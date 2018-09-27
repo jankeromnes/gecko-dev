@@ -113,7 +113,7 @@
         let input = content.document.getElementById("inp");
         input.value = args.search;
       });
- 
+
       await toggleHighlightAndWait(true);
 
       await ContentTask.spawn(gBrowser, { search }, async function(args) {

@@ -31,7 +31,7 @@ endm
 
 MY_PROLOG macro crc_end:req
     MY_PUSH_4_REGS
-    
+
     mov     r0, r1
     mov     rN, num_VAR
     mov     r5, table_VAR
@@ -131,7 +131,7 @@ endm
 
 MY_PROLOG macro crc_end:req
     MY_PUSH_4_REGS
-    
+
     mov     rN, r2
 
     mov     x0, [r4 + crc_val]

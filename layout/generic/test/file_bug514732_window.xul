@@ -13,7 +13,7 @@
   </script>
 
   <script type="application/javascript"><![CDATA[
-  
+
     // Define the generator-iterator for the tests.
     var tests = testIterator();
 
@@ -33,13 +33,13 @@
       // Make sure bfcache is on.
       enableBFCache(true);
 
-        
+
       // Load a wide and tall page, and then another.
       for (var i = 0; i < 2; ++i) {
         doPageNavigation( {
-          uri: "data:text/html,<!DOCTYPE html><html>" + 
+          uri: "data:text/html,<!DOCTYPE html><html>" +
                "<head><title>bug 514732 bfcache test page " + i + "</title></head>" +
-               "<body>" + 
+               "<body>" +
                '<div style="position: absolute; left: 10000px; top: 10000px; width: 500px; height: 500px;">' +
                "</body></html>",
           eventsToListenFor: ["MozScrolledAreaChanged"],
@@ -71,7 +71,7 @@
 
       finish();
     }
-    
+
   ]]></script>
 
   <browser type="content" primary="true" flex="1" id="content" src="about:blank"/>

@@ -453,7 +453,7 @@ pub fn visit_arm<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i: &'ast Arm)
     for it in & _i . attrs { _visitor.visit_attribute(it) };
     if let Some(ref it) = _i . leading_vert { tokens_helper(_visitor, &(it).0) };
     for el in Punctuated::pairs(& _i . pats) { let it = el.value(); _visitor.visit_pat(it) };
-    if let Some(ref it) = _i . guard { 
+    if let Some(ref it) = _i . guard {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             _visitor.visit_expr(& * ( it ) . 1);
          };
@@ -481,7 +481,7 @@ pub fn visit_attribute<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i: &'as
 }
 # [ cfg ( any ( feature = "full" , feature = "derive" ) ) ]
 pub fn visit_bare_fn_arg<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i: &'ast BareFnArg) {
-    if let Some(ref it) = _i . name { 
+    if let Some(ref it) = _i . name {
             _visitor.visit_bare_fn_arg_name(& ( it ) . 0);
             tokens_helper(_visitor, &(& ( it ) . 1).0);
          };
@@ -891,7 +891,7 @@ pub fn visit_expr_if<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i: &'ast 
     tokens_helper(_visitor, &(& _i . if_token).0);
     _visitor.visit_expr(& * _i . cond);
     _visitor.visit_block(& _i . then_branch);
-    if let Some(ref it) = _i . else_branch { 
+    if let Some(ref it) = _i . else_branch {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             _visitor.visit_expr(& * ( it ) . 1);
          };
@@ -905,7 +905,7 @@ pub fn visit_expr_if_let<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i: &'
     tokens_helper(_visitor, &(& _i . eq_token).0);
     _visitor.visit_expr(& * _i . expr);
     _visitor.visit_block(& _i . then_branch);
-    if let Some(ref it) = _i . else_branch { 
+    if let Some(ref it) = _i . else_branch {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             _visitor.visit_expr(& * ( it ) . 1);
          };
@@ -1398,7 +1398,7 @@ pub fn visit_item_extern_crate<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, 
     tokens_helper(_visitor, &(& _i . extern_token).0);
     tokens_helper(_visitor, &(& _i . crate_token).0);
     _visitor.visit_ident(& _i . ident);
-    if let Some(ref it) = _i . rename { 
+    if let Some(ref it) = _i . rename {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             _visitor.visit_ident(& ( it ) . 1);
          };
@@ -1429,7 +1429,7 @@ pub fn visit_item_impl<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i: &'as
     if let Some(ref it) = _i . unsafety { tokens_helper(_visitor, &(it).0) };
     tokens_helper(_visitor, &(& _i . impl_token).0);
     _visitor.visit_generics(& _i . generics);
-    if let Some(ref it) = _i . trait_ { 
+    if let Some(ref it) = _i . trait_ {
             if let Some(ref it) = ( it ) . 0 { tokens_helper(_visitor, &(it).0) };
             _visitor.visit_path(& ( it ) . 1);
             tokens_helper(_visitor, &(& ( it ) . 2).0);
@@ -1462,7 +1462,7 @@ pub fn visit_item_mod<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i: &'ast
     _visitor.visit_visibility(& _i . vis);
     tokens_helper(_visitor, &(& _i . mod_token).0);
     _visitor.visit_ident(& _i . ident);
-    if let Some(ref it) = _i . content { 
+    if let Some(ref it) = _i . content {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             for it in & ( it ) . 1 { _visitor.visit_item(it) };
          };
@@ -1621,11 +1621,11 @@ pub fn visit_local<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i: &'ast Lo
     for it in & _i . attrs { _visitor.visit_attribute(it) };
     tokens_helper(_visitor, &(& _i . let_token).0);
     for el in Punctuated::pairs(& _i . pats) { let it = el.value(); _visitor.visit_pat(it) };
-    if let Some(ref it) = _i . ty { 
+    if let Some(ref it) = _i . ty {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             _visitor.visit_type(& * ( it ) . 1);
          };
-    if let Some(ref it) = _i . init { 
+    if let Some(ref it) = _i . init {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             _visitor.visit_expr(& * ( it ) . 1);
          };
@@ -1775,7 +1775,7 @@ pub fn visit_pat_ident<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i: &'as
     if let Some(ref it) = _i . by_ref { tokens_helper(_visitor, &(it).0) };
     if let Some(ref it) = _i . mutability { tokens_helper(_visitor, &(it).0) };
     _visitor.visit_ident(& _i . ident);
-    if let Some(ref it) = _i . subpat { 
+    if let Some(ref it) = _i . subpat {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             _visitor.visit_pat(& * ( it ) . 1);
          };
@@ -1976,7 +1976,7 @@ pub fn visit_trait_item_const<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _
     _visitor.visit_ident(& _i . ident);
     tokens_helper(_visitor, &(& _i . colon_token).0);
     _visitor.visit_type(& _i . ty);
-    if let Some(ref it) = _i . default { 
+    if let Some(ref it) = _i . default {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             _visitor.visit_expr(& ( it ) . 1);
          };
@@ -2003,7 +2003,7 @@ pub fn visit_trait_item_type<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i
     _visitor.visit_generics(& _i . generics);
     if let Some(ref it) = _i . colon_token { tokens_helper(_visitor, &(it).0) };
     for el in Punctuated::pairs(& _i . bounds) { let it = el.value(); _visitor.visit_type_param_bound(it) };
-    if let Some(ref it) = _i . default { 
+    if let Some(ref it) = _i . default {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             _visitor.visit_type(& ( it ) . 1);
          };
@@ -2230,7 +2230,7 @@ pub fn visit_variant<'ast, V: Visit<'ast> + ?Sized>(_visitor: &mut V, _i: &'ast 
     for it in & _i . attrs { _visitor.visit_attribute(it) };
     _visitor.visit_ident(& _i . ident);
     _visitor.visit_fields(& _i . fields);
-    if let Some(ref it) = _i . discriminant { 
+    if let Some(ref it) = _i . discriminant {
             tokens_helper(_visitor, &(& ( it ) . 0).0);
             _visitor.visit_expr(& ( it ) . 1);
          };

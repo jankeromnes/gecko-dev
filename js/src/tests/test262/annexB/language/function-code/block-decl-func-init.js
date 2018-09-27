@@ -27,7 +27,7 @@ var init, changed;
     function f() {  }
   }
 
-  
+
 }());
 
 assert.sameValue(init, undefined, 'binding is initialized to `undefined`');

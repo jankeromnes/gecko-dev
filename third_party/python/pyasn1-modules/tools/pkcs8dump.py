@@ -5,7 +5,7 @@
 # Copyright (c) 2005-2017, Ilya Etingof <etingof@gmail.com>
 # License: http://pyasn1.sf.net/license.html
 #
-# Read  bunch of ASN.1/PEM plain/encrypted private keys in PKCS#8 
+# Read  bunch of ASN.1/PEM plain/encrypted private keys in PKCS#8
 # format on stdin, parse each into plain text, then build substrate from it
 #
 from pyasn1.codec.der import decoder, encoder

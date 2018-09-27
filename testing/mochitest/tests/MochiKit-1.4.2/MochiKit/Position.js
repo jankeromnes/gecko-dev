@@ -233,4 +233,4 @@ MochiKit.Position.__new__ = function (win) {
 
 MochiKit.Position.__new__(this);
 
-MochiKit.Base._exportSymbols(this, MochiKit.Position); 
+MochiKit.Base._exportSymbols(this, MochiKit.Position);

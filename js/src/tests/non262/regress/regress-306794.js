@@ -13,7 +13,7 @@ var expect = 'No Assertion';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 try
 {
   eval('getter\n');

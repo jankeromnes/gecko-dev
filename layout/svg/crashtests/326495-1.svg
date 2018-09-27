@@ -8,9 +8,9 @@
   {
     document.getElementsByTagName("rect")[0].style.display = "-moz-inline-stack";
   }
-  
+
   window.addEventListener("load", init, false);
   </script>
-  
+
   <rect requiredFeatures="http://www.w3.org/TR/SVG11/feature#SVG-nonexistent-feature"/>
 </svg>

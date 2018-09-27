@@ -4374,42 +4374,42 @@ mojo.config = {
     this.initDefault_();
     this.initValue_(value);
   }
-  
-  
+
+
   RunInput.Tags = {
     queryVersion: 0,
     flushForTesting: 1,
   };
-  
+
   RunInput.prototype.initDefault_ = function() {
     this.$data = null;
     this.$tag = undefined;
   }
-  
+
   RunInput.prototype.initValue_ = function(value) {
     if (value == undefined) {
       return;
     }
-  
+
     var keys = Object.keys(value);
     if (keys.length == 0) {
       return;
     }
-  
+
     if (keys.length > 1) {
       throw new TypeError("You may set only one member on a union.");
     }
-  
+
     var fields = [
         "queryVersion",
         "flushForTesting",
     ];
-  
+
     if (fields.indexOf(keys[0]) < 0) {
       throw new ReferenceError(keys[0] + " is not a RunInput member.");
-  
+
     }
-  
+
     this[keys[0]] = value[keys[0]];
   }
   Object.defineProperty(RunInput.prototype, "queryVersion", {
@@ -4420,7 +4420,7 @@ mojo.config = {
       }
       return this.$data;
     },
-  
+
     set: function(value) {
       this.$tag = RunInput.Tags.queryVersion;
       this.$data = value;
@@ -4434,14 +4434,14 @@ mojo.config = {
       }
       return this.$data;
     },
-  
+
     set: function(value) {
       this.$tag = RunInput.Tags.flushForTesting;
       this.$data = value;
     }
   });
-  
-  
+
+
     RunInput.encode = function(encoder, val) {
       if (val == null) {
         encoder.writeUint64(0);
@@ -4451,7 +4451,7 @@ mojo.config = {
       if (val.$tag == undefined) {
         throw new TypeError("Cannot encode unions with an unknown member set.");
       }
-    
+
       encoder.writeUint32(16);
       encoder.writeUint32(val.$tag);
       switch (val.$tag) {
@@ -4464,8 +4464,8 @@ mojo.config = {
       }
       encoder.align();
     };
-  
-  
+
+
     RunInput.decode = function(decoder) {
       var size = decoder.readUint32();
       if (size == 0) {
@@ -4473,7 +4473,7 @@ mojo.config = {
         decoder.readUint64();
         return null;
       }
-    
+
       var result = new RunInput();
       var tag = decoder.readUint32();
       switch (tag) {
@@ -4485,82 +4485,82 @@ mojo.config = {
           break;
       }
       decoder.align();
-    
+
       return result;
     };
-  
-  
+
+
     RunInput.validate = function(messageValidator, offset) {
       var size = messageValidator.decodeUnionSize(offset);
       if (size != 16) {
         return validator.validationError.INVALID_UNION_SIZE;
       }
-    
+
       var tag = messageValidator.decodeUnionTag(offset);
       var data_offset = offset + 8;
       var err;
       switch (tag) {
         case RunInput.Tags.queryVersion:
-          
-    
+
+
     // validate RunInput.queryVersion
     err = messageValidator.validateStructPointer(data_offset, QueryVersion, false);
     if (err !== validator.validationError.NONE)
         return err;
           break;
         case RunInput.Tags.flushForTesting:
-          
-    
+
+
     // validate RunInput.flushForTesting
     err = messageValidator.validateStructPointer(data_offset, FlushForTesting, false);
     if (err !== validator.validationError.NONE)
         return err;
           break;
       }
-    
+
       return validator.validationError.NONE;
     };
-  
+
   RunInput.encodedSize = 16;
 
   function RunOutput(value) {
     this.initDefault_();
     this.initValue_(value);
   }
-  
-  
+
+
   RunOutput.Tags = {
     queryVersionResult: 0,
   };
-  
+
   RunOutput.prototype.initDefault_ = function() {
     this.$data = null;
     this.$tag = undefined;
   }
-  
+
   RunOutput.prototype.initValue_ = function(value) {
     if (value == undefined) {
       return;
     }
-  
+
     var keys = Object.keys(value);
     if (keys.length == 0) {
       return;
     }
-  
+
     if (keys.length > 1) {
       throw new TypeError("You may set only one member on a union.");
     }
-  
+
     var fields = [
         "queryVersionResult",
     ];
-  
+
     if (fields.indexOf(keys[0]) < 0) {
       throw new ReferenceError(keys[0] + " is not a RunOutput member.");
-  
+
     }
-  
+
     this[keys[0]] = value[keys[0]];
   }
   Object.defineProperty(RunOutput.prototype, "queryVersionResult", {
@@ -4571,14 +4571,14 @@ mojo.config = {
       }
       return this.$data;
     },
-  
+
     set: function(value) {
       this.$tag = RunOutput.Tags.queryVersionResult;
       this.$data = value;
     }
   });
-  
-  
+
+
     RunOutput.encode = function(encoder, val) {
       if (val == null) {
         encoder.writeUint64(0);
@@ -4588,7 +4588,7 @@ mojo.config = {
       if (val.$tag == undefined) {
         throw new TypeError("Cannot encode unions with an unknown member set.");
       }
-    
+
       encoder.writeUint32(16);
       encoder.writeUint32(val.$tag);
       switch (val.$tag) {
@@ -4598,8 +4598,8 @@ mojo.config = {
       }
       encoder.align();
     };
-  
-  
+
+
     RunOutput.decode = function(decoder) {
       var size = decoder.readUint32();
       if (size == 0) {
@@ -4607,7 +4607,7 @@ mojo.config = {
         decoder.readUint64();
         return null;
       }
-    
+
       var result = new RunOutput();
       var tag = decoder.readUint32();
       switch (tag) {
@@ -4616,74 +4616,74 @@ mojo.config = {
           break;
       }
       decoder.align();
-    
+
       return result;
     };
-  
-  
+
+
     RunOutput.validate = function(messageValidator, offset) {
       var size = messageValidator.decodeUnionSize(offset);
       if (size != 16) {
         return validator.validationError.INVALID_UNION_SIZE;
       }
-    
+
       var tag = messageValidator.decodeUnionTag(offset);
       var data_offset = offset + 8;
       var err;
       switch (tag) {
         case RunOutput.Tags.queryVersionResult:
-          
-    
+
+
     // validate RunOutput.queryVersionResult
     err = messageValidator.validateStructPointer(data_offset, QueryVersionResult, false);
     if (err !== validator.validationError.NONE)
         return err;
           break;
       }
-    
+
       return validator.validationError.NONE;
     };
-  
+
   RunOutput.encodedSize = 16;
 
   function RunOrClosePipeInput(value) {
     this.initDefault_();
     this.initValue_(value);
   }
-  
-  
+
+
   RunOrClosePipeInput.Tags = {
     requireVersion: 0,
   };
-  
+
   RunOrClosePipeInput.prototype.initDefault_ = function() {
     this.$data = null;
     this.$tag = undefined;
   }
-  
+
   RunOrClosePipeInput.prototype.initValue_ = function(value) {
     if (value == undefined) {
       return;
     }
-  
+
     var keys = Object.keys(value);
     if (keys.length == 0) {
       return;
     }
-  
+
     if (keys.length > 1) {
       throw new TypeError("You may set only one member on a union.");
     }
-  
+
     var fields = [
         "requireVersion",
     ];
-  
+
     if (fields.indexOf(keys[0]) < 0) {
       throw new ReferenceError(keys[0] + " is not a RunOrClosePipeInput member.");
-  
+
     }
-  
+
     this[keys[0]] = value[keys[0]];
   }
   Object.defineProperty(RunOrClosePipeInput.prototype, "requireVersion", {
@@ -4694,14 +4694,14 @@ mojo.config = {
       }
       return this.$data;
     },
-  
+
     set: function(value) {
       this.$tag = RunOrClosePipeInput.Tags.requireVersion;
       this.$data = value;
     }
   });
-  
-  
+
+
     RunOrClosePipeInput.encode = function(encoder, val) {
       if (val == null) {
         encoder.writeUint64(0);
@@ -4711,7 +4711,7 @@ mojo.config = {
       if (val.$tag == undefined) {
         throw new TypeError("Cannot encode unions with an unknown member set.");
       }
-    
+
       encoder.writeUint32(16);
       encoder.writeUint32(val.$tag);
       switch (val.$tag) {
@@ -4721,8 +4721,8 @@ mojo.config = {
       }
       encoder.align();
     };
-  
-  
+
+
     RunOrClosePipeInput.decode = function(decoder) {
       var size = decoder.readUint32();
       if (size == 0) {
@@ -4730,7 +4730,7 @@ mojo.config = {
         decoder.readUint64();
         return null;
       }
-    
+
       var result = new RunOrClosePipeInput();
       var tag = decoder.readUint32();
       switch (tag) {
@@ -4739,34 +4739,34 @@ mojo.config = {
           break;
       }
       decoder.align();
-    
+
       return result;
     };
-  
-  
+
+
     RunOrClosePipeInput.validate = function(messageValidator, offset) {
       var size = messageValidator.decodeUnionSize(offset);
       if (size != 16) {
         return validator.validationError.INVALID_UNION_SIZE;
       }
-    
+
       var tag = messageValidator.decodeUnionTag(offset);
       var data_offset = offset + 8;
       var err;
       switch (tag) {
         case RunOrClosePipeInput.Tags.requireVersion:
-          
-    
+
+
     // validate RunOrClosePipeInput.requireVersion
     err = messageValidator.validateStructPointer(data_offset, RequireVersion, false);
     if (err !== validator.validationError.NONE)
         return err;
           break;
       }
-    
+
       return validator.validationError.NONE;
     };
-  
+
   RunOrClosePipeInput.encodedSize = 16;
   exports.kRunMessageId = kRunMessageId;
   exports.kRunOrClosePipeMessageId = kRunOrClosePipeMessageId;
@@ -4894,7 +4894,7 @@ mojo.config = {
 
 
 
-    
+
     // validate DisconnectReason.description
     err = messageValidator.validateStringPointer(offset + codec.kStructHeaderSize + 8, false)
     if (err !== validator.validationError.NONE)
@@ -4962,7 +4962,7 @@ mojo.config = {
 
 
 
-    
+
     // validate PeerAssociatedEndpointClosedEvent.disconnectReason
     err = messageValidator.validateStructPointer(offset + codec.kStructHeaderSize + 8, DisconnectReason, true);
     if (err !== validator.validationError.NONE)
@@ -5003,40 +5003,40 @@ mojo.config = {
     this.initDefault_();
     this.initValue_(value);
   }
-  
-  
+
+
   RunOrClosePipeInput.Tags = {
     peerAssociatedEndpointClosedEvent: 0,
   };
-  
+
   RunOrClosePipeInput.prototype.initDefault_ = function() {
     this.$data = null;
     this.$tag = undefined;
   }
-  
+
   RunOrClosePipeInput.prototype.initValue_ = function(value) {
     if (value == undefined) {
       return;
     }
-  
+
     var keys = Object.keys(value);
     if (keys.length == 0) {
       return;
     }
-  
+
     if (keys.length > 1) {
       throw new TypeError("You may set only one member on a union.");
     }
-  
+
     var fields = [
         "peerAssociatedEndpointClosedEvent",
     ];
-  
+
     if (fields.indexOf(keys[0]) < 0) {
       throw new ReferenceError(keys[0] + " is not a RunOrClosePipeInput member.");
-  
+
     }
-  
+
     this[keys[0]] = value[keys[0]];
   }
   Object.defineProperty(RunOrClosePipeInput.prototype, "peerAssociatedEndpointClosedEvent", {
@@ -5047,14 +5047,14 @@ mojo.config = {
       }
       return this.$data;
     },
-  
+
     set: function(value) {
       this.$tag = RunOrClosePipeInput.Tags.peerAssociatedEndpointClosedEvent;
       this.$data = value;
     }
   });
-  
-  
+
+
     RunOrClosePipeInput.encode = function(encoder, val) {
       if (val == null) {
         encoder.writeUint64(0);
@@ -5064,7 +5064,7 @@ mojo.config = {
       if (val.$tag == undefined) {
         throw new TypeError("Cannot encode unions with an unknown member set.");
       }
-    
+
       encoder.writeUint32(16);
       encoder.writeUint32(val.$tag);
       switch (val.$tag) {
@@ -5074,8 +5074,8 @@ mojo.config = {
       }
       encoder.align();
     };
-  
-  
+
+
     RunOrClosePipeInput.decode = function(decoder) {
       var size = decoder.readUint32();
       if (size == 0) {
@@ -5083,7 +5083,7 @@ mojo.config = {
         decoder.readUint64();
         return null;
       }
-    
+
       var result = new RunOrClosePipeInput();
       var tag = decoder.readUint32();
       switch (tag) {
@@ -5092,34 +5092,34 @@ mojo.config = {
           break;
       }
       decoder.align();
-    
+
       return result;
     };
-  
-  
+
+
     RunOrClosePipeInput.validate = function(messageValidator, offset) {
       var size = messageValidator.decodeUnionSize(offset);
       if (size != 16) {
         return validator.validationError.INVALID_UNION_SIZE;
       }
-    
+
       var tag = messageValidator.decodeUnionTag(offset);
       var data_offset = offset + 8;
       var err;
       switch (tag) {
         case RunOrClosePipeInput.Tags.peerAssociatedEndpointClosedEvent:
-          
-    
+
+
     // validate RunOrClosePipeInput.peerAssociatedEndpointClosedEvent
     err = messageValidator.validateStructPointer(data_offset, PeerAssociatedEndpointClosedEvent, false);
     if (err !== validator.validationError.NONE)
         return err;
           break;
       }
-    
+
       return validator.validationError.NONE;
     };
-  
+
   RunOrClosePipeInput.encodedSize = 16;
   exports.kRunOrClosePipeMessageId = kRunOrClosePipeMessageId;
   exports.RunOrClosePipeMessageParams = RunOrClosePipeMessageParams;

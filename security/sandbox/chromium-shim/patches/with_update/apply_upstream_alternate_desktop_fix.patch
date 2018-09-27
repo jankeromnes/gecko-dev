@@ -32,7 +32,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/policy_target_test.cc b/s
    EXPECT_EQ(SBOX_ALL_OK, result);
    result = policy3->SetAlternateDesktop(false);
    EXPECT_EQ(SBOX_ALL_OK, result);
- 
+
 +  base::string16 policy1_desktop_name = policy1->GetAlternateDesktop();
 +  base::string16 policy2_desktop_name = policy2->GetAlternateDesktop();
 +
@@ -47,7 +47,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/policy_target_test.cc b/s
    policy2->DestroyAlternateDesktop();
    policy3->DestroyAlternateDesktop();
  }
- 
+
  // Launches the app in the sandbox and share a handle with it. The app should
  // be able to use the handle.
  TEST(PolicyTargetTest, ShareHandleTest) {
@@ -66,7 +66,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.cc b/
 +IntegrityLevel
 +    PolicyBase::alternate_desktop_local_winstation_integrity_level_label_ =
 +        INTEGRITY_LEVEL_SYSTEM;
- 
+
  PolicyBase::PolicyBase()
      : ref_count(1),
        lockdown_level_(USER_LOCKDOWN),
@@ -78,7 +78,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.cc b/
                              lockdown_default_dacl_, lockdown);
    if (ERROR_SUCCESS != result)
      return SBOX_ERROR_GENERIC;
- 
+
    // If we're launching on the alternate desktop we need to make sure the
    // integrity label on the object is no higher than the sandboxed process's
    // integrity level. So, we lower the label on the desktop process if it's
@@ -107,7 +107,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.cc b/
                                    GetIntegrityLevelString(integrity_level_));
        if (ERROR_SUCCESS != result)
          return SBOX_ERROR_GENERIC;
- 
+
 -      alternate_desktop_integrity_level_label_ = integrity_level_;
 +      if (use_alternate_winstation_) {
 +        alternate_desktop_integrity_level_label_ = integrity_level_;
@@ -117,7 +117,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.cc b/
 +      }
      }
    }
- 
+
    if (lowbox_sid_) {
      NtCreateLowBoxToken CreateLowBoxToken = NULL;
      ResolveNTFunctionPtr("NtCreateLowBoxToken", &CreateLowBoxToken);
@@ -130,20 +130,20 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.h b/s
    base::win::ScopedHandle lowbox_directory_;
    std::unique_ptr<Dispatcher> dispatcher_;
    bool lockdown_default_dacl_;
- 
+
    static HDESK alternate_desktop_handle_;
    static HWINSTA alternate_winstation_handle_;
    static HDESK alternate_desktop_local_winstation_handle_;
    static IntegrityLevel alternate_desktop_integrity_level_label_;
 +  static IntegrityLevel
 +      alternate_desktop_local_winstation_integrity_level_label_;
- 
+
    // Contains the list of handles being shared with the target process.
    // This list contains handles other than the stderr/stdout handles which are
    // shared with the target at times.
    base::HandlesToInheritVector handles_to_share_;
    bool enable_opm_redirection_;
- 
+
    DISALLOW_COPY_AND_ASSIGN(PolicyBase);
 diff --git a/security/sandbox/chromium/sandbox/win/src/window.cc b/security/sandbox/chromium/sandbox/win/src/window.cc
 --- a/security/sandbox/chromium/sandbox/win/src/window.cc
@@ -153,15 +153,15 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/window.cc b/security/sand
                                     NULL, &attributes->lpSecurityDescriptor);
    if (ERROR_SUCCESS == result)
      return true;
- 
+
    return false;
  }
- 
+
 -}
 +}  // namespace
- 
+
  namespace sandbox {
- 
+
  ResultCode CreateAltWindowStation(HWINSTA* winsta) {
    // Get the security attributes from the current window station; we will
    // use this as the base security attributes for the new window station.
@@ -169,13 +169,13 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/window.cc b/security/sand
    if (!current_winsta)
 @@ -60,16 +60,20 @@ ResultCode CreateAltWindowStation(HWINST
      return SBOX_ALL_OK;
- 
+
    return SBOX_ERROR_CANNOT_CREATE_WINSTATION;
  }
- 
+
  ResultCode CreateAltDesktop(HWINSTA winsta, HDESK* desktop) {
    base::string16 desktop_name = L"sbox_alternate_desktop_";
- 
+
 +  if (!winsta) {
 +    desktop_name += L"local_winstation_";
 +  }
@@ -185,5 +185,5 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/window.cc b/security/sand
    _snwprintf_s(buffer, sizeof(buffer) / sizeof(wchar_t), L"0x%X",
                 ::GetCurrentProcessId());
    desktop_name += buffer;
- 
+
    HDESK current_desktop = GetThreadDesktop(GetCurrentThreadId());

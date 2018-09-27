@@ -346,11 +346,11 @@ Cleanup:
 
 
 #ifdef NSIS
-extern "C" void __declspec(dllexport) AddRule(HWND hwndParent, int string_size, 
+extern "C" void __declspec(dllexport) AddRule(HWND hwndParent, int string_size,
                                       TCHAR *variables, stack_t **stacktop)
 {
 	EXDLL_INIT();
-	
+
 	TCHAR ExceptionName[256], ProcessPath[MAX_PATH];
     popstring(ProcessPath);
     popstring(ExceptionName);
@@ -361,11 +361,11 @@ extern "C" void __declspec(dllexport) AddRule(HWND hwndParent, int string_size,
 	pushstring(intBuffer);
 }
 
-extern "C" void __declspec(dllexport) RemoveRule(HWND hwndParent, int string_size, 
+extern "C" void __declspec(dllexport) RemoveRule(HWND hwndParent, int string_size,
                                       TCHAR *variables, stack_t **stacktop)
 {
 	EXDLL_INIT();
-	
+
 	TCHAR ExceptionName[256], ProcessPath[MAX_PATH];
     popstring(ProcessPath);
 	popstring(ExceptionName);
@@ -391,16 +391,16 @@ HRESULT WFCOMInitialize(INetFwPolicy2** ppNetFwPolicy2)
 	HRESULT hr = S_OK;
 
 	hr = CoCreateInstance(
-		__uuidof(NetFwPolicy2), 
-		NULL, 
-		CLSCTX_INPROC_SERVER, 
-		__uuidof(INetFwPolicy2), 
+		__uuidof(NetFwPolicy2),
+		NULL,
+		CLSCTX_INPROC_SERVER,
+		__uuidof(INetFwPolicy2),
 		(void**)ppNetFwPolicy2);
 
 	if (FAILED(hr))
 	{
 		printf("CoCreateInstance for INetFwPolicy2 failed: 0x%08lx\n", hr);
-		goto Cleanup;        
+		goto Cleanup;
 	}
 
 Cleanup:

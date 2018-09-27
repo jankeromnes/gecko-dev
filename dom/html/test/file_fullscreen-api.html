@@ -104,7 +104,7 @@ function enter2(event) {
      "Full-screen element should be iframe element.");
   is(iframe.contentDocument.fullscreenElement, iframe.contentDocument.body,
      "Full-screen element in subframe should be body");
-  
+
   // The iframe's body is full-screen. Cancel full-screen in the subdocument to return
   // the full-screen element to the previous full-screen element. This causes
   // a fullscreenchange event.
@@ -118,7 +118,7 @@ function exit2(event) {
   is(iframe.contentDocument.fullscreenElement, null,
      "Full-screen element in subframe should be null");
   assertPromiseResolved(promise, "in exit2");
-  
+
   addFullscreenChangeContinuation("enter", enter3);
   promise = FULLSCREEN_ELEMENT.requestFullscreen();
 }
@@ -129,7 +129,7 @@ function enter3(event) {
   is(document.fullscreenElement, FULLSCREEN_ELEMENT,
      "Full-screen element should be div.");
   assertPromiseResolved(promise, "in enter3");
-  
+
   // Transplant the FSE into subdoc. Should exit full-screen.
   addFullscreenChangeContinuation("exit", exit3);
   var _innerFrame = iframe.contentDocument.getElementById("inner-frame");
@@ -152,7 +152,7 @@ function exit3(event) {
   // Do a request out of document. It should be denied.
   // Continue test in the following fullscreenerror handler.
   outOfDocElement = document.createElement("div");
-  addFullscreenErrorContinuation(error1);    
+  addFullscreenErrorContinuation(error1);
   promise = outOfDocElement.requestFullscreen();
 }
 

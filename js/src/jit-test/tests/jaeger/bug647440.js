@@ -1,4 +1,4 @@
-if (false) 
+if (false)
     function g() {}
 function f() {
     var x;

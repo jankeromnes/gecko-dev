@@ -37,13 +37,13 @@ function setUpPage() {
        setImplementationAttribute("namespaceAware", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,14 +73,14 @@ var docName = 'namednodemapsetnameditemns08';
 
 
 /**
-* 
-    raises a INUSE_ATTRIBUTE_ERR Raised if arg is an Attr that is already an 
-    attribute of another Element object. 
+*
+    raises a INUSE_ATTRIBUTE_ERR Raised if arg is an Attr that is already an
+    attribute of another Element object.
 
 	Retreieve the first element whose localName is address and its attributes into a named node map.
-	Retreiving the domestic attribute from the namednodemap.	 Retreieve the second element whose 
-	localName is address and its attributes into a named node map.	Invoke setNamedItemNS on the 
-	second NamedNodeMap specifying the attribute from the first map.  
+	Retreiving the domestic attribute from the namednodemap.	 Retreieve the second element whose
+	localName is address and its attributes into a named node map.	Invoke setNamedItemNS on the
+	second NamedNodeMap specifying the attribute from the first map.
 	This should raise an INUSE_ATTRIBIUTE_ERR.
 
 * @author IBM
@@ -96,7 +96,7 @@ function namednodemapsetnameditemns08() {
       var element;
       var attr;
       var newNode;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -110,7 +110,7 @@ function namednodemapsetnameditemns08() {
       element = elementList.item(1);
       attributes = element.attributes;
 
-      
+
 	{
 		success = false;
 		try {
@@ -130,12 +130,12 @@ function namednodemapsetnameditemns08() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapsetnameditemns08</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

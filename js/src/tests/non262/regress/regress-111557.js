@@ -4413,14 +4413,14 @@ function MTMenuItem(text, url, target,nsearchID, icon) {
   this.target =  target ? target : "";
   this.icon = icon ? icon : "";
   this.nsearchID = nsearchID;
- 
+
   this.number = MTMSubNumber++;
   this.parent      = null;
   this.submenu     = null;
   this.expanded    = false;
   this.selected    = false;
   this.childSelected = false;
- 
+
   this.MTMakeSubmenu = MTMakeSubmenu;
 
 }
@@ -4589,7 +4589,7 @@ function isAllChildrenSelected(item)
 function isSomeChildrenSelected(item)
 {
   var retValue = false;
-  
+
   if (item.submenu != null)
   {
     for (var x = 0; x < item.submenu.items.length; x++)
@@ -4600,7 +4600,7 @@ function isSomeChildrenSelected(item)
       }
     }
   }
-  
+
   return retValue;
 }
 
@@ -4612,14 +4612,14 @@ function ToggleSelected(item, ReturnValue) {
   var currentNode = item;
 
   while (currentNode.parent)
-  { 
+  {
     currentNode.parent.selected = isAllChildrenSelected(currentNode.parent);
     currentNode.parent.childSelected = isSomeChildrenSelected(currentNode.parent);
     currentNode = currentNode.parent;
   }
- 
+
   MarkChildren(item,item.selected);
- 
+
   if(!ReturnValue) {
     setTimeout("MTMDisplayMenu()", 10);
   }
@@ -4671,7 +4671,7 @@ function MTMDisplayMenu() {
       MTMOutputString += 'background="' + MTMPreHREF + MTMenuImageDirectory + MTMBackground + '" ';
     }
     MTMOutputString += 'bgcolor="' + MTMBGColor + '" text="' + MTMTextColor + '" link="' + MTMLinkColor + '" vlink="' + MTMLinkColor + '" alink="' + MTMLinkColor + '">';
-   
+
     MTMOutputString += '<table border="0" cellpadding="0" cellspacing="0" width="' + MTMTableWidth + '">';
     MTMOutputString += '<tr valign="top"><td nowrap>'; //REMOVED ROOT ICON <img src="' + MTMPreHREF + MTMenuImageDirectory + MTMRootIcon + '" align="left" border="0" vspace="0" hspace="0">';
     if(MTMUseStyle) {
@@ -4689,7 +4689,7 @@ function MTMDisplayMenu() {
 
     if((MTMClickedItem || MTMTrackedItem) && (MTMNN4 || MTMIE4) && !MTMFirstRun) {
       MTMItemName = "sub" + (MTMClickedItem ? MTMClickedItem : MTMTrackedItem);
-      if(document.layers && parent.frames[MTMenuFrame].scrollbars) {   
+      if(document.layers && parent.frames[MTMenuFrame].scrollbars) {
         MTMyval = parent.frames[MTMenuFrame].document.anchors[MTMItemName].y;
         MTMWinSize = parent.frames[MTMenuFrame].innerHeight;
       } else {
@@ -4732,7 +4732,7 @@ function MTMDisplayItem(item, last) {
 
   var MTMfrm = "parent.frames['code']";
   var MTMref = '.menu.items[' + MTMIndices[0] + ']';
- 
+
   if(item.submenu) {
     var MTMouseOverText;
 
@@ -4795,7 +4795,7 @@ function MTMDisplayItem(item, last) {
   MTMOutputString += MTMakeImage(img);
 /////////////////////////////////////////
 
-  var MTMCheckRef = '.menu.items[' + MTMIndices[0] + ']'; 
+  var MTMCheckRef = '.menu.items[' + MTMIndices[0] + ']';
   if(MTMLevel > 0) {
     for(i = 1; i <= MTMLevel; i++) {
       MTMCheckRef += ".submenu.items[" + MTMIndices[i] + "]";
@@ -4805,7 +4805,7 @@ function MTMDisplayItem(item, last) {
   MTMOutputString += MTMakeVoid(item, "return " + MTMfrm + ".ToggleSelected(" + MTMfrm + MTMCheckRef + ",false);", "Checked Status") ;
   var checkedImage = item.selected ? "checked.gif" : "uchecked.gif";
   if (!item.selected)
-  { 
+  {
     checkedImage = item.childSelected ? "gchecked.gif" : "uchecked.gif";
   }
   MTMOutputString += MTMakeImage(checkedImage);
@@ -5105,17 +5105,17 @@ MTMIconList = new IconList();
 // the search request.  The stored information will be used to build the
 // navigation tree.
 																																function navigationLink(title,URL,level,elementIndex,levelIndex,parentIndex,author)
-																																{      
+																																{
 																																  var returnArray = new Array();
 																																  returnArray.title = title;
 																																  returnArray.URL = URL;
 																																  returnArray.level = level;
 																																  returnArray.hasChild = false;
 																																  returnArray.elementIndex = elementIndex;
-																																  returnArray.parentIndex = parentIndex;  
+																																  returnArray.parentIndex = parentIndex;
 																																  returnArray.levelIndex = levelIndex;
 																																  returnArray.author = author;
-	 
+
 																																  return returnArray;
 																																}
 
@@ -5129,7 +5129,7 @@ MTMIconList = new IconList();
 																																var treeNodes = new Array();
 																																var levelIndex = 0;
 																																top.printList = "";
-																																top.printCount = 0;  
+																																top.printCount = 0;
 
 // asign the menu handle to the created tree
 																																var menu = null;
@@ -5143,31 +5143,31 @@ MTMIconList = new IconList();
 																																    for (var i = 0 ; i < top.authors.length; i++)
 																																    {
 																																      var re = /\s$/;
-			   
+
 																																      if (top.titles[i].replace(re,"") == item.text.replace(re,""))
 																																      {
 																																	top.printList +=  (top.authors[i].length + 3) + "_" + top.authors[i].replace(/\s/g,"+") + "+en";
 																																	top.printCount ++;
 																																      }
-																																    }	
+																																    }
 																																  }
 																																  else if (item.submenu != null)
 																																  {
 																																    for (var x = 0; x < item.submenu.items.length; x++)
-																																    { 
+																																    {
 																																      if (item.submenu.items[x].selected)
 																																      {
 																																	var name = item.submenu.items[x].text;
 																																	for (var i = 0 ; i < top.authors.length; i++)
-																																	{        
+																																	{
 																																	  var re = /\s$/;
 																																	  if (top.titles[i].replace(re,"") == name.replace(re,""))
 																																	  {
 																																	    top.printList +=  (top.authors[i].length + 3) + "_" + top.authors[i].replace(/\s/g,"+") + "+en";
 																																	    top.printCount ++;
 																																	  }
-																																	}			 
-		
+																																	}
+
 																																      }
 																																      else
 																																      {
@@ -5175,7 +5175,7 @@ MTMIconList = new IconList();
 																																      }
 																																    }
 																																  }
-  
+
 																																}
 
 // Get a URL to pass checked topics to the Print Servlet
@@ -5186,7 +5186,7 @@ MTMIconList = new IconList();
 																																{
 																																  top.printList = "";
 																																  top.printCount = 0;
- 
+
 																																  getNextChecked(menu.items[0]);
 																																  top.printList = top.printCount + "_" + top.printList;
 
@@ -5195,7 +5195,7 @@ MTMIconList = new IconList();
 
 																																function setLevels()
 																																{
-  
+
 																																  // Tracking the parent of the next node.
 																																  levelParents[currentLevel + 1] = index;
 
@@ -5220,7 +5220,7 @@ MTMIconList = new IconList();
 																																    // see if the current node has chilren
 																																    var thisLevel = navigationTree[i]["level"];
 																																    var nextLevel = navigationTree[i+1]["level"];
- 
+
 																																    if (nextLevel > thisLevel)
 																																    {
 																																      navigationTree[i]["hasChild"] = true;
@@ -5230,7 +5230,7 @@ MTMIconList = new IconList();
 																																      navigationTree[i]["hasChild"] = false;
 																																    }
 																																  }
-	                                
+
 
 // create tree object nodes.
 																																  for( var j = 0; j < navigationTree.length; j++)
@@ -5259,23 +5259,23 @@ MTMIconList = new IconList();
 // create submenu structure
 // NOTE: add 1 to parent nodes for root = 0 offset.
 																																  for( var j4 = 0; j4 < navigationTree.length; j4++)
-																																  {  
+																																  {
 																																    if (navigationTree[j4]["hasChild"])
 																																    {
 																																      var pindex = null;
 																																      if (navigationTree[j4]["parentIndex"] == null)
 																																      {
-	 
+
 																																	pindex = 0;
 																																      }
 																																      else
 																																      {
 																																	pindex = navigationTree[j4]["parentIndex"]+1;
 																																      }
-	 
+
 																																      var lindex = navigationTree[j4]["levelIndex"];
 																																      //  document.write('treeNodes[' + pindex +'].items['+ lindex +'].MTMakeSubmenu(treeNodes['+(j4+1)+']);<br>');
-	 
+
 																																      treeNodes[pindex].items[lindex].MTMakeSubmenu(treeNodes[j4+1]);
 																																    }
 																																  }
@@ -5285,15 +5285,15 @@ MTMIconList = new IconList();
 //expand the second item to display the sub contents on first display
 																																  if (menu.items[0] != null )
 																																  {
-																																    menu.items[0].expanded = true;    
+																																    menu.items[0].expanded = true;
 
 																																  }
-   
 
-        
+
+
 																																}
 
-       
+
 
 																																currentLevel++;
 
@@ -10928,4 +10928,4 @@ MTMIconList = new IconList();
 
 																																if (currentLevel > 1) currentLevel--
 
-																																reportCompare('No Crash', 'No Crash', '');  
+																																reportCompare('No Crash', 'No Crash', '');

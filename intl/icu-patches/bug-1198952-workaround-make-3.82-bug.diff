@@ -2,13 +2,13 @@ diff --git a/intl/icu/source/Makefile.in b/intl/icu/source/Makefile.in
 --- a/intl/icu/source/Makefile.in
 +++ b/intl/icu/source/Makefile.in
 @@ -134,32 +134,36 @@ endif
- 
+
  LOCAL_SUBDIRS = $(SUBDIRS)
  CLEAN_FIRST_SUBDIRS = $(TOOLS)
- 
+
  $(LIBDIR) $(BINDIR):
  	-$(MKINSTALLDIRS) $@
- 
+
  ## Recursive targets
 +## Strictly speaking, the $(MAKEOVERRIDES) is not necessary when recursing, but
 +## there is a bug in GNU make 3.82 that throws away the original overrides in
@@ -36,7 +36,7 @@ diff --git a/intl/icu/source/Makefile.in b/intl/icu/source/Makefile.in
  	if test "$$dot_seen" = "no"; then \
  	  $(MAKE) "$$target-local" || exit; \
  	fi
- 
+
  clean-recursive-with-twist:
  	$(MAKE) clean-recursive LOCAL_SUBDIRS='$(CLEAN_FIRST_SUBDIRS) $(filter-out $(CLEAN_FIRST_SUBDIRS),$(LOCAL_SUBDIRS))'
- 
+

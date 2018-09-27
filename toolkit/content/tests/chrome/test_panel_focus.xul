@@ -14,7 +14,7 @@
 <script>
 // use a chrome window for this test as the focus in content windows can be
 // adjusted by the current selection position
- 
+
 SimpleTest.waitForExplicitFinish();
 function runTest()
 {

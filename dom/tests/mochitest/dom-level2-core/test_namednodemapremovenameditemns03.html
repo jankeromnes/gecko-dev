@@ -37,13 +37,13 @@ function setUpPage() {
        setImplementationAttribute("namespaceAware", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,9 +73,9 @@ var docName = 'namednodemapremovenameditemns03';
 
 
 /**
-* 
-   The method removeNamedItemNS removes a node specified by local name and namespace 
-      
+*
+   The method removeNamedItemNS removes a node specified by local name and namespace
+
 	Create a new element node and add 2 new attribute nodes to it that have the same localName
 	but different namespaceURI's.  Remove the first attribute node from the namedNodeMap of the
 	new element node and check to see that the second attribute still exists.
@@ -95,7 +95,7 @@ function namednodemapremovenameditemns03() {
       var attribute1;
       var attribute2;
       var nodeName;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -113,7 +113,7 @@ function namednodemapremovenameditemns03() {
       nodeName = attribute.nodeName;
 
       assertEquals("namednodemapremovenameditemns02","L2:att",nodeName);
-       
+
 }
 
 </script>
@@ -122,12 +122,12 @@ function namednodemapremovenameditemns03() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapremovenameditemns03</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

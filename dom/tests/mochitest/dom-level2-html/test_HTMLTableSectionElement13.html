@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "tablesection");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,8 +70,8 @@ function loadComplete() {
 
 
 /**
-* 
-    The rows attribute specifies the collection of rows in this table section. 
+*
+    The rows attribute specifies the collection of rows in this table section.
 
     Retrieve the first THEAD element and examine the value of
     the rows length attribute.
@@ -88,7 +88,7 @@ function HTMLTableSectionElement13() {
       var testNode;
       var vrows;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -102,7 +102,7 @@ testNode = nodeList.item(0);
       vrows = rowsnodeList.length;
 
       assertEquals("rowsLink",1,vrows);
-       
+
 }
 
 </script>
@@ -112,7 +112,7 @@ testNode = nodeList.item(0);
 <p>&lt;test name='HTMLTableSectionElement13' schemaLocation='http://www.w3.org/2001/DOM-Test-Suite/Level-1 dom1.xsd'&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;metadata&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;HTMLTableSectionElement13&lt;/title&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
-    The rows attribute specifies the collection of rows in this table section. 
+    The rows attribute specifies the collection of rows in this table section.
 
     Retrieve the first THEAD element and examine the value of
     the rows length attribute.
@@ -132,7 +132,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/tablesection.html"></iframe>
 <br>

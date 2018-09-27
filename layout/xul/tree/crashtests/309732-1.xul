@@ -8,7 +8,7 @@
   <script>
   function boom()
   {
-    document.documentElement.appendChild(document.getElementById("TC")); 
+    document.documentElement.appendChild(document.getElementById("TC"));
     document.documentElement.appendChild(document.getElementById("TI"));
 
     document.documentElement.removeAttribute("class");

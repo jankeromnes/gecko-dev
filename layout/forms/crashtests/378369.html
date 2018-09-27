@@ -9,7 +9,7 @@ This page should not crash Mozilla
 <script>
 function docontextmenu(i){
 var doc = window.frames[0].document;
-  var ev = doc.createEvent ('MouseEvents'); 
+  var ev = doc.createEvent ('MouseEvents');
   ev.initMouseEvent('contextmenu', true,true, window, 3,5, 5, 400, 400, 0, 0, 0,0,0,null);
   doc.dispatchEvent(ev);
 }

@@ -873,7 +873,7 @@ pkix_PolicyChecker_MakeMutableCopy(
 
         *pMutableCopy = newList;
         newList = NULL;
-        
+
 cleanup:
         PKIX_DECREF(newList);
         PKIX_DECREF(object);

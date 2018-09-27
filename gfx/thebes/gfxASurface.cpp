@@ -298,7 +298,7 @@ gfxASurface::CreateSimilarSurface(gfxContentType aContent,
     if (!mSurface || !mSurfaceValid) {
       return nullptr;
     }
-    
+
     cairo_surface_t *surface =
         cairo_surface_create_similar(mSurface, cairo_content_t(int(aContent)),
                                      aSize.width, aSize.height);

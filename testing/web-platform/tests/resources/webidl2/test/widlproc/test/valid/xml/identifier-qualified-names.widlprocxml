@@ -17,7 +17,7 @@
     getter DOMString (DOMString keyName);
   };
 
-    
+
     interface TextField {
 
       attribute boolean _const;

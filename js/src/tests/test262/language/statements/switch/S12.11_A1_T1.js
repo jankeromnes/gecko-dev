@@ -11,7 +11,7 @@ description: Simple test using switch statement
 
 function SwitchTest(value){
   var result = 0;
-  
+
   switch(value) {
     case 0:
       result += 2;
@@ -28,10 +28,10 @@ function SwitchTest(value){
     case 4:
       result += 64;
   }
-  
+
   return result;
 }
-        
+
 if(!(SwitchTest(0) === 6)){
   $ERROR("#1: SwitchTest(0) === 6. Actual:  SwitchTest(0) ==="+ SwitchTest(0)  );
 }

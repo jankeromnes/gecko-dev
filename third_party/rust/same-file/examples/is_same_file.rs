@@ -5,7 +5,7 @@ use same_file::is_same_file;
 
 fn try_main() -> Result<(), Box<Error>> {
     assert!(is_same_file("/bin/sh", "/usr/bin/sh")?);
-    Ok(()) 
+    Ok(())
 }
 
 fn main() {

@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   ls("a, taken", "b, taken");
 
   reportCompare(expect, actual, summary);
@@ -733,7 +733,7 @@ function ls(a, b) {
       break;
   case "a, taken":
     switch(b) {
-    case "b, taken": 
+    case "b, taken":
       actual = 'PASSED';
     }
   }

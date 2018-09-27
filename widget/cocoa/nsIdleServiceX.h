@@ -14,16 +14,16 @@ public:
 
   bool PollIdleTime(uint32_t* aIdleTime) override;
 
-  static already_AddRefed<nsIdleServiceX> GetInstance() 
+  static already_AddRefed<nsIdleServiceX> GetInstance()
   {
     RefPtr<nsIdleService> idleService = nsIdleService::GetInstance();
     if (!idleService) {
       idleService = new nsIdleServiceX();
     }
-    
+
     return idleService.forget().downcast<nsIdleServiceX>();
   }
-  
+
 protected:
     nsIdleServiceX() { }
     virtual ~nsIdleServiceX() { }

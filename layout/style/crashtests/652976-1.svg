@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg">
 <script>
 window.addEventListener("load", function() {
-  setTimeout(function() { 
+  setTimeout(function() {
     document.getElementById("a").style.MozAnimationName = "a";
   }, 0);
 }, false);

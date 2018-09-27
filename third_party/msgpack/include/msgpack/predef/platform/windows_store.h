@@ -29,7 +29,7 @@ http://www.boost.org/LICENSE_1_0.txt)
 #   undef MSGPACK_PLAT_WINDOWS_STORE
 #   define MSGPACK_PLAT_WINDOWS_STORE MSGPACK_VERSION_NUMBER_AVAILABLE
 #endif
- 
+
 #if MSGPACK_PLAT_WINDOWS_STORE
 #   define MSGPACK_PLAT_WINDOWS_STORE_AVAILABLE
 #   include <msgpack/predef/detail/platform_detected.h>

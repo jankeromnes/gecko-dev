@@ -13,5 +13,5 @@
   <Param name="translate" value="firefox" />
   <Param name="word" value="{searchTerms}" />
 </Url>
-<SearchForm>http://portal.bg/dict/</SearchForm> 
+<SearchForm>http://portal.bg/dict/</SearchForm>
 </SearchPlugin>

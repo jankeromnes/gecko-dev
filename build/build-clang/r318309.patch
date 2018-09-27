@@ -20,7 +20,7 @@ index f4b8b4e34a8..fa6279800dc 100644
 @@ -7615,53 +7615,62 @@ class BuiltinOperatorOverloadBuilder {
    SmallVectorImpl<BuiltinCandidateTypeSet> &CandidateTypes;
    OverloadCandidateSet &CandidateSet;
- 
+
 -  // Define some constants used to index and iterate over the arithemetic types
 -  // provided via the getArithmeticType() method below.
 -  // The "promoted arithmetic types" are the arithmetic
@@ -124,7 +124,7 @@ index f4b8b4e34a8..fa6279800dc 100644
 +    assert(ArithmeticTypes.size() <= ArithmeticTypesCap &&
 +           "Enough inline storage for all arithmetic types.");
    }
- 
+
    /// \brief Helper method to factor out the common pattern of adding overloads
 @@ -7720,18 +7729,8 @@ class BuiltinOperatorOverloadBuilder {
          HasArithmeticOrEnumeralCandidateType),
@@ -145,7 +145,7 @@ index f4b8b4e34a8..fa6279800dc 100644
 +
 +    InitArithmeticTypes();
    }
- 
+
    // C++ [over.built]p3:
 @@ -7758,7 +7757,7 @@ class BuiltinOperatorOverloadBuilder {
      for (unsigned Arith = (Op == OO_PlusPlus? 0 : 1);
@@ -157,23 +157,23 @@ index f4b8b4e34a8..fa6279800dc 100644
          VisibleTypeConversionsQuals.hasRestrict());
      }
 @@ -7831,7 +7830,7 @@ class BuiltinOperatorOverloadBuilder {
- 
+
      for (unsigned Arith = FirstPromotedArithmeticType;
           Arith < LastPromotedArithmeticType; ++Arith) {
 -      QualType ArithTy = getArithmeticType(Arith);
 +      QualType ArithTy = ArithmeticTypes[Arith];
        S.AddBuiltinCandidate(&ArithTy, Args, CandidateSet);
      }
- 
+
 @@ -7871,7 +7870,7 @@ class BuiltinOperatorOverloadBuilder {
- 
+
      for (unsigned Int = FirstPromotedIntegralType;
           Int < LastPromotedIntegralType; ++Int) {
 -      QualType IntTy = getArithmeticType(Int);
 +      QualType IntTy = ArithmeticTypes[Int];
        S.AddBuiltinCandidate(&IntTy, Args, CandidateSet);
      }
- 
+
 @@ -8099,8 +8098,8 @@ class BuiltinOperatorOverloadBuilder {
           Left < LastPromotedArithmeticType; ++Left) {
        for (unsigned Right = FirstPromotedArithmeticType;
@@ -202,14 +202,14 @@ index f4b8b4e34a8..fa6279800dc 100644
          QualType ParamTypes[2];
 -        ParamTypes[1] = getArithmeticType(Right);
 +        ParamTypes[1] = ArithmeticTypes[Right];
- 
+
          // Add this built-in operator as a candidate (VQ is empty).
          ParamTypes[0] =
 -          S.Context.getLValueReferenceType(getArithmeticType(Left));
 +          S.Context.getLValueReferenceType(ArithmeticTypes[Left]);
          S.AddBuiltinCandidate(ParamTypes, Args, CandidateSet,
                                /*IsAssigmentOperator=*/isEqualOp);
- 
+
          // Add this built-in operator as a candidate (VQ is 'volatile').
          if (VisibleTypeConversionsQuals.hasVolatile()) {
            ParamTypes[0] =
@@ -224,7 +224,7 @@ index f4b8b4e34a8..fa6279800dc 100644
          QualType ParamTypes[2];
 -        ParamTypes[1] = getArithmeticType(Right);
 +        ParamTypes[1] = ArithmeticTypes[Right];
- 
+
          // Add this built-in operator as a candidate (VQ is empty).
          ParamTypes[0] =
 -          S.Context.getLValueReferenceType(getArithmeticType(Left));

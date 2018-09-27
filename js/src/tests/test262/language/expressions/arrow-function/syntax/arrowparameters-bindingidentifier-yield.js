@@ -6,7 +6,7 @@ description: >
     ArrowParameters[Yield] :
       BindingIdentifier[?Yield]
       ...
-    
+
     Parameter named "yield", non-strict
 
 flags: [noStrict]

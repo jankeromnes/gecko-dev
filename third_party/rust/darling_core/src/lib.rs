@@ -30,5 +30,5 @@ pub use from_variant::FromVariant;
 
 #[cfg(test)]
 mod tests {
-    
+
 }

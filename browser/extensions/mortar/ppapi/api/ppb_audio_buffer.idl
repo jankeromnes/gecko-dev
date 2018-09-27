@@ -95,7 +95,7 @@ interface PPB_AudioBuffer {
    */
   [on_failure=PP_AUDIOBUFFER_SAMPLESIZE_UNKNOWN]
   PP_AudioBuffer_SampleSize GetSampleSize([in] PP_Resource buffer);
-  
+
   /**
    * Gets the number of channels in the audio buffer.
    *

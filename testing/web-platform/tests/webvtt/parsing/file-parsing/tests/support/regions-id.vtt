@@ -18,7 +18,7 @@ id :bar
 lines:3
 
 REGION
-id:
+id:
 lines:4
 
 00:00:00.000 --> 00:00:01.000 region:foo
@@ -30,5 +30,5 @@ valid
 00:00:00.000 --> 00:00:01.000 region:id
 valid
 
-00:00:00.000 --> 00:00:01.000 region:
+00:00:00.000 --> 00:00:01.000 region:
 valid

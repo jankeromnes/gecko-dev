@@ -6,7 +6,7 @@
 
 function init() {   var n2 = document.getElementById("n2");
   var n3 = document.getElementById("n3");
-  
+
   n2.appendChild(n3);
 }
 

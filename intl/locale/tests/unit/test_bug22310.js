@@ -8,7 +8,7 @@ function dt(locale) {
 }
 
 var all_passed = true;
-const tests = 
+const tests =
 [
  [dt("en-US").has("June"), "month name in en-US"],
  [dt("en-US").has("2008"), "year in en-US"],

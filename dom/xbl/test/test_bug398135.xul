@@ -106,7 +106,7 @@ addLoadEvent(function() {
   todo(window.log == "descendantDestructor:ancestorDestructor:",
      "Destructors did not fire");
   window.log = "";
-  
+
   parent.insertBefore(d, nextSibling);
   is(window.log, "ancestorConstructor:descendantConstructor:",
      "Constructors did not fire a second time?");

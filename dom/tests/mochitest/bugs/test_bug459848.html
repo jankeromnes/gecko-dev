@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=459848
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=459848">Mozilla Bug 459848</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -41,7 +41,7 @@ function startTest() {
   var ifr2 = document.getElementById('iframe2');
   doc1 = ifr1.contentDocument;
   doc2 = ifr2.contentDocument;
-  
+
   testDocument(doc1);
   is(doc1.documentElement.getAttribute("didRun"), "true",
      "Should have run an event listener");

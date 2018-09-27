@@ -1,8 +1,8 @@
 /* -----------------------------------------------------------------------
    sysv.S - Copyright (c) 1998, 2008, 2011 Red Hat, Inc.
 	    Copyright (c) 2011 Plausible Labs Cooperative, Inc.
-   
-   ARM Foreign Function Interface 
+
+   ARM Foreign Function Interface
 
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the
@@ -25,7 +25,7 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#define LIBFFI_ASM	
+#define LIBFFI_ASM
 #include <fficonfig.h>
 #include <ffi.h>
 #ifdef HAVE_MACHINE_ASM_H
@@ -59,7 +59,7 @@
 #define __SOFTFP__
 #endif
 
-/* We need a better way of testing for this, but for now, this is all 
+/* We need a better way of testing for this, but for now, this is all
    we can do.  */
 @ This selects the minimum architecture level required.
 #define __ARM_ARCH__ 3
@@ -68,7 +68,7 @@
 # undef __ARM_ARCH__
 # define __ARM_ARCH__ 4
 #endif
-        
+
 #if defined(__ARM_ARCH_5__) || defined(__ARM_ARCH_5T__) \
 	|| defined(__ARM_ARCH_5E__) || defined(__ARM_ARCH_5TE__) \
 	|| defined(__ARM_ARCH_5TEJ__)
@@ -107,7 +107,7 @@
 #define UNWIND
 #else
 #define UNWIND @
-#endif	
+#endif
 
 .syntax unified
 
@@ -186,14 +186,14 @@ ARM_FUNC_START(ffi_call_SYSV)
 
 	@ call (fn) (...)
 	call_reg(ip)
-	
+
 	@ Remove the space we pushed for the args
 	mov	sp, fp
 
 	@ Load r2 with the pointer to storage for the return value
 	ldr	r2, [sp, #24]
 
-	@ Load r3 with the return type code 
+	@ Load r3 with the return type code
 	ldr	r3, [sp, #12]
 
 	@ If the return value pointer is NULL, assume no return value.
@@ -383,7 +383,7 @@ LSYM(Lbase_args):
 	@ the return value
 	ldr	r2, [sp, #24]
 
-	@ Load r3 with the return type code 
+	@ Load r3 with the return type code
 	ldr	r3, [sp, #12]
 
 	@ If the return value pointer is NULL,
@@ -402,7 +402,7 @@ LSYM(Lbase_args):
 	cmp	r3, #FFI_TYPE_FLOAT
 	fstseq	s0, [r2]
 	beq	LSYM(Lepilogue_vfp)
-	
+
 	cmp	r3, #FFI_TYPE_DOUBLE
 	fstdeq	d0, [r2]
 	beq	LSYM(Lepilogue_vfp)
@@ -452,7 +452,7 @@ ARM_FUNC_START(ffi_closure_VFP)
 
 	cmp	r0, #FFI_TYPE_STRUCT_VFP_DOUBLE
 	beq	.Lretdouble_struct_vfp
-	
+
 .Lclosure_epilogue_vfp:
 	add	sp, sp, #72
 	ldmfd	sp, {sp, pc}

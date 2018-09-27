@@ -16,10 +16,10 @@
 #include "unicode/unistr.h"
 
 /**
- * \file 
+ * \file
  * \brief C++ API: String Enumeration
  */
- 
+
 U_NAMESPACE_BEGIN
 
 /**
@@ -52,9 +52,9 @@ U_NAMESPACE_BEGIN
  * ICU 2.8 adds some default implementations and helper functions
  * for subclasses.
  *
- * @stable ICU 2.4 
+ * @stable ICU 2.4
  */
-class U_COMMON_API StringEnumeration : public UObject { 
+class U_COMMON_API StringEnumeration : public UObject {
 public:
     /**
      * Destructor.
@@ -126,7 +126,7 @@ public:
      * @param resultLength a pointer to receive the length, can be NULL.
      * @return a pointer to the string, or NULL.
      *
-     * @stable ICU 2.4 
+     * @stable ICU 2.4
      */
     virtual const char* next(int32_t *resultLength, UErrorCode& status);
 
@@ -151,7 +151,7 @@ public:
      * @param resultLength a ponter to receive the length, can be NULL.
      * @return a pointer to the string, or NULL.
      *
-     * @stable ICU 2.4 
+     * @stable ICU 2.4
      */
     virtual const char16_t* unext(int32_t *resultLength, UErrorCode& status);
 
@@ -173,7 +173,7 @@ public:
      * @param status the error code.
      * @return a pointer to the string, or NULL.
      *
-     * @stable ICU 2.4 
+     * @stable ICU 2.4
      */
     virtual const UnicodeString* snext(UErrorCode& status);
 
@@ -187,7 +187,7 @@ public:
      *
      * @param status the error code.
      *
-     * @stable ICU 2.4 
+     * @stable ICU 2.4
      */
     virtual void reset(UErrorCode& status) = 0;
 
@@ -196,7 +196,7 @@ public:
      *
      * @param that The other string enumeration to compare this object to
      * @return TRUE if the enumerations are equal. FALSE if not.
-     * @stable ICU 3.6 
+     * @stable ICU 3.6
      */
     virtual UBool operator==(const StringEnumeration& that)const;
     /**
@@ -204,7 +204,7 @@ public:
      *
      * @param that The other string enumeration to compare this object to
      * @return TRUE if the enumerations are equal. FALSE if not.
-     * @stable ICU 3.6 
+     * @stable ICU 3.6
      */
     virtual UBool operator!=(const StringEnumeration& that)const;
 

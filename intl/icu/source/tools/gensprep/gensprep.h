@@ -31,7 +31,7 @@
  * code point(s) at build time
  */
 
- 
+
 /* global flags */
 extern UBool beVerbose, haveCopyright;
 

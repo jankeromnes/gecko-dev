@@ -17,7 +17,7 @@ diff --git a/security/sandbox/chromium/base/memory/ref_counted.cc b/security/san
    AddRefImpl();
  }
  #endif
- 
+
  #if DCHECK_IS_ON()
  bool RefCountedBase::CalledOnValidSequence() const {
 +#if defined(MOZ_SANDBOX)
@@ -28,9 +28,9 @@ diff --git a/security/sandbox/chromium/base/memory/ref_counted.cc b/security/san
 +#endif
  }
  #endif
- 
+
  }  // namespace subtle
- 
+
  #if DCHECK_IS_ON()
  ScopedAllowCrossThreadRefCountAccess::ScopedAllowCrossThreadRefCountAccess() {
    ++g_cross_thread_ref_count_access_allow_count;

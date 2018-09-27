@@ -3,13 +3,13 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <!--LOCALIZATION NOTE printProgress.dtd Main UI for Print Progress Dialog -->
-<!ENTITY printWindow.title "Printing"> 
-<!ENTITY title    "Title:"> 
+<!ENTITY printWindow.title "Printing">
+<!ENTITY title    "Title:">
 <!ENTITY progress "Progress:">
 <!ENTITY preparing "Preparing…">
 <!ENTITY printComplete "Printing is Completed.">
 
-<!ENTITY dialogCancel.label "Cancel"> 
+<!ENTITY dialogCancel.label "Cancel">
 <!ENTITY dialogClose.label "Close">
 
 <!-- LOCALIZATION NOTE (percentPrint):

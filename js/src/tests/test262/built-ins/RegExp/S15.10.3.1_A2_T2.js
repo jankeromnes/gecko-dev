@@ -19,7 +19,7 @@ try {
 } catch (e) {
 	if ((e instanceof SyntaxError) !== true) {
 		$ERROR('#1.2: var x = 1; RegExp(/[a-b]?/, x) throw SyntaxError. Actual: ' + (e));
-	} 
+	}
 }
 
 reportCompare(0, 0);

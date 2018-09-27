@@ -1,5 +1,5 @@
 #! gmake
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -31,7 +31,7 @@ CSRCS	= now.c
 # This version hasn't been ported for us; the one in mozilla/config has
 ifneq ($(OS_ARCH),OS2)
 CSRCS  += nsinstall.c
- 
+
 PLSRCS	= nfspwd.pl
 endif
 

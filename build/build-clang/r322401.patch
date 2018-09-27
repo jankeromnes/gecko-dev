@@ -65,7 +65,7 @@ index 6ad99e516fb..c5373376ade 100644
 @@ -290,6 +290,90 @@ public:
    void print(raw_ostream &OS, const Module *M = nullptr) const override;
  };
- 
+
 +//===-------------------------------------
 +/// \brief Class to defer updates to a DominatorTree.
 +///
@@ -151,7 +151,7 @@ index 6ad99e516fb..c5373376ade 100644
 +};
 +
  } // end namespace llvm
- 
+
  #endif // LLVM_IR_DOMINATORS_H
 diff --git a/llvm/include/llvm/Transforms/Scalar/JumpThreading.h b/llvm/include/llvm/Transforms/Scalar/JumpThreading.h
 index a9466713b8e..b3493a29249 100644
@@ -174,7 +174,7 @@ index a9466713b8e..b3493a29249 100644
    std::unique_ptr<BranchProbabilityInfo> BPI;
    bool HasProfileData = false;
 @@ -107,8 +109,8 @@ public:
- 
+
    // Glue for old PM.
    bool runImpl(Function &F, TargetLibraryInfo *TLI_, LazyValueInfo *LVI_,
 -               AliasAnalysis *AA_, bool HasProfileData_,
@@ -182,14 +182,14 @@ index a9466713b8e..b3493a29249 100644
 +               AliasAnalysis *AA_, DeferredDominance *DDT_,
 +               bool HasProfileData_, std::unique_ptr<BlockFrequencyInfo> BFI_,
                 std::unique_ptr<BranchProbabilityInfo> BPI_);
- 
+
    PreservedAnalyses run(Function &F, FunctionAnalysisManager &AM);
 diff --git a/llvm/include/llvm/Transforms/Utils/BasicBlockUtils.h b/llvm/include/llvm/Transforms/Utils/BasicBlockUtils.h
 index 74f75509f55..6f0d2deac0a 100644
 --- a/llvm/include/llvm/Transforms/Utils/BasicBlockUtils.h
 +++ b/llvm/include/llvm/Transforms/Utils/BasicBlockUtils.h
 @@ -27,6 +27,7 @@ namespace llvm {
- 
+
  class BlockFrequencyInfo;
  class BranchProbabilityInfo;
 +class DeferredDominance;
@@ -198,11 +198,11 @@ index 74f75509f55..6f0d2deac0a 100644
  class Instruction;
 @@ -38,7 +39,7 @@ class TargetLibraryInfo;
  class Value;
- 
+
  /// Delete the specified block, which must have no predecessors.
 -void DeleteDeadBlock(BasicBlock *BB);
 +void DeleteDeadBlock(BasicBlock *BB, DeferredDominance *DDT = nullptr);
- 
+
  /// We know that BB has one predecessor. If there are any single-entry PHI nodes
  /// in it, fold them away. This handles the case when all entries to the PHI
 diff --git a/llvm/include/llvm/Transforms/Utils/Local.h b/llvm/include/llvm/Transforms/Utils/Local.h
@@ -216,7 +216,7 @@ index 01db88bc15c..eb1f4c41b44 100644
 -                            const TargetLibraryInfo *TLI = nullptr);
 +                            const TargetLibraryInfo *TLI = nullptr,
 +                            DeferredDominance *DDT = nullptr);
- 
+
  //===----------------------------------------------------------------------===//
  //  Local dead code elimination.
 @@ -171,18 +172,21 @@ bool SimplifyInstructionsInBlock(BasicBlock *BB,
@@ -226,14 +226,14 @@ index 01db88bc15c..eb1f4c41b44 100644
 -void RemovePredecessorAndSimplify(BasicBlock *BB, BasicBlock *Pred);
 +void RemovePredecessorAndSimplify(BasicBlock *BB, BasicBlock *Pred,
 +                                  DeferredDominance *DDT = nullptr);
- 
+
  /// BB is a block with one predecessor and its predecessor is known to have one
  /// successor (BB!). Eliminate the edge between them, moving the instructions in
  /// the predecessor into BB. This deletes the predecessor block.
 -void MergeBasicBlockIntoOnlyPred(BasicBlock *BB, DominatorTree *DT = nullptr);
 +void MergeBasicBlockIntoOnlyPred(BasicBlock *BB, DominatorTree *DT = nullptr,
 +                                 DeferredDominance *DDT = nullptr);
- 
+
  /// BB is known to contain an unconditional branch, and contains no instructions
  /// other than PHI nodes, potential debug intrinsics and the branch. If
  /// possible, eliminate BB by rewriting all the predecessors to branch to the
@@ -241,7 +241,7 @@ index 01db88bc15c..eb1f4c41b44 100644
 -bool TryToSimplifyUncondBranchFromEmptyBlock(BasicBlock *BB);
 +bool TryToSimplifyUncondBranchFromEmptyBlock(BasicBlock *BB,
 +                                             DeferredDominance *DDT = nullptr);
- 
+
  /// Check for and eliminate duplicate PHI nodes in this block. This doesn't try
  /// to be clever about PHI nodes which differ only in the order of the incoming
 @@ -382,7 +386,8 @@ unsigned removeAllNonTerminatorAndEHPadInstructions(BasicBlock *BB);
@@ -251,7 +251,7 @@ index 01db88bc15c..eb1f4c41b44 100644
 -                             bool PreserveLCSSA = false);
 +                             bool PreserveLCSSA = false,
 +                             DeferredDominance *DDT = nullptr);
- 
+
  /// Convert the CallInst to InvokeInst with the specified unwind edge basic
  /// block.  This also splits the basic block where CI is located, because
 @@ -397,12 +402,13 @@ BasicBlock *changeToInvokeAndSplitBasicBlock(CallInst *CI,
@@ -260,14 +260,14 @@ index 01db88bc15c..eb1f4c41b44 100644
  ///            have an unwind successor.
 -void removeUnwindEdge(BasicBlock *BB);
 +void removeUnwindEdge(BasicBlock *BB, DeferredDominance *DDT = nullptr);
- 
+
  /// Remove all blocks that can not be reached from the function's entry.
  ///
  /// Returns true if any basic block was removed.
 -bool removeUnreachableBlocks(Function &F, LazyValueInfo *LVI = nullptr);
 +bool removeUnreachableBlocks(Function &F, LazyValueInfo *LVI = nullptr,
 +                             DeferredDominance *DDT = nullptr);
- 
+
  /// Combine the metadata of two instructions so that K can replace J
  ///
 diff --git a/llvm/lib/IR/Dominators.cpp b/llvm/lib/IR/Dominators.cpp
@@ -285,7 +285,7 @@ index ad448a3f240..e44e845b324 100644
 @@ -389,3 +390,190 @@ void DominatorTreeWrapperPass::print(raw_ostream &OS, const Module *) const {
    DT.print(OS);
  }
- 
+
 +//===----------------------------------------------------------------------===//
 +//  DeferredDominance Implementation
 +//===----------------------------------------------------------------------===//
@@ -479,14 +479,14 @@ index 8f468ebf894..535d43cdf9e 100644
 +++ b/llvm/lib/Transforms/Scalar/CorrelatedValuePropagation.cpp
 @@ -77,6 +77,7 @@ namespace {
      bool runOnFunction(Function &F) override;
- 
+
      void getAnalysisUsage(AnalysisUsage &AU) const override {
 +      AU.addRequired<DominatorTreeWrapperPass>();
        AU.addRequired<LazyValueInfoWrapperPass>();
        AU.addPreserved<GlobalsAAWrapperPass>();
      }
 @@ -88,6 +89,7 @@ char CorrelatedValuePropagation::ID = 0;
- 
+
  INITIALIZE_PASS_BEGIN(CorrelatedValuePropagation, "correlated-propagation",
                  "Value Propagation", false, false)
 +INITIALIZE_PASS_DEPENDENCY(DominatorTreeWrapperPass)
@@ -499,7 +499,7 @@ index 141c9938bf8..4d366e8e392 100644
 +++ b/llvm/lib/Transforms/Scalar/JumpThreading.cpp
 @@ -131,10 +131,11 @@ namespace {
      bool runOnFunction(Function &F) override;
- 
+
      void getAnalysisUsage(AnalysisUsage &AU) const override {
 -      if (PrintLVIAfterJumpThreading)
 -        AU.addRequired<DominatorTreeWrapperPass>();
@@ -512,7 +512,7 @@ index 141c9938bf8..4d366e8e392 100644
        AU.addRequired<TargetLibraryInfoWrapperPass>();
      }
 @@ -148,6 +149,7 @@ char JumpThreading::ID = 0;
- 
+
  INITIALIZE_PASS_BEGIN(JumpThreading, "jump-threading",
                  "Jump Threading", false, false)
 +INITIALIZE_PASS_DEPENDENCY(DominatorTreeWrapperPass)
@@ -535,7 +535,7 @@ index 141c9938bf8..4d366e8e392 100644
 @@ -289,12 +295,11 @@ bool JumpThreading::runOnFunction(Function &F) {
      BFI.reset(new BlockFrequencyInfo(F, *BPI, LI));
    }
- 
+
 -  bool Changed = Impl.runImpl(F, TLI, LVI, AA, HasProfileData, std::move(BFI),
 -                              std::move(BPI));
 +  bool Changed = Impl.runImpl(F, TLI, LVI, AA, &DDT, HasProfileData,
@@ -558,18 +558,18 @@ index 141c9938bf8..4d366e8e392 100644
    auto &LVI = AM.getResult<LazyValueAnalysis>(F);
    auto &AA = AM.getResult<AAManager>(F);
 +  DeferredDominance DDT(DT);
- 
+
    std::unique_ptr<BlockFrequencyInfo> BFI;
    std::unique_ptr<BranchProbabilityInfo> BPI;
 @@ -313,25 +322,28 @@ PreservedAnalyses JumpThreadingPass::run(Function &F,
      BFI.reset(new BlockFrequencyInfo(F, *BPI, LI));
    }
- 
+
 -  bool Changed = runImpl(F, &TLI, &LVI, &AA, HasProfileData, std::move(BFI),
 -                         std::move(BPI));
 +  bool Changed = runImpl(F, &TLI, &LVI, &AA, &DDT, HasProfileData,
 +                         std::move(BFI), std::move(BPI));
- 
+
    if (!Changed)
      return PreservedAnalyses::all();
    PreservedAnalyses PA;
@@ -578,7 +578,7 @@ index 141c9938bf8..4d366e8e392 100644
 +  PA.preserve<LazyValueAnalysis>();
    return PA;
  }
- 
+
  bool JumpThreadingPass::runImpl(Function &F, TargetLibraryInfo *TLI_,
                                  LazyValueInfo *LVI_, AliasAnalysis *AA_,
 -                                bool HasProfileData_,
@@ -599,13 +599,13 @@ index 141c9938bf8..4d366e8e392 100644
    bool EverChanged = false;
 -  EverChanged |= removeUnreachableBlocks(F, LVI);
 +  EverChanged |= removeUnreachableBlocks(F, LVI, DDT);
- 
+
    FindLoopHeaders(F);
- 
+
 @@ -368,6 +380,10 @@ bool JumpThreadingPass::runImpl(Function &F, TargetLibraryInfo *TLI_,
- 
+
        ++I;
- 
+
 +      // Don't thread branches over a block that's slated for deletion.
 +      if (DDT->pendingDeletedBB(BB))
 +        continue;
@@ -633,12 +633,12 @@ index 141c9938bf8..4d366e8e392 100644
      }
 @@ -408,6 +424,7 @@ bool JumpThreadingPass::runImpl(Function &F, TargetLibraryInfo *TLI_,
    } while (Changed);
- 
+
    LoopHeaders.clear();
 +  DDT->flush();
    return EverChanged;
  }
- 
+
 @@ -931,8 +948,8 @@ static bool hasAddressTakenAndUsed(BasicBlock *BB) {
  bool JumpThreadingPass::ProcessBlock(BasicBlock *BB) {
    // If the block is trivially dead, just return and let the caller nuke it.
@@ -648,15 +648,15 @@ index 141c9938bf8..4d366e8e392 100644
 +  if (DDT->pendingDeletedBB(BB) ||
 +      (pred_empty(BB) && BB != &BB->getParent()->getEntryBlock()))
      return false;
- 
+
    // If this block has a single predecessor, and if that pred has a single
 @@ -948,7 +965,7 @@ bool JumpThreadingPass::ProcessBlock(BasicBlock *BB) {
          LoopHeaders.insert(BB);
- 
+
        LVI->eraseBlock(SinglePred);
 -      MergeBasicBlockIntoOnlyPred(BB);
 +      MergeBasicBlockIntoOnlyPred(BB, nullptr, DDT);
- 
+
        // Now that BB is merged into SinglePred (i.e. SinglePred Code followed by
        // BB code within one basic block `BB`), we need to invalidate the LVI
 @@ -1031,18 +1048,23 @@ bool JumpThreadingPass::ProcessBlock(BasicBlock *BB) {
@@ -664,7 +664,7 @@ index 141c9938bf8..4d366e8e392 100644
    if (isa<UndefValue>(Condition)) {
      unsigned BestSucc = GetBestDestForJumpOnUndef(BB);
 +    std::vector<DominatorTree::UpdateType> Updates;
- 
+
      // Fold the branch/switch.
      TerminatorInst *BBTerm = BB->getTerminator();
 +    Updates.reserve(BBTerm->getNumSuccessors());
@@ -675,7 +675,7 @@ index 141c9938bf8..4d366e8e392 100644
 +      Succ->removePredecessor(BB, true);
 +      Updates.push_back({DominatorTree::Delete, BB, Succ});
      }
- 
+
      DEBUG(dbgs() << "  In block '" << BB->getName()
            << "' folding undef terminator: " << *BBTerm << '\n');
      BranchInst::Create(BBTerm->getSuccessor(BestSucc), BBTerm);
@@ -683,7 +683,7 @@ index 141c9938bf8..4d366e8e392 100644
 +    DDT->applyUpdates(Updates);
      return true;
    }
- 
+
 @@ -1053,7 +1075,7 @@ bool JumpThreadingPass::ProcessBlock(BasicBlock *BB) {
      DEBUG(dbgs() << "  In block '" << BB->getName()
            << "' folding terminator: " << *BB->getTerminator() << '\n');
@@ -692,7 +692,7 @@ index 141c9938bf8..4d366e8e392 100644
 +    ConstantFoldTerminator(BB, true, nullptr, DDT);
      return true;
    }
- 
+
 @@ -1086,7 +1108,8 @@ bool JumpThreadingPass::ProcessBlock(BasicBlock *BB) {
        if (Ret != LazyValueInfo::Unknown) {
          unsigned ToRemove = Ret == LazyValueInfo::True ? 1 : 0;
@@ -710,7 +710,7 @@ index 141c9938bf8..4d366e8e392 100644
 +        DDT->deleteEdge(BB, ToRemoveSucc);
          return true;
        }
- 
+
 @@ -1182,9 +1206,12 @@ bool JumpThreadingPass::ProcessImpliedCondition(BasicBlock *BB) {
      Optional<bool> Implication =
          isImpliedCondition(PBI->getCondition(), Cond, DL, CondIsTrue);
@@ -742,19 +742,19 @@ index 141c9938bf8..4d366e8e392 100644
 +          Updates.push_back({DominatorTree::Delete, BB, SuccBB});
 +        }
        }
- 
+
        // Finally update the terminator.
        TerminatorInst *Term = BB->getTerminator();
        BranchInst::Create(OnlyDest, Term);
        Term->eraseFromParent();
 +      DDT->applyUpdates(Updates);
- 
+
        // If the condition is now dead due to the removal of the old terminator,
        // erase it.
 @@ -1964,6 +1996,10 @@ bool JumpThreadingPass::ThreadEdge(BasicBlock *BB,
        PredTerm->setSuccessor(i, NewBB);
      }
- 
+
 +  DDT->applyUpdates({{DominatorTree::Insert, NewBB, SuccBB},
 +                     {DominatorTree::Insert, PredBB, NewBB},
 +                     {DominatorTree::Delete, PredBB, BB}});
@@ -787,7 +787,7 @@ index 141c9938bf8..4d366e8e392 100644
 +  } else {
 +    NewBBs.push_back(SplitBlockPredecessors(BB, Preds, Suffix));
 +  }
- 
+
 -  BasicBlock *PredBB = SplitBlockPredecessors(BB, Preds, Suffix);
 +  std::vector<DominatorTree::UpdateType> Updates;
 +  Updates.reserve((2 * Preds.size()) + NewBBs.size());
@@ -803,7 +803,7 @@ index 141c9938bf8..4d366e8e392 100644
 +    if (HasProfileData) // Apply the summed frequency to NewBB.
 +      BFI->setBlockFreq(NewBB, NewBBFreq.getFrequency());
 +  }
- 
+
 -  // Set the block frequency of the newly created PredBB, which is the sum of
 -  // frequencies of Preds.
 -  if (HasProfileData)
@@ -812,11 +812,11 @@ index 141c9938bf8..4d366e8e392 100644
 +  DDT->applyUpdates(Updates);
 +  return NewBBs[0];
  }
- 
+
  bool JumpThreadingPass::doesBlockHaveProfileData(BasicBlock *BB) {
 @@ -2140,6 +2198,7 @@ bool JumpThreadingPass::DuplicateCondBranchOnPHIIntoPred(
    }
- 
+
    // And finally, do it!  Start by factoring the predecessors if needed.
 +  std::vector<DominatorTree::UpdateType> Updates;
    BasicBlock *PredBB;
@@ -827,12 +827,12 @@ index 141c9938bf8..4d366e8e392 100644
      PredBB = SplitBlockPreds(BB, PredBBs, ".thr_comm");
    }
 +  Updates.push_back({DominatorTree::Delete, PredBB, BB});
- 
+
    // Okay, we decided to do this!  Clone all the instructions in BB onto the end
    // of PredBB.
 @@ -2160,7 +2220,11 @@ bool JumpThreadingPass::DuplicateCondBranchOnPHIIntoPred(
    BranchInst *OldPredBranch = dyn_cast<BranchInst>(PredBB->getTerminator());
- 
+
    if (!OldPredBranch || !OldPredBranch->isUnconditional()) {
 -    PredBB = SplitEdge(PredBB, BB);
 +    BasicBlock *OldPredBB = PredBB;
@@ -842,7 +842,7 @@ index 141c9938bf8..4d366e8e392 100644
 +    Updates.push_back({DominatorTree::Delete, OldPredBB, BB});
      OldPredBranch = cast<BranchInst>(PredBB->getTerminator());
    }
- 
+
 @@ -2202,6 +2266,10 @@ bool JumpThreadingPass::DuplicateCondBranchOnPHIIntoPred(
        // Otherwise, insert the new instruction into the block.
        New->setName(BI->getName());
@@ -853,19 +853,19 @@ index 141c9938bf8..4d366e8e392 100644
 +          Updates.push_back({DominatorTree::Insert, PredBB, SuccBB});
      }
    }
- 
+
 @@ -2257,6 +2325,7 @@ bool JumpThreadingPass::DuplicateCondBranchOnPHIIntoPred(
- 
+
    // Remove the unconditional branch at the end of the PredBB block.
    OldPredBranch->eraseFromParent();
 +  DDT->applyUpdates(Updates);
- 
+
    ++NumDupes;
    return true;
 @@ -2329,6 +2398,8 @@ bool JumpThreadingPass::TryToUnfoldSelect(CmpInst *CondCmp, BasicBlock *BB) {
        // The select is now dead.
        SI->eraseFromParent();
- 
+
 +      DDT->applyUpdates({{DominatorTree::Insert, NewBB, BB},
 +                         {DominatorTree::Insert, Pred, NewBB}});
        // Update any other PHI nodes in BB.
@@ -900,12 +900,12 @@ index 141c9938bf8..4d366e8e392 100644
 @@ -2498,8 +2583,8 @@ bool JumpThreadingPass::ThreadGuard(BasicBlock *BB, IntrinsicInst *Guard,
    if (!TrueDestIsSafe && !FalseDestIsSafe)
      return false;
- 
+
 -  BasicBlock *UnguardedBlock = TrueDestIsSafe ? TrueDest : FalseDest;
 -  BasicBlock *GuardedBlock = FalseDestIsSafe ? TrueDest : FalseDest;
 +  BasicBlock *PredUnguardedBlock = TrueDestIsSafe ? TrueDest : FalseDest;
 +  BasicBlock *PredGuardedBlock = FalseDestIsSafe ? TrueDest : FalseDest;
- 
+
    ValueToValueMapTy UnguardedMapping, GuardedMapping;
    Instruction *AfterGuard = Guard->getNextNode();
 @@ -2508,18 +2593,29 @@ bool JumpThreadingPass::ThreadGuard(BasicBlock *BB, IntrinsicInst *Guard,
@@ -948,9 +948,9 @@ index 8f59913e14b..f3a5f148def 100644
 --- a/llvm/lib/Transforms/Utils/BasicBlockUtils.cpp
 +++ b/llvm/lib/Transforms/Utils/BasicBlockUtils.cpp
 @@ -45,16 +45,22 @@
- 
+
  using namespace llvm;
- 
+
 -void llvm::DeleteDeadBlock(BasicBlock *BB) {
 +void llvm::DeleteDeadBlock(BasicBlock *BB, DeferredDominance *DDT) {
    assert((pred_begin(BB) == pred_end(BB) ||
@@ -958,7 +958,7 @@ index 8f59913e14b..f3a5f148def 100644
           BB->getSinglePredecessor() == BB) && "Block is not dead!");
    TerminatorInst *BBTerm = BB->getTerminator();
 +  std::vector<DominatorTree::UpdateType> Updates;
- 
+
    // Loop through all of our successors and make sure they know that one
    // of their predecessors is going away.
 -  for (BasicBlock *Succ : BBTerm->successors())
@@ -969,13 +969,13 @@ index 8f59913e14b..f3a5f148def 100644
 +    if (DDT)
 +      Updates.push_back({DominatorTree::Delete, BB, Succ});
 +  }
- 
+
    // Zap all the instructions in the block.
    while (!BB->empty()) {
 @@ -69,8 +75,12 @@ void llvm::DeleteDeadBlock(BasicBlock *BB) {
      BB->getInstList().pop_back();
    }
- 
+
 -  // Zap the block!
 -  BB->eraseFromParent();
 +  if (DDT) {
@@ -985,7 +985,7 @@ index 8f59913e14b..f3a5f148def 100644
 +    BB->eraseFromParent(); // Zap the block!
 +  }
  }
- 
+
  void llvm::FoldSingleEntryPHINodes(BasicBlock *BB,
 diff --git a/llvm/lib/Transforms/Utils/Local.cpp b/llvm/lib/Transforms/Utils/Local.cpp
 index acccf7abf80..6564e18856c 100644
@@ -1000,7 +1000,7 @@ index acccf7abf80..6564e18856c 100644
 +                                  DeferredDominance *DDT) {
    TerminatorInst *T = BB->getTerminator();
    IRBuilder<> Builder(T);
- 
+
 @@ -123,6 +124,8 @@ bool llvm::ConstantFoldTerminator(BasicBlock *BB, bool DeleteDeadConditions,
        // Replace the conditional branch with an unconditional one.
        Builder.CreateBr(Destination);
@@ -1009,7 +1009,7 @@ index acccf7abf80..6564e18856c 100644
 +        DDT->deleteEdge(BB, OldDest);
        return true;
      }
- 
+
 @@ -193,9 +196,12 @@ bool llvm::ConstantFoldTerminator(BasicBlock *BB, bool DeleteDeadConditions,
                            createBranchWeights(Weights));
          }
@@ -1023,7 +1023,7 @@ index acccf7abf80..6564e18856c 100644
 +          DDT->deleteEdge(ParentBB, DefaultDest);
          continue;
        }
- 
+
 @@ -221,14 +227,20 @@ bool llvm::ConstantFoldTerminator(BasicBlock *BB, bool DeleteDeadConditions,
        // Insert the new branch.
        Builder.CreateBr(TheOnlyDest);
@@ -1031,7 +1031,7 @@ index acccf7abf80..6564e18856c 100644
 +      std::vector <DominatorTree::UpdateType> Updates;
 +      if (DDT)
 +        Updates.reserve(SI->getNumSuccessors() - 1);
- 
+
        // Remove entries from PHI nodes which we no longer branch to...
        for (BasicBlock *Succ : SI->successors()) {
          // Found case matching a constant operand?
@@ -1045,7 +1045,7 @@ index acccf7abf80..6564e18856c 100644
 +            Updates.push_back({DominatorTree::Delete, BB, Succ});
 +        }
        }
- 
+
        // Delete the old switch.
 @@ -236,6 +248,8 @@ bool llvm::ConstantFoldTerminator(BasicBlock *BB, bool DeleteDeadConditions,
        SI->eraseFromParent();
@@ -1055,7 +1055,7 @@ index acccf7abf80..6564e18856c 100644
 +        DDT->applyUpdates(Updates);
        return true;
      }
- 
+
 @@ -281,14 +295,23 @@ bool llvm::ConstantFoldTerminator(BasicBlock *BB, bool DeleteDeadConditions,
      if (auto *BA =
            dyn_cast<BlockAddress>(IBI->getAddress()->stripPointerCasts())) {
@@ -1066,7 +1066,7 @@ index acccf7abf80..6564e18856c 100644
 +
        // Insert the new branch.
        Builder.CreateBr(TheOnlyDest);
- 
+
        for (unsigned i = 0, e = IBI->getNumDestinations(); i != e; ++i) {
 -        if (IBI->getDestination(i) == TheOnlyDest)
 +        if (IBI->getDestination(i) == TheOnlyDest) {
@@ -1086,7 +1086,7 @@ index acccf7abf80..6564e18856c 100644
 @@ -303,6 +326,8 @@ bool llvm::ConstantFoldTerminator(BasicBlock *BB, bool DeleteDeadConditions,
          new UnreachableInst(BB->getContext(), BB);
        }
- 
+
 +      if (DDT)
 +        DDT->applyUpdates(Updates);
        return true;
@@ -1109,7 +1109,7 @@ index acccf7abf80..6564e18856c 100644
 +  if (DDT)
 +    DDT->deleteEdge(Pred, BB);
  }
- 
+
  /// MergeBasicBlockIntoOnlyPred - DestBB is a block with one predecessor and its
  /// predecessor is known to have one successor (DestBB!).  Eliminate the edge
  /// between them, moving the instructions in the predecessor into DestBB and
@@ -1125,7 +1125,7 @@ index acccf7abf80..6564e18856c 100644
 @@ -621,6 +652,25 @@ void llvm::MergeBasicBlockIntoOnlyPred(BasicBlock *DestBB, DominatorTree *DT) {
    BasicBlock *PredBB = DestBB->getSinglePredecessor();
    assert(PredBB && "Block doesn't have a single predecessor!");
- 
+
 +  bool ReplaceEntryBB = false;
 +  if (PredBB == &DestBB->getParent()->getEntryBlock())
 +    ReplaceEntryBB = true;
@@ -1149,13 +1149,13 @@ index acccf7abf80..6564e18856c 100644
    // address an invalid value.
    if (DestBB->hasAddressTaken()) {
 @@ -641,7 +691,7 @@ void llvm::MergeBasicBlockIntoOnlyPred(BasicBlock *DestBB, DominatorTree *DT) {
- 
+
    // If the PredBB is the entry block of the function, move DestBB up to
    // become the entry block after we erase PredBB.
 -  if (PredBB == &DestBB->getParent()->getEntryBlock())
 +  if (ReplaceEntryBB)
      DestBB->moveAfter(PredBB);
- 
+
    if (DT) {
 @@ -653,8 +703,19 @@ void llvm::MergeBasicBlockIntoOnlyPred(BasicBlock *DestBB, DominatorTree *DT) {
        DT->eraseNode(PredBB);
@@ -1177,7 +1177,7 @@ index acccf7abf80..6564e18856c 100644
 +    PredBB->eraseFromParent(); // Nuke BB.
 +  }
  }
- 
+
  /// CanMergeValues - Return true if we can choose one of these values to use
 @@ -861,7 +922,8 @@ static void redirectValuesFromPredecessorsToPhi(BasicBlock *BB,
  /// potential side-effect free intrinsics and the branch.  If possible,
@@ -1188,11 +1188,11 @@ index acccf7abf80..6564e18856c 100644
 +                                                   DeferredDominance *DDT) {
    assert(BB != &BB->getParent()->getEntryBlock() &&
           "TryToSimplifyUncondBranchFromEmptyBlock called on entry block!");
- 
+
 @@ -902,6 +964,19 @@ bool llvm::TryToSimplifyUncondBranchFromEmptyBlock(BasicBlock *BB) {
- 
+
    DEBUG(dbgs() << "Killing Trivial BB: \n" << *BB);
- 
+
 +  std::vector<DominatorTree::UpdateType> Updates;
 +  if (DDT) {
 +    Updates.reserve(1 + (2 * std::distance(pred_begin(BB), pred_end(BB))));
@@ -1223,10 +1223,10 @@ index acccf7abf80..6564e18856c 100644
 +  }
    return true;
  }
- 
+
 @@ -1448,13 +1529,19 @@ unsigned llvm::removeAllNonTerminatorAndEHPadInstructions(BasicBlock *BB) {
  }
- 
+
  unsigned llvm::changeToUnreachable(Instruction *I, bool UseLLVMTrap,
 -                                   bool PreserveLCSSA) {
 +                                   bool PreserveLCSSA, DeferredDominance *DDT) {
@@ -1255,7 +1255,7 @@ index acccf7abf80..6564e18856c 100644
 +    DDT->applyUpdates(Updates);
    return NumInstrsRemoved;
  }
- 
+
  /// changeToCall - Convert the specified invoke into a normal call.
 -static void changeToCall(InvokeInst *II) {
 +static void changeToCall(InvokeInst *II, DeferredDominance *DDT = nullptr) {
@@ -1264,12 +1264,12 @@ index acccf7abf80..6564e18856c 100644
    II->getOperandBundlesAsDefs(OpBundles);
 @@ -1491,11 +1580,16 @@ static void changeToCall(InvokeInst *II) {
    II->replaceAllUsesWith(NewCall);
- 
+
    // Follow the call by a branch to the normal destination.
 -  BranchInst::Create(II->getNormalDest(), II);
 +  BasicBlock *NormalDestBB = II->getNormalDest();
 +  BranchInst::Create(NormalDestBB, II);
- 
+
    // Update PHI nodes in the unwind destination
 -  II->getUnwindDest()->removePredecessor(II->getParent());
 +  BasicBlock *BB = II->getParent();
@@ -1279,11 +1279,11 @@ index acccf7abf80..6564e18856c 100644
 +  if (DDT)
 +    DDT->deleteEdge(BB, UnwindDestBB);
  }
- 
+
  BasicBlock *llvm::changeToInvokeAndSplitBasicBlock(CallInst *CI,
 @@ -1536,7 +1630,8 @@ BasicBlock *llvm::changeToInvokeAndSplitBasicBlock(CallInst *CI,
  }
- 
+
  static bool markAliveBlocks(Function &F,
 -                            SmallPtrSetImpl<BasicBlock*> &Reachable) {
 +                            SmallPtrSetImpl<BasicBlock*> &Reachable,
@@ -1365,7 +1365,7 @@ index acccf7abf80..6564e18856c 100644
 @@ -1679,7 +1779,7 @@ static bool markAliveBlocks(Function &F,
        }
      }
- 
+
 -    Changed |= ConstantFoldTerminator(BB, true);
 +    Changed |= ConstantFoldTerminator(BB, true, nullptr, DDT);
      for (BasicBlock *Successor : successors(BB))
@@ -1374,17 +1374,17 @@ index acccf7abf80..6564e18856c 100644
 @@ -1687,11 +1787,11 @@ static bool markAliveBlocks(Function &F,
    return Changed;
  }
- 
+
 -void llvm::removeUnwindEdge(BasicBlock *BB) {
 +void llvm::removeUnwindEdge(BasicBlock *BB, DeferredDominance *DDT) {
    TerminatorInst *TI = BB->getTerminator();
- 
+
    if (auto *II = dyn_cast<InvokeInst>(TI)) {
 -    changeToCall(II);
 +    changeToCall(II, DDT);
      return;
    }
- 
+
 @@ -1719,15 +1819,18 @@ void llvm::removeUnwindEdge(BasicBlock *BB) {
    UnwindDest->removePredecessor(BB);
    TI->replaceAllUsesWith(NewTI);
@@ -1392,7 +1392,7 @@ index acccf7abf80..6564e18856c 100644
 +  if (DDT)
 +    DDT->deleteEdge(BB, UnwindDest);
  }
- 
+
  /// removeUnreachableBlocks - Remove blocks that are not reachable, even
  /// if they are in a dead cycle.  Return true if a change was made, false
  /// otherwise. If `LVI` is passed, this function preserves LazyValueInfo
@@ -1403,12 +1403,12 @@ index acccf7abf80..6564e18856c 100644
    SmallPtrSet<BasicBlock*, 16> Reachable;
 -  bool Changed = markAliveBlocks(F, Reachable);
 +  bool Changed = markAliveBlocks(F, Reachable, DDT);
- 
+
    // If there are unreachable blocks in the CFG...
    if (Reachable.size() == F.size())
 @@ -1737,25 +1840,39 @@ bool llvm::removeUnreachableBlocks(Function &F, LazyValueInfo *LVI) {
    NumRemoved += F.size()-Reachable.size();
- 
+
    // Loop over all of the basic blocks that are not reachable, dropping all of
 -  // their internal references...
 -  for (Function::iterator BB = ++F.begin(), E = F.end(); BB != E; ++BB) {
@@ -1433,7 +1433,7 @@ index acccf7abf80..6564e18856c 100644
 +      LVI->eraseBlock(BB);
      BB->dropAllReferences();
    }
- 
+
 -  for (Function::iterator I = ++F.begin(); I != F.end();)
 -    if (!Reachable.count(&*I))
 -      I = F.getBasicBlockList().erase(I);
@@ -1451,12 +1451,12 @@ index acccf7abf80..6564e18856c 100644
 +      I = F.getBasicBlockList().erase(I);
 +    }
 +  }
- 
+
 +  if (DDT)
 +    DDT->applyUpdates(Updates);
    return true;
  }
- 
+
 diff --git a/llvm/test/Analysis/LazyValueAnalysis/lvi-after-jumpthreading.ll b/llvm/test/Analysis/LazyValueAnalysis/lvi-after-jumpthreading.ll
 index 41bb8c9c820..27cd2263bea 100644
 --- a/llvm/test/Analysis/LazyValueAnalysis/lvi-after-jumpthreading.ll
@@ -2210,6 +2210,6 @@ index 00000000000..96156f89a74
 +  DDT.applyUpdates(Updates);
 +  ASSERT_TRUE(DDT.flush().verify());
 +}
--- 
+--
 2.18.0
 

@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var r;
   var s = 'a0- z';
 

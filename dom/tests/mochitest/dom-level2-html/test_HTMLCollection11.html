@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "collection");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,14 +70,14 @@ function loadComplete() {
 
 
 /**
-* 
-    The namedItem(name) method retrieves a node using a name.  It first   
+*
+    The namedItem(name) method retrieves a node using a name.  It first
     searches for a node with a matching id attribute.  If it doesn't find
     one, it then searches for a Node with a matching name attribute, but only
     on those elements that are allowed a name attribute.
 
     Retrieve the first FORM element and create a HTMLCollection by invoking
-    the elements attribute.  The first SELECT element is further retrieved 
+    the elements attribute.  The first SELECT element is further retrieved
     using the elements id attribute.
 
 * @author NIST
@@ -93,7 +93,7 @@ function HTMLCollection11() {
       var formsnodeList;
       var vname;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -108,7 +108,7 @@ testNode = nodeList.item(0);
       vname = formNode.nodeName;
 
       assertEqualsAutoCase("element", "nameIndexLink","select",vname);
-       
+
 }
 
 </script>
@@ -118,13 +118,13 @@ testNode = nodeList.item(0);
 <p>&lt;test name='HTMLCollection11' schemaLocation='http://www.w3.org/2001/DOM-Test-Suite/Level-1 dom1.xsd'&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;metadata&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;HTMLCollection11&lt;/title&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
-    The namedItem(name) method retrieves a node using a name.  It first   
+    The namedItem(name) method retrieves a node using a name.  It first
     searches for a node with a matching id attribute.  If it doesn't find
     one, it then searches for a Node with a matching name attribute, but only
     on those elements that are allowed a name attribute.
 
     Retrieve the first FORM element and create a HTMLCollection by invoking
-    the elements attribute.  The first SELECT element is further retrieved 
+    the elements attribute.  The first SELECT element is further retrieved
     using the elements id attribute.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
@@ -142,7 +142,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/collection.html"></iframe>
 <br>

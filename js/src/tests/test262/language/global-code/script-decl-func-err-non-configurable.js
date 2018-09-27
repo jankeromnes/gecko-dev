@@ -26,7 +26,7 @@ info: |
   6. If existingProp.[[Configurable]] is true, return true.
   7. If IsDataDescriptor(existingProp) is true and existingProp has attribute
      values {[[Writable]]: true, [[Enumerable]]: true}, return true.
-  8. Return false. 
+  8. Return false.
 ---*/
 
 Object.defineProperty(
@@ -50,7 +50,7 @@ Object.defineProperty(
 Object.defineProperty(
   this,
   'accessor1',
-  { 
+  {
     configurable: false,
     get: function() {},
     set: function() {},
@@ -61,7 +61,7 @@ Object.defineProperty(
 Object.defineProperty(
   this,
   'accessor2',
-  { 
+  {
     configurable: false,
     get: function() {},
     set: function() {},

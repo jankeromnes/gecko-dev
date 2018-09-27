@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!--
 
-Description: channel lastBuildDate works 
+Description: channel lastBuildDate works
 Expect:      feed.updated == 'Sat, 07 Sep 2002 00:00:01 GMT'
 
 -->

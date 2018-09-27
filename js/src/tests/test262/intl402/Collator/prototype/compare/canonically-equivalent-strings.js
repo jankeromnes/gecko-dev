@@ -47,7 +47,7 @@ var pairs = [
     // examples involving supplementary characters from UCD NormalizationTest.txt
     ["\uD834\uDD5E", "\uD834\uDD57\uD834\uDD65"],
     ["\uD87E\uDC2B", "北"]
-    
+
 ];
 var i;
 for (i = 0; i < pairs.length; i++) {

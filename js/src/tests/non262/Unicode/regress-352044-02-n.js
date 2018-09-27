@@ -24,7 +24,7 @@ function test()
   try
   {
     var i = 1;
-    i \u002b= 1; 
+    i \u002b= 1;
     print(i);
   }
   catch(ex)

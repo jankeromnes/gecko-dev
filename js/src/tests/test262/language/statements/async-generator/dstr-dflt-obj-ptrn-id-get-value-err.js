@@ -31,7 +31,7 @@ var poisonedProperty = Object.defineProperty({}, 'poisoned', {
 
 
 async function* f({ poisoned } = poisonedProperty) {
-  
+
 };
 
 assert.throws(Test262Error, function() {

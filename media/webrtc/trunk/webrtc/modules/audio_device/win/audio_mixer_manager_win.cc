@@ -310,62 +310,62 @@ int32_t AudioMixerManager::EnumerateMicrophones()
                 if (!GetAllLineControls(mixId, destLine, controlArray))
                 {
                     // This destination has no controls. We must try to control
-                    // one of its sources instead. 
+                    // one of its sources instead.
                     // This is a rare state but has been found for some
                     // Logitech USB headsets.
 
-                    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, 
+                    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
                     "this destination has no controls => must control source");
                     for (DWORD sourceId = 0; sourceId < destLine.cConnections; sourceId++)
                     {
-                        GetSourceLineInfo(mixId, destId, sourceId, sourceLine, false); 
-                        if (sourceLine.dwComponentType == 
+                        GetSourceLineInfo(mixId, destId, sourceId, sourceLine, false);
+                        if (sourceLine.dwComponentType ==
                             MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE)
                         {
-                            WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, 
-                            "found microphone source ( name: %s, ID: %u)", 
+                            WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
+                            "found microphone source ( name: %s, ID: %u)",
                             WideToUTF8(sourceLine.szName), sourceId);
                             GetAllLineControls(mixId, sourceLine, controlArray, false);
-                            // scan the controls for this source and search for volume, 
+                            // scan the controls for this source and search for volume,
                             // mute and on/off (<=> boost) controls
                             for (UINT sc = 0; sc < sourceLine.cControls; sc++)
                             {
-                                if (controlArray[sc].dwControlType == 
+                                if (controlArray[sc].dwControlType ==
                                     MIXERCONTROL_CONTROLTYPE_VOLUME)
                                 {
                                     // store this volume control
-                                    _microphoneState[mixId].dwVolumeControlID = 
+                                    _microphoneState[mixId].dwVolumeControlID =
                                     controlArray[sc].dwControlID;
                                     _microphoneState[mixId].volumeControlIsValid = true;
-                                    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, 
-                                    "found volume control (name: %s, ID: %u)", 
-                                    WideToUTF8(controlArray[sc].szName), 
+                                    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
+                                    "found volume control (name: %s, ID: %u)",
+                                    WideToUTF8(controlArray[sc].szName),
                                     controlArray[sc].dwControlID);
                                 }
-                                else if (controlArray[sc].dwControlType == 
+                                else if (controlArray[sc].dwControlType ==
                                          MIXERCONTROL_CONTROLTYPE_MUTE)
                                 {
                                     // store this mute control
                                     _microphoneState[mixId].dwMuteControlID =
                                     controlArray[sc].dwControlID;
                                     _microphoneState[mixId].muteControlIsValid = true;
-                                    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, 
-                                    "found mute control (name: %s, ID: %u)", 
-                                    WideToUTF8(controlArray[sc].szName), 
+                                    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
+                                    "found mute control (name: %s, ID: %u)",
+                                    WideToUTF8(controlArray[sc].szName),
                                     controlArray[sc].dwControlID);
                                 }
-                                else if (controlArray[sc].dwControlType == 
+                                else if (controlArray[sc].dwControlType ==
                                          MIXERCONTROL_CONTROLTYPE_ONOFF ||
-                                         controlArray[sc].dwControlType == 
+                                         controlArray[sc].dwControlType ==
                                          MIXERCONTROL_CONTROLTYPE_LOUDNESS)
                                 {
                                     // store this on/off control (most likely a Boost control)
-                                    _microphoneState[mixId].dwOnOffControlID = 
+                                    _microphoneState[mixId].dwOnOffControlID =
                                     controlArray[sc].dwControlID;
                                     _microphoneState[mixId].onOffControlIsValid = true;
-                                    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, 
-                                    "found on/off control (name: %s, ID: %u)", 
-                                    WideToUTF8(controlArray[sc].szName), 
+                                    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
+                                    "found on/off control (name: %s, ID: %u)",
+                                    WideToUTF8(controlArray[sc].szName),
                                     controlArray[sc].dwControlID);
                                  }
                              }
@@ -427,7 +427,7 @@ int32_t AudioMixerManager::EnumerateMicrophones()
                         if (!GetSourceLineInfo(mixId, destId, selection, sourceLine)  ||
                            (sourceLine.cControls == 0)                                ||
                            (sourceLine.fdwLine & MIXERLINE_LINEF_DISCONNECTED)        ||
-                          !(sourceLine.fdwLine & MIXERLINE_LINEF_ACTIVE))               
+                          !(sourceLine.fdwLine & MIXERLINE_LINEF_ACTIVE))
                         {
                             continue;
                         }

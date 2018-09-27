@@ -5,20 +5,20 @@ Connected to ftp.x.org.
 220-This server is provided and supported by The Open Group.
 220-
 220 ftp.x.org FTP server (Version wu-2.6.2(2) Mon Dec 17 13:03:41 GMT 2001) ready.
-Name (export.lcs.mit.edu:cyp): 
+Name (export.lcs.mit.edu:cyp):
 331 Guest login ok, send your complete e-mail address as password.
 230-
 230-Welcome to ftp.x.org, the X11 anonymous FTP archive of X.Org.
 230-
-230-PLEASE NOTE THE INCOMING FACILITY IS PRESENTLY UNAVAILABLE 
+230-PLEASE NOTE THE INCOMING FACILITY IS PRESENTLY UNAVAILABLE
 230-
 230-All activity is logged with your host name and email address.
 230-
 230-REPORTING PROBLEMS - Please report all problems to xorg_info@x.org.
 230-
-230-LOGIN PROBLEMS - If your FTP client crashes or hangs shortly after 
-230-login, try using a dash (-) as the first character of your password.  
-230-This turns off the informational messages that may be confusing 
+230-LOGIN PROBLEMS - If your FTP client crashes or hangs shortly after
+230-login, try using a dash (-) as the first character of your password.
+230-This turns off the informational messages that may be confusing
 230-your ftp client.
 230-
 230-

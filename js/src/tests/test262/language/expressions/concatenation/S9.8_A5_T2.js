@@ -26,7 +26,7 @@ if (new Number(Number.NaN) + "" !== "NaN") {
 
 // CHECK#4
 if (new Number(null) + "" !== "0") {
-  $ERROR('#4: new Number(null) + "" === "0". Actual: ' + (new Number(null) + "")); 
+  $ERROR('#4: new Number(null) + "" === "0". Actual: ' + (new Number(null) + ""));
 }
 
 // CHECK#5
@@ -61,9 +61,9 @@ if (new Array(2,4,8,16,32) + "" !== "2,4,8,16,32") {
 
 // CHECK#11
 var myobj1 = {
-                toNumber : function(){return 12345;}, 
+                toNumber : function(){return 12345;},
                 toString : function(){return 67890;},
-                valueOf  : function(){return "[object MyObj]";} 
+                valueOf  : function(){return "[object MyObj]";}
             };
 
 if (myobj1 + "" !== "[object MyObj]"){
@@ -73,8 +73,8 @@ if (myobj1 + "" !== "[object MyObj]"){
 // CHECK#12
 var myobj2 = {
                 toNumber : function(){return 12345;},
-                toString : function(){return 67890}, 
-                valueOf  : function(){return {}} 
+                toString : function(){return 67890},
+                valueOf  : function(){return {}}
             };
 
 if (myobj2 + "" !== "67890"){
@@ -83,7 +83,7 @@ if (myobj2 + "" !== "67890"){
 
 // CHECK#13
 var myobj3 = {
-                toNumber : function(){return 12345;} 
+                toNumber : function(){return 12345;}
             };
 
 if (myobj3 + "" !== "[object Object]"){

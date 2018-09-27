@@ -6,9 +6,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,7 +43,7 @@ import org.mozilla.apache.commons.codec.binary.StringUtils;
  * to ensure the integrity of the data should the message pass through a character- translating, and/or line-wrapping
  * gateway.
  * </p>
- * 
+ *
  * <p>
  * Note:
  * </p>
@@ -53,10 +53,10 @@ import org.mozilla.apache.commons.codec.binary.StringUtils;
  * framework is ready. The motivation behind providing the codec in a partial form is that it can already come in handy
  * for those applications that do not require quoted-printable line formatting (rules #3, #4, #5), for instance Q codec.
  * </p>
- * 
+ *
  * @see <a href="http://www.ietf.org/rfc/rfc1521.txt"> RFC 1521 MIME (Multipurpose Internet Mail Extensions) Part One:
  *          Mechanisms for Specifying and Describing the Format of Internet Message Bodies </a>
- * 
+ *
  * @author Apache Software Foundation
  * @since 1.3
  * @version $Id: QuotedPrintableCodec.java 1080712 2011-03-11 18:26:59Z ggregory $
@@ -99,7 +99,7 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
 
     /**
      * Constructor which allows for the selection of a default charset
-     * 
+     *
      * @param charset
      *                  the default string charset to use.
      */
@@ -110,7 +110,7 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
 
     /**
      * Encodes byte into its quoted-printable representation.
-     * 
+     *
      * @param b
      *                  byte to encode
      * @param buffer
@@ -126,12 +126,12 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
 
     /**
      * Encodes an array of bytes into an array of quoted-printable 7-bit characters. Unsafe characters are escaped.
-     * 
+     *
      * <p>
      * This function implements a subset of quoted-printable encoding specification (rule #1 and rule #2) as defined in
      * RFC 1521 and is suitable for encoding binary data and unformatted text.
      * </p>
-     * 
+     *
      * @param printable
      *                  bitset of characters deemed quoted-printable
      * @param bytes
@@ -163,12 +163,12 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
     /**
      * Decodes an array quoted-printable characters into an array of original bytes. Escaped characters are converted
      * back to their original representation.
-     * 
+     *
      * <p>
      * This function implements a subset of quoted-printable encoding specification (rule #1 and rule #2) as defined in
      * RFC 1521.
      * </p>
-     * 
+     *
      * @param bytes
      *                  array of quoted-printable characters
      * @return array of original bytes
@@ -199,12 +199,12 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
 
     /**
      * Encodes an array of bytes into an array of quoted-printable 7-bit characters. Unsafe characters are escaped.
-     * 
+     *
      * <p>
      * This function implements a subset of quoted-printable encoding specification (rule #1 and rule #2) as defined in
      * RFC 1521 and is suitable for encoding binary data and unformatted text.
      * </p>
-     * 
+     *
      * @param bytes
      *                  array of bytes to be encoded
      * @return array of bytes containing quoted-printable data
@@ -216,12 +216,12 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
     /**
      * Decodes an array of quoted-printable characters into an array of original bytes. Escaped characters are converted
      * back to their original representation.
-     * 
+     *
      * <p>
      * This function implements a subset of quoted-printable encoding specification (rule #1 and rule #2) as defined in
      * RFC 1521.
      * </p>
-     * 
+     *
      * @param bytes
      *                  array of quoted-printable characters
      * @return array of original bytes
@@ -234,19 +234,19 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
 
     /**
      * Encodes a string into its quoted-printable form using the default string charset. Unsafe characters are escaped.
-     * 
+     *
      * <p>
      * This function implements a subset of quoted-printable encoding specification (rule #1 and rule #2) as defined in
      * RFC 1521 and is suitable for encoding binary data.
      * </p>
-     * 
+     *
      * @param pString
      *                  string to convert to quoted-printable form
      * @return quoted-printable string
-     * 
+     *
      * @throws EncoderException
      *                  Thrown if quoted-printable encoding is unsuccessful
-     * 
+     *
      * @see #getDefaultCharset()
      */
     public String encode(String pString) throws EncoderException {
@@ -263,7 +263,7 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
     /**
      * Decodes a quoted-printable string into its original form using the specified string charset. Escaped characters
      * are converted back to their original representation.
-     * 
+     *
      * @param pString
      *                  quoted-printable string to convert into its original form
      * @param charset
@@ -284,7 +284,7 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
     /**
      * Decodes a quoted-printable string into its original form using the default string charset. Escaped characters are
      * converted back to their original representation.
-     * 
+     *
      * @param pString
      *                  quoted-printable string to convert into its original form
      * @return original string
@@ -306,7 +306,7 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
 
     /**
      * Encodes an object into its quoted-printable safe form. Unsafe characters are escaped.
-     * 
+     *
      * @param pObject
      *                  string to convert to a quoted-printable form
      * @return quoted-printable object
@@ -322,8 +322,8 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
         } else if (pObject instanceof String) {
             return encode((String) pObject);
         } else {
-            throw new EncoderException("Objects of type " + 
-                  pObject.getClass().getName() + 
+            throw new EncoderException("Objects of type " +
+                  pObject.getClass().getName() +
                   " cannot be quoted-printable encoded");
         }
     }
@@ -331,7 +331,7 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
     /**
      * Decodes a quoted-printable object into its original form. Escaped characters are converted back to their original
      * representation.
-     * 
+     *
      * @param pObject
      *                  quoted-printable object to convert into its original form
      * @return original object
@@ -347,15 +347,15 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
         } else if (pObject instanceof String) {
             return decode((String) pObject);
         } else {
-            throw new DecoderException("Objects of type " + 
-                  pObject.getClass().getName() + 
+            throw new DecoderException("Objects of type " +
+                  pObject.getClass().getName() +
                   " cannot be quoted-printable decoded");
         }
     }
 
     /**
      * Returns the default charset used for string decoding and encoding.
-     * 
+     *
      * @return the default string charset.
      */
     public String getDefaultCharset() {
@@ -364,18 +364,18 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
 
     /**
      * Encodes a string into its quoted-printable form using the specified charset. Unsafe characters are escaped.
-     * 
+     *
      * <p>
      * This function implements a subset of quoted-printable encoding specification (rule #1 and rule #2) as defined in
      * RFC 1521 and is suitable for encoding binary data and unformatted text.
      * </p>
-     * 
+     *
      * @param pString
      *                  string to convert to quoted-printable form
      * @param charset
      *                  the charset for pString
      * @return quoted-printable string
-     * 
+     *
      * @throws UnsupportedEncodingException
      *                  Thrown if the charset is not supported
      */

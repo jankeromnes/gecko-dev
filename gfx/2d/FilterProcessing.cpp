@@ -210,7 +210,7 @@ FilterProcessing::DoPremultiplicationCalculation(const IntSize& aSize,
                                                  uint8_t* aSourceData, int32_t aSourceStride)
 {
   if (Factory::HasSSE2()) {
-#ifdef USE_SSE2 
+#ifdef USE_SSE2
     DoPremultiplicationCalculation_SSE2(
       aSize, aTargetData, aTargetStride, aSourceData, aSourceStride);
 #endif
@@ -226,7 +226,7 @@ FilterProcessing::DoUnpremultiplicationCalculation(const IntSize& aSize,
                                                    uint8_t* aSourceData, int32_t aSourceStride)
 {
   if (Factory::HasSSE2()) {
-#ifdef USE_SSE2 
+#ifdef USE_SSE2
     DoUnpremultiplicationCalculation_SSE2(
       aSize, aTargetData, aTargetStride, aSourceData, aSourceStride);
 #endif

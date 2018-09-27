@@ -12,9 +12,9 @@
         .ent    s_mpv_mul_d_add
         .globl  s_mpv_mul_d_add
 
-s_mpv_mul_d_add: 
+s_mpv_mul_d_add:
  #/* c += a * b */
- #void s_mpv_mul_d_add(const mp_digit *a, mp_size a_len, mp_digit b, 
+ #void s_mpv_mul_d_add(const mp_digit *a, mp_size a_len, mp_digit b,
  #			      mp_digit *c)
  #{
  #  mp_digit   a0, a1;	regs a4, a5
@@ -49,7 +49,7 @@ s_mpv_mul_d_add:
 	daddu	t0,t0,t2
  #	  w0    += c0;
 	daddu	t0,t0,a6
- #	  w1     = (mp_word)b * a1; 
+ #	  w1     = (mp_word)b * a1;
 	dmultu	a2,a5			#
  #	  cy     = CARRYOUT(w0);
 	dsrl32	t2,t0,0
@@ -87,7 +87,7 @@ s_mpv_mul_d_add:
 	mflo	t0
 	beq	a1,zero,.L.5
 	daddu	t0,t0,t2
- #	  w1     = (mp_word)b * a1; 
+ #	  w1     = (mp_word)b * a1;
 	dmultu	a2,a5
  #	  w0    += c0;
 	daddu	t0,t0,a6		#
@@ -146,9 +146,9 @@ s_mpv_mul_d_add:
         .ent    s_mpv_mul_d_add_prop
         .globl  s_mpv_mul_d_add_prop
 
-s_mpv_mul_d_add_prop: 
+s_mpv_mul_d_add_prop:
  #/* c += a * b */
- #void s_mpv_mul_d_add_prop(const mp_digit *a, mp_size a_len, mp_digit b, 
+ #void s_mpv_mul_d_add_prop(const mp_digit *a, mp_size a_len, mp_digit b,
  #			      mp_digit *c)
  #{
  #  mp_digit   a0, a1;	regs a4, a5
@@ -183,7 +183,7 @@ s_mpv_mul_d_add_prop:
 	daddu	t0,t0,t2
  #	  w0    += c0;
 	daddu	t0,t0,a6
- #	  w1     = (mp_word)b * a1; 
+ #	  w1     = (mp_word)b * a1;
 	dmultu	a2,a5			#
  #	  cy     = CARRYOUT(w0);
 	dsrl32	t2,t0,0
@@ -221,7 +221,7 @@ s_mpv_mul_d_add_prop:
 	mflo	t0
 	beq	a1,zero,.M.5
 	daddu	t0,t0,t2
- #	  w1     = (mp_word)b * a1; 
+ #	  w1     = (mp_word)b * a1;
 	dmultu	a2,a5
  #	  w0    += c0;
 	daddu	t0,t0,a6		#
@@ -294,9 +294,9 @@ s_mpv_mul_d_add_prop:
         .ent    s_mpv_mul_d
         .globl  s_mpv_mul_d
 
-s_mpv_mul_d: 
+s_mpv_mul_d:
  #/* c = a * b */
- #void s_mpv_mul_d(const mp_digit *a, mp_size a_len, mp_digit b, 
+ #void s_mpv_mul_d(const mp_digit *a, mp_size a_len, mp_digit b,
  #			      mp_digit *c)
  #{
  #  mp_digit   a0, a1;	regs a4, a5
@@ -328,8 +328,8 @@ s_mpv_mul_d:
 	daddu	t0,t0,t2
  #	  cy     = CARRYOUT(w0);
 	dsrl32	t2,t0,0
- #	  w1     = (mp_word)b * a1; 
-	dmultu	a2,a5	
+ #	  w1     = (mp_word)b * a1;
+	dmultu	a2,a5
  #	  c[0]   = ACCUM(w0);
 	sw	t0,0(a3)
  #	  a0     = a[2];
@@ -342,7 +342,7 @@ s_mpv_mul_d:
  #	  cy     = CARRYOUT(w1);
 	dsrl32	t2,t1,0
  #	  w0     = (mp_word)b * a0;
-	dmultu	a2,a4	
+	dmultu	a2,a4
  #	  c[1]   = ACCUM(w1);
 	sw	t1,4(a3)
  #	  c     += 2;
@@ -358,7 +358,7 @@ s_mpv_mul_d:
 	mflo	t0
 	beq	a1,zero,.N.5
 	daddu	t0,t0,t2
- #	  w1     = (mp_word)b * a1; 
+ #	  w1     = (mp_word)b * a1;
 	dmultu	a2,a5			#
  #	  cy     = CARRYOUT(w0);
 	dsrl32	t2,t0,0
@@ -413,7 +413,7 @@ s_mpv_mul_d:
  #	a3		digit from *a, a_i
  #	a4		square of digit from a
  #	a5,a6		next 2 digits in sqr
- #	a7,t0		carry 
+ #	a7,t0		carry
 s_mpv_sqr_add_prop:
 	move	a7,zero
 	move	t0,zero

@@ -70,7 +70,7 @@ STDAPI CreateArchiver(const GUID *clsid, const GUID *iid, void **outObject)
     int formatIndex = FindFormatCalssId(clsid);
     if (formatIndex < 0)
       return CLASS_E_CLASSNOTAVAILABLE;
-    
+
     const CArcInfo &arc = *g_Arcs[formatIndex];
     if (needIn)
     {

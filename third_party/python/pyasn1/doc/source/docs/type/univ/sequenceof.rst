@@ -12,6 +12,6 @@
 
        The |ASN.1| type models a collection of elements of a single ASN.1 type.
        Ordering of the components **is** preserved upon de/serialization.
-        
+
    .. automethod:: pyasn1.type.univ.SequenceOf.clone(componentType=None, tagSet=TagSet(), subtypeSpec=ConstraintsIntersection())
    .. automethod:: pyasn1.type.univ.SequenceOf.subtype(componentType=None, implicitTag=Tag(), explicitTag=Tag(),subtypeSpec=ConstraintsIntersection())

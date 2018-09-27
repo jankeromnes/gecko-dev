@@ -16,7 +16,7 @@ using namespace NDir;
 FString GetWorkDir(const NWorkDir::CInfo &workDirInfo, const FString &path, FString &fileName)
 {
   NWorkDir::NMode::EEnum mode = workDirInfo.Mode;
-  
+
   #if defined(_WIN32) && !defined(UNDER_CE)
   if (workDirInfo.ForRemovableOnly)
   {
@@ -37,10 +37,10 @@ FString GetWorkDir(const NWorkDir::CInfo &workDirInfo, const FString &path, FStr
     */
   }
   #endif
-  
+
   int pos = path.ReverseFind_PathSepar() + 1;
   fileName = path.Ptr(pos);
-  
+
   switch (mode)
   {
     case NWorkDir::NMode::kCurrent:

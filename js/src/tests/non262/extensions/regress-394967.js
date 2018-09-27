@@ -25,7 +25,7 @@ function test()
   }
   else
   {
-    var sandbox = evalcx(""); 
+    var sandbox = evalcx("");
     try
     {
       evalcx("(1)()", sandbox);

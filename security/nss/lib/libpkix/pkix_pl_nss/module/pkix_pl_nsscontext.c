@@ -45,7 +45,7 @@ PKIX_PL_NssContext_Create(
                 PKIX_CONTEXT_DEBUG("\t\tCalling PORT_NewArena\n");
                 arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
         }
-        
+
         context->arena = arena;
         context->certificateUsage = (SECCertificateUsage)certificateUsage;
         context->wincx = wincx;

@@ -899,13 +899,13 @@ res_findResource(const ResourceData *pResData, Resource r, char** path, const ch
   if(!URES_IS_CONTAINER(type)) {
       return RES_BOGUS;
   }
-  
+
   while(nextSepP && *pathP && t1 != RES_BOGUS && URES_IS_CONTAINER(type)) {
     /* Iteration stops if: the path has been consumed, we found a non-existing
      * resource (t1 == RES_BOGUS) or we found a scalar resource (including alias)
      */
     nextSepP = uprv_strchr(pathP, RES_PATH_SEPARATOR);
-    /* if there are more separators, terminate string 
+    /* if there are more separators, terminate string
      * and set path to the remaining part of the string
      */
     if(nextSepP != NULL) {
@@ -924,7 +924,7 @@ res_findResource(const ResourceData *pResData, Resource r, char** path, const ch
     if(URES_IS_TABLE(type)) {
       *key = pathP;
       t2 = res_getTableItemByKey(pResData, t1, &indexR, key);
-      if(t2 == RES_BOGUS) { 
+      if(t2 == RES_BOGUS) {
         /* if we fail to get the resource by key, maybe we got an index */
         indexR = uprv_strtol(pathP, &closeIndex, 10);
         if(indexR >= 0 && *closeIndex == 0) {

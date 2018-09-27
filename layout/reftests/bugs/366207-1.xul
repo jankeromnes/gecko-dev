@@ -5,7 +5,7 @@
 <window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload="loaded()"
 	class="reftest-wait">
-        
+
 <hbox style="display: none">
 <bindings xmlns="http://www.mozilla.org/xbl"
           xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
@@ -42,7 +42,7 @@ function loaded()
 }
 function boom()
 {
-  document.documentElement.style.MozBinding = "url('#foo')"; 
+  document.documentElement.style.MozBinding = "url('#foo')";
 }
 function finish()
 {

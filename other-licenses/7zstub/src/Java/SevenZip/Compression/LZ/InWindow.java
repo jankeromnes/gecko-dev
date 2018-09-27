@@ -10,17 +10,17 @@ public class InWindow
 	java.io.InputStream _stream;
 	int _posLimit;  // offset (from _buffer) of first byte when new block reading must be done
 	boolean _streamEndWasReached; // if (true) then _streamPos shows real end of stream
-	
+
 	int _pointerToLastSafePosition;
-	
+
 	public int _bufferOffset;
-	
+
 	public int _blockSize;  // Size of Allocated memory block
 	public int _pos;             // offset (from _buffer) of curent byte
 	int _keepSizeBefore;  // how many BYTEs must be kept in buffer before _pos
 	int _keepSizeAfter;   // how many BYTEs must be kept buffer after _pos
 	public int _streamPos;   // offset (from _buffer) of first not read byte from Stream
-	
+
 	public void MoveBlock()
 	{
 		int offset = _bufferOffset + _pos - _keepSizeBefore;
@@ -29,13 +29,13 @@ public class InWindow
 			offset--;
 
 		int numBytes = _bufferOffset + _streamPos - offset;
-		
+
 		// check negative offset ????
 		for (int i = 0; i < numBytes; i++)
 			_bufferBase[i] = _bufferBase[offset + i];
 		_bufferOffset -= offset;
 	}
-	
+
 	public void ReadBlock() throws IOException
 	{
 		if (_streamEndWasReached)
@@ -52,7 +52,7 @@ public class InWindow
 				int pointerToPostion = _bufferOffset + _posLimit;
 				if (pointerToPostion > _pointerToLastSafePosition)
 					_posLimit = _pointerToLastSafePosition - _bufferOffset;
-				
+
 				_streamEndWasReached = true;
 				return;
 			}
@@ -61,9 +61,9 @@ public class InWindow
 				_posLimit = _streamPos - _keepSizeAfter;
 		}
 	}
-	
+
 	void Free() { _bufferBase = null; }
-	
+
 	public void Create(int keepSizeBefore, int keepSizeAfter, int keepSizeReserv)
 	{
 		_keepSizeBefore = keepSizeBefore;
@@ -77,7 +77,7 @@ public class InWindow
 		}
 		_pointerToLastSafePosition = _blockSize - keepSizeAfter;
 	}
-	
+
 	public void SetStream(java.io.InputStream stream) { _stream = stream; 	}
 	public void ReleaseStream() { _stream = null; }
 
@@ -89,7 +89,7 @@ public class InWindow
 		_streamEndWasReached = false;
 		ReadBlock();
 	}
-	
+
 	public void MovePos() throws IOException
 	{
 		_pos++;
@@ -101,9 +101,9 @@ public class InWindow
 			ReadBlock();
 		}
 	}
-	
+
 	public byte GetIndexByte(int index)	{ return _bufferBase[_bufferOffset + _pos + index]; }
-	
+
 	// index + limit have not to exceed _keepSizeAfter;
 	public int GetMatchLen(int index, int distance, int limit)
 	{
@@ -113,14 +113,14 @@ public class InWindow
 		distance++;
 		// Byte *pby = _buffer + (size_t)_pos + index;
 		int pby = _bufferOffset + _pos + index;
-		
+
 		int i;
 		for (i = 0; i < limit && _bufferBase[pby + i] == _bufferBase[pby + i - distance]; i++);
 		return i;
 	}
-	
+
 	public int GetNumAvailableBytes()	{ return _streamPos - _pos; }
-	
+
 	public void ReduceOffsets(int subValue)
 	{
 		_bufferOffset += subValue;

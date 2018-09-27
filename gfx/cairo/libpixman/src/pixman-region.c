@@ -1,31 +1,31 @@
 /*
  * Copyright 1987, 1988, 1989, 1998  The Open Group
- * 
+ *
  * Permission to use, copy, modify, distribute, and sell this software and its
  * documentation for any purpose is hereby granted without fee, provided that
  * the above copyright notice appear in all copies and that both that
  * copyright notice and this permission notice appear in supporting
  * documentation.
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
  * OPEN GROUP BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
  * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * Except as contained in this notice, the name of The Open Group shall not be
  * used in advertising or otherwise to promote the sale, use or other dealings
  * in this Software without prior written authorization from The Open Group.
- * 
+ *
  * Copyright 1987, 1988, 1989 by
  * Digital Equipment Corporation, Maynard, Massachusetts.
- * 
+ *
  *                    All Rights Reserved
- * 
+ *
  * Permission to use, copy, modify, and distribute this software and its
  * documentation for any purpose and without fee is hereby granted,
  * provided that the above copyright notice appear in all copies and that
@@ -33,7 +33,7 @@
  * supporting documentation, and that the name of Digital not be
  * used in advertising or publicity pertaining to distribution of the
  * software without specific, written prior permission.
- * 
+ *
  * DIGITAL DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING
  * ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO EVENT SHALL
  * DIGITAL BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR
@@ -192,7 +192,7 @@ static size_t
 PIXREGION_SZOF (size_t n)
 {
     size_t size = n * sizeof(box_type_t);
-    
+
     if (n > UINT32_MAX / sizeof(box_type_t))
 	return 0;
 
@@ -307,33 +307,33 @@ PREFIX (_equal) (region_type_t *reg1, region_type_t *reg2)
 
     if (reg1->extents.x1 != reg2->extents.x1)
 	return FALSE;
-    
+
     if (reg1->extents.x2 != reg2->extents.x2)
 	return FALSE;
-    
+
     if (reg1->extents.y1 != reg2->extents.y1)
 	return FALSE;
-    
+
     if (reg1->extents.y2 != reg2->extents.y2)
 	return FALSE;
-    
+
     if (PIXREGION_NUMRECTS (reg1) != PIXREGION_NUMRECTS (reg2))
 	return FALSE;
 
     rects1 = PIXREGION_RECTS (reg1);
     rects2 = PIXREGION_RECTS (reg2);
-    
+
     for (i = 0; i != PIXREGION_NUMRECTS (reg1); i++)
     {
 	if (rects1[i].x1 != rects2[i].x1)
 	    return FALSE;
-	
+
 	if (rects1[i].x2 != rects2[i].x2)
 	    return FALSE;
-	
+
 	if (rects1[i].y1 != rects2[i].y1)
 	    return FALSE;
-	
+
 	if (rects1[i].y2 != rects2[i].y2)
 	    return FALSE;
     }
@@ -358,13 +358,13 @@ PREFIX (_print) (region_type_t *rgn)
 	     rgn->extents.y1,
 	     rgn->extents.x2,
 	     rgn->extents.y2);
-    
+
     for (i = 0; i < num; i++)
     {
 	fprintf (stderr, "%d %d %d %d \n",
 	         rects[i].x1, rects[i].y1, rects[i].x2, rects[i].y2);
     }
-    
+
     fprintf (stderr, "\n");
 
     return(num);
@@ -499,13 +499,13 @@ pixman_rect_alloc (region_type_t * region,
 	    data = (region_data_type_t *)
 		realloc (region->data, PIXREGION_SZOF (n));
 	}
-	
+
 	if (!data)
 	    return pixman_break (region);
-	
+
 	region->data = data;
     }
-    
+
     region->data->size = n;
 
     return TRUE;
@@ -519,7 +519,7 @@ PREFIX (_copy) (region_type_t *dst, region_type_t *src)
 
     if (dst == src)
 	return TRUE;
-    
+
     dst->extents = src->extents;
 
     if (!src->data || !src->data->size)
@@ -528,7 +528,7 @@ PREFIX (_copy) (region_type_t *dst, region_type_t *src)
 	dst->data = src->data;
 	return TRUE;
     }
-    
+
     if (!dst->data || (dst->data->size < src->data->numRects))
     {
 	FREE_DATA (dst);
@@ -609,7 +609,7 @@ pixman_coalesce (region_type_t * region,      /* Region to coalesce		 */
     {
 	if ((prev_box->x1 != cur_box->x1) || (prev_box->x2 != cur_box->x2))
 	    return (cur_start);
-	
+
 	prev_box++;
 	cur_box++;
 	numRects--;
@@ -757,7 +757,7 @@ pixman_op (region_type_t *  new_reg,               /* Place to store result	    
 	   region_type_t *  reg2,                  /* 2d region in operation        */
 	   overlap_proc_ptr overlap_func,          /* Function to call for over-
 						    * lapping bands		    */
-	   int              append_non1,           /* Append non-overlapping bands  
+	   int              append_non1,           /* Append non-overlapping bands
 						    * in region 1 ?
 						    */
 	   int              append_non2            /* Append non-overlapping bands
@@ -806,7 +806,7 @@ pixman_op (region_type_t *  new_reg,               /* Place to store result	    
     numRects = PIXREGION_NUMRECTS (reg2);
     r2 = PIXREGION_RECTS (reg2);
     r2_end = r2 + numRects;
-    
+
     critical_if_fail (r1 != r1_end);
     critical_if_fail (r2 != r2_end);
 
@@ -911,7 +911,7 @@ pixman_op (region_type_t *  new_reg,               /* Place to store result	    
             {
                 top = MAX (r2y1, ybot);
                 bot = MIN (r2->y2, r1y1);
-		
+
                 if (top != bot)
                 {
                     cur_band = new_reg->data->numRects;
@@ -945,7 +945,7 @@ pixman_op (region_type_t *  new_reg,               /* Place to store result	    
 	    {
 		goto bail;
 	    }
-	    
+
             COALESCE (new_reg, prev_band, cur_band);
 	}
 
@@ -974,16 +974,16 @@ pixman_op (region_type_t *  new_reg,               /* Place to store result	    
     {
         /* Do first non_overlap1Func call, which may be able to coalesce */
         FIND_BAND (r1, r1_band_end, r1_end, r1y1);
-	
+
         cur_band = new_reg->data->numRects;
-	
+
         if (!pixman_region_append_non_o (new_reg,
                                          r1, r1_band_end,
                                          MAX (r1y1, ybot), r1->y2))
 	{
 	    goto bail;
 	}
-	
+
         COALESCE (new_reg, prev_band, cur_band);
 
         /* Just append the rest of the boxes  */
@@ -1217,7 +1217,7 @@ PREFIX (_intersect) (region_type_t *     new_reg,
 
         if (!pixman_op (new_reg, reg1, reg2, pixman_region_intersect_o, FALSE, FALSE))
 	    return FALSE;
-	
+
         pixman_set_extents (new_reg);
     }
 
@@ -1460,7 +1460,7 @@ PREFIX (_union) (region_type_t *new_reg,
     new_reg->extents.y1 = MIN (reg1->extents.y1, reg2->extents.y1);
     new_reg->extents.x2 = MAX (reg1->extents.x2, reg2->extents.x2);
     new_reg->extents.y2 = MAX (reg1->extents.y2, reg2->extents.y2);
-    
+
     GOOD (new_reg);
 
     return TRUE;
@@ -1529,7 +1529,7 @@ quick_sort_rects (
                 j--;
 	    }
             while (y1 < r->y1 || (y1 == r->y1 && x1 < r->x1));
-	    
+
             if (i < j)
 		EXCHANGE_RECTS (i, j);
 	}
@@ -1611,7 +1611,7 @@ validate (region_type_t * badreg)
         GOOD (badreg);
         return TRUE;
     }
-    
+
     numRects = badreg->data->numRects;
     if (!numRects)
     {
@@ -1620,7 +1620,7 @@ validate (region_type_t * badreg)
         GOOD (badreg);
         return TRUE;
     }
-    
+
     if (badreg->extents.x1 < badreg->extents.x2)
     {
         if ((numRects) == 1)
@@ -1688,7 +1688,7 @@ validate (region_type_t * badreg)
                     *PIXREGION_TOP (reg) = *box;
                     reg->data->numRects++;
 		}
-		
+
                 goto next_rect;   /* So sue me */
 	    }
             else if (box->y1 >= ri_box->y2)
@@ -1696,10 +1696,10 @@ validate (region_type_t * badreg)
                 /* Put box into new band */
                 if (reg->extents.x2 < ri_box->x2)
 		    reg->extents.x2 = ri_box->x2;
-		
+
                 if (reg->extents.x1 > box->x1)
 		    reg->extents.x1 = box->x1;
-		
+
                 COALESCE (reg, rit->prev_band, rit->cur_band);
                 rit->cur_band = reg->data->numRects;
                 RECTALLOC_BAIL (reg, 1, bail);
@@ -1748,7 +1748,7 @@ validate (region_type_t * badreg)
 	/* MUST force allocation */
         if (!pixman_rect_alloc (&rit->reg, (i + num_ri) / num_ri))
 	    goto bail;
-	
+
     next_rect: ;
     } /* for i */
 
@@ -1763,7 +1763,7 @@ validate (region_type_t * badreg)
 
         if (reg->extents.x2 < ri_box->x2)
 	    reg->extents.x2 = ri_box->x2;
-	
+
         COALESCE (reg, rit->prev_band, rit->cur_band);
 
 	if (reg->data->numRects == 1) /* keep unions happy below */
@@ -1977,14 +1977,14 @@ PREFIX (_subtract) (region_type_t *reg_d,
     GOOD (reg_m);
     GOOD (reg_s);
     GOOD (reg_d);
-    
+
     /* check for trivial rejects */
     if (PIXREGION_NIL (reg_m) || PIXREGION_NIL (reg_s) ||
         !EXTENTCHECK (&reg_m->extents, &reg_s->extents))
     {
         if (PIXREGION_NAR (reg_s))
 	    return pixman_break (reg_d);
-	
+
         return PREFIX (_copy) (reg_d, reg_m);
     }
     else if (reg_m == reg_s)
@@ -2043,17 +2043,17 @@ PREFIX (_inverse) (region_type_t *new_reg,  /* Destination region */
 			    * bounding box */
     GOOD (reg1);
     GOOD (new_reg);
-    
+
     /* check for trivial rejects */
     if (PIXREGION_NIL (reg1) || !EXTENTCHECK (inv_rect, &reg1->extents))
     {
         if (PIXREGION_NAR (reg1))
 	    return pixman_break (new_reg);
-	
+
         new_reg->extents = *inv_rect;
         FREE_DATA (new_reg);
         new_reg->data = (region_data_type_t *)NULL;
-	
+
         return TRUE;
     }
 
@@ -2249,7 +2249,7 @@ PREFIX (_translate) (region_type_t *region, int x, int y)
     region->extents.y1 = y1 = region->extents.y1 + y;
     region->extents.x2 = x2 = region->extents.x2 + x;
     region->extents.y2 = y2 = region->extents.y2 + y;
-    
+
     if (((x1 - PIXMAN_REGION_MIN) | (y1 - PIXMAN_REGION_MIN) | (PIXMAN_REGION_MAX - x2) | (PIXMAN_REGION_MAX - y2)) >= 0)
     {
         if (region->data && (nbox = region->data->numRects))
@@ -2467,10 +2467,10 @@ PREFIX (_selfcheck) (region_type_t *reg)
 
             if (pbox_n->x1 < box.x1)
 		box.x1 = pbox_n->x1;
-	    
+
             if (pbox_n->x2 > box.x2)
 		box.x2 = pbox_n->x2;
-	    
+
             if ((pbox_n->y1 < pbox_p->y1) ||
                 ((pbox_n->y1 == pbox_p->y1) &&
                  ((pbox_n->x1 < pbox_p->x2) || (pbox_n->y2 != pbox_p->y2))))

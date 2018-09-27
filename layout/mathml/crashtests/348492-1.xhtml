@@ -9,11 +9,11 @@ function foo()
   var mmultiscripts = document.createElementNS(MATHML_NS, 'mmultiscripts');
   var mtd = document.createElementNS(MATHML_NS, 'mtd');
 
-  
+
   document.body.appendChild(mmultiscripts);
-  aC(mmultiscripts, mtd); 
-  aC(mmultiscripts, document.createTextNode('foo')); 
-  
+  aC(mmultiscripts, mtd);
+  aC(mmultiscripts, document.createTextNode('foo'));
+
   document.documentElement.removeAttribute("class");
 }
 

@@ -7,7 +7,7 @@ function Foo(prop) {
 
 function f() {
 	// Enter OSR here.
-	for (var i = 0; i < 100; i++) 
+	for (var i = 0; i < 100; i++)
 	{ }
 
 	// No type information below this point.

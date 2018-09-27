@@ -25,7 +25,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=382990
             <treeitem><treerow><treecell label="z"/></treerow></treeitem>
         </treechildren>
     </tree>
-    
+
   <!-- test code goes here -->
   <script type="application/javascript"><![CDATA[
     /** Test for Bug 382990 **/

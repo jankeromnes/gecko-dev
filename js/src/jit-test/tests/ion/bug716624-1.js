@@ -38,7 +38,7 @@ for(var i=0; i<42; i++)
     get_value_effectfull(o_effectfull)
 
 // Note:
-// because of bug 715111 when there is an invalidation we have bogus values on the stack. 
+// because of bug 715111 when there is an invalidation we have bogus values on the stack.
 // So we get wrong values. Therefor I run them twice. On as 'warmup'. Second time to test
 
 count = 0

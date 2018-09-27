@@ -1300,7 +1300,7 @@ void MeasureUnit::initTime(const char *timeId) {
     fTypeId = result;
     result = binarySearch(gSubTypes, gOffsets[fTypeId], gOffsets[fTypeId + 1], timeId);
     U_ASSERT(result != -1);
-    fSubTypeId = result - gOffsets[fTypeId]; 
+    fSubTypeId = result - gOffsets[fTypeId];
 }
 
 void MeasureUnit::initCurrency(const char *isoCurrency) {

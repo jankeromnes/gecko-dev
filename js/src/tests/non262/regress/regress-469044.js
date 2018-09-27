@@ -63,6 +63,6 @@ function test()
       print(actual += "" + c);
     }
     print(actual += c);
-  }  
+  }
   reportCompare(expect, actual, summary + ': 3');
 }

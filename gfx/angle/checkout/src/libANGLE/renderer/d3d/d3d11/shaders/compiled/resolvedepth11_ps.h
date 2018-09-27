@@ -15,8 +15,8 @@
 //
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
-// SV_Position              0   xyzw        0      POS   float       
-// TEXCOORD                 0   xy          1     NONE   float   xy  
+// SV_Position              0   xyzw        0      POS   float
+// TEXCOORD                 0   xy          1     NONE   float   xy
 //
 //
 // Output signature:
@@ -38,7 +38,7 @@ ftou r0.xy, r0.xyxx
 mov r0.zw, l(0,0,0,0)
 ldms r0.x, r0.xyzw, t0.xyzw, l(0)
 mov oDepth, r0.x
-ret 
+ret
 // Approximately 8 instruction slots used
 #endif
 

@@ -90,5 +90,5 @@ namespace jit {
 
 } // namespace jit
 } // namespace js
- 
+
 #endif /* jit_BaselineICList_h */

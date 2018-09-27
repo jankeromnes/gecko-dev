@@ -40,7 +40,7 @@
   <input type="text" id="textbox" value=""/>
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 </pre>
@@ -134,7 +134,7 @@ function eventToString(aEvent)
     name += " [Right Command]";
   }
 
-  return name;  
+  return name;
 }
 
 function getPhase(aDOMEvent)
@@ -4811,7 +4811,7 @@ function* runAccessKeyTests()
   }
 
   button.addEventListener("click", onClick, false);
-  
+
   // These tests have to be per-plaform.
   if (IS_MAC) {
     // Basic sanity checks
@@ -4839,7 +4839,7 @@ function* runAccessKeyTests()
     yield testKey({layout:KEYBOARD_LAYOUT_EN_US, keyCode:MAC_VK_ANSI_A,
                    modifiers:{ctrlKey:1, altKey:1}, chars:"\u0001", unmodifiedChars:"a"},
                   "A", true);
-            
+
     // Greek layout can activate a Latin accesskey
     yield testKey({layout:KEYBOARD_LAYOUT_GREEK, keyCode:MAC_VK_ANSI_A,
                    modifiers:{ctrlKey:1, altKey:1}, chars:"\u0001", unmodifiedChars:"\u03b1"},
@@ -4914,7 +4914,7 @@ function* runAccessKeyTests()
                    modifiers:{shiftKey:1, altKey:1}, chars:".", unmodifiedChars:"."},
                   ".", true);
   }
-  
+
   button.removeEventListener("click", onClick, false);
 }
 
@@ -5081,7 +5081,7 @@ function* runXULKeyTests()
                           modifiers:{ctrlKey:1, altKey:1}, chars:"\u0006"},
                          "commandOptionF");
   }
-  
+
   // 432112
   if (IS_MAC) {
     yield testKeyElement({layout:KEYBOARD_LAYOUT_SWEDISH, keyCode:MAC_VK_ANSI_Minus,

@@ -47,7 +47,7 @@ struct _AtkStreamableContentIface
   gint                      (* get_n_mime_types)  (AtkStreamableContent     *streamable);
   /*
    * Gets the specified mime type supported by this object.
-   * The mime types are 0-based so the first mime type is 
+   * The mime types are 0-based so the first mime type is
    * at index 0, the second at index 1 and so on.  The mime-type
    * at index 0 should be considered the "default" data type for the stream.
    *
@@ -74,7 +74,7 @@ struct _AtkStreamableContentIface
  * If mime_type is NULL, the URI for the default (and possibly only) mime-type is
  * returned.
  *
- * returns NULL if the mime-type is not supported, or if no URI can be 
+ * returns NULL if the mime-type is not supported, or if no URI can be
  * constructed.  Note that it is possible for get_uri to return NULL but for
  * get_stream to work nonetheless, since not all GIOChannels connect to URIs.
  */
@@ -89,7 +89,7 @@ struct _AtkStreamableContentIface
 GType                  atk_streamable_content_get_type (void);
 
 gint                   atk_streamable_content_get_n_mime_types (AtkStreamableContent     *streamable);
-                                                       
+
 G_CONST_RETURN gchar*  atk_streamable_content_get_mime_type    (AtkStreamableContent     *streamable,
                                                                 gint                     i);
 GIOChannel*             atk_streamable_content_get_stream       (AtkStreamableContent     *streamable,

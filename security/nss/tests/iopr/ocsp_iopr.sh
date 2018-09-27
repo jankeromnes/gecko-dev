@@ -20,7 +20,7 @@
 IOPR_OCSP_SOURCED=1
 
 ########################################################################
-# The funtion works with variables defined in interoperability 
+# The funtion works with variables defined in interoperability
 # configuration file that gets downloaded from a webserver.
 # The function sets test parameters defind for a particular type
 # of testing.
@@ -44,7 +44,7 @@ setTestParam() {
 # Params:
 #    dbDir - nss cert db location
 #    cert - cert in question
-#    respUrl - responder url is available 
+#    respUrl - responder url is available
 #    defRespCert - trusted responder cert
 #
 # Return values:
@@ -55,10 +55,10 @@ ocsp_get_cert_status() {
     cert=$2
     respUrl=$3
     defRespCert=$4
-    
+
     if [ -n "$respUrl" -o -n "$defRespCert" ]; then
         if [ -z "$respUrl" -o -z "$defRespCert" ]; then
-            html_failed "Incorrect test params" 
+            html_failed "Incorrect test params"
             return 1
         fi
         clntParam="-l $respUrl -t $defRespCert"
@@ -72,7 +72,7 @@ ocsp_get_cert_status() {
         echo "ocspclnt output:"
         cat $outFile
         [ -z "`grep succeeded $outFile`" ] && ret=1
-    
+
         rm -f $outFile
         return $ret
     fi
@@ -101,7 +101,7 @@ ocsp_iopr() {
             "run by server configuration"
         return 0
     fi
-    
+
     if [ -z "${MEMLEAK_DBG}" ]; then
         html_head "OCSP testing with responder at $IOPR_HOSTADDR. <br>" \
             "Test Type: $testDescription"
@@ -125,7 +125,7 @@ ocsp_iopr() {
             ocsp_get_cert_status $dbDir $certName "$responderUrl" \
                 "$testResponder"
             html_msg $? 1 "Getting status of a unvalid cert ($certName)" \
-                "produced a returncode of $ret, expected is 1." 
+                "produced a returncode of $ret, expected is 1."
         done
 
         for certName in $testStatUnknownCertNames; do
@@ -138,19 +138,19 @@ ocsp_iopr() {
         for certName in $testValidCertNames $testRevokedCertNames \
             $testStatUnknownCertName; do
             ocsp_get_cert_status $dbDir $certName "$responderUrl" \
-                "$testResponder" 
+                "$testResponder"
         done
     fi
 }
-  
+
 #####################################################################
 # Initial point for running ocsp test againt multiple hosts involved in
 # interoperability testing. Called from nss/tests/ocsp/ocsp.sh
-# It will only proceed with test run for a specific host if environment variable 
+# It will only proceed with test run for a specific host if environment variable
 # IOPR_HOSTADDR_LIST was set, had the host name in the list
 # and all needed file were successfully downloaded and installed for the host.
 #
-# Returns 1 if interoperability testing is off, 0 otherwise. 
+# Returns 1 if interoperability testing is off, 0 otherwise.
 #
 ocsp_iopr_run() {
     NO_ECC_CERTS=1 # disable ECC for interoperability tests
@@ -170,17 +170,17 @@ ocsp_iopr_run() {
         IOPR_HOSTADDR=`echo $IOPR_HOST_PARAM | cut -f 1 -d':'`
         IOPR_OPEN_PORT=`echo "$IOPR_HOST_PARAM:" | cut -f 2 -d':'`
         [ -z "$IOPR_OPEN_PORT" ] && IOPR_OPEN_PORT=443
-        
+
         . ${IOPR_CADIR}_${IOPR_HOSTADDR}/iopr_server.cfg
         RES=$?
-        
+
         num=`expr $num + 1`
         IOPR_HOST_PARAM=`echo "${IOPR_HOSTADDR_LIST} " | cut -f $num -d' '`
 
         if [ $RES -ne 0 -o X`echo "$wsFlags" | grep NOIOPR` != X ]; then
             continue
         fi
-        
+
         #=======================================================
         # Check what server is configured to run ssl tests
         #
@@ -191,7 +191,7 @@ ocsp_iopr_run() {
             LOGNAME=iopr-${IOPR_HOSTADDR}
             LOGFILE=${LOGDIR}/${LOGNAME}.log
         fi
-       
+
         # Testing directories defined by webserver.
         echo "Testing ocsp interoperability.
                 Client: local(tstclnt).

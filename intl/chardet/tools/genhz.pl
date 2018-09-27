@@ -39,7 +39,7 @@ my($hz_ver);
 #
 package genverifier;
 @hz_st = (
-# 0  1  2  3  4  5 
+# 0  1  2  3  4  5
   0, 1, 3, 0, 0, 0, # Start State - 0
   1, 1, 1, 1, 1, 1, # Error State - 1
   2, 2, 2, 2, 2, 2, # ItsMe State - 2
@@ -49,7 +49,7 @@ package genverifier;
   4, 1, 4, 1, 4, 2, # state 6 - got ~ { [X X]* ~
 );
 
-$hz_ver = genverifier::GenVerifier("HZ", "HZ-GB-2312", 
+$hz_ver = genverifier::GenVerifier("HZ", "HZ-GB-2312",
       \@hz_cls, 6, \@hz_st);
 print $hz_ver;
 

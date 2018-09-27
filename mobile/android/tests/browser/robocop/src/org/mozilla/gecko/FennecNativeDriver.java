@@ -423,7 +423,7 @@ public class FennecNativeDriver implements Driver, CompositorController.GetPixel
         log(level, sb.toString());
     }
 
-    /** 
+    /**
      *  Set the filename used for logging. If the file already exists, delete it
      *  as a safe-guard against accidentally appending to an old log file.
      */

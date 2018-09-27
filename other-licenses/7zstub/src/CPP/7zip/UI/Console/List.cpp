@@ -240,7 +240,7 @@ static void PrintUString(EAdjustment adj, unsigned width, const UString &s, AStr
     PrintSpaces(numLeftSpaces);
     numSpaces -= numLeftSpaces;
   }
-  
+
   g_StdOut.PrintUString(s, temp);
   PrintSpaces(numSpaces);
 }
@@ -263,7 +263,7 @@ static void PrintString(EAdjustment adj, unsigned width, const char *s)
     PrintSpaces(numLeftSpaces);
     numSpaces -= numLeftSpaces;
   }
-  
+
   g_StdOut << s;
   PrintSpaces(numSpaces);
 }
@@ -272,7 +272,7 @@ static void PrintStringToString(char *dest, EAdjustment adj, unsigned width, con
 {
   unsigned numSpaces = 0;
   unsigned len = (unsigned)strlen(textString);
-  
+
   if (width > len)
   {
     numSpaces = width - len;
@@ -287,7 +287,7 @@ static void PrintStringToString(char *dest, EAdjustment adj, unsigned width, con
     dest += numLeftSpaces;
     numSpaces -= numLeftSpaces;
   }
-  
+
   memcpy(dest, textString, len);
   dest += len;
   PrintSpacesToString(dest, numSpaces);
@@ -375,7 +375,7 @@ public:
 
   HRESULT AddMainProps(IInArchive *archive);
   HRESULT AddRawProps(IArchiveGetRawProps *getRawProps);
-  
+
   void PrintTitle();
   void PrintTitleLines();
   HRESULT PrintItemInfo(UInt32 index, const CListStat &st);
@@ -555,7 +555,7 @@ HRESULT CFieldPrinter::PrintItemInfo(UInt32 index, const CListStat &st)
       else
         g_StdOut << f.NameU;
     }
-    
+
     if (f.PropID == kpidPath)
     {
       if (!techMode)
@@ -567,20 +567,20 @@ HRESULT CFieldPrinter::PrintItemInfo(UInt32 index, const CListStat &st)
     }
 
     const unsigned width = f.Width;
-    
+
     if (f.IsRawProp)
     {
       #ifndef _SFX
-      
+
       const void *data;
       UInt32 dataSize;
       UInt32 propType;
       RINOK(Arc->GetRawProps->GetRawProp(index, f.PropID, &data, &dataSize, &propType));
-      
+
       if (dataSize != 0)
       {
         bool needPrint = true;
-        
+
         if (f.PropID == kpidNtSecure)
         {
           if (propType != NPropDataType::kRaw)
@@ -600,14 +600,14 @@ HRESULT CFieldPrinter::PrintItemInfo(UInt32 index, const CListStat &st)
             g_StdOut.PrintUString(s, TempAString);
           }
         }
-      
+
         if (needPrint)
         {
           if (propType != NPropDataType::kRaw)
             return E_FAIL;
-          
+
           const UInt32 kMaxDataSize = 64;
-          
+
           if (dataSize > kMaxDataSize)
           {
             g_StdOut << "data:";
@@ -621,7 +621,7 @@ HRESULT CFieldPrinter::PrintItemInfo(UInt32 index, const CListStat &st)
           }
         }
       }
-      
+
       #endif
     }
     else
@@ -920,7 +920,7 @@ static void ErrorInfo_Print(CStdOutStream &so, const CArcErrorInfo &er)
   PrintErrorFlags(so, "ERRORS:", er.GetErrorFlags());
   if (!er.ErrorMessage.IsEmpty())
     PrintPropPair(so, "ERROR", er.ErrorMessage, true);
-  
+
   PrintErrorFlags(so, "WARNINGS:", er.GetWarningFlags());
   if (!er.WarningMessage.IsEmpty())
     PrintPropPair(so, "WARNING", er.WarningMessage, true);
@@ -932,7 +932,7 @@ HRESULT Print_OpenArchive_Props(CStdOutStream &so, const CCodecs *codecs, const 
   {
     const CArc &arc = arcLink.Arcs[r];
     const CArcErrorInfo &er = arc.ErrorInfo;
-    
+
     so << "--\n";
     PrintPropPair(so, "Path", arc.Path, false);
     if (er.ErrorFormatIndex >= 0)
@@ -943,9 +943,9 @@ HRESULT Print_OpenArchive_Props(CStdOutStream &so, const CCodecs *codecs, const 
         PrintArcTypeError(so, codecs->GetFormatNamePtr(er.ErrorFormatIndex), true);
     }
     PrintPropPair(so, "Type", codecs->GetFormatNamePtr(arc.FormatIndex), false);
-    
+
     ErrorInfo_Print(so, er);
-    
+
     Int64 offset = arc.GetGlobalOffset();
     if (offset != 0)
       PrintPropNameAndNumber_Signed(so, kpidOffset, offset);
@@ -956,7 +956,7 @@ HRESULT Print_OpenArchive_Props(CStdOutStream &so, const CCodecs *codecs, const 
     {
       UInt32 numProps;
       RINOK(archive->GetNumberOfArchiveProperties(&numProps));
-      
+
       for (UInt32 j = 0; j < numProps; j++)
       {
         CMyComBSTR name;
@@ -966,7 +966,7 @@ HRESULT Print_OpenArchive_Props(CStdOutStream &so, const CCodecs *codecs, const 
         RINOK(PrintArcProp(so, archive, propID, name));
       }
     }
-    
+
     if (r != arcLink.Arcs.Size() - 1)
     {
       UInt32 numProps;
@@ -1044,7 +1044,7 @@ HRESULT ListArchives(CCodecs *codecs,
     fp.Init(kStandardFieldTable, ARRAY_SIZE(kStandardFieldTable));
 
   CListStat2 stat2total;
-  
+
   CBoolArr skipArcs(arcPaths.Size());
   unsigned arcIndex;
   for (arcIndex = 0; arcIndex < arcPaths.Size(); arcIndex++)
@@ -1061,7 +1061,7 @@ HRESULT ListArchives(CCodecs *codecs,
       continue;
     const UString &arcPath = arcPaths[arcIndex];
     UInt64 arcPackSize = 0;
-    
+
     if (!stdInMode)
     {
       NFile::NFind::CFileInfo fi;
@@ -1108,7 +1108,7 @@ HRESULT ListArchives(CCodecs *codecs,
     COptionalOpenProperties &optProps = optPropsVector.AddNew();
     optProps.Props = *props;
     */
-    
+
     COpenOptions options;
     #ifndef _SFX
     options.props = props;
@@ -1126,7 +1126,7 @@ HRESULT ListArchives(CCodecs *codecs,
       g_StdOut.NormalizePrint_UString(arcPath);
       g_StdOut << endl << endl;
     }
-    
+
     HRESULT result = arcLink.Open_Strict(options, &openCallback);
 
     if (result != S_OK)
@@ -1154,7 +1154,7 @@ HRESULT ListArchives(CCodecs *codecs,
       numErrors++;
       continue;
     }
-    
+
     {
       FOR_VECTOR (r, arcLink.Arcs)
       {
@@ -1221,15 +1221,15 @@ HRESULT ListArchives(CCodecs *codecs,
         RINOK(fp.AddRawProps(arc.GetRawProps));
       }
     }
-    
+
     CListStat2 stat2;
-    
+
     UInt32 numItems;
     RINOK(archive->GetNumberOfItems(&numItems));
- 
+
     CReadArcItem item;
     UStringVector pathParts;
-    
+
     for (UInt32 i = 0; i < numItems; i++)
     {
       if (NConsoleClose::TestBreakSignal())
@@ -1277,9 +1277,9 @@ HRESULT ListArchives(CCodecs *codecs,
             continue;
         }
       }
-      
+
       CListStat st;
-      
+
       RINOK(GetUInt64Value(archive, i, kpidSize, st.Size));
       RINOK(GetUInt64Value(archive, i, kpidPackSize, st.PackSize));
       RINOK(GetItemMTime(archive, i, st.MTime));
@@ -1304,10 +1304,10 @@ HRESULT ListArchives(CCodecs *codecs,
         arcPackSize += arcLink.VolumesSize;
       stat2.MainFiles.PackSize.Add((numStreams == 0) ? 0 : arcPackSize);
     }
-  
+
     stat2.MainFiles.SetSizeDefIfNoFiles();
     stat2.AltStreams.SetSizeDefIfNoFiles();
-    
+
     if (enableHeaders && !techMode)
     {
       fp.PrintTitleLines();
@@ -1324,12 +1324,12 @@ HRESULT ListArchives(CCodecs *codecs,
         PrintArcTypeError(g_StdOut, codecs->Formats[arcLink.NonOpen_ErrorInfo.ErrorFormatIndex].Name, false);
       }
     }
-    
+
     stat2total.Update(stat2);
 
     g_StdOut.Flush();
   }
-  
+
   if (enableHeaders && !techMode && (arcPaths.Size() > 1 || numVolumes > 1))
   {
     g_StdOut << endl;
@@ -1344,6 +1344,6 @@ HRESULT ListArchives(CCodecs *codecs,
 
   if (numErrors == 1 && lastError != 0)
     return lastError;
-  
+
   return S_OK;
 }

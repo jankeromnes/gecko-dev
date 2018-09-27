@@ -13,7 +13,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
 @@ -1232,27 +1232,27 @@ typedef struct _cairo_image_surface_span
      cairo_composite_rectangles_t composite_rectangles;
  } cairo_image_surface_span_renderer_t;
- 
+
 -static cairo_status_t
 -_cairo_image_surface_span_renderer_render_row (
 -    void				*abstract_renderer,
@@ -35,17 +35,17 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
      int prev_x = xmin;
      int prev_alpha = 0;
      unsigned i;
- 
+
      /* Make sure we're within y-range. */
 -    y -= renderer->composite_rectangles.mask.y;
 -    if (y < 0 || y >= renderer->composite_rectangles.height)
 +    y -= rects->mask.y;
 +    if (y < 0 || y >= rects->height)
  	return CAIRO_STATUS_SUCCESS;
- 
+
 -    row = (uint8_t*)(renderer->mask->data) + y*(size_t)renderer->mask->stride - xmin;
 +    row = (uint8_t*)(mask->data) + y*(size_t)mask->stride - xmin;
- 
+
      /* Find the first span within x-range. */
      for (i=0; i < num_spans && spans[i].x < xmin; i++) {}
 @@ -1286,7 +1286,17 @@ _cairo_image_surface_span_renderer_rende
@@ -53,7 +53,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  	memset(row + prev_x, prev_alpha, xmax - prev_x);
      }
 +}
- 
+
 +static cairo_status_t
 +_cairo_image_surface_span_renderer_render_row (
 +    void				*abstract_renderer,
@@ -65,7 +65,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
 +    _cairo_image_surface_span_render_row (y, spans, num_spans, renderer->mask, &renderer->composite_rectangles);
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 diff --git a/gfx/cairo/cairo/src/cairo-tor-scan-converter.c b/gfx/cairo/cairo/src/cairo-tor-scan-converter.c
 --- a/gfx/cairo/cairo/src/cairo-tor-scan-converter.c
 +++ b/gfx/cairo/cairo/src/cairo-tor-scan-converter.c
@@ -79,7 +79,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tor-scan-converter.c b/gfx/cairo/cairo/sr
 -#  define  GRID_AREA_TO_ALPHA(c)  ((c)*255 / GRID_XY) /* tweak me for rounding */
 +#  define  GRID_AREA_TO_ALPHA(c)  (((c)*255 + GRID_XY/2) / GRID_XY)
  #endif
- 
+
  #define UNROLL3(x) x x x
 diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cairo-win32-surface.c
 --- a/gfx/cairo/cairo/src/cairo-win32-surface.c
@@ -87,7 +87,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 @@ -2048,6 +2048,148 @@ _cairo_win32_surface_reset (void *abstra
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 +typedef struct _cairo_win32_surface_span_renderer {
 +    cairo_span_renderer_t base;
 +
@@ -257,6 +257,6 @@ diff --git a/gfx/cairo/cairo/src/cairoint.h b/gfx/cairo/cairo/src/cairoint.h
 +				      unsigned				 num_spans,
 +				      cairo_image_surface_t              *mask,
 +				      const cairo_composite_rectangles_t *rects);
- 
+
  cairo_private cairo_image_transparency_t
  _cairo_image_analyze_transparency (cairo_image_surface_t      *image);

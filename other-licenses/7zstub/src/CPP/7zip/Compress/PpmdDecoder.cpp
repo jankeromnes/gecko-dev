@@ -101,7 +101,7 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
     if (!_outBuf)
       return E_OUTOFMEMORY;
   }
-  
+
   _inStream.Stream = inStream;
   SetOutStreamSize(outSize);
 

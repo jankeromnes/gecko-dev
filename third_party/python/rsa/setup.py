@@ -6,9 +6,9 @@ import rsa
 
 setup(name='rsa',
 	version=rsa.__version__,
-    description='Pure-Python RSA implementation', 
+    description='Pure-Python RSA implementation',
     author='Sybren A. Stuvel',
-    author_email='sybren@stuvel.eu', 
+    author_email='sybren@stuvel.eu',
     maintainer='Sybren A. Stuvel',
     maintainer_email='sybren@stuvel.eu',
 	url='http://stuvel.eu/rsa',

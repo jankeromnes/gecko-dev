@@ -84,7 +84,7 @@ SECU_ReadDERFromFile(SECItem *der, PRFileDesc *inFile, PRBool ascii)
         } else {
             body = asc;
         }
-     
+
         /* Convert to binary */
         rv = ATOB_ConvertAsciiToItem(der, body);
         if (rv) {

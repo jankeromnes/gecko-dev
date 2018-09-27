@@ -67,7 +67,7 @@
  * equivalent types and values in the Windows Platform SDK are given in
  * comments.
  *
- * Author: Mark Mentovai 
+ * Author: Mark Mentovai
  * Change to split into its own file: Neal Sidhwaney */
 
 /*

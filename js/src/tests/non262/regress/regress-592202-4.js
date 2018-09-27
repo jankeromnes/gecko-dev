@@ -11,11 +11,11 @@ function test()
 
   function f(x) {
       try
-      { 
+      {
         throw 42;
       }
       catch(e)
-      { 
+      {
         assertEq(counter, 0);
         p(function(){x;});
         counter = 1;

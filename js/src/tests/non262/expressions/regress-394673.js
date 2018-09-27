@@ -11,7 +11,7 @@ var expect = 'No Error';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 var N = 70*1000;
 var counter;
 

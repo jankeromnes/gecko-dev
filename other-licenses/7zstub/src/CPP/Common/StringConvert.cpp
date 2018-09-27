@@ -31,7 +31,7 @@ MultiByteToWideChar(CodePage, DWORD dwFlags,
     if MB_ERR_INVALID_CHARS is set in dwFlags:
       - the function stops conversion on illegal character.
       - Return: 0. ERR: ERROR_NO_UNICODE_TRANSLATION.
-    
+
     if MB_ERR_INVALID_CHARS is NOT set in dwFlags:
       before Vista: illegal character is dropped (skipped). WinXP-64: GetLastError() returns 0.
       in Vista+:    illegal character is not dropped (MSDN). Undocumented: illegal
@@ -49,7 +49,7 @@ void MultiByteToUnicodeString2(UString &dest, const AString &src, UINT codePage)
     wchar_t *d = dest.GetBuf(src.Len());
     const char *s = (const char *)src;
     unsigned i;
-    
+
     for (i = 0;;)
     {
       Byte c = (Byte)s[i];
@@ -117,7 +117,7 @@ static void UnicodeStringToMultiByte2(AString &dest, const UString &src, UINT co
     char *d = dest.GetBuf(numRequiredBytes);
     const wchar_t *s = (const wchar_t *)src;
     unsigned i;
-    
+
     for (i = 0;;)
     {
       wchar_t c = s[i];
@@ -125,7 +125,7 @@ static void UnicodeStringToMultiByte2(AString &dest, const UString &src, UINT co
         break;
       d[i++] = (char)c;
     }
-    
+
     if (i != src.Len())
     {
       BOOL defUsed = FALSE;
@@ -157,7 +157,7 @@ static void UnicodeStringToMultiByte2(AString &dest, const UString &src, UINT co
         if (c >= 0x80 || c == 0)
           break;
       }
-      
+
       if (s[i] == 0)
       {
         char *d = dest.GetBuf(src.Len());
@@ -229,7 +229,7 @@ void MultiByteToUnicodeString2(UString &dest, const AString &src, UINT /* codePa
     dest.ReleaseBuf_SetEnd((unsigned)len);
     return;
   }
-  
+
   {
     unsigned i;
     const char *s = (const char *)src;

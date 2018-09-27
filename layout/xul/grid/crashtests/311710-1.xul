@@ -1,5 +1,5 @@
 <window title="Testcase bug 311710 - Evil xul testcase, using display:-moz-grid-group causes crash [@ nsGridRow::IsCollapsed]"
-        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:html="http://www.w3.org/1999/xhtml">
 <script type="application/x-javascript">
 function clickit() {
@@ -14,7 +14,7 @@ window.addEventListener('load', clickit, false);
         <grid>
           <rows>
             <row>
-            <separator/> 
+            <separator/>
             </row>
           </rows>
         </grid>

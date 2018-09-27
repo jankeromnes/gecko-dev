@@ -8,14 +8,14 @@ function cTN (v) {
 }
 
 function OSXBarIcon(elt) {
-	this.element = elt; 
+	this.element = elt;
 	this.labelNode = this.element.firstChild;
 	this.labelNodeParent = this.element;
 	this.labelNodeParent.removeChild(this.labelNode);
-	
+
 	this.contents = [];
 	var kids = this.element.childNodes;
-	for(var i=0; i<kids.length; i++) this.contents[this.contents.length] = this.element.removeChild(kids[i]); 
+	for(var i=0; i<kids.length; i++) this.contents[this.contents.length] = this.element.removeChild(kids[i]);
 	this.popupSubmenu = new OSXBarSubmenu(this);
 }
 
@@ -40,12 +40,12 @@ OSXBarSubmenu.prototype.addContent = function() {
 	var label = document.createElement("div");
 		label.appendChild(document.createTextNode(this.parentIcon.label));
 	this.popupNode.appendChild(label);
-	
-	// add <li> children to the popup:	
+
+	// add <li> children to the popup:
 	var contents = this.parentIcon.contents;
 	for(var i=0; i<contents.length; i++) {
 		this.popupNode.appendChild(contents[i]);
-		
+
 	}
 };
 

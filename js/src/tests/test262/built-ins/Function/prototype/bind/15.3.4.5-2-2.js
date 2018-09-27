@@ -11,7 +11,7 @@ description: >
     callable (bind attached to object)
 ---*/
 
-// dummy function 
+// dummy function
 function foo() {}
 var f = new foo();
 f.bind = Function.prototype.bind;

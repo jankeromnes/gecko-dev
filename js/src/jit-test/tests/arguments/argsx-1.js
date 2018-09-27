@@ -5,7 +5,7 @@ expected = "function f() {\n  var a = arguments;\n  \n  for (var i = 0; i < 10; 
 
 function f() {
   var a = arguments;
-  
+
   for (var i = 0; i < 10; ++i) {
     appendToActual(a.callee);
     appendToActual(a.length);

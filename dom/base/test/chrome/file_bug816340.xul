@@ -16,7 +16,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=816340
       opener.wrappedJSObject.ok(val, msg);
     }
 
-    var elems = 
+    var elems =
       [
         "input",
         "textarea",
@@ -49,7 +49,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=816340
       ok(contentDidGetEvent == contentShouldGetEvent, "content: " + el + (disabled ? " disabled" : ""));
       ok(chromeDidGetEvent, "chrome: " + el + (disabled ? " disabled" : ""));
     }
-      
+
     function start() {
       // Test common element.
       testElement("div", false, true);

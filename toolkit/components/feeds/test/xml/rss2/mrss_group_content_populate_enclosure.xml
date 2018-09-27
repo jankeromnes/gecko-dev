@@ -11,8 +11,8 @@ Expect: var encs = feed.items.queryElementAt(0, Components.interfaces.nsIFeedEnt
 <item>
 
 <media:group>
-  <media:content fileSize="400" type="audio/mpeg" url="http://dallas.example.com/joebob_050689_2.mp3" /> 
-  <media:content fileSize="200" type="audio/mpeg" url="http://dallas.example.com/joebob_050689_1.mp3" /> 
+  <media:content fileSize="400" type="audio/mpeg" url="http://dallas.example.com/joebob_050689_2.mp3" />
+  <media:content fileSize="200" type="audio/mpeg" url="http://dallas.example.com/joebob_050689_1.mp3" />
 </media:group>
 
 <author>jbb@dallas.example.com (Joe Bob Briggs)</author>

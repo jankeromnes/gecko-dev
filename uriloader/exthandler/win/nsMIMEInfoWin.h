@@ -26,9 +26,9 @@ class nsMIMEInfoWin : public nsMIMEInfoBase, public nsIPropertyBag {
     NS_DECL_ISUPPORTS_INHERITED
     NS_DECL_NSIPROPERTYBAG
 
-    void SetDefaultApplicationHandler(nsIFile* aDefaultApplication) 
-    { 
-      mDefaultApplication = aDefaultApplication; 
+    void SetDefaultApplicationHandler(nsIFile* aDefaultApplication)
+    {
+      mDefaultApplication = aDefaultApplication;
     }
 
   protected:
@@ -37,19 +37,19 @@ class nsMIMEInfoWin : public nsMIMEInfoBase, public nsIPropertyBag {
 
   private:
     nsCOMPtr<nsIFile>      mDefaultApplication;
-    
-    // Given a path to a local handler, return its 
+
+    // Given a path to a local handler, return its
     // nsILocalHandlerApp instance.
     bool GetLocalHandlerApp(const nsAString& aCommandHandler,
                               nsCOMPtr<nsILocalHandlerApp>& aApp);
 
-    // Return the cleaned up file path associated 
+    // Return the cleaned up file path associated
     // with a command verb located in root/Applications.
     bool GetAppsVerbCommandHandler(const nsAString& appExeName,
                                      nsAString& applicationPath,
                                      bool bEdit);
 
-    // Return the cleaned up file path associated 
+    // Return the cleaned up file path associated
     // with a progid command verb located in root.
     bool GetProgIDVerbCommandHandler(const nsAString& appProgIDName,
                                        nsAString& applicationPath,

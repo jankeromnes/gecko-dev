@@ -24,7 +24,7 @@ function crash(){
 
   //the following call will cause crash
   f();
-} 
+}
 
 crash();
 

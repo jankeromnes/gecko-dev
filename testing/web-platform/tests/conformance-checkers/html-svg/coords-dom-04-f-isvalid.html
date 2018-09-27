@@ -16,7 +16,7 @@
   <!--=  All Rights Reserved.                                              =-->
   <!--=  See http://www.w3.org/Consortium/Legal/.                          =-->
   <!--======================================================================-->
-  
+
   <title id="test-title">$RCSfile: coords-dom-04-f.svg,v $</title>
   <defs>
     <font-face
@@ -36,15 +36,15 @@
 		var pos = { "x": 20, "y": 40 };
 		var subtestCounter = 1;
 		var passed = true;
-		
+
 		function toString(m)
-		{	
+		{
 			var decimals = 0;
-			return m.a.toFixed(decimals) + "," + 
-				   m.b.toFixed(decimals) + "," + 
-				   m.c.toFixed(decimals) + "," + 
-				   m.d.toFixed(decimals) + "," + 
-				   m.e.toFixed(decimals) + "," + 
+			return m.a.toFixed(decimals) + "," +
+				   m.b.toFixed(decimals) + "," +
+				   m.c.toFixed(decimals) + "," +
+				   m.d.toFixed(decimals) + "," +
+				   m.e.toFixed(decimals) + "," +
 				   m.f.toFixed(decimals);
 		}
 
@@ -68,9 +68,9 @@
 			resultrect.setAttribute("width", 15);
 			resultrect.setAttribute("height", 15);
 			resultrect.setAttribute("y", pos.y-15);
-			
+
 			if(referenceEqual(m, ref, eps))
-			{	
+			{
 				result.textContent = "Passed subtest #" + subtestCounter;
 			}
 			else
@@ -84,7 +84,7 @@
 			results.appendChild(resultrect)
 			results.appendChild(result);
 		}
-		
+
 		function test()
 		{
 			eps = 0.005; // "close enough"
@@ -92,41 +92,41 @@
 
 			t1 = r.transform.baseVal.getItem(0);
 			t2 = r.transform.baseVal.getItem(1);
-			
+
 			// check that matrices are as specified in the markup
 			assertEquals(t1.matrix, [1, 0, 0, 1, 10, 10], eps);
 			assertEquals(t2.matrix, [0, 1, -1, 0, 0, 0], eps);
 
 			// consolidate
 			tfm = r.transform.baseVal.consolidate();
-			
+
 			// check that the consolidation is ok
 			assertEquals(tfm.matrix, [0, 1, -1, 0, 10, 10], eps);
-			
+
 			// check that t1 and t2 were not affected by the consolidation
 			assertEquals(t1.matrix, [1, 0, 0, 1, 10, 10], eps);
 			assertEquals(t2.matrix, [0, 1, -1, 0, 0, 0], eps);
-			
+
 			// check that modifying t1 has no effect on the consolidated transform
 			t1.setTranslate(10,200);
 			assertEquals(t1.matrix, [1, 0, 0, 1, 10, 200], eps);
 			assertEquals(tfm.matrix, [0, 1, -1, 0, 10, 10], eps);
-			
+
 			// check that modifying t2 has no effect on the consolidated transform
 			t2.setRotate(-90, 0, 0);
 			assertEquals(t2.matrix, [0, -1, 1, 0, 0, 0], eps);
 			assertEquals(tfm.matrix, [0, 1, -1, 0, 10, 10], eps);
-			
+
 			// check that modifying the consolidated transform has no effect on the t1 and t2 transforms
 			tfm.matrix.f = 400;
 			assertEquals(tfm.matrix, [0, 1, -1, 0, 10, 400], eps);
 			assertEquals(t1.matrix, [1, 0, 0, 1, 10, 200], eps);
 			assertEquals(t2.matrix, [0, -1, 1, 0, 0, 0], eps);
-		
+
 			document.getElementById("status").setAttributeNS(null, "fill", passed ? "lime" : "red");
 			document.getElementById("scriptstatus").textContent = "Scripting enabled";
 		}
-	
+
 	]]></script>
 	</defs>
 
@@ -135,7 +135,7 @@
 			<rect id="status" y="5" width="15" height="15" fill="red"/>
 			<text id="scriptstatus" y="20" x="20" >Scripting disabled</text>
 		</g>
-	
+
 		<polyline id="r" fill="none" stroke="green" display="none" transform="translate(10 10) rotate(90)" points="0 0 30 40 80 -20" stroke-width="10"/>
 	</g>
   </g>

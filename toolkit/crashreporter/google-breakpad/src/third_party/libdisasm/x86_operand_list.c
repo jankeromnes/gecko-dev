@@ -5,7 +5,7 @@
 static void x86_oplist_append( x86_insn_t *insn, x86_oplist_t *op ) {
 	x86_oplist_t *list;
 
-	if (! insn ) {	
+	if (! insn ) {
 		return;
 	}
 
@@ -13,7 +13,7 @@ static void x86_oplist_append( x86_insn_t *insn, x86_oplist_t *op ) {
 	if (! list ) {
 		insn->operand_count = 1;
 		/* Note that we have no way of knowing if this is an
-		 * exlicit operand or not, since the caller fills 
+		 * exlicit operand or not, since the caller fills
 		 * the x86_op_t after we return. We increase the
 		 * explicit count automatically, and ia32_insn_implicit_ops
 		 * decrements it */
@@ -23,7 +23,7 @@ static void x86_oplist_append( x86_insn_t *insn, x86_oplist_t *op ) {
 	}
 
 	/* get to end of list */
-	for ( ; list->next; list = list->next ) 
+	for ( ; list->next; list = list->next )
 		;
 
 	insn->operand_count = insn->operand_count + 1;
@@ -32,11 +32,11 @@ static void x86_oplist_append( x86_insn_t *insn, x86_oplist_t *op ) {
 
 	return;
 }
-	
+
 x86_op_t * x86_operand_new( x86_insn_t *insn ) {
 	x86_oplist_t *op;
 
-	if (! insn ) {	
+	if (! insn ) {
 		return(NULL);
 	}
 	op = calloc( sizeof(x86_oplist_t), 1 );
@@ -68,7 +68,7 @@ void x86_oplist_free( x86_insn_t *insn ) {
 /* ================================================== LIBDISASM API */
 /* these could probably just be #defines, but that means exposing the
    enum... yet one more confusing thing in the API */
-int x86_operand_foreach( x86_insn_t *insn, x86_operand_fn func, void *arg, 
+int x86_operand_foreach( x86_insn_t *insn, x86_operand_fn func, void *arg,
 	       		enum x86_op_foreach_type type ){
 	x86_oplist_t *list;
 	char explicit = 1, implicit = 1;
@@ -76,7 +76,7 @@ int x86_operand_foreach( x86_insn_t *insn, x86_operand_fn func, void *arg,
 	if (! insn || ! func ) {
 		return 0;
 	}
-	
+
 	/* note: explicit and implicit can be ORed together to
 	 * allow an "all" limited by access type, even though the
 	 * user is stupid to do this since it is default behavior :) */
@@ -153,7 +153,7 @@ static void count_operand( x86_op_t *op, x86_insn_t *insn, void *arg ) {
 
 size_t x86_operand_count( x86_insn_t *insn, enum x86_op_foreach_type type ) {
 	size_t count = 0;
-	
+
 	/* save us a list traversal for common counts... */
 	if ( type == op_any ) {
 		return insn->operand_count;

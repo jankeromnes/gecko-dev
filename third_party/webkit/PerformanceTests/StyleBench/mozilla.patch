@@ -4,16 +4,16 @@ index b33021d9d9ce..58b3e46982d1 100644
 +++ b/third_party/webkit/PerformanceTests/StyleBench/resources/benchmark-report.js
 @@ -1,12 +1,13 @@
  // This file can be customized to report results as needed.
- 
+
  (function () {
 -    if (!window.testRunner && location.search != '?webkit' && location.hash != '#webkit')
 +    if (!window.testRunner && location.search != '?webkit' && location.hash != '#webkit' &&
 +        location.search != '?gecko' && location.search != '?raptor')
          return;
- 
+
      if (window.testRunner)
          testRunner.waitUntilDone();
- 
+
      var scriptElement = document.createElement('script');
      scriptElement.src = '../resources/runner.js';
      document.head.appendChild(scriptElement);
@@ -38,7 +38,7 @@ index b33021d9d9ce..58b3e46982d1 100644
          },
          didFinishLastIteration: function () {
              document.head.removeChild(document.querySelector('style'));
- 
+
              var measuredValuesByFullName = {};
              function addToMeasuredValue(value, fullName, aggregator) {
                  var values = measuredValuesByFullName[fullName] || new Array;
@@ -50,15 +50,15 @@ index b33021d9d9ce..58b3e46982d1 100644
                      addToMeasuredValue(suite.total, suiteName, 'Total');
                  }
              });
- 
+
 -            PerfTestRunner.reportValues(createTest(null, null, false, 'pt'), scores);
 +            if (window.PerfTestRunner)
 +                PerfTestRunner.reportValues(createTest(null, null, false, 'pt'), scores);
- 
+
              var fullNames = new Array;
              for (var fullName in measuredValuesByFullName)
                  fullNames.push(fullName);
- 
+
 -            for (var i = 0; i < fullNames.length; i++) {
 -                var values = measuredValuesByFullName[fullNames[i]];
 -                PerfTestRunner.reportValues(createTest(fullNames[i], values.aggregator, i + 1 == fullNames.length), values);

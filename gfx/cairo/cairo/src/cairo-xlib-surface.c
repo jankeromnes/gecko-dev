@@ -2706,7 +2706,7 @@ _cairo_xlib_surface_solid_fill_rectangles (cairo_xlib_surface_t    *surface,
     _cairo_xlib_surface_put_gc (display, surface, gc);
 
     _cairo_pattern_release_surface (&solid.base, solid_surface, &attrs);
-    
+
     cairo_device_release (&display->base);
 
     return CAIRO_STATUS_SUCCESS;
@@ -4073,7 +4073,7 @@ _cairo_xlib_scaled_font_get_glyphset_info_for_format (cairo_scaled_font_t *scale
     glyphset_info = &font_private->glyphset_info[glyphset_index];
     if (glyphset_info->glyphset == None) {
 	cairo_xlib_display_t *display;
-        
+
         if (_cairo_xlib_display_acquire (font_private->device, &display))
             return NULL;
 

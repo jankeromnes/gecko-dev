@@ -9,6 +9,6 @@ function testStrict() {
         a[0x2 ] = (n === null);
         a[3] = (n == null);
     }
-    return  ;  
+    return  ;
 }
 testStrict();

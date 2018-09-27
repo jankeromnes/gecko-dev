@@ -21,7 +21,7 @@ catch (e)
 {
   actual = "pass";
 }
- 
+
 reportCompare(expect, actual, summary + ': +=');
 
 try
@@ -33,7 +33,7 @@ catch (e)
 {
   actual = "pass";
 }
- 
+
 reportCompare(expect, actual, summary + ': -=');
 
 try
@@ -45,7 +45,7 @@ catch (e)
 {
   actual = "pass";
 }
- 
+
 reportCompare(expect, actual, summary + ': *=');
 
 try
@@ -57,7 +57,7 @@ catch (e)
 {
   actual = "pass";
 }
- 
+
 reportCompare(expect, actual, summary + ': /=');
 
 try
@@ -69,7 +69,7 @@ catch (e)
 {
   actual = "pass";
 }
- 
+
 reportCompare(expect, actual, summary + ': %=');
 
 try
@@ -81,7 +81,7 @@ catch (e)
 {
   actual = "pass";
 }
- 
+
 reportCompare(expect, actual, summary + ': <<=');
 
 try
@@ -93,7 +93,7 @@ catch (e)
 {
   actual = "pass";
 }
- 
+
 reportCompare(expect, actual, summary + ': >>=');
 
 try
@@ -105,5 +105,5 @@ catch (e)
 {
   actual = "pass";
 }
- 
+
 reportCompare(expect, actual, summary + ': >>>=');

@@ -7,7 +7,7 @@
 /**
  * MODULE NOTES:
  * @update  gess 4/1/98
- * 
+ *
  * The scanner is a low-level service class that knows
  * how to consume characters out of an (internal) stream.
  * This class also offers a series of utility methods
@@ -47,7 +47,7 @@ class nsScanner final {
       explicit nsScanner(const nsAString& anHTMLString);
 
       /**
-       *  Use this constructor if you want i/o to be based on 
+       *  Use this constructor if you want i/o to be based on
        *  a file (therefore a stream) or just data you provide via Append().
        */
       nsScanner(nsString& aFilename, bool aCreateStream);
@@ -56,7 +56,7 @@ class nsScanner final {
 
       /**
        *  retrieve next char from internal input stream
-       *  
+       *
        *  @update  gess 3/25/98
        *  @param   ch is the char to accept new value
        *  @return  error code reflecting read status
@@ -67,57 +67,57 @@ class nsScanner final {
        *  Records current offset position in input stream. This allows us
        *  to back up to this point if the need should arise, such as when
        *  tokenization gets interrupted.
-       *  
+       *
        *  @update  gess 5/12/98
-       *  @param   
-       *  @return  
+       *  @param
+       *  @return
        */
       int32_t Mark(void);
 
       /**
-       *  Resets current offset position of input stream to marked position. 
-       *  This allows us to back up to this point if the need should arise, 
+       *  Resets current offset position of input stream to marked position.
+       *  This allows us to back up to this point if the need should arise,
        *  such as when tokenization gets interrupted.
        *  NOTE: IT IS REALLY BAD FORM TO CALL RELEASE WITHOUT CALLING MARK FIRST!
-       *  
+       *
        *  @update  gess 5/12/98
-       *  @param   
-       *  @return  
+       *  @param
+       *  @return
        */
       void RewindToMark(void);
 
 
       /**
-       *  
-       *  
+       *
+       *
        *  @update  harishd 01/12/99
-       *  @param   
-       *  @return  
+       *  @param
+       *  @return
        */
       bool UngetReadable(const nsAString& aBuffer);
 
       /**
-       *  
-       *  
+       *
+       *
        *  @update  gess 5/13/98
-       *  @param   
-       *  @return  
+       *  @param
+       *  @return
        */
       nsresult Append(const nsAString& aBuffer);
 
       /**
-       *  
-       *  
+       *
+       *
        *  @update  gess 5/21/98
-       *  @param   
-       *  @return  
+       *  @param
+       *  @return
        */
       nsresult Append(const char* aBuffer, uint32_t aLen);
 
       /**
        *  Call this to copy bytes out of the scanner that have not yet been consumed
        *  by the tokenization process.
-       *  
+       *
        *  @update  gess 5/12/98
        *  @param   aCopyBuffer is where the scanner buffer will be copied to
        *  @return  true if OK or false on OOM
@@ -128,9 +128,9 @@ class nsScanner final {
        *  Retrieve the name of the file that the scanner is reading from.
        *  In some cases, it's just a given name, because the scanner isn't
        *  really reading from a file.
-       *  
+       *
        *  @update  gess 5/12/98
-       *  @return  
+       *  @return
        */
       nsString& GetFilename(void);
 
@@ -142,7 +142,7 @@ class nsScanner final {
        *  @update  ftang 3/02/99
        *  @param   aCharset a normalized (alias resolved) charset name
        *  @param   aCharsetSource- where the charset info came from
-       *  @return  
+       *  @return
        */
       nsresult SetDocumentCharset(NotNull<const Encoding*> aEncoding,
                                   int32_t aSource);
@@ -155,7 +155,7 @@ class nsScanner final {
 
       /**
        * Internal method used to cause the internal buffer to
-       * be filled with data. 
+       * be filled with data.
        *
        * @update  gess4/3/98
        */

@@ -1,20 +1,20 @@
 Hyphen - hyphenation library to use converted TeX hyphenation patterns
- 
+
 (C) 1998 Raph Levien
 (C) 2001 ALTLinux, Moscow
 (C) 2006, 2007, 2008, 2010, 2011 László Németh
- 
+
 This was part of libHnj library by Raph Levien.
- 
+
 Peter Novodvorsky from ALTLinux cut hyphenation part from libHnj
 to use it in OpenOffice.org.
- 
+
 Compound word and non-standard hyphenation support by László Németh.
-  
+
 License is the original LibHnj license:
 LibHnj is dual licensed under LGPL and MPL (see also README.libhnj).
 
-Because LGPL allows GPL relicensing, COPYING contains now 
+Because LGPL allows GPL relicensing, COPYING contains now
 LGPL/GPL/MPL tri-license for explicit Mozilla source compatibility.
 
 Original Libhnj source with OOo's patches are managed by Rene Engelhard
@@ -37,7 +37,7 @@ hyphen.tex (en_US hyphenation patterns from plain TeX)
 
 tbhyphext.tex: hyphenation exception log from TugBoat archive
 
-  Source of the hyphenation exception list: 
+  Source of the hyphenation exception list:
   http://www.ctan.org/tex-archive/info/digests/tugboat/tb0hyf.tex
 
   Generated with the hyphenex script
@@ -114,7 +114,7 @@ hpyhenation patterns (after the character encoding in the first line):
 * Warning! Correct working of Libhnj *needs* prepared hyphenation patterns. *
 
 For example, generating hyph_en_US.dic from "hyphen.us" TeX patterns:
-    
+
 perl substrings.pl hyphen.us hyph_en_US.dic ISO8859-1
 
 or with default LEFTHYPHENMIN and RIGHTHYPHENMIN values:

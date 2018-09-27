@@ -35,7 +35,7 @@ assert.throws(SyntaxError, function() {
 assert.sameValue(
   subject.toString(),
   new RegExp('test262', 'ig').toString(),
-  '[[OriginalSource]] internal slot'        
+  '[[OriginalSource]] internal slot'
 );
 assert.sameValue(
   subject.test('tEsT262'), true, '[[RegExpMatcher]] internal slot'

@@ -1,9 +1,9 @@
 
 function setterFunction(v) { called = true; }
 function getterFunction(v) { return "getter"; }
-Object.defineProperty(Array.prototype, 1,{ 
-  get: getterFunction, 
-  set: setterFunction 
+Object.defineProperty(Array.prototype, 1,{
+  get: getterFunction,
+  set: setterFunction
 });
 gczeal(4);
 var N = 350;

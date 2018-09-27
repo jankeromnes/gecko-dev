@@ -135,30 +135,30 @@ bool CBondsChecks::CheckCoder(unsigned coderIndex)
   if (coderIndex >= _coderUsed.Size() || _coderUsed[coderIndex])
     return false;
   _coderUsed[coderIndex] = true;
-  
+
   UInt32 start = BindInfo->Coder_to_Stream[coderIndex];
 
   for (unsigned i = 0; i < coder.NumStreams; i++)
   {
     UInt32 ind = start + i;
-    
+
     if (BindInfo->IsStream_in_PackStreams(ind))
       continue;
-    
+
     int bond = BindInfo->FindBond_for_PackStream(ind);
     if (bond < 0)
       return false;
     if (!CheckCoder(BindInfo->Bonds[bond].UnpackIndex))
       return false;
   }
-  
+
   return true;
 }
 
 bool CBondsChecks::Check()
 {
   BoolVector_Fill_False(_coderUsed, BindInfo->Coders.Size());
-  
+
   if (!CheckCoder(BindInfo->UnpackCoder))
     return false;
 
@@ -189,9 +189,9 @@ bool CBindInfo::CalcMapsAndCheck()
   FOR_VECTOR(i, Coders)
   {
     Coder_to_Stream.Add(numStreams);
-    
+
     const CCoderStreamsInfo &c = Coders[i];
-    
+
     for (unsigned j = 0; j < c.NumStreams; j++)
       Stream_to_Coder.Add(i);
 
@@ -221,10 +221,10 @@ void CCoder::SetCoderInfo(const UInt64 *unpackSize, const UInt64 * const *packSi
     UnpackSize = 0;
     UnpackSizePointer = NULL;
   }
-  
+
   PackSizes.ClearAndSetSize((unsigned)NumStreams);
   PackSizePointers.ClearAndSetSize((unsigned)NumStreams);
-  
+
   for (unsigned i = 0; i < NumStreams; i++)
   {
     if (packSizes && packSizes[i])
@@ -244,20 +244,20 @@ bool CMixer::Is_UnpackSize_Correct_for_Coder(UInt32 coderIndex)
 {
   if (coderIndex == _bi.UnpackCoder)
     return true;
-  
+
   int bond = _bi.FindBond_for_UnpackStream(coderIndex);
   if (bond < 0)
     throw 20150213;
-  
+
   /*
   UInt32 coderIndex, coderStreamIndex;
   _bi.GetCoder_for_Stream(_bi.Bonds[bond].PackIndex, coderIndex, coderStreamIndex);
   */
   UInt32 nextCoder = _bi.Stream_to_Coder[_bi.Bonds[bond].PackIndex];
-  
+
   if (!IsFilter_Vector[nextCoder])
     return false;
-  
+
   return Is_UnpackSize_Correct_for_Coder(nextCoder);
 }
 
@@ -265,7 +265,7 @@ bool CMixer::Is_PackSize_Correct_for_Stream(UInt32 streamIndex)
 {
   if (_bi.IsStream_in_PackStreams(streamIndex))
     return true;
-  
+
   int bond = _bi.FindBond_for_PackStream(streamIndex);
   if (bond < 0)
     throw 20150213;
@@ -274,7 +274,7 @@ bool CMixer::Is_PackSize_Correct_for_Stream(UInt32 streamIndex)
 
   if (!IsFilter_Vector[nextCoder])
     return false;
-  
+
   return Is_PackSize_Correct_for_Coder(nextCoder);
 }
 
@@ -299,7 +299,7 @@ bool CMixer::IsThere_ExternalCoder_in_PackTree(UInt32 coderIndex)
     UInt32 si = startIndex + i;
     if (_bi.IsStream_in_PackStreams(si))
       continue;
-  
+
     int bond = _bi.FindBond_for_PackStream(si);
     if (bond < 0)
       throw 20150213;
@@ -375,7 +375,7 @@ HRESULT CMixerST::GetInStream2(
   }
 
   const CCoder &coder = _coders[coderIndex];
-  
+
   CMyComPtr<ISequentialInStream> seqInStream;
   coder.QueryInterface(IID_ISequentialInStream, (void **)&seqInStream);
   if (!seqInStream)
@@ -385,7 +385,7 @@ HRESULT CMixerST::GetInStream2(
   UInt32 startIndex = EncodeMode ? coderIndex : _bi.Coder_to_Stream[coderIndex];
 
   bool isSet = false;
-  
+
   if (numInStreams == 1)
   {
     CMyComPtr<ICompressSetInStream> setStream;
@@ -398,14 +398,14 @@ HRESULT CMixerST::GetInStream2(
       isSet = true;
     }
   }
-  
+
   if (!isSet && numInStreams != 0)
   {
     CMyComPtr<ICompressSetInStream2> setStream2;
     coder.QueryInterface(IID_ICompressSetInStream2, (void **)&setStream2);
     if (!setStream2)
       return E_NOTIMPL;
-    
+
     for (UInt32 i = 0; i < numInStreams; i++)
     {
       CMyComPtr<ISequentialInStream> seqInStream2;
@@ -424,7 +424,7 @@ HRESULT CMixerST::GetInStream(
     UInt32 inStreamIndex, ISequentialInStream **inStreamRes)
 {
   CMyComPtr<ISequentialInStream> seqInStream;
-  
+
   {
     int index = -1;
     if (EncodeMode)
@@ -442,7 +442,7 @@ HRESULT CMixerST::GetInStream(
       return S_OK;
     }
   }
-  
+
   int bond = FindBond_for_Stream(
       true, // forInputStream
       inStreamIndex);
@@ -458,14 +458,14 @@ HRESULT CMixerST::GetInStream(
 
   if (bs.StreamRef || bs.InStreamSpec)
     return E_NOTIMPL;
-  
+
   CSequentialInStreamCalcSize *spec = new CSequentialInStreamCalcSize;
   bs.StreamRef = spec;
   bs.InStreamSpec = spec;
-  
+
   spec->SetStream(seqInStream);
   spec->Init();
-  
+
   seqInStream = bs.InStreamSpec;
 
   *inStreamRes = seqInStream.Detach();
@@ -478,7 +478,7 @@ HRESULT CMixerST::GetOutStream(
     UInt32 outStreamIndex, ISequentialOutStream **outStreamRes)
 {
   CMyComPtr<ISequentialOutStream> seqOutStream;
-  
+
   {
     int index = -1;
     if (!EncodeMode)
@@ -496,7 +496,7 @@ HRESULT CMixerST::GetOutStream(
       return S_OK;
     }
   }
-  
+
   int bond = FindBond_for_Stream(
       false, // forInputStream
       outStreamIndex);
@@ -563,16 +563,16 @@ HRESULT CMixerST::GetOutStream(
 
   if (bs.StreamRef || bs.OutStreamSpec)
     return E_NOTIMPL;
-  
+
   COutStreamCalcSize *spec = new COutStreamCalcSize;
   bs.StreamRef = (ISequentialOutStream *)spec;
   bs.OutStreamSpec = spec;
-  
+
   spec->SetStream(seqOutStream);
   spec->Init();
 
   seqOutStream = bs.OutStreamSpec;
-  
+
   *outStreamRes = seqOutStream.Detach();
   return S_OK;
 }
@@ -651,41 +651,41 @@ HRESULT CMixerST::FinishCoder(UInt32 coderIndex)
 void CMixerST::SelectMainCoder(bool useFirst)
 {
   unsigned ci = _bi.UnpackCoder;
-  
+
   int firstNonFilter = -1;
   int firstAllowed = ci;
-  
+
   for (;;)
   {
     const CCoderST &coder = _coders[ci];
     // break;
-    
+
     if (ci != _bi.UnpackCoder)
       if (EncodeMode ? !coder.CanWrite : !coder.CanRead)
       {
         firstAllowed = ci;
         firstNonFilter = -2;
       }
-      
+
     if (coder.NumStreams != 1)
       break;
-    
+
     UInt32 st = _bi.Coder_to_Stream[ci];
     if (_bi.IsStream_in_PackStreams(st))
       break;
     int bond = _bi.FindBond_for_PackStream(st);
     if (bond < 0)
       throw 20150213;
-    
+
     if (EncodeMode ? !coder.CanRead : !coder.CanWrite)
       break;
-    
+
     if (firstNonFilter == -1 && !IsFilter_Vector[ci])
       firstNonFilter = ci;
-    
+
     ci = _bi.Bonds[bond].UnpackIndex;
   }
-  
+
   if (useFirst)
     ci = firstAllowed;
   else if (firstNonFilter >= 0)
@@ -706,18 +706,18 @@ HRESULT CMixerST::Code(
 
   _binderStreams.Clear();
   unsigned ci = MainCoderIndex;
- 
+
   const CCoder &mainCoder = _coders[MainCoderIndex];
 
   CObjectVector< CMyComPtr<ISequentialInStream> > seqInStreams;
   CObjectVector< CMyComPtr<ISequentialOutStream> > seqOutStreams;
-  
+
   UInt32 numInStreams  =  EncodeMode ? 1 : mainCoder.NumStreams;
   UInt32 numOutStreams = !EncodeMode ? 1 : mainCoder.NumStreams;
-  
+
   UInt32 startInIndex  =  EncodeMode ? ci : _bi.Coder_to_Stream[ci];
   UInt32 startOutIndex = !EncodeMode ? ci : _bi.Coder_to_Stream[ci];
-  
+
   UInt32 i;
 
   for (i = 0; i < numInStreams; i++)
@@ -726,17 +726,17 @@ HRESULT CMixerST::Code(
     RINOK(GetInStream(inStreams, /* inSizes, */ startInIndex + i, &seqInStream));
     seqInStreams.Add(seqInStream);
   }
-  
+
   for (i = 0; i < numOutStreams; i++)
   {
     CMyComPtr<ISequentialOutStream> seqOutStream;
     RINOK(GetOutStream(outStreams, /* outSizes, */ startOutIndex + i, &seqOutStream));
     seqOutStreams.Add(seqOutStream);
   }
-  
+
   CRecordVector< ISequentialInStream * > seqInStreamsSpec;
   CRecordVector< ISequentialOutStream * > seqOutStreamsSpec;
-  
+
   for (i = 0; i < numInStreams; i++)
     seqInStreamsSpec.Add(seqInStreams[i]);
   for (i = 0; i < numOutStreams; i++)
@@ -746,7 +746,7 @@ HRESULT CMixerST::Code(
   {
     if (i == ci)
       continue;
-   
+
     CCoder &coder = _coders[i];
 
     if (EncodeMode)
@@ -825,7 +825,7 @@ HRESULT CMixerST::GetMainUnpackStream(
 
   RINOK(GetInStream2(inStreams, /* inSizes, */
       _bi.UnpackCoder, &seqInStream))
-  
+
   FOR_VECTOR (i, _coders)
   {
     CCoder &coder = _coders[i];
@@ -836,7 +836,7 @@ HRESULT CMixerST::GetMainUnpackStream(
       RINOK(setOutStreamSize->SetOutStreamSize(coder.UnpackSizePointer));
     }
   }
-  
+
   *inStreamRes = seqInStream.Detach();
   return S_OK;
 }
@@ -881,10 +881,10 @@ void CCoderMT::Code(ICompressProgressInfo *progress)
   OutStreamPointers.ClearAndReserve(numOutStreams);
 
   unsigned i;
-  
+
   for (i = 0; i < numInStreams; i++)
     InStreamPointers.AddInReserved((ISequentialInStream *)InStreams[i]);
-  
+
   for (i = 0; i < numOutStreams; i++)
     OutStreamPointers.AddInReserved((ISequentialOutStream *)OutStreams[i]);
 
@@ -898,7 +898,7 @@ void CCoderMT::Code(ICompressProgressInfo *progress)
   */
 
   CReleaser releaser(*this);
-  
+
   if (Coder)
     Result = Coder->Code(InStreamPointers[0], OutStreamPointers[0],
         EncodeMode ? UnpackSizePointer : PackSizePointers[0],
@@ -914,7 +914,7 @@ void CCoderMT::Code(ICompressProgressInfo *progress)
 HRESULT CMixerMT::SetBindInfo(const CBindInfo &bindInfo)
 {
   CMixer::SetBindInfo(bindInfo);
-  
+
   _streamBinders.Clear();
   FOR_VECTOR (i, _bi.Bonds)
   {
@@ -957,7 +957,7 @@ void CMixerMT::SelectMainCoder(bool useFirst)
       break;
     if (!IsFilter_Vector[ci])
       break;
-    
+
     UInt32 st = _bi.Coder_to_Stream[ci];
     if (_bi.IsStream_in_PackStreams(st))
       break;
@@ -966,19 +966,19 @@ void CMixerMT::SelectMainCoder(bool useFirst)
       throw 20150213;
     ci = _bi.Bonds[bond].UnpackIndex;
   }
-  
+
   MainCoderIndex = ci;
 }
 
 HRESULT CMixerMT::Init(ISequentialInStream * const *inStreams, ISequentialOutStream * const *outStreams)
 {
   unsigned i;
-  
+
   for (i = 0; i < _coders.Size(); i++)
   {
     CCoderMT &coderInfo = _coders[i];
     const CCoderStreamsInfo &csi = _bi.Coders[i];
-    
+
     UInt32 j;
 
     unsigned numInStreams = EncodeMode ? 1 : csi.NumStreams;
@@ -987,7 +987,7 @@ HRESULT CMixerMT::Init(ISequentialInStream * const *inStreams, ISequentialOutStr
     coderInfo.InStreams.Clear();
     for (j = 0; j < numInStreams; j++)
       coderInfo.InStreams.AddNew();
-    
+
     coderInfo.OutStreams.Clear();
     for (j = 0; j < numOutStreams; j++)
       coderInfo.OutStreams.AddNew();
@@ -996,10 +996,10 @@ HRESULT CMixerMT::Init(ISequentialInStream * const *inStreams, ISequentialOutStr
   for (i = 0; i < _bi.Bonds.Size(); i++)
   {
     const CBond &bond = _bi.Bonds[i];
-   
+
     UInt32 inCoderIndex, inCoderStreamIndex;
     UInt32 outCoderIndex, outCoderStreamIndex;
-    
+
     {
       UInt32 coderIndex, coderStreamIndex;
       _bi.GetCoder_for_Stream(bond.PackIndex, coderIndex, coderStreamIndex);
@@ -1044,7 +1044,7 @@ HRESULT CMixerMT::Init(ISequentialInStream * const *inStreams, ISequentialOutStr
     else
       cod.InStreams[coderStreamIndex] = inStreams[i];
   }
-  
+
   return S_OK;
 }
 

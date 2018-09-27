@@ -16,7 +16,7 @@
 
 #if defined(WEBRTC_WIN)
 #undef UnlockResource
-#endif  // WEBRTC_WIN 
+#endif  // WEBRTC_WIN
 
 namespace rtc {
 

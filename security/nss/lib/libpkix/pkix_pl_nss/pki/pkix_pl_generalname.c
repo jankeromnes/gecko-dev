@@ -162,7 +162,7 @@ pkix_pl_DirectoryName_Create(
 
         dirName = &nssAltName->name.directoryName;
 
-        PKIX_CHECK(PKIX_PL_X500Name_CreateFromCERTName(NULL, dirName, 
+        PKIX_CHECK(PKIX_PL_X500Name_CreateFromCERTName(NULL, dirName,
                                                        &pkixDN, plContext),
                    PKIX_X500NAMECREATEFROMCERTNAMEFAILED);
 
@@ -287,7 +287,7 @@ pkix_pl_GeneralName_Create(
                 genName->other = SECITEM_DupItem(&nssAltName->name.other);
                 if (!genName->other) {
                     PKIX_ERROR(PKIX_OUTOFMEMORY);
-                }     
+                }
                 break;
         default:
                 PKIX_ERROR(PKIX_NAMETYPENOTSUPPORTED);

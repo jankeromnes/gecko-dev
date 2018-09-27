@@ -30,7 +30,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof scatter == 'function')
   {
     scatter([f, f, f, f]);

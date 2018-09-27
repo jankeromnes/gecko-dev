@@ -45,7 +45,7 @@ actual = cnFAIL_1; // initialize to failure
 try
 {
   Function(cnSTRING);
-  Function(cnNUMBER);  // cnNUMBER is a valid functionBody       
+  Function(cnNUMBER);  // cnNUMBER is a valid functionBody
   Function(cnSTRING,cnSTRING);
   Function(cnSTRING,cnNUMBER);
   Function(cnSTRING,cnSTRING,cnNUMBER);

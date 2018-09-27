@@ -15,7 +15,7 @@ assertEq(testLenientAndStrict('010',
 assertEq(parseRaisesException(SyntaxError)
          ('function f() { "use strict"; 010; }'),
          true);
-                              
+
 
 /*
  * Octal integer literal after strict function body (restoration of

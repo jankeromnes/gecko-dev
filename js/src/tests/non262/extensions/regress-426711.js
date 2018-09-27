@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof window != 'undefined' && '__count__' in window)
   {
     window.__count__ = 0;

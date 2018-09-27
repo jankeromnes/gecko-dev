@@ -49,7 +49,7 @@ function loadFile(lfVarx) {
 				default: evaluate(lfVarx);
 			}
 		}
-	} catch (lfVare) {	
+	} catch (lfVare) {
 		print(lfVare);
 	}
 }

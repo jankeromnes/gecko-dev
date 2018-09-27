@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" 
+<svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
      class="reftest-wait">
 
@@ -19,5 +19,5 @@
 </pattern>
 
 <rect x="25" y="25" width="430" height="60" stroke="black" fill="url(#pat1)" />
-		
+
 </svg>

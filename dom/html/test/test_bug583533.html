@@ -23,7 +23,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=583533
     var sbs = SpecialPowers.Cc['@mozilla.org/intl/stringbundle;1'].
        getService(SpecialPowers.Ci.nsIStringBundleService);
     var bundle = sbs.createBundle("chrome://global-platform/locale/platformKeys.properties");
-    
+
     var shiftText = bundle.GetStringFromName("VK_SHIFT");
     var altText = bundle.GetStringFromName("VK_ALT");
     var controlText = bundle.GetStringFromName("VK_CONTROL");

@@ -43,7 +43,7 @@ namespace base {
 // implementation here.  It is not guaranteed that assignment is a copy, so the
 // StringUtil.VariableArgsFunc unit test tests this capability.
 
-// The C standard says that va_copy is a "macro", not a function.  Trying to 
+// The C standard says that va_copy is a "macro", not a function.  Trying to
 // use va_list as ref args to a function, as above, breaks some machines.
 #  if defined(COMPILER_GCC)
 #    define base_va_copy(_a, _b) ::va_copy(_a, _b)

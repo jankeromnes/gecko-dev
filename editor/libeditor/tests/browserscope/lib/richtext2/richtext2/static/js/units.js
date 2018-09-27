@@ -1,5 +1,5 @@
 /**
- * @fileoverview 
+ * @fileoverview
  * Common constants and variables used in the RTE test suite.
  *
  * Copyright 2010 Google Inc.
@@ -169,7 +169,7 @@ var colorChart = {
   'whitesmoke': {red: 0xF5, green: 0xF5, blue: 0xF5},
   'yellow': {red: 0xFF, green: 0xFF, blue: 0x00},
   'yellowgreen': {red: 0x9A, green: 0xCD, blue: 0x32},
-  
+
   'transparent': {red: 0x00, green: 0x00, blue: 0x00, alpha: 0.0}
 };
 
@@ -327,11 +327,11 @@ function FontSize(value) {
         this.size = '7';
       }
       return true;
-    } 
+    }
     if (match = String(str).match(/([+-][0-9]+)/)) {
       this.size = match[1];
       return this.size >= 1 && this.size <= 7;
-    } 
+    }
     if (Number(str)) {
       this.size = String(Number(str));
       return this.size >= 1 && this.size <= 7;

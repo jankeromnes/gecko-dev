@@ -1,7 +1,7 @@
 // © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /********************************************************************
- * COPYRIGHT: 
+ * COPYRIGHT:
  * Copyright (c) 2002-2005, International Business Machines Corporation and
  * others. All Rights Reserved.
  ********************************************************************/
@@ -21,8 +21,8 @@
 #include "unicode/testlog.h"
 
 
-/* This class abstracts the actual organization of the  
- * data for data driven tests                           
+/* This class abstracts the actual organization of the
+ * data for data driven tests
  */
 
 
@@ -30,9 +30,9 @@ class DataMap;
 class TestData;
 
 
-/** Main data driven test class. Corresponds to one named data 
- *  unit (such as a resource bundle. It is instantiated using  
- *  a factory method getTestDataModule 
+/** Main data driven test class. Corresponds to one named data
+ *  unit (such as a resource bundle. It is instantiated using
+ *  a factory method getTestDataModule
  */
 class T_CTEST_EXPORT_API TestDataModule {
   const char* testName;
@@ -42,11 +42,11 @@ protected:
   TestLog& fLog;
 
 public:
-  /** Factory method. 
-   *  @param name name of the test module. Usually name of a resource bundle or a XML file 
-   *  @param log a logging class, used for internal error reporting.                       
-   *  @param status if something goes wrong, status will be set                            
-   *  @return a TestDataModule object. Use it to get test data from it                     
+  /** Factory method.
+   *  @param name name of the test module. Usually name of a resource bundle or a XML file
+   *  @param log a logging class, used for internal error reporting.
+   *  @param status if something goes wrong, status will be set
+   *  @return a TestDataModule object. Use it to get test data from it
    */
   static TestDataModule *getTestDataModule(const char* name, TestLog& log, UErrorCode &status);
   virtual ~TestDataModule();
@@ -55,31 +55,31 @@ protected:
   TestDataModule(const char* name, TestLog& log, UErrorCode& status);
 
 public:
-  /** Name of this TestData module. 
-   *  @return a name 
+  /** Name of this TestData module.
+   *  @return a name
    */
   const char * getName() const;
 
-  /** Get a pointer to an object owned DataMap that contains more information on this module 
-   *  Usual fields are "Description", "LongDescription", "Settings". Also, if containing a   
-   *  field "Headers" these will be used as the default headers, so that you don't have to   
-   *  to specify per test headers.                                                           
+  /** Get a pointer to an object owned DataMap that contains more information on this module
+   *  Usual fields are "Description", "LongDescription", "Settings". Also, if containing a
+   *  field "Headers" these will be used as the default headers, so that you don't have to
+   *  to specify per test headers.
    *  @param info pass in a const DataMap pointer. If no info, it will be set to NULL
    */
   virtual UBool getInfo(const DataMap *& info, UErrorCode &status) const = 0;
 
-  /** Create a test data object from an index. Helpful for integrating tests with current 
-   *  intltest framework which addresses the tests by index.                              
-   *  @param index index of the test to be instantiated                                   
-   *  @return an instantiated TestData object, ready to provide settings and cases for    
-   *          the tests.                                                                  
+  /** Create a test data object from an index. Helpful for integrating tests with current
+   *  intltest framework which addresses the tests by index.
+   *  @param index index of the test to be instantiated
+   *  @return an instantiated TestData object, ready to provide settings and cases for
+   *          the tests.
    */
   virtual TestData* createTestData(int32_t index, UErrorCode &status) const = 0;
 
-  /** Create a test data object from a name.                              
-   *  @param name name of the test to be instantiated                                     
-   *  @return an instantiated TestData object, ready to provide settings and cases for    
-   *          the tests.                                                                  
+  /** Create a test data object from a name.
+   *  @param name name of the test to be instantiated
+   *  @return an instantiated TestData object, ready to provide settings and cases for
+   *          the tests.
    */
   virtual TestData* createTestData(const char* name, UErrorCode &status) const = 0;
 };

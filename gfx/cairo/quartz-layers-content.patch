@@ -8,12 +8,12 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
  {
      cairo_quartz_surface_t *surface = (cairo_quartz_surface_t *) abstract_surface;
      cairo_format_t format;
- 
+
      if (surface->cgLayer)
 -        return cairo_quartz_surface_create_cg_layer (abstract_surface, width, height);
 +        return cairo_quartz_surface_create_cg_layer (abstract_surface, content,
 +                                                     width, height);
- 
+
      if (content == CAIRO_CONTENT_COLOR_ALPHA)
  	format = CAIRO_FORMAT_ARGB32;
      else if (content == CAIRO_CONTENT_COLOR)
@@ -22,10 +22,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
  	format = CAIRO_FORMAT_A8;
      else
 @@ -2960,54 +2961,55 @@ cairo_quartz_surface_create_for_cg_conte
- 
+
      return (cairo_surface_t *) surf;
  }
- 
+
  /**
   * cairo_quartz_cglayer_surface_create_similar
   * @surface: The returned surface can be efficiently drawn into this
@@ -56,16 +56,16 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
      CGLayerRef layer;
      CGContextRef ctx;
      CGContextRef cgContext;
- 
+
      cgContext = cairo_quartz_surface_get_cg_context (surface);
      if (!cgContext)
 -        return cairo_surface_create_similar (surface, CAIRO_CONTENT_COLOR_ALPHA,
 +        return cairo_surface_create_similar (surface, content,
                                               width, height);
- 
+
      if (!_cairo_quartz_verify_surface_size(width, height))
          return _cairo_surface_create_in_error (_cairo_error (CAIRO_STATUS_INVALID_SIZE));
- 
+
      /* If we pass zero width or height into CGLayerCreateWithContext below,
       * it will fail.
       */
@@ -75,7 +75,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +            _cairo_quartz_surface_create_internal (NULL, content,
                                                     width, height);
      }
- 
+
      layer = CGLayerCreateWithContext (cgContext,
                                        CGSizeMake (width, height),
                                        NULL);
@@ -88,7 +88,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
       */
      CGContextTranslateCTM (ctx, 0, height);
      CGContextScaleCTM (ctx, 1, -1);
- 
+
      CGContextRetain (ctx);
 -    surf = _cairo_quartz_surface_create_internal (ctx, CAIRO_CONTENT_COLOR_ALPHA,
 -              width, height);
@@ -100,26 +100,26 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
          return (cairo_surface_t*) surf;
      }
      surf->cgLayer = layer;
- 
+
      return (cairo_surface_t *) surf;
 diff --git a/gfx/cairo/cairo/src/cairo-quartz.h b/gfx/cairo/cairo/src/cairo-quartz.h
 --- a/gfx/cairo/cairo/src/cairo-quartz.h
 +++ b/gfx/cairo/cairo/src/cairo-quartz.h
 @@ -46,16 +46,17 @@ CAIRO_BEGIN_DECLS
- 
+
  cairo_public cairo_surface_t *
  cairo_quartz_surface_create (cairo_format_t format,
                               unsigned int width,
                               unsigned int height);
- 
+
  cairo_public cairo_surface_t *
  cairo_quartz_surface_create_cg_layer (cairo_surface_t *surface,
 +                                      cairo_content_t content,
                                        unsigned int width,
                                        unsigned int height);
- 
+
  cairo_public cairo_surface_t *
  cairo_quartz_surface_create_for_cg_context (CGContextRef cgContext,
                                              unsigned int width,
                                              unsigned int height);
- 
+

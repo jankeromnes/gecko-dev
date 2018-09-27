@@ -22,11 +22,11 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_dispatcher.cc 
  #include "sandbox/win/src/policy_params.h"
  #include "sandbox/win/src/sandbox.h"
  #include "sandbox/win/src/sandbox_nt_util.h"
- 
+
 +#include "mozilla/sandboxing/permissionsService.h"
 +
  namespace sandbox {
- 
+
  FilesystemDispatcher::FilesystemDispatcher(PolicyBase* policy_base)
      : policy_base_(policy_base) {
    static const IPCCall create_params = {
@@ -36,7 +36,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_dispatcher.cc 
 @@ -110,16 +112,26 @@ bool FilesystemDispatcher::NtCreateFile(
    params[OpenFile::OPTIONS] = ParamPickerMake(create_options);
    params[OpenFile::BROKER] = ParamPickerMake(broker);
- 
+
    // To evaluate the policy we need to call back to the policy object. We
    // are just middlemen in the operation since is the FileSystemPolicy which
    // knows what to do.
@@ -63,7 +63,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_dispatcher.cc 
 @@ -157,16 +169,26 @@ bool FilesystemDispatcher::NtOpenFile(IP
    params[OpenFile::OPTIONS] = ParamPickerMake(open_options);
    params[OpenFile::BROKER] = ParamPickerMake(broker);
- 
+
    // To evaluate the policy we need to call back to the policy object. We
    // are just middlemen in the operation since is the FileSystemPolicy which
    // knows what to do.
@@ -98,7 +98,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
      params[OpenFile::DISPOSITION] = ParamPickerMake(disposition_uint32);
      params[OpenFile::OPTIONS] = ParamPickerMake(options_uint32);
      params[OpenFile::BROKER] = ParamPickerMake(broker);
- 
+
 -    if (!QueryBroker(IPC_NTCREATEFILE_TAG, params.GetBase()))
 -      break;
 -
@@ -118,7 +118,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
      params[OpenFile::DISPOSITION] = ParamPickerMake(disposition_uint32);
      params[OpenFile::OPTIONS] = ParamPickerMake(options_uint32);
      params[OpenFile::BROKER] = ParamPickerMake(broker);
- 
+
 -    if (!QueryBroker(IPC_NTOPENFILE_TAG, params.GetBase()))
 -      break;
 -
@@ -129,4 +129,4 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
                                  &answer);
      if (SBOX_ALL_OK != code)
        break;
- 
+

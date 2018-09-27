@@ -9,7 +9,7 @@ info: |
   [...]
   8. If y is not NaN and 0 ≤ ToInteger(y) ≤ 99, let yr be 1900+ToInteger(y);
      otherwise, let yr be y.
-  9. Return TimeClip(MakeDate(MakeDay(yr, m, dt), MakeTime(h, min, s, milli))). 
+  9. Return TimeClip(MakeDate(MakeDay(yr, m, dt), MakeTime(h, min, s, milli))).
 ---*/
 
 assert.sameValue(Date.UTC(-1, 0), -62198755200000, '-1 (no offset)');

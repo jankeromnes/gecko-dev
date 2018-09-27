@@ -129,7 +129,7 @@ function handleRequest(request, response)
       response.setHeader("Content-Range", contentRange);
     }
   }
-  
+
   if (start > 0) {
     // Send all requested data
     out.write(bytes.slice(start, end + 1), end + 1 - start);

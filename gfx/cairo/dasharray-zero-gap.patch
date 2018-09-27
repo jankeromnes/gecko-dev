@@ -2,14 +2,14 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 --- a/gfx/cairo/cairo/src/cairo-quartz-surface.c
 +++ b/gfx/cairo/cairo/src/cairo-quartz-surface.c
 @@ -2573,29 +2573,43 @@ static cairo_int_status_t
- 
+
      if (style->dash && style->num_dashes) {
  #define STATIC_DASH 32
  	cairo_quartz_float_t sdash[STATIC_DASH];
  	cairo_quartz_float_t *fdash = sdash;
  	unsigned int max_dashes = style->num_dashes;
  	unsigned int k;
- 
+
 -	if (style->num_dashes%2)
 -	    max_dashes *= 2;
 -	if (max_dashes > STATIC_DASH)
@@ -52,9 +52,9 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +	    CGContextSetLineDash (state.context, 0, NULL, 0);
      } else
  	CGContextSetLineDash (state.context, 0, NULL, 0);
- 
- 
+
+
      _cairo_quartz_cairo_path_to_quartz_context (path, state.context);
- 
+
      _cairo_quartz_cairo_matrix_to_quartz (ctm, &strokeTransform);
      CGContextConcatCTM (state.context, strokeTransform);

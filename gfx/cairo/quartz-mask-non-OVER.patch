@@ -5,25 +5,25 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 --- a/gfx/cairo/cairo/src/cairo-quartz-surface.c
 +++ b/gfx/cairo/cairo/src/cairo-quartz-surface.c
 @@ -2734,17 +2734,19 @@ _cairo_quartz_surface_mask (void *abstra
- 
+
      if (IS_EMPTY(surface))
  	return CAIRO_STATUS_SUCCESS;
- 
+
      rv = _cairo_surface_clipper_set_clip (&surface->clipper, clip);
      if (unlikely (rv))
  	return rv;
- 
+
 -    if (mask->type == CAIRO_PATTERN_TYPE_SOLID) {
 +    /* Using CGContextSetAlpha to implement mask alpha doesn't work for all operators. */
 +    if (mask->type == CAIRO_PATTERN_TYPE_SOLID &&
 +        op == CAIRO_OPERATOR_OVER) {
  	/* This is easy; we just need to paint with the alpha. */
  	cairo_solid_pattern_t *solid_mask = (cairo_solid_pattern_t *) mask;
- 
+
  	CGContextSetAlpha (surface->cgContext, solid_mask->color.alpha);
  	rv = _cairo_quartz_surface_paint (surface, op, source, clip);
  	CGContextSetAlpha (surface->cgContext, 1.0);
- 
+
  	return rv;
 diff --git a/layout/reftests/bugs/579985-1-ref.html b/layout/reftests/bugs/579985-1-ref.html
 new file mode 100644

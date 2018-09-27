@@ -597,7 +597,7 @@ public:
     Locale getLocale(ULocDataLocaleType type, UErrorCode& status) const;
 
     /* The following type and kCapContextUsageTypeCount cannot be #ifndef U_HIDE_INTERNAL_API,
-       they are needed for .h file declarations. */ 
+       they are needed for .h file declarations. */
     /**
      * Constants for capitalization context usage types.
      * @internal
@@ -814,7 +814,7 @@ private:
      * entry containing the localized names for a single TimeZone.
      *
      * Each such row contains (with i ranging from 0..n-1):
-     * 
+     *
      * zoneStrings[i][0] - time zone ID
      *  example: America/Los_Angeles
      * zoneStrings[i][1] - long name of zone in standard time
@@ -900,7 +900,7 @@ private:
     int32_t         fStandaloneNarrowDayPeriodsCount;
 
 private:
-    /** valid/actual locale information 
+    /** valid/actual locale information
      *  these are always ICU locales, so the length should not be a problem
      */
     char validLocale[ULOC_FULLNAME_CAPACITY];

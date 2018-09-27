@@ -28,11 +28,11 @@ var ctx = canvas.getContext('2d');
                                 var colorBottom = 'rgba(0,255,0,1)';
                                 var inset               = 10;
                                 var grad                = ctx.createLinearGradient(inset, inset, inset, inset + 30);
-                                
+
                                 // add color stops
                                 grad.addColorStop(0, colorTop);
                                 grad.addColorStop(1, colorBottom);
-                                
+
                                 ctx.fillStyle               = grad;
                                 ctx.textBaseline    = 'top';
                                 ctx.font                    = '110px sans-serif'

@@ -12,14 +12,14 @@ Program received signal SIGSEGV, Segmentation fault.
 (gdb) list
 605	    child->SetAttr(kNameSpaceID_None, nsGkAtoms::ordinal, ordinal, PR_TRUE);
 606	  }
-607	
+607
 608	  nsTreeColumns::InvalidateColumns();
-609	
+609
 610	  mTree->Invalidate();
-611	
+611
 612	  return NS_OK;
 613	}
-614	
+614
 (gdb) p mTree
 $9 = (nsITreeBoxObject *) 0x0
 

@@ -50,7 +50,7 @@ impl<A, B> Sink for Fanout<A, B>
     type SinkError = A::SinkError;
 
     fn start_send(
-        &mut self, 
+        &mut self,
         item: Self::SinkItem
     ) -> StartSend<Self::SinkItem, Self::SinkError> {
         // Attempt to complete processing any outstanding requests.
@@ -85,7 +85,7 @@ impl<A, B> Sink for Fanout<A, B>
             Ok(Async::Ready(()))
         } else {
             Ok(Async::NotReady)
-        } 
+        }
     }
 }
 

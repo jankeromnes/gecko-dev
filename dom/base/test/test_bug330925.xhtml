@@ -51,19 +51,19 @@ function init()
   is(SpecialPowers.unwrap(d.getBindingParent(d.getAnonymousNodes(t)[0])),
      t,
      "Wrong binding parent for anonymous node");
-     
+
   is(SpecialPowers.unwrap(d.getBindingParent(d.getAnonymousNodes(t)[1].childNodes[0])),
      t,
      "Wrong binding parent for child of anonymous node");
-     
-  is(d.getBindingParent(t), 
+
+  is(d.getBindingParent(t),
      null,
      "Non-anonymous node should not have a binding parent");
-     
-  is(d.getBindingParent(document.documentElement), 
+
+  is(d.getBindingParent(document.documentElement),
      null,
      "Document element should not have a binding parent");
-     
+
   SimpleTest.finish();
 }
 

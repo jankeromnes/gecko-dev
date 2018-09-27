@@ -23,6 +23,6 @@ for (var j=0; j<UBOUND; j++)
 
   printStatus(j);
 }
- 
+
 reportCompare(expect, actual, summary);
 

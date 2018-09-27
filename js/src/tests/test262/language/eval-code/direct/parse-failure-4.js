@@ -16,7 +16,7 @@ try {
 } catch(e) {
   if ((e instanceof SyntaxError) !== true) {
     $ERROR('#1.2: break must throw SyntaxError. Actual: ' + (e));
-  }  
+  }
 }
 
 //CHECK#2
@@ -26,11 +26,11 @@ try {
        eval("break;");
     }
   }
-  $ERROR('#2.1: break must throw SyntaxError. Actual: ' + (eval("break;")));    
+  $ERROR('#2.1: break must throw SyntaxError. Actual: ' + (eval("break;")));
 } catch(e) {
-  if ((e instanceof SyntaxError) !== true) {   
+  if ((e instanceof SyntaxError) !== true) {
     $ERROR('#2.2: break must throw SyntaxError. Actual: ' + (e));
-  }  
+  }
 }
 
 reportCompare(0, 0);

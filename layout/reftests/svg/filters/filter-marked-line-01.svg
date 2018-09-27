@@ -7,7 +7,7 @@
     Filtering the 'line' should not cause the mark (lime 'circle') to be clipped.
   </desc>
   <defs>
-    <marker id="marker" markerWidth="200" markerHeight="200" refX="100" refY="100" 
+    <marker id="marker" markerWidth="200" markerHeight="200" refX="100" refY="100"
       markerUnits="userSpaceOnUse">
       <circle fill="lime" r="100" cx="100" cy="100"/>
     </marker>

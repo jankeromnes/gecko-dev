@@ -124,7 +124,7 @@ static SRes ThreadFunc2(CMtCoderThread *t)
     size_t size;
     const Byte *inData;
     UInt64 readProcessed = 0;
-    
+
     RINOK_THREAD(Event_Wait(&mtc->readEvent))
 
     /* after Event_Wait(&mtc->readEvent) we must call Event_Set(&mtc->readEvent) in any case to unlock another threads */
@@ -135,7 +135,7 @@ static SRes ThreadFunc2(CMtCoderThread *t)
     }
 
     res = MtProgress_GetError(&mtc->mtProgress);
-    
+
     size = 0;
     inData = NULL;
     finished = True;
@@ -237,10 +237,10 @@ static SRes ThreadFunc2(CMtCoderThread *t)
       bufIndex = mtc->freeBlockHead;
       mtc->freeBlockHead = mtc->freeBlockList[bufIndex];
       CriticalSection_Leave(&mtc->cs);
-      
+
       res = mtc->mtCallback->Code(mtc->mtCallbackObject, t->index, bufIndex,
           mtc->inStream ? t->inBuf : inData, size, finished);
-      
+
       // MtProgress_Reinit(&mtc->mtProgress, t->index);
 
       if (res != SZ_OK)
@@ -253,7 +253,7 @@ static SRes ThreadFunc2(CMtCoderThread *t)
       block->bufIndex = bufIndex;
       block->finished = finished;
     }
-    
+
     #ifdef MTCODER__USE_WRITE_THREAD
       RINOK_THREAD(Event_Set(&mtc->writeEvents[bi]))
     #else
@@ -297,20 +297,20 @@ static SRes ThreadFunc2(CMtCoderThread *t)
           Bool isReady;
 
           CriticalSection_Enter(&mtc->cs);
-          
+
           if (bufIndex != (unsigned)(int)-1)
           {
             mtc->freeBlockList[bufIndex] = mtc->freeBlockHead;
             mtc->freeBlockHead = bufIndex;
           }
-          
+
           isReady = mtc->ReadyBlocks[wi];
-          
+
           if (isReady)
             mtc->ReadyBlocks[wi] = False;
           else
             mtc->writeIndex = wi;
-          
+
           CriticalSection_Leave(&mtc->cs);
 
           RINOK_THREAD(Semaphore_Release1(&mtc->blocksSemaphore))
@@ -329,7 +329,7 @@ static SRes ThreadFunc2(CMtCoderThread *t)
       }
     }
     #endif
-      
+
     if (finished || res != SZ_OK)
       return 0;
   }
@@ -352,7 +352,7 @@ static THREAD_FUNC_RET_TYPE THREAD_FUNC_CALL_TYPE ThreadFunc(void *pp)
       {
         MtProgress_SetError(&mtc->mtProgress, res);
       }
-      
+
       #ifndef MTCODER__USE_WRITE_THREAD
       {
         unsigned numFinished = (unsigned)InterlockedIncrement(&mtc->numFinishedThreads);
@@ -370,7 +370,7 @@ static THREAD_FUNC_RET_TYPE THREAD_FUNC_CALL_TYPE ThreadFunc(void *pp)
 void MtCoder_Construct(CMtCoder *p)
 {
   unsigned i;
-  
+
   p->blockSize = 0;
   p->numThreadsMax = 0;
   p->expectedDataSize = (UInt64)(Int64)-1;
@@ -459,7 +459,7 @@ SRes MtCoder_Code(CMtCoder *p)
   if (numThreads > MTCODER__THREADS_MAX)
     numThreads = MTCODER__THREADS_MAX;
   numBlocksMax = MTCODER__GET_NUM_BLOCKS_FROM_THREADS(numThreads);
-  
+
   if (p->blockSize < ((UInt32)1 << 26)) numBlocksMax++;
   if (p->blockSize < ((UInt32)1 << 24)) numBlocksMax++;
   if (p->blockSize < ((UInt32)1 << 22)) numBlocksMax++;
@@ -559,7 +559,7 @@ SRes MtCoder_Code(CMtCoder *p)
             if (res != SZ_OK)
               MtProgress_SetError(&p->mtProgress, res);
           }
-          
+
           CriticalSection_Enter(&p->cs);
           {
             p->freeBlockList[bufIndex] = p->freeBlockHead;
@@ -567,7 +567,7 @@ SRes MtCoder_Code(CMtCoder *p)
           }
           CriticalSection_Leave(&p->cs);
         }
-        
+
         RINOK_THREAD(Semaphore_Release1(&p->blocksSemaphore))
 
         if (finished)

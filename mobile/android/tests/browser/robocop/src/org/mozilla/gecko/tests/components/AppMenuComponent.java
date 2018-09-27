@@ -209,7 +209,7 @@ public class AppMenuComponent extends BaseComponent {
         pressMenuItem(parentMenuItemTitle);
 
         // Child menu item is not pressed yet, Click on it.
-        pressMenuItem(childMenuItemTitle);        
+        pressMenuItem(childMenuItemTitle);
     }
 
     public void pressMenuItem(MenuItem menuItem) {

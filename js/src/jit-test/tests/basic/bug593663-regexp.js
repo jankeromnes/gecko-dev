@@ -1,4 +1,4 @@
-/* 
+/*
  * Ensure that flat matches with metachars in them don't have their metachars
  * interpreted as special.
  */

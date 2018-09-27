@@ -12,7 +12,7 @@
 
 /*! @category   nsMacCursor (PrivateMethods)
     @abstract   Private methods internal to the nsMacCursor class.
-    @discussion <code>nsMacCursor</code> is effectively an abstract class. It does not define complete 
+    @discussion <code>nsMacCursor</code> is effectively an abstract class. It does not define complete
                 behaviour in and of itself, the subclasses defined in this file provide the useful implementations.
 */
 @interface nsMacCursor (PrivateMethods)
@@ -216,7 +216,7 @@ INIT_FAILURE:
 
 - (void) unset
 {
-  [self destroyTimer];    
+  [self destroyTimer];
 }
 
 - (BOOL) isAnimated

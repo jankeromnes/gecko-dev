@@ -19,7 +19,7 @@ struct CEncProps
   UInt32 MemSize;
   UInt32 ReduceSize;
   int Order;
-  
+
   CEncProps()
   {
     MemSize = (UInt32)(Int32)-1;

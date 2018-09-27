@@ -6,10 +6,10 @@ diff --git a/modules/fdlibm/src/fdlibm.h b/modules/fdlibm/src/fdlibm.h
   * from: @(#)fdlibm.h 5.1 93/09/24
   * $FreeBSD$
   */
- 
+
  #ifndef _MATH_H_
  #define	_MATH_H_
- 
+
 -#include <sys/cdefs.h>
 -#include <sys/_types.h>
 -#include <machine/_limits.h>
@@ -229,29 +229,29 @@ diff --git a/modules/fdlibm/src/fdlibm.h b/modules/fdlibm/src/fdlibm.h
 -double	cos(double);
 -double	sin(double);
 -double	tan(double);
- 
+
  double	cosh(double);
  double	sinh(double);
  double	tanh(double);
- 
+
  double	exp(double);
 -double	frexp(double, int *);	/* fundamentally !__pure2 */
 -double	ldexp(double, int);
  double	log(double);
  double	log10(double);
 -double	modf(double, double *);	/* fundamentally !__pure2 */
- 
+
  double	pow(double, double);
  double	sqrt(double);
 +double	fabs(double);
- 
+
 -double	ceil(double);
 -double	fabs(double) __pure2;
  double	floor(double);
 -double	fmod(double, double);
 +double	trunc(double);
 +double	ceil(double);
- 
+
 -/*
 - * These functions are not in C90.
 - */
@@ -362,7 +362,7 @@ diff --git a/modules/fdlibm/src/fdlibm.h b/modules/fdlibm/src/fdlibm.h
 -
 -float	powf(float, float);
 -float	sqrtf(float);
- 
+
  float	ceilf(float);
 -float	fabsf(float) __pure2;
  float	floorf(float);
@@ -374,7 +374,7 @@ diff --git a/modules/fdlibm/src/fdlibm.h b/modules/fdlibm/src/fdlibm.h
 -float	hypotf(float, float);
 -float	lgammaf(float);
 -float	tgammaf(float);
- 
+
 -float	acoshf(float);
 -float	asinhf(float);
 -float	atanhf(float);
@@ -394,7 +394,7 @@ diff --git a/modules/fdlibm/src/fdlibm.h b/modules/fdlibm/src/fdlibm.h
 -float	scalblnf(float, long);
 -float	scalbnf(float, int);
  float	truncf(float);
- 
+
 -float	fdimf(float, float);
 -float	fmaf(float, float, float);
 -float	fmaxf(float, float) __pure2;

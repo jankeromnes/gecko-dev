@@ -47,7 +47,7 @@ if ((objectx.prop = false, objecty.prop) !== objecty.prop) {
 } else {
   if (objectx.prop !== false) {
     $ERROR('#6: var objectx = new Object(); var objecty = new Object(); objectx.prop = true; objecty.prop = 1; objectx.prop = false, objecty.prop; objectx.prop === false');
-  } 
+  }
 }
 
 reportCompare(0, 0);

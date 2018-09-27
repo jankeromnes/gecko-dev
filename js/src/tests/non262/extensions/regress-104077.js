@@ -40,7 +40,7 @@ var expectedvalues = [];
 function addValues_3(obj)
 {
   var sum = 0;
- 
+
   with (obj)
   {
     try

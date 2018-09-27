@@ -9,7 +9,7 @@
  * The purpose of this test and the sproc_p.c test is to test the shutdown
  * of all the IRIX sprocs in a program when one of them dies due to an error.
  *
- * There are three sprocs in this test: the parent, the child, and the 
+ * There are three sprocs in this test: the parent, the child, and the
  * grandchild.  The parent and child sprocs never stop on their own.
  * The grandchild sproc gets a segmentation fault and dies.  You should
  * You should use "ps" to see if the parent and child sprocs are killed

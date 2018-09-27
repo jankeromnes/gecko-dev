@@ -23,13 +23,13 @@ Expect: feed.items.queryElementAt(1, Components.interfaces.nsIFeedEntry).title.t
   <rights type="xhtml">
     <div xmlns="http://www.w3.org/1999/xhtml"><i>test</i> rights</div>
   </rights>
-  
+
 
   <entry></entry>
 
   <entry foo:bar="baz">
     <title>test</title>
-    
+
   </entry>
 
 </feed>

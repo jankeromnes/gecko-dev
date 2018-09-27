@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var d = new Date();
   d.setFullYear();
   d.setFullYear(2006);

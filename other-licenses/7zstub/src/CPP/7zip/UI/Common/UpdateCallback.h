@@ -126,7 +126,7 @@ public:
 
   const CDirItems *DirItems;
   const CDirItem *ParentDirItem;
-  
+
   const CArc *Arc;
   CMyComPtr<IInArchive> Archive;
   const CObjectVector<CArcItem> *ArcItems;

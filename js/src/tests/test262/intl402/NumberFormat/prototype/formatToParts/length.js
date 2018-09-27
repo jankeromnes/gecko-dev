@@ -2,7 +2,7 @@
 // This code is governed by the license found in the LICENSE file.
 
 /*---
-description: Intl.NumberFormat.prototype.formatToParts.length. 
+description: Intl.NumberFormat.prototype.formatToParts.length.
 includes: [propertyHelper.js]
 ---*/
 

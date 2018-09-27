@@ -89,7 +89,7 @@ class StabsReader {
   // actual symbol table; UNITIZED should be true when parsing Linux stabs,
   // false when parsing Mac OS X STABS. For details, see:
   // http://sourceware.org/gdb/current/onlinedocs/stabs/Stab-Section-Basics.html
-  // 
+  //
   // Note that, in ELF, the .stabstr section should be found using the
   // 'sh_link' field of the .stab section header, not by name.
   StabsReader(const uint8_t *stab,    size_t stab_size,
@@ -102,7 +102,7 @@ class StabsReader {
   // continue to process until we reach the end of the section.  If we
   // processed the entire section and all handlers returned true,
   // return true.  If any handler returned false, return false.
-  // 
+  //
   // This is only meant to be called once per StabsReader instance;
   // resuming a prior processing pass that stopped abruptly isn't supported.
   bool Process();
@@ -301,7 +301,7 @@ class StabsHandler {
   // the function's ending address is not available, and the consumer
   // must infer it by other means.
   virtual bool EndFunction(uint64_t address) { return true; }
-  
+
   // Report that the code at ADDRESS is attributable to line NUMBER of
   // the source file named FILENAME.  The caller must infer the ending
   // address of the line.

@@ -169,7 +169,7 @@ DoIO(void)
     }
 
     /*
-     * Make sure it has proper null byte to mark end of string 
+     * Make sure it has proper null byte to mark end of string
      */
 
     buf[sizeof(buf) - 1] = '\0';
@@ -222,7 +222,7 @@ int main(int argc, char **argv)
 			 * nspr may handle SIGCLD signal
 			 */
 			if ((rv < 0) && (errno == ECHILD)) {
-			} else 
+			} else
 #endif
 			{
 				fprintf(stderr, "waitpid failed: %d\n", errno);

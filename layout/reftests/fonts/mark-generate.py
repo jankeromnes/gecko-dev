@@ -50,11 +50,11 @@ for codepoint in range(ord("A"), ord("A") + 1):
             f.upos = upos
             f.uwidth = 100
             f.copyright = "Copyright (c) 2008 Mozilla Corporation"
-    
+
             g = f.createChar(codepoint, charname)
             g.importOutlines("mark" + mark + "-glyph.svg")
             g.width = width
-    
+
             f.generate("mark" + mark + charname + "-" + uposname +
                        "underline.ttf")
 

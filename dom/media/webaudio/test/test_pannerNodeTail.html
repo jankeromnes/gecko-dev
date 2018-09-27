@@ -190,7 +190,7 @@ function startTest() {
   // Start audioprocess events before source delays are connected.
   referenceProcessor.connect(ctx.destination);
 
-  // The test ScriptProcessor will record output of testPanners. 
+  // The test ScriptProcessor will record output of testPanners.
   // Create it now so that it is synchronized with the referenceProcessor.
   testProcessor = ctx.createScriptProcessor(bufferSize, 2, 0);
   testProcessor.onaudioprocess = onTestOutput;

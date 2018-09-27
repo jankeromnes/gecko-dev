@@ -13,7 +13,7 @@ info: |
   2. Let status be the result of performing PropertyDefinitionEvaluation of
      PropertyDefinitionList with arguments obj and true.
   3. ReturnIfAbrupt(status).
-  4. Return obj. 
+  4. Return obj.
 
   14.3.8 Runtime Semantics: PropertyDefinitionEvaluation
 

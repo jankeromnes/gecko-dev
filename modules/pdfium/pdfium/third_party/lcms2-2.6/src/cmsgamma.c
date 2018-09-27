@@ -68,7 +68,7 @@ static _cmsParametricCurvesCollection DefaultCurves = {
 
 // Duplicates the zone of memory used by the plug-in in the new context
 static
-void DupPluginCurvesList(struct _cmsContext_struct* ctx, 
+void DupPluginCurvesList(struct _cmsContext_struct* ctx,
                                                const struct _cmsContext_struct* src)
 {
    _cmsCurvesPluginChunkType newHead = { NULL };
@@ -84,15 +84,15 @@ void DupPluginCurvesList(struct _cmsContext_struct* ctx,
         entry = entry ->Next) {
 
             _cmsParametricCurvesCollection *newEntry = ( _cmsParametricCurvesCollection *) _cmsSubAllocDup(ctx ->MemPool, entry, sizeof(_cmsParametricCurvesCollection));
-   
-            if (newEntry == NULL) 
+
+            if (newEntry == NULL)
                 return;
 
             // We want to keep the linked list order, so this is a little bit tricky
             newEntry -> Next = NULL;
             if (Anterior)
                 Anterior -> Next = newEntry;
-     
+
             Anterior = newEntry;
 
             if (newHead.ParametricCurves == NULL)
@@ -103,7 +103,7 @@ void DupPluginCurvesList(struct _cmsContext_struct* ctx,
 }
 
 // The allocator have to follow the chain
-void _cmsAllocCurvesPluginChunk(struct _cmsContext_struct* ctx, 
+void _cmsAllocCurvesPluginChunk(struct _cmsContext_struct* ctx,
                                 const struct _cmsContext_struct* src)
 {
     _cmsAssert(ctx != NULL);
@@ -694,13 +694,13 @@ cmsToneCurve* CMSEXPORT cmsBuildTabulatedToneCurveFloat(cmsContext ContextID, cm
     Seg[2].x0 = 1.0;
     Seg[2].x1 = PLUS_INF;
     Seg[2].Type = 6;
-    
+
     Seg[2].Params[0] = 1;
     Seg[2].Params[1] = 0;
     Seg[2].Params[2] = 0;
     Seg[2].Params[3] = values[nEntries-1];
     Seg[2].Params[4] = 0;
-    
+
 
     return cmsBuildSegmentedToneCurve(ContextID, 3, Seg);
 }
@@ -818,7 +818,7 @@ void CMSEXPORT cmsFreeToneCurveTriple(cmsToneCurve* Curve[3])
 
 // Duplicate a gamma table
 cmsToneCurve* CMSEXPORT cmsDupToneCurve(const cmsToneCurve* In)
-{   
+{
 	// Xiaochuan Liu
 	// fix openpdf bug(mantis id:0055683, google id:360198)
 	// the function CurveSetElemTypeFree in cmslut.c also needs to check pointer
@@ -932,9 +932,9 @@ cmsToneCurve* CMSEXPORT cmsReverseToneCurveEx(cmsInt32Number nResultSamples, con
     _cmsAssert(InCurve != NULL);
 
     // Try to reverse it analytically whatever possible
- 
-    if (InCurve ->nSegments == 1 && InCurve ->Segments[0].Type > 0 && 
-        /* InCurve -> Segments[0].Type <= 5 */ 
+
+    if (InCurve ->nSegments == 1 && InCurve ->Segments[0].Type > 0 &&
+        /* InCurve -> Segments[0].Type <= 5 */
         GetParametricCurveByType(InCurve ->InterpParams->ContextID, InCurve ->Segments[0].Type, NULL) != NULL) {
 
         return cmsBuildParametricToneCurve(InCurve ->InterpParams->ContextID,

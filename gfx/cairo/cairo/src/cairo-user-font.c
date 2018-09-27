@@ -44,7 +44,7 @@
  * SECTION:cairo-user-fonts
  * @Title:User Fonts
  * @Short_Description: Font support with font data provided by the user
- * 
+ *
  * The user-font feature allows the cairo user to provide drawings for glyphs
  * in a font.  This is most useful in implementing fonts in non-standard
  * formats, like SVG fonts and Flash fonts, but can also be used by games and

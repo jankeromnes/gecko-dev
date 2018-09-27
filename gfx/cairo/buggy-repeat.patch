@@ -4,7 +4,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-display.c b/gfx/cairo/cairo/src/cair
 @@ -216,6 +216,8 @@ _cairo_xlib_display_get (Display *dpy)
      XExtCodes *codes;
      int major_unused, minor_unused;
- 
+
 +    static int buggy_repeat_force = -1;
 +
      /* There is an apparent deadlock between this mutex and the
@@ -34,6 +34,6 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-display.c b/gfx/cairo/cairo/src/cair
 +
 +    if (buggy_repeat_force != -2)
 +        display->buggy_repeat = (buggy_repeat_force == 1);
- 
+
      display->next = _cairo_xlib_display_list;
      _cairo_xlib_display_list = display;

@@ -38,7 +38,7 @@ function testUserInput() {
      "Change event dispatched when setting the value of the input element");
 
   input.value = "";
-  is(inputChange, 1, 
+  is(inputChange, 1,
      "Change event dispatched when setting the value of the input element (2).");
 
   SpecialPowers.wrap(input).setUserInput("foo");

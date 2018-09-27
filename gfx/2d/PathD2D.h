@@ -77,7 +77,7 @@ public:
     , mFillRule(aFillRule)
     , mBackendType(aBackendType)
   {}
-  
+
   virtual BackendType GetBackendType() const { return mBackendType; }
 
   virtual already_AddRefed<PathBuilder> CopyToBuilder(FillRule aFillRule) const;

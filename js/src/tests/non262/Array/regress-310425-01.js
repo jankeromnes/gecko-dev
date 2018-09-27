@@ -11,7 +11,7 @@ var expect = '';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 expect = -1;
 actual = [].lastIndexOf(undefined, -1);
 reportCompare(expect, actual, summary);

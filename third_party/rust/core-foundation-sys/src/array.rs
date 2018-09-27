@@ -41,7 +41,7 @@ extern {
     pub fn CFArrayCreate(allocator: CFAllocatorRef, values: *const *const c_void,
                      numValues: CFIndex, callBacks: *const CFArrayCallBacks) -> CFArrayRef;
     pub fn CFArrayCreateCopy(allocator: CFAllocatorRef , theArray: CFArrayRef) -> CFArrayRef;
-    
+
     // CFArrayBSearchValues
     // CFArrayContainsValue
     pub fn CFArrayGetCount(theArray: CFArrayRef) -> CFIndex;

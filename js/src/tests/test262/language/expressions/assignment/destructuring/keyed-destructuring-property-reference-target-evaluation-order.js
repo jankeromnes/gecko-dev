@@ -13,7 +13,7 @@ info: |
     1. Let name be the result of evaluating PropertyName.
     2. ReturnIfAbrupt(name).
     3. Return the result of performing KeyedDestructuringAssignmentEvaluation of
-       AssignmentElement with value and name as the arguments. 
+       AssignmentElement with value and name as the arguments.
 
     12.15.5.4 Runtime Semantics: KeyedDestructuringAssignmentEvaluation
 

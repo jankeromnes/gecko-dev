@@ -28,7 +28,7 @@ use serde::{Serialize, Serializer, Deserialize, Deserializer};
 /// }
 ///
 /// The same format is used by both Graph and StableGraph.
-/// 
+///
 /// For graph there are restrictions:
 /// node_holes is always empty and edges are always Some
 ///

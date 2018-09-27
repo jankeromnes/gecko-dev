@@ -30,7 +30,7 @@ struct null_markers  {
 };
 template<class VertexSource,
          class Generator,
-         class Markers = null_markers> class conv_adaptor_vcgen 
+         class Markers = null_markers> class conv_adaptor_vcgen
 {
     enum status {
         initial,

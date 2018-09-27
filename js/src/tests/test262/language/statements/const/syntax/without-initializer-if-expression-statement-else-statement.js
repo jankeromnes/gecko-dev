@@ -4,7 +4,7 @@
 /*---
 es6id: 13.1
 description: >
-    const declarations without initialisers in statement positions: 
+    const declarations without initialisers in statement positions:
     if ( Expression ) Statement else Statement
 negative:
   phase: parse

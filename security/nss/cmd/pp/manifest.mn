@@ -6,11 +6,11 @@
 CORE_DEPTH	= ../..
 
 # MODULE public and private header  directories are implicitly REQUIRED.
-MODULE = nss 
+MODULE = nss
 
 # This next line is used by .mk files
 # and gets translated into $LINCS in manifest.mnw
-REQUIRES = seccmd dbm 
+REQUIRES = seccmd dbm
 
 DEFINES = -DNSPR20
 

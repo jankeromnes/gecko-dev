@@ -74,7 +74,7 @@ public final class WebvttParserUtil {
     }
     return Float.parseFloat(s.substring(0, s.length() - 1)) / 100;
   }
-  
+
   /**
    * Reads lines up to and including the next WebVTT cue header.
    *

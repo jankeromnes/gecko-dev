@@ -44,7 +44,7 @@ endm
 
 MY_PROLOG macro crc_end:req
     MY_PUSH_4_REGS
-    
+
     mov     x0, x1
     mov     rN, num_VAR
     mov     r5, table_VAR
@@ -127,7 +127,7 @@ MY_PROC CrcUpdateT4, 4
     CRC_XOR x1, r3, 2
     CRC_XOR x1, r6, 0
     CRC_XOR x1, r0, 1
- 
+
     movzx   x0, x1_L
     movzx   x3, x1_H
     shr     x1, 16

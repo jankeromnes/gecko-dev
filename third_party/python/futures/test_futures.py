@@ -27,7 +27,7 @@ def reap_threads(func):
     If threading is unavailable this function does nothing.
     """
     @functools.wraps(func)
-    def decorator(*args): 
+    def decorator(*args):
         key = test_support.threading_setup()
         try:
             return func(*args)
@@ -48,7 +48,7 @@ def _assert_python(expected_success, *args, **env_vars):
     # caller is responsible to pass the full environment.
     if env_vars.pop('__cleanenv', None):
         env = {}
-    env.update(env_vars) 
+    env.update(env_vars)
     cmd_line.extend(args)
     p = subprocess.Popen(cmd_line, stdin=subprocess.PIPE,
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -76,7 +76,7 @@ def assert_python_ok(*args, **env_vars):
     return _assert_python(True, *args, **env_vars)
 
 
-def strip_python_stderr(stderr): 
+def strip_python_stderr(stderr):
     """Strip the stderr of a Python process from potential debug output
     emitted by the interpreter.
 

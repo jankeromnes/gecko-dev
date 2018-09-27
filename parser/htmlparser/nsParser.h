@@ -2,12 +2,12 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
- 
+
 /**
  * MODULE NOTES:
- * 
+ *
  *  This class does two primary jobs:
- *    1) It iterates the tokens provided during the 
+ *    1) It iterates the tokens provided during the
  *       tokenization process, identifing where elements
  *       begin and end (doing validation and normalization).
  *    2) It controls and coordinates with an instance of
@@ -29,13 +29,13 @@
  *        the correct section.
  *    4)  In the case of tags that belong in the BODY, we must
  *        ensure that our underlying document state reflects
- *        the appropriate context for our tag. 
+ *        the appropriate context for our tag.
  *
- *        For example,if we see a <TR>, we must ensure our 
+ *        For example,if we see a <TR>, we must ensure our
  *        document contains a table into which the row can
- *        be placed. This may result in "implicit containers" 
+ *        be placed. This may result in "implicit containers"
  *        created to ensure a well-formed document.
- *         
+ *
  */
 
 #ifndef NS_PARSER__
@@ -100,18 +100,18 @@ class nsParser final : public nsIParser,
     NS_IMETHOD_(void) SetContentSink(nsIContentSink* aSink) override;
 
     /**
-     * retrive the sink set into the parser 
+     * retrive the sink set into the parser
      * @update	gess5/11/98
      * @param   aSink is the new sink to be used by parser
      * @return  old sink, or nullptr
      */
     NS_IMETHOD_(nsIContentSink*) GetContentSink(void) override;
-    
+
     /**
      *  Call this method once you've created a parser, and want to instruct it
      *  about the command which caused the parser to be constructed. For example,
      *  this allows us to select a DTD which can do, say, view-source.
-     *  
+     *
      *  @update  gess 3/25/98
      *  @param   aCommand -- ptrs to string that contains command
      *  @return	 nada
@@ -123,7 +123,7 @@ class nsParser final : public nsIParser,
     /**
      *  Call this method once you've created a parser, and want to instruct it
      *  about what charset to load
-     *  
+     *
      *  @update  ftang 4/23/99
      *  @param   aCharset- the charset of a document
      *  @param   aCharsetSource- the source of the charset
@@ -139,7 +139,7 @@ class nsParser final : public nsIParser,
     }
 
     /**
-     * Cause parser to parse input from given URL 
+     * Cause parser to parse input from given URL
      * @update	gess5/11/98
      * @param   aURL is a descriptor for source document
      * @param   aListener is a listener to forward notifications to
@@ -155,7 +155,7 @@ class nsParser final : public nsIParser,
      */
     NS_IMETHOD ParseFragment(const nsAString& aSourceBuffer,
                              nsTArray<nsString>& aTagStack) override;
-                             
+
     /**
      * This method gets called when the tokens have been consumed, and it's time
      * to build the model via the content sink.
@@ -191,7 +191,7 @@ class nsParser final : public nsIParser,
      *  DTD and the parser. It allows the DTD to tell the parser that content
      *  that comes through (parser::parser(string)) but not consumed should
      *  propagate into the next string based parse call.
-     *  
+     *
      *  @update  gess 9/1/98
      *  @param   aState determines whether we propagate unused string content.
      *  @return  current state
@@ -203,7 +203,7 @@ class nsParser final : public nsIParser,
      * @update	gess5/11/98
      * @return  TRUE if all went well, otherwise FALSE
      */
-    virtual nsresult ResumeParse(bool allowIteration = true, 
+    virtual nsresult ResumeParse(bool allowIteration = true,
                                  bool aIsFinalChunk = false,
                                  bool aCanInterrupt = true);
 
@@ -221,7 +221,7 @@ class nsParser final : public nsIParser,
     CParserContext*   PopContext();
     CParserContext*   PeekContext() {return mParserContext;}
 
-    /** 
+    /**
      * Get the channel associated with this parser
      * @update harishd,gagan 07/17/01
      * @param aChannel out param that will contain the result
@@ -229,14 +229,14 @@ class nsParser final : public nsIParser,
      */
     NS_IMETHOD GetChannel(nsIChannel** aChannel) override;
 
-    /** 
+    /**
      * Get the DTD associated with this parser
      * @update vidur 9/29/99
      * @param aDTD out param that will contain the result
      * @return NS_OK if successful, NS_ERROR_FAILURE for runtime error
      */
     NS_IMETHOD GetDTD(nsIDTD** aDTD) override;
-  
+
     /**
      * Get the nsIStreamListener for this parser
      */
@@ -276,7 +276,7 @@ class nsParser final : public nsIParser,
      */
     virtual bool IsScriptCreated() override;
 
-    /**  
+    /**
      *  Set to parser state to indicate whether parsing tokens can be interrupted
      *  @param aCanInterrupt true if parser can be interrupted, false if it can not be interrupted.
      *  @update  kmcclusk 5/18/98
@@ -318,17 +318,17 @@ class nsParser final : public nsIParser,
     void Cleanup();
 
     /**
-     * 
+     *
      * @update	gess5/18/98
-     * @param 
+     * @param
      * @return
      */
     nsresult WillBuildModel(nsString& aFilename);
 
     /**
-     * 
+     *
      * @update	gess5/18/98
-     * @param 
+     * @param
      * @return
      */
     nsresult DidBuildModel(nsresult anErrorCode);
@@ -343,21 +343,21 @@ private:
      *  Part of the code sandwich, this gets called right before
      *  the tokenization process begins. The main reason for
      *  this call is to allow the delegate to do initialization.
-     *  
+     *
      *  @update  gess 3/25/98
-     *  @param   
+     *  @param
      *  @return  TRUE if it's ok to proceed
      */
     bool WillTokenize(bool aIsFinalChunk = false);
 
-   
+
     /**
      *  This is the primary control routine. It iteratively
      *  consumes tokens until an error occurs or you run out
      *  of data.
-     *  
+     *
      *  @update  gess 3/25/98
-     *  @return  error code 
+     *  @return  error code
      */
     nsresult Tokenize(bool aIsFinalChunk = false);
 
@@ -372,8 +372,8 @@ protected:
     //*********************************************
     // And now, some data members...
     //*********************************************
-    
-      
+
+
     CParserContext*              mParserContext;
     nsCOMPtr<nsIDTD>             mDTD;
     nsCOMPtr<nsIRequestObserver> mObserver;
@@ -384,7 +384,7 @@ protected:
     nsresult            mInternalState;
     nsresult            mStreamStatus;
     int32_t             mCharsetSource;
-    
+
     uint16_t            mFlags;
     uint32_t            mBlocked;
 
@@ -396,5 +396,5 @@ protected:
     bool                mIsAboutBlank;
 };
 
-#endif 
+#endif
 

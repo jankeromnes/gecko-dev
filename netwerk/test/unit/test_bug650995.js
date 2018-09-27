@@ -27,7 +27,7 @@ function setupChannel(suffix, value) {
     });
     var httpChan = chan.QueryInterface(Ci.nsIHttpChannel);
     httpChan.setRequestHeader("x-request", value, false);
-    
+
     return httpChan;
 }
 

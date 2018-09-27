@@ -5,7 +5,7 @@
 
 
 //
-// return a string representing the html content in html format 
+// return a string representing the html content in html format
 //
 function htmlString(node, indent)
 {
@@ -60,7 +60,6 @@ function htmlString(node, indent)
     return html;
 }
 
-htmlString(document.documentElement, "") 
+htmlString(document.documentElement, "")
 
 
-  

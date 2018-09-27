@@ -5,7 +5,7 @@
 /*
  *  Test that channels with different LoadInfo
  *  are stored in separate namespaces ("cookie jars")
- */ 
+ */
 
 XPCOMUtils.defineLazyGetter(this, "URL", function() {
   return "http://localhost:" + httpserver.identity.primaryPort;
@@ -27,20 +27,20 @@ function inChildProcess() {
 }
 
 // Test array:
-//  - element 0: name for cookie, used both to set and later to check 
+//  - element 0: name for cookie, used both to set and later to check
 //  - element 1: loadInfo (determines cookie namespace)
 //
 // TODO: bug 722850: make private browsing work per-app, and add tests.  For now
 // all values are 'false' for PB.
 
 var tests = [
-  { cookieName: 'LCC_App0_BrowF_PrivF', 
+  { cookieName: 'LCC_App0_BrowF_PrivF',
     originAttributes: new OriginAttributes(0, false, 0) },
-  { cookieName: 'LCC_App0_BrowT_PrivF', 
+  { cookieName: 'LCC_App0_BrowT_PrivF',
     originAttributes: new OriginAttributes(0, true, 0) },
-  { cookieName: 'LCC_App1_BrowF_PrivF', 
+  { cookieName: 'LCC_App1_BrowF_PrivF',
     originAttributes: new OriginAttributes(1, false, 0) },
-  { cookieName: 'LCC_App1_BrowT_PrivF', 
+  { cookieName: 'LCC_App1_BrowT_PrivF',
     originAttributes: new OriginAttributes(1, true, 0) },
 ];
 
@@ -61,7 +61,7 @@ function setCookie() {
   channel.asyncOpen2(new ChannelListener(setNextCookie, null));
 }
 
-function setNextCookie(request, data, context) 
+function setNextCookie(request, data, context)
 {
   if (++i == tests.length) {
     // all cookies set: switch to checking them
@@ -93,10 +93,10 @@ function completeCheckCookie(request, data, context) {
     var cookieToCheck = tests[j].cookieName;
     found = (cookiesSeen.includes(cookieToCheck));
     if (found && expectedCookie != cookieToCheck) {
-      do_throw("test index " + i + ": found unexpected cookie '" 
+      do_throw("test index " + i + ": found unexpected cookie '"
           + cookieToCheck + "': in '" + cookiesSeen + "'");
     } else if (!found && expectedCookie == cookieToCheck) {
-      do_throw("test index " + i + ": missing expected cookie '" 
+      do_throw("test index " + i + ": missing expected cookie '"
           + expectedCookie + "': in '" + cookiesSeen + "'");
     }
   }

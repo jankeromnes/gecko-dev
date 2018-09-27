@@ -73,7 +73,7 @@ enum arguments {
     ARG_QUIET
 };
 
-// prints out the standard usage method describing command line arguments, 
+// prints out the standard usage method describing command line arguments,
 // then bails out with the desired exit code
 static void usageAndDie(UErrorCode retCode) {
     fprintf((U_SUCCESS(retCode) ? stdout : stderr), "Usage: %s -trietype [-options] input-dictionary-file output-file\n", progName);
@@ -123,11 +123,11 @@ private:
     UChar32 transformConstant;
     int32_t transformType;
 public:
-    // constructs a new data dictionary. if there is an error, 
+    // constructs a new data dictionary. if there is an error,
     // it will be returned in status
     // isBytesTrie != 0 will produce a BytesTrieBuilder,
     // isBytesTrie == 0 will produce a UCharsTrieBuilder
-    DataDict(UBool isBytesTrie, UErrorCode &status) : bt(NULL), ut(NULL), 
+    DataDict(UBool isBytesTrie, UErrorCode &status) : bt(NULL), ut(NULL),
         transformConstant(0), transformType(DictionaryData::TRANSFORM_NONE) {
         if (isBytesTrie) {
             bt = new BytesTrieBuilder(status);
@@ -153,7 +153,7 @@ private:
                 exit(U_ILLEGAL_ARGUMENT_ERROR); // TODO: should return and print the line number
             }
             return (char)delta;
-        } else { // no such transform type 
+        } else { // no such transform type
             status = U_INTERNAL_PROGRAM_ERROR;
             return (char)c; // it should be noted this transform type will not generally work
         }
@@ -212,7 +212,7 @@ public:
     }
 
     int32_t getTransform() {
-        return (int32_t)(transformType | transformConstant); 
+        return (int32_t)(transformType | transformConstant);
     }
 };
 #endif
@@ -341,7 +341,7 @@ int  main(int argc, char **argv) {
     while (readLine(f.getAlias(), fileLine, status)) {
         lineCount++;
         if (fileLine.isEmpty()) continue;
- 
+
         // Parse word [spaces value].
         int32_t keyLen;
         for (keyLen = 0; keyLen < fileLine.length() && !u_isspace(fileLine[keyLen]); ++keyLen) {}

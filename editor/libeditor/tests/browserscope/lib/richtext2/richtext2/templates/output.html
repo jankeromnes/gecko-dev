@@ -45,7 +45,7 @@
 <HR>
 <!-- main output -->
 {% for s in suites %}
-  <H1 ID="{{ s.id }}"><A NAME="{{ s.id }}" HREF="#{{ s.id }}">{{ s.id }}</A> - {{ s.caption }}: 
+  <H1 ID="{{ s.id }}"><A NAME="{{ s.id }}" HREF="#{{ s.id }}">{{ s.id }}</A> - {{ s.caption }}:
     <SPAN ID="{{ s.id }}-{% ifequal s.id.0 'S' %}sel{% endifequal %}score">?/?</SPAN>
     {% ifnotequal s.id.0 "Q" %}{% ifnotequal s.id.0 "S" %}
     (Selection: <SPAN ID="{{ s.id }}-selscore">?/?</SPAN>)
@@ -130,8 +130,8 @@
       {% endfor %}{% endfor %}
     </TBODY>
   </TABLE>
-  {% endifequal %}{% endfor %}{% endfor %} 
-{% endfor %} 
+  {% endifequal %}{% endfor %}{% endfor %}
+{% endfor %}
 
 
 

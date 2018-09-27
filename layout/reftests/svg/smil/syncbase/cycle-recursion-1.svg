@@ -22,7 +22,7 @@
     change -> a: 3s-3.5s [Should break the cycle here]
     change -> b: 3s-4s
     change -> c: 0s-4s
-    etc. 
+    etc.
 
     If we break on the second change notice we should arrive at:
     a: 2s-2.5s

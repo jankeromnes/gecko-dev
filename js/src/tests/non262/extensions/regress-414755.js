@@ -26,9 +26,9 @@ function test()
     var b = 2e10;
     var c = 3e10;
 
-    return (a*2) * ((b*2) * c); 
+    return (a*2) * ((b*2) * c);
   }
- 
+
   if (typeof gczeal == 'function')
   {
     expect = f();

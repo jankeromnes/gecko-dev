@@ -16,7 +16,7 @@ if (eval("'MAX_VALUE'\u0009in\u0009Number") !== true) {
 
 //CHECK#2
 if (eval("'MAX_VALUE'\u000Bin\u000BNumber") !== true) {
-  $ERROR('#2: "MAX_VALUE"\\u000Bin\\u000BNumber === true');  
+  $ERROR('#2: "MAX_VALUE"\\u000Bin\\u000BNumber === true');
 }
 
 //CHECK#3
@@ -36,7 +36,7 @@ if (eval("'MAX_VALUE'\u00A0in\u00A0Number") !== true) {
 
 //CHECK#6
 if (eval("'MAX_VALUE'\u000Ain\u000ANumber") !== true) {
-  $ERROR('#6: "MAX_VALUE"\\u000Ain\\u000ANumber === true');  
+  $ERROR('#6: "MAX_VALUE"\\u000Ain\\u000ANumber === true');
 }
 
 //CHECK#7

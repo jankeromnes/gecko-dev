@@ -40,7 +40,7 @@ iter.next();
 var callCount = 0;
 var f;
 f = async function*([,]) {
-  
+
   callCount = callCount + 1;
 };
 

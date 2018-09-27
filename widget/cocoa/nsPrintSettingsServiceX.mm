@@ -201,15 +201,15 @@ nsPrintSettingsServiceX::ReadPrefs(nsIPrintSettings* aPS,
                                    uint32_t aFlags)
 {
   nsresult rv;
-  
+
   rv = nsPrintSettingsService::ReadPrefs(aPS, aPrinterName, aFlags);
   NS_ASSERTION(NS_SUCCEEDED(rv), "nsPrintSettingsService::ReadPrefs() failed");
-  
+
   RefPtr<nsPrintSettingsX> printSettingsX(do_QueryObject(aPS));
   if (!printSettingsX)
     return NS_ERROR_NO_INTERFACE;
   rv = printSettingsX->ReadPageFormatFromPrefs();
-  
+
   return NS_OK;
 }
 

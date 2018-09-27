@@ -38,7 +38,7 @@ combine_mask_ca (comp4_t *src, comp4_t *mask)
     xa = x >> A_SHIFT;
     UNcx4_MUL_UNcx4 (x, a);
     *(src) = x;
-    
+
     UNcx4_MUL_UNc (a, xa);
     *(mask) = a;
 }
@@ -1149,7 +1149,7 @@ PDF_NON_SEPARABLE_BLEND_MODE (hsl_luminosity)
  * come from each of the four areas of the picture -- areas covered by neither
  * A nor B, areas covered only by A, areas covered only by B and finally
  * areas covered by both A and B.
- * 
+ *
  * Disjoint			Conjoint
  * Fa		Fb		Fa		Fb
  * (0,0,0,0)	0		0		0		0

@@ -109,7 +109,7 @@ var popupTests = [
     is(document.popupNode, null, testname + " document.popupNode");
     is(document.tooltipNode, gButton, testname + " document.tooltipNode");
 
-    var child = $("childframe").contentDocument; 
+    var child = $("childframe").contentDocument;
     var evt = child.createEvent("Event");
     evt.initEvent("click", true, true);
     child.documentElement.dispatchEvent(evt);

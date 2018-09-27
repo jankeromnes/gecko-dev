@@ -2,7 +2,7 @@
 /*
  * Any copyright is dedicated to the Public Domain.
  * http://creativecommons.org/licenses/publicdomain/
- * Contributor: 
+ * Contributor:
  */
 var BUGNUMBER = 632003;
 var summary = 'The var statement should add the property to the global if it exists on the prototype';
@@ -37,7 +37,7 @@ function def_all(prefix)
     }
   }
   return builder;
-  
+
   function def(descriptor_seed)
   {
     var var_name = prefix + index;

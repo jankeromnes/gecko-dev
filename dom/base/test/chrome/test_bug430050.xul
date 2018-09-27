@@ -41,7 +41,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=430050
       }, true);
     document.documentElement.setAttribute("foo", "bar");
   }
-  
+
   SimpleTest.waitForExplicitFinish();
   addLoadEvent(startTest);
 

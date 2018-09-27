@@ -22,5 +22,5 @@ catch (e)
   assertEq(e instanceof TypeError, true,
            "No TypeError for String.prototype.match");
 }
- 
+
 reportCompare(expect, actual, summary);

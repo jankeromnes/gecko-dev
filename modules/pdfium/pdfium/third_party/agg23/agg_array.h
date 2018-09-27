@@ -156,7 +156,7 @@ pod_array<T>::operator = (const pod_array<T>&v)
     }
     return *this;
 }
-template<class T, unsigned S = 6> class pod_deque 
+template<class T, unsigned S = 6> class pod_deque
 {
 public:
     enum block_scale_e {
@@ -408,7 +408,7 @@ unsigned pod_deque<T, S>::byte_size() const
 {
     return m_size * sizeof(T);
 }
-class pod_allocator 
+class pod_allocator
 {
 public:
     void remove_all()

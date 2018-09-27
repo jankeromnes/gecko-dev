@@ -106,7 +106,7 @@ class WhichTestCase(unittest.TestCase):
             return os.path.samefile(path1, path2)
 
     def test_one_success(self):
-        os.environ["PATH"] += os.pathsep + self.tmpdir 
+        os.environ["PATH"] += os.pathsep + self.tmpdir
         output, error, retval = testsupport.run(self.which+' -q whichtestapp1')
         expectedOutput = os.path.join(self.tmpdir, "whichtestapp1")
         self.failUnless(self._match(output.strip(), expectedOutput),
@@ -116,7 +116,7 @@ class WhichTestCase(unittest.TestCase):
             "'which ...' should have returned 0: retval=%d" % retval)
 
     def test_two_successes(self):
-        os.environ["PATH"] += os.pathsep + self.tmpdir 
+        os.environ["PATH"] += os.pathsep + self.tmpdir
         apps = ['whichtestapp1', 'whichtestapp2']
         output, error, retval = testsupport.run(
             self.which + ' -q ' + ' '.join(apps))
@@ -131,13 +131,13 @@ class WhichTestCase(unittest.TestCase):
 
     if sys.platform.startswith("win"):
         def test_PATHEXT_failure(self):
-            os.environ["PATH"] += os.pathsep + self.tmpdir 
+            os.environ["PATH"] += os.pathsep + self.tmpdir
             output, error, retval = testsupport.run(self.which+' whichtestapp3')
             self.failUnless(retval == 1,
                 "'which ...' should have returned 1: retval=%d" % retval)
 
         def test_PATHEXT_success(self):
-            os.environ["PATH"] += os.pathsep + self.tmpdir 
+            os.environ["PATH"] += os.pathsep + self.tmpdir
             os.environ["PATHEXT"] += os.pathsep + '.wta'
             output, error, retval = testsupport.run(self.which+' whichtestapp3')
             expectedOutput = os.path.join(self.tmpdir, "whichtestapp3")
@@ -148,7 +148,7 @@ class WhichTestCase(unittest.TestCase):
                 "'which ...' should have returned 0: retval=%d" % retval)
 
         def test_exts(self):
-            os.environ["PATH"] += os.pathsep + self.tmpdir 
+            os.environ["PATH"] += os.pathsep + self.tmpdir
             output, error, retval = testsupport.run(self.which+' -e .wta whichtestapp3')
             expectedOutput = os.path.join(self.tmpdir, "whichtestapp3")
             self.failUnless(self._match(output.strip(), expectedOutput),

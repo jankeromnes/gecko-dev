@@ -78,7 +78,7 @@ function NtesMailInfo(){
 				sUserName = sUserName.substring(0, this.maxAccountLength) + "..";
 			}
 			this.$("dvNewMsg").style.display = "";		// 显示界面
-			
+
 			this.$("imgNewMsg").title = "您有"+ this.newCount +"封未读邮件";
 			this.$("lnkNewMsg").innerHTML = this.newCount > 999 ? "999+" : this.newCount; // 新邮件数目
 			if(this.newCount == 0){ // 邮件数为0或者大于0是显示不同的图标
@@ -88,7 +88,7 @@ function NtesMailInfo(){
 				this.$("imgNoNewMsg").style.display = "none";
 				this.$("imgNewMsg").style.display = "";
 			}
-			
+
 			this.$("lnkNewMsg").href = this.$("lnkMsgImg").href = this.getLoginUrl(); // 设置邮件数的链接
 		}else{
 			if(this.domain != "163.com" && location.hostname.indexOf("163.com") > -1){
@@ -124,12 +124,12 @@ function NtesMailInfo(){
 	this.redirected = false;						// 是否redirect
 	this.isHomePage = location.hostname == "www.163.com" ? true : false;
 	// 类型,show:显示数目页面, crossdomain:跨域跳转页面, init:引用js的163频道页面
-	this.type = (location.href.indexOf("/mailinfo/shownewmsg_0225.htm") > -1 ? "show" : (location.href.indexOf("/mailinfo/crossdomain_0225.htm") > -1 ? "crossdomain" : "init")); 
-	
+	this.type = (location.href.indexOf("/mailinfo/shownewmsg_0225.htm") > -1 ? "show" : (location.href.indexOf("/mailinfo/crossdomain_0225.htm") > -1 ? "crossdomain" : "init"));
+
 	this.getShowNewMsgUrl = function (){// 显示邮件数目信息页面
 		return "httpdisabled://p.mail."+ this.domain +"/mailinfo/shownewmsg_www_1222.htm";
 	};
-	
+
 	this.getNewCountUrl = function (){ // 获取新邮件接口url
 		return "httpdisabled://msg.mail."+ this.domain +"/cgi/mc?funcid=getusrnewmsgcnt&fid=1&addSubFdrs=1&language=0&style=0&template=newmsgres_setcookie.htm&username=" + this.username;
 	};
@@ -148,7 +148,7 @@ function NtesMailInfo(){
 		}
 		return oEntryUrl[this.domain];
 	};
-	
+
 	// if(!this.isLogin) return; // 如果没有登录直接返回
 	this.init(); // 初始化
 	this.render();// 生成html

@@ -192,8 +192,8 @@ NSCoordSaturatingAdd(nscoord a, nscoord b)
  * and (b), though.  (Under normal float math, those cases would return NaN
  * and -infinity, respectively.)
  */
-inline nscoord 
-NSCoordSaturatingSubtract(nscoord a, nscoord b, 
+inline nscoord
+NSCoordSaturatingSubtract(nscoord a, nscoord b,
                           nscoord infMinusInfResult)
 {
   VERIFY_COORD(a);
@@ -358,7 +358,7 @@ inline int32_t NSToIntRoundUp(double aValue)
   return int32_t(floor(aValue + 0.5));
 }
 
-/* 
+/*
  * App Unit/Pixel conversions
  */
 inline nscoord NSFloatPixelsToAppUnits(float aPixels, float aAppUnitsPerPixel)
@@ -403,7 +403,7 @@ inline float NSCoordScale(nscoord aCoord, int32_t aFromAPP, int32_t aToAPP)
 #define CM_PER_INCH_FLOAT             2.54f
 #define MM_PER_INCH_FLOAT             25.4f
 
-/* 
+/*
  * Twips/unit conversions
  */
 inline float NSUnitsToTwips(float aValue, float aPointsPerUnit)

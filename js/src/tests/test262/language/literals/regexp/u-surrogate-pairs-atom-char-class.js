@@ -9,7 +9,7 @@ info: |
   The production Atom :: CharacterClass evaluates as follows:
 
   1. Evaluate CharacterClass to obtain a CharSet A and a Boolean invert.
-  2. Call CharacterSetMatcher(A, invert) and return its Matcher result. 
+  2. Call CharacterSetMatcher(A, invert) and return its Matcher result.
 
   Runtime Semantics: CharacterSetMatcher Abstract Operation
 

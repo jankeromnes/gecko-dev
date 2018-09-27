@@ -12,7 +12,7 @@ ExclusiveOS: Linux
 BuildRoot: %_topdir/%{name}-root
 
 Requires: sun-nspr >= 4.1.2
-        
+
 %description
 Network Security Services (NSS) is a set of libraries designed
 to support cross-platform development of security-enabled server

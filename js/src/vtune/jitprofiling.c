@@ -210,12 +210,12 @@ int loadiJIT_Funcs()
         dllName = (char*)malloc(sizeof(char) * (dNameLength + 1));
         if(dllName != NULL)
         {
-            envret = GetEnvironmentVariableA(NEW_DLL_ENVIRONMENT_VAR, 
+            envret = GetEnvironmentVariableA(NEW_DLL_ENVIRONMENT_VAR,
                                              dllName, dNameLength);
             if (envret)
             {
                 /* Try to load the dll from the PATH... */
-                m_libHandle = LoadLibraryExA(dllName, 
+                m_libHandle = LoadLibraryExA(dllName,
                                              NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
             }
             free(dllName);
@@ -229,7 +229,7 @@ int loadiJIT_Funcs()
             dllName = (char*)malloc(sizeof(char) * (dNameLength + 1));
             if(dllName != NULL)
             {
-                envret = GetEnvironmentVariableA(DLL_ENVIRONMENT_VAR, 
+                envret = GetEnvironmentVariableA(DLL_ENVIRONMENT_VAR,
                                                  dllName, dNameLength);
                 if (envret)
                 {
@@ -278,7 +278,7 @@ int loadiJIT_Funcs()
 #else  /* ITT_PLATFORM==ITT_PLATFORM_WIN */
     FUNC_NotifyEvent = (TPNotify)dlsym(m_libHandle, "NotifyEvent");
 #endif /* ITT_PLATFORM==ITT_PLATFORM_WIN */
-    if (!FUNC_NotifyEvent) 
+    if (!FUNC_NotifyEvent)
     {
         FUNC_Initialize = NULL;
         return 0;
@@ -289,7 +289,7 @@ int loadiJIT_Funcs()
 #else  /* ITT_PLATFORM==ITT_PLATFORM_WIN */
     FUNC_Initialize = (TPInitialize)dlsym(m_libHandle, "Initialize");
 #endif /* ITT_PLATFORM==ITT_PLATFORM_WIN */
-    if (!FUNC_Initialize) 
+    if (!FUNC_Initialize)
     {
         FUNC_NotifyEvent = NULL;
         return 0;

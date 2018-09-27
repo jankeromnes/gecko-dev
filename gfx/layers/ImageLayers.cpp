@@ -22,7 +22,7 @@ ImageLayer::ImageLayer(LayerManager* aManager, void* aImplData)
 ImageLayer::~ImageLayer()
 {}
 
-void ImageLayer::SetContainer(ImageContainer* aContainer) 
+void ImageLayer::SetContainer(ImageContainer* aContainer)
 {
   mContainer = aContainer;
 }

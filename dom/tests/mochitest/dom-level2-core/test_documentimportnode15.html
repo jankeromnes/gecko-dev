@@ -37,19 +37,19 @@ function setUpPage() {
        setImplementationAttribute("namespaceAware", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
       var docImpRef = null;
       if (typeof(this.docImp) != 'undefined') {
         docImpRef = this.docImp;
       }
       docsLoaded += preload(docImpRef, "docImp", "staffNS");
-        
+
        if (docsLoaded == 2) {
           setUpPage = 'complete';
        }
@@ -60,7 +60,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -79,14 +79,14 @@ var docName = 'documentimportnode15';
 
 
 /**
-* 
-	The importNode method imports a node from another document to this document. 
-	The returned node has no parent; (parentNode is null). The source node is not 
+*
+	The importNode method imports a node from another document to this document.
+	The returned node has no parent; (parentNode is null). The source node is not
 	altered or removed from the original document but a new copy of the source node
 	is created.
-	
+
 	Using the method importNode with deep=true, import a newly created Text node for this
-	Document.  Verify if the node has been imported correctly by checking the value of the 
+	Document.  Verify if the node has been imported correctly by checking the value of the
 	imported text node.
 
 * @author IBM
@@ -102,13 +102,13 @@ function documentimportnode15() {
       var textImport;
       var textToImport;
       var nodeValue;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       doc = load(docRef, "doc", "staffNS");
-      
+
       var docImpRef = null;
       if (typeof(this.docImp) != 'undefined') {
         docImpRef = this.docImp;
@@ -119,7 +119,7 @@ function documentimportnode15() {
       nodeValue = textImport.nodeValue;
 
       assertEquals("documentimportnode15","Document.importNode test for a TEXT_NODE",nodeValue);
-       
+
 }
 
 </script>
@@ -128,12 +128,12 @@ function documentimportnode15() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/documentimportnode15</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

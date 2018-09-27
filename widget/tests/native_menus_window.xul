@@ -134,7 +134,7 @@
 
         // Create another submenu with hierarchy via DOM manipulation.
         // ******************
-        // * Foo * NewMenu0 * <- Menu bar 
+        // * Foo * NewMenu0 * <- Menu bar
         // ******************
         //       ****************
         //       * NewMenuItem0 * <- NewMenu0 submenu

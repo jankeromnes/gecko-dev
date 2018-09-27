@@ -41,5 +41,5 @@ for (var elem in obj) {
     var tmp2 = Array(12).join(' ');
   }
 }
- 
+
 reportCompare(expect, actual, summary);

@@ -14,8 +14,8 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 // don't crash|assert
-function f() { } 
-f.__proto__ = this; 
+function f() { }
+f.__proto__ = this;
 Object.defineProperty(this, "m", { set: f, enumerable: true, configurable: true });
 uneval(this);
 reportCompare(expect, actual, summary);

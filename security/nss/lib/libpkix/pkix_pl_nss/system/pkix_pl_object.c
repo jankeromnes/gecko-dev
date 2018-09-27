@@ -478,7 +478,7 @@ cleanup:
  *
  *  PKIX_PL_Object should have all function pointes to be to NULL: they
  *  work as proxy function to a real objects.
- *  
+ *
  */
 PKIX_Error *
 pkix_pl_Object_RegisterSelf(void *plContext)
@@ -557,11 +557,11 @@ PKIX_PL_Object_Alloc(
         } else {
                 ctEntry = &systemClasses[objType];
         }
-        
+
         PORT_Assert(size == ctEntry->typeObjectSize);
 
         /* Allocate space for the object header and the requested size */
-#ifdef PKIX_OBJECT_LEAK_TEST       
+#ifdef PKIX_OBJECT_LEAK_TEST
         PKIX_CHECK(PKIX_PL_Calloc
                     (1,
                     ((PKIX_UInt32)sizeof (PKIX_PL_Object))+size,
@@ -779,11 +779,11 @@ PKIX_PL_Object_IncRef(
         PKIX_NULLCHECK_ONE(object);
 
         if (plContext){
-                /* 
+                /*
                  * PKIX_PL_NssContext is not a complete PKIX Type, it doesn't
                  * have a header therefore we cannot verify its type before
                  * casting.
-                 */  
+                 */
                 context = (PKIX_PL_NssContext *) plContext;
                 if (context->arena != NULL) {
                         goto cleanup;
@@ -821,16 +821,16 @@ PKIX_PL_Object_DecRef(
         PKIX_Int32 refCount = 0;
         PKIX_PL_Object *objectHeader = NULL;
         PKIX_PL_NssContext *context = NULL;
-            
+
         PKIX_ENTER(OBJECT, "PKIX_PL_Object_DecRef");
         PKIX_NULLCHECK_ONE(object);
 
         if (plContext){
-                /* 
+                /*
                  * PKIX_PL_NssContext is not a complete PKIX Type, it doesn't
                  * have a header therefore we cannot verify its type before
                  * casting.
-                 */  
+                 */
                 context = (PKIX_PL_NssContext *) plContext;
                 if (context->arena != NULL) {
                         goto cleanup;
@@ -851,7 +851,7 @@ PKIX_PL_Object_DecRef(
             PKIX_PL_DestructorCallback destructor = NULL;
             pkix_ClassTable_Entry *ctEntry = NULL;
             PKIX_UInt32 objType = objectHeader->type;
-            
+
             /* first, special handling for system types */
             if (objType >= PKIX_NUMTYPES){
 #ifdef PKIX_USER_OBJECT_TYPE
@@ -871,7 +871,7 @@ PKIX_PL_Object_DecRef(
                     PKIX_ERROR_FATAL
                         (PKIX_ERRORINGETTINGDESTRUCTOR);
                 }
-                
+
                 if (ctEntry != NULL){
                     destructor = ctEntry->destructor;
                 }
@@ -885,7 +885,7 @@ PKIX_PL_Object_DecRef(
                 ctEntry = &systemClasses[objType];
                 destructor = ctEntry->destructor;
             }
-            
+
             if (destructor != NULL){
                 /* Call destructor on user data if necessary */
                 pkixErrorResult = destructor(object, plContext);
@@ -895,10 +895,10 @@ PKIX_PL_Object_DecRef(
                     pkixErrorResult = NULL;
                 }
             }
-            
+
             /* Atomically decrement object counter */
             PR_ATOMIC_DECREMENT((PRInt32*)&ctEntry->objCounter);
-            
+
             /* pkix_pl_Object_Destroy assumes the lock is held */
             /* It will call unlock and destroy the object */
             pkixErrorResult = pkix_pl_Object_Destroy(object, plContext);
@@ -1099,7 +1099,7 @@ PKIX_PL_Object_Hashcode(
 
                 /* first, special handling for system types */
                 if (objType >= PKIX_NUMTYPES){
-#ifdef PKIX_USER_OBJECT_TYPE            
+#ifdef PKIX_USER_OBJECT_TYPE
                         pkix_ClassTable_Entry *ctEntry = NULL;
 
                         PKIX_OBJECT_DEBUG("\tCalling PR_Lock).\n");

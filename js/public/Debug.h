@@ -250,7 +250,7 @@ class BuilderOrigin : public Builder {
 };
 
 
-
+
 // Finding the size of blocks allocated with malloc
 // ------------------------------------------------
 //
@@ -270,7 +270,7 @@ JS_PUBLIC_API(mozilla::MallocSizeOf)
 GetDebuggerMallocSizeOf(JSContext* cx);
 
 
-
+
 // Debugger and Garbage Collection Events
 // --------------------------------------
 //
@@ -292,7 +292,7 @@ FireOnGarbageCollectionHookRequired(JSContext* cx);
 JS_PUBLIC_API(bool)
 FireOnGarbageCollectionHook(JSContext* cx, GarbageCollectionEvent::Ptr&& data);
 
-
+
 // Return true if the given value is a Debugger object, false otherwise.
 JS_PUBLIC_API(bool)
 IsDebugger(JSObject& obj);
@@ -302,7 +302,7 @@ IsDebugger(JSObject& obj);
 JS_PUBLIC_API(bool)
 GetDebuggeeGlobals(JSContext* cx, JSObject& dbgObj, AutoObjectVector& vector);
 
-
+
 // Hooks for reporting where JavaScript execution began.
 //
 // Our performance tools would like to be able to label blocks of JavaScript

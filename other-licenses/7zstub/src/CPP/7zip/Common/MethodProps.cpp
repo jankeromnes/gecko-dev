@@ -106,7 +106,7 @@ static HRESULT StringToDictSize(const UString &s, NCOM::CPropVariant &destProp)
   unsigned numDigits = (unsigned)(end - s.Ptr());
   if (numDigits == 0 || s.Len() > numDigits + 1)
     return E_INVALIDARG;
-  
+
   if (s.Len() == numDigits)
   {
     if (number >= 64)
@@ -117,9 +117,9 @@ static HRESULT StringToDictSize(const UString &s, NCOM::CPropVariant &destProp)
       destProp = (UInt64)((UInt64)1 << (unsigned)number);
     return S_OK;
   }
-  
+
   unsigned numBits;
-  
+
   switch (MyCharLower_Ascii(s[numDigits]))
   {
     case 'b': destProp = number; return S_OK;
@@ -128,12 +128,12 @@ static HRESULT StringToDictSize(const UString &s, NCOM::CPropVariant &destProp)
     case 'g': numBits = 30; break;
     default: return E_INVALIDARG;
   }
-  
+
   if (number < ((UInt32)1 << (32 - numBits)))
     destProp = (UInt32)(number << numBits);
   else
     destProp = (UInt64)((UInt64)number << numBits);
-  
+
   return S_OK;
 }
 
@@ -319,7 +319,7 @@ static bool ConvertProperty(const PROPVARIANT &srcProp, VARTYPE varType, NCOM::C
   }
   return false;
 }
-    
+
 static void SplitParams(const UString &srcString, UStringVector &subStrings)
 {
   subStrings.Clear();
@@ -456,7 +456,7 @@ HRESULT CMethodProps::ParseParamsFromPROPVARIANT(const UString &realName, const 
     SplitParam(realName, name, valueStr);
     return SetParam(name, valueStr);
   }
-  
+
   // {realName}=value
   int index = FindPropIdExact(realName);
   if (index < 0)
@@ -464,7 +464,7 @@ HRESULT CMethodProps::ParseParamsFromPROPVARIANT(const UString &realName, const 
   const CNameToPropID &nameToPropID = g_NameToPropID[(unsigned)index];
   CProp prop;
   prop.Id = index;
-  
+
   if (IsLogSizeProp(prop.Id))
   {
     RINOK(PROPVARIANT_to_DictSize(value, prop.Value));

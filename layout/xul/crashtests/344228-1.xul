@@ -2,7 +2,7 @@
 
 <script>
 
-function remove(q1) { q1.parentNode.removeChild(q1); } 
+function remove(q1) { q1.parentNode.removeChild(q1); }
 
 function boom()
 {
@@ -10,7 +10,7 @@ function boom()
   var y = document.getElementById("y");
   remove(x);
   remove(y);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

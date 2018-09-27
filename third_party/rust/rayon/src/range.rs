@@ -3,13 +3,13 @@
 //!
 //! You will rarely need to interact with this module directly unless you have
 //! need to name one of the iterator types.
-//! 
+//!
 //! ```
 //! use rayon::prelude::*;
-//! 
+//!
 //! let r = (0..100u64).into_par_iter()
 //!                    .sum();
-//! 
+//!
 //! // compare result with sequential calculation
 //! assert_eq!((0..100).sum::<u64>(), r);
 //! ```

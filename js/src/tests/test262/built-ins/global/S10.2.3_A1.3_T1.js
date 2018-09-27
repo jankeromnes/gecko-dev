@@ -9,7 +9,7 @@ es5id: 10.2.3_A1.3_T1
 description: Eval execution context - Value Properties
 ---*/
 
-var evalStr = 
+var evalStr =
 '//CHECK#1\n'+
 'if ( NaN === null ) {\n'+
 '  $ERROR("#1: NaN === null");\n'+

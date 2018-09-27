@@ -21,10 +21,10 @@ function getAvailableBytes(input)
   var len = 0;
 
   try {
-    len = input.available();  
+    len = input.available();
   } catch (e) {
   }
-  
+
   return len;
 }
 
@@ -72,7 +72,7 @@ function buf2ip(buf)
 function buf2int(buf)
 {
   var n = 0;
-  
+
   for (var i in buf) {
     n |= buf[i] << ((buf.length - i - 1) * 8);
   }
@@ -207,7 +207,7 @@ SocksClient.prototype = {
       return;
 
     Assert.equal(this.inbuf[1], 0x01);
-    
+
     this.dest_port = this.inbuf.slice(2, 4);
     this.dest_addr = this.inbuf.slice(4, 8);
 
@@ -274,7 +274,7 @@ SocksClient.prototype = {
     if (this.inbuf.length < 2 + nmethods)
       return;
 
-    Assert.ok(nmethods >= 1);  
+    Assert.ok(nmethods >= 1);
     var methods = this.inbuf.slice(2, 2 + nmethods);
     Assert.ok(0 in methods);
 
@@ -282,7 +282,7 @@ SocksClient.prototype = {
     this.state = STATE_WAIT_SOCKS5_REQUEST;
     this.write('\x05\x00');
   },
-  
+
   checkSocks5Request: function()
   {
     if (this.inbuf.length < 4)
@@ -306,11 +306,11 @@ SocksClient.prototype = {
         break;
       case 0x04:
         len = 16;
-        break;  
+        break;
       default:
         do_throw("Unknown address type " + atype);
     }
-    
+
     if (name) {
       if (this.inbuf.length < 4 + len + 1 + 2)
         return;
@@ -360,7 +360,7 @@ SocksClient.prototype = {
     this.state = STATE_GOT_PONG;
     this.waitRead(this.client_in);
   },
-  
+
   close: function()
   {
     this.client_in.close();
@@ -405,7 +405,7 @@ SocksTestServer.prototype = {
   {
     var port_id = buf2int(client.dest_port);
     var test = this.pickTest(port_id);
-    
+
     print('server: test finished', test.port);
     Assert.ok(test != null);
     Assert.equal(test.expectedType || test.type, client.type);
@@ -415,7 +415,7 @@ SocksTestServer.prototype = {
       Assert.equal(test.host, client.dest_name);
     else
       Assert.equal(test.host, buf2ip(client.dest_addr));
-    
+
     if (this.test_cases.length == this.tests_completed) {
       print('server: all tests completed');
       this.close();
@@ -436,8 +436,8 @@ SocksTestServer.prototype = {
         arg += 'remote';
       else
         arg += 'local';
-      print('server: using test case', arg);  
-      argv.push(arg);      
+      print('server: using test case', arg);
+      argv.push(arg);
     }
 
     this.client_subprocess = runScriptSubprocess(
@@ -452,16 +452,16 @@ SocksTestServer.prototype = {
     var client = new SocksClient(this, input, output);
     this.client_connections.push(client);
   },
-  
+
   onStopListening: function(socket)
-  {  
+  {
   },
 
   close: function()
   {
     if (this.client_subprocess) {
       try {
-        this.client_subprocess.kill();      
+        this.client_subprocess.kill();
       } catch (x) {
         do_note_exception(x, 'Killing subprocess failed');
       }

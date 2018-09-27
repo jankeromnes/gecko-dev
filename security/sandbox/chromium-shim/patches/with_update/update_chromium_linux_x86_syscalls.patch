@@ -16,11 +16,11 @@ diff --git a/security/sandbox/chromium/sandbox/linux/system_headers/x86_32_linux
  #if !defined(__NR_getrandom)
  #define __NR_getrandom 355
  #endif
- 
+
  #if !defined(__NR_memfd_create)
  #define __NR_memfd_create 356
  #endif
- 
+
 +#if !defined(__NR_bpf)
 +#define __NR_bpf 357
 +#endif
@@ -90,4 +90,4 @@ diff --git a/security/sandbox/chromium/sandbox/linux/system_headers/x86_32_linux
 +#endif
 +
  #endif  // SANDBOX_LINUX_SYSTEM_HEADERS_X86_32_LINUX_SYSCALLS_H_
- 
+

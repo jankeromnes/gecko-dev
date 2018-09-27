@@ -16,7 +16,7 @@ if (false + "" !== "false") {
 
 // CHECK#2
 if (true + "" !== "true") {
-  $ERROR('#2: true + "" === "true". Actual: ' + (true + ""));	
+  $ERROR('#2: true + "" === "true". Actual: ' + (true + ""));
 }
 
 reportCompare(0, 0);

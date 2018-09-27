@@ -10,7 +10,7 @@
       'mac_bundle': 1,
       'sources': [ 'empty.c', ],
     },
-    {    
+    {
       'target_name': 'test_framework',
       'product_name': 'Test Framework',
       'type': 'shared_library',

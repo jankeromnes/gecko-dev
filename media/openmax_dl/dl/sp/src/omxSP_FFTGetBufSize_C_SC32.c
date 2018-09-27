@@ -12,15 +12,15 @@
  */
 
 /**
- * 
+ *
  * File Name:  omxSP_FFTGetBufSize_C_SC32.c
  * OpenMAX DL: v1.0.2
  * Last Modified Revision:   9468
  * Last Modified Date:       Thu, 03 Jan 2008
- * 
+ *
  * (c) Copyright 2007-2008 ARM Limited. All Rights Reserved.
- * 
- * 
+ *
+ *
  * Description:
  * Compute the size of the specification structure required
  */
@@ -35,25 +35,25 @@
  * Function:  omxSP_FFTGetBufSize_C_SC32   (2.2.4.1.6)
  *
  * Description:
- * These functions compute the size of the specification structure 
- * required for the length 2^order complex FFT and IFFT functions. The function 
- * <FFTGetBufSize_C_SC32> is used in conjunction with the 32-bit functions 
- * <FFTFwd_CToC_SC32_Sfs> and <FFTInv_CToC_SC32_Sfs>. 
+ * These functions compute the size of the specification structure
+ * required for the length 2^order complex FFT and IFFT functions. The function
+ * <FFTGetBufSize_C_SC32> is used in conjunction with the 32-bit functions
+ * <FFTFwd_CToC_SC32_Sfs> and <FFTInv_CToC_SC32_Sfs>.
  *
  * Input Arguments:
- *   
- *   order - base-2 logarithm of the desired block length; valid in the range 
- *            [0,12] 
+ *
+ *   order - base-2 logarithm of the desired block length; valid in the range
+ *            [0,12]
  *
  * Output Arguments:
- *   
- *   pSize - pointer to the number of bytes required for the specification 
- *            structure 
+ *
+ *   pSize - pointer to the number of bytes required for the specification
+ *            structure
  *
  * Return Value:
- *    
- *    OMX_Sts_NoErr - no error 
- *    
+ *
+ *    OMX_Sts_NoErr - no error
+ *
  *
  */
 
@@ -62,29 +62,29 @@ OMXResult omxSP_FFTGetBufSize_C_SC32(
      OMX_INT order,
      OMX_INT *pSize)
 {
-    
+
     OMX_INT     N,twiddleSize;
 
     /* Check for order zero */
     if (order == 0)
     {
-        *pSize = sizeof(ARMsFFTSpec_SC32);   
+        *pSize = sizeof(ARMsFFTSpec_SC32);
         return OMX_Sts_NoErr;
     }
 
-    
+
     N = 1 << order;
-    
+
     /*The max size of the twiddle table needed is 3N/4 for a radix-4 stage*/
     twiddleSize = 3*N/4;
-    
+
     *pSize = sizeof(ARMsFFTSpec_SC32)
         /* N Twiddle factors  */
            + sizeof(OMX_SC32) * twiddleSize
-        /* Ping Pong buffer   */   
+        /* Ping Pong buffer   */
            + sizeof(OMX_SC32) * N
-           + 62 ;  /* Extra bytes to get 32 byte alignment of ptwiddle and pBuf */ 
-            
+           + 62 ;  /* Extra bytes to get 32 byte alignment of ptwiddle and pBuf */
+
     return OMX_Sts_NoErr;
 }
 

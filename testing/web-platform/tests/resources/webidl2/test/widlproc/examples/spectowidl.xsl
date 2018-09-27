@@ -12,7 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-XSLT stylesheet to extract Web IDL snippets from Web IDL spec. 
+XSLT stylesheet to extract Web IDL snippets from Web IDL spec.
 =====================================================================-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:output method="text" encoding="utf-8"/>

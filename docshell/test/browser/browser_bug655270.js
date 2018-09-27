@@ -1,8 +1,8 @@
 /* Any copyright is dedicated to the Public Domain.
    http://creativecommons.org/publicdomain/zero/1.0/ */
 
-/** 
- * Test for Bug 655273 
+/**
+ * Test for Bug 655273
  *
  * Call pushState and then make sure that the favicon service associates our
  * old favicon with the new URI.

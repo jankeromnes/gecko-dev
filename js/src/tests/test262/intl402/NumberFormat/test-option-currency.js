@@ -20,19 +20,19 @@ validValues.forEach(function (value) {
     actual = format.resolvedOptions().currency;
     expected = value.toString().toUpperCase();
     assert.sameValue(actual, expected, "Incorrect resolved currency with currency style.");
-    
+
     // without currency style, we shouldn't get any currency back
     format = new Intl.NumberFormat([defaultLocale], {currency: value});
     actual = format.resolvedOptions().currency;
     expected = undefined;
     assert.sameValue(actual, expected, "Incorrect resolved currency with non-currency style.");
-    
+
     // currencies specified through the locale must be ignored
     format = new Intl.NumberFormat([defaultLocale + "-u-cu-krw"], {style: "currency", currency: value});
     actual = format.resolvedOptions().currency;
     expected = value.toString().toUpperCase();
     assert.sameValue(actual, expected, "Incorrect resolved currency with -u-cu- and currency style.");
-    
+
     format = new Intl.NumberFormat([defaultLocale + "-u-cu-krw"], {currency: value});
     actual = format.resolvedOptions().currency;
     expected = undefined;

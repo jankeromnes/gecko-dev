@@ -62,7 +62,7 @@ var asyncIter = (async function*() {
 
 async function *fn() {
   for await (var [,] of asyncIter) {
-    
+
 
     iterCount += 1;
   }

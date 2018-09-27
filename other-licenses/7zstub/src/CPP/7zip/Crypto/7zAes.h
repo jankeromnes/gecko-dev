@@ -57,7 +57,7 @@ protected:
   CKeyInfo _key;
   Byte _iv[kIvSizeMax];
   unsigned _ivSize;
-  
+
   void PrepareKey();
   CBase();
 };
@@ -73,7 +73,7 @@ protected:
 
 public:
   INTERFACE_ICompressFilter(;)
-  
+
   STDMETHOD(CryptoSetPassword)(const Byte *data, UInt32 size);
 };
 

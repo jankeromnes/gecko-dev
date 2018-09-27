@@ -1,7 +1,7 @@
 function handleRequest(request, response) {
   var page = "<!DOCTYPE html><html><body>bug 418354 and bug 1082837</body></html>";
 
-  if (request.queryString === "script") { 
+  if (request.queryString === "script") {
     var redirect = "http://example.com/browser/browser/base/content/test/siteIdentity/test_mcb_redirect.js";
     response.setHeader("Cache-Control", "no-cache", false);
   } else if (request.queryString === "image_http") {

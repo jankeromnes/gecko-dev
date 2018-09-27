@@ -8,13 +8,13 @@ sub recursive_copy {
     local(@dirlist);
     $fromdir = shift;
     $todir = shift;
-  
+
     print STDERR "recursive copy called with $fromdir, $todir\n";
 
 #remove any trailing slashes.
     $fromdir =~ s/\/$//;
     $todir =~ s/\/$//;
-    
+
     opendir(DIR, $fromdir);
     @dirlist = readdir DIR;
     close DIR;
@@ -22,7 +22,7 @@ sub recursive_copy {
 
     foreach $file (@dirlist) {
 	if  (! (($file eq "." ) || ($file eq "..") )) {
-	    
+
 	    if (-d "$fromdir/$file") {
 		print STDERR "handling directory $todir/$file\n";
 		&rec_mkdir("$todir/$file");
@@ -48,12 +48,12 @@ sub parse_argv {
 	   $q =~ /^([^=]*)=(.*)/;
 	   $left = $1;
 	   $right = $2;
-	
+
 	   $right =~ s/ *$//;
 	   $var{$left} = $right;
 
 	   $lastassigned = $left;
-	
+
 	   }
 	print STDERR "Assigned $lastassigned = $var{$lastassigned}\n";
     }

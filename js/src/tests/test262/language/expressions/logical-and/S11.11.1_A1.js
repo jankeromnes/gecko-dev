@@ -16,7 +16,7 @@ if ((eval("true\u0009&&\u0009true")) !== true) {
 
 //CHECK#2
 if ((eval("true\u000B&&\u000Btrue")) !== true) {
-  $ERROR('#2: (true\\u000B&&\\u000Btrue) === true');  
+  $ERROR('#2: (true\\u000B&&\\u000Btrue) === true');
 }
 
 //CHECK#3
@@ -36,7 +36,7 @@ if ((eval("true\u00A0&&\u00A0true")) !== true) {
 
 //CHECK#6
 if ((eval("true\u000A&&\u000Atrue")) !== true) {
-  $ERROR('#6: (true\\u000A&&\\u000Atrue) === true');  
+  $ERROR('#6: (true\\u000A&&\\u000Atrue) === true');
 }
 
 //CHECK#7

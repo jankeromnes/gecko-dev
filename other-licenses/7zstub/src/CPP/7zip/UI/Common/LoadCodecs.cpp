@@ -288,7 +288,7 @@ HRESULT CCodecs::LoadCodecs()
       }
     }
   }
-  
+
   return S_OK;
 }
 
@@ -379,11 +379,11 @@ static const UInt32 kArcFlagsPars[] =
 HRESULT CCodecs::LoadFormats()
 {
   const NDLL::CLibrary &lib = Libs.Back().Lib;
-  
+
   Func_GetHandlerProperty getProp = NULL;
   Func_GetHandlerProperty2 getProp2 = (Func_GetHandlerProperty2)lib.GetProc("GetHandlerProperty2");
   Func_GetIsArc getIsArc = (Func_GetIsArc)lib.GetProc("GetIsArc");
-  
+
   UInt32 numFormats = 1;
 
   if (getProp2)
@@ -400,7 +400,7 @@ HRESULT CCodecs::LoadFormats()
     if (!getProp)
       return S_OK;
   }
-  
+
   for (UInt32 i = 0; i < numFormats; i++)
   {
     CArcInfoEx item;
@@ -441,7 +441,7 @@ HRESULT CCodecs::LoadFormats()
           item.Flags |= kArcFlagsPars[j + 1];
       }
     }
-    
+
     CByteBuffer sig;
     RINOK(GetProp_RawData(getProp, getProp2, i, NArchive::NHandlerPropID::kSignature, sig));
     if (sig.Size() != 0)
@@ -454,7 +454,7 @@ HRESULT CCodecs::LoadFormats()
 
     bool signatureOffset_Defined;
     RINOK(GetProp_UInt32(getProp, getProp2, i, NArchive::NHandlerPropID::kSignatureOffset, item.SignatureOffset, signatureOffset_Defined));
-    
+
     // bool version_Defined;
     // RINOK(GetProp_UInt32(getProp, getProp2, i, NArchive::NHandlerPropID::kVersion, item.Version, version_Defined));
 
@@ -484,13 +484,13 @@ HRESULT CCodecs::LoadDll(const FString &dllPath, bool needCheckDll, bool *loaded
     if (!lib.LoadEx(dllPath, LOAD_LIBRARY_AS_DATAFILE))
       return S_OK;
   }
-  
+
   Libs.AddNew();
   CCodecLib &lib = Libs.Back();
   lib.Path = dllPath;
   bool used = false;
   HRESULT res = S_OK;
-  
+
   if (lib.Lib.Load(dllPath))
   {
     if (loadedOK)
@@ -529,7 +529,7 @@ HRESULT CCodecs::LoadDll(const FString &dllPath, bool needCheckDll, bool *loaded
       }
     }
   }
-  
+
   if (!used)
     Libs.DeleteBack();
 
@@ -557,17 +557,17 @@ void CCodecs::CloseLibs()
   WIN32: FreeLibrary() (CLibrary::Free()) function doesn't work as expected,
   if it's called from another FreeLibrary() call.
   So we need to call FreeLibrary() before global destructors.
-  
+
   Also we free global links from DLLs to object of this module before CLibrary::Free() call.
   */
-  
+
   FOR_VECTOR(i, Libs)
   {
     const CCodecLib &lib = Libs[i];
     if (lib.SetCodecs)
       lib.SetCodecs(NULL);
   }
-  
+
   // OutputDebugStringA("~CloseLibs after SetCodecs");
   Libs.Clear();
   // OutputDebugStringA("~CloseLibs end");
@@ -583,23 +583,23 @@ HRESULT CCodecs::Load()
   #endif
 
   Formats.Clear();
-  
+
   #ifdef EXTERNAL_CODECS
     MainDll_ErrorPath.Empty();
     Codecs.Clear();
     Hashers.Clear();
   #endif
-  
+
   for (UInt32 i = 0; i < g_NumArcs; i++)
   {
     const CArcInfo &arc = *g_Arcs[i];
     CArcInfoEx item;
-    
+
     item.Name = arc.Name;
     item.CreateInArchive = arc.CreateInArchive;
     item.IsArcFunc = arc.IsArc;
     item.Flags = arc.Flags;
-  
+
     {
       UString e, ae;
       if (arc.Ext)
@@ -616,17 +616,17 @@ HRESULT CCodecs::Load()
     item.SignatureOffset = arc.SignatureOffset;
     // item.Version = MY_VER_MIX;
     item.NewInterface = true;
-    
+
     if (arc.IsMultiSignature())
       ParseSignatures(arc.Signature, arc.SignatureSize, item.Signatures);
     else
       item.Signatures.AddNew().CopyFrom(arc.Signature, arc.SignatureSize);
-    
+
     #endif
 
     Formats.Add(item);
   }
-  
+
   #ifdef EXTERNAL_CODECS
     const FString baseFolder = GetBaseFolderPrefixFromRegistry();
     {
@@ -639,7 +639,7 @@ HRESULT CCodecs::Load()
     RINOK(LoadDllsFromFolder(baseFolder + kFormatsFolderName FSTRING_PATH_SEPARATOR));
 
   NeedSetLibCodecs = true;
-    
+
   if (Libs.Size() == 0)
     NeedSetLibCodecs = false;
   else if (Libs.Size() == 1)
@@ -858,7 +858,7 @@ STDMETHODIMP CCodecs::CreateDecoder(UInt32 index, const GUID *iid, void **coder)
   if (index < g_NumCodecs)
     return CreateDecoder(index, iid, coder);
   #endif
-  
+
   #ifdef EXTERNAL_CODECS
   const CDllCodecInfo &ci = Codecs[index - NUM_EXPORT_CODECS];
   if (ci.DecoderIsAssigned)
@@ -943,7 +943,7 @@ int CCodecs::GetCodec_LibIndex(UInt32 index) const
   if (index < g_NumCodecs)
     return -1;
   #endif
-  
+
   #ifdef EXTERNAL_CODECS
   const CDllCodecInfo &ci = Codecs[index - NUM_EXPORT_CODECS];
   return ci.LibIndex;
@@ -958,7 +958,7 @@ int CCodecs::GetHasherLibIndex(UInt32 index)
   if (index < g_NumHashers)
     return -1;
   #endif
-  
+
   #ifdef EXTERNAL_CODECS
   const CDllHasherInfo &ci = Hashers[index - NUM_EXPORT_HASHERS];
   return ci.LibIndex;
@@ -981,7 +981,7 @@ bool CCodecs::GetCodec_DecoderIsAssigned(UInt32 index) const
     return false;
   }
   #endif
-  
+
   #ifdef EXTERNAL_CODECS
   return Codecs[index - NUM_EXPORT_CODECS].DecoderIsAssigned;
   #else
@@ -1003,7 +1003,7 @@ bool CCodecs::GetCodec_EncoderIsAssigned(UInt32 index) const
     return false;
   }
   #endif
-  
+
   #ifdef EXTERNAL_CODECS
   return Codecs[index - NUM_EXPORT_CODECS].EncoderIsAssigned;
   #else

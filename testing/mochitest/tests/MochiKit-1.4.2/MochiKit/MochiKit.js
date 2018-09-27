@@ -180,7 +180,7 @@ if (typeof(JSAN) != 'undefined' || typeof(dojo) != 'undefined') {
                     these document.write calls into your XHTML source)
 
                 */
-                document.write('<' + baseElem.nodeName + ' src="' + uri + 
+                document.write('<' + baseElem.nodeName + ' src="' + uri +
                     '" type="text/javascript"></script>');
             }
         };

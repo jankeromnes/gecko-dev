@@ -48,7 +48,7 @@ function step() {
       SimpleTest.finish();
     } else {
       step();
-    }    
+    }
   }
   SpecialPowers.wrap(f).contentDocument.forms[0].submit();
 }

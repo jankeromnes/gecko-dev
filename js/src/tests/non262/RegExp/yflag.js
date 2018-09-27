@@ -38,7 +38,7 @@ function test()
     '"; RegExp.rightContext: "' + RegExp.rightContext + '"';
   reportCompare(expect, actual, summary + ' - /(1)/g.exec("1234561") second call');
   var y = /(1)/y;
- 
+
   print('Test sticky flag.');
 
   /*

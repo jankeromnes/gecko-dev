@@ -9,7 +9,7 @@ dbg.onDebuggerStatement = function (frame) {
 g.eval("function f() {\n" +
        "    let x = 'a';\n" +
        "    debugger;\n" +
-       "    for (let x = 0; x < 2; x++)\n" + 
+       "    for (let x = 0; x < 2; x++)\n" +
        "        if (x === 0)\n" +
        "            debugger;\n" +
        "        else {\n" +

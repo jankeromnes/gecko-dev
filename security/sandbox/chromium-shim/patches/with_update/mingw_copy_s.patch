@@ -12,12 +12,12 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_types.h b/securit
 @@ -5,16 +5,22 @@
  #ifndef SANDBOX_WIN_SRC_SANDBOX_TYPES_H_
  #define SANDBOX_WIN_SRC_SANDBOX_TYPES_H_
- 
+
  #include "base/process/kill.h"
  #include "base/process/launch.h"
- 
+
  namespace sandbox {
- 
+
 +#ifdef __MINGW32__
 +// Map Microsoft's proprietary more-safe version of copy() back to
 +// the std::basic_string method

@@ -26,9 +26,9 @@ function documentLoaded(e) {
   for (prop in e) {
     eventProperties += prop + " : '" + e[prop] + "'\n";
   }
-  document.getElementById("id2").firstChild.nodeValue = 
+  document.getElementById("id2").firstChild.nodeValue =
     "Event object: " + e + "\n" +
-    "Event properties:\n" + 
+    "Event properties:\n" +
     eventProperties;
 }
 

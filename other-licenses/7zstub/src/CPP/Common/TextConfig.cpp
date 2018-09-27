@@ -9,7 +9,7 @@ static inline bool IsDelimitChar(char c)
 {
   return (c == ' ' || c == 0x0A || c == 0x0D || c == '\0' || c == '\t');
 }
-    
+
 static AString GetIDString(const char *s, unsigned &finishPos)
 {
   AString result;

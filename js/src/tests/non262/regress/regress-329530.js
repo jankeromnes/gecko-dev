@@ -37,5 +37,5 @@ catch(ex)
   printStatus(ex + '');
 }
 
- 
+
 reportCompare(expect, actual, summary);

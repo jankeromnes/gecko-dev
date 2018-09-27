@@ -56,7 +56,7 @@ var iterCount = 0;
 
 async function fn() {
   for await (var [,] of [iter]) {
-    
+
 
     iterCount += 1;
   }

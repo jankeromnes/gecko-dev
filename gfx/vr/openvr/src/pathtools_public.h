@@ -24,7 +24,7 @@ std::string Path_StripFilename( const std::string & sPath, char slash = 0 );
 /** returns just the filename from the provided full or relative path. */
 std::string Path_StripDirectory( const std::string & sPath, char slash = 0 );
 
-/** returns just the filename with no extension of the provided filename. 
+/** returns just the filename with no extension of the provided filename.
 * If there is a path the path is left intact. */
 std::string Path_StripExtension( const std::string & sPath );
 
@@ -49,16 +49,16 @@ char Path_GetSlash();
 std::string Path_Join( const std::string & first, const std::string & second, char slash = 0 );
 std::string Path_Join( const std::string & first, const std::string & second, const std::string & third, char slash = 0 );
 std::string Path_Join( const std::string & first, const std::string & second, const std::string & third, const std::string &fourth, char slash = 0 );
-std::string Path_Join( 
-	const std::string & first, 
-	const std::string & second, 
-	const std::string & third, 
-	const std::string & fourth, 
-	const std::string & fifth, 
+std::string Path_Join(
+	const std::string & first,
+	const std::string & second,
+	const std::string & third,
+	const std::string & fourth,
+	const std::string & fifth,
 	char slash = 0 );
 
 
-/** Removes redundant <dir>/.. elements in the path. Returns an empty path if the 
+/** Removes redundant <dir>/.. elements in the path. Returns an empty path if the
 * specified path has a broken number of directories for its number of ..s.
 * If slash is unspecified the native path separator of the current platform
 * will be used. */

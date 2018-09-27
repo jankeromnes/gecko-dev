@@ -31,5 +31,5 @@ catch(e)
     actual = 'no error';
   }
 }
- 
+
 reportCompare(expect, actual, summary);

@@ -11,7 +11,7 @@ description: Using case with isNaN and isNaN(value)
 
 function SwitchTest(value){
   var result = 0;
-  
+
   switch(value) {
     case 0:
       result += 2;
@@ -38,7 +38,7 @@ function SwitchTest(value){
     case undefined:
       result += 1024;
   }
-  
+
   return result;
 }
 

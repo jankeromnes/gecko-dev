@@ -25,7 +25,7 @@ class DrawTarget;
  * This stores glyph bounds information for a particular gfxFont, at
  * a particular appunits-per-dev-pixel ratio (because the compressed glyph
  * width array is stored in appunits).
- * 
+ *
  * We store a hashtable from glyph IDs to float bounding rects. For the
  * common case where the glyph has no horizontal left bearing, and no
  * y overflow above the font ascent or below the font descent, and tight
@@ -128,7 +128,7 @@ private:
         }
 
         uint32_t SizeOfExcludingThis(mozilla::MallocSizeOf aMallocSizeOf) const;
-        
+
         ~GlyphWidths();
 
     private:

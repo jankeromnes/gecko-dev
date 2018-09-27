@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "tablesection");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,10 +70,10 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The deleteRow() method throws a INDEX_SIZE_ERR DOMException
     if the specified index is equal to the number of rows.
- 
+
     Retrieve the first THEAD element which has one row.  Try
     to delete a row using an index of 1.  This should throw
     a INDEX_SIZE_ERR DOMException since the index is equal to the
@@ -90,7 +90,7 @@ function HTMLTableSectionElement28() {
     var nodeList;
       var testNode;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -99,7 +99,7 @@ function HTMLTableSectionElement28() {
       nodeList = doc.getElementsByTagName("thead");
       assertSize("Asize",1,nodeList);
 testNode = nodeList.item(0);
-      
+
 	{
 		success = false;
 		try {
@@ -122,7 +122,7 @@ testNode = nodeList.item(0);
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
     The deleteRow() method throws a INDEX_SIZE_ERR DOMException
     if the specified index is equal to the number of rows.
- 
+
     Retrieve the first THEAD element which has one row.  Try
     to delete a row using an index of 1.  This should throw
     a INDEX_SIZE_ERR DOMException since the index is equal to the
@@ -144,7 +144,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/tablesection.html"></iframe>
 <br>

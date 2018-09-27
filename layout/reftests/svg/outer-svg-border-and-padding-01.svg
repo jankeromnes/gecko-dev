@@ -20,10 +20,10 @@
 function hide_red_rects()
 {
   var background = document.getElementById("background");
-  
+
   document.getElementById('r').setAttribute('opacity','0');
   document.getElementById('f').setAttribute('opacity','0');
-  
+
   <!-- top left -->
   document.elementFromPoint(121, 121).setAttribute('opacity','0');
   <!-- bottom right -->
@@ -49,10 +49,10 @@ setTimeout(hide_red_rects, 4000); // fallback for running outside reftest
 
   <!-- to catch misses-->
   <rect id="background" width="100%" height="100%" fill="lime"/>
-  
+
   <rect id="r" width="50" height="50" fill="red"/>
   <rect id="f" y="100" width="50" height="50" fill="red"/>
-  
+
   <rect x="100" y="100" width="50" height="50" fill="red"/>
   <rect x="200" y="100" width="50" height="50" fill="red"/>
 </svg>

@@ -4,7 +4,7 @@
 -->
 <svg xmlns="http://www.w3.org/2000/svg">
   <text x="100" y="100" rotate="-10 -10 -10 -10 -10" style="font: 48px sans-serif">
-    A 
+    A
     <tspan rotate="10">B C</tspan>
   </text>
 </svg>

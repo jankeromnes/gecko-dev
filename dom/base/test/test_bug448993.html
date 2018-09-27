@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=448993
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=448993">Mozilla Bug 448993</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -24,12 +24,12 @@ function runTest() {
   var b = document.getElementById("b");
   var c = document.getElementById("c")
   var r = document.createRange();
-  r.setStart(b, 0); 
-  r.setEnd(a, 2); 
+  r.setStart(b, 0);
+  r.setEnd(a, 2);
   c.appendChild(b);
   r.extractContents();
   var s = document.createRange();
-  s.setEnd(b, 0); 
+  s.setEnd(b, 0);
   SpecialPowers.gc();
   s.deleteContents();
   ok(true, "test did not crash");

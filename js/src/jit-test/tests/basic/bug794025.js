@@ -1,8 +1,8 @@
 // |jit-test| error:RangeError
 
 function getterFunction(v) { return "getter"; }
-Object.defineProperty(Array.prototype, 1,{ 
-  get: getterFunction, 
+Object.defineProperty(Array.prototype, 1,{
+  get: getterFunction,
 });
 var N = (10000);
 repeat_str("try { f(); } finally {\n", N),

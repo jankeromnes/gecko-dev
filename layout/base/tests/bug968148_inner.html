@@ -190,7 +190,7 @@ function runTests() {
 
   document.body.offsetLeft;
 
-  // This shouldn't enable capturing, since we're not in a right kind of 
+  // This shouldn't enable capturing, since we're not in a right kind of
   // event listener.
   utils.sendTouchEvent('touchstart', [test1PointerId, test2PointerId],
                        [left1d1, left2d1], [top1d1, top2d1], [rx, rx], [ry, ry],

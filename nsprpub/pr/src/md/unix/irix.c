@@ -140,10 +140,10 @@ usema_t *sem = NULL;
 PRCList *qp;
 nspr_arena *arena;
 usptr_t *irix_arena;
-PRThread *me = _MD_GET_ATTACHED_THREAD();	
+PRThread *me = _MD_GET_ATTACHED_THREAD();
 
 	if (me && !_PR_IS_NATIVE_THREAD(me))
-		_PR_INTSOFF(_is); 
+		_PR_INTSOFF(_is);
 	_PR_LOCK(arena_list_lock);
 	for (qp = arena_list.next; qp != &arena_list; qp = qp->next) {
 		arena = ARENA_PTR(qp);
@@ -193,10 +193,10 @@ PRThread *me = _MD_GET_ATTACHED_THREAD();
 static void free_poll_sem(struct _MDThread *mdthr)
 {
 PRIntn _is;
-PRThread *me = _MD_GET_ATTACHED_THREAD();	
+PRThread *me = _MD_GET_ATTACHED_THREAD();
 
 	if (me && !_PR_IS_NATIVE_THREAD(me))
-		_PR_INTSOFF(_is); 
+		_PR_INTSOFF(_is);
 	usfreepollsema(mdthr->cvar_pollsem, mdthr->pollsem_arena);
 	if (me && !_PR_IS_NATIVE_THREAD(me))
 		_PR_FAST_INTSON(_is);
@@ -211,10 +211,10 @@ ulock_t lock = NULL;
 PRCList *qp;
 nspr_arena *arena;
 usptr_t *irix_arena;
-PRThread *me = _MD_GET_ATTACHED_THREAD();	
+PRThread *me = _MD_GET_ATTACHED_THREAD();
 
 	if (me && !_PR_IS_NATIVE_THREAD(me))
-		_PR_INTSOFF(_is); 
+		_PR_INTSOFF(_is);
 	_PR_LOCK(arena_list_lock);
 	for (qp = arena_list.next; qp != &arena_list; qp = qp->next) {
 		arena = ARENA_PTR(qp);
@@ -264,10 +264,10 @@ PRThread *me = _MD_GET_ATTACHED_THREAD();
 static void free_lock(struct _MDLock *lockp)
 {
 PRIntn _is;
-PRThread *me = _MD_GET_ATTACHED_THREAD();	
+PRThread *me = _MD_GET_ATTACHED_THREAD();
 
 	if (me && !_PR_IS_NATIVE_THREAD(me))
-		_PR_INTSOFF(_is); 
+		_PR_INTSOFF(_is);
 	usfreelock(lockp->lock, lockp->arena);
 	if (me && !_PR_IS_NATIVE_THREAD(me))
 		_PR_FAST_INTSON(_is);
@@ -277,10 +277,10 @@ PRThread *me = _MD_GET_ATTACHED_THREAD();
 void _MD_FREE_LOCK(struct _MDLock *lockp)
 {
 	PRIntn _is;
-	PRThread *me = _MD_GET_ATTACHED_THREAD();	
+	PRThread *me = _MD_GET_ATTACHED_THREAD();
 
 	if (me && !_PR_IS_NATIVE_THREAD(me))
-		_PR_INTSOFF(_is); 
+		_PR_INTSOFF(_is);
 	free_lock(lockp);
 	if (me && !_PR_IS_NATIVE_THREAD(me))
 		_PR_FAST_INTSON(_is);
@@ -340,7 +340,7 @@ PRStatus _MD_NEW_LOCK(struct _MDLock *lockp)
 {
     PRStatus rv;
     PRIntn is;
-    PRThread *me = _MD_GET_ATTACHED_THREAD();	
+    PRThread *me = _MD_GET_ATTACHED_THREAD();
 
 	if (me && !_PR_IS_NATIVE_THREAD(me))
 		_PR_INTSOFF(is);
@@ -388,9 +388,9 @@ _PRCPU *cpu = _PR_MD_CURRENT_CPU();
 		/*
 		 * I am a cpu thread, not a user-created GLOBAL thread
 		 */
-		unblockproc(cpu->md.suspending_id);	
+		unblockproc(cpu->md.suspending_id);
 	} else {
-		unblockproc(me->md.suspending_id);	
+		unblockproc(me->md.suspending_id);
 	}
 	/*
 	 * now, block current thread
@@ -400,7 +400,7 @@ _PRCPU *cpu = _PR_MD_CURRENT_CPU();
 
 /*
 ** The irix kernel has a bug in it which causes async connect's which are
-** interrupted by a signal to fail terribly (EADDRINUSE is returned). 
+** interrupted by a signal to fail terribly (EADDRINUSE is returned).
 ** We work around the bug by blocking signals during the async connect
 ** attempt.
 */
@@ -496,7 +496,7 @@ extern PRUint32 _pr_global_threads;
      * save the new pid
      */
     _pr_primordialCPU->md.id = getpid();
-	_MD_SET_SPROC_PID(getpid());	
+	_MD_SET_SPROC_PID(getpid());
 }
 
 static PRStatus pr_cvar_wait_sem(PRThread *thread, PRIntervalTime timeout)
@@ -623,7 +623,7 @@ PRStatus _MD_WakeupWaiter(PRThread *thread)
 		_MD_CVAR_POST_SEM(thread);
 		if (!_PR_IS_NATIVE_THREAD(me))
 			_PR_FAST_INTSON(is);
-    } 
+    }
     return PR_SUCCESS;
 }
 
@@ -701,17 +701,17 @@ int pid;
 	_PR_UNLOCK(sproc_list_lock);
 }
 
-PRStatus _MD_CreateThread(PRThread *thread, 
-void (*start)(void *), 
-PRThreadPriority priority, 
-PRThreadScope scope, 
-PRThreadState state, 
+PRStatus _MD_CreateThread(PRThread *thread,
+void (*start)(void *),
+PRThreadPriority priority,
+PRThreadScope scope,
+PRThreadState state,
 PRUint32 stackSize)
 {
     typedef void (*SprocEntry) (void *, size_t);
     SprocEntry spentry = (SprocEntry)start;
     PRIntn is;
-	PRThread *me = _PR_MD_CURRENT_THREAD();	
+	PRThread *me = _PR_MD_CURRENT_THREAD();
 	PRInt32 pid;
 	PRStatus rv;
 
@@ -809,7 +809,7 @@ _MD_CleanupBeforeExit(void)
         	thread = _PR_THREAD_PTR(ptr);
 		_MD_CVAR_POST_SEM(thread);
                 ptr = ptr->next;
-        } 
+        }
      }
      _PR_DEADQ_UNLOCK;
      while(_PR_NUM_DEADNATIVE > 1) {
@@ -857,7 +857,7 @@ _MD_InitThread(PRThread *thread, PRBool wakeup_parent)
     if (thread->flags & _PR_GLOBAL_SCOPE) {
 		thread->md.id = getpid();
         setblockproccnt(thread->md.id, 0);
-		_MD_SET_SPROC_PID(getpid());	
+		_MD_SET_SPROC_PID(getpid());
 #ifdef _PR_HAVE_SGI_PRDA_PROCMASK
 		/*
 		 * enable user-level processing of sigprocmask(); this is an
@@ -916,7 +916,7 @@ _PRCPU *cpu = _pr_primordialCPU;
 
 	PR_ASSERT(cpu);
 
-	me->flags |= _PR_BOUND_THREAD;	
+	me->flags |= _PR_BOUND_THREAD;
 
 	if (me->cpu->id != 0) {
 		_PR_INTSOFF(is);
@@ -1015,7 +1015,7 @@ PRCList *qp;
 
 	if (me->flags & _PR_PRIMORDIAL) {
 
-		me->flags |= _PR_BOUND_THREAD;	
+		me->flags |= _PR_BOUND_THREAD;
 
 		PR_ASSERT((_PR_MD_CURRENT_CPU())->id == me->cpu->id);
 		if (me->cpu->id != 0) {
@@ -1059,11 +1059,11 @@ PRCList *qp;
 					thread = _PR_THREAD_PTR(ptr);
 					_MD_CVAR_POST_SEM(thread);
 					ptr = ptr->next;
-				} 
+				}
 			 }
 
 			while (sleep_cnt-- > 0) {
-				if (waitpid(0, NULL, WNOHANG) >= 0) 
+				if (waitpid(0, NULL, WNOHANG) >= 0)
 					sleep(1);
 				else
 					break;
@@ -1087,7 +1087,7 @@ _MD_InitRunningCPU(_PRCPU *cpu)
 
     _MD_unix_init_running_cpu(cpu);
     cpu->md.id = getpid();
-	_MD_SET_SPROC_PID(getpid());	
+	_MD_SET_SPROC_PID(getpid());
 	if (_pr_md_pipefd[0] >= 0) {
     	_PR_IOQ_MAX_OSFD(cpu) = _pr_md_pipefd[0];
 #ifndef _PR_USE_POLL
@@ -1368,7 +1368,7 @@ void _PR_List_Threads()
     }
     fflush(stdout);
 }
-#endif /* defined(_PR_PTHREADS) */ 
+#endif /* defined(_PR_PTHREADS) */
 
 PRWord *_MD_HomeGCRegisters(PRThread *t, int isCurrent, int *np)
 {
@@ -1415,7 +1415,7 @@ void _MD_EarlyInit(void)
         perror("mmap /dev/zero failed");
         exit(1);
     }
-	_MD_SET_SPROC_PID(getpid());	
+	_MD_SET_SPROC_PID(getpid());
     close(fd);
 	__ateachexit(irix_detach_sproc);
 #endif
@@ -1563,10 +1563,10 @@ static void _MD_IrixIntervalInit(void)
         clock_width = syssgi(SGI_CYCLECNTR_SIZE);
         if (clock_width < 0)
         {
-            /* 
+            /*
              * We must be executing on a 6.0 or earlier system, since the
              * SGI_CYCLECNTR_SIZE call is not supported.
-             * 
+             *
              * The only pre-6.1 platforms with 64-bit counters are
              * IP19 and IP21 (Challenge, PowerChallenge, Onyx).
              */
@@ -1595,7 +1595,7 @@ static void _MD_IrixIntervalInit(void)
         pr_clock_mask = pr_clock_granularity - 1;  /* to make a mask out of it */
         pr_ticks_per_second = PR_PSEC_PER_SEC
                 / ((PRUint64)pr_clock_granularity * (PRUint64)cycleval);
-            
+
         iotimer_addr = (void*)
             ((__psunsigned_t)iotimer_addr + (phys_addr & poffmask));
     }

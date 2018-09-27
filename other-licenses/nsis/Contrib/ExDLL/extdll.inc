@@ -4,7 +4,7 @@
 ; Author: Ramon
 ;
 ; Obs: This header must be included after windows.inc and kernel32.inc
-;      because it need the prototypes for lstrcpy, lstrcpyn, 
+;      because it need the prototypes for lstrcpy, lstrcpyn,
 ;      GlobalAlloc and GlobalFree
 ;
 ;################################################################
@@ -86,7 +86,7 @@ popstring proc uses edi pStr:DWORD
   ASSUME edi:PTR NOTHING
   mov eax, 0
   ret
-  
+
 STACK_ERR:
   mov eax, 1
   ret

@@ -123,7 +123,7 @@ pattern.lastIndex = Math.pow(2,32);
 actualmatch = pattern.exec(string);
 expectedmatch = null;
 addThis();
- 
+
 status = inSection(8);
 pattern.lastIndex = Math.pow(2,32) + 1;
 actualmatch = pattern.exec(string);
@@ -209,7 +209,7 @@ pattern.lastIndex = Math.pow(2,32);
 actualmatch = pattern.exec(string);
 expectedmatch = Array('Abc') // NOT null as before -
   addThis();
- 
+
 status = inSection(22);
 pattern.lastIndex = -Math.pow(2,32);
 actualmatch = pattern.exec(string);

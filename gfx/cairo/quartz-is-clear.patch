@@ -11,18 +11,18 @@ index 5a624eb..b8809d5 100644
 @@ -146,6 +146,8 @@ _cairo_quartz_image_surface_flush (void *asurface)
      surface->image = newImage;
      CGImageRelease (oldImage);
- 
+
 +    surface->base.is_clear = surface->imageSurface->base.is_clear;
 +
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 @@ -267,6 +269,8 @@ cairo_quartz_image_surface_create (cairo_surface_t *surface)
      qisurf->image = image;
      qisurf->imageSurface = image_surface;
- 
+
 +    qisurf->base.is_clear = image_surface->base.is_clear;
 +
      return &qisurf->base;
  }
- 
+

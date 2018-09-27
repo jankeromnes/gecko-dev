@@ -161,97 +161,97 @@ function testop(_, _$1) {
 
 function relop(_, param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return "eq";
-    case 1 : 
+    case 1 :
         return "ne";
-    case 2 : 
+    case 2 :
         return "lt_s";
-    case 3 : 
+    case 3 :
         return "lt_u";
-    case 4 : 
+    case 4 :
         return "gt_s";
-    case 5 : 
+    case 5 :
         return "gt_u";
-    case 6 : 
+    case 6 :
         return "le_s";
-    case 7 : 
+    case 7 :
         return "le_u";
-    case 8 : 
+    case 8 :
         return "ge_s";
-    case 9 : 
+    case 9 :
         return "ge_u";
-    
+
   }
 }
 
 function unop(_, param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return "clz";
-    case 1 : 
+    case 1 :
         return "ctz";
-    case 2 : 
+    case 2 :
         return "popcnt";
-    
+
   }
 }
 
 function binop(_, param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return "add";
-    case 1 : 
+    case 1 :
         return "sub";
-    case 2 : 
+    case 2 :
         return "mul";
-    case 3 : 
+    case 3 :
         return "div_s";
-    case 4 : 
+    case 4 :
         return "div_u";
-    case 5 : 
+    case 5 :
         return "rem_s";
-    case 6 : 
+    case 6 :
         return "rem_u";
-    case 7 : 
+    case 7 :
         return "and";
-    case 8 : 
+    case 8 :
         return "or";
-    case 9 : 
+    case 9 :
         return "xor";
-    case 10 : 
+    case 10 :
         return "shl";
-    case 11 : 
+    case 11 :
         return "shr_s";
-    case 12 : 
+    case 12 :
         return "shr_u";
-    case 13 : 
+    case 13 :
         return "rotl";
-    case 14 : 
+    case 14 :
         return "rotr";
-    
+
   }
 }
 
 function cvtop(xx, param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return "extend_s/i32";
-    case 1 : 
+    case 1 :
         return "extend_u/i32";
-    case 2 : 
+    case 2 :
         return "wrap/i64";
-    case 3 : 
+    case 3 :
         return "trunc_s/f32";
-    case 4 : 
+    case 4 :
         return "trunc_u/f32";
-    case 5 : 
+    case 5 :
         return "trunc_s/f64";
-    case 6 : 
+    case 6 :
         return "trunc_u/f64";
-    case 7 : 
+    case 7 :
         return "reinterpret/f" + xx;
-    
+
   }
 }
 
@@ -268,79 +268,79 @@ function testop$1(_, _$1) {
 
 function relop$1(_, param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return "eq";
-    case 1 : 
+    case 1 :
         return "ne";
-    case 2 : 
+    case 2 :
         return "lt";
-    case 3 : 
+    case 3 :
         return "gt";
-    case 4 : 
+    case 4 :
         return "le";
-    case 5 : 
+    case 5 :
         return "ge";
-    
+
   }
 }
 
 function unop$1(_, param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return "neg";
-    case 1 : 
+    case 1 :
         return "abs";
-    case 2 : 
+    case 2 :
         return "ceil";
-    case 3 : 
+    case 3 :
         return "floor";
-    case 4 : 
+    case 4 :
         return "trunc";
-    case 5 : 
+    case 5 :
         return "nearest";
-    case 6 : 
+    case 6 :
         return "sqrt";
-    
+
   }
 }
 
 function binop$1(_, param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return "add";
-    case 1 : 
+    case 1 :
         return "sub";
-    case 2 : 
+    case 2 :
         return "mul";
-    case 3 : 
+    case 3 :
         return "div";
-    case 4 : 
+    case 4 :
         return "min";
-    case 5 : 
+    case 5 :
         return "max";
-    case 6 : 
+    case 6 :
         return "copysign";
-    
+
   }
 }
 
 function cvtop$1(xx, param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return "convert_s/i32";
-    case 1 : 
+    case 1 :
         return "convert_u/i32";
-    case 2 : 
+    case 2 :
         return "convert_s/i64";
-    case 3 : 
+    case 3 :
         return "convert_u/i64";
-    case 4 : 
+    case 4 :
         return "promote/f32";
-    case 5 : 
+    case 5 :
         return "demote/f64";
-    case 6 : 
+    case 6 :
         return "reinterpret/i" + xx;
-    
+
   }
 }
 
@@ -349,19 +349,19 @@ function oper(param, op) {
   var intop = param[0];
   var $js;
   switch (op.tag | 0) {
-    case 0 : 
+    case 0 :
         $js = Curry._2(intop, "32", op[0]);
         break;
-    case 1 : 
+    case 1 :
         $js = Curry._2(intop, "64", op[0]);
         break;
-    case 2 : 
+    case 2 :
         $js = Curry._2(floatop, "32", op[0]);
         break;
-    case 3 : 
+    case 3 :
         $js = Curry._2(floatop, "64", op[0]);
         break;
-    
+
   }
   return Types.string_of_value_type(Values.type_of(op)) + ("." + $js);
 }
@@ -413,13 +413,13 @@ function cvtop$2(param) {
 
 function mem_size(param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return "8";
-    case 1 : 
+    case 1 :
         return "16";
-    case 2 : 
+    case 2 :
         return "32";
-    
+
   }
 }
 
@@ -477,54 +477,54 @@ function instr(e) {
   var match$1;
   if (typeof match === "number") {
     switch (match) {
-      case 0 : 
+      case 0 :
           match$1 = /* tuple */[
             "unreachable",
             /* [] */0
           ];
           break;
-      case 1 : 
+      case 1 :
           match$1 = /* tuple */[
             "nop",
             /* [] */0
           ];
           break;
-      case 2 : 
+      case 2 :
           match$1 = /* tuple */[
             "return",
             /* [] */0
           ];
           break;
-      case 3 : 
+      case 3 :
           match$1 = /* tuple */[
             "drop",
             /* [] */0
           ];
           break;
-      case 4 : 
+      case 4 :
           match$1 = /* tuple */[
             "select",
             /* [] */0
           ];
           break;
-      case 5 : 
+      case 5 :
           match$1 = /* tuple */[
             "current_memory",
             /* [] */0
           ];
           break;
-      case 6 : 
+      case 6 :
           match$1 = /* tuple */[
             "grow_memory",
             /* [] */0
           ];
           break;
-      
+
     }
   }
   else {
     switch (match.tag | 0) {
-      case 0 : 
+      case 0 :
           var f = function (param) {
             return /* Atom */Block.__(0, [Types.string_of_value_type(param)]);
           };
@@ -533,7 +533,7 @@ function instr(e) {
             Pervasives.$at(List.map(f, match[0]), List.map(instr, match[1]))
           ];
           break;
-      case 1 : 
+      case 1 :
           var f$1 = function (param) {
             return /* Atom */Block.__(0, [Types.string_of_value_type(param)]);
           };
@@ -542,7 +542,7 @@ function instr(e) {
             Pervasives.$at(List.map(f$1, match[0]), List.map(instr, match[1]))
           ];
           break;
-      case 2 : 
+      case 2 :
           var f$2 = function (param) {
             return /* Atom */Block.__(0, [Types.string_of_value_type(param)]);
           };
@@ -563,19 +563,19 @@ function instr(e) {
                 ])
           ];
           break;
-      case 3 : 
+      case 3 :
           match$1 = /* tuple */[
             "br " + Curry._1(I32.to_string_u, match[0][/* it */1]),
             /* [] */0
           ];
           break;
-      case 4 : 
+      case 4 :
           match$1 = /* tuple */[
             "br_if " + Curry._1(I32.to_string_u, match[0][/* it */1]),
             /* [] */0
           ];
           break;
-      case 5 : 
+      case 5 :
           var xs = Pervasives.$at(match[0], /* :: */[
                 match[1],
                 /* [] */0
@@ -585,98 +585,98 @@ function instr(e) {
             /* [] */0
           ];
           break;
-      case 6 : 
+      case 6 :
           match$1 = /* tuple */[
             "call " + Curry._1(I32.to_string_u, match[0][/* it */1]),
             /* [] */0
           ];
           break;
-      case 7 : 
+      case 7 :
           match$1 = /* tuple */[
             "call_indirect " + Curry._1(I32.to_string_u, match[0][/* it */1]),
             /* [] */0
           ];
           break;
-      case 8 : 
+      case 8 :
           match$1 = /* tuple */[
             "get_local " + Curry._1(I32.to_string_u, match[0][/* it */1]),
             /* [] */0
           ];
           break;
-      case 9 : 
+      case 9 :
           match$1 = /* tuple */[
             "set_local " + Curry._1(I32.to_string_u, match[0][/* it */1]),
             /* [] */0
           ];
           break;
-      case 10 : 
+      case 10 :
           match$1 = /* tuple */[
             "tee_local " + Curry._1(I32.to_string_u, match[0][/* it */1]),
             /* [] */0
           ];
           break;
-      case 11 : 
+      case 11 :
           match$1 = /* tuple */[
             "get_global " + Curry._1(I32.to_string_u, match[0][/* it */1]),
             /* [] */0
           ];
           break;
-      case 12 : 
+      case 12 :
           match$1 = /* tuple */[
             "set_global " + Curry._1(I32.to_string_u, match[0][/* it */1]),
             /* [] */0
           ];
           break;
-      case 13 : 
+      case 13 :
           match$1 = /* tuple */[
             loadop(match[0]),
             /* [] */0
           ];
           break;
-      case 14 : 
+      case 14 :
           match$1 = /* tuple */[
             storeop(match[0]),
             /* [] */0
           ];
           break;
-      case 15 : 
+      case 15 :
           var lit = match[0];
           match$1 = /* tuple */[
             constop(lit) + (" " + Values.string_of_value(lit[/* it */1])),
             /* [] */0
           ];
           break;
-      case 16 : 
+      case 16 :
           match$1 = /* tuple */[
             Curry._1(testop$2, match[0]),
             /* [] */0
           ];
           break;
-      case 17 : 
+      case 17 :
           match$1 = /* tuple */[
             Curry._1(relop$2, match[0]),
             /* [] */0
           ];
           break;
-      case 18 : 
+      case 18 :
           match$1 = /* tuple */[
             Curry._1(unop$2, match[0]),
             /* [] */0
           ];
           break;
-      case 19 : 
+      case 19 :
           match$1 = /* tuple */[
             Curry._1(binop$2, match[0]),
             /* [] */0
           ];
           break;
-      case 20 : 
+      case 20 :
           match$1 = /* tuple */[
             Curry._1(cvtop$2, match[0]),
             /* [] */0
           ];
           break;
-      
+
     }
   }
   return /* Node */Block.__(1, [
@@ -772,7 +772,7 @@ function typedef(i, t) {
 function import_kind(i, k) {
   var match = k[/* it */1];
   switch (match.tag | 0) {
-    case 0 : 
+    case 0 :
         return /* Node */Block.__(1, [
                   "func $" + Curry._1(I32.to_string_u, Curry._1(I32.of_int_u, i)),
                   /* :: */[
@@ -786,11 +786,11 @@ function import_kind(i, k) {
                     /* [] */0
                   ]
                 ]);
-    case 1 : 
+    case 1 :
         return table(0, i, Source.$at$at(/* record */[/* ttype */match[0]], k[/* at */0]));
-    case 2 : 
+    case 2 :
         return memory(0, i, Source.$at$at(/* record */[/* mtype */match[0]], k[/* at */0]));
-    case 3 : 
+    case 3 :
         return /* Node */Block.__(1, [
                   "global $" + Curry._1(I32.to_string_u, Curry._1(I32.of_int_u, i)),
                   /* :: */[
@@ -798,7 +798,7 @@ function import_kind(i, k) {
                     /* [] */0
                   ]
                 ]);
-    
+
   }
 }
 
@@ -822,15 +822,15 @@ function $$import(i, im) {
 function export_kind(k) {
   var match = k[/* it */1];
   switch (match) {
-    case 0 : 
+    case 0 :
         return "func";
-    case 1 : 
+    case 1 :
         return "table";
-    case 2 : 
+    case 2 :
         return "memory";
-    case 3 : 
+    case 3 :
         return "global";
-    
+
   }
 }
 
@@ -951,27 +951,27 @@ function module_(param) {
 function literal(lit) {
   var match = lit[/* it */1];
   switch (match.tag | 0) {
-    case 0 : 
+    case 0 :
         return /* Node */Block.__(1, [
                   "i32.const " + Curry._1(I32.to_string_s, match[0]),
                   /* [] */0
                 ]);
-    case 1 : 
+    case 1 :
         return /* Node */Block.__(1, [
                   "i64.const " + Curry._1(I64.to_string_s, match[0]),
                   /* [] */0
                 ]);
-    case 2 : 
+    case 2 :
         return /* Node */Block.__(1, [
                   "f32.const " + Curry._1(F32.to_string, match[0]),
                   /* [] */0
                 ]);
-    case 3 : 
+    case 3 :
         return /* Node */Block.__(1, [
                   "f64.const " + Curry._1(F64.to_string, match[0]),
                   /* [] */0
                 ]);
-    
+
   }
 }
 
@@ -980,12 +980,12 @@ function definition(mode, x_opt, def) {
   var exit = 0;
   exit = mode !== 564146209 && !(mode >= 983167089 && match.tag) ? 1 : 2;
   switch (exit) {
-    case 1 : 
+    case 1 :
         var match$1 = def[/* it */1];
         var m;
         m = match$1.tag ? Decode.decode("", match$1[1]) : match$1[0];
         return module_with_var_opt(x_opt, m);
-    case 2 : 
+    case 2 :
         var match$2 = def[/* it */1];
         var bs;
         bs = match$2.tag ? match$2[1] : Encode.encode(match$2[0]);
@@ -995,7 +995,7 @@ function definition(mode, x_opt, def) {
                   "module" + var_opt(x_opt$1),
                   break_bytes(bs$1)
                 ]);
-    
+
   }
 }
 
@@ -1031,21 +1031,21 @@ function script(mode, scr) {
               var cmd = param;
               var match = cmd[/* it */1];
               switch (match.tag | 0) {
-                case 0 : 
+                case 0 :
                     return definition(mode$1, match[0], match[1]);
-                case 1 : 
+                case 1 :
                     return /* Node */Block.__(1, [
                               "register " + (string_with(add_char, match[0]) + var_opt(match[1])),
                               /* [] */0
                             ]);
-                case 2 : 
+                case 2 :
                     return action(match[0]);
-                case 3 : 
+                case 3 :
                     var mode$2 = mode$1;
                     var ass = match[0];
                     var match$1 = ass[/* it */1];
                     switch (match$1.tag | 0) {
-                      case 0 : 
+                      case 0 :
                           return /* Node */Block.__(1, [
                                     "assert_malformed",
                                     /* :: */[
@@ -1056,7 +1056,7 @@ function script(mode, scr) {
                                       ]
                                     ]
                                   ]);
-                      case 1 : 
+                      case 1 :
                           return /* Node */Block.__(1, [
                                     "assert_invalid",
                                     /* :: */[
@@ -1067,7 +1067,7 @@ function script(mode, scr) {
                                       ]
                                     ]
                                   ]);
-                      case 2 : 
+                      case 2 :
                           return /* Node */Block.__(1, [
                                     "assert_soft_invalid",
                                     /* :: */[
@@ -1078,7 +1078,7 @@ function script(mode, scr) {
                                       ]
                                     ]
                                   ]);
-                      case 3 : 
+                      case 3 :
                           return /* Node */Block.__(1, [
                                     "assert_unlinkable",
                                     /* :: */[
@@ -1089,7 +1089,7 @@ function script(mode, scr) {
                                       ]
                                     ]
                                   ]);
-                      case 4 : 
+                      case 4 :
                           return /* Node */Block.__(1, [
                                     "assert_trap",
                                     /* :: */[
@@ -1100,7 +1100,7 @@ function script(mode, scr) {
                                       ]
                                     ]
                                   ]);
-                      case 5 : 
+                      case 5 :
                           return /* Node */Block.__(1, [
                                     "assert_return",
                                     /* :: */[
@@ -1108,7 +1108,7 @@ function script(mode, scr) {
                                       List.map(literal, match$1[1])
                                     ]
                                   ]);
-                      case 6 : 
+                      case 6 :
                           return /* Node */Block.__(1, [
                                     "assert_return_nan",
                                     /* :: */[
@@ -1116,7 +1116,7 @@ function script(mode, scr) {
                                       /* [] */0
                                     ]
                                   ]);
-                      case 7 : 
+                      case 7 :
                           return /* Node */Block.__(1, [
                                     "assert_trap",
                                     /* :: */[
@@ -1127,7 +1127,7 @@ function script(mode, scr) {
                                       ]
                                     ]
                                   ]);
-                      case 8 : 
+                      case 8 :
                           return /* Node */Block.__(1, [
                                     "assert_exhaustion",
                                     /* :: */[
@@ -1138,9 +1138,9 @@ function script(mode, scr) {
                                       ]
                                     ]
                                   ]);
-                      
+
                     }
-                case 4 : 
+                case 4 :
                     throw [
                           Caml_builtin_exceptions.assert_failure,
                           [
@@ -1149,7 +1149,7 @@ function script(mode, scr) {
                             14
                           ]
                         ];
-                
+
               }
             }, scr);
 }
@@ -1325,7 +1325,7 @@ function to_list(a) {
       ];
       _i = i - 1 | 0;
       continue ;
-      
+
     }
   };
 }
@@ -1338,7 +1338,7 @@ function list_length(_accu, _param) {
       _param = param[1];
       _accu = accu + 1 | 0;
       continue ;
-      
+
     }
     else {
       return accu;
@@ -1359,7 +1359,7 @@ function of_list(l) {
         _param = param[1];
         _i = i + 1 | 0;
         continue ;
-        
+
       }
       else {
         return a;
@@ -1427,7 +1427,7 @@ function sort(cmp, a) {
           a[i$1] = a[j];
           _i = j;
           continue ;
-          
+
         }
         else {
           a[i$1] = e$1;
@@ -1455,7 +1455,7 @@ function sort(cmp, a) {
         a[i$1] = a[j];
         _i = j;
         continue ;
-        
+
       };
     }
     catch (exn){
@@ -1486,7 +1486,7 @@ function sort(cmp, a) {
         if (father > 0) {
           _i = father;
           continue ;
-          
+
         }
         else {
           a[0] = e;
@@ -1542,7 +1542,7 @@ function stable_sort(cmp, a) {
           _s1 = a[i1$1];
           _i1 = i1$1;
           continue ;
-          
+
         }
         else {
           return blit(src2, i2, dst, d + 1 | 0, src2r - i2 | 0);
@@ -1556,7 +1556,7 @@ function stable_sort(cmp, a) {
           _s2 = src2[i2$1];
           _i2 = i2$1;
           continue ;
-          
+
         }
         else {
           return blit(a, i1, dst, d + 1 | 0, src1r - i1 | 0);
@@ -1651,15 +1651,15 @@ var FloatOp = /* module */[];
 
 function export_kind_of_import_kind(param) {
   switch (param.tag | 0) {
-    case 0 : 
+    case 0 :
         return /* FuncExport */0;
-    case 1 : 
+    case 1 :
         return /* TableExport */1;
-    case 2 : 
+    case 2 :
         return /* MemoryExport */2;
-    case 3 : 
+    case 3 :
         return /* GlobalExport */3;
-    
+
   }
 }
 
@@ -1667,15 +1667,15 @@ function import_type(m, im) {
   var match = im[/* it */1];
   var match$1 = match[/* ikind */2][/* it */1];
   switch (match$1.tag | 0) {
-    case 0 : 
+    case 0 :
         return /* ExternalFuncType */Block.__(0, [Curry._2(Lib.List32[/* nth */1], m[/* it */1][/* types */0], match$1[0][/* it */1])]);
-    case 1 : 
+    case 1 :
         return /* ExternalTableType */Block.__(1, [match$1[0]]);
-    case 2 : 
+    case 2 :
         return /* ExternalMemoryType */Block.__(2, [match$1[0]]);
-    case 3 : 
+    case 3 :
         return /* ExternalGlobalType */Block.__(3, [match$1[0]]);
-    
+
   }
 }
 
@@ -1695,7 +1695,7 @@ function export_type(m, ex) {
           _param = ims;
           _i = i - 1 | 0;
           continue ;
-          
+
         }
         else {
           return import_type(m, im);
@@ -1704,21 +1704,21 @@ function export_type(m, ex) {
       else {
         _param = ims;
         continue ;
-        
+
       }
     }
     else {
       var match$1 = ekind[/* it */1];
       switch (match$1) {
-        case 0 : 
+        case 0 :
             return /* ExternalFuncType */Block.__(0, [Curry._2(Lib.List32[/* nth */1], m[/* it */1][/* types */0], Curry._2(Lib.List32[/* nth */1], m[/* it */1][/* funcs */4], i)[/* it */1][/* ftype */0][/* it */1])]);
-        case 1 : 
+        case 1 :
             return /* ExternalTableType */Block.__(1, [Curry._2(Lib.List32[/* nth */1], m[/* it */1][/* tables */2], i)[/* it */1][/* ttype */0]]);
-        case 2 : 
+        case 2 :
             return /* ExternalMemoryType */Block.__(2, [Curry._2(Lib.List32[/* nth */1], m[/* it */1][/* memories */3], i)[/* it */1][/* mtype */0]]);
-        case 3 : 
+        case 3 :
             return /* ExternalGlobalType */Block.__(3, [Curry._2(Lib.List32[/* nth */1], m[/* it */1][/* globals */1], i)[/* it */1][/* gtype */0]]);
-        
+
       }
     }
   };
@@ -2317,14 +2317,14 @@ function advance_to_closing(opening, closing, k, s, start) {
       _i = i + 1 | 0;
       _k = k$1 + 1 | 0;
       continue ;
-      
+
     }
     else if (Caml_string.get(s, i) === closing) {
       if (k$1) {
         _i = i + 1 | 0;
         _k = k$1 - 1 | 0;
         continue ;
-        
+
       }
       else {
         return i;
@@ -2333,7 +2333,7 @@ function advance_to_closing(opening, closing, k, s, start) {
     else {
       _i = i + 1 | 0;
       continue ;
-      
+
     }
   };
 }
@@ -2382,9 +2382,9 @@ function advance_to_non_alpha(s, start) {
       if (exit === 1) {
         _i = i + 1 | 0;
         continue ;
-        
+
       }
-      
+
     }
   };
 }
@@ -2419,7 +2419,7 @@ function find_ident(s, start, lim) {
               stop$1 + 1 | 0
             ];
     }
-    
+
   }
 }
 
@@ -2439,20 +2439,20 @@ function add_substitute(b, f, s) {
           _i = i + 1 | 0;
           _previous = /* " " */32;
           continue ;
-          
+
         }
         else if (current !== 92) {
           add_char(b, current);
           _i = i + 1 | 0;
           _previous = current;
           continue ;
-          
+
         }
         else {
           _i = i + 1 | 0;
           _previous = current;
           continue ;
-          
+
         }
       }
       else if (previous === /* "\\" */92) {
@@ -2460,7 +2460,7 @@ function add_substitute(b, f, s) {
         _i = i + 1 | 0;
         _previous = /* " " */32;
         continue ;
-        
+
       }
       else {
         var j = i + 1 | 0;
@@ -2469,7 +2469,7 @@ function add_substitute(b, f, s) {
         _i = match[1];
         _previous = /* " " */32;
         continue ;
-        
+
       }
     }
     else if (previous === /* "\\" */92) {
@@ -2761,43 +2761,43 @@ function escaped(s) {
       }
       else {
         switch (c) {
-          case 8 : 
+          case 8 :
               s$prime[n] = /* "\\" */92;
               n = n + 1 | 0;
               s$prime[n] = /* "b" */98;
               break;
-          case 9 : 
+          case 9 :
               s$prime[n] = /* "\\" */92;
               n = n + 1 | 0;
               s$prime[n] = /* "t" */116;
               break;
-          case 10 : 
+          case 10 :
               s$prime[n] = /* "\\" */92;
               n = n + 1 | 0;
               s$prime[n] = /* "n" */110;
               break;
-          case 0 : 
-          case 1 : 
-          case 2 : 
-          case 3 : 
-          case 4 : 
-          case 5 : 
-          case 6 : 
-          case 7 : 
-          case 11 : 
-          case 12 : 
+          case 0 :
+          case 1 :
+          case 2 :
+          case 3 :
+          case 4 :
+          case 5 :
+          case 6 :
+          case 7 :
+          case 11 :
+          case 12 :
               exit = 1;
               break;
-          case 13 : 
+          case 13 :
               s$prime[n] = /* "\\" */92;
               n = n + 1 | 0;
               s$prime[n] = /* "r" */114;
               break;
-          
+
         }
       }
       switch (exit) {
-        case 1 : 
+        case 1 :
             s$prime[n] = /* "\\" */92;
             n = n + 1 | 0;
             s$prime[n] = 48 + (c / 100 | 0) | 0;
@@ -2806,12 +2806,12 @@ function escaped(s) {
             n = n + 1 | 0;
             s$prime[n] = 48 + c % 10 | 0;
             break;
-        case 2 : 
+        case 2 :
             s$prime[n] = /* "\\" */92;
             n = n + 1 | 0;
             s$prime[n] = c;
             break;
-        
+
       }
       n = n + 1 | 0;
     }
@@ -2886,7 +2886,7 @@ function index_rec(s, lim, _i, c) {
     else {
       _i = i + 1 | 0;
       continue ;
-      
+
     }
   };
 }
@@ -2920,7 +2920,7 @@ function rindex_rec(s, _i, c) {
     else {
       _i = i - 1 | 0;
       continue ;
-      
+
     }
   };
 }
@@ -3064,7 +3064,7 @@ function len(_acc, _l) {
       _l = l[1];
       _acc = l[0].length + acc | 0;
       continue ;
-      
+
     }
     else {
       return acc;
@@ -3089,7 +3089,7 @@ function fill(arr, _i, _l) {
       _l = l[1];
       _i = k;
       continue ;
-      
+
     }
     else {
       return /* () */0;
@@ -3436,7 +3436,7 @@ var caml_hypot_float = ( function (x, y) {
 }
 );
 
-var caml_log10_float = ( function  (x) { 
+var caml_log10_float = ( function  (x) {
    return Math.LOG10E * Math.log(x); }
 );
 
@@ -3503,15 +3503,15 @@ function parse_digit(c) {
 
 function int_of_string_base(param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return 8;
-    case 1 : 
+    case 1 :
         return 16;
-    case 2 : 
+    case 2 :
         return 10;
-    case 3 : 
+    case 3 :
         return 2;
-    
+
   }
 }
 
@@ -3533,7 +3533,7 @@ function parse_sign_and_base(s) {
             base = /* Hex */1;
             i = i + 2 | 0;
           }
-          
+
         }
         else {
           base = /* Oct */0;
@@ -3551,7 +3551,7 @@ function parse_sign_and_base(s) {
           base = /* Hex */1;
           i = i + 2 | 0;
         }
-        
+
       }
       else {
         base = /* Oct */0;
@@ -3596,7 +3596,7 @@ function caml_int_of_string(s) {
         if (a === /* "_" */95) {
           _k = k + 1 | 0;
           continue ;
-          
+
         }
         else {
           var v = parse_digit(a);
@@ -3618,7 +3618,7 @@ function caml_int_of_string(s) {
               _k = k + 1 | 0;
               _acc = acc$1;
               continue ;
-              
+
             }
           }
         }
@@ -3644,31 +3644,31 @@ function caml_int64_of_string(s) {
   var sign = Caml_int64.of_int32(match[1]);
   var threshold;
   switch (hbase) {
-    case 0 : 
+    case 0 :
         threshold = /* int64 */[
           /* hi */536870911,
           /* lo */4294967295
         ];
         break;
-    case 1 : 
+    case 1 :
         threshold = /* int64 */[
           /* hi */268435455,
           /* lo */4294967295
         ];
         break;
-    case 2 : 
+    case 2 :
         threshold = /* int64 */[
           /* hi */429496729,
           /* lo */2576980377
         ];
         break;
-    case 3 : 
+    case 3 :
         threshold = /* int64 */[
           /* hi */2147483647,
           /* lo */4294967295
         ];
         break;
-    
+
   }
   var len = s.length;
   var c = i < len ? s.charCodeAt(i) : /* "\000" */0;
@@ -3694,7 +3694,7 @@ function caml_int64_of_string(s) {
         if (a === /* "_" */95) {
           _k = k + 1 | 0;
           continue ;
-          
+
         }
         else {
           var v = Caml_int64.of_int32(parse_digit(a));
@@ -3719,7 +3719,7 @@ function caml_int64_of_string(s) {
               _k = k + 1 | 0;
               _acc = acc$1;
               continue ;
-              
+
             }
           }
         }
@@ -3747,13 +3747,13 @@ function caml_int64_of_string(s) {
 
 function int_of_base(param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return 8;
-    case 1 : 
+    case 1 :
         return 16;
-    case 2 : 
+    case 2 :
         return 10;
-    
+
   }
 }
 
@@ -3803,59 +3803,59 @@ function parse_format(fmt) {
           }
           else {
             switch (c - 88 | 0) {
-              case 0 : 
+              case 0 :
                   f[/* base */4] = /* Hex */1;
                   f[/* uppercase */7] = /* true */1;
                   _i = i + 1 | 0;
                   continue ;
-                  case 13 : 
-              case 14 : 
-              case 15 : 
+                  case 13 :
+              case 14 :
+              case 15 :
                   exit = 5;
                   break;
-              case 12 : 
-              case 17 : 
+              case 12 :
+              case 17 :
                   exit = 4;
                   break;
-              case 23 : 
+              case 23 :
                   f[/* base */4] = /* Oct */0;
                   _i = i + 1 | 0;
                   continue ;
-                  case 29 : 
+                  case 29 :
                   f[/* base */4] = /* Dec */2;
                   _i = i + 1 | 0;
                   continue ;
-                  case 1 : 
-              case 2 : 
-              case 3 : 
-              case 4 : 
-              case 5 : 
-              case 6 : 
-              case 7 : 
-              case 8 : 
-              case 9 : 
-              case 10 : 
-              case 11 : 
-              case 16 : 
-              case 18 : 
-              case 19 : 
-              case 20 : 
-              case 21 : 
-              case 22 : 
-              case 24 : 
-              case 25 : 
-              case 26 : 
-              case 27 : 
-              case 28 : 
-              case 30 : 
-              case 31 : 
+                  case 1 :
+              case 2 :
+              case 3 :
+              case 4 :
+              case 5 :
+              case 6 :
+              case 7 :
+              case 8 :
+              case 9 :
+              case 10 :
+              case 11 :
+              case 16 :
+              case 18 :
+              case 19 :
+              case 20 :
+              case 21 :
+              case 22 :
+              case 24 :
+              case 25 :
+              case 26 :
+              case 27 :
+              case 28 :
+              case 30 :
+              case 31 :
                   exit = 1;
                   break;
-              case 32 : 
+              case 32 :
                   f[/* base */4] = /* Hex */1;
                   _i = i + 1 | 0;
                   continue ;
-                  
+
             }
           }
         }
@@ -3868,7 +3868,7 @@ function parse_format(fmt) {
           f[/* conv */10] = String.fromCharCode(lowercase(c));
           _i = i + 1 | 0;
           continue ;
-          
+
         }
       }
       else {
@@ -3878,19 +3878,19 @@ function parse_format(fmt) {
         }
         else {
           switch (switcher) {
-            case 3 : 
+            case 3 :
                 f[/* alternate */3] = /* true */1;
                 _i = i + 1 | 0;
                 continue ;
-                case 0 : 
-            case 11 : 
+                case 0 :
+            case 11 :
                 exit = 2;
                 break;
-            case 13 : 
+            case 13 :
                 f[/* justify */0] = "-";
                 _i = i + 1 | 0;
                 continue ;
-                case 14 : 
+                case 14 :
                 f[/* prec */9] = 0;
                 var j = i + 1 | 0;
                 while((function(j){
@@ -3904,47 +3904,47 @@ function parse_format(fmt) {
                 };
                 _i = j;
                 continue ;
-                case 1 : 
-            case 2 : 
-            case 4 : 
-            case 5 : 
-            case 6 : 
-            case 7 : 
-            case 8 : 
-            case 9 : 
-            case 10 : 
-            case 12 : 
-            case 15 : 
+                case 1 :
+            case 2 :
+            case 4 :
+            case 5 :
+            case 6 :
+            case 7 :
+            case 8 :
+            case 9 :
+            case 10 :
+            case 12 :
+            case 15 :
                 exit = 1;
                 break;
-            case 16 : 
+            case 16 :
                 f[/* filter */2] = "0";
                 _i = i + 1 | 0;
                 continue ;
-                case 17 : 
-            case 18 : 
-            case 19 : 
-            case 20 : 
-            case 21 : 
-            case 22 : 
-            case 23 : 
-            case 24 : 
-            case 25 : 
+                case 17 :
+            case 18 :
+            case 19 :
+            case 20 :
+            case 21 :
+            case 22 :
+            case 23 :
+            case 24 :
+            case 25 :
                 exit = 3;
                 break;
-            
+
           }
         }
       }
       switch (exit) {
-        case 1 : 
+        case 1 :
             _i = i + 1 | 0;
             continue ;
-            case 2 : 
+            case 2 :
             f[/* signstyle */1] = String.fromCharCode(c);
             _i = i + 1 | 0;
             continue ;
-            case 3 : 
+            case 3 :
             f[/* width */6] = 0;
             var j$1 = i;
             while((function(j$1){
@@ -3958,17 +3958,17 @@ function parse_format(fmt) {
             };
             _i = j$1;
             continue ;
-            case 4 : 
+            case 4 :
             f[/* signedconv */5] = /* true */1;
             f[/* base */4] = /* Dec */2;
             _i = i + 1 | 0;
             continue ;
-            case 5 : 
+            case 5 :
             f[/* signedconv */5] = /* true */1;
             f[/* conv */10] = String.fromCharCode(c);
             _i = i + 1 | 0;
             continue ;
-            
+
       }
     }
   };
@@ -3993,7 +3993,7 @@ function finish_formatting(param, rawbuffer) {
       if (base === /* Hex */1) {
         len = len + 2 | 0;
       }
-      
+
     }
     else {
       len = len + 1 | 0;
@@ -4012,7 +4012,7 @@ function finish_formatting(param, rawbuffer) {
     else if (signstyle !== "-") {
       buffer = buffer + signstyle;
     }
-    
+
   }
   if (alternate && base === /* Oct */0) {
     buffer = buffer + "0";
@@ -4052,7 +4052,7 @@ function caml_format_int(fmt, i) {
       if (n > 0) {
         s = Caml_utils.repeat(n, "0") + s;
       }
-      
+
     }
     return finish_formatting(f$1, s);
   }
@@ -4067,7 +4067,7 @@ function caml_int64_format(fmt, x) {
   var s = "";
   var match = f[/* base */4];
   switch (match) {
-    case 0 : 
+    case 0 :
         var wbase = /* int64 */[
           /* hi */0,
           /* lo */8
@@ -4111,10 +4111,10 @@ function caml_int64_format(fmt, x) {
           };
         }
         break;
-    case 1 : 
+    case 1 :
         s = Caml_int64.to_hex(x$1) + s;
         break;
-    case 2 : 
+    case 2 :
         var wbase$1 = /* int64 */[
           /* hi */0,
           /* lo */10
@@ -4162,7 +4162,7 @@ function caml_int64_format(fmt, x) {
           };
         }
         break;
-    
+
   }
   if (f[/* prec */9] >= 0) {
     f[/* filter */2] = " ";
@@ -4170,7 +4170,7 @@ function caml_int64_format(fmt, x) {
     if (n > 0) {
       s = Caml_utils.repeat(n, "0") + s;
     }
-    
+
   }
   return finish_formatting(f, s);
 }
@@ -4187,17 +4187,17 @@ function caml_format_float(fmt, x) {
   else if (isFinite(x$1)) {
     var match = f[/* conv */10];
     switch (match) {
-      case "e" : 
+      case "e" :
           s = x$1.toExponential(prec);
           var i = s.length;
           if (s[i - 3 | 0] === "e") {
             s = s.slice(0, i - 1 | 0) + ("0" + s.slice(i - 1 | 0));
           }
           break;
-      case "f" : 
+      case "f" :
           s = x$1.toFixed(prec);
           break;
-      case "g" : 
+      case "g" :
           var prec$1 = prec !== 0 ? prec : 1;
           s = x$1.toExponential(prec$1 - 1 | 0);
           var j = s.indexOf("e");
@@ -4215,7 +4215,7 @@ function caml_format_float(fmt, x) {
             if (s[i$2 - 3 | 0] === "e") {
               s = s.slice(0, i$2 - 1 | 0) + ("0" + s.slice(i$2 - 1 | 0));
             }
-            
+
           }
           else {
             var p = prec$1;
@@ -4241,11 +4241,11 @@ function caml_format_float(fmt, x) {
               }
               s = s.slice(0, k + 1 | 0);
             }
-            
+
           }
           break;
       default:
-        
+
     }
   }
   else {
@@ -4344,7 +4344,7 @@ function caml_int32_bswap(x) {
 }
 
 var imul = ( Math.imul || function (x,y) {
-  y |= 0; return ((((x >> 16) * y) << 16) + (x & 0xffff) * y)|0; 
+  y |= 0; return ((((x >> 16) * y) << 16) + (x & 0xffff) * y)|0;
 }
 );
 
@@ -4595,7 +4595,7 @@ function mul(_this, _other) {
             _other = neg(other);
             _this = neg($$this);
             continue ;
-            
+
           }
           else {
             return neg(mul(neg($$this), other));
@@ -4636,7 +4636,7 @@ function mul(_this, _other) {
                 ];
         }
       }
-      
+
     }
     if (exit === 1) {
       if ((lo & 1) === 0) {
@@ -4646,7 +4646,7 @@ function mul(_this, _other) {
         return min_int;
       }
     }
-    
+
   };
 }
 
@@ -4810,7 +4810,7 @@ function div(_self, _other) {
           var rem = add(self, neg(y));
           return add(approx, div(rem, other));
         }
-        
+
       }
     }
     if (exit === 1) {
@@ -4831,7 +4831,7 @@ function div(_self, _other) {
             _other = neg(other);
             _self = neg(self);
             continue ;
-            
+
           }
           else {
             return neg(div(neg(self), other));
@@ -4863,9 +4863,9 @@ function div(_self, _other) {
           return res;
         }
       }
-      
+
     }
-    
+
   };
 }
 
@@ -4940,7 +4940,7 @@ function to_hex(x) {
       return aux(x[/* hi */0]) + "00000000";
     }
   }
-  
+
 }
 
 function discard_sign(x) {
@@ -5036,45 +5036,45 @@ function erase_rel(param) {
   }
   else {
     switch (param.tag | 0) {
-      case 0 : 
+      case 0 :
           return /* Char_ty */Block.__(0, [erase_rel(param[0])]);
-      case 1 : 
+      case 1 :
           return /* String_ty */Block.__(1, [erase_rel(param[0])]);
-      case 2 : 
+      case 2 :
           return /* Int_ty */Block.__(2, [erase_rel(param[0])]);
-      case 3 : 
+      case 3 :
           return /* Int32_ty */Block.__(3, [erase_rel(param[0])]);
-      case 4 : 
+      case 4 :
           return /* Nativeint_ty */Block.__(4, [erase_rel(param[0])]);
-      case 5 : 
+      case 5 :
           return /* Int64_ty */Block.__(5, [erase_rel(param[0])]);
-      case 6 : 
+      case 6 :
           return /* Float_ty */Block.__(6, [erase_rel(param[0])]);
-      case 7 : 
+      case 7 :
           return /* Bool_ty */Block.__(7, [erase_rel(param[0])]);
-      case 8 : 
+      case 8 :
           return /* Format_arg_ty */Block.__(8, [
                     param[0],
                     erase_rel(param[1])
                   ]);
-      case 9 : 
+      case 9 :
           var ty1 = param[0];
           return /* Format_subst_ty */Block.__(9, [
                     ty1,
                     ty1,
                     erase_rel(param[2])
                   ]);
-      case 10 : 
+      case 10 :
           return /* Alpha_ty */Block.__(10, [erase_rel(param[0])]);
-      case 11 : 
+      case 11 :
           return /* Theta_ty */Block.__(11, [erase_rel(param[0])]);
-      case 12 : 
+      case 12 :
           return /* Any_ty */Block.__(12, [erase_rel(param[0])]);
-      case 13 : 
+      case 13 :
           return /* Reader_ty */Block.__(13, [erase_rel(param[0])]);
-      case 14 : 
+      case 14 :
           return /* Ignored_reader_ty */Block.__(14, [erase_rel(param[0])]);
-      
+
     }
   }
 }
@@ -5085,44 +5085,44 @@ function concat_fmtty(fmtty1, fmtty2) {
   }
   else {
     switch (fmtty1.tag | 0) {
-      case 0 : 
+      case 0 :
           return /* Char_ty */Block.__(0, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 1 : 
+      case 1 :
           return /* String_ty */Block.__(1, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 2 : 
+      case 2 :
           return /* Int_ty */Block.__(2, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 3 : 
+      case 3 :
           return /* Int32_ty */Block.__(3, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 4 : 
+      case 4 :
           return /* Nativeint_ty */Block.__(4, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 5 : 
+      case 5 :
           return /* Int64_ty */Block.__(5, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 6 : 
+      case 6 :
           return /* Float_ty */Block.__(6, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 7 : 
+      case 7 :
           return /* Bool_ty */Block.__(7, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 8 : 
+      case 8 :
           return /* Format_arg_ty */Block.__(8, [
                     fmtty1[0],
                     concat_fmtty(fmtty1[1], fmtty2)
                   ]);
-      case 9 : 
+      case 9 :
           return /* Format_subst_ty */Block.__(9, [
                     fmtty1[0],
                     fmtty1[1],
                     concat_fmtty(fmtty1[2], fmtty2)
                   ]);
-      case 10 : 
+      case 10 :
           return /* Alpha_ty */Block.__(10, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 11 : 
+      case 11 :
           return /* Theta_ty */Block.__(11, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 12 : 
+      case 12 :
           return /* Any_ty */Block.__(12, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 13 : 
+      case 13 :
           return /* Reader_ty */Block.__(13, [concat_fmtty(fmtty1[0], fmtty2)]);
-      case 14 : 
+      case 14 :
           return /* Ignored_reader_ty */Block.__(14, [concat_fmtty(fmtty1[0], fmtty2)]);
-      
+
     }
   }
 }
@@ -5133,122 +5133,122 @@ function concat_fmt(fmt1, fmt2) {
   }
   else {
     switch (fmt1.tag | 0) {
-      case 0 : 
+      case 0 :
           return /* Char */Block.__(0, [concat_fmt(fmt1[0], fmt2)]);
-      case 1 : 
+      case 1 :
           return /* Caml_char */Block.__(1, [concat_fmt(fmt1[0], fmt2)]);
-      case 2 : 
+      case 2 :
           return /* String */Block.__(2, [
                     fmt1[0],
                     concat_fmt(fmt1[1], fmt2)
                   ]);
-      case 3 : 
+      case 3 :
           return /* Caml_string */Block.__(3, [
                     fmt1[0],
                     concat_fmt(fmt1[1], fmt2)
                   ]);
-      case 4 : 
+      case 4 :
           return /* Int */Block.__(4, [
                     fmt1[0],
                     fmt1[1],
                     fmt1[2],
                     concat_fmt(fmt1[3], fmt2)
                   ]);
-      case 5 : 
+      case 5 :
           return /* Int32 */Block.__(5, [
                     fmt1[0],
                     fmt1[1],
                     fmt1[2],
                     concat_fmt(fmt1[3], fmt2)
                   ]);
-      case 6 : 
+      case 6 :
           return /* Nativeint */Block.__(6, [
                     fmt1[0],
                     fmt1[1],
                     fmt1[2],
                     concat_fmt(fmt1[3], fmt2)
                   ]);
-      case 7 : 
+      case 7 :
           return /* Int64 */Block.__(7, [
                     fmt1[0],
                     fmt1[1],
                     fmt1[2],
                     concat_fmt(fmt1[3], fmt2)
                   ]);
-      case 8 : 
+      case 8 :
           return /* Float */Block.__(8, [
                     fmt1[0],
                     fmt1[1],
                     fmt1[2],
                     concat_fmt(fmt1[3], fmt2)
                   ]);
-      case 9 : 
+      case 9 :
           return /* Bool */Block.__(9, [concat_fmt(fmt1[0], fmt2)]);
-      case 10 : 
+      case 10 :
           return /* Flush */Block.__(10, [concat_fmt(fmt1[0], fmt2)]);
-      case 11 : 
+      case 11 :
           return /* String_literal */Block.__(11, [
                     fmt1[0],
                     concat_fmt(fmt1[1], fmt2)
                   ]);
-      case 12 : 
+      case 12 :
           return /* Char_literal */Block.__(12, [
                     fmt1[0],
                     concat_fmt(fmt1[1], fmt2)
                   ]);
-      case 13 : 
+      case 13 :
           return /* Format_arg */Block.__(13, [
                     fmt1[0],
                     fmt1[1],
                     concat_fmt(fmt1[2], fmt2)
                   ]);
-      case 14 : 
+      case 14 :
           return /* Format_subst */Block.__(14, [
                     fmt1[0],
                     fmt1[1],
                     concat_fmt(fmt1[2], fmt2)
                   ]);
-      case 15 : 
+      case 15 :
           return /* Alpha */Block.__(15, [concat_fmt(fmt1[0], fmt2)]);
-      case 16 : 
+      case 16 :
           return /* Theta */Block.__(16, [concat_fmt(fmt1[0], fmt2)]);
-      case 17 : 
+      case 17 :
           return /* Formatting_lit */Block.__(17, [
                     fmt1[0],
                     concat_fmt(fmt1[1], fmt2)
                   ]);
-      case 18 : 
+      case 18 :
           return /* Formatting_gen */Block.__(18, [
                     fmt1[0],
                     concat_fmt(fmt1[1], fmt2)
                   ]);
-      case 19 : 
+      case 19 :
           return /* Reader */Block.__(19, [concat_fmt(fmt1[0], fmt2)]);
-      case 20 : 
+      case 20 :
           return /* Scan_char_set */Block.__(20, [
                     fmt1[0],
                     fmt1[1],
                     concat_fmt(fmt1[2], fmt2)
                   ]);
-      case 21 : 
+      case 21 :
           return /* Scan_get_counter */Block.__(21, [
                     fmt1[0],
                     concat_fmt(fmt1[1], fmt2)
                   ]);
-      case 22 : 
+      case 22 :
           return /* Scan_next_char */Block.__(22, [concat_fmt(fmt1[0], fmt2)]);
-      case 23 : 
+      case 23 :
           return /* Ignored_param */Block.__(23, [
                     fmt1[0],
                     concat_fmt(fmt1[1], fmt2)
                   ]);
-      case 24 : 
+      case 24 :
           return /* Custom */Block.__(24, [
                     fmt1[0],
                     fmt1[1],
                     concat_fmt(fmt1[2], fmt2)
                   ]);
-      
+
     }
   }
 }
@@ -5337,90 +5337,90 @@ function prec_of_prec_opt(prec_opt) {
 function param_format_of_ignored_format(ign, fmt) {
   if (typeof ign === "number") {
     switch (ign) {
-      case 0 : 
+      case 0 :
           return /* Param_format_EBB */[/* Char */Block.__(0, [fmt])];
-      case 1 : 
+      case 1 :
           return /* Param_format_EBB */[/* Caml_char */Block.__(1, [fmt])];
-      case 2 : 
+      case 2 :
           return /* Param_format_EBB */[/* Bool */Block.__(9, [fmt])];
-      case 3 : 
+      case 3 :
           return /* Param_format_EBB */[/* Reader */Block.__(19, [fmt])];
-      case 4 : 
+      case 4 :
           return /* Param_format_EBB */[/* Scan_next_char */Block.__(22, [fmt])];
-      
+
     }
   }
   else {
     switch (ign.tag | 0) {
-      case 0 : 
+      case 0 :
           return /* Param_format_EBB */[/* String */Block.__(2, [
                       pad_of_pad_opt(ign[0]),
                       fmt
                     ])];
-      case 1 : 
+      case 1 :
           return /* Param_format_EBB */[/* Caml_string */Block.__(3, [
                       pad_of_pad_opt(ign[0]),
                       fmt
                     ])];
-      case 2 : 
+      case 2 :
           return /* Param_format_EBB */[/* Int */Block.__(4, [
                       ign[0],
                       pad_of_pad_opt(ign[1]),
                       /* No_precision */0,
                       fmt
                     ])];
-      case 3 : 
+      case 3 :
           return /* Param_format_EBB */[/* Int32 */Block.__(5, [
                       ign[0],
                       pad_of_pad_opt(ign[1]),
                       /* No_precision */0,
                       fmt
                     ])];
-      case 4 : 
+      case 4 :
           return /* Param_format_EBB */[/* Nativeint */Block.__(6, [
                       ign[0],
                       pad_of_pad_opt(ign[1]),
                       /* No_precision */0,
                       fmt
                     ])];
-      case 5 : 
+      case 5 :
           return /* Param_format_EBB */[/* Int64 */Block.__(7, [
                       ign[0],
                       pad_of_pad_opt(ign[1]),
                       /* No_precision */0,
                       fmt
                     ])];
-      case 6 : 
+      case 6 :
           return /* Param_format_EBB */[/* Float */Block.__(8, [
                       /* Float_f */0,
                       pad_of_pad_opt(ign[0]),
                       prec_of_prec_opt(ign[1]),
                       fmt
                     ])];
-      case 7 : 
+      case 7 :
           return /* Param_format_EBB */[/* Format_arg */Block.__(13, [
                       ign[0],
                       ign[1],
                       fmt
                     ])];
-      case 8 : 
+      case 8 :
           return /* Param_format_EBB */[/* Format_subst */Block.__(14, [
                       ign[0],
                       ign[1],
                       fmt
                     ])];
-      case 9 : 
+      case 9 :
           return /* Param_format_EBB */[/* Scan_char_set */Block.__(20, [
                       ign[0],
                       ign[1],
                       fmt
                     ])];
-      case 10 : 
+      case 10 :
           return /* Param_format_EBB */[/* Scan_get_counter */Block.__(21, [
                       ign[0],
                       fmt
                     ])];
-      
+
     }
   }
 }
@@ -5461,66 +5461,66 @@ function buffer_contents(buf) {
 
 function char_of_iconv(iconv) {
   switch (iconv) {
-    case 0 : 
-    case 1 : 
-    case 2 : 
+    case 0 :
+    case 1 :
+    case 2 :
         return /* "d" */100;
-    case 3 : 
-    case 4 : 
-    case 5 : 
+    case 3 :
+    case 4 :
+    case 5 :
         return /* "i" */105;
-    case 6 : 
-    case 7 : 
+    case 6 :
+    case 7 :
         return /* "x" */120;
-    case 8 : 
-    case 9 : 
+    case 8 :
+    case 9 :
         return /* "X" */88;
-    case 10 : 
-    case 11 : 
+    case 10 :
+    case 11 :
         return /* "o" */111;
-    case 12 : 
+    case 12 :
         return /* "u" */117;
-    
+
   }
 }
 
 function char_of_fconv(fconv) {
   switch (fconv) {
-    case 0 : 
-    case 1 : 
-    case 2 : 
+    case 0 :
+    case 1 :
+    case 2 :
         return /* "f" */102;
-    case 3 : 
-    case 4 : 
-    case 5 : 
+    case 3 :
+    case 4 :
+    case 5 :
         return /* "e" */101;
-    case 6 : 
-    case 7 : 
-    case 8 : 
+    case 6 :
+    case 7 :
+    case 8 :
         return /* "E" */69;
-    case 9 : 
-    case 10 : 
-    case 11 : 
+    case 9 :
+    case 10 :
+    case 11 :
         return /* "g" */103;
-    case 12 : 
-    case 13 : 
-    case 14 : 
+    case 12 :
+    case 13 :
+    case 14 :
         return /* "G" */71;
-    case 15 : 
+    case 15 :
         return /* "F" */70;
-    
+
   }
 }
 
 function char_of_counter(counter) {
   switch (counter) {
-    case 0 : 
+    case 0 :
         return /* "l" */108;
-    case 1 : 
+    case 1 :
         return /* "n" */110;
-    case 2 : 
+    case 2 :
         return /* "N" */78;
-    
+
   }
 }
 
@@ -5568,7 +5568,7 @@ function bprint_char_set(buf, char_set) {
         else {
           _i = i + 1 | 0;
           continue ;
-          
+
         }
       }
       else {
@@ -5623,7 +5623,7 @@ function bprint_char_set(buf, char_set) {
             else {
               _j = j + 1 | 0;
               continue ;
-              
+
             }
           };
         }
@@ -5633,7 +5633,7 @@ function bprint_char_set(buf, char_set) {
           return print_out(set, i + 2 | 0);
         }
       }
-      
+
     }
     else {
       print_char(buf, i - 1 | 0);
@@ -5669,13 +5669,13 @@ function bprint_char_set(buf, char_set) {
 
 function bprint_padty(buf, padty) {
   switch (padty) {
-    case 0 : 
+    case 0 :
         return buffer_add_char(buf, /* "-" */45);
-    case 1 : 
+    case 1 :
         return /* () */0;
-    case 2 : 
+    case 2 :
         return buffer_add_char(buf, /* "0" */48);
-    
+
   }
 }
 
@@ -5729,24 +5729,24 @@ function bprint_precision(buf, prec) {
 
 function bprint_iconv_flag(buf, iconv) {
   switch (iconv) {
-    case 1 : 
-    case 4 : 
+    case 1 :
+    case 4 :
         return buffer_add_char(buf, /* "+" */43);
-    case 2 : 
-    case 5 : 
+    case 2 :
+    case 5 :
         return buffer_add_char(buf, /* " " */32);
-    case 7 : 
-    case 9 : 
-    case 11 : 
+    case 7 :
+    case 9 :
+    case 11 :
         return buffer_add_char(buf, /* "#" */35);
-    case 0 : 
-    case 3 : 
-    case 6 : 
-    case 8 : 
-    case 10 : 
-    case 12 : 
+    case 0 :
+    case 3 :
+    case 6 :
+    case 8 :
+    case 10 :
+    case 12 :
         return /* () */0;
-    
+
   }
 }
 
@@ -5771,26 +5771,26 @@ function bprint_altint_fmt(buf, ign_flag, iconv, pad, prec, c) {
 
 function bprint_fconv_flag(buf, fconv) {
   switch (fconv) {
-    case 1 : 
-    case 4 : 
-    case 7 : 
-    case 10 : 
-    case 13 : 
+    case 1 :
+    case 4 :
+    case 7 :
+    case 10 :
+    case 13 :
         return buffer_add_char(buf, /* "+" */43);
-    case 2 : 
-    case 5 : 
-    case 8 : 
-    case 11 : 
-    case 14 : 
+    case 2 :
+    case 5 :
+    case 8 :
+    case 11 :
+    case 14 :
         return buffer_add_char(buf, /* " " */32);
-    case 0 : 
-    case 3 : 
-    case 6 : 
-    case 9 : 
-    case 12 : 
-    case 15 : 
+    case 0 :
+    case 3 :
+    case 6 :
+    case 9 :
+    case 12 :
+    case 15 :
         return /* () */0;
-    
+
   }
 }
 
@@ -5806,31 +5806,31 @@ function bprint_float_fmt(buf, ign_flag, fconv, pad, prec) {
 function string_of_formatting_lit(formatting_lit) {
   if (typeof formatting_lit === "number") {
     switch (formatting_lit) {
-      case 0 : 
+      case 0 :
           return "@]";
-      case 1 : 
+      case 1 :
           return "@}";
-      case 2 : 
+      case 2 :
           return "@?";
-      case 3 : 
+      case 3 :
           return "@\n";
-      case 4 : 
+      case 4 :
           return "@.";
-      case 5 : 
+      case 5 :
           return "@@";
-      case 6 : 
+      case 6 :
           return "@%";
-      
+
     }
   }
   else {
     switch (formatting_lit.tag | 0) {
-      case 0 : 
-      case 1 : 
+      case 0 :
+      case 1 :
           return formatting_lit[0];
-      case 2 : 
+      case 2 :
           return "@" + Caml_string.bytes_to_string(Bytes.make(1, formatting_lit[0]));
-      
+
     }
   }
 }
@@ -5863,71 +5863,71 @@ function bprint_fmtty(buf, _fmtty) {
     }
     else {
       switch (fmtty.tag | 0) {
-        case 0 : 
+        case 0 :
             buffer_add_string(buf, "%c");
             _fmtty = fmtty[0];
             continue ;
-            case 1 : 
+            case 1 :
             buffer_add_string(buf, "%s");
             _fmtty = fmtty[0];
             continue ;
-            case 2 : 
+            case 2 :
             buffer_add_string(buf, "%i");
             _fmtty = fmtty[0];
             continue ;
-            case 3 : 
+            case 3 :
             buffer_add_string(buf, "%li");
             _fmtty = fmtty[0];
             continue ;
-            case 4 : 
+            case 4 :
             buffer_add_string(buf, "%ni");
             _fmtty = fmtty[0];
             continue ;
-            case 5 : 
+            case 5 :
             buffer_add_string(buf, "%Li");
             _fmtty = fmtty[0];
             continue ;
-            case 6 : 
+            case 6 :
             buffer_add_string(buf, "%f");
             _fmtty = fmtty[0];
             continue ;
-            case 7 : 
+            case 7 :
             buffer_add_string(buf, "%B");
             _fmtty = fmtty[0];
             continue ;
-            case 8 : 
+            case 8 :
             buffer_add_string(buf, "%{");
             bprint_fmtty(buf, fmtty[0]);
             buffer_add_string(buf, "%}");
             _fmtty = fmtty[1];
             continue ;
-            case 9 : 
+            case 9 :
             buffer_add_string(buf, "%(");
             bprint_fmtty(buf, fmtty[0]);
             buffer_add_string(buf, "%)");
             _fmtty = fmtty[2];
             continue ;
-            case 10 : 
+            case 10 :
             buffer_add_string(buf, "%a");
             _fmtty = fmtty[0];
             continue ;
-            case 11 : 
+            case 11 :
             buffer_add_string(buf, "%t");
             _fmtty = fmtty[0];
             continue ;
-            case 12 : 
+            case 12 :
             buffer_add_string(buf, "%?");
             _fmtty = fmtty[0];
             continue ;
-            case 13 : 
+            case 13 :
             buffer_add_string(buf, "%r");
             _fmtty = fmtty[0];
             continue ;
-            case 14 : 
+            case 14 :
             buffer_add_string(buf, "%_r");
             _fmtty = fmtty[0];
             continue ;
-            
+
       }
     }
   };
@@ -5953,21 +5953,21 @@ function bprint_fmt(buf, fmt) {
     }
     else {
       switch (fmt$1.tag | 0) {
-        case 0 : 
+        case 0 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             buffer_add_char(buf, /* "c" */99);
             _ign_flag = /* false */0;
             _fmt = fmt$1[0];
             continue ;
-            case 1 : 
+            case 1 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             buffer_add_char(buf, /* "C" */67);
             _ign_flag = /* false */0;
             _fmt = fmt$1[0];
             continue ;
-            case 2 : 
+            case 2 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             bprint_padding(buf, fmt$1[0]);
@@ -5975,7 +5975,7 @@ function bprint_fmt(buf, fmt) {
             _ign_flag = /* false */0;
             _fmt = fmt$1[1];
             continue ;
-            case 3 : 
+            case 3 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             bprint_padding(buf, fmt$1[0]);
@@ -5983,51 +5983,51 @@ function bprint_fmt(buf, fmt) {
             _ign_flag = /* false */0;
             _fmt = fmt$1[1];
             continue ;
-            case 4 : 
+            case 4 :
             bprint_int_fmt(buf, ign_flag, fmt$1[0], fmt$1[1], fmt$1[2]);
             _ign_flag = /* false */0;
             _fmt = fmt$1[3];
             continue ;
-            case 5 : 
+            case 5 :
             bprint_altint_fmt(buf, ign_flag, fmt$1[0], fmt$1[1], fmt$1[2], /* "l" */108);
             _ign_flag = /* false */0;
             _fmt = fmt$1[3];
             continue ;
-            case 6 : 
+            case 6 :
             bprint_altint_fmt(buf, ign_flag, fmt$1[0], fmt$1[1], fmt$1[2], /* "n" */110);
             _ign_flag = /* false */0;
             _fmt = fmt$1[3];
             continue ;
-            case 7 : 
+            case 7 :
             bprint_altint_fmt(buf, ign_flag, fmt$1[0], fmt$1[1], fmt$1[2], /* "L" */76);
             _ign_flag = /* false */0;
             _fmt = fmt$1[3];
             continue ;
-            case 8 : 
+            case 8 :
             bprint_float_fmt(buf, ign_flag, fmt$1[0], fmt$1[1], fmt$1[2]);
             _ign_flag = /* false */0;
             _fmt = fmt$1[3];
             continue ;
-            case 9 : 
+            case 9 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             buffer_add_char(buf, /* "B" */66);
             _ign_flag = /* false */0;
             _fmt = fmt$1[0];
             continue ;
-            case 10 : 
+            case 10 :
             buffer_add_string(buf, "%!");
             _fmt = fmt$1[0];
             continue ;
-            case 11 : 
+            case 11 :
             bprint_string_literal(buf, fmt$1[0]);
             _fmt = fmt$1[1];
             continue ;
-            case 12 : 
+            case 12 :
             bprint_char_literal(buf, fmt$1[0]);
             _fmt = fmt$1[1];
             continue ;
-            case 13 : 
+            case 13 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             bprint_pad_opt(buf, fmt$1[0]);
@@ -6038,7 +6038,7 @@ function bprint_fmt(buf, fmt) {
             _ign_flag = /* false */0;
             _fmt = fmt$1[2];
             continue ;
-            case 14 : 
+            case 14 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             bprint_pad_opt(buf, fmt$1[0]);
@@ -6049,37 +6049,37 @@ function bprint_fmt(buf, fmt) {
             _ign_flag = /* false */0;
             _fmt = fmt$1[2];
             continue ;
-            case 15 : 
+            case 15 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             buffer_add_char(buf, /* "a" */97);
             _ign_flag = /* false */0;
             _fmt = fmt$1[0];
             continue ;
-            case 16 : 
+            case 16 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             buffer_add_char(buf, /* "t" */116);
             _ign_flag = /* false */0;
             _fmt = fmt$1[0];
             continue ;
-            case 17 : 
+            case 17 :
             bprint_string_literal(buf, string_of_formatting_lit(fmt$1[0]));
             _fmt = fmt$1[1];
             continue ;
-            case 18 : 
+            case 18 :
             bprint_string_literal(buf, "@{");
             bprint_string_literal(buf, string_of_formatting_gen(fmt$1[0]));
             _fmt = fmt$1[1];
             continue ;
-            case 19 : 
+            case 19 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             buffer_add_char(buf, /* "r" */114);
             _ign_flag = /* false */0;
             _fmt = fmt$1[0];
             continue ;
-            case 20 : 
+            case 20 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             bprint_pad_opt(buf, fmt$1[0]);
@@ -6087,26 +6087,26 @@ function bprint_fmt(buf, fmt) {
             _ign_flag = /* false */0;
             _fmt = fmt$1[2];
             continue ;
-            case 21 : 
+            case 21 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             buffer_add_char(buf, char_of_counter(fmt$1[0]));
             _ign_flag = /* false */0;
             _fmt = fmt$1[1];
             continue ;
-            case 22 : 
+            case 22 :
             buffer_add_char(buf, /* "%" */37);
             bprint_ignored_flag(buf, ign_flag);
             bprint_string_literal(buf, "0c");
             _ign_flag = /* false */0;
             _fmt = fmt$1[0];
             continue ;
-            case 23 : 
+            case 23 :
             var match = param_format_of_ignored_format(fmt$1[0], fmt$1[1]);
             _ign_flag = /* true */1;
             _fmt = match[0];
             continue ;
-            case 24 : 
+            case 24 :
             for(var _i = 1 ,_i_finish = int_of_custom_arity(fmt$1[0]); _i <= _i_finish; ++_i){
               buffer_add_char(buf, /* "%" */37);
               bprint_ignored_flag(buf, ign_flag);
@@ -6115,7 +6115,7 @@ function bprint_fmt(buf, fmt) {
             _ign_flag = /* false */0;
             _fmt = fmt$1[2];
             continue ;
-            
+
       }
     }
   };
@@ -6136,44 +6136,44 @@ function symm(param) {
   }
   else {
     switch (param.tag | 0) {
-      case 0 : 
+      case 0 :
           return /* Char_ty */Block.__(0, [symm(param[0])]);
-      case 1 : 
+      case 1 :
           return /* String_ty */Block.__(1, [symm(param[0])]);
-      case 2 : 
+      case 2 :
           return /* Int_ty */Block.__(2, [symm(param[0])]);
-      case 3 : 
+      case 3 :
           return /* Int32_ty */Block.__(3, [symm(param[0])]);
-      case 4 : 
+      case 4 :
           return /* Nativeint_ty */Block.__(4, [symm(param[0])]);
-      case 5 : 
+      case 5 :
           return /* Int64_ty */Block.__(5, [symm(param[0])]);
-      case 6 : 
+      case 6 :
           return /* Float_ty */Block.__(6, [symm(param[0])]);
-      case 7 : 
+      case 7 :
           return /* Bool_ty */Block.__(7, [symm(param[0])]);
-      case 8 : 
+      case 8 :
           return /* Format_arg_ty */Block.__(8, [
                     param[0],
                     symm(param[1])
                   ]);
-      case 9 : 
+      case 9 :
           return /* Format_subst_ty */Block.__(9, [
                     param[1],
                     param[0],
                     symm(param[2])
                   ]);
-      case 10 : 
+      case 10 :
           return /* Alpha_ty */Block.__(10, [symm(param[0])]);
-      case 11 : 
+      case 11 :
           return /* Theta_ty */Block.__(11, [symm(param[0])]);
-      case 12 : 
+      case 12 :
           return /* Any_ty */Block.__(12, [symm(param[0])]);
-      case 13 : 
+      case 13 :
           return /* Reader_ty */Block.__(13, [symm(param[0])]);
-      case 14 : 
+      case 14 :
           return /* Ignored_reader_ty */Block.__(14, [symm(param[0])]);
-      
+
     }
   }
 }
@@ -6197,7 +6197,7 @@ function fmtty_rel_det(param) {
   }
   else {
     switch (param.tag | 0) {
-      case 0 : 
+      case 0 :
           var match = fmtty_rel_det(param[0]);
           var af = match[1];
           var fa = match[0];
@@ -6213,7 +6213,7 @@ function fmtty_rel_det(param) {
                   match[2],
                   match[3]
                 ];
-      case 1 : 
+      case 1 :
           var match$1 = fmtty_rel_det(param[0]);
           var af$1 = match$1[1];
           var fa$1 = match$1[0];
@@ -6229,7 +6229,7 @@ function fmtty_rel_det(param) {
                   match$1[2],
                   match$1[3]
                 ];
-      case 2 : 
+      case 2 :
           var match$2 = fmtty_rel_det(param[0]);
           var af$2 = match$2[1];
           var fa$2 = match$2[0];
@@ -6245,7 +6245,7 @@ function fmtty_rel_det(param) {
                   match$2[2],
                   match$2[3]
                 ];
-      case 3 : 
+      case 3 :
           var match$3 = fmtty_rel_det(param[0]);
           var af$3 = match$3[1];
           var fa$3 = match$3[0];
@@ -6261,7 +6261,7 @@ function fmtty_rel_det(param) {
                   match$3[2],
                   match$3[3]
                 ];
-      case 4 : 
+      case 4 :
           var match$4 = fmtty_rel_det(param[0]);
           var af$4 = match$4[1];
           var fa$4 = match$4[0];
@@ -6277,7 +6277,7 @@ function fmtty_rel_det(param) {
                   match$4[2],
                   match$4[3]
                 ];
-      case 5 : 
+      case 5 :
           var match$5 = fmtty_rel_det(param[0]);
           var af$5 = match$5[1];
           var fa$5 = match$5[0];
@@ -6293,7 +6293,7 @@ function fmtty_rel_det(param) {
                   match$5[2],
                   match$5[3]
                 ];
-      case 6 : 
+      case 6 :
           var match$6 = fmtty_rel_det(param[0]);
           var af$6 = match$6[1];
           var fa$6 = match$6[0];
@@ -6309,7 +6309,7 @@ function fmtty_rel_det(param) {
                   match$6[2],
                   match$6[3]
                 ];
-      case 7 : 
+      case 7 :
           var match$7 = fmtty_rel_det(param[0]);
           var af$7 = match$7[1];
           var fa$7 = match$7[0];
@@ -6325,7 +6325,7 @@ function fmtty_rel_det(param) {
                   match$7[2],
                   match$7[3]
                 ];
-      case 8 : 
+      case 8 :
           var match$8 = fmtty_rel_det(param[1]);
           var af$8 = match$8[1];
           var fa$8 = match$8[0];
@@ -6341,7 +6341,7 @@ function fmtty_rel_det(param) {
                   match$8[2],
                   match$8[3]
                 ];
-      case 9 : 
+      case 9 :
           var match$9 = fmtty_rel_det(param[2]);
           var de = match$9[3];
           var ed = match$9[2];
@@ -6375,7 +6375,7 @@ function fmtty_rel_det(param) {
                     return /* Refl */0;
                   }
                 ];
-      case 10 : 
+      case 10 :
           var match$11 = fmtty_rel_det(param[0]);
           var af$10 = match$11[1];
           var fa$10 = match$11[0];
@@ -6391,7 +6391,7 @@ function fmtty_rel_det(param) {
                   match$11[2],
                   match$11[3]
                 ];
-      case 11 : 
+      case 11 :
           var match$12 = fmtty_rel_det(param[0]);
           var af$11 = match$12[1];
           var fa$11 = match$12[0];
@@ -6407,7 +6407,7 @@ function fmtty_rel_det(param) {
                   match$12[2],
                   match$12[3]
                 ];
-      case 12 : 
+      case 12 :
           var match$13 = fmtty_rel_det(param[0]);
           var af$12 = match$13[1];
           var fa$12 = match$13[0];
@@ -6423,7 +6423,7 @@ function fmtty_rel_det(param) {
                   match$13[2],
                   match$13[3]
                 ];
-      case 13 : 
+      case 13 :
           var match$14 = fmtty_rel_det(param[0]);
           var de$1 = match$14[3];
           var ed$1 = match$14[2];
@@ -6447,7 +6447,7 @@ function fmtty_rel_det(param) {
                     return /* Refl */0;
                   }
                 ];
-      case 14 : 
+      case 14 :
           var match$15 = fmtty_rel_det(param[0]);
           var de$2 = match$15[3];
           var ed$2 = match$15[2];
@@ -6471,7 +6471,7 @@ function fmtty_rel_det(param) {
                     return /* Refl */0;
                   }
                 ];
-      
+
     }
   }
 }
@@ -6496,25 +6496,25 @@ function trans(ty1, ty2) {
     }
     else {
       switch (ty2.tag | 0) {
-        case 8 : 
+        case 8 :
             exit = 6;
             break;
-        case 9 : 
+        case 9 :
             exit = 7;
             break;
-        case 10 : 
+        case 10 :
             exit = 1;
             break;
-        case 11 : 
+        case 11 :
             exit = 2;
             break;
-        case 12 : 
+        case 12 :
             exit = 3;
             break;
-        case 13 : 
+        case 13 :
             exit = 4;
             break;
-        case 14 : 
+        case 14 :
             exit = 5;
             break;
         default:
@@ -6531,271 +6531,271 @@ function trans(ty1, ty2) {
   }
   else {
     switch (ty1.tag | 0) {
-      case 0 : 
+      case 0 :
           if (typeof ty2 === "number") {
             exit = 8;
           }
           else {
             switch (ty2.tag | 0) {
-              case 0 : 
+              case 0 :
                   return /* Char_ty */Block.__(0, [trans(ty1[0], ty2[0])]);
-              case 8 : 
+              case 8 :
                   exit = 6;
                   break;
-              case 9 : 
+              case 9 :
                   exit = 7;
                   break;
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   exit = 5;
                   break;
-              
+
             }
           }
           break;
-      case 1 : 
+      case 1 :
           if (typeof ty2 === "number") {
             exit = 8;
           }
           else {
             switch (ty2.tag | 0) {
-              case 1 : 
+              case 1 :
                   return /* String_ty */Block.__(1, [trans(ty1[0], ty2[0])]);
-              case 8 : 
+              case 8 :
                   exit = 6;
                   break;
-              case 9 : 
+              case 9 :
                   exit = 7;
                   break;
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   exit = 5;
                   break;
-              
+
             }
           }
           break;
-      case 2 : 
+      case 2 :
           if (typeof ty2 === "number") {
             exit = 8;
           }
           else {
             switch (ty2.tag | 0) {
-              case 2 : 
+              case 2 :
                   return /* Int_ty */Block.__(2, [trans(ty1[0], ty2[0])]);
-              case 8 : 
+              case 8 :
                   exit = 6;
                   break;
-              case 9 : 
+              case 9 :
                   exit = 7;
                   break;
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   exit = 5;
                   break;
-              
+
             }
           }
           break;
-      case 3 : 
+      case 3 :
           if (typeof ty2 === "number") {
             exit = 8;
           }
           else {
             switch (ty2.tag | 0) {
-              case 3 : 
+              case 3 :
                   return /* Int32_ty */Block.__(3, [trans(ty1[0], ty2[0])]);
-              case 8 : 
+              case 8 :
                   exit = 6;
                   break;
-              case 9 : 
+              case 9 :
                   exit = 7;
                   break;
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   exit = 5;
                   break;
-              
+
             }
           }
           break;
-      case 4 : 
+      case 4 :
           if (typeof ty2 === "number") {
             exit = 8;
           }
           else {
             switch (ty2.tag | 0) {
-              case 4 : 
+              case 4 :
                   return /* Nativeint_ty */Block.__(4, [trans(ty1[0], ty2[0])]);
-              case 8 : 
+              case 8 :
                   exit = 6;
                   break;
-              case 9 : 
+              case 9 :
                   exit = 7;
                   break;
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   exit = 5;
                   break;
-              
+
             }
           }
           break;
-      case 5 : 
+      case 5 :
           if (typeof ty2 === "number") {
             exit = 8;
           }
           else {
             switch (ty2.tag | 0) {
-              case 5 : 
+              case 5 :
                   return /* Int64_ty */Block.__(5, [trans(ty1[0], ty2[0])]);
-              case 8 : 
+              case 8 :
                   exit = 6;
                   break;
-              case 9 : 
+              case 9 :
                   exit = 7;
                   break;
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   exit = 5;
                   break;
-              
+
             }
           }
           break;
-      case 6 : 
+      case 6 :
           if (typeof ty2 === "number") {
             exit = 8;
           }
           else {
             switch (ty2.tag | 0) {
-              case 6 : 
+              case 6 :
                   return /* Float_ty */Block.__(6, [trans(ty1[0], ty2[0])]);
-              case 8 : 
+              case 8 :
                   exit = 6;
                   break;
-              case 9 : 
+              case 9 :
                   exit = 7;
                   break;
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   exit = 5;
                   break;
-              
+
             }
           }
           break;
-      case 7 : 
+      case 7 :
           if (typeof ty2 === "number") {
             exit = 8;
           }
           else {
             switch (ty2.tag | 0) {
-              case 7 : 
+              case 7 :
                   return /* Bool_ty */Block.__(7, [trans(ty1[0], ty2[0])]);
-              case 8 : 
+              case 8 :
                   exit = 6;
                   break;
-              case 9 : 
+              case 9 :
                   exit = 7;
                   break;
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   exit = 5;
                   break;
-              
+
             }
           }
           break;
-      case 8 : 
+      case 8 :
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
@@ -6808,24 +6808,24 @@ function trans(ty1, ty2) {
           }
           else {
             switch (ty2.tag | 0) {
-              case 8 : 
+              case 8 :
                   return /* Format_arg_ty */Block.__(8, [
                             trans(ty1[0], ty2[0]),
                             trans(ty1[1], ty2[1])
                           ]);
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   exit = 5;
                   break;
               default:
@@ -6840,7 +6840,7 @@ function trans(ty1, ty2) {
             }
           }
           break;
-      case 9 : 
+      case 9 :
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
@@ -6853,10 +6853,10 @@ function trans(ty1, ty2) {
           }
           else {
             switch (ty2.tag | 0) {
-              case 8 : 
+              case 8 :
                   exit = 6;
                   break;
-              case 9 : 
+              case 9 :
                   var ty = trans(symm(ty1[1]), ty2[0]);
                   var match = fmtty_rel_det(ty);
                   Curry._1(match[1], /* Refl */0);
@@ -6866,19 +6866,19 @@ function trans(ty1, ty2) {
                             ty2[1],
                             trans(ty1[2], ty2[2])
                           ]);
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   exit = 5;
                   break;
               default:
@@ -6893,7 +6893,7 @@ function trans(ty1, ty2) {
             }
           }
           break;
-      case 10 : 
+      case 10 :
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
@@ -6918,7 +6918,7 @@ function trans(ty1, ty2) {
                 ];
           }
           break;
-      case 11 : 
+      case 11 :
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
@@ -6931,10 +6931,10 @@ function trans(ty1, ty2) {
           }
           else {
             switch (ty2.tag | 0) {
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   return /* Theta_ty */Block.__(11, [trans(ty1[0], ty2[0])]);
               default:
                 throw [
@@ -6948,7 +6948,7 @@ function trans(ty1, ty2) {
             }
           }
           break;
-      case 12 : 
+      case 12 :
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
@@ -6961,13 +6961,13 @@ function trans(ty1, ty2) {
           }
           else {
             switch (ty2.tag | 0) {
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   return /* Any_ty */Block.__(12, [trans(ty1[0], ty2[0])]);
               default:
                 throw [
@@ -6981,7 +6981,7 @@ function trans(ty1, ty2) {
             }
           }
           break;
-      case 13 : 
+      case 13 :
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
@@ -6994,16 +6994,16 @@ function trans(ty1, ty2) {
           }
           else {
             switch (ty2.tag | 0) {
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   return /* Reader_ty */Block.__(13, [trans(ty1[0], ty2[0])]);
               default:
                 throw [
@@ -7017,7 +7017,7 @@ function trans(ty1, ty2) {
             }
           }
           break;
-      case 14 : 
+      case 14 :
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
@@ -7030,19 +7030,19 @@ function trans(ty1, ty2) {
           }
           else {
             switch (ty2.tag | 0) {
-              case 10 : 
+              case 10 :
                   exit = 1;
                   break;
-              case 11 : 
+              case 11 :
                   exit = 2;
                   break;
-              case 12 : 
+              case 12 :
                   exit = 3;
                   break;
-              case 13 : 
+              case 13 :
                   exit = 4;
                   break;
-              case 14 : 
+              case 14 :
                   return /* Ignored_reader_ty */Block.__(14, [trans(ty1[0], ty2[0])]);
               default:
                 throw [
@@ -7056,11 +7056,11 @@ function trans(ty1, ty2) {
             }
           }
           break;
-      
+
     }
   }
   switch (exit) {
-    case 1 : 
+    case 1 :
         throw [
               Caml_builtin_exceptions.assert_failure,
               [
@@ -7069,7 +7069,7 @@ function trans(ty1, ty2) {
                 21
               ]
             ];
-    case 2 : 
+    case 2 :
         throw [
               Caml_builtin_exceptions.assert_failure,
               [
@@ -7078,7 +7078,7 @@ function trans(ty1, ty2) {
                 21
               ]
             ];
-    case 3 : 
+    case 3 :
         throw [
               Caml_builtin_exceptions.assert_failure,
               [
@@ -7087,7 +7087,7 @@ function trans(ty1, ty2) {
                 19
               ]
             ];
-    case 4 : 
+    case 4 :
         throw [
               Caml_builtin_exceptions.assert_failure,
               [
@@ -7096,7 +7096,7 @@ function trans(ty1, ty2) {
                 22
               ]
             ];
-    case 5 : 
+    case 5 :
         throw [
               Caml_builtin_exceptions.assert_failure,
               [
@@ -7105,7 +7105,7 @@ function trans(ty1, ty2) {
                 30
               ]
             ];
-    case 6 : 
+    case 6 :
         throw [
               Caml_builtin_exceptions.assert_failure,
               [
@@ -7114,7 +7114,7 @@ function trans(ty1, ty2) {
                 26
               ]
             ];
-    case 7 : 
+    case 7 :
         throw [
               Caml_builtin_exceptions.assert_failure,
               [
@@ -7123,7 +7123,7 @@ function trans(ty1, ty2) {
                 28
               ]
             ];
-    case 8 : 
+    case 8 :
         throw [
               Caml_builtin_exceptions.assert_failure,
               [
@@ -7132,7 +7132,7 @@ function trans(ty1, ty2) {
                 23
               ]
             ];
-    
+
   }
 }
 
@@ -7148,103 +7148,103 @@ function fmtty_of_fmt(_fmtty) {
     }
     else {
       switch (fmtty.tag | 0) {
-        case 2 : 
-        case 3 : 
+        case 2 :
+        case 3 :
             return fmtty_of_padding_fmtty(fmtty[0], /* String_ty */Block.__(1, [fmtty_of_fmt(fmtty[1])]));
-        case 4 : 
+        case 4 :
             var ty_rest = fmtty_of_fmt(fmtty[3]);
             var prec_ty = fmtty_of_precision_fmtty(fmtty[2], /* Int_ty */Block.__(2, [ty_rest]));
             return fmtty_of_padding_fmtty(fmtty[1], prec_ty);
-        case 5 : 
+        case 5 :
             var ty_rest$1 = fmtty_of_fmt(fmtty[3]);
             var prec_ty$1 = fmtty_of_precision_fmtty(fmtty[2], /* Int32_ty */Block.__(3, [ty_rest$1]));
             return fmtty_of_padding_fmtty(fmtty[1], prec_ty$1);
-        case 6 : 
+        case 6 :
             var ty_rest$2 = fmtty_of_fmt(fmtty[3]);
             var prec_ty$2 = fmtty_of_precision_fmtty(fmtty[2], /* Nativeint_ty */Block.__(4, [ty_rest$2]));
             return fmtty_of_padding_fmtty(fmtty[1], prec_ty$2);
-        case 7 : 
+        case 7 :
             var ty_rest$3 = fmtty_of_fmt(fmtty[3]);
             var prec_ty$3 = fmtty_of_precision_fmtty(fmtty[2], /* Int64_ty */Block.__(5, [ty_rest$3]));
             return fmtty_of_padding_fmtty(fmtty[1], prec_ty$3);
-        case 8 : 
+        case 8 :
             var ty_rest$4 = fmtty_of_fmt(fmtty[3]);
             var prec_ty$4 = fmtty_of_precision_fmtty(fmtty[2], /* Float_ty */Block.__(6, [ty_rest$4]));
             return fmtty_of_padding_fmtty(fmtty[1], prec_ty$4);
-        case 9 : 
+        case 9 :
             return /* Bool_ty */Block.__(7, [fmtty_of_fmt(fmtty[0])]);
-        case 10 : 
+        case 10 :
             _fmtty = fmtty[0];
             continue ;
-            case 13 : 
+            case 13 :
             return /* Format_arg_ty */Block.__(8, [
                       fmtty[1],
                       fmtty_of_fmt(fmtty[2])
                     ]);
-        case 14 : 
+        case 14 :
             var ty = fmtty[1];
             return /* Format_subst_ty */Block.__(9, [
                       ty,
                       ty,
                       fmtty_of_fmt(fmtty[2])
                     ]);
-        case 15 : 
+        case 15 :
             return /* Alpha_ty */Block.__(10, [fmtty_of_fmt(fmtty[0])]);
-        case 16 : 
+        case 16 :
             return /* Theta_ty */Block.__(11, [fmtty_of_fmt(fmtty[0])]);
-        case 11 : 
-        case 12 : 
-        case 17 : 
+        case 11 :
+        case 12 :
+        case 17 :
             _fmtty = fmtty[1];
             continue ;
-            case 18 : 
+            case 18 :
             return CamlinternalFormatBasics.concat_fmtty(fmtty_of_formatting_gen(fmtty[0]), fmtty_of_fmt(fmtty[1]));
-        case 19 : 
+        case 19 :
             return /* Reader_ty */Block.__(13, [fmtty_of_fmt(fmtty[0])]);
-        case 20 : 
+        case 20 :
             return /* String_ty */Block.__(1, [fmtty_of_fmt(fmtty[2])]);
-        case 21 : 
+        case 21 :
             return /* Int_ty */Block.__(2, [fmtty_of_fmt(fmtty[1])]);
-        case 0 : 
-        case 1 : 
-        case 22 : 
+        case 0 :
+        case 1 :
+        case 22 :
             return /* Char_ty */Block.__(0, [fmtty_of_fmt(fmtty[0])]);
-        case 23 : 
+        case 23 :
             var ign = fmtty[0];
             var fmt = fmtty[1];
             if (typeof ign === "number") {
               switch (ign) {
-                case 3 : 
+                case 3 :
                     return /* Ignored_reader_ty */Block.__(14, [fmtty_of_fmt(fmt)]);
-                case 0 : 
-                case 1 : 
-                case 2 : 
-                case 4 : 
+                case 0 :
+                case 1 :
+                case 2 :
+                case 4 :
                     return fmtty_of_fmt(fmt);
-                
+
               }
             }
             else {
               switch (ign.tag | 0) {
-                case 8 : 
+                case 8 :
                     return CamlinternalFormatBasics.concat_fmtty(ign[1], fmtty_of_fmt(fmt));
-                case 0 : 
-                case 1 : 
-                case 2 : 
-                case 3 : 
-                case 4 : 
-                case 5 : 
-                case 6 : 
-                case 7 : 
-                case 9 : 
-                case 10 : 
+                case 0 :
+                case 1 :
+                case 2 :
+                case 3 :
+                case 4 :
+                case 5 :
+                case 6 :
+                case 7 :
+                case 9 :
+                case 10 :
                     return fmtty_of_fmt(fmt);
-                
+
               }
             }
-        case 24 : 
+        case 24 :
             return fmtty_of_custom(fmtty[0], fmtty_of_fmt(fmtty[2]));
-        
+
       }
     }
   };
@@ -7367,7 +7367,7 @@ function type_format_gen(fmt, fmtty) {
   }
   else {
     switch (fmt.tag | 0) {
-      case 0 : 
+      case 0 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7382,7 +7382,7 @@ function type_format_gen(fmt, fmtty) {
                   ];
           }
           break;
-      case 1 : 
+      case 1 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7397,7 +7397,7 @@ function type_format_gen(fmt, fmtty) {
                   ];
           }
           break;
-      case 2 : 
+      case 2 :
           var match$2 = type_padding(fmt[0], fmtty);
           var match$3 = match$2[1];
           if (typeof match$3 === "number") {
@@ -7417,7 +7417,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 3 : 
+      case 3 :
           var match$5 = type_padding(fmt[0], fmtty);
           var match$6 = match$5[1];
           if (typeof match$6 === "number") {
@@ -7437,7 +7437,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 4 : 
+      case 4 :
           var match$8 = type_padprec(fmt[1], fmt[2], fmtty);
           var match$9 = match$8[2];
           if (typeof match$9 === "number") {
@@ -7459,7 +7459,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 5 : 
+      case 5 :
           var match$11 = type_padprec(fmt[1], fmt[2], fmtty);
           var match$12 = match$11[2];
           if (typeof match$12 === "number") {
@@ -7481,7 +7481,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 6 : 
+      case 6 :
           var match$14 = type_padprec(fmt[1], fmt[2], fmtty);
           var match$15 = match$14[2];
           if (typeof match$15 === "number") {
@@ -7503,7 +7503,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 7 : 
+      case 7 :
           var match$17 = type_padprec(fmt[1], fmt[2], fmtty);
           var match$18 = match$17[2];
           if (typeof match$18 === "number") {
@@ -7525,7 +7525,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 8 : 
+      case 8 :
           var match$20 = type_padprec(fmt[1], fmt[2], fmtty);
           var match$21 = match$20[2];
           if (typeof match$21 === "number") {
@@ -7547,7 +7547,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 9 : 
+      case 9 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7562,13 +7562,13 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 10 : 
+      case 10 :
           var match$24 = type_format_gen(fmt[0], fmtty);
           return /* Fmt_fmtty_EBB */[
                   /* Flush */Block.__(10, [match$24[0]]),
                   match$24[1]
                 ];
-      case 11 : 
+      case 11 :
           var match$25 = type_format_gen(fmt[1], fmtty);
           return /* Fmt_fmtty_EBB */[
                   /* String_literal */Block.__(11, [
@@ -7577,7 +7577,7 @@ function type_format_gen(fmt, fmtty) {
                     ]),
                   match$25[1]
                 ];
-      case 12 : 
+      case 12 :
           var match$26 = type_format_gen(fmt[1], fmtty);
           return /* Fmt_fmtty_EBB */[
                   /* Char_literal */Block.__(12, [
@@ -7586,7 +7586,7 @@ function type_format_gen(fmt, fmtty) {
                     ]),
                   match$26[1]
                 ];
-      case 13 : 
+      case 13 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7609,7 +7609,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 14 : 
+      case 14 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7632,7 +7632,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 15 : 
+      case 15 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7647,7 +7647,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 16 : 
+      case 16 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7662,7 +7662,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 17 : 
+      case 17 :
           var match$31 = type_format_gen(fmt[1], fmtty);
           return /* Fmt_fmtty_EBB */[
                   /* Formatting_lit */Block.__(17, [
@@ -7671,7 +7671,7 @@ function type_format_gen(fmt, fmtty) {
                     ]),
                   match$31[1]
                 ];
-      case 18 : 
+      case 18 :
           var formatting_gen = fmt[0];
           var fmt0 = fmt[1];
           var fmtty0 = fmtty;
@@ -7705,7 +7705,7 @@ function type_format_gen(fmt, fmtty) {
                     match$37[1]
                   ];
           }
-      case 19 : 
+      case 19 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7720,7 +7720,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 20 : 
+      case 20 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7739,7 +7739,7 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 21 : 
+      case 21 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7757,13 +7757,13 @@ function type_format_gen(fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 23 : 
+      case 23 :
           var ign = fmt[0];
           var fmt$1 = fmt[1];
           var fmtty$1 = fmtty;
           if (typeof ign === "number") {
             switch (ign) {
-              case 3 : 
+              case 3 :
                   if (typeof fmtty$1 === "number") {
                     throw Type_mismatch;
                   }
@@ -7781,22 +7781,22 @@ function type_format_gen(fmt, fmtty) {
                     throw Type_mismatch;
                   }
                   break;
-              case 0 : 
-              case 1 : 
-              case 2 : 
-              case 4 : 
+              case 0 :
+              case 1 :
+              case 2 :
+              case 4 :
                   return type_ignored_param_one(ign, fmt$1, fmtty$1);
-              
+
             }
           }
           else {
             switch (ign.tag | 0) {
-              case 7 : 
+              case 7 :
                   return type_ignored_param_one(/* Ignored_format_arg */Block.__(7, [
                                 ign[0],
                                 ign[1]
                               ]), fmt$1, fmtty$1);
-              case 8 : 
+              case 8 :
                   var match$42 = type_ignored_format_substitution(ign[1], fmt$1, fmtty$1);
                   var match$43 = match$42[1];
                   return /* Fmt_fmtty_EBB */[
@@ -7809,23 +7809,23 @@ function type_format_gen(fmt, fmtty) {
                             ]),
                           match$43[1]
                         ];
-              case 0 : 
-              case 1 : 
-              case 2 : 
-              case 3 : 
-              case 4 : 
-              case 5 : 
-              case 6 : 
-              case 9 : 
-              case 10 : 
+              case 0 :
+              case 1 :
+              case 2 :
+              case 3 :
+              case 4 :
+              case 5 :
+              case 6 :
+              case 9 :
+              case 10 :
                   return type_ignored_param_one(ign, fmt$1, fmtty$1);
-              
+
             }
           }
-      case 22 : 
-      case 24 : 
+      case 22 :
+      case 24 :
           throw Type_mismatch;
-      
+
     }
   }
 }
@@ -7839,7 +7839,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
   }
   else {
     switch (sub_fmtty.tag | 0) {
-      case 0 : 
+      case 0 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7854,7 +7854,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
                   ];
           }
           break;
-      case 1 : 
+      case 1 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7869,7 +7869,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 2 : 
+      case 2 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7884,7 +7884,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 3 : 
+      case 3 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7899,7 +7899,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 4 : 
+      case 4 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7914,7 +7914,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 5 : 
+      case 5 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7929,7 +7929,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 6 : 
+      case 6 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7944,7 +7944,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 7 : 
+      case 7 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7959,7 +7959,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 8 : 
+      case 8 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -7981,7 +7981,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 9 : 
+      case 9 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -8012,7 +8012,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 10 : 
+      case 10 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -8027,7 +8027,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 11 : 
+      case 11 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -8042,9 +8042,9 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 12 : 
+      case 12 :
           throw Type_mismatch;
-      case 13 : 
+      case 13 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -8059,7 +8059,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      case 14 : 
+      case 14 :
           if (typeof fmtty === "number") {
             throw Type_mismatch;
           }
@@ -8074,7 +8074,7 @@ function type_ignored_format_substitution(sub_fmtty, fmt, fmtty) {
             throw Type_mismatch;
           }
           break;
-      
+
     }
   }
 }
@@ -8105,13 +8105,13 @@ function fix_padding(padty, width, str) {
   else {
     var res = Bytes.make(width$1, padty$1 === /* Zeros */2 ? /* "0" */48 : /* " " */32);
     switch (padty$1) {
-      case 0 : 
+      case 0 :
           $$String.blit(str, 0, res, 0, len);
           break;
-      case 1 : 
+      case 1 :
           $$String.blit(str, 0, res, width$1 - len | 0, len);
           break;
-      case 2 : 
+      case 2 :
           if (len > 0 && (Caml_string.get(str, 0) === /* "+" */43 || Caml_string.get(str, 0) === /* "-" */45 || Caml_string.get(str, 0) === /* " " */32)) {
             res[0] = Caml_string.get(str, 0);
             $$String.blit(str, 1, res, (width$1 - len | 0) + 1 | 0, len - 1 | 0);
@@ -8124,7 +8124,7 @@ function fix_padding(padty, width, str) {
             $$String.blit(str, 0, res, width$1 - len | 0, len);
           }
           break;
-      
+
     }
     return Caml_string.bytes_to_string(res);
   }
@@ -8154,15 +8154,15 @@ function fix_int_precision(prec, str) {
   else if (c !== 32) {
     if (c >= 43) {
       switch (c - 43 | 0) {
-        case 0 : 
-        case 2 : 
+        case 0 :
+        case 2 :
             exit = 1;
             break;
-        case 1 : 
-        case 3 : 
-        case 4 : 
+        case 1 :
+        case 3 :
+        case 4 :
             return str;
-        case 5 : 
+        case 5 :
             if ((prec$1 + 2 | 0) > len && len > 1 && (Caml_string.get(str, 1) === /* "x" */120 || Caml_string.get(str, 1) === /* "X" */88)) {
               var res = Bytes.make(prec$1 + 2 | 0, /* "0" */48);
               res[1] = Caml_string.get(str, 1);
@@ -8173,18 +8173,18 @@ function fix_int_precision(prec, str) {
               exit = 2;
             }
             break;
-        case 6 : 
-        case 7 : 
-        case 8 : 
-        case 9 : 
-        case 10 : 
-        case 11 : 
-        case 12 : 
-        case 13 : 
-        case 14 : 
+        case 6 :
+        case 7 :
+        case 8 :
+        case 9 :
+        case 10 :
+        case 11 :
+        case 12 :
+        case 13 :
+        case 14 :
             exit = 2;
             break;
-        
+
       }
     }
     else {
@@ -8195,7 +8195,7 @@ function fix_int_precision(prec, str) {
     exit = 1;
   }
   switch (exit) {
-    case 1 : 
+    case 1 :
         if ((prec$1 + 1 | 0) > len) {
           var res$1 = Bytes.make(prec$1 + 1 | 0, /* "0" */48);
           res$1[0] = c;
@@ -8206,7 +8206,7 @@ function fix_int_precision(prec, str) {
           return str;
         }
         break;
-    case 2 : 
+    case 2 :
         if (prec$1 > len) {
           var res$2 = Bytes.make(prec$1, /* "0" */48);
           $$String.blit(str, 0, res$2, prec$1 - len | 0, len);
@@ -8216,7 +8216,7 @@ function fix_int_precision(prec, str) {
           return str;
         }
         break;
-    
+
   }
 }
 
@@ -8232,40 +8232,40 @@ function string_to_caml_string(str) {
 
 function format_of_iconv(iconv) {
   switch (iconv) {
-    case 0 : 
+    case 0 :
         return "%d";
-    case 1 : 
+    case 1 :
         return "%+d";
-    case 2 : 
+    case 2 :
         return "% d";
-    case 3 : 
+    case 3 :
         return "%i";
-    case 4 : 
+    case 4 :
         return "%+i";
-    case 5 : 
+    case 5 :
         return "% i";
-    case 6 : 
+    case 6 :
         return "%x";
-    case 7 : 
+    case 7 :
         return "%#x";
-    case 8 : 
+    case 8 :
         return "%X";
-    case 9 : 
+    case 9 :
         return "%#X";
-    case 10 : 
+    case 10 :
         return "%o";
-    case 11 : 
+    case 11 :
         return "%#o";
-    case 12 : 
+    case 12 :
         return "%u";
-    
+
   }
 }
 
 function format_of_aconv(iconv, c) {
   var seps;
   switch (iconv) {
-    case 0 : 
+    case 0 :
         seps = /* :: */[
           "%",
           /* :: */[
@@ -8274,7 +8274,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 1 : 
+    case 1 :
         seps = /* :: */[
           "%+",
           /* :: */[
@@ -8283,7 +8283,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 2 : 
+    case 2 :
         seps = /* :: */[
           "% ",
           /* :: */[
@@ -8292,7 +8292,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 3 : 
+    case 3 :
         seps = /* :: */[
           "%",
           /* :: */[
@@ -8301,7 +8301,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 4 : 
+    case 4 :
         seps = /* :: */[
           "%+",
           /* :: */[
@@ -8310,7 +8310,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 5 : 
+    case 5 :
         seps = /* :: */[
           "% ",
           /* :: */[
@@ -8319,7 +8319,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 6 : 
+    case 6 :
         seps = /* :: */[
           "%",
           /* :: */[
@@ -8328,7 +8328,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 7 : 
+    case 7 :
         seps = /* :: */[
           "%#",
           /* :: */[
@@ -8337,7 +8337,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 8 : 
+    case 8 :
         seps = /* :: */[
           "%",
           /* :: */[
@@ -8346,7 +8346,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 9 : 
+    case 9 :
         seps = /* :: */[
           "%#",
           /* :: */[
@@ -8355,7 +8355,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 10 : 
+    case 10 :
         seps = /* :: */[
           "%",
           /* :: */[
@@ -8364,7 +8364,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 11 : 
+    case 11 :
         seps = /* :: */[
           "%#",
           /* :: */[
@@ -8373,7 +8373,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    case 12 : 
+    case 12 :
         seps = /* :: */[
           "%",
           /* :: */[
@@ -8382,7 +8382,7 @@ function format_of_aconv(iconv, c) {
           ]
         ];
         break;
-    
+
   }
   return $$String.concat(Caml_string.bytes_to_string(Bytes.make(1, c)), seps);
 }
@@ -8444,7 +8444,7 @@ function convert_float(fconv, prec, x) {
             if (switcher !== 55) {
               _i = i + 1 | 0;
               continue ;
-              
+
             }
             else {
               return /* true */1;
@@ -8456,7 +8456,7 @@ function convert_float(fconv, prec, x) {
           else {
             _i = i + 1 | 0;
             continue ;
-            
+
           }
         }
       };
@@ -8511,7 +8511,7 @@ function make_printf(_k, o, _acc, _fmt) {
     }
     else {
       switch (fmt.tag | 0) {
-        case 0 : 
+        case 0 :
             var rest = fmt[0];
             return (function(k,acc,rest){
             return function (c) {
@@ -8522,7 +8522,7 @@ function make_printf(_k, o, _acc, _fmt) {
               return make_printf(k, o, new_acc, rest);
             }
             }(k,acc,rest));
-        case 1 : 
+        case 1 :
             var rest$1 = fmt[0];
             return (function(k,acc,rest$1){
             return function (c) {
@@ -8534,21 +8534,21 @@ function make_printf(_k, o, _acc, _fmt) {
               return make_printf(k, o, new_acc, rest$1);
             }
             }(k,acc,rest$1));
-        case 2 : 
+        case 2 :
             return make_string_padding(k, o, acc, fmt[1], fmt[0], function (str) {
                         return str;
                       });
-        case 3 : 
+        case 3 :
             return make_string_padding(k, o, acc, fmt[1], fmt[0], string_to_caml_string);
-        case 4 : 
+        case 4 :
             return make_int_padding_precision(k, o, acc, fmt[3], fmt[1], fmt[2], convert_int, fmt[0]);
-        case 5 : 
+        case 5 :
             return make_int_padding_precision(k, o, acc, fmt[3], fmt[1], fmt[2], convert_int32, fmt[0]);
-        case 6 : 
+        case 6 :
             return make_int_padding_precision(k, o, acc, fmt[3], fmt[1], fmt[2], convert_nativeint, fmt[0]);
-        case 7 : 
+        case 7 :
             return make_int_padding_precision(k, o, acc, fmt[3], fmt[1], fmt[2], convert_int64, fmt[0]);
-        case 8 : 
+        case 8 :
             var k$1 = k;
             var o$1 = o;
             var acc$1 = acc;
@@ -8675,7 +8675,7 @@ function make_printf(_k, o, _acc, _fmt) {
                 }(k$1,o$1,acc$1,fmt$1,fconv,padty$1,w,p$2));
               }
             }
-        case 9 : 
+        case 9 :
             var rest$2 = fmt[0];
             return (function(k,acc,rest$2){
             return function (b) {
@@ -8685,25 +8685,25 @@ function make_printf(_k, o, _acc, _fmt) {
                           ]), rest$2);
             }
             }(k,acc,rest$2));
-        case 10 : 
+        case 10 :
             _fmt = fmt[0];
             _acc = /* Acc_flush */Block.__(7, [acc]);
             continue ;
-            case 11 : 
+            case 11 :
             _fmt = fmt[1];
             _acc = /* Acc_string_literal */Block.__(2, [
                 acc,
                 fmt[0]
               ]);
             continue ;
-            case 12 : 
+            case 12 :
             _fmt = fmt[1];
             _acc = /* Acc_char_literal */Block.__(3, [
                 acc,
                 fmt[0]
               ]);
             continue ;
-            case 13 : 
+            case 13 :
             var rest$3 = fmt[2];
             var ty = string_of_fmtty(fmt[1]);
             return (function(k,acc,rest$3,ty){
@@ -8714,7 +8714,7 @@ function make_printf(_k, o, _acc, _fmt) {
                           ]), rest$3);
             }
             }(k,acc,rest$3,ty));
-        case 14 : 
+        case 14 :
             var rest$4 = fmt[2];
             var fmtty = fmt[1];
             return (function(k,acc,fmtty,rest$4){
@@ -8722,7 +8722,7 @@ function make_printf(_k, o, _acc, _fmt) {
               return make_printf(k, o, acc, CamlinternalFormatBasics.concat_fmt(recast(param[0], fmtty), rest$4));
             }
             }(k,acc,fmtty,rest$4));
-        case 15 : 
+        case 15 :
             var rest$5 = fmt[0];
             return (function(k,acc,rest$5){
             return function (f, x) {
@@ -8734,7 +8734,7 @@ function make_printf(_k, o, _acc, _fmt) {
                           ]), rest$5);
             }
             }(k,acc,rest$5));
-        case 16 : 
+        case 16 :
             var rest$6 = fmt[0];
             return (function(k,acc,rest$6){
             return function (f) {
@@ -8744,14 +8744,14 @@ function make_printf(_k, o, _acc, _fmt) {
                           ]), rest$6);
             }
             }(k,acc,rest$6));
-        case 17 : 
+        case 17 :
             _fmt = fmt[1];
             _acc = /* Acc_formatting_lit */Block.__(0, [
                 acc,
                 fmt[0]
               ]);
             continue ;
-            case 18 : 
+            case 18 :
             var match = fmt[0];
             if (match.tag) {
               var rest$7 = fmt[1];
@@ -8767,7 +8767,7 @@ function make_printf(_k, o, _acc, _fmt) {
               _acc = /* End_of_acc */0;
               _k = k$prime;
               continue ;
-              
+
             }
             else {
               var rest$8 = fmt[1];
@@ -8783,10 +8783,10 @@ function make_printf(_k, o, _acc, _fmt) {
               _acc = /* End_of_acc */0;
               _k = k$prime$1;
               continue ;
-              
+
             }
             break;
-        case 19 : 
+        case 19 :
             throw [
                   Caml_builtin_exceptions.assert_failure,
                   [
@@ -8795,7 +8795,7 @@ function make_printf(_k, o, _acc, _fmt) {
                     4
                   ]
                 ];
-        case 20 : 
+        case 20 :
             var rest$9 = fmt[2];
             var new_acc = /* Acc_invalid_arg */Block.__(8, [
                 acc,
@@ -8806,7 +8806,7 @@ function make_printf(_k, o, _acc, _fmt) {
               return make_printf(k, o, new_acc, rest$9);
             }
             }(k,rest$9,new_acc));
-        case 21 : 
+        case 21 :
             var rest$10 = fmt[1];
             return (function(k,acc,rest$10){
             return function (n) {
@@ -8818,7 +8818,7 @@ function make_printf(_k, o, _acc, _fmt) {
               return make_printf(k, o, new_acc, rest$10);
             }
             }(k,acc,rest$10));
-        case 22 : 
+        case 22 :
             var rest$11 = fmt[0];
             return (function(k,acc,rest$11){
             return function (c) {
@@ -8829,7 +8829,7 @@ function make_printf(_k, o, _acc, _fmt) {
               return make_printf(k, o, new_acc, rest$11);
             }
             }(k,acc,rest$11));
-        case 23 : 
+        case 23 :
             var k$2 = k;
             var o$2 = o;
             var acc$2 = acc;
@@ -8837,7 +8837,7 @@ function make_printf(_k, o, _acc, _fmt) {
             var fmt$2 = fmt[1];
             if (typeof ign === "number") {
               switch (ign) {
-                case 3 : 
+                case 3 :
                     throw [
                           Caml_builtin_exceptions.assert_failure,
                           [
@@ -8846,35 +8846,35 @@ function make_printf(_k, o, _acc, _fmt) {
                             39
                           ]
                         ];
-                case 0 : 
-                case 1 : 
-                case 2 : 
-                case 4 : 
+                case 0 :
+                case 1 :
+                case 2 :
+                case 4 :
                     return make_invalid_arg(k$2, o$2, acc$2, fmt$2);
-                
+
               }
             }
             else {
               switch (ign.tag | 0) {
-                case 8 : 
+                case 8 :
                     return make_from_fmtty(k$2, o$2, acc$2, ign[1], fmt$2);
-                case 0 : 
-                case 1 : 
-                case 2 : 
-                case 3 : 
-                case 4 : 
-                case 5 : 
-                case 6 : 
-                case 7 : 
-                case 9 : 
-                case 10 : 
+                case 0 :
+                case 1 :
+                case 2 :
+                case 3 :
+                case 4 :
+                case 5 :
+                case 6 :
+                case 7 :
+                case 9 :
+                case 10 :
                     return make_invalid_arg(k$2, o$2, acc$2, fmt$2);
-                
+
               }
             }
-        case 24 : 
+        case 24 :
             return make_custom(k, o, acc, fmt[2], fmt[0], Curry._1(fmt[1], /* () */0));
-        
+
       }
     }
   };
@@ -8886,73 +8886,73 @@ function make_from_fmtty(k, o, acc, fmtty, fmt) {
   }
   else {
     switch (fmtty.tag | 0) {
-      case 0 : 
+      case 0 :
           var rest = fmtty[0];
           return function () {
             return make_from_fmtty(k, o, acc, rest, fmt);
           };
-      case 1 : 
+      case 1 :
           var rest$1 = fmtty[0];
           return function () {
             return make_from_fmtty(k, o, acc, rest$1, fmt);
           };
-      case 2 : 
+      case 2 :
           var rest$2 = fmtty[0];
           return function () {
             return make_from_fmtty(k, o, acc, rest$2, fmt);
           };
-      case 3 : 
+      case 3 :
           var rest$3 = fmtty[0];
           return function () {
             return make_from_fmtty(k, o, acc, rest$3, fmt);
           };
-      case 4 : 
+      case 4 :
           var rest$4 = fmtty[0];
           return function () {
             return make_from_fmtty(k, o, acc, rest$4, fmt);
           };
-      case 5 : 
+      case 5 :
           var rest$5 = fmtty[0];
           return function () {
             return make_from_fmtty(k, o, acc, rest$5, fmt);
           };
-      case 6 : 
+      case 6 :
           var rest$6 = fmtty[0];
           return function () {
             return make_from_fmtty(k, o, acc, rest$6, fmt);
           };
-      case 7 : 
+      case 7 :
           var rest$7 = fmtty[0];
           return function () {
             return make_from_fmtty(k, o, acc, rest$7, fmt);
           };
-      case 8 : 
+      case 8 :
           var rest$8 = fmtty[1];
           return function () {
             return make_from_fmtty(k, o, acc, rest$8, fmt);
           };
-      case 9 : 
+      case 9 :
           var rest$9 = fmtty[2];
           var ty = trans(symm(fmtty[0]), fmtty[1]);
           return function () {
             return make_from_fmtty(k, o, acc, CamlinternalFormatBasics.concat_fmtty(ty, rest$9), fmt);
           };
-      case 10 : 
+      case 10 :
           var rest$10 = fmtty[0];
           return function (_, _$1) {
             return make_from_fmtty(k, o, acc, rest$10, fmt);
           };
-      case 11 : 
+      case 11 :
           var rest$11 = fmtty[0];
           return function () {
             return make_from_fmtty(k, o, acc, rest$11, fmt);
           };
-      case 12 : 
+      case 12 :
           var rest$12 = fmtty[0];
           return function () {
             return make_from_fmtty(k, o, acc, rest$12, fmt);
           };
-      case 13 : 
+      case 13 :
           throw [
                 Caml_builtin_exceptions.assert_failure,
                 [
@@ -8961,7 +8961,7 @@ function make_from_fmtty(k, o, acc, fmtty, fmt) {
                   31
                 ]
               ];
-      case 14 : 
+      case 14 :
           throw [
                 Caml_builtin_exceptions.assert_failure,
                 [
@@ -8970,7 +8970,7 @@ function make_from_fmtty(k, o, acc, fmtty, fmt) {
                   31
                 ]
               ];
-      
+
     }
   }
 }
@@ -9144,11 +9144,11 @@ function output_acc(o, _acc) {
     }
     else {
       switch (acc.tag | 0) {
-        case 0 : 
+        case 0 :
             var s = string_of_formatting_lit(acc[1]);
             output_acc(o, acc[0]);
             return Pervasives.output_string(o, s);
-        case 1 : 
+        case 1 :
             var match = acc[1];
             var p = acc[0];
             output_acc(o, p);
@@ -9156,46 +9156,46 @@ function output_acc(o, _acc) {
               Pervasives.output_string(o, "@[");
               _acc = match[0];
               continue ;
-              
+
             }
             else {
               Pervasives.output_string(o, "@{");
               _acc = match[0];
               continue ;
-              
+
             }
             break;
-        case 2 : 
-        case 4 : 
+        case 2 :
+        case 4 :
             exit = 1;
             break;
-        case 3 : 
-        case 5 : 
+        case 3 :
+        case 5 :
             exit = 2;
             break;
-        case 6 : 
+        case 6 :
             output_acc(o, acc[0]);
             return Curry._1(acc[1], o);
-        case 7 : 
+        case 7 :
             output_acc(o, acc[0]);
             return Caml_io.caml_ml_flush(o);
-        case 8 : 
+        case 8 :
             output_acc(o, acc[0]);
             throw [
                   Caml_builtin_exceptions.invalid_argument,
                   acc[1]
                 ];
-        
+
       }
     }
     switch (exit) {
-      case 1 : 
+      case 1 :
           output_acc(o, acc[0]);
           return Pervasives.output_string(o, acc[1]);
-      case 2 : 
+      case 2 :
           output_acc(o, acc[0]);
           return Caml_io.caml_ml_output_char(o, acc[1]);
-      
+
     }
   };
 }
@@ -9209,11 +9209,11 @@ function bufput_acc(b, _acc) {
     }
     else {
       switch (acc.tag | 0) {
-        case 0 : 
+        case 0 :
             var s = string_of_formatting_lit(acc[1]);
             bufput_acc(b, acc[0]);
             return Buffer.add_string(b, s);
-        case 1 : 
+        case 1 :
             var match = acc[1];
             var p = acc[0];
             bufput_acc(b, p);
@@ -9221,46 +9221,46 @@ function bufput_acc(b, _acc) {
               Buffer.add_string(b, "@[");
               _acc = match[0];
               continue ;
-              
+
             }
             else {
               Buffer.add_string(b, "@{");
               _acc = match[0];
               continue ;
-              
+
             }
             break;
-        case 2 : 
-        case 4 : 
+        case 2 :
+        case 4 :
             exit = 1;
             break;
-        case 3 : 
-        case 5 : 
+        case 3 :
+        case 5 :
             exit = 2;
             break;
-        case 6 : 
+        case 6 :
             bufput_acc(b, acc[0]);
             return Curry._1(acc[1], b);
-        case 7 : 
+        case 7 :
             _acc = acc[0];
             continue ;
-            case 8 : 
+            case 8 :
             bufput_acc(b, acc[0]);
             throw [
                   Caml_builtin_exceptions.invalid_argument,
                   acc[1]
                 ];
-        
+
       }
     }
     switch (exit) {
-      case 1 : 
+      case 1 :
           bufput_acc(b, acc[0]);
           return Buffer.add_string(b, acc[1]);
-      case 2 : 
+      case 2 :
           bufput_acc(b, acc[0]);
           return Buffer.add_char(b, acc[1]);
-      
+
     }
   };
 }
@@ -9274,11 +9274,11 @@ function strput_acc(b, _acc) {
     }
     else {
       switch (acc.tag | 0) {
-        case 0 : 
+        case 0 :
             var s = string_of_formatting_lit(acc[1]);
             strput_acc(b, acc[0]);
             return Buffer.add_string(b, s);
-        case 1 : 
+        case 1 :
             var match = acc[1];
             var p = acc[0];
             strput_acc(b, p);
@@ -9286,46 +9286,46 @@ function strput_acc(b, _acc) {
               Buffer.add_string(b, "@[");
               _acc = match[0];
               continue ;
-              
+
             }
             else {
               Buffer.add_string(b, "@{");
               _acc = match[0];
               continue ;
-              
+
             }
             break;
-        case 2 : 
-        case 4 : 
+        case 2 :
+        case 4 :
             exit = 1;
             break;
-        case 3 : 
-        case 5 : 
+        case 3 :
+        case 5 :
             exit = 2;
             break;
-        case 6 : 
+        case 6 :
             strput_acc(b, acc[0]);
             return Buffer.add_string(b, Curry._1(acc[1], /* () */0));
-        case 7 : 
+        case 7 :
             _acc = acc[0];
             continue ;
-            case 8 : 
+            case 8 :
             strput_acc(b, acc[0]);
             throw [
                   Caml_builtin_exceptions.invalid_argument,
                   acc[1]
                 ];
-        
+
       }
     }
     switch (exit) {
-      case 1 : 
+      case 1 :
           strput_acc(b, acc[0]);
           return Buffer.add_string(b, acc[1]);
-      case 2 : 
+      case 2 :
           strput_acc(b, acc[0]);
           return Buffer.add_char(b, acc[1]);
-      
+
     }
   };
 }
@@ -9379,13 +9379,13 @@ function open_box_of_string(str) {
             else {
               _i = i + 1 | 0;
               continue ;
-              
+
             }
           }
           else {
             _i = i + 1 | 0;
             continue ;
-            
+
           }
         }
       };
@@ -9404,7 +9404,7 @@ function open_box_of_string(str) {
           else {
             _j = j + 1 | 0;
             continue ;
-            
+
           }
         }
       };
@@ -9424,7 +9424,7 @@ function open_box_of_string(str) {
             else {
               _j = j + 1 | 0;
               continue ;
-              
+
             }
           }
           else if (match !== 45) {
@@ -9433,7 +9433,7 @@ function open_box_of_string(str) {
           else {
             _j = j + 1 | 0;
             continue ;
-            
+
           }
         }
       };
@@ -9466,20 +9466,20 @@ function open_box_of_string(str) {
     }
     var box_type;
     switch (box_name) {
-      case "" : 
-      case "b" : 
+      case "" :
+      case "b" :
           box_type = /* Pp_box */4;
           break;
-      case "h" : 
+      case "h" :
           box_type = /* Pp_hbox */0;
           break;
-      case "hov" : 
+      case "hov" :
           box_type = /* Pp_hovbox */3;
           break;
-      case "hv" : 
+      case "hv" :
           box_type = /* Pp_hvbox */2;
           break;
-      case "v" : 
+      case "v" :
           box_type = /* Pp_vbox */1;
           break;
       default:
@@ -9722,48 +9722,48 @@ function fmt_ebb_of_string(legacy_behavior, str) {
         }
         else {
           switch (switcher) {
-            case 0 : 
+            case 0 :
                 return /* Int_X */8;
-            case 12 : 
+            case 12 :
                 return /* Int_d */0;
-            case 17 : 
+            case 17 :
                 return /* Int_i */3;
-            case 23 : 
+            case 23 :
                 return /* Int_o */10;
-            case 29 : 
+            case 29 :
                 return /* Int_u */12;
-            case 1 : 
-            case 2 : 
-            case 3 : 
-            case 4 : 
-            case 5 : 
-            case 6 : 
-            case 7 : 
-            case 8 : 
-            case 9 : 
-            case 10 : 
-            case 11 : 
-            case 13 : 
-            case 14 : 
-            case 15 : 
-            case 16 : 
-            case 18 : 
-            case 19 : 
-            case 20 : 
-            case 21 : 
-            case 22 : 
-            case 24 : 
-            case 25 : 
-            case 26 : 
-            case 27 : 
-            case 28 : 
-            case 30 : 
-            case 31 : 
+            case 1 :
+            case 2 :
+            case 3 :
+            case 4 :
+            case 5 :
+            case 6 :
+            case 7 :
+            case 8 :
+            case 9 :
+            case 10 :
+            case 11 :
+            case 13 :
+            case 14 :
+            case 15 :
+            case 16 :
+            case 18 :
+            case 19 :
+            case 20 :
+            case 21 :
+            case 22 :
+            case 24 :
+            case 25 :
+            case 26 :
+            case 27 :
+            case 28 :
+            case 30 :
+            case 31 :
                 exit = 1;
                 break;
-            case 32 : 
+            case 32 :
                 return /* Int_x */6;
-            
+
           }
         }
       }
@@ -9775,7 +9775,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
         }
         else {
           switch (switcher$1) {
-            case 0 : 
+            case 0 :
                 if (legacy_behavior$1) {
                   return /* Int_CX */9;
                 }
@@ -9783,7 +9783,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   exit = 1;
                 }
                 break;
-            case 23 : 
+            case 23 :
                 if (legacy_behavior$1) {
                   return /* Int_Co */11;
                 }
@@ -9791,41 +9791,41 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   exit = 1;
                 }
                 break;
-            case 12 : 
-            case 17 : 
-            case 29 : 
+            case 12 :
+            case 17 :
+            case 29 :
                 exit$2 = 3;
                 break;
-            case 1 : 
-            case 2 : 
-            case 3 : 
-            case 4 : 
-            case 5 : 
-            case 6 : 
-            case 7 : 
-            case 8 : 
-            case 9 : 
-            case 10 : 
-            case 11 : 
-            case 13 : 
-            case 14 : 
-            case 15 : 
-            case 16 : 
-            case 18 : 
-            case 19 : 
-            case 20 : 
-            case 21 : 
-            case 22 : 
-            case 24 : 
-            case 25 : 
-            case 26 : 
-            case 27 : 
-            case 28 : 
-            case 30 : 
-            case 31 : 
+            case 1 :
+            case 2 :
+            case 3 :
+            case 4 :
+            case 5 :
+            case 6 :
+            case 7 :
+            case 8 :
+            case 9 :
+            case 10 :
+            case 11 :
+            case 13 :
+            case 14 :
+            case 15 :
+            case 16 :
+            case 18 :
+            case 19 :
+            case 20 :
+            case 21 :
+            case 22 :
+            case 24 :
+            case 25 :
+            case 26 :
+            case 27 :
+            case 28 :
+            case 30 :
+            case 31 :
                 exit = 1;
                 break;
-            case 32 : 
+            case 32 :
                 if (legacy_behavior$1) {
                   return /* Int_Cx */7;
                 }
@@ -9833,20 +9833,20 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   exit = 1;
                 }
                 break;
-            
+
           }
         }
         if (exit$2 === 3) {
           if (legacy_behavior$1) {
             _sharp = /* false */0;
             continue ;
-            
+
           }
           else {
             return incompatible_flag(pct_ind, str_ind, symb, "'#'");
           }
         }
-        
+
       }
       if (exit === 1) {
         if (plus !== 0) {
@@ -9854,7 +9854,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
             if (legacy_behavior$1) {
               _space = /* false */0;
               continue ;
-              
+
             }
             else {
               return incompatible_flag(pct_ind, str_ind, /* " " */32, "'+'");
@@ -9863,7 +9863,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           else if (legacy_behavior$1) {
             _plus = /* false */0;
             continue ;
-            
+
           }
           else {
             return incompatible_flag(pct_ind, str_ind, symb, "'+'");
@@ -9873,7 +9873,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           if (legacy_behavior$1) {
             _space = /* false */0;
             continue ;
-            
+
           }
           else {
             return incompatible_flag(pct_ind, str_ind, symb, "' '");
@@ -9890,7 +9890,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
               ];
         }
       }
-      
+
     };
   };
   var incompatible_flag = function (pct_ind, str_ind, symb, option) {
@@ -9977,7 +9977,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           _acc = new_acc;
           _str_ind = str_ind + 1 | 0;
           continue ;
-          
+
         }
       }
     };
@@ -10024,7 +10024,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                       ]));
         }
       }
-      
+
     }
     else {
       return parse_conv(pad);
@@ -10068,18 +10068,18 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       }
       else if (symb$1 >= 42) {
         switch (symb$1 - 42 | 0) {
-          case 0 : 
+          case 0 :
               return parse_after_precision(pct_ind$1, str_ind$1 + 1 | 0, end_ind$1, minus$1, plus$1, sharp$1, space$1, ign$1, pad$1, /* Arg_precision */1);
-          case 1 : 
-          case 3 : 
+          case 1 :
+          case 3 :
               exit$1 = 2;
               break;
-          case 2 : 
-          case 4 : 
-          case 5 : 
+          case 2 :
+          case 4 :
+          case 5 :
               exit = 1;
               break;
-          
+
         }
       }
       else {
@@ -10101,7 +10101,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           return invalid_format_without(str_ind$1 - 1 | 0, /* "." */46, "precision");
         }
       }
-      
+
     }
   };
   var parse_literal = function (lit_start, _str_ind, end_ind) {
@@ -10116,7 +10116,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           if (match !== 64) {
             _str_ind = str_ind + 1 | 0;
             continue ;
-            
+
           }
           else {
             var match$1 = parse_after_at(str_ind + 1 | 0, end_ind);
@@ -10163,37 +10163,37 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           }
           else {
             switch (switcher) {
-              case 0 : 
+              case 0 :
                   return parse_tag(/* true */1, str_ind + 1 | 0, end_ind);
-              case 1 : 
+              case 1 :
                   exit = 1;
                   break;
-              case 2 : 
+              case 2 :
                   var beg_ind = str_ind + 1 | 0;
                   var match = parse_literal(beg_ind, beg_ind, end_ind);
                   return /* Fmt_EBB */[/* Formatting_lit */Block.__(17, [
                               /* Close_tag */1,
                               match[0]
                             ])];
-              
+
             }
           }
         }
         else if (c >= 91) {
           switch (c - 91 | 0) {
-            case 0 : 
+            case 0 :
                 return parse_tag(/* false */0, str_ind + 1 | 0, end_ind);
-            case 1 : 
+            case 1 :
                 exit = 1;
                 break;
-            case 2 : 
+            case 2 :
                 var beg_ind$1 = str_ind + 1 | 0;
                 var match$1 = parse_literal(beg_ind$1, beg_ind$1, end_ind);
                 return /* Fmt_EBB */[/* Formatting_lit */Block.__(17, [
                             /* Close_box */0,
                             match$1[0]
                           ])];
-            
+
           }
         }
         else {
@@ -10203,7 +10203,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       else if (c !== 10) {
         if (c >= 32) {
           switch (c - 32 | 0) {
-            case 0 : 
+            case 0 :
                 var beg_ind$2 = str_ind + 1 | 0;
                 var match$2 = parse_literal(beg_ind$2, beg_ind$2, end_ind);
                 return /* Fmt_EBB */[/* Formatting_lit */Block.__(17, [
@@ -10214,7 +10214,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                               ]),
                             match$2[0]
                           ])];
-            case 5 : 
+            case 5 :
                 if ((str_ind + 1 | 0) < end_ind && Caml_string.get(str, str_ind + 1 | 0) === /* "%" */37) {
                   var beg_ind$3 = str_ind + 2 | 0;
                   var match$3 = parse_literal(beg_ind$3, beg_ind$3, end_ind);
@@ -10231,7 +10231,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                             ])];
                 }
                 break;
-            case 12 : 
+            case 12 :
                 var beg_ind$4 = str_ind + 1 | 0;
                 var match$5 = parse_literal(beg_ind$4, beg_ind$4, end_ind);
                 return /* Fmt_EBB */[/* Formatting_lit */Block.__(17, [
@@ -10242,14 +10242,14 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                               ]),
                             match$5[0]
                           ])];
-            case 14 : 
+            case 14 :
                 var beg_ind$5 = str_ind + 1 | 0;
                 var match$6 = parse_literal(beg_ind$5, beg_ind$5, end_ind);
                 return /* Fmt_EBB */[/* Formatting_lit */Block.__(17, [
                             /* Flush_newline */4,
                             match$6[0]
                           ])];
-            case 27 : 
+            case 27 :
                 var str_ind$1 = str_ind + 1 | 0;
                 var end_ind$1 = end_ind;
                 var match$7;
@@ -10316,7 +10316,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                       ];
                     }
                   }
-                  
+
                 }
                 catch (exn){
                   if (exn === Caml_builtin_exceptions.not_found) {
@@ -10349,7 +10349,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                             match$7[1],
                             match$12[0]
                           ])];
-            case 28 : 
+            case 28 :
                 var str_ind$2 = str_ind + 1 | 0;
                 var end_ind$2 = end_ind;
                 var match$13;
@@ -10386,7 +10386,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                           ])
                       ]];
                   }
-                  
+
                 }
                 catch (exn$1){
                   if (exn$1 === Caml_builtin_exceptions.not_found) {
@@ -10415,48 +10415,48 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                               match$18[0]
                             ])];
                 }
-            case 1 : 
-            case 2 : 
-            case 3 : 
-            case 4 : 
-            case 6 : 
-            case 7 : 
-            case 8 : 
-            case 9 : 
-            case 10 : 
-            case 11 : 
-            case 13 : 
-            case 15 : 
-            case 16 : 
-            case 17 : 
-            case 18 : 
-            case 19 : 
-            case 20 : 
-            case 21 : 
-            case 22 : 
-            case 23 : 
-            case 24 : 
-            case 25 : 
-            case 26 : 
-            case 29 : 
-            case 30 : 
+            case 1 :
+            case 2 :
+            case 3 :
+            case 4 :
+            case 6 :
+            case 7 :
+            case 8 :
+            case 9 :
+            case 10 :
+            case 11 :
+            case 13 :
+            case 15 :
+            case 16 :
+            case 17 :
+            case 18 :
+            case 19 :
+            case 20 :
+            case 21 :
+            case 22 :
+            case 23 :
+            case 24 :
+            case 25 :
+            case 26 :
+            case 29 :
+            case 30 :
                 exit = 1;
                 break;
-            case 31 : 
+            case 31 :
                 var beg_ind$6 = str_ind + 1 | 0;
                 var match$19 = parse_literal(beg_ind$6, beg_ind$6, end_ind);
                 return /* Fmt_EBB */[/* Formatting_lit */Block.__(17, [
                             /* FFlush */2,
                             match$19[0]
                           ])];
-            case 32 : 
+            case 32 :
                 var beg_ind$7 = str_ind + 1 | 0;
                 var match$20 = parse_literal(beg_ind$7, beg_ind$7, end_ind);
                 return /* Fmt_EBB */[/* Formatting_lit */Block.__(17, [
                             /* Escaped_at */5,
                             match$20[0]
                           ])];
-            
+
           }
         }
         else {
@@ -10479,7 +10479,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                     match$22[0]
                   ])];
       }
-      
+
     }
   };
   var add_literal = function (lit_start, str_ind, fmt) {
@@ -10511,7 +10511,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       if (Caml_string.get(str, str_ind) === /* " " */32) {
         _str_ind = str_ind + 1 | 0;
         continue ;
-        
+
       }
       else {
         return str_ind;
@@ -10574,7 +10574,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           if (legacy_behavior$1) {
             _space = /* false */0;
             continue ;
-            
+
           }
           else {
             return incompatible_flag(pct_ind, str_ind, /* " " */32, "'+'");
@@ -10589,26 +10589,26 @@ function fmt_ebb_of_string(legacy_behavior, str) {
             }
             else {
               switch (switcher) {
-                case 0 : 
+                case 0 :
                     return /* Float_pe */4;
-                case 1 : 
+                case 1 :
                     return /* Float_pf */1;
-                case 2 : 
+                case 2 :
                     return /* Float_pg */10;
-                
+
               }
             }
           }
           else if (symb >= 69) {
             switch (symb - 69 | 0) {
-              case 0 : 
+              case 0 :
                   return /* Float_pE */7;
-              case 1 : 
+              case 1 :
                   exit = 1;
                   break;
-              case 2 : 
+              case 2 :
                   return /* Float_pG */13;
-              
+
             }
           }
           else {
@@ -10618,13 +10618,13 @@ function fmt_ebb_of_string(legacy_behavior, str) {
             if (legacy_behavior$1) {
               _plus = /* false */0;
               continue ;
-              
+
             }
             else {
               return incompatible_flag(pct_ind, str_ind, symb, "'+'");
             }
           }
-          
+
         }
       }
       else if (space !== 0) {
@@ -10636,26 +10636,26 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           }
           else {
             switch (switcher$1) {
-              case 0 : 
+              case 0 :
                   return /* Float_se */5;
-              case 1 : 
+              case 1 :
                   return /* Float_sf */2;
-              case 2 : 
+              case 2 :
                   return /* Float_sg */11;
-              
+
             }
           }
         }
         else if (symb >= 69) {
           switch (symb - 69 | 0) {
-            case 0 : 
+            case 0 :
                 return /* Float_sE */8;
-            case 1 : 
+            case 1 :
                 exit$1 = 1;
                 break;
-            case 2 : 
+            case 2 :
                 return /* Float_sG */14;
-            
+
           }
         }
         else {
@@ -10665,13 +10665,13 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           if (legacy_behavior$1) {
             _space = /* false */0;
             continue ;
-            
+
           }
           else {
             return incompatible_flag(pct_ind, str_ind, symb, "' '");
           }
         }
-        
+
       }
       else if (symb >= 72) {
         var switcher$2 = symb - 101 | 0;
@@ -10687,25 +10687,25 @@ function fmt_ebb_of_string(legacy_behavior, str) {
         }
         else {
           switch (switcher$2) {
-            case 0 : 
+            case 0 :
                 return /* Float_e */3;
-            case 1 : 
+            case 1 :
                 return /* Float_f */0;
-            case 2 : 
+            case 2 :
                 return /* Float_g */9;
-            
+
           }
         }
       }
       else if (symb >= 69) {
         switch (symb - 69 | 0) {
-          case 0 : 
+          case 0 :
               return /* Float_E */6;
-          case 1 : 
+          case 1 :
               return /* Float_F */15;
-          case 2 : 
+          case 2 :
               return /* Float_G */12;
-          
+
         }
       }
       else {
@@ -10753,7 +10753,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       if (match !== 37) {
         _str_ind = str_ind + 1 | 0;
         continue ;
-        
+
       }
       else {
         if ((str_ind + 1 | 0) === end_ind) {
@@ -10772,16 +10772,16 @@ function fmt_ebb_of_string(legacy_behavior, str) {
               }
               else {
                 switch (match$1 - 123 | 0) {
-                  case 0 : 
+                  case 0 :
                       var sub_end = search_subformat_end(str_ind + 2 | 0, end_ind, /* "}" */125);
                       _str_ind = sub_end + 2 | 0;
                       continue ;
-                      case 1 : 
+                      case 1 :
                       exit = 1;
                       break;
-                  case 2 : 
+                  case 2 :
                       return expected_character(str_ind + 1 | 0, "character ')'", /* "}" */125);
-                  
+
                 }
               }
             }
@@ -10797,20 +10797,20 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                 if (match$2 !== 123) {
                   _str_ind = str_ind + 3 | 0;
                   continue ;
-                  
+
                 }
                 else {
                   var sub_end$1 = search_subformat_end(str_ind + 3 | 0, end_ind, /* "}" */125);
                   _str_ind = sub_end$1 + 2 | 0;
                   continue ;
-                  
+
                 }
               }
               else {
                 var sub_end$2 = search_subformat_end(str_ind + 3 | 0, end_ind, /* ")" */41);
                 _str_ind = sub_end$2 + 2 | 0;
                 continue ;
-                
+
               }
             }
           }
@@ -10826,14 +10826,14 @@ function fmt_ebb_of_string(legacy_behavior, str) {
             var sub_end$3 = search_subformat_end(str_ind + 2 | 0, end_ind, /* ")" */41);
             _str_ind = sub_end$3 + 2 | 0;
             continue ;
-            
+
           }
           if (exit === 1) {
             _str_ind = str_ind + 2 | 0;
             continue ;
-            
+
           }
-          
+
         }
       }
     };
@@ -10886,23 +10886,23 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       }
       else {
         switch (pad[0]) {
-          case 0 : 
+          case 0 :
               if (legacy_behavior$1) {
                 return /* Some */[pad[1]];
               }
               else {
                 return incompatible_flag(pct_ind, str_ind, c, "'-'");
               }
-          case 1 : 
+          case 1 :
               return /* Some */[pad[1]];
-          case 2 : 
+          case 2 :
               if (legacy_behavior$1) {
                 return /* Some */[pad[1]];
               }
               else {
                 return incompatible_flag(pct_ind, str_ind, c, "'0'");
               }
-          
+
         }
       }
     };
@@ -10929,11 +10929,11 @@ function fmt_ebb_of_string(legacy_behavior, str) {
     }
     else {
       switch (symb) {
-        case 33 : 
+        case 33 :
             var match = parse_literal(str_ind, str_ind, end_ind);
             fmt_result = /* Fmt_EBB */[/* Flush */Block.__(10, [match[0]])];
             break;
-        case 40 : 
+        case 40 :
             var sub_end = search_subformat_end(str_ind, end_ind, /* ")" */41);
             var beg_ind = sub_end + 2 | 0;
             var match$1 = parse_literal(beg_ind, beg_ind, end_ind);
@@ -10961,14 +10961,14 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   ])];
             }
             break;
-        case 44 : 
+        case 44 :
             fmt_result = parse_literal(str_ind, str_ind, end_ind);
             break;
-        case 37 : 
-        case 64 : 
+        case 37 :
+        case 64 :
             exit$1 = 4;
             break;
-        case 67 : 
+        case 67 :
             var match$3 = parse_literal(str_ind, str_ind, end_ind);
             var fmt_rest$1 = match$3[0];
             fmt_result = (ign_used[0] = /* true */1, ign) ? /* Fmt_EBB */[/* Ignored_param */Block.__(23, [
@@ -10976,7 +10976,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                     fmt_rest$1
                   ])] : /* Fmt_EBB */[/* Caml_char */Block.__(1, [fmt_rest$1])];
             break;
-        case 78 : 
+        case 78 :
             var match$4 = parse_literal(str_ind, str_ind, end_ind);
             var fmt_rest$2 = match$4[0];
             if (ign_used[0] = /* true */1, ign) {
@@ -10993,7 +10993,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   ])];
             }
             break;
-        case 83 : 
+        case 83 :
             pad_used = /* true */1;
             var pad$1 = check_no_0(symb, padprec);
             var match$5 = parse_literal(str_ind, str_ind, end_ind);
@@ -11014,7 +11014,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   ])];
             }
             break;
-        case 91 : 
+        case 91 :
             var match$7 = parse_char_set(str_ind, end_ind);
             var char_set = match$7[1];
             var next_ind = match$7[0];
@@ -11041,22 +11041,22 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   ])];
             }
             break;
-        case 32 : 
-        case 35 : 
-        case 43 : 
-        case 45 : 
-        case 95 : 
+        case 32 :
+        case 35 :
+        case 43 :
+        case 45 :
+        case 95 :
             exit$1 = 5;
             break;
-        case 97 : 
+        case 97 :
             var match$9 = parse_literal(str_ind, str_ind, end_ind);
             fmt_result = /* Fmt_EBB */[/* Alpha */Block.__(15, [match$9[0]])];
             break;
-        case 66 : 
-        case 98 : 
+        case 66 :
+        case 98 :
             exit$1 = 3;
             break;
-        case 99 : 
+        case 99 :
             var char_format = function (fmt_rest) {
               if (ign_used[0] = /* true */1, ign) {
                 return /* Fmt_EBB */[/* Ignored_param */Block.__(23, [
@@ -11089,20 +11089,20 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   ) : scan_format(fmt_rest$5)
               ) : char_format(fmt_rest$5);
             break;
-        case 69 : 
-        case 70 : 
-        case 71 : 
-        case 101 : 
-        case 102 : 
-        case 103 : 
+        case 69 :
+        case 70 :
+        case 71 :
+        case 101 :
+        case 102 :
+        case 103 :
             exit$1 = 2;
             break;
-        case 76 : 
-        case 108 : 
-        case 110 : 
+        case 76 :
+        case 108 :
+        case 110 :
             exit$2 = 8;
             break;
-        case 114 : 
+        case 114 :
             var match$12 = parse_literal(str_ind, str_ind, end_ind);
             var fmt_rest$6 = match$12[0];
             fmt_result = (ign_used[0] = /* true */1, ign) ? /* Fmt_EBB */[/* Ignored_param */Block.__(23, [
@@ -11110,7 +11110,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                     fmt_rest$6
                   ])] : /* Fmt_EBB */[/* Reader */Block.__(19, [fmt_rest$6])];
             break;
-        case 115 : 
+        case 115 :
             pad_used = /* true */1;
             var pad$2 = check_no_0(symb, padprec);
             var match$13 = parse_literal(str_ind, str_ind, end_ind);
@@ -11131,108 +11131,108 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   ])];
             }
             break;
-        case 116 : 
+        case 116 :
             var match$15 = parse_literal(str_ind, str_ind, end_ind);
             fmt_result = /* Fmt_EBB */[/* Theta */Block.__(16, [match$15[0]])];
             break;
-        case 88 : 
-        case 100 : 
-        case 105 : 
-        case 111 : 
-        case 117 : 
-        case 120 : 
+        case 88 :
+        case 100 :
+        case 105 :
+        case 111 :
+        case 117 :
+        case 120 :
             exit$2 = 7;
             break;
-        case 0 : 
-        case 1 : 
-        case 2 : 
-        case 3 : 
-        case 4 : 
-        case 5 : 
-        case 6 : 
-        case 7 : 
-        case 8 : 
-        case 9 : 
-        case 10 : 
-        case 11 : 
-        case 12 : 
-        case 13 : 
-        case 14 : 
-        case 15 : 
-        case 16 : 
-        case 17 : 
-        case 18 : 
-        case 19 : 
-        case 20 : 
-        case 21 : 
-        case 22 : 
-        case 23 : 
-        case 24 : 
-        case 25 : 
-        case 26 : 
-        case 27 : 
-        case 28 : 
-        case 29 : 
-        case 30 : 
-        case 31 : 
-        case 34 : 
-        case 36 : 
-        case 38 : 
-        case 39 : 
-        case 41 : 
-        case 42 : 
-        case 46 : 
-        case 47 : 
-        case 48 : 
-        case 49 : 
-        case 50 : 
-        case 51 : 
-        case 52 : 
-        case 53 : 
-        case 54 : 
-        case 55 : 
-        case 56 : 
-        case 57 : 
-        case 58 : 
-        case 59 : 
-        case 60 : 
-        case 61 : 
-        case 62 : 
-        case 63 : 
-        case 65 : 
-        case 68 : 
-        case 72 : 
-        case 73 : 
-        case 74 : 
-        case 75 : 
-        case 77 : 
-        case 79 : 
-        case 80 : 
-        case 81 : 
-        case 82 : 
-        case 84 : 
-        case 85 : 
-        case 86 : 
-        case 87 : 
-        case 89 : 
-        case 90 : 
-        case 92 : 
-        case 93 : 
-        case 94 : 
-        case 96 : 
-        case 104 : 
-        case 106 : 
-        case 107 : 
-        case 109 : 
-        case 112 : 
-        case 113 : 
-        case 118 : 
-        case 119 : 
-        case 121 : 
-        case 122 : 
+        case 0 :
+        case 1 :
+        case 2 :
+        case 3 :
+        case 4 :
+        case 5 :
+        case 6 :
+        case 7 :
+        case 8 :
+        case 9 :
+        case 10 :
+        case 11 :
+        case 12 :
+        case 13 :
+        case 14 :
+        case 15 :
+        case 16 :
+        case 17 :
+        case 18 :
+        case 19 :
+        case 20 :
+        case 21 :
+        case 22 :
+        case 23 :
+        case 24 :
+        case 25 :
+        case 26 :
+        case 27 :
+        case 28 :
+        case 29 :
+        case 30 :
+        case 31 :
+        case 34 :
+        case 36 :
+        case 38 :
+        case 39 :
+        case 41 :
+        case 42 :
+        case 46 :
+        case 47 :
+        case 48 :
+        case 49 :
+        case 50 :
+        case 51 :
+        case 52 :
+        case 53 :
+        case 54 :
+        case 55 :
+        case 56 :
+        case 57 :
+        case 58 :
+        case 59 :
+        case 60 :
+        case 61 :
+        case 62 :
+        case 63 :
+        case 65 :
+        case 68 :
+        case 72 :
+        case 73 :
+        case 74 :
+        case 75 :
+        case 77 :
+        case 79 :
+        case 80 :
+        case 81 :
+        case 82 :
+        case 84 :
+        case 85 :
+        case 86 :
+        case 87 :
+        case 89 :
+        case 90 :
+        case 92 :
+        case 93 :
+        case 94 :
+        case 96 :
+        case 104 :
+        case 106 :
+        case 107 :
+        case 109 :
+        case 112 :
+        case 113 :
+        case 118 :
+        case 119 :
+        case 121 :
+        case 122 :
             exit$1 = 6;
             break;
-        case 123 : 
+        case 123 :
             var sub_end$1 = search_subformat_end(str_ind, end_ind, /* "}" */125);
             var match$16 = parse_literal(str_ind, str_ind, sub_end$1);
             var beg_ind$1 = sub_end$1 + 2 | 0;
@@ -11260,11 +11260,11 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   ])];
             }
             break;
-        
+
       }
     }
     switch (exit$2) {
-      case 7 : 
+      case 7 :
           plus_used = /* true */1;
           sharp_used = /* true */1;
           space_used = /* true */1;
@@ -11319,7 +11319,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                 ])];
           }
           break;
-      case 8 : 
+      case 8 :
           if (str_ind === end_ind || !is_int_base(Caml_string.get(str, str_ind))) {
             var match$20 = parse_literal(str_ind, str_ind, end_ind);
             var fmt_rest$10 = match$20[0];
@@ -11342,10 +11342,10 @@ function fmt_ebb_of_string(legacy_behavior, str) {
             exit$1 = 6;
           }
           break;
-      
+
     }
     switch (exit$1) {
-      case 2 : 
+      case 2 :
           plus_used = /* true */1;
           space_used = /* true */1;
           var fconv = compute_float_conv(pct_ind, str_ind, plus, space, symb);
@@ -11375,7 +11375,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                 ])];
           }
           break;
-      case 3 : 
+      case 3 :
           var match$23 = parse_literal(str_ind, str_ind, end_ind);
           var fmt_rest$12 = match$23[0];
           fmt_result = (ign_used[0] = /* true */1, ign) ? /* Fmt_EBB */[/* Ignored_param */Block.__(23, [
@@ -11383,14 +11383,14 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   fmt_rest$12
                 ])] : /* Fmt_EBB */[/* Bool */Block.__(9, [fmt_rest$12])];
           break;
-      case 4 : 
+      case 4 :
           var match$24 = parse_literal(str_ind, str_ind, end_ind);
           fmt_result = /* Fmt_EBB */[/* Char_literal */Block.__(12, [
                 symb,
                 match$24[0]
               ])];
           break;
-      case 5 : 
+      case 5 :
           fmt_result = Curry._3(failwith_message(/* Format */[
                     /* String_literal */Block.__(11, [
                         "invalid format ",
@@ -11422,14 +11422,14 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                     "invalid format %S: at character number %d, flag %C is only allowed after the '%%', before padding and precision"
                   ]), str, pct_ind, symb);
           break;
-      case 6 : 
+      case 6 :
           if (symb >= 108) {
             if (symb >= 111) {
               exit = 1;
             }
             else {
               switch (symb - 108 | 0) {
-                case 0 : 
+                case 0 :
                     plus_used = /* true */1;
                     sharp_used = /* true */1;
                     space_used = /* true */1;
@@ -11460,10 +11460,10 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                           ])];
                     }
                     break;
-                case 1 : 
+                case 1 :
                     exit = 1;
                     break;
-                case 2 : 
+                case 2 :
                     plus_used = /* true */1;
                     sharp_used = /* true */1;
                     space_used = /* true */1;
@@ -11494,7 +11494,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                           ])];
                     }
                     break;
-                
+
               }
             }
           }
@@ -11533,7 +11533,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
             }
           }
           break;
-      
+
     }
     if (exit === 1) {
       fmt_result = Curry._3(failwith_message(/* Format */[
@@ -11583,7 +11583,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       if (ign && plus) {
         incompatible_flag(pct_ind, str_ind, /* "_" */95, "'+'");
       }
-      
+
     }
     if (!ign_used[0] && ign) {
       var exit$4 = 0;
@@ -11595,19 +11595,19 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           else if (!legacy_behavior$1) {
             exit$4 = 1;
           }
-          
+
         }
         else if (!legacy_behavior$1) {
           exit$4 = 1;
         }
-        
+
       }
       else if (symb !== 33) {
         if (symb >= 37) {
           if (!legacy_behavior$1) {
             exit$4 = 1;
           }
-          
+
         }
         else {
           exit$4 = 1;
@@ -11619,7 +11619,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       if (exit$4 === 1) {
         incompatible_flag(pct_ind, str_ind, symb, "'_'");
       }
-      
+
     }
     return fmt_result;
   };
@@ -11670,41 +11670,41 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       }
       else {
         switch (switcher) {
-          case 0 : 
+          case 0 :
               set_flag(str_ind$1, space);
               _str_ind = str_ind$1 + 1 | 0;
               continue ;
-              case 3 : 
+              case 3 :
               set_flag(str_ind$1, sharp);
               _str_ind = str_ind$1 + 1 | 0;
               continue ;
-              case 11 : 
+              case 11 :
               set_flag(str_ind$1, plus);
               _str_ind = str_ind$1 + 1 | 0;
               continue ;
-              case 13 : 
+              case 13 :
               set_flag(str_ind$1, minus);
               _str_ind = str_ind$1 + 1 | 0;
               continue ;
-              case 1 : 
-          case 2 : 
-          case 4 : 
-          case 5 : 
-          case 6 : 
-          case 7 : 
-          case 8 : 
-          case 9 : 
-          case 10 : 
-          case 12 : 
-          case 14 : 
-          case 15 : 
+              case 1 :
+          case 2 :
+          case 4 :
+          case 5 :
+          case 6 :
+          case 7 :
+          case 8 :
+          case 9 :
+          case 10 :
+          case 12 :
+          case 14 :
+          case 15 :
               exit = 1;
               break;
-          case 16 : 
+          case 16 :
               set_flag(str_ind$1, zero);
               _str_ind = str_ind$1 + 1 | 0;
               continue ;
-              
+
         }
       }
       if (exit === 1) {
@@ -11749,24 +11749,24 @@ function fmt_ebb_of_string(legacy_behavior, str) {
         }
         if (exit$1 === 1) {
           switch (padty) {
-            case 0 : 
+            case 0 :
                 if (!legacy_behavior$1) {
                   invalid_format_without(str_ind$2 - 1 | 0, /* "-" */45, "padding");
                 }
                 return parse_after_padding(pct_ind$1, str_ind$2, end_ind$1, minus$1, plus$1, sharp$1, space$1, ign$1, /* No_padding */0);
-            case 1 : 
+            case 1 :
                 return parse_after_padding(pct_ind$1, str_ind$2, end_ind$1, minus$1, plus$1, sharp$1, space$1, ign$1, /* No_padding */0);
-            case 2 : 
+            case 2 :
                 return parse_after_padding(pct_ind$1, str_ind$2, end_ind$1, minus$1, plus$1, sharp$1, space$1, ign$1, /* Lit_padding */Block.__(0, [
                               /* Right */1,
                               0
                             ]));
-            
+
           }
         }
-        
+
       }
-      
+
     };
   };
   var is_int_base = function (symb) {
@@ -11776,42 +11776,42 @@ function fmt_ebb_of_string(legacy_behavior, str) {
     }
     else {
       switch (switcher) {
-        case 1 : 
-        case 2 : 
-        case 3 : 
-        case 4 : 
-        case 5 : 
-        case 6 : 
-        case 7 : 
-        case 8 : 
-        case 9 : 
-        case 10 : 
-        case 11 : 
-        case 13 : 
-        case 14 : 
-        case 15 : 
-        case 16 : 
-        case 18 : 
-        case 19 : 
-        case 20 : 
-        case 21 : 
-        case 22 : 
-        case 24 : 
-        case 25 : 
-        case 26 : 
-        case 27 : 
-        case 28 : 
-        case 30 : 
-        case 31 : 
+        case 1 :
+        case 2 :
+        case 3 :
+        case 4 :
+        case 5 :
+        case 6 :
+        case 7 :
+        case 8 :
+        case 9 :
+        case 10 :
+        case 11 :
+        case 13 :
+        case 14 :
+        case 15 :
+        case 16 :
+        case 18 :
+        case 19 :
+        case 20 :
+        case 21 :
+        case 22 :
+        case 24 :
+        case 25 :
+        case 26 :
+        case 27 :
+        case 28 :
+        case 30 :
+        case 31 :
             return /* false */0;
-        case 0 : 
-        case 12 : 
-        case 17 : 
-        case 23 : 
-        case 29 : 
-        case 32 : 
+        case 0 :
+        case 12 :
+        case 17 :
+        case 23 :
+        case 29 :
+        case 32 :
             return /* true */1;
-        
+
       }
     }
   };
@@ -11823,14 +11823,14 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       }
       else {
         switch (symb - 108 | 0) {
-          case 0 : 
+          case 0 :
               return /* Line_counter */0;
-          case 1 : 
+          case 1 :
               exit = 1;
               break;
-          case 2 : 
+          case 2 :
               return /* Char_counter */1;
-          
+
         }
       }
     }
@@ -11850,7 +11850,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
             ]
           ];
     }
-    
+
   };
   var parse_char_set = function (str_ind, end_ind) {
     if (str_ind === end_ind) {
@@ -11966,7 +11966,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                 add_range(c$1, c$prime$2);
                 return parse_char_set_content(str_ind$1 + 2 | 0, end_ind$1);
               }
-              
+
             }
           }
           else {
@@ -11993,9 +11993,9 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           _c = c$prime;
           _str_ind = str_ind + 1 | 0;
           continue ;
-          
+
         }
-        
+
       };
     };
     var parse_char_set_content = function (_str_ind, end_ind) {
@@ -12017,7 +12017,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
           add_in_char_set(char_set, /* "-" */45);
           _str_ind = str_ind + 1 | 0;
           continue ;
-          
+
         }
       };
     };
@@ -12377,7 +12377,7 @@ function fail() {
       ];
 }
 
- 
+
 
 /***********************************************************************/
 /*                                                                     */
@@ -12400,9 +12400,9 @@ function caml_lex_array(s) {
     var l = s.length / 2;
     var a = new Array(l);
     // when s.charCodeAt(2 * i + 1 ) > 128 (0x80)
-    // a[i] < 0  
+    // a[i] < 0
     // for(var i = 0 ; i <= 0xffff; ++i) { if (i << 16 >> 16 !==i){console.log(i<<16>>16, 'vs',i)}}
-    // 
+    //
     for (var i = 0; i < l; i++)
         a[i] = (s.charCodeAt(2 * i) | (s.charCodeAt(2 * i + 1) << 8)) << 16 >> 16;
     return a;
@@ -12533,8 +12533,8 @@ function $$caml_lex_engine(tbl, start_state, lexbuf) {
 /**
  * s -> Lexing.lex_tables.lex_code
  * mem -> Lexing.lexbuf.lex_mem (* int array *)
- */          
-          
+ */
+
 function caml_lex_run_mem(s, i, mem, curr_pos) {
     for (;;) {
         var dst = s.charCodeAt(i);
@@ -12555,7 +12555,7 @@ function caml_lex_run_mem(s, i, mem, curr_pos) {
  * s -> Lexing.lex_tables.lex_code
  * mem -> Lexing.lexbuf.lex_mem (* int array *)
  */
-  
+
 function caml_lex_run_tag(s, i, mem) {
     for (;;) {
         var dst = s.charCodeAt(i);
@@ -12816,12 +12816,12 @@ function caml_compare(_a, _b) {
       if (tag_a === 250) {
         _a = a[0];
         continue ;
-        
+
       }
       else if (tag_b === 250) {
         _b = b[0];
         continue ;
-        
+
       }
       else if (tag_a === 248) {
         return caml_int_compare(a[1], b[1]);
@@ -12861,7 +12861,7 @@ function caml_compare(_a, _b) {
               else {
                 _i = i + 1 | 0;
                 continue ;
-                
+
               }
             }
           };
@@ -12884,7 +12884,7 @@ function caml_compare(_a, _b) {
               else {
                 _i$1 = i$1 + 1 | 0;
                 continue ;
-                
+
               }
             }
           };
@@ -12907,7 +12907,7 @@ function caml_compare(_a, _b) {
               else {
                 _i$2 = i$2 + 1 | 0;
                 continue ;
-                
+
               }
             }
           };
@@ -12933,12 +12933,12 @@ function caml_equal(_a, _b) {
       if (tag_a === 250) {
         _a = a[0];
         continue ;
-        
+
       }
       else if (tag_b === 250) {
         _b = b[0];
         continue ;
-        
+
       }
       else if (tag_a === 248) {
         return +(a[1] === b[1]);
@@ -12968,7 +12968,7 @@ function caml_equal(_a, _b) {
             else if (caml_equal(a$1[i], b$1[i])) {
               _i = i + 1 | 0;
               continue ;
-              
+
             }
             else {
               return /* false */0;
@@ -13064,7 +13064,7 @@ function caml_get_public_method(obj, tag, cacheid) {
         else {
           _i = i - 2 | 0;
           continue ;
-          
+
         }
       };
     };
@@ -13767,42 +13767,42 @@ function escaped(c) {
   }
   else {
     switch (c) {
-      case 8 : 
+      case 8 :
           return "\\b";
-      case 9 : 
+      case 9 :
           return "\\t";
-      case 10 : 
+      case 10 :
           return "\\n";
-      case 0 : 
-      case 1 : 
-      case 2 : 
-      case 3 : 
-      case 4 : 
-      case 5 : 
-      case 6 : 
-      case 7 : 
-      case 11 : 
-      case 12 : 
+      case 0 :
+      case 1 :
+      case 2 :
+      case 3 :
+      case 4 :
+      case 5 :
+      case 6 :
+      case 7 :
+      case 11 :
+      case 12 :
           exit = 1;
           break;
-      case 13 : 
+      case 13 :
           return "\\r";
-      
+
     }
   }
   switch (exit) {
-    case 1 : 
+    case 1 :
         var s = new Array(4);
         s[0] = /* "\\" */92;
         s[1] = 48 + (c / 100 | 0) | 0;
         s[2] = 48 + (c / 10 | 0) % 10 | 0;
         s[3] = 48 + c % 10 | 0;
         return Caml_string.bytes_to_string(s);
-    case 2 : 
+    case 2 :
         var s$1 = new Array(1);
         s$1[0] = c;
         return Caml_string.bytes_to_string(s$1);
-    
+
   }
 }
 
@@ -13860,7 +13860,7 @@ function app(_f, _args) {
         _args = Caml_array.caml_array_sub(args, arity$1, -d | 0);
         _f = f.apply(null, Caml_array.caml_array_sub(args, 0, arity$1));
         continue ;
-        
+
       }
       else {
         return (function(f,args){
@@ -13887,34 +13887,34 @@ function curry_1(o, a0, arity) {
   }
   else {
     switch (arity) {
-      case 0 : 
-      case 1 : 
+      case 0 :
+      case 1 :
           return o(a0);
-      case 2 : 
+      case 2 :
           return function (param) {
             return o(a0, param);
           };
-      case 3 : 
+      case 3 :
           return function (param, param$1) {
             return o(a0, param, param$1);
           };
-      case 4 : 
+      case 4 :
           return function (param, param$1, param$2) {
             return o(a0, param, param$1, param$2);
           };
-      case 5 : 
+      case 5 :
           return function (param, param$1, param$2, param$3) {
             return o(a0, param, param$1, param$2, param$3);
           };
-      case 6 : 
+      case 6 :
           return function (param, param$1, param$2, param$3, param$4) {
             return o(a0, param, param$1, param$2, param$3, param$4);
           };
-      case 7 : 
+      case 7 :
           return function (param, param$1, param$2, param$3, param$4, param$5) {
             return o(a0, param, param$1, param$2, param$3, param$4, param$5);
           };
-      
+
     }
   }
 }
@@ -13954,32 +13954,32 @@ function curry_2(o, a0, a1, arity) {
   }
   else {
     switch (arity) {
-      case 0 : 
-      case 1 : 
+      case 0 :
+      case 1 :
           return app(o(a0), /* array */[a1]);
-      case 2 : 
+      case 2 :
           return o(a0, a1);
-      case 3 : 
+      case 3 :
           return function (param) {
             return o(a0, a1, param);
           };
-      case 4 : 
+      case 4 :
           return function (param, param$1) {
             return o(a0, a1, param, param$1);
           };
-      case 5 : 
+      case 5 :
           return function (param, param$1, param$2) {
             return o(a0, a1, param, param$1, param$2);
           };
-      case 6 : 
+      case 6 :
           return function (param, param$1, param$2, param$3) {
             return o(a0, a1, param, param$1, param$2, param$3);
           };
-      case 7 : 
+      case 7 :
           return function (param, param$1, param$2, param$3, param$4) {
             return o(a0, a1, param, param$1, param$2, param$3, param$4);
           };
-      
+
     }
   }
 }
@@ -14020,33 +14020,33 @@ function curry_3(o, a0, a1, a2, arity) {
   }
   else {
     switch (arity) {
-      case 0 : 
-      case 1 : 
+      case 0 :
+      case 1 :
           return app(o(a0), /* array */[
                       a1,
                       a2
                     ]);
-      case 2 : 
+      case 2 :
           return app(o(a0, a1), /* array */[a2]);
-      case 3 : 
+      case 3 :
           return o(a0, a1, a2);
-      case 4 : 
+      case 4 :
           return function (param) {
             return o(a0, a1, a2, param);
           };
-      case 5 : 
+      case 5 :
           return function (param, param$1) {
             return o(a0, a1, a2, param, param$1);
           };
-      case 6 : 
+      case 6 :
           return function (param, param$1, param$2) {
             return o(a0, a1, a2, param, param$1, param$2);
           };
-      case 7 : 
+      case 7 :
           return function (param, param$1, param$2, param$3) {
             return o(a0, a1, a2, param, param$1, param$2, param$3);
           };
-      
+
     }
   }
 }
@@ -14088,35 +14088,35 @@ function curry_4(o, a0, a1, a2, a3, arity) {
   }
   else {
     switch (arity) {
-      case 0 : 
-      case 1 : 
+      case 0 :
+      case 1 :
           return app(o(a0), /* array */[
                       a1,
                       a2,
                       a3
                     ]);
-      case 2 : 
+      case 2 :
           return app(o(a0, a1), /* array */[
                       a2,
                       a3
                     ]);
-      case 3 : 
+      case 3 :
           return app(o(a0, a1, a2), /* array */[a3]);
-      case 4 : 
+      case 4 :
           return o(a0, a1, a2, a3);
-      case 5 : 
+      case 5 :
           return function (param) {
             return o(a0, a1, a2, a3, param);
           };
-      case 6 : 
+      case 6 :
           return function (param, param$1) {
             return o(a0, a1, a2, a3, param, param$1);
           };
-      case 7 : 
+      case 7 :
           return function (param, param$1, param$2) {
             return o(a0, a1, a2, a3, param, param$1, param$2);
           };
-      
+
     }
   }
 }
@@ -14159,38 +14159,38 @@ function curry_5(o, a0, a1, a2, a3, a4, arity) {
   }
   else {
     switch (arity) {
-      case 0 : 
-      case 1 : 
+      case 0 :
+      case 1 :
           return app(o(a0), /* array */[
                       a1,
                       a2,
                       a3,
                       a4
                     ]);
-      case 2 : 
+      case 2 :
           return app(o(a0, a1), /* array */[
                       a2,
                       a3,
                       a4
                     ]);
-      case 3 : 
+      case 3 :
           return app(o(a0, a1, a2), /* array */[
                       a3,
                       a4
                     ]);
-      case 4 : 
+      case 4 :
           return app(o(a0, a1, a2, a3), /* array */[a4]);
-      case 5 : 
+      case 5 :
           return o(a0, a1, a2, a3, a4);
-      case 6 : 
+      case 6 :
           return function (param) {
             return o(a0, a1, a2, a3, a4, param);
           };
-      case 7 : 
+      case 7 :
           return function (param, param$1) {
             return o(a0, a1, a2, a3, a4, param, param$1);
           };
-      
+
     }
   }
 }
@@ -14234,8 +14234,8 @@ function curry_6(o, a0, a1, a2, a3, a4, a5, arity) {
   }
   else {
     switch (arity) {
-      case 0 : 
-      case 1 : 
+      case 0 :
+      case 1 :
           return app(o(a0), /* array */[
                       a1,
                       a2,
@@ -14243,33 +14243,33 @@ function curry_6(o, a0, a1, a2, a3, a4, a5, arity) {
                       a4,
                       a5
                     ]);
-      case 2 : 
+      case 2 :
           return app(o(a0, a1), /* array */[
                       a2,
                       a3,
                       a4,
                       a5
                     ]);
-      case 3 : 
+      case 3 :
           return app(o(a0, a1, a2), /* array */[
                       a3,
                       a4,
                       a5
                     ]);
-      case 4 : 
+      case 4 :
           return app(o(a0, a1, a2, a3), /* array */[
                       a4,
                       a5
                     ]);
-      case 5 : 
+      case 5 :
           return app(o(a0, a1, a2, a3, a4), /* array */[a5]);
-      case 6 : 
+      case 6 :
           return o(a0, a1, a2, a3, a4, a5);
-      case 7 : 
+      case 7 :
           return function (param) {
             return o(a0, a1, a2, a3, a4, a5, param);
           };
-      
+
     }
   }
 }
@@ -14314,8 +14314,8 @@ function curry_7(o, a0, a1, a2, a3, a4, a5, a6, arity) {
   }
   else {
     switch (arity) {
-      case 0 : 
-      case 1 : 
+      case 0 :
+      case 1 :
           return app(o(a0), /* array */[
                       a1,
                       a2,
@@ -14324,7 +14324,7 @@ function curry_7(o, a0, a1, a2, a3, a4, a5, a6, arity) {
                       a5,
                       a6
                     ]);
-      case 2 : 
+      case 2 :
           return app(o(a0, a1), /* array */[
                       a2,
                       a3,
@@ -14332,29 +14332,29 @@ function curry_7(o, a0, a1, a2, a3, a4, a5, a6, arity) {
                       a5,
                       a6
                     ]);
-      case 3 : 
+      case 3 :
           return app(o(a0, a1, a2), /* array */[
                       a3,
                       a4,
                       a5,
                       a6
                     ]);
-      case 4 : 
+      case 4 :
           return app(o(a0, a1, a2, a3), /* array */[
                       a4,
                       a5,
                       a6
                     ]);
-      case 5 : 
+      case 5 :
           return app(o(a0, a1, a2, a3, a4), /* array */[
                       a5,
                       a6
                     ]);
-      case 6 : 
+      case 6 :
           return app(o(a0, a1, a2, a3, a4, a5), /* array */[a6]);
-      case 7 : 
+      case 7 :
           return o(a0, a1, a2, a3, a4, a5, a6);
-      
+
     }
   }
 }
@@ -14400,8 +14400,8 @@ function curry_8(o, a0, a1, a2, a3, a4, a5, a6, a7, arity) {
   }
   else {
     switch (arity) {
-      case 0 : 
-      case 1 : 
+      case 0 :
+      case 1 :
           return app(o(a0), /* array */[
                       a1,
                       a2,
@@ -14411,7 +14411,7 @@ function curry_8(o, a0, a1, a2, a3, a4, a5, a6, a7, arity) {
                       a6,
                       a7
                     ]);
-      case 2 : 
+      case 2 :
           return app(o(a0, a1), /* array */[
                       a2,
                       a3,
@@ -14420,7 +14420,7 @@ function curry_8(o, a0, a1, a2, a3, a4, a5, a6, a7, arity) {
                       a6,
                       a7
                     ]);
-      case 3 : 
+      case 3 :
           return app(o(a0, a1, a2), /* array */[
                       a3,
                       a4,
@@ -14428,27 +14428,27 @@ function curry_8(o, a0, a1, a2, a3, a4, a5, a6, a7, arity) {
                       a6,
                       a7
                     ]);
-      case 4 : 
+      case 4 :
           return app(o(a0, a1, a2, a3), /* array */[
                       a4,
                       a5,
                       a6,
                       a7
                     ]);
-      case 5 : 
+      case 5 :
           return app(o(a0, a1, a2, a3, a4), /* array */[
                       a5,
                       a6,
                       a7
                     ]);
-      case 6 : 
+      case 6 :
           return app(o(a0, a1, a2, a3, a4, a5), /* array */[
                       a6,
                       a7
                     ]);
-      case 7 : 
+      case 7 :
           return app(o(a0, a1, a2, a3, a4, a5, a6), /* array */[a7]);
-      
+
     }
   }
 }
@@ -14812,15 +14812,15 @@ function value_type(s) {
   }
   else {
     switch (switcher) {
-      case 0 : 
+      case 0 :
           return /* F64Type */3;
-      case 1 : 
+      case 1 :
           return /* F32Type */2;
-      case 2 : 
+      case 2 :
           return /* I64Type */1;
-      case 3 : 
+      case 3 :
           return /* I32Type */0;
-      
+
     }
   }
 }
@@ -14944,21 +14944,21 @@ function instr(s) {
   }
   else {
     switch (b) {
-      case 0 : 
+      case 0 :
           return Operators.unreachable;
-      case 1 : 
+      case 1 :
           return Operators.nop;
-      case 2 : 
+      case 2 :
           var ts = stack_type(s);
           var es$prime = List.rev(instr_block$prime(s, /* [] */0));
           expect(11, s, "END opcode expected");
           return Operators.block(ts, es$prime);
-      case 3 : 
+      case 3 :
           var ts$1 = stack_type(s);
           var es$prime$1 = List.rev(instr_block$prime(s, /* [] */0));
           expect(11, s, "END opcode expected");
           return Operators.loop(ts$1, es$prime$1);
-      case 4 : 
+      case 4 :
           var ts$2 = stack_type(s);
           var es1 = List.rev(instr_block$prime(s, /* [] */0));
           if (Caml_obj.caml_equal(peek(s), /* Some */[5])) {
@@ -14972,393 +14972,393 @@ function instr(s) {
             return Operators.if_(ts$2, es1, /* [] */0);
           }
           break;
-      case 5 : 
+      case 5 :
           return error(s, pos, "misplaced ELSE opcode");
-      case 11 : 
+      case 11 :
           return error(s, pos, "misplaced END opcode");
-      case 12 : 
+      case 12 :
           return Operators.br(at($$var, s));
-      case 13 : 
+      case 13 :
           return Operators.br_if(at($$var, s));
-      case 14 : 
+      case 14 :
           var xs = vec(function (param) {
                 return at($$var, param);
               }, s);
           var x = at($$var, s);
           return Operators.br_table(xs, x);
-      case 15 : 
+      case 15 :
           return Operators.$$return;
-      case 16 : 
+      case 16 :
           return Operators.call(at($$var, s));
-      case 17 : 
+      case 17 :
           var x$1 = at($$var, s);
           expect(0, s, "zero flag expected");
           return Operators.call_indirect(x$1);
-      case 26 : 
+      case 26 :
           return Operators.drop;
-      case 27 : 
+      case 27 :
           return Operators.select;
-      case 32 : 
+      case 32 :
           return Operators.get_local(at($$var, s));
-      case 33 : 
+      case 33 :
           return Operators.set_local(at($$var, s));
-      case 34 : 
+      case 34 :
           return Operators.tee_local(at($$var, s));
-      case 35 : 
+      case 35 :
           return Operators.get_global(at($$var, s));
-      case 36 : 
+      case 36 :
           return Operators.set_global(at($$var, s));
-      case 6 : 
-      case 7 : 
-      case 8 : 
-      case 9 : 
-      case 10 : 
-      case 18 : 
-      case 19 : 
-      case 20 : 
-      case 21 : 
-      case 22 : 
-      case 23 : 
-      case 24 : 
-      case 25 : 
-      case 28 : 
-      case 29 : 
-      case 30 : 
-      case 31 : 
-      case 37 : 
-      case 38 : 
-      case 39 : 
+      case 6 :
+      case 7 :
+      case 8 :
+      case 9 :
+      case 10 :
+      case 18 :
+      case 19 :
+      case 20 :
+      case 21 :
+      case 22 :
+      case 23 :
+      case 24 :
+      case 25 :
+      case 28 :
+      case 29 :
+      case 30 :
+      case 31 :
+      case 37 :
+      case 38 :
+      case 39 :
           return illegal(s, pos, b);
-      case 40 : 
+      case 40 :
           var match = memop(s);
           return Operators.i32_load(match[0], match[1]);
-      case 41 : 
+      case 41 :
           var match$1 = memop(s);
           return Operators.i64_load(match$1[0], match$1[1]);
-      case 42 : 
+      case 42 :
           var match$2 = memop(s);
           return Operators.f32_load(match$2[0], match$2[1]);
-      case 43 : 
+      case 43 :
           var match$3 = memop(s);
           return Operators.f64_load(match$3[0], match$3[1]);
-      case 44 : 
+      case 44 :
           var match$4 = memop(s);
           return Operators.i32_load8_s(match$4[0], match$4[1]);
-      case 45 : 
+      case 45 :
           var match$5 = memop(s);
           return Operators.i32_load8_u(match$5[0], match$5[1]);
-      case 46 : 
+      case 46 :
           var match$6 = memop(s);
           return Operators.i32_load16_s(match$6[0], match$6[1]);
-      case 47 : 
+      case 47 :
           var match$7 = memop(s);
           return Operators.i32_load16_u(match$7[0], match$7[1]);
-      case 48 : 
+      case 48 :
           var match$8 = memop(s);
           return Operators.i64_load8_s(match$8[0], match$8[1]);
-      case 49 : 
+      case 49 :
           var match$9 = memop(s);
           return Operators.i64_load8_u(match$9[0], match$9[1]);
-      case 50 : 
+      case 50 :
           var match$10 = memop(s);
           return Operators.i64_load16_s(match$10[0], match$10[1]);
-      case 51 : 
+      case 51 :
           var match$11 = memop(s);
           return Operators.i64_load16_u(match$11[0], match$11[1]);
-      case 52 : 
+      case 52 :
           var match$12 = memop(s);
           return Operators.i64_load32_s(match$12[0], match$12[1]);
-      case 53 : 
+      case 53 :
           var match$13 = memop(s);
           return Operators.i64_load32_u(match$13[0], match$13[1]);
-      case 54 : 
+      case 54 :
           var match$14 = memop(s);
           return Operators.i32_store(match$14[0], match$14[1]);
-      case 55 : 
+      case 55 :
           var match$15 = memop(s);
           return Operators.i64_store(match$15[0], match$15[1]);
-      case 56 : 
+      case 56 :
           var match$16 = memop(s);
           return Operators.f32_store(match$16[0], match$16[1]);
-      case 57 : 
+      case 57 :
           var match$17 = memop(s);
           return Operators.f64_store(match$17[0], match$17[1]);
-      case 58 : 
+      case 58 :
           var match$18 = memop(s);
           return Operators.i32_store8(match$18[0], match$18[1]);
-      case 59 : 
+      case 59 :
           var match$19 = memop(s);
           return Operators.i32_store16(match$19[0], match$19[1]);
-      case 60 : 
+      case 60 :
           var match$20 = memop(s);
           return Operators.i64_store8(match$20[0], match$20[1]);
-      case 61 : 
+      case 61 :
           var match$21 = memop(s);
           return Operators.i64_store16(match$21[0], match$21[1]);
-      case 62 : 
+      case 62 :
           var match$22 = memop(s);
           return Operators.i64_store32(match$22[0], match$22[1]);
-      case 63 : 
+      case 63 :
           expect(0, s, "zero flag expected");
           return Operators.current_memory;
-      case 64 : 
+      case 64 :
           expect(0, s, "zero flag expected");
           return Operators.grow_memory;
-      case 65 : 
+      case 65 :
           return Operators.i32_const(at(vs32, s));
-      case 66 : 
+      case 66 :
           return Operators.i64_const(at(vs64, s));
-      case 67 : 
+      case 67 :
           return Operators.f32_const(at(f32, s));
-      case 68 : 
+      case 68 :
           return Operators.f64_const(at(f64, s));
-      case 69 : 
+      case 69 :
           return Operators.i32_eqz;
-      case 70 : 
+      case 70 :
           return Operators.i32_eq;
-      case 71 : 
+      case 71 :
           return Operators.i32_ne;
-      case 72 : 
+      case 72 :
           return Operators.i32_lt_s;
-      case 73 : 
+      case 73 :
           return Operators.i32_lt_u;
-      case 74 : 
+      case 74 :
           return Operators.i32_gt_s;
-      case 75 : 
+      case 75 :
           return Operators.i32_gt_u;
-      case 76 : 
+      case 76 :
           return Operators.i32_le_s;
-      case 77 : 
+      case 77 :
           return Operators.i32_le_u;
-      case 78 : 
+      case 78 :
           return Operators.i32_ge_s;
-      case 79 : 
+      case 79 :
           return Operators.i32_ge_u;
-      case 80 : 
+      case 80 :
           return Operators.i64_eqz;
-      case 81 : 
+      case 81 :
           return Operators.i64_eq;
-      case 82 : 
+      case 82 :
           return Operators.i64_ne;
-      case 83 : 
+      case 83 :
           return Operators.i64_lt_s;
-      case 84 : 
+      case 84 :
           return Operators.i64_lt_u;
-      case 85 : 
+      case 85 :
           return Operators.i64_gt_s;
-      case 86 : 
+      case 86 :
           return Operators.i64_gt_u;
-      case 87 : 
+      case 87 :
           return Operators.i64_le_s;
-      case 88 : 
+      case 88 :
           return Operators.i64_le_u;
-      case 89 : 
+      case 89 :
           return Operators.i64_ge_s;
-      case 90 : 
+      case 90 :
           return Operators.i64_ge_u;
-      case 91 : 
+      case 91 :
           return Operators.f32_eq;
-      case 92 : 
+      case 92 :
           return Operators.f32_ne;
-      case 93 : 
+      case 93 :
           return Operators.f32_lt;
-      case 94 : 
+      case 94 :
           return Operators.f32_gt;
-      case 95 : 
+      case 95 :
           return Operators.f32_le;
-      case 96 : 
+      case 96 :
           return Operators.f32_ge;
-      case 97 : 
+      case 97 :
           return Operators.f64_eq;
-      case 98 : 
+      case 98 :
           return Operators.f64_ne;
-      case 99 : 
+      case 99 :
           return Operators.f64_lt;
-      case 100 : 
+      case 100 :
           return Operators.f64_gt;
-      case 101 : 
+      case 101 :
           return Operators.f64_le;
-      case 102 : 
+      case 102 :
           return Operators.f64_ge;
-      case 103 : 
+      case 103 :
           return Operators.i32_clz;
-      case 104 : 
+      case 104 :
           return Operators.i32_ctz;
-      case 105 : 
+      case 105 :
           return Operators.i32_popcnt;
-      case 106 : 
+      case 106 :
           return Operators.i32_add;
-      case 107 : 
+      case 107 :
           return Operators.i32_sub;
-      case 108 : 
+      case 108 :
           return Operators.i32_mul;
-      case 109 : 
+      case 109 :
           return Operators.i32_div_s;
-      case 110 : 
+      case 110 :
           return Operators.i32_div_u;
-      case 111 : 
+      case 111 :
           return Operators.i32_rem_s;
-      case 112 : 
+      case 112 :
           return Operators.i32_rem_u;
-      case 113 : 
+      case 113 :
           return Operators.i32_and;
-      case 114 : 
+      case 114 :
           return Operators.i32_or;
-      case 115 : 
+      case 115 :
           return Operators.i32_xor;
-      case 116 : 
+      case 116 :
           return Operators.i32_shl;
-      case 117 : 
+      case 117 :
           return Operators.i32_shr_s;
-      case 118 : 
+      case 118 :
           return Operators.i32_shr_u;
-      case 119 : 
+      case 119 :
           return Operators.i32_rotl;
-      case 120 : 
+      case 120 :
           return Operators.i32_rotr;
-      case 121 : 
+      case 121 :
           return Operators.i64_clz;
-      case 122 : 
+      case 122 :
           return Operators.i64_ctz;
-      case 123 : 
+      case 123 :
           return Operators.i64_popcnt;
-      case 124 : 
+      case 124 :
           return Operators.i64_add;
-      case 125 : 
+      case 125 :
           return Operators.i64_sub;
-      case 126 : 
+      case 126 :
           return Operators.i64_mul;
-      case 127 : 
+      case 127 :
           return Operators.i64_div_s;
-      case 128 : 
+      case 128 :
           return Operators.i64_div_u;
-      case 129 : 
+      case 129 :
           return Operators.i64_rem_s;
-      case 130 : 
+      case 130 :
           return Operators.i64_rem_u;
-      case 131 : 
+      case 131 :
           return Operators.i64_and;
-      case 132 : 
+      case 132 :
           return Operators.i64_or;
-      case 133 : 
+      case 133 :
           return Operators.i64_xor;
-      case 134 : 
+      case 134 :
           return Operators.i64_shl;
-      case 135 : 
+      case 135 :
           return Operators.i64_shr_s;
-      case 136 : 
+      case 136 :
           return Operators.i64_shr_u;
-      case 137 : 
+      case 137 :
           return Operators.i64_rotl;
-      case 138 : 
+      case 138 :
           return Operators.i64_rotr;
-      case 139 : 
+      case 139 :
           return Operators.f32_abs;
-      case 140 : 
+      case 140 :
           return Operators.f32_neg;
-      case 141 : 
+      case 141 :
           return Operators.f32_ceil;
-      case 142 : 
+      case 142 :
           return Operators.f32_floor;
-      case 143 : 
+      case 143 :
           return Operators.f32_trunc;
-      case 144 : 
+      case 144 :
           return Operators.f32_nearest;
-      case 145 : 
+      case 145 :
           return Operators.f32_sqrt;
-      case 146 : 
+      case 146 :
           return Operators.f32_add;
-      case 147 : 
+      case 147 :
           return Operators.f32_sub;
-      case 148 : 
+      case 148 :
           return Operators.f32_mul;
-      case 149 : 
+      case 149 :
           return Operators.f32_div;
-      case 150 : 
+      case 150 :
           return Operators.f32_min;
-      case 151 : 
+      case 151 :
           return Operators.f32_max;
-      case 152 : 
+      case 152 :
           return Operators.f32_copysign;
-      case 153 : 
+      case 153 :
           return Operators.f64_abs;
-      case 154 : 
+      case 154 :
           return Operators.f64_neg;
-      case 155 : 
+      case 155 :
           return Operators.f64_ceil;
-      case 156 : 
+      case 156 :
           return Operators.f64_floor;
-      case 157 : 
+      case 157 :
           return Operators.f64_trunc;
-      case 158 : 
+      case 158 :
           return Operators.f64_nearest;
-      case 159 : 
+      case 159 :
           return Operators.f64_sqrt;
-      case 160 : 
+      case 160 :
           return Operators.f64_add;
-      case 161 : 
+      case 161 :
           return Operators.f64_sub;
-      case 162 : 
+      case 162 :
           return Operators.f64_mul;
-      case 163 : 
+      case 163 :
           return Operators.f64_div;
-      case 164 : 
+      case 164 :
           return Operators.f64_min;
-      case 165 : 
+      case 165 :
           return Operators.f64_max;
-      case 166 : 
+      case 166 :
           return Operators.f64_copysign;
-      case 167 : 
+      case 167 :
           return Operators.i32_wrap_i64;
-      case 168 : 
+      case 168 :
           return Operators.i32_trunc_s_f32;
-      case 169 : 
+      case 169 :
           return Operators.i32_trunc_u_f32;
-      case 170 : 
+      case 170 :
           return Operators.i32_trunc_s_f64;
-      case 171 : 
+      case 171 :
           return Operators.i32_trunc_u_f64;
-      case 172 : 
+      case 172 :
           return Operators.i64_extend_s_i32;
-      case 173 : 
+      case 173 :
           return Operators.i64_extend_u_i32;
-      case 174 : 
+      case 174 :
           return Operators.i64_trunc_s_f32;
-      case 175 : 
+      case 175 :
           return Operators.i64_trunc_u_f32;
-      case 176 : 
+      case 176 :
           return Operators.i64_trunc_s_f64;
-      case 177 : 
+      case 177 :
           return Operators.i64_trunc_u_f64;
-      case 178 : 
+      case 178 :
           return Operators.f32_convert_s_i32;
-      case 179 : 
+      case 179 :
           return Operators.f32_convert_u_i32;
-      case 180 : 
+      case 180 :
           return Operators.f32_convert_s_i64;
-      case 181 : 
+      case 181 :
           return Operators.f32_convert_u_i64;
-      case 182 : 
+      case 182 :
           return Operators.f32_demote_f64;
-      case 183 : 
+      case 183 :
           return Operators.f64_convert_s_i32;
-      case 184 : 
+      case 184 :
           return Operators.f64_convert_u_i32;
-      case 185 : 
+      case 185 :
           return Operators.f64_convert_s_i64;
-      case 186 : 
+      case 186 :
           return Operators.f64_convert_u_i64;
-      case 187 : 
+      case 187 :
           return Operators.f64_promote_f32;
-      case 188 : 
+      case 188 :
           return Operators.i32_reinterpret_f32;
-      case 189 : 
+      case 189 :
           return Operators.i64_reinterpret_f64;
-      case 190 : 
+      case 190 :
           return Operators.f32_reinterpret_i32;
-      case 191 : 
+      case 191 :
           return Operators.f64_reinterpret_i64;
-      
+
     }
   }
 }
@@ -15378,7 +15378,7 @@ function instr_block$prime(s, _es) {
             es
           ];
           continue ;
-          
+
         }
         else {
           return es;
@@ -15412,31 +15412,31 @@ function id(s) {
               }
               else {
                 switch (param) {
-                  case 0 : 
+                  case 0 :
                       return /* CustomSection */-808010220;
-                  case 1 : 
+                  case 1 :
                       return /* TypeSection */836501035;
-                  case 2 : 
+                  case 2 :
                       return /* ImportSection */696517344;
-                  case 3 : 
+                  case 3 :
                       return /* FuncSection */205556449;
-                  case 4 : 
+                  case 4 :
                       return /* TableSection */1031864215;
-                  case 5 : 
+                  case 5 :
                       return /* MemorySection */-840203068;
-                  case 6 : 
+                  case 6 :
                       return /* GlobalSection */-872313182;
-                  case 7 : 
+                  case 7 :
                       return /* ExportSection */-440679759;
-                  case 8 : 
+                  case 8 :
                       return /* StartSection */395720131;
-                  case 9 : 
+                  case 9 :
                       return /* ElemSection */440380662;
-                  case 10 : 
+                  case 10 :
                       return /* CodeSection */1021133848;
-                  case 11 : 
+                  case 11 :
                       return /* DataSection */66447547;
-                  
+
                 }
               }
             }, bo);
@@ -15472,15 +15472,15 @@ function import_kind(s) {
   }
   else {
     switch (match) {
-      case 0 : 
+      case 0 :
           return /* FuncImport */Block.__(0, [at($$var, s)]);
-      case 1 : 
+      case 1 :
           return /* TableImport */Block.__(1, [table_type(s)]);
-      case 2 : 
+      case 2 :
           return /* MemoryImport */Block.__(2, [memory_type(s)]);
-      case 3 : 
+      case 3 :
           return /* GlobalImport */Block.__(3, [global_type(s)]);
-      
+
     }
   }
 }
@@ -15562,15 +15562,15 @@ function export_kind(s) {
   }
   else {
     switch (match) {
-      case 0 : 
+      case 0 :
           return /* FuncExport */0;
-      case 1 : 
+      case 1 :
           return /* TableExport */1;
-      case 2 : 
+      case 2 :
           return /* MemoryExport */2;
-      case 3 : 
+      case 3 :
           return /* GlobalExport */3;
-      
+
     }
   }
 }
@@ -15687,7 +15687,7 @@ function iterate(f, s) {
   while(true) {
     if (Curry._1(f, s)) {
       continue ;
-      
+
     }
     else {
       return 0;
@@ -15832,7 +15832,7 @@ function encode(m) {
         u8(b | 128);
         _i = Caml_int64.lsr_(i, 7);
         continue ;
-        
+
       }
     };
   };
@@ -15853,7 +15853,7 @@ function encode(m) {
         u8(b | 128);
         _i = Caml_int64.asr_(i, 7);
         continue ;
-        
+
       }
     };
   };
@@ -15909,27 +15909,27 @@ function encode(m) {
   };
   var value_type = function (param) {
     switch (param) {
-      case 0 : 
+      case 0 :
           return vs64(/* int64 */[
                       /* hi */-1,
                       /* lo */4294967295
                     ]);
-      case 1 : 
+      case 1 :
           return vs64(/* int64 */[
                       /* hi */-1,
                       /* lo */4294967294
                     ]);
-      case 2 : 
+      case 2 :
           return vs64(/* int64 */[
                       /* hi */-1,
                       /* lo */4294967293
                     ]);
-      case 3 : 
+      case 3 :
           return vs64(/* int64 */[
                       /* hi */-1,
                       /* lo */4294967292
                     ]);
-      
+
     }
   };
   var stack_type = function (param) {
@@ -15993,38 +15993,38 @@ function encode(m) {
     var match = e[/* it */1];
     if (typeof match === "number") {
       switch (match) {
-        case 0 : 
+        case 0 :
             return u8(0);
-        case 1 : 
+        case 1 :
             return u8(1);
-        case 2 : 
+        case 2 :
             return u8(15);
-        case 3 : 
+        case 3 :
             return u8(26);
-        case 4 : 
+        case 4 :
             return u8(27);
-        case 5 : 
+        case 5 :
             u8(63);
             return u8(0);
-        case 6 : 
+        case 6 :
             u8(64);
             return u8(0);
-        
+
       }
     }
     else {
       switch (match.tag | 0) {
-        case 0 : 
+        case 0 :
             u8(2);
             stack_type(match[0]);
             List.iter(instr, match[1]);
             return u8(11);
-        case 1 : 
+        case 1 :
             u8(3);
             stack_type(match[0]);
             List.iter(instr, match[1]);
             return u8(11);
-        case 2 : 
+        case 2 :
             var es2 = match[2];
             u8(4);
             stack_type(match[0]);
@@ -16034,47 +16034,47 @@ function encode(m) {
             }
             List.iter(instr, es2);
             return u8(11);
-        case 3 : 
+        case 3 :
             u8(12);
             return vu32(match[0][/* it */1]);
-        case 4 : 
+        case 4 :
             u8(13);
             return vu32(match[0][/* it */1]);
-        case 5 : 
+        case 5 :
             u8(14);
             vec($$var, match[0]);
             return vu32(match[1][/* it */1]);
-        case 6 : 
+        case 6 :
             u8(16);
             return vu32(match[0][/* it */1]);
-        case 7 : 
+        case 7 :
             u8(17);
             vu32(match[0][/* it */1]);
             return u8(0);
-        case 8 : 
+        case 8 :
             u8(32);
             return vu32(match[0][/* it */1]);
-        case 9 : 
+        case 9 :
             u8(33);
             return vu32(match[0][/* it */1]);
-        case 10 : 
+        case 10 :
             u8(34);
             return vu32(match[0][/* it */1]);
-        case 11 : 
+        case 11 :
             u8(35);
             return vu32(match[0][/* it */1]);
-        case 12 : 
+        case 12 :
             u8(36);
             return vu32(match[0][/* it */1]);
-        case 13 : 
+        case 13 :
             var mo = match[0];
             switch (mo[/* ty */0]) {
-              case 0 : 
+              case 0 :
                   var match$1 = mo[/* sz */3];
                   if (match$1) {
                     var match$2 = match$1[0];
                     switch (match$2[0]) {
-                      case 0 : 
+                      case 0 :
                           if (match$2[1] !== 0) {
                             u8(45);
                             return memop(mo);
@@ -16083,7 +16083,7 @@ function encode(m) {
                             u8(44);
                             return memop(mo);
                           }
-                      case 1 : 
+                      case 1 :
                           if (match$2[1] !== 0) {
                             u8(47);
                             return memop(mo);
@@ -16092,7 +16092,7 @@ function encode(m) {
                             u8(46);
                             return memop(mo);
                           }
-                      case 2 : 
+                      case 2 :
                           throw [
                                 Caml_builtin_exceptions.assert_failure,
                                 [
@@ -16101,7 +16101,7 @@ function encode(m) {
                                   8
                                 ]
                               ];
-                      
+
                     }
                   }
                   else {
@@ -16109,12 +16109,12 @@ function encode(m) {
                     return memop(mo);
                   }
                   break;
-              case 1 : 
+              case 1 :
                   var match$3 = mo[/* sz */3];
                   if (match$3) {
                     var match$4 = match$3[0];
                     switch (match$4[0]) {
-                      case 0 : 
+                      case 0 :
                           if (match$4[1] !== 0) {
                             u8(49);
                             return memop(mo);
@@ -16123,7 +16123,7 @@ function encode(m) {
                             u8(48);
                             return memop(mo);
                           }
-                      case 1 : 
+                      case 1 :
                           if (match$4[1] !== 0) {
                             u8(51);
                             return memop(mo);
@@ -16132,7 +16132,7 @@ function encode(m) {
                             u8(50);
                             return memop(mo);
                           }
-                      case 2 : 
+                      case 2 :
                           if (match$4[1] !== 0) {
                             u8(53);
                             return memop(mo);
@@ -16141,7 +16141,7 @@ function encode(m) {
                             u8(52);
                             return memop(mo);
                           }
-                      
+
                     }
                   }
                   else {
@@ -16149,7 +16149,7 @@ function encode(m) {
                     return memop(mo);
                   }
                   break;
-              case 2 : 
+              case 2 :
                   if (mo[/* sz */3]) {
                     throw [
                           Caml_builtin_exceptions.assert_failure,
@@ -16165,7 +16165,7 @@ function encode(m) {
                     return memop(mo);
                   }
                   break;
-              case 3 : 
+              case 3 :
                   if (mo[/* sz */3]) {
                     throw [
                           Caml_builtin_exceptions.assert_failure,
@@ -16181,23 +16181,23 @@ function encode(m) {
                     return memop(mo);
                   }
                   break;
-              
+
             }
             break;
-        case 14 : 
+        case 14 :
             var mo$1 = match[0];
             switch (mo$1[/* ty */0]) {
-              case 0 : 
+              case 0 :
                   var match$5 = mo$1[/* sz */3];
                   if (match$5) {
                     switch (match$5[0]) {
-                      case 0 : 
+                      case 0 :
                           u8(58);
                           return memop(mo$1);
-                      case 1 : 
+                      case 1 :
                           u8(59);
                           return memop(mo$1);
-                      case 2 : 
+                      case 2 :
                           throw [
                                 Caml_builtin_exceptions.assert_failure,
                                 [
@@ -16206,7 +16206,7 @@ function encode(m) {
                                   52
                                 ]
                               ];
-                      
+
                     }
                   }
                   else {
@@ -16214,20 +16214,20 @@ function encode(m) {
                     return memop(mo$1);
                   }
                   break;
-              case 1 : 
+              case 1 :
                   var match$6 = mo$1[/* sz */3];
                   if (match$6) {
                     switch (match$6[0]) {
-                      case 0 : 
+                      case 0 :
                           u8(60);
                           return memop(mo$1);
-                      case 1 : 
+                      case 1 :
                           u8(61);
                           return memop(mo$1);
-                      case 2 : 
+                      case 2 :
                           u8(62);
                           return memop(mo$1);
-                      
+
                     }
                   }
                   else {
@@ -16235,7 +16235,7 @@ function encode(m) {
                     return memop(mo$1);
                   }
                   break;
-              case 2 : 
+              case 2 :
                   if (mo$1[/* sz */3]) {
                     throw [
                           Caml_builtin_exceptions.assert_failure,
@@ -16251,7 +16251,7 @@ function encode(m) {
                     return memop(mo$1);
                   }
                   break;
-              case 3 : 
+              case 3 :
                   if (mo$1[/* sz */3]) {
                     throw [
                           Caml_builtin_exceptions.assert_failure,
@@ -16267,36 +16267,36 @@ function encode(m) {
                     return memop(mo$1);
                   }
                   break;
-              
+
             }
             break;
-        case 15 : 
+        case 15 :
             var match$7 = match[0][/* it */1];
             switch (match$7.tag | 0) {
-              case 0 : 
+              case 0 :
                   u8(65);
                   return vs64(Caml_int64.of_int32(match$7[0]));
-              case 1 : 
+              case 1 :
                   u8(66);
                   return vs64(match$7[0]);
-              case 2 : 
+              case 2 :
                   u8(67);
                   return u32(Curry._1(F32.to_bits, match$7[0]));
-              case 3 : 
+              case 3 :
                   u8(68);
                   var i = Curry._1(F64.to_bits, match$7[0]);
                   u32(i[1] & /* lo */4294967295 | 0);
                   return u32(Caml_int64.asr_(i, 32)[1] | 0);
-              
+
             }
             break;
-        case 16 : 
+        case 16 :
             switch (match[0].tag | 0) {
-              case 0 : 
+              case 0 :
                   return u8(69);
-              case 1 : 
+              case 1 :
                   return u8(80);
-              case 2 : 
+              case 2 :
                   throw [
                         Caml_builtin_exceptions.assert_failure,
                         [
@@ -16305,7 +16305,7 @@ function encode(m) {
                           24
                         ]
                       ];
-              case 3 : 
+              case 3 :
                   throw [
                         Caml_builtin_exceptions.assert_failure,
                         [
@@ -16314,285 +16314,285 @@ function encode(m) {
                           24
                         ]
                       ];
-              
+
             }
             break;
-        case 17 : 
+        case 17 :
             var match$8 = match[0];
             switch (match$8.tag | 0) {
-              case 0 : 
+              case 0 :
                   switch (match$8[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(70);
-                    case 1 : 
+                    case 1 :
                         return u8(71);
-                    case 2 : 
+                    case 2 :
                         return u8(72);
-                    case 3 : 
+                    case 3 :
                         return u8(73);
-                    case 4 : 
+                    case 4 :
                         return u8(74);
-                    case 5 : 
+                    case 5 :
                         return u8(75);
-                    case 6 : 
+                    case 6 :
                         return u8(76);
-                    case 7 : 
+                    case 7 :
                         return u8(77);
-                    case 8 : 
+                    case 8 :
                         return u8(78);
-                    case 9 : 
+                    case 9 :
                         return u8(79);
-                    
+
                   }
                   break;
-              case 1 : 
+              case 1 :
                   switch (match$8[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(81);
-                    case 1 : 
+                    case 1 :
                         return u8(82);
-                    case 2 : 
+                    case 2 :
                         return u8(83);
-                    case 3 : 
+                    case 3 :
                         return u8(84);
-                    case 4 : 
+                    case 4 :
                         return u8(85);
-                    case 5 : 
+                    case 5 :
                         return u8(86);
-                    case 6 : 
+                    case 6 :
                         return u8(87);
-                    case 7 : 
+                    case 7 :
                         return u8(88);
-                    case 8 : 
+                    case 8 :
                         return u8(89);
-                    case 9 : 
+                    case 9 :
                         return u8(90);
-                    
+
                   }
                   break;
-              case 2 : 
+              case 2 :
                   switch (match$8[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(91);
-                    case 1 : 
+                    case 1 :
                         return u8(92);
-                    case 2 : 
+                    case 2 :
                         return u8(93);
-                    case 3 : 
+                    case 3 :
                         return u8(94);
-                    case 4 : 
+                    case 4 :
                         return u8(95);
-                    case 5 : 
+                    case 5 :
                         return u8(96);
-                    
+
                   }
                   break;
-              case 3 : 
+              case 3 :
                   switch (match$8[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(97);
-                    case 1 : 
+                    case 1 :
                         return u8(98);
-                    case 2 : 
+                    case 2 :
                         return u8(99);
-                    case 3 : 
+                    case 3 :
                         return u8(100);
-                    case 4 : 
+                    case 4 :
                         return u8(101);
-                    case 5 : 
+                    case 5 :
                         return u8(102);
-                    
+
                   }
                   break;
-              
+
             }
             break;
-        case 18 : 
+        case 18 :
             var match$9 = match[0];
             switch (match$9.tag | 0) {
-              case 0 : 
+              case 0 :
                   switch (match$9[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(103);
-                    case 1 : 
+                    case 1 :
                         return u8(104);
-                    case 2 : 
+                    case 2 :
                         return u8(105);
-                    
+
                   }
                   break;
-              case 1 : 
+              case 1 :
                   switch (match$9[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(121);
-                    case 1 : 
+                    case 1 :
                         return u8(122);
-                    case 2 : 
+                    case 2 :
                         return u8(123);
-                    
+
                   }
                   break;
-              case 2 : 
+              case 2 :
                   switch (match$9[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(140);
-                    case 1 : 
+                    case 1 :
                         return u8(139);
-                    case 2 : 
+                    case 2 :
                         return u8(141);
-                    case 3 : 
+                    case 3 :
                         return u8(142);
-                    case 4 : 
+                    case 4 :
                         return u8(143);
-                    case 5 : 
+                    case 5 :
                         return u8(144);
-                    case 6 : 
+                    case 6 :
                         return u8(145);
-                    
+
                   }
                   break;
-              case 3 : 
+              case 3 :
                   switch (match$9[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(154);
-                    case 1 : 
+                    case 1 :
                         return u8(153);
-                    case 2 : 
+                    case 2 :
                         return u8(155);
-                    case 3 : 
+                    case 3 :
                         return u8(156);
-                    case 4 : 
+                    case 4 :
                         return u8(157);
-                    case 5 : 
+                    case 5 :
                         return u8(158);
-                    case 6 : 
+                    case 6 :
                         return u8(159);
-                    
+
                   }
                   break;
-              
+
             }
             break;
-        case 19 : 
+        case 19 :
             var match$10 = match[0];
             switch (match$10.tag | 0) {
-              case 0 : 
+              case 0 :
                   switch (match$10[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(106);
-                    case 1 : 
+                    case 1 :
                         return u8(107);
-                    case 2 : 
+                    case 2 :
                         return u8(108);
-                    case 3 : 
+                    case 3 :
                         return u8(109);
-                    case 4 : 
+                    case 4 :
                         return u8(110);
-                    case 5 : 
+                    case 5 :
                         return u8(111);
-                    case 6 : 
+                    case 6 :
                         return u8(112);
-                    case 7 : 
+                    case 7 :
                         return u8(113);
-                    case 8 : 
+                    case 8 :
                         return u8(114);
-                    case 9 : 
+                    case 9 :
                         return u8(115);
-                    case 10 : 
+                    case 10 :
                         return u8(116);
-                    case 11 : 
+                    case 11 :
                         return u8(117);
-                    case 12 : 
+                    case 12 :
                         return u8(118);
-                    case 13 : 
+                    case 13 :
                         return u8(119);
-                    case 14 : 
+                    case 14 :
                         return u8(120);
-                    
+
                   }
                   break;
-              case 1 : 
+              case 1 :
                   switch (match$10[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(124);
-                    case 1 : 
+                    case 1 :
                         return u8(125);
-                    case 2 : 
+                    case 2 :
                         return u8(126);
-                    case 3 : 
+                    case 3 :
                         return u8(127);
-                    case 4 : 
+                    case 4 :
                         return u8(128);
-                    case 5 : 
+                    case 5 :
                         return u8(129);
-                    case 6 : 
+                    case 6 :
                         return u8(130);
-                    case 7 : 
+                    case 7 :
                         return u8(131);
-                    case 8 : 
+                    case 8 :
                         return u8(132);
-                    case 9 : 
+                    case 9 :
                         return u8(133);
-                    case 10 : 
+                    case 10 :
                         return u8(134);
-                    case 11 : 
+                    case 11 :
                         return u8(135);
-                    case 12 : 
+                    case 12 :
                         return u8(136);
-                    case 13 : 
+                    case 13 :
                         return u8(137);
-                    case 14 : 
+                    case 14 :
                         return u8(138);
-                    
+
                   }
                   break;
-              case 2 : 
+              case 2 :
                   switch (match$10[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(146);
-                    case 1 : 
+                    case 1 :
                         return u8(147);
-                    case 2 : 
+                    case 2 :
                         return u8(148);
-                    case 3 : 
+                    case 3 :
                         return u8(149);
-                    case 4 : 
+                    case 4 :
                         return u8(150);
-                    case 5 : 
+                    case 5 :
                         return u8(151);
-                    case 6 : 
+                    case 6 :
                         return u8(152);
-                    
+
                   }
                   break;
-              case 3 : 
+              case 3 :
                   switch (match$10[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(160);
-                    case 1 : 
+                    case 1 :
                         return u8(161);
-                    case 2 : 
+                    case 2 :
                         return u8(162);
-                    case 3 : 
+                    case 3 :
                         return u8(163);
-                    case 4 : 
+                    case 4 :
                         return u8(164);
-                    case 5 : 
+                    case 5 :
                         return u8(165);
-                    case 6 : 
+                    case 6 :
                         return u8(166);
-                    
+
                   }
                   break;
-              
+
             }
             break;
-        case 20 : 
+        case 20 :
             var match$11 = match[0];
             switch (match$11.tag | 0) {
-              case 0 : 
+              case 0 :
                   switch (match$11[0]) {
-                    case 0 : 
+                    case 0 :
                         throw [
                               Caml_builtin_exceptions.assert_failure,
                               [
@@ -16601,7 +16601,7 @@ function encode(m) {
                                 42
                               ]
                             ];
-                    case 1 : 
+                    case 1 :
                         throw [
                               Caml_builtin_exceptions.assert_failure,
                               [
@@ -16610,28 +16610,28 @@ function encode(m) {
                                 42
                               ]
                             ];
-                    case 2 : 
+                    case 2 :
                         return u8(167);
-                    case 3 : 
+                    case 3 :
                         return u8(168);
-                    case 4 : 
+                    case 4 :
                         return u8(169);
-                    case 5 : 
+                    case 5 :
                         return u8(170);
-                    case 6 : 
+                    case 6 :
                         return u8(171);
-                    case 7 : 
+                    case 7 :
                         return u8(188);
-                    
+
                   }
                   break;
-              case 1 : 
+              case 1 :
                   switch (match$11[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(172);
-                    case 1 : 
+                    case 1 :
                         return u8(173);
-                    case 2 : 
+                    case 2 :
                         throw [
                               Caml_builtin_exceptions.assert_failure,
                               [
@@ -16640,30 +16640,30 @@ function encode(m) {
                                 39
                               ]
                             ];
-                    case 3 : 
+                    case 3 :
                         return u8(174);
-                    case 4 : 
+                    case 4 :
                         return u8(175);
-                    case 5 : 
+                    case 5 :
                         return u8(176);
-                    case 6 : 
+                    case 6 :
                         return u8(177);
-                    case 7 : 
+                    case 7 :
                         return u8(189);
-                    
+
                   }
                   break;
-              case 2 : 
+              case 2 :
                   switch (match$11[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(178);
-                    case 1 : 
+                    case 1 :
                         return u8(179);
-                    case 2 : 
+                    case 2 :
                         return u8(180);
-                    case 3 : 
+                    case 3 :
                         return u8(181);
-                    case 4 : 
+                    case 4 :
                         throw [
                               Caml_builtin_exceptions.assert_failure,
                               [
@@ -16672,26 +16672,26 @@ function encode(m) {
                                 42
                               ]
                             ];
-                    case 5 : 
+                    case 5 :
                         return u8(182);
-                    case 6 : 
+                    case 6 :
                         return u8(190);
-                    
+
                   }
                   break;
-              case 3 : 
+              case 3 :
                   switch (match$11[0]) {
-                    case 0 : 
+                    case 0 :
                         return u8(183);
-                    case 1 : 
+                    case 1 :
                         return u8(184);
-                    case 2 : 
+                    case 2 :
                         return u8(185);
-                    case 3 : 
+                    case 3 :
                         return u8(186);
-                    case 4 : 
+                    case 4 :
                         return u8(187);
-                    case 5 : 
+                    case 5 :
                         throw [
                               Caml_builtin_exceptions.assert_failure,
                               [
@@ -16700,15 +16700,15 @@ function encode(m) {
                                 41
                               ]
                             ];
-                    case 6 : 
+                    case 6 :
                         return u8(191);
-                    
+
                   }
                   break;
-              
+
             }
             break;
-        
+
       }
     }
   };
@@ -16740,19 +16740,19 @@ function encode(m) {
     var k = match[/* ikind */2];
     var match$1 = k[/* it */1];
     switch (match$1.tag | 0) {
-      case 0 : 
+      case 0 :
           u8(0);
           return vu32(match$1[0][/* it */1]);
-      case 1 : 
+      case 1 :
           u8(1);
           return table_type(match$1[0]);
-      case 2 : 
+      case 2 :
           u8(2);
           return memory_type(match$1[0]);
-      case 3 : 
+      case 3 :
           u8(3);
           return global_type(match$1[0]);
-      
+
     }
   };
   var import_section = function (ims) {
@@ -16799,15 +16799,15 @@ function encode(m) {
   var export_kind = function (k) {
     var match = k[/* it */1];
     switch (match) {
-      case 0 : 
+      case 0 :
           return u8(0);
-      case 1 : 
+      case 1 :
           return u8(1);
-      case 2 : 
+      case 2 :
           return u8(2);
-      case 3 : 
+      case 3 :
           return u8(3);
-      
+
     }
   };
   var $$export = function (ex) {
@@ -17682,7 +17682,7 @@ function pp_force_break_line(state) {
 function format_pp_token(state, size, param) {
   if (typeof param === "number") {
     switch (param) {
-      case 0 : 
+      case 0 :
           var match = state[/* pp_tbox_stack */2];
           if (match) {
             var tabs = match[0][0];
@@ -17716,7 +17716,7 @@ function format_pp_token(state, size, param) {
             return /* () */0;
           }
           break;
-      case 1 : 
+      case 1 :
           var match$1 = state[/* pp_format_stack */1];
           if (match$1) {
             state[/* pp_format_stack */1] = match$1[1];
@@ -17725,7 +17725,7 @@ function format_pp_token(state, size, param) {
           else {
             return /* () */0;
           }
-      case 2 : 
+      case 2 :
           var match$2 = state[/* pp_tbox_stack */2];
           if (match$2) {
             state[/* pp_tbox_stack */2] = match$2[1];
@@ -17734,7 +17734,7 @@ function format_pp_token(state, size, param) {
           else {
             return /* () */0;
           }
-      case 3 : 
+      case 3 :
           var match$3 = state[/* pp_format_stack */1];
           if (match$3) {
             return break_new_line(state, 0, match$3[0][1]);
@@ -17742,7 +17742,7 @@ function format_pp_token(state, size, param) {
           else {
             return Curry._1(state[/* pp_out_newline */18], /* () */0);
           }
-      case 4 : 
+      case 4 :
           if (state[/* pp_current_indent */9] !== (state[/* pp_margin */5] - state[/* pp_space_left */8] | 0)) {
             var state$1 = state;
             var match$4 = take_queue(state$1[/* pp_queue */26]);
@@ -17754,7 +17754,7 @@ function format_pp_token(state, size, param) {
           else {
             return 0;
           }
-      case 5 : 
+      case 5 :
           var match$5 = state[/* pp_mark_stack */4];
           if (match$5) {
             var marker = Curry._1(state[/* pp_mark_close_tag */23], match$5[0]);
@@ -17766,17 +17766,17 @@ function format_pp_token(state, size, param) {
             return /* () */0;
           }
           break;
-      
+
     }
   }
   else {
     switch (param.tag | 0) {
-      case 0 : 
+      case 0 :
           state[/* pp_space_left */8] = state[/* pp_space_left */8] - size | 0;
           pp_output_string(state, param[0]);
           state[/* pp_is_new_line */10] = /* false */0;
           return /* () */0;
-      case 1 : 
+      case 1 :
           var off = param[1];
           var n = param[0];
           var match$6 = state[/* pp_format_stack */1];
@@ -17784,34 +17784,34 @@ function format_pp_token(state, size, param) {
             var match$7 = match$6[0];
             var width = match$7[1];
             switch (match$7[0]) {
-              case 1 : 
-              case 2 : 
+              case 1 :
+              case 2 :
                   return break_new_line(state, off, width);
-              case 3 : 
+              case 3 :
                   if (size > state[/* pp_space_left */8]) {
                     return break_new_line(state, off, width);
                   }
                   else {
                     return break_same_line(state, n);
                   }
-              case 4 : 
+              case 4 :
                   if (state[/* pp_is_new_line */10] || !(size > state[/* pp_space_left */8] || state[/* pp_current_indent */9] > ((state[/* pp_margin */5] - width | 0) + off | 0))) {
                     return break_same_line(state, n);
                   }
                   else {
                     return break_new_line(state, off, width);
                   }
-              case 0 : 
-              case 5 : 
+              case 0 :
+              case 5 :
                   return break_same_line(state, n);
-              
+
             }
           }
           else {
             return /* () */0;
           }
           break;
-      case 2 : 
+      case 2 :
           var insertion_point = state[/* pp_margin */5] - state[/* pp_space_left */8] | 0;
           var match$8 = state[/* pp_tbox_stack */2];
           if (match$8) {
@@ -17827,7 +17827,7 @@ function format_pp_token(state, size, param) {
                   else {
                     _param = param[1];
                     continue ;
-                    
+
                   }
                 }
                 else {
@@ -17865,7 +17865,7 @@ function format_pp_token(state, size, param) {
             return /* () */0;
           }
           break;
-      case 3 : 
+      case 3 :
           var ty = param[1];
           var insertion_point$1 = state[/* pp_margin */5] - state[/* pp_space_left */8] | 0;
           if (insertion_point$1 > state[/* pp_max_indent */7]) {
@@ -17883,13 +17883,13 @@ function format_pp_token(state, size, param) {
             state[/* pp_format_stack */1]
           ];
           return /* () */0;
-      case 4 : 
+      case 4 :
           state[/* pp_tbox_stack */2] = /* :: */[
             param[0],
             state[/* pp_tbox_stack */2]
           ];
           return /* () */0;
-      case 5 : 
+      case 5 :
           var tag_name = param[0];
           var marker$1 = Curry._1(state[/* pp_mark_open_tag */22], tag_name);
           pp_output_string(state, marker$1);
@@ -17898,7 +17898,7 @@ function format_pp_token(state, size, param) {
             state[/* pp_mark_stack */4]
           ];
           return /* () */0;
-      
+
     }
   }
 }
@@ -17917,7 +17917,7 @@ function advance_left(state) {
         format_pp_token(state$1, size < 0 ? 1000000010 : size, match[/* token */1]);
         state$1[/* pp_left_total */11] = match[/* length */2] + state$1[/* pp_left_total */11] | 0;
         continue ;
-        
+
       }
     };
   }
@@ -17979,11 +17979,11 @@ function set_size(state, ty) {
       }
       else {
         switch ($js.tag | 0) {
-          case 1 : 
-          case 2 : 
+          case 1 :
+          case 2 :
               exit = 1;
               break;
-          case 3 : 
+          case 3 :
               if (ty) {
                 return 0;
               }
@@ -18006,7 +18006,7 @@ function set_size(state, ty) {
           return 0;
         }
       }
-      
+
     }
   }
   else {
@@ -18379,7 +18379,7 @@ function pp_print_list(_$staropt$star, pp_v, ppf, _param) {
         _param = vs;
         _$staropt$star = /* Some */[pp_sep];
         continue ;
-        
+
       }
       else {
         return Curry._2(pp_v, ppf, v);
@@ -18558,7 +18558,7 @@ function display_blanks(state, _n) {
         Curry._3(state[/* pp_out_string */16], blank_line, 0, 80);
         _n = n - 80 | 0;
         continue ;
-        
+
       }
     }
     else {
@@ -18921,33 +18921,33 @@ function compute_tag(output, tag_acc) {
 function output_formatting_lit(ppf, fmting_lit) {
   if (typeof fmting_lit === "number") {
     switch (fmting_lit) {
-      case 0 : 
+      case 0 :
           return pp_close_box(ppf, /* () */0);
-      case 1 : 
+      case 1 :
           return pp_close_tag(ppf, /* () */0);
-      case 2 : 
+      case 2 :
           return pp_print_flush(ppf, /* () */0);
-      case 3 : 
+      case 3 :
           return pp_force_newline(ppf, /* () */0);
-      case 4 : 
+      case 4 :
           return pp_print_newline(ppf, /* () */0);
-      case 5 : 
+      case 5 :
           return pp_print_char(ppf, /* "@" */64);
-      case 6 : 
+      case 6 :
           return pp_print_char(ppf, /* "%" */37);
-      
+
     }
   }
   else {
     switch (fmting_lit.tag | 0) {
-      case 0 : 
+      case 0 :
           return pp_print_break(ppf, fmting_lit[1], fmting_lit[2]);
-      case 1 : 
+      case 1 :
           return /* () */0;
-      case 2 : 
+      case 2 :
           pp_print_char(ppf, /* "@" */64);
           return pp_print_char(ppf, fmting_lit[0]);
-      
+
     }
   }
 }
@@ -18965,10 +18965,10 @@ function output_acc(ppf, acc) {
   }
   else {
     switch (acc.tag | 0) {
-      case 0 : 
+      case 0 :
           output_acc(ppf, acc[0]);
           return output_formatting_lit(ppf, acc[1]);
-      case 1 : 
+      case 1 :
           var match = acc[1];
           var p$2 = acc[0];
           output_acc(ppf, p$2);
@@ -18980,7 +18980,7 @@ function output_acc(ppf, acc) {
             return pp_open_tag(ppf, compute_tag(output_acc, match[0]));
           }
           break;
-      case 2 : 
+      case 2 :
           var p$3 = acc[0];
           var exit$1 = 0;
           if (typeof p$3 === "number") {
@@ -19009,7 +19009,7 @@ function output_acc(ppf, acc) {
             return pp_print_string(ppf, acc[1]);
           }
           break;
-      case 3 : 
+      case 3 :
           var p$4 = acc[0];
           var exit$2 = 0;
           if (typeof p$4 === "number") {
@@ -19038,7 +19038,7 @@ function output_acc(ppf, acc) {
             return pp_print_char(ppf, acc[1]);
           }
           break;
-      case 4 : 
+      case 4 :
           var p$5 = acc[0];
           var exit$3 = 0;
           if (typeof p$5 === "number") {
@@ -19067,7 +19067,7 @@ function output_acc(ppf, acc) {
             return pp_print_string(ppf, acc[1]);
           }
           break;
-      case 5 : 
+      case 5 :
           var p$6 = acc[0];
           var exit$4 = 0;
           if (typeof p$6 === "number") {
@@ -19096,29 +19096,29 @@ function output_acc(ppf, acc) {
             return pp_print_char(ppf, acc[1]);
           }
           break;
-      case 6 : 
+      case 6 :
           output_acc(ppf, acc[0]);
           return Curry._1(acc[1], ppf);
-      case 7 : 
+      case 7 :
           output_acc(ppf, acc[0]);
           return pp_print_flush(ppf, /* () */0);
-      case 8 : 
+      case 8 :
           output_acc(ppf, acc[0]);
           throw [
                 Caml_builtin_exceptions.invalid_argument,
                 acc[1]
               ];
-      
+
     }
   }
   switch (exit) {
-    case 1 : 
+    case 1 :
         output_acc(ppf, p);
         return pp_print_as_size(ppf, size, s);
-    case 2 : 
+    case 2 :
         output_acc(ppf, p$1);
         return pp_print_as_size(ppf, size$1, Caml_string.bytes_to_string(Bytes.make(1, c)));
-    
+
   }
 }
 
@@ -19135,10 +19135,10 @@ function strput_acc(ppf, acc) {
   }
   else {
     switch (acc.tag | 0) {
-      case 0 : 
+      case 0 :
           strput_acc(ppf, acc[0]);
           return output_formatting_lit(ppf, acc[1]);
-      case 1 : 
+      case 1 :
           var match = acc[1];
           var p$2 = acc[0];
           strput_acc(ppf, p$2);
@@ -19150,7 +19150,7 @@ function strput_acc(ppf, acc) {
             return pp_open_tag(ppf, compute_tag(strput_acc, match[0]));
           }
           break;
-      case 2 : 
+      case 2 :
           var p$3 = acc[0];
           var exit$1 = 0;
           if (typeof p$3 === "number") {
@@ -19179,7 +19179,7 @@ function strput_acc(ppf, acc) {
             return pp_print_string(ppf, acc[1]);
           }
           break;
-      case 3 : 
+      case 3 :
           var p$4 = acc[0];
           var exit$2 = 0;
           if (typeof p$4 === "number") {
@@ -19208,7 +19208,7 @@ function strput_acc(ppf, acc) {
             return pp_print_char(ppf, acc[1]);
           }
           break;
-      case 4 : 
+      case 4 :
           var p$5 = acc[0];
           var exit$3 = 0;
           if (typeof p$5 === "number") {
@@ -19237,7 +19237,7 @@ function strput_acc(ppf, acc) {
             return pp_print_string(ppf, acc[1]);
           }
           break;
-      case 5 : 
+      case 5 :
           var p$6 = acc[0];
           var exit$4 = 0;
           if (typeof p$6 === "number") {
@@ -19266,7 +19266,7 @@ function strput_acc(ppf, acc) {
             return pp_print_char(ppf, acc[1]);
           }
           break;
-      case 6 : 
+      case 6 :
           var p$7 = acc[0];
           var exit$5 = 0;
           if (typeof p$7 === "number") {
@@ -19293,26 +19293,26 @@ function strput_acc(ppf, acc) {
             return pp_print_string(ppf, Curry._1(acc[1], /* () */0));
           }
           break;
-      case 7 : 
+      case 7 :
           strput_acc(ppf, acc[0]);
           return pp_print_flush(ppf, /* () */0);
-      case 8 : 
+      case 8 :
           strput_acc(ppf, acc[0]);
           throw [
                 Caml_builtin_exceptions.invalid_argument,
                 acc[1]
               ];
-      
+
     }
   }
   switch (exit) {
-    case 1 : 
+    case 1 :
         strput_acc(ppf, p);
         return pp_print_as_size(ppf, size, s);
-    case 2 : 
+    case 2 :
         strput_acc(ppf, p$1);
         return pp_print_as_size(ppf, size$1, Caml_string.bytes_to_string(Bytes.make(1, c)));
-    
+
   }
 }
 
@@ -20133,7 +20133,7 @@ function Make(Rep) {
           _n = Curry._2(Rep[/* shift_left */15], n, 1);
           _acc = 1 + acc | 0;
           continue ;
-          
+
         }
         else {
           return acc;
@@ -20157,7 +20157,7 @@ function Make(Rep) {
           _n = Curry._2(Rep[/* shift_right_logical */17], n, 1);
           _acc = 1 + acc | 0;
           continue ;
-          
+
         }
       };
     };
@@ -20178,7 +20178,7 @@ function Make(Rep) {
           _i = i - 1 | 0;
           _acc = acc$prime;
           continue ;
-          
+
         }
       };
     };
@@ -20280,7 +20280,7 @@ function Make(Rep) {
             _num = Curry._2(Rep[/* logor */13], Curry._2(Rep[/* shift_left */15], num, 4), digit);
             _i = i$1 + 1 | 0;
             continue ;
-            
+
           }
         };
       }
@@ -20299,7 +20299,7 @@ function Make(Rep) {
             _num$1 = Curry._2(Rep[/* add */6], Curry._2(Rep[/* mul */8], num$1, ten), digit$1);
             _i$1 = i$2 + 1 | 0;
             continue ;
-            
+
           }
         };
       }
@@ -20312,15 +20312,15 @@ function Make(Rep) {
     }
     else {
       switch (switcher) {
-        case 0 : 
+        case 0 :
             return parse_int(1);
-        case 1 : 
+        case 1 :
             return parse_int(0);
-        case 2 : 
+        case 2 :
             var n = parse_int(1);
             $$require(Caml_obj.caml_greaterequal(Curry._2(Rep[/* sub */7], n, Rep[/* one */1]), Rep[/* minus_one */2]));
             return Curry._1(Rep[/* neg */5], n);
-        
+
       }
     }
   };
@@ -20483,7 +20483,7 @@ function text(s) {
         i = i + 1 | 0;
         c = Char.chr(Caml_format.caml_int_of_string("0x" + ($$String.make(1, d) + $$String.make(1, Caml_string.get(s, i)))));
       }
-      
+
     }
     Buffer.add_char(b, c);
     i = i + 1 | 0;
@@ -20493,13 +20493,13 @@ function text(s) {
 
 function value_type(param) {
   switch (param) {
-    case "f32" : 
+    case "f32" :
         return /* F32Type */2;
-    case "f64" : 
+    case "f64" :
         return /* F64Type */3;
-    case "i32" : 
+    case "i32" :
         return /* I32Type */0;
-    case "i64" : 
+    case "i64" :
         return /* I64Type */1;
     default:
       throw [
@@ -20515,9 +20515,9 @@ function value_type(param) {
 
 function intop(t, i32, i64) {
   switch (t) {
-    case "i32" : 
+    case "i32" :
         return i32;
-    case "i64" : 
+    case "i64" :
         return i64;
     default:
       throw [
@@ -20533,9 +20533,9 @@ function intop(t, i32, i64) {
 
 function floatop(t, f32, f64) {
   switch (t) {
-    case "f32" : 
+    case "f32" :
         return f32;
-    case "f64" : 
+    case "f64" :
         return f64;
     default:
       throw [
@@ -20551,13 +20551,13 @@ function floatop(t, f32, f64) {
 
 function numop(t, i32, i64, f32, f64) {
   switch (t) {
-    case "f32" : 
+    case "f32" :
         return f32;
-    case "f64" : 
+    case "f64" :
         return f64;
-    case "i32" : 
+    case "i32" :
         return i32;
-    case "i64" : 
+    case "i64" :
         return i64;
     default:
       throw [
@@ -20573,11 +20573,11 @@ function numop(t, i32, i64, f32, f64) {
 
 function memsz(sz, m8, m16, m32) {
   switch (sz) {
-    case "16" : 
+    case "16" :
         return m16;
-    case "32" : 
+    case "32" :
         return m32;
-    case "8" : 
+    case "8" :
         return m8;
     default:
       throw [
@@ -20605,9 +20605,9 @@ function ext(e, s, u) {
   }
   else {
     switch (switcher) {
-      case 0 : 
+      case 0 :
           return s;
-      case 1 : 
+      case 1 :
           throw [
                 Caml_builtin_exceptions.assert_failure,
                 [
@@ -20616,9 +20616,9 @@ function ext(e, s, u) {
                   9
                 ]
               ];
-      case 2 : 
+      case 2 :
           return u;
-      
+
     }
   }
 }
@@ -20649,36 +20649,36 @@ function token(lexbuf) {
       Curry._1(lexbuf$1[/* refill_buff */0], lexbuf$1);
       ___ocaml_lex_state = __ocaml_lex_state$1;
       continue ;
-      
+
     }
     else {
       switch (__ocaml_lex_state$1) {
-        case 0 : 
+        case 0 :
             return /* LPAR */2;
-        case 1 : 
+        case 1 :
             return /* RPAR */3;
-        case 2 : 
+        case 2 :
             var s = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_curr_pos */5]);
             return /* NAT */Block.__(0, [s]);
-        case 3 : 
+        case 3 :
             var s$1 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_curr_pos */5]);
             return /* INT */Block.__(1, [s$1]);
-        case 4 : 
+        case 4 :
             var s$2 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_curr_pos */5]);
             return /* FLOAT */Block.__(2, [s$2]);
-        case 5 : 
+        case 5 :
             var s$3 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_curr_pos */5]);
             return /* TEXT */Block.__(3, [text(s$3)]);
-        case 6 : 
+        case 6 :
             return error(lexbuf$1, "unclosed text literal");
-        case 7 : 
+        case 7 :
             return error(lexbuf$1, "illegal control character in text literal");
-        case 8 : 
+        case 8 :
             return error_nest(Lexing.lexeme_end_p(lexbuf$1), lexbuf$1, "illegal escape");
-        case 9 : 
+        case 9 :
             var t = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* VALUE_TYPE */Block.__(5, [value_type(t)]);
-        case 10 : 
+        case 10 :
             var t$1 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* CONST */Block.__(10, [numop(t$1, function (s) {
                             var n = Curry._1(I32.of_string, s[/* it */1]);
@@ -20705,53 +20705,53 @@ function token(lexbuf) {
                                     /* F64 */Block.__(3, [n])
                                   ];
                           })]);
-        case 11 : 
+        case 11 :
             return /* ANYFUNC */0;
-        case 12 : 
+        case 12 :
             return /* MUT */1;
-        case 13 : 
+        case 13 :
             return /* NOP */4;
-        case 14 : 
+        case 14 :
             return /* UNREACHABLE */24;
-        case 15 : 
+        case 15 :
             return /* DROP */5;
-        case 16 : 
+        case 16 :
             return /* BLOCK */6;
-        case 17 : 
+        case 17 :
             return /* LOOP */12;
-        case 18 : 
+        case 18 :
             return /* END */7;
-        case 19 : 
+        case 19 :
             return /* BR */13;
-        case 20 : 
+        case 20 :
             return /* BR_IF */14;
-        case 21 : 
+        case 21 :
             return /* BR_TABLE */15;
-        case 22 : 
+        case 22 :
             return /* RETURN */18;
-        case 23 : 
+        case 23 :
             return /* IF */8;
-        case 24 : 
+        case 24 :
             return /* THEN */9;
-        case 25 : 
+        case 25 :
             return /* ELSE */10;
-        case 26 : 
+        case 26 :
             return /* SELECT */11;
-        case 27 : 
+        case 27 :
             return /* CALL */16;
-        case 28 : 
+        case 28 :
             return /* CALL_INDIRECT */17;
-        case 29 : 
+        case 29 :
             return /* GET_LOCAL */19;
-        case 30 : 
+        case 30 :
             return /* SET_LOCAL */20;
-        case 31 : 
+        case 31 :
             return /* TEE_LOCAL */21;
-        case 32 : 
+        case 32 :
             return /* GET_GLOBAL */22;
-        case 33 : 
+        case 33 :
             return /* SET_GLOBAL */23;
-        case 34 : 
+        case 34 :
             var t$2 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* LOAD */Block.__(6, [(function(t$2){
                       return function (a, o) {
@@ -20770,7 +20770,7 @@ function token(lexbuf) {
                                       }), o);
                       }
                       }(t$2))]);
-        case 35 : 
+        case 35 :
             var t$3 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* STORE */Block.__(7, [(function(t$3){
                       return function (a, o) {
@@ -20789,7 +20789,7 @@ function token(lexbuf) {
                                       }), o);
                       }
                       }(t$3))]);
-        case 36 : 
+        case 36 :
             var t$4 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             var sz = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4] + 8 | 0, lexbuf$1[/* lex_curr_pos */5] - 2 | 0);
             var s$4 = Lexing.sub_lexeme_char(lexbuf$1, lexbuf$1[/* lex_curr_pos */5] - 1 | 0);
@@ -20803,7 +20803,7 @@ function token(lexbuf) {
                                           }), o), Curry._1(memsz(sz, Curry._1(ext(s$4, Operators.i64_load8_s, Operators.i64_load8_u), Curry._2(opt, a, 0)), Curry._1(ext(s$4, Operators.i64_load16_s, Operators.i64_load16_u), Curry._2(opt, a, 1)), Curry._1(ext(s$4, Operators.i64_load32_s, Operators.i64_load32_u), Curry._2(opt, a, 2))), o));
                       }
                       }(t$4,sz,s$4))]);
-        case 37 : 
+        case 37 :
             var t$5 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             var sz$1 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4] + 9 | 0, lexbuf$1[/* lex_curr_pos */5]);
             if (t$5 === "i32" && sz$1 === "32") {
@@ -20831,281 +20831,281 @@ function token(lexbuf) {
                                           }), o));
                       }
                       }(t$5,sz$1))]);
-        case 38 : 
+        case 38 :
             var s$5 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4] + 7 | 0, lexbuf$1[/* lex_curr_pos */5]);
             return /* OFFSET_EQ_NAT */Block.__(8, [s$5]);
-        case 39 : 
+        case 39 :
             var s$6 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4] + 6 | 0, lexbuf$1[/* lex_curr_pos */5]);
             return /* ALIGN_EQ_NAT */Block.__(9, [s$6]);
-        case 40 : 
+        case 40 :
             var t$6 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* UNARY */Block.__(11, [intop(t$6, Operators.i32_clz, Operators.i64_clz)]);
-        case 41 : 
+        case 41 :
             var t$7 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* UNARY */Block.__(11, [intop(t$7, Operators.i32_ctz, Operators.i64_ctz)]);
-        case 42 : 
+        case 42 :
             var t$8 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* UNARY */Block.__(11, [intop(t$8, Operators.i32_popcnt, Operators.i64_popcnt)]);
-        case 43 : 
+        case 43 :
             var t$9 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* UNARY */Block.__(11, [floatop(t$9, Operators.f32_neg, Operators.f64_neg)]);
-        case 44 : 
+        case 44 :
             var t$10 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* UNARY */Block.__(11, [floatop(t$10, Operators.f32_abs, Operators.f64_abs)]);
-        case 45 : 
+        case 45 :
             var t$11 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* UNARY */Block.__(11, [floatop(t$11, Operators.f32_sqrt, Operators.f64_sqrt)]);
-        case 46 : 
+        case 46 :
             var t$12 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* UNARY */Block.__(11, [floatop(t$12, Operators.f32_ceil, Operators.f64_ceil)]);
-        case 47 : 
+        case 47 :
             var t$13 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* UNARY */Block.__(11, [floatop(t$13, Operators.f32_floor, Operators.f64_floor)]);
-        case 48 : 
+        case 48 :
             var t$14 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* UNARY */Block.__(11, [floatop(t$14, Operators.f32_trunc, Operators.f64_trunc)]);
-        case 49 : 
+        case 49 :
             var t$15 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* UNARY */Block.__(11, [floatop(t$15, Operators.f32_nearest, Operators.f64_nearest)]);
-        case 50 : 
+        case 50 :
             var t$16 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$16, Operators.i32_add, Operators.i64_add)]);
-        case 51 : 
+        case 51 :
             var t$17 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$17, Operators.i32_sub, Operators.i64_sub)]);
-        case 52 : 
+        case 52 :
             var t$18 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$18, Operators.i32_mul, Operators.i64_mul)]);
-        case 53 : 
+        case 53 :
             var t$19 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$19, Operators.i32_div_s, Operators.i64_div_s)]);
-        case 54 : 
+        case 54 :
             var t$20 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$20, Operators.i32_div_u, Operators.i64_div_u)]);
-        case 55 : 
+        case 55 :
             var t$21 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$21, Operators.i32_rem_s, Operators.i64_rem_s)]);
-        case 56 : 
+        case 56 :
             var t$22 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$22, Operators.i32_rem_u, Operators.i64_rem_u)]);
-        case 57 : 
+        case 57 :
             var t$23 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$23, Operators.i32_and, Operators.i64_and)]);
-        case 58 : 
+        case 58 :
             var t$24 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$24, Operators.i32_or, Operators.i64_or)]);
-        case 59 : 
+        case 59 :
             var t$25 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$25, Operators.i32_xor, Operators.i64_xor)]);
-        case 60 : 
+        case 60 :
             var t$26 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$26, Operators.i32_shl, Operators.i64_shl)]);
-        case 61 : 
+        case 61 :
             var t$27 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$27, Operators.i32_shr_s, Operators.i64_shr_s)]);
-        case 62 : 
+        case 62 :
             var t$28 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$28, Operators.i32_shr_u, Operators.i64_shr_u)]);
-        case 63 : 
+        case 63 :
             var t$29 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$29, Operators.i32_rotl, Operators.i64_rotl)]);
-        case 64 : 
+        case 64 :
             var t$30 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [intop(t$30, Operators.i32_rotr, Operators.i64_rotr)]);
-        case 65 : 
+        case 65 :
             var t$31 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [floatop(t$31, Operators.f32_add, Operators.f64_add)]);
-        case 66 : 
+        case 66 :
             var t$32 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [floatop(t$32, Operators.f32_sub, Operators.f64_sub)]);
-        case 67 : 
+        case 67 :
             var t$33 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [floatop(t$33, Operators.f32_mul, Operators.f64_mul)]);
-        case 68 : 
+        case 68 :
             var t$34 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [floatop(t$34, Operators.f32_div, Operators.f64_div)]);
-        case 69 : 
+        case 69 :
             var t$35 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [floatop(t$35, Operators.f32_min, Operators.f64_min)]);
-        case 70 : 
+        case 70 :
             var t$36 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [floatop(t$36, Operators.f32_max, Operators.f64_max)]);
-        case 71 : 
+        case 71 :
             var t$37 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* BINARY */Block.__(12, [floatop(t$37, Operators.f32_copysign, Operators.f64_copysign)]);
-        case 72 : 
+        case 72 :
             var t$38 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* TEST */Block.__(15, [intop(t$38, Operators.i32_eqz, Operators.i64_eqz)]);
-        case 73 : 
+        case 73 :
             var t$39 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [intop(t$39, Operators.i32_eq, Operators.i64_eq)]);
-        case 74 : 
+        case 74 :
             var t$40 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [intop(t$40, Operators.i32_ne, Operators.i64_ne)]);
-        case 75 : 
+        case 75 :
             var t$41 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [intop(t$41, Operators.i32_lt_s, Operators.i64_lt_s)]);
-        case 76 : 
+        case 76 :
             var t$42 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [intop(t$42, Operators.i32_lt_u, Operators.i64_lt_u)]);
-        case 77 : 
+        case 77 :
             var t$43 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [intop(t$43, Operators.i32_le_s, Operators.i64_le_s)]);
-        case 78 : 
+        case 78 :
             var t$44 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [intop(t$44, Operators.i32_le_u, Operators.i64_le_u)]);
-        case 79 : 
+        case 79 :
             var t$45 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [intop(t$45, Operators.i32_gt_s, Operators.i64_gt_s)]);
-        case 80 : 
+        case 80 :
             var t$46 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [intop(t$46, Operators.i32_gt_u, Operators.i64_gt_u)]);
-        case 81 : 
+        case 81 :
             var t$47 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [intop(t$47, Operators.i32_ge_s, Operators.i64_ge_s)]);
-        case 82 : 
+        case 82 :
             var t$48 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [intop(t$48, Operators.i32_ge_u, Operators.i64_ge_u)]);
-        case 83 : 
+        case 83 :
             var t$49 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [floatop(t$49, Operators.f32_eq, Operators.f64_eq)]);
-        case 84 : 
+        case 84 :
             var t$50 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [floatop(t$50, Operators.f32_ne, Operators.f64_ne)]);
-        case 85 : 
+        case 85 :
             var t$51 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [floatop(t$51, Operators.f32_lt, Operators.f64_lt)]);
-        case 86 : 
+        case 86 :
             var t$52 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [floatop(t$52, Operators.f32_le, Operators.f64_le)]);
-        case 87 : 
+        case 87 :
             var t$53 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [floatop(t$53, Operators.f32_gt, Operators.f64_gt)]);
-        case 88 : 
+        case 88 :
             var t$54 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* COMPARE */Block.__(13, [floatop(t$54, Operators.f32_ge, Operators.f64_ge)]);
-        case 89 : 
+        case 89 :
             return /* CONVERT */Block.__(14, [Operators.i32_wrap_i64]);
-        case 90 : 
+        case 90 :
             return /* CONVERT */Block.__(14, [Operators.i64_extend_s_i32]);
-        case 91 : 
+        case 91 :
             return /* CONVERT */Block.__(14, [Operators.i64_extend_u_i32]);
-        case 92 : 
+        case 92 :
             return /* CONVERT */Block.__(14, [Operators.f32_demote_f64]);
-        case 93 : 
+        case 93 :
             return /* CONVERT */Block.__(14, [Operators.f64_promote_f32]);
-        case 94 : 
+        case 94 :
             var t$55 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* CONVERT */Block.__(14, [intop(t$55, Operators.i32_trunc_s_f32, Operators.i64_trunc_s_f32)]);
-        case 95 : 
+        case 95 :
             var t$56 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* CONVERT */Block.__(14, [intop(t$56, Operators.i32_trunc_u_f32, Operators.i64_trunc_u_f32)]);
-        case 96 : 
+        case 96 :
             var t$57 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* CONVERT */Block.__(14, [intop(t$57, Operators.i32_trunc_s_f64, Operators.i64_trunc_s_f64)]);
-        case 97 : 
+        case 97 :
             var t$58 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* CONVERT */Block.__(14, [intop(t$58, Operators.i32_trunc_u_f64, Operators.i64_trunc_u_f64)]);
-        case 98 : 
+        case 98 :
             var t$59 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* CONVERT */Block.__(14, [floatop(t$59, Operators.f32_convert_s_i32, Operators.f64_convert_s_i32)]);
-        case 99 : 
+        case 99 :
             var t$60 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* CONVERT */Block.__(14, [floatop(t$60, Operators.f32_convert_u_i32, Operators.f64_convert_u_i32)]);
-        case 100 : 
+        case 100 :
             var t$61 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* CONVERT */Block.__(14, [floatop(t$61, Operators.f32_convert_s_i64, Operators.f64_convert_s_i64)]);
-        case 101 : 
+        case 101 :
             var t$62 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_start_pos */4] + 3 | 0);
             return /* CONVERT */Block.__(14, [floatop(t$62, Operators.f32_convert_u_i64, Operators.f64_convert_u_i64)]);
-        case 102 : 
+        case 102 :
             return /* CONVERT */Block.__(14, [Operators.f32_reinterpret_i32]);
-        case 103 : 
+        case 103 :
             return /* CONVERT */Block.__(14, [Operators.f64_reinterpret_i64]);
-        case 104 : 
+        case 104 :
             return /* CONVERT */Block.__(14, [Operators.i32_reinterpret_f32]);
-        case 105 : 
+        case 105 :
             return /* CONVERT */Block.__(14, [Operators.i64_reinterpret_f64]);
-        case 106 : 
+        case 106 :
             return /* CURRENT_MEMORY */25;
-        case 107 : 
+        case 107 :
             return /* GROW_MEMORY */26;
-        case 108 : 
+        case 108 :
             return /* TYPE */29;
-        case 109 : 
+        case 109 :
             return /* FUNC */27;
-        case 110 : 
+        case 110 :
             return /* START */28;
-        case 111 : 
+        case 111 :
             return /* PARAM */30;
-        case 112 : 
+        case 112 :
             return /* RESULT */31;
-        case 113 : 
+        case 113 :
             return /* LOCAL */32;
-        case 114 : 
+        case 114 :
             return /* GLOBAL */33;
-        case 115 : 
+        case 115 :
             return /* MODULE */34;
-        case 116 : 
+        case 116 :
             return /* TABLE */35;
-        case 117 : 
+        case 117 :
             return /* MEMORY */37;
-        case 118 : 
+        case 118 :
             return /* ELEM */36;
-        case 119 : 
+        case 119 :
             return /* DATA */38;
-        case 120 : 
+        case 120 :
             return /* OFFSET */39;
-        case 121 : 
+        case 121 :
             return /* IMPORT */40;
-        case 122 : 
+        case 122 :
             return /* EXPORT */41;
-        case 123 : 
+        case 123 :
             return /* SCRIPT */42;
-        case 124 : 
+        case 124 :
             return /* REGISTER */43;
-        case 125 : 
+        case 125 :
             return /* INVOKE */44;
-        case 126 : 
+        case 126 :
             return /* GET */45;
-        case 127 : 
+        case 127 :
             return /* ASSERT_MALFORMED */46;
-        case 128 : 
+        case 128 :
             return /* ASSERT_INVALID */47;
-        case 129 : 
+        case 129 :
             return /* ASSERT_SOFT_INVALID */48;
-        case 130 : 
+        case 130 :
             return /* ASSERT_UNLINKABLE */49;
-        case 131 : 
+        case 131 :
             return /* ASSERT_RETURN */50;
-        case 132 : 
+        case 132 :
             return /* ASSERT_RETURN_NAN */51;
-        case 133 : 
+        case 133 :
             return /* ASSERT_TRAP */52;
-        case 134 : 
+        case 134 :
             return /* ASSERT_EXHAUSTION */53;
-        case 135 : 
+        case 135 :
             return /* INPUT */54;
-        case 136 : 
+        case 136 :
             return /* OUTPUT */55;
-        case 137 : 
+        case 137 :
             var s$7 = Lexing.sub_lexeme(lexbuf$1, lexbuf$1[/* lex_start_pos */4], lexbuf$1[/* lex_curr_pos */5]);
             return /* VAR */Block.__(4, [s$7]);
-        case 140 : 
+        case 140 :
             __ocaml_lex_comment_rec(Lexing.lexeme_start_p(lexbuf$1), lexbuf$1, 684);
             return token(lexbuf$1);
-        case 141 : 
+        case 141 :
             return token(lexbuf$1);
-        case 139 : 
-        case 142 : 
+        case 139 :
+        case 142 :
             Lexing.new_line(lexbuf$1);
             return token(lexbuf$1);
-        case 138 : 
-        case 143 : 
+        case 138 :
+        case 143 :
             return /* EOF */56;
-        case 144 : 
+        case 144 :
             return error(lexbuf$1, "unknown operator");
-        
+
       }
     }
   };
@@ -21119,26 +21119,26 @@ function __ocaml_lex_comment_rec(start, lexbuf, ___ocaml_lex_state) {
       Curry._1(lexbuf[/* refill_buff */0], lexbuf);
       ___ocaml_lex_state = __ocaml_lex_state$1;
       continue ;
-      
+
     }
     else {
       switch (__ocaml_lex_state$1) {
-        case 0 : 
+        case 0 :
             return /* () */0;
-        case 1 : 
+        case 1 :
             __ocaml_lex_comment_rec(Lexing.lexeme_start_p(lexbuf), lexbuf, 684);
             ___ocaml_lex_state = 684;
             continue ;
-            case 2 : 
+            case 2 :
             Lexing.new_line(lexbuf);
             ___ocaml_lex_state = 684;
             continue ;
-            case 3 : 
+            case 3 :
             return error_nest(start, lexbuf, "unclosed comment");
-        case 4 : 
+        case 4 :
             ___ocaml_lex_state = 684;
             continue ;
-            
+
       }
     }
   };
@@ -21240,7 +21240,7 @@ function from_function(f) {
                 if (v >= 0) {
                   t[i] = v - s | 0;
                 }
-                
+
               }
             }
             Bytes.blit(aux_buffer, 0, lexbuf[/* lex_buffer */1], lexbuf[/* lex_buffer_len */2], n);
@@ -21420,7 +21420,7 @@ function repeat(_n, f, x) {
       Curry._1(f, x);
       _n = n - 1 | 0;
       continue ;
-      
+
     }
     else {
       return /* () */0;
@@ -21490,7 +21490,7 @@ function drop(_n, _xs) {
           _xs = xs[1];
           _n = n - 1 | 0;
           continue ;
-          
+
         }
         else {
           return Pervasives.failwith("drop");
@@ -21514,7 +21514,7 @@ function last(_param) {
       if (xs) {
         _param = xs;
         continue ;
-        
+
       }
       else {
         return param[0];
@@ -21567,7 +21567,7 @@ function index_of(x, xs) {
         _i = i + 1 | 0;
         _xs = xs$1[1];
         continue ;
-        
+
       }
     }
     else {
@@ -21587,7 +21587,7 @@ function length(xs) {
         _n = n + 1 | 0;
         _xs = xs$1[1];
         continue ;
-        
+
       }
       else {
         return Pervasives.failwith("length");
@@ -21609,7 +21609,7 @@ function nth(_xs, _n) {
           _n = n - 1 | 0;
           _xs = xs[1];
           continue ;
-          
+
         }
         else {
           return Pervasives.failwith("nth");
@@ -21660,7 +21660,7 @@ function drop$1(_n, _xs) {
           _xs = xs[1];
           _n = n - 1 | 0;
           continue ;
-          
+
         }
         else {
           return Pervasives.failwith("drop");
@@ -21798,7 +21798,7 @@ function log2(n) {
       _n = (n$1 >>> 1);
       _acc = acc + 1 | 0;
       continue ;
-      
+
     }
   };
 }
@@ -21905,7 +21905,7 @@ function length(l) {
       _param = param[1];
       _len = len + 1 | 0;
       continue ;
-      
+
     }
     else {
       return len;
@@ -21955,7 +21955,7 @@ function nth(l, n) {
           _n = n$1 - 1 | 0;
           _l = l$1[1];
           continue ;
-          
+
         }
         else {
           return l$1[0];
@@ -21982,7 +21982,7 @@ function rev_append(_l1, _l2) {
       ];
       _l1 = l1[1];
       continue ;
-      
+
     }
     else {
       return l2;
@@ -22046,7 +22046,7 @@ function rev_map(f, l) {
         accu
       ];
       continue ;
-      
+
     }
     else {
       return accu;
@@ -22061,7 +22061,7 @@ function iter(f, _param) {
       Curry._1(f, param[0]);
       _param = param[1];
       continue ;
-      
+
     }
     else {
       return /* () */0;
@@ -22081,7 +22081,7 @@ function iteri(f, l) {
       _param = param[1];
       _i = i + 1 | 0;
       continue ;
-      
+
     }
     else {
       return /* () */0;
@@ -22097,7 +22097,7 @@ function fold_left(f, _accu, _l) {
       _l = l[1];
       _accu = Curry._2(f, accu, l[0]);
       continue ;
-      
+
     }
     else {
       return accu;
@@ -22158,7 +22158,7 @@ function rev_map2(f, l1, l2) {
           accu
         ];
         continue ;
-        
+
       }
       else {
         throw [
@@ -22189,7 +22189,7 @@ function iter2(f, _l1, _l2) {
         _l2 = l2[1];
         _l1 = l1[1];
         continue ;
-        
+
       }
       else {
         throw [
@@ -22221,7 +22221,7 @@ function fold_left2(f, _accu, _l1, _l2) {
         _l1 = l1[1];
         _accu = Curry._3(f, accu, l1[0], l2[0]);
         continue ;
-        
+
       }
       else {
         throw [
@@ -22272,7 +22272,7 @@ function for_all(p, _param) {
       if (Curry._1(p, param[0])) {
         _param = param[1];
         continue ;
-        
+
       }
       else {
         return /* false */0;
@@ -22294,7 +22294,7 @@ function exists(p, _param) {
       else {
         _param = param[1];
         continue ;
-        
+
       }
     }
     else {
@@ -22313,7 +22313,7 @@ function for_all2(p, _l1, _l2) {
           _l2 = l2[1];
           _l1 = l1[1];
           continue ;
-          
+
         }
         else {
           return /* false */0;
@@ -22351,7 +22351,7 @@ function exists2(p, _l1, _l2) {
           _l2 = l2[1];
           _l1 = l1[1];
           continue ;
-          
+
         }
       }
       else {
@@ -22380,7 +22380,7 @@ function mem(x, _param) {
       if (Caml_obj.caml_compare(param[0], x)) {
         _param = param[1];
         continue ;
-        
+
       }
       else {
         return /* true */1;
@@ -22402,7 +22402,7 @@ function memq(x, _param) {
       else {
         _param = param[1];
         continue ;
-        
+
       }
     }
     else {
@@ -22419,7 +22419,7 @@ function assoc(x, _param) {
       if (Caml_obj.caml_compare(match[0], x)) {
         _param = param[1];
         continue ;
-        
+
       }
       else {
         return match[1];
@@ -22442,7 +22442,7 @@ function assq(x, _param) {
       else {
         _param = param[1];
         continue ;
-        
+
       }
     }
     else {
@@ -22458,7 +22458,7 @@ function mem_assoc(x, _param) {
       if (Caml_obj.caml_compare(param[0][0], x)) {
         _param = param[1];
         continue ;
-        
+
       }
       else {
         return /* true */1;
@@ -22480,7 +22480,7 @@ function mem_assq(x, _param) {
       else {
         _param = param[1];
         continue ;
-        
+
       }
     }
     else {
@@ -22538,7 +22538,7 @@ function find(p, _param) {
       else {
         _param = param[1];
         continue ;
-        
+
       }
     }
     else {
@@ -22564,12 +22564,12 @@ function find_all(p) {
             accu
           ];
           continue ;
-          
+
         }
         else {
           _param = l;
           continue ;
-          
+
         }
       }
       else {
@@ -22597,7 +22597,7 @@ function partition(p, l) {
           yes
         ];
         continue ;
-        
+
       }
       else {
         _param = l$1;
@@ -22606,7 +22606,7 @@ function partition(p, l) {
           no
         ];
         continue ;
-        
+
       }
     }
     else {
@@ -22706,7 +22706,7 @@ function chop(_k, _l) {
         _l = l[1];
         _k = k - 1 | 0;
         continue ;
-        
+
       }
       else {
         throw [
@@ -22882,7 +22882,7 @@ function stable_sort(cmp, l) {
               ];
               _l1 = l1[1];
               continue ;
-              
+
             }
             else {
               _accu = /* :: */[
@@ -22891,7 +22891,7 @@ function stable_sort(cmp, l) {
               ];
               _l2 = l2$1[1];
               continue ;
-              
+
             }
           }
           else {
@@ -22903,7 +22903,7 @@ function stable_sort(cmp, l) {
         }
       };
     }
-    
+
   };
   var rev_sort = function (n, l) {
     var exit = 0;
@@ -23061,7 +23061,7 @@ function stable_sort(cmp, l) {
               ];
               _l1 = l1[1];
               continue ;
-              
+
             }
             else {
               _accu = /* :: */[
@@ -23070,7 +23070,7 @@ function stable_sort(cmp, l) {
               ];
               _l2 = l2$1[1];
               continue ;
-              
+
             }
           }
           else {
@@ -23082,7 +23082,7 @@ function stable_sort(cmp, l) {
         }
       };
     }
-    
+
   };
   var len = length(l);
   if (len < 2) {
@@ -23349,7 +23349,7 @@ function sort_uniq(cmp, l) {
                 ];
                 _l1 = t1;
                 continue ;
-                
+
               }
               else {
                 _accu = /* :: */[
@@ -23358,7 +23358,7 @@ function sort_uniq(cmp, l) {
                 ];
                 _l2 = t2;
                 continue ;
-                
+
               }
             }
             else {
@@ -23369,7 +23369,7 @@ function sort_uniq(cmp, l) {
               _l2 = t2;
               _l1 = t1;
               continue ;
-              
+
             }
           }
           else {
@@ -23381,7 +23381,7 @@ function sort_uniq(cmp, l) {
         }
       };
     }
-    
+
   };
   var rev_sort = function (n, l) {
     var exit = 0;
@@ -23638,7 +23638,7 @@ function sort_uniq(cmp, l) {
                 ];
                 _l1 = t1;
                 continue ;
-                
+
               }
               else {
                 _accu = /* :: */[
@@ -23647,7 +23647,7 @@ function sort_uniq(cmp, l) {
                 ];
                 _l2 = t2;
                 continue ;
-                
+
               }
             }
             else {
@@ -23658,7 +23658,7 @@ function sort_uniq(cmp, l) {
               _l2 = t2;
               _l1 = t1;
               continue ;
-              
+
             }
           }
           else {
@@ -23670,7 +23670,7 @@ function sort_uniq(cmp, l) {
         }
       };
     }
-    
+
   };
   var len = length(l);
   if (len < 2) {
@@ -23894,7 +23894,7 @@ function Make(funarg) {
         if (c) {
           _param = c < 0 ? param[0] : param[3];
           continue ;
-          
+
         }
         else {
           return param[2];
@@ -23913,7 +23913,7 @@ function Make(funarg) {
         if (c) {
           _param = c < 0 ? param[0] : param[3];
           continue ;
-          
+
         }
         else {
           return /* true */1;
@@ -23932,7 +23932,7 @@ function Make(funarg) {
         if (l) {
           _param = l;
           continue ;
-          
+
         }
         else {
           return /* tuple */[
@@ -23954,7 +23954,7 @@ function Make(funarg) {
         if (r) {
           _param = r;
           continue ;
-          
+
         }
         else {
           return /* tuple */[
@@ -24029,7 +24029,7 @@ function Make(funarg) {
         Curry._2(f, param[1], param[2]);
         _param = param[3];
         continue ;
-        
+
       }
       else {
         return /* () */0;
@@ -24079,7 +24079,7 @@ function Make(funarg) {
         _accu = Curry._3(f, m[1], m[2], fold(f, m[0], accu));
         _m = m[3];
         continue ;
-        
+
       }
       else {
         return accu;
@@ -24094,7 +24094,7 @@ function Make(funarg) {
           if (for_all(p, param[0])) {
             _param = param[3];
             continue ;
-            
+
           }
           else {
             return /* false */0;
@@ -24122,7 +24122,7 @@ function Make(funarg) {
         else {
           _param = param[3];
           continue ;
-          
+
         }
       }
       else {
@@ -24267,7 +24267,7 @@ function Make(funarg) {
             ];
       }
     }
-    
+
   };
   var filter = function (p, param) {
     if (param) {
@@ -24331,7 +24331,7 @@ function Make(funarg) {
         ];
         _m = m[0];
         continue ;
-        
+
       }
       else {
         return e;
@@ -24359,7 +24359,7 @@ function Make(funarg) {
               _e2 = cons_enum(e2[2], e2[3]);
               _e1 = cons_enum(e1[2], e1[3]);
               continue ;
-              
+
             }
           }
         }
@@ -24390,7 +24390,7 @@ function Make(funarg) {
             _e2 = cons_enum(e2[2], e2[3]);
             _e1 = cons_enum(e1[2], e1[3]);
             continue ;
-            
+
           }
           else {
             return /* false */0;
@@ -24430,7 +24430,7 @@ function Make(funarg) {
           bindings_aux(accu, param[3])
         ];
         continue ;
-        
+
       }
       else {
         return accu;
@@ -25493,13 +25493,13 @@ function parse$prime(name, lexbuf, start) {
 
 function parse(name, lexbuf, param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return parse$prime(name, lexbuf, Parser.module1);
-    case 1 : 
+    case 1 :
         return parse$prime(name, lexbuf, Parser.script);
-    case 2 : 
+    case 2 :
         return parse$prime(name, lexbuf, Parser.script1);
-    
+
   }
 }
 
@@ -27787,26 +27787,26 @@ function yyparse(tables, start, lexer, lexbuf) {
       var cmd = _cmd;
       var match = Caml_parser.caml_parse_engine(tables, env, cmd, arg);
       switch (match) {
-        case 0 : 
+        case 0 :
             var t = Curry._1(lexer, lexbuf);
             env[/* symb_start */8] = lexbuf[/* lex_start_p */10];
             env[/* symb_end */9] = lexbuf[/* lex_curr_p */11];
             _arg = t;
             _cmd = /* Token_read */1;
             continue ;
-            case 1 : 
+            case 1 :
             throw Parse_error;
-        case 2 : 
+        case 2 :
             grow_stacks(/* () */0);
             _arg = /* () */0;
             _cmd = /* Stacks_grown_1 */2;
             continue ;
-            case 3 : 
+            case 3 :
             grow_stacks(/* () */0);
             _arg = /* () */0;
             _cmd = /* Stacks_grown_2 */3;
             continue ;
-            case 4 : 
+            case 4 :
             var match$1;
             try {
               match$1 = /* tuple */[
@@ -27828,12 +27828,12 @@ function yyparse(tables, start, lexer, lexbuf) {
             _arg = match$1[1];
             _cmd = match$1[0];
             continue ;
-            case 5 : 
+            case 5 :
             Curry._1(tables[/* error_function */13], "syntax error");
             _arg = /* () */0;
             _cmd = /* Error_detected */5;
             continue ;
-            
+
       }
     };
   }
@@ -27883,7 +27883,7 @@ function symbol_start_pos() {
       else {
         _i = i - 1 | 0;
         continue ;
-        
+
       }
     }
   };
@@ -28039,9 +28039,9 @@ function string_of_bool(b) {
 
 function bool_of_string(param) {
   switch (param) {
-    case "false" : 
+    case "false" :
         return /* false */0;
-    case "true" : 
+    case "true" :
         return /* true */1;
     default:
       throw [
@@ -28072,7 +28072,7 @@ function valid_float_lexem(s) {
         else {
           _i = i + 1 | 0;
           continue ;
-          
+
         }
       }
       else if (match !== 45) {
@@ -28081,7 +28081,7 @@ function valid_float_lexem(s) {
       else {
         _i = i + 1 | 0;
         continue ;
-        
+
       }
     }
   };
@@ -28156,11 +28156,11 @@ function flush_all() {
         Caml_io.caml_ml_flush(param[0]);
       }
       catch (exn){
-        
+
       }
       _param = param[1];
       continue ;
-      
+
     }
     else {
       return /* () */0;
@@ -28218,7 +28218,7 @@ function close_out_noerr(oc) {
     Caml_io.caml_ml_flush(oc);
   }
   catch (exn){
-    
+
   }
   try {
     return function () {
@@ -28285,7 +28285,7 @@ function unsafe_really_input(_, _$1, _ofs, _len) {
         _len = len - r | 0;
         _ofs = ofs + r | 0;
         continue ;
-        
+
       }
       else {
         throw Caml_builtin_exceptions.end_of_file;
@@ -28324,7 +28324,7 @@ function input_line(chan) {
         _param = param[1];
         _pos = pos - len | 0;
         continue ;
-        
+
       }
       else {
         return buf;
@@ -28367,7 +28367,7 @@ function input_line(chan) {
             accu
           ];
           continue ;
-          
+
         }
       }
       else if (accu) {
@@ -29176,7 +29176,7 @@ function escaped(s) {
             else {
               _i = i + 1 | 0;
               continue ;
-              
+
             }
           }
           else if (switcher > 57 || switcher < 1) {
@@ -29185,7 +29185,7 @@ function escaped(s) {
           else {
             _i = i + 1 | 0;
             continue ;
-            
+
           }
         }
         else {
@@ -29435,15 +29435,15 @@ function size(param) {
 
 function string_of_value_type(param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return "i32";
-    case 1 : 
+    case 1 :
         return "i64";
-    case 2 : 
+    case 2 :
         return "f32";
-    case 3 : 
+    case 3 :
         return "f64";
-    
+
   }
 }
 
@@ -29463,7 +29463,7 @@ function string_of_value_types(ts) {
   if (exit === 1) {
     return "[" + ($$String.concat(" ", List.map(string_of_value_type, ts)) + "]");
   }
-  
+
 }
 
 function string_of_elem_type() {
@@ -29537,29 +29537,29 @@ var Caml_exceptions = require("bs-platform/lib/js/caml_exceptions");
 
 function type_of(param) {
   switch (param.tag | 0) {
-    case 0 : 
+    case 0 :
         return /* I32Type */0;
-    case 1 : 
+    case 1 :
         return /* I64Type */1;
-    case 2 : 
+    case 2 :
         return /* F32Type */2;
-    case 3 : 
+    case 3 :
         return /* F64Type */3;
-    
+
   }
 }
 
 function default_value(param) {
   switch (param) {
-    case 0 : 
+    case 0 :
         return /* I32 */Block.__(0, [I32.zero]);
-    case 1 : 
+    case 1 :
         return /* I64 */Block.__(1, [I64.zero]);
-    case 2 : 
+    case 2 :
         return /* F32 */Block.__(2, [F32.zero]);
-    case 3 : 
+    case 3 :
         return /* F64 */Block.__(3, [F64.zero]);
-    
+
   }
 }
 
@@ -29569,15 +29569,15 @@ function value_of_bool(b) {
 
 function string_of_value(param) {
   switch (param.tag | 0) {
-    case 0 : 
+    case 0 :
         return Curry._1(I32.to_string_s, param[0]);
-    case 1 : 
+    case 1 :
         return Curry._1(I64.to_string_s, param[0]);
-    case 2 : 
+    case 2 :
         return Curry._1(F32.to_string, param[0]);
-    case 3 : 
+    case 3 :
         return Curry._1(F64.to_string, param[0]);
-    
+
   }
 }
 
@@ -29597,7 +29597,7 @@ function string_of_values(vs) {
   if (exit === 1) {
     return "[" + ($$String.concat(" ", List.map(string_of_value, vs)) + "]");
   }
-  
+
 }
 
 var Value = Caml_exceptions.create("Values.Value");

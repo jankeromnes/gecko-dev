@@ -12,7 +12,7 @@
 <p id="display">
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 </pre>
@@ -22,7 +22,7 @@
 <![CDATA[
 
 SimpleTest.waitForExplicitFinish();
-window.open("window_nsITextInputProcessor.xul", "_blank", 
+window.open("window_nsITextInputProcessor.xul", "_blank",
             "chrome,width=600,height=600");
 
 ]]>

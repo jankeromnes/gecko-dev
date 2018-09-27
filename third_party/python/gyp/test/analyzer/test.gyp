@@ -18,7 +18,7 @@
 #   #exe3 -> subdir/subdir.gyp#foo, subdir/subdir.gyp#subdir2a
 #     exe3.c
 #   #allx (type none) -> exe, exe3
-# 
+#
 # subdir/subdir.gyp
 #   #foo
 #     subdir/subdir_source.c
@@ -27,7 +27,7 @@
 #     subdir/subdir2_source.c
 #   #subdir2b
 #     subdir/subdir2b_source.c
-# 
+#
 # subdir/subdir2/subdir2.gyp
 #   #subdir2
 #     subdir/subdir_source.h

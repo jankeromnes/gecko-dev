@@ -67,7 +67,7 @@ static void ConvertPosixAttribToString(char *s, UInt32 a) throw()
   if ((a & 0x400) != 0) s[6] = ((a & (1 << 3)) ? 's' : 'S');
   if ((a & 0x200) != 0) s[9] = ((a & (1 << 0)) ? 't' : 'T');
   s[10] = 0;
-  
+
   a &= ~(UInt32)0xFFFF;
   if (a != 0)
   {
@@ -85,9 +85,9 @@ void ConvertWinAttribToString(char *s, UInt32 wa) throw()
   macos - stores additional 0x4000 flag marker.
   info-zip - no additional marker.
   */
-  
+
   bool isPosix = ((wa & 0xF0000000) != 0);
-  
+
   UInt32 posix = 0;
   if (isPosix)
   {
@@ -109,7 +109,7 @@ void ConvertWinAttribToString(char *s, UInt32 wa) throw()
       }
     }
   }
-  
+
   if (wa != 0)
   {
     *s++ = ' ';
@@ -130,7 +130,7 @@ void ConvertWinAttribToString(char *s, UInt32 wa) throw()
 void ConvertPropertyToShortString2(char *dest, const PROPVARIANT &prop, PROPID propID, int level) throw()
 {
   *dest = 0;
-  
+
   if (prop.vt == VT_FILETIME)
   {
     const FILETIME &ft = prop.filetime;
@@ -197,7 +197,7 @@ void ConvertPropertyToShortString2(char *dest, const PROPVARIANT &prop, PROPID p
       return;
     }
   }
-  
+
   ConvertPropVariantToShortString(prop, dest);
 }
 
@@ -398,7 +398,7 @@ static void ParseSid(AString &s, const Byte *p, UInt32 lim, UInt32 &sidSize)
       }
     }
   }
-  
+
   s += "S-1-";
   if (p[2] == 0 && p[3] == 0)
     s.Add_UInt32(authority);
@@ -444,7 +444,7 @@ static void ParseAcl(AString &s, const Byte *p, UInt32 size, const char *strName
     return;
   UInt32 num = Get32(p + 4);
   s.Add_UInt32(num);
-  
+
   /*
   UInt32 aclSize = Get16(p + 2);
   if (num >= (1 << 16))
@@ -646,9 +646,9 @@ bool ConvertNtReparseToString(const Byte *data, UInt32 size, UString &s)
   if (len != 0)
   {
     s.Add_Space();
-    
+
     data += 8;
-    
+
     for (UInt32 i = 0; i < len; i++)
     {
       if (i >= 8)

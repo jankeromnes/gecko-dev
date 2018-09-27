@@ -13,5 +13,5 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 eval('for(var prop in {1:1})prop;', {})
- 
+
   reportCompare(expect, actual, summary);

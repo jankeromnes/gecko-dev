@@ -17,7 +17,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=498240
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=498240">Mozilla Bug 498240</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -175,9 +175,9 @@ function testInsertNode(node) {
   check(p,0,p.childNodes[1],1);
 }
 function testInvalidNodeType(node) {
-  try { 
-    testInsertNode(node); 
-    ok(false,"Expected an InvalidNodeTypeError"); 
+  try {
+    testInsertNode(node);
+    ok(false,"Expected an InvalidNodeTypeError");
   } catch(e) {
     is(e.name, "InvalidNodeTypeError", "Wrong exception, expected InvalidNodeTypeError");
     ok(e instanceof DOMException, "Wrong type of exception: " + e);
@@ -208,9 +208,9 @@ function runTest() {
   // Intentionally fails because of bug 418755.
   todo(false, "test that Range::insertNode() throws WrongDocumentError when it should");
   i = document.implementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null).createElement('html');
-  try { 
+  try {
     testInsertNode(i);
-    todo(false,"Expected a WrongDocumentError"); 
+    todo(false,"Expected a WrongDocumentError");
   } catch(e) {
     is(e.name, "WrongDocumentError", "Wrong exception, expected WrongDocumentError");
     ok(e instanceof DOMException, "Wrong type of exception: " + e);
@@ -223,9 +223,9 @@ function runTest() {
   select(p.childNodes[0],0,p.childNodes[0],1);
   var sel = getSelection();
   var range = sel.getRangeAt(0);
-  try { 
+  try {
     range.insertNode(p);
-    ok(false,"Expected a HierarchyRequestError"); 
+    ok(false,"Expected a HierarchyRequestError");
   } catch(e) {
     is(e.name, "HierarchyRequestError", "Wrong exception, expected HierarchyRequestError");
     ok(e instanceof DOMException, "Wrong type of exception: " + e);

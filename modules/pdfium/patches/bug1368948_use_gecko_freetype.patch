@@ -15,18 +15,18 @@ diff --git a/modules/pdfium/pdfium/core/fxge/freetype/fx_freetype.cpp b/modules/
  // Copyright 2014 PDFium Authors. All rights reserved.
  // Use of this source code is governed by a BSD-style license that can be
  // found in the LICENSE file.
- 
+
  // Original code copyright 2014 Foxit Software Inc. http://www.foxitsoftware.com
- 
+
  #include "core/fxge/fx_freetype.h"
- 
+
 -#include "third_party/freetype/src/psnames/pstables.h"
 +#include "psnames/pstables.h"
- 
+
  static int xyq_search_node(char* glyph_name,
                             int name_offset,
                             int table_offset,
                             wchar_t unicode) {
    int i, count;
- 
+
    // copy letters

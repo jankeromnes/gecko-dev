@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title>Example Feed</title> 
+  <title>Example Feed</title>
   <link href="http://example.org/"/>
   <updated>2003-12-13T18:30:02Z</updated>
 
-  <author> 
+  <author>
     <name>John Doe</name>
-  </author> 
+  </author>
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
 
   <entry>
@@ -29,7 +29,7 @@
 
     <summary>Some text.</summary>
   </entry>
-  
+
   <entry>
 
     <title>javascript: link</title>
@@ -39,7 +39,7 @@
 
     <summary>Some text.</summary>
   </entry>
-  
+
   <entry>
 
     <title>file: link</title>

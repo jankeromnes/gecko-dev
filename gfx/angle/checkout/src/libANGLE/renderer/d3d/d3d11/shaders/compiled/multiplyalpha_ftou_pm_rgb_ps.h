@@ -16,8 +16,8 @@
 //
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
-// SV_POSITION              0   xyzw        0      POS   float       
-// TEXCOORD                 0   xy          1     NONE   float   xy  
+// SV_POSITION              0   xyzw        0      POS   float
+// TEXCOORD                 0   xy          1     NONE   float   xy
 //
 //
 // Output signature:
@@ -37,7 +37,7 @@ mul r0.xyz, r0.wwww, r0.xyzx
 mul r0.xyz, r0.xyzx, l(255.000000, 255.000000, 255.000000, 0.000000)
 ftou o0.xyz, r0.xyzx
 mov o0.w, l(1)
-ret 
+ret
 // Approximately 6 instruction slots used
 #endif
 

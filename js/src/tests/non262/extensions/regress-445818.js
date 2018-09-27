@@ -17,7 +17,7 @@ test();
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 if (typeof scatter == 'undefined')
 {
   print(expect = actual = 'Test skipped. scatter not defined');
@@ -30,8 +30,8 @@ else
     for (var i = 0; i != 42*42*42; ++i) {
       var obj = array[i % array.length];
       obj["a"+i] = 1;
-      var tmp = {}; 
-      tmp["a"+i] = 2; 
+      var tmp = {};
+      tmp["a"+i] = 2;
     }
   }
 

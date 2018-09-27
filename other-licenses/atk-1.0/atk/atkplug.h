@@ -46,7 +46,7 @@ GType atk_plug_get_type (void);
 struct _AtkPlugClass
 {
   AtkObjectClass parent_class;
-  
+
   /* to be subscribed to by atk-bridge */
 
   /*< protected >*/

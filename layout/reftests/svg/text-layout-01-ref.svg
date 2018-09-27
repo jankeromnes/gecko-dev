@@ -35,7 +35,7 @@
   <text x="220" y="110">S</text>
   <text x="220" y="130">T</text>
   <text x="220" y="150">7</text>
-  
+
   <text x="220" y="200">T ST8</text>
 
   <g transform="translate(150,100)rotate(45)"><text>A</text></g>

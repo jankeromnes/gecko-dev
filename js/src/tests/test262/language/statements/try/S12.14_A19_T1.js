@@ -59,7 +59,7 @@ catch(e){
 
 // CHECK#7
 try{
-  throw URIError("message", "fileName", "1"); 
+  throw URIError("message", "fileName", "1");
 }
 catch(e){
   if (e.toString()!=="URIError: message") $ERROR('#7: Exception.toString()==="URIError: message". Actual: Exception is '+e);

@@ -7,5 +7,5 @@
 
 <rect id="rect1" fill="url(#pat0)"/>
 
-<pattern patternUnits="userSpaceOnUse" id="pat0" x="10" y="10" width="20" height="20">  <rect x="5" y="5" width="10" height="10" fill="red" />  <rect x="10" y="10" width="10" height="10" fill="green" /></pattern>	
+<pattern patternUnits="userSpaceOnUse" id="pat0" x="10" y="10" width="20" height="20">  <rect x="5" y="5" width="10" height="10" fill="red" />  <rect x="10" y="10" width="10" height="10" fill="green" /></pattern>
 </svg>

@@ -17,7 +17,7 @@ macro_rules! trait_template {
             }
         }
 
-        remove_sections! { [] 
+        remove_sections! { []
             $(#[$doc])*
             pub trait $name $($methods)*
 

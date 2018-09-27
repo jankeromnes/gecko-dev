@@ -74,8 +74,8 @@
 #define UFMT_EMPTY {ufmt_empty, NULL}
 
 /**
- * A u_printf handler function.  
- * A u_printf handler is responsible for handling a single u_printf 
+ * A u_printf handler function.
+ * A u_printf handler is responsible for handling a single u_printf
  * format specification, for example 'd' or 's'.
  * @param stream The UFILE to which to write output.
  * @param info A pointer to a <TT>u_printf_spec_info</TT> struct containing
@@ -546,7 +546,7 @@ u_printf_pointer_handler(const u_printf_stream_handler  *handler,
                          ULocaleBundle                  *formatBundle,
                          const u_printf_spec_info       *info,
                          const ufmt_args                *args)
-{ 
+{
     (void)formatBundle;
     UChar           result[UPRINTF_BUFFER_SIZE];
     int32_t         len  = UPRINTF_BUFFER_SIZE;
@@ -1158,15 +1158,15 @@ static ufmt_args* parseArguments(const UChar *alias, va_list ap, UErrorCode *sta
         pos--;
 
         /* skip over everything except for the type */
-        while (ISMOD(*alias) || ISFLAG(*alias) || ISDIGIT(*alias) || 
+        while (ISMOD(*alias) || ISFLAG(*alias) || ISDIGIT(*alias) ||
             *alias == SPEC_ASTERISK || *alias == SPEC_PERIOD || *alias == SPEC_DOLLARSIGN) {
                 islonglong[pos] = FALSE;
                 if (ISMOD(*alias)) {
                     alias++;
                     if (*alias == MOD_LOWERL) {
                         islonglong[pos] = TRUE;
-                    } 
-                } 
+                    }
+                }
                 alias++;
         }
         type = *alias;
@@ -1250,7 +1250,7 @@ u_printf_parse(const u_printf_stream_handler *streamHandler,
             return -1;
         }
     }
-    
+
     /* iterate through the pattern */
     while(!locStringContext || locStringContext->available >= 0) {
 

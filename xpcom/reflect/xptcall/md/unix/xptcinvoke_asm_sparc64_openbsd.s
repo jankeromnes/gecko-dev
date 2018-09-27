@@ -20,7 +20,7 @@
 /*
     NS_InvokeByIndex(nsISupports* that, uint32_t methodIndex,
                      uint32_t paramCount, nsXPTCVariant* params);
-    
+
 */
 NS_InvokeByIndex:
         save    %sp,-(128 + 64),%sp ! room for the register window and
@@ -43,7 +43,7 @@ NS_InvokeByIndex:
 !   BIAS is 0x7ff (2047)
 !
 
-!   load the %o1..5 64bit (extended word) output registers registers 
+!   load the %o1..5 64bit (extended word) output registers registers
         ldx     [%sp + 0x7ff + 136],%o1    ! %i1
         ldx     [%sp + 0x7ff + 144],%o2    ! %i2
         ldx     [%sp + 0x7ff + 152],%o3    ! %i3

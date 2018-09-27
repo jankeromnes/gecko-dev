@@ -3,21 +3,21 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-     
+
 #ifndef MOZILLA_GFX_DRAWTARGETDUAL_H_
 #define MOZILLA_GFX_DRAWTARGETDUAL_H_
-     
+
 #include <vector>
 #include <sstream>
 
 #include "SourceSurfaceDual.h"
-     
+
 #include "2D.h"
 #include "Filters.h"
-     
+
 namespace mozilla {
 namespace gfx {
-     
+
 #define FORWARD_FUNCTION(funcName) \
   virtual void funcName() override { mA->funcName(); mB->funcName(); }
 #define FORWARD_FUNCTION1(funcName, var1Type, var1Name) \
@@ -40,10 +40,10 @@ public:
   DrawTargetDual(DrawTarget *aA, DrawTarget *aB)
     : mA(aA)
     , mB(aB)
-  { 
+  {
     mFormat = aA->GetFormat();
   }
-     
+
   virtual DrawTargetType GetType() const override { return mA->GetType(); }
   virtual BackendType GetBackendType() const override { return mA->GetBackendType(); }
   virtual already_AddRefed<SourceSurface> Snapshot() override {
@@ -106,7 +106,7 @@ public:
 
   virtual void FillGlyphs(ScaledFont *aScaledFont, const GlyphBuffer &aBuffer,
                           const Pattern &aPattern, const DrawOptions &aOptions) override;
-  
+
   virtual void Mask(const Pattern &aSource, const Pattern &aMask, const DrawOptions &aOptions) override;
 
   virtual void PushLayer(bool aOpaque, Float aOpacity,
@@ -129,26 +129,26 @@ public:
   {
     return mA->CreateSourceSurfaceFromData(aData, aSize, aStride, aFormat);
   }
-     
+
   virtual already_AddRefed<SourceSurface> OptimizeSourceSurface(SourceSurface *aSurface) const override
   {
     return mA->OptimizeSourceSurface(aSurface);
   }
-     
+
   virtual already_AddRefed<SourceSurface>
     CreateSourceSurfaceFromNativeSurface(const NativeSurface &aSurface) const override
   {
     return mA->CreateSourceSurfaceFromNativeSurface(aSurface);
   }
-     
+
   virtual already_AddRefed<DrawTarget>
     CreateSimilarDrawTarget(const IntSize &aSize, SurfaceFormat aFormat) const override;
-     
+
   virtual already_AddRefed<PathBuilder> CreatePathBuilder(FillRule aFillRule = FillRule::FILL_WINDING) const override
   {
     return mA->CreatePathBuilder(aFillRule);
   }
-     
+
   virtual already_AddRefed<GradientStops>
     CreateGradientStops(GradientStop *aStops,
                         uint32_t aNumStops,
@@ -173,13 +173,13 @@ public:
   }
 
   virtual bool IsCurrentGroupOpaque() override { return mA->IsCurrentGroupOpaque(); }
-     
+
 private:
   RefPtr<DrawTarget> mA;
   RefPtr<DrawTarget> mB;
 };
-     
+
 } // namespace gfx
 } // namespace mozilla
-     
-#endif /* MOZILLA_GFX_DRAWTARGETDUAL_H_ */ 
+
+#endif /* MOZILLA_GFX_DRAWTARGETDUAL_H_ */

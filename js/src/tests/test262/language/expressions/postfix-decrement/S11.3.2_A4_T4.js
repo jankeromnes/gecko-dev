@@ -8,7 +8,7 @@ description: If Type(x) is undefined or null
 ---*/
 
 //CHECK#1
-var x; 
+var x;
 var y = x--;
 if (isNaN(y) !== true) {
   $ERROR('#1: var x; var y = x--; y === Not-a-Number. Actual: ' + (y));

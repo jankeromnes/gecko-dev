@@ -1,10 +1,10 @@
 /*
  * tchar.h
- * 
+ *
  * This file is a part of NSIS.
- * 
+ *
  * Copyright (C) 1999-2007 Nullsoft and Contributors
- * 
+ *
  * This software is provided 'as-is', without any express or implied
  * warranty.
  *

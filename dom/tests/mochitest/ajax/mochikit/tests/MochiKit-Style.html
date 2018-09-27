@@ -7,7 +7,7 @@
     <script type="text/javascript" src="../MochiKit/Style.js"></script>
     <script type="text/javascript" src="../MochiKit/Color.js"></script>
     <script type="text/javascript" src="../MochiKit/Logging.js"></script>
-    <script type="text/javascript" src="SimpleTest/SimpleTest.js"></script>        
+    <script type="text/javascript" src="SimpleTest/SimpleTest.js"></script>
     <link rel="stylesheet" type="text/css" href="SimpleTest/test.css">
 </head>
 <body style="border: 0; margin: 0; padding: 0;">
@@ -23,7 +23,7 @@ try {
     var pos = getElementPosition('styleTest');
     is(pos.x, 400, 'initial x position');
     is(pos.y, 100, 'initial y position');
-    
+
     // moved
     var newPos = new MochiKit.Style.Coordinates(500, 200);
     setElementPosition('styleTest', newPos);
@@ -36,50 +36,50 @@ try {
     pos = getElementPosition('styleTest', anotherPos);
     is(pos.x, 400, 'updated x position (using relativeTo parameter)');
     is(pos.y, 100, 'updated y position (using relativeTo parameter)');
-    
+
     // Coordinates object
     pos = getElementPosition({x: 123, y: 321});
     is(pos.x, 123, 'passthrough x position');
     is(pos.y, 321, 'passthrough y position');
-    
+
     // Coordinates object with relativeTo
     pos = getElementPosition({x: 123, y: 321}, {x: 100, y: 50});
     is(pos.x, 23, 'passthrough x position (using relativeTo parameter)');
     is(pos.y, 271, 'passthrough y position (using relativeTo parameter)');
-    
-    pos = getElementPosition('garbage'); 
-    is(typeof(pos), 'undefined', 
+
+    pos = getElementPosition('garbage');
+    is(typeof(pos), 'undefined',
         'invalid element should return an undefined position');
-    
+
     // Only set one coordinate
     setElementPosition('styleTest', {'x': 300});
     pos = getElementPosition('styleTest');
     is(pos.x, 300, 'updated only x position');
     is(pos.y, 200, 'not updated y position');
-    
+
     var mc = MochiKit.Color.Color;
     var red = mc.fromString('rgb(255,0,0)');
     var color = null;
-    
+
     color = mc.fromString(getStyle('styleTest', 'background-color'));
-    is(color.toHexString(), red.toHexString(), 
+    is(color.toHexString(), red.toHexString(),
         'test getStyle selector case');
-       
+
     color = mc.fromString(getStyle('styleTest', 'backgroundColor'));
-    is(color.toHexString(), red.toHexString(), 
+    is(color.toHexString(), red.toHexString(),
         'test getStyle camel case');
 
-    is(getStyle('styleSubTest', 'font-size'), '10px', 
+    is(getStyle('styleSubTest', 'font-size'), '10px',
         'test computed getStyle selector case');
-       
-    is(getStyle('styleSubTest', 'fontSize'), '10px', 
+
+    is(getStyle('styleSubTest', 'fontSize'), '10px',
         'test computed getStyle camel case');
 
-    is(eval(getStyle('styleTest', 'opacity')), 0.5, 
+    is(eval(getStyle('styleTest', 'opacity')), 0.5,
         'test getStyle opacity');
 
     is(getStyle('styleTest', 'opacity'), 0.5, 'test getOpacity');
-    
+
     setStyle('styleTest', {'opacity': 0.2});
     is(getStyle('styleTest', 'opacity'), 0.2, 'test setOpacity');
 
@@ -118,10 +118,10 @@ try {
     is(pos.y, 0, 'test getViewportPosition y');
 
     ok( true, "test suite finished!");
-    
-    
+
+
 } catch (err) {
-    
+
     var s = "test suite failure!\n";
     var o = {};
     var k = null;

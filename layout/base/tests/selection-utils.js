@@ -6,7 +6,7 @@ function clearSelection(w)
   sel.removeAllRanges();
 }
 
-function getNode(e, index) { 
+function getNode(e, index) {
   if (!(typeof index==='number')) return index;
   if (index >= 0) return e.childNodes[index];
   while (++index != 0) e = e.parentNode;

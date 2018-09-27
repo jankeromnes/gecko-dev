@@ -17,7 +17,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   try
   {
     this.toString = function() { return {}; }; p = [11].map('foo'.split);

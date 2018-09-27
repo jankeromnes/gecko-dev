@@ -7,13 +7,13 @@ function init()
 {
     var targetWindow = window.frames[0];
     var targetDocument = targetWindow.document;
-    
+
     targetDocument.body.appendChild(document.getElementById('rootish'));
     targetDocument.designMode = 'on';
 
-    var r = targetDocument.createRange(); 
-    r.setStart(targetDocument.getElementById("start"), 0); 
-    r.setEnd  (targetDocument.getElementById("end"), 0); 
+    var r = targetDocument.createRange();
+    r.setStart(targetDocument.getElementById("start"), 0);
+    r.setEnd  (targetDocument.getElementById("end"), 0);
     targetWindow.getSelection().addRange(r);
 
     targetDocument.execCommand('bold', false, null);

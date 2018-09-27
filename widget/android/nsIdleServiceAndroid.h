@@ -17,13 +17,13 @@ public:
 
     bool PollIdleTime(uint32_t* aIdleTime) override;
 
-    static already_AddRefed<nsIdleServiceAndroid> GetInstance() 
+    static already_AddRefed<nsIdleServiceAndroid> GetInstance()
     {
         RefPtr<nsIdleService> idleService = nsIdleService::GetInstance();
         if (!idleService) {
             idleService = new nsIdleServiceAndroid();
         }
-        
+
         return idleService.forget().downcast<nsIdleServiceAndroid>();
     }
 

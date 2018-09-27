@@ -17,7 +17,7 @@
  * Object.prototype.toString() on this returns '[object Number]'.
  *
  * The getJSClass() function returns 'Number', the [[Class]] property of obj.
- * See ECMA-262 Edition 3,  13-Oct-1999,  Section 8.6.2 
+ * See ECMA-262 Edition 3,  13-Oct-1999,  Section 8.6.2
  */
 //-----------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ function findClass(sType)
 {
   var re =  /^\[.*\s+(\w+)\s*\]$/;
   var a = sType.match(re);
- 
+
   if (a && a[1])
     return a[1];
   return cnNoClass;

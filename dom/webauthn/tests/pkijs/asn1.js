@@ -5,39 +5,39 @@
  *
  * Author 2014-2015, Yury Strozhevsky <www.strozhevsky.com>.
  *
- * Redistribution and use in source and binary forms, with or without modification, 
+ * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, 
+ * 1. Redistributions of source code must retain the above copyright notice,
  *    this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
  *
- * 3. Neither the name of the copyright holder nor the names of its contributors 
- *    may be used to endorse or promote products derived from this software without 
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software without
  *    specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
- * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
- * OF SUCH DAMAGE. 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE.
  *
  */
 (
 function(in_window)
 {
     //**************************************************************************************
-    // #region Declaration of global variables 
+    // #region Declaration of global variables
     //**************************************************************************************
-    // #region "org" namespace 
+    // #region "org" namespace
     if(typeof in_window.org === "undefined")
         in_window.org = {};
     else
@@ -45,9 +45,9 @@ function(in_window)
         if(typeof in_window.org !== "object")
             throw new Error("Name org already exists and it's not an object");
     }
-    // #endregion 
+    // #endregion
 
-    // #region "org.pkijs" namespace 
+    // #region "org.pkijs" namespace
     if(typeof in_window.org.pkijs === "undefined")
         in_window.org.pkijs = {};
     else
@@ -55,9 +55,9 @@ function(in_window)
         if(typeof in_window.org.pkijs !== "object")
             throw new Error("Name org.pkijs already exists and it's not an object" + " but " + (typeof in_window.org.pkijs));
     }
-    // #endregion 
+    // #endregion
 
-    // #region "org.pkijs.asn1" namespace 
+    // #region "org.pkijs.asn1" namespace
     if(typeof in_window.org.pkijs.asn1 === "undefined")
         in_window.org.pkijs.asn1 = {};
     else
@@ -65,15 +65,15 @@ function(in_window)
         if(typeof in_window.org.pkijs.asn1 !== "object")
             throw new Error("Name org.pkijs.asn1 already exists and it's not an object" + " but " + (typeof in_window.org.pkijs.asn1));
     }
-    // #endregion 
+    // #endregion
 
-    // #region "local" namespace 
+    // #region "local" namespace
     var local = {};
-    // #endregion   
+    // #endregion
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Aux-functions 
+    // #region Aux-functions
     //**************************************************************************************
     function util_frombase(input_buffer, input_base)
     {
@@ -81,7 +81,7 @@ function(in_window)
         /// <param name="input_buffer" type="Uint8Array">Array of bytes representing the number to convert</param>
         /// <param name="input_base" type="Number">The base of initial number</param>
 
-        var result = 0; 
+        var result = 0;
 
         for(var i = (input_buffer.length - 1); i >= 0; i-- )
             result += input_buffer[(input_buffer.length - 1) - i] * Math.pow(2, input_base * i);
@@ -147,7 +147,7 @@ function(in_window)
         var mod_value = (value < 0) ? (value * (-1)) : value;
         var big_int = 128;
 
-        for(var i = 1; i < 8; i++) 
+        for(var i = 1; i < 8; i++)
         {
             if( mod_value <= big_int )
             {
@@ -216,9 +216,9 @@ function(in_window)
         big_int_view[0] = (buf[0] & 0x80); // mask only the biggest bit
 
         var big_int = util_frombase(big_int_view, 8);
-        // #endregion   
+        // #endregion
 
-        // #region Create small part of the integer 
+        // #region Create small part of the integer
         var small_int_buffer = new ArrayBuffer(this.value_hex.byteLength);
         var small_int_view = new Uint8Array(small_int_buffer);
         for(var j = 0; j < this.value_hex.byteLength; j++)
@@ -227,7 +227,7 @@ function(in_window)
         small_int_view[0] &= 0x7F; // mask biggest bit
 
         var small_int = util_frombase(small_int_view, 8);
-        // #endregion 
+        // #endregion
 
         return (small_int - big_int);
     }
@@ -334,7 +334,7 @@ function(in_window)
         var result = "";
 
         var int_buffer = new Uint8Array(input_buffer, input_offset, input_lenght);
-        
+
         for(var i = 0; i < int_buffer.length; i++)
         {
             var str = int_buffer[i].toString(16).toUpperCase();
@@ -344,9 +344,9 @@ function(in_window)
         return result;
     }
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of base block class 
+    // #region Declaration of base block class
     //**************************************************************************************
     local.base_block =
     function()
@@ -395,9 +395,9 @@ function(in_window)
         };
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of hex block class 
+    // #region Declaration of hex block class
     //**************************************************************************************
     local.hex_block =
     function()
@@ -440,30 +440,30 @@ function(in_window)
         /// <param name="input_offset" type="Number">Offset in ASN.1 BER encoded array where decoding should be started</param>
         /// <param name="input_length" type="Number">Maximum length of array of bytes which can be using in this function</param>
 
-        // #region Basic check for parameters 
+        // #region Basic check for parameters
         if(check_buffer_params.call(this, input_buffer, input_offset, input_length) === false)
             return (-1);
-        // #endregion 
+        // #endregion
 
-        // #region Getting Uint8Array from ArrayBuffer 
+        // #region Getting Uint8Array from ArrayBuffer
         var int_buffer = new Uint8Array(input_buffer, input_offset, input_length);
-        // #endregion 
+        // #endregion
 
-        // #region Initial checks 
+        // #region Initial checks
         if(int_buffer.length == 0)
         {
             this.warnings.push("Zero buffer length");
             return input_offset;
         }
-        // #endregion 
+        // #endregion
 
-        // #region Copy input buffer to internal buffer 
+        // #region Copy input buffer to internal buffer
         this.value_hex = new ArrayBuffer(input_length);
         var view = new Uint8Array(this.value_hex);
 
         for(var i = 0; i < int_buffer.length; i++)
             view[i] = int_buffer[i];
-        // #endregion 
+        // #endregion
 
         this.block_length = input_length;
 
@@ -513,9 +513,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of identification block class 
+    // #region Declaration of identification block class
     //**************************************************************************************
     local.identification_block =
     function()
@@ -532,10 +532,10 @@ function(in_window)
         {
             if("id_block" in arguments[0])
             {
-                // #region Properties from hex_block class 
+                // #region Properties from hex_block class
                 this.is_hex_only = in_window.org.pkijs.getValue(arguments[0].id_block, "is_hex_only", false);
                 this.value_hex = in_window.org.pkijs.getValue(arguments[0].id_block, "value_hex", new ArrayBuffer(0));
-                // #endregion   
+                // #endregion
 
                 this.tag_class = in_window.org.pkijs.getValue(arguments[0].id_block, "tag_class", (-1));
                 this.tag_number = in_window.org.pkijs.getValue(arguments[0].id_block, "tag_number", (-1));
@@ -657,24 +657,24 @@ function(in_window)
         /// <param name="input_offset" type="Number">Offset in ASN.1 BER encoded array where decoding should be started</param>
         /// <param name="input_length" type="Number">Maximum length of array of bytes which can be using in this function</param>
 
-        // #region Basic check for parameters 
+        // #region Basic check for parameters
         if(check_buffer_params.call(this, input_buffer, input_offset, input_length) === false)
             return (-1);
-        // #endregion 
+        // #endregion
 
-        // #region Getting Uint8Array from ArrayBuffer 
+        // #region Getting Uint8Array from ArrayBuffer
         var int_buffer = new Uint8Array(input_buffer, input_offset, input_length);
-        // #endregion 
+        // #endregion
 
-        // #region Initial checks 
+        // #region Initial checks
         if(int_buffer.length == 0)
         {
             this.error = "Zero buffer length";
             return (-1);
         }
-        // #endregion 
+        // #endregion
 
-        // #region Find tag class 
+        // #region Find tag class
         var tag_class_mask = int_buffer[0] & 0xC0;
 
         switch(tag_class_mask)
@@ -695,25 +695,25 @@ function(in_window)
                 this.error = "Unknown tag class";
                 return ( -1 );
         }
-        // #endregion 
+        // #endregion
 
-        // #region Find it's constructed or not 
+        // #region Find it's constructed or not
         this.is_constructed = (int_buffer[0] & 0x20) == 0x20;
-        // #endregion 
+        // #endregion
 
-        // #region Find tag number 
+        // #region Find tag number
         this.is_hex_only = false;
 
         var tag_number_mask = int_buffer[0] & 0x1F;
 
         // #region Simple case (tag number < 31)
-        if(tag_number_mask != 0x1F) 
+        if(tag_number_mask != 0x1F)
         {
             this.tag_number = (tag_number_mask);
             this.block_length = 1;
         }
-            // #endregion 
-        // #region Tag number bigger or equal to 31 
+            // #endregion
+        // #region Tag number bigger or equal to 31
         else
         {
             var count = 1;
@@ -747,13 +747,13 @@ function(in_window)
                     this.value_hex = new ArrayBuffer(tag_number_buffer_max_length);
                     int_tag_number_buffer = new Uint8Array(this.value_hex);
                 }
-                // #endregion 
+                // #endregion
             }
 
             this.block_length = (count + 1);
             int_tag_number_buffer[count - 1] = int_buffer[count] & 0x7F; // Write last byte to buffer
 
-            // #region Cut buffer 
+            // #region Cut buffer
             var temp_buffer = new ArrayBuffer(count);
             var temp_buffer_view = new Uint8Array(temp_buffer);
             for(var i = 0; i < count; i++)
@@ -762,9 +762,9 @@ function(in_window)
             this.value_hex = new ArrayBuffer(count);
             int_tag_number_buffer = new Uint8Array(this.value_hex);
             int_tag_number_buffer.set(temp_buffer_view);
-            // #endregion 
+            // #endregion
 
-            // #region Try to convert long tag number to short form 
+            // #region Try to convert long tag number to short form
             if(this.block_length <= 9)
                 this.tag_number = util_frombase(int_tag_number_buffer, 7);
             else
@@ -772,12 +772,12 @@ function(in_window)
                 this.is_hex_only = true;
                 this.warnings.push("Tag too long, represented as hex-coded");
             }
-            // #endregion 
+            // #endregion
         }
-        // #endregion 
-        // #endregion 
+        // #endregion
+        // #endregion
 
-        // #region Check if constructed encoding was using for primitive type 
+        // #region Check if constructed encoding was using for primitive type
         if(((this.tag_class == 1)) &&
             (this.is_constructed))
         {
@@ -801,7 +801,7 @@ function(in_window)
                     ;
             }
         }
-        // #endregion 
+        // #endregion
 
         return ( input_offset + this.block_length ); // Return current offset in input buffer
     };
@@ -821,9 +821,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of length block class 
+    // #region Declaration of length block class
     //**************************************************************************************
     local.length_block =
     function()
@@ -866,16 +866,16 @@ function(in_window)
         /// <param name="input_offset" type="Number">Offset in ASN.1 BER encoded array where decoding should be started</param>
         /// <param name="input_length" type="Number">Maximum length of array of bytes which can be using in this function</param>
 
-        // #region Basic check for parameters 
+        // #region Basic check for parameters
         if(check_buffer_params.call(this, input_buffer, input_offset, input_length) === false)
             return (-1);
-        // #endregion 
+        // #endregion
 
-        // #region Getting Uint8Array from ArrayBuffer 
+        // #region Getting Uint8Array from ArrayBuffer
         var int_buffer = new Uint8Array(input_buffer, input_offset, input_length);
-        // #endregion 
+        // #endregion
 
-        // #region Initial checks 
+        // #region Initial checks
         if(int_buffer.length == 0)
         {
             this.error = "Zero buffer length";
@@ -887,34 +887,34 @@ function(in_window)
             this.error = "Length block 0xFF is reserved by standard";
             return (-1);
         }
-        // #endregion 
+        // #endregion
 
-        // #region Check for length form type 
+        // #region Check for length form type
         this.is_indefinite_form = int_buffer[0] == 0x80;
-        // #endregion 
+        // #endregion
 
-        // #region Stop working in case of indefinite length form 
+        // #region Stop working in case of indefinite length form
         if(this.is_indefinite_form == true)
         {
             this.block_length = 1;
             return (input_offset + this.block_length);
         }
-        // #endregion 
+        // #endregion
 
-        // #region Check is long form of length encoding using 
+        // #region Check is long form of length encoding using
         this.long_form_used = !!(int_buffer[0] & 0x80);
-        // #endregion 
+        // #endregion
 
-        // #region Stop working in case of short form of length value 
+        // #region Stop working in case of short form of length value
         if(this.long_form_used == false)
         {
             this.length = (int_buffer[0]);
             this.block_length = 1;
             return (input_offset + this.block_length);
         }
-        // #endregion 
+        // #endregion
 
-        // #region Calculate length value in case of long form 
+        // #region Calculate length value in case of long form
         var count = int_buffer[0] & 0x7F;
 
         if(count > 8) // Too big length value
@@ -943,7 +943,7 @@ function(in_window)
             this.warnings.push("Unneccesary usage of long length form");
 
         this.block_length = count + 1;
-        // #endregion 
+        // #endregion
 
         return (input_offset + this.block_length); // Return current offset in input buffer
     };
@@ -1030,9 +1030,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of value block class 
+    // #region Declaration of value block class
     //**************************************************************************************
     local.value_block =
     function()
@@ -1064,9 +1064,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of basic ASN.1 block class 
+    // #region Declaration of basic ASN.1 block class
     //**************************************************************************************
     in_window.org.pkijs.asn1.ASN1_block =
     function()
@@ -1195,9 +1195,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of basic block for all PRIMITIVE types 
+    // #region Declaration of basic block for all PRIMITIVE types
     //**************************************************************************************
     local.ASN1_PRIMITIVE_value_block =
     function()
@@ -1208,21 +1208,21 @@ function(in_window)
 
         if(arguments[0] instanceof Object)
         {
-            // #region Variables from "hex_block" class 
+            // #region Variables from "hex_block" class
             if("value_hex" in arguments[0])
                 this.value_hex = util_copybuf(arguments[0].value_hex);
             else
                 this.value_hex = new ArrayBuffer(0);
 
             this.is_hex_only = in_window.org.pkijs.getValue(arguments[0], "is_hex_only", true);
-            // #endregion 
+            // #endregion
         }
         else
         {
-            // #region Variables from "hex_block" class 
+            // #region Variables from "hex_block" class
             this.value_hex = new ArrayBuffer(0);
             this.is_hex_only = true;
-            // #endregion 
+            // #endregion
         }
     };
     //**************************************************************************************
@@ -1237,30 +1237,30 @@ function(in_window)
         /// <param name="input_offset" type="Number">Offset in ASN.1 BER encoded array where decoding should be started</param>
         /// <param name="input_length" type="Number">Maximum length of array of bytes which can be using in this function</param>
 
-        // #region Basic check for parameters 
+        // #region Basic check for parameters
         if(check_buffer_params.call(this, input_buffer, input_offset, input_length) === false)
             return (-1);
-        // #endregion 
+        // #endregion
 
-        // #region Getting Uint8Array from ArrayBuffer 
+        // #region Getting Uint8Array from ArrayBuffer
         var int_buffer = new Uint8Array(input_buffer, input_offset, input_length);
-        // #endregion 
+        // #endregion
 
-        // #region Initial checks 
+        // #region Initial checks
         if(int_buffer.length == 0)
         {
             this.warnings.push("Zero buffer length");
             return input_offset;
         }
-        // #endregion 
+        // #endregion
 
-        // #region Copy input buffer into internal buffer 
+        // #region Copy input buffer into internal buffer
         this.value_hex = new ArrayBuffer(int_buffer.length);
         var value_hex_view = new Uint8Array(this.value_hex);
 
         for(var i = 0; i < int_buffer.length; i++)
             value_hex_view[i] = int_buffer[i];
-        // #endregion 
+        // #endregion
 
         this.block_length = input_length;
 
@@ -1332,9 +1332,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of basic block for all CONSTRUCTED types 
+    // #region Declaration of basic block for all CONSTRUCTED types
     //**************************************************************************************
     local.ASN1_CONSTRUCTED_value_block =
     function()
@@ -1366,29 +1366,29 @@ function(in_window)
         /// <param name="input_offset" type="Number">Offset in ASN.1 BER encoded array where decoding should be started</param>
         /// <param name="input_length" type="Number">Maximum length of array of bytes which can be using in this function</param>
 
-        // #region Store initial offset and length 
+        // #region Store initial offset and length
         var initial_offset = input_offset;
         var initial_length = input_length;
-        // #endregion 
+        // #endregion
 
-        // #region Basic check for parameters 
+        // #region Basic check for parameters
         if(check_buffer_params.call(this, input_buffer, input_offset, input_length) === false)
             return (-1);
-        // #endregion 
+        // #endregion
 
-        // #region Getting Uint8Array from ArrayBuffer 
+        // #region Getting Uint8Array from ArrayBuffer
         var int_buffer = new Uint8Array(input_buffer, input_offset, input_length);
-        // #endregion 
+        // #endregion
 
-        // #region Initial checks 
+        // #region Initial checks
         if(int_buffer.length == 0)
         {
             this.warnings.push("Zero buffer length");
             return input_offset;
         }
-        // #endregion 
+        // #endregion
 
-        // #region Aux function 
+        // #region Aux function
         function check_len(_indefinite_length, _length)
         {
             if(_indefinite_length == true)
@@ -1396,7 +1396,7 @@ function(in_window)
 
             return _length;
         }
-        // #endregion 
+        // #endregion
 
         var current_offset = input_offset;
 
@@ -1429,9 +1429,9 @@ function(in_window)
                 this.warnings.push("No EOC block encoded");
         }
 
-        // #region Copy "input_buffer" to "value_before_decode" 
+        // #region Copy "input_buffer" to "value_before_decode"
         this.value_before_decode = util_copybuf_offset(input_buffer, initial_offset, initial_length);
-        // #endregion 
+        // #endregion
 
         return current_offset;
     };
@@ -1543,7 +1543,7 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region Declaration of ASN.1 EOC type class
     //**************************************************************************************
@@ -1564,9 +1564,9 @@ function(in_window)
         /// <param name="input_offset" type="Number">Offset in ASN.1 BER encoded array where decoding should be started</param>
         /// <param name="input_length" type="Number">Maximum length of array of bytes which can be using in this function</param>
 
-        // #region There is no "value block" for EOC type and we need to return the same offset 
+        // #region There is no "value block" for EOC type and we need to return the same offset
         return input_offset;
-        // #endregion 
+        // #endregion
     };
     //**************************************************************************************
     local.EOC_value_block.prototype.toBER =
@@ -1632,7 +1632,7 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region Declaration of ASN.1 BOOLEAN type class
     //**************************************************************************************
@@ -1645,7 +1645,7 @@ function(in_window)
         {
             this.value = in_window.org.pkijs.getValue(arguments[0], "value", false);
 
-            // #region Variables from hex_block class 
+            // #region Variables from hex_block class
             this.is_hex_only = in_window.org.pkijs.getValue(arguments[0], "is_hex_only", false);
             if("value_hex" in arguments[0])
                 this.value_hex = util_copybuf(arguments[0].value_hex);
@@ -1658,16 +1658,16 @@ function(in_window)
                     view[0] = 0xFF;
                 }
             }
-            // #endregion 
+            // #endregion
         }
         else
         {
             this.value = false;
 
-            // #region Variables from hex_block class 
+            // #region Variables from hex_block class
             this.is_hex_only = false;
             this.value_hex = new ArrayBuffer(1);
-            // #endregion 
+            // #endregion
         }
     };
     //**************************************************************************************
@@ -1682,14 +1682,14 @@ function(in_window)
         /// <param name="input_offset" type="Number">Offset in ASN.1 BER encoded array where decoding should be started</param>
         /// <param name="input_length" type="Number">Maximum length of array of bytes which can be using in this function</param>
 
-        // #region Basic check for parameters 
+        // #region Basic check for parameters
         if(check_buffer_params.call(this, input_buffer, input_offset, input_length) === false)
             return (-1);
-        // #endregion 
+        // #endregion
 
-        // #region Getting Uint8Array from ArrayBuffer 
+        // #region Getting Uint8Array from ArrayBuffer
         var int_buffer = new Uint8Array(input_buffer, input_offset, input_length);
-        // #endregion 
+        // #endregion
 
         if(input_length > 1)
             this.warnings.push("BOOLEAN value encoded in more then 1 octet");
@@ -1698,13 +1698,13 @@ function(in_window)
 
         this.is_hex_only = true;
 
-        // #region Copy input buffer to internal array 
+        // #region Copy input buffer to internal array
         this.value_hex = new ArrayBuffer(int_buffer.length);
         var view = new Uint8Array(this.value_hex);
 
         for(var i = 0; i < int_buffer.length; i++)
             view[i] = int_buffer[i];
-        // #endregion 
+        // #endregion
 
         this.block_length = input_length;
 
@@ -1780,7 +1780,7 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region Declaration of ASN.1 SEQUENCE and SET type classes
     //**************************************************************************************
@@ -1848,9 +1848,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of ASN.1 NULL type class 
+    // #region Declaration of ASN.1 NULL type class
     //**************************************************************************************
     in_window.org.pkijs.asn1.NULL =
     function()
@@ -1927,9 +1927,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of ASN.1 OCTETSTRING type class 
+    // #region Declaration of ASN.1 OCTETSTRING type class
     //**************************************************************************************
     local.OCTETSTRING_value_block =
     function()
@@ -1946,22 +1946,22 @@ function(in_window)
         {
             this.is_constructed = in_window.org.pkijs.getValue(arguments[0], "is_constructed", false);
 
-            // #region Variables from hex_block type 
+            // #region Variables from hex_block type
             this.is_hex_only = in_window.org.pkijs.getValue(arguments[0], "is_hex_only", false);
             if("value_hex" in arguments[0])
                 this.value_hex = util_copybuf(arguments[0].value_hex);
             else
                 this.value_hex = new ArrayBuffer(0);
-            // #endregion 
+            // #endregion
         }
         else
         {
             this.is_constructed = false;
 
-            // #region Variables from hex_block type 
+            // #region Variables from hex_block type
             this.is_hex_only = false;
             this.value_hex = new ArrayBuffer(0);
-            // #endregion 
+            // #endregion
         }
     };
     //**************************************************************************************
@@ -2096,7 +2096,7 @@ function(in_window)
         this.value_block.is_constructed = this.id_block.is_constructed;
         this.value_block.is_indefinite_form = this.len_block.is_indefinite_form;
 
-        // #region Ability to encode empty OCTET STRING 
+        // #region Ability to encode empty OCTET STRING
         if(input_length == 0)
         {
             if(this.id_block.error.length == 0)
@@ -2107,7 +2107,7 @@ function(in_window)
 
             return input_offset;
         }
-        // #endregion 
+        // #endregion
 
         return in_window.org.pkijs.asn1.ASN1_block.prototype.fromBER.call(this, input_buffer, input_offset, input_length);
     };
@@ -2136,20 +2136,20 @@ function(in_window)
         /// <summaryChecking that two OCTETSTRINGs are equal></summary>
         /// <param name="octetString" type="in_window.org.pkijs.asn1.OCTETSTRING">The OCTETSTRING to compare with</param>
 
-        // #region Check input type 
+        // #region Check input type
         if((octetString instanceof in_window.org.pkijs.asn1.OCTETSTRING) == false)
             return false;
-        // #endregion 
+        // #endregion
 
-        // #region Compare two JSON strings 
+        // #region Compare two JSON strings
         if(JSON.stringify(this) != JSON.stringify(octetString))
             return false;
-        // #endregion 
+        // #endregion
 
         return true;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region Declaration of ASN.1 BITSTRING type class
     //**************************************************************************************
@@ -2163,7 +2163,7 @@ function(in_window)
             this.unused_bits = in_window.org.pkijs.getValue(arguments[0], "unused_bits", 0);
             this.is_constructed = in_window.org.pkijs.getValue(arguments[0], "is_constructed", false);
 
-            // #region Variables from hex_block type 
+            // #region Variables from hex_block type
             this.is_hex_only = in_window.org.pkijs.getValue(arguments[0], "is_hex_only", false);
 
             if("value_hex" in arguments[0])
@@ -2172,17 +2172,17 @@ function(in_window)
                 this.value_hex = new ArrayBuffer(0);
 
             this.block_length = this.value_hex.byteLength;
-            // #endregion 
+            // #endregion
         }
         else
         {
             this.unused_bits = 0;
             this.is_constructed = false;
 
-            // #region Variables from hex_block type 
+            // #region Variables from hex_block type
             this.is_hex_only = false;
             this.value_hex = new ArrayBuffer(0);
-            // #endregion 
+            // #endregion
         }
     };
     //**************************************************************************************
@@ -2197,14 +2197,14 @@ function(in_window)
         /// <param name="input_offset" type="Number">Offset in ASN.1 BER encoded array where decoding should be started</param>
         /// <param name="input_length" type="Number">Maximum length of array of bytes which can be using in this function</param>
 
-        // #region Ability to decode zero-length BITSTRING value 
+        // #region Ability to decode zero-length BITSTRING value
         if(input_length == 0)
             return input_offset;
-        // #endregion 
+        // #endregion
 
         var result_offset = (-1);
 
-        // #region If the BISTRING supposed to be a constructed value 
+        // #region If the BISTRING supposed to be a constructed value
         if(this.is_constructed == true)
         {
             result_offset = local.ASN1_CONSTRUCTED_value_block.prototype.fromBER.call(this, input_buffer, input_offset, input_length);
@@ -2250,14 +2250,14 @@ function(in_window)
 
             return result_offset;
         }
-            // #endregion 
+            // #endregion
         // #region If the BITSTRING supposed to be a primitive value
         else
         {
-            // #region Basic check for parameters 
+            // #region Basic check for parameters
             if(check_buffer_params.call(this, input_buffer, input_offset, input_length) === false)
                 return (-1);
-            // #endregion 
+            // #endregion
 
             var int_buffer = new Uint8Array(input_buffer, input_offset, input_length);
 
@@ -2268,18 +2268,18 @@ function(in_window)
                 return (-1);
             }
 
-            // #region Copy input buffer to internal buffer 
+            // #region Copy input buffer to internal buffer
             this.value_hex = new ArrayBuffer(int_buffer.length - 1);
             var view = new Uint8Array(this.value_hex);
             for(var i = 0; i < (input_length - 1) ; i++)
                 view[i] = int_buffer[i + 1];
-            // #endregion 
+            // #endregion
 
             this.block_length = int_buffer.length;
 
             return (input_offset + input_length);
         }
-        // #endregion 
+        // #endregion
     };
     //**************************************************************************************
     local.BITSTRING_value_block.prototype.toBER =
@@ -2371,10 +2371,10 @@ function(in_window)
         /// <param name="input_offset" type="Number">Offset in ASN.1 BER encoded array where decoding should be started</param>
         /// <param name="input_length" type="Number">Maximum length of array of bytes which can be using in this function</param>
 
-        // #region Ability to encode empty BITSTRING 
+        // #region Ability to encode empty BITSTRING
         if(input_length == 0)
             return input_offset;
-        // #endregion 
+        // #endregion
 
         this.value_block.is_constructed = this.id_block.is_constructed;
         this.value_block.is_indefinite_form = this.len_block.is_indefinite_form;
@@ -2394,9 +2394,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of ASN.1 INTEGER type class 
+    // #region Declaration of ASN.1 INTEGER type class
     //**************************************************************************************
     local.INTEGER_value_block =
     function()
@@ -2407,7 +2407,7 @@ function(in_window)
         {
             this.value_dec = in_window.org.pkijs.getValue(arguments[0], "value", 0);
 
-            // #region Variables from hex_block type 
+            // #region Variables from hex_block type
             this.is_hex_only = in_window.org.pkijs.getValue(arguments[0], "is_hex_only", false);
             if("value_hex" in arguments[0])
             {
@@ -2420,16 +2420,16 @@ function(in_window)
             }
             else
                 this.value_hex = util_encode_tc(this.value_dec);
-            // #endregion 
+            // #endregion
         }
         else
         {
             this.value_dec = 0;
 
-            // #region Variables from hex_block type 
+            // #region Variables from hex_block type
             this.is_hex_only = false;
             this.value_hex = new ArrayBuffer(0);
-            // #endregion 
+            // #endregion
         }
     };
     //**************************************************************************************
@@ -2573,9 +2573,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of ASN.1 ENUMERATED type class 
+    // #region Declaration of ASN.1 ENUMERATED type class
     //**************************************************************************************
     in_window.org.pkijs.asn1.ENUMERATED =
     function()
@@ -2609,9 +2609,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of ASN.1 OBJECT IDENTIFIER type class 
+    // #region Declaration of ASN.1 OBJECT IDENTIFIER type class
     //**************************************************************************************
     local.SID_value_block =
     function()
@@ -2652,10 +2652,10 @@ function(in_window)
         if(input_length == 0)
             return input_offset;
 
-        // #region Basic check for parameters 
+        // #region Basic check for parameters
         if(check_buffer_params.call(this, input_buffer, input_offset, input_length) === false)
             return (-1);
-        // #endregion 
+        // #endregion
 
         var int_buffer = new Uint8Array(input_buffer, input_offset, input_length);
 
@@ -2672,7 +2672,7 @@ function(in_window)
                 break;
         }
 
-        // #region Ajust size of value_hex buffer 
+        // #region Ajust size of value_hex buffer
         var temp_value_hex = new ArrayBuffer(this.block_length);
         var temp_view = new Uint8Array(temp_value_hex);
 
@@ -2681,7 +2681,7 @@ function(in_window)
 
         this.value_hex = util_copybuf(temp_value_hex);
         view = new Uint8Array(this.value_hex);
-        // #endregion   
+        // #endregion
 
         if((int_buffer[this.block_length - 1] & 0x80) != 0x00)
         {
@@ -3041,9 +3041,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion   
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of all string's classes 
+    // #region Declaration of all string's classes
     //**************************************************************************************
     local.UTF8STRING_value_block =
     function()
@@ -3887,9 +3887,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of all date and time classes 
+    // #region Declaration of all date and time classes
     //**************************************************************************************
     in_window.org.pkijs.asn1.UTCTIME =
     function()
@@ -3903,7 +3903,7 @@ function(in_window)
         this.minute = 0;
         this.second = 0;
 
-        // #region Create UTCTIME from ASN.1 UTC string value 
+        // #region Create UTCTIME from ASN.1 UTC string value
         if((arguments[0] instanceof Object) && ("value" in arguments[0]))
         {
             in_window.org.pkijs.asn1.UTCTIME.prototype.fromString.call(this, arguments[0].value);
@@ -3914,14 +3914,14 @@ function(in_window)
             for(var i = 0; i < arguments[0].value.length; i++)
                 view[i] = arguments[0].value.charCodeAt(i);
         }
-        // #endregion 
-        // #region Create UTCTIME from JavaScript Date type 
+        // #endregion
+        // #region Create UTCTIME from JavaScript Date type
         if((arguments[0] instanceof Object) && ("value_date" in arguments[0]))
         {
             in_window.org.pkijs.asn1.UTCTIME.prototype.fromDate.call(this, arguments[0].value_date);
             this.value_block.value_hex = in_window.org.pkijs.asn1.UTCTIME.prototype.toBuffer.call(this);
         }
-        // #endregion 
+        // #endregion
 
         this.id_block.tag_class = 1; // UNIVERSAL
         this.id_block.tag_number = 23; // UTCTIME
@@ -4003,7 +4003,7 @@ function(in_window)
     {
         /// <summary>Create "UTCTime" ASN.1 type from JavaScript "String" type</summary>
 
-        // #region Parse input string 
+        // #region Parse input string
         var parser = /(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})Z/ig;
         var parser_array = parser.exec(input_string);
         if(parser_array === null)
@@ -4011,9 +4011,9 @@ function(in_window)
             this.error = "Wrong input string for convertion";
             return;
         }
-        // #endregion 
+        // #endregion
 
-        // #region Store parsed values 
+        // #region Store parsed values
         var year = parseInt(parser_array[1], 10);
         if(year >= 50)
             this.year = 1900 + year;
@@ -4025,7 +4025,7 @@ function(in_window)
         this.hour = parseInt(parser_array[4], 10);
         this.minute = parseInt(parser_array[5], 10);
         this.second = parseInt(parser_array[6], 10);
-        // #endregion 
+        // #endregion
     };
     //**************************************************************************************
     in_window.org.pkijs.asn1.UTCTIME.prototype.toString =
@@ -4083,7 +4083,7 @@ function(in_window)
         this.second = 0;
         this.millisecond = 0;
 
-        // #region Create GeneralizedTime from ASN.1 string value 
+        // #region Create GeneralizedTime from ASN.1 string value
         if((arguments[0] instanceof Object) && ("value" in arguments[0]))
         {
             in_window.org.pkijs.asn1.GENERALIZEDTIME.prototype.fromString.call(this, arguments[0].value);
@@ -4094,14 +4094,14 @@ function(in_window)
             for(var i = 0; i < arguments[0].value.length; i++)
                 view[i] = arguments[0].value.charCodeAt(i);
         }
-        // #endregion 
-        // #region Create GeneralizedTime from JavaScript Date type 
+        // #endregion
+        // #region Create GeneralizedTime from JavaScript Date type
         if((arguments[0] instanceof Object) && ("value_date" in arguments[0]))
         {
             in_window.org.pkijs.asn1.GENERALIZEDTIME.prototype.fromDate.call(this, arguments[0].value_date);
             this.value_block.value_hex = in_window.org.pkijs.asn1.GENERALIZEDTIME.prototype.toBuffer.call(this);
         }
-        // #endregion 
+        // #endregion
 
         this.id_block.tag_class = 1; // UNIVERSAL
         this.id_block.tag_number = 24; // GENERALIZEDTIME
@@ -4184,7 +4184,7 @@ function(in_window)
     {
         /// <summary>Create "GeneralizedTime" ASN.1 type from JavaScript "String" type</summary>
 
-        // #region Initial variables 
+        // #region Initial variables
         var isUTC = false;
 
         var timeString = "";
@@ -4195,17 +4195,17 @@ function(in_window)
 
         var hourDifference = 0;
         var minuteDifference = 0;
-        // #endregion 
+        // #endregion
 
-        // #region Convert as UTC time 
+        // #region Convert as UTC time
         if(input_string[input_string.length - 1] == "Z")
         {
             timeString = input_string.substr(0, input_string.length - 1);
 
             isUTC = true;
         }
-        // #endregion 
-        // #region Convert as local time 
+        // #endregion
+        // #region Convert as local time
         else
         {
             var number = new Number(input_string[input_string.length - 1]);
@@ -4215,9 +4215,9 @@ function(in_window)
 
             timeString = input_string;
         }
-        // #endregion 
+        // #endregion
 
-        // #region Check that we do not have a "+" and "-" symbols inside UTC time 
+        // #region Check that we do not have a "+" and "-" symbols inside UTC time
         if(isUTC)
         {
             if(timeString.indexOf("+") != (-1))
@@ -4226,7 +4226,7 @@ function(in_window)
             if(timeString.indexOf("-") != (-1))
                 throw new Error("Wrong input string for convertion");
         }
-        // #endregion 
+        // #endregion
         // #region Get "UTC time difference" in case of local time
         else
         {
@@ -4266,15 +4266,15 @@ function(in_window)
                 }
             }
         }
-        // #endregion 
+        // #endregion
 
-        // #region Get position of fraction point 
+        // #region Get position of fraction point
         var fractionPointPosition = timeString.indexOf("."); // Check for "full stop" symbol
         if(fractionPointPosition == (-1))
             fractionPointPosition = timeString.indexOf(","); // Check for "comma" symbol
-        // #endregion 
+        // #endregion
 
-        // #region Get fraction part 
+        // #region Get fraction part
         if(fractionPointPosition != (-1))
         {
             var fractionPartCheck = new Number("0" + timeString.substr(fractionPointPosition));
@@ -4288,9 +4288,9 @@ function(in_window)
         }
         else
             dateTimeString = timeString;
-        // #endregion 
+        // #endregion
 
-        // #region Parse internal date 
+        // #region Parse internal date
         switch(true)
         {
             case (dateTimeString.length == 8): // "YYYYMMDD"
@@ -4337,9 +4337,9 @@ function(in_window)
             default:
                 throw new Error("Wrong input string for convertion");
         }
-        // #endregion 
+        // #endregion
 
-        // #region Put parsed values at right places 
+        // #region Put parsed values at right places
         var parser_array = parser.exec(dateTimeString);
         if(parser_array == null)
             throw new Error("Wrong input string for convertion");
@@ -4370,9 +4370,9 @@ function(in_window)
                     throw new Error("Wrong input string for convertion");
             }
         }
-        // #endregion 
+        // #endregion
 
-        // #region Get final date 
+        // #region Get final date
         if(isUTC == false)
         {
             var tempDate = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
@@ -4385,7 +4385,7 @@ function(in_window)
             this.second = tempDate.getUTCSeconds();
             this.millisecond = tempDate.getUTCMilliseconds();
         }
-        // #endregion 
+        // #endregion
     };
     //**************************************************************************************
     in_window.org.pkijs.asn1.GENERALIZEDTIME.prototype.toString =
@@ -4596,9 +4596,9 @@ function(in_window)
         return _object;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of special ASN.1 schema type CHOICE 
+    // #region Declaration of special ASN.1 schema type CHOICE
     //**************************************************************************************
     in_window.org.pkijs.asn1.CHOICE =
     function()
@@ -4610,9 +4610,9 @@ function(in_window)
         }
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of special ASN.1 schema type ANY 
+    // #region Declaration of special ASN.1 schema type ANY
     //**************************************************************************************
     in_window.org.pkijs.asn1.ANY =
     function()
@@ -4624,9 +4624,9 @@ function(in_window)
         }
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of special ASN.1 schema type REPEATED 
+    // #region Declaration of special ASN.1 schema type REPEATED
     //**************************************************************************************
     in_window.org.pkijs.asn1.REPEATED =
     function()
@@ -4640,7 +4640,7 @@ function(in_window)
         }
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region Major ASN.1 BER decoding function
     //**************************************************************************************
@@ -4648,7 +4648,7 @@ function(in_window)
     {
         var incoming_offset = input_offset; // Need to store initial offset since "input_offset" is changing in the function
 
-        // #region Local function changing a type for ASN.1 classes 
+        // #region Local function changing a type for ASN.1 classes
         function local_change_type(input_object, new_type)
         {
             if(input_object instanceof new_type)
@@ -4662,13 +4662,13 @@ function(in_window)
 
             return new_object;
         }
-        // #endregion 
+        // #endregion
 
-        // #region Create a basic ASN.1 type since we need to return errors and warnings from the function 
+        // #region Create a basic ASN.1 type since we need to return errors and warnings from the function
         var return_object = new in_window.org.pkijs.asn1.ASN1_block();
-        // #endregion 
+        // #endregion
 
-        // #region Basic check for parameters 
+        // #region Basic check for parameters
         if(check_buffer_params(input_buffer, input_offset, input_length) === false)
         {
             return_object.error = "Wrong input parameters";
@@ -4677,13 +4677,13 @@ function(in_window)
                 result: return_object
             };
         }
-        // #endregion 
+        // #endregion
 
-        // #region Getting Uint8Array from ArrayBuffer 
+        // #region Getting Uint8Array from ArrayBuffer
         var int_buffer = new Uint8Array(input_buffer, input_offset, input_length);
-        // #endregion 
+        // #endregion
 
-        // #region Initial checks 
+        // #region Initial checks
         if(int_buffer.length == 0)
         {
             this.error = "Zero buffer length";
@@ -4692,9 +4692,9 @@ function(in_window)
                 result: return_object
             };
         }
-        // #endregion 
+        // #endregion
 
-        // #region Decode indentifcation block of ASN.1 BER structure 
+        // #region Decode indentifcation block of ASN.1 BER structure
         var result_offset = return_object.id_block.fromBER(input_buffer, input_offset, input_length);
         return_object.warnings.concat(return_object.id_block.warnings);
         if(result_offset == (-1))
@@ -4708,9 +4708,9 @@ function(in_window)
 
         input_offset = result_offset;
         input_length -= return_object.id_block.block_length;
-        // #endregion 
+        // #endregion
 
-        // #region Decode length block of ASN.1 BER structure 
+        // #region Decode length block of ASN.1 BER structure
         result_offset = return_object.len_block.fromBER(input_buffer, input_offset, input_length);
         return_object.warnings.concat(return_object.len_block.warnings);
         if(result_offset == (-1))
@@ -4724,9 +4724,9 @@ function(in_window)
 
         input_offset = result_offset;
         input_length -= return_object.len_block.block_length;
-        // #endregion 
+        // #endregion
 
-        // #region Check for usign indefinite length form in encoding for primitive types 
+        // #region Check for usign indefinite length form in encoding for primitive types
         if((return_object.id_block.is_constructed == false) &&
            (return_object.len_block.is_indefinite_form == true))
         {
@@ -4736,16 +4736,16 @@ function(in_window)
                 result: return_object
             };
         }
-        // #endregion 
+        // #endregion
 
-        // #region Switch ASN.1 block type 
+        // #region Switch ASN.1 block type
         var new_asn1_type = in_window.org.pkijs.asn1.ASN1_block;
 
         switch(return_object.id_block.tag_class)
         {
-            // #region UNIVERSAL 
-            case 1: 
-                // #region Check for reserved tag numbers 
+            // #region UNIVERSAL
+            case 1:
+                // #region Check for reserved tag numbers
                 if((return_object.id_block.tag_number >= 37) &&
                    (return_object.id_block.is_hex_only == false))
                 {
@@ -4755,13 +4755,13 @@ function(in_window)
                         result: return_object
                     };
                 }
-                // #endregion 
+                // #endregion
 
                 switch(return_object.id_block.tag_number)
                 {
-                    // #region EOC type 
+                    // #region EOC type
                     case 0:
-                        // #region Check for EOC type 
+                        // #region Check for EOC type
                         if((return_object.id_block.is_constructed == true) &&
                            (return_object.len_block.length > 0))
                         {
@@ -4771,58 +4771,58 @@ function(in_window)
                                 result: return_object
                             };
                         }
-                        // #endregion 
+                        // #endregion
 
                         new_asn1_type = in_window.org.pkijs.asn1.EOC;
 
                         break;
-                        // #endregion 
-                    // #region BOOLEAN type 
+                        // #endregion
+                    // #region BOOLEAN type
                     case 1:
                         new_asn1_type = in_window.org.pkijs.asn1.BOOLEAN;
                         break;
-                    // #endregion 
-                    // #region INTEGER type 
+                    // #endregion
+                    // #region INTEGER type
                     case 2:
                         new_asn1_type = in_window.org.pkijs.asn1.INTEGER;
                         break;
-                    // #endregion 
-                    // #region BITSTRING type 
+                    // #endregion
+                    // #region BITSTRING type
                     case 3:
                         new_asn1_type = in_window.org.pkijs.asn1.BITSTRING;
                         break;
-                    // #endregion 
-                    // #region OCTETSTRING type 
+                    // #endregion
+                    // #region OCTETSTRING type
                     case 4:
                         new_asn1_type = in_window.org.pkijs.asn1.OCTETSTRING;
                         break;
-                    // #endregion 
-                    // #region NULL type 
+                    // #endregion
+                    // #region NULL type
                     case 5:
                         new_asn1_type = in_window.org.pkijs.asn1.NULL;
                         break;
-                    // #endregion 
-                    // #region OBJECT IDENTIFIER type 
+                    // #endregion
+                    // #region OBJECT IDENTIFIER type
                     case 6:
                         new_asn1_type = in_window.org.pkijs.asn1.OID;
                         break;
-                    // #endregion 
-                    // #region ENUMERATED type 
+                    // #endregion
+                    // #region ENUMERATED type
                     case 10:
                         new_asn1_type = in_window.org.pkijs.asn1.ENUMERATED;
                         break;
-                    // #endregion 
-                    // #region UTF8STRING type 
+                    // #endregion
+                    // #region UTF8STRING type
                     case 12:
                         new_asn1_type = in_window.org.pkijs.asn1.UTF8STRING;
                         break;
-                    // #endregion 
-                    // #region TIME type 
+                    // #endregion
+                    // #region TIME type
                     case 14:
                         new_asn1_type = in_window.org.pkijs.asn1.TIME;
                         break;
-                    // #endregion 
-                    // #region ASN.1 reserved type 
+                    // #endregion
+                    // #region ASN.1 reserved type
                     case 15:
                         return_object.error = "[UNIVERSAL 15] is reserved by ASN.1 standard";
                         return {
@@ -4830,103 +4830,103 @@ function(in_window)
                             result: return_object
                         };
                         break;
-                    // #endregion 
-                    // #region SEQUENCE type 
+                    // #endregion
+                    // #region SEQUENCE type
                     case 16:
                         new_asn1_type = in_window.org.pkijs.asn1.SEQUENCE;
                         break;
-                    // #endregion 
-                    // #region SET type 
+                    // #endregion
+                    // #region SET type
                     case 17:
                         new_asn1_type = in_window.org.pkijs.asn1.SET;
                         break;
-                    // #endregion 
-                    // #region NUMERICSTRING type 
+                    // #endregion
+                    // #region NUMERICSTRING type
                     case 18:
                         new_asn1_type = in_window.org.pkijs.asn1.NUMERICSTRING;
                         break;
-                    // #endregion 
-                    // #region PRINTABLESTRING type 
+                    // #endregion
+                    // #region PRINTABLESTRING type
                     case 19:
                         new_asn1_type = in_window.org.pkijs.asn1.PRINTABLESTRING;
                         break;
-                    // #endregion 
-                    // #region TELETEXSTRING type 
+                    // #endregion
+                    // #region TELETEXSTRING type
                     case 20:
                         new_asn1_type = in_window.org.pkijs.asn1.TELETEXSTRING;
                         break;
-                    // #endregion 
-                    // #region VIDEOTEXSTRING type 
+                    // #endregion
+                    // #region VIDEOTEXSTRING type
                     case 21:
                         new_asn1_type = in_window.org.pkijs.asn1.VIDEOTEXSTRING;
                         break;
-                    // #endregion 
-                    // #region IA5STRING type 
+                    // #endregion
+                    // #region IA5STRING type
                     case 22:
                         new_asn1_type = in_window.org.pkijs.asn1.IA5STRING;
                         break;
-                    // #endregion 
-                    // #region UTCTIME type 
+                    // #endregion
+                    // #region UTCTIME type
                     case 23:
                         new_asn1_type = in_window.org.pkijs.asn1.UTCTIME;
                         break;
-                    // #endregion 
-                    // #region GENERALIZEDTIME type 
+                    // #endregion
+                    // #region GENERALIZEDTIME type
                     case 24:
                         new_asn1_type = in_window.org.pkijs.asn1.GENERALIZEDTIME;
                         break;
-                    // #endregion 
-                    // #region GRAPHICSTRING type 
+                    // #endregion
+                    // #region GRAPHICSTRING type
                     case 25:
                         new_asn1_type = in_window.org.pkijs.asn1.GRAPHICSTRING;
                         break;
-                    // #endregion 
-                    // #region VISIBLESTRING type 
+                    // #endregion
+                    // #region VISIBLESTRING type
                     case 26:
                         new_asn1_type = in_window.org.pkijs.asn1.VISIBLESTRING;
                         break;
-                    // #endregion 
-                    // #region GENERALSTRING type 
+                    // #endregion
+                    // #region GENERALSTRING type
                     case 27:
                         new_asn1_type = in_window.org.pkijs.asn1.GENERALSTRING;
                         break;
-                    // #endregion 
-                    // #region UNIVERSALSTRING type 
+                    // #endregion
+                    // #region UNIVERSALSTRING type
                     case 28:
                         new_asn1_type = in_window.org.pkijs.asn1.UNIVERSALSTRING;
                         break;
-                    // #endregion 
-                    // #region CHARACTERSTRING type 
+                    // #endregion
+                    // #region CHARACTERSTRING type
                     case 29:
                         new_asn1_type = in_window.org.pkijs.asn1.CHARACTERSTRING;
                         break;
-                    // #endregion 
-                    // #region BMPSTRING type 
+                    // #endregion
+                    // #region BMPSTRING type
                     case 30:
                         new_asn1_type = in_window.org.pkijs.asn1.BMPSTRING;
                         break;
-                    // #endregion 
-                    // #region DATE type 
+                    // #endregion
+                    // #region DATE type
                     case 31:
                         new_asn1_type = in_window.org.pkijs.asn1.DATE;
                         break;
-                    // #endregion 
-                    // #region TIMEOFDAY type 
+                    // #endregion
+                    // #region TIMEOFDAY type
                     case 32:
                         new_asn1_type = in_window.org.pkijs.asn1.TIMEOFDAY;
                         break;
-                    // #endregion 
-                    // #region DATE-TIME type 
+                    // #endregion
+                    // #region DATE-TIME type
                     case 33:
                         new_asn1_type = in_window.org.pkijs.asn1.DATETIME;
                         break;
-                    // #endregion 
-                    // #region DURATION type 
+                    // #endregion
+                    // #region DURATION type
                     case 34:
                         new_asn1_type = in_window.org.pkijs.asn1.DURATION;
                         break;
-                    // #endregion 
-                    // #region default 
+                    // #endregion
+                    // #region default
                     default:
                         {
                             var new_object;
@@ -4944,11 +4944,11 @@ function(in_window)
 
                             result_offset = return_object.fromBER(input_buffer, input_offset, input_length);
                         }
-                    // #endregion 
+                    // #endregion
                 }
                 break;
-            // #endregion 
-            // #region All other tag classes 
+            // #endregion
+            // #region All other tag classes
             case 2: // APPLICATION
             case 3: // CONTEXT-SPECIFIC
             case 4: // PRIVATE
@@ -4959,18 +4959,18 @@ function(in_window)
                     else
                         new_asn1_type = in_window.org.pkijs.asn1.ASN1_PRIMITIVE;
                 }
-            // #endregion 
+            // #endregion
         }
-        // #endregion 
+        // #endregion
 
-        // #region Change type and perform BER decoding 
+        // #region Change type and perform BER decoding
         return_object = local_change_type(return_object, new_asn1_type);
         result_offset = return_object.fromBER(input_buffer, input_offset, (return_object.len_block.is_indefinite_form == true) ? input_length : return_object.len_block.length);
-        // #endregion 
+        // #endregion
 
-        // #region Coping incoming buffer for entire ASN.1 block 
+        // #region Coping incoming buffer for entire ASN.1 block
         return_object.value_before_decode = util_copybuf_offset(input_buffer, incoming_offset, return_object.block_length);
-        // #endregion 
+        // #endregion
 
         return {
             offset: result_offset,
@@ -4978,7 +4978,7 @@ function(in_window)
         };
     }
     //**************************************************************************************
-    in_window.org.pkijs.fromBER = 
+    in_window.org.pkijs.fromBER =
     function(input_buffer)
     {
         /// <summary>Major function for decoding ASN.1 BER array into internal library structuries</summary>
@@ -4998,14 +4998,14 @@ function(in_window)
         return fromBER_raw(input_buffer, 0, input_buffer.byteLength);
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Major scheme verification function 
+    // #region Major scheme verification function
     //**************************************************************************************
     in_window.org.pkijs.compareSchema =
     function(root, input_asn1_data, input_asn1_schema)
     {
-        // #region Special case for CHOICE schema element type 
+        // #region Special case for CHOICE schema element type
         if(input_asn1_schema instanceof in_window.org.pkijs.asn1.CHOICE)
         {
             var choice_result = false;
@@ -5035,24 +5035,24 @@ function(in_window)
                 return _result;
             }
         }
-        // #endregion 
+        // #endregion
 
-        // #region Special case for ANY schema element type 
+        // #region Special case for ANY schema element type
         if(input_asn1_schema instanceof in_window.org.pkijs.asn1.ANY)
         {
-            // #region Add named component of ASN.1 schema 
+            // #region Add named component of ASN.1 schema
             if(input_asn1_schema.hasOwnProperty('name'))
                 root[input_asn1_schema.name] = input_asn1_data;
-            // #endregion 
+            // #endregion
 
             return {
                 verified: true,
                 result: root
             };
         }
-        // #endregion 
+        // #endregion
 
-        // #region Initial check 
+        // #region Initial check
         if((root instanceof Object) === false)
             return {
                 verified: false,
@@ -5076,10 +5076,10 @@ function(in_window)
                 verified: false,
                 result: { error: "Wrong ASN.1 schema" }
             };
-        // #endregion 
+        // #endregion
 
-        // #region Comparing id_block properties in ASN.1 data and ASN.1 schema 
-        // #region Encode and decode ASN.1 schema id_block 
+        // #region Comparing id_block properties in ASN.1 data and ASN.1 schema
+        // #region Encode and decode ASN.1 schema id_block
         /// <remarks>This encoding/decoding is neccessary because could be an errors in schema definition</remarks>
         if(('fromBER' in input_asn1_schema.id_block) === false)
             return {
@@ -5106,9 +5106,9 @@ function(in_window)
                 verified: false,
                 result: { error: "Error decoding id_block for ASN.1 schema" }
             };
-        // #endregion 
+        // #endregion
 
-        // #region tag_class 
+        // #region tag_class
         if(input_asn1_schema.id_block.hasOwnProperty('tag_class') === false)
             return {
                 verified: false,
@@ -5120,8 +5120,8 @@ function(in_window)
                 verified: false,
                 result: root
             };
-        // #endregion 
-        // #region tag_number 
+        // #endregion
+        // #region tag_number
         if(input_asn1_schema.id_block.hasOwnProperty('tag_number') === false)
             return {
                 verified: false,
@@ -5133,8 +5133,8 @@ function(in_window)
                 verified: false,
                 result: root
             };
-        // #endregion 
-        // #region is_constructed 
+        // #endregion
+        // #region is_constructed
         if(input_asn1_schema.id_block.hasOwnProperty('is_constructed') === false)
             return {
                 verified: false,
@@ -5146,8 +5146,8 @@ function(in_window)
                 verified: false,
                 result: root
             };
-        // #endregion 
-        // #region is_hex_only 
+        // #endregion
+        // #region is_hex_only
         if(('is_hex_only' in input_asn1_schema.id_block) === false) // Since 'is_hex_only' is an inhirited property
             return {
                 verified: false,
@@ -5159,8 +5159,8 @@ function(in_window)
                 verified: false,
                 result: root
             };
-        // #endregion 
-        // #region value_hex 
+        // #endregion
+        // #region value_hex
         if(input_asn1_schema.id_block.is_hex_only === true)
         {
             if(('value_hex' in input_asn1_schema.id_block) === false) // Since 'value_hex' is an inhirited property
@@ -5187,19 +5187,19 @@ function(in_window)
                     };
             }
         }
-        // #endregion 
-        // #endregion 
+        // #endregion
+        // #endregion
 
-        // #region Add named component of ASN.1 schema 
+        // #region Add named component of ASN.1 schema
         if(input_asn1_schema.hasOwnProperty('name'))
         {
             input_asn1_schema.name = input_asn1_schema.name.replace(/^\s+|\s+$/g, '');
             if(input_asn1_schema.name !== "")
                 root[input_asn1_schema.name] = input_asn1_data;
         }
-        // #endregion 
+        // #endregion
 
-        // #region Getting next ASN.1 block for comparition 
+        // #region Getting next ASN.1 block for comparition
         if(input_asn1_schema.id_block.is_constructed === true)
         {
             var admission = 0;
@@ -5213,16 +5213,16 @@ function(in_window)
                     max_length = input_asn1_data.value_block.value.length;
             }
 
-            // #region Special case when constructive value has no elements 
+            // #region Special case when constructive value has no elements
             if(max_length === 0)
                 return {
                     verified: true,
                     result: root
                 };
-            // #endregion 
+            // #endregion
 
             // #region Special case when "input_asn1_data" has no values and "input_asn1_schema" has all optional values
-            if((input_asn1_data.value_block.value.length === 0) && 
+            if((input_asn1_data.value_block.value.length === 0) &&
                (input_asn1_schema.value_block.value.length !== 0))
             {
                 var _optional = true;
@@ -5239,14 +5239,14 @@ function(in_window)
                 }
                 else
                 {
-                    // #region Delete early added name of block 
+                    // #region Delete early added name of block
                     if(input_asn1_schema.hasOwnProperty('name'))
                     {
                         input_asn1_schema.name = input_asn1_schema.name.replace(/^\s+|\s+$/g, '');
                         if(input_asn1_schema.name !== "")
                             delete root[input_asn1_schema.name];
                     }
-                    // #endregion 
+                    // #endregion
 
                     root.error = "Inconsistent object length";
 
@@ -5256,11 +5256,11 @@ function(in_window)
                     };
                 }
             }
-            // #endregion 
+            // #endregion
 
             for(var i = 0; i < max_length; i++)
             {
-                // #region Special case when there is an "optional" element of ASN.1 schema at the end 
+                // #region Special case when there is an "optional" element of ASN.1 schema at the end
                 if((i - admission) >= input_asn1_data.value_block.value.length)
                 {
                     if(input_asn1_schema.value_block.value[i].optional === false)
@@ -5272,7 +5272,7 @@ function(in_window)
 
                         root.error = "Inconsistent length between ASN.1 data and schema";
 
-                        // #region Delete early added name of block 
+                        // #region Delete early added name of block
                         if(input_asn1_schema.hasOwnProperty('name'))
                         {
                             input_asn1_schema.name = input_asn1_schema.name.replace(/^\s+|\s+$/g, '');
@@ -5282,15 +5282,15 @@ function(in_window)
                                 _result.name = input_asn1_schema.name;
                             }
                         }
-                        // #endregion 
+                        // #endregion
 
                         return _result;
                     }
                 }
-                    // #endregion 
+                    // #endregion
                 else
                 {
-                    // #region Special case for REPEATED type of ASN.1 schema element 
+                    // #region Special case for REPEATED type of ASN.1 schema element
                     if(input_asn1_schema.value_block.value[0] instanceof in_window.org.pkijs.asn1.REPEATED)
                     {
                         result = in_window.org.pkijs.compareSchema(root, input_asn1_data.value_block.value[i], input_asn1_schema.value_block.value[0].value);
@@ -5300,14 +5300,14 @@ function(in_window)
                                 admission++;
                             else
                             {
-                                // #region Delete early added name of block 
+                                // #region Delete early added name of block
                                 if(input_asn1_schema.hasOwnProperty('name'))
                                 {
                                     input_asn1_schema.name = input_asn1_schema.name.replace(/^\s+|\s+$/g, '');
                                     if(input_asn1_schema.name !== "")
                                         delete root[input_asn1_schema.name];
                                 }
-                                // #endregion 
+                                // #endregion
 
                                 return result;
                             }
@@ -5328,7 +5328,7 @@ function(in_window)
                             array_root[input_asn1_schema.value_block.value[0].name].push(input_asn1_data.value_block.value[i]);
                         }
                     }
-                        // #endregion 
+                        // #endregion
                     else
                     {
                         result = in_window.org.pkijs.compareSchema(root, input_asn1_data.value_block.value[i - admission], input_asn1_schema.value_block.value[i]);
@@ -5338,14 +5338,14 @@ function(in_window)
                                 admission++;
                             else
                             {
-                                // #region Delete early added name of block 
+                                // #region Delete early added name of block
                                 if(input_asn1_schema.hasOwnProperty('name'))
                                 {
                                     input_asn1_schema.name = input_asn1_schema.name.replace(/^\s+|\s+$/g, '');
                                     if(input_asn1_schema.name !== "")
                                         delete root[input_asn1_schema.name];
                                 }
-                                // #endregion 
+                                // #endregion
 
                                 return result;
                             }
@@ -5361,7 +5361,7 @@ function(in_window)
                     result: root
                 };
 
-                // #region Delete early added name of block 
+                // #region Delete early added name of block
                 if(input_asn1_schema.hasOwnProperty('name'))
                 {
                     input_asn1_schema.name = input_asn1_schema.name.replace(/^\s+|\s+$/g, '');
@@ -5371,7 +5371,7 @@ function(in_window)
                         _result.name = input_asn1_schema.name;
                     }
                 }
-                // #endregion 
+                // #endregion
 
                 return _result;
             }
@@ -5381,14 +5381,14 @@ function(in_window)
                 result: root
             };
         }
-        // #endregion 
+        // #endregion
         // #region Ability to parse internal value for primitive-encoded value (value of OCTETSTRING, for example)
         else
         {
             if( ("primitive_schema" in input_asn1_schema) &&
                 ("value_hex" in input_asn1_data.value_block) )
             {
-                // #region Decoding of raw ASN.1 data 
+                // #region Decoding of raw ASN.1 data
                 var asn1 = in_window.org.pkijs.fromBER(input_asn1_data.value_block.value_hex);
                 if(asn1.offset === (-1))
                 {
@@ -5397,7 +5397,7 @@ function(in_window)
                         result: asn1.result
                     };
 
-                    // #region Delete early added name of block 
+                    // #region Delete early added name of block
                     if(input_asn1_schema.hasOwnProperty('name'))
                     {
                         input_asn1_schema.name = input_asn1_schema.name.replace(/^\s+|\s+$/g, '');
@@ -5407,11 +5407,11 @@ function(in_window)
                             _result.name = input_asn1_schema.name;
                         }
                     }
-                    // #endregion 
+                    // #endregion
 
                     return _result;
                 }
-                // #endregion 
+                // #endregion
 
                 return in_window.org.pkijs.compareSchema(root, asn1.result, input_asn1_schema.primitive_schema);
             }
@@ -5421,46 +5421,46 @@ function(in_window)
                     result: root
                 };
         }
-        // #endregion 
+        // #endregion
     };
     //**************************************************************************************
     in_window.org.pkijs.verifySchema =
     function(input_buffer, input_schema)
     {
-        // #region Initial check 
+        // #region Initial check
         if((input_schema instanceof Object) === false)
             return {
                 verified: false,
                 result: { error: "Wrong ASN.1 schema type" }
             };
-        // #endregion 
+        // #endregion
 
-        // #region Decoding of raw ASN.1 data 
+        // #region Decoding of raw ASN.1 data
         var asn1 = in_window.org.pkijs.fromBER(input_buffer);
         if(asn1.offset === (-1))
             return {
                 verified: false,
                 result: asn1.result
             };
-        // #endregion 
+        // #endregion
 
-        // #region Compare ASN.1 struct with input schema 
+        // #region Compare ASN.1 struct with input schema
         return in_window.org.pkijs.compareSchema(asn1.result, asn1.result, input_schema);
-        // #endregion 
+        // #endregion
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Major function converting JSON to ASN.1 objects 
+    // #region Major function converting JSON to ASN.1 objects
     //**************************************************************************************
-    in_window.org.pkijs.fromJSON = 
+    in_window.org.pkijs.fromJSON =
     function(json)
     {
         /// <summary>Converting from JSON to ASN.1 objects</summary>
         /// <param name="json" type="String|Object">JSON string or object to convert to ASN.1 objects</param>
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
 }
 )(typeof exports !== "undefined" ? exports : window);

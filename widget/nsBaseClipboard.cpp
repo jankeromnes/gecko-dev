@@ -104,7 +104,7 @@ NS_IMETHODIMP
 nsBaseClipboard::HasDataMatchingFlavors(const char** aFlavorList,
                                         uint32_t aLength,
                                         int32_t aWhichClipboard,
-                                        bool* outResult) 
+                                        bool* outResult)
 {
   *outResult = true;  // say we always do.
   return NS_OK;

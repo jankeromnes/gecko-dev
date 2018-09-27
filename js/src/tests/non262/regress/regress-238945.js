@@ -13,6 +13,6 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 function f(){do;while(0)return}f()
- 
+
   actual = 'no error'
   reportCompare(expect, actual, summary);

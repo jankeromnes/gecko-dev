@@ -104,7 +104,7 @@ function run_test() {
         run_test_for(png2A);
         dump("Checking png2B...\n")
         run_test_for(png2B);
-}; 
+};
 
 
 function run_test_for(input) {

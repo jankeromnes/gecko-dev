@@ -69,8 +69,8 @@ must be one of the following:
       fails  The test passes if the images of the two renderings DO NOT
              meet the conditions specified in the <type>.
 
-      fails-if(condition) If the condition is met, the test passes if the 
-                          images of the two renderings DO NOT meet the 
+      fails-if(condition) If the condition is met, the test passes if the
+                          images of the two renderings DO NOT meet the
                           conditions of <type>. If the condition is not met,
                           the test passes if the conditions of <type> are met.
 
@@ -270,7 +270,7 @@ must be one of the following:
 
       ==     The test passes if the images of the two renderings are the
              SAME.
-      !=     The test passes if the images of the two renderings are 
+      !=     The test passes if the images of the two renderings are
              DIFFERENT.
       load   The test passes unconditionally if the page loads.  url_ref
              must be omitted, and the test cannot be marked as fails or
@@ -491,7 +491,7 @@ element, for example using this code:
     document.documentElement.className = "";
 
 
-Note that in layout tests it is often enough to trigger layout using 
+Note that in layout tests it is often enough to trigger layout using
     document.body.offsetWidth  // HTML example
 
 When possible, you should use this technique instead of making your

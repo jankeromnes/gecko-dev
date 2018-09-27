@@ -1,5 +1,5 @@
 #!/bin/sh
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -49,7 +49,7 @@ Display "***********************************************************************
         # Examine output file to see if test failed and keep track of number
         # of failures and names of failed tests. This assumes that the test
         # uses our utility library for displaying information
-	
+
         outputCount=`cat ${testOut} | grep "per second"`
 
         if [ $? -ne 0 ]; then

@@ -11,7 +11,7 @@
 #endif
 #ifdef _WIN32
 #include <windows.h>
-#endif 
+#endif
 #ifdef XP_BEOS
 #include <OS.h>
 #endif

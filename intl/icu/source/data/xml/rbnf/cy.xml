@@ -16,6 +16,6 @@
                 <rbnfrule value="0">&amp; ' ' , ',' ;</rbnfrule>
             </ruleset>
         </rulesetGrouping>
- 
+
    </rbnf>
 </ldml>

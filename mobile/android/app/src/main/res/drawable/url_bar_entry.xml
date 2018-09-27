@@ -21,7 +21,7 @@
 
     <item gecko:state_private="true"
           android:drawable="@drawable/url_bar_entry_default_pb"/>
- 
+
     <!-- normal modes -->
     <item android:state_focused="true"
           android:drawable="@drawable/url_bar_entry_pressed"/>

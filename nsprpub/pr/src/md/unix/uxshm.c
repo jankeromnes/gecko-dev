@@ -14,7 +14,7 @@
 #include <prshm.h>
 #include <prerr.h>
 #include <prmem.h>
-#include "primpl.h"       
+#include "primpl.h"
 #include <fcntl.h>
 
 extern PRLogModuleInfo *_pr_shm_lm;
@@ -36,7 +36,7 @@ extern PRLogModuleInfo *_pr_shm_lm;
 #define _MD_CLOSE_SHARED_MEMORY _MD_CloseSharedMemory
 #define _MD_DELETE_SHARED_MEMORY  _MD_DeleteSharedMemory
 
-extern PRSharedMemory * _MD_OpenSharedMemory( 
+extern PRSharedMemory * _MD_OpenSharedMemory(
     const char *name,
     PRSize      size,
     PRIntn      flags,
@@ -52,16 +52,16 @@ extern PRSharedMemory * _MD_OpenSharedMemory(
     if ( PR_FAILURE == rc )
     {
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_OpenSharedMemory(): _PR_MakeNativeIPCName() failed: %s", name ));
         return( NULL );
     }
 
     shm = PR_NEWZAP( PRSharedMemory );
-    if ( NULL == shm ) 
+    if ( NULL == shm )
     {
         PR_SetError(PR_OUT_OF_MEMORY_ERROR, 0 );
-        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG, ( "PR_OpenSharedMemory: New PRSharedMemory out of memory")); 
+        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG, ( "PR_OpenSharedMemory: New PRSharedMemory out of memory"));
         return( NULL );
     }
 
@@ -69,7 +69,7 @@ extern PRSharedMemory * _MD_OpenSharedMemory(
     if ( NULL == shm->ipcname )
     {
         PR_SetError(PR_OUT_OF_MEMORY_ERROR, 0 );
-        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG, ( "PR_OpenSharedMemory: New shm->ipcname out of memory")); 
+        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG, ( "PR_OpenSharedMemory: New shm->ipcname out of memory"));
         PR_DELETE( shm );
         return( NULL );
     }
@@ -89,7 +89,7 @@ extern PRSharedMemory * _MD_OpenSharedMemory(
             PR_FREEIF( shm->ipcname );
             PR_DELETE( shm );
             return( NULL );
-        } 
+        }
         if ( close(osfd) == -1 ) {
             _PR_MD_MAP_CLOSE_ERROR( errno );
             PR_FREEIF( shm->ipcname );
@@ -104,7 +104,7 @@ extern PRSharedMemory * _MD_OpenSharedMemory(
     {
         rc = PR_FAILURE;
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_OpenSharedMemory(): ftok() failed on name: %s", shm->ipcname));
         PR_FREEIF( shm->ipcname );
         PR_DELETE( shm );
@@ -119,18 +119,18 @@ extern PRSharedMemory * _MD_OpenSharedMemory(
         }
         if ((errno == EEXIST) && (flags & PR_SHM_EXCL)) {
             PR_SetError( PR_FILE_EXISTS_ERROR, errno );
-            PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+            PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
                 ("_MD_OpenSharedMemory(): shmget() exclusive failed, errno: %d", errno));
             PR_FREEIF(shm->ipcname);
             PR_DELETE(shm);
             return(NULL);
         }
-    } 
+    }
 
     shm->id = shmget( key, shm->size, shm->mode );
     if ( -1 == shm->id ) {
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_OpenSharedMemory(): shmget() failed, errno: %d", errno));
         PR_FREEIF(shm->ipcname);
         PR_DELETE(shm);
@@ -153,14 +153,14 @@ extern void * _MD_AttachSharedMemory( PRSharedMemory *shm, PRIntn flags )
     if ( (void*)-1 == addr )
     {
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
-            ("_MD_AttachSharedMemory(): shmat() failed on name: %s, OsError: %d", 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
+            ("_MD_AttachSharedMemory(): shmat() failed on name: %s, OsError: %d",
                 shm->ipcname, PR_GetOSError() ));
         addr = NULL;
     }
 
     return addr;
-}    
+}
 
 extern PRStatus _MD_DetachSharedMemory( PRSharedMemory *shm, void *addr )
 {
@@ -174,12 +174,12 @@ extern PRStatus _MD_DetachSharedMemory( PRSharedMemory *shm, void *addr )
     {
         rc = PR_FAILURE;
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_DetachSharedMemory(): shmdt() failed on name: %s", shm->ipcname ));
     }
 
     return rc;
-}    
+}
 
 extern PRStatus _MD_CloseSharedMemory( PRSharedMemory *shm )
 {
@@ -189,7 +189,7 @@ extern PRStatus _MD_CloseSharedMemory( PRSharedMemory *shm )
     PR_DELETE(shm);
 
     return PR_SUCCESS;
-}    
+}
 
 extern PRStatus _MD_DeleteSharedMemory( const char *name )
 {
@@ -203,18 +203,18 @@ extern PRStatus _MD_DeleteSharedMemory( const char *name )
     if ( PR_FAILURE == rc )
     {
         PR_SetError( PR_UNKNOWN_ERROR , errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_DeleteSharedMemory(): _PR_MakeNativeIPCName() failed: %s", name ));
         return(PR_FAILURE);
     }
 
-    /* create the file first */ 
+    /* create the file first */
     {
         int osfd = open( ipcname, (O_RDWR | O_CREAT), 0666 );
         if ( -1 == osfd ) {
             _PR_MD_MAP_OPEN_ERROR( errno );
             return( PR_FAILURE );
-        } 
+        }
         if ( close(osfd) == -1 ) {
             _PR_MD_MAP_CLOSE_ERROR( errno );
             return( PR_FAILURE );
@@ -227,7 +227,7 @@ extern PRStatus _MD_DeleteSharedMemory( const char *name )
     {
         rc = PR_FAILURE;
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_DeleteSharedMemory(): ftok() failed on name: %s", ipcname));
     }
 
@@ -239,7 +239,7 @@ extern PRStatus _MD_DeleteSharedMemory( const char *name )
 #endif
     if ( -1 == id ) {
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_DeleteSharedMemory(): shmget() failed, errno: %d", errno));
         return(PR_FAILURE);
     }
@@ -248,7 +248,7 @@ extern PRStatus _MD_DeleteSharedMemory( const char *name )
     if ( -1 == urc )
     {
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_DeleteSharedMemory(): shmctl() failed on name: %s", ipcname ));
         return(PR_FAILURE);
     }
@@ -256,7 +256,7 @@ extern PRStatus _MD_DeleteSharedMemory( const char *name )
     urc = unlink( ipcname );
     if ( -1 == urc ) {
         _PR_MD_MAP_UNLINK_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_DeleteSharedMemory(): unlink() failed: %s", ipcname ));
         return(PR_FAILURE);
     }
@@ -280,7 +280,7 @@ struct _MDSharedMemory {
     int     handle;
 };
 
-extern PRSharedMemory * _MD_OpenSharedMemory( 
+extern PRSharedMemory * _MD_OpenSharedMemory(
     const char *name,
     PRSize      size,
     PRIntn      flags,
@@ -296,16 +296,16 @@ extern PRSharedMemory * _MD_OpenSharedMemory(
     if ( PR_FAILURE == rc )
     {
         PR_SetError( PR_UNKNOWN_ERROR , errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_OpenSharedMemory(): _PR_MakeNativeIPCName() failed: %s", name ));
         return( NULL );
     }
 
     shm = PR_NEWZAP( PRSharedMemory );
-    if ( NULL == shm ) 
+    if ( NULL == shm )
     {
         PR_SetError(PR_OUT_OF_MEMORY_ERROR, 0 );
-        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG, ( "PR_OpenSharedMemory: New PRSharedMemory out of memory")); 
+        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG, ( "PR_OpenSharedMemory: New PRSharedMemory out of memory"));
         return( NULL );
     }
 
@@ -313,13 +313,13 @@ extern PRSharedMemory * _MD_OpenSharedMemory(
     if ( NULL == shm->ipcname )
     {
         PR_SetError(PR_OUT_OF_MEMORY_ERROR, 0 );
-        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG, ( "PR_OpenSharedMemory: New shm->ipcname out of memory")); 
+        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG, ( "PR_OpenSharedMemory: New shm->ipcname out of memory"));
         return( NULL );
     }
 
     /* copy args to struct */
     strcpy( shm->ipcname, ipcname );
-    shm->size = size; 
+    shm->size = size;
     shm->mode = mode;
     shm->flags = flags;
     shm->ident = _PR_SHM_IDENT;
@@ -329,7 +329,7 @@ extern PRSharedMemory * _MD_OpenSharedMemory(
     */
     if ( flags & PR_SHM_CREATE )  {
         int oflag = (O_CREAT | O_RDWR);
-        
+
         if ( flags & PR_SHM_EXCL )
             oflag |= O_EXCL;
         shm->id = shm_open( shm->ipcname, oflag, shm->mode );
@@ -339,9 +339,9 @@ extern PRSharedMemory * _MD_OpenSharedMemory(
 
     if ( -1 == shm->id )  {
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_OpenSharedMemory(): shm_open failed: %s, OSError: %d",
-                shm->ipcname, PR_GetOSError())); 
+                shm->ipcname, PR_GetOSError()));
         PR_DELETE( shm->ipcname );
         PR_DELETE( shm );
         return(NULL);
@@ -350,7 +350,7 @@ extern PRSharedMemory * _MD_OpenSharedMemory(
     end = ftruncate( shm->id, shm->size );
     if ( -1 == end ) {
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG(_pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_OpenSharedMemory(): ftruncate failed, OSError: %d",
                 PR_GetOSError()));
         PR_DELETE( shm->ipcname );
@@ -375,17 +375,17 @@ extern void * _MD_AttachSharedMemory( PRSharedMemory *shm, PRIntn flags )
     if ((void*)-1 == addr )
     {
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_AttachSharedMemory(): mmap failed: %s, errno: %d",
                 shm->ipcname, PR_GetOSError()));
         addr = NULL;
     } else {
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_AttachSharedMemory(): name: %s, attached at: %p", shm->ipcname, addr));
     }
-    
+
     return addr;
-}    
+}
 
 extern PRStatus _MD_DetachSharedMemory( PRSharedMemory *shm, void *addr )
 {
@@ -399,30 +399,30 @@ extern PRStatus _MD_DetachSharedMemory( PRSharedMemory *shm, void *addr )
     {
         rc = PR_FAILURE;
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
-            ("_MD_DetachSharedMemory(): munmap failed: %s, errno: %d", 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
+            ("_MD_DetachSharedMemory(): munmap failed: %s, errno: %d",
                 shm->ipcname, PR_GetOSError()));
     }
     return rc;
-}    
+}
 
 extern PRStatus _MD_CloseSharedMemory( PRSharedMemory *shm )
 {
     int urc;
-    
+
     PR_ASSERT( shm->ident == _PR_SHM_IDENT );
 
     urc = close( shm->id );
     if ( -1 == urc ) {
         _PR_MD_MAP_CLOSE_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_CloseSharedMemory(): close() failed, error: %d", PR_GetOSError()));
         return(PR_FAILURE);
     }
     PR_DELETE( shm->ipcname );
     PR_DELETE( shm );
     return PR_SUCCESS;
-}    
+}
 
 extern PRStatus _MD_DeleteSharedMemory( const char *name )
 {
@@ -434,7 +434,7 @@ extern PRStatus _MD_DeleteSharedMemory( const char *name )
     if ( PR_FAILURE == rc )
     {
         PR_SetError( PR_UNKNOWN_ERROR , errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_OpenSharedMemory(): _PR_MakeNativeIPCName() failed: %s", name ));
         return rc;
     }
@@ -443,11 +443,11 @@ extern PRStatus _MD_DeleteSharedMemory( const char *name )
     if ( -1 == urc ) {
         rc = PR_FAILURE;
         _PR_MD_MAP_DEFAULT_ERROR( errno );
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
-            ("_MD_DeleteSharedMemory(): shm_unlink failed: %s, errno: %d", 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
+            ("_MD_DeleteSharedMemory(): shm_unlink failed: %s, errno: %d",
                 ipcname, PR_GetOSError()));
     } else {
-        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG, 
+        PR_LOG( _pr_shm_lm, PR_LOG_DEBUG,
             ("_MD_DeleteSharedMemory(): %s, success", ipcname));
     }
 
@@ -464,7 +464,7 @@ extern PRLogModuleInfo *_pr_shma_lm;
 
 #include <unistd.h>
 
-extern PRFileMap* _md_OpenAnonFileMap( 
+extern PRFileMap* _md_OpenAnonFileMap(
     const char *dirName,
     PRSize      size,
     PRFileMapProtect prot
@@ -530,7 +530,7 @@ extern PRFileMap* _md_OpenAnonFileMap(
 
     urc = unlink( genName );
 #if defined(SYMBIAN) && defined(__WINS__)
-    /* If it is being used by the system or another process, Symbian OS 
+    /* If it is being used by the system or another process, Symbian OS
      * Emulator(WINS) considers this an error. */
     if ( -1 == urc && EACCES != errno ) {
 #else
@@ -541,7 +541,7 @@ extern PRFileMap* _md_OpenAnonFileMap(
             ("_md_OpenAnonFileMap(): failed on unlink(), errno: %d", errno));
         PR_smprintf_free( genName );
         close( osfd );
-        goto Finished;        
+        goto Finished;
     }
     PR_LOG( _pr_shma_lm, PR_LOG_DEBUG,
         ("_md_OpenAnonFileMap(): unlink(): %s", genName ));
@@ -552,7 +552,7 @@ extern PRFileMap* _md_OpenAnonFileMap(
     if ( NULL == fd ) {
         PR_LOG( _pr_shma_lm, PR_LOG_DEBUG,
             ("_md_OpenAnonFileMap(): PR_ImportFile(): failed"));
-        goto Finished;        
+        goto Finished;
     }
     PR_LOG( _pr_shma_lm, PR_LOG_DEBUG,
         ("_md_OpenAnonFileMap(): fd: %p", fd ));
@@ -563,7 +563,7 @@ extern PRFileMap* _md_OpenAnonFileMap(
         PR_LOG( _pr_shma_lm, PR_LOG_DEBUG,
             ("_md_OpenAnonFileMap(): failed on ftruncate(), errno: %d", errno));
         PR_Close( fd );
-        goto Finished;        
+        goto Finished;
     }
     PR_LOG( _pr_shma_lm, PR_LOG_DEBUG,
         ("_md_OpenAnonFileMap(): ftruncate(): size: %d", size ));
@@ -574,14 +574,14 @@ extern PRFileMap* _md_OpenAnonFileMap(
         PR_LOG( _pr_shma_lm, PR_LOG_DEBUG,
             ("PR_OpenAnonFileMap(): failed"));
         PR_Close( fd );
-        goto Finished;        
+        goto Finished;
     }
     fm->md.isAnonFM = PR_TRUE; /* set fd close */
 
     PR_LOG( _pr_shma_lm, PR_LOG_DEBUG,
         ("_md_OpenAnonFileMap(): PR_CreateFileMap(): fm: %p", fm ));
 
-Finished:    
+Finished:
     return(fm);
 } /* end md_OpenAnonFileMap() */
 
@@ -598,10 +598,10 @@ extern PRStatus _md_ExportFileMapAsString(
 {
     PRIntn  written;
     PRIntn  prot = (PRIntn)fm->prot;
-    
+
     written = PR_snprintf( buf, bufSize, "%ld:%d",
         fm->fd->secret->md.osfd, prot );
-        
+
     return((written == -1)? PR_FAILURE : PR_SUCCESS);
 } /* end _md_ExportFileMapAsString() */
 
@@ -630,14 +630,14 @@ extern PRFileMap * _md_ImportFileMapFromString(
     rc = PR_GetOpenFileInfo64( fd, &info );
     if ( PR_FAILURE == rc )  {
         PR_LOG( _pr_shma_lm, PR_LOG_DEBUG,
-            ("_md_ImportFileMapFromString(): PR_GetOpenFileInfo64() failed"));    
+            ("_md_ImportFileMapFromString(): PR_GetOpenFileInfo64() failed"));
         goto Finished;
     }
 
     fm = PR_CreateFileMap( fd, info.size, (PRFileMapProtect)prot );
     if ( NULL == fm ) {
         PR_LOG( _pr_shma_lm, PR_LOG_DEBUG,
-            ("_md_ImportFileMapFromString(): PR_CreateFileMap() failed"));    
+            ("_md_ImportFileMapFromString(): PR_CreateFileMap() failed"));
     }
 
 Finished:

@@ -103,7 +103,7 @@ NS_IMETHODIMP nsOSHelperAppService::GetApplicationDescription(const nsACString& 
 
   nsresult rv = NS_ERROR_NOT_AVAILABLE;
 
-  CFStringRef schemeCFString = 
+  CFStringRef schemeCFString =
     ::CFStringCreateWithBytes(kCFAllocatorDefault,
                               (const UInt8 *)PromiseFlatCString(aScheme).get(),
                               aScheme.Length(),

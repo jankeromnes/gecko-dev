@@ -137,7 +137,7 @@ angle::Result VertexDeclarationCache::applyDeclaration(
                     }
 
                     UINT frequency = 1;
-                    
+
                     if (attributes[i].divisor == 0)
                     {
                         frequency = D3DSTREAMSOURCE_INDEXEDDATA | instances;
@@ -146,7 +146,7 @@ angle::Result VertexDeclarationCache::applyDeclaration(
                     {
                         frequency = D3DSTREAMSOURCE_INSTANCEDATA | attributes[i].divisor;
                     }
-                    
+
                     device->SetStreamSourceFreq(stream, frequency);
                     mInstancingEnabled = true;
                 }

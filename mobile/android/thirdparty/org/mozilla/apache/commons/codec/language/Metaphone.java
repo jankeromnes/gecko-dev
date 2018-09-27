@@ -6,9 +6,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,9 +22,9 @@ import org.mozilla.apache.commons.codec.EncoderException;
 import org.mozilla.apache.commons.codec.StringEncoder;
 
 /**
- * Encodes a string into a Metaphone value. 
+ * Encodes a string into a Metaphone value.
  * <p>
- * Initial Java implementation by <CITE>William B. Brogden. December, 1997</CITE>. 
+ * Initial Java implementation by <CITE>William B. Brogden. December, 1997</CITE>.
  * Permission given by <CITE>wbrogden</CITE> for code to be used anywhere.
  * </p>
  * <p>
@@ -32,19 +32,19 @@ import org.mozilla.apache.commons.codec.StringEncoder;
  * 39.</CITE>
  * </p>
  * <p>
- * Note, that this does not match the algorithm that ships with PHP, or the algorithm 
+ * Note, that this does not match the algorithm that ships with PHP, or the algorithm
  * found in the Perl <a href="http://search.cpan.org/~mschwern/Text-Metaphone-1.96/Metaphone.pm">Text:Metaphone-1.96</a>.
- * They have had undocumented changes from the originally published algorithm. 
+ * They have had undocumented changes from the originally published algorithm.
  * For more information, see <a href="https://issues.apache.org/jira/browse/CODEC-57">CODEC-57</a>.
  * </p>
- * 
+ *
  * @author Apache Software Foundation
  * @version $Id: Metaphone.java 1080867 2011-03-12 06:06:46Z ggregory $
  */
 public class Metaphone implements StringEncoder {
 
     /**
-     * Five values in the English language 
+     * Five values in the English language
      */
     private static final String VOWELS = "AEIOU" ;
 
@@ -89,15 +89,15 @@ public class Metaphone implements StringEncoder {
         if (txt.length() == 1) {
             return txt.toUpperCase(java.util.Locale.ENGLISH) ;
         }
-      
+
         char[] inwd = txt.toUpperCase(java.util.Locale.ENGLISH).toCharArray() ;
-      
+
         StringBuffer local = new StringBuffer(40); // manipulate
         StringBuffer code = new StringBuffer(10) ; //   output
         // handle initial 2 characters exceptions
         switch(inwd[0]) {
-        case 'K' : 
-        case 'G' : 
+        case 'K' :
+        case 'G' :
         case 'P' : /* looking for KN, etc*/
             if (inwd[1] == 'N') {
                 local.append(inwd, 1, inwd.length - 1);
@@ -114,7 +114,7 @@ public class Metaphone implements StringEncoder {
             break;
         case 'W' : /* looking for WR or WH */
             if (inwd[1] == 'R') {   // WR -> R
-                local.append(inwd, 1, inwd.length - 1); 
+                local.append(inwd, 1, inwd.length - 1);
                 break ;
             }
             if (inwd[1] == 'H') {
@@ -135,7 +135,7 @@ public class Metaphone implements StringEncoder {
         int wdsz = local.length();
         int n = 0 ;
 
-        while ((code.length() < this.getMaxCodeLen()) && 
+        while ((code.length() < this.getMaxCodeLen()) &&
                (n < wdsz) ) { // max code size of 4 works well
             char symb = local.charAt(n) ;
             // remove duplicate letters except C
@@ -144,12 +144,12 @@ public class Metaphone implements StringEncoder {
             } else { // not dup
                 switch(symb) {
                 case 'A' : case 'E' : case 'I' : case 'O' : case 'U' :
-                    if (n == 0) { 
+                    if (n == 0) {
                         code.append(symb);
                     }
                     break ; // only use vowel if leading char
                 case 'B' :
-                    if ( isPreviousChar(local, n, 'M') && 
+                    if ( isPreviousChar(local, n, 'M') &&
                          isLastChar(wdsz, n) ) { // B is silent if word ends in MB
                         break;
                     }
@@ -157,57 +157,57 @@ public class Metaphone implements StringEncoder {
                     break;
                 case 'C' : // lots of C special cases
                     /* discard if SCI, SCE or SCY */
-                    if ( isPreviousChar(local, n, 'S') && 
-                         !isLastChar(wdsz, n) && 
-                         (FRONTV.indexOf(local.charAt(n + 1)) >= 0) ) { 
+                    if ( isPreviousChar(local, n, 'S') &&
+                         !isLastChar(wdsz, n) &&
+                         (FRONTV.indexOf(local.charAt(n + 1)) >= 0) ) {
                         break;
                     }
                     if (regionMatch(local, n, "CIA")) { // "CIA" -> X
-                        code.append('X'); 
+                        code.append('X');
                         break;
                     }
-                    if (!isLastChar(wdsz, n) && 
+                    if (!isLastChar(wdsz, n) &&
                         (FRONTV.indexOf(local.charAt(n + 1)) >= 0)) {
                         code.append('S');
                         break; // CI,CE,CY -> S
                     }
                     if (isPreviousChar(local, n, 'S') &&
                         isNextChar(local, n, 'H') ) { // SCH->sk
-                        code.append('K') ; 
+                        code.append('K') ;
                         break ;
                     }
                     if (isNextChar(local, n, 'H')) { // detect CH
-                        if ((n == 0) && 
-                            (wdsz >= 3) && 
+                        if ((n == 0) &&
+                            (wdsz >= 3) &&
                             isVowel(local,2) ) { // CH consonant -> K consonant
                             code.append('K');
-                        } else { 
+                        } else {
                             code.append('X'); // CHvowel -> X
                         }
-                    } else { 
+                    } else {
                         code.append('K');
                     }
                     break ;
                 case 'D' :
-                    if (!isLastChar(wdsz, n + 1) && 
-                        isNextChar(local, n, 'G') && 
-                        (FRONTV.indexOf(local.charAt(n + 2)) >= 0)) { // DGE DGI DGY -> J 
+                    if (!isLastChar(wdsz, n + 1) &&
+                        isNextChar(local, n, 'G') &&
+                        (FRONTV.indexOf(local.charAt(n + 2)) >= 0)) { // DGE DGI DGY -> J
                         code.append('J'); n += 2 ;
-                    } else { 
+                    } else {
                         code.append('T');
                     }
                     break ;
                 case 'G' : // GH silent at end or before consonant
-                    if (isLastChar(wdsz, n + 1) && 
+                    if (isLastChar(wdsz, n + 1) &&
                         isNextChar(local, n, 'H')) {
                         break;
                     }
-                    if (!isLastChar(wdsz, n + 1) &&  
-                        isNextChar(local,n,'H') && 
+                    if (!isLastChar(wdsz, n + 1) &&
+                        isNextChar(local,n,'H') &&
                         !isVowel(local,n+2)) {
                         break;
                     }
-                    if ((n > 0) && 
+                    if ((n > 0) &&
                         ( regionMatch(local, n, "GN") ||
                           regionMatch(local, n, "GNED") ) ) {
                         break; // silent G
@@ -218,8 +218,8 @@ public class Metaphone implements StringEncoder {
                     } else {
                         hard = false ;
                     }
-                    if (!isLastChar(wdsz, n) && 
-                        (FRONTV.indexOf(local.charAt(n + 1)) >= 0) && 
+                    if (!isLastChar(wdsz, n) &&
+                        (FRONTV.indexOf(local.charAt(n + 1)) >= 0) &&
                         (!hard)) {
                         code.append('J');
                     } else {
@@ -230,7 +230,7 @@ public class Metaphone implements StringEncoder {
                     if (isLastChar(wdsz, n)) {
                         break ; // terminal H
                     }
-                    if ((n > 0) && 
+                    if ((n > 0) &&
                         (VARSON.indexOf(local.charAt(n - 1)) >= 0)) {
                         break;
                     }
@@ -238,13 +238,13 @@ public class Metaphone implements StringEncoder {
                         code.append('H'); // Hvowel
                     }
                     break;
-                case 'F': 
-                case 'J' : 
+                case 'F':
+                case 'J' :
                 case 'L' :
-                case 'M': 
-                case 'N' : 
+                case 'M':
+                case 'N' :
                 case 'R' :
-                    code.append(symb); 
+                    code.append(symb);
                     break;
                 case 'K' :
                     if (n > 0) { // not initial
@@ -267,8 +267,8 @@ public class Metaphone implements StringEncoder {
                     code.append('K');
                     break;
                 case 'S' :
-                    if (regionMatch(local,n,"SH") || 
-                        regionMatch(local,n,"SIO") || 
+                    if (regionMatch(local,n,"SH") ||
+                        regionMatch(local,n,"SIO") ||
                         regionMatch(local,n,"SIA")) {
                         code.append('X');
                     } else {
@@ -276,9 +276,9 @@ public class Metaphone implements StringEncoder {
                     }
                     break;
                 case 'T' :
-                    if (regionMatch(local,n,"TIA") || 
+                    if (regionMatch(local,n,"TIA") ||
                         regionMatch(local,n,"TIO")) {
-                        code.append('X'); 
+                        code.append('X');
                         break;
                     }
                     if (regionMatch(local,n,"TCH")) {
@@ -295,7 +295,7 @@ public class Metaphone implements StringEncoder {
                 case 'V' :
                     code.append('F'); break ;
                 case 'W' : case 'Y' : // silent if not followed by vowel
-                    if (!isLastChar(wdsz,n) && 
+                    if (!isLastChar(wdsz,n) &&
                         isVowel(local,n+1)) {
                         code.append(symb);
                     }
@@ -308,8 +308,8 @@ public class Metaphone implements StringEncoder {
                 } // end switch
                 n++ ;
             } // end else from symb != 'C'
-            if (code.length() > this.getMaxCodeLen()) { 
-                code.setLength(this.getMaxCodeLen()); 
+            if (code.length() > this.getMaxCodeLen()) {
+                code.setLength(this.getMaxCodeLen());
             }
         }
         return code.toString();
@@ -349,9 +349,9 @@ public class Metaphone implements StringEncoder {
 
     private boolean isLastChar(int wdsz, int n) {
         return n + 1 == wdsz;
-    } 
-    
-    
+    }
+
+
     /**
      * Encodes an Object using the metaphone algorithm.  This method
      * is provided in order to satisfy the requirements of the
@@ -359,26 +359,26 @@ public class Metaphone implements StringEncoder {
      * supplied object is not of type java.lang.String.
      *
      * @param pObject Object to encode
-     * @return An object (or type java.lang.String) containing the 
+     * @return An object (or type java.lang.String) containing the
      *         metaphone code which corresponds to the String supplied.
      * @throws EncoderException if the parameter supplied is not
      *                          of type java.lang.String
      */
     public Object encode(Object pObject) throws EncoderException {
         if (!(pObject instanceof String)) {
-            throw new EncoderException("Parameter supplied to Metaphone encode is not of type java.lang.String"); 
+            throw new EncoderException("Parameter supplied to Metaphone encode is not of type java.lang.String");
         }
         return metaphone((String) pObject);
     }
 
     /**
-     * Encodes a String using the Metaphone algorithm. 
+     * Encodes a String using the Metaphone algorithm.
      *
      * @param pString String object to encode
      * @return The metaphone code corresponding to the String supplied
      */
     public String encode(String pString) {
-        return metaphone(pString);   
+        return metaphone(pString);
     }
 
     /**
@@ -386,7 +386,7 @@ public class Metaphone implements StringEncoder {
      *
      * @param str1 First of two strings to compare
      * @param str2 Second of two strings to compare
-     * @return <code>true</code> if the metaphones of these strings are identical, 
+     * @return <code>true</code> if the metaphones of these strings are identical,
      *        <code>false</code> otherwise.
      */
     public boolean isMetaphoneEqual(String str1, String str2) {

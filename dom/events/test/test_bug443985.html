@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=443985
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=443985">Mozilla Bug 443985</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -45,19 +45,19 @@ function doTest() {
   var target = document.getElementById("testTarget");
   target.addEventListener("click", listenerForNoScroll, true);
   var me = document.createEvent("MouseEvent");
-  me.initMouseEvent("click", true, true, window, 0, 0, 0, 10, 10, 
+  me.initMouseEvent("click", true, true, window, 0, 0, 0, 10, 10,
                     false, false, false, false, 0, null);
   target.dispatchEvent(me);
   target.removeEventListener("click", listenerForNoScroll, true);
-  
+
   target.scrollIntoView(true);
   target.addEventListener("click", listenerForScroll, true);
   me = document.createEvent("MouseEvent");
-  me.initMouseEvent("click", true, true, window, 0, 0, 0, 10, 10, 
+  me.initMouseEvent("click", true, true, window, 0, 0, 0, 10, 10,
                     false, false, false, false, 0, null);
   target.dispatchEvent(me);
   target.addEventListener("click", listenerForNoScroll, true);
-  
+
   document.getElementsByTagName("a")[0].scrollIntoView(true);
   SimpleTest.finish();
 }

@@ -18,7 +18,7 @@ dummy: swig swig-python swig-ruby swig-perl swig-tcl install uninstall clean
 swig: swig-python swig-perl
 # swig-rub swig-tcl
 
-swig-python: 
+swig-python:
 	cd python && make -f Makefile-swig
 
 swig-ruby:

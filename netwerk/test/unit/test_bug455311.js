@@ -16,7 +16,7 @@ const ios = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
 var link;
 var linkURI;
 const newURI = ios.newURI("http://www.mozilla.org/");
-  
+
 function NotificationCallbacks(origURI, newURI)
 {
   this._origURI = origURI;

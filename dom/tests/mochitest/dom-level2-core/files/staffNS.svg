@@ -1,5 +1,5 @@
 <?xml version="1.0"?><?TEST-STYLE PIDATA?>
-<!DOCTYPE svg PUBLIC "STAFF" "staffNS.dtd" 
+<!DOCTYPE svg PUBLIC "STAFF" "staffNS.dtd"
 [
    <!ENTITY ent1 "es">
    <!ENTITY ent2 "1900 Dallas Road">
@@ -11,17 +11,17 @@
    <!NOTATION notation1 PUBLIC "notation1File">
    <!NOTATION notation2 SYSTEM "notation2File">
    <!ELEMENT svg (rect, script, employee+, emp:employee, employee*)>
-   <!ATTLIST svg 
+   <!ATTLIST svg
       xmlns CDATA #FIXED "http://www.w3.org/2000/svg"
       name CDATA #IMPLIED>
    <!ELEMENT rect EMPTY>
-   <!ATTLIST rect 
+   <!ATTLIST rect
       x CDATA #REQUIRED
       y CDATA #REQUIRED
       width CDATA #REQUIRED
       height CDATA #REQUIRED>
   <!ELEMENT script (#PCDATA)>
-  <!ATTLIST script type CDATA #IMPLIED>      
+  <!ATTLIST script type CDATA #IMPLIED>
   <!ENTITY svgunit SYSTEM "svgunit.js">
   <!ENTITY svgtest SYSTEM "svgtest.js">
 ]>
@@ -30,7 +30,7 @@
  <employee xmlns="http://www.nist.gov" xmlns:dmstc="http://www.usa.com">
   <employeeId>EMP0001</employeeId>
   <name>Margaret Martin</name>
-  <position>Accountant</position>           
+  <position>Accountant</position>
   <salary>56,000</salary>
   <gender>Female</gender>
   <address dmstc:domestic="Yes">1230 North Ave. Dallas, Texas 98551</address>

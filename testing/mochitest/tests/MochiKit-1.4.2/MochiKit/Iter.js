@@ -408,7 +408,7 @@ MochiKit.Base.update(MochiKit.Iter, {
         var rval;
         if (iterable instanceof Array) {
             return iterable.slice();
-        } 
+        }
         // this is necessary to avoid a Safari crash
         if (typeof(iterable) == "function" &&
                 !(iterable instanceof Function) &&

@@ -15,7 +15,7 @@
  * The creation of a component which implements this interface
  * will begin the session. Likewise, destruction of that object
  * will end the session.
- * 
+ *
  * @status
  */
 

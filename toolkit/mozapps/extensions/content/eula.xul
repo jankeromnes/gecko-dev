@@ -21,7 +21,7 @@
         onload="Startup();">
 
   <script type="application/javascript" src="chrome://mozapps/content/extensions/eula.js"/>
-  
+
   <stringbundleset id="extensionsSet">
     <stringbundle id="extensionsStrings" src="chrome://mozapps/locale/extensions/extensions.properties"/>
   </stringbundleset>
@@ -30,6 +30,6 @@
     <image id="icon"/>
     <label id="heading" flex="1"/>
   </hbox>
-  
+
   <textbox id="eula" multiline="true" readonly="true" flex="1"/>
 </dialog>

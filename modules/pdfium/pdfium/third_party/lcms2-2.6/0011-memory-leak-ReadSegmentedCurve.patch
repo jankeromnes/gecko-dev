@@ -5,10 +5,10 @@ index 15199c7..04dd0c4 100644
 @@ -3968,7 +3968,7 @@ cmsToneCurve* ReadSegmentedCurve(struct _cms_typehandler_struct* self, cmsIOHAND
              case cmsSigSampledCurveSeg: {
                  cmsUInt32Number Count;
- 
+
 -                if (!_cmsReadUInt32Number(io, &Count)) return NULL;
 +                if (!_cmsReadUInt32Number(io, &Count)) goto Error;
- 
+
                  Segments[i].nGridPoints = Count;
                  Segments[i].SampledPoints = (cmsFloat32Number*) _cmsCalloc(self ->ContextID, Count, sizeof(cmsFloat32Number));
 @@ -3987,7 +3987,7 @@ cmsToneCurve* ReadSegmentedCurve(struct _cms_typehandler_struct* self, cmsIOHAND
@@ -17,12 +17,12 @@ index 15199c7..04dd0c4 100644
                  }
 -                return NULL;
 +                goto Error;
- 
+
           }
       }
 @@ -4001,7 +4001,12 @@ cmsToneCurve* ReadSegmentedCurve(struct _cms_typehandler_struct* self, cmsIOHAND
       return Curve;
- 
+
  Error:
 -     if (Segments) _cmsFree(self ->ContextID, Segments);
 +     if (Segments) {
@@ -33,4 +33,4 @@ index 15199c7..04dd0c4 100644
 +     }
       return NULL;
  }
- 
+

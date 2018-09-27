@@ -270,7 +270,7 @@ pub trait UdpSocketExt {
     /// Execute an overlapped send I/O operation on this UDP socket.
     ///
     /// This function will issue an overlapped I/O write (via `WSASend`) on
-    /// this socket to the address it was previously connected to. The provided 
+    /// this socket to the address it was previously connected to. The provided
     /// buffer will be written when the operation completes and the given `OVERLAPPED`
     /// instance is used to track the overlapped operation.
     ///
@@ -298,7 +298,7 @@ pub trait UdpSocketExt {
                                  buf: &[u8],
                                  overlapped: *mut OVERLAPPED)
                                  -> io::Result<Option<usize>>;
- 
+
     /// Calls the `GetOverlappedResult` function to get the result of an
     /// overlapped operation for this handle.
     ///

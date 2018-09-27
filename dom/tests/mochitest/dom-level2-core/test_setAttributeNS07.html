@@ -36,13 +36,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -53,7 +53,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -72,15 +72,15 @@ var docName = 'setAttributeNS07';
 
 
 /**
-* 
-    The "setAttributeNS(namespaceURI,localName,value)" method raises a 
+*
+    The "setAttributeNS(namespaceURI,localName,value)" method raises a
    NAMESPACE_ERR DOMException if the "qualifiedName" has a
    value of "xmlns" and the namespaceURI is different from
    http://www.w3.org/2000/xmlns.
-   
-   Attempt to add an attribute with a "qualifiedName" of "xmlns" as the 
+
+   Attempt to add an attribute with a "qualifiedName" of "xmlns" as the
    on the first employee node.
-   An exception should be raised since the namespaceURI of this node is not 
+   An exception should be raised since the namespaceURI of this node is not
    http://www.w3.org/2000/xmlns.
 
 * @author NIST
@@ -97,7 +97,7 @@ function setAttributeNS07() {
       var doc;
       var elementList;
       var testAddr;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -105,7 +105,7 @@ function setAttributeNS07() {
       doc = load(docRef, "doc", "staffNS");
       elementList = doc.getElementsByTagName("employee");
       testAddr = elementList.item(0);
-      
+
 	{
 		success = false;
 		try {
@@ -125,12 +125,12 @@ function setAttributeNS07() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/setAttributeNS07</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

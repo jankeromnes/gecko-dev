@@ -15,7 +15,7 @@ async_test(t => {
                  <xsl:output method="html"/>
                  <xsl:param name="param">false</xsl:param>
                  <xsl:template match="/">
-                   <xsl:element name="script">parent.postMessage({test: 1, result: <xsl:value-of select="$param"/>}, "*");</xsl:element> 
+                   <xsl:element name="script">parent.postMessage({test: 1, result: <xsl:value-of select="$param"/>}, "*");</xsl:element>
                  </xsl:template>
                </xsl:stylesheet>
              </doc>`;
@@ -39,7 +39,7 @@ async_test(t => {
                  <xsl:output method="html"/>
                  <xsl:param name="param">false</xsl:param>
                  <xsl:template match="/">
-                   <xsl:element name="script">parent.postMessage({test: 2, result: <xsl:value-of select="$param"/>}, "*");</xsl:element> 
+                   <xsl:element name="script">parent.postMessage({test: 2, result: <xsl:value-of select="$param"/>}, "*");</xsl:element>
                  </xsl:template>
                </xsl:stylesheet>
              </doc>`;

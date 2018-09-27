@@ -18,19 +18,19 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var o;
 
   o = new Array();
 
   expect = undefined;
   o[0xffffffff] = 'end';
-  actual = o[-1];  
+  actual = o[-1];
   reportCompare(expect, actual, summary + ': 1');
 
   expect = 42;
   o['42'] = 42;
-  actual = o[42];  
+  actual = o[42];
   reportCompare(expect, actual, summary + ': 2');
 
   //
@@ -39,11 +39,11 @@ function test()
 
   expect = undefined;
   o[0xffffffff] = 'end';
-  actual = o[-1];  
+  actual = o[-1];
   reportCompare(expect, actual, summary + ': 3');
 
   expect = 42;
   o['42'] = 42;
-  actual = o[42];  
+  actual = o[42];
   reportCompare(expect, actual, summary + ': 4');
 }

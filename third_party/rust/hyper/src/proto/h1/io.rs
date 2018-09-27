@@ -240,7 +240,7 @@ pub trait MemRead {
     fn read_mem(&mut self, len: usize) -> Poll<Bytes, io::Error>;
 }
 
-impl<T, B> MemRead for Buffered<T, B> 
+impl<T, B> MemRead for Buffered<T, B>
 where
     T: AsyncRead + AsyncWrite,
     B: Buf,

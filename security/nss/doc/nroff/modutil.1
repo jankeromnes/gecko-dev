@@ -346,7 +346,7 @@ directly or by running a JAR file and install script\&. For the most basic case,
 .RS 4
 .\}
 .nf
-modutil \-add modulename \-libfile library\-file [\-ciphers cipher\-enable\-list] [\-mechanisms mechanism\-list] 
+modutil \-add modulename \-libfile library\-file [\-ciphers cipher\-enable\-list] [\-mechanisms mechanism\-list]
 .fi
 .if n \{\
 .RE
@@ -358,9 +358,9 @@ For example:
 .RS 4
 .\}
 .nf
-modutil \-dbdir sql:/home/my/sharednssdb \-add "Example PKCS #11 Module" \-libfile "/tmp/crypto\&.so" \-mechanisms RSA:DSA:RC2:RANDOM 
+modutil \-dbdir sql:/home/my/sharednssdb \-add "Example PKCS #11 Module" \-libfile "/tmp/crypto\&.so" \-mechanisms RSA:DSA:RC2:RANDOM
 
-Using database directory \&.\&.\&. 
+Using database directory \&.\&.\&.
 Module "Example PKCS #11 Module" added to database\&.
 .fi
 .if n \{\
@@ -378,26 +378,26 @@ The JAR installation script defines the setup information for each platform that
 .RS 4
 .\}
 .nf
-Platforms { 
-   Linux:5\&.4\&.08:x86 { 
-      ModuleName { "Example PKCS #11 Module" } 
-      ModuleFile { crypto\&.so } 
-      DefaultMechanismFlags{0x0000} 
-      CipherEnableFlags{0x0000} 
-      Files { 
-         crypto\&.so { 
-            Path{ /tmp/crypto\&.so } 
-         } 
-         setup\&.sh { 
-            Executable 
-            Path{ /tmp/setup\&.sh } 
-         } 
-      } 
-   } 
-   Linux:6\&.0\&.0:x86 { 
-      EquivalentPlatform { Linux:5\&.4\&.08:x86 } 
-   } 
-} 
+Platforms {
+   Linux:5\&.4\&.08:x86 {
+      ModuleName { "Example PKCS #11 Module" }
+      ModuleFile { crypto\&.so }
+      DefaultMechanismFlags{0x0000}
+      CipherEnableFlags{0x0000}
+      Files {
+         crypto\&.so {
+            Path{ /tmp/crypto\&.so }
+         }
+         setup\&.sh {
+            Executable
+            Path{ /tmp/setup\&.sh }
+         }
+      }
+   }
+   Linux:6\&.0\&.0:x86 {
+      EquivalentPlatform { Linux:5\&.4\&.08:x86 }
+   }
+}
 .fi
 .if n \{\
 .RE
@@ -413,10 +413,10 @@ argument\&.
 .nf
 modutil \-dbdir sql:/home/mt"jar\-install\-filey/sharednssdb \-jar install\&.jar \-installdir sql:/home/my/sharednssdb
 
-This installation JAR file was signed by: 
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- 
+This installation JAR file was signed by:
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
 
-**SUBJECT NAME** 
+**SUBJECT NAME**
 
 C=US, ST=California, L=Mountain View, CN=Cryptorific Inc\&., OU=Digital ID
 Class 3 \- Netscape Object Signing, OU="www\&.verisign\&.com/repository/CPS
@@ -425,21 +425,21 @@ Incorp\&. by Ref\&.,LIAB\&.LTD(c)9 6", OU=www\&.verisign\&.com/CPS Incorp\&.by R
 Organization, OU="VeriSign, Inc\&.", O=VeriSign Trust Network **ISSUER
 NAME**, OU=www\&.verisign\&.com/CPS Incorp\&.by Ref\&. LIABILITY LTD\&.(c)97
 VeriSign, OU=VeriSign Object Signing CA \- Class 3 Organization,
-OU="VeriSign, Inc\&.", O=VeriSign Trust Network 
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- 
+OU="VeriSign, Inc\&.", O=VeriSign Trust Network
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
 
-Do you wish to continue this installation? (y/n) y 
-Using installer script "installer_script" 
-Successfully parsed installation script 
-Current platform is Linux:5\&.4\&.08:x86 
-Using installation parameters for platform Linux:5\&.4\&.08:x86 
+Do you wish to continue this installation? (y/n) y
+Using installer script "installer_script"
+Successfully parsed installation script
+Current platform is Linux:5\&.4\&.08:x86
+Using installation parameters for platform Linux:5\&.4\&.08:x86
 Installed file crypto\&.so to /tmp/crypto\&.so
-Installed file setup\&.sh to \&./pk11inst\&.dir/setup\&.sh 
-Executing "\&./pk11inst\&.dir/setup\&.sh"\&.\&.\&. 
-"\&./pk11inst\&.dir/setup\&.sh" executed successfully 
-Installed module "Example PKCS #11 Module" into module database 
+Installed file setup\&.sh to \&./pk11inst\&.dir/setup\&.sh
+Executing "\&./pk11inst\&.dir/setup\&.sh"\&.\&.\&.
+"\&./pk11inst\&.dir/setup\&.sh" executed successfully
+Installed module "Example PKCS #11 Module" into module database
 
-Installation completed successfully 
+Installation completed successfully
 .fi
 .if n \{\
 .RE
@@ -473,7 +473,7 @@ database:
 .RS 4
 .\}
 .nf
-modutil \-delete modulename \-dbdir [sql:]directory 
+modutil \-delete modulename \-dbdir [sql:]directory
 .fi
 .if n \{\
 .RE
@@ -493,7 +493,7 @@ command\&.
 .RS 4
 .\}
 .nf
-modutil \-list [modulename] \-dbdir [sql:]directory 
+modutil \-list [modulename] \-dbdir [sql:]directory
 .fi
 .if n \{\
 .RE
@@ -505,7 +505,7 @@ Listing the modules shows the module name, their status, and other associated se
 .RS 4
 .\}
 .nf
-modutil \-list \-dbdir sql:/home/my/sharednssdb 
+modutil \-list \-dbdir sql:/home/my/sharednssdb
 
 Listing of PKCS #11 Modules
 \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
@@ -513,10 +513,10 @@ Listing of PKCS #11 Modules
          slots: 2 slots attached
         status: loaded
 
-         slot: NSS Internal Cryptographic Services                            
+         slot: NSS Internal Cryptographic Services
         token: NSS Generic Crypto Services
 
-         slot: NSS User Private Key and Certificate Services                  
+         slot: NSS User Private Key and Certificate Services
         token: NSS Certificate DB
 \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
 .fi
@@ -537,23 +537,23 @@ returns details information about the module itself, like supported cipher mecha
 \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
 Name: NSS Internal PKCS #11 Module
 Library file: **Internal ONLY module**
-Manufacturer: Mozilla Foundation              
-Description: NSS Internal Crypto Services    
+Manufacturer: Mozilla Foundation
+Description: NSS Internal Crypto Services
 PKCS #11 Version 2\&.20
 Library Version: 3\&.11
 Cipher Enable Flags: None
 Default Mechanism Flags: RSA:RC2:RC4:DES:DH:SHA1:MD5:MD2:SSL:TLS:AES
 
-  Slot: NSS Internal Cryptographic Services                            
+  Slot: NSS Internal Cryptographic Services
   Slot Mechanism Flags: RSA:RC2:RC4:DES:DH:SHA1:MD5:MD2:SSL:TLS:AES
-  Manufacturer: Mozilla Foundation              
+  Manufacturer: Mozilla Foundation
   Type: Software
   Version Number: 3\&.11
   Firmware Version: 0\&.0
   Status: Enabled
-  Token Name: NSS Generic Crypto Services     
-  Token Manufacturer: Mozilla Foundation              
-  Token Model: NSS 3           
+  Token Name: NSS Generic Crypto Services
+  Token Manufacturer: Mozilla Foundation
+  Token Model: NSS 3
   Token Serial Number: 0000000000000000
   Token Version: 4\&.0
   Token Firmware Version: 0\&.0
@@ -561,16 +561,16 @@ Default Mechanism Flags: RSA:RC2:RC4:DES:DH:SHA1:MD5:MD2:SSL:TLS:AES
   Login Type: Public (no login required)
   User Pin: NOT Initialized
 
-  Slot: NSS User Private Key and Certificate Services                  
+  Slot: NSS User Private Key and Certificate Services
   Slot Mechanism Flags: None
-  Manufacturer: Mozilla Foundation              
+  Manufacturer: Mozilla Foundation
   Type: Software
   Version Number: 3\&.11
   Firmware Version: 0\&.0
   Status: Enabled
-  Token Name: NSS Certificate DB              
-  Token Manufacturer: Mozilla Foundation              
-  Token Model: NSS 3           
+  Token Name: NSS Certificate DB
+  Token Manufacturer: Mozilla Foundation
+  Token Model: NSS 3
   Token Serial Number: 0000000000000000
   Token Version: 8\&.3
   Token Firmware Version: 0\&.0
@@ -607,7 +607,7 @@ Multiple security modules may provide support for the same security mechanisms\&
 .RS 4
 .\}
 .nf
-modutil \-default modulename \-mechanisms mechanism\-list 
+modutil \-default modulename \-mechanisms mechanism\-list
 .fi
 .if n \{\
 .RE
@@ -621,7 +621,7 @@ command with a colon\-separated list of mechanisms\&. The available mechanisms d
 .RS 4
 .\}
 .nf
-modutil \-default "NSS Internal PKCS #11 Module" \-dbdir \-mechanisms RSA:DSA:RC2 
+modutil \-default "NSS Internal PKCS #11 Module" \-dbdir \-mechanisms RSA:DSA:RC2
 
 Using database directory c:\edatabases\&.\&.\&.
 
@@ -652,7 +652,7 @@ Modules, and specific slots on modules, can be selectively enabled or disabled u
 .RS 4
 .\}
 .nf
-modutil \-enable|\-disable modulename [\-slot slotname] 
+modutil \-enable|\-disable modulename [\-slot slotname]
 .fi
 .if n \{\
 .RE
@@ -718,7 +718,7 @@ Initializing or changing a token\*(Aqs password:
 .RS 4
 .\}
 .nf
-modutil \-changepw tokenname [\-pwfile old\-password\-file] [\-newpwfile new\-password\-file] 
+modutil \-changepw tokenname [\-pwfile old\-password\-file] [\-newpwfile new\-password\-file]
 .fi
 .if n \{\
 .RE
@@ -728,13 +728,13 @@ modutil \-changepw tokenname [\-pwfile old\-password\-file] [\-newpwfile new\-pa
 .RS 4
 .\}
 .nf
-modutil \-dbdir sql:/home/my/sharednssdb \-changepw "NSS Certificate DB" 
+modutil \-dbdir sql:/home/my/sharednssdb \-changepw "NSS Certificate DB"
 
-Enter old password: 
-Incorrect password, try again\&.\&.\&. 
-Enter old password: 
-Enter new password: 
-Re\-enter new password: 
+Enter old password:
+Incorrect password, try again\&.\&.\&.
+Enter old password:
+Enter new password:
+Re\-enter new password:
 Token "Communicator Certificate DB" password changed successfully\&.
 .fi
 .if n \{\
@@ -875,9 +875,9 @@ key \-\-> string
 string \-\-> simple_string
             "complex_string"
 
-simple_string \-\-> [^ \et\en\e""{""}"]+ 
+simple_string \-\-> [^ \et\en\e""{""}"]+
 
-complex_string \-\-> ([^\e"\e\e\er\en]|(\e\e\e")|(\e\e\e\e))+ 
+complex_string \-\-> ([^\e"\e\e\er\en]|(\e\e\e")|(\e\e\e\e))+
 .fi
 .if n \{\
 .RE

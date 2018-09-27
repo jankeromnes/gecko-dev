@@ -58,7 +58,7 @@ Note: Nomenclature
   - The enum members have *names* and *values* (the name of
     ``Color.red`` is ``red``, the value of ``Color.blue`` is
     ``3``, etc.)
-    
+
 Note:
 
     Even though we use the ``class`` syntax to create Enums, Enums
@@ -287,14 +287,14 @@ usual.  If we have this enumeration::
     >>> class Mood(Enum):
     ...   funky = 1
     ...   happy = 3
-    ... 
+    ...
     ...   def describe(self):
     ...     # self is the member here
     ...     return self.name, self.value
-    ... 
+    ...
     ...   def __str__(self):
     ...     return 'my custom str! {0}'.format(self.value)
-    ... 
+    ...
     ...   @classmethod
     ...   def favorite_mood(cls):
     ...     # cls here is the enumeration
@@ -388,7 +388,7 @@ The ``Enum`` class is callable, providing the following functional API::
     [<Animal.ant: 1>, <Animal.bee: 2>, <Animal.cat: 3>, <Animal.dog: 4>]
 
 The semantics of this API resemble ``namedtuple``. The first argument
-of the call to ``Enum`` is the name of the enumeration. 
+of the call to ``Enum`` is the name of the enumeration.
 
 The second argument is the *source* of enumeration member names.  It can be a
 whitespace-separated string of names, a sequence of names, a sequence of
@@ -580,7 +580,7 @@ alias::
     ...             raise ValueError(
     ...                     "aliases not allowed in UniqueEnum:  %r --> %r"
     ...                     % (a, e))
-    ... 
+    ...
     >>> class Color(UniqueEnum):
     ...     red = 1
     ...     green = 2
@@ -589,7 +589,7 @@ alias::
     Traceback (most recent call last):
     ...
     ValueError: aliases not allowed in UniqueEnum:  'grene' --> 'green'
-    
+
 
 OrderedEnum
 ^^^^^^^^^^^
@@ -651,7 +651,7 @@ will be passed to those methods::
     ...         # universal gravitational constant  (m3 kg-1 s-2)
     ...         G = 6.67300E-11
     ...         return G * self.mass / (self.radius * self.radius)
-    ... 
+    ...
     >>> Planet.EARTH.value
     (5.976e+24, 6378140.0)
     >>> Planet.EARTH.surface_gravity

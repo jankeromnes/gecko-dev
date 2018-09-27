@@ -422,7 +422,7 @@ void AString::Grow(unsigned n)
   unsigned freeSize = _limit - _len;
   if (n <= freeSize)
     return;
-  
+
   unsigned next = _len + n;
   next += next / 2;
   next += 16;
@@ -472,7 +472,7 @@ AString operator+(const AString &s1, const char    *s2) { return AString(s1, s1.
 AString operator+(const char    *s1, const AString &s2) { return AString(s1, MyStringLen(s1), s2, s2.Len()); }
 
 static const unsigned kStartStringCapacity = 4;
- 
+
 AString::AString()
 {
   _chars = 0;
@@ -800,7 +800,7 @@ void AString::Insert(unsigned index, const AString &s)
 void AString::RemoveChar(char ch) throw()
 {
   char *src = _chars;
-  
+
   for (;;)
   {
     char c = *src++;
@@ -811,7 +811,7 @@ void AString::RemoveChar(char ch) throw()
   }
 
   char *dest = src - 1;
-  
+
   for (;;)
   {
     char c = *src++;
@@ -820,7 +820,7 @@ void AString::RemoveChar(char ch) throw()
     if (c != ch)
       *dest++ = c;
   }
-  
+
   *dest = 0;
   _len = (unsigned)(dest - _chars);
 }
@@ -988,7 +988,7 @@ void UString::Grow(unsigned n)
   unsigned freeSize = _limit - _len;
   if (n <= freeSize)
     return;
-  
+
   unsigned next = _len + n;
   next += next / 2;
   next += 16;
@@ -1374,7 +1374,7 @@ void UString::Insert(unsigned index, const UString &s)
 void UString::RemoveChar(wchar_t ch) throw()
 {
   wchar_t *src = _chars;
-  
+
   for (;;)
   {
     wchar_t c = *src++;
@@ -1385,7 +1385,7 @@ void UString::RemoveChar(wchar_t ch) throw()
   }
 
   wchar_t *dest = src - 1;
-  
+
   for (;;)
   {
     wchar_t c = *src++;
@@ -1394,7 +1394,7 @@ void UString::RemoveChar(wchar_t ch) throw()
     if (c != ch)
       *dest++ = c;
   }
-  
+
   *dest = 0;
   _len = (unsigned)(dest - _chars);
 }

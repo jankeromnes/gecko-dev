@@ -11,9 +11,9 @@
   <script class="testbody" type="application/javascript">
   <![CDATA[
     ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
-    
+
     let TP = Ci.nsITaskbarProgress;
-    
+
     function IsWin7OrHigher() {
       try {
         var sysInfo = Cc["@mozilla.org/system-info;1"].
@@ -36,7 +36,7 @@
       is(taskbar.available, IsWin7OrHigher(), "Expected availability of taskbar");
       if (!taskbar.available)
         return null;
-      
+
       // HACK from mconnor:
       var wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
       let win = wm.getMostRecentWindow("navigator:browser");
@@ -51,10 +51,10 @@
       } catch (e) {
         ok(true, "Cannot get progress for null docshell");
       }
-      
+
       return progress;
     }
-    
+
     function macProgress() {
       let progress = Cc["@mozilla.org/widget/macdocksupport;1"];
       if (!progress) {
@@ -74,7 +74,7 @@
         SimpleTest.finish();
         return;
       }
-      
+
       function shouldThrow(s,c,m) {
         try {
           progress.setProgressState(s,c,m);

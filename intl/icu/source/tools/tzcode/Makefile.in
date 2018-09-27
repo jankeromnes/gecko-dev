@@ -42,7 +42,7 @@ ICUZDUMPTARG=$(BINDIR)/icuzdump$(EXEEXT)
 ICUZDUMPEXEC=$(TOOLBINDIR)/icuzdump$(TOOLEXEEXT)
 
 ifeq ($(TZDATA),)
-all: 
+all:
 	@echo ERROR "tzdata*.tar.gz" can\'t be found.
 	@false
 else
@@ -115,7 +115,7 @@ YEARISTYPE=     ./yearistype
 TZDIR=zoneinfo
 
 CFLAGS+=-D_POSIX_C_SOURCE
-CPPFLAGS+= -DTZDIR=\"$(TZDIR)\" 
+CPPFLAGS+= -DTZDIR=\"$(TZDIR)\"
 
 # more data
 XDATA=zone.tab yearistype.sh leapseconds iso3166.tab

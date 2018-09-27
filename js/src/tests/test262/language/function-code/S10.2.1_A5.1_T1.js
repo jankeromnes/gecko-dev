@@ -14,7 +14,7 @@ description: Checking variable existence only
 //CHECK#1
 function f1(){
   var x;
-  
+
   return typeof x;
 }
 
@@ -23,7 +23,7 @@ assert.sameValue(f1(), "undefined");
 //CHECK#2
 function f2(){
   var x;
-  
+
   return x;
 }
 

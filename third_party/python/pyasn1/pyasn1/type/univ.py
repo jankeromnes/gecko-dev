@@ -281,16 +281,16 @@ class Integer(base.AbstractSimpleAsn1Item):
         Parameters
         ----------
         value: :class:`int`, :class:`str` or |ASN.1| object
-            Initialization value to pass to new ASN.1 object instead of 
+            Initialization value to pass to new ASN.1 object instead of
             inheriting one from the caller.
 
         implicitTag: :py:class:`~pyasn1.type.tag.Tag`
-            Implicitly apply given ASN.1 tag object to caller's 
+            Implicitly apply given ASN.1 tag object to caller's
             :py:class:`~pyasn1.type.tag.TagSet`, then use the result as
             new object's ASN.1 tag(s).
 
         explicitTag: :py:class:`~pyasn1.type.tag.Tag`
-            Explicitly apply given ASN.1 tag object to caller's 
+            Explicitly apply given ASN.1 tag object to caller's
             :py:class:`~pyasn1.type.tag.TagSet`, then use the result as
             new object's ASN.1 tag(s).
 
@@ -489,12 +489,12 @@ class BitString(base.AbstractSimpleAsn1Item):
             inheriting one from the caller.
 
         implicitTag: :py:class:`~pyasn1.type.tag.Tag`
-            Implicitly apply given ASN.1 tag object to caller's 
+            Implicitly apply given ASN.1 tag object to caller's
             :py:class:`~pyasn1.type.tag.TagSet`, then use the result as
             new object's ASN.1 tag(s).
 
         explicitTag: :py:class:`~pyasn1.type.tag.Tag`
-            Explicitly apply given ASN.1 tag object to caller's 
+            Explicitly apply given ASN.1 tag object to caller's
             :py:class:`~pyasn1.type.tag.TagSet`, then use the result as
             new object's ASN.1 tag(s).
 
@@ -639,7 +639,7 @@ class BitString(base.AbstractSimpleAsn1Item):
     @classmethod
     def fromHexString(cls, value):
         """Create a |ASN.1| object initialized from the hex string.
-        
+
         Parameters
         ----------
         value: :class:`str`
@@ -777,7 +777,7 @@ class OctetString(base.AbstractSimpleAsn1Item):
     binValue: :py:class:`str`
         Binary string initializer to use instead of the *value*.
         Example: '10110011'.
-        
+
     hexValue: :py:class:`str`
         Hexadecimal string initializer to use instead of the *value*.
         Example: 'DEADBEEF'.
@@ -857,7 +857,7 @@ class OctetString(base.AbstractSimpleAsn1Item):
 
         binValue: :py:class:`str`
             Binary string initializer. Example: '10110011'.
-        
+
         hexValue: :py:class:`str`
             Hexadecimal string initializer. Example: 'DEADBEEF'.
 
@@ -901,7 +901,7 @@ class OctetString(base.AbstractSimpleAsn1Item):
 
         binValue: :py:class:`str`
             Binary string initializer. Example: '10110011'.
-        
+
         hexValue: :py:class:`str`
             Hexadecimal string initializer. Example: 'DEADBEEF'.
 
@@ -1158,7 +1158,7 @@ class Null(OctetString):
         Parameters
         ----------
         value: :class:`str` or |ASN.1| object
-            Initialization value to pass to new ASN.1 object instead of 
+            Initialization value to pass to new ASN.1 object instead of
             inheriting one from the caller.
 
         tagSet: :py:class:`~pyasn1.type.tag.TagSet`
@@ -1184,12 +1184,12 @@ class Null(OctetString):
             inheriting one from the caller.
 
         implicitTag: :py:class:`~pyasn1.type.tag.Tag`
-            Implicitly apply given ASN.1 tag object to caller's 
+            Implicitly apply given ASN.1 tag object to caller's
             :py:class:`~pyasn1.type.tag.TagSet`, then use the result as
             new object's ASN.1 tag(s).
 
         explicitTag: :py:class:`~pyasn1.type.tag.Tag`
-            Explicitly apply given ASN.1 tag object to caller's 
+            Explicitly apply given ASN.1 tag object to caller's
             :py:class:`~pyasn1.type.tag.TagSet`, then use the result as
             new object's ASN.1 tag(s).
 
@@ -1421,12 +1421,12 @@ class Real(base.AbstractSimpleAsn1Item):
             inheriting one from the caller.
 
         implicitTag: :py:class:`~pyasn1.type.tag.Tag`
-            Implicitly apply given ASN.1 tag object to caller's 
+            Implicitly apply given ASN.1 tag object to caller's
             :py:class:`~pyasn1.type.tag.TagSet`, then use the result as
             new object's ASN.1 tag(s).
 
         explicitTag: :py:class:`~pyasn1.type.tag.Tag`
-            Explicitly apply given ASN.1 tag object to caller's 
+            Explicitly apply given ASN.1 tag object to caller's
             :py:class:`~pyasn1.type.tag.TagSet`, then use the result as
             new object's ASN.1 tag(s).
 

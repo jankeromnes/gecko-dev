@@ -44,7 +44,7 @@ function test()
   for (var i = 0; i != 50000; ++i) {
     var x = {};
   }
- 
+
   print('done');
 
   setTimeout('checkTest()', 10000);
@@ -61,7 +61,7 @@ var lastialert = 0;
 function checkTest()
 {
   // this function is used to check if there
-  // additional alerts are still being fired 
+  // additional alerts are still being fired
   // in order to prevent the test from completing
   // until all alerts have finished.
 

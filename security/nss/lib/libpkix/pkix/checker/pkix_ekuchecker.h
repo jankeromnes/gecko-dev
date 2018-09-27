@@ -29,7 +29,7 @@ extern "C" {
  *      a PKIX_ProcessingParams links to PKIX_ComCertSelParams where a list of
  *      Extended Key Usage OIDs specified by application can be retrieved for
  *      verification.
- *  "ekuChecker" 
+ *  "ekuChecker"
  *      Address of created ekuchecker.
  *  "plContext"
  *      Platform-specific context pointer.

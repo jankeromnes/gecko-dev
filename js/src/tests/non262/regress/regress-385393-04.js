@@ -17,7 +17,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   try
   {
     'a'.replace(/a/g, eval);

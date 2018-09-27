@@ -107,7 +107,7 @@ public:
     MOZ_COUNT_CTOR(ShmemDIBTextureData);
   }
 
-  virtual ~ShmemDIBTextureData() 
+  virtual ~ShmemDIBTextureData()
   {
     MOZ_COUNT_DTOR(ShmemDIBTextureData);
 

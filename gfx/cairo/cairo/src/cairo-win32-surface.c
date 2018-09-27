@@ -1298,7 +1298,7 @@ _cairo_win32_surface_composite (cairo_operator_t	op,
 
 	    dst_r.height += src_r.y;
 	    dst_r.y -= src_r.y;
-	    
+
             src_r.y = 0;
             needs_pad = TRUE;
 	}
@@ -1335,19 +1335,19 @@ _cairo_win32_surface_composite (cairo_operator_t	op,
      *                   by setting the alpha values of the source to 255.
      * ARGB OVER ARGB -> AlphaBlend, with AC_SRC_ALPHA
      * ARGB OVER  RGB -> AlphaBlend, with AC_SRC_ALPHA; we'll have junk in the dst A byte
-     * 
+     *
      *  RGB OVER  RGB + mask -> AlphaBlend, no AC_SRC_ALPHA
      *  RGB OVER ARGB + mask -> Partially supported, We convert this operation into a ARGB OVER ARGB + mask
      *                          by setting the alpha values of the source to 255.
      * ARGB OVER ARGB + mask -> AlphaBlend, with AC_SRC_ALPHA
      * ARGB OVER  RGB + mask -> AlphaBlend, with AC_SRC_ALPHA; junk in the dst A byte
-     * 
+     *
      *  RGB SOURCE  RGB -> BitBlt
      *  RGB SOURCE ARGB -> Partially supported, We convert this operation into a ARGB SOURCE ARGB
      *                     by setting the alpha values of the source to 255.
      * ARGB SOURCE ARGB -> BitBlt
      * ARGB SOURCE  RGB -> BitBlt
-     * 
+     *
      *  RGB SOURCE  RGB + mask -> unsupported
      *  RGB SOURCE ARGB + mask -> unsupported
      * ARGB SOURCE ARGB + mask -> unsupported
@@ -1515,7 +1515,7 @@ _cairo_win32_surface_composite (cairo_operator_t	op,
 							       alpha, needs_alpha, needs_scale);
 		if (status != CAIRO_STATUS_SUCCESS) {
 		    /* Uh oh.  If something failed, and it's the first
-		     * piece, then we can jump to UNSUPPORTED. 
+		     * piece, then we can jump to UNSUPPORTED.
 		     * Otherwise, this is bad times, because part of the
 		     * rendering was already done. */
 		    if (rendered_width == 0 &&
@@ -1783,7 +1783,7 @@ _cairo_win32_surface_show_glyphs_internal (void			*surface,
 #endif
     } else {
 	cairo_win32_surface_t *dst = surface;
-        
+
 	WORD glyph_buf_stack[STACK_GLYPH_SIZE];
 	WORD *glyph_buf = glyph_buf_stack;
 	int dxy_buf_stack[2 * STACK_GLYPH_SIZE];
@@ -4038,7 +4038,7 @@ _cairo_win32_debug_dump_hrgn (HRGN rgn, char *header)
  *
  * Return value: %CAIRO_STATUS_SUCCESS if the flag was successfully
  * changed, or an error otherwise.
- * 
+ *
  */
 cairo_status_t
 cairo_win32_surface_set_can_convert_to_dib (cairo_surface_t *asurface, cairo_bool_t can_convert)
@@ -4068,7 +4068,7 @@ cairo_win32_surface_set_can_convert_to_dib (cairo_surface_t *asurface, cairo_boo
  *
  * Return value: %CAIRO_STATUS_SUCCESS if the flag was successfully
  * retreived, or an error otherwise.
- * 
+ *
  */
 cairo_status_t
 cairo_win32_surface_get_can_convert_to_dib (cairo_surface_t *asurface, cairo_bool_t *can_convert)

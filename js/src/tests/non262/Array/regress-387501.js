@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = '[object String]';
   actual = Array.prototype.toString.call((new String('foo')));
   assertEq(actual, expect, summary);

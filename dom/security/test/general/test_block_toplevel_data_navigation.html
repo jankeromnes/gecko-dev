@@ -50,7 +50,7 @@ function test1() {
 }
 
 function test2() {
-  // data: URI in iframe which opens data: URI in _blank should be blocked 
+  // data: URI in iframe which opens data: URI in _blank should be blocked
   let win2 = window.open("file_block_toplevel_data_navigation2.html");
   window.addEventListener("message", receiveMessage);
   function receiveMessage(event) {

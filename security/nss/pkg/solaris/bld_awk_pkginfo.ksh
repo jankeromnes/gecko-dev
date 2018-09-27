@@ -95,8 +95,8 @@ cat << EOF > $awk_script
       print
       next
    }
-/$PRODVERS/ { 
-      printf "SUNW_PRODVERS=\"%s\"\n", "$prodver" 
+/$PRODVERS/ {
+      printf "SUNW_PRODVERS=\"%s\"\n", "$prodver"
       next
    }
 /$ARCH/ {

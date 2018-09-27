@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -31,17 +31,17 @@ class Tmp extends TmpBase {
         this._index = index;
         this._type = type;
     }
-    
+
     static fromReg(reg)
     {
         return reg;
     }
-    
+
     get index() { return this._index; }
     get type() { return this._type; }
-    
+
     get isReg() { return false; }
-    
+
     hash()
     {
         if (isGP)
@@ -53,7 +53,7 @@ class Tmp extends TmpBase {
     {
         return "%" + (this.isGP ? "" : "f") + "tmp" + this._index;
     }
-    
+
     static extract(arg)
     {
         if (arg.isTmp)

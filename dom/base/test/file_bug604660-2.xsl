@@ -11,7 +11,7 @@
         <script async="" src="data:text/javascript,parent.asyncRan();"></script>
         <script src="file_bug604660-3.js"></script>
         <script>parent.scriptRan(3);</script>
-        <script src="file_bug604660-4.js"></script>        
+        <script src="file_bug604660-4.js"></script>
       </body>
     </html>
   </xsl:template>

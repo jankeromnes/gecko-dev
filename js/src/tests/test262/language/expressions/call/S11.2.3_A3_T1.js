@@ -10,11 +10,11 @@ description: Checking "boolean primitive" case
 //CHECK#1
 try {
   true();
-    $ERROR('#1.1: true() throw TypeError. Actual: ' + (true()));	
+    $ERROR('#1.1: true() throw TypeError. Actual: ' + (true()));
 }
 catch (e) {
   if ((e instanceof TypeError) !== true) {
-    $ERROR('#1.2: true() throw TypeError. Actual: ' + (e));	
+    $ERROR('#1.2: true() throw TypeError. Actual: ' + (e));
   }
 }
 
@@ -26,7 +26,7 @@ try {
 }
 catch (e) {
   if ((e instanceof TypeError) !== true) {
-    $ERROR('#2.2: var x = true; x() throw TypeError. Actual: ' + (e))  
+    $ERROR('#2.2: var x = true; x() throw TypeError. Actual: ' + (e))
   }
 }
 

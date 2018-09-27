@@ -6179,7 +6179,7 @@ Instead, please regenerate using generate-encoding-data.py
 줊
 줋
 줎
-　
+
 、
 。
 ·

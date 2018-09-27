@@ -113,7 +113,7 @@ function checkHasNoId(removed, test) {
   is(xul.getAttribute("id"), "",        "xul getAttribute " + test);
   is(svg.getAttribute("id"), attrValue, "svg getAttribute " + test);
   is(nsx.getAttribute("id"), attrValue, "ns getAttribute " + test);
-  
+
   is($("div_id"), null, "div getElementById " + test);
   is($("a_id"),   null, "a getElementById " + test);
   is($("xul_id"), null, "xul getElementById " + test);

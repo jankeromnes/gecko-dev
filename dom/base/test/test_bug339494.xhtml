@@ -4,7 +4,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=339494
 -->
 <head>
   <title>Test for Bug 339494</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -20,7 +20,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=339494
 /** Test for Bug 339494 **/
 
   var d = document.getElementById("d");
-  
+
   d.setAttribute("hhh", "testvalue");
 
   document.addEventListener("DOMAttrModified", removeItAgain, false);
@@ -36,9 +36,9 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=339494
     d.removeAttribute("hhh");
     ok(true, "Reachability", "We shouldn't have crashed");
   }
-  
+
   var s = document.getElementById("s");
-  
+
   s.setAttribute("ggg", "testvalue");
 
   document.addEventListener("DOMAttrModified", compareVal, false);

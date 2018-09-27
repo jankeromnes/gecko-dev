@@ -1,5 +1,5 @@
 #!/bin/sh
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -243,7 +243,7 @@ RunTests()
         # uses our utility library for displaying information
 
         cat ${testOut} | tail -2 | grep "COMPLETED SUCCESSFULLY" >/dev/null 2>&1
-        
+
         if [ $? -ne 0 ]; then
             testFail=1
             errors=`expr ${errors} + 1`
@@ -304,7 +304,7 @@ RunTests()
             memPlural="S"
         fi
         Display "                          ${memErrors} MEMORY LEAK TEST${memPlural} FAILED: ${failedmempgms}"
-        
+
         if [ ${prematureErrors} -ne 0 ]; then
             if [ ${prematureErrors} -eq 1 ]; then
                 prematurePlural=""

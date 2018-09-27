@@ -1,5 +1,5 @@
 #!/bin/sh
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -20,25 +20,25 @@ testunit=PKI
 doPki=1
 
 ### setup NIST files need to link in
-linkPkiNistFiles="InvalidDNnameConstraintsTest3EE.crt 
-        InvalidonlySomeReasonsTest21EE.crt 
-        indirectCRLCA3cRLIssuerCRL.crl  
-        nameConstraintsDN3subCA2Cert.crt 
-        nameConstraintsDN4CACert.crt 
-        nameConstraintsDN5CACert.crt 
-        onlyContainsAttributeCertsCACRL.crl 
-        onlyContainsCACertsCACRL.crl 
-        onlyContainsUserCertsCACRL.crl 
+linkPkiNistFiles="InvalidDNnameConstraintsTest3EE.crt
+        InvalidonlySomeReasonsTest21EE.crt
+        indirectCRLCA3cRLIssuerCRL.crl
+        nameConstraintsDN3subCA2Cert.crt
+        nameConstraintsDN4CACert.crt
+        nameConstraintsDN5CACert.crt
+        onlyContainsAttributeCertsCACRL.crl
+        onlyContainsCACertsCACRL.crl
+        onlyContainsUserCertsCACRL.crl
         onlySomeReasonsCA3compromiseCRL.crl
-        requireExplicitPolicy2CACert.crt 
-        inhibitPolicyMapping5CACert.crt 
-        inhibitAnyPolicy5CACert.crt 
-        inhibitAnyPolicy0CACert.crt 
-        P1Mapping1to234CACert.crt 
-        UserNoticeQualifierTest15EE.crt 
-        UserNoticeQualifierTest16EE.crt 
-        UserNoticeQualifierTest17EE.crt 
-        UserNoticeQualifierTest18EE.crt 
+        requireExplicitPolicy2CACert.crt
+        inhibitPolicyMapping5CACert.crt
+        inhibitAnyPolicy5CACert.crt
+        inhibitAnyPolicy0CACert.crt
+        P1Mapping1to234CACert.crt
+        UserNoticeQualifierTest15EE.crt
+        UserNoticeQualifierTest16EE.crt
+        UserNoticeQualifierTest17EE.crt
+        UserNoticeQualifierTest18EE.crt
         CPSPointerQualifierTest20EE.crt"
 
 if [ -n "${NIST_FILES_DIR}" ]; then

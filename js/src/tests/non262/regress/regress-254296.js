@@ -18,7 +18,7 @@ if (actual)
 {
   actual = actual.toString();
 }
- 
+
 reportCompare(expect, actual, summary + ' ' + inSection(1));
 
 expect = 'AB';

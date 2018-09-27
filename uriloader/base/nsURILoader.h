@@ -52,7 +52,7 @@ protected:
    * Logging.  The module is called "URILoader"
    */
   static mozilla::LazyLogModule mLog;
-  
+
   friend class nsDocumentOpenInfo;
 };
 

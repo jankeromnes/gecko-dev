@@ -21,7 +21,7 @@ function testHtmlCopyEncoder () {
   var encoder = SpecialPowers.Cc["@mozilla.org/layout/htmlCopyEncoder;1"]
                    .createInstance(SpecialPowers.Ci.nsIDocumentEncoder);
   var out, expected;
-  
+
   var node = document.getElementById('draggable');
 
   var select = window.getSelection();

@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   try
   {
     new Function("do { with({}) let x; var b; } while( 1 );");

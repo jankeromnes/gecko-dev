@@ -265,7 +265,7 @@ forth.
 It turns out that to get things right, if we use the current tickle
 routine, we have to use seq-cst operations **both in the sleep module
 and when publishing work**. We'll walk through two scenarios to
-show what I mean. 
+show what I mean.
 
 ### Scenario 1: get-sleepy-then-get-tickled
 

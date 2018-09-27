@@ -37,9 +37,9 @@ STDMETHODIMP_(UInt32) CByteSwap2::Filter(Byte *data, UInt32 size)
   if (size < kStep)
     return 0;
   size &= ~(kStep - 1);
-  
+
   const Byte *end = data + (size_t)size;
-  
+
   do
   {
     Byte b0 = data[0];
@@ -60,9 +60,9 @@ STDMETHODIMP_(UInt32) CByteSwap4::Filter(Byte *data, UInt32 size)
   if (size < kStep)
     return 0;
   size &= ~(kStep - 1);
-  
+
   const Byte *end = data + (size_t)size;
-  
+
   do
   {
     Byte b0 = data[0];

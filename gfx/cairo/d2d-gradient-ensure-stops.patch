@@ -13,9 +13,9 @@ diff --git a/gfx/cairo/cairo/src/cairo-d2d-surface.cpp b/gfx/cairo/cairo/src/cai
  		       _cairo_d2d_dot_product(u, _cairo_d2d_subtract_point(top_right, p1)));
  	min_dist = MIN(min_dist, _cairo_d2d_dot_product(u, _cairo_d2d_subtract_point(bottom_left, p1)));
  	min_dist = MIN(min_dist, _cairo_d2d_dot_product(u, _cairo_d2d_subtract_point(bottom_right, p1)));
- 
+
  	min_dist = MAX(-min_dist, 0);
- 
+
  	// Repeats after gradient start.
 -	int after_repeat = (int)ceil(max_dist / gradient_length);
 + 	// It's possible for max_dist and min_dist to both be zero, in which case
@@ -24,9 +24,9 @@ diff --git a/gfx/cairo/cairo/src/cairo-d2d-surface.cpp b/gfx/cairo/cairo/src/cai
 + 	int after_repeat = MAX((int)ceil(max_dist / gradient_length), 1);
  	int before_repeat = (int)ceil(min_dist / gradient_length);
  	num_stops *= (after_repeat + before_repeat);
- 
+
  	p2.x = p1.x + u.x * after_repeat * gradient_length;
  	p2.y = p1.y + u.y * after_repeat * gradient_length;
  	p1.x = p1.x - u.x * before_repeat * gradient_length;
  	p1.y = p1.y - u.y * before_repeat * gradient_length;
- 
+

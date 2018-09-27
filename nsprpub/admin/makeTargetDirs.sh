@@ -1,5 +1,5 @@
 #!/bin/sh
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -12,7 +12,7 @@
 # Description:
 # makeTargetDirs.sh creates a set of directories intended for use
 # with NSPR's autoconf based build system.
-#     
+#
 # The enumerated directories are the same as those built for NSPR
 # 4.1.1. Adjust as needed.
 #

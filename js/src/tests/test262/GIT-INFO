@@ -3,5 +3,5 @@ Author: Leo Balter <leonardo.balter@gmail.com>
 Date:   Fri Aug 17 18:06:19 2018 -0400
 
     Merge pull request #1677 from tc39/ofe-use-verifyproperty
-    
+
     Object.fromEntries: use verifyProperty; add specification details

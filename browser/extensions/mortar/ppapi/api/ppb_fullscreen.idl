@@ -15,7 +15,7 @@ label Chrome {
   M16 = 1.0
 };
 
-/** 
+/**
  * The <code>PPB_Fullscreen</code> interface is implemented by the browser.
  * This interface provides a way of checking the current screen mode and
  * toggling fullscreen mode.
@@ -36,7 +36,7 @@ interface PPB_Fullscreen {
 
   /**
    * SetFullscreen() switches the module instance to and from fullscreen
-   * mode. 
+   * mode.
    *
    * The transition to and from fullscreen mode is asynchronous. During the
    * transition, IsFullscreen() will return the previous value and
@@ -51,7 +51,7 @@ interface PPB_Fullscreen {
    * of a module.
    * @param[in] fullscreen <code>PP_TRUE</code> to enter fullscreen mode, or
    * <code>PP_FALSE</code> to exit fullscreen mode.
-   * 
+   *
    * @return <code>PP_TRUE</code> on success or <code>PP_FALSE</code> on
    * failure.
    */

@@ -47,7 +47,7 @@
 		stw	r31,-4(sp)
 #
 # save off the incoming values in the caller's parameter area
-#		
+#
 		stw	r3,24(sp)		# that
 		stw	r4,28(sp)		# methodIndex
 		stw	r5,32(sp)		# paramCount
@@ -56,7 +56,7 @@
 		stwu	sp,-136(sp)		#  = 24 for linkage area,  8 * 13 for fprData area, 8 for saved registers
 
 # prepare args for 'invoke_copy_to_stack' call
-#		
+#
 		lwz	r4,168(sp)		# paramCount
 		lwz	r5,172(sp)		# params
 		mr	r6,sp			# fprData
@@ -66,24 +66,24 @@
 		mr	r31,sp			# save original stack top
 		subfc	sp,r3,sp		# bump the stack
 		addi	r3,sp,28		# parameter pointer excludes linkage area size + 'this'
-		
+
 		bl	.invoke_copy_to_stack
 		nop
-		
-		lfd	f1,0(r31)		# Restore floating point registers	
-		lfd	f2,8(r31)				
-		lfd	f3,16(r31)				
-		lfd	f4,24(r31)				
-		lfd	f5,32(r31)				
-		lfd	f6,40(r31)				
-		lfd	f7,48(r31)				
-		lfd	f8,56(r31)				
-		lfd	f9,64(r31)				
-		lfd	f10,72(r31)				
-		lfd	f11,80(r31)				
-		lfd	f12,88(r31)				
-		lfd	f13,96(r31)				
-		
+
+		lfd	f1,0(r31)		# Restore floating point registers
+		lfd	f2,8(r31)
+		lfd	f3,16(r31)
+		lfd	f4,24(r31)
+		lfd	f5,32(r31)
+		lfd	f6,40(r31)
+		lfd	f7,48(r31)
+		lfd	f8,56(r31)
+		lfd	f9,64(r31)
+		lfd	f10,72(r31)
+		lfd	f11,80(r31)
+		lfd	f12,88(r31)
+		lfd	f13,96(r31)
+
 		lwz	r3,160(r31)		# that
 		lwz	r4,0(r3)		# get vTable from 'that'
 		lwz	r5,164(r31)		# methodIndex
@@ -92,9 +92,9 @@
 		lwzx	r11,r5,r4		# get function pointer
 
 		addi	r5,r5,4    	 	# We need to manually adjust the 'that' pointer, this is CFRONT based
-		lwzx	r5,r4,r5 		# offset = r4(vtable) + r5(methodIndex offset) - 4 
+		lwzx	r5,r4,r5 		# offset = r4(vtable) + r5(methodIndex offset) - 4
 		add	r3,r5,r3		# adjust 'that' r3 = r3 + r5
-		
+
 		lwz	r4,28(sp)
 		lwz	r5,32(sp)
 		lwz	r6,36(sp)
@@ -104,8 +104,8 @@
 		lwz	r10,52(sp)
 
 		bl      ._ptrgl{PR}
-		nop		
-		
+		nop
+
 		mr      sp,r31
 		lwz	r0,144(sp)
 		addi    sp,sp,136
@@ -126,4 +126,4 @@ T.18.NS_InvokeByIndex:
         .long   0x00000000              # "\0\0\0\0"
 # End   csect   NS_InvokeByIndex{DS}
 
-# .bss section	
+# .bss section

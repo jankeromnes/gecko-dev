@@ -68,7 +68,7 @@ class NamedType(object):
     @property
     def name(self):
         return self.__name
-    
+
     @property
     def asn1Object(self):
         return self.__type

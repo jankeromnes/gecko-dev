@@ -13,7 +13,7 @@ Author: Olli Etuaho <olli.etuaho@gmail.com>
 Date:   Fri Apr 6 20:00:43 2018 +0300
 
     Add a test for having a case statement inside a block (#2630)
-    
+
     This was not being validated correctly by ANGLE until recently, though
     this would not cause issues if the native drivers were working
     correctly.

@@ -5,7 +5,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #Input: [-d dir] foo1.java foo2.java
-#Compares with: foo1.class foo2.class (if -d specified, checks in 'dir', 
+#Compares with: foo1.class foo2.class (if -d specified, checks in 'dir',
 #  otherwise assumes .class files in same directory as .java files)
 #Returns: list of input arguments which are newer than corresponding class
 #files (non-existent class files are considered to be real old :-)

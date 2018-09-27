@@ -22,10 +22,10 @@ pkix_RevocationMethod_Init(
     PKIX_UInt32 priority,
     pkix_LocalRevocationCheckFn localRevChecker,
     pkix_ExternalRevocationCheckFn externalRevChecker,
-    void *plContext) 
+    void *plContext)
 {
     PKIX_ENTER(REVOCATIONMETHOD, "PKIX_RevocationMethod_Init");
-    
+
     method->methodType = methodType;
     method->flags = flags;
     method->priority = priority;

@@ -10,7 +10,7 @@
 
 //! Pseudo random number generators are algorithms to produce *apparently
 //! random* numbers deterministically, and usually fairly quickly.
-//! 
+//!
 //! So long as the algorithm is computationally secure, is initialised with
 //! sufficient entropy (i.e. unknown by an attacker), and its internal state is
 //! also protected (unknown to an attacker), the output will also be
@@ -24,17 +24,17 @@
 //! forking a child process should reinitialise any user-space PRNGs. For this
 //! reason it may be preferable to source random numbers directly from the OS
 //! for cryptographic applications.
-//! 
+//!
 //! PRNGs are also widely used for non-cryptographic uses: randomised
 //! algorithms, simulations, games. In these applications it is usually not
 //! important for numbers to be cryptographically *unguessable*, but even
 //! distribution and independence from other samples (from the point of view
 //! of someone unaware of the algorithm used, at least) may still be important.
 //! Good PRNGs should satisfy these properties, but do not take them for
-//! granted; Wikipedia's article on 
+//! granted; Wikipedia's article on
 //! [Pseudorandom number generators](https://en.wikipedia.org/wiki/Pseudorandom_number_generator)
 //! provides some background on this topic.
-//! 
+//!
 //! Care should be taken when seeding (initialising) PRNGs. Some PRNGs have
 //! short periods for some seeds. If one PRNG is seeded from another using the
 //! same algorithm, it is possible that both will yield the same sequence of

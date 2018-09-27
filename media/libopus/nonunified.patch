@@ -14,7 +14,7 @@ index 8a39b9f..dfc2c62 100644
 @@ -20,6 +18,15 @@ celt_sources = [
      'celt/vq.c',
  ]
- 
+
 +opus_nonunified_sources = [
 +    # Disabled because of name clash of opus_custom_encoder_get_size.
 +    'celt/celt_decoder.c',

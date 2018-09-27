@@ -6,7 +6,7 @@
 # This is to ensure that our media files are not cached by necko,
 # so that our detection as to whether the server supports byte range
 # requests is not interferred with by Necko's cache. See bug 977398
-# for details. Necko will fix this in bug 977314. 
+# for details. Necko will fix this in bug 977314.
 
 FILES=(`ls *.ogg *.ogv *.webm *.mp3 *.opus *.mp4 *.m4s *.wav`)
 

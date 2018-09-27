@@ -562,7 +562,7 @@ void CompilationUnit::ProcessDIEs() {
     lengthstart += 4;
 
   std::stack<uint64> die_stack;
-  
+
   while (dieptr < (lengthstart + header_.length)) {
     // We give the user the absolute offset from the beginning of
     // debug_info, since they need it to deal with ref_addr forms.
@@ -997,7 +997,7 @@ void LineInfo::ReadHeader() {
 
       uint64 filelength = reader_->ReadUnsignedLEB128(lineptr, &len);
       lineptr += len;
-      handler_->DefineFile(filename, fileindex, static_cast<uint32>(dirindex), 
+      handler_->DefineFile(filename, fileindex, static_cast<uint32>(dirindex),
                            mod_time, filelength);
       fileindex++;
     }
@@ -1169,7 +1169,7 @@ bool LineInfo::ProcessOneOpcode(ByteReader* reader,
           oplen += templen;
 
           if (handler) {
-            handler->DefineFile(filename, -1, static_cast<uint32>(dirindex), 
+            handler->DefineFile(filename, -1, static_cast<uint32>(dirindex),
                                 mod_time, filelength);
           }
         }
@@ -1231,7 +1231,7 @@ void LineInfo::ReadLines() {
                           pending_file_num, pending_line_num,
                           pending_column_num);
       if (lsm.end_sequence) {
-        lsm.Reset(header_.default_is_stmt);      
+        lsm.Reset(header_.default_is_stmt);
         have_pending_line = false;
       } else {
         pending_address = lsm.address;
@@ -1647,7 +1647,7 @@ class CallFrameInfo::State {
   // report the problem to reporter_ and return false.
   bool InterpretFDE(const FDE &fde);
 
- private:  
+ private:
   // The operands of a CFI instruction, for ParseOperands.
   struct Operands {
     unsigned register_number;  // A register number.
@@ -1908,19 +1908,19 @@ bool CallFrameInfo::State::DoInstruction() {
       if (!ParseOperands("1", &ops)) return false;
       address_ += ops.offset * cie->code_alignment_factor;
       break;
-      
+
     // Advance the address.
     case DW_CFA_advance_loc2:
       if (!ParseOperands("2", &ops)) return false;
       address_ += ops.offset * cie->code_alignment_factor;
       break;
-      
+
     // Advance the address.
     case DW_CFA_advance_loc4:
       if (!ParseOperands("4", &ops)) return false;
       address_ += ops.offset * cie->code_alignment_factor;
       break;
-      
+
     // Advance the address.
     case DW_CFA_MIPS_advance_loc8:
       if (!ParseOperands("8", &ops)) return false;
@@ -2221,7 +2221,7 @@ bool CallFrameInfo::ReadEntryPrologue(const uint8_t *cursor, Entry *entry) {
   // Validate the length.
   if (length > size_t(buffer_end - cursor))
     return ReportIncomplete(entry);
- 
+
   // The length is the number of bytes after the initial length field;
   // we have that position handy at this point, so compute the end
   // now. (If we're parsing 64-bit-offset DWARF on a 32-bit machine,
@@ -2263,7 +2263,7 @@ bool CallFrameInfo::ReadEntryPrologue(const uint8_t *cursor, Entry *entry) {
 
   // Now advance cursor past the id.
    cursor += offset_size;
- 
+
   // The fields specific to this kind of entry start here.
   entry->fields = cursor;
 
@@ -2497,7 +2497,7 @@ bool CallFrameInfo::ReadFDEFields(FDE *fde) {
     if (size_t(fde->end - cursor) < size + data_size)
       return ReportIncomplete(fde);
     cursor += size;
-    
+
     // In the abstract, we should walk the augmentation string, and extract
     // items from the FDE's augmentation data as we encounter augmentation
     // string characters that specify their presence: the ordering of items
@@ -2535,7 +2535,7 @@ bool CallFrameInfo::ReadFDEFields(FDE *fde) {
 
   return true;
 }
-  
+
 bool CallFrameInfo::Start() {
   const uint8_t *buffer_end = buffer_ + buffer_length_;
   const uint8_t *cursor;
@@ -2592,7 +2592,7 @@ bool CallFrameInfo::Start() {
       reporter_->CIEPointerOutOfRange(fde.offset, fde.id);
       continue;
     }
-      
+
     CIE cie;
 
     // Parse this FDE's CIE header.
@@ -2622,7 +2622,7 @@ bool CallFrameInfo::Start() {
       ok = true;
       continue;
     }
-                         
+
     if (cie.has_z_augmentation) {
       // Report the personality routine address, if we have one.
       if (cie.has_z_personality) {

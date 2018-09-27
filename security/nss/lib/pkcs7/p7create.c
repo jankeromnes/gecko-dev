@@ -358,7 +358,7 @@ sec_pkcs7_create_signed_data(SECKEYGetPasswordKey pwfn, void *pwfn_arg)
  *
  * "certdb" is the cert database to use for verifying the cert.
  * It can be NULL if a default database is available (like in the client).
- * 
+ *
  * "digestalg" names the digest algorithm (e.g. SEC_OID_SHA1).
  *
  * "digest" is the actual digest of the data.  It must be provided in
@@ -1192,7 +1192,7 @@ SEC_PKCS7CreateData(void)
  * Create an empty PKCS7 encrypted content info.
  *
  * "algorithm" specifies the bulk encryption algorithm to use.
- * 
+ *
  * An error results in a return value of NULL and an error set.
  * (Retrieve specific errors via PORT_GetError()/XP_GetError().)
  */
@@ -1216,7 +1216,7 @@ SEC_PKCS7CreateEncryptedData(SECOidTag algorithm, int keysize,
     if (!SEC_PKCS5IsAlgorithmPBEAlgTag(algorithm)) {
         rv = SECOID_SetAlgorithmID(cinfo->poolp, algid, algorithm, NULL);
     } else {
-        /* Assume password-based-encryption.  
+        /* Assume password-based-encryption.
          * Note: we can't generate pkcs5v2 from this interface.
          * PK11_CreateBPEAlgorithmID generates pkcs5v2 by accepting
          * non-PBE oids and assuming that they are pkcs5v2 oids, but

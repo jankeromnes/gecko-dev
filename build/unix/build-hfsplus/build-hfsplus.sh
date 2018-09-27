@@ -42,7 +42,7 @@ patch -p1 << 'EOF'
  newfs_hfs: $(OFILES)
 -	${CC} ${CFLAGS} ${LDFLAGS} -o newfs_hfs ${OFILES} -lcrypto
 +	${CC} ${CFLAGS} ${LDFLAGS} -o newfs_hfs ${OFILES} -Wl,-Bstatic -lcrypto -Wl,-Bdynamic,--as-needed,-lz,-ldl
- 
+
 EOF
 make $make_flags || exit 1
 cd ..

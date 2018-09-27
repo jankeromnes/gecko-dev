@@ -88,7 +88,7 @@ mkdirs(char *path, mode_t mode)
 	}
 	*cp = '/';
     }
-    
+
     res = mkdir(path, mode);
     if ((res != 0) && (errno == EEXIST))
       return 0;
@@ -410,9 +410,9 @@ main(int argc, char **argv)
 	    /* Check for a pre-existing symlink with identical content. */
 	    if (exists && (!S_ISLNK(tosb.st_mode) ||
 						readlink(toname, buf, sizeof buf) != len ||
-						strncmp(buf, name, (unsigned int)len) != 0 || 
+						strncmp(buf, name, (unsigned int)len) != 0 ||
 			((stat(name, &fromsb) == 0) &&
-			 (fromsb.st_mtime > tosb.st_mtime) 
+			 (fromsb.st_mtime > tosb.st_mtime)
 			 ))) {
 		(void) (S_ISDIR(tosb.st_mode) ? rmdir : unlink)(toname);
 		exists = 0;
@@ -435,7 +435,7 @@ main(int argc, char **argv)
         /* then is directory: must explicitly create destination dir  */
         /*  and manually copy files over                              */
         copydir( name, todir, mode, group, owner, dotimes, uid, gid );
-      } 
+      }
       else
       {
         copyfile(name, toname, mode, group, owner, dotimes, uid, gid);

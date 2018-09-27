@@ -8,14 +8,14 @@ function run_test() {
 function AddToZip(zipWriter, path, file)
 {
   var currentPath = path + file.leafName;
-  
+
   if (file.isDirectory()) {
     currentPath += "/";
   }
-  
+
   // THIS IS WHERE THE ERROR OCCURS, FOR THE FILE "st14-1.tiff" IN "test_bug446708"
   zipWriter.addEntryFile(currentPath, Ci.nsIZipWriter.COMPRESSION_DEFAULT, file, false);
-  
+
   // if it's a dir, continue adding its contents recursively...
   if (file.isDirectory()) {
     var entries = file.QueryInterface(Ci.nsIFile).directoryEntries;
@@ -24,14 +24,14 @@ function AddToZip(zipWriter, path, file)
       AddToZip(zipWriter, currentPath, entry);
     }
   }
-  
+
   // ...otherwise, we're done
 }
 
 function RecursivelyZipDirectory(bundle)
 {
   zipW.open(tmpFile, PR_RDWR | PR_CREATE_FILE | PR_TRUNCATE);
-  AddToZip(zipW, "", bundle); 
+  AddToZip(zipW, "", bundle);
   zipW.close();
 }
 

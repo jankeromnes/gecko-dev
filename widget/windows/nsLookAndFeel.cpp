@@ -389,7 +389,7 @@ nsLookAndFeel::GetIntImpl(IntID aID, int32_t &aResult)
 
   switch (aID) {
     case eIntID_CaretBlinkTime:
-        // eIntID_CaretBlinkTime is often called by updating editable text 
+        // eIntID_CaretBlinkTime is often called by updating editable text
         // that has focus. So it should be cached to improve performance.
         if (mCaretBlinkTime < 0) {
             mCaretBlinkTime = static_cast<int32_t>(::GetCaretBlinkTime());

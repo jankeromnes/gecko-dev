@@ -15,5 +15,5 @@ throw "Test262: This statement should not be evaluated.";
 
 //CHECK#1
 do
-  
+
 while (false)

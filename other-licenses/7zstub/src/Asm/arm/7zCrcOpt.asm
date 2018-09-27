@@ -19,13 +19,13 @@
 
 	MACRO
 	CRC32_STEP_4 $STREAM_WORD
-	
+
 	eor     r7, r7, r8
 	eor     r7, r7, r9
 	eor     r0, r0, r7
 	eor     r0, r0, $STREAM_WORD
 	ldr     $STREAM_WORD, [r1], #4
-	
+
 	and     r7, r0, #0xFF
 	and     r8, r0, #0xFF00
 	and     r9, r0, #0xFF0000
@@ -35,7 +35,7 @@
 	ldr     r8, [r5, +r8, lsr #6]
 	ldr     r9, [r4, +r9, lsr #14]
 	ldr     r0, [r3, +r0, lsr #22]
-	
+
 	MEND
 
 
@@ -58,7 +58,7 @@
 	ldr     r10, [r1], #4
 	ldr     r11, [r1], #4
 
-	add     r4, r3, #0x400 
+	add     r4, r3, #0x400
 	add     r5, r3, #0x800
 	add     r6, r3, #0xC00
 

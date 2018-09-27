@@ -8,12 +8,12 @@
 /**
  * MODULE NOTES:
  * @update  gess 4/1/98
- * 
- * This pure virtual interface is used as the "glue" that connects the parsing 
+ *
+ * This pure virtual interface is used as the "glue" that connects the parsing
  * process to the content model construction process.
  *
  * The icontentsink interface is a very lightweight wrapper that represents the
- * content-sink model building process. There is another one that you may care 
+ * content-sink model building process. There is another one that you may care
  * about more, which is the IHTMLContentSink interface. (See that file for details).
  */
 #include "nsISupports.h"
@@ -118,7 +118,7 @@ public:
    * (IOW, may return null).
    */
   virtual nsISupports *GetTarget()=0;
-  
+
   /**
    * Returns true if there's currently script executing that we need to hold
    * parsing for.
@@ -127,7 +127,7 @@ public:
   {
     return false;
   }
-  
+
   /**
    * Posts a runnable that continues parsing.
    */

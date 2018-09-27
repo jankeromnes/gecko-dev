@@ -12,7 +12,7 @@ var expect = 'No Crash';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 function g()
 {
   return 10;

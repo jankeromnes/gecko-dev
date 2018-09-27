@@ -154,7 +154,7 @@ void MessagePumpForUI::HandleDispatch() {
   }
 
   if (state_->delegate->DoWork()) {
-    // there might be more, see more_work_is_plausible 
+    // there might be more, see more_work_is_plausible
     // variable above, that's why we ScheduleWork() to keep going.
     ScheduleWork();
   }

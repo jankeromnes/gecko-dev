@@ -9,35 +9,35 @@ extern "C" {
 #ifndef ICC_H
 /* icc34 defines */
 
-/***************************************************************** 
+/*****************************************************************
  Copyright (c) 1994-1996 SunSoft, Inc.
 
                     Rights Reserved
 
-Permission is hereby granted, free of charge, to any person 
+Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without restrict- 
-ion, including without limitation the rights to use, copy, modify, 
-merge, publish distribute, sublicense, and/or sell copies of the 
-Software, and to permit persons to whom the Software is furnished 
-to do so, subject to the following conditions: 
- 
-The above copyright notice and this permission notice shall be 
-included in all copies or substantial portions of the Software. 
- 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+files (the "Software"), to deal in the Software without restrict-
+ion, including without limitation the rights to use, copy, modify,
+merge, publish distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished
+to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-
-INFRINGEMENT.  IN NO EVENT SHALL SUNSOFT, INC. OR ITS PARENT 
-COMPANY BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
-OTHER DEALINGS IN THE SOFTWARE. 
- 
-Except as contained in this notice, the name of SunSoft, Inc. 
-shall not be used in advertising or otherwise to promote the 
-sale, use or other dealings in this Software without written 
-authorization from SunSoft Inc. 
+INFRINGEMENT.  IN NO EVENT SHALL SUNSOFT, INC. OR ITS PARENT
+COMPANY BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+Except as contained in this notice, the name of SunSoft, Inc.
+shall not be used in advertising or otherwise to promote the
+sale, use or other dealings in this Software without written
+authorization from SunSoft Inc.
 ******************************************************************/
 
 /*
@@ -46,11 +46,11 @@ authorization from SunSoft Inc.
  * don't use the same objects on different threads at the same time.
  */
 
-/* 
+/*
  * Color Space Signatures
  * Note that only icSigXYZData and icSigLabData are valid
  * Profile Connection Spaces (PCSs)
- */ 
+ */
 typedef enum {
     icSigXYZData                        = 0x58595A20L,  /* 'XYZ ' */
     icSigLabData                        = 0x4C616220L,  /* 'Lab ' */
@@ -77,7 +77,7 @@ typedef enum {
     icSig13colorData                    = 0x44434C52L,  /* 'DCLR' */
     icSig14colorData                    = 0x45434C52L,  /* 'ECLR' */
     icSig15colorData                    = 0x46434C52L,  /* 'FCLR' */
-    icMaxEnumData                       = 0xFFFFFFFFL   
+    icMaxEnumData                       = 0xFFFFFFFFL
 } icColorSpaceSignature;
 #endif
 

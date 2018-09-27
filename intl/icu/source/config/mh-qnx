@@ -27,11 +27,11 @@ SHAREDLIBCXXFLAGS = -shared
 #CPPFLAGS+=-shared
 
 ## Additional flags when building libraries and with threads
-LIBCPPFLAGS = 
-THREADSCPPFLAGS = 
+LIBCPPFLAGS =
+THREADSCPPFLAGS =
 
 ## Compiler switch to embed a runtime search path
-LD_RPATH=	
+LD_RPATH=
 LD_RPATH_PRE = -Wl,-rpath,
 
 ## Compiler switch to embed a library name

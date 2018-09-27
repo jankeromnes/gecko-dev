@@ -19,12 +19,12 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var n = 1 << 22;
   var o = {};
   do {
     o[0] = 0;
-    delete o[0]; 
+    delete o[0];
   } while (--n != 0);
 
   gc();
@@ -34,7 +34,7 @@ function test()
 
   o = {};
   o[0] = 0;
-  delete o[0]; 
+  delete o[0];
   gc();
   var time2 = Date.now();
   gc();

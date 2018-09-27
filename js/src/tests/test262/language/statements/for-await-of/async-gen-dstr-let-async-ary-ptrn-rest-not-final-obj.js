@@ -54,7 +54,7 @@ var asyncIter = (async function*() {
 
 async function *fn() {
   for await (let [...{ x }, y] of asyncIter) {
-    
+
 
     iterCount += 1;
   }

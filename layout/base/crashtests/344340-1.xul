@@ -12,13 +12,13 @@ function foopy()
   var tooltip = document.createElementNS(XUL_NS, 'tooltip');
   var vbox = document.createElementNS(XUL_NS, 'vbox');
   var toolbarspring = document.createElementNS(XUL_NS, 'toolbarspring');
-  
+
   document.documentElement.appendChild(hbox);
   hbox.appendChild(toolbarspring);
 
   vbox.appendChild(tooltip);
   toolbarspring.appendChild(vbox);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

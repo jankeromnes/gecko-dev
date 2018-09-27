@@ -19,7 +19,7 @@ function test()
   printBugNumber(BUGNUMBER);
   printStatus (summary);
 
-  for (var j = 0; j < 5; ++j) { "".substring(-60000); } 
- 
+  for (var j = 0; j < 5; ++j) { "".substring(-60000); }
+
   reportCompare(expect, actual, summary);
 }

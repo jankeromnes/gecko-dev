@@ -134,8 +134,8 @@ var __the__raven = "	Once upon a midnight dreary, while I pondered weak and wear
         "And my soul from out that shadow that lies floating on the floor" +
         "Shall be lifted - nevermore!"
 
-var NEVERMORE=11;       
-       
+var NEVERMORE=11;
+
 var __re = /[Nn]evermore/g;
 var __matched=0;
 

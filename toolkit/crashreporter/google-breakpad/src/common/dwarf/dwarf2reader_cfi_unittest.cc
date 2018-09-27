@@ -148,7 +148,7 @@ struct CFIFixture {
     // - Leave Entry and End without expectations, as it's probably a
     //   good idea to set those explicitly in each test.
     //
-    // - Expect the *Rule functions to not be called, 
+    // - Expect the *Rule functions to not be called,
     //   so that each test can simply list the calls they expect.
     //
     // I gather I could use StrictMock for this, but the manual seems
@@ -700,7 +700,7 @@ struct CFIInsnFixture: public CFIFixture {
     cfa_base_register = 0x383a3aa;
     cfa_offset = 0xf748;
   }
-  
+
   // Prepare SECTION to receive FDE instructions.
   //
   // - Append a stock CIE header that establishes the fixture's
@@ -1275,7 +1275,7 @@ TEST_F(CFIInsn, DW_CFA_restore) {
         .WillOnce(Return(true));
     EXPECT_CALL(handler, End()).WillOnce(Return(true));
   }
-    
+
   ParseSection(&section);
 }
 
@@ -1324,7 +1324,7 @@ TEST_F(CFIInsn, DW_CFA_restoreNoRule) {
         .WillOnce(Return(true));
     EXPECT_CALL(handler, End()).WillOnce(Return(true));
   }
-    
+
   ParseSection(&section);
 }
 
@@ -1384,7 +1384,7 @@ TEST_F(CFIInsn, DW_CFA_restore_extended) {
         .WillOnce(Return(true));
     EXPECT_CALL(handler, End()).WillOnce(Return(true));
   }
-    
+
   ParseSection(&section);
 }
 
@@ -1631,7 +1631,7 @@ TEST_F(CFIInsn, QuitMidentry) {
       .InSequence(s).WillOnce(Return(false));
   EXPECT_CALL(handler, End())
       .InSequence(s).WillOnce(Return(true));
-  
+
   ParseSection(&section, false);
 }
 
@@ -2065,7 +2065,7 @@ TEST_F(CFIRestore, RestoreValExpressionRuleChangedValExpression) {
 }
 
 struct EHFrameFixture: public CFIInsnFixture {
-  EHFrameFixture() 
+  EHFrameFixture()
       : CFIInsnFixture(), section(kBigEndian, 4, true) {
     encoded_pointer_bases.cfi  = 0x7f496cb2;
     encoded_pointer_bases.text = 0x540f67b6;
@@ -2149,7 +2149,7 @@ TEST_F(EHFrame, SimpleFDE) {
   DwarfPointerEncoding fde_encoding =
       DwarfPointerEncoding(dwarf2reader::DW_EH_PE_textrel
                            | dwarf2reader::DW_EH_PE_udata2);
-  
+
   section.SetPointerEncoding(fde_encoding);
   section.SetEncodedPointerBases(encoded_pointer_bases);
   Label cie;
@@ -2159,7 +2159,7 @@ TEST_F(EHFrame, SimpleFDE) {
       .ULEB128(7)                                // Augmentation data length
       .D8(lsda_encoding)                         // LSDA pointer format
       .D8(dwarf2reader::DW_EH_PE_pcrel)          // personality pointer format
-      .EncodedPointer(0x97baa00, dwarf2reader::DW_EH_PE_pcrel) // and value 
+      .EncodedPointer(0x97baa00, dwarf2reader::DW_EH_PE_pcrel) // and value
       .D8(fde_encoding)                          // FDE pointer format
       .D8(dwarf2reader::DW_CFA_def_cfa).ULEB128(6706).ULEB128(31)
       .FinishEntry()
@@ -2509,7 +2509,7 @@ void WriteELFFrameSection(const char *filename, const char *cfi_name,
       .Mark(&cfi_header.name)
       .AppendCString(cfi_name)
       .Mark(&section_names_header.file_size);
-  
+
   // Create the section table. The ELF header's e_shoff member refers
   // to this, and the e_shnum member gives the number of entries it
   // contains.

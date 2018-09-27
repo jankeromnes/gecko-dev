@@ -5,20 +5,20 @@
 /* $Id: activity-home.css,v 1.4 2003/01/17 22:44:17 slesch Exp $ */
 
 /*   Single style sheet for ALL activity Home pages please
-** Tim     
+** Tim
 **  We need consistency on our web site - Nov 99 AC meeting
 **  Please do NOT use in-line style.
-**  Discuss this style sheet with other users and me 
+**  Discuss this style sheet with other users and me
 **    before fixing it
 */
 
-/* These bits from Dave's inline stylein the HTML home page 
+/* These bits from Dave's inline stylein the HTML home page
   tbl 19991115
 */
 
-  body { 
-    margin-left: 10%; 
-    margin-right: 5%; 
+  body {
+    margin-left: 10%;
+    margin-right: 5%;
     font-family: sans-serif
   }
   h1 { margin-left: -8% }
@@ -48,7 +48,7 @@
               padding: 0.5em;
               border: none
             }
- 
+
 
  h3.c3 {text-align: center}
  p.c2 {text-align: center}
@@ -64,57 +64,57 @@ body {
 /*	font-family: serif;   WinIE 4 to 5.5 problem with generic serif 20010726 */
 }
 
-div.main { 
-	margin-left: 5%; margin-right: 2% 
+div.main {
+	margin-left: 5%; margin-right: 2%
 }
 h1, h2, h3 {
-	font-family: arial, helvetica, sans-serif 
+	font-family: arial, helvetica, sans-serif
 }
 h2 {
 	margin-left:-2%
 }
-.date {color: #000; background: #DFD;  font-style: italic; font-weight: bold; 
+.date {color: #000; background: #DFD;  font-style: italic; font-weight: bold;
 vertical-align: top; border: none}
 .format {
-	color: #000; 
-	background: #DFD;  
-	font-style: italic; 
-	font-weight: bold; 
-	vertical-align: top; 
+	color: #000;
+	background: #DFD;
+	font-style: italic;
+	font-weight: bold;
+	vertical-align: top;
 	border: none
 }
 
 td {
-	margin: 6px 
+	margin: 6px
 }
 
 .offsite:link {
-	color: #393 
+	color: #393
 }
 
 .offsite:visited {
-	color: #666 
+	color: #666
 }
 .newslist {
 	margin: 3px 8px
 }
 
-pre {  
-	font-family: Syntax, "Courier New", Courier, monospace 
+pre {
+	font-family: Syntax, "Courier New", Courier, monospace
 }
 
-.qdlogo { 
-	height: 48px; 
-	color: #903; 
+.qdlogo {
+	height: 48px;
+	color: #903;
 
-	/* border: thin solid #903; 
+	/* border: thin solid #903;
 	*/ font-weight: bold; font-family: Hattenschweiller, Impact, serif; vertical-align: middle
 
 }
 
-.filler { 
-	color: #777; 
-	font-style: italic 
+.filler {
+	color: #777;
+	font-style: italic
 }
 
 

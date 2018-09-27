@@ -14,7 +14,7 @@ function handleRequest(request, response) {
     '  document.close();' +
     '}' +
     'setTimeout(doWrite, 0);' +
-    '</script>' 
+    '</script>'
   );
 
   response.bodyOutputStream.flush();

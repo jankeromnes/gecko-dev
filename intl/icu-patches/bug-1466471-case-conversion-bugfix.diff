@@ -13,7 +13,7 @@ Index: source/common/ucase.cpp
              GET_SLOT_VALUE(excWord, UCASE_EXC_DELTA, pe, delta);
              sa->add(sa->set, (excWord&UCASE_EXC_DELTA_IS_NEGATIVE)==0 ? c+delta : c-delta);
 @@ -1167,7 +1168,7 @@
- 
+
          if(HAS_SLOT(excWord, UCASE_EXC_DELTA) && UCASE_IS_UPPER_OR_TITLE(props)) {
              int32_t delta;
 -            GET_SLOT_VALUE(excWord, UCASE_EXC_DELTA, pe, delta);
@@ -22,7 +22,7 @@ Index: source/common/ucase.cpp
          }
          if(HAS_SLOT(excWord, UCASE_EXC_LOWER)) {
 @@ -1261,7 +1262,7 @@
- 
+
          if(HAS_SLOT(excWord, UCASE_EXC_DELTA) && UCASE_GET_TYPE(props)==UCASE_LOWER) {
              int32_t delta;
 -            GET_SLOT_VALUE(excWord, UCASE_EXC_DELTA, pe, delta);

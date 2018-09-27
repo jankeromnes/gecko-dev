@@ -137,7 +137,7 @@ function run_test() {
   check("", "", false);
 
   type = netutil.parseResponseContentType('text/plain, TEXT/HTML; param=charset=UTF8; charset="ISO-8859-1"; param2=charset=UTF16, text/html, TEXT/HTML', charset, hadCharset);
-  check("text/html", "ISO-8859-1", true);  
+  check("text/html", "ISO-8859-1", true);
 
   type = netutil.parseRequestContentType('text/plain, TEXT/HTML; param=charset=UTF8; charset="ISO-8859-1"; param2=charset=UTF16, text/html, TEXT/HTML', charset, hadCharset);
   check("", "", false);

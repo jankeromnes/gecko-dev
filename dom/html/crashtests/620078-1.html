@@ -9,7 +9,7 @@ function boom()
   var frameRoot = frame.contentDocument.documentElement;
   document.body.removeChild(frame);
   var i = document.createElementNS("http://www.w3.org/1999/xhtml", "input");
-  i.setAttribute("autofocus", "true"); 
+  i.setAttribute("autofocus", "true");
   frameRoot.appendChild(i);
 }
 

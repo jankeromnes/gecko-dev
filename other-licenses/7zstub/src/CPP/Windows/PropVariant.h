@@ -82,10 +82,10 @@ public:
   CPropVariant& operator=(const char *s);
   CPropVariant& operator=(const AString &s)
     { return (*this)=(const char *)s; }
-  
+
   CPropVariant& operator=(bool bSrc) throw();
   CPropVariant& operator=(Byte value) throw();
-  
+
 private:
   CPropVariant& operator=(Int16 value) throw();
 

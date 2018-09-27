@@ -17,6 +17,6 @@ function f() {
   g();
 
   assertEq(x, 8);
-} 
+}
 
 f();

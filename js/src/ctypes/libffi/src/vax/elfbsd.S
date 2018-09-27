@@ -8,10 +8,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED ``AS IS'', WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -25,7 +25,7 @@
  * vax Foreign Function Interface
  */
 
-#define LIBFFI_ASM	
+#define LIBFFI_ASM
 #include <fficonfig.h>
 #include <ffi.h>
 
@@ -81,7 +81,7 @@ ffi_call_elfbsd:
 	pushl	%r3
 1:	bbc	$2, 0(%r1), 1f
 	pushl	%r2
-1:	
+1:
 	pushal	9f
 	pushl	%fp
 	pushl	%ap
@@ -93,7 +93,7 @@ ffi_call_elfbsd:
 	bicw2	$0xf003, %r2	# only keep R11-R2
 	ashl	$16, %r2, %r2
 	bisl2	%r2, %r0	# saved register mask of the called function
-	pushl	%r0	
+	pushl	%r0
 	pushl	$0
 	movl	%sp, %fp
 

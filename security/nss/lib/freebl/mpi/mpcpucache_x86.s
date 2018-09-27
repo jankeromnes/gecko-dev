@@ -573,7 +573,7 @@ freebl_cpuid:
 	cpuid
 	mov %ebx,%esi
 	popl %ebx
-	
+
 /NO_APP
 	movl	%eax, (%ebp)
 	movl	24(%esp), %eax
@@ -602,7 +602,7 @@ changeFlag:
 	popl %edx
 	pushl %ecx
 	popfl
-	
+
 /NO_APP
 	xorl	%ecx, %edx
 	movl	%edx, %eax

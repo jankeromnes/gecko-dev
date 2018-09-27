@@ -145,8 +145,8 @@ gfxDWriteFontFileStream::ReleaseFileFragment(void *fragmentContext)
 }
 
 HRESULT STDMETHODCALLTYPE
-gfxDWriteFontFileLoader::CreateStreamFromKey(const void *fontFileReferenceKey, 
-                                             UINT32 fontFileReferenceKeySize, 
+gfxDWriteFontFileLoader::CreateStreamFromKey(const void *fontFileReferenceKey,
+                                             UINT32 fontFileReferenceKeySize,
                                              IDWriteFontFileStream **fontFileStream)
 {
     if (!fontFileReferenceKey || !fontFileStream) {

@@ -7,7 +7,7 @@ g.eval("function i() { h(); }");
 
 var dbg = new Debugger(g);
 var log;
-function logger(frame, mark) { 
+function logger(frame, mark) {
     return function (completion) {
         assertEq(this, frame);
         assertEq('return' in completion, true);
@@ -19,7 +19,7 @@ dbg.onEnterFrame = function handleEnter(f) {
     // Note that this establishes a distinct function object as each
     // frame's onPop handler. Thus, a pass proves that each frame is
     // remembering its handler separately.
-    f.onPop = logger(f, f.callee.name + ")");  
+    f.onPop = logger(f, f.callee.name + ")");
 };
 dbg.onDebuggerStatement = function handleDebugger(f) {
     log += 'd';

@@ -15,9 +15,9 @@
 //
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
-// SV_POSITION              0   xyzw        0      POS   float       
-// TEXCORD                  0   xy          1     NONE   float   xy  
-// SV_SAMPLEINDEX           0   x           2   SAMPLE    uint   x   
+// SV_POSITION              0   xyzw        0      POS   float
+// TEXCORD                  0   xy          1     NONE   float   xy
+// SV_SAMPLEINDEX           0   x           2   SAMPLE    uint   x
 //
 //
 // Output signature:
@@ -38,7 +38,7 @@ dcl_temps 1
 ftou r0.xy, v1.xyxx
 mov r0.zw, l(0,0,0,0)
 ldms o0.xyzw, r0.xyzw, t0.xyzw, v2.x
-ret 
+ret
 // Approximately 4 instruction slots used
 #endif
 

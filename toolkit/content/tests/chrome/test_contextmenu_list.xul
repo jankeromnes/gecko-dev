@@ -6,8 +6,8 @@
         onload="setTimeout(startTest, 0);"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>      
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/EventUtils.js"></script>      
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/EventUtils.js"></script>
 
 <spacer height="5"/>
 
@@ -222,7 +222,7 @@ function checkContextMenuForMenu(event)
 function checkPopup()
 {
   var menurect = $("themenu").getBoundingClientRect();
-  
+
   // Context menus are offset by a number of pixels from the mouse click
   // which activates them. This is so that they don't appear exactly
   // under the mouse which can cause them to be mistakenly dismissed.

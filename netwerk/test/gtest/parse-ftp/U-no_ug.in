@@ -10,15 +10,15 @@ Name (ftp.cs.uct.ac.za:cyp):
 230- |  _| |_| |_) | (__\__ \| |_| | (__| |_ | (_| | (__ _ / / (_| |
 230- |_|  \__| .__(_)___|___(_)__,_|\___|\__(_)__,_|\___(_)___\__,_|
 230-         |_|
-230- 
+230-
 230- Publicly available downloads can be found in /pub.
-230- 
+230-
 230- Do not put anything in /incoming unless it is by prior arrangement.
 230- If we do not know what it is, it will be deleted.
-230- 
+230-
 230- A complete listing of available files can be found in /pub/ls-lR.gz
 230- and /pub/ls-lR.  This list is updated daily at 02:00 SAST.
-230- 
+230-
 230- Contents of /pub:
 230-   CVC/                - Collaborative Visual Computing Laboratory
 230-   DB/                 - Database Laboratory
@@ -29,17 +29,17 @@ Name (ftp.cs.uct.ac.za:cyp):
 230-   OpenBSD/            - The OpenBSD Operating System
 230-   windows/            - Software for Microsoft Windows
 230-       ssh/                - secure shell clients
-230- 
+230-
 230- This FTP site is also searchable via archie,
 230- and the web: http://ftp.cs.uct.ac.za:8000/ftpsearch
-230- 
+230-
 230- UCT/UNINET users should also peruse the following
 230- anonymous FTP servers for additional resources:
-230- 
+230-
 230-   ftp://ftp.leg.uct.ac.za/         [ http://www.leg.uct.ac.za/ ]
 230-   ftp://ftp.adamastor.ac.za/     [ http://ftp.adamastor.ac.za/ ]
 230-   ftp://cabbagewrath.its.uct.ac.za/ [ don't ask about the name ]
-230- 
+230-
 230- --
 230- ftp-admin@cs.uct.ac.za
 230 Guest login ok, access restrictions apply.

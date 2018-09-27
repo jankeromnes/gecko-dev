@@ -23,7 +23,7 @@ function run_test() {
 
   // Opened channel that has no remaining references after being opened
   setupChannel(testpath).asyncOpen2(new ChannelListener(function() {}, null));
-  
+
   // Unopened channel that has remaining references on shutdown
   live_channels.push(setupChannel(testpath));
 

@@ -64,7 +64,7 @@ public:
   void PanFeedbackFinalize(HWND hWnd, bool endFeedback);
 
 private:
-  // Delay load info 
+  // Delay load info
   bool InitLibrary();
 
   // Pan and feedback state

@@ -37,13 +37,13 @@ function setUpPage() {
        setImplementationAttribute("namespaceAware", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,16 +73,16 @@ var docName = 'setNamedItemNS04';
 
 
 /**
-* 
-  The "setNamedItemNS(arg)" method for a 
-  NamedNodeMap should raise NO_MODIFICATION_ALLOWED_ERR DOMException if 
+*
+  The "setNamedItemNS(arg)" method for a
+  NamedNodeMap should raise NO_MODIFICATION_ALLOWED_ERR DOMException if
   this map is readonly.
-  
+
   Retrieve a list of "gender" elements. Get access to the THIRD element
   which contains an ENTITY_REFERENCE child node.  Get access to the node's
-  map. Try to add an attribute node specified by arg with 
+  map. Try to add an attribute node specified by arg with
   method setNamedItemNS(arg).  This should result in NO_MODIFICATION_ALLOWED_ERR
-  DOMException. 
+  DOMException.
 
 * @author NIST
 * @author Mary Brady
@@ -106,7 +106,7 @@ function setNamedItemNS04() {
       var arg;
       var setNode;
       var nodeType;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -119,7 +119,7 @@ function setNamedItemNS04() {
       child = nList.item(0);
       nodeType = child.nodeType;
 
-      
+
 	if(
 	(1 == nodeType)
 	) {
@@ -134,7 +134,7 @@ function setNamedItemNS04() {
 attributes = child2.attributes;
 
       arg = attributes.getNamedItemNS(namespaceURI,localName);
-      
+
 	{
 		success = false;
 		try {
@@ -154,12 +154,12 @@ attributes = child2.attributes;
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/setNamedItemNS04</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

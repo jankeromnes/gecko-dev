@@ -38,13 +38,13 @@ adapted from test_bug607584.xul by Kent James <kent@caspia.com>
   {
     this.init(aEditor);
   }
-  
+
   EditorContentListener.prototype = {
     init : function(aEditor)
       {
         this.mEditor = aEditor;
       },
-  
+
     QueryInterface : function(aIID)
       {
         if (aIID.equals(Ci.nsIWebProgressListener) ||
@@ -53,7 +53,7 @@ adapted from test_bug607584.xul by Kent James <kent@caspia.com>
           return this;
         throw Cr.NS_NOINTERFACE;
       },
-  
+
     onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
     {
         if (aStateFlags & Ci.nsIWebProgressListener.STATE_STOP)
@@ -73,28 +73,28 @@ adapted from test_bug607584.xul by Kent James <kent@caspia.com>
               progress.removeProgressListener(this);
           }
         }
-  
+
     },
-  
-  
+
+
     onProgressChange : function(aWebProgress, aRequest,
                                 aCurSelfProgress, aMaxSelfProgress,
                                 aCurTotalProgress, aMaxTotalProgress)
       {
       },
-  
+
     onLocationChange : function(aWebProgress, aRequest, aLocation, aFlags)
       {
       },
-  
+
     onStatusChange : function(aWebProgress, aRequest, aStatus, aMessage)
       {
       },
-  
+
     onSecurityChange : function(aWebProgress, aRequest, aState)
       {
       },
-  
+
       mEditor: null
   };
 

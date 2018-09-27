@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof gczeal == 'undefined')
   {
     gczeal = (function (){});

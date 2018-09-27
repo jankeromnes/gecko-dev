@@ -1,7 +1,7 @@
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
 The ECL exposes routines for constructing and converting curve
 parameters for internal use.
 
@@ -150,8 +150,8 @@ Default Wiring
 --------------
 
 Curves over prime fields by default use montgomery field arithmetic,
-point multiplication using 5-bit window non-adjacent-form with 
-Modified Jacobian coordinates, and 2*2-bit simultaneous point 
+point multiplication using 5-bit window non-adjacent-form with
+Modified Jacobian coordinates, and 2*2-bit simultaneous point
 multiplication using Jacobian coordinates.
 (Wiring in function ECGroup_consGFp_mont in ecl.c.)
 

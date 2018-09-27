@@ -94,7 +94,7 @@ nsNativeTheme::GetContentState(nsIFrame* aFrame, StyleAppearance aWidgetType)
       flags |= NS_EVENT_STATE_DISABLED;
     }
   }
-  
+
   if (isXULCheckboxRadio && aWidgetType == StyleAppearance::Radio) {
     if (IsFocused(aFrame))
       flags |= NS_EVENT_STATE_FOCUS;
@@ -117,14 +117,14 @@ nsNativeTheme::GetContentState(nsIFrame* aFrame, StyleAppearance aWidgetType)
   // On Windows, focused buttons are always drawn as such by the native theme.
   if (aWidgetType == StyleAppearance::Button)
     return flags;
-#endif    
+#endif
 #if defined(XP_MACOSX) || defined(XP_WIN)
   nsIDocument* doc = aFrame->GetContent()->OwnerDoc();
   nsPIDOMWindowOuter* window = doc->GetWindow();
   if (window && !window->ShouldShowFocusRing())
     flags &= ~NS_EVENT_STATE_FOCUS;
 #endif
-  
+
   return flags;
 }
 

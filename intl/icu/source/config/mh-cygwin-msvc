@@ -25,12 +25,12 @@ STATICCPPFLAGS = -DU_STATIC_IMPLEMENTATION
 endif
 
 ## Flags for position independent code
-SHAREDLIBCFLAGS = 
-SHAREDLIBCXXFLAGS = 
+SHAREDLIBCFLAGS =
+SHAREDLIBCXXFLAGS =
 SHAREDLIBCPPFLAGS =
 
 ## Additional flags when building libraries and with threads
-LIBCPPFLAGS = 
+LIBCPPFLAGS =
 
 ifeq ($(ENABLE_RELEASE),1)
 # Make sure that assertions are disabled
@@ -67,7 +67,7 @@ SHLIB.c=	LINK.EXE -DLL $(LDFLAGS)
 SHLIB.cc=	LINK.EXE -DLL $(LDFLAGS)
 
 ## Compiler switch to embed a runtime search path
-LD_RPATH=	
+LD_RPATH=
 LD_RPATH_PRE=
 
 ## Compiler switch to embed a library name

@@ -532,7 +532,7 @@ impl<'de, 'a> de::VariantAccess<'de> for Enum<'a, 'de> {
         where T: DeserializeSeed<'de>
     {
         self.de.bytes.skip_ws();
-        
+
         if self.de.bytes.consume("(") {
             let val = seed.deserialize(&mut *self.de)?;
 

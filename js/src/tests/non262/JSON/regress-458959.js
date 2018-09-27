@@ -18,8 +18,8 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
-  for (var i in this) 
+
+  for (var i in this)
   {
     if (i.toString() == 'JSON')
       actual = i;

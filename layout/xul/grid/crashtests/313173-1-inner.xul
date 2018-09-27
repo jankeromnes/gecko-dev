@@ -24,7 +24,7 @@ setTimeout(doe2,20);
 }
 function doe2(){
 document.getElementsByTagName('columns')[0].style.display='-moz-grid';
-}     
+}
 
 function clickit() {
   var button = document.getElementById('button');

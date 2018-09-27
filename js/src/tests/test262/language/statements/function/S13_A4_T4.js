@@ -15,7 +15,7 @@ description: >
 function __func(){return arguments[0].name + " " + arguments[0].surname;};
 
 //////////////////////////////////////////////////////////////////////////////
-//CHECK#1 
+//CHECK#1
 if (typeof __func !== "function") {
 	$ERROR('#1: typeof __func === "function". Actual: typeof __func ==='+typeof __func);
 }
@@ -33,7 +33,7 @@ if (__func({name:'fox', surname:'malder'}) !== "fox malder") {
 function func__(arg){return arg.name + " " + arg.surname;};
 
 //////////////////////////////////////////////////////////////////////////////
-//CHECK#3 
+//CHECK#3
 if (typeof func__ !== "function") {
 	$ERROR('#3: typeof func__ === "function". Actual: typeof __func ==='+typeof __func);
 }

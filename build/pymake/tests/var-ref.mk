@@ -5,7 +5,7 @@ VAR5 = $(NULL) $(NULL)
 VARC = value # comment
 
 $(VAR3)
-  $(VAR4)  
+  $(VAR4)
 $(VAR5)
 
 VAR6$(VAR5) = val6

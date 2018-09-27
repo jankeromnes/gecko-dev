@@ -137,7 +137,7 @@ noop_dest_iter_init (pixman_implementation_t *imp, pixman_iter_t *iter)
     pixman_image_t *image = iter->image;
     uint32_t image_flags = iter->image_flags;
     uint32_t iter_flags = iter->iter_flags;
-    
+
     if ((image_flags & FAST_PATH_STD_DEST_FLAGS) == FAST_PATH_STD_DEST_FLAGS	&&
 	(iter_flags & ITER_NARROW) == ITER_NARROW				&&
 	((image->common.extended_format_code == PIXMAN_a8r8g8b8)	||
@@ -168,7 +168,7 @@ _pixman_implementation_create_noop (pixman_implementation_t *fallback)
 {
     pixman_implementation_t *imp =
 	_pixman_implementation_create (fallback, noop_fast_paths);
- 
+
     imp->src_iter_init = noop_src_iter_init;
     imp->dest_iter_init = noop_dest_iter_init;
 

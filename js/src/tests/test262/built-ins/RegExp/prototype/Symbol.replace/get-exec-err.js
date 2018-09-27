@@ -10,7 +10,7 @@ info: |
     [...]
     13. Repeat, while done is false
         a. Let result be RegExpExec(rx, S).
- 
+
     ES6 21.2.5.2.1 Runtime Semantics: RegExpExec ( R, S )
 
     [...]

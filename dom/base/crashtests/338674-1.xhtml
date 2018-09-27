@@ -16,7 +16,7 @@ function boom()
     document.removeEventListener("DOMAttrModified", bang, false); // avoid accidental recursion, multiple calls, etc.
     rM(t);
   }
-  
+
   document.documentElement.removeAttribute("class");
 }
 

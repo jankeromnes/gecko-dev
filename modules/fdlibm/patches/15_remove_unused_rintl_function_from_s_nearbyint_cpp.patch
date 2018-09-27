@@ -7,7 +7,7 @@ diff --git a/modules/fdlibm/src/s_nearbyint.cpp b/modules/fdlibm/src/s_nearbyint
  	fesetenv(&env);		\
  	return (ret);		\
  }
- 
+
  DECL(double, nearbyint, rint)
  DECL(float, nearbyintf, rintf)
 -DECL(long double, nearbyintl, rintl)

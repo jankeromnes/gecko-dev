@@ -9,7 +9,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-access.c b/gfx/cairo/libpixman/src/p
  	       ((values[i] << 14) & 0x3ff00000));
      }
  }
- 
+
 +static void
 +store_scanline_16 (bits_image_t *  image,
 +		   int             x,
@@ -58,10 +58,10 @@ diff --git a/gfx/cairo/libpixman/src/pixman-access.c b/gfx/cairo/libpixman/src/p
                             int             y,
 @@ -1044,32 +1082,47 @@ fetch_pixel_generic_lossy_32 (bits_image
      pixman_contract (&result, &pixel64, 1);
- 
+
      return result;
  }
- 
+
  typedef struct
  {
      pixman_format_code_t	format;
@@ -74,7 +74,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-access.c b/gfx/cairo/libpixman/src/p
      store_scanline_t		store_scanline_32;
      store_scanline_t		store_scanline_64;
  } format_info_t;
- 
+
  #define FORMAT_INFO(format) 						\
      {									\
  	PIXMAN_ ## format,						\
@@ -96,7 +96,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-access.c b/gfx/cairo/libpixman/src/p
 +	    store_scanline_ ## format, store_scanline_generic_64	\
 +    }
 +
- 
+
  static const format_info_t accessors[] =
  {
  /* 32 bpp formats */
@@ -107,17 +107,17 @@ diff --git a/gfx/cairo/libpixman/src/pixman-access.c b/gfx/cairo/libpixman/src/p
 @@ -1079,18 +1132,18 @@ static const format_info_t accessors[] =
      FORMAT_INFO (r8g8b8x8),
      FORMAT_INFO (x14r6g6b6),
- 
+
  /* 24bpp formats */
      FORMAT_INFO (r8g8b8),
      FORMAT_INFO (b8g8r8),
-     
+
  /* 16bpp formats */
 -    FORMAT_INFO (r5g6b5),
 -    FORMAT_INFO (b5g6r5),
 +    FORMAT_INFO16 (r5g6b5),
 +    FORMAT_INFO16 (b5g6r5),
-     
+
      FORMAT_INFO (a1r5g5b5),
      FORMAT_INFO (x1r5g5b5),
      FORMAT_INFO (a1b5g5r5),
@@ -126,58 +126,58 @@ diff --git a/gfx/cairo/libpixman/src/pixman-access.c b/gfx/cairo/libpixman/src/p
      FORMAT_INFO (x4r4g4b4),
      FORMAT_INFO (a4b4g4r4),
 @@ -1132,62 +1185,64 @@ static const format_info_t accessors[] =
-     
+
  /* 1bpp formats */
      FORMAT_INFO (a1),
      FORMAT_INFO (g1),
-     
+
  /* Wide formats */
-     
+
      { PIXMAN_a2r10g10b10,
 -      NULL, fetch_scanline_a2r10g10b10,
 +      NULL, NULL, fetch_scanline_a2r10g10b10,
        fetch_pixel_generic_lossy_32, fetch_pixel_a2r10g10b10,
        NULL, store_scanline_a2r10g10b10 },
-     
+
      { PIXMAN_x2r10g10b10,
 -      NULL, fetch_scanline_x2r10g10b10,
 +      NULL, NULL, fetch_scanline_x2r10g10b10,
        fetch_pixel_generic_lossy_32, fetch_pixel_x2r10g10b10,
        NULL, store_scanline_x2r10g10b10 },
-     
+
      { PIXMAN_a2b10g10r10,
 -      NULL, fetch_scanline_a2b10g10r10,
 +      NULL, NULL, fetch_scanline_a2b10g10r10,
        fetch_pixel_generic_lossy_32, fetch_pixel_a2b10g10r10,
        NULL, store_scanline_a2b10g10r10 },
-     
+
      { PIXMAN_x2b10g10r10,
 -      NULL, fetch_scanline_x2b10g10r10,
 +      NULL, NULL, fetch_scanline_x2b10g10r10,
        fetch_pixel_generic_lossy_32, fetch_pixel_x2b10g10r10,
        NULL, store_scanline_x2b10g10r10 },
-     
+
  /* YUV formats */
      { PIXMAN_yuy2,
 -      fetch_scanline_yuy2, fetch_scanline_generic_64,
 +      NULL, fetch_scanline_yuy2, fetch_scanline_generic_64,
        fetch_pixel_yuy2, fetch_pixel_generic_64,
        NULL, NULL },
-     
+
      { PIXMAN_yv12,
 -      fetch_scanline_yv12, fetch_scanline_generic_64,
 +      NULL, fetch_scanline_yv12, fetch_scanline_generic_64,
        fetch_pixel_yv12, fetch_pixel_generic_64,
        NULL, NULL },
-     
+
      { PIXMAN_null },
  };
- 
+
  static void
  setup_accessors (bits_image_t *image)
  {
      const format_info_t *info = accessors;
-     
+
      while (info->format != PIXMAN_null)
      {
  	if (info->format == image->format)
@@ -190,17 +190,17 @@ diff --git a/gfx/cairo/libpixman/src/pixman-access.c b/gfx/cairo/libpixman/src/p
 +	    image->store_scanline_16 = info->store_scanline_16;
  	    image->store_scanline_32 = info->store_scanline_32;
  	    image->store_scanline_64 = info->store_scanline_64;
- 	    
+
  	    return;
  	}
- 	
+
  	info++;
      }
 diff --git a/gfx/cairo/libpixman/src/pixman-bits-image.c b/gfx/cairo/libpixman/src/pixman-bits-image.c
 --- a/gfx/cairo/libpixman/src/pixman-bits-image.c
 +++ b/gfx/cairo/libpixman/src/pixman-bits-image.c
 @@ -1247,16 +1247,31 @@ src_get_scanline_wide (pixman_iter_t *it
- 
+
  void
  _pixman_bits_image_src_iter_init (pixman_image_t *image, pixman_iter_t *iter)
  {
@@ -224,7 +224,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-bits-image.c b/gfx/cairo/libpixman/s
 +
 +    return iter->buffer;
  }
- 
+
  static uint32_t *
  dest_get_scanline_narrow (pixman_iter_t *iter, const uint32_t *mask)
  {
@@ -235,10 +235,10 @@ diff --git a/gfx/cairo/libpixman/src/pixman-bits-image.c b/gfx/cairo/libpixman/s
  	    free (alpha);
  	}
      }
- 
+
      return iter->buffer;
  }
- 
+
  static void
 +dest_write_back_16 (pixman_iter_t *iter)
 +{
@@ -261,13 +261,13 @@ diff --git a/gfx/cairo/libpixman/src/pixman-bits-image.c b/gfx/cairo/libpixman/s
      int             y      = iter->y;
      int             width  = iter->width;
      const uint32_t *buffer = iter->buffer;
- 
+
 @@ -1375,28 +1404,41 @@ dest_write_back_wide (pixman_iter_t *ite
      }
- 
+
      iter->y++;
  }
- 
+
  void
  _pixman_bits_image_dest_iter_init (pixman_image_t *image, pixman_iter_t *iter)
  {
@@ -296,7 +296,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-bits-image.c b/gfx/cairo/libpixman/s
  	{
  	    iter->get_scanline = dest_get_scanline_narrow;
  	}
--	
+-
 +
  	iter->write_back = dest_write_back_narrow;
      }
@@ -450,7 +450,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-general.c b/gfx/cairo/libpixman/src/
 +    iter_flags_t rgb16;
      int Bpp;
      int i;
- 
+
      if ((src_image->common.flags & FAST_PATH_NARROW_FORMAT)		    &&
  	(!mask_image || mask_image->common.flags & FAST_PATH_NARROW_FORMAT) &&
  	(dest_image->common.flags & FAST_PATH_NARROW_FORMAT))
@@ -463,7 +463,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-general.c b/gfx/cairo/libpixman/src/
  	narrow = 0;
  	Bpp = 8;
      }
- 
+
 +    // XXX: This special casing is bad. Ideally, we'd keep the general code general perhaps
 +    // by having it deal more specifically with different intermediate formats
 +    if (
@@ -481,77 +481,77 @@ diff --git a/gfx/cairo/libpixman/src/pixman-general.c b/gfx/cairo/libpixman/src/
      if (width * Bpp > SCANLINE_BUFFER_LENGTH)
      {
  	scanline_buffer = pixman_malloc_abc (width, 3, Bpp);
- 
+
  	if (!scanline_buffer)
  	    return;
      }
- 
+
      src_buffer = scanline_buffer;
      mask_buffer = src_buffer + width * Bpp;
      dest_buffer = mask_buffer + width * Bpp;
- 
+
      /* src iter */
 -    src_flags = narrow | op_flags[op].src;
 +    src_flags = narrow | op_flags[op].src | rgb16;
- 
+
      _pixman_implementation_src_iter_init (imp->toplevel, &src_iter, src_image,
  					  src_x, src_y, width, height,
  					  src_buffer, src_flags);
- 
+
      /* mask iter */
      if ((src_flags & (ITER_IGNORE_ALPHA | ITER_IGNORE_RGB)) ==
  	(ITER_IGNORE_ALPHA | ITER_IGNORE_RGB))
 @@ -164,20 +179,20 @@ general_composite_rect  (pixman_implemen
- 
+
      _pixman_implementation_src_iter_init (
  	imp->toplevel, &mask_iter, mask_image, mask_x, mask_y, width, height,
  	mask_buffer, narrow | (component_alpha? 0 : ITER_IGNORE_RGB));
- 
+
      /* dest iter */
      _pixman_implementation_dest_iter_init (
  	imp->toplevel, &dest_iter, dest_image, dest_x, dest_y, width, height,
 -	dest_buffer, narrow | op_flags[op].dst);
 +	dest_buffer, narrow | op_flags[op].dst | rgb16);
- 
+
      compose = _pixman_implementation_lookup_combiner (
 -	imp->toplevel, op, component_alpha, narrow);
 +	imp->toplevel, op, component_alpha, narrow, !!rgb16);
- 
+
      if (!compose)
  	return;
- 
+
      for (i = 0; i < height; ++i)
      {
  	uint32_t *s, *m, *d;
- 
+
 @@ -234,16 +249,17 @@ general_fill (pixman_implementation_t *i
      return FALSE;
  }
- 
+
  pixman_implementation_t *
  _pixman_implementation_create_general (void)
  {
      pixman_implementation_t *imp = _pixman_implementation_create (NULL, general_fast_path);
- 
+
 +    _pixman_setup_combiner_functions_16 (imp);
      _pixman_setup_combiner_functions_32 (imp);
      _pixman_setup_combiner_functions_64 (imp);
- 
+
      imp->blt = general_blt;
      imp->fill = general_fill;
      imp->src_iter_init = general_src_iter_init;
      imp->dest_iter_init = general_dest_iter_init;
- 
+
 diff --git a/gfx/cairo/libpixman/src/pixman-image.c b/gfx/cairo/libpixman/src/pixman-image.c
 --- a/gfx/cairo/libpixman/src/pixman-image.c
 +++ b/gfx/cairo/libpixman/src/pixman-image.c
 @@ -451,16 +451,20 @@ compute_image_info (pixman_image_t *imag
  		flags |= FAST_PATH_IS_OPAQUE;
  	}
- 
+
  	if (image->bits.read_func || image->bits.write_func)
  	    flags &= ~FAST_PATH_NO_ACCESSORS;
- 
+
  	if (PIXMAN_FORMAT_IS_WIDE (image->bits.format))
  	    flags &= ~FAST_PATH_NARROW_FORMAT;
 +
@@ -559,10 +559,10 @@ diff --git a/gfx/cairo/libpixman/src/pixman-image.c b/gfx/cairo/libpixman/src/pi
 +	    flags |= FAST_PATH_16_FORMAT;
 +
  	break;
- 
+
      case RADIAL:
  	code = PIXMAN_unknown;
- 
+
  	/*
  	 * As explained in pixman-radial-gradient.c, every point of
  	 * the plane has a valid associated radius (and thus will be
@@ -573,9 +573,9 @@ diff --git a/gfx/cairo/libpixman/src/pixman-implementation.c b/gfx/cairo/libpixm
      imp->fill = delegate_fill;
      imp->src_iter_init = delegate_src_iter_init;
      imp->dest_iter_init = delegate_dest_iter_init;
- 
+
      imp->fast_paths = fast_paths;
- 
+
      for (i = 0; i < PIXMAN_N_OPERATORS; ++i)
      {
 +	imp->combine_16[i] = NULL;
@@ -584,10 +584,10 @@ diff --git a/gfx/cairo/libpixman/src/pixman-implementation.c b/gfx/cairo/libpixm
  	imp->combine_32_ca[i] = NULL;
  	imp->combine_64_ca[i] = NULL;
      }
- 
+
      return imp;
  }
- 
+
  pixman_combine_32_func_t
  _pixman_implementation_lookup_combiner (pixman_implementation_t *imp,
  					pixman_op_t		 op,
@@ -597,7 +597,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-implementation.c b/gfx/cairo/libpixm
 +					pixman_bool_t		 rgb16)
  {
      pixman_combine_32_func_t f;
- 
+
      do
      {
  	pixman_combine_32_func_t (*combiners[]) =
@@ -620,10 +620,10 @@ diff --git a/gfx/cairo/libpixman/src/pixman-implementation.c b/gfx/cairo/libpixm
  	imp = imp->delegate;
      }
      while (!f);
- 
+
      return f;
  }
- 
+
  pixman_bool_t
 diff --git a/gfx/cairo/libpixman/src/pixman-linear-gradient.c b/gfx/cairo/libpixman/src/pixman-linear-gradient.c
 --- a/gfx/cairo/libpixman/src/pixman-linear-gradient.c
@@ -631,12 +631,12 @@ diff --git a/gfx/cairo/libpixman/src/pixman-linear-gradient.c b/gfx/cairo/libpix
 @@ -217,42 +217,185 @@ linear_get_scanline_narrow (pixman_iter_
  	}
      }
- 
+
      iter->y++;
- 
+
      return iter->buffer;
  }
- 
+
 +static uint16_t convert_8888_to_0565(uint32_t color)
 +{
 +    return CONVERT_8888_TO_0565(color);
@@ -706,7 +706,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-linear-gradient.c b/gfx/cairo/libpix
 +	    invden = pixman_fixed_1 * (double) pixman_fixed_1 /
 +		(l * (double) v.vector[2]);
 +	    v2 = v.vector[2] * (1. / pixman_fixed_1);
-+	    t = ((dx * v.vector[0] + dy * v.vector[1]) - 
++	    t = ((dx * v.vector[0] + dy * v.vector[1]) -
 +		 (dx * linear->p1.x + dy * linear->p1.y) * v2) * invden;
 +	    inc = (dx * unit.vector[0] + dy * unit.vector[1]) * invden;
 +	}
@@ -756,7 +756,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-linear-gradient.c b/gfx/cairo/libpix
 +		    invden = pixman_fixed_1 * (double) pixman_fixed_1 /
 +			(l * (double) v.vector[2]);
 +		    v2 = v.vector[2] * (1. / pixman_fixed_1);
-+		    t = ((dx * v.vector[0] + dy * v.vector[1]) - 
++		    t = ((dx * v.vector[0] + dy * v.vector[1]) -
 +			 (dx * linear->p1.x + dy * linear->p1.y) * v2) * invden;
 +		}
 +
@@ -780,12 +780,12 @@ diff --git a/gfx/cairo/libpixman/src/pixman-linear-gradient.c b/gfx/cairo/libpix
  linear_get_scanline_wide (pixman_iter_t *iter, const uint32_t *mask)
  {
      uint32_t *buffer = linear_get_scanline_narrow (iter, NULL);
- 
+
      pixman_expand ((uint64_t *)buffer, buffer, PIXMAN_a8r8g8b8, iter->width);
- 
+
      return buffer;
  }
- 
+
  void
  _pixman_linear_gradient_iter_init (pixman_image_t *image, pixman_iter_t  *iter)
  {
@@ -799,7 +799,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-linear-gradient.c b/gfx/cairo/libpix
  	    linear_get_scanline_narrow (iter, NULL);
  	else
  	    linear_get_scanline_wide (iter, NULL);
- 
+
  	iter->get_scanline = _pixman_iter_get_scanline_noop;
      }
      else
@@ -813,7 +813,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-linear-gradient.c b/gfx/cairo/libpix
  	    iter->get_scanline = linear_get_scanline_wide;
      }
  }
- 
+
  PIXMAN_EXPORT pixman_image_t *
  pixman_image_create_linear_gradient (pixman_point_fixed_t *        p1,
 diff --git a/gfx/cairo/libpixman/src/pixman-private.h b/gfx/cairo/libpixman/src/pixman-private.h
@@ -824,27 +824,27 @@ diff --git a/gfx/cairo/libpixman/src/pixman-private.h b/gfx/cairo/libpixman/src/
      uint32_t *                 bits;
      uint32_t *                 free_me;
      int                        rowstride;  /* in number of uint32_t's */
- 
+
      fetch_scanline_t           get_scanline_32;
      fetch_scanline_t           get_scanline_64;
- 
+
 +    fetch_scanline_t           fetch_scanline_16;
 +
      fetch_scanline_t           fetch_scanline_32;
      fetch_pixel_32_t	       fetch_pixel_32;
      store_scanline_t           store_scanline_32;
- 
+
      fetch_scanline_t           fetch_scanline_64;
      fetch_pixel_64_t	       fetch_pixel_64;
      store_scanline_t           store_scanline_64;
- 
+
 +    store_scanline_t           store_scanline_16;
 +
      /* Used for indirect access to the bits */
      pixman_read_memory_func_t  read_func;
      pixman_write_memory_func_t write_func;
  };
- 
+
  union pixman_image
  {
      image_type_t       type;
@@ -867,7 +867,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-private.h b/gfx/cairo/libpixman/src/
 +     * Note: ITER_16 still has a 32 bit mask, which is a bit weird. */
 +    ITER_16 =			(1 << 4)
  } iter_flags_t;
- 
+
  struct pixman_iter_t
  {
      /* These are initialized by _pixman_implementation_{src,dest}_init */
@@ -882,11 +882,11 @@ diff --git a/gfx/cairo/libpixman/src/pixman-private.h b/gfx/cairo/libpixman/src/
  					     uint32_t                 xor);
  typedef void (*pixman_iter_init_func_t) (pixman_implementation_t *imp,
                                           pixman_iter_t           *iter);
- 
+
 +void _pixman_setup_combiner_functions_16 (pixman_implementation_t *imp);
  void _pixman_setup_combiner_functions_32 (pixman_implementation_t *imp);
  void _pixman_setup_combiner_functions_64 (pixman_implementation_t *imp);
- 
+
  typedef struct
  {
      pixman_op_t             op;
@@ -896,23 +896,23 @@ diff --git a/gfx/cairo/libpixman/src/pixman-private.h b/gfx/cairo/libpixman/src/
      pixman_fill_func_t		fill;
      pixman_iter_init_func_t     src_iter_init;
      pixman_iter_init_func_t     dest_iter_init;
- 
+
      pixman_combine_32_func_t	combine_32[PIXMAN_N_OPERATORS];
      pixman_combine_32_func_t	combine_32_ca[PIXMAN_N_OPERATORS];
      pixman_combine_64_func_t	combine_64[PIXMAN_N_OPERATORS];
      pixman_combine_64_func_t	combine_64_ca[PIXMAN_N_OPERATORS];
 +    pixman_combine_64_func_t	combine_16[PIXMAN_N_OPERATORS];
  };
- 
+
  uint32_t
  _pixman_image_get_solid (pixman_implementation_t *imp,
  			 pixman_image_t *         image,
                           pixman_format_code_t     format);
- 
+
  pixman_implementation_t *
  _pixman_implementation_create (pixman_implementation_t *delegate,
  			       const pixman_fast_path_t *fast_paths);
- 
+
  pixman_combine_32_func_t
  _pixman_implementation_lookup_combiner (pixman_implementation_t *imp,
  					pixman_op_t		 op,
@@ -920,7 +920,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-private.h b/gfx/cairo/libpixman/src/
 -					pixman_bool_t		 wide);
 +					pixman_bool_t		 wide,
 +					pixman_bool_t		 rgb16);
- 
+
  pixman_bool_t
  _pixman_implementation_blt (pixman_implementation_t *imp,
                              uint32_t *               src_bits,
@@ -938,12 +938,12 @@ diff --git a/gfx/cairo/libpixman/src/pixman-private.h b/gfx/cairo/libpixman/src/
  #define FAST_PATH_SAMPLES_COVER_CLIP_BILINEAR	(1 << 24)
  #define FAST_PATH_BITS_IMAGE			(1 << 25)
 +#define FAST_PATH_16_FORMAT			(1 << 26)
- 
+
  #define FAST_PATH_PAD_REPEAT						\
      (FAST_PATH_NO_NONE_REPEAT		|				\
       FAST_PATH_NO_NORMAL_REPEAT		|				\
       FAST_PATH_NO_REFLECT_REPEAT)
- 
+
  #define FAST_PATH_NORMAL_REPEAT						\
      (FAST_PATH_NO_NONE_REPEAT		|				\
 diff --git a/gfx/cairo/libpixman/src/pixman-radial-gradient.c b/gfx/cairo/libpixman/src/pixman-radial-gradient.c
@@ -953,11 +953,11 @@ diff --git a/gfx/cairo/libpixman/src/pixman-radial-gradient.c b/gfx/cairo/libpix
  	    v.vector[2] += unit.vector[2];
  	}
      }
- 
+
      iter->y++;
      return iter->buffer;
  }
- 
+
 +static uint16_t convert_8888_to_0565(uint32_t color)
 +{
 +    return CONVERT_8888_TO_0565(color);
@@ -1213,12 +1213,12 @@ diff --git a/gfx/cairo/libpixman/src/pixman-radial-gradient.c b/gfx/cairo/libpix
  radial_get_scanline_wide (pixman_iter_t *iter, const uint32_t *mask)
  {
      uint32_t *buffer = radial_get_scanline_narrow (iter, NULL);
- 
+
      pixman_expand ((uint64_t *)buffer, buffer, PIXMAN_a8r8g8b8, iter->width);
- 
+
      return buffer;
  }
- 
+
  void
  _pixman_radial_gradient_iter_init (pixman_image_t *image, pixman_iter_t *iter)
  {
@@ -1230,7 +1230,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-radial-gradient.c b/gfx/cairo/libpix
      else
  	iter->get_scanline = radial_get_scanline_wide;
  }
- 
+
 +
  PIXMAN_EXPORT pixman_image_t *
  pixman_image_create_radial_gradient (pixman_point_fixed_t *        inner,

@@ -12,14 +12,14 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_nt_util.cc b/secu
 --- a/security/sandbox/chromium/sandbox/win/src/sandbox_nt_util.cc
 +++ b/security/sandbox/chromium/sandbox/win/src/sandbox_nt_util.cc
 @@ -649,16 +649,21 @@ void* operator new(size_t size, sandbox:
- 
+
    // TODO: Returning NULL from operator new has undefined behavior, but
    // the Allocate() functions called above can return NULL. Consider checking
    // for NULL here and crashing or throwing.
- 
+
    return result;
  }
- 
+
 +void* operator new [](size_t size, sandbox::AllocationType type,
 +		      void* near_to) {
 +  return operator new(size, type, near_to);
@@ -37,11 +37,11 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_nt_util.h b/secur
 --- a/security/sandbox/chromium/sandbox/win/src/sandbox_nt_util.h
 +++ b/security/sandbox/chromium/sandbox/win/src/sandbox_nt_util.h
 @@ -11,16 +11,18 @@
- 
+
  #include "base/macros.h"
  #include "sandbox/win/src/nt_internals.h"
  #include "sandbox/win/src/sandbox_nt_types.h"
- 
+
  // Placement new and delete to be used from ntdll interception code.
  void* __cdecl operator new(size_t size, sandbox::AllocationType type,
                             void* near_to = NULL);
@@ -54,4 +54,4 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_nt_util.h b/secur
  // See http://msdn.microsoft.com/en-us/library/cxdxz3x6.aspx
  void __cdecl operator delete(void* memory, sandbox::AllocationType type,
                               void* near_to);
- 
+

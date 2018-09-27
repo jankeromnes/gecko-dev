@@ -42,7 +42,7 @@ namespace SevenZip.Buffer
 
 		public void ReleaseStream()
 		{
-			// m_Stream.Close(); 
+			// m_Stream.Close();
 			m_Stream = null;
 		}
 

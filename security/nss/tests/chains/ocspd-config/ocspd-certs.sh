@@ -35,7 +35,7 @@ convert_key()
         [ ${STATUS} -eq 1 ] && echo "${LINE}"
         echo "${LINE}" | grep "END ENCRYPTED PRIVATE KEY" > /dev/null && break
     done > ${DATA_DIR}/${KEY_NAME}.key
-    
+
     rm ${DATA_DIR}/${KEY_NAME}.key.tmp
 }
 
@@ -44,7 +44,7 @@ create_conf()
     CONF_FILE=$1
     CA=$2
     OCSP=$3
-    PORT=$4 
+    PORT=$4
 
     cat ${CONF_TEMPLATE} | \
         sed "s:@DIR@:${OCSP_DIR}:" | \

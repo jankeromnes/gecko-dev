@@ -536,7 +536,7 @@ struct __pyx_obj_5_yaml_CEmitter;
 
 /* "_yaml.pyx":64
  * MappingNode = yaml.nodes.MappingNode
- * 
+ *
  * cdef class Mark:             # <<<<<<<<<<<<<<
  *     cdef readonly object name
  *     cdef readonly int index
@@ -554,9 +554,9 @@ struct __pyx_obj_5_yaml_Mark {
 
 /* "_yaml.pyx":247
  * #        self.style = style
- * 
+ *
  * cdef class CParser:             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef yaml_parser_t parser
  */
 struct __pyx_obj_5_yaml_CParser {
@@ -578,9 +578,9 @@ struct __pyx_obj_5_yaml_CParser {
 
 /* "_yaml.pyx":935
  *     return 1
- * 
+ *
  * cdef class CEmitter:             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef yaml_emitter_t emitter
  */
 struct __pyx_obj_5_yaml_CEmitter {
@@ -604,9 +604,9 @@ struct __pyx_obj_5_yaml_CEmitter {
 
 /* "_yaml.pyx":247
  * #        self.style = style
- * 
+ *
  * cdef class CParser:             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef yaml_parser_t parser
  */
 
@@ -628,9 +628,9 @@ static struct __pyx_vtabstruct_5_yaml_CParser *__pyx_vtabptr_5_yaml_CParser;
 
 /* "_yaml.pyx":935
  *     return 1
- * 
+ *
  * cdef class CEmitter:             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef yaml_emitter_t emitter
  */
 
@@ -1305,7 +1305,7 @@ static PyObject *__pyx_codeobj__75;
 
 /* "_yaml.pyx":4
  * import yaml
- * 
+ *
  * def get_version_string():             # <<<<<<<<<<<<<<
  *     cdef char *value
  *     value = yaml_get_version_string()
@@ -1375,7 +1375,7 @@ static PyObject *__pyx_pf_5_yaml_get_version_string(CYTHON_UNUSED PyObject *__py
  *         return value
  *     else:
  *         return PyUnicode_FromString(value)             # <<<<<<<<<<<<<<
- * 
+ *
  * def get_version():
  */
     __Pyx_XDECREF(__pyx_r);
@@ -1388,7 +1388,7 @@ static PyObject *__pyx_pf_5_yaml_get_version_string(CYTHON_UNUSED PyObject *__py
 
   /* "_yaml.pyx":4
  * import yaml
- * 
+ *
  * def get_version_string():             # <<<<<<<<<<<<<<
  *     cdef char *value
  *     value = yaml_get_version_string()
@@ -1407,7 +1407,7 @@ static PyObject *__pyx_pf_5_yaml_get_version_string(CYTHON_UNUSED PyObject *__py
 
 /* "_yaml.pyx":12
  *         return PyUnicode_FromString(value)
- * 
+ *
  * def get_version():             # <<<<<<<<<<<<<<
  *     cdef int major, minor, patch
  *     yaml_get_version(&major, &minor, &patch)
@@ -1447,7 +1447,7 @@ static PyObject *__pyx_pf_5_yaml_2get_version(CYTHON_UNUSED PyObject *__pyx_self
  *     cdef int major, minor, patch
  *     yaml_get_version(&major, &minor, &patch)             # <<<<<<<<<<<<<<
  *     return (major, minor, patch)
- * 
+ *
  */
   yaml_get_version((&__pyx_v_major), (&__pyx_v_minor), (&__pyx_v_patch));
 
@@ -1455,7 +1455,7 @@ static PyObject *__pyx_pf_5_yaml_2get_version(CYTHON_UNUSED PyObject *__pyx_self
  *     cdef int major, minor, patch
  *     yaml_get_version(&major, &minor, &patch)
  *     return (major, minor, patch)             # <<<<<<<<<<<<<<
- * 
+ *
  * #Mark = yaml.error.Mark
  */
   __Pyx_XDECREF(__pyx_r);
@@ -1482,7 +1482,7 @@ static PyObject *__pyx_pf_5_yaml_2get_version(CYTHON_UNUSED PyObject *__pyx_self
 
   /* "_yaml.pyx":12
  *         return PyUnicode_FromString(value)
- * 
+ *
  * def get_version():             # <<<<<<<<<<<<<<
  *     cdef int major, minor, patch
  *     yaml_get_version(&major, &minor, &patch)
@@ -1504,7 +1504,7 @@ static PyObject *__pyx_pf_5_yaml_2get_version(CYTHON_UNUSED PyObject *__pyx_self
 
 /* "_yaml.pyx":72
  *     cdef readonly pointer
- * 
+ *
  *     def __init__(self, object name, int index, int line, int column,             # <<<<<<<<<<<<<<
  *             object buffer, object pointer):
  *         self.name = name
@@ -1657,7 +1657,7 @@ static int __pyx_pf_5_yaml_4Mark___init__(struct __pyx_obj_5_yaml_Mark *__pyx_v_
  *         self.column = column
  *         self.buffer = buffer             # <<<<<<<<<<<<<<
  *         self.pointer = pointer
- * 
+ *
  */
   __Pyx_INCREF(__pyx_v_buffer);
   __Pyx_GIVEREF(__pyx_v_buffer);
@@ -1669,7 +1669,7 @@ static int __pyx_pf_5_yaml_4Mark___init__(struct __pyx_obj_5_yaml_Mark *__pyx_v_
  *         self.column = column
  *         self.buffer = buffer
  *         self.pointer = pointer             # <<<<<<<<<<<<<<
- * 
+ *
  *     def get_snippet(self):
  */
   __Pyx_INCREF(__pyx_v_pointer);
@@ -1680,7 +1680,7 @@ static int __pyx_pf_5_yaml_4Mark___init__(struct __pyx_obj_5_yaml_Mark *__pyx_v_
 
   /* "_yaml.pyx":72
  *     cdef readonly pointer
- * 
+ *
  *     def __init__(self, object name, int index, int line, int column,             # <<<<<<<<<<<<<<
  *             object buffer, object pointer):
  *         self.name = name
@@ -1694,10 +1694,10 @@ static int __pyx_pf_5_yaml_4Mark___init__(struct __pyx_obj_5_yaml_Mark *__pyx_v_
 
 /* "_yaml.pyx":81
  *         self.pointer = pointer
- * 
+ *
  *     def get_snippet(self):             # <<<<<<<<<<<<<<
  *         return None
- * 
+ *
  */
 
 /* Python wrapper */
@@ -1719,10 +1719,10 @@ static PyObject *__pyx_pf_5_yaml_4Mark_2get_snippet(CYTHON_UNUSED struct __pyx_o
   __Pyx_RefNannySetupContext("get_snippet", 0);
 
   /* "_yaml.pyx":82
- * 
+ *
  *     def get_snippet(self):
  *         return None             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __str__(self):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -1732,10 +1732,10 @@ static PyObject *__pyx_pf_5_yaml_4Mark_2get_snippet(CYTHON_UNUSED struct __pyx_o
 
   /* "_yaml.pyx":81
  *         self.pointer = pointer
- * 
+ *
  *     def get_snippet(self):             # <<<<<<<<<<<<<<
  *         return None
- * 
+ *
  */
 
   /* function exit code */
@@ -1747,7 +1747,7 @@ static PyObject *__pyx_pf_5_yaml_4Mark_2get_snippet(CYTHON_UNUSED struct __pyx_o
 
 /* "_yaml.pyx":84
  *         return None
- * 
+ *
  *     def __str__(self):             # <<<<<<<<<<<<<<
  *         where = "  in \"%s\", line %d, column %d"   \
  *                 % (self.name, self.line+1, self.column+1)
@@ -1783,7 +1783,7 @@ static PyObject *__pyx_pf_5_yaml_4Mark_4__str__(struct __pyx_obj_5_yaml_Mark *__
  *         where = "  in \"%s\", line %d, column %d"   \
  *                 % (self.name, self.line+1, self.column+1)             # <<<<<<<<<<<<<<
  *         return where
- * 
+ *
  */
   __pyx_t_1 = __Pyx_PyInt_From_long((__pyx_v_self->line + 1)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -1810,7 +1810,7 @@ static PyObject *__pyx_pf_5_yaml_4Mark_4__str__(struct __pyx_obj_5_yaml_Mark *__
  *         where = "  in \"%s\", line %d, column %d"   \
  *                 % (self.name, self.line+1, self.column+1)
  *         return where             # <<<<<<<<<<<<<<
- * 
+ *
  * #class YAMLError(Exception):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -1820,7 +1820,7 @@ static PyObject *__pyx_pf_5_yaml_4Mark_4__str__(struct __pyx_obj_5_yaml_Mark *__
 
   /* "_yaml.pyx":84
  *         return None
- * 
+ *
  *     def __str__(self):             # <<<<<<<<<<<<<<
  *         where = "  in \"%s\", line %d, column %d"   \
  *                 % (self.name, self.line+1, self.column+1)
@@ -1841,7 +1841,7 @@ static PyObject *__pyx_pf_5_yaml_4Mark_4__str__(struct __pyx_obj_5_yaml_Mark *__
 }
 
 /* "_yaml.pyx":65
- * 
+ *
  * cdef class Mark:
  *     cdef readonly object name             # <<<<<<<<<<<<<<
  *     cdef readonly int index
@@ -2023,7 +2023,7 @@ static PyObject *__pyx_pf_5_yaml_4Mark_6column___get__(struct __pyx_obj_5_yaml_M
  *     cdef readonly int column
  *     cdef readonly buffer             # <<<<<<<<<<<<<<
  *     cdef readonly pointer
- * 
+ *
  */
 
 /* Python wrapper */
@@ -2059,7 +2059,7 @@ static PyObject *__pyx_pf_5_yaml_4Mark_6buffer___get__(struct __pyx_obj_5_yaml_M
  *     cdef readonly int column
  *     cdef readonly buffer
  *     cdef readonly pointer             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __init__(self, object name, int index, int line, int column,
  */
 
@@ -2094,7 +2094,7 @@ static PyObject *__pyx_pf_5_yaml_4Mark_7pointer___get__(struct __pyx_obj_5_yaml_
 
 /* "_yaml.pyx":262
  *     cdef int unicode_source
- * 
+ *
  *     def __init__(self, stream):             # <<<<<<<<<<<<<<
  *         cdef is_readable
  *         if yaml_parser_initialize(&self.parser) == 0:
@@ -2683,7 +2683,7 @@ static int __pyx_pf_5_yaml_7CParser___init__(struct __pyx_obj_5_yaml_CParser *__
  *         self.current_token = None
  *         self.current_event = None             # <<<<<<<<<<<<<<
  *         self.anchors = {}
- * 
+ *
  */
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
@@ -2695,7 +2695,7 @@ static int __pyx_pf_5_yaml_7CParser___init__(struct __pyx_obj_5_yaml_CParser *__
  *         self.current_token = None
  *         self.current_event = None
  *         self.anchors = {}             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __dealloc__(self):
  */
   __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -2708,7 +2708,7 @@ static int __pyx_pf_5_yaml_7CParser___init__(struct __pyx_obj_5_yaml_CParser *__
 
   /* "_yaml.pyx":262
  *     cdef int unicode_source
- * 
+ *
  *     def __init__(self, stream):             # <<<<<<<<<<<<<<
  *         cdef is_readable
  *         if yaml_parser_initialize(&self.parser) == 0:
@@ -2732,7 +2732,7 @@ static int __pyx_pf_5_yaml_7CParser___init__(struct __pyx_obj_5_yaml_CParser *__
 
 /* "_yaml.pyx":310
  *         self.anchors = {}
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         yaml_parser_delete(&self.parser)
  *         yaml_event_delete(&self.parsed_event)
@@ -2754,11 +2754,11 @@ static void __pyx_pf_5_yaml_7CParser_2__dealloc__(struct __pyx_obj_5_yaml_CParse
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
   /* "_yaml.pyx":311
- * 
+ *
  *     def __dealloc__(self):
  *         yaml_parser_delete(&self.parser)             # <<<<<<<<<<<<<<
  *         yaml_event_delete(&self.parsed_event)
- * 
+ *
  */
   yaml_parser_delete((&__pyx_v_self->parser));
 
@@ -2766,14 +2766,14 @@ static void __pyx_pf_5_yaml_7CParser_2__dealloc__(struct __pyx_obj_5_yaml_CParse
  *     def __dealloc__(self):
  *         yaml_parser_delete(&self.parser)
  *         yaml_event_delete(&self.parsed_event)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def dispose(self):
  */
   yaml_event_delete((&__pyx_v_self->parsed_event));
 
   /* "_yaml.pyx":310
  *         self.anchors = {}
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         yaml_parser_delete(&self.parser)
  *         yaml_event_delete(&self.parsed_event)
@@ -2785,10 +2785,10 @@ static void __pyx_pf_5_yaml_7CParser_2__dealloc__(struct __pyx_obj_5_yaml_CParse
 
 /* "_yaml.pyx":314
  *         yaml_event_delete(&self.parsed_event)
- * 
+ *
  *     def dispose(self):             # <<<<<<<<<<<<<<
  *         pass
- * 
+ *
  */
 
 /* Python wrapper */
@@ -2818,7 +2818,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_4dispose(CYTHON_UNUSED struct __pyx_ob
 
 /* "_yaml.pyx":317
  *         pass
- * 
+ *
  *     cdef object _parser_error(self):             # <<<<<<<<<<<<<<
  *         if self.parser.error == YAML_MEMORY_ERROR:
  *             return MemoryError
@@ -2852,7 +2852,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__parser_error(struct __pyx_obj_5_yaml_C
   switch (__pyx_v_self->parser.error) {
 
     /* "_yaml.pyx":318
- * 
+ *
  *     cdef object _parser_error(self):
  *         if self.parser.error == YAML_MEMORY_ERROR:             # <<<<<<<<<<<<<<
  *             return MemoryError
@@ -3402,7 +3402,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__parser_error(struct __pyx_obj_5_yaml_C
  *             raise ValueError("no parser error")
  *         else:
  *             raise ValueError(u"no parser error")             # <<<<<<<<<<<<<<
- * 
+ *
  *     def raw_scan(self):
  */
     __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3414,7 +3414,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__parser_error(struct __pyx_obj_5_yaml_C
 
   /* "_yaml.pyx":317
  *         pass
- * 
+ *
  *     cdef object _parser_error(self):             # <<<<<<<<<<<<<<
  *         if self.parser.error == YAML_MEMORY_ERROR:
  *             return MemoryError
@@ -3441,7 +3441,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__parser_error(struct __pyx_obj_5_yaml_C
 
 /* "_yaml.pyx":360
  *             raise ValueError(u"no parser error")
- * 
+ *
  *     def raw_scan(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_token_t token
  *         cdef int done
@@ -3576,7 +3576,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_6raw_scan(struct __pyx_obj_5_yaml_CPar
  *                 count = count+1
  *             yaml_token_delete(&token)             # <<<<<<<<<<<<<<
  *         return count
- * 
+ *
  */
     yaml_token_delete((&__pyx_v_token));
   }
@@ -3585,7 +3585,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_6raw_scan(struct __pyx_obj_5_yaml_CPar
  *                 count = count+1
  *             yaml_token_delete(&token)
  *         return count             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef object _scan(self):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -3597,7 +3597,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_6raw_scan(struct __pyx_obj_5_yaml_CPar
 
   /* "_yaml.pyx":360
  *             raise ValueError(u"no parser error")
- * 
+ *
  *     def raw_scan(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_token_t token
  *         cdef int done
@@ -3617,7 +3617,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_6raw_scan(struct __pyx_obj_5_yaml_CPar
 
 /* "_yaml.pyx":377
  *         return count
- * 
+ *
  *     cdef object _scan(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_token_t token
  *         if yaml_parser_scan(&self.parser, &token) == 0:
@@ -3688,7 +3688,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__scan(struct __pyx_obj_5_yaml_CParser *
  *         token_object = self._token_to_object(&token)
  *         yaml_token_delete(&token)             # <<<<<<<<<<<<<<
  *         return token_object
- * 
+ *
  */
   yaml_token_delete((&__pyx_v_token));
 
@@ -3696,7 +3696,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__scan(struct __pyx_obj_5_yaml_CParser *
  *         token_object = self._token_to_object(&token)
  *         yaml_token_delete(&token)
  *         return token_object             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef object _token_to_object(self, yaml_token_t *token):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -3706,7 +3706,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__scan(struct __pyx_obj_5_yaml_CParser *
 
   /* "_yaml.pyx":377
  *         return count
- * 
+ *
  *     cdef object _scan(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_token_t token
  *         if yaml_parser_scan(&self.parser, &token) == 0:
@@ -3727,7 +3727,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__scan(struct __pyx_obj_5_yaml_CParser *
 
 /* "_yaml.pyx":386
  *         return token_object
- * 
+ *
  *     cdef object _token_to_object(self, yaml_token_t *token):             # <<<<<<<<<<<<<<
  *         start_mark = Mark(self.stream_name,
  *                 token.start_mark.index,
@@ -3787,7 +3787,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__token_to_object(struct __pyx_obj_5_yam
   __Pyx_GOTREF(__pyx_t_3);
 
   /* "_yaml.pyx":387
- * 
+ *
  *     cdef object _token_to_object(self, yaml_token_t *token):
  *         start_mark = Mark(self.stream_name,             # <<<<<<<<<<<<<<
  *                 token.start_mark.index,
@@ -5163,7 +5163,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__token_to_object(struct __pyx_obj_5_yam
  *                 raise ValueError("unknown token type")
  *             else:
  *                 raise ValueError(u"unknown token type")             # <<<<<<<<<<<<<<
- * 
+ *
  *     def get_token(self):
  */
       __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 481; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -5177,7 +5177,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__token_to_object(struct __pyx_obj_5_yam
 
   /* "_yaml.pyx":386
  *         return token_object
- * 
+ *
  *     cdef object _token_to_object(self, yaml_token_t *token):             # <<<<<<<<<<<<<<
  *         start_mark = Mark(self.stream_name,
  *                 token.start_mark.index,
@@ -5207,7 +5207,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__token_to_object(struct __pyx_obj_5_yam
 
 /* "_yaml.pyx":483
  *                 raise ValueError(u"unknown token type")
- * 
+ *
  *     def get_token(self):             # <<<<<<<<<<<<<<
  *         if self.current_token is not None:
  *             value = self.current_token
@@ -5239,7 +5239,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_8get_token(struct __pyx_obj_5_yaml_CPa
   __Pyx_RefNannySetupContext("get_token", 0);
 
   /* "_yaml.pyx":484
- * 
+ *
  *     def get_token(self):
  *         if self.current_token is not None:             # <<<<<<<<<<<<<<
  *             value = self.current_token
@@ -5282,7 +5282,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_8get_token(struct __pyx_obj_5_yaml_CPa
  *         else:
  *             value = self._scan()             # <<<<<<<<<<<<<<
  *         return value
- * 
+ *
  */
     __pyx_t_3 = ((struct __pyx_vtabstruct_5_yaml_CParser *)__pyx_v_self->__pyx_vtab)->_scan(__pyx_v_self); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 488; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -5295,7 +5295,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_8get_token(struct __pyx_obj_5_yaml_CPa
  *         else:
  *             value = self._scan()
  *         return value             # <<<<<<<<<<<<<<
- * 
+ *
  *     def peek_token(self):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5305,7 +5305,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_8get_token(struct __pyx_obj_5_yaml_CPa
 
   /* "_yaml.pyx":483
  *                 raise ValueError(u"unknown token type")
- * 
+ *
  *     def get_token(self):             # <<<<<<<<<<<<<<
  *         if self.current_token is not None:
  *             value = self.current_token
@@ -5325,7 +5325,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_8get_token(struct __pyx_obj_5_yaml_CPa
 
 /* "_yaml.pyx":491
  *         return value
- * 
+ *
  *     def peek_token(self):             # <<<<<<<<<<<<<<
  *         if self.current_token is None:
  *             self.current_token = self._scan()
@@ -5356,7 +5356,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_10peek_token(struct __pyx_obj_5_yaml_C
   __Pyx_RefNannySetupContext("peek_token", 0);
 
   /* "_yaml.pyx":492
- * 
+ *
  *     def peek_token(self):
  *         if self.current_token is None:             # <<<<<<<<<<<<<<
  *             self.current_token = self._scan()
@@ -5371,7 +5371,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_10peek_token(struct __pyx_obj_5_yaml_C
  *         if self.current_token is None:
  *             self.current_token = self._scan()             # <<<<<<<<<<<<<<
  *         return self.current_token
- * 
+ *
  */
     __pyx_t_3 = ((struct __pyx_vtabstruct_5_yaml_CParser *)__pyx_v_self->__pyx_vtab)->_scan(__pyx_v_self); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -5388,7 +5388,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_10peek_token(struct __pyx_obj_5_yaml_C
  *         if self.current_token is None:
  *             self.current_token = self._scan()
  *         return self.current_token             # <<<<<<<<<<<<<<
- * 
+ *
  *     def check_token(self, *choices):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5398,7 +5398,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_10peek_token(struct __pyx_obj_5_yaml_C
 
   /* "_yaml.pyx":491
  *         return value
- * 
+ *
  *     def peek_token(self):             # <<<<<<<<<<<<<<
  *         if self.current_token is None:
  *             self.current_token = self._scan()
@@ -5417,7 +5417,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_10peek_token(struct __pyx_obj_5_yaml_C
 
 /* "_yaml.pyx":496
  *         return self.current_token
- * 
+ *
  *     def check_token(self, *choices):             # <<<<<<<<<<<<<<
  *         if self.current_token is None:
  *             self.current_token = self._scan()
@@ -5457,7 +5457,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_12check_token(struct __pyx_obj_5_yaml_
   __Pyx_RefNannySetupContext("check_token", 0);
 
   /* "_yaml.pyx":497
- * 
+ *
  *     def check_token(self, *choices):
  *         if self.current_token is None:             # <<<<<<<<<<<<<<
  *             self.current_token = self._scan()
@@ -5579,7 +5579,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_12check_token(struct __pyx_obj_5_yaml_
  *             if token_class is choice:
  *                 return True             # <<<<<<<<<<<<<<
  *         return False
- * 
+ *
  */
       __Pyx_XDECREF(__pyx_r);
       __Pyx_INCREF(Py_True);
@@ -5594,7 +5594,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_12check_token(struct __pyx_obj_5_yaml_
  *             if token_class is choice:
  *                 return True
  *         return False             # <<<<<<<<<<<<<<
- * 
+ *
  *     def raw_parse(self):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5604,7 +5604,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_12check_token(struct __pyx_obj_5_yaml_
 
   /* "_yaml.pyx":496
  *         return self.current_token
- * 
+ *
  *     def check_token(self, *choices):             # <<<<<<<<<<<<<<
  *         if self.current_token is None:
  *             self.current_token = self._scan()
@@ -5626,7 +5626,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_12check_token(struct __pyx_obj_5_yaml_
 
 /* "_yaml.pyx":509
  *         return False
- * 
+ *
  *     def raw_parse(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         cdef int done
@@ -5761,7 +5761,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_14raw_parse(struct __pyx_obj_5_yaml_CP
  *                 count = count+1
  *             yaml_event_delete(&event)             # <<<<<<<<<<<<<<
  *         return count
- * 
+ *
  */
     yaml_event_delete((&__pyx_v_event));
   }
@@ -5770,7 +5770,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_14raw_parse(struct __pyx_obj_5_yaml_CP
  *                 count = count+1
  *             yaml_event_delete(&event)
  *         return count             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef object _parse(self):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5782,7 +5782,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_14raw_parse(struct __pyx_obj_5_yaml_CP
 
   /* "_yaml.pyx":509
  *         return False
- * 
+ *
  *     def raw_parse(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         cdef int done
@@ -5802,7 +5802,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_14raw_parse(struct __pyx_obj_5_yaml_CP
 
 /* "_yaml.pyx":526
  *         return count
- * 
+ *
  *     cdef object _parse(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         if yaml_parser_parse(&self.parser, &event) == 0:
@@ -5873,7 +5873,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__parse(struct __pyx_obj_5_yaml_CParser 
  *         event_object = self._event_to_object(&event)
  *         yaml_event_delete(&event)             # <<<<<<<<<<<<<<
  *         return event_object
- * 
+ *
  */
   yaml_event_delete((&__pyx_v_event));
 
@@ -5881,7 +5881,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__parse(struct __pyx_obj_5_yaml_CParser 
  *         event_object = self._event_to_object(&event)
  *         yaml_event_delete(&event)
  *         return event_object             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef object _event_to_object(self, yaml_event_t *event):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5891,7 +5891,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__parse(struct __pyx_obj_5_yaml_CParser 
 
   /* "_yaml.pyx":526
  *         return count
- * 
+ *
  *     cdef object _parse(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         if yaml_parser_parse(&self.parser, &event) == 0:
@@ -5912,7 +5912,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__parse(struct __pyx_obj_5_yaml_CParser 
 
 /* "_yaml.pyx":535
  *         return event_object
- * 
+ *
  *     cdef object _event_to_object(self, yaml_event_t *event):             # <<<<<<<<<<<<<<
  *         cdef yaml_tag_directive_t *tag_directive
  *         start_mark = Mark(self.stream_name,
@@ -7538,7 +7538,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__event_to_object(struct __pyx_obj_5_yam
  *                 raise ValueError("unknown event type")
  *             else:
  *                 raise ValueError(u"unknown event type")             # <<<<<<<<<<<<<<
- * 
+ *
  *     def get_event(self):
  */
       __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7552,7 +7552,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__event_to_object(struct __pyx_obj_5_yam
 
   /* "_yaml.pyx":535
  *         return event_object
- * 
+ *
  *     cdef object _event_to_object(self, yaml_event_t *event):             # <<<<<<<<<<<<<<
  *         cdef yaml_tag_directive_t *tag_directive
  *         start_mark = Mark(self.stream_name,
@@ -7586,7 +7586,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__event_to_object(struct __pyx_obj_5_yam
 
 /* "_yaml.pyx":661
  *                 raise ValueError(u"unknown event type")
- * 
+ *
  *     def get_event(self):             # <<<<<<<<<<<<<<
  *         if self.current_event is not None:
  *             value = self.current_event
@@ -7618,7 +7618,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_16get_event(struct __pyx_obj_5_yaml_CP
   __Pyx_RefNannySetupContext("get_event", 0);
 
   /* "_yaml.pyx":662
- * 
+ *
  *     def get_event(self):
  *         if self.current_event is not None:             # <<<<<<<<<<<<<<
  *             value = self.current_event
@@ -7661,7 +7661,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_16get_event(struct __pyx_obj_5_yaml_CP
  *         else:
  *             value = self._parse()             # <<<<<<<<<<<<<<
  *         return value
- * 
+ *
  */
     __pyx_t_3 = ((struct __pyx_vtabstruct_5_yaml_CParser *)__pyx_v_self->__pyx_vtab)->_parse(__pyx_v_self); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -7674,7 +7674,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_16get_event(struct __pyx_obj_5_yaml_CP
  *         else:
  *             value = self._parse()
  *         return value             # <<<<<<<<<<<<<<
- * 
+ *
  *     def peek_event(self):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -7684,7 +7684,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_16get_event(struct __pyx_obj_5_yaml_CP
 
   /* "_yaml.pyx":661
  *                 raise ValueError(u"unknown event type")
- * 
+ *
  *     def get_event(self):             # <<<<<<<<<<<<<<
  *         if self.current_event is not None:
  *             value = self.current_event
@@ -7704,7 +7704,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_16get_event(struct __pyx_obj_5_yaml_CP
 
 /* "_yaml.pyx":669
  *         return value
- * 
+ *
  *     def peek_event(self):             # <<<<<<<<<<<<<<
  *         if self.current_event is None:
  *             self.current_event = self._parse()
@@ -7735,7 +7735,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_18peek_event(struct __pyx_obj_5_yaml_C
   __Pyx_RefNannySetupContext("peek_event", 0);
 
   /* "_yaml.pyx":670
- * 
+ *
  *     def peek_event(self):
  *         if self.current_event is None:             # <<<<<<<<<<<<<<
  *             self.current_event = self._parse()
@@ -7750,7 +7750,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_18peek_event(struct __pyx_obj_5_yaml_C
  *         if self.current_event is None:
  *             self.current_event = self._parse()             # <<<<<<<<<<<<<<
  *         return self.current_event
- * 
+ *
  */
     __pyx_t_3 = ((struct __pyx_vtabstruct_5_yaml_CParser *)__pyx_v_self->__pyx_vtab)->_parse(__pyx_v_self); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -7767,7 +7767,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_18peek_event(struct __pyx_obj_5_yaml_C
  *         if self.current_event is None:
  *             self.current_event = self._parse()
  *         return self.current_event             # <<<<<<<<<<<<<<
- * 
+ *
  *     def check_event(self, *choices):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -7777,7 +7777,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_18peek_event(struct __pyx_obj_5_yaml_C
 
   /* "_yaml.pyx":669
  *         return value
- * 
+ *
  *     def peek_event(self):             # <<<<<<<<<<<<<<
  *         if self.current_event is None:
  *             self.current_event = self._parse()
@@ -7796,7 +7796,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_18peek_event(struct __pyx_obj_5_yaml_C
 
 /* "_yaml.pyx":674
  *         return self.current_event
- * 
+ *
  *     def check_event(self, *choices):             # <<<<<<<<<<<<<<
  *         if self.current_event is None:
  *             self.current_event = self._parse()
@@ -7836,7 +7836,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_20check_event(struct __pyx_obj_5_yaml_
   __Pyx_RefNannySetupContext("check_event", 0);
 
   /* "_yaml.pyx":675
- * 
+ *
  *     def check_event(self, *choices):
  *         if self.current_event is None:             # <<<<<<<<<<<<<<
  *             self.current_event = self._parse()
@@ -7958,7 +7958,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_20check_event(struct __pyx_obj_5_yaml_
  *             if event_class is choice:
  *                 return True             # <<<<<<<<<<<<<<
  *         return False
- * 
+ *
  */
       __Pyx_XDECREF(__pyx_r);
       __Pyx_INCREF(Py_True);
@@ -7973,7 +7973,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_20check_event(struct __pyx_obj_5_yaml_
  *             if event_class is choice:
  *                 return True
  *         return False             # <<<<<<<<<<<<<<
- * 
+ *
  *     def check_node(self):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -7983,7 +7983,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_20check_event(struct __pyx_obj_5_yaml_
 
   /* "_yaml.pyx":674
  *         return self.current_event
- * 
+ *
  *     def check_event(self, *choices):             # <<<<<<<<<<<<<<
  *         if self.current_event is None:
  *             self.current_event = self._parse()
@@ -8005,7 +8005,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_20check_event(struct __pyx_obj_5_yaml_
 
 /* "_yaml.pyx":687
  *         return False
- * 
+ *
  *     def check_node(self):             # <<<<<<<<<<<<<<
  *         self._parse_next_event()
  *         if self.parsed_event.type == YAML_STREAM_START_EVENT:
@@ -8035,7 +8035,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_22check_node(struct __pyx_obj_5_yaml_C
   __Pyx_RefNannySetupContext("check_node", 0);
 
   /* "_yaml.pyx":688
- * 
+ *
  *     def check_node(self):
  *         self._parse_next_event()             # <<<<<<<<<<<<<<
  *         if self.parsed_event.type == YAML_STREAM_START_EVENT:
@@ -8089,7 +8089,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_22check_node(struct __pyx_obj_5_yaml_C
  *         if self.parsed_event.type != YAML_STREAM_END_EVENT:
  *             return True             # <<<<<<<<<<<<<<
  *         return False
- * 
+ *
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(Py_True);
@@ -8101,7 +8101,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_22check_node(struct __pyx_obj_5_yaml_C
  *         if self.parsed_event.type != YAML_STREAM_END_EVENT:
  *             return True
  *         return False             # <<<<<<<<<<<<<<
- * 
+ *
  *     def get_node(self):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -8111,7 +8111,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_22check_node(struct __pyx_obj_5_yaml_C
 
   /* "_yaml.pyx":687
  *         return False
- * 
+ *
  *     def check_node(self):             # <<<<<<<<<<<<<<
  *         self._parse_next_event()
  *         if self.parsed_event.type == YAML_STREAM_START_EVENT:
@@ -8129,7 +8129,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_22check_node(struct __pyx_obj_5_yaml_C
 
 /* "_yaml.pyx":696
  *         return False
- * 
+ *
  *     def get_node(self):             # <<<<<<<<<<<<<<
  *         self._parse_next_event()
  *         if self.parsed_event.type != YAML_STREAM_END_EVENT:
@@ -8160,7 +8160,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_24get_node(struct __pyx_obj_5_yaml_CPa
   __Pyx_RefNannySetupContext("get_node", 0);
 
   /* "_yaml.pyx":697
- * 
+ *
  *     def get_node(self):
  *         self._parse_next_event()             # <<<<<<<<<<<<<<
  *         if self.parsed_event.type != YAML_STREAM_END_EVENT:
@@ -8173,7 +8173,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_24get_node(struct __pyx_obj_5_yaml_CPa
  *         self._parse_next_event()
  *         if self.parsed_event.type != YAML_STREAM_END_EVENT:             # <<<<<<<<<<<<<<
  *             return self._compose_document()
- * 
+ *
  */
   __pyx_t_2 = ((__pyx_v_self->parsed_event.type != YAML_STREAM_END_EVENT) != 0);
   if (__pyx_t_2) {
@@ -8182,7 +8182,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_24get_node(struct __pyx_obj_5_yaml_CPa
  *         self._parse_next_event()
  *         if self.parsed_event.type != YAML_STREAM_END_EVENT:
  *             return self._compose_document()             # <<<<<<<<<<<<<<
- * 
+ *
  *     def get_single_node(self):
  */
     __Pyx_XDECREF(__pyx_r);
@@ -8195,7 +8195,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_24get_node(struct __pyx_obj_5_yaml_CPa
 
   /* "_yaml.pyx":696
  *         return False
- * 
+ *
  *     def get_node(self):             # <<<<<<<<<<<<<<
  *         self._parse_next_event()
  *         if self.parsed_event.type != YAML_STREAM_END_EVENT:
@@ -8216,7 +8216,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_24get_node(struct __pyx_obj_5_yaml_CPa
 
 /* "_yaml.pyx":701
  *             return self._compose_document()
- * 
+ *
  *     def get_single_node(self):             # <<<<<<<<<<<<<<
  *         self._parse_next_event()
  *         yaml_event_delete(&self.parsed_event)
@@ -8252,7 +8252,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_26get_single_node(struct __pyx_obj_5_y
   __Pyx_RefNannySetupContext("get_single_node", 0);
 
   /* "_yaml.pyx":702
- * 
+ *
  *     def get_single_node(self):
  *         self._parse_next_event()             # <<<<<<<<<<<<<<
  *         yaml_event_delete(&self.parsed_event)
@@ -8471,7 +8471,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_26get_single_node(struct __pyx_obj_5_y
  *                 raise ComposerError(u"expected a single document in the stream",
  *                         document.start_mark, u"but found another document", mark)             # <<<<<<<<<<<<<<
  *         return document
- * 
+ *
  */
       __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_document, __pyx_n_s_start_mark); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 720; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
@@ -8511,7 +8511,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_26get_single_node(struct __pyx_obj_5_y
  *                 raise ComposerError(u"expected a single document in the stream",
  *                         document.start_mark, u"but found another document", mark)
  *         return document             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef object _compose_document(self):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -8521,7 +8521,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_26get_single_node(struct __pyx_obj_5_y
 
   /* "_yaml.pyx":701
  *             return self._compose_document()
- * 
+ *
  *     def get_single_node(self):             # <<<<<<<<<<<<<<
  *         self._parse_next_event()
  *         yaml_event_delete(&self.parsed_event)
@@ -8545,7 +8545,7 @@ static PyObject *__pyx_pf_5_yaml_7CParser_26get_single_node(struct __pyx_obj_5_y
 
 /* "_yaml.pyx":723
  *         return document
- * 
+ *
  *     cdef object _compose_document(self):             # <<<<<<<<<<<<<<
  *         yaml_event_delete(&self.parsed_event)
  *         node = self._compose_node(None, None)
@@ -8563,7 +8563,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_document(struct __pyx_obj_5_ya
   __Pyx_RefNannySetupContext("_compose_document", 0);
 
   /* "_yaml.pyx":724
- * 
+ *
  *     cdef object _compose_document(self):
  *         yaml_event_delete(&self.parsed_event)             # <<<<<<<<<<<<<<
  *         node = self._compose_node(None, None)
@@ -8606,7 +8606,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_document(struct __pyx_obj_5_ya
  *         yaml_event_delete(&self.parsed_event)
  *         self.anchors = {}             # <<<<<<<<<<<<<<
  *         return node
- * 
+ *
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -8620,7 +8620,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_document(struct __pyx_obj_5_ya
  *         yaml_event_delete(&self.parsed_event)
  *         self.anchors = {}
  *         return node             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef object _compose_node(self, object parent, object index):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -8630,7 +8630,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_document(struct __pyx_obj_5_ya
 
   /* "_yaml.pyx":723
  *         return document
- * 
+ *
  *     cdef object _compose_document(self):             # <<<<<<<<<<<<<<
  *         yaml_event_delete(&self.parsed_event)
  *         node = self._compose_node(None, None)
@@ -8650,7 +8650,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_document(struct __pyx_obj_5_ya
 
 /* "_yaml.pyx":731
  *         return node
- * 
+ *
  *     cdef object _compose_node(self, object parent, object index):             # <<<<<<<<<<<<<<
  *         self._parse_next_event()
  *         if self.parsed_event.type == YAML_ALIAS_EVENT:
@@ -8676,7 +8676,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
   __Pyx_RefNannySetupContext("_compose_node", 0);
 
   /* "_yaml.pyx":732
- * 
+ *
  *     cdef object _compose_node(self, object parent, object index):
  *         self._parse_next_event()             # <<<<<<<<<<<<<<
  *         if self.parsed_event.type == YAML_ALIAS_EVENT:
@@ -9316,7 +9316,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
  *             node = self._compose_mapping_node(anchor)
  *         self.ascend_resolver()             # <<<<<<<<<<<<<<
  *         return node
- * 
+ *
  */
   __pyx_t_7 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ascend_resolver); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
@@ -9329,7 +9329,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
  *             node = self._compose_mapping_node(anchor)
  *         self.ascend_resolver()
  *         return node             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef _compose_scalar_node(self, object anchor):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -9340,7 +9340,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
 
   /* "_yaml.pyx":731
  *         return node
- * 
+ *
  *     cdef object _compose_node(self, object parent, object index):             # <<<<<<<<<<<<<<
  *         self._parse_next_event()
  *         if self.parsed_event.type == YAML_ALIAS_EVENT:
@@ -9365,7 +9365,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
 
 /* "_yaml.pyx":780
  *         return node
- * 
+ *
  *     cdef _compose_scalar_node(self, object anchor):             # <<<<<<<<<<<<<<
  *         start_mark = Mark(self.stream_name,
  *                 self.parsed_event.start_mark.index,
@@ -9427,7 +9427,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_scalar_node(struct __pyx_obj_5
   __Pyx_GOTREF(__pyx_t_3);
 
   /* "_yaml.pyx":781
- * 
+ *
  *     cdef _compose_scalar_node(self, object anchor):
  *         start_mark = Mark(self.stream_name,             # <<<<<<<<<<<<<<
  *                 self.parsed_event.start_mark.index,
@@ -9874,7 +9874,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_scalar_node(struct __pyx_obj_5
  *             self.anchors[anchor] = node
  *         yaml_event_delete(&self.parsed_event)             # <<<<<<<<<<<<<<
  *         return node
- * 
+ *
  */
   yaml_event_delete((&__pyx_v_self->parsed_event));
 
@@ -9882,7 +9882,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_scalar_node(struct __pyx_obj_5
  *             self.anchors[anchor] = node
  *         yaml_event_delete(&self.parsed_event)
  *         return node             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef _compose_sequence_node(self, object anchor):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -9892,7 +9892,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_scalar_node(struct __pyx_obj_5
 
   /* "_yaml.pyx":780
  *         return node
- * 
+ *
  *     cdef _compose_scalar_node(self, object anchor):             # <<<<<<<<<<<<<<
  *         start_mark = Mark(self.stream_name,
  *                 self.parsed_event.start_mark.index,
@@ -9921,7 +9921,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_scalar_node(struct __pyx_obj_5
 
 /* "_yaml.pyx":822
  *         return node
- * 
+ *
  *     cdef _compose_sequence_node(self, object anchor):             # <<<<<<<<<<<<<<
  *         cdef int index
  *         start_mark = Mark(self.stream_name,
@@ -10401,7 +10401,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_sequence_node(struct __pyx_obj
  *                 None, None)
  *         yaml_event_delete(&self.parsed_event)             # <<<<<<<<<<<<<<
  *         return node
- * 
+ *
  */
   yaml_event_delete((&__pyx_v_self->parsed_event));
 
@@ -10409,7 +10409,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_sequence_node(struct __pyx_obj
  *                 None, None)
  *         yaml_event_delete(&self.parsed_event)
  *         return node             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef _compose_mapping_node(self, object anchor):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -10419,7 +10419,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_sequence_node(struct __pyx_obj
 
   /* "_yaml.pyx":822
  *         return node
- * 
+ *
  *     cdef _compose_sequence_node(self, object anchor):             # <<<<<<<<<<<<<<
  *         cdef int index
  *         start_mark = Mark(self.stream_name,
@@ -10446,7 +10446,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_sequence_node(struct __pyx_obj
 
 /* "_yaml.pyx":862
  *         return node
- * 
+ *
  *     cdef _compose_mapping_node(self, object anchor):             # <<<<<<<<<<<<<<
  *         start_mark = Mark(self.stream_name,
  *                 self.parsed_event.start_mark.index,
@@ -10509,7 +10509,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_mapping_node(struct __pyx_obj_
   __Pyx_GOTREF(__pyx_t_3);
 
   /* "_yaml.pyx":863
- * 
+ *
  *     cdef _compose_mapping_node(self, object anchor):
  *         start_mark = Mark(self.stream_name,             # <<<<<<<<<<<<<<
  *                 self.parsed_event.start_mark.index,
@@ -10936,7 +10936,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_mapping_node(struct __pyx_obj_
  *                 None, None)
  *         yaml_event_delete(&self.parsed_event)             # <<<<<<<<<<<<<<
  *         return node
- * 
+ *
  */
   yaml_event_delete((&__pyx_v_self->parsed_event));
 
@@ -10944,7 +10944,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_mapping_node(struct __pyx_obj_
  *                 None, None)
  *         yaml_event_delete(&self.parsed_event)
  *         return node             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef int _parse_next_event(self) except 0:
  */
   __Pyx_XDECREF(__pyx_r);
@@ -10954,7 +10954,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_mapping_node(struct __pyx_obj_
 
   /* "_yaml.pyx":862
  *         return node
- * 
+ *
  *     cdef _compose_mapping_node(self, object anchor):             # <<<<<<<<<<<<<<
  *         start_mark = Mark(self.stream_name,
  *                 self.parsed_event.start_mark.index,
@@ -10983,7 +10983,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_mapping_node(struct __pyx_obj_
 
 /* "_yaml.pyx":901
  *         return node
- * 
+ *
  *     cdef int _parse_next_event(self) except 0:             # <<<<<<<<<<<<<<
  *         if self.parsed_event.type == YAML_NO_EVENT:
  *             if yaml_parser_parse(&self.parser, &self.parsed_event) == 0:
@@ -11002,7 +11002,7 @@ static int __pyx_f_5_yaml_7CParser__parse_next_event(struct __pyx_obj_5_yaml_CPa
   __Pyx_RefNannySetupContext("_parse_next_event", 0);
 
   /* "_yaml.pyx":902
- * 
+ *
  *     cdef int _parse_next_event(self) except 0:
  *         if self.parsed_event.type == YAML_NO_EVENT:             # <<<<<<<<<<<<<<
  *             if yaml_parser_parse(&self.parser, &self.parsed_event) == 0:
@@ -11039,7 +11039,7 @@ static int __pyx_f_5_yaml_7CParser__parse_next_event(struct __pyx_obj_5_yaml_CPa
  *                 error = self._parser_error()
  *                 raise error             # <<<<<<<<<<<<<<
  *         return 1
- * 
+ *
  */
       __Pyx_Raise(__pyx_v_error, 0, 0, 0);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 905; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -11052,7 +11052,7 @@ static int __pyx_f_5_yaml_7CParser__parse_next_event(struct __pyx_obj_5_yaml_CPa
  *                 error = self._parser_error()
  *                 raise error
  *         return 1             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef int input_handler(void *data, char *buffer, int size, int *read) except 0:
  */
   __pyx_r = 1;
@@ -11060,7 +11060,7 @@ static int __pyx_f_5_yaml_7CParser__parse_next_event(struct __pyx_obj_5_yaml_CPa
 
   /* "_yaml.pyx":901
  *         return node
- * 
+ *
  *     cdef int _parse_next_event(self) except 0:             # <<<<<<<<<<<<<<
  *         if self.parsed_event.type == YAML_NO_EVENT:
  *             if yaml_parser_parse(&self.parser, &self.parsed_event) == 0:
@@ -11079,7 +11079,7 @@ static int __pyx_f_5_yaml_7CParser__parse_next_event(struct __pyx_obj_5_yaml_CPa
 
 /* "_yaml.pyx":908
  *         return 1
- * 
+ *
  * cdef int input_handler(void *data, char *buffer, int size, int *read) except 0:             # <<<<<<<<<<<<<<
  *     cdef CParser parser
  *     parser = <CParser>data
@@ -11352,7 +11352,7 @@ static int __pyx_f_5_yaml_input_handler(void *__pyx_v_data, char *__pyx_v_buffer
  *     if parser.stream_cache_pos == parser.stream_cache_len:
  *         parser.stream_cache = None             # <<<<<<<<<<<<<<
  *     return 1
- * 
+ *
  */
     __Pyx_INCREF(Py_None);
     __Pyx_GIVEREF(Py_None);
@@ -11367,7 +11367,7 @@ static int __pyx_f_5_yaml_input_handler(void *__pyx_v_data, char *__pyx_v_buffer
  *     if parser.stream_cache_pos == parser.stream_cache_len:
  *         parser.stream_cache = None
  *     return 1             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef class CEmitter:
  */
   __pyx_r = 1;
@@ -11375,7 +11375,7 @@ static int __pyx_f_5_yaml_input_handler(void *__pyx_v_data, char *__pyx_v_buffer
 
   /* "_yaml.pyx":908
  *         return 1
- * 
+ *
  * cdef int input_handler(void *data, char *buffer, int size, int *read) except 0:             # <<<<<<<<<<<<<<
  *     cdef CParser parser
  *     parser = <CParser>data
@@ -11397,7 +11397,7 @@ static int __pyx_f_5_yaml_input_handler(void *__pyx_v_data, char *__pyx_v_buffer
 
 /* "_yaml.pyx":953
  *     cdef object use_encoding
- * 
+ *
  *     def __init__(self, stream, canonical=None, indent=None, width=None,             # <<<<<<<<<<<<<<
  *             allow_unicode=None, line_break=None, encoding=None,
  *             explicit_start=None, explicit_end=None, version=None, tags=None):
@@ -11431,7 +11431,7 @@ static int __pyx_pw_5_yaml_8CEmitter_1__init__(PyObject *__pyx_v_self, PyObject 
     values[3] = ((PyObject *)Py_None);
 
     /* "_yaml.pyx":954
- * 
+ *
  *     def __init__(self, stream, canonical=None, indent=None, width=None,
  *             allow_unicode=None, line_break=None, encoding=None,             # <<<<<<<<<<<<<<
  *             explicit_start=None, explicit_end=None, version=None, tags=None):
@@ -11570,7 +11570,7 @@ static int __pyx_pw_5_yaml_8CEmitter_1__init__(PyObject *__pyx_v_self, PyObject 
 
   /* "_yaml.pyx":953
  *     cdef object use_encoding
- * 
+ *
  *     def __init__(self, stream, canonical=None, indent=None, width=None,             # <<<<<<<<<<<<<<
  *             allow_unicode=None, line_break=None, encoding=None,
  *             explicit_start=None, explicit_end=None, version=None, tags=None):
@@ -12013,7 +12013,7 @@ static int __pyx_pf_5_yaml_8CEmitter___init__(struct __pyx_obj_5_yaml_CEmitter *
  *         self.anchors = {}
  *         self.last_alias_id = 0             # <<<<<<<<<<<<<<
  *         self.closed = -1
- * 
+ *
  */
   __pyx_v_self->last_alias_id = 0;
 
@@ -12021,14 +12021,14 @@ static int __pyx_pf_5_yaml_8CEmitter___init__(struct __pyx_obj_5_yaml_CEmitter *
  *         self.anchors = {}
  *         self.last_alias_id = 0
  *         self.closed = -1             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __dealloc__(self):
  */
   __pyx_v_self->closed = -1;
 
   /* "_yaml.pyx":953
  *     cdef object use_encoding
- * 
+ *
  *     def __init__(self, stream, canonical=None, indent=None, width=None,             # <<<<<<<<<<<<<<
  *             allow_unicode=None, line_break=None, encoding=None,
  *             explicit_start=None, explicit_end=None, version=None, tags=None):
@@ -12048,10 +12048,10 @@ static int __pyx_pf_5_yaml_8CEmitter___init__(struct __pyx_obj_5_yaml_CEmitter *
 
 /* "_yaml.pyx":996
  *         self.closed = -1
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         yaml_emitter_delete(&self.emitter)
- * 
+ *
  */
 
 /* Python wrapper */
@@ -12070,20 +12070,20 @@ static void __pyx_pf_5_yaml_8CEmitter_2__dealloc__(struct __pyx_obj_5_yaml_CEmit
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
   /* "_yaml.pyx":997
- * 
+ *
  *     def __dealloc__(self):
  *         yaml_emitter_delete(&self.emitter)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def dispose(self):
  */
   yaml_emitter_delete((&__pyx_v_self->emitter));
 
   /* "_yaml.pyx":996
  *         self.closed = -1
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         yaml_emitter_delete(&self.emitter)
- * 
+ *
  */
 
   /* function exit code */
@@ -12092,10 +12092,10 @@ static void __pyx_pf_5_yaml_8CEmitter_2__dealloc__(struct __pyx_obj_5_yaml_CEmit
 
 /* "_yaml.pyx":999
  *         yaml_emitter_delete(&self.emitter)
- * 
+ *
  *     def dispose(self):             # <<<<<<<<<<<<<<
  *         pass
- * 
+ *
  */
 
 /* Python wrapper */
@@ -12125,7 +12125,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_4dispose(CYTHON_UNUSED struct __pyx_o
 
 /* "_yaml.pyx":1002
  *         pass
- * 
+ *
  *     cdef object _emitter_error(self):             # <<<<<<<<<<<<<<
  *         if self.emitter.error == YAML_MEMORY_ERROR:
  *             return MemoryError
@@ -12154,7 +12154,7 @@ static PyObject *__pyx_f_5_yaml_8CEmitter__emitter_error(struct __pyx_obj_5_yaml
   switch (__pyx_v_self->emitter.error) {
 
     /* "_yaml.pyx":1003
- * 
+ *
  *     cdef object _emitter_error(self):
  *         if self.emitter.error == YAML_MEMORY_ERROR:             # <<<<<<<<<<<<<<
  *             return MemoryError
@@ -12278,7 +12278,7 @@ static PyObject *__pyx_f_5_yaml_8CEmitter__emitter_error(struct __pyx_obj_5_yaml
  *             raise ValueError("no emitter error")
  *         else:
  *             raise ValueError(u"no emitter error")             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef int _object_to_event(self, object event_object, yaml_event_t *event) except 0:
  */
     __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1014; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -12290,7 +12290,7 @@ static PyObject *__pyx_f_5_yaml_8CEmitter__emitter_error(struct __pyx_obj_5_yaml
 
   /* "_yaml.pyx":1002
  *         pass
- * 
+ *
  *     cdef object _emitter_error(self):             # <<<<<<<<<<<<<<
  *         if self.emitter.error == YAML_MEMORY_ERROR:
  *             return MemoryError
@@ -12312,7 +12312,7 @@ static PyObject *__pyx_f_5_yaml_8CEmitter__emitter_error(struct __pyx_obj_5_yaml
 
 /* "_yaml.pyx":1016
  *             raise ValueError(u"no emitter error")
- * 
+ *
  *     cdef int _object_to_event(self, object event_object, yaml_event_t *event) except 0:             # <<<<<<<<<<<<<<
  *         cdef yaml_encoding_t encoding
  *         cdef yaml_version_directive_t version_directive_value
@@ -14609,7 +14609,7 @@ static int __pyx_f_5_yaml_8CEmitter__object_to_event(struct __pyx_obj_5_yaml_CEm
  *             else:
  *                 raise TypeError(u"invalid event %s" % event_object)             # <<<<<<<<<<<<<<
  *         return 1
- * 
+ *
  */
       __pyx_t_5 = PyUnicode_Format(__pyx_kp_u_invalid_event_s, __pyx_v_event_object); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
@@ -14632,7 +14632,7 @@ static int __pyx_f_5_yaml_8CEmitter__object_to_event(struct __pyx_obj_5_yaml_CEm
  *             else:
  *                 raise TypeError(u"invalid event %s" % event_object)
  *         return 1             # <<<<<<<<<<<<<<
- * 
+ *
  *     def emit(self, event_object):
  */
   __pyx_r = 1;
@@ -14640,7 +14640,7 @@ static int __pyx_f_5_yaml_8CEmitter__object_to_event(struct __pyx_obj_5_yaml_CEm
 
   /* "_yaml.pyx":1016
  *             raise ValueError(u"no emitter error")
- * 
+ *
  *     cdef int _object_to_event(self, object event_object, yaml_event_t *event) except 0:             # <<<<<<<<<<<<<<
  *         cdef yaml_encoding_t encoding
  *         cdef yaml_version_directive_t version_directive_value
@@ -14668,7 +14668,7 @@ static int __pyx_f_5_yaml_8CEmitter__object_to_event(struct __pyx_obj_5_yaml_CEm
 
 /* "_yaml.pyx":1235
  *         return 1
- * 
+ *
  *     def emit(self, event_object):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         self._object_to_event(event_object, &event)
@@ -14725,7 +14725,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_6emit(struct __pyx_obj_5_yaml_CEmitte
  *         if yaml_emitter_emit(&self.emitter, &event) == 0:
  *             error = self._emitter_error()             # <<<<<<<<<<<<<<
  *             raise error
- * 
+ *
  */
     __pyx_t_3 = ((struct __pyx_vtabstruct_5_yaml_CEmitter *)__pyx_v_self->__pyx_vtab)->_emitter_error(__pyx_v_self); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -14736,7 +14736,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_6emit(struct __pyx_obj_5_yaml_CEmitte
  *         if yaml_emitter_emit(&self.emitter, &event) == 0:
  *             error = self._emitter_error()
  *             raise error             # <<<<<<<<<<<<<<
- * 
+ *
  *     def open(self):
  */
     __Pyx_Raise(__pyx_v_error, 0, 0, 0);
@@ -14745,7 +14745,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_6emit(struct __pyx_obj_5_yaml_CEmitte
 
   /* "_yaml.pyx":1235
  *         return 1
- * 
+ *
  *     def emit(self, event_object):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         self._object_to_event(event_object, &event)
@@ -14767,7 +14767,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_6emit(struct __pyx_obj_5_yaml_CEmitte
 
 /* "_yaml.pyx":1242
  *             raise error
- * 
+ *
  *     def open(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         cdef yaml_encoding_t encoding
@@ -15073,7 +15073,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_8open(struct __pyx_obj_5_yaml_CEmitte
  *                 raise SerializerError("serializer is already opened")
  *             else:
  *                 raise SerializerError(u"serializer is already opened")             # <<<<<<<<<<<<<<
- * 
+ *
  *     def close(self):
  */
       __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_SerializerError); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -15090,7 +15090,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_8open(struct __pyx_obj_5_yaml_CEmitte
 
   /* "_yaml.pyx":1242
  *             raise error
- * 
+ *
  *     def open(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         cdef yaml_encoding_t encoding
@@ -15113,7 +15113,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_8open(struct __pyx_obj_5_yaml_CEmitte
 
 /* "_yaml.pyx":1272
  *                 raise SerializerError(u"serializer is already opened")
- * 
+ *
  *     def close(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         if self.closed == -1:
@@ -15256,7 +15256,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_10close(struct __pyx_obj_5_yaml_CEmit
  *                 error = self._emitter_error()
  *                 raise error             # <<<<<<<<<<<<<<
  *             self.closed = 1
- * 
+ *
  */
       __Pyx_Raise(__pyx_v_error, 0, 0, 0);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -15266,7 +15266,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_10close(struct __pyx_obj_5_yaml_CEmit
  *                 error = self._emitter_error()
  *                 raise error
  *             self.closed = 1             # <<<<<<<<<<<<<<
- * 
+ *
  *     def serialize(self, node):
  */
     __pyx_v_self->closed = 1;
@@ -15276,7 +15276,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_10close(struct __pyx_obj_5_yaml_CEmit
 
   /* "_yaml.pyx":1272
  *                 raise SerializerError(u"serializer is already opened")
- * 
+ *
  *     def close(self):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         if self.closed == -1:
@@ -15299,7 +15299,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_10close(struct __pyx_obj_5_yaml_CEmit
 
 /* "_yaml.pyx":1286
  *             self.closed = 1
- * 
+ *
  *     def serialize(self, node):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         cdef yaml_version_directive_t version_directive_value
@@ -16025,7 +16025,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_12serialize(struct __pyx_obj_5_yaml_C
  *         self.serialized_nodes = {}
  *         self.anchors = {}             # <<<<<<<<<<<<<<
  *         self.last_alias_id = 0
- * 
+ *
  */
   __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -16039,14 +16039,14 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_12serialize(struct __pyx_obj_5_yaml_C
  *         self.serialized_nodes = {}
  *         self.anchors = {}
  *         self.last_alias_id = 0             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef int _anchor_node(self, object node) except 0:
  */
   __pyx_v_self->last_alias_id = 0;
 
   /* "_yaml.pyx":1286
  *             self.closed = 1
- * 
+ *
  *     def serialize(self, node):             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         cdef yaml_version_directive_t version_directive_value
@@ -16072,7 +16072,7 @@ static PyObject *__pyx_pf_5_yaml_8CEmitter_12serialize(struct __pyx_obj_5_yaml_C
 
 /* "_yaml.pyx":1357
  *         self.last_alias_id = 0
- * 
+ *
  *     cdef int _anchor_node(self, object node) except 0:             # <<<<<<<<<<<<<<
  *         if node in self.anchors:
  *             if self.anchors[node] is None:
@@ -16102,7 +16102,7 @@ static int __pyx_f_5_yaml_8CEmitter__anchor_node(struct __pyx_obj_5_yaml_CEmitte
   __Pyx_RefNannySetupContext("_anchor_node", 0);
 
   /* "_yaml.pyx":1358
- * 
+ *
  *     cdef int _anchor_node(self, object node) except 0:
  *         if node in self.anchors:             # <<<<<<<<<<<<<<
  *             if self.anchors[node] is None:
@@ -16325,11 +16325,11 @@ static int __pyx_f_5_yaml_8CEmitter__anchor_node(struct __pyx_obj_5_yaml_CEmitte
           }
           #if CYTHON_COMPILING_IN_CPYTHON
           if (likely(PyTuple_CheckExact(sequence))) {
-            __pyx_t_8 = PyTuple_GET_ITEM(sequence, 0); 
-            __pyx_t_9 = PyTuple_GET_ITEM(sequence, 1); 
+            __pyx_t_8 = PyTuple_GET_ITEM(sequence, 0);
+            __pyx_t_9 = PyTuple_GET_ITEM(sequence, 1);
           } else {
-            __pyx_t_8 = PyList_GET_ITEM(sequence, 0); 
-            __pyx_t_9 = PyList_GET_ITEM(sequence, 1); 
+            __pyx_t_8 = PyList_GET_ITEM(sequence, 0);
+            __pyx_t_9 = PyList_GET_ITEM(sequence, 1);
           }
           __Pyx_INCREF(__pyx_t_8);
           __Pyx_INCREF(__pyx_t_9);
@@ -16380,7 +16380,7 @@ static int __pyx_f_5_yaml_8CEmitter__anchor_node(struct __pyx_obj_5_yaml_CEmitte
  *                     self._anchor_node(key)
  *                     self._anchor_node(value)             # <<<<<<<<<<<<<<
  *         return 1
- * 
+ *
  */
         __pyx_t_7 = ((struct __pyx_vtabstruct_5_yaml_CEmitter *)__pyx_v_self->__pyx_vtab)->_anchor_node(__pyx_v_self, __pyx_v_value); if (unlikely(__pyx_t_7 == 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
@@ -16395,7 +16395,7 @@ static int __pyx_f_5_yaml_8CEmitter__anchor_node(struct __pyx_obj_5_yaml_CEmitte
  *                     self._anchor_node(key)
  *                     self._anchor_node(value)
  *         return 1             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef int _serialize_node(self, object node, object parent, object index) except 0:
  */
   __pyx_r = 1;
@@ -16403,7 +16403,7 @@ static int __pyx_f_5_yaml_8CEmitter__anchor_node(struct __pyx_obj_5_yaml_CEmitte
 
   /* "_yaml.pyx":1357
  *         self.last_alias_id = 0
- * 
+ *
  *     cdef int _anchor_node(self, object node) except 0:             # <<<<<<<<<<<<<<
  *         if node in self.anchors:
  *             if self.anchors[node] is None:
@@ -16429,7 +16429,7 @@ static int __pyx_f_5_yaml_8CEmitter__anchor_node(struct __pyx_obj_5_yaml_CEmitte
 
 /* "_yaml.pyx":1374
  *         return 1
- * 
+ *
  *     cdef int _serialize_node(self, object node, object parent, object index) except 0:             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         cdef int implicit
@@ -17977,11 +17977,11 @@ static int __pyx_f_5_yaml_8CEmitter__serialize_node(struct __pyx_obj_5_yaml_CEmi
           }
           #if CYTHON_COMPILING_IN_CPYTHON
           if (likely(PyTuple_CheckExact(sequence))) {
-            __pyx_t_7 = PyTuple_GET_ITEM(sequence, 0); 
-            __pyx_t_1 = PyTuple_GET_ITEM(sequence, 1); 
+            __pyx_t_7 = PyTuple_GET_ITEM(sequence, 0);
+            __pyx_t_1 = PyTuple_GET_ITEM(sequence, 1);
           } else {
-            __pyx_t_7 = PyList_GET_ITEM(sequence, 0); 
-            __pyx_t_1 = PyList_GET_ITEM(sequence, 1); 
+            __pyx_t_7 = PyList_GET_ITEM(sequence, 0);
+            __pyx_t_1 = PyList_GET_ITEM(sequence, 1);
           }
           __Pyx_INCREF(__pyx_t_7);
           __Pyx_INCREF(__pyx_t_1);
@@ -18089,7 +18089,7 @@ static int __pyx_f_5_yaml_8CEmitter__serialize_node(struct __pyx_obj_5_yaml_CEmi
  *                     raise error
  *             self.ascend_resolver()             # <<<<<<<<<<<<<<
  *         return 1
- * 
+ *
  */
     __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ascend_resolver); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
@@ -18104,7 +18104,7 @@ static int __pyx_f_5_yaml_8CEmitter__serialize_node(struct __pyx_obj_5_yaml_CEmi
  *                     raise error
  *             self.ascend_resolver()
  *         return 1             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef int output_handler(void *data, char *buffer, int size) except 0:
  */
   __pyx_r = 1;
@@ -18112,7 +18112,7 @@ static int __pyx_f_5_yaml_8CEmitter__serialize_node(struct __pyx_obj_5_yaml_CEmi
 
   /* "_yaml.pyx":1374
  *         return 1
- * 
+ *
  *     cdef int _serialize_node(self, object node, object parent, object index) except 0:             # <<<<<<<<<<<<<<
  *         cdef yaml_event_t event
  *         cdef int implicit
@@ -18143,7 +18143,7 @@ static int __pyx_f_5_yaml_8CEmitter__serialize_node(struct __pyx_obj_5_yaml_CEmi
 
 /* "_yaml.pyx":1518
  *         return 1
- * 
+ *
  * cdef int output_handler(void *data, char *buffer, int size) except 0:             # <<<<<<<<<<<<<<
  *     cdef CEmitter emitter
  *     emitter = <CEmitter>data
@@ -18219,7 +18219,7 @@ static int __pyx_f_5_yaml_output_handler(void *__pyx_v_data, char *__pyx_v_buffe
  *         value = PyUnicode_DecodeUTF8(buffer, size, 'strict')
  *     emitter.stream.write(value)             # <<<<<<<<<<<<<<
  *     return 1
- * 
+ *
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_emitter->stream, __pyx_n_s_write); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -18238,14 +18238,14 @@ static int __pyx_f_5_yaml_output_handler(void *__pyx_v_data, char *__pyx_v_buffe
  *         value = PyUnicode_DecodeUTF8(buffer, size, 'strict')
  *     emitter.stream.write(value)
  *     return 1             # <<<<<<<<<<<<<<
- * 
+ *
  */
   __pyx_r = 1;
   goto __pyx_L0;
 
   /* "_yaml.pyx":1518
  *         return 1
- * 
+ *
  * cdef int output_handler(void *data, char *buffer, int size) except 0:             # <<<<<<<<<<<<<<
  *     cdef CEmitter emitter
  *     emitter = <CEmitter>data
@@ -19004,7 +19004,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             raise ValueError("no parser error")
  *         else:
  *             raise ValueError(u"no parser error")             # <<<<<<<<<<<<<<
- * 
+ *
  *     def raw_scan(self):
  */
   __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_no_parser_error); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -19026,7 +19026,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                 raise ValueError("unknown token type")
  *             else:
  *                 raise ValueError(u"unknown token type")             # <<<<<<<<<<<<<<
- * 
+ *
  *     def get_token(self):
  */
   __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_u_unknown_token_type); if (unlikely(!__pyx_tuple__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 481; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -19048,7 +19048,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                 raise ValueError("unknown event type")
  *             else:
  *                 raise ValueError(u"unknown event type")             # <<<<<<<<<<<<<<
- * 
+ *
  *     def get_event(self):
  */
   __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_u_unknown_event_type); if (unlikely(!__pyx_tuple__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -19092,7 +19092,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             raise ValueError("no emitter error")
  *         else:
  *             raise ValueError(u"no emitter error")             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef int _object_to_event(self, object event_object, yaml_event_t *event) except 0:
  */
   __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_u_no_emitter_error); if (unlikely(!__pyx_tuple__21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1014; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -19378,7 +19378,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                 raise SerializerError("serializer is already opened")
  *             else:
  *                 raise SerializerError(u"serializer is already opened")             # <<<<<<<<<<<<<<
- * 
+ *
  *     def close(self):
  */
   __pyx_tuple__47 = PyTuple_Pack(1, __pyx_kp_u_serializer_is_already_opened); if (unlikely(!__pyx_tuple__47)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -19651,7 +19651,7 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "_yaml.pyx":4
  * import yaml
- * 
+ *
  * def get_version_string():             # <<<<<<<<<<<<<<
  *     cdef char *value
  *     value = yaml_get_version_string()
@@ -19663,7 +19663,7 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "_yaml.pyx":12
  *         return PyUnicode_FromString(value)
- * 
+ *
  * def get_version():             # <<<<<<<<<<<<<<
  *     cdef int major, minor, patch
  *     yaml_get_version(&major, &minor, &patch)
@@ -19806,9 +19806,9 @@ PyMODINIT_FUNC PyInit__yaml(void)
   /*--- Execution code ---*/
 
   /* "_yaml.pyx":2
- * 
+ *
  * import yaml             # <<<<<<<<<<<<<<
- * 
+ *
  * def get_version_string():
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_yaml, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -19818,7 +19818,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
 
   /* "_yaml.pyx":4
  * import yaml
- * 
+ *
  * def get_version_string():             # <<<<<<<<<<<<<<
  *     cdef char *value
  *     value = yaml_get_version_string()
@@ -19830,7 +19830,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
 
   /* "_yaml.pyx":12
  *         return PyUnicode_FromString(value)
- * 
+ *
  * def get_version():             # <<<<<<<<<<<<<<
  *     cdef int major, minor, patch
  *     yaml_get_version(&major, &minor, &patch)
@@ -19841,7 +19841,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_yaml.pyx":18
- * 
+ *
  * #Mark = yaml.error.Mark
  * YAMLError = yaml.error.YAMLError             # <<<<<<<<<<<<<<
  * ReaderError = yaml.reader.ReaderError
@@ -19971,7 +19971,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
  * EmitterError = yaml.emitter.EmitterError
  * SerializerError = yaml.serializer.SerializerError             # <<<<<<<<<<<<<<
  * RepresenterError = yaml.representer.RepresenterError
- * 
+ *
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_yaml); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -19988,7 +19988,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
  * EmitterError = yaml.emitter.EmitterError
  * SerializerError = yaml.serializer.SerializerError
  * RepresenterError = yaml.representer.RepresenterError             # <<<<<<<<<<<<<<
- * 
+ *
  * StreamStartToken = yaml.tokens.StreamStartToken
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_yaml); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -20004,7 +20004,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
 
   /* "_yaml.pyx":28
  * RepresenterError = yaml.representer.RepresenterError
- * 
+ *
  * StreamStartToken = yaml.tokens.StreamStartToken             # <<<<<<<<<<<<<<
  * StreamEndToken = yaml.tokens.StreamEndToken
  * DirectiveToken = yaml.tokens.DirectiveToken
@@ -20021,7 +20021,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_yaml.pyx":29
- * 
+ *
  * StreamStartToken = yaml.tokens.StreamStartToken
  * StreamEndToken = yaml.tokens.StreamEndToken             # <<<<<<<<<<<<<<
  * DirectiveToken = yaml.tokens.DirectiveToken
@@ -20331,7 +20331,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
  * AnchorToken = yaml.tokens.AnchorToken
  * TagToken = yaml.tokens.TagToken             # <<<<<<<<<<<<<<
  * ScalarToken = yaml.tokens.ScalarToken
- * 
+ *
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_yaml); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -20348,7 +20348,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
  * AnchorToken = yaml.tokens.AnchorToken
  * TagToken = yaml.tokens.TagToken
  * ScalarToken = yaml.tokens.ScalarToken             # <<<<<<<<<<<<<<
- * 
+ *
  * StreamStartEvent = yaml.events.StreamStartEvent
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_yaml); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -20364,7 +20364,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
 
   /* "_yaml.pyx":49
  * ScalarToken = yaml.tokens.ScalarToken
- * 
+ *
  * StreamStartEvent = yaml.events.StreamStartEvent             # <<<<<<<<<<<<<<
  * StreamEndEvent = yaml.events.StreamEndEvent
  * DocumentStartEvent = yaml.events.DocumentStartEvent
@@ -20381,7 +20381,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_yaml.pyx":50
- * 
+ *
  * StreamStartEvent = yaml.events.StreamStartEvent
  * StreamEndEvent = yaml.events.StreamEndEvent             # <<<<<<<<<<<<<<
  * DocumentStartEvent = yaml.events.DocumentStartEvent
@@ -20511,7 +20511,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
  * SequenceEndEvent = yaml.events.SequenceEndEvent
  * MappingStartEvent = yaml.events.MappingStartEvent             # <<<<<<<<<<<<<<
  * MappingEndEvent = yaml.events.MappingEndEvent
- * 
+ *
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_yaml); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -20528,7 +20528,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
  * SequenceEndEvent = yaml.events.SequenceEndEvent
  * MappingStartEvent = yaml.events.MappingStartEvent
  * MappingEndEvent = yaml.events.MappingEndEvent             # <<<<<<<<<<<<<<
- * 
+ *
  * ScalarNode = yaml.nodes.ScalarNode
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_yaml); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -20544,7 +20544,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
 
   /* "_yaml.pyx":60
  * MappingEndEvent = yaml.events.MappingEndEvent
- * 
+ *
  * ScalarNode = yaml.nodes.ScalarNode             # <<<<<<<<<<<<<<
  * SequenceNode = yaml.nodes.SequenceNode
  * MappingNode = yaml.nodes.MappingNode
@@ -20561,11 +20561,11 @@ PyMODINIT_FUNC PyInit__yaml(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_yaml.pyx":61
- * 
+ *
  * ScalarNode = yaml.nodes.ScalarNode
  * SequenceNode = yaml.nodes.SequenceNode             # <<<<<<<<<<<<<<
  * MappingNode = yaml.nodes.MappingNode
- * 
+ *
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_yaml); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -20582,7 +20582,7 @@ PyMODINIT_FUNC PyInit__yaml(void)
  * ScalarNode = yaml.nodes.ScalarNode
  * SequenceNode = yaml.nodes.SequenceNode
  * MappingNode = yaml.nodes.MappingNode             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef class Mark:
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_yaml); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -20597,9 +20597,9 @@ PyMODINIT_FUNC PyInit__yaml(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_yaml.pyx":2
- * 
+ *
  * import yaml             # <<<<<<<<<<<<<<
- * 
+ *
  * def get_version_string():
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

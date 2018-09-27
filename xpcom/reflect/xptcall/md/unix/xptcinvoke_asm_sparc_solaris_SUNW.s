@@ -11,7 +11,7 @@
 /*
     NS_InvokeByIndex(nsISupports* that, uint32_t methodIndex,
                      uint32_t paramCount, nsXPTCVariant* params);
-    
+
 */
 NS_InvokeByIndex:
         save    %sp,-(64 + 32),%sp  ! room for the register window and

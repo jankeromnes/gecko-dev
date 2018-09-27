@@ -67,7 +67,7 @@ operations:
                     matches the signature (argument 2) issued
                     by the owner of this key. A falsification
                     can have multiple causes:
-                    
+
                     - Data, public key or signature were altered
                       during transmission/storage.
                     - The siganture was not issued by the owner
@@ -76,7 +76,7 @@ operations:
                     - The signature was issued for different data.
                     - The signature was issued using a different
                       hash function. Another hash function may work.
-                      
+
                     Optionally, the name of a hash algorithm
                     can be provided. For hash names see below.
 
@@ -130,8 +130,8 @@ Additional functions:
 *) The encryption used here depends on the "eccrypt" module imported
 by this module. Default implementation should use RABBIT as cipher
 and do the asymmetric part using an optimized El-Gamal scheme.
-        
-            
+
+
 
 Hash functions
 --------------
@@ -204,7 +204,7 @@ class Key:
 
     def compress(self):
         '''Returns a compact public key representation'''
-        
+
 
     @staticmethod
     def decode(s):
@@ -278,7 +278,7 @@ class Key:
         '''Decrypt an encrypted message using this private key'''
         mkey, ctext = Decoder(data).point().str(4).out()
         return decrypt(ctext, mkey, self._priv)
-        
+
     # --- AUTHENTICATED ENCRYPTION ---------------------------------------------
 
     def auth_encrypt(self, data, receiver):
@@ -315,6 +315,6 @@ if __name__ == "__main__":
                 t2 = time.time() - t
                 print s, r, len(e), t1, t2
 
-                
-                
-    
+
+
+

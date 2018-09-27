@@ -9,13 +9,13 @@ Differential Revision: https://reviews.llvm.org/D51788
 @@ -223,8 +223,8 @@
    return true;
  }
- 
+
 -static const u8 kHintNop9Bytes[] = {
 -  0x66, 0x0F, 0x1F, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00
 +static const u8 kHintNop8Bytes[] = {
 +  0x0F, 0x1F, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00
  };
- 
+
  template<class T>
 @@ -239,8 +239,8 @@
  static bool FunctionHasPadding(uptr address, uptr size) {

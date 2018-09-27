@@ -9,7 +9,7 @@ function handleRequest(aRequest, aResponse) {
  aResponse.setStatusLine(aRequest.httpVersion, 301, "Moved Permanently");
 
  // Set redirect URI, mirroring the hash value.
- let hash = (/\#.+/.test(aRequest.path))? 
+ let hash = (/\#.+/.test(aRequest.path))?
               "#" + aRequest.path.split("#")[1]:
               "";
  aResponse.setHeader("Location", REDIRECT_TO + hash);

@@ -513,7 +513,7 @@ export LD_LIBRARY_PATH=$ICU_ROOT/dbg/icu4c/lib
     ValueError: remove ['Nshu'] from _scripts_only_in_iso15924
   -> adjust _scripts_only_in_iso15924 as indicated
 - fix other errors
-    Exception: no default values (@missing lines) for some Catalog or Enumerated properties: [u'vo'] 
+    Exception: no default values (@missing lines) for some Catalog or Enumerated properties: [u'vo']
   -> add vo=Vertical_Orientation to _ignored_properties
   -> later removed again, parsing the file, even though we do not yet store data for runtime use
 

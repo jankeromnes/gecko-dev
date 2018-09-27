@@ -26,14 +26,14 @@
 <!-- Test elements follow -->
 <div id="test_1" class="a bbbbbbbbbbbb cccccccccc dddd"> </div>
 
-<div id="test_2" class="classA-foobar classB-foobar"> </div> <span> </span> 
+<div id="test_2" class="classA-foobar classB-foobar"> </div> <span> </span>
 
 <div id="style_test_1" style="display:none;"></div>
 <div id="style_test_2" class="blah" style="font-size:11px;"></div>
 
 <div id="style_test_3">blah</div>
 
-<div id="test_whitespace"> <span> </span> 
+<div id="test_whitespace"> <span> </span>
 
 
 
@@ -52,9 +52,9 @@
   <span id="2" class="secondClass">Second class</span>
   <span id="3" class="firstClass secondClass">First and Second class</span>
   <span id="4" class="thirdClass">Third class <span id="5" class="firstClass">Nested First class</span></span>
-  
+
   <div id="collect">1<span class="ignore"><span class="someclass">2</span>3</span><ul><li class="ignore">4</li></ul></div>
-  
+
 </div>
 
 <div id="perftest1"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
@@ -64,33 +64,33 @@
 // <![CDATA[
 
   new Test.Unit.Runner({
-    
+
     testElementCollectTextNodes: function() { with(this) {
       assertEqual('1234', Element.collectTextNodes('collect'));
       assert(benchmark(function(){
         Element.collectTextNodes('collect')
       },50) < 1000);
-      
+
       benchmark(function(){
         Element.collectTextNodes('collect')
       },10,'Element.collectTextNodes');
-      
+
       assertEqual('1234', Element.collectTextNodesIgnoreClass('collect', 'somethingcompletelydifferent'));
       assertEqual('1',    $('collect').collectTextNodesIgnoreClass('ignore'));
       benchmark(function(){
         Element.collectTextNodesIgnoreClass('collect','ignore')
       },10,'Element.collectTextNodesIgnoreClass');
-      
+
       assertEqual('134',  Element.collectTextNodesIgnoreClass('collect', 'someclass'));
     }},
-    
+
     testVisualEffect: function() { with(this) {
       assert($('style_test_3') == $('style_test_3').visualEffect('fade'));
       wait(1500,function(){
         assert(!$('style_test_3').visible())
       });
     }},
-        
+
     testParseStylePerformance: function() { with(this) {
       benchmark(function(){
         "font:12px/15pt Verdana;opacity:0.4;border:4px dotted red".parseStyle();

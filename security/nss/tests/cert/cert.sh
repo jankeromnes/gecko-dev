@@ -8,7 +8,7 @@
 #
 # mozilla/security/nss/tests/cert/rcert.sh
 #
-# Certificate generating and handeling for NSS QA, can be included 
+# Certificate generating and handeling for NSS QA, can be included
 # multiple times from all.sh and the individual scripts
 #
 # needs to work on all Unix and Windows platforms
@@ -52,7 +52,7 @@ cert_init()
 
   ROOTCERTSFILE=`ls -1 ${LIBDIR}/*nssckbi* | head -1`
   if [ ! "${ROOTCERTSFILE}" ] ; then
-      html_failed "Looking for root certs module." 
+      html_failed "Looking for root certs module."
       cert_log "ERROR: Root certs module not found."
       Exit 5 "Fatal - Root certs module not found."
   else
@@ -97,7 +97,7 @@ certu()
     EXPECTED=${RETEXPECTED-0}
 
     if [ -n "${CU_SUBJECT}" ]; then
-        #the subject of the cert contains blanks, and the shell 
+        #the subject of the cert contains blanks, and the shell
         #will strip the quotes off the string, if called otherwise...
         echo "certutil -s \"${CU_SUBJECT}\" $*"
         ${PROFTOOL} ${BINDIR}/certutil -s "${CU_SUBJECT}" $*
@@ -110,7 +110,7 @@ certu()
     fi
     if [ "$RET" -ne "$EXPECTED" ]; then
         CERTFAILED=$RET
-        html_failed "${CU_ACTION} ($RET=$EXPECTED) " 
+        html_failed "${CU_ACTION} ($RET=$EXPECTED) "
         cert_log "ERROR: ${CU_ACTION} failed $RET"
     else
         html_passed "${CU_ACTION}"
@@ -126,14 +126,14 @@ certu()
 crlu()
 {
     echo "$SCRIPTNAME: ${CU_ACTION} --------------------------"
-    
+
     CRLUTIL="crlutil -q"
     echo "$CRLUTIL $*"
     ${PROFTOOL} ${BINDIR}/$CRLUTIL $*
     RET=$?
     if [ "$RET" -ne 0 ]; then
         CRLFAILED=$RET
-        html_failed "${CU_ACTION} ($RET) " 
+        html_failed "${CU_ACTION} ($RET) "
         cert_log "ERROR: ${CU_ACTION} failed $RET"
     else
         html_passed "${CU_ACTION}"
@@ -176,7 +176,7 @@ modu()
     RET=$?
     if [ "$RET" -ne 0 ]; then
         MODFAILED=$RET
-        html_failed "${CU_ACTION} ($RET) " 
+        html_failed "${CU_ACTION} ($RET) "
         cert_log "ERROR: ${CU_ACTION} failed $RET"
     else
         html_passed "${CU_ACTION}"
@@ -229,26 +229,26 @@ hw_acc()
         echo "modutil -add rainbow -libfile /usr/lib/libcryptoki22.so "
         echo "         -dbdir ${PROFILEDIR} 2>&1 "
         echo | ${BINDIR}/modutil -add rainbow -libfile /usr/lib/libcryptoki22.so \
-            -dbdir ${PROFILEDIR} 2>&1 
+            -dbdir ${PROFILEDIR} 2>&1
         if [ "$?" -ne 0 ]; then
             echo "modutil -add rainbow failed in `pwd`"
             HW_ACC_RET=1
             HW_ACC_ERR="modutil -add rainbow"
         fi
-    
+
         echo "modutil -add ncipher "
         echo "         -libfile /opt/nfast/toolkits/pkcs11/libcknfast.so "
         echo "         -dbdir ${PROFILEDIR} 2>&1 "
         echo | ${BINDIR}/modutil -add ncipher \
             -libfile /opt/nfast/toolkits/pkcs11/libcknfast.so \
-            -dbdir ${PROFILEDIR} 2>&1 
+            -dbdir ${PROFILEDIR} 2>&1
         if [ "$?" -ne 0 ]; then
             echo "modutil -add ncipher failed in `pwd`"
             HW_ACC_RET=`expr $HW_ACC_RET + 2`
             HW_ACC_ERR="$HW_ACC_ERR,modutil -add ncipher"
         fi
         if [ "$HW_ACC_RET" -ne 0 ]; then
-            html_failed "Adding HW accelerators to certDB for ${CERTNAME} ($HW_ACC_RET) " 
+            html_failed "Adding HW accelerators to certDB for ${CERTNAME} ($HW_ACC_RET) "
         else
             html_passed "Adding HW accelerators to certDB for ${CERTNAME}"
         fi
@@ -258,7 +258,7 @@ hw_acc()
 }
 
 ############################# cert_create_cert #########################
-# local shell function to create client certs 
+# local shell function to create client certs
 #     initialize DB, import
 #     root cert
 #     add cert to DB
@@ -274,7 +274,7 @@ cert_create_cert()
     fi
 
     CU_ACTION="Loading root cert module to ${CERTNAME}'s Cert DB"
-    modu -add "RootCerts" -libfile "${ROOTCERTSFILE}" -dbdir "${PROFILEDIR}" 2>&1   
+    modu -add "RootCerts" -libfile "${ROOTCERTSFILE}" -dbdir "${PROFILEDIR}" 2>&1
     if [ "$RET" -ne 0 ]; then
         return $RET
     fi
@@ -489,7 +489,7 @@ cert_all_CA()
     cert_CA $SERVER_CADIR serverCA -x "Cu,Cu,Cu" ${D_SERVER_CA} "2"
     ALL_CU_SUBJECT="CN=NSS Chain1 Server Test CA, O=BOGUS NSS, L=Santa Clara, ST=California, C=US"
     cert_CA $SERVER_CADIR chain-1-serverCA "-c serverCA" "u,u,u" ${D_SERVER_CA} "3"
-    ALL_CU_SUBJECT="CN=NSS Chain2 Server Test CA, O=BOGUS NSS, L=Santa Clara, ST=California, C=US" 
+    ALL_CU_SUBJECT="CN=NSS Chain2 Server Test CA, O=BOGUS NSS, L=Santa Clara, ST=California, C=US"
     cert_CA $SERVER_CADIR chain-2-serverCA "-c chain-1-serverCA" "u,u,u" ${D_SERVER_CA} "4"
 
 
@@ -503,7 +503,7 @@ cert_all_CA()
 
     rm $CLIENT_CADIR/root.cert $SERVER_CADIR/root.cert
 
-    # root.cert in $CLIENT_CADIR and in $SERVER_CADIR is one of the last 
+    # root.cert in $CLIENT_CADIR and in $SERVER_CADIR is one of the last
     # in the chain
 
 
@@ -517,7 +517,7 @@ cert_all_CA()
 	cert_dsa_CA $SERVER_CADIR serverCA-dsa -x "Cu,Cu,Cu" ${D_SERVER_CA} "2"
 	ALL_CU_SUBJECT="CN=NSS Chain1 Server Test CA (DSA), O=BOGUS NSS, L=Santa Clara, ST=California, C=US"
 	cert_dsa_CA $SERVER_CADIR chain-1-serverCA-dsa "-c serverCA-dsa" "u,u,u" ${D_SERVER_CA} "3"
-	ALL_CU_SUBJECT="CN=NSS Chain2 Server Test CA (DSA), O=BOGUS NSS, L=Santa Clara, ST=California, C=US" 
+	ALL_CU_SUBJECT="CN=NSS Chain2 Server Test CA (DSA), O=BOGUS NSS, L=Santa Clara, ST=California, C=US"
 	cert_dsa_CA $SERVER_CADIR chain-2-serverCA-dsa "-c chain-1-serverCA-dsa" "u,u,u" ${D_SERVER_CA} "4"
 
 	ALL_CU_SUBJECT="CN=NSS Client Test CA (DSA), O=BOGUS NSS, L=Santa Clara, ST=California, C=US"
@@ -528,7 +528,7 @@ cert_all_CA()
 	cert_dsa_CA $CLIENT_CADIR chain-2-clientCA-dsa "-c chain-1-clientCA-dsa" "u,u,u" ${D_CLIENT_CA} "7"
 
 	rm $CLIENT_CADIR/dsaroot.cert $SERVER_CADIR/dsaroot.cert
-#	dsaroot.cert in $CLIENT_CADIR and in $SERVER_CADIR is one of the last 
+#	dsaroot.cert in $CLIENT_CADIR and in $SERVER_CADIR is one of the last
 #	in the chain
 
 #
@@ -552,7 +552,7 @@ cert_all_CA()
 	cert_ec_CA $SERVER_CADIR serverCA-ec -x "Cu,Cu,Cu" ${D_SERVER_CA} "2" ${CA_CURVE}
 	ALL_CU_SUBJECT="CN=NSS Chain1 Server Test CA (ECC), O=BOGUS NSS, L=Santa Clara, ST=California, C=US"
 	cert_ec_CA $SERVER_CADIR chain-1-serverCA-ec "-c serverCA-ec" "u,u,u" ${D_SERVER_CA} "3" ${CA_CURVE}
-	ALL_CU_SUBJECT="CN=NSS Chain2 Server Test CA (ECC), O=BOGUS NSS, L=Santa Clara, ST=California, C=US" 
+	ALL_CU_SUBJECT="CN=NSS Chain2 Server Test CA (ECC), O=BOGUS NSS, L=Santa Clara, ST=California, C=US"
 	cert_ec_CA $SERVER_CADIR chain-2-serverCA-ec "-c chain-1-serverCA-ec" "u,u,u" ${D_SERVER_CA} "4" ${CA_CURVE}
 
 	ALL_CU_SUBJECT="CN=NSS Client Test CA (ECC), O=BOGUS NSS, L=Santa Clara, ST=California, C=US"
@@ -563,7 +563,7 @@ cert_all_CA()
 	cert_ec_CA $CLIENT_CADIR chain-2-clientCA-ec "-c chain-1-clientCA-ec" "u,u,u" ${D_CLIENT_CA} "7" ${CA_CURVE}
 
 	rm $CLIENT_CADIR/ecroot.cert $SERVER_CADIR/ecroot.cert
-#	ecroot.cert in $CLIENT_CADIR and in $SERVER_CADIR is one of the last 
+#	ecroot.cert in $CLIENT_CADIR and in $SERVER_CADIR is one of the last
 #	in the chain
 }
 
@@ -604,7 +604,7 @@ cert_CA()
       fi
 
       CU_ACTION="Loading root cert module to CA Cert DB"
-      modu -add "RootCerts" -libfile "${ROOTCERTSFILE}" -dbdir "${LPROFILE}" 2>&1   
+      modu -add "RootCerts" -libfile "${ROOTCERTSFILE}" -dbdir "${LPROFILE}" 2>&1
       if [ "$RET" -ne 0 ]; then
           return $RET
       fi
@@ -641,7 +641,7 @@ CERTSCRIPT
   ################# Exporting Root Cert ###################################
   #
   CU_ACTION="Exporting Root Cert"
-  certu -L -n  $NICKNAME -r -d ${LPROFILE} -o root.cert 
+  certu -L -n  $NICKNAME -r -d ${LPROFILE} -o root.cert
   if [ "$RET" -ne 0 ]; then
       Exit 7 "Fatal - failed to export root cert"
   fi
@@ -708,7 +708,7 @@ CERTSCRIPT
   ################# Exporting DSA Root Cert ###############################
   #
   CU_ACTION="Exporting DSA Root Cert"
-  certu -L -n  $NICKNAME -r -d ${LPROFILE} -o dsaroot.cert 
+  certu -L -n  $NICKNAME -r -d ${LPROFILE} -o dsaroot.cert
   if [ "$RET" -ne 0 ]; then
       Exit 7 "Fatal - failed to export dsa root cert"
   fi
@@ -848,7 +848,7 @@ CERTSCRIPT
   ################# Exporting EC Root Cert ################################
   #
   CU_ACTION="Exporting EC Root Cert"
-  certu -L -n  $NICKNAME -r -d ${LPROFILE} -o ecroot.cert 
+  certu -L -n  $NICKNAME -r -d ${LPROFILE} -o ecroot.cert
   if [ "$RET" -ne 0 ]; then
       Exit 7 "Fatal - failed to export ec root cert"
   fi
@@ -856,7 +856,7 @@ CERTSCRIPT
 }
 
 ############################## cert_smime_client #############################
-# local shell function to create client Certificates for S/MIME tests 
+# local shell function to create client Certificates for S/MIME tests
 ##############################################################################
 cert_smime_client()
 {
@@ -873,8 +873,8 @@ cert_smime_client()
 ## call to cert_create_cert ends up creating two separate certs
 ## one for Eve and another for Eve-ec but they both end up with
 ## the same Subject Alt Name Extension, i.e., both the cert for
-## Eve@bogus.com and the cert for Eve-ec@bogus.com end up 
-## listing eve@bogus.net in the Certificate Subject Alt Name extension. 
+## Eve@bogus.com and the cert for Eve-ec@bogus.com end up
+## listing eve@bogus.net in the Certificate Subject Alt Name extension.
 ## This can cause a problem later when cmsutil attempts to create
 ## enveloped data and accidently picks up the ECC cert (NSS currently
 ## does not support ECC for enveloped data creation). This script
@@ -936,7 +936,7 @@ cert_smime_client()
           -i ${R_DAVEDIR}/Dave-ec.cert 2>&1
 
 ## XXXX Do not import Eve's EC cert until we can make sure that
-## the email addresses listed in the Subject Alt Name Extension 
+## the email addresses listed in the Subject Alt Name Extension
 ## inside Eve's ECC and non-ECC certs are different.
 #     CU_ACTION="Import Eve's EC cert into Alice's DB"
 #     certu -E -t ",," -d ${P_R_ALICEDIR} -f ${R_PWFILE} \
@@ -1272,7 +1272,7 @@ cert_ssl()
   echo "             ${HOSTADDR}-sni --------------------------------"
   CERTSERIAL=101
   CERTNAME="${HOST}-sni${sniCertCount}.${DOMSUF}"
-  cert_add_cert 
+  cert_add_cert
   CU_ACTION="Modify trust attributes of Root CA -t TC,TC,TC"
   certu -M -n "TestCA" -t "TC,TC,TC" -d ${PROFILEDIR} -f "${R_PWFILE}"
 
@@ -1323,7 +1323,7 @@ cert_stresscerts()
   PROFILEDIR=`cd ${CERTDIR}; pwd`
   if [ "${OS_ARCH}" = "WINNT" -a "$OS_NAME" = "CYGWIN_NT" ]; then
      PROFILEDIR=`cygpath -m ${PROFILEDIR}`
-  fi  
+  fi
   if [ -n "${MULTIACCESS_DBM}" ]; then
      PROFILEDIR="multiaccess:${D_CLIENT}"
   fi
@@ -1337,7 +1337,7 @@ cert_stresscerts()
   do
       CERTNAME="TestUser$CONTINUE"
 #      cert_add_cert ${CLIENTDIR} "TestUser$CONTINUE" $CERTSERIAL
-      cert_add_cert 
+      cert_add_cert
       CERTSERIAL=`expr $CERTSERIAL + 1 `
       CONTINUE=`expr $CONTINUE - 1 `
   done
@@ -1349,7 +1349,7 @@ cert_stresscerts()
 }
 
 ############################## cert_fips #####################################
-# local shell function to create certificates for FIPS tests 
+# local shell function to create certificates for FIPS tests
 ##############################################################################
 cert_fips()
 {
@@ -1371,7 +1371,7 @@ y
 MODSCRIPT
   RET=$?
   if [ "$RET" -ne 0 ]; then
-    html_failed "${CU_ACTION} ($RET) " 
+    html_failed "${CU_ACTION} ($RET) "
     cert_log "ERROR: ${CU_ACTION} failed $RET"
   else
     html_passed "${CU_ACTION}"
@@ -1381,9 +1381,9 @@ MODSCRIPT
   RETEXPECTED=255
   certu -W -d "${PROFILEDIR}" -f "${R_FIPSPWFILE}" -@ "${R_FIPSBADPWFILE}" 2>&1
   CU_ACTION="Attempt to generate a key with exponent of 3 (too small)"
-  certu -G -k rsa -g 2048 -y 3 -d "${PROFILEDIR}" -z ${R_NOISE_FILE} -f "${R_FIPSPWFILE}" 
+  certu -G -k rsa -g 2048 -y 3 -d "${PROFILEDIR}" -z ${R_NOISE_FILE} -f "${R_FIPSPWFILE}"
   CU_ACTION="Attempt to generate a key with exponent of 17 (too small)"
-  certu -G -k rsa -g 2048 -y 17 -d "${PROFILEDIR}" -z ${R_NOISE_FILE} -f "${R_FIPSPWFILE}" 
+  certu -G -k rsa -g 2048 -y 17 -d "${PROFILEDIR}" -z ${R_NOISE_FILE} -f "${R_FIPSPWFILE}"
   RETEXPECTED=0
 
   CU_ACTION="Generate Certificate for ${CERTNAME}"
@@ -1403,9 +1403,9 @@ cert_rsa_exponent_nonfips()
 {
   echo "$SCRIPTNAME: Verify that small RSA exponents still work  =============="
   CU_ACTION="Attempt to generate a key with exponent of 3"
-  certu -G -k rsa -g 2048 -y 3 -d "${CLIENTDIR}" -z ${R_NOISE_FILE} -f "${R_PWFILE}" 
+  certu -G -k rsa -g 2048 -y 3 -d "${CLIENTDIR}" -z ${R_NOISE_FILE} -f "${R_PWFILE}"
   CU_ACTION="Attempt to generate a key with exponent of 17"
-  certu -G -k rsa -g 2048 -y 17 -d "${CLIENTDIR}" -z ${R_NOISE_FILE} -f "${R_PWFILE}" 
+  certu -G -k rsa -g 2048 -y 17 -d "${CLIENTDIR}" -z ${R_NOISE_FILE} -f "${R_PWFILE}"
 }
 
 ############################## cert_eccurves ###########################
@@ -1442,13 +1442,13 @@ cert_eccurves()
 	CU_SUBJECT="CN=$CERTNAME, E=${CERTNAME}-ec@bogus.com, O=BOGUS NSS, L=Mountain View, ST=California, C=US"
 	certu -R -k ec -q "${CURVE}" -d "${PROFILEDIR}" -f "${R_PWFILE}" \
 		-z "${R_NOISE_FILE}" -o req  2>&1
-	
+
 	if [ $RET -eq 0 ] ; then
 	  CU_ACTION="Sign ${CERTNAME}'s EC Request"
 	  certu -C -c "TestCA-ec" -m "$CERTSERIAL" -v 60 -d "${P_R_CADIR}" \
 		-i req -o "${CERTNAME}-ec.cert" -f "${R_PWFILE}" "$1" 2>&1
 	fi
-	
+
 	if [ $RET -eq 0 ] ; then
 	  CU_ACTION="Import $CERTNAME's EC Cert"
 	  certu -A -n "${CERTNAME}-ec" -t "u,u,u" -d "${PROFILEDIR}" \
@@ -1478,19 +1478,19 @@ cert_extensions_test()
     RET=$?
     if [ "${RET}" -ne 0 ]; then
         CERTFAILED=1
-        html_failed "${TESTNAME} (${COUNT}) - Create and Add Certificate" 
-        cert_log "ERROR: ${TESTNAME} - Create and Add Certificate failed" 
+        html_failed "${TESTNAME} (${COUNT}) - Create and Add Certificate"
+        cert_log "ERROR: ${TESTNAME} - Create and Add Certificate failed"
         return 1
     fi
 
-    echo certutil -d ${CERT_EXTENSIONS_DIR} -L -n ${CERTNAME} 
+    echo certutil -d ${CERT_EXTENSIONS_DIR} -L -n ${CERTNAME}
     EXTLIST=`${BINDIR}/certutil -d ${CERT_EXTENSIONS_DIR} -L -n ${CERTNAME}`
     RET=$?
     echo "${EXTLIST}"
     if [ "${RET}" -ne 0 ]; then
         CERTFAILED=1
-        html_failed "${TESTNAME} (${COUNT}) - List Certificate" 
-        cert_log "ERROR: ${TESTNAME} - List Certificate failed" 
+        html_failed "${TESTNAME} (${COUNT}) - List Certificate"
+        cert_log "ERROR: ${TESTNAME} - List Certificate failed"
         return 1
     fi
 
@@ -1505,7 +1505,7 @@ cert_extensions_test()
         RET=$?
         if [ "${RET}" -ne "${EXPSTAT}" ]; then
             CERTFAILED=1
-            html_failed "${TESTNAME} (${COUNT}) - Looking for ${FL}" "returned ${RET}, expected is ${EXPSTAT}" 
+            html_failed "${TESTNAME} (${COUNT}) - Looking for ${FL}" "returned ${RET}, expected is ${EXPSTAT}"
             cert_log "ERROR: ${TESTNAME} - Looking for ${FL} failed"
             return 1
         fi
@@ -1554,16 +1554,16 @@ cert_make_with_param()
 
     echo certutil ${DIRPASS} -s "${SUBJ}" ${MAKE} ${CERTNAME} ${EXTRA}
     ${BINDIR}/certutil ${DIRPASS} -s "${SUBJ}" ${MAKE} ${CERTNAME} ${EXTRA}
-        
+
     RET=$?
     if [ "${RET}" -ne "${EXPECT}" ]; then
         # if we expected failure to create, then delete unexpected certificate
         if [ "${EXPECT}" -ne 0 ]; then
             ${BINDIR}/certutil ${DIRPASS} -D ${CERTNAME}
         fi
-    
+
         CERTFAILED=1
-        html_failed "${TESTNAME} (${COUNT}) - ${EXTRA}" 
+        html_failed "${TESTNAME} (${COUNT}) - ${EXTRA}"
         cert_log "ERROR: ${TESTNAME} - ${EXTRA} failed"
         return 1
     fi
@@ -1617,7 +1617,7 @@ cert_list_and_count_dns()
     RET=$?
     if [ "${RET}" -ne "${EXPECT}" ]; then
         CERTFAILED=1
-        html_failed "${TESTNAME} (${COUNT}) - list and count" 
+        html_failed "${TESTNAME} (${COUNT}) - list and count"
         cert_log "ERROR: ${TESTNAME} - list and count failed"
         return 1
     fi
@@ -1625,7 +1625,7 @@ cert_list_and_count_dns()
     LISTCOUNT=`${BINDIR}/certutil ${DIRPASS} -L ${CERTNAME} | grep -wc DNS`
     if [ "${LISTCOUNT}" -ne "${EXPECTCOUNT}" ]; then
         CERTFAILED=1
-        html_failed "${TESTNAME} (${COUNT}) - list and count" 
+        html_failed "${TESTNAME} (${COUNT}) - list and count"
         cert_log "ERROR: ${TESTNAME} - list and count failed"
         return 1
     fi
@@ -1646,7 +1646,7 @@ cert_dump_ext_to_file()
     echo certutil ${DIRPASS} -L ${CERTNAME} --dump-ext-val ${OID}
     echo "writing output to ${OUTFILE}"
     ${BINDIR}/certutil ${DIRPASS} -L ${CERTNAME} --dump-ext-val ${OID} > ${OUTFILE}
-        
+
     RET=$?
     if [ "${RET}" -ne "${EXPECT}" ]; then
         CERTFAILED=1
@@ -1668,11 +1668,11 @@ cert_delete()
 
     echo certutil ${DIRPASS} -D ${CERTNAME}
     ${BINDIR}/certutil ${DIRPASS} -D ${CERTNAME}
-        
+
     RET=$?
     if [ "${RET}" -ne "${EXPECT}" ]; then
         CERTFAILED=1
-        html_failed "${TESTNAME} (${COUNT}) - delete cert" 
+        html_failed "${TESTNAME} (${COUNT}) - delete cert"
         cert_log "ERROR: ${TESTNAME} - delete cert failed"
         return 1
     fi
@@ -1773,14 +1773,14 @@ cert_san_and_generic_extensions()
 ########################################################################
 cert_crl_ssl()
 {
-    
+
   ################# Creating Certs ###################################
   #
   CERTFAILED=0
   CERTSERIAL=${CRL_GRP_1_BEGIN}
 
   cd $CADIR
-  
+
   PROFILEDIR=`cd ${CLIENTDIR}; pwd`
   if [ "${OS_ARCH}" = "WINNT" -a "$OS_NAME" = "CYGWIN_NT" ]; then
      PROFILEDIR=`cygpath -m ${PROFILEDIR}`
@@ -1792,7 +1792,7 @@ cert_crl_ssl()
   while [ $CERTSERIAL -le $CRL_GRPS_END ]
   do
       CERTNAME="TestUser$CERTSERIAL"
-      cert_add_cert 
+      cert_add_cert
       CERTSERIAL=`expr $CERTSERIAL + 1 `
   done
 
@@ -1803,7 +1803,7 @@ cert_crl_ssl()
   CRL_GRP_END=`expr ${CRL_GRP_1_BEGIN} + ${CRL_GRP_1_RANGE} - 1`
   CRL_FILE_GRP_1=${R_SERVERDIR}/root.crl_${CRL_GRP_1_BEGIN}-${CRL_GRP_END}
   CRL_FILE=${CRL_FILE_GRP_1}
-  
+
   CRLUPDATE=`date -u "+%Y%m%d%H%M%SZ"`
   CU_ACTION="Generating CRL for range ${CRL_GRP_1_BEGIN}-${CRL_GRP_END} TestCA authority"
   CRL_GRP_END_=`expr ${CRL_GRP_END} - 1`
@@ -2046,7 +2046,7 @@ cert_test_password()
 #  we mark the first leaf and the intermediate as explicitly untrusted.
 #  we then try to verify the two leaf certs for our possible usages.
 #  All verification should fail.
-# 
+#
 cert_test_distrust()
 {
   echo "$SCRIPTNAME: Creating Distrusted Certificate"

@@ -10,13 +10,13 @@ Group: System Environment/Base
 Source: %{name}-%{version}.tar.gz
 ExclusiveOS: Linux
 BuildRoot: /var/tmp/%{name}-root
-        
+
 %description
 
 NSPR provides platform independence for non-GUI operating system
 facilities. These facilities include threads, thread synchronization,
 normal file and network I/O, interval timing and calendar time, basic
-memory management (malloc and free) and shared library linking. 
+memory management (malloc and free) and shared library linking.
 
 See: http://www.mozilla.org/projects/nspr/about-nspr.html
 

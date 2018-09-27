@@ -68,9 +68,9 @@ uint8_t nsMenuUtilsX::GeckoModifiersForNodeAttribute(const nsString& modifiersAt
   while (token != NULL) {
     if (strcmp(token, "shift") == 0)
       modifiers |= knsMenuItemShiftModifier;
-    else if (strcmp(token, "alt") == 0) 
+    else if (strcmp(token, "alt") == 0)
       modifiers |= knsMenuItemAltModifier;
-    else if (strcmp(token, "control") == 0) 
+    else if (strcmp(token, "control") == 0)
       modifiers |= knsMenuItemControlModifier;
     else if ((strcmp(token, "accel") == 0) ||
              (strcmp(token, "meta") == 0)) {
@@ -86,7 +86,7 @@ uint8_t nsMenuUtilsX::GeckoModifiersForNodeAttribute(const nsString& modifiersAt
 unsigned int nsMenuUtilsX::MacModifiersForGeckoModifiers(uint8_t geckoModifiers)
 {
   unsigned int macModifiers = 0;
-  
+
   if (geckoModifiers & knsMenuItemShiftModifier)
     macModifiers |= NSShiftKeyMask;
   if (geckoModifiers & knsMenuItemAltModifier)

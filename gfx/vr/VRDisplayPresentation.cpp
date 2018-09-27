@@ -73,7 +73,7 @@ VRDisplayPresentation::CreateLayers()
 
     Rect rightBounds(0.5, 0.0, 0.5, 1.0);
     if (layer.mRightBounds.Length() == 4) {
-      rightBounds.SetRect(layer.mRightBounds[0], 
+      rightBounds.SetRect(layer.mRightBounds[0],
                           layer.mRightBounds[1],
                           layer.mRightBounds[2],
                           layer.mRightBounds[3]);

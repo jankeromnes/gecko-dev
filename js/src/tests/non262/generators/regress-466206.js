@@ -30,6 +30,6 @@ function test()
   try { g().next(); } catch (e) {}
   gc();
   f();
- 
+
   reportCompare(expect, actual, summary);
 }

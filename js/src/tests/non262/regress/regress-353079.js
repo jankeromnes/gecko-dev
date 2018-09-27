@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   for (let a in [1]) { { let x;
     for (let y in ((function(id2) { return id2; })( '' ))) { } } }
 

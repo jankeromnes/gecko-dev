@@ -9,7 +9,7 @@ description: Nesting one "switch" statement into StatementList of the other's
 
 function SwitchTest(value){
   var result = 0;
-  
+
   switch(value) {
     case 0:
       switch(value) {

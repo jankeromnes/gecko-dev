@@ -22,7 +22,7 @@ function DoWhile( object ) { return result1=false; }
 new TestCase(
     SECTION,
     "break one: ",
-    result1 
+    result1
 );
 jsTestDriverEnd();
 new TestCase( SECTION, "'�O� �:i��'.match(new RegExp('.+'))", [], '�O� �:i��');

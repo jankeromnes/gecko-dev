@@ -8,7 +8,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-dwrite-font.cpp b/gfx/cairo/cairo/src/cai
      if (FAILED(hr)) {
  	return CAIRO_INT_STATUS_UNSUPPORTED;
      }
- 
+
      // TODO: Treat swap_xy.
 -    extents.width = (FLOAT)(metrics.advanceWidth - metrics.leftSideBearing - metrics.rightSideBearing) / fontMetrics.designUnitsPerEm;
 -    extents.height = (FLOAT)(metrics.advanceHeight - metrics.topSideBearing - metrics.bottomSideBearing) / fontMetrics.designUnitsPerEm;
@@ -39,6 +39,6 @@ diff --git a/gfx/cairo/cairo/src/cairo-dwrite-font.cpp b/gfx/cairo/cairo/src/cai
  				     &extents);
      return CAIRO_INT_STATUS_SUCCESS;
  }
- 
+
  /**
   * Stack-based helper implementing IDWriteGeometrySink.

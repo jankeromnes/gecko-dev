@@ -13,7 +13,7 @@ var expect = 'No Crash';
 printBugNumber(BUGNUMBER);
 printStatus (summary);
 print('This test runs only in the browser');
- 
+
 function countProps(obj)
 {
   var c;

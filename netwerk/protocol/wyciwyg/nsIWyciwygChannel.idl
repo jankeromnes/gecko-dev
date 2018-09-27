@@ -7,7 +7,7 @@
 
 /**
  * A channel to  manage all cache-related interactions for layout
- * when it is dealing with dynamic pages created through 
+ * when it is dealing with dynamic pages created through
  * document.write(). This interface provides methods that will
  * help layout save dynamic pages in cache for future retrievals.
  */

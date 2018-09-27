@@ -3,7 +3,7 @@
      xmlns="http://www.w3.org/2000/svg">
   <desc>Borrowed from http://www.w3.org/TR/SVG/pservers.html</desc>
   <!-- Outline the drawing area in blue -->
-  <rect fill="none" stroke="blue" 
+  <rect fill="none" stroke="blue"
         x="1" y="1" width="798" height="398"/>
 
   <defs>
@@ -11,11 +11,11 @@
              x="0" y="0" width="100" height="100"
              viewBox="0 0 10 10" >
       <path d="M 0 0 L 7 0 L 3.5 7 z" fill="red" fill-opacity="0.7" stroke="blue" />
-    </pattern> 
+    </pattern>
   </defs>
 
   <!-- The ellipse is filled using a triangle pattern paint server
        and stroked with black -->
-  <ellipse fill="url(#TrianglePattern)" stroke="black" stroke-width="5"  
+  <ellipse fill="url(#TrianglePattern)" stroke="black" stroke-width="5"
            cx="400" cy="200" rx="350" ry="150" />
 </svg>

@@ -10,6 +10,6 @@
 <Url type="text/html" method="GET" template="http://www.ceneje.si/search_new.aspx" resultdomain="ceneje.si">
 	<Param name="q" value="{searchTerms}" />
 	<Param name="FF-SearchBox" value="1" />
-</Url>	
+</Url>
 <SearchForm>http://www.ceneje.si</SearchForm>
 </SearchPlugin>

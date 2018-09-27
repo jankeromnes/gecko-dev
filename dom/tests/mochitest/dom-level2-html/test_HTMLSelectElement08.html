@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "select");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,12 +70,12 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The options attribute returns a collection of OPTION elements contained
     by this element.
 
     Retrieve the options attribute from the first SELECT element and
-    examine the items of the returned collection. 
+    examine the items of the returned collection.
 
 * @author NIST
 * @author Mary Brady
@@ -100,7 +100,7 @@ function HTMLSelectElement08() {
       expectedOptions[3] = "option";
       expectedOptions[4] = "option";
 
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -119,7 +119,7 @@ testNode = nodeList.item(0);
 
 	}
    assertEqualsListAutoCase("element", "optionsLink",expectedOptions,result);
-       
+
 }
 
 </script>
@@ -133,7 +133,7 @@ testNode = nodeList.item(0);
     by this element.
 
     Retrieve the options attribute from the first SELECT element and
-    examine the items of the returned collection. 
+    examine the items of the returned collection.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Mary Brady&lt;/contributor&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;date qualifier='created'&gt;2002-02-22&lt;/date&gt;
@@ -150,7 +150,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/select.html"></iframe>
 <br>

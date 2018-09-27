@@ -20,7 +20,7 @@ catch(ex)
 {
   actual = ex.name;
 }
- 
+
 reportCompare(expect, actual, summary + ': typeof (0, undef)');
 
 try
@@ -31,7 +31,7 @@ catch(ex)
 {
   actual = ex.name;
 }
- 
+
 reportCompare(expect, actual, summary + ': typeof (0 || undef)');
 
 try
@@ -42,7 +42,7 @@ catch(ex)
 {
   actual = ex.name;
 }
- 
+
 reportCompare(expect, actual, summary + ': typeof (1 && undef)');
 
 /*
@@ -54,7 +54,7 @@ reportCompare(expect, actual, summary + ': typeof (1 && undef)');
   {
   actual = ex.name;
   }
- 
+
   reportCompare(expect, actual, summary + ': typeof (0 ? 0 : undef)');
 */
 
@@ -67,7 +67,7 @@ reportCompare(expect, actual, summary + ': typeof (1 && undef)');
   {
   actual = ex.name;
   }
- 
+
   reportCompare(expect, actual, summary + ': typeof (1 ? undef : 0)');
 */
 
@@ -79,5 +79,5 @@ catch(ex)
 {
   actual = ex.name;
 }
- 
+
 reportCompare(expect, actual, summary + ': typeof (!this ? 0 : undef)');

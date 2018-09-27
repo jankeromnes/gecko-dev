@@ -19,7 +19,7 @@
   </its:provenanceRecords>
   <its:rules version="2.0">
     <its:param name="provenanceParam">#pr1</its:param>
-    <its:provRule selector="//*[@ref=$provenanceParam]" provenanceRecordsRefPointer="@ref"/> 
+    <its:provRule selector="//*[@ref=$provenanceParam]" provenanceRecordsRefPointer="@ref"/>
   </its:rules>
   <title>Translation Revision Provenance Agent: Global Test in XML</title>
   <body>

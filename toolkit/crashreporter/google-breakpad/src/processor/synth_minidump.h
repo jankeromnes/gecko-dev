@@ -45,26 +45,26 @@
 //    using google_breakpad::SynthMinidump::Dump;
 //    using google_breakpad::SynthMinidump::Memory;
 //    using google_breakpad::SynthMinidump::Thread;
-//    
+//
 //    Dump minidump(MD_NORMAL, kLittleEndian);
-//    
+//
 //    Memory stack1(minidump, 0x569eb0a9);
 //    ... build contents of stack1 with test_assembler::Section functions ...
-//    
+//
 //    MDRawContextX86 x86_context1;
 //    x86_context1.context_flags = MD_CONTEXT_X86;
 //    x86_context1.eip = 0x7c90eb94;
 //    x86_context1.esp = 0x569eb0a9;
 //    x86_context1.ebp = x86_context1.esp + something appropriate;
 //    Context context1(minidump, x86_context1);
-//    
+//
 //    Thread thread1(minidump, 0xe4a4821d, stack1, context1);
-//    
+//
 //    minidump.Add(&stack1);
 //    minidump.Add(&context1);
 //    minidump.Add(&thread1);
 //    minidump.Finish();
-//    
+//
 //    string contents;
 //    EXPECT_TRUE(minidump.GetContents(&contents));
 //    // contents now holds the bytes of a minidump file
@@ -77,7 +77,7 @@
 // been placed by the time we call dump.GetContents to obtain the
 // bytes, all the Labels' values will be known, and everything will
 // get patched up appropriately.
-//   
+//
 // The dump.Add(thing) functions append THINGS's contents to the
 // minidump, but they also do two other things:
 //
@@ -151,7 +151,7 @@ class Section: public test_assembler::Section {
   // been placed in the minidump file at OFFSET. The 'Add' member
   // functions call the Finish member function of the object being
   // added for you; if you are 'Add'ing this section, you needn't Finish it.
-  virtual void Finish(const Label &offset) { 
+  virtual void Finish(const Label &offset) {
     file_offset_ = offset; size_ = Size();
   }
 
@@ -183,7 +183,7 @@ class SystemInfo: public Stream {
   // SYSTEM_INFO, except that the csd_version field is replaced with
   // the file offset of the string CSD_VERSION, which can be 'Add'ed
   // to the dump at the desired location.
-  // 
+  //
   // Remember that you are still responsible for 'Add'ing CSD_VERSION
   // to the dump yourself.
   SystemInfo(const Dump &dump,

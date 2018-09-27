@@ -1,15 +1,15 @@
 // Define a test object
 var test = {x:1,y:2};
 
-// Put the object into dictionary mode by deleting 
+// Put the object into dictionary mode by deleting
 // a property that was not the last one added.
 delete test.x;
 
-// Define a an accessor property with a setter that 
+// Define a an accessor property with a setter that
 // itself calls Object.defineProperty
 Object.defineProperty(test, "foo", {
     get: function() { return 1; },
-    set: function(v) { 
+    set: function(v) {
         Object.defineProperty(this, "foo", { value: v });
         // Prints the correct object descriptor
         assertEq(this.foo, 33);

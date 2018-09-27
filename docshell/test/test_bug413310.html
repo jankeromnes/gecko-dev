@@ -60,7 +60,7 @@ function doNextStep() {
       $("i").contentWindow.location.hash = "foo";
       setTimeout(doNextStep, 0);
       break;
-    case 3: 
+    case 3:
       is(onloadCount, 2, "Anchor scroll should not fire onload");
       is($("i").contentWindow.location.href,
          location.href.replace(/test_bug413310.html/,
@@ -97,7 +97,7 @@ function doNextStep() {
 </iframe>
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 </pre>

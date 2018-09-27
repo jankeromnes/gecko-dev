@@ -47,7 +47,7 @@ function f(code) {
    * should be stored where the call frame can see it.
    */
   eval(code);
-  call_this = this; 
+  call_this = this;
 }
 f.call(true, 'eval_this = this');
 assertEq(call_this, eval_this);

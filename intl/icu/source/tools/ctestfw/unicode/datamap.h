@@ -1,7 +1,7 @@
 // © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /********************************************************************
- * COPYRIGHT: 
+ * COPYRIGHT:
  * Copyright (c) 2002-2006, International Business Machines Corporation and
  * others. All Rights Reserved.
  ********************************************************************/
@@ -24,7 +24,7 @@ U_NAMESPACE_END
  *  For test cases, names are defined in the "Headers" section. For settings
  *  and info data, names are keys in data. Currently, we return scalar strings
  *  and integers and arrays of strings and integers. Arrays should be deposited
- *  of by the user. 
+ *  of by the user.
  */
 class T_CTEST_EXPORT_API DataMap {
 public:
@@ -100,7 +100,7 @@ public:
   // ... etc ...
 };
 
-// This one is already concrete - it is going to be instantiated from 
+// This one is already concrete - it is going to be instantiated from
 // concrete data by TestData children...
 class T_CTEST_EXPORT_API RBDataMap : public DataMap{
 private:
@@ -128,7 +128,7 @@ public:
   virtual const uint8_t *getBinary(int32_t &length, const char *key, UErrorCode &status) const;
 
   virtual int32_t getInt(const char* key, UErrorCode &status) const;
-  
+
   virtual const UnicodeString* getStringArray(int32_t& count, const char* key, UErrorCode &status) const;
   virtual const int32_t* getIntArray(int32_t& count, const char* key, UErrorCode &status) const;
 

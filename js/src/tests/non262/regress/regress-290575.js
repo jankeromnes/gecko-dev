@@ -25,7 +25,7 @@ function crashMe(n) {
 printStatus('crashMe(0x8001)');
 
 crashMe(0x8001);
- 
+
 reportCompare(expect, actual, summary);
 
 function crashMe2(n) {

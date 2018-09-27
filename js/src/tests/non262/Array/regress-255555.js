@@ -11,7 +11,7 @@ var expect = 'not undefined';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 function comparefn(a,b)
 {
   if (typeof a == 'undefined')

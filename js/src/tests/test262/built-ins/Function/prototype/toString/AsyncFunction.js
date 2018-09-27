@@ -12,7 +12,7 @@ includes: [nativeFunctionMatcher.js]
 ---*/
 async function f() {}
 var AsyncFunction = f.constructor;
-var g = /* before */AsyncFunction("a", " /* a */ b, c /* b */ //", "/* c */ ; /* d */ //")/* after */; 
+var g = /* before */AsyncFunction("a", " /* a */ b, c /* b */ //", "/* c */ ; /* d */ //")/* after */;
 assertToStringOrNativeFunction(g, "async function anonymous(a, /* a */ b, c /* b */ //\n) {\n/* c */ ; /* d */ //\n}");
 
 reportCompare(0, 0);

@@ -11,7 +11,7 @@ def test_generation_perf(n = 100):
         t = time.time() - t
         results[bits] = t
     return results
-        
+
 def test_signing_perf(n = 100):
     results = OrderedDict()
     for bits in (192, 224, 256, 384, 521):
@@ -34,7 +34,7 @@ def test_verification_perf(n = 100):
         t = time.time() - t
         results[bits] = t
     return results
-            
+
 def print_dict(title, d):
     print title
     print '-' * len(title)
@@ -47,4 +47,4 @@ print_dict("Key generation", test_generation_perf(n))
 print_dict("Signing", test_signing_perf(n))
 print_dict("Verifying", test_verification_perf(n))
 
-        
+

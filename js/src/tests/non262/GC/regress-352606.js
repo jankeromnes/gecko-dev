@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   y = ({toString: gc}); new Function("y--;")()
 
 			  reportCompare(expect, actual, summary);

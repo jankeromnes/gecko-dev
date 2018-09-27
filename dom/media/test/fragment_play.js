@@ -10,7 +10,7 @@ function onLoadedMetadata() {
   var e = end == null ? v.duration : end;
   ok(v.currentTime == s, "loadedmetadata currentTime is " + v.currentTime + " != " + s);
   ok(v.mozFragmentEnd == e, "mozFragmentEnd (" + v.mozFragmentEnd + ") == end Time (" + e + ")");
-  loadedMetadataRaised = true; 
+  loadedMetadataRaised = true;
   v.play();
 }
 

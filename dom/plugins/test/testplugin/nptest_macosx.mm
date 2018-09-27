@@ -1,11 +1,11 @@
 /* ***** BEGIN LICENSE BLOCK *****
- * 
+ *
  * Copyright (c) 2008, Mozilla Corporation
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * * Redistributions of source code must retain the above copyright notice, this
  *   list of conditions and the following disclaimer.
  * * Redistributions in binary form must reproduce the above copyright notice,
@@ -14,7 +14,7 @@
  * * Neither the name of the Mozilla Corporation nor the names of its
  *   contributors may be used to endorse or promote products derived from this
  *   software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -25,10 +25,10 @@
  * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * Contributor(s):
  *   Josh Aas <josh@mozilla.com>
- * 
+ *
  * ***** END LICENSE BLOCK ***** */
 
 #include "nptest_platform.h"
@@ -112,7 +112,7 @@ pluginWidgetInit(InstanceData* instanceData, void* oldWindow)
   // Should never be called since we don't support window mode
 }
 
-static void 
+static void
 GetColorsFromRGBA(uint32_t rgba, float* r, float* g, float* b, float* a)
 {
   *b = (rgba & 0xFF) / 255.0;
@@ -132,7 +132,7 @@ pluginDraw(InstanceData* instanceData, NPCocoaEvent* event)
   NPP npp = instanceData->npp;
   if (!npp)
     return;
-  
+
   const char* uaString = NPN_UserAgent(npp);
   if (!uaString)
     return;
@@ -181,7 +181,7 @@ pluginDraw(InstanceData* instanceData, NPCocoaEvent* event)
     // Create a color and add it as an attribute to the string.
     CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat components[] = { 0.0, 0.0, 0.0, 1.0 };
-    CGColorRef red = CGColorCreate(rgbColorSpace, components);    
+    CGColorRef red = CGColorCreate(rgbColorSpace, components);
     CGColorSpaceRelease(rgbColorSpace);
     CFAttributedStringSetAttribute(attrString, CFRangeMake(0, 50), kCTForegroundColorAttributeName, red);
 
@@ -283,7 +283,7 @@ int32_t pluginGetClipRegionRectCount(InstanceData* instanceData)
   return 1;
 }
 
-int32_t pluginGetClipRegionRectEdge(InstanceData* instanceData, 
+int32_t pluginGetClipRegionRectEdge(InstanceData* instanceData,
     int32_t rectIndex, RectEdge edge)
 {
   if (rectIndex != 0)

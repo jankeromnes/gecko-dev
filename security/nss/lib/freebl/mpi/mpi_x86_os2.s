@@ -6,13 +6,13 @@
 .data
 .align 4
  #
- # -1 means to call _s_mpi_is_sse to determine if we support sse 
+ # -1 means to call _s_mpi_is_sse to determine if we support sse
  #    instructions.
  #  0 means to use x86 instructions
  #  1 means to use sse2 instructions
 .type	is_sse,@object
 .size	is_sse,4
-is_sse: .long	-1 
+is_sse: .long	-1
 
 #
 # sigh, handle the difference between -fPIC and not PIC
@@ -41,13 +41,13 @@ is_sse: .long	-1
 
  #  ebp - 36:	caller's esi
  #  ebp - 32:	caller's edi
- #  ebp - 28:	
- #  ebp - 24:	
- #  ebp - 20:	
- #  ebp - 16:	
- #  ebp - 12:	
- #  ebp - 8:	
- #  ebp - 4:	
+ #  ebp - 28:
+ #  ebp - 24:
+ #  ebp - 20:
+ #  ebp - 16:
+ #  ebp - 12:
+ #  ebp - 8:
+ #  ebp - 4:
  #  ebp + 0:	caller's ebp
  #  ebp + 4:	return address
  #  ebp + 8:	a	argument
@@ -103,8 +103,8 @@ _s_mpv_mul_d_x86:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 _s_mpv_mul_d_sse2:
     push   %ebp
@@ -134,19 +134,19 @@ _s_mpv_mul_d_sse2:
     emms
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  #  ebp - 36:	caller's esi
  #  ebp - 32:	caller's edi
- #  ebp - 28:	
- #  ebp - 24:	
- #  ebp - 20:	
- #  ebp - 16:	
- #  ebp - 12:	
- #  ebp - 8:	
- #  ebp - 4:	
+ #  ebp - 28:
+ #  ebp - 24:
+ #  ebp - 20:
+ #  ebp - 16:
+ #  ebp - 12:
+ #  ebp - 8:
+ #  ebp - 4:
  #  ebp + 0:	caller's ebp
  #  ebp + 4:	return address
  #  ebp + 8:	a	argument
@@ -193,7 +193,7 @@ _s_mpv_mul_d_add_x86:
     add    %ebx,%eax		# add carry (%ebx) to edx:eax
     adc    $0,%edx
     mov    0(%edi),%ebx		# add in current word from *c
-    add    %ebx,%eax		
+    add    %ebx,%eax
     adc    $0,%edx
     mov    %edx,%ebx		# high half of product becomes next carry
 
@@ -205,8 +205,8 @@ _s_mpv_mul_d_add_x86:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 _s_mpv_mul_d_add_sse2:
     push   %ebp
@@ -238,8 +238,8 @@ _s_mpv_mul_d_add_sse2:
     emms
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  #  ebp - 8:	caller's esi
@@ -290,7 +290,7 @@ _s_mpv_mul_d_add_prop_x86:
     add    %ebx,%eax		# add carry (%ebx) to edx:eax
     adc    $0,%edx
     mov    0(%edi),%ebx		# add in current word from *c
-    add    %ebx,%eax		
+    add    %ebx,%eax
     adc    $0,%edx
     mov    %edx,%ebx		# high half of product becomes next carry
 
@@ -313,8 +313,8 @@ _s_mpv_mul_d_add_prop_x86:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 _s_mpv_mul_d_add_prop_sse2:
     push   %ebp
@@ -360,14 +360,14 @@ _s_mpv_mul_d_add_prop_sse2:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
 
  #  ebp - 20:	caller's esi
  #  ebp - 16:	caller's edi
- #  ebp - 12:	
+ #  ebp - 12:
  #  ebp - 8:	carry
  #  ebp - 4:	a_len	local
  #  ebp + 0:	caller's ebp
@@ -375,7 +375,7 @@ _s_mpv_mul_d_add_prop_sse2:
  #  ebp + 8:	pa	argument
  #  ebp + 12:	a_len	argument
  #  ebp + 16:	ps	argument
- #  ebp + 20:	
+ #  ebp + 20:
  #  registers:
  # 	eax:
  #	ebx:	carry
@@ -442,8 +442,8 @@ _s_mpv_sqr_add_prop_x86:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 _s_mpv_sqr_add_prop_sse2:
     push   %ebp
@@ -467,7 +467,7 @@ _s_mpv_sqr_add_prop_sse2:
     paddq  %mm3,%mm2           # add the low word
     movd   4(%edi),%mm3
     movd   %mm2,0(%edi)        # store the 32bit result
-    psrlq  $32, %mm2	
+    psrlq  $32, %mm2
     paddq  %mm3,%mm2           # add the high word
     movd   %mm2,4(%edi)        # store the 32bit result
     psrlq  $32, %mm2	       # save the carry.
@@ -492,8 +492,8 @@ _s_mpv_sqr_add_prop_sse2:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  #
@@ -517,7 +517,7 @@ _s_mpv_sqr_add_prop_sse2:
  #	edx:
  #	esi:	a ptr
  #	edi:	c ptr
- # 
+ #
 
 .globl	_s_mpv_div_2dx1d
 .type	_s_mpv_div_2dx1d,@function
@@ -533,6 +533,6 @@ _s_mpv_div_2dx1d:
        mov    %edx,0(%ebx)
        xor    %eax,%eax		# return zero
        pop    %ebx
-       ret    
+       ret
        nop
-  
+

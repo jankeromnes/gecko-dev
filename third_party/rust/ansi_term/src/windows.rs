@@ -20,7 +20,7 @@ pub fn enable_ansi_support() -> Result<(), u32> {
         let std_out_handle = GetStdHandle(STD_OUT_HANDLE);
         let error_code = GetLastError();
         if error_code != 0 { return Err(error_code); }
-        
+
         // https://docs.microsoft.com/en-us/windows/console/getconsolemode
         let mut console_mode: u32 = 0;
         GetConsoleMode(std_out_handle, &mut console_mode);

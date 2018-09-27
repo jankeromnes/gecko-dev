@@ -17,7 +17,7 @@ struct CBenchInfo
   UInt64 UnpackSize;
   UInt64 PackSize;
   UInt64 NumIterations;
-  
+
   CBenchInfo(): NumIterations(0) {}
   UInt64 GetUsage() const;
   UInt64 GetRatingPerUsage(UInt64 rating) const;

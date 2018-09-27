@@ -29,5 +29,5 @@ actual = obj.elem++;
 
 gc();
 
- 
+
 reportCompare(expect, actual, summary);

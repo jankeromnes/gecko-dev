@@ -78,7 +78,7 @@ public class FennecNativeElement implements Element {
                             }
                         }
                     } else if (v instanceof TextView) {
-                        mText = ((TextView)v).getText(); 
+                        mText = ((TextView)v).getText();
                     } else if (v == null) {
                         FennecNativeDriver.log(FennecNativeDriver.LogLevel.ERROR,
                             "getText: unable to find view " + mId + " " + mName);

@@ -252,7 +252,7 @@ int Main2(
   #if defined(_WIN32) && !defined(UNDER_CE)
   SetFileApisToOEM();
   #endif
-  
+
   g_StdOut << kCopyrightString;
 
   UStringVector commandStrings;
@@ -263,7 +263,7 @@ int Main2(
   #endif
 
   #ifdef _WIN32
-  
+
   FString arcPath;
   {
     FString path;
@@ -287,7 +287,7 @@ int Main2(
   #endif
 
   NCommandLineParser::CParser parser;
-  
+
   try
   {
     if (!parser.ParseStrings(kSwitchForms, kNumSwitches, commandStrings))
@@ -308,7 +308,7 @@ int Main2(
     PrintHelp();
     return 0;
   }
-  
+
   const UStringVector &nonSwitchStrings = parser.NonSwitchStrings;
 
   unsigned curCommandIndex = 0;
@@ -332,7 +332,7 @@ int Main2(
   recursedType = command.DefaultRecursedType();
 
   NWildcard::CCensor wildcardCensor;
-  
+
   {
     if (nonSwitchStrings.Size() == curCommandIndex)
       AddCommandLineWildcardToCensor(wildcardCensor, (UString)kUniversalWildcard, true, recursedType);
@@ -358,7 +358,7 @@ int Main2(
 
   if (!NFind::DoesFileExist(arcPath))
     throw kCantFindSFX;
-  
+
   FString outputDir;
   if (parser[NKey::kOutputDir].ThereIs)
   {
@@ -368,7 +368,7 @@ int Main2(
 
 
   wildcardCensor.AddPathsToCensor(NWildcard::k_RelatPath);
-  
+
   {
     UStringVector v1, v2;
     v1.Add(fs2us(arcPath));

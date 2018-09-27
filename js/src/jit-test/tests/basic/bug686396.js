@@ -1,5 +1,5 @@
 
-(function () { 
+(function () {
   assertEquals = function assertEquals(expected, found, name_opt) {  };
 })();
 function testOne(receiver, key, result) {

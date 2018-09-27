@@ -382,7 +382,7 @@ nsIdleServiceDaily::DailyCallback(nsITimer* aTimer, void* aClosure)
 ////////////////////////////////////////////////////////////////////////////////
 //// nsIdleService
 
-namespace { 
+namespace {
 nsIdleService* gIdleService;
 } // namespace
 
@@ -514,7 +514,7 @@ nsIdleService::RemoveIdleObserver(nsIObserver* aObserver, uint32_t aTimeInS)
   }
 
   // If we get here, we haven't removed anything:
-  MOZ_LOG(sLog, LogLevel::Warning, 
+  MOZ_LOG(sLog, LogLevel::Warning,
          ("idleService: Failed to remove idle observer %p (%d seconds)",
           aObserver, aTimeInS));
 #ifdef MOZ_WIDGET_ANDROID
@@ -616,7 +616,7 @@ nsIdleService::GetIdleTime(uint32_t* idleTime)
   MOZ_LOG(sLog, LogLevel::Debug,
          ("idleService: Get idle time: polled %u msec, valid = %d",
           polledIdleTimeMS, polledIdleTimeIsValid));
-  
+
   // timeSinceReset is in milliseconds.
   TimeDuration timeSinceReset = TimeStamp::Now() - mLastUserInteraction;
   uint32_t timeSinceResetInMS = timeSinceReset.ToMilliseconds();

@@ -16,7 +16,7 @@ if [ "$VALGRIND" != "" ]; then
         echo "$log Valgrind log file moved to $TEMPDIR/badlogs"
         mv $log $TEMPDIR/badlogs
         exit 1
-    fi    
+    fi
     rm -f $log
   fi
 fi
@@ -97,7 +97,7 @@ check_valgrind_log "morphological analysis"
 # Tests suggestions
 if test -f $TESTDIR/$NAME.sug; then
     hunspell $* -a -d $TESTDIR/$NAME <$TESTDIR/$NAME.wrong | grep '^&' | \
-        sed 's/^[^:]*: //' >$TEMPDIR/$NAME.sug 
+        sed 's/^[^:]*: //' >$TEMPDIR/$NAME.sug
     if ! cmp $TEMPDIR/$NAME.sug $TESTDIR/$NAME.sug >/dev/null; then
         echo "============================================="
         echo "Fail in $NAME.sug. Bad suggestion?"

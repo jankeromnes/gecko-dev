@@ -569,7 +569,7 @@ fn table_structs_empty() {
     expected.insert("bar".to_string(), CanBeEmpty::default());
     expected.insert("baz".to_string(), CanBeEmpty::default());
     expected.insert(
-        "bazv".to_string(), 
+        "bazv".to_string(),
         CanBeEmpty {a: Some("foo".to_string()), b: None},
     );
     expected.insert("foo".to_string(), CanBeEmpty::default());

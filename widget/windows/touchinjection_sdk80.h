@@ -6,7 +6,7 @@
 #define touchinjection_sdk80_h
 
 // Note, this isn't inclusive of all touch injection header info.
-// You may need to add more to expand on current apis. 
+// You may need to add more to expand on current apis.
 
 #ifndef TOUCH_FEEDBACK_DEFAULT
 

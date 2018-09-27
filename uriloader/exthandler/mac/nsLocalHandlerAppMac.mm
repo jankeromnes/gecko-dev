@@ -26,7 +26,7 @@ NS_IMETHODIMP nsLocalHandlerAppMac::GetName(nsAString& aName)
   return nsLocalHandlerApp::GetName(aName);
 }
 
-/** 
+/**
  * mostly copy/pasted from nsMacShellService.cpp (which is in browser/,
  * so we can't depend on it here).  This code probably really wants to live
  * somewhere more central (see bug 389922).
@@ -40,12 +40,12 @@ nsLocalHandlerAppMac::LaunchWithURI(nsIURI *aURI,
   nsresult rv;
   nsCOMPtr<nsILocalFileMac> lfm(do_QueryInterface(mExecutable, &rv));
   NS_ENSURE_SUCCESS(rv, rv);
-  
+
   CFURLRef appURL;
   rv = lfm->GetCFURL(&appURL);
   if (NS_FAILED(rv))
     return rv;
-  
+
   nsAutoCString uriSpec;
   aURI->GetAsciiSpec(uriSpec);
 
@@ -56,7 +56,7 @@ nsLocalHandlerAppMac::LaunchWithURI(nsIURI *aURI,
     ::CFRelease(appURL);
     return NS_ERROR_OUT_OF_MEMORY;
   }
-  
+
   CFArrayRef uris = ::CFArrayCreate(NULL, reinterpret_cast<const void**>(&uri),
                                     1, NULL);
   if (!uris) {
@@ -64,20 +64,20 @@ nsLocalHandlerAppMac::LaunchWithURI(nsIURI *aURI,
     ::CFRelease(appURL);
     return NS_ERROR_OUT_OF_MEMORY;
   }
-  
+
   LSLaunchURLSpec launchSpec;
   launchSpec.appURL = appURL;
   launchSpec.itemURLs = uris;
   launchSpec.passThruParams = NULL;
   launchSpec.launchFlags = kLSLaunchDefaults;
   launchSpec.asyncRefCon = NULL;
-  
+
   OSErr err = ::LSOpenFromURLSpec(&launchSpec, NULL);
-  
+
   ::CFRelease(uris);
   ::CFRelease(uri);
   ::CFRelease(appURL);
-  
+
   return err != noErr ? NS_ERROR_FAILURE : NS_OK;
 
   NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;

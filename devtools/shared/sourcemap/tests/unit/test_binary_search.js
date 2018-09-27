@@ -60,93 +60,93 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var binarySearch = __webpack_require__(1);
-	
+
 	function numberCompare(a, b) {
 	  return a - b;
 	}
-	
+
 	exports['test too high with default (glb) bias'] = function (assert) {
 	  var needle = 30;
 	  var haystack = [2,4,6,8,10,12,14,16,18,20];
-	
+
 	  assert.doesNotThrow(function () {
 	    binarySearch.search(needle, haystack, numberCompare);
 	  });
-	
+
 	  assert.equal(haystack[binarySearch.search(needle, haystack, numberCompare)], 20);
 	};
-	
+
 	exports['test too low with default (glb) bias'] = function (assert) {
 	  var needle = 1;
 	  var haystack = [2,4,6,8,10,12,14,16,18,20];
-	
+
 	  assert.doesNotThrow(function () {
 	    binarySearch.search(needle, haystack, numberCompare);
 	  });
-	
+
 	  assert.equal(binarySearch.search(needle, haystack, numberCompare), -1);
 	};
-	
+
 	exports['test too high with lub bias'] = function (assert) {
 	  var needle = 30;
 	  var haystack = [2,4,6,8,10,12,14,16,18,20];
-	
+
 	  assert.doesNotThrow(function () {
 	    binarySearch.search(needle, haystack, numberCompare);
 	  });
-	
+
 	  assert.equal(binarySearch.search(needle, haystack, numberCompare,
 	                                   binarySearch.LEAST_UPPER_BOUND), -1);
 	};
-	
+
 	exports['test too low with lub bias'] = function (assert) {
 	  var needle = 1;
 	  var haystack = [2,4,6,8,10,12,14,16,18,20];
-	
+
 	  assert.doesNotThrow(function () {
 	    binarySearch.search(needle, haystack, numberCompare);
 	  });
-	
+
 	  assert.equal(haystack[binarySearch.search(needle, haystack, numberCompare,
 	                                            binarySearch.LEAST_UPPER_BOUND)], 2);
 	};
-	
+
 	exports['test exact search'] = function (assert) {
 	  var needle = 4;
 	  var haystack = [2,4,6,8,10,12,14,16,18,20];
-	
+
 	  assert.equal(haystack[binarySearch.search(needle, haystack, numberCompare)], 4);
 	};
-	
+
 	exports['test fuzzy search with default (glb) bias'] = function (assert) {
 	  var needle = 19;
 	  var haystack = [2,4,6,8,10,12,14,16,18,20];
-	
+
 	  assert.equal(haystack[binarySearch.search(needle, haystack, numberCompare)], 18);
 	};
-	
+
 	exports['test fuzzy search with lub bias'] = function (assert) {
 	  var needle = 19;
 	  var haystack = [2,4,6,8,10,12,14,16,18,20];
-	
+
 	  assert.equal(haystack[binarySearch.search(needle, haystack, numberCompare,
 	                                            binarySearch.LEAST_UPPER_BOUND)], 20);
 	};
-	
+
 	exports['test multiple matches'] = function (assert) {
 	  var needle = 5;
 	  var haystack = [1, 1, 2, 5, 5, 5, 13, 21];
-	
+
 	  assert.equal(binarySearch.search(needle, haystack, numberCompare,
 	                                   binarySearch.LEAST_UPPER_BOUND), 3);
 	};
-	
+
 	exports['test multiple matches at the beginning'] = function (assert) {
 	  var needle = 1;
 	  var haystack = [1, 1, 2, 5, 5, 5, 13, 21];
-	
+
 	  assert.equal(binarySearch.search(needle, haystack, numberCompare,
 	                                   binarySearch.LEAST_UPPER_BOUND), 0);
 	};
@@ -162,10 +162,10 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	exports.GREATEST_LOWER_BOUND = 1;
 	exports.LEAST_UPPER_BOUND = 2;
-	
+
 	/**
 	 * Recursive implementation of binary search.
 	 *
@@ -201,7 +201,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      // The element is in the upper half.
 	      return recursiveSearch(mid, aHigh, aNeedle, aHaystack, aCompare, aBias);
 	    }
-	
+
 	    // The exact needle element was not found in this haystack. Determine if
 	    // we are in termination case (3) or (2) and return the appropriate thing.
 	    if (aBias == exports.LEAST_UPPER_BOUND) {
@@ -216,7 +216,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      // The element is in the lower half.
 	      return recursiveSearch(aLow, mid, aNeedle, aHaystack, aCompare, aBias);
 	    }
-	
+
 	    // we are in termination case (3) or (2) and return the appropriate thing.
 	    if (aBias == exports.LEAST_UPPER_BOUND) {
 	      return mid;
@@ -225,7 +225,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	  }
 	}
-	
+
 	/**
 	 * This is an implementation of binary search which will always try and return
 	 * the index of the closest element if there is no exact hit. This is because
@@ -248,13 +248,13 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (aHaystack.length === 0) {
 	    return -1;
 	  }
-	
+
 	  var index = recursiveSearch(-1, aHaystack.length, aNeedle, aHaystack,
 	                              aCompare, aBias || exports.GREATEST_LOWER_BOUND);
 	  if (index < 0) {
 	    return -1;
 	  }
-	
+
 	  // We have found either the exact element, or the next-closest element than
 	  // the one we are searching for. However, there may be more than one such
 	  // element. Make sure we always return the smallest of these.
@@ -264,7 +264,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	    --index;
 	  }
-	
+
 	  return index;
 	};
 

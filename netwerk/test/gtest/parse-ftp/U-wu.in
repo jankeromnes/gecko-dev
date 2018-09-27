@@ -1,34 +1,34 @@
 ftp> open sunsite.unc.edu
 Connected to sunsite.unc.edu.
 220 divahouse.metalab.unc.edu FTP server (Version wu-2.6.1(4) Thu Nov 29 23:05:07 EST 2001) ready.
-Name (sunsite.unc.edu:cyp): 
+Name (sunsite.unc.edu:cyp):
 331 Guest login ok, send your complete e-mail address as password.
 230-
-230-             Welcome to ibiblio.org's FTP archives! 
+230-             Welcome to ibiblio.org's FTP archives!
 230-  	       formerly known as MetaLab.unc.edu
 230-
 230-
-230-For more information about services offered by ibiblio.org, 
+230-For more information about services offered by ibiblio.org,
 230-browse to http://ibiblio.org/faq
 230-
-230-You can access this archive via HTTP with the same URL. 
+230-You can access this archive via HTTP with the same URL.
 230-
-230-example:  ftp://ibiblio.org/pub/Linux/  becomes 
+230-example:  ftp://ibiblio.org/pub/Linux/  becomes
 230-         http://ibiblio.org/pub/Linux/, but we prefer you use FTP.
 230-
 230-You can get tarred directories if you issue a "get dirname.tar"
-230-You can also get gzipped or compressed tarred directories by following 
-230-the .tar with .gz or .Z, respectively. Please don't issue either of 
-230-these commands to get Linux distributions. They are already compressed, 
+230-You can also get gzipped or compressed tarred directories by following
+230-the .tar with .gz or .Z, respectively. Please don't issue either of
+230-these commands to get Linux distributions. They are already compressed,
 230-so this only generates unnecessary CPU overhead for us.
 230-
 230-************************************************************************
 230-
-230-Please use LSM documentation when submitting to the linux archive.  
-230-Anything submitted without an LSM will be rejected!  You'll get an 
+230-Please use LSM documentation when submitting to the linux archive.
+230-Anything submitted without an LSM will be rejected!  You'll get an
 230-email form letter about it if we can figure out who you are.
 230-
-230-To learn more about submitting an LSM, 
+230-To learn more about submitting an LSM,
 230-see: http://www.ibiblio.org/pub/Linux/howtosubmit.html
 230-or ftp://www.ibiblio.org/pub/Linux/HOW.TO.SUBMIT
 230-
@@ -68,4 +68,4 @@ ftp> close
 221-Total traffic for this session was 2777 bytes in 1 transfers.
 221-Thank you for using the FTP service on divahouse.metalab.unc.edu.
 221 Goodbye.
-ftp> 
+ftp>

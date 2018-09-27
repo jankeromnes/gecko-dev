@@ -9,7 +9,7 @@ var key = Object.getOwnPropertyNames(f1)[30];
 if(key) {
     f3 = f1[key];
 }
-gc(); 
+gc();
 gc();
 try {
 for(var i=0; i<10; i++) {

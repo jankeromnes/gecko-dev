@@ -30,9 +30,9 @@
 		rect4a.setAttribute("systemLanguage", "foo");
 		}
 	</script>
-	
+
 	<rect width="100%" height="100%" fill="lime"/>
-	
+
 	<switch>
         <!-- test removing first child -->
 		<rect id="rect1" x="50" y="100" width="50" height="50" fill="red"/>

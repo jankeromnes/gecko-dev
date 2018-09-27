@@ -12,7 +12,7 @@ if (~({}) !== -1) {
   $ERROR('#1: ~({}) === -1. Actual: ' + (~({})));
 }
 
-//CHECK#2  
+//CHECK#2
 if (~(function(){return 1}) !== -1) {
   $ERROR('#2: ~(function(){return 1}) === -1. Actual: ' + (~(function(){return 1})));
 }

@@ -113,7 +113,7 @@ gfxImageSurface::gfxImageSurface(const IntSize& size, gfxImageFormat format, boo
     AllocateAndInit(0, 0, aClear);
 }
 
-void 
+void
 gfxImageSurface::AllocateAndInit(long aStride, int32_t aMinimalAllocation,
                                  bool aClear)
 {

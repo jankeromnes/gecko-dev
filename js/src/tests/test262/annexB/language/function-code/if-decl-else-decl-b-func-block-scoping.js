@@ -31,12 +31,12 @@ info: |
           i. Let fn be the sole element of the BoundNames of d.
           ii. Let fo be the result of performing InstantiateFunctionObject for
               d with argument env.
-          iii. Perform envRec.InitializeBinding(fn, fo). 
+          iii. Perform envRec.InitializeBinding(fn, fo).
 ---*/
 var initialBV, currentBV, varBinding;
 
 (function() {
-  
+
 
   if (false) function _f() {} else function f() { initialBV = f; f = 123; currentBV = f; return 'decl'; }
 

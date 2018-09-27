@@ -25,7 +25,7 @@ function parseQueryString(str)
 function handleRequest(request, response)
 {
   response.setHeader("Cache-Control", "no-cache", false);
-  
+
   /*
    * NB: A Content-Type header is *necessary* to avoid content-sniffing, which
    *     will delay onStartRequest past the the point where the entire head of

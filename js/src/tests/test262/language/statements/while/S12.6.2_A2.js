@@ -10,7 +10,7 @@ description: Evaluating Statement with error Expression
 ---*/
 
 try {
-	while ((function(){throw 1})()) __in__while = "reached"; 
+	while ((function(){throw 1})()) __in__while = "reached";
 	$ERROR('#1: \'while ((function(){throw 1})()) __in__while = "reached"\' lead to throwing exception');
 } catch (e) {
 	if (e !== 1) {

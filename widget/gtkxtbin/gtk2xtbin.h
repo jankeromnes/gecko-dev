@@ -1,6 +1,6 @@
 /* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*-
  * vim: set expandtab shiftwidth=2 tabstop=2: */
- 
+
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
@@ -62,7 +62,7 @@ struct _GtkXtBin
   Window         xtwindow;         /* Xt Toolkit XWindow */
   XtClient	 xtclient;         /* Xt Client for XEmbed */
 };
-  
+
 struct _GtkXtBinClass
 {
   GtkSocketClass parent_class;
@@ -77,7 +77,7 @@ typedef struct _XtTMRec {
     XtBoundActions  proc_table;         /* procedure bindings for actions    */
     struct _XtStateRec *current_state;  /* Translation Manager state ptr     */
     unsigned long   lastEventTime;
-} XtTMRec, *XtTM;   
+} XtTMRec, *XtTM;
 
 typedef struct _CorePart {
     Widget          self;               /* pointer to widget itself          */
@@ -113,7 +113,7 @@ typedef struct _CorePart {
 
 typedef struct _WidgetRec {
     CorePart    core;
- } WidgetRec, CoreRec;   
+ } WidgetRec, CoreRec;
 
 /* Exported functions, used by Xt plugins */
 void xt_client_create(XtClient * xtclient, Window embeder, int height, int width);

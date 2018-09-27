@@ -17,7 +17,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = 'zero';
   Array.prototype[0] = 'zero';
   var a = [];

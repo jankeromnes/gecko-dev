@@ -114,7 +114,7 @@ Platforms {
 <i>complex_string</i> --> ([^\"\\\r\n]|(\\\")|(\\\\))+ <font size=-1><i>(quotes and backslashes must be escaped with a backslash, no newlines or carriage returns are allowed in the string)</i></font>
 </pre></blockquote>
 Outside of complex strings, all whitespace (space, tab, newline) is considered
-equal and is used only to delimit tokens. 
+equal and is used only to delimit tokens.
 
 <hr>
 
@@ -133,7 +133,7 @@ attributes will be used for the current platform.
 pair:
 the key is the name of the platform, and the valuelist contains various
 attributes of the platform. The ModuleName, ModuleFile, and Files attributes
-must be specified, unless an EquivalentPlatform attribute is specified. 
+must be specified, unless an EquivalentPlatform attribute is specified.
 The platform string is in the following
 format: <u><i>system name</i></u>:<u><i>os release</i></u>:<u><i>architecture</i></u>. The installer
 will obtain these values from NSPR. <u><i>os release</i></u> is an empty
@@ -170,11 +170,11 @@ Linux:2.0.32:x86, WIN95::x86</code>.
 </dl>
 
 <h3>Per-Platform Keys</h3>
-These keys only have meaning within the value list of an entry in 
+These keys only have meaning within the value list of an entry in
 the <code>Platforms</code> list.
 <dl>
 <dt><code>ModuleName</code> (<i>required</i>)
-<dd>Gives the common name for the module. This name will be used to 
+<dd>Gives the common name for the module. This name will be used to
 reference the module from Communicator, modutil, servers, or any other
 program that uses the Netscape security module database.
 <dt><code>ModuleFile</code> (<i>required</i>)
@@ -183,7 +183,7 @@ is given as the relative path of the file within the JAR archive.
 <dt><code>Files</code> (<i>required</i>)
 <dd>Lists the files that should be installed for this module.  Each entry
 in the file list is a key-value pair: the key is the path of the file in
-the JAR archive, and 
+the JAR archive, and
 the valuelist contains attributes of the file.  At least RelativePath and
 AbsoluteDir must be specified in this valuelist.
 <dt><code>DefaultMechanismFlags</code>
@@ -256,7 +256,7 @@ course of the
 installation.  Typically this would be used for a setup program provided
 by a module vendor, such as a self-extracting <code>setup.exe</code>.
 More than one file can be specified as executable, in which case they will
-be run in the order they are specified in the script file. 
+be run in the order they are specified in the script file.
 <dt><code>FilePermissions</code>
 <dd>This string is interpreted as a string of octal digits, according to the
 standard UNIX format. It is a bitwise OR of the following constants:

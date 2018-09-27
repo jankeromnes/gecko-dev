@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -31,27 +31,27 @@ class Results {
         for (let subResult of Results.subResults)
             this[subResult] = new Stats(benchmark.cells[subResult], subResult);
     }
-    
+
     get benchmark() { return this._benchmark; }
-    
+
     reset()
     {
         for (let subResult of Results.subResults)
             this[subResult].reset();
     }
-    
+
     reportRunning()
     {
         if (isInBrowser)
             this._benchmark.cells.message.classList.add('running');
     }
-    
+
     reportDone()
     {
         if (isInBrowser)
             this._benchmark.cells.message.classList.remove('running');
     }
-    
+
     reportResult(times)
     {
         if (times.length < 5)
@@ -63,7 +63,7 @@ class Results {
         this.steadyState.add(steadyTimes.reduce((previous, current) => previous + current) / steadyTimes.length);
         this.reportDone();
     }
-    
+
     reportError(message, url, lineNumber)
     {
         if (isInBrowser) {

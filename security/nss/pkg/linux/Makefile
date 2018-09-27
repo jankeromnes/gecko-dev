@@ -33,7 +33,7 @@ endif
 publish:
 	$(MAKE) clean
 	mkdir -p SOURCES SRPMS RPMS BUILD
-	mkdir -p opt/sun/private/$(RPMLIBDIR) 
+	mkdir -p opt/sun/private/$(RPMLIBDIR)
 	find $(CORE_DEPTH)/../dist/$(OBJDIR)/lib -type l \
 		\( -name "*.so" -o -name "*.chk" \) \
 	-exec cp {} opt/sun/private/$(RPMLIBDIR) \;
@@ -50,7 +50,7 @@ publish:
 	rm -rf opt/sun/private/include/seccmd
 	rm -rf opt/sun/private/include/dbm
 
-	tar czvf $(NAME)-$(VERSION).tar.gz opt 
+	tar czvf $(NAME)-$(VERSION).tar.gz opt
 	echo "%define _topdir `pwd`" >temp.spec
 	sed -e "s/NAME_REPLACE/$(NAME)/" \
 		-e "s/VERSION_REPLACE/$(VERSION)/" \
@@ -81,7 +81,7 @@ publish:
 
 clean::
 	rm -rf SOURCES SRPMS RPMS BUILD
-	rm -rf opt 
+	rm -rf opt
 	rm -f temp.spec
 	rm -f $(NAME)-$(VERSION).tar.gz
 

@@ -26,7 +26,7 @@ STRUCT!{struct PDH_FMT_COUNTERVALUE {
 }}
 UNION!(PDH_FMT_COUNTERVALUE, largeValue, largeValue, largeValue_mut, ::LONGLONG);
 UNION!(PDH_FMT_COUNTERVALUE, largeValue, longValue, longValue_mut, ::LONG);
-UNION!(PDH_FMT_COUNTERVALUE, largeValue, doubleValue, doubleValue_mut, ::DOUBLE); 
+UNION!(PDH_FMT_COUNTERVALUE, largeValue, doubleValue, doubleValue_mut, ::DOUBLE);
 UNION!(PDH_FMT_COUNTERVALUE, largeValue, AnsiStringValue, AnsiStringValue_mut, ::LPCSTR);
 UNION!(PDH_FMT_COUNTERVALUE, largeValue, WideStringValue, WideStringValue_mut, ::LPCWSTR);
 pub type PPDH_FMT_COUNTERVALUE = *mut PDH_FMT_COUNTERVALUE;

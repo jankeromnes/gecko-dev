@@ -24,12 +24,12 @@ class NamedValues(object):
     Parameters
     ----------
 
-    \*args: variable number of two-element :py:class:`tuple` 
+    \*args: variable number of two-element :py:class:`tuple`
     \*\*kwargs: keyword parameters of:
-        
+
         name: :py:class:`str`
             Value name
-    
+
         value: :py:class:`int`
                 A numerical value
 

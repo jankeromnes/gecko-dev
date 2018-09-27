@@ -3,7 +3,7 @@
 
 /*---
 esid: sec-intl.getcanonicallocales
-description: Test Intl.getCanonicalLocales for step 5. 
+description: Test Intl.getCanonicalLocales for step 5.
 info: |
   9.2.1 CanonicalizeLocaleList (locales)
     5. Let len be ? ToLength(? Get(O, "length")).

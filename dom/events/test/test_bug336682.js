@@ -1,12 +1,12 @@
 /*
  * Helper functions for online/offline events tests.
- * 
+ *
  * Any copyright is dedicated to the Public Domain.
  * http://creativecommons.org/licenses/publicdomain/
  */
 var gState = 0;
 /**
- * After all the on/offline handlers run, 
+ * After all the on/offline handlers run,
  * gState is expected to be equal to MAX_STATE.
  */
 var MAX_STATE;
@@ -34,7 +34,7 @@ function makeHandler(nameTemplate, eventName, expectedStates) {
     ++gState;
     trace(name + ": gState=" + gState);
     ok(expectedStates.includes(gState),
-       "handlers called in the right order: " + name + " is called, " + 
+       "handlers called in the right order: " + name + " is called, " +
        "gState=" + gState + ", expectedStates=" + expectedStates);
     ok(e.constructor == Event, "event should be an Event");
     ok(e.type == eventName, "event type should be " + eventName);

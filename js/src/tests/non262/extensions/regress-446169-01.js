@@ -12,9 +12,9 @@ var expect = 'No Crash';
 
 var array = [{}, {}, {}, {}];
 
-function foo() 
+function foo()
 {
-  for (var i = 0; i != 42*42*42; ++i) 
+  for (var i = 0; i != 42*42*42; ++i)
   {
     var obj = array[i % array.length];
     obj["a"+i] = 1;
@@ -32,7 +32,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof scatter == 'function')
   {
     scatter([foo, foo, foo, foo]);

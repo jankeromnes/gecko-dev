@@ -5027,7 +5027,7 @@ Instead, please regenerate using generate-encoding-data.py
 齐
 麦
 𦉫
-　
+
 ，
 、
 。

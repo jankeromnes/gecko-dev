@@ -665,7 +665,7 @@ fails == block-max-height-last-child-9a-dyn.html block-max-height-last-child-9-r
 # Note: CSS 2.1 suggests that the 'caption-side' values 'top-outside' and
 # 'bottom-outside' will be used in a future CSS Module to restore the
 # CSS 2 definition of 'top' and 'bottom' (which is different from CSS 2.1's).
-# Since Bug #659828 was fixed, 'top-outside' and 'bottom-outside' act as an 
+# Since Bug #659828 was fixed, 'top-outside' and 'bottom-outside' act as an
 # alias for the CSS 2.1 values 'top' and 'bottom' respectively.
 == table-caption-top-1.html table-caption-top-1-ref.html
 == table-caption-top-2.html table-caption-top-2-ref.html

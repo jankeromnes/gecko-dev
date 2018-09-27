@@ -1,5 +1,5 @@
 #!/bin/sh
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -8,13 +8,13 @@
 # symlinks.sh -- create links from NSPR builds
 #
 # syntax: symlinks.sh
-# 
+#
 # Description:
 # symlinks.sh creates some symbolic links for NSPR build targets
 # that are not actually build, but for which there are NSPR
 # binaries suitable for running on the intended target. ... got
 # that?
-# 
+#
 # Suggested use: After copying NSPR binaries to
 # /s/b/c/nspr20/<platform> run symlinks.sh to create the links
 # for all supported platforms.

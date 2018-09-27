@@ -11,7 +11,7 @@ description: >
     prototype contain it
 ---*/
 
-//Establish foo object 
+//Establish foo object
 function FooObj(){}; FooObj.prototype.propFoo="some";
 
 // Invoke instance of foo object

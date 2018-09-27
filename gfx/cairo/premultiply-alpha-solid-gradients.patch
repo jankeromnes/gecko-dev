@@ -7,7 +7,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-pattern.c b/gfx/cairo/cairo/src/cairo-pat
 --- a/gfx/cairo/cairo/src/cairo-pattern.c
 +++ b/gfx/cairo/cairo/src/cairo-pattern.c
 @@ -2262,8 +2262,17 @@ _cairo_pattern_acquire_surface (const ca
- 
+
  	    if (src->n_stops)
  	    {
 +		cairo_color_t color;
@@ -37,10 +37,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-pattern.c b/gfx/cairo/cairo/src/cairo-pat
 +			src->stops->color.green,
 +			src->stops->color.blue,
 +			src->stops->color.alpha);
- 
+
  		_cairo_pattern_init_solid (&solid,
 -					   &src->stops->color,
 +					   &color,
  					   CAIRO_CONTENT_COLOR_ALPHA);
- 
+
  		status =

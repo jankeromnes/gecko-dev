@@ -52,16 +52,16 @@ function assertEquals(descr, expected, actual) {
   	        is(actual, expected.toUpperCase(), descr);
   	    }
   	} else {
-  		is(actual, expected, descr); 
+  		is(actual, expected, descr);
   	}
   }
-  
+
 
   function assertEqualsCollectionAutoCase(context, descr, expected, actual) {
     //
     //  if they aren't the same size, they aren't equal
     is(actual.length, expected.length, descr);
-    
+
     //
     //  if there length is the same, then every entry in the expected list
     //     must appear once and only once in the actual list
@@ -370,7 +370,7 @@ EventMonitor.prototype.handleEvent = function(evt) {
        case 1:
        monitor.capturedEvents[monitor.capturedEvents.length] = evt;
        break;
-       
+
        case 2:
        monitor.atEvents[monitor.atEvents.length] = evt;
        break;
@@ -431,15 +431,15 @@ UserDataMonitor.prototype.handle = function(operation, key, data, src, dst) {
 
 function IFrameBuilder() {
     this.contentType = "text/html";
-    this.supportedContentTypes = [ "text/html", 
+    this.supportedContentTypes = [ "text/html",
         "text/xml",
         "image/svg+xml",
-        "application/xhtml+xml" ];    
+        "application/xhtml+xml" ];
 
     this.supportsAsyncChange = false;
     this.async = true;
     this.fixedAttributeNames = [
-        "validating",  "expandEntityReferences", "coalescing", 
+        "validating",  "expandEntityReferences", "coalescing",
         "signed", "hasNullString", "ignoringElementContentWhitespace", "namespaceAware", "ignoringComments", "schemaValidating"];
 
     this.fixedAttributeValues = [false,  true, false, true, true , false, false, true, false ];
@@ -471,33 +471,33 @@ IFrameBuilder.prototype.setContentType = function(contentType) {
 
 IFrameBuilder.prototype.preload = function(frame, varname, url) {
   var suffix;
-  if (this.contentType == "text/html" || 
+  if (this.contentType == "text/html" ||
       this.contentType == "application/xhtml+xml") {
       if (url.substring(0,5) == "staff" || url == "nodtdstaff" ||
-	  url == "datatype_normalization") { 
+	  url == "datatype_normalization") {
   	  suffix = ".xml";
-      }  
+      }
   }
-  
+
   if (!suffix) suffix = getSuffix(this.contentType);
-  
+
   var iframe = document.createElement("iframe");
   var srcname = url + suffix;
   iframe.setAttribute("name", srcname);
   iframe.setAttribute("src", fileBase + srcname);
   //
   //   HTML and XHTML have onload attributes that will invoke loadComplete
-  //       
-  if (suffix.indexOf("html") < 0) { 
-     iframe.addEventListener("load", loadComplete, false);       
+  //
+  if (suffix.indexOf("html") < 0) {
+     iframe.addEventListener("load", loadComplete, false);
   }
   document.getElementsByTagName("body").item(0).appendChild(iframe);
-  return 0; 
+  return 0;
 }
 
 IFrameBuilder.prototype.load = function(frame, varname, url) {
   	var suffix;
-  	if (url.substring(0,5) == "staff" || url == "nodtdstaff" || url == "datatype_normalization") { 
+  	if (url.substring(0,5) == "staff" || url == "nodtdstaff" || url == "datatype_normalization") {
   	  suffix = ".xml";
   	}
   	if (!suffix) suffix = getSuffix(this.contentType);
@@ -550,7 +550,7 @@ function createBuilder(implementation) {
   switch(implementation) {
 /*    case "msxml3":
     return new MSXMLBuilder("Msxml2.DOMDocument.3.0");
-    
+
     case "msxml4":
     return new MSXMLBuilder("Msxml2.DOMDocument.4.0");*/
 
@@ -562,13 +562,13 @@ function createBuilder(implementation) {
 
     case "dom3ls":
     return new DOM3LSBuilder(); */
-    
+
     case "iframe":
     return new IFrameBuilder();
 
     case "xmlhttprequest":
     return new XMLHttpRequestBuilder();
-    
+
     default:
     alert ("unrecognized implementation " + implementation);
   }
@@ -683,7 +683,7 @@ SimpleTest._logResult = function overrideSTlR(test, passString, failString) {
 }
 */
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(function(){ setUpPage(); });
 
@@ -699,16 +699,16 @@ function markTodos() {
 function runJSUnitTests() {
   builder = createConfiguredBuilder();
   try {
-    var tests = exposeTestFunctionNames(); 
+    var tests = exposeTestFunctionNames();
     for (var i = 0; i < tests.length; i++) {
-      window[tests[i]](); 
+      window[tests[i]]();
     }
   } catch (ex) {
 /*
     if (todoTests[docName]) {
       todo(false, "[failure as todo] Test threw exception: " + ex);
       ++gFailuresAsTodos;
-    } else { 
+    } else {
 */
       ok(false, "Test threw exception: " + ex);
 /*

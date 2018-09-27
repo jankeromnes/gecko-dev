@@ -3,9 +3,9 @@
 # *   Copyright (C) 2003-2015, International Business Machines
 # *   Corporation and others.  All Rights Reserved.
 # A list of txt's to build
-# Note: 
+# Note:
 #
-#   If you are thinking of modifying this file, READ THIS. 
+#   If you are thinking of modifying this file, READ THIS.
 #
 # Instead of changing this file [unless you want to check it back in],
 # you should consider creating a 'misclocal.mk' file in this same directory.
@@ -14,7 +14,7 @@
 #
 # Example 'misclocal.mk' files:
 #
-#  * To add an additional file to the list: 
+#  * To add an additional file to the list:
 #    _____________________________________________________
 #    |  MISC_SOURCE_LOCAL =   myFile.txt ...
 #

@@ -23,17 +23,17 @@
 // <![CDATA[
 
   new Test.Unit.Runner({
-    
+
     testDynamicLoading: function() { with(this) {
-      
+
       // not loaded: controls
       assertNull(Ajax.Autocompleter || null);
       assertNull(Form.Element.DelayedObserver || null);
-      
+
       // we loading dragdrop
       assertNotNull(Draggable || null);
     }}
-    
+
   }, "testlog");
 // ]]>
 </script>

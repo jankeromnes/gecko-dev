@@ -16,8 +16,8 @@ this.p1 = 1;
 this.p2 = 2;
 this.p3 = 3;
 var result = "result";
-var myObj = {p1: 'a', 
-             p2: 'b', 
+var myObj = {p1: 'a',
+             p2: 'b',
              p3: 'c',
              value: 'myObj_value',
              valueOf : function(){return 'obj_valueOf';},
@@ -83,7 +83,7 @@ if(!(p3 === 3)){
 try {
   p4;
   $ERROR('#4: p4 is not defined');
-} catch(e) {    
+} catch(e) {
 }
 
 if(!(p5 === "x5")){

@@ -25,7 +25,7 @@ typedef struct pkix_RevocationMethodStruct pkix_RevocationMethod;
  * means(cache) should implement this prototype. */
 typedef PKIX_Error *
 pkix_LocalRevocationCheckFn(PKIX_PL_Cert *cert, PKIX_PL_Cert *issuer,
-                            PKIX_PL_Date *date, 
+                            PKIX_PL_Date *date,
                             pkix_RevocationMethod *checkerObject,
                             PKIX_ProcessingParams *procParams,
                             PKIX_UInt32 methodFlags,

@@ -102,7 +102,7 @@ public class BookmarksDataAccessor extends DataAccessor {
                                                 BrowserContract.Bookmarks._ID };
 
   protected Cursor getGuidsIDsForFolders() throws NullCursorException {
-    // Exclude items that we don't want to sync (pinned items, reading list, 
+    // Exclude items that we don't want to sync (pinned items, reading list,
     // tags, the places root), in case they've ended up in the DB.
     String where = BOOKMARK_IS_FOLDER + " AND " + GUID_SHOULD_TRACK;
     return queryHelper.safeQuery(".getGuidsIDsForFolders", GUID_AND_ID, where, null, null);
@@ -388,7 +388,7 @@ public class BookmarksDataAccessor extends DataAccessor {
     return queryHelper.safeQuery(".getChildren", getAllColumns(), where, args, order);
   }
 
-  
+
   @Override
   protected String[] getAllColumns() {
     return BrowserContractHelpers.BookmarkColumns;

@@ -12,19 +12,19 @@
 
   <script class="testbody" type="text/javascript">
     var snap1, snap2;
-  
+
     SimpleTest.waitForExplicitFinish();
-  
+
     function onBodyLoad() {
       window.frames[0].document.getElementById("test").selectedIndex = 0;
       window.frames[0].document.getElementById("test").selectedIndex = 1;
-      
+
       snap1 = snapshotWindow(window);
-      
+
       document.getElementById("test").onload = onFrameLoad;
       window.frames[0].location.reload();
     }
-    
+
     function onFrameLoad() {
       snap2 = snapshotWindow(window);
 
@@ -32,7 +32,7 @@
       [equal, str1, str2] = compareSnapshots(snap1, snap2, true);
 
       ok(equal, "persistent attribute in tab box broken, expected: "+str1+" got: "+str2);
-          
+
       SimpleTest.finish();
     }
   </script>

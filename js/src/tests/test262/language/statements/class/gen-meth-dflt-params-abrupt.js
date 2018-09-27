@@ -74,7 +74,7 @@ info: |
 var callCount = 0;
 class C {
   *method(_ = (function() { throw new Test262Error(); }())) {
-    
+
     callCount = callCount + 1;
   }
 }

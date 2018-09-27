@@ -74,7 +74,7 @@ NS_IMETHODIMP nsPrintSettings::GetPrintSession(nsIPrintSession **aPrintSession)
 {
   NS_ENSURE_ARG_POINTER(aPrintSession);
   *aPrintSession = nullptr;
-  
+
   nsCOMPtr<nsIPrintSession> session = do_QueryReferent(mSession);
   if (!session)
     return NS_ERROR_NOT_INITIALIZED;
@@ -87,7 +87,7 @@ NS_IMETHODIMP nsPrintSettings::SetPrintSession(nsIPrintSession *aPrintSession)
   // Clearing it by passing nullptr is not allowed. That's why we
   // use a weak ref so that it doesn't have to be cleared.
   NS_ENSURE_ARG(aPrintSession);
-  
+
   mSession = do_GetWeakReference(aPrintSession);
   if (!mSession) {
     // This may happen if the implementation of this object does
@@ -508,7 +508,7 @@ NS_IMETHODIMP nsPrintSettings::SetDocURL(const nsAString& aDocURL)
  *  See documentation in nsPrintSettingsImpl.h
  *	@update 1/12/01 rods
  */
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::GetPrintOptions(int32_t aType, bool *aTurnOnOff)
 {
   NS_ENSURE_ARG_POINTER(aTurnOnOff);
@@ -519,7 +519,7 @@ nsPrintSettings::GetPrintOptions(int32_t aType, bool *aTurnOnOff)
  *  See documentation in nsPrintSettingsImpl.h
  *	@update 1/12/01 rods
  */
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::SetPrintOptions(int32_t aType, bool aTurnOnOff)
 {
   if (aTurnOnOff) {
@@ -763,14 +763,14 @@ NS_IMETHODIMP nsPrintSettings::SetPaperData(int16_t aPaperData)
  *	@update 6/21/00 dwc
  *	@update 1/12/01 rods
  */
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::SetMarginInTwips(nsIntMargin& aMargin)
 {
   mMargin = aMargin;
   return NS_OK;
 }
 
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::SetEdgeInTwips(nsIntMargin& aEdge)
 {
   mEdge = aEdge;
@@ -778,9 +778,9 @@ nsPrintSettings::SetEdgeInTwips(nsIntMargin& aEdge)
 }
 
 // NOTE: Any subclass implementation of this function should make sure
-// to check for negative margin values in aUnwriteableMargin (which 
+// to check for negative margin values in aUnwriteableMargin (which
 // would indicate that we should use the system default unwriteable margin.)
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::SetUnwriteableMarginInTwips(nsIntMargin& aUnwriteableMargin)
 {
   if (aUnwriteableMargin.top >= 0) {
@@ -802,21 +802,21 @@ nsPrintSettings::SetUnwriteableMarginInTwips(nsIntMargin& aUnwriteableMargin)
  *  See documentation in nsPrintSettingsService.h
  *	@update 6/21/00 dwc
  */
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::GetMarginInTwips(nsIntMargin& aMargin)
 {
   aMargin = mMargin;
   return NS_OK;
 }
 
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::GetEdgeInTwips(nsIntMargin& aEdge)
 {
   aEdge = mEdge;
   return NS_OK;
 }
 
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::GetUnwriteableMarginInTwips(nsIntMargin& aUnwriteableMargin)
 {
   aUnwriteableMargin = mUnwriteableMargin;
@@ -835,7 +835,7 @@ nsPrintSettings::SetupSilentPrinting()
 /** ---------------------------------------------------
  *  See documentation in nsPrintSettingsService.h
  */
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::GetEffectivePageSize(double *aWidth, double *aHeight)
 {
   if (mPaperSizeUnit == kPaperSizeInches) {
@@ -860,7 +860,7 @@ nsPrintSettings::GetPageRanges(nsTArray<int32_t> &aPages)
   return NS_OK;
 }
 
-nsresult 
+nsresult
 nsPrintSettings::_Clone(nsIPrintSettings **_retval)
 {
   RefPtr<nsPrintSettings> printSettings = new nsPrintSettings(*this);
@@ -868,14 +868,14 @@ nsPrintSettings::_Clone(nsIPrintSettings **_retval)
   return NS_OK;
 }
 
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::Clone(nsIPrintSettings **_retval)
 {
   NS_ENSURE_ARG_POINTER(_retval);
   return _Clone(_retval);
 }
 
-nsresult 
+nsresult
 nsPrintSettings::_Assign(nsIPrintSettings *aPS)
 {
   nsPrintSettings *ps = static_cast<nsPrintSettings*>(aPS);
@@ -883,7 +883,7 @@ nsPrintSettings::_Assign(nsIPrintSettings *aPS)
   return NS_OK;
 }
 
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrintSettings::Assign(nsIPrintSettings *aPS)
 {
   NS_ENSURE_ARG(aPS);

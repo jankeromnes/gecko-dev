@@ -16,8 +16,8 @@ interface nsIFeedEntry : nsIFeedContainer {
 
   /**
   * Uses description, subtitle, summary, content and extensions
-  * to generate a summary. 
-  * 
+  * to generate a summary.
+  *
   */
   attribute nsIFeedTextConstruct summary;
 

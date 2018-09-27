@@ -60,7 +60,7 @@ lrwxrwxrwx   1 pnftp    pnftp          12 Mar 18 15:48 wmail.exe -> wmail30h.exe
 -rw-r--r--   1 pnftp    pnftp     1789173 Mar 11 16:38 wmail30h_raq4.tar.gz
 -rw-r--r--   1 pnftp    pnftp     2846045 Feb 19 16:06 wmail30h_solaris.tar.Z
 -rw-r--r--   1 pnftp    pnftp     2858946 Feb 19 16:11 wmail30h_solarisx86.tar.Z
-226 Transfer complete. 
+226 Transfer complete.
 ftp> close
 221 Closing connection - goodbye!
-ftp> 
+ftp>

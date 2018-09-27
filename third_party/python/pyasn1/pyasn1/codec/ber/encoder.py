@@ -250,7 +250,7 @@ class RealEncoder(AbstractItemEncoder):
         if m < 0:
             ms = -1  # mantissa sign
         if e < 0:
-            es = -1  # exponenta sign 
+            es = -1  # exponenta sign
         m *= ms
         if encbase == 8:
             m *= 2 ** (abs(e) % 3 * es)
@@ -274,7 +274,7 @@ class RealEncoder(AbstractItemEncoder):
             return self._dropFloatingPoint(m, value.binEncBase, e)
         elif self.binEncBase in encBase:
             return self._dropFloatingPoint(m, self.binEncBase, e)
-        # auto choosing base 2/8/16 
+        # auto choosing base 2/8/16
         mantissa = [m, m, m]
         exponenta = [e, e, e]
         sign = 1

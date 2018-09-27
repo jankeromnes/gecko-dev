@@ -16,8 +16,8 @@ this.p1 = 1;
 this.p2 = 2;
 this.p3 = 3;
 var result = "result";
-var myObj = {p1: 'a', 
-             p2: 'b', 
+var myObj = {p1: 'a',
+             p2: 'b',
              p3: 'c',
              value: 'myObj_value',
              valueOf : function(){return 'obj_valueOf';},
@@ -91,7 +91,7 @@ catch(e){
 try {
   p5;
   $ERROR('#5: p5 is not defined');
-} catch(e) {    
+} catch(e) {
 }
 
 if(!(myObj.p1 === "a")){
@@ -145,7 +145,7 @@ if(!(st_isFinite === "isFinite")){
 try {
   value;
   $ERROR('#18: value is not defined');
-} catch(e) {    
+} catch(e) {
 }
 
 if(!(myObj.value === "myObj_value")){

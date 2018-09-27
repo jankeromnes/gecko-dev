@@ -5,7 +5,7 @@ body,body.editor,body.body {
 }
 
 a, a.reference {
-	text-decoration: none; 
+	text-decoration: none;
 }
 a[href]:hover { text-decoration: underline; }
 
@@ -47,7 +47,7 @@ hr {
 }
 
 
-ul { 
+ul {
     line-height: 1.5em;
     /*list-style-image: url("bullet.gif"); */
     margin-left: 1.5em;
@@ -135,7 +135,7 @@ a.menu[href]:hover {
 div#pagetitle{
   /*border-spacing: 20px;*/
   font: 160% Verdana, Helvetica, Arial, sans-serif;
-  color: #3ba6ec; 
+  color: #3ba6ec;
   vertical-align: middle;
   left: 80 px;
   padding-bottom: 0.3em;
@@ -143,7 +143,7 @@ div#pagetitle{
 
 a.wikicurrent {
   font: 100% Verdana, Helvetica, Arial, sans-serif;
-  color: #3ba6ec; 
+  color: #3ba6ec;
   vertical-align: middle;
 }
 
@@ -163,7 +163,7 @@ td.page-header-left {
 
 td.page-header-top {
   padding: 0;
-    
+
   /*border-bottom: 1px solid #444444;*/
 }
 
@@ -204,7 +204,7 @@ p.error-message {
   font-weight: bold;
 }
 
-p:first-child { 
+p:first-child {
   margin: 0 ;
   padding: 0;
 }
@@ -578,7 +578,7 @@ div#pagename {
 }
 
 a.wikiaction, input.wikiaction {
-    color: black; 
+    color: black;
     text-decoration: None;
     text-align: center;
     color: black;
@@ -589,9 +589,9 @@ a.wikiaction, input.wikiaction {
     white-space: nowrap;
 }
 
-a.wikiaction[href]:hover { 
-	color: black; 
-	text-decoration: none; 
+a.wikiaction[href]:hover {
+	color: black;
+	text-decoration: none;
 	/*background-color: #dddddd; */
 }
 
@@ -604,13 +604,13 @@ div.legenditem {
 span.wikitoken {
    background-color: #eeeeee;
 }
-    
 
-div#contentspace h1:first-child, div.heading:first-child { 
+
+div#contentspace h1:first-child, div.heading:first-child {
   padding-top: 0;
   margin-top: 0;
 }
-div#contentspace h2:first-child { 
+div#contentspace h2:first-child {
   padding-top: 0;
   margin-top: 0;
 }
@@ -620,13 +620,13 @@ div#contentspace h2:first-child {
 div.heading, h1 {
     font-family: Verdana, Helvetica, Arial, sans-serif;
     background-color: #58b3ef;
-    background-color: #FFFFFF; 
+    background-color: #FFFFFF;
     /*color: #4893cf;*/
     color: black;
     padding-top: 1.0em;
     padding-bottom:0.2em;
     text-align: left;
-    margin-top: 0em; 
+    margin-top: 0em;
     /*margin-bottom:8pt;*/
     font-weight: bold;
     font-size: 115%;
@@ -723,7 +723,7 @@ div.history a {
     /* font-size: 70%; */
 }
 
-div.wikiactiontitle { 
+div.wikiactiontitle {
   font-weight: bold;
 }
 
@@ -746,7 +746,7 @@ img#pyimg {
     float: left;
     padding-bottom: 1em;
 }
-    
+
 div#navspace {
     position: absolute;
     font-size: 100%;
@@ -757,8 +757,8 @@ div#navspace {
 
 div#errorline {
     position: relative;
-    top: 5px; 
-    float: right; 
+    top: 5px;
+    float: right;
 }
 
 div#contentspace {
@@ -776,14 +776,14 @@ div#menubar {
 
 /* for the documentation page */
 div#title{
-    
+
   font-size: 110%;
   color: black;
-    
-    
-  /*background-color: #dee7ec; 
-  #padding: 5pt; 
-  #padding-bottom: 1em; 
+
+
+  /*background-color: #dee7ec;
+  #padding: 5pt;
+  #padding-bottom: 1em;
   #color: black;
   border-width: 1pt;
   border-style: solid;*/
@@ -792,8 +792,8 @@ div#title{
 
 div#docnavlist {
   /*background-color: #dee7ec; */
-  padding: 5pt; 
-  padding-bottom: 2em; 
+  padding: 5pt;
+  padding-bottom: 2em;
   color: black;
   border-width: 1pt;
   /*border-style: solid;*/
@@ -814,7 +814,7 @@ div.listtitle {
     border-bottom: 1px solid #8CACBB;
 }
 
-div.actionbox h3 { 
+div.actionbox h3 {
   padding-top: 0;
   padding-right: 0.5em;
   padding-left: 0.5em;
@@ -823,22 +823,22 @@ div.actionbox h3 {
   border: 1px solid black; /* 8cacbb; */
 }
 
-div.actionbox a { 
+div.actionbox a {
   display: block;
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   margin-left: 0.5em;
 }
 
-div.actionbox a.history { 
+div.actionbox a.history {
   display: block;
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   margin-left: 0.5em;
-  font-size: 90%; 
+  font-size: 90%;
 }
 
-div.actionbox { 
+div.actionbox {
   margin-bottom: 2em;
   padding-bottom: 1em;
   overflow: hidden; /* scroll;  */
@@ -1041,4 +1041,4 @@ ul.auto-toc {
 
 div.section {
   margin-top: 1.0em ;
-}    
+}

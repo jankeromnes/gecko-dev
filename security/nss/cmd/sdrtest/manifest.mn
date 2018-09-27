@@ -17,7 +17,7 @@ REQUIRES = dbm seccmd
 
 # WINNT uses EXTRA_LIBS as the list of libs to link in.
 # Unix uses     OS_LIBS for that purpose.
-# We can solve this via conditional makefile code, but 
+# We can solve this via conditional makefile code, but
 # can't do this in manifest.mn because OS_ARCH isn't defined there.
 # So, look in the local Makefile for the defines for the list of libs.
 

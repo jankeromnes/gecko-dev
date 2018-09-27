@@ -501,7 +501,7 @@ var TypeScript;
         }
         return BlockIntrinsics;
     })();
-    TypeScript.BlockIntrinsics = BlockIntrinsics;    
+    TypeScript.BlockIntrinsics = BlockIntrinsics;
     var StringHashTable = (function () {
         function StringHashTable() {
             this.itemCount = 0;
@@ -576,7 +576,7 @@ var TypeScript;
         };
         return StringHashTable;
     })();
-    TypeScript.StringHashTable = StringHashTable;    
+    TypeScript.StringHashTable = StringHashTable;
     var DualStringHashTable = (function () {
         function DualStringHashTable(primaryTable, secondaryTable) {
             this.primaryTable = primaryTable;
@@ -623,7 +623,7 @@ var TypeScript;
         };
         return DualStringHashTable;
     })();
-    TypeScript.DualStringHashTable = DualStringHashTable;    
+    TypeScript.DualStringHashTable = DualStringHashTable;
     function numberHashFn(key) {
         var c2 = 668265261;
         key = (key ^ 61) ^ (key >>> 16);
@@ -645,7 +645,7 @@ var TypeScript;
         }
         return HashEntry;
     })();
-    TypeScript.HashEntry = HashEntry;    
+    TypeScript.HashEntry = HashEntry;
     var HashTable = (function () {
         function HashTable(size, hashFn, equalsFn) {
             this.size = size;
@@ -709,7 +709,7 @@ var TypeScript;
         };
         return HashTable;
     })();
-    TypeScript.HashTable = HashTable;    
+    TypeScript.HashTable = HashTable;
     var SimpleHashTable = (function () {
         function SimpleHashTable() {
             this.keys = [];
@@ -741,7 +741,7 @@ var TypeScript;
         };
         return SimpleHashTable;
     })();
-    TypeScript.SimpleHashTable = SimpleHashTable;    
+    TypeScript.SimpleHashTable = SimpleHashTable;
 })(TypeScript || (TypeScript = {}));
 var __extends = this.__extends || function (d, b) {
     function __() { this.constructor = d; }
@@ -757,7 +757,7 @@ var TypeScript;
         }
         return ASTSpan;
     })();
-    TypeScript.ASTSpan = ASTSpan;    
+    TypeScript.ASTSpan = ASTSpan;
     var AST = (function (_super) {
         __extends(AST, _super);
         function AST(nodeType) {
@@ -976,7 +976,7 @@ var TypeScript;
         };
         return AST;
     })(ASTSpan);
-    TypeScript.AST = AST;    
+    TypeScript.AST = AST;
     var IncompleteAST = (function (_super) {
         __extends(IncompleteAST, _super);
         function IncompleteAST(min, lim) {
@@ -986,7 +986,7 @@ var TypeScript;
         }
         return IncompleteAST;
     })(AST);
-    TypeScript.IncompleteAST = IncompleteAST;    
+    TypeScript.IncompleteAST = IncompleteAST;
     var ASTList = (function (_super) {
         __extends(ASTList, _super);
         function ASTList() {
@@ -1039,7 +1039,7 @@ var TypeScript;
         };
         return ASTList;
     })(AST);
-    TypeScript.ASTList = ASTList;    
+    TypeScript.ASTList = ASTList;
     var Identifier = (function (_super) {
         __extends(Identifier, _super);
         function Identifier(actualText, hasEscapeSequence) {
@@ -1085,7 +1085,7 @@ var TypeScript;
         }
         return Identifier;
     })(AST);
-    TypeScript.Identifier = Identifier;    
+    TypeScript.Identifier = Identifier;
     var MissingIdentifier = (function (_super) {
         __extends(MissingIdentifier, _super);
         function MissingIdentifier() {
@@ -1098,7 +1098,7 @@ var TypeScript;
         };
         return MissingIdentifier;
     })(Identifier);
-    TypeScript.MissingIdentifier = MissingIdentifier;    
+    TypeScript.MissingIdentifier = MissingIdentifier;
     var Label = (function (_super) {
         __extends(Label, _super);
         function Label(id) {
@@ -1124,7 +1124,7 @@ var TypeScript;
         };
         return Label;
     })(AST);
-    TypeScript.Label = Label;    
+    TypeScript.Label = Label;
     var Expression = (function (_super) {
         __extends(Expression, _super);
         function Expression(nodeType) {
@@ -1138,7 +1138,7 @@ var TypeScript;
         };
         return Expression;
     })(AST);
-    TypeScript.Expression = Expression;    
+    TypeScript.Expression = Expression;
     var UnaryExpression = (function (_super) {
         __extends(UnaryExpression, _super);
         function UnaryExpression(nodeType, operand) {
@@ -1334,7 +1334,7 @@ var TypeScript;
         };
         return UnaryExpression;
     })(Expression);
-    TypeScript.UnaryExpression = UnaryExpression;    
+    TypeScript.UnaryExpression = UnaryExpression;
     var CallExpression = (function (_super) {
         __extends(CallExpression, _super);
         function CallExpression(nodeType, target, arguments) {
@@ -1364,7 +1364,7 @@ var TypeScript;
         };
         return CallExpression;
     })(Expression);
-    TypeScript.CallExpression = CallExpression;    
+    TypeScript.CallExpression = CallExpression;
     var BinaryExpression = (function (_super) {
         __extends(BinaryExpression, _super);
         function BinaryExpression(nodeType, operand1, operand2) {
@@ -1563,7 +1563,7 @@ var TypeScript;
         };
         return BinaryExpression;
     })(Expression);
-    TypeScript.BinaryExpression = BinaryExpression;    
+    TypeScript.BinaryExpression = BinaryExpression;
     var ConditionalExpression = (function (_super) {
         __extends(ConditionalExpression, _super);
         function ConditionalExpression(operand1, operand2, operand3) {
@@ -1588,7 +1588,7 @@ var TypeScript;
         };
         return ConditionalExpression;
     })(Expression);
-    TypeScript.ConditionalExpression = ConditionalExpression;    
+    TypeScript.ConditionalExpression = ConditionalExpression;
     var NumberLiteral = (function (_super) {
         __extends(NumberLiteral, _super);
         function NumberLiteral(value, hasEmptyFraction) {
@@ -1630,7 +1630,7 @@ var TypeScript;
         };
         return NumberLiteral;
     })(Expression);
-    TypeScript.NumberLiteral = NumberLiteral;    
+    TypeScript.NumberLiteral = NumberLiteral;
     var RegexLiteral = (function (_super) {
         __extends(RegexLiteral, _super);
         function RegexLiteral(regex) {
@@ -1650,7 +1650,7 @@ var TypeScript;
         };
         return RegexLiteral;
     })(Expression);
-    TypeScript.RegexLiteral = RegexLiteral;    
+    TypeScript.RegexLiteral = RegexLiteral;
     var StringLiteral = (function (_super) {
         __extends(StringLiteral, _super);
         function StringLiteral(text) {
@@ -1676,7 +1676,7 @@ var TypeScript;
         };
         return StringLiteral;
     })(Expression);
-    TypeScript.StringLiteral = StringLiteral;    
+    TypeScript.StringLiteral = StringLiteral;
     var ModuleElement = (function (_super) {
         __extends(ModuleElement, _super);
         function ModuleElement(nodeType) {
@@ -1684,7 +1684,7 @@ var TypeScript;
         }
         return ModuleElement;
     })(AST);
-    TypeScript.ModuleElement = ModuleElement;    
+    TypeScript.ModuleElement = ModuleElement;
     var ImportDeclaration = (function (_super) {
         __extends(ImportDeclaration, _super);
         function ImportDeclaration(id, alias) {
@@ -1743,7 +1743,7 @@ var TypeScript;
         };
         return ImportDeclaration;
     })(ModuleElement);
-    TypeScript.ImportDeclaration = ImportDeclaration;    
+    TypeScript.ImportDeclaration = ImportDeclaration;
     var BoundDecl = (function (_super) {
         __extends(BoundDecl, _super);
         function BoundDecl(id, nodeType, nestingLevel) {
@@ -1778,7 +1778,7 @@ var TypeScript;
         };
         return BoundDecl;
     })(AST);
-    TypeScript.BoundDecl = BoundDecl;    
+    TypeScript.BoundDecl = BoundDecl;
     var VarDecl = (function (_super) {
         __extends(VarDecl, _super);
         function VarDecl(id, nest) {
@@ -1801,7 +1801,7 @@ var TypeScript;
         };
         return VarDecl;
     })(BoundDecl);
-    TypeScript.VarDecl = VarDecl;    
+    TypeScript.VarDecl = VarDecl;
     var ArgDecl = (function (_super) {
         __extends(ArgDecl, _super);
         function ArgDecl(id) {
@@ -1824,7 +1824,7 @@ var TypeScript;
         };
         return ArgDecl;
     })(BoundDecl);
-    TypeScript.ArgDecl = ArgDecl;    
+    TypeScript.ArgDecl = ArgDecl;
     var internalId = 0;
     var FuncDecl = (function (_super) {
         __extends(FuncDecl, _super);
@@ -1992,7 +1992,7 @@ var TypeScript;
         };
         return FuncDecl;
     })(AST);
-    TypeScript.FuncDecl = FuncDecl;    
+    TypeScript.FuncDecl = FuncDecl;
     var LocationInfo = (function () {
         function LocationInfo(filename, lineMap, unitIndex) {
             this.filename = filename;
@@ -2001,7 +2001,7 @@ var TypeScript;
         }
         return LocationInfo;
     })();
-    TypeScript.LocationInfo = LocationInfo;    
+    TypeScript.LocationInfo = LocationInfo;
     TypeScript.unknownLocationInfo = new LocationInfo("unknown", null, -1);
     var Script = (function (_super) {
         __extends(Script, _super);
@@ -2105,7 +2105,7 @@ var TypeScript;
         };
         return Script;
     })(FuncDecl);
-    TypeScript.Script = Script;    
+    TypeScript.Script = Script;
     var NamedDeclaration = (function (_super) {
         __extends(NamedDeclaration, _super);
         function NamedDeclaration(nodeType, name, members) {
@@ -2120,7 +2120,7 @@ var TypeScript;
         };
         return NamedDeclaration;
     })(ModuleElement);
-    TypeScript.NamedDeclaration = NamedDeclaration;    
+    TypeScript.NamedDeclaration = NamedDeclaration;
     var ModuleDeclaration = (function (_super) {
         __extends(ModuleDeclaration, _super);
         function ModuleDeclaration(name, members, vars, scopes, endingToken) {
@@ -2160,7 +2160,7 @@ var TypeScript;
         };
         return ModuleDeclaration;
     })(NamedDeclaration);
-    TypeScript.ModuleDeclaration = ModuleDeclaration;    
+    TypeScript.ModuleDeclaration = ModuleDeclaration;
     var TypeDeclaration = (function (_super) {
         __extends(TypeDeclaration, _super);
         function TypeDeclaration(nodeType, name, extendsList, implementsList, members) {
@@ -2177,7 +2177,7 @@ var TypeScript;
         };
         return TypeDeclaration;
     })(NamedDeclaration);
-    TypeScript.TypeDeclaration = TypeDeclaration;    
+    TypeScript.TypeDeclaration = TypeDeclaration;
     var ClassDeclaration = (function (_super) {
         __extends(ClassDeclaration, _super);
         function ClassDeclaration(name, members, extendsList, implementsList) {
@@ -2196,7 +2196,7 @@ var TypeScript;
         };
         return ClassDeclaration;
     })(TypeDeclaration);
-    TypeScript.ClassDeclaration = ClassDeclaration;    
+    TypeScript.ClassDeclaration = ClassDeclaration;
     var InterfaceDeclaration = (function (_super) {
         __extends(InterfaceDeclaration, _super);
         function InterfaceDeclaration(name, members, extendsList, implementsList) {
@@ -2209,7 +2209,7 @@ var TypeScript;
         };
         return InterfaceDeclaration;
     })(TypeDeclaration);
-    TypeScript.InterfaceDeclaration = InterfaceDeclaration;    
+    TypeScript.InterfaceDeclaration = InterfaceDeclaration;
     var Statement = (function (_super) {
         __extends(Statement, _super);
         function Statement(nodeType) {
@@ -2231,7 +2231,7 @@ var TypeScript;
         };
         return Statement;
     })(ModuleElement);
-    TypeScript.Statement = Statement;    
+    TypeScript.Statement = Statement;
     var LabeledStatement = (function (_super) {
         __extends(LabeledStatement, _super);
         function LabeledStatement(labels, stmt) {
@@ -2265,7 +2265,7 @@ var TypeScript;
         };
         return LabeledStatement;
     })(Statement);
-    TypeScript.LabeledStatement = LabeledStatement;    
+    TypeScript.LabeledStatement = LabeledStatement;
     var Block = (function (_super) {
         __extends(Block, _super);
         function Block(statements, isStatementBlock) {
@@ -2319,7 +2319,7 @@ var TypeScript;
         };
         return Block;
     })(Statement);
-    TypeScript.Block = Block;    
+    TypeScript.Block = Block;
     var Jump = (function (_super) {
         __extends(Jump, _super);
         function Jump(nodeType) {
@@ -2369,7 +2369,7 @@ var TypeScript;
         };
         return Jump;
     })(Statement);
-    TypeScript.Jump = Jump;    
+    TypeScript.Jump = Jump;
     var WhileStatement = (function (_super) {
         __extends(WhileStatement, _super);
         function WhileStatement(cond) {
@@ -2422,7 +2422,7 @@ var TypeScript;
         };
         return WhileStatement;
     })(Statement);
-    TypeScript.WhileStatement = WhileStatement;    
+    TypeScript.WhileStatement = WhileStatement;
     var DoWhileStatement = (function (_super) {
         __extends(DoWhileStatement, _super);
         function DoWhileStatement() {
@@ -2479,7 +2479,7 @@ var TypeScript;
         };
         return DoWhileStatement;
     })(Statement);
-    TypeScript.DoWhileStatement = DoWhileStatement;    
+    TypeScript.DoWhileStatement = DoWhileStatement;
     var IfStatement = (function (_super) {
         __extends(IfStatement, _super);
         function IfStatement(cond) {
@@ -2560,7 +2560,7 @@ var TypeScript;
         };
         return IfStatement;
     })(Statement);
-    TypeScript.IfStatement = IfStatement;    
+    TypeScript.IfStatement = IfStatement;
     var ReturnStatement = (function (_super) {
         __extends(ReturnStatement, _super);
         function ReturnStatement() {
@@ -2593,7 +2593,7 @@ var TypeScript;
         };
         return ReturnStatement;
     })(Statement);
-    TypeScript.ReturnStatement = ReturnStatement;    
+    TypeScript.ReturnStatement = ReturnStatement;
     var EndCode = (function (_super) {
         __extends(EndCode, _super);
         function EndCode() {
@@ -2601,7 +2601,7 @@ var TypeScript;
         }
         return EndCode;
     })(AST);
-    TypeScript.EndCode = EndCode;    
+    TypeScript.EndCode = EndCode;
     var ForInStatement = (function (_super) {
         __extends(ForInStatement, _super);
         function ForInStatement(lval, obj) {
@@ -2713,7 +2713,7 @@ var TypeScript;
         };
         return ForInStatement;
     })(Statement);
-    TypeScript.ForInStatement = ForInStatement;    
+    TypeScript.ForInStatement = ForInStatement;
     var ForStatement = (function (_super) {
         __extends(ForStatement, _super);
         function ForStatement(init) {
@@ -2804,7 +2804,7 @@ var TypeScript;
         };
         return ForStatement;
     })(Statement);
-    TypeScript.ForStatement = ForStatement;    
+    TypeScript.ForStatement = ForStatement;
     var WithStatement = (function (_super) {
         __extends(WithStatement, _super);
         function WithStatement(expr) {
@@ -2832,7 +2832,7 @@ var TypeScript;
         };
         return WithStatement;
     })(Statement);
-    TypeScript.WithStatement = WithStatement;    
+    TypeScript.WithStatement = WithStatement;
     var SwitchStatement = (function (_super) {
         __extends(SwitchStatement, _super);
         function SwitchStatement(val) {
@@ -2903,7 +2903,7 @@ var TypeScript;
         };
         return SwitchStatement;
     })(Statement);
-    TypeScript.SwitchStatement = SwitchStatement;    
+    TypeScript.SwitchStatement = SwitchStatement;
     var CaseStatement = (function (_super) {
         __extends(CaseStatement, _super);
         function CaseStatement() {
@@ -2958,7 +2958,7 @@ var TypeScript;
         };
         return CaseStatement;
     })(Statement);
-    TypeScript.CaseStatement = CaseStatement;    
+    TypeScript.CaseStatement = CaseStatement;
     var TypeReference = (function (_super) {
         __extends(TypeReference, _super);
         function TypeReference(term, arrayCount) {
@@ -2987,7 +2987,7 @@ var TypeScript;
         };
         return TypeReference;
     })(AST);
-    TypeScript.TypeReference = TypeReference;    
+    TypeScript.TypeReference = TypeReference;
     var TryFinally = (function (_super) {
         __extends(TryFinally, _super);
         function TryFinally(tryNode, finallyNode) {
@@ -3033,7 +3033,7 @@ var TypeScript;
         };
         return TryFinally;
     })(Statement);
-    TypeScript.TryFinally = TryFinally;    
+    TypeScript.TryFinally = TryFinally;
     var TryCatch = (function (_super) {
         __extends(TryCatch, _super);
         function TryCatch(tryNode, catchNode) {
@@ -3085,7 +3085,7 @@ var TypeScript;
         };
         return TryCatch;
     })(Statement);
-    TypeScript.TryCatch = TryCatch;    
+    TypeScript.TryCatch = TryCatch;
     var Try = (function (_super) {
         __extends(Try, _super);
         function Try(body) {
@@ -3113,7 +3113,7 @@ var TypeScript;
         };
         return Try;
     })(Statement);
-    TypeScript.Try = Try;    
+    TypeScript.Try = Try;
     var Catch = (function (_super) {
         __extends(Catch, _super);
         function Catch(param, body) {
@@ -3180,7 +3180,7 @@ var TypeScript;
         };
         return Catch;
     })(Statement);
-    TypeScript.Catch = Catch;    
+    TypeScript.Catch = Catch;
     var Finally = (function (_super) {
         __extends(Finally, _super);
         function Finally(body) {
@@ -3208,7 +3208,7 @@ var TypeScript;
         };
         return Finally;
     })(Statement);
-    TypeScript.Finally = Finally;    
+    TypeScript.Finally = Finally;
     var Comment = (function (_super) {
         __extends(Comment, _super);
         function Comment(content, isBlockComment, endsLine) {
@@ -3429,7 +3429,7 @@ var TypeScript;
         }
         return Comment;
     })(AST);
-    TypeScript.Comment = Comment;    
+    TypeScript.Comment = Comment;
     var DebuggerStatement = (function (_super) {
         __extends(DebuggerStatement, _super);
         function DebuggerStatement() {
@@ -3444,7 +3444,7 @@ var TypeScript;
         };
         return DebuggerStatement;
     })(Statement);
-    TypeScript.DebuggerStatement = DebuggerStatement;    
+    TypeScript.DebuggerStatement = DebuggerStatement;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -3461,7 +3461,7 @@ var TypeScript;
         };
         return AstWalkOptions;
     })();
-    TypeScript.AstWalkOptions = AstWalkOptions;    
+    TypeScript.AstWalkOptions = AstWalkOptions;
     var AstWalker = (function () {
         function AstWalker(childrenWalkers, pre, post, options, state) {
             this.childrenWalkers = childrenWalkers;
@@ -3494,7 +3494,7 @@ var TypeScript;
             }
         };
         return AstWalker;
-    })();    
+    })();
     var AstWalkerFactory = (function () {
         function AstWalkerFactory() {
             this.childrenWalkers = [];
@@ -3628,7 +3628,7 @@ var TypeScript;
         };
         return AstWalkerFactory;
     })();
-    TypeScript.AstWalkerFactory = AstWalkerFactory;    
+    TypeScript.AstWalkerFactory = AstWalkerFactory;
     var globalAstWalkerFactory;
     function getAstWalkerFactory() {
         if(!globalAstWalkerFactory) {
@@ -4209,7 +4209,7 @@ var TypeScript;
         };
         return AstPath;
     })();
-    TypeScript.AstPath = AstPath;    
+    TypeScript.AstPath = AstPath;
     function isValidAstNode(ast) {
         if(ast === null) {
             return false;
@@ -4226,7 +4226,7 @@ var TypeScript;
         }
         return AstPathContext;
     })();
-    TypeScript.AstPathContext = AstPathContext;    
+    TypeScript.AstPathContext = AstPathContext;
     (function (GetAstPathOptions) {
         GetAstPathOptions._map = [];
         GetAstPathOptions.Default = 0;
@@ -4393,7 +4393,7 @@ var TypeScript;
         };
         return AstLogger;
     })();
-    TypeScript.AstLogger = AstLogger;    
+    TypeScript.AstLogger = AstLogger;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -4571,7 +4571,7 @@ var TypeScript;
         };
         return Binder;
     })();
-    TypeScript.Binder = Binder;    
+    TypeScript.Binder = Binder;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -4592,7 +4592,7 @@ var TypeScript;
             }
         }
         return Base64Format;
-    })();    
+    })();
     var Base64VLQFormat = (function () {
         function Base64VLQFormat() { }
         Base64VLQFormat.encode = function encode(inValue) {
@@ -4639,7 +4639,7 @@ var TypeScript;
         }
         return Base64VLQFormat;
     })();
-    TypeScript.Base64VLQFormat = Base64VLQFormat;    
+    TypeScript.Base64VLQFormat = Base64VLQFormat;
 })(TypeScript || (TypeScript = {}));
 var JSON2 = {
 };
@@ -4803,7 +4803,7 @@ var TypeScript;
         function SourceMapPosition() { }
         return SourceMapPosition;
     })();
-    TypeScript.SourceMapPosition = SourceMapPosition;    
+    TypeScript.SourceMapPosition = SourceMapPosition;
     var SourceMapping = (function () {
         function SourceMapping() {
             this.start = new SourceMapPosition();
@@ -4813,7 +4813,7 @@ var TypeScript;
         }
         return SourceMapping;
     })();
-    TypeScript.SourceMapping = SourceMapping;    
+    TypeScript.SourceMapping = SourceMapping;
     var SourceMapper = (function () {
         function SourceMapper(tsFileName, jsFileName, jsFile, sourceMapOut, errorReporter) {
             this.jsFile = jsFile;
@@ -4913,7 +4913,7 @@ var TypeScript;
         }
         return SourceMapper;
     })();
-    TypeScript.SourceMapper = SourceMapper;    
+    TypeScript.SourceMapper = SourceMapper;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -4947,7 +4947,7 @@ var TypeScript;
         }
         return EmitState;
     })();
-    TypeScript.EmitState = EmitState;    
+    TypeScript.EmitState = EmitState;
     var EmitOptions = (function () {
         function EmitOptions(settings) {
             this.ioHost = null;
@@ -4972,7 +4972,7 @@ var TypeScript;
         };
         return EmitOptions;
     })();
-    TypeScript.EmitOptions = EmitOptions;    
+    TypeScript.EmitOptions = EmitOptions;
     var Indenter = (function () {
         function Indenter() {
             this.indentAmt = 0;
@@ -4999,7 +4999,7 @@ var TypeScript;
         };
         return Indenter;
     })();
-    TypeScript.Indenter = Indenter;    
+    TypeScript.Indenter = Indenter;
     var Emitter = (function () {
         function Emitter(checker, emittingFileName, outfile, emitOptions, errorReporter) {
             this.checker = checker;
@@ -6354,7 +6354,7 @@ var TypeScript;
         };
         return Emitter;
     })();
-    TypeScript.Emitter = Emitter;    
+    TypeScript.Emitter = Emitter;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -6520,7 +6520,7 @@ var TypeScript;
         };
         return ErrorReporter;
     })();
-    TypeScript.ErrorReporter = ErrorReporter;    
+    TypeScript.ErrorReporter = ErrorReporter;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -6571,7 +6571,7 @@ var TypeScript;
         }
         return QuickParseResult;
     })();
-    TypeScript.QuickParseResult = QuickParseResult;    
+    TypeScript.QuickParseResult = QuickParseResult;
     var Parser = (function () {
         function Parser() {
             this.varLists = [];
@@ -10176,7 +10176,7 @@ var TypeScript;
         };
         return Parser;
     })();
-    TypeScript.Parser = Parser;    
+    TypeScript.Parser = Parser;
     function quickParse(logger, scopeStartAST, sourceText, minChar, limChar, errorCapture) {
         var fragment = sourceText.getText(minChar, limChar);
         logger.log("Quick parse range (" + minChar + "," + limChar + "): \"" + TypeScript.stringToLiteral(fragment, 100) + "\"");
@@ -10231,7 +10231,7 @@ var TypeScript;
         };
         return PrintContext;
     })();
-    TypeScript.PrintContext = PrintContext;    
+    TypeScript.PrintContext = PrintContext;
     function prePrintAST(ast, parent, walker) {
         var pc = walker.state;
         ast.print(pc);
@@ -10309,1959 +10309,1959 @@ var TypeScript;
     var autoToken = new Array(TypeScript.LexCodeASCIIChars);
     var lexIdStartTable = new Array(TypeScript.LexCodeASCIIChars);
     var unicodeES3IdStart = [
-        170, 
-        170, 
-        181, 
-        181, 
-        186, 
-        186, 
-        192, 
-        214, 
-        216, 
-        246, 
-        248, 
-        543, 
-        546, 
-        563, 
-        592, 
-        685, 
-        688, 
-        696, 
-        699, 
-        705, 
-        720, 
-        721, 
-        736, 
-        740, 
-        750, 
-        750, 
-        890, 
-        890, 
-        902, 
-        902, 
-        904, 
-        906, 
-        908, 
-        908, 
-        910, 
-        929, 
-        931, 
-        974, 
-        976, 
-        983, 
-        986, 
-        1011, 
-        1024, 
-        1153, 
-        1164, 
-        1220, 
-        1223, 
-        1224, 
-        1227, 
-        1228, 
-        1232, 
-        1269, 
-        1272, 
-        1273, 
-        1329, 
-        1366, 
-        1369, 
-        1369, 
-        1377, 
-        1415, 
-        1488, 
-        1514, 
-        1520, 
-        1522, 
-        1569, 
-        1594, 
-        1600, 
-        1610, 
-        1649, 
-        1747, 
-        1749, 
-        1749, 
-        1765, 
-        1766, 
-        1786, 
-        1788, 
-        1808, 
-        1808, 
-        1810, 
-        1836, 
-        1920, 
-        1957, 
-        2309, 
-        2361, 
-        2365, 
-        2365, 
-        2384, 
-        2384, 
-        2392, 
-        2401, 
-        2437, 
-        2444, 
-        2447, 
-        2448, 
-        2451, 
-        2472, 
-        2474, 
-        2480, 
-        2482, 
-        2482, 
-        2486, 
-        2489, 
-        2524, 
-        2525, 
-        2527, 
-        2529, 
-        2544, 
-        2545, 
-        2565, 
-        2570, 
-        2575, 
-        2576, 
-        2579, 
-        2600, 
-        2602, 
-        2608, 
-        2610, 
-        2611, 
-        2613, 
-        2614, 
-        2616, 
-        2617, 
-        2649, 
-        2652, 
-        2654, 
-        2654, 
-        2674, 
-        2676, 
-        2693, 
-        2699, 
-        2701, 
-        2701, 
-        2703, 
-        2705, 
-        2707, 
-        2728, 
-        2730, 
-        2736, 
-        2738, 
-        2739, 
-        2741, 
-        2745, 
-        2749, 
-        2749, 
-        2768, 
-        2768, 
-        2784, 
-        2784, 
-        2821, 
-        2828, 
-        2831, 
-        2832, 
-        2835, 
-        2856, 
-        2858, 
-        2864, 
-        2866, 
-        2867, 
-        2870, 
-        2873, 
-        2877, 
-        2877, 
-        2908, 
-        2909, 
-        2911, 
-        2913, 
-        2949, 
-        2954, 
-        2958, 
-        2960, 
-        2962, 
-        2965, 
-        2969, 
-        2970, 
-        2972, 
-        2972, 
-        2974, 
-        2975, 
-        2979, 
-        2980, 
-        2984, 
-        2986, 
-        2990, 
-        2997, 
-        2999, 
-        3001, 
-        3077, 
-        3084, 
-        3086, 
-        3088, 
-        3090, 
-        3112, 
-        3114, 
-        3123, 
-        3125, 
-        3129, 
-        3168, 
-        3169, 
-        3205, 
-        3212, 
-        3214, 
-        3216, 
-        3218, 
-        3240, 
-        3242, 
-        3251, 
-        3253, 
-        3257, 
-        3294, 
-        3294, 
-        3296, 
-        3297, 
-        3333, 
-        3340, 
-        3342, 
-        3344, 
-        3346, 
-        3368, 
-        3370, 
-        3385, 
-        3424, 
-        3425, 
-        3461, 
-        3478, 
-        3482, 
-        3505, 
-        3507, 
-        3515, 
-        3517, 
-        3517, 
-        3520, 
-        3526, 
-        3585, 
-        3632, 
-        3634, 
-        3635, 
-        3648, 
-        3654, 
-        3713, 
-        3714, 
-        3716, 
-        3716, 
-        3719, 
-        3720, 
-        3722, 
-        3722, 
-        3725, 
-        3725, 
-        3732, 
-        3735, 
-        3737, 
-        3743, 
-        3745, 
-        3747, 
-        3749, 
-        3749, 
-        3751, 
-        3751, 
-        3754, 
-        3755, 
-        3757, 
-        3760, 
-        3762, 
-        3763, 
-        3773, 
-        3773, 
-        3776, 
-        3780, 
-        3782, 
-        3782, 
-        3804, 
-        3805, 
-        3840, 
-        3840, 
-        3904, 
-        3911, 
-        3913, 
-        3946, 
-        3976, 
-        3979, 
-        4096, 
-        4129, 
-        4131, 
-        4135, 
-        4137, 
-        4138, 
-        4176, 
-        4181, 
-        4256, 
-        4293, 
-        4304, 
-        4342, 
-        4352, 
-        4441, 
-        4447, 
-        4514, 
-        4520, 
-        4601, 
-        4608, 
-        4614, 
-        4616, 
-        4678, 
-        4680, 
-        4680, 
-        4682, 
-        4685, 
-        4688, 
-        4694, 
-        4696, 
-        4696, 
-        4698, 
-        4701, 
-        4704, 
-        4742, 
-        4744, 
-        4744, 
-        4746, 
-        4749, 
-        4752, 
-        4782, 
-        4784, 
-        4784, 
-        4786, 
-        4789, 
-        4792, 
-        4798, 
-        4800, 
-        4800, 
-        4802, 
-        4805, 
-        4808, 
-        4814, 
-        4816, 
-        4822, 
-        4824, 
-        4846, 
-        4848, 
-        4878, 
-        4880, 
-        4880, 
-        4882, 
-        4885, 
-        4888, 
-        4894, 
-        4896, 
-        4934, 
-        4936, 
-        4954, 
-        5024, 
-        5108, 
-        5121, 
-        5740, 
-        5743, 
-        5750, 
-        5761, 
-        5786, 
-        5792, 
-        5866, 
-        6016, 
-        6067, 
-        6176, 
-        6263, 
-        6272, 
-        6312, 
-        7680, 
-        7835, 
-        7840, 
-        7929, 
-        7936, 
-        7957, 
-        7960, 
-        7965, 
-        7968, 
-        8005, 
-        8008, 
-        8013, 
-        8016, 
-        8023, 
-        8025, 
-        8025, 
-        8027, 
-        8027, 
-        8029, 
-        8029, 
-        8031, 
-        8061, 
-        8064, 
-        8116, 
-        8118, 
-        8124, 
-        8126, 
-        8126, 
-        8130, 
-        8132, 
-        8134, 
-        8140, 
-        8144, 
-        8147, 
-        8150, 
-        8155, 
-        8160, 
-        8172, 
-        8178, 
-        8180, 
-        8182, 
-        8188, 
-        8319, 
-        8319, 
-        8450, 
-        8450, 
-        8455, 
-        8455, 
-        8458, 
-        8467, 
-        8469, 
-        8469, 
-        8473, 
-        8477, 
-        8484, 
-        8484, 
-        8486, 
-        8486, 
-        8488, 
-        8488, 
-        8490, 
-        8493, 
-        8495, 
-        8497, 
-        8499, 
-        8505, 
-        8544, 
-        8579, 
-        12293, 
-        12295, 
-        12321, 
-        12329, 
-        12337, 
-        12341, 
-        12344, 
-        12346, 
-        12353, 
-        12436, 
-        12445, 
-        12446, 
-        12449, 
-        12538, 
-        12540, 
-        12542, 
-        12549, 
-        12588, 
-        12593, 
-        12686, 
-        12704, 
-        12727, 
-        13312, 
-        13312, 
-        19893, 
-        19893, 
-        19968, 
-        19968, 
-        40869, 
-        40869, 
-        40960, 
-        42124, 
-        44032, 
-        44032, 
-        55203, 
-        55203, 
-        63744, 
-        64045, 
-        64256, 
-        64262, 
-        64275, 
-        64279, 
-        64285, 
-        64285, 
-        64287, 
-        64296, 
-        64298, 
-        64310, 
-        64312, 
-        64316, 
-        64318, 
-        64318, 
-        64320, 
-        64321, 
-        64323, 
-        64324, 
-        64326, 
-        64433, 
-        64467, 
-        64829, 
-        64848, 
-        64911, 
-        64914, 
-        64967, 
-        65008, 
-        65019, 
-        65136, 
-        65138, 
-        65140, 
-        65140, 
-        65142, 
-        65276, 
-        65313, 
-        65338, 
-        65345, 
-        65370, 
-        65382, 
-        65470, 
-        65474, 
-        65479, 
-        65482, 
-        65487, 
-        65490, 
-        65495, 
-        65498, 
+        170,
+        170,
+        181,
+        181,
+        186,
+        186,
+        192,
+        214,
+        216,
+        246,
+        248,
+        543,
+        546,
+        563,
+        592,
+        685,
+        688,
+        696,
+        699,
+        705,
+        720,
+        721,
+        736,
+        740,
+        750,
+        750,
+        890,
+        890,
+        902,
+        902,
+        904,
+        906,
+        908,
+        908,
+        910,
+        929,
+        931,
+        974,
+        976,
+        983,
+        986,
+        1011,
+        1024,
+        1153,
+        1164,
+        1220,
+        1223,
+        1224,
+        1227,
+        1228,
+        1232,
+        1269,
+        1272,
+        1273,
+        1329,
+        1366,
+        1369,
+        1369,
+        1377,
+        1415,
+        1488,
+        1514,
+        1520,
+        1522,
+        1569,
+        1594,
+        1600,
+        1610,
+        1649,
+        1747,
+        1749,
+        1749,
+        1765,
+        1766,
+        1786,
+        1788,
+        1808,
+        1808,
+        1810,
+        1836,
+        1920,
+        1957,
+        2309,
+        2361,
+        2365,
+        2365,
+        2384,
+        2384,
+        2392,
+        2401,
+        2437,
+        2444,
+        2447,
+        2448,
+        2451,
+        2472,
+        2474,
+        2480,
+        2482,
+        2482,
+        2486,
+        2489,
+        2524,
+        2525,
+        2527,
+        2529,
+        2544,
+        2545,
+        2565,
+        2570,
+        2575,
+        2576,
+        2579,
+        2600,
+        2602,
+        2608,
+        2610,
+        2611,
+        2613,
+        2614,
+        2616,
+        2617,
+        2649,
+        2652,
+        2654,
+        2654,
+        2674,
+        2676,
+        2693,
+        2699,
+        2701,
+        2701,
+        2703,
+        2705,
+        2707,
+        2728,
+        2730,
+        2736,
+        2738,
+        2739,
+        2741,
+        2745,
+        2749,
+        2749,
+        2768,
+        2768,
+        2784,
+        2784,
+        2821,
+        2828,
+        2831,
+        2832,
+        2835,
+        2856,
+        2858,
+        2864,
+        2866,
+        2867,
+        2870,
+        2873,
+        2877,
+        2877,
+        2908,
+        2909,
+        2911,
+        2913,
+        2949,
+        2954,
+        2958,
+        2960,
+        2962,
+        2965,
+        2969,
+        2970,
+        2972,
+        2972,
+        2974,
+        2975,
+        2979,
+        2980,
+        2984,
+        2986,
+        2990,
+        2997,
+        2999,
+        3001,
+        3077,
+        3084,
+        3086,
+        3088,
+        3090,
+        3112,
+        3114,
+        3123,
+        3125,
+        3129,
+        3168,
+        3169,
+        3205,
+        3212,
+        3214,
+        3216,
+        3218,
+        3240,
+        3242,
+        3251,
+        3253,
+        3257,
+        3294,
+        3294,
+        3296,
+        3297,
+        3333,
+        3340,
+        3342,
+        3344,
+        3346,
+        3368,
+        3370,
+        3385,
+        3424,
+        3425,
+        3461,
+        3478,
+        3482,
+        3505,
+        3507,
+        3515,
+        3517,
+        3517,
+        3520,
+        3526,
+        3585,
+        3632,
+        3634,
+        3635,
+        3648,
+        3654,
+        3713,
+        3714,
+        3716,
+        3716,
+        3719,
+        3720,
+        3722,
+        3722,
+        3725,
+        3725,
+        3732,
+        3735,
+        3737,
+        3743,
+        3745,
+        3747,
+        3749,
+        3749,
+        3751,
+        3751,
+        3754,
+        3755,
+        3757,
+        3760,
+        3762,
+        3763,
+        3773,
+        3773,
+        3776,
+        3780,
+        3782,
+        3782,
+        3804,
+        3805,
+        3840,
+        3840,
+        3904,
+        3911,
+        3913,
+        3946,
+        3976,
+        3979,
+        4096,
+        4129,
+        4131,
+        4135,
+        4137,
+        4138,
+        4176,
+        4181,
+        4256,
+        4293,
+        4304,
+        4342,
+        4352,
+        4441,
+        4447,
+        4514,
+        4520,
+        4601,
+        4608,
+        4614,
+        4616,
+        4678,
+        4680,
+        4680,
+        4682,
+        4685,
+        4688,
+        4694,
+        4696,
+        4696,
+        4698,
+        4701,
+        4704,
+        4742,
+        4744,
+        4744,
+        4746,
+        4749,
+        4752,
+        4782,
+        4784,
+        4784,
+        4786,
+        4789,
+        4792,
+        4798,
+        4800,
+        4800,
+        4802,
+        4805,
+        4808,
+        4814,
+        4816,
+        4822,
+        4824,
+        4846,
+        4848,
+        4878,
+        4880,
+        4880,
+        4882,
+        4885,
+        4888,
+        4894,
+        4896,
+        4934,
+        4936,
+        4954,
+        5024,
+        5108,
+        5121,
+        5740,
+        5743,
+        5750,
+        5761,
+        5786,
+        5792,
+        5866,
+        6016,
+        6067,
+        6176,
+        6263,
+        6272,
+        6312,
+        7680,
+        7835,
+        7840,
+        7929,
+        7936,
+        7957,
+        7960,
+        7965,
+        7968,
+        8005,
+        8008,
+        8013,
+        8016,
+        8023,
+        8025,
+        8025,
+        8027,
+        8027,
+        8029,
+        8029,
+        8031,
+        8061,
+        8064,
+        8116,
+        8118,
+        8124,
+        8126,
+        8126,
+        8130,
+        8132,
+        8134,
+        8140,
+        8144,
+        8147,
+        8150,
+        8155,
+        8160,
+        8172,
+        8178,
+        8180,
+        8182,
+        8188,
+        8319,
+        8319,
+        8450,
+        8450,
+        8455,
+        8455,
+        8458,
+        8467,
+        8469,
+        8469,
+        8473,
+        8477,
+        8484,
+        8484,
+        8486,
+        8486,
+        8488,
+        8488,
+        8490,
+        8493,
+        8495,
+        8497,
+        8499,
+        8505,
+        8544,
+        8579,
+        12293,
+        12295,
+        12321,
+        12329,
+        12337,
+        12341,
+        12344,
+        12346,
+        12353,
+        12436,
+        12445,
+        12446,
+        12449,
+        12538,
+        12540,
+        12542,
+        12549,
+        12588,
+        12593,
+        12686,
+        12704,
+        12727,
+        13312,
+        13312,
+        19893,
+        19893,
+        19968,
+        19968,
+        40869,
+        40869,
+        40960,
+        42124,
+        44032,
+        44032,
+        55203,
+        55203,
+        63744,
+        64045,
+        64256,
+        64262,
+        64275,
+        64279,
+        64285,
+        64285,
+        64287,
+        64296,
+        64298,
+        64310,
+        64312,
+        64316,
+        64318,
+        64318,
+        64320,
+        64321,
+        64323,
+        64324,
+        64326,
+        64433,
+        64467,
+        64829,
+        64848,
+        64911,
+        64914,
+        64967,
+        65008,
+        65019,
+        65136,
+        65138,
+        65140,
+        65140,
+        65142,
+        65276,
+        65313,
+        65338,
+        65345,
+        65370,
+        65382,
+        65470,
+        65474,
+        65479,
+        65482,
+        65487,
+        65490,
+        65495,
+        65498,
         65500
     ];
     var unicodeES3IdCont = [
-        768, 
-        846, 
-        864, 
-        866, 
-        1155, 
-        1158, 
-        1425, 
-        1441, 
-        1443, 
-        1465, 
-        1467, 
-        1469, 
-        1471, 
-        1471, 
-        1473, 
-        1474, 
-        1476, 
-        1476, 
-        1611, 
-        1621, 
-        1632, 
-        1641, 
-        1648, 
-        1648, 
-        1750, 
-        1756, 
-        1759, 
-        1764, 
-        1767, 
-        1768, 
-        1770, 
-        1773, 
-        1776, 
-        1785, 
-        1809, 
-        1809, 
-        1840, 
-        1866, 
-        1958, 
-        1968, 
-        2305, 
-        2307, 
-        2364, 
-        2364, 
-        2366, 
-        2381, 
-        2385, 
-        2388, 
-        2402, 
-        2403, 
-        2406, 
-        2415, 
-        2433, 
-        2435, 
-        2492, 
-        2492, 
-        2494, 
-        2500, 
-        2503, 
-        2504, 
-        2507, 
-        2509, 
-        2519, 
-        2519, 
-        2530, 
-        2531, 
-        2534, 
-        2543, 
-        2562, 
-        2562, 
-        2620, 
-        2620, 
-        2622, 
-        2626, 
-        2631, 
-        2632, 
-        2635, 
-        2637, 
-        2662, 
-        2673, 
-        2689, 
-        2691, 
-        2748, 
-        2748, 
-        2750, 
-        2757, 
-        2759, 
-        2761, 
-        2763, 
-        2765, 
-        2790, 
-        2799, 
-        2817, 
-        2819, 
-        2876, 
-        2876, 
-        2878, 
-        2883, 
-        2887, 
-        2888, 
-        2891, 
-        2893, 
-        2902, 
-        2903, 
-        2918, 
-        2927, 
-        2946, 
-        2947, 
-        3006, 
-        3010, 
-        3014, 
-        3016, 
-        3018, 
-        3021, 
-        3031, 
-        3031, 
-        3047, 
-        3055, 
-        3073, 
-        3075, 
-        3134, 
-        3140, 
-        3142, 
-        3144, 
-        3146, 
-        3149, 
-        3157, 
-        3158, 
-        3174, 
-        3183, 
-        3202, 
-        3203, 
-        3262, 
-        3268, 
-        3270, 
-        3272, 
-        3274, 
-        3277, 
-        3285, 
-        3286, 
-        3302, 
-        3311, 
-        3330, 
-        3331, 
-        3390, 
-        3395, 
-        3398, 
-        3400, 
-        3402, 
-        3405, 
-        3415, 
-        3415, 
-        3430, 
-        3439, 
-        3458, 
-        3459, 
-        3530, 
-        3530, 
-        3535, 
-        3540, 
-        3542, 
-        3542, 
-        3544, 
-        3551, 
-        3570, 
-        3571, 
-        3633, 
-        3633, 
-        3636, 
-        3642, 
-        3655, 
-        3662, 
-        3664, 
-        3673, 
-        3761, 
-        3761, 
-        3764, 
-        3769, 
-        3771, 
-        3772, 
-        3784, 
-        3789, 
-        3792, 
-        3801, 
-        3864, 
-        3865, 
-        3872, 
-        3881, 
-        3893, 
-        3893, 
-        3895, 
-        3895, 
-        3897, 
-        3897, 
-        3902, 
-        3903, 
-        3953, 
-        3972, 
-        3974, 
-        3975, 
-        3984, 
-        3991, 
-        3993, 
-        4028, 
-        4038, 
-        4038, 
-        4140, 
-        4146, 
-        4150, 
-        4153, 
-        4160, 
-        4169, 
-        4182, 
-        4185, 
-        4969, 
-        4977, 
-        6068, 
-        6099, 
-        6112, 
-        6121, 
-        6160, 
-        6169, 
-        6313, 
-        6313, 
-        8255, 
-        8256, 
-        8400, 
-        8412, 
-        8417, 
-        8417, 
-        12330, 
-        12335, 
-        12441, 
-        12442, 
-        12539, 
-        12539, 
-        64286, 
-        64286, 
-        65056, 
-        65059, 
-        65075, 
-        65076, 
-        65101, 
-        65103, 
-        65296, 
-        65305, 
-        65343, 
-        65343, 
-        65381, 
+        768,
+        846,
+        864,
+        866,
+        1155,
+        1158,
+        1425,
+        1441,
+        1443,
+        1465,
+        1467,
+        1469,
+        1471,
+        1471,
+        1473,
+        1474,
+        1476,
+        1476,
+        1611,
+        1621,
+        1632,
+        1641,
+        1648,
+        1648,
+        1750,
+        1756,
+        1759,
+        1764,
+        1767,
+        1768,
+        1770,
+        1773,
+        1776,
+        1785,
+        1809,
+        1809,
+        1840,
+        1866,
+        1958,
+        1968,
+        2305,
+        2307,
+        2364,
+        2364,
+        2366,
+        2381,
+        2385,
+        2388,
+        2402,
+        2403,
+        2406,
+        2415,
+        2433,
+        2435,
+        2492,
+        2492,
+        2494,
+        2500,
+        2503,
+        2504,
+        2507,
+        2509,
+        2519,
+        2519,
+        2530,
+        2531,
+        2534,
+        2543,
+        2562,
+        2562,
+        2620,
+        2620,
+        2622,
+        2626,
+        2631,
+        2632,
+        2635,
+        2637,
+        2662,
+        2673,
+        2689,
+        2691,
+        2748,
+        2748,
+        2750,
+        2757,
+        2759,
+        2761,
+        2763,
+        2765,
+        2790,
+        2799,
+        2817,
+        2819,
+        2876,
+        2876,
+        2878,
+        2883,
+        2887,
+        2888,
+        2891,
+        2893,
+        2902,
+        2903,
+        2918,
+        2927,
+        2946,
+        2947,
+        3006,
+        3010,
+        3014,
+        3016,
+        3018,
+        3021,
+        3031,
+        3031,
+        3047,
+        3055,
+        3073,
+        3075,
+        3134,
+        3140,
+        3142,
+        3144,
+        3146,
+        3149,
+        3157,
+        3158,
+        3174,
+        3183,
+        3202,
+        3203,
+        3262,
+        3268,
+        3270,
+        3272,
+        3274,
+        3277,
+        3285,
+        3286,
+        3302,
+        3311,
+        3330,
+        3331,
+        3390,
+        3395,
+        3398,
+        3400,
+        3402,
+        3405,
+        3415,
+        3415,
+        3430,
+        3439,
+        3458,
+        3459,
+        3530,
+        3530,
+        3535,
+        3540,
+        3542,
+        3542,
+        3544,
+        3551,
+        3570,
+        3571,
+        3633,
+        3633,
+        3636,
+        3642,
+        3655,
+        3662,
+        3664,
+        3673,
+        3761,
+        3761,
+        3764,
+        3769,
+        3771,
+        3772,
+        3784,
+        3789,
+        3792,
+        3801,
+        3864,
+        3865,
+        3872,
+        3881,
+        3893,
+        3893,
+        3895,
+        3895,
+        3897,
+        3897,
+        3902,
+        3903,
+        3953,
+        3972,
+        3974,
+        3975,
+        3984,
+        3991,
+        3993,
+        4028,
+        4038,
+        4038,
+        4140,
+        4146,
+        4150,
+        4153,
+        4160,
+        4169,
+        4182,
+        4185,
+        4969,
+        4977,
+        6068,
+        6099,
+        6112,
+        6121,
+        6160,
+        6169,
+        6313,
+        6313,
+        8255,
+        8256,
+        8400,
+        8412,
+        8417,
+        8417,
+        12330,
+        12335,
+        12441,
+        12442,
+        12539,
+        12539,
+        64286,
+        64286,
+        65056,
+        65059,
+        65075,
+        65076,
+        65101,
+        65103,
+        65296,
+        65305,
+        65343,
+        65343,
+        65381,
         65381
     ];
     var unicodeES5IdStart = [
-        170, 
-        170, 
-        181, 
-        181, 
-        186, 
-        186, 
-        192, 
-        214, 
-        216, 
-        246, 
-        248, 
-        705, 
-        710, 
-        721, 
-        736, 
-        740, 
-        748, 
-        748, 
-        750, 
-        750, 
-        880, 
-        884, 
-        886, 
-        887, 
-        890, 
-        893, 
-        902, 
-        902, 
-        904, 
-        906, 
-        908, 
-        908, 
-        910, 
-        929, 
-        931, 
-        1013, 
-        1015, 
-        1153, 
-        1162, 
-        1319, 
-        1329, 
-        1366, 
-        1369, 
-        1369, 
-        1377, 
-        1415, 
-        1488, 
-        1514, 
-        1520, 
-        1522, 
-        1568, 
-        1610, 
-        1646, 
-        1647, 
-        1649, 
-        1747, 
-        1749, 
-        1749, 
-        1765, 
-        1766, 
-        1774, 
-        1775, 
-        1786, 
-        1788, 
-        1791, 
-        1791, 
-        1808, 
-        1808, 
-        1810, 
-        1839, 
-        1869, 
-        1957, 
-        1969, 
-        1969, 
-        1994, 
-        2026, 
-        2036, 
-        2037, 
-        2042, 
-        2042, 
-        2048, 
-        2069, 
-        2074, 
-        2074, 
-        2084, 
-        2084, 
-        2088, 
-        2088, 
-        2112, 
-        2136, 
-        2208, 
-        2208, 
-        2210, 
-        2220, 
-        2308, 
-        2361, 
-        2365, 
-        2365, 
-        2384, 
-        2384, 
-        2392, 
-        2401, 
-        2417, 
-        2423, 
-        2425, 
-        2431, 
-        2437, 
-        2444, 
-        2447, 
-        2448, 
-        2451, 
-        2472, 
-        2474, 
-        2480, 
-        2482, 
-        2482, 
-        2486, 
-        2489, 
-        2493, 
-        2493, 
-        2510, 
-        2510, 
-        2524, 
-        2525, 
-        2527, 
-        2529, 
-        2544, 
-        2545, 
-        2565, 
-        2570, 
-        2575, 
-        2576, 
-        2579, 
-        2600, 
-        2602, 
-        2608, 
-        2610, 
-        2611, 
-        2613, 
-        2614, 
-        2616, 
-        2617, 
-        2649, 
-        2652, 
-        2654, 
-        2654, 
-        2674, 
-        2676, 
-        2693, 
-        2701, 
-        2703, 
-        2705, 
-        2707, 
-        2728, 
-        2730, 
-        2736, 
-        2738, 
-        2739, 
-        2741, 
-        2745, 
-        2749, 
-        2749, 
-        2768, 
-        2768, 
-        2784, 
-        2785, 
-        2821, 
-        2828, 
-        2831, 
-        2832, 
-        2835, 
-        2856, 
-        2858, 
-        2864, 
-        2866, 
-        2867, 
-        2869, 
-        2873, 
-        2877, 
-        2877, 
-        2908, 
-        2909, 
-        2911, 
-        2913, 
-        2929, 
-        2929, 
-        2947, 
-        2947, 
-        2949, 
-        2954, 
-        2958, 
-        2960, 
-        2962, 
-        2965, 
-        2969, 
-        2970, 
-        2972, 
-        2972, 
-        2974, 
-        2975, 
-        2979, 
-        2980, 
-        2984, 
-        2986, 
-        2990, 
-        3001, 
-        3024, 
-        3024, 
-        3077, 
-        3084, 
-        3086, 
-        3088, 
-        3090, 
-        3112, 
-        3114, 
-        3123, 
-        3125, 
-        3129, 
-        3133, 
-        3133, 
-        3160, 
-        3161, 
-        3168, 
-        3169, 
-        3205, 
-        3212, 
-        3214, 
-        3216, 
-        3218, 
-        3240, 
-        3242, 
-        3251, 
-        3253, 
-        3257, 
-        3261, 
-        3261, 
-        3294, 
-        3294, 
-        3296, 
-        3297, 
-        3313, 
-        3314, 
-        3333, 
-        3340, 
-        3342, 
-        3344, 
-        3346, 
-        3386, 
-        3389, 
-        3389, 
-        3406, 
-        3406, 
-        3424, 
-        3425, 
-        3450, 
-        3455, 
-        3461, 
-        3478, 
-        3482, 
-        3505, 
-        3507, 
-        3515, 
-        3517, 
-        3517, 
-        3520, 
-        3526, 
-        3585, 
-        3632, 
-        3634, 
-        3635, 
-        3648, 
-        3654, 
-        3713, 
-        3714, 
-        3716, 
-        3716, 
-        3719, 
-        3720, 
-        3722, 
-        3722, 
-        3725, 
-        3725, 
-        3732, 
-        3735, 
-        3737, 
-        3743, 
-        3745, 
-        3747, 
-        3749, 
-        3749, 
-        3751, 
-        3751, 
-        3754, 
-        3755, 
-        3757, 
-        3760, 
-        3762, 
-        3763, 
-        3773, 
-        3773, 
-        3776, 
-        3780, 
-        3782, 
-        3782, 
-        3804, 
-        3807, 
-        3840, 
-        3840, 
-        3904, 
-        3911, 
-        3913, 
-        3948, 
-        3976, 
-        3980, 
-        4096, 
-        4138, 
-        4159, 
-        4159, 
-        4176, 
-        4181, 
-        4186, 
-        4189, 
-        4193, 
-        4193, 
-        4197, 
-        4198, 
-        4206, 
-        4208, 
-        4213, 
-        4225, 
-        4238, 
-        4238, 
-        4256, 
-        4293, 
-        4295, 
-        4295, 
-        4301, 
-        4301, 
-        4304, 
-        4346, 
-        4348, 
-        4680, 
-        4682, 
-        4685, 
-        4688, 
-        4694, 
-        4696, 
-        4696, 
-        4698, 
-        4701, 
-        4704, 
-        4744, 
-        4746, 
-        4749, 
-        4752, 
-        4784, 
-        4786, 
-        4789, 
-        4792, 
-        4798, 
-        4800, 
-        4800, 
-        4802, 
-        4805, 
-        4808, 
-        4822, 
-        4824, 
-        4880, 
-        4882, 
-        4885, 
-        4888, 
-        4954, 
-        4992, 
-        5007, 
-        5024, 
-        5108, 
-        5121, 
-        5740, 
-        5743, 
-        5759, 
-        5761, 
-        5786, 
-        5792, 
-        5866, 
-        5870, 
-        5872, 
-        5888, 
-        5900, 
-        5902, 
-        5905, 
-        5920, 
-        5937, 
-        5952, 
-        5969, 
-        5984, 
-        5996, 
-        5998, 
-        6000, 
-        6016, 
-        6067, 
-        6103, 
-        6103, 
-        6108, 
-        6108, 
-        6176, 
-        6263, 
-        6272, 
-        6312, 
-        6314, 
-        6314, 
-        6320, 
-        6389, 
-        6400, 
-        6428, 
-        6480, 
-        6509, 
-        6512, 
-        6516, 
-        6528, 
-        6571, 
-        6593, 
-        6599, 
-        6656, 
-        6678, 
-        6688, 
-        6740, 
-        6823, 
-        6823, 
-        6917, 
-        6963, 
-        6981, 
-        6987, 
-        7043, 
-        7072, 
-        7086, 
-        7087, 
-        7098, 
-        7141, 
-        7168, 
-        7203, 
-        7245, 
-        7247, 
-        7258, 
-        7293, 
-        7401, 
-        7404, 
-        7406, 
-        7409, 
-        7413, 
-        7414, 
-        7424, 
-        7615, 
-        7680, 
-        7957, 
-        7960, 
-        7965, 
-        7968, 
-        8005, 
-        8008, 
-        8013, 
-        8016, 
-        8023, 
-        8025, 
-        8025, 
-        8027, 
-        8027, 
-        8029, 
-        8029, 
-        8031, 
-        8061, 
-        8064, 
-        8116, 
-        8118, 
-        8124, 
-        8126, 
-        8126, 
-        8130, 
-        8132, 
-        8134, 
-        8140, 
-        8144, 
-        8147, 
-        8150, 
-        8155, 
-        8160, 
-        8172, 
-        8178, 
-        8180, 
-        8182, 
-        8188, 
-        8305, 
-        8305, 
-        8319, 
-        8319, 
-        8336, 
-        8348, 
-        8450, 
-        8450, 
-        8455, 
-        8455, 
-        8458, 
-        8467, 
-        8469, 
-        8469, 
-        8473, 
-        8477, 
-        8484, 
-        8484, 
-        8486, 
-        8486, 
-        8488, 
-        8488, 
-        8490, 
-        8493, 
-        8495, 
-        8505, 
-        8508, 
-        8511, 
-        8517, 
-        8521, 
-        8526, 
-        8526, 
-        8544, 
-        8584, 
-        11264, 
-        11310, 
-        11312, 
-        11358, 
-        11360, 
-        11492, 
-        11499, 
-        11502, 
-        11506, 
-        11507, 
-        11520, 
-        11557, 
-        11559, 
-        11559, 
-        11565, 
-        11565, 
-        11568, 
-        11623, 
-        11631, 
-        11631, 
-        11648, 
-        11670, 
-        11680, 
-        11686, 
-        11688, 
-        11694, 
-        11696, 
-        11702, 
-        11704, 
-        11710, 
-        11712, 
-        11718, 
-        11720, 
-        11726, 
-        11728, 
-        11734, 
-        11736, 
-        11742, 
-        11823, 
-        11823, 
-        12293, 
-        12295, 
-        12321, 
-        12329, 
-        12337, 
-        12341, 
-        12344, 
-        12348, 
-        12353, 
-        12438, 
-        12445, 
-        12447, 
-        12449, 
-        12538, 
-        12540, 
-        12543, 
-        12549, 
-        12589, 
-        12593, 
-        12686, 
-        12704, 
-        12730, 
-        12784, 
-        12799, 
-        13312, 
-        13312, 
-        19893, 
-        19893, 
-        19968, 
-        19968, 
-        40908, 
-        40908, 
-        40960, 
-        42124, 
-        42192, 
-        42237, 
-        42240, 
-        42508, 
-        42512, 
-        42527, 
-        42538, 
-        42539, 
-        42560, 
-        42606, 
-        42623, 
-        42647, 
-        42656, 
-        42735, 
-        42775, 
-        42783, 
-        42786, 
-        42888, 
-        42891, 
-        42894, 
-        42896, 
-        42899, 
-        42912, 
-        42922, 
-        43000, 
-        43009, 
-        43011, 
-        43013, 
-        43015, 
-        43018, 
-        43020, 
-        43042, 
-        43072, 
-        43123, 
-        43138, 
-        43187, 
-        43250, 
-        43255, 
-        43259, 
-        43259, 
-        43274, 
-        43301, 
-        43312, 
-        43334, 
-        43360, 
-        43388, 
-        43396, 
-        43442, 
-        43471, 
-        43471, 
-        43520, 
-        43560, 
-        43584, 
-        43586, 
-        43588, 
-        43595, 
-        43616, 
-        43638, 
-        43642, 
-        43642, 
-        43648, 
-        43695, 
-        43697, 
-        43697, 
-        43701, 
-        43702, 
-        43705, 
-        43709, 
-        43712, 
-        43712, 
-        43714, 
-        43714, 
-        43739, 
-        43741, 
-        43744, 
-        43754, 
-        43762, 
-        43764, 
-        43777, 
-        43782, 
-        43785, 
-        43790, 
-        43793, 
-        43798, 
-        43808, 
-        43814, 
-        43816, 
-        43822, 
-        43968, 
-        44002, 
-        44032, 
-        44032, 
-        55203, 
-        55203, 
-        55216, 
-        55238, 
-        55243, 
-        55291, 
-        63744, 
-        64109, 
-        64112, 
-        64217, 
-        64256, 
-        64262, 
-        64275, 
-        64279, 
-        64285, 
-        64285, 
-        64287, 
-        64296, 
-        64298, 
-        64310, 
-        64312, 
-        64316, 
-        64318, 
-        64318, 
-        64320, 
-        64321, 
-        64323, 
-        64324, 
-        64326, 
-        64433, 
-        64467, 
-        64829, 
-        64848, 
-        64911, 
-        64914, 
-        64967, 
-        65008, 
-        65019, 
-        65136, 
-        65140, 
-        65142, 
-        65276, 
-        65313, 
-        65338, 
-        65345, 
-        65370, 
-        65382, 
-        65470, 
-        65474, 
-        65479, 
-        65482, 
-        65487, 
-        65490, 
-        65495, 
-        65498, 
+        170,
+        170,
+        181,
+        181,
+        186,
+        186,
+        192,
+        214,
+        216,
+        246,
+        248,
+        705,
+        710,
+        721,
+        736,
+        740,
+        748,
+        748,
+        750,
+        750,
+        880,
+        884,
+        886,
+        887,
+        890,
+        893,
+        902,
+        902,
+        904,
+        906,
+        908,
+        908,
+        910,
+        929,
+        931,
+        1013,
+        1015,
+        1153,
+        1162,
+        1319,
+        1329,
+        1366,
+        1369,
+        1369,
+        1377,
+        1415,
+        1488,
+        1514,
+        1520,
+        1522,
+        1568,
+        1610,
+        1646,
+        1647,
+        1649,
+        1747,
+        1749,
+        1749,
+        1765,
+        1766,
+        1774,
+        1775,
+        1786,
+        1788,
+        1791,
+        1791,
+        1808,
+        1808,
+        1810,
+        1839,
+        1869,
+        1957,
+        1969,
+        1969,
+        1994,
+        2026,
+        2036,
+        2037,
+        2042,
+        2042,
+        2048,
+        2069,
+        2074,
+        2074,
+        2084,
+        2084,
+        2088,
+        2088,
+        2112,
+        2136,
+        2208,
+        2208,
+        2210,
+        2220,
+        2308,
+        2361,
+        2365,
+        2365,
+        2384,
+        2384,
+        2392,
+        2401,
+        2417,
+        2423,
+        2425,
+        2431,
+        2437,
+        2444,
+        2447,
+        2448,
+        2451,
+        2472,
+        2474,
+        2480,
+        2482,
+        2482,
+        2486,
+        2489,
+        2493,
+        2493,
+        2510,
+        2510,
+        2524,
+        2525,
+        2527,
+        2529,
+        2544,
+        2545,
+        2565,
+        2570,
+        2575,
+        2576,
+        2579,
+        2600,
+        2602,
+        2608,
+        2610,
+        2611,
+        2613,
+        2614,
+        2616,
+        2617,
+        2649,
+        2652,
+        2654,
+        2654,
+        2674,
+        2676,
+        2693,
+        2701,
+        2703,
+        2705,
+        2707,
+        2728,
+        2730,
+        2736,
+        2738,
+        2739,
+        2741,
+        2745,
+        2749,
+        2749,
+        2768,
+        2768,
+        2784,
+        2785,
+        2821,
+        2828,
+        2831,
+        2832,
+        2835,
+        2856,
+        2858,
+        2864,
+        2866,
+        2867,
+        2869,
+        2873,
+        2877,
+        2877,
+        2908,
+        2909,
+        2911,
+        2913,
+        2929,
+        2929,
+        2947,
+        2947,
+        2949,
+        2954,
+        2958,
+        2960,
+        2962,
+        2965,
+        2969,
+        2970,
+        2972,
+        2972,
+        2974,
+        2975,
+        2979,
+        2980,
+        2984,
+        2986,
+        2990,
+        3001,
+        3024,
+        3024,
+        3077,
+        3084,
+        3086,
+        3088,
+        3090,
+        3112,
+        3114,
+        3123,
+        3125,
+        3129,
+        3133,
+        3133,
+        3160,
+        3161,
+        3168,
+        3169,
+        3205,
+        3212,
+        3214,
+        3216,
+        3218,
+        3240,
+        3242,
+        3251,
+        3253,
+        3257,
+        3261,
+        3261,
+        3294,
+        3294,
+        3296,
+        3297,
+        3313,
+        3314,
+        3333,
+        3340,
+        3342,
+        3344,
+        3346,
+        3386,
+        3389,
+        3389,
+        3406,
+        3406,
+        3424,
+        3425,
+        3450,
+        3455,
+        3461,
+        3478,
+        3482,
+        3505,
+        3507,
+        3515,
+        3517,
+        3517,
+        3520,
+        3526,
+        3585,
+        3632,
+        3634,
+        3635,
+        3648,
+        3654,
+        3713,
+        3714,
+        3716,
+        3716,
+        3719,
+        3720,
+        3722,
+        3722,
+        3725,
+        3725,
+        3732,
+        3735,
+        3737,
+        3743,
+        3745,
+        3747,
+        3749,
+        3749,
+        3751,
+        3751,
+        3754,
+        3755,
+        3757,
+        3760,
+        3762,
+        3763,
+        3773,
+        3773,
+        3776,
+        3780,
+        3782,
+        3782,
+        3804,
+        3807,
+        3840,
+        3840,
+        3904,
+        3911,
+        3913,
+        3948,
+        3976,
+        3980,
+        4096,
+        4138,
+        4159,
+        4159,
+        4176,
+        4181,
+        4186,
+        4189,
+        4193,
+        4193,
+        4197,
+        4198,
+        4206,
+        4208,
+        4213,
+        4225,
+        4238,
+        4238,
+        4256,
+        4293,
+        4295,
+        4295,
+        4301,
+        4301,
+        4304,
+        4346,
+        4348,
+        4680,
+        4682,
+        4685,
+        4688,
+        4694,
+        4696,
+        4696,
+        4698,
+        4701,
+        4704,
+        4744,
+        4746,
+        4749,
+        4752,
+        4784,
+        4786,
+        4789,
+        4792,
+        4798,
+        4800,
+        4800,
+        4802,
+        4805,
+        4808,
+        4822,
+        4824,
+        4880,
+        4882,
+        4885,
+        4888,
+        4954,
+        4992,
+        5007,
+        5024,
+        5108,
+        5121,
+        5740,
+        5743,
+        5759,
+        5761,
+        5786,
+        5792,
+        5866,
+        5870,
+        5872,
+        5888,
+        5900,
+        5902,
+        5905,
+        5920,
+        5937,
+        5952,
+        5969,
+        5984,
+        5996,
+        5998,
+        6000,
+        6016,
+        6067,
+        6103,
+        6103,
+        6108,
+        6108,
+        6176,
+        6263,
+        6272,
+        6312,
+        6314,
+        6314,
+        6320,
+        6389,
+        6400,
+        6428,
+        6480,
+        6509,
+        6512,
+        6516,
+        6528,
+        6571,
+        6593,
+        6599,
+        6656,
+        6678,
+        6688,
+        6740,
+        6823,
+        6823,
+        6917,
+        6963,
+        6981,
+        6987,
+        7043,
+        7072,
+        7086,
+        7087,
+        7098,
+        7141,
+        7168,
+        7203,
+        7245,
+        7247,
+        7258,
+        7293,
+        7401,
+        7404,
+        7406,
+        7409,
+        7413,
+        7414,
+        7424,
+        7615,
+        7680,
+        7957,
+        7960,
+        7965,
+        7968,
+        8005,
+        8008,
+        8013,
+        8016,
+        8023,
+        8025,
+        8025,
+        8027,
+        8027,
+        8029,
+        8029,
+        8031,
+        8061,
+        8064,
+        8116,
+        8118,
+        8124,
+        8126,
+        8126,
+        8130,
+        8132,
+        8134,
+        8140,
+        8144,
+        8147,
+        8150,
+        8155,
+        8160,
+        8172,
+        8178,
+        8180,
+        8182,
+        8188,
+        8305,
+        8305,
+        8319,
+        8319,
+        8336,
+        8348,
+        8450,
+        8450,
+        8455,
+        8455,
+        8458,
+        8467,
+        8469,
+        8469,
+        8473,
+        8477,
+        8484,
+        8484,
+        8486,
+        8486,
+        8488,
+        8488,
+        8490,
+        8493,
+        8495,
+        8505,
+        8508,
+        8511,
+        8517,
+        8521,
+        8526,
+        8526,
+        8544,
+        8584,
+        11264,
+        11310,
+        11312,
+        11358,
+        11360,
+        11492,
+        11499,
+        11502,
+        11506,
+        11507,
+        11520,
+        11557,
+        11559,
+        11559,
+        11565,
+        11565,
+        11568,
+        11623,
+        11631,
+        11631,
+        11648,
+        11670,
+        11680,
+        11686,
+        11688,
+        11694,
+        11696,
+        11702,
+        11704,
+        11710,
+        11712,
+        11718,
+        11720,
+        11726,
+        11728,
+        11734,
+        11736,
+        11742,
+        11823,
+        11823,
+        12293,
+        12295,
+        12321,
+        12329,
+        12337,
+        12341,
+        12344,
+        12348,
+        12353,
+        12438,
+        12445,
+        12447,
+        12449,
+        12538,
+        12540,
+        12543,
+        12549,
+        12589,
+        12593,
+        12686,
+        12704,
+        12730,
+        12784,
+        12799,
+        13312,
+        13312,
+        19893,
+        19893,
+        19968,
+        19968,
+        40908,
+        40908,
+        40960,
+        42124,
+        42192,
+        42237,
+        42240,
+        42508,
+        42512,
+        42527,
+        42538,
+        42539,
+        42560,
+        42606,
+        42623,
+        42647,
+        42656,
+        42735,
+        42775,
+        42783,
+        42786,
+        42888,
+        42891,
+        42894,
+        42896,
+        42899,
+        42912,
+        42922,
+        43000,
+        43009,
+        43011,
+        43013,
+        43015,
+        43018,
+        43020,
+        43042,
+        43072,
+        43123,
+        43138,
+        43187,
+        43250,
+        43255,
+        43259,
+        43259,
+        43274,
+        43301,
+        43312,
+        43334,
+        43360,
+        43388,
+        43396,
+        43442,
+        43471,
+        43471,
+        43520,
+        43560,
+        43584,
+        43586,
+        43588,
+        43595,
+        43616,
+        43638,
+        43642,
+        43642,
+        43648,
+        43695,
+        43697,
+        43697,
+        43701,
+        43702,
+        43705,
+        43709,
+        43712,
+        43712,
+        43714,
+        43714,
+        43739,
+        43741,
+        43744,
+        43754,
+        43762,
+        43764,
+        43777,
+        43782,
+        43785,
+        43790,
+        43793,
+        43798,
+        43808,
+        43814,
+        43816,
+        43822,
+        43968,
+        44002,
+        44032,
+        44032,
+        55203,
+        55203,
+        55216,
+        55238,
+        55243,
+        55291,
+        63744,
+        64109,
+        64112,
+        64217,
+        64256,
+        64262,
+        64275,
+        64279,
+        64285,
+        64285,
+        64287,
+        64296,
+        64298,
+        64310,
+        64312,
+        64316,
+        64318,
+        64318,
+        64320,
+        64321,
+        64323,
+        64324,
+        64326,
+        64433,
+        64467,
+        64829,
+        64848,
+        64911,
+        64914,
+        64967,
+        65008,
+        65019,
+        65136,
+        65140,
+        65142,
+        65276,
+        65313,
+        65338,
+        65345,
+        65370,
+        65382,
+        65470,
+        65474,
+        65479,
+        65482,
+        65487,
+        65490,
+        65495,
+        65498,
         65500
     ];
     var unicodeES5IdCont = [
-        768, 
-        879, 
-        1155, 
-        1159, 
-        1425, 
-        1469, 
-        1471, 
-        1471, 
-        1473, 
-        1474, 
-        1476, 
-        1477, 
-        1479, 
-        1479, 
-        1552, 
-        1562, 
-        1611, 
-        1641, 
-        1648, 
-        1648, 
-        1750, 
-        1756, 
-        1759, 
-        1764, 
-        1767, 
-        1768, 
-        1770, 
-        1773, 
-        1776, 
-        1785, 
-        1809, 
-        1809, 
-        1840, 
-        1866, 
-        1958, 
-        1968, 
-        1984, 
-        1993, 
-        2027, 
-        2035, 
-        2070, 
-        2073, 
-        2075, 
-        2083, 
-        2085, 
-        2087, 
-        2089, 
-        2093, 
-        2137, 
-        2139, 
-        2276, 
-        2302, 
-        2304, 
-        2307, 
-        2362, 
-        2364, 
-        2366, 
-        2383, 
-        2385, 
-        2391, 
-        2402, 
-        2403, 
-        2406, 
-        2415, 
-        2433, 
-        2435, 
-        2492, 
-        2492, 
-        2494, 
-        2500, 
-        2503, 
-        2504, 
-        2507, 
-        2509, 
-        2519, 
-        2519, 
-        2530, 
-        2531, 
-        2534, 
-        2543, 
-        2561, 
-        2563, 
-        2620, 
-        2620, 
-        2622, 
-        2626, 
-        2631, 
-        2632, 
-        2635, 
-        2637, 
-        2641, 
-        2641, 
-        2662, 
-        2673, 
-        2677, 
-        2677, 
-        2689, 
-        2691, 
-        2748, 
-        2748, 
-        2750, 
-        2757, 
-        2759, 
-        2761, 
-        2763, 
-        2765, 
-        2786, 
-        2787, 
-        2790, 
-        2799, 
-        2817, 
-        2819, 
-        2876, 
-        2876, 
-        2878, 
-        2884, 
-        2887, 
-        2888, 
-        2891, 
-        2893, 
-        2902, 
-        2903, 
-        2914, 
-        2915, 
-        2918, 
-        2927, 
-        2946, 
-        2946, 
-        3006, 
-        3010, 
-        3014, 
-        3016, 
-        3018, 
-        3021, 
-        3031, 
-        3031, 
-        3046, 
-        3055, 
-        3073, 
-        3075, 
-        3134, 
-        3140, 
-        3142, 
-        3144, 
-        3146, 
-        3149, 
-        3157, 
-        3158, 
-        3170, 
-        3171, 
-        3174, 
-        3183, 
-        3202, 
-        3203, 
-        3260, 
-        3260, 
-        3262, 
-        3268, 
-        3270, 
-        3272, 
-        3274, 
-        3277, 
-        3285, 
-        3286, 
-        3298, 
-        3299, 
-        3302, 
-        3311, 
-        3330, 
-        3331, 
-        3390, 
-        3396, 
-        3398, 
-        3400, 
-        3402, 
-        3405, 
-        3415, 
-        3415, 
-        3426, 
-        3427, 
-        3430, 
-        3439, 
-        3458, 
-        3459, 
-        3530, 
-        3530, 
-        3535, 
-        3540, 
-        3542, 
-        3542, 
-        3544, 
-        3551, 
-        3570, 
-        3571, 
-        3633, 
-        3633, 
-        3636, 
-        3642, 
-        3655, 
-        3662, 
-        3664, 
-        3673, 
-        3761, 
-        3761, 
-        3764, 
-        3769, 
-        3771, 
-        3772, 
-        3784, 
-        3789, 
-        3792, 
-        3801, 
-        3864, 
-        3865, 
-        3872, 
-        3881, 
-        3893, 
-        3893, 
-        3895, 
-        3895, 
-        3897, 
-        3897, 
-        3902, 
-        3903, 
-        3953, 
-        3972, 
-        3974, 
-        3975, 
-        3981, 
-        3991, 
-        3993, 
-        4028, 
-        4038, 
-        4038, 
-        4139, 
-        4158, 
-        4160, 
-        4169, 
-        4182, 
-        4185, 
-        4190, 
-        4192, 
-        4194, 
-        4196, 
-        4199, 
-        4205, 
-        4209, 
-        4212, 
-        4226, 
-        4237, 
-        4239, 
-        4253, 
-        4957, 
-        4959, 
-        5906, 
-        5908, 
-        5938, 
-        5940, 
-        5970, 
-        5971, 
-        6002, 
-        6003, 
-        6068, 
-        6099, 
-        6109, 
-        6109, 
-        6112, 
-        6121, 
-        6155, 
-        6157, 
-        6160, 
-        6169, 
-        6313, 
-        6313, 
-        6432, 
-        6443, 
-        6448, 
-        6459, 
-        6470, 
-        6479, 
-        6576, 
-        6592, 
-        6600, 
-        6601, 
-        6608, 
-        6617, 
-        6679, 
-        6683, 
-        6741, 
-        6750, 
-        6752, 
-        6780, 
-        6783, 
-        6793, 
-        6800, 
-        6809, 
-        6912, 
-        6916, 
-        6964, 
-        6980, 
-        6992, 
-        7001, 
-        7019, 
-        7027, 
-        7040, 
-        7042, 
-        7073, 
-        7085, 
-        7088, 
-        7097, 
-        7142, 
-        7155, 
-        7204, 
-        7223, 
-        7232, 
-        7241, 
-        7248, 
-        7257, 
-        7376, 
-        7378, 
-        7380, 
-        7400, 
-        7405, 
-        7405, 
-        7410, 
-        7412, 
-        7616, 
-        7654, 
-        7676, 
-        7679, 
-        8204, 
-        8205, 
-        8255, 
-        8256, 
-        8276, 
-        8276, 
-        8400, 
-        8412, 
-        8417, 
-        8417, 
-        8421, 
-        8432, 
-        11503, 
-        11505, 
-        11647, 
-        11647, 
-        11744, 
-        11775, 
-        12330, 
-        12335, 
-        12441, 
-        12442, 
-        42528, 
-        42537, 
-        42607, 
-        42607, 
-        42612, 
-        42621, 
-        42655, 
-        42655, 
-        42736, 
-        42737, 
-        43010, 
-        43010, 
-        43014, 
-        43014, 
-        43019, 
-        43019, 
-        43043, 
-        43047, 
-        43136, 
-        43137, 
-        43188, 
-        43204, 
-        43216, 
-        43225, 
-        43232, 
-        43249, 
-        43264, 
-        43273, 
-        43302, 
-        43309, 
-        43335, 
-        43347, 
-        43392, 
-        43395, 
-        43443, 
-        43456, 
-        43472, 
-        43481, 
-        43561, 
-        43574, 
-        43587, 
-        43587, 
-        43596, 
-        43597, 
-        43600, 
-        43609, 
-        43643, 
-        43643, 
-        43696, 
-        43696, 
-        43698, 
-        43700, 
-        43703, 
-        43704, 
-        43710, 
-        43711, 
-        43713, 
-        43713, 
-        43755, 
-        43759, 
-        43765, 
-        43766, 
-        44003, 
-        44010, 
-        44012, 
-        44013, 
-        44016, 
-        44025, 
-        64286, 
-        64286, 
-        65024, 
-        65039, 
-        65056, 
-        65062, 
-        65075, 
-        65076, 
-        65101, 
-        65103, 
-        65296, 
-        65305, 
-        65343, 
+        768,
+        879,
+        1155,
+        1159,
+        1425,
+        1469,
+        1471,
+        1471,
+        1473,
+        1474,
+        1476,
+        1477,
+        1479,
+        1479,
+        1552,
+        1562,
+        1611,
+        1641,
+        1648,
+        1648,
+        1750,
+        1756,
+        1759,
+        1764,
+        1767,
+        1768,
+        1770,
+        1773,
+        1776,
+        1785,
+        1809,
+        1809,
+        1840,
+        1866,
+        1958,
+        1968,
+        1984,
+        1993,
+        2027,
+        2035,
+        2070,
+        2073,
+        2075,
+        2083,
+        2085,
+        2087,
+        2089,
+        2093,
+        2137,
+        2139,
+        2276,
+        2302,
+        2304,
+        2307,
+        2362,
+        2364,
+        2366,
+        2383,
+        2385,
+        2391,
+        2402,
+        2403,
+        2406,
+        2415,
+        2433,
+        2435,
+        2492,
+        2492,
+        2494,
+        2500,
+        2503,
+        2504,
+        2507,
+        2509,
+        2519,
+        2519,
+        2530,
+        2531,
+        2534,
+        2543,
+        2561,
+        2563,
+        2620,
+        2620,
+        2622,
+        2626,
+        2631,
+        2632,
+        2635,
+        2637,
+        2641,
+        2641,
+        2662,
+        2673,
+        2677,
+        2677,
+        2689,
+        2691,
+        2748,
+        2748,
+        2750,
+        2757,
+        2759,
+        2761,
+        2763,
+        2765,
+        2786,
+        2787,
+        2790,
+        2799,
+        2817,
+        2819,
+        2876,
+        2876,
+        2878,
+        2884,
+        2887,
+        2888,
+        2891,
+        2893,
+        2902,
+        2903,
+        2914,
+        2915,
+        2918,
+        2927,
+        2946,
+        2946,
+        3006,
+        3010,
+        3014,
+        3016,
+        3018,
+        3021,
+        3031,
+        3031,
+        3046,
+        3055,
+        3073,
+        3075,
+        3134,
+        3140,
+        3142,
+        3144,
+        3146,
+        3149,
+        3157,
+        3158,
+        3170,
+        3171,
+        3174,
+        3183,
+        3202,
+        3203,
+        3260,
+        3260,
+        3262,
+        3268,
+        3270,
+        3272,
+        3274,
+        3277,
+        3285,
+        3286,
+        3298,
+        3299,
+        3302,
+        3311,
+        3330,
+        3331,
+        3390,
+        3396,
+        3398,
+        3400,
+        3402,
+        3405,
+        3415,
+        3415,
+        3426,
+        3427,
+        3430,
+        3439,
+        3458,
+        3459,
+        3530,
+        3530,
+        3535,
+        3540,
+        3542,
+        3542,
+        3544,
+        3551,
+        3570,
+        3571,
+        3633,
+        3633,
+        3636,
+        3642,
+        3655,
+        3662,
+        3664,
+        3673,
+        3761,
+        3761,
+        3764,
+        3769,
+        3771,
+        3772,
+        3784,
+        3789,
+        3792,
+        3801,
+        3864,
+        3865,
+        3872,
+        3881,
+        3893,
+        3893,
+        3895,
+        3895,
+        3897,
+        3897,
+        3902,
+        3903,
+        3953,
+        3972,
+        3974,
+        3975,
+        3981,
+        3991,
+        3993,
+        4028,
+        4038,
+        4038,
+        4139,
+        4158,
+        4160,
+        4169,
+        4182,
+        4185,
+        4190,
+        4192,
+        4194,
+        4196,
+        4199,
+        4205,
+        4209,
+        4212,
+        4226,
+        4237,
+        4239,
+        4253,
+        4957,
+        4959,
+        5906,
+        5908,
+        5938,
+        5940,
+        5970,
+        5971,
+        6002,
+        6003,
+        6068,
+        6099,
+        6109,
+        6109,
+        6112,
+        6121,
+        6155,
+        6157,
+        6160,
+        6169,
+        6313,
+        6313,
+        6432,
+        6443,
+        6448,
+        6459,
+        6470,
+        6479,
+        6576,
+        6592,
+        6600,
+        6601,
+        6608,
+        6617,
+        6679,
+        6683,
+        6741,
+        6750,
+        6752,
+        6780,
+        6783,
+        6793,
+        6800,
+        6809,
+        6912,
+        6916,
+        6964,
+        6980,
+        6992,
+        7001,
+        7019,
+        7027,
+        7040,
+        7042,
+        7073,
+        7085,
+        7088,
+        7097,
+        7142,
+        7155,
+        7204,
+        7223,
+        7232,
+        7241,
+        7248,
+        7257,
+        7376,
+        7378,
+        7380,
+        7400,
+        7405,
+        7405,
+        7410,
+        7412,
+        7616,
+        7654,
+        7676,
+        7679,
+        8204,
+        8205,
+        8255,
+        8256,
+        8276,
+        8276,
+        8400,
+        8412,
+        8417,
+        8417,
+        8421,
+        8432,
+        11503,
+        11505,
+        11647,
+        11647,
+        11744,
+        11775,
+        12330,
+        12335,
+        12441,
+        12442,
+        42528,
+        42537,
+        42607,
+        42607,
+        42612,
+        42621,
+        42655,
+        42655,
+        42736,
+        42737,
+        43010,
+        43010,
+        43014,
+        43014,
+        43019,
+        43019,
+        43043,
+        43047,
+        43136,
+        43137,
+        43188,
+        43204,
+        43216,
+        43225,
+        43232,
+        43249,
+        43264,
+        43273,
+        43302,
+        43309,
+        43335,
+        43347,
+        43392,
+        43395,
+        43443,
+        43456,
+        43472,
+        43481,
+        43561,
+        43574,
+        43587,
+        43587,
+        43596,
+        43597,
+        43600,
+        43609,
+        43643,
+        43643,
+        43696,
+        43696,
+        43698,
+        43700,
+        43703,
+        43704,
+        43710,
+        43711,
+        43713,
+        43713,
+        43755,
+        43759,
+        43765,
+        43766,
+        44003,
+        44010,
+        44012,
+        44013,
+        44016,
+        44025,
+        64286,
+        64286,
+        65024,
+        65039,
+        65056,
+        65062,
+        65075,
+        65076,
+        65101,
+        65103,
+        65296,
+        65305,
+        65343,
         65343
     ];
     function LexLookUpUnicodeMap(code, map) {
@@ -12419,7 +12419,7 @@ var TypeScript;
         };
         return StringSourceText;
     })();
-    TypeScript.StringSourceText = StringSourceText;    
+    TypeScript.StringSourceText = StringSourceText;
     var SourceTextSegment = (function () {
         function SourceTextSegment(segmentStart, segmentEnd, segment) {
             this.segmentStart = segmentStart;
@@ -12434,7 +12434,7 @@ var TypeScript;
         };
         return SourceTextSegment;
     })();
-    TypeScript.SourceTextSegment = SourceTextSegment;    
+    TypeScript.SourceTextSegment = SourceTextSegment;
     var AggerateSourceTextSegment = (function () {
         function AggerateSourceTextSegment(seg1, seg2) {
             this.seg1 = seg1;
@@ -12454,7 +12454,7 @@ var TypeScript;
         };
         return AggerateSourceTextSegment;
     })();
-    TypeScript.AggerateSourceTextSegment = AggerateSourceTextSegment;    
+    TypeScript.AggerateSourceTextSegment = AggerateSourceTextSegment;
     var ScannerTextStream = (function () {
         function ScannerTextStream(sourceText) {
             this.sourceText = sourceText;
@@ -12493,7 +12493,7 @@ var TypeScript;
         };
         return ScannerTextStream;
     })();
-    TypeScript.ScannerTextStream = ScannerTextStream;    
+    TypeScript.ScannerTextStream = ScannerTextStream;
     var SavedTokens = (function () {
         function SavedTokens() {
             this.prevToken = null;
@@ -12618,7 +12618,7 @@ var TypeScript;
         };
         return SavedTokens;
     })();
-    TypeScript.SavedTokens = SavedTokens;    
+    TypeScript.SavedTokens = SavedTokens;
     var Scanner = (function () {
         function Scanner() {
             this.prevLine = 1;
@@ -13592,7 +13592,7 @@ while(this.pos < this.len) {
         };
         return Scanner;
     })();
-    TypeScript.Scanner = Scanner;    
+    TypeScript.Scanner = Scanner;
     function convertTokToIDName(tok) {
         return convertTokToIDBase(tok, true, false);
     }
@@ -13700,7 +13700,7 @@ var TypeScript;
         }
         return AssignScopeContext;
     })();
-    TypeScript.AssignScopeContext = AssignScopeContext;    
+    TypeScript.AssignScopeContext = AssignScopeContext;
     function pushAssignScope(scope, context, type, classType, fnc) {
         var chain = new TypeScript.ScopeChain(null, context.scopeChain, scope);
         chain.thisType = type;
@@ -13744,7 +13744,7 @@ var TypeScript;
         };
         return ScopeSearchFilter;
     })();
-    TypeScript.ScopeSearchFilter = ScopeSearchFilter;    
+    TypeScript.ScopeSearchFilter = ScopeSearchFilter;
     TypeScript.instanceFilter = new ScopeSearchFilter(instanceCompare, instanceFilterStop);
     function preAssignModuleScopes(ast, context) {
         var moduleDecl = ast;
@@ -14063,7 +14063,7 @@ var TypeScript;
         }
         return TypeCollectionContext;
     })();
-    TypeScript.TypeCollectionContext = TypeCollectionContext;    
+    TypeScript.TypeCollectionContext = TypeCollectionContext;
     var MemberScopeContext = (function () {
         function MemberScopeContext(flow, pos, matchFlag) {
             this.flow = flow;
@@ -14075,7 +14075,7 @@ var TypeScript;
         }
         return MemberScopeContext;
     })();
-    TypeScript.MemberScopeContext = MemberScopeContext;    
+    TypeScript.MemberScopeContext = MemberScopeContext;
     var EnclosingScopeContext = (function () {
         function EnclosingScopeContext(logger, script, text, pos, isMemberCompletion) {
             this.logger = logger;
@@ -14122,7 +14122,7 @@ var TypeScript;
         };
         return EnclosingScopeContext;
     })();
-    TypeScript.EnclosingScopeContext = EnclosingScopeContext;    
+    TypeScript.EnclosingScopeContext = EnclosingScopeContext;
     function preFindMemberScope(ast, parent, walker) {
         var memScope = walker.state;
         if(TypeScript.hasFlag(ast.flags, memScope.matchFlag) && ((memScope.pos < 0) || (memScope.pos == ast.limChar))) {
@@ -14344,7 +14344,7 @@ var TypeScript;
         };
         return Signature;
     })();
-    TypeScript.Signature = Signature;    
+    TypeScript.Signature = Signature;
     var SignatureGroup = (function () {
         function SignatureGroup() {
             this.signatures = [];
@@ -14430,7 +14430,7 @@ var TypeScript;
         };
         return SignatureGroup;
     })();
-    TypeScript.SignatureGroup = SignatureGroup;    
+    TypeScript.SignatureGroup = SignatureGroup;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -14684,12 +14684,12 @@ var TypeScript;
         };
         return Symbol;
     })();
-    TypeScript.Symbol = Symbol;    
+    TypeScript.Symbol = Symbol;
     var ValueLocation = (function () {
         function ValueLocation() { }
         return ValueLocation;
     })();
-    TypeScript.ValueLocation = ValueLocation;    
+    TypeScript.ValueLocation = ValueLocation;
     var InferenceSymbol = (function (_super) {
         __extends(InferenceSymbol, _super);
         function InferenceSymbol(name, location, length, unitIndex) {
@@ -14727,7 +14727,7 @@ var TypeScript;
         };
         return InferenceSymbol;
     })(Symbol);
-    TypeScript.InferenceSymbol = InferenceSymbol;    
+    TypeScript.InferenceSymbol = InferenceSymbol;
     var TypeSymbol = (function (_super) {
         __extends(TypeSymbol, _super);
         function TypeSymbol(locName, location, length, unitIndex, type) {
@@ -14829,7 +14829,7 @@ var TypeScript;
         };
         return TypeSymbol;
     })(InferenceSymbol);
-    TypeScript.TypeSymbol = TypeSymbol;    
+    TypeScript.TypeSymbol = TypeSymbol;
     var WithSymbol = (function (_super) {
         __extends(WithSymbol, _super);
         function WithSymbol(location, unitIndex, withType) {
@@ -14840,7 +14840,7 @@ var TypeScript;
         };
         return WithSymbol;
     })(TypeSymbol);
-    TypeScript.WithSymbol = WithSymbol;    
+    TypeScript.WithSymbol = WithSymbol;
     var FieldSymbol = (function (_super) {
         __extends(FieldSymbol, _super);
         function FieldSymbol(name, location, unitIndex, canWrite, field) {
@@ -14914,7 +14914,7 @@ var TypeScript;
         };
         return FieldSymbol;
     })(InferenceSymbol);
-    TypeScript.FieldSymbol = FieldSymbol;    
+    TypeScript.FieldSymbol = FieldSymbol;
     var ParameterSymbol = (function (_super) {
         __extends(ParameterSymbol, _super);
         function ParameterSymbol(name, location, unitIndex, parameter) {
@@ -14986,7 +14986,7 @@ var TypeScript;
         };
         return ParameterSymbol;
     })(InferenceSymbol);
-    TypeScript.ParameterSymbol = ParameterSymbol;    
+    TypeScript.ParameterSymbol = ParameterSymbol;
     var VariableSymbol = (function (_super) {
         __extends(VariableSymbol, _super);
         function VariableSymbol(name, location, unitIndex, variable) {
@@ -15013,7 +15013,7 @@ var TypeScript;
         };
         return VariableSymbol;
     })(InferenceSymbol);
-    TypeScript.VariableSymbol = VariableSymbol;    
+    TypeScript.VariableSymbol = VariableSymbol;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -15032,7 +15032,7 @@ var TypeScript;
         };
         return ScopedMembers;
     })();
-    TypeScript.ScopedMembers = ScopedMembers;    
+    TypeScript.ScopedMembers = ScopedMembers;
     (function (SymbolKind) {
         SymbolKind._map = [];
         SymbolKind._map[0] = "None";
@@ -15056,28 +15056,28 @@ var TypeScript;
         };
         SymbolScope.prototype.getAllSymbolNames = function (members) {
             return [
-                "please", 
-                "implement", 
-                "in", 
-                "derived", 
+                "please",
+                "implement",
+                "in",
+                "derived",
                 "classes"
             ];
         };
         SymbolScope.prototype.getAllTypeSymbolNames = function (members) {
             return [
-                "please", 
-                "implement", 
-                "in", 
-                "derived", 
+                "please",
+                "implement",
+                "in",
+                "derived",
                 "classes"
             ];
         };
         SymbolScope.prototype.getAllValueSymbolNames = function (members) {
             return [
-                "please", 
-                "implement", 
-                "in", 
-                "derived", 
+                "please",
+                "implement",
+                "in",
+                "derived",
                 "classes"
             ];
         };
@@ -15111,7 +15111,7 @@ var TypeScript;
         };
         return SymbolScope;
     })();
-    TypeScript.SymbolScope = SymbolScope;    
+    TypeScript.SymbolScope = SymbolScope;
     function symbolCanBeUsed(sym, publicOnly) {
         return publicOnly ? !(TypeScript.hasFlag(sym.flags, TypeScript.SymbolFlags.Private) || (sym.declAST && sym.declAST.nodeType == TypeScript.NodeType.FuncDecl && TypeScript.hasFlag((sym.declAST).fncFlags, TypeScript.FncFlags.Private))) : true;
     }
@@ -15286,7 +15286,7 @@ var TypeScript;
         };
         return SymbolAggregateScope;
     })(SymbolScope);
-    TypeScript.SymbolAggregateScope = SymbolAggregateScope;    
+    TypeScript.SymbolAggregateScope = SymbolAggregateScope;
     var SymbolTableScope = (function (_super) {
         __extends(SymbolTableScope, _super);
         function SymbolTableScope(valueMembers, ambientValueMembers, enclosedTypes, ambientEnclosedTypes, container) {
@@ -15415,7 +15415,7 @@ var TypeScript;
         };
         return SymbolTableScope;
     })(SymbolScope);
-    TypeScript.SymbolTableScope = SymbolTableScope;    
+    TypeScript.SymbolTableScope = SymbolTableScope;
     var SymbolScopeBuilder = (function (_super) {
         __extends(SymbolScopeBuilder, _super);
         function SymbolScopeBuilder(valueMembers, ambientValueMembers, enclosedTypes, ambientEnclosedTypes, parent, container) {
@@ -15614,7 +15614,7 @@ var TypeScript;
         };
         return SymbolScopeBuilder;
     })(SymbolScope);
-    TypeScript.SymbolScopeBuilder = SymbolScopeBuilder;    
+    TypeScript.SymbolScopeBuilder = SymbolScopeBuilder;
     var FilteredSymbolScope = (function (_super) {
         __extends(FilteredSymbolScope, _super);
         function FilteredSymbolScope(scope, container, filter) {
@@ -15634,7 +15634,7 @@ var TypeScript;
         };
         return FilteredSymbolScope;
     })(SymbolScope);
-    TypeScript.FilteredSymbolScope = FilteredSymbolScope;    
+    TypeScript.FilteredSymbolScope = FilteredSymbolScope;
     var FilteredSymbolScopeBuilder = (function (_super) {
         __extends(FilteredSymbolScopeBuilder, _super);
         function FilteredSymbolScopeBuilder(valueMembers, parent, container, filter) {
@@ -15664,7 +15664,7 @@ var TypeScript;
         };
         return FilteredSymbolScopeBuilder;
     })(SymbolScopeBuilder);
-    TypeScript.FilteredSymbolScopeBuilder = FilteredSymbolScopeBuilder;    
+    TypeScript.FilteredSymbolScopeBuilder = FilteredSymbolScopeBuilder;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -15977,7 +15977,7 @@ var TypeScript;
         }
         return TokenInfo;
     })();
-    TypeScript.TokenInfo = TokenInfo;    
+    TypeScript.TokenInfo = TokenInfo;
     function setTokenInfo(tokenId, reservation, binopPrecedence, binopNodeType, unopPrecedence, unopNodeType, text, ers) {
         if(tokenId !== undefined) {
             TypeScript.tokenTable[tokenId] = new TokenInfo(tokenId, reservation, binopPrecedence, binopNodeType, unopPrecedence, unopNodeType, text, ers);
@@ -16133,7 +16133,7 @@ var TypeScript;
         }
         return SavedToken;
     })();
-    TypeScript.SavedToken = SavedToken;    
+    TypeScript.SavedToken = SavedToken;
     var Token = (function () {
         function Token(tokenId) {
             this.tokenId = tokenId;
@@ -16162,7 +16162,7 @@ var TypeScript;
         };
         return Token;
     })();
-    TypeScript.Token = Token;    
+    TypeScript.Token = Token;
     var NumberLiteralToken = (function (_super) {
         __extends(NumberLiteralToken, _super);
         function NumberLiteralToken(value, hasEmptyFraction) {
@@ -16178,7 +16178,7 @@ var TypeScript;
         };
         return NumberLiteralToken;
     })(Token);
-    TypeScript.NumberLiteralToken = NumberLiteralToken;    
+    TypeScript.NumberLiteralToken = NumberLiteralToken;
     var StringLiteralToken = (function (_super) {
         __extends(StringLiteralToken, _super);
         function StringLiteralToken(value) {
@@ -16193,7 +16193,7 @@ var TypeScript;
         };
         return StringLiteralToken;
     })(Token);
-    TypeScript.StringLiteralToken = StringLiteralToken;    
+    TypeScript.StringLiteralToken = StringLiteralToken;
     var IdentifierToken = (function (_super) {
         __extends(IdentifierToken, _super);
         function IdentifierToken(value, hasEscapeSequence) {
@@ -16209,7 +16209,7 @@ var TypeScript;
         };
         return IdentifierToken;
     })(Token);
-    TypeScript.IdentifierToken = IdentifierToken;    
+    TypeScript.IdentifierToken = IdentifierToken;
     var WhitespaceToken = (function (_super) {
         __extends(WhitespaceToken, _super);
         function WhitespaceToken(tokenId, value) {
@@ -16224,7 +16224,7 @@ var TypeScript;
         };
         return WhitespaceToken;
     })(Token);
-    TypeScript.WhitespaceToken = WhitespaceToken;    
+    TypeScript.WhitespaceToken = WhitespaceToken;
     var CommentToken = (function (_super) {
         __extends(CommentToken, _super);
         function CommentToken(tokenID, value, isBlock, startPos, line, endsLine) {
@@ -16243,7 +16243,7 @@ var TypeScript;
         };
         return CommentToken;
     })(Token);
-    TypeScript.CommentToken = CommentToken;    
+    TypeScript.CommentToken = CommentToken;
     var RegularExpressionLiteralToken = (function (_super) {
         __extends(RegularExpressionLiteralToken, _super);
         function RegularExpressionLiteralToken(regex) {
@@ -16258,7 +16258,7 @@ var TypeScript;
         };
         return RegularExpressionLiteralToken;
     })(Token);
-    TypeScript.RegularExpressionLiteralToken = RegularExpressionLiteralToken;    
+    TypeScript.RegularExpressionLiteralToken = RegularExpressionLiteralToken;
     TypeScript.staticTokens = new Array();
     function initializeStaticTokens() {
         for(var i = 0; i <= TokenID.LimFixed; i++) {
@@ -16281,7 +16281,7 @@ var TypeScript;
         };
         return ArrayCache;
     })();
-    TypeScript.ArrayCache = ArrayCache;    
+    TypeScript.ArrayCache = ArrayCache;
     var TypeComparisonInfo = (function () {
         function TypeComparisonInfo() {
             this.onlyCaptureFirstError = false;
@@ -16300,7 +16300,7 @@ var TypeScript;
         };
         return TypeComparisonInfo;
     })();
-    TypeScript.TypeComparisonInfo = TypeComparisonInfo;    
+    TypeScript.TypeComparisonInfo = TypeComparisonInfo;
     (function (TypeCheckCollectionMode) {
         TypeCheckCollectionMode._map = [];
         TypeCheckCollectionMode._map[0] = "Resident";
@@ -16396,7 +16396,7 @@ var TypeScript;
         };
         return PersistentGlobalTypeState;
     })();
-    TypeScript.PersistentGlobalTypeState = PersistentGlobalTypeState;    
+    TypeScript.PersistentGlobalTypeState = PersistentGlobalTypeState;
     var ContextualTypeContext = (function () {
         function ContextualTypeContext(contextualType, provisional, contextID) {
             this.contextualType = contextualType;
@@ -16408,7 +16408,7 @@ var TypeScript;
         }
         return ContextualTypeContext;
     })();
-    TypeScript.ContextualTypeContext = ContextualTypeContext;    
+    TypeScript.ContextualTypeContext = ContextualTypeContext;
     var ContextualTypingContextStack = (function () {
         function ContextualTypingContextStack(checker) {
             this.checker = checker;
@@ -16438,7 +16438,7 @@ var TypeScript;
         };
         return ContextualTypingContextStack;
     })();
-    TypeScript.ContextualTypingContextStack = ContextualTypingContextStack;    
+    TypeScript.ContextualTypingContextStack = ContextualTypingContextStack;
     var TypeChecker = (function () {
         function TypeChecker(persistentState) {
             this.persistentState = persistentState;
@@ -17909,7 +17909,7 @@ var TypeScript;
         };
         return TypeChecker;
     })();
-    TypeScript.TypeChecker = TypeChecker;    
+    TypeScript.TypeChecker = TypeChecker;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -17920,7 +17920,7 @@ var TypeScript;
         }
         return Continuation;
     })();
-    TypeScript.Continuation = Continuation;    
+    TypeScript.Continuation = Continuation;
     function getBaseTypeLinks(bases, baseTypeLinks) {
         if(bases) {
             var len = bases.members.length;
@@ -18547,7 +18547,7 @@ var TypeScript;
         }
         return ScopeChain;
     })();
-    TypeScript.ScopeChain = ScopeChain;    
+    TypeScript.ScopeChain = ScopeChain;
     var BBUseDefInfo = (function () {
         function BBUseDefInfo(bb) {
             this.bb = bb;
@@ -18667,7 +18667,7 @@ var TypeScript;
         };
         return BBUseDefInfo;
     })();
-    TypeScript.BBUseDefInfo = BBUseDefInfo;    
+    TypeScript.BBUseDefInfo = BBUseDefInfo;
     var UseDefContext = (function () {
         function UseDefContext() {
             this.useIndexBySymbol = new Array();
@@ -18710,7 +18710,7 @@ var TypeScript;
         };
         return UseDefContext;
     })();
-    TypeScript.UseDefContext = UseDefContext;    
+    TypeScript.UseDefContext = UseDefContext;
     var BitVector = (function () {
         function BitVector(bitCount) {
             this.bitCount = bitCount;
@@ -18817,7 +18817,7 @@ var TypeScript;
         };
         return BitVector;
     })();
-    TypeScript.BitVector = BitVector;    
+    TypeScript.BitVector = BitVector;
     var BasicBlock = (function () {
         function BasicBlock() {
             this.predecessors = new Array();
@@ -18839,7 +18839,7 @@ var TypeScript;
         };
         return BasicBlock;
     })();
-    TypeScript.BasicBlock = BasicBlock;    
+    TypeScript.BasicBlock = BasicBlock;
     var ControlFlowContext = (function () {
         function ControlFlowContext(current, exit) {
             this.current = current;
@@ -19029,7 +19029,7 @@ var TypeScript;
         };
         return ControlFlowContext;
     })();
-    TypeScript.ControlFlowContext = ControlFlowContext;    
+    TypeScript.ControlFlowContext = ControlFlowContext;
     var ResolutionDataCache = (function () {
         function ResolutionDataCache() {
             this.cacheSize = 16;
@@ -19070,7 +19070,7 @@ var TypeScript;
         };
         return ResolutionDataCache;
     })();
-    TypeScript.ResolutionDataCache = ResolutionDataCache;    
+    TypeScript.ResolutionDataCache = ResolutionDataCache;
     var TypeFlow = (function () {
         function TypeFlow(logger, initScope, parser, checker) {
             this.logger = logger;
@@ -21756,7 +21756,7 @@ var TypeScript;
         };
         return TypeFlow;
     })();
-    TypeScript.TypeFlow = TypeFlow;    
+    TypeScript.TypeFlow = TypeFlow;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -21817,7 +21817,7 @@ var TypeScript;
         }
         return MemberName;
     })();
-    TypeScript.MemberName = MemberName;    
+    TypeScript.MemberName = MemberName;
     var MemberNameString = (function (_super) {
         __extends(MemberNameString, _super);
         function MemberNameString(text) {
@@ -21829,7 +21829,7 @@ var TypeScript;
         };
         return MemberNameString;
     })(MemberName);
-    TypeScript.MemberNameString = MemberNameString;    
+    TypeScript.MemberNameString = MemberNameString;
     var MemberNameArray = (function (_super) {
         __extends(MemberNameArray, _super);
         function MemberNameArray() {
@@ -21851,7 +21851,7 @@ var TypeScript;
         };
         return MemberNameArray;
     })(MemberName);
-    TypeScript.MemberNameArray = MemberNameArray;    
+    TypeScript.MemberNameArray = MemberNameArray;
     var currentTypeID = -1;
     var Type = (function () {
         function Type() {
@@ -22211,7 +22211,7 @@ var TypeScript;
         };
         return Type;
     })();
-    TypeScript.Type = Type;    
+    TypeScript.Type = Type;
     var ModuleType = (function (_super) {
         __extends(ModuleType, _super);
         function ModuleType(enclosedTypes, ambientEnclosedTypes) {
@@ -22264,7 +22264,7 @@ var TypeScript;
         };
         return ModuleType;
     })(Type);
-    TypeScript.ModuleType = ModuleType;    
+    TypeScript.ModuleType = ModuleType;
     var TypeLink = (function () {
         function TypeLink() {
             this.type = null;
@@ -22272,7 +22272,7 @@ var TypeScript;
         }
         return TypeLink;
     })();
-    TypeScript.TypeLink = TypeLink;    
+    TypeScript.TypeLink = TypeLink;
     function getTypeLink(ast, checker, autoVar) {
         var result = new TypeLink();
         result.ast = ast;
@@ -22504,7 +22504,7 @@ var TypeScript;
         };
         return SourceUnit;
     })();
-    TypeScript.SourceUnit = SourceUnit;    
+    TypeScript.SourceUnit = SourceUnit;
     var CompilationEnvironment = (function () {
         function CompilationEnvironment(compilationSettings, ioHost) {
             this.compilationSettings = compilationSettings;
@@ -22514,7 +22514,7 @@ var TypeScript;
         }
         return CompilationEnvironment;
     })();
-    TypeScript.CompilationEnvironment = CompilationEnvironment;    
+    TypeScript.CompilationEnvironment = CompilationEnvironment;
     var CodeResolver = (function () {
         function CodeResolver(environment) {
             this.environment = environment;
@@ -22623,7 +22623,7 @@ var TypeScript;
         };
         return CodeResolver;
     })();
-    TypeScript.CodeResolver = CodeResolver;    
+    TypeScript.CodeResolver = CodeResolver;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -22675,7 +22675,7 @@ var TypeScript;
         };
         return StyleSettings;
     })();
-    TypeScript.StyleSettings = StyleSettings;    
+    TypeScript.StyleSettings = StyleSettings;
     var CompilationSettings = (function () {
         function CompilationSettings() {
             this.styleSettings = new StyleSettings();
@@ -22707,7 +22707,7 @@ var TypeScript;
         };
         return CompilationSettings;
     })();
-    TypeScript.CompilationSettings = CompilationSettings;    
+    TypeScript.CompilationSettings = CompilationSettings;
     function getFileReferenceFromReferencePath(comment) {
         var referencesRegEx = /^(\/\/\/\s*<reference\s+path=)('|")(.+?)\2\s*(static=('|")(.+?)\2\s*)*\/>/igm;
         var match = referencesRegEx.exec(comment);
@@ -23124,7 +23124,7 @@ var TypeScript;
         };
         return IncrementalParser;
     })();
-    TypeScript.IncrementalParser = IncrementalParser;    
+    TypeScript.IncrementalParser = IncrementalParser;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -23146,7 +23146,7 @@ var TypeScript;
         };
         return DeclFileWriter;
     })();
-    TypeScript.DeclFileWriter = DeclFileWriter;    
+    TypeScript.DeclFileWriter = DeclFileWriter;
     var DeclarationEmitter = (function () {
         function DeclarationEmitter(checker, emitOptions, errorReporter) {
             this.checker = checker;
@@ -23785,7 +23785,7 @@ var TypeScript;
         };
         return DeclarationEmitter;
     })();
-    TypeScript.DeclarationEmitter = DeclarationEmitter;    
+    TypeScript.DeclarationEmitter = DeclarationEmitter;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -23819,7 +23819,7 @@ var TypeScript;
         };
         return ScriptEditRange;
     })();
-    TypeScript.ScriptEditRange = ScriptEditRange;    
+    TypeScript.ScriptEditRange = ScriptEditRange;
     var UpdateUnitResult = (function () {
         function UpdateUnitResult(kind, unitIndex, script1, script2) {
             this.kind = kind;
@@ -23849,7 +23849,7 @@ var TypeScript;
         }
         return UpdateUnitResult;
     })();
-    TypeScript.UpdateUnitResult = UpdateUnitResult;    
+    TypeScript.UpdateUnitResult = UpdateUnitResult;
     var ErrorEntry = (function () {
         function ErrorEntry(unitIndex, minChar, limChar, message) {
             this.unitIndex = unitIndex;
@@ -23859,7 +23859,7 @@ var TypeScript;
         }
         return ErrorEntry;
     })();
-    TypeScript.ErrorEntry = ErrorEntry;    
+    TypeScript.ErrorEntry = ErrorEntry;
     TypeScript.defaultSettings = new TypeScript.CompilationSettings();
     var TypeScriptCompiler = (function () {
         function TypeScriptCompiler(errorOutput, logger, settings) {
@@ -24381,7 +24381,7 @@ var TypeScript;
         };
         return TypeScriptCompiler;
     })();
-    TypeScript.TypeScriptCompiler = TypeScriptCompiler;    
+    TypeScript.TypeScriptCompiler = TypeScriptCompiler;
     var ScopeEntry = (function () {
         function ScopeEntry(name, type, sym) {
             this.name = name;
@@ -24390,7 +24390,7 @@ var TypeScript;
         }
         return ScopeEntry;
     })();
-    TypeScript.ScopeEntry = ScopeEntry;    
+    TypeScript.ScopeEntry = ScopeEntry;
     var ScopeTraversal = (function () {
         function ScopeTraversal(compiler) {
             this.compiler = compiler;
@@ -24456,7 +24456,7 @@ var TypeScript;
         };
         return ScopeTraversal;
     })();
-    TypeScript.ScopeTraversal = ScopeTraversal;    
+    TypeScript.ScopeTraversal = ScopeTraversal;
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
 (function (TypeScript) {
@@ -24507,7 +24507,7 @@ var TypeScript;
         };
         return NullLogger;
     })();
-    TypeScript.NullLogger = NullLogger;    
+    TypeScript.NullLogger = NullLogger;
     var LoggerAdapter = (function () {
         function LoggerAdapter(logger) {
             this.logger = logger;
@@ -24537,7 +24537,7 @@ var TypeScript;
         };
         return LoggerAdapter;
     })();
-    TypeScript.LoggerAdapter = LoggerAdapter;    
+    TypeScript.LoggerAdapter = LoggerAdapter;
     var BufferedLogger = (function () {
         function BufferedLogger() {
             this.logContents = [];
@@ -24562,7 +24562,7 @@ var TypeScript;
         };
         return BufferedLogger;
     })();
-    TypeScript.BufferedLogger = BufferedLogger;    
+    TypeScript.BufferedLogger = BufferedLogger;
     function timeFunction(logger, funcDescription, func) {
         var start = +new Date();
         var result = func();
@@ -25135,7 +25135,7 @@ var OptionsParser = (function () {
             }
             usageString += this.DEFAULT_LONG_FLAG + option.name + type;
             output.push([
-                usageString, 
+                usageString,
                 option.usage
             ]);
             if(usageString.length > maxLength) {
@@ -25143,7 +25143,7 @@ var OptionsParser = (function () {
             }
         }
         output.push([
-            "  @<file>", 
+            "  @<file>",
             "Insert command line options and files from a file."
         ]);
         for(var i = 0; i < output.length; i++) {

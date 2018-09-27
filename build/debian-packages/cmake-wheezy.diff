@@ -22,7 +22,7 @@ diff -Nru cmake-3.7.1/debian/changelog cmake-3.7.1/debian/changelog
 + -- Mike Hommey <glandium@mozilla.com>  Thu, 21 Dec 2017 15:46:11 +0900
 +
  cmake (3.7.1-1) unstable; urgency=medium
- 
+
    * New upstream release.
 diff -Nru cmake-3.7.1/debian/cmake-curses-gui.maintscript cmake-3.7.1/debian/cmake-curses-gui.maintscript
 --- cmake-3.7.1/debian/cmake-curses-gui.maintscript	2016-10-31 02:20:34.000000000 +0900
@@ -83,7 +83,7 @@ diff -Nru cmake-3.7.1/debian/control cmake-3.7.1/debian/control
           procps [!hurd-any],
           ${misc:Depends},
 @@ -59,7 +50,6 @@
- 
+
  Package: cmake-curses-gui
  Architecture: any
 -Pre-Depends: dpkg (>= 1.17.5~)
@@ -93,7 +93,7 @@ diff -Nru cmake-3.7.1/debian/control cmake-3.7.1/debian/control
 @@ -72,23 +62,6 @@
   are provided at the bottom of the terminal when the program is running. The
   main executable file for this GUI is "ccmake".
- 
+
 -Package: cmake-qt-gui
 -Architecture: any
 -Build-Profiles: <!stage1>
@@ -135,14 +135,14 @@ diff -Nru cmake-3.7.1/debian/rules cmake-3.7.1/debian/rules
 +	                         --init=../$(BUILD_FLAGS_FILE) \
  	                         --sphinx-man --sphinx-html --sphinx-flags="-D today=\"$(BUILD_DATE)\"" \
  	                         $(BOOTSTRAP_PARALLEL) --verbose
- 
+
 @@ -68,9 +65,6 @@
  override_dh_sphinxdoc:
  	dh_sphinxdoc -pcmake-doc
- 
+
 -override_dh_strip:
 -	dh_strip --dbgsym-migration='cmake-dbg (<< 3.5.0-1~)'
 -
  %:
  	dh $@ --with=sphinxdoc --parallel --builddirectory=Build
- 
+

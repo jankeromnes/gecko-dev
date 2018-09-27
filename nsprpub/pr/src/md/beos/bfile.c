@@ -9,7 +9,7 @@
 ** Global lock variable used to bracket calls into rusty libraries that
 ** aren't thread safe (like libc, libX, etc).
 */
-static PRLock *_pr_rename_lock = NULL; 
+static PRLock *_pr_rename_lock = NULL;
 
 void
 _MD_InitIO (void)
@@ -94,7 +94,7 @@ PRStatus
 _MD_set_fd_inheritable (PRFileDesc *fd, PRBool inheritable)
 {
         int rv;
-	
+
         rv = fcntl(fd->secret->md.osfd, F_SETFD, inheritable ? 0 : FD_CLOEXEC);
         if (-1 == rv) {
                 PR_SetError(PR_UNKNOWN_ERROR, _MD_ERRNO());
@@ -114,7 +114,7 @@ _MD_init_fd_inheritable (PRFileDesc *fd, PRBool imported)
 			PR_SetError(PR_UNKNOWN_ERROR, _MD_ERRNO());
 			return;
 		}
-		fd->secret->inheritable = (flags & FD_CLOEXEC) ? 
+		fd->secret->inheritable = (flags & FD_CLOEXEC) ?
 			_PR_TRI_TRUE : _PR_TRI_FALSE;
 	}
 }
@@ -123,7 +123,7 @@ void
 _MD_query_fd_inheritable (PRFileDesc *fd)
 {
 	int flags;
-	
+
 	PR_ASSERT(_PR_TRI_UNKNOWN == fd->secret->inheritable);
 	flags = fcntl(fd->secret->md.osfd, F_GETFD, 0);
 	PR_ASSERT(-1 != flags);
@@ -174,7 +174,7 @@ _MD_open (const char *name, PRIntn flags, PRIntn mode)
         if (rv < 0) {
                 err = _MD_ERRNO();
                 _PR_MD_MAP_OPEN_ERROR(err);
-        }                                                                      
+        }
 
     if ((flags & PR_CREATE_FILE) && (NULL !=_pr_rename_lock))
         PR_Unlock(_pr_rename_lock);
@@ -343,7 +343,7 @@ PRInt64 s, s2us;
 			info->type = PR_FILE_DIRECTORY;
 		else
 			info->type = PR_FILE_OTHER;
-	
+
 		/* For the 64 bit version we can use
 		 * the native st_size without modification
 		 */
@@ -449,7 +449,7 @@ _MD_rename (const char *from, const char *to)
     }
     if (NULL != _pr_rename_lock)
         PR_Unlock(_pr_rename_lock);
-    return rv; 
+    return rv;
 }
 
 PRInt32
@@ -463,15 +463,15 @@ struct stat buf;
 		case PR_ACCESS_WRITE_OK:
 			checkFlags = S_IWUSR | S_IWGRP | S_IWOTH;
 			break;
-		
+
 		case PR_ACCESS_READ_OK:
 			checkFlags = S_IRUSR | S_IRGRP | S_IROTH;
 			break;
-		
+
 		case PR_ACCESS_EXISTS:
 			/* we don't need to examine st_mode. */
 			break;
-		
+
 		default:
 			PR_SetError(PR_INVALID_ARGUMENT_ERROR, 0);
 			return -1;
@@ -517,7 +517,7 @@ _MD_mkdir (const char *name, PRIntn mode)
     }
     if (NULL !=_pr_rename_lock)
         PR_Unlock(_pr_rename_lock);
-    return rv; 
+    return rv;
 }
 
 PRInt32
@@ -569,8 +569,8 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 	for (pd = pds, epd = pd + npds; pd < epd; pd++)
 	{
 		PRInt16 in_flags_read = 0, in_flags_write = 0;
-		PRInt16 out_flags_read = 0, out_flags_write = 0; 
-		
+		PRInt16 out_flags_read = 0, out_flags_write = 0;
+
 		if ((NULL != pd->fd) && (0 != pd->in_flags))
 		{
 			if (pd->in_flags & PR_POLL_READ)
@@ -591,7 +591,7 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 					 * We will have to return without calling the
 					 * system poll/select function.  So zero the
 					 * out_flags fields of all the poll descriptors
-					 * before this one. 
+					 * before this one.
 					 */
 					PRPollDesc *prev;
 					for (prev = pds; prev < pd; prev++)
@@ -605,7 +605,7 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 			else
 			{
 				pd->out_flags = 0;  /* pre-condition */
-				
+
 				/* make sure this is an NSPR supported stack */
 				bottom = PR_GetIdentitiesLayer(pd->fd, PR_NSPR_IO_LAYER);
 				PR_ASSERT(NULL != bottom);  /* what to do about that? */
@@ -614,7 +614,7 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 				{
 					if (0 == ready)
 					{
-						PRInt32 osfd = bottom->secret->md.osfd; 
+						PRInt32 osfd = bottom->secret->md.osfd;
 						if (osfd > maxfd) maxfd = osfd;
 						if (in_flags_read & PR_POLL_READ)
 						{
@@ -663,7 +663,7 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 	if (0 != ready) return ready;  /* no need to block */
 
 	remaining = timeout;
-	start = PR_IntervalNow(); 
+	start = PR_IntervalNow();
 
  retry:
 	if (timeout != PR_INTERVAL_NO_TIMEOUT)
@@ -673,9 +673,9 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 		tv.tv_usec = PR_IntervalToMicroseconds( remaining % ticksPerSecond );
 		tvp = &tv;
 	}
-	
+
 	ready = _MD_SELECT(maxfd + 1, &rd, &wt, &ex, tvp);
-	
+
 	if (ready == -1 && errno == EINTR)
 	{
 		if (timeout == PR_INTERVAL_NO_TIMEOUT) goto retry;
@@ -686,10 +686,10 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 			else
 			{
 				remaining = timeout - elapsed;
-				goto retry; 
+				goto retry;
 			}
 		}
-	} 
+	}
 
 	/*
 	** Now to unravel the select sets back into the client's poll
@@ -707,9 +707,9 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 				PRInt32 osfd;
 				bottom = PR_GetIdentitiesLayer(pd->fd, PR_NSPR_IO_LAYER);
 				PR_ASSERT(NULL != bottom);
-				
-				osfd = bottom->secret->md.osfd; 
-				
+
+				osfd = bottom->secret->md.osfd;
+
 				if (FD_ISSET(osfd, &rd))
 				{
 					if (pd->out_flags & _PR_POLL_READ_SYS_READ)
@@ -727,25 +727,25 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 				if (FD_ISSET(osfd, &ex)) out_flags |= PR_POLL_EXCEPT;
 
 /* Workaround for nonblocking connects under net_server */
-#ifndef BONE_VERSION 		
+#ifndef BONE_VERSION
 				if (out_flags)
 				{
 					/* check if it is a pending connect */
 					int i = 0, j = 0;
 					PR_Lock( _connectLock );
-					for( i = 0; i < connectCount; i++ ) 
+					for( i = 0; i < connectCount; i++ )
 					{
 						if(connectList[i].osfd == osfd)
 						{
 							int connectError;
 							int connectResult;
-					
+
 							connectResult = connect(connectList[i].osfd,
 							                        &connectList[i].addr,
 							                        connectList[i].addrlen);
 							connectError = errno;
-					
-							if(connectResult < 0 ) 
+
+							if(connectResult < 0 )
 							{
 								if(connectError == EINTR || connectError == EWOULDBLOCK ||
 					  		   connectError == EINPROGRESS || connectError == EALREADY)
@@ -753,7 +753,7 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 									break;
 								}
 							}
-					
+
 							if(i == (connectCount - 1))
 							{
 								connectList[i].osfd = -1;
@@ -765,7 +765,7 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 								}
 							}
 							connectCount--;
-					
+
 							bottom->secret->md.connectReturnValue = connectResult;
 							bottom->secret->md.connectReturnError = connectError;
 							bottom->secret->md.connectValueValid = PR_TRUE;
@@ -782,7 +782,7 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 		PR_ASSERT(ready > 0);
 	}
 	else if (ready < 0)
-	{ 
+	{
 		err = _MD_ERRNO();
 		if (err == EBADF)
 		{
@@ -805,7 +805,7 @@ _MD_pr_poll(PRPollDesc *pds, PRIntn npds, PRIntervalTime timeout)
 		}
 		else _PR_MD_MAP_SELECT_ERROR(err);
 	}
-	
+
 	return ready;
 }  /* _MD_pr_poll */
 
@@ -819,7 +819,7 @@ _MD_lockfile (PRInt32 osfd)
     PRInt32 rv;
     struct flock linfo;
 
-    linfo.l_type = 
+    linfo.l_type =
     linfo.l_whence = SEEK_SET;
     linfo.l_start = 0;
     linfo.l_len = 0;
@@ -838,7 +838,7 @@ _MD_tlockfile (PRInt32 osfd)
     PRInt32 rv;
     struct flock linfo;
 
-    linfo.l_type = 
+    linfo.l_type =
     linfo.l_whence = SEEK_SET;
     linfo.l_start = 0;
     linfo.l_len = 0;
@@ -857,7 +857,7 @@ _MD_unlockfile (PRInt32 osfd)
     PRInt32 rv;
     struct flock linfo;
 
-    linfo.l_type = 
+    linfo.l_type =
     linfo.l_whence = SEEK_SET;
     linfo.l_start = 0;
     linfo.l_len = 0;

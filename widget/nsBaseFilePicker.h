@@ -21,7 +21,7 @@ class nsBaseFilePicker : public nsIFilePicker
 {
   class AsyncShowFilePicker;
 public:
-  nsBaseFilePicker(); 
+  nsBaseFilePicker();
   virtual ~nsBaseFilePicker();
 
   NS_IMETHOD Init(mozIDOMWindowProxy* aParent,

@@ -1,5 +1,5 @@
 #! gmake
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -10,7 +10,7 @@
 # export - Create generated headers and stubs. Publish public headers to
 #          dist/<arch>/include.
 #          Create libraries. Publish libraries to dist/<arch>/lib.
-#          Create programs. 
+#          Create programs.
 #
 # libs - obsolete.  Now a synonym of "export".
 #
@@ -21,7 +21,7 @@
 # Parameters to this makefile (set these before including):
 #
 # a)
-#	TARGETS	-- the target to create 
+#	TARGETS	-- the target to create
 #			(defaults to $LIBRARY $PROGRAM)
 # b)
 #	DIRS	-- subdirectories for make to recurse on

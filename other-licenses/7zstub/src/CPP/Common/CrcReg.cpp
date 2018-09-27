@@ -29,7 +29,7 @@ class CCrcHasher:
   UInt32 _crc;
   CRC_FUNC _updateFunc;
   Byte mtDummy[1 << 7];
-  
+
   bool SetFunctions(UInt32 tSize);
 public:
   CCrcHasher(): _crc(CRC_INIT_VAL) { SetFunctions(0); }
@@ -42,7 +42,7 @@ public:
 bool CCrcHasher::SetFunctions(UInt32 tSize)
 {
   _updateFunc = g_CrcUpdate;
-  
+
   if (tSize == 1)
     _updateFunc = CrcUpdateT1;
   else if (tSize == 4)
@@ -59,7 +59,7 @@ bool CCrcHasher::SetFunctions(UInt32 tSize)
     else
       return false;
   }
-  
+
   return true;
 }
 

@@ -25,5 +25,5 @@ catch(ex)
 {
   actual = ex + '';
 }
- 
+
 reportCompare(expect, actual, summary);

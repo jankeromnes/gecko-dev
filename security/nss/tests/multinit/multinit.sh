@@ -1,4 +1,4 @@
-#! /bin/sh  
+#! /bin/sh
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -75,7 +75,7 @@ multinit_init()
 
 
 ############################## multinit_main ##############################
-# local shell function to test basic signed and enveloped messages 
+# local shell function to test basic signed and enveloped messages
 # from 1 --> 2"
 ########################################################################
 multinit_main()
@@ -125,21 +125,21 @@ multinit_main()
 	lib2_db=`echo $dirs | sed -e 's;^.*,;;'`
 
 	# show us the command we are executing
-	echo ${PROFILETOOL} ${BINDIR}/multinit --order $order --main_command $main_command --lib1_command $lib1_command --lib2_command $lib2_command $shutdown_command --main_db $main_db --lib1_db $lib1_db --lib2_db $lib2_db $ro_command --main_token_name "Main" --lib1_token_name "Lib1" --lib2_token_name "Lib2" --verbose --summary 
+	echo ${PROFILETOOL} ${BINDIR}/multinit --order $order --main_command $main_command --lib1_command $lib1_command --lib2_command $lib2_command $shutdown_command --main_db $main_db --lib1_db $lib1_db --lib2_db $lib2_db $ro_command --main_token_name "Main" --lib1_token_name "Lib1" --lib2_token_name "Lib2" --verbose --summary
 
 	# execute the command an collect the result. Most of the user
 	# visible output goes to stderr, so it's not captured by the pipe
-	actual_result=`${PROFILETOOL} ${BINDIR}/multinit --order $order --main_command $main_command --lib1_command $lib1_command --lib2_command $lib2_command $shutdown_command --main_db $main_db --lib1_db $lib1_db --lib2_db $lib2_db $ro_command --main_token_name "Main" --lib1_token_name "Lib1" --lib2_token_name "Lib2" --verbose --summary | grep "^result=" | sed -e 's;^result=;;'` 
+	actual_result=`${PROFILETOOL} ${BINDIR}/multinit --order $order --main_command $main_command --lib1_command $lib1_command --lib2_command $lib2_command $shutdown_command --main_db $main_db --lib1_db $lib1_db --lib2_db $lib2_db $ro_command --main_token_name "Main" --lib1_token_name "Lib1" --lib2_token_name "Lib2" --verbose --summary | grep "^result=" | sed -e 's;^result=;;'`
 
 	# show what we got and what we expected for diagnostic purposes
 	echo "actual   = |$actual_result|"
 	echo "expected = |$expected_result|"
-	test  "$actual_result" == "$expected_result" 
+	test  "$actual_result" == "$expected_result"
 	html_msg $? 0 "$testname"
     fi
   done
 }
-  
+
 ############################## multinit_cleanup ###########################
 # local shell function to finish this script (no exit since it might be
 # sourced)

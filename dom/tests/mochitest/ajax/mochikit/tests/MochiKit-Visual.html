@@ -9,7 +9,7 @@
     <script type="text/javascript" src="../MochiKit/Signal.js"></script>
     <script type="text/javascript" src="../MochiKit/Position.js"></script>
     <script type="text/javascript" src="../MochiKit/Visual.js"></script>
-    <script type="text/javascript" src="SimpleTest/SimpleTest.js"></script>     
+    <script type="text/javascript" src="SimpleTest/SimpleTest.js"></script>
 
     <link rel="stylesheet" type="text/css" href="SimpleTest/test.css">
     <style type="text/css">
@@ -38,7 +38,7 @@ try {
     };
 
     TestQueue.prototype = new MochiKit.Visual.ScopedQueue();
-    
+
     MochiKit.Base.update(TestQueue.prototype, {
         startLoop: function (func, interval) {
             this.started = true;
@@ -54,7 +54,7 @@ try {
             this.started = false;
         }
     });
-    
+
     var gl = new TestQueue();
     MochiKit.Visual.Queues.instances['global'] = gl;
     MochiKit.Visual.Queues.instances['elt1'] = gl;
@@ -70,11 +70,11 @@ try {
     pulsate("elt1", {pulses: 2, afterFinish: function () {
         is(getElement('elt1').style.display != 'none', true, "pulsate with numbered pulses ok");
     }});
-    
+
     shake("elt1", {afterFinish: function () {
         is(getElement('elt1').style.display != 'none', true, "shake ok");
     }});
-    
+
     fade("elt1", {afterFinish: function () {
         is(getElement('elt1').style.display, 'none', "fade ok");
     }});

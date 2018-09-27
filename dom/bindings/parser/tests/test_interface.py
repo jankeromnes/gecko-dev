@@ -32,7 +32,7 @@ def WebIDLTest(parser, harness):
 
         interface QNameDerived : QNameBase {
           attribute long long foo;
-          attribute byte bar;          
+          attribute byte bar;
         };
     """)
     results = parser.finish()

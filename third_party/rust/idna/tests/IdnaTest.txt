@@ -12,28 +12,28 @@
 # This file is in UTF8, with certain characters escaped using the \uXXXX or \x{XXXX}
 # convention where they could otherwise have a confusing display.
 # These characters include:
-# 
+#
 # - General Categories C, Z, and M
 # - Default ignorable characters
 # - Bidi categories R, AL, AN
-# 
+#
 # Columns (c1, c2,...) are separated by semicolons.
 # Leading and trailing spaces and tabs in each column are ignored.
 # Comments are indicated with hash marks.
 #
 #  Column 1: type -       T for transitional, N for nontransitional, B for both
 #  Column 2: source -     The source string to be tested
-#  Column 3: toUnicode -  The result of applying toUnicode to the source, using nontransitional. 
+#  Column 3: toUnicode -  The result of applying toUnicode to the source, using nontransitional.
 #                         A blank value means the same as the source value; a value in [...] is a set of error codes.
 #  Column 4: toASCII -    The result of applying toASCII to the source, using the specified type: T, N, or B.
 #                         A blank value means the same as the toUnicode value; a value in [...] is a set of error codes.
 #  Column 5: idna2008 -   NV8 is only present if the status is valid but the character is excluded by IDNA2008
 #                         from all domain names for all versions of Unicode.
-#                         XV8 is present when the character is excluded by IDNA2008 for the current version of Unicode. 
+#                         XV8 is present when the character is excluded by IDNA2008 for the current version of Unicode.
 #                         These are informative values only.
 #
 # If the value of toUnicode is the same as source, the column will be blank.
-# The line comments currently show visible characters that have been escaped 
+# The line comments currently show visible characters that have been escaped
 # (after removing default-ignorables and controls, except for whitespace)
 #
 # The test is performed with the following flag settings:
@@ -60,7 +60,7 @@
 # CONFORMANCE:
 #
 # To test for conformance to UTS46, an implementation must first perform the toUnicode operation
-# on the source string, then the toASCII operation (with the indicated type) on the source string. 
+# on the source string, then the toASCII operation (with the indicated type) on the source string.
 # Implementations may be more strict than UTS46; thus they may have errors where the file indicates results.
 # In particular, an implementation conformant to IDNA2008 would disallow the input for lines marked with NV8.
 #
@@ -68,11 +68,11 @@
 # they need not reproduce those codes. Thus to then verify conformance for the toASCII and toUnicode columns:
 #
 # - If the file indicates an error, the implementation must also have an error.
-# - If the file does not indicate an error, then the implementation must either have an error, 
+# - If the file does not indicate an error, then the implementation must either have an error,
 #   or must have a matching result.
 #
 # ====================================================================================================
-B;	fass.de;	;	
+B;	fass.de;	;
 T;	faß.de;	;	fass.de
 N;	faß.de;	;	xn--fa-hia.de
 T;	Faß.de;	faß.de;	fass.de
@@ -127,7 +127,7 @@ T;	A\u200CB;	[C1];	ab	#	ab
 N;	A\u200CB;	[C1];	[C1]	#	ab
 T;	A\u200Cb;	[C1];	ab	#	ab
 N;	A\u200Cb;	[C1];	[C1]	#	ab
-B;	ab;	;	
+B;	ab;	;
 B;	xn--ab-j1t;	[C1];	[C1]	#	ab
 T;	a\u094D\u200Cb;	;	xn--ab-fsf	#	a्b
 N;	a\u094D\u200Cb;	;	xn--ab-fsf604u	#	a्b
@@ -207,7 +207,7 @@ B;	1234567890a\u03081234567890123456789012345678901234567890123456;	1234567890ä
 B;	1234567890A\u03081234567890123456789012345678901234567890123456;	1234567890ä1234567890123456789012345678901234567890123456;	[A4_2]
 B;	1234567890Ä1234567890123456789012345678901234567890123456;	1234567890ä1234567890123456789012345678901234567890123456;	[A4_2]
 B;	xn--12345678901234567890123456789012345678901234567890123456-fxe;	1234567890ä1234567890123456789012345678901234567890123456;	[A4_2]
-B;	www.eXample.cOm;	www.example.com;	
+B;	www.eXample.cOm;	www.example.com;
 B;	Bücher.de;	bücher.de;	xn--bcher-kva.de
 B;	Bu\u0308cher.de;	bücher.de;	xn--bcher-kva.de
 B;	bu\u0308cher.de;	bücher.de;	xn--bcher-kva.de
@@ -281,13 +281,13 @@ B;	xn--mgba3gch31f.com;	\u0646\u0627\u0645\u0647\u0627\u06CC.com;	xn--mgba3gch31
 B;	\u0646\u0627\u0645\u0647\u0627\u06CC.com;	;	xn--mgba3gch31f.com	#	نامهای.com
 B;	\u0646\u0627\u0645\u0647\u0627\u06CC.COM;	\u0646\u0627\u0645\u0647\u0627\u06CC.com;	xn--mgba3gch31f.com	#	نامهای.com
 B;	\u0646\u0627\u0645\u0647\u0627\u06CC.Com;	\u0646\u0627\u0645\u0647\u0627\u06CC.com;	xn--mgba3gch31f.com	#	نامهای.com
-B;	a.b．c。d｡;	a.b.c.d.;	
-B;	a.b.c。d。;	a.b.c.d.;	
-B;	A.B.C。D。;	a.b.c.d.;	
-B;	A.b.c。D。;	a.b.c.d.;	
-B;	a.b.c.d.;	;	
-B;	A.B．C。D｡;	a.b.c.d.;	
-B;	A.b．c。D｡;	a.b.c.d.;	
+B;	a.b．c。d｡;	a.b.c.d.;
+B;	a.b.c。d。;	a.b.c.d.;
+B;	A.B.C。D。;	a.b.c.d.;
+B;	A.b.c。D。;	a.b.c.d.;
+B;	a.b.c.d.;	;
+B;	A.B．C。D｡;	a.b.c.d.;
+B;	A.b．c。D｡;	a.b.c.d.;
 B;	U\u0308.xn--tda;	ü.ü;	xn--tda.xn--tda
 B;	Ü.xn--tda;	ü.ü;	xn--tda.xn--tda
 B;	ü.xn--tda;	ü.ü;	xn--tda.xn--tda
@@ -305,7 +305,7 @@ B;	Ü.ü;	ü.ü;	xn--tda.xn--tda
 B;	U\u0308.u\u0308;	ü.ü;	xn--tda.xn--tda
 B;	xn--u-ccb;	[V1];	[V1]	#	ü
 B;	a⒈com;	[P1 V6];	[P1 V6]
-B;	a1.com;	;	
+B;	a1.com;	;
 B;	A⒈COM;	[P1 V6];	[P1 V6]
 B;	A⒈Com;	[P1 V6];	[P1 V6]
 B;	xn--acom-0w1b;	[V6];	[V6]
@@ -382,8 +382,8 @@ B;	夡夞夜夙;	;	xn--bssffl
 B;	ˣ\u034Fℕ\u200B﹣\u00AD－\u180Cℬ\uFE00S\u2064𝔰󠇯FFL;	夡夞夜夙;	xn--bssffl
 B;	x\u034FN\u200B-\u00AD-\u180CB\uFE00S\u2064s󠇯FFL;	夡夞夜夙;	xn--bssffl
 B;	ˣ\u034Fℕ\u200B﹣\u00AD－\u180Cℬ\uFE00s\u2064𝔰󠇯ffl;	夡夞夜夙;	xn--bssffl
-B;	123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890123.1234567890123456789012345678901234567890123456789012345678901;	;	
-B;	123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890123.1234567890123456789012345678901234567890123456789012345678901.;	;	
+B;	123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890123.1234567890123456789012345678901234567890123456789012345678901;	;
+B;	123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890123.1234567890123456789012345678901234567890123456789012345678901.;	;
 B;	123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890123.12345678901234567890123456789012345678901234567890123456789012;	;	[A4_1]
 B;	123456789012345678901234567890123456789012345678901234567890123.1234567890123456789012345678901234567890123456789012345678901234.123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890;	;	[A4_2]
 B;	123456789012345678901234567890123456789012345678901234567890123.1234567890123456789012345678901234567890123456789012345678901234.123456789012345678901234567890123456789012345678901234567890123.123456789012345678901234567890123456789012345678901234567890.;	;	[A4_2]
@@ -469,8 +469,8 @@ B;	a.b.\u0308c.d;	[V5];	[V5]	#	a.b.̈c.d
 B;	A.B.\u0308C.D;	[V5];	[V5]	#	a.b.̈c.d
 B;	A.b.\u0308c.d;	[V5];	[V5]	#	a.b.̈c.d
 B;	a.b.xn--c-bcb.d;	[V5];	[V5]	#	a.b.̈c.d
-B;	A0;	a0;	
-B;	0A;	0a;	
+B;	A0;	a0;
+B;	0A;	0a;
 B;	0A.\u05D0;	[B1];	[B1]	#	0a.א
 B;	0a.\u05D0;	[B1];	[B1]	#	0a.א
 B;	0a.xn--4db;	[B1];	[B1]	#	0a.א
@@ -521,19 +521,19 @@ N;	ஹ\u200D;	[C2];	[C2]	#	ஹ
 B;	xn--dmc;	ஹ;	xn--dmc
 B;	ஹ;	;	xn--dmc
 B;	xn--dmc225h;	[C2];	[C2]	#	ஹ
-T;	\u200D;	[C2];	[A4_2]	#	
-N;	\u200D;	[C2];	[C2]	#	
+T;	\u200D;	[C2];	[A4_2]	#
+N;	\u200D;	[C2];	[C2]	#
 B;	;	[A4_2];	[A4_2]
-B;	xn--1ug;	[C2];	[C2]	#	
+B;	xn--1ug;	[C2];	[C2]	#
 T;	ஹ\u0BCD\u200C;	;	xn--dmc4b	#	ஹ்
 N;	ஹ\u0BCD\u200C;	;	xn--dmc4by94h	#	ஹ்
 B;	xn--dmc4by94h;	ஹ\u0BCD\u200C;	xn--dmc4by94h	#	ஹ்
 T;	ஹ\u200C;	[C1];	xn--dmc	#	ஹ
 N;	ஹ\u200C;	[C1];	[C1]	#	ஹ
 B;	xn--dmc025h;	[C1];	[C1]	#	ஹ
-T;	\u200C;	[C1];	[A4_2]	#	
-N;	\u200C;	[C1];	[C1]	#	
-B;	xn--0ug;	[C1];	[C1]	#	
+T;	\u200C;	[C1];	[A4_2]	#
+N;	\u200C;	[C1];	[C1]	#
+B;	xn--0ug;	[C1];	[C1]	#
 T;	\u0644\u0670\u200C\u06ED\u06EF;	;	xn--ghb2gxqia	#	لٰۭۯ
 N;	\u0644\u0670\u200C\u06ED\u06EF;	;	xn--ghb2gxqia7523a	#	لٰۭۯ
 B;	xn--ghb2gxqia;	\u0644\u0670\u06ED\u06EF;	xn--ghb2gxqia	#	لٰۭۯ
@@ -3962,7 +3962,7 @@ T;	\u200D.9;	[C2];	[A4_2]	#	.9
 N;	\u200D.9;	[C2];	[C2]	#	.9
 B;	.9;	[A4_2];	[A4_2]
 B;	xn--1ug.9;	[C2];	[C2]	#	.9
-B;	9;	;	
+B;	9;	;
 B;	\u0779ᡭ𪕈。\u06B6\u08D9;	[B2 B3];	[B2 B3]	#	ݹᡭ𪕈.ڶࣙ
 B;	xn--9pb497fs270c.xn--pkb80i;	[B2 B3];	[B2 B3]	#	ݹᡭ𪕈.ڶࣙ
 B;	\u0726５\u07E2겙。\u1CF4𐷚;	[B1 B2 B3 P1 V5 V6];	[B1 B2 B3 P1 V5 V6]	#	ܦ5ߢ겙.᳴
@@ -4526,7 +4526,7 @@ T;	𝟙｡\u200D𝟸\u200D⁷;	[C2];	1.27	#	1.27
 N;	𝟙｡\u200D𝟸\u200D⁷;	[C2];	[C2]	#	1.27
 T;	1。\u200D2\u200D7;	[C2];	1.27	#	1.27
 N;	1。\u200D2\u200D7;	[C2];	[C2]	#	1.27
-B;	1.27;	;	
+B;	1.27;	;
 B;	1.xn--27-l1tb;	[C2];	[C2]	#	1.27
 B;	ᡨ-｡󠻋𝟷;	[P1 V3 V6];	[P1 V3 V6]
 B;	ᡨ-。󠻋1;	[P1 V3 V6];	[P1 V3 V6]
@@ -6452,7 +6452,7 @@ T;	\u200D.f;	[C2];	[A4_2]	#	.f
 N;	\u200D.f;	[C2];	[C2]	#	.f
 B;	.f;	[A4_2];	[A4_2]
 B;	xn--1ug.f;	[C2];	[C2]	#	.f
-B;	f;	;	
+B;	f;	;
 T;	\u200D㨲｡ß;	[C2];	xn--9bm.ss	#	㨲.ß
 N;	\u200D㨲｡ß;	[C2];	[C2]	#	㨲.ß
 T;	\u200D㨲。ß;	[C2];	xn--9bm.ss	#	㨲.ß

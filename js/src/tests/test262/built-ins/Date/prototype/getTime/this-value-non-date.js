@@ -6,7 +6,7 @@ es6id: 20.3.4.10
 description: >
   Behavior when "this" value is an Object without a [[DateValue]] internal slot
 info: |
-  1. Return ? thisTimeValue(this value). 
+  1. Return ? thisTimeValue(this value).
 
   The abstract operation thisTimeValue(value) performs the following steps:
 

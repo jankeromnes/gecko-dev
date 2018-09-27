@@ -1,4 +1,4 @@
-#! /bin/sh  
+#! /bin/sh
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -64,7 +64,7 @@ smime_sign()
   html_msg $? 0 "Create Detached Signature Alice (${HASH})" "."
 
   echo "cmsutil -D -i alice.d${SIG} -c alice.txt -d ${P_R_BOBDIR} "
-  ${PROFTOOL} ${BINDIR}/cmsutil -D -i alice.d${SIG} -c alice.txt -d ${P_R_BOBDIR} 
+  ${PROFTOOL} ${BINDIR}/cmsutil -D -i alice.d${SIG} -c alice.txt -d ${P_R_BOBDIR}
   html_msg $? 0 "Verifying Alice's Detached Signature (${HASH})" "."
 
   echo "$SCRIPTNAME: Signing Attached Message (${HASH}) ------------------"
@@ -87,7 +87,7 @@ smime_sign()
   html_msg $? 0 "Create Detached Signature Alice (ECDSA w/ ${HASH})" "."
 
   echo "cmsutil -D -i alice-ec.d${SIG} -c alice.txt -d ${P_R_BOBDIR} "
-  ${PROFTOOL} ${BINDIR}/cmsutil -D -i alice-ec.d${SIG} -c alice.txt -d ${P_R_BOBDIR} 
+  ${PROFTOOL} ${BINDIR}/cmsutil -D -i alice-ec.d${SIG} -c alice.txt -d ${P_R_BOBDIR}
   html_msg $? 0 "Verifying Alice's Detached Signature (ECDSA w/ ${HASH})" "."
 
   echo "$SCRIPTNAME: Signing Attached Message (ECDSA w/ ${HASH}) ------------------"
@@ -134,7 +134,7 @@ smime_p7()
 }
 
 ############################## smime_main ##############################
-# local shell function to test basic signed and enveloped messages 
+# local shell function to test basic signed and enveloped messages
 # from 1 --> 2"
 ########################################################################
 smime_main()
@@ -206,7 +206,7 @@ smime_main()
 
   diff alice.txt alice.data4
   html_msg $? 0 "Compare Decoded with Multiple Email cert" "."
-  
+
   echo "$SCRIPTNAME: Sending CERTS-ONLY Message ------------------------------"
   echo "cmsutil -O -r \"Alice,bob@bogus.com,dave@bogus.com\" \\"
   echo "        -d ${P_R_ALICEDIR} > co.der"
@@ -232,7 +232,7 @@ smime_main()
   diff alice.txt alice.data2
   html_msg $? 0 "Compare Decoded and Original Data" "."
 }
-  
+
 ############################## smime_cleanup ###########################
 # local shell function to finish this script (no exit since it might be
 # sourced)

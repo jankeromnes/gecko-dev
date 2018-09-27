@@ -55,7 +55,7 @@ TestServer.prototype = {
 
     this.reset();
   } ,
-  
+
   onStopListening: function(socket) {} ,
 
   /**
@@ -95,7 +95,7 @@ function checkAddrEqual(lhs, rhs) {
     Assert.equal(lhs.address, rhs.address);
     Assert.equal(lhs.port, rhs.port);
   }
-  
+
   /* TODO: fully support ipv6 and local */
 }
 
@@ -194,6 +194,6 @@ function run_test() {
   add_test(testIpv4);
   /* TODO: testIpv6 */
   /* TODO: testLocal */
-    
+
   run_next_test();
 }

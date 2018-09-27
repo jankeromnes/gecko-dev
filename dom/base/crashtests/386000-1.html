@@ -9,15 +9,15 @@ function boom()
 {
   de = document.documentElement;
   document.addEventListener("DOMNodeRemoved", f);
-    
+
   function f()
   {
     document.removeEventListener("DOMNodeRemoved", f);
     de.appendChild(document.createElement("body"));
   }
-    
+
   document.removeChild(de);
-  
+
   setTimeout(cont, 30);
 }
 

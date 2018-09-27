@@ -60,9 +60,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var ArraySet = __webpack_require__(1).ArraySet;
-	
+
 	function makeTestSet() {
 	  var set = new ArraySet();
 	  for (var i = 0; i < 100; i++) {
@@ -70,48 +70,48 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	  return set;
 	}
-	
+
 	exports['test .has() membership'] = function (assert) {
 	  var set = makeTestSet();
 	  for (var i = 0; i < 100; i++) {
 	    assert.ok(set.has(String(i)));
 	  }
 	};
-	
+
 	exports['test .indexOf() elements'] = function (assert) {
 	  var set = makeTestSet();
 	  for (var i = 0; i < 100; i++) {
 	    assert.strictEqual(set.indexOf(String(i)), i);
 	  }
 	};
-	
+
 	exports['test .at() indexing'] = function (assert) {
 	  var set = makeTestSet();
 	  for (var i = 0; i < 100; i++) {
 	    assert.strictEqual(set.at(i), String(i));
 	  }
 	};
-	
+
 	exports['test creating from an array'] = function (assert) {
 	  var set = ArraySet.fromArray(['foo', 'bar', 'baz', 'quux', 'hasOwnProperty']);
-	
+
 	  assert.ok(set.has('foo'));
 	  assert.ok(set.has('bar'));
 	  assert.ok(set.has('baz'));
 	  assert.ok(set.has('quux'));
 	  assert.ok(set.has('hasOwnProperty'));
-	
+
 	  assert.strictEqual(set.indexOf('foo'), 0);
 	  assert.strictEqual(set.indexOf('bar'), 1);
 	  assert.strictEqual(set.indexOf('baz'), 2);
 	  assert.strictEqual(set.indexOf('quux'), 3);
-	
+
 	  assert.strictEqual(set.at(0), 'foo');
 	  assert.strictEqual(set.at(1), 'bar');
 	  assert.strictEqual(set.at(2), 'baz');
 	  assert.strictEqual(set.at(3), 'quux');
 	};
-	
+
 	exports['test that you can add __proto__; see github issue #30'] = function (assert) {
 	  var set = new ArraySet();
 	  set.add('__proto__');
@@ -119,14 +119,14 @@ var SOURCE_MAP_TEST_MODULE =
 	  assert.strictEqual(set.at(0), '__proto__');
 	  assert.strictEqual(set.indexOf('__proto__'), 0);
 	};
-	
+
 	exports['test .fromArray() with duplicates'] = function (assert) {
 	  var set = ArraySet.fromArray(['foo', 'foo']);
 	  assert.ok(set.has('foo'));
 	  assert.strictEqual(set.at(0), 'foo');
 	  assert.strictEqual(set.indexOf('foo'), 0);
 	  assert.strictEqual(set.toArray().length, 1);
-	
+
 	  set = ArraySet.fromArray(['foo', 'foo'], true);
 	  assert.ok(set.has('foo'));
 	  assert.strictEqual(set.at(0), 'foo');
@@ -134,17 +134,17 @@ var SOURCE_MAP_TEST_MODULE =
 	  assert.strictEqual(set.indexOf('foo'), 0);
 	  assert.strictEqual(set.toArray().length, 2);
 	};
-	
+
 	exports['test .add() with duplicates'] = function (assert) {
 	  var set = new ArraySet();
 	  set.add('foo');
-	
+
 	  set.add('foo');
 	  assert.ok(set.has('foo'));
 	  assert.strictEqual(set.at(0), 'foo');
 	  assert.strictEqual(set.indexOf('foo'), 0);
 	  assert.strictEqual(set.toArray().length, 1);
-	
+
 	  set.add('foo', true);
 	  assert.ok(set.has('foo'));
 	  assert.strictEqual(set.at(0), 'foo');
@@ -152,7 +152,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  assert.strictEqual(set.indexOf('foo'), 0);
 	  assert.strictEqual(set.toArray().length, 2);
 	};
-	
+
 	exports['test .size()'] = function (assert) {
 	  var set = new ArraySet();
 	  set.add('foo');
@@ -160,34 +160,34 @@ var SOURCE_MAP_TEST_MODULE =
 	  set.add('baz');
 	  assert.strictEqual(set.size(), 3);
 	};
-	
+
 	exports['test .size() with disallowed duplicates'] = function (assert) {
 	  var set = new ArraySet();
-	
+
 	  set.add('foo');
 	  set.add('foo');
-	
+
 	  set.add('bar');
 	  set.add('bar');
-	
+
 	  set.add('baz');
 	  set.add('baz');
-	
+
 	  assert.strictEqual(set.size(), 3);
 	};
-	
+
 	exports['test .size() with allowed duplicates'] = function (assert) {
 	  var set = new ArraySet();
-	
+
 	  set.add('foo');
 	  set.add('foo', true);
-	
+
 	  set.add('bar');
 	  set.add('bar', true);
-	
+
 	  set.add('baz');
 	  set.add('baz', true);
-	
+
 	  assert.strictEqual(set.size(), 3);
 	};
 
@@ -202,11 +202,11 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var util = __webpack_require__(2);
 	var has = Object.prototype.hasOwnProperty;
 	var hasNativeMap = typeof Map !== "undefined";
-	
+
 	/**
 	 * A data structure which is a combination of an array and a set. Adding a new
 	 * member is O(1), testing for membership is O(1), and finding the index of an
@@ -217,7 +217,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  this._array = [];
 	  this._set = hasNativeMap ? new Map() : Object.create(null);
 	}
-	
+
 	/**
 	 * Static method for creating ArraySet instances from an existing array.
 	 */
@@ -228,7 +228,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	  return set;
 	};
-	
+
 	/**
 	 * Return how many unique items are in this ArraySet. If duplicates have been
 	 * added, than those do not count towards the size.
@@ -238,7 +238,7 @@ var SOURCE_MAP_TEST_MODULE =
 	ArraySet.prototype.size = function ArraySet_size() {
 	  return hasNativeMap ? this._set.size : Object.getOwnPropertyNames(this._set).length;
 	};
-	
+
 	/**
 	 * Add the given string to this set.
 	 *
@@ -259,7 +259,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	  }
 	};
-	
+
 	/**
 	 * Is the given string a member of this set?
 	 *
@@ -273,7 +273,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    return has.call(this._set, sStr);
 	  }
 	};
-	
+
 	/**
 	 * What is the index of the given string in the array?
 	 *
@@ -291,10 +291,10 @@ var SOURCE_MAP_TEST_MODULE =
 	      return this._set[sStr];
 	    }
 	  }
-	
+
 	  throw new Error('"' + aStr + '" is not in the set.');
 	};
-	
+
 	/**
 	 * What is the element at the given index?
 	 *
@@ -306,7 +306,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	  throw new Error('No element indexed by ' + aIdx);
 	};
-	
+
 	/**
 	 * Returns the array representation of this set (which has the proper indices
 	 * indicated by indexOf). Note that this is a copy of the internal array used
@@ -315,7 +315,7 @@ var SOURCE_MAP_TEST_MODULE =
 	ArraySet.prototype.toArray = function ArraySet_toArray() {
 	  return this._array.slice();
 	};
-	
+
 	exports.ArraySet = ArraySet;
 
 
@@ -329,7 +329,7 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	/**
 	 * This is a helper function for getting values from parameter/options
 	 * objects.
@@ -350,10 +350,10 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	}
 	exports.getArg = getArg;
-	
+
 	var urlRegexp = /^(?:([\w+\-.]+):)?\/\/(?:(\w+:\w+)@)?([\w.-]*)(?::(\d+))?(.*)$/;
 	var dataUrlRegexp = /^data:.+\,.+$/;
-	
+
 	function urlParse(aUrl) {
 	  var match = aUrl.match(urlRegexp);
 	  if (!match) {
@@ -368,7 +368,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  };
 	}
 	exports.urlParse = urlParse;
-	
+
 	function urlGenerate(aParsedUrl) {
 	  var url = '';
 	  if (aParsedUrl.scheme) {
@@ -390,7 +390,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  return url;
 	}
 	exports.urlGenerate = urlGenerate;
-	
+
 	/**
 	 * Normalizes a path, or the path portion of a URL:
 	 *
@@ -412,7 +412,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    path = url.path;
 	  }
 	  var isAbsolute = exports.isAbsolute(path);
-	
+
 	  var parts = path.split(/\/+/);
 	  for (var part, up = 0, i = parts.length - 1; i >= 0; i--) {
 	    part = parts[i];
@@ -434,11 +434,11 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	  }
 	  path = parts.join('/');
-	
+
 	  if (path === '') {
 	    path = isAbsolute ? '/' : '.';
 	  }
-	
+
 	  if (url) {
 	    url.path = path;
 	    return urlGenerate(url);
@@ -446,7 +446,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  return path;
 	}
 	exports.normalize = normalize;
-	
+
 	/**
 	 * Joins two paths/URLs.
 	 *
@@ -475,7 +475,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (aRootUrl) {
 	    aRoot = aRootUrl.path || '/';
 	  }
-	
+
 	  // `join(foo, '//www.example.org')`
 	  if (aPathUrl && !aPathUrl.scheme) {
 	    if (aRootUrl) {
@@ -483,21 +483,21 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	    return urlGenerate(aPathUrl);
 	  }
-	
+
 	  if (aPathUrl || aPath.match(dataUrlRegexp)) {
 	    return aPath;
 	  }
-	
+
 	  // `join('http://', 'www.example.com')`
 	  if (aRootUrl && !aRootUrl.host && !aRootUrl.path) {
 	    aRootUrl.host = aPath;
 	    return urlGenerate(aRootUrl);
 	  }
-	
+
 	  var joined = aPath.charAt(0) === '/'
 	    ? aPath
 	    : normalize(aRoot.replace(/\/+$/, '') + '/' + aPath);
-	
+
 	  if (aRootUrl) {
 	    aRootUrl.path = joined;
 	    return urlGenerate(aRootUrl);
@@ -505,11 +505,11 @@ var SOURCE_MAP_TEST_MODULE =
 	  return joined;
 	}
 	exports.join = join;
-	
+
 	exports.isAbsolute = function (aPath) {
 	  return aPath.charAt(0) === '/' || urlRegexp.test(aPath);
 	};
-	
+
 	/**
 	 * Make a path relative to a URL or another path.
 	 *
@@ -520,9 +520,9 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (aRoot === "") {
 	    aRoot = ".";
 	  }
-	
+
 	  aRoot = aRoot.replace(/\/$/, '');
-	
+
 	  // It is possible for the path to be above the root. In this case, simply
 	  // checking whether the root is a prefix of the path won't work. Instead, we
 	  // need to remove components from the root one by one, until either we find
@@ -533,7 +533,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (index < 0) {
 	      return aPath;
 	    }
-	
+
 	    // If the only part of the root that is left is the scheme (i.e. http://,
 	    // file:///, etc.), one or more slashes (/), or simply nothing at all, we
 	    // have exhausted all components, so the path is not relative to the root.
@@ -541,24 +541,24 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (aRoot.match(/^([^\/]+:\/)?\/*$/)) {
 	      return aPath;
 	    }
-	
+
 	    ++level;
 	  }
-	
+
 	  // Make sure we add a "../" for each component we removed from the root.
 	  return Array(level + 1).join("../") + aPath.substr(aRoot.length + 1);
 	}
 	exports.relative = relative;
-	
+
 	var supportsNullProto = (function () {
 	  var obj = Object.create(null);
 	  return !('__proto__' in obj);
 	}());
-	
+
 	function identity (s) {
 	  return s;
 	}
-	
+
 	/**
 	 * Because behavior goes wacky when you set `__proto__` on objects, we
 	 * have to prefix all the strings in our set with an arbitrary character.
@@ -572,31 +572,31 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (isProtoString(aStr)) {
 	    return '$' + aStr;
 	  }
-	
+
 	  return aStr;
 	}
 	exports.toSetString = supportsNullProto ? identity : toSetString;
-	
+
 	function fromSetString(aStr) {
 	  if (isProtoString(aStr)) {
 	    return aStr.slice(1);
 	  }
-	
+
 	  return aStr;
 	}
 	exports.fromSetString = supportsNullProto ? identity : fromSetString;
-	
+
 	function isProtoString(s) {
 	  if (!s) {
 	    return false;
 	  }
-	
+
 	  var length = s.length;
-	
+
 	  if (length < 9 /* "__proto__".length */) {
 	    return false;
 	  }
-	
+
 	  if (s.charCodeAt(length - 1) !== 95  /* '_' */ ||
 	      s.charCodeAt(length - 2) !== 95  /* '_' */ ||
 	      s.charCodeAt(length - 3) !== 111 /* 'o' */ ||
@@ -608,16 +608,16 @@ var SOURCE_MAP_TEST_MODULE =
 	      s.charCodeAt(length - 9) !== 95  /* '_' */) {
 	    return false;
 	  }
-	
+
 	  for (var i = length - 10; i >= 0; i--) {
 	    if (s.charCodeAt(i) !== 36 /* '$' */) {
 	      return false;
 	    }
 	  }
-	
+
 	  return true;
 	}
-	
+
 	/**
 	 * Comparator between two mappings where the original positions are compared.
 	 *
@@ -631,31 +631,31 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalLine - mappingB.originalLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalColumn - mappingB.originalColumn;
 	  if (cmp !== 0 || onlyCompareOriginal) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedColumn - mappingB.generatedColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedLine - mappingB.generatedLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  return strcmp(mappingA.name, mappingB.name);
 	}
 	exports.compareByOriginalPositions = compareByOriginalPositions;
-	
+
 	/**
 	 * Comparator between two mappings with deflated source and name indices where
 	 * the generated positions are compared.
@@ -670,51 +670,51 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedColumn - mappingB.generatedColumn;
 	  if (cmp !== 0 || onlyCompareGenerated) {
 	    return cmp;
 	  }
-	
+
 	  cmp = strcmp(mappingA.source, mappingB.source);
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalLine - mappingB.originalLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalColumn - mappingB.originalColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  return strcmp(mappingA.name, mappingB.name);
 	}
 	exports.compareByGeneratedPositionsDeflated = compareByGeneratedPositionsDeflated;
-	
+
 	function strcmp(aStr1, aStr2) {
 	  if (aStr1 === aStr2) {
 	    return 0;
 	  }
-	
+
 	  if (aStr1 === null) {
 	    return 1; // aStr2 !== null
 	  }
-	
+
 	  if (aStr2 === null) {
 	    return -1; // aStr1 !== null
 	  }
-	
+
 	  if (aStr1 > aStr2) {
 	    return 1;
 	  }
-	
+
 	  return -1;
 	}
-	
+
 	/**
 	 * Comparator between two mappings with inflated source and name strings where
 	 * the generated positions are compared.
@@ -724,31 +724,31 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedColumn - mappingB.generatedColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = strcmp(mappingA.source, mappingB.source);
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalLine - mappingB.originalLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalColumn - mappingB.originalColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  return strcmp(mappingA.name, mappingB.name);
 	}
 	exports.compareByGeneratedPositionsInflated = compareByGeneratedPositionsInflated;
-	
+
 	/**
 	 * Strip any JSON XSSI avoidance prefix from the string (as documented
 	 * in the source maps specification), and then parse the string as
@@ -758,14 +758,14 @@ var SOURCE_MAP_TEST_MODULE =
 	  return JSON.parse(str.replace(/^\)]}'[^\n]*\n/, ''));
 	}
 	exports.parseSourceMapInput = parseSourceMapInput;
-	
+
 	/**
 	 * Compute the URL of a source given the the source root, the source's
 	 * URL, and the source map's URL.
 	 */
 	function computeSourceURL(sourceRoot, sourceURL, sourceMapURL) {
 	  sourceURL = sourceURL || '';
-	
+
 	  if (sourceRoot) {
 	    // This follows what Chrome does.
 	    if (sourceRoot[sourceRoot.length - 1] !== '/' && sourceURL[0] !== '/') {
@@ -778,7 +778,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    //   entries in the “source” field.
 	    sourceURL = sourceRoot + sourceURL;
 	  }
-	
+
 	  // Historically, SourceMapConsumer did not take the sourceMapURL as
 	  // a parameter.  This mode is still somewhat supported, which is why
 	  // this code block is conditional.  However, it's preferable to pass
@@ -807,7 +807,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	    sourceURL = join(urlGenerate(parsed), sourceURL);
 	  }
-	
+
 	  return normalize(sourceURL);
 	}
 	exports.computeSourceURL = computeSourceURL;

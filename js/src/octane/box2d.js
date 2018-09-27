@@ -539,7 +539,7 @@ var world = null;
 
 var Box2DBenchmark = new BenchmarkSuite('Box2D', [5432788],
                                         [new Benchmark('Box2D',
-                                                       false, 
+                                                       false,
                                                        false,
                                                        60,
                                                        runBox2D,

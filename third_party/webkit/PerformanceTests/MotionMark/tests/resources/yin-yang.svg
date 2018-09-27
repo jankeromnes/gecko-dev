@@ -12,6 +12,6 @@
     <circle cx="100" cy="100" r="98" fill="green" clip-path="url(#right-half)"/>
     <circle cx="100" cy="50"  r="49" fill="green"/>
     <circle cx="100" cy="148" r="49" fill="white"/>
-    <circle cx="100" cy="50"  r="10" fill="white"/>    
+    <circle cx="100" cy="50"  r="10" fill="white"/>
     <circle cx="100" cy="148" r="10" fill="green"/>
 </svg>

@@ -1,5 +1,5 @@
 VAR = val1 	 \
-  	  val2  
+  	  val2
 
 VAR2 = val1space\
 val2

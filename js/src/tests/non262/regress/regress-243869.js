@@ -34,5 +34,5 @@ catch(eb)
 {
   actual = eb.fileName + ':' + eb.lineNumber
     }
- 
+
 reportCompare(expect, actual, summary);

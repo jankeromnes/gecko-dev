@@ -44,29 +44,29 @@
 #if defined(__i386)
 
 
-ENTRY(GetEBP) 
+ENTRY(GetEBP)
       pushl    %ebp
       movl     %esp,%ebp
       subl     $0x00000004,%esp
       movl     0x00000000(%ebp),%eax
       movl     %eax,0xfffffffc(%ebp)
       movl     0xfffffffc(%ebp),%eax
-      leave    
-      ret      
+      leave
+      ret
 SET_SIZE(GetEBP)
 
-ENTRY(GetEIP) 
+ENTRY(GetEIP)
       pushl    %ebp
       movl     %esp,%ebp
       subl     $0x00000004,%esp
       movl     0x00000004(%ebp),%eax
       movl     %eax,0xfffffffc(%ebp)
       movl     0xfffffffc(%ebp),%eax
-      leave    
-      ret      
+      leave
+      ret
 SET_SIZE(GetEIP)
 
-ENTRY(GetESP) 
+ENTRY(GetESP)
       pushl    %ebp
       movl     %esp,%ebp
       subl     $0x00000004,%esp
@@ -74,8 +74,8 @@ ENTRY(GetESP)
       movl     %eax,0xfffffffc(%ebp)
       movl     0xfffffffc(%ebp),%eax
       addl     $0x00000008,%eax
-      leave    
-      ret      
+      leave
+      ret
 SET_SIZE(GetESP)
 
 
@@ -87,24 +87,24 @@ ENTRY(GetPC)
       mov      %i7, %i4
       inccc    8, %i4
       mov      %i4, %i0
-      ret      
-      restore  
+      ret
+      restore
 SET_SIZE(GetPC)
 
 ENTRY(GetSP)
       save     %sp, -120, %sp
       mov      %fp, %i4
       mov      %i4, %i0
-      ret      
-      restore  
+      ret
+      restore
 SET_SIZE(GetSP)
 
 ENTRY(GetFP)
       save     %sp, -120, %sp
       ld       [%fp + 56], %g1
       mov      %g1, %i0
-      ret      
-      restore  
+      ret
+      restore
 SET_SIZE(GetFP)
 
 

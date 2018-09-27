@@ -5,18 +5,18 @@ diff --git a/modules/fdlibm/src/e_acos.cpp b/modules/fdlibm/src/e_acos.cpp
   *
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_acos(x)
-  * Method :                  
+  * Method :
   *	acos(x)  = pi/2 - asin(x)
   *	acos(-x) = pi/2 + asin(x)
   * For |x|<=0.5
@@ -28,20 +28,20 @@ diff --git a/modules/fdlibm/src/e_acosh.cpp b/modules/fdlibm/src/e_acosh.cpp
 @@ -7,18 +7,18 @@
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   *
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_acosh(x)
   * Method :
-  *	Based on 
+  *	Based on
   *		acosh(x) = log [ x + sqrt(x*x-1) ]
   *	we have
   *		acosh(x) := log(x)+ln2,	if x is large; else
@@ -57,40 +57,40 @@ diff --git a/modules/fdlibm/src/e_asin.cpp b/modules/fdlibm/src/e_asin.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_asin(x)
-  * Method :                  
+  * Method :
   *	Since  asin(x) = x + x^3/6 + x^5*3/40 + x^7*15/336 + ...
   *	we approximate asin(x) on [0,0.5] by
   *		asin(x) = x + x*x^2*R(x^2)
   *	where
-  *		R(x^2) is a rational approximation of (asin(x)-x)/x^3 
+  *		R(x^2) is a rational approximation of (asin(x)-x)/x^3
 diff --git a/modules/fdlibm/src/e_atan2.cpp b/modules/fdlibm/src/e_atan2.cpp
 --- a/modules/fdlibm/src/e_atan2.cpp
 +++ b/modules/fdlibm/src/e_atan2.cpp
 @@ -7,18 +7,18 @@
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   *
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_atan2(y,x)
   * Method :
   *	1. Reduce y to positive by atan2(y,x)=-atan2(-y,x).
-  *	2. Reduce x to positive by (if x and y are unexceptional): 
+  *	2. Reduce x to positive by (if x and y are unexceptional):
   *		ARG (x+iy) = arctan(y/x)   	   ... if x > 0,
   *		ARG (x+iy) = pi - arctan[y/(-x)]   ... if x < 0,
   *
@@ -100,17 +100,17 @@ diff --git a/modules/fdlibm/src/e_atanh.cpp b/modules/fdlibm/src/e_atanh.cpp
 @@ -7,18 +7,18 @@
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   *
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_atanh(x)
   * Method :
   *    1.Reduced x to positive by atanh(-x) = -atanh(x)
@@ -125,22 +125,22 @@ diff --git a/modules/fdlibm/src/e_cosh.cpp b/modules/fdlibm/src/e_cosh.cpp
   *
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_cosh(x)
-  * Method : 
+  * Method :
   * mathematically cosh(x) if defined to be (exp(x)+exp(-x))/2
-  *	1. Replace x by |x| (cosh(x) = cosh(-x)). 
-  *	2. 
-  *		                                        [ exp(x) - 1 ]^2 
+  *	1. Replace x by |x| (cosh(x) = cosh(-x)).
+  *	2.
+  *		                                        [ exp(x) - 1 ]^2
   *	    0        <= x <= ln2/2  :  cosh(x) := 1 + -------------------
 diff --git a/modules/fdlibm/src/e_exp.cpp b/modules/fdlibm/src/e_exp.cpp
 --- a/modules/fdlibm/src/e_exp.cpp
@@ -149,16 +149,16 @@ diff --git a/modules/fdlibm/src/e_exp.cpp b/modules/fdlibm/src/e_exp.cpp
   * Copyright (C) 2004 by Sun Microsystems, Inc. All rights reserved.
   *
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_exp(x)
   * Returns the exponential of x.
   *
@@ -173,21 +173,21 @@ diff --git a/modules/fdlibm/src/e_hypot.cpp b/modules/fdlibm/src/e_hypot.cpp
   *
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_hypot(x,y)
   *
-  * Method :                  
-  *	If (assume round-to-nearest) z=x*x+y*y 
-  *	has error less than sqrt(2)/2 ulp, than 
+  * Method :
+  *	If (assume round-to-nearest) z=x*x+y*y
+  *	has error less than sqrt(2)/2 ulp, than
   *	sqrt(z) has error less than 1 ulp (exercise).
   *
 diff --git a/modules/fdlibm/src/e_log.cpp b/modules/fdlibm/src/e_log.cpp
@@ -197,22 +197,22 @@ diff --git a/modules/fdlibm/src/e_log.cpp b/modules/fdlibm/src/e_log.cpp
   *
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_log(x)
   * Return the logrithm of x
   *
-  * Method :                  
-  *   1. Argument Reduction: find k and f such that 
-  *			x = 2^k * (1+f), 
+  * Method :
+  *   1. Argument Reduction: find k and f such that
+  *			x = 2^k * (1+f),
   *	   where  sqrt(2)/2 < 1+f < sqrt(2) .
 diff --git a/modules/fdlibm/src/e_log10.cpp b/modules/fdlibm/src/e_log10.cpp
 --- a/modules/fdlibm/src/e_log10.cpp
@@ -221,16 +221,16 @@ diff --git a/modules/fdlibm/src/e_log10.cpp b/modules/fdlibm/src/e_log10.cpp
   *
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * Return the base 10 logarithm of x.  See e_log.c and k_log.h for most
   * comments.
@@ -238,20 +238,20 @@ diff --git a/modules/fdlibm/src/e_log10.cpp b/modules/fdlibm/src/e_log10.cpp
   *    log10(x) = (f - 0.5*f*f + k_log1p(f)) / ln10 + k * log10(2)
   * in not-quite-routine extra precision.
   */
- 
+
  #include <float.h>
- 
+
  #include "math_private.h"
  #include "k_log.h"
 -
-+ 
++
  static const double
  two54      =  1.80143985094819840000e+16, /* 0x43500000, 0x00000000 */
  ivln10hi   =  4.34294481878168880939e-01, /* 0x3fdbcb7b, 0x15200000 */
  ivln10lo   =  2.50829467116452752298e-11, /* 0x3dbb9438, 0xca9aadd5 */
  log10_2hi  =  3.01029995663611771306e-01, /* 0x3FD34413, 0x509F6000 */
  log10_2lo  =  3.69423907715893078616e-13; /* 0x3D59FEF3, 0x11F12B36 */
- 
+
  static const double zero   =  0.0;
 diff --git a/modules/fdlibm/src/e_log2.cpp b/modules/fdlibm/src/e_log2.cpp
 --- a/modules/fdlibm/src/e_log2.cpp
@@ -260,16 +260,16 @@ diff --git a/modules/fdlibm/src/e_log2.cpp b/modules/fdlibm/src/e_log2.cpp
   *
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * Return the base 2 logarithm of x.  See e_log.c and k_log.h for most
   * comments.
@@ -288,12 +288,12 @@ diff --git a/modules/fdlibm/src/e_pow.cpp b/modules/fdlibm/src/e_pow.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_pow(x,y) return x**y
   *
   *		      n
@@ -308,21 +308,21 @@ diff --git a/modules/fdlibm/src/e_sinh.cpp b/modules/fdlibm/src/e_sinh.cpp
   *
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_sinh(x)
-  * Method : 
+  * Method :
   * mathematically sinh(x) if defined to be (exp(x)-exp(-x))/2
-  *	1. Replace x by |x| (sinh(-x) = -sinh(x)). 
-  *	2. 
+  *	1. Replace x by |x| (sinh(-x) = -sinh(x)).
+  *	2.
   *		                                    E + E/(E+1)
   *	    0        <= x <= 22     :  sinh(x) := --------------, E=expm1(x)
 diff --git a/modules/fdlibm/src/e_sqrt.cpp b/modules/fdlibm/src/e_sqrt.cpp
@@ -332,23 +332,23 @@ diff --git a/modules/fdlibm/src/e_sqrt.cpp b/modules/fdlibm/src/e_sqrt.cpp
   *
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* __ieee754_sqrt(x)
   * Return correctly rounded sqrt.
   *           ------------------------------------------
   *	     |  Use the hardware sqrt if you have one |
   *           ------------------------------------------
-  * Method: 
-  *   Bit by bit method using integer arithmetic. (Slow, but portable) 
+  * Method:
+  *   Bit by bit method using integer arithmetic. (Slow, but portable)
 diff --git a/modules/fdlibm/src/k_exp.cpp b/modules/fdlibm/src/k_exp.cpp
 --- a/modules/fdlibm/src/k_exp.cpp
 +++ b/modules/fdlibm/src/k_exp.cpp
@@ -360,20 +360,20 @@ diff --git a/modules/fdlibm/src/k_exp.cpp b/modules/fdlibm/src/k_exp.cpp
   * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
   * SUCH DAMAGE.
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  #include <complex.h>
- 
+
 -#include "math_private.h"
 + #include "math_private.h"
- 
+
  static const uint32_t k = 1799;		/* constant for reduction */
  static const double kln2 =  1246.97177782734161156;	/* k * ln2 */
- 
+
  /*
   * Compute exp(x), scaled to avoid spurious overflow.  An exponent is
   * returned separately in 'expt'.
@@ -385,16 +385,16 @@ diff --git a/modules/fdlibm/src/k_log.h b/modules/fdlibm/src/k_log.h
   *
   * Developed at SunSoft, a Sun Microsystems, Inc. business.
   * Permission to use, copy, modify, and distribute this
-  * software is freely granted, provided that this notice 
+  * software is freely granted, provided that this notice
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * k_log1p(f):
   * Return log(1+f) - f for 1+f in ~[sqrt(2)/2, sqrt(2)].
@@ -413,12 +413,12 @@ diff --git a/modules/fdlibm/src/s_asinh.cpp b/modules/fdlibm/src/s_asinh.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* asinh(x)
   * Method :
   *	Based on
@@ -437,12 +437,12 @@ diff --git a/modules/fdlibm/src/s_atan.cpp b/modules/fdlibm/src/s_atan.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* atan(x)
   * Method
   *   1. Reduce x to positive by atan(x) = -atan(-x).
@@ -461,14 +461,14 @@ diff --git a/modules/fdlibm/src/s_cbrt.cpp b/modules/fdlibm/src/s_cbrt.cpp
   *
   * Optimized by Bruce D. Evans.
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  #include "math_private.h"
- 
+
  /* cbrt(x)
   * Return cube root of x
   */
@@ -485,12 +485,12 @@ diff --git a/modules/fdlibm/src/s_ceil.cpp b/modules/fdlibm/src/s_ceil.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * ceil(x)
   * Return x rounded toward -inf to integral value
@@ -509,16 +509,16 @@ diff --git a/modules/fdlibm/src/s_ceilf.cpp b/modules/fdlibm/src/s_ceilf.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  #include "math_private.h"
- 
+
  static const float huge = 1.0e30;
- 
+
  float
  ceilf(float x)
  {
@@ -533,18 +533,18 @@ diff --git a/modules/fdlibm/src/s_copysign.cpp b/modules/fdlibm/src/s_copysign.c
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * copysign(double x, double y)
   * copysign(x,y) returns a value with the magnitude of x and
   * with the sign bit of y.
   */
- 
+
  #include "math_private.h"
 diff --git a/modules/fdlibm/src/s_expm1.cpp b/modules/fdlibm/src/s_expm1.cpp
 --- a/modules/fdlibm/src/s_expm1.cpp
@@ -557,12 +557,12 @@ diff --git a/modules/fdlibm/src/s_expm1.cpp b/modules/fdlibm/src/s_expm1.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* expm1(x)
   * Returns exp(x)-1, the exponential of x minus 1.
   *
@@ -581,18 +581,18 @@ diff --git a/modules/fdlibm/src/s_fabs.cpp b/modules/fdlibm/src/s_fabs.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * fabs(x) returns the absolute value of x.
   */
- 
+
  #include "math_private.h"
- 
+
  double
 diff --git a/modules/fdlibm/src/s_floor.cpp b/modules/fdlibm/src/s_floor.cpp
 --- a/modules/fdlibm/src/s_floor.cpp
@@ -605,12 +605,12 @@ diff --git a/modules/fdlibm/src/s_floor.cpp b/modules/fdlibm/src/s_floor.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * floor(x)
   * Return x rounded toward -inf to integral value
@@ -629,12 +629,12 @@ diff --git a/modules/fdlibm/src/s_floorf.cpp b/modules/fdlibm/src/s_floorf.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * floorf(x)
   * Return x rounded toward -inf to integral value
@@ -653,12 +653,12 @@ diff --git a/modules/fdlibm/src/s_log1p.cpp b/modules/fdlibm/src/s_log1p.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* double log1p(double x)
   *
   * Method :
@@ -677,15 +677,15 @@ diff --git a/modules/fdlibm/src/s_nearbyint.cpp b/modules/fdlibm/src/s_nearbyint
   * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
   * SUCH DAMAGE.
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  #include <fenv.h>
  #include "math_private.h"
- 
+
  /*
   * We save and restore the floating-point environment to avoid raising
   * an inexact exception.  We can get away with using fesetenv()
@@ -701,12 +701,12 @@ diff --git a/modules/fdlibm/src/s_rint.cpp b/modules/fdlibm/src/s_rint.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * rint(x)
   * Return x rounded to integral value according to the prevailing
@@ -725,17 +725,17 @@ diff --git a/modules/fdlibm/src/s_rintf.cpp b/modules/fdlibm/src/s_rintf.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  #include <float.h>
  #include <stdint.h>
- 
+
  #include "math_private.h"
- 
+
  static const float
  TWO23[2]={
 diff --git a/modules/fdlibm/src/s_scalbn.cpp b/modules/fdlibm/src/s_scalbn.cpp
@@ -749,19 +749,19 @@ diff --git a/modules/fdlibm/src/s_scalbn.cpp b/modules/fdlibm/src/s_scalbn.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * scalbn (double x, int n)
   * scalbn(x,n) returns x* 2**n  computed by  exponent
   * manipulation rather than by actually performing an
   * exponentiation or a multiplication.
   */
- 
+
 diff --git a/modules/fdlibm/src/s_tanh.cpp b/modules/fdlibm/src/s_tanh.cpp
 --- a/modules/fdlibm/src/s_tanh.cpp
 +++ b/modules/fdlibm/src/s_tanh.cpp
@@ -773,12 +773,12 @@ diff --git a/modules/fdlibm/src/s_tanh.cpp b/modules/fdlibm/src/s_tanh.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /* Tanh(x)
   * Return the Hyperbolic Tangent of x
   *
@@ -797,12 +797,12 @@ diff --git a/modules/fdlibm/src/s_trunc.cpp b/modules/fdlibm/src/s_trunc.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * trunc(x)
   * Return x rounded toward 0 to integral value
@@ -821,12 +821,12 @@ diff --git a/modules/fdlibm/src/s_truncf.cpp b/modules/fdlibm/src/s_truncf.cpp
   * is preserved.
   * ====================================================
   */
- 
+
 -#include <sys/cdefs.h>
 -__FBSDID("$FreeBSD$");
 +//#include <sys/cdefs.h>
 +//__FBSDID("$FreeBSD$");
- 
+
  /*
   * truncf(x)
   * Return x rounded toward 0 to integral value

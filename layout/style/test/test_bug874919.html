@@ -26,26 +26,26 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=874919
 
     var shouldUseComputed = ["inner_SVG"]
     var shouldUseUsed = ["outer_SVG"]
-  
+
     shouldUseUsed.forEach(function(elemId) {
 
         var style = window.getComputedStyle(document.getElementById(elemId));
-        
-        ok(style.width.match(/^\d+px$/), 
+
+        ok(style.width.match(/^\d+px$/),
             "Inline Outer SVG element's getComputedStyle.width should be used value. ");
-            
-        ok(style.height.match(/^\d+px$/), 
+
+        ok(style.height.match(/^\d+px$/),
             "Inline Outer SVG element's getComputedStyle.height should be used value.");
     });
-    
+
     shouldUseComputed.forEach(function(elemId) {
         var style = window.getComputedStyle(document.getElementById(elemId));
-        
+
         // Computed value should match either the percentage used, or "auto" in the case of the inner SVG element.
-        ok(style.width.match(/^\d+%$|^auto$/), 
+        ok(style.width.match(/^\d+%$|^auto$/),
             "Inline inner SVG element's getComputedStyle.width should be computed value. " + style.width);
-            
-        ok(style.height.match(/^\d+%$|^auto$/), 
+
+        ok(style.height.match(/^\d+%$|^auto$/),
             "Inline inner SVG element's getComputedStyle.height should be computed value. " + style.height);
     });
 

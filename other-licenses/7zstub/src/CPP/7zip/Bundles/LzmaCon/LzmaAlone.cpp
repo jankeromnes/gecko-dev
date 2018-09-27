@@ -342,7 +342,7 @@ static int main2(int numArgs, const char *args[])
   UStringVector commandStrings;
   for (int i = 1; i < numArgs; i++)
     commandStrings.Add(MultiByteToUnicodeString(args[i]));
-  
+
   CParser parser;
   try
   {
@@ -379,7 +379,7 @@ static int main2(int numArgs, const char *args[])
   CObjectVector<CProperty> props2;
   bool dictDefined = false;
   UInt32 dict = (UInt32)(Int32)-1;
-  
+
   if (parser[NKey::kDict].ThereIs)
   {
     UInt32 dictLog;
@@ -389,14 +389,14 @@ static int main2(int numArgs, const char *args[])
     dictDefined = true;
     AddProp(props2, "d", s);
   }
-  
+
   if (parser[NKey::kLevel].ThereIs)
   {
     const UString &s = parser[NKey::kLevel].PostStrings[0];
     /* UInt32 level = */ GetNumber(s);
     AddProp(props2, "x", s);
   }
-  
+
   UString mf ("BT4");
   if (parser[NKey::kMatchFinder].ThereIs)
     mf = parser[NKey::kMatchFinder].PostStrings[0];
@@ -404,7 +404,7 @@ static int main2(int numArgs, const char *args[])
   UInt32 numThreads = (UInt32)(Int32)-1;
 
   #ifndef _7ZIP_ST
-  
+
   if (parser[NKey::kMultiThread].ThereIs)
   {
     const UString &s = parser[NKey::kMultiThread].PostStrings[0];
@@ -414,10 +414,10 @@ static int main2(int numArgs, const char *args[])
       numThreads = GetNumber(s);
     AddProp(props2, "mt", s);
   }
-  
+
   #endif
 
-  
+
   if (parser[NKey::kMethod].ThereIs)
   {
     const UString &s = parser[NKey::kMethod].PostStrings[0];
@@ -433,9 +433,9 @@ static int main2(int numArgs, const char *args[])
       numIterations = GetNumber(params[paramIndex++]);
     if (params.Size() != paramIndex)
       IncorrectCommand();
-  
+
     HRESULT res = BenchCon(props2, numIterations, stdout);
-    
+
     if (res == S_OK)
       return 0;
     return Error_HRESULT("Benchmark error", res);
@@ -453,7 +453,7 @@ static int main2(int numArgs, const char *args[])
     numThreads = 1;
 
   bool encodeMode = false;
-  
+
   if (StringsAreEqualNoCase_Ascii(command, "e"))
     encodeMode = true;
   else if (!StringsAreEqualNoCase_Ascii(command, "d"))
@@ -461,7 +461,7 @@ static int main2(int numArgs, const char *args[])
 
   CMyComPtr<ISequentialInStream> inStream;
   CInFileStream *inStreamSpec = NULL;
-  
+
   if (stdInMode)
   {
     inStream = new CStdInFileStream;
@@ -481,7 +481,7 @@ static int main2(int numArgs, const char *args[])
 
   CMyComPtr<ISequentialOutStream> outStream;
   COutFileStream *outStreamSpec = NULL;
-  
+
   if (stdOutMode)
   {
     outStream = new CStdOutFileStream;
@@ -501,7 +501,7 @@ static int main2(int numArgs, const char *args[])
 
   bool fileSizeDefined = false;
   UInt64 fileSize = 0;
-  
+
   if (inStreamSpec)
   {
     if (!inStreamSpec->File.GetLength(fileSize))
@@ -540,27 +540,27 @@ static int main2(int numArgs, const char *args[])
       throw "File is too big";
 
     Byte *inBuffer = NULL;
-    
+
     if (inSize != 0)
     {
       inBuffer = (Byte *)MyAlloc((size_t)inSize);
       if (!inBuffer)
         throw kCantAllocate;
     }
-    
+
     if (ReadStream_FAIL(inStream, inBuffer, inSize) != S_OK)
       throw "Can not read";
 
     Byte *outBuffer = NULL;
     size_t outSize;
-    
+
     if (encodeMode)
     {
       // we allocate 105% of original size for output buffer
       UInt64 outSize64 = fileSize / 20 * 21 + (1 << 16);
 
       outSize = (size_t)outSize64;
-      
+
       if (outSize != outSize64)
         throw "File is too big";
 
@@ -570,10 +570,10 @@ static int main2(int numArgs, const char *args[])
         if (!outBuffer)
           throw kCantAllocate;
       }
-      
+
       int res = Lzma86_Encode(outBuffer, &outSize, inBuffer, inSize,
           5, dict, parser[NKey::kFilter86].PostCharIndex == 0 ? SZ_FILTER_YES : SZ_FILTER_AUTO);
-  
+
       if (res != 0)
       {
         PrintError_int("Encode error", (int)res);
@@ -583,10 +583,10 @@ static int main2(int numArgs, const char *args[])
     else
     {
       UInt64 outSize64;
-      
+
       if (Lzma86_GetUnpackSize(inBuffer, inSize, &outSize64) != 0)
         throw "data error";
-      
+
       outSize = (size_t)outSize64;
       if (outSize != outSize64)
         throw "Unpack size is too big";
@@ -596,9 +596,9 @@ static int main2(int numArgs, const char *args[])
         if (!outBuffer)
           throw kCantAllocate;
       }
-      
+
       int res = Lzma86_Decode(outBuffer, &outSize, inBuffer, &inSize);
-      
+
       if (inSize != (size_t)fileSize)
         throw "incorrect processed size";
       if (res != 0)
@@ -607,10 +607,10 @@ static int main2(int numArgs, const char *args[])
         return 1;
       }
     }
-    
+
     if (WriteStream(outStream, outBuffer, outSize) != S_OK)
       throw kWriteError;
-    
+
     MyFree(outBuffer);
     MyFree(inBuffer);
   }
@@ -640,7 +640,7 @@ static int main2(int numArgs, const char *args[])
     bool mcDefined = false;
 
     bool eos = parser[NKey::kEOS].ThereIs || stdInMode;
- 
+
     ParseUInt32(parser, NKey::kAlgo, algo);
     ParseUInt32(parser, NKey::kFb, fb);
     ParseUInt32(parser, NKey::kLc, lc);
@@ -650,7 +650,7 @@ static int main2(int numArgs, const char *args[])
     mcDefined = parser[NKey::kMc].ThereIs;
     if (mcDefined)
       mc = GetNumber(parser[NKey::kMc].PostStrings[0]);
-    
+
     const PROPID propIDs[] =
     {
       NCoderPropID::kDictionarySize,
@@ -716,7 +716,7 @@ static int main2(int numArgs, const char *args[])
       if (WriteStream(outStream, temp, 8) != S_OK)
         throw kWriteError;
     }
-  
+
     res = encoder->Code(inStream, outStream, NULL, NULL, progress);
     if (progressSpec)
       progressSpec->ClosePrint();
@@ -725,7 +725,7 @@ static int main2(int numArgs, const char *args[])
       return Error_HRESULT("Encoding error", res);
 
     UInt64 processedSize = encoderSpec->GetInputProcessedSize();
-    
+
     if (fileSizeWasUsed && processedSize != fileSize)
       throw "Incorrect size of processed data";
   }
@@ -733,18 +733,18 @@ static int main2(int numArgs, const char *args[])
   {
     NCompress::NLzma::CDecoder *decoderSpec = new NCompress::NLzma::CDecoder;
     CMyComPtr<ICompressCoder> decoder = decoderSpec;
-    
+
     decoderSpec->FinishStream = true;
-    
+
     const unsigned kPropertiesSize = 5;
     Byte header[kPropertiesSize + 8];
 
     if (ReadStream_FALSE(inStream, header, kPropertiesSize + 8) != S_OK)
       throw kReadError;
-    
+
     if (decoderSpec->SetDecoderProperties2(header, kPropertiesSize) != S_OK)
       throw "SetDecoderProperties error";
-    
+
     UInt64 unpackSize = 0;
     for (int i = 0; i < 8; i++)
       unpackSize |= ((UInt64)header[kPropertiesSize + i]) << (8 * i);
@@ -764,7 +764,7 @@ static int main2(int numArgs, const char *args[])
       }
       return Error_HRESULT("Decoding error", res);
     }
-    
+
     if (unpackSizeDefined && unpackSize != decoderSpec->GetOutputProcessedSize())
       throw "incorrect uncompressed size in header";
   }

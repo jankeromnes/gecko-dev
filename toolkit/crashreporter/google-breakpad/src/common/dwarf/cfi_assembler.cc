@@ -40,7 +40,7 @@
 namespace google_breakpad {
 
 using dwarf2reader::DwarfPointerEncoding;
-  
+
 CFISection &CFISection::CIEHeader(uint64_t code_alignment_factor,
                                   int data_alignment_factor,
                                   unsigned return_address_register,

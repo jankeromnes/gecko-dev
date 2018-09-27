@@ -96,7 +96,7 @@ impl<K> UnionFind<K>
     /// Unify the two sets containing `x` and `y`.
     ///
     /// Return `false` if the sets were already the same, `true` if they were unified.
-    /// 
+    ///
     /// **Panics** if `x` or `y` is out of bounds.
     pub fn union(&mut self, x: K, y: K) -> bool
     {
@@ -115,7 +115,7 @@ impl<K> UnionFind<K>
         let xrank = self.rank[xrepu];
         let yrank = self.rank[yrepu];
 
-        // The rank corresponds roughly to the depth of the treeset, so put the 
+        // The rank corresponds roughly to the depth of the treeset, so put the
         // smaller set below the larger
         if xrank < yrank {
             self.parent[xrepu] = yrep;

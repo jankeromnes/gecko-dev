@@ -431,7 +431,7 @@ pkix_pl_LdapRequest_Equals(
          */
 
         secondData = &secondData[dindex + 2];
-        
+
         for (i = 0; i < firstLen; i++) {
                 if (firstData[i] != secondData[i]) {
                         goto cleanup;

@@ -21,7 +21,7 @@ function test()
 
   expect = 'TypeError: can\'t convert o to primitive type';
 
- 
+
   try
   {
     var o = {toString: function() { return (i > 2) ? this : "foo"; }};

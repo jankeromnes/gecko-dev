@@ -44,10 +44,10 @@ endif
 # as an environment variable, by the individual Makefile, or
 # by the <component>-specific "version.mk" file, automatically
 # generate the next available version number via a perl script.
-# 
+#
 
 ifndef RELEASE_VERSION
-    RELEASE_VERSION = 
+    RELEASE_VERSION =
 endif
 
 #

@@ -335,7 +335,7 @@ element. In the case of iterating over an object, `var` will be an object with t
 
 When $map is given an object, the expression defined by `each(var)` must evaluate to an
 object for each key/value pair (`key` and `val`).The objects constructed by each 'each(var)'
-can then be merged internally to give the resulting object with later keys overwriting 
+can then be merged internally to give the resulting object with later keys overwriting
 the previous ones.Otherwise the expression becomes invalid for the $map operator
 
 ```yaml

@@ -8,7 +8,7 @@
 #ifndef nsUXThemeConstants_h
 #define nsUXThemeConstants_h
 
-/* 
+/*
  * The following constants are used to determine how a widget is drawn using
  * Windows' Theme API. For more information on theme parts and states see
  * http://msdn.microsoft.com/en-us/library/bb773210(VS.85).aspx
@@ -177,7 +177,7 @@
 #ifndef SPI_GETMENUSHOWDELAY
 #define SPI_GETMENUSHOWDELAY      106
 #endif //SPI_GETMENUSHOWDELAY
-#ifndef WS_EX_LAYOUTRTL 
+#ifndef WS_EX_LAYOUTRTL
 #define WS_EX_LAYOUTRTL         0x00400000L // Right to left mirroring
 #endif
 

@@ -6,7 +6,7 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice 
+ * software is freely granted, provided that this notice
  * is preserved.
  * ====================================================
  */
@@ -26,7 +26,7 @@
 
 #include "math_private.h"
 #include "k_log.h"
- 
+
 static const double
 two54      =  1.80143985094819840000e+16, /* 0x43500000, 0x00000000 */
 ivln10hi   =  4.34294481878168880939e-01, /* 0x3fdbcb7b, 0x15200000 */

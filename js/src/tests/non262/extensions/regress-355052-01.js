@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = /TypeError: .+ is not a function/;
   actual = 'No Error';
   try

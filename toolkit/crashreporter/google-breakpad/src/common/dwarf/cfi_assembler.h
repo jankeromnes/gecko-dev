@@ -188,7 +188,7 @@ class CFISection: public Section {
   // SetEncodedPointerBases. If the DW_EH_PE_indirect bit is set in the
   // encoding, assume that ADDRESS is where the true address is stored.
   // Return a reference to this section.
-  // 
+  //
   // (C++ doesn't let me use default arguments here, because I want to
   // refer to members of *this in the default argument expression.)
   CFISection &EncodedPointer(uint64_t address) {

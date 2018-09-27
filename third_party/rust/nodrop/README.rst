@@ -23,7 +23,7 @@ Recent Changes (nodrop)
     a better way to get rid of the enum layout optimization.
 
 - 0.1.8
-  
+
   - Add crate feature ``use_union`` that uses untagged unions to implement NoDrop.
     Finally we have an implementation without hacks, without a runtime flag,
     and without an actual ``Drop`` impl (which was needed to suppress drop).

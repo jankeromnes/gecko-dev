@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -83,7 +83,7 @@ function nonEmptyRangesOverlap(leftMin, leftMax, rightMin, rightMax)
         throw new Error("Bad left range");
     if (rightMin >= rightMax)
         throw new Error("Bad right range");
-    
+
     if (leftMin <= rightMin && leftMax > rightMin)
         return true;
     if (rightMin <= leftMin && rightMax > leftMin)
@@ -97,12 +97,12 @@ function rangesOverlap(leftMin, leftMax, rightMin, rightMax)
         throw new Error("Bad left range");
     if (rightMin > rightMax)
         throw new Error("Bad right range");
-    
+
     if (leftMin == leftMax)
         return false;
     if (rightMin == rightMax)
         return false;
-    
+
     return nonEmptyRangesOverlap(leftMin, leftMax, rightMin, rightMax);
 }
 
@@ -126,12 +126,12 @@ function bubbleSort(array, lessThan)
         array[i] = array[j];
         array[j] = tmp;
     }
-    
+
     let begin = 0;
     let end = array.length;
     for (;;) {
         let changed = false;
-        
+
         function bubble(i, j)
         {
             if (lessThan(array[i], array[j])) {
@@ -139,31 +139,31 @@ function bubbleSort(array, lessThan)
                 changed = true;
             }
         }
-    
+
         if (end < begin)
             throw new Error("Begin and end are messed up");
-        
+
         let limit = end - begin;
         for (let i = limit; i-- > 1;)
             bubble(begin + i, begin + i - 1);
         if (!changed)
             return;
-        
+
         // After one run, the first element in the list is guaranteed to be the smallest.
         begin++;
-        
+
         // Now go in the other direction. This eliminates most sorting pathologies.
         changed = false;
-        
+
         if (end < begin)
             throw new Error("Begin and end are messed up");
-        
+
         limit = end - begin;
         for (let i = 1; i < limit; ++i)
             bubble(begin + i, begin + i - 1);
         if (!changed)
             return;
-        
+
         // Now the last element is guaranteed to be the largest.
         end--;
     }

@@ -9,7 +9,7 @@ var summary = 'operator evaluation order';
 var actual = '';
 var expect = '';
 
-function makeObject(label) 
+function makeObject(label)
 {
   var o = (function (){});
 

@@ -119,7 +119,7 @@ fn hash_test() {
 fn parse_example_test() {
   let test = &b"  { \"a\"\t: 42,
   \"b\": [ \"x\", \"y\", 12 ] ,
-  \"c\": { \"hello\" : \"world\" 
+  \"c\": { \"hello\" : \"world\"
   }
   }";
 

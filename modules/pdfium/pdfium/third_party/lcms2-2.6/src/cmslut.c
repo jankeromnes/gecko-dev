@@ -1287,7 +1287,7 @@ cmsBool BlessLUT(cmsPipeline* lut)
             prev = prev->Next;
         }
     }
-    return TRUE;    
+    return TRUE;
 }
 
 
@@ -1519,7 +1519,7 @@ int CMSEXPORT cmsPipelineInsertStage(cmsPipeline* lut, cmsStageLoc loc, cmsStage
             return FALSE;
     }
 
-    return BlessLUT(lut);    
+    return BlessLUT(lut);
 }
 
 // Unlink an element and return the pointer to it
@@ -1601,7 +1601,7 @@ cmsBool  CMSEXPORT cmsPipelineCat(cmsPipeline* l1, const cmsPipeline* l2)
                 return FALSE;
     }
 
-    return BlessLUT(l1);    
+    return BlessLUT(l1);
 }
 
 
@@ -1731,11 +1731,11 @@ cmsBool CMSEXPORT cmsPipelineEvalReverseFloat(cmsFloat32Number Target[],
     cmsFloat32Number  fx[4], x[4], xd[4], fxd[4];
     cmsVEC3 tmp, tmp2;
     cmsMAT3 Jacobian;
-    
+
     // Only 3->3 and 4->3 are supported
     if (lut ->InputChannels != 3 && lut ->InputChannels != 4) return FALSE;
     if (lut ->OutputChannels != 3) return FALSE;
-   
+
     // Take the hint as starting point if specified
     if (Hint == NULL) {
 

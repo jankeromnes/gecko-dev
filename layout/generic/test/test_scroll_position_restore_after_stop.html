@@ -25,18 +25,18 @@ function partiallyLoaded() {
   if (loadCount == 1) {
     // Halfway through the first reload, stop loading.
     childWin.stop();
-    
-    // Force a reflow in the stopped state. This triggers the buggy behaviour. 
+
+    // Force a reflow in the stopped state. This triggers the buggy behaviour.
     var newNode = childWin.document.createElement('p');
     newNode.innerHTML = "Added text.";
     childWin.document.body.insertBefore(newNode, childWin.document.body.childNodes[0]);
-    
+
     childWin.waitForAllPaintsFlushed(function() {
       // Since we're only partially loaded, we should not have been able to
       // reach the target scroll position.
       ok(childWin.scrollY < targetPos, "Expected page to not be fully loaded");
-      
-      // Now re-load again. Continue reading in fullyLoaded(), the 
+
+      // Now re-load again. Continue reading in fullyLoaded(), the
       // 'loadCount == 2' case.
       loadCount++;
       childWin.location.reload();
@@ -53,11 +53,11 @@ function fullyLoaded() {
     childWin.scrollTo(0, targetPos);
     childWin.waitForAllPaintsFlushed(function() {
       ok(childWin.scrollY == targetPos, "Expected page to have scrolled");
-      
+
       // Reload the page.
       loadCount++;
       childWin.location.reload();
-      
+
       // Next, we'll get into partiallyLoaded(). Read on there.
     });
   } else if (loadCount == 2) {

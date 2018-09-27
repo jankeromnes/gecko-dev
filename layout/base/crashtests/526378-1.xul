@@ -9,7 +9,7 @@
 function boom()
 {
   var x = document.getElementById("x");
-  
+
   x.appendChild(document.createTextNode("A"));
   x.appendChild(document.createTextNode("\u202B" + "C"));
 

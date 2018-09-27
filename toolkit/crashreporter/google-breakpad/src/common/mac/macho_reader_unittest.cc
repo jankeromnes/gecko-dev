@@ -70,7 +70,7 @@ using testing::SaveArg;
 using testing::Test;
 using testing::_;
 
-
+
 // Mock classes for the reader's various reporters and handlers.
 
 class MockFatReaderReporter: public FatReader::Reporter {
@@ -115,7 +115,7 @@ class MockSectionHandler: public Reader::SectionHandler {
   MOCK_METHOD1(HandleSection, bool(const Section &section));
 };
 
-
+
 // Tests for mach_o::FatReader.
 
 // Since the effect of these functions is to write to stderr, the
@@ -305,7 +305,7 @@ TEST_F(FatReaderTest, OneObjectFile) {
   AppendFatArch(0x5e3a6e91, 0x52ccd852, obj1_offset, 0x42, 0x355b15b2);
   // First object file data
   fat
-      .Mark(&obj1_offset)           
+      .Mark(&obj1_offset)
       .Append(0x42, '*');           // dummy contents
   ReadFat();
   ASSERT_EQ(1U, object_files.size());
@@ -327,15 +327,15 @@ TEST_F(FatReaderTest, ThreeObjectFiles) {
   AppendFatArch(0x3717276d, 0x10ecdc84, obj3, 0x4b3, 0x035267d7);
   fat
       // First object file data
-      .Mark(&obj1)           
+      .Mark(&obj1)
       .Append(0xfb4, '*')           // dummy contents
       // Second object file data
-      .Mark(&obj2)           
+      .Mark(&obj2)
       .Append(0xc31, '%')           // dummy contents
       // Third object file data
-      .Mark(&obj3)           
+      .Mark(&obj3)
       .Append(0x4b3, '^');          // dummy contents
-  
+
   ReadFat();
 
   ASSERT_EQ(3U, object_files.size());
@@ -462,7 +462,7 @@ TEST_F(FatReaderTest, IncompleteMach) {
   ReadFat(false);
 }
 
-
+
 // General mach_o::Reader tests.
 
 // Dynamically scoped configuration data.
@@ -475,11 +475,11 @@ class WithConfiguration {
     current_ = this;
   }
   ~WithConfiguration() { current_ = saved_; }
-  static Endianness endianness() { 
+  static Endianness endianness() {
     assert(current_);
     return current_->endianness_;
   }
-  static size_t word_size() { 
+  static size_t word_size() {
     assert(current_);
     return current_->word_size_;
   }
@@ -516,7 +516,7 @@ class SizedSection: public test_assembler::Section {
 
   // Access/set this section's word size.
   size_t word_size() const { return word_size_; }
-  void set_word_size(size_t word_size) { 
+  void set_word_size(size_t word_size) {
     assert(word_size_ == 32 || word_size_ == 64);
     word_size_ = word_size;
   }
@@ -573,7 +573,7 @@ class LoadedSection: public SizedSection {
   // The address at which this section's contents will be loaded.
   Label address_;
 };
-  
+
 // A SizedSection representing a segment load command.
 class SegmentLoadCommand: public SizedSection {
  public:
@@ -703,7 +703,7 @@ class LoadCommands: public SizedSection {
 // MachOFile, the start, Here, and Mark members refer to file offsets.
 class MachOFile: public SizedSection {
  public:
-  MachOFile() { 
+  MachOFile() {
     start() = 0;
   }
 
@@ -735,7 +735,7 @@ class MachOFile: public SizedSection {
 struct ReaderFixture {
   ReaderFixture()
       : reporter("reporter filename"),
-        reader(&reporter) { 
+        reader(&reporter) {
     EXPECT_CALL(reporter, BadHeader()).Times(0);
     EXPECT_CALL(reporter, CPUTypeMismatch(_, _, _, _)).Times(0);
     EXPECT_CALL(reporter, HeaderTruncated()).Times(0);
@@ -957,7 +957,7 @@ TEST_F(ReaderTest, BigEndian64Bit) {
   EXPECT_EQ(FileFlags(0x80e71d64),  reader.flags());
 }
 
-
+
 // Load command tests.
 
 class LoadCommand: public ReaderFixture, public Test { };
@@ -1001,7 +1001,7 @@ TEST_F(LoadCommand, None) {
                       MH_DYLDLINK |
                       MH_NOUNDEFS),
             FileFlags(reader.flags()));
-  
+
   EXPECT_TRUE(reader.WalkLoadCommands(&load_command_handler));
 }
 
@@ -1259,7 +1259,7 @@ TEST_F(LoadCommand, SegmentCommandTruncated) {
   file
       .Header(&load_commands)
       .Place(&segment_contents);
-  
+
   ReadFile(&file, true, CPU_TYPE_ANY, 0);
 
   EXPECT_CALL(reporter, LoadCommandTooShort(0, LC_SEGMENT))
@@ -1310,13 +1310,13 @@ TEST_F(LoadCommand, ThreeLoadCommands) {
   seg2.Append(42, '*');
   seg2.address() = 0xc70fc909;
   cmd2.Header("thorax", seg2, 0xde7327f4, 0xfdaf771d, 0x65e74b30);
-  // More dummy data at the end of the load command. 
+  // More dummy data at the end of the load command.
   cmd2.Append(32, '^');
 
   seg3.Append(42, '%');
   seg3.address() = 0x46b3ab05;
   cmd3.Header("abdomen", seg3, 0x7098b70d, 0x8d8d7728, 0x5131419b);
-  // More dummy data at the end of the load command. 
+  // More dummy data at the end of the load command.
   cmd3.Append(64, '&');
 
   LoadCommands load_commands;
@@ -1397,7 +1397,7 @@ TEST_F(LoadCommand, OneSegmentTwoSections) {
   file.Header(&commands).Place(&segment);
 
   ReadFile(&file, true, CPU_TYPE_ANY, 0);
-  
+
   Segment actual_segment;
   EXPECT_CALL(load_command_handler, SegmentCommand(_))
       .WillOnce(DoAll(SaveArg<0>(&actual_segment),
@@ -1417,7 +1417,7 @@ TEST_F(LoadCommand, OneSegmentTwoSections) {
                                            section1.address().Value(), 12,
                                            0x8cd4604bU, contents1)))
       .WillOnce(Return(true));
-    
+
     ByteBuffer contents2;
     contents2.start = file_bytes + section2.start().Value();
     contents2.end = contents2.start + section2.final_size().Value();
@@ -1453,7 +1453,7 @@ TEST_F(LoadCommand, MisplacedSectionBefore) {
   before.start()   = segment.start() - 1;
   before.address() = segment.address() - 1;
   before.final_size() = before.Size();
-  
+
   SegmentLoadCommand command;
   command
     .Header("segment", segment, 0x173baa29, 0x8407275d, 0xed8f7057)
@@ -1575,7 +1575,7 @@ TEST_F(LoadCommand, ZappedSegment) {
   section.address() = segment.address();
   section.start() = 0;
   section.final_size() = 1000;          // extends beyond its segment
-  
+
   SegmentLoadCommand command;
   command
     .Header("zapped", segment, 0x0861a5cb, 0x68ccff67, 0x0b66255c)
@@ -1707,7 +1707,7 @@ TEST_F(LoadCommand, FindSegment) {
   EXPECT_EQ(0xd6b0ce83, actual_segment.vmaddr);
 }
 
-
+
 // Symtab tests.
 
 // A StringAssembler is a class for generating .stabstr sections to present
@@ -1728,7 +1728,7 @@ class StringAssembler: public SizedSection {
 class SymbolAssembler: public SizedSection {
  public:
   // Create a SymbolAssembler that uses StringAssembler for its strings.
-  explicit SymbolAssembler(StringAssembler *string_assembler) 
+  explicit SymbolAssembler(StringAssembler *string_assembler)
       : string_assembler_(string_assembler),
         entry_count_(0) { }
 

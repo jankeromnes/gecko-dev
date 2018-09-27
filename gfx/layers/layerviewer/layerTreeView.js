@@ -108,8 +108,8 @@ function parseDisplayList(lines) {
   return root;
 }
 
-function trim(s){ 
-  return ( s || '' ).replace( /^\s+|\s+$/g, '' ); 
+function trim(s){
+  return ( s || '' ).replace( /^\s+|\s+$/g, '' );
 }
 
 function getDataURI(str) {
@@ -361,13 +361,13 @@ function parseLayers(layersDumpLines) {
           layerObject[fieldName].type = "bool";
           continue;
         }
-        var float = parseFloat_cleo(rest); 
+        var float = parseFloat_cleo(rest);
         if (float) {
           layerObject[fieldName] = float;
           layerObject[fieldName].type = "float";
           continue;
         }
-        var region = parseRegion(rest); 
+        var region = parseRegion(rest);
         if (region) {
           layerObject[fieldName] = region;
           layerObject[fieldName].type = "region";
@@ -432,7 +432,7 @@ function parseLayers(layersDumpLines) {
   return root;
 }
 function populateLayers(root, displayList, pane, previewParent, hasSeenRoot, contentScale, rootPreviewParent) {
-  
+
   contentScale = contentScale || 1;
   rootPreviewParent = rootPreviewParent || previewParent;
 
@@ -616,7 +616,7 @@ function populateLayers(root, displayList, pane, previewParent, hasSeenRoot, con
         hasImg = true;
         layerPreview.style.background = "rgba(" + root.color.r + ", " + root.color.g + ", " + root.color.b + ", " + root.color.a + ")";
       }
-      
+
       if (hasImg || true) {
         layerPreview.mouseoverElem = elem;
         layerPreview.onmouseenter = function() {
@@ -739,7 +739,7 @@ function parseMultiLineDump(log) {
   var lines = log.split("\n");
 
   var container = createElement("div", {
-    style: { 
+    style: {
       height: "100%",
       position: "relative",
     },
@@ -759,7 +759,7 @@ function parseMultiLineDump(log) {
   window.matches = matches;
 
   var matchList = createElement("span", {
-    style: { 
+    style: {
       height: "95%",
       width: "10%",
       position: "relative",
@@ -771,7 +771,7 @@ function parseMultiLineDump(log) {
   });
   container.appendChild(matchList);
   var contents = createElement("span", {
-    style: { 
+    style: {
       height: "95%",
       width: "88%",
       display: "inline-block",
@@ -878,7 +878,7 @@ function parseDump(log, displayList, compositeTitle, compositeTime) {
 function tab_showLayersDump(layersDumpLines, compositeTitle, compositeTime) {
   var container = parseDump(layersDumpLines, compositeTitle, compositeTime);
 
-  gTabWidget.addTab("LayerTree", container); 
+  gTabWidget.addTab("LayerTree", container);
   gTabWidget.selectTab("LayerTree");
 }
 

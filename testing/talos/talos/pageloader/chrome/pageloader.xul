@@ -44,13 +44,13 @@
   screenX="0" screenY="0"
   onload="plInit()">
 
-  <script type="application/x-javascript" 
+  <script type="application/x-javascript"
           src="chrome://global/content/globalOverlay.js"/>
   <script type="application/x-javascript" src="MozillaFileLogger.js"></script>
   <script type="application/x-javascript" src="report.js"></script>
   <script type="application/x-javascript" src="pageloader.js"></script>
   <script type="application/x-javascript" src="quit.js"></script>
 
-  <browser id="contentPageloader" src="about:blank" 
+  <browser id="contentPageloader" src="about:blank"
     type="content" flex="1"/>
 </window>

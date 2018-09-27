@@ -130,7 +130,7 @@ NS_IMETHODIMP
 nsStandaloneNativeMenu::ActivateNativeMenuItemAt(const nsAString& indexString)
 {
   NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NSRESULT;
-  
+
   if (!mMenu)
     return NS_ERROR_NOT_INITIALIZED;
 
@@ -152,7 +152,7 @@ nsStandaloneNativeMenu::ActivateNativeMenuItemAt(const nsAString& indexString)
   }
 
   return NS_ERROR_FAILURE;
-  
+
   NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
 }
 

@@ -47,7 +47,7 @@
       for (let eventType of LISTEN_EVENTS) {
         gBrowser.addEventListener(eventType, eventListener, true);
       }
-             
+
       gTestsIterator = testsIterator();
       nextTest();
     }

@@ -14,7 +14,7 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 var value;
- 
+
 value = 99999999999;
 expect = '99999999999';
 actual = value.toString();

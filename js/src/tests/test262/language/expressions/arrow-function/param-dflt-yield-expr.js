@@ -15,7 +15,7 @@ info: |
 
   ArrowFunction : ArrowParameters=>ConciseBody
 
-  - It is a Syntax Error if ArrowParameters Contains YieldExpression is true. 
+  - It is a Syntax Error if ArrowParameters Contains YieldExpression is true.
 features: [generators, default-parameters]
 negative:
   phase: parse

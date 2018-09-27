@@ -22,7 +22,7 @@ function dateToString()
     this.dtsReturnValue = "200811080616";
   return this.dtsReturnValue
     }
-      
+
 function placeAd2() {
   var adClasses = {
     "": {
@@ -44,7 +44,7 @@ function placeAd2() {
                 what:["!bigbox"]
                 }
           });
-        
+
         for (a in foo) {
           if (dateCheck("", dateToString())) {
             for (var c = 0; c < 1; c++) {
@@ -55,7 +55,7 @@ function placeAd2() {
       }
     }
   };
-      
+
   adClasses[""].templateCheck();
 }
 

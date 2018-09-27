@@ -6,9 +6,9 @@ function s()
 {
   var x = document.getElementById("x");
   x.style.MozBinding = "url(401993-1.xml#foo)";
-  
+
   setTimeout(boom, 0);
-  
+
   function boom()
   {
     var nodes = SpecialPowers.unwrap(SpecialPowers.wrap(document).getAnonymousNodes(x));
@@ -21,7 +21,7 @@ function s()
     newSpan.contentEditable = "true";
     nodes[0].appendChild(newSpan);
     x.remove();
-    
+
     document.documentElement.removeAttribute("class");
   }
 }

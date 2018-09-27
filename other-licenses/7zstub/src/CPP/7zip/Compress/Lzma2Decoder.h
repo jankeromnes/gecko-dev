@@ -43,18 +43,18 @@ public:
   MY_QUERYINTERFACE_ENTRY(ICompressSetFinishMode)
   MY_QUERYINTERFACE_ENTRY(ICompressGetInStreamProcessedSize)
   MY_QUERYINTERFACE_ENTRY(ICompressSetBufSize)
-  
+
   #ifndef NO_READ_FROM_CODER
   MY_QUERYINTERFACE_ENTRY(ICompressSetInStream)
   MY_QUERYINTERFACE_ENTRY(ICompressSetOutStreamSize)
   MY_QUERYINTERFACE_ENTRY(ISequentialInStream)
   #endif
-  
+
   #ifndef _7ZIP_ST
   MY_QUERYINTERFACE_ENTRY(ICompressSetCoderMt)
   MY_QUERYINTERFACE_ENTRY(ICompressSetMemLimit)
   #endif
-  
+
   MY_QUERYINTERFACE_END
   MY_ADDREF_RELEASE
 

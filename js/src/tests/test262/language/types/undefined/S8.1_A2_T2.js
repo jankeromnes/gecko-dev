@@ -17,7 +17,7 @@ if (!(test1() === void 0)) {
 }
 
 // CHECK#2
-function test2() {  
+function test2() {
 }
 
 if (!(test2() === void 0)) {

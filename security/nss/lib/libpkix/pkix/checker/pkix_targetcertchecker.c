@@ -209,7 +209,7 @@ pkix_TargetCertCheckerState_Create(
         state = NULL;
 
 cleanup:
-        
+
         PKIX_DECREF(extKeyUsageOID);
         PKIX_DECREF(subjAltNameOID);
         PKIX_DECREF(pathToNameList);
@@ -374,41 +374,41 @@ pkix_TargetCertChecker_Check(
              * functions to set the parameters for both cases.
              * We may want to separate them in the future.
              */
-            
+
             PKIX_CHECK(PKIX_PL_Cert_GetExtendedKeyUsage
                        (cert, &certExtKeyUsageList, plContext),
                        PKIX_CERTGETEXTENDEDKEYUSAGEFAILED);
-            
-            
+
+
             if (state->extKeyUsageList != NULL &&
                 certExtKeyUsageList != NULL) {
-                
+
                 PKIX_CHECK(PKIX_List_GetLength
                            (state->extKeyUsageList, &numItems, plContext),
                            PKIX_LISTGETLENGTHFAILED);
-                
+
                 for (i = 0; i < numItems; i++) {
-                    
+
                     PKIX_CHECK(PKIX_List_GetItem
                                (state->extKeyUsageList,
                                 i,
                                 (PKIX_PL_Object **) &name,
                                 plContext),
                                PKIX_LISTGETITEMFAILED);
-                    
+
                     PKIX_CHECK(pkix_List_Contains
                                (certExtKeyUsageList,
                                 (PKIX_PL_Object *) name,
                                 &checkPassed,
                                 plContext),
                                PKIX_LISTCONTAINSFAILED);
-                    
+
                     PKIX_DECREF(name);
-                    
+
                     if (checkPassed != PKIX_TRUE) {
                         PKIX_ERROR
                             (PKIX_EXTENDEDKEYUSAGECHECKINGFAILED);
-                        
+
                     }
                 }
             }

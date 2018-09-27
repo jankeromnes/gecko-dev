@@ -21,6 +21,6 @@ while (true) {
 }
 function loadFile(lfVarx) {
   if (lfVarx.substr(-3) != ".js" && lfVarx.length != 1) {
-    function newFunc(x) { new Function(x)(); }; newFunc(lfVarx); 
+    function newFunc(x) { new Function(x)(); }; newFunc(lfVarx);
   }
 }

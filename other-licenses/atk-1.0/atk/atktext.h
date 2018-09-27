@@ -37,15 +37,15 @@ extern "C" {
  *@ATK_TEXT_ATTR_INDENT: The number of pixels that the text is indented
  *@ATK_TEXT_ATTR_INVISIBLE: Either "true" or "false" indicating whether text is visible or not
  *@ATK_TEXT_ATTR_EDITABLE: Either "true" or "false" indicating whether text is editable or not
- *@ATK_TEXT_ATTR_PIXELS_ABOVE_LINES: Pixels of blank space to leave above each newline-terminated line. 
+ *@ATK_TEXT_ATTR_PIXELS_ABOVE_LINES: Pixels of blank space to leave above each newline-terminated line.
  *@ATK_TEXT_ATTR_PIXELS_BELOW_LINES: Pixels of blank space to leave below each newline-terminated line.
  *@ATK_TEXT_ATTR_PIXELS_INSIDE_WRAP: Pixels of blank space to leave between wrapped lines inside the same newline-terminated line (paragraph).
  *@ATK_TEXT_ATTR_BG_FULL_HEIGHT: "true" or "false" whether to make the background color for each character the height of the highest font used on the current line, or the height of the font used for the current character.
  *@ATK_TEXT_ATTR_RISE: Number of pixels that the characters are risen above the baseline
  *@ATK_TEXT_ATTR_UNDERLINE: "none", "single", "double" or "low"
- *@ATK_TEXT_ATTR_STRIKETHROUGH: "true" or "false" whether the text is strikethrough 
- *@ATK_TEXT_ATTR_SIZE: The size of the characters. 
- *@ATK_TEXT_ATTR_SCALE: The scale of the characters. The value is a string representation of a double 
+ *@ATK_TEXT_ATTR_STRIKETHROUGH: "true" or "false" whether the text is strikethrough
+ *@ATK_TEXT_ATTR_SIZE: The size of the characters.
+ *@ATK_TEXT_ATTR_SCALE: The scale of the characters. The value is a string representation of a double
  *@ATK_TEXT_ATTR_WEIGHT: The weight of the characters.
  *@ATK_TEXT_ATTR_LANGUAGE: The language used
  *@ATK_TEXT_ATTR_FAMILY_NAME: The font family name
@@ -53,9 +53,9 @@ extern "C" {
  *@ATK_TEXT_ATTR_FG_COLOR:The foreground color. The value is an RGB value of the format "%u,%u,%u"
  *@ATK_TEXT_ATTR_BG_STIPPLE: "true" if a #GdkBitmap is set for stippling the background color.
  *@ATK_TEXT_ATTR_FG_STIPPLE: "true" if a #GdkBitmap is set for stippling the foreground color.
- *@ATK_TEXT_ATTR_WRAP_MODE: The wrap mode of the text, if any. Values are "none", "char" or "word" 
- *@ATK_TEXT_ATTR_DIRECTION: The direction of the text, if set. Values are "none", "ltr" or "rtl" 
- *@ATK_TEXT_ATTR_JUSTIFICATION: The justification of the text, if set. Values are "left", "right", "center" or "fill" 
+ *@ATK_TEXT_ATTR_WRAP_MODE: The wrap mode of the text, if any. Values are "none", "char" or "word"
+ *@ATK_TEXT_ATTR_DIRECTION: The direction of the text, if set. Values are "none", "ltr" or "rtl"
+ *@ATK_TEXT_ATTR_JUSTIFICATION: The justification of the text, if set. Values are "left", "right", "center" or "fill"
  *@ATK_TEXT_ATTR_STRETCH: The stretch of the text, if set. Values are "ultra_condensed", "extra_condensed", "condensed", "semi_condensed", "normal", "semi_expanded", "expanded", "extra_expanded" or "ultra_expanded"
  *@ATK_TEXT_ATTR_VARIANT: The capitalization variant of the text, if set. Values are "normal" or "small_caps"
  *@ATK_TEXT_ATTR_STYLE: The slant style of the text, if set. Values are "normal", "oblique" or "italic"
@@ -112,15 +112,15 @@ typedef struct _AtkTextIface AtkTextIface;
 
 /**
  *AtkTextBoundary:
- *@ATK_TEXT_BOUNDARY_CHAR: Boundary is the boundary between characters 
+ *@ATK_TEXT_BOUNDARY_CHAR: Boundary is the boundary between characters
  * (including non-printing characters)
- *@ATK_TEXT_BOUNDARY_WORD_START: Boundary is the start (i.e. first character) of a word. 
+ *@ATK_TEXT_BOUNDARY_WORD_START: Boundary is the start (i.e. first character) of a word.
  *@ATK_TEXT_BOUNDARY_WORD_END: Boundary is the end (i.e. last character) of a word.
  *@ATK_TEXT_BOUNDARY_SENTENCE_START: Boundary is the first character in a sentence.
- *@ATK_TEXT_BOUNDARY_SENTENCE_END: Boundary is the last (terminal) character in a sentence; 
+ *@ATK_TEXT_BOUNDARY_SENTENCE_END: Boundary is the last (terminal) character in a sentence;
  * in languages which use "sentence stop" punctuation such as English, the boundary is thus the
  * '.', '?', or similar terminal punctuation character.
- *@ATK_TEXT_BOUNDARY_LINE_START: Boundary is the initial character of the content or a 
+ *@ATK_TEXT_BOUNDARY_LINE_START: Boundary is the initial character of the content or a
  * character immediately following a newline, linefeed, or return character.
  *@ATK_TEXT_BOUNDARY_LINE_END: Boundary is the linefeed, or return character.
  *
@@ -272,7 +272,7 @@ struct _AtkTextIface
                                                    AtkCoordType     coord_type,
                                                    AtkTextClipType  x_clip_type,
                                                    AtkTextClipType  y_clip_type);
- 
+
 
   AtkFunction    pad4;
 };

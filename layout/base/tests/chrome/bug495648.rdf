@@ -190,25 +190,25 @@
   <RDF:Description RDF:about="http://www.google.de/search?hl=de&amp;q=35&amp;btnG=Suche&amp;meta="
                    NC:name="35 - Google-Suche"
                    NS1:nextScan="0"
-                   NS1:status="0" />			
+                   NS1:status="0" />
   <RDF:Description RDF:about="http://www.google.de/search?hl=de&amp;q=36&amp;btnG=Suche&amp;meta="
                    NC:name="36 - Google-Suche"
                    NS1:nextScan="0"
-                   NS1:status="0" />	
+                   NS1:status="0" />
   <RDF:Description RDF:about="http://www.google.de/search?hl=de&amp;q=37&amp;btnG=Suche&amp;meta="
                    NC:name="37 - Google-Suche"
                    NS1:nextScan="0"
-                   NS1:status="0" />	
+                   NS1:status="0" />
   <RDF:Description RDF:about="http://www.google.de/search?hl=de&amp;q=38&amp;btnG=Suche&amp;meta="
                    NC:name="38 - Google-Suche"
                    NS1:nextScan="0"
-                   NS1:status="0" />	
+                   NS1:status="0" />
   <RDF:Description RDF:about="http://www.google.de/search?hl=de&amp;q=39&amp;btnG=Suche&amp;meta="
                    NC:name="39 - Google-Suche"
                    NS1:nextScan="0"
-                   NS1:status="0" />	
+                   NS1:status="0" />
   <RDF:Description RDF:about="http://www.google.de/search?hl=de&amp;q=40&amp;btnG=Suche&amp;meta="
                    NC:name="40 - Google-Suche"
                    NS1:nextScan="0"
-                   NS1:status="0" />					   
+                   NS1:status="0" />
 </RDF:RDF>

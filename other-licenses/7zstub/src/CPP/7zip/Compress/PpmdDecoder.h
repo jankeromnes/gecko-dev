@@ -62,7 +62,7 @@ public:
       const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress);
   STDMETHOD(SetDecoderProperties2)(const Byte *data, UInt32 size);
   STDMETHOD(GetInStreamProcessedSize)(UInt64 *value);
-  
+
   STDMETHOD(SetOutStreamSize)(const UInt64 *outSize);
 
   #ifndef NO_READ_FROM_CODER

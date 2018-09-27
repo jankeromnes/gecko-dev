@@ -30,7 +30,7 @@ function thrower() {
 
 
 var f = async function*({ a, b = thrower(), c = ++initCount } = {}) {
-  
+
 };
 
 assert.throws(Test262Error, function() {

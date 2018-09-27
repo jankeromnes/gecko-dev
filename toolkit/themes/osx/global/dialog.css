@@ -12,7 +12,7 @@
   margin-inline-start: 80px;
 }
 
-dialog { 
+dialog {
   -moz-appearance: dialog;
   padding: 14px;
 }

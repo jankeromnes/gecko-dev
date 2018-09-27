@@ -20,7 +20,7 @@ class CPasswordDialog: public NWindows::NControl::CModalDialog
 public:
   UString Password;
   bool ShowPassword;
-  
+
   CPasswordDialog(): ShowPassword(false) {}
   INT_PTR Create(HWND parentWindow = 0) { return CModalDialog::Create(IDD_PASSWORD, parentWindow); }
 };

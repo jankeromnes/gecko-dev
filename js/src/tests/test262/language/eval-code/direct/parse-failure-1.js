@@ -17,7 +17,7 @@ try {
 } catch (e) {
   if ((e instanceof SyntaxError) !== true) {
     $ERROR('#1.2: eval("x = 1; x\\u000A++") must throw a SyntaxError. Actual: ' + (e));
-  }  
+  }
 }
 
 reportCompare(0, 0);

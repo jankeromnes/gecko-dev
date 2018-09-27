@@ -41,6 +41,6 @@ f = function ()
 
   f();
 
- 
+
 reportCompare(expect, actual, summary);
 

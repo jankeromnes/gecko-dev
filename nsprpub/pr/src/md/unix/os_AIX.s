@@ -1,5 +1,5 @@
 # -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*-
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -41,7 +41,7 @@
           l   RTOC,0x10(r3)
          bl   .jmprestfpr
 # 1 == cr0 in disassembly
-       cmpi   1,r4,0x0  
+       cmpi   1,r4,0x0
        mtlr   r5
          lm   r13,0x14(r3)
           l   r5,0x60(r3)

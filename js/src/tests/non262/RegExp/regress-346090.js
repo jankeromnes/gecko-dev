@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var r = /%((h[^l]+)|(l[^h]+)){0,2}?a/g;
   r.exec('%lld %d');
 

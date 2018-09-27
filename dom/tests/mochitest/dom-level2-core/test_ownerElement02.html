@@ -36,13 +36,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -53,7 +53,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -72,11 +72,11 @@ var docName = 'ownerElement02';
 
 
 /**
-* 
+*
     The "getOwnerElement()" will return the Element node this attribute
-  is attached to or null if this attribute is not in use.  
+  is attached to or null if this attribute is not in use.
   Create a new attribute.
-  Apply the "getOwnerElement()" method to get the Element associated 
+  Apply the "getOwnerElement()" method to get the Element associated
   with the attribute.  The value returned should be "null" since this
   attribute is not in use.
 
@@ -90,7 +90,7 @@ function ownerElement02() {
     var doc;
       var newAttr;
       var elementNode;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -100,7 +100,7 @@ function ownerElement02() {
       elementNode = newAttr.ownerElement;
 
       assertNull("throw_Null",elementNode);
-    
+
 }
 
 </script>
@@ -109,12 +109,12 @@ function ownerElement02() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/ownerElement02</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

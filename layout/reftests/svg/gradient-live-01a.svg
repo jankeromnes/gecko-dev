@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" 
+<svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
      class="reftest-wait" font-size="80">
 
 <script type="application/javascript">
   document.addEventListener("MozReftestInvalidate", doTest, false);
-  
+
   function doTest() {
     document.getElementById('grad1').removeChild(document.getElementById('red'));
     document.documentElement.removeAttribute('class');
   }
-  
+
 </script>
 
 <!-- Tests that gradients are live to stop removal. -->

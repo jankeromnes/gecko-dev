@@ -8,7 +8,7 @@
 <head>
 <title>This is a test</title>
 <style type="text/css">
-  * {color:red} 
+  * {color:red}
   div#first, DIV#second {color:green}
 </style>
 </head>

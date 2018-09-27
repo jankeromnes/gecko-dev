@@ -204,7 +204,7 @@ struct CriticalLogger {
 
 // The int is the index of the Log call; if the number of logs exceeds some preset
 // capacity we may not get all of them, so the indices help figure out which
-// ones we did save.  The double is expected to be the "TimeDuration", 
+// ones we did save.  The double is expected to be the "TimeDuration",
 // time in seconds since the process creation.
 typedef mozilla::Tuple<int32_t,std::string,double> LoggingRecordEntry;
 
@@ -293,7 +293,7 @@ public:
     }
     return *this;
   }
-  Log &operator <<(const std::string &aLogText) { 
+  Log &operator <<(const std::string &aLogText) {
     if (MOZ_UNLIKELY(LogIt())) {
       mMessage << aLogText;
     }

@@ -71,7 +71,7 @@ class StackwalkerMIPS : public Stackwalker {
   StackFrameMIPS* GetCallerByCFIFrameInfo(const vector<StackFrame*>& frames,
                                           CFIFrameInfo* cfi_frame_info);
 
-  // Scan the stack for plausible return address and frame pointer pair. 
+  // Scan the stack for plausible return address and frame pointer pair.
   // The caller takes ownership of the returned frame. Return NULL on failure.
   StackFrameMIPS* GetCallerByStackScan(const vector<StackFrame*>& frames);
 

@@ -13,7 +13,7 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 try
-{ 
+{
   var re = eval('/[/]/');
 }
 catch(e)

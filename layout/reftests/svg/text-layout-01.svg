@@ -29,7 +29,7 @@
   <text x="220, 240, 260, 280" y="30">TEST6</text>
 
   <text x="220, 220, 220, 220, 220" y="70, 90, 110, 130, 150">TEST7</text>
-  
+
   <text><textPath xlink:href="#h3"><tspan dx="0,1000,-1000">TES</tspan>T8</textPath></text>
 
   <text x="150" y="100" rotate="45">A</text>

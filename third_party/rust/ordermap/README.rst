@@ -54,7 +54,7 @@ which is roughly:
   separate places. (Visible when cpu caches size is limiting.)
 
 - In practice, ``OrderMap`` has been tested out as the hashmap in rustc in PR45282_ and
-  the performance was roughly on par across the whole workload. 
+  the performance was roughly on par across the whole workload.
 - If you want the properties of ``OrderMap``, or its strongest performance points
   fits your workload, it might be the best hash table implementation.
 

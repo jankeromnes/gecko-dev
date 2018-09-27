@@ -35,7 +35,7 @@ AC_DEFUN([PKG_CHECK_MODULES],
         else
             $1_CFLAGS=""
             $1_LIBS=""
-            ## If we have a custom action on failure, don't print errors, but 
+            ## If we have a custom action on failure, don't print errors, but
             ## do set a variable so people can do so.
             $1_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "$2"`
             ifelse([$4], ,echo $$1_PKG_ERRORS,)
@@ -52,7 +52,7 @@ AC_DEFUN([PKG_CHECK_MODULES],
   if test $succeeded = yes; then
      ifelse([$3], , :, [$3])
   else
-     if test "$COMPILE_ENVIRONMENT"; then 
+     if test "$COMPILE_ENVIRONMENT"; then
        ifelse([$4], , AC_MSG_ERROR([Library requirements ($2) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them.]), [$4])
      fi
   fi

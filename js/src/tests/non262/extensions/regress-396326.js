@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof dis == 'undefined')
   {
     print('disassembly not supported. test skipped.');
@@ -27,19 +27,19 @@ function test()
   }
   else
   {
-    function f1() { var v; return v.prop }; 
+    function f1() { var v; return v.prop };
     dis(f1);
-    reportCompare(expect, actual, summary + 
+    reportCompare(expect, actual, summary +
                   ': function f1() { var v; return v.prop };');
 
-    function f2(arg) { return arg.prop }; 
+    function f2(arg) { return arg.prop };
     dis(f2);
-    reportCompare(expect, actual, summary + 
+    reportCompare(expect, actual, summary +
                   ': function f2(arg) { return arg.prop };');
 
-    function f3() { return this.prop }; 
+    function f3() { return this.prop };
     dis(f3);
-    reportCompare(expect, actual, summary + 
+    reportCompare(expect, actual, summary +
                   ': function f3() { return this.prop };');
   }
 }

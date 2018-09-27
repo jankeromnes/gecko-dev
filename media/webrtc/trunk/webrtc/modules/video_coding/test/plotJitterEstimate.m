@@ -34,7 +34,7 @@ plot(s, slopes(end, 1)*s + slopes(end, 2) + 3*sqrt(randJitters(end,2)), 'r');
 plot(s, slopes(end, 1)*s + slopes(end, 2) - 3*sqrt(randJitters(end,2)), 'r');
 title('theta(1)*x+theta(2), (dT-dTS)/dL');
 if sum(size(rttStatsVec)) > 0
-    figure; hold on; 
+    figure; hold on;
     rttNstdDevsDrift = 3.5;
     rttNstdDevsJump = 2.5;
     rttSamples = rttStatsVec(:, 1);
@@ -43,8 +43,8 @@ if sum(size(rttStatsVec)) > 0
     rttMax = rttStatsVec(:, 4);
     plot(rttSamples, 'ko-');
     plot(rttAvgs, 'g');
-    plot(rttAvgs + rttNstdDevsDrift*rttStdDevs, 'b--'); 
-    plot(rttAvgs + rttNstdDevsJump*rttStdDevs, 'b'); 
+    plot(rttAvgs + rttNstdDevsDrift*rttStdDevs, 'b--');
+    plot(rttAvgs + rttNstdDevsJump*rttStdDevs, 'b');
     plot(rttAvgs - rttNstdDevsJump*rttStdDevs, 'b');
     plot(rttMax, 'r');
     %plot(driftRestarts*max(maxRtts), '.');

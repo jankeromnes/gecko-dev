@@ -28,9 +28,9 @@ extern "C" {
 #include <atk/atkrelationtype.h>
 
 /*
- * An AtkRelation describes a relation between the object and one or more 
+ * An AtkRelation describes a relation between the object and one or more
  * other objects. The actual relations that an object has with other objects
- * are defined as an AtkRelationSet, which is a set of AtkRelations. 
+ * are defined as an AtkRelationSet, which is a set of AtkRelations.
  */
 
 #define ATK_TYPE_RELATION                         (atk_relation_get_type ())
@@ -79,7 +79,7 @@ AtkRelationType       atk_relation_get_relation_type  (AtkRelation     *relation
 GPtrArray*            atk_relation_get_target         (AtkRelation     *relation);
 void                  atk_relation_add_target         (AtkRelation     *relation,
                                                        AtkObject       *target);
-                
+
 
 #ifdef __cplusplus
 }

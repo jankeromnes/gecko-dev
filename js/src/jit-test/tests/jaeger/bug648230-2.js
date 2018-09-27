@@ -1,7 +1,7 @@
 var i = 1;
 var j = 2;
 function f() {
-    if (false) 
+    if (false)
         function g() {};
     return i / j;
 }

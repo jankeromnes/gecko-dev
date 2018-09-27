@@ -19,7 +19,7 @@ function test()
   var actual;
   try
   {
-    var o = { __noSuchMethod__: Function }; 
+    var o = { __noSuchMethod__: Function };
     actual = (new o.y) + '';
     throw new Error("didn't throw, produced a value");
   }

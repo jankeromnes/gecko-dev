@@ -16,6 +16,6 @@ p.then(function() {
   $ERROR("Never settles.");
 }).then($DONE, $DONE);
 
-// use three 'then's to allow above to settle 
+// use three 'then's to allow above to settle
 // if this is a buggy Promise.race implementation
 Promise.resolve().then().then().then($DONE, $DONE);

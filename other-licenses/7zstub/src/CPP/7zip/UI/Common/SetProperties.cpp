@@ -67,7 +67,7 @@ HRESULT SetProperties(IUnknown *unknown, const CObjectVector<CProperty> &propert
     CRecordVector<const wchar_t *> names;
     for (i = 0; i < realNames.Size(); i++)
       names.Add((const wchar_t *)realNames[i]);
-    
+
     RINOK(setProperties->SetProperties(&names.Front(), values, names.Size()));
   }
   catch(...)

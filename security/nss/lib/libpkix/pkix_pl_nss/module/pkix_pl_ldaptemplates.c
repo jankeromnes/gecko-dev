@@ -308,7 +308,7 @@ static const SEC_ASN1Template LDAPSearchApplTemplate[] = {
 
 static const SEC_ASN1Template LDAPSearchTemplate[] = {
     { SEC_ASN1_CONSTRUCTED | SEC_ASN1_APPLICATION | LDAP_SEARCH_TYPE, 0,
-        LDAPSearchApplTemplate, sizeof (LDAPSearch) } 
+        LDAPSearchApplTemplate, sizeof (LDAPSearch) }
 };
 
 /*

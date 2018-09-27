@@ -16,7 +16,7 @@ if (eval("Number\u0009()") !== 0) {
 
 //CHECK#2
 if (eval("Number\u000B()") !== 0) {
-  $ERROR('#2: Number\\u000B() === 0');  
+  $ERROR('#2: Number\\u000B() === 0');
 }
 
 //CHECK#3
@@ -36,7 +36,7 @@ if (eval("Number\u00A0()") !== 0) {
 
 //CHECK#6
 if (eval("Number\u000A()") !== 0) {
-  $ERROR('#6: Number\\u000A() === 0');  
+  $ERROR('#6: Number\\u000A() === 0');
 }
 
 //CHECK#7

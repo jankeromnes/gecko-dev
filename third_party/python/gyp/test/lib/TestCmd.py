@@ -1160,7 +1160,7 @@ class TestCmd(object):
         if universal_newlines is None:
             universal_newlines = self.universal_newlines
 
-        # On Windows, if we make stdin a pipe when we plan to send 
+        # On Windows, if we make stdin a pipe when we plan to send
         # no input, and the test program exits before
         # Popen calls msvcrt.open_osfhandle, that call will fail.
         # So don't use a pipe for stdin if we don't need one.

@@ -24,7 +24,7 @@ if (__re.propertyIsEnumerable('ignoreCase') !== false) {
  //CHECK#2
 var count = 0
 for (var p in __re){
-  if (p==="ignoreCase") count++   
+  if (p==="ignoreCase") count++
 }
 
 if (count !== 0) {

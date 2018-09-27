@@ -68,7 +68,7 @@ STDMETHODIMP CFilterCoder::Code(ISequentialInStream *inStream, ISequentialOutStr
     const UInt64 * /* inSize */, const UInt64 *outSize, ICompressProgressInfo *progress)
 {
   RINOK(Init_and_Alloc());
-  
+
   UInt64 nowPos64 = 0;
   bool inputFinished = false;
   UInt32 pos = 0;
@@ -76,7 +76,7 @@ STDMETHODIMP CFilterCoder::Code(ISequentialInStream *inStream, ISequentialOutStr
   while (!outSize || nowPos64 < *outSize)
   {
     UInt32 endPos = pos;
-    
+
     if (!inputFinished)
     {
       size_t processedSize = _bufSize - pos;
@@ -86,7 +86,7 @@ STDMETHODIMP CFilterCoder::Code(ISequentialInStream *inStream, ISequentialOutStr
     }
 
     pos = Filter->Filter(_buf, endPos);
-    
+
     if (pos > endPos)
     {
       // AES
@@ -94,11 +94,11 @@ STDMETHODIMP CFilterCoder::Code(ISequentialInStream *inStream, ISequentialOutStr
         return E_FAIL;
       if (!_encodeMode)
         return S_FALSE;
-      
+
       do
         _buf[endPos] = 0;
       while (++endPos != pos);
-      
+
       if (pos != Filter->Filter(_buf, pos))
         return E_FAIL;
     }
@@ -113,7 +113,7 @@ STDMETHODIMP CFilterCoder::Code(ISequentialInStream *inStream, ISequentialOutStr
       if (size > remSize)
         size = (UInt32)remSize;
     }
-    
+
     RINOK(WriteStream(outStream, _buf, size));
     nowPos64 += size;
 
@@ -161,18 +161,18 @@ HRESULT CFilterCoder::Flush2()
       if (num == 0)
         return k_My_HRESULT_WritingWasCut;
     }
-    
+
     UInt32 processed = 0;
     HRESULT res = _outStream->Write(_buf + _convPos, num, &processed);
     if (processed == 0)
       return res != S_OK ? res : E_FAIL;
-    
+
     _convPos += processed;
     _convSize -= processed;
     _nowPos64 += processed;
     RINOK(res);
   }
-    
+
   if (_convPos != 0)
   {
     UInt32 num = _bufPos - _convPos;
@@ -181,7 +181,7 @@ HRESULT CFilterCoder::Flush2()
     _bufPos = num;
     _convPos = 0;
   }
-    
+
   return S_OK;
 }
 
@@ -189,7 +189,7 @@ STDMETHODIMP CFilterCoder::Write(const void *data, UInt32 size, UInt32 *processe
 {
   if (processedSize)
     *processedSize = 0;
-  
+
   while (size != 0)
   {
     RINOK(Flush2());
@@ -213,7 +213,7 @@ STDMETHODIMP CFilterCoder::Write(const void *data, UInt32 size, UInt32 *processe
 
     // _bufPos == _bufSize
     _convSize = Filter->Filter(_buf, _bufPos);
-    
+
     if (_convSize == 0)
       break;
     if (_convSize > _bufPos)
@@ -257,7 +257,7 @@ STDMETHODIMP CFilterCoder::OutStreamFinish()
         return E_FAIL;
     }
   }
-  
+
   CMyComPtr<IOutStreamFinish> finish;
   _outStream.QueryInterface(IID_IOutStreamFinish, &finish);
   if (finish)
@@ -309,7 +309,7 @@ STDMETHODIMP CFilterCoder::Read(void *data, UInt32 size, UInt32 *processedSize)
 {
   if (processedSize)
     *processedSize = 0;
-  
+
   while (size != 0)
   {
     if (_convSize != 0)
@@ -330,7 +330,7 @@ STDMETHODIMP CFilterCoder::Read(void *data, UInt32 size, UInt32 *processedSize)
         *processedSize = size;
       break;
     }
-  
+
     if (_convPos != 0)
     {
       UInt32 num = _bufPos - _convPos;
@@ -339,16 +339,16 @@ STDMETHODIMP CFilterCoder::Read(void *data, UInt32 size, UInt32 *processedSize)
       _bufPos = num;
       _convPos = 0;
     }
-    
+
     {
       size_t readSize = _bufSize - _bufPos;
       HRESULT res = ReadStream(_inStream, _buf + _bufPos, &readSize);
       _bufPos += (UInt32)readSize;
       RINOK(res);
     }
-    
+
     _convSize = Filter->Filter(_buf, _bufPos);
-    
+
     if (_convSize == 0)
     {
       if (_bufPos == 0)
@@ -357,7 +357,7 @@ STDMETHODIMP CFilterCoder::Read(void *data, UInt32 size, UInt32 *processedSize)
       _convSize = _bufPos;
       continue;
     }
-    
+
     if (_convSize > _bufPos)
     {
       // AES
@@ -365,17 +365,17 @@ STDMETHODIMP CFilterCoder::Read(void *data, UInt32 size, UInt32 *processedSize)
         return E_FAIL;
       if (!_encodeMode)
         return S_FALSE;
-      
+
       do
         _buf[_bufPos] = 0;
       while (++_bufPos != _convSize);
-      
+
       _convSize = Filter->Filter(_buf, _convSize);
       if (_convSize != _bufPos)
         return E_FAIL;
     }
   }
- 
+
   return S_OK;
 }
 

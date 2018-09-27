@@ -50,6 +50,6 @@ NS_InvokeByIndex:
 	pop        %ebx
 	movl       %ebp,%esp
 	pop        %ebp
-	ret        
+	ret
 	.size NS_InvokeByIndex, . - NS_InvokeByIndex
 

@@ -49,8 +49,8 @@
  * @Title: Regions
  * @Short_Description: Representing a pixel-aligned area
  *
- * Regions are a simple graphical data type representing an area of 
- * integer-aligned rectangles. They are often used on raster surfaces 
+ * Regions are a simple graphical data type representing an area of
+ * integer-aligned rectangles. They are often used on raster surfaces
  * to track areas of interest, such as change or clip areas.
  */
 
@@ -705,7 +705,7 @@ cairo_region_xor (cairo_region_t *dst, const cairo_region_t *other)
 
     /* XXX: get an xor function into pixman */
     if (! pixman_region32_subtract (&tmp, CONST_CAST &other->rgn, &dst->rgn) ||
-        ! pixman_region32_subtract (&dst->rgn, &dst->rgn, CONST_CAST &other->rgn) || 
+        ! pixman_region32_subtract (&dst->rgn, &dst->rgn, CONST_CAST &other->rgn) ||
         ! pixman_region32_union (&dst->rgn, &dst->rgn, &tmp))
 	status = _cairo_region_set_error (dst, CAIRO_STATUS_NO_MEMORY);
 
@@ -721,7 +721,7 @@ slim_hidden_def (cairo_region_xor);
  * @rectangle: a #cairo_rectangle_int_t
  *
  * Computes the exclusive difference of @dst with @rectangle and places the
- * result in @dst. That is, @dst will be set to contain all areas that are 
+ * result in @dst. That is, @dst will be set to contain all areas that are
  * either in @dst or in @rectangle, but not in both.
  *
  * Return value: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
@@ -745,7 +745,7 @@ cairo_region_xor_rectangle (cairo_region_t *dst,
 
     /* XXX: get an xor function into pixman */
     if (! pixman_region32_subtract (&tmp, &region, &dst->rgn) ||
-        ! pixman_region32_subtract (&dst->rgn, &dst->rgn, &region) || 
+        ! pixman_region32_subtract (&dst->rgn, &dst->rgn, &region) ||
         ! pixman_region32_union (&dst->rgn, &dst->rgn, &tmp))
 	status = _cairo_region_set_error (dst, CAIRO_STATUS_NO_MEMORY);
 
@@ -803,7 +803,7 @@ slim_hidden_def (cairo_region_translate);
  * @CAIRO_REGION_OVERLAP_OUT: The contents are entirely outside the region
  * @CAIRO_REGION_OVERLAP_PART: The contents are partially inside and
  *     partially outside the region.
- * 
+ *
  * Used as the return value for cairo_region_contains_rectangle().
  */
 

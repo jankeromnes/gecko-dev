@@ -8,7 +8,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-surface-wrapper.c b/gfx/cairo/cairo/src/c
 +++ b/gfx/cairo/cairo/src/cairo-surface-wrapper.c
 @@ -712,9 +712,10 @@ _cairo_surface_wrapper_fini (cairo_surfa
  }
- 
+
  cairo_status_t
  _cairo_surface_wrapper_flush (cairo_surface_wrapper_t *wrapper)
  {

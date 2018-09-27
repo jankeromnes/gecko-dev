@@ -41,18 +41,18 @@
         std     r31,-8(sp)
 #
 # save off the incoming values in the caller's parameter area
-#		
+#
         std     r3,48(sp)       # that
         std     r4,56(sp)       # methodIndex
         std     r5,64(sp)       # paramCount
         std     r6,72(sp)       # params
 	std     r0,16(sp)
-	stdu    sp,-168(sp)     # 2*24=48 for linkage area, 
+	stdu    sp,-168(sp)     # 2*24=48 for linkage area,
                                 # 8*13=104 for fprData area
                                 #      16 for saved registers
 
 # prepare args for 'invoke_copy_to_stack' call
-#		
+#
         ld      r4,232(sp)      # paramCount (168+8+56)
         ld      r5,240(sp)      # params
         mr      r6,sp           # fprData
@@ -67,7 +67,7 @@
         bl      .invoke_copy_to_stack
         nop
 
-        lfd     f1,0(r31)       # Restore floating point registers	
+        lfd     f1,0(r31)       # Restore floating point registers
 	lfd     f2,8(r31)
         lfd     f3,16(r31)
         lfd     f4,24(r31)
@@ -80,7 +80,7 @@
         lfd     f11,80(r31)
         lfd     f12,88(r31)
         lfd     f13,96(r31)
-		
+
         ld      r3,216(r31)     # that (168+48)
         ld      r4,0(r3)        # get vTable from 'that'
         ld      r5,224(r31)     # methodIndex (168+56)
@@ -88,10 +88,10 @@
                                 # No junk at the start of 64bit vtable !!!
         ldx     r11,r5,r4       # get function pointer (this jumps
                                 # either to the function if no adjustment
-                                # is needed (displacement = 0), or it 
+                                # is needed (displacement = 0), or it
                                 # jumps to the thunk code, which will jump
                                 # to the function at the end)
-        
+
         # No adjustment of the that pointer in 64bit mode, this is done
         # by the thunk code
 

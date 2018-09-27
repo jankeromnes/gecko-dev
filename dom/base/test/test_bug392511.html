@@ -12,14 +12,14 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=392511
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=392511">Mozilla Bug 392511</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  <div id="t1"><span onclick="&quot;&amp;"></span></div>  
-  <div id="t2"><span foo="&quot;&amp;"></span></div>  
-  <div id="t3"><span onclick='&apos;&amp;'></span></div>  
-  <div id="t4"><span foo='&apos;&amp;'></span></div>  
-  <div id="t5"><span onclick='"&apos;&amp;'></span></div>  
-  <div id="t6"><span foo='"&apos;&amp;'></span></div>  
-  <div id="t7"><span onclick="'&quot;&amp;"></span></div>  
-  <div id="t8"><span foo="'&quot;&amp;"></span></div>  
+  <div id="t1"><span onclick="&quot;&amp;"></span></div>
+  <div id="t2"><span foo="&quot;&amp;"></span></div>
+  <div id="t3"><span onclick='&apos;&amp;'></span></div>
+  <div id="t4"><span foo='&apos;&amp;'></span></div>
+  <div id="t5"><span onclick='"&apos;&amp;'></span></div>
+  <div id="t6"><span foo='"&apos;&amp;'></span></div>
+  <div id="t7"><span onclick="'&quot;&amp;"></span></div>
+  <div id="t8"><span foo="'&quot;&amp;"></span></div>
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -36,7 +36,7 @@ var results = [
  "\"'&quot;&amp;\"",
  "\"'&quot;&amp;\""
 ];
- 
+
 for (var i = 1; i <= 8; ++i) {
   var id = "t" + i;
   var str = $(id).innerHTML;

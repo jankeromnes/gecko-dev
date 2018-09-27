@@ -45,7 +45,7 @@ it.next().then(function(ret) {
       assert.sameValue(ret.value, undefined, 'Generator is closed');
       assert.sameValue(ret.done, true, 'Generator is closed');
     }).then($DONE, $DONE);
-    
+
   }).catch($DONE);
 
 }).catch($DONE);

@@ -21,7 +21,7 @@ LDFLAGSICUDT=-nodefaultlibs -nostdlib
 THREADSCPPFLAGS = -D_REENTRANT
 
 ## Compiler switch to embed a runtime search path
-LD_RPATH=       -R'$$'ORIGIN 
+LD_RPATH=       -R'$$'ORIGIN
 LD_RPATH_PRE=   -R
 
 ## Compiler switch to embed a library name
@@ -74,7 +74,7 @@ STATIC_O = ao
 	$(RM) $@ && ln -s ${*F}.$(SO).$(SO_TARGET_VERSION) $@
 
 ## Remove shared library 's'
-STATIC_PREFIX_WHEN_USED = 
-STATIC_PREFIX = 
+STATIC_PREFIX_WHEN_USED =
+STATIC_PREFIX =
 
 ## End Solaris-specific setup

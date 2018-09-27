@@ -25,7 +25,7 @@ function test()
   img1canvas.height = img2canvas.height = height;
   img1canvas.getContext("2d").getImageData(0, 0, width, height).data;
   img2canvas.getContext("2d").getImageData(0, 0, width, height).data;
- 
+
   reportCompare(expect, actual, summary);
   gDelayTestDriverEnd = false;
   jsTestDriverEnd();

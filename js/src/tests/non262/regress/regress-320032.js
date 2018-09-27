@@ -23,5 +23,5 @@ if (typeof document != 'undefined' && 'getElementById' in document)
     actual = ex + '';
   }
 }
- 
+
 reportCompare(expect, actual, summary);

@@ -11,7 +11,7 @@ public class OutWindow
 	int _windowSize = 0;
 	int _streamPos;
 	java.io.OutputStream _stream;
-	
+
 	public void Create(int windowSize)
 	{
 		if (_buffer == null || _windowSize != windowSize)
@@ -20,19 +20,19 @@ public class OutWindow
 		_pos = 0;
 		_streamPos = 0;
 	}
-	
+
 	public void SetStream(java.io.OutputStream stream) throws IOException
 	{
 		ReleaseStream();
 		_stream = stream;
 	}
-	
+
 	public void ReleaseStream() throws IOException
 	{
 		Flush();
 		_stream = null;
 	}
-	
+
 	public void Init(boolean solid)
 	{
 		if (!solid)
@@ -41,7 +41,7 @@ public class OutWindow
 			_pos = 0;
 		}
 	}
-	
+
 	public void Flush() throws IOException
 	{
 		int size = _pos - _streamPos;
@@ -52,7 +52,7 @@ public class OutWindow
 			_pos = 0;
 		_streamPos = _pos;
 	}
-	
+
 	public void CopyBlock(int distance, int len) throws IOException
 	{
 		int pos = _pos - distance - 1;
@@ -67,14 +67,14 @@ public class OutWindow
 				Flush();
 		}
 	}
-	
+
 	public void PutByte(byte b) throws IOException
 	{
 		_buffer[_pos++] = b;
 		if (_pos >= _windowSize)
 			Flush();
 	}
-	
+
 	public byte GetByte(int distance)
 	{
 		int pos = _pos - distance - 1;

@@ -24,7 +24,7 @@ std::wstring UTF8to16(const char * in);
 /** safely copy a string into a buffer */
 void strcpy_safe( char *pchBuffer, size_t unBufferSizeBytes, const char *pchSource );
 template< size_t bufferSize >
-void strcpy_safe( char (& buffer) [ bufferSize ], const char *pchSource ) 
+void strcpy_safe( char (& buffer) [ bufferSize ], const char *pchSource )
 {
 	strcpy_safe( buffer, bufferSize, pchSource );
 }
@@ -69,9 +69,9 @@ inline errno_t strncpy_s(char *strDest, size_t numberOfElements, const char *str
 #endif
 
 #if defined( LINUX )
-// this implementation does not return whether or not the destination was 
+// this implementation does not return whether or not the destination was
 // truncated, but that is straightforward to fix if anybody actually needs the
-// return code. 
+// return code.
 #include "string.h"
 inline void wcsncpy_s(wchar_t *strDest, size_t numberOfElements, const wchar_t *strSource, size_t count)
 {
@@ -102,7 +102,7 @@ uint32_t ReturnStdString( const std::string & sValue, char *pchBuffer, uint32_t 
 uint64_t StringToUint64( const std::string & sValue );
 
 //-----------------------------------------------------------------------------
-// Purpose: Encodes a string (or binary data) from URL encoding format, see rfc1738 section 2.2.  
+// Purpose: Encodes a string (or binary data) from URL encoding format, see rfc1738 section 2.2.
 //          This version of the call isn't a strict RFC implementation, but uses + for space as is
 //          the standard in HTML form encoding, despite it not being part of the RFC.
 //
@@ -111,7 +111,7 @@ uint64_t StringToUint64( const std::string & sValue );
 void V_URLEncode( char *pchDest, int nDestLen, const char *pchSource, int nSourceLen );
 
 //-----------------------------------------------------------------------------
-// Purpose: Decodes a string (or binary data) from URL encoding format, see rfc1738 section 2.2.  
+// Purpose: Decodes a string (or binary data) from URL encoding format, see rfc1738 section 2.2.
 //          This version of the call isn't a strict RFC implementation, but uses + for space as is
 //          the standard in HTML form encoding, despite it not being part of the RFC.
 //

@@ -117,7 +117,7 @@ enum PP_VideoDecodeError_Dev {
    */
   PP_VIDEODECODERERROR_UNREADABLE_INPUT = 3,
 
-  /** 
+  /**
    * A failure occurred at the browser layer or lower.  Examples of such
    * failures include GPU hardware failures, GPU driver failures, GPU library
    * failures, browser programming errors, and so on.

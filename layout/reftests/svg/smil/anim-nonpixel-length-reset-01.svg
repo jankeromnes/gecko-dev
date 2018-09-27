@@ -8,7 +8,7 @@
      onload="document.documentElement.setCurrentTime(0);
              if (document.getElementById('x').width.animVal.value != 0) {
 	       /* fail */
-               document.documentElement.textContent = '';     
+               document.documentElement.textContent = '';
              }
              setTimeAndSnapshot(1, true)">
   <title>Test that an animation for a length correctly restores the original

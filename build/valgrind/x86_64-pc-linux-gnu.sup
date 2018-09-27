@@ -837,7 +837,7 @@
 #    at 0x4C2CAEE: operator new(unsigned long) (vg_replace_malloc.c:332)
 #    by 0xF6AB737: std::vector<unsigned short, std::allocator<unsigned short>
 #    by 0xFCD0FDE: ots::ots_post_parse(ots::Font*, unsigned char const*, unsi
-#    by 0xFCCA3D9: (anonymous namespace)::ProcessGeneric(ots::OpenTypeFile*, 
+#    by 0xFCCA3D9: (anonymous namespace)::ProcessGeneric(ots::OpenTypeFile*,
 #    by 0xFCCB17E: (anonymous namespace)::ProcessTTF(ots::OpenTypeFile*, ots:
 #    by 0xFCCBA54: ots::OTSContext::Process(ots::OTSStream*, unsigned char co
 #    by 0xE7D7C8D: gfxUserFontEntry::SanitizeOpenTypeData(unsigned char const

@@ -35,17 +35,17 @@
 #include <assert.h>
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ProtectedMemoryAllocator::ProtectedMemoryAllocator(vm_size_t pool_size) 
+ProtectedMemoryAllocator::ProtectedMemoryAllocator(vm_size_t pool_size)
   : pool_size_(pool_size),
     next_alloc_offset_(0),
     valid_(false) {
-  
+
   kern_return_t result = vm_allocate(mach_task_self(),
                                      &base_address_,
                                      pool_size,
                                      TRUE
                                      );
-  
+
   valid_ = (result == KERN_SUCCESS);
   assert(valid_);
 }
@@ -65,7 +65,7 @@ char *ProtectedMemoryAllocator::Allocate(vm_size_t bytes) {
     next_alloc_offset_ += bytes;
     return p;
   }
-  
+
   return NULL;  // ran out of memory in our allocation block
 }
 
@@ -76,7 +76,7 @@ kern_return_t  ProtectedMemoryAllocator::Protect() {
                                     pool_size_,
                                     FALSE,
                                     VM_PROT_READ);
-  
+
   return result;
 }
 
@@ -87,6 +87,6 @@ kern_return_t  ProtectedMemoryAllocator::Unprotect() {
                                     pool_size_,
                                     FALSE,
                                     VM_PROT_READ | VM_PROT_WRITE);
-  
+
   return result;
 }

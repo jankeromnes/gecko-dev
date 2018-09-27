@@ -13,7 +13,7 @@
   font-family: Gentium;
   src: url(GenI102.ttf);
   font-style: italic;
-}  
+}
 
 @font-face {
   font-family: GentiumAlt;
@@ -31,4 +31,4 @@
 @font-face {
   font-family: Scheherazade;
   src: url(ScheherazadeRegOT.ttf) format("opentype");
-}  
+}

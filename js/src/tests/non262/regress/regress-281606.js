@@ -12,7 +12,7 @@ var status;
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 var o = {};
 
 status = summary + ' ' + inSection(1) + ' o instanceof Math ';

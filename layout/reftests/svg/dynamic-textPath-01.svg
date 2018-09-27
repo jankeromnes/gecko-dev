@@ -8,7 +8,7 @@
   <defs>
 	  <path id="x" d="M 75.5 100 h 251"/>
   </defs>
-	
+
   <text>
 	  <textPath xlink:href="#m1" font-size="20" fill="black">Should see this</textPath>
   </text>
@@ -16,7 +16,7 @@
   <script>
   document.addEventListener("MozReftestInvalidate", doTest, false);
   setTimeout(doTest, 4000); // fallback for running outside reftest
-  
+
   function doTest() {
     // check that changing an id to "m1" lets l1 find it
     var x = document.getElementById("x");

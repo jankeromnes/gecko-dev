@@ -8,7 +8,7 @@ description: Type(x) is boolean primitive or Boolean object
 ---*/
 
 //CHECK#1
-var x = false; 
+var x = false;
 if (++x !== 0 + 1) {
   $ERROR('#1: var x = false; ++x === 0 + 1. Actual: ' + (++x));
 }

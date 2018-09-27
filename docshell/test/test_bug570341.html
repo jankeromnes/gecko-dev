@@ -65,9 +65,9 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=570341
 
   function checkValues(){
     var win = frames[0];
-    ok(win.performance, 
+    ok(win.performance,
         'window.performance is missing or not accessible for frame');
-    ok(!win.performance || win.performance.timing, 
+    ok(!win.performance || win.performance.timing,
         'window.performance.timing is missing or not accessible for frame');
     collectMoments();
 

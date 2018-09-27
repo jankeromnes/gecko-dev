@@ -53,20 +53,20 @@ G_BEGIN_DECLS
  *@ATK_STATE_RESIZABLE: Indicates the size of this object is not fixed
  *@ATK_STATE_SELECTABLE: Indicates this object is the child of an object that allows its children to be selected and that this child is one of those children that can be selected
  *@ATK_STATE_SELECTED: Indicates this object is the child of an object that allows its children to be selected and that this child is one of those children that has been selected
- *@ATK_STATE_SENSITIVE: Indicates this object is sensitive, e.g. to user interaction. 
+ *@ATK_STATE_SENSITIVE: Indicates this object is sensitive, e.g. to user interaction.
  * STATE_SENSITIVE usually accompanies STATE_ENABLED for user-actionable controls,
- * but may be found in the absence of STATE_ENABLED if the current visible state of the 
+ * but may be found in the absence of STATE_ENABLED if the current visible state of the
  * control is "disconnected" from the application state.  In such cases, direct user interaction
- * can often result in the object gaining STATE_SENSITIVE, for instance if a user makes 
+ * can often result in the object gaining STATE_SENSITIVE, for instance if a user makes
  * an explicit selection using an object whose current state is ambiguous or undefined.
  * @see STATE_ENABLED, STATE_INDETERMINATE.
- *@ATK_STATE_SHOWING: Indicates this object, the object's parent, the object's parent's parent, and so on, 
+ *@ATK_STATE_SHOWING: Indicates this object, the object's parent, the object's parent's parent, and so on,
  * are all 'shown' to the end-user, i.e. subject to "exposure" if blocking or obscuring objects do not interpose
  * between this object and the top of the window stack.
  *@ATK_STATE_SINGLE_LINE: Indicates this (text) object can contain only a single line of text
  *@ATK_STATE_STALE: Indicates that the information returned for this object may no longer be
  * synchronized with the application state.  This is implied if the object has STATE_TRANSIENT,
- * and can also occur towards the end of the object peer's lifecycle. It can also be used to indicate that 
+ * and can also occur towards the end of the object peer's lifecycle. It can also be used to indicate that
  * the index associated with this object has changed since the user accessed the object (in lieu of
  * "index-in-parent-changed" events).
  *@ATK_STATE_TRANSIENT: Indicates this object is transient, i.e. a snapshot which may not emit events when its
@@ -75,10 +75,10 @@ G_BEGIN_DECLS
  *@ATK_STATE_VERTICAL: Indicates the orientation of this object is vertical
  *@ATK_STATE_VISIBLE: Indicates this object is visible, e.g. has been explicitly marked for exposure to the user.
  * @note: STATE_VISIBLE is no guarantee that the object is actually unobscured on the screen, only
- * that it is 'potentially' visible, barring obstruction, being scrolled or clipped out of the 
+ * that it is 'potentially' visible, barring obstruction, being scrolled or clipped out of the
  * field of view, or having an ancestor container that has not yet made visible.
  * A widget is potentially onscreen if it has both STATE_VISIBLE and STATE_SHOWING.
- * The absence of STATE_VISIBLE and STATE_SHOWING is semantically equivalent to saying 
+ * The absence of STATE_VISIBLE and STATE_SHOWING is semantically equivalent to saying
  * that an object is 'hidden'.  See also STATE_TRUNCATED, which applies if a VISIBLE and SHOWING object
  * lies within a viewport which means that its contents are clipped, e.g. a truncated spreadsheet cell or
  * an image within a scrolling viewport.  Mostly useful for screen-review and magnification algorithms.
@@ -89,7 +89,7 @@ G_BEGIN_DECLS
  * that the children should not, and need not, be enumerated by the client.
  * Objects implementing this state are expected to provide relevant state
  * notifications to listening clients, for instance notifications of visibility
- * changes and activation of their contained child objects, without the client 
+ * changes and activation of their contained child objects, without the client
  * having previously requested references to those children.
  *@ATK_STATE_INDETERMINATE: Indicates that the value, or some other quantifiable
  * property, of this AtkObject cannot be fully determined. In the case of a large
@@ -101,12 +101,12 @@ G_BEGIN_DECLS
  *@ATK_STATE_TRUNCATED: Indicates that an object is truncated, e.g. a text value in a speradsheet cell.
  *@ATK_STATE_REQUIRED: Indicates that explicit user interaction with an object is required by the user interface, e.g. a required field in a "web-form" interface.
  *@ATK_STATE_INVALID_ENTRY: Indicates that the object has encountered an error condition due to failure of input validation. For instance, a form control may acquire this state in response to invalid or malformed user input.
- *@ATK_STATE_SUPPORTS_AUTOCOMPLETION:  Indicates that the object in question implements some form of ¨typeahead¨ or 
+ *@ATK_STATE_SUPPORTS_AUTOCOMPLETION:  Indicates that the object in question implements some form of ¨typeahead¨ or
  * pre-selection behavior whereby entering the first character of one or more sub-elements
  * causes those elements to scroll into view or become selected.  Subsequent character input
  * may narrow the selection further as long as one or more sub-elements match the string.
  * This state is normally only useful and encountered on objects that implement Selection.
- * In some cases the typeahead behavior may result in full or partial ¨completion¨ of 
+ * In some cases the typeahead behavior may result in full or partial ¨completion¨ of
  * the data in the input field, in which case these input events may trigger text-changed
  * events from the AtkText interface.  This state supplants @ATK_ROLE_AUTOCOMPLETE.
  *@ATK_STATE_SELECTABLE_TEXT:Indicates that the object in question supports text selection. It should only be exposed on objects which implement the Text interface, in order to distinguish this state from @ATK_STATE_SELECTABLE, which infers that the object in question is a selectable child of an object which implements Selection. While similar, text selection and subelement selection are distinct operations.

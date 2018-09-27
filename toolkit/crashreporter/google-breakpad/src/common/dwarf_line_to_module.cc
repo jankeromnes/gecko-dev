@@ -30,7 +30,7 @@
 // Original author: Jim Blandy <jimb@mozilla.com> <jimb@red-bean.com>
 
 // dwarf_line_to_module.cc: Implementation of DwarfLineToModule class.
-// See dwarf_line_to_module.h for details. 
+// See dwarf_line_to_module.h for details.
 
 #include <stdio.h>
 

@@ -62,7 +62,7 @@ int main(int argc, const char *argv[]) {
     Collator *col = Collator::createInstance(Locale::getEnglish(), errorCode);
     fprintf(stderr, "\n%s:%d: err %s creating collator\n", __FILE__, __LINE__, u_errorName(errorCode));
   }
-  
+
   if(U_FAILURE(errorCode)) {
     return 1;
   } else {

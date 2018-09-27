@@ -65,7 +65,7 @@
          "cmd_delete should be disabled when the empty textbox is focused");
       finish();
     }
-    
+
     window.controllers.appendController(gShouldNotBeReachedController);
   ]]></script>
 

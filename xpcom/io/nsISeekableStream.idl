@@ -7,7 +7,7 @@
 /*
  * nsISeekableStream
  *
- * Note that a stream might not implement all methods (e.g., a readonly stream 
+ * Note that a stream might not implement all methods (e.g., a readonly stream
  * won't implement setEOF)
  */
 
@@ -16,20 +16,20 @@
 [scriptable, uuid(8429d350-1040-4661-8b71-f2a6ba455980)]
 interface nsISeekableStream : nsISupports
 {
-    /* 
-     * Sets the stream pointer to the value of the 'offset' parameter 
+    /*
+     * Sets the stream pointer to the value of the 'offset' parameter
      */
     const int32_t NS_SEEK_SET = 0;
 
-    /*  
-     * Sets the stream pointer to its current location plus the value 
-     * of the offset parameter. 
+    /*
+     * Sets the stream pointer to its current location plus the value
+     * of the offset parameter.
      */
     const int32_t NS_SEEK_CUR = 1;
 
-    /* 
-     * Sets the stream pointer to the size of the stream plus the value 
-     * of the offset parameter. 
+    /*
+     * Sets the stream pointer to the size of the stream plus the value
+     * of the offset parameter.
      */
     const int32_t NS_SEEK_END = 2;
 
@@ -42,10 +42,10 @@ interface nsISeekableStream : nsISupports
      *   @param whence specifies how to interpret the 'offset' parameter in
      *                 setting the stream offset associated with the implementing
      *                 stream.
-     *     
+     *
      *   @param offset specifies a value, in bytes, that is used in conjunction
-     *                 with the 'whence' parameter to set the stream offset of the 
-     *                 implementing stream.  A negative value causes seeking in 
+     *                 with the 'whence' parameter to set the stream offset of the
+     *                 implementing stream.  A negative value causes seeking in
      *                 the reverse direction.
      *
      *   @throws NS_BASE_STREAM_CLOSED if called on a closed stream.
@@ -55,8 +55,8 @@ interface nsISeekableStream : nsISupports
     /**
      *  tell
      *
-     *  This method reports the current offset, in bytes, from the start of the 
-     *  stream. 
+     *  This method reports the current offset, in bytes, from the start of the
+     *  stream.
      *
      *   @throws NS_BASE_STREAM_CLOSED if called on a closed stream.
      */

@@ -50,7 +50,7 @@ info: |
 
 class C {
   async *method({ w: { x, y, z } = undefined } = { }) {
-    
+
   }
 };
 

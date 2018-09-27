@@ -37,7 +37,7 @@ protected:
   STDMETHODIMP QueryInterface(REFIID aIId, void **aInterface);
   STDMETHODIMP_(ULONG) AddRef() { return mFilter->AddRef(); }
   STDMETHODIMP_(ULONG) Release() { return mFilter->Release(); }
-  
+
   STDMETHODIMP GetAllocator(IMemAllocator **aAllocator);
   STDMETHODIMP NotifyAllocator(IMemAllocator *aAllocator, BOOL aReadOnly);
   STDMETHODIMP GetAllocatorRequirements(ALLOCATOR_PROPERTIES *aProps);

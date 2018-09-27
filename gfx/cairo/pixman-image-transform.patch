@@ -24,13 +24,13 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
 +++ b/gfx/cairo/cairo/src/cairo-image-surface.c
 @@ -1138,16 +1138,27 @@ _cairo_image_surface_composite (cairo_op
  	return status;
- 
+
      status = _cairo_image_surface_set_attributes (src, &src_attr,
  						  dst_x + width / 2.,
  						  dst_y + height / 2.);
      if (unlikely (status))
  	goto CLEANUP_SURFACES;
- 
+
 +    /* we sometimes get destinations with transforms.
 +     * we're not equiped to deal with this */
 +    {
@@ -48,5 +48,5 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  						      dst_y + height / 2.);
  	if (unlikely (status))
  	    goto CLEANUP_SURFACES;
- 
+
  	pixman_image_composite (_pixman_operator (op),

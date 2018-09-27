@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof Script == 'undefined')
   {
     actual = expect = 'Test skipped - Test requires Script object..';

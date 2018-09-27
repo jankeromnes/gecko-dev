@@ -5,7 +5,7 @@ diff --git a/modules/fdlibm/src/math_private.h b/modules/fdlibm/src/math_private
  /* The above works on non-i386 too, but we use this to check v. */
  #define	LD80C(m, ex, v)	{ .e = (v), }
  #endif
- 
+
  #ifdef FLT_EVAL_METHOD
  /*
   * Attempt to get strict C99 semantics for assignment with non-C99 compilers.

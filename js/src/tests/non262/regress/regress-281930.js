@@ -16,5 +16,5 @@ var global = this;
 
 actual = function() { return this; }();
 expect = global;
- 
+
 reportCompare(expect, actual, summary);

@@ -42,7 +42,7 @@ struct CProps
   }
 
   void AddProp32(PROPID propid, UInt32 val);
-  
+
   void AddPropBool(PROPID propid, bool val);
 
   void AddProp_Ascii(PROPID propid, const char *s)
@@ -249,7 +249,7 @@ class COneMethodInfo: public CMethodProps
 public:
   AString MethodName;
   UString PropsString;
-  
+
   void Clear()
   {
     CMethodProps::Clear();

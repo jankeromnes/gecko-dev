@@ -40,7 +40,7 @@ HRESULT CHashBundle::SetMethods(DECL_EXTERNAL_CODECS_LOC_VARS const UStringVecto
 
   CRecordVector<CMethodId> ids;
   CObjectVector<COneMethodInfo> methods;
-  
+
   unsigned i;
   for (i = 0; i < names.Size(); i++)
   {
@@ -49,7 +49,7 @@ HRESULT CHashBundle::SetMethods(DECL_EXTERNAL_CODECS_LOC_VARS const UStringVecto
 
     if (m.MethodName.IsEmpty())
       m.MethodName = k_DefaultHashMethod;
-    
+
     if (m.MethodName == "*")
     {
       CRecordVector<CMethodId> tempMethods;
@@ -157,7 +157,7 @@ void CHashBundle::Final(bool isDir, bool isAltStream, const UString &path)
   memset(pre, 0, sizeof(pre));
   if (isDir)
     pre[0] = 1;
-  
+
   FOR_VECTOR (i, Hashers)
   {
     CHasherState &h = Hashers[i];
@@ -171,14 +171,14 @@ void CHashBundle::Final(bool isDir, bool isAltStream, const UString &path)
     h.Hasher->Init();
     h.Hasher->Update(pre, sizeof(pre));
     h.Hasher->Update(h.Digests[0], h.DigestSize);
-    
+
     for (unsigned k = 0; k < path.Len(); k++)
     {
       wchar_t c = path[k];
       Byte temp[2] = { (Byte)(c & 0xFF), (Byte)((c >> 8) & 0xFF) };
       h.Hasher->Update(temp, 2);
     }
-  
+
     Byte tempDigest[k_HashCalc_DigestSize_Max];
     h.Hasher->Final(tempDigest);
     if (!isAltStream)
@@ -217,7 +217,7 @@ HRESULT HashCalc(
         options.PathMode,
         UString(),
         dirItems);
-    
+
     if (res != S_OK)
     {
       if (res != E_ABORT)
@@ -233,7 +233,7 @@ HRESULT HashCalc(
   hb.Init();
 
   hb.NumErrors = dirItems.Stat.NumErrors;
-  
+
   if (options.StdInMode)
   {
     RINOK(callback->SetNumFiles(1));
@@ -318,7 +318,7 @@ static inline char GetHex(unsigned v)
 void AddHashHexToString(char *dest, const Byte *data, UInt32 size)
 {
   dest[size * 2] = 0;
-  
+
   if (!data)
   {
     for (UInt32 i = 0; i < size; i++)
@@ -329,14 +329,14 @@ void AddHashHexToString(char *dest, const Byte *data, UInt32 size)
     }
     return;
   }
-  
+
   int step = 2;
   if (size <= 8)
   {
     step = -2;
     dest += size * 2 - 2;
   }
-  
+
   for (UInt32 i = 0; i < size; i++)
   {
     unsigned b = data[i];

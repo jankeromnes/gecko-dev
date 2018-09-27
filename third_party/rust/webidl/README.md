@@ -84,5 +84,5 @@ assert_eq!(visitor.get_output(),
 The parser is conformant with regards to the [WebIDL grammar](https://heycam.github.io/webidl/#idl-grammar) except for three points:
 
 - Extended attributes, as described by the grammar, are not supported due to their lack of semantic meaning when parsed. Instead, limited forms are supported (as shown in the [table](https://heycam.github.io/webidl/#idl-extended-attributes)). This parser allows a bit more flexibility when parsing extended attributes of the form `A=B`. The specification states that `A` and `B` must be identifiers, but this parser accepts `B` as any token. If you would like for any extended attributes to be parsed (essentially any sequences of tokens), please consider looking at [#8](https://github.com/sgodwincs/webidl-rs/issues/8) to help resolve the problem with doing so.
-- This parser supports the old `implements` keyword that is no longer a part of the official specification. This is for backwards compatibility. 
-- This parser supports the old `legacycaller` keyword that is no longer a part of the official specification. This is for backwards compatibility. 
+- This parser supports the old `implements` keyword that is no longer a part of the official specification. This is for backwards compatibility.
+- This parser supports the old `legacycaller` keyword that is no longer a part of the official specification. This is for backwards compatibility.

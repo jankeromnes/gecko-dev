@@ -35,10 +35,10 @@ extern "C" {
  * but embedded images and components which appear inline in the
  * content of a text object are. The AtkHyperlinkIface interface
  * allows a means of determining which children are hyperlinks in this
- * sense of the word, and for obtaining their corresponding AtkHyperlink 
+ * sense of the word, and for obtaining their corresponding AtkHyperlink
  * object, from which the embedding range, URI, etc. can be obtained.
  *
- * To some extent this interface exists because, for historical 
+ * To some extent this interface exists because, for historical
  * reasons, AtkHyperlink was defined as an object type, not an interface.
  * Thus, in order to interact with AtkObjects via AtkHyperlink semantics,
  * a new interface was required.
@@ -58,7 +58,7 @@ typedef struct _AtkHyperlinkImplIface AtkHyperlinkImplIface;
 struct _AtkHyperlinkImplIface
 {
   GTypeInterface parent;
-    
+
   AtkHyperlink*  (* get_hyperlink) (AtkHyperlinkImpl *impl);
 
   AtkFunction pad1;

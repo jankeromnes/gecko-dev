@@ -11,7 +11,7 @@ var expect = /TypeError: value.parameters (has no properties|is undefined)/;
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 var value = {};
 
 function funccall(a,b)

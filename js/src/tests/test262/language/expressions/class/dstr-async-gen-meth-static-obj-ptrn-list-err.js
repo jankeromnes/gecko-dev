@@ -55,7 +55,7 @@ function thrower() {
 
 var C = class {
   static async *method({ a, b = thrower(), c = ++initCount }) {
-    
+
   }
 };
 

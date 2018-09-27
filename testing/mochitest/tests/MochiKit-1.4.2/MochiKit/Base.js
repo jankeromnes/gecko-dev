@@ -84,7 +84,7 @@ MochiKit.Base.update(MochiKit.Base, {
         if (!(module in MochiKit)) {
             MochiKit[module] = {};
         }
-        
+
         if (typeof(dojo) != 'undefined') {
             dojo.provide('MochiKit.' + module);
         }
@@ -100,7 +100,7 @@ MochiKit.Base.update(MochiKit.Base, {
             }
         }
     },
-    
+
     _flattenArray: function (res, lst) {
         for (var i = 0; i < lst.length; i++) {
             var o = lst[i];

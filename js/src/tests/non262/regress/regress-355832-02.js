@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = actual = 'No Crash';
 
   { let [] = []; print(3) } print(4)

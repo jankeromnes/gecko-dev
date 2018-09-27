@@ -9,12 +9,12 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 @@ -1993,33 +1993,16 @@ _cairo_quartz_surface_acquire_source_ima
      if (status)
  	return _cairo_error (CAIRO_STATUS_NO_MEMORY);
- 
+
      *image_extra = NULL;
- 
+
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 -static cairo_surface_t *
 -_cairo_quartz_surface_snapshot (void *abstract_surface)
 -{
@@ -39,7 +39,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
  {
      cairo_surface_destroy ((cairo_surface_t *) image);
  }
- 
+
 @@ -2916,17 +2899,17 @@ static const struct _cairo_surface_backe
      _cairo_quartz_surface_stroke,
      _cairo_quartz_surface_fill,
@@ -48,13 +48,13 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
  #else
      NULL, /* show_glyphs */
  #endif
- 
+
 -    _cairo_quartz_surface_snapshot,
 +    NULL, /* snapshot */
      NULL, /* is_similar */
      NULL  /* fill_stroke */
  };
- 
+
  cairo_quartz_surface_t *
  _cairo_quartz_surface_create_internal (CGContextRef cgContext,
  					cairo_content_t content,

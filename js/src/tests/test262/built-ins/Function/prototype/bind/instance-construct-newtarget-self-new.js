@@ -9,7 +9,7 @@ description: >
 info: |
   [...]
   5. If SameValue(F, newTarget) is true, let newTarget be target.
-  6. Return ? Construct(target, args, newTarget). 
+  6. Return ? Construct(target, args, newTarget).
 features: [new.target]
 ---*/
 

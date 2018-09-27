@@ -10,18 +10,18 @@
 #include "gfxPoint.h"
 
 struct gfxLineSegment {
-  gfxLineSegment(const gfxPoint &aStart, const gfxPoint &aEnd) 
+  gfxLineSegment(const gfxPoint &aStart, const gfxPoint &aEnd)
     : mStart(aStart)
     , mEnd(aEnd)
   {}
 
   bool PointsOnSameSide(const gfxPoint& aOne, const gfxPoint& aTwo)
   {
-    // Solve the equation y - mStart.y - ((mEnd.y - mStart.y)/(mEnd.x - mStart.x))(x - mStart.x) for both points 
-  
+    // Solve the equation y - mStart.y - ((mEnd.y - mStart.y)/(mEnd.x - mStart.x))(x - mStart.x) for both points
+
     gfxFloat deltaY = (mEnd.y - mStart.y);
     gfxFloat deltaX = (mEnd.x - mStart.x);
-  
+
     gfxFloat one = deltaX * (aOne.y - mStart.y) - deltaY * (aOne.x - mStart.x);
     gfxFloat two = deltaX * (aTwo.y - mStart.y) - deltaY * (aTwo.x - mStart.x);
 
@@ -42,7 +42,7 @@ struct gfxLineSegment {
    */
   bool Intersects(const gfxLineSegment& aOther, gfxPoint& aIntersection)
   {
-    gfxFloat denominator = (aOther.mEnd.y - aOther.mStart.y) * (mEnd.x - mStart.x ) - 
+    gfxFloat denominator = (aOther.mEnd.y - aOther.mStart.y) * (mEnd.x - mStart.x ) -
                            (aOther.mEnd.x - aOther.mStart.x ) * (mEnd.y - mStart.y);
 
     // Parallel or coincident. We treat coincident as not intersecting since
@@ -53,7 +53,7 @@ struct gfxLineSegment {
 
     gfxFloat anumerator = (aOther.mEnd.x - aOther.mStart.x) * (mStart.y - aOther.mStart.y) -
                          (aOther.mEnd.y - aOther.mStart.y) * (mStart.x - aOther.mStart.x);
-  
+
     gfxFloat bnumerator = (mEnd.x - mStart.x) * (mStart.y - aOther.mStart.y) -
                          (mEnd.y - mStart.y) * (mStart.x - aOther.mStart.x);
 
@@ -66,7 +66,7 @@ struct gfxLineSegment {
       return false;
     }
 
-    aIntersection = mStart + (mEnd - mStart) * ua;  
+    aIntersection = mStart + (mEnd - mStart) * ua;
     return true;
   }
 

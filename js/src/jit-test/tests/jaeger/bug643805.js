@@ -1,5 +1,5 @@
 function _tt_face_get_name() {
-    var __label__ = -1; 
+    var __label__ = -1;
     var $rec;
     var $n;
     while(true) {

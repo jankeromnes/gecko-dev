@@ -4,7 +4,7 @@
      onload="setTimeAndSnapshot(2, false)">
   <script xlink:href="smil-util.js" type="text/javascript"/>
   <rect x="15" y="15" width="50" height="200" fill="blue">
-    <animate attributeName="width" 
+    <animate attributeName="width"
              from="50" to="200" begin="0s" dur="2s" fill="freeze"/>
   </rect>
 </svg>

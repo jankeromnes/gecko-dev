@@ -184,10 +184,10 @@ else # !NS_USE_GCC
 	USERNAME   := $(subst -,_,$(USERNAME))
 	DEFINES    += -DDEBUG -UNDEBUG -DDEBUG_$(USERNAME)
 	DLLFLAGS   += -DEBUG -OUT:$@
-	LDFLAGS    += -DEBUG 
+	LDFLAGS    += -DEBUG
 ifeq ($(_MSC_VER),$(_MSC_VER_6))
 ifndef MOZ_DEBUG_SYMBOLS
-	LDFLAGS    += -PDB:NONE 
+	LDFLAGS    += -PDB:NONE
 endif
 endif
 	# Purify requires /FIXED:NO when linking EXEs.

@@ -15,7 +15,7 @@ var requestedDN = "CN=Javi CA Shack ID, O=NSS";
 
 function setTestType() {
   var testType = document.crmfForm.testType;
-  
+
   keyGenType = testType.options[testType.selectedIndex].value;
 }
 
@@ -30,7 +30,7 @@ function generateSignAndEncryptRSARequest() {
     request = crypto.generateCRMFRequest(requestedDN,
                                          null, null, null, "setRequest()",
                                          crypto.algorithms.rsa.keyEx.keySizes[0],
-                                         null, "rsa-dual-use");    
+                                         null, "rsa-dual-use");
 }
 
 function generateSigningOnlyRSARequest() {
@@ -102,9 +102,9 @@ to successfully use this page, modify its action to post to a a server
 where you have installed the crmfcgi executable and you'll be able to
 test the functionality.
 <hr>
-<form name="crmfForm" method=post action="http://www.cgi-site.com/cgi-bin/crmfcgi"> 
+<form name="crmfForm" method=post action="http://www.cgi-site.com/cgi-bin/crmfcgi">
 <h2>Certificate Database information</h2>
-First, enter all the information for the CGI to use for initializing 
+First, enter all the information for the CGI to use for initializing
 NSS.  The CGI will use the directory entered below as the directory
 where to look for the certificate and key databases.
 <pre>
@@ -115,7 +115,7 @@ above.
 <pre>
 Database Password:   <input type="password" name="dbPassword" size=40>
 </pre>
-Now enter the nickname of the certificate to use for signing the 
+Now enter the nickname of the certificate to use for signing the
 certificate issued during this test.
 <pre>
 CA Nickname:         <input size=40 type="text" name="CANickname">

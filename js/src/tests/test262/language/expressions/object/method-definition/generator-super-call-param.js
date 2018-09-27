@@ -4,7 +4,7 @@
 
 /*---
 info: |
- GeneratorMethod early SyntaxError when super is called 
+ GeneratorMethod early SyntaxError when super is called
  directly inside generator args
 features: [generators]
 es6id: 14.4.1

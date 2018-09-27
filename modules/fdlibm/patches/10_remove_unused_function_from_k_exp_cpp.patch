@@ -6,24 +6,24 @@ diff --git a/modules/fdlibm/src/k_exp.cpp b/modules/fdlibm/src/k_exp.cpp
   * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
   * SUCH DAMAGE.
   */
- 
+
  //#include <sys/cdefs.h>
  //__FBSDID("$FreeBSD$");
- 
+
 -#include <complex.h>
 -
   #include "math_private.h"
- 
+
  static const uint32_t k = 1799;		/* constant for reduction */
  static const double kln2 =  1246.97177782734161156;	/* k * ln2 */
- 
+
  /*
   * Compute exp(x), scaled to avoid spurious overflow.  An exponent is
   * returned separately in 'expt'.
 @@ -78,32 +76,8 @@ double
  	double exp_x, scale;
  	int ex_expt;
- 
+
  	exp_x = __frexp_exp(x, &ex_expt);
  	expt += ex_expt;
  	INSERT_WORDS(scale, (0x3ff + expt) << 20, 0);

@@ -13,13 +13,13 @@
 
 <body>
     <p>This test passes if there is a CSP violation saying the plugin was blocked.</p>
-    
+
     <script>
        window.addEventListener('securitypolicyviolation', function(e) {
             log("violated-directive=" + e.violatedDirective);
        });
     </script>
-    
+
     <object data="/plugins/resources/mock-plugin.pl"></object>
     <div id="log"></div>
 </body>

@@ -7,7 +7,7 @@
 
 struct VS_MASKINPUT
 {
-  // Note, the input is 
+  // Note, the input is
   float2 vPos : POSITION;
   float4 vTexCoords : POSITION1;
 };

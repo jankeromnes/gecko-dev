@@ -1,8 +1,8 @@
-// Same thing but nested trees, each reconstructing one or more stack frames 
+// Same thing but nested trees, each reconstructing one or more stack frames
 // (so, several functions with loops, such that the loops end up being
 // nested though they are not lexically nested)
 
-function testSlowArrayPopNestedTrees() {    
+function testSlowArrayPopNestedTrees() {
     var a = [];
     for (var i = 0; i < 9; i++)
         a[i] = [0];
@@ -21,7 +21,7 @@ function testSlowArrayPopNestedTrees() {
             last = child(a, i, j, k);
         return last;
     }
-    function gramps(a, i) { 
+    function gramps(a, i) {
         var last;
         for (var j = 0; j < 9; j++)
             last = parent(a, i, j);

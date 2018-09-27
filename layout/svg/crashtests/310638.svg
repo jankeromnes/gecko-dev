@@ -11,14 +11,14 @@ function init()
   var titleText = document.createTextNode("foo baz");
 
   docElt.appendChild(div2);  div2.appendChild(titleText);
-  
-  function second () 
+
+  function second ()
   {
     div2.appendChild(div1);
     removeNode(titleText);
     removeNode(div2);
   }
-  
+
   setTimeout(second, 0);
 }
 

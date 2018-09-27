@@ -28,9 +28,9 @@ class C {
   #x;
 
   x() {
-    
+
     delete (this.#x);
   }
 
-  
+
 }

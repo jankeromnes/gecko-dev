@@ -185,7 +185,7 @@ Var AppLaunchWaitTickCount
 
 ; Maximum value of the download/install/launch progress bar, and the end values
 ; for each individual stage.
-!define PROGRESS_BAR_TOTAL_STEPS 500 
+!define PROGRESS_BAR_TOTAL_STEPS 500
 !define PROGRESS_BAR_DOWNLOAD_END_STEP 300
 !define PROGRESS_BAR_INSTALL_END_STEP 475
 !define PROGRESS_BAR_APP_LAUNCH_END_STEP 500

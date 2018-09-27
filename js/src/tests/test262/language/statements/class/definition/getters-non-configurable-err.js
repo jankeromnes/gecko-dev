@@ -8,7 +8,7 @@ info: |
   [...]
   9. Let desc be the PropertyDescriptor{[[Get]]: closure, [[Enumerable]]:
      enumerable, [[Configurable]]: true}.
-  10. Return ? DefinePropertyOrThrow(object, propKey, desc). 
+  10. Return ? DefinePropertyOrThrow(object, propKey, desc).
 features: [generators]
 ---*/
 

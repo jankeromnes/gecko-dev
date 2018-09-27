@@ -5,7 +5,7 @@
 ##
 ## Aix-specific setup (for gcc)
 ##
-## Please note: AIX does NOT have library versioning per se (there is no 'SONAME' capability). 
+## Please note: AIX does NOT have library versioning per se (there is no 'SONAME' capability).
 ## So, we are using 'windows' style library names, that is, libicuuc20.1.so instead of libicuuc.so.20.1
 
 # When building stubdata, special considerations need to be made when building on AIX with GCC
@@ -21,8 +21,8 @@ GEN_DEPS.cc=	$(CXX) -E -MM $(DEFS) $(CPPFLAGS)
 ## Commands to link
 ## We need to use the C++ linker, even when linking C programs, since
 ##  our libraries contain C++ code (C++ static init not called)
-LINK.c=		$(AIX_PREDELETE) $(CXX) $(CXXFLAGS) $(LDFLAGS) 
-LINK.cc=	$(AIX_PREDELETE) $(CXX) $(CXXFLAGS) $(LDFLAGS) 
+LINK.c=		$(AIX_PREDELETE) $(CXX) $(CXXFLAGS) $(LDFLAGS)
+LINK.cc=	$(AIX_PREDELETE) $(CXX) $(CXXFLAGS) $(LDFLAGS)
 
 ## Shared library options
 LD_SOOPTIONS= -Wl,-bsymbolic
@@ -33,7 +33,7 @@ SHLIB.cc=   $(AIX_PREDELETE) $(CXX) $(CXXFLAGS) $(LDFLAGS) -shared -Wl,-bexpall 
 
 ## Compiler switch to embed a runtime search path
 LD_RPATH=	-I
-LD_RPATH_PRE=	
+LD_RPATH_PRE=
 
 ## enable the shared lib loader
 LDFLAGS += -Wl,-bbigtoc
@@ -42,10 +42,10 @@ LDFLAGS += -Wl,-bbigtoc
 LDFLAGSICUDT=-nodefaultlibs -nostdlib
 
 ## We need to delete things prior to linking, or else we'll get
-## SEVERE ERROR: output file in use ..  on AIX. 
+## SEVERE ERROR: output file in use ..  on AIX.
 ## But, shell script version should NOT delete target as we don't
 ## have $@ in that context.  (SH = only shell script, icu-config)
-AIX_PREDELETE=rm -f $@ ; 
+AIX_PREDELETE=rm -f $@ ;
 #SH# AIX_PREDELETE=
 
 ## Environment variable to set a runtime search path
@@ -66,7 +66,7 @@ SO_TARGET_VERSION_SUFFIX = $(SO_TARGET_VERSION_MAJOR)
 endif
 
 ## Compiler switch to embed a library name. Not present on AIX.
-LD_SONAME = 
+LD_SONAME =
 
 ## The type of assembly needed when pkgdata is used for generating shared libraries.
 GENCCODE_ASSEMBLY=-a xlc

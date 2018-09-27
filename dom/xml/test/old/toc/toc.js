@@ -8,7 +8,7 @@ function toggleDisplay(event)
   if (event.target.localName != "img")
     return;
   var img = event.target;
-  var div = img.nextSibling.nextSibling; 
+  var div = img.nextSibling.nextSibling;
 
   // Change the display: property of the container to
   // hide and show the container.
@@ -22,7 +22,7 @@ function toggleDisplay(event)
   }
 }
 
-// Function that recurses down the tree, looking for 
+// Function that recurses down the tree, looking for
 // structural elements. For each structural element,
 // a corresponding element is created in the table of
 // contents.
@@ -53,7 +53,7 @@ function addToToc(root, tocFrame)
         var img = document.createElementNS("http://www.w3.org/1999/xhtml","img");
         img.src = "minus.gif";
         newTocElement.insertBefore(img,newTocLink);
- 
+
         newTocFrame = document.createElementNS("http://www.w3.org/1999/xhtml","div");
         newTocElement.appendChild(newTocFrame);
       }
@@ -91,16 +91,16 @@ function createToc()
     var title = document.createElement("title");
     title.appendChild(document.createTextNode("Table of Contents"));
     toc.appendChild(title);
-  
+
     // Recurse down and build up the document element
     addToToc(document.documentElement, toc);
-    
+
     // Since we've created the toc element as a fixed element,
     // insert a rule that shifts over the document element by
     // the width of the toc element.
     document.styleSheets[0].cssRules[0].style.marginLeft = "12em";
     document.documentElement.appendChild(toc);
-    
+
     // Attach the event handler for table of contents buttons.
     // This will only work for content that is already a part
     // of a document, which is why we had to wait until here

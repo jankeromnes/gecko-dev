@@ -12,14 +12,14 @@
 //    as you add translations. That way, you don't inadvertently mark
 //    an untranslated English (or whatever) string as already
 //    translated. The base translation might change!
-// 
+//
 // 3. These files are in UTF-8 format (even though root uses only
 //    ASCII)
 //
 // 4. Make note of the location of {0}, {1}, etc.. they are taken from
 //    arguments to u_wmsg() in order..
 //
-// 5. Add se.txt to RESSRC= in resfiles.mk and to the project file on 
+// 5. Add se.txt to RESSRC= in resfiles.mk and to the project file on
 //    the Windows side.
 //
 // 6. Send it in to srl@jtcsv.com or ask on the ICU mailing list! thanks!
@@ -52,7 +52,7 @@ root
           "          --default-code                list only the default encoding\n"
           "          -L, --list-transliterators    list all available transliterators\n"
           "          --canon                       print list in cnvrtrs.txt(5) format\n"
-          "          -x transliteration            run everything through transliteration\n" 
+          "          -x transliteration            run everything through transliteration\n"
           "          --to-callback callback        use callback on destination encoding\n"
           "          -c                            omit invalid characters from the output\n"
           "          --from-callback callback      use callback on original encoding\n"
@@ -62,7 +62,7 @@ root
           "          --fallback                    use fallback mapping\n"
           "          --no-fallback                 do not use fallback mapping\n"
           "          -f, --from-code code          set the original encoding\n"
-          "          -t, --to-code code            set the destination encoding\n" 
+          "          -t, --to-code code            set the destination encoding\n"
           "          --add-signature               add a U+FEFF Unicode signature character (BOM)\n"
           "          --remove-signature            remove a U+FEFF Unicode signature character (BOM)\n"
           "          -o, --output file             write output to file\n"
@@ -72,7 +72,7 @@ root
 
   cantGetNames   { "Couldn''t get available converter names.\n" } // 0: err
   cantGetTag   { "Couldn''t get standard tag name: {0}.\n" } // 0: err
-  
+
   noSuchCodeset  { "Couldn''t find encoding: {0}.\n" } // 0: name of the encoding
   noFromCodeset  { "No original encoding set (use -f).\n" }
   noToCodeset    {  "No destination encoding set (use -t).\n" }

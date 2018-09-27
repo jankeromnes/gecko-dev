@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -30,10 +30,10 @@ class Insertion {
         this._index = index;
         this._element = element;
     }
-    
+
     get index() { return this._index; }
     get element() { return this._element; }
-    
+
     lessThan(other)
     {
         return this._index < other._index;
@@ -45,24 +45,24 @@ class InsertionSet {
     {
         this._insertions = []
     }
-    
+
     appendInsertion(insertion)
     {
         this._insertions.push(insertion);
     }
-    
+
     append(index, element)
     {
         this.appendInsertion(new Insertion(index, element));
     }
-    
+
     execute(target)
     {
         // We bubble-sort because that's what the C++ code, and for the same reason as we do it:
         // the stdlib doesn't have a stable sort and mergesort is slower in the common case of the
         // array usually being sorted. This array is usually sorted.
         bubbleSort(this._insertions, (a, b) => (a.lessThan(b)));
-        
+
         let numInsertions = this._insertions.length;
         if (!numInsertions)
             return 0;

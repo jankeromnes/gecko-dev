@@ -20,7 +20,7 @@
 #include <malloc.h>
 #include <wchar.h>
 #define alloca _alloca
-#endif  // WEBRTC_WIN 
+#endif  // WEBRTC_WIN
 
 #if defined(WEBRTC_POSIX)
 #ifdef WEBRTC_BSD
@@ -103,7 +103,7 @@ inline wchar_t tolowercase(wchar_t c) {
   return static_cast<wchar_t>(towlower(c));
 }
 
-#endif  // WEBRTC_WIN 
+#endif  // WEBRTC_WIN
 
 #if defined(WEBRTC_POSIX)
 
@@ -269,7 +269,7 @@ inline int ascnicmp(const wchar_t* s1, const char* s2, size_t n) {
 size_t asccpyn(wchar_t* buffer, size_t buflen,
                const char* source, size_t srclen = SIZE_UNKNOWN);
 
-#endif  // WEBRTC_WIN 
+#endif  // WEBRTC_WIN
 
 ///////////////////////////////////////////////////////////////////////////////
 // Traits<char> specializations
@@ -293,7 +293,7 @@ struct Traits<wchar_t> {
   inline static const wchar_t* empty_str() { return L""; }
 };
 
-#endif  // WEBRTC_WIN 
+#endif  // WEBRTC_WIN
 
 // Replaces all occurrences of "search" with "replace".
 void replace_substrs(const char *search,

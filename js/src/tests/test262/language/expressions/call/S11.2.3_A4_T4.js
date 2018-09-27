@@ -12,11 +12,11 @@ description: Checking Global object case
 //CHECK#1
 try {
   this();
-  $ERROR('#1.1: this() throw TypeError. Actual: ' + (this()));	
+  $ERROR('#1.1: this() throw TypeError. Actual: ' + (this()));
 }
 catch (e) {
   if ((e instanceof TypeError) !== true) {
-    $ERROR('#1.2: this() throw TypeError. Actual: ' + (e));	
+    $ERROR('#1.2: this() throw TypeError. Actual: ' + (e));
   }
 }
 

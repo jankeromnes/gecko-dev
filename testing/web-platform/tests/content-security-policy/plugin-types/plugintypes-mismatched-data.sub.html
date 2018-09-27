@@ -16,7 +16,7 @@
         window.addEventListener('securitypolicyviolation', function(e) {
             log("Fail");
         });
-    </script>    
+    </script>
 
     This tests that plugin content that doesn&apos;t match the declared type doesn&apos;t load, even if the document&apos;s CSP would allow it. This test passes if &quot;FAIL!&quot; isn&apos;t logged.
     <object type="application/x-invalid-type" data="data:application/x-webkit-test-netscape,logifloaded" log="FAIL!"></object>

@@ -137,7 +137,7 @@ void
 OfflineCacheUpdateGlue::SetDocument(nsIDocument *aDocument)
 {
     // The design is one document for one cache update on the content process.
-    NS_ASSERTION(!mDocument, 
+    NS_ASSERTION(!mDocument,
                  "Setting more then a single document on an instance of OfflineCacheUpdateGlue");
 
     LOG(("Document %p added to update glue %p", aDocument, this));

@@ -654,7 +654,7 @@ icu4j-data-install : GODATA $(ICU4J_DATA) $(ICU4J_TZDATA) $(ICU4J_DATA_INSTALLED
 
 !ELSE
 
-icu4j-data-install : 
+icu4j-data-install :
 	@echo ERROR ICU4J_ROOT not set
 	@exit 1
 
@@ -887,7 +887,7 @@ res_index:table(nofallback) {
 }
 <<KEEP
 	@"$(ICUTOOLS)\genrb\$(CFGTOOLS)\genrb" -k -d"$(ICUBLD_PKG)" .\res_index.txt
-	
+
 
 {$(ICUSRCDATA_RELATIVE_PATH)\curr}.txt{curr}.res::
 	@echo Making currency display name files

@@ -30,8 +30,8 @@ fn fuse_is_done() {
             assert!(self.0.is_done());
             assert_eq!(self.0.poll().unwrap(), Async::NotReady);
             assert!(self.0.is_done());
-            
-            Ok(Async::Ready(()))            
+
+            Ok(Async::Ready(()))
         }
     }
 

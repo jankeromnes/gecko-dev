@@ -50,7 +50,7 @@ Air.js relies on three major ES6 features more so than most of the others:
   iterating most non-trivial data-structures:
 
         inst.forEachArg((arg, role, type, width) => ...)
-  
+
   This is because the functional style allows the callbacks to mutate the data
   being iterated: if the callback returns a non-null value, forEachArg() will
   replace the argument with that value. This would not have been possible with
@@ -142,7 +142,7 @@ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
 OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Summary
 

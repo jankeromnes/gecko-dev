@@ -11,7 +11,7 @@ function inline() {
 function f() {
   do {
     ({ b: 1 })
-  } while (cond())  
+  } while (cond())
 }
 
 i = 0;
@@ -21,7 +21,7 @@ function g() {
   do {
     if (cond()) { }
     ({ b: 1 })
-  } while (cond())  
+  } while (cond())
 }
 
 i = 0;
@@ -31,7 +31,7 @@ g();
 function h() {
   do {
     inline();
-  } while (cond())  
+  } while (cond())
 }
 
 i = 0;

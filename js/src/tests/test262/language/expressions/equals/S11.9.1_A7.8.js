@@ -22,8 +22,8 @@ if (({valueOf: function() {return 1}, toString: function() {return 0}} == 1) !==
 //CHECK#3
 if (({valueOf: function() {return 1}, toString: function() {return {}}} == "+1") !== true) {
   $ERROR('#3: ({valueOf: function() {return 1}, toString: function() {return {}}} == "+1") === true');
-} 
-  
+}
+
 //CHECK#4
 try {
   if (({valueOf: function() {return "+1"}, toString: function() {throw "error"}} == true) !== true) {
@@ -56,22 +56,22 @@ if (({valueOf: function() {return {}}, toString: function() {return "+1"}} == "1
 try {
   ({valueOf: function() {throw "error"}, toString: function() {return 1}} == 1);
   $ERROR('#7.1: ({valueOf: function() {throw "error"}, toString: function() {return 1}} == 1) throw "error". Actual: ' + (({valueOf: function() {throw "error"}, toString: function() {return 1}} == 1)));
-}  
+}
 catch (e) {
   if (e !== "error") {
     $ERROR('#7.2: ({valueOf: function() {throw "error"}, toString: function() {return 1}} == 1) throw "error". Actual: ' + (e));
-  } 
+  }
 }
 
 //CHECK#8
 try {
   ({valueOf: function() {return {}}, toString: function() {return {}}} == 1);
   $ERROR('#8.1: ({valueOf: function() {return {}}, toString: function() {return {}}} == 1) throw TypeError. Actual: ' + (({valueOf: function() {return {}}, toString: function() {return {}}} == 1)));
-}  
+}
 catch (e) {
   if ((e instanceof TypeError) !== true) {
     $ERROR('#8.2: ({valueOf: function() {return {}}, toString: function() {return {}}} == 1) throw TypeError. Actual: ' + (e));
-  } 
+  }
 }
 
 reportCompare(0, 0);

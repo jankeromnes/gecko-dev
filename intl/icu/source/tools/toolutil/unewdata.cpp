@@ -56,13 +56,13 @@ udata_create(const char *dir, const char *type, const char *name,
         *pErrorCode=U_MEMORY_ALLOCATION_ERROR;
         return NULL;
     }
-    
+
     /* Check that the full path won't be too long */
     length = 0;					/* Start with nothing */
     if(dir != NULL  && *dir !=0)	/* Add directory length if one was given */
     {
     	length += strlen(dir);
-	
+
     	/* Add 1 if dir doesn't end with path sep */
         if (dir[strlen(dir) - 1]!= U_FILE_SEP_CHAR) {
             length++;
@@ -74,7 +74,7 @@ udata_create(const char *dir, const char *type, const char *name,
         length += strlen(type);
     }
 
-        
+
      /* LDH buffer Length error check */
     if(length  > ((int32_t)sizeof(filename) - 1))
     {
@@ -82,7 +82,7 @@ udata_create(const char *dir, const char *type, const char *name,
    	    uprv_free(pData);
 	    return NULL;
     }
-   
+
     /* open the output file */
     if(dir!=NULL && *dir!=0) { /* if dir has a value, we prepend it to the filename */
         char *p=filename+strlen(dir);

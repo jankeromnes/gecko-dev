@@ -575,7 +575,7 @@ _addExtensionToList(ExtensionListEntry **first, ExtensionListEntry *ext, UBool l
                         cmp = *(ext->key) - *(cur->key);
                     }
                 } else if (len == 1) {
-                    cmp = *(ext->key) - LDMLEXT; 
+                    cmp = *(ext->key) - LDMLEXT;
                 } else if (curlen == 1) {
                     cmp = LDMLEXT - *(cur->key);
                 } else {
@@ -1016,7 +1016,7 @@ _appendKeywordsToLanguageTag(const char* localeID, char* appendAt, int32_t capac
                     continue;
                 }
                 if (bcpValue == buf) {
-                    /* 
+                    /*
                     When uloc_toUnicodeLocaleType(key, buf) returns the
                     input value as is, the value is well-formed, but has
                     no known mapping. This implementation normalizes the
@@ -1444,7 +1444,7 @@ _appendLDMLExtensionAsKeywords(const char* ldmlext, ExtensionListEntry** appendT
                     pType = LOCALE_TYPE_YES;
                 }
 
-                /* Special handling for u-va-posix, since we want to treat this as a variant, 
+                /* Special handling for u-va-posix, since we want to treat this as a variant,
                    not as a keyword */
                 if (!variantExists && !uprv_strcmp(pKey, POSIX_KEY) && !uprv_strcmp(pType, POSIX_VALUE) ) {
                     *posixVariant = TRUE;

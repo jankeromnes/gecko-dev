@@ -60,58 +60,58 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var util = __webpack_require__(1);
 	var SourceMapConsumer = __webpack_require__(3).SourceMapConsumer;
 	var SourceMapGenerator = __webpack_require__(9).SourceMapGenerator;
-	
+
 	exports['test eating our own dog food'] = function (assert) {
 	  var smg = new SourceMapGenerator({
 	    file: 'testing.js',
 	    sourceRoot: '/wu/tang'
 	  });
-	
+
 	  smg.addMapping({
 	    source: 'gza.coffee',
 	    original: { line: 1, column: 0 },
 	    generated: { line: 2, column: 2 }
 	  });
-	
+
 	  smg.addMapping({
 	    source: 'gza.coffee',
 	    original: { line: 2, column: 0 },
 	    generated: { line: 3, column: 2 }
 	  });
-	
+
 	  smg.addMapping({
 	    source: 'gza.coffee',
 	    original: { line: 3, column: 0 },
 	    generated: { line: 4, column: 2 }
 	  });
-	
+
 	  smg.addMapping({
 	    source: 'gza.coffee',
 	    original: { line: 4, column: 0 },
 	    generated: { line: 5, column: 2 }
 	  });
-	
+
 	  smg.addMapping({
 	    source: 'gza.coffee',
 	    original: { line: 5, column: 10 },
 	    generated: { line: 6, column: 12 }
 	  });
-	
+
 	  var smc = new SourceMapConsumer(smg.toString());
-	
+
 	  // Exact
 	  util.assertMapping(2, 2, '/wu/tang/gza.coffee', 1, 0, null, null, smc, assert);
 	  util.assertMapping(3, 2, '/wu/tang/gza.coffee', 2, 0, null, null, smc, assert);
 	  util.assertMapping(4, 2, '/wu/tang/gza.coffee', 3, 0, null, null, smc, assert);
 	  util.assertMapping(5, 2, '/wu/tang/gza.coffee', 4, 0, null, null, smc, assert);
 	  util.assertMapping(6, 12, '/wu/tang/gza.coffee', 5, 10, null, null, smc, assert);
-	
+
 	  // Fuzzy
-	
+
 	  // Generated to original with default (glb) bias.
 	  util.assertMapping(2, 0, null, null, null, null, null, smc, assert, true);
 	  util.assertMapping(2, 9, '/wu/tang/gza.coffee', 1, 0, null, null, smc, assert, true);
@@ -124,7 +124,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  util.assertMapping(6, 0, null, null, null, null, null, smc, assert, true);
 	  util.assertMapping(6, 9, null, null, null, null, null, smc, assert, true);
 	  util.assertMapping(6, 13, '/wu/tang/gza.coffee', 5, 10, null, null, smc, assert, true);
-	
+
 	  // Generated to original with lub bias.
 	  util.assertMapping(2, 0, '/wu/tang/gza.coffee', 1, 0, null, SourceMapConsumer.LEAST_UPPER_BOUND, smc, assert, true);
 	  util.assertMapping(2, 9, null, null, null, null, SourceMapConsumer.LEAST_UPPER_BOUND, smc, assert, true);
@@ -137,7 +137,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  util.assertMapping(6, 0, '/wu/tang/gza.coffee', 5, 10, null, SourceMapConsumer.LEAST_UPPER_BOUND, smc, assert, true);
 	  util.assertMapping(6, 9, '/wu/tang/gza.coffee', 5, 10, null, SourceMapConsumer.LEAST_UPPER_BOUND, smc, assert, true);
 	  util.assertMapping(6, 13, null, null, null, null, SourceMapConsumer.LEAST_UPPER_BOUND, smc, assert, true);
-	
+
 	  // Original to generated with default (glb) bias
 	  util.assertMapping(2, 2, '/wu/tang/gza.coffee', 1, 1, null, null, smc, assert, null, true);
 	  util.assertMapping(3, 2, '/wu/tang/gza.coffee', 2, 3, null, null, smc, assert, null, true);
@@ -145,7 +145,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  util.assertMapping(5, 2, '/wu/tang/gza.coffee', 4, 9, null, null, smc, assert, null, true);
 	  util.assertMapping(5, 2, '/wu/tang/gza.coffee', 5, 9, null, null, smc, assert, null, true);
 	  util.assertMapping(6, 12, '/wu/tang/gza.coffee', 6, 19, null, null, smc, assert, null, true);
-	
+
 	  // Original to generated with lub bias.
 	  util.assertMapping(3, 2, '/wu/tang/gza.coffee', 1, 1, null, SourceMapConsumer.LEAST_UPPER_BOUND, smc, assert, null, true);
 	  util.assertMapping(4, 2, '/wu/tang/gza.coffee', 2, 3, null, SourceMapConsumer.LEAST_UPPER_BOUND, smc, assert, null, true);
@@ -166,9 +166,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var util = __webpack_require__(2);
-	
+
 	// This is a test mapping which maps functions from two different files
 	// (one.js and two.js) to a minified generated source.
 	//
@@ -411,8 +411,8 @@ var SOURCE_MAP_TEST_MODULE =
 	  sources: [],
 	  mappings: ''
 	};
-	
-	
+
+
 	function assertMapping(generatedLine, generatedColumn, originalSource,
 	                       originalLine, originalColumn, name, bias, map, assert,
 	                       dontTestGenerated, dontTestOriginal) {
@@ -431,9 +431,9 @@ var SOURCE_MAP_TEST_MODULE =
 	    assert.equal(origMapping.column, originalColumn,
 	                 'Incorrect column, expected ' + JSON.stringify(originalColumn)
 	                 + ', got ' + JSON.stringify(origMapping.column));
-	
+
 	    var expectedSource;
-	
+
 	    if (originalSource && map.sourceRoot && originalSource.indexOf(map.sourceRoot) === 0) {
 	      expectedSource = originalSource;
 	    } else if (originalSource) {
@@ -443,12 +443,12 @@ var SOURCE_MAP_TEST_MODULE =
 	    } else {
 	      expectedSource = null;
 	    }
-	
+
 	    assert.equal(origMapping.source, expectedSource,
 	                 'Incorrect source, expected ' + JSON.stringify(expectedSource)
 	                 + ', got ' + JSON.stringify(origMapping.source));
 	  }
-	
+
 	  if (!dontTestGenerated) {
 	    var genMapping = map.generatedPositionFor({
 	      source: originalSource,
@@ -465,7 +465,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	}
 	exports.assertMapping = assertMapping;
-	
+
 	function assertEqualMaps(assert, actualMap, expectedMap) {
 	  assert.equal(actualMap.version, expectedMap.version, "version mismatch");
 	  assert.equal(actualMap.file, expectedMap.file, "file mismatch");
@@ -519,7 +519,7 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	/**
 	 * This is a helper function for getting values from parameter/options
 	 * objects.
@@ -540,10 +540,10 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	}
 	exports.getArg = getArg;
-	
+
 	var urlRegexp = /^(?:([\w+\-.]+):)?\/\/(?:(\w+:\w+)@)?([\w.-]*)(?::(\d+))?(.*)$/;
 	var dataUrlRegexp = /^data:.+\,.+$/;
-	
+
 	function urlParse(aUrl) {
 	  var match = aUrl.match(urlRegexp);
 	  if (!match) {
@@ -558,7 +558,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  };
 	}
 	exports.urlParse = urlParse;
-	
+
 	function urlGenerate(aParsedUrl) {
 	  var url = '';
 	  if (aParsedUrl.scheme) {
@@ -580,7 +580,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  return url;
 	}
 	exports.urlGenerate = urlGenerate;
-	
+
 	/**
 	 * Normalizes a path, or the path portion of a URL:
 	 *
@@ -602,7 +602,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    path = url.path;
 	  }
 	  var isAbsolute = exports.isAbsolute(path);
-	
+
 	  var parts = path.split(/\/+/);
 	  for (var part, up = 0, i = parts.length - 1; i >= 0; i--) {
 	    part = parts[i];
@@ -624,11 +624,11 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	  }
 	  path = parts.join('/');
-	
+
 	  if (path === '') {
 	    path = isAbsolute ? '/' : '.';
 	  }
-	
+
 	  if (url) {
 	    url.path = path;
 	    return urlGenerate(url);
@@ -636,7 +636,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  return path;
 	}
 	exports.normalize = normalize;
-	
+
 	/**
 	 * Joins two paths/URLs.
 	 *
@@ -665,7 +665,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (aRootUrl) {
 	    aRoot = aRootUrl.path || '/';
 	  }
-	
+
 	  // `join(foo, '//www.example.org')`
 	  if (aPathUrl && !aPathUrl.scheme) {
 	    if (aRootUrl) {
@@ -673,21 +673,21 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	    return urlGenerate(aPathUrl);
 	  }
-	
+
 	  if (aPathUrl || aPath.match(dataUrlRegexp)) {
 	    return aPath;
 	  }
-	
+
 	  // `join('http://', 'www.example.com')`
 	  if (aRootUrl && !aRootUrl.host && !aRootUrl.path) {
 	    aRootUrl.host = aPath;
 	    return urlGenerate(aRootUrl);
 	  }
-	
+
 	  var joined = aPath.charAt(0) === '/'
 	    ? aPath
 	    : normalize(aRoot.replace(/\/+$/, '') + '/' + aPath);
-	
+
 	  if (aRootUrl) {
 	    aRootUrl.path = joined;
 	    return urlGenerate(aRootUrl);
@@ -695,11 +695,11 @@ var SOURCE_MAP_TEST_MODULE =
 	  return joined;
 	}
 	exports.join = join;
-	
+
 	exports.isAbsolute = function (aPath) {
 	  return aPath.charAt(0) === '/' || urlRegexp.test(aPath);
 	};
-	
+
 	/**
 	 * Make a path relative to a URL or another path.
 	 *
@@ -710,9 +710,9 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (aRoot === "") {
 	    aRoot = ".";
 	  }
-	
+
 	  aRoot = aRoot.replace(/\/$/, '');
-	
+
 	  // It is possible for the path to be above the root. In this case, simply
 	  // checking whether the root is a prefix of the path won't work. Instead, we
 	  // need to remove components from the root one by one, until either we find
@@ -723,7 +723,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (index < 0) {
 	      return aPath;
 	    }
-	
+
 	    // If the only part of the root that is left is the scheme (i.e. http://,
 	    // file:///, etc.), one or more slashes (/), or simply nothing at all, we
 	    // have exhausted all components, so the path is not relative to the root.
@@ -731,24 +731,24 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (aRoot.match(/^([^\/]+:\/)?\/*$/)) {
 	      return aPath;
 	    }
-	
+
 	    ++level;
 	  }
-	
+
 	  // Make sure we add a "../" for each component we removed from the root.
 	  return Array(level + 1).join("../") + aPath.substr(aRoot.length + 1);
 	}
 	exports.relative = relative;
-	
+
 	var supportsNullProto = (function () {
 	  var obj = Object.create(null);
 	  return !('__proto__' in obj);
 	}());
-	
+
 	function identity (s) {
 	  return s;
 	}
-	
+
 	/**
 	 * Because behavior goes wacky when you set `__proto__` on objects, we
 	 * have to prefix all the strings in our set with an arbitrary character.
@@ -762,31 +762,31 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (isProtoString(aStr)) {
 	    return '$' + aStr;
 	  }
-	
+
 	  return aStr;
 	}
 	exports.toSetString = supportsNullProto ? identity : toSetString;
-	
+
 	function fromSetString(aStr) {
 	  if (isProtoString(aStr)) {
 	    return aStr.slice(1);
 	  }
-	
+
 	  return aStr;
 	}
 	exports.fromSetString = supportsNullProto ? identity : fromSetString;
-	
+
 	function isProtoString(s) {
 	  if (!s) {
 	    return false;
 	  }
-	
+
 	  var length = s.length;
-	
+
 	  if (length < 9 /* "__proto__".length */) {
 	    return false;
 	  }
-	
+
 	  if (s.charCodeAt(length - 1) !== 95  /* '_' */ ||
 	      s.charCodeAt(length - 2) !== 95  /* '_' */ ||
 	      s.charCodeAt(length - 3) !== 111 /* 'o' */ ||
@@ -798,16 +798,16 @@ var SOURCE_MAP_TEST_MODULE =
 	      s.charCodeAt(length - 9) !== 95  /* '_' */) {
 	    return false;
 	  }
-	
+
 	  for (var i = length - 10; i >= 0; i--) {
 	    if (s.charCodeAt(i) !== 36 /* '$' */) {
 	      return false;
 	    }
 	  }
-	
+
 	  return true;
 	}
-	
+
 	/**
 	 * Comparator between two mappings where the original positions are compared.
 	 *
@@ -821,31 +821,31 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalLine - mappingB.originalLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalColumn - mappingB.originalColumn;
 	  if (cmp !== 0 || onlyCompareOriginal) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedColumn - mappingB.generatedColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedLine - mappingB.generatedLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  return strcmp(mappingA.name, mappingB.name);
 	}
 	exports.compareByOriginalPositions = compareByOriginalPositions;
-	
+
 	/**
 	 * Comparator between two mappings with deflated source and name indices where
 	 * the generated positions are compared.
@@ -860,51 +860,51 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedColumn - mappingB.generatedColumn;
 	  if (cmp !== 0 || onlyCompareGenerated) {
 	    return cmp;
 	  }
-	
+
 	  cmp = strcmp(mappingA.source, mappingB.source);
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalLine - mappingB.originalLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalColumn - mappingB.originalColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  return strcmp(mappingA.name, mappingB.name);
 	}
 	exports.compareByGeneratedPositionsDeflated = compareByGeneratedPositionsDeflated;
-	
+
 	function strcmp(aStr1, aStr2) {
 	  if (aStr1 === aStr2) {
 	    return 0;
 	  }
-	
+
 	  if (aStr1 === null) {
 	    return 1; // aStr2 !== null
 	  }
-	
+
 	  if (aStr2 === null) {
 	    return -1; // aStr1 !== null
 	  }
-	
+
 	  if (aStr1 > aStr2) {
 	    return 1;
 	  }
-	
+
 	  return -1;
 	}
-	
+
 	/**
 	 * Comparator between two mappings with inflated source and name strings where
 	 * the generated positions are compared.
@@ -914,31 +914,31 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedColumn - mappingB.generatedColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = strcmp(mappingA.source, mappingB.source);
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalLine - mappingB.originalLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalColumn - mappingB.originalColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  return strcmp(mappingA.name, mappingB.name);
 	}
 	exports.compareByGeneratedPositionsInflated = compareByGeneratedPositionsInflated;
-	
+
 	/**
 	 * Strip any JSON XSSI avoidance prefix from the string (as documented
 	 * in the source maps specification), and then parse the string as
@@ -948,14 +948,14 @@ var SOURCE_MAP_TEST_MODULE =
 	  return JSON.parse(str.replace(/^\)]}'[^\n]*\n/, ''));
 	}
 	exports.parseSourceMapInput = parseSourceMapInput;
-	
+
 	/**
 	 * Compute the URL of a source given the the source root, the source's
 	 * URL, and the source map's URL.
 	 */
 	function computeSourceURL(sourceRoot, sourceURL, sourceMapURL) {
 	  sourceURL = sourceURL || '';
-	
+
 	  if (sourceRoot) {
 	    // This follows what Chrome does.
 	    if (sourceRoot[sourceRoot.length - 1] !== '/' && sourceURL[0] !== '/') {
@@ -968,7 +968,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    //   entries in the “source” field.
 	    sourceURL = sourceRoot + sourceURL;
 	  }
-	
+
 	  // Historically, SourceMapConsumer did not take the sourceMapURL as
 	  // a parameter.  This mode is still somewhat supported, which is why
 	  // this code block is conditional.  However, it's preferable to pass
@@ -997,7 +997,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	    sourceURL = join(urlGenerate(parsed), sourceURL);
 	  }
-	
+
 	  return normalize(sourceURL);
 	}
 	exports.computeSourceURL = computeSourceURL;
@@ -1013,33 +1013,33 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var util = __webpack_require__(2);
 	var binarySearch = __webpack_require__(4);
 	var ArraySet = __webpack_require__(5).ArraySet;
 	var base64VLQ = __webpack_require__(6);
 	var quickSort = __webpack_require__(8).quickSort;
-	
+
 	function SourceMapConsumer(aSourceMap, aSourceMapURL) {
 	  var sourceMap = aSourceMap;
 	  if (typeof aSourceMap === 'string') {
 	    sourceMap = util.parseSourceMapInput(aSourceMap);
 	  }
-	
+
 	  return sourceMap.sections != null
 	    ? new IndexedSourceMapConsumer(sourceMap, aSourceMapURL)
 	    : new BasicSourceMapConsumer(sourceMap, aSourceMapURL);
 	}
-	
+
 	SourceMapConsumer.fromSourceMap = function(aSourceMap, aSourceMapURL) {
 	  return BasicSourceMapConsumer.fromSourceMap(aSourceMap, aSourceMapURL);
 	}
-	
+
 	/**
 	 * The version of the source mapping spec that we are consuming.
 	 */
 	SourceMapConsumer.prototype._version = 3;
-	
+
 	// `__generatedMappings` and `__originalMappings` are arrays that hold the
 	// parsed mapping coordinates from the source map's "mappings" attribute. They
 	// are lazily instantiated, accessed via the `_generatedMappings` and
@@ -1069,7 +1069,7 @@ var SOURCE_MAP_TEST_MODULE =
 	// `_generatedMappings` is ordered by the generated positions.
 	//
 	// `_originalMappings` is ordered by the original positions.
-	
+
 	SourceMapConsumer.prototype.__generatedMappings = null;
 	Object.defineProperty(SourceMapConsumer.prototype, '_generatedMappings', {
 	  configurable: true,
@@ -1078,11 +1078,11 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (!this.__generatedMappings) {
 	      this._parseMappings(this._mappings, this.sourceRoot);
 	    }
-	
+
 	    return this.__generatedMappings;
 	  }
 	});
-	
+
 	SourceMapConsumer.prototype.__originalMappings = null;
 	Object.defineProperty(SourceMapConsumer.prototype, '_originalMappings', {
 	  configurable: true,
@@ -1091,17 +1091,17 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (!this.__originalMappings) {
 	      this._parseMappings(this._mappings, this.sourceRoot);
 	    }
-	
+
 	    return this.__originalMappings;
 	  }
 	});
-	
+
 	SourceMapConsumer.prototype._charIsMappingSeparator =
 	  function SourceMapConsumer_charIsMappingSeparator(aStr, index) {
 	    var c = aStr.charAt(index);
 	    return c === ";" || c === ",";
 	  };
-	
+
 	/**
 	 * Parse the mappings in a string in to a data structure which we can easily
 	 * query (the ordered arrays in the `this.__generatedMappings` and
@@ -1111,13 +1111,13 @@ var SOURCE_MAP_TEST_MODULE =
 	  function SourceMapConsumer_parseMappings(aStr, aSourceRoot) {
 	    throw new Error("Subclasses must implement _parseMappings");
 	  };
-	
+
 	SourceMapConsumer.GENERATED_ORDER = 1;
 	SourceMapConsumer.ORIGINAL_ORDER = 2;
-	
+
 	SourceMapConsumer.GREATEST_LOWER_BOUND = 1;
 	SourceMapConsumer.LEAST_UPPER_BOUND = 2;
-	
+
 	/**
 	 * Iterate over each mapping between an original source/line/column and a
 	 * generated line/column in this source map.
@@ -1138,7 +1138,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  function SourceMapConsumer_eachMapping(aCallback, aContext, aOrder) {
 	    var context = aContext || null;
 	    var order = aOrder || SourceMapConsumer.GENERATED_ORDER;
-	
+
 	    var mappings;
 	    switch (order) {
 	    case SourceMapConsumer.GENERATED_ORDER:
@@ -1150,7 +1150,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    default:
 	      throw new Error("Unknown order of iteration.");
 	    }
-	
+
 	    var sourceRoot = this.sourceRoot;
 	    mappings.map(function (mapping) {
 	      var source = mapping.source === null ? null : this._sources.at(mapping.source);
@@ -1165,7 +1165,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      };
 	    }, this).forEach(aCallback, context);
 	  };
-	
+
 	/**
 	 * Returns all generated line and column information for the original source,
 	 * line, and column provided. If no column is provided, returns all mappings
@@ -1191,7 +1191,7 @@ var SOURCE_MAP_TEST_MODULE =
 	SourceMapConsumer.prototype.allGeneratedPositionsFor =
 	  function SourceMapConsumer_allGeneratedPositionsFor(aArgs) {
 	    var line = util.getArg(aArgs, 'line');
-	
+
 	    // When there is no exact match, BasicSourceMapConsumer.prototype._findMapping
 	    // returns the index of the closest mapping less than the needle. By
 	    // setting needle.originalColumn to 0, we thus find the last mapping for
@@ -1201,14 +1201,14 @@ var SOURCE_MAP_TEST_MODULE =
 	      originalLine: line,
 	      originalColumn: util.getArg(aArgs, 'column', 0)
 	    };
-	
+
 	    needle.source = this._findSourceIndex(needle.source);
 	    if (needle.source < 0) {
 	      return [];
 	    }
-	
+
 	    var mappings = [];
-	
+
 	    var index = this._findMapping(needle,
 	                                  this._originalMappings,
 	                                  "originalLine",
@@ -1217,10 +1217,10 @@ var SOURCE_MAP_TEST_MODULE =
 	                                  binarySearch.LEAST_UPPER_BOUND);
 	    if (index >= 0) {
 	      var mapping = this._originalMappings[index];
-	
+
 	      if (aArgs.column === undefined) {
 	        var originalLine = mapping.originalLine;
-	
+
 	        // Iterate until either we run out of mappings, or we run into
 	        // a mapping for a different line than the one we found. Since
 	        // mappings are sorted, this is guaranteed to find all mappings for
@@ -1231,12 +1231,12 @@ var SOURCE_MAP_TEST_MODULE =
 	            column: util.getArg(mapping, 'generatedColumn', null),
 	            lastColumn: util.getArg(mapping, 'lastGeneratedColumn', null)
 	          });
-	
+
 	          mapping = this._originalMappings[++index];
 	        }
 	      } else {
 	        var originalColumn = mapping.originalColumn;
-	
+
 	        // Iterate until either we run out of mappings, or we run into
 	        // a mapping for a different line than the one we were searching for.
 	        // Since mappings are sorted, this is guaranteed to find all mappings for
@@ -1249,17 +1249,17 @@ var SOURCE_MAP_TEST_MODULE =
 	            column: util.getArg(mapping, 'generatedColumn', null),
 	            lastColumn: util.getArg(mapping, 'lastGeneratedColumn', null)
 	          });
-	
+
 	          mapping = this._originalMappings[++index];
 	        }
 	      }
 	    }
-	
+
 	    return mappings;
 	  };
-	
+
 	exports.SourceMapConsumer = SourceMapConsumer;
-	
+
 	/**
 	 * A BasicSourceMapConsumer instance represents a parsed source map which we can
 	 * query for information about the original file positions by giving it a file
@@ -1299,7 +1299,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (typeof aSourceMap === 'string') {
 	    sourceMap = util.parseSourceMapInput(aSourceMap);
 	  }
-	
+
 	  var version = util.getArg(sourceMap, 'version');
 	  var sources = util.getArg(sourceMap, 'sources');
 	  // Sass 3.3 leaves out the 'names' array, so we deviate from the spec (which
@@ -1309,17 +1309,17 @@ var SOURCE_MAP_TEST_MODULE =
 	  var sourcesContent = util.getArg(sourceMap, 'sourcesContent', null);
 	  var mappings = util.getArg(sourceMap, 'mappings');
 	  var file = util.getArg(sourceMap, 'file', null);
-	
+
 	  // Once again, Sass deviates from the spec and supplies the version as a
 	  // string rather than a number, so we use loose equality checking here.
 	  if (version != this._version) {
 	    throw new Error('Unsupported version: ' + version);
 	  }
-	
+
 	  if (sourceRoot) {
 	    sourceRoot = util.normalize(sourceRoot);
 	  }
-	
+
 	  sources = sources
 	    .map(String)
 	    // Some source maps produce relative source paths like "./foo.js" instead of
@@ -1335,28 +1335,28 @@ var SOURCE_MAP_TEST_MODULE =
 	        ? util.relative(sourceRoot, source)
 	        : source;
 	    });
-	
+
 	  // Pass `true` below to allow duplicate names and sources. While source maps
 	  // are intended to be compressed and deduplicated, the TypeScript compiler
 	  // sometimes generates source maps with duplicates in them. See Github issue
 	  // #72 and bugzil.la/889492.
 	  this._names = ArraySet.fromArray(names.map(String), true);
 	  this._sources = ArraySet.fromArray(sources, true);
-	
+
 	  this._absoluteSources = this._sources.toArray().map(function (s) {
 	    return util.computeSourceURL(sourceRoot, s, aSourceMapURL);
 	  });
-	
+
 	  this.sourceRoot = sourceRoot;
 	  this.sourcesContent = sourcesContent;
 	  this._mappings = mappings;
 	  this._sourceMapURL = aSourceMapURL;
 	  this.file = file;
 	}
-	
+
 	BasicSourceMapConsumer.prototype = Object.create(SourceMapConsumer.prototype);
 	BasicSourceMapConsumer.prototype.consumer = SourceMapConsumer;
-	
+
 	/**
 	 * Utility function to find the index of a source.  Returns -1 if not
 	 * found.
@@ -1366,11 +1366,11 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (this.sourceRoot != null) {
 	    relativeSource = util.relative(this.sourceRoot, relativeSource);
 	  }
-	
+
 	  if (this._sources.has(relativeSource)) {
 	    return this._sources.indexOf(relativeSource);
 	  }
-	
+
 	  // Maybe aSource is an absolute URL as returned by |sources|.  In
 	  // this case we can't simply undo the transform.
 	  var i;
@@ -1379,10 +1379,10 @@ var SOURCE_MAP_TEST_MODULE =
 	      return i;
 	    }
 	  }
-	
+
 	  return -1;
 	};
-	
+
 	/**
 	 * Create a BasicSourceMapConsumer from a SourceMapGenerator.
 	 *
@@ -1395,7 +1395,7 @@ var SOURCE_MAP_TEST_MODULE =
 	BasicSourceMapConsumer.fromSourceMap =
 	  function SourceMapConsumer_fromSourceMap(aSourceMap, aSourceMapURL) {
 	    var smc = Object.create(BasicSourceMapConsumer.prototype);
-	
+
 	    var names = smc._names = ArraySet.fromArray(aSourceMap._names.toArray(), true);
 	    var sources = smc._sources = ArraySet.fromArray(aSourceMap._sources.toArray(), true);
 	    smc.sourceRoot = aSourceMap._sourceRoot;
@@ -1406,47 +1406,47 @@ var SOURCE_MAP_TEST_MODULE =
 	    smc._absoluteSources = smc._sources.toArray().map(function (s) {
 	      return util.computeSourceURL(smc.sourceRoot, s, aSourceMapURL);
 	    });
-	
+
 	    // Because we are modifying the entries (by converting string sources and
 	    // names to indices into the sources and names ArraySets), we have to make
 	    // a copy of the entry or else bad things happen. Shared mutable state
 	    // strikes again! See github issue #191.
-	
+
 	    var generatedMappings = aSourceMap._mappings.toArray().slice();
 	    var destGeneratedMappings = smc.__generatedMappings = [];
 	    var destOriginalMappings = smc.__originalMappings = [];
-	
+
 	    for (var i = 0, length = generatedMappings.length; i < length; i++) {
 	      var srcMapping = generatedMappings[i];
 	      var destMapping = new Mapping;
 	      destMapping.generatedLine = srcMapping.generatedLine;
 	      destMapping.generatedColumn = srcMapping.generatedColumn;
-	
+
 	      if (srcMapping.source) {
 	        destMapping.source = sources.indexOf(srcMapping.source);
 	        destMapping.originalLine = srcMapping.originalLine;
 	        destMapping.originalColumn = srcMapping.originalColumn;
-	
+
 	        if (srcMapping.name) {
 	          destMapping.name = names.indexOf(srcMapping.name);
 	        }
-	
+
 	        destOriginalMappings.push(destMapping);
 	      }
-	
+
 	      destGeneratedMappings.push(destMapping);
 	    }
-	
+
 	    quickSort(smc.__originalMappings, util.compareByOriginalPositions);
-	
+
 	    return smc;
 	  };
-	
+
 	/**
 	 * The version of the source mapping spec that we are consuming.
 	 */
 	BasicSourceMapConsumer.prototype._version = 3;
-	
+
 	/**
 	 * The list of original sources.
 	 */
@@ -1455,7 +1455,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    return this._absoluteSources.slice();
 	  }
 	});
-	
+
 	/**
 	 * Provide the JIT with a nice shape / hidden class.
 	 */
@@ -1467,7 +1467,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  this.originalColumn = null;
 	  this.name = null;
 	}
-	
+
 	/**
 	 * Parse the mappings in a string in to a data structure which we can easily
 	 * query (the ordered arrays in the `this.__generatedMappings` and
@@ -1488,7 +1488,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    var originalMappings = [];
 	    var generatedMappings = [];
 	    var mapping, str, segment, end, value;
-	
+
 	    while (index < length) {
 	      if (aStr.charAt(index) === ';') {
 	        generatedLine++;
@@ -1501,7 +1501,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      else {
 	        mapping = new Mapping();
 	        mapping.generatedLine = generatedLine;
-	
+
 	        // Because each offset is encoded relative to the previous one,
 	        // many segments often have the same encoding. We can exploit this
 	        // fact by caching the parsed variable length fields of each segment,
@@ -1513,7 +1513,7 @@ var SOURCE_MAP_TEST_MODULE =
 	          }
 	        }
 	        str = aStr.slice(index, end);
-	
+
 	        segment = cachedSegments[str];
 	        if (segment) {
 	          index += str.length;
@@ -1525,58 +1525,58 @@ var SOURCE_MAP_TEST_MODULE =
 	            index = temp.rest;
 	            segment.push(value);
 	          }
-	
+
 	          if (segment.length === 2) {
 	            throw new Error('Found a source, but no line and column');
 	          }
-	
+
 	          if (segment.length === 3) {
 	            throw new Error('Found a source and line, but no column');
 	          }
-	
+
 	          cachedSegments[str] = segment;
 	        }
-	
+
 	        // Generated column.
 	        mapping.generatedColumn = previousGeneratedColumn + segment[0];
 	        previousGeneratedColumn = mapping.generatedColumn;
-	
+
 	        if (segment.length > 1) {
 	          // Original source.
 	          mapping.source = previousSource + segment[1];
 	          previousSource += segment[1];
-	
+
 	          // Original line.
 	          mapping.originalLine = previousOriginalLine + segment[2];
 	          previousOriginalLine = mapping.originalLine;
 	          // Lines are stored 0-based
 	          mapping.originalLine += 1;
-	
+
 	          // Original column.
 	          mapping.originalColumn = previousOriginalColumn + segment[3];
 	          previousOriginalColumn = mapping.originalColumn;
-	
+
 	          if (segment.length > 4) {
 	            // Original name.
 	            mapping.name = previousName + segment[4];
 	            previousName += segment[4];
 	          }
 	        }
-	
+
 	        generatedMappings.push(mapping);
 	        if (typeof mapping.originalLine === 'number') {
 	          originalMappings.push(mapping);
 	        }
 	      }
 	    }
-	
+
 	    quickSort(generatedMappings, util.compareByGeneratedPositionsDeflated);
 	    this.__generatedMappings = generatedMappings;
-	
+
 	    quickSort(originalMappings, util.compareByOriginalPositions);
 	    this.__originalMappings = originalMappings;
 	  };
-	
+
 	/**
 	 * Find the mapping that best matches the hypothetical "needle" mapping that
 	 * we are searching for in the given "haystack" of mappings.
@@ -1588,7 +1588,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    // mapping for the given position and then return the opposite position it
 	    // points to. Because the mappings are sorted, we can use binary search to
 	    // find the best mapping.
-	
+
 	    if (aNeedle[aLineName] <= 0) {
 	      throw new TypeError('Line must be greater than or equal to 1, got '
 	                          + aNeedle[aLineName]);
@@ -1597,10 +1597,10 @@ var SOURCE_MAP_TEST_MODULE =
 	      throw new TypeError('Column must be greater than or equal to 0, got '
 	                          + aNeedle[aColumnName]);
 	    }
-	
+
 	    return binarySearch.search(aNeedle, aMappings, aComparator, aBias);
 	  };
-	
+
 	/**
 	 * Compute the last column for each generated mapping. The last column is
 	 * inclusive.
@@ -1609,25 +1609,25 @@ var SOURCE_MAP_TEST_MODULE =
 	  function SourceMapConsumer_computeColumnSpans() {
 	    for (var index = 0; index < this._generatedMappings.length; ++index) {
 	      var mapping = this._generatedMappings[index];
-	
+
 	      // Mappings do not contain a field for the last generated columnt. We
 	      // can come up with an optimistic estimate, however, by assuming that
 	      // mappings are contiguous (i.e. given two consecutive mappings, the
 	      // first mapping ends where the second one starts).
 	      if (index + 1 < this._generatedMappings.length) {
 	        var nextMapping = this._generatedMappings[index + 1];
-	
+
 	        if (mapping.generatedLine === nextMapping.generatedLine) {
 	          mapping.lastGeneratedColumn = nextMapping.generatedColumn - 1;
 	          continue;
 	        }
 	      }
-	
+
 	      // The last mapping for each line spans the entire line.
 	      mapping.lastGeneratedColumn = Infinity;
 	    }
 	  };
-	
+
 	/**
 	 * Returns the original source, line, and column information for the generated
 	 * source's line and column positions provided. The only argument is an object
@@ -1658,7 +1658,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      generatedLine: util.getArg(aArgs, 'line'),
 	      generatedColumn: util.getArg(aArgs, 'column')
 	    };
-	
+
 	    var index = this._findMapping(
 	      needle,
 	      this._generatedMappings,
@@ -1667,10 +1667,10 @@ var SOURCE_MAP_TEST_MODULE =
 	      util.compareByGeneratedPositionsDeflated,
 	      util.getArg(aArgs, 'bias', SourceMapConsumer.GREATEST_LOWER_BOUND)
 	    );
-	
+
 	    if (index >= 0) {
 	      var mapping = this._generatedMappings[index];
-	
+
 	      if (mapping.generatedLine === needle.generatedLine) {
 	        var source = util.getArg(mapping, 'source', null);
 	        if (source !== null) {
@@ -1689,7 +1689,7 @@ var SOURCE_MAP_TEST_MODULE =
 	        };
 	      }
 	    }
-	
+
 	    return {
 	      source: null,
 	      line: null,
@@ -1697,7 +1697,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      name: null
 	    };
 	  };
-	
+
 	/**
 	 * Return true if we have the source content for every source in the source
 	 * map, false otherwise.
@@ -1710,7 +1710,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    return this.sourcesContent.length >= this._sources.size() &&
 	      !this.sourcesContent.some(function (sc) { return sc == null; });
 	  };
-	
+
 	/**
 	 * Returns the original source content. The only argument is the url of the
 	 * original source file. Returns null if no original source content is
@@ -1721,17 +1721,17 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (!this.sourcesContent) {
 	      return null;
 	    }
-	
+
 	    var index = this._findSourceIndex(aSource);
 	    if (index >= 0) {
 	      return this.sourcesContent[index];
 	    }
-	
+
 	    var relativeSource = aSource;
 	    if (this.sourceRoot != null) {
 	      relativeSource = util.relative(this.sourceRoot, relativeSource);
 	    }
-	
+
 	    var url;
 	    if (this.sourceRoot != null
 	        && (url = util.urlParse(this.sourceRoot))) {
@@ -1744,13 +1744,13 @@ var SOURCE_MAP_TEST_MODULE =
 	          && this._sources.has(fileUriAbsPath)) {
 	        return this.sourcesContent[this._sources.indexOf(fileUriAbsPath)]
 	      }
-	
+
 	      if ((!url.path || url.path == "/")
 	          && this._sources.has("/" + relativeSource)) {
 	        return this.sourcesContent[this._sources.indexOf("/" + relativeSource)];
 	      }
 	    }
-	
+
 	    // This function is used recursively from
 	    // IndexedSourceMapConsumer.prototype.sourceContentFor. In that case, we
 	    // don't want to throw if we can't find the source - we just want to
@@ -1762,7 +1762,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      throw new Error('"' + relativeSource + '" is not in the SourceMap.');
 	    }
 	  };
-	
+
 	/**
 	 * Returns the generated line and column information for the original source,
 	 * line, and column positions provided. The only argument is an object with
@@ -1797,13 +1797,13 @@ var SOURCE_MAP_TEST_MODULE =
 	        lastColumn: null
 	      };
 	    }
-	
+
 	    var needle = {
 	      source: source,
 	      originalLine: util.getArg(aArgs, 'line'),
 	      originalColumn: util.getArg(aArgs, 'column')
 	    };
-	
+
 	    var index = this._findMapping(
 	      needle,
 	      this._originalMappings,
@@ -1812,10 +1812,10 @@ var SOURCE_MAP_TEST_MODULE =
 	      util.compareByOriginalPositions,
 	      util.getArg(aArgs, 'bias', SourceMapConsumer.GREATEST_LOWER_BOUND)
 	    );
-	
+
 	    if (index >= 0) {
 	      var mapping = this._originalMappings[index];
-	
+
 	      if (mapping.source === needle.source) {
 	        return {
 	          line: util.getArg(mapping, 'generatedLine', null),
@@ -1824,16 +1824,16 @@ var SOURCE_MAP_TEST_MODULE =
 	        };
 	      }
 	    }
-	
+
 	    return {
 	      line: null,
 	      column: null,
 	      lastColumn: null
 	    };
 	  };
-	
+
 	exports.BasicSourceMapConsumer = BasicSourceMapConsumer;
-	
+
 	/**
 	 * An IndexedSourceMapConsumer instance represents a parsed source map which
 	 * we can query for information. It differs from BasicSourceMapConsumer in
@@ -1888,17 +1888,17 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (typeof aSourceMap === 'string') {
 	    sourceMap = util.parseSourceMapInput(aSourceMap);
 	  }
-	
+
 	  var version = util.getArg(sourceMap, 'version');
 	  var sections = util.getArg(sourceMap, 'sections');
-	
+
 	  if (version != this._version) {
 	    throw new Error('Unsupported version: ' + version);
 	  }
-	
+
 	  this._sources = new ArraySet();
 	  this._names = new ArraySet();
-	
+
 	  var lastOffset = {
 	    line: -1,
 	    column: 0
@@ -1912,13 +1912,13 @@ var SOURCE_MAP_TEST_MODULE =
 	    var offset = util.getArg(s, 'offset');
 	    var offsetLine = util.getArg(offset, 'line');
 	    var offsetColumn = util.getArg(offset, 'column');
-	
+
 	    if (offsetLine < lastOffset.line ||
 	        (offsetLine === lastOffset.line && offsetColumn < lastOffset.column)) {
 	      throw new Error('Section offsets must be ordered and non-overlapping.');
 	    }
 	    lastOffset = offset;
-	
+
 	    return {
 	      generatedOffset: {
 	        // The offset fields are 0-based, but we use 1-based indices when
@@ -1930,15 +1930,15 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	  });
 	}
-	
+
 	IndexedSourceMapConsumer.prototype = Object.create(SourceMapConsumer.prototype);
 	IndexedSourceMapConsumer.prototype.constructor = SourceMapConsumer;
-	
+
 	/**
 	 * The version of the source mapping spec that we are consuming.
 	 */
 	IndexedSourceMapConsumer.prototype._version = 3;
-	
+
 	/**
 	 * The list of original sources.
 	 */
@@ -1953,7 +1953,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    return sources;
 	  }
 	});
-	
+
 	/**
 	 * Returns the original source, line, and column information for the generated
 	 * source's line and column positions provided. The only argument is an object
@@ -1979,7 +1979,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      generatedLine: util.getArg(aArgs, 'line'),
 	      generatedColumn: util.getArg(aArgs, 'column')
 	    };
-	
+
 	    // Find the section containing the generated position we're trying to map
 	    // to an original position.
 	    var sectionIndex = binarySearch.search(needle, this._sections,
@@ -1988,12 +1988,12 @@ var SOURCE_MAP_TEST_MODULE =
 	        if (cmp) {
 	          return cmp;
 	        }
-	
+
 	        return (needle.generatedColumn -
 	                section.generatedOffset.generatedColumn);
 	      });
 	    var section = this._sections[sectionIndex];
-	
+
 	    if (!section) {
 	      return {
 	        source: null,
@@ -2002,7 +2002,7 @@ var SOURCE_MAP_TEST_MODULE =
 	        name: null
 	      };
 	    }
-	
+
 	    return section.consumer.originalPositionFor({
 	      line: needle.generatedLine -
 	        (section.generatedOffset.generatedLine - 1),
@@ -2013,7 +2013,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      bias: aArgs.bias
 	    });
 	  };
-	
+
 	/**
 	 * Return true if we have the source content for every source in the source
 	 * map, false otherwise.
@@ -2024,7 +2024,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      return s.consumer.hasContentsOfAllSources();
 	    });
 	  };
-	
+
 	/**
 	 * Returns the original source content. The only argument is the url of the
 	 * original source file. Returns null if no original source content is
@@ -2034,7 +2034,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  function IndexedSourceMapConsumer_sourceContentFor(aSource, nullOnMissing) {
 	    for (var i = 0; i < this._sections.length; i++) {
 	      var section = this._sections[i];
-	
+
 	      var content = section.consumer.sourceContentFor(aSource, true);
 	      if (content) {
 	        return content;
@@ -2047,7 +2047,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      throw new Error('"' + aSource + '" is not in the SourceMap.');
 	    }
 	  };
-	
+
 	/**
 	 * Returns the generated line and column information for the original source,
 	 * line, and column positions provided. The only argument is an object with
@@ -2062,7 +2062,7 @@ var SOURCE_MAP_TEST_MODULE =
 	 * and an object is returned with the following properties:
 	 *
 	 *   - line: The line number in the generated source, or null.  The
-	 *     line number is 1-based. 
+	 *     line number is 1-based.
 	 *   - column: The column number in the generated source, or null.
 	 *     The column number is 0-based.
 	 */
@@ -2070,7 +2070,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  function IndexedSourceMapConsumer_generatedPositionFor(aArgs) {
 	    for (var i = 0; i < this._sections.length; i++) {
 	      var section = this._sections[i];
-	
+
 	      // Only consider this section if the requested source is in the list of
 	      // sources of the consumer.
 	      if (section.consumer._findSourceIndex(util.getArg(aArgs, 'source')) === -1) {
@@ -2089,13 +2089,13 @@ var SOURCE_MAP_TEST_MODULE =
 	        return ret;
 	      }
 	    }
-	
+
 	    return {
 	      line: null,
 	      column: null
 	    };
 	  };
-	
+
 	/**
 	 * Parse the mappings in a string in to a data structure which we can easily
 	 * query (the ordered arrays in the `this.__generatedMappings` and
@@ -2110,19 +2110,19 @@ var SOURCE_MAP_TEST_MODULE =
 	      var sectionMappings = section.consumer._generatedMappings;
 	      for (var j = 0; j < sectionMappings.length; j++) {
 	        var mapping = sectionMappings[j];
-	
+
 	        var source = section.consumer._sources.at(mapping.source);
 	        source = util.computeSourceURL(section.consumer.sourceRoot, source, this._sourceMapURL);
 	        this._sources.add(source);
 	        source = this._sources.indexOf(source);
-	
+
 	        var name = null;
 	        if (mapping.name) {
 	          name = section.consumer._names.at(mapping.name);
 	          this._names.add(name);
 	          name = this._names.indexOf(name);
 	        }
-	
+
 	        // The mappings coming from the consumer for the section have
 	        // generated positions relative to the start of the section, so we
 	        // need to offset them to be relative to the start of the concatenated
@@ -2139,18 +2139,18 @@ var SOURCE_MAP_TEST_MODULE =
 	          originalColumn: mapping.originalColumn,
 	          name: name
 	        };
-	
+
 	        this.__generatedMappings.push(adjustedMapping);
 	        if (typeof adjustedMapping.originalLine === 'number') {
 	          this.__originalMappings.push(adjustedMapping);
 	        }
 	      }
 	    }
-	
+
 	    quickSort(this.__generatedMappings, util.compareByGeneratedPositionsDeflated);
 	    quickSort(this.__originalMappings, util.compareByOriginalPositions);
 	  };
-	
+
 	exports.IndexedSourceMapConsumer = IndexedSourceMapConsumer;
 
 
@@ -2164,10 +2164,10 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	exports.GREATEST_LOWER_BOUND = 1;
 	exports.LEAST_UPPER_BOUND = 2;
-	
+
 	/**
 	 * Recursive implementation of binary search.
 	 *
@@ -2203,7 +2203,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      // The element is in the upper half.
 	      return recursiveSearch(mid, aHigh, aNeedle, aHaystack, aCompare, aBias);
 	    }
-	
+
 	    // The exact needle element was not found in this haystack. Determine if
 	    // we are in termination case (3) or (2) and return the appropriate thing.
 	    if (aBias == exports.LEAST_UPPER_BOUND) {
@@ -2218,7 +2218,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      // The element is in the lower half.
 	      return recursiveSearch(aLow, mid, aNeedle, aHaystack, aCompare, aBias);
 	    }
-	
+
 	    // we are in termination case (3) or (2) and return the appropriate thing.
 	    if (aBias == exports.LEAST_UPPER_BOUND) {
 	      return mid;
@@ -2227,7 +2227,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	  }
 	}
-	
+
 	/**
 	 * This is an implementation of binary search which will always try and return
 	 * the index of the closest element if there is no exact hit. This is because
@@ -2250,13 +2250,13 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (aHaystack.length === 0) {
 	    return -1;
 	  }
-	
+
 	  var index = recursiveSearch(-1, aHaystack.length, aNeedle, aHaystack,
 	                              aCompare, aBias || exports.GREATEST_LOWER_BOUND);
 	  if (index < 0) {
 	    return -1;
 	  }
-	
+
 	  // We have found either the exact element, or the next-closest element than
 	  // the one we are searching for. However, there may be more than one such
 	  // element. Make sure we always return the smallest of these.
@@ -2266,7 +2266,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	    --index;
 	  }
-	
+
 	  return index;
 	};
 
@@ -2281,11 +2281,11 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var util = __webpack_require__(2);
 	var has = Object.prototype.hasOwnProperty;
 	var hasNativeMap = typeof Map !== "undefined";
-	
+
 	/**
 	 * A data structure which is a combination of an array and a set. Adding a new
 	 * member is O(1), testing for membership is O(1), and finding the index of an
@@ -2296,7 +2296,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  this._array = [];
 	  this._set = hasNativeMap ? new Map() : Object.create(null);
 	}
-	
+
 	/**
 	 * Static method for creating ArraySet instances from an existing array.
 	 */
@@ -2307,7 +2307,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	  return set;
 	};
-	
+
 	/**
 	 * Return how many unique items are in this ArraySet. If duplicates have been
 	 * added, than those do not count towards the size.
@@ -2317,7 +2317,7 @@ var SOURCE_MAP_TEST_MODULE =
 	ArraySet.prototype.size = function ArraySet_size() {
 	  return hasNativeMap ? this._set.size : Object.getOwnPropertyNames(this._set).length;
 	};
-	
+
 	/**
 	 * Add the given string to this set.
 	 *
@@ -2338,7 +2338,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	  }
 	};
-	
+
 	/**
 	 * Is the given string a member of this set?
 	 *
@@ -2352,7 +2352,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    return has.call(this._set, sStr);
 	  }
 	};
-	
+
 	/**
 	 * What is the index of the given string in the array?
 	 *
@@ -2370,10 +2370,10 @@ var SOURCE_MAP_TEST_MODULE =
 	      return this._set[sStr];
 	    }
 	  }
-	
+
 	  throw new Error('"' + aStr + '" is not in the set.');
 	};
-	
+
 	/**
 	 * What is the element at the given index?
 	 *
@@ -2385,7 +2385,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	  throw new Error('No element indexed by ' + aIdx);
 	};
-	
+
 	/**
 	 * Returns the array representation of this set (which has the proper indices
 	 * indicated by indexOf). Note that this is a copy of the internal array used
@@ -2394,7 +2394,7 @@ var SOURCE_MAP_TEST_MODULE =
 	ArraySet.prototype.toArray = function ArraySet_toArray() {
 	  return this._array.slice();
 	};
-	
+
 	exports.ArraySet = ArraySet;
 
 
@@ -2438,9 +2438,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 	 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	 */
-	
+
 	var base64 = __webpack_require__(7);
-	
+
 	// A single base 64 digit can contain 6 bits of data. For the base 64 variable
 	// length quantities we use in the source map spec, the first bit is the sign,
 	// the next four bits are the actual value, and the 6th bit is the
@@ -2452,18 +2452,18 @@ var SOURCE_MAP_TEST_MODULE =
 	//   |    |
 	//   V    V
 	//   101011
-	
+
 	var VLQ_BASE_SHIFT = 5;
-	
+
 	// binary: 100000
 	var VLQ_BASE = 1 << VLQ_BASE_SHIFT;
-	
+
 	// binary: 011111
 	var VLQ_BASE_MASK = VLQ_BASE - 1;
-	
+
 	// binary: 100000
 	var VLQ_CONTINUATION_BIT = VLQ_BASE;
-	
+
 	/**
 	 * Converts from a two-complement value to a value where the sign bit is
 	 * placed in the least significant bit.  For example, as decimals:
@@ -2475,7 +2475,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    ? ((-aValue) << 1) + 1
 	    : (aValue << 1) + 0;
 	}
-	
+
 	/**
 	 * Converts to a two-complement value from a value where the sign bit is
 	 * placed in the least significant bit.  For example, as decimals:
@@ -2489,16 +2489,16 @@ var SOURCE_MAP_TEST_MODULE =
 	    ? -shifted
 	    : shifted;
 	}
-	
+
 	/**
 	 * Returns the base 64 VLQ encoded value.
 	 */
 	exports.encode = function base64VLQ_encode(aValue) {
 	  var encoded = "";
 	  var digit;
-	
+
 	  var vlq = toVLQSigned(aValue);
-	
+
 	  do {
 	    digit = vlq & VLQ_BASE_MASK;
 	    vlq >>>= VLQ_BASE_SHIFT;
@@ -2509,10 +2509,10 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	    encoded += base64.encode(digit);
 	  } while (vlq > 0);
-	
+
 	  return encoded;
 	};
-	
+
 	/**
 	 * Decodes the next base 64 VLQ value from the given string and returns the
 	 * value and the rest of the string via the out parameter.
@@ -2522,23 +2522,23 @@ var SOURCE_MAP_TEST_MODULE =
 	  var result = 0;
 	  var shift = 0;
 	  var continuation, digit;
-	
+
 	  do {
 	    if (aIndex >= strLen) {
 	      throw new Error("Expected more digits in base 64 VLQ value.");
 	    }
-	
+
 	    digit = base64.decode(aStr.charCodeAt(aIndex++));
 	    if (digit === -1) {
 	      throw new Error("Invalid base64 digit: " + aStr.charAt(aIndex - 1));
 	    }
-	
+
 	    continuation = !!(digit & VLQ_CONTINUATION_BIT);
 	    digit &= VLQ_BASE_MASK;
 	    result = result + (digit << shift);
 	    shift += VLQ_BASE_SHIFT;
 	  } while (continuation);
-	
+
 	  aOutParam.value = fromVLQSigned(result);
 	  aOutParam.rest = aIndex;
 	};
@@ -2554,9 +2554,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var intToCharMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split('');
-	
+
 	/**
 	 * Encode an integer in the range of 0 to 63 to a single base 64 digit.
 	 */
@@ -2566,7 +2566,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	  throw new TypeError("Must be between 0 and 63: " + number);
 	};
-	
+
 	/**
 	 * Decode a single base 64 character code digit to an integer. Returns -1 on
 	 * failure.
@@ -2574,44 +2574,44 @@ var SOURCE_MAP_TEST_MODULE =
 	exports.decode = function (charCode) {
 	  var bigA = 65;     // 'A'
 	  var bigZ = 90;     // 'Z'
-	
+
 	  var littleA = 97;  // 'a'
 	  var littleZ = 122; // 'z'
-	
+
 	  var zero = 48;     // '0'
 	  var nine = 57;     // '9'
-	
+
 	  var plus = 43;     // '+'
 	  var slash = 47;    // '/'
-	
+
 	  var littleOffset = 26;
 	  var numberOffset = 52;
-	
+
 	  // 0 - 25: ABCDEFGHIJKLMNOPQRSTUVWXYZ
 	  if (bigA <= charCode && charCode <= bigZ) {
 	    return (charCode - bigA);
 	  }
-	
+
 	  // 26 - 51: abcdefghijklmnopqrstuvwxyz
 	  if (littleA <= charCode && charCode <= littleZ) {
 	    return (charCode - littleA + littleOffset);
 	  }
-	
+
 	  // 52 - 61: 0123456789
 	  if (zero <= charCode && charCode <= nine) {
 	    return (charCode - zero + numberOffset);
 	  }
-	
+
 	  // 62: +
 	  if (charCode == plus) {
 	    return 62;
 	  }
-	
+
 	  // 63: /
 	  if (charCode == slash) {
 	    return 63;
 	  }
-	
+
 	  // Invalid base64 digit.
 	  return -1;
 	};
@@ -2627,7 +2627,7 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	// It turns out that some (most?) JavaScript engines don't self-host
 	// `Array.prototype.sort`. This makes sense because C++ will likely remain
 	// faster than JS when doing raw CPU-intensive sorting. However, when using a
@@ -2637,7 +2637,7 @@ var SOURCE_MAP_TEST_MODULE =
 	// fact, when sorting with a comparator, these costs outweigh the benefits of
 	// sorting in C++. By using our own JS-implemented Quick Sort (below), we get
 	// a ~3500ms mean speed-up in `bench/bench.html`.
-	
+
 	/**
 	 * Swap the elements indexed by `x` and `y` in the array `ary`.
 	 *
@@ -2653,7 +2653,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  ary[x] = ary[y];
 	  ary[y] = temp;
 	}
-	
+
 	/**
 	 * Returns a random integer within the range `low .. high` inclusive.
 	 *
@@ -2665,7 +2665,7 @@ var SOURCE_MAP_TEST_MODULE =
 	function randomIntInRange(low, high) {
 	  return Math.round(low + (Math.random() * (high - low)));
 	}
-	
+
 	/**
 	 * The Quick Sort algorithm.
 	 *
@@ -2682,7 +2682,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  // If our lower bound is less than our upper bound, we (1) partition the
 	  // array into two pieces and (2) recurse on each half. If it is not, this is
 	  // the empty array and our base case.
-	
+
 	  if (p < r) {
 	    // (1) Partitioning.
 	    //
@@ -2692,15 +2692,15 @@ var SOURCE_MAP_TEST_MODULE =
 	    // once partition is done, the pivot is in the exact place it will be when
 	    // the array is put in sorted order, and it will not need to be moved
 	    // again. This runs in O(n) time.
-	
+
 	    // Always choose a random pivot so that an input array which is reverse
 	    // sorted does not cause O(n^2) running time.
 	    var pivotIndex = randomIntInRange(p, r);
 	    var i = p - 1;
-	
+
 	    swap(ary, pivotIndex, r);
 	    var pivot = ary[r];
-	
+
 	    // Immediately after `j` is incremented in this loop, the following hold
 	    // true:
 	    //
@@ -2713,17 +2713,17 @@ var SOURCE_MAP_TEST_MODULE =
 	        swap(ary, i, j);
 	      }
 	    }
-	
+
 	    swap(ary, i + 1, j);
 	    var q = i + 1;
-	
+
 	    // (2) Recurse on each half.
-	
+
 	    doQuickSort(ary, comparator, p, q - 1);
 	    doQuickSort(ary, comparator, q + 1, r);
 	  }
 	}
-	
+
 	/**
 	 * Sort the given array in-place with the given comparator function.
 	 *
@@ -2747,12 +2747,12 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var base64VLQ = __webpack_require__(6);
 	var util = __webpack_require__(2);
 	var ArraySet = __webpack_require__(5).ArraySet;
 	var MappingList = __webpack_require__(10).MappingList;
-	
+
 	/**
 	 * An instance of the SourceMapGenerator represents a source map which is
 	 * being built incrementally. You may pass an object with the following
@@ -2773,9 +2773,9 @@ var SOURCE_MAP_TEST_MODULE =
 	  this._mappings = new MappingList();
 	  this._sourcesContents = null;
 	}
-	
+
 	SourceMapGenerator.prototype._version = 3;
-	
+
 	/**
 	 * Creates a new SourceMapGenerator based on a SourceMapConsumer
 	 *
@@ -2795,23 +2795,23 @@ var SOURCE_MAP_TEST_MODULE =
 	          column: mapping.generatedColumn
 	        }
 	      };
-	
+
 	      if (mapping.source != null) {
 	        newMapping.source = mapping.source;
 	        if (sourceRoot != null) {
 	          newMapping.source = util.relative(sourceRoot, newMapping.source);
 	        }
-	
+
 	        newMapping.original = {
 	          line: mapping.originalLine,
 	          column: mapping.originalColumn
 	        };
-	
+
 	        if (mapping.name != null) {
 	          newMapping.name = mapping.name;
 	        }
 	      }
-	
+
 	      generator.addMapping(newMapping);
 	    });
 	    aSourceMapConsumer.sources.forEach(function (sourceFile) {
@@ -2819,11 +2819,11 @@ var SOURCE_MAP_TEST_MODULE =
 	      if (sourceRoot !== null) {
 	        sourceRelative = util.relative(sourceRoot, sourceFile);
 	      }
-	
+
 	      if (!generator._sources.has(sourceRelative)) {
 	        generator._sources.add(sourceRelative);
 	      }
-	
+
 	      var content = aSourceMapConsumer.sourceContentFor(sourceFile);
 	      if (content != null) {
 	        generator.setSourceContent(sourceFile, content);
@@ -2831,7 +2831,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    });
 	    return generator;
 	  };
-	
+
 	/**
 	 * Add a single mapping from original source line and column to the generated
 	 * source's line and column for this source map being created. The mapping
@@ -2848,25 +2848,25 @@ var SOURCE_MAP_TEST_MODULE =
 	    var original = util.getArg(aArgs, 'original', null);
 	    var source = util.getArg(aArgs, 'source', null);
 	    var name = util.getArg(aArgs, 'name', null);
-	
+
 	    if (!this._skipValidation) {
 	      this._validateMapping(generated, original, source, name);
 	    }
-	
+
 	    if (source != null) {
 	      source = String(source);
 	      if (!this._sources.has(source)) {
 	        this._sources.add(source);
 	      }
 	    }
-	
+
 	    if (name != null) {
 	      name = String(name);
 	      if (!this._names.has(name)) {
 	        this._names.add(name);
 	      }
 	    }
-	
+
 	    this._mappings.add({
 	      generatedLine: generated.line,
 	      generatedColumn: generated.column,
@@ -2876,7 +2876,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      name: name
 	    });
 	  };
-	
+
 	/**
 	 * Set the source content for a source file.
 	 */
@@ -2886,7 +2886,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (this._sourceRoot != null) {
 	      source = util.relative(this._sourceRoot, source);
 	    }
-	
+
 	    if (aSourceContent != null) {
 	      // Add the source content to the _sourcesContents map.
 	      // Create a new _sourcesContents map if the property is null.
@@ -2903,7 +2903,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      }
 	    }
 	  };
-	
+
 	/**
 	 * Applies the mappings of a sub-source-map for a specific source file to the
 	 * source map being generated. Each mapping to the supplied source file is
@@ -2942,7 +2942,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    // the names array.
 	    var newSources = new ArraySet();
 	    var newNames = new ArraySet();
-	
+
 	    // Find mappings for the "sourceFile"
 	    this._mappings.unsortedForEach(function (mapping) {
 	      if (mapping.source === sourceFile && mapping.originalLine != null) {
@@ -2967,21 +2967,21 @@ var SOURCE_MAP_TEST_MODULE =
 	          }
 	        }
 	      }
-	
+
 	      var source = mapping.source;
 	      if (source != null && !newSources.has(source)) {
 	        newSources.add(source);
 	      }
-	
+
 	      var name = mapping.name;
 	      if (name != null && !newNames.has(name)) {
 	        newNames.add(name);
 	      }
-	
+
 	    }, this);
 	    this._sources = newSources;
 	    this._names = newNames;
-	
+
 	    // Copy sourcesContents of applied map.
 	    aSourceMapConsumer.sources.forEach(function (sourceFile) {
 	      var content = aSourceMapConsumer.sourceContentFor(sourceFile);
@@ -2996,7 +2996,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      }
 	    }, this);
 	  };
-	
+
 	/**
 	 * A mapping can have one of the three levels of data:
 	 *
@@ -3022,7 +3022,7 @@ var SOURCE_MAP_TEST_MODULE =
 	            'null for the original mapping instead of an object with empty or null values.'
 	        );
 	    }
-	
+
 	    if (aGenerated && 'line' in aGenerated && 'column' in aGenerated
 	        && aGenerated.line > 0 && aGenerated.column >= 0
 	        && !aOriginal && !aSource && !aName) {
@@ -3046,7 +3046,7 @@ var SOURCE_MAP_TEST_MODULE =
 	      }));
 	    }
 	  };
-	
+
 	/**
 	 * Serialize the accumulated mappings in to the stream of base 64 VLQs
 	 * specified by the source map format.
@@ -3064,12 +3064,12 @@ var SOURCE_MAP_TEST_MODULE =
 	    var mapping;
 	    var nameIdx;
 	    var sourceIdx;
-	
+
 	    var mappings = this._mappings.toArray();
 	    for (var i = 0, len = mappings.length; i < len; i++) {
 	      mapping = mappings[i];
 	      next = ''
-	
+
 	      if (mapping.generatedLine !== previousGeneratedLine) {
 	        previousGeneratedColumn = 0;
 	        while (mapping.generatedLine !== previousGeneratedLine) {
@@ -3085,38 +3085,38 @@ var SOURCE_MAP_TEST_MODULE =
 	          next += ',';
 	        }
 	      }
-	
+
 	      next += base64VLQ.encode(mapping.generatedColumn
 	                                 - previousGeneratedColumn);
 	      previousGeneratedColumn = mapping.generatedColumn;
-	
+
 	      if (mapping.source != null) {
 	        sourceIdx = this._sources.indexOf(mapping.source);
 	        next += base64VLQ.encode(sourceIdx - previousSource);
 	        previousSource = sourceIdx;
-	
+
 	        // lines are stored 0-based in SourceMap spec version 3
 	        next += base64VLQ.encode(mapping.originalLine - 1
 	                                   - previousOriginalLine);
 	        previousOriginalLine = mapping.originalLine - 1;
-	
+
 	        next += base64VLQ.encode(mapping.originalColumn
 	                                   - previousOriginalColumn);
 	        previousOriginalColumn = mapping.originalColumn;
-	
+
 	        if (mapping.name != null) {
 	          nameIdx = this._names.indexOf(mapping.name);
 	          next += base64VLQ.encode(nameIdx - previousName);
 	          previousName = nameIdx;
 	        }
 	      }
-	
+
 	      result += next;
 	    }
-	
+
 	    return result;
 	  };
-	
+
 	SourceMapGenerator.prototype._generateSourcesContent =
 	  function SourceMapGenerator_generateSourcesContent(aSources, aSourceRoot) {
 	    return aSources.map(function (source) {
@@ -3132,7 +3132,7 @@ var SOURCE_MAP_TEST_MODULE =
 	        : null;
 	    }, this);
 	  };
-	
+
 	/**
 	 * Externalize the source map.
 	 */
@@ -3153,10 +3153,10 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (this._sourcesContents) {
 	      map.sourcesContent = this._generateSourcesContent(map.sources, map.sourceRoot);
 	    }
-	
+
 	    return map;
 	  };
-	
+
 	/**
 	 * Render the source map being generated to a string.
 	 */
@@ -3164,7 +3164,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  function SourceMapGenerator_toString() {
 	    return JSON.stringify(this.toJSON());
 	  };
-	
+
 	exports.SourceMapGenerator = SourceMapGenerator;
 
 
@@ -3178,9 +3178,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var util = __webpack_require__(2);
-	
+
 	/**
 	 * Determine whether mappingB is after mappingA with respect to generated
 	 * position.
@@ -3194,7 +3194,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  return lineB > lineA || lineB == lineA && columnB >= columnA ||
 	         util.compareByGeneratedPositionsInflated(mappingA, mappingB) <= 0;
 	}
-	
+
 	/**
 	 * A data structure to provide a sorted view of accumulated mappings in a
 	 * performance conscious manner. It trades a neglibable overhead in general
@@ -3206,7 +3206,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  // Serves as infimum
 	  this._last = {generatedLine: -1, generatedColumn: 0};
 	}
-	
+
 	/**
 	 * Iterate through internal items. This method takes the same arguments that
 	 * `Array.prototype.forEach` takes.
@@ -3217,7 +3217,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  function MappingList_forEach(aCallback, aThisArg) {
 	    this._array.forEach(aCallback, aThisArg);
 	  };
-	
+
 	/**
 	 * Add the given source mapping.
 	 *
@@ -3232,7 +3232,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    this._array.push(aMapping);
 	  }
 	};
-	
+
 	/**
 	 * Returns the flat, sorted array of mappings. The mappings are sorted by
 	 * generated position.
@@ -3249,7 +3249,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	  return this._array;
 	};
-	
+
 	exports.MappingList = MappingList;
 
 

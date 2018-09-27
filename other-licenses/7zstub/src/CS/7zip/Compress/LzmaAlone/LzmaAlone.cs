@@ -3,14 +3,14 @@ using System.IO;
 namespace SevenZip
 {
 	using CommandLineParser;
-	
+
 	public class CDoubleStream: Stream
 	{
 		public System.IO.Stream s1;
 		public System.IO.Stream s2;
 		public int fileIndex;
 		public long skipSize;
-		
+
 		public override bool CanRead { get { return true; }}
 		public override bool CanWrite { get { return false; }}
 		public override bool CanSeek { get { return false; }}
@@ -21,7 +21,7 @@ namespace SevenZip
 			set { }
 		}
 		public override void Flush() { }
-		public override int Read(byte[] buffer, int offset, int count) 
+		public override int Read(byte[] buffer, int offset, int count)
 		{
 			int numTotal = 0;
 			while (count > 0)
@@ -56,7 +56,7 @@ namespace SevenZip
 			throw (new Exception("can't SetLength"));
 		}
 	}
-	
+
 	class LzmaAlone
 	{
 		enum Key
@@ -269,7 +269,7 @@ namespace SevenZip
 					if (!GetNumber((string)parser[(int)Key.PosBits].PostStrings[0], out posStateBits))
 						IncorrectCommand();
 
-				CoderPropID[] propIDs = 
+				CoderPropID[] propIDs =
 				{
 					CoderPropID.DictionarySize,
 					CoderPropID.PosStateBits,
@@ -280,7 +280,7 @@ namespace SevenZip
 					CoderPropID.MatchFinder,
 					CoderPropID.EndMarker
 				};
-				object[] properties = 
+				object[] properties =
 				{
 					(Int32)(dictionary),
 					(Int32)(posStateBits),

@@ -12,7 +12,7 @@ buffer.getChannelData(0)[0] = 1.0;
 var source = context.createBufferSource();
 source.buffer = buffer;
 source.loop = true;
-// Initialize the resampler with a slow input rate. 
+// Initialize the resampler with a slow input rate.
 // With the current (Mar 2017) implementation, very slow rates give the
 // resampler a very large denominator.
 source.playbackRate.setValueAtTime(rate / 0x7fffffff, 0.0);

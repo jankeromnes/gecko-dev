@@ -158,27 +158,27 @@
    #abstractimg .left, #abstractimg .bottom { word-spacing: 12px; }
    #abstractimg .right { font-size: 25px; }
   </style><body>
-  
+
   <script async="" src=/html-dfn.js></script>
   <script data-file-issue-url=https://github.com/whatwg/html/issues/new src=https://resources.whatwg.org/file-issue.js async=""></script>
   <header id=head class="head with-buttons">
    <a href=https://whatwg.org/ class=logo><img alt=WHATWG src=https://resources.whatwg.org/logo.svg width=100 height=100></a>
    <h1 class=allcaps>HTML</h1><h2 id=living-standard class="no-num no-toc">Living Standard — Last Updated <span class=pubdate>9 December 2017</span></h2>
-   
-   
 
-   
+
+
+
   </header>
 
-  
 
-  
-  
 
-  
-  
 
-  
+
+
+
+
+
+
 
   <nav><a href=imagebitmap-and-animations.html>← 8.8 Images</a> — <a href=./>Table of Contents</a> — <a href=server-sent-events.html>9.2 Server-sent events →</a></nav><ol class=toc><li id=toc-comms><a href=comms.html#comms><span class=secno>9</span> Communication</a><ol><li><a href=comms.html#the-messageevent-interface><span class=secno>9.1</span> The <code>MessageEvent</code> interface</a></ol></ol><h2 id=comms><span class=secno>9</span> Communication<a href=#comms class=self-link></a></h2>
 
@@ -237,7 +237,7 @@ typedef (<a id=the-messageevent-interface:windowproxy href=window-object.html#wi
 
    </dl>
 
-  
+
 
   <p>The <dfn id=dom-messageevent-data><code>data</code></dfn> attribute must return the value
   it was initialized to. It represents the message being sent.</p>
@@ -262,11 +262,11 @@ typedef (<a id=the-messageevent-interface:windowproxy href=window-object.html#wi
   value it was initialized to. It represents, in <a id=the-messageevent-interface:web-messaging-7 href=web-messaging.html#web-messaging>cross-document messaging</a> and
   <a id=the-messageevent-interface:channel-messaging-3 href=web-messaging.html#channel-messaging>channel messaging</a>, the <code id=the-messageevent-interface:messageport-8><a href=web-messaging.html#messageport>MessagePort</a></code> array being sent.</p>
 
-  
+
   <p>The <dfn id=dom-messageevent-initmessageevent><code>initMessageEvent()</code></dfn>
   method must initialize the event in a manner analogous to the similarly-named <code id=the-messageevent-interface:dom-event-initevent><a data-x-internal=dom-event-initevent href=https://dom.spec.whatwg.org/#dom-event-initevent>initEvent()</a></code> method. <a href=references.html#refsDOM>[DOM]</a></p>
 
-  
+
 
   <p class=note>Various APIs (e.g., <code id=the-messageevent-interface:websocket><a href=web-sockets.html#websocket>WebSocket</a></code>, <code id=the-messageevent-interface:eventsource><a href=server-sent-events.html#eventsource>EventSource</a></code>) use the
   <code id=the-messageevent-interface:messageevent-3><a href=#messageevent>MessageEvent</a></code> interface for their <code id=the-messageevent-interface:event-message-2><a href=indices.html#event-message>message</a></code> event

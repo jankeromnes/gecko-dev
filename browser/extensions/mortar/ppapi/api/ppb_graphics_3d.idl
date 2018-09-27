@@ -22,7 +22,7 @@ label Chrome {
 /**
  * <code>PPB_Graphics3D</code> defines the interface for a 3D graphics context.
  * <strong>Example usage from plugin code:</strong>
- * 
+ *
  * <strong>Setup:</strong>
  * @code
  * PP_Resource context;

@@ -328,7 +328,7 @@ radix8fsGrpZeroSetLoop\name :
             VSUB    dVi7,dVi7,dT1
             SUB     pDst, pDst, step2                 @// set pDst to y1
 
-            @// On the last iteration,  this will read past the end of pSrc, 
+            @// On the last iteration,  this will read past the end of pSrc,
             @// so skip this read.
             BEQ     radix8SkipLastUpdateInv\name
             VLD2    {dXr7,dXi7},[pSrc, :128],setStep   @//  data[7]
@@ -370,7 +370,7 @@ radix8SkipLastUpdateInv\name:
             VSUB    dVr5,dT1,dVi5                     @// a * V5
             VADD    dVi5,dT1,dVi5
 
-            @// On the last iteration,  this will read past the end of pSrc, 
+            @// On the last iteration,  this will read past the end of pSrc,
             @// so skip this read.
             BEQ     radix8SkipLastUpdateFwd\name
             VLD2    {dXr7,dXi7},[pSrc, :128],setStep   @//  data[7]

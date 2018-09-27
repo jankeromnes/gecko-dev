@@ -1606,7 +1606,7 @@ JitcodeIonTable::WriteIonTable(CompactBufferWriter& writer,
     JitSpew(JitSpew_Profiling, "  ScriptList of size %d", int(scriptListSize));
     for (uint32_t i = 0; i < scriptListSize; i++) {
         JitSpew(JitSpew_Profiling, "  Script %d - %s:%u:%u",
-                int(i), scriptList[i]->filename(), 
+                int(i), scriptList[i]->filename(),
                 scriptList[i]->lineno(), scriptList[i]->column());
     }
 

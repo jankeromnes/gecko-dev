@@ -24,7 +24,7 @@ function testConvertibleObjectEqUndefined()
   return results.join("") + count;
 }
 
-assertEq(testConvertibleObjectEqUndefined(),  
+assertEq(testConvertibleObjectEqUndefined(),
 	 x4(false) + x4(false) + x4(false) + x4(false) + x4(false) + x4(false) +
 	 x4(false) + x4(false) + x4(false) + x4(false) + "20");
 

@@ -55,6 +55,6 @@ class Win32Window {
 
 }  // namespace rtc
 
-#endif  // WEBRTC_WIN 
+#endif  // WEBRTC_WIN
 
 #endif  // WEBRTC_BASE_WIN32WINDOW_H_

@@ -141,7 +141,7 @@ Thanks to all of the contributors for this release!
     scope), the task cannot capture anything from the current stack
     frame.
   - `ThreadPool::join()`, `ThreadPool::spawn()`, `ThreadPool::scope()`
-    -- convenience APIs for launching new work within a thread-pool. 
+    -- convenience APIs for launching new work within a thread-pool.
 - The various iterator adapters are now tagged with `#[must_use]`
 - Parallel iterators now offer a `for_each_with` adapter, similar to
   `map_with`.
@@ -259,8 +259,8 @@ supported in some capacity.
   better performance for some parallel iterators.
 - Strings now support `par_split()` and `par_split_whitespace()`.
 - The `Configuration` API is expanded and simplified:
-    - `num_threads(0)` no longer triggers an error 
-    - you can now supply a closure to name the Rayon threads that get created 
+    - `num_threads(0)` no longer triggers an error
+    - you can now supply a closure to name the Rayon threads that get created
       by using `Configuration::thread_name`.
     - you can now inject code when Rayon threads start up and finish
     - you can now set a custom panic handler to handle panics in various odd situations
@@ -347,7 +347,7 @@ API. Thanks @cuviper! Keep it up.
   We also support `min_by_key()` and `max_by_key()`. Thanks @tapeinosyne!
 - **Breaking change:** The `mul()` method is now renamed to `product()`,
   to match sequential iterators. Thanks @jonathandturner!
-- We now support parallel iterator over ranges on `u64` values. Thanks @cuviper!  
+- We now support parallel iterator over ranges on `u64` values. Thanks @cuviper!
 - We now offer a `par_chars()` method on strings for iterating over characters
   in parallel. Thanks @cuviper!
 - We now have new demos: a traveling salesman problem solver as well as matrix
@@ -383,7 +383,7 @@ API. Thanks @cuviper! Keep it up.
 - We now build with older versions of rustc again (thanks @durango!),
   as we removed a stray semicolon from `thread_local!`.
 - Various improvements to the (unstable) `scope()` API implementation.
-    
+
 # Release 0.4.3
 
 - Parallel iterators now offer an adaptive weight scheme,
@@ -397,7 +397,7 @@ API. Thanks @cuviper! Keep it up.
   - You will need to supply the [cargo feature] `unstable`.
 - The various demos and benchmarks have been consolidated into one
   program, `rayon-demo`.
-- Optimizations in Rayon's inner workings. Thanks @emilio!  
+- Optimizations in Rayon's inner workings. Thanks @emilio!
 - Update `num_cpus` to 1.0. Thanks @jamwt!
 - Various internal cleanup in the implementation and typo fixes.
   Thanks @cuviper, @Eh2406, and @spacejam!

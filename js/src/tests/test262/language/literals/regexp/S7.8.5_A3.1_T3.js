@@ -8,12 +8,12 @@ description: "IdentifierPart :: m"
 ---*/
 
 //CHECK#1
-var regexp = /(?:)/m; 
+var regexp = /(?:)/m;
 if (regexp.global !== false) {
   $ERROR('#1: var regexp = /(?:)/g; regexp.global === false. Actual: ' + (regexp.global));
 }
 
-//CHECK#2 
+//CHECK#2
 if (regexp.ignoreCase !== false) {
   $ERROR('#2: var regexp = /(?:)/g; regexp.ignoreCase === false. Actual: ' + (regexp.ignoreCase));
 }

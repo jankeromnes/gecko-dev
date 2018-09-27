@@ -11,9 +11,9 @@ function n() {
 function f(y) {
   for (var i = 0; i < 7; ++i) {
     var q;
-    q = function() { 
+    q = function() {
       appendToActual(y);
-      
+
       var m = 1;
       var z = function() {
 	appendToActual(m);

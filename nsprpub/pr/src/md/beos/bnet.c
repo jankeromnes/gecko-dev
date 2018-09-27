@@ -32,7 +32,7 @@ static PRMonitor *_pr_Xfe_mon = NULL;
 #define WRITE_FD    2
 
 /*
-** This is a support routine to handle "deferred" i/o on sockets. 
+** This is a support routine to handle "deferred" i/o on sockets.
 ** It uses "select", so it is subject to all of the BeOS limitations
 ** (only READ notification, only sockets)
 */
@@ -337,7 +337,7 @@ _MD_send (PRFileDesc *fd, const void *buf, PRInt32 amount, PRInt32 flags,
         }
     }
 #endif /* BONE_VERSION */
-    
+
     if (rv < 0) {
         _PR_MD_MAP_SEND_ERROR(err);
     }

@@ -8,7 +8,7 @@ public class LzmaBench
 {
 	static final int kAdditionalSize = (1 << 21);
 	static final int kCompressedAdditionalSize = (1 << 10);
-	
+
 	static class CRandomGenerator
 	{
 		int A1;
@@ -22,7 +22,7 @@ public class LzmaBench
 				((A2 = 18000 * (A2 & 0xffff) + (A2 >>> 16)));
 		}
 	};
-	
+
 	static class CBitRandomGenerator
 	{
 		CRandomGenerator RG = new CRandomGenerator();
@@ -52,7 +52,7 @@ public class LzmaBench
 			return result;
 		}
 	};
-	
+
 	static class CBenchRandomGenerator
 	{
 		CBitRandomGenerator RG = new CBitRandomGenerator();
@@ -110,18 +110,18 @@ public class LzmaBench
 			}
 		}
 	};
-	
+
 	static class CrcOutStream extends java.io.OutputStream
 	{
 		public CRC CRC = new CRC();
-		
+
 		public void Init()
-		{ 
-			CRC.Init(); 
+		{
+			CRC.Init();
 		}
 		public int GetDigest()
-		{ 
-			return CRC.GetDigest(); 
+		{
+			return CRC.GetDigest();
 		}
 		public void write(byte[] b)
 		{
@@ -142,25 +142,25 @@ public class LzmaBench
 		byte[] _buffer;
 		int _size;
 		int _pos;
-		
+
 		public MyOutputStream(byte[] buffer)
 		{
 			_buffer = buffer;
 			_size = _buffer.length;
 		}
-		
+
 		public void reset()
-		{ 
-			_pos = 0; 
+		{
+			_pos = 0;
 		}
-		
+
 		public void write(int b) throws IOException
 		{
 			if (_pos >= _size)
 				throw new IOException("Error");
 			_buffer[_pos++] = (byte)b;
 		}
-		
+
 		public int size()
 		{
 			return _pos;
@@ -172,18 +172,18 @@ public class LzmaBench
 		byte[] _buffer;
 		int _size;
 		int _pos;
-		
+
 		public MyInputStream(byte[] buffer, int size)
 		{
 			_buffer = buffer;
 			_size = size;
 		}
-		
+
 		public void reset()
-		{ 
-			_pos = 0; 
+		{
+			_pos = 0;
 		}
-		
+
 		public int read()
 		{
 			if (_pos >= _size)
@@ -191,7 +191,7 @@ public class LzmaBench
 			return _buffer[_pos++] & 0xFF;
 		}
 	};
-	
+
 	static class CProgressInfo implements ICodeProgress
 	{
 		public long ApprovedStart;
@@ -209,7 +209,7 @@ public class LzmaBench
 		}
 	}
 	static final int kSubBits = 8;
-	
+
 	static int GetLogSize(int size)
 	{
 		for (int i = kSubBits; i < 32; i++)
@@ -218,7 +218,7 @@ public class LzmaBench
 					return (i << kSubBits) + j;
 		return (32 << kSubBits);
 	}
-	
+
 	static long MyMultDiv64(long value, long elapsedTime)
 	{
 		long freq = 1000; // ms
@@ -232,7 +232,7 @@ public class LzmaBench
 			elTime = 1;
 		return value * freq / elTime;
 	}
-	
+
 	static long GetCompressRating(int dictionarySize, long elapsedTime, long size)
 	{
 		long t = GetLogSize(dictionarySize) - (18 << kSubBits);
@@ -240,13 +240,13 @@ public class LzmaBench
 		long numCommands = (long)(size) * numCommandsForOne;
 		return MyMultDiv64(numCommands, elapsedTime);
 	}
-	
+
 	static long GetDecompressRating(long elapsedTime, long outSize, long inSize)
 	{
 		long numCommands = inSize * 220 + outSize * 20;
 		return MyMultDiv64(numCommands, elapsedTime);
 	}
-	
+
 	static long GetTotalRating(
 			int dictionarySize,
 			long elapsedTimeEn, long sizeEn,
@@ -256,7 +256,7 @@ public class LzmaBench
 		return (GetCompressRating(dictionarySize, elapsedTimeEn, sizeEn) +
 				GetDecompressRating(elapsedTimeDe, inSizeDe, outSizeDe)) / 2;
 	}
-	
+
 	static void PrintValue(long v)
 	{
 		String s = "";
@@ -265,13 +265,13 @@ public class LzmaBench
 			System.out.print(" ");
 		System.out.print(s);
 	}
-	
+
 	static void PrintRating(long rating)
 	{
 		PrintValue(rating / 1000000);
 		System.out.print(" MIPS");
 	}
-	
+
 	static void PrintResults(
 			int dictionarySize,
 			long elapsedTime,
@@ -288,7 +288,7 @@ public class LzmaBench
 			rating = GetCompressRating(dictionarySize, elapsedTime, size);
 		PrintRating(rating);
 	}
-	
+
 	static public int LzmaBenchmark(int numIterations, int dictionarySize) throws Exception
 	{
 		if (numIterations <= 0)
@@ -299,21 +299,21 @@ public class LzmaBench
 			return 1;
 		}
 		System.out.print("\n       Compressing                Decompressing\n\n");
-		
+
 		SevenZip.Compression.LZMA.Encoder encoder = new SevenZip.Compression.LZMA.Encoder();
 		SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
-		
+
 		if (!encoder.SetDictionarySize(dictionarySize))
 			throw new Exception("Incorrect dictionary size");
-		
+
 		int kBufferSize = dictionarySize + kAdditionalSize;
 		int kCompressedBufferSize = (kBufferSize / 2) + kCompressedAdditionalSize;
-		
+
 		ByteArrayOutputStream propStream = new ByteArrayOutputStream();
 		encoder.WriteCoderProperties(propStream);
 		byte[] propArray = propStream.toByteArray();
 		decoder.SetDecoderProperties(propArray);
-		
+
 		CBenchRandomGenerator rg = new CBenchRandomGenerator();
 
 		rg.Set(kBufferSize);
@@ -321,15 +321,15 @@ public class LzmaBench
 		CRC crc = new CRC();
 		crc.Init();
 		crc.Update(rg.Buffer, 0, rg.BufferSize);
-		
+
 		CProgressInfo progressInfo = new CProgressInfo();
 		progressInfo.ApprovedStart = dictionarySize;
-		
+
 		long totalBenchSize = 0;
 		long totalEncodeTime = 0;
 		long totalDecodeTime = 0;
 		long totalCompressedSize = 0;
-		
+
 		MyInputStream inStream = new MyInputStream(rg.Buffer, rg.BufferSize);
 
 		byte[] compressedBuffer = new byte[kCompressedBufferSize];
@@ -344,7 +344,7 @@ public class LzmaBench
 			compressedStream.reset();
 			encoder.Code(inStream, compressedStream, -1, -1, progressInfo);
 			long encodeTime = System.currentTimeMillis() - progressInfo.Time;
-			
+
 			if (i == 0)
 			{
 				compressedSize = compressedStream.size();
@@ -352,7 +352,7 @@ public class LzmaBench
 			}
 			else if (compressedSize != compressedStream.size())
 				throw (new Exception("Encoding error"));
-				
+
 			if (progressInfo.InSize == 0)
 				throw (new Exception("Internal ERROR 1282"));
 
@@ -361,7 +361,7 @@ public class LzmaBench
 			{
 				inputCompressedStream.reset();
 				crcOutStream.Init();
-				
+
 				long outSize = kBufferSize;
 				long startTime = System.currentTimeMillis();
 				if (!decoder.Code(inputCompressedStream, crcOutStream, outSize))
@@ -375,7 +375,7 @@ public class LzmaBench
 			System.out.print("     ");
 			PrintResults(dictionarySize, decodeTime, kBufferSize, true, compressedSize);
 			System.out.println();
-			
+
 			totalBenchSize += benchSize;
 			totalEncodeTime += encodeTime;
 			totalDecodeTime += decodeTime;

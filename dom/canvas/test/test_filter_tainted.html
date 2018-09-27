@@ -109,7 +109,7 @@ function runTest() {
 
     var canvas = newCanvas();
     var ctx = canvas.getContext('2d');
-  
+
     // A CSS filter should not taint the canvas.
     ctx.filter = 'grayscale(100%)';
     ctx.fillStyle = 'green';
@@ -230,7 +230,7 @@ function runTest() {
     ctx.fill();
     checkCanvasPixel(canvas, 8,8, 255,0,0,255, 5);
     expectCanvasCtxToBeTainted(ctx);
-  
+
     // Create new untainted canvas.
     canvas = newCanvas();
     ctx = canvas.getContext('2d');
@@ -276,7 +276,7 @@ function runTest() {
     checkCanvasPixel(canvas, 4,12, 0,255,0,255, 1);
     checkCanvasPixel(canvas, 12,12, 0,255,0,255, 1);
     expectCanvasCtxToBeTainted(ctx);
-  
+
     // Create new untainted canvas.
     canvas = newCanvas();
     ctx = canvas.getContext('2d');
@@ -328,7 +328,7 @@ function runTest() {
     expectCanvasCtxToBeTainted(secondCtx);
 
     SimpleTest.finish();
-    
+
   });
 
 }

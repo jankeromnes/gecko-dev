@@ -37,8 +37,8 @@ extern "C" {
  *@ATK_HYPERLINK_IS_INLINE: Link is inline
  *
  *Describes the type of link
- **/ 
-typedef enum 
+ **/
+typedef enum
 {
   ATK_HYPERLINK_IS_INLINE = 1 << 0
 } AtkHyperlinkStateFlags;

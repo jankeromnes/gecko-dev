@@ -3,22 +3,22 @@
 //  Copyright (C) 2009 Mozilla Corporation
 //  Copyright (C) 1998-2007 Marti Maria
 //
-// Permission is hereby granted, free of charge, to any person obtaining 
-// a copy of this software and associated documentation files (the "Software"), 
-// to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, 
-// and/or sell copies of the Software, and to permit persons to whom the Software 
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the Software
 // is furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in 
+// The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
-// THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <stdlib.h>
@@ -334,7 +334,7 @@ static void qcms_transform_module_tetra_clut(struct qcms_modular_transform *tran
 				c2_b = CLU(b_table, x_n, y_n, z) - c0_b;
 				c3_b = CLU(b_table, x_n, y_n, z_n) - CLU(b_table, x_n, y_n, z);
 			} else {
-				if (ry >= rz) { //ry >= rz && rz > rx 
+				if (ry >= rz) { //ry >= rz && rz > rx
 					c1_r = CLU(r_table, x_n, y_n, z_n) - CLU(r_table, x, y_n, z_n);
 					c2_r = CLU(r_table, x, y_n, z) - c0_r;
 					c3_r = CLU(r_table, x, y_n, z_n) - CLU(r_table, x, y_n, z);
@@ -531,7 +531,7 @@ static void append_transform(struct qcms_modular_transform *transform, struct qc
 }
 
 /* reverse the transformation list (used by mBA) */
-static struct qcms_modular_transform* reverse_transform(struct qcms_modular_transform *transform) 
+static struct qcms_modular_transform* reverse_transform(struct qcms_modular_transform *transform)
 {
 	struct qcms_modular_transform *prev_transform = NULL;
 	while (transform != NULL) {
@@ -540,7 +540,7 @@ static struct qcms_modular_transform* reverse_transform(struct qcms_modular_tran
 		prev_transform = transform;
 		transform = next_transform;
 	}
-	
+
 	return prev_transform;
 }
 
@@ -555,9 +555,9 @@ static struct qcms_modular_transform* qcms_modular_transform_create_mAB(struct l
 		size_t clut_length;
 		float *clut;
 
-		// If the A curve is present this also implies the 
+		// If the A curve is present this also implies the
 		// presence of a CLUT.
-		if (!lut->clut_table) 
+		if (!lut->clut_table)
 			goto fail;
 
 		// Prepare A curve.
@@ -577,7 +577,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create_mAB(struct l
 
 		// Prepare CLUT
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform)
 			goto fail;
 		append_transform(transform, &next_transform);
 		clut_length = sizeof(float)*pow(lut->num_grid_points[0], 3)*3;
@@ -606,7 +606,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create_mAB(struct l
 
 		// Prepare Matrix
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform)
 			goto fail;
 		append_transform(transform, &next_transform);
 		transform->matrix = build_mAB_matrix(lut);
@@ -620,7 +620,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create_mAB(struct l
 	if (lut->b_curves[0] != NULL) {
 		// Prepare B curve
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform)
 			goto fail;
 		append_transform(transform, &next_transform);
 		transform->input_clut_table_r = build_input_gamma_table(lut->b_curves[0]);
@@ -655,7 +655,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create_lut(struct l
 
 	// Prepare Matrix
 	transform = qcms_modular_transform_alloc();
-	if (!transform) 
+	if (!transform)
 		goto fail;
 	append_transform(transform, &next_transform);
 	transform->matrix = build_lut_matrix(lut);
@@ -665,12 +665,12 @@ static struct qcms_modular_transform* qcms_modular_transform_create_lut(struct l
 
 	// Prepare input curves
 	transform = qcms_modular_transform_alloc();
-	if (!transform) 
+	if (!transform)
 		goto fail;
 	append_transform(transform, &next_transform);
 	in_curve_len = sizeof(float)*lut->num_input_table_entries * 3;
 	in_curves = malloc(in_curve_len);
-	if (!in_curves) 
+	if (!in_curves)
 		goto fail;
 	memcpy(in_curves, lut->input_table, in_curve_len);
 	transform->input_clut_table_r = in_curves + lut->num_input_table_entries * 0;
@@ -681,7 +681,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create_lut(struct l
 	// Prepare table
 	clut_length = sizeof(float)*pow(lut->num_clut_grid_points, 3)*3;
 	clut = malloc(clut_length);
-	if (!clut) 
+	if (!clut)
 		goto fail;
 	memcpy(clut, lut->clut_table, clut_length);
 	transform->r_clut = clut + 0;
@@ -692,7 +692,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create_lut(struct l
 	// Prepare output curves
 	out_curve_len = sizeof(float) * lut->num_output_table_entries * 3;
 	out_curves = malloc(out_curve_len);
-	if (!out_curves) 
+	if (!out_curves)
 		goto fail;
 	memcpy(out_curves, lut->output_table, out_curve_len);
 	transform->output_clut_table_r = out_curves + lut->num_output_table_entries * 0;
@@ -742,7 +742,7 @@ struct qcms_modular_transform* qcms_modular_transform_create_input(qcms_profile 
 		}
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform)
 			goto fail;
 		append_transform(transform, &next_transform);
 		transform->matrix.m[0][0] = 1/1.999969482421875f;
@@ -758,7 +758,7 @@ struct qcms_modular_transform* qcms_modular_transform_create_input(qcms_profile 
 		transform->transform_module_fn = qcms_transform_module_matrix;
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform)
 			goto fail;
 		append_transform(transform, &next_transform);
 		transform->matrix = build_colorant_matrix(in);
@@ -778,27 +778,27 @@ static struct qcms_modular_transform* qcms_modular_transform_create_output(qcms_
 	if (out->B2A0) {
 		struct qcms_modular_transform *lut_transform;
 		lut_transform = qcms_modular_transform_create_lut(out->B2A0);
-		if (!lut_transform) 
+		if (!lut_transform)
 			goto fail;
 		append_transform(lut_transform, &next_transform);
 	} else if (out->mBA && out->mBA->num_in_channels == 3 && out->mBA->num_out_channels == 3) {
 		struct qcms_modular_transform *lut_transform;
 		lut_transform = qcms_modular_transform_create_mAB(out->mBA);
-		if (!lut_transform) 
+		if (!lut_transform)
 			goto fail;
 		append_transform(lut_transform, &next_transform);
 	} else if (out->redTRC && out->greenTRC && out->blueTRC) {
 		struct qcms_modular_transform *transform;
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform)
 			goto fail;
 		append_transform(transform, &next_transform);
 		transform->matrix = matrix_invert(build_colorant_matrix(out));
 		transform->transform_module_fn = qcms_transform_module_matrix;
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform)
 			goto fail;
 		append_transform(transform, &next_transform);
 		transform->matrix.m[0][0] = 1.999969482421875f;
@@ -814,7 +814,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create_output(qcms_
 		transform->transform_module_fn = qcms_transform_module_matrix;
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform)
 			goto fail;
 		append_transform(transform, &next_transform);
 		build_output_lut(out->redTRC, &transform->output_gamma_lut_r,
@@ -852,7 +852,7 @@ static struct qcms_modular_transform* qcms_modular_transform_reduce(struct qcms_
 		if (curr_trans->transform_module_fn == qcms_transform_module_matrix) {
 			if (next_trans && next_trans->transform_module_fn == qcms_transform_module_matrix) {
 				curr_trans->matrix = matrix_multiply(curr_trans->matrix, next_trans->matrix);
-				goto remove_next;	
+				goto remove_next;
 			}
 		}
 		if (curr_trans->transform_module_fn == qcms_transform_module_gamma_table) {
@@ -865,7 +865,7 @@ static struct qcms_modular_transform* qcms_modular_transform_reduce(struct qcms_
 			}
 			goto remove_current;
 		}
-		
+
 next_transform:
 		if (!next_trans) break;
 		prev_trans = curr_trans;
@@ -900,7 +900,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create(qcms_profile
 	if (in->color_space == RGB_SIGNATURE) {
 		struct qcms_modular_transform* rgb_to_pcs;
 		rgb_to_pcs = qcms_modular_transform_create_input(in);
-		if (!rgb_to_pcs) 
+		if (!rgb_to_pcs)
 			goto fail;
 		append_transform(rgb_to_pcs, &next_transform);
 	} else {
@@ -911,7 +911,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create(qcms_profile
 	if (in->pcs == LAB_SIGNATURE && out->pcs == XYZ_SIGNATURE) {
 		struct qcms_modular_transform* lab_to_pcs;
 		lab_to_pcs = qcms_modular_transform_alloc();
-		if (!lab_to_pcs) 
+		if (!lab_to_pcs)
 			goto fail;
 		append_transform(lab_to_pcs, &next_transform);
 		lab_to_pcs->transform_module_fn = qcms_transform_module_LAB_to_XYZ;
@@ -921,7 +921,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create(qcms_profile
 	//if (in->chromaticAdaption.invalid == false) {
 	//	struct qcms_modular_transform* chromaticAdaption;
 	//	chromaticAdaption = qcms_modular_transform_alloc();
-	//	if (!chromaticAdaption) 
+	//	if (!chromaticAdaption)
 	//		goto fail;
 	//	append_transform(chromaticAdaption, &next_transform);
 	//	chromaticAdaption->matrix = matrix_invert(in->chromaticAdaption);
@@ -931,7 +931,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create(qcms_profile
         if (in->pcs == XYZ_SIGNATURE && out->pcs == LAB_SIGNATURE) {
 		struct qcms_modular_transform* pcs_to_lab;
 		pcs_to_lab = qcms_modular_transform_alloc();
-		if (!pcs_to_lab) 
+		if (!pcs_to_lab)
 			goto fail;
 		append_transform(pcs_to_lab, &next_transform);
 		pcs_to_lab->transform_module_fn = qcms_transform_module_XYZ_to_LAB;
@@ -940,7 +940,7 @@ static struct qcms_modular_transform* qcms_modular_transform_create(qcms_profile
 	if (out->color_space == RGB_SIGNATURE) {
 		struct qcms_modular_transform* pcs_to_rgb;
 		pcs_to_rgb = qcms_modular_transform_create_output(out);
-		if (!pcs_to_rgb) 
+		if (!pcs_to_rgb)
 			goto fail;
 		append_transform(pcs_to_rgb, &next_transform);
 	} else {

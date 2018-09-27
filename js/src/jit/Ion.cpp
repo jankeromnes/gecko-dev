@@ -2684,7 +2684,7 @@ jit::IonCompileScriptForBaseline(JSContext* cx, BaselineFrame* frame, jsbytecode
     // Ensure that Ion-compiled code is available.
     JitSpew(JitSpew_BaselineOSR,
             "WarmUpCounter for %s:%u:%u reached %d at pc %p, trying to switch to Ion!",
-            script->filename(), script->lineno(), script->column(), 
+            script->filename(), script->lineno(), script->column(),
             (int) script->getWarmUpCount(), (void*) pc);
 
     MethodStatus stat;
@@ -2795,7 +2795,7 @@ InvalidateActivation(FreeOp* fop, const JitActivationIterator& activations, bool
             JitSpew(JitSpew_IonInvalidate,
                     "#%zu %s JS frame @ %p, %s:%u:%u (fun: %p, script: %p, pc %p)",
                     frameno, type, frame.fp(), frame.script()->maybeForwardedFilename(),
-                    frame.script()->lineno(), frame.script()->column(), frame.maybeCallee(), 
+                    frame.script()->lineno(), frame.script()->column(), frame.maybeCallee(),
                     (JSScript*)frame.script(), frame.returnAddressToFp());
             break;
           }
@@ -2961,7 +2961,7 @@ jit::Invalidate(TypeZone& types, FreeOp* fop,
         }
 
         JitSpew(JitSpew_IonInvalidate, " Invalidate %s:%u:%u, IonScript %p",
-                info.script()->filename(), info.script()->lineno(), 
+                info.script()->filename(), info.script()->lineno(),
                 info.script()->column(), ionScript);
 
         // Keep the ion script alive during the invalidation and flag this
@@ -3057,7 +3057,7 @@ jit::Invalidate(JSContext* cx, JSScript* script, bool resetUses, bool cancelOffT
         }
 
         // Construct the descriptive string.
-        UniqueChars buf = JS_smprintf("Invalidate %s:%u:%u", filename, 
+        UniqueChars buf = JS_smprintf("Invalidate %s:%u:%u", filename,
                 script->lineno(), script->column());
 
         // Ignore the event on allocation failure.

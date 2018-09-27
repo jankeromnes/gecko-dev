@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "tablerow");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,7 +70,7 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The cells attribute specifies the collection of cells in this row.
 
     Retrieve the fourth TR element and examine the value of
@@ -88,7 +88,7 @@ function HTMLTableRowElement05() {
       var testNode;
       var vcells;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -102,7 +102,7 @@ testNode = nodeList.item(3);
       vcells = cellsnodeList.length;
 
       assertEquals("cellsLink",6,vcells);
-       
+
 }
 
 </script>
@@ -132,7 +132,7 @@ testNode = nodeList.item(3);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/tablerow.html"></iframe>
 <br>

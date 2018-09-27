@@ -27,7 +27,7 @@ function printpreview() {
   gWbp = window.frames[1].docShell.printPreview;
   var listener = {
     onLocationChange: function(webProgress, request, location, flags) { },
-    onProgressChange: function(webProgress, request, curSelfProgress, 
+    onProgressChange: function(webProgress, request, curSelfProgress,
                                maxSelfProgress, curTotalProgress,
                                maxTotalProgress) { },
     onSecurityChange: function(webProgress, request, state) { },

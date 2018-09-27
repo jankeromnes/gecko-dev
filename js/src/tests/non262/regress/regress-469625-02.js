@@ -27,6 +27,6 @@ function test()
   var [x, y, z] = ['x', , 'z'];
 
   actual = y;
- 
+
   reportCompare(expect, actual, summary);
 }

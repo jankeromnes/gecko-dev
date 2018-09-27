@@ -118,7 +118,7 @@ putComplexString(char *str)
 	}
 	size = strlen(str);
 
-	/* Allocate the new space.  This string will actually be too big, 
+	/* Allocate the new space.  This string will actually be too big,
 		since quotes and backslashes will be stripped out.  But that's ok. */
 	tmp = (char*) PR_Malloc(size+1);
 

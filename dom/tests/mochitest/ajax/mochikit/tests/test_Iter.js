@@ -8,8 +8,8 @@ tests.test_Iter = function (t) {
     t.is( compare(list(range(6, 0, -1)), [6, 5, 4, 3, 2, 1]), 0, "list(range(6, 0, -1)");
     t.is( compare(list(range(6)), [0, 1, 2, 3, 4, 5]), 0, "list(range(6))" );
     var moreThanTwo = partial(operator.lt, 2);
-    t.is( sum(ifilter(moreThanTwo, range(6))), 12, "sum(ifilter(, range()))" ); 
-    t.is( sum(ifilterfalse(moreThanTwo, range(6))), 3, "sum(ifilterfalse(, range()))" ); 
+    t.is( sum(ifilter(moreThanTwo, range(6))), 12, "sum(ifilter(, range()))" );
+    t.is( sum(ifilterfalse(moreThanTwo, range(6))), 3, "sum(ifilterfalse(, range()))" );
 
     var c = count(10);
     t.is( compare([c.next(), c.next(), c.next()], [10, 11, 12]), 0, "count()" );
@@ -96,7 +96,7 @@ tests.test_Iter = function (t) {
     }
     forEach(range(2), foo);
     t.is( compare(rval, [0, 1, 0, 1]), 0, "forEach works unbound" );
-    
+
     t.is( compare(sorted([3, 2, 1]), [1, 2, 3]), 0, "sorted default" );
     rval = sorted(["aaa", "bb", "c"], keyComparator("length"));
     t.is(compare(rval, ["c", "bb", "aaa"]), 0, "sorted custom");

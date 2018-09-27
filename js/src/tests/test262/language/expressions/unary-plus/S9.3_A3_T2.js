@@ -20,7 +20,7 @@ if (+(false) !== +0) {
 
 // CHECK#2
 if (+(true) !== 1) {
-  $ERROR('#2: +(true) === 1. Actual: ' + (+(true)));	
+  $ERROR('#2: +(true) === 1. Actual: ' + (+(true)));
 }
 
 reportCompare(0, 0);

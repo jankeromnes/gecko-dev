@@ -35,7 +35,7 @@ protected:
   CStdOutStream *_se;
 
   void CommonError(const FString &path, DWORD systemError, bool isWarning);
-  
+
   HRESULT ScanError_Base(const FString &path, DWORD systemError);
   HRESULT OpenFileError_Base(const FString &name, DWORD systemError);
   HRESULT ReadingFileError_Base(const FString &name, DWORD systemError);
@@ -58,7 +58,7 @@ public:
       PercentsNameLevel(1),
       LogLevel(0)
       {}
-  
+
   void SetWindowWidth(unsigned width) { _percent.MaxLen = width - 1; }
 
   void Init(CStdOutStream *outStream, CStdOutStream *errorStream, CStdOutStream *percentStream)
@@ -110,7 +110,7 @@ public:
       , AskPassword(false)
       #endif
       {}
-  
+
   /*
   void Init(CStdOutStream *outStream)
   {

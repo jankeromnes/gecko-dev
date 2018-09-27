@@ -16,7 +16,7 @@ AC_DEFUN([ICU_CHECK_MH_FRAG], [
 		[
 case "${host}" in
 *-*-solaris*)
-	if test "$GCC" = yes; then	
+	if test "$GCC" = yes; then
 		icu_cv_host_frag=mh-solaris-gcc
 	else
 		icu_cv_host_frag=mh-solaris
@@ -34,13 +34,13 @@ powerpc*-*-linux*)
 		icu_cv_host_frag=mh-linux-va
 	fi ;;
 *-*-linux*|*-*-gnu|*-*-k*bsd*-gnu|*-*-kopensolaris*-gnu) icu_cv_host_frag=mh-linux ;;
-i[[34567]]86-*-cygwin) 
+i[[34567]]86-*-cygwin)
 	if test "$GCC" = yes; then
 		icu_cv_host_frag=mh-cygwin
 	else
 		icu_cv_host_frag=mh-cygwin-msvc
 	fi ;;
-x86_64-*-cygwin) 
+x86_64-*-cygwin)
 	if test "$GCC" = yes; then
 		icu_cv_host_frag=mh-cygwin64
 	else
@@ -78,8 +78,8 @@ x86_64-*-cygwin)
 *-*-os400*)	icu_cv_host_frag=mh-os400 ;;
 *-apple-rhapsody*)	icu_cv_host_frag=mh-darwin ;;
 *-apple-darwin*)	icu_cv_host_frag=mh-darwin ;;
-*-*-beos)       icu_cv_host_frag=mh-beos ;; 
-*-*-haiku)      icu_cv_host_frag=mh-haiku ;; 
+*-*-beos)       icu_cv_host_frag=mh-beos ;;
+*-*-haiku)      icu_cv_host_frag=mh-haiku ;;
 *-*-irix*)	icu_cv_host_frag=mh-irix ;;
 *-dec-osf*) icu_cv_host_frag=mh-alpha-osf ;;
 *-*-nto*)	icu_cv_host_frag=mh-qnx ;;
@@ -136,7 +136,7 @@ AC_DEFUN([AC_CHECK_64BIT_LIBS],
     BITS_REQ=nochange
     ENABLE_64BIT_LIBS=unknown
     ## revisit this for cross-compile.
-    
+
     AC_ARG_ENABLE(64bit-libs,
         [  --enable-64bit-libs     (deprecated, use --with-library-bits) build 64-bit libraries [default= platform default]],
         [echo "note, use --with-library-bits instead of --*-64bit-libs"
@@ -146,7 +146,7 @@ AC_DEFUN([AC_CHECK_64BIT_LIBS],
             nochange) with_library_bits=nochange; ;;
             *) AC_MSG_ERROR(bad value ${enableval} for '--*-64bit-libs') ;;
             esac]    )
-    
+
 
     AC_ARG_WITH(library-bits,
         [  --with-library-bits=bits specify how many bits to use for the library (32, 64, 64else32, nochange) [default=nochange]],
@@ -155,7 +155,7 @@ AC_DEFUN([AC_CHECK_64BIT_LIBS],
             32|64|64else32) BITS_REQ=$withval ;;
             *) AC_MSG_ERROR(bad value ${withval} for --with-library-bits) ;;
             esac])
-        
+
     # don't use these for cross compiling
     if test "$cross_compiling" = "yes" -a "${BITS_REQ}" != "nochange"; then
         AC_MSG_ERROR([Don't specify bitness when cross compiling. See readme.html for help with cross compilation., and set compiler options manually.])
@@ -168,24 +168,24 @@ AC_DEFUN([AC_CHECK_64BIT_LIBS],
         *) DEFAULT_64BIT=unknown
     esac
     BITS_GOT=unknown
-    
+
     # 'OK' here means, we can exit any further checking, everything's copa
     BITS_OK=yes
 
     # do we need to check for buildable/runnable 32 or 64 bit?
     BITS_CHECK_32=no
     BITS_CHECK_64=no
-    
+
     # later, can we run the 32/64 bit binaries so made?
     BITS_RUN_32=no
     BITS_RUN_64=no
-    
+
     if test "$DEFAULT_64BIT" = "yes"; then
         # we get 64 bits by default.
         BITS_GOT=64
         case "$BITS_REQ" in
-            32) 
-                # need to look for 32 bit support. 
+            32)
+                # need to look for 32 bit support.
                 BITS_CHECK_32=yes
                 # not copa.
                 BITS_OK=no;;
@@ -216,7 +216,7 @@ AC_DEFUN([AC_CHECK_64BIT_LIBS],
             *) ;;
         esac
     fi
-            
+
     AC_MSG_RESULT($DEFAULT_64BIT);
 
     if test "$BITS_OK" != "yes"; then
@@ -224,18 +224,18 @@ AC_DEFUN([AC_CHECK_64BIT_LIBS],
         CFLAGS_OLD="${CFLAGS}"
         CXXFLAGS_OLD="${CXXFLAGS}"
         LDFLAGS_OLD="${LDFLAGS}"
-        ARFLAGS_OLD="${ARFLAGS}"        
-        
+        ARFLAGS_OLD="${ARFLAGS}"
+
         CFLAGS_32="${CFLAGS}"
         CXXFLAGS_32="${CXXFLAGS}"
         LDFLAGS_32="${LDFLAGS}"
-        ARFLAGS_32="${ARFLAGS}"        
-        
+        ARFLAGS_32="${ARFLAGS}"
+
         CFLAGS_64="${CFLAGS}"
         CXXFLAGS_64="${CXXFLAGS}"
         LDFLAGS_64="${LDFLAGS}"
-        ARFLAGS_64="${ARFLAGS}"        
-        
+        ARFLAGS_64="${ARFLAGS}"
+
         CAN_BUILD_64=unknown
         CAN_BUILD_32=unknown
         # These results can't be cached because is sets compiler flags.
@@ -251,7 +251,7 @@ AC_DEFUN([AC_CHECK_64BIT_LIBS],
             #    *FLAGS are assumed to contain the right settings for 64bit
             # else if CAN_BUILD_64=no: (default)
             #    *FLAGS are assumed to be trashed, and will be reset from *FLAGS_OLD
-            
+
             if test "$GCC" = yes; then
                 CFLAGS="${CFLAGS} -m64"
                 CXXFLAGS="${CXXFLAGS} -m64"
@@ -376,13 +376,13 @@ AC_DEFUN([AC_CHECK_64BIT_LIBS],
                 CFLAGS_64="${CFLAGS}"
                 CXXFLAGS_64="${CXXFLAGS}"
                 LDFLAGS_64="${LDFLAGS}"
-                ARFLAGS_64="${ARFLAGS}"        
+                ARFLAGS_64="${ARFLAGS}"
             fi
             # put it back.
             CFLAGS="${CFLAGS_OLD}"
             CXXFLAGS="${CXXFLAGS_OLD}"
             LDFLAGS="${LDFLAGS_OLD}"
-            ARFLAGS="${ARFLAGS_OLD}"     
+            ARFLAGS="${ARFLAGS_OLD}"
         fi
         if test "$BITS_CHECK_32" = "yes"; then
             # see comment under 'if BITS_CHECK_64', above.
@@ -402,41 +402,41 @@ AC_DEFUN([AC_CHECK_64BIT_LIBS],
                 CFLAGS_32="${CFLAGS}"
                 CXXFLAGS_32="${CXXFLAGS}"
                 LDFLAGS_32="${LDFLAGS}"
-                ARFLAGS_32="${ARFLAGS}"        
+                ARFLAGS_32="${ARFLAGS}"
             fi
             # put it back.
             CFLAGS="${CFLAGS_OLD}"
             CXXFLAGS="${CXXFLAGS_OLD}"
             LDFLAGS="${LDFLAGS_OLD}"
-            ARFLAGS="${ARFLAGS_OLD}"     
+            ARFLAGS="${ARFLAGS_OLD}"
         fi
-        
+
         ##
         # OK. Now, we've tested for 32 and 64 bitness. Let's see what we'll do.
         #
-        
+
         # First, implement 64else32
         if test "$BITS_REQ" = "64else32"; then
             if test "$BITS_RUN_64" = "yes"; then
                 BITS_REQ=64
             else
                 # no changes.
-                BITS_OK=yes 
+                BITS_OK=yes
             fi
         fi
-        
+
         # implement.
         if test "$BITS_REQ" = "32" -a "$BITS_RUN_32" = "yes"; then
             CFLAGS="${CFLAGS_32}"
             CXXFLAGS="${CXXFLAGS_32}"
             LDFLAGS="${LDFLAGS_32}"
-            ARFLAGS="${ARFLAGS_32}"     
+            ARFLAGS="${ARFLAGS_32}"
             BITS_OK=yes
         elif test "$BITS_REQ" = "64" -a "$BITS_RUN_64" = "yes"; then
             CFLAGS="${CFLAGS_64}"
             CXXFLAGS="${CXXFLAGS_64}"
             LDFLAGS="${LDFLAGS_64}"
-            ARFLAGS="${ARFLAGS_64}"     
+            ARFLAGS="${ARFLAGS_64}"
             BITS_OK=yes
         elif test "$BITS_OK" != "yes"; then
             AC_MSG_ERROR([Requested $BITS_REQ bit binaries but could not compile and execute them. See readme.html for help with cross compilation., and set compiler options manually.])
@@ -472,7 +472,7 @@ AC_DEFUN([AC_CHECK_STRICT_COMPILE],
                 CFLAGS="$CFLAGS -std=c11"
                 ;;
             esac
-            
+
             CFLAGS="$CFLAGS -Wall -pedantic -Wshadow -Wpointer-arith -Wmissing-prototypes -Wwrite-strings"
 
             # Suppress clang C warnings:

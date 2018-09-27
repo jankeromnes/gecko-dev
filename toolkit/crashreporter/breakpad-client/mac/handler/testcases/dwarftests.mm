@@ -47,11 +47,11 @@
   STAssertNotNil(dump, @"DumpSymbols is nil");
   [dump setArchitecture:@"i386"];
   [dump writeSymbolFile:outputBreakpadSymbolFile];
-  
+
   NSData *d = [[NSData alloc] initWithContentsOfFile:inputBreakpadSymbolFile];
   STAssertNotNil(d, @"Input breakpad symbol file not found");
-  
-  NSData *d1 = [[NSData alloc] initWithContentsOfFile:outputBreakpadSymbolFile]; 
+
+  NSData *d1 = [[NSData alloc] initWithContentsOfFile:outputBreakpadSymbolFile];
   STAssertNotNil(d1, @"Output breakpad symbol file not found");
 
   STAssertTrue([d isEqualToData:d1],

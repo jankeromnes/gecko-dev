@@ -37,13 +37,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,17 +73,17 @@ var docName = 'textsplittextnomodificationallowederr';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
-    The "splitText(offset)" method raises a 
+*
+    The "splitText(offset)" method raises a
     NO_MODIFICATION_ALLOWED_ERR DOMException if the
     node is readonly.
-     
+
     Obtain the children of the THIRD "gender" element.   The elements
     content is an entity reference.   Get the element content of the FIRST
     Text Node of the entity reference and execute the "splitText(offset)" method.
@@ -107,7 +107,7 @@ function textsplittextnomodificationallowederr() {
       var entElementText;
       var splitNode;
       var nodeType;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -120,7 +120,7 @@ function textsplittextnomodificationallowederr() {
       assertNotNull("entRefNotNull",entRef);
 nodeType = entRef.nodeType;
 
-      
+
 	if(
 	(1 == nodeType)
 	) {
@@ -154,12 +154,12 @@ entElementText = entElement.firstChild;
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/textsplittextnomodificationallowederr</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

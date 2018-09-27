@@ -23,5 +23,5 @@ try
 catch(ex)
 {
 }
- 
+
 reportCompare(expect, actual, summary);

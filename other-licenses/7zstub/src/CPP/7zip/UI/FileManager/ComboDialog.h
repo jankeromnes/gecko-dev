@@ -20,7 +20,7 @@ public:
   UString Static;
   UString Value;
   UStringVector Strings;
-  
+
   // CComboDialog(): Sorted(false) {};
   INT_PTR Create(HWND parentWindow = 0) { return CModalDialog::Create(IDD_COMBO, parentWindow); }
 };

@@ -16,15 +16,15 @@ pkix_pl_CrlDp_Destroy(
         void *plContext)
 {
     pkix_pl_CrlDp *crldp = NULL;
-    
+
     PKIX_ENTER(CRLCHECKER, "pkix_CrlDp_Destroy");
     PKIX_NULLCHECK_ONE(object);
-    
+
     /* Check that this object is a default CRL checker state */
     PKIX_CHECK(
         pkix_CheckType(object, PKIX_CRLDP_TYPE, plContext),
         PKIX_OBJECTNOTCRLCHECKER);
-    
+
     crldp = (pkix_pl_CrlDp *)object;
     if (crldp->distPointType == relativeDistinguishedName) {
         CERT_DestroyName(crldp->name.issuerName);

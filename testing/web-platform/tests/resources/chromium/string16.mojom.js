@@ -55,7 +55,7 @@ if ((typeof mojo !== 'undefined')  && mojo.internal && mojo.config) {
         return err;
 
 
-    
+
     // validate String16.data
     err = messageValidator.validateArrayPointer(offset + codec.kStructHeaderSize + 0, 2, codec.Uint16, false, [0], 0);
     if (err !== validator.validationError.NONE)
@@ -126,7 +126,7 @@ define("mojo/public/mojom/base/string16.mojom", [
         return err;
 
 
-    
+
     // validate String16.data
     err = messageValidator.validateArrayPointer(offset + codec.kStructHeaderSize + 0, 2, codec.Uint16, false, [0], 0);
     if (err !== validator.validationError.NONE)

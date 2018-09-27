@@ -10,7 +10,7 @@
     </vbox>
     <spacer flex="1"/>
   </hbox>
-  
+
   <!-- test code goes here -->
   <script type="application/javascript"><![CDATA[
     var imports = [ "SimpleTest", "is", "isnot", "ok", "snapshotWindow",

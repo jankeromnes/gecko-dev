@@ -68,7 +68,7 @@ function run_test() {
   for (var j = 0; j < perms.length; ++j) {
     pm.removePermission(perms[j]);
   }
-  
+
   // ... ensure each and every element is equal ...
   for (var i = 0; i < hosts.length; ++i) {
     for (var j = 0; j < perms.length; ++j) {

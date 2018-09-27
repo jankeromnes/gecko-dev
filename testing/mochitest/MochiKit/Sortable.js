@@ -101,65 +101,65 @@ MochiKit.Sortable.Sortable = {
     create: function (element, options) {
         element = MochiKit.DOM.getElement(element);
         var self = MochiKit.Sortable.Sortable;
-        
+
         /** @id MochiKit.Sortable.Sortable.options */
         options = MochiKit.Base.update({
-            
+
             /** @id MochiKit.Sortable.Sortable.element */
             element: element,
-            
+
             /** @id MochiKit.Sortable.Sortable.tag */
             tag: 'li',  // assumes li children, override with tag: 'tagname'
-            
+
             /** @id MochiKit.Sortable.Sortable.dropOnEmpty */
             dropOnEmpty: false,
-            
+
             /** @id MochiKit.Sortable.Sortable.tree */
             tree: false,
-            
+
             /** @id MochiKit.Sortable.Sortable.treeTag */
             treeTag: 'ul',
-            
+
             /** @id MochiKit.Sortable.Sortable.overlap */
             overlap: 'vertical',  // one of 'vertical', 'horizontal'
-            
+
             /** @id MochiKit.Sortable.Sortable.constraint */
             constraint: 'vertical',  // one of 'vertical', 'horizontal', false
             // also takes array of elements (or ids); or false
-            
+
             /** @id MochiKit.Sortable.Sortable.containment */
             containment: [element],
-            
+
             /** @id MochiKit.Sortable.Sortable.handle */
             handle: false,  // or a CSS class
-            
+
             /** @id MochiKit.Sortable.Sortable.only */
             only: false,
-            
+
             /** @id MochiKit.Sortable.Sortable.hoverclass */
             hoverclass: null,
-            
+
             /** @id MochiKit.Sortable.Sortable.ghosting */
             ghosting: false,
-            
+
             /** @id MochiKit.Sortable.Sortable.scroll */
             scroll: false,
-            
+
             /** @id MochiKit.Sortable.Sortable.scrollSensitivity */
             scrollSensitivity: 20,
-            
+
             /** @id MochiKit.Sortable.Sortable.scrollSpeed */
             scrollSpeed: 15,
-            
+
             /** @id MochiKit.Sortable.Sortable.format */
             format: /^[^_]*_(.*)$/,
-            
+
             /** @id MochiKit.Sortable.Sortable.onChange */
             onChange: MochiKit.Base.noop,
-            
+
             /** @id MochiKit.Sortable.Sortable.onUpdate */
             onUpdate: MochiKit.Base.noop,
-            
+
             /** @id MochiKit.Sortable.Sortable.accept */
             accept: null
         }, options);
@@ -280,7 +280,7 @@ MochiKit.Sortable.Sortable = {
     },
 
     // return all suitable-for-sortable elements in a guaranteed order
-    
+
     /** @id MochiKit.Sortable.Sortable.findElements */
     findElements: function (element, options) {
         return MochiKit.Sortable.Sortable.findChildren(
@@ -562,7 +562,7 @@ MochiKit.Sortable.Sortable = {
     },
 
     /**
-     * Serializes the content of a Sortable. Useful to send this content through a XMLHTTPRequest. 
+     * Serializes the content of a Sortable. Useful to send this content through a XMLHTTPRequest.
      * These options override the Sortable options for the serialization only.
      * @param {Node} element    Element to serialize.
      * @param {Object} options    Serialization options.

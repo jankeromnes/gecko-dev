@@ -31,7 +31,7 @@ public:
     // Given a nsISupports* primitive and the flavor it represents, creates a new data
     // buffer with the data in it. This data will be null terminated, but the length
     // parameter does not reflect that.
-  static void CreateDataFromPrimitive ( const nsACString& aFlavor, nsISupports* aPrimitive, 
+  static void CreateDataFromPrimitive ( const nsACString& aFlavor, nsISupports* aPrimitive,
                                          void** aDataBuff, uint32_t aDataLen ) ;
 
 }; // class nsPrimitiveHelpers

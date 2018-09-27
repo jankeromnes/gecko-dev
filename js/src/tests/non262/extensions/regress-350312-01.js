@@ -23,8 +23,8 @@ function test()
 
   function f()
   {
-    try {  
-      try {  
+    try {
+      try {
 	throw 1;
       } catch (e) {
 	throw e;

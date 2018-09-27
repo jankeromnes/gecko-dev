@@ -14,7 +14,7 @@ label Chrome {
 
 [macro="PPB_CURSOR_CONTROL_DEV_INTERFACE"]
 interface PPB_CursorControl_Dev {
-  /** 
+  /**
    * Set a cursor.  If "type" is PP_CURSORTYPE_CUSTOM, then "custom_image"
    * must be an ImageData resource containing the cursor and "hot_spot" must
    * contain the offset within that image that refers to the cursor's position.
@@ -52,7 +52,7 @@ interface PPB_CursorControl_Dev {
    */
   PP_Bool UnlockCursor([in] PP_Instance instance);
 
-  /** 
+  /**
    * Returns PP_TRUE if the cursor is locked, PP_FALSE otherwise.
    */
   PP_Bool HasCursorLock([in] PP_Instance instance);

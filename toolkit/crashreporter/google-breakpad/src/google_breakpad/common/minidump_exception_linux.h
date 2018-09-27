@@ -34,7 +34,7 @@
  *
  * Author: Mark Mentovai
  * Split into its own file: Neal Sidhwaney */
- 
+
 
 #ifndef GOOGLE_BREAKPAD_COMMON_MINIDUMP_EXCEPTION_LINUX_H__
 #define GOOGLE_BREAKPAD_COMMON_MINIDUMP_EXCEPTION_LINUX_H__

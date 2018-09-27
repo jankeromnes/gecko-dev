@@ -24,7 +24,7 @@ function test()
   expect = 'bar';
 
   f = function(){
-    var e = "bar"; 
+    var e = "bar";
     with({e:"foo"}) {
       var e = "wibble";
     };
@@ -37,7 +37,7 @@ function test()
   reportCompare(expect, actual, summary + ': with');
 
   f = function(){
-    var e = "bar"; 
+    var e = "bar";
     try
     {
       throw {e:"foo"};

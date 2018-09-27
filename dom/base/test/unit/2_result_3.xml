@@ -16,8 +16,8 @@
       molestie.</firefox>
     <?xml-foo "hey" ?>
   </bar>
-  <!-- a comment 
+  <!-- a comment
          on several lines-->
-  <?xml-foo "another pi on two lines"  
+  <?xml-foo "another pi on two lines"
               example="hello"?>
 </foo>

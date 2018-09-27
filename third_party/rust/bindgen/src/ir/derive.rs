@@ -124,7 +124,7 @@ pub trait CanTriviallyDerivePartialEqOrPartialOrd {
 }
 
 /// Whether it is possible or not to automatically derive trait for an item.
-/// 
+///
 /// ```ignore
 ///         No
 ///          ^
@@ -134,7 +134,7 @@ pub trait CanTriviallyDerivePartialEqOrPartialOrd {
 ///          |
 ///         Yes
 /// ```
-/// 
+///
 /// Initially we assume that we can derive trait for all types and then
 /// update our understanding as we learn more about each type.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Ord)]
@@ -144,7 +144,7 @@ pub enum CanDerive {
 
     /// The only thing that stops us from automatically deriving is that
     /// array with more than maximum number of elements is used.
-    /// 
+    ///
     /// This means we probably can "manually" implement such trait.
     ArrayTooLarge,
 

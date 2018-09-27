@@ -12,12 +12,12 @@ includes: [testIntl.js]
 
 testWithIntlConstructors(function (Constructor) {
     // undefined is handled separately
-    
+
     // null should result in a TypeError
     assert.throws(TypeError, function() {
         var supportedForNull = Constructor.supportedLocalesOf(null);
     }, "Null as locale list was not rejected.");
-    
+
     // let's use an empty list for comparison
     var supportedForEmptyList = Constructor.supportedLocalesOf([]);
     // we don't compare the elements because length should be 0 - let's just verify that

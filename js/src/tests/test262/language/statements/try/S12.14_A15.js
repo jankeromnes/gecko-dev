@@ -12,7 +12,7 @@ description: Insert try/catch/finally to switch statement
 // CHECK#1
 function SwitchTest1(value){
   var result = 0;
-  try{  
+  try{
     switch(value) {
       case 1:
         result += 4;
@@ -27,7 +27,7 @@ function SwitchTest1(value){
     }
     return result;
   }
-  catch(e){	
+  catch(e){
     if ((value===1)&&(e!==4)) $ERROR('#1.1: Exception ===4. Actual:  Exception ==='+ e  );
     if ((value===4)&&(e!=="ex")) $ERROR('#1.2: Exception ==="ex". Actual:  Exception ==='+ e  );
   }
@@ -44,7 +44,7 @@ function SwitchTest2(value){
   var result = 0;
   switch(value) {
     case 0:
-      try{  
+      try{
         result += 2;
         break;
       }
@@ -70,7 +70,7 @@ function SwitchTest3(value){
   var result = 0;
   switch(value) {
     case 0:
-      try{  
+      try{
         result += 2;
         throw "ex";
       }

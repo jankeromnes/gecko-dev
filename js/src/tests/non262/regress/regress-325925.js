@@ -15,5 +15,5 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 /[\cA]/.exec('\x01');
- 
+
 reportCompare(expect, actual, summary);

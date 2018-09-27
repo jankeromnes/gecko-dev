@@ -323,15 +323,15 @@ if (false) {
     var e3 = document.getElementById('1127835crash3');
     var t1 = e1.childNodes[0];
     var t3 = e3.childNodes[0];
-    
+
     var sel = window.getSelection();
     sel.removeAllRanges();
-  
+
     var r = document.createRange();
     r.setStart(t1, 1);
     r.setEnd(e2, 0);
     sel.addRange(r);
-  
+
     r = document.createRange();
     r.setStart(e2, 1);
     r.setEnd(t3, 0);
@@ -397,7 +397,7 @@ if (false) {
   testClipboardValue("text/unicode", "Xdiv12");
   testHtmlClipboardValue("text/html", "<div><p>X<span>div</span>12</p></div>");
   await new Promise(resolve => { setTimeout(resolve, 0); });
-  testSelectionToString("div12"); 
+  testSelectionToString("div12");
 
   await new Promise(resolve => { setTimeout(resolve, 0); });
 }

@@ -9,7 +9,7 @@ description: null convert to String by implicit transformation
 
 // CHECK#1
 if (null + "" !== "null") {
-  $ERROR('#1: null + "" === "null". Actual: ' + (null + "")); 
+  $ERROR('#1: null + "" === "null". Actual: ' + (null + ""));
 }
 
 reportCompare(0, 0);

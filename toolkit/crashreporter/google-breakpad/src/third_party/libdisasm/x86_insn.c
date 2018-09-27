@@ -33,7 +33,7 @@ uint32_t x86_get_address( x86_insn_t *insn ) {
 			return op_lst->op.data.absolute.offset.off32;
 		}
 	}
-	
+
 	return 0;
 }
 
@@ -50,7 +50,7 @@ int32_t x86_get_rel_offset( x86_insn_t *insn ) {
 			return op_lst->op.data.relative_far;
 		}
 	}
-	
+
 	return 0;
 }
 
@@ -65,7 +65,7 @@ x86_op_t * x86_get_branch_target( x86_insn_t *insn ) {
 			return &(op_lst->op);
 		}
 	}
-	
+
 	return NULL;
 }
 x86_op_t * x86_get_imm( x86_insn_t *insn ) {
@@ -79,13 +79,13 @@ x86_op_t * x86_get_imm( x86_insn_t *insn ) {
 			return &(op_lst->op);
 		}
 	}
-	
+
 	return NULL;
 }
 
 #define IS_PROPER_IMM( x ) \
 	x->op.type == op_immediate && ! (x->op.flags & op_hardcode)
-							   
+
 
 /* if there is an immediate value in the instruction, return a pointer to
  * it */
@@ -103,12 +103,12 @@ unsigned char * x86_get_raw_imm( x86_insn_t *insn ) {
 	} else if ( insn->operands->next ) {
 		if ( IS_PROPER_IMM( insn->operands->next ) ) {
 			op = &insn->operands->next->op;
-		} else if ( insn->operands->next->next && 
+		} else if ( insn->operands->next->next &&
 			    IS_PROPER_IMM( insn->operands->next->next ) ) {
 			op = &insn->operands->next->next->op;
 		}
 	}
-	
+
 	if (! op ) {
 		return( NULL );
 	}

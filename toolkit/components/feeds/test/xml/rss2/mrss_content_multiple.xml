@@ -9,8 +9,8 @@ Expect: var mcs = feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntr
 <channel>
 <item>
 
-<media:content fileSize="24986239" type="video/mpeg" url="http://dallas.example.com/joebob_1.mpeg" /> 
-<media:content fileSize="30000000" type="video/mpeg" url="http://dallas.example.com/joebob_2.mpeg" /> 
+<media:content fileSize="24986239" type="video/mpeg" url="http://dallas.example.com/joebob_1.mpeg" />
+<media:content fileSize="30000000" type="video/mpeg" url="http://dallas.example.com/joebob_2.mpeg" />
 
 <author>jbb@dallas.example.com (Joe Bob Briggs)</author>
 <comments>http://example.org</comments>

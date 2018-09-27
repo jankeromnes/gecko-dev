@@ -21,7 +21,7 @@ __func = function(arg1, arg2){
 	this.first=arg1;
 	var __obj={second:arg2};
     return __obj;
-	
+
 };
 
 __obj__ = new __func(__FRST, __SCND);

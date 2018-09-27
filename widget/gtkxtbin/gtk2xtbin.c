@@ -1,13 +1,13 @@
 /* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*-
  * vim: set expandtab shiftwidth=2 tabstop=2: */
- 
+
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
- 
+
 /*
  * The GtkXtBin widget allows for Xt toolkit code to be used
- * inside a GTK application.  
+ * inside a GTK application.
  */
 
 #include "xembed.h"
@@ -42,22 +42,22 @@ static void            gtk_xtbin_unrealize    (GtkWidget      *widget);
 static void            gtk_xtbin_destroy    (GtkObject      *object);
 
 /* Xt aware XEmbed */
-static void       xt_client_handle_xembed_message (Widget w, 
-                                                   XtPointer client_data, 
+static void       xt_client_handle_xembed_message (Widget w,
+                                                   XtPointer client_data,
                                                    XEvent *event);
 static void       xt_add_focus_listener( Widget w, XtPointer user_data );
-static void       xt_add_focus_listener_tree ( Widget treeroot, XtPointer user_data); 
+static void       xt_add_focus_listener_tree ( Widget treeroot, XtPointer user_data);
 static void       xt_remove_focus_listener(Widget w, XtPointer user_data);
 static void       xt_client_event_handler (Widget w, XtPointer client_data, XEvent *event);
 static void       xt_client_focus_listener (Widget w, XtPointer user_data, XEvent *event);
 static void       xt_client_set_info (Widget xtplug, unsigned long flags);
 static void       send_xembed_message (XtClient *xtclient,
-                                       long message, 
-                                       long detail, 
-                                       long data1, 
+                                       long message,
+                                       long detail,
+                                       long data1,
                                        long data2,
-                                       long time);  
-static int        error_handler       (Display *display, 
+                                       long time);
+static int        error_handler       (Display *display,
                                        XErrorEvent *error);
 /* For error trap of XEmbed */
 static void       trap_errors(void);
@@ -79,7 +79,7 @@ static guint            tag = 0;
 static gboolean
 xt_event_prepare (GSource*  source_data,
                    gint     *timeout)
-{   
+{
   int mask;
 
   mask = XPending(xtdisplay);
@@ -97,7 +97,7 @@ xt_event_check (GSource*  source_data)
   }
 
   return FALSE;
-}   
+}
 
 static gboolean
 xt_event_dispatch (GSource*  source_data,
@@ -118,7 +118,7 @@ xt_event_dispatch (GSource*  source_data,
     XtAppProcessEvent(ac, XtIMXEvent);
   }
 
-  return TRUE;  
+  return TRUE;
 }
 
 static GSourceFuncs xt_event_funcs = {
@@ -229,8 +229,8 @@ gtk_xtbin_realize (GtkWidget *widget)
   (*GTK_WIDGET_CLASS(parent_class)->realize)(widget);
 
   /* create the Xt client widget */
-  xt_client_create(&(xtbin->xtclient), 
-       gtk_socket_get_id(GTK_SOCKET(xtbin)), 
+  xt_client_create(&(xtbin->xtclient),
+       gtk_socket_get_id(GTK_SOCKET(xtbin)),
        h, w);
   xtbin->xtwindow = XtWindow(xtbin->xtclient.child_widget);
 
@@ -260,7 +260,7 @@ gtk_xtbin_new (GdkWindow *parent_window, String * f)
   /* Initialize the Xt toolkit */
   xtbin->parent_window = parent_window;
 
-  xt_client_init(&(xtbin->xtclient), 
+  xt_client_init(&(xtbin->xtclient),
       GDK_VISUAL_XVISUAL(gdk_rgb_get_visual()),
       GDK_COLORMAP_XCOLORMAP(gdk_rgb_get_colormap()),
       gdk_rgb_get_visual()->depth);
@@ -353,8 +353,8 @@ gtk_xtbin_destroy (GtkObject *object)
 
 /* Initial Xt plugin */
 void
-xt_client_init( XtClient * xtclient, 
-                Visual *xtvisual, 
+xt_client_init( XtClient * xtclient,
+                Visual *xtvisual,
                 Colormap xtcolormap,
                 int xtdepth)
 {
@@ -381,7 +381,7 @@ xt_client_init( XtClient * xtclient,
     if (fallback)
       XtAppSetFallbackResources(app_context, fallback);
 
-    xtdisplay = XtOpenDisplay(app_context, gdk_get_display(), NULL, 
+    xtdisplay = XtOpenDisplay(app_context, gdk_get_display(), NULL,
                             "Wrapper", NULL, 0, &mArgc, mArgv);
     if (xtdisplay)
       xt_is_initialized = TRUE;
@@ -425,11 +425,11 @@ xt_client_xloop_create(void)
     cnumber = ConnectionNumber(xtdisplay);
 #endif
     xt_event_poll_fd.fd = cnumber;
-    xt_event_poll_fd.events = G_IO_IN; 
+    xt_event_poll_fd.events = G_IO_IN;
     xt_event_poll_fd.revents = 0;    /* hmm... is this correct? */
 
-    g_main_context_add_poll ((GMainContext*)NULL, 
-                             &xt_event_poll_fd, 
+    g_main_context_add_poll ((GMainContext*)NULL,
+                             &xt_event_poll_fd,
                              G_PRIORITY_LOW);
     /* add a timer so that we can poll and process Xt timers */
     xt_polling_timer_id =
@@ -475,10 +475,10 @@ xt_client_get_display(void)
 /* Create the Xt client widgets
 *  */
 void
-xt_client_create ( XtClient* xtclient , 
-                   Window embedderid, 
-                   int height, 
-                   int width ) 
+xt_client_create ( XtClient* xtclient ,
+                   Window embedderid,
+                   int height,
+                   int width )
 {
   int           n;
   Arg           args[6];
@@ -488,9 +488,9 @@ xt_client_create ( XtClient* xtclient ,
 #ifdef DEBUG_XTBIN
   printf("xt_client_create() \n");
 #endif
-  top_widget = XtAppCreateShell("drawingArea", "Wrapper", 
-                                applicationShellWidgetClass, 
-                                xtclient->xtdisplay, 
+  top_widget = XtAppCreateShell("drawingArea", "Wrapper",
+                                applicationShellWidgetClass,
+                                xtclient->xtdisplay,
                                 NULL, 0);
   xtclient->top_widget = top_widget;
 
@@ -500,8 +500,8 @@ xt_client_create ( XtClient* xtclient ,
   XtSetArg(args[n], XtNwidth,    width);n++;
   XtSetValues(top_widget, args, n);
 
-  child_widget = XtVaCreateWidget("form", 
-                                  compositeWidgetClass, 
+  child_widget = XtVaCreateWidget("form",
+                                  compositeWidgetClass,
                                   top_widget, NULL);
 
   n = 0;
@@ -519,7 +519,7 @@ xt_client_create ( XtClient* xtclient ,
 
   /* this little trick seems to finish initializing the widget */
 #if XlibSpecificationRelease >= 6
-  XtRegisterDrawable(xtclient->xtdisplay, 
+  XtRegisterDrawable(xtclient->xtdisplay,
                      embedderid,
                      top_widget);
 #else
@@ -529,8 +529,8 @@ xt_client_create ( XtClient* xtclient ,
   XtRealizeWidget(child_widget);
 
   /* listen to all Xt events */
-  XSelectInput(xtclient->xtdisplay, 
-               embedderid, 
+  XSelectInput(xtclient->xtdisplay,
+               embedderid,
                XtBuildEventMask(top_widget));
   xt_client_set_info (child_widget, 0);
 
@@ -540,12 +540,12 @@ xt_client_create ( XtClient* xtclient ,
   /* set the event handler */
   XtAddEventHandler(child_widget,
                     StructureNotifyMask | KeyPressMask,
-                    TRUE, 
+                    TRUE,
                     (XtEventHandler)xt_client_event_handler, xtclient);
-  XtAddEventHandler(child_widget, 
-                    SubstructureNotifyMask | ButtonReleaseMask, 
+  XtAddEventHandler(child_widget,
+                    SubstructureNotifyMask | ButtonReleaseMask,
                     FALSE,
-                    (XtEventHandler)xt_client_focus_listener, 
+                    (XtEventHandler)xt_client_focus_listener,
                     xtclient);
   XSync(xtclient->xtdisplay, FALSE);
 }
@@ -574,25 +574,25 @@ xt_client_unrealize ( XtClient* xtclient )
   XtUnrealizeWidget(xtclient->top_widget);
 }
 
-void            
+void
 xt_client_destroy   (XtClient* xtclient)
 {
   if(xtclient->top_widget) {
     XtRemoveEventHandler(xtclient->child_widget,
                          StructureNotifyMask | KeyPressMask,
-                         TRUE, 
+                         TRUE,
                          (XtEventHandler)xt_client_event_handler, xtclient);
     XtDestroyWidget(xtclient->top_widget);
     xtclient->top_widget = NULL;
   }
 }
 
-void         
+void
 xt_client_set_info (Widget xtplug, unsigned long flags)
 {
   unsigned long buffer[2];
 
-  Atom infoAtom = XInternAtom(XtDisplay(xtplug), "_XEMBED_INFO", False); 
+  Atom infoAtom = XInternAtom(XtDisplay(xtplug), "_XEMBED_INFO", False);
 
   buffer[1] = 0;                /* Protocol version */
   buffer[1] = flags;
@@ -652,7 +652,7 @@ xt_client_handle_xembed_message(Widget w, XtPointer client_data, XEvent *event)
 
       xevent.xfocus.window = XtWindow(xtplug->child_widget);
       xevent.xfocus.display = XtDisplay(xtplug->child_widget);
-      XSendEvent(XtDisplay(xtplug->child_widget), 
+      XSendEvent(XtDisplay(xtplug->child_widget),
                  xevent.xfocus.window,
                  False, NoEventMask,
                  &xevent );
@@ -664,11 +664,11 @@ xt_client_handle_xembed_message(Widget w, XtPointer client_data, XEvent *event)
   } /* End of XEmbed Message */
 }
 
-void         
+void
 xt_client_event_handler( Widget w, XtPointer client_data, XEvent *event)
 {
   XtClient *xtplug = (XtClient*)client_data;
-  
+
   switch(event->type)
     {
     case ClientMessage:
@@ -700,12 +700,12 @@ xt_client_event_handler( Widget w, XtPointer client_data, XEvent *event)
 static void
 send_xembed_message (XtClient  *xtclient,
                      long      message,
-                     long      detail, 
-                     long      data1,  
-                     long      data2,  
-                     long      time)   
+                     long      detail,
+                     long      data1,
+                     long      data2,
+                     long      time)
 {
-  XEvent xevent; 
+  XEvent xevent;
   Window w=XtWindow(xtclient->top_widget);
   Display* dpy=xtclient->xtdisplay;
   int errorcode;
@@ -715,9 +715,9 @@ send_xembed_message (XtClient  *xtclient,
   xevent.xclient.type = ClientMessage;
   xevent.xclient.message_type = XInternAtom(dpy,"_XEMBED",False);
   xevent.xclient.format = 32;
-  xevent.xclient.data.l[0] = time; 
+  xevent.xclient.data.l[0] = time;
   xevent.xclient.data.l[1] = message;
-  xevent.xclient.data.l[2] = detail; 
+  xevent.xclient.data.l[2] = detail;
   xevent.xclient.data.l[3] = data1;
   xevent.xclient.data.l[4] = data2;
 
@@ -732,21 +732,21 @@ send_xembed_message (XtClient  *xtclient,
   }
 }
 
-static int             
+static int
 error_handler(Display *display, XErrorEvent *error)
 {
   trapped_error_code = error->error_code;
   return 0;
 }
 
-static void          
+static void
 trap_errors(void)
 {
   trapped_error_code =0;
   old_error_handler = XSetErrorHandler(error_handler);
 }
 
-static int         
+static int
 untrap_error(void)
 {
   XSetErrorHandler(old_error_handler);
@@ -758,7 +758,7 @@ untrap_error(void)
   return trapped_error_code;
 }
 
-void         
+void
 xt_client_focus_listener( Widget w, XtPointer user_data, XEvent *event)
 {
   Display *dpy = XtDisplay(w);
@@ -809,10 +809,10 @@ xt_add_focus_listener( Widget w, XtPointer user_data)
   XtClient *xtclient = user_data;
 
   trap_errors ();
-  XtAddEventHandler(w, 
-                    SubstructureNotifyMask | ButtonReleaseMask, 
-                    FALSE, 
-                    (XtEventHandler)xt_client_focus_listener, 
+  XtAddEventHandler(w,
+                    SubstructureNotifyMask | ButtonReleaseMask,
+                    FALSE,
+                    (XtEventHandler)xt_client_focus_listener,
                     xtclient);
   untrap_error();
 }
@@ -821,14 +821,14 @@ static void
 xt_remove_focus_listener(Widget w, XtPointer user_data)
 {
   trap_errors ();
-  XtRemoveEventHandler(w, SubstructureNotifyMask | ButtonReleaseMask, FALSE, 
+  XtRemoveEventHandler(w, SubstructureNotifyMask | ButtonReleaseMask, FALSE,
                       (XtEventHandler)xt_client_focus_listener, user_data);
 
   untrap_error();
 }
 
 static void
-xt_add_focus_listener_tree ( Widget treeroot, XtPointer user_data) 
+xt_add_focus_listener_tree ( Widget treeroot, XtPointer user_data)
 {
   Window win = XtWindow(treeroot);
   Window *children;
@@ -845,12 +845,12 @@ xt_add_focus_listener_tree ( Widget treeroot, XtPointer user_data)
     return;
   }
 
-  if(untrap_error()) 
+  if(untrap_error())
     return;
 
   for(i=0; i<nchildren; ++i) {
     Widget child = XtWindowToWidget(dpy, children[i]);
-    if (child) 
+    if (child)
       xt_add_focus_listener_tree( child, user_data);
   }
   XFree((void*)children);

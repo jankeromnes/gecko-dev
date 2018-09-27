@@ -475,7 +475,7 @@ PKIX_Error_Create(
  * FUNCTION: PKIX_Error_GetErrorClass
  * DESCRIPTION:
  *
- *  Retrieves the error class of the Error pointed to by "error" and 
+ *  Retrieves the error class of the Error pointed to by "error" and
  *  stores it at "pClass". Supported error codes are defined in pkixt.h.
  *
  * PARAMETERS:
@@ -502,7 +502,7 @@ PKIX_Error_GetErrorClass(
  * FUNCTION: PKIX_Error_GetErrorCode
  * DESCRIPTION:
  *
- *  Retrieves the error code of the Error pointed to by "error" and 
+ *  Retrieves the error code of the Error pointed to by "error" and
  *  stores it at "pCode". Supported error codes are defined in pkixt.h.
  *
  * PARAMETERS:

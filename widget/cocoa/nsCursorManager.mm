@@ -203,7 +203,7 @@ static const nsCursor sCustomCursor = eCursorCount;
     NS_IF_RELEASE(sCursorImgContainer);
   }
   return NS_OK;
-  
+
   NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
 }
 
@@ -235,7 +235,7 @@ static const nsCursor sCustomCursor = eCursorCount;
   }
 
   return NS_OK;
-  
+
   NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
 }
 
@@ -269,14 +269,14 @@ static const nsCursor sCustomCursor = eCursorCount;
   NSPoint hotSpot = ::NSMakePoint(aHotspotX, aHotspotY);
   [self setMacCursor:[nsMacCursor cursorWithCursor:[[NSCursor alloc] initWithImage:cursorImage hotSpot:hotSpot] type:sCustomCursor]];
   [cursorImage release];
-  
+
   NS_IF_RELEASE(sCursorImgContainer);
   sCursorImgContainer = aCursorImage;
   sCursorScaleFactor = scaleFactor;
   NS_ADDREF(sCursorImgContainer);
-  
+
   return NS_OK;
-  
+
   NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
 }
 

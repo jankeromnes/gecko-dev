@@ -15,7 +15,7 @@ description: >
 function __func(arg1, arg2, arg3){return arg1+=(arg2+=arg3);};
 
 //////////////////////////////////////////////////////////////////////////////
-//CHECK#1 
+//CHECK#1
 if (typeof __func !== "function") {
 	$ERROR('#1: typeof __func === "function". Actual: typeof __func ==='+typeof __func);
 }

@@ -6,7 +6,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 //! Parsing C literals from byte slices.
-//! 
+//!
 //! This will parse a representation of a C literal into a Rust type.
 //!
 //! # characters

@@ -143,7 +143,7 @@ gfxTextRun::AllocateStorageForTextRun(size_t aSize, uint32_t aLength)
 already_AddRefed<gfxTextRun>
 gfxTextRun::Create(const gfxTextRunFactory::Parameters *aParams,
                    uint32_t aLength, gfxFontGroup *aFontGroup,
-                   gfx::ShapedTextFlags aFlags, 
+                   gfx::ShapedTextFlags aFlags,
                    nsTextFrameUtils::Flags aFlags2)
 {
     void *storage = AllocateStorageForTextRun(sizeof(gfxTextRun), aLength);
@@ -2351,7 +2351,7 @@ gfxFontGroup::MakeTextRun(const uint8_t *aString, uint32_t aLength,
 already_AddRefed<gfxTextRun>
 gfxFontGroup::MakeTextRun(const char16_t *aString, uint32_t aLength,
                           const Parameters *aParams,
-                          gfx::ShapedTextFlags aFlags, 
+                          gfx::ShapedTextFlags aFlags,
                           nsTextFrameUtils::Flags aFlags2,
                           gfxMissingFontRecorder *aMFR)
 {

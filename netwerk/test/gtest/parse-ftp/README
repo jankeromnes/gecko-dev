@@ -9,7 +9,7 @@ Testcases for the following:
 - EPLF (Easily Parsable List Format)
 - '/bin/dls' (two known variants, plus multi-line) LIST format
 - '/bin/ls -l' and all variants (even if they are not SYST UNIX)
-  including 
+  including
    - Hellsoft FTP for NetWare (non-unix perm-bits)
    - Hethmon Brothers FTP for OS/2 (all '-' perm bits)
    - NetPresenz (SYST is "MACOS")

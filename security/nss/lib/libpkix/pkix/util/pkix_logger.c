@@ -36,7 +36,7 @@ PKIX_List *pkixLoggers = NULL;
  *     PKIX_ERROR() macro invokes pkix_Logger_Check of ERROR level
  *     WARNING is not invoked as default
  *     PKIX_DEBUG() macro invokes pkix_Logger_Check of DEBUG level. This needs
- *         compilation -DPKIX_<component>DEBUG flag to turn on 
+ *         compilation -DPKIX_<component>DEBUG flag to turn on
  *     PKIX_ENTER() and PKIX_RETURN() macros invoke pkix_Logger_Check of TRACE
  *         level. TRACE provides duplicate information of DEBUG, but needs no
  *         recompilation and cannot choose component. To allow application
@@ -58,8 +58,8 @@ PKIX_PL_MonitorLock *pkixLoggerLock = NULL;
  *  This function goes through each PKIX_Logger at "pkixLoggersList" and
  *  checks if "maxLevel" and "logComponent" satisfies what is specified in the
  *  PKIX_Logger. If satisfies, it invokes the callback in PKIX_Logger and
- *  passes a PKIX_PL_String that is the concatenation of "message" and 
- *  "message2" to the application for processing. 
+ *  passes a PKIX_PL_String that is the concatenation of "message" and
+ *  "message2" to the application for processing.
  *  Since this call is inserted into a handful of PKIX macros, no macros are
  *  applied in this function, to avoid infinite recursion.
  *  If an error occurs, this call is aborted.
@@ -188,13 +188,13 @@ pkix_Logger_Check(
                      * avoid logging the higher log level (lower value) twice.
                      */
                     if (pkixLoggersList == pkixLoggersErrors) {
-                            needLogging = needLogging && 
+                            needLogging = needLogging &&
                                 (currentLevel <= PKIX_LOGGER_LEVEL_WARNING);
                     } else if (pkixLoggersList == pkixLoggersDebugTrace) {
-                            needLogging = needLogging && 
+                            needLogging = needLogging &&
                                 (currentLevel > PKIX_LOGGER_LEVEL_WARNING);
                     }
-                
+
                     if (needLogging) {
                         if (logComponent == logger->logComponent) {
                             needLogging = PKIX_TRUE;
@@ -250,9 +250,9 @@ cleanup:
 
         if (pkixLoggersErrors == NULL && savedPkixLoggersErrors != NULL) {
                 pkixLoggersErrors = savedPkixLoggersErrors;
-        } 
+        }
 
-        if (pkixLoggersDebugTrace == NULL && 
+        if (pkixLoggersDebugTrace == NULL &&
            savedPkixLoggersDebugTrace != NULL) {
                 pkixLoggersDebugTrace = savedPkixLoggersDebugTrace;
         }
@@ -445,7 +445,7 @@ pkix_Logger_Equals(
                 goto cleanup;
         }
 
-        PKIX_EQUALS  
+        PKIX_EQUALS
                 (firstLogger->context,
                 secondLogger->context,
                 &cmpResult,
@@ -534,7 +534,7 @@ pkix_Logger_Duplicate(
 
         dupLogger->callback = logger->callback;
         dupLogger->maxLevel = logger->maxLevel;
-        
+
         PKIX_DUPLICATE
                     (logger->context,
                     &dupLogger->context,
@@ -913,7 +913,7 @@ PKIX_SetLoggers(
                                 plContext),
                                 PKIX_LISTCREATEFAILED);
                     }
-        
+
                     PKIX_CHECK(PKIX_List_AppendItem
                             (savedPkixLoggersErrors,
                             (PKIX_PL_Object *) dupLogger,
@@ -931,7 +931,7 @@ PKIX_SetLoggers(
                                     plContext),
                                     PKIX_LISTCREATEFAILED);
                         }
-        
+
                         PKIX_CHECK(PKIX_List_AppendItem
                                 (savedPkixLoggersDebugTrace,
                                 (PKIX_PL_Object *) dupLogger,
@@ -1040,13 +1040,13 @@ PKIX_AddLogger(
                                     plContext),
                                     PKIX_LISTCREATEFAILED);
                 }
-        
+
                 PKIX_CHECK(PKIX_List_AppendItem
                         (savedPkixLoggersErrors,
                         (PKIX_PL_Object *) addLogger,
                         plContext),
                         PKIX_LISTAPPENDITEMFAILED);
-                            
+
                 if (addLogger->maxLevel > PKIX_LOGGER_LEVEL_WARNING) {
 
                         /* Put in pkixLoggersDebugTrace */

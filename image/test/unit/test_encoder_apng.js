@@ -372,7 +372,7 @@ function run_test() {
 
 	dump("Checking apng3...\n");
 	run_test_for(apng3);
-}; 
+};
 
 
 function run_test_for(input) {

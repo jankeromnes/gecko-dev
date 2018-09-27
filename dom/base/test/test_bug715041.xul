@@ -243,8 +243,8 @@ target="_blank">Mozilla Bug 715041</a>
         idleServiceObj.testIdleBackService(idleObserversArray[1], "active");
         return;
       }
-      
-      if (msg1Count === 2 && !msg2Count && !msg3Count && !msg4Count && !msg5Count) {        
+
+      if (msg1Count === 2 && !msg2Count && !msg3Count && !msg4Count && !msg5Count) {
         idleServiceObj.idleTime = 1000;
         idleServiceObj.testIdleBackService(idleObserversArray[1], "idle");
         return;
@@ -255,7 +255,7 @@ target="_blank">Mozilla Bug 715041</a>
       }
       ok(false, "Failed test active to active notification.");
       SimpleTest.finish();
-      break;  
+      break;
     default:
       break;
     }
@@ -386,7 +386,7 @@ target="_blank">Mozilla Bug 715041</a>
       }
       ok(passed, "Failed TestActiveToActiveNotification.");
           TestActiveNotificationCleanUp();
-      break;  
+      break;
     default:
       //do nothing.
       break;
@@ -689,7 +689,7 @@ target="_blank">Mozilla Bug 715041</a>
     else {
       dump("Finished testing AddNewLocalWhileAllIdle()\n");
       SimpleTest.finish();
-    }   
+    }
   }
 
   function TestActiveNotification()
@@ -704,7 +704,7 @@ target="_blank">Mozilla Bug 715041</a>
     window.navigator.addIdleObserver(idleObserversArray[1]);
     window.navigator.addIdleObserver(idleObserversArray[5]);
     idleServiceObj.idleTime = 1000;
-    idleServiceObj.testIdleBackService(idleObserversArray[1], "idle");    
+    idleServiceObj.testIdleBackService(idleObserversArray[1], "idle");
   }
 
   function TestActiveNotificationCleanUp()
@@ -807,7 +807,7 @@ target="_blank">Mozilla Bug 715041</a>
   TestActiveToActiveNotificationEnabled = true;
   AddShiftLocalEnabled = true;
   AddIdleObserverWithInvalidTimeEnabled = false;
-  
+
   SpecialPowers.pushPrefEnv({"set":[['dom.idle-observers-api.fuzz_time.disabled', true]]}, caseZero);
     ]]>
     </script>

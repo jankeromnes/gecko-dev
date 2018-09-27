@@ -153,7 +153,7 @@ pkix_pl_PublicKey_Destroy(
 
             PKIX_CHECK(pkix_pl_DestroySPKI(pubKey->nssSPKI, plContext),
                        PKIX_DESTROYSPKIFAILED);
-            
+
             PKIX_FREE(pubKey->nssSPKI);
         }
 

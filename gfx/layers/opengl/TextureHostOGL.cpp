@@ -383,7 +383,7 @@ DirectMapTextureSource::Sync(bool aBlocking)
                                             LOCAL_GL_SYNC_FLUSH_COMMANDS_BIT,
                                             aBlocking ? LOCAL_GL_TIMEOUT_IGNORED : 0);
   return waitResult == LOCAL_GL_ALREADY_SIGNALED ||
-         waitResult == LOCAL_GL_CONDITION_SATISFIED; 
+         waitResult == LOCAL_GL_CONDITION_SATISFIED;
 }
 
 bool

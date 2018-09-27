@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!--
 
-Description: entry published works 
+Description: entry published works
 Expect:      feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntry).published == 'Sat, 07 Sep 2002 00:00:01 GMT'
 
 -->

@@ -2,7 +2,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
- 
+
 #include "nsDecodeAppleFile.h"
 #include "nsCRT.h"
 
@@ -25,7 +25,7 @@ nsDecodeAppleFile::nsDecodeAppleFile()
   m_totalDataForkWritten = 0;
   m_totalResourceForkWritten = 0;
   m_headerOk = false;
-  
+
   m_comment[0] = 0;
   memset(&m_dates, 0, sizeof(m_dates));
   memset(&m_finderInfo, 0, sizeof(m_dates));
@@ -43,7 +43,7 @@ nsDecodeAppleFile::~nsDecodeAppleFile()
 NS_IMETHODIMP nsDecodeAppleFile::Initialize(nsIOutputStream *output, nsIFile *file)
 {
   m_output = output;
-  
+
   nsCOMPtr<nsILocalFileMac> macFile = do_QueryInterface(file);
   macFile->GetTargetFSSpec(&m_fsFileSpec);
 
@@ -62,7 +62,7 @@ NS_IMETHODIMP nsDecodeAppleFile::Close(void)
 
   if (m_rfRefNum != -1)
     FSClose(m_rfRefNum);
-    
+
   /* Check if the file is complete and if it's the case, write file attributes */
   if (m_headerOk)
   {
@@ -84,12 +84,12 @@ NS_IMETHODIMP nsDecodeAppleFile::Close(void)
         resourceOk = (bool)(m_totalResourceForkWritten == m_entries[i].length);
         break;
       }
-      
+
     if (dataOk && resourceOk)
     {
       HFileInfo *fpb;
       CInfoPBRec cipbr;
-      
+
       fpb = (HFileInfo *) &cipbr;
       fpb->ioVRefNum = m_fsFileSpec.vRefNum;
       fpb->ioDirID   = m_fsFileSpec.parID;
@@ -101,16 +101,16 @@ NS_IMETHODIMP nsDecodeAppleFile::Close(void)
       memcpy(&fpb->ioFlFndrInfo, &m_finderInfo, sizeof (FInfo));
       memcpy(&fpb->ioFlXFndrInfo, &m_finderExtraInfo, sizeof (FXInfo));
       fpb->ioFlFndrInfo.fdFlags &= 0xfc00; /* clear flags maintained by finder */
-      
+
       /* set file dates */
       fpb->ioFlCrDat = m_dates.create - CONVERT_TIME;
       fpb->ioFlMdDat = m_dates.modify - CONVERT_TIME;
       fpb->ioFlBkDat = m_dates.backup - CONVERT_TIME;
-    
+
       /* update file info */
       fpb->ioDirID = fpb->ioFlParID;
       PBSetCatInfoSync(&cipbr);
-      
+
       /* set comment */
       IOParam vinfo;
       GetVolParmsInfoBuffer vp;
@@ -120,17 +120,17 @@ NS_IMETHODIMP nsDecodeAppleFile::Close(void)
       vinfo.ioVRefNum = fpb->ioVRefNum;
       vinfo.ioBuffer  = (Ptr) &vp;
       vinfo.ioReqCount = sizeof (vp);
-      if (PBHGetVolParmsSync((HParmBlkPtr) &vinfo) == noErr && ((vp.vMAttrib >> bHasDesktopMgr) & 1)) 
+      if (PBHGetVolParmsSync((HParmBlkPtr) &vinfo) == noErr && ((vp.vMAttrib >> bHasDesktopMgr) & 1))
       {
         memset((void *) &dtp, 0, sizeof (dtp));
         dtp.ioVRefNum = fpb->ioVRefNum;
-        if (PBDTGetPath(&dtp) == noErr) 
+        if (PBDTGetPath(&dtp) == noErr)
         {
           dtp.ioDTBuffer = (Ptr) &m_comment[1];
           dtp.ioNamePtr  = fpb->ioNamePtr;
           dtp.ioDirID    = fpb->ioDirID;
           dtp.ioDTReqCount = m_comment[0];
-          if (PBDTSetCommentSync(&dtp) == noErr) 
+          if (PBDTSetCommentSync(&dtp) == noErr)
             PBDTFlushSync(&dtp);
         }
       }
@@ -143,7 +143,7 @@ NS_IMETHODIMP nsDecodeAppleFile::Close(void)
 NS_IMETHODIMP nsDecodeAppleFile::Flush(void)
 {
   return m_output->Flush();
-} 
+}
 
 NS_IMETHODIMP nsDecodeAppleFile::WriteFrom(nsIInputStream *inStr, uint32_t count, uint32_t *_retval)
 {
@@ -171,7 +171,7 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
   nsresult rv = NS_OK;
 
   *writeCount = 0;
-  
+
   while (bufferSize > 0 && NS_SUCCEEDED(rv))
   {
     switch (m_state)
@@ -182,13 +182,13 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
           dataCount = bufferSize;
         memcpy(&m_dataBuffer[m_dataBufferLength], buffPtr, dataCount);
         m_dataBufferLength += dataCount;
-        
+
         if (m_dataBufferLength == sizeof(ap_header))
         {
           memcpy(&m_headers, m_dataBuffer, sizeof(ap_header));
 
           /* Check header to be sure we are dealing with the right kind of data, else just write it to the data fork. */
-          if ((m_headers.magic == APPLEDOUBLE_MAGIC || m_headers.magic == APPLESINGLE_MAGIC) && 
+          if ((m_headers.magic == APPLEDOUBLE_MAGIC || m_headers.magic == APPLESINGLE_MAGIC) &&
               m_headers.version == VERSION && m_headers.entriesCount)
           {
             /* Just to be sure, the filler must contains only 0 */
@@ -198,7 +198,7 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
               m_state = parseEntries;
           }
           m_dataBufferLength = 0;
-          
+
           if (m_state == parseHeaders)
           {
             dataCount = 0;
@@ -206,7 +206,7 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
           }
         }
         break;
-      
+
       case parseEntries :
         if (!m_entries)
         {
@@ -233,11 +233,11 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
                 m_dataForkOffset = offset;
             }
           }
-          m_headerOk = true;          
+          m_headerOk = true;
           m_state = parseLookupPart;
         }
         break;
-      
+
       case parseLookupPart :
         /* which part are we parsing? */
         m_currentPartID = -1;
@@ -259,12 +259,12 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
                   m_dataBufferLength = 0;
                   m_state = parsePart;
                   break;
-                
+
                 default           : m_state = parseSkipPart;           break;
               }
               break;
           }
-          
+
         if (m_currentPartID == -1)
         {
           /* maybe is the datafork of an appledouble file? */
@@ -277,16 +277,16 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
           }
           else
             dataCount = 1;
-        }        
+        }
         break;
-      
+
       case parsePart :
         dataCount = m_currentPartLength - m_dataBufferLength;
         if (dataCount > bufferSize)
           dataCount = bufferSize;
         memcpy(&m_dataBuffer[m_dataBufferLength], buffPtr, dataCount);
         m_dataBufferLength += dataCount;
-        
+
         if (m_dataBufferLength == m_currentPartLength)
         {
           switch (m_currentPartID)
@@ -310,7 +310,7 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
           m_state = parseLookupPart;
         }
         break;
-      
+
       case parseSkipPart :
         dataCount = m_currentPartLength - m_currentPartCount;
         if (dataCount > bufferSize)
@@ -318,7 +318,7 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
         else
           m_state = parseLookupPart;
         break;
-      
+
       case parseDataFork :
         if (m_headers.magic == APPLEDOUBLE_MAGIC)
           dataCount = bufferSize;
@@ -330,7 +330,7 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
           else
             m_state = parseLookupPart;
         }
-        
+
         if (m_output)
         {
           uint32_t writeCount;
@@ -339,28 +339,28 @@ NS_IMETHODIMP nsDecodeAppleFile::Write(const char *buffer, uint32_t bufferSize, 
             rv = NS_ERROR_FAILURE;
           m_totalDataForkWritten += dataCount;
         }
-        
+
         break;
-      
+
       case parseResourceFork :
         dataCount = m_currentPartLength - m_currentPartCount;
         if (dataCount > bufferSize)
           dataCount = bufferSize;
         else
           m_state = parseLookupPart;
-        
+
         if (m_rfRefNum == -1)
         {
           if (noErr != FSpOpenRF(&m_fsFileSpec, fsWrPerm, &m_rfRefNum))
             return NS_ERROR_FAILURE;
         }
-        
+
         long count = dataCount;
         if (noErr != FSWrite(m_rfRefNum, &count, buffPtr) || count != dataCount)
             return NS_ERROR_FAILURE;
         m_totalResourceForkWritten += dataCount;
         break;
-      
+
       case parseWriteThrough :
         dataCount = bufferSize;
         if (m_output)

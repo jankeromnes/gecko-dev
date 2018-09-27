@@ -15,7 +15,7 @@ pub trait ResultExt<T, E> {
     /// # }
     /// #
     /// # #[cfg(not(all(feature = "std", feature = "derive")))] mod tests { pub fn run_test() { } }
-    /// #  
+    /// #
     /// # #[cfg(all(feature = "std", feature = "derive"))] mod tests {
     /// use std::error::Error;
     /// # use std::fmt;
@@ -86,7 +86,7 @@ pub trait ResultExt<T, E> {
     /// struct CustomError;
     /// #
     /// # pub fn run_test() {
-    ///  
+    ///
     /// let x = (|| -> Result<(), failure::Error> {
     ///     Err(CustomError)?
     /// })().context(format!("An error occured")).unwrap_err();

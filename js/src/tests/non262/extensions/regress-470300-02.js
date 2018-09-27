@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
   for (let a = 0; a < 7; ++a) { let e = 8; if (a > 3) { let x; } }
 

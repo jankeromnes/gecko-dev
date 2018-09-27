@@ -521,7 +521,7 @@ interface nsIBrowserSearchService : nsISupports
   nsISearchParseSubmissionResult parseSubmissionURL(in AString url);
 
   /**
-   * Determines if a URL is related to search and if so, records the 
+   * Determines if a URL is related to search and if so, records the
    * appropriate telemtry.
    *
    * @param url

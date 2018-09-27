@@ -472,7 +472,7 @@ _cairo_beos_surface_create_similar (void            *abstract_surface,
 	default:
 	    assert(0);
 	    return NULL;
-	    
+
     };
     BView* view = new BView(rect, "Cairo bitmap view", B_FOLLOW_ALL_SIDES, 0);
     bmp->AddChild(view);

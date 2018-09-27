@@ -3,7 +3,7 @@
 
 /*---
 info: |
-    Refer 11.1.5; 
+    Refer 11.1.5;
     The production
     PropertyNameAndValueList :  PropertyNameAndValueList , PropertyAssignment
     4. If previous is not undefined then throw a SyntaxError exception if any of the following conditions are true

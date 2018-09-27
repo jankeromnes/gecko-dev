@@ -21,5 +21,5 @@ catch(ex) {
   printStatus(ex);
   actual = ex instanceof SyntaxError;
 }
- 
+
 reportCompare(expect, actual, summary);

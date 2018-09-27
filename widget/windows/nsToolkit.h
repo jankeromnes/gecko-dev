@@ -24,7 +24,7 @@
  * Wrapper around the thread running the message pump.
  * The toolkit abstraction is necessary because the message pump must
  * execute within the same thread that created the widget under Win32.
- */ 
+ */
 
 class nsToolkit
 {

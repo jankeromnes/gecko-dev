@@ -23,7 +23,7 @@ locales.forEach(function (locale) {
         "cu": ["USD", "EUR", "JPY", "CNY", "TWD", "invalid"],
         "nu": ["native", "traditio", "finance", "invalid"]
     };
-    
+
     Object.getOwnPropertyNames(keyValues).forEach(function (key) {
         keyValues[key].forEach(function (value) {
             var numberFormat = new Intl.NumberFormat([locale + "-u-" + key + "-" + value]);

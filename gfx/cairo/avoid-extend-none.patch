@@ -13,10 +13,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
 @@ -1390,25 +1390,16 @@ static pixman_image_t *
  	cairo_image_surface_t *source = (cairo_image_surface_t *) pattern->surface;
  	cairo_surface_type_t type;
- 
+
  	if (source->base.backend->type == CAIRO_INTERNAL_SURFACE_TYPE_SNAPSHOT)
  	    source = (cairo_image_surface_t *) ((cairo_surface_snapshot_t *) pattern->surface)->target;
- 
+
  	type = source->base.backend->type;
  	if (type == CAIRO_SURFACE_TYPE_IMAGE) {
 -	    if (extend != CAIRO_EXTEND_NONE &&

@@ -1,6 +1,6 @@
-/** 
+/**
  * Test for Bug 493881: Changes to legacy HTML color properties before the BODY is loaded
- * should be ignored. Additionally, after BODY loads, setting any of these properties to undefined 
+ * should be ignored. Additionally, after BODY loads, setting any of these properties to undefined
  * should cause them to be returned as the string "undefined".
  */
 
@@ -38,7 +38,7 @@ addLoadEvent( function() {
   for (var i = 0; i < legacyProps.length; i++) {
     is(document[legacyProps[i]], initialValues[i], "document[" + legacyProps[i] + "] altered after body load");
   }
-  
+
   // Verify that legacy color properties applied before BODY are really ignored when rendering.
   // Save current computed style colors for later use.
   for (i = 0; i < idPropList.length; i++) {
@@ -49,21 +49,21 @@ addLoadEvent( function() {
   }
   // XXX: Can't get links to visually activate via script events, so can't verify
   // that the alinkColor property was not applied.
-  
+
   // Verify that setting legacy color props to undefined after BODY loads will cause them
   // to be read as the string "undefined".
   for (var i = 0; i < legacyProps.length; i++) {
     document[legacyProps[i]] = undefined;
-    is(document[legacyProps[i]], "undefined", 
+    is(document[legacyProps[i]], "undefined",
       "Unexpected value of " + legacyProps[i] + " after setting to undefined");
   }
-  
+
   // Verify that setting legacy color props to undefined led to result
   // of parsing undefined as a color.
   for (i = 0; i < idPropList.length; i++) {
     var style = window.getComputedStyle(document.getElementById(idPropList[i].id));
     var color = style.getPropertyValue(idPropList[i].prop);
-    is(color, "rgb(0, 239, 14)", 
+    is(color, "rgb(0, 239, 14)",
       "element's style should get result of parsing undefined as a color");
   }
 

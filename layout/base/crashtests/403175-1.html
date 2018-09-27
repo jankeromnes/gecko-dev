@@ -7,7 +7,7 @@ var i = 0;
 function boom()
 {
   ++i;
-  
+
   while (document.body.firstChild)
     document.body.firstChild.remove();
 
@@ -15,7 +15,7 @@ function boom()
   document.body.appendChild(table);
   document.documentElement.style.color = (i % 2) ? "red" : "magenta";
   table.setAttribute("align", "right");
-  
+
   setTimeout(boom, 15);
 }
 

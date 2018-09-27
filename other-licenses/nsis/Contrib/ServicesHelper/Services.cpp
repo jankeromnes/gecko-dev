@@ -5,7 +5,7 @@
 #include <windows.h>
 #include "../../../../toolkit/mozapps/update/common/pathhash.h"
 
-#pragma comment(lib, "advapi32.lib") 
+#pragma comment(lib, "advapi32.lib")
 
 typedef struct _stack_t {
   struct _stack_t *next;
@@ -19,7 +19,7 @@ void pushstring(stack_t **stacktop, LPCTSTR str, int len);
  * Determines if the specified service exists or not
  *
  * @param  serviceName The name of the service to check
- * @param  exists      Whether or not the service exists 
+ * @param  exists      Whether or not the service exists
  * @return TRUE if there were no errors
  */
 static BOOL
@@ -28,24 +28,24 @@ IsServiceInstalled(LPCWSTR serviceName, BOOL &exists)
   exists = FALSE;
 
   // Get a handle to the local computer SCM database with full access rights.
-  SC_HANDLE serviceManager = OpenSCManager(NULL, NULL, 
+  SC_HANDLE serviceManager = OpenSCManager(NULL, NULL,
                                            SC_MANAGER_ENUMERATE_SERVICE);
   if (!serviceManager) {
     return FALSE;
   }
 
-  SC_HANDLE serviceHandle = OpenServiceW(serviceManager, 
-                                         serviceName, 
+  SC_HANDLE serviceHandle = OpenServiceW(serviceManager,
+                                         serviceName,
                                          SERVICE_QUERY_CONFIG);
   if (!serviceHandle && GetLastError() != ERROR_SERVICE_DOES_NOT_EXIST) {
     CloseServiceHandle(serviceManager);
     return FALSE;
   }
- 
+
   if (serviceHandle) {
     CloseServiceHandle(serviceHandle);
     exists = TRUE;
-  } 
+  }
 
   CloseServiceHandle(serviceManager);
   return TRUE;
@@ -53,7 +53,7 @@ IsServiceInstalled(LPCWSTR serviceName, BOOL &exists)
 
 /**
  * Determines if the specified service is installed or not
- * 
+ *
  * @param  stacktop  A pointer to the top of the stack
  * @param  variables A pointer to the NSIS variables
  * @return 0 if the service does not exist
@@ -61,7 +61,7 @@ IsServiceInstalled(LPCWSTR serviceName, BOOL &exists)
  *         -1 if there was an error.
  */
 extern "C" void __declspec(dllexport)
-IsInstalled(HWND hwndParent, int string_size, 
+IsInstalled(HWND hwndParent, int string_size,
             TCHAR *variables, stack_t **stacktop, void *extra)
 {
   TCHAR tmp[MAX_PATH] = { L'\0' };
@@ -84,22 +84,22 @@ IsInstalled(HWND hwndParent, int string_size,
 
 /**
  * Stops the specified service.
- * 
+ *
  * @param  serviceName The name of the service to stop
- * @return TRUE if the operation was successful 
+ * @return TRUE if the operation was successful
  */
 static BOOL
 StopService(LPCWSTR serviceName)
 {
   // Get a handle to the local computer SCM database with full access rights.
-  SC_HANDLE serviceManager = OpenSCManager(NULL, NULL, 
+  SC_HANDLE serviceManager = OpenSCManager(NULL, NULL,
                                            SC_MANAGER_ENUMERATE_SERVICE);
   if (!serviceManager) {
     return FALSE;
   }
 
-  SC_HANDLE serviceHandle = OpenServiceW(serviceManager, 
-                                         serviceName, 
+  SC_HANDLE serviceHandle = OpenServiceW(serviceManager,
+                                         serviceName,
                                          SERVICE_STOP);
   if (!serviceHandle) {
     CloseServiceHandle(serviceManager);
@@ -133,13 +133,13 @@ StopService(LPCWSTR serviceName)
 
 /**
  * Stops the specified service
- * 
+ *
  * @param  stacktop  A pointer to the top of the stack
- * @param  variables A pointer to the NSIS variables 
+ * @param  variables A pointer to the NSIS variables
  * @return 1 if the service was stopped, 0 on error
  */
 extern "C" void __declspec(dllexport)
-Stop(HWND hwndParent, int string_size, 
+Stop(HWND hwndParent, int string_size,
      TCHAR *variables, stack_t **stacktop, void *extra)
 {
   TCHAR tmp[MAX_PATH] = { L'\0' };
@@ -162,14 +162,14 @@ Stop(HWND hwndParent, int string_size,
 
 /**
  * Determines a unique registry path from a file or directory path
- * 
+ *
  * @param  stacktop  A pointer to the top of the stack
- * @param  variables A pointer to the NSIS variables 
+ * @param  variables A pointer to the NSIS variables
  * @return The unique registry path or an empty string on error
  */
 extern "C" void __declspec(dllexport)
-PathToUniqueRegistryPath(HWND hwndParent, int string_size, 
-                         TCHAR *variables, stack_t **stacktop, 
+PathToUniqueRegistryPath(HWND hwndParent, int string_size,
+                         TCHAR *variables, stack_t **stacktop,
                          void *extra)
 {
   TCHAR tmp[MAX_PATH] = { L'\0' };
@@ -190,7 +190,7 @@ PathToUniqueRegistryPath(HWND hwndParent, int string_size,
   }
 }
 
-BOOL WINAPI 
+BOOL WINAPI
 DllMain(HANDLE hInst, ULONG ul_reason_for_call, LPVOID lpReserved)
 {
   return TRUE;
@@ -230,7 +230,7 @@ int popstring(stack_t **stacktop, TCHAR *str, int len)
 void pushstring(stack_t **stacktop, const TCHAR *str, int len)
 {
   stack_t *th;
-  if (!stacktop) { 
+  if (!stacktop) {
     return;
   }
 

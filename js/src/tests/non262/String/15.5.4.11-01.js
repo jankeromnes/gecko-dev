@@ -12,7 +12,7 @@ print(BUGNUMBER + ": " + summary);
  * BEGIN TEST *
  **************/
 
-/* 
+/*
  * Check that regexp statics are preserved across the whole test.
  * If the engine is trying to cheat by turning stuff into regexps,
  * we should catch it!

@@ -6,7 +6,7 @@ description: >
     Object.is ( value1, value2 )
 
     7.2.9 SameValue(x, y)
-    
+
     ...
     3. If Type(x) is different from Type(y), return false.
     ...

@@ -11,7 +11,7 @@ var expect = 'No error';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 options('strict');
 options('werror');
 

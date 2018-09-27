@@ -26,7 +26,7 @@
  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
 <title>SunSpider 1.0.1 JavaScript Benchmark (sunspider-1.0.1 test suite - In Progress...)</title>
@@ -52,17 +52,17 @@ for (var i = 0; i < output.length; i++) {
     output[i] = {};
 }
 
-function start() 
+function start()
 {
     window.setTimeout(reallyNext, 500);
 }
 
-function next() 
+function next()
 {
     window.setTimeout(reallyNext, 0);
 }
 
-function reallyNext() 
+function reallyNext()
 {
     document.getElementById("frameparent").innerHTML = "";
     document.getElementById("frameparent").innerHTML = "<iframe id='testframe'>";
@@ -72,7 +72,7 @@ function reallyNext()
         testFrame.contentDocument.open();
         testFrame.contentDocument.write(testContents[testIndex]);
         testFrame.contentDocument.close();
-    } else if (++currentRepeat < repeatCount) { 
+    } else if (++currentRepeat < repeatCount) {
         testIndex = 0;
         testFrame.contentDocument.open();
         testFrame.contentDocument.write(testContents[testIndex]);

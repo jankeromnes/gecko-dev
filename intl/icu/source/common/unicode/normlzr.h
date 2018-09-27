@@ -14,10 +14,10 @@
 #include "unicode/utypes.h"
 
 /**
- * \file 
+ * \file
  * \brief C++ API: Unicode Normalization
  */
- 
+
 #if !UCONFIG_NO_NORMALIZATION
 
 #include "unicode/chariter.h"

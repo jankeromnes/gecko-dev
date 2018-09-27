@@ -17,10 +17,10 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
-  
+
 
   for (var j=0; j<4; ++j) { var a = ["", ""]; a[0] * a[1]; }
- 
+
 
   reportCompare(expect, actual, summary);
 }

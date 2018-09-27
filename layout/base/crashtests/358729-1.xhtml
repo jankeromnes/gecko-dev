@@ -7,18 +7,18 @@ var HTML_NS = "http://www.w3.org/1999/xhtml";
 
 function foo()
 {
-  var DIVa = document.getElementById('a'); 
+  var DIVa = document.getElementById('a');
 
-  var DIVb = document.createElementNS(HTML_NS, 'div'); 
-  DIVb.appendChild(document.createTextNode('DIVb')); 
+  var DIVb = document.createElementNS(HTML_NS, 'div');
+  DIVb.appendChild(document.createTextNode('DIVb'));
   DIVa.appendChild(DIVb);
-  
-  document.body.offsetHeight; 
-  
-  var DIVc = document.createElementNS(HTML_NS, 'div'); 
+
+  document.body.offsetHeight;
+
+  var DIVc = document.createElementNS(HTML_NS, 'div');
   DIVc.appendChild(document.createTextNode('DIVc'));
   DIVb.appendChild(DIVc);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

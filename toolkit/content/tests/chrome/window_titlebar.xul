@@ -69,8 +69,8 @@ function waitForWindowMove(element, x, y, callback, arg, panel, anchored)
     synthesizeMouse(element, x, y, { type: "mousemove" });
   }
 
-  var newx = isPanelMove ? panel.getBoundingClientRect().left : window.screenX; 
-  var newy = isPanelMove ? panel.getBoundingClientRect().top : window.screenY; 
+  var newx = isPanelMove ? panel.getBoundingClientRect().left : window.screenX;
+  var newy = isPanelMove ? panel.getBoundingClientRect().top : window.screenY;
   if (newx == oldx && newy == oldy) {
     if (waitSteps++ > 10) {
       SimpleTest.is(window.screenX + "," + window.screenY, oldx + "," + oldy + " ",

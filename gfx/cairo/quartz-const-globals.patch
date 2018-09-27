@@ -8,7 +8,7 @@ Bug 508730. Clean up Quartz gradient code by moving some local variables to stat
 diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/cairo-quartz-surface.c
 --- a/gfx/cairo/cairo/src/cairo-quartz-surface.c
 +++ b/gfx/cairo/cairo/src/cairo-quartz-surface.c
-@@ -684,51 +684,50 @@ ComputeGradientValue (void *info, const 
+@@ -684,51 +684,50 @@ ComputeGradientValue (void *info, const
  	    grad->stops[i-1].color.blue * ap +
  	    grad->stops[i].color.blue * bp;
  	out[3] =
@@ -16,7 +16,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
  	    grad->stops[i].color.alpha * bp;
      }
  }
- 
+
 +static const float gradient_output_value_ranges[8] = {
 +    0.f, 1.f, 0.f, 1.f, 0.f, 1.f, 0.f, 1.f
 +};
@@ -33,12 +33,12 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 -    CGFunctionCallbacks callbacks = {
 -	0, ComputeGradientValue, (CGFunctionReleaseInfoCallback) cairo_pattern_destroy
 -    };
- 
+
      if (_cairo_pattern_create_copy (&pat, &gpat->base))
  	/* quartz doesn't deal very well with malloc failing, so there's
  	 * not much point in us trying either */
  	return NULL;
- 
+
      return CGFunctionCreate (pat,
  			     1,
  			     input_value_range,
@@ -48,7 +48,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +			     gradient_output_value_ranges,
 +			     &gradient_callbacks);
  }
- 
+
  static CGFunctionRef
  CreateRepeatingLinearGradientFunction (cairo_quartz_surface_t *surface,
  				       const cairo_gradient_pattern_t *gpat,
@@ -61,19 +61,19 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 -    CGFunctionCallbacks callbacks = {
 -	0, ComputeGradientValue, (CGFunctionReleaseInfoCallback) cairo_pattern_destroy
 -    };
- 
+
      CGPoint mstart, mend;
- 
+
      double dx, dy;
      int x_rep_start = 0, x_rep_end = 0;
      int y_rep_start = 0, y_rep_end = 0;
- 
+
      int rep_start, rep_end;
 @@ -787,18 +786,18 @@ CreateRepeatingLinearGradientFunction (c
  	/* quartz doesn't deal very well with malloc failing, so there's
  	 * not much point in us trying either */
  	return NULL;
- 
+
      return CGFunctionCreate (pat,
  			     1,
  			     input_value_range,
@@ -83,7 +83,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +			     gradient_output_value_ranges,
 +			     &gradient_callbacks);
  }
- 
+
  static void
  UpdateRadialParameterToIncludePoint(double *max_t, CGPoint *center,
                                      double dr, double dx, double dy,
@@ -115,7 +115,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
    /* quartz doesn't deal very well with malloc failing, so there's
     * not much point in us trying either */
    return NULL;
- 
+
      return CGFunctionCreate (pat,
             1,
             input_value_range,
@@ -125,9 +125,9 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +           gradient_output_value_ranges,
 +           &gradient_callbacks);
  }
- 
+
  /* Obtain a CGImageRef from a #cairo_surface_t * */
- 
+
  static void
  DataProviderReleaseCallback (void *info, const void *data, size_t size)
  {

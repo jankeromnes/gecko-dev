@@ -54,7 +54,7 @@ IAsyncOperation : public IUnknown
 #endif // __IAsyncOperation_INTERFACE_DEFINED__
 #endif // __IDataObjectAsyncCapability_INTERFACE_DEFINED__
 
-/* 
+/*
  * CFSTR_SHELLURL is deprecated and doesn't have a Unicode version.
  * Therefore we are using CFSTR_INETURL instead of CFSTR_SHELLURL.
  * See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/shell/programmersguide/shell_basics/shell_basics_programming/transferring/clipboard.asp
@@ -66,8 +66,8 @@ IAsyncOperation : public IUnknown
 #define CFSTR_INETURLW    L"UniformResourceLocatorW"
 #endif
 
-// For support of MinGW w32api v2.4. 
-// When the next version of w32api is released with shlobj.h rev 1.35 
+// For support of MinGW w32api v2.4.
+// When the next version of w32api is released with shlobj.h rev 1.35
 // http://sources.redhat.com/cgi-bin/cvsweb.cgi/src/winsup/w32api/include/shlobj.h?cvsroot=src
 // then that can be made the base required version and this code should be removed.
 #ifndef CFSTR_FILEDESCRIPTORA
@@ -179,7 +179,7 @@ protected:
     virtual HRESULT GetText ( const nsACString& aDF, FORMATETC& aFE, STGMEDIUM & aSTG );
     virtual HRESULT GetDib ( const nsACString& inFlavor, FORMATETC &, STGMEDIUM & aSTG );
     virtual HRESULT GetMetafilePict(FORMATETC&  FE, STGMEDIUM&  STM);
-        
+
     virtual HRESULT DropImage( FORMATETC& aFE, STGMEDIUM& aSTG );
     virtual HRESULT DropFile( FORMATETC& aFE, STGMEDIUM& aSTG );
     virtual HRESULT DropTempFile( FORMATETC& aFE, STGMEDIUM& aSTG );
@@ -221,10 +221,10 @@ protected:
 
     nsTArray<nsCString> mDataFlavors;
 
-    nsITransferable  * mTransferable; // nsDataObj owns and ref counts nsITransferable, 
+    nsITransferable  * mTransferable; // nsDataObj owns and ref counts nsITransferable,
                                       // the nsITransferable does know anything about the nsDataObj
 
-    CEnumFormatEtc   * m_enumFE;      // Ownership Rules: 
+    CEnumFormatEtc   * m_enumFE;      // Ownership Rules:
                                       // nsDataObj owns and ref counts CEnumFormatEtc,
 
     nsCOMPtr<nsIFile> mCachedTempFile;
@@ -260,7 +260,7 @@ protected:
       // IUnknown
       STDMETHOD(QueryInterface)(REFIID refiid, void** ppvResult);
 
-      // IStream  
+      // IStream
       STDMETHOD(Clone)(IStream** ppStream);
       STDMETHOD(Commit)(DWORD dwFrags);
       STDMETHOD(CopyTo)(IStream* pDestStream, ULARGE_INTEGER nBytesToCopy, ULARGE_INTEGER* nBytesRead, ULARGE_INTEGER* nBytesWritten);

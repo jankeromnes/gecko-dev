@@ -4,7 +4,7 @@
 #
 # This file enables test coverage of the various SSL ciphers
 #
-# Enable Enable Cipher Test Name 
+# Enable Enable Cipher Test Name
 #  EC     TLS
 #
   noECC  SSL3   c    SSL3_RSA_WITH_RC4_128_MD5

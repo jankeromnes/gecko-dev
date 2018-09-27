@@ -132,7 +132,7 @@ sub getMilestoneAB {
   } else {
     $milestoneAB = $_[0];
   }
-  
+
   if ($milestoneAB =~ /a/) { return "alpha"; }
   if ($milestoneAB =~ /b/) { return "beta"; }
   return "final";

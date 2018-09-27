@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof Script == 'undefined')
   {
     print('Test skipped. Script not defined.');

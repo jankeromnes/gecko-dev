@@ -97,21 +97,21 @@ bool GetRamSize(UInt64 &size)
   size = (UInt64)(sizeof(size_t)) << 29;
 
   #ifdef _WIN32
-  
+
   #ifndef UNDER_CE
     MY_MEMORYSTATUSEX stat;
     stat.dwLength = sizeof(stat);
   #endif
-  
+
   #ifdef _WIN64
-    
+
     if (!::GlobalMemoryStatusEx(&stat))
       return false;
     size = MyMin(stat.ullTotalVirtual, stat.ullTotalPhys);
     return true;
 
   #else
-    
+
     #ifndef UNDER_CE
       GlobalMemoryStatusExP globalMemoryStatusEx = (GlobalMemoryStatusExP)
           ::GetProcAddress(::GetModuleHandle(TEXT("kernel32.dll")), "GlobalMemoryStatusEx");
@@ -121,7 +121,7 @@ bool GetRamSize(UInt64 &size)
         return true;
       }
     #endif
-  
+
     {
       MEMORYSTATUS stat2;
       stat2.dwLength = sizeof(stat2);
@@ -129,7 +129,7 @@ bool GetRamSize(UInt64 &size)
       size = MyMin(stat2.dwTotalVirtual, stat2.dwTotalPhys);
       return true;
     }
-  
+
   #endif
 
   #else

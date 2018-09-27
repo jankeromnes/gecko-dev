@@ -6,7 +6,7 @@ es6id: 20.3.3.4
 description: Infinite values specified to MakeTime produce NaN
 info: |
   [...]
-  9. Return TimeClip(MakeDate(MakeDay(yr, m, dt), MakeTime(h, min, s, milli))). 
+  9. Return TimeClip(MakeDate(MakeDay(yr, m, dt), MakeTime(h, min, s, milli))).
 
   MakeTime (hour, min, sec, ms)
 

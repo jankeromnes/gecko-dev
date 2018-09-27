@@ -64,10 +64,10 @@ CNavDTD::Terminate()
 }
 
 
-NS_IMETHODIMP_(int32_t) 
-CNavDTD::GetType() 
-{ 
-  return NS_IPARSER_FLAG_HTML; 
+NS_IMETHODIMP_(int32_t)
+CNavDTD::GetType()
+{
+  return NS_IPARSER_FLAG_HTML;
 }
 
 NS_IMETHODIMP_(nsDTDMode)

@@ -34,7 +34,7 @@ function runTest()
     is(pt1.x, x, str + " x");
     is(pt1.y, y, str + " y");
   }
-  
+
   function ymost(r)
   {
     return r.y + r.height;
@@ -91,7 +91,7 @@ function runTest()
   is(text1.getCharNumAtPosition(p), -1, "text1 finding no char on right");
 
   // Simple rotated-90 string ... width might change because of hinting
-  
+
   charWidth = text2.getSubStringLength(0, 1);
 
   is(text2.getNumberOfChars(), 3, "text2 length");
@@ -136,13 +136,13 @@ function runTest()
   is(text2.getCharNumAtPosition(p), -1, "text2 finding no char on bottom");
 
   // Text along a thin rectangle path
-  
+
   charWidth = text3.getSubStringLength(0, 1);
 
   is(text3.getNumberOfChars(), 26, "text3 length");
   ok(text3.getComputedTextLength() > 0, "text3 measured length");
   is(text3.getComputedTextLength(), text3.getSubStringLength(0, 26), "text3 substring length");
-  
+
   // character 12 should be on the bottom side
   is(text3.getStartPositionOfChar(12).y, 253, "text3 char 12 start offset");
   is(text3.getEndPositionOfChar(12).y, 253, "text3 char 12 end offset");
@@ -175,7 +175,7 @@ function runTests() {
 
   var doc = $("svg").contentWindow.document;
   doc.getElementById("g").setAttribute("transform", "scale(2) rotate(90 200 200)");
-  
+
   runTest();
 
   SimpleTest.finish();

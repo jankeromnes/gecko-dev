@@ -3,7 +3,7 @@
 
 /*---
 info: |
-    Refer 11.1.4; 
+    Refer 11.1.4;
     The production
     ElementList : ElementList , Elisionopt AssignmentExpression
     6.Call the [[DefineOwnProperty]] internal method of array with arguments ToString(ToUint32((pad+len)) and the Property Descriptor { [[Value]]: initValue

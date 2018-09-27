@@ -17,7 +17,7 @@ outer : for(index=0; index<4; index+=1) {
     nested : for(index_n=0; index_n<=index; index_n++) {
 	if (index*index_n == 6)continue nested;
 	__str+=""+index+index_n;
-    } 
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ outer : for(index=0; index<4; index+=1) {
     nested : for(index_n=0; index_n<=index; index_n++) {
 	if (index*index_n == 6)continue outer;
 	__str+=""+index+index_n;
-    } 
+    }
 }
 //////////////////////////////////////////////////////////////////////////////
 //CHECK#2
@@ -50,7 +50,7 @@ outer : for(index=0; index<4; index+=1) {
     nested : for(index_n=0; index_n<=index; index_n++) {
 	if (index*index_n == 6)continue ;
 	__str+=""+index+index_n;
-    } 
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////

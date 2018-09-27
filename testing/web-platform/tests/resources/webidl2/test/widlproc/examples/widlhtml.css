@@ -49,8 +49,8 @@ div.exampleInner { background-color: #d5dee3;
        	           padding: 4px; margin: 0em }
 div.exampleWrapper { margin: 4px }
 div.exampleHeader { font-weight: bold; margin: 4px}
-div.term { font: 100% sans-serif; color:#000000; font-weight: bold; line-height: 60%}   
-div.list { font: 100% sans-serif; color:#000000; font-weight: normal; line-height: 60%} 
+div.term { font: 100% sans-serif; color:#000000; font-weight: bold; line-height: 60%}
+div.list { font: 100% sans-serif; color:#000000; font-weight: normal; line-height: 60%}
 
 .optional {text-decoration: line-through; display: none;}
 

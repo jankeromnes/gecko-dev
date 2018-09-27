@@ -17,9 +17,9 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   // note that the assertion does not fire if the regexp is
-  // evald or used in new RegExp, so this test must be an -n 
+  // evald or used in new RegExp, so this test must be an -n
   // with uncaught SyntaxError.
 
   /[\Wb-G]/.exec("");

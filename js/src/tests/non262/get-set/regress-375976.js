@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   this.__defineSetter__('x', gc);
   this.__defineGetter__('x', Math.sin);
   x = x++;

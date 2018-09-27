@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function doevil() {
     print('evildone');
     return 'evildone';
@@ -30,7 +30,7 @@ function test()
   reportCompare(expect, actual, summary);
 
   expect = 'a%EF%BF%BE,+doevil()%5D)//';
-  actual = eval("(['a\\\ufffe', '+doevil()])//'])"); 
+  actual = eval("(['a\\\ufffe', '+doevil()])//'])");
   actual = encodeURI(actual);
   reportCompare(expect, actual, summary);
 }

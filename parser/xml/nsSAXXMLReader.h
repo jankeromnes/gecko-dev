@@ -46,7 +46,7 @@ public:
   NS_IMETHOD WillBuildModel(nsDTDMode aDTDMode) override;
   NS_IMETHOD DidBuildModel(bool aTerminated) override;
   NS_IMETHOD SetParser(nsParserBase* aParser) override;
-  
+
   NS_IMETHOD WillInterrupt() override
   {
     return NS_OK;
@@ -56,15 +56,15 @@ public:
   {
     return NS_OK;
   }
-  
+
   virtual void FlushPendingNotifications(mozilla::FlushType aType) override
   {
   }
-  
+
   virtual void SetDocumentCharset(NotNull<const Encoding*> aEncoding) override
   {
   }
-  
+
   virtual nsISupports *GetTarget() override
   {
     return nullptr;

@@ -30,7 +30,7 @@ var outstandingCallbacks = 2;
 
 function CallbackAssert(assertVal, failText) {
   ok(assertVal, failText);
-  
+
   outstandingCallbacks--;
   ok(outstandingCallbacks >= 0, '`outstandingCallbacks` should be non-negative.');
   if (outstandingCallbacks)

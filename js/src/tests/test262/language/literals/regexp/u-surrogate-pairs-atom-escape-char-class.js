@@ -10,7 +10,7 @@ info: |
   The production AtomEscape :: CharacterClassEscape evaluates as follows:
 
   1. Evaluate CharacterClassEscape to obtain a CharSet A.
-  2. Call CharacterSetMatcher(A, false) and return its Matcher result. 
+  2. Call CharacterSetMatcher(A, false) and return its Matcher result.
 
   Runtime Semantics: CharacterSetMatcher Abstract Operation
 

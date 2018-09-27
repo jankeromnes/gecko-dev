@@ -322,7 +322,7 @@ test_fin_many(void *arg)
 	array[2] = &evcb1;
 	array[3] = &evcb2;
 
-	
+
 
 	n = event_callback_finalize_many(base, 4, array,
 	    callback_finalize_callback_1);

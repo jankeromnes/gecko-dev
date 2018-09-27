@@ -23,7 +23,7 @@ CCC			= gcc
 LD  			= gcc
 AR                      = emxomfar r $@
 # Keep AR_FLAGS blank so that we do not have to change rules.mk
-AR_FLAGS                = 
+AR_FLAGS                =
 RANLIB 			= @echo OS2 RANLIB
 BSDECHO 		= @echo OS2 BSDECHO
 IMPLIB			= emximp -o
@@ -39,17 +39,17 @@ HIGHMEM_LDFLAG          = -Zhigh-mem
 endif
 
 ifndef NO_SHARED_LIB
-WRAP_MALLOC_LIB         = 
-WRAP_MALLOC_CFLAGS      = 
-DSO_CFLAGS              = 
-DSO_PIC_CFLAGS          = 
+WRAP_MALLOC_LIB         =
+WRAP_MALLOC_CFLAGS      =
+DSO_CFLAGS              =
+DSO_PIC_CFLAGS          =
 MKSHLIB                 = $(CXX) $(CXXFLAGS) $(DSO_LDOPTS) -o $@
 MKCSHLIB                = $(CC) $(CFLAGS) $(DSO_LDOPTS) -o $@
-MKSHLIB_FORCE_ALL       = 
-MKSHLIB_UNFORCE_ALL     = 
+MKSHLIB_FORCE_ALL       =
+MKSHLIB_UNFORCE_ALL     =
 DSO_LDOPTS              = -Zomf -Zdll -Zmap $(HIGHMEM_LDFLAG)
-SHLIB_LDSTARTFILE	= 
-SHLIB_LDENDFILE		= 
+SHLIB_LDSTARTFILE	=
+SHLIB_LDENDFILE		=
 ifdef MAPFILE
 MKSHLIB += $(MAPFILE)
 endif
@@ -79,7 +79,7 @@ EXEFLAGS    		= -PMTYPE:VIO -OUT:$@ -MAP:$(@:.exe=.map) -nologo -NOE $(HIGHMEM_L
 OBJDIR_TAG 		= _OPT
 else
 #OPTIMIZER		= -O+ -Oi
-DEFINES 		+= -DDEBUG -D_DEBUG -DDEBUGPRINTS     #HCT Need += to avoid overidding manifest.mn 
+DEFINES 		+= -DDEBUG -D_DEBUG -DDEBUGPRINTS     #HCT Need += to avoid overidding manifest.mn
 DLLFLAGS		= -DEBUG -DLL -OUT:$@ -MAP:$(@:.dll=.map) $(HIGHMEM_LDFLAG)
 EXEFLAGS    		= -DEBUG -PMTYPE:VIO -OUT:$@ -MAP:$(@:.exe=.map) -nologo -NOE $(HIGHMEM_LDFLAG)
 OBJDIR_TAG 		= _DBG

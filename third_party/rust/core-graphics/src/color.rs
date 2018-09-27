@@ -19,7 +19,7 @@ impl_TCFType!(CGColor, CGColorRef, CGColorGetTypeID);
 
 impl CGColor {
     pub fn rgb(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> Self {
-        unsafe { 
+        unsafe {
             let ptr = CGColorCreateGenericRGB(red, green, blue, alpha);
             CGColor::wrap_under_create_rule(ptr)
         }

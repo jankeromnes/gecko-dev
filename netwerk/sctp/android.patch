@@ -27,7 +27,7 @@ diff --git a/netwerk/sctp/src/netinet/sctp_bsd_addr.c b/netwerk/sctp/src/netinet
  #include <sys/unistd.h>
  #endif
 +#endif
- 
+
  /* Declare all of our malloc named types */
  #ifndef __Panda__
  MALLOC_DEFINE(SCTP_M_MAP, "sctp_map", "sctp asoc map descriptor");
@@ -40,9 +40,9 @@ diff --git a/netwerk/sctp/src/netinet/sctp_os_userspace.h b/netwerk/sctp/src/net
 +++ b/netwerk/sctp/src/netinet/sctp_os_userspace.h
 @@ -40,18 +40,18 @@
   */
- 
+
  #include <errno.h>
- 
+
  #if defined(__Userspace_os_Windows)
  #include <winsock2.h>
  #include <ws2tcpip.h>
@@ -64,7 +64,7 @@ diff --git a/netwerk/sctp/src/netinet/sctp_os_userspace.h b/netwerk/sctp/src/net
  #endif
  /* #include <netinet/in_pcb.h> ported to userspace */
  #include <user_inpcb.h>
- 
+
  /* for getifaddrs */
  #include <sys/types.h>
  #if !defined(__Userspace_os_Windows)
@@ -72,9 +72,9 @@ diff --git a/netwerk/sctp/src/netinet/sctp_os_userspace.h b/netwerk/sctp/src/net
 +#if !defined(ANDROID) && (defined(INET) || defined(INET6))
  #include <ifaddrs.h>
  #endif
- 
+
  /* for ioctl */
  #include <sys/ioctl.h>
- 
+
  /* for close, etc. */
  #include <unistd.h>

@@ -37,7 +37,7 @@ statementMakers = weighted([{
   fun: function makeMixedTypeArray() { [[, , , , , , , , , , , , , , , , , , ,
 , , , , , ""][(a[rnd()])()]]}
 }])
-start() 
+start()
 
 /* Don't assert. */
 

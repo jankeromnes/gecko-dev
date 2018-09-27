@@ -43,7 +43,7 @@ _pixman_implementation_create (pixman_implementation_t *fallback,
 
 	imp->fallback = fallback;
 	imp->fast_paths = fast_paths;
-	
+
 	/* Make sure the whole fallback chain has the right toplevel */
 	for (d = imp; d != NULL; d = d->fallback)
 	    d->toplevel = imp;
@@ -198,7 +198,7 @@ _pixman_implementation_lookup_combiner (pixman_implementation_t *imp,
 	case 0: /* not narrow, not component alpha */
 	    f = (pixman_combine_32_func_t)imp->combine_float[op];
 	    break;
-	    
+
 	case 1: /* not narrow, component_alpha */
 	    f = (pixman_combine_32_func_t)imp->combine_float_ca[op];
 	    break;

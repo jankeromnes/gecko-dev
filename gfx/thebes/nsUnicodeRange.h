@@ -9,9 +9,9 @@
 #include <stdint.h>
 
 // The following constants define unicode subranges
-// values below kRangeNum must be continuous so that we can map to 
+// values below kRangeNum must be continuous so that we can map to
 // lang group directly.
-// all ranges we care about should be defined under 32, that allows 
+// all ranges we care about should be defined under 32, that allows
 // us to store range using bits of a uint32_t
 
 // frequently used range definitions
@@ -80,7 +80,7 @@ const uint8_t   kRangeSMP                  = 53;  // u+1xxxx
 const uint8_t   kRangeHigherPlanes         = 54;  // u+3xxxx and above
 
 const uint8_t   kRangeTableBase   = 128;    //values over 127 are reserved for internal use only
-const uint8_t   kRangeTertiaryTable  = 145; // leave room for 16 subtable 
+const uint8_t   kRangeTertiaryTable  = 145; // leave room for 16 subtable
                                             // indices (kRangeTableBase + 1 ..
                                             // kRangeTableBase + 16)
 

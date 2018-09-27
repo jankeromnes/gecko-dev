@@ -37,6 +37,6 @@ test();
 function test()
 {
   printBugNumber(BUGNUMBER);
-  printStatus (summary); 
+  printStatus (summary);
   reportCompare(expect, actual, summary);
 }

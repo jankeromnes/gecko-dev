@@ -66,5 +66,5 @@ class C {
 };
 
 new C().method({x: 1, y: 2, a: 5, b: 3}).next().then(() => {
-    assert.sameValue(callCount, 1, 'invoked exactly once');    
+    assert.sameValue(callCount, 1, 'invoked exactly once');
 }).then($DONE, $DONE);

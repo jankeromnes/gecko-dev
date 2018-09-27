@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "iframe2");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,9 +70,9 @@ function loadComplete() {
 
 
 /**
-* 
+*
     Retrieve the contentDocument attribute of the second IFRAME element
-    and examine its title.  
+    and examine its title.
 
 * @author NIST
 * @author Rick Rivello
@@ -85,7 +85,7 @@ function HTMLIFrameElement11() {
       var cd;
       var vtitle;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -97,7 +97,7 @@ function HTMLIFrameElement11() {
       vtitle = cd.title;
 
       assertEquals("titleLink","NIST DOM HTML Test - FRAME",vtitle);
-       
+
 }
 
 </script>
@@ -108,7 +108,7 @@ function HTMLIFrameElement11() {
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
     Retrieve the contentDocument attribute of the second IFRAME element
-    and examine its title.  
+    and examine its title.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;date qualifier='created'&gt;2002-07-03&lt;/date&gt;
@@ -125,7 +125,7 @@ function HTMLIFrameElement11() {
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/iframe2.html"></iframe>
 <br>

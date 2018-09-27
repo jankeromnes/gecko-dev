@@ -11,7 +11,7 @@
 
 #ifdef IS_LITTLE_ENDIAN
 #define BYTEORDER 1234
-#else 
+#else
 #define BYTEORDER 4321
 #endif /* IS_LITTLE_ENDIAN */
 

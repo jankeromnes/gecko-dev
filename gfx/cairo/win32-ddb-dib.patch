@@ -15,14 +15,14 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-private.h b/gfx/cairo/cairo/src/cai
 --- a/gfx/cairo/cairo/src/cairo-win32-private.h
 +++ b/gfx/cairo/cairo/src/cairo-win32-private.h
 @@ -117,6 +117,9 @@
- 
+
      /* Whether we can use the CHECKJPEGFORMAT escape function */
      CAIRO_WIN32_SURFACE_CAN_CHECK_PNG = (1<<8),
 +
 +    /* if this DDB surface can be converted to a DIB if necessary */
 +    CAIRO_WIN32_SURFACE_CAN_CONVERT_TO_DIB = (1<<9),
  };
- 
+
  cairo_status_t
 diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cairo-win32-surface.c
 --- a/gfx/cairo/cairo/src/cairo-win32-surface.c
@@ -30,7 +30,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 @@ -560,6 +560,56 @@
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 +static void
 +_cairo_win32_convert_ddb_to_dib (cairo_win32_surface_t *surface)
 +{
@@ -99,7 +99,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 +	 */
 +	_cairo_win32_convert_ddb_to_dib (surface);
 +    }
- 
+
      if (surface->image) {
  	*image_out = (cairo_image_surface_t *)surface->image;
 @@ -2133,3 +2194,61 @@
@@ -122,7 +122,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 + *
 + * Return value: %CAIRO_STATUS_SUCCESS if the flag was successfully
 + * changed, or an error otherwise.
-+ * 
++ *
 + */
 +cairo_status_t
 +cairo_win32_surface_set_can_convert_to_dib (cairo_surface_t *asurface, cairo_bool_t can_convert)
@@ -152,7 +152,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 + *
 + * Return value: %CAIRO_STATUS_SUCCESS if the flag was successfully
 + * retreived, or an error otherwise.
-+ * 
++ *
 + */
 +cairo_status_t
 +cairo_win32_surface_get_can_convert_to_dib (cairo_surface_t *asurface, cairo_bool_t *can_convert)
@@ -170,7 +170,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32.h b/gfx/cairo/cairo/src/cairo-win32
 @@ -68,6 +68,12 @@ cairo_win32_surface_get_dc (cairo_surface_t *surface);
  cairo_public cairo_surface_t *
  cairo_win32_surface_get_image (cairo_surface_t *surface);
- 
+
 +cairo_public cairo_status_t
 +cairo_win32_surface_set_can_convert_to_dib (cairo_surface_t *surface, cairo_bool_t can_convert);
 +
@@ -178,4 +178,4 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32.h b/gfx/cairo/cairo/src/cairo-win32
 +cairo_win32_surface_get_can_convert_to_dib (cairo_surface_t *surface, cairo_bool_t *can_convert);
 +
  #if CAIRO_HAS_WIN32_FONT
- 
+

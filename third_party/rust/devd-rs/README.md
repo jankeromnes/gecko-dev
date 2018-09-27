@@ -21,5 +21,5 @@ By participating in this project you agree to follow the [Contributor Code of Co
 
 ## License
 
-This is free and unencumbered software released into the public domain.  
+This is free and unencumbered software released into the public domain.
 For more information, please refer to the `UNLICENSE` file or [unlicense.org](http://unlicense.org).

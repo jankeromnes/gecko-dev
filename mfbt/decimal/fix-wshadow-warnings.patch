@@ -6,7 +6,7 @@ diff --git a/mfbt/decimal/Decimal.cpp b/mfbt/decimal/Decimal.cpp
          return m_lhs;
      }
  }
- 
+
  // This class is used for 128 bit unsigned integer arithmetic.
  class UInt128 {
  public:
@@ -16,21 +16,21 @@ diff --git a/mfbt/decimal/Decimal.cpp b/mfbt/decimal/Decimal.cpp
 +        : m_high(aHigh), m_low(aLow)
      {
      }
- 
+
      UInt128& operator/=(uint32_t);
- 
+
      uint64_t high() const { return m_high; }
      uint64_t low() const { return m_low; }
- 
-@@ -224,68 +224,68 @@ static uint64_t scaleUp(uint64_t x, int 
+
+@@ -224,68 +224,68 @@ static uint64_t scaleUp(uint64_t x, int
          z = z * z;
      }
  }
- 
+
  } // namespace DecimalPrivate
- 
+
  using namespace DecimalPrivate;
- 
+
 -Decimal::EncodedData::EncodedData(Sign sign, FormatClass formatClass)
 +Decimal::EncodedData::EncodedData(Sign aSign, FormatClass aFormatClass)
      : m_coefficient(0)
@@ -41,7 +41,7 @@ diff --git a/mfbt/decimal/Decimal.cpp b/mfbt/decimal/Decimal.cpp
 +    , m_sign(aSign)
  {
  }
- 
+
 -Decimal::EncodedData::EncodedData(Sign sign, int exponent, uint64_t coefficient)
 -    : m_formatClass(coefficient ? ClassNormal : ClassZero)
 -    , m_sign(sign)
@@ -59,7 +59,7 @@ diff --git a/mfbt/decimal/Decimal.cpp b/mfbt/decimal/Decimal.cpp
 +            ++aExponent;
          }
      }
- 
+
 -    if (exponent > ExponentMax) {
 +    if (aExponent > ExponentMax) {
          m_coefficient = 0;
@@ -67,7 +67,7 @@ diff --git a/mfbt/decimal/Decimal.cpp b/mfbt/decimal/Decimal.cpp
          m_formatClass = ClassInfinity;
          return;
      }
- 
+
 -    if (exponent < ExponentMin) {
 +    if (aExponent < ExponentMin) {
          m_coefficient = 0;
@@ -75,13 +75,13 @@ diff --git a/mfbt/decimal/Decimal.cpp b/mfbt/decimal/Decimal.cpp
          m_formatClass = ClassZero;
          return;
      }
- 
+
 -    m_coefficient = coefficient;
 -    m_exponent = static_cast<int16_t>(exponent);
 +    m_coefficient = aCoefficient;
 +    m_exponent = static_cast<int16_t>(aExponent);
  }
- 
+
  bool Decimal::EncodedData::operator==(const EncodedData& another) const
  {
      return m_sign == another.m_sign
@@ -89,33 +89,33 @@ diff --git a/mfbt/decimal/Decimal.cpp b/mfbt/decimal/Decimal.cpp
          && m_exponent == another.m_exponent
          && m_coefficient == another.m_coefficient;
  }
- 
+
  Decimal::Decimal(int32_t i32)
      : m_data(i32 < 0 ? Negative : Positive, 0, i32 < 0 ? static_cast<uint64_t>(-static_cast<int64_t>(i32)) : static_cast<uint64_t>(i32))
  {
  }
- 
+
 -Decimal::Decimal(Sign sign, int exponent, uint64_t coefficient)
 -    : m_data(sign, coefficient ? exponent : 0, coefficient)
 +Decimal::Decimal(Sign aSign, int aExponent, uint64_t aCoefficient)
 +    : m_data(aSign, aCoefficient ? aExponent : 0, aCoefficient)
  {
  }
- 
+
  Decimal::Decimal(const EncodedData& data)
      : m_data(data)
  {
  }
- 
+
 @@ -479,32 +479,32 @@ Decimal Decimal::operator/(const Decimal
      if (rhs.isZero())
          return lhs.isZero() ? nan() : infinity(resultSign);
- 
+
      int resultExponent = lhs.exponent() - rhs.exponent();
- 
+
      if (lhs.isZero())
          return Decimal(resultSign, resultExponent, 0);
- 
+
 -    uint64_t remainder = lhs.m_data.coefficient();
 +    uint64_t lhsRemainder = lhs.m_data.coefficient();
      const uint64_t divisor = rhs.m_data.coefficient();
@@ -136,14 +136,14 @@ diff --git a/mfbt/decimal/Decimal.cpp b/mfbt/decimal/Decimal.cpp
 +        if (!lhsRemainder)
              break;
      }
- 
+
 -    if (remainder > divisor / 2)
 +    if (lhsRemainder > divisor / 2)
          ++result;
- 
+
      return Decimal(resultSign, resultExponent, result);
  }
- 
+
  bool Decimal::operator==(const Decimal& rhs) const
  {
      if (isNaN() || rhs.isNaN())
@@ -161,7 +161,7 @@ diff --git a/mfbt/decimal/Decimal.h b/mfbt/decimal/Decimal.h
          Sign sign() const { return m_sign; }
 -        void setSign(Sign sign) { m_sign = sign; }
 +        void setSign(Sign aSign) { m_sign = aSign; }
- 
+
      private:
          enum FormatClass {
              ClassInfinity,

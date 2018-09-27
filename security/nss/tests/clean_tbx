@@ -5,10 +5,10 @@
 # /u/sonmi/bin/clean_tbx.pl
 #
 # this script is supposed to remove tinderbox  QA if:
-# QA has passed, there are 2+ newer QA dirs of the same machine and 
+# QA has passed, there are 2+ newer QA dirs of the same machine and
 #     platform (32/64) and it is older than 2 hours
-# QA has failed, there are 2+ newer QA dirsof the same machine and 
-#     platform (32/64) with _identical failures and it is older than 
+# QA has failed, there are 2+ newer QA dirsof the same machine and
+#     platform (32/64) with _identical failures and it is older than
 #     2 hours
 # directory is older than 48 hours
 #
@@ -27,7 +27,7 @@ $verbose = 1;
 $TBX_TESTDIR="/share/builds/mccrel3/nss/nsstip/tinderbox/tests_results/security";
 $FTP_STAGE="/u/sonmi/tmp/ftp_stage/tinderbox";
 
-@tbx_dirs = ();  
+@tbx_dirs = ();
 
 $eANY_TBX_KEEP=$ANY_TBX_KEEP_HOURS*60*60;
 $ePASSED_TBX_KEEP=$PASSED_TBX_KEEP_HOURS*60*60;
@@ -45,12 +45,12 @@ $last_no_bits="";
 $host="";
 $last_host="";
 
-@tbx_dirs = `ls -r $TBX_TESTDIR`; #sort first by host, 
-                               #then 64, 
+@tbx_dirs = `ls -r $TBX_TESTDIR`; #sort first by host,
+                               #then 64,
                                #then newest - oldest
 debug ("found $#tbx_dirs directories ");
 
-($seconds, $minutes, $hours, $days, $month, $year) = localtime; 
+($seconds, $minutes, $hours, $days, $month, $year) = localtime;
 
 debug ("$seconds, $minutes, $hours, $days, $month, $year");
 
@@ -65,7 +65,7 @@ sub check_tbx_dirs;
 
 sub check_tbx_dirs
 {
-    my $platform_idx=0; # counts directories per platform, newest 
+    my $platform_idx=0; # counts directories per platform, newest
                         # to oldest (ignores incomplete)
     my $passed_idx=0;   # counts passed  directories newest to oldest
     my $QAstatus="unknown";
@@ -85,7 +85,7 @@ sub check_tbx_dirs
         $day =~ s/......(..).*/$1/;
         $hour =~ s/........-(..).*/$1/;
         $min =~ s/.*\.(..)$/$1/;
-        
+
 
         if ( -f "$TBX_TESTDIR/$tbx_dir/QAstatus" ) {
             $QAstatus=`cat $TBX_TESTDIR/$tbx_dir/QAstatus 2>/dev/null`;
@@ -126,7 +126,7 @@ sub check_tbx_dirs
         }
         if  ( $QAstatus =~ "QA failed" ) {
             $ekeeptime=$efulldate + $eIF_TBX_KEEP;
-            #FIXME - compare to the previous failure by filtering and 
+            #FIXME - compare to the previous failure by filtering and
             #FIXME diffing the results.html files (first grep failed)
         }
     }

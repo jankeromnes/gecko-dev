@@ -4065,7 +4065,7 @@ TSFTextStore::SetInputScope(const nsString& aHTMLInputType,
     }
     return;
   }
-  
+
   // http://www.whatwg.org/specs/web-apps/current-work/multipage/the-input-element.html
   if (aHTMLInputType.EqualsLiteral("url")) {
     mInputScopes.AppendElement(IS_URL);

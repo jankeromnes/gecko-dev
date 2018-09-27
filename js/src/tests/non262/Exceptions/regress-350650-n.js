@@ -20,7 +20,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function exc() { this.toString = function() { return "EXC"; } }
   throw new exc();
 

@@ -37,7 +37,7 @@ Object.getOwnPropertyNames(functions).forEach(function (p) {
             var result = f.call(new Date(), locales);
         }, "Date.prototype." + p + " didn't throw exception for locales " + locales + ".");
     });
-    
+
     options.forEach(function (options) {
         var referenceError, error;
         try {

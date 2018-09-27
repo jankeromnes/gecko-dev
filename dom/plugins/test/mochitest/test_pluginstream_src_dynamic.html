@@ -1,15 +1,15 @@
 <html>
 <head>
   <title>NPAPI src="" NPStream Test</title>
-  <script type="text/javascript" 
+  <script type="text/javascript"
           src="/tests/SimpleTest/SimpleTest.js"></script>
-  <script type="text/javascript" 
+  <script type="text/javascript"
           src="pluginstream.js"></script>
   <script type="text/javascript" src="plugin-utils.js"></script>
   <script type="text/javascript">
     setTestPluginEnabledState(SpecialPowers.Ci.nsIPluginTag.STATE_ENABLED);
   </script>
-  <link rel="stylesheet" type="text/css" 
+  <link rel="stylesheet" type="text/css"
         href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -22,7 +22,7 @@
    - The plugin reports that data can only be sent to it in 100-byte
    - chunks.  When NPP_DestroyStream is called, the plugin sends the stream
    - content back to the browser by passing it as a data: url to
-   - NPN_GetURL, using a frame, so that the stream content should 
+   - NPN_GetURL, using a frame, so that the stream content should
    - be displayed in the frame in the browser.
    -
    - We create the object element dynamically, which in some cases has caused us to deliver the data=""

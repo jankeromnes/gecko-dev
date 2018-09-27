@@ -41,10 +41,10 @@
 #define SIB_SCALE_NOBASE    0x00
 
 /* Convenience struct for modR/M bitfield */
-struct modRM_byte {  
+struct modRM_byte {
    unsigned int mod : 2;
    unsigned int reg : 3;
-   unsigned int rm  : 3; 
+   unsigned int rm  : 3;
 };
 
 /* Convenience struct for SIB bitfield */
@@ -99,9 +99,9 @@ static void byte_decode(unsigned char b, struct modRM_byte *modrm) {
 }
 
 
-static size_t sib_decode( unsigned char *buf, size_t buf_len, x86_ea_t *ea, 
+static size_t sib_decode( unsigned char *buf, size_t buf_len, x86_ea_t *ea,
 			  unsigned int mod ) {
-	/* set Address Expression fields (scale, index, base, disp) 
+	/* set Address Expression fields (scale, index, base, disp)
 	 * according to the contents of the SIB byte.
 	 *  b points to the SIB byte in the instruction-stream buffer; the
 	 *    byte after b[0] is therefore the byte after the SIB
@@ -173,7 +173,7 @@ static size_t modrm_decode16( unsigned char *buf, unsigned int buf_len,
 		case MOD16_RM_BP:
 			if ( modrm->mod != MOD16_MOD_NODISP ) {
 				op->flags |= op_ss_seg;
-				ia32_handle_register(&ea->base, 
+				ia32_handle_register(&ea->base,
 						     REG_WORD_OFFSET + 5);
 			}
 			break;
@@ -196,7 +196,7 @@ static size_t modrm_decode16( unsigned char *buf, unsigned int buf_len,
 		ea->disp_sign = (ea->disp < 0) ? 1 : 0;
 		ea->disp_size = sizeof(short);
 		size += sizeof(short);
-	} 
+	}
 
 	return size;
 }
@@ -225,7 +225,7 @@ size_t ia32_modrm_decode( unsigned char *buf, unsigned int buf_len,
                 /* increase insn size by 1 for modrm byte */
  		return 1;
  	}
- 
+
 	/* then deal with cases where there is an effective address */
 	ea = &op->data.expression;
 	op->type = op_expression;
@@ -246,7 +246,7 @@ size_t ia32_modrm_decode( unsigned char *buf, unsigned int buf_len,
 		if (modrm.rm == MODRM_RM_NOREG) {	/* if r/m == 101 */
 			/* IF RM == No Register, just Displacement */
 			/* This is an Intel Moronic Exception TM */
-			imm32_signsized( buf, buf_len, &ea->disp, 
+			imm32_signsized( buf, buf_len, &ea->disp,
 					sizeof(int32_t) );
 			ea->disp_size = sizeof(int32_t);
 			ea->disp_sign = (ea->disp < 0) ? 1 : 0;
@@ -279,7 +279,7 @@ size_t ia32_modrm_decode( unsigned char *buf, unsigned int buf_len,
 		/* ELSE mod + r/m specify a disp##[base] or disp##(SIB) */
 		if (modrm.mod == MODRM_MOD_DISP8) {		/* mod == 01 */
 			/* If this is an 8-bit displacement */
-			imm32_signsized( buf, buf_len, &ea->disp, 
+			imm32_signsized( buf, buf_len, &ea->disp,
 					sizeof(char));
 			ea->disp_size = sizeof(char);
 			ea->disp_sign = (ea->disp < 0) ? 1 : 0;
@@ -287,7 +287,7 @@ size_t ia32_modrm_decode( unsigned char *buf, unsigned int buf_len,
 
 		} else {
 			/* Displacement is dependent on address size */
-			imm32_signsized( buf, buf_len, &ea->disp, 
+			imm32_signsized( buf, buf_len, &ea->disp,
 					insn->addr_size);
 			ea->disp_size = insn->addr_size;
 			ea->disp_sign = (ea->disp < 0) ? 1 : 0;

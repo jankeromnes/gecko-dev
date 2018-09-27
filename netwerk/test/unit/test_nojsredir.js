@@ -55,8 +55,8 @@ function handler(metadata, response) {
             response.setHeader(splitHdr[0], splitHdr[1], false);
         }
     }
-    
+
     response.setStatusLine(metadata.httpVersion, 302, "Redirected");
     response.bodyOutputStream.write(body, body.length);
 }
- 
+

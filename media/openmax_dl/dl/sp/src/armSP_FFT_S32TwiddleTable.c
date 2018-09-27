@@ -12,25 +12,25 @@
  */
 
 /**
- * 
+ *
  * File Name:  armSP_FFT_S32TwiddleTable.c
  * OpenMAX DL: v1.0.2
  * Last Modified Revision:   6781
  * Last Modified Date:       Wed, 25 Jul 2007
- * 
+ *
  * (c) Copyright 2007-2008 ARM Limited. All Rights Reserved.
- * 
- * 
+ *
+ *
  *
  * Description:
  * Twiddle table for Forward FFT in Q31 format.
  * It contains complex pairs [-cos (W * i), -sin (W * i)] where W = -2*PI/N
  * and 0<= i<= N/8.  N is the max size of the FFT. Here N = 2^12.
- * Values for N/8 < i < N are generated in the FFTInit function using the 
+ * Values for N/8 < i < N are generated in the FFTInit function using the
  * symmetries of cos and sine.
- * 
- * NOTE: The values are stored negated. This is to represent '1' which cannot be otherwise 
- * represented as Q31 in 32 bits. 
+ *
+ * NOTE: The values are stored negated. This is to represent '1' which cannot be otherwise
+ * represented as Q31 in 32 bits.
 **/
 
 #include "dl/api/omxtypes.h"

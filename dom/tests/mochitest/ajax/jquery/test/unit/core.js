@@ -353,19 +353,19 @@ test("attr(String)", function() {
 
 	ok( $body.attr('foo') === undefined, 'Make sure that a non existent attribute returns undefined' );
 	ok( $body.attr('nextSibling') === null, 'Make sure a null expando returns null' );
-	
+
 	body.setAttribute('foo', 'baz');
 	equals( $body.attr('foo'), 'baz', 'Make sure the dom attribute is retrieved when no expando is found' );
-	
+
 	body.foo = 'bar';
 	equals( $body.attr('foo'), 'bar', 'Make sure the expando is preferred over the dom attribute' );
-	
+
 	$body.attr('foo','cool');
 	equals( $body.attr('foo'), 'cool', 'Make sure that setting works well when both expando and dom attribute are available' );
-	
+
 	body.foo = undefined;
 	ok( $body.attr('foo') === undefined, 'Make sure the expando is preferred over the dom attribute, even if undefined' );
-	
+
 	body.removeAttribute('foo'); // Cleanup
 });
 

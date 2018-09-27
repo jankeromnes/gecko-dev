@@ -10,7 +10,7 @@ TEST2 += T)
 TES T = val
 
 RECVAR = foo
-RECVAR += var baz 
+RECVAR += var baz
 
 IMMVAR := bloo
 IMMVAR += $(RECVAR)

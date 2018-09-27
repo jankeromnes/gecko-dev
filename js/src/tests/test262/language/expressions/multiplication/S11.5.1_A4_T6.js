@@ -19,7 +19,7 @@ if (Number.MAX_VALUE * 1.1 !== Number.POSITIVE_INFINITY) {
 //CHECK#2
 if (-1.1 * Number.MAX_VALUE !== Number.NEGATIVE_INFINITY) {
   $ERROR('#2: -1.1 * Number.MAX_VALUE === Number.NEGATIVE_INFINITY. Actual: ' + (-1.1 * Number.MAX_VALUE));
-} 
+}
 
 //CHECK#3
 if (Number.MAX_VALUE * 1 !== Number.MAX_VALUE) {

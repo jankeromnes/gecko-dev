@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = ["", undefined, ""] + '';
   actual = "y".split(/(x)?\1y/) + '';
   reportCompare(expect, actual, summary + ': "y".split(/(x)?\1y/)');

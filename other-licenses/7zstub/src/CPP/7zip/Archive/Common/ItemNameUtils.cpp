@@ -51,7 +51,7 @@ void ReplaceToOsSlashes_Remove_TailSlash(UString &name)
     #if WCHAR_PATH_SEPARATOR != L'/'
       name.Replace(kUnixPathSepar, kOsPathSepar);
     #endif
-    
+
     if (name.Back() == kOsPathSepar)
       name.DeleteBack();
   }

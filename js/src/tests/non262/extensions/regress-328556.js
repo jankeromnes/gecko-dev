@@ -15,5 +15,5 @@ printStatus (summary);
 var D = [];
 D.foo = D;
 uneval(D);
- 
+
 reportCompare(expect, actual, summary);

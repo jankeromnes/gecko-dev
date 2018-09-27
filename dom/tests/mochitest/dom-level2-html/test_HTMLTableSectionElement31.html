@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "tablesection");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,15 +70,15 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The deleteRow() method deletes a row from this section.  The index
     starts from 0 and is relative only to the rows contained inside
     this section, not all the rows in the table.  If the index is -1
     the last row will be deleted.
-    
+
     Retrieve the second TBODY element and invoke the deleteRow() method
-    with an index of -1.  The nuber of rows in the THEAD section before 
-    the deletion of the row is two.  After the row is deleted the number 
+    with an index of -1.  The nuber of rows in the THEAD section before
+    the deletion of the row is two.  After the row is deleted the number
     of rows in the TBODY section is one.
 
 * @author NIST
@@ -93,7 +93,7 @@ function HTMLTableSectionElement31() {
       var rowsnodeList;
       var vrows;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -113,7 +113,7 @@ testNode = nodeList.item(1);
       vrows = rowsnodeList.length;
 
       assertEquals("rowsLink2",1,vrows);
-       
+
 }
 
 </script>
@@ -127,10 +127,10 @@ testNode = nodeList.item(1);
     starts from 0 and is relative only to the rows contained inside
     this section, not all the rows in the table.  If the index is -1
     the last row will be deleted.
-    
+
     Retrieve the second TBODY element and invoke the deleteRow() method
-    with an index of -1.  The nuber of rows in the THEAD section before 
-    the deletion of the row is two.  After the row is deleted the number 
+    with an index of -1.  The nuber of rows in the THEAD section before
+    the deletion of the row is two.  After the row is deleted the number
     of rows in the TBODY section is one.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
@@ -148,7 +148,7 @@ testNode = nodeList.item(1);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/tablesection.html"></iframe>
 <br>

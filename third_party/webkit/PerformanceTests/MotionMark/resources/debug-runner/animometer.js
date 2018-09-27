@@ -217,7 +217,7 @@ window.optionsManager =
 
         document.body.classList.add("display-" + optionsManager.valueForOption("display"));
     },
-    
+
     updateTiles: function()
     {
         document.body.classList.remove("tiles-big");

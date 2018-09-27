@@ -25,5 +25,5 @@ function Foo() {
     printStatus("End");
   };
 }
- 
+
 reportCompare(expect, actual, summary);

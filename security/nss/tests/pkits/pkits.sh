@@ -8,24 +8,24 @@
 #
 # mozilla/security/nss/tests/pkits/pkits.sh
 #
-# Script to test the NIST PKITS tests 
+# Script to test the NIST PKITS tests
 #
 # needs to work on all Unix and Windows platforms
 #
 # tests implemented:
-#    vfychain 
+#    vfychain
 #
 # special NOTES
 # ---------------
 # NIST PKITS data needs to be downloaded from
 # http://csrc.nist.gov/pki/testing/x509paths.html
 # Environment variable PKITS_DATA needs to be set to the directory
-# where this data is downloaded, or test data needs to be copied under 
+# where this data is downloaded, or test data needs to be copied under
 # the mozilla source tree in mozilla/PKITS_DATA
 ########################################################################
 
 ############################## pkits_init ##############################
-# local shell function to initialize this script 
+# local shell function to initialize this script
 ########################################################################
 pkits_init()
 {
@@ -43,7 +43,7 @@ pkits_init()
   if [ -z "${PKITS_DATA}" ]; then
       echo "${SCRIPTNAME}: PKITS data directory not defined, skipping."
       exit 0
-  fi      
+  fi
 
   if [ ! -d "${PKITS_DATA}" ]; then
       echo "${SCRIPTNAME}: PKITS data directory ${PKITS_DATA} doesn't exist, skipping."
@@ -133,7 +133,7 @@ log_banner()
 start_table()
 {
   html "<TABLE BORDER=1><TR><TH COLSPAN=3>$*</TH></TR>"
-  html "<TR><TH width=500>Test Case</TH><TH width=50>Result</TH></TR>" 
+  html "<TR><TH width=500>Test Case</TH><TH width=50>Result</TH></TR>"
   echo ""
   echo "***************************************************************"
   echo "$*"
@@ -147,8 +147,8 @@ break_table()
 }
 
 ################################ pkits #################################
-# local shell function for positive testcases, calls vfychain, writes 
-# action and options to stdout, sets variable RET and writes results to 
+# local shell function for positive testcases, calls vfychain, writes
+# action and options to stdout, sets variable RET and writes results to
 # the html file results
 ########################################################################
 pkits()
@@ -172,8 +172,8 @@ pkits()
 }
 
 ################################ pkitsn #################################
-# local shell function for negative testcases, calls vfychain, writes 
-# action and options to stdout, sets variable RET and writes results to 
+# local shell function for negative testcases, calls vfychain, writes
+# action and options to stdout, sets variable RET and writes results to
 # the html file results
 ########################################################################
 pkitsn()
@@ -196,7 +196,7 @@ pkitsn()
 }
 
 ################################ crlImport #############################
-# local shell function to import a CRL, calls crlutil -I -i, writes 
+# local shell function to import a CRL, calls crlutil -I -i, writes
 # action and options to stdout
 ########################################################################
 crlImport()
@@ -215,7 +215,7 @@ crlImport()
 }
 
 ################################ crlImportn #############################
-# local shell function to import an incorrect CRL, calls crlutil -I -i, 
+# local shell function to import an incorrect CRL, calls crlutil -I -i,
 # writes action and options to stdout
 ########################################################################
 crlImportn()
@@ -239,7 +239,7 @@ crlImportn()
 }
 
 ################################ certImport #############################
-# local shell function to import a Cert, calls certutil -A, writes 
+# local shell function to import a Cert, calls certutil -A, writes
 # action and options to stdout
 ########################################################################
 certImport()
@@ -256,7 +256,7 @@ certImport()
 }
 
 ################################ certImportn #############################
-# local shell function to import an incorrect Cert, calls certutil -A, 
+# local shell function to import an incorrect Cert, calls certutil -A,
 # writes action and options to stdout
 ########################################################################
 certImportn()
@@ -335,7 +335,7 @@ pkits_ValidityPeriods()
   VFY_ACTION="Invalid CA notBefore Date Test1"; log_banner
   certImport BadnotBeforeDateCACert
   crlImportn BadnotBeforeDateCACRL.crl
-  if [ $RET -eq 0 ] ; then 
+  if [ $RET -eq 0 ] ; then
       pkitsn $certs/InvalidCAnotBeforeDateTest1EE.crt \
           $certs/BadnotBeforeDateCACert.crt
   fi
@@ -365,7 +365,7 @@ pkits_ValidityPeriods()
   VFY_ACTION="Invalid CA notAfter Date Test5"; log_banner
   certImport BadnotAfterDateCACert
   crlImportn BadnotAfterDateCACRL.crl
-  if [ $RET -eq 0 ] ; then 
+  if [ $RET -eq 0 ] ; then
       pkitsn $certs/InvalidCAnotAfterDateTest5EE.crt \
           $certs/BadnotAfterDateCACert.crt
   fi
@@ -510,7 +510,7 @@ fi
   VFY_ACTION="Invalid Bad CRL Signature Test4"; log_banner
   certImport BadCRLSignatureCACert
   crlImportn BadCRLSignatureCACRL.crl
-  if [ $RET -eq 0 ] ; then 
+  if [ $RET -eq 0 ] ; then
       pkitsn $certs/InvalidBadCRLSignatureTest4EE.crt \
           $certs/BadCRLSignatureCACert.crt
   fi
@@ -519,7 +519,7 @@ fi
   VFY_ACTION="Invalid Bad CRL Issuer Name Test5"; log_banner
   certImport BadCRLIssuerNameCACert
   crlImportn BadCRLIssuerNameCACRL.crl
-  if [ $RET -eq 0 ] ; then 
+  if [ $RET -eq 0 ] ; then
       pkitsn $certs/InvalidBadCRLIssuerNameTest5EE.crt \
           $certs/BadCRLIssuerNameCACert.crt
   fi
@@ -546,7 +546,7 @@ fi
   VFY_ACTION="Invalid Unknown CRL Entry Extension Test8"; log_banner
   certImport UnknownCRLEntryExtensionCACert
   crlImportn UnknownCRLEntryExtensionCACRL.crl
-  if [ $RET -eq 0 ] ; then 
+  if [ $RET -eq 0 ] ; then
       pkitsn $certs/InvalidUnknownCRLEntryExtensionTest8EE.crt \
           $certs/UnknownCRLEntryExtensionCACert.crt
   fi
@@ -555,7 +555,7 @@ fi
   VFY_ACTION="Invalid Unknown CRL Extension Test9"; log_banner
   certImport UnknownCRLExtensionCACert
   crlImportn UnknownCRLExtensionCACRL.crl
-  if [ $RET -eq 0 ] ; then 
+  if [ $RET -eq 0 ] ; then
       pkitsn $certs/InvalidUnknownCRLExtensionTest9EE.crt \
           $certs/UnknownCRLExtensionCACert.crt
   fi
@@ -564,7 +564,7 @@ fi
   VFY_ACTION="Invalid Unknown CRL Extension Test10"; log_banner
   certImport UnknownCRLExtensionCACert
   crlImportn UnknownCRLExtensionCACRL.crl
-  if [ $RET -eq 0 ] ; then 
+  if [ $RET -eq 0 ] ; then
       pkitsn $certs/InvalidUnknownCRLExtensionTest10EE.crt \
           $certs/UnknownCRLExtensionCACert.crt
   fi
@@ -954,7 +954,7 @@ pkits_KeyUsage()
   VFY_ACTION="Invalid keyUsage Critical cRLSign False Test4"; log_banner
   certImport keyUsageCriticalcRLSignFalseCACert
   crlImportn keyUsageCriticalcRLSignFalseCACRL.crl
-  if [ $RET -eq 0 ] ; then 
+  if [ $RET -eq 0 ] ; then
       pkitsn $certs/InvalidkeyUsageCriticalcRLSignFalseTest4EE.crt \
           $certs/keyUsageCriticalcRLSignFalseCACert.crt
   fi
@@ -963,7 +963,7 @@ pkits_KeyUsage()
   VFY_ACTION="Invalid keyUsage Not Critical cRLSign False Test5"; log_banner
   certImport keyUsageNotCriticalcRLSignFalseCACert
   crlImportn keyUsageNotCriticalcRLSignFalseCACRL.crl
-  if [ $RET -eq 0 ] ; then 
+  if [ $RET -eq 0 ] ; then
       pkitsn $certs/InvalidkeyUsageNotCriticalcRLSignFalseTest5EE.crt \
           $certs/keyUsageNotCriticalcRLSignFalseCACert.crt
   fi
@@ -1955,7 +1955,7 @@ pkits_PvtCertExtensions()
 }
 
 ############################## pkits_cleanup ###########################
-# local shell function to finish this script (no exit since it might be 
+# local shell function to finish this script (no exit since it might be
 # sourced)
 ########################################################################
 pkits_cleanup()
@@ -1967,7 +1967,7 @@ pkits_cleanup()
 
 
 ################################## main ################################
-pkits_init 
+pkits_init
 pkits_SignatureVerification | tee -a $PKITS_LOG
 pkits_ValidityPeriods | tee -a $PKITS_LOG
 pkits_NameChaining | tee -a $PKITS_LOG

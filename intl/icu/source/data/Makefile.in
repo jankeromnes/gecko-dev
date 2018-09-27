@@ -127,10 +127,10 @@ check-exhaustive
 
 ## List of standard targets
 all: all-local
-install: all-local install-local 
+install: all-local install-local
 clean: clean-local
 distclean : distclean-local
-dist: 
+dist:
 check: all
 
 check-exhaustive: check
@@ -286,9 +286,9 @@ UCM_FILES = $(ALL_UCM_SOURCE:%=$(SRCDATADIR)/%)
 CNV_FILES = $(ALL_UCM_SOURCE:%.ucm=$(BUILDDIR)/%.cnv)
 CNV_FILES_SHORT = $(ALL_UCM_SOURCE:%.ucm=%.cnv)
 UCM_SOURCE_SPECIAL=$(UCM_SOURCE_EBCDIC_IGNORE_SISO) $(UCM_SOURCE_EBCDIC_IGNORE_SISO_LOCAL)
-UCM_FILES_SPECIAL=$(UCM_SOURCE_SPECIAL:%=$(UCMSRCDIR)/%) 
-CNV_FILES_SPECIAL=$(UCM_SOURCE_SPECIAL:%.ucm=$(BUILDDIR)/%.cnv) 
-CNV_FILES_SHORT_SPECIAL=$(UCM_SOURCE_SPECIAL:%.ucm=%.cnv) 
+UCM_FILES_SPECIAL=$(UCM_SOURCE_SPECIAL:%=$(UCMSRCDIR)/%)
+CNV_FILES_SPECIAL=$(UCM_SOURCE_SPECIAL:%.ucm=$(BUILDDIR)/%.cnv)
+CNV_FILES_SHORT_SPECIAL=$(UCM_SOURCE_SPECIAL:%.ucm=%.cnv)
 
 ## RES files
 -include $(LOCSRCDIR)/resfiles.mk
@@ -585,8 +585,8 @@ $(CFU_FILES): $(ALL_CFU_SOURCE) $(TOOLBINDIR)/gencfu$(TOOLEXEEXT) $(DAT_FILES)
 
 ####################################################    CNV
 # CNV FILES
-$(CNV_FILES_SPECIAL) : $(UCM_FILES_SPECIAL) $(TOOLBINDIR)/makeconv$(TOOLEXEEXT) 
-	$(INVOKE) $(TOOLBINDIR)/makeconv --ignore-siso-check -c -d $(BUILDDIR) $(UCMSRCDIR)/$(@F:%.cnv=%.ucm) 
+$(CNV_FILES_SPECIAL) : $(UCM_FILES_SPECIAL) $(TOOLBINDIR)/makeconv$(TOOLEXEEXT)
+	$(INVOKE) $(TOOLBINDIR)/makeconv --ignore-siso-check -c -d $(BUILDDIR) $(UCMSRCDIR)/$(@F:%.cnv=%.ucm)
 $(BUILDDIR)/%.cnv: $(UCMSRCDIR)/%.ucm $(TOOLBINDIR)/makeconv$(TOOLEXEEXT)
 	$(INVOKE) $(TOOLBINDIR)/makeconv -c -d $(BUILDDIR) $(UCMSRCDIR)/$(<F)
 

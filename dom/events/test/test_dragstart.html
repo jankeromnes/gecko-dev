@@ -2,13 +2,13 @@
 <head>
   <title>Tests for the dragstart event</title>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css">
-  <script type="application/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>      
-  <script type="application/javascript" src="/tests/SimpleTest/EventUtils.js"></script>      
+  <script type="application/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
+  <script type="application/javascript" src="/tests/SimpleTest/EventUtils.js"></script>
 
 <!--
  This test checks the dragstart event and the DataTransfer object
   -->
- 
+
 <script>
 
 SimpleTest.waitForExplicitFinish();
@@ -61,7 +61,7 @@ function afterDragTests()
   sendMouseEventsForDrag("link");
   sendMouseEventsForDrag("image");
 
-//  disable testing input dragging for now, as it doesn't seem to be testable 
+//  disable testing input dragging for now, as it doesn't seem to be testable
 //  draggable = $("input");
 //  draggable.setSelectionRange(0, 4);
 //  synthesizeMouse(draggable, 8, 8, { type: "mousedown" });
@@ -124,7 +124,7 @@ function doDragStartSelection(event)
   is(dt.getData("text/unicode"), "This is a draggable bit of text.", "initial selection text/unicode");
   is(dt.getData("Text"), "This is a draggable bit of text.", "initial selection Text");
   is(dt.getData("TEXT"), "This is a draggable bit of text.", "initial selection TEXT");
-  is(dt.getData("text/UNICODE"), "This is a draggable bit of text.", "initial selection text/UNICODE"); 
+  is(dt.getData("text/UNICODE"), "This is a draggable bit of text.", "initial selection text/UNICODE");
 
   is(SpecialPowers.wrap(dt).mozItemCount, 1, "initial selection item count");
 
@@ -209,7 +209,7 @@ function test_DataTransfer(dt)
   dt.clearData(""); // null means clear all
   is(dt.mozItemCount, 0, "itemCount after clearData empty string");
   checkTypes(dt, [], 0, "empty after clearData empty string");
-  
+
   dt.setData("text/plain", 22);
   dt.setData("text/html", 5.6);
   dt.setData("text/xml", 5.6);

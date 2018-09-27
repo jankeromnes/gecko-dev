@@ -85,7 +85,7 @@ function test_display_value(val)
   posFixedElem.style.display = "";
 
   if (mapping[val]) {
-    is(floatLeftConversion, mapping[val], 
+    is(floatLeftConversion, mapping[val],
         "Element display should be converted when floated left");
     is(floatRightConversion, mapping[val],
         "Element display should be converted when floated right");

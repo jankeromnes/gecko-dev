@@ -19,7 +19,7 @@ namespace NUpdateArchive {
       kUnknowNewerFiles
     };
   }
- 
+
   namespace NPairAction
   {
     enum EEnum
@@ -30,11 +30,11 @@ namespace NUpdateArchive {
       kCompressAsAnti
     };
   }
-  
+
   struct CActionSet
   {
     NPairAction::EEnum StateActions[NPairState::kNumValues];
-    
+
     bool IsEqualTo(const CActionSet &a) const
     {
       for (unsigned i = 0; i < NPairState::kNumValues; i++)
@@ -55,7 +55,7 @@ namespace NUpdateArchive {
       return false;
     }
   };
-  
+
   extern const CActionSet k_ActionSet_Add;
   extern const CActionSet k_ActionSet_Update;
   extern const CActionSet k_ActionSet_Fresh;

@@ -9,7 +9,7 @@ info: |
   The production Atom :: . evaluates as follows:
 
   1. Let A be the set of all characters except LineTerminator.
-  2. Call CharacterSetMatcher(A, false) and return its Matcher result. 
+  2. Call CharacterSetMatcher(A, false) and return its Matcher result.
 
   Runtime Semantics: CharacterSetMatcher Abstract Operation
 

@@ -65,8 +65,8 @@ namespace SevenZip
 	public interface ICoder2
 	{
 		 void Code(ISequentialInStream []inStreams,
-				const UInt64 []inSizes, 
-				ISequentialOutStream []outStreams, 
+				const UInt64 []inSizes,
+				ISequentialOutStream []outStreams,
 				UInt64 []outSizes,
 				ICodeProgress progress);
 	};

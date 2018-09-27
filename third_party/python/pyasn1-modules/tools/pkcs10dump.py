@@ -5,7 +5,7 @@
 # Copyright (c) 2005-2017, Ilya Etingof <etingof@gmail.com>
 # License: http://pyasn1.sf.net/license.html
 #
-# Read ASN.1/PEM X.509 certificate requests (PKCS#10 format) on stdin, 
+# Read ASN.1/PEM X.509 certificate requests (PKCS#10 format) on stdin,
 # parse each into plain text, then build substrate from it
 #
 from pyasn1.codec.der import decoder, encoder

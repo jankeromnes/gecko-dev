@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/css" href="chrome://global/skin"?>
 <?xml-stylesheet type="text/css" href="chrome://mochikit/content/tests/SimpleTest/test.css"?>
 <!--
-https://bugzilla.mozilla.org/show_bug.cgi?id=980023 
+https://bugzilla.mozilla.org/show_bug.cgi?id=980023
 -->
 <window title="Mozilla Bug 980023 "
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">

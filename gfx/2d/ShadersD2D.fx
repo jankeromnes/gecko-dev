@@ -459,7 +459,7 @@ float4 SampleRadialGradientPS(VS_RADIAL_OUTPUT In, uniform sampler aSampler) : S
     //
     // A more extensive derrivation can be found in the pixman radial gradient
     // code.
- 
+
     float2 p = In.PixelCoord;
     float3 dp = float3(p - center1, radius1);
 
@@ -583,12 +583,12 @@ PS_TEXT_OUTPUT SampleTextTexturePS( VS_OUTPUT In) : SV_Target
 PS_TEXT_OUTPUT SampleTextTexturePSMasked( VS_OUTPUT In) : SV_Target
 {
     PS_TEXT_OUTPUT output;
-    
+
     float maskValue = mask.Sample(sMaskSampler, In.MaskTexCoord).a;
 
     output.color = float4(TextColor.r, TextColor.g, TextColor.b, 1.0);
     output.alpha.rgba = tex.Sample(sSampler, In.TexCoord).bgrg * TextColor.a * maskValue;
-    
+
     return output;
 };
 

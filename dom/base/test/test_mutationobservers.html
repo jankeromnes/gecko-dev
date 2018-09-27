@@ -9,11 +9,11 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=641821
   <script type="application/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css"/>
 </head>
-<body onload="runTest()">                                                  
+<body onload="runTest()">
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=641821">Mozilla Bug 641821</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-                                
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -53,14 +53,14 @@ if (!("ok" in window)) {
 
 if (!("is" in window)) {
   window.is = function(val, refVal, str) {
-    log(str + (val == refVal? " PASSED " : " FAILED ") + 
+    log(str + (val == refVal? " PASSED " : " FAILED ") +
         (val != refVal ? "expected " + refVal + " got " + val + "\n" : "\n"));
   }
 }
 
 if (!("isnot" in window)) {
   window.isnot = function(val, refVal, str) {
-    log(str + (val != refVal? " PASSED " : " FAILED ") + 
+    log(str + (val != refVal? " PASSED " : " FAILED ") +
         (val == refVal ? "Didn't expect " + refVal + "\n" : "\n"));
   }
 }
@@ -464,7 +464,7 @@ function testInsertAdjacentHTML() {
       is(records[2].nextSibling, null, "");
       is(records[3].target, doc.body, "");
       is(records[3].previousSibling, d4, "");
-      is(records[3].nextSibling, null, "");      
+      is(records[3].nextSibling, null, "");
       observer.disconnect();
       then(testSyncXHR);
       m = null;
@@ -518,12 +518,12 @@ function testTakeRecords() {
       is(records[1].addedNodes.length, 2, "Should have got addedNodes");
       is(records[2].type, "attributes", "Should have got attributes");
       is(records[2].attributeName, "foo", "");
-      
+
       is(records.length, takenRecords.length, "Should have had similar mutations");
       is(records[0].type, takenRecords[0].type, "Should have had similar mutations");
       is(records[1].type, takenRecords[1].type, "Should have had similar mutations");
       is(records[2].type, takenRecords[2].type, "Should have had similar mutations");
-      
+
       is(records[1].removedNodes.length, takenRecords[1].removedNodes.length, "Should have had similar mutations");
       is(records[1].addedNodes.length, takenRecords[1].addedNodes.length, "Should have had similar mutations");
 
@@ -807,7 +807,7 @@ function testAttributeRecordMerging3() {
     is(records[1].attributeName, "foo");
     is(records[1].attributeNamespace, null);
     is(records[1].oldValue, "initial");
-    
+
     is(records[2].type, "attributes");
     is(records[2].target, div);
     is(records[2].attributeName, "foo");

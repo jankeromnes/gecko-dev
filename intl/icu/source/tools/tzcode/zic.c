@@ -2434,7 +2434,7 @@ outzone(const struct zone * const zpfirst, const int zonecount)
 						 * which does not change the offset.  ICU ignores
 						 * such rules without actual time transitions. */
 						finalRuleYear = finalRuleIndex = -1;
-						finalRule1 = finalRule2 = NULL; 
+						finalRule1 = finalRule2 = NULL;
 					} else {
 						/* Swap if necessary so finalRule1 occurs before
 						 * finalRule2 */

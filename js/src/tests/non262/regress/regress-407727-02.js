@@ -12,7 +12,7 @@ var expect = 1;
 printBugNumber(BUGNUMBER);
 printStatus (summary);
 
-{ 
+{
   let Object = 1;
   actual = Object;
   reportCompare(expect, actual, summary);

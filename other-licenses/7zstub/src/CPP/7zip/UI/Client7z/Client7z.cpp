@@ -187,7 +187,7 @@ STDMETHODIMP CArchiveOpenCallback::SetCompleted(const UInt64 * /* files */, cons
 {
   return S_OK;
 }
-  
+
 STDMETHODIMP CArchiveOpenCallback::CryptoGetTextPassword(BSTR *password)
 {
   if (!PasswordIsDefined)
@@ -298,7 +298,7 @@ STDMETHODIMP CArchiveExtractCallback::GetStream(UInt32 index,
     // Get Name
     NCOM::CPropVariant prop;
     RINOK(_archiveHandler->GetProperty(index, kpidPath, &prop));
-    
+
     UString fullPath;
     if (prop.vt == VT_EMPTY)
       fullPath = kEmptyFileAlias;
@@ -361,7 +361,7 @@ STDMETHODIMP CArchiveExtractCallback::GetStream(UInt32 index,
     /* bool newFileSizeDefined = */ ConvertPropVariantToUInt64(prop, newFileSize);
   }
 
-  
+
   {
     // Create folders for file
     int slashPos = _filePath.ReverseFind_PathSepar();
@@ -387,7 +387,7 @@ STDMETHODIMP CArchiveExtractCallback::GetStream(UInt32 index,
         return E_ABORT;
       }
     }
-    
+
     _outFileStreamSpec = new COutFileStream;
     CMyComPtr<ISequentialOutStream> outStreamLoc(_outFileStreamSpec);
     if (!_outFileStreamSpec->Open(fullProcessedPath, CREATE_ALWAYS))
@@ -595,7 +595,7 @@ STDMETHODIMP CArchiveUpdateCallback::GetUpdateItemInfo(UInt32 /* index */,
 STDMETHODIMP CArchiveUpdateCallback::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *value)
 {
   NCOM::CPropVariant prop;
-  
+
   if (propID == kpidIsAnti)
   {
     prop = false;
@@ -644,7 +644,7 @@ STDMETHODIMP CArchiveUpdateCallback::GetStream(UInt32 index, ISequentialInStream
 
   const CDirItem &dirItem = (*DirItems)[index];
   GetStream2(dirItem.Name);
- 
+
   if (dirItem.isDir())
     return S_OK;
 
@@ -746,7 +746,7 @@ int MY_CDECL main(int numArgs, const char *args[])
     return 1;
   }
 
-  
+
   NDLL::CLibrary lib;
   if (!lib.Load(NDLL::GetModuleDirPrefix() + FTEXT(kDllName)))
   {
@@ -773,7 +773,7 @@ int MY_CDECL main(int numArgs, const char *args[])
   }
 
   FString archiveName = CmdStringToFString(args[2]);
-  
+
   if (c == 'a')
   {
     // create archive command
@@ -789,14 +789,14 @@ int MY_CDECL main(int numArgs, const char *args[])
       {
         CDirItem di;
         FString name = CmdStringToFString(args[i]);
-        
+
         NFind::CFileInfo fi;
         if (!fi.Find(name))
         {
           PrintError("Can't find file", name);
           return 1;
         }
-        
+
         di.Attrib = fi.Attrib;
         di.Size = fi.Size;
         di.CTime = fi.CTime;
@@ -852,23 +852,23 @@ int MY_CDECL main(int numArgs, const char *args[])
       RINOK(setProperties->SetProperties(names, values, kNumProps));
     }
     */
-    
+
     HRESULT result = outArchive->UpdateItems(outFileStream, dirItems.Size(), updateCallback);
-    
+
     updateCallbackSpec->Finilize();
-    
+
     if (result != S_OK)
     {
       PrintError("Update Error");
       return 1;
     }
-    
+
     FOR_VECTOR (i, updateCallbackSpec->FailedFiles)
     {
       PrintNewLine();
       PrintError("Error for file", updateCallbackSpec->FailedFiles[i]);
     }
-    
+
     if (updateCallbackSpec->FailedFiles.Size() != 0)
       return 1;
   }
@@ -881,7 +881,7 @@ int MY_CDECL main(int numArgs, const char *args[])
     }
 
     bool listCommand;
-    
+
     if (c == 'l')
       listCommand = true;
     else if (c == 'x')
@@ -891,17 +891,17 @@ int MY_CDECL main(int numArgs, const char *args[])
       PrintError(kIncorrectCommand);
       return 1;
     }
-  
+
     CMyComPtr<IInArchive> archive;
     if (createObjectFunc(&CLSID_Format, &IID_IInArchive, (void **)&archive) != S_OK)
     {
       PrintError("Can not get class object");
       return 1;
     }
-    
+
     CInFileStream *fileSpec = new CInFileStream;
     CMyComPtr<IInStream> file = fileSpec;
-    
+
     if (!fileSpec->Open(archiveName))
     {
       PrintError("Can not open archive file", archiveName);
@@ -914,7 +914,7 @@ int MY_CDECL main(int numArgs, const char *args[])
       openCallbackSpec->PasswordIsDefined = false;
       // openCallbackSpec->PasswordIsDefined = true;
       // openCallbackSpec->Password = L"1";
-      
+
       const UInt64 scanSize = 1 << 23;
       if (archive->Open(file, &scanSize, openCallback) != S_OK)
       {
@@ -922,7 +922,7 @@ int MY_CDECL main(int numArgs, const char *args[])
         return 1;
       }
     }
-    
+
     if (listCommand)
     {
       // List command
@@ -980,7 +980,7 @@ int MY_CDECL main(int numArgs, const char *args[])
       */
 
       HRESULT result = archive->Extract(NULL, (UInt32)(Int32)(-1), false, extractCallback);
-  
+
       if (result != S_OK)
       {
         PrintError("Extract Error");

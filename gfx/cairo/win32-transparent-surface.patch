@@ -1,15 +1,15 @@
 diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cairo-win32-surface.c
 --- a/gfx/cairo/cairo/src/cairo-win32-surface.c
 +++ b/gfx/cairo/cairo/src/cairo-win32-surface.c
-@@ -1709,40 +1709,23 @@ _cairo_win32_surface_show_glyphs (void		
+@@ -1709,40 +1709,23 @@ _cairo_win32_surface_show_glyphs (void
      }
  #else
      return CAIRO_INT_STATUS_UNSUPPORTED;
  #endif
  }
- 
+
  #undef STACK_GLYPH_SIZE
- 
+
 -/**
 - * cairo_win32_surface_create:
 - * @hdc: the DC to create a surface for
@@ -29,17 +29,17 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 +cairo_win32_surface_create_internal (HDC hdc, cairo_format_t format)
  {
      cairo_win32_surface_t *surface;
- 
+
 -    cairo_format_t format;
      RECT rect;
- 
+
 -    /* Assume that everything coming in as a HDC is RGB24 */
 -    format = CAIRO_FORMAT_RGB24;
 -
      surface = malloc (sizeof (cairo_win32_surface_t));
      if (surface == NULL)
  	return _cairo_surface_create_in_error (_cairo_error (CAIRO_STATUS_NO_MEMORY));
- 
+
      if (_cairo_win32_save_initial_clip (hdc, surface) != CAIRO_STATUS_SUCCESS) {
  	free (surface);
  	return _cairo_surface_create_in_error (_cairo_error (CAIRO_STATUS_NO_MEMORY));
@@ -47,12 +47,12 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 @@ -1765,17 +1748,58 @@ cairo_win32_surface_create (HDC hdc)
      surface->extents.width = rect.right - rect.left;
      surface->extents.height = rect.bottom - rect.top;
- 
+
      surface->flags = _cairo_win32_flags_for_dc (surface->dc);
- 
+
      _cairo_surface_init (&surface->base, &cairo_win32_surface_backend,
  			 _cairo_content_from_format (format));
- 
+
 -    return (cairo_surface_t *)surface;
 +    return &surface->base;
 +}
@@ -97,7 +97,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 +{
 +    return cairo_win32_surface_create_internal(hdc, CAIRO_FORMAT_ARGB32);
  }
- 
+
  /**
   * cairo_win32_surface_create_with_dib:
   * @format: format of pixels in the surface to create
@@ -109,21 +109,21 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32.h b/gfx/cairo/cairo/src/cairo-win32
 +++ b/gfx/cairo/cairo/src/cairo-win32.h
 @@ -44,16 +44,19 @@
  #include <windows.h>
- 
+
  CAIRO_BEGIN_DECLS
- 
+
  cairo_public cairo_surface_t *
  cairo_win32_surface_create (HDC hdc);
- 
+
  cairo_public cairo_surface_t *
 +cairo_win32_surface_create_with_alpha (HDC hdc);
 +
 +cairo_public cairo_surface_t *
  cairo_win32_printing_surface_create (HDC hdc);
- 
+
  cairo_public cairo_surface_t *
  cairo_win32_surface_create_with_ddb (HDC hdc,
                                       cairo_format_t format,
                                       int width,
                                       int height);
- 
+

@@ -29,16 +29,16 @@ class CAesCbcCoder:
 
 public:
   CAesCbcCoder(bool encodeMode, unsigned keySize);
-  
+
   virtual ~CAesCbcCoder() {};   // we need virtual destructor for derived classes
-  
+
   MY_UNKNOWN_IMP3(ICompressFilter, ICryptoProperties, ICompressSetCoderProperties)
-  
+
   INTERFACE_ICompressFilter(;)
-  
+
   STDMETHOD(SetKey)(const Byte *data, UInt32 size);
   STDMETHOD(SetInitVector)(const Byte *data, UInt32 size);
-  
+
   STDMETHOD(SetCoderProperties)(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps);
 };
 

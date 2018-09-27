@@ -2,14 +2,14 @@
  * Copyright (c) 1999 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,7 +17,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_LICENSE_HEADER_END@
  */
 /*
@@ -55,13 +55,13 @@
 
 
 /*
- * This file was copied from libc/gen/nlist.c from Darwin's source code       
- * The version of nlist used as a base is from 10.5.2, libc-498               
- * http://www.opensource.apple.com/darwinsource/10.5.2/Libc-498/gen/nlist.c   
- *                                                                            
- * The full tarball is at:                                                    
- * http://www.opensource.apple.com/darwinsource/tarballs/apsl/Libc-498.tar.gz 
- *                                                                            
+ * This file was copied from libc/gen/nlist.c from Darwin's source code
+ * The version of nlist used as a base is from 10.5.2, libc-498
+ * http://www.opensource.apple.com/darwinsource/10.5.2/Libc-498/gen/nlist.c
+ *
+ * The full tarball is at:
+ * http://www.opensource.apple.com/darwinsource/tarballs/apsl/Libc-498.tar.gz
+ *
  * I've modified it to be compatible with 64-bit images.
 */
 
@@ -338,7 +338,7 @@ int __breakpad_fdnlist(int fd, nlist_type *list, const char **symbolNames,
 
   // the algorithm here is to read the nlist entries in m-sized
   // chunks into q.  q is then iterated over. for each entry in q,
-  // use the string table index(q->n_un.n_strx) to read the symbol 
+  // use the string table index(q->n_un.n_strx) to read the symbol
   // name, then scan the nlist entries passed in by the user(via p),
   // and look for a match
   while (n) {
@@ -369,10 +369,10 @@ int __breakpad_fdnlist(int fd, nlist_type *list, const char **symbolNames,
         return -1;
       }
       const char *s2 = nambuf;
-      for (nlist_type *p = list; 
+      for (nlist_type *p = list;
            symbolNames[p-list] && symbolNames[p-list][0];
            p++) {
-        // get the symbol name the user has passed in that 
+        // get the symbol name the user has passed in that
         // corresponds to the nlist entry that we're looking at
         const char *s1 = symbolNames[p - list];
         while (*s1) {

@@ -445,13 +445,13 @@ nsresult Do_CheckOneString()
     fail("String data object did not provide wide data on request");
     return NS_ERROR_UNEXPECTED;
   }
-  
+
   rv = CheckValidUNICODE(stg);
   if (NS_FAILED(rv)) {
     fail("UNICODE was invalid");
     return rv;
   }
-  
+
   return NS_OK;
 }
 
@@ -525,13 +525,13 @@ nsresult Do_CheckTwoStrings()
     fail("String data object did not provide wide data on request");
     return NS_ERROR_UNEXPECTED;
   }
-  
+
   rv = CheckValidUNICODETwo(stg);
   if (NS_FAILED(rv)) {
     fail("UNICODE was invalid");
     return rv;
   }
-  
+
   return NS_OK;
 }
 
@@ -554,7 +554,7 @@ nsresult Do_CheckSetArbitraryData(bool aMultiple)
     fail("Could not append element to transferable array");
     return rv;
   }
-  
+
   if (aMultiple) {
     rv = GetTransferableText(transferable);
     if (NS_FAILED(rv)) {

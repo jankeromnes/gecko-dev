@@ -17,13 +17,13 @@ function test()
   var e;
 
   printStatus ("Catchguard syntax negative test #2.");
-   
+
   try
-  {   
-    throw EXCEPTION_DATA;  
+  {
+    throw EXCEPTION_DATA;
   }
   catch (e)
-  {  
+  {
     actual = e + ': 1';
   }
   catch (e) /* two non-guarded catch statements should generate an error */

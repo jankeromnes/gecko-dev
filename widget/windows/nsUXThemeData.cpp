@@ -198,7 +198,7 @@ nsUXThemeData::UpdateTitlebarInfo(HWND aWnd)
     return;
 
   // Query a temporary, visible window with command buttons to get
-  // the right metrics. 
+  // the right metrics.
   WNDCLASSW wc;
   wc.style         = 0;
   wc.lpfnWndProc   = ::DefWindowProcW;
@@ -234,7 +234,7 @@ nsUXThemeData::UpdateTitlebarInfo(HWND aWnd)
   ShowWindow(hWnd, showType);
   TITLEBARINFOEX info = {0};
   info.cbSize = sizeof(TITLEBARINFOEX);
-  SendMessage(hWnd, WM_GETTITLEBARINFOEX, 0, (LPARAM)&info); 
+  SendMessage(hWnd, WM_GETTITLEBARINFOEX, 0, (LPARAM)&info);
   DestroyWindow(hWnd);
 
   // Only set if we have valid data for all three buttons we use.

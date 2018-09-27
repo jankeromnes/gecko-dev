@@ -23,7 +23,7 @@ function destroyAllXHRs() {
   for (var i = 0; i < xhrs.length; ++i) {
     xhrs[i].onreadystatechange = null;
     // Abort XHRs if they are not yet DONE state.
-    // Calling abort() here (i.e. in onreadystatechange handler) 
+    // Calling abort() here (i.e. in onreadystatechange handler)
     // causes "NetworkError" messages in DevTools in sync mode,
     // even if it is after transition to DONE state.
     if (xhrs[i].readyState != XMLHttpRequest.DONE)

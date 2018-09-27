@@ -16,7 +16,7 @@ CSRCS = \
 
 
 # headers for the MODULE (defined above) are implicitly required.
-REQUIRES = 
+REQUIRES =
 
 PROGRAM = mangle
 

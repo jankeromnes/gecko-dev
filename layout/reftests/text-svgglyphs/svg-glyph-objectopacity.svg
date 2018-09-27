@@ -30,7 +30,7 @@
       <stop stop-color="red" offset="0%" />
       <stop stop-color="blue" offset="100%" />
     </radialGradient>
-    
+
   </defs>
 
   <text x="0" y="200">R</text>

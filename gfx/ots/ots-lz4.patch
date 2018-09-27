@@ -2,16 +2,16 @@ diff --git a/gfx/ots/src/glat.cc b/gfx/ots/src/glat.cc
 --- a/gfx/ots/src/glat.cc
 +++ b/gfx/ots/src/glat.cc
 @@ -4,9 +4,9 @@
- 
+
  #include "glat.h"
- 
+
  #include "gloc.h"
 -#include "lz4.h"
 +#include "mozilla/Compression.h"
  #include <list>
- 
+
  namespace ots {
- 
+
 @@ -200,16 +200,17 @@ bool OpenTypeGLAT_v3::Parse(const uint8_
        if (prevent_decompression) {
          return DropGraphite("Illegal nested compression");
@@ -39,17 +39,17 @@ diff --git a/gfx/ots/src/silf.cc b/gfx/ots/src/silf.cc
 --- a/gfx/ots/src/silf.cc
 +++ b/gfx/ots/src/silf.cc
 @@ -4,9 +4,9 @@
- 
+
  #include "silf.h"
- 
+
  #include "name.h"
 -#include "lz4.h"
 +#include "mozilla/Compression.h"
  #include <cmath>
- 
+
  namespace ots {
- 
-@@ -38,16 +38,17 @@ bool OpenTypeSILF::Parse(const uint8_t* 
+
+@@ -38,16 +38,17 @@ bool OpenTypeSILF::Parse(const uint8_t*
          if (prevent_decompression) {
            return DropGraphite("Illegal nested compression");
          }

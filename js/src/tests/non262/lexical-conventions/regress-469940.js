@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = 'SyntaxError: unexpected token: identifier';
 
   var s = 'var x = function f() { \n return 42; } print(x);';

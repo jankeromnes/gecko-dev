@@ -13,8 +13,8 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 expect = '"\\t"';
-actual = uneval('\t'); 
+actual = uneval('\t');
 reportCompare(expect, actual, summary);
 
-actual = uneval('\x09'); 
+actual = uneval('\x09');
 reportCompare(expect, actual, summary);

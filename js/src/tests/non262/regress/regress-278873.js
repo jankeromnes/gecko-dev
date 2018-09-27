@@ -12,7 +12,7 @@ var expect = 'No Crash';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 function SwitchTest( input) {
   switch ( input ) {
   default:   break;

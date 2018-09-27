@@ -6,4 +6,4 @@ for (var j = 0; j < 4; j++) {
     dbg.enabled = false;
     dbg = null;
     gc(); gc();
-} 
+}

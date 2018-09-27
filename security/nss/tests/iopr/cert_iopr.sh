@@ -23,7 +23,7 @@ IOPR_CERT_SOURCED=1
 
 ########################################################################
 # function wraps calls to pk12util, also: writes action and options
-# to stdout. 
+# to stdout.
 # Params are the same as to pk12util.
 # Returns pk12util status
 #
@@ -67,7 +67,7 @@ createDBDir() {
 }
 ########################################################################
 # takes care of downloading config, cert and crl files from remote
-# location. 
+# location.
 # Params:
 #      $1 - name of the host file will be downloaded from
 #      $2 - path to the file as it appeared in url
@@ -92,7 +92,7 @@ download_file() {
     echo >> $req
 
     echo ${BINDIR}/tstclnt -d $trgDir -S -h $host -p $IOPR_DOWNLOAD_PORT \
-        -v -w ${R_PWFILE} -o 
+        -v -w ${R_PWFILE} -o
     ${BINDIR}/tstclnt -d $trgDir -S -h $host -p $IOPR_DOWNLOAD_PORT \
         -v -w ${R_PWFILE} -o < $req > $file
     ret=$?
@@ -108,9 +108,9 @@ download_file() {
 #      $1 - db location directory
 #      $2 - file name to import
 #      $3 - nick name an object in the file will be associated with
-#      $4 - trust arguments 
+#      $4 - trust arguments
 # Returns status of import
-#      
+#
 importFile() {
     dir=$1\
     file=$2
@@ -120,7 +120,7 @@ importFile() {
     [ ! -d $dir ] && mkdir -p $dir;
 
     createDBDir $dir || return $RET
-            
+
     case `basename $file | sed 's/^.*\.//'` in
         p12)
             CU_ACTION="Importing p12 $file to DB at $dir"
@@ -130,8 +130,8 @@ importFile() {
             certu -M -n "$certName" -t "$certTrust" -f "${R_PWFILE}" -d "${dir}"
             return $?
             ;;
-        
-        crl) 
+
+        crl)
             CU_ACTION="Importing crl $file to DB at $dir"
             crlu -d ${dir} -I -n TestCA -i $file
             return $?
@@ -182,14 +182,14 @@ download_install_certs() {
     download_file $host "$confPath/iopr_server.cfg" $caDir
     RET=$?
     if [ $RET -ne 0 -o ! -f $caDir/iopr_server.cfg ]; then
-        html_failed "Fail to download website config file(ws: $host)" 
+        html_failed "Fail to download website config file(ws: $host)"
         return 1
     fi
 
     . $caDir/iopr_server.cfg
     RET=$?
     if [ $RET -ne 0 ]; then
-        html_failed "Fail to source config file(ws: $host)" 
+        html_failed "Fail to source config file(ws: $host)"
         return $RET
     fi
 
@@ -205,7 +205,7 @@ download_install_certs() {
     download_file $host $certDir/$caCertName.p12 $caDir
     RET=$?
     if [ $RET -ne 0 -o ! -f $caDir/$caCertName.p12 ]; then
-        html_failed "Fail to download $caCertName cert(ws: $host)" 
+        html_failed "Fail to download $caCertName cert(ws: $host)"
         return 1
     fi
     tmpFiles="$caDir/$caCertName.p12"
@@ -213,12 +213,12 @@ download_install_certs() {
     importFile $caDir $caDir/$caCertName.p12 $caCertName "TC,C,C"
     RET=$?
     if [ $RET -ne 0 ]; then
-        html_failed "Fail to import $caCertName cert to CA DB(ws: $host)" 
+        html_failed "Fail to import $caCertName cert to CA DB(ws: $host)"
         return $RET
     fi
 
     CU_ACTION="Exporting Root CA cert(ws: $host)"
-    certu -L -n $caCertName -r -d ${caDir} -o $caDir/$caCertName.cert 
+    certu -L -n $caCertName -r -d ${caDir} -o $caDir/$caCertName.cert
     if [ "$RET" -ne 0 ]; then
         Exit 7 "Fatal - failed to export $caCertName cert"
     fi
@@ -242,15 +242,15 @@ download_install_certs() {
             RET=$?
             if [ $RET -ne 0 ]; then
                 html_failed "Fail to import server-client-CA cert to \
-                             server DB(ws: $host)" 
+                             server DB(ws: $host)"
                 return $RET
             fi
-            
+
             #=======================================================
             # Creating server cert
             #
             CERTNAME=$HOSTADDR
-            
+
             CU_ACTION="Generate Cert Request for $CERTNAME (ws: $host)"
             CU_SUBJECT="CN=$CERTNAME, E=${CERTNAME}@bogus.com, O=BOGUS NSS, \
                         L=Mountain View, ST=California, C=US"
@@ -267,16 +267,16 @@ download_install_certs() {
                 -d "${caDir}" \
                 -i ${sslServerDir}/req -o $caDir/${CERTNAME}.cert \
                 -f "${R_PWFILE}" 2>&1
-            
+
             importFile $sslServerDir $caDir/$CERTNAME.cert $CERTNAME ",,"
             RET=$?
             if [ $RET -ne 0 ]; then
                 html_failed "Fail to import $CERTNAME cert to server\
-                             DB(ws: $host)" 
+                             DB(ws: $host)"
                 return $RET
             fi
             tmpFiles="$tmpFiles $caDir/$CERTNAME.cert"
-            
+
             #=======================================================
             # Download and import CA crl to server DB
             #
@@ -284,20 +284,20 @@ download_install_certs() {
             RET=$?
             if [ $? -ne 0 ]; then
                 html_failed "Fail to download $caCertName crl\
-                             (ws: $host)" 
+                             (ws: $host)"
                 return $RET
             fi
             tmpFiles="$tmpFiles $sslServerDir/$caCrlName.crl"
-            
+
             importFile $sslServerDir $sslServerDir/TestCA.crl
             RET=$?
             if [ $RET -ne 0 ]; then
                 html_failed "Fail to import TestCA crt to server\
-                             DB(ws: $host)" 
+                             DB(ws: $host)"
                 return $RET
             fi
         fi # if [ "$reverseRunCGIScript" ]
-        
+
         [ ! -d "$sslClientDir" ] && mkdir -p $sslClientDir;
         #=======================================================
         # Import CA cert to ssl client DB
@@ -307,7 +307,7 @@ download_install_certs() {
         RET=$?
         if [ $RET -ne 0 ]; then
             html_failed "Fail to import server-client-CA cert to \
-                         server DB(ws: $host)" 
+                         server DB(ws: $host)"
             return $RET
         fi
     fi
@@ -322,7 +322,7 @@ download_install_certs() {
         RET=$?
         if [ $RET -ne 0 ]; then
             html_failed "Fail to import server-client-CA cert to \
-                         server DB(ws: $host)" 
+                         server DB(ws: $host)"
             return $RET
         fi
     fi
@@ -344,16 +344,16 @@ download_install_certs() {
         download_file $host "$certDir/$fileName" $clientDir
         RET=$?
         if [ $RET -ne 0 -o ! -f $clientDir/$fileName ]; then
-            html_failed "Fail to download $certName cert(ws: $host)" 
+            html_failed "Fail to download $certName cert(ws: $host)"
             return $RET
         fi
         tmpFiles="$tmpFiles $clientDir/$fileName"
-        
+
         importFile $clientDir $clientDir/$fileName $certName ",,"
         RET=$?
         if [ $RET -ne 0 ]; then
             html_failed "Fail to import $certName cert to client DB\
-                        (ws: $host)" 
+                        (ws: $host)"
             return $RET
         fi
     done
@@ -367,10 +367,10 @@ download_install_certs() {
 #########################################################################
 # Initial point for downloading config, cert, crl files for multiple hosts
 # involved in interoperability testing. Called from nss/tests/cert/cert.sh
-# It will only proceed with downloading if environment variable 
+# It will only proceed with downloading if environment variable
 # IOPR_HOSTADDR_LIST is set and has a value of host names separated by space.
 #
-# Returns 1 if interoperability testing is off, 0 otherwise. 
+# Returns 1 if interoperability testing is off, 0 otherwise.
 #
 cert_iopr_setup() {
 
@@ -385,10 +385,10 @@ cert_iopr_setup() {
         [ -z "$IOPR_DOWNLOAD_PORT" ] && IOPR_DOWNLOAD_PORT=443
         IOPR_CONF_PATH=`echo "$IOPR_HOST_PARAM:" | cut -f 3 -d':'`
         [ -z "$IOPR_CONF_PATH" ] && IOPR_CONF_PATH="/iopr"
-        
+
         echo "Installing certs for $IOPR_HOSTADDR:$IOPR_DOWNLOAD_PORT:\
               $IOPR_CONF_PATH"
-        
+
         download_install_certs ${IOPR_HOSTADDR} ${IOPR_CADIR}_${IOPR_HOSTADDR} \
             ${IOPR_CONF_PATH} ${IOPR_SSL_SERVERDIR}_${IOPR_HOSTADDR} \
             ${IOPR_SSL_CLIENTDIR}_${IOPR_HOSTADDR} \
@@ -400,6 +400,6 @@ cert_iopr_setup() {
         num=`expr $num + 1`
         IOPR_HOST_PARAM=`echo "${IOPR_HOSTADDR_LIST} " | cut -f $num -d' '`
     done
-    
+
     return 0
 }

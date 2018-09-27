@@ -5,7 +5,7 @@
 /* yacc file for parsing PKCS #11 module installation instructions */
 /*------------------------ Definition Section ---------------------------*/
 
-%{ 
+%{
 #define yyparse Pk11Install_yyparse
 #define yylex Pk11Install_yylex
 #define yyerror Pk11Install_yyerror
@@ -51,19 +51,19 @@ char *Pk11Install_yyerrstr=NULL;
 
 /*--------------------------- Productions -------------------------------*/
 
-toplist		: valuelist	
+toplist		: valuelist
 {
 	Pk11Install_valueList = $1.list;
 }
 
 valuelist	: value valuelist
-{ 
+{
 	Pk11Install_ValueList_AddItem($2.list,$1.value);
-	$$.list = $2.list; 
+	$$.list = $2.list;
 }
 |
-{ 
-	$$.list = Pk11Install_ValueList_new(); 
+{
+	$$.list = Pk11Install_ValueList_new();
 };
 
 value		: key_value_pair
@@ -75,7 +75,7 @@ value		: key_value_pair
 	$$.value= Pk11Install_Value_new(STRING_VALUE, $1);
 };
 
-key_value_pair	: key OPENBRACE valuelist CLOSEBRACE 
+key_value_pair	: key OPENBRACE valuelist CLOSEBRACE
 {
 	$$.pair = Pk11Install_Pair_new($1.string,$3.list);
 };

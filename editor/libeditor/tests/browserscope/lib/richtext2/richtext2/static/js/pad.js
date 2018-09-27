@@ -1,5 +1,5 @@
 /**
- * @fileoverview 
+ * @fileoverview
  * Functions used to handle test and expectation strings.
  *
  * Copyright 2010 Google Inc.
@@ -43,10 +43,10 @@ function convertSelectionIndicators(pad) {
   }
 
   // Convert intra-tag selection markers to special attributes.
-  pad = pad.replace(/\{\>/g, ATTRNAME_SEL_START + '="1">');  
-  pad = pad.replace(/\}\>/g, ATTRNAME_SEL_END + '="1">');  
-  pad = pad.replace(/\|\>/g, ATTRNAME_SEL_START + '="1" ' + 
-                             ATTRNAME_SEL_END + '="1">'); 
+  pad = pad.replace(/\{\>/g, ATTRNAME_SEL_START + '="1">');
+  pad = pad.replace(/\}\>/g, ATTRNAME_SEL_END + '="1">');
+  pad = pad.replace(/\|\>/g, ATTRNAME_SEL_START + '="1" ' +
+                             ATTRNAME_SEL_END + '="1">');
 
   // Convert remaining {, }, | to comments with '[' and ']' data.
   pad = pad.replace('{', '<!--[-->');
@@ -90,7 +90,7 @@ function deriveSelectionPoint(root, marker) {
         }
       }
       break;
-      
+
     case DOM_NODE_TYPE_TEXT:
       var pos = root.data.indexOf(marker);
       if (pos != -1) {
@@ -136,7 +136,7 @@ function deriveSelectionPoint(root, marker) {
  * doesn't otherwise have any children. Ex.: <hr {>foobarbaz<hr }>
  *
  * Explicit and implicit specification can also be mixed between the 2 points.
- * 
+ *
  * A pad string must only contain at most ONE of the above that is suitable for
  * that start or end point, respectively, and must contain either both or none.
  *

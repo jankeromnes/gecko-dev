@@ -9183,7 +9183,7 @@ struct tuple<A0> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
 };
 
@@ -9206,7 +9206,7 @@ struct tuple<A0, A1> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
 };
@@ -9230,7 +9230,7 @@ struct tuple<A0, A1, A2> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9255,7 +9255,7 @@ struct tuple<A0, A1, A2, A3> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9281,7 +9281,7 @@ struct tuple<A0, A1, A2, A3, A4> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9308,7 +9308,7 @@ struct tuple<A0, A1, A2, A3, A4, A5> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9336,7 +9336,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9365,7 +9365,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9395,7 +9395,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9426,7 +9426,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9458,7 +9458,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9491,7 +9491,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9525,7 +9525,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9560,7 +9560,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9596,7 +9596,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14> {
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9633,7 +9633,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9671,7 +9671,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9710,7 +9710,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9750,7 +9750,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9791,7 +9791,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9833,7 +9833,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9876,7 +9876,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9920,7 +9920,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -9965,7 +9965,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -10011,7 +10011,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -10058,7 +10058,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -10106,7 +10106,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -10155,7 +10155,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -10205,7 +10205,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -10256,7 +10256,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -10308,7 +10308,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -10361,7 +10361,7 @@ struct tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1
         { return tuple_element<value_type, N>(*this).get(); }
     template <int N> typename const_tuple_element<value_type, N>::const_reference get() const
         { return const_tuple_element<value_type, N>(*this).get(); }
-    
+
     A0 a0;
     A1 a1;
     A2 a2;
@@ -10628,7 +10628,7 @@ struct convert<type::tuple<A0> > {
         msgpack::object const& o,
         type::tuple<A0>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10642,7 +10642,7 @@ struct convert<type::tuple<A0, A1> > {
         msgpack::object const& o,
         type::tuple<A0, A1>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10659,7 +10659,7 @@ struct convert<type::tuple<A0, A1, A2> > {
         msgpack::object const& o,
         type::tuple<A0, A1, A2>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10679,7 +10679,7 @@ struct convert<type::tuple<A0, A1, A2, A3> > {
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10702,7 +10702,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4> > {
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10728,7 +10728,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5> > {
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10757,7 +10757,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6> > {
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10789,7 +10789,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7> > {
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10824,7 +10824,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8> > {
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10862,7 +10862,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9> > {
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10903,7 +10903,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10> > {
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10947,7 +10947,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11> > {
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -10994,7 +10994,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11044,7 +11044,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11097,7 +11097,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11153,7 +11153,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11212,7 +11212,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11274,7 +11274,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11339,7 +11339,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11407,7 +11407,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11478,7 +11478,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11552,7 +11552,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11629,7 +11629,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11709,7 +11709,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11792,7 +11792,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11878,7 +11878,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -11967,7 +11967,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -12059,7 +12059,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -12154,7 +12154,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27, A28>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -12252,7 +12252,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27, A28, A29>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -12353,7 +12353,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27, A28, A29, A30>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -12457,7 +12457,7 @@ struct convert<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         msgpack::object const& o,
         type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27, A28, A29, A30, A31>& v) const {
         if(o.type != msgpack::type::ARRAY) { throw msgpack::type_error(); }
-        
+
         // In order to avoid clang++'s invalid warning, msgpack::object:: has been added.
         if(o.via.array.size > 0)
             o.via.array.ptr[0].msgpack::object::convert<typename type::tuple_type<A0>::type>(v.template get<0>());
@@ -12580,7 +12580,7 @@ struct pack<type::tuple<A0> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0>& v) const {
         o.pack_array(1);
-        
+
         o.pack(v.template get<0>());
         return o;
     }
@@ -12593,7 +12593,7 @@ struct pack<type::tuple<A0, A1> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1>& v) const {
         o.pack_array(2);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         return o;
@@ -12607,7 +12607,7 @@ struct pack<type::tuple<A0, A1, A2> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2>& v) const {
         o.pack_array(3);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12622,7 +12622,7 @@ struct pack<type::tuple<A0, A1, A2, A3> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3>& v) const {
         o.pack_array(4);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12638,7 +12638,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4>& v) const {
         o.pack_array(5);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12655,7 +12655,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5>& v) const {
         o.pack_array(6);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12673,7 +12673,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6>& v) const {
         o.pack_array(7);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12692,7 +12692,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7>& v) const {
         o.pack_array(8);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12712,7 +12712,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8>& v) const {
         o.pack_array(9);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12733,7 +12733,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9>& v) const {
         o.pack_array(10);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12755,7 +12755,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>& v) const {
         o.pack_array(11);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12778,7 +12778,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11> > {
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11>& v) const {
         o.pack_array(12);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12802,7 +12802,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12> >
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12>& v) const {
         o.pack_array(13);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12827,7 +12827,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13>& v) const {
         o.pack_array(14);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12853,7 +12853,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14>& v) const {
         o.pack_array(15);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12880,7 +12880,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15>& v) const {
         o.pack_array(16);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12908,7 +12908,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16>& v) const {
         o.pack_array(17);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12937,7 +12937,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17>& v) const {
         o.pack_array(18);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12967,7 +12967,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18>& v) const {
         o.pack_array(19);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -12998,7 +12998,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19>& v) const {
         o.pack_array(20);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13030,7 +13030,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20>& v) const {
         o.pack_array(21);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13063,7 +13063,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21>& v) const {
         o.pack_array(22);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13097,7 +13097,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22>& v) const {
         o.pack_array(23);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13132,7 +13132,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23>& v) const {
         o.pack_array(24);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13168,7 +13168,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24>& v) const {
         o.pack_array(25);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13205,7 +13205,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25>& v) const {
         o.pack_array(26);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13243,7 +13243,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26>& v) const {
         o.pack_array(27);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13282,7 +13282,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27>& v) const {
         o.pack_array(28);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13322,7 +13322,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27, A28>& v) const {
         o.pack_array(29);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13363,7 +13363,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27, A28, A29>& v) const {
         o.pack_array(30);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13405,7 +13405,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27, A28, A29, A30>& v) const {
         o.pack_array(31);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13448,7 +13448,7 @@ struct pack<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A
         msgpack::packer<Stream>& o,
         const type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27, A28, A29, A30, A31>& v) const {
         o.pack_array(32);
-        
+
         o.pack(v.template get<0>());
         o.pack(v.template get<1>());
         o.pack(v.template get<2>());
@@ -13508,7 +13508,7 @@ struct object_with_zone<type::tuple<A0> > {
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*1, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 1;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
     }
 };
@@ -13521,7 +13521,7 @@ struct object_with_zone<type::tuple<A0, A1> > {
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*2, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 2;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
     }
@@ -13535,7 +13535,7 @@ struct object_with_zone<type::tuple<A0, A1, A2> > {
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*3, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 3;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13550,7 +13550,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3> > {
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*4, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 4;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13566,7 +13566,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4> > {
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*5, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 5;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13583,7 +13583,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5> > {
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*6, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 6;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13601,7 +13601,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6> > {
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*7, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 7;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13620,7 +13620,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7> > {
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*8, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 8;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13640,7 +13640,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8> > {
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*9, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 9;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13661,7 +13661,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9> > {
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*10, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 10;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13683,7 +13683,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*11, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 11;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13706,7 +13706,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*12, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 12;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13730,7 +13730,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*13, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 13;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13755,7 +13755,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*14, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 14;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13781,7 +13781,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*15, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 15;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13808,7 +13808,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*16, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 16;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13836,7 +13836,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*17, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 17;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13865,7 +13865,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*18, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 18;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13895,7 +13895,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*19, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 19;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13926,7 +13926,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*20, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 20;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13958,7 +13958,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*21, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 21;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -13991,7 +13991,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*22, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 22;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -14025,7 +14025,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*23, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 23;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -14060,7 +14060,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*24, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 24;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -14096,7 +14096,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*25, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 25;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -14133,7 +14133,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*26, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 26;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -14171,7 +14171,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*27, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 27;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -14210,7 +14210,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*28, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 28;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -14250,7 +14250,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*29, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 29;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -14291,7 +14291,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*30, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 30;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -14333,7 +14333,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*31, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 31;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);
@@ -14376,7 +14376,7 @@ struct object_with_zone<type::tuple<A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
         o.type = msgpack::type::ARRAY;
         o.via.array.ptr = static_cast<msgpack::object*>(o.zone.allocate_align(sizeof(msgpack::object)*32, MSGPACK_ZONE_ALIGNOF(msgpack::object)));
         o.via.array.size = 32;
-        
+
         o.via.array.ptr[0] = msgpack::object(v.template get<0>(), o.zone);
         o.via.array.ptr[1] = msgpack::object(v.template get<1>(), o.zone);
         o.via.array.ptr[2] = msgpack::object(v.template get<2>(), o.zone);

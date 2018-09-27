@@ -44,7 +44,7 @@ cleanup:
 /*
  * FUNCTION: pkix_pl_OcspCertID_RegisterSelf
  * DESCRIPTION:
- *  Registers PKIX_PUBLICKEY_TYPE and its related functions 
+ *  Registers PKIX_PUBLICKEY_TYPE and its related functions
  *  with systemClasses[]
  * THREAD SAFETY:
  *  Not Thread Safe - for performance and complexity reasons
@@ -117,7 +117,7 @@ PKIX_PL_OcspCertID_Create(
 
         PKIX_ENTER(DATE, "PKIX_PL_OcspCertID_Create");
         PKIX_NULLCHECK_TWO(cert, object);
-    
+
         PKIX_CHECK(PKIX_PL_Object_Alloc
                     (PKIX_OCSPCERTID_TYPE,
                     sizeof (PKIX_PL_OcspCertID),
@@ -174,7 +174,7 @@ cleanup:
  */
 PKIX_Error *
 PKIX_PL_OcspCertID_GetFreshCacheStatus(
-        PKIX_PL_OcspCertID *cid, 
+        PKIX_PL_OcspCertID *cid,
         PKIX_PL_Date *validity,
         PKIX_Boolean *hasFreshStatus,
         PKIX_Boolean *statusIsGood,
@@ -232,7 +232,7 @@ cleanup:
  */
 PKIX_Error *
 PKIX_PL_OcspCertID_RememberOCSPProcessingFailure(
-        PKIX_PL_OcspCertID *cid, 
+        PKIX_PL_OcspCertID *cid,
         void *plContext)
 {
         PRBool certIDWasConsumed = PR_FALSE;

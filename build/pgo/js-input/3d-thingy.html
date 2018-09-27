@@ -163,7 +163,7 @@ function S_sphere(d,r,c,clr) {
   }
   return new S_model(v,t);
 }
-S_model.prototype.S_scale=function(x) { 
+S_model.prototype.S_scale=function(x) {
   this.tm[0]*=x; this.tm[5]*=x; this.tm[10]*=x;
 }
 S_model.prototype.S_faceColor=function(i,c) { this.f[i].c=c; }
@@ -190,7 +190,7 @@ function S_buffer(h,w) {
   }
   return b;
 }
-function S_pixel() { // display boolean, color  
+function S_pixel() { // display boolean, color
   this.d=true; this.c=0;
 }
 S_pixel.prototype.S_setColor=function(c) {
@@ -319,7 +319,7 @@ function S_setupBuffer(scn,p,c) {
     }
     for(j=0;j<scn.w;j++)
       if((j>=(xmin[i]-scn.l))&&(j<=(xmax[i]-scn.l))) {
-        scn.bfr[i][j].d=true; scn.bfr[i][j].c=c;          
+        scn.bfr[i][j].d=true; scn.bfr[i][j].c=c;
       }
   }
 }

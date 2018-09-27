@@ -23,7 +23,7 @@
   /* virtual HRESULT Open_GetPasswordIfAny(bool &passwordIsDefined, UString &password) x; */ \
   /* virtual bool Open_WasPasswordAsked() x; */ \
   /* virtual void Open_Clear_PasswordWasAsked_Flag() x; */  \
-  
+
 #endif
 
 #define INTERFACE_IOpenCallbackUI(x) \
@@ -81,7 +81,7 @@ public:
   UStringVector FileNames;
   CBoolVector FileNames_WasUsed;
   CRecordVector<UInt64> FileSizes;
-  
+
   bool PasswordWasAsked;
 
   IOpenCallbackUI *Callback;
@@ -89,7 +89,7 @@ public:
   // UInt64 TotalSize;
 
   COpenCallbackImp(): Callback(NULL), _subArchiveMode(false) {}
-  
+
   void Init(const FString &folderPrefix, const FString &fileName)
   {
     _folderPrefix = folderPrefix;

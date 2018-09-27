@@ -20,7 +20,7 @@ info: |
        iv. Let benvRec be benv's EnvironmentRecord.
        v. Let fobj be ! benvRec.GetBindingValue(F, false).
        vi. Perform ? genvRec.SetMutableBinding(F, fobj, false).
-       vii. Return NormalCompletion(empty). 
+       vii. Return NormalCompletion(empty).
 
 ---*/
 Object.defineProperty(fnGlobalObject(), 'f', {

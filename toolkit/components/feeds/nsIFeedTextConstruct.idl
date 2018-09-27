@@ -14,9 +14,9 @@ webidl Element;
  * nsIFeedTextConstructs represent feed text fields that can contain
  * one of text, HTML, or XHTML. Some extension elements also have "type"
  * parameters, and this interface could be used there as well.
- */ 
+ */
 [scriptable, uuid(fc97a2a9-d649-4494-931e-db81a156c873)]
-interface nsIFeedTextConstruct : nsISupports 
+interface nsIFeedTextConstruct : nsISupports
 {
   /**
    * If the text construct contains (X)HTML, relative references in
@@ -44,7 +44,7 @@ interface nsIFeedTextConstruct : nsISupports
   attribute AString text;
 
   /**
-   * Returns the text of the text construct, with all markup stripped 
+   * Returns the text of the text construct, with all markup stripped
    * and all entities decoded. If the type attribute's value is "text",
    * this function returns the value of the text attribute unchanged.
    */
@@ -55,4 +55,4 @@ interface nsIFeedTextConstruct : nsISupports
    */
   DocumentFragment createDocumentFragment(in Element element);
 };
- 
+

@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
 // Print x as a continued fraction in compact abbreviated notation and return
 // the convergent [n, d] such that x - (n / d) <= epsilon.

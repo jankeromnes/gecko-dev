@@ -21,8 +21,8 @@
 #     define __UU  /* Universal Unix - for struct timeval */
 #   endif
 #   include <time.h>
-#   include <sys/time.h> 
-#   include <unistd.h> 
+#   include <sys/time.h>
+#   include <unistd.h>
 #endif
 
 /**
@@ -47,12 +47,12 @@
  *              printf("Normalization failed\n");
  *          }
  *      }
- *  
+ *
  *      int main(){
- *          // time the normalization function 
+ *          // time the normalization function
  *          double timeTaken = 0;
  *          Params param;
- *          param.source  // set up the source buffer 
+ *          param.source  // set up the source buffer
  *          param.target   // set up the target buffer
  *          .... so on ...
  *          UTimer timer;
@@ -71,7 +71,7 @@
  *          UChar* dest=NULL;
  *          int32_t destCapacity=0;
  *          int len =-1;
- *          double elapsedTime = 0; 
+ *          double elapsedTime = 0;
  *          int retVal=0;
  *
  *          UChar arr[5000];
@@ -81,7 +81,7 @@
  *
  *          // Initialize cache and ensure the data is loaded.
  *          // This loop checks for errors in Normalization. Once we pass the initialization
- *          // without errors we can safelly assume that there are no errors while timing the 
+ *          // without errors we can safelly assume that there are no errors while timing the
  *          // funtion
  *          for (loops=0; loops<10; loops++) {
  *              for (line=0; line < gNumFileLines; line++) {
@@ -100,7 +100,7 @@
  *                      fprintf(stderr,"Normalization of string in ICU API failed for mode %s. Error: %s at line number %i\n",mode,u_errorName(error),line);
  *                      return 0;
  *                  }
- *        
+ *
  *              }
  *          }
  *
@@ -114,7 +114,7 @@
  *                  }
  *
  *                  retVal= fn(fileLines[line].name,len,dest,destCapacity,&error);
- *       
+ *
  *              }
  *          }
  *
@@ -147,14 +147,14 @@
  *                  perf(timer2,source,sourceLen,target,targetLen,loopCount,UNORM_NFC,&error);
  *                  NFCTimeTaken = utimer_getDeltaSeconds(start,timer2);
  *                  perf(timer3, source, sourceLen, target,targetLen, loopCount, UNORM_FCD,&error);
- *              // ........so on .............          
+ *              // ........so on .............
  *           }
- *          // calculate confidence levels etc and print            
+ *          // calculate confidence levels etc and print
  *
  *       }
- *           
+ *
  *     </code>
- *      
+ *
  */
 
 typedef struct UTimer UTimer;
@@ -167,8 +167,8 @@ typedef void FuntionToBeTimed(void* param);
     struct UTimer{
         LARGE_INTEGER start;
         LARGE_INTEGER placeHolder;
-    };      
-        
+    };
+
 static    int uprv_initFrequency(UTimer* timer)
     {
         return QueryPerformanceFrequency(&timer->placeHolder);
@@ -190,7 +190,7 @@ static    UBool uprv_compareFrequency(UTimer* timer1, UTimer* timer2){
         struct timeval start;
         struct timeval placeHolder;
     };
-    
+
 static    int32_t uprv_initFrequency(UTimer* /*timer*/)
     {
         return 0;
@@ -240,7 +240,7 @@ utimer_getDeltaSeconds(UTimer* timer1, UTimer* timer2){
 }
 
 /**
- * Returns the time elapsed from the starting time represented by the 
+ * Returns the time elapsed from the starting time represented by the
  * UTimer struct pointer passed
  * @param timer A pointer to UTimer struct to be used as starting time
  * @return Time elapsed in seconds
@@ -255,7 +255,7 @@ utimer_getElapsedSeconds(UTimer* timer){
 /**
  * Executes the function pointed to for a given time and returns exact time
  * taken and number of iterations of the loop
- * @param thresholTimeVal 
+ * @param thresholTimeVal
  * @param loopCount output param to recieve the number of iterations
  * @param fn    The funtion to be executed
  * @param param Parameters to be passed to the fn
@@ -263,8 +263,8 @@ utimer_getElapsedSeconds(UTimer* timer){
  */
 static inline double U_EXPORT2
 utimer_loopUntilDone(double thresholdTimeVal,
-                     int32_t* loopCount, 
-                     FuntionToBeTimed fn, 
+                     int32_t* loopCount,
+                     FuntionToBeTimed fn,
                      void* param){
     UTimer timer;
     double currentVal=0;

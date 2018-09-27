@@ -75,7 +75,7 @@ public:
     STDMETHODIMP Reset();
     STDMETHODIMP Clone(LPENUMFORMATETC *aResult); // Addrefs
 
-    // Utils 
+    // Utils
     void AddFormatEtc(LPFORMATETC aFormat);
 
 private:

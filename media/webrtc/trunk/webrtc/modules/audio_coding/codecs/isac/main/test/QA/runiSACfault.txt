@@ -1,5 +1,5 @@
 #!/bin/bash
-(set -o igncr) 2>/dev/null && set -o igncr; # force bash to ignore \r character????? ?????? 
+(set -o igncr) 2>/dev/null && set -o igncr; # force bash to ignore \r character????? ??????
 if  [ "$1" = "x64" ] || [ "$#" -eq 0 ]
     then
     PLATFORM=_X64
@@ -40,7 +40,7 @@ index1=0
 file_wb=../data/orig/16kHz.pcm
 file_swb=../data/origswb/32kHz.pcm
 
-for idx in 0 1 2 3 
+for idx in 0 1 2 3
   do
 # Fault test
   echo
@@ -58,9 +58,9 @@ for idx in 0 1 2 3
     $ISAC -I -B "${TARGETRATE[idx]}" -F $testnr -FS "${SAMPFREQ[idx]}" "$file" \
 	$OUTDIR/ft"$testnr"_"${TARGETRATE[idx]}"_"${SAMPFREQ[idx]}".pcm >> LOGFILE
     echo
-    
+
   done
-  
+
 # Fault test number 10, error in bitstream
   echo "Running Fault Test 10"
   $ISAC -I -B "${TARGETRATE[idx]}" -F 10        -FS "${SAMPFREQ[idx]}" "$file" \
@@ -72,9 +72,9 @@ for idx in 0 1 2 3
   echo
 done
 
-echo 
+echo
 echo
 echo DONE!
-  
+
 
 

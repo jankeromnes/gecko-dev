@@ -17,7 +17,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof Script == 'undefined' || !('toSource' in {}))
   {
     print('Test skipped. Script or toSource not defined');

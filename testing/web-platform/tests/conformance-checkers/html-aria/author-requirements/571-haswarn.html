@@ -9,7 +9,7 @@
       var DEL = 8;
       var BACK_SPACE = 72;
       var comboInfo = {};
-      
+
       function initComboInfo() {
           comboInfo.comboBox = document.getElementById ('test');
           comboInfo.textEntry = document.getElementById ('textEntry');
@@ -17,10 +17,10 @@
           comboInfo.options = active.parentElement.children;
           return active;
       }
-      
+
       function matchOption(/* String */ entryVal) {
           var theOption = null;
-          
+
           // Check only if entryVal is not empty.
           //
           if (entryVal != null && entryVal.length != 0) {
@@ -35,7 +35,7 @@
           }
           return theOption;
       }
-      
+
       function updateActive (/* Element */ newActive) {
           var oldActive = document.getElementById (comboInfo.comboBox.getAttribute ('aria-activedescendant'));
           if (oldActive != newActive) {
@@ -44,19 +44,19 @@
               newActive.setAttribute ('class', 'hasFocus');
           }
       }
-      
+
       function doOnload() {
           var active = initComboInfo();
           active.setAttribute ('class', 'hasFocus');
           comboInfo.textEntry.value = active.innerHTML;
           comboInfo.textEntry.focus();
       }
-      
-    function handleTyping (event) {     
+
+    function handleTyping (event) {
           /* NOTE:  With respect to IE, assumes IE9 as per CR criteria (http://www.w3.org/WAI/ARIA/1.0/CR/implementation-report) */
           /* NOTE:  Supports deletion only from the end of the text INPUT value */
           var stringSoFar = event.target.value;
-          
+
           if (event.which == DEL || event.which == BACK_SPACE)
               stringSoFar = stringSoFar.slice(0, stringSoFar.length-1);
           else
@@ -66,7 +66,7 @@
           if (matchedOption != null)
               updateActive (matchedOption);
       }
-      
+
     </script>
   </head>
   <body onload="doOnload();">
@@ -80,5 +80,5 @@
         <li role="option" id="o5">Alpha</li>
       </ul>
     </div>
-  
+
 </body></html>

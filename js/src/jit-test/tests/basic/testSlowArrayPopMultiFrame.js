@@ -1,6 +1,6 @@
 // Same thing but it needs to reconstruct multiple stack frames (so,
 // multiple functions called inside the loop)
-function testSlowArrayPopMultiFrame() {    
+function testSlowArrayPopMultiFrame() {
     var a = [];
     for (var i = 0; i < 9; i++)
         a[i] = [0];
@@ -12,7 +12,7 @@ function testSlowArrayPopMultiFrame() {
     function parent(a, i) {
         return child(a, i);
     }
-    function gramps(a, i) { 
+    function gramps(a, i) {
         return parent(a, i);
     }
 

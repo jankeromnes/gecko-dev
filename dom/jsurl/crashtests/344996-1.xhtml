@@ -11,13 +11,13 @@ function foopy()
 {
   a = document.getElementById("a");
   b = document.getElementById("b");
-  
+
   var img = document.getElementById("img");
   var rx = document.getElementById("rx");
 
   img.setAttribute('src', "javascript:aC(a, b);");
   aC(rx, a);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

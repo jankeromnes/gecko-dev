@@ -29,7 +29,7 @@ info: |
 let iterCount = 0;
 async function fn() {
   for await ({ unresolvable } of [{}]) {
-    
+
     iterCount += 1;
   }
 }

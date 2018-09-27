@@ -42,7 +42,7 @@ namespace google_breakpad {
 // Splits line into at most max_tokens tokens, separated by any of the
 // characters in separators and placing them in the tokens vector.
 // line is a 0-terminated string that optionally ends with a newline
-// character or combination, which will be removed. 
+// character or combination, which will be removed.
 // If more tokens than max_tokens are present, the final token is placed
 // into the vector without splitting it up at all.  This modifies line as
 // a side effect.  Returns true if exactly max_tokens tokens are returned,

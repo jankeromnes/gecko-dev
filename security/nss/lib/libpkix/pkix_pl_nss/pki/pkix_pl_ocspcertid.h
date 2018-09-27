@@ -34,7 +34,7 @@ PKIX_PL_OcspCertID_Create(
 
 PKIX_Error *
 PKIX_PL_OcspCertID_GetFreshCacheStatus(
-        PKIX_PL_OcspCertID *cid, 
+        PKIX_PL_OcspCertID *cid,
         PKIX_PL_Date *validity,
         PKIX_Boolean *hasFreshStatus,
         PKIX_Boolean *statusIsGood,
@@ -43,7 +43,7 @@ PKIX_PL_OcspCertID_GetFreshCacheStatus(
 
 PKIX_Error *
 PKIX_PL_OcspCertID_RememberOCSPProcessingFailure(
-        PKIX_PL_OcspCertID *cid, 
+        PKIX_PL_OcspCertID *cid,
         void *plContext);
 
 #ifdef __cplusplus

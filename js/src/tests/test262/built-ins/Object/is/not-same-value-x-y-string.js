@@ -9,8 +9,8 @@ description: >
 
     ...
     7. If Type(x) is String, then
-      a. If x and y are exactly the same sequence of code units 
-        (same length and same code units at corresponding indices) 
+      a. If x and y are exactly the same sequence of code units
+        (same length and same code units at corresponding indices)
         return true; otherwise, return false.
     ...
 ---*/

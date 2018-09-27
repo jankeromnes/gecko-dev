@@ -11,8 +11,8 @@ flags: [noStrict]
 //////////////////////////////////////////////////////////////////////////////
 //CHECK#1
 if (typeof(__ref) !== "undefined"){
-    $ERROR('#1: typeof(__ref) === "undefined". Actual: ' + (typeof(__ref)));  
-}; 
+    $ERROR('#1: typeof(__ref) === "undefined". Actual: ' + (typeof(__ref)));
+};
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -23,7 +23,7 @@ __ref = obj;
 //CHECK#2
 if (typeof(__ref) === "undefined"){
     $ERROR('#2: obj = new Object(); __ref = obj; typeof(__ref) !== "undefined"');
-}; 
+};
 //
 //////////////////////////////////////////////////////////////////////////////
 

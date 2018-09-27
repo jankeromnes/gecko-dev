@@ -3,7 +3,7 @@ Index: tools/dsymutil/DwarfLinker.cpp
 --- a/llvm/tools/dsymutil/DwarfLinker.cpp	(revision 313871)
 +++ b/llvm/tools/dsymutil/DwarfLinker.cpp	(revision 313872)
 @@ -1496,7 +1496,11 @@
- 
+
    if ((RefCU = getUnitForOffset(Units, RefOffset)))
 -    if (const auto RefDie = RefCU->getOrigUnit().getDIEForOffset(RefOffset))
 -      return RefDie;
@@ -13,6 +13,6 @@ Index: tools/dsymutil/DwarfLinker.cpp
 +      if(!RefDie.isNULL())
 +        return RefDie;
 +    }
- 
+
    Linker.reportWarning("could not find referenced DIE", &DIE);
    return DWARFDie();

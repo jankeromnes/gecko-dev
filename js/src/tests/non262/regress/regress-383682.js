@@ -20,7 +20,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function f(s) {
     return this.eval(s);
   }

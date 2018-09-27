@@ -39,14 +39,14 @@ function run() {
 
   is(subdoc_cell_font(), subdoc_body_font(),
         "Quirks style sheet should be applied.");
-  
+
   subdoc.open();
   subdoc.write("<!DOCTYPE HTML>" + doctext);
   subdoc.close();
 
   isnot(subdoc_cell_font(), subdoc_body_font(),
         "Quirks style sheet should NOT be applied.");
-  
+
   subdoc.open();
   subdoc.write(doctext);
   subdoc.close();

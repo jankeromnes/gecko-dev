@@ -29,11 +29,11 @@ if (isNaN(+(new Number(Number.NaN)) !== true)) {
 
 // CHECK#4
 if (+(new Number(null)) !== 0) {
-  $ERROR('#4.1: +(new Number(null)) === 0. Actual: ' + (+(new Number(null)))); 
+  $ERROR('#4.1: +(new Number(null)) === 0. Actual: ' + (+(new Number(null))));
 } else {
   if (1/+(new Number(null)) !== Number.POSITIVE_INFINITY) {
     $ERROR('#4.2: +(new Number(null)) === +0. Actual: -0');
-  }	
+  }
 }
 
 // CHECK#5
@@ -76,9 +76,9 @@ if (isNaN(+(new Array(2,4,8,16,32))) !== true) {
 
 // CHECK#11
 var myobj1 = {
-                ToNumber : function(){return 12345;}, 
+                ToNumber : function(){return 12345;},
                 toString : function(){return "67890";},
-                valueOf  : function(){return "[object MyObj]";} 
+                valueOf  : function(){return "[object MyObj]";}
             };
 
 if (isNaN(+(myobj1)) !== true){
@@ -87,9 +87,9 @@ if (isNaN(+(myobj1)) !== true){
 
 // CHECK#12
 var myobj2 = {
-                ToNumber : function(){return 12345;}, 
+                ToNumber : function(){return 12345;},
                 toString : function(){return "67890";},
-                valueOf  : function(){return "9876543210";} 
+                valueOf  : function(){return "9876543210";}
             };
 
 if (+(myobj2) !== 9876543210){
@@ -99,8 +99,8 @@ if (+(myobj2) !== 9876543210){
 
 // CHECK#13
 var myobj3 = {
-                ToNumber : function(){return 12345;}, 
-                toString : function(){return "[object MyObj]";} 
+                ToNumber : function(){return 12345;},
+                toString : function(){return "[object MyObj]";}
             };
 
 if (isNaN(+(myobj3)) !== true){
@@ -109,8 +109,8 @@ if (isNaN(+(myobj3)) !== true){
 
 // CHECK#14
 var myobj4 = {
-                ToNumber : function(){return 12345;}, 
-                toString : function(){return "67890";} 
+                ToNumber : function(){return 12345;},
+                toString : function(){return "67890";}
             };
 
 if (+(myobj4) !== 67890){
@@ -119,7 +119,7 @@ if (+(myobj4) !== 67890){
 
 // CHECK#15
 var myobj5 = {
-                ToNumber : function(){return 12345;} 
+                ToNumber : function(){return 12345;}
             };
 
 if (isNaN(+(myobj5)) !== true){

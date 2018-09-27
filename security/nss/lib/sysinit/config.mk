@@ -70,7 +70,7 @@ MKSHLIB += -R '$$ORIGIN'
 endif
 endif
 
-ifeq ($(OS_ARCH), HP-UX) 
+ifeq ($(OS_ARCH), HP-UX)
 ifneq ($(OS_TEST), ia64)
 # pa-risc
 ifeq ($(USE_64), 1)

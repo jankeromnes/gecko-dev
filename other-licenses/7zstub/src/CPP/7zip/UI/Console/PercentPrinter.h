@@ -9,7 +9,7 @@ struct CPercentPrinterState
 {
   UInt64 Completed;
   UInt64 Total;
-  
+
   UInt64 Files;
 
   AString Command;
@@ -45,7 +45,7 @@ public:
 
   bool NeedFlush;
   unsigned MaxLen;
-  
+
   CPercentPrinter(UInt32 tickStep = 200):
       _tickStep(tickStep),
       _prevTick(0),

@@ -24,7 +24,7 @@ var g2 = f("var b = 2;");
 /* Call the lambda once, caching a reference to the global b. */
 g1(0);
 
-/* 
+/*
  * If this call sees the above cache entry, then it will erroneously use the
  * global b.
  */

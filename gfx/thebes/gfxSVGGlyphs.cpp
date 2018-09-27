@@ -82,7 +82,7 @@ gfxSVGGlyphs::DidRefresh()
  * The total ordering here is guaranteed by
  *   (1) the index ranges being disjoint; and
  *   (2) the (sole) key always being a singleton, so intersection => containment
- *       (note that this is wrong if we have more than one intersection or two 
+ *       (note that this is wrong if we have more than one intersection or two
  *        sets intersecting of size > 1 -- so... don't do that)
  */
 /* static */ int

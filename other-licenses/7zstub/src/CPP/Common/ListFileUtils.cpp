@@ -81,7 +81,7 @@ bool ReadNamesFromListFile(CFSTR fileName, UStringVector &strings, UINT codePage
     s.ReleaseBuf_CalcLen((unsigned)processed);
     if (s.Len() != processed)
       return false;
-    
+
     // #ifdef CP_UTF8
     if (codePage == CP_UTF8)
     {
@@ -95,7 +95,7 @@ bool ReadNamesFromListFile(CFSTR fileName, UStringVector &strings, UINT codePage
 
   const wchar_t kGoodBOM = 0xFEFF;
   const wchar_t kBadBOM  = 0xFFFE;
-  
+
   UString s;
   unsigned i = 0;
   for (; i < u.Len() && u[i] == kGoodBOM; i++);

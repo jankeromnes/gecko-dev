@@ -1,5 +1,5 @@
 //
-// Test that data can be appended to a cache entry even when the data is 
+// Test that data can be appended to a cache entry even when the data is
 // compressed by the cache compression feature - bug 648429.
 //
 

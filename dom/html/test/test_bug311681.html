@@ -5,7 +5,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=311681
 -->
 <head>
   <title>Test for Bug 311681</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -21,7 +21,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=311681
   }
 
   // save off the document.getElementById function, since getting it as a
-  // property off the document it causes a content flush.      
+  // property off the document it causes a content flush.
   var fun = document.getElementById;
 
   // Slot for our initial element with id "content"
@@ -30,7 +30,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=311681
   function getCont() {
     return fun.call(document, "content");
   }
-  
+
   function testClone() {
     // Test to make sure that if we have multiple nodes with the same ID in
     // a document we don't forget about one of them when the other is
@@ -43,18 +43,18 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=311681
 
     // Check what getElementById returns, no flushing
     is(getCont(), node, "Should be getting new node pre-flush 1");
-    
+
     // Trigger a layout flush, just in case.
     var itemHeight = newParent.offsetHeight/10;
 
     // Check what getElementById returns now.
     is(getCont(), node, "Should be getting new node post-flush 1");
-    
+
     clear(newParent);
-    
+
     // Check what getElementById returns, no flushing
     is(getCont(), testNode, "Should be getting orig node pre-flush 2");
-    
+
     // Trigger a layout flush, just in case.
     var itemHeight = newParent.offsetHeight/10;
 
@@ -67,7 +67,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=311681
 
     // Check what getElementById returns, no flushing
     is(getCont(), node, "Should be getting clone pre-flush");
-    
+
     // Trigger a layout flush, just in case.
     var itemHeight = newParent.offsetHeight/10;
 

@@ -12,7 +12,7 @@ description: >
 flags: [noStrict]
 ---*/
 
-function __func(){ 
+function __func(){
     delete arguments;
     return arguments;
 }

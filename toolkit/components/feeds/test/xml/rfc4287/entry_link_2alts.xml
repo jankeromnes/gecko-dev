@@ -19,7 +19,7 @@ Expect: feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntry).link.sp
     <updated>2005-01-18T15:00:02Z</updated>
     <summary>The aggregator should pick either the second or third link below as the alternate</summary>
 
-    <link rel="ALTERNATE" href="http://www.snellspace.com/public/linktests/wrong" />    
+    <link rel="ALTERNATE" href="http://www.snellspace.com/public/linktests/wrong" />
     <link href="http://www.snellspace.com/public/linktests/alternate" />
     <link type="text/plain" href="http://www.snellspace.com/public/linktests/alternate2" />
     <link rel="ALTERNATE" href="http://www.snellspace.com/public/linktests/wrong" />

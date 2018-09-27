@@ -8,7 +8,7 @@ description: Type(x) is boolean primitive or Boolean object
 ---*/
 
 //CHECK#1
-var x = false; 
+var x = false;
 if (void x !== undefined) {
   $ERROR('#1: var x = false; void x === undefined. Actual: ' + (void x));
 }

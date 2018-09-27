@@ -1,5 +1,5 @@
 #!perl -w
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -85,7 +85,7 @@ while(<>) {
     if( !defined($constants{$fields[2]}) ) {
       $constants{$fields[2]} = "static const $fields[1] $lcv = $fields[2];\n";
     }
-    
+
     $size = "sizeof($fields[1])";
     $fields[2] = "&$lcv";
   }

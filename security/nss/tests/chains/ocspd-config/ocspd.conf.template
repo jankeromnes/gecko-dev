@@ -13,7 +13,7 @@ ocspd_certificate = $dir/@CA_CERT@
 ocspd_key = $dir/@CA_KEY@
 pidfile = $dir/@OCSP_PID@
 
-user = nobody 
+user = nobody
 group = nobody
 
 bind = *

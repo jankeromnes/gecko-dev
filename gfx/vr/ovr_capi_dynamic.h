@@ -54,7 +54,7 @@
 #define OVR_UNUSED_STRUCT_PAD(padName, size) char padName[size];
 #endif
 
-#ifdef __cplusplus 
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -99,7 +99,7 @@ typedef struct {
 } ovrFovPort;
 
 typedef enum {
-  ovrHmd_None      = 0,    
+  ovrHmd_None      = 0,
   ovrHmd_DK1       = 3,
   ovrHmd_DKHD      = 4,
   ovrHmd_DK2       = 6,

@@ -53,7 +53,7 @@ AC_ARG_WITH(nspr-exec-prefix,
 	if test "$NSPR_CONFIG" != "no"; then
 		NSPR_CFLAGS=`$NSPR_CONFIG $nspr_config_args --cflags`
 		NSPR_LIBS=`$NSPR_CONFIG $nspr_config_args --libs`
-		NSPR_VERSION_STRING=`$NSPR_CONFIG $nspr_config_args --version`	
+		NSPR_VERSION_STRING=`$NSPR_CONFIG $nspr_config_args --version`
 	elif test -n "${NO_NSPR_CONFIG_SYSTEM_VERSION}"; then
 	    NSPR_CFLAGS="${NO_NSPR_CONFIG_SYSTEM_CFLAGS}"
 		NSPR_LIBS="${NO_NSPR_CONFIG_SYSTEM_LDFLAGS}"
@@ -97,7 +97,7 @@ AC_ARG_WITH(nspr-exec-prefix,
 
 	if test -z "$no_nspr"; then
 		AC_MSG_RESULT(yes)
-		ifelse([$2], , :, [$2])     
+		ifelse([$2], , :, [$2])
 	else
 		AC_MSG_RESULT(no)
 		ifelse([$3], , :, [$3])

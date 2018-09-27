@@ -27,10 +27,10 @@ extern "C" {
 #endif /* __cplusplus */
 
 /*
- * The interface AtkAction should be supported by any object that can 
- * perform one or more actions. The interface provides the standard 
- * mechanism for an assistive technology to determine what those actions 
- * are as well as tell the object to perform them. Any object that can 
+ * The interface AtkAction should be supported by any object that can
+ * perform one or more actions. The interface provides the standard
+ * mechanism for an assistive technology to determine what those actions
+ * are as well as tell the object to perform them. Any object that can
  * be manipulated should support this interface.
  */
 

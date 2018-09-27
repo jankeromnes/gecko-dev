@@ -10,7 +10,7 @@ description: Pattern is /./i and RegExp is new RegExp(pattern)
 ---*/
 
 var __pattern = /./i;
-var __re = new RegExp(__pattern); 
+var __re = new RegExp(__pattern);
 
 //CHECK#1
 if (__re.source !== __pattern.source) {

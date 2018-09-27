@@ -4,7 +4,7 @@
 <script>
 
 function init()
-{ 
+{
   var a = document.getElementById("a");
   var b = document.getElementById("b");
   a.appendChild(b);
@@ -16,4 +16,4 @@ window.addEventListener("load", init, false);
 
 <rect id="a" width="20" height="10"/><rect id="b" width="10" height="20"/>
 
-</svg>
+</svg>

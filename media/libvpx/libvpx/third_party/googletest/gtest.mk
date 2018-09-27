@@ -1,1 +1,1 @@
-GTEST_SRCS-yes += src/gtest-all.cc 
+GTEST_SRCS-yes += src/gtest-all.cc

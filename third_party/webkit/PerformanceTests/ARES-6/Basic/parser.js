@@ -20,16 +20,16 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
 function parse(tokenizer)
 {
     let program;
-    
+
     let pushBackBuffer = [];
-    
+
     function nextToken()
     {
         if (pushBackBuffer.length)
@@ -39,19 +39,19 @@ function parse(tokenizer)
             return {kind: "endOfFile", string: "<end of file>"};
         return result.value;
     }
-    
+
     function pushToken(token)
     {
         pushBackBuffer.push(token);
     }
-    
+
     function peekToken()
     {
         let result = nextToken();
         pushToken(result);
         return result;
     }
-    
+
     function consumeKind(kind)
     {
         let token = nextToken();
@@ -60,7 +60,7 @@ function parse(tokenizer)
         }
         return token;
     }
-    
+
     function consumeToken(string)
     {
         let token = nextToken();
@@ -68,7 +68,7 @@ function parse(tokenizer)
             throw new Error("At " + token.sourceLineNumber + ": expected " + string + " but got: " + token.string);
         return token;
     }
-    
+
     function parseVariable()
     {
         let name = consumeKind("identifier").string;
@@ -82,7 +82,7 @@ function parse(tokenizer)
         }
         return result;
     }
-    
+
     function parseNumericExpression()
     {
         function parsePrimary()
@@ -100,10 +100,10 @@ function parse(tokenizer)
                 }
                 return result;
             }
-                
+
             case "number":
                 return {evaluate: Basic.Const, value: token.value};
-                
+
             case "operator":
                 switch (token.string) {
                 case "(": {
@@ -115,11 +115,11 @@ function parse(tokenizer)
             }
             throw new Error("At " + token.sourceLineNumber + ": expected identifier, number, or (, but got: " + token.string);
         }
-        
+
         function parseFactor()
         {
             let primary = parsePrimary();
-            
+
             let ok = true;
             while (ok) {
                 switch (peekToken().string) {
@@ -132,14 +132,14 @@ function parse(tokenizer)
                     break;
                 }
             }
-            
+
             return primary;
         }
-        
+
         function parseTerm()
         {
             let factor = parseFactor();
-            
+
             let ok = true;
             while (ok) {
                 switch (peekToken().string) {
@@ -156,10 +156,10 @@ function parse(tokenizer)
                     break;
                 }
             }
-            
+
             return factor;
         }
-        
+
         // Only the leading term in Basic can have a sign.
         let negate = false;
         switch (peekToken().string) {
@@ -171,11 +171,11 @@ function parse(tokenizer)
             nextToken()
             break;
         }
-        
+
         let term = parseTerm();
         if (negate)
             term = {evaluate: Basic.NumberNeg, term: term};
-        
+
         let ok = true;
         while (ok) {
             switch (peekToken().string) {
@@ -192,10 +192,10 @@ function parse(tokenizer)
                 break;
             }
         }
-        
+
         return term;
     }
-    
+
     function parseConstant()
     {
         switch (peekToken().string) {
@@ -211,7 +211,7 @@ function parse(tokenizer)
             return consumeKind("number").value;
         }
     }
-    
+
     function parseStringExpression()
     {
         let token = nextToken();
@@ -225,7 +225,7 @@ function parse(tokenizer)
             throw new Error("At " + token.sourceLineNumber + ": expected string expression but got " + token.string);
         }
     }
-    
+
     function isStringExpression()
     {
         // A string expression must start with a string variable or a string constant.
@@ -242,7 +242,7 @@ function parse(tokenizer)
         pushToken(token);
         return false;
     }
-    
+
     function parseRelationalExpression()
     {
         if (isStringExpression()) {
@@ -261,7 +261,7 @@ function parse(tokenizer)
             }
             return {evaluate, left, right: parseStringExpression()};
         }
-        
+
         let left = parseNumericExpression();
         let operator = nextToken();
         let evaluate;
@@ -289,7 +289,7 @@ function parse(tokenizer)
         }
         return {evaluate, left, right: parseNumericExpression()};
     }
-    
+
     function parseNonNegativeInteger()
     {
         let token = nextToken();
@@ -297,25 +297,25 @@ function parse(tokenizer)
             throw new Error("At ", token.sourceLineNumber + ": expected a line number but got: " + token.string);
         return token.value;
     }
-    
+
     function parseGoToStatement()
     {
         statement.kind = Basic.GoTo;
         statement.target = parseNonNegativeInteger();
     }
-    
+
     function parseGoSubStatement()
     {
         statement.kind = Basic.GoSub;
         statement.target = parseNonNegativeInteger();
     }
-    
+
     function parseStatement()
     {
         let statement = {};
         statement.lineNumber = consumeKind("userLineNumber").userLineNumber;
         program.statements.set(statement.lineNumber, statement);
-        
+
         let command = nextToken();
         statement.sourceLineNumber = command.sourceLineNumber;
         switch (command.kind) {
@@ -488,7 +488,7 @@ function parse(tokenizer)
                     }
                     consumeToken(")");
                     statement.items.push({name, bounds});
-                    
+
                     if (peekToken().string != ",")
                         break;
                     consumeToken(",");
@@ -518,11 +518,11 @@ function parse(tokenizer)
         default:
             throw new Error("At " + command.sourceLineNumber + ": expected command but got: " + command.string + " (of kind " + command.kind + ")");
         }
-        
+
         consumeKind("newLine");
         return statement;
     }
-    
+
     function parseStatements()
     {
         let statement;
@@ -531,7 +531,7 @@ function parse(tokenizer)
         } while (!statement.process || !statement.process.isBlockEnd);
         return statement;
     }
-    
+
     return {
         program()
         {
@@ -544,10 +544,10 @@ function parse(tokenizer)
             let lastStatement = parseStatements(program.statements);
             if (lastStatement.process != Basic.End)
                 throw new Error("At " + lastStatement.sourceLineNumber + ": expected end");
-            
+
             return program;
         },
-        
+
         statement(program_)
         {
             program = program_;

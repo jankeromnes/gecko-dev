@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 // ------- Comment #102 From Gary Kwong [:nth10sd]
 
 // =====

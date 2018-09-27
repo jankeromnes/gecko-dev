@@ -78,7 +78,7 @@ which have the following meanings:
 <ul>
     <li> <b>JP_START</b> : Install the signal handler, and start sending the
     timer signals.
-    
+
     <li> <b>JP_DEFER</b> : Install the signal handler, but don't start sending
     the timer signals.  The user must start the signals by sending the first
     one (with <code>kill -PROF</code>, or with <code>kill -ALRM</code> if
@@ -89,7 +89,7 @@ which have the following meanings:
     <li> <b>JP_PERIOD=y</b> : Set timer to interrupt every y seconds.  Only
     values of y greater than or equal to 0.001 are supported.  Default is
     0.050 (50ms).
-    
+
     <li> <b>JP_REALTIME</b> : Do the profiling in intervals of real time rather
     than intervals of time used by the mozilla process (and the kernel
     when doing work for mozilla).  This could probably lead to weird
@@ -112,7 +112,7 @@ which have the following meanings:
     to disk when SIGUSR1 is received or JProfStopProfiling is done.  If the
     buffer overflows, the oldest entries will be evicted until there's
     space for the new entry.<p>
-	 
+
     SIGUSR2 will cause the circular buffer to be cleared.
 
     <li> <b>JP_FILENAME=basefilename</b> : This is the filename used for
@@ -140,12 +140,12 @@ These clear the circular buffer and save the buffer (without stopping), respecti
         setenv JPROF_FLAGS "JP_START JP_FIRST=3 JP_PERIOD=0.025" </pre>
 
   <li>To make the timer start on your signal and fire every 1 millisecond of
-  program time use:  
+  program time use:
     <pre>
         setenv JPROF_FLAGS "JP_DEFER JP_PERIOD=0.001" </pre>
 
   <li>To make the timer start on your signal and fire every 10 milliseconds of
-  wall-clock time use:  
+  wall-clock time use:
     <pre>
         setenv JPROF_FLAGS "JP_DEFER JP_PERIOD=0.010 JP_REALTIME" </pre>
 
@@ -153,7 +153,7 @@ These clear the circular buffer and save the buffer (without stopping), respecti
   time use:
     <pre>
         setenv JPROF_FLAGS "JP_DEFER JP_RTC_HZ=8192" </pre>
-  
+
   <li>To make the timer start on JProfStartProfiling() and run continously
       with a 1ms sample rate until told to stop, then save the last 1MB of
       data:

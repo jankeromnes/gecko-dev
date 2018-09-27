@@ -16,7 +16,7 @@ function setupChannel(suffix, xRequest, flags) {
 
     var httpChan = chan.QueryInterface(Ci.nsIHttpChannel);
     httpChan.setRequestHeader("x-request", xRequest, false);
-        
+
     return httpChan;
 }
 

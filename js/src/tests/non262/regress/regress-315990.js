@@ -23,7 +23,7 @@ catch(ex)
 {
   printStatus(ex);
   actual = ex.name;
-} 
+}
 reportCompare(expect, actual, summary + ': function expression');
 
 
@@ -36,5 +36,5 @@ catch(ex)
 {
   printStatus(ex);
   actual = ex.name;
-} 
+}
 reportCompare(expect, actual, summary + ': top level');

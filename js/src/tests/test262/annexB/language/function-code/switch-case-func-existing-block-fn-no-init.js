@@ -27,7 +27,7 @@ var init;
       function f() {  }
   }
 
-  
+
 }());
 
 assert.sameValue(init, undefined);

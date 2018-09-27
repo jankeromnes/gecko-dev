@@ -50,22 +50,22 @@ if (1 >= {valueOf: function() {return {}}, toString: function() {return 0}} !== 
 try {
   1 >= {valueOf: function() {throw "error"}, toString: function() {return 0}};
   $ERROR('#7.1: 1 >= {valueOf: function() {throw "error"}, toString: function() {return 0}} throw "error". Actual: ' + (1 >= {valueOf: function() {throw "error"}, toString: function() {return 0}}));
-}  
+}
 catch (e) {
   if (e !== "error") {
     $ERROR('#7.2: 1 >= {valueOf: function() {throw "error"}, toString: function() {return 0}} throw "error". Actual: ' + (e));
-  } 
+  }
 }
 
 //CHECK#8
 try {
   1 >= {valueOf: function() {return {}}, toString: function() {return {}}};
   $ERROR('#8.1: 1 >= {valueOf: function() {return {}}, toString: function() {return {}}} throw TypeError. Actual: ' + (1 >= {valueOf: function() {return {}}, toString: function() {return {}}}));
-}  
+}
 catch (e) {
   if ((e instanceof TypeError) !== true) {
     $ERROR('#8.2: 1 >= {valueOf: function() {return {}}, toString: function() {return {}}} throw TypeError. Actual: ' + (e));
-  } 
+  }
 }
 
 reportCompare(0, 0);

@@ -49,7 +49,7 @@ GType atk_socket_get_type (void);
 struct _AtkSocketClass
 {
   AtkObjectClass parent_class;
-  
+
   /* to be subscribed to by atk-bridge */
 
   /*< protected >*/

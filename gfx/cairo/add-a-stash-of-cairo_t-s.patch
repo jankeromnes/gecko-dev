@@ -11,7 +11,7 @@ index 3c9d892..4b27b83 100644
 @@ -119,7 +119,63 @@ _cairo_set_error (cairo_t *cr, cairo_status_t status)
      _cairo_status_set_error (&cr->status, _cairo_error (status));
  }
- 
+
 -#if HAS_ATOMIC_OPS
 +#if defined(_MSC_VER)
 +#pragma intrinsic(_BitScanForward)

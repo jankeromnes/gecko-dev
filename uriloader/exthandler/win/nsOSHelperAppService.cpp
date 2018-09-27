@@ -31,7 +31,7 @@
 static nsresult GetExtensionFromWindowsMimeDatabase(const nsACString& aMimeType,
                                                     nsString& aFileExtension);
 
-nsOSHelperAppService::nsOSHelperAppService() : 
+nsOSHelperAppService::nsOSHelperAppService() :
   nsExternalHelperAppService()
   , mAppAssoc(nullptr)
 {
@@ -49,7 +49,7 @@ nsOSHelperAppService::~nsOSHelperAppService()
   CoUninitialize();
 }
 
-// The windows registry provides a mime database key which lists a set of mime types and corresponding "Extension" values. 
+// The windows registry provides a mime database key which lists a set of mime types and corresponding "Extension" values.
 // we can use this to look up our mime type to see if there is a preferred extension for the mime type.
 static nsresult GetExtensionFromWindowsMimeDatabase(const nsACString& aMimeType,
                                                     nsString& aFileExtension)
@@ -59,15 +59,15 @@ static nsresult GetExtensionFromWindowsMimeDatabase(const nsACString& aMimeType,
 
   AppendASCIItoUTF16(aMimeType, mimeDatabaseKey);
 
-  nsCOMPtr<nsIWindowsRegKey> regKey = 
+  nsCOMPtr<nsIWindowsRegKey> regKey =
     do_CreateInstance("@mozilla.org/windows-registry-key;1");
-  if (!regKey) 
+  if (!regKey)
     return NS_ERROR_NOT_AVAILABLE;
 
   nsresult rv = regKey->Open(nsIWindowsRegKey::ROOT_KEY_CLASSES_ROOT,
                              mimeDatabaseKey,
                              nsIWindowsRegKey::ACCESS_QUERY_VALUE);
-  
+
   if (NS_SUCCEEDED(rv))
      regKey->ReadStringValue(NS_LITERAL_STRING("Extension"), aFileExtension);
 
@@ -98,9 +98,9 @@ nsresult nsOSHelperAppService::OSProtocolHandlerExists(const char * aProtocolSch
 
 NS_IMETHODIMP nsOSHelperAppService::GetApplicationDescription(const nsACString& aScheme, nsAString& _retval)
 {
-  nsCOMPtr<nsIWindowsRegKey> regKey = 
+  nsCOMPtr<nsIWindowsRegKey> regKey =
     do_CreateInstance("@mozilla.org/windows-registry-key;1");
-  if (!regKey) 
+  if (!regKey)
     return NS_ERROR_NOT_AVAILABLE;
 
   NS_ConvertASCIItoUTF16 buf(aScheme);
@@ -150,16 +150,16 @@ nsresult nsOSHelperAppService::GetMIMEInfoFromRegistry(const nsString& fileType,
   nsresult rv = NS_OK;
 
   NS_ENSURE_ARG(pInfo);
-  nsCOMPtr<nsIWindowsRegKey> regKey = 
+  nsCOMPtr<nsIWindowsRegKey> regKey =
     do_CreateInstance("@mozilla.org/windows-registry-key;1");
-  if (!regKey) 
+  if (!regKey)
     return NS_ERROR_NOT_AVAILABLE;
 
   rv = regKey->Open(nsIWindowsRegKey::ROOT_KEY_CLASSES_ROOT,
                     fileType, nsIWindowsRegKey::ACCESS_QUERY_VALUE);
   if (NS_FAILED(rv))
     return NS_ERROR_FAILURE;
- 
+
   // OK, the default value here is the description of the type.
   nsAutoString description;
   rv = regKey->ReadStringValue(EmptyString(), description);
@@ -171,7 +171,7 @@ nsresult nsOSHelperAppService::GetMIMEInfoFromRegistry(const nsString& fileType,
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // method overrides used to gather information from the windows registry for
-// various mime types. 
+// various mime types.
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Looks up the type for the extension aExt and compares it to aType
@@ -187,9 +187,9 @@ nsOSHelperAppService::typeFromExtEquals(const char16_t* aExt, const char *aType)
   fileExtToUse.Append(aExt);
 
   bool eq = false;
-  nsCOMPtr<nsIWindowsRegKey> regKey = 
+  nsCOMPtr<nsIWindowsRegKey> regKey =
     do_CreateInstance("@mozilla.org/windows-registry-key;1");
-  if (!regKey) 
+  if (!regKey)
     return eq;
 
   nsresult rv = regKey->Open(nsIWindowsRegKey::ROOT_KEY_CLASSES_ROOT,
@@ -197,7 +197,7 @@ nsOSHelperAppService::typeFromExtEquals(const char16_t* aExt, const char *aType)
                              nsIWindowsRegKey::ACCESS_QUERY_VALUE);
   if (NS_FAILED(rv))
       return eq;
-   
+
   nsAutoString type;
   rv = regKey->ReadStringValue(NS_LITERAL_STRING("Content Type"), type);
   if (NS_SUCCEEDED(rv))
@@ -206,19 +206,19 @@ nsOSHelperAppService::typeFromExtEquals(const char16_t* aExt, const char *aType)
   return eq;
 }
 
-// The "real" name of a given helper app (as specified by the path to the 
+// The "real" name of a given helper app (as specified by the path to the
 // executable file held in various registry keys) is stored n the VERSIONINFO
 // block in the file's resources. We need to find the path to the executable
-// and then retrieve the "FileDescription" field value from the file. 
+// and then retrieve the "FileDescription" field value from the file.
 nsresult
 nsOSHelperAppService::GetDefaultAppInfo(const nsAString& aAppInfo,
-                                        nsAString& aDefaultDescription, 
+                                        nsAString& aDefaultDescription,
                                         nsIFile** aDefaultApplication)
 {
   nsAutoString handlerCommand;
 
-  // If all else fails, use the file type key name, which will be 
-  // something like "pngfile" for .pngs, "WMVFile" for .wmvs, etc. 
+  // If all else fails, use the file type key name, which will be
+  // something like "pngfile" for .pngs, "WMVFile" for .wmvs, etc.
   aDefaultDescription = aAppInfo;
   *aDefaultApplication = nullptr;
 
@@ -233,31 +233,31 @@ nsOSHelperAppService::GetDefaultAppInfo(const nsAString& aAppInfo,
 
   nsAutoString handlerKeyName(aAppInfo);
 
-  nsCOMPtr<nsIWindowsRegKey> chkKey = 
+  nsCOMPtr<nsIWindowsRegKey> chkKey =
     do_CreateInstance("@mozilla.org/windows-registry-key;1");
-  if (!chkKey) 
+  if (!chkKey)
     return NS_ERROR_FAILURE;
-      
+
   nsresult rv = chkKey->Open(nsIWindowsRegKey::ROOT_KEY_CLASSES_ROOT,
-                             handlerKeyName, 
+                             handlerKeyName,
                              nsIWindowsRegKey::ACCESS_QUERY_VALUE);
   if (NS_FAILED(rv)) {
-    // It's a file system path to a handler 
+    // It's a file system path to a handler
     handlerCommand.Assign(aAppInfo);
   }
   else {
     handlerKeyName.AppendLiteral("\\shell\\open\\command");
-    nsCOMPtr<nsIWindowsRegKey> regKey = 
+    nsCOMPtr<nsIWindowsRegKey> regKey =
       do_CreateInstance("@mozilla.org/windows-registry-key;1");
-    if (!regKey) 
+    if (!regKey)
       return NS_ERROR_FAILURE;
 
     nsresult rv = regKey->Open(nsIWindowsRegKey::ROOT_KEY_CLASSES_ROOT,
-                               handlerKeyName, 
+                               handlerKeyName,
                                nsIWindowsRegKey::ACCESS_QUERY_VALUE);
     if (NS_FAILED(rv))
       return NS_ERROR_FAILURE;
-     
+
     // OK, the default value here is the description of the type.
     rv = regKey->ReadStringValue(EmptyString(), handlerCommand);
     if (NS_FAILED(rv)) {
@@ -273,7 +273,7 @@ nsOSHelperAppService::GetDefaultAppInfo(const nsAString& aAppInfo,
       delegateExecuteRegPath.Append(delegateExecute);
       delegateExecuteRegPath.AppendLiteral("\\InProcServer32");
       rv = chkKey->Open(nsIWindowsRegKey::ROOT_KEY_CLASSES_ROOT,
-                        delegateExecuteRegPath, 
+                        delegateExecuteRegPath,
                         nsIWindowsRegKey::ACCESS_QUERY_VALUE);
       if (NS_SUCCEEDED(rv)) {
         rv = chkKey->ReadStringValue(EmptyString(), handlerCommand);
@@ -285,7 +285,7 @@ nsOSHelperAppService::GetDefaultAppInfo(const nsAString& aAppInfo,
         delegateExecuteRegPath.Append(delegateExecute);
         delegateExecuteRegPath.AppendLiteral("\\LocalServer32");
         rv = chkKey->Open(nsIWindowsRegKey::ROOT_KEY_CLASSES_ROOT,
-                          delegateExecuteRegPath, 
+                          delegateExecuteRegPath,
                           nsIWindowsRegKey::ACCESS_QUERY_VALUE);
         NS_ENSURE_SUCCESS(rv, rv);
         rv = chkKey->ReadStringValue(EmptyString(), handlerCommand);
@@ -297,7 +297,7 @@ nsOSHelperAppService::GetDefaultAppInfo(const nsAString& aAppInfo,
   // XXX FIXME: If this fails, the UI will display the full command
   // string.
   // There are some rare cases this can happen - ["url.dll" -foo]
-  // for example won't resolve correctly to the system dir. The 
+  // for example won't resolve correctly to the system dir. The
   // subsequent launch of the helper app will work though.
   nsCOMPtr<nsILocalFileWin> lf = new nsLocalFile();
   rv = lf->InitWithCommandLine(handlerCommand);
@@ -351,7 +351,7 @@ already_AddRefed<nsMIMEInfoWin> nsOSHelperAppService::GetByExtension(const nsStr
     found = true;
     appInfo.Assign(pResult);
     CoTaskMemFree(pResult);
-  } 
+  }
   else {
     found = false;
   }
@@ -367,7 +367,7 @@ already_AddRefed<nsMIMEInfoWin> nsOSHelperAppService::GetByExtension(const nsStr
   // Get other nsIMIMEInfo fields from registry, if possible.
   nsAutoString defaultDescription;
   nsCOMPtr<nsIFile> defaultApplication;
-  
+
   if (NS_FAILED(GetDefaultAppInfo(appInfo, defaultDescription,
                                   getter_AddRefs(defaultApplication)))) {
     return nullptr;
@@ -442,7 +442,7 @@ already_AddRefed<nsIMIMEInfo> nsOSHelperAppService::GetMIMEInfoFromOS(const nsAC
       if (!aFileExt.IsEmpty()) {
         mi->AppendExtension(aFileExt);
       }
-      
+
       return mi.forget();
     }
 

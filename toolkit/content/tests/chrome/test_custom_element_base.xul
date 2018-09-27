@@ -113,7 +113,7 @@
 
     await SimpleTest.promiseFocus();
     ok(document.hasFocus(), "has focus");
-    
+
     // This should skip the disabled simpleelement.
     synthesizeKey("VK_TAB");
     is(document.activeElement.id, "one", "Tab 1");

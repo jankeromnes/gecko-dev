@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var o = {p: 42, q: true};
   var {p, q} = o;
 

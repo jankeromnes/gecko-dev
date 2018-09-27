@@ -33,7 +33,7 @@ interface nsIStreamListener : nsIRequestObserver
      * causing the request to be canceled.
      */
     void onDataAvailable(in nsIRequest aRequest,
-                         in nsISupports aContext, 
+                         in nsISupports aContext,
                          in nsIInputStream aInputStream,
                          in unsigned long long aOffset,
                          in unsigned long aCount);

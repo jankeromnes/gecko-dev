@@ -23,7 +23,7 @@ def enc_block(block, key, rounds = 16):
         h = sha512(y + key).digest()
         x = ''.join([chr(ord(x[k]) ^ ord(h[k])) for k in BPOS])
     return x + y
-        
+
 def dec_block(block, key, rounds = 16):
     x = block[:64]
     y = block[64:]
@@ -35,4 +35,4 @@ def dec_block(block, key, rounds = 16):
     return x + y
 
 
-    
+

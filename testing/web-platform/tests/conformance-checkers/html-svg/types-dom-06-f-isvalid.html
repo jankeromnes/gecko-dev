@@ -16,7 +16,7 @@
   <!--=  All Rights Reserved.                                              =-->
   <!--=  See http://www.w3.org/Consortium/Legal/.                          =-->
   <!--======================================================================-->
-  
+
   <title id="test-title">$RCSfile: types-dom-06-f.svg,v $</title>
   <defs>
     <font-face
@@ -39,7 +39,7 @@
 						var r3 = document.getElementById("r3");
 						var i0 = r1.requiredFeatures.getItem(0);
 						var i1 = r1.requiredFeatures.getItem(1);
-						
+
 						if(i0 != "http://www.w3.org/TR/SVG11/feature#Shape")
 						{
 							r1.removeAttribute("requiredFeatures");
@@ -82,25 +82,25 @@
 					{
 						var f = document.getElementById("fail");
 						f.setAttribute("fill", "red");
-					}				
+					}
 				}
 			</script>
 		</defs>
-		
+
 		<text x="50%" y="70" text-anchor="middle">SVGStringList DOM</text>
-		
+
 		<!-- background images -->
 		<g>
 			<rect width="100" height="100" fill="lime" transform="translate(80 100)"/>
 			<rect width="100" height="100" fill="lime" transform="translate(190 100)"/>
 			<rect width="100" height="100" fill="red" transform="translate(300 100)"/>
 		</g>
-		
+
 		<!-- tests -->
 		<rect id="r1" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Shape this.is.a.bogus.feature.string" width="100" height="100" fill="red" transform="translate(100 100)"/>
 		<rect id="r2" width="100" height="100" fill="red" transform="translate(190 100)"/>
 		<rect id="r3" width="100" height="100" fill="lime" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Shape" transform="translate(300 100)"/>
-		
+
 		<rect id="fail" width="100%" height="100%" fill="none"/>
   </g>
   <g font-family="SVGFreeSansASCII,sans-serif" font-size="32">

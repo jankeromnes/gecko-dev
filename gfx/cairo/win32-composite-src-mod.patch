@@ -6,10 +6,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
  				       src_r.x, src_r.y, src_r.width, src_r.height,
  				       dst_r.x, dst_r.y, dst_r.width, dst_r.height);
      }
- 
+
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 +/* from pixman-private.h */
 +#define MOD(a,b) ((a) < 0 ? ((b) - ((-(a) - 1) % (b))) - 1 : (a) % (b))
 +
@@ -34,10 +34,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 -	int32_t src_start_y = src_r.y % src_extents.height;
 +	int32_t src_start_x = MOD(src_r.x, src_extents.width);
 +	int32_t src_start_y = MOD(src_r.y, src_extents.height);
- 
+
  	if (needs_scale)
  	    goto UNSUPPORTED;
- 
+
  	/* If both the src and dest have an image, we may as well fall
  	 * back, because it will be faster than our separate blits.
  	 * Our blit code will be fastest when the src is a DDB and the

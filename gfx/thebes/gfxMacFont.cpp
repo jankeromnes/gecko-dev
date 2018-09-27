@@ -440,7 +440,7 @@ gfxMacFont::GetCharWidth(CFDataRef aCmap, char16_t aUniChar,
                          uint32_t *aGlyphID, gfxFloat aConvFactor)
 {
     CGGlyph glyph = 0;
-    
+
     if (aCmap) {
         glyph = gfxFontUtils::MapCharToGlyph(::CFDataGetBytePtr(aCmap),
                                              ::CFDataGetLength(aCmap),

@@ -120,7 +120,7 @@ using mozilla::PodCopy;
 //     ======  Dispatch through a manual stack.                                                 //
 //                                                                                              //
 
-
+
 /*** Tracing Invariants **************************************************************************/
 
 #if defined(DEBUG)
@@ -395,7 +395,7 @@ js::gc::AssertRootMarkingPhase(JSTracer* trc)
 }
 #endif
 
-
+
 /*** Tracing Interface ***************************************************************************/
 
 template <typename T> T DoCallback(JS::CallbackTracer* trc, T* thingp, const char* name);
@@ -596,7 +596,7 @@ js::gc::TraceRangeInternal(JSTracer* trc, size_t len, T* vec, const char* name)
     }
 }
 
-
+
 /*** GC Marking Interface *************************************************************************/
 
 namespace js {
@@ -959,7 +959,7 @@ js::GCMarker::mark(T* thing)
     return cell->markIfUnmarked(markColor());
 }
 
-
+
 /*** Inline, Eager GC Marking *********************************************************************/
 
 // Each of the eager, inline marking paths is directly preceeded by the
@@ -1619,7 +1619,7 @@ VisitTraceList(F f, const int32_t* traceList, uint8_t* memory, Args&&... args)
     }
 }
 
-
+
 /*** Mark-stack Marking ***************************************************************************/
 
 bool
@@ -2011,7 +2011,7 @@ GCMarker::restoreValueArray(const MarkStack::SavedValueArray& savedArray)
     return MarkStack::ValueArray(obj, start, end);
 }
 
-
+
 /*** Mark Stack ***********************************************************************************/
 
 static_assert(sizeof(MarkStack::TaggedPtr) == sizeof(uintptr_t),
@@ -2463,7 +2463,7 @@ MarkStackIter::saveValueArray(const MarkStack::SavedValueArray& savedArray)
     MOZ_ASSERT(peekTag() == MarkStack::SavedValueArrayTag);
 }
 
-
+
 /*** GCMarker *************************************************************************************/
 
 /*
@@ -2765,7 +2765,7 @@ GCMarker::stackContainsCrossZonePointerTo(const Cell* target)
 }
 #endif // DEBUG
 
-
+
 /*** Tenuring Tracer *****************************************************************************/
 
 namespace js {
@@ -3360,7 +3360,7 @@ js::TenuringTracer::moveStringToTenured(JSString* dst, JSString* src, AllocKind 
     return size;
 }
 
-
+
 /*** IsMarked / IsAboutToBeFinalized **************************************************************/
 
 template <typename T>
@@ -3540,7 +3540,7 @@ FOR_EACH_PUBLIC_TAGGED_GC_POINTER_TYPE(INSTANTIATE_INTERNAL_MARKING_FUNCTIONS)
 } /* namespace gc */
 } /* namespace js */
 
-
+
 /*** Cycle Collector Barrier Implementation *******************************************************/
 
 /*

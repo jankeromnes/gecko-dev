@@ -35,7 +35,7 @@ typedef void PPB_AudioInput_Callback([in] mem_t sample_buffer,
  *
  * TODO(brettw) before moving out of dev, we need to resolve the issue of
  * the mismatch between the current audio config interface and this one.
- * 
+ *
  * In particular, the params for input assume stereo, but this class takes
  * everything as mono. We either need to not use an audio config resource, or
  * add mono support.

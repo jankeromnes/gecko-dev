@@ -78,7 +78,7 @@ interface nsITelemetry : nsISupports
   readonly attribute uint32_t lastShutdownDuration;
 
   /**
-   * The number of failed profile lock attempts that have occurred prior to 
+   * The number of failed profile lock attempts that have occurred prior to
    * successfully locking the profile
    */
   readonly attribute uint32_t failedProfileLockCount;

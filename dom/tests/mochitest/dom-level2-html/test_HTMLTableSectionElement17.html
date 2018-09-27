@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "tablesection");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,12 +70,12 @@ function loadComplete() {
 
 
 /**
-* 
-    The insertRow() method inserts a new empty table row.  
-    
+*
+    The insertRow() method inserts a new empty table row.
+
     Retrieve the first TFOOT element and invoke the insertRow() method
-    with an index of 0.  The nuber of rows in the TFOOT section before 
-    insertion of the new row is one.  After the new row is inserted the number 
+    with an index of 0.  The nuber of rows in the TFOOT section before
+    insertion of the new row is one.  After the new row is inserted the number
     of rows in the TFOOT section is two.
 
 * @author NIST
@@ -91,7 +91,7 @@ function HTMLTableSectionElement17() {
       var rowsnodeList;
       var vrows;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -111,7 +111,7 @@ testNode = nodeList.item(0);
       vrows = rowsnodeList.length;
 
       assertEquals("rowsLink2",2,vrows);
-       
+
 }
 
 </script>
@@ -121,11 +121,11 @@ testNode = nodeList.item(0);
 <p>&lt;test name='HTMLTableSectionElement17' schemaLocation='http://www.w3.org/2001/DOM-Test-Suite/Level-1 dom1.xsd'&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;metadata&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;HTMLTableSectionElement17&lt;/title&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
-    The insertRow() method inserts a new empty table row.  
-    
+    The insertRow() method inserts a new empty table row.
+
     Retrieve the first TFOOT element and invoke the insertRow() method
-    with an index of 0.  The nuber of rows in the TFOOT section before 
-    insertion of the new row is one.  After the new row is inserted the number 
+    with an index of 0.  The nuber of rows in the TFOOT section before
+    insertion of the new row is one.  After the new row is inserted the number
     of rows in the TFOOT section is two.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
@@ -143,7 +143,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/tablesection.html"></iframe>
 <br>

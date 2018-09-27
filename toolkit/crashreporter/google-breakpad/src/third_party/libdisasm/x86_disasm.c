@@ -44,7 +44,7 @@ unsigned int x86_disasm( unsigned char *buf, unsigned int buf_len,
 	/* copy enough bytes for disassembly into buffer : this
 	 * helps prevent buffer overruns at the end of a file */
 	memset( bytes, 0, MAX_INSTRUCTION_SIZE );
-	memcpy( bytes, &buf[offset], (len < MAX_INSTRUCTION_SIZE) ? len : 
+	memcpy( bytes, &buf[offset], (len < MAX_INSTRUCTION_SIZE) ? len :
 		MAX_INSTRUCTION_SIZE );
 
         /* actually do the disassembly */
@@ -193,7 +193,7 @@ unsigned int x86_disasm_forward( unsigned char *buf, unsigned int buf_len,
 }
 
 /* invariant instruction representation */
-size_t x86_invariant_disasm( unsigned char *buf, int buf_len, 
+size_t x86_invariant_disasm( unsigned char *buf, int buf_len,
 		x86_invariant_t *inv ){
 	if (! buf || ! buf_len || ! inv  ) {
 		return(0);

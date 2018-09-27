@@ -13,7 +13,7 @@ function __FUNC(){
     function __GUNC(){
         return arguments[0];
     };
-    
+
     return __GUNC;
 };
 

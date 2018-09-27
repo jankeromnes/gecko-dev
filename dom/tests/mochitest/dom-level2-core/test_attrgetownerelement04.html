@@ -37,19 +37,19 @@ function setUpPage() {
        setImplementationAttribute("namespaceAware", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
       var docImpRef = null;
       if (typeof(this.docImp) != 'undefined') {
         docImpRef = this.docImp;
       }
       docsLoaded += preload(docImpRef, "docImp", "staff");
-        
+
        if (docsLoaded == 2) {
           setUpPage = 'complete';
        }
@@ -60,7 +60,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -79,11 +79,11 @@ var docName = 'attrgetownerelement04';
 
 
 /**
-* 
-  The "getOwnerElement()" will return the Element node this attribute is attached to or 
-  null if this attribute is not in use.  
-  Import an attribute node to another document.  If an Attr node is imported, its 
-  ownerElement attribute should be set to null.  Verify if the ownerElement has been set 
+*
+  The "getOwnerElement()" will return the Element node this attribute is attached to or
+  null if this attribute is not in use.
+  Import an attribute node to another document.  If an Attr node is imported, its
+  ownerElement attribute should be set to null.  Verify if the ownerElement has been set
   to null.
 
 * @author IBM
@@ -100,13 +100,13 @@ function attrgetownerelement04() {
       var attr;
       var attrImp;
       var addresses;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       doc = load(docRef, "doc", "staffNS");
-      
+
       var docImpRef = null;
       if (typeof(this.docImp) != 'undefined') {
         docImpRef = this.docImp;
@@ -120,7 +120,7 @@ attr = element.getAttributeNodeNS("http://www.nist.gov","zone");
       ownerElement = attrImp.ownerElement;
 
       assertNull("attrgetownerelement04",ownerElement);
-    
+
 }
 
 </script>
@@ -129,12 +129,12 @@ attr = element.getAttributeNodeNS("http://www.nist.gov","zone");
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/attrgetownerelement04</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

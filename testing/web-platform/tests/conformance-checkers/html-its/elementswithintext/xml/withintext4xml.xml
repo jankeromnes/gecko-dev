@@ -5,7 +5,7 @@
   <its:span withinText="no">user interface, ui, software interface</its:span>
  </prolog>
  <body>
-  <p>The book <its:span withinText="yes">Of Mice and Screens</its:span> by <its:span withinText="yes">Aldus 
+  <p>The book <its:span withinText="yes">Of Mice and Screens</its:span> by <its:span withinText="yes">Aldus
      Brandywine</its:span> is one of the best introductions to the vast topic of designing user interfaces.</p>
  </body>
 </text>

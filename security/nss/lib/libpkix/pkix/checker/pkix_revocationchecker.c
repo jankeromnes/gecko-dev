@@ -36,7 +36,7 @@ pkix_RevocationChecker_Destroy(
 
         PKIX_DECREF(checker->leafMethodList);
         PKIX_DECREF(checker->chainMethodList);
-        
+
 cleanup:
 
         PKIX_RETURN(REVOCATIONCHECKER);
@@ -146,12 +146,12 @@ pkix_RevocationChecker_SortComparator(
         void *plContext)
 {
     pkix_RevocationMethod *method1 = NULL, *method2 = NULL;
-    
+
     PKIX_ENTER(BUILD, "pkix_RevocationChecker_SortComparator");
-    
+
     method1 = (pkix_RevocationMethod *)obj1;
     method2 = (pkix_RevocationMethod *)obj2;
-    
+
     if (method1->priority < method2->priority) {
       *pResult = -1;
     } else if (method1->priority > method2->priority) {
@@ -159,7 +159,7 @@ pkix_RevocationChecker_SortComparator(
     } else {
       *pResult = 0;
     }
-    
+
     PKIX_RETURN(BUILD);
 }
 
@@ -178,28 +178,28 @@ PKIX_RevocationChecker_Create(
     void *plContext)
 {
     PKIX_RevocationChecker *checker = NULL;
-    
+
     PKIX_ENTER(REVOCATIONCHECKER, "PKIX_RevocationChecker_Create");
     PKIX_NULLCHECK_ONE(pChecker);
-    
+
     PKIX_CHECK(
         PKIX_PL_Object_Alloc(PKIX_REVOCATIONCHECKER_TYPE,
                              sizeof (PKIX_RevocationChecker),
                              (PKIX_PL_Object **)&checker,
                              plContext),
         PKIX_COULDNOTCREATECERTCHAINCHECKEROBJECT);
-    
+
     checker->leafMethodListFlags = leafMethodListFlags;
     checker->chainMethodListFlags = chainMethodListFlags;
     checker->leafMethodList = NULL;
     checker->chainMethodList = NULL;
-    
+
     *pChecker = checker;
     checker = NULL;
-    
+
 cleanup:
     PKIX_DECREF(checker);
-    
+
     PKIX_RETURN(REVOCATIONCHECKER);
 }
 
@@ -224,14 +224,14 @@ PKIX_RevocationChecker_CreateAndAddMethod(
     pkix_LocalRevocationCheckFn *localRevChecker = NULL;
     pkix_ExternalRevocationCheckFn *externRevChecker = NULL;
     PKIX_UInt32 miFlags;
-    
+
     PKIX_ENTER(REVOCATIONCHECKER, "PKIX_RevocationChecker_CreateAndAddMethod");
     PKIX_NULLCHECK_ONE(revChecker);
 
-    /* If the caller has said "Either one is sufficient, then don't let the 
+    /* If the caller has said "Either one is sufficient, then don't let the
      * absence of any one method's info lead to an overall failure.
      */
-    miFlags = isLeafMethod ? revChecker->leafMethodListFlags 
+    miFlags = isLeafMethod ? revChecker->leafMethodListFlags
 	                   : revChecker->chainMethodListFlags;
     if (miFlags & PKIX_REV_MI_REQUIRE_SOME_FRESH_INFO_AVAILABLE)
 	flags &= ~PKIX_REV_M_FAIL_ON_MISSING_FRESH_INFO;
@@ -272,7 +272,7 @@ PKIX_RevocationChecker_CreateAndAddMethod(
     } else {
         methodList = &revChecker->chainMethodList;
     }
-    
+
     if (*methodList == NULL) {
         PKIX_CHECK(
             PKIX_List_Create(methodList, plContext),
@@ -283,7 +283,7 @@ PKIX_RevocationChecker_CreateAndAddMethod(
         PKIX_List_AppendItem(unsortedList, (PKIX_PL_Object*)method, plContext),
         PKIX_LISTAPPENDITEMFAILED);
     PKIX_CHECK(
-        pkix_List_BubbleSort(unsortedList, 
+        pkix_List_BubbleSort(unsortedList,
                              pkix_RevocationChecker_SortComparator,
                              methodList, plContext),
         PKIX_LISTBUBBLESORTFAILED);
@@ -292,7 +292,7 @@ cleanup:
     PKIX_DECREF(method);
     PKIX_DECREF(unsortedList);
     PKIX_DECREF(certStores);
-    
+
     PKIX_RETURN(REVOCATIONCHECKER);
 }
 
@@ -321,16 +321,16 @@ PKIX_RevocationChecker_Check(
     pkix_RevocationMethod *method = NULL;
     void *nbioContext;
     int tries;
-    
+
     PKIX_ENTER(REVOCATIONCHECKER, "PKIX_RevocationChecker_Check");
     PKIX_NULLCHECK_TWO(revChecker, procParams);
 
     nbioContext = *pNbioContext;
     *pNbioContext = NULL;
-    
+
     if (testingLeafCert) {
         revList = revChecker->leafMethodList;
-        revFlags = revChecker->leafMethodListFlags;        
+        revFlags = revChecker->leafMethodListFlags;
     } else {
         revList = revChecker->chainMethodList;
         revFlags = revChecker->chainMethodListFlags;
@@ -369,7 +369,7 @@ PKIX_RevocationChecker_Check(
                 PKIX_CHECK_NO_GOTO(
                     (*method->localRevChecker)(cert, issuer, date,
                                                method, procParams,
-                                               methodFlags, 
+                                               methodFlags,
                                                chainVerificationState,
                                                &revStatus,
                                                (CERTCRLEntryReasonCode *)pReasonCode,
@@ -439,12 +439,12 @@ PKIX_RevocationChecker_Check(
         }
         break;
     } /* outer loop */
-    
+
     if (overallStatus == PKIX_RevStatus_NoInfo &&
         chainVerificationState) {
         /* The following check makes sence only for chain
          * validation step, sinse we do not fetch info while
-         * in the process of finding trusted anchor. 
+         * in the process of finding trusted anchor.
          * For chain building step it is enough to know, that
          * the cert was not directly revoked by any of the
          * methods. */

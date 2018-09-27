@@ -4,7 +4,7 @@ use syn;
 
 use {Error, FromField, FromVariant, Result};
 
-/// A struct or enum body. 
+/// A struct or enum body.
 ///
 /// `V` is the type which receives any encountered variants, and `F` receives struct fields.
 #[derive(Debug, Clone, PartialEq, Eq)]

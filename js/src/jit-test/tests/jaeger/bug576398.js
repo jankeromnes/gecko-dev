@@ -1,6 +1,6 @@
 function K(x) {
   with ({});    // prevent compilation
-  this.x = x; 
+  this.x = x;
 }
 function f() {
   var a = new K(1);

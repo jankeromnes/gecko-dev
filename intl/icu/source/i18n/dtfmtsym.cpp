@@ -1495,7 +1495,7 @@ struct CalendarDataSink : public ResourceSink {
     Hashtable arrays;
     Hashtable arraySizes;
     Hashtable maps;
-    /** 
+    /**
      * Whenever there are aliases, the same object will be added twice to 'map'.
      * To avoid double deletion, 'maps' won't take ownership of the objects. Instead,
      * 'mapRefs' will own them and will delete them when CalendarDataSink is deleted.

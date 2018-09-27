@@ -19,7 +19,7 @@ impl<S> StreamFuture<S> {
     /// pulling from.
     ///
     /// This method returns an `Option` to account for the fact that `StreamFuture`'s
-    /// implementation of `Future::poll` consumes the underlying stream during polling 
+    /// implementation of `Future::poll` consumes the underlying stream during polling
     /// in order to return it to the caller of `Future::poll` if the stream yielded
     /// an element.
     pub fn get_ref(&self) -> Option<&S> {
@@ -33,7 +33,7 @@ impl<S> StreamFuture<S> {
     /// stream which may otherwise confuse this combinator.
     ///
     /// This method returns an `Option` to account for the fact that `StreamFuture`'s
-    /// implementation of `Future::poll` consumes the underlying stream during polling 
+    /// implementation of `Future::poll` consumes the underlying stream during polling
     /// in order to return it to the caller of `Future::poll` if the stream yielded
     /// an element.
     pub fn get_mut(&mut self) -> Option<&mut S> {
@@ -46,7 +46,7 @@ impl<S> StreamFuture<S> {
     /// care should be taken to avoid losing resources when this is called.
     ///
     /// This method returns an `Option` to account for the fact that `StreamFuture`'s
-    /// implementation of `Future::poll` consumes the underlying stream during polling 
+    /// implementation of `Future::poll` consumes the underlying stream during polling
     /// in order to return it to the caller of `Future::poll` if the stream yielded
     /// an element.
     pub fn into_inner(self) -> Option<S> {

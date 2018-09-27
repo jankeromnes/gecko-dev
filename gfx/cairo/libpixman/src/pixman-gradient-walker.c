@@ -70,16 +70,16 @@ gradient_walker_reset (pixman_gradient_walker_t *walker,
     {
 	x = pos;
     }
-    
+
     for (n = 0; n < count; n++)
     {
 	if (x < stops[n].x)
 	    break;
     }
-    
+
     left_x =  stops[n - 1].x;
     left_c = &stops[n - 1].color;
-    
+
     right_x =  stops[n].x;
     right_c = &stops[n].color;
 

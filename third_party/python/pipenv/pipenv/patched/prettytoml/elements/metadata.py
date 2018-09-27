@@ -10,7 +10,7 @@ class WhitespaceElement(common.TokenElement):
 
     def __init__(self, _tokens):
         common.TokenElement.__init__(self, _tokens, common.TYPE_METADATA)
-    
+
     def _validate_tokens(self, _tokens):
         for token in _tokens:
             if token.type != tokens.TYPE_WHITESPACE:

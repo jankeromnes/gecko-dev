@@ -22,7 +22,7 @@ var __func = function(arg1, arg2){
 	var __gunc = Function.call(this,"arg","return ++arg;");
 	__gunc.prop=arg2;
     return __gunc;
-	
+
 };
 
 var __instance = new __func(__FRST, __SCND);

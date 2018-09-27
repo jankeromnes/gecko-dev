@@ -40,7 +40,7 @@ let _;
 let iterCount = 0;
 async function * fn() {
   for await ([ _ ] of [iterable]) {
-    
+
     iterCount += 1;
   }
 }

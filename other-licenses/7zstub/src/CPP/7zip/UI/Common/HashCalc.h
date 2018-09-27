@@ -52,7 +52,7 @@ struct CHashBundle: public IHashCalc
   UInt64 CurSize;
 
   HRESULT SetMethods(DECL_EXTERNAL_CODECS_LOC_VARS const UStringVector &methods);
-  
+
   void Init()
   {
     NumDirs = NumFiles = NumAltStreams = FilesSize = AltStreamsSize = NumErrors = 0;
@@ -90,7 +90,7 @@ struct CHashOptions
   bool StdInMode;
   bool AltStreamsMode;
   NWildcard::ECensorPathMode PathMode;
- 
+
   CHashOptions(): StdInMode(false), OpenShareForWrite(false), AltStreamsMode(false), PathMode(NWildcard::k_RelatPath) {};
 };
 

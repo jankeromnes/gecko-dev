@@ -20,9 +20,9 @@ index 327fed1..11b2887 100644
 --- a/src/cairo-atomic-private.h
 +++ b/src/cairo-atomic-private.h
 @@ -53,6 +53,96 @@
- 
+
  CAIRO_BEGIN_DECLS
- 
+
 +/* C++11 atomic primitives were designed to be more flexible than the
 + * __sync_* family of primitives.  Despite the name, they are available
 + * in C as well as C++.  The motivating reason for using them is that
@@ -114,8 +114,8 @@ index 327fed1..11b2887 100644
 +#endif
 +
  #if HAVE_INTEL_ATOMIC_PRIMITIVES
- 
+
  #define HAS_ATOMIC_OPS 1
--- 
+--
 cgit v0.10.2
 

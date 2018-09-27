@@ -13,7 +13,7 @@ function g(n, h) {
         return a;
     return a(h(function() { return t(); }));
     };
-    arr.push(r); 
+    arr.push(r);
     return r;
 }
 

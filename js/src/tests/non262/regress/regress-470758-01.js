@@ -20,7 +20,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   (function() { var k; eval("for (var k in {});") })()
 
   reportCompare(expect, actual, summary);

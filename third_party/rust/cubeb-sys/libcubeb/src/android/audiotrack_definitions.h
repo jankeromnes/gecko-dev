@@ -53,7 +53,7 @@ enum event_type {
 
 /**
  * From https://android.googlesource.com/platform/frameworks/base/+/android-2.2.3_r2.1/include/media/AudioSystem.h
- * and 
+ * and
  * https://android.googlesource.com/platform/system/core/+/android-4.2.2_r1/include/system/audio.h
  */
 

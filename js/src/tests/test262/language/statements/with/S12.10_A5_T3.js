@@ -11,7 +11,7 @@ flags: [noStrict]
 this.p1 = 'a';
 var myObj = {
   p1: true,
-  del:false 
+  del:false
 }
 
 eval("with(myObj){del = delete p1}");

@@ -15,7 +15,7 @@ function boom()
   function t() {
     document.removeEventListener("DOMAttrModified", t);
     document.removeChild(a);
-  } 
+  }
 
   document.addEventListener("DOMAttrModified", t);
   document.execCommand("insertunorderedlist", false, "<h1>");

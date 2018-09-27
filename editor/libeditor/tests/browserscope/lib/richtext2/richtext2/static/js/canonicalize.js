@@ -1,5 +1,5 @@
 /**
- * @fileoverview 
+ * @fileoverview
  * Canonicalization functions used in the RTE test suite.
  *
  * Copyright 2010 Google Inc.
@@ -41,7 +41,7 @@ function canonicalizeEntities(str) {
 }
 
 /**
- * Canonicalize the contents of the HTML 'style' attribute. 
+ * Canonicalize the contents of the HTML 'style' attribute.
  * I.e. sorts the CSS attributes alphabetically and canonicalizes the values
  * CSS attributes where necessary.
  *
@@ -55,7 +55,7 @@ function canonicalizeEntities(str) {
  *
  * FIXME: does not canonicalize the contents of compound attributes
  * (e.g., 'border').
- * 
+ *
  * @param str {String} contents of the 'style' attribute
  * @param emitFlags {Object} flags used for this output
  * @return {String/null} canonicalized string, null instead of the empty string
@@ -67,7 +67,7 @@ function canonicalizeStyle(str, emitFlags) {
   var attributes = str.split(';');
   var count = attributes.length;
   var resultArr = [];
-  
+
   for (var a = 0; a < count; ++a) {
     // Retrieve "name: value" pair
     // Note: may expectedly fail if the last pair was terminated with ';'
@@ -88,7 +88,7 @@ function canonicalizeStyle(str, emitFlags) {
           resultArr.push(name + ': ' + value);
         }
         break;
-      
+
       case 'font-family':
         if (emitFlags.canonicalizeUnits) {
           resultArr.push(name + ': ' + new FontName(value).toString());
@@ -96,7 +96,7 @@ function canonicalizeStyle(str, emitFlags) {
           resultArr.push(name + ': ' + value);
         }
         break;
-        
+
       case 'font-size':
         if (emitFlags.canonicalizeUnits) {
           resultArr.push(name + ': ' + new FontSize(value).toString());
@@ -104,17 +104,17 @@ function canonicalizeStyle(str, emitFlags) {
           resultArr.push(name + ': ' + value);
         }
         break;
-        
+
       default:
-        resultArr.push(name + ': ' + value);  
+        resultArr.push(name + ': ' + value);
     }
   }
-  
+
   // Sort by name, assuming no duplicate CSS attribute names.
   resultArr.sort();
 
   return resultArr.join('; ') || null;
-} 
+}
 
 /**
  * Canonicalize a single attribute value.
@@ -149,7 +149,7 @@ function canonicalizeSingleAttribute(elemName, attrName, attrValue, emitFlags) {
     // Remove empty style attributes, canonicalize the contents otherwise,
     // provided the test cares for styles.
     case 'style':
-      return (emitFlags.emitStyle && attrValue) 
+      return (emitFlags.emitStyle && attrValue)
                  ? canonicalizeStyle(attrValue, emitFlags)
                  : null;
 
@@ -168,7 +168,7 @@ function canonicalizeSingleAttribute(elemName, attrName, attrValue, emitFlags) {
     // Canonicalize font names.
     case 'face':
       return emitFlags.canonicalizeUnits ? new FontName(attrValue).toString() : attrValue;
-      
+
     // Canonicalize font sizes (leave other 'size' attributes as-is).
     case 'size':
       if (!attrValue) {
@@ -180,14 +180,14 @@ function canonicalizeSingleAttribute(elemName, attrName, attrValue, emitFlags) {
           return emitFlags.canonicalizeUnits ? new FontSize(attrValue).toString() : attrValue;
       }
       return attrValue;
-      
+
     // Remove spans with value 1. Retain spans with other values, even if
     // empty or with a value 0, since those indicate a flawed implementation.
     case 'colspan':
     case 'rowspan':
     case 'span':
       return (attrValue == '1' || attrValue === '') ? null : attrValue;
-      
+
     // Boolean attributes: presence equals true. If present, the value must be
     // the empty string or the attribute's canonical name.
     // (http://www.whatwg.org/specs/web-apps/current-work/#boolean-attributes)
@@ -219,12 +219,12 @@ function canonicalizeSingleAttribute(elemName, attrName, attrValue, emitFlags) {
     case 'seamless':
     case 'selected':
       return attrValue ? attrValue : attrName;
-      
+
     default:
-      return attrValue;  
+      return attrValue;
   }
 }
- 
+
 /**
  * Canonicalize the contents of an element tag.
  *
@@ -267,7 +267,7 @@ function canonicalizeElementTag(str, emitFlags) {
   while (str) {
     var attrName;
     var attrValue = '';
-    
+
     pos = str.search(/[ =]/);
     if (pos >= 0) {
       attrName = str.substr(0, pos);
@@ -295,7 +295,7 @@ function canonicalizeElementTag(str, emitFlags) {
             attrValue = (pos == -1) ? str : str.substr(0, pos);
             break;
         }
-        attrValue = attrValue.replace(/^ /, '');         
+        attrValue = attrValue.replace(/^ /, '');
         attrValue = attrValue.replace(/ $/, '');
       }
     } else {
@@ -308,7 +308,7 @@ function canonicalizeElementTag(str, emitFlags) {
       case ATTRNAME_SEL_START:
         selStartInTag = true;
         continue;
-      
+
       case ATTRNAME_SEL_END:
         selEndInTag = true;
         continue;
@@ -319,13 +319,13 @@ function canonicalizeElementTag(str, emitFlags) {
       case 'onload':
       case 'xmlns':
         break;
-        
+
       default:
         if (!emitFlags.emitAttrs) {
           break;
         }
         // >>> fall through >>>
-        
+
       case 'contenteditable':
         attrValue = canonicalizeEntities(attrValue);
         attrValue = canonicalizeSingleAttribute(elemName, attrName, attrValue, emitFlags);
@@ -380,7 +380,7 @@ function canonicalizeElementsAndAttributes(str, emitFlags) {
     result = result + canonicalizeEntities(str.substring(tagEnd, tagStart));
     tagEnd = str.indexOf('>', tagStart);
     if (tagEnd < 0) {
-      tagEnd = str.length - 1;  
+      tagEnd = str.length - 1;
     }
     if (str.charAt(tagEnd - 1) == '/') {
       --tagEnd;
@@ -411,7 +411,7 @@ function canonicalizeSpaces(str) {
   str = str.replace(/\< ?/g, '<');
   str = str.replace(/\<\/ ?/g, '</');
   str = str.replace(/ ?\/?\>/g, '>');
-  
+
   return str;
 }
 
@@ -431,6 +431,6 @@ function initialCanonicalizationOf(str) {
   str = str.replace(/ ?<!-- ?/g, '');
   str = str.replace(/ ?--> ?/g, '');
   str = str.replace(/<\/[bh]r>/g, '');
-  
+
   return str;
 }

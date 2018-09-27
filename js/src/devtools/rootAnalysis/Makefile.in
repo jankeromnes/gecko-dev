@@ -35,7 +35,7 @@ JOBS ?= 6
 
 all : rootingHazards.txt allFunctions.txt
 
-CALL_JS := time env PATH=$$PATH:$(SIXGILL)/bin XDB=$(SIXGILL)/bin/xdb.so $(JS) 
+CALL_JS := time env PATH=$$PATH:$(SIXGILL)/bin XDB=$(SIXGILL)/bin/xdb.so $(JS)
 
 src_body.xdb src_comp.xdb: run_complete
 	@echo Started compilation at $$(date)

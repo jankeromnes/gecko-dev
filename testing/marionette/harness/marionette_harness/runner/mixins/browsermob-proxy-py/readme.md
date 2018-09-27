@@ -10,7 +10,7 @@ How to use with selenium-webdriver
 
 Manually:
 
-``` python 
+``` python
 from browsermobproxy import Server
 server = Server("path/to/browsermob-proxy")
 server.start()
@@ -71,7 +71,7 @@ Note on Patches/Pull Requests
 Copyright
 ---------
 
-Copyright 2011 David Burns 
+Copyright 2011 David Burns
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

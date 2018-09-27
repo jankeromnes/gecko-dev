@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=607529
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=607529">Mozilla Bug 607529</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -35,7 +35,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=607529
 
   window.onmessage = function(e) {
     isnot(e.data, "notcached", "Should never end up not being cached");
-  
+
     if (e.data == "loaded") {
       if (!doneOneLoad) {
         doneOneLoad = true;

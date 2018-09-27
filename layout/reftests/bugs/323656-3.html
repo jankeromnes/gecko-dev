@@ -13,7 +13,7 @@
        * be red if what it's inheriting from has the default (currentColor)
        * border-color).
        */
-      
+
       /* 't' for "test" */
       * { color: red; border: 0px hidden red; background: transparent }
       .t { border-color: green }
@@ -26,7 +26,7 @@
       function make(str) {
         return document.createElement(str);
       }
-      
+
       function makeDiv() {
         return make("div");
       }
@@ -46,7 +46,7 @@
           var span = lst[i].getElementsByTagName("span")[0];
           span.style.cssText =
             "border-color: inherit; border-style: solid; border-width: 10px";
-        }        
+        }
 
         var x = document.getElementsByClassName("f d")[0];
         x.appendChild(make("span"));

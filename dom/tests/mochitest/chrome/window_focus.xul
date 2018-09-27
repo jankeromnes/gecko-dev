@@ -431,10 +431,10 @@ function startTest()
   gLastFocusMethod = 0;
   var selectFired = false;
   function selectListener() { selectFired = true; }
-  t19.addEventListener("select", selectListener, false); 
+  t19.addEventListener("select", selectListener, false);
   expectFocusShift(() => t19.select(),
                    null, getById("t" + 19), true, "input.select()");
-  t19.removeEventListener("select", selectListener, false); 
+  t19.removeEventListener("select", selectListener, false);
   ok(selectFired, "select event fires for input");
 
   // mouse clicking
@@ -462,7 +462,7 @@ function startTest()
 
   ok(t19.selectionStart == t19.selectionEnd, "input focused from mouse selection");
 
-  // mouse clicking on elements that are not tabbable 
+  // mouse clicking on elements that are not tabbable
   for (idx = 1; idx <= kFocusSteps; idx++) {
     var element = getById("o" + (idx % 2 ? idx : idx - 1));
 
@@ -504,7 +504,7 @@ function startTest()
   ok(gEvents === "", "blurring element that is not focused");
   is(document.activeElement, $("t1"), "old element still focused after blur() on another element");
 
-  // focus() method on elements that are not tabbable 
+  // focus() method on elements that are not tabbable
   for (idx = 1; idx <= kFocusSteps; idx++) {
     var expected = getById("o" + (idx % 2 ? idx : idx - 1));
     expectFocusShift(() => getById("o" + idx).focus(),
@@ -707,7 +707,7 @@ function startTest()
 
   // next, check cases where the focus is adjusted during the focus event
 
-  // switch focus to an element in the same document  
+  // switch focus to an element in the same document
   trapFocus(o5, shiftFocusParentDocument);
   compareEvents("commandupdate: cu focus: o5 commandupdate: cu blur: o5 commandupdate: cu focus: o9",
                 window, o9, "change focus to sibling during element focus");
@@ -1450,7 +1450,7 @@ function doFrameSwitchingTests()
                      [inputb, "focus", inputb, frameb.contentWindow, window, frameb]];
   inputb.focus();
   ok(gEventMatched && gExpectedEvents.length == 0, "frame switch from input to sibling frame");
-  is(fm.getFocusedElementForWindow(framea.contentWindow, false, {}), inputa, 
+  is(fm.getFocusedElementForWindow(framea.contentWindow, false, {}), inputa,
      "blurred frame still has input as focus");
 
   // focus a descendant in a sibling

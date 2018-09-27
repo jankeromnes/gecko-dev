@@ -7,9 +7,9 @@
 #ifndef nsPrintSettingsWin_h__
 #define nsPrintSettingsWin_h__
 
-#include "nsPrintSettingsImpl.h"  
-#include "nsIPrintSettingsWin.h"  
-#include <windows.h>  
+#include "nsPrintSettingsImpl.h"
+#include "nsIPrintSettingsWin.h"
+#include <windows.h>
 
 
 //*****************************************************************************

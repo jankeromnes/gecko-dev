@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var N = 1 << 16;
   var src = 'var x = /';
   var array = Array();

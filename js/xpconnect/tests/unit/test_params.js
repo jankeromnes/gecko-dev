@@ -90,7 +90,7 @@ function test_component(contractid) {
     var error = false;
     try {
       doIsTest(name, val1, val1Size, val2, val2Size, comparator);
-      
+
       // An exception was not thrown as would have been expected.
       Assert.ok(false);
     }

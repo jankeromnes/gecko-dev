@@ -68,6 +68,6 @@ function test()
       array[i]();
   }
 
- 
+
   reportCompare(expect, actual, summary);
 }

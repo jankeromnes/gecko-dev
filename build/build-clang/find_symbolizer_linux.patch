@@ -13,13 +13,13 @@ index cde54bf..8daade1 100644
 @@ -21,6 +21,10 @@
  #include "sanitizer_common.h"
  #include "sanitizer_file.h"
- 
+
 +#if SANITIZER_LINUX
 +#include "sanitizer_posix.h"
 +#endif
 +
  namespace __sanitizer {
- 
+
  void CatastrophicErrorWrite(const char *buffer, uptr length) {
 @@ -156,6 +160,34 @@ char *FindPathToBinary(const char *name) {
      if (*end == '\0') break;
@@ -55,4 +55,4 @@ index cde54bf..8daade1 100644
 +
    return nullptr;
  }
- 
+

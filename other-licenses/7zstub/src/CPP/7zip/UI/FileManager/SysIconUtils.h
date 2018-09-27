@@ -34,7 +34,7 @@ public:
   CObjectVector<CExtIconPair> _extMap;
   int SplitIconIndex;
   int SplitIconIndex_Defined;
-  
+
   CExtToIconMap(): SplitIconIndex_Defined(false) {}
 
   void Clear()

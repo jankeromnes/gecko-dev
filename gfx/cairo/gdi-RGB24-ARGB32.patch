@@ -15,10 +15,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
  		      src_w, src_h,
  		      blend_function))
  	return _cairo_win32_print_gdi_error ("_cairo_win32_surface_composite(AlphaBlend)");
- 
+
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 +/* makes the alpha channel in a RGB24 surface 0xff */
 +static void
 +make_opaque (cairo_image_surface_t *image, cairo_rectangle_int_t src_r)
@@ -69,7 +69,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
      } else {
  	needs_repeat = TRUE;
      }
- 
+
      /*
       * Operations that we can do:
       *
@@ -84,21 +84,21 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 +     *                   by setting the alpha values of the source to 255.
       * ARGB OVER ARGB -> AlphaBlend, with AC_SRC_ALPHA
       * ARGB OVER  RGB -> AlphaBlend, with AC_SRC_ALPHA; we'll have junk in the dst A byte
-      * 
+      *
       *  RGB OVER  RGB + mask -> AlphaBlend, no AC_SRC_ALPHA
 -     *  RGB OVER ARGB + mask -> UNSUPPORTED
 +     *  RGB OVER ARGB + mask -> Partially supported, We convert this operation into a ARGB OVER ARGB + mask
 +     *                          by setting the alpha values of the source to 255.
       * ARGB OVER ARGB + mask -> AlphaBlend, with AC_SRC_ALPHA
       * ARGB OVER  RGB + mask -> AlphaBlend, with AC_SRC_ALPHA; junk in the dst A byte
-      * 
+      *
       *  RGB SOURCE  RGB -> BitBlt
 -     *  RGB SOURCE ARGB -> UNSUPPORTED (AlphaBlend treats this as a BitBlt, even with SCA 255 and no AC_SRC_ALPHA)
 +     *  RGB SOURCE ARGB -> Partially supported, We convert this operation into a ARGB SOURCE ARGB
 +     *                     by setting the alpha values of the source to 255.
       * ARGB SOURCE ARGB -> BitBlt
       * ARGB SOURCE  RGB -> BitBlt
-      * 
+      *
       *  RGB SOURCE  RGB + mask -> unsupported
       *  RGB SOURCE ARGB + mask -> unsupported
       * ARGB SOURCE ARGB + mask -> unsupported

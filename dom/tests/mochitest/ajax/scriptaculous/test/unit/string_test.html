@@ -23,7 +23,7 @@
 // <![CDATA[
 
   new Test.Unit.Runner({
-    
+
     testStringParseColor: function() { with(this) {
       assertEqual('#000000', "#000000".parseColor());
       assertEqual('#000000', "rgb(0,0,0)".parseColor());
@@ -36,20 +36,20 @@
       assertEqual('#1234', "#1234".parseColor());
       assertEqual('#12345', "#12345".parseColor());
       assertEqual('#123456', "#123456".parseColor());
-      
+
       assertEqual('#abcdef', "#aBcDeF".parseColor());
       assertEqual('#aabbcc', "#aBc".parseColor());
-      
+
       assertEqual('white', "white".parseColor());
       assertEqual('#123456', "#123456".parseColor('#000000'));  // default to #000000 if not parseable
       assertEqual('#000000', "white".parseColor('#000000'));  // default to #000000 if not parseable
-            
+
       assertEqual('#ffffff', "rgb(255,255,255)".parseColor());
       assertEqual('#ff0000', "rgb(255,0,0)".parseColor());
       assertEqual('#00ff00', "rgb(0,255,0)".parseColor());
       assertEqual('#0000ff', "rgb(0,0,255)".parseColor());
     }},
-    
+
     testStringParseStyle: function() { with(this) {
       var expected = "#<Hash:{'fontSize': '11px'}>";
 
@@ -60,7 +60,7 @@
     }}
 
   });
-  
+
 // ]]>
 </script>
 </body>

@@ -3837,7 +3837,7 @@ HTMLEditor::GetFirstSelectedCellInTable(int32_t* aRowIndex,
       NS_WARN_IF(!aCellElement)) {
     return NS_ERROR_INVALID_ARG;
   }
-  
+
 
   *aRowIndex = 0;
   *aColumnIndex = 0;

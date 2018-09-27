@@ -5,7 +5,7 @@ function handleRequest(request, response)
     if (getState("loaded") == "loaded") {
       response.write("ok(false, 'This script was not supposed to get fetched.'); continueAfterReport();");
     } else {
-      response.write("ok(true, 'This script was not supposed to get fetched.'); continueAfterReport();");      
+      response.write("ok(true, 'This script was not supposed to get fetched.'); continueAfterReport();");
     }
   } else {
     setState("loaded", "loaded");

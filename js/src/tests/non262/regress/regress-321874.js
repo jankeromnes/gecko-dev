@@ -31,7 +31,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, section);
 
 section = summary + ': function foo(){for((v) in b);};foo();';
@@ -46,7 +46,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, section);
 
 section = summary + ': for(a() in b);';
@@ -61,7 +61,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, section);
 
 section = summary + ': function foo(){for(a() in b);};foo();';
@@ -76,7 +76,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, section);
 
 section = ': for(new a() in b);';
@@ -91,7 +91,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, summary + section);
 
 section = ': function foo(){for(new a() in b);};foo();';
@@ -106,7 +106,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, summary + section);
 
 section = ': for(void in b);';
@@ -121,7 +121,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, summary + section);
 
 section = ': function foo(){for(void in b);};foo();';
@@ -136,7 +136,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, summary + section);
 
 var d = 1;
@@ -153,7 +153,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, summary + section);
 
 var d = 1;
@@ -170,7 +170,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, summary + section);
 
 const c = 0;
@@ -187,7 +187,7 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, summary + section);
 
 expect = 'error';
@@ -203,5 +203,5 @@ catch(ex)
 {
   printStatus(ex+'');
   actual = 'error';
-} 
+}
 reportCompare(expect, actual, summary + section);

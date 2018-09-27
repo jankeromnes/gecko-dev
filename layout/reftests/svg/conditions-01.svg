@@ -8,7 +8,7 @@
 	<!-- From https://bugzilla.mozilla.org/show_bug.cgi?id=409383 -->
 
 	<rect width="100%" height="100%" fill="lime"/>
-	
+
 	<rect systemLanguage="foo" x="50" y="100" width="50" height="50" fill="red"/>
 
 	<rect x="200" y="100" width="50" height="50" fill="red"/>

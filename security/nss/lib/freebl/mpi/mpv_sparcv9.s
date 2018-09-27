@@ -36,7 +36,7 @@
 !
 
                                    .L900000149:		/* frequency 1.0 confidence 0.0 */
-/* 0x0024	  36 ( 0  2) */		call	(.+0x8)	! params = 	! Result = 
+/* 0x0024	  36 ( 0  2) */		call	(.+0x8)	! params = 	! Result =
 /* 0x0028	     ( 1  2) */		sethi	%hi((_GLOBAL_OFFSET_TABLE_-(.L900000149-.))),%g5
 /* 0x002c	 178 ( 2  3) */		sethi	%hi(.L_const_seg_900000101),%g3
 /* 0x0030	 179 ( 2  3) */		add	%g5,%lo((_GLOBAL_OFFSET_TABLE_-(.L900000149-.))),%g5
@@ -1623,7 +1623,7 @@
 /* 0x1258	1501 ( 1  2) */		or	%g0,%i1,%o2
 /* 0x125c	1502 ( 2  3) */		or	%g0,%i0,%o0
 /* 0x1260	1503 ( 2  3) */		or	%g0,%i0,%o1
-/* 0x1264	1504 ( 3  5) */		call	mul_add	! params = 	! Result = 
+/* 0x1264	1504 ( 3  5) */		call	mul_add	! params = 	! Result =
 /* 0x1268	     ( 4  5) */		srl	%i3,0,%o4
 /* 0x126c	1506 ( 5  6) */		srl	%o0,0,%i0
 /* 0x1270	     ( 6  8) */		ret	! Result =  %o1 %o0 %f0 %f1

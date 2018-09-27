@@ -128,7 +128,7 @@ HRESULT CStreamBinder::Write(const void *data, UInt32 size, UInt32 *processedSiz
     _buf = data;
     _bufSize = size;
     _canRead_Event.Set();
-    
+
     /*
     _canWrite_Event.Lock();
     if (_readingWasClosed)

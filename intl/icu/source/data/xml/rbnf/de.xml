@@ -17,6 +17,6 @@
                 <rbnfrule value="0">&amp;ue=ü&amp;ae=ä&amp;oe=ö&amp;[last primary ignorable ] ←← ' ' ←← ',' ←← '-' ←← '­';</rbnfrule>
             </ruleset>
         </rulesetGrouping>
- 
+
    </rbnf>
 </ldml>

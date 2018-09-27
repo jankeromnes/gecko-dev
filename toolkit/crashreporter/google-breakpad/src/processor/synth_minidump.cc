@@ -417,5 +417,5 @@ void Dump::Finish() {
 }
 
 } // namespace SynthMinidump
-          
+
 } // namespace google_breakpad

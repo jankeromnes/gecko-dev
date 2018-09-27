@@ -1,6 +1,6 @@
 I will, eventually convert all files here to html - just right now I have no
-time to do it. Anyone who'd like to - please feel free, mail me the file and 
-I will check it in 
+time to do it. Anyone who'd like to - please feel free, mail me the file and
+I will check it in
 sonmi@netscape.com
 
 
@@ -11,19 +11,19 @@ of './ssl.sh stress' looks like this:
 ********************* Stress SSL2 RC4 128 with MD5 ****************************
 selfserv -p 8443 -d
 /local/llennox/NSS-PSM/mozilla/tests_results/security/conrail.20/server -n
-conrail.cs.columbia.edu -w nss   -i /tmp/tests_pid.5505  & strsclnt -p 8443 -d . -w nss -c 1000 -C A  conrail.cs.columbia.edu 
+conrail.cs.columbia.edu -w nss   -i /tmp/tests_pid.5505  & strsclnt -p 8443 -d . -w nss -c 1000 -C A  conrail.cs.columbia.edu
 strsclnt: -- SSL: Server Certificate Validated.
 strsclnt: PR_NewTCPSocket returned error -5974:
 Insufficient system resources.
-Terminated 
+Terminated
 ********************* Stress SSL3 RC4 128 with MD5 ****************************
 selfserv -p 8443 -d
 /local/llennox/NSS-PSM/mozilla/tests_results/security/conrail.20/server -n
-conrail.cs.columbia.edu -w nss   -i /tmp/tests_pid.5505  & strsclnt -p 8443 -d . -w nss -c 1000 -C c  conrail.cs.columbia.edu 
+conrail.cs.columbia.edu -w nss   -i /tmp/tests_pid.5505  & strsclnt -p 8443 -d . -w nss -c 1000 -C c  conrail.cs.columbia.edu
 strsclnt: -- SSL: Server Certificate Validated.
 strsclnt: PR_NewTCPSocket returned error -5974:
 Insufficient system resources.
-Terminated 
+Terminated
 
 Running ktrace on the process (ktrace is a system-call tracer, the equivalent of
 Linux's strace) reveals that socket() failed with ENOBUFS after it was called
@@ -39,27 +39,27 @@ All the other NSS tests pass successfully.
 ------- Additional Comments From Nelson Bolyard 2000-11-01 23:08 -------
 
 I see no indication of any error on NSS's part from this description.
-It sounds like an OS kernel configuration problem on the 
+It sounds like an OS kernel configuration problem on the
 submittor's system.  The stress test is just that.  It stresses
-the server by pounding it with SSL connections.  Apparently this 
+the server by pounding it with SSL connections.  Apparently this
 test exhausts some kernel resource on the submittor's system.
 
-The only change to NSS that might be beneficial to this test 
+The only change to NSS that might be beneficial to this test
 would be to respond to this error by waiting and trying again
-for some limited number of times, rather than immediately 
-treating it as a fatal error.  
+for some limited number of times, rather than immediately
+treating it as a fatal error.
 
 However, while such a change might make the test appear to pass,
 it would merely be hiding a very serious problem, namely,
 chronic system resource exhaustion.
 
 So, I suggest that, in this case, the failure serves the useful
-purpose of revealing the system problem, which needs to be 
+purpose of revealing the system problem, which needs to be
 cured apart from any changes to NSS.
 
 I'll leave this bug open for a few more days, to give others
 a chance to persuade me that some NSS change would and should
-solve this problem.  
+solve this problem.
 
 
 ------- Additional Comments From Jonathan Lennox 2000-11-02 13:13 -------
@@ -72,7 +72,7 @@ so normally in use on my system.
 
 So I'd just suggest adding a note to the NSS test webpage to the effect of "The
 SSL stress test opens 2,048 TCP connections in quick succession.  Kernel data
-structures may remain allocated for these connections for up to two minutes. 
+structures may remain allocated for these connections for up to two minutes.
 Some systems may not be configured to allow this many simulatenous connections
 by default; if the stress tests fail, try increasing the number of simultaneous
 sockets supported."

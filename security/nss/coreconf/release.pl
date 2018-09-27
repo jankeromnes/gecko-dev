@@ -20,7 +20,7 @@ if ( $ENV{JAVA_HOME} eq "" ) {
 
 &parse_argv;
 
- 
+
 ######-- Do the packaging of jars.
 
 foreach $jarfile (split(/ /,$var{FILES}) ) {
@@ -48,7 +48,7 @@ foreach $jarfile (split(/ /,$var{FILES}) ) {
     }
 
     $dirdepth --;
-    
+
     print STDERR "jardir = $jardir\n";
     system("ls $jardir");
 
@@ -58,7 +58,7 @@ foreach $jarfile (split(/ /,$var{FILES}) ) {
 # count the number of slashes
 
 	$slashes =0;
-	
+
 	foreach $i (split(//,$jardir)) {
 	    if ($i =~ /\//) {
 		$slashes++;
@@ -66,7 +66,7 @@ foreach $jarfile (split(/ /,$var{FILES}) ) {
 	}
 
 	$dotdots =0;
-	
+
 	foreach $i (split(m|/|,$jardir)) {
 	    if ($i eq '..') {
 		$dotdots ++;
@@ -94,7 +94,7 @@ foreach $jarfile (split(/ /,$var{FILES}) ) {
 		}
 	    }
 	}
-	closedir(DIR);	
+	closedir(DIR);
 
 	print STDERR "$ZIP $zipoptions $jarfile $filelist\n";
 	system("$ZIP $zipoptions $jarfile $filelist");

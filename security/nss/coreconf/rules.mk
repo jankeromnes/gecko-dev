@@ -13,7 +13,7 @@
 # Double-Colon rules for utilizing the binary release model.          #
 #######################################################################
 
-all:: export libs 
+all:: export libs
 
 ifeq ($(AUTOCLEAN),1)
 autobuild:: clean export private_export libs program install
@@ -60,7 +60,7 @@ ifeq ($(OS_TARGET),Darwin)
 	find $(SOURCE_MD_DIR)/lib -name "*.a" -exec $(RANLIB) {} \;
 endif
 
-export:: 
+export::
 	+$(LOOP_OVER_DIRS)
 
 private_export::
@@ -145,7 +145,7 @@ release_cpdistdir::
 
 
 # $(SOURCE_RELEASE_xxx_JAR) is a name like yyy.jar
-# $(SOURCE_RELEASE_xx_DIR)  is a name like 
+# $(SOURCE_RELEASE_xx_DIR)  is a name like
 
 release_jars::
 	@echo "== release.pl =="
@@ -481,7 +481,7 @@ endif #STRICT_CPLUSPLUS_SUFFIX
 
 %.i: %.c
 ifeq (,$(filter-out WIN%,$(OS_TARGET)))
-	$(CC) -C /P $(CFLAGS) $< 
+	$(CC) -C /P $(CFLAGS) $<
 else
 	$(CC) -C -E $(CFLAGS) $< > $@
 endif
@@ -596,7 +596,7 @@ endif
 endif
 
 #
-# JDK_GEN -- for generating "old style" native methods 
+# JDK_GEN -- for generating "old style" native methods
 #
 # Generate JDK Headers and Stubs into the '_gen' and '_stubs' directory
 #
@@ -626,7 +626,7 @@ $(JDK_HEADER_CFILES): $(JDK_HEADER_CLASSFILES)
 $(JDK_STUB_CFILES): $(JDK_STUB_CLASSFILES)
 
 export::
-	@echo Generating/Updating JDK headers 
+	@echo Generating/Updating JDK headers
 	$(JAVAH) -d $(JDK_GEN_DIR) $(JDK_PACKAGE_CLASSES)
 	@echo Generating/Updating JDK stubs
 	$(JAVAH) -stubs -d $(JDK_STUB_DIR) $(JDK_PACKAGE_CLASSES)
@@ -675,7 +675,7 @@ $(JRI_HEADER_CFILES): $(JRI_HEADER_CLASSFILES)
 $(JRI_STUB_CFILES): $(JRI_STUB_CLASSFILES)
 
 export::
-	@echo Generating/Updating JRI headers 
+	@echo Generating/Updating JRI headers
 	$(JAVAH) -jri -d $(JRI_GEN_DIR) $(JRI_PACKAGE_CLASSES)
 	@echo Generating/Updating JRI stubs
 	$(JAVAH) -jri -stubs -d $(JRI_GEN_DIR) $(JRI_PACKAGE_CLASSES)
@@ -722,7 +722,7 @@ JMC_EXPORT_PATHS	:= $(subst .,/,$(JMC_EXPORT))
 JMC_EXPORT_FILES	:= $(patsubst %,$(JAVA_DESTPATH)/$(PACKAGE)/%.class,$(JMC_EXPORT_PATHS))
 
 #
-# We're doing NSINSTALL -t here (copy mode) because calling INSTALL will pick up 
+# We're doing NSINSTALL -t here (copy mode) because calling INSTALL will pick up
 # your NSDISTMODE and make links relative to the current directory. This is a
 # problem because the source isn't in the current directory:
 #
@@ -768,9 +768,9 @@ $(PUBLIC_EXPORT_DIR)::
 		$(NSINSTALL) -D $@; \
 	fi
 
-export:: $(PUBLIC_EXPORT_DIR) 
+export:: $(PUBLIC_EXPORT_DIR)
 
-export:: $(EXPORTS) 
+export:: $(EXPORTS)
 	$(INSTALL) -m 444 $^ $(PUBLIC_EXPORT_DIR)
 
 export:: $(BUILT_SRCS)
@@ -789,10 +789,10 @@ $(PRIVATE_EXPORT_DIR)::
 
 private_export:: $(PRIVATE_EXPORT_DIR)
 
-private_export:: $(PRIVATE_EXPORTS) 
+private_export:: $(PRIVATE_EXPORTS)
 	$(INSTALL) -m 444 $^ $(PRIVATE_EXPORT_DIR)
 else
-private_export:: 
+private_export::
 	@echo There are no private exports.;
 endif
 
@@ -810,7 +810,7 @@ ifneq ($(BUILD_OPT),)
 REGDATE = $(subst \ ,, $(shell $(PERL)  $(CORE_DEPTH)/$(MODULE)/scripts/now))
 endif
 
-tests:: $(REGRESSION_SPEC) 
+tests:: $(REGRESSION_SPEC)
 	cd $(PLATFORM); \
 	../$(SOURCE_MD_DIR)/bin/regress$(PROG_SUFFIX) specfile=../$(REGRESSION_SPEC) progress $(EXTRA_REGRESS_OPTIONS); \
 	if test ! -d $(TESTS_DIR); then \
@@ -824,7 +824,7 @@ ifneq ($(BUILD_OPT),)
 	echo "then run 'reporter specfile=$(RESULTS_DIR)/rptspec'"
 endif
 else
-tests:: 
+tests::
 	@echo Error: you didn't specify REGRESSION_SPEC in your manifest.mn file!;
 endif
 
@@ -896,8 +896,8 @@ ifdef MKDEPENDENCIES
 
 $(MKDEPENDENCIES)::
 	@$(MAKE_OBJDIR)
-	touch $(MKDEPENDENCIES) 
-	chmod u+w $(MKDEPENDENCIES) 
+	touch $(MKDEPENDENCIES)
+	chmod u+w $(MKDEPENDENCIES)
 #on NT, the preceding touch command creates a read-only file !?!?!
 #which is why we have to explicitly chmod it.
 	$(MKDEPEND) -p$(OBJDIR_NAME)/ -o'$(OBJ_SUFFIX)' -f$(MKDEPENDENCIES) \

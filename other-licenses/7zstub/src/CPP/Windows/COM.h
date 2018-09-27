@@ -9,7 +9,7 @@ namespace NWindows {
 namespace NCOM {
 
 #ifdef _WIN32
-  
+
 class CComInitializer
 {
 public:

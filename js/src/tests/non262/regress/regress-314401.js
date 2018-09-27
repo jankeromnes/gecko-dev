@@ -59,7 +59,7 @@ window.onerror = null;
     catch(ex)
     {
       printStatus(ex+'');
-    } 
+    }
     reportCompare(expect, actual, 'setInterval(Script, 0, "", null)');
   }
   setTimeout('gDelayTestDriverEnd = false; jsTestDriverEnd();', 0);

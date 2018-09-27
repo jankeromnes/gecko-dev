@@ -120,7 +120,7 @@ _get_rectangular_clip (cairo_t *cr,
 
         rectangles[i] = rect;
     }
-  
+
     *need_clip = true;
     *num_rectangles = cliplist->num_rectangles;
 

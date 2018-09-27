@@ -18,7 +18,7 @@ top_builddir=../..
 include $(top_builddir)/icudefs.mk
 
 CPPFLAGS+= -I$(top_builddir)/common -I$(top_srcdir)/common
-LIBS=@LIBS@ 
+LIBS=@LIBS@
 exec_prefix=@exec_prefix@
 prefix=@prefix@
 program_transform_name=@program_transform_name@

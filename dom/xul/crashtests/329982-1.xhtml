@@ -9,17 +9,17 @@ function init()
   var B = A.nextSibling;
   var C = B.nextSibling;
   var P = A.parentNode;
-  
+
   document.addEventListener("DOMNodeRemoved", fizzy, false);
   P.removeChild(B);
   document.removeEventListener("DOMNodeRemoved", fizzy, false);
-  
+
   function fizzy()
   {
     document.removeEventListener("DOMNodeRemoved", fizzy, false); // avoid recursion
     P.removeChild(A);
   }
-    
+
   document.documentElement.appendChild(C);
 }
 

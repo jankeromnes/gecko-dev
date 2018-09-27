@@ -91,7 +91,7 @@ NS_IMETHODIMP JumpListLink::GetUri(nsIURI **aURI)
 NS_IMETHODIMP JumpListLink::SetUri(nsIURI *aURI)
 {
   mURI = aURI;
-  
+
   return NS_OK;
 }
 
@@ -105,7 +105,7 @@ NS_IMETHODIMP JumpListLink::SetUriTitle(const nsAString &aUriTitle)
 NS_IMETHODIMP JumpListLink::GetUriTitle(nsAString& aUriTitle)
 {
   aUriTitle.Assign(mUriTitle);
-  
+
   return NS_OK;
 }
 
@@ -188,7 +188,7 @@ NS_IMETHODIMP JumpListLink::Equals(nsIJumpListItem *aItem, bool *aResult)
 NS_IMETHODIMP JumpListShortcut::GetApp(nsILocalHandlerApp **aApp)
 {
   NS_IF_ADDREF(*aApp = mHandlerApp);
-  
+
   return NS_OK;
 }
 
@@ -278,7 +278,7 @@ nsresult JumpListSeparator::GetSeparator(RefPtr<IShellLinkW>& aShellLink)
   IShellLinkW* psl;
 
   // Create a IShellLink.
-  hr = CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER, 
+  hr = CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER,
                         IID_IShellLinkW, (LPVOID*)&psl);
   if (FAILED(hr))
     return NS_ERROR_UNEXPECTED;
@@ -303,7 +303,7 @@ nsresult JumpListSeparator::GetSeparator(RefPtr<IShellLinkW>& aShellLink)
 }
 
 // (static) Creates a ShellLink that encapsulate a shortcut to local apps.
-nsresult JumpListShortcut::GetShellLink(nsCOMPtr<nsIJumpListItem>& item, 
+nsresult JumpListShortcut::GetShellLink(nsCOMPtr<nsIJumpListItem>& item,
                                         RefPtr<IShellLinkW>& aShellLink,
                                         nsCOMPtr<nsIThread> &aIOThread)
 {
@@ -329,7 +329,7 @@ nsresult JumpListShortcut::GetShellLink(nsCOMPtr<nsIJumpListItem>& item,
   rv = shortcut->GetApp(getter_AddRefs(handlerApp));
   NS_ENSURE_SUCCESS(rv, rv);
 
-  // Create a IShellLink 
+  // Create a IShellLink
   hr = CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER,
                         IID_IShellLinkW, (LPVOID*)&psl);
   if (FAILED(hr))
@@ -365,7 +365,7 @@ nsresult JumpListShortcut::GetShellLink(nsCOMPtr<nsIJumpListItem>& item,
   bool useUriIcon = false; // if we want to use the URI icon
   bool usedUriIcon = false; // if we did use the URI icon
   shortcut->GetIconIndex(&appIconIndex);
-  
+
   nsCOMPtr<nsIURI> iconUri;
   rv = shortcut->GetFaviconPageUri(getter_AddRefs(iconUri));
   if (NS_SUCCEEDED(rv) && iconUri) {
@@ -396,8 +396,8 @@ nsresult JumpListShortcut::GetShellLink(nsCOMPtr<nsIJumpListItem>& item,
 
   if (useUriIcon) {
     nsString icoFilePath;
-    rv = mozilla::widget::FaviconHelper::ObtainCachedIconFile(iconUri, 
-                                                              icoFilePath, 
+    rv = mozilla::widget::FaviconHelper::ObtainCachedIconFile(iconUri,
+                                                              icoFilePath,
                                                               aIOThread,
                                                               false);
     if (NS_SUCCEEDED(rv)) {
@@ -420,12 +420,12 @@ nsresult JumpListShortcut::GetShellLink(nsCOMPtr<nsIJumpListItem>& item,
 
 // If successful fills in the aSame parameter
 // aSame will be true if the path is in our icon cache
-static nsresult IsPathInOurIconCache(nsCOMPtr<nsIJumpListShortcut>& aShortcut, 
+static nsresult IsPathInOurIconCache(nsCOMPtr<nsIJumpListShortcut>& aShortcut,
                                      wchar_t *aPath, bool *aSame)
 {
   NS_ENSURE_ARG_POINTER(aPath);
   NS_ENSURE_ARG_POINTER(aSame);
- 
+
   *aSame = false;
 
   // Construct the path of our jump list cache
@@ -461,7 +461,7 @@ nsresult JumpListShortcut::GetJumpListShortcut(IShellLinkW *pLink, nsCOMPtr<nsIJ
   nsresult rv;
   HRESULT hres;
 
-  nsCOMPtr<nsILocalHandlerApp> handlerApp = 
+  nsCOMPtr<nsILocalHandlerApp> handlerApp =
     do_CreateInstance(NS_LOCALHANDLERAPP_CONTRACTID, &rv);
   NS_ENSURE_SUCCESS(rv, rv);
 
@@ -535,7 +535,7 @@ nsresult JumpListLink::GetShellItem(nsCOMPtr<nsIJumpListItem>& item, RefPtr<IShe
   IShellItem2 *psi = nullptr;
   nsresult rv;
 
-  int16_t type; 
+  int16_t type;
   if (NS_FAILED(item->GetType(&type)))
     return NS_ERROR_INVALID_ARG;
 

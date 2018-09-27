@@ -46,7 +46,7 @@ function html(node)
             dump("</" + node.tagName + ">");
         }
 
-        
+
     }
     // if it's a piece of text just dump the text
     else if (type == Node.TEXT_NODE) {

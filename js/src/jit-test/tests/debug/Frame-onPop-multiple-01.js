@@ -26,7 +26,7 @@ g.eval('function f() { debugger; return "1"; }');
 // We create a bunch of debuggers, but they all consult this global variable
 // for expectations and responses, so the order in which events get
 // reported to the debuggers doesn't matter.
-// 
+//
 // This list includes every pair of transitions, and is of minimal length.
 // As if opportunity cost were just some theoretical concern.
 var sequence = [{ expect: { return: '1' }, resume: { return: '2'} },
@@ -67,7 +67,7 @@ dbg0.onEnterFrame = function handleOriginalEnter(frame) {
         dbgs.push(dbg);
 
         dbg.onDebuggerStatement = function handleDebuggerStatement(f) {
-            log += 'd';  
+            log += 'd';
             assertEq(f.live, true);
             frames.push(f);
         };
@@ -115,7 +115,7 @@ dbg0.onEnterFrame = function handleOriginalEnter(frame) {
     assertEq(completionsEqual(frame.eval('f()'), { return: '7' }), true);
     assertEq(log, "eeeeeeeee(((((((((ddddddddd)r1)r2)t3)r4)x)t5)t6)x)x");
 
-    dbg0.log += '.';    
+    dbg0.log += '.';
 };
 
 dbg0.log = '';

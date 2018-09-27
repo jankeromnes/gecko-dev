@@ -36,7 +36,7 @@ window.addEventListener("load", step1);
 function step1()
 {
   var rect = document.getElementById("x").getBoundingClientRect();
-  
+
   is(document.elementFromPoint(rect.x + rect.width/2, rect.y + rect.height/2), document.getElementById("x"), "Able to hit transformed object");
   SimpleTest.finish();
 }

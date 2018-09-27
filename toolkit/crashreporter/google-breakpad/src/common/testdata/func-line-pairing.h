@@ -1,7 +1,7 @@
 // -*- mode: c++ -*-
 
 // Test data for pairing functions and lines.
-// 
+//
 // For a pair of functions that are adjacent (10,20),(20,25) and a
 // pair that are not (10,15),(20,25), we include a test case for every
 // possible arrangement of two lines relative to those functions. We
@@ -9,7 +9,7 @@
 // lines are dropped before we do any pairing.
 //
 // Each test case is represented by a macro call of the form:
-// 
+//
 //   PAIRING(func1_start, func1_end, func2_start, func2_end,
 //           line1_start, line1_end, line2_start, line2_end,
 //           func1_num_lines, func2_num_lines,

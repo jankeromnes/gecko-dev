@@ -22,7 +22,7 @@
             <tabpanel id="main_coursetabpanel_overview">
                 <label value="this is the OVERVIEW tabpanel" />
             </tabpanel>
-            
+
             <tabpanel id="main_coursetabpanel_extensions">
                 <label value="this is the EXTENSIONS tabpanel" />
             </tabpanel>

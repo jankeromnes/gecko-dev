@@ -32,7 +32,7 @@ if (typeof uneval != 'undefined')
   {
     actual = 'error';
   }
- 
+
   reportCompare(expect, actual, status);
 
   status = inSection(2) + ' eval(uneval({"if": "then"}))';
@@ -49,7 +49,7 @@ if (typeof uneval != 'undefined')
   {
     actual = 'error';
   }
- 
+
   reportCompare(expect, actual, status);
 
   status = inSection(3) + ' eval(uneval(f))';
@@ -65,7 +65,7 @@ if (typeof uneval != 'undefined')
   {
     actual = 'error';
   }
- 
+
   reportCompare(expect, actual, status);
 
   status = inSection(2) + ' eval(uneval(g))';
@@ -81,7 +81,7 @@ if (typeof uneval != 'undefined')
   {
     actual = 'error';
   }
- 
+
   reportCompare(expect, actual, status);
 }
 

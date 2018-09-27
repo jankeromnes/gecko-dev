@@ -20,6 +20,6 @@ Expect: feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntry).link.sp
     <link href="http://www.snellspace.com/public/linktests/alternate" />
     <link rel="payment" href="http://www.example.org/payment" />
   </entry>
-  
-  
+
+
 </feed>

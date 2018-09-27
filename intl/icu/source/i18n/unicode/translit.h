@@ -15,10 +15,10 @@
 #include "unicode/utypes.h"
 
 /**
- * \file 
+ * \file
  * \brief C++ API: Tranforms text from one format to another.
  */
- 
+
 #if !UCONFIG_NO_TRANSLITERATION
 
 #include "unicode/uobject.h"

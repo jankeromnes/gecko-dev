@@ -37,5 +37,5 @@
   <xsl:template match="/">
     <xhtml:body><xsl:apply-templates/></xhtml:body>
   </xsl:template>
-  
+
 </xsl:stylesheet>

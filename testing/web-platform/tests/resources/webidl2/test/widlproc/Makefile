@@ -22,7 +22,7 @@ OBJDIR = obj
 ########################################################################
 # Linux configuration
 #
-ifneq (,$(filter Linux%, $(UNAME))) 
+ifneq (,$(filter Linux%, $(UNAME)))
 
 CFLAGS = -g -Wall -Werror -O0 $(patsubst %, -I%, $(INCDIRS))
 OBJSUFFIX = .o
@@ -35,21 +35,21 @@ else
 ########################################################################
 # Darwin configuration
 #
-ifneq (,$(filter Darwin%, $(UNAME))) 
+ifneq (,$(filter Darwin%, $(UNAME)))
 
 CFLAGS = -g -Wall -Werror -O2 $(patsubst %, -I%, $(INCDIRS))
 OBJSUFFIX = .o
 EXESUFFIX =
 OBJOPTION = -o
 # The -o in the following line has a space after it, which must not be removed.
-EXEOPTION = -o 
+EXEOPTION = -o
 
 else
 ########################################################################
 # Windows (cygwin but using MS compiler) configuration
 #
 # this is messy - should probably use vcvars.bat
-ifneq (,$(filter CYGWIN%, $(UNAME))) 
+ifneq (,$(filter CYGWIN%, $(UNAME)))
 VISUALSTUDIODIR = $(wildcard /cygdrive/c/Program*Files/Microsoft*Visual*Studio*8)
 SDKDIR = $(wildcard /cygdrive/c/Program*Files/Microsoft*SDKs/Windows/*/Lib)
 ifeq (,$(VISUALSTUDIODIR))
@@ -64,12 +64,12 @@ SDKDIR = $(wildcard /cygdrive/c/Program\ Files\ */Windows*Kits)
 endif
 
 ifeq (,$(VISUALSTUDIODIR))
-$(error Could not find  MS Visual Studio) 
+$(error Could not find  MS Visual Studio)
 else
 WINVISUALSTUDIODIR = $(shell cygpath -w '$(VISUALSTUDIODIR)')
 WINSDKDIR = $(shell cygpath -w '$(SDKDIR)')
 
-#$(error $(VISUALSTUDIODIR)) 
+#$(error $(VISUALSTUDIODIR))
 
 CC = \
 	Lib='$(WINVISUALSTUDIODIR)\VC\LIB;$(WINVISUALSTUDIODIR)\VC\PlatformSDK\Lib;$(WINSDKDIR)' \
@@ -147,7 +147,7 @@ $(OBJDIR)/widlproc-$(SVNBRANCH)$(SVNREV).zip : $(WIDLPROC) $(DTD) $(DOCDIR)/widl
 srczip : widlproc-src-$(SVNBRANCH)$(SVNREV).zip
 
 widlproc-src-%.zip : $(SVNFILES) $(SVNLOG)
-	zip $@ $^ 
+	zip $@ $^
 
 examples :
 	$(MAKE) -C examples SRCDIR=../src OBJDIR=../obj EXAMPLESOBJDIR=../obj/examples

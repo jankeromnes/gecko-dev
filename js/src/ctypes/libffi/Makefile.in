@@ -263,7 +263,7 @@ libffi_la_OBJECTS = $(am_libffi_la_OBJECTS) \
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
-am__v_lt_1 = 
+am__v_lt_1 =
 libffi_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(libffi_la_LDFLAGS) $(LDFLAGS) -o $@
@@ -294,11 +294,11 @@ am__v_P_1 = :
 AM_V_GEN = $(am__v_GEN_@AM_V@)
 am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
 am__v_GEN_0 = @echo "  GEN     " $@;
-am__v_GEN_1 = 
+am__v_GEN_1 =
 AM_V_at = $(am__v_at_@AM_V@)
 am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
-am__v_at_1 = 
+am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -312,7 +312,7 @@ LTCPPASCOMPILE = $(LIBTOOL) $(AM_V_lt) $(AM_LIBTOOLFLAGS) \
 AM_V_CPPAS = $(am__v_CPPAS_@AM_V@)
 am__v_CPPAS_ = $(am__v_CPPAS_@AM_DEFAULT_V@)
 am__v_CPPAS_0 = @echo "  CPPAS   " $@;
-am__v_CPPAS_1 = 
+am__v_CPPAS_1 =
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
@@ -322,7 +322,7 @@ LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CC = $(am__v_CC_@AM_V@)
 am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
 am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
+am__v_CC_1 =
 CCLD = $(CC)
 LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -330,7 +330,7 @@ LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
+am__v_CCLD_1 =
 SOURCES = $(libffi_la_SOURCES) $(nodist_libffi_la_SOURCES) \
 	$(libffi_convenience_la_SOURCES) \
 	$(nodist_libffi_convenience_la_SOURCES)
@@ -338,31 +338,31 @@ DIST_SOURCES = $(libffi_la_SOURCES) $(libffi_convenience_la_SOURCES)
 AM_V_DVIPS = $(am__v_DVIPS_@AM_V@)
 am__v_DVIPS_ = $(am__v_DVIPS_@AM_DEFAULT_V@)
 am__v_DVIPS_0 = @echo "  DVIPS   " $@;
-am__v_DVIPS_1 = 
+am__v_DVIPS_1 =
 AM_V_MAKEINFO = $(am__v_MAKEINFO_@AM_V@)
 am__v_MAKEINFO_ = $(am__v_MAKEINFO_@AM_DEFAULT_V@)
 am__v_MAKEINFO_0 = @echo "  MAKEINFO" $@;
-am__v_MAKEINFO_1 = 
+am__v_MAKEINFO_1 =
 AM_V_INFOHTML = $(am__v_INFOHTML_@AM_V@)
 am__v_INFOHTML_ = $(am__v_INFOHTML_@AM_DEFAULT_V@)
 am__v_INFOHTML_0 = @echo "  INFOHTML" $@;
-am__v_INFOHTML_1 = 
+am__v_INFOHTML_1 =
 AM_V_TEXI2DVI = $(am__v_TEXI2DVI_@AM_V@)
 am__v_TEXI2DVI_ = $(am__v_TEXI2DVI_@AM_DEFAULT_V@)
 am__v_TEXI2DVI_0 = @echo "  TEXI2DVI" $@;
-am__v_TEXI2DVI_1 = 
+am__v_TEXI2DVI_1 =
 AM_V_TEXI2PDF = $(am__v_TEXI2PDF_@AM_V@)
 am__v_TEXI2PDF_ = $(am__v_TEXI2PDF_@AM_DEFAULT_V@)
 am__v_TEXI2PDF_0 = @echo "  TEXI2PDF" $@;
-am__v_TEXI2PDF_1 = 
+am__v_TEXI2PDF_1 =
 AM_V_texinfo = $(am__v_texinfo_@AM_V@)
 am__v_texinfo_ = $(am__v_texinfo_@AM_DEFAULT_V@)
 am__v_texinfo_0 = -q
-am__v_texinfo_1 = 
+am__v_texinfo_1 =
 AM_V_texidevnull = $(am__v_texidevnull_@AM_V@)
 am__v_texidevnull_ = $(am__v_texidevnull_@AM_DEFAULT_V@)
 am__v_texidevnull_0 = > /dev/null
-am__v_texidevnull_1 = 
+am__v_texidevnull_1 =
 INFO_DEPS =
 am__TEXINFO_TEX_DIR = $(srcdir)
 DVIS = doc/libffi.dvi
@@ -693,7 +693,7 @@ AM_MAKEFLAGS = \
 
 # Subdir rules rely on $(FLAGS_TO_PASS)
 FLAGS_TO_PASS = $(AM_MAKEFLAGS)
-MAKEOVERRIDES = 
+MAKEOVERRIDES =
 toolexeclib_LTLIBRARIES = libffi.la
 noinst_LTLIBRARIES = libffi_convenience.la
 libffi_la_SOURCES = src/prep_cif.c src/types.c \
@@ -771,7 +771,7 @@ fficonfig.h: stamp-h1
 stamp-h1: $(srcdir)/fficonfig.h.in $(top_builddir)/config.status
 	@rm -f stamp-h1
 	cd $(top_builddir) && $(SHELL) ./config.status fficonfig.h
-$(srcdir)/fficonfig.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps) 
+$(srcdir)/fficonfig.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	($(am__cd) $(top_srcdir) && $(AUTOHEADER))
 	rm -f stamp-h1
 	touch $@
@@ -1149,10 +1149,10 @@ src/vax/elfbsd.lo: src/vax/$(am__dirstamp) \
 src/vax/ffi.lo: src/vax/$(am__dirstamp) \
 	src/vax/$(DEPDIR)/$(am__dirstamp)
 
-libffi.la: $(libffi_la_OBJECTS) $(libffi_la_DEPENDENCIES) $(EXTRA_libffi_la_DEPENDENCIES) 
+libffi.la: $(libffi_la_OBJECTS) $(libffi_la_DEPENDENCIES) $(EXTRA_libffi_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libffi_la_LINK) -rpath $(toolexeclibdir) $(libffi_la_OBJECTS) $(libffi_la_LIBADD) $(LIBS)
 
-libffi_convenience.la: $(libffi_convenience_la_OBJECTS) $(libffi_convenience_la_DEPENDENCIES) $(EXTRA_libffi_convenience_la_DEPENDENCIES) 
+libffi_convenience.la: $(libffi_convenience_la_OBJECTS) $(libffi_convenience_la_DEPENDENCIES) $(EXTRA_libffi_convenience_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(LINK)  $(libffi_convenience_la_OBJECTS) $(libffi_convenience_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:

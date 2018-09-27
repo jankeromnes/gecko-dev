@@ -8,5 +8,5 @@
   <script type="text/javascript" src="platform.js"/>
 
   <textbox type="number" value="test" hidespinbuttons="true"/>
-      
+
 </window>

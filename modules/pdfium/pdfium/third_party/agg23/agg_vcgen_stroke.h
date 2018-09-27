@@ -18,7 +18,7 @@
 #include "agg_math_stroke.h"
 namespace agg
 {
-class vcgen_stroke 
+class vcgen_stroke
 {
     enum status_e {
         initial,

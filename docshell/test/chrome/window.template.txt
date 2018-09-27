@@ -13,7 +13,7 @@
   </script>
 
   <script type="application/javascript"><![CDATA[
-  
+
     // Define the generator-iterator for the tests.
     var tests = testIterator();
 
@@ -25,19 +25,19 @@
     }
 
     ////
-    // Generator function for test steps for bug {BUGNUMBER}:  
+    // Generator function for test steps for bug {BUGNUMBER}:
     // Description goes here.
     //
     function testIterator()
     {
       // Test steps go here.  See bug303267_window.xul for an example.
 
-      // Tell the framework the test is finished.  Include the final 'yield' 
+      // Tell the framework the test is finished.  Include the final 'yield'
       // statement to prevent a StopIteration exception from being thrown.
       finish();
       yield undefined;
     }
-    
+
   ]]></script>
 
   <browser type="content" primary="true" flex="1" id="content" src="about:blank"/>

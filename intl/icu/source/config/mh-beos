@@ -22,7 +22,7 @@ GEN_DEPS.cc= $(CXX) -E -MM $(DEFS) $(CPPFLAGS)
 #	  -fmove-all-movables -freduce-all-givs -fpeephole \
 #	  -funroll-all-loops -ffunction-sections -fdata-sections
 
-# BeOS gccs (geekgadgets + 2.95.3) have this old bug: 
+# BeOS gccs (geekgadgets + 2.95.3) have this old bug:
 # after this:          const wchar_t x[] = L"foo";
 # x[2] is "optimized" into: (wchar_t)((char *)x)[2] (== 0)
 #
@@ -46,11 +46,11 @@ SHAREDLIBCXXFLAGS = -fPIC
 SHAREDLIBCPPFLAGS = -DPIC
 
 ## Additional flags when building libraries and with threads
-LIBCPPFLAGS = 
-THREADSCPPFLAGS = 
+LIBCPPFLAGS =
+THREADSCPPFLAGS =
 
 ## Compiler switch to embed a runtime search path
-LD_RPATH=	
+LD_RPATH=
 LD_RPATH_PRE = -Wl,-rpath,
 
 ## Compiler switch to embed a library name

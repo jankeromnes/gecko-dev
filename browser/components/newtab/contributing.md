@@ -118,13 +118,13 @@ reference GitHub issues that this commit **Closes**.
 ## Milestones ##
 
 All work on Activity Stream is broken into two week iterations, which we map into a GitHub [Milestone](https://github.com/mozilla/activity-stream/milestones).  At the beginning of the iteration, we prioritize and estimate tickets
-into the milestone, attempting to figure out how much progress we can make during the iteration.  
+into the milestone, attempting to figure out how much progress we can make during the iteration.
 
 ## Priorities ##
 
 All tickets that have been [triaged](#triage) will have a priority tag of either `P1`, `P2`, `P3`, or `P4` which are highest to lowest
 priorities of tickets in Activity Stream. We love ticket tags and you might also see `Blocked`, `Critical` or `Chemspill` tags, which
-indicate our level of anxiety about that particular ticket.  
+indicate our level of anxiety about that particular ticket.
 
 ## Triage ##
 

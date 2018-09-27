@@ -84,12 +84,12 @@ struct _cairo_d2d_surface {
 	_cairo_clip_init (&this->clip);
         cairo_list_init(&this->dependent_surfaces);
     }
-    
+
     ~_cairo_d2d_surface();
 
 
     cairo_surface_t base;
-    /* Device used by this surface 
+    /* Device used by this surface
      * NOTE: In upstream cairo this is in the surface base class */
     cairo_d2d_device_t *device;
 
@@ -97,7 +97,7 @@ struct _cairo_d2d_surface {
     RefPtr<ID2D1RenderTarget> rt;
     /** Surface containing our backstore */
     RefPtr<ID3D10Resource> surface;
-    /** 
+    /**
      * Surface used to temporarily store our surface if a bitmap isn't available
      * straight from our render target surface.
      */
@@ -121,7 +121,7 @@ struct _cairo_d2d_surface {
     RefPtr<ID2D1Layer> maskLayer;
     /**
      * Layer used for clipping when tiling, and also for clearing out geometries
-     * - lazily initialized 
+     * - lazily initialized
      */
     RefPtr<ID2D1Layer> helperLayer;
     /** If this layer currently is clipping, used to prevent excessive push/pops */
@@ -182,7 +182,7 @@ typedef HRESULT (WINAPI*D3D10CreateEffectFromMemoryFunc)(
     void *pData,
     SIZE_T DataLength,
     UINT FXFlags,
-    ID3D10Device *pDevice, 
+    ID3D10Device *pDevice,
     ID3D10EffectPool *pEffectPool,
     ID3D10Effect **ppEffect
 );

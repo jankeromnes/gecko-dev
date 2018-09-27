@@ -33,7 +33,7 @@ try{
 	__my__funct instanceof __my__funct;
 	$ERROR('#4 Only Function objects implement [[HasInstance]] and consequently can be proper ShiftExpression for The instanceof operator');
 }
-catch(e){  
+catch(e){
 	if (e instanceof TypeError !== true) {
       $ERROR('#4 Only Function objects implement [[HasInstance]] and consequently can be proper ShiftExpression for The instanceof operator');
 	}

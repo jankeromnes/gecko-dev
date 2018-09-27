@@ -12,7 +12,7 @@
     window.parent.ok_wrapper(result, desc);
     window.parent.postMessage({ok: result, desc: desc}, "*");
   }
-  
+
   function doStuff() {
     ok(true, "a document sandboxed with allow-same-origin and allow-scripts should be same origin with its parent and able to run scripts " +
        "regardless of what kind of whitespace was used in its sandbox attribute");

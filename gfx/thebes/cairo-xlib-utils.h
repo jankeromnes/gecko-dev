@@ -19,7 +19,7 @@ CAIRO_BEGIN_DECLS
  * than zero. This includes the assumption that the same RGBA image
  * is composited if you call the callback multiple times with the same closure,
  * display and visual during a single cairo_draw_with_xlib call.
- * 
+ *
  * @return True on success, False on non-recoverable error
  */
 typedef cairo_bool_t (* cairo_xlib_drawing_callback)
@@ -55,20 +55,20 @@ typedef enum _cairo_xlib_drawing_opacity {
 
 /**
  * This type encodes the capabilities of the native drawing callback.
- * 
+ *
  * If CAIRO_XLIB_DRAWING_SUPPORTS_OFFSET is set, 'offset_x' and 'offset_y'
  * can be nonzero in the call to the callback; otherwise they will be zero.
- * 
+ *
  * If CAIRO_XLIB_DRAWING_SUPPORTS_CLIP_RECT is set, then 'num_rects' can be
  * zero or one in the call to the callback. If
  * CAIRO_XLIB_DRAWING_SUPPORTS_CLIP_LIST is set, then 'num_rects' can be
  * anything in the call to the callback. Otherwise 'num_rects' will be zero.
  * Do not set both of these values.
- * 
+ *
  * If CAIRO_XLIB_DRAWING_SUPPORTS_ALTERNATE_SCREEN is set, then 'screen' can
  * be any screen on any display, otherwise it will be the default screen of
  * the display passed into cairo_draw_with_xlib.
- * 
+ *
  * If CAIRO_XLIB_DRAWING_SUPPORTS_NONDEFAULT_VISUAL is set, then 'visual' can be
  * any visual, otherwise it will be equal to
  * DefaultVisualOfScreen (screen).

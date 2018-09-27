@@ -3,7 +3,7 @@ if (typeof(JSAN) != 'undefined') { JSAN.use('MochiKit.Logging'); }
 if (typeof(tests) == 'undefined') { tests = {}; }
 
 tests.test_Logging = function (t) {
-  
+
     // just in case
     logger.clear();
 
@@ -23,7 +23,7 @@ tests.test_Logging = function (t) {
     logger.addListener("firstTwo", null,
         bind(firstTwo.push, firstTwo));
 
-    
+
     log("foo");
     var msgs = logger.getMessages();
     t.is( msgs.length, 1, 'global log() put one message in queue' );

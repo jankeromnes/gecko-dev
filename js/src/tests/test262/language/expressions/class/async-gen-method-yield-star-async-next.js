@@ -19,7 +19,7 @@ info: |
       async [no LineTerminator here] * PropertyName ( UniqueFormalParameters ) { AsyncGeneratorBody }
 
 
-    
+
 ---*/
 var log = [];
 var obj = {

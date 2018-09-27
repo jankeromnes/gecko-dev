@@ -31,15 +31,15 @@ bool EnablePrivilege(LPCTSTR privilegeName, bool enable)
   HMODULE hModule = ::LoadLibrary(TEXT("Advapi32.dll"));
   if (hModule == NULL)
     return false;
-  
+
   GET_PROC_ADDR(OpenProcessToken, "OpenProcessToken");
   GET_PROC_ADDR(LookupPrivilegeValue, "LookupPrivilegeValueA");
   GET_PROC_ADDR(AdjustTokenPrivileges, "AdjustTokenPrivileges");
-  
+
   if (my_OpenProcessToken &&
       my_AdjustTokenPrivileges &&
       my_LookupPrivilegeValue)
-  
+
   #endif
 
   {
@@ -57,11 +57,11 @@ bool EnablePrivilege(LPCTSTR privilegeName, bool enable)
       ::CloseHandle(token);
     }
   }
-    
+
   #ifndef _UNICODE
 
   ::FreeLibrary(hModule);
-  
+
   #endif
 
   return res;

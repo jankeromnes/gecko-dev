@@ -37,13 +37,13 @@ function setUpPage() {
        setImplementationAttribute("namespaceAware", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,10 +73,10 @@ var docName = 'namednodemapsetnameditemns09';
 
 
 /**
-* 
-	The method setNamedItemNS adds a node using its namespaceURI and localName and 
+*
+	The method setNamedItemNS adds a node using its namespaceURI and localName and
 	raises a NO_MODIFICATION_ALLOWED_ERR if this map is readonly.
-	
+
 	Create a new attribute node and attempt to add it to the nodemap of entities and notations
 	for this documenttype.  This should reaise a NO_MODIFICATION_ALLOWED_ERR.
 
@@ -93,7 +93,7 @@ function namednodemapsetnameditemns09() {
       var notations;
       var attr;
       var newNode;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -106,7 +106,7 @@ function namednodemapsetnameditemns09() {
       notations = docType.notations;
 
       attr = doc.createAttributeNS("http://www.w3.org/DOM/Test","test");
-      
+
 	{
 		success = false;
 		try {
@@ -137,12 +137,12 @@ function namednodemapsetnameditemns09() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapsetnameditemns09</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

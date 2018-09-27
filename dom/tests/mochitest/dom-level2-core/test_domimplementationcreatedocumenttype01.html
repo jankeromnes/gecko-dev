@@ -36,13 +36,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -53,7 +53,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -72,12 +72,12 @@ var docName = 'domimplementationcreatedocumenttype01';
 
 
 /**
-* 
+*
 	The method createDocumentType with valid values for qualifiedName, publicId and
 	systemId should create an empty DocumentType node.
-	
+
 	Invoke createDocument on this DOMImplementation with a valid qualifiedName and different
-	publicIds and systemIds.  Check if the the DocumentType node was created with its 
+	publicIds and systemIds.  Check if the the DocumentType node was created with its
 	ownerDocument attribute set to null.
 
 	The specification has changed! ownerDocument should not be null.
@@ -104,7 +104,7 @@ function domimplementationcreatedocumenttype01() {
       systemIds[0] = "";
       systemIds[1] = "test";
 
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -120,11 +120,11 @@ for(var indexN65629 = 0;indexN65629 < publicIds.length; indexN65629++) {
 ownerDocument = newDocType.ownerDocument;
 
       assertNotNull("domimplementationcreatedocumenttype01_ownerDocument",ownerDocument);
-    
+
 	}
-   
+
 	}
-   
+
 }
 
 </script>
@@ -133,12 +133,12 @@ ownerDocument = newDocType.ownerDocument;
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/domimplementationcreatedocumenttype01</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

@@ -12,7 +12,7 @@ description: Statement must be evaluated before second Expression is evaluated
 //CHECK#1
 for(var i=0;i<10;i++){
 	i*=2;
-  break;	
+  break;
 }
 if (i!==0)  $ERROR('#1: i === 0. Actual:  i ==='+ i  );
 

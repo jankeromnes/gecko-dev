@@ -28,12 +28,12 @@ info: |
        d. Let benvRec be benv's EnvironmentRecord.
        e. Let fobj be ! benvRec.GetBindingValue(F, false).
        f. Perform ! fenvRec.SetMutableBinding(F, fobj, false).
-       g. Return NormalCompletion(empty). 
+       g. Return NormalCompletion(empty).
 ---*/
 var after;
 
 (function() {
-  
+
 
   if (true) function f() { return 'function declaration'; }
 

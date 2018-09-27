@@ -5,7 +5,7 @@ esid: sec-date.prototype.gettime
 es6id: 20.3.4.10
 description: Return value for valid dates
 info: |
-  1. Return ? thisTimeValue(this value). 
+  1. Return ? thisTimeValue(this value).
 ---*/
 
 assert.sameValue(new Date(0).getTime(), 0, '+0');

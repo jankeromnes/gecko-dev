@@ -39,7 +39,7 @@ void
 CheckTracedThing(JSTracer* trc, T thing);
 } // namespace js
 
-
+
 /*** Callback Tracer Dispatch ********************************************************************/
 
 template <typename T>
@@ -114,7 +114,7 @@ JS::CallbackTracer::getTracingEdgeName(char* buffer, size_t bufferSize)
     snprintf(buffer, bufferSize, "%s", contextName_);
 }
 
-
+
 /*** Public Tracing API **************************************************************************/
 
 JS_PUBLIC_API(void)
@@ -180,7 +180,7 @@ JS::TraceIncomingCCWs(JSTracer* trc, const JS::CompartmentSet& compartments)
     }
 }
 
-
+
 /*** Cycle Collector Helpers **********************************************************************/
 
 // This function is used by the Cycle Collector (CC) to trace through -- or in
@@ -297,7 +297,7 @@ gc::TraceCycleCollectorChildren(JS::CallbackTracer* trc, ObjectGroup* group)
     }
 }
 
-
+
 /*** Traced Edge Printer *************************************************************************/
 
 static size_t

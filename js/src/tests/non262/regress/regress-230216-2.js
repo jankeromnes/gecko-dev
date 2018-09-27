@@ -17,7 +17,7 @@ printStatus (summary);
 
 status = inSection(1) + ' check for overflow in quantifier';
 
-actual = 'undefined'; 
+actual = 'undefined';
 expect0 = 'no exception thrown false';
 expect1 = 'error';
 

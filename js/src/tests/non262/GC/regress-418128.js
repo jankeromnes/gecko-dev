@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var obj = {};
   var id = { toString: function() { return ""+Math.pow(2, 0.1); } }
   obj[id] = { valueOf: unrooter };

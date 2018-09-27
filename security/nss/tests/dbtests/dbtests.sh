@@ -8,7 +8,7 @@
 #
 # mozilla/security/nss/tests/dbtest/dbtest.sh
 #
-# Certificate generating and handeling for NSS QA, can be included 
+# Certificate generating and handeling for NSS QA, can be included
 # multiple times from all.sh and the individual scripts
 #
 # needs to work on all Unix and Windows platforms
@@ -61,7 +61,7 @@ dbtest_init()
 ########################################################################
 dbtest_cleanup()
 {
-  html "</TABLE><BR>" 
+  html "</TABLE><BR>"
   cd ${QADIR}
   chmod a+rw $RONLY_DIR
   . common/cleanup.sh
@@ -78,21 +78,21 @@ dbtest_main()
 {
     cd ${HOSTDIR}
 
-    
+
     Echo "test opening the database read/write in a nonexisting directory"
     ${BINDIR}/certutil -L -X -d ./non_existent_dir
     ret=$?
     if [ $ret -ne 255 ]; then
       html_failed "Certutil succeeded in a nonexisting directory $ret"
     else
-      html_passed "Certutil didn't work in a nonexisting dir $ret" 
+      html_passed "Certutil didn't work in a nonexisting dir $ret"
     fi
     ${BINDIR}/dbtest -r -d ./non_existent_dir
     ret=$?
     if [ $ret -ne 46 ]; then
       html_failed "Dbtest readonly succeeded in a nonexisting directory $ret"
     else
-      html_passed "Dbtest readonly didn't work in a nonexisting dir $ret" 
+      html_passed "Dbtest readonly didn't work in a nonexisting dir $ret"
     fi
 
     Echo "test force opening the database in a nonexisting directory"
@@ -106,7 +106,7 @@ dbtest_main()
 
     Echo "test opening the database readonly in an empty directory"
     mkdir $EMPTY_DIR
-    ${BINDIR}/tstclnt -h  ${HOST}  -d $EMPTY_DIR 
+    ${BINDIR}/tstclnt -h  ${HOST}  -d $EMPTY_DIR
     ret=$?
     if [ $ret -ne 1 ]; then
       html_failed "Tstclnt succeded in an empty directory $ret"
@@ -118,7 +118,7 @@ dbtest_main()
     if [ $ret -ne 46 ]; then
       html_failed "Dbtest readonly succeeded in an empty directory $ret"
     else
-      html_passed "Dbtest readonly didn't work in an empty dir $ret" 
+      html_passed "Dbtest readonly didn't work in an empty dir $ret"
     fi
     rm -rf $EMPTY_DIR/* 2>/dev/null
     ${BINDIR}/dbtest -i -d $EMPTY_DIR
@@ -126,7 +126,7 @@ dbtest_main()
     if [ $ret -ne 0 ]; then
       html_failed "Dbtest logout after empty DB Init loses key $ret"
     else
-      html_passed "Dbtest logout after empty DB Init has key" 
+      html_passed "Dbtest logout after empty DB Init has key"
     fi
     rm -rf $EMPTY_DIR/* 2>/dev/null
     ${BINDIR}/dbtest -i -p pass -d $EMPTY_DIR
@@ -134,12 +134,12 @@ dbtest_main()
     if [ $ret -ne 0 ]; then
       html_failed "Dbtest password DB Init loses needlogin state $ret"
     else
-      html_passed "Dbtest password DB Init maintains needlogin state" 
+      html_passed "Dbtest password DB Init maintains needlogin state"
     fi
     rm -rf $EMPTY_DIR/* 2>/dev/null
     ${BINDIR}/certutil -D -n xxxx -d $EMPTY_DIR #created DB
     ret=$?
-    if [ $ret -ne 255 ]; then 
+    if [ $ret -ne 255 ]; then
         html_failed "Certutil succeeded in deleting a cert in an empty directory $ret"
     else
         html_passed "Certutil didn't work in an empty dir $ret"
@@ -176,7 +176,7 @@ dbtest_main()
     if [ $ret -ne 46 ]; then
       html_failed "Dbtest r/w succeeded in a readonly directory $ret"
     else
-      html_passed "Dbtest r/w didn't work in an readonly dir $ret" 
+      html_passed "Dbtest r/w didn't work in an readonly dir $ret"
     fi
     else
       html_passed "Skipping Dbtest r/w in a readonly dir because user is root"
@@ -190,9 +190,9 @@ dbtest_main()
       html_passed "Certutil didn't work in an readonly dir $ret"
     fi
     else
-        html_passed "Skipping Certutil delete cert in a readonly directory test because user is root" 
+        html_passed "Skipping Certutil delete cert in a readonly directory test because user is root"
     fi
-    
+
     Echo "test opening the database ronly in a readonly directory"
 
     ${BINDIR}/dbtest -d $RONLY_DIR -r
@@ -200,7 +200,7 @@ dbtest_main()
     if [ $ret -ne 0 ]; then
       html_failed "Dbtest readonly failed in a readonly directory $ret"
     else
-      html_passed "Dbtest readonly succeeded in a readonly dir $ret" 
+      html_passed "Dbtest readonly succeeded in a readonly dir $ret"
     fi
 
     Echo "test force opening the database  r/w in a readonly directory"
@@ -223,7 +223,7 @@ dbtest_main()
     ret=$?
     if [ $ret -ne 0 ]; then
       html_failed "Nicknane conflict test failed, couldn't create database $ret"
-    else 
+    else
       ${BINDIR}/certutil -A -n alice -t ,, -i ${R_ALICEDIR}/Alice.cert -d ${CONFLICT_DIR}
       ret=$?
       if [ $ret -ne 0 ]; then
@@ -257,6 +257,6 @@ dbtest_main()
 
 ################## main #################################################
 
-dbtest_init 
+dbtest_init
 dbtest_main 2>&1
 dbtest_cleanup

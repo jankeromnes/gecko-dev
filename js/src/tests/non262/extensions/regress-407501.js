@@ -28,7 +28,7 @@ function test()
   var a = [[[[[[[0]]]]]]];
   if (uneval(a).length == 0)
     throw "Unexpected result";
- 
+
   if (typeof gczeal == 'function')
   {
     gczeal(0);

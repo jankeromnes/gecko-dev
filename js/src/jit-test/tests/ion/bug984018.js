@@ -29,8 +29,8 @@ function test() {
 
         var c2 = Math.cos(x);
         var s2 = Math.sin(x);
-        
-        return (s1 * s1 + c1 * c1) - (s2 * s2 + c2 * c2); 
+
+        return (s1 * s1 + c1 * c1) - (s2 * s2 + c2 * c2);
     }
 
     function bailoutHere() { bailout(); }

@@ -4,9 +4,9 @@
     var myMsg = JSON.stringify({msg: msg, url: url, line: line, error: true});
     opener.postMessage(myMsg, "*");
   }
-  
+
   var report = false;
-  
+
   function g() {
     if (report) {
       opener.postMessage("callbackHappened", "*");

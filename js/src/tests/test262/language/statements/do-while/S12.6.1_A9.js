@@ -11,7 +11,7 @@ description: Throwing system exception whithin a "do-while" loop
 //CHECK#1
 try {
 	do {
-	    var x = 1; 
+	    var x = 1;
 	    abaracadabara;
 	} while(0);
 	$ERROR('#1: "abbracadabra" lead to throwing exception');

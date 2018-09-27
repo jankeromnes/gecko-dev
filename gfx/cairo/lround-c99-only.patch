@@ -9,9 +9,9 @@ diff --git a/gfx/cairo/cairo/src/cairo-misc.c b/gfx/cairo/cairo/src/cairo-misc.c
      case CAIRO_OPERATOR_DEST_ATOP:
  	return 0;
      }
- 
+
  }
- 
+
 -#if DISABLE_SOME_FLOATING_POINT
 +#if DISABLE_SOME_FLOATING_POINT || __STDC_VERSION__ < 199901L
  /* This function is identical to the C99 function lround(), except that it
@@ -33,7 +33,7 @@ diff --git a/gfx/cairo/cairo/src/cairoint.h b/gfx/cairo/cairo/src/cairoint.h
  {
      return floor (r + .5);
  }
- 
+
 -#if DISABLE_SOME_FLOATING_POINT
 +#if DISABLE_SOME_FLOATING_POINT || __STDC_VERSION__ < 199901L
  cairo_private int
@@ -41,6 +41,6 @@ diff --git a/gfx/cairo/cairo/src/cairoint.h b/gfx/cairo/cairo/src/cairoint.h
  #else
  #define _cairo_lround lround
  #endif
- 
+
  cairo_private uint16_t
  _cairo_half_from_float (float f) cairo_const;

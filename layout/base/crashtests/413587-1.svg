@@ -5,7 +5,7 @@
       svg { counter-increment: x; }
     </style>
   </symbol>
-  
+
   <use xlink:href="#foo"/>
 
 </svg>

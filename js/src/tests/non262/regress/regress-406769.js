@@ -147,6 +147,6 @@ var a125;
 for (var a126 = 1; a126 < ([1,2,3]).length -1; ++a126)
     1;
 
- 
+
   reportCompare(expect, actual, summary);
 }

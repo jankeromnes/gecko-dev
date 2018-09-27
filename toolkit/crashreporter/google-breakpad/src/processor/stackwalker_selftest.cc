@@ -59,7 +59,7 @@
 #if defined(__sparc) && !defined(__sparc__)
 #define __sparc__
 #endif
- 
+
 #if (defined(__SUNPRO_CC) || defined(__GNUC__)) && \
     (defined(__i386__) || defined(__ppc__) || defined(__sparc__))
 
@@ -236,10 +236,10 @@ static uint32_t GetPC() {
 #elif defined(__sparc__)
 
 
-// GetSP returns the current value of the %sp/%o6/%g_r[14] register, which 
+// GetSP returns the current value of the %sp/%o6/%g_r[14] register, which
 // by convention, is the stack pointer on sparc.  Because it's implemented
-// as a function, %sp itself contains GetSP's own stack pointer and not 
-// the caller's stack pointer.  Dereference  to obtain the caller's stack 
+// as a function, %sp itself contains GetSP's own stack pointer and not
+// the caller's stack pointer.  Dereference  to obtain the caller's stack
 // pointer, which the compiler-generated prolog stored on the stack.
 // Because this function depends on the compiler-generated prolog, inlining
 // is disabled.

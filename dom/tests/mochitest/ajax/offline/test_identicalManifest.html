@@ -58,7 +58,7 @@ function manifestUpdatedContinue()
   // Now make sure applicationCache.update() does what we expect.
   applicationCache.oncached = OfflineTest.failEvent;
   applicationCache.onnoupdate = OfflineTest.priv(noUpdate);
-  
+
   gGotChecking = false;
   gGotDownloading = false;
   applicationCache.update();

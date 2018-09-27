@@ -23745,7 +23745,7 @@
       xxxfontnamexxx Regular
     </namerecord>
     <namerecord nameID="5" platformID="3" platEncID="1" langID="0x409">
-      Version 001.001 
+      Version 001.001
     </namerecord>
     <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
       xxxfontnamexxx
@@ -23808,7 +23808,7 @@
   <FFTM>
     <hexdata>
       00000001 00000000 c9896f31 00000000
-      c6a779b7 00000000 cae12877 
+      c6a779b7 00000000 cae12877
     </hexdata>
   </FFTM>
 

@@ -39,5 +39,5 @@ else
 {
   expect = 5;
   actual = ReferenceError;
-} 
+}
 reportCompare(expect, actual, summary);

@@ -11,10 +11,10 @@ var __arr = [4,3,2,1,4,3,2,1,4,3,2,1];
 //Sort uses closure
 //
 __arr.sort(
-	function(x,y) { 
-		if (x>y){return -1;} 
-		if (x<y){return 1;} 
-		if (x==y){return 0;} 
+	function(x,y) {
+		if (x>y){return -1;}
+		if (x<y){return 1;}
+		if (x==y){return 0;}
 	}
 );
 

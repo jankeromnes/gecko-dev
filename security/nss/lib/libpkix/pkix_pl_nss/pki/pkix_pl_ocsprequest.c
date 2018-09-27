@@ -339,7 +339,7 @@ pkix_pl_OcspRequest_Create(
 	}
 
         certRequest = cert_CreateSingleCertOCSPRequest(
-                cid->certID, cert->nssCert, time, 
+                cid->certID, cert->nssCert, time,
                 addServiceLocatorExtension, nssSignerCert);
 
         ocspRequest->decoded = certRequest;

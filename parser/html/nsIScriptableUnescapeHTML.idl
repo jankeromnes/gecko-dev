@@ -14,27 +14,27 @@ webidl Element;
  * This interface is OBSOLETE and exists solely for legacy extensions.
  */
 [scriptable, uuid(3ab244a9-f09d-44da-9e3f-ee4d67367f2d)]
-interface nsIScriptableUnescapeHTML : nsISupports 
+interface nsIScriptableUnescapeHTML : nsISupports
 {
-  /** 
+  /**
    * Converts HTML to plain text. This is equivalent to calling
-   * nsIParserUtils::convertToPlainText(src, 
+   * nsIParserUtils::convertToPlainText(src,
    *   nsIDocumentEncoder::OutputSelectionOnly |
    *   nsIDocumentEncoder::OutputAbsoluteLinks, 0).
    *
-   * You should call nsIParserUtils::convertToPlainText() instead of calling 
+   * You should call nsIParserUtils::convertToPlainText() instead of calling
    * this method.
    *
    * @param src The HTML string to convert to plain text.
-   */ 
+   */
   AString unescape(in AString src);
-        
+
   /**
    * Parses markup into a sanitized document fragment. This is equivalent to
    * calling nsIParserUtils::parseFragment(fragment, 0, isXML, baseURI,
    * element).
    *
-   * You should call nsIParserUtils::parseFragment() instead of calling this 
+   * You should call nsIParserUtils::parseFragment() instead of calling this
    * method.
    * @param fragment the input markup
    * @param isXML true if |fragment| is XML and false if HTML

@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var f = function() { for(p in {})   try{}catch(e){}   };
   print(f.toString());
 

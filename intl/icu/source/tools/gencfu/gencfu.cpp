@@ -254,8 +254,8 @@ int  main(int argc, char **argv) {
     uspoof_serialize(sc, outData, outDataSize, &status);
 
     // Copy the data format version numbers from the spoof data header into the UDataMemory header.
-    
-    uprv_memcpy(dh.info.formatVersion, 
+
+    uprv_memcpy(dh.info.formatVersion,
                 reinterpret_cast<SpoofDataHeader *>(outData)->fFormatVersion,
                 sizeof(dh.info.formatVersion));
 
@@ -266,7 +266,7 @@ int  main(int argc, char **argv) {
     UNewDataMemory *pData;
     pData = udata_create(outDir, NULL, outFileName, &(dh.info), copyright, &status);
     if(U_FAILURE(status)) {
-        fprintf(stderr, "gencfu: Could not open output file \"%s\", \"%s\"\n", 
+        fprintf(stderr, "gencfu: Could not open output file \"%s\", \"%s\"\n",
                          outFileName, u_errorName(status));
         exit(status);
     }
@@ -274,13 +274,13 @@ int  main(int argc, char **argv) {
 
     //  Write the data itself.
     udata_writeBlock(pData, outData, outDataSize);
-    // finish up 
+    // finish up
     bytesWritten = udata_finish(pData, &status);
     if(U_FAILURE(status)) {
         fprintf(stderr, "gencfu: Error %d writing the output file\n", status);
         exit(status);
     }
-    
+
     if (bytesWritten != outDataSize) {
         fprintf(stderr, "gencfu: Error writing to output file \"%s\"\n", outFileName);
         exit(-1);

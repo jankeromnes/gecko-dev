@@ -7,7 +7,7 @@ info: |
 es6id: 19.4.2.10
 author: Sam Mikes
 description: Symbol.species exists
-includes: 
+includes:
   - propertyHelper.js
 features: [Symbol.species]
 ---*/

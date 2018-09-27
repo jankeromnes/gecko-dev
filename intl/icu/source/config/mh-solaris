@@ -50,7 +50,7 @@ SHLIB.c=	$(CC) $(CFLAGS) $(LDFLAGS) -G
 SHLIB.cc=	$(CXX) $(CXXFLAGS) $(LDFLAGS) -G
 
 ## Compiler switch to embed a runtime search path
-LD_RPATH=       -R'$$'ORIGIN 
+LD_RPATH=       -R'$$'ORIGIN
 LD_RPATH_PRE=   -R
 
 #LIBRARY_PATH_PREFIX=/usr/lib/lwp:
@@ -108,14 +108,14 @@ endif
 %.$(SO): %.$(SO).$(SO_TARGET_VERSION_MAJOR)
 	$(RM) $@ && ln -s ${*F}.$(SO).$(SO_TARGET_VERSION) $@
 
-# 
+#
 ifeq (strip $(GENCCODE_ASSEMBLY),)
 BIR_LDFLAGS=  -Wl,-M,$(NAME).map -Wl,-B,symbolic -Wl,-B,eliminate
 BIR_DEPS=   $(NAME).map
 endif
 
 ## Remove shared library 's'
-STATIC_PREFIX_WHEN_USED = 
-STATIC_PREFIX = 
+STATIC_PREFIX_WHEN_USED =
+STATIC_PREFIX =
 
 ## End Solaris-specific setup

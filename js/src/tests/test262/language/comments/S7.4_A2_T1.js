@@ -19,17 +19,17 @@ if (x !== 0) {
 }
 
 //CHECK#3
-var /* y = 1;*/ 
+var /* y = 1;*/
 y;
 if (y !== undefined) {
   $ERROR('#3: var /* y = 1; */ \\n y; y === undefined. Actual: ' + (y));
-}  
+}
 
 //CHECK#4
 var /* y = 1;*/ y;
 if (y !== undefined) {
   $ERROR('#4: var /* y = 1; */ y; y === undefined. Actual: ' + (y));
-}  
+}
 
 /*CHECK#5*/
 /*var x = 1;
@@ -39,20 +39,20 @@ if (x === 1) {
 */
 
 /*CHECK#6*/
-/*var this.y = 1;*/ 
+/*var this.y = 1;*/
 this.y++;
 if (isNaN(y) !== true) {
   $ERROR('#6: /*var this.y = 1;*/ \\n this.y++; y === Not-a-Number. Actual: ' + (y));
 }
 
 //CHECK#7
-var string = "/*var y = 0*/" /* y = 1;*/ 
+var string = "/*var y = 0*/" /* y = 1;*/
 if (string !== "/*var y = 0*/") {
 $ERROR('#7: var string = "/*var y = 0*/" /* y = 1;*/ string === "//var y = 0"');
 }
 
 //CHECK#8
-var string = "/*var y = 0" /* y = 1;*/ 
+var string = "/*var y = 0" /* y = 1;*/
 if (string !== "/*var y = 0") {
 $ERROR('#8: var string = "/*var y = 0" /* y = 1;*/ string === "//var y = 0"');
 }

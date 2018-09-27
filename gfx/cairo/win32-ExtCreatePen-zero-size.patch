@@ -21,17 +21,17 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-printing-surface.c b/gfx/cairo/cair
      cairo_matrix_t mat;
      double scale;
 +    double scaled_width;
- 
+
      status = _cairo_surface_clipper_set_clip (&surface->clipper, clip);
      if (status)
  	return status;
- 
+
      if (op == CAIRO_OPERATOR_CLEAR) {
  	_cairo_win32_printing_surface_init_clear_color (surface, &clear);
  	source = (cairo_pattern_t*) &clear;
 @@ -1288,17 +1290,21 @@ static cairo_int_status_t
      _cairo_matrix_factor_out_scale (&mat, &scale);
- 
+
      pen_style = PS_GEOMETRIC;
      dash_array = NULL;
      if (style->num_dashes) {
@@ -48,7 +48,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-printing-surface.c b/gfx/cairo/cair
      } else {
  	pen_style |= PS_SOLID;
      }
- 
+
      SetMiterLimit (surface->dc, (FLOAT) (style->miter_limit), NULL);
      if (source->type == CAIRO_PATTERN_TYPE_SOLID) {
  	cairo_solid_pattern_t *solid = (cairo_solid_pattern_t *) source;

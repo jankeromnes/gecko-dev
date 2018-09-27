@@ -1,6 +1,6 @@
 /* -----------------------------------------------------------------------
    eabi.S - Copyright (c) 2012, 2013  Anthony Green
-   
+
    Moxie Assembly glue.
 
    Permission is hereby granted, free of charge, to any person obtaining
@@ -23,7 +23,7 @@
    OTHER DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#define LIBFFI_ASM	
+#define LIBFFI_ASM
 #include <fficonfig.h>
 #include <ffi.h>
 
@@ -40,7 +40,7 @@
 	# $r3 :   fig->flags
 	# $r4 :   ecif.rvalue
 	# $r5 :   fn
-	
+
 ffi_call_EABI:
 	push	$sp, $r6
 	push	$sp, $r7
@@ -54,7 +54,7 @@ ffi_call_EABI:
 	sto.l	12($sp), $r3 /* flags */
 	sto.l	16($sp), $r4 /* &rvalue */
 	sto.l	20($sp), $r5 /* fn */
-	
+
 	/* Call ffi_prep_args.  */
 	mov 	$r6, $r4 /* Save result buffer */
 	mov	$r7, $r5 /* Save the target fn */
@@ -71,7 +71,7 @@ ffi_call_EABI:
 	ldo.l	$r3, 12($sp)
 	ldo.l	$r4, 16($sp)
 	ldo.l	$r5, 20($sp)
-	
+
 	/* Call the target function.  */
 	jsr	$r7
 
@@ -86,16 +86,16 @@ ffi_call_EABI:
 	st.l	($r6), $r0
 	jmpa	retdone
 
-ret2reg:	
+ret2reg:
 	st.l	($r6), $r0
 	sto.l	4($r6), $r1
 
 retstruct:
-retdone:	
+retdone:
 	/* Return.  */
 	ldo.l	$r6, -4($fp)
 	ldo.l	$r7, -8($fp)
 	ldo.l	$r8, -12($fp)
 	ret
 	.size ffi_call_EABI, .-ffi_call_EABI
-	
+

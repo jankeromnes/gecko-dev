@@ -47,7 +47,7 @@
       for (let part in components) {
         dir.append(components[part]);
       }
-      return dir;    
+      return dir;
     }
 
     function setupLibs(path) {

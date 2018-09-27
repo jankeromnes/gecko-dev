@@ -4,7 +4,7 @@ Connected to ftp.jgaa.com.
     WarFTPd 1.81.00 (Mar  3 2002) Ready
     (C)opyright 1996 - 2002 by Jarle (jgaa) Aase - all rights reserved.
 220 Please enter your user name.
-Name (ftp.jgaa.com:cyp): 
+Name (ftp.jgaa.com:cyp):
 230 User  logged in.
 Remote system type is UNIX.
 Using binary mode to transfer files.
@@ -34,5 +34,5 @@ dr-xr--r-- 1 root  root        0 Apr 22  2009 ..
 -r-xr--r-- 1 root  root       90 Oct 17  2000 warftpd-version2-public-source.zip.md5
 226 Transfer complete. 1220 bytes in 0.01 sec. (119.141 Kb/s)
 ftp> close
-221 Goodbye. Control connection closed. 
-ftp> 
+221 Goodbye. Control connection closed.
+ftp>

@@ -126,7 +126,7 @@ COMPILER_TAG := _$(CC_NAME)
 endif
 
 ifeq ($(USE_PTHREADS),1)
-OS_PTHREAD = -lpthread 
+OS_PTHREAD = -lpthread
 endif
 
 OS_CFLAGS		= $(DSO_CFLAGS) $(OS_REL_CFLAGS) $(ARCHFLAG) -pipe -ffunction-sections -fdata-sections -DHAVE_STRERROR

@@ -1,13 +1,13 @@
 README              763  Information about this server
-bin/                  -  
-etc/                  =  
-ls-lR                 0  
-ls-lR.Z               3  
+bin/                  -
+etc/                  =
+ls-lR                 0
+ls-lR.Z               3
 pub/                  =  Public area
-usr/                  -  
+usr/                  -
 morgan               14  -> ../real/morgan
 TIMIT.mostlikely.Z
-                  79215  
+                  79215
 README              763  Feb  3 18:21  Information about this server
 bin/                  -  Apr 28  1994
 etc/                  =  11 Jul 21:04
@@ -18,6 +18,6 @@ usr/                  -  Sep  7 09:39
 morgan               14  Apr 18  9:39  -> ../real/morgan
 TIMIT.mostlikely.Z
                   79215  Jan  4  6:45
-                      
-*** CAUTION while editing this sample LISTing - 
+
+*** CAUTION while editing this sample LISTing -
 *** Lines contain trailing whitespace and/or '\r's

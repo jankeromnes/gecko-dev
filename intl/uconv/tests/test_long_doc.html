@@ -69,7 +69,7 @@ for (var i = 0; i < decoders.length; i++) {
     var decoder = decoders[i];
     var data = encodeURI(testContent);
     var dataURI = "data:text/html;charset=" + decoder + "," + data;
-   
+
     var testFrame = document.createElement("iframe");
     frameID = decoder;
     testFrame.setAttribute("id", frameID);

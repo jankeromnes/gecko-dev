@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var x='123'+'\0'+'456';
   var y='123'+'\0'+'789';
   var a={};

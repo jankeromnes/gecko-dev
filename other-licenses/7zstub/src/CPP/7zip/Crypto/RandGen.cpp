@@ -77,7 +77,7 @@ void CRandomGenerator::Init()
     DWORD tickCount = ::GetTickCount();
     HASH_UPD(tickCount);
     #endif
-    
+
     for (unsigned j = 0; j < 100; j++)
     {
       Sha256_Final(&hash, _buff);
@@ -105,11 +105,11 @@ void CRandomGenerator::Generate(Byte *data, unsigned size)
   while (size != 0)
   {
     CSha256 hash;
-    
+
     Sha256_Init(&hash);
     Sha256_Update(&hash, _buff, SHA256_DIGEST_SIZE);
     Sha256_Final(&hash, _buff);
-    
+
     Sha256_Init(&hash);
     UInt32 salt = 0xF672ABD1;
     HASH_UPD(salt);

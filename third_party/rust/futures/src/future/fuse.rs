@@ -21,7 +21,7 @@ pub fn new<A: Future>(f: A) -> Fuse<A> {
 
 impl<A: Future> Fuse<A> {
     /// Returns whether the underlying future has finished or not.
-    /// 
+    ///
     /// If this method returns `true`, then all future calls to `poll`
     /// are guaranteed to return `Ok(Async::NotReady)`. If this returns
     /// false, then the underlying future has not been driven to

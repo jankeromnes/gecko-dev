@@ -10,9 +10,9 @@
 
 #ifdef _DEBUG
   #define BREAK_TO_DEBUGGER           DebugBreak()
-#else   
+#else
   #define BREAK_TO_DEBUGGER
-#endif  
+#endif
 
 #ifdef _DEBUG
   #define VERIFY(exp)                 if (!(exp)) { GetLastError(); BREAK_TO_DEBUGGER; }
@@ -26,7 +26,7 @@
 // Logging can be changed at runtime without recompiling in the General
 // property page of Visual Studio under the "Environment" property.
 //
-// Two variables are of importance to be set: 
+// Two variables are of importance to be set:
 // MOZ_LOG and MOZ_LOG_FILE
 //
 // MOZ_LOG:

@@ -1,9 +1,9 @@
 diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/cairo-quartz-surface.c
 --- a/gfx/cairo/cairo/src/cairo-quartz-surface.c
 +++ b/gfx/cairo/cairo/src/cairo-quartz-surface.c
-@@ -690,31 +690,51 @@ ComputeGradientValue (void *info, const 
+@@ -690,31 +690,51 @@ ComputeGradientValue (void *info, const
  }
- 
+
  static const float gradient_output_value_ranges[8] = {
      0.f, 1.f, 0.f, 1.f, 0.f, 1.f, 0.f, 1.f
  };
@@ -21,8 +21,8 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +   on the gradient line will pass 0.0 to ComputeGradientValue, which will
 +   select the last color stop with position 0, although it should select
 +   the first color stop (this matters when there are multiple color stops with
-+   position 0). 
-+   
++   position 0).
++
 +   Therefore we pass a small negative number as the lower bound of the input
 +   range, so this value gets passed into ComputeGradientValue, which will
 +   return the color of the first stop. The number should be small because
@@ -31,18 +31,18 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +   than needed, the resolution of the gradient will be unnecessarily low.
 +*/
 +static const float nonrepeating_gradient_input_value_range[2] = { -0.001f, 1.f };
- 
+
  static CGFunctionRef
  CreateGradientFunction (const cairo_gradient_pattern_t *gpat)
  {
      cairo_pattern_t *pat;
 -    float input_value_range[2] = { 0.f, 1.f };
- 
+
      if (_cairo_pattern_create_copy (&pat, &gpat->base))
  	/* quartz doesn't deal very well with malloc failing, so there's
  	 * not much point in us trying either */
  	return NULL;
- 
+
      return CGFunctionCreate (pat,
  			     1,
 -			     input_value_range,
@@ -51,7 +51,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
  			     gradient_output_value_ranges,
  			     &gradient_callbacks);
  }
- 
+
  static void
  UpdateLinearParametersToIncludePoint(double *min_t, double *max_t, CGPoint *start,
                                       double dx, double dy,

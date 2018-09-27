@@ -156,10 +156,10 @@
   </style></head><body><header class="head with-buttons" id="head">
    <a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo.svg" width="100"/></a>
    <hgroup><h1 class="allcaps">HTML</h1><h2 class="no-num no-toc" id="living-standard">Living Standard — Last Updated <span class="pubdate">31 August 2017</span></h2></hgroup>
-   
-   
 
-   
+
+
+
   <p class="copyright">Parts of this specification are © Copyright 2004-2014 Apple Inc., Mozilla Foundation, and Opera Software ASA. You are granted a license to use, reproduce and create derivative works of this document.</p></header><h4 id="the-canvas-element"><span class="secno">4.12.5</span> The <dfn id="canvas"><code>canvas</code></dfn> element<a class="self-link" href="#the-canvas-element"/></h4><div class="status"><input onclick="toggleStatus(this)" type="button" value="⋰"/><p class="support"><strong>Support:</strong> canvas<span class="and_chr yes"><span>Chrome for Android</span> <span>59+</span></span><span class="chrome yes"><span>Chrome</span> <span>4+</span></span><span class="and_uc yes"><span>UC Browser for Android</span> <span>11.4+</span></span><span class="ios_saf yes"><span>iOS Safari</span> <span>3.2+</span></span><span class="firefox yes"><span>Firefox</span> <span>3.6+</span></span><span class="ie yes"><span>IE</span> <span>9+</span></span><span class="samsung yes"><span>Samsung Internet</span> <span>4+</span></span><span class="op_mini partial"><span>Opera Mini (limited)</span> <span>all+</span></span><span class="safari yes"><span>Safari</span> <span>4+</span></span><span class="android yes"><span>Android Browser</span> <span>3+</span></span><span class="opera yes"><span>Opera</span> <span>9+</span></span><span class="edge yes"><span>Edge</span> <span>12+</span></span></p><p class="caniuse">Source: <a href="https://caniuse.com/#feat=canvas">caniuse.com</a></p></div>
 
   <dl class="element"><dt><a href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-categories" id="the-canvas-element:concept-element-categories">Categories</a>:</dt><dd><a href="https://html.spec.whatwg.org/multipage/dom.html#flow-content-2" id="the-canvas-element:flow-content-2">Flow content</a>.</dd><dd><a href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="the-canvas-element:phrasing-content-2">Phrasing content</a>.</dd><dd><a href="https://html.spec.whatwg.org/multipage/dom.html#embedded-content-category" id="the-canvas-element:embedded-content-category">Embedded content</a>.</dd><dd><a href="https://html.spec.whatwg.org/multipage/dom.html#palpable-content-2" id="the-canvas-element:palpable-content-2">Palpable content</a>.</dd><dt><a href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-contexts" id="the-canvas-element:concept-element-contexts">Contexts in which this element can be used</a>:</dt><dd>Where <a href="https://html.spec.whatwg.org/multipage/dom.html#embedded-content-category" id="the-canvas-element:embedded-content-category-2">embedded content</a> is expected.</dd><dt><a href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-content-model" id="the-canvas-element:concept-element-content-model">Content model</a>:</dt><dd><a href="https://html.spec.whatwg.org/multipage/dom.html#transparent" id="the-canvas-element:transparent">Transparent</a>, but with no <a href="https://html.spec.whatwg.org/multipage/dom.html#interactive-content-2" id="the-canvas-element:interactive-content-2">interactive content</a> descendants except
@@ -221,13 +221,13 @@ callback <dfn id="blobcallback">BlobCallback</dfn> = void (<a data-x-internal="b
   has been disabled, the <code id="the-canvas-element:the-canvas-element-15"><a href="#the-canvas-element">canvas</a></code> element <a href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="the-canvas-element:represents-3">represents</a> its <a href="https://html.spec.whatwg.org/multipage/dom.html#fallback-content" id="the-canvas-element:fallback-content-3">fallback
   content</a> instead.</p>
 
-  
+
   <p>When a <code id="the-canvas-element:the-canvas-element-16"><a href="#the-canvas-element">canvas</a></code> element <a href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="the-canvas-element:represents-4">represents</a> <a href="https://html.spec.whatwg.org/multipage/dom.html#embedded-content-category" id="the-canvas-element:embedded-content-category-5">embedded content</a>, the
   user can still focus descendants of the <code id="the-canvas-element:the-canvas-element-17"><a href="#the-canvas-element">canvas</a></code> element (in the <a href="https://html.spec.whatwg.org/multipage/dom.html#fallback-content" id="the-canvas-element:fallback-content-4">fallback
   content</a>). When an element is <a href="https://html.spec.whatwg.org/multipage/interaction.html#focused" id="the-canvas-element:focused">focused</a>, it is the target of keyboard interaction
   events (even though the element itself is not visible). This allows authors to make an interactive
   canvas keyboard-accessible: authors should have a one-to-one mapping of interactive regions to <i id="the-canvas-element:focusable-area"><a href="https://html.spec.whatwg.org/multipage/interaction.html#focusable-area">focusable areas</a></i> in the <a href="https://html.spec.whatwg.org/multipage/dom.html#fallback-content" id="the-canvas-element:fallback-content-5">fallback content</a>. (Focus has no
-  effect on mouse interaction events.) <a href="https://html.spec.whatwg.org/multipage/references.html#refsUIEVENTS">[UIEVENTS]</a></p> 
+  effect on mouse interaction events.) <a href="https://html.spec.whatwg.org/multipage/references.html#refsUIEVENTS">[UIEVENTS]</a></p>
 
   <p>An element whose nearest <code id="the-canvas-element:the-canvas-element-18"><a href="#the-canvas-element">canvas</a></code> element ancestor is <a href="https://html.spec.whatwg.org/multipage/rendering.html#being-rendered" id="the-canvas-element:being-rendered">being rendered</a>
   and <a href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="the-canvas-element:represents-5">represents</a> <a href="https://html.spec.whatwg.org/multipage/dom.html#embedded-content-category" id="the-canvas-element:embedded-content-category-6">embedded content</a> is an element that is <dfn id="being-used-as-relevant-canvas-fallback-content">being used as
@@ -253,7 +253,7 @@ callback <dfn id="blobcallback">BlobCallback</dfn> = void (<a data-x-internal="b
   <p class="note">A <code id="the-canvas-element:the-canvas-element-22"><a href="#the-canvas-element">canvas</a></code> element can be sized arbitrarily by a style sheet, its
   bitmap is then subject to the <a data-x-internal="'object-fit'" href="https://drafts.csswg.org/css-images/#the-object-fit" id="the-canvas-element:'object-fit'">'object-fit'</a> CSS property.</p>
 
-  
+
 
   <hr/>
 
@@ -327,11 +327,11 @@ callback <dfn id="blobcallback">BlobCallback</dfn> = void (<a data-x-internal="b
   <p>The <dfn id="dom-canvas-width"><code>width</code></dfn> and <dfn id="dom-canvas-height"><code>height</code></dfn> IDL attributes must <a href="https://html.spec.whatwg.org/multipage/common-dom-interfaces.html#reflect" id="the-canvas-element:reflect">reflect</a> the
   respective content attributes of the same name, with the same defaults.</p>
 
-  
+
 
   <hr/>
 
-  
+
   <dl class="domintro"><dt><var>context</var> = <var>canvas</var> . <code id="dom-canvas-getcontext"><a href="#dom-canvas-getcontext-2">getContext</a></code>(<var>contextId</var> [, ... ] )</dt><dd>
 
     <p>Returns an object that exposes an API for drawing on the canvas. The first argument
@@ -346,7 +346,7 @@ callback <dfn id="blobcallback">BlobCallback</dfn> = void (<a data-x-internal="b
 
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-canvas-getcontext-2"><code>getContext(<var>contextId</var>,
   <var>arguments...</var>)</code></dfn> method of the <code id="the-canvas-element:the-canvas-element-33"><a href="#the-canvas-element">canvas</a></code> element, when invoked,
@@ -439,7 +439,7 @@ callback <dfn id="blobcallback">BlobCallback</dfn> = void (<a data-x-internal="b
 
   <hr/>
 
-  
+
 
   <dl class="domintro"><dt><var>url</var> = <var>canvas</var> . <code id="dom-canvas-todataurl"><a href="#dom-canvas-todataurl-2">toDataURL</a></code>( [ <var>type</var> [, <var>quality</var> ] ] )</dt><dd>
 
@@ -479,7 +479,7 @@ callback <dfn id="blobcallback">BlobCallback</dfn> = void (<a data-x-internal="b
     </p>
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-canvas-todataurl-2"><code>toDataURL(<var>type</var>,
   <var>quality</var>)</code></dfn> method, when invoked, must run these steps:</p>
@@ -494,7 +494,7 @@ callback <dfn id="blobcallback">BlobCallback</dfn> = void (<a data-x-internal="b
    <var>type</var> and <var>quality</var> if they were given.</p></li><li><p>If <var>file</var> is null then return &quot;<code>data:,</code>&quot;.</p></li><li><p>Return a <a data-x-internal="data-protocol" href="https://tools.ietf.org/html/rfc2397#section-2" id="the-canvas-element:data-protocol-3"><code>data:</code> URL</a> representing
    <var>file</var>. <a href="https://html.spec.whatwg.org/multipage/references.html#refsRFC2397">[RFC2397]</a></p>
 
-   
+
 
   </li></ol>
 
@@ -531,13 +531,13 @@ callback <dfn id="blobcallback">BlobCallback</dfn> = void (<a data-x-internal="b
    element.</p></li><li><p>Set this <code id="the-canvas-element:the-canvas-element-49"><a href="#the-canvas-element">canvas</a></code> element's <a href="#concept-canvas-context-mode" id="the-canvas-element:concept-canvas-context-mode-10">context
    mode</a> to <a href="#concept-canvas-placeholder" id="the-canvas-element:concept-canvas-placeholder-4">placeholder</a>.</p></li><li><p>Return <var>offscreenCanvas</var>.</p></li></ol>
 
-  
 
-  
+
+
 
   <h5 id="2dcontext"><span class="secno">4.12.5.1</span> The 2D rendering context<a class="self-link" href="#2dcontext"/></h5>
 
-  
+
 
   <pre class="idl">typedef (<a href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlimageelement" id="2dcontext:htmlimageelement">HTMLImageElement</a> or
          <a data-x-internal="svgimageelement" href="https://www.w3.org/TR/SVG11/struct.html#InterfaceSVGImageElement" id="2dcontext:svgimageelement">SVGImageElement</a>) <dfn id="htmlorsvgimageelement">HTMLOrSVGImageElement</dfn>;
@@ -739,11 +739,11 @@ interface <dfn id="canvaspath">CanvasPath</dfn> {
   void <a href="#dom-context-2d-lineto-2" id="2dcontext:dom-context-2d-lineto-2">lineTo</a>(unrestricted double x, unrestricted double y);
   void <a href="#dom-context-2d-quadraticcurveto-2" id="2dcontext:dom-context-2d-quadraticcurveto-2">quadraticCurveTo</a>(unrestricted double cpx, unrestricted double cpy, unrestricted double x, unrestricted double y);
   void <a href="#dom-context-2d-beziercurveto-2" id="2dcontext:dom-context-2d-beziercurveto-2">bezierCurveTo</a>(unrestricted double cp1x, unrestricted double cp1y, unrestricted double cp2x, unrestricted double cp2y, unrestricted double x, unrestricted double y);
-  void <a href="#dom-context-2d-arcto-2" id="2dcontext:dom-context-2d-arcto-2">arcTo</a>(unrestricted double x1, unrestricted double y1, unrestricted double x2, unrestricted double y2, unrestricted double radius); 
-  void <a href="#dom-context-2d-arcto-2" id="2dcontext:dom-context-2d-arcto-2-2">arcTo</a>(unrestricted double x1, unrestricted double y1, unrestricted double x2, unrestricted double y2, unrestricted double radiusX, unrestricted double radiusY, unrestricted double rotation); 
+  void <a href="#dom-context-2d-arcto-2" id="2dcontext:dom-context-2d-arcto-2">arcTo</a>(unrestricted double x1, unrestricted double y1, unrestricted double x2, unrestricted double y2, unrestricted double radius);
+  void <a href="#dom-context-2d-arcto-2" id="2dcontext:dom-context-2d-arcto-2-2">arcTo</a>(unrestricted double x1, unrestricted double y1, unrestricted double x2, unrestricted double y2, unrestricted double radiusX, unrestricted double radiusY, unrestricted double rotation);
   void <a href="#dom-context-2d-rect-2" id="2dcontext:dom-context-2d-rect-2">rect</a>(unrestricted double x, unrestricted double y, unrestricted double w, unrestricted double h);
-  void <a href="#dom-context-2d-arc-2" id="2dcontext:dom-context-2d-arc-2">arc</a>(unrestricted double x, unrestricted double y, unrestricted double radius, unrestricted double startAngle, unrestricted double endAngle, optional boolean anticlockwise = false); 
-  void <a href="#dom-context-2d-ellipse-2" id="2dcontext:dom-context-2d-ellipse-2">ellipse</a>(unrestricted double x, unrestricted double y, unrestricted double radiusX, unrestricted double radiusY, unrestricted double rotation, unrestricted double startAngle, unrestricted double endAngle, optional boolean anticlockwise = false); 
+  void <a href="#dom-context-2d-arc-2" id="2dcontext:dom-context-2d-arc-2">arc</a>(unrestricted double x, unrestricted double y, unrestricted double radius, unrestricted double startAngle, unrestricted double endAngle, optional boolean anticlockwise = false);
+  void <a href="#dom-context-2d-ellipse-2" id="2dcontext:dom-context-2d-ellipse-2">ellipse</a>(unrestricted double x, unrestricted double y, unrestricted double radiusX, unrestricted double radiusY, unrestricted double rotation, unrestricted double startAngle, unrestricted double endAngle, optional boolean anticlockwise = false);
 };
 
 [Exposed=(Window,Worker)]
@@ -797,7 +797,7 @@ interface <dfn id="path2d">Path2D</dfn> {
 };
 <a href="#path2d" id="2dcontext:path2d-11">Path2D</a> implements <a href="#canvaspath" id="2dcontext:canvaspath-3">CanvasPath</a>;</pre>
 
- 
+
 
   <p class="note">To maintain compatibility with existing Web content, user agents need to
   enumerate methods defined in <code id="2dcontext:canvasuserinterface-2"><a href="#canvasuserinterface">CanvasUserInterface</a></code> immediately after the <code id="2dcontext:dom-context-2d-stroke-2-3"><a href="#dom-context-2d-stroke-2">stroke()</a></code> method on <code id="2dcontext:canvasrenderingcontext2d-17"><a href="#canvasrenderingcontext2d">CanvasRenderingContext2D</a></code>
@@ -817,7 +817,7 @@ interface <dfn id="path2d">Path2D</dfn> {
 
    </dd></dl>
 
-  
+
 
   <p>A <code id="2dcontext:canvasrenderingcontext2d-19"><a href="#canvasrenderingcontext2d">CanvasRenderingContext2D</a></code> object has an <dfn id="output-bitmap">output bitmap</dfn> that
   is initialized when the object is created.</p>
@@ -960,7 +960,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   <p class="note">Similar concerns exist with font-related properties; the rules for those are
   described in detail in the relevant section below.</p>
 
-  
+
 
   <hr/>
 
@@ -1052,7 +1052,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-context-2d-save-2"><code>save()</code></dfn> method, when invoked, must push
   a copy of the current drawing state onto the drawing state stack.</p>
@@ -1065,9 +1065,9 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   clear the drawing state stack and everything that <a href="#drawing-state" id="the-canvas-state:drawing-state">drawing state</a> consists of to
   initial values.</p>
 
-  
 
-  
+
+
 
 
   <h6 id="line-styles"><span class="secno">4.12.5.1.3</span> Line styles<a class="self-link" href="#line-styles"/></h6>
@@ -1120,7 +1120,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>Objects that implement the <code id="line-styles:canvaspathdrawingstyles"><a href="#canvaspathdrawingstyles">CanvasPathDrawingStyles</a></code> interface have attributes and
   methods (defined in this section) that control how lines are treated by the object.</p>
@@ -1165,7 +1165,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   miter limit ratio can be explicitly set using the <dfn id="dom-context-2d-miterlimit-2"><code>miterLimit</code></dfn> attribute. On getting, it must return
   the current value. On setting, zero, negative, infinite, and NaN values must be ignored, leaving
   the value unchanged; other values must change the current value to the new value.</p>
-  
+
 
   <p>When the object implementing the <code id="line-styles:canvaspathdrawingstyles-5"><a href="#canvaspathdrawingstyles">CanvasPathDrawingStyles</a></code> interface is created, the
   <code id="line-styles:dom-context-2d-miterlimit-2-2"><a href="#dom-context-2d-miterlimit-2">miterLimit</a></code> attribute must initially have the value
@@ -1333,7 +1333,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
     the line edges on the outside of the join. The miter limit ratio is the maximum allowed ratio of
     the miter length to half the line width. If the miter length would cause the miter limit ratio
     (as set by the <var>style</var> <code id="line-styles:dom-context-2d-miterlimit-2-3"><a href="#dom-context-2d-miterlimit-2">miterLimit</a></code> attribute) to be exceeded, then this second
-    triangle must not be added.</p> 
+    triangle must not be added.</p>
 
 
 
@@ -1347,7 +1347,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
 
 
-  
+
 
 
   <h6 id="text-styles"><span class="secno">4.12.5.1.4</span> Text styles<a class="self-link" href="#text-styles"/></h6>
@@ -1385,7 +1385,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>Objects that implement the <code id="text-styles:canvastextdrawingstyles"><a href="#canvastextdrawingstyles">CanvasTextDrawingStyles</a></code> interface have attributes
   (defined in this section) that control how text is laid out (rasterized or outlined) by the
@@ -1393,7 +1393,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   <code id="text-styles:canvasrenderingcontext2d"><a href="#canvasrenderingcontext2d">CanvasRenderingContext2D</a></code> objects, this is the <code id="text-styles:the-canvas-element-2"><a href="#the-canvas-element">canvas</a></code> element
   referenced by the context's canvas property.</p>
 
-  
+
 
   <p>The <dfn id="dom-context-2d-font-2"><code>font</code></dfn> IDL attribute, on setting, must
   be <a data-x-internal="parse-something-according-to-a-css-grammar" href="https://drafts.csswg.org/css-syntax/#parse-grammar" id="text-styles:parse-something-according-to-a-css-grammar">parsed as a CSS &lt;'font'&gt;
@@ -1457,7 +1457,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   created, the <code id="text-styles:dom-context-2d-direction-2-2"><a href="#dom-context-2d-direction-2">direction</a></code> attribute must initially
   have the value &quot;<code id="text-styles:dom-context-2d-direction-inherit-2"><a href="#dom-context-2d-direction-inherit">inherit</a></code>&quot;.</p>
 
-  
+
 
   <p>The <code id="text-styles:dom-context-2d-textalign-2-3"><a href="#dom-context-2d-textalign-2">textAlign</a></code> attribute's allowed keywords are
   as follows:</p>
@@ -1619,7 +1619,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
     radius is negative.</p>
 
     <figure class="diagrams">
-     
+
      <img alt="" height="254" src="https://html.spec.whatwg.org/images/arcTo1.png" width="357"/>
      <img alt="" height="310" src="https://html.spec.whatwg.org/images/arcTo2.png" width="468"/>
      <img alt="" height="233" src="https://html.spec.whatwg.org/images/arcTo3.png" width="513"/>
@@ -1638,7 +1638,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
     radius is negative.</p>
 
     <figure class="diagrams">
-     
+
      <img alt="" height="255" src="https://html.spec.whatwg.org/images/arc1.png" width="590"/>
     </figure>
 
@@ -1660,7 +1660,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>The following methods allow authors to manipulate the <a href="#concept-path" id="building-paths:concept-path-5">paths</a>
   of objects implementing the <code id="building-paths:canvaspath-3"><a href="#canvaspath">CanvasPath</a></code> interface.</p>
@@ -1805,9 +1805,9 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
    four points connected by straight lines.</p></li><li><p>Mark the subpath as closed.</p></li><li><p>Create a new subpath with the point (<var>x</var>, <var>y</var>) as the only point in the
    subpath.</p></li></ol>
 
-  
 
-  
+
+
 
 
 
@@ -1840,7 +1840,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-path2d"><code>Path2D()</code></dfn> constructor, when invoked, must return a
   newly created <code id="path2d-objects:path2d-7"><a href="#path2d">Path2D</a></code> object.</p>
@@ -1920,7 +1920,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
    <var>matrix</var>.</p></li><li><p>Let (<var>x</var>, <var>y</var>) be the last point in the last subpath
    of <var>c</var>.</p></li><li><p>Add all the subpaths in <var>c</var> to <var>a</var>.</p></li><li><p>Create a new subpath in <var>a</var> with (<var>x</var>, <var>y</var>) as the only point in the subpath.</p></li></ol>
 
-  
+
 
 
   <h6 id="transformations"><span class="secno">4.12.5.1.7</span> <dfn>Transformations</dfn><a class="self-link" href="#transformations"/></h6><div class="status"><input onclick="toggleStatus(this)" type="button" value="⋰"/><p class="bugs"><strong>Spec bugs:</strong> <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=28333" title="Show on example how a,b,c,d,e,f affect the point position">28333</a></p></div>
@@ -1933,21 +1933,21 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   <p>The <a href="#current-transformation-matrix" id="transformations:current-transformation-matrix">current transformation matrix</a> is applied to coordinates when creating the
   <a href="#current-default-path" id="transformations:current-default-path">current default path</a>, and when painting text, shapes, and <code id="transformations:path2d"><a href="#path2d">Path2D</a></code>
   objects, on objects implementing the <code id="transformations:canvastransform-3"><a href="#canvastransform">CanvasTransform</a></code> interface.</p>
-  
+
 
   <p class="note">Most of the API uses <code id="transformations:dommatrix"><a data-x-internal="dommatrix" href="https://drafts.fxtf.org/geometry/#dommatrix">DOMMatrix</a></code> objects rather than this API. This API
   remains mostly for historical reasons.</p>
 
-  
+
 
   <p>The transformations must be performed in reverse order.</p>
 
   <p class="note">For instance, if a scale transformation that doubles the width is applied to the
   canvas, followed by a rotation transformation that rotates drawing operations by a quarter turn,
   and a rectangle twice as wide as it is tall is then drawn on the canvas, the actual result will be
-  a square.</p> 
+  a square.</p>
 
-  
+
 
   <dl class="domintro"><dt><var>context</var> . <code id="dom-context-2d-scale"><a href="#dom-context-2d-scale-2">scale</a></code>(<var>x</var>, <var>y</var>)</dt><dd>
 
@@ -1990,7 +1990,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-context-2d-scale-2"><code>scale(<var>x</var>, <var>y</var>)</code></dfn>
   method, when invoked, must run these steps:</p>
@@ -2022,7 +2022,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   <ol><li><p>If any of the arguments are infinite or NaN, then abort these steps.</p></li><li><p>Replace the <a href="#current-transformation-matrix" id="transformations:current-transformation-matrix-13">current transformation matrix</a> with the result of multiplying the
    current transformation matrix with the matrix described by:</p></li></ol>
 
-  
+
 
   <table class="matrix"><tbody><tr><td><var>a</var></td><td><var>c</var></td><td><var>e</var></td></tr><tr><td><var>b</var></td><td><var>d</var></td><td><var>f</var></td></tr><tr><td>0</td><td>0</td><td>1</td></tr></tbody></table>
 
@@ -2034,7 +2034,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   <var>c</var>) as their order varies from API to API and APIs sometimes use the notation
   <var>m12</var>/<var>m21</var> and sometimes <var>m21</var>/<var>m12</var> for those positions.</p>
 
-  
+
 
   <p>The <dfn id="dom-context-2d-gettransform-2"><code>getTransform()</code></dfn> method, when
   invoked, must return a newly created <code id="transformations:dommatrix-3"><a data-x-internal="dommatrix" href="https://drafts.fxtf.org/geometry/#dommatrix">DOMMatrix</a></code> representing a copy of the
@@ -2060,7 +2060,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   when invoked, must reset the <a href="#current-transformation-matrix" id="transformations:current-transformation-matrix-19">current transformation matrix</a> to the identity
   matrix.</p>
 
-  
+
 
 
 
@@ -2159,9 +2159,9 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
 
-  
+
+
 
   <p>Objects that implement the <code id="fill-and-stroke-styles:canvasfillstrokestyles"><a href="#canvasfillstrokestyles">CanvasFillStrokeStyles</a></code> interface have attributes and
   methods (defined in this section) that control how shapes are treated by the object.</p>
@@ -2207,15 +2207,15 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   RIGHT PARENTHESIS. User agents must express the fractional part of the alpha value, if any, with
   the level of precision necessary for the alpha value, when reparsed, to be interpreted as the same
   alpha value.</p>
-  
+
 
   <p>When the context is created, the <code id="fill-and-stroke-styles:dom-context-2d-fillstyle-2"><a href="#dom-context-2d-fillstyle-2">fillStyle</a></code> and <code id="fill-and-stroke-styles:dom-context-2d-strokestyle-2"><a href="#dom-context-2d-strokestyle-2">strokeStyle</a></code> attributes
   must initially have the string value <code>#000000</code>.</p>
 
   <p>When the value is a color, it must not be affected by the transformation matrix when used to
-  draw on bitmaps.</p> 
+  draw on bitmaps.</p>
 
-  
+
 
   <hr/>
 
@@ -2256,7 +2256,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-canvasgradient-addcolorstop-2"><code>addColorStop(<var>offset</var>,
   <var>color</var>)</code></dfn> method on the <code id="fill-and-stroke-styles:canvasgradient-10"><a href="#canvasgradient">CanvasGradient</a></code> interface adds a new stop
@@ -2325,7 +2325,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   <p>Gradients must be painted only where the relevant stroking or filling effects requires that
   they be drawn.</p>
 
-  
+
 
   <hr/>
 
@@ -2351,7 +2351,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-context-2d-createpattern-2"><code>createPattern(<var>image</var>,
   <var>repetition</var>)</code></dfn> method, when invoked, must run these steps:</p>
@@ -2403,7 +2403,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
     to guide the choice of filtering algorithm. When such a filtering algorithm requires a pixel
     value from outside the original image data, it must instead use the value from wrapping the
     pixel's coordinates to the original image's dimensions. (That is, the filter uses 'repeat'
-    behavior, regardless of the value of the pattern's repetition behavior.)</p> 
+    behavior, regardless of the value of the pattern's repetition behavior.)</p>
 
    </li><li><p>Transform the resulting bitmap according to the pattern's transformation matrix.</p></li><li><p>Transform the resulting bitmap again, this time according to the <a href="#transformations" id="fill-and-stroke-styles:transformations-3">current transformation matrix</a>.</p></li><li><p>Replace any part of the image outside the area in which the pattern is to be rendered with
    transparent black.</p></li><li><p>The resulting bitmap is what is to be rendered, with the same origin and same
@@ -2416,7 +2416,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   collapsed to a point or line, leaving the other pixels undefined). Linear gradients and solid
   colors always define all points even with singular transformation matrices.</p>
 
-  
+
 
 
 
@@ -2428,7 +2428,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   give the <var>x</var> and <var>y</var> coordinates of the top left of the rectangle, and the
   second two give the width <var>w</var> and height <var>h</var> of the rectangle, respectively.</p>
 
-  
+
 
   <p>The <a href="#transformations" id="drawing-rectangles-to-the-bitmap:transformations">current transformation matrix</a> must be
   applied to the following four coordinates, which form the path that must then be closed to get the
@@ -2438,7 +2438,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   the <a href="#clipping-region" id="drawing-rectangles-to-the-bitmap:clipping-region">clipping region</a>, and, with the exception of <code id="drawing-rectangles-to-the-bitmap:dom-context-2d-clearrect-2"><a href="#dom-context-2d-clearrect-2">clearRect()</a></code>, also <a href="#shadows" id="drawing-rectangles-to-the-bitmap:shadows">shadow
   effects</a>, <a href="#dom-context-2d-globalalpha-2" id="drawing-rectangles-to-the-bitmap:dom-context-2d-globalalpha-2">global alpha</a>, and <a href="#dom-context-2d-globalcompositeoperation-2" id="drawing-rectangles-to-the-bitmap:dom-context-2d-globalcompositeoperation-2">global composition operators</a>.</p>
 
-  
+
 
   <dl class="domintro"><dt><var>context</var> . <code id="dom-context-2d-clearrect"><a href="#dom-context-2d-clearrect-2">clearRect</a></code>(<var>x</var>, <var>y</var>, <var>w</var>, <var>h</var>)</dt><dd>
 
@@ -2455,7 +2455,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-context-2d-clearrect-2"><code>clearRect(<var>x</var>, <var>y</var>,
   <var>w</var>, <var>h</var>)</code></dfn> method, when invoked, must run these steps:</p>
@@ -2492,7 +2492,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   <var>y</var>+<var>h</var>), and (<var>x</var>, <var>y</var>+<var>h</var>),
   connected to each other in that order by straight lines.</p>
 
-  
+
 
 
 
@@ -2514,7 +2514,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>Objects that implement the <code id="drawing-text-to-the-bitmap:canvastext"><a href="#canvastext">CanvasText</a></code> interface provide the following methods for
   rendering text.</p>
@@ -2564,7 +2564,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   <a class="fingerprint" href="https://html.spec.whatwg.org/multipage/introduction.html#fingerprinting-vector" id="drawing-text-to-the-bitmap:fingerprinting-vector" title="There is a potential fingerprinting vector here."><img alt="(This is a fingerprinting vector.)" height="64" src="https://html.spec.whatwg.org/images/fingerprint.png" width="46"/></a>
   </p>
 
-  
+
 
   <dl><dt><dfn id="dom-textmetrics-width-2"><code>width</code></dfn> attribute</dt><dd><p>The width of that <a data-x-internal="inline-box" href="https://drafts.csswg.org/css2/visuren.html#inline-box" id="drawing-text-to-the-bitmap:inline-box-2">inline box</a>, in <a data-x-internal="'px'" href="https://drafts.csswg.org/css-values/#px" id="drawing-text-to-the-bitmap:'px'-4">CSS pixels</a>. (The
    text's advance width.)</p></dd><dt><dfn id="dom-textmetrics-actualboundingboxleft-2"><code>actualBoundingBoxLeft</code></dfn> attribute</dt><dd>
@@ -2682,7 +2682,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl><div class="status"><input onclick="toggleStatus(this)" type="button" value="⋰"/><p class="bugs"><strong>Spec bugs:</strong> <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=28217" title="&lt;canvas&gt;: not clear if two polygon paths with a common edge should have no line visible">28217</a></p></div>
 
-  
+
 
   <p>The <dfn id="dom-context-2d-beginpath-2"><code>beginPath()</code></dfn> method, when invoked,
   must empty the list of subpaths in the context's <a href="#current-default-path" id="drawing-paths-to-the-canvas:current-default-path-9">current default path</a> so that the it
@@ -2735,7 +2735,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   <p>When the context is initialized, the clipping region must be set to the largest infinite
   surface (i.e. by default, no clipping occurs).</p>
 
-  
+
 
   <p>The <dfn id="dom-context-2d-resetclip-2"><code>resetClip()</code></dfn> method, when invoked,
   must create a new <a href="#clipping-region" id="drawing-paths-to-the-canvas:clipping-region-2">clipping region</a> that is the largest infinite surface. The new
@@ -2764,7 +2764,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
   <hr/>
 
-  
+
 
   <div class="example" id="drawCustomFocusRingExample">
 
@@ -2858,7 +2858,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   Objects that implement the <code id="drawing-focus-rings-and-scrolling-paths-into-view:canvasuserinterface"><a href="#canvasuserinterface">CanvasUserInterface</a></code> interface provide the following
   methods to control drawing focus rings and scrolling paths into view.
@@ -2923,13 +2923,13 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   the canvas. However, it does not associate the path with the element, or provide a region for
   tactile feedback, etc.</p>
 
-  
+
 
   <h6 id="drawing-images"><span class="secno">4.12.5.1.14</span> Drawing images<a class="self-link" href="#drawing-images"/></h6>
 
   <p>Objects that implement the <code id="drawing-images:canvasdrawimage"><a href="#canvasdrawimage">CanvasDrawImage</a></code> interface have the <dfn id="dom-context-2d-drawimage"><code>drawImage</code></dfn> method to draw images.</p>
 
-  
+
 
   <p>This method can be invoked with three different sets of arguments:</p>
 
@@ -2938,7 +2938,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
    </li><li><code>drawImage(<var>image</var>, <var>sx</var>, <var>sy</var>, <var>sw</var>, <var>sh</var>, <var>dx</var>, <var>dy</var>, <var>dw</var>, <var>dh</var>)</code>
   </li></ul>
 
-  
+
 
   <dl class="domintro"><dt><var>context</var> . <code id="dom-context-2d-drawimage-2"><a href="#dom-context-2d-drawimage">drawImage</a></code>(<var>image</var>, <var>dx</var>, <var>dy</var>)</dt><dt><var>context</var> . <code id="drawing-images:dom-context-2d-drawimage"><a href="#dom-context-2d-drawimage">drawImage</a></code>(<var>image</var>, <var>dx</var>, <var>dy</var>, <var>dw</var>, <var>dh</var>)</dt><dt><var>context</var> . <code id="drawing-images:dom-context-2d-drawimage-2"><a href="#dom-context-2d-drawimage">drawImage</a></code>(<var>image</var>, <var>sx</var>, <var>sy</var>, <var>sw</var>, <var>sh</var>, <var>dx</var>, <var>dy</var>, <var>dw</var>, <var>dh</var>)</dt><dd>
 
@@ -2952,7 +2952,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>When the <code id="drawing-images:dom-context-2d-drawimage-3"><a href="#dom-context-2d-drawimage">drawImage()</a></code> method is invoked, the user
   agent must run these steps:</p>
@@ -3023,8 +3023,8 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
     use the value from the nearest edge pixel. (That is, the filter uses 'clamp-to-edge' behavior.)
     When the filtering algorithm requires a pixel value from outside the source rectangle but inside
     the original image data, then the value from the original image data must be used.</p>
-    
-    
+
+
 
     <p class="note">Thus, scaling an image in parts or in whole will have the same effect. This does
     mean that when sprites coming from a single sprite sheet are to be scaled, adjacent images in
@@ -3038,7 +3038,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
    </li><li><p>If <a href="#the-image-argument-is-not-origin-clean" id="drawing-images:the-image-argument-is-not-origin-clean">the <var>image argument</var> is not origin-clean</a>, then set the
    <code id="drawing-images:canvasrenderingcontext2d"><a href="#canvasrenderingcontext2d">CanvasRenderingContext2D</a></code>'s <a href="#concept-canvas-origin-clean" id="drawing-images:concept-canvas-origin-clean">origin-clean</a> flag to false.</p></li></ol>
 
-  
+
 
 
   <h6 id="pixel-manipulation"><span class="secno">4.12.5.1.15</span> <dfn>Pixel manipulation</dfn><a class="self-link" href="#pixel-manipulation"/></h6>
@@ -3100,7 +3100,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
 
    </dd></dl>
 
-  
+
 
   <p>Objects that implement the <code id="pixel-manipulation:canvasimagedata"><a href="#canvasimagedata">CanvasImageData</a></code> interface provide the following methods
   for reading and writing pixel data to the bitmap.</p>
@@ -3173,10 +3173,10 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   <var>sy</var>, <var>sw</var>, <var>sh</var>)</code></dfn> method, when invoked, must,
   if either the <var>sw</var> or <var>sh</var> arguments are zero, throw an
   <a data-x-internal="indexsizeerror" href="https://heycam.github.io/webidl/#indexsizeerror" id="pixel-manipulation:indexsizeerror-8">&quot;<code>IndexSizeError</code>&quot;</a> <code id="pixel-manipulation:domexception-10"><a data-x-internal="domexception" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>; otherwise,
-  
+
   if the <code id="pixel-manipulation:canvasrenderingcontext2d"><a href="#canvasrenderingcontext2d">CanvasRenderingContext2D</a></code>'s <a href="#concept-canvas-origin-clean" id="pixel-manipulation:concept-canvas-origin-clean">origin-clean</a> flag is set to false, it must throw a
   <a data-x-internal="securityerror" href="https://heycam.github.io/webidl/#securityerror" id="pixel-manipulation:securityerror">&quot;<code>SecurityError</code>&quot;</a> <code id="pixel-manipulation:domexception-11"><a data-x-internal="domexception" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>;
-  
+
   otherwise, it must <a href="#create-an-imagedata-object" id="pixel-manipulation:create-an-imagedata-object-5">create an <code>ImageData</code> object</a>, with parameter
   <var>pixelsPerRow</var> set to <var>sw</var>, and parameter <var>rows</var> set to <var>sh</var>.
   Set the pixel values of the image data of the newly created <code id="pixel-manipulation:imagedata-16"><a href="#imagedata">ImageData</a></code> object to
@@ -3288,7 +3288,7 @@ context.fillRect(100,0,50,50); // only this square remains</pre>
   alpha</a>, the <a href="#clipping-region" id="pixel-manipulation:clipping-region">clipping region</a>, and <a href="#dom-context-2d-globalcompositeoperation-2" id="pixel-manipulation:dom-context-2d-globalcompositeoperation-2-2">global composition operator</a> must not
   affect the methods described in this section.</p>
 
-  
+
 
   <div class="example">
 
@@ -3398,12 +3398,12 @@ function AddCloud(data, x, y) { ... }</pre>
 
    </dd></dl><div class="status"><input onclick="toggleStatus(this)" type="button" value="⋰"/><p class="bugs"><strong>Spec bugs:</strong> <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=27313" title="It seems like this should be defined in terms of an IDL enum. If not, please clarify the relationshi [...]">27313</a></p></div>
 
-  
+
 
   <p>All drawing operations on an object which implements the <code id="compositing:canvascompositing"><a href="#canvascompositing">CanvasCompositing</a></code>
   interface are affected by the global compositing attributes, <code id="compositing:dom-context-2d-globalalpha-2"><a href="#dom-context-2d-globalalpha-2">globalAlpha</a></code> and <code id="compositing:dom-context-2d-globalcompositeoperation-2"><a href="#dom-context-2d-globalcompositeoperation-2">globalCompositeOperation</a></code>.</p>
 
-  
+
 
   <p>The <dfn id="dom-context-2d-globalalpha-2"><code>globalAlpha</code></dfn> attribute gives an
   alpha value that is applied to shapes and images before they are composited onto the <a href="#output-bitmap" id="compositing:output-bitmap">output
@@ -3432,7 +3432,7 @@ function AddCloud(data, x, y) { ... }</pre>
   <p>When the context is created, the <code id="compositing:dom-context-2d-globalcompositeoperation-2-3"><a href="#dom-context-2d-globalcompositeoperation-2">globalCompositeOperation</a></code> attribute must
   initially have the value <code id="compositing:gcop-source-over"><a href="#gcop-source-over">source-over</a></code>.</p>
 
-  
+
 
 
 
@@ -3454,7 +3454,7 @@ function AddCloud(data, x, y) { ... }</pre>
 
    </dd></dl>
 
-  
+
 
   <p>Objects that implement the <code id="image-smoothing:canvasimagesmoothing"><a href="#canvasimagesmoothing">CanvasImageSmoothing</a></code> interface have attributes that
   control how image smoothing is performed.</p>
@@ -3469,7 +3469,7 @@ function AddCloud(data, x, y) { ... }</pre>
   new value. When the object implementing the <code id="image-smoothing:canvasimagesmoothing-3"><a href="#canvasimagesmoothing">CanvasImageSmoothing</a></code> interface is
   created, the attribute must be set to &quot;<code id="image-smoothing:dom-context-2d-imagesmoothingquality-low-2"><a href="#dom-context-2d-imagesmoothingquality-low">low</a></code>&quot;.</p>
 
-  
+
 
 
   <h6 id="shadows"><span class="secno">4.12.5.1.18</span> <dfn>Shadows</dfn><a class="self-link" href="#shadows"/></h6>
@@ -3498,7 +3498,7 @@ function AddCloud(data, x, y) { ... }</pre>
 
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-context-2d-shadowcolor-2"><code>shadowColor</code></dfn> attribute sets the
   color of the shadow.</p>
@@ -3562,7 +3562,7 @@ function AddCloud(data, x, y) { ... }</pre>
    component of the color of <code id="shadows:dom-context-2d-shadowcolor-2-4"><a href="#dom-context-2d-shadowcolor-2">shadowColor</a></code>.</p></li><li><p>The shadow is in the bitmap <var>B</var>, and is rendered as part of the
    <a href="#drawing-model" id="shadows:drawing-model">drawing model</a> described below.</p></li></ol>
 
-  
+
 
   <p>If the current composition operation is <code id="shadows:gcop-copy"><a href="#gcop-copy">copy</a></code>, then shadows
   effectively won't render (since the shape will overwrite the shadow).</p>
@@ -3582,7 +3582,7 @@ function AddCloud(data, x, y) { ... }</pre>
 
    </dd></dl>
 
-  
+
 
   <p>The <code id="filters:dom-context-2d-filter"><a href="#dom-context-2d-filter">filter</a></code> attribute, on getting, must
   return the last value it was successfully set to. The value must not be re-serialized. On setting,
@@ -3623,7 +3623,7 @@ function AddCloud(data, x, y) { ... }</pre>
   SVG filter in an external resource document and that document is not loaded when a drawing
   operation is invoked, then the drawing operation must proceed with no filtering.</p>
 
-  
+
 
   <h6 id="working-with-externally-defined-svg-filters"><span class="secno">4.12.5.1.20</span> Working with externally-defined SVG filters<a class="self-link" href="#working-with-externally-defined-svg-filters"/></h6>
 
@@ -3637,7 +3637,7 @@ function AddCloud(data, x, y) { ... }</pre>
   <code>use</code></a> element), and wait for the <code>load</code> event to be
   dispatched.</p>
 
-  
+
 
   <h6 id="drawing-model"><span class="secno">4.12.5.1.21</span> <dfn>Drawing model</dfn><a class="self-link" href="#drawing-model"/></h6>
 
@@ -3658,7 +3658,7 @@ function AddCloud(data, x, y) { ... }</pre>
   <p>When compositing onto the <a href="#output-bitmap" id="drawing-model:output-bitmap-3">output bitmap</a>, pixels that would fall outside of the
   <a href="#output-bitmap" id="drawing-model:output-bitmap-4">output bitmap</a> must be discarded.</p>
 
-  
+
 
 
 
@@ -3993,7 +3993,7 @@ dictionary <dfn id="imagebitmaprenderingcontextsettings">ImageBitmapRenderingCon
 
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-imagebitmaprenderingcontext-canvas-2"><code>canvas</code></dfn> attribute
   must return the value it was initialized to when the object was created.</p>
@@ -4100,7 +4100,7 @@ dictionary <dfn id="imagebitmaprenderingcontextsettings">ImageBitmapRenderingCon
    true.</p></li><li><p>Unset <var>imageBitmap's</var> <a href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#concept-imagebitmap-bitmap-data" id="the-imagebitmaprenderingcontext-interface:concept-imagebitmap-bitmap-data-6">bitmap
    data</a>.</p></li></ol>
 
-  
+
 
 
 
@@ -4168,7 +4168,7 @@ interface <dfn id="offscreencanvas">OffscreenCanvas</dfn> : <a data-x-internal="
 
    </dd></dl>
 
-  
+
 
   <p>An <code id="the-offscreencanvas-interface:offscreencanvas-10"><a href="#offscreencanvas">OffscreenCanvas</a></code> object has an internal <dfn id="offscreencanvas-bitmap">bitmap</dfn> that is initialized when the object
   is created. The width and height of the <a href="#offscreencanvas-bitmap" id="the-offscreencanvas-interface:offscreencanvas-bitmap">bitmap</a> are
@@ -4258,7 +4258,7 @@ interface <dfn id="offscreencanvas">OffscreenCanvas</dfn> : <a data-x-internal="
 
   <hr/>
 
-  
+
 
   <dl class="domintro"><dt><var>offscreenCanvas</var> . <code id="dom-offscreencanvas-width"><a href="#dom-offscreencanvas-width-2">width</a></code> [
    = <var>value</var> ]</dt><dt><var>offscreenCanvas</var> . <code id="dom-offscreencanvas-height"><a href="#dom-offscreencanvas-height-2">height</a></code> [
@@ -4269,7 +4269,7 @@ interface <dfn id="offscreencanvas">OffscreenCanvas</dfn> : <a data-x-internal="
     new, transparent black bitmap of the specified dimensions (effectively resizing it).</p>
    </dd></dl>
 
-  
+
 
   <p>If either the <dfn id="dom-offscreencanvas-width-2"><code>width</code></dfn> or <dfn id="dom-offscreencanvas-height-2"><code>height</code></dfn> attributes of an
   <code id="the-offscreencanvas-interface:offscreencanvas-22"><a href="#offscreencanvas">OffscreenCanvas</a></code> object are set (to a new value or to the same value as before) and
@@ -4282,7 +4282,7 @@ interface <dfn id="offscreencanvas">OffscreenCanvas</dfn> : <a data-x-internal="
   <p>The resizing behavior for &quot;<code id="the-offscreencanvas-interface:offscreen-context-type-webgl-5"><a href="#offscreen-context-type-webgl">webgl</a></code>&quot;
   contexts is defined in the WebGL specification. <a href="https://html.spec.whatwg.org/multipage/references.html#refsWEBGL">[WEBGL]</a></p>
 
-  
+
 
   <p class="note">If an <code id="the-offscreencanvas-interface:offscreencanvas-25"><a href="#offscreencanvas">OffscreenCanvas</a></code> object whose dimensions were changed has
   a <a href="#offscreencanvas-placeholder" id="the-offscreencanvas-interface:offscreencanvas-placeholder-5">placeholder <code>canvas</code> element</a>, then
@@ -4306,7 +4306,7 @@ interface <dfn id="offscreencanvas">OffscreenCanvas</dfn> : <a data-x-internal="
     replaced with a new blank image.</p>
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="dom-offscreencanvas-converttoblob-2"><code>convertToBlob(<var>options</var>)</code></dfn> method,
   when invoked, must run the following steps:</p>
@@ -4339,7 +4339,7 @@ interface <dfn id="offscreencanvas">OffscreenCanvas</dfn> : <a data-x-internal="
    the same underlying bitmap data as this <code id="the-offscreencanvas-interface:offscreencanvas-36"><a href="#offscreencanvas">OffscreenCanvas</a></code> object's <a href="#offscreencanvas-bitmap" id="the-offscreencanvas-interface:offscreencanvas-bitmap-10">bitmap</a>.</p></li><li><p>Set this <code id="the-offscreencanvas-interface:offscreencanvas-37"><a href="#offscreencanvas">OffscreenCanvas</a></code> object's <a href="#offscreencanvas-bitmap" id="the-offscreencanvas-interface:offscreencanvas-bitmap-11">bitmap</a> to reference a newly created bitmap of the
    same dimensions as the previous bitmap, and with its pixels initialized to transparent black,
    or opaque black if the rendering context's <a href="#offscreencontext2d-alpha" id="the-offscreencanvas-interface:offscreencontext2d-alpha">alpha</a> flag is set to false.</p></li><li><p>Return <var>image</var>.</p></li></ol>
-  
+
 
   <h6 id="the-offscreen-2d-rendering-context"><span class="secno">4.12.5.3.1</span> The offscreen 2D rendering context<a class="self-link" href="#the-offscreen-2d-rendering-context"/></h6>
 
@@ -4398,7 +4398,7 @@ interface <a href="#offscreencanvasrenderingcontext2d" id="the-offscreen-2d-rend
     <p>Returns the <a href="#associated-offscreencanvas-object" id="the-offscreen-2d-rendering-context:associated-offscreencanvas-object-2">associated <code>OffscreenCanvas</code> object</a>.</p>
    </dd></dl>
 
-  
+
 
   <p>The <dfn id="offscreen-2d-context-creation-algorithm">offscreen 2D context creation algorithm</dfn>, which is passed a
   <var>target</var> (an <code id="the-offscreen-2d-rendering-context:offscreencanvas-6"><a href="#offscreencanvas">OffscreenCanvas</a></code> object) and optionally some arguments,
@@ -4458,7 +4458,7 @@ interface <a href="#offscreencanvasrenderingcontext2d" id="the-offscreen-2d-rend
 
   </p>
 
-  
+
 
   <h5 id="colour-spaces-and-colour-correction"><span class="secno">4.12.5.4</span> Color spaces and color correction<a class="self-link" href="#colour-spaces-and-colour-correction"/></h5>
 
@@ -4489,13 +4489,13 @@ interface <a href="#offscreencanvasrenderingcontext2d" id="the-offscreen-2d-rend
   <p class="note">Thus, in the 2D context, calling the <code id="colour-spaces-and-colour-correction:dom-context-2d-drawimage-2"><a href="#dom-context-2d-drawimage">drawImage()</a></code> method to render the output of the <code id="colour-spaces-and-colour-correction:dom-canvas-todataurl-2-4"><a href="#dom-canvas-todataurl-2">toDataURL()</a></code> method to the canvas, given the appropriate
   dimensions, has no visible effect.</p>
 
-  
+
 
 
 
   <h5 id="serialising-bitmaps-to-a-file"><span class="secno">4.12.5.5</span> Serializing bitmaps to a file<a class="self-link" href="#serialising-bitmaps-to-a-file"/></h5>
 
-  
+
 
   <p>When a user agent is to create <dfn id="a-serialisation-of-the-bitmap-as-a-file">a
   serialization of the bitmap as a file</dfn>, given an optional <var>type</var> and
@@ -4538,10 +4538,10 @@ interface <a href="#offscreencanvasrenderingcontext2d" id="the-offscreen-2d-rend
   <p class="note">The use of type-testing here, instead of simply declaring <var>quality</var> as
   a Web IDL <code>double</code>, is a historical artifact.</p>
 
-  
 
 
-  
+
+
 
   <h5 id="security-with-canvas-elements"><span class="secno">4.12.5.6</span> Security with <code id="security-with-canvas-elements:the-canvas-element"><a href="#the-canvas-element">canvas</a></code> elements<a class="self-link" href="#security-with-canvas-elements"/></h5>
 
@@ -4573,6 +4573,6 @@ interface <a href="#offscreencanvasrenderingcontext2d" id="the-offscreen-2d-rend
   <code id="security-with-canvas-elements:imagebitmap-4"><a href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a></code> objects when they are transferred to the <code id="security-with-canvas-elements:the-canvas-element-6"><a href="#the-canvas-element">canvas</a></code>
   via <a href="#dom-imagebitmaprenderingcontext-transferfromimagebitmap-2" id="security-with-canvas-elements:dom-imagebitmaprenderingcontext-transferfromimagebitmap-2">transferFromImageBitmap()</a>.</p>
 
-  
+
 
   </body></html>

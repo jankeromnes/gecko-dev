@@ -10,7 +10,7 @@ function boom()
   var frame1doc = frame1.contentDocument;
   var frame1root = frame1doc.documentElement;
   frame1root.appendChild(frame2);
-  setTimeout(function() { 
+  setTimeout(function() {
     try {
       frame2.contentDocument.q = frame1root.__lookupGetter__("nextSibling");
     } catch(ex) {}

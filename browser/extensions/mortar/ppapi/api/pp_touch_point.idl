@@ -5,7 +5,7 @@
 
 
 /**
- * This file defines the API to create a touch point or position where fingers        
+ * This file defines the API to create a touch point or position where fingers
  * makes contact with touch screen device.
  */
 

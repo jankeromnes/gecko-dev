@@ -10,7 +10,7 @@ description: for ( \n semicolon \n\n semicolon \n)
 //CHECK#1
 for(
     ;
-    
+
     ;
 ) {
   break;

@@ -234,7 +234,7 @@ PaintThread::AsyncPaintTask(CompositorBridgeChild* aBridge,
                             PaintTask* aTask)
 {
   AUTO_PROFILER_LABEL("PaintThread::AsyncPaintTask", GRAPHICS);
-  
+
   MOZ_ASSERT(IsOnPaintWorkerThread());
   MOZ_ASSERT(aTask);
 

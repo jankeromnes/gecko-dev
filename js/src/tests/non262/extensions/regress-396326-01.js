@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof dis == 'undefined')
   {
     print('disassembly not supported. test skipped.');
@@ -26,9 +26,9 @@ function test()
   }
   else
   {
-    function f4() { let local; return local.prop }; 
+    function f4() { let local; return local.prop };
     dis(f4);
-    reportCompare(expect, actual, summary + 
+    reportCompare(expect, actual, summary +
                   ': function f4() { let local; return local.prop };');
   }
 }

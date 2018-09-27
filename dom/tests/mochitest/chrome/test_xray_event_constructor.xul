@@ -9,7 +9,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=861493
   <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"/>
 
   <iframe id="t" type="content"></iframe>
-  
+
   <!-- test results are displayed in the html:body -->
   <body xmlns="http://www.w3.org/1999/xhtml">
   <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=861493"

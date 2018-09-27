@@ -85,7 +85,7 @@ def parse_auto_props():
         file_types.append((file_type, proplist))
     # print file_types
 
-        
+
 def runCommand(cmd):
     output_file = os.popen(cmd);
     output_text = output_file.read();
@@ -100,7 +100,7 @@ svn_auto_props = runCommand("svn propget svn:auto-props http://source.icu-projec
 def usage():
     print "usage: " + sys.argv[0] + " [-f | --fix] [-h | --help]"
 
-    
+
 #
 #  UTF-8 file check.   For text files with svn:mime-type=text/anything, check the specified charset
 #    file_name:        name of a text file.

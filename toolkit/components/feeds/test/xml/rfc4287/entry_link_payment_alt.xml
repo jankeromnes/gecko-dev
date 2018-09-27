@@ -13,7 +13,7 @@ Expect: feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntry).link.sp
   <link href="http://www.intertwingly.net/wiki/pie/LinkConformanceTests" />
   <link rel="self" href="http://www.snellspace.com/public/linktests.xml" />
 
-    
+
   <entry>
     <id>tag:snellspace.com,2006:/atom/conformance/linktest/5</id>
     <title>Entry with a link relation registered by an extension</title>
@@ -22,6 +22,6 @@ Expect: feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntry).link.sp
     <link href="http://www.snellspace.com/public/linktests/alternate" />
     <link rel="payment" href="http://www.example.org/payment" />
   </entry>
-  
-  
+
+
 </feed>

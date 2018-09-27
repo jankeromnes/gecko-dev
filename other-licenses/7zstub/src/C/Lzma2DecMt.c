@@ -57,7 +57,7 @@ typedef struct
   CLzma2Dec dec;
   Byte dec_created;
   Byte needInit;
-  
+
   Byte *outBuf;
   size_t outBufSize;
 
@@ -89,7 +89,7 @@ typedef struct
   CAlignOffsetAlloc alignOffsetAlloc;
   CLzma2DecMtProps props;
   Byte prop;
-  
+
   ISeqInStream *inStream;
   ISeqOutStream *outStream;
   ICompressProgress *progress;
@@ -127,7 +127,7 @@ CLzma2DecMtHandle Lzma2DecMt_Create(ISzAllocPtr alloc, ISzAllocPtr allocMid)
   CLzma2DecMt *p = (CLzma2DecMt *)ISzAlloc_Alloc(alloc, sizeof(CLzma2DecMt));
   if (!p)
     return NULL;
-  
+
   // p->alloc = alloc;
   p->allocMid = allocMid;
 
@@ -260,7 +260,7 @@ static void Lzma2DecMt_MtCallback_Parse(void *obj, unsigned coderIndex, CMtDecCa
       }
     }
     Lzma2Dec_Init(&t->dec);
-    
+
     t->inPreSize = 0;
     t->outPreSize = 0;
     // t->blockWasFinished = False;
@@ -279,7 +279,7 @@ static void Lzma2DecMt_MtCallback_Parse(void *obj, unsigned coderIndex, CMtDecCa
     ELzma2ParseStatus status;
     Bool overflow;
     UInt32 unpackRem = 0;
-    
+
     int checkFinishBlock = True;
     size_t limit = me->props.outBlockMax;
     if (me->outSize_Defined)
@@ -300,14 +300,14 @@ static void Lzma2DecMt_MtCallback_Parse(void *obj, unsigned coderIndex, CMtDecCa
       const SizeT srcOrig = cc->srcSize;
       SizeT srcSize_Point = 0;
       SizeT dicPos_Point = 0;
-      
+
       cc->srcSize = 0;
       overflow = False;
 
       for (;;)
       {
         SizeT srcCur = srcOrig - cc->srcSize;
-        
+
         status = Lzma2Dec_Parse(&t->dec,
             limit - t->dec.decoder.dicPos,
             cc->src + cc->srcSize, &srcCur,
@@ -324,7 +324,7 @@ static void Lzma2DecMt_MtCallback_Parse(void *obj, unsigned coderIndex, CMtDecCa
           }
           continue;
         }
-        
+
         if (status == LZMA2_PARSE_STATUS_NEW_BLOCK)
         {
           if (t->dec.decoder.dicPos == 0)
@@ -345,7 +345,7 @@ static void Lzma2DecMt_MtCallback_Parse(void *obj, unsigned coderIndex, CMtDecCa
           overflow = True;
           break;
         }
-        
+
         unpackRem = Lzma2Dec_GetUnpackExtra(&t->dec);
         break;
       }
@@ -398,10 +398,10 @@ static void Lzma2DecMt_MtCallback_Parse(void *obj, unsigned coderIndex, CMtDecCa
             }
           }
         }
-    
+
         me->outProcessed_Parse += dicPos;
       }
-      
+
       cc->outPos = dicPos;
       t->outPreSize = (size_t)dicPos;
     }
@@ -480,7 +480,7 @@ static SRes Lzma2DecMt_MtCallback_Code(void *pp, unsigned coderIndex,
     Bool blockWasFinished =
         ((int)t->parseStatus == LZMA_STATUS_FINISHED_WITH_MARK
         || t->parseStatus == LZMA2_PARSE_STATUS_NEW_BLOCK);
-    
+
     SRes res = Lzma2Dec_DecodeToDic(&t->dec,
         t->outPreSize,
         src, &srcProcessed,
@@ -504,7 +504,7 @@ static SRes Lzma2DecMt_MtCallback_Code(void *pp, unsigned coderIndex,
     {
       if (srcSize != srcProcessed)
         return SZ_ERROR_FAIL;
-      
+
       if (t->inPreSize == t->inCodeSize)
       {
         if (t->outPreSize != t->outCodeSize)
@@ -563,7 +563,7 @@ static SRes Lzma2DecMt_MtCallback_Write(void *pp, unsigned coderIndex,
     return SZ_ERROR_FAIL;
 
   *canRecode = False;
-    
+
   if (me->outStream)
   {
     for (;;)
@@ -574,7 +574,7 @@ static SRes Lzma2DecMt_MtCallback_Write(void *pp, unsigned coderIndex,
         cur = LZMA2DECMT_STREAM_WRITE_STEP;
 
       written = ISeqOutStream_Write(me->outStream, data, cur);
-      
+
       me->outProcessed += written;
       // me->mtc.writtenTotal += written;
       if (written != cur)
@@ -589,7 +589,7 @@ static SRes Lzma2DecMt_MtCallback_Write(void *pp, unsigned coderIndex,
       RINOK(MtProgress_ProgressAdd(&me->mtc.mtProgress, 0, 0));
     }
   }
-  
+
   return SZ_ERROR_FAIL;
   /*
   if (size > me->outBufSize)
@@ -626,7 +626,7 @@ static SRes Lzma2Dec_Prepare_ST(CLzma2DecMt *p)
   }
 
   Lzma2Dec_Init(&p->dec);
-  
+
   return SZ_OK;
 }
 
@@ -690,7 +690,7 @@ static SRes Lzma2Dec_Decode_ST(CLzma2DecMt *p
         inLim = 0;
       }
       #endif
-      
+
       if (!p->readWasFinished)
       {
         inPos = 0;
@@ -725,7 +725,7 @@ static SRes Lzma2Dec_Decode_ST(CLzma2DecMt *p
     }
 
     inProcessed = inLim - inPos;
-    
+
     res = Lzma2Dec_DecodeToDic(dec, dicPos + size, inData + inPos, &inProcessed, finishMode, &status);
 
     inPos += inProcessed;
@@ -775,11 +775,11 @@ static SRes Lzma2Dec_Decode_ST(CLzma2DecMt *p
 
         if (status == LZMA_STATUS_NEEDS_MORE_INPUT)
           return SZ_ERROR_INPUT_EOF;
-        
+
         return SZ_ERROR_DATA;
       }
     }
-    
+
     if (p->progress)
     {
       UInt64 inDelta = p->inProcessed - inPrev;
@@ -841,7 +841,7 @@ SRes Lzma2DecMt_Decode(CLzma2DecMtHandle pp,
 
   *isMT = False;
 
-  
+
   #ifndef _7ZIP_ST
 
   tMode = False;
@@ -867,7 +867,7 @@ SRes Lzma2DecMt_Decode(CLzma2DecMtHandle pp,
       p->mtc_WasConstructed = True;
       MtDec_Construct(&p->mtc);
     }
-    
+
     p->mtc.progress = progress;
     p->mtc.inStream = inStream;
 
@@ -935,7 +935,7 @@ SRes Lzma2DecMt_Decode(CLzma2DecMtHandle pp,
       p->readRes = p->mtc.readRes;
       p->readWasFinished = p->mtc.readWasFinished;
       p->inProcessed = p->mtc.inProcessed;
-      
+
       PRF_STR("----- decoding ST -----");
     }
   }
@@ -957,14 +957,14 @@ SRes Lzma2DecMt_Decode(CLzma2DecMtHandle pp,
     // res = SZ_OK; // for test
     if (res == SZ_OK && p->readRes != SZ_OK)
       res = p->readRes;
-    
+
     /*
     #ifndef _7ZIP_ST
     if (res == SZ_OK && tMode && p->mtc.parseRes != SZ_OK)
       res = p->mtc.parseRes;
     #endif
     */
-    
+
     return res;
   }
 }
@@ -1052,7 +1052,7 @@ SRes Lzma2DecMt_Read(CLzma2DecMtHandle pp,
 
     res = Lzma2Dec_DecodeToBuf(&p->dec, data, &outCur,
         p->inBuf + p->inPos, &inCur, finishMode, &status);
-    
+
     p->inPos += inCur;
     p->inProcessed += inCur;
     *inStreamProcessed += inCur;
@@ -1060,10 +1060,10 @@ SRes Lzma2DecMt_Read(CLzma2DecMtHandle pp,
     *outSize += outCur;
     size -= outCur;
     data += outCur;
-    
+
     if (res != 0)
       return res;
-    
+
     /*
     if (status == LZMA_STATUS_FINISHED_WITH_MARK)
       return readRes;

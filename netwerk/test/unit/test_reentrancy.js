@@ -15,7 +15,7 @@ function syncXHR()
 {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", URL + testpath, false);
-  xhr.send(null);    
+  xhr.send(null);
 }
 
 const MAX_TESTS = 2;
@@ -51,7 +51,7 @@ var listener = {
         syncXHR();
         break;
     }
-    
+
     this._done_onStart = true;
   },
 
@@ -67,7 +67,7 @@ var listener = {
     if (this._test <= MAX_TESTS)
       next_test();
     else
-      httpserver.stop(do_test_finished);      
+      httpserver.stop(do_test_finished);
   },
 
   _reset: function() {

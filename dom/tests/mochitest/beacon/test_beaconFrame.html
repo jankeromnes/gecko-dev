@@ -49,7 +49,7 @@ function beaconSent(result) {
     // This function gets called from beacon-frame.html in the inner frame
     // Check that the beacon was actually sent
     ok(result, "Beacon was not sent")
-    
+
     // remove the frame.
     var frame = document.getElementById("frame");
     var data = frame.getAttribute("data");
@@ -61,7 +61,7 @@ function beaconSent(result) {
     getBeaconServerStatus( function(response) {
       console.log(response);
         var result = JSON.parse(response);
-        
+
         is(result.data, data, "Beacon status should match expected.  is: " + result.data + " should be: " + data);
         is(result.mimetype, mimetype, "Beacon mimetype should match expected.  is: " + result.mimetype + " should be: " + mimetype);
 

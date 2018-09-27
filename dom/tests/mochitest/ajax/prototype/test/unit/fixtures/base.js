@@ -10,14 +10,14 @@ var arg1 = 1;
 var arg2 = 2;
 var arg3 = 3;
 function TestObj() { };
-TestObj.prototype.assertingEventHandler = 
+TestObj.prototype.assertingEventHandler =
   function(event, assertEvent, assert1, assert2, assert3, a1, a2, a3) {
     assertEvent(event);
     assert1(a1);
     assert2(a2);
     assert3(a3);
   };
-  
+
 var globalBindTest = null;
 
 
@@ -46,12 +46,12 @@ var Cat = Class.create(Animal, {
 // empty subclass
 var Mouse = Class.create(Animal, {});
 
-//mixins 
+//mixins
 var Sellable = {
   getValue: function(pricePerKilo) {
     return this.weight * pricePerKilo;
   },
-  
+
   inspect: function() {
     return '#<Sellable: #{weight}kg>'.interpolate(this);
   }
@@ -94,12 +94,12 @@ var Ox = Class.create(Animal, Sellable, Reproduceable, {
     this.sex = sex;
     $super(name);
   },
-  
+
   eat: function(food) {
     if (food instanceof Plant)
       this.weight += food.weight;
   },
-  
+
   inspect: function() {
     return '#<Ox: #{name}>'.interpolate(this);
   }

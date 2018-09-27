@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "object");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,7 +70,7 @@ function loadComplete() {
 
 
 /**
-* 
+*
 The value of attribute width of the object element is read and checked against the expected value.
 
 * @author Netscape
@@ -84,7 +84,7 @@ function object14() {
       var testNode;
       var vwidth;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -96,7 +96,7 @@ testNode = nodeList.item(0);
       vwidth = testNode.width;
 
       assertEquals("widthLink","550",vwidth);
-       
+
 }
 
 </script>
@@ -123,7 +123,7 @@ The value of attribute width of the object element is read and checked against t
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/object.html"></iframe>
 <br>

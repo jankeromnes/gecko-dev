@@ -1,10 +1,10 @@
-#! /bin/sh  
+#! /bin/sh
 
 ########################################################################
 #
 # /u/sonmi/bin/jssqa
 #
-# this script is supposed to automatically run - now a sanity test, later QA for 
+# this script is supposed to automatically run - now a sanity test, later QA for
 # JSS on all required Unix and Windows (NT and 2000) platforms
 #
 # parameters
@@ -45,9 +45,9 @@ INTERNAL_TOKEN="NSS Certificate DB"
 SIGTEST_INTERNAL_TOKEN="Internal Key Storage Token"
 
 ################################ jss_init #########################
-# 
+#
 # Most of the procedure is setting up the test environment.
-# set all necessary dir and file variables, set all paths, copy the shared libs 
+# set all necessary dir and file variables, set all paths, copy the shared libs
 # Put all the shared libraries into a lib directory, <libdir>.
 # including the libjss3.so that was built by the build process.
 # set LD_LIBRARY PATH and CLASSPATH
@@ -71,7 +71,7 @@ jss_init()
   MOZILLA_ROOT=`echo $MOZILLA_ROOT | sed -e 's/nss/jss/g'`
 
   JSS_SAMPLES="$MOZILLA_ROOT/security/jss/samples"
-  JSS_CLASSPATH=`echo $MOZILLA_ROOT | 
+  JSS_CLASSPATH=`echo $MOZILLA_ROOT |
       sed -e "s/jss$NSSVER.builds/jss$NSSVER\/ships/g" -e "s/mozilla/jss\/${QAYEAR}${BUILDDATE}/"`
   Debug "JSS_CLASSPATH=$JSS_CLASSPATH"
   Debug "JSS_SAMPLES=$JSS_SAMPLES"
@@ -141,15 +141,15 @@ jss_mode_init()
   export_dirs
 }
 
-  
+
 ################################ jss_test #########################
-# 
+#
 # go into the build tree. cd to mozilla/security/jss/samples.
 # Create NSS directories in this directory with modutil and set the password
 #
 #6. Create an alias for the "java" and "javac" commands. You'll need to set
 #it to whatever version of the JDK you used to build on this platform. For
-#example, 
+#example,
       #alias java /share/builds/components/cms_jdk/AIX/1.3.0/jre/bin/java
         #alias javac /share/builds/components/cms_jdk/AIX/1.3.0/bin/javac
 # instead $JAVA and $JAVAC
@@ -183,14 +183,14 @@ jss_test()
   Debug "$JAVAC SigTest.java"
   $JAVAC SigTest.java
   Debug "$JAVAC SigTest.java returned $?"
-          
-  echo "Starting new jss test on $HOST"  
+
+  echo "Starting new jss test on $HOST"
   date
 
   # Run the actual tests
 
-  Debug "$JAVA $NATIVE_FLAG TestKeyGen ." 
-  $JAVA $NATIVE_FLAG TestKeyGen . 
+  Debug "$JAVA $NATIVE_FLAG TestKeyGen ."
+  $JAVA $NATIVE_FLAG TestKeyGen .
   Debug "$JAVA TestKeyGen returned $?"
 
   Debug "$JAVA $NATIVE_FLAG SigTest . \"$SIGTEST_INTERNAL_TOKEN\""

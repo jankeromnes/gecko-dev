@@ -78,7 +78,7 @@ bool SetDirTime(CFSTR path, const FILETIME *cTime, const FILETIME *aTime, const 
     return false;
   }
   #endif
-  
+
   HANDLE hDir = INVALID_HANDLE_VALUE;
   IF_USE_MAIN_PATH
     hDir = ::CreateFileW(fs2us(path), GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
@@ -240,10 +240,10 @@ WinXP-64 CreateDir():
   ""                  - ERROR_PATH_NOT_FOUND
   \                   - ERROR_ACCESS_DENIED
   C:\                 - ERROR_ACCESS_DENIED, if there is such drive,
-  
+
   D:\folder             - ERROR_PATH_NOT_FOUND, if there is no such drive,
   C:\nonExistent\folder - ERROR_PATH_NOT_FOUND
-  
+
   C:\existFolder      - ERROR_ALREADY_EXISTS
   C:\existFolder\     - ERROR_ALREADY_EXISTS
 
@@ -292,7 +292,7 @@ bool CreateDir(CFSTR path)
 
   We need CreateDir2, since fileInfo.Find() for reserved names like "com8"
    returns FILE instead of DIRECTORY. And we need to use SuperPath */
- 
+
 static bool CreateDir2(CFSTR path)
 {
   #ifndef _UNICODE
@@ -336,7 +336,7 @@ static bool CreateDir2(CFSTR path)
 bool CreateComplexDir(CFSTR _path)
 {
   #ifdef _WIN32
-  
+
   {
     DWORD attrib = NFind::GetFileAttrib(_path);
     if (attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_DIRECTORY) != 0)
@@ -344,14 +344,14 @@ bool CreateComplexDir(CFSTR _path)
   }
 
   #ifndef UNDER_CE
-  
+
   if (IsDriveRootPath_SuperAllowed(_path))
     return false;
-  
+
   unsigned prefixSize = GetRootPrefixSize(_path);
-  
+
   #endif
-  
+
   #endif
 
   FString path (_path);
@@ -366,7 +366,7 @@ bool CreateComplexDir(CFSTR _path)
 
   const FString path2 (path);
   pos = path.Len();
-  
+
   for (;;)
   {
     if (CreateDir2(path))
@@ -376,17 +376,17 @@ bool CreateComplexDir(CFSTR _path)
     pos = path.ReverseFind_PathSepar();
     if (pos < 0 || pos == 0)
       return false;
-    
+
     #if defined(_WIN32) && !defined(UNDER_CE)
     if (pos == 1 && IS_PATH_SEPAR(path[0]))
       return false;
     if (prefixSize >= (unsigned)pos + 1)
       return false;
     #endif
-    
+
     path.DeleteFrom(pos);
   }
-  
+
   while (pos < (int)path2.Len())
   {
     int pos2 = NName::FindSepar(path2.Ptr(pos + 1));
@@ -398,7 +398,7 @@ bool CreateComplexDir(CFSTR _path)
     if (!CreateDir(path))
       return false;
   }
-  
+
   return true;
 }
 
@@ -480,7 +480,7 @@ bool RemoveDirWithSubItems(const FString &path)
         return false;
     }
   }
-  
+
   if (!SetFileAttrib(path, 0))
     return false;
   return RemoveDir(path);
@@ -679,7 +679,7 @@ bool CTempFile::MoveTo(CFSTR name, bool deleteDestBefore)
   }
   DisableDeleting();
   return MyMoveFile(_path, name);
-  
+
   /*
   if (attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_READONLY))
   {

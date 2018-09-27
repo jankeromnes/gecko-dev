@@ -44,9 +44,9 @@ function doTest(id, boundsWidth, w1, w2, w3) {
   var s = document.getElementById(id);
   is(s.offsetWidth, boundsWidth, "bad offsetWidth");
   is(getWidth(s.getBoundingClientRect()), boundsWidth, "bad getBoundingClientRect width");
-  is(getWidth(s.getClientRects()[0]), w1, "bad getClientRects width"); 
-  is(getWidth(s.getClientRects()[1]), w2, "bad getClientRects width"); 
-  is(getWidth(s.getClientRects()[2]), w3, "bad getClientRects width"); 
+  is(getWidth(s.getClientRects()[0]), w1, "bad getClientRects width");
+  is(getWidth(s.getClientRects()[1]), w2, "bad getClientRects width");
+  is(getWidth(s.getClientRects()[2]), w3, "bad getClientRects width");
 }
 
 doTest("s1", 500, 102, 500, 202);

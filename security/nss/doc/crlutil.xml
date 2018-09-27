@@ -63,14 +63,14 @@ where options and arguments are combinations of the options and arguments listed
     </para>
 
   </refsection>
-  
+
   <refsection id="options">
     <title>Options and Arguments</title>
 	<para>
 	</para>
-   	<para><command>Options</command></para> 
+   	<para><command>Options</command></para>
    	<para>
-Options specify an action. Option arguments modify an action. 
+Options specify an action. Option arguments modify an action.
 The options and arguments for the crlutil command are defined as follows:
     </para>
 
@@ -280,7 +280,7 @@ Specify the url.
     <para>
     * Set "this update" or "next update" CRL fields:
     </para>
-    <para>           
+    <para>
              update=YYYYMMDDhhmmssZ
              nextupdate=YYYYMMDDhhmmssZ
      </para>
@@ -355,7 +355,7 @@ The authority key identifier extension provides a means of identifying the publi
      <para>
           authKeyIdent: identifies the name of an extension
           critical: value of 1 of 0. Should be set to 1 if this extension is critical or 0 otherwise.
-          key-id: key identifier represented in octet string. dn:: is a CA distinguished name cert-serial: authority certificate serial number. 
+          key-id: key identifier represented in octet string. dn:: is a CA distinguished name cert-serial: authority certificate serial number.
      </para>
      <para>
     * Add Issuer Alternative Name extension:
@@ -448,31 +448,31 @@ The Certificate Revocation List Management Tool's capabilities are grouped as fo
     * Creating or modifying a CRL:
     </para>
       <programlisting>
-crlutil -G|-M -c crl-gen-file -n nickname [-i crl] [-u url] [-d keydir] [-P dbprefix] [-l alg] [-a] [-B] 
+crlutil -G|-M -c crl-gen-file -n nickname [-i crl] [-u url] [-d keydir] [-P dbprefix] [-l alg] [-a] [-B]
       </programlisting>
     <para>
     * Listing all CRls or a named CRL:
     </para>
       <programlisting>
-	crlutil -L [-n crl-name] [-d krydir] 
+	crlutil -L [-n crl-name] [-d krydir]
       </programlisting>
 
     <para>
     * Deleting CRL from db:
     </para>
       <programlisting>
-	crlutil -D -n nickname [-d keydir] [-P dbprefix] 
+	crlutil -D -n nickname [-d keydir] [-P dbprefix]
       </programlisting>
 
     <para>
     * Erasing CRLs from db:
     </para>
       <programlisting>
-	crlutil -E [-d keydir] [-P dbprefix] 
+	crlutil -E [-d keydir] [-P dbprefix]
       </programlisting>
 
     <para>
-    * Deleting CRL from db: 
+    * Deleting CRL from db:
     </para>
     <programlisting>
           crlutil -D -n nickname [-d keydir] [-P dbprefix]
@@ -482,14 +482,14 @@ crlutil -G|-M -c crl-gen-file -n nickname [-i crl] [-u url] [-d keydir] [-P dbpr
     * Erasing CRLs from db:
     </para>
     <programlisting>
-          crlutil -E [-d keydir] [-P dbprefix] 
+          crlutil -E [-d keydir] [-P dbprefix]
     </programlisting>
 
     <para>
     * Import CRL from file:
     </para>
     <programlisting>
-          crlutil -I -i crl [-t crlType] [-u url] [-d keydir] [-P dbprefix] [-B] 
+          crlutil -I -i crl [-t crlType] [-u url] [-d keydir] [-P dbprefix] [-B]
     </programlisting>
   </refsection>
 

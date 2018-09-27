@@ -89,7 +89,7 @@ new TestCase(
 	      Math.atan(0)          );
 
 new TestCase(
-	      "Math.atan(-0)",	
+	      "Math.atan(-0)",
 	      -0,
 	      Math.atan(-0)         );
 

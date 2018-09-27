@@ -24,7 +24,7 @@ index2=0
 
 for file in $INFILES # loop over all input files
   do
-  
+
   for rate in ${TARGETRATE[*]}
 	do
 	let "index1=index1+1"
@@ -48,7 +48,7 @@ for file in $SUBSET # loop over the subset of input files
 	$ISAC $INDIR/${CHANNELLIST[0]} -FL 60 -FIXED_FL $INDIR/"$file" $OUTDIR/a60_$index1"$file" >> $LOGFILE
 done
 
-let "index1=index1+1"	
+let "index1=index1+1"
  $ISAC $INDIR/${CHANNELLIST[0]} -INITRATE 25000 -FL 30 $INDIR/"$file" $OUTDIR/a60_$index1"$file" >> $LOGFILE
 
 # Run fault test

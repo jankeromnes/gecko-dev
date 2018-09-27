@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "tablesection");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,12 +70,12 @@ function loadComplete() {
 
 
 /**
-* 
-    The deleteRow() method deletes a row from this section. 
-    
+*
+    The deleteRow() method deletes a row from this section.
+
     Retrieve the first TBODY element and invoke the deleteRow() method
-    with an index of 0.  The nuber of rows in the TBODY section before 
-    the deletion of the row is two.  After the row is deleted the number 
+    with an index of 0.  The nuber of rows in the TBODY section before
+    the deletion of the row is two.  After the row is deleted the number
     of rows in the TBODY section is one.
 
 * @author NIST
@@ -90,7 +90,7 @@ function HTMLTableSectionElement24() {
       var rowsnodeList;
       var vrows;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -110,7 +110,7 @@ testNode = nodeList.item(1);
       vrows = rowsnodeList.length;
 
       assertEquals("rowsLink2",1,vrows);
-       
+
 }
 
 </script>
@@ -120,11 +120,11 @@ testNode = nodeList.item(1);
 <p>&lt;test name='HTMLTableSectionElement24' schemaLocation='http://www.w3.org/2001/DOM-Test-Suite/Level-1 dom1.xsd'&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;metadata&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;HTMLTableSectionElement24&lt;/title&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
-    The deleteRow() method deletes a row from this section. 
-    
+    The deleteRow() method deletes a row from this section.
+
     Retrieve the first TBODY element and invoke the deleteRow() method
-    with an index of 0.  The nuber of rows in the TBODY section before 
-    the deletion of the row is two.  After the row is deleted the number 
+    with an index of 0.  The nuber of rows in the TBODY section before
+    the deletion of the row is two.  After the row is deleted the number
     of rows in the TBODY section is one.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
@@ -142,7 +142,7 @@ testNode = nodeList.item(1);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/tablesection.html"></iframe>
 <br>

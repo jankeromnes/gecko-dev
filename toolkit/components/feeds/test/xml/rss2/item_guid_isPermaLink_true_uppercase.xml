@@ -9,7 +9,7 @@ Expect: var link = feed.items.queryElementAt(0, Components.interfaces.nsIFeedEnt
 <channel>
 <item>
 
-<enclosure length="24986239" type="audio/mpeg" url="http://dallas.example.com/joebob_050689.mp3" /> 
+<enclosure length="24986239" type="audio/mpeg" url="http://dallas.example.com/joebob_050689.mp3" />
 <author>jbb@dallas.example.com (Joe Bob Briggs)</author>
 <title>test</title>
 <guid isPermaLink="TrUe">http://www.example.org/</guid>

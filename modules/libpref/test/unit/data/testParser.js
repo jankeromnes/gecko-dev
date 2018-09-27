@@ -12,7 +12,7 @@
    /* comment £ */
 /* comment
  * and
-some
+some
    # more
    // comment */
 // comment /*
@@ -20,12 +20,12 @@ some
 /* /* /* /* /* ...no nesting of C-style comments... */
 
 // The following four lines have whitespace: \t, \v, \f, \r
-	
-
-
 
 
-// This comment has the same whitespace: 	
+
+
+
+// This comment has the same whitespace:
 # This comment has other stuff: \n \r \t \v \f \r \a \b \? \' \" \\ \@
 /* This comment has more stuff: \x61 \u0061 \u1234 \uXYZ */
 

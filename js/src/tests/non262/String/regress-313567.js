@@ -19,5 +19,5 @@ s.toString = function() {
   var expect = 1;
 var actual = s.length;
 printStatus("expect="+expect+" actual="+actual);
- 
+
 reportCompare(expect, actual, summary);

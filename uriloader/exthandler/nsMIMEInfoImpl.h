@@ -16,13 +16,13 @@
 #include "nsIURI.h"
 #include "nsIProcess.h"
 
-/** 
- * UTF8 moz-icon URI string for the default handler application's icon, if 
+/**
+ * UTF8 moz-icon URI string for the default handler application's icon, if
  * available.
  */
 #define PROPERTY_DEFAULT_APP_ICON_URL "defaultApplicationIconURL"
-/** 
- * UTF8 moz-icon URI string for the user's preferred handler application's 
+/**
+ * UTF8 moz-icon URI string for the user's preferred handler application's
  * icon, if available.
  */
 #define PROPERTY_CUSTOM_APP_ICON_URL "customApplicationIconURL"
@@ -58,8 +58,8 @@ class nsMIMEInfoBase : public nsIMIMEInfo {
     NS_IMETHOD GetPreferredAction(nsHandlerInfoAction *aPreferredAction) override;
     NS_IMETHOD SetPreferredAction(nsHandlerInfoAction aPreferredAction) override;
     NS_IMETHOD GetAlwaysAskBeforeHandling(bool *aAlwaysAskBeforeHandling) override;
-    NS_IMETHOD SetAlwaysAskBeforeHandling(bool aAlwaysAskBeforeHandling) override; 
-    NS_IMETHOD GetPossibleLocalHandlers(nsIArray **_retval) override; 
+    NS_IMETHOD SetAlwaysAskBeforeHandling(bool aAlwaysAskBeforeHandling) override;
+    NS_IMETHOD GetPossibleLocalHandlers(nsIArray **_retval) override;
 
     enum HandlerClass {
       eMIMEInfo,
@@ -113,8 +113,8 @@ class nsMIMEInfoBase : public nsIMIMEInfo {
                                                     nsresult* aResult);
 
     /**
-     * This method can be used to launch the file or URI with a single 
-     * argument (typically either a file path or a URI spec).  This is 
+     * This method can be used to launch the file or URI with a single
+     * argument (typically either a file path or a URI spec).  This is
      * meant as a helper method for implementations of
      * LaunchWithURI/LaunchDefaultWithFile.
      *

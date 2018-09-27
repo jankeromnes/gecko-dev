@@ -5,39 +5,39 @@
  *
  * Author 2014-2015, Yury Strozhevsky <www.strozhevsky.com>.
  *
- * Redistribution and use in source and binary forms, with or without modification, 
+ * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, 
+ * 1. Redistributions of source code must retain the above copyright notice,
  *    this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
  *
- * 3. Neither the name of the copyright holder nor the names of its contributors 
- *    may be used to endorse or promote products derived from this software without 
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software without
  *    specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
- * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
- * OF SUCH DAMAGE. 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE.
  *
  */
 (
 function(in_window)
 {
     //**************************************************************************************
-    // #region Declaration of global variables 
+    // #region Declaration of global variables
     //**************************************************************************************
-    // #region "org" namespace 
+    // #region "org" namespace
     if(typeof in_window.org === "undefined")
         in_window.org = {};
     else
@@ -45,9 +45,9 @@ function(in_window)
         if(typeof in_window.org !== "object")
             throw new Error("Name org already exists and it's not an object");
     }
-    // #endregion 
+    // #endregion
 
-    // #region "org.pkijs" namespace 
+    // #region "org.pkijs" namespace
     if(typeof in_window.org.pkijs === "undefined")
         in_window.org.pkijs = {};
     else
@@ -55,9 +55,9 @@ function(in_window)
         if(typeof in_window.org.pkijs !== "object")
             throw new Error("Name org.pkijs already exists and it's not an object" + " but " + (typeof in_window.org.pkijs));
     }
-    // #endregion 
+    // #endregion
 
-    // #region "org.pkijs.schema" namespace 
+    // #region "org.pkijs.schema" namespace
     if(typeof in_window.org.pkijs.schema === "undefined")
         in_window.org.pkijs.schema = {};
     else
@@ -65,9 +65,9 @@ function(in_window)
         if(typeof in_window.org.pkijs.schema !== "object")
             throw new Error("Name org.pkijs.schema already exists and it's not an object" + " but " + (typeof in_window.org.pkijs.schema));
     }
-    // #endregion 
+    // #endregion
 
-    // #region "org.pkijs.schema.x509" namespace 
+    // #region "org.pkijs.schema.x509" namespace
     if(typeof in_window.org.pkijs.schema.x509 === "undefined")
         in_window.org.pkijs.schema.x509 = {};
     else
@@ -75,15 +75,15 @@ function(in_window)
         if(typeof in_window.org.pkijs.schema.x509 !== "object")
             throw new Error("Name org.pkijs.schema.x509 already exists and it's not an object" + " but " + (typeof in_window.org.pkijs.schema.x509));
     }
-    // #endregion 
+    // #endregion
 
-    // #region "local" namespace 
+    // #region "local" namespace
     var local = {};
-    // #endregion   
+    // #endregion
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "Time" type 
+    // #region ASN.1 schema definition for "Time" type
     //**************************************************************************************
     in_window.org.pkijs.schema.TIME =
     function(input_names, input_optional)
@@ -100,7 +100,7 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region ASN.1 schema definition for X.509 v3 certificate (RFC5280)
     //**************************************************************************************
@@ -232,9 +232,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for X.509 CRL (Certificate Revocation List)(RFC5280)  
+    // #region ASN.1 schema definition for X.509 CRL (Certificate Revocation List)(RFC5280)
     //**************************************************************************************
     local.tbsCertList =
     function()
@@ -343,9 +343,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for PKCS#10 certificate request 
+    // #region ASN.1 schema definition for PKCS#10 certificate request
     //**************************************************************************************
     local.CertificationRequestInfo =
     function()
@@ -417,7 +417,7 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region ASN.1 schema definition for PKCS#8 private key bag
     //**************************************************************************************
@@ -460,9 +460,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "GeneralName" type 
+    // #region ASN.1 schema definition for "GeneralName" type
     //**************************************************************************************
     local.BuiltInStandardAttributes =
     function(optional_flag)
@@ -812,9 +812,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "AlgorithmIdentifier" type 
+    // #region ASN.1 schema definition for "AlgorithmIdentifier" type
     //**************************************************************************************
     in_window.org.pkijs.schema.ALGORITHM_IDENTIFIER =
     function()
@@ -835,7 +835,7 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region ASN.1 schema definition for "RSAPublicKey" type (RFC3447)
     //**************************************************************************************
@@ -858,9 +858,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "OtherPrimeInfo" type (RFC3447) 
+    // #region ASN.1 schema definition for "OtherPrimeInfo" type (RFC3447)
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.OtherPrimeInfo =
     function()
@@ -883,7 +883,7 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region ASN.1 schema definition for "RSAPrivateKey" type (RFC3447)
     //**************************************************************************************
@@ -932,7 +932,7 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region ASN.1 schema definition for "RSASSA-PSS-params" type (RFC3447)
     //**************************************************************************************
@@ -986,9 +986,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "SubjectPublicKeyInfo" type 
+    // #region ASN.1 schema definition for "SubjectPublicKeyInfo" type
     //**************************************************************************************
     in_window.org.pkijs.schema.PUBLIC_KEY_INFO =
     function()
@@ -1008,9 +1008,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "Attribute" type 
+    // #region ASN.1 schema definition for "Attribute" type
     //**************************************************************************************
     in_window.org.pkijs.schema.ATTRIBUTE =
     function()
@@ -1039,9 +1039,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "AttributeTypeAndValue" type 
+    // #region ASN.1 schema definition for "AttributeTypeAndValue" type
     //**************************************************************************************
     in_window.org.pkijs.schema.ATTR_TYPE_AND_VALUE =
     function()
@@ -1065,9 +1065,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "RelativeDistinguishedName" type 
+    // #region ASN.1 schema definition for "RelativeDistinguishedName" type
     //**************************************************************************************
     in_window.org.pkijs.schema.RDN =
     function()
@@ -1097,9 +1097,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "Extension" type 
+    // #region ASN.1 schema definition for "Extension" type
     //**************************************************************************************
     in_window.org.pkijs.schema.EXTENSION =
     function()
@@ -1125,7 +1125,7 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region ASN.1 schema definition for "Extensions" type (sequence of many Extension)
     //**************************************************************************************
@@ -1149,15 +1149,15 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "AuthorityKeyIdentifier" type of extension 
+    // #region ASN.1 schema definition for "AuthorityKeyIdentifier" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.AuthorityKeyIdentifier =
     function()
     {
         // AuthorityKeyIdentifier OID ::= 2.5.29.35
-        // 
+        //
         //AuthorityKeyIdentifier ::= SEQUENCE {
         //    keyIdentifier             [0] KeyIdentifier           OPTIONAL,
         //    authorityCertIssuer       [1] GeneralNames            OPTIONAL,
@@ -1203,9 +1203,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "PrivateKeyUsagePeriod" type of extension 
+    // #region ASN.1 schema definition for "PrivateKeyUsagePeriod" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.PrivateKeyUsagePeriod =
     function()
@@ -1242,9 +1242,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "IssuerAltName" and "SubjectAltName" types of extension 
+    // #region ASN.1 schema definition for "IssuerAltName" and "SubjectAltName" types of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.AltName =
     function()
@@ -1267,9 +1267,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "SubjectDirectoryAttributes" type of extension 
+    // #region ASN.1 schema definition for "SubjectDirectoryAttributes" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.SubjectDirectoryAttributes =
     function()
@@ -1291,9 +1291,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "GeneralSubtree" type 
+    // #region ASN.1 schema definition for "GeneralSubtree" type
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.GeneralSubtree =
     function()
@@ -1331,9 +1331,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "NameConstraints" type of extension 
+    // #region ASN.1 schema definition for "NameConstraints" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.NameConstraints =
     function()
@@ -1379,9 +1379,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "BasicConstraints" type of extension 
+    // #region ASN.1 schema definition for "BasicConstraints" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.BasicConstraints =
     function()
@@ -1409,9 +1409,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "PolicyQualifierInfo" type 
+    // #region ASN.1 schema definition for "PolicyQualifierInfo" type
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.PolicyQualifierInfo =
     function()
@@ -1437,9 +1437,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "PolicyInformation" type 
+    // #region ASN.1 schema definition for "PolicyInformation" type
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.PolicyInformation =
     function()
@@ -1470,9 +1470,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "CertificatePolicies" type of extension 
+    // #region ASN.1 schema definition for "CertificatePolicies" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.CertificatePolicies =
     function()
@@ -1494,7 +1494,7 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region ASN.1 schema definition for "PolicyMapping" type
     //**************************************************************************************
@@ -1516,9 +1516,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "PolicyMappings" type of extension 
+    // #region ASN.1 schema definition for "PolicyMappings" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.PolicyMappings =
     function()
@@ -1540,9 +1540,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "PolicyConstraints" type of extension 
+    // #region ASN.1 schema definition for "PolicyConstraints" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.PolicyConstraints =
     function()
@@ -1580,9 +1580,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "ExtKeyUsage" type of extension 
+    // #region ASN.1 schema definition for "ExtKeyUsage" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.ExtKeyUsage =
     function()
@@ -1606,7 +1606,7 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region ASN.1 schema definition for "DistributionPoint" type
     //**************************************************************************************
@@ -1700,9 +1700,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "CRLDistributionPoints" type of extension 
+    // #region ASN.1 schema definition for "CRLDistributionPoints" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.CRLDistributionPoints =
     function()
@@ -1724,7 +1724,7 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
     // #region ASN.1 schema definition for "AccessDescription" type
     //**************************************************************************************
@@ -1746,9 +1746,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "AuthorityInfoAccess" and "SubjectInfoAccess" types of extension 
+    // #region ASN.1 schema definition for "AuthorityInfoAccess" and "SubjectInfoAccess" types of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.InfoAccess =
     function()
@@ -1772,9 +1772,9 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region ASN.1 schema definition for "IssuingDistributionPoint" type of extension 
+    // #region ASN.1 schema definition for "IssuingDistributionPoint" type of extension
     //**************************************************************************************
     in_window.org.pkijs.schema.x509.IssuingDistributionPoint =
     function()
@@ -1883,7 +1883,7 @@ function(in_window)
         }));
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
 }
 )(typeof exports !== "undefined" ? exports : window);

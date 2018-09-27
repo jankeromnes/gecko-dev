@@ -17,10 +17,10 @@ class TableHeaderElement(TokenElement):
     """
     An element containing opening and closing single and double square brackets, strings and dots and ending with
     a newline.
-    
+
     Raises InvalidElementError.
     """
-    
+
     def __init__(self, _tokens):
         TokenElement.__init__(self, _tokens, common.TYPE_MARKUP)
         self._names = tuple(toml2py.deserialize(token) for token in self._tokens if token.type in _name_types)

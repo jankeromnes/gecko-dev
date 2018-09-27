@@ -22,8 +22,8 @@ speechoffice0dB.pcm
 speech_and_misc_NB.pcm
 speech_and_misc_WB.pcm
 testM4.pcm
-testM4D_rev.pcm  
-testM4D.pcm  
+testM4D_rev.pcm
+testM4D.pcm
 testfile.pcm
 tone_cisco.pcm
 tone_cisco_long.pcm

@@ -46,7 +46,7 @@ performance.now = (function() {
 // arguments are functions that will be invoked before and after
 // running the benchmark, but the running time of these functions will
 // not be accounted for in the benchmark score.
-function Benchmark(name, doWarmup, doDeterministic, deterministicIterations, 
+function Benchmark(name, doWarmup, doDeterministic, deterministicIterations,
                    run, setup, tearDown, rmsResult, minIterations) {
   this.name = name;
   this.doWarmup = doWarmup;
@@ -55,7 +55,7 @@ function Benchmark(name, doWarmup, doDeterministic, deterministicIterations,
   this.run = run;
   this.Setup = setup ? setup : function() { };
   this.TearDown = tearDown ? tearDown : function() { };
-  this.rmsResult = rmsResult ? rmsResult : null; 
+  this.rmsResult = rmsResult ? rmsResult : null;
   this.minIterations = minIterations ? minIterations : 32;
 }
 
@@ -99,8 +99,8 @@ BenchmarkSuite.suites = [];
 BenchmarkSuite.version = '9';
 
 
-// Defines global benchsuite running mode that overrides benchmark suite 
-// behavior. Intended to be set by the benchmark driver. Undefined 
+// Defines global benchsuite running mode that overrides benchmark suite
+// behavior. Intended to be set by the benchmark driver. Undefined
 // values here allow a benchmark to define behaviour itself.
 BenchmarkSuite.config = {
   doWarmup: undefined,
@@ -289,20 +289,20 @@ BenchmarkSuite.prototype.NotifyError = function(error) {
 // average time it takes to run a single iteration.
 BenchmarkSuite.prototype.RunSingleBenchmark = function(benchmark, data) {
   var config = BenchmarkSuite.config;
-  var doWarmup = config.doWarmup !== undefined 
-                 ? config.doWarmup 
+  var doWarmup = config.doWarmup !== undefined
+                 ? config.doWarmup
                  : benchmark.doWarmup;
-  var doDeterministic = config.doDeterministic !== undefined 
-                        ? config.doDeterministic 
+  var doDeterministic = config.doDeterministic !== undefined
+                        ? config.doDeterministic
                         : benchmark.doDeterministic;
 
   function Measure(data) {
     var elapsed = 0;
     var start = new Date();
-  
+
   // Run either for 1 second or for the number of iterations specified
   // by minIterations, depending on the config flag doDeterministic.
-    for (var i = 0; (doDeterministic ? 
+    for (var i = 0; (doDeterministic ?
       i<benchmark.deterministicIterations : elapsed < 1000); i++) {
       benchmark.run();
       elapsed = new Date() - start;

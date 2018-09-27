@@ -30,29 +30,29 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "wb" ]
     OUTDIR=../dataqa"$PLATFORM"
     mkdir -p $OUTDIR
     rm -f $OUTDIR/*
-    
+
     idx=0
     RATE=10000
     FRAMESIZE=30
-    
+
 
     for file in $INFILES # loop over all input files
       do
-      
+
       echo "Input file: " $file
       echo "-----------------------------------"
       echo "Instantaneous with RATE " $RATE ", and Frame-size " $FRAMESIZE
       $ISAC -I -B $RATE -FL $FRAMESIZE -FS 16 $INDIR/"$file" $OUTDIR/i_"$FRAMESIZE"_"$RATE"_"$file" >> $LOGFILE
       echo
-      
+
       name="${CHANNELLIST[$idx]}"
-      echo "Adaptive with channel file: " $name 
-      
+      echo "Adaptive with channel file: " $name
+
       $ISAC -B $INDIR/${CHANNELLIST[$idx]} -FS 16 $INDIR/"$file" $OUTDIR/a_${name%.*}_"$file" >> $LOGFILE
-      
+
       echo
       echo
-      
+
 #     alternate between 30 & 60 ms.
       if [ $FRAMESIZE -eq 30 ]
 	  then
@@ -60,7 +60,7 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "wb" ]
       else
 	  FRAMESIZE=30
       fi
-      
+
 #     rate between 10000 to 32000 bits/sec
       if [ $RATE -le 30000 ]
 	  then
@@ -68,22 +68,22 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "wb" ]
       else
 	  let "RATE=10000"
       fi
-      
+
 #     there are only three channel file
       if [ $idx -ge 2 ]; then
 	  idx=0
       else
 	  let "idx=idx+1"
       fi
-      
+
     done
 
     idx=0
-    
+
 #   loop over the subset of input files
-    for file in $SUBSET 
+    for file in $SUBSET
       do
-      
+
       if [ $idx -eq 0 ]; then
 	  $ISAC -B $INDIR/${CHANNELLIST[0]} -FL 30 -FIXED_FL -FS 16 $INDIR/"$file" $OUTDIR/a30_"$file" >> $LOGFILE
 	  idx=1
@@ -109,27 +109,27 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "swb" ]
     echo >> $LOGFILE
 
     echo STARTING TO TEST SUPER-WIDEBAND
-    
+
     INFILES=$(cat InputFilesSWB.txt)
     INDIR=../data/origswb
     OUTDIR=../dataqaswb"$PLATFORM"
     mkdir -p $OUTDIR
     rm -f $OUTDIR/*
-    
+
     for file in $INFILES
       do
       echo
       echo "Input file: " $file
       echo "--------------------------------"
-      for RATE in 12000 20000 32000 38000 45000 50000 56000  
+      for RATE in 12000 20000 32000 38000 45000 50000 56000
 	do
-	
+
 	echo "Rate " $RATE
 	$ISAC -I -B $RATE -FL 30 -FS 32 $INDIR/"$file" $OUTDIR/swb_"$RATE"_"$file" >> $LOGFILE
 	echo
-	
+
       done
-  
+
     done
 fi
 
@@ -171,7 +171,7 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     echo
     echo "-- Now Enforce 60 ms frame size with the same bottleneck"
     echo "There should not be any 30 ms frame"
-    echo 
+    echo
     $ISAC -B 32000 -FL 60 -FIXED_FL -FS 16 ../data/orig/speech_and_misc_WB.pcm \
 	../FrameSizeLim"$PLATFORM"/APITest_"$idx".pcm >> $LOGFILE_API
     let "idx=idx+1"
@@ -188,14 +188,14 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     echo
     echo
     echo "-- No Limit, frame-size 60 ms, WIDEBAND"
-    echo 
+    echo
     $ISAC -I -B 32000 -FL 60 -FS 16                ../data/orig/speech_and_misc_WB.pcm \
 	../PayloadLim"$PLATFORM"/APITest_"$idx".pcm >> $LOGFILE_API
     let "idx=idx+1"
     echo
     echo
     echo "-- Payload-size limit of 250, frame-size 60 ms, WIDEBAND"
-    echo 
+    echo
     $ISAC -I -B 32000 -FL 60 -FS 16 -MAX 250       ../data/orig/speech_and_misc_WB.pcm \
 	../PayloadLim"$PLATFORM"/APITest_"$idx".pcm >> $LOGFILE_API
     let "idx=idx+1"
@@ -206,20 +206,20 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     $ISAC -I -B 32000 -FL 60 -FS 16 -MAXRATE 33000 ../data/orig/speech_and_misc_WB.pcm \
 	../PayloadLim"$PLATFORM"/APITest_"$idx".pcm >> $LOGFILE_API
     let "idx=idx+1"
-    echo 
+    echo
     echo "________________________________________________________"
     echo
     echo
 
     echo "-- No Limit, frame-size 30 ms, WIDEBAND"
-    echo 
+    echo
     $ISAC -I -B 32000 -FL 30 -FS 16                ../data/orig/speech_and_misc_WB.pcm \
 	../PayloadLim"$PLATFORM"/APITest_"$idx".pcm >> $LOGFILE_API
     let "idx=idx+1"
     echo
-    echo    
+    echo
     echo "-- Payload-size limit of 130, frame-size 30 ms, WIDEBAND"
-    echo 
+    echo
     $ISAC -I -B 32000 -FL 30 -FS 16 -MAX 130       ../data/orig/speech_and_misc_WB.pcm \
 	../PayloadLim"$PLATFORM"/APITest_"$idx".pcm >> $LOGFILE_API
     let "idx=idx+1"
@@ -275,7 +275,7 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     echo "________________________________________________________"
     echo
     echo
-  
+
     echo "-- No limit for 56 kbps, 30 ms, SUPER-WIDEBAND, 16 kHz"
     echo
     $ISAC -I -B 56000 -FL 30 -FS 32                ../data/origswb/jstest_32.pcm \
@@ -302,7 +302,7 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     echo
     echo
     echo
-    
+
     echo "                                    Test Trans-Coding"
     echo "========================================================================================"
     mkdir -p ../Transcoding"$PLATFORM"
@@ -316,7 +316,7 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     let "idx=idx+1"
     echo
     echo
-    
+
     echo "-- 32 kbps trans-coding to 20 kbps, 30 ms, WIDEBAND"
     echo
     $ISAC -I -B 32000 -FL 30 -FS 16  -T 20000  ../Transcoding"$PLATFORM"/APITest_32T20.pcm \
@@ -334,13 +334,13 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     let "idx=idx+1"
     echo
     echo
-    
+
     echo "-- 45 kbps trans-coding to 38 kbps, 30 ms, SUPER-WIDEBAND"
     echo
     $ISAC -I -B 45000 -FL 30 -FS 32  -T 38000  ../Transcoding"$PLATFORM"/APITest_45T38.pcm \
 	../data/origswb/jstest_32.pcm ../Transcoding"$PLATFORM"/APITest_"$idx".pcm >> $LOGFILE_API
     let "idx=idx+1"
- 
+
     echo
     echo
     echo "-- 20 kbps, 30 ms, SUPER-WIDEBAND"
@@ -351,7 +351,7 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
 
     echo
     echo
-    
+
     echo "-- 45 kbps trans-coding to 20 kbps, 30 ms, SUPER-WIDEBAND"
     echo
     $ISAC -I -B 45000 -FL 30 -FS 32  -T 20000  ../Transcoding"$PLATFORM"/APITest_45T20.pcm \
@@ -368,7 +368,7 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     let "idx=idx+1"
     echo
     echo
-    
+
     echo "-- 56 kbps trans-coding to 50 kbps, 30 ms, SUPER-WIDEBAND"
     echo
     $ISAC -I -B 56000 -FL 30 -FS 32  -T 50000  ../Transcoding"$PLATFORM"/APITest_56T50.pcm \
@@ -376,7 +376,7 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     let "idx=idx+1"
     echo
     echo
-    
+
     echo "-- 56 kbps trans-coding to 20 kbps, 30 ms, SUPER-WIDEBAND"
     echo
     $ISAC -I -B 56000 -FL 30 -FS 32  -T 20000 ../Transcoding"$PLATFORM"/APITest_56T20.pcm \
@@ -386,10 +386,10 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     echo "________________________________________________________"
     echo
     echo
-    echo 
     echo
     echo
-    
+    echo
+
     echo "                                         Test FEC"
     echo "========================================================================================"
     mkdir -p ../FEC"$PLATFORM"
@@ -402,14 +402,14 @@ if  [ "$#" -eq 0 ] || [ "$1" = "all" ] || [ "$1" = "API" ]
     let "idx=idx+1"
     echo
     echo
-    
+
     echo "-- 32 kbps, 60 ms, WIDEBAND, 10% packet loss"
     $ISAC -I -B 32000 -FL 60 -FS 16 -PL 10 ../data/orig/speech_and_misc_WB.pcm \
 	../FEC"$PLATFORM"/APITest_PL10_WB60.pcm >> $LOGFILE_API
     let "idx=idx+1"
     echo
     echo
-    
+
     echo "-- 32 kbps with transcoding to 20 kbps, 30 ms, SUPER-WIDEBAND, 10% packet loss"
     $ISAC -I -B 32000 -FL 30 -FS 32 -PL 10 -T 20000 ../FEC"$PLATFORM"/APITest_PL10_SWB_8kHz_T20.pcm \
 	../data/origswb/jstest_32.pcm ../FEC"$PLATFORM"/APITest_PL10_SWB_8kHz.pcm >> $LOGFILE_API

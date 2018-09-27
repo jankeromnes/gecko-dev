@@ -1,4 +1,4 @@
-#!/usr/bin/perl 
+#!/usr/bin/perl
 # Copyright (C) 2016 and later: Unicode, Inc. and others.
 # License & terms of use: http://www.unicode.org/copyright.html
 #*
@@ -61,11 +61,11 @@ unless(@ARGV > 0) {
 }
 
 #$headername = "uren".substr($ARGV[0], 6, index(".", $ARGV[0])-7).".h";
-    
+
 $HEADERDEF = uc($headername);  # this is building the constant for #define
 $HEADERDEF =~ s/\./_/;
 
-    
+
     open HEADER, ">$headername"; # opening a header file
 
 #We will print our copyright here + warnings
@@ -168,7 +168,7 @@ for(;@ARGV; shift(@ARGV)) {
 	        ##  DON'T match    ...  (   foo::bar ...   want :: to be to the left of paren
                 ## icu::CharString::~CharString(void) -> CharString
                 @CppName = split(/::/); ## remove scope stuff
-                
+
                 if(@CppName>1) {
                     ## MessageFormat virtual table -> MessageFormat
                     if(! ($CppName[0] =~ /icu/ )) {
@@ -208,7 +208,7 @@ for(;@ARGV; shift(@ARGV)) {
                 print STDERR "$ARGV[0]: Skipped typeinfo $_\n";
             } elsif ( /operator\+/ ) {
                 print STDERR "$ARGV[0]: Skipped ignored function $_\n";
-            } else { # This is regular C function 
+            } else { # This is regular C function
                 &verbose( "C func: $_\n");
                 @funcname = split(/[\(\s+]/);
                 $CFuncs{$funcname[0]}++;
@@ -251,7 +251,7 @@ sub verbose {
 sub printHelpMsgAndExit {
     print STDERR <<"EndHelpText";
 Usage: $0 [OPTIONS] LIBRARY_FILES
-  Options: 
+  Options:
     -v - verbose
     -h - help
     -o - output file name (defaults to 'urename.h'

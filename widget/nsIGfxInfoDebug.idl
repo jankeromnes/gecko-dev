@@ -12,7 +12,7 @@ interface nsIGfxInfoDebug : nsISupports
 {
   void spoofVendorID(in DOMString aVendorID);
   void spoofDeviceID(in DOMString aDeviceID);
-  
+
   void spoofDriverVersion(in DOMString aDriverVersion);
 
   void spoofOSVersion(in unsigned long aVersion);

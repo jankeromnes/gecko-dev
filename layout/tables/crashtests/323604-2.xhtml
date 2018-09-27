@@ -5,9 +5,9 @@
 
 var HTML_NS = "http://www.w3.org/1999/xhtml";
 
-function foo() { 
+function foo() {
   var table = document.getElementById("table");
-  var newRow = document.createElementNS(HTML_NS, 'tr');  
+  var newRow = document.createElementNS(HTML_NS, 'tr');
   table.insertBefore(newRow, document.getElementById('lastrow'));
 }
 
@@ -31,7 +31,7 @@ doc = document;
     <col></col>
     <td rowspan="2">TD</td>
   </tr>
-  
+
   <tr id="lastrow">
     <td width="50%">TD</td>
   </tr>

@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -33,42 +33,42 @@ class BasicBlock {
         this._successors = [];
         this._predecessors = [];
     }
-    
+
     get index() { return this._index; }
     get size() { return this._insts.length; }
-    
+
     [Symbol.iterator]()
     {
         return this._insts[Symbol.iterator]();
     }
-    
+
     at(index)
     {
         if (index >= this._insts.length)
             throw new Error("Out of bounds access");
         return this._insts[index];
     }
-    
+
     get(index)
     {
         if (index < 0 || index >= this._insts.length)
             return null;
         return this._insts[index];
     }
-    
+
     get last()
     {
         return this._insts[this._insts.length - 1];
     }
-    
+
     get insts() { return this._insts; }
-    
+
     append(inst) { this._insts.push(inst); }
-    
+
     get numSuccessors() { return this._successors.length; }
     successor(index) { return this._successors[index]; }
     get successors() { return this._successors; }
-    
+
     successorBlock(index) { return this._successors[index].block; }
     get successorBlocks()
     {
@@ -79,7 +79,7 @@ class BasicBlock {
                     return target[property].block;
                 return target[property];
             },
-            
+
             set(target, property, value) {
                 if (typeof property == "string"
                     && (property | 0) == property) {
@@ -88,23 +88,23 @@ class BasicBlock {
                         value, oldValue ? oldValue.frequency : Normal);
                     return;
                 }
-                
+
                 target[property] = value;
             }
         });
     }
-    
+
     get numPredecessors() { return this._predecessors.length; }
     predecessor(index) { return this._predecessors[index]; }
     get predecessors() { return this._predecessors; }
-    
+
     get frequency() { return this._frequency; }
 
     toString()
     {
         return "#" + this._index;
     }
-    
+
     get headerString()
     {
         let result = "";
@@ -113,7 +113,7 @@ class BasicBlock {
             result += "  Predecessors: " + this._predecessors.join(", ") + "\n";
         return result;
     }
-    
+
     get footerString()
     {
         let result = "";
@@ -121,7 +121,7 @@ class BasicBlock {
             result += "  Successors: " + this._successors.join(", ") + "\n";
         return result;
     }
-    
+
     toStringDeep()
     {
         let result = "";

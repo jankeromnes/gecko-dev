@@ -208,7 +208,7 @@ UNAPPLY_TESTS_CSS = {
         { 'id':         'S_SPANs:td:lt-1_SR',
           'desc':       'Selection oblique right; Italicize "text-decoration:line-through"',
           'pad':        'foo<span style="text-decoration:line-through">[bar</span>]baz' },
-                
+
         { 'id':         'S_SPANc:s-1_SW',
           'desc':       'Unapply "strike-through" on interited CSS style',
           'checkClass': True,

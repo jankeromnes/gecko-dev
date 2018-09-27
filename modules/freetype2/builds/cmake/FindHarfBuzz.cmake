@@ -60,7 +60,7 @@ endif ()
 
 include(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(
-    harfbuzz 
+    harfbuzz
         REQUIRED_VARS HARFBUZZ_INCLUDE_DIRS HARFBUZZ_LIBRARIES
         VERSION_VAR HARFBUZZ_VERSION)
 
@@ -69,7 +69,7 @@ mark_as_advanced(
     HARFBUZZ_LIBRARIES
 )
 
-# Allows easy linking as in 
+# Allows easy linking as in
 #   target_link_libraries(freetype PRIVATE Harfbuzz::Harfbuzz)
 if (NOT CMAKE_VERSION VERSION_LESS 3.1)
     if (HARFBUZZ_FOUND AND NOT TARGET Harfbuzz::Harfbuzz)

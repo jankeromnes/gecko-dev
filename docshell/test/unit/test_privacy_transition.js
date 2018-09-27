@@ -8,7 +8,7 @@ var observer = {
       return this;
     throw Cr.NS_ERROR_NO_INTERFACE;
   },
-  
+
   privateModeChanged: function(enabled) {
     gNotifications++;
   }

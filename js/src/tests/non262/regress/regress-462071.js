@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
   for (let i of [{}, 0, 0, {}, 0, {}, 0]) { }
 

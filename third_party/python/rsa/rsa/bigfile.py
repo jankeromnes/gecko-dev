@@ -44,7 +44,7 @@ from rsa._compat import byte
 
 def encrypt_bigfile(infile, outfile, pub_key):
     '''Encrypts a file, writing it to 'outfile' in VARBLOCK format.
-    
+
     :param infile: file-like object to read the cleartext from
     :param outfile: file-like object to write the crypto in VARBLOCK format to
     :param pub_key: :py:class:`rsa.PublicKey` to encrypt with
@@ -69,7 +69,7 @@ def encrypt_bigfile(infile, outfile, pub_key):
 
 def decrypt_bigfile(infile, outfile, priv_key):
     '''Decrypts an encrypted VARBLOCK file, writing it to 'outfile'
-    
+
     :param infile: file-like object to read the crypto in VARBLOCK format from
     :param outfile: file-like object to write the cleartext to
     :param priv_key: :py:class:`rsa.PrivateKey` to decrypt with
@@ -78,7 +78,7 @@ def decrypt_bigfile(infile, outfile, priv_key):
 
     if not isinstance(priv_key, key.PrivateKey):
         raise TypeError('Private key required, but got %r' % priv_key)
-    
+
     for block in varblock.yield_varblocks(infile):
         cleartext = pkcs1.decrypt(block, priv_key)
         outfile.write(cleartext)

@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" 
+<svg xmlns="http://www.w3.org/2000/svg"
      onload="setTimeout(boom, 30);"
      class="reftest-wait">
-     
+
 <script style="display: none" type="text/javascript">
 <![CDATA[
 
@@ -12,10 +12,10 @@ function boom()
 
   var newGrad = document.createElementNS("http://www.w3.org/2000/svg", "radialGradient");
   newGrad.setAttribute("gradientUnits", "userSpaceOnUse");
-  newGrad.setAttribute("id", "grad"); 
-  
+  newGrad.setAttribute("id", "grad");
+
   document.documentElement.appendChild(newGrad);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

@@ -20,7 +20,7 @@ SharedStub:
         mov     %i0, %o0               ! the original 'this'
         add     %fp, 0x7ff + 136, %o2  ! previous stack top adjusted to the first argument slot (beyond 'this')
 
-! save off the original incoming parameters that arrived in 
+! save off the original incoming parameters that arrived in
 ! registers, the ABI guarantees the space for us to do this
         stx     %i1, [%fp + 0x7ff + 136]
         stx     %i2, [%fp + 0x7ff + 144]

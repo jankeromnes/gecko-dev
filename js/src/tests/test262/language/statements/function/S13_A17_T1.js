@@ -16,7 +16,7 @@ try{
 	$ERROR("#1.1: var __result = __func() lead to throwing exception");
 } catch(e) {
   if ((e instanceof TypeError) !== true) {
-    $ERROR('#1.2: func should throw a TypeError  Actual: ' + (e));  
+    $ERROR('#1.2: func should throw a TypeError  Actual: ' + (e));
   }
 }
 //

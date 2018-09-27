@@ -3,13 +3,13 @@
    --><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>@media and @-moz-document testcases</title>
-  
+
 <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
 <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css">
 
 <style type="text/css">
 a {
-    font-weight: bold; 
+    font-weight: bold;
 }
   #pink {
     color: pink;
@@ -89,11 +89,11 @@ pre {
 <style type="text/css">
 @media screen {
   @-moz-document regexp(".*test_bug511909.*"){
-      @media screen { 
+      @media screen {
         @-moz-document regexp(".*test_bug511909.*"){
           @media screen {
             #me {
-             color: blue; 
+             color: blue;
             }
           }
         }
@@ -147,11 +147,11 @@ pre {
 <pre>default style
 </pre>
 <a id="pink">This line should be pink</a><br>
-  
+
 <a id="green">This line should be green</a><br>
-  
+
 <a id="blue">This line should be blue</a><br>
-  
+
 <pre>@-moz-document {...}
 </pre>
 <a id="d">This line should be pink</a><br>

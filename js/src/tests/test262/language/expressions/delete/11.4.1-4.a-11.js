@@ -15,7 +15,7 @@ flags: [noStrict]
 function testcase() {
   function foo(a,b)
   {
-    return (delete arguments.callee); 
+    return (delete arguments.callee);
   }
   var d = delete arguments.callee;
 

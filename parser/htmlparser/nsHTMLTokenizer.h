@@ -7,7 +7,7 @@
 /**
  * MODULE NOTES:
  * @update  gess 4/1/98
- * 
+ *
  */
 
 #ifndef __NSHTMLTOKENIZER

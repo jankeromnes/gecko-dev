@@ -5,14 +5,14 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=291377
 -->
 <head>
   <title>Test for Bug 291377</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=291377">Mozilla Bug 291377</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -28,7 +28,7 @@ try {
   is(e.name, "NS_ERROR_MALFORMED_URI", "Unexpected exception name");
   is(e.message, "", "Should not have a message for this case");
   isnot(e.result, 0, "Should have a result");
-  
+
   is(e.result, SpecialPowers.Cr.NS_ERROR_MALFORMED_URI);
 }
 

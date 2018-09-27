@@ -3,7 +3,7 @@
 
 /*---
 esid: sec-intl.getcanonicallocales
-description: Intl.getCanonicalLocales.length. 
+description: Intl.getCanonicalLocales.length.
 info: |
   8.2.1 Intl.getCanonicalLocales (locales)
   1. Let ll be ? CanonicalizeLocaleList(locales).

@@ -22,5 +22,5 @@ try
 catch(e)
 {
   actual = e.name + ':' + e.lineNumber;
-} 
+}
 reportCompare(expect, actual, summary);

@@ -14,15 +14,15 @@
 const PKIX_StdVars zeroStdVars;
 
 PKIX_Error*
-PKIX_DoThrow(PKIX_StdVars * stdVars, PKIX_ERRORCLASS errClass, 
+PKIX_DoThrow(PKIX_StdVars * stdVars, PKIX_ERRORCLASS errClass,
              PKIX_ERRORCODE errCode, PKIX_ERRORCLASS overrideClass,
              void *plContext)
 {
-    if (!pkixErrorReceived && !pkixErrorResult && pkixErrorList) { 
-        pkixTempResult = PKIX_List_GetItem(pkixErrorList, 0, 
+    if (!pkixErrorReceived && !pkixErrorResult && pkixErrorList) {
+        pkixTempResult = PKIX_List_GetItem(pkixErrorList, 0,
                          (PKIX_PL_Object**)&pkixReturnResult,
-                                           plContext); 
-    } else { 
+                                           plContext);
+    } else {
         pkixTempResult = (PKIX_Error*)pkix_Throw(errClass, myFuncName, errCode,
                                                  overrideClass, pkixErrorResult,
                                                  &pkixReturnResult, plContext);

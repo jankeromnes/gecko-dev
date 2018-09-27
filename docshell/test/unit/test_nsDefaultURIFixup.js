@@ -75,7 +75,7 @@ add_task(function test_unset_pref_fixes_typos() {
     Assert.equal(result, item.fixed);
   }
 });
-  
+
 // Make sure we don't do anything when the pref is explicitly
 // set to false.
 add_task(function test_false_pref_keeps_typos() {

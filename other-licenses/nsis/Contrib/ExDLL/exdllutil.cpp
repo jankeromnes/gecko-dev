@@ -33,7 +33,7 @@ static TCHAR * __stdcall getuservariable(const int varnum)
 
 static void __stdcall setuservariable(const int varnum, const TCHAR *var)
 {
-	if (var != NULL && varnum >= 0 && varnum < __INST_LAST) 
+	if (var != NULL && varnum >= 0 && varnum < __INST_LAST)
 		lstrcpy(g_variables + varnum*g_stringsize, var);
 }
 

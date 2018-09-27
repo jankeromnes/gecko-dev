@@ -553,7 +553,7 @@ QUERYSTATE_TESTS = {
           'desc':       'query the "justifyright" state',
           'pad':        '<span class="jr">foo[bar]baz</span>',
           'expected':   True },
-          
+
         { 'id':         'JR_MYJR-1-SI',
           'desc':       'query the "justifyright" state',
           'pad':        '<myjr>foo[bar]baz</myjr>',
@@ -569,7 +569,7 @@ QUERYSTATE_TESTS_CSS = {
   'checkAttrs':   False,
   'checkStyle':   False,
   'styleWithCSS': True,
-  
+
   'Proposed':     QUERYSTATE_TESTS['Proposed']
 }
 

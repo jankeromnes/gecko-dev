@@ -16,7 +16,7 @@ info: |
     LiteralPropertyName : StringLiteral
       Return the String value whose code units are the SV of the StringLiteral.
 
-    
+
     // This test file tests the following early error:
     Static Semantics: Early Errors
 

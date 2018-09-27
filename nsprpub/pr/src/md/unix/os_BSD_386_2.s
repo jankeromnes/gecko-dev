@@ -23,7 +23,7 @@ _setjmp:
 		movl	%edi,20(%eax)
 		movl	$0,%eax
 		ret
- 
+
 .globl _longjmp
 .align 2
 _longjmp:

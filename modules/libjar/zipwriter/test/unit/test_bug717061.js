@@ -72,7 +72,7 @@ function run_test()
   var source = do_get_file(DATA_DIR + "test_bug717061.html");
   var comparer = new BinaryComparer(do_get_file(DATA_DIR + "test_bug717061.gz"),
                                     comparer_callback);
-  
+
   // Prepare the stream converter
   var scs = Cc["@mozilla.org/streamConverters;1"].
             getService(Ci.nsIStreamConverterService);

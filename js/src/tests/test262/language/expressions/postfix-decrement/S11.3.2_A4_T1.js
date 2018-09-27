@@ -9,7 +9,7 @@ description: Type(x) is boolean primitive or Boolean object
 
 //CHECK#1
 var x = true;
-var y = x--; 
+var y = x--;
 if (y !== 1) {
   $ERROR('#1: var x = true; var y = x--; y === 1. Actual: ' + (y));
 }

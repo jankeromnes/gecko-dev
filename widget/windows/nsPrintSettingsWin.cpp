@@ -133,13 +133,13 @@ const short kPaperSizeUnits[] = {
   nsIPrintSettings::kPaperSizeMillimeters, // DMPAPER_PENV_10_ROTATED
 };
 
-NS_IMPL_ISUPPORTS_INHERITED(nsPrintSettingsWin, 
-                            nsPrintSettings, 
+NS_IMPL_ISUPPORTS_INHERITED(nsPrintSettingsWin,
+                            nsPrintSettings,
                             nsIPrintSettingsWin)
 
 /** ---------------------------------------------------
  *  See documentation in nsPrintSettingsWin.h
- *	@update 
+ *	@update
  */
 nsPrintSettingsWin::nsPrintSettingsWin() :
   nsPrintSettings(),
@@ -152,7 +152,7 @@ nsPrintSettingsWin::nsPrintSettingsWin() :
 
 /** ---------------------------------------------------
  *  See documentation in nsPrintSettingsWin.h
- *	@update 
+ *	@update
  */
 nsPrintSettingsWin::nsPrintSettingsWin(const nsPrintSettingsWin& aPS)
   : mDevMode(nullptr)
@@ -162,7 +162,7 @@ nsPrintSettingsWin::nsPrintSettingsWin(const nsPrintSettingsWin& aPS)
 
 /** ---------------------------------------------------
  *  See documentation in nsPrintSettingsWin.h
- *	@update 
+ *	@update
  */
 nsPrintSettingsWin::~nsPrintSettingsWin()
 {
@@ -429,7 +429,7 @@ nsPrintSettingsWin::CopyToNative(DEVMODEW* aDevMode)
 }
 
 //-------------------------------------------
-nsresult 
+nsresult
 nsPrintSettingsWin::_Clone(nsIPrintSettings **_retval)
 {
   RefPtr<nsPrintSettingsWin> printSettings = new nsPrintSettingsWin(*this);
@@ -464,7 +464,7 @@ nsPrintSettingsWin& nsPrintSettingsWin::operator=(const nsPrintSettingsWin& rhs)
 }
 
 //-------------------------------------------
-nsresult 
+nsresult
 nsPrintSettingsWin::_Assign(nsIPrintSettings *aPS)
 {
   nsPrintSettingsWin *psWin = static_cast<nsPrintSettingsWin*>(aPS);

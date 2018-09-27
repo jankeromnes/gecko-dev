@@ -2213,7 +2213,7 @@ pkix_pl_LdapDefaultClient_MakeAndFilter(
                 currentFilter->selector = LDAP_EQUALFILTER_TYPE;
                 component = (*componentP)->attrType;
                 currentFilter->filter.equalFilter.attrType.data = component;
-                currentFilter->filter.equalFilter.attrType.len = 
+                currentFilter->filter.equalFilter.attrType.len =
                         PL_strlen((const char *)component);
                 component = (*componentP)->attrValue;
                 currentFilter->filter.equalFilter.attrValue.data = component;
@@ -2430,7 +2430,7 @@ cleanup:
  * FUNCTION: PKIX_PL_LdapDefaultClient_AbandonRequest
  * DESCRIPTION:
  *
- *  This function creates and sends an LDAP-protocol "Abandon" message to the 
+ *  This function creates and sends an LDAP-protocol "Abandon" message to the
  *  server connected to the LdapDefaultClient pointed to by "client".
  *
  * PARAMETERS:

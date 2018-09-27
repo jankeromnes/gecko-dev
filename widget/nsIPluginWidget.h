@@ -17,7 +17,7 @@ class nsIPluginInstanceOwner;
  */
 class NS_NO_VTABLE nsIPluginWidget : public nsISupports
 {
- public: 
+ public:
 
   NS_DECLARE_STATIC_IID_ACCESSOR(NS_IPLUGINWIDGET_IID)
 

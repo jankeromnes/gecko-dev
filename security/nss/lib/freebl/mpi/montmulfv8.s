@@ -1,4 +1,4 @@
-!  
+!
 ! This Source Code Form is subject to the terms of the Mozilla Public
 ! License, v. 2.0. If a copy of the MPL was not distributed with this
 ! file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -81,10 +81,10 @@ TwoToMinus32:
 !   46		      !double upper32(double);
 !   47		      !double lower32(double, double);
 !   48		      !double mod(double, double, double);
-!   50		      !void i16_to_d16_and_d32x4(const double * /*1/(2^16)*/, 
+!   50		      !void i16_to_d16_and_d32x4(const double * /*1/(2^16)*/,
 !   51		      !			  const double * /* 2^16*/,
 !   52		      !			  const double * /* 0 */,
-!   53		      !			  double *       /*result16*/, 
+!   53		      !			  double *       /*result16*/,
 !   54		      !			  double *       /* result32 */,
 !   55		      !			  float *  /*source - should be unsigned int*
 !   56		      !		          	       converted to float* */);
@@ -292,7 +292,7 @@ TwoToMinus32:
 /* 0x01e4	     */		sll	%o7,2,%g4
 /* 0x01e8	     */		and	%g2,%g3,%g2
 /* 0x01ec	     */		st	%g2,[%i0+%g4]
-/* 0x01f0	     */		ret	! Result = 
+/* 0x01f0	     */		ret	! Result =
 /* 0x01f4	     */		restore	%g0,%g0,%g0
 /* 0x01f8	   0 */		.type	conv_d16_to_i32,2
 /* 0x01f8	     */		.size	conv_d16_to_i32,(.-conv_d16_to_i32)
@@ -403,7 +403,7 @@ TwoToMinus32:
 /* 0x0128	     */		ble,a,pt	%icc,.L900000211
 /* 0x012c	     */		ld	[%g4],%f1
                        .L77000140:
-/* 0x0130	     */		retl	! Result = 
+/* 0x0130	     */		retl	! Result =
 /* 0x0134	     */		nop
 /* 0x0138	   0 */		.type	conv_i32_to_d32,2
 /* 0x0138	     */		.size	conv_i32_to_d32,(.-conv_i32_to_d32)
@@ -495,7 +495,7 @@ TwoToMinus32:
 /* 0x00d4	     */		ld	[%sp+92],%f3
 /* 0x00d8	     */		fsubd	%f2,%f0,%f0
 /* 0x00dc	     */		std	%f0,[%g3-8]
-/* 0x00e0	     */		ret	! Result = 
+/* 0x00e0	     */		ret	! Result =
 /* 0x00e4	     */		restore	%g0,%g0,%g0
                        .L77000154:
 /* 0x00e8	 154 */		ld	[%o7],%o0
@@ -520,7 +520,7 @@ TwoToMinus32:
 /* 0x0130	     */		ble,a,pt	%icc,.L900000311
 /* 0x0134	     */		ld	[%o7],%o0
                        .L77000150:
-/* 0x0138	     */		ret	! Result = 
+/* 0x0138	     */		ret	! Result =
 /* 0x013c	     */		restore	%g0,%g0,%g0
 /* 0x0140	   0 */		.type	conv_i32_to_d16,2
 /* 0x0140	     */		.size	conv_i32_to_d16,(.-conv_i32_to_d16)
@@ -548,7 +548,7 @@ TwoToMinus32:
 
 !  157		      !   }
 !  158		      !}
-!  161		      !void conv_i32_to_d32_and_d16(double *d32, double *d16, 
+!  161		      !void conv_i32_to_d32_and_d16(double *d32, double *d16,
 !  162		      !			     unsigned int *i32, int len)
 !  163		      !{
 !  164		      !int i = 0;
@@ -771,7 +771,7 @@ TwoToMinus32:
 /* 0x02f8	     */		bl,a,pt	%icc,.L900000416
 /* 0x02fc	     */		ld	[%o0],%f3
                        .L77000164:
-/* 0x0300	     */		ret	! Result = 
+/* 0x0300	     */		ret	! Result =
 /* 0x0304	     */		restore	%g0,%g0,%g0
 /* 0x0308	   0 */		.type	conv_i32_to_d32_and_d16,2
 /* 0x0308	     */		.size	conv_i32_to_d32_and_d16,(.-conv_i32_to_d32_and_d16)
@@ -905,7 +905,7 @@ TwoToMinus32:
 /* 0x0128	 201 */		sub	%g1,%g2,%g1
 /* 0x012c	     */		add	%g1,%g5,%g1
 /* 0x0130	 204 */		and	%g1,%g3,%g2
-/* 0x0134	     */		retl	! Result = 
+/* 0x0134	     */		retl	! Result =
 /* 0x0138	     */		st	%g2,[%o4-4]
                        .L77000199:
 /* 0x013c	 203 */		ld	[%o4],%g1
@@ -923,7 +923,7 @@ TwoToMinus32:
 /* 0x0168	     */		ble,a,pt	%icc,.L900000509
 /* 0x016c	     */		ld	[%o4],%g1
                        .L77000191:
-/* 0x0170	     */		retl	! Result = 
+/* 0x0170	     */		retl	! Result =
 /* 0x0174	     */		nop
 /* 0x0178	   0 */		.type	adjust_montf_result,2
 /* 0x0178	     */		.size	adjust_montf_result,(.-adjust_montf_result)
@@ -1021,7 +1021,7 @@ TwoToMinus32:
 !  252		      !	     pdtj[2*i]+=pdm1[i]*m2j+pdn[i]*digit;
 !  253		      !	   }
 !  254		      ! 	 if((jj==30)) {cleanup(dt,j/2+1,2*nlen+1); jj=0;}
-!  255		      !	 
+!  255		      !
 !  256		      !	 digit=mod(lower32(b,Zero)*dn0,TwoToMinus16,TwoTo16);
 !  257		      !       }
 !  258		      !   }
@@ -1424,7 +1424,7 @@ TwoToMinus32:
 	ldd [%i2+104],%f34
 	ldd [%i2+112],%f58
 
-	ldd [%i4+8],%f28	
+	ldd [%i4+8],%f28
 	ldd [%i4+104],%f38
 	ldd [%i4+112],%f60
 
@@ -1702,7 +1702,7 @@ TwoToMinus32:
 /* 0x09b8	     */		and	%o5,%g2,%g2
 /* 0x09bc	     */		and	%o7,%g3,%g4
 
-!  317		      ! adjust_montf_result(result,nint,nlen); 
+!  317		      ! adjust_montf_result(result,nint,nlen);
 
 /* 0x09c0	 317 */		or	%g0,-1,%o5
 /* 0x09c4	 311 */		sllx	%g2,16,%g2
@@ -1793,7 +1793,7 @@ TwoToMinus32:
 /* 0x0afc	     */		add	%o0,%o5,%o0
 /* 0x0b00	     */		and	%o0,%o4,%o1
 /* 0x0b04	     */		st	%o1,[%o3-4]
-/* 0x0b08	     */		ret	! Result = 
+/* 0x0b08	     */		ret	! Result =
 /* 0x0b0c	     */		restore	%g0,%g0,%g0
                        .L77000289:
 /* 0x0b10	     */		ld	[%o3],%o0
@@ -1811,7 +1811,7 @@ TwoToMinus32:
 /* 0x0b3c	     */		ble,a,pt	%icc,.L900000647
 /* 0x0b40	     */		ld	[%o3],%o0
                        .L77000224:
-/* 0x0b44	     */		ret	! Result = 
+/* 0x0b44	     */		ret	! Result =
 /* 0x0b48	     */		restore	%g0,%g0,%g0
 /* 0x0b4c	   0 */		.type	mont_mulf_noconv,2
 /* 0x0b4c	     */		.size	mont_mulf_noconv,(.-mont_mulf_noconv)

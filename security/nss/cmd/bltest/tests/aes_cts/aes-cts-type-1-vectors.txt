@@ -1,7 +1,7 @@
 # Raeburn                     Standards Track                    [Page 12]
-# 
+#
 # RFC 3962             AES Encryption for Kerberos 5         February 2005
-# 
+#
 # Some test vectors for CBC with ciphertext stealing, using an initial
 # vector of all-zero.
 #

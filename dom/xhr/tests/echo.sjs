@@ -16,6 +16,6 @@ function handleRequest(request, response)
   var bodyAvail;
   while ((bodyAvail = bodyStream.available()) > 0)
     body += String.fromCharCode.apply(null, bodyStream.readByteArray(bodyAvail));
-  
+
   response.write(body);
 }

@@ -37,10 +37,10 @@ struct CSwitchResult
   bool WithMinus;
   int PostCharIndex;
   UStringVector PostStrings;
-  
+
   CSwitchResult(): ThereIs(false) {};
 };
-  
+
 class CParser
 {
   CSwitchResult *_switches;
@@ -51,7 +51,7 @@ public:
   int StopSwitchIndex;  // NonSwitchStrings[StopSwitchIndex+] are after "--"
   AString ErrorMessage;
   UString ErrorLine;
-  
+
   CParser();
   ~CParser();
   bool ParseStrings(const CSwitchForm *switchForms, unsigned numSwitches, const UStringVector &commandStrings);

@@ -645,7 +645,7 @@ TEST(ExceptionHandlerTest, InstructionPointerMemory) {
   memset(prefix_bytes, 0, sizeof(prefix_bytes));
   memset(suffix_bytes, 0, sizeof(suffix_bytes));
   EXPECT_TRUE(memcmp(bytes, prefix_bytes, sizeof(prefix_bytes)) == 0);
-  EXPECT_TRUE(memcmp(bytes + kOffset, kIllegalInstruction, 
+  EXPECT_TRUE(memcmp(bytes + kOffset, kIllegalInstruction,
                      sizeof(kIllegalInstruction)) == 0);
   EXPECT_TRUE(memcmp(bytes + kOffset + sizeof(kIllegalInstruction),
                      suffix_bytes, sizeof(suffix_bytes)) == 0);
@@ -734,7 +734,7 @@ TEST(ExceptionHandlerTest, InstructionPointerMemoryMinBound) {
 
   uint8_t suffix_bytes[kMemorySize / 2 - sizeof(kIllegalInstruction)];
   memset(suffix_bytes, 0, sizeof(suffix_bytes));
-  EXPECT_TRUE(memcmp(bytes + kOffset, kIllegalInstruction, 
+  EXPECT_TRUE(memcmp(bytes + kOffset, kIllegalInstruction,
                      sizeof(kIllegalInstruction)) == 0);
   EXPECT_TRUE(memcmp(bytes + kOffset + sizeof(kIllegalInstruction),
                      suffix_bytes, sizeof(suffix_bytes)) == 0);

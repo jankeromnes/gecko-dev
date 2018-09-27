@@ -16,16 +16,16 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/interception.h b/security
  #else
  #define MAKE_SERVICE_NAME(service) &Target##service
  #endif
- 
+
  #define ADD_NT_INTERCEPTION(service, id, num_params) \
    AddToPatchedFunctions(kNtdllName, #service, \
                          sandbox::INTERCEPTION_SERVICE_CALL, \
 -                        MAKE_SERVICE_NAME(service), id)
 +                        (void*)MAKE_SERVICE_NAME(service), id)
- 
+
  #define INTERCEPT_NT(manager, service, id, num_params) \
    manager->ADD_NT_INTERCEPTION(service, id, num_params)
- 
+
  // When intercepting the EAT it is important that the patched version of the
  // function not call any functions imported from system libraries unless
  // |TargetServices::InitCalled()| returns true, because it is only then that
@@ -35,7 +35,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/interception.h b/security
 -                                 MAKE_SERVICE_NAME(function), id)
 +                                 (void*)MAKE_SERVICE_NAME(function), id)
  #endif  // SANDBOX_EXPORTS
- 
+
  }  // namespace sandbox
- 
+
  #endif  // SANDBOX_SRC_INTERCEPTION_H_

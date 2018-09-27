@@ -24,6 +24,6 @@ function test()
     for (var p in window.Packages)
       ;
   }
- 
+
   reportCompare(expect, actual, summary);
 }

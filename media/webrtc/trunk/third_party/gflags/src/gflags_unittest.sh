@@ -39,7 +39,7 @@
 if [ -z "$1" ]; then
   echo "USAGE: $0 <unittest exe> [top_srcdir] [tmpdir]"
   exit 1
-fi 
+fi
 EXE="$1"
 SRCDIR="${2:-./}"
 TMPDIR="${3:-/tmp/gflags}"

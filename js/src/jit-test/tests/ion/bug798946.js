@@ -4,8 +4,8 @@ var CHARS = "aaa";
 function RandStr() {
   var c = Math.floor(Math.random() * CHARS.length);
 }
-function RandVal() { 
-  return RandBool() ? RandStr() : RandStr(); 
+function RandVal() {
+  return RandBool() ? RandStr() : RandStr();
 }
 function GenerateSpecPermutes(matchVals, resultArray) {
     var maxPermuteBody = (1 << matchVals.length) - 1;

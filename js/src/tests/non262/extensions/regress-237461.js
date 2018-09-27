@@ -19,7 +19,7 @@ function g()
   core.js.init = function()
     {
       var loader = null;
-       
+
       function loader() {}
     };
   return core;

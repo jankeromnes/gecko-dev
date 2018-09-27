@@ -79,9 +79,9 @@ moz_get_debugger()
 		moz_test_binary /bin/which
 		if [ $? -eq 1 ]
 		then
-			dpath=`which ${d}`	
-		else 	
-			dpath=`LC_MESSAGES=C type ${d} | awk '{print $3;}' | sed -e 's/\.$//'`	
+			dpath=`which ${d}`
+		else
+			dpath=`LC_MESSAGES=C type ${d} | awk '{print $3;}' | sed -e 's/\.$//'`
 		fi
 		if [ -x "$dpath" ]
 		then
@@ -124,17 +124,17 @@ moz_debug_program()
 	then
 		moz_test_binary /bin/which
 		if [ $? -eq 1 ]
-		then	
-			debugger=`which $moz_debugger` 
+		then
+			debugger=`which $moz_debugger`
 		else
-			debugger=`LC_MESSAGES=C type $moz_debugger | awk '{print $3;}' | sed -e 's/\.$//'` 
-		fi	
+			debugger=`LC_MESSAGES=C type $moz_debugger | awk '{print $3;}' | sed -e 's/\.$//'`
+		fi
 	else
 		debugger=`moz_get_debugger`
 	fi
-    if [ -x "$debugger" ] 
+    if [ -x "$debugger" ]
     then
-# If you are not using ddd, gdb and know of a way to convey the arguments 
+# If you are not using ddd, gdb and know of a way to convey the arguments
 # over to the prog then add that here- Gagan Saksena 03/15/00
         case `basename $debugger` in
             native-gdb) echo "$debugger $moz_debugger_args --args $prog" ${1+"$@"}
@@ -221,7 +221,7 @@ then
 		MOZ_PROGRAM=$MOZ_DEFAULT_NAME
 	##
 	## Try mozilla-bin
-	## 
+	##
 	elif [ -x "$MOZ_APPRUNNER_NAME" ]
 	then
 		MOZ_PROGRAM=$MOZ_APPRUNNER_NAME
@@ -243,8 +243,8 @@ fi
 ##
 ## Set LD_LIBRARY_PATH
 ##
-## On Solaris we use $ORIGIN (set in RUNPATH) instead of LD_LIBRARY_PATH 
-## to locate shared libraries. 
+## On Solaris we use $ORIGIN (set in RUNPATH) instead of LD_LIBRARY_PATH
+## to locate shared libraries.
 ##
 ## When a shared library is a symbolic link, $ORIGIN will be replaced with
 ## the real path (i.e., what the symbolic link points to) by the runtime
@@ -256,7 +256,7 @@ fi
 ## under dist/bin. To solve the problem, we should rely on LD_LIBRARY_PATH
 ## to locate shared libraries.
 ##
-## Note: 
+## Note:
 ##  We test $MOZ_DIST_BIN/*.so. If any of them is a symbolic link,
 ##  we need to set LD_LIBRARY_PATH.
 ##########################################################################
@@ -272,7 +272,7 @@ moz_should_set_ld_library_path()
 if moz_should_set_ld_library_path
 then
 	LD_LIBRARY_PATH=${MOZ_DIST_BIN}:${MOZ_DIST_BIN}/plugins:${MRE_HOME}${LD_LIBRARY_PATH:+":$LD_LIBRARY_PATH"}
-fi 
+fi
 
 if [ -n "$LD_LIBRARYN32_PATH" ]
 then
@@ -298,8 +298,8 @@ DYLD_LIBRARY_PATH=${MOZ_DIST_BIN}:${MRE_HOME}${DYLD_LIBRARY_PATH:+":$DYLD_LIBRAR
 #
 ## Solaris Xserver(Xsun) tuning - use shared memory transport if available
 if [ "$XSUNTRANSPORT" = "" ]
-then 
-        XSUNTRANSPORT="shmem" 
+then
+        XSUNTRANSPORT="shmem"
         XSUNSMESIZE="512"
         export XSUNTRANSPORT XSUNSMESIZE
 fi

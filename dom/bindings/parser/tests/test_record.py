@@ -36,7 +36,7 @@ def WebIDLTest(parser, harness):
     except Exception,x:
         threw = True
     harness.ok(threw, "Should have thrown because record can't have void as value type.")
- 
+
     parser = parser.reset()
     threw = False
     try:

@@ -391,7 +391,7 @@ cmsPipeline* _cmsCreateGamutCheckPipeline(cmsContext ContextID,
             if (!cmsPipelineInsertStage(Gamut, cmsAT_BEGIN, CLUT)) {
                 cmsPipelineFree(Gamut);
                 Gamut = NULL;
-            } 
+            }
             else {
                 cmsStageSampleCLut16bit(CLUT, GamutSampler, (void*) &Chain, 0);
             }

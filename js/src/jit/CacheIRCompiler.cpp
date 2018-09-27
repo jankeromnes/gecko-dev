@@ -1979,12 +1979,12 @@ CacheIRCompiler::emitGuardAndGetNumberFromString()
             //
             // Use addToStackPtr instead of freeStack as freeStack tracks stack height
             // flow-insensitively, and using it twice would confuse the stack height
-            // tracking. 
+            // tracking.
             masm.addToStackPtr(Imm32(sizeof(double)));
             masm.jump(failure->label());
         }
         masm.bind(&ok);
-        
+
         masm.loadDouble(Address(output.payloadOrValueReg(), 0), FloatReg0);
         masm.boxDouble(FloatReg0, output, FloatReg0);
         masm.freeStack(sizeof(double));

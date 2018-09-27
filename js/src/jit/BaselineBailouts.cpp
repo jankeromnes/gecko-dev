@@ -674,7 +674,7 @@ InitFromBailout(JSContext* cx, size_t frameNo,
     // +===============+
 
     JitSpew(JitSpew_BaselineBailouts, "      Unpacking %s:%u:%u", script->filename(),
-                                                                  script->lineno(), 
+                                                                  script->lineno(),
                                                                   script->column());
     JitSpew(JitSpew_BaselineBailouts, "      [BASELINE-JS FRAME]");
 

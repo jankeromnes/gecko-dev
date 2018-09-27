@@ -15,7 +15,7 @@ if ((-1 || 1) !== -1) {
 //CHECK#2
 if ((1 || new Number(0)) !== 1) {
   $ERROR('#2: (1 || new Number(0)) === 1');
-} 
+}
 
 //CHECK#3
 if ((-1 || NaN) !== -1) {

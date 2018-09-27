@@ -165,7 +165,7 @@ main(int argc, char* argv[]) {
     }
     if(argc<0 || options[HELP].doesOccur || options[HELP_QUESTION_MARK].doesOccur) {
         return printHelp(argc, argv);
-        
+
     }
 
     /* get the options values */
@@ -204,7 +204,7 @@ main(int argc, char* argv[]) {
 
     setUnicodeVersion(options[UNICODE_VERSION].value);
     filename = (char* ) uprv_malloc(uprv_strlen(srcDir) + uprv_strlen(inputFileName) + (icuUniDataDir == NULL ? 0 : uprv_strlen(icuUniDataDir)) + 40); /* hopefully this should be enough */
-   
+
     /* prepare the filename beginning with the source dir */
     if(uprv_strchr(srcDir,U_FILE_SEP_CHAR) == NULL && uprv_strchr(srcDir,U_FILE_ALT_SEP_CHAR) == NULL){
         filename[0] = '.';
@@ -213,12 +213,12 @@ main(int argc, char* argv[]) {
     }else{
         uprv_strcpy(filename, srcDir);
     }
-    
+
     basename=filename+uprv_strlen(filename);
     if(basename>filename && *(basename-1)!=U_FILE_SEP_CHAR) {
         *basename++=U_FILE_SEP_CHAR;
     }
-    
+
     /* initialize */
     init();
 
@@ -229,7 +229,7 @@ main(int argc, char* argv[]) {
         fprintf(stderr, "Could not open file %s for reading. Error: %s \n", filename, u_errorName(errorCode));
         return errorCode;
     }
-    
+
     if(options[NORMALIZE].doesOccur){ /* this option might be set by @normalize;; in the source file */
         /* set up directory for NormalizationCorrections.txt */
         uprv_strcpy(filename,icuUniDataDir);
@@ -240,7 +240,7 @@ main(int argc, char* argv[]) {
 
         *basename++=U_FILE_SEP_CHAR;
         uprv_strcpy(basename,NORM_CORRECTIONS_FILE_NAME);
-    
+
         parseNormalizationCorrections(filename,&errorCode);
         if(U_FAILURE(errorCode)){
             fprintf(stderr,"Could not open file %s for reading \n", filename);
@@ -248,7 +248,7 @@ main(int argc, char* argv[]) {
         }
         sprepOptions |= _SPREP_NORMALIZATION_ON;
     }
-    
+
     if(options[CHECK_BIDI].doesOccur){ /* this option might be set by @check-bidi;; in the source file */
         sprepOptions |= _SPREP_CHECK_BIDI_ON;
     }
@@ -311,7 +311,7 @@ normalizationCorrectionsLineFn(void *context,
     }
 
     /* store the mapping */
-    if( version[0] > thisVersion[0] || 
+    if( version[0] > thisVersion[0] ||
         ((version[0]==thisVersion[0]) && (version[1] > thisVersion[1]))
         ){
         storeMapping(code,mapping, length, USPREP_MAP, pErrorCode);
@@ -408,14 +408,14 @@ strprepProfileLineFn(void *context,
 
         /* parse the mapping string */
         length=u_parseCodePoints(map, mapping, sizeof(mapping)/4, pErrorCode);
-        
+
         /* store the mapping */
         storeMapping(code,mapping, length,USPREP_MAP, pErrorCode);
 
     }else{
         *pErrorCode = U_INVALID_FORMAT_ERROR;
     }
-    
+
     if(U_FAILURE(*pErrorCode)) {
         fprintf(stderr, "gensprep error parsing  %s line %s at %s. Error: %s\n",filename,
                fields[0][0],fields[2][0],u_errorName(*pErrorCode));

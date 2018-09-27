@@ -31,4 +31,4 @@ void LinearScaleYUVToRGB32Row(const uint8* y_buf,
   LinearScaleYUVToRGB32Row_C(y_buf, u_buf, v_buf, rgb_buf, width, source_dx);
 }
 
-} 
+}

@@ -270,7 +270,7 @@ static int format_expr( x86_ea_t *ea, char *buf, int len,
                         }
                 }
 
-                if ( ea->disp_size || (! ea->index.name[0] && 
+                if ( ea->disp_size || (! ea->index.name[0] &&
 					! ea->base.name[0] ) )
                 {
                         PRINT_DISPLACEMENT(ea);
@@ -659,7 +659,7 @@ static int format_operand_att( x86_op_t *op, x86_insn_t *insn, char *buf,
                         STRNCATF( buf, "$%s", str, len );
                         break;
 
-                case op_relative_near: 
+                case op_relative_near:
                         STRNCATF( buf, "0x%08X",
                                  (unsigned int)(op->data.sbyte +
                                  insn->addr + insn->size), len );
@@ -682,10 +682,10 @@ static int format_operand_att( x86_op_t *op, x86_insn_t *insn, char *buf,
                         STRNCATF( buf, "$0x%04" PRIX16 ", ", op->data.absolute.segment,
 				len );
 			if (op->datatype == op_descr16) {
-                        	STRNCATF( buf, "$0x%04" PRIX16, 
+                        	STRNCATF( buf, "$0x%04" PRIX16,
 					op->data.absolute.offset.off16, len );
 			} else {
-                        	STRNCATF( buf, "$0x%08" PRIX32, 
+                        	STRNCATF( buf, "$0x%08" PRIX32,
 					op->data.absolute.offset.off32, len );
 			}
                         break;
@@ -753,10 +753,10 @@ static int format_operand_native( x86_op_t *op, x86_insn_t *insn, char *buf,
                         STRNCATF( buf, "$0x%04" PRIX16 ":", op->data.absolute.segment,
 				len );
 			if (op->datatype == op_descr16) {
-                        	STRNCATF( buf, "0x%04" PRIX16, 
+                        	STRNCATF( buf, "0x%04" PRIX16,
 					op->data.absolute.offset.off16, len );
 			} else {
-                        	STRNCATF( buf, "0x%08" PRIX32, 
+                        	STRNCATF( buf, "0x%08" PRIX32,
 					op->data.absolute.offset.off32, len );
 			}
                         break;
@@ -833,15 +833,15 @@ static int format_operand_xml( x86_op_t *op, x86_insn_t *insn, char *buf,
 
                 case op_absolute:
 
-                        STRNCATF( buf, 
+                        STRNCATF( buf,
 				"\t\t<absolute_address segment=\"0x%04" PRIX16 "\"",
                         	op->data.absolute.segment, len );
 
 			if (op->datatype == op_descr16) {
-                        	STRNCATF( buf, "offset=\"0x%04" PRIX16 "\">", 
+                        	STRNCATF( buf, "offset=\"0x%04" PRIX16 "\">",
 					op->data.absolute.offset.off16, len );
 			} else {
-                        	STRNCATF( buf, "offset=\"0x%08" PRIX32 "\">", 
+                        	STRNCATF( buf, "offset=\"0x%08" PRIX32 "\">",
 					op->data.absolute.offset.off32, len );
 			}
 
@@ -849,7 +849,7 @@ static int format_operand_xml( x86_op_t *op, x86_insn_t *insn, char *buf,
                         break;
 
                 case op_expression:
-			
+
 
                         STRNCAT( buf, "\t\t<address_expression>\n", len );
 
@@ -940,10 +940,10 @@ static int format_operand_raw( x86_op_t *op, x86_insn_t *insn, char *buf,
                         STRNCATF( buf, "$0x%04" PRIX16 ":", op->data.absolute.segment,
 				len );
 			if (op->datatype == op_descr16) {
-                        	STRNCATF( buf, "0x%04" PRIX16 "|", 
+                        	STRNCATF( buf, "0x%04" PRIX16 "|",
 					op->data.absolute.offset.off16, len );
 			} else {
-                        	STRNCATF( buf, "0x%08" PRIX32 "|", 
+                        	STRNCATF( buf, "0x%08" PRIX32 "|",
 					op->data.absolute.offset.off32, len );
 			}
 
@@ -1330,7 +1330,7 @@ int x86_format_insn( x86_insn_t *insn, char *buf, int len,
                 /* imm */
 		if ( x86_operand_3rd( insn )) {
                 	STRNCAT( buf, ", ", len );
-        		x86_format_operand( x86_operand_3rd( insn ), 
+        		x86_format_operand( x86_operand_3rd( insn ),
 				str, MAX_OP_STRING, format);
                 	STRNCAT( buf, str, len );
 		}
@@ -1346,7 +1346,7 @@ int x86_format_insn( x86_insn_t *insn, char *buf, int len,
 		 * an imm as the first operand, sometimes as the third... */
                 /* imm */
 		if ( x86_operand_3rd( insn ) ) {
-        		x86_format_operand(x86_operand_3rd( insn ), 
+        		x86_format_operand(x86_operand_3rd( insn ),
 				str, MAX_OP_STRING, format);
                 	STRNCAT( buf, str, len );
 			/* there is always 'dest' operand if there is 'src' */
@@ -1405,21 +1405,21 @@ int x86_format_insn( x86_insn_t *insn, char *buf, int len,
                 /* print operands */
                 /* dest */
 		if ( x86_operand_1st( insn )  ) {
-        		x86_format_operand( x86_operand_1st( insn ), 
+        		x86_format_operand( x86_operand_1st( insn ),
 				str, MAX_OP_STRING, format);
                 	STRNCATF( buf, "%s\t", str, len );
 		}
 
                 /* src */
 		if ( x86_operand_2nd( insn ) ) {
-        		x86_format_operand(x86_operand_2nd( insn ), 
+        		x86_format_operand(x86_operand_2nd( insn ),
 				str, MAX_OP_STRING, format);
                 	STRNCATF( buf, "%s\t", str, len );
 		}
 
                 /* imm */
 		if ( x86_operand_3rd( insn )) {
-        		x86_format_operand( x86_operand_3rd( insn ), 
+        		x86_format_operand( x86_operand_3rd( insn ),
 				str, MAX_OP_STRING, format);
                 	STRNCAT( buf, str, len );
 		}

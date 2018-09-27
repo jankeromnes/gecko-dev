@@ -37,18 +37,18 @@ public:
       ::DeleteCriticalSection(&mCriticalSection);
     }
 
-    /** 
+    /**
      * Enter
-     * @see prmon.h 
+     * @see prmon.h
      **/
     void Enter()
     {
       ::EnterCriticalSection(&mCriticalSection);
     }
 
-    /** 
+    /**
      * Exit
-     * @see prmon.h 
+     * @see prmon.h
      **/
     void Leave()
     {
@@ -70,7 +70,7 @@ private:
  * it leaves scope.
  *
  * MUCH PREFERRED to bare calls to CriticalSection.Enter and Exit.
- */ 
+ */
 class CriticalSectionAutoEnter
 {
 public:
@@ -92,7 +92,7 @@ public:
     {
         mCriticalSection->Leave();
     }
- 
+
 
 private:
     CriticalSectionAutoEnter();

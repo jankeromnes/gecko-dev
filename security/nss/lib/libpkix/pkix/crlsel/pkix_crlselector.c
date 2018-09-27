@@ -459,11 +459,11 @@ pkix_CRLSelector_DefaultMatch(
                 /* check crl dates only for if NIST policies enforced */
                 if (nistPolicyEnabled) {
                         result = PKIX_FALSE;
-                    
+
                         PKIX_CHECK(PKIX_PL_CRL_VerifyUpdateTime
                                    (crl, selDate, &result, plContext),
                                    PKIX_CRLVERIFYUPDATETIMEFAILED);
-                    
+
                         if (result == PKIX_FALSE) {
                                 *pMatch = PKIX_FALSE;
                                 goto cleanup;
@@ -514,7 +514,7 @@ pkix_CRLSelector_DefaultMatch(
                                     PKIX_OBJECTCOMPARATORFAILED);
 
                         if (result == 1) {
-                               PKIX_CRLSELECTOR_DEBUG 
+                               PKIX_CRLSELECTOR_DEBUG
 					(PKIX_CRLMAXNUMBERRANGEMATCHFAILED);
                         	*pMatch = PKIX_FALSE;
 	                        goto cleanup;
@@ -636,7 +636,7 @@ PKIX_CRLSelector_Create(
     PKIX_ENTER(CERTCHAINCHECKER, "PKIX_CrlSelector_Create");
     PKIX_NULLCHECK_ONE(issuer);
 
-    PKIX_CHECK( 
+    PKIX_CHECK(
         PKIX_PL_Cert_GetSubject(issuer, &issuerName, plContext),
         PKIX_CERTGETISSUERFAILED);
 

@@ -18,7 +18,7 @@ assertEq(Object.prototype.toString.call(new Set()), "[object Set]");
 assertEq(Object.keys(Set.prototype).join(), "");
 assertEq(Set.prototype.constructor, Set);
 
-function checkMethod(name, arity) { 
+function checkMethod(name, arity) {
     var desc = Object.getOwnPropertyDescriptor(Set.prototype, name);
     assertEq(desc.enumerable, false);
     assertEq(desc.configurable, true);

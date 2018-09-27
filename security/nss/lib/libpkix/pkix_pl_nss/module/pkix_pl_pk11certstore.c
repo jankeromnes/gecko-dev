@@ -80,7 +80,7 @@ pkix_pl_Pk11CertStore_CheckTrust(
             if (certUsage != certUsageAnyCA &&
                 certUsage != certUsageStatusResponder) {
                 CERTCertificate *nssCert = cert->nssCert;
-                
+
                 if (certUsage == certUsageVerifyCA) {
                     if (nssCert->nsCertType & NS_CERT_TYPE_EMAIL_CA) {
                         trustType = trustEmail;
@@ -90,7 +90,7 @@ pkix_pl_Pk11CertStore_CheckTrust(
                         trustType = trustObjectSigning;
                     }
                 }
-                
+
                 certFlags = SEC_GET_TRUST_FLAGS((&trust), trustType);
                 if ((certFlags & requiredFlags) == requiredFlags) {
                     trusted = PKIX_TRUE;
@@ -278,7 +278,7 @@ pkix_pl_Pk11CertStore_CertQuery(
         certList = NULL;
 
 cleanup:
-        
+
         if (pk11CertList) {
             CERT_DestroyCertList(pk11CertList);
         }
@@ -325,7 +325,7 @@ pkix_pl_Pk11CertStore_ImportCrl(
 
     PKIX_ENTER(CERTSTORE, "pkix_pl_Pk11CertStore_ImportCrl");
     PKIX_NULLCHECK_TWO(store, plContext);
-    
+
     if (!crlList) {
         goto cleanup;
     }
@@ -353,7 +353,7 @@ pkix_pl_Pk11CertStore_ImportCrl(
             PKIX_DECREF(crl);
             continue;
         }
-        cert_CacheCRLByGeneralName(certHandle, derCrl, 
+        cert_CacheCRLByGeneralName(certHandle, derCrl,
                                         crl->derGenName);
         /* Do not check the status. If it is a SECFailure,
          * derCrl is already destroyed. */
@@ -385,7 +385,7 @@ NameCacheHasFetchedCrlInfo(PKIX_PL_Cert *pkixCert,
 
     PKIX_ENTER(CERTSTORE, "ChechCacheHasFetchedCrl");
 
-    reloadDelay = 
+    reloadDelay =
         ((PKIX_PL_NssContext*)plContext)->crlReloadDelay *
                                                 PR_USEC_PER_SEC;
     badCrlInvalDelay =
@@ -521,7 +521,7 @@ pkix_pl_Pk11CertStore_CheckRevByCrl(
             pkixRevStatus = PKIX_RevStatus_Revoked;
         } else if (revStatus == certRevocationStatusValid) {
             pkixRevStatus = PKIX_RevStatus_Success;
-        } 
+        }
     } else {
         pkixErrorResult =
             NameCacheHasFetchedCrlInfo(pkixCert, time, &hasFetchedCrlInCache,
@@ -541,7 +541,7 @@ pkix_pl_Pk11CertStore_CheckRevByCrl(
 cleanup:
     *pStatus = pkixRevStatus;
 
-    PKIX_RETURN(CERTSTORE);    
+    PKIX_RETURN(CERTSTORE);
 }
 
 
@@ -683,7 +683,7 @@ RemovePartitionedDpsFromList(PKIX_List *dpList, PKIX_PL_Date *date,
     if (!dpList || !dpList->length) {
         PKIX_RETURN(CERTSTORE);
     }
-    reloadDelay = 
+    reloadDelay =
         ((PKIX_PL_NssContext*)plContext)->crlReloadDelay *
                                                 PR_USEC_PER_SEC;
     badCrlInvalDelay =
@@ -699,7 +699,7 @@ RemovePartitionedDpsFromList(PKIX_List *dpList, PKIX_PL_Date *date,
     while (dpIndex < dpList->length) {
         SECItem **derDpNames = NULL;
         PKIX_Boolean removeDp = PKIX_FALSE;
-        
+
         PKIX_CHECK(
             PKIX_List_GetItem(dpList, dpIndex, (PKIX_PL_Object **)&dp,
                               plContext),
@@ -741,7 +741,7 @@ RemovePartitionedDpsFromList(PKIX_List *dpList, PKIX_PL_Date *date,
             PKIX_CHECK_ONLY_FATAL(
                 pkix_List_Remove(dpList,(PKIX_PL_Object*)dp,
                                  plContext),
-                PKIX_LISTGETITEMFAILED); 
+                PKIX_LISTGETITEMFAILED);
         } else {
             dpIndex += 1;
         }
@@ -753,7 +753,7 @@ cleanup:
         cert_ReleaseNamedCRLCache(nameCrlCache);
     }
     PKIX_DECREF(dp);
-    
+
     PKIX_RETURN(CERTSTORE);
 }
 
@@ -810,18 +810,18 @@ DownloadCrl(pkix_pl_CrlDp *dp, PKIX_PL_CRL **crl,
                 PORT_SetError(SEC_ERROR_BAD_CRL_DP_URL);
                 break;
             }
-    
+
             PORT_Assert(hostname != NULL);
             PORT_Assert(path != NULL);
 
-            if ((*hcv1->createSessionFcn)(hostname, port, 
+            if ((*hcv1->createSessionFcn)(hostname, port,
                                           &pServerSession) != SECSuccess) {
                 PORT_SetError(SEC_ERROR_BAD_CRL_DP_URL);
                 break;
             }
 
             if ((*hcv1->createFcn)(pServerSession, "http", path, "GET",
-                /* Users with slow connections might not get CRL revocation 
+                /* Users with slow connections might not get CRL revocation
                    checking for certs that use big CRLs because of the timeout
                    We absolutely need code that limits our retry attempts.
                  */
@@ -843,7 +843,7 @@ DownloadCrl(pkix_pl_CrlDp *dp, PKIX_PL_CRL **crl,
             */
             /* we don't want result objects larger than this: */
             if ((*hcv1->trySendAndReceiveFcn)(
-                    pRequestSession, 
+                    pRequestSession,
                     NULL,
                     &myHttpResponseCode,
                     NULL,
@@ -872,7 +872,7 @@ DownloadCrl(pkix_pl_CrlDp *dp, PKIX_PL_CRL **crl,
     if (!myHttpResponseData) {
         /* Generating fake bad CRL to keep track of this dp */
         SECItem derCrl = {siBuffer, (void*)"BadCrl", 6 };
-        
+
         derCrlCopy = SECITEM_DupItem(&derCrl);
         if (!derCrlCopy) {
             PKIX_ERROR(PKIX_ALLOCERROR);
@@ -907,7 +907,7 @@ cleanup:
         PORT_Free(derCrlCopy);
     if (nssCrl)
         SEC_DestroyCrl(nssCrl);
-    if (pRequestSession != NULL) 
+    if (pRequestSession != NULL)
         (*hcv1->freeFcn)(pRequestSession);
     if (pServerSession != NULL)
         (*hcv1->freeSessionFcn)(pServerSession);

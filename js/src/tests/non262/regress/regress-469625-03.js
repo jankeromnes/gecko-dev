@@ -20,7 +20,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function f(x) {
     var [a, b, [c0, c1]] = [x, x, x];
   }

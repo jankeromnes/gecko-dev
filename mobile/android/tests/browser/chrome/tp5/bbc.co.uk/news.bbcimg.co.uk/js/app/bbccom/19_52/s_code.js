@@ -879,7 +879,7 @@ function startMovie(obj) {
         s.eventsTracked[obj.mediaName].event3 = true;
     }
 
-    
+
     //s.Media.monitor(s, obj);
     // Removing this for the moment as there is always at least a one second ad
     /*

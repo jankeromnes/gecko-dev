@@ -21,7 +21,7 @@ info: |
     a. Let m be the String formed by the concatenation of code unit 0x0030
     (DIGIT ZERO), code unit 0x002E (FULL STOP), -(e+1) occurrences of code unit
     0x0030 (DIGIT ZERO), and the String m.
-  14. Return the String that is the concatenation of s and m. 
+  14. Return the String that is the concatenation of s and m.
 ---*/
 
 assert.sameValue((7).toPrecision(1), "7");

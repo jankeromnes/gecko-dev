@@ -242,15 +242,15 @@ _cairo_dwrite_matrix_from_matrix(const cairo_matrix_t *matrix)
 }
 
 /* Helper functions for cairo_dwrite_scaled_glyph_init */
-cairo_int_status_t 
-_cairo_dwrite_scaled_font_init_glyph_metrics 
+cairo_int_status_t
+_cairo_dwrite_scaled_font_init_glyph_metrics
     (cairo_dwrite_scaled_font_t *scaled_font, cairo_scaled_glyph_t *scaled_glyph);
 
-cairo_int_status_t 
+cairo_int_status_t
 _cairo_dwrite_scaled_font_init_glyph_surface
     (cairo_dwrite_scaled_font_t *scaled_font, cairo_scaled_glyph_t *scaled_glyph);
 
-cairo_int_status_t 
+cairo_int_status_t
 _cairo_dwrite_scaled_font_init_glyph_path
     (cairo_dwrite_scaled_font_t *scaled_font, cairo_scaled_glyph_t *scaled_glyph);
 
@@ -354,7 +354,7 @@ _cairo_dwrite_glyph_run_from_glyphs(cairo_glyph_t *glyphs,
     run->isSideways = FALSE;
 
     if (scaled_font->mat.xy == 0 && scaled_font->mat.yx == 0 &&
-	scaled_font->mat.xx == scaled_font->base.font_matrix.xx && 
+	scaled_font->mat.xx == scaled_font->base.font_matrix.xx &&
 	scaled_font->mat.yy == scaled_font->base.font_matrix.yy) {
 	// Fast route, don't actually use a transform but just
 	// set the correct font size.
@@ -591,7 +591,7 @@ _cairo_dwrite_scaled_show_glyphs(void			*scaled_font,
 	    //XXX: we need to set the clip region here
 
 	status = (cairo_int_status_t)_cairo_dwrite_show_glyphs_on_surface (surface, op, pattern,
-									  glyphs, num_glyphs, 
+									  glyphs, num_glyphs,
 									  (cairo_scaled_font_t*)scaled_font, NULL);
 
 	return status;
@@ -612,7 +612,7 @@ _cairo_dwrite_scaled_show_glyphs(void			*scaled_font,
     	IDWriteGlyphRunAnalysis *analysis;
 
 	if (dwritesf->mat.xy == 0 && dwritesf->mat.yx == 0 &&
-	    dwritesf->mat.xx == dwritesf->base.font_matrix.xx && 
+	    dwritesf->mat.xx == dwritesf->base.font_matrix.xx &&
 	    dwritesf->mat.yy == dwritesf->base.font_matrix.yy) {
 
 	    for (int i = 0; i < num_glyphs; i++) {
@@ -677,7 +677,7 @@ _cairo_dwrite_scaled_show_glyphs(void			*scaled_font,
 
 	analysis->CreateAlphaTexture(DWRITE_TEXTURE_CLEARTYPE_3x1, &r, surface, width * height * 3);
 
-	cairo_image_surface_t *mask_surface = 
+	cairo_image_surface_t *mask_surface =
 	    (cairo_image_surface_t*)cairo_image_surface_create(CAIRO_FORMAT_ARGB32, width, height);
 
 	cairo_surface_flush(&mask_surface->base);
@@ -719,8 +719,8 @@ _cairo_dwrite_scaled_show_glyphs(void			*scaled_font,
 }
 
 /* cairo_dwrite_scaled_glyph_init helper function bodies */
-cairo_int_status_t 
-_cairo_dwrite_scaled_font_init_glyph_metrics(cairo_dwrite_scaled_font_t *scaled_font, 
+cairo_int_status_t
+_cairo_dwrite_scaled_font_init_glyph_metrics(cairo_dwrite_scaled_font_t *scaled_font,
 					     cairo_scaled_glyph_t *scaled_glyph)
 {
     UINT16 charIndex = (UINT16)_cairo_scaled_glyph_index (scaled_glyph);
@@ -769,7 +769,7 @@ _cairo_dwrite_scaled_font_init_glyph_metrics(cairo_dwrite_scaled_font_t *scaled_
 class GeometryRecorder : public IDWriteGeometrySink
 {
 public:
-    GeometryRecorder(cairo_path_fixed_t *aCairoPath) 
+    GeometryRecorder(cairo_path_fixed_t *aCairoPath)
 	: mCairoPath(aCairoPath) {}
 
     // IUnknown interface
@@ -807,7 +807,7 @@ public:
     {
 	return;
     }
-    
+
     cairo_fixed_t GetFixedX(const D2D1_POINT_2F &point)
     {
 	unsigned int control_word;
@@ -823,21 +823,21 @@ public:
     }
 
     IFACEMETHODIMP_(void) BeginFigure(
-	D2D1_POINT_2F startPoint, 
-	D2D1_FIGURE_BEGIN figureBegin) 
+	D2D1_POINT_2F startPoint,
+	D2D1_FIGURE_BEGIN figureBegin)
     {
 	mStartPoint = startPoint;
-	cairo_status_t status = _cairo_path_fixed_move_to(mCairoPath, 
+	cairo_status_t status = _cairo_path_fixed_move_to(mCairoPath,
 							  GetFixedX(startPoint),
 							  GetFixedY(startPoint));
     }
 
-    IFACEMETHODIMP_(void) EndFigure(    
-	D2D1_FIGURE_END figureEnd) 
+    IFACEMETHODIMP_(void) EndFigure(
+	D2D1_FIGURE_END figureEnd)
     {
 	if (figureEnd == D2D1_FIGURE_END_CLOSED) {
 	    cairo_status_t status = _cairo_path_fixed_line_to(mCairoPath,
-							      GetFixedX(mStartPoint), 
+							      GetFixedX(mStartPoint),
 							      GetFixedY(mStartPoint));
 	}
     }
@@ -854,7 +854,7 @@ public:
 							       GetFixedY(beziers[i].point2),
 							       GetFixedX(beziers[i].point3),
 							       GetFixedY(beziers[i].point3));
-	}	
+	}
     }
 
     IFACEMETHODIMP_(void) AddLines(
@@ -862,8 +862,8 @@ public:
 	UINT pointsCount)
     {
 	for (unsigned int i = 0; i < pointsCount; i++) {
-	    cairo_status_t status = _cairo_path_fixed_line_to(mCairoPath, 
-		GetFixedX(points[i]), 
+	    cairo_status_t status = _cairo_path_fixed_line_to(mCairoPath,
+		GetFixedX(points[i]),
 		GetFixedY(points[i]));
 	}
     }
@@ -873,8 +873,8 @@ private:
     D2D1_POINT_2F mStartPoint;
 };
 
-cairo_int_status_t 
-_cairo_dwrite_scaled_font_init_glyph_path(cairo_dwrite_scaled_font_t *scaled_font, 
+cairo_int_status_t
+_cairo_dwrite_scaled_font_init_glyph_path(cairo_dwrite_scaled_font_t *scaled_font,
 					  cairo_scaled_glyph_t *scaled_glyph)
 {
     cairo_path_fixed_t *path;
@@ -899,7 +899,7 @@ _cairo_dwrite_scaled_font_init_glyph_path(cairo_dwrite_scaled_font_t *scaled_fon
 
     /* Now apply our transformation to the drawn path. */
     _cairo_path_fixed_transform(path, &scaled_font->base.ctm);
-    
+
     _cairo_scaled_glyph_set_path (scaled_glyph,
 				  &scaled_font->base,
 				  path);
@@ -939,8 +939,8 @@ _compute_a8_mask (cairo_win32_surface_t *mask_surface)
     return &image8->base;
 }
 
-cairo_int_status_t 
-_cairo_dwrite_scaled_font_init_glyph_surface(cairo_dwrite_scaled_font_t *scaled_font, 
+cairo_int_status_t
+_cairo_dwrite_scaled_font_init_glyph_surface(cairo_dwrite_scaled_font_t *scaled_font,
 					     cairo_scaled_glyph_t	*scaled_glyph)
 {
     cairo_int_status_t status;
@@ -1079,12 +1079,12 @@ cairo_dwrite_font_face_create_for_dwrite_fontface(void* dwrite_font, void* dwrit
     cairo_font_face_t *font_face;
 
     dwriteface->AddRef();
-    
+
     face->dwriteface = dwriteface;
     face->font = NULL;
 
     font_face = (cairo_font_face_t*)face;
-    
+
     _cairo_font_face_init (&((cairo_dwrite_font_face_t*)font_face)->base, &_cairo_dwrite_font_face_backend);
 
     return font_face;
@@ -1163,7 +1163,7 @@ _dwrite_draw_glyphs_to_gdi_surface_gdi(cairo_win32_surface_t *surface,
       renderingState = cairo_d2d_surface_t::TEXT_RENDERING_NO_CLEARTYPE;
       IDWriteBitmapRenderTarget1* rt1;
       rv = rt->QueryInterface(&rt1);
-      
+
       if (SUCCEEDED(rv) && rt1) {
         rt1->SetTextAntialiasMode(DWRITE_TEXT_ANTIALIAS_MODE_GRAYSCALE);
         rt1->Release();
@@ -1188,9 +1188,9 @@ _dwrite_draw_glyphs_to_gdi_surface_gdi(cairo_win32_surface_t *surface,
 	   0, 0,
 	   area.right - area.left, area.bottom - area.top,
 	   surface->dc,
-	   area.left, area.top, 
+	   area.left, area.top,
 	   SRCCOPY | NOMIRRORBITMAP);
-    DWRITE_MEASURING_MODE measureMode; 
+    DWRITE_MEASURING_MODE measureMode;
     switch (renderingState) {
     case cairo_d2d_surface_t::TEXT_RENDERING_GDI_CLASSIC:
     case cairo_d2d_surface_t::TEXT_RENDERING_NO_CLEARTYPE:
@@ -1205,7 +1205,7 @@ _dwrite_draw_glyphs_to_gdi_surface_gdi(cairo_win32_surface_t *surface,
 	   area.left, area.top,
 	   area.right - area.left, area.bottom - area.top,
 	   rt->GetMemoryDC(),
-	   0, 0, 
+	   0, 0,
 	   SRCCOPY | NOMIRRORBITMAP);
     params->Release();
     rt->Release();
@@ -1387,7 +1387,7 @@ _cairo_dwrite_show_glyphs_on_surface(void			*surface,
     run.fontFace = dwriteff->dwriteface;
     run.isSideways = FALSE;
     if (dwritesf->mat.xy == 0 && dwritesf->mat.yx == 0 &&
-	dwritesf->mat.xx == scaled_font->font_matrix.xx && 
+	dwritesf->mat.xx == scaled_font->font_matrix.xx &&
 	dwritesf->mat.yy == scaled_font->font_matrix.yy) {
 
 	for (int i = 0; i < num_glyphs; i++) {
@@ -1419,7 +1419,7 @@ _cairo_dwrite_show_glyphs_on_surface(void			*surface,
 	}
 	run.fontEmSize = 1.0f;
     }
-    
+
     cairo_solid_pattern_t *solid_pattern = (cairo_solid_pattern_t *)source;
     COLORREF color = RGB(((int)solid_pattern->color.red_short) >> 8,
 		((int)solid_pattern->color.green_short) >> 8,

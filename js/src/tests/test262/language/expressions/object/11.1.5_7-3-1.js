@@ -3,9 +3,9 @@
 
 /*---
 info: |
-    Refer 11.1.5; 
+    Refer 11.1.5;
     The production
-    PropertyAssignment : set PropertyName( PropertySetParameterList ) { FunctionBody } 
+    PropertyAssignment : set PropertyName( PropertySetParameterList ) { FunctionBody }
     3.Let desc be the Property Descriptor{[[Set]]: closure, [[Enumerable]]: true, [[Configurable]]: true}
 es5id: 11.1.5_7-3-1
 description: Object literal - property descriptor for set property assignment

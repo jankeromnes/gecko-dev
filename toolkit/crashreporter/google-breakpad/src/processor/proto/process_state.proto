@@ -135,7 +135,7 @@ message ProcessStateProto {
 }
 
 
-// Represents a single frame in a stack  
+// Represents a single frame in a stack
 // See src/google_breakpad/processor/code_module.h
 message StackFrame {
   // Next value: 8

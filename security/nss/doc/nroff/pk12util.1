@@ -454,9 +454,9 @@ Enter a password which will be used to encrypt your keys\&.
 The password should be at least 8 characters long,
 and should contain at least one non\-alphabetic character\&.
 
-Enter new password: 
-Re\-enter password: 
-Enter password for PKCS12 file: 
+Enter new password:
+Re\-enter password:
+Enter password for PKCS12 file:
 pk12util: PKCS12 IMPORT SUCCESSFUL
 .fi
 .if n \{\
@@ -478,8 +478,8 @@ For example:
 .\}
 .nf
 # pk12util \-o certs\&.p12 \-n Server\-Cert \-d sql:/home/my/sharednssdb
-Enter password for PKCS12 file: 
-Re\-enter password: 
+Enter password for PKCS12 file:
+Re\-enter password:
 .fi
 .if n \{\
 .RE
@@ -503,7 +503,7 @@ For example, this prints the default ASCII output:
 .nf
 # pk12util \-l certs\&.p12
 
-Enter password for PKCS12 file: 
+Enter password for PKCS12 file:
 Key(shrouded):
     Friendly Name: Thawte Freemail Member\*(Aqs Thawte Consulting (Pty) Ltd\&. ID
 
@@ -520,7 +520,7 @@ Certificate:
         Issuer: "E=personal\-freemail@thawte\&.com,CN=Thawte Personal Freemail C
             A,OU=Certification Services Division,O=Thawte Consulting,L=Cape T
             own,ST=Western Cape,C=ZA"
-    
+
 .fi
 .if n \{\
 .RE
@@ -540,7 +540,7 @@ file000N\&.der, incrementing the number for every certificate:
 .\}
 .nf
 pk12util \-l test\&.p12 \-r
-Enter password for PKCS12 file: 
+Enter password for PKCS12 file:
 Key(shrouded):
     Friendly Name: Thawte Freemail Member\*(Aqs Thawte Consulting (Pty) Ltd\&. ID
 
@@ -552,7 +552,7 @@ Key(shrouded):
 Certificate    Friendly Name: Thawte Personal Freemail Issuing CA \- Thawte Consulting
 
 Certificate    Friendly Name: Thawte Freemail Member\*(Aqs Thawte Consulting (Pty) Ltd\&. ID
-    
+
 .fi
 .if n \{\
 .RE

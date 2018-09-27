@@ -48,14 +48,14 @@
 
 <refsection>
     <title>Options</title>
-    
+
     <variablelist>
-    
+
     <varlistentry>
         <term><option>-r </option></term>
         <listitem><simpara>For formatted items, dump raw bytes as well</simpara></listitem>
       </varlistentry>
-      
+
       <varlistentry>
         <term><option>-i </option> <replaceable>DER encoded file</replaceable></term>
         <listitem><simpara>Define an input file to use (default is stdin)</simpara></listitem>
@@ -65,10 +65,10 @@
         <term><option>-o </option> <replaceable>output file</replaceable></term>
         <listitem><simpara>Define an output file to use (default is stdout).</simpara></listitem>
       </varlistentry>
-    
+
         </variablelist>
   </refsection>
-  
+
   <refsection id="resources">
     <title>Additional Resources</title>
     <para>NSS is maintained in conjunction with PKI and security-related projects through Mozilla dn Fedora. The most closely-related project is Dogtag PKI, with a project wiki at <ulink url="http://pki.fedoraproject.org/wiki/">PKI Wiki</ulink>. </para>

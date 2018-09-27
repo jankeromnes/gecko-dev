@@ -14,7 +14,7 @@ Expect: var summary = feed.items.queryElementAt(0, Components.interfaces.nsIFeed
 <category domain="foo">bar</category>
 
 <description>
-  &lt;b>test D&amp;eacute;sol&amp;eacute;e&lt;/b> 
+  &lt;b>test D&amp;eacute;sol&amp;eacute;e&lt;/b>
 </description>
 </item>
 </channel>

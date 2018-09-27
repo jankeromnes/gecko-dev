@@ -784,7 +784,7 @@ if test x$enable_debug_mode = xno; then
         [Define if libevent should build without support for a debug mode])
 fi
 
-# check if we should enable verbose debugging 
+# check if we should enable verbose debugging
 if test x$enable_verbose_debug = xyes; then
 	CFLAGS="$CFLAGS -DUSE_DEBUG"
 fi

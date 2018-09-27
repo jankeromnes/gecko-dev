@@ -7,8 +7,8 @@
 <window title="Radio Buttons" width="500" height="600"
         onload="setTimeout(test_radio, 0);"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>  
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/EventUtils.js"></script>  
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/EventUtils.js"></script>
   <script type="application/javascript" src="xul_selectcontrol.js"/>
 
 <radiogroup id="radiogroup"/>
@@ -43,7 +43,7 @@ function test_radio()
   var accessKeyDetails = (navigator.platform.includes("Mac")) ?
                          { altKey : true, ctrlKey : true } :
                          { altKey : true, shiftKey: true };
-  synthesizeKey("t", accessKeyDetails);  
+  synthesizeKey("t", accessKeyDetails);
 
   var radiogroup = $("radiogroup-initwithselected");
   is(document.activeElement, radiogroup, "accesskey focuses radiogroup");
@@ -52,7 +52,7 @@ function test_radio()
   $("radiogroup-initwithvalue").focus();
 
   $("one").disabled = true;
-  synthesizeKey("o", accessKeyDetails);  
+  synthesizeKey("o", accessKeyDetails);
 
   is(document.activeElement, $("radiogroup-initwithvalue"), "accesskey on disabled radio doesn't focus");
   is(radiogroup.selectedItem, $("two"), "accesskey on disabled radio doesn't change selection");

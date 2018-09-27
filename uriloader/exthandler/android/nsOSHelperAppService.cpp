@@ -23,12 +23,12 @@ nsOSHelperAppService::GetMIMEInfoFromOS(const nsACString& aMIMEType,
     RefPtr<nsMIMEInfoAndroid> mimeInfo;
     *aFound = false;
     if (!aMIMEType.IsEmpty())
-        *aFound = 
-            nsMIMEInfoAndroid::GetMimeInfoForMimeType(aMIMEType, 
+        *aFound =
+            nsMIMEInfoAndroid::GetMimeInfoForMimeType(aMIMEType,
                                                       getter_AddRefs(mimeInfo));
     if (!*aFound)
         *aFound =
-            nsMIMEInfoAndroid::GetMimeInfoForFileExt(aFileExt, 
+            nsMIMEInfoAndroid::GetMimeInfoForFileExt(aFileExt,
                                                      getter_AddRefs(mimeInfo));
 
     // Code that calls this requires an object regardless if the OS has
@@ -43,7 +43,7 @@ nsresult
 nsOSHelperAppService::OSProtocolHandlerExists(const char* aScheme,
                                               bool* aExists)
 {
-    *aExists = mozilla::AndroidBridge::Bridge()->GetHandlersForURL(NS_ConvertUTF8toUTF16(aScheme));    
+    *aExists = mozilla::AndroidBridge::Bridge()->GetHandlersForURL(NS_ConvertUTF8toUTF16(aScheme));
     return NS_OK;
 }
 
@@ -58,7 +58,7 @@ nsIHandlerApp*
 nsOSHelperAppService::CreateAndroidHandlerApp(const nsAString& aName,
                                               const nsAString& aDescription,
                                               const nsAString& aPackageName,
-                                              const nsAString& aClassName, 
+                                              const nsAString& aClassName,
                                               const nsACString& aMimeType,
                                               const nsAString& aAction)
 {

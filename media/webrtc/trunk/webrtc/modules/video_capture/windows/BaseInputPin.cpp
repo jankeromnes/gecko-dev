@@ -13,7 +13,7 @@ using namespace std;
 namespace mozilla {
 namespace media {
 
-STDMETHODIMP 
+STDMETHODIMP
 BaseInputPin::QueryInterface(REFIID aIId, void **aInterface)
 {
   if (!aInterface) {

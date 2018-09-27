@@ -64,7 +64,7 @@ public:
       : gfxFontFamily(aName), mDWFamily(aFamily),
         mIsSystemFontFamily(aIsSystemFontFamily), mForceGDIClassic(false) {}
     virtual ~gfxDWriteFontFamily();
-    
+
     void FindStyleVariations(FontInfoData *aFontInfoData = nullptr) final;
 
     void LocalizedName(nsACString& aLocalizedName) final;
@@ -218,7 +218,7 @@ protected:
                                    nsTArray<uint8_t>& aBuffer) override;
 
     virtual gfxFont *CreateFontInstance(const gfxFontStyle *aFontStyle);
-    
+
     nsresult CreateFontFace(
         IDWriteFontFace **aFontFace,
         const gfxFontStyle* aFontStyle = nullptr,
@@ -419,7 +419,7 @@ public:
                                            SlantStyleRange aStyleForEntry,
                                            const uint8_t* aFontData,
                                            uint32_t aLength);
-    
+
     bool GetStandardFamilyName(const nsCString& aFontName,
                                  nsACString& aFamilyName);
 

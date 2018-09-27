@@ -1,14 +1,14 @@
 /*
  * smslib.m
- * 
+ *
  * SMSLib Sudden Motion Sensor Access Library
  * Copyright (c) 2010 Suitable Systems
  * All rights reserved.
- * 
+ *
  * Developed by: Daniel Griscom
  *               Suitable Systems
  *               http://www.suitable.com
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal with the Software without restriction, including
@@ -16,18 +16,18 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * - Redistributions of source code must retain the above copyright notice,
  * this list of conditions and the following disclaimers.
- * 
+ *
  * - Redistributions in binary form must reproduce the above copyright
  * notice, this list of conditions and the following disclaimers in the
  * documentation and/or other materials provided with the distribution.
- * 
+ *
  * - Neither the names of Suitable Systems nor the names of its
  * contributors may be used to endorse or promote products derived from
  * this Software without specific prior written permission.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -72,10 +72,10 @@ typedef struct sensorSpec {
 	int recordSize;				// Size of record to be sent/received
 	axisStruct axes[3];			// Description of three axes (X, Y, Z)
 } sensorSpec;
-	
+
 // Configuration of all known types of sensors. The configurations are
 // tried in order until one succeeds in returning data.
-// All default values are set here, but each axis' zerog and oneg values 
+// All default values are set here, but each axis' zerog and oneg values
 // may be changed to saved (calibrated) values.
 //
 // These values came from SeisMaCalibrate calibration reports. In general I've
@@ -225,7 +225,7 @@ static const sensorSpec sensors[] = {
 	// All MacBook, MacBookPro models. Hardware (at least on early MacBookPro 15")
 	// is Kionix KXM52-1050 three-axis accelerometer chip. Data is at
 	// http://kionix.com/Product-Index/product-index.htm. Specific MB and MBP models
-	// that use this are: 
+	// that use this are:
 	//		MacBook1,1
 	//		MacBook2,1
 	//		MacBook3,1
@@ -335,26 +335,26 @@ int smsStartup(id logObject, SEL logSelector) {
 	kern_return_t result;
 	sms_acceleration accel;
 	int failure_result = SMS_FAIL_MODEL;
-		
+
 	running = NO;
 	debugging = NO;
-	
+
 	NSString *modelName = getModelName();
-	
+
 	LOG_ARG(@"Machine model: %@\n", modelName);
 	LOG_ARG(@"OS X version: %@\n", getOSVersion());
 	LOG_ARG(@"Accelerometer library version: %s\n", SMSLIB_VERSION);
-		
+
 	for (sensorNum = 0; sensorNum < SENSOR_COUNT; sensorNum++) {
-		
+
 		// Set up all specs for this type of sensor
 		serviceName = sensors[sensorNum].name;
 		recordSize = sensors[sensorNum].recordSize;
 		function = sensors[sensorNum].function;
-		
+
 		LOG_3ARG(@"Trying service \"%s\" with selector %d and %d byte record:\n",
 				serviceName, function, recordSize);
-		
+
 		NSString *targetName = [NSString stringWithCString:sensors[sensorNum].model
 												  encoding:NSMacOSRomanStringEncoding];
 		LOG_ARG(@"    Comparing model name to target \"%@\": ", targetName);
@@ -365,10 +365,10 @@ int smsStartup(id logObject, SEL logSelector) {
 			// Don't need to increment failure_result.
 			continue;
 		}
-		
+
 		LOG(@"    Fetching dictionary for service: ");
 		CFMutableDictionaryRef dict = IOServiceMatching(serviceName);
-		
+
 		if (dict) {
 			LOG(@"success.\n");
 		} else {
@@ -378,12 +378,12 @@ int smsStartup(id logObject, SEL logSelector) {
 			}
 			continue;
 		}
-		
+
 		LOG(@"    Getting list of matching services: ");
-		result = IOServiceGetMatchingServices(kIOMasterPortDefault, 
-										 dict, 
+		result = IOServiceGetMatchingServices(kIOMasterPortDefault,
+										 dict,
 										 &iterator);
-		
+
 		if (result == KERN_SUCCESS) {
 			LOG(@"success.\n");
 		} else {
@@ -393,10 +393,10 @@ int smsStartup(id logObject, SEL logSelector) {
 			}
 			continue;
 		}
-		
+
 		LOG(@"    Getting first device in list: ");
-		device = IOIteratorNext(iterator);	
-		
+		device = IOIteratorNext(iterator);
+
 		if (device == 0) {
 			LOG(@"failure.\n");
 			if (failure_result < SMS_FAIL_NO_SERVICES) {
@@ -407,9 +407,9 @@ int smsStartup(id logObject, SEL logSelector) {
 			LOG(@"success.\n");
 			LOG(@"    Opening device: ");
 		}
-		
+
 		result = IOServiceOpen(device, mach_task_self(), 0, &connection);
-		
+
 		if (result != KERN_SUCCESS) {
 			LOG_ARG(@"failure, with return value 0x%x.\n", result);
 			IOObjectRelease(device);
@@ -429,16 +429,16 @@ int smsStartup(id logObject, SEL logSelector) {
 			LOG(@"success.\n");
 		}
 		LOG(@"    Testing device.\n");
-		
+
 		defaultCalibration();
-		
+
 		iRecord = (char*) malloc(recordSize);
 		oRecord = (char*) malloc(recordSize);
-		
+
 		running = YES;
 		result = getData(&accel, true, logObject, logSelector);
 		running = NO;
-		
+
 		if (result) {
 			LOG_ARG(@"    Failure testing device, with result 0x%x.\n", result);
 			free(iRecord);
@@ -462,7 +462,7 @@ int smsStartup(id logObject, SEL logSelector) {
 // Returned data is in the form of 1Hz sine waves, with the X, Y and Z
 // axes 120 degrees out of phase; "calibrated" data has range +/- (1.0/5);
 // "uncalibrated" data has range +/- (256/5). X and Y axes centered on 0.0,
-// Z axes centered on 1 (calibrated) or 256 (uncalibrated). 
+// Z axes centered on 1 (calibrated) or 256 (uncalibrated).
 // Don't use smsGetBufferLength or smsGetBufferData. Always returns SMS_SUCCESS.
 int smsDebugStartup(id logObject, SEL logSelector) {
 	LOG(@"Starting up in debug mode\n");
@@ -473,7 +473,7 @@ int smsDebugStartup(id logObject, SEL logSelector) {
 // Returns the current calibration values.
 void smsGetCalibration(sms_calibration *calibrationRecord) {
 	int x;
-	
+
 	for (x = 0; x < 3; x++) {
 		calibrationRecord->zeros[x] = (debugging ? 0 : zeros[x]);
 		calibrationRecord->onegs[x] = (debugging ? 256 : onegs[x]);
@@ -484,7 +484,7 @@ void smsGetCalibration(sms_calibration *calibrationRecord) {
 // is nil then the current calibration is set from the built-in value table.
 void smsSetCalibration(sms_calibration *calibrationRecord) {
 	int x;
-	
+
 	if (!debugging) {
 		if (calibrationRecord) {
 			for (x = 0; x < 3; x++) {
@@ -600,7 +600,7 @@ void smsGetBufferData(char *buffer) {
 						buffer
 					);
 #endif // __MAC_OS_X_VERSION_MIN_REQUIRED 1050
-	
+
 	if (result != KERN_SUCCESS) {
 		running = NO;
 	}
@@ -611,18 +611,18 @@ void smsGetBufferData(char *buffer) {
 NSString *smsGetCalibrationDescription(void) {
 	BOOL success;
 	NSMutableString *s = [[NSMutableString alloc] init];
-	
+
 	if (debugging) {
 		[s release];
 		return @"Debugging!";
 	}
-	
+
 	[s appendString:@"---- SeisMac Calibration Record ----\n \n"];
-	[s appendFormat:@"Machine model: %@\n", 
+	[s appendFormat:@"Machine model: %@\n",
 		getModelName()];
-	[s appendFormat:@"OS X build: %@\n", 
+	[s appendFormat:@"OS X build: %@\n",
 		getOSVersion()];
-	[s appendFormat:@"SeisMacLib version %s, record %d\n \n", 
+	[s appendFormat:@"SeisMacLib version %s, record %d\n \n",
 		SMSLIB_VERSION, sensorNum];
 	[s appendFormat:@"Using service \"%s\", function index %d, size %d\n \n",
 		serviceName, function, recordSize];
@@ -658,9 +658,9 @@ void smsShutdown(void) {
 BOOL loadCalibration(void) {
 	BOOL thisSuccess, allSuccess;
 	int x;
-	
+
 	prefSynchronize();
-	
+
 	if (prefIntRead(CALIBRATED_NAME, &thisSuccess) && thisSuccess) {
 		// Calibrated. Set all values from saved values.
 		allSuccess = YES;
@@ -672,7 +672,7 @@ BOOL loadCalibration(void) {
 		}
 		return allSuccess;
 	}
-	
+
 	return NO;
 }
 
@@ -683,7 +683,7 @@ static void storeCalibration(void) {
 	for (x = 0; x < 3; x++) {
 		prefFloatWrite(ZERO_NAME(x), zeros[x]);
 		prefFloatWrite(ONEG_NAME(x), onegs[x]);
-	}	
+	}
 	prefSynchronize();
 }
 
@@ -700,7 +700,7 @@ void defaultCalibration(void) {
 // Deletes the stored preferences.
 static void deleteCalibration(void) {
 	int x;
-	
+
 	prefDelete(CALIBRATED_NAME);
 	for (x = 0; x < 3; x++) {
 		prefDelete(ZERO_NAME(x));
@@ -713,8 +713,8 @@ static void deleteCalibration(void) {
 // the success boolean based on, you guessed it, whether it succeeds.
 static float prefFloatRead(NSString *prefName, BOOL *success) {
 	float result = 0.0f;
-	
-	CFPropertyListRef ref = CFPreferencesCopyAppValue((CFStringRef)prefName, 
+
+	CFPropertyListRef ref = CFPreferencesCopyAppValue((CFStringRef)prefName,
 													   APP_ID);
 	// If there isn't such a preference, fail
 	if (ref == NULL) {
@@ -765,10 +765,10 @@ static void prefFloatWrite(NSString *prefName, float prefValue) {
 static int prefIntRead(NSString *prefName, BOOL *success) {
 	Boolean internalSuccess;
 	CFIndex result = CFPreferencesGetAppIntegerValue((CFStringRef)prefName,
-													 APP_ID, 
+													 APP_ID,
 													 &internalSuccess);
 	*success = internalSuccess;
-	
+
 	return result;
 }
 
@@ -796,17 +796,17 @@ int getData(sms_acceleration *accel, int calibrated, id logObject, SEL logSelect
 	IOItemCount iSize = recordSize;
 	IOByteCount oSize = recordSize;
 	kern_return_t result;
-	
+
 	if (running == NO) {
 		return -1;
 	}
-	
+
 	memset(iRecord, 1, iSize);
 	memset(oRecord, 0, oSize);
-	
-	LOG_2ARG(@"    Querying device (%u, %d): ", 
+
+	LOG_2ARG(@"    Querying device (%u, %d): ",
 			 sensors[sensorNum].function, sensors[sensorNum].recordSize);
-	
+
 #if __MAC_OS_X_VERSION_MIN_REQUIRED  >= 1050
 	const size_t InStructSize = recordSize;
 	size_t OutStructSize = recordSize;
@@ -833,7 +833,7 @@ int getData(sms_acceleration *accel, int calibrated, id logObject, SEL logSelect
 		return result;
 	} else {
 		LOG(@"succeeded.\n");
-		
+
 		accel->x = getAxis(0, calibrated);
 		accel->y = getAxis(1, calibrated);
 		accel->z = getAxis(2, calibrated);
@@ -851,7 +851,7 @@ float getAxis(int which, int calibrated) {
 	float oneg = onegs[which];
 	// Storage for value to be returned
 	int value = 0;
-	
+
 	// Although the values in the returned record should have the proper
 	// endianness, we still have to get it into the proper end of value.
 #if (BYTE_ORDER == BIG_ENDIAN)
@@ -862,9 +862,9 @@ float getAxis(int which, int calibrated) {
 	// On Intel processors
 	memcpy(&value, &oRecord[indx], size);
 #endif
-	
+
 	value = signExtend(value, size);
-	
+
 	if (calibrated) {
 		// Scale and shift for zero.
 		return ((float)(value - zerog)) / oneg;
@@ -899,13 +899,13 @@ NSString *getModelName(void) {
 	size_t len = sizeof(model);
 	int name[2] = {CTL_HW, HW_MODEL};
 	NSString *result;
-	
+
 	if (sysctl(name, 2, &model, &len, NULL, 0) == 0) {
 		result = [NSString stringWithFormat:@"%s", model];
 	} else {
 		result = @"";
 	}
-	
+
 	return result;
 }
 
@@ -915,7 +915,7 @@ NSString *getOSVersion(void) {
 		@"/System/Library/CoreServices/SystemVersion.plist"];
 	NSString *versionString = [dict objectForKey:@"ProductVersion"];
 	NSString *buildString = [dict objectForKey:@"ProductBuildVersion"];
-	NSString *wholeString = [NSString stringWithFormat:@"%@ (build %@)", 
+	NSString *wholeString = [NSString stringWithFormat:@"%@ (build %@)",
 		versionString, buildString];
 	return wholeString;
 }
@@ -935,4 +935,4 @@ float fakeData(NSTimeInterval time) {
 	double mag = exp(-(time - (secs - secsMod3)) * 2);
 	return sin(angle) * mag;
 }
-	
+

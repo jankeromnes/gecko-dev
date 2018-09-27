@@ -171,7 +171,7 @@ fuzzy(0-1,0-2203) == rgba16-5551.bmp rgba16-5551.png
 # BMP: bihsize=124, 127 x 64, bpp=0, compression=4, colors=0
 # BMP: bihsize=124, 127 x 64, bpp=0, compression=5, colors=0
 # "My attempt to make BMP files with embedded JPEG and PNG images. These are
-# not likely to be supported by much of anything (they’re intended for 
+# not likely to be supported by much of anything (they’re intended for
 # printers)."
 # [We reject them. So does Chromium.]
 == wrapper.html?rgb24jpeg.bmp about:blank

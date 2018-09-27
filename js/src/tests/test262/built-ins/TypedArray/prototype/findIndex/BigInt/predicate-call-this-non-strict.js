@@ -41,7 +41,7 @@ testWithBigIntTypedArrayConstructors(function(TA) {
 
   assert.sameValue(result, T, "without thisArg, predicate this is the global");
 
-  result = null;  
+  result = null;
   sample.findIndex(function() {
     result = this;
   }, undefined);

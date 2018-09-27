@@ -1,6 +1,6 @@
 var x = 1;
 function f() {
-  function g() { 
+  function g() {
     var t=0;
     for (var i=0; i<3; i++)
       x = i;

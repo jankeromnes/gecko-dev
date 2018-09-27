@@ -4,7 +4,7 @@ function run_test() {
   var fis =
       Cc["@mozilla.org/network/file-input-stream;1"].
       createInstance(Ci.nsIFileInputStream);
-  fis.init(f, -1, -1, 0); 
+  fis.init(f, -1, -1, 0);
 
   var bis =
       Cc["@mozilla.org/network/buffered-input-stream;1"].

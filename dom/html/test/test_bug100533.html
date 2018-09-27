@@ -9,7 +9,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=100533
   <script type="text/javascript" src="/MochiKit/DOM.js"></script>
   <script type="text/javascript" src="/MochiKit/Style.js"></script>
   <script type="text/javascript" src="/MochiKit/Signal.js"></script>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -19,7 +19,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=100533
 
 <button id="thebutton">Test</button>
 <iframe style='display: none;' src='bug100533_iframe.html' id='a'></iframe>
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -31,9 +31,9 @@ var submitIframeForm = function() {
   $('a').contentDocument.getElementById('b').submit();
 }
 
-submitted = function() { 
+submitted = function() {
   ok(true, "Finished. Form submits when located in iframe set to display:none;");
-  SimpleTest.finish(); 
+  SimpleTest.finish();
 };
 
 addLoadEvent(function() {

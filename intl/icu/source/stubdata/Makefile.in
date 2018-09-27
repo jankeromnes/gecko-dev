@@ -51,7 +51,7 @@ LDFLAGS += $(LDFLAGSICUDT)
 OBJECTS = stubdata.o
 
 ## Header files to install
-HEADERS = 
+HEADERS =
 
 STATIC_OBJECTS = $(OBJECTS:.o=.$(STATIC_O))
 

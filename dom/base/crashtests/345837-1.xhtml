@@ -6,14 +6,14 @@
 
 function foo()
 {
-  var r = document.createRange(); 
-  r.setStart(document.getElementById("a"), 0); 
-  r.setEnd(document.getElementById("b"), 0); 
+  var r = document.createRange();
+  r.setStart(document.getElementById("a"), 0);
+  r.setEnd(document.getElementById("b"), 0);
   window.getSelection().addRange(r);
 
   var everything = document.getElementById("everything");
   everything.remove();
-  
+
   document.documentElement.removeAttribute("class");
 }
 

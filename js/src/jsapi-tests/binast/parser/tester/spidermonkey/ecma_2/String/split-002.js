@@ -184,7 +184,7 @@ function string_split ( __this, separator, limit ) {
   var q = p;									  // 10
 loop:
   while (true ) {
-	
+
     if ( q == s ) break;					  // 11
 
     z = SplitMatch(R, S, q);                  // 12

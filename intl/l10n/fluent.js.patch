@@ -3,18 +3,18 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 +++ /home/zbraniecki/projects/fluent/fluent.js/fluent-gecko/dist/DOMLocalization.jsm	2018-08-01 09:15:58.916763182 -0700
 @@ -16,10 +16,12 @@
   */
- 
- 
+
+
 -/* fluent-dom@cab517f (July 31, 2018) */
 +/* fluent-dom@0.3.0 */
- 
+
 -const { Localization } =
 -  ChromeUtils.import("resource://gre/modules/Localization.jsm", {});
 +import Localization from '../../fluent-dom/src/localization.js';
 +
 +/* eslint no-console: ["error", {allow: ["warn"]}] */
 +/* global console */
- 
+
  // Match the opening angle bracket (<) in HTML tags, and HTML entities like
  // &amp;, &#0038;, &#x0026;.
 @@ -61,9 +63,7 @@
@@ -38,7 +38,7 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 @@ -350,46 +349,6 @@
    return toElement;
  }
- 
+
 -/**
 - * Sanitizes a translation before passing them to Node.localize API.
 - *
@@ -81,11 +81,11 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 -
  const L10NID_ATTR_NAME = "data-l10n-id";
  const L10NARGS_ATTR_NAME = "data-l10n-args";
- 
+
 @@ -530,6 +489,7 @@
        );
      }
- 
+
 +
      this.roots.add(newRoot);
      this.mutationObserver.observe(newRoot, this.observerConfig);
@@ -165,11 +165,11 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 -    }
      return this.translateElements(this.getTranslatables(frag));
    }
- 
+
 @@ -800,5 +700,37 @@
    }
  }
- 
+
 -this.DOMLocalization = DOMLocalization;
 -var EXPORTED_SYMBOLS = ["DOMLocalization"];
 +/* global L10nRegistry, Services */
@@ -215,21 +215,21 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
    const { DOMLocalization } =
 -    ChromeUtils.import("resource://gre/modules/DOMLocalization.jsm", {});
 +    Components.utils.import("resource://gre/modules/DOMLocalization.jsm");
- 
+
    /**
     * Polyfill for document.ready polyfill.
 @@ -44,13 +45,16 @@
- 
+
    const resourceIds = getResourceLinks(document.head || document);
- 
+
 -  document.l10n = new DOMLocalization(resourceIds);
 +  document.l10n = new DOMLocalization(window, resourceIds);
- 
+
 -  // Trigger the first two contexts to be loaded eagerly.
 -  document.l10n.ctxs.touchNext(2);
 +  // trigger first context to be fetched eagerly
 +  document.l10n.ctxs.touchNext();
- 
+
    document.l10n.ready = documentReady().then(() => {
      document.l10n.registerObservers();
 +    window.addEventListener("unload", () => {
@@ -243,11 +243,11 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 +++ /home/zbraniecki/projects/fluent/fluent.js/fluent-gecko/dist/Localization.jsm	2018-08-01 09:15:58.546760435 -0700
 @@ -16,128 +16,11 @@
   */
- 
- 
+
+
 -/* fluent-dom@cab517f (July 31, 2018) */
 +/* fluent-dom@0.3.0 */
- 
+
 -/* eslint no-console: ["error", { allow: ["warn", "error"] }] */
 -/* global console */
 -
@@ -255,7 +255,7 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 -const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm", {});
 -const { AppConstants } = ChromeUtils.import("resource://gre/modules/AppConstants.jsm", {});
 +import { CachedAsyncIterable } from 'cached-iterable';
- 
+
 -class CachedIterable extends Array {
 -  /**
 -   * Create a `CachedIterable` instance from an iterable or, if another
@@ -370,7 +370,7 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 -  return L10nRegistry.generateContexts(appLocales, resourceIds);
 -}
 +/* eslint no-console: ["error", { allow: ["warn", "error"] }] */
- 
+
  /**
   * The `Localization` class is a central high-level API for vanilla
 @@ -153,7 +36,7 @@
@@ -385,7 +385,7 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 @@ -194,12 +77,9 @@
          break;
        }
- 
+
 -      if (AppConstants.NIGHTLY_BUILD || Cu.isInAutomation) {
 +      if (typeof console !== "undefined") {
          const locale = ctx.locales[0];
@@ -399,7 +399,7 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 @@ -284,35 +164,8 @@
      return val;
    }
- 
+
 -  /**
 -   * Register weak observers on events that will trigger cache invalidation
 -   */
@@ -432,12 +432,12 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 +  handleEvent() {
 +    this.onChange();
    }
- 
+
    /**
 @@ -326,10 +179,6 @@
    }
  }
- 
+
 -Localization.prototype.QueryInterface = ChromeUtils.generateQI([
 -  Ci.nsISupportsWeakReference
 -]);
@@ -448,7 +448,7 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 @@ -449,5 +298,44 @@
    return missingIds;
  }
- 
+
 -this.Localization = Localization;
 -var EXPORTED_SYMBOLS = ["Localization"];
 +/* global Components */
@@ -497,17 +497,17 @@ diff -uN -x README -x moz.build -x L10nRegistry.jsm -x jar.mn -x fluent.js.patch
 +++ /home/zbraniecki/projects/fluent/fluent.js/fluent-gecko/dist/MessageContext.jsm	2018-08-01 09:15:58.176757688 -0700
 @@ -16,7 +16,7 @@
   */
- 
- 
+
+
 -/* fluent@0.6.0 */
 +/* fluent-dom@0.3.0 */
- 
+
  /*  eslint no-magic-numbers: [0]  */
- 
+
 @@ -1930,6 +1930,57 @@
    }
  }
- 
+
 +/*
 + * @overview
 + *

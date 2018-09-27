@@ -15,7 +15,7 @@ const value_latin1 = "";
 
 
 function run_test() {
-    var StringBundle = 
+    var StringBundle =
 	Cc["@mozilla.org/intl/stringbundle;1"]
 	 .getService(Ci.nsIStringBundleService);
     var ios = Cc["@mozilla.org/network/io-service;1"]
@@ -23,7 +23,7 @@ function run_test() {
     var bundleURI = ios.newFileURI(do_get_file("397093.properties"));
 
     var bundle = StringBundle.createBundle(bundleURI.spec);
-    
+
     var bundle_ascii="", bundle_utf8="", bundle_latin1="";
     try {
 	bundle_ascii = bundle.GetStringFromName(name_ascii);
@@ -40,4 +40,4 @@ function run_test() {
     } catch(e) {}
     Assert.equal(bundle_latin1, value_latin1);
 }
-    
+

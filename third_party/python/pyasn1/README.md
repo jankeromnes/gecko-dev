@@ -37,9 +37,9 @@ That probably explains why many network protocols and file formats
 still rely on the 30+ years old technology. Including a number of
 high-profile Internet protocols and file formats.
 
-Quite a number of books cover the topic of ASN.1. 
+Quite a number of books cover the topic of ASN.1.
 [Communication between heterogeneous systems](http://www.oss.com/asn1/dubuisson.html)
-by Olivier Dubuisson is one of those high quality books freely 
+by Olivier Dubuisson is one of those high quality books freely
 available on the Internet.
 
 The pyasn1 package is designed to help Python programmers tackling
@@ -80,7 +80,7 @@ class Record(Sequence):
     )
 ```
 
-It is in the spirit of ASN.1 to take abstract data description 
+It is in the spirit of ASN.1 to take abstract data description
 and turn it into a programming language specific form.
 Once you have your ASN.1 data structure expressed in Python, you
 can use it along the lines of similar Python type (e.g. ASN.1
@@ -154,7 +154,7 @@ Record:
 ```
 
 With ASN.1 design, serialization codecs are decoupled from data objects,
-so you could turn every single ASN.1 object into many different 
+so you could turn every single ASN.1 object into many different
 serialized forms. As of this moment, pyasn1 supports BER, DER, CER and
 Python built-ins codecs. The extremely compact PER encoding is expected
 to be introduced in the upcoming pyasn1 release.
@@ -162,7 +162,7 @@ to be introduced in the upcoming pyasn1 release.
 More information on pyasn1 APIs can be found in the
 [documentation](http://pyasn1.sourceforge.net),
 compiled ASN.1 modules for different protocols and file formats
-could be found in the pyasn1-modules 
+could be found in the pyasn1-modules
 [repo](https://github.com/etingof/pyasn1-modules).
 
 How to get pyasn1
@@ -174,10 +174,10 @@ available as a GitHub [repo](https://github.com/etingof/pyasn1).
 
 You could `pip install pyasn1` or download it from [PyPI](https://pypi.python.org/pypi/pyasn1).
 
-If something does not work as expected, 
+If something does not work as expected,
 [open an issue](https://github.com/etingof/pyasn1/issues) at GitHub or
 post your question [on Stack Overflow](http://stackoverflow.com/questions/ask)
-or try browsing pyasn1 
+or try browsing pyasn1
 [mailing list archives](https://sourceforge.net/p/pyasn1/mailman/pyasn1-users/).
 
 Copyright (c) 2005-2017, [Ilya Etingof](mailto:etingof@gmail.com).

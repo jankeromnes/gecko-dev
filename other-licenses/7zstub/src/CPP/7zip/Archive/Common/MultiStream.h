@@ -27,9 +27,9 @@ public:
 
     CSubStreamInfo(): Size(0), GlobalOffset(0), LocalPos(0) {}
   };
-  
+
   CObjectVector<CSubStreamInfo> Streams;
-  
+
   HRESULT Init()
   {
     UInt64 total = 0;

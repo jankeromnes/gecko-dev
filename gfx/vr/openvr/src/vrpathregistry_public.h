@@ -18,7 +18,7 @@ public:
 public:
 	CVRPathRegistry_Public();
 
-	/** Returns paths using the path registry and the provided override values. Pass NULL for any paths you don't care about. 
+	/** Returns paths using the path registry and the provided override values. Pass NULL for any paths you don't care about.
 	* Returns false if the path registry could not be read. Valid paths might still be returned based on environment variables. */
 	static bool GetPaths( std::string *psRuntimePath, std::string *psConfigPath, std::string *psLogPath, const char *pchConfigPathOverride, const char *pchLogPathOverride, std::vector<std::string> *pvecExternalDrivers = NULL );
 

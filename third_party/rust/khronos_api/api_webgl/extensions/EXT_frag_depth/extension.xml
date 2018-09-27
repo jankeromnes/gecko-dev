@@ -34,7 +34,7 @@
       </glsl>
     </features>
   </overview>
-  
+
   <idl xml:space="preserve">
     [NoInterfaceObject]
     interface EXT_frag_depth {

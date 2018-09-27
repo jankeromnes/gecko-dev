@@ -61,7 +61,7 @@ interface nsISAXXMLReader : nsIStreamListener {
    * handler immediately.
    */
   attribute nsISAXErrorHandler errorHandler;
-  
+
   /**
    * Begin an asynchronous parse. This method initializes the parser,
    * and must be called before any nsIStreamListener methods. It is

@@ -12,8 +12,8 @@ description: Using "break" within a "do-while" loop
 var __in__do__before__break, __in__do__after__break;
 
 do {
-    __in__do__before__break="reached"; 
-    break; 
+    __in__do__before__break="reached";
+    break;
     __in__do__after__break="where am i";
 } while(2===1);
 

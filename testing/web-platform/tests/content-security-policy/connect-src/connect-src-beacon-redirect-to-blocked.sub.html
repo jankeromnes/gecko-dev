@@ -19,7 +19,7 @@
        window.addEventListener('securitypolicyviolation', function(e) {
             log("violated-directive=" + e.violatedDirective);
        });
-       
+
 	     if (typeof navigator.sendBeacon != 'function') {
 	          t_log.set_status(t_log.NOTRUN, "No navigator.sendBeacon, cannot run test.");
             t_log.phase = t_log.phases.HAS_RESULT;

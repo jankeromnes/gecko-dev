@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (delete (0 ? 3 : {}));
 
   reportCompare(expect, actual, summary);

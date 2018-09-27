@@ -34,7 +34,7 @@ interface nsITreeSelection : nsISupports
   boolean isSelected(in long index);
 
   /**
-   * Deselect all rows and select the row at the specified index. 
+   * Deselect all rows and select the row at the specified index.
    */
   void select(in long index);
 
@@ -95,7 +95,7 @@ interface nsITreeSelection : nsISupports
    * This attribute is a boolean indicating whether or not the
    * "select" event should fire when the selection is changed using
    * one of our methods.  A view can use this to temporarily suppress
-   * the selection while manipulating all of the indices, e.g., on 
+   * the selection while manipulating all of the indices, e.g., on
    * a sort.
    * Note: setting this attribute to false will fire a select event.
    */

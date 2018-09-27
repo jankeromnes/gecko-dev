@@ -47,7 +47,7 @@
 /* #undef NO_MINUS_C_MINUS_O */
 
 /* make use of arm asm optimization */
- 
+
 
 /* Define if assembler supports EDSP instructions */
 

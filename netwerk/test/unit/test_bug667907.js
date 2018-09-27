@@ -40,7 +40,7 @@ var listener_proto = {
   onStopRequest: function(request, context, status) {
     Assert.equal(status, Cr.NS_BINDING_ABORTED);
     this.termination_func();
-  }  
+  }
 };
 
 function listener(contentType, termination_func) {

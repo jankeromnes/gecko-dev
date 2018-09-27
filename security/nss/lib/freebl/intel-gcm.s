@@ -1,7 +1,7 @@
-# LICENSE:                                                                  
+# LICENSE:
 # This submission to NSS is to be made available under the terms of the
-# Mozilla Public License, v. 2.0. You can obtain one at http:         
-# //mozilla.org/MPL/2.0/. 
+# Mozilla Public License, v. 2.0. You can obtain one at http:
+# //mozilla.org/MPL/2.0/.
 ################################################################################
 # Copyright(c) 2012, Intel Corp.
 
@@ -15,7 +15,7 @@
 .Lshuff_mask:
 .quad 0x0f0f0f0f0f0f0f0f, 0x0f0f0f0f0f0f0f0f
 .Lpoly:
-.quad 0x1, 0xc200000000000000 
+.quad 0x1, 0xc200000000000000
 
 
 ################################################################################
@@ -49,7 +49,7 @@ intel_aes_gcmTAG:
    vpshufb  .Lbswap_mask(%rip), T, T
    vpxor    (X0), T, T
    vmovdqu  T, (TAG)
-   
+
 ret
 .size intel_aes_gcmTAG, .-intel_aes_gcmTAG
 ################################################################################
@@ -59,7 +59,7 @@ ret
 .globl intel_aes_gcmINIT
 .align 16
 intel_aes_gcmINIT:
-   
+
 .set  Htbl, %rdi
 .set  KS, %rsi
 .set  NR, %edx
@@ -89,11 +89,11 @@ CALCULATE_POWERS_OF_H:
     vaesenc      16*12(KS), T, T
     vaesenc      16*13(KS), T, T
     vmovdqu      16*14(KS), TMP0
-  
+
 .LH0done:
     vaesenclast  TMP0, T, T
 
-    vpshufb      .Lbswap_mask(%rip), T, T  
+    vpshufb      .Lbswap_mask(%rip), T, T
 
     vmovdqu	T, TMP0
     # Calculate H` = GFMUL(H, 2)
@@ -127,7 +127,7 @@ CALCULATE_POWERS_OF_H:
     call  GFMUL
     vmovdqu  T, 96(Htbl)    # H^7 * 2
     call  GFMUL
-    vmovdqu  T, 112(Htbl)   # H^8 * 2  
+    vmovdqu  T, 112(Htbl)   # H^8 * 2
 
     # Precalculations for the reduce 4 step
     vpshufd  $78, (Htbl), %xmm8
@@ -204,11 +204,11 @@ intel_aes_gcmAAD:
 
    push  hlp0
    vzeroupper
-   
+
    vmovdqa  .Lbswap_mask(%rip), BSWAP_MASK
-   
+
    vpxor    Xhi, Xhi, Xhi
-   
+
    vmovdqu  (Tp),T
    vpshufb  BSWAP_MASK,T,T
 
@@ -225,13 +225,13 @@ intel_aes_gcmAAD:
 	vmovdqu (inp), DATA
 	vpshufb  BSWAP_MASK, DATA, DATA
 	vpxor    T, DATA, DATA
-	
+
 	vpclmulqdq  $0x00, (Htbl, hlp0), DATA, TMP0
 	vpclmulqdq  $0x11, (Htbl, hlp0), DATA, TMP1
 	vpshufd     $78, DATA, TMP2
 	vpxor       DATA, TMP2, TMP2
 	vpclmulqdq  $0x00, 16*8(Htbl, hlp0), TMP2, TMP2
-	
+
 	lea	    16(inp), inp
 	test    hlp0, hlp0
 	jnz	    .Lpre_loop
@@ -260,7 +260,7 @@ intel_aes_gcmAAD:
     lea	16(inp), inp
 
     jnz	.Lpre_loop
-	
+
 .Lred1:
     vpxor       TMP0, TMP2, TMP2
     vpxor       TMP1, TMP2, TMP2
@@ -269,7 +269,7 @@ intel_aes_gcmAAD:
 
     vpxor       TMP3, TMP1, Xhi
     vpxor       TMP2, TMP0, T
-	
+
 .align 64
 .Lmod_loop:
     sub	$0x80, len
@@ -353,7 +353,7 @@ intel_aes_gcmAAD:
     vpxor       TMP3, T, T
 
     vpxor       Xhi, T, T
-   
+
 .Lsave:
     vpshufb     BSWAP_MASK,T, T
     vmovdqu     T,(Tp)
@@ -434,7 +434,7 @@ intel_aes_gcmENC:
     vpxor       TMP3, TMP1, TMP1
     vpclmulqdq  $0x00, TMP4, TMP5, TMP3
     vpxor       TMP3, TMP2, TMP2
-  
+
 .endm
 
 .macro KARATSUBA i
@@ -453,14 +453,14 @@ intel_aes_gcmENC:
     test len, len
     jnz  .Lbegin
     ret
-   
+
 .Lbegin:
 
     vzeroupper
     push %rbp
     push %rbx
 
-    movq %rsp, %rbp   
+    movq %rsp, %rbp
     sub  $128, %rsp
     andq $-16, %rsp
 
@@ -475,7 +475,7 @@ intel_aes_gcmENC:
 
     cmp  $128, len
     jb   .LDataSingles
-   
+
 # Encrypt the first eight blocks
     sub     $128, len
     vmovdqa CTR, CTR0
@@ -531,7 +531,7 @@ intel_aes_gcmENC:
     ROUND 13
 
     vmovdqu 224(KS), TMP5
-  
+
 .LLast1:
 
     vpxor       (PT), TMP5, TMP3
@@ -550,9 +550,9 @@ intel_aes_gcmENC:
     vaesenclast TMP3, CTR6, CTR6
     vpxor       112(PT), TMP5, TMP3
     vaesenclast TMP3, CTR7, CTR7
-    
+
     vmovdqu     .Lbswap_mask(%rip), TMP3
-   
+
     vmovdqu CTR0, (CT)
     vpshufb TMP3, CTR0, CTR0
     vmovdqu CTR1, 16(CT)
@@ -620,10 +620,10 @@ intel_aes_gcmENC:
 
         vmovdqu     16*0(Htbl), TMP3
         vpclmulqdq  $0x11, TMP3, TMP5, TMP1
-        vpclmulqdq  $0x00, TMP3, TMP5, TMP2      
+        vpclmulqdq  $0x00, TMP3, TMP5, TMP2
         vpshufd     $78, TMP5, TMP3
         vpxor       TMP5, TMP3, TMP5
-        vmovdqu     128+0*16(Htbl), TMP3      
+        vmovdqu     128+0*16(Htbl), TMP3
         vpclmulqdq  $0x00, TMP3, TMP5, TMP0
 
         ROUNDMUL 1
@@ -661,7 +661,7 @@ intel_aes_gcmENC:
         vpclmulqdq  $0x00, 128+7*16(Htbl), TMP4, TMP3
         vpxor       TMP3, TMP0, TMP0
 
-        ROUND 8    
+        ROUND 8
         vmovdqa .Lpoly(%rip), TMP5
 
         vpxor   TMP1, TMP0, TMP0
@@ -698,7 +698,7 @@ intel_aes_gcmENC:
         vmovdqu 224(KS), TMP5
 
 .LLast2:
-      
+
         vpxor       (PT), TMP5, TMP3
         vaesenclast TMP3, CTR0, CTR0
         vpxor       16(PT), TMP5, TMP3
@@ -742,7 +742,7 @@ intel_aes_gcmENC:
     jmp  .LDataOctets
 
 .LEndOctets:
-    
+
     vmovdqa CTR7, TMP5
     vmovdqa CTR6, 1*16(%rsp)
     vmovdqa CTR5, 2*16(%rsp)
@@ -754,29 +754,29 @@ intel_aes_gcmENC:
 
     vmovdqu     16*0(Htbl), TMP3
     vpclmulqdq  $0x11, TMP3, TMP5, TMP1
-    vpclmulqdq  $0x00, TMP3, TMP5, TMP2      
+    vpclmulqdq  $0x00, TMP3, TMP5, TMP2
     vpshufd     $78, TMP5, TMP3
     vpxor       TMP5, TMP3, TMP5
-    vmovdqu     128+0*16(Htbl), TMP3      
+    vmovdqu     128+0*16(Htbl), TMP3
     vpclmulqdq  $0x00, TMP3, TMP5, TMP0
 
     KARATSUBA 1
     KARATSUBA 2
-    KARATSUBA 3      
+    KARATSUBA 3
     KARATSUBA 4
     KARATSUBA 5
     KARATSUBA 6
 
     vmovdqu     7*16(%rsp), TMP5
     vpxor       T, TMP5, TMP5
-    vmovdqu     16*7(Htbl), TMP4            
+    vmovdqu     16*7(Htbl), TMP4
     vpclmulqdq  $0x11, TMP4, TMP5, TMP3
     vpxor       TMP3, TMP1, TMP1
     vpclmulqdq  $0x00, TMP4, TMP5, TMP3
-    vpxor       TMP3, TMP2, TMP2      
+    vpxor       TMP3, TMP2, TMP2
     vpshufd     $78, TMP5, TMP3
     vpxor       TMP5, TMP3, TMP5
-    vmovdqu     128+7*16(Htbl), TMP4      
+    vmovdqu     128+7*16(Htbl), TMP4
     vpclmulqdq  $0x00, TMP4, TMP5, TMP3
     vpxor       TMP3, TMP0, TMP0
 
@@ -877,15 +877,15 @@ intel_aes_gcmENC:
     vaesenc 16*12(KS), TMP1, TMP1
     vaesenc 16*13(KS), TMP1, TMP1
     vmovdqu 16*14(KS), TMP2
-  
+
 .LLast4:
     vaesenclast TMP2, TMP1, TMP1
 #Zero a temp location
     vpxor   TMP2, TMP2, TMP2
     vmovdqa TMP2, (%rsp)
-    
+
 # Copy the required bytes only (could probably use rep movsb)
-    xor KS, KS  
+    xor KS, KS
 .LEncCpy:
         cmp     KS, len
         je      .LEncCpyEnd
@@ -934,7 +934,7 @@ DATA_END:
    popq   %rbp
    ret
    .size intel_aes_gcmENC, .-intel_aes_gcmENC
-  
+
 #########################
 # Decrypt and Authenticate
 # void intel_aes_gcmDEC(uint8_t* PT, uint8_t* CT, void *Gctx,uint64_t len);
@@ -990,12 +990,12 @@ intel_aes_gcmDEC:
     test  len, len
     jnz   .LbeginDec
     ret
-   
+
 .LbeginDec:
 
     pushq   %rbp
     pushq   %rbx
-    movq    %rsp, %rbp   
+    movq    %rsp, %rbp
     sub     $128, %rsp
     andq    $-16, %rsp
     vmovdqu 288(Gctx), CTR
@@ -1006,14 +1006,14 @@ intel_aes_gcmDEC:
 
     vpshufb .Lbswap_mask(%rip), CTR, CTR
     vpshufb .Lbswap_mask(%rip), T, T
-     
+
     vmovdqu .Lbswap_mask(%rip), TMP3
     jmp     .LDECOctets
-      
+
 # Decrypt 8 blocks each time while hashing them at the same time
 .align 64
 .LDECOctets:
-   
+
         cmp $128, len
         jb  .LDECSingles
         sub $128, len
@@ -1051,10 +1051,10 @@ intel_aes_gcmDEC:
         vpshufb     .Lbswap_mask(%rip), TMP5, TMP5
         vmovdqu     16*0(Htbl), TMP3
         vpclmulqdq  $0x11, TMP3, TMP5, TMP1
-        vpclmulqdq  $0x00, TMP3, TMP5, TMP2      
+        vpclmulqdq  $0x00, TMP3, TMP5, TMP2
         vpshufd     $78, TMP5, TMP3
         vpxor       TMP5, TMP3, TMP5
-        vmovdqu     128+0*16(Htbl), TMP3      
+        vmovdqu     128+0*16(Htbl), TMP3
         vpclmulqdq  $0x00, TMP3, TMP5, TMP0
 
         ROUND 1
@@ -1081,7 +1081,7 @@ intel_aes_gcmDEC:
         vpshufb     .Lbswap_mask(%rip), TMP5, TMP5
         vpxor       T, TMP5, TMP5
         vmovdqu     16*7(Htbl), TMP4
-            
+
         vpclmulqdq  $0x11, TMP4, TMP5, TMP3
         vpxor       TMP3, TMP1, TMP1
         vpclmulqdq  $0x00, TMP4, TMP5, TMP3
@@ -1094,7 +1094,7 @@ intel_aes_gcmDEC:
         vpclmulqdq  $0x00, TMP4, TMP5, TMP3
         vpxor       TMP3, TMP0, TMP0
 
-        ROUND 8      
+        ROUND 8
 
         vpxor       TMP1, TMP0, TMP0
         vpxor       TMP2, TMP0, TMP0
@@ -1124,7 +1124,7 @@ intel_aes_gcmDEC:
         ROUND 11
 
         vmovdqu     192(KS), TMP5
-        cmp         $12, NR       
+        cmp         $12, NR
 
         jbe  .LDECLast1
 
@@ -1133,8 +1133,8 @@ intel_aes_gcmDEC:
 
         vmovdqu  224(KS), TMP5
 
-.LDECLast1:      
-      
+.LDECLast1:
+
         vpxor   (CT), TMP5, TMP3
         vaesenclast TMP3, CTR0, CTR0
         vpxor   16(CT), TMP5, TMP3
@@ -1168,7 +1168,7 @@ intel_aes_gcmDEC:
         lea 128(CT), CT
         lea 128(PT), PT
    jmp  .LDECOctets
-   
+
 #Here we decrypt and hash any remaining whole block
 .LDECSingles:
 
@@ -1213,7 +1213,7 @@ intel_aes_gcmDEC:
     vpxor    (CT), TMP1, TMP1
     vmovdqu  TMP1, (PT)
     addq     $16, CT
-    addq     $16, PT  
+    addq     $16, PT
     jmp   .LDECSingles
 
 #Here we decrypt the final partial block, if there is one
@@ -1248,11 +1248,11 @@ intel_aes_gcmDEC:
 
 .LDECLast3:
    vaesenclast TMP2, TMP1, TMP1
-  
+
    vpxor   TMP2, TMP2, TMP2
-   vmovdqa TMP2, (%rsp) 
+   vmovdqa TMP2, (%rsp)
 # Copy the required bytes only (could probably use rep movsb)
-    xor KS, KS  
+    xor KS, KS
 .LDecCpy:
         cmp     KS, len
         je      .LDecCpy2
@@ -1307,7 +1307,7 @@ intel_aes_gcmDEC:
 # __m128i GFMUL(__m128i A, __m128i B);
 .type GFMUL,@function
 .globl GFMUL
-GFMUL:  
+GFMUL:
     vpclmulqdq  $0x00, TMP0, T, TMP1
     vpclmulqdq  $0x11, TMP0, T, TMP4
 

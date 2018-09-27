@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -32,17 +32,17 @@ class CaselessMap {
         else
             this._map = new Map(otherMap._map);
     }
-    
+
     set(key, value)
     {
         this._map.set(key.toLowerCase(), value);
     }
-    
+
     has(key)
     {
         return this._map.has(key.toLowerCase());
     }
-    
+
     get(key)
     {
         return this._map.get(key.toLowerCase());

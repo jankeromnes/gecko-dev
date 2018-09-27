@@ -22,7 +22,7 @@ diff --git a/modules/fdlibm/src/math_private.h b/modules/fdlibm/src/math_private
 +	}					\
 +} while (0)
  #endif /* FLT_EVAL_METHOD */
- 
+
  /* Support switching the mode to FP_PE if necessary. */
  #if defined(__i386__) && !defined(NO_FPSETPREC)
  #define	ENTERI()				\

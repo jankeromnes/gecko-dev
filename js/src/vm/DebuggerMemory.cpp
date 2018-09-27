@@ -360,7 +360,7 @@ DebuggerMemory::setOnGarbageCollection(JSContext* cx, unsigned argc, Value* vp)
     return Debugger::setHookImpl(cx, args, *memory->getDebugger(), Debugger::OnGarbageCollection);
 }
 
-
+
 /* Debugger.Memory.prototype.takeCensus */
 
 JS_PUBLIC_API(void)
@@ -452,7 +452,7 @@ DebuggerMemory::takeCensus(JSContext* cx, unsigned argc, Value* vp)
     return handler.report(cx, args.rval());
 }
 
-
+
 /* Debugger.Memory property and method tables. */
 
 

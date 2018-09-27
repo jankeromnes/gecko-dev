@@ -19,7 +19,7 @@ function boom()
 {
   xblize = document.getElementById("xblize");
   div = document.getElementById("div");
-  
+
   xblize.style.MozBinding = "url('#empty')";
 
   // Give the XBL extra time to settle
@@ -30,7 +30,7 @@ function boom2()
 {
   div.removeChild(xblize);
   div.appendChild(xblize);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

@@ -6,7 +6,7 @@ function createURI(s) {
                 .getService(Ci.nsIIOService);
   return service.newURI(s);
 }
- 
+
 function run_test() {
   // Set up a profile.
   do_get_profile();
@@ -25,7 +25,7 @@ function run_test() {
 
   let attrs_inBrowser = JSON.stringify({ appId:1, inIsolatedMozBrowser:true });
   Services.obs.notifyObservers(null, "clear-origin-attributes-data", attrs_inBrowser);
-  
+
   var domain = {value: ""}, user = {value: ""}, pass = {value: ""};
   try {
     am.getAuthIdentity("http", "a.example.com", -1, "basic", "realm", "", domain, user, pass, false, app1browser);

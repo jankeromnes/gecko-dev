@@ -24,7 +24,7 @@
     for (var name of imports) {
       window[name] = window.opener.wrappedJSObject[name];
     }
-    
+
     function runTests() {
       var testCanvas = snapshotWindow(window);
 

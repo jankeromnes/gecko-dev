@@ -8,26 +8,26 @@ diff --git a/intl/icu/source/i18n/timezone.cpp b/intl/icu/source/i18n/timezone.c
  static const UChar         UNKNOWN_ZONE_ID[] = {0x45, 0x74, 0x63, 0x2F, 0x55, 0x6E, 0x6B, 0x6E, 0x6F, 0x77, 0x6E, 0x00}; /* "Etc/Unknown" */
  static const int32_t       GMT_ID_LENGTH = 3;
  static const int32_t       UNKNOWN_ZONE_ID_LENGTH = 11;
- 
+
  static icu::TimeZone* DEFAULT_ZONE = NULL;
  static icu::UInitOnce gDefaultZoneInitOnce = U_INITONCE_INITIALIZER;
- 
+
 +// Prevents DEFAULT_ZONE from being deleted while another thread is cloning it.
 +static UMutex gDefaultZoneMutex = U_MUTEX_INITIALIZER;
 +
  static icu::TimeZone* _GMT = NULL;
  static icu::TimeZone* _UNKNOWN_ZONE = NULL;
  static icu::UInitOnce gStaticZonesInitOnce = U_INITONCE_INITIALIZER;
- 
+
  static char TZDATA_VERSION[16];
  static icu::UInitOnce gTZDataVersionInitOnce = U_INITONCE_INITIALIZER;
- 
+
  static int32_t* MAP_SYSTEM_ZONES = NULL;
 @@ -554,26 +557,36 @@ static void U_CALLCONV initDefault()
  }
- 
+
  // -------------------------------------
- 
+
  TimeZone* U_EXPORT2
  TimeZone::createDefault()
  {
@@ -36,7 +36,7 @@ diff --git a/intl/icu/source/i18n/timezone.cpp b/intl/icu/source/i18n/timezone.c
 +    Mutex mutex_lock(&gDefaultZoneMutex);
      return (DEFAULT_ZONE != NULL) ? DEFAULT_ZONE->clone() : NULL;
  }
- 
+
 +void
 +TimeZone::recreateDefault()
 +{
@@ -45,7 +45,7 @@ diff --git a/intl/icu/source/i18n/timezone.cpp b/intl/icu/source/i18n/timezone.c
 +}
 +
  // -------------------------------------
- 
+
  void U_EXPORT2
  TimeZone::adoptDefault(TimeZone* zone)
  {
@@ -59,7 +59,7 @@ diff --git a/intl/icu/source/i18n/timezone.cpp b/intl/icu/source/i18n/timezone.c
      }
  }
  // -------------------------------------
- 
+
 diff --git a/intl/icu/source/i18n/unicode/timezone.h b/intl/icu/source/i18n/unicode/timezone.h
 --- a/intl/icu/source/i18n/unicode/timezone.h
 +++ b/intl/icu/source/i18n/unicode/timezone.h
@@ -71,7 +71,7 @@ diff --git a/intl/icu/source/i18n/unicode/timezone.h b/intl/icu/source/i18n/unic
       * @stable ICU 2.0
       */
      static TimeZone* U_EXPORT2 createDefault(void);
- 
+
 +#define ICU_TZ_HAS_RECREATE_DEFAULT
 +    static void U_EXPORT2 recreateDefault();
 +

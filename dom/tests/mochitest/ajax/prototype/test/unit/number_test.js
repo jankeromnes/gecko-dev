@@ -1,5 +1,5 @@
 new Test.Unit.Runner({
-  
+
   testNumberMathMethods: function() {
     this.assertEqual(1, (0.9).round());
     this.assertEqual(-2, (-1.9).floor());
@@ -31,12 +31,12 @@ new Test.Unit.Runner({
     this.assertEqual('0', (0).toJSON());
     this.assertEqual('-293', (-293).toJSON());
   },
-  
+
   testNumberTimes: function() {
     var results = [];
     (5).times(function(i) { results.push(i) });
     this.assertEnumEqual($R(0, 4), results);
-    
+
     results = [];
     (5).times(function(i) { results.push(i * this.i) }, { i: 2 });
     this.assertEnumEqual([0, 2, 4, 6, 8], results);

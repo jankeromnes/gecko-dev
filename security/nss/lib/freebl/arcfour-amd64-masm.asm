@@ -9,7 +9,7 @@
 
 .CODE
 
-; extern void ARCFOUR(RC4Context *cx, unsigned long long inputLen, 
+; extern void ARCFOUR(RC4Context *cx, unsigned long long inputLen,
 ;                     const unsigned char *input, unsigned char *output);
 
 

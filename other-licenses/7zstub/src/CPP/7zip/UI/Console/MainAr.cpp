@@ -60,7 +60,7 @@ int MY_CDECL main
 
   NConsoleClose::CCtrlHandlerSetter ctrlHandlerSetter;
   int res = 0;
-  
+
   try
   {
     res = Main2(

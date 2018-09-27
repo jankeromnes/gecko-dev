@@ -24,24 +24,24 @@ STDMETHODIMP CLocalProgress::SetRatioInfo(const UInt64 *inSize, const UInt64 *ou
 {
   UInt64 inSize2 = InSize;
   UInt64 outSize2 = OutSize;
-  
+
   if (inSize)
     inSize2 += (*inSize);
   if (outSize)
     outSize2 += (*outSize);
-  
+
   if (SendRatio && _ratioProgress)
   {
     RINOK(_ratioProgress->SetRatioInfo(&inSize2, &outSize2));
   }
-  
+
   if (SendProgress)
   {
     inSize2 += ProgressOffset;
     outSize2 += ProgressOffset;
     return _progress->SetCompleted(_inSizeIsMain ? &inSize2 : &outSize2);
   }
-  
+
   return S_OK;
 }
 

@@ -15,7 +15,7 @@ info: |
   2. If number is NaN, return +0.
   3. If number is +0, -0, +∞, or -∞, return number.
   4. Return the number value that is the same sign as number and whose
-     magnitude is floor(abs(number)). 
+     magnitude is floor(abs(number)).
 ---*/
 
 var aCode = 97;

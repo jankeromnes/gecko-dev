@@ -39,7 +39,7 @@
     function statesChecker(aTreeID, aView)
     {
       this.DOMNode = getNode(aTreeID);
-      
+
       this.invoke = function invoke()
       {
         this.DOMNode.view = aView;

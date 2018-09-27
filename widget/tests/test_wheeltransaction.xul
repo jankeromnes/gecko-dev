@@ -10,7 +10,7 @@
 
 <body  xmlns="http://www.w3.org/1999/xhtml">
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 </pre>
@@ -20,7 +20,7 @@
 <![CDATA[
 
 SimpleTest.waitForExplicitFinish();
-window.open("window_wheeltransaction.xul", "_blank", 
+window.open("window_wheeltransaction.xul", "_blank",
             "chrome,width=600,height=600");
 
 ]]>

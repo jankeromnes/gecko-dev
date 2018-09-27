@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = 'falsy,falsy,falsy,falsy,falsy,';
   actual = '';
 

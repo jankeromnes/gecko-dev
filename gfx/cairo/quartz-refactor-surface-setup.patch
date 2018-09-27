@@ -6,13 +6,13 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +++ b/gfx/cairo/cairo/src/cairo-quartz-surface.c
 @@ -1455,16 +1455,147 @@ _cairo_quartz_setup_radial_source (cairo
  					    extend, extend);
- 
+
      CGColorSpaceRelease(rgb);
      CGFunctionRelease(gradFunc);
- 
+
      state->action = DO_SHADING;
  }
- 
+
 +static void
 +_cairo_quartz_setup_surface_source (cairo_quartz_surface_t *surface,
 +				    const cairo_surface_pattern_t *spat,
@@ -129,7 +129,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +    patternSpace = CGColorSpaceCreatePattern (NULL);
 +    CGContextSetFillColorSpace (context, patternSpace);
 +    CGContextSetFillPattern (context, pattern, &patternAlpha);
-+    CGContextSetStrokeColorSpace (context, patternSpace); 
++    CGContextSetStrokeColorSpace (context, patternSpace);
 +    CGContextSetStrokePattern (context, pattern, &patternAlpha);
 +    CGColorSpaceRelease (patternSpace);
 +
@@ -154,13 +154,13 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
      if (surface->bitmapContextImage) {
 @@ -1566,133 +1697,19 @@ _cairo_quartz_setup_state (cairo_quartz_
      }
- 
+
      if (source->type == CAIRO_PATTERN_TYPE_RADIAL) {
  	const cairo_radial_pattern_t *rpat = (const cairo_radial_pattern_t *)source;
  	_cairo_quartz_setup_radial_source (surface, rpat, extents, &state);
  	return state;
      }
- 
+
 -    if (source->type == CAIRO_PATTERN_TYPE_SURFACE &&
 -	(source->extend == CAIRO_EXTEND_NONE || (CGContextDrawTiledImagePtr && source->extend == CAIRO_EXTEND_REPEAT)))
 -    {
@@ -267,7 +267,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 -	patternSpace = CGColorSpaceCreatePattern (NULL);
 -	CGContextSetFillColorSpace (context, patternSpace);
 -	CGContextSetFillPattern (context, pattern, &patternAlpha);
--	CGContextSetStrokeColorSpace (context, patternSpace); 
+-	CGContextSetStrokeColorSpace (context, patternSpace);
 -	CGContextSetStrokePattern (context, pattern, &patternAlpha);
 -	CGColorSpaceRelease (patternSpace);
 -
@@ -282,9 +282,9 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +        _cairo_quartz_setup_surface_source (surface, spat, extents, &state);
          return state;
      }
- 
+
      state.action = DO_UNSUPPORTED;
      return state;
  }
- 
+
  /**

@@ -17,13 +17,13 @@ function test()
   var e;
 
   printStatus ("Catchguard var declaration negative test.");
-   
+
   try
-  {   
-    throw EXCEPTION_DATA;  
+  {
+    throw EXCEPTION_DATA;
   }
   catch (var e)
-  {  
+  {
     actual = e + '';
   }
 

@@ -204,10 +204,10 @@ enifed('ember-debug/deprecate', ['exports', 'ember-debug/error', 'ember-console'
     Deprecations are invoked by calls to [@ember/application/deprecations/deprecate](https://emberjs.com/api/ember/release/classes/@ember%2Fapplication%2Fdeprecations/methods/deprecate?anchor=deprecate).
     The following example demonstrates its usage by registering a handler that throws an error if the
     message contains the word "should", otherwise defers to the default handler.
-  
+
     ```javascript
     import { registerDeprecationHandler } from '@ember/debug';
-  
+
     registerDeprecationHandler((message, options, next) => {
       if (message.indexOf('should') !== -1) {
         throw new Error(`Deprecation message with should: ${message}`);
@@ -217,9 +217,9 @@ enifed('ember-debug/deprecate', ['exports', 'ember-debug/error', 'ember-console'
       }
     });
     ```
-  
+
     The handler function takes the following arguments:
-  
+
     <ul>
       <li> <code>message</code> - The message received from the deprecation call.</li>
       <li> <code>options</code> - An object passed in with the deprecation call containing additional information including:</li>
@@ -229,7 +229,7 @@ enifed('ember-debug/deprecate', ['exports', 'ember-debug/error', 'ember-console'
         </ul>
       <li> <code>next</code> - A function that calls into the previously registered handler.</li>
     </ul>
-  
+
     @public
     @static
     @method registerDeprecationHandler
@@ -410,7 +410,7 @@ enifed("ember-debug/error", ["exports", "ember-babel"], function (exports, _embe
 
   /**
     A subclass of the JavaScript Error object for use in Ember.
-  
+
     @class EmberError
     @extends Error
     @constructor
@@ -462,10 +462,10 @@ enifed('ember-debug/features', ['exports', 'ember-environment', 'ember/features'
   /**
     The hash of enabled Canary features. Add to this, any canary features
     before creating your application.
-  
+
     Alternatively (and recommended), you can also define `EmberENV.FEATURES`
     if you need to enable features flagged at runtime.
-  
+
     @class FEATURES
     @namespace Ember
     @static
@@ -478,12 +478,12 @@ enifed('ember-debug/features', ['exports', 'ember-environment', 'ember/features'
   /**
     Determine whether the specified `feature` is enabled. Used by Ember's
     build tools to exclude experimental features from beta/stable builds.
-  
+
     You can define the following configuration options:
-  
+
     * `EmberENV.ENABLE_OPTIONAL_FEATURES` - enable any features that have not been explicitly
       enabled/disabled.
-  
+
     @method isEnabled
     @param {String} feature The feature to check
     @return {Boolean}
@@ -1008,7 +1008,7 @@ enifed('ember-testing/adapters/adapter', ['exports', 'ember-runtime'], function 
   /**
     The primary purpose of this class is to create hooks that can be implemented
     by an adapter for various test frameworks.
-  
+
     @class TestAdapter
     @public
   */
@@ -1368,15 +1368,15 @@ enifed('ember-testing/helpers/click', ['exports', 'ember-testing/events'], funct
   /**
     Clicks an element and triggers any actions triggered by the element's `click`
     event.
-  
+
     Example:
-  
+
     ```javascript
     click('.some-jQuery-selector').then(function() {
       // assert something
     });
     ```
-  
+
     @method click
     @param {String} selector jQuery selector for finding element on the DOM
     @param {Object} context A DOM Element, Document, or jQuery to use as context
@@ -1407,17 +1407,17 @@ enifed('ember-testing/helpers/current_path', ['exports', 'ember-metal'], functio
 
   /**
     Returns the current path.
-  
+
   Example:
-  
+
   ```javascript
   function validateURL() {
     equal(currentPath(), 'some.path.index', "correct path was transitioned into.");
   }
-  
+
   click('#some-link-id').then(validateURL);
   ```
-  
+
   @method currentPath
   @return {Object} The currently active path.
   @since 1.5.0
@@ -1437,16 +1437,16 @@ enifed('ember-testing/helpers/current_route_name', ['exports', 'ember-metal'], f
 
   /**
     Returns the currently active route name.
-  
+
   Example:
-  
+
   ```javascript
   function validateRouteName() {
     equal(currentRouteName(), 'some.path', "correct route was transitioned into.");
   }
   visit('/some/path').then(validateRouteName)
   ```
-  
+
   @method currentRouteName
   @return {Object} The name of the currently active route.
   @since 1.5.0
@@ -1467,17 +1467,17 @@ enifed('ember-testing/helpers/current_url', ['exports', 'ember-metal'], function
 
   /**
     Returns the current URL.
-  
+
   Example:
-  
+
   ```javascript
   function validateURL() {
     equal(currentURL(), '/some/path', "correct URL was transitioned into.");
   }
-  
+
   click('#some-link-id').then(validateURL);
   ```
-  
+
   @method currentURL
   @return {Object} The currently active URL.
   @since 1.5.0
@@ -1498,15 +1498,15 @@ enifed('ember-testing/helpers/fill_in', ['exports', 'ember-testing/events'], fun
 
   /**
     Fills in an input element with some text.
-  
+
     Example:
-  
+
     ```javascript
     fillIn('#email', 'you@example.com').then(function() {
       // assert something
     });
     ```
-  
+
     @method fillIn
     @param {String} selector jQuery selector finding an input element on the DOM
     to fill text with
@@ -1545,19 +1545,19 @@ enifed('ember-testing/helpers/find', ['exports', 'ember-metal'], function (expor
   /**
     Finds an element in the context of the app's container element. A simple alias
     for `app.$(selector)`.
-  
+
     Example:
-  
+
     ```javascript
     var $el = find('.my-selector');
     ```
-  
+
     With the `context` param:
-  
+
     ```javascript
     var $el = find('.my-selector', '.parent-element-class');
     ```
-  
+
     @method find
     @param {String} selector jQuery string selector for element lookup
     @param {String} [context] (optional) jQuery selector that will limit the selector
@@ -1583,19 +1583,19 @@ enifed('ember-testing/helpers/find_with_assert', ['exports'], function (exports)
   */
   /**
     Like `find`, but throws an error if the element selector returns no results.
-  
+
     Example:
-  
+
     ```javascript
     var $el = findWithAssert('.doesnt-exist'); // throws error
     ```
-  
+
     With the `context` param:
-  
+
     ```javascript
     var $el = findWithAssert('.selector-id', '.parent-element-class'); // assert will pass
     ```
-  
+
     @method findWithAssert
     @param {String} selector jQuery selector string for finding an element within
     the DOM
@@ -1663,7 +1663,7 @@ enifed('ember-testing/helpers/pause_test', ['exports', 'ember-runtime', 'ember-c
 
   /**
    Resumes a test paused by `pauseTest`.
-  
+
    @method resumeTest
    @return {void}
    @public
@@ -1682,34 +1682,34 @@ enifed('ember-testing/helpers/pause_test', ['exports', 'ember-runtime', 'ember-c
    Pauses the current test - this is useful for debugging while testing or for test-driving.
    It allows you to inspect the state of your application at any point.
    Example (The test will pause before clicking the button):
-  
+
    ```javascript
    visit('/')
    return pauseTest();
    click('.btn');
    ```
-  
+
    You may want to turn off the timeout before pausing.
-  
+
    qunit (as of 2.4.0):
-  
+
    ```
    visit('/');
    assert.timeout(0);
    return pauseTest();
    click('.btn');
    ```
-  
+
    mocha:
-  
+
    ```
    visit('/');
    this.timeout(0);
    return pauseTest();
    click('.btn');
    ```
-  
-  
+
+
    @since 1.9.0
    @method pauseTest
    @return {Object} A promise that will never resolve
@@ -1801,15 +1801,15 @@ enifed('ember-testing/helpers/visit', ['exports', 'ember-metal'], function (expo
     Loads a route, sets up any controllers, and renders any templates associated
     with the route as though a real user had triggered the route change while
     using your app.
-  
+
     Example:
-  
+
     ```javascript
     visit('posts/index').then(function() {
       // assert something
     });
     ```
-  
+
     @method visit
     @param {String} url the name of the route
     @return {RSVP.Promise<undefined>}
@@ -1849,19 +1849,19 @@ enifed('ember-testing/helpers/wait', ['exports', 'ember-testing/test/waiters', '
   /**
     Causes the run loop to process any pending events. This is used to ensure that
     any async operations from other helpers (or your assertions) have been processed.
-  
+
     This is most often used as the return value for the helper functions (see 'click',
     'fillIn','visit',etc). However, there is a method to register a test helper which
     utilizes this method without the need to actually call `wait()` in your helpers.
-  
+
     The `wait` helper is built into `registerAsyncHelper` by default. You will not need
     to `return app.testHelpers.wait();` - the wait behavior is provided for you.
-  
+
     Example:
-  
+
     ```javascript
     import { registerAsyncHelper } from '@ember/test';
-  
+
     registerAsyncHelper('loginUser', function(app, username, password) {
       visit('secured/path/here')
         .fillIn('#username', username)
@@ -1869,7 +1869,7 @@ enifed('ember-testing/helpers/wait', ['exports', 'ember-testing/test/waiters', '
         .click('.submit');
     });
     ```
-  
+
     @method wait
     @param {Object} value The value to be returned.
     @return {RSVP.Promise<any>} Promise that resolves to the passed value.
@@ -1971,10 +1971,10 @@ enifed('ember-testing/setup_for_testing', ['exports', 'ember-debug', 'ember-view
   /**
     Sets Ember up for testing. This is useful to perform
     basic setup steps in order to unit test.
-  
+
     Use `App.setupForTesting` to perform integration tests (full
     application testing).
-  
+
     @method setupForTesting
     @namespace Ember
     @since 1.5.0
@@ -2015,7 +2015,7 @@ enifed('ember-testing/support', ['ember-debug', 'ember-views', 'ember-environmen
     This method creates a checkbox and triggers the click event to fire the
     passed in handler. It is used to correct for a bug in older versions
     of jQuery (e.g 1.8.3).
-  
+
     @private
     @method testCheckboxClick
   */
@@ -2058,12 +2058,12 @@ enifed('ember-testing/test', ['exports', 'ember-testing/test/helpers', 'ember-te
 
   /**
     This is a container for an assortment of testing related functionality:
-  
+
     * Choose your default test adapter (for your framework of choice).
     * Register/Unregister additional test helpers.
     * Setup callbacks to be fired when the test helpers are injected into
       your application.
-  
+
     @class Test
     @namespace Ember
     @public
@@ -2092,17 +2092,17 @@ enifed('ember-testing/test', ['exports', 'ember-testing/test/helpers', 'ember-te
   /**
    Used to allow ember-testing to communicate with a specific testing
    framework.
-  
+
    You can manually set it before calling `App.setupForTesting()`.
-  
+
    Example:
-  
+
    ```javascript
    Ember.Test.adapter = MyCustomAdapter.create()
    ```
-  
+
    If you do not set it, ember-testing will default to `Ember.Test.QUnitAdapter`.
-  
+
    @public
    @for Ember.Test
    @property adapter
@@ -2174,32 +2174,32 @@ enifed('ember-testing/test/helpers', ['exports', 'ember-testing/test/promise'], 
   /**
     `registerHelper` is used to register a test helper that will be injected
     when `App.injectTestHelpers` is called.
-  
+
     The helper method will always be called with the current Application as
     the first parameter.
-  
+
     For example:
-  
+
     ```javascript
     import { registerHelper } from '@ember/test';
     import { run } from '@ember/runloop';
-  
+
     registerHelper('boot', function(app) {
       run(app, app.advanceReadiness);
     });
     ```
-  
+
     This helper can later be called without arguments because it will be
     called with `app` as the first parameter.
-  
+
     ```javascript
     import Application from '@ember/application';
-  
+
     App = Application.create();
     App.injectTestHelpers();
     boot();
     ```
-  
+
     @public
     @for @ember/test
     @static
@@ -2218,42 +2218,42 @@ enifed('ember-testing/test/helpers', ['exports', 'ember-testing/test/promise'], 
   /**
     `registerAsyncHelper` is used to register an async test helper that will be injected
     when `App.injectTestHelpers` is called.
-  
+
     The helper method will always be called with the current Application as
     the first parameter.
-  
+
     For example:
-  
+
     ```javascript
     import { registerAsyncHelper } from '@ember/test';
     import { run } from '@ember/runloop';
-  
+
     registerAsyncHelper('boot', function(app) {
       run(app, app.advanceReadiness);
     });
     ```
-  
+
     The advantage of an async helper is that it will not run
     until the last async helper has completed.  All async helpers
     after it will wait for it complete before running.
-  
-  
+
+
     For example:
-  
+
     ```javascript
     import { registerAsyncHelper } from '@ember/test';
-  
+
     registerAsyncHelper('deletePost', function(app, postId) {
       click('.delete-' + postId);
     });
-  
+
     // ... in your test
     visit('/post/2');
     deletePost(2);
     visit('/post/3');
     deletePost(3);
     ```
-  
+
     @public
     @for @ember/test
     @method registerAsyncHelper
@@ -2270,15 +2270,15 @@ enifed('ember-testing/test/helpers', ['exports', 'ember-testing/test/promise'], 
 
   /**
     Remove a previously added helper method.
-  
+
     Example:
-  
+
     ```javascript
     import { unregisterHelper } from '@ember/test';
-  
+
     unregisterHelper('wait');
     ```
-  
+
     @public
     @method unregisterHelper
     @static
@@ -2300,25 +2300,25 @@ enifed("ember-testing/test/on_inject_helpers", ["exports"], function (exports) {
   /**
     Used to register callbacks to be fired whenever `App.injectTestHelpers`
     is called.
-  
+
     The callback will receive the current application as an argument.
-  
+
     Example:
-  
+
     ```javascript
     import $ from 'jquery';
-  
+
     Ember.Test.onInjectHelpers(function() {
       $(document).ajaxSend(function() {
         Test.pendingRequests++;
       });
-  
+
       $(document).ajaxComplete(function() {
         Test.pendingRequests--;
       });
     });
     ```
-  
+
     @public
     @for Ember.Test
     @method onInjectHelpers
@@ -2410,9 +2410,9 @@ enifed('ember-testing/test/promise', ['exports', 'ember-babel', 'ember-runtime',
     This returns a thenable tailored for testing.  It catches failed
     `onSuccess` callbacks and invokes the `Ember.Test.adapter.exception`
     callback in the last chained then.
-  
+
     This method should be returned by async helpers such as `wait`.
-  
+
     @public
     @for Ember.Test
     @method promise
@@ -2428,7 +2428,7 @@ enifed('ember-testing/test/promise', ['exports', 'ember-babel', 'ember-runtime',
     Replacement for `Ember.RSVP.resolve`
     The only difference is this uses
     an instance of `Ember.Test.Promise`
-  
+
     @public
     @for Ember.Test
     @method resolve
@@ -2503,27 +2503,27 @@ enifed("ember-testing/test/waiters", ["exports"], function (exports) {
      after each async helper (i.e. `click`, `andThen`, `visit`, etc) has executed,
      until the returning result is truthy. After the waiters finish, the next async helper
      is executed and the process repeats.
-  
+
      For example:
-  
+
      ```javascript
      import { registerWaiter } from '@ember/test';
-  
+
      registerWaiter(function() {
        return myPendingTransactions() == 0;
      });
      ```
      The `context` argument allows you to optionally specify the `this`
      with which your callback will be invoked.
-  
+
      For example:
-  
+
      ```javascript
      import { registerWaiter } from '@ember/test';
-  
+
      registerWaiter(MyDB, MyDB.hasPendingTransactions);
      ```
-  
+
      @public
      @for @ember/test
      @static
@@ -2547,7 +2547,7 @@ enifed("ember-testing/test/waiters", ["exports"], function (exports) {
   /**
      `unregisterWaiter` is used to unregister a callback that was
      registered with `registerWaiter`.
-  
+
      @public
      @for @ember/test
      @static
@@ -2576,10 +2576,10 @@ enifed("ember-testing/test/waiters", ["exports"], function (exports) {
     Iterates through each registered test waiter, and invokes
     its callback. If any waiter returns false, this method will return
     true indicating that the waiters have not settled yet.
-  
+
     This is generally used internally from the acceptance/integration test
     infrastructure.
-  
+
     @public
     @for @ember/test
     @static
@@ -7904,7 +7904,7 @@ define('@ember/test-helpers/-utils', ['exports'], function (exports) {
    Retrieves an array of destroyables from the specified property on the object
    provided, iterates that array invoking each function, then deleting the
    property (clearing the array).
-  
+
    @private
    @param {Object} object an object to search for the destroyable array within
    @param {string} property the property on the object that contains the destroyable array
@@ -7937,10 +7937,10 @@ define('@ember/test-helpers/application', ['exports', '@ember/test-helpers/resol
 
   /**
     Stores the provided application instance so that tests being ran will be aware of the application under test.
-  
+
     - Required by `setupApplicationContext` method.
     - Used by `setupContext` and `setupRenderingContext` when present.
-  
+
     @public
     @param {Ember.Application} application the application that will be tested
   */
@@ -7957,7 +7957,7 @@ define('@ember/test-helpers/application', ['exports', '@ember/test-helpers/resol
 
   /**
     Retrieve the application instance stored by `setApplication`.
-  
+
     @public
     @returns {Ember.Application} the previously stored application instance under test
   */
@@ -7977,17 +7977,17 @@ define('@ember/test-helpers/build-owner', ['exports', 'ember-test-helpers/legacy
   /**
     Creates an "owner" (an object that either _is_ or duck-types like an
     `Ember.ApplicationInstance`) from the provided options.
-  
+
     If `options.application` is present (e.g. setup by an earlier call to
     `setApplication`) an `Ember.ApplicationInstance` is built via
     `application.buildInstance()`.
-  
+
     If `options.application` is not present, we fall back to using
     `options.resolver` instead (setup via `setResolver`). This creates a mock
     "owner" by using a custom created combination of `Ember.Registry`,
     `Ember.Container`, `Ember._ContainerProxyMixin`, and
     `Ember._RegistryProxyMixin`.
-  
+
     @private
     @param {Ember.Application} [application] the Ember.Application to build an instance from
     @param {Ember.Resolver} [resolver] the resolver to use to back a "mock owner"
@@ -8017,7 +8017,7 @@ define('@ember/test-helpers/dom/-get-element', ['exports', '@ember/test-helpers/
 
   /**
     Used internally by the DOM interaction helpers to find one element.
-  
+
     @private
     @param {string|Element} target the element or selector to retrieve
     @returns {Element} the target or selector
@@ -8045,7 +8045,7 @@ define('@ember/test-helpers/dom/-get-elements', ['exports', '@ember/test-helpers
 
   /**
     Used internally by the DOM interaction helpers to find multiple elements.
-  
+
     @private
     @param {string} target the selector to retrieve
     @returns {NodeList} the matched elements
@@ -8161,18 +8161,18 @@ define('@ember/test-helpers/dom/blur', ['exports', '@ember/test-helpers/dom/-get
 
   /**
     Unfocus the specified target.
-  
+
     Sends a number of events intending to simulate a "real" user unfocusing an
     element.
-  
+
     The following events are triggered (in order):
-  
+
     - `blur`
     - `focusout`
-  
+
     The exact listing of events that are triggered may change over time as needed
     to continue to emulate how actual browsers handle unfocusing a given element.
-  
+
     @public
     @param {string|Element} [target=document.activeElement] the element or selector to unfocus
     @return {Promise<void>} resolves when settled
@@ -8221,28 +8221,28 @@ define('@ember/test-helpers/dom/click', ['exports', '@ember/test-helpers/dom/-ge
 
   /**
     Clicks on the specified target.
-  
+
     Sends a number of events intending to simulate a "real" user clicking on an
     element.
-  
+
     For non-focusable elements the following events are triggered (in order):
-  
+
     - `mousedown`
     - `mouseup`
     - `click`
-  
+
     For focusable (e.g. form control) elements the following events are triggered
     (in order):
-  
+
     - `mousedown`
     - `focus`
     - `focusin`
     - `mouseup`
     - `click`
-  
+
     The exact listing of events that are triggered may change over time as needed
     to continue to emulate how actual browsers handle clicking a given element.
-  
+
     @public
     @param {string|Element} target the element or selector to click on
     @return {Promise<void>} resolves when settled
@@ -8276,7 +8276,7 @@ define('@ember/test-helpers/dom/fill-in', ['exports', '@ember/test-helpers/dom/-
     Fill the provided text into the `value` property (or set `.innerHTML` when
     the target is a content editable element) then trigger `change` and `input`
     events on the specified target.
-  
+
     @public
     @param {string|Element} target the element or selector to enter text into
     @param {string} text the text to fill into the target element
@@ -8328,7 +8328,7 @@ define('@ember/test-helpers/dom/find-all', ['exports', '@ember/test-helpers/dom/
   /**
     Find all elements matched by the given selector. Equivalent to calling
     `querySelectorAll()` on the test root element.
-  
+
     @public
     @param {string} selector the selector to search for
     @return {Array} array of matched elements
@@ -8353,7 +8353,7 @@ define('@ember/test-helpers/dom/find', ['exports', '@ember/test-helpers/dom/-get
   /**
     Find the first element matched by the given selector. Equivalent to calling
     `querySelector()` on the test root element.
-  
+
     @public
     @param {string} selector the selector to search for
     @return {Element} matched element or null
@@ -8382,7 +8382,7 @@ define('@ember/test-helpers/dom/fire-event', ['exports'], function (exports) {
 
   /**
     Internal helper used to build and dispatch events throughout the other DOM helpers.
-  
+
     @private
     @param {Element} element the element to dispatch the event to
     @param {string} eventType the type of event
@@ -8575,18 +8575,18 @@ define('@ember/test-helpers/dom/focus', ['exports', '@ember/test-helpers/dom/-ge
 
   /**
     Focus the specified target.
-  
+
     Sends a number of events intending to simulate a "real" user focusing an
     element.
-  
+
     The following events are triggered (in order):
-  
+
     - `focus`
     - `focusin`
-  
+
     The exact listing of events that are triggered may change over time as needed
     to continue to emulate how actual browsers handle focusing a given element.
-  
+
     @public
     @param {string|Element} target the element or selector to focus
     @return {Promise<void>} resolves when the application is settled
@@ -8623,7 +8623,7 @@ define('@ember/test-helpers/dom/get-root-element', ['exports', '@ember/test-help
 
   /**
     Get the root element of the application under test (usually `#ember-testing`)
-  
+
     @public
     @returns {Element} the root element
   */
@@ -8660,21 +8660,21 @@ define('@ember/test-helpers/dom/tap', ['exports', '@ember/test-helpers/dom/-get-
 
   /**
     Taps on the specified target.
-  
+
     Sends a number of events intending to simulate a "real" user tapping on an
     element.
-  
+
     For non-focusable elements the following events are triggered (in order):
-  
+
     - `touchstart`
     - `touchend`
     - `mousedown`
     - `mouseup`
     - `click`
-  
+
     For focusable (e.g. form control) elements the following events are triggered
     (in order):
-  
+
     - `touchstart`
     - `touchend`
     - `mousedown`
@@ -8682,10 +8682,10 @@ define('@ember/test-helpers/dom/tap', ['exports', '@ember/test-helpers/dom/-get-
     - `focusin`
     - `mouseup`
     - `click`
-  
+
     The exact listing of events that are triggered may change over time as needed
     to continue to emulate how actual browsers handle tapping on a given element.
-  
+
     @public
     @param {string|Element} target the element or selector to tap on
     @param {Object} options the options to be provided to the touch events
@@ -8724,7 +8724,7 @@ define('@ember/test-helpers/dom/trigger-event', ['exports', '@ember/test-helpers
 
   /**
     Triggers an event on the specified target.
-  
+
     @public
     @param {string|Element} target the element or selector to trigger the event on
     @param {string} eventType the type of event to trigger
@@ -8770,7 +8770,7 @@ define('@ember/test-helpers/dom/trigger-key-event', ['exports', '@ember/test-hel
 
   /**
     Triggers a keyboard event on the specified target.
-  
+
     @public
     @param {string|Element} target the element or selector to trigger the event on
     @param {'keydown' | 'keyup' | 'keypress'} eventType the type of event to trigger
@@ -8827,7 +8827,7 @@ define('@ember/test-helpers/dom/wait-for', ['exports', '@ember/test-helpers/wait
     Used to wait for a particular selector to appear in the DOM. Due to the fact
     that it does not wait for general settledness, this is quite useful for testing
     interim DOM states (e.g. loading states, pending promises, etc).
-  
+
     @param {string} selector the selector to wait for
     @param {Object} [options] the options to be used
     @param {number} [options.timeout=1000] the time to wait (in ms) for a match
@@ -8886,7 +8886,7 @@ define('@ember/test-helpers/has-ember-version', ['exports'], function (exports) 
   /**
     Checks if the currently running Ember version is greater than or equal to the
     specified major and minor version numbers.
-  
+
     @private
     @param {number} major the major version number to compare
     @param {number} minor the minor version number to compare
@@ -9135,9 +9135,9 @@ define("@ember/test-helpers/resolver", ["exports"], function (exports) {
   /**
     Stores the provided resolver instance so that tests being ran can resolve
     objects in the same way as a normal application.
-  
+
     Used by `setupContext` and `setupRenderingContext` as a fallback when `setApplication` was _not_ used.
-  
+
     @public
     @param {Ember.Resolver} resolver the resolver to be used for testing
   */
@@ -9147,7 +9147,7 @@ define("@ember/test-helpers/resolver", ["exports"], function (exports) {
 
   /**
     Retrieve the resolver instance stored by `setResolver`.
-  
+
     @public
     @returns {Ember.Resolver} the previously stored resolver
   */
@@ -9233,7 +9233,7 @@ define('@ember/test-helpers/settled', ['exports', '@ember/test-helpers/-utils', 
 
   /**
     Clears listeners that were previously setup for `ajaxSend` and `ajaxComplete`.
-  
+
     @private
   */
   function _teardownAJAXHooks() {
@@ -9247,7 +9247,7 @@ define('@ember/test-helpers/settled', ['exports', '@ember/test-helpers/-utils', 
 
   /**
     Sets up listeners for `ajaxSend` and `ajaxComplete`.
-  
+
     @private
   */
   function _setupAJAXHooks() {
@@ -9284,7 +9284,7 @@ define('@ember/test-helpers/settled', ['exports', '@ember/test-helpers/-utils', 
 
   /**
     Check various settledness metrics, and return an object with the following properties:
-  
+
     * `hasRunLoop` - Checks if a run-loop has been started. If it has, this will
       be `true` otherwise it will be `false`.
     * `hasPendingTimers` - Checks if there are scheduled timers in the run-loop.
@@ -9297,7 +9297,7 @@ define('@ember/test-helpers/settled', ['exports', '@ember/test-helpers/-utils', 
       `ajaxSend` / `ajaxComplete` events triggered by `jQuery.ajax`). If there
       are pending requests, this will be `true`, otherwise `false`.
     * `pendingRequestCount` - The count of pending AJAX requests.
-  
+
     @public
     @returns {Object} object with properties for each of the metrics used to determine settledness
   */
@@ -9315,11 +9315,11 @@ define('@ember/test-helpers/settled', ['exports', '@ember/test-helpers/-utils', 
 
   /**
     Checks various settledness metrics (via `getSettledState()`) to determine if things are settled or not.
-  
+
     Settled generally means that there are no pending timers, no pending waiters,
     no pending AJAX requests, and no current run loop. However, new settledness
     metrics may be added and used as they become available.
-  
+
     @public
     @returns {boolean} `true` if settled, `false` otherwise
   */
@@ -9336,7 +9336,7 @@ define('@ember/test-helpers/settled', ['exports', '@ember/test-helpers/-utils', 
   /**
     Returns a promise that resolves when in a settled state (see `isSettled` for
     a definition of "settled state").
-  
+
     @public
     @returns {Promise<void>} resolves when settled
   */
@@ -9358,7 +9358,7 @@ define('@ember/test-helpers/setup-application-context', ['exports', '@ember/test
 
   /**
     Navigate the application to the provided URL.
-  
+
     @public
     @returns {Promise<void>} resolves when settled
   */
@@ -9408,12 +9408,12 @@ define('@ember/test-helpers/setup-application-context', ['exports', '@ember/test
   /**
     Used by test framework addons to setup the provided context for working with
     an application (e.g. routing).
-  
+
     `setupContext` must have been ran on the provided context prior to calling
     `setupApplicatinContext`.
-  
+
     Sets up the basic framework used by application tests.
-  
+
     @public
     @param {Object} context the context to setup
     @returns {Promise<Object>} resolves with the context that was setup
@@ -9524,9 +9524,9 @@ define('@ember/test-helpers/setup-context', ['exports', '@ember/test-helpers/bui
 
   /**
     Stores the provided context as the "global testing context".
-  
+
     Generally setup automatically by `setupContext`.
-  
+
     @public
     @param {Object} context the context to use
   */
@@ -9536,7 +9536,7 @@ define('@ember/test-helpers/setup-context', ['exports', '@ember/test-helpers/bui
 
   /**
     Retrive the "global testing context" as stored by `setContext`.
-  
+
     @public
     @returns {Object} the previously stored testing context
   */
@@ -9546,9 +9546,9 @@ define('@ember/test-helpers/setup-context', ['exports', '@ember/test-helpers/bui
 
   /**
     Clear the "global testing context".
-  
+
     Generally invoked from `teardownContext`.
-  
+
     @public
   */
   function unsetContext() {
@@ -9601,7 +9601,7 @@ define('@ember/test-helpers/setup-context', ['exports', '@ember/test-helpers/bui
 
   /**
     Resumes a test previously paused by `await pauseTest()`.
-  
+
     @public
   */
   function resumeTest() {
@@ -9618,15 +9618,15 @@ define('@ember/test-helpers/setup-context', ['exports', '@ember/test-helpers/bui
 
   /**
     Used by test framework addons to setup the provided context for testing.
-  
+
     Responsible for:
-  
+
     - sets the "global testing context" to the provided context (`setContext`)
     - create an owner object and set it on the provided context (e.g. `this.owner`)
     - setup `this.set`, `this.setProperties`, `this.get`, and `this.getProperties` to the provided context
     - setting up AJAX listeners
     - setting up `pauseTest` (also available as `this.pauseTest()`) and `resumeTest` helpers
-  
+
     @public
     @param {Object} context the context to setup
     @param {Object} [options] options used to override defaults
@@ -9688,7 +9688,7 @@ define('@ember/test-helpers/setup-rendering-context', ['exports', '@ember/test-h
   let templateId = 0;
   /**
     Renders the provided template and appends it to the DOM.
-  
+
     @public
     @param {CompiledTemplate} template the template to render
     @returns {Promise<void>} resolves when settled
@@ -9752,7 +9752,7 @@ define('@ember/test-helpers/setup-rendering-context', ['exports', '@ember/test-h
     Clears any templates previously rendered. This is commonly used for
     confirming behavior that is triggered by teardown (e.g.
     `willDestroyElement`).
-  
+
     @public
     @returns {Promise<void>} resolves when settled
   */
@@ -9768,19 +9768,19 @@ define('@ember/test-helpers/setup-rendering-context', ['exports', '@ember/test-h
 
   /**
     Used by test framework addons to setup the provided context for rendering.
-  
+
     `setupContext` must have been ran on the provided context
     prior to calling `setupRenderingContext`.
-  
+
     Responsible for:
-  
+
     - Setup the basic framework used for rendering by the
       `render` helper.
     - Ensuring the event dispatcher is properly setup.
     - Setting `this.element` to the root element of the testing
       container (things rendered via `render` will go _into_ this
       element).
-  
+
     @public
     @param {Object} context the context to setup for rendering
     @returns {Promise<Object>} resolves with the context that was setup
@@ -9867,13 +9867,13 @@ define('@ember/test-helpers/teardown-context', ['exports', '@ember/test-helpers/
 
   /**
     Used by test framework addons to tear down the provided context after testing is completed.
-  
+
     Responsible for:
-  
+
     - un-setting the "global testing context" (`unsetContext`)
     - destroy the contexts owner object
     - remove AJAX listeners
-  
+
     @public
     @param {Object} context the context to setup
     @returns {Promise<void>} resolves when settled
@@ -9910,12 +9910,12 @@ define('@ember/test-helpers/teardown-rendering-context', ['exports', '@ember/tes
 
   /**
     Used by test framework addons to tear down the provided context after testing is completed.
-  
+
     Responsible for:
-  
+
     - resetting the `ember-testing-container` to its original state (the value
       when `setupRenderingContext` was called).
-  
+
     @public
     @param {Object} context the context to setup
     @returns {Promise<void>} resolves when settled
@@ -10003,10 +10003,10 @@ define('@ember/test-helpers/wait-until', ['exports', '@ember/test-helpers/-utils
 
   /**
     Wait for the provided callback to return a truthy value.
-  
+
     This does not leverage `settled()`, and as such can be used to manage async
     while _not_ settled (e.g. "loading" or "pending" states).
-  
+
     @public
     @param {Function} callback the callback to use for testing when waiting should stop
     @param {Object} [options] options used to override defaults
@@ -10445,12 +10445,12 @@ define('ember-qunit/index', ['exports', 'ember-qunit/legacy-2-x/module-for', 'em
 
   /**
      Uses current URL configuration to setup the test container.
-  
+
      * If `?nocontainer` is set, the test container will be hidden.
      * If `?dockcontainer` or `?devmode` are set the test container will be
        absolutely positioned.
      * If `?devmode` is set, the test container will be made full screen.
-  
+
      @method setupTestContainer
    */
   function setupTestContainer() {
@@ -10487,7 +10487,7 @@ define('ember-qunit/index', ['exports', 'ember-qunit/legacy-2-x/module-for', 'em
 
   /**
      Sets up the `Ember.Test` adapter for usage with QUnit 2.x.
-  
+
      @method setupTestAdapter
    */
   function setupTestAdapter() {
@@ -10498,7 +10498,7 @@ define('ember-qunit/index', ['exports', 'ember-qunit/legacy-2-x/module-for', 'em
     Ensures that `Ember.testing` is set to `true` before each test begins
     (including `before` / `beforeEach`), and reset to `false` after each test is
     completed. This is done via `QUnit.testStart` and `QUnit.testDone`.
-  
+
    */
   function setupEmberTesting() {
     _qunit.default.testStart(() => {
@@ -10714,16 +10714,16 @@ define('ember-qunit/test-loader', ['exports', 'qunit', 'ember-cli-test-loader/te
   exports.TestLoader = TestLoader;
   /**
      Load tests following the default patterns:
-  
+
      * The module name ends with `-test`
      * The module name ends with `.jshint`
-  
+
      Excludes tests that match the following
      patterns when `?nolint` URL param is set:
-  
+
      * The module name ends with `.jshint`
      * The module name ends with `-lint-test`
-  
+
      @method loadTests
    */
   function loadTests() {
@@ -11228,7 +11228,7 @@ define('ember-test-helpers/legacy-0-6-x/ext/rsvp', ['exports'], function (export
     Configures `RSVP` to resolve promises on the run-loop's action queue. This is
     done by Ember internally since Ember 1.7 and it is only needed to
     provide a consistent testing experience for users of Ember < 1.7.
-  
+
     @private
   */
   function _setupPromiseListeners() {
@@ -11243,7 +11243,7 @@ define('ember-test-helpers/legacy-0-6-x/ext/rsvp', ['exports'], function (export
 
   /**
     Resets `RSVP`'s `async` to its prior value.
-  
+
     @private
   */
   function _teardownPromiseListeners() {
@@ -11981,7 +11981,7 @@ define('ember-test-helpers/wait', ['exports', '@ember/test-helpers/settled', '@e
   /**
     Returns a promise that resolves when in a settled state (see `isSettled` for
     a definition of "settled state").
-  
+
     @private
     @deprecated
     @param {Object} [options={}] the options to be used for waiting

@@ -16,13 +16,13 @@ diff --git a/modules/pdfium/pdfium/core/fxcodec/codec/fx_codec_flate.cpp b/modul
  #include <memory>
  #include <utility>
  #include <vector>
- 
+
  #include "core/fxcodec/fx_codec.h"
  #include "core/fxcrt/fx_ext.h"
  #include "third_party/base/ptr_util.h"
 -#include "third_party/zlib_v128/zlib.h"
 +#include "zlib.h"
- 
+
  extern "C" {
  static void* my_alloc_func(void* opaque,
                             unsigned int items,

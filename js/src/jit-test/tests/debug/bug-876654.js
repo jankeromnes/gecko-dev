@@ -1,4 +1,4 @@
-// |jit-test| 
+// |jit-test|
 // Exercise finding a DebuggerSource cross compartment wrapper in
 // Compartment::findOutgoingEdges()
 

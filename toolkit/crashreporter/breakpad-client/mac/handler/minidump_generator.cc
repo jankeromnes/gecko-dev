@@ -1066,7 +1066,7 @@ bool MinidumpGenerator::WriteMemoryListStream(
         ip_memory_d.start_of_memory_range =
           std::max(uintptr_t(addr),
                    uintptr_t(ip - (kIPMemorySize / 2)));
-        uintptr_t end_of_range = 
+        uintptr_t end_of_range =
           std::min(uintptr_t(ip + (kIPMemorySize / 2)),
                    uintptr_t(addr + size));
         uintptr_t range_diff = end_of_range -

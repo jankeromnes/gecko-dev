@@ -9,14 +9,14 @@
 #import <Cocoa/Cocoa.h>
 
 //  WindowDataMap
-// 
+//
 //  In both mozilla and embedding apps, we need to have a place to put
 //  per-top-level-window logic and data, to handle such things as IME
-//  commit when the window gains/loses focus. We can't use a window 
+//  commit when the window gains/loses focus. We can't use a window
 //  delegate, because an embeddor probably already has one. Nor can we
 //  subclass NSWindow, again because we can't impose that burden on the
 //  embeddor.
-// 
+//
 //  So we have a global map of NSWindow -> TopLevelWindowData, and set
 //  up TopLevelWindowData as a notification observer etc.
 
@@ -43,7 +43,7 @@
 @class ChildView;
 
 //  TopLevelWindowData
-// 
+//
 //  Class to hold per-window data, and handle window state changes.
 
 @interface TopLevelWindowData : NSObject

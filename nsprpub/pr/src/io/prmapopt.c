@@ -178,7 +178,7 @@ PRStatus PR_CALLBACK _PR_SocketGetSocketOption(PRFileDesc *fd, PRSocketOptionDat
             default:
                 PR_NOT_REACHED("Unknown socket option");
                 break;
-        }  
+        }
     }
     return rv;
 }  /* _PR_SocketGetSocketOption */
@@ -315,7 +315,7 @@ PRStatus PR_CALLBACK _PR_SocketSetSocketOption(PRFileDesc *fd, const PRSocketOpt
             default:
                 PR_NOT_REACHED("Unknown socket option");
                 break;
-        }  
+        }
     }
     return rv;
 }  /* _PR_SocketSetSocketOption */

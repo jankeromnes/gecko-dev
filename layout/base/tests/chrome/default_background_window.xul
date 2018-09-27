@@ -19,7 +19,7 @@
     for (var name of imports) {
       window[name] = window.opener.wrappedJSObject[name];
     }
-    
+
     function snapshot(win) {
       var el = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
       el.width = win.innerWidth;

@@ -309,7 +309,7 @@ pkix_pl_LdapCertStore_BuildCrlList(
                             }
                             /* pkix crl own the der. */
                             PKIX_CHECK(
-                                pkix_pl_CRL_CreateWithSignedCRL(nssCrl, 
+                                pkix_pl_CRL_CreateWithSignedCRL(nssCrl,
                                        derCrlCopy, NULL, &crl, plContext),
                                 PKIX_CRLCREATEWITHSIGNEDCRLFAILED);
                             /* Left control over memory pointed by derCrlCopy and
@@ -427,7 +427,7 @@ pkix_pl_LdapCertStore_DestroyAVAList(
 static PKIX_Error *
 pkix_pl_LdapCertStore_MakeNameAVAList(
         PLArenaPool *arena,
-        PKIX_PL_X500Name *subjectName, 
+        PKIX_PL_X500Name *subjectName,
         LDAPNameComponent ***pList,
         void *plContext)
 {

@@ -333,7 +333,7 @@ Recent Changes
     new lifetime bounds on NeighborIter and Dfs, impact should be minimal.
 
 - 0.1.10
-  
+
   - Fix bug in WalkEdges::next_neighbor()
 
 - 0.1.9

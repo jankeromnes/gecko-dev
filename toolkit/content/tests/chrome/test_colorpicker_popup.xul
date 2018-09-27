@@ -8,8 +8,8 @@
   onpopuphidden="popupHiding();"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>      
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/EventUtils.js"></script>      
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/EventUtils.js"></script>
 
 <colorpicker id="colorpicker-popup" type="button" color="#FF0000" tabindex="1"/>
 
@@ -31,7 +31,7 @@ function runTests()
   is(gCp.color, "#FF0000", "popup color is initialized");
   is(gCp.tabIndex, 1, "button tabindex is initialized");
   is(gCp.disabled, false, "button is not disabled");
-  
+
   document.addEventListener("keypress", preventDefault, false);
 
   goNext();

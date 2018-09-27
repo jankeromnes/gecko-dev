@@ -17,7 +17,7 @@
             return;
           }
           f1.removeAttribute("systemLanguage");
-          
+
         } catch(e) {
           var f = document.getElementById("fail");
           f.setAttribute("fill", "red");

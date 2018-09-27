@@ -115,7 +115,7 @@ CreateAlias(JSContext* cx, const char* dstName, JS::HandleObject namespaceObj, c
         JS_ReportErrorASCII(cx, "attempted to alias nonexistent function");
         return false;
     }
-    
+
     RootedObject function(cx, &val.toObject());
     if (!JS_DefineProperty(cx, global, dstName, function, 0)) {
         return false;

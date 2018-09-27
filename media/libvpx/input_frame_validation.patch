@@ -16,7 +16,7 @@ diff --git a/media/libvpx/libvpx/vp8/vp8_cx_iface.c b/media/libvpx/libvpx/vp8/vp
 
      if (img != NULL) {
        res = image2yuvconfig(img, &sd);
- 
+
 -      if (vp8_receive_raw_frame(ctx->cpi, ctx->next_frame_flag | lib_flags, &sd,
 -                                dst_time_stamp, dst_end_time_stamp)) {
 -        VP8_COMP *cpi = (VP8_COMP *)ctx->cpi;

@@ -1,4 +1,4 @@
-#! /bin/bash  
+#! /bin/bash
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,7 +9,7 @@
 #
 # Script to test basic functionallity of the NSSLoHash API
 #
-# included from 
+# included from
 # --------------
 #   all.sh
 #
@@ -26,7 +26,7 @@
 errors=0
 
 ############################## lowhash_init ##############################
-# local shell function to initialize this script 
+# local shell function to initialize this script
 ########################################################################
 lowhash_init()
 {
@@ -79,7 +79,7 @@ lowhash_test()
 }
 
 ############################## lowhash_cleanup ############################
-# local shell function to finish this script (no exit since it might be 
+# local shell function to finish this script (no exit since it might be
 # sourced)
 ########################################################################
 lowhash_cleanup()

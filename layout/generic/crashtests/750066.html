@@ -12,8 +12,8 @@ function resize(w) {
   win.frameElement.style.width = w;
 }
 function doTest() {
-  resize('1000px'); 
-  setTimeout(function(){ 
+  resize('1000px');
+  setTimeout(function(){
     resize('500px');
     setTimeout(function(){
       document.documentElement.removeAttribute("class");

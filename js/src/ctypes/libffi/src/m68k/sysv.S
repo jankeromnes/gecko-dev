@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------
-	
+
    sysv.S - Copyright (c) 2012 Alan Hourihane
 	    Copyright (c) 1998, 2012 Andreas Schwab
 	    Copyright (c) 2008 Red Hat, Inc.
@@ -28,7 +28,7 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#define LIBFFI_ASM	
+#define LIBFFI_ASM
 #include <fficonfig.h>
 #include <ffi.h>
 
@@ -75,7 +75,7 @@ CALLFUNC(ffi_call_SYSV):
 #else
 	bsr.l	CALLFUNC(ffi_prep_args@PLTPC)
 #endif
-	addq.l	#8,%sp	
+	addq.l	#8,%sp
 
 	| Pass pointer to struct value, if any
 #ifdef __MINT__
@@ -94,7 +94,7 @@ CALLFUNC(ffi_call_SYSV):
 	| Load the pointer to storage for the return value
 	move.l	20(%fp),%a1
 
-	| Load the return type code 
+	| Load the return type code
 	move.l	16(%fp),%d2
 
 	| If the return value pointer is NULL, assume no return value.

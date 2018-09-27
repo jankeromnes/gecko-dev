@@ -258,7 +258,7 @@ nsWinGesture::ProcessPanMessage(HWND hWnd, WPARAM wParam, LPARAM lParam)
   nsPointWin coord;
   coord = mPanRefPoint = gi.ptsLocation;
   // We want screen coordinates in our local offsets as client coordinates will change
-  // when feedback is taking place. Gui events though require client coordinates. 
+  // when feedback is taking place. Gui events though require client coordinates.
   mPanRefPoint.ScreenToClient(hWnd);
 
   switch(gi.dwID)
@@ -283,7 +283,7 @@ nsWinGesture::ProcessPanMessage(HWND hWnd, WPARAM wParam, LPARAM lParam)
 #ifdef DBG_jimm
         int32_t deltaX = mPanIntermediate.x - coord.x;
         int32_t deltaY = mPanIntermediate.y - coord.y;
-        MOZ_LOG(gWindowsLog, LogLevel::Info, 
+        MOZ_LOG(gWindowsLog, LogLevel::Info,
                ("coordX=%d coordY=%d deltaX=%d deltaY=%d x:%d y:%d\n", coord.x,
                 coord.y, deltaX, deltaY, mXAxisFeedback, mYAxisFeedback));
 #endif
@@ -310,7 +310,7 @@ nsWinGesture::ProcessPanMessage(HWND hWnd, WPARAM wParam, LPARAM lParam)
 inline bool TestTransition(int32_t a, int32_t b)
 {
   // If a is zero, overflow is zero, implying the cursor has moved back to the start position.
-  // If b is zero, cached overscroll is zero, implying feedback just begun. 
+  // If b is zero, cached overscroll is zero, implying feedback just begun.
   if (a == 0 || b == 0) return true;
   // Test for different signs.
   return (a < 0) == (b < 0);
@@ -325,12 +325,12 @@ nsWinGesture::UpdatePanFeedbackX(HWND hWnd, int32_t scrollOverflow, bool& endFee
     if (!mFeedbackActive) {
       BeginPanningFeedback(hWnd);
       mFeedbackActive = true;
-    }      
+    }
     endFeedback = false;
     mXAxisFeedback = true;
     return;
   }
-  
+
   if (mXAxisFeedback) {
     int32_t newOverflow = mPixelScrollOverflow.x - mPixelScrollDelta.x;
 
@@ -359,7 +359,7 @@ nsWinGesture::UpdatePanFeedbackY(HWND hWnd, int32_t scrollOverflow, bool& endFee
     mYAxisFeedback = true;
     return;
   }
-  
+
   if (mYAxisFeedback) {
     int32_t newOverflow = mPixelScrollOverflow.y - mPixelScrollDelta.y;
 

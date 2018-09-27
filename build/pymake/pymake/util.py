@@ -25,7 +25,7 @@ def joiniter(fd, it):
     """
     Given an iterator that returns strings, write the words with a space in between each.
     """
-    
+
     it = iter(it)
     for i in it:
         fd.write(i)

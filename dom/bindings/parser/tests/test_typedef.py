@@ -44,7 +44,7 @@ def WebIDLTest(parser, harness):
         threw = True
 
     harness.ok(threw, "Should have thrown on nullable inside nullable const.")
-    
+
     parser = parser.reset()
     threw = False
     try:

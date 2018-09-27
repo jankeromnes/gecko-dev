@@ -1,4 +1,4 @@
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -22,7 +22,7 @@ EXTRA_SHARED_LIBS += \
 	-lplds4 \
 	-lnspr4 \
 	$(NULL)
-else 
+else
 EXTRA_SHARED_LIBS += \
         $(NSPR_LIB_DIR)/$(NSPR31_LIB_PREFIX)plc4.lib \
         $(NSPR_LIB_DIR)/$(NSPR31_LIB_PREFIX)plds4.lib \

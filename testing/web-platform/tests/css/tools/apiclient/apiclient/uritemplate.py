@@ -95,7 +95,7 @@ class URITemplate(object):
         for part in self.parts:
             vars.update(part.variables)
         return vars
-    
+
     def expand(self, **kwargs):
         try:
             expanded = [part.expand(kwargs) for part in self.parts]
@@ -116,10 +116,10 @@ class Variable(object):
         self.maxLength = None
         self.explode = False
         self.array = False
-        
+
         if (name[0:1] not in URITemplate.varstart):
             raise BadVariable(name)
-        
+
         if (':' in name):
             name, maxLength = name.split(':', 1)
             if ((0 < len(maxLength)) and (len(maxLength) < 4)):
@@ -138,7 +138,7 @@ class Variable(object):
             name = name[:-2]
             self.array = True
             self.explode = True
-        
+
         index = 0
         while (index < len(name)):
             codepoint = name[index]
@@ -158,7 +158,7 @@ class Variable(object):
 class Expression(object):
     def __init__(self):
         pass
-    
+
     @property
     def variables(self):
         return []
@@ -188,19 +188,19 @@ class Expression(object):
 
     def _uriEncodeName(self, name):
         return self._encode(unicode(name), URITemplate.unreserved + URITemplate.reserved, True) if (name) else ''
-    
+
     def _join(self, prefix, joiner, value):
         if (prefix):
             return prefix + joiner + value
         return value
-    
+
     def _encodeStr(self, variable, name, value, prefix, joiner, first):
         if (variable.maxLength):
             if (not first):
                 raise BadExpansion(variable)
             return self._join(prefix, joiner, self._uriEncodeValue(value[:variable.maxLength]))
         return self._join(prefix, joiner, self._uriEncodeValue(value))
-    
+
     def _encodeDictItem(self, variable, name, key, item, delim, prefix, joiner, first):
         joiner = '=' if (variable.explode) else ','
         if (variable.array):
@@ -214,7 +214,7 @@ class Expression(object):
             prefix = prefix + '[' + unicode(index) + ']' if (prefix) else ''
             return self._encodeVar(variable, None, item, delim, prefix, joiner, False)
         return self._encodeVar(variable, name, item, delim, prefix, '.', False)
-    
+
     def _encodeVar(self, variable, name, value, delim = ',', prefix = '', joiner = '=', first = True):
         if (isinstance(value, basestring)):
             return self._encodeStr(variable, name, value, prefix, joiner, first)
@@ -247,7 +247,7 @@ class Literal(Expression):
 class Expansion(Expression):
     operator = ''
     varJoiner = ','
-    
+
     def __init__(self, variables):
         Expression.__init__(self)
         self.vars = [Variable(var) for var in variables.split(',')]
@@ -255,10 +255,10 @@ class Expansion(Expression):
     @property
     def variables(self):
         return [var.name for var in self.vars]
-    
+
     def _expandVar(self, variable, value):
         return self._encodeVar(variable, self._uriEncodeName(variable.name), value)
-    
+
     def expand(self, values):
         expandedVars = []
         for var in self.vars:
@@ -271,8 +271,8 @@ class Expansion(Expression):
             if (expanded is not None):
                 return self.operator + expanded
         return None
-    
-    
+
+
 class SimpleExpansion(Expansion):
     def __init__(self, variables):
         Expansion.__init__(self, variables)
@@ -288,7 +288,7 @@ class ReservedExpansion(Expansion):
 
 class FragmentExpansion(ReservedExpansion):
     operator = '#'
-    
+
     def __init__(self, variables):
         ReservedExpansion.__init__(self, variables)
 
@@ -296,7 +296,7 @@ class FragmentExpansion(ReservedExpansion):
 class LabelExpansion(Expansion):
     operator = '.'
     varJoiner = '.'
-    
+
     def __init__(self, variables):
         Expansion.__init__(self, variables[1:])
 
@@ -307,7 +307,7 @@ class LabelExpansion(Expansion):
 class PathExpansion(Expansion):
     operator = '/'
     varJoiner = '/'
-    
+
     def __init__(self, variables):
         Expansion.__init__(self, variables[1:])
 
@@ -318,7 +318,7 @@ class PathExpansion(Expansion):
 class PathStyleExpansion(Expansion):
     operator = ';'
     varJoiner = ';'
-    
+
     def __init__(self, variables):
         Expansion.__init__(self, variables[1:])
 
@@ -329,7 +329,7 @@ class PathStyleExpansion(Expansion):
         elif (variable.explode):
             prefix = self._join(prefix, '.', name)
         return Expansion._encodeStr(self, variable, name, value, prefix, joiner, first)
-    
+
     def _encodeDictItem(self, variable, name, key, item, delim, prefix, joiner, first):
         if (variable.array):
             if (name):
@@ -359,7 +359,7 @@ class PathStyleExpansion(Expansion):
 class FormStyleQueryExpansion(PathStyleExpansion):
     operator = '?'
     varJoiner = '&'
-    
+
     def __init__(self, variables):
         PathStyleExpansion.__init__(self, variables)
 
@@ -372,7 +372,7 @@ class FormStyleQueryExpansion(PathStyleExpansion):
 
 class FormStyleQueryContinuation(FormStyleQueryExpansion):
     operator = '&'
-    
+
     def __init__(self, variables):
         FormStyleQueryExpansion.__init__(self, variables)
 

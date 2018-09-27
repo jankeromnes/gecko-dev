@@ -69,7 +69,7 @@
                          false, false, KeyEvent.DOM_VK_BACK_SPACE, 0);
       gFindBar._findField.inputField.dispatchEvent(event);
 
-      var notRed = !findField.hasAttribute("status") || 
+      var notRed = !findField.hasAttribute("status") ||
                    (findField.getAttribute("status") != "notfound");
       ok(notRed, "Find Bar textbox is correct colour");
       finish();

@@ -5,7 +5,7 @@
         <script type="text/javascript" charset="utf-8">
             function selectNewlyAdded() {
                 window.getSelection().removeAllRanges();
-                
+
                 var newNode = document.createElement('span');
                 newNode.innerHTML = "Hello Kitty";
                 document.getElementById('new_nodes').appendChild(newNode);
@@ -13,7 +13,7 @@
                 range.selectNode(newNode);
                 window.getSelection().addRange(range);
             }
-            
+
         </script>
     </head>
     <body onload="selectNewlyAdded()">

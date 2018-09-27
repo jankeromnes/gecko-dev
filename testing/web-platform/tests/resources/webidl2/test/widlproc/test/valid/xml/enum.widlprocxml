@@ -5,7 +5,7 @@
 
 interface Meal {
   attribute <ref>MealType</ref> type;
-  attribute float size;     
+  attribute float size;
 
   void initialize(<ref>MealType</ref> type, float size);
 };</webidl>
@@ -24,7 +24,7 @@ interface Meal {
   <Interface name="Meal" id="::Meal">
     <webidl>interface Meal {
   attribute <ref>MealType</ref> type;
-  attribute float size;     
+  attribute float size;
 
   void initialize(<ref>MealType</ref> type, float size);
 };</webidl>

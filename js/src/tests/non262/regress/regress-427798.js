@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function f(N)
   {
     for (var i = 0; i != N; ++i) {

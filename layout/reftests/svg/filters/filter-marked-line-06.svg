@@ -9,7 +9,7 @@
    clipped when the 'path' is filtered.
   </desc>
   <defs>
-    <marker id="marker" markerWidth="200" markerHeight="200" refX="0" refY="100" 
+    <marker id="marker" markerWidth="200" markerHeight="200" refX="0" refY="100"
             markerUnits="userSpaceOnUse" viewBox="-100 0 200 200">
       <g transform="translate(100, 0)">
         <circle fill="lime" r="100" cx="-100" cy="100"/>

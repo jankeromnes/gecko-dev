@@ -14,7 +14,7 @@ if (eval("var x = 0; x\u0009++; x") !== 1) {
 
 //CHECK#2
 if (eval("var x = 0; x\u000B++; x") !== 1) {
-	$ERROR('#2: var x = 0; x\\u000B++; x === 1. Actual: ' + (x));	
+	$ERROR('#2: var x = 0; x\\u000B++; x === 1. Actual: ' + (x));
 }
 
 //CHECK#3

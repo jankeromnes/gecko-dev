@@ -1,5 +1,5 @@
 // Windows/Control/CommandBar.h
-  
+
 #ifndef __WINDOWS_CONTROL_COMMANDBAR_H
 #define __WINDOWS_CONTROL_COMMANDBAR_H
 
@@ -22,7 +22,7 @@ public:
     _window = ::CommandBar_Create(hInst, hwndParent, idCmdBar);
     return (_window != NULL);
   }
-  
+
   // Macros
   // void Destroy() { CommandBar_Destroy(_window); }
   // bool AddButtons(UINT numButtons, LPTBBUTTON buttons) { return BOOLToBool(SendMsg(TB_ADDBUTTONS, (WPARAM)numButtons, (LPARAM)buttons)); }
@@ -39,7 +39,7 @@ public:
   bool InsertMenubar(HINSTANCE hInst, WORD idMenu, WORD iButton) { return BOOLToBool(::CommandBar_InsertMenubar(_window, hInst, idMenu, iButton)); }
   bool InsertMenubarEx(HINSTANCE hInst, LPTSTR pszMenu, WORD iButton) { return BOOLToBool(::CommandBar_InsertMenubarEx(_window, hInst, pszMenu, iButton)); }
   bool Show(bool cmdShow) { return BOOLToBool(::CommandBar_Show(_window, BoolToBOOL(cmdShow))); }
-  
+
 
   // CE 4.0
   void AlignAdornments() { CommandBar_AlignAdornments(_window); }

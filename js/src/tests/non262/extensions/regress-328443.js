@@ -28,5 +28,5 @@ try {
   actual = "Exception caught";
   printStatus("Exception was caught: " + er);
 }
- 
+
 reportCompare(expect, actual, summary);

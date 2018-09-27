@@ -86,7 +86,7 @@ nsClipboard::EmptyClipboard(int32_t aWhichClipboard)
   if (aWhichClipboard != kGlobalClipboard)
     return NS_ERROR_NOT_IMPLEMENTED;
   java::Clipboard::ClearText(java::GeckoAppShell::GetApplicationContext());
-  
+
   return NS_OK;
 }
 

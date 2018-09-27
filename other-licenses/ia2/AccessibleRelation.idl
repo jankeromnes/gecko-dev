@@ -1,64 +1,64 @@
 /*************************************************************************
  *
  *  File Name (AccessibleRelation.idl)
- * 
- *  IAccessible2 IDL Specification 
- * 
- *  Copyright (c) 2007, 2013 Linux Foundation 
- *  Copyright (c) 2006 IBM Corporation 
- *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
- *  All rights reserved. 
- *   
- *   
- *  Redistribution and use in source and binary forms, with or without 
- *  modification, are permitted provided that the following conditions 
- *  are met: 
- *   
- *   1. Redistributions of source code must retain the above copyright 
- *      notice, this list of conditions and the following disclaimer. 
- *   
- *   2. Redistributions in binary form must reproduce the above 
- *      copyright notice, this list of conditions and the following 
- *      disclaimer in the documentation and/or other materials 
- *      provided with the distribution. 
  *
- *   3. Neither the name of the Linux Foundation nor the names of its 
- *      contributors may be used to endorse or promote products 
- *      derived from this software without specific prior written 
- *      permission. 
- *   
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
- *  CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
- *  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
- *  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
- *  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
- *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
- *  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
- *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
- *  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
- *  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- *  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
- *   
- *  This BSD License conforms to the Open Source Initiative "Simplified 
- *  BSD License" as published at: 
- *  http://www.opensource.org/licenses/bsd-license.php 
- *   
- *  IAccessible2 is a trademark of the Linux Foundation. The IAccessible2 
- *  mark may be used in accordance with the Linux Foundation Trademark 
- *  Policy to indicate compliance with the IAccessible2 specification. 
- * 
- ************************************************************************/ 
+ *  IAccessible2 IDL Specification
+ *
+ *  Copyright (c) 2007, 2013 Linux Foundation
+ *  Copyright (c) 2006 IBM Corporation
+ *  Copyright (c) 2000, 2006 Sun Microsystems, Inc.
+ *  All rights reserved.
+ *
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *
+ *   1. Redistributions of source code must retain the above copyright
+ *      notice, this list of conditions and the following disclaimer.
+ *
+ *   2. Redistributions in binary form must reproduce the above
+ *      copyright notice, this list of conditions and the following
+ *      disclaimer in the documentation and/or other materials
+ *      provided with the distribution.
+ *
+ *   3. Neither the name of the Linux Foundation nor the names of its
+ *      contributors may be used to endorse or promote products
+ *      derived from this software without specific prior written
+ *      permission.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+ *  CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ *  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ *  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ *  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ *  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ *  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ *  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ *  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *  This BSD License conforms to the Open Source Initiative "Simplified
+ *  BSD License" as published at:
+ *  http://www.opensource.org/licenses/bsd-license.php
+ *
+ *  IAccessible2 is a trademark of the Linux Foundation. The IAccessible2
+ *  mark may be used in accordance with the Linux Foundation Trademark
+ *  Policy to indicate compliance with the IAccessible2 specification.
+ *
+ ************************************************************************/
 
 import "objidl.idl";
 import "oaidl.idl";
 import "oleacc.idl";
 
-/** @defgroup grpRelations Relations 
-  Use the following constants to compare against the BSTRs returned by 
+/** @defgroup grpRelations Relations
+  Use the following constants to compare against the BSTRs returned by
   IAccessibleRelation::relationType.
-*/ 
+*/
 ///@{
 
 /** The target object is the containing application object. */
@@ -91,12 +91,12 @@ const WCHAR *const IA2_RELATION_DESCRIPTION_FOR = L"descriptionFor";
 const WCHAR *const IA2_RELATION_EMBEDDED_BY = L"embeddedBy";
 
 /** This object embeds a target object. This relation can be used on the
- OBJID_CLIENT accessible for a top level window to show where the content 
+ OBJID_CLIENT accessible for a top level window to show where the content
  areas are.
 */
 const WCHAR *const IA2_RELATION_EMBEDS = L"embeds";
 
-/** Content flows to this object from a target object. 
+/** Content flows to this object from a target object.
  This relation and IA2_RELATION_FLOWS_TO are useful to tie text and non-text
  objects together in order to allow assistive technology to follow the
  intended reading order.
@@ -118,9 +118,9 @@ const WCHAR *const IA2_RELATION_LABELED_BY = L"labelledBy";
 /** This object is labelled by a target object. */
 const WCHAR *const IA2_RELATION_LABELLED_BY = L"labelledBy";
 
-/** This object is a member of a group of one or more objects. When 
- there is more than one object in the group each member may have one and the 
- same target, e.g. a grouping object.  It is also possible that each member has 
+/** This object is a member of a group of one or more objects. When
+ there is more than one object in the group each member may have one and the
+ same target, e.g. a grouping object.  It is also possible that each member has
  multiple additional targets, e.g. one for every other member in the group.
 */
 const WCHAR *const IA2_RELATION_MEMBER_OF = L"memberOf";
@@ -143,7 +143,7 @@ const WCHAR *const IA2_RELATION_NODE_PARENT_OF = L"nodeParentOf";
 /** This object is a parent window of the target object. */
 const WCHAR *const IA2_RELATION_PARENT_WINDOW_OF = L"parentWindowOf";
 
-/** This object is a transient component related to the target object. 
+/** This object is a transient component related to the target object.
  When this object is activated the target object doesn't lose focus.
 */
 const WCHAR *const IA2_RELATION_POPUP_FOR = L"popupFor";
@@ -218,7 +218,7 @@ interface IAccessibleRelation : IUnknown
   [propget] HRESULT target
     (
      [in] long targetIndex,
-     [out, retval] IUnknown **target 
+     [out, retval] IUnknown **target
     );
 
   /** @brief Returns multiple accessible relation targets
@@ -226,8 +226,8 @@ interface IAccessibleRelation : IUnknown
     maximum size of the array allocated by the client
    @param [out] targets
     The array of target objects.  Note that this array is to be allocated by the
-	client and freed when no longer needed.  Refer to @ref _arrayConsideration 
-	"Special Consideration when using Arrays" for more details.  You will need to use 
+	client and freed when no longer needed.  Refer to @ref _arrayConsideration
+	"Special Consideration when using Arrays" for more details.  You will need to use
 	QueryInterface on the IUnknown to get the IAccessible2.
    @param [out] nTargets
 	actual number of targets in the returned array (not more than maxTargets)
@@ -236,10 +236,10 @@ interface IAccessibleRelation : IUnknown
   */
   [propget] HRESULT targets
     (
-     [in] long maxTargets, 
+     [in] long maxTargets,
      [out, size_is(maxTargets), length_is(*nTargets)]
-       IUnknown **targets, 
-     [out, retval] long *nTargets 
+       IUnknown **targets,
+     [out, retval] long *nTargets
     );
 
 }

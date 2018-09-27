@@ -32,8 +32,8 @@ index 4b953b212..a02ef9532 100644
 -  append("/IGNORE:4221" CMAKE_STATIC_LINKER_FLAGS)
 +  set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS} /IGNORE:4221")
  endif()
- 
+
  add_subdirectory(include)
--- 
+--
 2.18.0
 

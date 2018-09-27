@@ -38,7 +38,7 @@ extern boolean	verbose;
 extern boolean	show_where_not;
 
 void
-add_include(struct filepointer *filep, struct inclist *file, 
+add_include(struct filepointer *filep, struct inclist *file,
 	    struct inclist *file_red, char *include, int type,
 	    boolean failOK)
 {

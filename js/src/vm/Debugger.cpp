@@ -73,7 +73,7 @@ using mozilla::AsVariant;
 using mozilla::TimeDuration;
 using mozilla::TimeStamp;
 
-
+
 /*** Forward declarations, ClassOps and Classes **************************************************/
 
 static void DebuggerFrame_finalize(FreeOp* fop, JSObject* obj);
@@ -223,7 +223,7 @@ static const Class DebuggerSource_class = {
     &DebuggerSource_classOps
 };
 
-
+
 /*** Utils ***************************************************************************************/
 
 /*
@@ -555,7 +555,7 @@ RequireGlobalObject(JSContext* cx, HandleValue dbgobj, HandleObject referent)
     return true;
 }
 
-
+
 /*** Breakpoints *********************************************************************************/
 
 BreakpointSite::BreakpointSite(Type type)
@@ -1431,7 +1431,7 @@ Debugger::unwrapPropertyDescriptor(JSContext* cx, HandleObject obj,
     return true;
 }
 
-
+
 /*** Debuggee resumption values and debugger error handling **************************************/
 
 static bool
@@ -1814,7 +1814,7 @@ Debugger::receiveCompletionValue(Maybe<AutoRealm>& ar, bool ok,
            newCompletionValue(cx, resumeMode, value, vp);
 }
 
-
+
 /*** Firing debugger hooks ***********************************************************************/
 
 static bool
@@ -2495,7 +2495,7 @@ Debugger::slowPathPromiseHook(JSContext* cx, Hook hook, Handle<PromiseObject*> p
     MOZ_ASSERT(resumeMode == ResumeMode::Continue);
 }
 
-
+
 /*** Debugger code invalidation for observing execution ******************************************/
 
 class MOZ_RAII ExecutionObservableRealms : public Debugger::ExecutionObservableSet
@@ -3055,7 +3055,7 @@ Debugger::updateObservesBinarySourceDebuggees(IsObserving observing)
     }
 }
 
-
+
 /*** Allocations Tracking *************************************************************************/
 
 /* static */ bool
@@ -3151,7 +3151,7 @@ Debugger::removeAllocationsTrackingForAllDebuggees()
 }
 
 
-
+
 /*** Debugger JSObjects **************************************************************************/
 
 void
@@ -7632,7 +7632,7 @@ static const JSFunctionSpec DebuggerScript_methods[] = {
     JS_FS_END
 };
 
-
+
 /*** Debugger.Source *****************************************************************************/
 
 // For internal use only.
@@ -8225,7 +8225,7 @@ static const JSFunctionSpec DebuggerSource_methods[] = {
     JS_FS_END
 };
 
-
+
 /*** Debugger.Frame ******************************************************************************/
 
 ScriptedOnStepHandler::ScriptedOnStepHandler(JSObject* object)
@@ -9517,7 +9517,7 @@ const JSFunctionSpec DebuggerFrame::methods_[] = {
     JS_FS_END
 };
 
-
+
 /*** Debugger.Object *****************************************************************************/
 
 void
@@ -11811,7 +11811,7 @@ DebuggerObject::getScriptedProxyHandler(JSContext* cx, HandleDebuggerObject obje
     return dbg->wrapDebuggeeObject(cx, unwrapped, result);
 }
 
-
+
 /*** Debugger.Environment ************************************************************************/
 
 void
@@ -12407,7 +12407,7 @@ DebuggerEnvironment::setVariable(JSContext* cx, HandleDebuggerEnvironment enviro
     return true;
 }
 
-
+
 /*** JS::dbg::Builder ****************************************************************************/
 
 Builder::Builder(JSContext* cx, js::Debugger* debugger)
@@ -12484,7 +12484,7 @@ Builder::newObject(JSContext* cx)
     return Object(cx, *this, obj);
 }
 
-
+
 /*** JS::dbg::AutoEntryMonitor ******************************************************************/
 
 AutoEntryMonitor::AutoEntryMonitor(JSContext* cx)
@@ -12499,7 +12499,7 @@ AutoEntryMonitor::~AutoEntryMonitor()
     cx_->entryMonitor = savedMonitor_;
 }
 
-
+
 /*** Glue ****************************************************************************************/
 
 extern JS_PUBLIC_API(bool)
@@ -12665,7 +12665,7 @@ js::CheckDebuggeeThing(JSObject* obj, bool invisibleOk)
 }
 #endif // DEBUG
 
-
+
 /*** JS::dbg::GarbageCollectionEvent **************************************************************/
 
 namespace JS {

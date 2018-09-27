@@ -20,9 +20,9 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=772966
       is(document.getElementById('b').test(123, 123, 123), 2, "Should have 2 params.");
     }
   </script>
-  
+
   <box id="b" style="-moz-binding: url(#binding)"/>
-  
+
   <xbl:bindings xmlns:xbl="http://www.mozilla.org/xbl">
     <xbl:binding id="binding">
       <xbl:implementation>
@@ -37,6 +37,6 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=772966
       </xbl:implementation>
     </xbl:binding>
   </xbl:bindings>
-  
+
 
 </window>

@@ -7,16 +7,16 @@ function foop(targetWindow)
 {
   var targetDocument = targetWindow.document;
 
-  var r1 = targetDocument.createRange(); 
-  r1.setStart(targetDocument.getElementById("out1"), 0); 
-  r1.setEnd  (targetDocument.getElementById("out2"), 0); 
+  var r1 = targetDocument.createRange();
+  r1.setStart(targetDocument.getElementById("out1"), 0);
+  r1.setEnd  (targetDocument.getElementById("out2"), 0);
   targetWindow.getSelection().addRange(r1);
 
-  var r2 = targetDocument.createRange(); 
-  r2.setStart(targetDocument.getElementById("in1"), 0); 
-  r2.setEnd  (targetDocument.getElementById("in2"), 0); 
+  var r2 = targetDocument.createRange();
+  r2.setStart(targetDocument.getElementById("in1"), 0);
+  r2.setEnd  (targetDocument.getElementById("in2"), 0);
   targetWindow.getSelection().addRange(r2);
-    
+
   targetDocument.execCommand('removeformat', false, null);
   targetDocument.execCommand('outdent', false, null);
 }
@@ -30,7 +30,7 @@ function init()
     fd.designMode = 'on';
     foop(window.frames[0]);
     document.documentElement.removeAttribute("class");
-  }, 100); 
+  }, 100);
 }
 
 ]]>

@@ -80,7 +80,7 @@ _GROUPS = [
     'texelfetchoffset',
     'texturesize'
 ]
-    
+
 def GenerateFilename(group):
   """Generate test filename."""
   filename = group

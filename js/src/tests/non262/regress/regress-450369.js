@@ -293,7 +293,7 @@ function test()
     ['{"null":null}', {"null":null}],
     ['{"five":5}', {"five":5}],
   ]
-  
+
   var a = [];
   for (var i=0; i < testPairs.length; i++) {
     var pair = testPairs[i];
@@ -301,7 +301,7 @@ function test()
     a[i] = s;
   }
   print(a.join("\n"));
- 
+
   reportCompare(expect, actual, summary);
 }
 

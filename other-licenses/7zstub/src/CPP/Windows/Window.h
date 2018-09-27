@@ -73,7 +73,7 @@ public:
   }
 
   bool Foreground() { return BOOLToBool(::SetForegroundWindow(_window)); }
-  
+
   HWND GetParent() const { return ::GetParent(_window); }
   bool GetWindowRect(LPRECT rect) const { return BOOLToBool(::GetWindowRect(_window,rect)); }
   #ifndef UNDER_CE
@@ -190,9 +190,9 @@ public:
 
   LONG_PTR SetUserDataLongPtr(LONG_PTR newLongPtr) { return SetUserDataLong(newLongPtr); }
   LONG_PTR GetUserDataLongPtr() const { return GetUserDataLong(); }
-  
+
   #else
-  
+
   LONG_PTR SetLongPtr(int index, LONG_PTR newLongPtr)
     { return ::SetWindowLongPtr(_window, index,
           #ifndef _WIN64
@@ -211,16 +211,16 @@ public:
   LONG_PTR GetLongPtr(int index) const { return ::GetWindowLongPtr(_window, index); }
   LONG_PTR SetUserDataLongPtr(LONG_PTR newLongPtr) { return SetLongPtr(GWLP_USERDATA, newLongPtr); }
   LONG_PTR GetUserDataLongPtr() const { return GetLongPtr(GWLP_USERDATA); }
-  
+
   #endif
-  
+
   /*
   bool ModifyStyle(HWND hWnd, DWORD remove, DWORD add, UINT flags = 0)
     {  return ModifyStyleBase(GWL_STYLE, remove, add, flags); }
   bool ModifyStyleEx(HWND hWnd, DWORD remove, DWORD add, UINT flags = 0)
     { return ModifyStyleBase(GWL_EXSTYLE, remove, add, flags); }
   */
- 
+
   HWND SetFocus() { return ::SetFocus(_window); }
 
   LRESULT SendMsg(UINT message, WPARAM wParam = 0, LPARAM lParam = 0)
@@ -257,10 +257,10 @@ public:
 
   bool Enable(bool enable)
     { return BOOLToBool(::EnableWindow(_window, BoolToBOOL(enable))); }
-  
+
   bool IsEnabled()
     { return BOOLToBool(::IsWindowEnabled(_window)); }
-  
+
   #ifndef UNDER_CE
   HMENU GetSystemMenu(bool revert)
     { return ::GetSystemMenu(_window, BoolToBOOL(revert)); }

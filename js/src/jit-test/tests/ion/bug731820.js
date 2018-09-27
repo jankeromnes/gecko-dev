@@ -11,7 +11,7 @@ function BigInteger(a, b, c) {
 }
 function bnpCopyTo(r, g) {
     var this_array = g.array;
-    for (var i = g.t - 1; i >= 0; --i) 
+    for (var i = g.t - 1; i >= 0; --i)
 	r.array[i] = g.array[i];
     r.t = g.t;
 }

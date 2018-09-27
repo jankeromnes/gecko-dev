@@ -2,7 +2,7 @@
  * Module : Set.cpp
  * Purpose: NSIS Plug-in for setting shortcut ApplicationID property
  * Created: 27/12/2009
- * Original code Copyright (c) 2009 Mike Anchor.  
+ * Original code Copyright (c) 2009 Mike Anchor.
  */
 
 /*
@@ -94,7 +94,7 @@ extern "C" void __declspec(dllexport) Set(HWND hwndParent, int string_size, TCHA
           }
         }
       }
-    }    
+    }
     if (m_pps != NULL)
       m_pps->Release();
 
@@ -127,7 +127,7 @@ extern "C" void __declspec(dllexport) UninstallJumpLists(HWND hwndParent, int st
 #endif
 
   CoInitialize(NULL);
-  
+
   CoCreateInstance(CLSID_DestinationList, NULL, CLSCTX_INPROC_SERVER,
                    IID_ICustomDestinationList, (void**)&m_cdl);
 
@@ -175,17 +175,17 @@ extern "C" void __declspec(dllexport) UninstallPinnedItem(HWND hwndParent, int s
 
   if (SUCCEEDED(hr)) {
 
-      hr = CoCreateInstance(CLSID_StartMenuPin, 
-                            NULL, 
-                            CLSCTX_INPROC_SERVER, 
+      hr = CoCreateInstance(CLSID_StartMenuPin,
+                            NULL,
+                            CLSCTX_INPROC_SERVER,
                             IID_PPV_ARGS(&pPinnedList));
-      
+
       if (SUCCEEDED(hr)) {
           hr = pPinnedList->RemoveFromList(pItem);
           pPinnedList->Release();
           success = true;
       }
-      
+
       pItem->Release();
   }
 

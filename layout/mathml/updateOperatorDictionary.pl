@@ -25,7 +25,7 @@ $WG_DICTIONARY_URL = "http://www.w3.org/2003/entities/2007xml/unicode.xml";
 # XSL stylesheet to extract relevant data from the dictionary
 $DICTIONARY_XSL = "operatorDictionary.xsl";
 
-# dictionary provided by the W3C transformed with operatorDictionary.xsl 
+# dictionary provided by the W3C transformed with operatorDictionary.xsl
 $WG_DICTIONARY = $FILE_DICTIONARY;
 
 if (!($#ARGV >= 0 &&
@@ -192,7 +192,7 @@ if ($ARGV[0] eq "check") {
             $nb_warnings++;
             print $file_syntax_errors "warning: operator is integral but not largeop\n";
         }
-        
+
         $_ = @moz[0];
         if ((m/^(.*)[iI]ntegral(.*)$/) && !@moz[14]) {
             $valid = 0;
@@ -261,7 +261,7 @@ if ($ARGV[0] eq "check") {
                 }
                 print $file_syntax_errors "\n";
             }
-            
+
             if (@moz_prefix) {
                 delete $moz_hash{$key.prefix};
             }
@@ -471,7 +471,7 @@ sub generateCommon {
 sub completeCommon {
     # helper to add key and private data to generateCommon
     my($entry, $key, @v_moz, @v_wg) = @_;
-    
+
     $entry = "$key = $entry";
 
     if ($v_moz[13]) { $entry = "$entry direction:$v_moz[13]"; }

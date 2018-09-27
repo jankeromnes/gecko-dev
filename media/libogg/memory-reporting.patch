@@ -9,14 +9,14 @@ index cea4ebe..cebe38e 100644
 --- include/ogg/ogg.h
 +++ include/ogg/ogg.h
 @@ -202,6 +202,10 @@ extern int      ogg_page_packets(const ogg_page *og);
- 
+
  extern void     ogg_packet_clear(ogg_packet *op);
- 
+
 +extern void     ogg_set_mem_functions(ogg_malloc_function_type *malloc_func,
 +                                      ogg_calloc_function_type *calloc_func,
 +                                      ogg_realloc_function_type *realloc_func,
 +                                      ogg_free_function_type *free_func);
- 
+
  #ifdef __cplusplus
  }
 diff --git a/media/libogg/include/ogg/os_types.h b/media/libogg/include/ogg/os_types.h
@@ -26,7 +26,7 @@ index 2c75a20..83ed732 100644
 @@ -17,12 +17,33 @@
  #ifndef _OS_TYPES_H
  #define _OS_TYPES_H
- 
+
 -/* make it easy on the folks that want to compile the libs with a
 -   different malloc than stdlib */
 -#define _ogg_malloc  malloc
@@ -60,9 +60,9 @@ index 2c75a20..83ed732 100644
 +#define _ogg_calloc ogg_calloc_func
 +#define _ogg_realloc ogg_realloc_func
 +#define _ogg_free ogg_free_func
- 
- #if defined(_WIN32) 
- 
+
+ #if defined(_WIN32)
+
 diff --git a/media/libogg/src/ogg_alloc.c b/media/libogg/src/ogg_alloc.c
 new file mode 100644
 index 0000000..4238d7b

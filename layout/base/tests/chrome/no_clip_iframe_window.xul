@@ -82,7 +82,7 @@
           waitForAllPaintsFlushed(function(x1, y1, x2, y2) {
             ok(x1 <= 1 && x2 >= 151 && y1 <= 271 && y2 >= 320,
                "Entire updated region is painted: " + x1 + "," + y1 + "," + x2 + "," + y2);
-      
+
             var tester = window.SimpleTest;
             window.close();
             tester.finish();

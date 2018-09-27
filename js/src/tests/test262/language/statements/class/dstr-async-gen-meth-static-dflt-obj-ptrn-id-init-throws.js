@@ -55,7 +55,7 @@ function thrower() {
 
 class C {
   static async *method({ x = thrower() } = {}) {
-    
+
   }
 };
 

@@ -73,7 +73,7 @@ interface nsISupportsString : nsISupportsPrimitive
 
 /**
  * The rest are truly primitive and are passed by value
- */ 
+ */
 
 /**
  * Scriptable storage for booleans

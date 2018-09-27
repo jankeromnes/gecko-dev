@@ -9,7 +9,7 @@ description: Checking by using eval "eval("true")"
 
 if (eval("true")) {
 } else {
-    $ERROR('#1: In the "if" Statement eval as Expression is admitted'); 
+    $ERROR('#1: In the "if" Statement eval as Expression is admitted');
 }
 
 reportCompare(0, 0);

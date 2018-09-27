@@ -43,7 +43,7 @@ function testHtmlCopyEncoder () {
 
   var select = window.getSelection();
   select.selectAllChildren(node);
-  
+
   encoder.init(document, "text/html", de.OutputLFLineBreak | de.OutputSelectionOnly);
   encoder.setSelection(select);
   out = encoder.encodeToString();
@@ -60,7 +60,7 @@ function testHtmlCopyEncoder () {
   node = document.getElementById('aList');
 
   var select = window.getSelection();
-  select.selectAllChildren(node);  
+  select.selectAllChildren(node);
 
   encoder.init(document, "text/html",de.OutputLFLineBreak | de.OutputSelectionOnly);
   encoder.setSelection(select);

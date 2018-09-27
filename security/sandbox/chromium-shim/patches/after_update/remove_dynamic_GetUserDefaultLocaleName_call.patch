@@ -20,7 +20,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/target_services.cc b/secu
    }
    return true;
  }
- 
+
 -// GetUserDefaultLocaleName is not available on WIN XP.  So we'll
 -// load it on-the-fly.
 -const wchar_t kKernel32DllName[] = L"kernel32.dll";
@@ -57,7 +57,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/target_services.cc b/secu
 -                    localeName, LOCALE_NAME_MAX_LENGTH * sizeof(wchar_t)));
 +  return (0 != ::GetUserDefaultLocaleName(localeName, LOCALE_NAME_MAX_LENGTH));
  }
- 
+
  // Used as storage for g_target_services, because other allocation facilities
  // are not available early. We can't use a regular function static because on
  // VS2015, because the CRT tries to acquire a lock to guard initialization, but

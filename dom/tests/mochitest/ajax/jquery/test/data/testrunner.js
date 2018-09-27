@@ -20,7 +20,7 @@ var isLocal = !!(window.location.protocol == 'file:');
 
 $(function() {
 	$('#userAgent').html(navigator.userAgent);
-	runTest();	
+	runTest();
 });
 
 function synchronize(callback) {
@@ -67,7 +67,7 @@ function validTest( name ) {
 	while( i-- ){
 		var filter = filters[i],
 			not = filter.charAt(0) == '!';
-		if( not ) 
+		if( not )
 			filter = filter.slice(1);
 		if( name.indexOf(filter) != -1 )
 			return !not;
@@ -99,10 +99,10 @@ function runTest() {
 function test(name, callback, nowait) {
 	if(_config.currentModule)
 		name = _config.currentModule + " module: " + name;
-		
+
 	if ( !validTest(name) )
 		return;
-		
+
 	synchronize(function() {
 		_config.Test = [];
 		try {
@@ -118,15 +118,15 @@ function test(name, callback, nowait) {
 	});
 	synchronize(function() {
 		reset();
-		
+
 		// don't output pause tests
 		if(nowait) return;
-		
+
 		if(_config.expected && _config.expected != _config.Test.length) {
 			_config.Test.push( [ false, "Expected " + _config.expected + " assertions, but " + _config.Test.length + " were run" ] );
 		}
 		_config.expected = null;
-		
+
 		var good = 0, bad = 0;
 		var ol = document.createElement("ol");
 		ol.style.display = "none";
@@ -136,21 +136,21 @@ function test(name, callback, nowait) {
 			li.className = _config.Test[i][0] ? "pass" : "fail";
 			li.innerHTML = _config.Test[i][1];
 			ol.appendChild( li );
-			
+
 			_config.stats.all++;
 			if ( !_config.Test[i][0] ) {
 				state = "fail";
 				bad++;
 				_config.stats.bad++;
 			} else good++;
-			
+
 			if ( parent.SimpleTest ){
 				parent.SimpleTest.ok( _config.Test[i][0], name, _config.Test[i][1] );}
 		}
-	
+
 		var li = document.createElement("li");
 		li.className = state;
-	
+
 		var b = document.createElement("strong");
 		b.innerHTML = name + " <b style='color:black;'>(<b class='fail'>" + bad + "</b>, <b class='pass'>" + good + "</b>, " + _config.Test.length + ")</b>";
 		b.onclick = function(){
@@ -169,8 +169,8 @@ function test(name, callback, nowait) {
 		});
 		li.appendChild( b );
 		li.appendChild( ol );
-	
-		document.getElementById("tests").appendChild( li );		
+
+		document.getElementById("tests").appendChild( li );
 	});
 }
 
@@ -216,7 +216,7 @@ function isSet(a, b, msg) {
 		ret = false;
 	if ( !ret )
 		_config.Test.push( [ ret, msg + " expected: " + serialArray(b) + " result: " + serialArray(a) ] );
-	else 
+	else
 		_config.Test.push( [ ret, msg ] );
 }
 
@@ -225,7 +225,7 @@ function isSet(a, b, msg) {
  */
 function isObj(a, b, msg) {
 	var ret = true;
-	
+
 	if ( a && b ) {
 		for ( var i in a )
 			if ( a[i] != b[i] )
@@ -242,7 +242,7 @@ function isObj(a, b, msg) {
 
 function serialArray( a ) {
 	var r = [];
-	
+
 	if ( a && a.length )
         for ( var i = 0; i < a.length; i++ ) {
             var str = a[i].nodeName;

@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -32,36 +32,36 @@ function* lex(string)
     let sourceLineNumber = 0;
     for (let line of string.split("\n")) {
         ++sourceLineNumber;
-        
+
         function consumeWhitespace()
         {
             if (/^\s+/.test(line))
                 line = RegExp.rightContext;
         }
-   
+
         function consume(kind)
         {
             line = RegExp.rightContext;
             return {kind, string: RegExp.lastMatch, sourceLineNumber, userLineNumber};
         }
-        
+
         const isIdentifier = /^[a-z_]([a-z0-9_]*)/i;
         const isNumber = /^(([0-9]+(\.([0-9]*))?)|(\.[0-9]+)(e([+-]?)([0-9]+))?)/i;
         const isString = /^\"([^\"]|(\"\"))*\"/;
         const isKeyword = /^((base)|(data)|(def)|(dim)|(end)|(for)|(go)|(gosub)|(goto)|(if)|(input)|(let)|(next)|(on)|(option)|(print)|(randomize)|(read)|(restore)|(return)|(step)|(stop)|(sub)|(then)|(to))/i;
         const isOperator = /^(-|\+|\*|\/|\^|\(|\)|(<[>=]?)|(>=?)|=|,|\$|;)/;
         const isRem = /^rem\s.*/;
-        
+
         consumeWhitespace();
-        
+
         if (!/^[0-9]+/.test(line))
             throw new Error("At line " + sourceLineNumber + ": Expect line number: " + line);
         let userLineNumber = +RegExp.lastMatch;
         line = RegExp.rightContext;
         yield {kind: "userLineNumber", string: RegExp.lastMatch, sourceLineNumber, userLineNumber};
-        
+
         consumeWhitespace();
-        
+
         while (line.length) {
             if (isKeyword.test(line))
                 yield consume("keyword");
@@ -89,7 +89,7 @@ function* lex(string)
                 throw new Error("At line " + sourceLineNumber + ": Cannot lex token: " + line);
             consumeWhitespace();
         }
-        
+
         // Note: this is necessary for the parser, which may look-ahead without checking if we're
         // done. Fortunately, it won't look-ahead past a newLine.
         yield {kind: "newLine", string:"\n", sourceLineNumber, userLineNumber};

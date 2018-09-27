@@ -14,7 +14,7 @@ if (void x !== undefined) {
 }
 
 //CHECK#2
-var x = "x"; 
+var x = "x";
 if (isNaN(void x) !== true) {
   $ERROR('#2: var x = "x"; void x === undefined. Actual: ' + (void x));
 }

@@ -50,7 +50,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   for (var i in expect)
   {
     reportCompare(expect[i], actual[i], getStatus(i));

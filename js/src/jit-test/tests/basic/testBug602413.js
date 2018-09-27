@@ -23,7 +23,7 @@ function exploreProperties(obj)
   }
   for (var i = 0; i < props.length; ++i) {
     var p = props[i];
-    try { 
+    try {
       var v = obj[p];
       C(v);
     } catch(e) { }

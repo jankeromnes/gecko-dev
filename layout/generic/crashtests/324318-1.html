@@ -2,7 +2,7 @@
 
 var tr;
 
-function init() { 
+function init() {
 
   tr = one.document.getElementsByTagName("tr")[0];
   tr = document.adoptNode(tr);
@@ -13,9 +13,9 @@ function init() {
       var frameset = document.getElementsByTagName("frameset")[0];
       document.getElementsByTagName("td")[0].appendChild(frameset);
       document.documentElement.removeAttribute("class");
-    }, 
+    },
     100);
-  
+
 }
 
 window.addEventListener("load", init);

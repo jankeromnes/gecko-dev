@@ -5,7 +5,7 @@
   <keywords its:withinText="no">user interface, ui, software interface</keywords>
  </prolog>
  <body>
-  <p>The book <title its:withinText="yes">Of Mice and Screens</title> by <author its:withinText="yes">Aldus 
+  <p>The book <title its:withinText="yes">Of Mice and Screens</title> by <author its:withinText="yes">Aldus
      Brandywine</author> is one of the best introductions to the vast topic of designing user interfaces.</p>
  </body>
 </text>

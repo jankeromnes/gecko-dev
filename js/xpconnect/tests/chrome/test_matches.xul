@@ -25,24 +25,24 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=533596
       {
         var doc = ifr.contentDocument;
         var docElem = doc.documentElement;
-        
+
         var res = doc.createElement('div').matches('div');
         is(res, true, "matches call through xray, regular case");
-        
+
         res = docElem.matches.call(
           doc.createElement('div'), 'div');
         is(res, true, "matches call through xray, with .call");
-                        
+
         var sb = new Cu.Sandbox(ifr.contentWindow);
         sb.doc = doc;
         var str = "doc.documentElement.matches.call(doc.createElement( 'div' ),'div')";
         res = Cu.evalInSandbox(str, sb);
         is(res, true, "matches call through xray (same origin), with .call");
-        
+
         docElem.matches = function(){return false};
         res = docElem.matches.call(doc.createElement( 'div' ),'div');
         is(res, false, "shadowing matches with an expando on the xray wrapper");
-        
+
         SimpleTest.finish();
       }
 

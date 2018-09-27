@@ -15,7 +15,7 @@ printStatus (summary);
 
 status = inSection(1) + ' check for overflow in backref';
 
-actual = 'undefined'; 
+actual = 'undefined';
 expect = false;
 
 try
@@ -31,11 +31,11 @@ reportCompare(expect, actual, status);
 
 status = inSection(2) + ' check for overflow in backref';
 
-actual = 'undefined'; 
+actual = 'undefined';
 expect = false;
 
 try
-{ 
+{
   actual = eval('/a\21474836480/.test("")');
 }
 catch(e)

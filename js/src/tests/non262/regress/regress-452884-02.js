@@ -20,7 +20,7 @@ function test()
 
 
   for (var j=0;j<5;++j) { switch(1.1) { case 2: case NaN: } }
- 
+
 
   reportCompare(expect, actual, summary);
 }

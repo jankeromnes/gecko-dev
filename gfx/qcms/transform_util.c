@@ -310,11 +310,11 @@ uint16_fract_t lut_inverse_interp16(uint16_t Value, uint16_t LutTable[], int len
 
         cell0 = (int) floor(val2);
         cell1 = (int) ceil(val2);
-           
+
         if (cell0 == cell1) return (uint16_fract_t) x;
 
         y0 = LutTable[cell0] ;
-        x0 = (65535.0 * cell0) / (length-1); 
+        x0 = (65535.0 * cell0) / (length-1);
 
         y1 = LutTable[cell1] ;
         x1 = (65535.0 * cell1) / (length-1);
@@ -329,7 +329,7 @@ uint16_fract_t lut_inverse_interp16(uint16_t Value, uint16_t LutTable[], int len
         if (f < 0.0) return (uint16_fract_t) 0;
         if (f >= 65535.0) return (uint16_fract_t) 0xFFFF;
 
-        return (uint16_fract_t) floor(f + 0.5);                        
+        return (uint16_fract_t) floor(f + 0.5);
 
 }
 
@@ -391,7 +391,7 @@ void compute_precache_linear(uint8_t *output)
 
 qcms_bool compute_precache(struct curveType *trc, uint8_t *output)
 {
-        
+
         if (trc->type == PARAMETRIC_CURVE_TYPE) {
                         float gamma_table[256];
                         uint16_t gamma_table_uint[256];
@@ -404,9 +404,9 @@ qcms_bool compute_precache(struct curveType *trc, uint8_t *output)
                                 gamma_table_uint[i] = (uint16_t)(gamma_table[i] * 65535);
                         }
 
-                        //XXX: the choice of a minimum of 256 here is not backed by any theory, 
+                        //XXX: the choice of a minimum of 256 here is not backed by any theory,
                         //     measurement or data, howeve r it is what lcms uses.
-                        //     the maximum number we would need is 65535 because that's the 
+                        //     the maximum number we would need is 65535 because that's the
                         //     accuracy used for computing the pre cache table
                         if (inverted_size < 256)
                                 inverted_size = 256;
@@ -424,9 +424,9 @@ qcms_bool compute_precache(struct curveType *trc, uint8_t *output)
                 } else {
                         uint16_t *inverted;
                         int inverted_size = trc->count;
-                        //XXX: the choice of a minimum of 256 here is not backed by any theory, 
+                        //XXX: the choice of a minimum of 256 here is not backed by any theory,
                         //     measurement or data, howeve r it is what lcms uses.
-                        //     the maximum number we would need is 65535 because that's the 
+                        //     the maximum number we would need is 65535 because that's the
                         //     accuracy used for computing the pre cache table
                         if (inverted_size < 256)
                                 inverted_size = 256;
@@ -502,7 +502,7 @@ void build_output_lut(struct curveType *trc,
                         *output_gamma_lut = build_pow_table(gamma, 4096);
                         *output_gamma_lut_length = 4096;
                 } else {
-                        //XXX: the choice of a minimum of 256 here is not backed by any theory, 
+                        //XXX: the choice of a minimum of 256 here is not backed by any theory,
                         //     measurement or data, however it is what lcms uses.
                         *output_gamma_lut_length = trc->count;
                         if (*output_gamma_lut_length < 256)

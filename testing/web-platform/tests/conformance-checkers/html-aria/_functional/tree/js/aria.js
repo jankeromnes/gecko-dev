@@ -26,11 +26,11 @@ Aria.Tree.prototype = {
 		this.strDefaultActiveDescendant = 'tree'+this.index+'_item0'; // default first item
 		if(!$(this.strActiveDescendant)) this.strActiveDescendant = this.strDefaultActiveDescendant; // set to default if no existing activedescendant
 		this.setActiveDescendant($(this.strActiveDescendant));
-		
+
 		// set up event delegation on the tree node
 		Event.observe(this.el, 'click', this.handleClick.bindAsEventListener(this));
 		Event.observe(this.el, 'keydown', this.handleKeyPress.bindAsEventListener(this)); //webkit doesn't send keypress events for arrow keys, so use keydown instead
-		
+
 	},
 	getActiveDescendant: function(inNode){
 		if(inNode){ // if inNode (from event target), sets the activedescendant to nearest ancestor treeitem
@@ -151,7 +151,7 @@ Aria.Tree.prototype = {
 		if(Aria.isExpanded(el)){
 			el.setAttribute('aria-expanded','false');
 		} else {
-			el.setAttribute('aria-expanded','true');	
+			el.setAttribute('aria-expanded','true');
 		}
 		this.setActiveDescendant(el);
 	}

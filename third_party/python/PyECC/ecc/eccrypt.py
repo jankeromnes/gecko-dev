@@ -34,7 +34,7 @@ def encrypt(message, qk, encrypter = Rabbit):
             raise ValueError, "Key size %s not suitable for encryption" % bits
     except KeyError:
         raise ValueError, "Key size %s not implemented" % bits
-    
+
     k = random.randint(1, n - 1)        # temporary private key k
     kg = mulp(cp, cq, cn, g, k)         # temporary public key k*G
     sg = mulp(cp, cq, cn, q, k)         # shared secret k*Q = k*d*G
@@ -61,5 +61,5 @@ def decrypt(message, kg, dk, decrypter = Rabbit):
 
     sg = mulp(cp, cq, cn, kg, d)        # shared secret d*(k*G) = k*d*G
     return decrypter(enc_long(sg[0])).decrypt(message)
-    
-    
+
+

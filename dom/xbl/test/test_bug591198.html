@@ -23,7 +23,7 @@ function* runTest() {
   window.addEventListener("message", function(e) {
     gen.next(JSON.parse(e.data));
   });
-  
+
   iframe.src = "file_bug591198_inner.html";
   let res = (yield);
   is(res.widths[0], res.widths[2], "binding was rendered");

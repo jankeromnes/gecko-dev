@@ -752,7 +752,7 @@ class FlavorFunction(Function):
 
     def resolve(self, makefile, variables, fd, setting):
         varname = self._arguments[0].resolvestr(makefile, variables, setting)
-        
+
         flavor, source, value = variables.get(varname)
         if flavor is None:
             r = 'undefined'

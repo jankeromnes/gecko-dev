@@ -389,7 +389,7 @@ function do_miscellaneous_tests(doc) {
     } catch (e) {
       Assert.equal(e.name, "IndexSizeError");
     }
-  
+
     // Invalid index
     var newOffset = isText(startContainer) ?
                       startContainer.nodeValue.length + 1 :
@@ -400,7 +400,7 @@ function do_miscellaneous_tests(doc) {
     } catch (e) {
       Assert.equal(e.name, "IndexSizeError");
     }
-  
+
     newOffset--;
     // Valid index
     baseRange.setStart(startContainer, newOffset);

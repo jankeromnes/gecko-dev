@@ -97,32 +97,32 @@ pkix_pl_HttpDefaultClient_RequestCreateFcn(
         SEC_HTTP_SERVER_SESSION session,
         const char *http_protocol_variant, /* usually "http" */
         const char *path_and_query_string,
-        const char *http_request_method, 
-        const PRIntervalTime timeout, 
+        const char *http_request_method,
+        const PRIntervalTime timeout,
         SEC_HTTP_REQUEST_SESSION *pRequest);
 
 SECStatus
 pkix_pl_HttpDefaultClient_SetPostDataFcn(
         SEC_HTTP_REQUEST_SESSION request,
-        const char *http_data, 
+        const char *http_data,
         const PRUint32 http_data_len,
         const char *http_content_type);
 
 SECStatus
 pkix_pl_HttpDefaultClient_AddHeaderFcn(
         SEC_HTTP_REQUEST_SESSION request,
-        const char *http_header_name, 
+        const char *http_header_name,
         const char *http_header_value);
 
 SECStatus
 pkix_pl_HttpDefaultClient_TrySendAndReceiveFcn(
         SEC_HTTP_REQUEST_SESSION request,
         PRPollDesc **pPollDesc,
-        PRUint16 *http_response_code, 
-        const char **http_response_content_type, 
-        const char **http_response_headers, 
-        const char **http_response_data, 
-        PRUint32 *http_response_data_len); 
+        PRUint16 *http_response_code,
+        const char **http_response_content_type,
+        const char **http_response_headers,
+        const char **http_response_data,
+        PRUint32 *http_response_data_len);
 
 SECStatus
 pkix_pl_HttpDefaultClient_CancelFcn(

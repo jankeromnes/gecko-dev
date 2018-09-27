@@ -26,6 +26,6 @@ if (typeof setTimeout != 'undefined')
   }
 }
 
- 
+
 
 reportCompare(expect, actual, summary);

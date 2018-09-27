@@ -13,7 +13,7 @@ function handleRequest(request, response)
     }
     else if (etag)
     {
-      response.setStatusLine(request.httpVersion, 412, "Precondition Failed");        
+      response.setStatusLine(request.httpVersion, 412, "Precondition Failed");
     }
   }
   else
@@ -21,7 +21,7 @@ function handleRequest(request, response)
     var etag = request.queryString.match(/^etag=(.*)$/);
     if (etag)
       setState("etag", etag[1]);
-      
+
     response.setStatusLine(request.httpVersion, 204, "No content");
   }
 }

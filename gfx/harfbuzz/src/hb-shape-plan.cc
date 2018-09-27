@@ -117,13 +117,13 @@ DEFINE_NULL_INSTANCE (hb_shape_plan_t) =
 
 /**
  * hb_shape_plan_create: (Xconstructor)
- * @face: 
- * @props: 
+ * @face:
+ * @props:
  * @user_features: (array length=num_user_features):
- * @num_user_features: 
+ * @num_user_features:
  * @shaper_list: (array zero-terminated=1):
  *
- * 
+ *
  *
  * Return value: (transfer full):
  *
@@ -206,7 +206,7 @@ hb_shape_plan_create2 (hb_face_t                     *face,
 /**
  * hb_shape_plan_get_empty:
  *
- * 
+ *
  *
  * Return value: (transfer full):
  *
@@ -222,7 +222,7 @@ hb_shape_plan_get_empty (void)
  * hb_shape_plan_reference: (skip)
  * @shape_plan: a shape plan.
  *
- * 
+ *
  *
  * Return value: (transfer full):
  *
@@ -238,7 +238,7 @@ hb_shape_plan_reference (hb_shape_plan_t *shape_plan)
  * hb_shape_plan_destroy: (skip)
  * @shape_plan: a shape plan.
  *
- * 
+ *
  *
  * Since: 0.9.7
  **/
@@ -260,14 +260,14 @@ hb_shape_plan_destroy (hb_shape_plan_t *shape_plan)
 /**
  * hb_shape_plan_set_user_data: (skip)
  * @shape_plan: a shape plan.
- * @key: 
- * @data: 
- * @destroy: 
- * @replace: 
+ * @key:
+ * @data:
+ * @destroy:
+ * @replace:
  *
- * 
  *
- * Return value: 
+ *
+ * Return value:
  *
  * Since: 0.9.7
  **/
@@ -284,9 +284,9 @@ hb_shape_plan_set_user_data (hb_shape_plan_t    *shape_plan,
 /**
  * hb_shape_plan_get_user_data: (skip)
  * @shape_plan: a shape plan.
- * @key: 
+ * @key:
  *
- * 
+ *
  *
  * Return value: (transfer none):
  *
@@ -306,11 +306,11 @@ hb_shape_plan_get_user_data (hb_shape_plan_t    *shape_plan,
  * @font: a font.
  * @buffer: a buffer.
  * @features: (array length=num_features):
- * @num_features: 
+ * @num_features:
  *
- * 
  *
- * Return value: 
+ *
+ * Return value:
  *
  * Since: 0.9.7
  **/
@@ -449,13 +449,13 @@ hb_coords_present (const int *coords,
 
 /**
  * hb_shape_plan_create_cached:
- * @face: 
- * @props: 
+ * @face:
+ * @props:
  * @user_features: (array length=num_user_features):
- * @num_user_features: 
+ * @num_user_features:
  * @shaper_list: (array zero-terminated=1):
  *
- * 
+ *
  *
  * Return value: (transfer full):
  *
@@ -569,7 +569,7 @@ retry:
  * hb_shape_plan_get_shaper:
  * @shape_plan: a shape plan.
  *
- * 
+ *
  *
  * Return value: (transfer none):
  *

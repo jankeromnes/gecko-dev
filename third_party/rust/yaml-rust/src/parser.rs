@@ -389,9 +389,9 @@ impl<T: Iterator<Item=char>> Parser<T> {
                 self.state = State::DocumentContent;
                 self.skip();
                 Ok((Event::DocumentStart, mark))
-            }    
+            }
             Token(mark, _) => Err(ScanError::new(mark, "did not find expected <document start>"))
-        }        
+        }
     }
 
     fn document_content(&mut self) -> ParseResult {
@@ -421,7 +421,7 @@ impl<T: Iterator<Item=char>> Parser<T> {
             },
             Token(mark, _) => mark
         };
-        
+
         // TODO tag handling
         self.state = State::DocumentStart;
         Ok((Event::DocumentEnd, marker))
@@ -666,7 +666,7 @@ impl<T: Iterator<Item=char>> Parser<T> {
                 }
             }
         };
-        
+
         self.state = State::FlowMappingKey;
         Ok((Event::empty_scalar(), mark))
     }

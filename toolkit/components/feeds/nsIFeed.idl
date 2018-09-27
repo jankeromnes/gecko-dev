@@ -14,9 +14,9 @@ interface nsIFeedGenerator;
 [scriptable, uuid(3b8aae33-80e2-4efa-99c8-a6c5b99f76ea)]
 interface nsIFeed : nsIFeedContainer
 {
-  /** 
+  /**
   * Uses description, subtitle, and extensions
-  * to generate a summary. 
+  * to generate a summary.
   */
   attribute nsIFeedTextConstruct subtitle;
 
@@ -30,7 +30,7 @@ interface nsIFeed : nsIFeedContainer
   * The type of feed. For example, a podcast would be TYPE_AUDIO.
   */
   readonly attribute unsigned long type;
-  
+
   /**
   * The total number of enclosures found in the feed.
   */

@@ -1,8 +1,8 @@
 #!/usr/bin/ksh -p
-# 
+#
 # Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
 # Use is subject to license terms.
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -97,8 +97,8 @@ cat << EOF > $awk_script
       print
       next
    }
-/$PRODVERS/ { 
-      printf "SUNW_PRODVERS=\"%s\"\n", "$prodver" 
+/$PRODVERS/ {
+      printf "SUNW_PRODVERS=\"%s\"\n", "$prodver"
       next
    }
 /$ARCH/ {

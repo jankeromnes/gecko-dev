@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "table");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,12 +70,12 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The deleteRow() method deletes a table row.  If the index is -1
-    the last row of the table is deleted. 
-    
+    the last row of the table is deleted.
+
     Retrieve the second TABLE element and invoke the deleteRow() method
-    with an index of negative one. Currently there are four rows in the  
+    with an index of negative one. Currently there are four rows in the
     table.  The deleteRow() method is called and now there should be three.
 
 * @author NIST
@@ -90,7 +90,7 @@ function HTMLTableElement40() {
       var rowsnodeList;
       var vrows;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -110,7 +110,7 @@ testNode = nodeList.item(1);
       vrows = rowsnodeList.length;
 
       assertEquals("rowsLink2",3,vrows);
-       
+
 }
 
 </script>
@@ -121,10 +121,10 @@ testNode = nodeList.item(1);
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
     The deleteRow() method deletes a table row.  If the index is -1
-    the last row of the table is deleted. 
-    
+    the last row of the table is deleted.
+
     Retrieve the second TABLE element and invoke the deleteRow() method
-    with an index of negative one. Currently there are four rows in the  
+    with an index of negative one. Currently there are four rows in the
     table.  The deleteRow() method is called and now there should be three.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
@@ -142,7 +142,7 @@ testNode = nodeList.item(1);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/table.html"></iframe>
 <br>

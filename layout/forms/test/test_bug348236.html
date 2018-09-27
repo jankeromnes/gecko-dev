@@ -94,7 +94,7 @@ addLoadEvent(function test() {
     // Check if sending key events works.
     keypressOnSelect({key: "KEY_ArrowDown"});
     is(eSelect.value, "2", "SELECT value should be 2 after pressing Down.")
-      
+
     // Test ALT-Down.
     testKey({key: "KEY_ArrowDown", altKey: true}, "ALT-Down", nextKey1)
     function nextKey1() {

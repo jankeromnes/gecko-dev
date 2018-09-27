@@ -6,7 +6,7 @@ Date:   Mon Jun 22 16:10:47 2015 +0200
     These members were almost surely initialized before use by other member
     functions, but Coverity was warning about this. Eliminating these warnings
     minimizes clutter in that report and the likelihood of overlooking a real bug.
-    
+
     A=cmumford
     R=jeff
 
@@ -17,26 +17,26 @@ Date:   Mon Jun 22 16:03:28 2015 +0200
     Add support for Uncompress(source, sink). Various changes to allow
     Uncompress(source, sink) to get the same performance as the different
     variants of Uncompress to Cord/DataBuffer/String/FlatBuffer.
-    
+
     Changes to efficiently support Uncompress(source, sink)
     --------
-    
+
     a) For strings - we add support to StringByteSink to do GetAppendBuffer so we
        can write to it without copying.
     b) For flat array buffers, we do GetAppendBuffer and see if we can get a full buffer.
-    
+
     With the above changes we get performance with ByteSource/ByteSink
     that is	very close to directly using flat arrays and strings.
-    
+
     We add various benchmark cases to demonstrate that.
-    
+
     Orthogonal change
     ------------------
-    
+
     Add support for TryFastAppend() for SnappyScatteredWriter.
-    
+
     Benchmark results are below
-    
+
     CPU: Intel Core2 dL1:32KB dL2:4096KB
     Benchmark              Time(ns)    CPU(ns) Iterations
     -----------------------------------------------------
@@ -81,7 +81,7 @@ Date:   Mon Jun 22 16:03:28 2015 +0200
     BM_UValidate/2              283        283    2481447 417.2GB/s  jpg
     BM_UValidate/3            16230      16228      43137 5.4GB/s  pdf
     BM_UValidate/4           189129     189193       3701 2.0GB/s  html4
-    
+
     A=uday
     R=sanjay
 
@@ -90,15 +90,15 @@ Author: Steinar H. Gunderson <sesse@google.com>
 Date:   Mon Jun 22 15:48:29 2015 +0200
 
     Changes to eliminate compiler warnings on MSVC
-    
+
     This code was not compiling under Visual Studio 2013 with warnings being treated
     as errors. Specifically:
-    
+
     1. Changed int -> size_t to eliminate signed/unsigned mismatch warning.
     2. Added some missing return values to functions.
     3. Inserting character instead of integer literals into strings to avoid type
        conversions.
-    
+
     A=cmumford
     R=jeff
 
@@ -107,7 +107,7 @@ Author: Steinar H. Gunderson <sesse@google.com>
 Date:   Mon Jun 22 15:45:11 2015 +0200
 
     Fixed unit tests to compile under MSVC.
-    
+
     1. Including config.h in test.
     2. Including windows.h before zippy-test.h.
     3. Removed definition of WIN32_LEAN_AND_MEAN. This caused problems in
@@ -115,7 +115,7 @@ Date:   Mon Jun 22 15:45:11 2015 +0200
        definition didn't check for prior existence. This constant is old
        and no longer needed anyhow.
     4. Disable MSVC warning 4722 since ~LogMessageCrash() never returns.
-    
+
     A=cmumford
     R=jeff
 
@@ -125,9 +125,9 @@ Date:   Mon Jun 22 15:41:30 2015 +0200
 
     Change a few branch annotations that profiling found to be wrong.
     Overall performance is neutral or slightly positive.
-    
+
     Westmere (64-bit, opt):
-    
+
     Benchmark               Base (ns)  New (ns)                                Improvement
     --------------------------------------------------------------------------------------
     BM_UFlat/0                  73798     71464  1.3GB/s  html                    +3.3%
@@ -178,9 +178,9 @@ Date:   Mon Jun 22 15:41:30 2015 +0200
     BM_ZFlat/19                109981    112173  326.0MB/s  sum (48.96 %)         -2.0%
     BM_ZFlat/20                 14355     14575  277.4MB/s  man (59.36 %)         -1.5%
     Sum of all benchmarks    33882722  33879325                                   +0.0%
-    
+
     Sandy Bridge (64-bit, opt):
-    
+
     Benchmark               Base (ns)  New (ns)                                Improvement
     --------------------------------------------------------------------------------------
     BM_UFlat/0                  43764     41600  2.3GB/s  html                    +5.2%
@@ -226,7 +226,7 @@ Date:   Mon Jun 22 15:41:30 2015 +0200
     BM_ZFlat/19                 77904     80924  451.7MB/s  sum (48.96 %)         -3.7%
     BM_ZFlat/20                  7648      7663  527.1MB/s  man (59.36 %)         -0.2%
     Sum of all benchmarks    25493635  25482069                                   +0.0%
-    
+
     A=dehao
     R=sesse
 
@@ -235,7 +235,7 @@ Author: Steinar H. Gunderson <sesse@google.com>
 Date:   Mon Jun 22 16:07:58 2015 +0200
 
     Sync with various Google-internal changes.
-    
+
     Should not mean much for the open-source version.
 
 commit 22acaf438ed93ab21a2ff1919d173206798b996e
@@ -243,7 +243,7 @@ Author: Steinar H. Gunderson <sesse@google.com>
 Date:   Mon Jun 22 15:39:08 2015 +0200
 
     Change some internal path names.
-    
+
     This is mostly to sync up with some changes from Google's internal
     repositories; it does not affect the open-source distribution in itself.
 
@@ -252,10 +252,10 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Fri Feb 28 11:18:07 2014 +0000
 
     Release Snappy 1.1.2.
-    
+
     R=jeff
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@84 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 19690d78e83f8963f497585031efa3d9ca66b807
@@ -264,14 +264,14 @@ Date:   Wed Feb 19 10:31:49 2014 +0000
 
     Fix public issue 82: Stop distributing benchmark data files that have
     unclear or unsuitable licensing.
-    
+
     In general, we replace the files we can with liberally licensed data,
     and remove all the others (in particular all the parts of the Canterbury
     corpus that are not clearly in the public domain). The replacements
     do not always have the exact same characteristics as the original ones,
     but they are more than good enough to be useful for benchmarking.
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@83 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit f82bff66afe0de4c9ae22f8c4ef84e3c2233e799
@@ -279,14 +279,14 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Fri Oct 25 13:31:27 2013 +0000
 
     Add support for padding in the Snappy framed format.
-    
+
     This is specifically motivated by DICOM's demands that embedded data
     must be of an even number of bytes, but could in principle be used for
     any sort of padding/alignment needed.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@82 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit eeead8dc38ea359f027fb6e89f345448e8e9d723
@@ -294,10 +294,10 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Tue Oct 15 15:21:31 2013 +0000
 
     Release Snappy 1.1.1.
-    
+
     R=jeff
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@81 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 6bc39e24c76adbbff26ae629fafbf7dfc795f554
@@ -307,10 +307,10 @@ Date:   Tue Aug 13 12:55:00 2013 +0000
     Add autoconf tests for size_t and ssize_t. Sort-of resolves public issue 79;
     it would solve the problem if MSVC typically used autoconf. However, it gives
     a natural place (config.h) to put the typedef even for MSVC.
-    
+
     R=jsbell
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@80 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 7c3c01df77e191ad1f8377448961fe88db2802e9
@@ -321,17 +321,17 @@ Date:   Mon Jul 29 11:06:44 2013 +0000
     backreference, make the signedness of the bytes produced clear,
     by sticking it into a size_t. This avoids a signed/unsigned compare
     warning from MSVC (public issue 71), and also is slightly clearer.
-    
+
     Since the line is now so long the explanatory comment about the -1u
     trick has to go somewhere else anyway, I used the opportunity to
     explain it in slightly more detail.
-    
+
     This is a purely stylistic change; the emitted assembler from GCC
     is identical.
-    
+
     R=jeff
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@79 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 2f0aaf8631d8fb2475ca1a6687c181efb14ed286
@@ -344,13 +344,13 @@ Date:   Sun Jun 30 19:24:03 2013 +0000
     5 bytes free, just check once for 21 bytes. This skips a compare
     and a branch; although it is easily predictable, it is still
     a few cycles on a fast path that we would like to get rid of.
-    
+
     Benchmarking this yields very confusing results. On open-source
     GCC 4.8.1 on Haswell, we get exactly the expected results; the
     benchmarks where we hit the fast path for literals (in particular
     the two HTML benchmarks and the protobuf benchmark) give very nice
     speedups, and the others are not really affected.
-    
+
     However, benchmarks with Google's GCC branch on other hardware
     is much less clear. It seems that we have a weak loss in some cases
     (and the win for the “typical” win cases are not nearly as clear),
@@ -358,16 +358,16 @@ Date:   Sun Jun 30 19:24:03 2013 +0000
     the benchmark. Looking at the generated assembler, it seems that
     the removal of the if causes other large-scale changes in how the
     function is laid out, which makes it likely that this is just bad luck.
-    
+
     Thus, we should keep this change, even though its exact current impact is
     unclear; it's a sensible change per se, and dropping it on the basis of
     microoptimization for a given compiler (or even branch of a compiler)
     would seem like a bad strategy in the long run.
-    
+
     Microbenchmark results (all in 64-bit, opt mode):
-    
+
       Nehalem, Google GCC:
-    
+
       Benchmark                Base (ns)  New (ns)                       Improvement
       ------------------------------------------------------------------------------
       BM_UFlat/0                   76747     75591  1.3GB/s  html           +1.5%
@@ -392,10 +392,10 @@ Date:   Sun Jun 30 19:24:03 2013 +0000
       BM_UFlat/19                  79721     76581  1.4GB/s  pb             +4.1%
       BM_UFlat/20                 251158    252330  697.5MB/s  gaviota      -0.5%
       Sum of all benchmarks      4966150   4980396                          -0.3%
-    
-    
+
+
       Sandy Bridge, Google GCC:
-    
+
       Benchmark                Base (ns)  New (ns)                       Improvement
       ------------------------------------------------------------------------------
       BM_UFlat/0                   42850     42182  2.3GB/s  html           +1.6%
@@ -420,10 +420,10 @@ Date:   Sun Jun 30 19:24:03 2013 +0000
       BM_UFlat/19                  40546     39108  2.8GB/s  pb             +3.7%
       BM_UFlat/20                 175803    168209  1048.9MB/s  gaviota     +4.5%
       Sum of all benchmarks      3408117   3368361                          +1.2%
-    
-    
+
+
       Haswell, upstream GCC 4.8.1:
-    
+
       Benchmark                Base (ns)  New (ns)                       Improvement
       ------------------------------------------------------------------------------
       BM_UFlat/0                   46308     40641  2.3GB/s  html          +13.9%
@@ -448,8 +448,8 @@ Date:   Sun Jun 30 19:24:03 2013 +0000
       BM_UFlat/19                  44551     37373  3.0GB/s  pb            +19.2%
       BM_UFlat/20                 165408    164584  1.0GB/s  gaviota        +0.5%
       Sum of all benchmarks      3408011   3385508                          +0.7%
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@78 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 062bf544a61107db730b6d08cb0b159c4dd9b24c
@@ -461,12 +461,12 @@ Date:   Fri Jun 14 21:42:26 2013 +0000
     during decompression. (Also fixes some MSVC warnings, mentioned in public
     issue 75, but more of those remain.) They cannot be size_t because we expect
     them to go negative and test for that.
-    
+
     This saves a few movzwl instructions, yielding ~2% speedup in decompression.
-    
-    
+
+
     Sandy Bridge:
-    
+
     Benchmark                          Base (ns)  New (ns)                                Improvement
     -------------------------------------------------------------------------------------------------
     BM_UFlat/0                             48009     41283  2.3GB/s  html                   +16.3%
@@ -491,10 +491,10 @@ Date:   Fri Jun 14 21:42:26 2013 +0000
     BM_UFlat/19                            45766     38589  2.9GB/s  pb                     +18.6%
     BM_UFlat/20                           171107    169832  1039.5MB/s  gaviota              +0.8%
     Sum of all benchmarks                3500103   3394565                                   +3.1%
-    
-    
+
+
     Westmere:
-    
+
     Benchmark                          Base (ns)  New (ns)                                Improvement
     -------------------------------------------------------------------------------------------------
     BM_UFlat/0                             72624     71526  1.3GB/s  html                    +1.5%
@@ -519,10 +519,10 @@ Date:   Fri Jun 14 21:42:26 2013 +0000
     BM_UFlat/19                            74964     73210  1.5GB/s  pb                      +2.4%
     BM_UFlat/20                           237987    236745  746.0MB/s  gaviota               +0.5%
     Sum of all benchmarks                4794092   4697659                                   +2.1%
-    
-    
+
+
     Istanbul:
-    
+
     Benchmark                          Base (ns)  New (ns)                                Improvement
     -------------------------------------------------------------------------------------------------
     BM_UFlat/0                             98614     96376  1020.4MB/s  html                 +2.3%
@@ -547,8 +547,8 @@ Date:   Fri Jun 14 21:42:26 2013 +0000
     BM_UFlat/19                            94720     92653  1.2GB/s  pb                      +2.2%
     BM_UFlat/20                           360435    346687  510.6MB/s  gaviota               +4.0%
     Sum of all benchmarks                6944998   6828663                                   +1.7%
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@77 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 328aafa1980824a9afdcd50edc30d9d5157e417f
@@ -559,12 +559,12 @@ Date:   Thu Jun 13 16:19:52 2013 +0000
     Windows does not have struct iovec defined anywhere,
     so we define our own version that's equal to what UNIX
     typically has.
-    
+
     The bulk of this patch was contributed by Mohit Aron.
-    
+
     R=jeff
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@76 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit cd92eb0852e2339187b693eef3595a07d2276c1d
@@ -572,10 +572,10 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Wed Jun 12 19:51:15 2013 +0000
 
     Some code reorganization needed for an internal change.
-    
+
     R=fikes
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@75 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit a3e928d62bbd61b523b988c07b560253950cf73b
@@ -583,10 +583,10 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Tue Apr 9 15:33:30 2013 +0000
 
     Supports truncated test data in zippy benchmark.
-    
+
     R=sesse
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@74 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit bde324c0169763688f35ee44630a26ad1f49eec3
@@ -594,10 +594,10 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Tue Feb 5 14:36:15 2013 +0000
 
     Release Snappy 1.1.0.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@73 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 8168446c7eaaa0594e1f4ca923376dcf3a2846fa
@@ -605,15 +605,15 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Tue Feb 5 14:30:05 2013 +0000
 
     Make ./snappy_unittest pass without "srcdir" being defined.
-    
+
     Previously, snappy_unittests would read from an absolute path /testdata/..;
     convert it to use a relative path instead.
-    
+
     Patch from Marc-Antonie Ruel.
-    
+
     R=maruel
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@72 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 27a0cc394950ebdad2e8d67322f0862835b10bd9
@@ -622,7 +622,7 @@ Date:   Fri Jan 18 12:16:36 2013 +0000
 
     Increase the Zippy block size from 32 kB to 64 kB, winning ~3% density
     while being effectively performance neutral.
-    
+
     The longer story about density is that we win 3-6% density on the benchmarks
     where this has any effect at all; many of the benchmarks (cp, c, lsp, man)
     are smaller than 32 kB and thus will have no effect. Binary data also seems
@@ -630,7 +630,7 @@ Date:   Fri Jan 18 12:16:36 2013 +0000
     The protobuf benchmark wins as much as ~18% depending on architecture,
     but I wouldn't be too sure that this is representative of protobuf data in
     general.
-    
+
     As of performance, we lose a tiny amount since we get more tags (e.g., a long
     literal might be broken up into literal-copy-literal), but we win it back with
     less clearing of the hash table, and more opportunities to skip incompressible
@@ -638,17 +638,17 @@ Date:   Fri Jan 18 12:16:36 2013 +0000
     slower, again due to more tags. The total net change is about as close to zero
     as we can get, so the end effect seems to be simply more density and no
     real performance change.
-    
+
     The comment about not changing kBlockSize, scary as it is, is not really
     relevant, since we're never going to have a block-level decompressor without
     explicitly marked blocks. Replace it with something more appropriate.
-    
+
     This affects the framing format, but it's okay to change it since it basically
     has no users yet.
-    
-    
+
+
     Density (note that cp, c, lsp and man are all smaller than 32 kB):
-    
+
        Benchmark         Description   Base (%)  New (%)  Improvement
        --------------------------------------------------------------
        ZFlat/0           html            22.57    22.31     +5.6%
@@ -670,12 +670,12 @@ Date:   Fri Jan 18 12:16:36 2013 +0000
        ZFlat/16          pb              23.15    19.64    +17.9%
        ZFlat/17          gaviota         38.27    37.72     +1.5%
        Geometric mean                    45.51    44.15     +3.1%
-    
-    
+
+
     Microbenchmarks (64-bit, opt):
-    
+
     Westmere 2.8 GHz:
-    
+
        Benchmark                          Base (ns)  New (ns)                                Improvement
        -------------------------------------------------------------------------------------------------
        BM_UFlat/0                             75342     75027  1.3GB/s  html                    +0.4%
@@ -750,10 +750,10 @@ Date:   Fri Jan 18 12:16:36 2013 +0000
        BM_ZDataBuffer/3                       98236     99727  902.1MB/s  pdf                   -1.5%
        BM_ZDataBuffer/4                      710776    699104  558.8MB/s  html4                 +1.7%
        Sum of all benchmarks               27358908  27200688                                   +0.6%
-    
-    
+
+
     Sandy Bridge 2.6 GHz:
-    
+
        Benchmark                          Base (ns)  New (ns)                                Improvement
        -------------------------------------------------------------------------------------------------
        BM_UFlat/0                             49356     49018  1.9GB/s  html                    +0.7%
@@ -828,10 +828,10 @@ Date:   Fri Jan 18 12:16:36 2013 +0000
        BM_ZDataBuffer/3                       65725     66826  1.3GB/s  pdf                     -1.6%
        BM_ZDataBuffer/4                      517871    514750  758.9MB/s  html4                 +0.6%
        Sum of all benchmarks               20258879  20315484                                   -0.3%
-    
-    
+
+
     AMD Instanbul 2.4 GHz:
-    
+
        Benchmark                          Base (ns)  New (ns)                                Improvement
        -------------------------------------------------------------------------------------------------
        BM_UFlat/0                             97120     96585  1011.1MB/s  html                 +0.6%
@@ -906,8 +906,8 @@ Date:   Fri Jan 18 12:16:36 2013 +0000
        BM_ZDataBuffer/3                      145382    145986  616.2MB/s  pdf                   -0.4%
        BM_ZDataBuffer/4                      868117    852754  458.1MB/s  html4                 +1.8%
        Sum of all benchmarks               33771833  33744763                                   +0.1%
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@71 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 81f34784b7b812dcda956ee489dfdc74ec2da990
@@ -916,11 +916,11 @@ Date:   Sun Jan 6 19:21:26 2013 +0000
 
     Adjust the Snappy open-source distribution for the changes in Google's
     internal file API.
-    
+
     R=sanjay
-    
-    
-    
+
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@70 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 698af469b47fe809905e2ed173ad84241de5800f
@@ -932,17 +932,17 @@ Date:   Fri Jan 4 11:54:20 2013 +0000
     as one instruction. Even more importantly, it can constant-fold the
     COPY_* enums together with the shifted negative constants, which also saves
     some instructions. (We don't need it for LITERAL, since it happens to be 0.)
-    
+
     I am unsure why the compiler couldn't do this itself, but the theory is that
     it cannot prove that len-1 and len-4 cannot underflow/wrap, and thus can't
     do the optimization safely.
-    
+
     The gains are small but measurable; 0.5-1.0% over the BM_Z* benchmarks
     (measured on Westmere, Sandy Bridge and Istanbul).
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@69 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 55209f9b92efd97e0a61be28ed94210de04c3bfc
@@ -951,10 +951,10 @@ Date:   Mon Oct 8 11:37:16 2012 +0000
 
     Stop giving -Werror to automake, due to an incompatibility between current
     versions of libtool and automake on non-GNU platforms (e.g. Mac OS X).
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@68 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit b86e81c8b3426a62d8ab3a7674c2506e9e678740
@@ -963,10 +963,10 @@ Date:   Fri Aug 17 13:54:47 2012 +0000
 
     Fix public issue 66: Document GetUncompressedLength better, in particular that
     it leaves the source in a state that's not appropriate for RawUncompress.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@67 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 2e225ba821b420ae28e1d427075d5589c1e892d9
@@ -975,10 +975,10 @@ Date:   Tue Jul 31 11:44:44 2012 +0000
 
     Fix public issue 64: Check for <sys/time.h> at configure time,
     since MSVC seemingly does not have it.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@66 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit e89f20ab46ee11050760c6d57f05c2a3825a911c
@@ -988,14 +988,14 @@ Date:   Wed Jul 4 09:34:48 2012 +0000
     Handle the case where gettimeofday() goes backwards or returns the same value
     twice; it could cause division by zero in the unit test framework.
     (We already had one fix for this in place, but it was incomplete.)
-    
+
     This could in theory happen on any system, since there are few guarantees
     about gettimeofday(), but seems to only happen in practice on GNU/Hurd, where
     gettimeofday() is cached and only updated ever so often.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@65 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 3ec60ac9878de5d0317ad38fc545080a4bfaa74f
@@ -1005,10 +1005,10 @@ Date:   Wed Jul 4 09:28:33 2012 +0000
     Mark ARMv4 as not supporting unaligned accesses (not just ARMv5 and ARMv6);
     apparently Debian still targets these by default, giving us segfaults on
     armel.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@64 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit be80d6f74f9d82220e952a54f3f129aae1f13f95
@@ -1017,10 +1017,10 @@ Date:   Tue May 22 09:46:05 2012 +0000
 
     Fix public bug #62: Remove an extraneous comma at the end of an enum list,
     causing compile errors when embedded in Mozilla on OpenBSD.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@63 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 8b95464146dddab1c7068f879162db9a885cdafe
@@ -1028,14 +1028,14 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Tue May 22 09:32:50 2012 +0000
 
     Snappy library no longer depends on iostream.
-    
+
     Achieved by moving logging macro definitions to a test-only
     header file, and by changing non-test code to use assert,
     fprintf, and abort instead of LOG/CHECK macros.
-    
+
     R=sesse
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@62 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit fc723b212d6972af7051261754770b3f70a7dc03
@@ -1043,10 +1043,10 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Fri Feb 24 15:46:37 2012 +0000
 
     Release Snappy 1.0.5.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@61 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit dc63e0ad9693e13390ba31b00d92ecccaf7605c3
@@ -1055,15 +1055,15 @@ Date:   Thu Feb 23 17:00:36 2012 +0000
 
     For 32-bit platforms, do not try to accelerate multiple neighboring
     32-bit loads with a 64-bit load during compression (it's not a win).
-    
+
     The main target for this optimization is ARM, but 32-bit x86 gets
     a small gain, too, although there is noise in the microbenchmarks.
     It's a no-op for 64-bit x86. It does not affect decompression.
-    
+
     Microbenchmark results on a Cortex-A9 1GHz, using g++ 4.6.2 (from
     Ubuntu/Linaro), -O2 -DNDEBUG -Wa,-march=armv7a -mtune=cortex-a9
     -mthumb-interwork, minimum 1000 iterations:
-    
+
       Benchmark            Time(ns)    CPU(ns) Iterations
       ---------------------------------------------------
       BM_ZFlat/0            1158277    1160000       1000 84.2MB/s  html (23.57 %)    [ +4.3%]
@@ -1084,9 +1084,9 @@ Date:   Thu Feb 23 17:00:36 2012 +0000
       BM_ZFlat/15             84784      85011       2235 47.4MB/s  man (59.36 %)     [ +1.1%]
       BM_ZFlat/16           1293254    1290000       1000 87.7MB/s  pb (23.15 %)      [ +2.3%]
       BM_ZFlat/17           2775155    2780000       1000 63.2MB/s  gaviota (38.27 %) [+12.2%]
-    
+
     Core i7 in 32-bit mode (only one run and 100 iterations, though, so noisy):
-    
+
       Benchmark            Time(ns)    CPU(ns) Iterations
       ---------------------------------------------------
       BM_ZFlat/0             227582     223464       3043 437.0MB/s  html (23.57 %)    [ +7.4%]
@@ -1107,10 +1107,10 @@ Date:   Thu Feb 23 17:00:36 2012 +0000
       BM_ZFlat/15             20939      20571      35000 196.0MB/s  man (59.36 %)     [ +2.1%]
       BM_ZFlat/16            239209     236544       2917 478.1MB/s  pb (23.15 %)      [ +4.2%]
       BM_ZFlat/17            616206     610000       1000 288.2MB/s  gaviota (38.27 %) [ -1.6%]
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@60 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit f8829ea39d51432ba4e6a26ddaec57acea779f4c
@@ -1121,14 +1121,14 @@ Date:   Tue Feb 21 17:02:17 2012 +0000
     where they are available (ARMv7 and higher). This gives a significant
     speed boost on ARM, both for compression and decompression.
     It should not affect x86 at all.
-    
+
     There are more changes possible to speed up ARM, but it might not be
     that easy to do without hurting x86 or making the code uglier.
     Also, we de not try to use NEON yet.
-    
+
     Microbenchmark results on a Cortex-A9 1GHz, using g++ 4.6.2 (from Ubuntu/Linaro),
     -O2 -DNDEBUG -Wa,-march=armv7a -mtune=cortex-a9 -mthumb-interwork:
-    
+
     Benchmark            Time(ns)    CPU(ns) Iterations
     ---------------------------------------------------
     BM_UFlat/0             524806     529100        378 184.6MB/s  html            [+33.6%]
@@ -1172,12 +1172,12 @@ Date:   Tue Feb 21 17:02:17 2012 +0000
     BM_ZFlat/15             86921      86206       1972 46.8MB/s  man (59.36 %)    [+42.2%]
     BM_ZFlat/16           1312315    1315789        152 86.0MB/s  pb (23.15 %)     [+34.5%]
     BM_ZFlat/17           3173120    3200000        100 54.9MB/s  gaviota (38.27%) [+28.1%]
-    
-    
+
+
     The move from 64-bit to 32-bit operations for the copies also affected 32-bit x86;
     positive on the decompression side, and slightly negative on the compression side
     (unless that is noise; I only ran once):
-    
+
     Benchmark              Time(ns)    CPU(ns) Iterations
     -----------------------------------------------------
     BM_UFlat/0                86279      86140       7778 1.1GB/s  html             [ +7.5%]
@@ -1221,10 +1221,10 @@ Date:   Tue Feb 21 17:02:17 2012 +0000
     BM_ZFlat/15               21181      20857      35000 193.3MB/s  man (59.36 %)  [ -0.8%]
     BM_ZFlat/16              244009     239973       2917 471.3MB/s  pb (23.15 %)   [ -1.4%]
     BM_ZFlat/17              596362     590000       1000 297.9MB/s  gaviota (38.27%) [ +0.0%]
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@59 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit f2e184f638bdc7905f26c24faaf10fc0f5d33403
@@ -1234,13 +1234,13 @@ Date:   Sat Feb 11 22:11:22 2012 +0000
     Lower the size allocated in the "corrupted input" unit test from 256 MB
     to 2 MB. This fixes issues with running the unit test on platforms with
     little RAM (e.g. some ARM boards).
-    
+
     Also, reactivate the 2 MB test for 64-bit platforms; there's no good
     reason why it shouldn't be.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@58 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit e750dc0f054ba74b0ce76dd2013e6728cc7a41c5
@@ -1248,8 +1248,8 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Sun Jan 8 17:55:48 2012 +0000
 
     Minor refactoring to accomodate changes in Google's internal code tree.
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@57 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit d9068ee301bdf893a4d8cb7c6518eacc44c4c1f2
@@ -1260,22 +1260,22 @@ Date:   Wed Jan 4 13:10:46 2012 +0000
     warnings. There are still some in the unit test, but the main .cc file should
     be clean. We haven't enabled -Wall for the default build, since the unit test
     is still not clean.
-    
+
     This also fixes a real bug in the open-source implementation of
     ReadFileToStringOrDie(); it would not detect errors correctly.
-    
+
     I had to go through some pains to avoid performance loss as the types
     were changed; I think there might still be some with 32-bit if and only if LFS
     is enabled (ie., size_t is 64-bit), but for regular 32-bit and 64-bit I can't
     see any losses, and I've diffed the generated GCC assembler between the old and
     new code without seeing any significant choices. If anything, it's ever so
     slightly faster.
-    
+
     This may or may not enable compression of very large blocks (>2^32 bytes)
     when size_t is 64-bit, but I haven't checked, and it is still not a supported
     case.
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@56 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 0755c815197dacc77d8971ae917c86d7aa96bf8e
@@ -1285,10 +1285,10 @@ Date:   Wed Jan 4 10:46:39 2012 +0000
     Add a framing format description. We do not have any implementation of this at
     the current point, but there seems to be enough of a general interest in the
     topic (cf. public bug #34).
-    
+
     R=csilvers,sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@55 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit d7eb2dc4133794b62cba691f9be40d1549bc32e2
@@ -1296,17 +1296,17 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Mon Dec 5 21:27:26 2011 +0000
 
     Speed up decompression by moving the refill check to the end of the loop.
-    
+
     This seems to work because in most of the branches, the compiler can evaluate
     “ip_limit_ - ip” in a more efficient way than reloading ip_limit_ from memory
     (either by already having the entire expression in a register, or reconstructing
     it from “avail”, or something else). Memory loads, even from L1, are seemingly
     costly in the big picture at the current decompression speeds.
-    
+
     Microbenchmarks (64-bit, opt mode):
-    
+
     Westmere (Intel Core i7):
-    
+
       Benchmark     Time(ns)    CPU(ns) Iterations
       --------------------------------------------
       BM_UFlat/0       74492      74491     187894 1.3GB/s  html      [ +5.9%]
@@ -1327,9 +1327,9 @@ Date:   Mon Dec 5 21:27:26 2011 +0000
       BM_UFlat/15       4833       4833    2898697 834.1MB/s  man     [ +4.8%]
       BM_UFlat/16      79855      79855     175356 1.4GB/s  pb        [ +4.8%]
       BM_UFlat/17     245845     245843      56838 715.0MB/s  gaviota [ +5.8%]
-    
+
     Clovertown (Intel Core 2):
-    
+
       Benchmark     Time(ns)    CPU(ns) Iterations
       --------------------------------------------
       BM_UFlat/0      107911     107890     100000 905.1MB/s  html    [ +2.2%]
@@ -1350,9 +1350,9 @@ Date:   Mon Dec 5 21:27:26 2011 +0000
       BM_UFlat/15       7264       7263    1916168 555.0MB/s  man     [ +1.4%]
       BM_UFlat/16     108853     108836     100000 1039.1MB/s  pb     [ +1.7%]
       BM_UFlat/17     364289     364223      38419 482.6MB/s  gaviota [ +4.9%]
-    
+
     Barcelona (AMD Opteron):
-    
+
       Benchmark     Time(ns)    CPU(ns) Iterations
       --------------------------------------------
       BM_UFlat/0      103900     103871     100000 940.2MB/s  html    [ +8.3%]
@@ -1373,10 +1373,10 @@ Date:   Mon Dec 5 21:27:26 2011 +0000
       BM_UFlat/15       7976       7974    1760383 505.6MB/s  man     [ +5.6%]
       BM_UFlat/16     103121     103092     100000 1097.0MB/s  pb     [ +8.7%]
       BM_UFlat/17     391431     391314      35733 449.2MB/s  gaviota [ +6.5%]
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@54 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 5ed51ce15fc4ff8d2f7235704eb6b0c3f762fb88
@@ -1384,24 +1384,24 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Wed Nov 23 11:14:17 2011 +0000
 
     Speed up decompression by making the fast path for literals faster.
-    
+
     We do the fast-path step as soon as possible; in fact, as soon as we know the
     literal length. Since we usually hit the fast path, we can then skip the checks
     for long literals and available input space (beyond what the fast path check
     already does).
-    
+
     Note that this changes the decompression Writer API; however, it does not
     change the ABI, since writers are always templatized and as such never
     cross compilation units. The new API is slightly more general, in that it
     doesn't hard-code the value 16. Note that we also take care to check
     for len <= 16 first, since the other two checks almost always succeed
     (so we don't want to waste time checking for them until we have to).
-    
+
     The improvements are most marked on Nehalem, but are generally positive
     on other platforms as well. All microbenchmarks are 64-bit, opt.
-    
+
     Clovertown (Core 2):
-    
+
       Benchmark     Time(ns)    CPU(ns) Iterations
       --------------------------------------------
       BM_UFlat/0      110226     110224     100000 886.0MB/s  html    [ +1.5%]
@@ -1422,9 +1422,9 @@ Date:   Wed Nov 23 11:14:17 2011 +0000
       BM_UFlat/15       7368       7368    1881856 547.1MB/s  man     [ +4.0%]
       BM_UFlat/16     110727     110726     100000 1021.4MB/s  pb     [ +2.3%]
       BM_UFlat/17     382138     382141      36616 460.0MB/s  gaviota [ -0.7%]
-    
+
     Westmere (Core i7):
-    
+
       Benchmark     Time(ns)    CPU(ns) Iterations
       --------------------------------------------
       BM_UFlat/0       78861      78853     177703 1.2GB/s  html      [ +2.1%]
@@ -1445,9 +1445,9 @@ Date:   Wed Nov 23 11:14:17 2011 +0000
       BM_UFlat/15       5063       5063    2772202 796.2MB/s  man     [ +7.7%]
       BM_UFlat/16      83663      83656     167697 1.3GB/s  pb        [ +1.8%]
       BM_UFlat/17     260224     260198      53823 675.6MB/s  gaviota [ -0.5%]
-    
+
     Barcelona (Opteron):
-    
+
       Benchmark     Time(ns)    CPU(ns) Iterations
       --------------------------------------------
       BM_UFlat/0      112490     112457     100000 868.4MB/s  html    [ -0.4%]
@@ -1468,10 +1468,10 @@ Date:   Wed Nov 23 11:14:17 2011 +0000
       BM_UFlat/15       8422       8421    1665036 478.7MB/s  man     [ +2.6%]
       BM_UFlat/16     112053     112048     100000 1009.3MB/s  pb     [ -0.4%]
       BM_UFlat/17     416723     416713      33612 421.8MB/s  gaviota [ -2.0%]
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@53 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 0c1b9c3904430f5b399bd057d76de4bc36b7a123
@@ -1480,10 +1480,10 @@ Date:   Tue Nov 8 14:46:39 2011 +0000
 
     Fix public issue #53: Update the README to the API we actually open-sourced
     with.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@52 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit b61134bc0a6a904b41522b4e5c9e80874c730cef
@@ -1492,10 +1492,10 @@ Date:   Wed Oct 5 12:27:12 2011 +0000
 
     In the format description, use a clearer example to emphasize that varints are
     stored in little-endian. Patch from Christian von Roques.
-    
+
     R=csilvers
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@51 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 21a2e4f55758e759302cd84ad0f3580affcba7d9
@@ -1503,10 +1503,10 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Thu Sep 15 19:34:06 2011 +0000
 
     Release Snappy 1.0.4.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@50 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit e2e303286813c759c5b1cdb46dad63c494f0a061
@@ -1515,10 +1515,10 @@ Date:   Thu Sep 15 09:50:05 2011 +0000
 
     Fix public issue #50: Include generic byteswap macros.
     Also include Solaris 10 and FreeBSD versions.
-    
+
     R=csilvers
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@49 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 593002da3c051f4721312869f816b41485bad3b7
@@ -1527,10 +1527,10 @@ Date:   Wed Aug 10 18:57:27 2011 +0000
 
     Partially fix public issue 50: Remove an extra comma from the end of some
     enum declarations, as it seems the Sun compiler does not like it.
-    
+
     Based on patch by Travis Vitek.
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@48 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit f1063a5dc43891eed37f0586bfea57b84dddd756
@@ -1538,10 +1538,10 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Wed Aug 10 18:44:16 2011 +0000
 
     Use the right #ifdef test for sys/mman.h.
-    
+
     Based on patch by Travis Vitek.
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@47 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 41c827a2fa9ce048202d941187f211180feadde4
@@ -1549,12 +1549,12 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Wed Aug 10 01:22:09 2011 +0000
 
     Fix public issue #47: Small comment cleanups in the unit test.
-    
+
     Originally based on a patch by Patrick Pelletier.
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@46 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 59aeffa6049b5c2a3a467e7602c1f93630b870e7
@@ -1563,13 +1563,13 @@ Date:   Wed Aug 10 01:14:43 2011 +0000
 
     Fix public issue #46: Format description said "3-byte offset"
     instead of "4-byte offset" for the longest copies.
-    
+
     Also fix an inconsistency in the heading for section 2.2.3.
     Both patches by Patrick Pelletier.
-    
+
     R=csilvers
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@45 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 57e7cd72559cb022ef32856f2252a4c4585e562e
@@ -1578,13 +1578,13 @@ Date:   Tue Jun 28 11:40:25 2011 +0000
 
     Fix public issue #44: Make the definition and declaration of CompressFragment
     identical, even regarding cv-qualifiers.
-    
+
     This is required to work around a bug in the Solaris Studio C++ compiler
     (it does not properly disregard cv-qualifiers when doing name mangling).
-    
+
     R=sanjay
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@44 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 13c4a449a8ea22139c9aa441e8024eebc9dbdf6e
@@ -1593,12 +1593,12 @@ Date:   Sat Jun 4 10:19:05 2011 +0000
 
     Correct an inaccuracy in the Snappy format description.
     (I stumbled into this when changing the way we decompress literals.)
-    
+
     R=csilvers
-    
+
     Revision created by MOE tool push_codebase.
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@43 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit f5406737403119e1483a71d2084d17728663a114
@@ -1606,7 +1606,7 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Fri Jun 3 20:53:06 2011 +0000
 
     Speed up decompression by removing a fast-path attempt.
-    
+
     Whenever we try to enter a copy fast-path, there is a certain cost in checking
     that all the preconditions are in place, but it's normally offset by the fact
     that we can usually take the cheaper path. However, in a certain path we've
@@ -1616,15 +1616,15 @@ Date:   Fri Jun 3 20:53:06 2011 +0000
     checking without gaining much from having a fast path. Thus, simply don't try
     the fast path in this situation -- we're already on a slow path anyway
     (one where we need to refill more data from the reader).
-    
+
     I'm a bit surprised at how much this gained; it could be that this path is
     more common than I thought, or that the simpler structure somehow makes the
     compiler happier. I haven't looked at the assembler, but it's a win across
     the board on both Core 2, Core i7 and Opteron, at least for the cases we
     typically care about. The gains seem to be the largest on Core i7, though.
     Results from my Core i7 workstation:
-    
-    
+
+
       Benchmark            Time(ns)    CPU(ns) Iterations
       ---------------------------------------------------
       BM_UFlat/0              73337      73091     190996 1.3GB/s  html      [ +1.7%]
@@ -1650,12 +1650,12 @@ Date:   Fri Jun 3 20:53:06 2011 +0000
       BM_UValidate/2            197        196   71428571 603.3GB/s  jpg     [ +0.5%]
       BM_UValidate/3          14494      14462     972222 6.1GB/s  pdf       [ +0.5%]
       BM_UValidate/4         168444     167836      83832 2.3GB/s  html4     [ +0.1%]
-    
+
     R=jeff
-    
+
     Revision created by MOE tool push_codebase.
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@42 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 197f3ee9f9397e98c9abf07f9da875fbcb725dba
@@ -1663,18 +1663,18 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Fri Jun 3 20:47:14 2011 +0000
 
     Speed up decompression by not needing a lookup table for literal items.
-    
+
     Looking up into and decoding the values from char_table has long shown up as a
     hotspot in the decompressor. While it turns out that it's hard to make a more
     efficient decoder for the copy ops, the literals are simple enough that we can
     decode them without needing a table lookup. (This means that 1/4 of the table
     is now unused, although that in itself doesn't buy us anything.)
-    
+
     The gains are small, but definitely present; some tests win as much as 10%,
     but 1-4% is more typical. These results are from Core i7, in 64-bit mode;
     Core 2 and Opteron show similar results. (I've run with more iterations
     than unusual to make sure the smaller gains don't drown entirely in noise.)
-    
+
       Benchmark            Time(ns)    CPU(ns) Iterations
       ---------------------------------------------------
       BM_UFlat/0              74665      74428     182055 1.3GB/s  html      [ +3.1%]
@@ -1700,12 +1700,12 @@ Date:   Fri Jun 3 20:47:14 2011 +0000
       BM_UValidate/2            198        197   71428571 600.7GB/s  jpg     [+16.8%]
       BM_UValidate/3          14560      14521     965517 6.1GB/s  pdf       [ -4.1%]
       BM_UValidate/4         169065     168671      83832 2.3GB/s  html4     [ -2.9%]
-    
+
     R=jeff
-    
+
     Revision created by MOE tool push_codebase.
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@41 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 8efa2639e885ac467e7b11c662975c5844019fb9
@@ -1713,8 +1713,8 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Thu Jun 2 22:57:41 2011 +0000
 
     Release Snappy 1.0.3.
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@40 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 2e12124bd87f39296709decc65195fa5bfced538
@@ -1724,15 +1724,15 @@ Date:   Thu Jun 2 18:06:54 2011 +0000
     Remove an unneeded goto in the decompressor; it turns out that the
     state of ip_ after decompression (or attempted decompresion) is
     completely irrelevant, so we don't need the trailer.
-    
+
     Performance is, as expected, mostly flat -- there's a curious ~3-5%
     loss in the "lsp" test, but that test case is so short it is hard to say
     anything definitive about why (most likely, it's some sort of
     unrelated effect).
-    
+
     R=jeff
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@39 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit c266bbf32103f8ed4a83e2272ed3d8828d5b8b34
@@ -1740,7 +1740,7 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Thu Jun 2 17:59:40 2011 +0000
 
     Speed up decompression by caching ip_.
-    
+
     It is seemingly hard for the compiler to understand that ip_, the current input
     pointer into the compressed data stream, can not alias on anything else, and
     thus using it directly will incur memory traffic as it cannot be kept in a
@@ -1750,19 +1750,19 @@ Date:   Thu Jun 2 17:59:40 2011 +0000
     performance, so changing Step() into a function that decodes as much as it can
     before it saves ip_ back and returns. (Note that Step() was already inlined,
     so it is not the manual inlining that buys the performance here.)
-    
+
     The wins are about 3-6% for Core 2, 6-13% on Core i7 and 5-12% on Opteron
     (for plain array-to-array decompression, in 64-bit opt mode).
-    
+
     There is a tiny difference in the behavior here; if an invalid literal is
     encountered (ie., the writer refuses the Append() operation), ip_ will now
     point to the byte past the tag byte, instead of where the literal was
     originally thought to end. However, we don't use ip_ for anything after
     DecompressAllTags() has returned, so this should not change external behavior
     in any way.
-    
+
     Microbenchmark results for Core i7, 64-bit (Opteron results are similar):
-    
+
     Benchmark            Time(ns)    CPU(ns) Iterations
     ---------------------------------------------------
     BM_UFlat/0              79134      79110       8835 1.2GB/s  html      [ +6.2%]
@@ -1788,10 +1788,10 @@ Date:   Thu Jun 2 17:59:40 2011 +0000
     BM_UValidate/2            237        237    2950297 499.0GB/s  jpg     [+24.9%]
     BM_UValidate/3          14610      14611      47901 6.0GB/s  pdf       [+26.8%]
     BM_UValidate/4         171973     171990       4071 2.2GB/s  html4     [+25.7%]
-    
-    
-    
-    
+
+
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@38 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit d0ee043bc50c62c5b5ff3da044f0b5567257407d
@@ -1799,15 +1799,15 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Tue May 17 08:48:25 2011 +0000
 
     Fix the numbering of the headlines in the Snappy format description.
-    
+
     R=csilvers
     DELTA=4  (0 added, 0 deleted, 4 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1906
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@37 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 6c7053871fbdb459c9c14287a138d7f82d6d84a1
@@ -1817,15 +1817,15 @@ Date:   Mon May 16 08:59:18 2011 +0000
     Fix public issue #32: Add compressed format documentation for Snappy.
     This text is new, but an earlier version from Zeev Tarantov was used
     as reference.
-    
+
     R=csilvers
     DELTA=112  (111 added, 0 deleted, 1 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1867
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@36 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit a1f9f9973d127992f341d442969c86fd9a0847c9
@@ -1835,15 +1835,15 @@ Date:   Mon May 9 21:29:02 2011 +0000
     Fix public issue #39: Pick out the median runs based on CPU time,
     not real time. Also, use nth_element instead of sort, since we
     only need one element.
-    
+
     R=csilvers
     DELTA=5  (3 added, 0 deleted, 2 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1799
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@35 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit f7b105683c074cdf233740089e245e43f63e7e55
@@ -1856,19 +1856,19 @@ Date:   Mon May 9 21:28:45 2011 +0000
     (as when the user adjusts the clock). We avoid a division-by-zero,
     and put a lower bound on the number of iterations -- the same
     amount as we use to calibrate.
-    
+
     We should probably use CLOCK_MONOTONIC for platforms that support
     it, to be robust against clock adjustments; we already use Windows'
     monotonic timers. However, that's for a later changelist.
-    
+
     R=csilvers
     DELTA=7  (5 added, 0 deleted, 2 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1798
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@34 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit d8d481427a05b88cdb0810c29bf400153595c423
@@ -1877,15 +1877,15 @@ Date:   Tue May 3 23:22:52 2011 +0000
 
     Fix public issue #37: Only link snappy_unittest against -lz and other autodetected
     libraries, not libsnappy.so (which doesn't need any such dependency).
-    
+
     R=csilvers
     DELTA=20  (14 added, 0 deleted, 6 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1710
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@33 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit bcecf195c0aeb2c98144d3d54b4d8d228774f50d
@@ -1894,15 +1894,15 @@ Date:   Tue May 3 23:22:33 2011 +0000
 
     Release Snappy 1.0.2, to get the license change and various other fixes into
     a release.
-    
+
     R=csilvers
     DELTA=239  (236 added, 0 deleted, 3 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1709
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@32 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 84d9f642025cda672dda0d94a8008f094500aaa6
@@ -1915,15 +1915,15 @@ Date:   Tue Apr 26 12:34:55 2011 +0000
     (Some machines have traditionally had bugs in QPC, but they should
     be relatively rare these days, and there's really no much better
     alternative that I know of.)
-    
+
     R=csilvers
     DELTA=74  (55 added, 19 deleted, 0 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1556
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@31 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 3d8e71df8d30f980d71d4c784ebfc5ff62d5b0cb
@@ -1932,15 +1932,15 @@ Date:   Tue Apr 26 12:34:37 2011 +0000
 
     Fix public issue #31: Don't reset PATH in autogen.sh; instead, do the trickery
     we need for our own build system internally.
-    
+
     R=csilvers
     DELTA=16  (13 added, 1 deleted, 2 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1555
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@30 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 73987351de54c88e2fc3f5dcdeceb47708df3585
@@ -1950,15 +1950,15 @@ Date:   Fri Apr 15 22:55:56 2011 +0000
     When including <windows.h>, define WIN32_LEAN_AND_MEAN first,
     so we won't pull in macro definitions of things like min() and max(),
     which can conflict with <algorithm>.
-    
+
     R=csilvers
     DELTA=1  (1 added, 0 deleted, 0 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1485
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@29 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit fb7e0eade471a20b009720a84fea0af1552791d5
@@ -1967,19 +1967,19 @@ Date:   Mon Apr 11 09:07:01 2011 +0000
 
     Fix public issue #29: Write CPU timing code for Windows, based on GetProcessTimes()
     instead of getursage().
-    
+
     I thought I'd already committed this patch, so that the 1.0.1 release already
     would have a Windows-compatible snappy_unittest, but I'd seemingly deleted it
     instead, so this is a reconstruction.
-    
+
     R=csilvers
     DELTA=43  (39 added, 3 deleted, 1 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1295
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@28 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit c67fa0c755a329000da5546fff79089d62ac2f82
@@ -1987,27 +1987,27 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Fri Apr 8 09:51:53 2011 +0000
 
     Include C bindings of Snappy, contributed by Martin Gieseking.
-    
+
     I've made a few changes since Martin's version; mostly style nits, but also
     a semantic change -- most functions that return bool in the C++ version now
     return an enum, to better match typical C (and zlib) semantics.
-    
+
     I've kept the copyright notice, since Martin is obviously the author here;
     he has signed the contributor license agreement, though, so this should not
     hinder Google's use in the future.
-    
+
     We'll need to update the libtool version number to match the added interface,
     but as of http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
     I'm going to wait until public release.
-    
+
     R=csilvers
     DELTA=238  (233 added, 0 deleted, 5 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1294
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@27 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 56be85cb9ae06f2e92180ae2575bdd10c012ab73
@@ -2015,18 +2015,18 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Thu Apr 7 16:36:43 2011 +0000
 
     Replace geo.protodata with a newer version.
-    
+
     The data compresses/decompresses slightly faster than the old data, and has
     similar density.
-    
+
     R=lookingbill
     DELTA=1  (0 added, 0 deleted, 1 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1288
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@26 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 3dd93f3ec74df54a37f68bffabb058ac757bbe72
@@ -2036,15 +2036,15 @@ Date:   Wed Mar 30 20:27:53 2011 +0000
     Fix public issue #27: Add HAVE_CONFIG_H tests around the config.h
     inclusion in snappy-stubs-internal.h, which eases compiling outside the
     automake/autoconf framework.
-    
+
     R=csilvers
     DELTA=5  (4 added, 1 deleted, 0 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1152
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@25 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit f67bcaa61006da8b325a7ed9909a782590971815
@@ -2055,15 +2055,15 @@ Date:   Wed Mar 30 20:27:39 2011 +0000
     Measure() loop. This gives all algorithms a small speed boost, except Snappy which
     already didn't do reallocation (so the measurements were slightly biased in its
     favor).
-    
+
     R=csilvers
     DELTA=92  (69 added, 9 deleted, 14 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1151
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@24 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit cc333c1c5cc4eabceceb9848ff3cac6c604ecbc6
@@ -2074,20 +2074,20 @@ Date:   Wed Mar 30 20:25:09 2011 +0000
     the differences from the opensource code.  Will make it easier
     in the future to mix-and-match third-party code that uses
     snappy with google code.
-    
+
     Currently, csearch shows that the only external user of
     "namespace zippy" is some bigtable code that accesses
     a TEST variable, which is temporarily kept in the zippy
     namespace.
-    
+
     R=sesse
     DELTA=123  (18 added, 3 deleted, 102 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1150
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@23 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit f19fb07e6dc79d6857e37df572dba25ff30fc8f3
@@ -2096,15 +2096,15 @@ Date:   Mon Mar 28 22:17:04 2011 +0000
 
     Put back the final few lines of what was truncated during the
     license header change.
-    
+
     R=csilvers
     DELTA=5  (4 added, 0 deleted, 1 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1094
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@22 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 7e8ca8f8315fc2ecb4eea19db695039ab2ca43a0
@@ -2112,25 +2112,25 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Sat Mar 26 02:34:34 2011 +0000
 
     Change on 2011-03-25 19:18:00-07:00 by sesse
-    
+
     	Replace the Apache 2.0 license header by the BSD-type license header;
     	somehow a lot of the files were missed in the last round.
-    
+
     	R=dannyb,csilvers
     	DELTA=147  (74 added, 2 deleted, 71 changed)
-    
+
     Change on 2011-03-25 19:25:07-07:00 by sesse
-    
+
     	Unbreak the build; the relicensing removed a bit too much (only comments
     	were intended, but I also accidentially removed some of the top lines of
     	the actual source).
-    
-    
-    
+
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1072
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@21 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit b4bbc1041b35d844ec26fbae25f2864995361fd8
@@ -2138,15 +2138,15 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Fri Mar 25 16:14:41 2011 +0000
 
     Change Snappy from the Apache 2.0 to a BSD-type license.
-    
+
     R=dannyb
     DELTA=328  (80 added, 184 deleted, 64 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1061
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@20 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit c47640c510eb11cf8913edfa34f667bceb3a4401
@@ -2155,15 +2155,15 @@ Date:   Fri Mar 25 00:39:01 2011 +0000
 
     Release Snappy 1.0.1, to soup up all the various small changes
     that have been made since release.
-    
+
     R=csilvers
     DELTA=266  (260 added, 0 deleted, 6 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1057
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@19 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit b1dc1f643eaff897a5ce135f525799b99687b118
@@ -2172,15 +2172,15 @@ Date:   Thu Mar 24 19:15:54 2011 +0000
 
     Fix a microbenchmark crash on mingw32; seemingly %lld is not universally
     supported on Windows, and %I64d is recommended instead.
-    
+
     R=csilvers
     DELTA=6  (5 added, 0 deleted, 1 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1034
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@18 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 98004ca9afc62a3279dfe9d9a359083f61db437f
@@ -2189,17 +2189,17 @@ Date:   Thu Mar 24 19:15:27 2011 +0000
 
     Fix public issue #19: Fix unit test when Google Test is installed but the
     gflags package isn't (Google Test is not properly initialized).
-    
+
     Patch by Martin Gieseking.
-    
+
     R=csilvers
     DELTA=2  (1 added, 0 deleted, 1 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1033
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@17 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 444a6c5f72d6f8d8f7213a5bcc08b26606eb9934
@@ -2210,17 +2210,17 @@ Date:   Thu Mar 24 19:13:57 2011 +0000
     among others, Windows support. For Windows in specific, we could have used
     CreateFileMapping/MapViewOfFile, but this should at least get us a bit closer
     to compiling, and is of course also relevant for embedded systems with no MMU.
-    
+
     (Part 2/2)
-    
+
     R=csilvers
     DELTA=15  (12 added, 3 deleted, 0 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1032
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@16 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 2e182e9bb840737f9cd8817e859dc17a82f2c16b
@@ -2231,17 +2231,17 @@ Date:   Thu Mar 24 19:12:27 2011 +0000
     among others, Windows support. For Windows in specific, we could have used
     CreateFileMapping/MapViewOfFile, but this should at least get us a bit closer
     to compiling, and is of course also relevant for embedded systems with no MMU.
-    
+
     (Part 1/2)
-    
+
     R=csilvers
     DELTA=9  (8 added, 0 deleted, 1 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1031
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@15 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 48662cbb7f81533977334629790d346220084527
@@ -2250,18 +2250,18 @@ Date:   Wed Mar 23 23:17:36 2011 +0000
 
     Fix public issue #12: Don't keep autogenerated auto* files in Subversion;
     it causes problems with others sending patches etc..
-    
+
     We can't get this 100% hermetic anyhow, due to files like lt~obsolete.m4,
     so we can just as well go cleanly in the other direction.
-    
+
     R=csilvers
     DELTA=21038  (0 added, 21036 deleted, 2 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=1012
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@14 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 9e4717a586149c9538b353400312bab5ab5458c4
@@ -2270,15 +2270,15 @@ Date:   Wed Mar 23 17:50:49 2011 +0000
 
     Fix public issue tracker bug #3: Call AC_SUBST([LIBTOOL_DEPS]), or the rule
     to rebuild libtool in Makefile.am won't work.
-    
+
     R=csilvers
     DELTA=1  (1 added, 0 deleted, 0 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=997
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@13 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 519c822a34a91a0c0eb32d98e9686ee7d9cd6651
@@ -2287,15 +2287,15 @@ Date:   Wed Mar 23 11:16:39 2011 +0000
 
     Fix public issue #10: Don't add GTEST_CPPFLAGS to snappy_unittest_CXXFLAGS;
     it's not needed (CPPFLAGS are always included when compiling).
-    
+
     R=csilvers
     DELTA=1  (0 added, 1 deleted, 0 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=994
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@12 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit ea6b936378583cba730c33c8a53776edc1782208
@@ -2304,15 +2304,15 @@ Date:   Wed Mar 23 11:16:18 2011 +0000
 
     Fix public issue #9: Add -Wall -Werror to automake flags.
     (This concerns automake itself, not the C++ compiler.)
-    
+
     R=csilvers
     DELTA=4  (3 added, 0 deleted, 1 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=993
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@11 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit e3ca06af253094b1c3a8eae508cd97accf077535
@@ -2320,15 +2320,15 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Wed Mar 23 11:13:37 2011 +0000
 
     Fix a typo in the Snappy README file.
-    
+
     R=csilvers
     DELTA=1  (0 added, 0 deleted, 1 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=992
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@10 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 39d27bea23873abaa663e884261386b17b058f20
@@ -2337,15 +2337,15 @@ Date:   Wed Mar 23 11:13:13 2011 +0000
 
     Fix public issue #6: Add a --with-gflags for disabling gflags autodetection
     and using a manually given setting (use/don't use) instead.
-    
+
     R=csilvers
     DELTA=16  (13 added, 0 deleted, 3 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=991
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@9 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 60add43d99c1c31aeecd895cb555ad6f6520608e
@@ -2355,15 +2355,15 @@ Date:   Wed Mar 23 11:12:44 2011 +0000
     Fix public issue #5: Replace the EXTRA_LIBSNAPPY_LDFLAGS setup with something
     slightly more standard, that also doesn't leak libtool command-line into
     configure.ac.
-    
+
     R=csilvers
     DELTA=7  (0 added, 4 deleted, 3 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=990
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@8 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit a8dd1700879ad646106742aa0e9c3a48dc07b01d
@@ -2371,15 +2371,15 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Wed Mar 23 11:12:22 2011 +0000
 
     Fix public issue #4: Properly quote all macro arguments in configure.ac.
-    
+
     R=csilvers
     DELTA=16  (0 added, 0 deleted, 16 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=989
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@7 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 79752dd7033658e28dc894de55012bdf2c9afca3
@@ -2388,15 +2388,15 @@ Date:   Wed Mar 23 11:11:54 2011 +0000
 
     Fix public issue #7: Don't use internal variables named ac_*, as those belong
     to autoconf's namespace.
-    
+
     R=csilvers
     DELTA=6  (0 added, 0 deleted, 6 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=988
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@6 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 46e39fb20c297129494b969ac4ea64fcd04b4fa0
@@ -2404,15 +2404,15 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Wed Mar 23 11:11:09 2011 +0000
 
     Add missing licensing headers to a few files. (Part 2/2.)
-    
+
     R=csilvers
     DELTA=12  (12 added, 0 deleted, 0 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=987
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@5 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 3e764216fc8edaafca480443b90e55c14eaae2c2
@@ -2420,15 +2420,15 @@ Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-469
 Date:   Wed Mar 23 11:10:39 2011 +0000
 
     Add mising licensing headers to a few files. (Part 1/2.)
-    
+
     R=csilvers
     DELTA=24  (24 added, 0 deleted, 0 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=986
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@4 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 9a59f183c8ffec62dcdabd3499d0d515e44e4ef0
@@ -2437,15 +2437,15 @@ Date:   Wed Mar 23 11:10:04 2011 +0000
 
     Use the correct license file for the Apache 2.0 license;
     spotted by Florian Weimer.
-    
+
     R=csilvers
     DELTA=202  (174 added, 0 deleted, 28 changed)
-    
-    
+
+
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=985
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@3 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 28a64402392c791905d6e1384ea1b48a5cb0b281
@@ -2454,8 +2454,8 @@ Date:   Fri Mar 18 17:14:15 2011 +0000
 
     Revision created by MOE tool push_codebase.
     MOE_MIGRATION=
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@2 03e5f5b5-db94-4691-08a0-1a8bf15f6143
 
 commit 7c3c6077b72b4ae2237267a20f640b55e9a90569
@@ -2463,6 +2463,6 @@ Author: sesse@google.com <sesse@google.com@03e5f5b5-db94-4691-08a0-1a8bf15f6143>
 Date:   Fri Mar 18 17:13:52 2011 +0000
 
     Create trunk directory.
-    
-    
+
+
     git-svn-id: https://snappy.googlecode.com/svn/trunk@1 03e5f5b5-db94-4691-08a0-1a8bf15f6143

@@ -1,5 +1,5 @@
 #!/bin/perl
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -11,8 +11,8 @@
 # syntax: perl explode.pl
 #
 # Description:
-# explode.pl unpacks the .jar files created by the NSPR build   
-# procedure. 
+# explode.pl unpacks the .jar files created by the NSPR build
+# procedure.
 #
 # Suggested use: After copying the platform directories to
 # /s/b/c/nspr20/<release>. CD to /s/b/c/nspr20/<release> and

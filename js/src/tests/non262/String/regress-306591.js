@@ -12,7 +12,7 @@ var expect = '';
 printBugNumber(BUGNUMBER);
 printStatus (summary);
 printStatus ('See https://bugzilla.mozilla.org/show_bug.cgi?id=304828');
- 
+
 expect = ['a', 'b', 'c'].toString();
 actual = String.split(new String('abc'), '').toString();
 reportCompare(expect, actual, summary +
@@ -24,7 +24,7 @@ reportCompare(expect, actual, summary +
               " String.substring(new Number(123), 1, 2)");
 
 expect = 'TRUE';
-actual = String.toUpperCase(new Boolean(true)); 
+actual = String.toUpperCase(new Boolean(true));
 reportCompare(expect, actual, summary +
               " String.toUpperCase(new Boolean(true))");
 
@@ -40,7 +40,7 @@ catch (e)
 }
 
 expect = 2;
-actual = String.indexOf(String(null), 'l');             
+actual = String.indexOf(String(null), 'l');
 reportCompare(expect, actual, summary +
               " String.indexOf(String(null), 'l')");
 

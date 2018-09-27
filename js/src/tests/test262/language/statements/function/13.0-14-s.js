@@ -3,7 +3,7 @@
 
 /*---
 info: |
-    Refer 13; 
+    Refer 13;
     The production FunctionBody : SourceElementsopt is evaluated as follows:
 es5id: 13.0-14-s
 description: >

@@ -109,7 +109,7 @@ function serverHandler(metadata, response) {
 
   response.setHeader("Content-Type", "text/plain", false);
   response.setStatusLine("1.1", 200, "OK");
-  
+
   // note: httpd.js' "Response" class uses ',' (no space) for merge.
   response.setHeader("httpdMerge", "bar1", false);
   response.setHeader("httpdMerge", "bar2", true);

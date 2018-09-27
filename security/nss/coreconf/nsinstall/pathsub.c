@@ -48,7 +48,7 @@ fail(char *format, ...)
 	fprintf(stderr, ": %s", strerror(errno));
 #endif
     }
- 
+
     putc('\n', stderr);
     abort();
     exit(1);
@@ -123,7 +123,7 @@ xmalloc(size_t size)
 char *
 xstrdup(char *s)
 {
-    if (!s || !s[0]) 
+    if (!s || !s[0])
 	fail("Null pointer or empty string passed to xstrdup()");
     return strcpy((char*)xmalloc(strlen(s) + 1), s);
 }
@@ -133,7 +133,7 @@ xbasename(char *path)
 {
     char *cp;
 
-    if (!path || !path[0]) 
+    if (!path || !path[0])
 	fail("Null pointer or empty string passed to xbasename()");
     while ((cp = strrchr(path, '/')) && cp[1] == '\0')
 	*cp = '\0';
@@ -144,7 +144,7 @@ xbasename(char *path)
 void
 xchdir(char *dir)
 {
-    if (!dir || !dir[0]) 
+    if (!dir || !dir[0])
 	fail("Null pointer or empty string passed to xchdir()");
     if (chdir(dir) < 0)
 	fail("cannot change directory to %s", dir);
@@ -228,7 +228,7 @@ diagnosePath(const char * path)
     struct stat sb;
     char 	buf[BUFSIZ];
 
-    if (!path || !path[0]) 
+    if (!path || !path[0])
 	fail("Null pointer or empty string passed to mkdirs()");
     myPath = strdup(path);
     if (!myPath)

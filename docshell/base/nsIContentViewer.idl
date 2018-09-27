@@ -100,7 +100,7 @@ interface nsIContentViewer : nsISupports
 
   /**
    * All users of a content viewer are responsible for calling both
-   * close() and destroy(), in that order. 
+   * close() and destroy(), in that order.
    *
    * close() should be called when the load of a new page for the next
    * content viewer begins, and destroy() should be called when the next
@@ -231,7 +231,7 @@ interface nsIContentViewer : nsISupports
    */
   [noscript,notxpcom,nostdcall] void setNavigationTiming(in nsDOMNavigationTimingPtr aTiming);
   /*
-  Scrolls to a given DOM content node. 
+  Scrolls to a given DOM content node.
   */
   void scrollToNode(in Node node);
 

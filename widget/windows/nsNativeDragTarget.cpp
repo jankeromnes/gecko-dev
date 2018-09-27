@@ -34,7 +34,7 @@ bool nsNativeDragTarget::gDragImageChanged = false;
  * class nsNativeDragTarget
  */
 nsNativeDragTarget::nsNativeDragTarget(nsIWidget * aWidget)
-  : m_cRef(0), 
+  : m_cRef(0),
     mEffectsAllowed(DROPEFFECT_MOVE | DROPEFFECT_COPY | DROPEFFECT_LINK),
     mEffectsPreferred(DROPEFFECT_NONE),
     mTookOwnRef(false), mWidget(aWidget), mDropTargetHelper(nullptr)
@@ -129,7 +129,7 @@ nsNativeDragTarget::GetGeckoDragAction(DWORD grfKeyState, LPDWORD pdwEffect,
     }
   }
 
-  // Otherwise we should specify the first available effect 
+  // Otherwise we should specify the first available effect
   // from MOVE, COPY, or LINK.
   if (desiredEffect & DROPEFFECT_MOVE) {
     *pdwEffect = DROPEFFECT_MOVE;
@@ -143,7 +143,7 @@ nsNativeDragTarget::GetGeckoDragAction(DWORD grfKeyState, LPDWORD pdwEffect,
   } else {
     *pdwEffect = DROPEFFECT_NONE;
     *aGeckoAction = nsIDragService::DRAGDROP_ACTION_NONE;
-  } 
+  }
 }
 
 inline
@@ -300,10 +300,10 @@ nsNativeDragTarget::DragEnter(LPDATAOBJECT pIDataSource,
   return S_OK;
 }
 
-void 
-nsNativeDragTarget::AddLinkSupportIfCanBeGenerated(LPDATAOBJECT aIDataSource) 
+void
+nsNativeDragTarget::AddLinkSupportIfCanBeGenerated(LPDATAOBJECT aIDataSource)
 {
-  // If we don't have a link effect, but we can generate one, fix the 
+  // If we don't have a link effect, but we can generate one, fix the
   // drop effect to include it.
   if (!(mEffectsAllowed & DROPEFFECT_LINK) && aIDataSource) {
     if (S_OK == ::OleQueryLinkFromData(aIDataSource)) {
@@ -461,7 +461,7 @@ nsNativeDragTarget::Drop(LPDATAOBJECT pData,
     return S_OK;  // DragCancel() was called.
   }
 
-  // Let the win drag service know whether this session experienced 
+  // Let the win drag service know whether this session experienced
   // a drop event within the application. Drop will not oocur if the
   // drop landed outside the app. (used in tab tear off, bug 455884)
   winDragService->SetDroppedLocal();
@@ -494,7 +494,7 @@ nsNativeDragTarget::Drop(LPDATAOBJECT pData,
 IDropTargetHelper*
 nsNativeDragTarget::GetDropTargetHelper()
 {
-  if (!mDropTargetHelper) { 
+  if (!mDropTargetHelper) {
     CoCreateInstance(CLSID_DragDropHelper, nullptr, CLSCTX_INPROC_SERVER,
                      IID_IDropTargetHelper, (LPVOID*)&mDropTargetHelper);
   }

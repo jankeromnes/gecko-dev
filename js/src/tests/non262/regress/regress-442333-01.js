@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = 'ReferenceError: a is not defined';
   var o = {a : 1};
 

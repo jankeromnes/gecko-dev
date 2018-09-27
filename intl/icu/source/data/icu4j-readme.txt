@@ -23,14 +23,14 @@ In the following,
         (Windows: build as 'x86, Release' otherwise you will have to set 'CFG' differently below.)
 
     *NOTE* You should do a full rebuild after any data changes.
-    
-1a.  If you didn't download from Subversion, you will also need the "icu4c-*-data.zip" file.  Unpack this file and replace the icu/source/data directory's contents with the contents of the data directory from the zip file.  
+
+1a.  If you didn't download from Subversion, you will also need the "icu4c-*-data.zip" file.  Unpack this file and replace the icu/source/data directory's contents with the contents of the data directory from the zip file.
 
 
 2. Step 2 depends on whether you are on a Windows or a Unix-type
 platform.
 
-*Windows* 
+*Windows*
 
 2a. On the command line, cd to $icu4c_root\source\data.
 

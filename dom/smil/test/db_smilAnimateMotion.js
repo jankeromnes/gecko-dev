@@ -36,7 +36,7 @@ var _reusedCTMLists = {
                         ctm2_3: [120, 220, 3*Math.PI/4],
                         ctm1:   [130, 210, 3*Math.PI/4]
   },
-  
+
   discreteBasic : { ctm0:   [100, 200, 0],
                     ctm1_6: [100, 200, 0],
                     ctm1_3: [120, 220, 0],

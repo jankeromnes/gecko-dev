@@ -52,4 +52,4 @@ else
                 'String.prototype invariant');
 
 }
- 
+

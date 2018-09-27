@@ -8,8 +8,8 @@ description: >
     the object is actually callable (getter called as indexed property)
 ---*/
 
-    var o = { }; 
-    Object.defineProperty(o, "bar", {get: function()  {this.barGetter = true; return 42;}, 
+    var o = { };
+    Object.defineProperty(o, "bar", {get: function()  {this.barGetter = true; return 42;},
                                      set: function(x) {this.barSetter = true; }});
 assert.throws(TypeError, function() {
         o.foo( o["bar"] );

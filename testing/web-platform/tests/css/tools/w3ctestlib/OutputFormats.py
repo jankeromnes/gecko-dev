@@ -53,7 +53,7 @@ class BasicFormat:
 
   def destDir(self):
     return join(self.root, self.subdir) if self.subdir else self.root
-    
+
   def dest(self, relpath):
     """Returns final destination of relpath in this format and ensures that the
        parent directory exists."""
@@ -118,7 +118,7 @@ class HTMLFormat(BasicFormat):
       source.write(self, source.serializeHTML())
     else:
       source.write(self)
-      
+
 
 class HTML5Format(HTMLFormat):
   def __init__(self, destroot, sourceTree, extMap=None, outputDirName='html'):

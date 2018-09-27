@@ -50,7 +50,7 @@ gfxQuartzSurface::gfxQuartzSurface(CGContextRef context,
     unsigned int width = static_cast<unsigned int>(mSize.width);
     unsigned int height = static_cast<unsigned int>(mSize.height);
 
-    cairo_surface_t *surf = 
+    cairo_surface_t *surf =
         cairo_quartz_surface_create_for_cg_context(context,
                                                    width, height);
 

@@ -105,7 +105,7 @@ const mach_port_t kNoLastExceptionThread = MACH_PORT_NULL;
   return shouldHandleException_;
 }
 
-- (void)setLastExceptionType:(int)type 
+- (void)setLastExceptionType:(int)type
 		     andCode:(int)code
                    andThread:(mach_port_t)thread {
   last_exception_type_ = type;
@@ -172,7 +172,7 @@ const mach_port_t kNoLastExceptionThread = MACH_PORT_NULL;
 
   NSString *prependedKeyname =
     [@BREAKPAD_SERVER_PARAMETER_PREFIX stringByAppendingString:@"key"];
-    
+
   STAssertEqualStrings(BreakpadKeyValue(b, prependedKeyname),
                        @"value",
                        @"Calling BreakpadAddUploadParameter did not prepend "

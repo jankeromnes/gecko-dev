@@ -11,7 +11,7 @@ var dbg = new Debugger(g);
 var log;
 var count = 0;
 function makePopHandler(label, resumption) {
-    return function handlePop(completion) { 
+    return function handlePop(completion) {
         log += label;
         assertEq(completion, null);
         return resumption;
@@ -23,7 +23,7 @@ dbg.onEnterFrame = function handleEnter(f) {
                              count++ == 0 ? { return: 'king' } : undefined);
 };
 dbg.onExceptionUnwind = function handleExceptionUnwind(f, x) {
-    log += 'u';  
+    log += 'u';
 };
 log = '';
 assertEq(g.i(), 'king');

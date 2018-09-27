@@ -1,4 +1,4 @@
-#!/usr/bin/perl 
+#!/usr/bin/perl
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -18,7 +18,7 @@ $li=0;
 # Open the unicode database file
 #
 ######################################################################
-open ( UNICODATA , "< ../../unicharutil/tools/UnicodeData-Latest.txt") 
+open ( UNICODATA , "< ../../unicharutil/tools/UnicodeData-Latest.txt")
    || die "cannot find UnicodeData-Latest.txt";
 
 ######################################################################
@@ -26,7 +26,7 @@ open ( UNICODATA , "< ../../unicharutil/tools/UnicodeData-Latest.txt")
 # Open the JIS X 4051 Class file
 #
 ######################################################################
-open ( CLASS , "< jisx4051class.txt") 
+open ( CLASS , "< jisx4051class.txt")
    || die "cannot find jisx4051class.txt";
 
 ######################################################################
@@ -34,7 +34,7 @@ open ( CLASS , "< jisx4051class.txt")
 # Open the JIS X 4051 Class simplified mapping
 #
 ######################################################################
-open ( SIMP , "< jisx4051simp.txt") 
+open ( SIMP , "< jisx4051simp.txt")
    || die "cannot find jisx4051simp.txt";
 
 ######################################################################
@@ -42,7 +42,7 @@ open ( SIMP , "< jisx4051simp.txt")
 # Open the output file
 #
 ######################################################################
-open ( OUT , "> anzx4051.html") 
+open ( OUT , "> anzx4051.html")
   || die "cannot open output anzx4051.html file";
 
 ######################################################################
@@ -114,9 +114,9 @@ while(<UNICODATA>) {
    # Get value from fields
    #
    ######################################################################
-   @f = split(/;/ , $_); 
+   @f = split(/;/ , $_);
    $c = $f[0];   # The unicode value
-   $g = $f[2]; 
+   $g = $f[2];
    $d = substr($g, 0, 1);
 
    $gcat{$c} = $g;
@@ -133,7 +133,7 @@ while(<SIMP>) {
    # Get value from fields
    #
    ######################################################################
-   @f = split(/;/ , $_); 
+   @f = split(/;/ , $_);
 
    $simp{$f[0]} = $f[1];
    $sccount{$f[1]}++;
@@ -186,7 +186,7 @@ sub GetDClass{
 }
 sub DecToHex{
      my ($d) = @_;
-     return sprintf("%04X", $d); 
+     return sprintf("%04X", $d);
 }
 %gtotal = ();
 %dtotal = ();
@@ -197,7 +197,7 @@ while(<CLASS>) {
    # Get value from fields
    #
    ######################################################################
-   @f = split(/;/ , $_); 
+   @f = split(/;/ , $_);
 
    if( substr($f[2], 0, 1) ne "a")
    {
@@ -213,13 +213,13 @@ while(<CLASS>) {
      {
        if( exists($occ{$k}))
        {
-          #  printf "WARNING !! Conflict defination!!! U+%s -> [%s] [%s | %s]\n", 
+          #  printf "WARNING !! Conflict defination!!! U+%s -> [%s] [%s | %s]\n",
           #         DecToHex($k),  $occ{$k} , $f[2] , $sc;
        }
        else
        {
            $occ{$k} = $sc . " | " . $f[2];
-           $gclass = GetClass($k); 
+           $gclass = GetClass($k);
            $dclass = GetDClass($k);
            $gtotal{$sc . $gclass}++;
            $dtotal{$sc . $dclass}++;
@@ -234,76 +234,76 @@ while(<CLASS>) {
 #print %gtotal;
 #print %dtotal;
 
-sub printreport 
+sub printreport
 {
     print OUT "<TABLE BORDER=3>\n";
     print OUT "<TR BGCOLOR=blue><TH><TH>\n";
-    
+
     foreach $d (sort(keys %dcount)) {
        print OUT "<TD BGCOLOR=red>$d</TD>\n";
     }
-    
+
     print OUT "<TD BGCOLOR=white>Total</TD>\n";
     foreach $g (sort(keys %gcount)) {
        print OUT "<TD BGCOLOR=yellow>$g</TD>\n";
     }
     print OUT "</TR>\n";
     foreach $sc (sort(keys %sccount)) {
-    
+
        print OUT "<TR><TH>$sc<TH>\n";
-    
-       $total = 0; 
+
+       $total = 0;
        foreach $d (sort (keys %dcount)) {
          $count = $dtotal{$sc . $d};
          $total += $count;
          print OUT "<TD>$count</TD>\n";
        }
-    
+
        print OUT "<TD BGCOLOR=white>$total</TD>\n";
-    
+
        foreach $g (sort(keys %gcount)) {
          $count = $gtotal{$sc . $g};
          print OUT "<TD>$count</TD>\n";
        }
-    
-    
+
+
        print OUT "</TR>\n";
     }
     print OUT "</TABLE>\n";
-    
-    
+
+
     print OUT "<TABLE BORDER=3>\n";
     print OUT "<TR BGCOLOR=blue><TH><TH>\n";
-    
-    foreach $sc (sort(keys %sccount)) 
+
+    foreach $sc (sort(keys %sccount))
     {
        print OUT "<TD BGCOLOR=red>$sc</TD>\n";
     }
-    
+
     print OUT "</TR>\n";
-    
-    
+
+
     for($rr = 0; $rr < 0x4f; $rr++)
     {
        $empty = 0;
        $r = sprintf("%02X" , $rr) ;
        $tmp = "<TR><TH>" . $r . "<TH>\n";
-    
+
        foreach $sc (sort(keys %sccount)) {
          $count = $rangecount{ " " .$r . ":" .$sc};
          $tmp .= sprintf("<TD>%s</TD>\n", $count);
          $empty += $count;
        }
-    
+
        $tmp .=  "</TR>\n";
-    
-       if($empty ne 0) 
+
+       if($empty ne 0)
        {
           print OUT $tmp;
        }
     }
     print OUT "</TABLE>\n";
-    
+
 }
 printreport();
 
@@ -314,18 +314,18 @@ printf "[%s || %s]\n", $r, $def;
    $k = hex($r) * 256;
    printf HEADER "static const uint32_t gLBClass%s[32] = {\n", $r;
    for($i = 0 ; $i < 256; $i+= 8)
-   {  
+   {
       for($j = 7 ; $j >= 0; $j-- )
-      {  
+      {
           $v = $k + $i + $j;
-          if( exists($occ{$v})) 
+          if( exists($occ{$v}))
 	  {
              $p = substr($occ{$v}, 1,1);
           } else {
              $p = $def;
           }
 
-          if($j eq 7 ) 
+          if($j eq 7 )
           {
              printf HEADER "0x%s" , $p;
           } else {

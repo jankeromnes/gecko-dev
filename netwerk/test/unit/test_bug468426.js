@@ -26,7 +26,7 @@ var tests = [
     // Cache now contains a variant with cookie "c=4". When setting
     // cookie "c=4" in the request we expect the cached variant
     { url : "/bug468426", server : "5", expected : "4", cookie: "c=4"},
-    
+
     // Cache still contains a variant with cookie "c=4". When setting
     // no cookie in the request we expect a fresh value
     { url : "/bug468426", server : "6", expected : "6", cookie: null},

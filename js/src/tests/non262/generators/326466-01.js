@@ -11,7 +11,7 @@ var expect;
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 function* fib()
 {
   var a = 0, b = 1;

@@ -8,13 +8,13 @@
 #
 # mozilla/security/nss/tests/ssl/ssl_dist_stress.sh
 #
-# Script to test NSS SSL - distributed stresstest - this script needs to 
-# source the regular ssl.sh (for shellfunctions, certs and variables 
+# Script to test NSS SSL - distributed stresstest - this script needs to
+# source the regular ssl.sh (for shellfunctions, certs and variables
 # initialisation)
 # create certs
 # start server
 # start itself via rsh on different systems to connect back to the server
-# 
+#
 #
 # needs to work on all Unix and Windows platforms
 #
@@ -48,7 +48,7 @@ ssl_ds_init()
   if [ -z "${CLEANUP}" ] ; then     # if nobody else is responsible for
       CLEANUP="${SCRIPTNAME}"       # cleaning this script will do it
   fi
-  
+
   ssl_init  # let some other script do the hard work (initialize, generate certs, ...
 
   SCRIPTNAME=ssl_dist_stress.sh
@@ -180,13 +180,13 @@ ssl_ds_rem_stress()
 }
 
 ######################### ssl_ds_dist_stress ###########################
-# local shell function to perform the server part of the new, distributed 
+# local shell function to perform the server part of the new, distributed
 # SSL stress test
 ########################################################################
 
 ssl_ds_dist_stress()
 {
-  max_clientlist=" 
+  max_clientlist="
                box-200
                washer-200
                dryer-200
@@ -256,19 +256,19 @@ ssl_ds_dist_stress()
   cd "${CLIENTDIR}"
 
   sleep 500 # give the clients time to finish #FIXME ADJUST
- 
+
   echo "GET /stop HTTP/1.0\n\n" > stdin.txt #check to make sure it has /r/n
   echo "tstclnt -h $HOSTADDR -p  8443 -d ${P_R_CLIENTDIR} -n TestUser0 "
   echo "        -w nss -f < stdin.txt"
   ${BINDIR}/tstclnt -h $HOSTADDR -p  8443 -d ${P_R_CLIENTDIR} -n TestUser0 \
 	  -w nss -f < stdin.txt
-  
+
   html_msg 0 0 "${testname}"
   html "</TABLE><BR>"
 }
 
 ############################ get_certrange #############################
-# local shell function to find the range of certs that the next remote 
+# local shell function to find the range of certs that the next remote
 # client is supposed to use (only for server side of the dist stress test
 ########################################################################
 get_certrange()
@@ -286,16 +286,16 @@ get_certrange()
   fi
   if [ -z "$FROM_CERT" ] ; then    # start new on top of the cert stack
       FROM_CERT=$GLOB_MAX_CERT
-  elif [ `expr $FROM_CERT - $range + 1 ` -lt  0 ] ; then 
+  elif [ `expr $FROM_CERT - $range + 1 ` -lt  0 ] ; then
           FROM_CERT=$GLOB_MAX_CERT # dont let it fall below 0 on the TO_CERT
 
   fi
   TO_CERT=`expr $FROM_CERT - $range + 1 `
-  if [ $TO_CERT -lt 0 ] ; then     # it's not that I'm bad in math, I just 
+  if [ $TO_CERT -lt 0 ] ; then     # it's not that I'm bad in math, I just
       TO_CERT=0                    # don't trust expr...
   fi
   CERTRANGE="${TO_CERT}-${FROM_CERT}"
-  FROM_CERT=`expr ${TO_CERT} - 1 ` #start the next  client one below 
+  FROM_CERT=`expr ${TO_CERT} - 1 ` #start the next  client one below
 }
 
 

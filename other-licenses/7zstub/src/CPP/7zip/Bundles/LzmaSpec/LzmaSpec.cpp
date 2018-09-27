@@ -31,7 +31,7 @@ struct CInputStream
 {
   FILE *File;
   UInt64 Processed;
-  
+
   void Init() { Processed = 0; }
 
   Byte ReadByte()
@@ -74,7 +74,7 @@ public:
 
   COutWindow(): Buf(NULL) {}
   ~COutWindow() { delete []Buf; }
- 
+
   void Create(UInt32 dictSize)
   {
     Buf = new Byte[dictSize];
@@ -155,10 +155,10 @@ bool CRangeDecoder::Init()
   Code = 0;
 
   Byte b = InStream->ReadByte();
-  
+
   for (int i = 0; i < 4; i++)
     Code = (Code << 8) | InStream->ReadByte();
-  
+
   if (b != 0 || Code == Range)
     Corrupted = true;
   return b == 0;
@@ -184,10 +184,10 @@ UInt32 CRangeDecoder::DecodeDirectBits(unsigned numBits)
     Code -= Range;
     UInt32 t = 0 - ((UInt32)Code >> 31);
     Code += Range & t;
-    
+
     if (Code == Range)
       Corrupted = true;
-    
+
     Normalize();
     res <<= 1;
     res += t + 1;
@@ -352,7 +352,7 @@ public:
   }
 
   int Decode(bool unpackSizeDefined, UInt64 unpackSize);
-  
+
 private:
 
   CProb *LitProbs;
@@ -361,24 +361,24 @@ private:
   {
     LitProbs = new CProb[(UInt32)0x300 << (lc + lp)];
   }
-  
+
   void InitLiterals()
   {
     UInt32 num = (UInt32)0x300 << (lc + lp);
     for (UInt32 i = 0; i < num; i++)
       LitProbs[i] = PROB_INIT_VAL;
   }
-  
+
   void DecodeLiteral(unsigned state, UInt32 rep0)
   {
     unsigned prevByte = 0;
     if (!OutWindow.IsEmpty())
       prevByte = OutWindow.GetByte(1);
-    
+
     unsigned symbol = 1;
     unsigned litState = ((OutWindow.TotalPos & ((1 << lp) - 1)) << lc) + (prevByte >> (8 - lc));
     CProb *probs = &LitProbs[(UInt32)0x300 * litState];
-    
+
     if (state >= 7)
     {
       unsigned matchByte = OutWindow.GetByte(rep0 + 1);
@@ -401,7 +401,7 @@ private:
   CBitTreeDecoder<6> PosSlotDecoder[kNumLenToPosStates];
   CBitTreeDecoder<kNumAlignBits> AlignDecoder;
   CProb PosDecoders[1 + kNumFullDistances - kEndPosModelIndex];
-  
+
   void InitDist()
   {
     for (unsigned i = 0; i < kNumLenToPosStates; i++)
@@ -409,17 +409,17 @@ private:
     AlignDecoder.Init();
     INIT_PROBS(PosDecoders);
   }
-  
+
   unsigned DecodeDistance(unsigned len)
   {
     unsigned lenState = len;
     if (lenState > kNumLenToPosStates - 1)
       lenState = kNumLenToPosStates - 1;
-    
+
     unsigned posSlot = PosSlotDecoder[lenState].Decode(&RangeDec);
     if (posSlot < 4)
       return posSlot;
-    
+
     unsigned numDirectBits = (unsigned)((posSlot >> 1) - 1);
     UInt32 dist = ((2 | (posSlot & 1)) << numDirectBits);
     if (posSlot < kEndPosModelIndex)
@@ -458,7 +458,7 @@ private:
     RepLenDecoder.Init();
   }
 };
-    
+
 
 #define LZMA_RES_ERROR                   0
 #define LZMA_RES_FINISHED_WITH_MARKER    1
@@ -473,7 +473,7 @@ int CLzmaDecoder::Decode(bool unpackSizeDefined, UInt64 unpackSize)
 
   UInt32 rep0 = 0, rep1 = 0, rep2 = 0, rep3 = 0;
   unsigned state = 0;
-  
+
   for (;;)
   {
     if (unpackSizeDefined && unpackSize == 0 && !markerIsMandatory)
@@ -491,9 +491,9 @@ int CLzmaDecoder::Decode(bool unpackSizeDefined, UInt64 unpackSize)
       unpackSize--;
       continue;
     }
-    
+
     unsigned len;
-    
+
     if (RangeDec.DecodeBit(&IsRep[state]) != 0)
     {
       if (unpackSizeDefined && unpackSize == 0)
@@ -659,7 +659,7 @@ int main2(int numArgs, const char *args[])
   Print("\n");
 
   lzmaDecoder.Create();
-  
+
   int res = lzmaDecoder.Decode(unpackSizeDefined, unpackSize);
 
   PrintUInt64("Read    ", inStream.Processed);
@@ -683,7 +683,7 @@ int main2(int numArgs, const char *args[])
     throw "Internal Error";
 
   Print("\n");
-  
+
   if (lzmaDecoder.RangeDec.Corrupted)
   {
     Print("\nWarning: LZMA stream is corrupted\n");

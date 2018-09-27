@@ -4,7 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 
-var t = {   
+var t = {
   _y: "<initial y>",
 
   get y()
@@ -45,4 +45,4 @@ function test(t)
   t.y = d;
   reportCompare (d, t.y, "y getter, after date set");
 
-}       
+}

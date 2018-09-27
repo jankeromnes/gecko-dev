@@ -26,7 +26,7 @@
 (<a href="#fips">-fips</a>)
 <li>Delete a PKCS #11 module. (<a href="#delete">-delete</a>)
 <li>List installed PKCS #11 modules. (<a href="#list">-list</a>)
-<li>List detailed info on a particular module and its tokens, including 
+<li>List detailed info on a particular module and its tokens, including
 whether needs login, is hardware, needs user init
 (<a href="#list">-list</a>)
 <li>Specify which modules should be the default provider of various
@@ -79,7 +79,7 @@ interpretation. <b>This
 list does not enable the mechanisms; it only specifies that this module
 will be a default provider for the listed mechanisms.</b> If more than
 one module claims to be a default provider for a given mechanism, it is
-undefined which will actually be chosen to provide that mechanism. The 
+undefined which will actually be chosen to provide that mechanism. The
 following mechanisms are currently available:
 <ul>
 <li>RSA
@@ -173,7 +173,7 @@ FIPS mode.</td>
 <!-------------------------- -force ------------------------------------->
 <tr>
 <td><a name="force"></a><code>-force</code></td>
-<td>Disables interactive prompts, so modutil can be run in a script. 
+<td>Disables interactive prompts, so modutil can be run in a script.
 Should only be used by experts, since the prompts may relate to security
 or database integrity. Before using this option, test the command
 interactively once to see the warnings that are produced.</td>
@@ -184,12 +184,12 @@ interactively once to see the warnings that are produced.</td>
 <td><a name="jar"></a><code>-jar <u><i>JAR file</i></u>
 -installdir <u><i>root installation directory</i></u>
 [-tempdir <u><i>temporary directory</i></u>]</code></td>
-<td>Adds a new module from the given JAR file. The JAR file uses the 
+<td>Adds a new module from the given JAR file. The JAR file uses the
 server <a href="pk11jar.html">PKCS #11 JAR format</a> to describe the names of
 any files that need to be installed, the name of the module, mechanism flags,
 and cipher flags.  The <u><i>root installation directory</i></u>
 is the directory relative to which files will be installed. This should be a
- directory 
+ directory
 under which it would be natural to store dynamic library files, such as
 a server's root directory, or Communicator's root directory.
 The <u><i>temporary directory</i></u> is where temporary modutil files
@@ -233,7 +233,7 @@ Using database directory /u/nicolson/.netscape...
 -----------------------------------------------------------
 Name: Netscape Internal PKCS #11 Module
 Library file: **Internal ONLY module**
-Manufacturer: Netscape Communications Corp    
+Manufacturer: Netscape Communications Corp
 Description: Communicator Internal Crypto Svc
 PKCS #11 Version 2.0
 Library Version: 4.0
@@ -241,14 +241,14 @@ Cipher Enable Flags: None
 Default Mechanism Flags: RSA:DSA:RC2:RC4:DES:SHA1:MD5:MD2
 
   Slot: Communicator Internal Cryptographic Services Version 4.0
-  Manufacturer: Netscape Communications Corp    
+  Manufacturer: Netscape Communications Corp
   Type: Software
   Version Number: 4.1
   Firmware Version: 0.0
   Status: Enabled
   Token Name: Communicator Generic Crypto Svcs
-  Token Manufacturer: Netscape Communications Corp    
-  Token Model: Libsec 4.0      
+  Token Manufacturer: Netscape Communications Corp
+  Token Model: Libsec 4.0
   Token Serial Number: 0000000000000000
   Token Version: 4.0
   Token Firmware Version: 0.0
@@ -257,14 +257,14 @@ Default Mechanism Flags: RSA:DSA:RC2:RC4:DES:SHA1:MD5:MD2
   User Pin: NOT Initialized
 
   Slot: Communicator User Private Key and Certificate Services
-  Manufacturer: Netscape Communications Corp    
+  Manufacturer: Netscape Communications Corp
   Type: Software
   Version Number: 3.0
   Firmware Version: 0.0
   Status: Enabled
-  Token Name: Communicator Certificate DB     
-  Token Manufacturer: Netscape Communications Corp    
-  Token Model: Libsec 4.0      
+  Token Name: Communicator Certificate DB
+  Token Manufacturer: Netscape Communications Corp
+  Token Model: Libsec 4.0
   Token Serial Number: 0000000000000000
   Token Version: 7.0
   Token Firmware Version: 0.0
@@ -282,7 +282,7 @@ Default Mechanism Flags: RSA:DSA:RC2:RC4:DES:SHA1:MD5:MD2
 <tr>
 <td><a name="undefault"></a><code>-undefault <u><i>module name</i></u>
 -mechanisms <u><i>mechanism list</i></u></code></td>
-<td>Specifies that the given module will NOT be a default provider of 
+<td>Specifies that the given module will NOT be a default provider of
 the listed mechanisms. This command clears the default mechanism flags
 for the given module.</td>
 </tr>
@@ -311,7 +311,7 @@ no default, and this option must be used.</td>
 With the <code>-create</code> command, this means that only a secmod.db file
 will be created; cert7.db and key3.db will not be created.  With the
 <code>-jar</code> command, signatures on the JAR file will not be checked.
-With the <code>-changepw</code> command, the password on the Netscape internal 
+With the <code>-changepw</code> command, the password on the Netscape internal
 module cannot be set or changed, since this password is stored in key3.db.
 </td>
 </tr>

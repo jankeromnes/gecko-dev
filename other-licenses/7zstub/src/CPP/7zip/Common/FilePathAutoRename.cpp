@@ -30,7 +30,7 @@ bool AutoRenamePath(FString &path)
     extension = path.Ptr(dotPos);
   }
   name += '_';
-  
+
   FString temp;
 
   UInt32 left = 1, right = ((UInt32)1 << 30);

@@ -23,7 +23,7 @@ CFLAGS += -mieee
 CXXFLAGS += -mieee
 
 ## Compiler switch to embed a runtime search path
-LD_RPATH=	
+LD_RPATH=
 LD_RPATH_PRE=	-Wl,-rpath,
 
 ## Compiler switch to embed a library name

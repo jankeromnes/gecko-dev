@@ -9,7 +9,7 @@ while (true) {
 function loadFile(lfVarx) {
     try {
       if (lfVarx.substr(-3) != ".js" && lfVarx.length != 1) {
-        evaluate(lfVarx); 
+        evaluate(lfVarx);
       } else if (!isNaN(lfVarx)) {}
     } catch (lfVare) {    }
 }

@@ -61,7 +61,7 @@ E(GF(n)) takes the form y**2 == x**3 - p*x - q (mod n) for a prime n.
     doublef()           Optimized point doubling.
     mulf()              Highly optimized scalar multiplication.
     muladdf()           Highly optimized addition of two products.
-    
+
     The following functions use the optimized ones above but consume
     and output (x, y)-coordinates for a more convenient usage:
 
@@ -154,7 +154,7 @@ def add(p, q, n, p1, p2):
 def addf(p, q, n, jp1, jp2):
     '''Add jp1 and jp2 in projective (jacobian) coordinates.'''
     if jp1 and jp2:
-        
+
         x1, y1, z1, z1s, z1c = jp1
         x2, y2, z2, z2s, z2c = jp2
 
@@ -175,12 +175,12 @@ def addf(p, q, n, jp1, jp2):
             x3 = (-hc - 2 * u1 * hs + r * r) % n
             y3 = (-s1 * hc + r * (u1 * hs - x3)) % n
             z3 = (z1 * z2 * h) % n
-            
+
             z3s = (z3 * z3) % n
             z3c = (z3s * z3) % n
-    
+
             return (x3, y3, z3, z3s, z3c)
-        
+
         else:
             if (s1 + s2) % n:
                 return doublef(p, q, n, jp1)
@@ -195,7 +195,7 @@ def doublef(p, q, n, jp):
     if not jp:
         return None
     x1, y1, z1, z1p2, z1p3 = jp
-    
+
     y1p2 = (y1 * y1) % n
     a = (4 * x1 * y1p2) % n
     b = (3 * x1 * x1 - p * z1p3 * z1) % n
@@ -203,7 +203,7 @@ def doublef(p, q, n, jp):
     y3 = (b * (a - x3) - 8 * y1p2 * y1p2) % n
     z3 = (2 * y1 * z1) % n
     z3p2 = (z3 * z3) % n
-    
+
     return x3, y3, z3, z3p2, (z3p2 * z3) % n
 
 
@@ -245,7 +245,7 @@ def _signed_bin(n):
     r = []
     while n > 1:
         if n & 1:
-            cp = _gbd(n + 1) 
+            cp = _gbd(n + 1)
             cn = _gbd(n - 1)
             if cp > cn:         # -1 leaves more zeroes -> subtract -1 (= +1)
                 r.append(-1)
@@ -331,8 +331,8 @@ def y_from_x(x, p, q, n, sign):
 
     # optimized form of (x**3 - p*x - q) % n
     a = (((x * x) % n - p) * x - q) % n
-    
-    
+
+
 
 if __name__ == "__main__":
     import rsa
@@ -376,6 +376,6 @@ if __name__ == "__main__":
         t2 = time.time() - t
 
         return tcount, t1, t2
-        
 
-        
+
+

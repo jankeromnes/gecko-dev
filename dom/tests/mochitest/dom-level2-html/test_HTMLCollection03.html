@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "collection");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,12 +70,12 @@ function loadComplete() {
 
 
 /**
-* 
+*
     An individual node may be accessed by either ordinal index, the node's
     name or id attributes.  (Test id attribute).
 
     Retrieve the first FORM element and create a HTMLCollection by invoking
-    the "element" attribute.  The first SELECT element is further retrieved 
+    the "element" attribute.  The first SELECT element is further retrieved
     using the elements id.
 
 * @author NIST
@@ -91,7 +91,7 @@ function HTMLCollection03() {
       var formsnodeList;
       var vname;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -106,7 +106,7 @@ testNode = nodeList.item(0);
       vname = formNode.nodeName;
 
       assertEqualsAutoCase("element", "nameIndexLink","select",vname);
-       
+
 }
 
 </script>
@@ -120,7 +120,7 @@ testNode = nodeList.item(0);
     name or id attributes.  (Test id attribute).
 
     Retrieve the first FORM element and create a HTMLCollection by invoking
-    the "element" attribute.  The first SELECT element is further retrieved 
+    the "element" attribute.  The first SELECT element is further retrieved
     using the elements id.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
@@ -138,7 +138,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/collection.html"></iframe>
 <br>

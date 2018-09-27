@@ -16,13 +16,13 @@ diff --git a/modules/pdfium/pdfium/core/fxge/win32/fx_win32_dwrite.cpp b/modules
 --- a/modules/pdfium/pdfium/core/fxge/win32/fx_win32_dwrite.cpp
 +++ b/modules/pdfium/pdfium/core/fxge/win32/fx_win32_dwrite.cpp
 @@ -6,19 +6,19 @@
- 
+
  #include <dwrite.h>
- 
+
  #include "core/fxcrt/fx_system.h"
  #include "core/fxge/ge/cfx_cliprgn.h"
  #include "core/fxge/win32/dwrite_int.h"
- 
+
  typedef HRESULT(__stdcall* FuncType_DWriteCreateFactory)(
 -    __in DWRITE_FACTORY_TYPE,
 -    __in REFIID,
@@ -40,7 +40,7 @@ diff --git a/modules/pdfium/pdfium/core/fxge/win32/fx_win32_dwrite.cpp b/modules
  template <typename InterfaceType>
 @@ -109,17 +109,17 @@ class CDwGdiTextRenderer {
    ~CDwGdiTextRenderer();
- 
+
    HRESULT STDMETHODCALLTYPE DrawGlyphRun(const FX_RECT& text_bbox,
                                           __in_opt CFX_ClipRgn* pClipRgn,
                                           __in_opt DWRITE_MATRIX const* pMatrix,
@@ -50,15 +50,15 @@ diff --git a/modules/pdfium/pdfium/core/fxge/win32/fx_win32_dwrite.cpp b/modules
 -                                         __in DWRITE_GLYPH_RUN const* glyphRun,
 +                                         DWRITE_GLYPH_RUN const* glyphRun,
                                           const COLORREF& textColor);
- 
+
   private:
    CFX_DIBitmap* pBitmap_;
    IDWriteBitmapRenderTarget* pRenderTarget_;
    IDWriteRenderingParams* pRenderingParams_;
  };
- 
+
 @@ -408,17 +408,17 @@ CDwGdiTextRenderer::~CDwGdiTextRenderer(
- 
+
  STDMETHODIMP CDwGdiTextRenderer::DrawGlyphRun(
      const FX_RECT& text_bbox,
      __in_opt CFX_ClipRgn* pClipRgn,

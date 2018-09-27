@@ -33,20 +33,20 @@ function stringOfLength(n)
     var d = (n - r) / 2;
     var y = stringOfLength(d);
     return y + y + stringOfLength(r);
-  }    
+  }
 }
 
 try
 {
   this.__defineGetter__('x', this.toSource);
-  while (x.length < 12000000) { 
+  while (x.length < 12000000) {
     let q = x;
-    s = q + q; 
+    s = q + q;
   }
   print(x.length);
 }
 catch(ex)
 {
 }
- 
+
 reportCompare(expect, actual, summary);

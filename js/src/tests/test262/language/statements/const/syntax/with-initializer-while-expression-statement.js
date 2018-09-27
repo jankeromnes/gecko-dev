@@ -4,7 +4,7 @@
 /*---
 es6id: 13.1
 description: >
-    const declarations with initialisers in statement positions: 
+    const declarations with initialisers in statement positions:
     while ( Expression ) Statement
 negative:
   phase: parse

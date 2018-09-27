@@ -54,7 +54,7 @@ protected:
   }
 
   virtual void RenderLayer() override;
-  
+
   virtual void ClearCachedResources() override
   {
     DestroyBackBuffer();

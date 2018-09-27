@@ -26,7 +26,7 @@ using namespace std;
 int
 main()
 {
-  TestObject tests[] = 
+  TestObject tests[] =
   {
     { new SanityChecks(), "Sanity Checks" },
   #ifdef WIN32

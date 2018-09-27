@@ -400,7 +400,7 @@ int popstring(stack_t **stacktop, LPTSTR str, int len)
 void pushstring(stack_t **stacktop, LPCTSTR str, int len)
 {
   stack_t *th;
-  if (!stacktop) { 
+  if (!stacktop) {
     return;
   }
 

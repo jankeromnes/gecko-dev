@@ -8,7 +8,7 @@ description: Checking if execution of "var x = \n 1" passes
 ---*/
 
 //CHECK#1
-var x = 
+var x =
 1
 
 reportCompare(0, 0);

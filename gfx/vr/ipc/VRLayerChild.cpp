@@ -69,7 +69,7 @@ VRLayerChild::SubmitFrame(const VRDisplayInfo& aDisplayInfo)
 #if defined(MOZ_WIDGET_ANDROID)
   /**
    * Do not blit WebGL to a SurfaceTexture until the last submitted frame is already processed
-   * and the new frame poses are ready. SurfaceTextures need to be released in the VR render thread 
+   * and the new frame poses are ready. SurfaceTextures need to be released in the VR render thread
    * in order to allow to be used again in the WebGLContext GLScreenBuffer producer.
    * Not doing so causes some freezes, crashes or other undefined behaviour.
    */

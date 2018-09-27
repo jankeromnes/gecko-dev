@@ -71,7 +71,7 @@ class nsNativeTheme : public nsITimerCallback, public nsINamed
   static bool IsFrameRTL(nsIFrame* aFrame);
 
   bool IsHTMLContent(nsIFrame *aFrame);
-  
+
   // button:
   bool IsDefaultButton(nsIFrame* aFrame) {
     return CheckBooleanAttr(aFrame, nsGkAtoms::_default);
@@ -100,13 +100,13 @@ class nsNativeTheme : public nsITimerCallback, public nsINamed
   bool IsSelectedTab(nsIFrame* aFrame) {
     return CheckBooleanAttr(aFrame, nsGkAtoms::visuallyselected);
   }
-  
+
   bool IsNextToSelectedTab(nsIFrame* aFrame, int32_t aOffset);
-  
+
   bool IsBeforeSelectedTab(nsIFrame* aFrame) {
     return IsNextToSelectedTab(aFrame, -1);
   }
-  
+
   bool IsAfterSelectedTab(nsIFrame* aFrame) {
     return IsNextToSelectedTab(aFrame, 1);
   }
@@ -142,7 +142,7 @@ class nsNativeTheme : public nsITimerCallback, public nsINamed
   // tab:
   bool IsBottomTab(nsIFrame* aFrame);
   bool IsFirstTab(nsIFrame* aFrame);
-  
+
   bool IsHorizontal(nsIFrame* aFrame);
 
   // progressbar:

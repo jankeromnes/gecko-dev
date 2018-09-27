@@ -151,7 +151,7 @@ pkix_SignatureCheckerState_Create(
 cleanup:
 
         PKIX_DECREF(keyUsageOID);
-        PKIX_DECREF(state); 
+        PKIX_DECREF(state);
 
         PKIX_RETURN(SIGNATURECHECKERSTATE);
 }

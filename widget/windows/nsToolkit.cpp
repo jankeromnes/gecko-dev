@@ -29,7 +29,7 @@ HINSTANCE nsToolkit::mDllInstance = 0;
 // constructor
 //
 //-------------------------------------------------------------------------
-nsToolkit::nsToolkit()  
+nsToolkit::nsToolkit()
 {
     MOZ_COUNT_CTOR(nsToolkit);
 

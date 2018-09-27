@@ -1,7 +1,7 @@
 // © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /********************************************************************
- * COPYRIGHT: 
+ * COPYRIGHT:
  * Copyright (c) 2002-2006, International Business Machines Corporation and
  * others. All Rights Reserved.
  ********************************************************************/
@@ -17,7 +17,7 @@
 DataMap::~DataMap() {}
 DataMap::DataMap() {}
 
-int32_t 
+int32_t
 DataMap::utoi(const UnicodeString &s) const
 {
   char ch[256];
@@ -49,7 +49,7 @@ RBDataMap::RBDataMap()
 }
 
 // init from table resource
-// will put stuff in hashtable according to 
+// will put stuff in hashtable according to
 // keys.
 RBDataMap::RBDataMap(UResourceBundle *data, UErrorCode &status)
 {
@@ -59,9 +59,9 @@ RBDataMap::RBDataMap(UResourceBundle *data, UErrorCode &status)
 }
 
 // init from headers and resource
-// with checking the whether the size of resource matches 
+// with checking the whether the size of resource matches
 // header size
-RBDataMap::RBDataMap(UResourceBundle *headers, UResourceBundle *data, UErrorCode &status) 
+RBDataMap::RBDataMap(UResourceBundle *headers, UResourceBundle *data, UErrorCode &status)
 {
   fData = new Hashtable(TRUE, status);
   fData->setValueDeleter(deleteResBund);
@@ -178,7 +178,7 @@ int32_t RBDataMap::getInt(const char* key, UErrorCode &status) const
   }
 }
 
-const UnicodeString* RBDataMap::getStringArray(int32_t& count, const char* key, UErrorCode &status) const 
+const UnicodeString* RBDataMap::getStringArray(int32_t& count, const char* key, UErrorCode &status) const
 {
   const ResourceBundle *r = getItem(key, status);
   if(U_SUCCESS(status)) {

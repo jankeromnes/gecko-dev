@@ -7,7 +7,7 @@ es5id: 10.2.3_A2.3_T1
 description: Global execution context - Value Properties
 ---*/
 
-var evalStr = 
+var evalStr =
 '//CHECK#1\n'+
 'for (var x in this) {\n'+
 '  if ( x === \'NaN\' ) {\n'+

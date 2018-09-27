@@ -65,7 +65,7 @@ with added XML elements representing the
 </p>
 
 <p>
-widlproc reads the file named <em>filename</em>, and 
+widlproc reads the file named <em>filename</em>, and
 sends its XML output format to stdout.
 </p>
 
@@ -500,7 +500,7 @@ with added XML elements representing the
 The <code>&lt;webidl></code> element contains the literal text of the
 original Web IDL that the parent
 element was parsed from, minus the comments, with each reference to
-an interface name 
+an interface name
 enclosed in a <code>&lt;ref></code>..<code>&lt;/ref></code>.
 </p>
 
@@ -619,7 +619,7 @@ The <em>EnumValue</em> element indicates the values defined for that enumeration
 
 <pre class="dtd">
 &lt;!ELEMENT Enum (webidl, descriptive?, EnumValue* ) >
-&lt;!ATTLIST Enum name CDATA #REQUIRED 
+&lt;!ATTLIST Enum name CDATA #REQUIRED
                     id CDATA #REQUIRED >
 
 &lt;!ELEMENT EnumValue (webidl, descriptive?) >
@@ -660,7 +660,7 @@ scoped name of the exception being inherited from.
 <pre class="dtd">
 &lt;!ELEMENT Exception (webidl, descriptive?, ExtendedAttributeList?, ExceptionInheritance?,
         (Const | ExceptionField)* ) >
-&lt;!ATTLIST Exception name CDATA #REQUIRED 
+&lt;!ATTLIST Exception name CDATA #REQUIRED
                     id CDATA #REQUIRED >
 
 &lt;!ELEMENT ExceptionInheritance (Name) >
@@ -883,7 +883,7 @@ name when the corresponding syntax appears in the Web IDL input.
 <p>
 A <em>DictionaryMember</em> represents a member of a dictionary.
 The <em>Type</em> element specifies its type. The <em>name</em>
-attribute specifies its name. 
+attribute specifies its name.
 </p>
 
 <p>
@@ -1078,7 +1078,7 @@ The following XHTML elements are part of widlprocxml:
 &lt;!ELEMENT em %Inline; >
 
 &lt;!ELEMENT img %Inline; >
-&lt;!ATTLIST img src CDATA #REQUIRED 
+&lt;!ATTLIST img src CDATA #REQUIRED
                  alt CDATA #IMPLIED>
 
 

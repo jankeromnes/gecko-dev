@@ -26,12 +26,12 @@ define(STUB_ENTRY,
 	.type		'STUB_NAME($1)`,@function
 	.ent		'STUB_NAME($1)`, 0
 'STUB_NAME($1)`:
-	.frame		sp, FRAMESZ, ra 
+	.frame		sp, FRAMESZ, ra
 	.set		noreorder
 	.cpload		t9
 	.set		reorder
 	subu		sp, FRAMESZ
-	.cprestore	16	
+	.cprestore	16
 	li		t0, '$1`
 	b		sharedstub
 .end			'STUB_NAME($1)`

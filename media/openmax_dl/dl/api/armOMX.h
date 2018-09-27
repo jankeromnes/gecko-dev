@@ -11,19 +11,19 @@
  *  relicensed with permission from the copyright holders.
  */
 
-/* 
- * 
+/*
+ *
  * File Name:  armOMX_ReleaseVersion.h
  * OpenMAX DL: v1.0.2
  * Last Modified Revision:   15322
  * Last Modified Date:       Wed, 15 Oct 2008
- * 
+ *
  * (c) Copyright 2007-2008 ARM Limited. All Rights Reserved.
- * 
- * 
+ *
+ *
  *
  * This file allows a version of the OMX DL libraries to be built where some or
- * all of the function names can be given a user specified suffix. 
+ * all of the function names can be given a user specified suffix.
  *
  * You might want to use it where:
  *
@@ -32,15 +32,15 @@
  *   in the library just with a different name - so you could debug the new
  *   version by comparing it to the output of the old)
  *
- * - you want to rename all the functions to versions with a suffix so that 
+ * - you want to rename all the functions to versions with a suffix so that
  *   you can include two versions of the library and choose between functions
  *   at runtime.
  *
  *     e.g. omxIPBM_Copy_U8_C1R could be renamed omxIPBM_Copy_U8_C1R_CortexA8
- * 
+ *
  */
 
-  
+
 #ifndef _armOMX_H_
 #define _armOMX_H_
 
@@ -52,12 +52,12 @@
 #define OMXCATBAR(A, B) OMXCAT2BAR(A, B)
 
 /* Define the suffix to add to all functions - the default is no suffix */
-#define BARE_SUFFIX 
+#define BARE_SUFFIX
 
 
 
 /* Define what happens to the bare suffix-less functions, down to the sub-domain accuracy */
-#define OMXACAAC_SUFFIX    BARE_SUFFIX   
+#define OMXACAAC_SUFFIX    BARE_SUFFIX
 #define OMXACMP3_SUFFIX    BARE_SUFFIX
 #define OMXICJP_SUFFIX     BARE_SUFFIX
 #define OMXIPBM_SUFFIX     BARE_SUFFIX

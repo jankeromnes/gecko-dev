@@ -11,5 +11,5 @@ index b95befb..4ba998b 100644
 +    // fpclassify() required by C99
 +    return (fpclassify(*n) == FP_ZERO) || (fpclassify(*n) == FP_NORMAL);
  }
- 
- 
+
+

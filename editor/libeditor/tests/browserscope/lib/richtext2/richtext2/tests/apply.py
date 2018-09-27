@@ -58,7 +58,7 @@ APPLY_TESTS = {
           'rte1-id':    'a-underline-0',
           'desc':       'Underline selection',
           'pad':        'foo[bar]baz',
-          'expected':   'foo<u>[bar]</u>baz' }          
+          'expected':   'foo<u>[bar]</u>baz' }
       ]
     },
 
@@ -71,7 +71,7 @@ APPLY_TESTS = {
           'pad':        'foo[bar]baz',
           'expected':   [ 'foo<s>[bar]</s>baz',
                           'foo<strike>[bar]</strike>baz',
-                          'foo<del>[bar]</del>baz' ] }          
+                          'foo<del>[bar]</del>baz' ] }
       ]
     },
 

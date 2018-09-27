@@ -7,9 +7,9 @@ CORE_DEPTH = ../..
 
 MODULE = nss
 
-CSRCS = p7sign.c  
+CSRCS = p7sign.c
 
-REQUIRES = seccmd 
+REQUIRES = seccmd
 
 PROGRAM = p7sign
 

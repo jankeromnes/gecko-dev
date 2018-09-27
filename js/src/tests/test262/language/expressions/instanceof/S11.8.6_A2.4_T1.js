@@ -7,14 +7,14 @@ es5id: 11.8.6_A2.4_T1
 description: Checking with "="
 ---*/
 
-//CHECK#1 
+//CHECK#1
 var OBJECT = 0;
 if ((OBJECT = Object, {}) instanceof OBJECT !== true) {
   $ERROR('#1: var OBJECT = 0; (OBJECT = Object, {}) instanceof OBJECT === true');
 }
 
 //CHECK#2
-var object = {}; 
+var object = {};
 if (object instanceof (object = 0, Object) !== true) {
   $ERROR('#2: var object = {};  object instanceof (object = 0, Object) === true');
 }

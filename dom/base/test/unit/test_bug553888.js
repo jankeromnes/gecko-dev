@@ -55,5 +55,5 @@ function run_test() {
     request.setRequestHeader("X-Unwanted-Header", "present");
     do_throw("Shouldn't be able to set a header after send");
   } catch (x) {
-  }    
+  }
 }

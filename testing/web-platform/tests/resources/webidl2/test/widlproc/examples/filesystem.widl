@@ -1,20 +1,20 @@
-/* 
- * Licensed to OMTP Ltd. (OMTP) under one or more contributor license agreements. 
- * See the NOTICE file distributed with this work for additional information regarding 
- * copyright ownership. 
- * 
- * The Reference Implementation (save for such parts of the reference implementation made 
- * available under separate terms and conditions) is made available under the terms of the 
- * Apache License, version 2.0, subject to the condition that any "Works" and "Derivative 
+/*
+ * Licensed to OMTP Ltd. (OMTP) under one or more contributor license agreements.
+ * See the NOTICE file distributed with this work for additional information regarding
+ * copyright ownership.
+ *
+ * The Reference Implementation (save for such parts of the reference implementation made
+ * available under separate terms and conditions) is made available under the terms of the
+ * Apache License, version 2.0, subject to the condition that any "Works" and "Derivative
  * Works" used or distributed for commercial purposes must be and remain compliant with the
- * BONDI specification as promulgated by OMTP in each release. Your implementation of the 
- * Reference Implementation (whether object or source) must maintain these conditions, and 
+ * BONDI specification as promulgated by OMTP in each release. Your implementation of the
+ * Reference Implementation (whether object or source) must maintain these conditions, and
  * you must notify any recipient of this condition in a conspicuous way.
- * 
- * You may not use this BONDI Reference Implementation except in compliance with the License. 
- * 
- * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 or at 
- * http://bondi.omtp.org/BONDI-LICENSE-2.0 
+ *
+ * You may not use this BONDI Reference Implementation except in compliance with the License.
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 or at
+ * http://bondi.omtp.org/BONDI-LICENSE-2.0
  */
 
 /**
@@ -35,7 +35,7 @@
  * <em>&lt;root name&gt;/&lt;path&gt;</em> where <em>&lt;rootname&gt;</em> is
  * the name of the root and <em>&lt;path&gt;</em> is the path to the file or
  * directory relative to that root.
- * 
+ *
  * The list of the supported root locations can be retrieved by calling
  * filesystem.getRootLocations().
  *
@@ -88,7 +88,7 @@
  *
  * 	bondi.requestFeature(successCB, errorCB, "filesystem");
  * \endcode
- * 
+ *
  * \def-api-feature http://bondi.omtp.org/api/filesystem.read
  * \brief Filesystem read operations, including reading directory listings,
  *        file contents and resolving root locations.
@@ -99,7 +99,7 @@
  *        writing to files, deleting files/directories, moving and copying
  *        files.
  * \device-cap io.file.write
- * 
+ *
  * \def-api-feature-set http://bondi.omtp.org/api/filesystem
  * \brief All the FileSystem features
  * \api-feature http://bondi.omtp.org/api/filesystem.read
@@ -260,7 +260,7 @@ module filesystem {
 		 * Validates and resolves the given location to a File handle
 		 * and returns a handle. A valid location is prefixed with a
 		 * valid root or default location and must address an existing
-		 * and accessible file.  
+		 * and accessible file.
 		 *
 		 * \api-feature http://bondi.omtp.org/api/filesystem.read
 		 *
@@ -379,7 +379,7 @@ module filesystem {
 	 * 		// alerts each name of dir's contents
 	 * 		alert(files[i].name);
 	 * 	}
-	 * 
+	 *
 	 * 	// opens a file for writing
 	 * 	var file = dir.createFile("test.txt");
 	 * 	var out  = file.open("w", "UTF-8");
@@ -502,7 +502,7 @@ module filesystem {
 		 * Read-only.
 		 *
 		 * If the file path is <em>/baz/foo.bar</em>, then
-		 * the path is <em>/baz/</em>.  
+		 * the path is <em>/baz/</em>.
 		 *
 		 * The encoding of file paths is <a href="http://www.ietf.org/rfc/rfc2279.txt">UTF-8</a>.
 		 *
@@ -641,7 +641,7 @@ module filesystem {
 		 *
 		 * \param successCallback called when the file has been copied.
 		 * \param errorCallback called if an error occured.
-		 * \param filePath the new file path, [a-Z0-9_- /]+ are allowed 
+		 * \param filePath the new file path, [a-Z0-9_- /]+ are allowed
 		 * \param overwrite <em>true</em> enforces overwriting an existing file.
 		 * \return PendingOperation enabling the requester to cancel this request.
 		 * \throw SecurityError PERMISSION_DENIED_ERROR when
@@ -762,7 +762,7 @@ module filesystem {
 		 * \brief Resolves an existing file or directory relatively to
 		 * the current directory this operation is performed on; and
 		 * returns a file handle for it.
-		 * 
+		 *
 		 * The filePath is not allowed to contain the "." or ".." directories.
 		 *
 		 * The encoding of file paths is <a href="http://www.ietf.org/rfc/rfc2279.txt">UTF-8</a>.
@@ -851,7 +851,7 @@ module filesystem {
 	 * A FileStream represents a handle to a File opened for read and/or
 	 * write operations.  Read and write operations are performed relative
 	 * to a file pointer which represents the current position in the file.
-	 * 
+	 *
 	 * A series of read/write methods are available that permit both binary and
 	 * text to be processed.
 	 *
@@ -863,7 +863,7 @@ module filesystem {
 		/**
 		 * \brief Indicates whether or not the current file pointer is at the end
 		 * of the file.
-		 * 
+		 *
 		 * <em>true</em> if the position is at the end of the current file stream.
 		 *
 		 * \code
@@ -876,7 +876,7 @@ module filesystem {
 
 		/**
 		 * \brief Get/set stream position for reads/writes.
-		 * 
+		 *
 		 * The stream position is an offset of bytes from the start of
 		 * the file stream.  When invoking an operation that reads or
 		 * writes from the stream, the operation will take place from
@@ -899,7 +899,7 @@ module filesystem {
 		 *
 		 * The number of bytes available for reading is the maximum
 		 * amount of bytes that can be read in the next read operation.
-		 * 
+		 *
 		 * -1 if eof is <em>true</em>.
 		 *
 		 * \code
@@ -910,7 +910,7 @@ module filesystem {
 
 		/**
 		 * \brief Closes this FileStream.
-		 * 
+		 *
 		 * Flushes any pending buffered writes and closes the File. Always succeeds.
 		 * Note that pending writes might not succeed.
 		 *
@@ -1009,7 +1009,7 @@ module filesystem {
 			raises(DeviceAPIError);
 
 		/**
-		 * \brief Converts the specified base64 DOMString to bytes and writes the 
+		 * \brief Converts the specified base64 DOMString to bytes and writes the
 		 * result to this FileStream.
 		 *
 		 * \code
@@ -1031,7 +1031,7 @@ module filesystem {
    * \api-feature http://bondi.omtp.org/api/filesystem.write
    */
 	interface FileSystemManagerObject {
-		readonly attribute FileSystemManager fileSystemManager; 
+		readonly attribute FileSystemManager fileSystemManager;
 	};
 	bondi implements FileSystemManagerObject;
 

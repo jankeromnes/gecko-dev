@@ -29,7 +29,7 @@ let iterCount = 0;
 async function * fn() {
   for await ([] of ['string literal'
 ]) {
-    
+
     iterCount += 1;
   }
 }

@@ -52,7 +52,7 @@ info: |
 
 class C {
   static async *method([x = (function() { throw new Test262Error(); })()] = [undefined]) {
-    
+
   }
 };
 

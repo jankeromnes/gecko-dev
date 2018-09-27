@@ -36,7 +36,7 @@ def web_socket_do_extra_handshake(request):
 
 # Behave according to recommendation of RFC 6455, section # 5.5.1:
 #  "When sending a Close frame in response, the endpoint typically echos the
-#   status code it received."  
+#   status code it received."
 # - Without this, pywebsocket replies with 1000 to any close code.
 #
 #  Note that this function is only called when the client initiates the close
@@ -79,7 +79,7 @@ def web_socket_transfer_data(request):
       # converted unpaired surrogate in UTF-16 to UTF-8 OK
       msgutil.send_message(request, "SUCCESS")
     else:
-      msgutil.send_message(request, "FAIL got '" + msg 
+      msgutil.send_message(request, "FAIL got '" + msg
           + "' instead of string with replacement char'")
   elif request.ws_protocol == "test-13":
     # first one binary message containing the byte 0x61 ('a')
@@ -134,9 +134,9 @@ def web_socket_transfer_data(request):
     # Echo back 3 messages
     msgutil.send_message(request,
                          msgutil.receive_message(request))
-    msgutil.send_message(request, 
+    msgutil.send_message(request,
                          msgutil.receive_message(request))
-    msgutil.send_message(request, 
+    msgutil.send_message(request,
                          msgutil.receive_message(request))
   elif request.ws_protocol == "test-44":
     rcv = msgutil.receive_message(request)

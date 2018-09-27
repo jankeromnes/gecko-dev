@@ -7,7 +7,7 @@ diff --git a/modules/fdlibm/src/e_exp.cpp b/modules/fdlibm/src/e_exp.cpp
  	else
  	    INSERT_WORDS(twopk,0x3ff00000+((k+1000)<<20), 0);
  	c  = x - t*(P1+t*(P2+t*(P3+t*(P4+t*P5))));
- 	if(k==0) 	return one-((x*c)/(c-2.0)-x); 
+ 	if(k==0) 	return one-((x*c)/(c-2.0)-x);
  	else 		y = one-((lo-(x*c)/(2.0-c))-hi);
  	if(k >= -1021) {
 -	    if (k==1024) return y*2.0*0x1p1023;

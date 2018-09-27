@@ -64,17 +64,17 @@ PRIntn debug_mode;
 int count;
 
 
-static void 
+static void
 AttachDetach(void)
 {
     PRThread *me;
     PRInt32 index;
 
     for (index=0;index<count; index++) {
-        me = PR_AttachThread(PR_USER_THREAD, 
+        me = PR_AttachThread(PR_USER_THREAD,
                              PR_PRIORITY_NORMAL,
                              NULL);
- 
+
         if (!me) {
             fprintf(stderr, "Error attaching thread %d: PR_AttachThread failed\n",
 		    count);
@@ -173,7 +173,7 @@ int main(int argc, char **argv)
     goto exit_now;
 #endif
 
-	if(0 == count) count = DEFAULT_COUNT;	
+	if(0 == count) count = DEFAULT_COUNT;
 
     /*
      * To force the implicit initialization of nspr20
@@ -195,7 +195,7 @@ int main(int argc, char **argv)
 		failed_already=1;
 		goto exit_now;
 	}
-	
+
     rv = pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
     if (debug_mode) PR_ASSERT(0 == rv);
 	else if (0 != rv) {
@@ -233,7 +233,7 @@ int main(int argc, char **argv)
 	if(!debug_mode) {
 		failed_already=1;
 		goto exit_now;
-	} else	
+	} else
 		fprintf(stderr, "thread creation failed: error code %d\n", rv);
     }
     rv = thr_join(threadID, NULL, NULL);
@@ -271,10 +271,10 @@ int main(int argc, char **argv)
 					errno);
 			failed_already=1;
 			goto exit_now;
-	
+
 	}
 	else {
-		if (debug_mode) 
+		if (debug_mode)
 			printf ("thread creation succeeded \n");
 		sleep(3);
 		goto exit_now;
@@ -289,7 +289,7 @@ int main(int argc, char **argv)
 #elif defined(OS2)
 
     threadID = (TID) _beginthread((void *)threadStartFunc, NULL,
-            32768, NULL); 
+            32768, NULL);
     if (threadID == -1) {
         fprintf(stderr, "thread creation failed: error code %d\n", errno);
         failed_already=1;
@@ -304,7 +304,7 @@ int main(int argc, char **argv)
     }
 
 #elif defined(XP_BEOS)
-	
+
 	threadID = spawn_thread(threadStartFunc, NULL, B_NORMAL_PRIORITY, NULL);
 	if (threadID <= B_ERROR) {
 		fprintf(stderr, "thread creation failed: error code %08lx\n", threadID);
@@ -324,11 +324,11 @@ int main(int argc, char **argv)
 		failed_already = 1;
 		goto exit_now;
 	}
-	
+
 #else
 	if (!debug_mode)
 		failed_already=1;
-	else	
+	else
 		printf("The attach test does not apply to this platform because\n"
 	    "either this platform does not have native threads or the\n"
 	    "test needs to be written for this platform.\n");
@@ -336,7 +336,7 @@ int main(int argc, char **argv)
 #endif
 
 exit_now:
-   if(failed_already)	
+   if(failed_already)
 		return 1;
 	else
 		return 0;

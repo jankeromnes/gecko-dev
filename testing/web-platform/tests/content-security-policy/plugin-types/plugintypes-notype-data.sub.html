@@ -16,7 +16,7 @@
         window.addEventListener('securitypolicyviolation', function(e) {
             log("violated-directive=" + e.violatedDirective);
         });
-    </script>    
+    </script>
 
     Given a `plugin-types` directive, plugins have to declare a type explicitly. No declared type, no load. This test passes if there&apos;s a CSP report and &quot;FAIL!&quot; isn&apos;t logged.
     <object data="data:application/x-webkit-test-netscape" onload="log('FAIL');" onerror="log('PASS: object tag onerror handler fired');"></object>

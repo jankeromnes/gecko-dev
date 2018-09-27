@@ -38,7 +38,7 @@ my($iso2022kr_ver);
 #
 package genverifier;
 @iso2022kr_st = (
-# 0  1  2  3  4  5 
+# 0  1  2  3  4  5
   0, 3, 1, 0, 0, 0, # Start State - 0
   1, 1, 1, 1, 1, 1, # Error State - 1
   2, 2, 2, 2, 2, 2, # ItsMe State - 2
@@ -47,7 +47,7 @@ package genverifier;
   1, 1, 1, 1, 1, 2, # state 5 - got ESC $ )
 );
 
-$iso2022kr_ver = genverifier::GenVerifier("ISO2022KR", "ISO-2022-KR", 
+$iso2022kr_ver = genverifier::GenVerifier("ISO2022KR", "ISO-2022-KR",
       \@iso2022kr_cls, 6, \@iso2022kr_st);
 print $iso2022kr_ver;
 

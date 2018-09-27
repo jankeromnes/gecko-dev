@@ -6,7 +6,7 @@
   -->
 <window title="Notification Box" width="500" height="600"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>  
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>
 
   <notificationbox id="nb"/>
   <menupopup id="menupopup" onpopupshown="this.hidePopup()" onpopuphidden="checkPopupClosed()">
@@ -243,7 +243,7 @@ var tests =
           return [++idx, ntf];
         case 3:
           testtag_notificationbox_State(nb, "second removeTransientNotifications", null, 0);
-          
+
           this.repeat = false;
       }
     }

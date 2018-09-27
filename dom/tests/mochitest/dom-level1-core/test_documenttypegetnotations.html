@@ -37,13 +37,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,16 +73,16 @@ var docName = 'documenttypegetnotations';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
-    The "getNotations()" method creates a NamedNodeMap that   
+*
+    The "getNotations()" method creates a NamedNodeMap that
    contains all the notations declared in the DTD.
-   
+
    Retrieve the Document Type for this document and create
    a NamedNodeMap object of all the notations.  There
    should be two items in the list (notation1 and notation2).
@@ -106,7 +106,7 @@ function documenttypegetnotations() {
       expected[0] = "notation1";
       expected[1] = "notation2";
 
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -126,7 +126,7 @@ for(var indexN65627 = 0;indexN65627 < notationList.length; indexN65627++) {
 
 	}
    assertEqualsCollection("names",expected,actual);
-       
+
 }
 
 </script>
@@ -135,12 +135,12 @@ for(var indexN65627 = 0;indexN65627 < notationList.length; indexN65627++) {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/documenttypegetnotations</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

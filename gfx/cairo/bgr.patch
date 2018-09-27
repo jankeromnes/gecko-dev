@@ -18,11 +18,11 @@ index 332e3ab..4a1d6a0 100644
 +					 acquire_data->image_extra);
      free(data);
  }
- 
+
 @@ -1515,42 +1517,47 @@ _wrap_image (cairo_surface_t *src,
      cairo_image_surface_t *surface;
      cairo_status_t status;
- 
+
 -    struct acquire_source_image_data *data = malloc(sizeof(*data));
 +    struct acquire_source_image_data *data = malloc (sizeof (*data));
 +    if (unlikely (data == NULL))
@@ -30,7 +30,7 @@ index 332e3ab..4a1d6a0 100644
      data->src = src;
      data->image = image;
      data->image_extra = image_extra;
- 
+
 -    surface = (cairo_image_surface_t*)cairo_image_surface_create_for_data (image->data,
 -	    image->format,
 -	    image->width,
@@ -48,7 +48,7 @@ index 332e3ab..4a1d6a0 100644
 +	free (data);
  	return status;
 +    }
- 
+
      status = _cairo_user_data_array_set_data (&surface->base.user_data,
 -	    &wrap_image_key,
 -	    data,
@@ -73,7 +73,7 @@ index 332e3ab..4a1d6a0 100644
      *out = surface;
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 -
  /**
   * _cairo_surface_clone_similar:

@@ -21,7 +21,7 @@ function test()
 
   options('strict');
   options('werror');
- 
+
   function f() {
     this.a = {1: "a", 2: "b"};
     var dummy;

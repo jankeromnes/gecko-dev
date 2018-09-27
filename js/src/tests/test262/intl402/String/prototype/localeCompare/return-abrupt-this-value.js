@@ -10,7 +10,7 @@ author: Norbert Lindenberg
 ---*/
 
 var invalidValues = [undefined, null];
- 
+
 invalidValues.forEach(function (value) {
     assert.throws(TypeError, function() {
         var result = String.prototype.localeCompare.call(value, "");

@@ -10,7 +10,7 @@
 # to be used in NamePrepProfile
 #
 # Author: Ram Viswanadha
-#        
+#
 ####################################################################################
 
 use File::Find;
@@ -187,7 +187,7 @@ sub readPrint{
             $line =~ s/Case map/MAP/;
             $line =~ s/Additional folding/MAP/;
         }elsif ( $table =~ /C/ ) {
-            ($code, $noise) = split /;/ , $line;   
+            ($code, $noise) = split /;/ , $line;
             $line = $code."; ; PROHIBITED\n";
         }
         if($line =~ /\.\./){

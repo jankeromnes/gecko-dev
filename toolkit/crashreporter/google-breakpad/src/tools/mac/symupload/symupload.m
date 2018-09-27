@@ -60,7 +60,7 @@ static NSArray *ModuleDataForSymbolFile(NSString *file) {
   NSString *line;
   NSMutableArray *parts = nil;
   const int MODULE_ID_INDEX = 3;
-  
+
   if ([scanner scanUpToString:@"\n" intoString:&line]) {
     parts = [[NSMutableArray alloc] init];
     NSScanner *moduleInfoScanner = [NSScanner scannerWithString:line];
@@ -104,13 +104,13 @@ static void Start(Options *options) {
   [parameters setObject:[moduleParts objectAtIndex:4] forKey:@"debug_file"];
   [parameters setObject:[moduleParts objectAtIndex:4] forKey:@"code_file"];
   [ul setParameters:parameters];
-  
+
   NSArray *keys = [parameters allKeys];
   int count = [keys count];
   for (int i = 0; i < count; ++i) {
     NSString *key = [keys objectAtIndex:i];
     NSString *value = [parameters objectForKey:key];
-    fprintf(stdout, "'%s' = '%s'\n", [key UTF8String], 
+    fprintf(stdout, "'%s' = '%s'\n", [key UTF8String],
             [value UTF8String]);
   }
 

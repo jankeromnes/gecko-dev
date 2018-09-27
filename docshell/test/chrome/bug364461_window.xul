@@ -31,7 +31,7 @@
       for (let eventType of LISTEN_EVENTS) {
         gBrowser.removeEventListener(eventType, eventListener, true);
       }
-    
+
       window.close();
       window.opener.wrappedJSObject.SimpleTest.finish();
     }
@@ -42,7 +42,7 @@
       for (let eventType of LISTEN_EVENTS) {
         gBrowser.addEventListener(eventType, eventListener, true);
       }
-      
+
       gTestsIterator = testsIterator();
       nextTest();
     }
@@ -102,7 +102,7 @@
                    {type: "pageshow", title: "test1", persisted: true}];
       gBrowser.goBack();
       yield undefined;
-      
+
       gExpected = [{type: "pagehide", title: "test1", persisted: true},
                    {type: "pageshow", title: "test2", persisted: true}];
       gBrowser.goForward();
@@ -166,7 +166,7 @@
       //  Back/forward between a document containing an unload handler and a
       //  a simple document. Bfcache won't be used for the first one (see
       //  http://developer.mozilla.org/en/docs/Using_Firefox_1.5_caching).
-      
+
       var test5Doc = "data:text/html,<html><head><title>test5</title></head>" +
                      "<body onunload='while(false) { /* nop */ }'>" +
                      "test5</body></html>";
@@ -192,7 +192,7 @@
                    {type: "pageshow", title: "test5", persisted: false}];
       gBrowser.goBack();
       yield undefined;
-      
+
       gExpected = [{type: "pagehide", title: "test5", persisted: false},
                    {type: "unload", title: "test5"},
                    {type: "pageshow", title: "test6", persisted: true}];
@@ -203,7 +203,7 @@
       //  Testcase from https://bugzilla.mozilla.org/show_bug.cgi?id=384977#c10
       //  Check that navigation is not blocked after a document is restored
       //  from bfcache
-      
+
       var test7Doc = "data:text/html,<html><head><title>test7</title>" +
                       "</head><body>" +
                       "<iframe src='data:text/html," +
@@ -214,7 +214,7 @@
                         "</body></html>'>" +
                       "</iframe>" +
                     "</body></html>";
-      
+
       gExpected = [{type: "pagehide", title: "test6", persisted: true},
                    {type: "load", title: "test7-nested1"},
                    {type: "pageshow", title: "test7-nested1", persisted: false},
@@ -228,7 +228,7 @@
         var iframe = gBrowser.contentDocument.getElementsByTagName("iframe")[0];
         var w = iframe.contentWindow;
         var d = iframe.contentDocument;
-        
+
         var evt = d.createEvent("MouseEvents");
         evt.initMouseEvent("click", true, true, w,
                            0, 0, 0, 0, 0, false, false, false, false, 0, null);
@@ -241,23 +241,23 @@
                    {type: "pageshow", persisted: false}];
       clickIframeLink();
       yield undefined;
-      
+
       is(gBrowser.currentURI.spec, "data:text/plain,aaa",
          "Navigation is blocked when clicking link");
-      
+
       gExpected = [{type: "pagehide", persisted: true},
                    {type: "pageshow", title: "test7-nested1", persisted: true},
                    {type: "pageshow", title: "test7", persisted: true}];
       gBrowser.goBack();
       yield undefined;
-      
+
       gExpected = [{type: "pagehide", title: "test7", persisted: true},
                    {type: "pagehide", title: "test7-nested1", persisted: true},
                    {type: "load"},
                    {type: "pageshow", persisted: false}];
       clickIframeLink();
       yield undefined;
-      
+
       is(gBrowser.currentURI.spec, "data:text/plain,aaa",
          "Navigation is blocked when clicking link");
 

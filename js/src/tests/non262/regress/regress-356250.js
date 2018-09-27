@@ -21,7 +21,7 @@ function test1()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   (function() { eval("(function() { })"); })();
 
   reportCompare(expect, actual, summary + ': nested 1');
@@ -31,7 +31,7 @@ function test2()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   (function () {(function() { eval("(function() { })"); })();})();
 
   reportCompare(expect, actual, summary + ': nested 2');

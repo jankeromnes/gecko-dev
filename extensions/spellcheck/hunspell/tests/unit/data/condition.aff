@@ -22,7 +22,7 @@ SFX S   0 suf17 [aeou][bcdfgkmnoprstvz]
 SFX S   0 suf18 [aeou]o
 
 SFX Q N 2
-SFX Q   0 ning  [^aeio][aeiou]n 
+SFX Q   0 ning  [^aeio][aeiou]n
 SFX Q   0 ing   [aeio][aeiou][bcdfgkmnprstvz]
 
 SFX T N 1

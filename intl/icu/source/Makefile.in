@@ -19,7 +19,7 @@ include $(top_builddir)/icudefs.mk
 docdir = $(datadir)/doc
 docsubdir = $(PACKAGE)$(ICULIBDASHSUFFIX)/html
 docfilesdir = doc/html
-docfiles = $(docfilesdir)/*.png $(docfilesdir)/*.html $(docfilesdir)/*.css $(docfilesdir)/*.tag 
+docfiles = $(docfilesdir)/*.png $(docfilesdir)/*.html $(docfilesdir)/*.css $(docfilesdir)/*.tag
 docsrchdir = $(docfilesdir)/search
 docsrchfiles = $(docsrchdir)/*
 

@@ -89,23 +89,23 @@ pkix_pl_lifecycle_ObjectLeakCheck(int *initObjCountTable)
                 }
 
                 numObjects += objCountDiff;
-                
+
                 if (!pkixLog || !objCountDiff) {
                     continue;
                 }
                 className = entry->description;
                 if (!className) {
                     className = classNameBuff;
-                    PR_snprintf(className, 128, "Unknown(ref %d)", 
+                    PR_snprintf(className, 128, "Unknown(ref %d)",
                             entry->objCounter);
                 }
 
                 PR_LOG(pkixLog, 1, ("Class %s leaked %d objects of "
-                        "size %d bytes, total = %d bytes\n", className, 
+                        "size %d bytes, total = %d bytes\n", className,
                         objCountDiff, entry->typeObjectSize,
                         objCountDiff * entry->typeObjectSize));
         }
- 
+
         return numObjects;
 }
 
@@ -228,7 +228,7 @@ PKIX_PL_Initialize(
             PKIX_CHECK(PKIX_PL_NssContext_Create
                        (0, useArenas, NULL, &plContext),
                        PKIX_NSSCONTEXTCREATEFAILED);
-            
+
             *pPlContext = plContext;
         }
 

@@ -6,15 +6,15 @@ diff --git a/mfbt/double-conversion/double-conversion/double-conversion.h b/mfbt
  // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- 
+
  #ifndef DOUBLE_CONVERSION_DOUBLE_CONVERSION_H_
  #define DOUBLE_CONVERSION_DOUBLE_CONVERSION_H_
- 
+
 +#include "mozilla/Types.h"
  #include <double-conversion/utils.h>
- 
+
  namespace double_conversion {
- 
+
  class DoubleToStringConverter {
   public:
    // When calling ToFixed with a double > 10^kMaxFixedDigitsBeforePoint
@@ -26,11 +26,11 @@ diff --git a/mfbt/double-conversion/double-conversion/double-conversion.h b/mfbt
      ASSERT(((flags & EMIT_TRAILING_DECIMAL_POINT) != 0) ||
          !((flags & EMIT_TRAILING_ZERO_AFTER_POINT) != 0));
    }
- 
+
    // Returns a converter following the EcmaScript specification.
 -  static const DoubleToStringConverter& EcmaScriptConverter();
 +  static MFBT_API const DoubleToStringConverter& EcmaScriptConverter();
- 
+
    // Computes the shortest string of digits that correctly represent the input
    // number. Depending on decimal_in_shortest_low and decimal_in_shortest_high
    // (see constructor) it then either returns a decimal representation, or an
@@ -51,7 +51,7 @@ diff --git a/mfbt/double-conversion/double-conversion/double-conversion.h b/mfbt
 +  MFBT_API bool ToFixed(double value,
                 int requested_digits,
                 StringBuilder* result_builder) const;
- 
+
    // Computes a representation in exponential format with requested_digits
    // after the decimal point. The last emitted digit is rounded.
    // If requested_digits equals -1, then the shortest exponential representation
@@ -70,7 +70,7 @@ diff --git a/mfbt/double-conversion/double-conversion/double-conversion.h b/mfbt
 +  MFBT_API bool ToExponential(double value,
                       int requested_digits,
                       StringBuilder* result_builder) const;
- 
+
    // Computes 'precision' leading digits of the given 'value' and returns them
    // either in exponential or decimal format, depending on
    // max_{leading|trailing}_padding_zeroes_in_precision_mode (given to the
@@ -89,7 +89,7 @@ diff --git a/mfbt/double-conversion/double-conversion/double-conversion.h b/mfbt
 +  MFBT_API bool ToPrecision(double value,
                     int precision,
                     StringBuilder* result_builder) const;
- 
+
    enum DtoaMode {
      // Produce the shortest correct representation.
      // For example the output of 0.299999999999999988897 is (the less accurate
@@ -97,7 +97,7 @@ diff --git a/mfbt/double-conversion/double-conversion/double-conversion.h b/mfbt
      SHORTEST,
 @@ -287,17 +288,17 @@ class DoubleToStringConverter {
    };
- 
+
    // The maximal number of digits that are needed to emit a double in base 10.
    // A higher precision can be achieved by using more digits, but the shortest
    // accurate representation of any double will never use more digits than
@@ -106,7 +106,7 @@ diff --git a/mfbt/double-conversion/double-conversion/double-conversion.h b/mfbt
    // should be at least kBase10MaximalLength + 1 characters long.
 -  static const int kBase10MaximalLength = 17;
 +  static const MFBT_DATA int kBase10MaximalLength = 17;
- 
+
    // Converts the given double 'v' to digit characters. 'v' must not be NaN,
    // +Infinity, or -Infinity. In SHORTEST_SINGLE-mode this restriction also
    // applies to 'v' after it has been casted to a single-precision float. That
@@ -132,14 +132,14 @@ diff --git a/mfbt/double-conversion/double-conversion/double-conversion.h b/mfbt
                              bool* sign,
                              int* length,
                              int* point);
- 
+
   private:
    // Implementation for ToShortest and ToShortestSingle.
 -  bool ToShortestIeeeNumber(double value,
 +  MFBT_API bool ToShortestIeeeNumber(double value,
                              StringBuilder* result_builder,
                              DtoaMode mode) const;
- 
+
    // If the value is a special value (NaN or Infinity) constructs the
    // corresponding string using the configured infinity/nan-symbol.
    // If either of them is NULL or the value is not special then the
@@ -160,7 +160,7 @@ diff --git a/mfbt/double-conversion/double-conversion/double-conversion.h b/mfbt
                                     int decimal_point,
                                     int digits_after_point,
                                     StringBuilder* result_builder) const;
- 
+
    const int flags_;
    const char* const infinity_symbol_;
    const char* const nan_symbol_;

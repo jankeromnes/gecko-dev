@@ -12,7 +12,7 @@
 #
 
 ifndef OBJ_PREFIX
-    OBJ_PREFIX = 
+    OBJ_PREFIX =
 endif
 
 #
@@ -30,7 +30,7 @@ endif
 
 
 ifndef IMPORT_LIB_PREFIX
-    IMPORT_LIB_PREFIX = 
+    IMPORT_LIB_PREFIX =
 endif
 
 #
@@ -38,7 +38,7 @@ endif
 #
 
 ifndef PROG_PREFIX
-    PROG_PREFIX = 
+    PROG_PREFIX =
 endif
 
 MK_PREFIX = included

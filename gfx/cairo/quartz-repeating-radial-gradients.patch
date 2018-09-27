@@ -15,7 +15,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
  			     output_value_ranges,
  			     &callbacks);
  }
- 
+
  static CGFunctionRef
 -CreateRepeatingGradientFunction (cairo_quartz_surface_t *surface,
 -				 const cairo_gradient_pattern_t *gpat,
@@ -32,7 +32,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
      CGFunctionCallbacks callbacks = {
  	0, ComputeGradientValue, (CGFunctionReleaseInfoCallback) cairo_pattern_destroy
      };
- 
+
 @@ -791,16 +791,156 @@ CreateRepeatingGradientFunction (cairo_q
      return CGFunctionCreate (pat,
  			     1,
@@ -41,7 +41,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
  			     output_value_ranges,
  			     &callbacks);
  }
- 
+
 +static void
 +UpdateRadialParameterToIncludePoint(double *max_t, CGPoint *center,
 +                                    double dr, double dx, double dy,
@@ -183,7 +183,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +}
 +
  /* Obtain a CGImageRef from a #cairo_surface_t * */
- 
+
  static void
  DataProviderReleaseCallback (void *info, const void *data, size_t size)
  {
@@ -192,15 +192,15 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
  }
 @@ -1112,23 +1252,24 @@ _cairo_quartz_setup_linear_source (cairo
      rgb = CGColorSpaceCreateDeviceRGB();
- 
+
      start = CGPointMake (_cairo_fixed_to_double (lpat->p1.x),
  			 _cairo_fixed_to_double (lpat->p1.y));
      end = CGPointMake (_cairo_fixed_to_double (lpat->p2.x),
  		       _cairo_fixed_to_double (lpat->p2.y));
- 
+
      if (abspat->extend == CAIRO_EXTEND_NONE ||
 -	abspat->extend == CAIRO_EXTEND_PAD)
-+        abspat->extend == CAIRO_EXTEND_PAD) 
++        abspat->extend == CAIRO_EXTEND_PAD)
      {
  	gradFunc = CreateGradientFunction (&lpat->base);
      } else {
@@ -212,12 +212,12 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +						          &start, &end,
 +						          surface->sourceTransform);
      }
- 
+
      surface->sourceShading = CGShadingCreateAxial (rgb,
  						   start, end,
  						   gradFunc,
  						   extend, extend);
- 
+
      CGColorSpaceRelease(rgb);
 @@ -1142,52 +1283,68 @@ _cairo_quartz_setup_radial_source (cairo
  				   const cairo_radial_pattern_t *rpat)
@@ -237,13 +237,13 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +    double dx = c1x - c2x;
 +    double dy = c1y - c2y;
 +    double centerDistance = sqrt (dx*dx + dy*dy);
- 
+
      if (rpat->base.n_stops == 0) {
  	CGContextSetRGBStrokeColor (surface->cgContext, 0., 0., 0., 0.);
  	CGContextSetRGBFillColor (surface->cgContext, 0., 0., 0., 0.);
  	return DO_SOLID;
      }
- 
+
 -    if (abspat->extend == CAIRO_EXTEND_REPEAT ||
 -	abspat->extend == CAIRO_EXTEND_REFLECT)
 -    {
@@ -262,20 +262,20 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 -	return _cairo_quartz_setup_fallback_source (surface, &rpat->base.base);
 +	return _cairo_quartz_setup_fallback_source (surface, abspat);
      }
- 
+
      mat = abspat->matrix;
      cairo_matrix_invert (&mat);
      _cairo_quartz_cairo_matrix_to_quartz (&mat, &surface->sourceTransform);
- 
+
      rgb = CGColorSpaceCreateDeviceRGB();
- 
+
 -    start = CGPointMake (_cairo_fixed_to_double (rpat->c1.x),
 -			 _cairo_fixed_to_double (rpat->c1.y));
 -    end = CGPointMake (_cairo_fixed_to_double (rpat->c2.x),
 -		       _cairo_fixed_to_double (rpat->c2.y));
 +    start = CGPointMake (c1x, c1y);
 +    end = CGPointMake (c2x, c2y);
- 
+
 -    gradFunc = CreateGradientFunction (&rpat->base);
 +    if (abspat->extend == CAIRO_EXTEND_NONE ||
 +        abspat->extend == CAIRO_EXTEND_PAD)
@@ -287,7 +287,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +						          &start, &r1,
 +						          &end, &r2);
 +    }
- 
+
      surface->sourceShading = CGShadingCreateRadial (rgb,
  						    start,
 -						    _cairo_fixed_to_double (rpat->r1),
@@ -297,9 +297,9 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 +						    r2,
  						    gradFunc,
  						    extend, extend);
- 
+
      CGColorSpaceRelease(rgb);
      CGFunctionRelease(gradFunc);
- 
+
      return DO_SHADING;
  }

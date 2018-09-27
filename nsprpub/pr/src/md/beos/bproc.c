@@ -157,7 +157,7 @@ _MD_wait_process (PRProcess *process, PRInt32 *exitCode)
 {
 	PRStatus retVal = PR_SUCCESS;
 	int ret, status;
-	
+
 	/* Ignore interruptions */
 	do {
 		ret = waitpid(process->md.pid, &status, 0);
@@ -166,7 +166,7 @@ _MD_wait_process (PRProcess *process, PRInt32 *exitCode)
 	/*
 	 * waitpid() cannot return 0 because we did not invoke it
 	 * with the WNOHANG option.
-	 */ 
+	 */
 	PR_ASSERT(0 != ret);
 
 	if (ret < 0) {
@@ -180,7 +180,7 @@ _MD_wait_process (PRProcess *process, PRInt32 *exitCode)
 	} else {
 		PR_ASSERT(WIFSIGNALED(status));
 		*exitCode = _PR_SIGNALED_EXITSTATUS;
-	}		
+	}
 
 	PR_DELETE(process);
 	return PR_SUCCESS;
@@ -191,7 +191,7 @@ _MD_kill_process (PRProcess *process)
 {
 	PRErrorCode prerror;
 	PRInt32 oserror;
-	
+
 	if (kill(process->md.pid, SIGKILL) == 0) {
 		return PR_SUCCESS;
 	}

@@ -13,7 +13,7 @@ Making a test font:
 
 2. Make the font
   ttx grtestxxx-src.ttx
-  
+
 3. Edit GDL file
 
 4. Compile the GDL into the ttf

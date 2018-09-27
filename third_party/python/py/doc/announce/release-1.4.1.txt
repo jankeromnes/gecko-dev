@@ -21,7 +21,7 @@ NOTE: The prior py-1.3.X versions contained "py.test" which since py-1.4.0
 comes as its own separate "pytest" distribution, see:
 
     http://pytest.org
-   
+
 Also, the "py.cleanup|py.lookup|py.countloc" helpers are now part of
 the pycmd distribution, see http://pypi.python.org/pypi/pycmd
 

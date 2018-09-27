@@ -1,4 +1,4 @@
-eval("var OBJ = new MyObject(true); OBJ.valueOf()") 
+eval("var OBJ = new MyObject(true); OBJ.valueOf()")
 function MyObject( value ) {
   this.valueOf = new Function( "return this.value" );
 }

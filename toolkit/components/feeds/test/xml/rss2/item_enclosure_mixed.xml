@@ -9,7 +9,7 @@ Expect: ((feed.type == 0) && (feed.enclosureCount == 2));
 <channel>
 
 <item>
-<enclosure length="24986239" type="audio/mpeg" url="http://dallas.example.com/joebob_050689.mp3" /> 
+<enclosure length="24986239" type="audio/mpeg" url="http://dallas.example.com/joebob_050689.mp3" />
 <author>jbb@dallas.example.com (Joe Bob Briggs)</author>
 <comments>http://example.org</comments>
 <title>test audio</title>
@@ -20,7 +20,7 @@ Expect: ((feed.type == 0) && (feed.enclosureCount == 2));
 </item>
 
 <item>
-<enclosure length="3000000" type="video/mpeg" url="http://dallas.example.com/joebob_pants.mpeg" /> 
+<enclosure length="3000000" type="video/mpeg" url="http://dallas.example.com/joebob_pants.mpeg" />
 <author>jbb@dallas.example.com (Joe Bob Briggs)</author>
 <comments>http://example.org</comments>
 <title>test video</title>

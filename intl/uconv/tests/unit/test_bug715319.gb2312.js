@@ -40,7 +40,7 @@ function test(inString) {
 	c1 = inString.charCodeAt(1);
 	c2 = inString.charCodeAt(2);
 	c3 = inString.charCodeAt(3);
-	if (IsASCII(inString.charCodeAt(pos)) && 
+	if (IsASCII(inString.charCodeAt(pos)) &&
 	    !(outString.charCodeAt(outPos) == inString.charCodeAt(pos) ||
 	      (outString.charCodeAt(outPos) != 0xFFFD) ||
 	      // legal 4 byte range

@@ -12,7 +12,7 @@ function init()
     targetDocument.body.appendChild(targetDocument.importNode(document.getElementById('rootish'), true));
     targetDocument.designMode = 'on';
     setTimeout(boom, 30);
-  }, 30); 
+  }, 30);
 }
 
 function boom()
@@ -21,9 +21,9 @@ function boom()
   r.setStart(targetDocument.getElementById("bar"), 0);
   r.setEnd(targetDocument.getElementById("baz").firstChild, 0);
   targetWindow.getSelection().addRange(r);
-  
+
   targetDocument.execCommand("indent", false, null);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

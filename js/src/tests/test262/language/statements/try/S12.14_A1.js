@@ -41,7 +41,7 @@ try{
   var x2=1;
 }
 catch(e){
-  $ERROR('#3.1: If Result(1).type is not throw, return Result(1). Actual: 4 Return(Result(3))');	
+  $ERROR('#3.1: If Result(1).type is not throw, return Result(1). Actual: 4 Return(Result(3))');
 }
 finally{
   c2=1;

@@ -76,7 +76,7 @@ function reallyHandleRequest(request, response) {
   // Look for an authentication header, if any, in the request.
   //
   // EG: Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
-  // 
+  //
   // This test only supports Basic auth. The value sent by the client is
   // "username:password", obscured with base64 encoding.
 
@@ -94,7 +94,7 @@ function reallyHandleRequest(request, response) {
         throw "Couldn't decode auth header: " + userpass;
     actual_user = match[1];
     actual_pass = match[2];
-  } 
+  }
 
   var proxy_actual_user = "", proxy_actual_pass = "";
   if (request.hasHeader("Proxy-Authorization")) {
@@ -160,7 +160,7 @@ function reallyHandleRequest(request, response) {
   }
 
   if (plugin) {
-    response.write("<embed id='embedtest' style='width: 400px; height: 100px;' " + 
+    response.write("<embed id='embedtest' style='width: 400px; height: 100px;' " +
            "type='application/x-test'></embed>\n");
   }
 
@@ -197,7 +197,7 @@ function base64ToString(data) {
         var padding = (data[i] == base64Pad);
         // Skip illegal characters and whitespace
         if (c == -1) continue;
-        
+
         // Collect data into leftdata, update bitcount
         leftdata = (leftdata << 6) | c;
         leftbits += 6;

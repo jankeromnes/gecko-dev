@@ -5,11 +5,11 @@
 function boom()
 {
   var p = document.getElementById("p");
-  
-  document.addEventListener("DOMAttrModified", removeP, true); 
-  
+
+  document.addEventListener("DOMAttrModified", removeP, true);
+
   p.removeAttribute("mode");
-  
+
   function removeP()
   {
     document.documentElement.removeChild(p);

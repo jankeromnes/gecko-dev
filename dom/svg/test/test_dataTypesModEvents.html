@@ -32,7 +32,7 @@ function runTests()
   var eventChecker = new MutationEventChecker;
 
   // class attribute
- 
+
   eventChecker.watchAttr(filter, "class");
   eventChecker.expect("add modify remove add");
   filter.setAttribute("class", "foo");

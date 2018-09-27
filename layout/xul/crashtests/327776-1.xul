@@ -4,8 +4,8 @@
 <script>
 <![CDATA[
 function init()
-{ 
-  var span = document.getElementsByTagName("span")[0]; 
+{
+  var span = document.getElementsByTagName("span")[0];
   var boxobj = document.getBoxObjectFor(span);
   try {
     boxobj.setPropertyAsSupports(undefined, undefined);

@@ -7,7 +7,7 @@
     circle {
       fill: #808080;
     }
-    
+
     line {
       stroke: #fff;
       stroke-width: 1.5px;

@@ -37,13 +37,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,23 +73,23 @@ var docName = 'elementgettagname';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
+*
 
-    The "getTagName()" method returns the 
+    The "getTagName()" method returns the
 
-   tagName of an element.    
+   tagName of an element.
 
-   
 
-   Invoke the "getTagName()" method one the 
 
-   root node. The value returned should be "staff". 
+   Invoke the "getTagName()" method one the
+
+   root node. The value returned should be "staff".
 
 
 * @author NIST
@@ -103,7 +103,7 @@ function elementgettagname() {
     var doc;
       var root;
       var tagname;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -113,21 +113,21 @@ function elementgettagname() {
 
       tagname = root.tagName;
 
-      
+
 	if(
-	
+
 	(builder.contentType == "image/svg+xml")
 
 	) {
 	assertEquals("svgTagName","svg",tagname);
-       
+
 	}
-	
+
 		else {
 			assertEquals("elementGetTagNameAssert","staff",tagname);
-       
+
 		}
-	
+
 }
 
 </script>
@@ -136,12 +136,12 @@ function elementgettagname() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/elementgettagname</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

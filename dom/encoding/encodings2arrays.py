@@ -14,7 +14,7 @@ def main(header, propFile):
         parts = line.split("=", 1)
         if len(parts) == 2 and len(parts[0]) > 0:
           mappings[parts[0].strip()] = parts[1].strip()
- 
+
   keys = mappings.keys()
   keys.sort()
 

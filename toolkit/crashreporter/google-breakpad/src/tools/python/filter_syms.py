@@ -61,10 +61,10 @@ class SymbolFileParser(object):
                path_handler=os.path):
     """Inits a SymbolFileParser to read symbol records from |input_stream| and
     write the processed output to |output_stream|.
-    
+
     |ignored_prefixes| contains a list of optional path prefixes that
     should be stripped from the final, normalized path outputs.
-    
+
     For example, if the Breakpad symbol file had all paths starting with a
     common prefix, such as:
       FILE 1 /b/build/src/foo.cc
@@ -73,7 +73,7 @@ class SymbolFileParser(object):
     file that contained:
       FILE 1 foo.cc
       FILE 2 bar.cc
-    
+
     Note that |ignored_prefixes| does not necessarily contain file system
     paths, as the contents of the DWARF DW_AT_comp_dir attribute is dependent
     upon the host system and compiler, and may contain additional information

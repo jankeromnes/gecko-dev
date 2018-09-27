@@ -12,7 +12,7 @@
  * ICU License - ICU 1.8.1 and later
  *
  * COPYRIGHT AND PERMISSION NOTICE
- * 
+ *
  * Copyright (c) 1995-2009 International Business Machines Corporation and
  * others
  *
@@ -44,7 +44,7 @@
  * copyright holder.
  *
  * All trademarks and registered trademarks mentioned herein are the property
- * of their respective owners. 
+ * of their respective owners.
  */
 
 #include "gfxScriptItemizer.h"
@@ -89,7 +89,7 @@ gfxScriptItemizer::pop()
 
     pushCount -= 1;
     parenSP = DEC1(parenSP);
-  
+
     /* If the stack is now empty, reset the stack
        pointers to their initial values.
      */

@@ -9,7 +9,7 @@ features: [caller]
 ---*/
 
     var called = false;
-    
+
     function test1(flag) {
         if (flag!==true) {
             test2();
@@ -18,15 +18,15 @@ features: [caller]
         }
     }
 
-    function test2() {  
+    function test2() {
        if (arguments.callee.caller===undefined) {
          called = true;  //Extension not supported - fake it
-       } else {     
+       } else {
          var explicit = arguments.callee.caller;
          explicit(true);
        }
     }
-    
+
     test1();
 
 assert(called, 'called !== true');

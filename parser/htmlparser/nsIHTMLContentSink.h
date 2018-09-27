@@ -15,13 +15,13 @@
  * model.
  *
  * After the tokenizer completes, the parser iterates over
- * the known token list. As the parser identifies valid 
+ * the known token list. As the parser identifies valid
  * elements, it calls the contentsink interface to notify
  * the content model that a new node or child node is being
  * created and added to the content model.
  *
  * The HTMLContentSink interface assumes 4 underlying
- * containers: HTML, HEAD, BODY and FRAMESET. Before 
+ * containers: HTML, HEAD, BODY and FRAMESET. Before
  * accessing any these, the parser will call the appropriate
  * OpennsIHTMLContentSink method: OpenHTML,OpenHead,OpenBody,OpenFrameSet;
  * likewise, the ClosensIHTMLContentSink version will be called when the
@@ -38,8 +38,8 @@
  *
  * Containers within the body are Opened and Closed
  * using the OpenContainer(...) and CloseContainer(...) calls.
- * It is assumed that the document or contentSink is 
- * maintaining its state to manage where new content should 
+ * It is assumed that the document or contentSink is
+ * maintaining its state to manage where new content should
  * be added to the underlying document.
  *
  * NOTE: OpenHTML() and OpenBody() may get called multiple times
@@ -59,7 +59,7 @@
  * This interface is OBSOLETE and in the process of being REMOVED.
  * Do NOT implement!
  */
-class nsIHTMLContentSink : public nsIContentSink 
+class nsIHTMLContentSink : public nsIContentSink
 {
 public:
 
@@ -71,7 +71,7 @@ public:
    * This method is used to open a generic container in the sink.
    *
    * @update 4/1/98 gess
-   */     
+   */
   NS_IMETHOD OpenContainer(ElementType aNodeType) = 0;
 
   /**
@@ -79,7 +79,7 @@ public:
    *  container tag has been consumed and needs to be closed.
    *
    * @param  aTag - The tag to be closed.
-   */     
+   */
   NS_IMETHOD CloseContainer(ElementType aTag) = 0;
 };
 

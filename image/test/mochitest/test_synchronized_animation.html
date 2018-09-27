@@ -55,7 +55,7 @@ function cleanUpAndFinish() {
 
 function frameUpdate(aRequest) {
   if (!gDispatched) {
-    Promise.resolve().then(function() { 
+    Promise.resolve().then(function() {
       gRanEvent = true;
     });
     gDispatched = true;

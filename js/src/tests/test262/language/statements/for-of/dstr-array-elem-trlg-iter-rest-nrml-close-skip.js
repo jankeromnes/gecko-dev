@@ -58,7 +58,7 @@ iterable[Symbol.iterator] = function() {
 var counter = 0;
 
 for ([ x , ...y ] of [iterable]) {
-  
+
   counter += 1;
 }
 

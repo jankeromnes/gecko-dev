@@ -11,7 +11,7 @@ index a7a40b8..566d9fb 100644
 @@ -407,6 +407,10 @@ _cairo_xlib_display_get (Display *dpy,
  	display->buggy_pad_reflect = TRUE;
      }
- 
+
 +    /* gradients don't seem to work */
 +    display->buggy_gradients = TRUE;
 +

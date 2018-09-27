@@ -47,10 +47,10 @@ extern size_t ia32_table_lookup( unsigned char *buf, size_t buf_len,
 #define SIB_SCALE_NOBASE    0x00
 
 /* Convenience struct for modR/M bitfield */
-struct modRM_byte {  
+struct modRM_byte {
    unsigned int mod : 2;
    unsigned int reg : 3;
-   unsigned int rm  : 3; 
+   unsigned int rm  : 3;
 };
 
 /* Convenience struct for SIB bitfield */
@@ -91,7 +91,7 @@ static int ia32_invariant_modrm( unsigned char *in, unsigned char *out,
 
 	op->type = op_expression;
 	op->flags |= op_pointer;
-	if ( ! mode_16 && modrm.rm == MODRM_RM_SIB && 
+	if ( ! mode_16 && modrm.rm == MODRM_RM_SIB &&
 			      modrm.mod != MODRM_MOD_NOEA ) {
 		size ++;
 		byte_decode(*cin, (struct modRM_byte *)(void*)&sib);
@@ -119,7 +119,7 @@ static int ia32_invariant_modrm( unsigned char *in, unsigned char *out,
 		}
 	} else if (modrm.mod && modrm.mod < 3) {
 		if (modrm.mod == MODRM_MOD_DISP8) {	 /* offset in disp */
-			*c = *cin;	
+			*c = *cin;
 			size += 1;
 		} else if ( mode_16 ) {
 			*s = (* ((unsigned short *) cin));
@@ -137,8 +137,8 @@ static int ia32_invariant_modrm( unsigned char *in, unsigned char *out,
 }
 
 
-static int ia32_decode_invariant( unsigned char *buf, size_t buf_len, 
-				ia32_insn_t *t, unsigned char *out, 
+static int ia32_decode_invariant( unsigned char *buf, size_t buf_len,
+				ia32_insn_t *t, unsigned char *out,
 				unsigned int prefixes, x86_invariant_t *inv) {
 
 	unsigned int addr_size, op_size, mode_16;
@@ -157,9 +157,9 @@ static int ia32_decode_invariant( unsigned char *buf, size_t buf_len,
 	}
 
 	for (x = 0; x < 3; x++) {
-		inv->operands[x].access = (enum x86_op_access) 
+		inv->operands[x].access = (enum x86_op_access)
 						OP_PERM(op_flags[x]);
-		inv->operands[x].flags = (enum x86_op_flags) 
+		inv->operands[x].flags = (enum x86_op_flags)
 						(OP_FLAGS(op_flags[x]) >> 12);
 
 		switch (op_flags[x] & OPTYPE_MASK) {
@@ -193,7 +193,7 @@ static int ia32_decode_invariant( unsigned char *buf, size_t buf_len,
 			case OPTYPE_pd: case OPTYPE_sd:
 				size = 16;
 				break;
-			case OPTYPE_m:	
+			case OPTYPE_m:
 				size = (addr_size == 4) ? 4 : 2;
 				break;
 			default:
@@ -204,8 +204,8 @@ static int ia32_decode_invariant( unsigned char *buf, size_t buf_len,
 		switch (type) {
 			case ADDRMETH_E: case ADDRMETH_M: case ADDRMETH_Q:
 			case ADDRMETH_R: case ADDRMETH_W:
-				modrm = 1;	
-				bytes += ia32_invariant_modrm( buf, out, 
+				modrm = 1;
+				bytes += ia32_invariant_modrm( buf, out,
 						mode_16, &inv->operands[x]);
 				break;
 			case ADDRMETH_C: case ADDRMETH_D: case ADDRMETH_G:
@@ -216,7 +216,7 @@ static int ia32_decode_invariant( unsigned char *buf, size_t buf_len,
 				break;
 			case ADDRMETH_A: case ADDRMETH_O:
 				/* pad with xF4's */
-				memset( &out[bytes + modrm], X86_WILDCARD_BYTE, 
+				memset( &out[bytes + modrm], X86_WILDCARD_BYTE,
 					size );
 				bytes += size;
 				inv->operands[x].type = op_offset;
@@ -229,20 +229,20 @@ static int ia32_decode_invariant( unsigned char *buf, size_t buf_len,
 				/* grab imm value */
 				if ((op_flags[x] & OPTYPE_MASK) == OPTYPE_v) {
 					/* assume this is an address */
-					memset( &out[bytes + modrm], 
+					memset( &out[bytes + modrm],
 						X86_WILDCARD_BYTE, size );
 				} else {
-					memcpy( &out[bytes + modrm], 
+					memcpy( &out[bytes + modrm],
 						&buf[bytes + modrm], size );
 				}
-					
+
 				bytes += size;
 				if ( type == ADDRMETH_J ) {
 					if ( size == 1 ) {
-						inv->operands[x].type = 
+						inv->operands[x].type =
 							op_relative_near;
 					} else {
-						inv->operands[x].type = 
+						inv->operands[x].type =
 							op_relative_far;
 					}
 					inv->operands[x].flags |= op_signed;
@@ -261,10 +261,10 @@ static int ia32_decode_invariant( unsigned char *buf, size_t buf_len,
 				inv->operands[x].flags |= op_signed |
 					  op_pointer | op_es_seg | op_string;
 				break;
-			case ADDRMETH_RR:	
+			case ADDRMETH_RR:
 				inv->operands[x].type = op_register;
 				break;
-			case ADDRMETH_II:	
+			case ADDRMETH_II:
 				inv->operands[x].type = op_immediate;
 				break;
 			default:
@@ -276,13 +276,13 @@ static int ia32_decode_invariant( unsigned char *buf, size_t buf_len,
 	return (bytes + modrm);
 }
 
-size_t ia32_disasm_invariant( unsigned char * buf, size_t buf_len, 
+size_t ia32_disasm_invariant( unsigned char * buf, size_t buf_len,
 		x86_invariant_t *inv ) {
 	ia32_insn_t *raw_insn = NULL;
 	unsigned int prefixes;
 	unsigned int type;
 	size_t size;
-	
+
 	/* Perform recursive table lookup starting with main table (0) */
 	size = ia32_table_lookup( buf, buf_len, 0, &raw_insn, &prefixes );
 	if ( size == INVALID_INSN || size > buf_len ) {
@@ -299,7 +299,7 @@ size_t ia32_disasm_invariant( unsigned char * buf, size_t buf_len,
         inv->type = (enum x86_insn_type) INS_TYPE(type);
 
 	/* handle operands */
-	size += ia32_decode_invariant( buf + size, buf_len - size, raw_insn, 
+	size += ia32_decode_invariant( buf + size, buf_len - size, raw_insn,
 					&buf[size - 1], prefixes, inv );
 
 	inv->size = size;

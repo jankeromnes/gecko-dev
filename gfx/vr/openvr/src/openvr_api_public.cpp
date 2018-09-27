@@ -70,7 +70,7 @@ uint32_t VR_InitInternal( EVRInitError *peError, vr::EVRApplicationType eApplica
 void VR_ShutdownInternal()
 {
 	std::lock_guard<std::recursive_mutex> lock( g_mutexSystem );
-	
+
 	if ( g_pHmdSystem )
 	{
 		g_pHmdSystem->Cleanup();

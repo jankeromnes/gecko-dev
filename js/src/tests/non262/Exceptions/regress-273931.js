@@ -29,7 +29,7 @@ catch (e)
     actual = ee.name;
   }
 }
- 
+
 reportCompare(expect, actual, status);
 
 status = summary + ' ' + inSection(2) + ' ';
@@ -49,7 +49,7 @@ catch (e)
     actual = ee.name;
   }
 }
- 
+
 reportCompare(expect, actual, status);
 
 status = summary + ' ' + inSection(3) + ' ';
@@ -70,5 +70,5 @@ catch (e)
     actual = ee.name;
   }
 }
- 
+
 reportCompare(expect, actual, status);

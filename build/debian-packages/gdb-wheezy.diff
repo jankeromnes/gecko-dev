@@ -16,7 +16,7 @@ diff -Nru gdb-7.12/debian/changelog gdb-7.12/debian/changelog
 + -- Mike Hommey <glandium@mozilla.com>  Wed, 07 Feb 2018 15:36:15 +0900
 +
  gdb (7.12-6) unstable; urgency=medium
- 
+
    * debian/patches: import 7.12 branch fixes
 diff -Nru gdb-7.12/debian/control gdb-7.12/debian/control
 --- gdb-7.12/debian/control	2017-01-17 20:01:41.000000000 +0900
@@ -34,11 +34,11 @@ diff -Nru gdb-7.12/debian/rules gdb-7.12/debian/rules
 --- gdb-7.12/debian/rules	2016-12-15 09:31:54.000000000 +0900
 +++ gdb-7.12/debian/rules	2018-02-07 15:36:15.000000000 +0900
 @@ -4,7 +4,6 @@
- 
+
  DEB_BUILDDIR := $(ALL_BUILDDIR)/objdir
  DEB_DH_INSTALL_SOURCEDIR := $(shell pwd)/debian/tmp
 -DEB_DH_STRIP_ARGS_gdb = --dbgsym-migration='gdb-dbg (<< 7.12-1~)'
- 
+
  # Override CDBS's default CFLAGS, which also includes -Wall; gdb
  # does not handle -Wunused well with -Werror, but defaults to
 @@ -35,8 +34,8 @@
@@ -49,17 +49,17 @@ diff -Nru gdb-7.12/debian/rules gdb-7.12/debian/rules
 -DEB_TARGET_GNU_TYPE := $(shell dpkg-architecture -qDEB_TARGET_GNU_TYPE)
 +DEB_TARGET_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
 +DEB_TARGET_GNU_TYPE := $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
- 
+
  # Cross configuration support.  Check for an environment variable
  # $GDB_TARGET, or a file debian/target.
 @@ -89,10 +88,6 @@
    arch_config_args := --with-libunwind-ia64
  endif
- 
+
 -ifneq (,$(filter $(DEB_HOST_ARCH),amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390x))
 -  arch_config_args += --with-babeltrace
 -endif
 -
  ifdef GDB_TARGET
    run_tests := no
- 
+

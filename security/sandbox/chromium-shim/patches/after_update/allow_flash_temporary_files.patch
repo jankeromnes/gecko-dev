@@ -16,13 +16,13 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_dispatcher.cc 
 +++ b/security/sandbox/chromium/sandbox/win/src/filesystem_dispatcher.cc
 @@ -221,16 +221,25 @@ bool FilesystemDispatcher::NtQueryAttrib
    params[FileName::BROKER] = ParamPickerMake(broker);
- 
+
    // To evaluate the policy we need to call back to the policy object. We
    // are just middlemen in the operation since is the FileSystemPolicy which
    // knows what to do.
    EvalResult result = policy_base_->EvalPolicy(IPC_NTQUERYATTRIBUTESFILE_TAG,
                                                 params.GetBase());
- 
+
 +  // If the policies forbid access (any result other than ASK_BROKER),
 +  // then check for user-granted access to file.
 +  if (ASK_BROKER != result &&
@@ -42,13 +42,13 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_dispatcher.cc 
      return true;
 @@ -261,16 +270,25 @@ bool FilesystemDispatcher::NtQueryFullAt
    params[FileName::BROKER] = ParamPickerMake(broker);
- 
+
    // To evaluate the policy we need to call back to the policy object. We
    // are just middlemen in the operation since is the FileSystemPolicy which
    // knows what to do.
    EvalResult result = policy_base_->EvalPolicy(
                            IPC_NTQUERYFULLATTRIBUTESFILE_TAG, params.GetBase());
- 
+
 +  // If the policies forbid access (any result other than ASK_BROKER),
 +  // then check for user-granted access to file.
 +  if (ASK_BROKER != result &&
@@ -68,13 +68,13 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_dispatcher.cc 
                                                         &nt_status)) {
 @@ -316,16 +334,26 @@ bool FilesystemDispatcher::NtSetInformat
    params[FileName::BROKER] = ParamPickerMake(broker);
- 
+
    // To evaluate the policy we need to call back to the policy object. We
    // are just middlemen in the operation since is the FileSystemPolicy which
    // knows what to do.
    EvalResult result = policy_base_->EvalPolicy(IPC_NTSETINFO_RENAME_TAG,
                                                 params.GetBase());
- 
+
 +  // If the policies forbid access (any result other than ASK_BROKER),
 +  // then check for user-granted write access to file.  We only permit
 +  // the FileRenameInformation action.
@@ -99,12 +99,12 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
 @@ -223,19 +223,16 @@ NTSTATUS WINAPI TargetNtQueryAttributesF
      InOutCountedBuffer file_info(file_attributes,
                                   sizeof(FILE_BASIC_INFORMATION));
- 
+
      uint32_t broker = FALSE;
      CountedParameterSet<FileName> params;
      params[FileName::NAME] = ParamPickerMake(name);
      params[FileName::BROKER] = ParamPickerMake(broker);
- 
+
 -    if (!QueryBroker(IPC_NTQUERYATTRIBUTESFILE_TAG, params.GetBase()))
 -      break;
 -
@@ -112,19 +112,19 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
      CrossCallReturn answer = {0};
      ResultCode code = CrossCall(ipc, IPC_NTQUERYATTRIBUTESFILE_TAG, name,
                                  attributes, file_info, &answer);
- 
+
      if (SBOX_ALL_OK != code)
        break;
- 
+
 @@ -290,19 +287,16 @@ NTSTATUS WINAPI TargetNtQueryFullAttribu
      InOutCountedBuffer file_info(file_attributes,
                                   sizeof(FILE_NETWORK_OPEN_INFORMATION));
- 
+
      uint32_t broker = FALSE;
      CountedParameterSet<FileName> params;
      params[FileName::NAME] = ParamPickerMake(name);
      params[FileName::BROKER] = ParamPickerMake(broker);
- 
+
 -    if (!QueryBroker(IPC_NTQUERYFULLATTRIBUTESFILE_TAG, params.GetBase()))
 -      break;
 -
@@ -132,19 +132,19 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
      CrossCallReturn answer = {0};
      ResultCode code = CrossCall(ipc, IPC_NTQUERYFULLATTRIBUTESFILE_TAG, name,
                                  attributes, file_info, &answer);
- 
+
      if (SBOX_ALL_OK != code)
        break;
- 
+
 @@ -369,19 +363,16 @@ NTSTATUS WINAPI TargetNtSetInformationFi
      if (!NT_SUCCESS(ret) || !name)
        break;
- 
+
      uint32_t broker = FALSE;
      CountedParameterSet<FileName> params;
      params[FileName::NAME] = ParamPickerMake(name);
      params[FileName::BROKER] = ParamPickerMake(broker);
- 
+
 -    if (!QueryBroker(IPC_NTSETINFO_RENAME_TAG, params.GetBase()))
 -      break;
 -
@@ -152,7 +152,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
      // This is actually not an InOut buffer, only In, but using InOut facility
      // really helps to simplify the code.
      InOutCountedBuffer file_info_buffer(file_info, length);
- 
+
      SharedMemIPCClient ipc(memory);
      CrossCallReturn answer = {0};
      ResultCode code = CrossCall(ipc, IPC_NTSETINFO_RENAME_TAG, file,

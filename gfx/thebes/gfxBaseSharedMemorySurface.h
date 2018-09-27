@@ -110,8 +110,8 @@ public:
     }
 
 protected:
-    gfxBaseSharedMemorySurface(const mozilla::gfx::IntSize& aSize, long aStride, 
-                               gfxImageFormat aFormat, 
+    gfxBaseSharedMemorySurface(const mozilla::gfx::IntSize& aSize, long aStride,
+                               gfxImageFormat aFormat,
                                const Shmem& aShmem)
       : Base(aShmem.get<unsigned char>(), aSize, aStride, aFormat)
     {

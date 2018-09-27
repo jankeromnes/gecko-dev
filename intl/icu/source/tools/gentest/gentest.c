@@ -58,7 +58,7 @@ static UOption options[]={
   /*1*/ UOPTION_HELP_QUESTION_MARK,
   /*2*/ UOPTION_DESTDIR,
   /*3*/ UOPTION_DEF("genres", 'r', UOPT_NO_ARG),
-  /*4*/ UOPTION_DEF("javastuff", 'j', UOPT_NO_ARG),  
+  /*4*/ UOPTION_DEF("javastuff", 'j', UOPT_NO_ARG),
 };
 
 extern int
@@ -92,7 +92,7 @@ main(int argc, char* argv[]) {
     	return outputJavaStuff( argv[0], options[2].value );
     } else if ( options[3].doesOccur ) {
         return genres32( argv[0], options[2].value );
-    } else { 
+    } else {
         /* printf("Generating the test memory mapped file\n"); */
         createData(options[2].value, &errorCode);
     }
@@ -146,7 +146,7 @@ outputJavaStuff(const char* progname, const char *outputDir) {
     FILE *out;
 
     uprv_strcpy(file,outputDir);
-    if(*outputDir &&  /* don't put a trailing slash if outputDir is empty */ 
+    if(*outputDir &&  /* don't put a trailing slash if outputDir is empty */
         file[strlen(file)-1]!=U_FILE_SEP_CHAR) {
             uprv_strcat(file,U_FILE_SEP_STRING);
     }
@@ -184,7 +184,7 @@ outputJavaStuff(const char* progname, const char *outputDir) {
         fprintf(out, "        /* %s, %d */\n", udbg_enumName(UDBG_UDebugEnumType,t), t);
         fprintf(out, "        { \n");
         for(i=0;i<count;i++) {
-            fprintf(out, 
+            fprintf(out,
                 "           \"%s\", /* %d */ \n", udbg_enumName((UDebugEnumType)t,i), i);
         }
         fprintf(out, "        },\n");
@@ -197,7 +197,7 @@ outputJavaStuff(const char* progname, const char *outputDir) {
         fprintf(out, "        /* %s, %d */\n", udbg_enumName(UDBG_UDebugEnumType,t), t);
         fprintf(out, "        { \n");
         for(i=0;i<count;i++) {
-            fprintf(out, 
+            fprintf(out,
                 "           ");
             switch(t) {
 #if !UCONFIG_NO_FORMATTING

@@ -33,7 +33,7 @@ var init;
 
   if (false) function _f() {} else function f() {  }
 
-  
+
 }());
 
 assert.sameValue(init, undefined);

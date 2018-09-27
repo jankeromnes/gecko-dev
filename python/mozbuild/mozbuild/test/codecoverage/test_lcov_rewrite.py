@@ -375,7 +375,7 @@ class TestUrlFinder(unittest.TestCase):
             # Path with pp_info
             ('resource://gre/modules/AppConstants.jsm', ('toolkit/modules/AppConstants.jsm', {
                 '101,102': [
-                    'toolkit/modules/AppConstants.jsm', 
+                    'toolkit/modules/AppConstants.jsm',
                     135
                 ],
             })),

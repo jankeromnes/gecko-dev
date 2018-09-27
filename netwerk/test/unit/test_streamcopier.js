@@ -22,7 +22,7 @@ function run_test() {
   var ctx = {
   };
   ctx.wrappedJSObject = ctx;
-  
+
   var observer = {
     onStartRequest: function(aRequest, aContext) {
       Assert.equal(aContext.wrappedJSObject, ctx);
@@ -49,5 +49,5 @@ function run_test() {
   };
 
   streamCopier.asyncCopy(observer, ctx);
-  do_test_pending();  
+  do_test_pending();
 }

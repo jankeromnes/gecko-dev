@@ -8,7 +8,7 @@ var count = 0;
 function boom()
 {
   var r = document.body; while(r.firstChild) { r.removeChild(r.firstChild); }
-  
+
   document.body = document.createElementNS("http://www.w3.org/1999/xhtml", "body");
   var div = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
   var span = document.createElementNS("http://www.w3.org/1999/xhtml", "span");

@@ -1075,6 +1075,6 @@ function dummy2(){}
 function dummy3(){}
 
 actual = 'No Crash';
- 
+
 reportCompare(expect, actual, summary);
 

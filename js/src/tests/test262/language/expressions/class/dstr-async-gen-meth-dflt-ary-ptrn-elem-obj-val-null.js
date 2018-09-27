@@ -62,7 +62,7 @@ info: |
 
 var C = class {
   async *method([{ x }] = [null]) {
-    
+
   }
 };
 

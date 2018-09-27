@@ -7,7 +7,7 @@ var iframe;
 
 addEventListener("message", function(e) {
   mess = JSON.parse(e.data);
-  
+
   if ("img" in mess)
     img.src = mess.img;
   else if ("audio" in mess)

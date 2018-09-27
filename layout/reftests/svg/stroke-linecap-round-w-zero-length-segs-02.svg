@@ -3,7 +3,7 @@
      http://creativecommons.org/publicdomain/zero/1.0/
 -->
 <svg xmlns="http://www.w3.org/2000/svg" class="reftest-wait">
-  
+
   <title>Test invalidation for 'stroke-linecap: round' with zero length path segments</title>
 
   <!-- From https://bugzilla.mozilla.org/show_bug.cgi?id=1075399 for path and

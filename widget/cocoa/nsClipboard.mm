@@ -235,7 +235,7 @@ nsClipboard::TransferableFromPasteboard(nsITransferable *aTransferable, NSPasteb
       nsLinebreakHelpers::ConvertPlatformToDOMLinebreaks(flavorStr, &clipboardDataPtr, &signedDataLength);
       dataLength = signedDataLength;
 
-      // skip BOM (Byte Order Mark to distinguish little or big endian)      
+      // skip BOM (Byte Order Mark to distinguish little or big endian)
       char16_t* clipboardDataPtrNoBOM = (char16_t*)clipboardDataPtr;
       if ((dataLength > 2) &&
           ((clipboardDataPtrNoBOM[0] == 0xFEFF) ||
@@ -301,7 +301,7 @@ nsClipboard::TransferableFromPasteboard(nsITransferable *aTransferable, NSPasteb
         continue;
 
       // Figure out what type we're converting to
-      CFStringRef outputType = NULL; 
+      CFStringRef outputType = NULL;
       if (flavorStr.EqualsLiteral(kJPEGImageMime) ||
           flavorStr.EqualsLiteral(kJPGImageMime))
         outputType = CFSTR("public.jpeg");
@@ -343,7 +343,7 @@ nsClipboard::TransferableFromPasteboard(nsITransferable *aTransferable, NSPasteb
         nsCOMPtr<nsIInputStream> byteStream;
         NS_NewByteInputStream(getter_AddRefs(byteStream), (const char*)[encodedData bytes],
                                    [encodedData length], NS_ASSIGNMENT_COPY);
-  
+
         aTransferable->SetTransferData(flavorStr.get(), byteStream, sizeof(nsIInputStream*));
       }
 
@@ -351,7 +351,7 @@ nsClipboard::TransferableFromPasteboard(nsITransferable *aTransferable, NSPasteb
         CFRelease(dest);
       if (source)
         CFRelease(source);
-      
+
       if (successfullyConverted)
         break;
       else
@@ -458,8 +458,8 @@ nsClipboard::HasDataMatchingFlavors(const char** aFlavorList, uint32_t aLength,
             return NS_OK;
           }
         }
-      }      
-    }    
+      }
+    }
   }
 
   NSPasteboard* generalPBoard = [NSPasteboard generalPasteboard];
@@ -517,7 +517,7 @@ nsClipboard::SupportsFindClipboard(bool *_retval)
 // This function converts anything that other applications might understand into the system format
 // and puts it into a dictionary which it returns.
 // static
-NSDictionary* 
+NSDictionary*
 nsClipboard::PasteboardDictFromTransferable(nsITransferable* aTransferable)
 {
   NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NIL;
@@ -558,12 +558,12 @@ nsClipboard::PasteboardDictFromTransferable(nsITransferable* aTransferable)
         nativeString = [NSString stringWithCharacters:(const unichar*)data length:(dataSize / sizeof(char16_t))];
       else
         nativeString = [NSString string];
-      
+
       // be nice to Carbon apps, normalize the receiver's contents using Form C.
       nativeString = [nativeString precomposedStringWithCanonicalMapping];
 
       [pasteboardOutputDict setObject:nativeString forKey:pboardType];
-      
+
       free(data);
     }
     else if (flavorStr.EqualsLiteral(kCustomTypesMime)) {

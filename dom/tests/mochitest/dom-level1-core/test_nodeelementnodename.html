@@ -37,13 +37,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,27 +73,27 @@ var docName = 'nodeelementnodename';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
+*
 
-    The string returned by the "getNodeName()" method for an 
+    The string returned by the "getNodeName()" method for an
 
-    Element Node is its tagName. 
+    Element Node is its tagName.
 
-    
 
-    Retrieve the first Element Node(Root Node) of the   
 
-    DOM object and check the string returned by the            
+    Retrieve the first Element Node(Root Node) of the
+
+    DOM object and check the string returned by the
 
     "getNodeName()" method.   It should be equal to its
 
-    tagName. 
+    tagName.
 
 
 * @author NIST
@@ -107,7 +107,7 @@ function nodeelementnodename() {
     var doc;
       var elementNode;
       var elementName;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -117,21 +117,21 @@ function nodeelementnodename() {
 
       elementName = elementNode.nodeName;
 
-      
+
 	if(
-	
+
 	(builder.contentType == "image/svg+xml")
 
 	) {
 	assertEquals("svgNodeName","svg",elementName);
-       
+
 	}
-	
+
 		else {
 			assertEquals("nodeElementNodeNameAssert1","staff",elementName);
-       
+
 		}
-	
+
 }
 
 </script>
@@ -140,12 +140,12 @@ function nodeelementnodename() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/nodeelementnodename</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

@@ -13,7 +13,7 @@ Roadmap
   looking into that.
 
 - Delete separate 'unified alpha' path
- 
+
   DONE
 
 - Split images into their own files
@@ -28,7 +28,7 @@ Roadmap
 
   DONE
 
-- Generic 64 bit fetcher 
+- Generic 64 bit fetcher
 
   DONE
 
@@ -67,7 +67,7 @@ Split image types into their own source files. Export noop virtual
 reinit() call.  Call this whenever a property of the image changes.
 
 
-3. 
+3.
 
 Split the get_scanline() call into smaller functions that are
 initialized by the reinit() call.
@@ -114,7 +114,7 @@ Starting from a destination pixel (x, y), do
 	5 If the image has an alpha map, then
 
 		Call GetUntransformedPixel (x, y) on the alpha map
-		
+
 		add resulting alpha channel to p
 
 	   return p
@@ -128,7 +128,7 @@ Starting from a destination pixel (x, y), do
 		break;
 
 	  case BILINEAR:
-		return GetUnfilteredPixel (...) // 4 times 
+		return GetUnfilteredPixel (...) // 4 times
 		break;
 
 	  case CONVOLUTION:
@@ -175,7 +175,7 @@ So, the GetRawPixel
 It is then possible to build things like "get scanline" or "get tile" on
 top of this. In the simplest case, just repeatedly calling GetPixel()
 would work, but specialized get_scanline()s or get_tile()s could be
-plugged in for common cases. 
+plugged in for common cases.
 
 By not plugging anything in for images with access functions, we only
 have to compile the pixel functions twice, not the scanline functions.
@@ -206,12 +206,12 @@ Drawable:
 	2. Reconstruct a continuous image according to the filter
 	3. Transform according to the transform attribute
 	4. Position image such that src_x, src_y is over dst_x, dst_y
-	5. Sample once per destination pixel 
+	5. Sample once per destination pixel
 	6. Clip. If a pixel is not within the source clip, then no
 	   compositing takes place at that pixel. (Ie., it's *not*
 	   treated as 0).
 
-	Sampling a drawable: 
+	Sampling a drawable:
 
 	- If the channel does not have an alpha channel, the pixels in it
 	  are treated as opaque.
@@ -226,7 +226,7 @@ Gradient:
 		gradient according to the repeat attribute
 	2. Integrate the gradient across the plane according to type.
 	3. Transform according to transform attribute
-	4. Position gradient 
+	4. Position gradient
 	5. Sample once per destination pixel.
  	6. Clip
 
@@ -257,9 +257,9 @@ Possibly interesting additions:
 
 	  In principle the polygon image uses a 15x17 box filter for
 	  resampling. If we allow general resampling filters, then we
-	  get all the various antialiasing types for free. 
+	  get all the various antialiasing types for free.
 
-	  Bilinear downsampling looks terrible and could be much 
+	  Bilinear downsampling looks terrible and could be much
 	  improved by a resampling filter. NEAREST reconstruction
 	  combined with a box resampling filter is what GdkPixbuf
 	  does, I believe.
@@ -287,7 +287,7 @@ Possibly interesting additions:
 	  antialiasing, which is a simpler way to think about it. So
 	  resampling kernels may make sense for individual images, but
 	  not as a post-compositing step.
-	  
+
 	  Fullscreen AA is inefficient without chained compositing
 	  though. Consider an (image scaled up to oversample size IN
 	  some polygon) scaled down to screen size. With the current
@@ -326,7 +326,7 @@ Possibly interesting additions:
 	  Whether the alpha channel should be interpreted as luminance
           modulation or as coverage (intensity modulation). This is a
           bit of a departure from the rendering model though. It could
-	  also be considered whether it should be possible to have 
+	  also be considered whether it should be possible to have
 	  both channels in the same drawable.
 
 	- Alternative for component alpha
@@ -340,7 +340,7 @@ Possibly interesting additions:
 	  - Have 3 x oversampled mask
 
 	  - Scale it down by 3 horizontally, with [ 1/3, 1/3, 1/3 ]
-            resampling filter. 
+            resampling filter.
 
 	    Is this equivalent to just using a component alpha mask?
 
@@ -363,19 +363,19 @@ issues are
 
   may be one of the uglies names ever created.
 
-  coding style: 
+  coding style:
   	 use the one from cairo except that pixman uses this brace style:
-	 
+
 		while (blah)
 		{
 		}
 
 	Format do while like this:
 
-	       do 
+	       do
 	       {
 
-	       } 
+	       }
 	       while (...);
 
 - PIXMAN_COMPOSITE_RECT_GENERAL() is horribly complex
@@ -388,7 +388,7 @@ issues are
   	get_pixel()
 	get_scanline()
 
-- Much of the scanline fetching code is for formats that no one 
+- Much of the scanline fetching code is for formats that no one
   ever uses. a2r2g2b2 anyone?
 
   It would probably be worthwhile having a generic fetcher for any
@@ -416,9 +416,9 @@ issues are
 
   The fast path table should describe each fast path. Ie there should
   be bitfields indicating what things the fast path can handle, rather than
-  like now where it is only allowed to take one format per src/mask/dest. Ie., 
+  like now where it is only allowed to take one format per src/mask/dest. Ie.,
 
-  { 
+  {
     FAST_a8r8g8b8 | FAST_x8r8g8b8,
     FAST_null,
     FAST_x8r8g8b8,
@@ -426,14 +426,14 @@ issues are
     the_fast_path
   }
 
-There should then be *one* file that implements pixman_image_composite(). 
+There should then be *one* file that implements pixman_image_composite().
 This should do this:
 
      optimize_operator();
 
      convert 1x1 repeat to solid (actually this should be done at
      image creation time).
-     
+
      is there a useful fastpath?
 
 There should be a file called pixman-cpu.c that contains all the

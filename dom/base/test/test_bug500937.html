@@ -32,8 +32,8 @@ b.appendChild(d.createElementNS("http://www.w3.org/1999/xhtml", "source"));
 b.appendChild(d.createElementNS("http://www.w3.org/1999/xhtml", "param"));
 b.appendChild(d.createTextNode("\u00A0"));
 
-is(new XMLSerializer().serializeToString(d), 
-   '<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body><div></div><script><\/script><br /><source /><param />\u00A0</body></html>', 
+is(new XMLSerializer().serializeToString(d),
+   '<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body><div></div><script><\/script><br /><source /><param />\u00A0</body></html>',
    "XML DOM input to XMLSerializer");
 
 d = document.getElementById('iframe').contentWindow.document;
@@ -44,8 +44,8 @@ while(d.documentElement.previousSibling) {
 
 d.replaceChild(h, d.documentElement);
 
-is(new XMLSerializer().serializeToString(d),  
-   '<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body><div></div><script><\/script><br /><source /><param />\u00A0</body></html>', 
+is(new XMLSerializer().serializeToString(d),
+   '<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body><div></div><script><\/script><br /><source /><param />\u00A0</body></html>',
    "HTML DOM input to XMLSerializer");
 
 </script>

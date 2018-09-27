@@ -175,7 +175,7 @@ impl Pos {
 
     /// Like resolve, but the Pos **must** be non-none. Return its index.
     #[inline]
-    fn resolve_existing_index<Sz>(&self) -> usize 
+    fn resolve_existing_index<Sz>(&self) -> usize
         where Sz: Size
     {
         debug_assert!(!self.is_none(), "datastructure inconsistent: none where valid Pos expected");
@@ -253,7 +253,7 @@ impl<Sz> ShortHashProxy<Sz>
 /// for ch in "a short treatise on fungi".chars() {
 ///     *letters.entry(ch).or_insert(0) += 1;
 /// }
-/// 
+///
 /// assert_eq!(letters[&'s'], 2);
 /// assert_eq!(letters[&'t'], 3);
 /// assert_eq!(letters[&'u'], 1);
@@ -1919,7 +1919,7 @@ mod tests {
     #[test]
     fn entry() {
         let mut map = IndexMap::new();
-        
+
         map.insert(1, "1");
         map.insert(2, "2");
         {
@@ -1928,7 +1928,7 @@ mod tests {
             let e = e.or_insert("3");
             assert_eq!(e, &"3");
         }
-        
+
         let e = map.entry(2);
         assert_eq!(e.index(), 1);
         assert_eq!(e.key(), &2);

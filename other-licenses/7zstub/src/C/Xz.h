@@ -190,7 +190,7 @@ typedef struct
   SRes res;
   ECoderStatus status;
   // Bool SingleBufMode;
-  
+
   int finished[MIXCODER_NUM_FILTERS_MAX - 1];
   size_t pos[MIXCODER_NUM_FILTERS_MAX - 1];
   size_t size[MIXCODER_NUM_FILTERS_MAX - 1];
@@ -221,7 +221,7 @@ typedef struct
   unsigned indexPreSize;
 
   CXzStreamFlags streamFlags;
-  
+
   UInt32 blockHeaderSize;
   UInt64 packSize;
   UInt64 unpackSize;
@@ -279,7 +279,7 @@ void XzUnpacker_Free(CXzUnpacker *p);
       for()
         XzUnpacker_Code();
     }
-    
+
   Interface-2 : Direct output buffer:
     Use it, if you know exact size of decoded data, and you need
     whole xz unpacked data in one output buffer.
@@ -342,7 +342,7 @@ XzUnpacker_GetExtraSize() returns then number of uncofirmed bytes,
  if it's in (XZ_STATE_STREAM_HEADER) state or in (XZ_STATE_STREAM_PADDING) state.
 These bytes can be some bytes after xz archive, or
 it can be start of new xz stream.
- 
+
 Call XzUnpacker_GetExtraSize() after XzUnpacker_Code() function to detect real size of
 xz stream in two cases, if XzUnpacker_Code() returns:
   res == SZ_OK && status == CODER_STATUS_NEEDS_MORE_INPUT
@@ -379,7 +379,7 @@ typedef struct
   size_t inBufSize_ST;
   size_t outStep_ST;
   Bool ignoreErrors;
-  
+
   #ifndef _7ZIP_ST
   unsigned numThreads;
   size_t inBufSize_MT;

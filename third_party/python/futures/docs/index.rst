@@ -2,7 +2,7 @@
 ======================================================
 
 .. module:: concurrent.futures
-   :synopsis: Execute computations asynchronously using threads or processes. 
+   :synopsis: Execute computations asynchronously using threads or processes.
 
 The :mod:`concurrent.futures` module provides a high-level interface for
 asynchronously executing callables.
@@ -106,7 +106,7 @@ And:
         # This will never complete because there is only one worker thread and
         # it is executing this function.
         print(f.result())
-    
+
     executor = ThreadPoolExecutor(max_workers=1)
     executor.submit(wait_on_future)
 
@@ -122,20 +122,20 @@ ThreadPoolExecutor Example
 
     from concurrent import futures
     import urllib.request
-    
+
     URLS = ['http://www.foxnews.com/',
             'http://www.cnn.com/',
             'http://europe.wsj.com/',
             'http://www.bbc.co.uk/',
             'http://some-made-up-domain.com/']
-    
+
     def load_url(url, timeout):
         return urllib.request.urlopen(url, timeout=timeout).read()
-    
+
     with futures.ThreadPoolExecutor(max_workers=5) as executor:
         future_to_url = dict((executor.submit(load_url, url, 60), url)
                              for url in URLS)
-    
+
         for future in futures.as_completed(future_to_url):
             url = future_to_url[future]
             if future.exception() is not None:
@@ -245,7 +245,7 @@ The :class:`Future` class encapulates the asynchronous execution of a callable.
    If the future is cancelled before completing then :exc:`CancelledError` will
    be raised.
 
-   If the call completed without raising then ``None`` is returned.   
+   If the call completed without raising then ``None`` is returned.
 
 .. method:: Future.add_done_callback(fn)
 

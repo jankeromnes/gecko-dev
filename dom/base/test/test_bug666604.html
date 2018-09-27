@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=666604
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=666604">Mozilla Bug 666604</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <a href="javascript:activationListener()" id="testlink">test</a>
 <pre id="test">
@@ -28,7 +28,7 @@ function hitEventLoop(times, next)
      next();
      return;
    }
- 
+
   SimpleTest.executeSoon(function() {
     hitEventLoop(times - 1, next);
   });
@@ -38,7 +38,7 @@ var activationListener;
 
 function dispatchClick(target, ctrl) {
   var e = document.createEvent("MouseEvent");
-  e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, 
+  e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0,
                    ctrl, false, false, false, 0, null);
   target.dispatchEvent(e);
 }
@@ -47,7 +47,7 @@ function dispatchReturn(target, ctrl) {
   var e = document.createEvent("KeyboardEvent");
   e.initKeyEvent("keypress", true, true, window, ctrl, false,
                  false, false, 13, 0);
-  target.dispatchEvent(e);                
+  target.dispatchEvent(e);
 }
 
 function dispatchDOMActivate(target) {

@@ -89,7 +89,7 @@ NS_InvokeByIndex:
 
 
         # Call invoke_copy_to_stack(uint64_t* gpregs, double* fpregs,
-        #                           uint32_t paramCount, nsXPTCVariant* s, 
+        #                           uint32_t paramCount, nsXPTCVariant* s,
         #                           uint64_t* d))
 
         # r5, r6 are passed through intact (paramCount, params)
@@ -108,7 +108,7 @@ NS_InvokeByIndex:
         ld      r9,0(r29)               # vtable (r29 is 'that')
         mr      r3,r29                  # self is first arg, obviously
 
-        sldi    r30,r30,3               # Find function descriptor 
+        sldi    r30,r30,3               # Find function descriptor
         add     r9,r9,r30
         ld      r12,0(r9)
 
@@ -124,13 +124,13 @@ NS_InvokeByIndex:
 #endif
 
         # Load FP and GP registers as required
-        ld      r4, -(23*8)(r31) 
-        ld      r5, -(22*8)(r31) 
-        ld      r6, -(21*8)(r31) 
-        ld      r7, -(20*8)(r31) 
-        ld      r8, -(19*8)(r31) 
-        ld      r9, -(18*8)(r31) 
-        ld      r10, -(17*8)(r31) 
+        ld      r4, -(23*8)(r31)
+        ld      r5, -(22*8)(r31)
+        ld      r6, -(21*8)(r31)
+        ld      r7, -(20*8)(r31)
+        ld      r8, -(19*8)(r31)
+        ld      r9, -(18*8)(r31)
+        ld      r10, -(17*8)(r31)
 
         lfd     f1, -(16*8)(r31)
         lfd     f2, -(15*8)(r31)

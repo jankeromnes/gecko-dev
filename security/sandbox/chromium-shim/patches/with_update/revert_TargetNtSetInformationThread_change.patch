@@ -31,7 +31,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/policy_target.cc b/securi
      // This is a revert to self.
      return STATUS_SUCCESS;
    } while (false);
- 
+
    return orig_SetInformationThread(thread, thread_info_class,
                                     thread_information,
                                     thread_information_bytes);

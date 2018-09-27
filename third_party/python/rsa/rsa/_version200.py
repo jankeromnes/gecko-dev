@@ -40,7 +40,7 @@ def gcd(p, q):
         if p < q: (p,q) = (q,p)
         (p,q) = (q, p % q)
     return p
-    
+
 
 def bytes2int(bytes):
     """Converts a list of bytes or a string to an integer
@@ -77,13 +77,13 @@ def int2bytes(number):
     while number > 0:
         string = "%s%s" % (byte(number & 0xFF), string)
         number /= 256
-    
+
     return string
 
 def to64(number):
     """Converts a number in the range of 0 to 63 into base 64 digit
     character in the range of '0'-'9', 'A'-'Z', 'a'-'z','-','_'.
-    
+
     >>> to64(10)
     'A'
     """
@@ -112,7 +112,7 @@ def to64(number):
 def from64(number):
     """Converts an ordinal character value in the range of
     0-9,A-Z,a-z,-,_ to a number in the range of 0-63.
-    
+
     >>> from64(49)
     1
     """
@@ -141,7 +141,7 @@ def from64(number):
 def int2str64(number):
     """Converts a number to a string of base64 encoded characters in
     the range of '0'-'9','A'-'Z,'a'-'z','-','_'.
-    
+
     >>> int2str64(123456789)
     '7MyqL'
     """
@@ -161,7 +161,7 @@ def int2str64(number):
 def str642int(string):
     """Converts a base64 encoded string into an integer.
     The chars of this string in in the range '0'-'9','A'-'Z','a'-'z','-','_'
-    
+
     >>> str642int('7MyqL')
     123456789
     """
@@ -200,10 +200,10 @@ def randint(minvalue, maxvalue):
 
     # Convert to bits, but make sure it's always at least min_nbits*2
     rangebits = max(rangebytes * 8, min_nbits * 2)
-    
+
     # Take a random number of bits between min_nbits and rangebits
     nbits = random.randint(min_nbits, rangebits)
-    
+
     return (read_random_int(nbits) % range) + minvalue
 
 def jacobi(a, b):
@@ -249,7 +249,7 @@ def randomized_primality_testing(n, k):
     for i in range(k):
         x = randint(1, n-1)
         if jacobi_witness(x, n): return False
-    
+
     return True
 
 def is_prime(number):
@@ -264,11 +264,11 @@ def is_prime(number):
     if randomized_primality_testing(number, 6):
         # Prime, according to Jacobi
         return True
-    
+
     # Not prime
     return False
 
-    
+
 def getprime(nbits):
     """Returns a prime number of max. 'math.ceil(nbits/8)*8' bits. In
     other words: nbits is rounded up to whole bytes.
@@ -330,7 +330,7 @@ def extended_gcd(a, b):
     y = 1
     lx = 1
     ly = 0
-    oa = a                             #Remember original a/b to remove 
+    oa = a                             #Remember original a/b to remove
     ob = b                             #negative values from return results
     while b != 0:
         q = long(a/b)
@@ -467,7 +467,7 @@ def chopstring(message, key, n, funcref):
         blocks += 1
 
     cypher = []
-    
+
     for bindex in range(blocks):
         offset = bindex * nbytes
         block = message[offset:offset+nbytes]
@@ -485,11 +485,11 @@ def gluechops(string, key, n, funcref):
     message = ""
 
     chops = decode64chops(string)  #Decode base64 strings into integer chops
-    
+
     for cpart in chops:
         mpart = funcref(cpart, key, n) #Decrypt each chop
         message += int2bytes(mpart)    #Combine decrypted strings into a msg
-    
+
     return message
 
 def encrypt(message, key):

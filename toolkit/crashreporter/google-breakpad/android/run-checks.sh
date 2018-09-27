@@ -395,7 +395,7 @@ fi
     if [ $? != 0 ]; then
       dump "Tools and processor unit tests failed as expected. \
 Use --verbose for results."
-    fi                           
+    fi
   fi
 )
 fail_panic "Client library unit test suite failed!"

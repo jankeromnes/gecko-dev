@@ -18,7 +18,7 @@
 .set f20,20; .set f21,21; .set f22,22; .set f23,23; .set f24,24
 .set f25,25; .set f26,26; .set f27,27; .set f28,28; .set f29,29
 .set f30,30; .set f31,31
-		      
+
         .section ".text"
 	.align 2
 	.globl NS_InvokeByIndex
@@ -60,12 +60,12 @@ NS_InvokeByIndex:
 	bl      invoke_copy_to_stack@local	// (args, paramCount, params, gpregs, fpregs)
 #ifndef __NO_FPRS__
 	lfd     f1,32(r30)			// load FP registers with method parameters
-	lfd     f2,40(r30)   
-	lfd     f3,48(r30)  
-	lfd     f4,56(r30)  
-	lfd     f5,64(r30)  
-	lfd     f6,72(r30)  
-	lfd     f7,80(r30)  
+	lfd     f2,40(r30)
+	lfd     f3,48(r30)
+	lfd     f4,56(r30)
+	lfd     f5,64(r30)
+	lfd     f6,72(r30)
+	lfd     f7,80(r30)
 	lfd     f8,88(r30)
 #endif
 	lwz     r3,8(r31)			// r3 <= that
@@ -75,19 +75,19 @@ NS_InvokeByIndex:
 	lwzx    r0,r5,r4			// r0 <= methodpointer ( == vtable + offset )
 
         lwz     r4,4(r30)			// load GP regs with method parameters
-	lwz     r5,8(r30)   
-	lwz     r6,12(r30)  
-	lwz     r7,16(r30)  
-	lwz     r8,20(r30)  
-	lwz     r9,24(r30)  
+	lwz     r5,8(r30)
+	lwz     r6,12(r30)
+	lwz     r7,16(r30)
+	lwz     r8,20(r30)
+	lwz     r9,24(r30)
 	lwz     r10,28(r30)
 
-	mtlr    r0				// copy methodpointer to LR    
+	mtlr    r0				// copy methodpointer to LR
 	blrl					// call method
-	
+
 	lwz     r30,16(r31)			// restore r30 & r31
 	lwz     r31,20(r31)
-	
+
 	lwz     r11,0(sp)			// clean up the stack
 	lwz     r0,4(r11)
 	mtlr    r0

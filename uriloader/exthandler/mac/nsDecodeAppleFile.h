@@ -13,7 +13,7 @@
 #include "nsIOutputStream.h"
 
 /*
-** applefile definitions used 
+** applefile definitions used
 */
 #if PRAGMA_STRUCT_ALIGN
   #pragma options align=mac68k
@@ -37,7 +37,7 @@
 /*
 ** data type used in the header decoder.
 */
-typedef struct ap_header 
+typedef struct ap_header
 {
 	int32_t 	magic;
 	int32_t   version;
@@ -46,15 +46,15 @@ typedef struct ap_header
 
 } ap_header;
 
-typedef struct ap_entry 
+typedef struct ap_entry
 {
 	int32_t   id;
 	int32_t	  offset;
 	int32_t	  length;
-	
+
 } ap_entry;
 
-typedef struct ap_dates 
+typedef struct ap_dates
 {
 	int32_t create, modify, backup, access;
 
@@ -79,21 +79,21 @@ class nsDecodeAppleFile : public nsIOutputStream
 public:
   NS_DECL_THREADSAFE_ISUPPORTS
   NS_DECL_NSIOUTPUTSTREAM
-  
+
   nsDecodeAppleFile();
   virtual ~nsDecodeAppleFile();
-  
+
   MOZ_MUST_USE nsresult Initialize(nsIOutputStream *output, nsIFile *file);
-  
+
 private:
   #define MAX_BUFFERSIZE    1024
   enum ParserState {parseHeaders, parseEntries, parseLookupPart, parsePart, parseSkipPart,
                     parseDataFork, parseResourceFork, parseWriteThrough};
-  
+
   nsCOMPtr<nsIOutputStream> m_output;
   FSSpec            m_fsFileSpec;
   SInt16            m_rfRefNum;
-  
+
   unsigned char *   m_dataBuffer;
   int32_t           m_dataBufferLength;
   ParserState       m_state;
@@ -104,11 +104,11 @@ private:
   int32_t           m_totalDataForkWritten;
   int32_t           m_totalResourceForkWritten;
   bool              m_headerOk;
-  
+
   int32_t           m_currentPartID;
   int32_t           m_currentPartLength;
   int32_t           m_currentPartCount;
-  
+
   Str255            m_comment;
   ap_dates          m_dates;
   FInfo             m_finderInfo;

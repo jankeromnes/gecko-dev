@@ -1,4 +1,4 @@
-!  
+!
 ! This Source Code Form is subject to the terms of the Mozilla Public
 ! License, v. 2.0. If a copy of the MPL was not distributed with this
 ! file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -78,25 +78,25 @@ TwoToMinus32:
 !    3		      ! * License Version 1.1 (the "License"); you may not use this file
 !    4		      ! * except in compliance with the License. You may obtain a copy of
 !    5		      ! * the License at http://www.mozilla.org/MPL/
-!    6		      ! * 
+!    6		      ! *
 !    7		      ! * Software distributed under the License is distributed on an "AS
 !    8		      ! * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
 !    9		      ! * implied. See the License for the specific language governing
 !   10		      ! * rights and limitations under the License.
-!   11		      ! * 
+!   11		      ! *
 !   12		      ! * The Original Code is SPARC optimized Montgomery multiply functions.
 !   13		      ! *
 !   14		      ! * The Initial Developer of the Original Code is Sun Microsystems Inc.
-!   15		      ! * Portions created by Sun Microsystems Inc. are 
+!   15		      ! * Portions created by Sun Microsystems Inc. are
 !   16		      ! * Copyright (C) 1999-2000 Sun Microsystems Inc.  All Rights Reserved.
-!   17		      ! * 
+!   17		      ! *
 !   18		      ! * Contributor(s):
 !   19		      ! *	Netscape Communications Corporation
-!   20		      ! * 
+!   20		      ! *
 !   21		      ! * Alternatively, the contents of this file may be used under the
 !   22		      ! * terms of the GNU General Public License Version 2 or later (the
-!   23		      ! * "GPL"), in which case the provisions of the GPL are applicable 
-!   24		      ! * instead of those above.	If you wish to allow use of your 
+!   23		      ! * "GPL"), in which case the provisions of the GPL are applicable
+!   24		      ! * instead of those above.	If you wish to allow use of your
 !   25		      ! * version of this file only under the terms of the GPL and not to
 !   26		      ! * allow others to use your version of this file under the MPL,
 !   27		      ! * indicate your decision by deleting the provisions above and
@@ -115,10 +115,10 @@ TwoToMinus32:
 !   46		      !double upper32(double);
 !   47		      !double lower32(double, double);
 !   48		      !double mod(double, double, double);
-!   50		      !void i16_to_d16_and_d32x4(const double * /*1/(2^16)*/, 
+!   50		      !void i16_to_d16_and_d32x4(const double * /*1/(2^16)*/,
 !   51		      !			  const double * /* 2^16*/,
 !   52		      !			  const double * /* 0 */,
-!   53		      !			  double *       /*result16*/, 
+!   53		      !			  double *       /*result16*/,
 !   54		      !			  double *       /* result32 */,
 !   55		      !			  float *  /*source - should be unsigned int*
 !   56		      !		          	       converted to float* */);
@@ -424,7 +424,7 @@ TwoToMinus32:
 /* 0x035c	     */		sllx	%g5,2,%g2
 /* 0x0360	     */		and	%g4,%g3,%g3
 /* 0x0364	     */		st	%g3,[%g1+%g2]
-/* 0x0368	     */		ret	! Result = 
+/* 0x0368	     */		ret	! Result =
 /* 0x036c	     */		restore	%g0,%g0,%g0
 /* 0x0370	   0 */		.type	conv_d16_to_i32,2
 /* 0x0370	     */		.size	conv_d16_to_i32,(.-conv_d16_to_i32)
@@ -564,7 +564,7 @@ TwoToMinus32:
 /* 0x019c	     */		ble,a,pt	%icc,.L900000211
 /* 0x01a0	     */		ldd	[%g4],%f8
                        .L77000140:
-/* 0x01a4	     */		retl	! Result = 
+/* 0x01a4	     */		retl	! Result =
 /* 0x01a8	     */		nop
 /* 0x01ac	   0 */		.type	conv_i32_to_d32,2
 /* 0x01ac	     */		.size	conv_i32_to_d32,(.-conv_i32_to_d32)
@@ -761,7 +761,7 @@ TwoToMinus32:
 /* 0x0264	     */		ble,a,pt	%icc,.L900000311
 /* 0x0268	     */		ldd	[%o5],%f0
                        .L77000150:
-/* 0x026c	     */		ret	! Result = 
+/* 0x026c	     */		ret	! Result =
 /* 0x0270	     */		restore	%g0,%g0,%g0
 /* 0x0274	   0 */		.type	conv_i32_to_d16,2
 /* 0x0274	     */		.size	conv_i32_to_d16,(.-conv_i32_to_d16)
@@ -789,7 +789,7 @@ TwoToMinus32:
 
 !  157		      !   }
 !  158		      !}
-!  161		      !void conv_i32_to_d32_and_d16(double *d32, double *d16, 
+!  161		      !void conv_i32_to_d32_and_d16(double *d32, double *d16,
 !  162		      !			     unsigned int *i32, int len)
 !  163		      !{
 !  164		      !int i = 0;
@@ -1094,7 +1094,7 @@ TwoToMinus32:
 /* 0x0448	     */		bl,a,pt	%icc,.L900000416
 /* 0x044c	     */		ldd	[%g1],%f2
                        .L77000164:
-/* 0x0450	     */		ret	! Result = 
+/* 0x0450	     */		ret	! Result =
 /* 0x0454	     */		restore	%g0,%g0,%g0
 /* 0x0458	   0 */		.type	conv_i32_to_d32_and_d16,2
 /* 0x0458	     */		.size	conv_i32_to_d32_and_d16,(.-conv_i32_to_d32_and_d16)
@@ -1294,7 +1294,7 @@ TwoToMinus32:
 /* 0x0228	 205 */		ble,pt	%icc,.L900000509
 /* 0x022c	     */		or	%g0,%o1,%g1
                        .L77000191:
-/* 0x0230	     */		ret	! Result = 
+/* 0x0230	     */		ret	! Result =
 /* 0x0234	     */		restore	%g0,%g0,%g0
 /* 0x0238	   0 */		.type	adjust_montf_result,2
 /* 0x0238	     */		.size	adjust_montf_result,(.-adjust_montf_result)
@@ -1390,7 +1390,7 @@ TwoToMinus32:
 !  252		      !	     pdtj[2*i]+=pdm1[i]*m2j+pdn[i]*digit;
 !  253		      !	   }
 !  254		      ! 	 if((jj==30)) {cleanup(dt,j/2+1,2*nlen+1); jj=0;}
-!  255		      !	 
+!  255		      !
 !  256		      !	 digit=mod(lower32(b,Zero)*dn0,TwoToMinus16,TwoTo16);
 !  257		      !       }
 !  258		      !   }
@@ -1826,7 +1826,7 @@ TwoToMinus32:
 	ldd [%i1+104],%f34
 	ldd [%i1+112],%f58
 
-	ldd [%o0+8],%f28	
+	ldd [%o0+8],%f28
 	ldd [%o0+104],%f38
 	ldd [%o0+112],%f60
 
@@ -2192,7 +2192,7 @@ TwoToMinus32:
 /* 0x0b98	     */		and	%g4,%g3,%g3
 /* 0x0b9c	     */		st	%g3,[%l2+%g2]
 
-!  317		      ! adjust_montf_result(result,nint,nlen); 
+!  317		      ! adjust_montf_result(result,nint,nlen);
 
 /* 0x0ba0	 317 */		sra	%l0,0,%g4
 /* 0x0ba4	     */		sllx	%g4,2,%g2
@@ -2339,7 +2339,7 @@ TwoToMinus32:
 /* 0x0db4	     */		ble,pt	%icc,.L900000644
 /* 0x0db8	     */		or	%g0,%o1,%g1
                        .L77000224:
-/* 0x0dbc	     */		ret	! Result = 
+/* 0x0dbc	     */		ret	! Result =
 /* 0x0dc0	     */		restore	%g0,%g0,%g0
 /* 0x0dc4	   0 */		.type	mont_mulf_noconv,2
 /* 0x0dc4	     */		.size	mont_mulf_noconv,(.-mont_mulf_noconv)

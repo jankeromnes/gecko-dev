@@ -33,13 +33,13 @@ Why which.py?
 `which.py` is a small GNU-which replacement. It has the following
 features:
 
-- it is portable (Windows, Linux, Mac OS X, Un*x); 
-- it understands PATHEXT and "App Paths" registration on Windows 
-  (i.e. it will find everything that `start` does from the command shell); 
-- it can print all matches on the PATH; 
+- it is portable (Windows, Linux, Mac OS X, Un*x);
+- it understands PATHEXT and "App Paths" registration on Windows
+  (i.e. it will find everything that `start` does from the command shell);
+- it can print all matches on the PATH;
 - it can note "near misses" on the PATH (e.g. files that match but may
-  not, say, have execute permissions); and 
-- it can be used as a Python module. 
+  not, say, have execute permissions); and
+- it can be used as a Python module.
 
 I also would be happy to have this be a replacement for the `which.py` in the
 Python CVS tree at `dist/src/Tools/scripts/which.py` which is
@@ -80,9 +80,9 @@ following:
 
 - Python 2.4 users might want to use Python's new '-m' switch and setup
   and alias:
-  
+
         alias which='python -m which'
-  
+
   or stub script like this:
 
         #!/bin/sh
@@ -96,7 +96,7 @@ Currently the best intro to using `which.py` as a module is its module
 documentation.  Either install `which.py` and run:
 
     pydoc which
-    
+
 take a look at `which.py` in your editor or [here](which.py), or read
 on. Most commonly you'll use the `which()` method to find an
 executable:
@@ -116,7 +116,7 @@ There is an "App Paths" area of the registry where the `start` command
 will find "registered" executables -- `which.py` mimics this.)
 
     >>> which.whichall("perl", verbose=True)
-    [('/usr/local/bin/perl', 'from PATH element 10'), 
+    [('/usr/local/bin/perl', 'from PATH element 10'),
      ('/usr/bin/perl', 'from PATH element 15')]
 
 You can restrict the searched path:
@@ -128,7 +128,7 @@ There is a generator interface:
 
     >>> for perl in which.whichgen("perl"):
     ...     print "found a perl here:", perl
-    ... 
+    ...
     found a perl here: /usr/local/bin/perl
     found a perl here: /usr/bin/perl
 
@@ -138,10 +138,10 @@ An exception is raised if your executable is not found:
     Traceback (most recent call last):
       ...
     which.WhichError: Could not find 'fuzzywuzzy' on the path.
-    >>> 
+    >>>
 
 There are some other options too:
-    
+
     >>> help(which.which)
     ...
 

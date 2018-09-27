@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   try
   {
     new Function("switch(w) { case 2: with({}) let y; case 3: }");

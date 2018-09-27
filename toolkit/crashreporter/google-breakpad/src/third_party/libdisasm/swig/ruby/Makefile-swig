@@ -31,8 +31,8 @@ RUBY_SHADOW	=	$(BASE_NAME)_wrap.c
 #RUBY_SWIG	=	$(BASE_NAME).rb
 RUBY_OBJ	=	$(BASE_NAME)_wrap.o
 RUBY_INC	=	`ruby -e 'puts $$:.join("\n")' | tail -2 | head -1`
-#RUBY_LIB	=	
-#RUBY_DEST	=	
+#RUBY_LIB	=
+#RUBY_DEST	=
 
 #====================================================
 # TARGETS
@@ -63,6 +63,6 @@ install: $(RUBY_MOD)
 uninstall:
 
 # ==================================================================
-clean: 
+clean:
 	make clean || true
 	rm $(RUBY_SHADOW) $(RUBY_MAKEFILE) $(RUBY_MOD) $(RUBY_OBJ)

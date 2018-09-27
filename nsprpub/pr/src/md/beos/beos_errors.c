@@ -1489,6 +1489,6 @@ void _MD_hpux_map_sendfile_error(int oserror)
         default:
             prerror = PR_UNKNOWN_ERROR;
     }
-    PR_SetError(prerror, oserror); 
+    PR_SetError(prerror, oserror);
 }
 #endif /* HPUX11 */

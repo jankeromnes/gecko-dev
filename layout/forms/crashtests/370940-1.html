@@ -1,14 +1,14 @@
 ﻿<html class="reftest-wait">
 <head>
 <script>
-  
+
 var HTML_NS = "http://www.w3.org/1999/xhtml";
 
 function boom1()
 {
   var newSpan = document.createElementNS(HTML_NS, "span");
   document.body.appendChild(newSpan);
-  
+
   setTimeout(boom2, 30);
 }
 

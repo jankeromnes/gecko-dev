@@ -40,7 +40,7 @@ char nsFilePicker::mLastUsedDirectory[MAX_PATH+1] = { 0 };
 static const unsigned long kDialogTimerTimeout = 300;
 
 #define MAX_EXTENSION_LENGTH 10
-#define FILE_BUFFER_SIZE     4096 
+#define FILE_BUFFER_SIZE     4096
 
 typedef DWORD FILEOPENDIALOGOPTIONS;
 
@@ -107,7 +107,7 @@ public:
     if (mWnd)
       DestroyWindow(mWnd);
   }
-  
+
   inline HWND get() const { return mWnd; }
 private:
   HWND mWnd;
@@ -197,9 +197,9 @@ NS_IMPL_ISUPPORTS(nsFilePicker, nsIFilePicker)
 NS_IMETHODIMP nsFilePicker::Init(mozIDOMWindowProxy *aParent, const nsAString& aTitle, int16_t aMode)
 {
   nsCOMPtr<nsPIDOMWindowOuter> window = do_QueryInterface(aParent);
-  nsIDocShell* docShell = window ? window->GetDocShell() : nullptr;  
+  nsIDocShell* docShell = window ? window->GetDocShell() : nullptr;
   mLoadContext = do_QueryInterface(docShell);
-  
+
   return nsBaseFilePicker::Init(aParent, aTitle, aMode);
 }
 
@@ -273,7 +273,7 @@ nsFilePicker::OnTypeChange(IFileDialog *pfd)
     NS_ERROR("Could not retrieve the HWND for IFileDialog.");
     return S_OK;
   }
-  
+
   SetDialogHandle(hwnd);
   return S_OK;
 }
@@ -363,7 +363,7 @@ nsFilePicker::ShowFolderPicker(const nsString& aInitialDir)
   // options
   FILEOPENDIALOGOPTIONS fos = FOS_PICKFOLDERS;
   dialog->SetOptions(fos);
- 
+
   // initial strings
   dialog->SetTitle(mTitle.get());
 
@@ -383,7 +383,7 @@ nsFilePicker::ShowFolderPicker(const nsString& aInitialDir)
 
   AutoDestroyTmpWindow adtw((HWND)(mParentWidget.get() ?
     mParentWidget->GetNativeData(NS_NATIVE_TMP_WINDOW) : nullptr));
- 
+
   // display
   RefPtr<IShellItem> item;
   if (FAILED(dialog->Show(adtw.get())) ||
@@ -501,7 +501,7 @@ nsFilePicker::ShowFilePicker(const nsString& aInitialDir)
   if (!mDefaultFilename.IsEmpty()) {
     dialog->SetFileName(mDefaultFilename.get());
   }
-  
+
   // default extension to append to new files
   if (!mDefaultExtension.IsEmpty()) {
     dialog->SetDefaultExtension(mDefaultExtension.get());
@@ -662,7 +662,7 @@ nsFilePicker::GetFile(nsIFile **aFile)
       return NS_OK;
 
   nsCOMPtr<nsIFile> file(do_CreateInstance("@mozilla.org/file/local;1"));
-    
+
   NS_ENSURE_TRUE(file, NS_ERROR_FAILURE);
 
   file->InitWithPath(mUnicodeFile);
@@ -706,7 +706,7 @@ nsBaseWinFilePicker::SetDefaultString(const nsAString& aString)
     nameIndex ++;
   nameLength = mDefaultFilePath.Length() - nameIndex;
   mDefaultFilename.Assign(Substring(mDefaultFilePath, nameIndex));
-  
+
   if (nameLength > MAX_PATH) {
     int32_t extIndex = mDefaultFilePath.RFind(".");
     if (extIndex == kNotFound)

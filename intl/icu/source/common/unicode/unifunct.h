@@ -16,10 +16,10 @@
 #include "unicode/uobject.h"
 
 /**
- * \file 
+ * \file
  * \brief C++ API: Unicode Functor
  */
- 
+
 U_NAMESPACE_BEGIN
 
 class UnicodeMatcher;

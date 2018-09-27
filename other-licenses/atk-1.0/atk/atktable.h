@@ -174,7 +174,7 @@ AtkObject*        atk_table_get_row_header       (AtkTable         *table,
 AtkObject*        atk_table_get_summary          (AtkTable         *table);
 void              atk_table_set_caption          (AtkTable         *table,
                                                   AtkObject        *caption);
-void              atk_table_set_column_description 
+void              atk_table_set_column_description
                                                  (AtkTable         *table,
                                                   gint             column,
                                                   const gchar      *description);
@@ -206,7 +206,7 @@ gboolean          atk_table_remove_row_selection (AtkTable         *table,
                                                   gint             row);
 gboolean          atk_table_add_column_selection (AtkTable         *table,
                                                   gint             column);
-gboolean          atk_table_remove_column_selection  
+gboolean          atk_table_remove_column_selection
                                                  (AtkTable         *table,
                                                   gint             column);
 

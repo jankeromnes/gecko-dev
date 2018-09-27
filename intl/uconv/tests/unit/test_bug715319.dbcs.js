@@ -33,7 +33,7 @@ function test(inString) {
 
     var outLen = outString.length;
 
-    if (IsASCII(inString.charCodeAt(1)) && 
+    if (IsASCII(inString.charCodeAt(1)) &&
 	(outLen < 4 || outString.charCodeAt(outLen - 4) == 0xFFFD)) {
 	error(inString, outString, "ASCII input eaten in " + gConverter.charset);
     }

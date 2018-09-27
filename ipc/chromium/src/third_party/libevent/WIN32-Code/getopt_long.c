@@ -15,7 +15,7 @@
  *    contributors may be used to endorse or promote products derived from
  *    this software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS
  * IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
  * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE
@@ -146,7 +146,7 @@ getopt2(nargc, nargv, ostr)
 
 	if ((retval = getopt_internal(nargc, nargv, ostr)) == -2) {
 		retval = -1;
-		++optind; 
+		++optind;
 	}
 	return(retval);
 }
@@ -184,11 +184,11 @@ getopt_long(nargc, nargv, options, long_options, index)
 		} else
 			current_argv_len = strlen(current_argv);
 
-		for (i = 0; long_options[i].name; i++) { 
+		for (i = 0; long_options[i].name; i++) {
 			if (strncmp(current_argv, long_options[i].name, current_argv_len))
 				continue;
 
-			if (strlen(long_options[i].name) == (unsigned)current_argv_len) { 
+			if (strlen(long_options[i].name) == (unsigned)current_argv_len) {
 				match = i;
 				break;
 			}
@@ -224,7 +224,7 @@ getopt_long(nargc, nargv, options, long_options, index)
 		if (long_options[match].flag) {
 			*long_options[match].flag = long_options[match].val;
 			retval = 0;
-		} else 
+		} else
 			retval = long_options[match].val;
 		if (index)
 			*index = match;

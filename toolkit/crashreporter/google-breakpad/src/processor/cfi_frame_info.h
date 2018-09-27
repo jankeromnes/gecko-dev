@@ -66,7 +66,7 @@ class MemoryRegion;
 class CFIFrameInfo {
  public:
   // A map from register names onto values.
-  template<typename ValueType> class RegisterValueMap: 
+  template<typename ValueType> class RegisterValueMap:
     public map<string, ValueType> { };
 
   // Set the expression for computing a call frame address, return
@@ -106,7 +106,7 @@ class CFIFrameInfo {
 
  private:
 
-  // A map from register names onto evaluation rules. 
+  // A map from register names onto evaluation rules.
   typedef map<string, string> RuleMap;
 
   // In this type, a "postfix expression" is an expression of the sort
@@ -125,7 +125,7 @@ class CFIFrameInfo {
   // cfa_rule expression, above.
 
   // A postfix expression for computing the current frame's return
-  // address. 
+  // address.
   string ra_rule_;
 
   // For a register named REG, rules[REG] is a postfix expression
@@ -154,7 +154,7 @@ class CFIRuleParser {
     // The input specifies EXPRESSION as the recovery rule for register NAME.
     virtual void RegisterRule(const string &name, const string &expression) = 0;
   };
-    
+
   // Construct a parser which feeds its results to HANDLER.
   CFIRuleParser(Handler *handler) : handler_(handler) { }
 

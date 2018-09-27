@@ -25,7 +25,7 @@ ifdef BUILD_OPT
 endif
 
 NON_LD_FLAGS += -ieee_with_inexact
-OS_CFLAGS    += -DOSF1 -D_REENTRANT 
+OS_CFLAGS    += -DOSF1 -D_REENTRANT
 
 ifeq ($(USE_PTHREADS),1)
 	OS_CFLAGS += -pthread

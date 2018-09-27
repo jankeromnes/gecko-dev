@@ -76,7 +76,7 @@ TEST(ascii_string_compareTest, GreaterThan) {
   EXPECT_EQ(1, ascii_string_compare(L"xyz", "xy", 5, identity));
   EXPECT_EQ(1, ascii_string_compare(L"abc", "ABB", 5, tolowercase));
 }
-#endif  // WEBRTC_WIN 
+#endif  // WEBRTC_WIN
 
 TEST(string_trim_Test, Trimming) {
   EXPECT_EQ("temp", string_trim("\n\r\t temp \n\r\t"));

@@ -9,7 +9,7 @@
 
 #define COM_TRY_BEGIN try {
 #define COM_TRY_END } catch(...) { return E_OUTOFMEMORY; }
-  
+
 /*
 #define COM_TRY_END } \
   catch(const CNewException &) { return E_OUTOFMEMORY; } \

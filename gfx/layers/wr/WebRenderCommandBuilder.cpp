@@ -464,7 +464,7 @@ struct DIGroup
       combined = clip.ApplyNonRoundedIntersection(geometry->ComputeInvalidationRegion());
       aData->mGeometry = std::move(geometry);
 
-      GP("matrix: %f %f\n", aMatrix._31, aMatrix._32); 
+      GP("matrix: %f %f\n", aMatrix._31, aMatrix._32);
       GP("frame invalid invalidate: %s\n", aItem->Name());
       GP("old rect: %d %d %d %d\n",
              aData->mRect.x,

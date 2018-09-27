@@ -20,10 +20,10 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
-  
+
 
   var m = new Number(3);
-  function foo() { for (var i=0; i<20;i++) m.toString(); } 
+  function foo() { for (var i=0; i<20;i++) m.toString(); }
   foo();
 
 

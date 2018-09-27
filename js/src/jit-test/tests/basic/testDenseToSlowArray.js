@@ -10,7 +10,7 @@ function test_set_elem() {
             a[100*100] = i;
             bag.push(a);
         }
-        
+
         for (var i = 0; i != 100; ++i) {
             var a = [0];
             a[200 + i] = i;
@@ -18,9 +18,9 @@ function test_set_elem() {
         }
         return bag;
     }
-    
+
     var bag = f();
-    
+
     for (var i = 0; i != 100; ++i) {
         var a = bag[i];
         assertEq(a.length, 100 * 100 + 1);
@@ -28,7 +28,7 @@ function test_set_elem() {
         assertEq(a[0], 0);
         assertEq(1 + i in a, false);
     }
-    
+
     for (var i = 0; i != 100; ++i) {
         var a = bag[100 + i];
         assertEq(a.length, 200 + i + 1);
@@ -71,7 +71,7 @@ function test_reverse() {
             assertEq(j in a, false);
         }
     }
-    
+
 }
 
 function test_push() {
@@ -99,7 +99,7 @@ function test_push() {
     test(bag);
     for (var i = 0; i != bag.length; ++i) {
         var a = bag[i];
-        assertEq(a[0], 1); 
+        assertEq(a[0], 1);
         assertEq(a[a.length - 1], 2);
         for (var j = 1; j < a.length - 1; ++j) {
             assertEq(j in a, false);
@@ -132,9 +132,9 @@ function test_unshift() {
     test(bag);
     for (var i = 0; i != bag.length; ++i) {
         var a = bag[i];
-        assertEq(a[0], 1); 
-        assertEq(a[1], 0); 
-        assertEq(a[2], 2); 
+        assertEq(a[0], 1);
+        assertEq(a[1], 0);
+        assertEq(a[2], 2);
         for (var j = 3; j < a.length; ++j) {
             assertEq(j in a, false);
         }
@@ -166,11 +166,11 @@ function test_splice() {
     test(bag);
     for (var i = 0; i != bag.length; ++i) {
         var a = bag[i];
-        assertEq(a[0], 1); 
-        assertEq(a[1], "a"); 
-        assertEq(a[2], 100); 
-        assertEq(a[3], "c"); 
-        assertEq(a[4], 2); 
+        assertEq(a[0], 1);
+        assertEq(a[1], "a");
+        assertEq(a[2], 100);
+        assertEq(a[3], "c");
+        assertEq(a[4], 2);
         for (var j = 5; j < a.length; ++j) {
             assertEq(j in a, false);
         }

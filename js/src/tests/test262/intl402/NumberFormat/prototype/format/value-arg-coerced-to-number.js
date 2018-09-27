@@ -18,7 +18,7 @@ for (i in testData) {
     input = testData[i];
     number = +input;
     correctResult = formatter.format(number);
-    
+
     result = formatter.format(input);
     assert.sameValue(result, correctResult, 'Intl.NumberFormat does not convert other types to numbers. Input: "' + input + '".');
 }

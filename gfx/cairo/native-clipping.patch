@@ -9,18 +9,18 @@ index df063bf..819e53e 100644
 --- a/src/cairo-quartz-surface.c
 +++ b/src/cairo-quartz-surface.c
 @@ -39,6 +39,8 @@
- 
+
  #include "cairo-quartz-private.h"
  #include "cairo-surface-clipper-private.h"
 +#include "cairo-gstate-private.h"
 +#include "cairo-private.h"
- 
+
  #include <dlfcn.h>
- 
+
 @@ -3095,6 +3097,61 @@ cairo_quartz_surface_get_cg_context (cairo_surface_t *surface)
      return quartz->cgContext;
  }
- 
+
 +CGContextRef
 +cairo_quartz_get_cg_context_with_clip (cairo_t *cr)
 +{
@@ -76,9 +76,9 @@ index df063bf..819e53e 100644
 +
 +    CGContextRestoreGState (quartz->cgContext);
 +}
- 
+
  /* Debug stuff */
- 
+
 diff --git a/src/cairo-quartz.h b/src/cairo-quartz.h
 index e8b71ba..aa1cdd2 100644
 --- a/src/cairo-quartz.h
@@ -86,7 +86,7 @@ index e8b71ba..aa1cdd2 100644
 @@ -57,6 +57,12 @@ cairo_quartz_surface_create_for_cg_context (CGContextRef cgContext,
  cairo_public CGContextRef
  cairo_quartz_surface_get_cg_context (cairo_surface_t *surface);
- 
+
 +cairo_public CGContextRef
 +cairo_quartz_get_cg_context_with_clip (cairo_t *cr);
 +
@@ -94,7 +94,7 @@ index e8b71ba..aa1cdd2 100644
 +cairo_quartz_finish_cg_context_with_clip (cairo_t *cr);
 +
  #if CAIRO_HAS_QUARTZ_FONT
- 
+
  /*
 diff --git a/src/cairo-win32-surface.c b/src/cairo-win32-surface.c
 index d4575a3..c10e134 100644
@@ -110,11 +110,11 @@ index d4575a3..c10e134 100644
 +#include "cairo-private.h"
  #include <wchar.h>
  #include <windows.h>
- 
+
 @@ -1914,6 +1916,61 @@ cairo_win32_surface_get_dc (cairo_surface_t *surface)
      return NULL;
  }
- 
+
 +
 +HDC
 +cairo_win32_get_dc_with_clip (cairo_t *cr)
@@ -180,10 +180,10 @@ index 7d04d2a..c304f92 100644
 @@ -65,6 +65,9 @@ cairo_win32_surface_create_with_dib (cairo_format_t format,
  cairo_public HDC
  cairo_win32_surface_get_dc (cairo_surface_t *surface);
- 
+
 +cairo_public HDC
 +cairo_win32_get_dc_with_clip (cairo_t *cr);
 +
  cairo_public cairo_surface_t *
  cairo_win32_surface_get_image (cairo_surface_t *surface);
- 
+

@@ -52,5 +52,5 @@ catch(ex)
   expect = 'InternalError: allocation size overflow';
   actual = ex + '';
 }
- 
+
 reportCompare(expect, actual, summary);

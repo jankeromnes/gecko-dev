@@ -16,21 +16,21 @@ try {
 } catch(e) {
   if ((e instanceof SyntaxError) !== true) {
     $ERROR('#1.2: continue must throw SyntaxError. Actual ' + (e));
-  }  
+  }
 }
 
 //CHECK#2
 try {
   for (var i = 0; i <= 1; i++) {
     for (var j = 0; j <= 1; j++) {
-       eval("continue;");       
+       eval("continue;");
     }
   }
-  $ERROR('#2.1: continue must throw SyntaxError. Actual: ' + (eval("continue;")));    
+  $ERROR('#2.1: continue must throw SyntaxError. Actual: ' + (eval("continue;")));
 } catch(e) {
   if ((e instanceof SyntaxError) !== true) {
     $ERROR('#2.2: continue must throw SyntaxError. Actual: ' + (e));
-  }  
+  }
 }
 
 reportCompare(0, 0);

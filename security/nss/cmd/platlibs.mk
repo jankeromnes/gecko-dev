@@ -8,7 +8,7 @@ ifeq ($(BUILD_SUN_PKG), 1)
 # set RPATH-type linker instructions here so they can be used in the shared
 # version and in the mixed (static nss libs/shared NSPR libs) version.
 
-ifeq ($(OS_ARCH), SunOS) 
+ifeq ($(OS_ARCH), SunOS)
 ifeq ($(USE_64), 1)
 EXTRA_SHARED_LIBS += -R '$$ORIGIN/../lib:/usr/lib/mps/secv1/64:/usr/lib/mps/64'
 else
@@ -29,7 +29,7 @@ endif # BUILD_SUN_PKG
 ifdef NSS_DISABLE_DBM
 DBMLIB = $(NULL)
 else
-DBMLIB = $(DIST)/lib/$(LIB_PREFIX)dbm.$(LIB_SUFFIX) 
+DBMLIB = $(DIST)/lib/$(LIB_PREFIX)dbm.$(LIB_SUFFIX)
 endif
 
 ifeq ($(NSS_BUILD_UTIL_ONLY),1)
@@ -170,8 +170,8 @@ EXTRA_LIBS += \
 	$(NSS_LIBS_4) \
 	$(NULL)
 
-ifeq ($(OS_ARCH), AIX) 
-EXTRA_SHARED_LIBS += -brtl 
+ifeq ($(OS_ARCH), AIX)
+EXTRA_SHARED_LIBS += -brtl
 endif
 
 # $(PROGRAM) has NO explicit dependencies on $(EXTRA_SHARED_LIBS)
@@ -216,8 +216,8 @@ EXTRA_LIBS += \
 	$(SECTOOL_LIB) \
 	$(NULL)
 
-ifeq ($(OS_ARCH), AIX) 
-EXTRA_SHARED_LIBS += -brtl 
+ifeq ($(OS_ARCH), AIX)
+EXTRA_SHARED_LIBS += -brtl
 endif
 
 # $(PROGRAM) has NO explicit dependencies on $(EXTRA_SHARED_LIBS)

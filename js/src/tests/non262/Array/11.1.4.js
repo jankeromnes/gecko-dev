@@ -27,7 +27,7 @@ for (prop in array)
   }
 }
 reportCompare(expect, actual, status);
- 
+
 status = summary + ' ' + inSection(2) + ' [,,1] ';
 array = [,,1];
 actual = '';
@@ -53,7 +53,7 @@ for (prop in array)
   }
 }
 reportCompare(expect, actual, status);
- 
+
 status = summary + ' ' + inSection(4) + ' [1,,] ';
 array = [1,,];
 actual = '';

@@ -58,7 +58,7 @@ typedef struct _stack_t {
 
 } // namespace NSIS
 
-enum NSPIM 
+enum NSPIM
 {
   NSPIM_UNLOAD,
   NSPIM_GUIUNLOAD,

@@ -47,7 +47,7 @@ TracingListener.prototype = {
 
   onStopRequest: function(request, context, statusCode) {
     dump("*** tracing listener onStopRequest\n");
-    
+
     Assert.equal(gotOnStartRequest, true);
 
     try {
@@ -58,10 +58,10 @@ TracingListener.prototype = {
       var input = pipe.inputStream;
       sin.init(input);
       Assert.equal(sin.available(), originalBody.length);
-    
+
       var result = sin.read(originalBody.length);
       Assert.equal(result, originalBody);
-    
+
       input.close();
     } catch (e) {
       dump("TracingListener.onStopRequest swallowing exception: " + e + "\n");
@@ -97,14 +97,14 @@ HttpResponseExaminer.prototype = {
     dump("In HttpResponseExaminer.observe\n");
     try {
       subject.QueryInterface(Ci.nsITraceableChannel);
-      
+
       var tee = Cc["@mozilla.org/network/stream-listener-tee;1"].
           createInstance(Ci.nsIStreamListenerTee);
       var newListener = new TracingListener();
       pipe = Cc["@mozilla.org/pipe;1"].createInstance(Ci.nsIPipe);
       pipe.init(false, false, 0, 0xffffffff, null);
       streamSink = pipe.outputStream;
-      
+
       var originalListener = subject.setNewListener(tee);
       tee.init(originalListener, streamSink, newListener);
     } catch(e) {

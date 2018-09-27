@@ -303,7 +303,7 @@ int main(int argc,char *argv[])
 				(old[scsc+lastoffset] == newbuf[scsc]))
 				oldscore++;
 
-			if(((len==oldscore) && (len!=0)) || 
+			if(((len==oldscore) && (len!=0)) ||
 				(len>oldscore+10)) break;
 
 			if((scan+lastoffset<oldsize) &&

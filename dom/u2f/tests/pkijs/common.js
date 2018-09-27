@@ -5,39 +5,39 @@
  *
  * Author 2014-2015, Yury Strozhevsky <www.strozhevsky.com>.
  *
- * Redistribution and use in source and binary forms, with or without modification, 
+ * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, 
+ * 1. Redistributions of source code must retain the above copyright notice,
  *    this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
  *
- * 3. Neither the name of the copyright holder nor the names of its contributors 
- *    may be used to endorse or promote products derived from this software without 
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software without
  *    specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
- * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
- * OF SUCH DAMAGE. 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE.
  *
  */
 (
 function(in_window)
 {
     //**************************************************************************************
-    // #region Declaration of global variables 
+    // #region Declaration of global variables
     //**************************************************************************************
-    // #region "org" namespace 
+    // #region "org" namespace
     if(typeof in_window.org === "undefined")
         in_window.org = {};
     else
@@ -45,9 +45,9 @@ function(in_window)
         if(typeof in_window.org !== "object")
             throw new Error("Name org already exists and it's not an object");
     }
-    // #endregion 
+    // #endregion
 
-    // #region "org.pkijs" namespace 
+    // #region "org.pkijs" namespace
     if(typeof in_window.org.pkijs === "undefined")
         in_window.org.pkijs = {};
     else
@@ -55,15 +55,15 @@ function(in_window)
         if(typeof in_window.org.pkijs !== "object")
             throw new Error("Name org.pkijs already exists and it's not an object" + " but " + (typeof in_window.org.pkijs));
     }
-    // #endregion 
+    // #endregion
 
-    // #region "local" namespace 
+    // #region "local" namespace
     var local = {};
-    // #endregion   
+    // #endregion
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Settings for "crypto engine" 
+    // #region Settings for "crypto engine"
     //**************************************************************************************
     local.engine = {
         name: "none",
@@ -115,9 +115,9 @@ function(in_window)
         return local.engine;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
-    // #region Declaration of common functions 
+    // #region Declaration of common functions
     //**************************************************************************************
     in_window.org.pkijs.emptyObject =
     function()
@@ -309,7 +309,7 @@ function(in_window)
         /// <summary>Create an ArrayBuffer from string having hexdecimal codes</summary>
         /// <param name="hexString" type="String">String to create ArrayBuffer from</param>
 
-        // #region Initial variables 
+        // #region Initial variables
         var stringLength = hexString.length;
 
         var resultBuffer = new ArrayBuffer(stringLength >> 1);
@@ -342,9 +342,9 @@ function(in_window)
 
         var j = 0;
         var temp = 0x00;
-        // #endregion 
+        // #endregion
 
-        // #region Convert char-by-char 
+        // #region Convert char-by-char
         for(var i = 0; i < stringLength; i++)
         {
             if(!(i % 2))
@@ -357,7 +357,7 @@ function(in_window)
                 j++;
             }
         }
-        // #endregion 
+        // #endregion
 
         return resultBuffer;
     };
@@ -869,7 +869,7 @@ function(in_window)
                         result = "1.3.133.16.840.63.0.2"; // dhSinglePass-stdDH-sha1kdf-scheme
                         break;
                     case "SHA-256":
-                        result = "1.3.132.1.11.1"; // dhSinglePass-stdDH-sha256kdf-scheme 
+                        result = "1.3.132.1.11.1"; // dhSinglePass-stdDH-sha256kdf-scheme
                         break;
                     case "SHA-384":
                         result = "1.3.132.1.11.2"; // dhSinglePass-stdDH-sha384kdf-scheme
@@ -984,7 +984,7 @@ function(in_window)
             case "PBKDF2":
                 result = "1.2.840.113549.1.5.12";
                 break;
-            // #region Special case - OIDs for ECC curves 
+            // #region Special case - OIDs for ECC curves
             case "P-256":
                 result = "1.2.840.10045.3.1.7";
                 break;
@@ -994,7 +994,7 @@ function(in_window)
             case "P-521":
                 result = "1.3.132.0.35";
                 break;
-            // #endregion 
+            // #endregion
 
             default:
         }
@@ -1244,7 +1244,7 @@ function(in_window)
                     name: "PBKDF2"
                 };
                 break;
-            // #region Special case - OIDs for ECC curves 
+            // #region Special case - OIDs for ECC curves
             case "1.2.840.10045.3.1.7":
                 result = {
                     name: "P-256"
@@ -1260,7 +1260,7 @@ function(in_window)
                     name: "P-521"
                 };
                 break;
-            // #endregion 
+            // #endregion
 
             default:
         }
@@ -1329,12 +1329,12 @@ function(in_window)
         /// <summary>Create CMS ECDSA signature from WebCrypto ECDSA signature</summary>
         /// <param name="signatureBuffer" type="ArrayBuffer">WebCrypto result of "sign" function</param>
 
-        // #region Initial check for correct length 
+        // #region Initial check for correct length
         if((signatureBuffer.byteLength % 2) != 0)
             return new ArrayBuffer(0);
-        // #endregion 
+        // #endregion
 
-        // #region Initial variables 
+        // #region Initial variables
         var i = 0;
         var length = signatureBuffer.byteLength / 2; // There are two equal parts inside incoming ArrayBuffer
 
@@ -1349,9 +1349,9 @@ function(in_window)
         var s_view = new Uint8Array(s_buffer);
         var s_corrected_buffer;
         var s_corrected_view;
-        // #endregion   
+        // #endregion
 
-        // #region Get "r" part of ECDSA signature 
+        // #region Get "r" part of ECDSA signature
         for(; i < length; i++)
             r_view[i] = signatureView[i];
 
@@ -1370,9 +1370,9 @@ function(in_window)
             r_corrected_buffer = r_buffer;
             r_corrected_view = r_view;
         }
-        // #endregion 
+        // #endregion
 
-        // #region Get "s" part of ECDSA signature 
+        // #region Get "s" part of ECDSA signature
         for(; i < signatureBuffer.byteLength; i++)
             s_view[i - length] = signatureView[i];
 
@@ -1392,9 +1392,9 @@ function(in_window)
             s_corrected_buffer = s_buffer;
             s_corrected_view = s_view;
         }
-        // #endregion 
+        // #endregion
 
-        // #region Create ASN.1 structure of CMS ECDSA signature 
+        // #region Create ASN.1 structure of CMS ECDSA signature
         var r_integer = new in_window.org.pkijs.asn1.INTEGER();
         r_integer.value_block.is_hex_only = true;
         r_integer.value_block.value_hex = in_window.org.pkijs.copyBuffer(r_corrected_buffer);
@@ -1409,7 +1409,7 @@ function(in_window)
                 s_integer
             ]
         });
-        // #endregion   
+        // #endregion
 
         return asn1.toBER(false);
     };
@@ -1420,7 +1420,7 @@ function(in_window)
         /// <summary>Create a single ArrayBuffer from CMS ECDSA signature</summary>
         /// <param name="cmsSignature" type="in_window.org.pkijs.asn1.SEQUENCE">ASN.1 SEQUENCE contains CMS ECDSA signature</param>
 
-        // #region Initial variables 
+        // #region Initial variables
         var length = 0;
 
         var r_start = 0;
@@ -1428,9 +1428,9 @@ function(in_window)
 
         var r_length = cmsSignature.value_block.value[0].value_block.value_hex.byteLength;
         var s_length = cmsSignature.value_block.value[1].value_block.value_hex.byteLength;
-        // #endregion 
+        // #endregion
 
-        // #region Get length of final "ArrayBuffer" 
+        // #region Get length of final "ArrayBuffer"
         var r_view = new Uint8Array(cmsSignature.value_block.value[0].value_block.value_hex);
         if((r_view[0] === 0x00) && (r_view[1] & 0x80))
         {
@@ -1448,9 +1448,9 @@ function(in_window)
         }
         else
             length += s_length;
-        // #endregion 
+        // #endregion
 
-        // #region Copy values from CMS ECDSA signature 
+        // #region Copy values from CMS ECDSA signature
         var result = new ArrayBuffer(length);
         var result_view = new Uint8Array(result);
 
@@ -1459,7 +1459,7 @@ function(in_window)
 
         for(var i = s_start; i < s_length; i++)
             result_view[i - s_start + r_length - r_start] = s_view[i];
-        // #endregion 
+        // #endregion
 
         return result;
     };
@@ -1536,7 +1536,7 @@ function(in_window)
         return result;
     };
     //**************************************************************************************
-    // #endregion 
+    // #endregion
     //**************************************************************************************
 }
 )(typeof exports !== "undefined" ? exports : window);

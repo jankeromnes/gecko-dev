@@ -7,7 +7,7 @@
 author: Brian Terlson <brian.terlson@microsoft.com>
 esid: pending
 description: >
-  If the source code matching this production is strict code, it is a Syntax Error if BindingIdentifier is the IdentifierName arguments. 
+  If the source code matching this production is strict code, it is a Syntax Error if BindingIdentifier is the IdentifierName arguments.
 negative:
   phase: parse
   type: SyntaxError

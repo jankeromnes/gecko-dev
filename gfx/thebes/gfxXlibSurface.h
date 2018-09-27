@@ -104,7 +104,7 @@ public:
 protected:
     // if TakePixmap() has been called on this
     bool mPixmapTaken;
-    
+
     Display *mDisplay;
     Drawable mDrawable;
 

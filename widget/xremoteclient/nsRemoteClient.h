@@ -52,7 +52,7 @@ public:
    * string functions, so free it with free().
    *
    * @return true if succeeded, false if no running instance was found.
-   * 
+   *
    */
   virtual nsresult SendCommandLine(const char *aProgram, const char *aUsername,
                                    const char *aProfile,

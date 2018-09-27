@@ -6,7 +6,7 @@ diff --git a/media/libcubeb/include/cubeb.h b/media/libcubeb/include/cubeb.h
                           CHANNEL_BACK_LEFT | CHANNEL_BACK_RIGHT |
                           CHANNEL_SIDE_LEFT | CHANNEL_SIDE_RIGHT,
  };
- 
+
  /** Miscellaneous stream preferences. */
  typedef enum {
    CUBEB_STREAM_PREF_NONE     = 0x00, /**< No stream preferences are requested. */
@@ -22,7 +22,7 @@ diff --git a/media/libcubeb/include/cubeb.h b/media/libcubeb/include/cubeb.h
 +                                                          default device on OS
 +                                                          changes. */
  } cubeb_stream_prefs;
- 
+
  /** Stream format initialization parameters. */
  typedef struct {
    cubeb_sample_format format;   /**< Requested sample format.  One of
@@ -40,7 +40,7 @@ diff --git a/media/libcubeb/src/cubeb_wasapi.cpp b/media/libcubeb/src/cubeb_wasa
    if (rv != CUBEB_OK) {
      return rv;
    }
- 
+
 -  HRESULT hr = register_notification_client(stm.get());
 -  if (FAILED(hr)) {
 -    /* this is not fatal, we can still play audio, but we won't be able
@@ -57,14 +57,14 @@ diff --git a/media/libcubeb/src/cubeb_wasapi.cpp b/media/libcubeb/src/cubeb_wasa
 +      LOG("failed to register notification client, %lx", hr);
 +    }
    }
- 
+
    *stream = stm.release();
- 
+
    LOG("Stream init succesfull (%p)", *stream);
    return CUBEB_OK;
  }
- 
-@@ -1879,17 +1884,19 @@ void wasapi_stream_destroy(cubeb_stream 
+
+@@ -1879,17 +1884,19 @@ void wasapi_stream_destroy(cubeb_stream
    // Only free stm->emergency_bailout if we could join the thread.
    // If we could not join the thread, stm->emergency_bailout is true
    // and is still alive until the thread wakes up and exits cleanly.
@@ -72,16 +72,16 @@ diff --git a/media/libcubeb/src/cubeb_wasapi.cpp b/media/libcubeb/src/cubeb_wasa
      delete stm->emergency_bailout.load();
      stm->emergency_bailout = nullptr;
    }
- 
+
 -  unregister_notification_client(stm);
 +  if (stm->notification_client) {
 +    unregister_notification_client(stm);
 +  }
- 
+
    CloseHandle(stm->reconfigure_event);
    CloseHandle(stm->refill_event);
    CloseHandle(stm->input_available_event);
- 
+
    // The variables intialized in wasapi_stream_init,
    // must be destroyed in wasapi_stream_destroy.
    stm->linear_input_buffer.reset();

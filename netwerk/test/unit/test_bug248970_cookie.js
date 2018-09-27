@@ -11,7 +11,7 @@ var httpserver;
 function inChildProcess() {
   return Cc["@mozilla.org/xre/app-info;1"]
            .getService(Ci.nsIXULRuntime)
-           .processType != Ci.nsIXULRuntime.PROCESS_TYPE_DEFAULT;  
+           .processType != Ci.nsIXULRuntime.PROCESS_TYPE_DEFAULT;
 }
 function makeChan(path) {
   return NetUtil.newChannel({
@@ -23,7 +23,7 @@ function makeChan(path) {
 function setup_chan(path, isPrivate, callback) {
   var chan = makeChan(path);
   chan.QueryInterface(Ci.nsIPrivateBrowsingChannel).setPrivate(isPrivate);
-  chan.asyncOpen2(new ChannelListener(callback));  
+  chan.asyncOpen2(new ChannelListener(callback));
  }
 
 function set_cookie(value, callback) {
@@ -71,9 +71,9 @@ function run_test() {
   httpserver.registerPathHandler("/set", setHandler);
   httpserver.registerPathHandler("/present", presentHandler);
   httpserver.start(-1);
-  
+
   do_test_pending();
-  
+
   function check_cookie(req) {
     req.QueryInterface(Ci.nsIHttpChannel);
     Assert.equal(req.responseStatus, 200);
@@ -87,11 +87,11 @@ function run_test() {
   }
 
   let tests = [];
-  
+
   function runNextTest() {
     executeSoon(tests.shift());
   }
-  
+
   tests.push(function() {
     set_cookie("C1=V1", check_cookie);
   });
@@ -117,7 +117,7 @@ function run_test() {
 
   // The following test only works in a non-e10s situation at the moment,
   // since the notification needs to run in the parent process but there is
-  // no existing mechanism to make that happen.  
+  // no existing mechanism to make that happen.
   if (!inChildProcess()) {
     tests.push(function() {
       // Simulate all private browsing instances being closed
@@ -128,8 +128,8 @@ function run_test() {
       check_cookie_presence("C2=V2", true, false, runNextTest);
     });
   }
-  
+
   tests.push(function() { httpserver.stop(do_test_finished); });
-  
+
   runNextTest();
 }

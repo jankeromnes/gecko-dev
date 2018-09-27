@@ -96,7 +96,7 @@ _cairo_boxes_get_extents (const cairo_box_t *boxes,
 
 /* This function will return 'true' if the containing_rectangle contains the
  * contained_rectangle, and false otherwise.
- */ 
+ */
 cairo_bool_t
 _cairo_rectangle_contains (const cairo_rectangle_int_t *containing_rectangle,
 			   const cairo_rectangle_int_t *contained_rectangle)
@@ -104,7 +104,7 @@ _cairo_rectangle_contains (const cairo_rectangle_int_t *containing_rectangle,
     if (containing_rectangle->x > contained_rectangle->x ||
 	containing_rectangle->y > contained_rectangle->y)
 	return FALSE;
-    
+
     if (containing_rectangle->x + containing_rectangle->width <
 	contained_rectangle->x + contained_rectangle->width ||
 	containing_rectangle->y + containing_rectangle->height <

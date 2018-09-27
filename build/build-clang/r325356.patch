@@ -42,7 +42,7 @@ index 787c88cc6ec..cea5bf0df80 100644
 @@ -113,6 +113,13 @@ public:
    /// in LVI, so we need to pass it here as an argument.
    void printLVI(Function &F, DominatorTree &DTree, raw_ostream &OS);
- 
+
 +  /// Disables use of the DominatorTree within LVI.
 +  void disableDT();
 +
@@ -52,7 +52,7 @@ index 787c88cc6ec..cea5bf0df80 100644
 +
    // For old PM pass. Delete once LazyValueInfoWrapperPass is gone.
    void releaseMemory();
- 
+
 diff --git a/llvm/include/llvm/IR/Dominators.h b/llvm/include/llvm/IR/Dominators.h
 index c5373376ade..ccb18527abc 100644
 --- a/llvm/include/llvm/IR/Dominators.h
@@ -60,7 +60,7 @@ index c5373376ade..ccb18527abc 100644
 @@ -342,6 +342,9 @@ public:
    /// \brief Returns true if DelBB is awaiting deletion at a flush() event.
    bool pendingDeletedBB(BasicBlock *DelBB);
- 
+
 +  /// \brief Returns true if pending DT updates are queued for a flush() event.
 +  bool pending();
 +
@@ -76,13 +76,13 @@ index d7da669f6e7..fcbfb08cf1d 100644
      const DataLayout &DL; ///< A mandatory DataLayout
      DominatorTree *DT;    ///< An optional DT pointer.
 +    DominatorTree *DisabledDT; ///< Stores DT if it's disabled.
- 
+
    ValueLatticeElement getBlockValue(Value *Val, BasicBlock *BB);
    bool getEdgeValue(Value *V, BasicBlock *F, BasicBlock *T,
 @@ -463,13 +464,30 @@ namespace {
        TheCache.eraseBlock(BB);
      }
- 
+
 +    /// Disables use of the DominatorTree within LVI.
 +    void disableDT() {
 +      if (DT) {
@@ -103,18 +103,18 @@ index d7da669f6e7..fcbfb08cf1d 100644
      /// This is the update interface to inform the cache that an edge from
      /// PredBB to OldSucc has been threaded to be from PredBB to NewSucc.
      void threadEdge(BasicBlock *PredBB,BasicBlock *OldSucc,BasicBlock *NewSucc);
- 
+
      LazyValueInfoImpl(AssumptionCache *AC, const DataLayout &DL,
                         DominatorTree *DT = nullptr)
 -        : AC(AC), DL(DL), DT(DT) {}
 +        : AC(AC), DL(DL), DT(DT), DisabledDT(nullptr) {}
    };
  } // end anonymous namespace
- 
+
 @@ -1791,6 +1809,16 @@ void LazyValueInfo::printLVI(Function &F, DominatorTree &DTree, raw_ostream &OS)
    }
  }
- 
+
 +void LazyValueInfo::disableDT() {
 +  if (PImpl)
 +    getImpl(PImpl, AC, DL, DT).disableDT();
@@ -135,7 +135,7 @@ index e44e845b324..5efd0df5db9 100644
 @@ -453,6 +453,9 @@ bool DeferredDominance::pendingDeletedBB(BasicBlock *DelBB) {
    return DeletedBBs.count(DelBB) != 0;
  }
- 
+
 +/// \brief Returns true if pending DT updates are queued for a flush() event.
 +bool DeferredDominance::pending() { return !PendUpdates.empty(); }
 +
@@ -147,17 +147,17 @@ index 4d366e8e392..9ff91cf4924 100644
 --- a/llvm/lib/Transforms/Scalar/JumpThreading.cpp
 +++ b/llvm/lib/Transforms/Scalar/JumpThreading.cpp
 @@ -425,6 +425,7 @@ bool JumpThreadingPass::runImpl(Function &F, TargetLibraryInfo *TLI_,
- 
+
    LoopHeaders.clear();
    DDT->flush();
 +  LVI->enableDT();
    return EverChanged;
  }
- 
+
 @@ -617,6 +618,10 @@ bool JumpThreadingPass::ComputeValueKnownInPredecessors(
      // "X < 4" and "X < 3" is known true but "X < 4" itself is not available.
      // Perhaps getConstantOnEdge should be smart enough to do this?
- 
+
 +    if (DDT->pending())
 +      LVI->disableDT();
 +    else
@@ -166,7 +166,7 @@ index 4d366e8e392..9ff91cf4924 100644
        // If the value is known by LazyValueInfo to be a constant in a
        // predecessor, use that information to try to thread this block.
 @@ -630,6 +635,10 @@ bool JumpThreadingPass::ComputeValueKnownInPredecessors(
- 
+
    /// If I is a PHI node, then we know the incoming values for any constants.
    if (PHINode *PN = dyn_cast<PHINode>(I)) {
 +    if (DDT->pending())
@@ -188,7 +188,7 @@ index 4d366e8e392..9ff91cf4924 100644
          BasicBlock *PredBB = PN->getIncomingBlock(i);
          Value *LHS = PN->getIncomingValue(i);
 @@ -792,6 +805,10 @@ bool JumpThreadingPass::ComputeValueKnownInPredecessors(
- 
+
        if (!isa<Instruction>(CmpLHS) ||
            cast<Instruction>(CmpLHS)->getParent() != BB) {
 +        if (DDT->pending())
@@ -211,7 +211,7 @@ index 4d366e8e392..9ff91cf4924 100644
                // a predecessor, use that information to try to thread this
 @@ -901,6 +922,10 @@ bool JumpThreadingPass::ComputeValueKnownInPredecessors(
    }
- 
+
    // If all else fails, see if LVI can figure out a constant value for us.
 +  if (DDT->pending())
 +    LVI->disableDT();
@@ -223,7 +223,7 @@ index 4d366e8e392..9ff91cf4924 100644
 @@ -1102,6 +1127,10 @@ bool JumpThreadingPass::ProcessBlock(BasicBlock *BB) {
        // threading is concerned.
        assert(CondBr->isConditional() && "Threading on unconditional terminator");
- 
+
 +      if (DDT->pending())
 +        LVI->disableDT();
 +      else
@@ -234,13 +234,13 @@ index 4d366e8e392..9ff91cf4924 100644
 @@ -1899,6 +1928,10 @@ bool JumpThreadingPass::ThreadEdge(BasicBlock *BB,
          << ", across block:\n    "
          << *BB << "\n");
- 
+
 +  if (DDT->pending())
 +    LVI->disableDT();
 +  else
 +    LVI->enableDT();
    LVI->threadEdge(PredBB, BB, SuccBB);
- 
+
    // We are going to have to map operands from the original BB block to the new
 @@ -2368,6 +2401,10 @@ bool JumpThreadingPass::TryToUnfoldSelect(CmpInst *CondCmp, BasicBlock *BB) {
      // Now check if one of the select values would allow us to constant fold the
@@ -303,6 +303,6 @@ index 00000000000..b8d8c5fac46
 +}
 +
 +declare void @llvm.assume(i1)
--- 
+--
 2.18.0
 

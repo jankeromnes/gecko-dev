@@ -61,7 +61,7 @@ var iter = function*() {
 
 class C {
   async *method([...x] = iter) {
-    
+
   }
 };
 

@@ -154,7 +154,7 @@ linear_get_scanline_narrow (pixman_iter_t  *iter,
 	    invden = pixman_fixed_1 * (double) pixman_fixed_1 /
 		(l * (double) v.vector[2]);
 	    v2 = v.vector[2] * (1. / pixman_fixed_1);
-	    t = ((dx * v.vector[0] + dy * v.vector[1]) - 
+	    t = ((dx * v.vector[0] + dy * v.vector[1]) -
 		 (dx * linear->p1.x + dy * linear->p1.y) * v2) * invden;
 	    inc = (dx * unit.vector[0] + dy * unit.vector[1]) * invden;
 	}
@@ -204,7 +204,7 @@ linear_get_scanline_narrow (pixman_iter_t  *iter,
 		    invden = pixman_fixed_1 * (double) pixman_fixed_1 /
 			(l * (double) v.vector[2]);
 		    v2 = v.vector[2] * (1. / pixman_fixed_1);
-		    t = ((dx * v.vector[0] + dy * v.vector[1]) - 
+		    t = ((dx * v.vector[0] + dy * v.vector[1]) -
 			 (dx * linear->p1.x + dy * linear->p1.y) * v2) * invden;
 		}
 
@@ -289,7 +289,7 @@ linear_get_scanline_16 (pixman_iter_t  *iter,
 	    invden = pixman_fixed_1 * (double) pixman_fixed_1 /
 		(l * (double) v.vector[2]);
 	    v2 = v.vector[2] * (1. / pixman_fixed_1);
-	    t = ((dx * v.vector[0] + dy * v.vector[1]) - 
+	    t = ((dx * v.vector[0] + dy * v.vector[1]) -
 		 (dx * linear->p1.x + dy * linear->p1.y) * v2) * invden;
 	    inc = (dx * unit.vector[0] + dy * unit.vector[1]) * invden;
 	}
@@ -352,7 +352,7 @@ linear_get_scanline_16 (pixman_iter_t  *iter,
 		    invden = pixman_fixed_1 * (double) pixman_fixed_1 /
 			(l * (double) v.vector[2]);
 		    v2 = v.vector[2] * (1. / pixman_fixed_1);
-		    t = ((dx * v.vector[0] + dy * v.vector[1]) - 
+		    t = ((dx * v.vector[0] + dy * v.vector[1]) -
 			 (dx * linear->p1.x + dy * linear->p1.y) * v2) * invden;
 		}
 

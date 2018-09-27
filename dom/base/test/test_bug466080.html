@@ -2,19 +2,19 @@
 <html>
 <head>
   <title>Test bug 466080</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body onload="onWindowLoad()">
 <iframe id="frame1"
         src="https://requireclientcert.example.com/tests/dom/base/test/bug466080.sjs"
         onload="document.iframeWasLoaded = true">
- 
+
  This iframe should load the resource via the src-attribute from
  a secure server which requires a client-cert. Doing this is
  supposed to work, but further below in the test we try to load
  the resource from the same url using a XHR, which should not work.
- 
+
  TODO : What if we change 'src' from JS? Would/should it load?
 
 </iframe>
@@ -63,7 +63,7 @@ var alltests = [
     status_check:"==200",
     error:"XHR w/ credentials from cross-site secure server requiring certificate",
     withCredentials:"true"},
-    
+
 // repeat previous, but with credentials - should work
   { url:"https://requireclientcert.example.com/tests/dom/base/test/bug466080.sjs",
     status_check:"==200",
@@ -77,7 +77,7 @@ var alltests = [
     error:"XHR PREFLIGHT from cross-site secure server requiring certificate",
     withCredentials:"true",
     method:"XMETHOD"},
-    
+
 ];
 
 function onWindowLoad() {

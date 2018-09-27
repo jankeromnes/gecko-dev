@@ -63,7 +63,7 @@ namespace SevenZip
 			CBitRandomGenerator RG = new CBitRandomGenerator();
 			UInt32 Pos;
 			UInt32 Rep0;
-			
+
 			public UInt32 BufferSize;
 			public Byte[] Buffer = null;
 
@@ -253,11 +253,11 @@ namespace SevenZip
 			Compression.LZMA.Decoder decoder = new Compression.LZMA.Decoder();
 
 
-			CoderPropID[] propIDs = 
-			{ 
+			CoderPropID[] propIDs =
+			{
 				CoderPropID.DictionarySize,
 			};
-			object[] properties = 
+			object[] properties =
 			{
 				(Int32)(dictionarySize),
 			};

@@ -1142,7 +1142,7 @@ pkix_VerifyNode_FindError(
 
     if (!node)
         goto cleanup;
-    
+
     /* First, try to get error from lowest level. */
     if (node->children) {
         PKIX_UInt32 length = 0;
@@ -1169,7 +1169,7 @@ pkix_VerifyNode_FindError(
             }
         }
     }
-    
+
     if (node->error && node->error->plErr) {
         PKIX_INCREF(node->error);
         *error = node->error;
@@ -1177,6 +1177,6 @@ pkix_VerifyNode_FindError(
 
 cleanup:
     PKIX_DECREF(childNode);
-    
+
     PKIX_RETURN(VERIFYNODE);
 }

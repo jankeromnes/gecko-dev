@@ -19,7 +19,7 @@ flags: [noStrict]
 
             var verifyValue = false;
             verifyValue = typeof argObj.callee === "function";
-            
+
             var verifyWritable = false;
             argObj.callee = 1001;
             verifyWritable = (argObj.callee === 1001);

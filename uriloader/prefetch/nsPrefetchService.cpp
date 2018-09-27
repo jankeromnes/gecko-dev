@@ -239,7 +239,7 @@ nsPrefetchNode::OnStartRequest(nsIRequest *aRequest,
     nsCOMPtr<nsICacheInfoChannel> cacheInfoChannel =
         do_QueryInterface(aRequest, &rv);
     if (NS_FAILED(rv)) return rv;
- 
+
     // no need to prefetch a document that is already in the cache
     bool fromCache;
     if (NS_SUCCEEDED(cacheInfoChannel->IsFromCache(&fromCache)) &&
@@ -339,9 +339,9 @@ nsPrefetchNode::AsyncOnChannelRedirect(nsIChannel *aOldChannel,
         return rv;
 
     bool match;
-    rv = newURI->SchemeIs("http", &match); 
+    rv = newURI->SchemeIs("http", &match);
     if (NS_FAILED(rv) || !match) {
-        rv = newURI->SchemeIs("https", &match); 
+        rv = newURI->SchemeIs("https", &match);
         if (NS_FAILED(rv) || !match) {
             LOG(("rejected: URL is not of type http/https\n"));
             return NS_ERROR_ABORT;
@@ -546,8 +546,8 @@ nsPrefetchService::DispatchEvent(nsPrefetchNode *node, bool aSuccess)
 void
 nsPrefetchService::AddProgressListener()
 {
-    // Register as an observer for the document loader  
-    nsCOMPtr<nsIWebProgress> progress = 
+    // Register as an observer for the document loader
+    nsCOMPtr<nsIWebProgress> progress =
         do_GetService(NS_DOCUMENTLOADER_SERVICE_CONTRACTID);
     if (progress)
         progress->AddProgressListener(this, nsIWebProgress::NOTIFY_STATE_DOCUMENT);
@@ -556,7 +556,7 @@ nsPrefetchService::AddProgressListener()
 void
 nsPrefetchService::RemoveProgressListener()
 {
-    // Register as an observer for the document loader  
+    // Register as an observer for the document loader
     nsCOMPtr<nsIWebProgress> progress =
         do_GetService(NS_DOCUMENTLOADER_SERVICE_CONTRACTID);
     if (progress)
@@ -671,7 +671,7 @@ nsPrefetchService::CheckURIScheme(nsIURI *aURI, nsIURI *aReferrerURI)
         }
     }
 
-    // 
+    //
     // the referrer URI must be http:
     //
     rv = aReferrerURI->SchemeIs("http", &match);
@@ -978,20 +978,20 @@ nsPrefetchService::HasMoreElements(bool *aHasMore)
 
 NS_IMETHODIMP
 nsPrefetchService::OnProgressChange(nsIWebProgress *aProgress,
-                                    nsIRequest *aRequest, 
-                                    int32_t curSelfProgress, 
-                                    int32_t maxSelfProgress, 
-                                    int32_t curTotalProgress, 
+                                    nsIRequest *aRequest,
+                                    int32_t curSelfProgress,
+                                    int32_t maxSelfProgress,
+                                    int32_t curTotalProgress,
                                     int32_t maxTotalProgress)
 {
     MOZ_ASSERT_UNREACHABLE("notification excluded in AddProgressListener(...)");
     return NS_OK;
 }
 
-NS_IMETHODIMP 
-nsPrefetchService::OnStateChange(nsIWebProgress* aWebProgress, 
-                                 nsIRequest *aRequest, 
-                                 uint32_t progressStateFlags, 
+NS_IMETHODIMP
+nsPrefetchService::OnStateChange(nsIWebProgress* aWebProgress,
+                                 nsIRequest *aRequest,
+                                 uint32_t progressStateFlags,
                                  nsresult aStatus)
 {
     if (progressStateFlags & STATE_IS_DOCUMENT) {
@@ -1000,7 +1000,7 @@ nsPrefetchService::OnStateChange(nsIWebProgress* aWebProgress,
         else if (progressStateFlags & STATE_START)
             StopPrefetching();
     }
-            
+
     return NS_OK;
 }
 
@@ -1015,7 +1015,7 @@ nsPrefetchService::OnLocationChange(nsIWebProgress* aWebProgress,
     return NS_OK;
 }
 
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsPrefetchService::OnStatusChange(nsIWebProgress* aWebProgress,
                                   nsIRequest* aRequest,
                                   nsresult aStatus,
@@ -1025,9 +1025,9 @@ nsPrefetchService::OnStatusChange(nsIWebProgress* aWebProgress,
     return NS_OK;
 }
 
-NS_IMETHODIMP 
-nsPrefetchService::OnSecurityChange(nsIWebProgress *aWebProgress, 
-                                    nsIRequest *aRequest, 
+NS_IMETHODIMP
+nsPrefetchService::OnSecurityChange(nsIWebProgress *aWebProgress,
+                                    nsIRequest *aRequest,
                                     uint32_t state)
 {
     MOZ_ASSERT_UNREACHABLE("notification excluded in AddProgressListener(...)");

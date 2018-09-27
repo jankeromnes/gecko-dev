@@ -13,7 +13,7 @@ function boom()
     <g id="ch" style="counter-reset: c;">
       <rect x="75" y="0" width="75" height="75" fill="lightgreen" style="counter-increment: c;"/>
     </g>
-    
+
   </defs>
 
   <use id="thhh" x="0" y="0"><use xlink:href="#ch" x="0" y="0"/></use>

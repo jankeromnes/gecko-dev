@@ -51,7 +51,7 @@ if [ -z "${CLEANUP}" -o "${CLEANUP}" = "${SCRIPTNAME}" ]; then
     echo
 
     html "END_OF_TEST<BR>"
-    html "</BODY></HTML>" 
+    html "</BODY></HTML>"
     rm -f ${TEMPFILES} 2>/dev/null
     if [ ${FAILED_CNT} -gt 0 ] || [ ${ASAN_CNT} -gt 0 ]; then
         exit 1

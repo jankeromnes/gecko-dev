@@ -1,4 +1,4 @@
-<?xml version="1.0"?> 
+<?xml version="1.0"?>
 
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -20,11 +20,11 @@
 
     <!-- This is non-visible content that simply adds translatable string
          into the document so that it is accessible to JS code.
-         
-         XXX-TODO: 
-          convert to use string bundles. 
+
+         XXX-TODO:
+          convert to use string bundles.
     -->
-  
+
     <data id="dialog.strings.dialogCloseLabel">&dialogClose.label;</data>
     <data id="dialog.strings.printComplete">&printComplete;</data>
     <data id="dialog.strings.progressText">&percentPrint;</data>
@@ -37,7 +37,7 @@
         <column/>
         <column/>
       </columns>
-      
+
       <rows>
         <row>
           <hbox pack="end">
@@ -45,7 +45,7 @@
           </hbox>
             <label id="dialog.title"/>
         </row>
-        <row class="thin-separator">             
+        <row class="thin-separator">
           <hbox pack="end">
             <label id="dialog.progressLabel" control="dialog.progress" value="&progress;"/>
           </hbox>

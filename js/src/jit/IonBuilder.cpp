@@ -345,7 +345,7 @@ IonBuilder::DontInline(JSScript* targetScript, const char* reason)
 {
     if (targetScript) {
         JitSpew(JitSpew_Inlining, "Cannot inline %s:%u:%u %s",
-                targetScript->filename(), targetScript->lineno(), 
+                targetScript->filename(), targetScript->lineno(),
                 targetScript->column(), reason);
     } else {
         JitSpew(JitSpew_Inlining, "Cannot inline: %s", reason);
@@ -796,7 +796,7 @@ IonBuilder::build()
     } else {
         JitSpew(JitSpew_IonScripts, "%sompiling script %s:%u:%u (%p) (warmup-counter=%" PRIu32 ", level=%s)",
                 (script()->hasIonScript() ? "Rec" : "C"),
-                script()->filename(), script()->lineno(), script()->column(), 
+                script()->filename(), script()->lineno(), script()->column(),
                 (void*)script(), script()->getWarmUpCount(), OptimizationLevelString(optimizationInfo().level()));
     }
 #endif

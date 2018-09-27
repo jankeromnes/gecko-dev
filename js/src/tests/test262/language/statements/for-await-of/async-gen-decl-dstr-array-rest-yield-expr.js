@@ -30,7 +30,7 @@ let x = {};
 let iterCount = 0;
 async function * fn() {
   for await ([...x[yield]] of [[33, 44, 55]]) {
-    
+
     iterCount += 1;
   }
 }

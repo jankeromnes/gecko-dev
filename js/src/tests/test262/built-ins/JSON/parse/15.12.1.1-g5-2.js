@@ -9,7 +9,7 @@ description: >
 ---*/
 
 assert.throws(SyntaxError, function() {
-        JSON.parse('"\\u005"') 
+        JSON.parse('"\\u005"')
 });
 
 reportCompare(0, 0);

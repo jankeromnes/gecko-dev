@@ -49,7 +49,7 @@ ffi_call_SYSV:
 	swi r21, r1, 8 /* PIC register */
 	swi r22, r1, 12 /* save for locals */
 	swi r23, r1, 16 /* save for locals */
-	
+
 	/* save the r5-r10 registers in the stack */
 	addik r1, r1, -24 /* increment sp to store 6x 32-bit words */
 	swi r5, r1, 0
@@ -113,7 +113,7 @@ ffi_call_SYSV:
 
 	lwi r22, r1, 48 /* get return type (20 for locals + 28 for arg[6]) */
 	lwi r23, r1, 52 /* get return size (20 for locals + 32 for arg[7])  */
-	
+
 	/* Check if return type is actually a struct, do nothing */
 	rsubi r11, r22, FFI_TYPE_STRUCT
 	beqi r11, ffi_call_SYSV_end
@@ -181,7 +181,7 @@ ffi_call_SYSV_end:
 
 	/*
 	 * args passed into this function, are passed down to the callee.
-	 * this function is the target of the closure trampoline, as such r12 is 
+	 * this function is the target of the closure trampoline, as such r12 is
 	 * a pointer to the closure object.
 	 */
 	.text

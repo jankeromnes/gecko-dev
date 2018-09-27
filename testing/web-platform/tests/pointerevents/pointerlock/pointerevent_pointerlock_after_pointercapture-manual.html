@@ -30,7 +30,7 @@
                             assert_equals(document.pointerLockElement, div1, "document.pointerLockElement should be div1.");
                             assert_true(lost_capture, "Pointer capture was lost after got a pointer lock.");
                         });
-                        test_pointerEvent.done(); 
+                        test_pointerEvent.done();
                     }
                 });
                 on_event(document, 'contextmenu', function(event) {

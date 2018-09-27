@@ -34,7 +34,7 @@ fn main() {
         .filter(None, log::LevelFilter::Error)
         .write_style(env_logger::WriteStyle::Never)
         .build();
-    
+
     stylish_logger.log(&record());
     unstylish_logger.log(&record());
 }

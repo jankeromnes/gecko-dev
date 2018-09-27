@@ -202,7 +202,7 @@ function testInDocument(doc, documentID) {
     allNodes.push(doc.createDocumentFragment());
     XMLNodes.push(XMLDoc.createCDATASection("some text"));
     XMLNodes.push(XMLDoc.createProcessingInstruction("PI", "data"));
-        
+
     function runTestUnwrapped() {
         if (!("wrappedJSObject" in doc)) {
             return;

@@ -16,7 +16,7 @@ try {
 } catch(e) {
   if (e !== 1) {
     $ERROR('#1.2: throw 1 must throw SyntaxError. Actual: ' + (e));
-  }  
+  }
 }
 
 reportCompare(0, 0);

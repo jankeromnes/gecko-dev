@@ -16,7 +16,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=936129
     function test1Done()
     {
       ok(true, "Bareword setTimeout should work after calling document.open().");
-  
+
       var iframe = document.getElementById("testFrame");
       iframe.onload = function () {
         window.runTest2 = iframe.contentWindow.runTest2;

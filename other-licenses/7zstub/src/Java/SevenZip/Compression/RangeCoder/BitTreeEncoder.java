@@ -5,18 +5,18 @@ public class BitTreeEncoder
 {
 	short[] Models;
 	int NumBitLevels;
-	
+
 	public BitTreeEncoder(int numBitLevels)
 	{
 		NumBitLevels = numBitLevels;
 		Models = new short[1 << numBitLevels];
 	}
-	
+
 	public void Init()
 	{
 		Decoder.InitBitModels(Models);
 	}
-	
+
 	public void Encode(Encoder rangeEncoder, int symbol) throws IOException
 	{
 		int m = 1;
@@ -28,7 +28,7 @@ public class BitTreeEncoder
 			m = (m << 1) | bit;
 		}
 	}
-	
+
 	public void ReverseEncode(Encoder rangeEncoder, int symbol) throws IOException
 	{
 		int m = 1;
@@ -40,7 +40,7 @@ public class BitTreeEncoder
 			symbol >>= 1;
 		}
 	}
-	
+
 	public int GetPrice(int symbol)
 	{
 		int price = 0;
@@ -54,7 +54,7 @@ public class BitTreeEncoder
 		}
 		return price;
 	}
-	
+
 	public int ReverseGetPrice(int symbol)
 	{
 		int price = 0;
@@ -68,7 +68,7 @@ public class BitTreeEncoder
 		}
 		return price;
 	}
-	
+
 	public static int ReverseGetPrice(short[] Models, int startIndex,
 			int NumBitLevels, int symbol)
 	{
@@ -83,7 +83,7 @@ public class BitTreeEncoder
 		}
 		return price;
 	}
-	
+
 	public static void ReverseEncode(short[] Models, int startIndex,
 			Encoder rangeEncoder, int NumBitLevels, int symbol) throws IOException
 	{

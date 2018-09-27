@@ -26,7 +26,7 @@ function runTest1() {
   // wait for 1000ms and check that the data: URI did not load
   setTimeout(function () {
     isnot(wrappedFrame.contentWindow.document.body.innerHTML,
-          INNER, 
+          INNER,
           "data: URI navigation should be blocked");
     runTest2();
   }, 1000);
@@ -47,7 +47,7 @@ function runTest2() {
     // wait for 1000ms and check that the data: URI did not load
     setTimeout(function () {
       isnot(wrappedFrame.contentWindow.document.body.innerHTML,
-            INNER, 
+            INNER,
             "data: URI navigation should be blocked");
       SimpleTest.finish();
     }, 1000);

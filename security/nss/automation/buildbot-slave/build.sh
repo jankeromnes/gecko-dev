@@ -46,7 +46,7 @@ proc_args()
                 echo "    --check-abi"
                 exit 1
                 ;;
-        esac 
+        esac
 
         shift
     done
@@ -92,7 +92,7 @@ print_env()
     if [ -e "/etc/redhat-release" ]; then
         cat "/etc/redhat-release" | tee -a ${LOG_ALL}
     fi
-    # don't print the MAIL command, it might contain a password    
+    # don't print the MAIL command, it might contain a password
     env | grep -v "^MAIL=" | tee -a ${LOG_ALL}
 }
 
@@ -103,12 +103,12 @@ set_cycle()
 
     if [ "${BITS}" = "64" ]; then
         USE_64=1
-        JAVA_HOME=${JAVA_HOME_64} 
+        JAVA_HOME=${JAVA_HOME_64}
         PORT_DBG=${PORT_64_DBG}
         PORT_OPT=${PORT_64_OPT}
     else
         USE_64=
-        JAVA_HOME=${JAVA_HOME_32} 
+        JAVA_HOME=${JAVA_HOME_32}
         PORT_DBG=${PORT_32_DBG}
         PORT_OPT=${PORT_32_OPT}
     fi
@@ -359,7 +359,7 @@ test_jss()
     tail -n2 ${LOG_TMP} | grep JSSTEST_RATE > /dev/null
     RET=$?
 
-    grep FAIL ${LOG_TMP} 
+    grep FAIL ${LOG_TMP}
     [ $? -eq 1 ] || RET=1
 
     print_result "JSS - tests - ${BITS} bits - ${OPT}" ${RET} 0

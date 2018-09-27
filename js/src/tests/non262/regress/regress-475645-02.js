@@ -30,7 +30,7 @@ function test()
     h = t = 7;
     var pics = "";
     pic[2] = "";
-    for (i=1; i < pic.length; i++) 
+    for (i=1; i < pic.length; i++)
     {
       try
       {

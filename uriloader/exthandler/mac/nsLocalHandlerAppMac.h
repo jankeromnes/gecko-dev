@@ -13,9 +13,9 @@ class nsLocalHandlerAppMac : public nsLocalHandlerApp {
     nsLocalHandlerAppMac() { }
 
     nsLocalHandlerAppMac(const char16_t *aName, nsIFile *aExecutable)
-      : nsLocalHandlerApp(aName, aExecutable) {} 
+      : nsLocalHandlerApp(aName, aExecutable) {}
 
-    nsLocalHandlerAppMac(const nsAString & aName, nsIFile *aExecutable) 
+    nsLocalHandlerAppMac(const nsAString & aName, nsIFile *aExecutable)
       : nsLocalHandlerApp(aName, aExecutable) {}
     virtual ~nsLocalHandlerAppMac() { }
 

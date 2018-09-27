@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "select");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,7 +70,7 @@ function loadComplete() {
 
 
 /**
-* 
+*
 Removes an option using HTMLSelectElement.remove.
 
 * @author Curt Arnold
@@ -84,7 +84,7 @@ function HTMLSelectElement16() {
       var doc;
       var optLength;
       var selected;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -100,7 +100,7 @@ testNode = nodeList.item(0);
        selected = testNode.selectedIndex;
 
       assertEquals("selected",-1,selected);
-       
+
 }
 
 </script>
@@ -126,7 +126,7 @@ Removes an option using HTMLSelectElement.remove.
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/select.html"></iframe>
 <br>

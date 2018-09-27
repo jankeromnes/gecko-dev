@@ -29,11 +29,11 @@
  * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
  *
  */
-  
+
 #ifndef _OMXTYPES_H_
 #define _OMXTYPES_H_
 
-#include <limits.h> 
+#include <limits.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -56,27 +56,27 @@ extern "C" {
 
 
 typedef enum {
-    
+
     /* Mandatory return codes - use cases are explicitly described for each function */
     OMX_Sts_NoErr                    =  0,    /* No error, the function completed successfully */
-    OMX_Sts_Err                      = -2,    /* Unknown/unspecified error */    
-    OMX_Sts_InvalidBitstreamValErr   = -182,  /* Invalid value detected during bitstream processing */    
+    OMX_Sts_Err                      = -2,    /* Unknown/unspecified error */
+    OMX_Sts_InvalidBitstreamValErr   = -182,  /* Invalid value detected during bitstream processing */
     OMX_Sts_MemAllocErr              = -9,    /* Not enough memory allocated for the operation */
     OMX_StsACAAC_GainCtrErr    	     = -159,  /* AAC: Unsupported gain control data detected */
     OMX_StsACAAC_PrgNumErr           = -167,  /* AAC: Invalid number of elements for one program   */
-    OMX_StsACAAC_CoefValErr          = -163,  /* AAC: Invalid quantized coefficient value          */     
-    OMX_StsACAAC_MaxSfbErr           = -162,  /* AAC: Invalid maxSfb value in relation to numSwb */    
+    OMX_StsACAAC_CoefValErr          = -163,  /* AAC: Invalid quantized coefficient value          */
+    OMX_StsACAAC_MaxSfbErr           = -162,  /* AAC: Invalid maxSfb value in relation to numSwb */
 	OMX_StsACAAC_PlsDataErr		     = -160,  /* AAC: pulse escape sequence data error */
 
     /* Optional return codes - use cases are explicitly described for each function*/
     OMX_Sts_BadArgErr                = -5,    /* Bad Arguments */
 
     OMX_StsACAAC_TnsNumFiltErr       = -157,  /* AAC: Invalid number of TNS filters  */
-    OMX_StsACAAC_TnsLenErr           = -156,  /* AAC: Invalid TNS region length  */   
-    OMX_StsACAAC_TnsOrderErr         = -155,  /* AAC: Invalid order of TNS filter  */                  
+    OMX_StsACAAC_TnsLenErr           = -156,  /* AAC: Invalid TNS region length  */
+    OMX_StsACAAC_TnsOrderErr         = -155,  /* AAC: Invalid order of TNS filter  */
     OMX_StsACAAC_TnsCoefResErr       = -154,  /* AAC: Invalid bit-resolution for TNS filter coefficients  */
-    OMX_StsACAAC_TnsCoefErr          = -153,  /* AAC: Invalid TNS filter coefficients  */                  
-    OMX_StsACAAC_TnsDirectErr        = -152,  /* AAC: Invalid TNS filter direction  */  
+    OMX_StsACAAC_TnsCoefErr          = -153,  /* AAC: Invalid TNS filter coefficients  */
+    OMX_StsACAAC_TnsDirectErr        = -152,  /* AAC: Invalid TNS filter direction  */
 
     OMX_StsICJP_JPEGMarkerErr        = -183,  /* JPEG marker encountered within an entropy-coded block; */
                                               /* Huffman decoding operation terminated early.           */
@@ -87,45 +87,45 @@ typedef enum {
     OMX_StsSP_EvenMedianMaskSizeErr  = -180,  /* Even size of the Median Filter mask was replaced by the odd one */
 
     OMX_Sts_MaximumEnumeration       = INT_MAX  /*Placeholder, forces enum of size OMX_INT*/
-    
+
  } OMXResult;          /** Return value or error value returned from a function. Identical to OMX_INT */
 
- 
+
 /* OMX_U8 */
 #if UCHAR_MAX == 0xff
 typedef unsigned char OMX_U8;
-#elif USHRT_MAX == 0xff 
-typedef unsigned short int OMX_U8; 
+#elif USHRT_MAX == 0xff
+typedef unsigned short int OMX_U8;
 #else
 #error OMX_U8 undefined
-#endif 
+#endif
 
- 
+
 /* OMX_S8 */
-#if SCHAR_MAX == 0x7f 
+#if SCHAR_MAX == 0x7f
 typedef signed char OMX_S8;
-#elif SHRT_MAX == 0x7f 
-typedef signed short int OMX_S8; 
+#elif SHRT_MAX == 0x7f
+typedef signed short int OMX_S8;
 #else
 #error OMX_S8 undefined
 #endif
- 
- 
+
+
 /* OMX_U16 */
 #if USHRT_MAX == 0xffff
 typedef unsigned short int OMX_U16;
 #elif UINT_MAX == 0xffff
-typedef unsigned int OMX_U16; 
+typedef unsigned int OMX_U16;
 #else
 #error OMX_U16 undefined
 #endif
 
 
 /* OMX_S16 */
-#if SHRT_MAX == 0x7fff 
+#if SHRT_MAX == 0x7fff
 typedef signed short int OMX_S16;
-#elif INT_MAX == 0x7fff 
-typedef signed int OMX_S16; 
+#elif INT_MAX == 0x7fff
+typedef signed int OMX_S16;
 #else
 #error OMX_S16 undefined
 #endif
@@ -135,7 +135,7 @@ typedef signed int OMX_S16;
 #if UINT_MAX == 0xffffffff
 typedef unsigned int OMX_U32;
 #elif LONG_MAX == 0xffffffff
-typedef unsigned long int OMX_U32; 
+typedef unsigned long int OMX_U32;
 #else
 #error OMX_U32 undefined
 #endif
@@ -145,7 +145,7 @@ typedef unsigned long int OMX_U32;
 #if INT_MAX == 0x7fffffff
 typedef signed int OMX_S32;
 #elif LONG_MAX == 0x7fffffff
-typedef long signed int OMX_S32; 
+typedef long signed int OMX_S32;
 #else
 #error OMX_S32 undefined
 #endif
@@ -173,8 +173,8 @@ typedef long signed int OMX_S32;
 typedef struct
 {
   OMX_S8 Re; /** Real part */
-  OMX_S8 Im; /** Imaginary part */	
-	
+  OMX_S8 Im; /** Imaginary part */
+
 } OMX_SC8; /** Signed 8-bit complex number */
 
 
@@ -182,8 +182,8 @@ typedef struct
 typedef struct
 {
   OMX_S16 Re; /** Real part */
-  OMX_S16 Im; /** Imaginary part */	
-	
+  OMX_S16 Im; /** Imaginary part */
+
 } OMX_SC16; /** Signed 16-bit complex number */
 
 
@@ -191,8 +191,8 @@ typedef struct
 typedef struct
 {
   OMX_S32 Re; /** Real part */
-  OMX_S32 Im; /** Imaginary part */	
-	
+  OMX_S32 Im; /** Imaginary part */
+
 } OMX_SC32; /** Signed 32-bit complex number */
 
 
@@ -200,8 +200,8 @@ typedef struct
 typedef struct
 {
   OMX_S64 Re; /** Real part */
-  OMX_S64 Im; /** Imaginary part */	
-	
+  OMX_S64 Im; /** Imaginary part */
+
 } OMX_SC64; /** Signed 64-bit complex number */
 
 
@@ -215,7 +215,7 @@ typedef double OMX_F64; /** Double precision floating point,IEEE 754 */
 typedef struct
 {
   OMX_F32 Re; /** Real part */
-  OMX_F32 Im; /** Imaginary part */	
+  OMX_F32 Im; /** Imaginary part */
 
 } OMX_FC32; /** single precision floating point complex number */
 
@@ -223,7 +223,7 @@ typedef struct
 typedef struct
 {
   OMX_F64 Re; /** Real part */
-  OMX_F64 Im; /** Imaginary part */	
+  OMX_F64 Im; /** Imaginary part */
 
 } OMX_FC64; /** double precision floating point complex number */
 
@@ -251,9 +251,9 @@ typedef void OMXVoid;
 #define NULL ((void*)0)
 #endif
 
-/** Defines the geometric position and size of a rectangle, 
+/** Defines the geometric position and size of a rectangle,
   * where x,y defines the coordinates of the top left corner
-  * of the rectangle, with dimensions width in the x-direction 
+  * of the rectangle, with dimensions width in the x-direction
   * and height in the y-direction */
 typedef struct {
 	OMX_INT x;      /** x-coordinate of top left corner of rectangle */
@@ -264,20 +264,20 @@ typedef struct {
 
 
 /** Defines the geometric position of a point, */
-typedef struct 
+typedef struct
 {
  OMX_INT x; /** x-coordinate */
  OMX_INT y;	/** y-coordinate */
-	
+
 } OMXPoint;
 
 
 /** Defines the dimensions of a rectangle, or region of interest in an image */
-typedef struct 
+typedef struct
 {
  OMX_INT width;  /** Width of the rectangle, in the x-direction */
  OMX_INT height; /** Height of the rectangle, in the y-direction */
-	
+
 } OMXSize;
 
 #ifdef __cplusplus

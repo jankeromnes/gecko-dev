@@ -37,5 +37,5 @@ index 8c26e80..5925504 100644
 -  Ebml_Serialize(glob, (void *)&unknownLen,sizeof(unknownLen), 8); // this is a key that says lenght unknown
 +  Ebml_Serialize(glob, (void *)&unknownLen,sizeof(unknownLen), 8); // this is a key that says length unknown
  }
- 
+
  void Ebml_EndSubElement(EbmlGlobal *glob, EbmlLoc *ebmlLoc) {

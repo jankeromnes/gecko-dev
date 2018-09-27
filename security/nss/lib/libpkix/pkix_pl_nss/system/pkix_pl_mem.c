@@ -29,7 +29,7 @@ PKIX_PL_Malloc(
                 *pMemory = NULL;
         } else {
 
-                nssContext = (PKIX_PL_NssContext *)plContext; 
+                nssContext = (PKIX_PL_NssContext *)plContext;
 
                 if (nssContext != NULL && nssContext->arena != NULL) {
                     PKIX_MEM_DEBUG("\tCalling PORT_ArenaAlloc.\n");
@@ -72,7 +72,7 @@ PKIX_PL_Calloc(
                 *pMemory = NULL;
         } else {
 
-                nssContext = (PKIX_PL_NssContext *)plContext; 
+                nssContext = (PKIX_PL_NssContext *)plContext;
 
                 if (nssContext != NULL && nssContext->arena != NULL) {
                     PKIX_MEM_DEBUG("\tCalling PORT_ArenaAlloc.\n");
@@ -112,7 +112,7 @@ PKIX_PL_Realloc(
         PKIX_ENTER(MEM, "PKIX_PL_Realloc");
         PKIX_NULLCHECK_ONE(pMemory);
 
-        nssContext = (PKIX_PL_NssContext *)plContext; 
+        nssContext = (PKIX_PL_NssContext *)plContext;
 
         if (nssContext != NULL && nssContext->arena != NULL) {
                 PKIX_MEM_DEBUG("\tCalling PORT_ArenaAlloc.\n");

@@ -779,7 +779,7 @@ pkix_pl_InfoAccess_ParseLocation(
         *pDomainName = domainName;
 
         /*
-         * Get a list of AttrValueAssertions (such as 
+         * Get a list of AttrValueAssertions (such as
          * "cn=CommonName, o=Organization, c=US" into a null-terminated array
          */
         startPos = endPos;
@@ -837,9 +837,9 @@ pkix_pl_InfoAccess_ParseLocation(
 
         setOfNameComponent[len] = NULL;
         request->nc = setOfNameComponent;
-                
+
         /*
-         * Get a list of AttrTypes (such as 
+         * Get a list of AttrTypes (such as
          * "caCertificate;binary, crossCertificatePair;binary") into
          * a null-terminated array
          */

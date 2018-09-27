@@ -78,10 +78,10 @@ void GetUpdatePairInfoList(
     CRecordVector<CUpdatePair> &updatePairs)
 {
   CUIntVector dirIndices, arcIndices;
-  
+
   unsigned numDirItems = dirItems.Items.Size();
   unsigned numArcItems = arcItems.Size();
-  
+
   CIntArr duplicatedArcItem(numArcItems);
   {
     int *vals = &duplicatedArcItem[0];
@@ -123,25 +123,25 @@ void GetUpdatePairInfoList(
         ThrowError(k_Duplicate_inDir_Message, s1, s2);
     }
   }
-  
+
   unsigned dirIndex = 0;
   unsigned arcIndex = 0;
 
   int prevHostFile = -1;
   const UString *prevHostName = NULL;
-  
+
   while (dirIndex < numDirItems || arcIndex < numArcItems)
   {
     CUpdatePair pair;
-    
+
     int dirIndex2 = -1;
     int arcIndex2 = -1;
     const CDirItem *di = NULL;
     const CArcItem *ai = NULL;
-    
+
     int compareResult = -1;
     const UString *name = NULL;
-    
+
     if (dirIndex < numDirItems)
     {
       dirIndex2 = dirIndices[dirIndex];
@@ -163,7 +163,7 @@ void GetUpdatePairInfoList(
         }
       }
     }
-    
+
     if (compareResult < 0)
     {
       name = &dirNames[dirIndex2];
@@ -189,7 +189,7 @@ void GetUpdatePairInfoList(
       name = &dirNames[dirIndex2];
       if (!ai->Censored)
         ThrowError(k_NotCensoredCollision_Message, *name, ai->Name);
-      
+
       pair.DirIndex = dirIndex2;
       pair.ArcIndex = arcIndex2;
 
@@ -204,11 +204,11 @@ void GetUpdatePairInfoList(
               NUpdateArchive::NPairState::kSameFiles :
               NUpdateArchive::NPairState::kUnknowNewerFiles;
       }
-      
+
       dirIndex++;
       arcIndex++;
     }
-    
+
     if ((di && di->IsAltStream) ||
         (ai && ai->IsAltStream))
     {
@@ -225,7 +225,7 @@ void GetUpdatePairInfoList(
       prevHostFile = updatePairs.Size();
       prevHostName = name;
     }
-    
+
     updatePairs.Add(pair);
   }
 

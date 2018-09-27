@@ -18,5 +18,5 @@ fuzzy-if(cocoaWidget||skiaContent,0-1,0-1024) == wrapper.html?bgbn4a08.png bg__4
 fuzzy-if(cocoaWidget||skiaContent,0-1,0-1024) == wrapper.html?bggn4a16.png bg__4a16.html
 # bgwn6a08 - 3x8 bits rgb color, alpha, white background chunk
 fuzzy-if(cocoaWidget||skiaContent,0-1,0-1024) == wrapper.html?bgwn6a08.png bg__6a08.html
-# bgyn6a16 - 3x16 bits rgb color, alpha, yellow background chunk 
+# bgyn6a16 - 3x16 bits rgb color, alpha, yellow background chunk
 fuzzy-if(cocoaWidget||skiaContent,0-1,0-1024) == wrapper.html?bgyn6a16.png bg__6a16.html

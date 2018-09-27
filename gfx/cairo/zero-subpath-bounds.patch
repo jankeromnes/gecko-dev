@@ -10,8 +10,8 @@ diff --git a/gfx/cairo/cairo/src/cairo-path-bounds.c b/gfx/cairo/cairo/src/cairo
 +    if (bounder->has_initial_point) {
 +	_cairo_path_bounder_add_point (bounder, &bounder->current_point);
 +	bounder->has_initial_point = FALSE;
-+    } 
++    }
 +
      return CAIRO_STATUS_SUCCESS;
  }
- 
+

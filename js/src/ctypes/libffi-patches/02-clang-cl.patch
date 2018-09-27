@@ -11,14 +11,14 @@ index 7aee5b4..9cba257 100644
 @@ -146,12 +146,17 @@ It's also possible to build libffi on Windows platforms with
  Microsoft's Visual C++ compiler.  In this case, use the msvcc.sh
  wrapper script during configuration like so:
- 
+
 -path/to/configure CC=path/to/msvcc.sh CXX=path/to/msvcc.sh LD=link CPP=\"cl -nologo -EP\"
 +path/to/configure CC=path/to/msvcc.sh CXX=path/to/msvcc.sh LD=link CPP="cl -nologo -EP"
- 
+
  For 64-bit Windows builds, use CC="path/to/msvcc.sh -m64" and
  CXX="path/to/msvcc.sh -m64".  You may also need to specify --build
  appropriately.
- 
+
 +It is also possible to build libffi on Windows platforms with the LLVM
 +project's clang-cl compiler, like below:
 +
@@ -32,9 +32,9 @@ index 70c6179..ebed0aa 100644
 --- a/include/ffi.h.in
 +++ b/include/ffi.h.in
 @@ -68,7 +68,13 @@
- 
+
  #ifndef LIBFFI_ASM
- 
+
 -#ifdef _MSC_VER
 +#if defined(_MSC_VER) && !defined(__clang__)
  #define __attribute__(X)
@@ -45,7 +45,7 @@ index 70c6179..ebed0aa 100644
 +#if defined(_MSC_VER) && defined(__clang__)
 +#define regparm(X)
 +#endif
- 
+
 diff --git a/msvcc.sh b/msvcc.sh
 index 9208076..4a65b0b 100755
 --- a/msvcc.sh

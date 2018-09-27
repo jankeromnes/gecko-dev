@@ -54,7 +54,7 @@ var asyncIter = (async function*() {
 
 async function fn() {
   for await (const [...x = []] of asyncIter) {
-    
+
 
     iterCount += 1;
   }

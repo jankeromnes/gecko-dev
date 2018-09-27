@@ -11,7 +11,7 @@ var expect = '00012';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 
 function zeroArguments () {
   arguments[1] = '0';

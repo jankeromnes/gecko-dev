@@ -18,7 +18,7 @@ second line
 third line
 </textarea></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -44,7 +44,7 @@ SimpleTest.waitForFocus(function test() {
   }
 
   const isWindows = /WINNT/.test(SpecialPowers.OS);
-  
+
   var textarea = document.getElementById('textarea904810');
   textarea.focus();
 
@@ -102,7 +102,7 @@ SimpleTest.waitForFocus(function test() {
     is(textarea.selectionEnd, 12, "caret moved to visual start of selection");
   }
 
- 
+
 
   SimpleTest.finish();
 });

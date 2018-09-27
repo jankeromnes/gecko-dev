@@ -1,4 +1,4 @@
-#! /bin/bash  
+#! /bin/bash
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -109,7 +109,7 @@ cipher_gcm()
 
 ###################### cipher_rsa_populate ############################
 # Test the ability to reconstruct rsa private key reconstruction
-# also test the PK11GenericObject interface 
+# also test the PK11GenericObject interface
 ###################################################################
 cipher_rsa_populate()
 {
@@ -136,7 +136,7 @@ cipher_cleanup()
 ################## main #################################################
 
 # When building without softoken, bltest isn't built. It was already
-# built and the cipher suite run as part of an nss-softoken build. 
+# built and the cipher suite run as part of an nss-softoken build.
 if [ ! -x ${DIST}/${OBJDIR}/bin/bltest${PROG_SUFFIX} ]; then
     echo "bltest not built, skipping this test." >> ${LOGFILE}
     res=0

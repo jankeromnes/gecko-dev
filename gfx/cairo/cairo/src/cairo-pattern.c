@@ -39,8 +39,8 @@
  * @See_Also: #cairo_t, #cairo_surface_t
  *
  * #cairo_pattern_t is the paint with which cairo draws.
- * The primary use of patterns is as the source for all cairo drawing 
- * operations, although they can also be used as masks, that is, as the 
+ * The primary use of patterns is as the source for all cairo drawing
+ * operations, although they can also be used as masks, that is, as the
  * brush too.
  *
  * A cairo pattern is created by using one of the many constructors,
@@ -3010,7 +3010,7 @@ cairo_pattern_get_rgba (cairo_pattern_t *pattern,
  * cairo_pattern_get_surface
  * @pattern: a #cairo_pattern_t
  * @surface: return value for surface of pattern, or %NULL
- * 
+ *
  * Gets the surface of a surface pattern.  The reference returned in
  * @surface is owned by the pattern; the caller should call
  * cairo_surface_reference() if the surface is to be retained.

@@ -14,7 +14,7 @@ struct CCompressProgressWrap
   ICompressProgress vt;
   ICompressProgressInfo *Progress;
   HRESULT Res;
-  
+
   void Init(ICompressProgressInfo *progress) throw();
 };
 
@@ -25,7 +25,7 @@ struct CSeqInStreamWrap
   ISequentialInStream *Stream;
   HRESULT Res;
   UInt64 Processed;
-  
+
   void Init(ISequentialInStream *stream) throw();
 };
 
@@ -35,7 +35,7 @@ struct CSeekInStreamWrap
   ISeekInStream vt;
   IInStream *Stream;
   HRESULT Res;
-  
+
   void Init(IInStream *stream) throw();
 };
 
@@ -46,7 +46,7 @@ struct CSeqOutStreamWrap
   ISequentialOutStream *Stream;
   HRESULT Res;
   UInt64 Processed;
-  
+
   void Init(ISequentialOutStream *stream) throw();
 };
 
@@ -62,7 +62,7 @@ struct CByteInBufWrap
   UInt64 Processed;
   bool Extra;
   HRESULT Res;
-  
+
   CByteInBufWrap();
   ~CByteInBufWrap() { Free(); }
   void Free() throw();
@@ -95,7 +95,7 @@ struct CByteOutBufWrap
   ISequentialOutStream *Stream;
   UInt64 Processed;
   HRESULT Res;
-  
+
   CByteOutBufWrap() throw();
   ~CByteOutBufWrap() { Free(); }
   void Free() throw();

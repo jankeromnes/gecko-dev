@@ -16,10 +16,10 @@ function f() {
   var x = 3;
   if (x > 0) {
     let {a:x} = {a:7};
-    if (x != 7) 
+    if (x != 7)
       throw "fail";
   }
-  if (x != 3) 
+  if (x != 3)
     throw "fail";
 }
 

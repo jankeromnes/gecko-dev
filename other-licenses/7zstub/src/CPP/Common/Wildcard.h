@@ -37,7 +37,7 @@ struct CItem
   bool ForFile;
   bool ForDir;
   bool WildcardMatching;
-  
+
   #ifdef _WIN32
   bool IsDriveItem() const
   {
@@ -54,7 +54,7 @@ struct CItem
 class CCensorNode
 {
   CCensorNode *Parent;
-  
+
   bool CheckPathCurrent(bool include, const UStringVector &pathParts, bool isFile) const;
   void AddItemSimple(bool include, CItem &item);
 public:
@@ -91,7 +91,7 @@ struct CPair
 {
   UString Prefix;
   CCensorNode Head;
-  
+
   CPair(const UString &prefix): Prefix(prefix) { };
 };
 
@@ -123,10 +123,10 @@ public:
   CObjectVector<CPair> Pairs;
 
   CObjectVector<NWildcard::CCensorPath> CensorPaths;
-  
+
   bool AllAreRelative() const
     { return (Pairs.Size() == 1 && Pairs.Front().Prefix.IsEmpty()); }
-  
+
   void AddItem(ECensorPathMode pathMode, bool include, const UString &path, bool recursive, bool wildcardMatching);
   // bool CheckPath(bool isAltStream, const UString &path, bool isFile) const;
   void ExtendExclude();

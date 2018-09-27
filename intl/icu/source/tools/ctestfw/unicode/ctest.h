@@ -241,7 +241,7 @@ log_knownIssue(const char *ticket, const char *fmt, ...);
  * before running the tests.
  * This must be called before runTests.
  */
-T_CTEST_API int T_CTEST_EXPORT2 
+T_CTEST_API int T_CTEST_EXPORT2
 initArgs( int argc, const char* const argv[], ArgHandlerPtr argHandler, void *context);
 
 /**
@@ -257,7 +257,7 @@ initArgs( int argc, const char* const argv[], ArgHandlerPtr argHandler, void *co
  * @return positive for error count, 0 for success, negative for illegal argument
  * @internal Internal APIs for testing purpose only
  */
-T_CTEST_API int T_CTEST_EXPORT2 
+T_CTEST_API int T_CTEST_EXPORT2
 runTestRequest(const TestNode* root,
             int argc,
             const char* const argv[]);
@@ -278,7 +278,7 @@ str_timeDelta(char *str, UDate delta);
 /* ======== XML (JUnit output) ========= */
 
 /**
- * Set the filename for the XML output. 
+ * Set the filename for the XML output.
  * @param fileName file name. Caller must retain storage.
  * @return 0 on success, 1 on failure.
  */

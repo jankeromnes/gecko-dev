@@ -1,7 +1,7 @@
 actual = '';
 expected = 'undefined,';
 
-function f() { 
+function f() {
     (eval("\
         (function () {\
             for (var z = 0; z < 2; ++z) {\

@@ -18,13 +18,13 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   Array(10000).slice(1);
-  a = Array(1); 
-  a.length = 10000; 
+  a = Array(1);
+  a.length = 10000;
   a.slice(1);
-  a = Array(1); 
-  a.length = 10000; 
+  a = Array(1);
+  a.length = 10000;
   a.slice(-1);
 
   reportCompare(expect, actual, summary);

@@ -11,7 +11,7 @@ var gIoService = Cc["@mozilla.org/network/io-service;1"]
                    .getService(Ci.nsIIOService);
 
 
-// Run by: cd objdir;  make -C netwerk/test/ xpcshell-tests    
+// Run by: cd objdir;  make -C netwerk/test/ xpcshell-tests
 // or: cd objdir; make SOLO_FILE="test_URIs.js" -C netwerk/test/ check-one
 
 // See also test_URIs2.js.
@@ -254,7 +254,7 @@ function do_info(text, stack) {
 // Checks that the URIs satisfy equals(), in both possible orderings.
 // Also checks URI.equalsExceptRef(), because equal URIs should also be equal
 // when we ignore the ref.
-// 
+//
 // The third argument is optional. If the client passes a third argument
 // (e.g. todo_check_true), we'll use that in lieu of ok.
 function do_check_uri_eq(aURI1, aURI2, aCheckTrueFunc = ok) {
@@ -519,7 +519,7 @@ function do_test_mutate_ref(aTest, aSuffix) {
 
       // Also: make sure that clearing .pathQueryRef also clears .ref
       testURI = testURI.mutate().setPathQueryRef(pathWithSuffix).finalize();
-      do_info("testing that clearing path from " + 
+      do_info("testing that clearing path from " +
               pathWithSuffix + " also clears .ref");
       testURI = testURI.mutate().setPathQueryRef("").finalize();
       Assert.equal(testURI.ref, "");

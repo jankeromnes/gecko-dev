@@ -5,7 +5,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=351633
 -->
 <head>
   <title>Test for Bug 351633</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -59,7 +59,7 @@ function test3() {
     // Ignore this call; we expect the javascript: URI to still load.  Note
     // that whether onload fires for the fail.html load before the event for
     // the javascript: URI execution runs is a timing issue, so we can't depend
-    // on the ordering.    
+    // on the ordering.
     return;
   }
 
@@ -68,7 +68,7 @@ function test3() {
   // Something is bogus here.  Maybe we're ending up with the href being the
   // javascript: URI even though it hasn't run yet?  Or something?  In any
   // case, this test fails on some tinderboxen but not others....  Need to
-  // sort it out.  
+  // sort it out.
   // is(passJSUrl2, true, "<script> should have run");
 
   passJSUrl = false;
@@ -77,7 +77,7 @@ function test3() {
 
   window.testframe4.location.href = 'pass.html';
   window.testframe4.location.href =
-    'javascript:void("<script>parent.passJSUrl2 = false</' + 'script>")'; 
+    'javascript:void("<script>parent.passJSUrl2 = false</' + 'script>")';
 }
 
 function test4() {
@@ -90,7 +90,7 @@ function test4() {
 
   window.testframe5.location.href =
     'javascript:"<script>parent.passJSUrl2 = false</' + 'script>"';
-  window.testframe5.location.href = 'pass.html';  
+  window.testframe5.location.href = 'pass.html';
 }
 
 function test5() {
@@ -113,7 +113,7 @@ addLoadEvent(runTests);
   <iframe name="testframe5" id="testframe5"></iframe>
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 </body>
 </html>

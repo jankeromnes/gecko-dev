@@ -1,7 +1,7 @@
 all: test
 .PHONY: all
 
-test: 
+test:
 	@echo TEST DEFAULT FEATURES
 	@cargo test --all
 	@echo TEST WITH BACKTRACE

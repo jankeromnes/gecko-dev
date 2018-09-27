@@ -8,7 +8,7 @@ description: Type(x) is undefined or null
 ---*/
 
 //CHECK#1
-var x; 
+var x;
 if (isNaN(void x) !== true) {
   $ERROR('#1: var x; void x === undefined. Actual: ' + (void x));
 }

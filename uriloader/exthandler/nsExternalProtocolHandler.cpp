@@ -57,7 +57,7 @@ private:
 
     nsresult OpenURL();
     void Finish(nsresult aResult);
-    
+
     nsCOMPtr<nsIURI> mUrl;
     nsCOMPtr<nsIURI> mOriginalURI;
     nsresult mStatus;
@@ -68,7 +68,7 @@ private:
     // a redirect target channel.  It turns AsyncOpen into a no-op since
     // we do it on the child.
     bool mConnectedParent;
-    
+
     nsCOMPtr<nsIInterfaceRequestor> mCallbacks;
     nsCOMPtr<nsILoadGroup> mLoadGroup;
     nsCOMPtr<nsILoadInfo> mLoadInfo;
@@ -127,7 +127,7 @@ NS_IMETHODIMP nsExtProtocolChannel::SetNotificationCallbacks(nsIInterfaceRequest
   return NS_OK;
 }
 
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsExtProtocolChannel::GetSecurityInfo(nsISupports * *aSecurityInfo)
 {
   *aSecurityInfo = nullptr;
@@ -137,23 +137,23 @@ nsExtProtocolChannel::GetSecurityInfo(nsISupports * *aSecurityInfo)
 NS_IMETHODIMP nsExtProtocolChannel::GetOriginalURI(nsIURI* *aURI)
 {
   NS_ADDREF(*aURI = mOriginalURI);
-  return NS_OK; 
+  return NS_OK;
 }
- 
+
 NS_IMETHODIMP nsExtProtocolChannel::SetOriginalURI(nsIURI* aURI)
 {
   NS_ENSURE_ARG_POINTER(aURI);
   mOriginalURI = aURI;
   return NS_OK;
 }
- 
+
 NS_IMETHODIMP nsExtProtocolChannel::GetURI(nsIURI* *aURI)
 {
   *aURI = mUrl;
   NS_IF_ADDREF(*aURI);
-  return NS_OK; 
+  return NS_OK;
 }
- 
+
 nsresult nsExtProtocolChannel::OpenURL()
 {
   nsresult rv = NS_ERROR_FAILURE;
@@ -175,7 +175,7 @@ nsresult nsExtProtocolChannel::OpenURL()
     if (NS_FAILED(rv)) {
       goto finish;
     }
-                                                
+
     rv = extProtService->LoadURI(mUrl, aggCallbacks);
 
     if (NS_SUCCEEDED(rv) && mListener) {
@@ -354,7 +354,7 @@ NS_IMETHODIMP nsExtProtocolChannel::GetName(nsACString &result)
 NS_IMETHODIMP nsExtProtocolChannel::IsPending(bool *result)
 {
   *result = false;
-  return NS_OK; 
+  return NS_OK;
 }
 
 NS_IMETHODIMP nsExtProtocolChannel::GetStatus(nsresult *status)
@@ -511,10 +511,10 @@ NS_IMETHODIMP nsExternalProtocolHandler::GetDefaultPort(int32_t *aDefaultPort)
     return NS_OK;
 }
 
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsExternalProtocolHandler::AllowPort(int32_t port, const char *scheme, bool *_retval)
 {
-    // don't override anything.  
+    // don't override anything.
     *_retval = false;
     return NS_OK;
 }

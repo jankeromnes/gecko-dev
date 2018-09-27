@@ -9,7 +9,7 @@
 // accessing a, which is itself free inside the lambda, the Debugger has no way
 // to tell if the on-stack testGet or testSet frame is the frame that *would
 // have* allocated a scope for the lambda, *had the lambda been heavyweight*.
-// 
+//
 // More concretely, if the inner lambda were returned from testGet and testSet,
 // then called from a different invocation of testGet or testSet, it becomes
 // obvious that it is incorrect to synthesize a scope based on the frame of

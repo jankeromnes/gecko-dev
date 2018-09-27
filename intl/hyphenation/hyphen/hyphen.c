@@ -3,8 +3,8 @@
  */
 
 /* LibHnj - a library for high quality hyphenation and justification
- * Copyright (C) 1998 Raph Levien, 
- * 	     (C) 2001 ALTLinux, Moscow (http://www.alt-linux.org), 
+ * Copyright (C) 1998 Raph Levien,
+ * 	     (C) 2001 ALTLinux, Moscow (http://www.alt-linux.org),
  *           (C) 2001 Peter Novodvorsky (nidd@cs.msu.su)
  *           (C) 2006, 2007, 2008, 2010 László Németh (nemeth at OOo)
  *
@@ -19,8 +19,8 @@
  * Library General Public License for more details.
  *
  * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the 
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330, 
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307  USA.
 */
 
@@ -282,7 +282,7 @@ void hnj_hyphen_load_line(char * buf, HyphenDict * dict, HashTab * hashtab) {
 	        }
 	    }
 	    return;
-	  } 
+	  }
 	  j = 0;
 	  pattern[j] = '0';
           repl = strchr(buf, '/');
@@ -297,7 +297,7 @@ void hnj_hyphen_load_line(char * buf, HyphenDict * dict, HashTab * hashtab) {
                 if (index2) {
                     *index2 = '\0';
                     replindex = (signed char) atoi(index + 1) - 1;
-                    replcut = (signed char) atoi(index2 + 1);                
+                    replcut = (signed char) atoi(index2 + 1);
                 }
             } else {
                 hnj_strchomp(repl + 1);
@@ -398,7 +398,7 @@ hnj_hyphen_load_file (FILE *f)
   HashEntry *e;
   int state_num = 0;
 /* loading one or two dictionaries (separated by NEXTLEVEL keyword) */
-for (k = 0; k < 2; k++) { 
+for (k = 0; k < 2; k++) {
   hashtab = hnj_hash_new ();
 #ifdef VERBOSE
   global[k] = hashtab;
@@ -439,7 +439,7 @@ for (k = 0; k < 2; k++) {
 
   if (k == 0 || nextlevel) {
     while (fgets(buf, sizeof(buf), f) != NULL) {
-      
+
       /* discard lines that don't fit in buffer */
       if (!feof(f) && strchr(buf, '\n') == NULL) {
         int c;
@@ -450,7 +450,7 @@ for (k = 0; k < 2; k++) {
         }
         continue;
       }
-      
+
       if (strncmp(buf, "NEXTLEVEL", 9) == 0) {
         nextlevel = 1;
         break;
@@ -495,7 +495,7 @@ for (k = 0; k < 2; k++) {
     for (e = hashtab->entries[i]; e; e = e->next)
       {
 	if (*(e->key)) for (j = 1; 1; j++)
-	  {          
+	  {
 	    state_num = hnj_hash_lookup (hashtab, e->key + j);
 	    if (state_num >= 0)
 	      break;
@@ -612,7 +612,7 @@ int hnj_hyphen_hyphenate (HyphenDict *dict,
 	    /*  KBH: FIXME shouldn't this be as follows? */
             state = 0;
             goto try_next_letter;
-          }          
+          }
 
 #ifdef VERBOSE
 	  char *state_str;
@@ -684,8 +684,8 @@ int hnj_hyphen_hyphenate (HyphenDict *dict,
   hyphens[word_size] = '\0';
 
   hnj_free (prep_word);
-    
-  return 0;    
+
+  return 0;
 }
 
 /* Unicode ligature length */
@@ -798,7 +798,7 @@ int hnj_hyphen_hyph_(HyphenDict *dict, const char *word, int word_size,
   int offset;
   int * matchlen;
   int * matchindex;
-  char ** matchrepl;  
+  char ** matchrepl;
   int isrepl = 0;
   int nHyphCount;
 
@@ -810,7 +810,7 @@ int hnj_hyphen_hyph_(HyphenDict *dict, const char *word, int word_size,
 
   j = 0;
   prep_word[j++] = '.';
-  
+
   for (i = 0; i < word_size; i++) {
     if (word[i] <= '9' && word[i] >= '0') {
       prep_word[j++] = '.';
@@ -825,7 +825,7 @@ int hnj_hyphen_hyph_(HyphenDict *dict, const char *word, int word_size,
   prep_word[j] = '\0';
 
   for (i = 0; i < j; i++)
-    hyphens[i] = '0';    
+    hyphens[i] = '0';
 
 #ifdef VERBOSE
   printf ("prep_word = %s\n", prep_word);
@@ -844,7 +844,7 @@ int hnj_hyphen_hyph_(HyphenDict *dict, const char *word, int word_size,
 	    /*  KBH: FIXME shouldn't this be as follows? */
             state = 0;
             goto try_next_letter;
-          }          
+          }
 
 #ifdef VERBOSE
 	  char *state_str;
@@ -907,7 +907,7 @@ int hnj_hyphen_hyph_(HyphenDict *dict, const char *word, int word_size,
               }
             }
           }
-          
+
 	}
 
       /* KBH: we need this to make sure we keep looking in a word */
@@ -941,7 +941,7 @@ int hnj_hyphen_hyph_(HyphenDict *dict, const char *word, int word_size,
              nHyphCount++;
        j = 0;
        for (i = 0; i < word_size; i++) {
-           if (isrepl && (matchindex[i] >= 0) && matchrepl[matchindex[i]]) { 
+           if (isrepl && (matchindex[i] >= 0) && matchrepl[matchindex[i]]) {
                 if (rep && pos && cut) {
                     if (!*rep)
                         *rep = (char **) calloc(word_size, sizeof(char *));
@@ -976,7 +976,7 @@ int hnj_hyphen_hyph_(HyphenDict *dict, const char *word, int word_size,
      cut2 = (int*) hnj_malloc (word_size * sizeof(int));
      hyphens2 = (char*) hnj_malloc (word_size + 3);
      for (i = 0; i < word_size; i++) rep2[i] = NULL;
-     for (i = 0; i < word_size; i++) if 
+     for (i = 0; i < word_size; i++) if
         (hyphens[i]&1 || (begin > 0 && i + 1 == word_size)) {
         if (i - begin > 0) {
             int hyph = 0;
@@ -1024,7 +1024,7 @@ int hnj_hyphen_hyph_(HyphenDict *dict, const char *word, int word_size,
         begin = i + 1;
         for (j = 0; j < word_size; j++) rep2[j] = NULL;
      }
-     
+
      /* non-compound */
      if (begin == 0) {
         hnj_hyphen_hyph_(dict->nextlevel, word, word_size,
@@ -1034,7 +1034,7 @@ int hnj_hyphen_hyph_(HyphenDict *dict, const char *word, int word_size,
         if (!rend) hnj_hyphen_rhmin(dict->utf8, word, word_size, hyphens,
             rep, pos, cut, crhmin);
      }
-     
+
      free(rep2);
      free(cut2);
      free(pos2);
@@ -1068,7 +1068,7 @@ int hnj_hyphen_norm(const char *word, int word_size, char * hyphens,
         }
         k = i - l + 1;
         l = k + (*cut)[i];
-        (*cut)[j] = 0;        
+        (*cut)[j] = 0;
         for (; k < l; k++) {
             if ((((unsigned char) word[k]) >> 6) != 2) (*cut)[j]++;
         }
@@ -1091,12 +1091,12 @@ int hnj_hyphen_norm(const char *word, int word_size, char * hyphens,
 void hnj_hyphen_hyphword(const char * word, int word_size, const char * hyphens,
     char * hyphword, char *** rep, int ** pos, int ** cut)
 {
-  
+
   if (word_size <= 0 || word_size > INT_MAX / 2) {
     hyphword[0] = '\0';
     return;
   }
-  
+
   /* hyphword buffer size must be at least 2 * l */
   int hyphword_size = 2 * word_size - 1;
 

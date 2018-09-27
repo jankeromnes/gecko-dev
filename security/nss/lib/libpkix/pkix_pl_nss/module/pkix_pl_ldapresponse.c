@@ -233,7 +233,7 @@ pkix_pl_LdapResponse_Equals(
          */
 
         secondData = &secondData[dindex + 2];
-        
+
         for (i = 0; i < firstLen; i++) {
                 if (firstData[i] != secondData[i]) {
                         goto cleanup;
@@ -662,7 +662,7 @@ pkix_pl_LdapResponse_GetCapacity(
  *  "response"
  *      The address of the LdapResponse whose message type is to be
  *      retrieved. Must be non-NULL.
- *  "pMessageType" 
+ *  "pMessageType"
  *      The address at which is stored the type of the response message. Must
  *      be non-NULL.
  *  "plContext"

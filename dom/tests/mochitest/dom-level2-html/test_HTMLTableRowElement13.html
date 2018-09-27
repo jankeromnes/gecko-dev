@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "tablerow");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,16 +70,16 @@ function loadComplete() {
 
 
 /**
-* 
-    The deleteCell() method deletes a cell from the current row.   
+*
+    The deleteCell() method deletes a cell from the current row.
 
-    
+
     Retrieve the fourth TR element and examine the value of
-    the cells length attribute which should be set to six.  
+    the cells length attribute which should be set to six.
     Check the value of the first TD element.  Invoke the
     deleteCell() method which will delete a cell from the current row.
     Check the value of the cell at the zero index and also check
-    the number of cells which should now be five. 
+    the number of cells which should now be five.
 
 * @author NIST
 * @author Rick Rivello
@@ -96,7 +96,7 @@ function HTMLTableRowElement13() {
       var value;
       var vcells;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -129,7 +129,7 @@ testNode = nodeList.item(3);
       value = cellNode.nodeValue;
 
       assertEquals("value2Link","Margaret Martin",value);
-       
+
 }
 
 </script>
@@ -139,15 +139,15 @@ testNode = nodeList.item(3);
 <p>&lt;test name='HTMLTableRowElement13' schemaLocation='http://www.w3.org/2001/DOM-Test-Suite/Level-1 dom1.xsd'&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;metadata&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;HTMLTableRowElement13&lt;/title&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
-    The deleteCell() method deletes a cell from the current row.   
+    The deleteCell() method deletes a cell from the current row.
 
-    
+
     Retrieve the fourth TR element and examine the value of
-    the cells length attribute which should be set to six.  
+    the cells length attribute which should be set to six.
     Check the value of the first TD element.  Invoke the
     deleteCell() method which will delete a cell from the current row.
     Check the value of the cell at the zero index and also check
-    the number of cells which should now be five. 
+    the number of cells which should now be five.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;date qualifier='created'&gt;2002-05-06&lt;/date&gt;
@@ -164,7 +164,7 @@ testNode = nodeList.item(3);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/tablerow.html"></iframe>
 <br>

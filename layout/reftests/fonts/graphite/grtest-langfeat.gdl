@@ -8,21 +8,21 @@ endtable
 
 table (feature)
 
-failtopass 
+failtopass
 {
   id = "FTPS";
   name.LG_USENG = string("Pass substitution");
   default = 0;
 }
 
-failtopass2 
+failtopass2
 {
   id = "FTP2";
   name.LG_USENG = string("Pass substitution 2");
   default = 0;
 }
 
-passtofail 
+passtofail
 {
   id = "PTFL";
   name.LG_USENG = string("Pass to fail substitution");

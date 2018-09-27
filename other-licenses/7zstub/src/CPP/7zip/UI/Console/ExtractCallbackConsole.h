@@ -22,7 +22,7 @@ class CExtractScanConsole: public IDirItemsCallback
   CPercentPrinter _percent;
 
   bool NeedPercents() const { return _percent._so != NULL; }
-  
+
   void ClosePercentsAndFlush()
   {
     if (NeedPercents())
@@ -38,11 +38,11 @@ public:
     _se = errorStream;
     _percent._so = percentStream;
   }
-  
+
   void SetWindowWidth(unsigned width) { _percent.MaxLen = width - 1; }
 
   void StartScanning();
-  
+
   INTERFACE_IDirItemsCallback(;)
 
   void CloseScanning()
@@ -77,7 +77,7 @@ class CExtractCallbackConsole:
     if (NeedPercents() && _so == _percent._so)
       _percent.ClosePrint(false);
   }
-  
+
   void ClosePercentsAndFlush()
   {
     if (NeedPercents())
@@ -110,9 +110,9 @@ public:
   STDMETHOD(CryptoGetTextPassword)(BSTR *password);
 
   #endif
-  
+
   UInt64 NumTryArcs;
-  
+
   bool ThereIsError_in_Current;
   bool ThereIsWarning_in_Current;
 
@@ -123,7 +123,7 @@ public:
 
   UInt64 NumOpenArcErrors;
   UInt64 NumOpenArcWarnings;
-  
+
   UInt64 NumFileErrors;
   UInt64 NumFileErrors_in_Current;
 
@@ -144,7 +144,7 @@ public:
     COpenCallbackConsole::Init(outStream, errorStream, percentStream);
 
     NumTryArcs = 0;
-    
+
     ThereIsError_in_Current = false;
     ThereIsWarning_in_Current = false;
 
@@ -155,7 +155,7 @@ public:
 
     NumOpenArcErrors = 0;
     NumOpenArcWarnings = 0;
-    
+
     NumFileErrors = 0;
     NumFileErrors_in_Current = 0;
   }

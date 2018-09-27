@@ -39,7 +39,7 @@
         gl = canvas.getContext("webgl", { preserveDrawingBuffer: true });
         gl.viewportWidth = canvas.width;
         gl.viewportHeight = canvas.height;
-      
+
         initShaders();
         initBuffers();
 
@@ -83,7 +83,7 @@
 
         return shader;
       }
-      
+
       function initShaders() {
         var fragmentShader = getShader(gl, "shader-fs");
         var vertexShader = getShader(gl, "shader-vs");

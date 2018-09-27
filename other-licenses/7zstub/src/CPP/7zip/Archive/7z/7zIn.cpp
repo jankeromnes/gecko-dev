@@ -125,7 +125,7 @@ void CInArchive::AddByteStream(const Byte *buf, size_t size)
   _inByteBack = &_inByteVector[_numInByteBufs++];
   _inByteBack->Init(buf, size);
 }
-  
+
 
 Byte CInByte2::ReadByte()
 {
@@ -163,26 +163,26 @@ static UInt64 ReadNumberSpec(const Byte *p, size_t size, size_t &processed)
     processed = 0;
     return 0;
   }
-  
+
   unsigned b = *p++;
   size--;
-  
+
   if ((b & 0x80) == 0)
   {
     processed = 1;
     return b;
   }
-  
+
   if (size == 0)
   {
     processed = 0;
     return 0;
   }
-  
+
   UInt64 value = (UInt64)*p;
   p++;
   size--;
-  
+
   for (unsigned i = 1; i < 8; i++)
   {
     unsigned mask = (unsigned)0x80 >> i;
@@ -193,18 +193,18 @@ static UInt64 ReadNumberSpec(const Byte *p, size_t size, size_t &processed)
       processed = i + 1;
       return value;
     }
-    
+
     if (size == 0)
     {
       processed = 0;
       return 0;
     }
-    
+
     value |= ((UInt64)*p << (i * 8));
     p++;
     size--;
   }
-  
+
   processed = 9;
   return value;
 }
@@ -292,7 +292,7 @@ HRESULT CInArchive::FindAndReadSignature(IInStream *stream, const UInt64 *search
   CByteArr buf(kBufSize);
   memcpy(buf, _header, kHeaderSize);
   UInt64 offset = 0;
-  
+
   for (;;)
   {
     UInt32 readSize = kBufSize - kHeaderSize;
@@ -304,12 +304,12 @@ HRESULT CInArchive::FindAndReadSignature(IInStream *stream, const UInt64 *search
       if (readSize == 0)
         return S_FALSE;
     }
-    
+
     UInt32 processed = 0;
     RINOK(stream->Read(buf + kHeaderSize, readSize, &processed));
     if (processed == 0)
       return S_FALSE;
-    
+
     for (UInt32 pos = 0;;)
     {
       const Byte *p = buf + pos + 1;
@@ -331,7 +331,7 @@ HRESULT CInArchive::FindAndReadSignature(IInStream *stream, const UInt64 *search
         return stream->Seek(_arhiveBeginStreamPosition + kHeaderSize, STREAM_SEEK_SET, NULL);
       }
     }
-    
+
     offset += processed;
     memmove(buf, buf + processed, kHeaderSize);
   }
@@ -349,7 +349,7 @@ HRESULT CInArchive::Open(IInStream *stream, const UInt64 *searchHeaderSizeLimit)
   _stream = stream;
   return S_OK;
 }
-  
+
 void CInArchive::Close()
 {
   _numInByteBufs = 0;
@@ -406,7 +406,7 @@ void CInByte2::ParseFolder(CFolder &folder)
       {
         coder.NumStreams = 1;
       }
-      
+
       if ((mainByte & 0x20) != 0)
       {
         CNum propsSize = ReadNum();
@@ -432,7 +432,7 @@ void CInByte2::ParseFolder(CFolder &folder)
     ThrowUnsupported();
   UInt32 numPackStreams = numInStreams - numBonds;
   folder.PackStreams.SetSize(numPackStreams);
-  
+
   if (numPackStreams == 1)
   {
     for (i = 0; i < numInStreams; i++)
@@ -477,9 +477,9 @@ void CDatabase::GetPath(unsigned index, UString &path) const
   const Byte *p = ((const Byte *)NamesBuf + offset * 2);
 
   #if defined(_WIN32) && defined(MY_CPU_LE)
-  
+
   wmemcpy(s, (const wchar_t *)p, size);
-  
+
   #else
 
   for (size_t i = 0; i < size; i++)
@@ -527,7 +527,7 @@ HRESULT CDatabase::GetPath_Prop(unsigned index, PROPVARIANT *path) const throw()
   /*
   unsigned cur = index;
   unsigned size = 0;
-  
+
   for (int i = 0;; i++)
   {
     size_t len = NameOffsets[cur + 1] - NameOffsets[cur];
@@ -545,7 +545,7 @@ HRESULT CDatabase::GetPath_Prop(unsigned index, PROPVARIANT *path) const throw()
   s += size;
   *s = 0;
   cur = index;
-  
+
   for (;;)
   {
     unsigned len = (unsigned)(NameOffsets[cur + 1] - NameOffsets[cur] - 1);
@@ -612,7 +612,7 @@ void CInArchive::ReadHashDigests(unsigned numItems, CUInt32DefVector &crcs)
 void CInArchive::ReadPackInfo(CFolders &f)
 {
   CNum numPackStreams = ReadNum();
-  
+
   WaitId(NID::kSize);
   f.PackPositions.Alloc(numPackStreams + 1);
   f.NumPackStreams = numPackStreams;
@@ -668,7 +668,7 @@ void CInArchive::ReadUnpackInfo(
     CNum packStreamIndex = 0;
     CNum fo;
     CInByte2 *inByte = _inByteBack;
-    
+
     for (fo = 0; fo < numFolders; fo++)
     {
       UInt32 indexOfMainStream = 0;
@@ -677,7 +677,7 @@ void CInArchive::ReadUnpackInfo(
 
       CNum numInStreams = 0;
       CNum numCoders = inByte->ReadNum();
-    
+
       if (numCoders == 0 || numCoders > k_Scan_NumCoders_MAX)
         ThrowUnsupported();
 
@@ -686,7 +686,7 @@ void CInArchive::ReadUnpackInfo(
         Byte mainByte = inByte->ReadByte();
         if ((mainByte & 0xC0) != 0)
           ThrowUnsupported();
-        
+
         unsigned idSize = (mainByte & 0xF);
         if (idSize > 8)
           ThrowUnsupported();
@@ -699,7 +699,7 @@ void CInArchive::ReadUnpackInfo(
         inByte->SkipDataNoCheck(idSize);
         if (folders.ParsedMethods.IDs.Size() < 128)
           folders.ParsedMethods.IDs.AddToUniqueSorted(id);
-        
+
         CNum coderInStreams = 1;
         if ((mainByte & 0x10) != 0)
         {
@@ -713,7 +713,7 @@ void CInArchive::ReadUnpackInfo(
         numInStreams += coderInStreams;
         if (numInStreams > k_Scan_NumCodersStreams_in_Folder_MAX)
           ThrowUnsupported();
-        
+
         if ((mainByte & 0x20) != 0)
         {
           CNum propsSize = inByte->ReadNum();
@@ -734,7 +734,7 @@ void CInArchive::ReadUnpackInfo(
           inByte->SkipDataNoCheck((size_t)propsSize);
         }
       }
-      
+
       if (numCoders == 1 && numInStreams == 1)
       {
         indexOfMainStream = 0;
@@ -746,25 +746,25 @@ void CInArchive::ReadUnpackInfo(
         CNum numBonds = numCoders - 1;
         if (numInStreams < numBonds)
           ThrowUnsupported();
-        
+
         BoolVector_Fill_False(StreamUsed, numInStreams);
         BoolVector_Fill_False(CoderUsed, numCoders);
-        
+
         for (i = 0; i < numBonds; i++)
         {
           CNum index = ReadNum();
           if (index >= numInStreams || StreamUsed[index])
             ThrowUnsupported();
           StreamUsed[index] = true;
-          
+
           index = ReadNum();
           if (index >= numCoders || CoderUsed[index])
             ThrowUnsupported();
           CoderUsed[index] = true;
         }
-        
+
         numPackStreams = numInStreams - numBonds;
-        
+
         if (numPackStreams != 1)
           for (i = 0; i < numPackStreams; i++)
           {
@@ -773,18 +773,18 @@ void CInArchive::ReadUnpackInfo(
               ThrowUnsupported();
             StreamUsed[index] = true;
           }
-          
+
         for (i = 0; i < numCoders; i++)
           if (!CoderUsed[i])
           {
             indexOfMainStream = i;
             break;
           }
-          
+
         if (i == numCoders)
           ThrowUnsupported();
       }
-      
+
       folders.FoToCoderUnpackSizes[fo] = numCodersOutStreams;
       numCodersOutStreams += numCoders;
       folders.FoStartPackStreamIndex[fo] = packStreamIndex;
@@ -793,7 +793,7 @@ void CInArchive::ReadUnpackInfo(
       packStreamIndex += numPackStreams;
       folders.FoToMainUnpackSizeIndex[fo] = (Byte)indexOfMainStream;
     }
-    
+
     size_t dataSize = _inByteBack->GetPtr() - startBufPtr;
     folders.FoToCoderUnpackSizes[fo] = numCodersOutStreams;
     folders.FoStartPackStreamIndex[fo] = packStreamIndex;
@@ -831,9 +831,9 @@ void CInArchive::ReadSubStreamsInfo(
   CNum i;
   for (i = 0; i < folders.NumFolders; i++)
     folders.NumUnpackStreamsVector[i] = 1;
-  
+
   UInt64 type;
-  
+
   for (;;)
   {
     type = ReadID();
@@ -907,10 +907,10 @@ void CInArchive::ReadSubStreamsInfo(
       ReadBoolVector2(numDigests, digests2);
 
       digests.ClearAndSetSize(unpackSizes.Size());
-      
+
       unsigned k = 0;
       unsigned k2 = 0;
-      
+
       for (i = 0; i < folders.NumFolders; i++)
       {
         CNum numSubstreams = folders.NumUnpackStreamsVector[i];
@@ -935,7 +935,7 @@ void CInArchive::ReadSubStreamsInfo(
     }
     else
       SkipData();
-    
+
     type = ReadID();
   }
 
@@ -970,7 +970,7 @@ void CInArchive::ReadStreamsInfo(
     CUInt32DefVector &digests)
 {
   UInt64 type = ReadID();
-  
+
   if (type == NID::kPackInfo)
   {
     dataOffset = ReadNumber();
@@ -990,7 +990,7 @@ void CInArchive::ReadStreamsInfo(
     folders.PackPositions.Alloc(1);
     folders.PackPositions[0] = 0;
   }
-  
+
   if (type == NID::kSubStreamsInfo)
   {
     ReadSubStreamsInfo(folders, unpackSizes, digests);
@@ -1010,7 +1010,7 @@ void CInArchive::ReadStreamsInfo(
       // digests.Vals[i] = 0;
     }
   }
-  
+
   if (type != NID::kEnd)
     ThrowIncorrect();
 }
@@ -1054,7 +1054,7 @@ void CInArchive::ReadUInt64DefVector(const CObjectVector<CByteBuffer> &dataVecto
 
   CStreamSwitch streamSwitch;
   streamSwitch.Set(this, &dataVector);
-  
+
   v.Vals.ClearAndSetSize(numItems);
   UInt64 *p = &v.Vals[0];
   const bool *defs = &v.Defs[0];
@@ -1078,13 +1078,13 @@ HRESULT CInArchive::ReadAndDecodePackedStreams(
   CFolders folders;
   CRecordVector<UInt64> unpackSizes;
   CUInt32DefVector  digests;
-  
+
   ReadStreamsInfo(NULL,
     dataOffset,
     folders,
     unpackSizes,
     digests);
-  
+
   CDecoder decoder(_useMixerMT);
 
   for (CNum i = 0; i < folders.NumFolders; i++)
@@ -1095,11 +1095,11 @@ HRESULT CInArchive::ReadAndDecodePackedStreams(
     if (unpackSize != unpackSize64)
       ThrowUnsupported();
     data.Alloc(unpackSize);
-    
+
     CBufPtrSeqOutStream *outStreamSpec = new CBufPtrSeqOutStream;
     CMyComPtr<ISequentialOutStream> outStream = outStreamSpec;
     outStreamSpec->Init(data, unpackSize);
-    
+
     bool dataAfterEnd_Error = false;
 
     HRESULT result = decoder.Decode(
@@ -1107,13 +1107,13 @@ HRESULT CInArchive::ReadAndDecodePackedStreams(
         _stream, baseOffset + dataOffset,
         folders, i,
         NULL, // *unpackSize
-        
+
         outStream,
         NULL, // *compressProgress
 
         NULL  // **inStreamMainRes
         , dataAfterEnd_Error
-        
+
         _7Z_DECODER_CRYPRO_VARS
         #if !defined(_7ZIP_ST)
           , false // mtMode
@@ -1121,12 +1121,12 @@ HRESULT CInArchive::ReadAndDecodePackedStreams(
           , 0     // memUsage
         #endif
       );
-    
+
     RINOK(result);
-    
+
     if (dataAfterEnd_Error)
       ThereIsHeaderError = true;
-    
+
     if (folders.FolderCRCs.ValidAndDefined(i))
       if (CrcCalc(data, unpackSize) != folders.FolderCRCs.Vals[i])
         ThrowIncorrect();
@@ -1151,9 +1151,9 @@ HRESULT CInArchive::ReadHeader(
     ReadArchiveProperties(db.ArcInfo);
     type = ReadID();
   }
- 
+
   CObjectVector<CByteBuffer> dataVector;
-  
+
   if (type == NID::kAdditionalStreamsInfo)
   {
     HRESULT result = ReadAndDecodePackedStreams(
@@ -1170,7 +1170,7 @@ HRESULT CInArchive::ReadHeader(
 
   CRecordVector<UInt64> unpackSizes;
   CUInt32DefVector digests;
-  
+
   if (type == NID::kMainStreamsInfo)
   {
     ReadStreamsInfo(&dataVector,
@@ -1184,7 +1184,7 @@ HRESULT CInArchive::ReadHeader(
 
   if (type == NID::kFilesInfo)
   {
-  
+
   const CNum numFiles = ReadNum();
 
   db.ArcInfo.FileInfoPopIDs.Add(NID::kSize);
@@ -1249,7 +1249,7 @@ HRESULT CInArchive::ReadHeader(
         Read_UInt32_Vector(db.Attrib);
         break;
       }
-      
+
       /*
       case NID::kIsAux:
       {
@@ -1408,9 +1408,9 @@ HRESULT CInArchive::ReadHeader(
     if (numAntiItems != 0)
       db.IsAnti[i] = isAnti;
   }
-  
+
   }
-  
+
   db.FillLinks();
 
   if (type != NID::kEnd || _inByteBack->GetRem() != 0)
@@ -1427,7 +1427,7 @@ void CDbEx::FillLinks()
 {
   FolderStartFileIndex.Alloc(NumFolders);
   FileIndexToFolderIndexMap.Alloc(Files.Size());
-  
+
   CNum folderIndex = 0;
   CNum indexInFolder = 0;
   unsigned i;
@@ -1470,7 +1470,7 @@ void CDbEx::FillLinks()
   if (indexInFolder != 0)
     ThrowIncorrect();
   */
-  
+
   for (;;)
   {
     if (folderIndex >= NumFolders)
@@ -1564,10 +1564,10 @@ HRESULT CInArchive::ReadDatabase2(
     db.IsArc = true;
     return S_OK;
   }
-  
+
   if (!db.StartHeaderWasRecovered)
     db.IsArc = true;
-  
+
   HeadersSize += kHeaderSize + nextHeaderSize;
   db.PhySize = kHeaderSize + nextHeaderOffset + nextHeaderSize;
   if (_fileEndPosition - db.ArcInfo.StartPositionAfterHeader < nextHeaderOffset + nextHeaderSize)
@@ -1589,12 +1589,12 @@ HRESULT CInArchive::ReadDatabase2(
 
   if (!db.StartHeaderWasRecovered)
     db.PhySizeWasConfirmed = true;
-  
+
   CStreamSwitch streamSwitch;
   streamSwitch.Set(this, buffer2);
-  
+
   CObjectVector<CByteBuffer> dataVector;
-  
+
   UInt64 type = ReadID();
   if (type != NID::kHeader)
   {

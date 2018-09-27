@@ -177,7 +177,7 @@ radix4fsGrpZeroSetLoop\name :
             VADD    qZ0,qY0,qY1
 
             @//  data[3] & update pSrc for the next set, but not if it's the
-            @//  last iteration so that we don't read past the end of the 
+            @//  last iteration so that we don't read past the end of the
             @//  input array.
             BEQ     radix4SkipLastUpdateInv\name
             VLD2    {dXr3,dXi3},[pSrc, :128],setStep
@@ -204,7 +204,7 @@ radix4SkipLastUpdateInv\name:
             VADD    qZ0,qY0,qY1
 
             @//  data[3] & update pSrc for the next set, but not if it's the
-            @//  last iteration so that we don't read past the end of the 
+            @//  last iteration so that we don't read past the end of the
             @//  input array.
             BEQ     radix4SkipLastUpdateFwd\name
             VLD2    {dXr3,dXi3},[pSrc, :128],setStep

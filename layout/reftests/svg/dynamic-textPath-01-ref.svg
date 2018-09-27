@@ -8,7 +8,7 @@
   <defs>
 	  <path id="m1" d="M 75.5 100 h 251"/>
   </defs>
-	
+
   <text>
 	  <textPath xlink:href="#m1" font-size="20" fill="black">Should see this</textPath>
   </text>

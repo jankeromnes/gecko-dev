@@ -94,7 +94,7 @@ class Asn1ItemBase(Asn1Item):
 
     def isSuperTypeOf(self, other, matchTags=True, matchConstraints=True):
         """Examine |ASN.1| type for subtype relationship with other ASN.1 type.
-        
+
         ASN.1 tags (:py:mod:`~pyasn1.type.tag`) and constraints
         (:py:mod:`~pyasn1.type.constraint`) are examined when carrying
         out ASN.1 types comparison.
@@ -105,7 +105,7 @@ class Asn1ItemBase(Asn1Item):
         Parameters
         ----------
             other: a pyasn1 type object
-                Class instance representing ASN.1 type. 
+                Class instance representing ASN.1 type.
 
         Returns
         -------
@@ -152,7 +152,7 @@ class NoValue(object):
     a PyASN1 type object.
     """
     skipMethods = ('__getattribute__', '__getattr__', '__setattr__', '__delattr__',
-                   '__class__', '__init__', '__del__', '__new__', '__repr__', 
+                   '__class__', '__init__', '__del__', '__new__', '__repr__',
                    '__qualname__', '__objclass__', 'im_class', '__sizeof__')
 
     _instance = None

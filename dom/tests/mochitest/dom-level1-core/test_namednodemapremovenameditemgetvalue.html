@@ -38,13 +38,13 @@ function setUpPage() {
        setImplementationAttribute("validating", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -55,7 +55,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -74,18 +74,18 @@ var docName = 'namednodemapremovenameditemgetvalue';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
-    If the node removed by the "removeNamedItem(name)" method 
+*
+    If the node removed by the "removeNamedItem(name)" method
    is an Attr node with a default value it is immediately
-   replaced. 
-   
-   Retrieve the third employee and create a NamedNodeMap 
+   replaced.
+
+   Retrieve the third employee and create a NamedNodeMap
    object of the attributes of the last child.  Once the
    list is created invoke the "removeNamedItem(name)"
    method with name="street".  The "removeNamedItem(name)"
@@ -109,7 +109,7 @@ function namednodemapremovenameditemgetvalue() {
       var streetAttr;
       var value;
       var removedNode;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -126,7 +126,7 @@ removedNode = attributes.removeNamedItem("street");
 value = streetAttr.value;
 
       assertEquals("namednodemapRemoveNamedItemGetValueAssert","Yes",value);
-       
+
 }
 
 </script>
@@ -135,12 +135,12 @@ value = streetAttr.value;
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/namednodemapremovenameditemgetvalue</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

@@ -18,13 +18,13 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = 'SyntaxError';
 
   try
   {
     var i = 1;
-    eval('i \\u002b= 1'); 
+    eval('i \\u002b= 1');
     print(i);
   }
   catch(ex)

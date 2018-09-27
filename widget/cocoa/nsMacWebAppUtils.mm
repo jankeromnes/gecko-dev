@@ -25,7 +25,7 @@ NS_IMETHODIMP nsMacWebAppUtils::PathForAppWithIdentifier(const nsAString& bundle
 
   nsAutoreleasePool localPool;
 
-  //note that the result of this expression might be nil, meaning no matching app was found. 
+  //note that the result of this expression might be nil, meaning no matching app was found.
   NSString* temp = [[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier:
                         [NSString stringWithCharacters:reinterpret_cast<const unichar*>(((nsString)bundleIdentifier).get())
                                                 length:((nsString)bundleIdentifier).Length()]];
@@ -45,7 +45,7 @@ NS_IMETHODIMP nsMacWebAppUtils::LaunchAppWithIdentifier(const nsAString& bundleI
 
   nsAutoreleasePool localPool;
 
-  // Note this might return false, meaning the app wasnt launched for some reason. 
+  // Note this might return false, meaning the app wasnt launched for some reason.
   BOOL success = [[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:
                         [NSString stringWithCharacters:reinterpret_cast<const unichar*>(((nsString)bundleIdentifier).get())
                                                 length:((nsString)bundleIdentifier).Length()]

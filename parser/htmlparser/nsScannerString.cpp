@@ -76,7 +76,7 @@ nsScannerBufferList::SplitBuffer( const Position& pos )
     NS_ASSERTION(pos.mPosition >= bufferToSplit->DataStart() &&
                  splitOffset <= bufferToSplit->DataLength(),
                  "split offset is outside buffer");
-    
+
     uint32_t len = bufferToSplit->DataLength() - splitOffset;
     Buffer* new_buffer = AllocBuffer(len);
     if (new_buffer)
@@ -173,7 +173,7 @@ nsScannerSubstring::CountChar( char16_t c ) const
 
 void
 nsScannerSubstring::Rebind( const nsScannerSubstring& aString,
-                            const nsScannerIterator& aStart, 
+                            const nsScannerIterator& aStart,
                             const nsScannerIterator& aEnd )
   {
     // allow for the case where &aString == this
@@ -332,7 +332,7 @@ nsScannerString::DiscardPrefix( const nsScannerIterator& aIter )
     Position old_start(mStart);
     mStart = aIter;
     mLength -= Position::Distance(old_start, mStart);
-    
+
     mStart.mBuffer->IncrementUsageCount();
     old_start.mBuffer->DecrementUsageCount();
 
@@ -521,7 +521,7 @@ FindCharInReadable( char16_t aChar,
     while ( aSearchStart != aSearchEnd )
       {
         int32_t fragmentLength;
-        if ( SameFragment(aSearchStart, aSearchEnd) ) 
+        if ( SameFragment(aSearchStart, aSearchEnd) )
           fragmentLength = aSearchEnd.get() - aSearchStart.get();
         else
           fragmentLength = aSearchStart.size_forward();

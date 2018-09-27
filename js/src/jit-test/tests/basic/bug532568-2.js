@@ -11,7 +11,7 @@ function f(xa_arg) {
   for (var i = 0; i < 5; ++i) {
     var j = i + xa[i];
     before += j + ',';
-    g(); 
+    g();
     after += j + ',';
   }
 }

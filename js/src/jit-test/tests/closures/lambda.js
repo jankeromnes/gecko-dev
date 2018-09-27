@@ -1,6 +1,6 @@
 function f() {
   var k = 0;
-  
+
   var g = function() {
     return ++k;
   }

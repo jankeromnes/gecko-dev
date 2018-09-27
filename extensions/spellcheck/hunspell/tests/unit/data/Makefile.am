@@ -121,7 +121,7 @@ warn.test
 
 distclean-local:
 	-rm -rf testSubDir
-        
+
 EXTRA_DIST = \
 test.sh \
 affixes.aff \

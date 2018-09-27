@@ -802,13 +802,13 @@ gfxContext::WriteAsPNG(const char* aFile)
   gfxUtils::WriteAsPNG(mDT, aFile);
 }
 
-void 
+void
 gfxContext::DumpAsDataURI()
 {
   gfxUtils::DumpAsDataURI(mDT);
 }
 
-void 
+void
 gfxContext::CopyAsDataURI()
 {
   gfxUtils::CopyAsDataURI(mDT);
@@ -944,7 +944,7 @@ gfxContext::ChangeTransform(const Matrix &aNewMatrix, bool aUpdatePatternTransfo
 
   if (mPathIsRect) {
     Matrix invMatrix = aNewMatrix;
-    
+
     invMatrix.Invert();
 
     Matrix toNewUS = mTransform * invMatrix;

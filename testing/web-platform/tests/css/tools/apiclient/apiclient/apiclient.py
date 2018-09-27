@@ -61,7 +61,7 @@ class MimeType(UserString.MutableString):
     @property
     def type(self):
         return self._type
-    
+
     @type.setter
     def type(self, value):
         self._type = value
@@ -103,7 +103,7 @@ class APIResponse(object):
     def contentType(self):
         contentType = self.headers.get('content-type') if (self.headers) else None
         return MimeType(contentType.split(';')[0]) if (contentType and (';' in contentType)) else MimeType(contentType)
-    
+
     @property
     def encoding(self):
         contentType = self.headers.get('content-type') if (self.headers) else None
@@ -112,7 +112,7 @@ class APIResponse(object):
             if ('=' in encoding):
                 return encoding.split('=', 1)[1].strip()
         return 'utf-8'
-    
+
 
 class APIHints(object):
     def __init__(self, data):
@@ -124,12 +124,12 @@ class APIHints(object):
                 self.formats['GET'] = formats
             if ('PUT' in self.httpMethods):
                 self.formats['PUT'] = formats
-    
+
         if (('PATCH' in self.httpMethods) and ('accept-patch' in data)):
             self.formats['PATCH'] = [MimeType(format) for format in data['accept-patch']]
         if (('POST' in self.httpMethods) and ('accept-post' in data)):
             self.formats['POST'] = [MimeType(format) for format in data['accept-post']]
-    
+
         # TODO: ranges from 'accept-ranges'; preferece tokens from 'accept-prefer';
         #       preconditions from 'precondition-req'; auth from 'auth-req'
         self.ranges = None
@@ -166,14 +166,14 @@ class APIClient(object):
         self._resources = {}
         self._versions = {}
         self._accepts = {}
-        
+
         self._loadHome()
-    
+
 
     @property
     def baseURI(self):
         return self._baseURI
-    
+
     def _loadHome(self):
         home = self._callURI('GET', self.baseURI, 'application/home+json, application/json-home, application/json')
         if (home):
@@ -208,7 +208,7 @@ class APIClient(object):
 
     def resource(self, name):
         return self._resources.get(urlparse.urljoin(self.baseURI, name))
-    
+
     def addResource(self, name, uri):
         resource = APIResource(self.baseURI, uri)
         apiKey = urlparse.urljoin(self.baseURI, name)
@@ -230,17 +230,17 @@ class APIClient(object):
             if (payload and payloadType):
                 request.add_header('Content-Type', payloadType)
             request.get_method = lambda: method
-            
+
             with contextlib.closing(urllib2.urlopen(request)) as response:
                 return APIResponse(response)
         except Exception as e:
             pass
         return None
-    
+
     def _call(self, method, name, arguments, payload = None, payloadType = None):
         apiKey = urlparse.urljoin(self.baseURI, name)
         resource = self._resources.get(apiKey)
-        
+
         if (resource):
             uri = resource.template.expand(**arguments)
             if (uri):
@@ -250,7 +250,7 @@ class APIClient(object):
                     accept.subtype = version
                 return self._callURI(method, uri, accept, payload, payloadType)
         return None
-    
+
     def setVersion(self, name, version):
         apiKey = urlparse.urljoin(self.baseURI, name)
         self._versions[apiKey] = version
@@ -261,7 +261,7 @@ class APIClient(object):
 
     def get(self, name, **kwargs):
         return self._call('GET', name, kwargs)
-    
+
     def post(self, name, payload = None, payloadType = None, **kwargs):
         return self._call('POST', name, kwargs, payload, payloadType)
 

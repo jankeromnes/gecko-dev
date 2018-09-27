@@ -120,7 +120,7 @@ if __name__ == "__main__":
         s2 = sign(testh1, (dk[0], dk[1] ^ 1))
         s3 = (s1[0], s1[1] ^ 1)
         qk2 = (qk[0], (qk[1][0] ^ 1, qk[1][1]))
-        
+
         assert verify(testh1, s1, qk)       # everything ok -> must succeed
         assert not verify(testh2, s1, qk)   # modified hash       -> must fail
         assert not verify(testh1, s2, qk)   # different priv. key -> must fail
@@ -132,12 +132,12 @@ if __name__ == "__main__":
         '''-> (key generations, signatures, verifications) / second'''
         h = 0x0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
         d = get_curve(bits)
-        
+
         t = time.time()
         for i in xrange(rounds):
             qk, dk = keypair(bits)
         tgen = time.time() - t
-        
+
         t = time.time()
         for i in xrange(rounds):
             s = sign(0, dk)
@@ -150,4 +150,4 @@ if __name__ == "__main__":
 
         return rounds / tgen, rounds / tsign, rounds / tver
 
-    
+

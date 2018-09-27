@@ -5,7 +5,7 @@ ifndef TOUCH
 TOUCH = touch
 endif
 
-all: 
+all:
 	$(RM) justprint-native-file1.txt
 	$(TOUCH) justprint-native-file2.txt
 	$(MAKE) --just-print -f $(TESTPATH)/justprint-native.mk justprint_target > justprint.log

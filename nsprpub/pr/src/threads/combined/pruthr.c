@@ -7,7 +7,7 @@
 #include <signal.h>
 #include <string.h>
 
-#if defined(WIN95)                                                                         
+#if defined(WIN95)
 /*
 ** Some local variables report warnings on Win95 because the code paths
 ** using them are conditioned on HAVE_CUSTOME_USER_THREADS.
@@ -15,7 +15,7 @@
 **
 */
 #pragma warning(disable : 4101)
-#endif          
+#endif
 
 /* _pr_activeLock protects the following global variables */
 PRLock *_pr_activeLock;
@@ -28,7 +28,7 @@ PRInt32 _pr_primordialExitCount;   /* In PR_Cleanup(), the primordial thread
                     * If the primordial thread is a system
                     * thread, then _pr_primordialExitCount
                     * is 0.  If the primordial thread is
-                    * itself a user thread, then 
+                    * itself a user thread, then
                     * _pr_primordialThread is 1.
                     */
 PRCondVar *_pr_primordialExitCVar; /* When _pr_userActive is decremented to
@@ -195,7 +195,7 @@ void _PR_NotifyJoinWaiters(PRThread *thread)
     ** Notify on our "termination" condition variable so that joining
     ** thread will know about our termination.  Switch our context and
     ** come back later on to continue the cleanup.
-    */    
+    */
     PR_ASSERT(thread == _PR_MD_CURRENT_THREAD());
     if (thread->term != NULL) {
         PR_Lock(_pr_terminationCVLock);
@@ -517,7 +517,7 @@ static void _PR_UserRunThread(void)
         /* All done, time to go away */
         _PR_CleanupThread(thread);
 
-        _PR_INTSOFF(is);    
+        _PR_INTSOFF(is);
 
         _PR_NotifyJoinWaiters(thread);
 
@@ -704,12 +704,12 @@ static void _PR_Resume(PRThread *thread)
 /*      PR_ASSERT(thread->wait.monitor->stickyCount == 0); */
         break;
 
-      case _PR_LOCK_WAIT: 
+      case _PR_LOCK_WAIT:
       {
         PRLock *wLock = thread->wait.lock;
 
         thread->flags &= ~_PR_SUSPENDING;
- 
+
         _PR_LOCK_LOCK(wLock);
         if (thread->wait.lock->owner == 0) {
             _PR_UnblockLockWaiter(thread->wait.lock);
@@ -762,7 +762,7 @@ static PRThread *get_thread(_PRCPU *cpu, PRBool *wakeup_cpus)
     thread = NULL;
     for (pri = priMax; pri >= priMin ; pri-- ) {
     if (r & (1 << pri)) {
-            for (qp = _PR_RUNQ(cpu)[pri].next; 
+            for (qp = _PR_RUNQ(cpu)[pri].next;
                  qp != &_PR_RUNQ(cpu)[pri];
                  qp = qp->next) {
                 thread = _PR_THREAD_PTR(qp);
@@ -877,7 +877,7 @@ void _PR_Schedule(void)
     thread = NULL;
     for (pri = priMax; pri >= priMin ; pri-- ) {
     if (r & (1 << pri)) {
-            for (qp = _PR_RUNQ(cpu)[pri].next; 
+            for (qp = _PR_RUNQ(cpu)[pri].next;
                  qp != &_PR_RUNQ(cpu)[pri];
                  qp = qp->next) {
                 thread = _PR_THREAD_PTR(qp);
@@ -938,17 +938,17 @@ found_thread:
        ("switching to %d[%p]", thread->id, thread));
     PR_ASSERT(thread->state != _PR_RUNNING);
     thread->state = _PR_RUNNING;
- 
+
     /* If we are on the runq, it just means that we went to sleep on some
      * resource, and by the time we got here another real native thread had
-     * already given us the resource and put us back on the runqueue 
+     * already given us the resource and put us back on the runqueue
      */
 	PR_ASSERT(thread->cpu == _PR_MD_CURRENT_CPU());
-    if (thread != me) 
+    if (thread != me)
         _PR_MD_RESTORE_CONTEXT(thread);
 #if 0
-    /* XXXMB; with setjmp/longjmp it is impossible to land here, but 
-     * it is not with fibers... Is this a bad thing?  I believe it is 
+    /* XXXMB; with setjmp/longjmp it is impossible to land here, but
+     * it is not with fibers... Is this a bad thing?  I believe it is
      * still safe.
      */
     PR_NOT_REACHED("impossible return from schedule");
@@ -956,8 +956,8 @@ found_thread:
 }
 
 /*
-** Attaches a thread.  
-** Does not set the _PR_MD_CURRENT_THREAD.  
+** Attaches a thread.
+** Does not set the _PR_MD_CURRENT_THREAD.
 ** Does not specify the scope of the thread.
 */
 static PRThread *
@@ -992,7 +992,7 @@ _PR_AttachThread(PRThreadType type, PRThreadPriority priority,
 
 
 
-PR_IMPLEMENT(PRThread*) 
+PR_IMPLEMENT(PRThread*)
 _PR_NativeCreateThread(PRThreadType type,
                      void (*start)(void *arg),
                      void *arg,
@@ -1028,7 +1028,7 @@ _PR_NativeCreateThread(PRThreadType type,
         thread->startFunc = start;
         thread->arg = arg;
 
-        /* 
+        /*
           Set thread flags related to scope and joinable state. If joinable
           thread, allocate a "termination" conidition variable.
          */
@@ -1080,7 +1080,7 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
     PRIntn useRecycled = 0;
     PRBool status;
 
-    /* 
+    /*
     First, pin down the priority.  Not all compilers catch passing out of
     range enum here.  If we let bad values thru, priority queues won't work.
     */
@@ -1089,7 +1089,7 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
     } else if (priority < PR_PRIORITY_FIRST) {
         priority = PR_PRIORITY_FIRST;
     }
-        
+
     if (!_pr_initialized) _PR_ImplicitInitialization();
 
     if (! (flags & _PR_IDLE_THREAD))
@@ -1141,7 +1141,7 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
             else PR_ATOMIC_INCREMENT(&_pr_userActive);
 
             if (state == PR_JOINABLE_THREAD) {
-                if (!thread->term) 
+                if (!thread->term)
                        thread->term = PR_NewCondVar(_pr_terminationCVLock);
             }
         else {
@@ -1159,7 +1159,7 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
         return thread;
             }
         }
-        thread = _PR_NativeCreateThread(type, start, arg, priority, 
+        thread = _PR_NativeCreateThread(type, start, arg, priority,
                                             scope, state, stackSize, flags);
     } else {
         if (_PR_NUM_DEADUSER > 0) {
@@ -1170,7 +1170,7 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
             } else {
                 PRCList *ptr;
 
-                /* Go down list checking for a recycled thread with a 
+                /* Go down list checking for a recycled thread with a
                  * large enough stack.  XXXMB - this has a bad degenerate case.
                  */
                 ptr = _PR_DEADUSERQ.next;
@@ -1185,7 +1185,7 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
                         ptr = ptr->next;
                         thread = NULL;
                     }
-                } 
+                }
 
                 _PR_DEADQ_UNLOCK;
 
@@ -1195,7 +1195,7 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
                     thread->arg = arg;
                     thread->priority = priority;
             if (state == PR_JOINABLE_THREAD) {
-            if (!thread->term) 
+            if (!thread->term)
                thread->term = PR_NewCondVar(_pr_terminationCVLock);
             } else {
             if(thread->term) {
@@ -1206,7 +1206,7 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
                     useRecycled++;
                 }
             }
-        } 
+        }
         if (thread == NULL) {
 #ifndef HAVE_CUSTOM_USER_THREADS
             stack = _PR_NewStack(stackSize);
@@ -1293,7 +1293,7 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
                 return NULL;
             }
 
-            /* 
+            /*
               Set thread flags related to scope and joinable state. If joinable
               thread, allocate a "termination" condition variable.
             */
@@ -1310,9 +1310,9 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
                     return NULL;
                 }
             }
-  
+
         }
-  
+
         /* Update thread type counter */
         PR_Lock(_pr_activeLock);
         thread->flags = flags;
@@ -1350,7 +1350,7 @@ PR_IMPLEMENT(PRThread*) _PR_CreateThread(PRThreadType type,
             ** If the creating thread is a kernel thread, we need to
             ** awaken the user thread idle thread somehow; potentially
             ** it could be sleeping in its idle loop, and we need to poke
-            ** it.  To do so, wake the idle thread...  
+            ** it.  To do so, wake the idle thread...
             */
             _PR_MD_WAKEUP_WAITER(NULL);
         } else if (_PR_IS_NATIVE_THREAD(me)) {
@@ -1371,7 +1371,7 @@ PR_IMPLEMENT(PRThread*) PR_CreateThread(PRThreadType type,
                      PRThreadState state,
                      PRUint32 stackSize)
 {
-    return _PR_CreateThread(type, start, arg, priority, scope, state, 
+    return _PR_CreateThread(type, start, arg, priority, scope, state,
                             stackSize, 0);
 }
 
@@ -1486,7 +1486,7 @@ void _PRI_DetachThread(void)
 
     _PR_MD_CLEAN_THREAD(me);
     _PR_MD_SET_CURRENT_THREAD(NULL);
-    if (!me->threadAllocatedOnStack) 
+    if (!me->threadAllocatedOnStack)
         PR_DELETE(me->stack);
     _PR_MD_FREE_LOCK(&me->threadLock);
     PR_DELETE(me);
@@ -1494,9 +1494,9 @@ void _PRI_DetachThread(void)
 
 /*
 ** Wait for thread termination:
-**     "thread" is the target thread 
+**     "thread" is the target thread
 **
-** This can return PR_FAILURE if no joinable thread could be found 
+** This can return PR_FAILURE if no joinable thread could be found
 ** corresponding to the specified target thread.
 **
 ** The calling thread is suspended until the target thread completes.
@@ -1533,12 +1533,12 @@ PR_IMPLEMENT(PRStatus) PR_JoinThread(PRThread *thread)
         (void) PR_WaitCondVar(term, PR_INTERVAL_NO_TIMEOUT);
     }
     (void) PR_Unlock (_pr_terminationCVLock);
-    
-    /* 
+
+    /*
      Remove target thread from global waiting to join Q; make it runnable
      again and put it back on its run Q.  When it gets scheduled later in
      _PR_RunThread code, it will clean up its stack.
-    */    
+    */
     if (!_PR_IS_NATIVE_THREAD(me))
         _PR_INTSOFF(is);
     thread->state = _PR_RUNNABLE;
@@ -1561,14 +1561,14 @@ PR_IMPLEMENT(PRStatus) PR_JoinThread(PRThread *thread)
 
 ErrorExit:
     if ( !_PR_IS_NATIVE_THREAD(me)) _PR_INTSON(is);
-    return PR_FAILURE;   
+    return PR_FAILURE;
 }
 
 PR_IMPLEMENT(void) PR_SetThreadPriority(PRThread *thread,
     PRThreadPriority newPri)
 {
 
-    /* 
+    /*
     First, pin down the priority.  Not all compilers catch passing out of
     range enum here.  If we let bad values thru, priority queues won't work.
     */
@@ -1577,7 +1577,7 @@ PR_IMPLEMENT(void) PR_SetThreadPriority(PRThread *thread,
     } else if ((PRIntn)newPri < (PRIntn)PR_PRIORITY_FIRST) {
         newPri = PR_PRIORITY_FIRST;
     }
-        
+
     if ( _PR_IS_NATIVE_THREAD(thread) ) {
         thread->priority = newPri;
         _PR_MD_SET_PRIORITY(&(thread->md), newPri);
@@ -1617,7 +1617,7 @@ PR_IMPLEMENT(const char *) PR_GetThreadName(const PRThread *thread)
 
 
 /*
-** This routine prevents all other threads from running. This call is needed by 
+** This routine prevents all other threads from running. This call is needed by
 ** the garbage collector.
 */
 PR_IMPLEMENT(void) PR_SuspendAll(void)
@@ -1634,7 +1634,7 @@ PR_IMPLEMENT(void) PR_SuspendAll(void)
     _PR_MD_BEGIN_SUSPEND_ALL();
     for (qp = _PR_ACTIVE_LOCAL_THREADQ().next;
         qp != &_PR_ACTIVE_LOCAL_THREADQ(); qp = qp->next) {
-        if ((me != _PR_ACTIVE_THREAD_PTR(qp)) && 
+        if ((me != _PR_ACTIVE_THREAD_PTR(qp)) &&
             _PR_IS_GCABLE_THREAD(_PR_ACTIVE_THREAD_PTR(qp))) {
             _PR_Suspend(_PR_ACTIVE_THREAD_PTR(qp));
                 PR_ASSERT((_PR_ACTIVE_THREAD_PTR(qp))->state != _PR_RUNNING);
@@ -1645,13 +1645,13 @@ PR_IMPLEMENT(void) PR_SuspendAll(void)
         if ((me != _PR_ACTIVE_THREAD_PTR(qp)) &&
             _PR_IS_GCABLE_THREAD(_PR_ACTIVE_THREAD_PTR(qp)))
             /* PR_Suspend(_PR_ACTIVE_THREAD_PTR(qp)); */
-                _PR_MD_SUSPEND_THREAD(_PR_ACTIVE_THREAD_PTR(qp)); 
+                _PR_MD_SUSPEND_THREAD(_PR_ACTIVE_THREAD_PTR(qp));
     }
     _PR_MD_END_SUSPEND_ALL();
 }
 
 /*
-** This routine unblocks all other threads that were suspended from running by 
+** This routine unblocks all other threads that were suspended from running by
 ** PR_SuspendAll(). This call is needed by the garbage collector.
 */
 PR_IMPLEMENT(void) PR_ResumeAll(void)
@@ -1665,7 +1665,7 @@ PR_IMPLEMENT(void) PR_ResumeAll(void)
     _PR_MD_BEGIN_RESUME_ALL();
     for (qp = _PR_ACTIVE_LOCAL_THREADQ().next;
         qp != &_PR_ACTIVE_LOCAL_THREADQ(); qp = qp->next) {
-        if ((me != _PR_ACTIVE_THREAD_PTR(qp)) && 
+        if ((me != _PR_ACTIVE_THREAD_PTR(qp)) &&
             _PR_IS_GCABLE_THREAD(_PR_ACTIVE_THREAD_PTR(qp)))
             _PR_Resume(_PR_ACTIVE_THREAD_PTR(qp));
     }
@@ -1787,7 +1787,7 @@ _PR_AddSleepQ(PRThread *thread, PRIntervalTime timeout)
             ** must be one) so that they remain relative to us.
             */
             PR_ASSERT (thread->links.next != &_PR_SLEEPQ(cpu));
-          
+
             t = _PR_THREAD_PTR(thread->links.next);
             PR_ASSERT(_PR_THREAD_PTR(t->links.prev) == thread);
             t->sleep -= sleep;
@@ -1821,11 +1821,11 @@ _PR_DelSleepQ(PRThread *thread, PRBool propogate_time)
                 if (propogate_time == PR_TRUE) {
                     PRThread *after = _PR_THREAD_PTR(q);
                     after->sleep += thread->sleep;
-                } else 
+                } else
                     _PR_SLEEPQMAX(cpu) -= thread->sleep;
             } else {
                 /* Check if prev is the beggining of the list; if so,
-                 * we are the only element on the list.  
+                 * we are the only element on the list.
                  */
                 if (thread->links.prev != &_PR_SLEEPQ(cpu))
                     _PR_SLEEPQMAX(cpu) -= thread->sleep;
@@ -1837,7 +1837,7 @@ _PR_DelSleepQ(PRThread *thread, PRBool propogate_time)
             thread->flags &= ~_PR_ON_PAUSEQ;
         }
         PR_REMOVE_LINK(&thread->links);
-    } else 
+    } else
         PR_ASSERT(0);
 }
 

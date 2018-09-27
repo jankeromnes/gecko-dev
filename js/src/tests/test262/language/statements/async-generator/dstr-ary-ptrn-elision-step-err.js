@@ -41,7 +41,7 @@ var iter =function* () {
 
 
 async function* f([,]) {
-  
+
 };
 
 assert.throws(Test262Error, function() {

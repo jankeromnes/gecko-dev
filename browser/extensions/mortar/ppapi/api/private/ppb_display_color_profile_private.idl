@@ -43,7 +43,7 @@ interface PPB_DisplayColorProfile_Private {
    *
    * @param[in] resource A <code>DisplayColorProfile</code> context resource.
    * @return Returns:
-   * - <code>PP_TRUE</code> if the given resource is a valid 
+   * - <code>PP_TRUE</code> if the given resource is a valid
    *   <code>DisplayColorProfile</code>
    * - <code>PP_FALSE</code> if it is an invalid resource or is a resource
    *   of another type.

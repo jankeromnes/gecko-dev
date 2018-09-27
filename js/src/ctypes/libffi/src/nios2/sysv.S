@@ -9,10 +9,10 @@
    distribute, sublicense, and/or sell copies of the Software, and to
    permit persons to whom the Software is furnished to do so, subject to
    the following conditions:
-   
+
    The above copyright notice and this permission notice shall be
    included in all copies or substantial portions of the Software.
-   
+
    THE SOFTWARE IS PROVIDED ``AS IS'', WITHOUT WARRANTY OF ANY KIND,
    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -21,13 +21,13 @@
    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
-/* This function is declared on the C side as 
+/* This function is declared on the C side as
 
    extern UINT64 ffi_call_sysv (void (*arghook) (char *, extended_cif *),
 	  		        extended_cif *ecif,
-				unsigned nbytes, 
+				unsigned nbytes,
 				void (*fn) (void));
-	
+
    On input, the arguments appear as
 	r4 = arghook
 	r5 = ecif
@@ -92,7 +92,7 @@ ffi_call_sysv:
    to the closure are in the normal places, in r4-r7 and on the
    stack.  Push the register arguments on the stack too and then call the
    C helper function to deal with them.  */
-   
+
 	.section	.text
 	.align	2
 	.global	ffi_closure_sysv
@@ -125,7 +125,7 @@ ffi_closure_sysv:
 	addi	r4, sp, 4
 	mov	r5, r10
 	callr	r9
-	
+
 	/* Pop the stack and return.  */
 	ldw	ra, 0(sp)
 	addi	sp, sp, 20

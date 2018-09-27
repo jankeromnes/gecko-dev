@@ -11,7 +11,7 @@ var expect = '';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 function f(code)
 {
   (eval("(function(){" + code + "});"))();

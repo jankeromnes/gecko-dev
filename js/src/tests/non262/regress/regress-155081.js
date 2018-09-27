@@ -11,7 +11,7 @@ var expect = 'No Crash, No Error';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 function f(A,B,C,D) {}
 
 try

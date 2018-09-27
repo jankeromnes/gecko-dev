@@ -36,4 +36,3 @@ node = node.nextSibling
 
 node = node.parentNode
 
- 

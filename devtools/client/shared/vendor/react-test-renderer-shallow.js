@@ -200,7 +200,7 @@ var emptyObject_1 = emptyObject;
  * LICENSE file in the root directory of this source tree.
  *
  * @typechecks
- * 
+ *
  */
 
 /*eslint-disable no-self-compare */
@@ -280,7 +280,7 @@ var shallowEqual_1 = shallowEqual;
  * @private
  */
 function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-  
+
 }
 
 var checkPropTypes_1 = checkPropTypes;

@@ -8,9 +8,9 @@ var BUGNUMBER = 24712;
 test();
 
 function test()
-{   
+{
   printBugNumber (BUGNUMBER);
-   
+
   var re = /([\S]+([ \t]+[\S]+)*)[ \t]*=[ \t]*[\S]+/;
   var result = re.exec("Course_Creator = Test") + '';
 

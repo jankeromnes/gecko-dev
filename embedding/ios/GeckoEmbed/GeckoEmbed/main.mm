@@ -82,7 +82,7 @@ int main(int argc, char * argv[]) {
     printf("Couldn't find the application directory.\n");
     return 255;
   }
-    
+
   nsCOMPtr<nsIFile> appSubdir;
   greDir->Clone(getter_AddRefs(appSubdir));
   greDir->Append(NS_LITERAL_STRING("Frameworks"));

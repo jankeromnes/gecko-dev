@@ -20,15 +20,15 @@ diff --git a/modules/pdfium/pdfium/core/fxge/win32/fx_win32_gdipext.cpp b/module
  // Copyright 2014 PDFium Authors. All rights reserved.
  // Use of this source code is governed by a BSD-style license that can be
  // found in the LICENSE file.
- 
+
  // Original code copyright 2014 Foxit Software Inc. http://www.foxitsoftware.com
- 
+
 +#undef WIN32_LEAN_AND_MEAN
  #include <windows.h>
- 
+
  #include <algorithm>
  #include <memory>
- 
+
  #include "core/fxcrt/fx_system.h"
  #include "core/fxge/cfx_gemodule.h"
  #include "core/fxge/cfx_graphstatedata.h"

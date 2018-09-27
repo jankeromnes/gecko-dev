@@ -1,7 +1,7 @@
 Function.prototype.__proto__ = null;
 
 function testLenientAndStrict(code, lenient_pred, strict_pred) {
-  return (strict_pred("'use strict'; " + code) && 
+  return (strict_pred("'use strict'; " + code) &&
           lenient_pred(code));
 }
 function raisesException(exception) {

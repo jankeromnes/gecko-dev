@@ -60,7 +60,7 @@
     <button id="pressed_button" aria-pressed="true" label="I am pressed" />
   </vbox>
 
-  
-  </hbox>  
+
+  </hbox>
 </window>
 

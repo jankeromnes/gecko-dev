@@ -167,7 +167,7 @@ that somewhere in the distant past of our state machine there must be
 an item like
 
     Foo = ...a (*) X ...b
-    
+
 that led us here. We want to find that item, so we can derive the
 lookahead from `...b` (whatever symbols come after `X`).
 
@@ -275,7 +275,7 @@ S0 = G0 = (*) "a" X "d"
    | G0 = (*) "a" Y "c"
    | G0 = (*) "b" X "c"
    | G0 = (*) "b" X "d"
-   
+
 S1 = G0 = "a" (*) X "d"
    | G0 = "a" (*) Y "c"
    | X = (*) "e" X

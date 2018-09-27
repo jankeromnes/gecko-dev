@@ -20,7 +20,7 @@ catch (e) {
   c1*=2;
 }
 if (c1!==2){
-  $ERROR('#1.2: Sequence evaluation of commands try/catch is 1. try, 2. catch');	
+  $ERROR('#1.2: Sequence evaluation of commands try/catch is 1. try, 2. catch');
 }
 
 // CHECK#2
@@ -49,7 +49,7 @@ finally{
 }
 if (c3!==3){
   $ERROR('#3: Sequence evaluation of commands try/catch/finally(with exception) is 1. try, 2. catch, 3. finally');
-}	
+}
 
 // CHECK#4
 var c4=0;

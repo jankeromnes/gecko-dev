@@ -4,7 +4,7 @@
 var g = newGlobal();
 var dbg = new Debugger(g);
 
-// We use Debugger.Frame.prototype.eval and ignore the outer 'eval' frame so we 
+// We use Debugger.Frame.prototype.eval and ignore the outer 'eval' frame so we
 // can catch the termination.
 
 function test(type, provocation) {

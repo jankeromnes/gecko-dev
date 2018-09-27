@@ -217,7 +217,7 @@ ssse3_fetch_horizontal (bits_image_t *image, line_t *line,
 #endif
         /* vrl0: R0, L0 */
 
-	/* The weights are based on vx which is a vector of 
+	/* The weights are based on vx which is a vector of
 	 *
 	 *    - (x + 1), x, - (x + 1), x,
 	 *          - (x + ux + 1), x + ux, - (x + ux + 1), x + ux
@@ -231,7 +231,7 @@ ssse3_fetch_horizontal (bits_image_t *image, line_t *line,
 	 *    iw0, w0, iw0, w0, iw1, w1, iw1, w1,
 	 *        iw0, w0, iw0, w0, iw1, w1, iw1, w1,
 	 *
-	 * which means the first and the second input pixel 
+	 * which means the first and the second input pixel
 	 * have to be interleaved like this:
 	 *
 	 *    la0, ra0, lr0, rr0, la1, ra1, lr1, rr1,

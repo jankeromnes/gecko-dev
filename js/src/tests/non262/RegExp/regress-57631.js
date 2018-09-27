@@ -64,7 +64,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   testIllegalRegExps(legalpatterns, illegalflags);
   testIllegalRegExps(illegalpatterns, legalflags);
   testIllegalRegExps(illegalpatterns, illegalflags);
@@ -77,26 +77,26 @@ function testIllegalRegExps(patterns, flags)
   for (i in patterns)
   {
     s = patterns[i];
- 
+
     for (j in flags)
     {
       f = flags[j];
       status = getStatus(s, f);
       actual = cnFAILURE;
       expect = cnSUCCESS;
- 
+
       try
       {
-	// This should cause an exception if either s or f is illegal -        
-	eval('obj = new RegExp(s, f);'); 
-      } 
+	// This should cause an exception if either s or f is illegal -
+	eval('obj = new RegExp(s, f);');
+      }
       catch(e)
       {
 	// We expect to get a SyntaxError - test for this:
 	if (e instanceof SyntaxError)
 	  actual = cnSUCCESS;
       }
-       
+
       reportCompare(expect, actual, status);
     }
   }

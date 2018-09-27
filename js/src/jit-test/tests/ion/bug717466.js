@@ -40,24 +40,24 @@ for (var i=0; i!=41; i++) {
   assertEq(test(string, String), true);
   assertEq(test(array, Array), true);
   assertEq(test(empty, Object), true);
-  
+
   // Test if bailout works
   assertEq(test(0.1, Object), false);
-  
+
   // Should generate TypeError
   var err = false;
   try {
     test(0.1, 5);
   } catch (e) { err = true; }
   assertEq(err, true);
-  
+
   // Should generate TypeError
   var err = false;
   try {
     test(empty, empty);
   } catch (e) { err = true; }
   assertEq(err, true);
-  
+
   // Should generate TypeError
   var err = false;
   try {

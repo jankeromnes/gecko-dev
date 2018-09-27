@@ -81,7 +81,7 @@ public class SkewHandler {
   /**
    * Update our tracked skew value to account for the local clock differing from
    * the server's.
-   * 
+   *
    * @param response
    *          the received HTTP response.
    * @param now

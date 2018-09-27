@@ -18,7 +18,7 @@ MIDDLE_SO_TARGET=
 
 OUTPUTFILE=pkgdata.inc
 
-all : clean 
+all : clean
 	@echo GENCCODE_ASSEMBLY_TYPE=$(GENCCODE_ASSEMBLY) >> $(OUTPUTFILE)
 	@echo SO=$(SO) >> $(OUTPUTFILE)
 	@echo SOBJ=$(SOBJ) >> $(OUTPUTFILE)
@@ -37,6 +37,6 @@ all : clean
 	@echo RANLIB=$(RANLIB) >> $(OUTPUTFILE)
 	@echo INSTALL_CMD=$(INSTALL) >> $(OUTPUTFILE)
 
-clean : 
+clean :
 	$(RMV) $(OUTPUTFILE)
 

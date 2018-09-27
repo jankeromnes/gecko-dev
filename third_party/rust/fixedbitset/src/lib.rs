@@ -44,7 +44,7 @@ impl FixedBitSet
             length: bits,
         }
     }
-    
+
     /// Grow capacity to **bits**, all new bits initialized to zero
     pub fn grow(&mut self, bits: usize) {
         let (mut blocks, rem) = div_rem(bits, BITS);

@@ -26,5 +26,5 @@ function f(C,x)
 
 actual = f(44,42);
 expect = 0;
- 
+
 reportCompare(expect, actual, summary);

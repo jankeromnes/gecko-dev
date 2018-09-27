@@ -72,7 +72,7 @@ _ZN14nsXPTCStubBase7Stub ##x ##Ev:;				\
 	.align	2
 	.type	dummy,@function
 	.ent	dummy, 0
-	.frame	sp, FRAMESZ, ra 
+	.frame	sp, FRAMESZ, ra
 dummy:
 	SETUP_GP
 
@@ -109,7 +109,7 @@ sharedstub:
 	# gp reference below this point. It also allows better
 	# instruction sscheduling.
 	# lw	gp, GPOFF(fp)
- 
+
  	lw	ra, RAOFF(sp)
 	addiu	sp, FRAMESZ
 	j	ra

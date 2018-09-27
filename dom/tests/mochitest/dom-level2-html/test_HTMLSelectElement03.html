@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "select");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,15 +70,15 @@ function loadComplete() {
 
 
 /**
-* 
-    The selectedIndex attribute specifies the ordinal index of the selected  
+*
+    The selectedIndex attribute specifies the ordinal index of the selected
     option.  If no element is selected -1 is returned.
 
-    Retrieve the selectedIndex attribute from the second SELECT element and 
-    examine its value.  
+    Retrieve the selectedIndex attribute from the second SELECT element and
+    examine its value.
 
     Per http://www.w3.org/TR/html401/interact/forms.html#h-17.6.1,
-    without an explicit selected attribute, user agent behavior is 
+    without an explicit selected attribute, user agent behavior is
     undefined.  There is no way to coerce no option to be selected.
 
 * @author NIST
@@ -92,7 +92,7 @@ function HTMLSelectElement03() {
       var testNode;
       var vselectedindex;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -103,7 +103,7 @@ function HTMLSelectElement03() {
 testNode = nodeList.item(1);
       vselectedindex = testNode.selectedIndex;
 
-      
+
 }
 
 </script>
@@ -113,14 +113,14 @@ testNode = nodeList.item(1);
 <p>&lt;test name='HTMLSelectElement03' schemaLocation='http://www.w3.org/2001/DOM-Test-Suite/Level-1 dom1.xsd'&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;metadata&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;HTMLSelectElement03&lt;/title&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
-    The selectedIndex attribute specifies the ordinal index of the selected  
+    The selectedIndex attribute specifies the ordinal index of the selected
     option.  If no element is selected -1 is returned.
 
-    Retrieve the selectedIndex attribute from the second SELECT element and 
-    examine its value.  
+    Retrieve the selectedIndex attribute from the second SELECT element and
+    examine its value.
 
     Per http://www.w3.org/TR/html401/interact/forms.html#h-17.6.1,
-    without an explicit selected attribute, user agent behavior is 
+    without an explicit selected attribute, user agent behavior is
     undefined.  There is no way to coerce no option to be selected.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Mary Brady&lt;/contributor&gt;
@@ -138,7 +138,7 @@ testNode = nodeList.item(1);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/select.html"></iframe>
 <br>

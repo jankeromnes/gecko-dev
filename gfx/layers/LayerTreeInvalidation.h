@@ -46,7 +46,7 @@ public:
    * Copies the current layer tree properties into
    * a new LayerProperties object.
    *
-   * @param Layer tree to copy, or nullptr if we have no 
+   * @param Layer tree to copy, or nullptr if we have no
    * initial layer tree.
    */
   static UniquePtr<LayerProperties> CloneFrom(Layer* aRoot);

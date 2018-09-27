@@ -342,7 +342,7 @@ main(int argc, char *argv[])
 		case 'm':
 			warn_multiple = TRUE;
 			break;
-			
+
 		/* Ignore -O, -g so we can just pass ${CFLAGS} to
 		   makedepend
 		 */
@@ -524,7 +524,7 @@ main(int argc, char *argv[])
 /*
  * eliminate \r chars from file
  */
-static int 
+static int
 elim_cr(char *buf, int sz)
 {
 	int i,wp;
@@ -648,7 +648,7 @@ char *getnextline(struct filepointer *filep)
 			}
 			whitespace = TRUE;
 		}
-        
+
 		if (*p == '/' && (p+1) < eof && *(p+1) == '*') {
 			/* Consume C comments */
 			*(p++) = ' ';
@@ -676,7 +676,7 @@ char *getnextline(struct filepointer *filep)
 					lineno++;
 				}
 				else if (*p == '?' && (p+3) < eof &&
-					 *(p+1) == '?' && 
+					 *(p+1) == '?' &&
 					 *(p+2) == '/' &&
 					 *(p+3) == '\n') {
 					*(p++) = ' ';
@@ -712,7 +712,7 @@ char *getnextline(struct filepointer *filep)
 
 				*(p++) = '\0';
 				/* punt lines with just # (yacc generated) */
-				for (cp = bol+1; 
+				for (cp = bol+1;
 				     *cp && (*cp == ' ' || *cp == '\t'); cp++);
 				if (*cp) goto done;
 				--p;

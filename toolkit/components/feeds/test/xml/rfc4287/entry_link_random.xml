@@ -19,10 +19,10 @@ Expect: feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntry).link.sp
     <updated>2005-01-18T15:00:01Z</updated>
     <summary>The aggregator should pick the second link as the alternate</summary>
     <link rel="http://example.org/random"
-         href="http://www.snellspace.com/public/wrong" /> 
+         href="http://www.snellspace.com/public/wrong" />
     <link href="http://www.snellspace.com/public/linktests/alternate" />
     <link rel="http://example.org/random"
-         href="http://www.snellspace.com/public/wrong" /> 
+         href="http://www.snellspace.com/public/wrong" />
   </entry>
 
 </feed>

@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var a =
     Object.defineProperty({}, "h",
     {
@@ -29,7 +29,7 @@ function test()
     });
 
   expect = '({get h() {[native code]}})';
-  actual = uneval(a);      
+  actual = uneval(a);
 
   // Native function syntax:
   // `function IdentifierName_opt ( FormalParameters ) { [ native code ] }`

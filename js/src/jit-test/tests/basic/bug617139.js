@@ -2,7 +2,7 @@
 // don't assert
 
 gczeal(2)
-function x() { 
+function x() {
     [null].some(x)
 }
 x();

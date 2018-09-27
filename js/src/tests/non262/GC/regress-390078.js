@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var a = new Array(10*1000);
   a[0] = { toString: function() { gc(); return ".*9"; }};;
   a[1] = "g";

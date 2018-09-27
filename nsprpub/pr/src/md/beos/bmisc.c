@@ -14,7 +14,7 @@ PRLock *_connectLock = NULL;
 PRUint32 connectCount = 0;
 ConnectListNode connectList[64];
 #endif
-                                   
+
 void
 _MD_cleanup_before_exit (void)
 {
@@ -37,8 +37,8 @@ void
 _MD_final_init (void)
 {
     _connectLock = PR_NewLock();
-    PR_ASSERT(NULL != _connectLock); 
-#ifndef BONE_VERSION   
+    PR_ASSERT(NULL != _connectLock);
+#ifndef BONE_VERSION
     /* Workaround for nonblocking connects under net_server */
     connectCount = 0;
 #endif

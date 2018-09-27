@@ -61,7 +61,7 @@ function runTypescript() {
            directoryExists: function (path) { return false; },
            resolvePath: function (path) { return path; }
   });
-  
+
   if (parseErrors.length != 192 && parseErrors.length != 193) {
     throw new Error("Parse errors.");
   }
@@ -69,7 +69,7 @@ function runTypescript() {
 }
 
 var outfile = {
-  checksum: -412589664, 
+  checksum: -412589664,
   cumulative_checksum: 0,
   Write: function (s) { this.Verify(s); },
   WriteLine: function (s) { this.Verify(s + "\n"); },
@@ -113,8 +113,8 @@ function createCompiler() {
   settings.codeGenTarget = TypeScript.CodeGenTarget.ES5;
   var compiler = new TypeScript.TypeScriptCompiler(
       outerr, new TypeScript.NullLogger, settings);
-  compiler.setErrorCallback(function (start, len, message) { 
-    parseErrors.push({ start: start, len: len, message: message }); 
+  compiler.setErrorCallback(function (start, len, message) {
+    parseErrors.push({ start: start, len: len, message: message });
   });
   compiler.parser.errorRecovery = true;
   compiler.typeCheck();
@@ -149,7 +149,7 @@ function createCompiler() {
 //   data = data.replace("\\", "\\\\").replace("\"", "\\\"")
 //          .replace("\n", "\\n");
 //   data = "var " + varname + " = \"" + data + "\""
-//   print data; 
+//   print data;
 // result = open("/tmp/compiler_input", 'r');
 // escape_and_format(result.read(), "compiler_input")
 //
@@ -157,16 +157,16 @@ function createCompiler() {
 // compiler source at the time this benchmark was generated:
 //
 /* *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved. 
+Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0  
- 
+License at http://www.apache.org/licenses/LICENSE-2.0
+
 THIS CODE IS PROVIDED *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
-MERCHANTABLITY OR NON-INFRINGEMENT. 
- 
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */

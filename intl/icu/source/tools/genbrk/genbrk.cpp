@@ -316,7 +316,7 @@ int  main(int argc, char **argv) {
     UNewDataMemory *pData;
     pData = udata_create(outDir, NULL, outFileName, &(dh.info), copyright, &status);
     if(U_FAILURE(status)) {
-        fprintf(stderr, "genbrk: Could not open output file \"%s\", \"%s\"\n", 
+        fprintf(stderr, "genbrk: Could not open output file \"%s\", \"%s\"\n",
                          outFileName, u_errorName(status));
         exit(status);
     }
@@ -324,13 +324,13 @@ int  main(int argc, char **argv) {
 
     //  Write the data itself.
     udata_writeBlock(pData, outData, outDataSize);
-    // finish up 
+    // finish up
     bytesWritten = udata_finish(pData, &status);
     if(U_FAILURE(status)) {
         fprintf(stderr, "genbrk: error %d writing the output file\n", status);
         exit(status);
     }
-    
+
     if (bytesWritten != outDataSize) {
         fprintf(stderr, "Error writing to output file \"%s\"\n", outFileName);
         exit(-1);

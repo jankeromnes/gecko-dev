@@ -1,7 +1,7 @@
 <html class="reftest-wait">
 <head>
 <script>
-    
+
 function boom()
 {
   var a = document.getElementById("a");
@@ -11,7 +11,7 @@ function boom()
   a.parentNode.insertBefore(x, a);
   x.remove();
   b.remove();
-  
+
   document.documentElement.removeAttribute("class");
 }
 
@@ -20,13 +20,13 @@ function boom()
 
 
 <body onload="setTimeout(boom, 30);">
-    
+
   <table>
     <tr>
       <td id="x">X</td>
     </tr>
   </table>
-                                                        
+
   <table border="1" style="border-collapse: collapse;">
     <tr>
       <td id="a">A</td>

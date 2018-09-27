@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "document");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,9 +70,9 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The getElementsByName method returns the (possibly empty) collection
-    of elements whose name value is given by the elementName.  
+    of elements whose name value is given by the elementName.
 
     Retrieve all the elements whose name attribute is "noid".
     Check the length of the nodelist.  It should be 0 since
@@ -87,7 +87,7 @@ function HTMLDocument14() {
     if(checkInitialization(builder, "HTMLDocument14") != null) return;
     var nodeList;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -106,7 +106,7 @@ function HTMLDocument14() {
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
     The getElementsByName method returns the (possibly empty) collection
-    of elements whose name value is given by the elementName.  
+    of elements whose name value is given by the elementName.
 
     Retrieve all the elements whose name attribute is "noid".
     Check the length of the nodelist.  It should be 0 since
@@ -127,7 +127,7 @@ function HTMLDocument14() {
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/document.html"></iframe>
 <br>

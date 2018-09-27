@@ -75,7 +75,7 @@ struct CArcCmdLineOptions
 
   bool TechMode;
   bool ShowTime;
-  
+
   UStringVector HashMethods;
 
   bool AppendName;
@@ -97,7 +97,7 @@ struct CArcCmdLineOptions
   CHashOptions HashOptions;
   UString ArcType;
   UStringVector ExcludedArcTypes;
-  
+
   unsigned Number_for_Out;
   unsigned Number_for_Errors;
   unsigned Number_for_Percents;

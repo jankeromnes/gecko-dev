@@ -111,7 +111,7 @@ struct EvaluateTestSet {
 struct EvaluateForValueTest {
   // Expression passed to PostfixEvaluator::Evaluate.
   const string expression;
-  
+
   // True if the expression is expected to be evaluable, false if evaluation
   // is expected to fail.
   bool evaluable;
@@ -375,10 +375,10 @@ static bool RunTests() {
               "expected dict[\"%s\"] to be 0x%x, but it was 0x%x\n",
               v->first.c_str(), v->second, a->second);
       return false;
-    } 
+    }
     dictionary_2.erase(a);
   }
-  
+
   map<string, unsigned int>::iterator remaining = dictionary_2.begin();
   if (remaining != dictionary_2.end()) {
     fprintf(stderr, "FAIL: evaluation of test expressions put unexpected "

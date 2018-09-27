@@ -55,7 +55,7 @@ QUERYENABLED_TESTS = {
         { 'id':         'SUPERSCRIPT_TEXT-1',
           'desc':       'check whether the "superscript" command is enabled',
           'qcenabled':  'superscript' },
-          
+
         { 'id':         'FORMATBLOCK_TEXT-1',
           'desc':       'check whether the "formatblock" command is enabled',
           'qcenabled':  'formatblock' },
@@ -63,7 +63,7 @@ QUERYENABLED_TESTS = {
         { 'id':         'CREATELINK_TEXT-1',
           'desc':       'check whether the "createlink" command is enabled',
           'qcenabled':  'createlink' },
-          
+
         { 'id':         'UNLINK_TEXT-1',
           'desc':       'check whether the "unlink" command is enabled',
           'qcenabled':  'unlink' },

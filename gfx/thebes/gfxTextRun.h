@@ -581,7 +581,7 @@ public:
     // if it returns false, the caller needs to fall back to some other
     // means to create the necessary (detailed) glyph data.
     bool SetSpaceGlyphIfSimple(gfxFont *aFont, uint32_t aCharIndex,
-                               char16_t aSpaceChar, 
+                               char16_t aSpaceChar,
                                mozilla::gfx::ShapedTextFlags aOrientation);
 
     // Record the positions of specific characters that layout may need to

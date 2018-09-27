@@ -25,7 +25,7 @@ function test()
 
   print('This test will probably run out of memory');
   print('This test really should only fail on 64 bit machines');
- 
+
   var JSVAL_INT_MAX = (1 << 30) - 1;
 
   var a = new Array(JSVAL_INT_MAX + 2);

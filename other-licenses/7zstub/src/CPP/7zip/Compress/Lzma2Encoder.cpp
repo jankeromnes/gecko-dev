@@ -118,5 +118,5 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
 
   return SResToHRESULT(res);
 }
-  
+
 }}

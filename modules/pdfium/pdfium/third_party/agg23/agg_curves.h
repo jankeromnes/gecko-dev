@@ -59,7 +59,7 @@ struct curve4_points  {
         return cp[i];
     }
 };
-class curve4_div 
+class curve4_div
 {
 public:
     curve4_div() :
@@ -135,7 +135,7 @@ private:
     unsigned              m_count;
     pod_deque<point_type> m_points;
 };
-class curve4 
+class curve4
 {
 public:
     curve4() {}

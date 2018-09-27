@@ -3,9 +3,9 @@ index 441d6bb..15199c7 100644
 --- a/third_party/lcms2-2.6/src/cmstypes.c
 +++ b/third_party/lcms2-2.6/src/cmstypes.c
 @@ -4203,7 +4203,11 @@ void *Type_MPEmatrix_Read(struct _cms_typehandler_struct* self, cmsIOHANDLER* io
- 
+
          cmsFloat32Number v;
- 
+
 -        if (!_cmsReadFloat32Number(io, &v)) return NULL;
 +        if (!_cmsReadFloat32Number(io, &v)) {
 +            _cmsFree(self ->ContextID, Matrix);
@@ -14,11 +14,11 @@ index 441d6bb..15199c7 100644
 +        }
          Matrix[i] = v;
      }
- 
+
 @@ -4212,7 +4216,11 @@ void *Type_MPEmatrix_Read(struct _cms_typehandler_struct* self, cmsIOHANDLER* io
- 
+
          cmsFloat32Number v;
- 
+
 -        if (!_cmsReadFloat32Number(io, &v)) return NULL;
 +        if (!_cmsReadFloat32Number(io, &v)) {
 +            _cmsFree(self ->ContextID, Matrix);
@@ -27,4 +27,4 @@ index 441d6bb..15199c7 100644
 +        }
          Offsets[i] = v;
      }
- 
+

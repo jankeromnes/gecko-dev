@@ -170,7 +170,7 @@ int32_t VideoCaptureImpl::IncomingFrame(
         bool apply_rotation = apply_rotation_;
         int target_width;
         int target_height;
-        
+
         if (apply_rotation &&
             (_rotateFrame == kVideoRotation_90 ||
              _rotateFrame == kVideoRotation_270)) {

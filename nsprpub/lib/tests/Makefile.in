@@ -1,4 +1,4 @@
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -137,7 +137,7 @@ endif
 ifeq ($(AIX_PRE_4_2),1)
 
 # AIX releases prior to 4.2 need a special two-step linking hack
-# in order to both override the system select() and be able to 
+# in order to both override the system select() and be able to
 # get at the original system select().
 #
 # We use a pattern rule in ns/nspr20/config/rules.mk to generate

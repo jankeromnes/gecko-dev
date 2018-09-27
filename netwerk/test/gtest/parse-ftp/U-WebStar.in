@@ -1,7 +1,7 @@
 ftp> open ftp.webstar.com
 Connected to ftp.webstar.com.
 220 FTP server ready.
-Name (ftp.webstar.com:cyp): 
+Name (ftp.webstar.com:cyp):
 331 Anonymous login OK, send login as password.
 230 User logged in.
 Remote system type is UNIX.
@@ -38,4 +38,4 @@ drwx------  0  owner  group         2 Apr 25 10:00 WebSTAR_V
 226 Transfer complete.
 ftp> close
 221 Goodbye.
-ftp> 
+ftp>

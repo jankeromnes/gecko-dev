@@ -1019,7 +1019,7 @@ static void dumptimeICU(FILE * fp, time_t t)
 	offset = (offset - sec) / 60;
 	min = offset % 60;
 	hour = offset / 60;
-	
+
 	fprintf(fp, "%02ld", hour);
 	fprintf(fp, "%02ld", min);
 	fprintf(fp, "%02ld", sec);
@@ -1060,7 +1060,7 @@ static void getzones(char * basedir, char * relpath, struct listentry ** last, i
 				exit(EXIT_FAILURE);
 			}
 			strcpy(pzonename, relpath);
-		
+
 			if ((pentry = malloc(sizeof(listentry))) == NULL) {
 				exit(EXIT_FAILURE);
 			}

@@ -15,7 +15,7 @@
 ******************************************************************************
 *
 *
-* This file implements a number of example ICU plugins. 
+* This file implements a number of example ICU plugins.
 *
 */
 
@@ -129,20 +129,20 @@ UPlugTokenReturn U_EXPORT2 myPluginBad (
         uplug_setPlugLevel(data, UPLUG_LEVEL_LOW);
     } else if(reason == UPLUG_REASON_LOAD) {
         void *ctx = uprv_malloc(12345);
-        
+
         uplug_setContext(data, ctx);
         fprintf(stderr,"I'm %p and I did a bad thing and malloced %p\n", (void*)data, (void*)ctx);
     } else if(reason == UPLUG_REASON_UNLOAD) {
         void * ctx = uplug_getContext(data);
-        
+
         uprv_free(ctx);
     }
-    
+
 
     return UPLUG_TOKEN;
 }
 
-U_CAPI 
+U_CAPI
 UPlugTokenReturn U_EXPORT2 myPluginHigh (
                   UPlugData *data,
                   UPlugReason reason,
@@ -177,7 +177,7 @@ static void * U_CALLCONV myMemRealloc(const void *context, void *mem, size_t siz
     void *retPtr;
     (void)context; /* unused */
 
-    
+
     if(mem==NULL) {
         retPtr = NULL;
     } else {
@@ -193,7 +193,7 @@ UPlugTokenReturn U_EXPORT2 debugMemoryPlugin (
                   UPlugReason reason,
                   UErrorCode *status) {
     fprintf(stderr,"debugMemoryPlugin: data=%p, reason=%s, status=%s\n", (void*)data, udbg_enumName(UDBG_UPlugReason,(int32_t)reason), u_errorName(*status));
-    
+
     if(reason==UPLUG_REASON_QUERY) {
         uplug_setPlugLevel(data, UPLUG_LEVEL_LOW);
         uplug_setPlugName(data, "Memory Plugin");

@@ -29,7 +29,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = 'PASS';
 
   var src = "return f(" +Array(10*1000).join("0,")+"Math.atan2());";

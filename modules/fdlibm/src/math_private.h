@@ -522,7 +522,7 @@ CMPLXL(long double x, long double y)
 #endif
 
 #endif /* _COMPLEX_H */
- 
+
 #ifdef __GNUCLIKE_ASM
 
 /* Asm versions of some functions. */

@@ -9,7 +9,7 @@
 function compareAsync(file, canvas, type, callback)
 {
   var reader = new FileReader();
-  reader.onload = 
+  reader.onload =
     function(e) {
       is(e.target.result, canvas.toDataURL(type),
  "<canvas>.mozGetAsFile().getAsDataURL() should equal <canvas>.toDataURL()");

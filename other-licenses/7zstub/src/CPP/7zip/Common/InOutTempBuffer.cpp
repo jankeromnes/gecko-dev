@@ -89,7 +89,7 @@ HRESULT CInOutTempBuffer::WriteToStream(ISequentialOutStream *stream)
     crc = CrcUpdate(crc, _buf, _bufPos);
     size += _bufPos;
   }
-  
+
   if (_tempFileCreated)
   {
     NIO::CInFile inFile;
@@ -107,7 +107,7 @@ HRESULT CInOutTempBuffer::WriteToStream(ISequentialOutStream *stream)
       size += processed;
     }
   }
-  
+
   return (_crc == crc && size == _size) ? S_OK : E_FAIL;
 }
 

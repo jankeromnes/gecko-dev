@@ -6,17 +6,17 @@ function __result_handler() {
 	function getSection() {
 	    function getIds(node) {
 		var a = [];
-	    
+
 		var nodes = node.querySelectorAll('*[id]');
 		for (var i = 0; i < nodes.length; i++) {
 		    a.push(nodes[i].getAttribute("id"));
 		}
 		return a;
 	    }
-	
+
 	    function getTOCIds() {
 		var a = [];
-	    
+
 		var nodes = toc_element.querySelectorAll('li');
 		for (var i = 0; i < nodes.length; i++) {
 		    var href = nodes[i].firstElementChild.getAttribute("href");
@@ -28,7 +28,7 @@ function __result_handler() {
 	    var obj = new Object();
 	    var ids = getIds(document);
 	    var toc = getTOCIds();
-    
+
 	    for (var i = 1; i < toc.length; i++) {
 		var key1 = toc[i-1];
 		var key2 = toc[i];
@@ -55,7 +55,7 @@ function __result_handler() {
 		}
 		obj[key] = map;
 	    }
-    
+
 	    return obj;
 	}
 
@@ -75,8 +75,8 @@ function __result_handler() {
 	    var child = el.firstElementChild;
 
 	    var m = map[obj.id];
-	    for (var i = 0; i < m.length; i++)  {	    
-		var sub = new section(m[i]); 
+	    for (var i = 0; i < m.length; i++)  {
+		var sub = new section(m[i]);
 		addSubSection(obj, sub);
 	    }
 	    while (child !== null) {

@@ -61,7 +61,7 @@ public:
      * @param aStride The stride of the buffer - if <=0, use ComputeStride()
      * @param aMinimalAllocation Allocate at least this many bytes.  If smaller
      *        than width * stride, or width*stride <=0, this value is ignored.
-     * @param aClear 
+     * @param aClear
      *
      * @see gfxImageFormat
      */
@@ -158,7 +158,7 @@ protected:
     void AllocateAndInit(long aStride, int32_t aMinimalAllocation, bool aClear);
     void InitFromSurface(cairo_surface_t *csurf);
 
-    long ComputeStride() const { 
+    long ComputeStride() const {
         if (mSize.height < 0 || mSize.width < 0) {
             return 0;
         }

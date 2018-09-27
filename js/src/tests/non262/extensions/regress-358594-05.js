@@ -22,7 +22,7 @@ function test()
 
   // don't crash|assert
   f = function () { };
-  f.hhhhhhhhh = this; 
+  f.hhhhhhhhh = this;
   Object.defineProperty(this, "m", { set: f, enumerable: true, configurable: true });
   uneval(this);
   reportCompare(expect, actual, summary);

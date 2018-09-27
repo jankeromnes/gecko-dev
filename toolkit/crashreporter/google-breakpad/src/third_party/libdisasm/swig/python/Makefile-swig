@@ -58,7 +58,7 @@ install: $(PYTHON_MOD)
 uninstall:
 
 # ==================================================================
-clean: 
+clean:
 	rm $(PYTHON_MOD) $(PYTHON_SWIG) $(PYTHON_OBJ)
 	rm $(PYTHON_SHADOW)
 

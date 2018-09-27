@@ -23,5 +23,5 @@ var x = "global";
     actual += x;
   })();
 })();
- 
+
 reportCompare(expect, actual, summary);

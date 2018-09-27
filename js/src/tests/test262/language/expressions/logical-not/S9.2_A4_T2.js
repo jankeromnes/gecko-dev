@@ -11,7 +11,7 @@ description: +0, -0 and NaN convert to Boolean by implicit transformation
 
 // CHECK#1
 if (!(+0) !== true) {
-  $ERROR('#1: !(+0) === true. Actual: ' + (!(+0))); 	 
+  $ERROR('#1: !(+0) === true. Actual: ' + (!(+0)));
 }
 
 // CHECK#2

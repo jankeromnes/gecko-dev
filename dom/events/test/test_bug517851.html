@@ -30,7 +30,7 @@ target2.setAttribute("onerror", "++window.parent.handledCount; return window.par
 target.setAttribute("onmouseover", "++window.handledCount; return window.testReturnValue;");
 target.setAttribute("onbeforeunload", "++window.handledCount; return window.testReturnValue;");
 target2.setAttribute("onbeforeunload", "++window.parent.handledCount; return window.parent.testReturnValue;");
-target.setAttribute("onmousemove", "++window.handledCount; return window.testReturnValue;");                     
+target.setAttribute("onmousemove", "++window.handledCount; return window.testReturnValue;");
 
 var e = new ErrorEvent("error", {bubbles: true, cancelable: true});
 window.testReturnValue = true;

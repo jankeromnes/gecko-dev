@@ -27,9 +27,9 @@ public:
   //nsISupports
   NS_DECL_ISUPPORTS
 
-  // nsIClipboard  
+  // nsIClipboard
   NS_DECL_NSICLIPBOARD
-  
+
 protected:
   virtual ~nsBaseClipboard();
 

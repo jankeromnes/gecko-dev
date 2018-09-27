@@ -7,28 +7,28 @@ public class LzmaAlone
 		public static final int kEncode = 0;
 		public static final int kDecode = 1;
 		public static final int kBenchmak = 2;
-		
+
 		public int Command = -1;
 		public int NumBenchmarkPasses = 10;
-		
+
 		public int DictionarySize = 1 << 23;
 		public boolean DictionarySizeIsDefined = false;
-		
+
 		public int Lc = 3;
 		public int Lp = 0;
 		public int Pb = 2;
-		
+
 		public int Fb = 128;
 		public boolean FbIsDefined = false;
-		
+
 		public boolean Eos = false;
-		
+
 		public int Algorithm = 2;
 		public int MatchFinder = 1;
-		
+
 		public String InFile;
 		public String OutFile;
-		
+
 		boolean ParseSwitch(String s)
 		{
 			if (s.startsWith("d"))
@@ -67,7 +67,7 @@ public class LzmaAlone
 				return false;
 			return true;
 		}
-		
+
 		public boolean Parse(String[] args) throws Exception
 		{
 			int pos = 0;
@@ -140,8 +140,8 @@ public class LzmaAlone
 			return true;
 		}
 	}
-	
-	
+
+
 	static void PrintHelp()
 	{
 		System.out.println(
@@ -160,24 +160,24 @@ public class LzmaAlone
 				"  -eos:   write End Of Stream marker\n"
 				);
 	}
-	
+
 	public static void main(String[] args) throws Exception
 	{
 		System.out.println("\nLZMA (Java) 4.61  2008-11-23\n");
-		
+
 		if (args.length < 1)
 		{
 			PrintHelp();
 			return;
 		}
-		
+
 		CommandLine params = new CommandLine();
 		if (!params.Parse(args))
 		{
 			System.out.println("\nIncorrect command");
 			return;
 		}
-		
+
 		if (params.Command == CommandLine.kBenchmak)
 		{
 			int dictionary = (1 << 21);
@@ -191,10 +191,10 @@ public class LzmaAlone
 		{
 			java.io.File inFile = new java.io.File(params.InFile);
 			java.io.File outFile = new java.io.File(params.OutFile);
-			
+
 			java.io.BufferedInputStream inStream  = new java.io.BufferedInputStream(new java.io.FileInputStream(inFile));
 			java.io.BufferedOutputStream outStream = new java.io.BufferedOutputStream(new java.io.FileOutputStream(outFile));
-			
+
 			boolean eos = false;
 			if (params.Eos)
 				eos = true;

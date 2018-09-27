@@ -22,7 +22,7 @@
 #include "agg_basics.h"
 namespace agg
 {
-class rendering_buffer 
+class rendering_buffer
 {
 public:
     struct row_data  {

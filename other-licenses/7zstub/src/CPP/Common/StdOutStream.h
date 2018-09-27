@@ -26,7 +26,7 @@ public:
   bool Open(const char *fileName) throw();
   bool Close() throw();
   bool Flush() throw();
-  
+
   CStdOutStream & operator<<(CStdOutStream & (* func)(CStdOutStream  &))
   {
     (*func)(*this);

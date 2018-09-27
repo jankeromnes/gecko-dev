@@ -1,4 +1,4 @@
-#! /bin/bash  
+#! /bin/bash
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19,7 +19,7 @@
 ########################################################################
 
 ############################## fips_init ##############################
-# local shell function to initialize this script 
+# local shell function to initialize this script
 ########################################################################
 fips_init()
 {
@@ -108,7 +108,7 @@ fips_140()
   echo "certutil -d ${P_R_FIPSDIR} -L"
   certs=`${BINDIR}/certutil -d ${P_R_FIPSDIR} -L 2>&1`
   ret=$?
-  echo "${certs}" 
+  echo "${certs}"
   if [ ${ret} -eq 0 ]; then
     echo "${certs}" | grep FIPS_PUB_140_Test_Certificate > /dev/null
     ret=$?
@@ -125,7 +125,7 @@ fips_140()
   echo "certutil -d ${P_R_FIPSDIR} -L"
   certs=`${BINDIR}/certutil -d ${P_R_FIPSDIR} -L 2>&1`
   ret=$?
-  echo "${certs}" 
+  echo "${certs}"
   if [ ${ret} -eq 0 ]; then
     echo "${certs}" | grep FIPS_PUB_140_Test_Certificate > /dev/null
     if [ $? -eq 0 ]; then
@@ -151,7 +151,7 @@ fips_140()
   echo "certutil -d ${P_R_FIPSDIR} -L"
   certs=`${BINDIR}/certutil -d ${P_R_FIPSDIR} -L 2>&1`
   ret=$?
-  echo "${certs}" 
+  echo "${certs}"
   if [ ${ret} -eq 0 ]; then
     echo "${certs}" | grep FIPS_PUB_140_Test_Certificate > /dev/null
     ret=$?
@@ -173,7 +173,7 @@ fips_140()
   echo "certutil -d ${P_R_FIPSDIR} -L"
   certs=`${BINDIR}/certutil -d ${P_R_FIPSDIR} -L 2>&1`
   ret=$?
-  echo "${certs}" 
+  echo "${certs}"
   if [ ${ret} -eq 0 ]; then
     echo "${certs}" | grep FIPS_PUB_140_Test_Certificate > /dev/null
     if [ $? -eq 0 ]; then
@@ -192,7 +192,7 @@ fips_140()
   echo "certutil -d ${P_R_FIPSDIR} -L"
   certs=`${BINDIR}/certutil -d ${P_R_FIPSDIR} -L 2>&1`
   ret=$?
-  echo "${certs}" 
+  echo "${certs}"
   if [ ${ret} -eq 0 ]; then
     echo "${certs}" | grep FIPS_PUB_140_Test_Certificate > /dev/null
     ret=$?
@@ -217,17 +217,17 @@ fips_140()
 
   LIBDIR="${DIST}/${OBJDIR}/lib"
   MANGLEDIR="${FIPSDIR}/mangle"
-   
-  # There are different versions of cp command on different systems, some of them 
+
+  # There are different versions of cp command on different systems, some of them
   # copies only symlinks, others doesn't have option to disable links, so there
-  # is needed to copy files one by one. 
+  # is needed to copy files one by one.
   echo "mkdir ${MANGLEDIR}"
   mkdir ${MANGLEDIR}
   for lib in `ls ${LIBDIR}`; do
     echo "cp ${LIBDIR}/${lib} ${MANGLEDIR}"
     cp ${LIBDIR}/${lib} ${MANGLEDIR}
   done
-    
+
   echo "$SCRIPTNAME: Detect mangled softoken--------------------------"
   SOFTOKEN=${MANGLEDIR}/${DLL_PREFIX}softokn3.${DLL_SUFFIX}
 
@@ -266,7 +266,7 @@ fips_140()
       echo "LD_LIBRARY_PATH=${MANGLEDIR} dbtest -r -d ${P_R_FIPSDIR}"
       LD_LIBRARY_PATH="${MANGLEDIR}" ${BINDIR}/dbtest -r -d ${P_R_FIPSDIR} > ${TMP}/dbtestoutput.txt 2>&1
       RESULT=$?
-    fi  
+    fi
 
     html_msg ${RESULT} 46 "Init NSS with a corrupted library (dbtest -r)" "."
   else
@@ -275,7 +275,7 @@ fips_140()
 }
 
 ############################## fips_cleanup ############################
-# local shell function to finish this script (no exit since it might be 
+# local shell function to finish this script (no exit since it might be
 # sourced)
 ########################################################################
 fips_cleanup()

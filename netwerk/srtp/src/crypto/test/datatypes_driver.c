@@ -159,7 +159,7 @@ void byte_order(void)
     c.octet[i] = i;
   for (i=0; i < sizeof(d); i++)
     d.octet[i] = i;
-  
+
   printf("v128_t:\t%s\n", v128_hex_string(&e));
   printf("v64_t:\t%s\n", v64_hex_string(&d));
   printf("v32_t:\t%s\n", v32_hex_string(c));

@@ -20,7 +20,7 @@ pub struct ZipLongest<T, U> {
 }
 
 /// Create a new `ZipLongest` iterator.
-pub fn zip_longest<T, U>(a: T, b: U) -> ZipLongest<T, U> 
+pub fn zip_longest<T, U>(a: T, b: U) -> ZipLongest<T, U>
     where T: Iterator,
           U: Iterator
 {

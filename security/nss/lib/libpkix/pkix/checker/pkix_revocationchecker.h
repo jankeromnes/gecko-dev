@@ -47,12 +47,12 @@ extern "C" {
  * IGNORE means:
  *        ignore the implicit default source, whether it's configured or not.
  * ALLOW means:
- *       if an implicit default source is configured, 
+ *       if an implicit default source is configured,
  *          then it overrides any available or missing source in the cert.
  *       if no implicit default source is configured,
- *          then we continue to use what's available (or not available) 
+ *          then we continue to use what's available (or not available)
  *          in the certs.
- */ 
+ */
 #define PKIX_REV_M_ALLOW_IMPLICIT_DEFAULT_SOURCE     0x00L
 #define PKIX_REV_M_IGNORE_IMPLICIT_DEFAULT_SOURCE    0x04L /* OCSP only */
 
@@ -62,7 +62,7 @@ extern "C" {
  *   information is unknown (even after considering implicit sources,
  *   if allowed by other flags).
  * SKIPT_TEST means:
- *          We ignore that no fresh information is available and 
+ *          We ignore that no fresh information is available and
  *          skip this test.
  * REQUIRE_INFO means:
  *          We still require that fresh information is available.

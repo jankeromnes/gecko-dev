@@ -15,7 +15,7 @@ info: |
     LiteralPropertyName : IdentifierName
       Return StringValue of IdentifierName.
 
-    
+
     // This test file tests the following early error:
     Static Semantics: Early Errors
 

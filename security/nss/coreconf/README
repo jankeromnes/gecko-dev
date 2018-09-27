@@ -42,7 +42,7 @@ DEPENDENCIES of "ns/coreconf":
                    NOTE:  perl 5.003 or later recommended;
                           MKS toolkit perl 5.002 is broken)
         uname.exe (use nstools version)
-
+
 ENHANCEMENTS to "ns/coreconf":
 
     With the advent of Certificate Server 4.0 using the ns/coreconf
@@ -108,7 +108,7 @@ ENHANCEMENTS to "ns/coreconf":
                                  any change to the ".java" file
                                  from which the ".class" file was
                                  originally generated)
-
+
         (2) As stated above, the ns/coreconf build system now separates
             the link phase of a program from its compilation phase.
             While ns/coreconf still works exactly as it used to because
@@ -169,7 +169,7 @@ ENHANCEMENTS to "ns/coreconf":
             limit the 8.3 namespace on 16-bit platforms, it is highly
             unlikely that any future development will be performed on
             this platform.
-
+
         (5) The $(LIBRARY_VERSION) tag has been added to all non-static
             libraries created on UNIX operating systems to alleviate
             any future confusion for binary releases which utilize this
@@ -217,7 +217,7 @@ ENHANCEMENTS to "ns/coreconf":
             what comprises ns/coreconf.  This file was written in
             ASCII (rather than HTML) primarily to promote simple
             paginated printing.
-
+
 OVERVIEW of "config.mk":
 
     This file contains the configuration information necessary to
@@ -227,26 +227,26 @@ OVERVIEW of "config.mk":
         ===================     =======================================
         arch.mk                 source and release <architecture> tags
 
-        command.mk              default command macros 
+        command.mk              default command macros
 				(NOTE: may be overridden in $(OS_CONFIG).mk)
 
         $(OS_CONFIG).mk         <architecture>-specific macros
                                 (dependent upon <architecture> tags)
 
-        tree.mk                 release <tree> tags 
+        tree.mk                 release <tree> tags
 				(dependent upon <architecture> tags)
 
-        module.mk               source and release <component> tags 
-				(NOTE:  A component is also called a module 
+        module.mk               source and release <component> tags
+				(NOTE:  A component is also called a module
 				or a subsystem.  This file is dependent upon
                                 $(MODULE) being defined on the command
                                 line, as an environment variable, or in
                                 individual makefiles, or more
                                 appropriately, manifest.mn)
 
-        version.mk              release <version> tags 
-				(dependent upon $(MODULE) being defined on 
-				the command line, as an environment variable, 
+        version.mk              release <version> tags
+				(dependent upon $(MODULE) being defined on
+				the command line, as an environment variable,
 				or in individual makefiles, or more
                                 appropriately, manifest.mn)
 
@@ -258,16 +258,16 @@ OVERVIEW of "config.mk":
                                 <source_component>, <version>, and
                                 <platform> tags)
 
-        headers.mk              include switch for support header files 
+        headers.mk              include switch for support header files
 				(dependent upon <tree>, <component>, <version>,
                                 and <platform> tags)
 
         prefix.mk               compute program prefixes
 
-        suffix.mk               compute program suffixes 
+        suffix.mk               compute program suffixes
 				(dependent upon <architecture> tags)
-
-        jdk.mk                  define JDK 
+
+        jdk.mk                  define JDK
 				(dependent upon <architecture>,
                                 <source>, and <suffix> tags)
 
@@ -329,7 +329,7 @@ OVERVIEW of "rules.mk":
                                 $(ALL_TRASH) variable
 
         clobber::               synonym for "clean::" rule
-
+
         realclean::             remove all files specified by
                                 $(wildcard *.OBJ), dist, and in
                                 the $(ALL_TRASH) variable
@@ -391,9 +391,9 @@ OVERVIEW of "rules.mk":
                                 binary releases on various platforms
 
         tests::                 automation tool used to run the
-                                "regress" and "reporter" tools 
+                                "regress" and "reporter" tools
                                 on various regression test suites
-
+
     The second section of "rules.mk" primarily contains several
     "language" dependent build rules for binary releases.  These are
     generally "computed" rules (created on the "fly"), and include
@@ -454,7 +454,7 @@ OVERVIEW of "rules.mk":
                                           makefile rule dependency:
 
                                               %.cpp = C++ file
-
+
         MISCELLANEOUS
         -------------
         %.i:                              build the preprocessor file
@@ -505,7 +505,7 @@ OVERVIEW of "rules.mk":
 
         $(JNI_HEADERS):                   used to generate/regenerate
                                           JNI header files for "C"
-
+
     The fourth section of "rules.mk" primarily contains miscellaneous
     build rules for binary releases.  Many of these rules are here to
     create new subdirectories, manage dependencies, and/or override

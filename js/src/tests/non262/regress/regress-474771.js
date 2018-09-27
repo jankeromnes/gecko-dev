@@ -29,7 +29,7 @@ function test()
 
   Object.prototype.q = 3;
   for (let x of [6, 7]) { } print(actual = "PASS");
- 
+
 
   delete Object.prototype.q;
 

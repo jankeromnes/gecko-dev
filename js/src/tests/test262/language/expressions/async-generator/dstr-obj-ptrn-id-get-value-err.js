@@ -32,7 +32,7 @@ var poisonedProperty = Object.defineProperty({}, 'poisoned', {
 
 var f;
 f = async function*({ poisoned }) {
-  
+
 };
 
 assert.throws(Test262Error, function() {

@@ -8,7 +8,7 @@ import org.mozilla.gecko.sync.SyncException;
 import org.mozilla.gecko.sync.repositories.RepositorySession;
 
 public class SessionNotBegunException extends SyncException {
-  
+
   public RepositorySession failed;
 
   public SessionNotBegunException(RepositorySession failed) {

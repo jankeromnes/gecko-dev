@@ -11,7 +11,7 @@ var expect = 'No Crash';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 var obj = {
   toString: function() {
     return "*TEST*".substr(1, 4);

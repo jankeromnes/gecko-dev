@@ -6,9 +6,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,7 @@ import org.mozilla.apache.commons.codec.StringEncoder;
  * Encodes a string into a Refined Soundex value. A refined soundex code is
  * optimized for spell checking words. Soundex method originally developed by
  * <CITE>Margaret Odell</CITE> and <CITE>Robert Russell</CITE>.
- * 
+ *
  * @author Apache Software Foundation
  * @version $Id: RefinedSoundex.java 1064455 2011-01-28 04:40:27Z ggregory $
  */
@@ -68,7 +68,7 @@ public class RefinedSoundex implements StringEncoder {
      * Creates a refined soundex instance using a custom mapping. This
      * constructor can be used to customize the mapping, and/or possibly
      * provide an internationalized mapping for a non-Western character set.
-     * 
+     *
      * @param mapping
      *                  Mapping array to use when finding the corresponding code for
      *                  a given character
@@ -81,7 +81,7 @@ public class RefinedSoundex implements StringEncoder {
     /**
      * Creates a refined Soundex instance using a custom mapping. This constructor can be used to customize the mapping,
      * and/or possibly provide an internationalized mapping for a non-Western character set.
-     * 
+     *
      * @param mapping
      *            Mapping string to use when finding the corresponding code for a given character
      * @since 1.4
@@ -96,18 +96,18 @@ public class RefinedSoundex implements StringEncoder {
      * encoded String: 0 indicates little or no similarity, and 4 out of 4 (for
      * example) indicates strong similarity or identical values. For refined
      * Soundex, the return value can be greater than 4.
-     * 
+     *
      * @param s1
      *                  A String that will be encoded and compared.
      * @param s2
      *                  A String that will be encoded and compared.
      * @return The number of characters in the two encoded Strings that are the
      *             same from 0 to to the length of the shortest encoded String.
-     * 
+     *
      * @see SoundexUtils#difference(StringEncoder,String,String)
      * @see <a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/tsqlref/ts_de-dz_8co5.asp">
      *          MS T-SQL DIFFERENCE</a>
-     * 
+     *
      * @throws EncoderException
      *                  if an error occurs encoding one of the strings
      * @since 1.3
@@ -121,7 +121,7 @@ public class RefinedSoundex implements StringEncoder {
      * provided in order to satisfy the requirements of the Encoder interface,
      * and will throw an EncoderException if the supplied object is not of type
      * java.lang.String.
-     * 
+     *
      * @param pObject
      *                  Object to encode
      * @return An object (or type java.lang.String) containing the refined
@@ -138,7 +138,7 @@ public class RefinedSoundex implements StringEncoder {
 
     /**
      * Encodes a String using the refined soundex algorithm.
-     * 
+     *
      * @param pString
      *                  A String object to encode
      * @return A Soundex code corresponding to the String supplied
@@ -151,7 +151,7 @@ public class RefinedSoundex implements StringEncoder {
      * Returns the mapping code for a given character. The mapping codes are
      * maintained in an internal char array named soundexMapping, and the
      * default values of these mappings are US English.
-     * 
+     *
      * @param c
      *                  char to get mapping for
      * @return A character (really a numeral) to return for the given char
@@ -165,7 +165,7 @@ public class RefinedSoundex implements StringEncoder {
 
     /**
      * Retreives the Refined Soundex code for a given String object.
-     * 
+     *
      * @param str
      *                  String to encode using the Refined Soundex algorithm
      * @return A soundex code for the String supplied

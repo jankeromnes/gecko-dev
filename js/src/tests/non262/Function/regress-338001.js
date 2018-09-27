@@ -36,7 +36,7 @@ catch(ex)
   // handle changed 1.9 branch behavior. see bug 422348
   actual = ex + '';
 }
- 
+
 print('Done: ' + actual);
 
 reportMatch(expect, actual, summary);

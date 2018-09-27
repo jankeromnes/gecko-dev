@@ -177,7 +177,7 @@ pub struct SegmentBuilder {
     items: Vec<Item>,
     inner_rect: Option<LayoutRect>,
     bounding_rect: Option<LayoutRect>,
-    
+
     #[cfg(debug_assertions)]
     initialized: bool,
 }
@@ -207,7 +207,7 @@ impl SegmentBuilder {
 
         self.push_clip_rect(local_rect, None, ClipMode::Clip);
         self.push_clip_rect(local_clip_rect, None, ClipMode::Clip);
-                    
+
         #[cfg(debug_assertions)]
         {
             self.initialized = true;
@@ -546,7 +546,7 @@ impl SegmentBuilder {
                 }
             }
         }
-      
+
         #[cfg(debug_assertions)]
         {
             self.initialized = false;

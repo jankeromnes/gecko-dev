@@ -15,7 +15,7 @@ function test_stream(stream) {
                  .getService(Ci.nsIIOUtil)
                  .inputStreamIsBuffered(stream),
                false);
-  
+
   // Wrap it in a binary stream (to avoid wrong results that
   // scriptablestream would produce with binary content)
   var binstream = Cc['@mozilla.org/binaryinputstream;1']

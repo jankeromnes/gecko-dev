@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function f(a) { for (let c of a) [(c > 5) ? 'A' : 'B']; }
   f([true, 8]);
   f([2]);

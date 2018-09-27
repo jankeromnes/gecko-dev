@@ -101,7 +101,7 @@ TEMPORARILY_DONT_BUILD = \
 #       needs to look at what needs to happen to make jar build in
 # the binary release environment.
 #
-# perror requires lib/strerror.c which requires the client code installed 
+# perror requires lib/strerror.c which requires the client code installed
 # to build (requires allxpstr.h)
 #
 DONT_BULD = jar \

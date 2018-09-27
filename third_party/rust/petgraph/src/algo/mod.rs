@@ -122,7 +122,7 @@ pub fn toposort<G>(g: G, space: Option<&mut DfsSpace<G::NodeId, G::Map>>)
                         }
                         if !dfs.discovered.is_visited(&succ) {
                             dfs.stack.push(succ);
-                        } 
+                        }
                     }
                 } else {
                     dfs.stack.pop();
@@ -321,7 +321,7 @@ pub fn tarjan_scc<G>(g: G) -> Vec<Vec<G::NodeId>>
 
     #[derive(Debug)]
     struct Data<'a, G>
-        where G: NodeIndexable, 
+        where G: NodeIndexable,
           G::NodeId: 'a
     {
         index: usize,
@@ -330,7 +330,7 @@ pub fn tarjan_scc<G>(g: G) -> Vec<Vec<G::NodeId>>
         sccs: &'a mut Vec<Vec<G::NodeId>>,
     }
 
-    fn scc_visit<G>(v: G::NodeId, g: G, data: &mut Data<G>) 
+    fn scc_visit<G>(v: G::NodeId, g: G, data: &mut Data<G>)
         where G: IntoNeighbors + NodeIndexable
     {
         macro_rules! node {

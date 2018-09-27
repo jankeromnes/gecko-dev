@@ -71,7 +71,7 @@ tests.test_Base = function (t) {
     t.is( p.func(), "boring", "clone function calls correct" );
     q.value = "awesome";
     t.is( q.func(), "awesome", "clone really does work" );
-    
+
     // test boring boolean funcs
     t.is( isNull(null), true, "isNull matches null" );
     t.is( isNull(undefined), false, "isNull doesn't match undefined" );
@@ -133,7 +133,7 @@ tests.test_Base = function (t) {
     t.is( compare([1, 2], [2, 1]), -1, "arrays compare lt (contents)" );
     t.is( compare([1, 2], [1]), 1, "arrays compare gt (length)" );
     t.is( compare([2, 1], [1, 1]), 1, "arrays compare gt (contents)" );
-    
+
     // test partial application
     var a = [];
     var func = function (a, b) {
@@ -153,7 +153,7 @@ tests.test_Base = function (t) {
     self.funcTwo = bind(bind(self.funcTwo, self2), null);
     t.is( self.funcTwo(3), 6, "re-unbinding partial application works" );
 
-    
+
     // nodeWalk test
     // ... looks a lot like a DOM tree on purpose
     var tree = {
@@ -191,7 +191,7 @@ tests.test_Base = function (t) {
     });
 
     t.ok( objEqual(visitedNodes, ["1", "2", "3", "4", "5"]), "nodeWalk looks like it works");
-    
+
     // test map
     var minusOne = function (x) { return x - 1; };
     var res = map(minusOne, [1, 2, 3]);
@@ -219,8 +219,8 @@ tests.test_Base = function (t) {
     t.ok( objEqual(res, [1, 2, 3]), "map(null, lst) works" );
 
 
-    
-    
+
+
     t.is( isNotEmpty("foo"), true, "3 char string is not empty" );
     t.is( isNotEmpty(""), false, "0 char string is empty" );
     t.is( isNotEmpty([1, 2, 3]), true, "3 element list is not empty" );
@@ -235,10 +235,10 @@ tests.test_Base = function (t) {
     t.ok( objEqual(res, [2, 3]), "filter self works" );
     var res2 = xfilter(greaterThanOne, -1, 0, 1, 2, 3);
     t.ok( objEqual(res2, res), "xfilter works" );
- 
+
     t.is(objMax(1, 2, 9, 12, 42, -16, 16), 42, "objMax works (with numbers)");
     t.is(objMin(1, 2, 9, 12, 42, -16, 16), -16, "objMin works (with numbers)");
-    
+
     // test adapter registry
 
     var R = new AdapterRegistry();
@@ -259,7 +259,7 @@ tests.test_Base = function (t) {
     t.is( R.match(undefined), "undefined", "adapter was removed" );
     R.register("undefinedOrNull", isUndefinedOrNull, function () { return "undefinedOrNull" }, true);
     t.is( R.match(undefined), "undefinedOrNull", "override works" );
-    
+
     var a1 = {"a": 1, "b": 2, "c": 2};
     var a2 = {"a": 2, "b": 1, "c": 2};
     t.is( keyComparator("a")(a1, a2), -1, "keyComparator 1 lt" );
@@ -315,7 +315,7 @@ tests.test_Base = function (t) {
 
     // not public API
     MochiKit.Base.reprRegistry.unregister("stringMap");
-    
+
     t.is( repr(a), "[object Object]", "default repr for StringMap" );
 
     registerComparator("stringMap",
@@ -367,17 +367,17 @@ tests.test_Base = function (t) {
     var c = items(merge({"foo": "bar"}, {"wibble": "baz"}));
     c.sort(compare);
     t.is( compare(c, [["foo", "bar"], ["wibble", "baz"]]), 0, "merge worked" );
-    
+
     // not public API
     MochiKit.Base.comparatorRegistry.unregister("stringMap");
-    
+
     try {
         compare(a, b);
         t.ok( false, "bad comparison registered!?" );
     } catch (e) {
         t.ok( e instanceof TypeError, "bad comparison raised TypeError" );
     }
-    
+
     var o = {"__repr__": function () { return "__repr__"; }};
     t.is( repr(o), "__repr__", "__repr__ protocol" );
     t.is( repr(MochiKit.Base), MochiKit.Base.__repr__(), "__repr__ protocol when repr is defined" );
@@ -386,7 +386,7 @@ tests.test_Base = function (t) {
     o = function () { return "TACO" };
     o.NAME = "NAME";
     t.is( repr(o), "NAME", "NAME protocol (func)" );
-    
+
     t.is( repr(MochiKit.Base.nameFunctions), "MochiKit.Base.nameFunctions", "test nameFunctions" );
     // Done!
 
@@ -452,19 +452,19 @@ tests.test_Base = function (t) {
 
     var aa = {"foo": {"bar": 12, "wibble": 13}};
     var bb = {"foo": {"baz": 4, "bar": 16}, "bar": 4};
-    
+
     cc = updatetree(null, aa, bb);
     got = items(cc.foo);
     got.sort(compare);
     t.is( repr(got), repr(expect), "updatetree merge (self is null)" );
     t.is( cc.bar, 4, "updatetree insert (self is null)" );
-    
+
     cc = updatetree(undefined, aa, bb);
     got = items(cc.foo);
     got.sort(compare);
     t.is( repr(got), repr(expect), "updatetree merge (self is undefined)" );
     t.is( cc.bar, 4, "updatetree insert (self is undefined)" );
-    
+
     var c = counter();
     t.is( c(), 1, "counter starts at 1" );
     t.is( c(), 2, "counter increases" );
@@ -498,14 +498,14 @@ tests.test_Base = function (t) {
     t.is( repr(compose(f1,f2,f3)(4)), "[1, [2, [3, 4]]]", "three fn composition works" );
     t.is( repr(compose(compose(f1,f2),f3)(4)), "[1, [2, [3, 4]]]", "associative left" );
     t.is( repr(compose(f1,compose(f2,f3))(4)), "[1, [2, [3, 4]]]", "associative right" );
-    
+
     try {
         compose(f1, "foo");
         t.ok( false, "wrong compose argument not raised!" );
     } catch (e) {
         t.is( e.name, 'TypeError', "wrong compose argument raised correctly" );
     }
-    
+
     t.is(camelize('one'), 'one', 'one word');
     t.is(camelize('one-two'), 'oneTwo', 'two words');
     t.is(camelize('one-two-three'), 'oneTwoThree', 'three words');
@@ -517,14 +517,14 @@ tests.test_Base = function (t) {
     var flat = flattenArray([1, "2", 3, [4, [5, [6, 7], 8, [], 9]]]);
     var expect = [1, "2", 3, 4, 5, 6, 7, 8, 9];
     t.is( repr(flat), repr(expect), "flattenArray" );
-    
+
     /* mean */
     try {
         mean();
         t.ok( false, "mean no arguments didn't raise!" );
     } catch (e) {
         t.is( e.name, 'TypeError', "no arguments raised correctly" );
-    }    
+    }
     t.is( mean(1), 1, 'single argument (arg list)');
     t.is( mean([1]), 1, 'single argument (array)');
     t.is( mean(1,2,3), 2, 'three arguments (arg list)');

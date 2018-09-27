@@ -1,4 +1,4 @@
-function testDestructuring() {	
+function testDestructuring() {
     eval();
     var t = 0;
     for (var i = 0; i < 9; ++i) {

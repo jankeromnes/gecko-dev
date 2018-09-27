@@ -1,7 +1,7 @@
 ftp> ftp ftp.novell.com
 Connected to kmpec.provo.novell.com.
 220 ftp.novell.com NcFTPd Server (licensed copy) ready.
-Name (ftp.novell.com:cyp): 
+Name (ftp.novell.com:cyp):
 331 Guest login ok, send your complete e-mail address as password.
 230-You are user #18 of 400 simultaneous users allowed.
 230-
@@ -10,7 +10,7 @@ Name (ftp.novell.com:cyp):
 230-Other FTP mirror sites of ftp.novell.com are:
 230-ftp2.novell.com (United States)
 230-ftp3.novell.com (United States)
-230-ftp.novell.com.au (Australia) 
+230-ftp.novell.com.au (Australia)
 230-ftp.novell.de (Germany)
 230-ftp.novell.co.jp (Japan)
 230-ftp.novell.nl (Netherlands)
@@ -20,7 +20,7 @@ Name (ftp.novell.com:cyp):
 230-http://support.novell.com.au (Australia)
 230-http://support.novell.de (Germany)
 230-http://support.novell.co.jp (Japan)
-230- 
+230-
 230-webmaster@novell.com
 230-
 230 Logged in anonymously.
@@ -1407,5 +1407,5 @@ lrwxrwxrwx   1 ftpuser  ftpusers        10 Jan 10  2002 updates -> allupdates
 226 Listing completed.
 ftp> close
 221-Thank you and have a nice day.
-221 
-ftp> 
+221
+ftp>

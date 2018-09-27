@@ -14,8 +14,8 @@ this.p1 = 1;
 this.p2 = 2;
 this.p3 = 3;
 var result = "result";
-var myObj = {p1: 'a', 
-             p2: 'b', 
+var myObj = {p1: 'a',
+             p2: 'b',
              p3: 'c',
              value: 'myObj_value',
              valueOf : function(){return 'obj_valueOf';},

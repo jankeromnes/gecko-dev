@@ -14,5 +14,5 @@ printStatus (summary);
 
 var _cs='2001-01-01';
 var curTime = _cs.split(/([- :])/);
- 
+
 reportCompare(expect, actual, summary);

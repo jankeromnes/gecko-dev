@@ -27,7 +27,7 @@ window.addEventListener("message", function(e) {
     responseXML: null,
     sendThrew: false
   };
-  
+
   var xhr = new XMLHttpRequest();
   for (type of ["load", "abort", "error", "loadstart", "loadend"]) {
     xhr.addEventListener(type, function(e) {

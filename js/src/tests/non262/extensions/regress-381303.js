@@ -19,12 +19,12 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var obj = {set inn(value) {this.for = value;}, get inn() {return this.for;}};
   expect = '({' +
-    'get inn() {return this.for;}' + 
-    ', ' + 
-    'set inn(value) {this.for = value;}' + 
+    'get inn() {return this.for;}' +
+    ', ' +
+    'set inn(value) {this.for = value;}' +
     '})';
   actual = obj.toSource();
 

@@ -10,12 +10,12 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=553917
     <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
     <script type="application/javascript">
 
-      var stringBundleService = 
+      var stringBundleService =
         SpecialPowers.Cc["@mozilla.org/intl/stringbundle;1"]
                     .getService(SpecialPowers.Ci.nsIStringBundleService);
       var g_bundl =
         stringBundleService.createBundle("chrome://global/locale/mathml/mathml.properties");
-      
+
       var g_errorInfo = {
         InvalidChild: {
           status : [false, false, false, false, false, false],
@@ -29,20 +29,20 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=553917
           args: ["NoBase", "SubSupMismatch"]
         }
     };
-      
+
       var g_errorTypes = ["InvalidChild", "MMultiscriptsErrors"];
-      
+
       function getErrorMessage(name,idx)
       {
         if (name != "MMultiscriptsErrors") {
-          return g_bundl.formatStringFromName(name,g_errorInfo[name].args[idx], 
+          return g_bundl.formatStringFromName(name,g_errorInfo[name].args[idx],
                                             g_errorInfo[name].args[idx].length);
         }
         else {
           return g_bundl.GetStringFromName(g_errorInfo[name].args[idx]);
         }
       }
-    
+
     /** Checks the roll call to see if all expected error messages were present. */
     function processRollCall()
     {
@@ -54,8 +54,8 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=553917
         }
       }
     }
-    
-    /** Tests a candidate to see if it is one of the expected messages and updates the 
+
+    /** Tests a candidate to see if it is one of the expected messages and updates the
         g_errorInfo structure if it is. */
     function doRollCall(msg)
     {
@@ -68,7 +68,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=553917
         }
       }
     }
-    
+
     SpecialPowers.registerConsoleListener(
       function (msg) {
         if (msg.message == "SENTINEL") {
@@ -78,13 +78,13 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=553917
           doRollCall(msg.errorMessage);
         }
       });
-      
+
     SimpleTest.waitForExplicitFinish();
   </script>
   </head>
   <body onload="SpecialPowers.postConsoleSentinel();">
     <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=827713">Mozilla Bug 827713</a>
-    
+
     <!-- InvalidChild -->
     <math>
       <msubsup>

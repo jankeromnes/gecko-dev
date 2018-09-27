@@ -170,7 +170,7 @@ var check_use_counter_iframe = async function(file, use_counter_middlefix, check
 
     return deferred.promise;
   });
-  
+
   // Tear down the page.
   gBrowser.removeTab(newTab);
 
@@ -235,7 +235,7 @@ var check_use_counter_img = async function(file, use_counter_middlefix) {
 
     return deferred.promise;
   });
-  
+
   // Tear down the page.
   gBrowser.removeTab(newTab);
 
@@ -288,7 +288,7 @@ var check_use_counter_direct = async function(file, use_counter_middlefix, xfail
       addEventListener("load", listener, true);
     });
   });
-  
+
   // Tear down the page.
   gBrowser.removeTab(newTab);
 

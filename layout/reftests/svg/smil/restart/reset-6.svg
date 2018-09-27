@@ -24,7 +24,7 @@
   potentially giving us:
 
     |...|  | |
-      ^  
+      ^
     1   2  3 3.5
 
   At t=2s we'll go to look for the next interval and construct one from 3s-3.5s.

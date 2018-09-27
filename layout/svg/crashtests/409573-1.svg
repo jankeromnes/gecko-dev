@@ -7,7 +7,7 @@
 	<defs>
 
     <filter id="filter1"/>
-    
+
     <filter id="filter2">
       <use filter="url(#filter1)" />
 	  </filter>

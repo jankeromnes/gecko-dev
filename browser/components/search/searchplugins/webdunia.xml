@@ -11,7 +11,7 @@
   <Param name="q" value="{searchTerms}"/>
   <Param name="FF" value="SearchBox" />
 </Url>
-<Url type="application/x-suggestions+json" template="http://search.webdunia.com/suggestions.aspx">  
+<Url type="application/x-suggestions+json" template="http://search.webdunia.com/suggestions.aspx">
   <Param name="q" value="{searchTerms}"/>
   <Param name="stype" value="json"/>
 </Url>

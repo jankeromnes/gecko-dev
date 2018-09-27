@@ -144,7 +144,7 @@ nsCSSFilterInstance::SetAttributesForBrightness(FilterPrimitiveDescription& aDes
   slopeIntercept[kComponentTransferInterceptIndex] = intercept;
   atts.mValues[kChannelROrRGB].AppendElements(slopeIntercept, 2);
 
-  atts.mTypes[kChannelA] = 
+  atts.mTypes[kChannelA] =
     (uint8_t)SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY;
 
   aDescr.Attributes() = AsVariant(std::move(atts));
@@ -171,7 +171,7 @@ nsCSSFilterInstance::SetAttributesForContrast(FilterPrimitiveDescription& aDescr
   slopeIntercept[kComponentTransferInterceptIndex] = intercept;
   atts.mValues[kChannelROrRGB].AppendElements(slopeIntercept, 2);
 
-  atts.mTypes[kChannelA] = 
+  atts.mTypes[kChannelA] =
     (uint8_t)SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY;
 
   aDescr.Attributes() = AsVariant(std::move(atts));

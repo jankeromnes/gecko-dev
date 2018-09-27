@@ -108,7 +108,7 @@ checkSdpCLineNotDefault: function(sdpStr, label) {
 },
 
 // Note, we don't bother removing the fmtp lines, which makes a good test
-// for some SDP parsing issues. 
+// for some SDP parsing issues.
 removeCodec: function(sdp, codec) {
     var updated_sdp = sdp.replace(new RegExp("a=rtpmap:" + codec + ".*\\/90000\\r\\n",""),"");
     updated_sdp = updated_sdp.replace(new RegExp("(RTP\\/SAVPF.*)( " + codec + ")(.*\\r\\n)",""),"$1$3");

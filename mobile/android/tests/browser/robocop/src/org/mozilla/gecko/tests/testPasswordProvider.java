@@ -32,9 +32,9 @@ public class testPasswordProvider extends OldBaseTest {
         ContentResolver cr = context.getContentResolver();
         ContentValues[] cvs = new ContentValues[1];
         cvs[0] = new ContentValues();
-  
+
         blockForGeckoReady();
-  
+
         cvs[0].put("hostname", "http://www.example.com");
         cvs[0].put("httpRealm", "http://www.example.com");
         cvs[0].put("formSubmitURL", "http://www.example.com");
@@ -54,15 +54,15 @@ public class testPasswordProvider extends OldBaseTest {
         mAsserter.is(uri.toString(), expectedUri.toString(), "Insert returned correct uri");
         Cursor c = cr.query(passwordUri, null, null, null, null);
         SqliteCompare(c, cvs);
-  
+
         cvs[0].put("usernameField", "usernameField2");
         cvs[0].put("passwordField", "passwordField2");
-  
+
         int numUpdated = cr.update(passwordUri, cvs[0], null, null);
         mAsserter.is(1, numUpdated, "Correct number updated");
         c = cr.query(passwordUri, null, null, null, null);
         SqliteCompare(c, cvs);
-  
+
         int numDeleted = cr.delete(passwordUri, null, null);
         mAsserter.is(1, numDeleted, "Correct number deleted");
         cvs = new ContentValues[0];

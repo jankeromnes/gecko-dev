@@ -2,8 +2,8 @@
    ffi.c - Copyright (c) 2011  Anthony Green
            Copyright (c) 2008  David Daney
            Copyright (c) 1996, 2007, 2008, 2011  Red Hat, Inc.
-   
-   MIPS Foreign Function Interface 
+
+   MIPS Foreign Function Interface
 
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the
@@ -60,14 +60,14 @@ if (argp == &stack[bytes]) \
   FFI_MIPS_STOP_HERE(); \
 }
 #else
-#define FIX_ARGP 
+#define FIX_ARGP
 #endif
 
 
 /* ffi_prep_args is called by the assembly routine once stack space
    has been allocated for the function's arguments */
 
-static void ffi_prep_args(char *stack, 
+static void ffi_prep_args(char *stack,
 			  extended_cif *ecif,
 			  int bytes,
 			  int flags)
@@ -79,7 +79,7 @@ static void ffi_prep_args(char *stack,
 
 #ifdef FFI_MIPS_N32
   /* If more than 8 double words are used, the remainder go
-     on the stack. We reorder stuff on the stack here to 
+     on the stack. We reorder stuff on the stack here to
      support this easily. */
   if (bytes > 8 * sizeof(ffi_arg))
     argp = &stack[bytes - (8 * sizeof(ffi_arg))];
@@ -95,7 +95,7 @@ static void ffi_prep_args(char *stack,
   if ( ecif->cif->rstruct_flag != 0 )
 #else
   if ( ecif->cif->rtype->type == FFI_TYPE_STRUCT )
-#endif  
+#endif
     {
       *(ffi_arg *) argp = (ffi_arg) ecif->rvalue;
       argp += sizeof(ffi_arg);
@@ -113,7 +113,7 @@ static void ffi_prep_args(char *stack,
       a = (*p_arg)->alignment;
       if (a < sizeof(ffi_arg))
         a = sizeof(ffi_arg);
-      
+
       if ((a - 1) & (unsigned long) argp)
 	{
 	  argp = (char *) ALIGN(argp, a);
@@ -156,19 +156,19 @@ static void ffi_prep_args(char *stack,
 	      case FFI_TYPE_UINT8:
 		*(ffi_arg *)argp = *(UINT8 *)(* p_argv);
 		break;
-		  
+
 	      case FFI_TYPE_SINT16:
 		*(ffi_arg *)argp = *(SINT16 *)(* p_argv);
 		break;
-		  
+
 	      case FFI_TYPE_UINT16:
 		*(ffi_arg *)argp = *(UINT16 *)(* p_argv);
 		break;
-		  
+
 	      case FFI_TYPE_SINT32:
 		*(ffi_arg *)argp = *(SINT32 *)(* p_argv);
 		break;
-		  
+
 	      case FFI_TYPE_UINT32:
 #ifdef FFI_MIPS_N32
 		/* The N32 ABI requires that 32-bit integers
@@ -226,7 +226,7 @@ static void ffi_prep_args(char *stack,
 
 #ifdef FFI_MIPS_N32
 
-/* The n32 spec says that if "a chunk consists solely of a double 
+/* The n32 spec says that if "a chunk consists solely of a double
    float field (but not a double, which is part of a union), it
    is passed in a floating point register. Any other chunk is
    passed in an integer register". This code traverses structure
@@ -275,12 +275,12 @@ calc_n32_return_struct_flags(int soft_float, ffi_type *arg)
   ffi_type *e;
 
   /* Returning structures under n32 is a tricky thing.
-     A struct with only one or two floating point fields 
+     A struct with only one or two floating point fields
      is returned in $f0 (and $f2 if necessary). Any other
      struct results at most 128 bits are returned in $2
      (the first 64 bits) and $3 (remainder, if necessary).
      Larger structs are handled normally. */
-  
+
   if (arg->size > 16)
     return 0;
 
@@ -300,12 +300,12 @@ calc_n32_return_struct_flags(int soft_float, ffi_type *arg)
 	flags += FFI_TYPE_DOUBLE << FFI_FLAG_BITS;
       else if (e->type == FFI_TYPE_FLOAT)
 	flags += FFI_TYPE_FLOAT << FFI_FLAG_BITS;
-      else 
+      else
 	return small;
 
       if (flags && (arg->elements[2]))
 	{
-	  /* There are three arguments and the first two are 
+	  /* There are three arguments and the first two are
 	     floats! This must be passed the old way. */
 	  return small;
 	}
@@ -341,7 +341,7 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
 	    case FFI_TYPE_DOUBLE:
 	      cif->flags += (cif->arg_types)[0]->type;
 	      break;
-	      
+
 	    default:
 	      break;
 	    }
@@ -358,7 +358,7 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
 		    case FFI_TYPE_DOUBLE:
 		      cif->flags += (cif->arg_types)[1]->type << FFI_FLAG_BITS;
 		      break;
-		      
+
 		    default:
 		      break;
 		    }
@@ -366,7 +366,7 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
 	    }
 	}
     }
-      
+
   /* Set the return type flag */
 
   if (cif->abi == FFI_O32_SOFT_FLOAT)
@@ -383,7 +383,7 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
         case FFI_TYPE_DOUBLE:
           cif->flags += FFI_TYPE_UINT64 << (FFI_FLAG_BITS * 2);
           break;
-      
+
         case FFI_TYPE_FLOAT:
         default:
           cif->flags += FFI_TYPE_INT << (FFI_FLAG_BITS * 2);
@@ -392,7 +392,7 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
     }
   else
     {
-      /* FFI_O32 */      
+      /* FFI_O32 */
       switch (cif->rtype->type)
         {
         case FFI_TYPE_VOID:
@@ -406,7 +406,7 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
         case FFI_TYPE_UINT64:
           cif->flags += FFI_TYPE_UINT64 << (FFI_FLAG_BITS * 2);
           break;
-      
+
         default:
           cif->flags += FFI_TYPE_INT << (FFI_FLAG_BITS * 2);
           break;
@@ -476,7 +476,7 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
             /* Align it.  */
             arg_reg = ALIGN(arg_reg, 2);
             /* Treat it as two adjacent doubles.  */
-	    if (soft_float) 
+	    if (soft_float)
 	      {
 		arg_reg += 2;
 	      }
@@ -514,7 +514,7 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
 	  if (struct_flags == 0)
 	    {
 	      /* The structure is returned through a hidden
-		 first argument. Do nothing, 'cause FFI_TYPE_VOID 
+		 first argument. Do nothing, 'cause FFI_TYPE_VOID
 		 is 0 */
 	    }
 	  else
@@ -526,7 +526,7 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
 	    }
 	  break;
 	}
-      
+
       case FFI_TYPE_VOID:
 	/* Do nothing, 'cause FFI_TYPE_VOID is 0 */
 	break;
@@ -574,18 +574,18 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
       }
   }
 #endif
-  
+
   return FFI_OK;
 }
 
 /* Low level routine for calling O32 functions */
-extern int ffi_call_O32(void (*)(char *, extended_cif *, int, int), 
-			extended_cif *, unsigned, 
+extern int ffi_call_O32(void (*)(char *, extended_cif *, int, int),
+			extended_cif *, unsigned,
 			unsigned, unsigned *, void (*)(void));
 
 /* Low level routine for calling N32 functions */
-extern int ffi_call_N32(void (*)(char *, extended_cif *, int, int), 
-			extended_cif *, unsigned, 
+extern int ffi_call_N32(void (*)(char *, extended_cif *, int, int),
+			extended_cif *, unsigned,
 			unsigned, void *, void (*)(void));
 
 void ffi_call(ffi_cif *cif, void (*fn)(void), void *rvalue, void **avalue)
@@ -594,22 +594,22 @@ void ffi_call(ffi_cif *cif, void (*fn)(void), void *rvalue, void **avalue)
 
   ecif.cif = cif;
   ecif.avalue = avalue;
-  
+
   /* If the return value is a struct and we don't have a return	*/
   /* value address then we need to make one		        */
-  
-  if ((rvalue == NULL) && 
+
+  if ((rvalue == NULL) &&
       (cif->rtype->type == FFI_TYPE_STRUCT))
     ecif.rvalue = alloca(cif->rtype->size);
   else
     ecif.rvalue = rvalue;
-    
-  switch (cif->abi) 
+
+  switch (cif->abi)
     {
 #ifdef FFI_MIPS_O32
     case FFI_O32:
     case FFI_O32_SOFT_FLOAT:
-      ffi_call_O32(ffi_prep_args, &ecif, cif->bytes, 
+      ffi_call_O32(ffi_prep_args, &ecif, cif->bytes,
 		   cif->flags, ecif.rvalue, fn);
       break;
 #endif
@@ -818,12 +818,12 @@ ffi_closure_mips_inner_O32 (ffi_closure *closure,
 		avaluep[i] = &avalue[i];
 		*(UINT8 *) &avalue[i] = (UINT8) ar[argn];
 		break;
-		  
+
 	      case FFI_TYPE_SINT16:
 		avaluep[i] = &avalue[i];
 		*(SINT16 *) &avalue[i] = (SINT16) ar[argn];
 		break;
-		  
+
 	      case FFI_TYPE_UINT16:
 		avaluep[i] = &avalue[i];
 		*(UINT16 *) &avalue[i] = (UINT16) ar[argn];

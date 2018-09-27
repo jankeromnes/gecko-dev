@@ -122,7 +122,7 @@ private:
   bool mUsingInvalidation;
   nsIntRegion mInvalidRegion;
   Maybe<widget::WidgetRenderingContext> mWidgetContext;
-  
+
   IntSize mWindowSize;
   TimeStamp mCompositionStartTime;
   TimeStamp mLastCompositionEndTime;

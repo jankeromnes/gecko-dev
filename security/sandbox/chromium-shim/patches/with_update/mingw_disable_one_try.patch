@@ -20,11 +20,11 @@ diff --git a/security/sandbox/chromium/base/threading/platform_thread_win.cc b/s
 +++ b/security/sandbox/chromium/base/threading/platform_thread_win.cc
 @@ -32,27 +32,30 @@ typedef struct tagTHREADNAME_INFO {
  } THREADNAME_INFO;
- 
+
  // The SetThreadDescription API was brought in version 1607 of Windows 10.
  typedef HRESULT(WINAPI* SetThreadDescription)(HANDLE hThread,
                                                PCWSTR lpThreadDescription);
- 
+
  // This function has try handling, so it is separated out of its caller.
  void SetNameInternal(PlatformThreadId thread_id, const char* name) {
 +  //This function is only used for debugging purposes, as you can find by its caller
@@ -34,7 +34,7 @@ diff --git a/security/sandbox/chromium/base/threading/platform_thread_win.cc b/s
    info.szName = name;
    info.dwThreadID = thread_id;
    info.dwFlags = 0;
- 
+
    __try {
      RaiseException(kVCThreadNameException, 0, sizeof(info)/sizeof(DWORD),
                     reinterpret_cast<DWORD_PTR*>(&info));
@@ -42,10 +42,10 @@ diff --git a/security/sandbox/chromium/base/threading/platform_thread_win.cc b/s
    }
 +#endif
  }
- 
+
  struct ThreadParams {
    PlatformThread::Delegate* delegate;
    bool joinable;
    ThreadPriority priority;
  };
- 
+

@@ -19,7 +19,7 @@ function test()
   printStatus (summary);
 
   var N = 0xFFFFFFFF;
-  var a = []; 
+  var a = [];
   a[N - 1] = 0;
 
   var expected = "GETTER RESULT";

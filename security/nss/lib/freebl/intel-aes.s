@@ -752,7 +752,7 @@ intel_aes_decrypt_cbc_128:
 	xor	%eax, %eax
 	ret
 	.size intel_aes_decrypt_cbc_128, .-intel_aes_decrypt_cbc_128
-        
+
 /* in %rdi : the key
    in %rsi : buffer for expanded key
 */

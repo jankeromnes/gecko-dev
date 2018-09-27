@@ -350,7 +350,7 @@ class VideoCodingModule : public Module {
   //                    <0,         on error.
   virtual int32_t RegisterPacketRequestCallback(
       VCMPacketRequestCallback* callback) = 0;
- 
+
   // Register a receive state change callback. This callback will be called when the
   // module state has changed
   //
@@ -479,7 +479,7 @@ class VideoCodingModule : public Module {
   // Setting a desired delay to the VCM receiver. Video rendering will be
   // delayed by at least desired_delay_ms.
   virtual int SetMinReceiverDelay(int desired_delay_ms) = 0;
- 
+
   // Set current load state of the CPU
   virtual void SetCPULoadState(CPULoadState state) = 0;
 

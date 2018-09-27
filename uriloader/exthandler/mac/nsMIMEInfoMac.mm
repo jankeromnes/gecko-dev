@@ -37,18 +37,18 @@ nsMIMEInfoMac::LaunchWithFile(nsIFile *aFile)
 
   NS_ASSERTION(mClass == eMIMEInfo, "only MIME infos are currently allowed"
                "to pass content by value");
-  
+
   if (mPreferredAction == useHelperApp) {
 
     // we don't yet support passing content by value (rather than reference)
-    // to web apps.  at some point, we will probably want to.  
+    // to web apps.  at some point, we will probably want to.
     nsCOMPtr<nsILocalHandlerApp> localHandlerApp =
         do_QueryInterface(mPreferredApplication, &rv);
     NS_ENSURE_SUCCESS(rv, rv);
-    
+
     rv = localHandlerApp->GetExecutable(getter_AddRefs(application));
     NS_ENSURE_SUCCESS(rv, rv);
-    
+
   } else if (mPreferredAction == useSystemDefault) {
     application = mDefaultApplication;
   }
@@ -83,7 +83,7 @@ nsMIMEInfoMac::LaunchWithFile(nsIFile *aFile)
   NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
 }
 
-nsresult 
+nsresult
 nsMIMEInfoMac::LoadUriInternal(nsIURI *aURI)
 {
   NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NSRESULT;

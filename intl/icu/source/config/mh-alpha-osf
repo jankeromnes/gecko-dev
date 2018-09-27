@@ -7,12 +7,12 @@
 
 ## Commands to generate dependency files
 #GEN_DEPS.c=	$(CC) $(DEFS) $(CPPFLAGS) -MD -c -msg_quiet
-#GEN_DEPS.cc=	$(CXX) $(DEFS) $(CPPFLAGS) -D__USE_STD_IOSTREAM -c -MD -msg_quiet 
+#GEN_DEPS.cc=	$(CXX) $(DEFS) $(CPPFLAGS) -D__USE_STD_IOSTREAM -c -MD -msg_quiet
 
 ## Flags for position independent code
-SHAREDLIBCFLAGS = 
-SHAREDLIBCXXFLAGS = 
-SHAREDLIBCPPFLAGS = 
+SHAREDLIBCFLAGS =
+SHAREDLIBCXXFLAGS =
+SHAREDLIBCPPFLAGS =
 
 ## Additional flags when building libraries and with threads
 THREADSCPPFLAGS = -D_REENTRANT -pthread
@@ -28,11 +28,11 @@ COMPILE.cc=	$(CXX) $(DEFS) $(CPPFLAGS) $(CXXFLAGS) -c -D__USE_STD_IOSTREAM
 
 
 ## Commands to link
-LINK.c=		$(CC) -call_shared $(CFLAGS) $(LDFLAGS) 
-LINK.cc=	$(CXX) -call_shared $(CXXFLAGS) $(LDFLAGS) 
+LINK.c=		$(CC) -call_shared $(CFLAGS) $(LDFLAGS)
+LINK.cc=	$(CXX) -call_shared $(CXXFLAGS) $(LDFLAGS)
 
 ## Compiler switch to embed a runtime search path
-LD_RPATH=	$(LD_RPATH)$(LD_RPATH_PRE)path1	
+LD_RPATH=	$(LD_RPATH)$(LD_RPATH_PRE)path1
 LD_RPATH_PRE=	-Wl,-rpath,
 
 ## Compiler switch to embed a library name

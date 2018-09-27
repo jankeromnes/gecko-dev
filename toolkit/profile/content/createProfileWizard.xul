@@ -45,12 +45,12 @@
   </wizardpage>
 
   <wizardpage id="createProfile" onpageshow="initSecondWizardPage();">
-    <description>&profileCreationIntro.text;</description> 
+    <description>&profileCreationIntro.text;</description>
 
-    <label accesskey="&profilePrompt.accesskey;" control="ProfileName">&profilePrompt.label;</label> 
+    <label accesskey="&profilePrompt.accesskey;" control="ProfileName">&profilePrompt.label;</label>
     <textbox id="profileName" value="&profileDefaultName;"
              oninput="updateProfileName(this.value);"/>
-    
+
     <separator/>
 
     <description>&profileDirectoryExplanation.text;</description>
@@ -60,7 +60,7 @@
     </vbox>
 
     <hbox>
-      <button label="&button.choosefolder.label;" oncommand="chooseProfileFolder();" 
+      <button label="&button.choosefolder.label;" oncommand="chooseProfileFolder();"
               accesskey="&button.choosefolder.accesskey;"/>
 
       <button id="useDefault" label="&button.usedefault.label;"

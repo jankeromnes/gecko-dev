@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2002-2003 ActiveState Corp.
  * Author: Trent Mick (TrentM@ActiveState.com)
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -9,10 +9,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,8 +22,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* Console launch executable.  
- * 
+/* Console launch executable.
+ *
  * This program exists solely to launch:
  * 		python <installdir>/<exename>.py <argv>
  * on Windows. "<exename>.py" must be in the same directory.
@@ -315,7 +315,7 @@ static int _IsExecutableFile(char *filename)
             strncpy(progPath, newProgPath, MAXPATHLEN);
         }
 
-        
+
         // prefix with the current working directory if the path is
         // relative to conform with the Windows version of this
         if (strlen(progPath) != 0 && progPath[0] != SEP) {
@@ -326,7 +326,7 @@ static int _IsExecutableFile(char *filename)
             snprintf(tmp, MAXPATHLEN, "%s%c%s", cwd, SEP, progPath);
             strncpy(progPath, tmp, MAXPATHLEN);
         }
-        
+
         // 'progPath' now contains the full path to the program *and* the program
         // name. The latter is not desire.
         char* pLetter = progPath + strlen(progPath);
@@ -373,7 +373,7 @@ int main(int argc, char** argv)
     char pyFile[MAXPATHLEN+1];
     snprintf(pyFile, MAXPATHLEN, "%s%c%s.py", programPath, SEP,
 	     programNameNoExt);
-    
+
     // Build the argument array for launching.
     char* pythonArgs[MAX_PYTHON_ARGS+1];
     int nPythonArgs = 0;

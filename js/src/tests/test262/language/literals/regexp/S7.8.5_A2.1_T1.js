@@ -12,7 +12,7 @@ description: Without eval
 //CHECK#1
 if (/1a/.source !== "1a") {
   $ERROR('#1: /1a/');
-}   
+}
 
 //CHECK#2
 if (/aa/.source !== "aa") {
@@ -27,7 +27,7 @@ if (/,;/.source !== ",;") {
 //CHECK#4
 if (/  /.source !== "  ") {
   $ERROR('#4: /  /');
-}      
+}
 
 //CHECK#5
 if (/a\u0041/.source !== "a\\u0041") {

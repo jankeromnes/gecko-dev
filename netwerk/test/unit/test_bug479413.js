@@ -31,7 +31,7 @@ function run_test() {
   var whitelistPref = "network.IDN.whitelist.com";
 
   pbi.setBoolPref(whitelistPref, true);
- 
+
   idnService = Cc["@mozilla.org/network/idn-service;1"]
     .getService(Ci.nsIIDNService);
 

@@ -14,7 +14,7 @@
   </depends>
   <overview>
     <p>
-      This extension exposes the compressed texture formats defined in the 
+      This extension exposes the compressed texture formats defined in the
       <a href="http://www.khronos.org/registry/gles/extensions/AMD/AMD_compressed_ATC_texture.txt">
       AMD_compressed_ATC_texture</a> OpenGL extension to WebGL.
     </p>

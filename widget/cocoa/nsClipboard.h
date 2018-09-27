@@ -46,7 +46,7 @@ protected:
   NS_IMETHOD GetNativeClipboardData(nsITransferable * aTransferable, int32_t aWhichClipboard);
   void ClearSelectionCache();
   void SetSelectionCache(nsITransferable* aTransferable);
-  
+
 private:
   virtual ~nsClipboard();
   int32_t mCachedClipboard;

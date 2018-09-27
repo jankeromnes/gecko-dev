@@ -49,7 +49,7 @@ class CEncoder
   #ifdef USE_MIXER_MT
     NCoderMixer2::CMixerMT *_mixerMT;
   #endif
-  
+
   NCoderMixer2::CMixer *_mixer;
   CMyComPtr<IUnknown> _mixerRef;
 

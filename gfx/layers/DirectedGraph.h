@@ -30,7 +30,7 @@ public:
     T mTo;
   };
 
-  class RemoveEdgesToComparator 
+  class RemoveEdgesToComparator
   {
   public:
     bool Equals(const Edge& a, T const& b) const { return a.mTo == b; }
@@ -55,7 +55,7 @@ public:
    */
   const nsTArray<Edge>& GetEdgeList() const
   {
-    return mEdges; 
+    return mEdges;
   }
 
   /**
@@ -74,7 +74,7 @@ public:
     RemoveEdgesToComparator c;
     while (mEdges.RemoveElement(aNode, c)) {}
   }
-  
+
   /**
    * Get the number of edges going into aNode.
    */

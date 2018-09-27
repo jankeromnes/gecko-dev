@@ -624,7 +624,7 @@ enum ParseColorErrorKind {
     /// An error originating from `termcolor`.
     TermColor(termcolor::ParseColorError),
     /// An error converting the `termcolor` color to a `env_logger::Color`.
-    /// 
+    ///
     /// This variant should only get reached if a user uses a new spec that's
     /// valid for `termcolor`, but not recognised in `env_logger` yet.
     Unrecognized {
@@ -665,7 +665,7 @@ impl fmt::Display for ParseColorError {
             ParseColorErrorKind::TermColor(ref err) => fmt::Display::fmt(err, f),
             ParseColorErrorKind::Unrecognized { ref given, .. } => {
                 write!(f, "unrecognized color value '{}'", given)
-            } 
+            }
         }
     }
 }

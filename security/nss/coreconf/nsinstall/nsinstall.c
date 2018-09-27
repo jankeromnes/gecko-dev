@@ -88,8 +88,8 @@ mkdirs(char *path, mode_t mode)
     char *      cp;
     int         rv;
     struct stat sb;
-    
-    if (!path || !path[0]) 
+
+    if (!path || !path[0])
 	fail("Null pointer or empty string passed to mkdirs()");
     while (*path == '/' && path[1] == '/')
 	path++;
@@ -107,7 +107,7 @@ mkdirs(char *path, mode_t mode)
 	if (errno != EEXIST)
 	    fail("mkdirs cannot make %s", path);
 	fprintf(stderr, "directory creation race: %s\n", path);
-	if (!stat(path, &sb) && S_ISDIR(sb.st_mode)) 
+	if (!stat(path, &sb) && S_ISDIR(sb.st_mode))
 	    rv = 0;
     }
     return rv;
@@ -120,7 +120,7 @@ touid(char *owner)
     uid_t uid;
     char *cp;
 
-    if (!owner || !owner[0]) 
+    if (!owner || !owner[0])
 	fail("Null pointer or empty string passed to touid()");
     pw = getpwnam(owner);
     if (pw)
@@ -138,7 +138,7 @@ togid(char *group)
     gid_t gid;
     char *cp;
 
-    if (!group || !group[0]) 
+    if (!group || !group[0])
 	fail("Null pointer or empty string passed to togid()");
     gr = getgrnam(group);
     if (gr)
@@ -274,7 +274,7 @@ retry:
 	    }
 	    if (!exists && mkdir(toname, mode) < 0) {
 	    	/* we probably have two nsinstall programs in a race here. */
-		if (errno == EEXIST && !stat(toname, &sb) && 
+		if (errno == EEXIST && !stat(toname, &sb) &&
 		    S_ISDIR(sb.st_mode)) {
 		    fprintf(stderr, "directory creation race: %s\n", toname);
 		    goto retry;
@@ -348,7 +348,7 @@ retry:
 	    fromfd = open(name, O_RDONLY);
 	    if (fromfd < 0 || fstat(fromfd, &sb) < 0)
 		fail("cannot access %s", name);
-	    if (exists && 
+	    if (exists &&
 	        (!S_ISREG(tosb.st_mode) || access(toname, W_OK) < 0)) {
 		int rmrv;
 		rmrv = (S_ISDIR(tosb.st_mode) ? rmdir : unlink)(toname);

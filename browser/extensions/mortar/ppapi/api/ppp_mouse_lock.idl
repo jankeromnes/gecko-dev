@@ -4,9 +4,9 @@
  */
 
 /**
- * This file defines the <code>PPP_MouseLock</code> interface containing a 
+ * This file defines the <code>PPP_MouseLock</code> interface containing a
  * function that you must implement to receive mouse lock events from the
- * browser. 
+ * browser.
  */
 
 label Chrome {
@@ -19,7 +19,7 @@ label Chrome {
  */
 interface PPP_MouseLock {
   /**
-   * MouseLockLost() is called when the instance loses the mouse lock, such as   
+   * MouseLockLost() is called when the instance loses the mouse lock, such as
    * when the user presses the ESC key.
    *
    * @param[in] instance A <code>PP_Instance</code> identifying one instance

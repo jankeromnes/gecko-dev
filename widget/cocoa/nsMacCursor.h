@@ -20,7 +20,7 @@
   NSTimer *mTimer;
   @protected
   nsCursor mType;
-  int mFrameCounter;    
+  int mFrameCounter;
 }
 
 /*! @method     cursorWithCursor:
@@ -94,9 +94,9 @@
 
 /** @method     cursorType
     @abstract   Get the cursor type for this cursor
-    @discussion This method returns the <code>nsCursor</code> constant that corresponds to this cursor, which is  
+    @discussion This method returns the <code>nsCursor</code> constant that corresponds to this cursor, which is
                 equivalent to the CSS name for the cursor.
-    @result     The nsCursor constant corresponding to this cursor, or nsCursor's 'eCursorCount' if the cursor 
+    @result     The nsCursor constant corresponding to this cursor, or nsCursor's 'eCursorCount' if the cursor
                 is a custom cursor loaded from a URI
  */
 - (nsCursor) type;

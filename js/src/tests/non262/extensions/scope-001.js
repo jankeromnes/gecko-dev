@@ -55,7 +55,7 @@ function test()
   reportCompare (expect, actual, status);
 
 
- 
+
   status= 'Step 3:  setting obj.__proto__  to global object again';
   obj.__proto__ = this;
 

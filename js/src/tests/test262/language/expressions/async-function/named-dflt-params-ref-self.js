@@ -29,7 +29,7 @@ var x = 0;
 
 var callCount = 0;
 var f = async function f(x = x) {
-  
+
   callCount = callCount + 1;
 }
 

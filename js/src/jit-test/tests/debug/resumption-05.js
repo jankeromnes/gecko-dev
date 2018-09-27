@@ -2,7 +2,7 @@
 
 var g = newGlobal();
 g.debuggeeGlobal = this;
-g.eval("(" + function () { 
+g.eval("(" + function () {
         var dbg = new Debugger(debuggeeGlobal);
         dbg.onDebuggerStatement = function (frame) {
             if (frame.callee === null) {

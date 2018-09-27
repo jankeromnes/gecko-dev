@@ -27,9 +27,9 @@ extern "C" {
 #endif /* __cplusplus */
 
 /*
- * This AtkSelection interface provides the standard mechanism for an 
- * assistive technology to determine what the current selected children are, 
- * as well as modify the selection set. Any object that has children that 
+ * This AtkSelection interface provides the standard mechanism for an
+ * assistive technology to determine what the current selected children are,
+ * as well as modify the selection set. Any object that has children that
  * can be selected should support the AtkSelection interface.
  */
 
@@ -61,7 +61,7 @@ struct _AtkSelectionIface
   gboolean     (* select_all_selection) (AtkSelection   *selection);
 
   /* signal handlers */
-  
+
   void         (*selection_changed)     (AtkSelection   *selection);
 
   AtkFunction  pad1;

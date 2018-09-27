@@ -4,7 +4,7 @@
 #define __EXTRACT_MODE_H
 
 namespace NExtract {
-  
+
 namespace NPathMode
 {
   enum EEnum

@@ -17,7 +17,7 @@ function TimeClip( t ) {
   if ( isNaN ) { Number.NaN; }
 }
 function runDSTOffsetCachingTestsFraction(part, parts) { print; };
-test_times=( TIME_NOW, TIME_0000, ( SECTION, VERSION+".getUTCMinutes()", 
+test_times=( TIME_NOW, TIME_0000, ( SECTION, VERSION+".getUTCMinutes()",
              TIME_NOW.test_times,VERSION.SECTION ) , TIME_0000, TIME_0000,
              0, 0 );
 try { j = 0( SECTION, TimeClip(1.1), 0 ); } catch (e) {}

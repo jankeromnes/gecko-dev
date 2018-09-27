@@ -7,7 +7,7 @@
 
 01 IFolderArchive.h
 
-  // 05  IArchiveFolder   // old 
+  // 05  IArchiveFolder   // old
   // 06  IInFolderArchive // old
   07  IFileExtractCallback.h::IFolderArchiveExtractCallback
   08  IFileExtractCallback.h::IFolderArchiveExtractCallback2
@@ -19,7 +19,7 @@
   0F  IOutFolderArchive
   10  IFolderArchiveUpdateCallback2
   11  IFolderScanProgress
-  
+
   20  IFileExtractCallback.h::IGetProp
   30  IFileExtractCallback.h::IFolderExtractToStreamCallback
 
@@ -88,10 +88,10 @@
   05  IArchiveAllowTail
 
   10  IArchiveOpenCallback
-  
+
   20  IArchiveExtractCallback
   21  IArchiveExtractCallbackMessage
-  
+
   30  IArchiveOpenVolumeCallback
   40  IInArchiveGetStream
   50  IArchiveOpenSetSubArchiveName
@@ -122,10 +122,10 @@
   09 IFolderClone
   0A IFolderSetFlatMode
   0B IFolderOperationsExtractCallback
-  0C // 
-  0D // 
+  0C //
+  0D //
   0E IFolderProperties
-  0F 
+  0F
   10 IFolderArcProps
   11 IGetFolderArcProps
   12 // IFolderOperations
@@ -200,7 +200,7 @@ Handler GUIDs:
   E5 Compound
   E6 Wim
   E7 Iso
-  E8 
+  E8
   E9 Chm
   EA Split
   EB Rpm

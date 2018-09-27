@@ -13,7 +13,7 @@ description: Declaring a function that returns string
 function __func(){return "zig-zig-sputnik";};
 
 //////////////////////////////////////////////////////////////////////////////
-//CHECK#1 
+//CHECK#1
 if (typeof __func !== "function") {
 	$ERROR('#1: typeof __func === "function". Actual: typeof __func ==='+typeof __func);
 }

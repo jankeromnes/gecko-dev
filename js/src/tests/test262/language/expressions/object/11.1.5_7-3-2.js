@@ -3,9 +3,9 @@
 
 /*---
 info: |
-    Refer 11.1.5; 
+    Refer 11.1.5;
     The production
-    PropertyAssignment : get PropertyName ( ) { FunctionBody } 
+    PropertyAssignment : get PropertyName ( ) { FunctionBody }
     3.Let desc be the Property Descriptor{[[Get]]: closure, [[Enumerable]]: true, [[Configurable]]: true}
 es5id: 11.1.5_7-3-2
 description: >

@@ -41,7 +41,7 @@ public:
     }
 
     // create a font entry for a downloaded font
-    static FT2FontEntry* 
+    static FT2FontEntry*
     CreateFontEntry(const nsACString& aFontName,
                     WeightRange aWeight,
                     StretchRange aStretch,
@@ -60,7 +60,7 @@ public:
     // aFontData (if non-nullptr) is NS_Malloc'ed data that aFace depends on,
     // to be freed after the face is destroyed.
     // aLength is the length of aFontData.
-    static FT2FontEntry* 
+    static FT2FontEntry*
     CreateFontEntry(FT_Face aFace,
                     const char *aFilename, uint8_t aIndex,
                     const nsACString& aName,

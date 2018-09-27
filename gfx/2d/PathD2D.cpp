@@ -421,9 +421,9 @@ PathD2D::TransformedCopyToBuilder(const Matrix &aTransform, FillRule aFillRule) 
   }
 
   RefPtr<PathBuilderD2D> pathBuilder = new PathBuilderD2D(sink, path, aFillRule, mBackendType);
-  
+
   pathBuilder->mCurrentPoint = aTransform.TransformPoint(mEndPoint);
-  
+
   if (mEndedActive) {
     pathBuilder->mFigureActive = true;
   }
@@ -446,7 +446,7 @@ PathD2D::StreamToSink(PathSink *aSink) const
     return;
   }
 }
- 
+
 bool
 PathD2D::ContainsPoint(const Point &aPoint, const Matrix &aTransform) const
 {

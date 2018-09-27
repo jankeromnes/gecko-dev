@@ -33,7 +33,7 @@
                 memcpy( i->bytes, buf, 1 );
 
 
-size_t ia32_disasm_addr( unsigned char * buf, size_t buf_len, 
+size_t ia32_disasm_addr( unsigned char * buf, size_t buf_len,
 		x86_insn_t *insn);
 
 
@@ -75,7 +75,7 @@ typedef struct {
 #define PREFIX_TAKEN      0x1000	/* branch taken */
 #define PREFIX_NOTTAKEN   0x2000	/* branch not taken */
 #define PREFIX_REG_MASK   0x0F00
-#define BRANCH_HINT_MASK  0x3000 
+#define BRANCH_HINT_MASK  0x3000
 #define PREFIX_PRINT_MASK 0x000F	/* printable prefixes */
 #define PREFIX_MASK       0xFFFF
 
@@ -121,7 +121,7 @@ typedef struct {
 #define   ADDRMETH_MASK	0x00FF0000
 
 /* note: for instructions with implied operands, use no ADDRMETH */
-#define   ADDRMETH_A  	0x00010000   
+#define   ADDRMETH_A  	0x00010000
 #define   ADDRMETH_C   	0x00020000
 #define   ADDRMETH_D   	0x00030000
 #define   ADDRMETH_E   	0x00040000
@@ -185,7 +185,7 @@ typedef struct {
 
 
 /* ---------------------------------------------- Opcode Table Descriptions */
-/* the table type describes how to handle byte/size increments before 
+/* the table type describes how to handle byte/size increments before
  * and after lookup. Some tables re-use the current byte, others
  * consume a byte only if the ModR/M encodes no operands, etc */
 enum ia32_tbl_type_id {
@@ -215,10 +215,10 @@ enum ia32_tbl_type_id {
  * 	tbl_extension uses current byte but does not consume it
  * 	tbl_ext_ext uses current byte but does not consume it
  * 	tbl_fpu uses current byte and consumes it
- * 	tbl_fpu_ext uses current byte but does not consume it 
+ * 	tbl_fpu_ext uses current byte but does not consume it
  */
 
-/* Convenience struct for opcode tables : these will be stored in a 
+/* Convenience struct for opcode tables : these will be stored in a
  * 'table of tables' so we can use a table index instead of a pointer */
 typedef struct {		/* Assembly instruction tables */
    ia32_insn_t *table;		/* Pointer to table of instruction encodings */
@@ -262,7 +262,7 @@ typedef struct {		/* Assembly instruction tables */
 #define INS_NOTE_SERIAL		0x00000004	/* serializes */
 #define INS_NOTE_NONSWAP    0x00000008  /* insn is not swapped in att format */ // could be separate field?
 #define INS_NOTE_NOSUFFIX   0x00000010  /* insn has no size suffix in att format */ // could be separate field?
-//#define INS_NOTE_NMI		
+//#define INS_NOTE_NMI
 
 #define INS_INVALID 	0
 
@@ -410,7 +410,7 @@ typedef struct {		/* Assembly instruction tables */
 #define INS_SZCONV	(INS_OTHER | 0x03)	/* convert size of operand */
 #define INS_SALC	(INS_OTHER | 0x04)	/* set %al on carry */
 #define INS_UNKNOWN	(INS_OTHER | 0x05)
- 
+
 
 #define INS_TYPE_MASK	0xFFFF
 #define INS_TYPE( type )      ( type & INS_TYPE_MASK )
@@ -444,7 +444,7 @@ typedef struct {		/* Assembly instruction tables */
 #define INS_SET_DIR          0x080000    /* direction */
 #define INS_SET_SIGN         0x100000    /* negative */
 #define INS_SET_PARITY       0x200000    /* parity */
-#define INS_SET_NCARRY       0x1000000 
+#define INS_SET_NCARRY       0x1000000
 #define INS_SET_NZERO        0x2000000
 #define INS_SET_NOFLOW       0x4000000
 #define INS_SET_NDIR         0x8000000

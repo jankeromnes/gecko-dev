@@ -29,7 +29,7 @@ let x = {};
 let iterCount = 0;
 async function * fn() {
   for await ({ x: x[yield] } of [{ x: 23 }]) {
-    
+
     iterCount += 1;
   }
 }

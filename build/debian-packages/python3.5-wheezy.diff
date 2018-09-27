@@ -22,7 +22,7 @@ index e19964f..0bc60c2 100644
 + -- Gregory Szorc <gps@mozilla.com>  Thu, 29 Mar 2018 20:00:00 -0700
 +
  python3.5 (3.5.3-1) unstable; urgency=medium
- 
+
    * Python 3.5.3 release.
 diff --git a/debian/control.in b/debian/control.in
 index 7d36556..ec1af78 100644
@@ -66,7 +66,7 @@ index 7d36556..ec1af78 100644
 @@ -161,28 +160,6 @@ Description: IDE for Python (v@VER@) using Tkinter
   IDLE is an Integrated Development Environment for Python (v@VER@).
   IDLE is written using Tkinter and therefore quite platform-independent.
- 
+
 -Package: @PVER@-doc
 -Section: doc
 -Architecture: all
@@ -99,25 +99,25 @@ index 05895da..294d432 100755
 @@ -136,14 +136,14 @@ endif
  CC=$(DEB_HOST_GNU_TYPE)-gcc
  CXX=$(DEB_HOST_GNU_TYPE)-g++
- 
+
 -AR=$(DEB_HOST_GNU_TYPE)-ar
 -RANLIB=$(DEB_HOST_GNU_TYPE)-ranlib
 +AR=$(DEB_HOST_GNU_TYPE)-gcc-ar-4.7
 +RANLIB=$(DEB_HOST_GNU_TYPE)-gcc-ranlib-4.7
- 
+
  DPKG_CPPFLAGS:= $(shell dpkg-buildflags --get CPPFLAGS)
  DPKG_CFLAGS  := $(shell dpkg-buildflags --get CFLAGS)
  DPKG_LDFLAGS := $(shell dpkg-buildflags --get LDFLAGS)
  OPT_CFLAGS   := $(filter-out -O%,$(DPKG_CFLAGS)) # default is -O3
 -DEBUG_CFLAGS := $(patsubst -O%,-Og,$(DPKG_CFLAGS))
 +DEBUG_CFLAGS := $(DPKG_CFLAGS)
- 
+
  # on alpha, use -O2 only, use -mieee
  ifeq ($(DEB_HOST_ARCH),alpha)
 @@ -155,14 +155,6 @@ ifeq ($(DEB_HOST_ARCH),m68k)
      EXTRA_OPT_FLAGS += -O2
  endif
- 
+
 -ifeq ($(DEB_HOST_GNU_TYPE),$(DEB_BUILD_GNU_TYPE))
 -  ifeq ($(DEB_HOST_ARCH_OS),linux)
 -    ifneq (,$(findstring $(DEB_HOST_ARCH), amd64 armel armhf i386 powerpc ppc64 ppc64el s390x))
@@ -136,28 +136,28 @@ index 05895da..294d432 100755
 -    AR=$(DEB_HOST_GNU_TYPE)-gcc-ar
 -    RANLIB=$(DEB_HOST_GNU_TYPE)-gcc-ranlib
  endif
- 
+
  make_build_target = $(if $(with_pgo),profile-opt)
 @@ -322,7 +312,6 @@ common_configure_args = \
  		--with-computed-gotos \
  		--without-ensurepip \
  		--with-system-expat \
 -		--with-system-libmpdec \
- 
+
  ifneq (,$(filter $(DEB_HOST_ARCH), avr32 or1k))
    common_configure_args += --without-ffi
 @@ -659,7 +648,6 @@ minimal-test:
- 
+
  stamps/stamp-doc-html:
  	dh_testdir
 -	$(MAKE) -C Doc html
  	@mkdir -p stamps
  	touch stamps/stamp-doc-html
- 
+
 @@ -1299,26 +1287,6 @@ binary-indep: build-indep install stamps/stamp-control
  	dh_testdir -i
  	dh_testroot -i
- 
+
 -	: # $(p_doc) package
 -	dh_installdirs -p$(p_doc) \
 -		usr/share/doc/$(p_base) \
@@ -183,7 +183,7 @@ index 05895da..294d432 100755
  	  ln -s $(p_base) debian/$$i/usr/share/doc/$$i; \
 @@ -1377,7 +1345,7 @@ ifneq ($(with_gdbm),yes)
  endif
- 
+
  	find $(d_ldbg) $(d_ldev) -name '*.a' ! -type l \
 -		| xargs -n 1 $(DEB_HOST_GNU_TYPE)-objcopy -p --remove-section=.gnu.lto_.*
 +		| xargs -n 1 objcopy -p --remove-section=.gnu.lto_.*

@@ -17,7 +17,7 @@ if (x1 + "" !== x1) {
 
 // CHECK#2
 var x2 = "abc";
-if (typeof x2 + "" !== typeof x2) { 
+if (typeof x2 + "" !== typeof x2) {
   $ERROR('#2: typeof "abc" + "" === "string". Actual: ' + (typeof "abc" + ""));
 }
 

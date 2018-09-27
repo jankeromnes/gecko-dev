@@ -271,7 +271,7 @@ function execTests() {
   testDelete(nodecallback, 0, "<ol><li>one<ol><li>twothree</li></ol></li></ol>", true);
 
   setupTest("<ol><li>one<ol><li>two</li></ol></li></ol>\n<hr>\n<p>three</p>", 3, nodecallback);
-  testDelete(nodecallback, 3, 
+  testDelete(nodecallback, 3,
     "<ol><li>one<ol><li>two</li></ol></li></ol><p>three</p>", true);
 
   // Tests for Bug 519751
@@ -281,7 +281,7 @@ function execTests() {
 
   nodecallback = function(){return editor.firstChild.childNodes[1].firstChild;};
   setupTest("<ol><li>one</li><li>two</li></ol><ol><li>three</li><li>four</li></ol>", 3, nodecallback);
-  testDelete(function(){return editor.firstChild.childNodes[2].firstChild;}, 
+  testDelete(function(){return editor.firstChild.childNodes[2].firstChild;},
     0, "<ol><li>one</li><li>two</li><li>three</li><li>four</li></ol>", true);
   /*todo_is(false, true, 'The above testDelete should use the same nodecallback' +
     'as in the proceeding setupTest: the cursor should stay at the end of "two", while currently it is at the beginning of "three" after delete');*/

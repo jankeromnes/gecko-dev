@@ -18,12 +18,12 @@ function init2()
 {
   targetWindow = targetIframe.contentWindow;
   targetDocument = targetWindow.document;
-  
+
   var div = document.getElementById("div");
   textNode = div.firstChild;
 
   targetDocument.body.appendChild(targetDocument.adoptNode(div, true));
-      
+
   targetDocument.designMode = 'on';
   setTimeout(init3, 0);
 }
@@ -31,7 +31,7 @@ function init2()
 
 function init3()
 {
-  var rng = targetDocument.createRange(); 
+  var rng = targetDocument.createRange();
   rng.setStart(textNode, 1);
   rng.setEnd(textNode, 1);
   targetWindow.getSelection().addRange(rng);
@@ -39,7 +39,7 @@ function init3()
   try {
     targetDocument.execCommand("inserthtml", false, "<p>");
   } catch(e) {}
-  
+
   document.documentElement.removeAttribute("class");
 }
 

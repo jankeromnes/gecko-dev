@@ -6,14 +6,14 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=430723
 <head>
   <title>Test for Bug 430723</title>
   <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
-  <script type="text/javascript" src="/tests/SimpleTest/EventUtils.js"></script>  
+  <script type="text/javascript" src="/tests/SimpleTest/EventUtils.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=430723">Mozilla Bug 430723</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -48,7 +48,7 @@ var nextTest =function() {
 
 var step1 =function() {
   window.is(String(testWindow.location), gTallRedBoxURI, "Ensure red page loaded.");
-  
+
   // Navigate down and up.
   is(testWindow.document.body.scrollTop, 0,
      "Page1: Ensure the scrollpane is at the top before we start scrolling.");
@@ -62,7 +62,7 @@ var step1 =function() {
   function step1_2() {
     testWindow.addEventListener("scroll", function () {
       is(testWindow.document.body.scrollTop, 0,
-         "Page1: Ensure we can scroll up, back to the top.");  
+         "Page1: Ensure we can scroll up, back to the top.");
 
       // Nav to blue box page. This should fire step2.
       testWindow.location = gTallBlueBoxURI;
@@ -72,7 +72,7 @@ var step1 =function() {
 }
 
 
-var step2 =function() {    
+var step2 =function() {
   window.is(String(testWindow.location), gTallBlueBoxURI, "Ensure blue page loaded.");
 
   // Scroll around a bit.
@@ -102,10 +102,10 @@ var step3 =function() {
 
   // Check we can still scroll with the keys.
   is(testWindow.document.body.scrollTop, 0,
-     "Page1Again: Ensure scroll pane at top before we scroll.");  
+     "Page1Again: Ensure scroll pane at top before we scroll.");
   testWindow.addEventListener("scroll", function () {
     isnot(testWindow.document.body.scrollTop, 0,
-          "Page2Again: Ensure we can still scroll.");  
+          "Page2Again: Ensure we can still scroll.");
 
     testWindow.close();
     window.SimpleTest.finish();

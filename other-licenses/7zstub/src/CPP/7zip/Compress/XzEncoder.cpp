@@ -125,7 +125,7 @@ HRESULT CEncoder::SetCoderProp(PROPID propID, const PROPVARIANT &prop)
       return E_INVALIDARG;
     return S_OK;
   }
- 
+
   if (propID == NCoderPropID::kFilter)
   {
     if (prop.vt == VT_UI4)
@@ -139,12 +139,12 @@ HRESULT CEncoder::SetCoderProp(PROPID propID, const PROPVARIANT &prop)
     {
       if (prop.vt != VT_BSTR)
         return E_INVALIDARG;
-      
+
       const wchar_t *name = prop.bstrVal;
       const wchar_t *end;
 
       UInt32 id32 = ConvertStringToUInt32(name, &end);
-      
+
       if (end != name)
         name = end;
       else
@@ -162,7 +162,7 @@ HRESULT CEncoder::SetCoderProp(PROPID propID, const PROPVARIANT &prop)
           id32 = filterId;
         }
       }
-      
+
       if (id32 == XZ_ID_Delta)
       {
         wchar_t c = *name;
@@ -174,10 +174,10 @@ HRESULT CEncoder::SetCoderProp(PROPID propID, const PROPVARIANT &prop)
           return E_INVALIDARG;
         xzProps.filterProps.delta = delta;
       }
-      
+
       xzProps.filterProps.id = id32;
     }
-    
+
     return S_OK;
   }
 
@@ -194,7 +194,7 @@ STDMETHODIMP CEncoder::SetCoderProperties(const PROPID *propIDs,
   {
     RINOK(SetCoderProp(propIDs[i], coderProps[i]));
   }
-  
+
   return S_OK;
   // return SResToHRESULT(XzEnc_SetProps(_encoder, &xzProps));
 }
@@ -241,5 +241,5 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
 
   return SResToHRESULT(res);
 }
-  
+
 }}

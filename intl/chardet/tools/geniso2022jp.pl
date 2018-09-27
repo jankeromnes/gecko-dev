@@ -12,7 +12,7 @@ my(@iso2022jp_cls);
 my(@iso2022jp_st);
 my($iso2022jp_ver);
 
-# 1:ESC 3:'(' 4:'B' 5:'J' 6:'@' 7:'$' 8:'D' 9:'I' 
+# 1:ESC 3:'(' 4:'B' 5:'J' 6:'@' 7:'$' 8:'D' 9:'I'
 @iso2022jp_cls = (
  [ 0x0e , 0x0f , 2 ],
  [ 0x28 , 0x28 , 3 ],
@@ -41,7 +41,7 @@ package genverifier;
   1, 1, 1, 1, 1, 1, 1, 1, 2, 1, # got ESC $ (
 );
 
-$iso2022jp_ver = genverifier::GenVerifier("ISO2022JP", "ISO-2022-JP", 
+$iso2022jp_ver = genverifier::GenVerifier("ISO2022JP", "ISO-2022-JP",
       \@iso2022jp_cls, 10, \@iso2022jp_st);
 print $iso2022jp_ver;
 

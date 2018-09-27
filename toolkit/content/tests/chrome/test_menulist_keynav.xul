@@ -5,8 +5,8 @@
 <window title="Menulist Key Navigation Tests"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>      
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/EventUtils.js"></script>      
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/EventUtils.js"></script>
 
 <button id="button1" label="One"/>
 <menulist id="list">
@@ -104,7 +104,7 @@ function pressedAgain()
   SpecialPowers.setIntPref("ui.menu.incremental_search.timeout", 0); // prevent to timeout
   keyCheck(list, "W", 2, 1, "second letter pressed");
   SpecialPowers.clearUserPref("ui.menu.incremental_search.timeout");
-  setTimeout(differentPressed, 1200); 
+  setTimeout(differentPressed, 1200);
 }
 
 function differentPressed()

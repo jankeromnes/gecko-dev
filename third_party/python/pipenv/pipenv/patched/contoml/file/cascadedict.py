@@ -47,7 +47,7 @@ class CascadeDict:
     @property
     def neutralized(self):
         return {k: raw.to_raw(v) for k, v in self.items()}
-    
+
     @property
     def primitive_value(self):
         return self.neutralized

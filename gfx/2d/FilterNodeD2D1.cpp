@@ -906,7 +906,7 @@ FilterNodeConvolveD2D1::FilterNodeConvolveD2D1(ID2D1DeviceContext *aDC)
   // we update the filter chain dynamically in UpdateChain().
 
   HRESULT hr;
-  
+
   hr = aDC->CreateEffect(CLSID_D2D1ConvolveMatrix, getter_AddRefs(mEffect));
 
   if (FAILED(hr) || !mEffect) {

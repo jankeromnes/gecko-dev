@@ -3,16 +3,16 @@ diff --git a/gfx/cairo/cairo/src/cairo-dwrite-font.cpp b/gfx/cairo/cairo/src/cai
 +++ b/gfx/cairo/cairo/src/cairo-dwrite-font.cpp
 @@ -37,16 +37,17 @@
  #include "cairoint.h"
- 
+
  #include "cairo-win32-private.h"
  #include "cairo-surface-private.h"
  #include "cairo-clip-private.h"
- 
+
  #include "cairo-d2d-private.h"
  #include "cairo-dwrite-private.h"
 +#include "cairo-truetype-subset-private.h"
  #include <float.h>
- 
+
  typedef HRESULT (WINAPI*D2D1CreateFactoryFunc)(
      D2D1_FACTORY_TYPE factoryType,
      REFIID iid,
@@ -23,7 +23,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-dwrite-font.cpp b/gfx/cairo/cairo/src/cai
  {
      cairo_dwrite_scaled_font_t *dwritesf = static_cast<cairo_dwrite_scaled_font_t*>(scaled_font);
      cairo_dwrite_font_face_t *face = reinterpret_cast<cairo_dwrite_font_face_t*>(dwritesf->base.font_face);
- 
+
      const void *data;
      UINT32 size;
      void *tableContext;
@@ -34,7 +34,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-dwrite-font.cpp b/gfx/cairo/cairo/src/cai
  				      &size,
  				      &tableContext,
  				      &exists);
- 
+
      if (!exists) {
  	return CAIRO_INT_STATUS_UNSUPPORTED;
      }
@@ -46,7 +46,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-dwrite-font.cpp b/gfx/cairo/cairo/src/cai
          pixelGeometry, DWRITE_RENDERING_MODE_CLEARTYPE_GDI_CLASSIC,
          &mForceGDIClassicRenderingParams);
  }
- 
+
 +static cairo_bool_t
 +_name_tables_match (cairo_scaled_font_t *font1,
 +                    cairo_scaled_font_t *font2)
@@ -102,11 +102,11 @@ diff --git a/gfx/cairo/cairo/src/cairo-dwrite-font.cpp b/gfx/cairo/cairo/src/cai
  			                                  &ctm,
  			                                  &options);
      cairo_font_face_destroy (win32_face);
- 
+
      if (!font) {
          return CAIRO_INT_STATUS_UNSUPPORTED;
      }
- 
+
 -    if (_cairo_win32_scaled_font_is_type1 (font) || _cairo_win32_scaled_font_is_bitmap (font)) {
 -        // If we somehow got a Type1 or bitmap font, it can't be the same physical font
 -        // as directwrite was using, so glyph IDs will not match; best we can do is to
@@ -117,7 +117,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-dwrite-font.cpp b/gfx/cairo/cairo/src/cai
          cairo_scaled_font_destroy (font);
          return CAIRO_INT_STATUS_UNSUPPORTED;
      }
- 
+
      *new_font = font;
      return CAIRO_INT_STATUS_SUCCESS;
  }
@@ -127,16 +127,16 @@ diff --git a/gfx/cairo/cairo/src/cairo-truetype-subset-private.h b/gfx/cairo/cai
 @@ -34,16 +34,18 @@
   *	Adrian Johnson <ajohnson@redneon.com>
   */
- 
+
  #ifndef CAIRO_TRUETYPE_SUBSET_PRIVATE_H
  #define CAIRO_TRUETYPE_SUBSET_PRIVATE_H
- 
+
  #include "cairoint.h"
- 
+
 +CAIRO_BEGIN_DECLS
 +
  #if CAIRO_HAS_FONT_SUBSET
- 
+
  /* The structs defined here should strictly follow the TrueType
   * specification and not be padded.  We use only 16-bit integer
   * in their definition to guarantee that.  The fields of type
@@ -149,9 +149,9 @@ diff --git a/gfx/cairo/cairo/src/cairo-truetype-subset-private.h b/gfx/cairo/cai
      int8_t            data[8];
      tt_composite_glyph_t glyph;
  } tt_glyph_data_t;
- 
+
  #endif /* CAIRO_HAS_FONT_SUBSET */
- 
+
 +CAIRO_END_DECLS
 +
  #endif /* CAIRO_TRUETYPE_SUBSET_PRIVATE_H */

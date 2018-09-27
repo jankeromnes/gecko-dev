@@ -241,9 +241,9 @@ pkix_EkuChecker_Check(
         if (certExtKeyUsageList == NULL) {
             goto cleanup;
         }
-        
+
         for (i = 0; i < numItems; i++) {
-            
+
             PKIX_CHECK(
                 PKIX_List_GetItem(requiredExtKeyUsageList, i,
                                   (PKIX_PL_Object **)&ekuOid, plContext),
@@ -255,7 +255,7 @@ pkix_EkuChecker_Check(
                                    &isContained,
                                    plContext),
                 PKIX_LISTCONTAINSFAILED);
-            
+
             PKIX_DECREF(ekuOid);
             if (isContained != PKIX_TRUE) {
                 checkResult = PKIX_FALSE;
@@ -268,7 +268,7 @@ cleanup:
             pkixErrorReceived = PKIX_TRUE;
             pkixErrorCode = PKIX_EXTENDEDKEYUSAGECHECKINGFAILED;
         }
-        
+
         PKIX_DECREF(ekuOid);
         PKIX_DECREF(certExtKeyUsageList);
         PKIX_DECREF(state);

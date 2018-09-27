@@ -22,5 +22,5 @@
 # tp0n2c08 - not transparent for reference (logo on gray)
 # tp0n3p08 - not transparent for reference (logo on gray)
 # ...these 3 not tested because they're not transparent.
-# tp1n3p08 - transparent, but no background chunk 
+# tp1n3p08 - transparent, but no background chunk
 == wrapper.html?tp1n3p08.png tp1n3p08.html

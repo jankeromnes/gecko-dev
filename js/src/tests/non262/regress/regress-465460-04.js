@@ -19,7 +19,7 @@ function test()
   printBugNumber(BUGNUMBER);
   printStatus (summary);
 
- 
+
   for (var j = 0; j < 3; ++j) { 1 & new Date; }
 
 

@@ -109,9 +109,9 @@ struct evport_data {
 	int ed_maxevents;
 	/* fdi's that we need to reassoc */
 	int *ed_pending;
-	/* storage space for incoming events. */ 
+	/* storage space for incoming events. */
 	port_event_t *ed_pevtlist;
-	
+
 };
 
 static void*	evport_init(struct event_base *);
@@ -155,7 +155,7 @@ evport_init(struct event_base *base)
 		mm_free(evpd);
 		return NULL;
 	}
-		
+
 	evpd->ed_npending = 0;
 
 	evsig_init_(base);
@@ -185,7 +185,7 @@ grow(struct evport_data *data, int min_events)
 	new_pevtlist = mm_realloc(data->ed_pevtlist, sizeof(port_event_t)*newsize);
 	if (new_pevtlist == NULL)
 		return -1;
-	data->ed_pevtlist = new_pevtlist; 
+	data->ed_pevtlist = new_pevtlist;
 
 	data->ed_maxevents = newsize;
 	return 0;

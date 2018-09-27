@@ -50,14 +50,14 @@ function run_test() {
     }
     prefs.setBoolPref(pref.name, pref.newVal);
   }
-  
+
   try {
     // URI stolen from
     // http://lists.w3.org/Archives/Public/public-iri/2004Mar/0012.html
     var uri4 = ios.newURI("http://xn--jos-dma.example.net.ch/");
     Assert.equal(uri4.asciiHost, "xn--jos-dma.example.net.ch");
     Assert.equal(uri4.displayHost, "jos\u00e9.example.net.ch");
-    
+
     var uri5 = round_trip(uri4);
     Assert.ok(uri4.equals(uri5));
     Assert.equal(uri4.displayHost, uri5.displayHost);

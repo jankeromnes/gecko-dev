@@ -60,7 +60,7 @@ AC_DEFUN([MOZ_ARG_ENABLE_STRING],
 
 dnl MOZ_ARG_ENABLE_BOOL_OR_STRING(NAME, HELP, IF-YES, IF-NO, IF-SET[, ELSE]]])
 AC_DEFUN([MOZ_ARG_ENABLE_BOOL_OR_STRING],
-[ifelse([$5], , 
+[ifelse([$5], ,
  [errprint([Option, $1, needs an "IF-SET" argument.
 ])
   m4exit(1)],

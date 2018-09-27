@@ -49,7 +49,7 @@ static bool ReadDataString(CFSTR fileName, LPCSTR startID,
   Byte buffer[kBufferSize];
   int signatureStartSize = MyStringLen(startID);
   int signatureEndSize = MyStringLen(endID);
-  
+
   UInt32 numBytesPrev = 0;
   bool writeMode = false;
   UInt64 posTotal = 0;
@@ -403,7 +403,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
         return 0;
     }
     appLaunched = GetTextConfigValue(pairs, "RunProgram");
-    
+
     #ifdef _SHELL_EXECUTE
     executeFile = GetTextConfigValue(pairs, "ExecuteFile");
     executeParameters = GetTextConfigValue(pairs, "ExecuteParameters");
@@ -439,7 +439,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     UString errorMessage;
     HRESULT result = ExtractArchive(codecs, fullPath, tempDirPath, showProgress,
       isCorrupt, errorMessage);
-    
+
     if (result != S_OK)
     {
       if (!assumeYes)
@@ -487,7 +487,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   if (!SetCurrentDir(tempDirPath))
     return 1;
   #endif
-  
+
   HANDLE hProcess = 0;
 #ifdef _SHELL_EXECUTE
   if (!executeFile.IsEmpty())
@@ -542,13 +542,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
         return 1;
       }
     }
-    
+
     {
       FString s2 = tempDirPath;
       NName::NormalizeDirPathPrefix(s2);
       appLaunched.Replace(L"%%T" WSTRING_PATH_SEPARATOR, fs2us(s2));
     }
-    
+
     UString appNameForError = appLaunched; // actually we need to rtemove parameters also
 
     appLaunched.Replace(L"%%T", fs2us(tempDirPath));
@@ -566,11 +566,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     startupInfo.dwFlags = 0;
     startupInfo.cbReserved2 = 0;
     startupInfo.lpReserved2 = 0;
-    
+
     PROCESS_INFORMATION processInformation;
-    
+
     CSysString appLaunchedSys (GetSystemString(dirPrefix + appLaunched));
-    
+
     BOOL createResult = CreateProcess(NULL, (LPTSTR)(LPCTSTR)appLaunchedSys,
       NULL, NULL, FALSE, 0, NULL, NULL /*tempDir.GetPath() */,
       &startupInfo, &processInformation);

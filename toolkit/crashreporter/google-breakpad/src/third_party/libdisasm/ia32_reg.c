@@ -62,7 +62,7 @@ static struct {
 	{ REG_FPU_OFFSET + 7,	0 } 	/* mm7 : 25 */
  };
 
-/* REGISTER TABLE: size, type, and name of every register in the 
+/* REGISTER TABLE: size, type, and name of every register in the
  *                 CPU. Does not include MSRs since the are, after all,
  *                 model specific. */
 static struct {
@@ -166,13 +166,13 @@ static struct {
 	{ REG_FPU_SIZE, reg_fpu, 0, "st(6)" },
 	{ REG_FPU_SIZE, reg_fpu, 0, "st(7)" },
 	/* REG_FLAGS_INDEX : 81 */
-	{ REG_FLAGS_SIZE, reg_cond, 0, "eflags" }, 
+	{ REG_FLAGS_SIZE, reg_cond, 0, "eflags" },
 	/* REG_FPCTRL_INDEX  : 82*/
-	{ REG_FPCTRL_SIZE, reg_fpu | reg_sys, 0, "fpctrl" }, 
+	{ REG_FPCTRL_SIZE, reg_fpu | reg_sys, 0, "fpctrl" },
 	/* REG_FPSTATUS_INDEX : 83*/
 	{ REG_FPSTATUS_SIZE, reg_fpu | reg_sys, 0, "fpstat" },
 	/* REG_FPTAG_INDEX : 84 */
-	{ REG_FPTAG_SIZE, reg_fpu | reg_sys, 0, "fptag" }, 
+	{ REG_FPTAG_SIZE, reg_fpu | reg_sys, 0, "fptag" },
 	/* REG_EIP_INDEX : 85 */
 	{ REG_EIP_SIZE, reg_pc, 0, "eip" },
 	/* REG_IP_INDEX : 86 */

@@ -593,7 +593,7 @@ _cairo_quartz_path_apply_func (void *info, const CGPathElement *el)
 						 _cairo_fixed_from_double(el->points[1].y),
 						 _cairo_fixed_from_double(el->points[2].x),
 						 _cairo_fixed_from_double(el->points[2].y));
-	    assert(!status);	    
+	    assert(!status);
 	    break;
 	case kCGPathElementCloseSubpath:
 	    status = _cairo_path_fixed_close_path (path);

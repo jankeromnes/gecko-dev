@@ -17,7 +17,7 @@ var options = [
 options.forEach(function (option) {
     var defaultLocale = new Intl.Collator().resolvedOptions().locale;
     var collator, opt, result;
-    
+
     // find out which values are supported for a property in the default locale
     var supportedValues = [];
     option.values.forEach(function (value) {
@@ -29,14 +29,14 @@ options.forEach(function (option) {
             supportedValues.push(result);
         }
     });
-    
+
     // verify that the supported values can also be set through the locale
     supportedValues.forEach(function (value) {
         collator = new Intl.Collator([defaultLocale + "-u-" + option.key + "-" + value]);
         result = collator.resolvedOptions()[option.property];
         assert.sameValue(result, value, "Property " + option.property + " couldn't be set through locale extension key " + option.key + ".");
     });
-    
+
     // verify that the options setting overrides the locale setting
     supportedValues.forEach(function (value) {
         var otherValue;

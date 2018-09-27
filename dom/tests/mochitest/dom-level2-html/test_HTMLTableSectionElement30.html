@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "tablesection");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,16 +70,16 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The insertRow() method inserts a new empty table row.  The new
     row is inserted immediately before the current indexth row in this
     section.  If index is -1 or equal to the number of rows in this section,
     the new row is appended.
-    
+
     Retrieve the first THEAD element and invoke the insertRow() method
-    with an index of negative one.  Since the index is negative one the 
+    with an index of negative one.  Since the index is negative one the
     new row is appended.
-    After the new row is appended the number of rows in the THEAD 
+    After the new row is appended the number of rows in the THEAD
     section is two.
 
 * @author NIST
@@ -95,7 +95,7 @@ function HTMLTableSectionElement30() {
       var rowsnodeList;
       var vrows;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -115,7 +115,7 @@ testNode = nodeList.item(0);
       vrows = rowsnodeList.length;
 
       assertEquals("rowsLink2",2,vrows);
-       
+
 }
 
 </script>
@@ -129,11 +129,11 @@ testNode = nodeList.item(0);
     row is inserted immediately before the current indexth row in this
     section.  If index is -1 or equal to the number of rows in this section,
     the new row is appended.
-    
+
     Retrieve the first THEAD element and invoke the insertRow() method
-    with an index of negative one.  Since the index is negative one the 
+    with an index of negative one.  Since the index is negative one the
     new row is appended.
-    After the new row is appended the number of rows in the THEAD 
+    After the new row is appended the number of rows in the THEAD
     section is two.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
@@ -151,7 +151,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/tablesection.html"></iframe>
 <br>

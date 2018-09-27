@@ -68,7 +68,7 @@ public:
    * this service is first instantiated.
    */
   MOZ_MUST_USE nsresult Init();
- 
+
   /**
    * Given a mimetype and an extension, looks up a mime info from the OS.
    * The mime type is given preference. This function follows the same rules
@@ -299,17 +299,17 @@ protected:
   /**
    * The following field is set if we were processing an http channel that had
    * a content disposition header which specified the SUGGESTED file name we
-   * should present to the user in the save to disk dialog. 
+   * should present to the user in the save to disk dialog.
    */
   nsString mSuggestedFileName;
 
   /**
    * If set, this handler should forcibly save the file to disk regardless of
-   * MIME info settings or anything else, without ever popping up the 
+   * MIME info settings or anything else, without ever popping up the
    * unknown content type handling dialog.
    */
   bool mForceSave;
-  
+
   /**
    * The canceled flag is set if the user canceled the launching of this
    * application before we finished saving the data to a temp file.
@@ -319,7 +319,7 @@ protected:
   /**
    * True if a stop request has been issued.
    */
-  bool mStopRequestIssued; 
+  bool mStopRequestIssued;
 
   bool mIsFileChannel;
 

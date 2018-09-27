@@ -10,7 +10,7 @@
 # Windows platforms override this.  See WIN32.mk.
 ifndef RELEASE_TREE
     ifdef BUILD_SHIP
-	ifdef USE_SHIPS 
+	ifdef USE_SHIPS
 	    RELEASE_TREE = $(BUILD_SHIP)
 	else
 	    RELEASE_TREE = /share/builds/components
@@ -37,7 +37,7 @@ else
 	    RELEASE_XP_DIR = france
 	    RELEASE_MD_DIR = france/$(PLATFORM)
 	else
-	    RELEASE_XP_DIR = 
+	    RELEASE_XP_DIR =
 	    RELEASE_MD_DIR = $(PLATFORM)
 	endif
     endif
@@ -46,7 +46,7 @@ endif
 
 REPORTER_TREE = $(subst \,\\,$(RELEASE_TREE))
 
-IMPORT_XP_DIR = 
+IMPORT_XP_DIR =
 IMPORT_MD_DIR = $(PLATFORM)
 
 MK_TREE = included

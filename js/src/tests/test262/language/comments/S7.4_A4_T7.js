@@ -9,8 +9,8 @@ description: Insert Multi line comment into Single line comments
 
 /*CHECK#1*/
 
-// var /* 
-// x 
+// var /*
+// x
 // =
 // 1*/
 

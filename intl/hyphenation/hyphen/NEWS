@@ -85,7 +85,7 @@
 
 en_US hyphenation patterns:
 
-  - extended hyph_en_US.dic with TugBoat hyphenation log (fix thousand 
+  - extended hyph_en_US.dic with TugBoat hyphenation log (fix thousand
     incompletely or badly hyphenated words, for example acad-e-my, acro-nym,
     acryl-amide, adren-a-line, aero-space, am-phet-a-mine, anom-aly etc.)
 

@@ -180,7 +180,7 @@ do
     -o)
       outdir="$(dirname $2)"
       base="$(basename $2|sed 's/\.[^.]*//g')"
-      if [ -n "$single" ]; then 
+      if [ -n "$single" ]; then
         output="-Fo$2"
       else
         output="-Fe$2"

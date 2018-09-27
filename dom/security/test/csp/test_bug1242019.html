@@ -27,7 +27,7 @@ var expectedURI = "data:image/png;base64,iVBORw0KGgoAAAANSU"
 
 SpecialPowers.registerConsoleListener(function ConsoleMsgListener(aMsg) {
   // look for the message with data uri and see the data uri is truncated to 40 chars
-  data_start = aMsg.message.indexOf(expectedURI) 
+  data_start = aMsg.message.indexOf(expectedURI)
   if (data_start > -1) {
     data_uri = "";
     data_uri = aMsg.message.substr(data_start);

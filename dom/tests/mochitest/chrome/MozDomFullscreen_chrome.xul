@@ -5,16 +5,16 @@
   Test that "MozDOMFullscreen:*" events are dispatched to chrome on documents that use DOM fullscreen.
 
   Test Description:
-  
+
   This chrome window has a browser. The browser's contentDocument (the "outer document")
   in turn has an iframe (the "inner document").
-  
+
   We request fullscreen in the outer document, and check that MozDOMFullscreen:Entered and
   MozDOMFullscreen:NewOrigin are dispatched to chrome, targeted at the outer document.
-  
+
   Then we request fullscreen in the inner document, and check that MozDOMFullscreen:NewOrigin
   is dispatched to chrome, targeted at the inner document.
-  
+
   Then we cancel fullscreen in the inner document, and check that MozDOMFullscreen:NewOrigin is
   dispatched again to chrome, targeted at the outer document.
 -->
@@ -22,7 +22,7 @@
 
 <script type="application/javascript" src="chrome://mochikit/content/chrome-harness.js"></script>
 <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/EventUtils.js"></script>
-<script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>      
+<script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>
 <script type="application/javascript"><![CDATA[
 
 function ok(condition, msg) {

@@ -1,5 +1,5 @@
 
-0.6.0 / 2014-01-21 
+0.6.0 / 2014-01-21
 ==================
 
   * Added support for parameters in har creation
@@ -8,13 +8,13 @@
   * Fix project name
   * adding docs
 
-0.5.0 / 2013-05-23 
+0.5.0 / 2013-05-23
 ==================
 * Allow proxying of ssl requests with selenium.
 * Updating case for proxy type
 
 
-0.4.0 / 2013-03-06 
+0.4.0 / 2013-03-06
 ==================
 
   * Allow setting basic authentication
@@ -25,7 +25,7 @@
   * server.create_proxy is a function, should be called :)
   * forgot to add the port
 
-0.2.0 / 2012-06-18 
+0.2.0 / 2012-06-18
 ==================
 
   * pep8 --ignore=E501
@@ -45,7 +45,7 @@
   * check the path before attempting to start the server
   * wait longer than 3 seconds for the server to come up
 
-0.1.0 / 2012-03-22 
+0.1.0 / 2012-03-22
 ==================
 
 * Removed httplib2 in preference for requests

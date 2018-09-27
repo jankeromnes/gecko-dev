@@ -12,7 +12,7 @@
 
 
 <dialog id="ssl_warning" title="&chooseToken.title;"
-  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"      
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   style="width: 40em;"
   buttons="accept,cancel"
   ondialogaccept="return doOK();"

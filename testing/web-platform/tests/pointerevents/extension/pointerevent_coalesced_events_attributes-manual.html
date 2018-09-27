@@ -29,7 +29,7 @@
             function expect_no_coalesced_events(event, eventName) {
                 test(function () {
                     assert_equals(event.getCoalescedEvents().length, 0, eventName + ' should not have any coalesced events');
-                }, expectedPointerType + ' ' + eventName + ' should not have any coalesced events'); 
+                }, expectedPointerType + ' ' + eventName + ' should not have any coalesced events');
             }
             function run() {
                 var test_pointerEvent = setup_pointerevent_test("coalesced events attributes in pointerevents", ['touch']);

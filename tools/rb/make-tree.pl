@@ -53,7 +53,7 @@ my %excludes;
 if ($::opt_exclude) {
      open(EXCLUDE, "<".$::opt_exclude)
          || die "unable to open $::opt_exclude";
- 
+
      while (<EXCLUDE>) {
          chomp $_;
          warn "excluding $_\n";
@@ -86,17 +86,17 @@ sub read_data($$$) {
      LINE: while (<$INFILE>) {
           next LINE if (! /^</);
           my @fields = split(/ /, $_);
-     
+
           my $class = shift(@fields);
           my $obj   = shift(@fields);
           my $sno   = shift(@fields);
           next LINE unless ($obj eq $::opt_object);
-     
+
           my $op  = shift(@fields);
           next LINE unless ($op eq $plus || $op eq $minus);
-     
+
           my $cnt = shift(@fields);
-     
+
           # Collect the remaining lines to create a stack trace. We need to
           # filter out the frame numbers so that frames that differ only in
           # their frame number are considered equivalent. However, we need to
@@ -109,45 +109,45 @@ sub read_data($$$) {
               $_ =~ s/#\d+: /#00: /;    # replace frame number with 0
               $stack[++$#stack] = $_;
           }
-     
+
           # Reverse the remaining fields to produce the call stack, with the
           # oldest frame at the front of the array.
           if (! $::opt_reverse) {
               @stack = reverse(@stack);
           }
-     
+
           my $call;
-     
+
           # If any of the functions in the stack are supposed to be excluded,
           # march on to the next line.
           foreach $call (@stack) {
               next LINE if exists($excludes{$call});
           }
-     
-     
+
+
           # Add the callstack as a path through the call graph, updating
           # refcounts at each node.
-     
+
           my $caller = $callGraphRoot;
-     
+
           foreach $call (@stack) {
-     
+
               # Chop the method offset if we're 'collapsing to method' or
               # 'collapsing to class'.
               $call =~ s/\+0x.*$//g if ($::opt_collapse_to_method || $::opt_collapse_to_class);
-     
+
               # Chop the method name if we're 'collapsing to class'.
               $call =~ s/::.*$//g if ($::opt_collapse_to_class);
-     
+
               my $site = $caller->{$call};
               if (!$site) {
                   # This is the first time we've seen this callsite. Add a
                   # new entry to the call tree.
-     
+
                   $site = { '#name#' => $call, '#refcount#' => 0 };
                   $caller->{$call} = $site;
               }
-     
+
               if ($op eq $plus) {
                   ++($site->{'#refcount#'});
                   ++($imbalance{$call});
@@ -157,7 +157,7 @@ sub read_data($$$) {
               } else {
                   die "Bad operation $op";
               }
-     
+
               $caller = $site;
           }
      }
@@ -219,7 +219,7 @@ sub prune($$) {
 
 
 # Compute the #label# properties of this subtree.
-# Return the subtree's number of nodes, not counting nodes reachable 
+# Return the subtree's number of nodes, not counting nodes reachable
 # through a labeled node.
 sub createLabels($) {
      my ($site) = @_;
@@ -285,7 +285,7 @@ if (!prune($callGraphRoot, 0)) {
      list $callGraphRoot, 0, "", 0, 1;
      while (@labeledSubtrees) {
          my $labeledSubtree = shift @labeledSubtrees;
-         print "\n------------------------------\n", 
+         print "\n------------------------------\n",
 $labeledSubtree->{'#label#'}, "\n";
          list $labeledSubtree, 0, "", 0, 1;
      }

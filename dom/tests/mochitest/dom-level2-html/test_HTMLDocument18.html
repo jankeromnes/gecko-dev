@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "document");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,7 +70,7 @@ function loadComplete() {
 
 
 /**
-* 
+*
 Calls HTMLDocument.close on a document that has not been opened for modification.
 
 * @author Curt Arnold
@@ -80,14 +80,14 @@ function HTMLDocument18() {
    var success;
     if(checkInitialization(builder, "HTMLDocument18") != null) return;
     var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       doc = load(docRef, "doc", "document");
       doc.close();
-      
+
       // Ensure at least one SimpleTest check is reported. (Bug 483992)
       ok(true, "Test complete");
 }
@@ -115,7 +115,7 @@ Calls HTMLDocument.close on a document that has not been opened for modification
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/document.html"></iframe>
 <br>

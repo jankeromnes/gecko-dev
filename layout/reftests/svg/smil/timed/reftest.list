@@ -1,4 +1,4 @@
-# Tests related to SVG Animation that use timeouts to interrupt, modify, 
+# Tests related to SVG Animation that use timeouts to interrupt, modify,
 # and examine animations.
 #
 # NOTE: Most of these tests require a few seconds to run.

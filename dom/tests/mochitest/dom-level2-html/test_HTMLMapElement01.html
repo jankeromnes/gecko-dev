@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "map");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,10 +70,10 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The  areas attribute is a list of areas defined for the image map.
 
-    Retrieve the areas attribute and find the number of areas defined.  
+    Retrieve the areas attribute and find the number of areas defined.
 
 * @author NIST
 * @author Mary Brady
@@ -87,7 +87,7 @@ function HTMLMapElement01() {
       var testNode;
       var vareas;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -101,7 +101,7 @@ testNode = nodeList.item(0);
       vareas = areasnodeList.length;
 
       assertEquals("areasLink",3,vareas);
-       
+
 }
 
 </script>
@@ -113,7 +113,7 @@ testNode = nodeList.item(0);
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
     The  areas attribute is a list of areas defined for the image map.
 
-    Retrieve the areas attribute and find the number of areas defined.  
+    Retrieve the areas attribute and find the number of areas defined.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Mary Brady&lt;/contributor&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;date qualifier='created'&gt;2002-02-22&lt;/date&gt;
@@ -130,7 +130,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/map.html"></iframe>
 <br>

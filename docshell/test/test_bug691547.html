@@ -21,14 +21,14 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=691547
          innerFrame.location = 'bug570341_recordevents.html';
          // Let's wait a bit so the difference is clear anough.
          setTimeout(reload, 3000);
-       } 
+       }
        else {
          // Content reloaded, time to check. We are allowing a huge time slack,
-         // in case clock is imprecise. If we have a bug, the difference is 
-         // expected to be about the timeout value set above.  
+         // in case clock is imprecise. If we have a bug, the difference is
+         // expected to be about the timeout value set above.
          var diff = frame.performance.timing.navigationStart - beforeReload;
          ok(diff >= -200,
-            'navigationStart should be set after reload request. ' + 
+            'navigationStart should be set after reload request. ' +
             'Measured difference: ' + diff + ' (should be positive)');
          SimpleTest.finish();
        }

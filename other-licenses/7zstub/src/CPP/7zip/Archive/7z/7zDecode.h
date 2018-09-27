@@ -25,24 +25,24 @@ class CDecoder
 {
   bool _bindInfoPrev_Defined;
   CBindInfoEx _bindInfoPrev;
-  
+
   bool _useMixerMT;
-  
+
   #ifdef USE_MIXER_ST
     NCoderMixer2::CMixerST *_mixerST;
   #endif
-  
+
   #ifdef USE_MIXER_MT
     NCoderMixer2::CMixerMT *_mixerMT;
   #endif
-  
+
   NCoderMixer2::CMixer *_mixer;
   CMyComPtr<IUnknown> _mixerRef;
 
 public:
 
   CDecoder(bool useMixerMT);
-  
+
   HRESULT Decode(
       DECL_EXTERNAL_CODECS_LOC_VARS
       IInStream *inStream,
@@ -56,9 +56,9 @@ public:
 
       , ISequentialInStream **inStreamMainRes
       , bool &dataAfterEnd_Error
-      
+
       _7Z_DECODER_CRYPRO_VARS_DECL
-      
+
       #if !defined(_7ZIP_ST)
       , bool mtMode, UInt32 numThreads, UInt64 memUsage
       #endif

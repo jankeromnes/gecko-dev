@@ -9,9 +9,9 @@ diff --git jmorecfg.h jmorecfg.h
   * JPEG software for special applications or support machine-dependent
   * optimizations.  Most users will not need to touch this file.
   */
- 
+
 +#include <stdint.h>
- 
+
  /*
   * Maximum number of components (color channels) allowed in JPEG image.
   * To meet the letter of the JPEG spec, set this to 255.  However, darn
@@ -25,9 +25,9 @@ diff --git jmorecfg.h jmorecfg.h
   * extraction code like we did for JSAMPLE.  (In other words, these
   * typedefs live at a different point on the speed/space tradeoff curve.)
   */
- 
+
  /* UINT8 must hold at least the values 0..255. */
- 
+
 -#ifdef HAVE_UNSIGNED_CHAR
 -typedef unsigned char UINT8;
 -#else /* not HAVE_UNSIGNED_CHAR */
@@ -38,23 +38,23 @@ diff --git jmorecfg.h jmorecfg.h
 -#endif /* __CHAR_UNSIGNED__ */
 -#endif /* HAVE_UNSIGNED_CHAR */
 +typedef uint8_t UINT8;
- 
+
  /* UINT16 must hold at least the values 0..65535. */
- 
+
 -#ifdef HAVE_UNSIGNED_SHORT
 -typedef unsigned short UINT16;
 -#else /* not HAVE_UNSIGNED_SHORT */
 -typedef unsigned int UINT16;
 -#endif /* HAVE_UNSIGNED_SHORT */
 +typedef uint16_t UINT16;
- 
+
  /* INT16 must hold at least the values -32768..32767. */
- 
+
 -#ifndef XMD_H                   /* X11/xmd.h correctly defines INT16 */
 -typedef short INT16;
 -#endif
 +typedef int16_t INT16;
- 
+
  /* INT32 must hold at least signed 32-bit values.
   *
   * NOTE: The INT32 typedef dates back to libjpeg v5 (1994.)  Integers were
@@ -70,7 +70,7 @@ diff --git jmorecfg.h jmorecfg.h
   * for internal use, which ensures that internal behavior will always be the
   * same regardless of any external headers that may be included.
   */
- 
+
 -#ifndef XMD_H                   /* X11/xmd.h correctly defines INT32 */
 -#ifndef _BASETSD_H_		/* Microsoft defines it in basetsd.h */
 -#ifndef _BASETSD_H		/* MinGW is slightly different */
@@ -81,7 +81,7 @@ diff --git jmorecfg.h jmorecfg.h
 -#endif
 -#endif
 +typedef int32_t INT32;
- 
+
  /* Datatype used for image dimensions.  The JPEG standard only supports
   * images up to 64K*64K due to 16-bit fields in SOF markers.  Therefore
   * "unsigned int" is sufficient on all machines.  However, if you need to

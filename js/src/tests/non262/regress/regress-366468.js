@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   try
   {
     function o(){} o.prototype = {get foo() {}}; obj = new o(); obj.foo = 2;

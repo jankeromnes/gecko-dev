@@ -63,7 +63,7 @@ iter.next();
 var callCount = 0;
 var obj = {
   method([,]) {
-    
+
     callCount = callCount + 1;
   }
 };

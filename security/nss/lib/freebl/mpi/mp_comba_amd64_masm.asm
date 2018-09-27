@@ -3,12 +3,12 @@
 ; file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 ;/* TomsFastMath, a fast ISO C bignum library.
-; * 
+; *
 ; * This project is meant to fill in where LibTomMath
 ; * falls short.  That is speed ;-)
 ; *
 ; * This project is public domain and free for all purposes.
-; * 
+; *
 ; * Tom St Denis, tomstdenis@iahu.ca
 ; */
 

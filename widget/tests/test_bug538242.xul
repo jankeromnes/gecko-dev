@@ -13,7 +13,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=538242
 
 <body  xmlns="http://www.w3.org/1999/xhtml">
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 </pre>
@@ -35,7 +35,7 @@ SimpleTest.waitForFocus(function () {
     return;
   }
 
-  var win = window.open("window_bug538242.xul", "_blank", 
+  var win = window.open("window_bug538242.xul", "_blank",
                         "chrome=1,width=400,height=300,left=100,top=100");
   SimpleTest.waitForFocus(function () {
     is(win.screenX, 100, "window should open at 100, 100");

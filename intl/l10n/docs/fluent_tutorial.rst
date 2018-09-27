@@ -135,7 +135,7 @@ a more complex example like:
 
   -brand-short-name = Firefox
       .gender = masculine
-  
+
   pref-pane =
       .title =
           { PLATFORM() ->
@@ -143,7 +143,7 @@ a more complex example like:
              *[other] Preferences
           }
       .accesskey = C
-  
+
   # Variables:
   #   $tabCount (Number) - number of container tabs to be closed
   containers-disable-alert-ok-button =
@@ -151,7 +151,7 @@ a more complex example like:
           [one] Close { $tabCount } Container Tab
          *[other] Close { $tabCount } Container Tabs
       }
-  
+
   update-application-info =
       You are using { -brand-short-name } Version: { $version }.
       <span>Please, read the <a>privacy policy</a>.</span>
@@ -540,14 +540,14 @@ contexts manually using the `Localization` class:
 
   const { Localization } =
     ChromeUtils.import("resource://gre/modules/Localization.jsm", {});
-  
-  
+
+
   const myL10n = new Localization([
     "branding/brand.ftl",
     "browser/preferences/preferences.ftl"
   ]);
-  
-  
+
+
   let [isDefaultMsg, isNotDefaultMsg] =
     myL10n.formatValues({id: "is-default"}, {id: "is-not-default"});
 
@@ -585,11 +585,11 @@ makes it relatively easy. In case of localization, the recommended way is to tes
 the code sets the right :code:`l10n-id`/:code:`l10n-args` attributes like this:
 
 .. code-block:: javascript
-  
+
   testedFunction();
-  
+
   const l10nAttrs = document.l10n.getAttributes(element);
-  
+
   deepEquals(l10nAttrs, {
     id: "my-expected-id",
     args: {
@@ -603,7 +603,7 @@ always better to scan for a variable:
 .. code-block:: javascript
 
   testedFunction();
-  
+
   equals(element.textContent.contains("John"));
 
 .. important::

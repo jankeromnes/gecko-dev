@@ -70,14 +70,14 @@ extern "C" {
  *@ATK_ROLE_INTERNAL_FRAME: A frame-like object that is clipped by a desktop pane
  *@ATK_ROLE_LABEL: An object used to present an icon or short string in an interface
  *@ATK_ROLE_LAYERED_PANE: A specialized pane that allows its children to be drawn in layers, providing a form of stacking order
- *@ATK_ROLE_LIST: An object that presents a list of objects to the user and allows the user to select one or more of them 
- *@ATK_ROLE_LIST_ITEM: An object that represents an element of a list 
+ *@ATK_ROLE_LIST: An object that presents a list of objects to the user and allows the user to select one or more of them
+ *@ATK_ROLE_LIST_ITEM: An object that represents an element of a list
  *@ATK_ROLE_MENU: An object usually found inside a menu bar that contains a list of actions the user can choose from
- *@ATK_ROLE_MENU_BAR: An object usually drawn at the top of the primary dialog box of an application that contains a list of menus the user can choose from 
+ *@ATK_ROLE_MENU_BAR: An object usually drawn at the top of the primary dialog box of an application that contains a list of menus the user can choose from
  *@ATK_ROLE_MENU_ITEM: An object usually contained in a menu that presents an action the user can choose
  *@ATK_ROLE_OPTION_PANE: A specialized pane whose primary use is inside a DIALOG
  *@ATK_ROLE_PAGE_TAB: An object that is a child of a page tab list
- *@ATK_ROLE_PAGE_TAB_LIST: An object that presents a series of panels (or page tabs), one at a time, through some mechanism provided by the object 
+ *@ATK_ROLE_PAGE_TAB_LIST: An object that presents a series of panels (or page tabs), one at a time, through some mechanism provided by the object
  *@ATK_ROLE_PANEL: A generic container that is often used to group objects
  *@ATK_ROLE_PASSWORD_TEXT: A text object uses for passwords, or other places where the text content is not shown visibly to the user
  *@ATK_ROLE_POPUP_MENU: A temporary window that is usually used to offer the user a list of choices, and then hides when the user selects one of those choices
@@ -131,16 +131,16 @@ extern "C" {
  *@ATK_ROLE_PAGE: The object is a containing instance which encapsulates a page of information. @ATK_ROLE_PAGE is used in documents and content which support a paginated navigation model.  @Since: ATK-1.11
  *@ATK_ROLE_SECTION: The object is a containing instance of document content which constitutes a particular 'logical' section of the document. The type of content within a section, and the nature of the section division itself, may be obtained by querying the object's attributes. Sections may be nested. @Since: ATK-1.11
  *@ATK_ROLE_REDUNDANT_OBJECT: The object is redundant with another object in the hierarchy, and is exposed for purely technical reasons.  Objects of this role should normally be ignored by clients. @Since: ATK-1.11
- *@ATK_ROLE_FORM: The object is a container for form controls, for instance as part of a 
- * web form or user-input form within a document.  This role is primarily a tag/convenience for 
- * clients when navigating complex documents, it is not expected that ordinary GUI containers will 
+ *@ATK_ROLE_FORM: The object is a container for form controls, for instance as part of a
+ * web form or user-input form within a document.  This role is primarily a tag/convenience for
+ * clients when navigating complex documents, it is not expected that ordinary GUI containers will
  * always have ATK_ROLE_FORM. @Since: ATK-1.12.0
  *@ATK_ROLE_LINK: The object is a hypertext anchor, i.e. a "link" in a
  * hypertext document.  Such objects are distinct from 'inline'
  * content which may also use the Hypertext/Hyperlink interfaces
  * to indicate the range/location within a text object where
  * an inline or embedded object lies.  @Since: ATK-1.12.1
- *@ATK_ROLE_INPUT_METHOD_WINDOW: The object is a window or similar viewport 
+ *@ATK_ROLE_INPUT_METHOD_WINDOW: The object is a window or similar viewport
  * which is used to allow composition or input of a 'complex character',
  * in other words it is an "input method window." @Since: ATK-1.12.1
  *@ATK_ROLE_TABLE_ROW: A row in a table.  @Since: ATK-2.1.0
@@ -407,12 +407,12 @@ typedef GSList AtkAttributeSet;
 /**
  * AtkAttribute:
  * @name: The attribute name. Call atk_text_attr_get_name()
- * @value: the value of the attribute, represented as a string. 
+ * @value: the value of the attribute, represented as a string.
  * Call atk_text_attr_get_value() for those which are strings.
- * For values which are numbers, the string representation of the number 
+ * For values which are numbers, the string representation of the number
  * is in value.
  *
- * A string name/value pair representing a text attribute. 
+ * A string name/value pair representing a text attribute.
  **/
 typedef struct _AtkAttribute AtkAttribute;
 
@@ -470,7 +470,7 @@ struct _AtkPropertyValues
 
 typedef struct _AtkPropertyValues        AtkPropertyValues;
 
-typedef gboolean (*AtkFunction)          (gpointer data); 
+typedef gboolean (*AtkFunction)          (gpointer data);
 /*
  * For most properties the old_value field of AtkPropertyValues will
  * not contain a valid value.
@@ -595,13 +595,13 @@ void                      (* initialize)                         (AtkObject     
   void                    (* focus_event)         (AtkObject                  *accessible,
                                                    gboolean                   focus_in);
   /*
-   * The signal handler which is executed  when there is a property_change 
+   * The signal handler which is executed  when there is a property_change
    * signal for an object.
    */
   void                    (* property_change)     (AtkObject                  *accessible,
                                                    AtkPropertyValues          *values);
   /*
-   * The signal handler which is executed  when there is a state_change 
+   * The signal handler which is executed  when there is a state_change
    * signal for an object.
    */
   void                    (* state_change)        (AtkObject                  *accessible,
@@ -615,15 +615,15 @@ void                      (* initialize)                         (AtkObject     
 
   /*
    * The signal handler which is executed when there is a change in the
-   * 'active' child or children of the object, for instance when 
+   * 'active' child or children of the object, for instance when
    * interior focus changes in a table or list.  This signal should be emitted
    * by objects whose state includes ATK_STATE_MANAGES_DESCENDANTS.
    */
   void                    (*active_descendant_changed) (AtkObject                  *accessible,
                                                         gpointer                   *child);
 
-  /*    	
-   * Gets a list of properties applied to this object as a whole, as an #AtkAttributeSet consisting of name-value pairs. 
+  /*
+   * Gets a list of properties applied to this object as a whole, as an #AtkAttributeSet consisting of name-value pairs.
    * Since ATK 1.12
    */
   AtkAttributeSet* 	  (*get_attributes)            (AtkObject                  *accessible);
@@ -694,7 +694,7 @@ void                 atk_object_notify_state_change              (AtkObject     
                                                                   gboolean                       value);
 void                 atk_object_initialize                       (AtkObject                     *accessible,
                                                                   gpointer                      data);
-                                    
+
 G_CONST_RETURN gchar* atk_role_get_name      (AtkRole         role);
 AtkRole               atk_role_for_name      (const gchar     *name);
 

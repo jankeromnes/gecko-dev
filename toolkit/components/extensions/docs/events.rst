@@ -160,7 +160,7 @@ For example, extending our example above:
          myapi: {
            onSomething: new EventManager(context, "myapi.onSomething", (fire, minValue) => {
              const callback = value => {
-               if (value >= minValue) 
+               if (value >= minValue)
                  fire.async(value);
                }
              };

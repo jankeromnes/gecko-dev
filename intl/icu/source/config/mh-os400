@@ -55,7 +55,7 @@ STUBDATA_LIBDIR = $(LIBDIR)/
 
 ## Versioned target for a shared library.
 FINAL_SO_TARGET = $(SO_TARGET)
-MIDDLE_SO_TARGET = 
+MIDDLE_SO_TARGET =
 
 # this one is for icudefs.mk's use
 ifeq ($(ENABLE_SHARED),YES)

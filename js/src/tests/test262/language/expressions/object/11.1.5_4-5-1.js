@@ -3,9 +3,9 @@
 
 /*---
 info: |
-    Refer 11.1.5; 
+    Refer 11.1.5;
     The production
-    PropertyNameAndValueList : PropertyNameAndValueList , PropertyAssignment 
+    PropertyNameAndValueList : PropertyNameAndValueList , PropertyAssignment
     5.Call the [[DefineOwnProperty]] internal method of obj with arguments propId.name, propId.descriptor, and false.
 es5id: 11.1.5_4-5-1
 description: >

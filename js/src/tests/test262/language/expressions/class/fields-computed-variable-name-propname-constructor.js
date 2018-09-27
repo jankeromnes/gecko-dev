@@ -13,7 +13,7 @@ info: |
     ComputedPropertyName : [ AssignmentExpression ]
       Return empty.
 
-    
+
     // This test file tests the following early error:
     Static Semantics: Early Errors
 

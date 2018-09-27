@@ -68,7 +68,7 @@ static long glock = LOCK_IS_FREE;
 
 		char buf[1024];
 		vsnprintf(buf, sizeof(buf), format, args);
-		
+
 		va_end(args);
 
 		printf(buf);

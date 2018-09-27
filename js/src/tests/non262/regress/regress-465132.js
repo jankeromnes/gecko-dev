@@ -26,10 +26,10 @@ function test()
   {
     expect = Math[constants[j]];
 
-    for(i=0;i<9;++i) 
+    for(i=0;i<9;++i)
       ++Math[constants[j]];
 
-    for(i=0;i<9;++i) 
+    for(i=0;i<9;++i)
       eval('++Math.' + constants[j]);
 
     actual = Math[constants[j]];

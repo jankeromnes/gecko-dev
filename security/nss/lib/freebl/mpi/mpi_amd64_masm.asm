@@ -187,7 +187,7 @@ s_mpv_mul_set_vec64 ENDP
 ;
 ; uint64_t
 ; s_mpv_mul_add_vec64(uint64_t *r, uint64_t *a, int len, uint64_t digit)
-; 
+;
 
 s_mpv_mul_add_vec64 PROC
 

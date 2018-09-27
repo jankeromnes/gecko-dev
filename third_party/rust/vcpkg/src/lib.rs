@@ -172,7 +172,7 @@ impl fmt::Display for Error {
             Error::NotMSVC => {
                 write!(f,
                        "the vcpkg-rs Vcpkg build helper can only find libraries built for the MSVC ABI.")
-            } 
+            }
             Error::VcpkgNotFound(ref detail) => write!(f, "Could not find Vcpkg tree: {}", detail),
             Error::LibNotFound(ref detail) => {
                 write!(f, "Could not find library in Vcpkg tree {}", detail)

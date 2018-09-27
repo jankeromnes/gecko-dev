@@ -217,7 +217,7 @@ hb_font_funcs_set_font_v_extents_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 1.2.3
  **/
@@ -233,7 +233,7 @@ hb_font_funcs_set_nominal_glyph_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 1.2.3
  **/
@@ -249,7 +249,7 @@ hb_font_funcs_set_variation_glyph_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -265,7 +265,7 @@ hb_font_funcs_set_glyph_h_advance_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -281,7 +281,7 @@ hb_font_funcs_set_glyph_v_advance_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 1.8.6
  **/
@@ -297,7 +297,7 @@ hb_font_funcs_set_glyph_h_advances_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 1.8.6
  **/
@@ -313,7 +313,7 @@ hb_font_funcs_set_glyph_v_advances_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -329,7 +329,7 @@ hb_font_funcs_set_glyph_h_origin_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -345,7 +345,7 @@ hb_font_funcs_set_glyph_v_origin_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -361,7 +361,7 @@ hb_font_funcs_set_glyph_h_kerning_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -377,7 +377,7 @@ hb_font_funcs_set_glyph_v_kerning_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -393,7 +393,7 @@ hb_font_funcs_set_glyph_extents_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -409,7 +409,7 @@ hb_font_funcs_set_glyph_contour_point_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -425,7 +425,7 @@ hb_font_funcs_set_glyph_name_func (hb_font_funcs_t *ffuncs,
  * @user_data:
  * @destroy:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/

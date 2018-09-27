@@ -1373,7 +1373,7 @@ gfxFontFamily::HasOtherFamilyNames()
 }
 
 gfxFontEntry*
-gfxFontFamily::FindFontForStyle(const gfxFontStyle& aFontStyle, 
+gfxFontFamily::FindFontForStyle(const gfxFontStyle& aFontStyle,
                                 bool aIgnoreSizeTolerance)
 {
     AutoTArray<gfxFontEntry*,4> matched;
@@ -1937,7 +1937,7 @@ gfxFontFamily::ReadOtherFamilyNamesForFace(const nsACString& aFamilyName,
         NS_WARNING("invalid font (name records)");
         return;
     }
-    
+
     const gfxFontUtils::NameRecord *nameRecord =
         reinterpret_cast<const gfxFontUtils::NameRecord*>(aNameData + sizeof(gfxFontUtils::NameHeader));
     uint32_t stringsBase = uint32_t(nameHeader->stringOffset);
@@ -1994,7 +1994,7 @@ gfxFontFamily::ReadOtherFamilyNamesForFace(gfxPlatformFontList *aPlatformFontLis
 void
 gfxFontFamily::ReadOtherFamilyNames(gfxPlatformFontList *aPlatformFontList)
 {
-    if (mOtherFamilyNamesInitialized) 
+    if (mOtherFamilyNamesInitialized)
         return;
     mOtherFamilyNamesInitialized = true;
 
@@ -2021,7 +2021,7 @@ gfxFontFamily::ReadOtherFamilyNames(gfxPlatformFontList *aPlatformFontList)
     // read in other names for the first face in the list with the assumption
     // that if extra names don't exist in that face then they don't exist in
     // other faces for the same font
-    if (!mHasOtherFamilyNames) 
+    if (!mHasOtherFamilyNames)
         return;
 
     // read in names for all faces, needed to catch cases where fonts have
@@ -2120,7 +2120,7 @@ gfxFontFamily::CheckForLegacyFamilyNames(gfxPlatformFontList* aFontList)
 }
 
 void
-gfxFontFamily::ReadFaceNames(gfxPlatformFontList *aPlatformFontList, 
+gfxFontFamily::ReadFaceNames(gfxPlatformFontList *aPlatformFontList,
                              bool aNeedFullnamePostscriptNames,
                              FontInfoData *aFontInfoData)
 {

@@ -46,9 +46,9 @@ class TestGroup:
     # Save name
     self.name = name
     self.title = title
-    
+
     self.ui = ui
-    
+
     sourceTree = sourceCache.sourceTree
 
     # Load htaccess
@@ -157,7 +157,7 @@ class TestGroup:
 
     self.tests = SourceSet.combine(self.tests, other.tests, self.ui)
     other.tests = None
-    
+
     self.refs  = SourceSet.combine(self.refs, other.refs, self.ui)
     other.refs = None
     if self.manifest and other.manifest:
@@ -165,7 +165,7 @@ class TestGroup:
     else:
       self.manifest = self.manifest or other.manifest
     other.manifest = None
-    
+
 
   def build(self, format):
     """Build Group's contents through OutputFormat `format`.

@@ -22,7 +22,7 @@
 #include <speex/speex_resampler.h>
 
 namespace webrtc {
- 
+
 #define FIXED_RATE_RESAMPLER 0x10
 
 // All methods return 0 on success and -1 on failure.

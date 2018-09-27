@@ -6,7 +6,7 @@
 #ifndef nsPrintSession_h__
 #define nsPrintSession_h__
 
-#include "nsIPrintSession.h" 
+#include "nsIPrintSession.h"
 
 #include "mozilla/RefPtr.h"
 #include "nsWeakReference.h"
@@ -32,7 +32,7 @@ public:
   NS_DECL_NSIPRINTSESSION
 
   nsPrintSession();
-  
+
   virtual nsresult Init();
 
 private:

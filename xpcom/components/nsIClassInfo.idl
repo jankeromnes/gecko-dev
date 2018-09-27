@@ -18,14 +18,14 @@ interface nsIXPCScriptable;
 interface nsIClassInfo : nsISupports
 {
     /**
-     * Get an ordered list of the interface ids that instances of the class 
-     * promise to implement. Note that nsISupports is an implicit member 
-     * of any such list and need not be included. 
+     * Get an ordered list of the interface ids that instances of the class
+     * promise to implement. Note that nsISupports is an implicit member
+     * of any such list and need not be included.
      *
-     * Should set *count = 0 and *array = null and return NS_OK if getting the 
+     * Should set *count = 0 and *array = null and return NS_OK if getting the
      * list is not supported.
      */
-    void getInterfaces(out uint32_t count, 
+    void getInterfaces(out uint32_t count,
                        [array, size_is(count), retval] out nsIIDPtr array);
 
     /**
@@ -61,8 +61,8 @@ interface nsIClassInfo : nsISupports
     const uint32_t PLUGIN_OBJECT        = 1 << 4;
     const uint32_t SINGLETON_CLASSINFO  = 1 << 5;
 
-    // The high order bit is RESERVED for consumers of these flags. 
-    // No implementor of this interface should ever return flags 
+    // The high order bit is RESERVED for consumers of these flags.
+    // No implementor of this interface should ever return flags
     // with this bit set.
     const uint32_t RESERVED             = 1 << 31;
 

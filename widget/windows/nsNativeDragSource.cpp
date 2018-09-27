@@ -89,7 +89,7 @@ nsNativeDragSource::QueryContinueDrag(BOOL fEsc, DWORD grfKeyState)
 STDMETHODIMP
 nsNativeDragSource::GiveFeedback(DWORD dwEffect)
 {
-  // For drags involving tabs, we do some custom work with cursors. 
+  // For drags involving tabs, we do some custom work with cursors.
   if (mDataTransfer) {
     nsAutoString cursor;
     mDataTransfer->GetMozCursor(cursor);
@@ -104,7 +104,7 @@ nsNativeDragSource::GiveFeedback(DWORD dwEffect)
     ::SetCursor(m_hCursor);
     return S_OK;
   }
-  
+
   // Let the system choose which cursor to apply.
   return DRAGDROP_S_USEDEFAULTCURSORS;
 }

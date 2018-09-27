@@ -1,6 +1,6 @@
 (function() {
     var s = "__proto__";
-    assertEq(arguments[s], Object.prototype);   
+    assertEq(arguments[s], Object.prototype);
 })();
 
 Object.defineProperty(Object.prototype, "foo", {

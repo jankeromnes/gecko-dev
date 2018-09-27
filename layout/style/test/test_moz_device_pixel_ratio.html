@@ -13,7 +13,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=474356
 <body onload="run()">
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=474356">Mozilla Bug 474356</a>
 <div id="content" style="display: none">
-  
+
 </div>
 <script type="text/javascript">
 </script>
@@ -47,7 +47,7 @@ function run() {
   var doubleRatio = 2.0 * screenPixelsPerCSSPixel;
   var halfRatio = 0.5 * screenPixelsPerCSSPixel;
   var styleElem = document.getElementsByTagName("style")[1];
-  styleElem.textContent = 
+  styleElem.textContent =
       ["@media all and (-moz-device-pixel-ratio: " + baseRatio + ") {",
          "#zoom1 { visibility: visible; }",
        "}",

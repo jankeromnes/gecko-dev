@@ -13,6 +13,6 @@ index 2ec2594..de05c0e 100644
  #include <stdio.h>
  #include <stdlib.h>
 +#include <limits.h>
- 
+
  #include "pixman-private.h"
- 
+

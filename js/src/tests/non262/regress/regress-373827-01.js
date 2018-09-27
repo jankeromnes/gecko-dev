@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   { let [] = [{x: function(){}}]; };
 
   reportCompare(expect, actual, summary);

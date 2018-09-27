@@ -150,10 +150,10 @@ case "$host" in
   i?86-*-solaris2.1[[0-9]]*)
 	TARGETDIR=x86
 	if test $ac_cv_sizeof_size_t = 4; then
-	  TARGET=X86; 
+	  TARGET=X86;
 	else
-	  TARGET=X86_64; 
-	fi	  
+	  TARGET=X86_64;
+	fi
 	;;
 
   x86_64-*-darwin*)
@@ -183,10 +183,10 @@ case "$host" in
 	    *)
 	      TARGET=X86
 	      ;;
-          esac	
+          esac
 	else
-	  TARGET=X86_64; 
-	fi	  
+	  TARGET=X86_64;
+	fi
 	;;
 
   ia64*-*-*)

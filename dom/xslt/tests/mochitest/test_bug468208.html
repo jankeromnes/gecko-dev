@@ -13,7 +13,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=468208
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=468208">Mozilla Bug 468208</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -24,7 +24,7 @@ var xslt =
         <xsl:strip-space elements="color"/>\n\
     </xsl:stylesheet>'
 ;
-var xsltdoc = new DOMParser().parseFromString(xslt, "text/xml"); 
+var xsltdoc = new DOMParser().parseFromString(xslt, "text/xml");
 
 var processor = new XSLTProcessor;
 processor.importStylesheet(xsltdoc);

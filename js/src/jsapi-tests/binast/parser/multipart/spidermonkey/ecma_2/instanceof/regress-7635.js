@@ -8,7 +8,7 @@
  *  File Name:          regress-7635.js
  *  Reference:          http://bugzilla.mozilla.org/show_bug.cgi?id=7635
  *  Description:        instanceof tweaks
- *  Author:            
+ *  Author:
  */
 
 var SECTION = "instanceof";       // provide a document reference (ie, ECMA section)

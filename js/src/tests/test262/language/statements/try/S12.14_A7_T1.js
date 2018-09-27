@@ -110,7 +110,7 @@ try{
   }
 }
 finally{
-  c6=1;		
+  c6=1;
 }
 if (c6!==1) $ERROR('#6.2: "finally" block must be evaluated');
 

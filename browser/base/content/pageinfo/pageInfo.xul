@@ -152,7 +152,7 @@
                      onclick="gMetaView.onPageMediaSort('meta-content');"/>
           </treecols>
           <treechildren id="metatreechildren" flex="1"/>
-        </tree>        
+        </tree>
       </vbox>
       <hbox pack="end">
         <button command="cmd_help" label="&helpButton.label;" dlgtype="help"/>

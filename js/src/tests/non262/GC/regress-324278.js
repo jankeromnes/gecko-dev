@@ -59,5 +59,5 @@ check(chainTop, N);
 printStatus("CHECKED");
 chainTop = null;
 gc();
- 
+
 reportCompare(expect, actual, summary);

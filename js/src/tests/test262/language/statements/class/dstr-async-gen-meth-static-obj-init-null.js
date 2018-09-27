@@ -48,7 +48,7 @@ info: |
 
 class C {
   static async *method({}) {
-    
+
   }
 };
 

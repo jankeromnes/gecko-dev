@@ -27,10 +27,10 @@ extern "C" {
 #endif /* __cplusplus */
 
 /*
- * The AtkValue interface should be supported by any object that 
- * supports a numerical value (e.g., a scroll bar). This interface 
- * provides the standard mechanism for an assistive technology to 
- * determine and set the numerical value as well as get the minimum 
+ * The AtkValue interface should be supported by any object that
+ * supports a numerical value (e.g., a scroll bar). This interface
+ * provides the standard mechanism for an assistive technology to
+ * determine and set the numerical value as well as get the minimum
  * and maximum values.
  */
 

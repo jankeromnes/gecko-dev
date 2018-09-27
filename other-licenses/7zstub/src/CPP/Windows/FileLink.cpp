@@ -29,14 +29,14 @@ using namespace NName;
     UInt32 Tag;
     UInt16 Size;     // not including starting 8 bytes
     UInt16 Reserved; // = 0
-    
+
     UInt16 SubstituteOffset; // offset in bytes from  start of namesChars
     UInt16 SubstituteLen;    // size in bytes, it doesn't include tailed NUL
     UInt16 PrintOffset;      // offset in bytes from  start of namesChars
     UInt16 PrintLen;         // size in bytes, it doesn't include tailed NUL
-    
+
     [UInt32] Flags;  // for Symbolic Links only.
-    
+
     UInt16 namesChars[]
   }
 
@@ -120,7 +120,7 @@ bool FillLinkData(CByteBuffer &dest, const wchar_t *path, bool isSymLink)
   }
 
   const unsigned add_Prefix_Len = isAbs ? k_LinkPrefix_Size : 0;
-    
+
   unsigned len2 = MyStringLen(path) * 2;
   const unsigned len1 = len2 + add_Prefix_Len * 2;
   if (!needPrintName)
@@ -217,13 +217,13 @@ bool CReparseAttr::Parse(const Byte *p, size_t size, DWORD &errorCode)
 
   if (Get16(p + 6) != 0) // padding
     return false;
-  
+
   p += 8;
   size -= 8;
-  
+
   if (len != size) // do we need that check?
     return false;
-  
+
   if (len < 8)
     return false;
   unsigned subOffs = Get16(p);
@@ -277,13 +277,13 @@ bool CReparseShortInfo::Parse(const Byte *p, size_t size)
 
   if (Get16(p + 6) != 0) // padding
     return false;
-  
+
   p += 8;
   size -= 8;
-  
+
   if (len != size) // do we need that check?
     return false;
-  
+
   if (len < 8)
     return false;
   unsigned subOffs = Get16(p);

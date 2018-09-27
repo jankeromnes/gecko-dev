@@ -19,7 +19,7 @@ index1=0
 
 for file in $INFILES # loop over all input files
   do
-  
+
   for channel in $CHANNELFILES
 	do
 	let "index1=index1+1"

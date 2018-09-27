@@ -633,7 +633,7 @@ Assert.equal(numErrors, 6);
 testnum = 363986;
 testdesc = "test PNG and JPEG encoders' Read/ReadSegments methods";
 
-var testData = 
+var testData =
     [{preImage: "image3.ico",
       preImageMimeType: "image/x-icon",
       refImage: "image3ico16x16.png",

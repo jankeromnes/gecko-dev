@@ -1,6 +1,6 @@
 			Libdisasm SWIG README
 
-The SWIG utility (www.swig.org) can be used to generate 
+The SWIG utility (www.swig.org) can be used to generate
 
 
 Building SWIG Modules
@@ -62,7 +62,7 @@ To test that the module loads:
 	...     s = node.op.format(x86disasm.raw_syntax)
 	...     print s
 	...     node = ops.next()
-	... 
+	...
 	relative|sbyte|00000047|
 
 

@@ -14,7 +14,7 @@ privileges.  API implementations do not directly interact with
 extensions' Javascript environments, that is handled by the WebExtensions
 framework.  Each API includes a schema that describes all the functions,
 events, and other properties that the API might inject into an
-extension's Javascript environment.  
+extension's Javascript environment.
 Among other things, the schema specifies the namespace into which
 an API should be injected, what permissions (if any) are required to
 use it, and in which contexts (e.g., extension pages, content scripts, etc)

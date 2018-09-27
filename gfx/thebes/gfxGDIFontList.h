@@ -87,7 +87,7 @@ private:
  * These can generally be lumped in to 3 categories where we have to
  * do special things:  Really old fonts bitmap and vector fonts (device
  * and raster), Type 1 fonts, and TrueType/OpenType fonts.
- * 
+ *
  * This list is sorted in order from least prefered to most prefered.
  * We prefer Type1 fonts over OpenType fonts to avoid falling back to
  * things like Arial (opentype) when you ask for Helvetica (type1)
@@ -116,7 +116,7 @@ public:
                      LONG aWeight,
                      gfxFloat aSize);
 
-    static gfxWindowsFontType DetermineFontType(const NEWTEXTMETRICW& metrics, 
+    static gfxWindowsFontType DetermineFontType(const NEWTEXTMETRICW& metrics,
                                                 DWORD fontType)
     {
         gfxWindowsFontType feType;
@@ -134,7 +134,7 @@ public:
             feType = GFX_FONT_TYPE_DEVICE;
         else
             feType = GFX_FONT_TYPE_UNKNOWN;
-        
+
         return feType;
     }
 

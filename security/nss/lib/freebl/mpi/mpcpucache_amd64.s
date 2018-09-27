@@ -570,7 +570,7 @@ freebl_cpuid:
 	movq	%rdi, %rax
 /APP
 	cpuid
-	
+
 /NO_APP
 	movq	%rax, (%rsi)
 	movq	%rbx, (%r10)
@@ -599,7 +599,7 @@ getIntelCacheEntryLineSize:
 	je	.L4
 	movl	$1, (%rsi)
 .L9:
-	movzbl	%cl, %eax 
+	movzbl	%cl, %eax
 	movq	%rax, (%r10)
 	ret
 	.align	16
@@ -754,15 +754,15 @@ s_mpi_getProcessorLineSize:
 	.align	16
 .L25:
 	movq	-184(%rbp), %rdi
-	testl	$2147483648, %edi 
+	testl	$2147483648, %edi
 	je	.L40
 .L26:
 	movq	-176(%rbp), %rdi
-	testl	$2147483648, %edi 
+	testl	$2147483648, %edi
 	je	.L41
 .L27:
 	movq	-168(%rbp), %rdi
-	testl	$2147483648, %edi 
+	testl	$2147483648, %edi
 	je	.L42
 .L28:
 	incl	%ebx
@@ -779,28 +779,28 @@ s_mpi_getProcessorLineSize:
 	jge	.L38
 	movq	-192(%rbp), %rdi
 .L30:
-	testl	$2147483648, %edi 
+	testl	$2147483648, %edi
 	jne	.L25
 	leaq	-200(%rbp), %rdx
 	leaq	-204(%rbp), %rsi
 	andl	$4294967040, %edi
 	call	getIntelRegisterCacheLineSize
 	movq	-184(%rbp), %rdi
-	testl	$2147483648, %edi 
+	testl	$2147483648, %edi
 	jne	.L26
 .L40:
 	leaq	-200(%rbp), %rdx
 	leaq	-204(%rbp), %rsi
 	call	getIntelRegisterCacheLineSize
 	movq	-176(%rbp), %rdi
-	testl	$2147483648, %edi 
+	testl	$2147483648, %edi
 	jne	.L27
 .L41:
 	leaq	-200(%rbp), %rdx
 	leaq	-204(%rbp), %rsi
 	call	getIntelRegisterCacheLineSize
 	movq	-168(%rbp), %rdi
-	testl	$2147483648, %edi 
+	testl	$2147483648, %edi
 	jne	.L28
 .L42:
 	leaq	-200(%rbp), %rdx

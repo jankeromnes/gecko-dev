@@ -1,18 +1,18 @@
-<?xml version="1.0"?> 
+<?xml version="1.0"?>
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 
-<?xml-stylesheet href="chrome://global/skin/" type="text/css"?> 
-<?xml-stylesheet href="gridsample.css" type="text/css"?> 
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="gridsample.css" type="text/css"?>
 
-<!DOCTYPE window> 
+<!DOCTYPE window>
 
 
-<window orient="vertical" 
+<window orient="vertical"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-		onload="start()"> 
+		onload="start()">
 
 <script>
 
@@ -21,7 +21,7 @@
 
    function isCell(box)
    {
-     if (box.localName == "row" || 
+     if (box.localName == "row" ||
 	     box.localName == "column" ||
 		 box.localName == "rows" ||
 		 box.localName == "columns" ||
@@ -104,17 +104,17 @@
 
      setUserAttribute(element);
 
-	 if (selected.localName == "rows") 
+	 if (selected.localName == "rows")
 	   appendRow(false);
      else if (selected.localName == "columns")
 	   appendColumn(false);
 
 	 if (selected.localName == "row" || selected.localName == "column" ) { // is row or column
-		 selected.appendChild(element); 
+		 selected.appendChild(element);
 	 } else {
 		  var parent = selected.parentNode;
 		  if (prepend)
-		    parent.insertBefore(element, selected);	 
+		    parent.insertBefore(element, selected);
 		  else {
 		    var next = selected.nextSibling;
 			if (next)
@@ -123,7 +123,7 @@
 			  parent.appendChild(element);
 		  }
 	 }
-     
+
 	 selectIt(element);
    }
 
@@ -152,7 +152,7 @@
      if (!selected)
 	    return;
 
-     setUserAttribute(rowColumn); 
+     setUserAttribute(rowColumn);
 
      var row = rowColumn;
 
@@ -164,7 +164,7 @@
 
 	 if (selected.localName == "row" || selected.localName == "rows")
 	   if (row.localName == "column") {
-	     selectIt(getColumns(selected)); 
+	     selectIt(getColumns(selected));
 		 dump("Selecting the column")
 		 dump("Selected="+selected.localName);
 		 }
@@ -173,13 +173,13 @@
 	   if (row.localName == "row")
 	     selectIt(getRows(selected));
 
-	 if (selected.localName == "rows" || selected.localName == "columns" ) 
+	 if (selected.localName == "rows" || selected.localName == "columns" )
 	 { // if rows its easy
-		 selected.appendChild(row); 
+		 selected.appendChild(row);
 	 } else {
 		  var parent = selected.parentNode;
 		  if (prepend)
-		    parent.insertBefore(row, selected);	 
+		    parent.insertBefore(row, selected);
 		  else {
 		    var next = selected.nextSibling;
 			if (next)
@@ -313,13 +313,13 @@
 
     <grid style="background-color: blue">
 	   <columns>
-             <column flex="1"/> 
              <column flex="1"/>
-             <column flex="1"/>             
+             <column flex="1"/>
+             <column flex="1"/>
              <column flex="1"/>
  	   </columns>
 	 <rows>
-     
+
          <row>
 		  <button label="append row" oncommand="appendRow(false);"/>
 		  <button label="prepend row" oncommand="appendRow(true);"/>

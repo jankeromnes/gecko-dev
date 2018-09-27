@@ -8,9 +8,9 @@
 <script>
 
 
-function init() { 
+function init() {
 
-  var m = document.getElementById("m"); 
+  var m = document.getElementById("m");
   m.parentNode.removeChild(m);
   m.controllers;
 };
@@ -23,5 +23,5 @@ window.addEventListener("load", init, false);
 
 
 <hbox id="m" />
-    
+
 </window>

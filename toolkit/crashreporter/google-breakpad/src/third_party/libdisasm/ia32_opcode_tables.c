@@ -2878,7 +2878,7 @@ ia32_table_desc_t ia32_tables[] = {
 	{ tbl_0F0F, tbl_suffix, 0x00, 0xFF, 0x00, 0xBF }
 };
 /* ia32_opcode_tables.h */
-/* Table index constants: 
+/* Table index constants:
 #define idx_Main 0
 #define idx_66 1
 #define idx_F2 2
@@ -2936,4 +2936,4 @@ ia32_table_desc_t ia32_tables[] = {
 #define idx_DF 54
 #define idx_DFC0 55
 #define idx_0F0F 56
-*/ 
+*/

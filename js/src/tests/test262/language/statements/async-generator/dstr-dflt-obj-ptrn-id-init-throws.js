@@ -31,7 +31,7 @@ function thrower() {
 
 
 async function* f({ x = thrower() } = {}) {
-  
+
 };
 
 assert.throws(Test262Error, function() {

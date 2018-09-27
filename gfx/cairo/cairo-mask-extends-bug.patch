@@ -9,7 +9,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
      cairo_status_t status;
      struct _cairo_boxes_chunk *chunk;
      int i;
- 
+
 -    if (boxes->num_boxes < 1 && clip_region == NULL)
 -	return _cairo_image_surface_fixup_unbounded (dst, extents, NULL);
 +    // If we have no boxes then we need to clear the entire extents
@@ -31,11 +31,11 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
 +        }
 +        return CAIRO_STATUS_SUCCESS;
 +    }
- 
+
      _cairo_boxes_init (&clear);
- 
+
      box.p1.x = _cairo_fixed_from_int (extents->unbounded.x + extents->unbounded.width);
      box.p1.y = _cairo_fixed_from_int (extents->unbounded.y);
      box.p2.x = _cairo_fixed_from_int (extents->unbounded.x);
      box.p2.y = _cairo_fixed_from_int (extents->unbounded.y + extents->unbounded.height);
- 
+

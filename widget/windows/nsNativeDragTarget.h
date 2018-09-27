@@ -72,7 +72,7 @@ public:
 
 protected:
 
-  void GetGeckoDragAction(DWORD grfKeyState, LPDWORD pdwEffect, 
+  void GetGeckoDragAction(DWORD grfKeyState, LPDWORD pdwEffect,
                           uint32_t * aGeckoAction);
   void ProcessDrag(mozilla::EventMessage aEventMessage, DWORD grfKeyState,
                    POINTL pt, DWORD* pdwEffect);
@@ -90,12 +90,12 @@ protected:
   // Gecko Stuff
   nsIWidget      * mWidget;
   nsIDragService * mDragService;
-  // Drag target helper 
+  // Drag target helper
   IDropTargetHelper * GetDropTargetHelper();
 
 
 private:
-  // Drag target helper 
+  // Drag target helper
   IDropTargetHelper * mDropTargetHelper;
 
   static bool gDragImageChanged;

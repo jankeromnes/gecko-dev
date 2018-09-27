@@ -81,7 +81,7 @@
  *
  *   // Do the custom operations on the device here.
  *   // But do not call any Cairo functions that might acquire devices.
- *   
+ *
  *   // Release the device when done.
  *   cairo_device_release (device);
  * }
@@ -237,7 +237,7 @@ cairo_device_status (cairo_device_t *device)
  *
  * Finish any pending operations for the device and also restore any
  * temporary modifications cairo has made to the device's state.
- * This function must be called before switching from using the 
+ * This function must be called before switching from using the
  * device with Cairo to operating on it directly with native APIs.
  * If the device doesn't support direct access, then this function
  * does nothing.

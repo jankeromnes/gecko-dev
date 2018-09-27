@@ -7,13 +7,13 @@ ASN.1 modules for Python
 [![Coverage Status](https://img.shields.io/codecov/c/github/etingof/pyasn1-modules.svg)](https://codecov.io/github/etingof/pyasn1-modules/)
 [![GitHub license](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/etingof/pyasn1-modules/master/LICENSE.txt)
 
-This is a small but growing collection of 
+This is a small but growing collection of
 [ASN.1](https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-X.208-198811-W!!PDF-E&type=items)
 data structures expressed in Python terms using [pyasn1](https://github.com/etingof/pyasn1) data model.
 
 If ASN.1 module you need is not present in this collection, try using
 [Asn1ate](https://github.com/kimgr/asn1ate) tool that compiles ASN.1 documents
-into pyasn1 code. 
+into pyasn1 code.
 
 Feedback
 --------

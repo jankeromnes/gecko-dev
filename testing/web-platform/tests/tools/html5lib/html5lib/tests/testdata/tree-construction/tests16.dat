@@ -118,7 +118,7 @@
 |   <body>
 
 #data
-<!doctype html><script></SCRIPT 
+<!doctype html><script></SCRIPT
 #errors
 (1,32): expected-attribute-name-but-got-eof
 (1,32): expected-named-closing-tag-but-got-eof
@@ -202,7 +202,7 @@
 |   <body>
 
 #data
-<!doctype html><script></script 
+<!doctype html><script></script
 #errors
 (1,32): expected-attribute-name-but-got-eof
 (1,32): expected-named-closing-tag-but-got-eof
@@ -340,7 +340,7 @@
 |   <body>
 
 #data
-<!doctype html><script><!--</script 
+<!doctype html><script><!--</script
 #errors
 (1,36): expected-attribute-name-but-got-eof
 (1,36): expected-named-closing-tag-but-got-eof
@@ -379,7 +379,7 @@
 |   <body>
 
 #data
-<!doctype html><script><!--<script 
+<!doctype html><script><!--<script
 #errors
 (1,35): eof-in-script-in-script
 (1,35): expected-named-closing-tag-but-got-eof
@@ -470,7 +470,7 @@
 |   <body>
 
 #data
-<!doctype html><script><!--<script </script 
+<!doctype html><script><!--<script </script
 #errors
 (1,44): expected-named-closing-tag-but-got-eof
 (1,44): unexpected-eof-in-text-mode
@@ -561,7 +561,7 @@
 |   <body>
 
 #data
-<!doctype html><script><!--<script </script </script 
+<!doctype html><script><!--<script </script </script
 #errors
 (1,53): expected-attribute-name-but-got-eof
 (1,53): expected-named-closing-tag-but-got-eof
@@ -724,7 +724,7 @@
 |   <body>
 
 #data
-<!doctype html><script><!--<script --></script 
+<!doctype html><script><!--<script --></script
 #errors
 (1,47): expected-attribute-name-but-got-eof
 (1,47): expected-named-closing-tag-but-got-eof
@@ -1346,7 +1346,7 @@
 |   <body>
 
 #data
-<script></SCRIPT 
+<script></SCRIPT
 #errors
 (1,8): expected-doctype-but-got-start-tag
 (1,17): expected-attribute-name-but-got-eof
@@ -1430,7 +1430,7 @@
 |   <body>
 
 #data
-<script></script 
+<script></script
 #errors
 (1,8): expected-doctype-but-got-start-tag
 (1,17): expected-attribute-name-but-got-eof
@@ -1568,7 +1568,7 @@
 |   <body>
 
 #data
-<script><!--</script 
+<script><!--</script
 #errors
 (1,8): expected-doctype-but-got-start-tag
 (1,21): expected-attribute-name-but-got-eof
@@ -1607,7 +1607,7 @@
 |   <body>
 
 #data
-<script><!--<script 
+<script><!--<script
 #errors
 (1,8): expected-doctype-but-got-start-tag
 (1,20): eof-in-script-in-script
@@ -1698,7 +1698,7 @@
 |   <body>
 
 #data
-<script><!--<script </script 
+<script><!--<script </script
 #errors
 (1,8): expected-doctype-but-got-start-tag
 (1,29): expected-named-closing-tag-but-got-eof
@@ -1789,7 +1789,7 @@
 |   <body>
 
 #data
-<script><!--<script </script </script 
+<script><!--<script </script </script
 #errors
 (1,8): expected-doctype-but-got-start-tag
 (1,38): expected-attribute-name-but-got-eof
@@ -1926,7 +1926,7 @@
 |   <body>
 
 #data
-<script><!--<script --></script 
+<script><!--<script --></script
 #errors
 (1,8): expected-doctype-but-got-start-tag
 (1,32): expected-attribute-name-but-got-eof

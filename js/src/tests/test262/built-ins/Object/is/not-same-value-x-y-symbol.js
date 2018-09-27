@@ -7,7 +7,7 @@ description: >
 
     ...
     6. If Type(x) is Symbol, then
-      a. If x and y are both the same Symbol value, 
+      a. If x and y are both the same Symbol value,
           return true; otherwise, return false.
     ...
 features: [Symbol]

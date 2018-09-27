@@ -16,7 +16,7 @@ diff --git a/media/libspeex_resampler/src/resample.c b/media/libspeex_resampler/
        st->last_sample[i] = st->filt_len/2;
     return RESAMPLER_ERR_SUCCESS;
  }
- 
+
 +EXPORT int speex_resampler_set_skip_frac_num(SpeexResamplerState *st, spx_uint32_t skip_frac_num)
 +{
 +   spx_uint32_t i;
@@ -52,12 +52,12 @@ diff --git a/media/libspeex_resampler/src/speex_resampler.h b/media/libspeex_res
 +#define speex_resampler_set_skip_frac_num CAT_PREFIX(RANDOM_PREFIX,_resampler_set_skip_frac_num)
  #define speex_resampler_reset_mem CAT_PREFIX(RANDOM_PREFIX,_resampler_reset_mem)
  #define speex_resampler_strerror CAT_PREFIX(RANDOM_PREFIX,_resampler_strerror)
- 
+
  #define spx_int16_t short
  #define spx_int32_t int
  #define spx_uint16_t unsigned short
  #define spx_uint32_t unsigned int
-       
+
 @@ -317,16 +318,32 @@ int speex_resampler_get_output_latency(S
   * resampler. It is recommended to use that when resampling an audio file, as
   * it will generate a file with the same length. For real-time processing,
@@ -66,7 +66,7 @@ diff --git a/media/libspeex_resampler/src/speex_resampler.h b/media/libspeex_res
   * @param st Resampler state
   */
  int speex_resampler_skip_zeros(SpeexResamplerState *st);
- 
+
 +/** Set the numerator in a fraction determining the advance through input
 + * samples before writing any output samples. The denominator of the fraction
 + * is the value returned from speex_resampler_get_ratio() in ratio_den. This
@@ -87,7 +87,7 @@ diff --git a/media/libspeex_resampler/src/speex_resampler.h b/media/libspeex_res
   * @param st Resampler state
   */
  int speex_resampler_reset_mem(SpeexResamplerState *st);
- 
+
  /** Returns the English meaning for an error code
   * @param err Error code
   * @return English string

@@ -9,7 +9,7 @@
 sub usage() {
     print <<EOUSAGE;
 # bloatdiff.pl - munges the output from
-#   XPCOM_MEM_BLOAT_LOG=1 
+#   XPCOM_MEM_BLOAT_LOG=1
 #   firefox-bin -P default resource:///res/bloatcycle.html
 # so that it does some summary and stats stuff.
 #
@@ -29,7 +29,7 @@ $NEWFILE = $ARGV[1];
 #$LABEL   = $ARGV[2];
 
 if (!$OLDFILE or
-    ! -e $OLDFILE or 
+    ! -e $OLDFILE or
     -z $OLDFILE) {
     print "\nError: Previous log file not specified, does not exist, or is empty.\n\n";
     &usage();
@@ -37,7 +37,7 @@ if (!$OLDFILE or
 }
 
 if (!$NEWFILE or
-    ! -e $NEWFILE or 
+    ! -e $NEWFILE or
     -z $NEWFILE) {
     print "\nError: Current log file not specified, does not exist, or is empty.\n\n";
     &usage();
@@ -111,7 +111,7 @@ sub getLeaksDelta {
     # else we had no record of this class before
     return ($newLeaks - $oldLeaks, $percentLeaks);
 }
-    
+
 ################################################################################
 
 sub getBloatDelta {
@@ -186,7 +186,7 @@ print "Current file:  $NEWFILE\n";
 print "Previous file: $OLDFILE\n";
 print "----------------------------------------------leaks------leaks%------bloat------bloat%\n";
 
-    if (! $newMap{"TOTAL"} or 
+    if (! $newMap{"TOTAL"} or
         ! $newMap{"TOTAL"}{bloat}) {
         # It's OK if leaked or leakPercent are 0 (in fact, that would be good).
         # If bloatPercent is zero, it is also OK, because we may have just had

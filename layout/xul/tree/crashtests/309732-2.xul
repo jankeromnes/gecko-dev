@@ -7,9 +7,9 @@
   <script>
   function boom()
   {
-    document.documentElement.appendChild(document.getElementById('TC'));   
+    document.documentElement.appendChild(document.getElementById('TC'));
     document.getElementById('TI').hidden = false;
-    
+
     document.documentElement.removeAttribute("class");
   }
   </script>

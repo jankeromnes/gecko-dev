@@ -13,11 +13,11 @@ description: >
 
 function FACTORY(){
    this.id = 0;
-      
+
    this.id = func();
-   
+
    eval("function func(){return \"id_string\";}");
-     
+
 }
 //////////////////////////////////////////////////////////////////////////////
 //CHECK#1

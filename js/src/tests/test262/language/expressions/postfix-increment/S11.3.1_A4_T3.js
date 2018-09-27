@@ -16,13 +16,13 @@ if (y !== 1) {
 
 //CHECK#2
 var x = "x";
-var y = x++; 
+var y = x++;
 if (isNaN(y) !== true) {
   $ERROR('#2: var x = "x"; var y = x++; y === Not-a-Number. Actual: ' + (y));
 }
 
 //CHECK#3
-var x = new String("-1"); 
+var x = new String("-1");
 var y = x++;
 if (y !== -1) {
   $ERROR('#3: var x = new String("-1"); var y = x++; y === -1. Actual: ' + (y));

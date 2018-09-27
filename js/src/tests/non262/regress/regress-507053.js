@@ -15,7 +15,7 @@ start_test();
 
 var f = function() {
   var p = 1;
-  
+
   function g() {
     for (var i = 0; i < 5; ++i) {
       p = p * 2;

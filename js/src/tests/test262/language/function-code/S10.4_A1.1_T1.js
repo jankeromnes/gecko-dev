@@ -11,13 +11,13 @@ var y;
 
 function f(){
   var x;
-  
+
   if(x === undefined) {
     x = 0;
   } else {
     x = 1;
   }
-  
+
   return x;
 }
 

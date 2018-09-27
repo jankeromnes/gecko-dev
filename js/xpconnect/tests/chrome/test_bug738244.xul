@@ -48,7 +48,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=533596
 
         win["1000"] = "foopy";
         ok(!("1000" in win), "Shouldn't be able to add indexed expandos to xray");
-        
+
         win["1000a"] = "foopy";
         ok("1000a" in win, "Should be able to add named expandos to xray");
 

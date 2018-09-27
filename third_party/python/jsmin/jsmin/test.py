@@ -11,11 +11,11 @@ class JsTests(unittest.TestCase):
             print(repr(thing1), repr(thing2))
             raise AssertionError
         return True
-    
+
     def assertMinified(self, js_input, expected, **kwargs):
         minified = jsmin.jsmin(js_input, **kwargs)
         assert minified == expected, "%r != %r" % (minified, expected)
-        
+
     def testQuoted(self):
         js = r'''
         Object.extend(String, {
@@ -52,20 +52,20 @@ class JsTests(unittest.TestCase):
         }
         //bye
         '''
-        expected = r""" 
+        expected = r"""
 if(Object.isFunction(Array.prototype.forEach))
 Array.prototype._each=Array.prototype.forEach;if(!Array.prototype.indexOf)Array.prototype.indexOf=function(item,i){ function(){ foo; location='http://foo.com;';}"""
         # print expected
         self.assertMinified(js, expected)
-    
+
     def testEmpty(self):
         self.assertMinified('', '')
         self.assertMinified(' ', '')
         self.assertMinified('\n', '')
         self.assertMinified('\r\n', '')
         self.assertMinified('\t', '')
-        
-        
+
+
     def testMultiComment(self):
         js = r"""
         function foo() {
@@ -82,15 +82,15 @@ Array.prototype._each=Array.prototype.forEach;if(!Array.prototype.indexOf)Array.
         expected = r"""function foo(){print('hey');}
 another thing;"""
         self.assertMinified(js, expected)
-    
+
     def testLeadingComment(self):
         js = r"""/* here is a comment at the top
-        
+
         it ends here */
         function foo() {
             alert('crud');
         }
-        
+
         """
         expected = r"""function foo(){alert('crud');}"""
         self.assertMinified(js, expected)
@@ -126,7 +126,7 @@ another thing;"""
         self.assertMinified(js, expected)
 
     def testRe(self):
-        js = r'''  
+        js = r'''
         var str = this.replace(/\\./g, '@').replace(/"[^"\\\n\r]*"/g, '');
         return (/^[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]*$/).test(str);
         });'''
@@ -150,11 +150,11 @@ another thing;"""
           hoverclass:   options.hoverclass
         }
 
-        // fix for gecko engine   
-        Element.cleanWhitespace(element); 
+        // fix for gecko engine
+        Element.cleanWhitespace(element);
         """
         expected = r"""var options_for_droppable={overlap:options.overlap,containment:options.containment,tree:options.tree,hoverclass:options.hoverclass,onHover:Sortable.onHover}
-var options_for_tree={onHover:Sortable.onEmptyHover,overlap:options.overlap,containment:options.containment,hoverclass:options.hoverclass} 
+var options_for_tree={onHover:Sortable.onEmptyHover,overlap:options.overlap,containment:options.containment,hoverclass:options.hoverclass}
 Element.cleanWhitespace(element);"""
         self.assertMinified(js, expected)
 
@@ -179,7 +179,7 @@ Element.cleanWhitespace(element);"""
         """
         expected = r"""inspect:function(useDoubleQuotes){var escapedString=this.gsub(/[\x00-\x1f\\]/,function(match){var character=String.specialChar[match[0]];return character?character:'\\u00'+match[0].charCodeAt().toPaddedString(2,16);});if(useDoubleQuotes)return'"'+escapedString.replace(/"/g,'\\"')+'"';return"'"+escapedString.replace(/'/g,'\\\'')+"'";},toJSON:function(){return this.inspect(true);},unfilterJSON:function(filter){return this.sub(filter||Prototype.JSONFilter,'#{1}');},"""
         self.assertMinified(js, expected)
-    
+
     def testLiteralRe(self):
         js = r"""
         myString.replace(/\\/g, '/');
@@ -187,13 +187,13 @@ Element.cleanWhitespace(element);"""
         """
         expected = r"""myString.replace(/\\/g,'/');console.log("hi");"""
         self.assertMinified(js, expected)
-        
-        js = r''' return /^data:image\//i.test(url) || 
+
+        js = r''' return /^data:image\//i.test(url) ||
         /^(https?|ftp|file|about|chrome|resource):/.test(url);
         '''
         expected = r'''return /^data:image\//i.test(url)||/^(https?|ftp|file|about|chrome|resource):/.test(url);'''
         self.assertMinified(js, expected)
-        
+
     def testNoBracesWithComment(self):
         js = r"""
         onSuccess: function(transport) {
@@ -206,48 +206,48 @@ Element.cleanWhitespace(element);"""
           onFailure: this.onFailure
         });
         """
-        expected = r"""onSuccess:function(transport){var js=transport.responseText.strip();if(!/^\[.*\]$/.test(js)) 
+        expected = r"""onSuccess:function(transport){var js=transport.responseText.strip();if(!/^\[.*\]$/.test(js))
 throw'Server returned an invalid collection representation.';this._collection=eval(js);this.checkForExternalText();}.bind(this),onFailure:this.onFailure});"""
         self.assertMinified(js, expected)
-    
+
     def testSpaceInRe(self):
         js = r"""
         num = num.replace(/ /g,'');
         """
         self.assertMinified(js, "num=num.replace(/ /g,'');")
-    
+
     def testEmptyString(self):
         js = r'''
         function foo('') {
-        
+
         }
         '''
         self.assertMinified(js, "function foo(''){}")
-    
+
     def testDoubleSpace(self):
         js = r'''
 var  foo    =  "hey";
         '''
         self.assertMinified(js, 'var foo="hey";')
-    
+
     def testLeadingRegex(self):
         js = r'/[d]+/g    '
         self.assertMinified(js, js.strip())
-    
+
     def testLeadingString(self):
         js = r"'a string in the middle of nowhere'; // and a comment"
         self.assertMinified(js, "'a string in the middle of nowhere';")
-    
+
     def testSingleCommentEnd(self):
         js = r'// a comment\n'
         self.assertMinified(js, '')
-    
+
     def testInputStream(self):
         try:
             from StringIO import StringIO
         except ImportError:
             from io import StringIO
-            
+
         ins = StringIO(r'''
             function foo('') {
 
@@ -258,7 +258,7 @@ var  foo    =  "hey";
         m.minify(ins, outs)
         output = outs.getvalue()
         assert output == "function foo(''){}"
-    
+
     def testUnicode(self):
         instr = u'\u4000 //foo'
         expected = u'\u4000'
@@ -267,9 +267,9 @@ var  foo    =  "hey";
 
     def testCommentBeforeEOF(self):
         self.assertMinified("//test\r\n", "")
-    
+
     def testCommentInObj(self):
-        self.assertMinified("""{ 
+        self.assertMinified("""{
             a: 1,//comment
             }""", "{a:1,}")
 
@@ -283,7 +283,7 @@ var  foo    =  "hey";
 
     def testImplicitSemicolon2(self):
         self.assertMinified("return//comment...\r\na", "return\na")
-    
+
     def testSingleComment2(self):
         self.assertMinified('x.replace(/\//, "_")// slash to underscore',
                 'x.replace(/\//,"_")')
@@ -295,7 +295,7 @@ var  foo    =  "hey";
         '''
         expected = '''{a:n/2,}'''
         self.assertMinified(original, expected)
-    
+
     def testReturn(self):
         original = '''
         return foo;//comment

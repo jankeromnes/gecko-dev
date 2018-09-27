@@ -1,8 +1,8 @@
-This is a synthetic LISTing based on comments in mirror.pl and a 
+This is a synthetic LISTing based on comments in mirror.pl and a
 screenshot I saw somewhere. Either way, its 'synthetic' because I
-couldn't find an FTP server that LISTed like this. Note that (as 
-with other VM/CMS LISTings) filesize cannot be determined from 
-the listing and (AFAIK) files/dirs not on the 'A' minidisk (see 
+couldn't find an FTP server that LISTed like this. Note that (as
+with other VM/CMS LISTings) filesize cannot be determined from
+the listing and (AFAIK) files/dirs not on the 'A' minidisk (see
 'Fm' field) are not RETRievable/CHDIR'able without magic.
 
 Filename FileType  Fm Format Lrecl  Records Blocks Date      Time

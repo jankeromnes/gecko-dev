@@ -9,7 +9,7 @@ description: Checking Expression and Variable statements for x += y
 
 //CHECK#1
 var x = 1;
-x += 1; 
+x += 1;
 if (x !== 2) {
   $ERROR('#1: var x = 1; x += 1; x === 2. Actual: ' + (x));
 }

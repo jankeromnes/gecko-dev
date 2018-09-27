@@ -34,5 +34,5 @@ printStatus(badvalue);
 
 expect = goodvalue;
 actual = badvalue;
- 
+
 reportCompare(expect, actual, summary);

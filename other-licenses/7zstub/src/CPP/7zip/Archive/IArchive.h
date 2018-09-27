@@ -69,7 +69,7 @@ namespace NArchive
         kSkip
       };
     }
-  
+
     namespace NOperationResult
     {
       enum
@@ -98,7 +98,7 @@ namespace NArchive
       kOutArcIndex
     };
   }
-  
+
   namespace NUpdate
   {
     namespace NOperationResult
@@ -139,7 +139,7 @@ IArchiveExtractCallback::GetStream()
     {
       then the callee can not real stream: (*inStream == NULL)
     }
-  
+
   Out:
       (*inStream == NULL) - for directories
       (*inStream == NULL) - if link (hard link or symbolic link) was created
@@ -327,7 +327,7 @@ ARCHIVE_INTERFACE(IArchiveGetRawProps, 0x70)
 #define INTERFACE_IArchiveGetRootProps(x) \
   STDMETHOD(GetRootProp)(PROPID propID, PROPVARIANT *value) x; \
   STDMETHOD(GetRootRawProp)(PROPID propID, const void **data, UInt32 *dataSize, UInt32 *propType) x; \
- 
+
 ARCHIVE_INTERFACE(IArchiveGetRootProps, 0x71)
 {
   INTERFACE_IArchiveGetRootProps(PURE)
@@ -344,7 +344,7 @@ ARCHIVE_INTERFACE(IArchiveOpenSeq, 0x61)
     S_FALSE - is not archive
     ? - DATA error
 */
-    
+
 /*
 const UInt32 kOpenFlags_RealPhySize = 1 << 0;
 const UInt32 kOpenFlags_NoSeek = 1 << 1;
@@ -357,7 +357,7 @@ Flags:
      - if phySize is not available, it doesn't try to make full parse to get phySize
    kOpenFlags_NoSeek -  ArcOpen2 function doesn't use IInStream interface, even if it's available
    kOpenFlags_RealPhySize - the handler will try to get PhySize, even if it requires full decompression for file
-   
+
   if handler is not allowed to use IInStream and the flag kOpenFlags_RealPhySize is not specified,
   the handler can return S_OK, but it doesn't check even Signature.
   So next Extract can be called for that sequential stream.
@@ -463,7 +463,7 @@ UpdateItems()
   outStream: output stream. (the handler) MUST support the case when
     Seek position in outStream is not ZERO.
     but the caller calls with empty outStream and seek position is ZERO??
- 
+
   archives with stub:
 
   If archive is open and the handler and (Offset > 0), then the handler

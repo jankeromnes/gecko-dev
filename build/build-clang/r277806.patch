@@ -3,7 +3,7 @@ Author: John Brawn <john.brawn@arm.com>
 Date:   Fri Aug 5 11:01:08 2016 +0000
 
     Reapply r276973 "Adjust Registry interface to not require plugins to export a registry"
-    
+
     This differs from the previous version by being more careful about template
     instantiation/specialization in order to prevent errors when building with
     clang -Werror. Specifically:
@@ -14,24 +14,24 @@ Date:   Fri Aug 5 11:01:08 2016 +0000
        instead provide a template definition then do explicit instantiation. No
        compiler I've tried has problems with doing it the other way, but strictly
        speaking it's not permitted by the C++ standard so better safe than sorry.
-    
+
     Original commit message:
-    
+
     Currently the Registry class contains the vestiges of a previous attempt to
     allow plugins to be used on Windows without using BUILD_SHARED_LIBS, where a
     plugin would have its own copy of a registry and export it to be imported by
     the tool that's loading the plugin. This only works if the plugin is entirely
     self-contained with the only interface between the plugin and tool being the
     registry, and in particular this conflicts with how IR pass plugins work.
-    
+
     This patch changes things so that instead the add_node function of the registry
     is exported by the tool and then imported by the plugin, which solves this
     problem and also means that instead of every plugin having to export every
     registry they use instead LLVM only has to export the add_node functions. This
     allows plugins that use a registry to work on Windows if
     LLVM_EXPORT_SYMBOLS_FOR_PLUGINS is used.
-    
-    
+
+
     git-svn-id: https://llvm.org/svn/llvm-project/llvm/trunk@277806 91177308-0d34-0410-b5e6-96231b3b80d8
 
 diff --git a/llvm/include/llvm/Support/Registry.h b/llvm/include/llvm/Support/Registry.h
@@ -44,12 +44,12 @@ index 27f025fcd08..9557f56093b 100644
    public:
 +    typedef T type;
      typedef SimpleRegistryEntry<T> entry;
- 
+
      class node;
 @@ -69,13 +70,14 @@ namespace llvm {
        node(const entry &V) : Next(nullptr), Val(V) {}
      };
- 
+
 -    static void add_node(node *N) {
 -      if (Tail)
 -        Tail->Next = N;
@@ -65,19 +65,19 @@ index 27f025fcd08..9557f56093b 100644
 +    /// to avoid it being instantiated in the plugin and is instead defined in
 +    /// the executable (see LLVM_INSTANTIATE_REGISTRY below).
 +    static void add_node(node *N);
- 
+
      /// Iterators for registry entries.
      ///
 @@ -92,7 +94,9 @@ namespace llvm {
        const entry *operator->() const { return &Cur->Val; }
      };
- 
+
 -    static iterator begin() { return iterator(Head); }
 +    // begin is not defined here in order to avoid usage of an undefined static
 +    // data member, instead it's instantiated by LLVM_INSTANTIATE_REGISTRY.
 +    static iterator begin();
      static iterator end()   { return iterator(nullptr); }
- 
+
      static iterator_range<iterator> entries() {
 @@ -120,61 +124,37 @@ namespace llvm {
          add_node(&Node);
@@ -116,7 +116,7 @@ index 27f025fcd08..9557f56093b 100644
 -    }
    };
 -
--  
+-
 -  // Since these are defined in a header file, plugins must be sure to export
 -  // these symbols.
 -  template <typename T>
@@ -125,7 +125,7 @@ index 27f025fcd08..9557f56093b 100644
 -  template <typename T>
 -  typename Registry<T>::node *Registry<T>::Tail;
  } // end namespace llvm
- 
+
 -#ifdef LLVM_ON_WIN32
 -#define LLVM_EXPORT_REGISTRY(REGISTRY_CLASS)                                   \
 -  extern "C" {                                                                 \
@@ -167,7 +167,7 @@ index 27f025fcd08..9557f56093b 100644
 -#define LLVM_EXPORT_REGISTRY(REGISTRY_CLASS)
 -#define LLVM_IMPORT_REGISTRY(REGISTRY_CLASS, DL)
 -#endif
- 
+
  #endif // LLVM_SUPPORT_REGISTRY_H
 diff --git a/llvm/lib/CodeGen/GCMetadataPrinter.cpp b/llvm/lib/CodeGen/GCMetadataPrinter.cpp
 index bb8cfa1cc80..d183c7f2980 100644
@@ -176,20 +176,20 @@ index bb8cfa1cc80..d183c7f2980 100644
 @@ -14,6 +14,8 @@
  #include "llvm/CodeGen/GCMetadataPrinter.h"
  using namespace llvm;
- 
+
 +LLVM_INSTANTIATE_REGISTRY(GCMetadataPrinterRegistry)
 +
  GCMetadataPrinter::GCMetadataPrinter() {}
- 
+
  GCMetadataPrinter::~GCMetadataPrinter() {}
 diff --git a/llvm/lib/CodeGen/GCStrategy.cpp b/llvm/lib/CodeGen/GCStrategy.cpp
 index 554d326942e..31ab86fdf27 100644
 --- a/llvm/lib/CodeGen/GCStrategy.cpp
 +++ b/llvm/lib/CodeGen/GCStrategy.cpp
 @@ -16,6 +16,8 @@
- 
+
  using namespace llvm;
- 
+
 +LLVM_INSTANTIATE_REGISTRY(GCRegistry)
 +
  GCStrategy::GCStrategy()
@@ -201,7 +201,7 @@ Author: John Brawn <john.brawn@arm.com>
 Date:   Fri Aug 5 11:01:08 2016 +0000
 
     Reapply r276973 "Adjust Registry interface to not require plugins to export a registry"
-    
+
     This differs from the previous version by being more careful about template
     instantiation/specialization in order to prevent errors when building with
     clang -Werror. Specifically:
@@ -212,24 +212,24 @@ Date:   Fri Aug 5 11:01:08 2016 +0000
        instead provide a template definition then do explicit instantiation. No
        compiler I've tried has problems with doing it the other way, but strictly
        speaking it's not permitted by the C++ standard so better safe than sorry.
-    
+
     Original commit message:
-    
+
     Currently the Registry class contains the vestiges of a previous attempt to
     allow plugins to be used on Windows without using BUILD_SHARED_LIBS, where a
     plugin would have its own copy of a registry and export it to be imported by
     the tool that's loading the plugin. This only works if the plugin is entirely
     self-contained with the only interface between the plugin and tool being the
     registry, and in particular this conflicts with how IR pass plugins work.
-    
+
     This patch changes things so that instead the add_node function of the registry
     is exported by the tool and then imported by the plugin, which solves this
     problem and also means that instead of every plugin having to export every
     registry they use instead LLVM only has to export the add_node functions. This
     allows plugins that use a registry to work on Windows if
     LLVM_EXPORT_SYMBOLS_FOR_PLUGINS is used.
-    
-    
+
+
     git-svn-id: https://llvm.org/svn/llvm-project/cfe/trunk@277806 91177308-0d34-0410-b5e6-96231b3b80d8
 
 diff --git a/clang/examples/AnnotateFunctions/CMakeLists.txt b/clang/examples/AnnotateFunctions/CMakeLists.txt
@@ -239,7 +239,7 @@ index cf564d527d..5684abf238 100644
 @@ -1,4 +1,4 @@
 -add_llvm_loadable_module(AnnotateFunctions AnnotateFunctions.cpp)
 +add_llvm_loadable_module(AnnotateFunctions AnnotateFunctions.cpp PLUGIN_TOOL clang)
- 
+
  if(LLVM_ENABLE_PLUGINS AND (WIN32 OR CYGWIN))
    target_link_libraries(AnnotateFunctions PRIVATE
 diff --git a/clang/examples/PrintFunctionNames/CMakeLists.txt b/clang/examples/PrintFunctionNames/CMakeLists.txt
@@ -249,10 +249,10 @@ index 5a00d5036f..f5f818866c 100644
 @@ -9,7 +9,7 @@ if( NOT MSVC ) # MSVC mangles symbols differently, and
    endif()
  endif()
- 
+
 -add_llvm_loadable_module(PrintFunctionNames PrintFunctionNames.cpp)
 +add_llvm_loadable_module(PrintFunctionNames PrintFunctionNames.cpp PLUGIN_TOOL clang)
- 
+
  if(LLVM_ENABLE_PLUGINS AND (WIN32 OR CYGWIN))
    target_link_libraries(PrintFunctionNames PRIVATE
 diff --git a/clang/include/clang/Frontend/FrontendPluginRegistry.h b/clang/include/clang/Frontend/FrontendPluginRegistry.h
@@ -262,21 +262,21 @@ index ecab630c12..9d7ee08d95 100644
 @@ -13,9 +13,6 @@
  #include "clang/Frontend/FrontendAction.h"
  #include "llvm/Support/Registry.h"
- 
+
 -// Instantiated in FrontendAction.cpp.
 -extern template class llvm::Registry<clang::PluginASTAction>;
 -
  namespace clang {
- 
+
  /// The frontend plugin registry.
 diff --git a/clang/include/clang/Lex/Preprocessor.h b/clang/include/clang/Lex/Preprocessor.h
 index c9b712504e..000df6647f 100644
 --- a/clang/include/clang/Lex/Preprocessor.h
 +++ b/clang/include/clang/Lex/Preprocessor.h
 @@ -1972,6 +1972,4 @@ typedef llvm::Registry<PragmaHandler> PragmaHandlerRegistry;
- 
+
  }  // end namespace clang
- 
+
 -extern template class llvm::Registry<clang::PragmaHandler>;
 -
  #endif
@@ -287,12 +287,12 @@ index d2c2a80394..2945b8925f 100644
 @@ -33,7 +33,7 @@
  #include <system_error>
  using namespace clang;
- 
+
 -template class llvm::Registry<clang::PluginASTAction>;
 +LLVM_INSTANTIATE_REGISTRY(FrontendPluginRegistry)
- 
+
  namespace {
- 
+
 diff --git a/clang/lib/Lex/Preprocessor.cpp b/clang/lib/Lex/Preprocessor.cpp
 index 8832c7f80c..f0d6872546 100644
 --- a/clang/lib/Lex/Preprocessor.cpp
@@ -300,10 +300,10 @@ index 8832c7f80c..f0d6872546 100644
 @@ -54,7 +54,7 @@
  #include <utility>
  using namespace clang;
- 
+
 -template class llvm::Registry<clang::PragmaHandler>;
 +LLVM_INSTANTIATE_REGISTRY(PragmaHandlerRegistry)
- 
+
  //===----------------------------------------------------------------------===//
  ExternalPreprocessorSource::~ExternalPreprocessorSource() { }
 diff --git a/clang/lib/Tooling/CompilationDatabase.cpp b/clang/lib/Tooling/CompilationDatabase.cpp
@@ -313,9 +313,9 @@ index 8fc4a1fe5b..6f95bf01f6 100644
 @@ -32,6 +32,8 @@
  using namespace clang;
  using namespace tooling;
- 
+
 +LLVM_INSTANTIATE_REGISTRY(CompilationDatabasePluginRegistry)
 +
  CompilationDatabase::~CompilationDatabase() {}
- 
+
  std::unique_ptr<CompilationDatabase>

@@ -68,12 +68,12 @@ nsWebHandlerApp.prototype = {
     // encode the URI to be handled
     var escapedUriSpecToHandle = encodeURIComponent(aURI.spec);
 
-    // insert the encoded URI and create the object version 
+    // insert the encoded URI and create the object version
     var uriSpecToSend = this.uriTemplate.replace("%s", escapedUriSpecToHandle);
     var ioService = Cc["@mozilla.org/network/io-service;1"].
                     getService(Ci.nsIIOService);
     var uriToSend = ioService.newURI(uriSpecToSend);
-    
+
     // if we have a window context, use the URI loader to load there
     if (aWindowContext) {
       try {
@@ -103,12 +103,12 @@ nsWebHandlerApp.prototype = {
       // XXX ideally, whether to pass the IS_CONTENT_PREFERRED flag should be
       // passed in from above.  Practically, the flag is probably a reasonable
       // default since browsers don't care much, and link click is likely to be
-      // the more interesting case for non-browser apps.  See 
+      // the more interesting case for non-browser apps.  See
       // <https://bugzilla.mozilla.org/show_bug.cgi?id=392957#c9> for details.
       uriLoader.openURI(channel, Ci.nsIURILoader.IS_CONTENT_PREFERRED,
                         aWindowContext);
       return;
-    } 
+    }
 
     // since we don't have a window context, hand it off to a browser
     var windowMediator = Cc["@mozilla.org/appshell/window-mediator;1"].
@@ -129,8 +129,8 @@ nsWebHandlerApp.prototype = {
     //    should be opened.  It's not clear whether this situation will really
     //    ever occur in real life.  If it does, the only API that I can find
     //    that seems reasonably likely to work for most embedders is the
-    //    command line handler.  
-    // c) something else went wrong 
+    //    command line handler.
+    // c) something else went wrong
     //
     // it's not clear how one would differentiate between the three cases
     // above, so for now we don't catch the exception
@@ -141,7 +141,7 @@ nsWebHandlerApp.prototype = {
                           Ci.nsIBrowserDOMWindow.OPEN_DEFAULTWINDOW,
                           Ci.nsIBrowserDOMWindow.OPEN_NEW,
                           Services.scriptSecurityManager.getSystemPrincipal());
-      
+
     return;
   },
 

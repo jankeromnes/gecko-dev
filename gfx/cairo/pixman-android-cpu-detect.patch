@@ -5,7 +5,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-cpu.c b/gfx/cairo/libpixman/src/pixm
  	arm_tests_initialized = TRUE;
  	return;
      }
- 
+
      fread(buf, sizeof(char), 1024, f);
      fclose(f);
      pos = strstr(buf, ver_token);
@@ -25,5 +25,5 @@ diff --git a/gfx/cairo/libpixman/src/pixman-cpu.c b/gfx/cairo/libpixman/src/pixm
      arm_has_iwmmxt = strstr(buf, "iwmmxt") != NULL;
      arm_tests_initialized = TRUE;
  }
- 
+
  #else

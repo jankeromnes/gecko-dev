@@ -2,7 +2,7 @@
 // This code is governed by the license found in the LICENSE file.
 
 /*---
-description: Property type and descriptor. 
+description: Property type and descriptor.
 includes: [propertyHelper.js]
 ---*/
 

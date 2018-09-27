@@ -424,10 +424,10 @@ function runTest() {
   checkQuadIsRect("d", {toStr:"dContainer"},
                   12 + 16 + 20, 9 + 13 + 17, dW, dH);
 
-  // Test BoxQuadOptions.relativeTo relative to this document          
+  // Test BoxQuadOptions.relativeTo relative to this document
   checkQuadIsRect("d", {toStr:"document"},
                   dX, dY, dW, dH);
-  // Test BoxQuadOptions.relativeTo relative to a non-ancestor.             
+  // Test BoxQuadOptions.relativeTo relative to a non-ancestor.
   var dUnrelatedX = dUnrelated.getBoundingClientRect().left;
   var dUnrelatedY = dUnrelated.getBoundingClientRect().top;
   checkQuadIsRect("d", {toStr:"dUnrelated"},

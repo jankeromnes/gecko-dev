@@ -1,55 +1,55 @@
 /*************************************************************************
  *
  *  File Name (AccessibleTable2.idl)
- * 
- *  IAccessible2 IDL Specification 
- * 
- *  Copyright (c) 2007, 2012 Linux Foundation 
- *  Copyright (c) 2006 IBM Corporation 
- *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
- *  All rights reserved. 
- *   
- *   
- *  Redistribution and use in source and binary forms, with or without 
- *  modification, are permitted provided that the following conditions 
- *  are met: 
- *   
- *   1. Redistributions of source code must retain the above copyright 
- *      notice, this list of conditions and the following disclaimer. 
- *   
- *   2. Redistributions in binary form must reproduce the above 
- *      copyright notice, this list of conditions and the following 
- *      disclaimer in the documentation and/or other materials 
- *      provided with the distribution. 
  *
- *   3. Neither the name of the Linux Foundation nor the names of its 
- *      contributors may be used to endorse or promote products 
- *      derived from this software without specific prior written 
- *      permission. 
- *   
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
- *  CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
- *  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
- *  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
- *  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
- *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
- *  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
- *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
- *  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
- *  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- *  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
- *   
- *  This BSD License conforms to the Open Source Initiative "Simplified 
- *  BSD License" as published at: 
- *  http://www.opensource.org/licenses/bsd-license.php 
- *   
- *  IAccessible2 is a trademark of the Linux Foundation. The IAccessible2 
- *  mark may be used in accordance with the Linux Foundation Trademark 
- *  Policy to indicate compliance with the IAccessible2 specification. 
- * 
- ************************************************************************/ 
+ *  IAccessible2 IDL Specification
+ *
+ *  Copyright (c) 2007, 2012 Linux Foundation
+ *  Copyright (c) 2006 IBM Corporation
+ *  Copyright (c) 2000, 2006 Sun Microsystems, Inc.
+ *  All rights reserved.
+ *
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *
+ *   1. Redistributions of source code must retain the above copyright
+ *      notice, this list of conditions and the following disclaimer.
+ *
+ *   2. Redistributions in binary form must reproduce the above
+ *      copyright notice, this list of conditions and the following
+ *      disclaimer in the documentation and/or other materials
+ *      provided with the distribution.
+ *
+ *   3. Neither the name of the Linux Foundation nor the names of its
+ *      contributors may be used to endorse or promote products
+ *      derived from this software without specific prior written
+ *      permission.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+ *  CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ *  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ *  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ *  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ *  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ *  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ *  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ *  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *  This BSD License conforms to the Open Source Initiative "Simplified
+ *  BSD License" as published at:
+ *  http://www.opensource.org/licenses/bsd-license.php
+ *
+ *  IAccessible2 is a trademark of the Linux Foundation. The IAccessible2
+ *  mark may be used in accordance with the Linux Foundation Trademark
+ *  Policy to indicate compliance with the IAccessible2 specification.
+ *
+ ************************************************************************/
 
 import "objidl.idl";
 import "oaidl.idl";
@@ -68,30 +68,30 @@ import "IA2CommonTypes.idl";
 interface IAccessibleTable2 : IUnknown
 {
 
-  /** @brief Returns the accessible object at the specified row and column in 
+  /** @brief Returns the accessible object at the specified row and column in
     the table.  This object could be an IAccessible or an IAccessible2.
    @param [in] row
     The 0 based row index for which to retrieve the cell.
    @param [in] column
     The 0 based column index for which to retrieve the cell.
    @param [out] cell
-    If both row and column index are valid then the corresponding accessible 
-    object is returned that represents the requested cell regardless of whether 
+    If both row and column index are valid then the corresponding accessible
+    object is returned that represents the requested cell regardless of whether
     the cell is currently visible (on the screen).
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT cellAt
     (
-     [in] long row, 
+     [in] long row,
      [in] long column,
      [out, retval] IUnknown **cell
     );
 
-  /** @brief Returns the caption for the table.  The returned object could be 
+  /** @brief Returns the caption for the table.  The returned object could be
     an IAccessible or an IAccessible2.
    @param [out] accessible
-    If the table has a caption then a reference to it is returned, else a NULL 
+    If the table has a caption then a reference to it is returned, else a NULL
     pointer is returned.
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is NULL
@@ -101,15 +101,15 @@ interface IAccessibleTable2 : IUnknown
     (
      [out, retval] IUnknown **accessible
     );
-	  
+
   /** @brief Returns the description text of the specified column in the table.
    @param [in] column
     The 0 based index of the column for which to retrieve the description.
    @param [out] description
-    Returns the description text of the specified column in the table if such a 
+    Returns the description text of the specified column in the table if such a
     description exists.  Otherwise a NULL pointer is returned.
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, [out] value is NULL 
+   @retval S_FALSE if there is nothing to return, [out] value is NULL
    @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT columnDescription
@@ -126,7 +126,7 @@ interface IAccessibleTable2 : IUnknown
   */
   [propget] HRESULT nColumns
     (
-     [out, retval] long *columnCount 
+     [out, retval] long *columnCount
     );
 
   /** @brief Returns the total number of rows in table
@@ -136,7 +136,7 @@ interface IAccessibleTable2 : IUnknown
   */
   [propget] HRESULT nRows
     (
-     [out, retval] long *rowCount 
+     [out, retval] long *rowCount
     );
 
   /** @brief Returns the total number of selected cells
@@ -156,7 +156,7 @@ interface IAccessibleTable2 : IUnknown
   */
   [propget] HRESULT nSelectedColumns
     (
-     [out, retval] long *columnCount 
+     [out, retval] long *columnCount
     );
 
   /** @brief Returns the total number of selected rows
@@ -166,22 +166,22 @@ interface IAccessibleTable2 : IUnknown
   */
   [propget] HRESULT nSelectedRows
     (
-     [out, retval] long *rowCount 
+     [out, retval] long *rowCount
     );
 
   /** @brief Returns the description text of the specified row in the table.
    @param [in] row
     The 0 based index of the row for which to retrieve the description.
    @param [out] description
-    Returns the description text of the specified row in the table if such a 
+    Returns the description text of the specified row in the table if such a
     description exists.  Otherwise a NULL pointer is returned.
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, [out] value is NULL 
+   @retval S_FALSE if there is nothing to return, [out] value is NULL
    @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT rowDescription
     (
-     [in] long row, 
+     [in] long row,
      [out, retval] BSTR *description
     );
 
@@ -193,7 +193,7 @@ interface IAccessibleTable2 : IUnknown
    @param [out] nSelectedCells
     The number of accessibles returned; the size of the returned array.
    @retval S_OK
-   @retval S_FALSE if there are none, [out] values are NULL and 0 respectively 
+   @retval S_FALSE if there are none, [out] values are NULL and 0 respectively
   */
   [propget] HRESULT selectedCells
     (
@@ -209,7 +209,7 @@ interface IAccessibleTable2 : IUnknown
    @param [out] nColumns
     The number of column indexes returned; the size of the returned array.
    @retval S_OK
-   @retval S_FALSE if there are none, [out] values are NULL and 0 respectively 
+   @retval S_FALSE if there are none, [out] values are NULL and 0 respectively
   */
   [propget] HRESULT selectedColumns
     (
@@ -225,19 +225,19 @@ interface IAccessibleTable2 : IUnknown
    @param [out] nRows
     The number of row indexes returned; the size of the returned array.
    @retval S_OK
-   @retval S_FALSE if there are none, [out] values are NULL and 0 respectively 
+   @retval S_FALSE if there are none, [out] values are NULL and 0 respectively
   */
   [propget] HRESULT selectedRows
     (
-     [out, size_is(,*nRows)] long **selectedRows, 
-     [out, retval] long *nRows 
+     [out, size_is(,*nRows)] long **selectedRows,
+     [out, retval] long *nRows
     );
 
-  /** @brief Returns the summary description of the table.  The returned object could be 
+  /** @brief Returns the summary description of the table.  The returned object could be
     an IAccessible or an IAccessible2.
    @param [out] accessible
-    Returns a reference to an implementation dependent accessible object 
-    representing the table's summary or a NULL pointer if the table 
+    Returns a reference to an implementation dependent accessible object
+    representing the table's summary or a NULL pointer if the table
     does not support a summary.
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is NULL
@@ -245,10 +245,10 @@ interface IAccessibleTable2 : IUnknown
   */
   [propget] HRESULT summary
     (
-     [out, retval] IUnknown **accessible 
+     [out, retval] IUnknown **accessible
     );
 
-  /** @brief Returns a boolean value indicating whether the specified column is 
+  /** @brief Returns a boolean value indicating whether the specified column is
     completely selected.
    @param [in] column
     0 based index of the column for which to determine whether it is selected.
@@ -263,7 +263,7 @@ interface IAccessibleTable2 : IUnknown
      [out, retval] boolean *isSelected
     );
 
-  /** @brief Returns a boolean value indicating whether the specified row is completely 
+  /** @brief Returns a boolean value indicating whether the specified row is completely
     selected.
    @param [in] row
     0 based index of the row for which to determine whether it is selected.
@@ -281,11 +281,11 @@ interface IAccessibleTable2 : IUnknown
   /** @brief Selects a row and unselects all previously selected rows.
 
    The behavior should mimic that of the application, but for those applications
-    which do not have a means in the GUI to select a full row of cells the behavior 
+    which do not have a means in the GUI to select a full row of cells the behavior
     should be as follows:  First any selected rows in the table are unselected.  Then
     the entire row of cells for the specified row is selected.  If any of the
     cells in the selected row span additional rows, the cells in those rows
-    are also selected. 
+    are also selected.
    @param [in] row
     0 based index of the row to be selected.
    @retval S_OK
@@ -293,17 +293,17 @@ interface IAccessibleTable2 : IUnknown
   */
   HRESULT selectRow
     (
-     [in] long row 
+     [in] long row
     );
 
   /** @brief Selects a column and unselects all previously selected columns.
 
    The behavior should mimic that of the application, but for those applications
-    which do not have a means in the GUI to select a full column of cells the behavior 
+    which do not have a means in the GUI to select a full column of cells the behavior
     should be as follows:  First any selected columns in the table are unselected.  Then
     the entire column of cells for the specified column is selected.  If any of the
     cells in the selected column span additional columns, the cells in those columns
-    are also selected. 
+    are also selected.
    @param [in] column
     0 based index of the column to be selected.
    @retval S_OK
@@ -320,7 +320,7 @@ interface IAccessibleTable2 : IUnknown
     which do not have a means in the GUI to unselect a full row of cells the
     behavior should be as follows:  The entire row of cells for the specified
     row is unselected.  If any of the cells in the selected row span additional
-    rows, the cells in those rows are also unselected. 
+    rows, the cells in those rows are also unselected.
    @param [in] row
     0 based index of the row to be unselected.
    @retval S_OK
@@ -337,7 +337,7 @@ interface IAccessibleTable2 : IUnknown
     which do not have a means in the GUI to unselect a full column of cells the
     behavior should be as follows:  The entire column of cells for the specified
     column is unselected.  If any of the cells in the selected column span additional
-    columns, the cells in those columns are also unselected. 
+    columns, the cells in those columns are also unselected.
    @param [in] column
     0 based index of the column to be unselected.
    @retval S_OK
@@ -349,25 +349,25 @@ interface IAccessibleTable2 : IUnknown
     );
 
   /** @brief Returns the type and extents describing how a table changed.
-  
+
    Provided for use by the IA2_EVENT_TABLE_MODEL_CHANGED event handler.
 
-   This data is only guaranteed to be valid while the thread notifying the event 
-   continues. Once the handler has returned, the validity of the data depends on 
-   how the server manages the life cycle of its objects. Also, note that the server 
-   may have different life cycle management strategies for controls depending on 
-   whether or not a control manages its children. Lists, trees, and tables can have 
-   a large number of children and thus it's possible that the child objects for those 
-   controls would only be created as needed. Servers should document their life cycle 
-   strategy as this will be of interest to assistive technology or script engines 
-   accessing data out of process or from other threads. Servers only need to save the 
-   most recent row and column values associated with the change and a scope of the 
+   This data is only guaranteed to be valid while the thread notifying the event
+   continues. Once the handler has returned, the validity of the data depends on
+   how the server manages the life cycle of its objects. Also, note that the server
+   may have different life cycle management strategies for controls depending on
+   whether or not a control manages its children. Lists, trees, and tables can have
+   a large number of children and thus it's possible that the child objects for those
+   controls would only be created as needed. Servers should document their life cycle
+   strategy as this will be of interest to assistive technology or script engines
+   accessing data out of process or from other threads. Servers only need to save the
+   most recent row and column values associated with the change and a scope of the
    entire application is adequate.
 
    @param [out] modelChange
     A struct of (type(insert, delete, update), firstRow, lastRow, firstColumn, lastColumn).
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, [out] value is NULL 
+   @retval S_FALSE if there is nothing to return, [out] value is NULL
   */
   [propget] HRESULT modelChange
     (

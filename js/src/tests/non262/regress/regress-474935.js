@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
   var a = ["", 0, 0, 0, 0, 0, "", "", 0, "", 0, ""];
   var i = 0;

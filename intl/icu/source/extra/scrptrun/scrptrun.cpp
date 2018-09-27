@@ -119,7 +119,7 @@ UBool ScriptRun::next()
     if (scriptEnd >= charLimit) {
         return false;
     }
-    
+
     scriptCode = USCRIPT_COMMON;
 
     for (scriptStart = scriptEnd; scriptEnd < charLimit; scriptEnd += 1) {

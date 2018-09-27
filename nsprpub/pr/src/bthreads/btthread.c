@@ -73,7 +73,7 @@ _PR_InitThreads (PRThreadType type, PRThreadPriority priority,
     /*
     ** Create and initialize NSPR structure for our primordial thread.
     */
-    
+
     primordialThread = PR_NEWZAP(PRThread);
     if( NULL == primordialThread )
     {
@@ -88,9 +88,9 @@ _PR_InitThreads (PRThreadType type, PRThreadPriority priority,
     */
 
     beThreadPriority = _bt_MapNSPRToNativePriority( priority );
-    
+
     set_thread_priority( find_thread( NULL ), beThreadPriority );
-    
+
     primordialThread->priority = priority;
 
 
@@ -104,7 +104,7 @@ _PR_InitThreads (PRThreadType type, PRThreadPriority priority,
     ** native TLS, as opposed to NSPR TPD, will make PR_GetCurrentThread()
     ** somewhat faster, and will leave one more TPD slot for our client)
     */
-	
+
 	tls_prThreadSlot = tls_allocate();
 
     /*
@@ -113,7 +113,7 @@ _PR_InitThreads (PRThreadType type, PRThreadPriority priority,
     */
 
 	tls_set(tls_prThreadSlot, primordialThread);
-    
+
 	/* allocate lock for bt_book */
     bt_book.ml = PR_NewLock();
     if( NULL == bt_book.ml )
@@ -342,7 +342,7 @@ PR_IMPLEMENT(PRStatus)
 
 	/* synchronize access to the thread's joinSem */
 	PR_Lock(joinSemLock);
-	
+
 	if (thred->md.is_joining)
 	{
 		/* another thread is already waiting to join the specified
@@ -372,7 +372,7 @@ PR_IMPLEMENT(PRStatus)
 		/* the thread has already finished, and has allocated the
 		   joinSem itself - let it know it can finally die */
 		delete_sem(thred->md.joinSem);
-		
+
 		PR_Unlock(joinSemLock);
     }
 
@@ -505,7 +505,7 @@ PR_IMPLEMENT(void*)
 {
 	/* make sure the index is valid */
 	if (index < 0 || index >= tpd_slotsUsed || index >= BT_TPD_LIMIT)
-    {   
+    {
 		PR_SetError( PR_TPD_RANGE_ERROR, 0 );
 		return NULL;
     }
@@ -652,11 +652,11 @@ PRThread *_bt_AttachThread()
 
 	/* store this thread's PRThread */
 	tls_set(tls_prThreadSlot, thread);
-	
+
 	/* the thread must call _bt_CleanupThread() before it dies, in order
 	   to clean up its PRThread, synchronize with the primordial thread,
 	   etc. */
 	on_exit_thread(_bt_CleanupThread, NULL);
-	
+
 	return thread;
 }

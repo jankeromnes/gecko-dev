@@ -11,7 +11,7 @@
 # Minimal test that doesn't do anything
 #
 # NSS_TESTS="dummy" can be used for quick testing of the
-#   test script infrastructure, without running any of the tests 
+#   test script infrastructure, without running any of the tests
 #
 ########################################################################
 

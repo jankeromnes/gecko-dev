@@ -211,7 +211,7 @@ function checkResponse(request, data, context) {
       linkOrgHeaderFound3++;
     }
   });
-  Assert.ok(linkOrgHeaderFound2 == 3, 
+  Assert.ok(linkOrgHeaderFound2 == 3,
             "Original link header still here.");
 
   if (dbg) { print("============== checkResponse: out"); }

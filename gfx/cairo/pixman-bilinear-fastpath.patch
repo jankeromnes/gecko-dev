@@ -18,7 +18,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-fast-path.c b/gfx/cairo/libpixman/sr
  FAST_NEAREST (8888_565_none, 8888, 0565, uint32_t, uint16_t, OVER, NONE)
  FAST_NEAREST (8888_565_pad, 8888, 0565, uint32_t, uint16_t, OVER, PAD)
  FAST_NEAREST (8888_565_normal, 8888, 0565, uint32_t, uint16_t, OVER, NORMAL)
- 
+
 +static force_inline void
 +scaled_bilinear_scanline_8888_565_OVER (uint16_t *       dst,
 +                                        const uint32_t * mask,
@@ -142,7 +142,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-fast-path.c b/gfx/cairo/libpixman/sr
 +    a01 = SkExpand_rgb_16(a01);
 +    a10 = SkExpand_rgb_16(a10);
 +    a11 = SkExpand_rgb_16(a11);
-+    
++
 +    int xy = x * y >> 3;
 +    return  a00 * (32 - 2*y - 2*x + xy) +
 +            a01 * (2*x - xy) +
@@ -232,7 +232,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-fast-path.c b/gfx/cairo/libpixman/sr
 +			       NORMAL, FLAG_NONE)
 +
  #define REPEAT_MIN_WIDTH    32
- 
+
  static void
  fast_composite_tiled_repeat (pixman_implementation_t *imp,
  			     pixman_composite_info_t *info)
@@ -247,14 +247,14 @@ diff --git a/gfx/cairo/libpixman/src/pixman-fast-path.c b/gfx/cairo/libpixman/sr
  	PIXMAN_any, FAST_PATH_STD_DEST_FLAGS,
  	fast_composite_tiled_repeat
      },
- 
+
 +    SIMPLE_BILINEAR_FAST_PATH (SRC, r5g6b5, r5g6b5, 565_565),
 +    SIMPLE_BILINEAR_FAST_PATH (OVER, a8r8g8b8, r5g6b5, 8888_565),
 +    SIMPLE_BILINEAR_FAST_PATH (OVER, a8r8g8b8, a8r8g8b8, 8888_8888),
 +
      {   PIXMAN_OP_NONE	},
  };
- 
+
  #ifdef WORDS_BIGENDIAN
  #define A1_FILL_MASK(n, offs) (((1U << (n)) - 1) << (32 - (offs) - (n)))
  #else
@@ -263,15 +263,15 @@ diff --git a/gfx/cairo/libpixman/src/pixman-fast-path.c b/gfx/cairo/libpixman/sr
 diff --git a/gfx/cairo/libpixman/src/pixman-inlines.h b/gfx/cairo/libpixman/src/pixman-inlines.h
 --- a/gfx/cairo/libpixman/src/pixman-inlines.h
 +++ b/gfx/cairo/libpixman/src/pixman-inlines.h
-@@ -80,16 +80,21 @@ repeat (pixman_repeat_t repeat, int *c, 
+@@ -80,16 +80,21 @@ repeat (pixman_repeat_t repeat, int *c,
      }
      return TRUE;
  }
- 
+
  #ifdef MOZ_GFX_OPTIMIZE_MOBILE
  #define LOW_QUALITY_INTERPOLATION
  #endif
- 
+
 +#ifdef LOW_QUALITY_INTERPOLATION
 +#define INTERPOLATION_PRECISION_BITS 4
 +#else

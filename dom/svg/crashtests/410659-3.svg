@@ -5,7 +5,7 @@
              y="0"
              width="5%"
              height="20%"
-             result="raster1" 
+             result="raster1"
              xlink:href="../../../../../testing/crashtest/images/tree.gif" />
     <feTile />
   </filter>

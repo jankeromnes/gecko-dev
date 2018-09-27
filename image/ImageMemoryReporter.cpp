@@ -14,7 +14,7 @@ namespace mozilla {
 namespace image {
 
 ImageMemoryReporter::WebRenderReporter* ImageMemoryReporter::sWrReporter;
- 
+
 class ImageMemoryReporter::WebRenderReporter final : public nsIMemoryReporter
 {
 public:

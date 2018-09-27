@@ -17,19 +17,19 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/process_mitigations.cc b/
        return false;
      }
    }
- 
+
    return true;
  }
- 
+
 +// This function isn't used yet and adds dependencies for FilePath and
 +// ScopedNativeLibrary.
 +#if !defined(MOZ_SANDBOX)
  bool ApplyMitigationsToCurrentThread(MitigationFlags flags) {
    if (!CanSetMitigationsPerThread(flags))
      return false;
- 
+
    base::win::Version version = base::win::GetVersion();
- 
+
    if (version < base::win::VERSION_WIN10_RS1)
      return true;
 @@ -263,16 +266,17 @@ bool ApplyMitigationsToCurrentThread(Mit
@@ -38,15 +38,15 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/process_mitigations.cc b/
        return false;
      }
    }
- 
+
    return true;
  }
 +#endif
- 
+
  void ConvertProcessMitigationsToPolicy(MitigationFlags flags,
                                         DWORD64* policy_flags,
                                         size_t* size) {
    base::win::Version version = base::win::GetVersion();
- 
+
    *policy_flags = 0;
  #if defined(_WIN64)

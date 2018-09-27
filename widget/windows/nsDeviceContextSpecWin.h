@@ -45,7 +45,7 @@ public:
 
   // The GetDevMode will return a pointer to a DevMode
   // whether it is from the Global memory handle or just the DevMode
-  // To get the DevMode from the Global memory Handle it must lock it 
+  // To get the DevMode from the Global memory Handle it must lock it
   // So this call must be paired with a call to UnlockGlobalHandle
   void GetDevMode(LPDEVMODEW &aDevMode);
 

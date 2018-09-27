@@ -58,5 +58,5 @@ fails-if(prefs.getIntPref("gfx.color_management.mode")!=2) fuzzy-if(winWidget,0-
 == ct0n0g04.png ct0n0g04.html
 # ct1n0g04 - with textual data
 == ct1n0g04.png ct1n0g04.html
-# ctzn0g04 - with compressed textual data 
+# ctzn0g04 - with compressed textual data
 == ctzn0g04.png ctzn0g04.html

@@ -11,7 +11,7 @@ B.prototype = proto;
 
 function f() {
   var o = new B();
-  
+
   for (var i = 0; i < 5; ++i) {
     actual += o.a + ',';
     actual += o.b + ',';

@@ -53,7 +53,7 @@ iter.next();
 var iterCount = 0;
 
 for (var [,] = iter; iterCount < 1; ) {
-  
+
   iterCount += 1;
 }
 

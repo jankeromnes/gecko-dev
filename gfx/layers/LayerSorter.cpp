@@ -51,7 +51,7 @@ static gfxFloat RecoverZDepth(const Matrix4x4& aTransform, const gfxPoint& aPoin
     Point3D p0 = aTransform.TransformPoint(Point3D(0, 0, 0));
     Point3D normal = aTransform.GetNormalVector();
 
-    gfxFloat n = normal.DotProduct(p0 - l0); 
+    gfxFloat n = normal.DotProduct(p0 - l0);
     gfxFloat d = normal.DotProduct(l);
 
     if (!d) {
@@ -62,7 +62,7 @@ static gfxFloat RecoverZDepth(const Matrix4x4& aTransform, const gfxPoint& aPoin
 }
 
 /**
- * Determine if this transform layer should be drawn before another when they 
+ * Determine if this transform layer should be drawn before another when they
  * are both preserve-3d children.
  *
  * We want to find the relative z depths of the 2 layers at points where they
@@ -72,7 +72,7 @@ static gfxFloat RecoverZDepth(const Matrix4x4& aTransform, const gfxPoint& aPoin
  *
  * We then choose the intersection point with the greatest difference in Z
  * depths and use this point to determine an ordering for the two layers.
- * For layers that are intersecting in 3d space, this essentially guesses an 
+ * For layers that are intersecting in 3d space, this essentially guesses an
  * order. In a lot of cases we only intersect right at the edge point (3d cubes
  * in particular) and this generates the 'correct' looking ordering. For planes
  * that truely intersect, then there is no correct ordering and this remains
@@ -114,7 +114,7 @@ static LayerSortOrder CompareDepth(Layer* aOne, Layer* aTwo) {
       points.AppendElement(ourTransformedRect.mPoints[i]);
     }
   }
-  
+
   // Look for intersections between lines (in 2d space) and use these as
   // depth testing points.
   for (uint32_t i = 0; i < 4; i++) {
@@ -225,7 +225,7 @@ static void DumpLayerList(nsTArray<Layer*>& aLayers)
 static void DumpEdgeList(DirectedGraph<Layer*>& aGraph)
 {
   const nsTArray<DirectedGraph<Layer*>::Edge>& edges = aGraph.GetEdgeList();
-  
+
   for (uint32_t i = 0; i < edges.Length(); i++) {
     fprintf(stderr, "From: ");
     print_layer(stderr, edges.ElementAt(i).mFrom);

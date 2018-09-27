@@ -37,13 +37,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,19 +73,19 @@ var docName = 'nodeappendchildchildexists';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
+*
     If the "newChild" is already in the tree, it is first
     removed before the new one is appended.
-    
-    Retrieve the first child of the second employee and   
+
+    Retrieve the first child of the second employee and
     append the first child to the end of the list.   After
-    the "appendChild(newChild)" method is invoked the first 
+    the "appendChild(newChild)" method is invoked the first
     child should be the one that was second and the last
     child should be the one that was first.
 
@@ -106,7 +106,7 @@ function nodeappendchildchildexists() {
       var fchildName;
       var appendedChild;
       var initialName;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -127,21 +127,21 @@ function nodeappendchildchildexists() {
 
       lchildName = lchild.nodeName;
 
-      
+
 	if(
 	("employeeId" == initialName)
 	) {
 	assertEquals("assert1_nowhitespace","name",fchildName);
        assertEquals("assert2_nowhitespace","employeeId",lchildName);
-       
+
 	}
-	
+
 		else {
 			assertEquals("assert1","employeeId",fchildName);
        assertEquals("assert2","#text",lchildName);
-       
+
 		}
-	
+
 }
 
 </script>
@@ -150,12 +150,12 @@ function nodeappendchildchildexists() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/nodeappendchildchildexists</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

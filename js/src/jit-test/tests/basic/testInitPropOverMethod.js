@@ -5,5 +5,5 @@ try {
     result = x.a();
 } catch (exc) {
     result = "threw " + exc.name;
-}    
+}
 assertEq(result, "threw TypeError");

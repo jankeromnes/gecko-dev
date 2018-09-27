@@ -24,13 +24,13 @@
 ########################################################################
 dbupgrade_init()
 {
-	if [ -z "${INIT_SOURCED}" -o "${INIT_SOURCED}" != "TRUE" ]; then 
+	if [ -z "${INIT_SOURCED}" -o "${INIT_SOURCED}" != "TRUE" ]; then
 		cd ${QADIR}/common
 		. ./init.sh
 	fi
-	
+
 	if [ ! -r "${CERT_LOG_FILE}" ]; then  # we need certificates here
-		cd ${QADIR}/cert 
+		cd ${QADIR}/cert
 		. ./cert.sh
 	fi
 
@@ -38,12 +38,12 @@ dbupgrade_init()
 		cd ${QADIR}/sdr
 		. ./sdr.sh
 	fi
-	
+
 	SCRIPTNAME=dbupgrade.sh
 	if [ -z "${CLEANUP}" ] ; then     # if nobody else is responsible for
 		CLEANUP="${SCRIPTNAME}"       # cleaning this script will do it
 	fi
-	
+
 	echo "$SCRIPTNAME: DB upgrade tests ==============================="
 }
 
@@ -59,7 +59,7 @@ dbupgrade_main()
 	${BINDIR}/certutil -M -n FIPS_PUB_140_Test_Certificate -t "C,C,C" -d fips -f ${FIPSPWFILE} 2>&1
 	${BINDIR}/certutil -L -d fips 2>&1
 	rm -f smime/alicehello.env
-	
+
 	# test upgrade to the new database
 	echo "nss" > ${PWFILE}
 	html_head "Legacy to shared Library update"
@@ -76,7 +76,7 @@ dbupgrade_main()
 			html_msg 0 0 "No directory $i"
 		fi
 	done
-	
+
 	if [ -d fips ]; then
 		echo "upgrading db fips"
 		${BINDIR}/certutil -S -g 1024 -n tmprsa -t "u,u,u" -s "CN=tmprsa, C=US" -x -d sql:fips -f ${FIPSPWFILE} -z ${NOISE_FILE} 2>&1
@@ -85,7 +85,7 @@ dbupgrade_main()
 		${BINDIR}/certutil -F -n tmprsa -d sql:fips -f ${FIPSPWFILE} 2>&1
 		${BINDIR}/certutil -L -d sql:fips 2>&1
 	fi
-	
+
 	html "</TABLE><BR>"
 }
 

@@ -14,7 +14,7 @@ add_task(async function() {
       statusTexts.push(xhr.statusText);
     }
   };
-  
+
   Services.obs.addObserver(observer, "http-on-examine-response");
   await new Promise((resolve) => {
     xhr.addEventListener("load", function() {

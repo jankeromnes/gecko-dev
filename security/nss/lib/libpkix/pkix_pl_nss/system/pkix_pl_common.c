@@ -358,7 +358,7 @@ pkix_pl_helperBytes2Ascii(
         outputString = NULL;
 
 cleanup:
-        
+
         PKIX_FREE(outputString);
         PKIX_FREE(tempString);
 

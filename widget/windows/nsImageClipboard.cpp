@@ -2,7 +2,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
- 
+
 #include "nsImageClipboard.h"
 
 #include "gfxUtils.h"
@@ -56,7 +56,7 @@ nsImageToClipboard::~nsImageToClipboard()
 //
 // GetPicture
 //
-// Call to get the actual bits that go on the clipboard. If an error 
+// Call to get the actual bits that go on the clipboard. If an error
 // ocurred during conversion, |outBits| will be null.
 //
 // NOTE: The caller owns the handle and must delete it with ::GlobalRelease()
@@ -76,7 +76,7 @@ nsImageToClipboard :: GetPicture ( HANDLE* outBits )
 //
 // Computes # of bytes needed by a bitmap with the specified attributes.
 //
-int32_t 
+int32_t
 nsImageToClipboard :: CalcSize ( int32_t aHeight, int32_t aColors, WORD aBitsPerPixel, int32_t aSpanBytes )
 {
   int32_t HeaderMem = sizeof(BITMAPINFOHEADER);
@@ -97,11 +97,11 @@ nsImageToClipboard :: CalcSize ( int32_t aHeight, int32_t aColors, WORD aBitsPer
 //
 // Computes the span bytes for determining the overall size of the image
 //
-int32_t 
+int32_t
 nsImageToClipboard::CalcSpanLength(uint32_t aWidth, uint32_t aBitCount)
 {
   int32_t spanBytes = (aWidth * aBitCount) >> 5;
-  
+
   if ((aWidth * aBitCount) & 0x1F)
     spanBytes++;
   spanBytes <<= 2;
@@ -114,7 +114,7 @@ nsImageToClipboard::CalcSpanLength(uint32_t aWidth, uint32_t aBitCount)
 // CreateFromImage
 //
 // Do the work to setup the bitmap header and copy the bits out of the
-// image. 
+// image.
 //
 nsresult
 nsImageToClipboard::CreateFromImage ( imgIContainer* inImage, HANDLE* outBitmap )
@@ -144,7 +144,7 @@ nsImageToClipboard::CreateFromImage ( imgIContainer* inImage, HANDLE* outBitmap 
 
     nsCOMPtr<imgIEncoder> encoder = do_CreateInstance("@mozilla.org/image/encoder;2?type=image/bmp", &rv);
     NS_ENSURE_SUCCESS(rv, rv);
-    
+
     uint32_t format;
     nsAutoString options;
     if (mWantDIBV5) {
@@ -166,7 +166,7 @@ nsImageToClipboard::CreateFromImage ( imgIContainer* inImage, HANDLE* outBitmap 
 #endif
     default:
         MOZ_ASSERT_UNREACHABLE("Unexpected surface format");
-        return NS_ERROR_INVALID_ARG;  
+        return NS_ERROR_INVALID_ARG;
     }
 
     DataSourceSurface::MappedSurface map;
@@ -196,7 +196,7 @@ nsImageToClipboard::CreateFromImage ( imgIContainer* inImage, HANDLE* outBitmap 
 
     ::CopyMemory(dst, src + BFH_LENGTH, size - BFH_LENGTH);
     ::GlobalUnlock(glob);
-    
+
     *outBitmap = (HANDLE)glob;
     return NS_OK;
 }
@@ -215,7 +215,7 @@ nsImageFromClipboard :: ~nsImageFromClipboard ( )
 //
 // Take the raw clipboard image data and convert it to aMIMEFormat in the form of a nsIInputStream
 //
-nsresult 
+nsresult
 nsImageFromClipboard ::GetEncodedImageStream (unsigned char * aClipboardData, const char * aMIMEFormat, nsIInputStream** aInputStream )
 {
   NS_ENSURE_ARG_POINTER (aInputStream);
@@ -229,7 +229,7 @@ nsImageFromClipboard ::GetEncodedImageStream (unsigned char * aClipboardData, co
   int32_t width  = header->bmiHeader.biWidth;
   int32_t height = header->bmiHeader.biHeight;
   // neg. heights mean the Y axis is inverted and we don't handle that case
-  NS_ENSURE_TRUE(height > 0, NS_ERROR_FAILURE); 
+  NS_ENSURE_TRUE(height > 0, NS_ERROR_FAILURE);
 
   unsigned char * rgbData = new unsigned char[width * height * 3 /* RGB */];
 
@@ -248,7 +248,7 @@ nsImageFromClipboard ::GetEncodedImageStream (unsigned char * aClipboardData, co
         encoderCID.Append(aMIMEFormat);
       nsCOMPtr<imgIEncoder> encoder = do_CreateInstance(encoderCID.get(), &rv);
       if (NS_SUCCEEDED(rv)){
-        rv = encoder->InitFromData(rgbData, 0, width, height, 3 * width /* RGB * # pixels in a row */, 
+        rv = encoder->InitFromData(rgbData, 0, width, height, 3 * width /* RGB * # pixels in a row */,
                                    imgIEncoder::INPUT_FORMAT_RGB, EmptyString());
         if (NS_SUCCEEDED(rv)) {
           encoder.forget(aInputStream);
@@ -256,8 +256,8 @@ nsImageFromClipboard ::GetEncodedImageStream (unsigned char * aClipboardData, co
       }
     }
     delete [] rgbData;
-  } 
-  else 
+  }
+  else
     rv = NS_ERROR_OUT_OF_MEMORY;
 
   return rv;
@@ -271,8 +271,8 @@ nsImageFromClipboard ::GetEncodedImageStream (unsigned char * aClipboardData, co
 void
 nsImageFromClipboard::InvertRows(unsigned char * aInitialBuffer, uint32_t aSizeOfBuffer, uint32_t aNumBytesPerRow)
 {
-  if (!aNumBytesPerRow) 
-    return; 
+  if (!aNumBytesPerRow)
+    return;
 
   uint32_t numRows = aSizeOfBuffer / aNumBytesPerRow;
   unsigned char * row = new unsigned char[aNumBytesPerRow];
@@ -297,23 +297,23 @@ nsImageFromClipboard::InvertRows(unsigned char * aInitialBuffer, uint32_t aSizeO
 //
 // Takes the clipboard bitmap and converts it into a RGB packed pixel values.
 //
-nsresult 
+nsresult
 nsImageFromClipboard::ConvertColorBitMap(unsigned char * aInputBuffer, PBITMAPINFO pBitMapInfo, unsigned char * aOutBuffer)
 {
-  uint8_t bitCount = pBitMapInfo->bmiHeader.biBitCount; 
+  uint8_t bitCount = pBitMapInfo->bmiHeader.biBitCount;
   uint32_t imageSize = pBitMapInfo->bmiHeader.biSizeImage; // may be zero for BI_RGB bitmaps which means we need to calculate by hand
   uint32_t bytesPerPixel = bitCount / 8;
-  
+
   if (bitCount <= 4)
     bytesPerPixel = 1;
 
-  // rows are DWORD aligned. Calculate how many real bytes are in each row in the bitmap. This number won't 
+  // rows are DWORD aligned. Calculate how many real bytes are in each row in the bitmap. This number won't
   // correspond to biWidth.
   uint32_t rowSize = (bitCount * pBitMapInfo->bmiHeader.biWidth + 7) / 8; // +7 to round up
   if (rowSize % 4)
     rowSize += (4 - (rowSize % 4)); // Pad to DWORD Boundary
-  
-  // if our buffer includes a color map, skip over it 
+
+  // if our buffer includes a color map, skip over it
   if (bitCount <= 8)
   {
     int32_t bytesToSkip = (pBitMapInfo->bmiHeader.biClrUsed ? pBitMapInfo->bmiHeader.biClrUsed : (1 << bitCount) ) * sizeof(RGBQUAD);
@@ -325,26 +325,26 @@ nsImageFromClipboard::ConvertColorBitMap(unsigned char * aInputBuffer, PBITMAPIN
   if (pBitMapInfo->bmiHeader.biCompression == BI_BITFIELDS)
   {
     // color table consists of 3 DWORDS containing the color masks...
-    colorMasks.red = (*((uint32_t*)&(pBitMapInfo->bmiColors[0]))); 
-    colorMasks.green = (*((uint32_t*)&(pBitMapInfo->bmiColors[1]))); 
-    colorMasks.blue = (*((uint32_t*)&(pBitMapInfo->bmiColors[2]))); 
+    colorMasks.red = (*((uint32_t*)&(pBitMapInfo->bmiColors[0])));
+    colorMasks.green = (*((uint32_t*)&(pBitMapInfo->bmiColors[1])));
+    colorMasks.blue = (*((uint32_t*)&(pBitMapInfo->bmiColors[2])));
     CalcBitShift(&colorMasks);
     aInputBuffer += 3 * sizeof(DWORD);
-  } 
+  }
   else if (pBitMapInfo->bmiHeader.biCompression == BI_RGB && !imageSize)  // BI_RGB can have a size of zero which means we figure it out
   {
     // XXX: note use rowSize here and not biWidth. rowSize accounts for the DWORD padding for each row
     imageSize = rowSize * pBitMapInfo->bmiHeader.biHeight;
   }
 
-  // The windows clipboard image format inverts the rows 
+  // The windows clipboard image format inverts the rows
   InvertRows(aInputBuffer, imageSize, rowSize);
 
-  if (!pBitMapInfo->bmiHeader.biCompression || pBitMapInfo->bmiHeader.biCompression == BI_BITFIELDS) 
-  {  
+  if (!pBitMapInfo->bmiHeader.biCompression || pBitMapInfo->bmiHeader.biCompression == BI_BITFIELDS)
+  {
     uint32_t index = 0;
     uint32_t writeIndex = 0;
-     
+
     unsigned char redValue, greenValue, blueValue;
     uint8_t colorTableEntry = 0;
     int8_t bit; // used for grayscale bitmaps where each bit is a pixel
@@ -353,7 +353,7 @@ nsImageFromClipboard::ConvertColorBitMap(unsigned char * aInputBuffer, PBITMAPIN
 
     while (index < imageSize)
     {
-      switch (bitCount) 
+      switch (bitCount)
       {
         case 1:
           for (bit = 7; bit >= 0 && numPixelsLeftInRow; bit--)
@@ -392,7 +392,7 @@ nsImageFromClipboard::ConvertColorBitMap(unsigned char * aInputBuffer, PBITMAPIN
           aOutBuffer[writeIndex++] = pBitMapInfo->bmiColors[aInputBuffer[index]].rgbGreen;
           aOutBuffer[writeIndex++] = pBitMapInfo->bmiColors[aInputBuffer[index]].rgbBlue;
           numPixelsLeftInRow--;
-          pos += 1;    
+          pos += 1;
           break;
         case 16:
           {
@@ -410,7 +410,7 @@ nsImageFromClipboard::ConvertColorBitMap(unsigned char * aInputBuffer, PBITMAPIN
             aOutBuffer[writeIndex++] = greenValue;
             aOutBuffer[writeIndex++] = blueValue;
             numPixelsLeftInRow--;
-            pos += 2;          
+            pos += 2;
           }
           break;
         case 32:
@@ -448,7 +448,7 @@ nsImageFromClipboard::ConvertColorBitMap(unsigned char * aInputBuffer, PBITMAPIN
           index += (rowSize - pos);
         }
         numPixelsLeftInRow = pBitMapInfo->bmiHeader.biWidth;
-        pos = 0; 
+        pos = 0;
       }
 
     } // while we still have bytes to process
@@ -463,14 +463,14 @@ void nsImageFromClipboard::CalcBitmask(uint32_t aMask, uint8_t& aBegin, uint8_t&
   uint8_t pos;
   bool started = false;
   aBegin = aLength = 0;
-  for (pos = 0; pos <= 31; pos++) 
+  for (pos = 0; pos <= 31; pos++)
   {
-    if (!started && (aMask & (1 << pos))) 
+    if (!started && (aMask & (1 << pos)))
     {
       aBegin = pos;
       started = true;
     }
-    else if (started && !(aMask & (1 << pos))) 
+    else if (started && !(aMask & (1 << pos)))
     {
       aLength = pos - aBegin;
       break;

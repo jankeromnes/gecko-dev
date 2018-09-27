@@ -30,7 +30,7 @@ public:
     m_Object = NULL;
     return imageList;
   }
-  
+
   bool Create(int width, int height, UINT flags, int initialNumber, int grow)
   {
     HIMAGELIST a = ImageList_Create(width, height, flags,
@@ -39,7 +39,7 @@ public:
       return false;
     return Attach(a);
   }
-  
+
   bool Destroy() // DeleteImageList() in MFC
   {
     if (m_Object == NULL)

@@ -46,7 +46,7 @@ is for hyphenation within words or word parts.
 
 Recursive compound level hyphenation
 
-The algorithm is recursive: every word parts of a successful 
+The algorithm is recursive: every word parts of a successful
 first (compound) level hyphenation will be rehyphenated
 by the same (first) pattern set.
 

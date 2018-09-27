@@ -49,10 +49,10 @@ public:
       ICompressProgressInfo *progress);
 
   STDMETHOD(SetCoderProperties)(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps);
-  
+
   STDMETHOD(SetInBufSize)(UInt32 streamIndex, UInt32 size);
   STDMETHOD(SetOutBufSize)(UInt32 streamIndex, UInt32 size);
-  
+
   CEncoder();
   ~CEncoder();
 };
@@ -83,7 +83,7 @@ class CDecoder:
 
   void InitCommon();
   // HRESULT ReadSpec();
-  
+
 public:
   MY_UNKNOWN_IMP7(
     ICompressCoder2,
@@ -94,7 +94,7 @@ public:
     ICompressSetOutStreamSize,
     ICompressSetBufSize
     );
-  
+
   STDMETHOD(Code)(ISequentialInStream * const *inStreams, const UInt64 * const *inSizes, UInt32 numInStreams,
       ISequentialOutStream * const *outStreams, const UInt64 * const *outSizes, UInt32 numOutStreams,
       ICompressProgressInfo *progress);

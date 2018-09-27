@@ -423,7 +423,7 @@ QUERYVALUE_TESTS_CSS = {
   'checkAttrs':   False,
   'checkStyle':   False,
   'styleWithCSS': True,
-  
+
   'Proposed':     QUERYVALUE_TESTS['Proposed']
 }
 

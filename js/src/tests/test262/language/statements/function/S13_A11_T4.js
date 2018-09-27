@@ -15,7 +15,7 @@ function __func(){
     {
         delete arguments[i];
         is_undef= is_undef && (typeof arguments[i] === "undefined");
-    };       
+    };
     return is_undef;
 };
 

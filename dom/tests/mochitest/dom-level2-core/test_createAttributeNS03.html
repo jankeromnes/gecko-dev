@@ -36,13 +36,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -53,7 +53,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -72,11 +72,11 @@ var docName = 'createAttributeNS03';
 
 
 /**
-* 
-    The "createAttributeNS(namespaceURI,qualifiedName)" method for a 
+*
+    The "createAttributeNS(namespaceURI,qualifiedName)" method for a
    Document should raise INVALID_CHARACTER_ERR DOMException
    if qualifiedName contains an illegal character.
-   
+
    Invoke method createAttributeNS(namespaceURI,qualifiedName) on this document
    with qualifiedName containing an illegal character from illegalChars[].
    Method should raise INVALID_CHARACTER_ERR DOMException for all
@@ -123,7 +123,7 @@ function createAttributeNS03() {
       illegalQNames[25] = "person:a ";
       illegalQNames[26] = "person:\"";
 
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -131,7 +131,7 @@ function createAttributeNS03() {
       doc = load(docRef, "doc", "staffNS");
       for(var indexN65680 = 0;indexN65680 < illegalQNames.length; indexN65680++) {
       qualifiedName = illegalQNames[indexN65680];
-      
+
 	{
 		success = false;
 		try {
@@ -144,7 +144,7 @@ function createAttributeNS03() {
 	}
 
 	}
-   
+
 }
 
 </script>
@@ -153,12 +153,12 @@ function createAttributeNS03() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/createAttributeNS03</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

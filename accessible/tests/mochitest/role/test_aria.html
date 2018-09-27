@@ -114,11 +114,11 @@
       for (l in weak_landmarks) {
         var id = weak_landmarks[l] + "_table";
         testRole(id, ROLE_TABLE);
-    
+
         var accessibleTable = getAccessible(id, [nsIAccessibleTable], null,
                                             DONOTFAIL_IF_NO_INTERFACE);
         ok(!!accessibleTable, "landmarked table should have nsIAccessibleTable");
-    
+
         if (accessibleTable)
           is(accessibleTable.getCellAt(0, 0).firstChild.name, "hi", "no cell");
       }
@@ -354,12 +354,12 @@
     <div role="listitem">C</div>
   </div>
 
-  <p>Image: 
+  <p>Image:
     <img id="img_eq" role="math" src="foo" alt="x^2 + y^2 + z^2">
   </p>
 
-  <p>Text: 
-    <span id="txt_eq" role="math" title="x^2 + y^2 + z^2">x<sup>2</sup> + 
+  <p>Text:
+    <span id="txt_eq" role="math" title="x^2 + y^2 + z^2">x<sup>2</sup> +
       y<sup>2</sup> + z<sup>2</sup></span>
 
 </body>

@@ -316,12 +316,12 @@ function [are_equal, diffvector] = ...
 are_equal = false;
 diffvector = 0;
 if ~exist(newfile,'file')
-  warning(['Output file ' newfile ' does not exist']);  
+  warning(['Output file ' newfile ' does not exist']);
   return
 end
 
 if ~exist(reffile,'file')
-  warning(['Reference file ' reffile ' does not exist']);  
+  warning(['Reference file ' reffile ' does not exist']);
   return
 end
 

@@ -13,7 +13,7 @@
         width="600"
         height="600"
         onload="onLoad();"
-        title="FindbarTest for bug 304188 - 
+        title="FindbarTest for bug 304188 -
 find-menu appears in editor element which has had makeEditable() called but designMode not set">
 
   <script type="application/javascript"><![CDATA[
@@ -63,7 +63,7 @@ find-menu appears in editor element which has had makeEditable() called but desi
         edsession.makeWindowEditable(content, "html", false, true, false);
         content.focus();
       });
-      
+
       await enterStringIntoEditor("'");
       await enterStringIntoEditor("/");
 

@@ -26,7 +26,7 @@ pub struct MappedSequenceVisitor<T, R, F>
     marker: PhantomData<fn() -> T>
 }
 
-impl<'de, F, T, R> MappedSequenceVisitor<T, R, F> 
+impl<'de, F, T, R> MappedSequenceVisitor<T, R, F>
     where T: Deserialize<'de>,
           F: Fn(T) -> Result<R, &'static str>,
 {
@@ -38,7 +38,7 @@ impl<'de, F, T, R> MappedSequenceVisitor<T, R, F>
     }
 }
 
-impl<'de, F, T, R> Visitor<'de> for MappedSequenceVisitor<T, R, F> 
+impl<'de, F, T, R> Visitor<'de> for MappedSequenceVisitor<T, R, F>
     where T: Deserialize<'de>,
           F: Fn(T) -> Result<R, &'static str>,
 {

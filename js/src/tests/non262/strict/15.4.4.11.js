@@ -21,7 +21,7 @@ function obj() {
 }
 
 assertEq(testLenientAndStrict('var o = obj(); Array.prototype.sort.call(o)',
-                              raisesException(TypeError), 
+                              raisesException(TypeError),
                               raisesException(TypeError)),
          true);
 

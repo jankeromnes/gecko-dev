@@ -12,7 +12,7 @@ function boom()
   var treechildren = document.getElementById("treechildren");
 
   tree.appendChild(treechildren); // no real change
-  
+
   function boom2() {
     treecols.parentNode.removeChild(treecols);
     document.documentElement.removeAttribute("class");

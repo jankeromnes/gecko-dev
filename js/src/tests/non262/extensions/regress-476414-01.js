@@ -30,7 +30,7 @@ function tryItOut(code)
 }
 function tryRunning(f, code)
 {
-  try { 
+  try {
     var rv = f();
   } catch(runError) {}
 }
@@ -49,7 +49,7 @@ function tryEnsureSanity()
   toSource = realToSource;
   toString = realToString;
 }
-for (let iters = 0; iters < 2000; ++iters) { 
+for (let iters = 0; iters < 2000; ++iters) {
   count=27745; tryItOut("with({x: (c) = (x2 = [])})false;");
   tryEnsureSanity();
   count=35594; tryItOut("switch(null) { case this.__defineSetter__(\"window\", function () { yield  \"\"  } ): break; }");
@@ -63,5 +63,5 @@ for (let iters = 0; iters < 2000; ++iters) {
   count=45254; tryItOut("for (NaN in this);");
   tryEnsureSanity();
 }
- 
+
 reportCompare(expect, actual, summary);

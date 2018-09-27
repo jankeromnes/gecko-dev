@@ -1,7 +1,7 @@
 ftp> open pandora.anglistik.uni-mainz.de
 220-  Novonyx FTP Server for NetWare, v0.51 (9-16-98)
 220 Service Ready
-Name (pandora.anglistik.uni-mainz.de:cyp): 
+Name (pandora.anglistik.uni-mainz.de:cyp):
 331 User name okay, need password
 230 User logged in, proceed
 Remote system type is UNIX.

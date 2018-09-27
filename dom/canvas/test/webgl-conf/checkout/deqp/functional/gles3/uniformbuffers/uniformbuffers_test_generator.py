@@ -75,7 +75,7 @@ _GROUPS = [
     'multi_nested_struct',
     'random',
 ]
-    
+
 def GenerateFilename(group):
   """Generate test filename."""
   filename = group

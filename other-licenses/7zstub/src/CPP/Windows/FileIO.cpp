@@ -36,7 +36,7 @@ WinXP-64 CreateFile():
   :stream        -  OK
   .:stream       -  ERROR_PATH_NOT_FOUND
   .\:stream      -  OK
-  
+
   folder\:stream -  ERROR_INVALID_NAME
   folder:stream  -  OK
 
@@ -224,9 +224,9 @@ void CInFile::CalcDeviceSize(CFSTR s)
 
   SizeDefined = true;
   Size = 128 << 20;
-  
+
   #else
-  
+
   PARTITION_INFORMATION partInfo;
   bool needCorrectSize = true;
 
@@ -271,7 +271,7 @@ void CInFile::CalcDeviceSize(CFSTR s)
         needCorrectSize = true;
     }
   }
-  
+
   if (!SizeDefined)
   {
     my_DISK_GEOMETRY_EX geomEx;
@@ -288,7 +288,7 @@ void CInFile::CalcDeviceSize(CFSTR s)
         Size = geom.Cylinders.QuadPart * geom.TracksPerCylinder * geom.SectorsPerTrack * geom.BytesPerSector;
     }
   }
-  
+
   if (needCorrectSize && SizeDefined && Size != 0)
   {
     CorrectDeviceSize();

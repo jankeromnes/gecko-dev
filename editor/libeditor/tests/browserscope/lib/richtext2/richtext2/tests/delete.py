@@ -143,7 +143,7 @@ DELETE_TESTS = {
       'tests':      [
         { 'id':         'OL-LI2-1_SO1',
           'desc':       'Delete fully wrapped list item',
-          'pad':        'foo<ol>{<li>bar</li>}<li>baz</li></ol>qoz', 
+          'pad':        'foo<ol>{<li>bar</li>}<li>baz</li></ol>qoz',
           'expected':   ['foo<ol>|<li>baz</li></ol>qoz',
                          'foo<ol><li>^baz</li></ol>qoz'] },
 

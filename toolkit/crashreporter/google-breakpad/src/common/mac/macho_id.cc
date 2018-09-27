@@ -56,8 +56,8 @@ using google_breakpad::MD5Final;
 MachoID::MachoID(const char *path)
    : memory_(0),
      memory_size_(0),
-     crc_(0), 
-     md5_context_(), 
+     crc_(0),
+     md5_context_(),
      update_function_(NULL) {
   snprintf(path_, sizeof(path_), "%s", path);
 }
@@ -65,8 +65,8 @@ MachoID::MachoID(const char *path)
 MachoID::MachoID(const char *path, void *memory, size_t size)
    : memory_(memory),
      memory_size_(size),
-     crc_(0), 
-     md5_context_(), 
+     crc_(0),
+     md5_context_(),
      update_function_(NULL) {
   snprintf(path_, sizeof(path_), "%s", path);
 }
@@ -263,10 +263,10 @@ bool MachoID::WalkerCB(MachoWalker *walker, load_command *cmd, off_t offset,
 
     struct mach_header_64 header;
     off_t header_offset;
-    
+
     if (!walker->CurrentHeader(&header, &header_offset))
       return false;
-        
+
     // Process segments that have sections:
     // (e.g., __TEXT, __DATA, __IMPORT, __OBJC)
     offset += sizeof(struct segment_command);
@@ -296,10 +296,10 @@ bool MachoID::WalkerCB(MachoWalker *walker, load_command *cmd, off_t offset,
 
     struct mach_header_64 header;
     off_t header_offset;
-    
+
     if (!walker->CurrentHeader(&header, &header_offset))
       return false;
-    
+
     // Process segments that have sections:
     // (e.g., __TEXT, __DATA, __IMPORT, __OBJC)
     offset += sizeof(struct segment_command_64);
@@ -314,8 +314,8 @@ bool MachoID::WalkerCB(MachoWalker *walker, load_command *cmd, off_t offset,
       // sections of type S_ZEROFILL are "virtual" and contain no data
       // in the file itself
       if ((sec64.flags & SECTION_TYPE) != S_ZEROFILL && sec64.offset != 0)
-        macho_id->Update(walker, 
-                         header_offset + sec64.offset, 
+        macho_id->Update(walker,
+                         header_offset + sec64.offset,
                          (size_t)sec64.size);
 
       offset += sizeof(struct section_64);

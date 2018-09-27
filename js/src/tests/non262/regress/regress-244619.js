@@ -28,5 +28,5 @@ catch(e)
 }
 
 actual = 'No Crash';
- 
+
 reportCompare(expect, actual, summary);

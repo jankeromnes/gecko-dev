@@ -45,7 +45,7 @@ fn to_json(toml: toml::Value) -> Json {
 fn run_pretty(toml: Toml) {
     // Assert toml == json
     println!("### pretty round trip parse.");
-    
+
     // standard pretty
     let toml_raw = to_string_pretty(&toml).expect("to string");
     let toml2 = toml_raw.parse().expect("from string");

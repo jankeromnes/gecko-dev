@@ -84,7 +84,7 @@ public:
 
 private:
   friend class DrawTargetSkia;
-  
+
   SkPath mPath;
   FillRule mFillRule;
 };

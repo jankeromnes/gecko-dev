@@ -75,7 +75,7 @@ There are React-specific code style rules in the .eslintrc file.
 
 ### Components
 
-* Default to creating components as [stateless function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions). 
+* Default to creating components as [stateless function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions).
 * If you need local state or lifecycle methods, use `React.createClass` instead of functions.
 * Use React.DOM to create native elements. Assign it to a variable named `dom`, and use it like `dom.div({}, dom.span({}))`. You may also destructure specific elements directly: `const { div, ul } = React.DOM`.
 

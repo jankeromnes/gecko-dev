@@ -14,7 +14,7 @@
 
     This is the primary build script for the which.py project. It exists
     to assist in building, maintaining, and distributing this project.
-    
+
     It is intended to have Makefile semantics. I.e. 'python build.py'
     will build execute the default target, 'python build.py foo' will
     build target foo, etc. However, there is no intelligent target
@@ -139,7 +139,7 @@ def _rmtree(dirname):
 # Recipe: pretty_logging (0.1) in /Users/trentm/tm/recipes/cookbook
 class _PerLevelFormatter(logging.Formatter):
     """Allow multiple format string -- depending on the log level.
-    
+
     A "fmtFromLevel" optional arg is added to the constructor. It can be
     a dictionary mapping a log record level to a format string. The
     usual "fmt" argument acts as the default.
@@ -272,12 +272,12 @@ def target_sdist():
 
 def target_webdist():
     """Build a web dist package.
-    
+
     "Web dist" packages are zip files with '.web' package. All files in
     the zip must be under a dir named after the project. There must be a
     webinfo.xml file at <projname>/webinfo.xml. This file is "defined"
     by the parsing in trentm.com/build.py.
-    """ 
+    """
     assert sys.platform != "win32", "'webdist' not implemented for win32"
     log.info("target: webdist")
     bitsDir = _get_project_bits_dir()
@@ -288,7 +288,7 @@ def target_webdist():
     os.makedirs(distDir)
 
     target_docs()
-    
+
     # Copy the webdist bits to the build tree.
     manifest = [
         "project-info.xml",
@@ -321,7 +321,7 @@ def target_install():
 
 def target_upload_local():
     """Update release bits to *local* trentm.com bits-dir location.
-    
+
     This is different from the "upload" target, which uploads release
     bits remotely to trentm.com.
     """
@@ -390,9 +390,9 @@ def target_upload():
 
 def target_check_version():
     """grep for version strings in source code
-    
+
     List all things that look like version strings in the source code.
-    Used for checking that versioning is updated across the board.  
+    Used for checking that versioning is updated across the board.
     """
     sources = [
         "which.py",
@@ -411,7 +411,7 @@ def build(targets=[]):
     if not targets:
         if available.has_key('default'):
             return available['default']()
-        else:   
+        else:
             log.warn("No default target available. Doing nothing.")
     else:
         for target in targets:

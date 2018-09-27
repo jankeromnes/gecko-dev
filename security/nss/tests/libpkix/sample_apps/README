@@ -8,7 +8,7 @@ applications.
 SAMPLE APPLICATIONS
 
 Currently, there are two performance applications: libpkix_buildThreads and
-nss_threads. And three sample applications: dumpcert, dumpcrl and 
+nss_threads. And three sample applications: dumpcert, dumpcrl and
 validateChain..
 
 ============================================================================
@@ -41,7 +41,7 @@ PERFORMANCE EVALUATION APPLICATIONS
 
 ============================================================================
 
-USAGE:  libpkix_buildthreads <duration> <threads> <eecertNickname> 
+USAGE:  libpkix_buildthreads <duration> <threads> <eecertNickname>
 
 	Sets up and runs a PKIX_BuildChain call for the number of seconds
 	specified by <duration> using the number of threads specified by

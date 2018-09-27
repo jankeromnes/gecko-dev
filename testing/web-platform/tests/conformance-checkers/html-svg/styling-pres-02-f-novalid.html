@@ -16,7 +16,7 @@
   <!--=  All Rights Reserved.                                              =-->
   <!--=  See http://www.w3.org/Consortium/Legal/.                          =-->
   <!--======================================================================-->
-  
+
   <title id="test-title">$RCSfile: styling-pres-02-f.svg,v $</title>
   <defs>
     <font-face
@@ -96,7 +96,7 @@
         }
         return hex;
       }
-  
+
       function checkSVGColor(e, p, r, g, b) {
         var v;
         try {
@@ -157,7 +157,7 @@
       report(5, checkSVGColor($('text'), 'stop-color', 0, 255, 0));
       report(6, checkIdent($('ellipse'), 'font-variant', 'small-caps'));
       report(7, checkPx($('polyline'), 'letter-spacing', '20px'));
-      
+
       report(11, checkSVGColor($('tref'), 'flood-color', 255, 0, 0));
       report(12, checkFloat($('textPath'), 'flood-opacity', 0.25));
       report(13, checkIdent($('altGlyph'), 'color-interpolation-filters', 'auto'));

@@ -19,7 +19,7 @@ if (Number.MAX_VALUE / 0.9 !== Number.POSITIVE_INFINITY) {
 //CHECK#2
 if (Number.MAX_VALUE / -0.9 !== Number.NEGATIVE_INFINITY) {
   $ERROR('#2: Number.MAX_VALUE / -0.9 === Number.NEGATIVE_INFINITY. Actual: ' + (Number.MAX_VALUE / -0.9));
-} 
+}
 
 //CHECK#3
 if (Number.MAX_VALUE / 1 !== Number.MAX_VALUE) {
@@ -29,7 +29,7 @@ if (Number.MAX_VALUE / 1 !== Number.MAX_VALUE) {
 //CHECK#4
 if (Number.MAX_VALUE / -1 !== -Number.MAX_VALUE) {
   $ERROR('#4: Number.MAX_VALUE / -1 === -Number.MAX_VALUE. Actual: ' + (Number.MAX_VALUE / -1));
-} 
+}
 
 //CHECK#5
 if (Number.MAX_VALUE / (Number.MAX_VALUE / 0.9) === (Number.MAX_VALUE / Number.MAX_VALUE) / 0.9) {

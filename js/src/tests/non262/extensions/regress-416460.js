@@ -17,7 +17,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   /a/.__proto__.__proto__ = { "2": 3 };
   var b = /b/;
   b["2"];

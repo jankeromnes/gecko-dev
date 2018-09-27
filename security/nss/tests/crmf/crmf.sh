@@ -1,4 +1,4 @@
-#! /bin/bash  
+#! /bin/bash
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -8,7 +8,7 @@
 #
 # mozilla/security/nss/tests/crmf/crmf.sh
 #
-# Script to test NSS crmf library (a static library) 
+# Script to test NSS crmf library (a static library)
 #
 # needs to work on all Unix and Windows platforms
 #
@@ -63,13 +63,13 @@ crmf_main()
   html_msg $? 0 "CRMF test" "."
 
   echo "crmftest -d ${P_R_BOBDIR} -p Bob -e dave@bogus.com -s TestCA -P nss cmmf"
-  ${BINDIR}/crmftest -d ${P_R_BOBDIR} -p Bob -e dave@bogus.com -s TestCA -P nss cmmf 
+  ${BINDIR}/crmftest -d ${P_R_BOBDIR} -p Bob -e dave@bogus.com -s TestCA -P nss cmmf
   html_msg $? 0 "CMMF test" "."
 
 # Add tests for key recovery and challange as crmftest's capabilities increase
 
 }
-  
+
 ############################## crmf_cleanup ###########################
 # local shell function to finish this script (no exit since it might be
 # sourced)

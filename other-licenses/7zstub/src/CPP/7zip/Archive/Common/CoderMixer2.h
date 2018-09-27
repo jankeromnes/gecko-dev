@@ -62,10 +62,10 @@ class COutStreamCalcSize:
   UInt64 _size;
 public:
   MY_UNKNOWN_IMP2(ISequentialOutStream, IOutStreamFinish)
-  
+
   STDMETHOD(Write)(const void *data, UInt32 size, UInt32 *processedSize);
   STDMETHOD(OutStreamFinish)();
-  
+
   void SetStream(ISequentialOutStream *stream) { _stream = stream; }
   void ReleaseStream() { _stream.Release(); }
   void Init() { _size = 0; }
@@ -75,7 +75,7 @@ public:
 #endif
 
 
-  
+
 namespace NCoderMixer2 {
 
 struct CBond
@@ -134,7 +134,7 @@ struct CBindInfo
     }
     return isOk;
   }
-  
+
   bool IsStream_in_PackStreams(UInt32 streamIndex) const
   {
     return FindStream_in_PackStreams(streamIndex) >= 0;
@@ -148,7 +148,7 @@ struct CBindInfo
     return -1;
   }
 
-  
+
   // that function is used before Maps is calculated
 
   UInt32 GetStream_for_Coder(UInt32 coderIndex) const
@@ -158,9 +158,9 @@ struct CBindInfo
       streamIndex += Coders[i].NumStreams;
     return streamIndex;
   }
-  
+
   // ---------- Maps Section ----------
-  
+
   CRecordVector<UInt32> Coder_to_Stream;
   CRecordVector<UInt32> Stream_to_Coder;
 
@@ -177,7 +177,7 @@ struct CBindInfo
 
     ClearMaps();
   }
-  
+
   void GetCoder_for_Stream(UInt32 streamIndex, UInt32 &coderIndex, UInt32 &coderStreamIndex) const
   {
     coderIndex = Stream_to_Coder[streamIndex];
@@ -258,7 +258,7 @@ public:
       for each coder
         AddCoder();
       SelectMainCoder();
- 
+
       for each file
       {
         ReInit()
@@ -302,7 +302,7 @@ struct CCoderST: public CCoder
 {
   bool CanRead;
   bool CanWrite;
-  
+
   CCoderST(): CanRead(false), CanWrite(false) {}
 };
 
@@ -334,7 +334,7 @@ class CMixerST:
 
 public:
   CObjectVector<CCoderST> _coders;
-  
+
   CObjectVector<CStBinderStream> _binderStreams;
 
   MY_UNKNOWN_IMP
@@ -403,7 +403,7 @@ public:
 
   CCoderMT(): EncodeMode(false) {}
   ~CCoderMT() { CVirtThread::WaitThreadFinish(); }
-  
+
   void Code(ICompressProgressInfo *progress);
 };
 

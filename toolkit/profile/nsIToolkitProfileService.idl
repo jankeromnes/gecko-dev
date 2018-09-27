@@ -57,7 +57,7 @@ interface nsIToolkitProfileService : nsISupports
      *
      * The profile temporary directory will be chosen based on where the
      * profile directory is located.
-     * 
+     *
      * @param aRootDir
      *        The profile directory. May be null, in which case a suitable
      *        default will be chosen based on the profile name.

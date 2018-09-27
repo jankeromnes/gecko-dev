@@ -105,7 +105,7 @@ function testLimit(name, min, limit, gen) {
     let builder = new WasmModuleBuilder();
     gen(builder, count);
     let result = WebAssembly.validate(builder.toBuffer());
-    
+
     if (result != expected) {
       let msg = `UNEXPECTED ${expected ? "FAIL" : "PASS"}: ${name} == ${count}`;
       verbose(`=====> ${msg}`);

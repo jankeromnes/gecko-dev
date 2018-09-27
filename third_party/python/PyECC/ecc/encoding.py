@@ -122,7 +122,7 @@ class Decoder:
     def int(self, size = 4):
         self._res.append(dec_long(self._io.read(size)))
         return self._ret()
-        
+
 
     def long(self, pre = 2):
         llen = dec_long(self._io.read(pre))

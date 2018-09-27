@@ -165,7 +165,7 @@ N = TestNameParts.Size();
                            File                          Dir
 ForFile     rec   M<=N  [N-M, N)                          -
 !ForDir  nonrec   M=N   [0, M)                            -
- 
+
 ForDir      rec   M<N   [0, M) ... [N-M-1, N-1)  same as ForBoth-File
 !ForFile nonrec         [0, M)                   same as ForBoth-File
 
@@ -201,7 +201,7 @@ bool CItem::CheckPath(const UStringVector &pathParts, bool isFile) const
     return false;
   int start = 0;
   int finish = 0;
-  
+
   if (isFile)
   {
     if (!ForDir)
@@ -214,14 +214,14 @@ bool CItem::CheckPath(const UStringVector &pathParts, bool isFile) const
     if (!ForFile && delta == 0)
       return false;
   }
-  
+
   if (Recursive)
   {
     finish = delta;
     if (isFile && !ForFile)
       finish = delta - 1;
   }
-  
+
   for (int d = start; d <= finish; d++)
   {
     unsigned i;
@@ -283,7 +283,7 @@ void CCensorNode::AddItem(bool include, CItem &item, int ignoreWildcardIndex)
     return;
   }
   const UString &front = item.PathParts.Front();
-  
+
   // WIN32 doesn't support wildcards in file names
   if (item.WildcardMatching
       && ignoreWildcardIndex != 0
@@ -461,7 +461,7 @@ unsigned GetNumPrefixParts_if_DrivePath(UStringVector &pathParts)
 {
   if (pathParts.IsEmpty())
     return 0;
-  
+
   unsigned testIndex = 0;
   if (pathParts[0].IsEmpty())
   {
@@ -482,9 +482,9 @@ static unsigned GetNumPrefixParts(const UStringVector &pathParts)
 {
   if (pathParts.IsEmpty())
     return 0;
-  
+
   #ifdef _WIN32
-  
+
   if (IsDriveColonName(pathParts[0]))
     return 1;
   if (!pathParts[0].IsEmpty())
@@ -519,9 +519,9 @@ static unsigned GetNumPrefixParts(const UStringVector &pathParts)
   return networkParts;
 
   #else
-  
+
   return pathParts[0].IsEmpty() ? 1 : 0;
- 
+
   #endif
 }
 
@@ -539,9 +539,9 @@ void CCensor::AddItem(ECensorPathMode pathMode, bool include, const UString &pat
     forFile = false;
     pathParts.DeleteBack();
   }
-  
+
   UString prefix;
-  
+
   int ignoreWildcardIndex = -1;
 
   // #ifdef _WIN32

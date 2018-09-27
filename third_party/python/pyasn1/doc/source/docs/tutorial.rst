@@ -77,7 +77,7 @@ And here's pyasn1 version of :py:class:`~pyasn1.type.univ.Boolean`:
 
    >>> from pyasn1.type import univ
    >>> class FunFactorPresent(univ.Boolean): pass
-   ... 
+   ...
    >>> pythonFunFactor = FunFactorPresent(True)
    >>> cobolFunFactor = FunFactorPresent(False)
    >>> pythonFunFactor
@@ -404,7 +404,7 @@ a text string.
    Welcome to ASN.1 wilderness!
    >>> welcomeMessage[11:16]
    OctetString(b'ASN.1')
-   >>> 
+   >>>
 
 OctetString objects support the immutable sequence object protocol.
 In other words, they behave like Python 3 bytes (or Python 2 strings).
@@ -626,7 +626,7 @@ uniqueness in the standard.
    >>> descrBER = useful.ObjectDescriptor(
          "Basic encoding of a single ASN.1 type"
    )
-   >>> 
+   >>>
 
 GeneralizedTime and UTCTime types are designed to hold a
 human-readable timestamp in a universal and unambiguous form. The
@@ -649,7 +649,7 @@ In pyasn1 parlance:
    >>> from pyasn1.type import useful
    >>> moscowTime = useful.GeneralizedTime("20110308120000.0")
    >>> utcTime = useful.UTCTime("9803081200Z")
-   >>> 
+   >>>
 
 Despite their intended use, these types possess no special, time-related,
 handling in pyasn1. They are just printable strings.
@@ -667,7 +667,7 @@ type of the value to interpret and verify it accordingly.
 
 Historically, the first data serialization protocol introduced in
 ASN.1 was BER (Basic Encoding Rules). According to BER, any serialized
-value is packed into a triplet of (Type, Length, Value) where Type is a 
+value is packed into a triplet of (Type, Length, Value) where Type is a
 code that identifies the value (which is called *tag* in ASN.1),
 length is the number of bytes occupied by the value in its serialized form
 and value is ASN.1 value in a form suitable for serial transmission or storage.
@@ -675,7 +675,7 @@ For that reason almost every ASN.1 type has a tag (which is actually a
 BER type) associated with it by default.
 
 An ASN.1 tag could be viewed as a tuple of three numbers:
-(Class, Format, Number). While Number identifies a tag, Class component 
+(Class, Format, Number). While Number identifies a tag, Class component
 is used to create scopes for Numbers. Four scopes are currently defined:
 UNIVERSAL, context-specific, APPLICATION and PRIVATE. The Format component
 is actually a one-bit flag - zero for tags associated with scalar types,
@@ -739,19 +739,19 @@ To model both modes of tagging, a specialized container TagSet object
    Tag(tagClass=128, tagFormat=0, tagId=10)
    >>> tagSet = tagSet.tagExplicitly(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 20))
    >>> tagSet
-   TagSet((), Tag(tagClass=128, tagFormat=0, tagId=10), 
+   TagSet((), Tag(tagClass=128, tagFormat=0, tagId=10),
    Tag(tagClass=128, tagFormat=32, tagId=20))
    >>> tagSet = tagSet.tagExplicitly(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 30))
    >>> tagSet
-   TagSet((), Tag(tagClass=128, tagFormat=0, tagId=10), 
-   Tag(tagClass=128, tagFormat=32, tagId=20), 
+   TagSet((), Tag(tagClass=128, tagFormat=0, tagId=10),
+   Tag(tagClass=128, tagFormat=32, tagId=20),
    Tag(tagClass=128, tagFormat=32, tagId=30))
    >>> tagSet = tagSet.tagImplicitly(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 40))
    >>> tagSet
    TagSet((), Tag(tagClass=128, tagFormat=0, tagId=10),
    Tag(tagClass=128, tagFormat=32, tagId=20),
    Tag(tagClass=128, tagFormat=32, tagId=40))
-   >>> 
+   >>>
 
 As a side note: the "base tag" concept is now obsolete and not used.
 The "effective tag" is the one that always appears in encoding and is
@@ -775,7 +775,7 @@ data processing algorithms are to be chosen.
    True
    >>> tagSet2.isSuperTagSetOf(tagSet1)
    False
-   >>> 
+   >>>
 
 We will complete this discussion on tagging with a real-world example. The
 following ASN.1 tagged type:
@@ -793,7 +793,7 @@ could be expressed in pyasn1 like this:
    ...   tagSet = univ.Integer.tagSet.tagExplicitly(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12))
    >>> myInteger = MyIntegerType(12345)
    >>> myInteger.tagSet
-   TagSet((), Tag(tagClass=0, tagFormat=0, tagId=2), 
+   TagSet((), Tag(tagClass=0, tagFormat=0, tagId=2),
    Tag(tagClass=128, tagFormat=32, tagId=12))
    >>>
 
@@ -815,7 +815,7 @@ Besides scalar types, ASN.1 specifies so-called constructed ones - these
 are capable of holding one or more values of other types, both scalar
 and constructed.
 
-In pyasn1 implementation, constructed ASN.1 types behave like 
+In pyasn1 implementation, constructed ASN.1 types behave like
 Python sequences, and also support additional component addressing methods,
 specific to particular constructed type.
 
@@ -865,7 +865,7 @@ with possibly modified properties.
    ...       )
    ...     ),
    ...     namedtype.DefaultedNamedType(
-   ...       'house', 
+   ...       'house',
    ...       univ.Integer(0).subtype(
    ...         implicitTag=tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
    ...       )
@@ -895,7 +895,7 @@ instantiated and initialized (continuing the above code):
    >>> print(record.prettyPrint())
    Record:
     id=123
-   >>> 
+   >>>
    >>> record[1] = 321
    >>> print(record.prettyPrint())
    Record:
@@ -1117,7 +1117,7 @@ as will be explained later) and calls it for value verification.
    ...
    ValueConstraintError:
      SingleValueConstraint(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) failed at: A
-   >>> 
+   >>>
 
 Constrained pyasn1 value object can never hold a violating value.
 
@@ -1145,7 +1145,7 @@ And in pyasn1 terms:
    ...
    ValueConstraintError:
      ValueRangeConstraint(13, 19) failed at: 20
-   >>> 
+   >>>
 
 ASN.1 MIN and MAX operands can be substituted with floating point
 infinity values.
@@ -1208,7 +1208,7 @@ Express the same grammar in pyasn1:
    Traceback (most recent call last):
    ...
    ValueConstraintError: ValueSizeConstraint(2, 2) failed at: (1, 1, 0)
-   >>> 
+   >>>
 
 Size constraint can be applied to potentially massive values - bit or
 octet strings, SEQUENCE OF/SET OF values.
@@ -1217,7 +1217,7 @@ Alphabet constraint
 +++++++++++++++++++
 
 The permitted alphabet constraint is similar to Single value
-constraint but constraint applies to individual characters of a value. 
+constraint but constraint applies to individual characters of a value.
 
 .. code-block:: bash
 
@@ -1236,7 +1236,7 @@ And in pyasn1:
    Traceback (most recent call last):
    ...
    ValueConstraintError: PermittedAlphabetConstraint(".", "-", " ") failed at: "?"
-   >>> 
+   >>>
 
 Current implementation does not handle ranges of characters in
 constraint (FROM "A".."Z" syntax), one has to list the whole set in a
@@ -1393,7 +1393,7 @@ is a program that transforms between concrete data structures and a stream
 of octets, suitable for transmission over the wire. This serialized form of
 data is sometimes called *substrate* or *essence*.
 
-In pyasn1 implementation, substrate takes shape of Python 3 bytes or 
+In pyasn1 implementation, substrate takes shape of Python 3 bytes or
 Python 2 string objects.
 
 One of the properties of a codec is its ability to cope with
@@ -1411,9 +1411,9 @@ options and design choices, refer to `Apache ASN.1 project
 As of this writing, codecs implemented in pyasn1 are all stateless,
 mostly to keep the code simple.
 
-The pyasn1 package currently supports 
+The pyasn1 package currently supports
 `BER <http://en.wikipedia.org/wiki/Basic_encoding_rules>`_ codec and
-its variations -- 
+its variations --
 `CER <http://en.wikipedia.org/wiki/Canonical_encoding_rules>`_ and
 `DER <http://en.wikipedia.org/wiki/Distinguished_encoding_rules>`_.
 More ASN.1 codecs are planned for implementation in the future.
@@ -1601,7 +1601,7 @@ and the constrained one.
    ...
    ValueConstraintError:
      ValueRangeConstraint(0, 9) failed at: 13
-   >>> 
+   >>>
 
 Similarily to encoders, to use CER or DER decoders application has to
 explicitly import and call them - all APIs are compatible.
@@ -1615,20 +1615,20 @@ explicitly import and call them - all APIs are compatible.
    >>> from pyasn1.codec.ber import decoder as ber_decoder
    >>> from pyasn1.codec.cer import decoder as cer_decoder
    >>> from pyasn1.codec.der import decoder as der_decoder
-   >>> 
+   >>>
    >>> ber_decoder.decode(substrate)
    (OctetString(b'http://pyasn1.sf.net'), b'')
    >>> cer_decoder.decode(substrate)
    (OctetString(b'http://pyasn1.sf.net'), b'')
    >>> der_decoder.decode(substrate)
    (OctetString(b'http://pyasn1.sf.net'), b'')
-   >>> 
+   >>>
 
 Advanced topics
 ---------------
 
 Certain, non-trivial, ASN.1 data structures may require special
-treatment, especially when running deserialization. 
+treatment, especially when running deserialization.
 
 Decoding untagged types
 +++++++++++++++++++++++
@@ -1739,7 +1739,7 @@ given to guide the decoder. Continuing previous code:
    >>>
 
 Both CHOICE and ANY types are widely used in practice. Reader is welcome to
-take a look at 
+take a look at
 `ASN.1 specifications of X.509 applications
 <http://www.cs.auckland.ac.nz/~pgut001/pubs/x509guide.txt>`_
 for more information.

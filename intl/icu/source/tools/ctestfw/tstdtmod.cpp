@@ -1,7 +1,7 @@
 // © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /********************************************************************
- * COPYRIGHT: 
+ * COPYRIGHT:
  * Copyright (c) 2002-2014, International Business Machines Corporation and
  * others. All Rights Reserved.
  ********************************************************************/
@@ -157,7 +157,7 @@ RBTestDataModule::~RBTestDataModule()
   uprv_free(tdpath);
 }
 
-RBTestDataModule::RBTestDataModule(const char* name, TestLog& log, UErrorCode& status) 
+RBTestDataModule::RBTestDataModule(const char* name, TestLog& log, UErrorCode& status)
 : TestDataModule(name, log, status),
   fModuleBundle(NULL),
   fTestData(NULL),
@@ -190,16 +190,16 @@ UBool RBTestDataModule::getInfo(const DataMap *& info, UErrorCode &/*status*/) c
     }
 }
 
-TestData* RBTestDataModule::createTestData(int32_t index, UErrorCode &status) const 
+TestData* RBTestDataModule::createTestData(int32_t index, UErrorCode &status) const
 {
   TestData *result = NULL;
   UErrorCode intStatus = U_ZERO_ERROR;
 
   if(fDataTestValid == TRUE) {
     // Both of these resources get adopted by a TestData object.
-    UResourceBundle *DataFillIn = ures_getByIndex(fTestData, index, NULL, &status); 
+    UResourceBundle *DataFillIn = ures_getByIndex(fTestData, index, NULL, &status);
     UResourceBundle *headers = ures_getByKey(fInfoRB, "Headers", NULL, &intStatus);
-  
+
     if(U_SUCCESS(status)) {
       result = new RBTestData(DataFillIn, headers, status);
 
@@ -225,9 +225,9 @@ TestData* RBTestDataModule::createTestData(const char* name, UErrorCode &status)
 
   if(fDataTestValid == TRUE) {
     // Both of these resources get adopted by a TestData object.
-    UResourceBundle *DataFillIn = ures_getByKey(fTestData, name, NULL, &status); 
+    UResourceBundle *DataFillIn = ures_getByKey(fTestData, name, NULL, &status);
     UResourceBundle *headers = ures_getByKey(fInfoRB, "Headers", NULL, &intStatus);
-   
+
     if(U_SUCCESS(status)) {
       result = new RBTestData(DataFillIn, headers, status);
       if(U_SUCCESS(status)) {
@@ -248,8 +248,8 @@ TestData* RBTestDataModule::createTestData(const char* name, UErrorCode &status)
 
 
 //Get test data from ResourceBundles
-UResourceBundle* 
-RBTestDataModule::getTestBundle(const char* bundleName, UErrorCode &status) 
+UResourceBundle*
+RBTestDataModule::getTestBundle(const char* bundleName, UErrorCode &status)
 {
   if(U_SUCCESS(status)) {
     UResourceBundle *testBundle = NULL;

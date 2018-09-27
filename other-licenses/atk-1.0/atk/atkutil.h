@@ -42,14 +42,14 @@ typedef struct _AtkKeyEventStruct AtkKeyEventStruct;
 #endif
 
 /**
- * AtkEventListener: 
+ * AtkEventListener:
  * @obj: An #AtkObject instance for whom the callback will be called when
  * the specified event (e.g. 'focus:') takes place.
  *
  * A function which is called when an object emits a matching event,
  * as used in #atk_add_focus_tracker.
  * Currently the only events for which object-specific handlers are
- * supported are events of type "focus:".  Most clients of ATK will prefer to 
+ * supported are events of type "focus:".  Most clients of ATK will prefer to
  * attach signal handlers for the various ATK signals instead.
  *
  * @see: atk_add_focus_tracker.
@@ -60,7 +60,7 @@ typedef void  (*AtkEventListener) (AtkObject* obj);
  *
  * An #AtkEventListenerInit function is a special function that is
  * called in order to initialize the per-object event registration system
- * used by #AtkEventListener, if any preparation is required.  
+ * used by #AtkEventListener, if any preparation is required.
  *
  * @see: atk_focus_tracker_init.
  **/
@@ -71,12 +71,12 @@ typedef void  (*AtkEventListenerInit) (void);
  * notification is being given.
  * @func_data: a block of data which will be passed to the event listener, on notification.
  *
- * An #AtkKeySnoopFunc is a type of callback which is called whenever a key event occurs, 
- * if registered via atk_add_key_event_listener.  It allows for pre-emptive 
+ * An #AtkKeySnoopFunc is a type of callback which is called whenever a key event occurs,
+ * if registered via atk_add_key_event_listener.  It allows for pre-emptive
  * interception of key events via the return code as described below.
  *
- * Returns: TRUE (nonzero) if the event emission should be stopped and the event 
- * discarded without being passed to the normal GUI recipient; FALSE (zero) if the 
+ * Returns: TRUE (nonzero) if the event emission should be stopped and the event
+ * discarded without being passed to the normal GUI recipient; FALSE (zero) if the
  * event dispatch to the client application should proceed as normal.
  *
  * @see: atk_add_key_event_listener.
@@ -87,20 +87,20 @@ typedef gint  (*AtkKeySnoopFunc)  (AtkKeyEventStruct *event,
 /**
  * AtkKeyEventStruct:
  * @type: An AtkKeyEventType, generally one of ATK_KEY_EVENT_PRESS or ATK_KEY_EVENT_RELEASE
- * @state: A bitmask representing the state of the modifier keys immediately after the event takes place.   
+ * @state: A bitmask representing the state of the modifier keys immediately after the event takes place.
  * The meaning of the bits is currently defined to match the bitmask used by GDK in
- * GdkEventType.state, see 
+ * GdkEventType.state, see
  * http://developer.gnome.org/doc/API/2.0/gdk/gdk-Event-Structures.html#GdkEventKey
  * @keyval: A guint representing a keysym value corresponding to those used by GDK and X11: see
  * /usr/X11/include/keysymdef.h.
  * @length: The length of member #string.
- * @string: A string containing one of the following: either a string approximating the text that would 
+ * @string: A string containing one of the following: either a string approximating the text that would
  * result from this keypress, if the key is a control or graphic character, or a symbolic name for this keypress.
- * Alphanumeric and printable keys will have the symbolic key name in this string member, for instance "A". "0", 
+ * Alphanumeric and printable keys will have the symbolic key name in this string member, for instance "A". "0",
  * "semicolon", "aacute".  Keypad keys have the prefix "KP".
  * @keycode: The raw hardware code that generated the key event.  This field is raraly useful.
- * @timestamp: A timestamp in milliseconds indicating when the event occurred.  
- * These timestamps are relative to a starting point which should be considered arbitrary, 
+ * @timestamp: A timestamp in milliseconds indicating when the event occurred.
+ * These timestamps are relative to a starting point which should be considered arbitrary,
  * and only used to compare the dispatch times of events to one another.
  *
  * Encapsulates information about a key event.
@@ -112,7 +112,7 @@ struct _AtkKeyEventStruct {
   gint length;
   gchar *string;
   guint16 keycode;
-  guint32 timestamp;	
+  guint32 timestamp;
 };
 
 /**
@@ -159,7 +159,7 @@ GType atk_util_get_type (void);
  * immediate parent.
  *
  *Specifies how xy coordinates are to be interpreted. Used by functions such
- *as atk_component_get_position() and atk_text_get_character_extents() 
+ *as atk_component_get_position() and atk_text_get_character_extents()
  **/
 typedef enum {
   ATK_XY_SCREEN,

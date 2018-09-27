@@ -7,5 +7,5 @@
 +  if (!frame_pointer_needed)
 +    REGNO_POINTER_ALIGN (HARD_FRAME_POINTER_REGNUM) = 0;
  }
- 
+
  /* Map: eliminable "from" register -> its current elimination,

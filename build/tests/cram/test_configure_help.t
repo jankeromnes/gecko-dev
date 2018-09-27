@@ -9,6 +9,6 @@ configure --help works
   checking for vcs source checkout... hg
   checking for vcs source checkout... hg
   Usage: configure.py [options]
-  
+
   Options: [defaults in brackets after descriptions]
     --help                    print this message

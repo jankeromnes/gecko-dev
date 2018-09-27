@@ -1,5 +1,5 @@
 #!/bin/sh
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -59,7 +59,7 @@ fi
 #
 
 #forktest (failed on IRIX)
-#nbconn - fails on some platforms 
+#nbconn - fails on some platforms
 #poll_er - fails on some platforms? limited use?
 #prpoll -  the bad-FD test needs to be moved to a different test
 #sleep	-  specific to OS/2

@@ -6,7 +6,7 @@ var dbg = Debugger(g);
 var hits;
 var a = [];
 dbg.onDebuggerStatement = function (frame) {
-    for (var i = 0; i < a.length; i++) 
+    for (var i = 0; i < a.length; i++)
         assertEq(a[i] === frame, false);
     a.push(frame);
     hits++;

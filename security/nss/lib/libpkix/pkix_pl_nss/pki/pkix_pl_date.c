@@ -321,7 +321,7 @@ pkix_pl_Date_Equals(
         if (pkixErrorResult) {
             PKIX_DECREF(pkixErrorResult);
         }
-            
+
 cleanup:
 
         PKIX_RETURN(DATE);

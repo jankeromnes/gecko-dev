@@ -14,7 +14,7 @@ printStatus (summary);
 expect = 'TypeError';
 
 var saveString = String;
- 
+
 String = Array;
 
 try

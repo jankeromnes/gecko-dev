@@ -4,8 +4,8 @@
  * Author: Tom Schuster
  */
 
-JSON.stringify(new Boolean(false), function(k, v) { 
-    assertEq(typeof v, "object"); 
+JSON.stringify(new Boolean(false), function(k, v) {
+    assertEq(typeof v, "object");
 });
 
 assertEq(Boolean.prototype.hasOwnProperty('toJSON'), false);

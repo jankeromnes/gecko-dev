@@ -4,7 +4,7 @@ function f() {
         y = 3.14;
         y = y ^ y;
         return y;
-        
+
         function g() {
         }
     }

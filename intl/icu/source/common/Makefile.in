@@ -65,7 +65,7 @@ endif
 
 CPPFLAGS += -I$(srcdir) $(LIBCPPFLAGS) $(CPPFLAGSICUUC)
 # we want DEFS here
-DEFS += -DU_COMMON_IMPLEMENTATION 
+DEFS += -DU_COMMON_IMPLEMENTATION
 LDFLAGS += $(LDFLAGSICUUC)
 
 # for plugin configuration

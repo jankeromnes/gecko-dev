@@ -23,7 +23,7 @@ var init;
     function f() {  }
   }
 
-  
+
 }());
 
 assert.sameValue(init, 123);

@@ -124,7 +124,7 @@ pkix_CrlChecker_Create(PKIX_RevocationMethodType methodType,
                        void *plContext)
 {
         pkix_CrlChecker *crlChecker = NULL;
-        
+
         PKIX_ENTER(CRLCHECKER, "pkix_CrlChecker_Create");
         PKIX_NULLCHECK_TWO(certStores, pChecker);
 
@@ -208,7 +208,7 @@ pkix_CrlChecker_CheckLocal(
 
     PKIX_ENTER(CERTCHAINCHECKER, "pkix_CrlChecker_CheckLocal");
     PKIX_NULLCHECK_FOUR(cert, issuer, checkerObject, checkerObject);
-    
+
     state = (pkix_CrlChecker*)checkerObject;
 
     PKIX_CHECK(
@@ -221,7 +221,7 @@ pkix_CrlChecker_CheckLocal(
                               (PKIX_PL_Object **)&certStore,
                               plContext),
             PKIX_LISTGETITEMFAILED);
-        
+
         PKIX_CHECK(
             PKIX_CertStore_GetLocalFlag(certStore, &storeIsLocal,
                                         plContext),
@@ -240,7 +240,7 @@ pkix_CrlChecker_CheckLocal(
                                           * a chain by not specifying the time*/
                                           chainVerificationState ? date : NULL,
                                          /* crl downloading is not done. */
-                                          PKIX_FALSE,   
+                                          PKIX_FALSE,
                                           pReasonCode, &revStatus, plContext),
                     PKIX_CERTSTORECRLCHECKFAILED);
                 if (revStatus == PKIX_RevStatus_Revoked) {
@@ -305,7 +305,7 @@ pkix_CrlChecker_CheckExternal(
     PKIX_CertStore *localStore = NULL;
     PKIX_CRLSelector *crlSelector = NULL;
     PKIX_PL_X500Name *issuerName = NULL;
-    pkix_CrlChecker *state = NULL; 
+    pkix_CrlChecker *state = NULL;
     PKIX_UInt32 crlStoreIndex = 0;
     PKIX_UInt32 numCrlStores = 0;
     PKIX_Boolean storeIsLocal = PKIX_FALSE;
@@ -315,12 +315,12 @@ pkix_CrlChecker_CheckExternal(
 
     PKIX_ENTER(CERTCHAINCHECKER, "pkix_CrlChecker_CheckExternal");
     PKIX_NULLCHECK_FOUR(cert, issuer, checkerObject, pNBIOContext);
-    
+
     nbioContext = *pNBIOContext;
     *pNBIOContext = NULL; /* prepare for Error exit */
 
     state = (pkix_CrlChecker*)checkerObject;
-    
+
     PKIX_CHECK(
         PKIX_List_GetLength(state->certStores, &numCrlStores, plContext),
         PKIX_LISTGETLENGTHFAILED);
@@ -332,7 +332,7 @@ pkix_CrlChecker_CheckExternal(
                               (PKIX_PL_Object **)&certStore,
                               plContext),
             PKIX_LISTGETITEMFAILED);
-        
+
         PKIX_CHECK(
             PKIX_CertStore_GetLocalFlag(certStore, &storeIsLocal,
                                         plContext),
@@ -343,13 +343,13 @@ pkix_CrlChecker_CheckExternal(
                                                     &storeImportCrlFn,
                                                     plContext),
                 PKIX_CERTSTOREGETCHECKREVBYCRLFAILED);
-            
+
             PKIX_CHECK(
                 PKIX_CertStore_GetCrlCheckerFn(certStore,
                                                &storeCheckRevocationFn,
                                                plContext),
                 PKIX_CERTSTOREGETCHECKREVBYCRLFAILED);
-            
+
             if (storeImportCrlFn && storeCheckRevocationFn) {
                 localStore = certStore;
                 certStore = NULL;
@@ -389,12 +389,12 @@ pkix_CrlChecker_CheckExternal(
                               (PKIX_PL_Object **)&certStore,
                               plContext),
             PKIX_LISTGETITEMFAILED);
-        
+
         PKIX_CHECK(
             PKIX_CertStore_GetCRLCallback(certStore, &getCrlsFn,
                                           plContext),
             PKIX_CERTSTOREGETCRLCALLBACKFAILED);
-        
+
         PKIX_CHECK(
             (*getCrlsFn)(certStore, crlSelector, &nbioContext,
                       &crlList, plContext),
@@ -403,7 +403,7 @@ pkix_CrlChecker_CheckExternal(
         PKIX_CHECK(
             (*storeImportCrlFn)(localStore, issuerName, crlList, plContext),
             PKIX_CERTSTOREFAILTOIMPORTCRLLIST);
-        
+
         PKIX_CHECK(
             (*storeCheckRevocationFn)(certStore, cert, issuer, date,
                                       /* done with crl downloading */
@@ -419,7 +419,7 @@ pkix_CrlChecker_CheckExternal(
 
 cleanup:
     /* Update return flags */
-    if (revStatus == PKIX_RevStatus_NoInfo && 
+    if (revStatus == PKIX_RevStatus_NoInfo &&
 	((dpList && dpList->length > 0) ||
 	 (methodFlags & PKIX_REV_M_REQUIRE_INFO_ON_MISSING_SOURCE)) &&
         methodFlags & PKIX_REV_M_FAIL_ON_MISSING_FRESH_INFO) {

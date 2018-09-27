@@ -49,7 +49,7 @@ pkix_pl_CRL_GetVersion(
 
         PKIX_ENTER(CRL, "pkix_pl_CRL_GetVersion");
         PKIX_NULLCHECK_THREE(crl, crl->nssSignedCrl, pVersion);
-      
+
         PKIX_NULLCHECK_ONE(crl->nssSignedCrl->crl.version.data);
 
         myVersion = *(crl->nssSignedCrl->crl.version.data);
@@ -116,7 +116,7 @@ PKIX_PL_CRL_GetCRLNumber(
                                     (bytes, length, &crlNumber, plContext),
                                     PKIX_BIGINTCREATEWITHBYTESFAILED);
 
-                        /* arena release does the job 
+                        /* arena release does the job
                         PKIX_CRL_DEBUG("\t\tCalling SECITEM_FreeItem\n");
                         SECITEM_FreeItem(&nssCrlNumber, PKIX_FALSE);
                         */
@@ -197,7 +197,7 @@ pkix_pl_CRL_GetSignatureAlgId(
                     PKIX_CHECK(PKIX_PL_OID_CreateBySECItem
                                (algBytes, &signatureAlgId, plContext),
                                PKIX_OIDCREATEFAILED);
-                    
+
                     /* save a cached copy in case it is asked for again */
                     crl->signatureAlgId = signatureAlgId;
                     signatureAlgId = NULL;
@@ -531,7 +531,7 @@ pkix_pl_CRL_Hashcode(
         PKIX_PL_CRL *crl = NULL;
         PKIX_UInt32 certHash;
         SECItem *crlDer = NULL;
-        
+
         PKIX_ENTER(CRL, "pkix_pl_CRL_Hashcode");
         PKIX_NULLCHECK_TWO(object, pHashcode);
 
@@ -541,7 +541,7 @@ pkix_pl_CRL_Hashcode(
         crl = (PKIX_PL_CRL *)object;
         if (crl->adoptedDerCrl) {
             crlDer = crl->adoptedDerCrl;
-        } else if (crl->nssSignedCrl && crl->nssSignedCrl->derCrl) { 
+        } else if (crl->nssSignedCrl && crl->nssSignedCrl->derCrl) {
             crlDer = crl->nssSignedCrl->derCrl;
         }
         if (!crlDer || !crlDer->data) {
@@ -838,7 +838,7 @@ cleanup:
         }
         if (nssSignedCrl) {
             SEC_DestroyCrl(nssSignedCrl);
-        } 
+        }
 
         PKIX_RETURN(CRL);
 }
@@ -879,7 +879,7 @@ PKIX_PL_CRL_GetIssuer(
                                                                 &issuer,
                                                                 plContext),
                             PKIX_X500NAMECREATEFROMCERTNAMEFAILED);
-                        
+
                         /* save a cached copy in case it is asked for again */
                         crl->issuer = issuer;
                 }
@@ -1049,7 +1049,7 @@ PKIX_PL_CRL_ReleaseDerCrl(PKIX_PL_CRL *crl,
     PKIX_ENTER(CRL, "PKIX_PL_CRL_ReleaseDerCrl");
     *derCrl = crl->adoptedDerCrl;
     crl->adoptedDerCrl = NULL;
-        
+
     PKIX_RETURN(CRL);
 }
 
@@ -1063,6 +1063,6 @@ PKIX_PL_CRL_AdoptDerCrl(PKIX_PL_CRL *crl,
         PKIX_ERROR(PKIX_CANNOTAQUIRECRLDER);
     }
     crl->adoptedDerCrl = derCrl;
-cleanup:        
+cleanup:
     PKIX_RETURN(CRL);
 }

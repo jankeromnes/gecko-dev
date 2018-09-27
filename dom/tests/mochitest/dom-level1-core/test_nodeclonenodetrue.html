@@ -37,13 +37,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,20 +73,20 @@ var docName = 'nodeclonenodetrue';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
+*
     The "cloneNode(deep)" method returns a copy of the node
     and the subtree under it if deep=true.
-    
+
     Retrieve the second employee and invoke the
     "cloneNode(deep)" method with deep=true.   The
     method should clone this node and the subtree under it.
-    The NodeName of each child in the returned node is 
+    The NodeName of each child in the returned node is
     checked to insure the entire subtree under the second
     employee was cloned.
 
@@ -131,7 +131,7 @@ function nodeclonenodetrue() {
       expectedNoWhitespace[4] = "gender";
       expectedNoWhitespace[5] = "address";
 
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -153,19 +153,19 @@ function nodeclonenodetrue() {
       result[result.length] = clonedChildName;
 
 	}
-   
+
 	if(
 	(6 == length)
 	) {
 	assertEqualsList("nowhitespace",expectedNoWhitespace,result);
-       
+
 	}
-	
+
 		else {
 			assertEqualsList("whitespace",expectedWhitespace,result);
-       
+
 		}
-	
+
 }
 
 </script>
@@ -174,12 +174,12 @@ function nodeclonenodetrue() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/nodeclonenodetrue</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

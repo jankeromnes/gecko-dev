@@ -24,7 +24,7 @@ locales.forEach(function (locale) {
         "nu": ["native", "traditio", "finance", "invalid"],
         "tz": ["usnavajo", "utcw01", "aumel", "uslax", "usnyc", "deber", "invalid"]
     };
-    
+
     Object.getOwnPropertyNames(keyValues).forEach(function (key) {
         keyValues[key].forEach(function (value) {
             var dateTimeFormat = new Intl.DateTimeFormat([locale + "-u-" + key + "-" + value]);

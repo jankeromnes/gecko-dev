@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var x = { "0": 3, "-0": 7 };
 
   expect = actual = 'No Exception';

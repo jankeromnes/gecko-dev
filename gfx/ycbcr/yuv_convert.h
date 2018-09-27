@@ -11,7 +11,7 @@
 namespace mozilla {
 
 namespace gfx {
- 
+
 // Type of YUV surface.
 // The value of these enums matter as they are used to shift vertical indices.
 enum YUVType {

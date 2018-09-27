@@ -37,13 +37,13 @@ function setUpPage() {
        setImplementationAttribute("namespaceAware", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,14 +73,14 @@ var docName = 'documentimportnode22';
 
 
 /**
-* 
-	The importNode method imports a node from another document to this document. 
-	The returned node has no parent; (parentNode is null). The source node is not 
+*
+	The importNode method imports a node from another document to this document.
+	The returned node has no parent; (parentNode is null). The source node is not
 	altered or removed from the original document but a new copy of the source node
 	is created.
-	
-	Using the method importNode with deep=true/false, import two notaiton nodes into the 
-	same and different documnet objects.  In each case check if valid public and systemids 
+
+	Using the method importNode with deep=true/false, import two notaiton nodes into the
+	same and different documnet objects.  In each case check if valid public and systemids
 	are returned if any and if none, check if a null value was returned.
 
 * @author IBM
@@ -114,7 +114,7 @@ function documentimportnode22() {
       var systemId2;
       var systemId2Imp;
       var systemId2NewImp;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -161,7 +161,7 @@ notation1 = nodeMap.getNamedItem("notation1");
        assertEquals("documentimportnode22_N2NSID",systemId2,systemId2NewImp);
        assertNull("documentimportnode22_N2PID",publicId2Imp);
     assertNull("documentimportnode22_N2NPID",publicId2Imp);
-    
+
 }
 
 </script>
@@ -170,12 +170,12 @@ notation1 = nodeMap.getNamedItem("notation1");
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/documentimportnode22</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

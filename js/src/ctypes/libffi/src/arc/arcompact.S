@@ -1,7 +1,7 @@
 /* -----------------------------------------------------------------------
    arcompact.S - Copyright (c) 2013 Synposys, Inc. (www.synopsys.com)
-   
-   ARCompact Foreign Function Interface 
+
+   ARCompact Foreign Function Interface
 
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the
@@ -80,9 +80,9 @@ ENTRY(ffi_call_ARCompact)
 
         /* Call the function.  */
         jl.d       [r11]
-        add        sp, sp, r12 
+        add        sp, sp, r12
 
-        mov        sp, fp        
+        mov        sp, fp
         pop_s      r3        /* fig->flags, return type */
         pop_s      r2        /* ecif.rvalue, pointer for return value */
 
@@ -93,11 +93,11 @@ ENTRY(ffi_call_ARCompact)
         /* Return INT.  */
         brne       r3, FFI_TYPE_INT, return_double
         b.d        epilogue
-        st_s       r0, [r2]        
+        st_s       r0, [r2]
 
 return_double:
         brne       r3, FFI_TYPE_DOUBLE, epilogue
-        st_s       r0, [r2]        
+        st_s       r0, [r2]
         st_s       r1, [r2,4]
 
 epilogue:
@@ -122,7 +122,7 @@ ENTRY(ffi_closure_ARCompact)
         mov_s      r1, sp
 
         push_s     blink
-        
+
         bl.d       ffi_closure_inner_ARCompact
         mov_s      r0, r8                /* codeloc, set by trampoline */
 

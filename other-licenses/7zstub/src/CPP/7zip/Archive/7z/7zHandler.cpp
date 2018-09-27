@@ -36,13 +36,13 @@ CHandler::CHandler()
   #endif
 
   #ifdef EXTRACT_ONLY
-  
+
   _crcSize = 4;
-  
+
   #ifdef __7Z_SET_PROPERTIES
   _useMultiThreadMixer = true;
   #endif
-  
+
   #endif
 }
 
@@ -150,7 +150,7 @@ static char *AddProp32(char *s, const char *name, UInt32 v)
   ::ConvertUInt32ToString(v, s);
   return s + MyStringLen(s);
 }
- 
+
 void CHandler::AddMethodName(AString &s, UInt64 id)
 {
   AString name;
@@ -214,7 +214,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
     */
     // case kpidError: if (_db.ThereIsHeaderError) prop = "Header error"; break;
     #endif
-    
+
     case kpidWarningFlags:
     {
       UInt32 v = 0;
@@ -224,7 +224,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
         prop = v;
       break;
     }
-    
+
     case kpidErrorFlags:
     {
       UInt32 v = 0;
@@ -260,7 +260,7 @@ bool CHandler::IsFolderEncrypted(CNum folderIndex) const
   size_t size = _db.FoCodersDataOffset[folderIndex + 1] - startPos;
   CInByte2 inByte;
   inByte.Init(p, size);
-  
+
   CNum numCoders = inByte.ReadNum();
   for (; numCoders != 0; numCoders--)
   {
@@ -358,17 +358,17 @@ HRESULT CHandler::SetMethodToProp(CNum folderIndex, PROPVARIANT *prop) const
   char temp[kTempSize];
   unsigned pos = kTempSize;
   temp[--pos] = 0;
- 
+
   size_t startPos = _db.FoCodersDataOffset[folderIndex];
   const Byte *p = _db.CodersData + startPos;
   size_t size = _db.FoCodersDataOffset[folderIndex + 1] - startPos;
   CInByte2 inByte;
   inByte.Init(p, size);
-  
+
   // numCoders == 0 ???
   CNum numCoders = inByte.ReadNum();
   bool needSpace = false;
-  
+
   for (; numCoders != 0; numCoders--, needSpace = true)
   {
     if (pos < 32) // max size of property
@@ -386,7 +386,7 @@ HRESULT CHandler::SetMethodToProp(CNum folderIndex, PROPVARIANT *prop) const
       inByte.ReadNum(); // NumInStreams
       inByte.ReadNum(); // NumOutStreams
     }
-  
+
     CNum propsSize = 0;
     const Byte *props = NULL;
     if ((mainByte & 0x20) != 0)
@@ -395,11 +395,11 @@ HRESULT CHandler::SetMethodToProp(CNum folderIndex, PROPVARIANT *prop) const
       props = inByte.GetPtr();
       inByte.SkipDataNoCheck(propsSize);
     }
-    
+
     const char *name = NULL;
     char s[32];
     s[0] = 0;
-    
+
     if (id64 <= (UInt32)0xFFFFFFFF)
     {
       UInt32 id = (UInt32)id64;
@@ -468,7 +468,7 @@ HRESULT CHandler::SetMethodToProp(CNum folderIndex, PROPVARIANT *prop) const
         }
       }
     }
-    
+
     if (name)
     {
       unsigned nameLen = MyStringLen(name);
@@ -510,7 +510,7 @@ HRESULT CHandler::SetMethodToProp(CNum folderIndex, PROPVARIANT *prop) const
       }
     }
   }
-  
+
   if (numCoders != 0 && pos >= 4)
   {
     temp[--pos] = ' ';
@@ -518,7 +518,7 @@ HRESULT CHandler::SetMethodToProp(CNum folderIndex, PROPVARIANT *prop) const
     temp[--pos] = '.';
     temp[--pos] = '.';
   }
-  
+
   return PropVarEm_Set_Str(prop, temp + pos);
   // }
 }
@@ -530,14 +530,14 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
   PropVariant_Clear(value);
   // COM_TRY_BEGIN
   // NCOM::CPropVariant prop;
-  
+
   /*
   const CRef2 &ref2 = _refs[index];
   if (ref2.Refs.IsEmpty())
     return E_FAIL;
   const CRef &ref = ref2.Refs.Front();
   */
-  
+
   const CFileItem &item = _db.Files[index];
   const UInt32 index2 = index;
 
@@ -594,9 +594,9 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     */
 
     case kpidPath: return _db.GetPath_Prop(index, value);
-    
+
     #ifndef _SFX
-    
+
     case kpidMethod: return SetMethodToProp(_db.FileIndexToFolderIndexMap[index2], value);
     case kpidBlock:
       {
@@ -627,7 +627,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       }
       break;
     */
-    
+
     #endif
   }
   // prop.Detach(value);
@@ -644,7 +644,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream,
   #ifndef _SFX
   _fileInfoPopIDs.Clear();
   #endif
-  
+
   try
   {
     CMyComPtr<IArchiveOpenCallback> openArchiveCallbackTemp = openArchiveCallback;
@@ -665,7 +665,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream,
     _db.IsArc = false;
     RINOK(archive.Open(stream, maxCheckStartPosition));
     _db.IsArc = true;
-    
+
     HRESULT result = archive.ReadDatabase(
         EXTERNAL_CODECS_VARS
         _db
@@ -674,7 +674,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream,
         #endif
         );
     RINOK(result);
-    
+
     _inStream = stream;
   }
   catch(...)
@@ -713,7 +713,7 @@ STDMETHODIMP CHandler::Close()
 STDMETHODIMP CHandler::SetProperties(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps)
 {
   COM_TRY_BEGIN
-  
+
   InitCommon();
   _useMultiThreadMixer = true;
 

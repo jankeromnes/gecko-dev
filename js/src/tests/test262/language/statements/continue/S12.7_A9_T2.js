@@ -17,7 +17,7 @@ FOR : for(;;){
 		throw 1;
 	} catch(e){
 		continue;
-	}	
+	}
 }
 })();
 

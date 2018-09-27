@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
   var a = (function(){}).prototype;
   a.__proto__ = a.toString;

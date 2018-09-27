@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -33,38 +33,38 @@ class Reg extends TmpBase {
         this._name = name;
         this._isCalleeSave = !!isCalleeSave;
     }
-    
+
     static fromReg(reg)
     {
         return reg;
     }
-    
+
     get index() { return this._index; }
     get type() { return this._type; }
     get name() { return this._name; }
     get isCalleeSave() { return this._isCalleeSave; }
-    
+
     get isReg() { return true; }
-    
+
     hash()
     {
         if (this.isGP)
             return 1 + this._index;
         return -1 - this._index;
     }
-    
+
     toString()
     {
         return `%${this._name}`;
     }
-    
+
     static extract(arg)
     {
         if (arg.isReg)
             return arg.reg;
         return null;
     }
-    
+
     static forEachFast(arg, func)
     {
         return arg.forEachTmpFast(tmp => {
@@ -73,7 +73,7 @@ class Reg extends TmpBase {
             return func(tmp);
         });
     }
-    
+
     static forEach(arg, argRole, argType, argWidth, func)
     {
         return arg.forEachTmp(
@@ -99,7 +99,7 @@ class Reg extends TmpBase {
     {
         let index = 0;
         function newGPR(name, isCalleeSave) { return newReg(index++, GP, name, isCalleeSave); }
-        
+
         Reg.rax = newGPR("rax");
         Reg.rcx = newGPR("rcx");
         Reg.rdx = newGPR("rdx");
@@ -134,7 +134,7 @@ class Reg extends TmpBase {
         if (reg.isCalleeSave)
             Reg.calleeSaves.push(reg);
     }
-    
+
     Reg.callFrameRegister = Reg.rbp;
     Reg.stackPointerRegister = Reg.rsp;
 }

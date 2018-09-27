@@ -27,7 +27,7 @@ function test()
   var limit = 0;
   var incr  = 10;
   var resolution = 5;
-  
+
   while (stop - start == 0)
   {
     limit += incr;

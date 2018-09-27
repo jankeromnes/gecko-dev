@@ -118,8 +118,8 @@ public class HMACAuthHeaderProvider implements AuthHeaderProvider {
    * additional MAC Authentication specific data.
    *
    * @throws UnsupportedEncodingException
-   * @throws NoSuchAlgorithmException 
-   * @throws InvalidKeyException 
+   * @throws NoSuchAlgorithmException
+   * @throws InvalidKeyException
    */
   protected Header getAuthHeader(HttpRequestBase request, BasicHttpContext context, DefaultHttpClient client,
       long timestamp, String nonce, String extra)

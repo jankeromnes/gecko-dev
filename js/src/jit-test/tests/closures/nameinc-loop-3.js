@@ -17,9 +17,9 @@ var f = function() {
     g();
     appendToActual('h ' + p + ' ' + q);
   }
-  
+
   h();
-  
+
   appendToActual('f ' + p);
 }
 

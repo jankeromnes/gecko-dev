@@ -47,7 +47,7 @@ function checkNegativeMinMaxLength(element)
 
     element.setAttribute(type + 'Length', 0);
     is(element[type + "Length"], 0, "zero " + type + "Length is not processed correctly");
-    element.setAttribute(type + 'Length', 2147483647); // PR_INT32_MAX 
+    element.setAttribute(type + 'Length', 2147483647); // PR_INT32_MAX
     is(element[type + "Length"], 2147483647, "negative " + type + "Length is not processed correctly");
     element.setAttribute(type + 'Length', -2147483648);  // PR_INT32_MIN
     is(element[type + "Length"], -1, "negative " + type + "Length is not processed correctly");

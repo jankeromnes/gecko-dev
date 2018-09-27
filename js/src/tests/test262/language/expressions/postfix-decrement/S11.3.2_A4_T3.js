@@ -8,7 +8,7 @@ description: Type(x) is string primitive or String object
 ---*/
 
 //CHECK#1
-var x = "1"; 
+var x = "1";
 var y = x--;
 if (y !== 1) {
   $ERROR('#1: var x = "1"; var y = x--; y === 1. Actual: ' + (y));

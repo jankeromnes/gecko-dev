@@ -302,7 +302,7 @@ TEST(ModuleErrors, EmptyLine) {
   h.AddLine(1, 0, 1, 0, 0);
 
   ASSERT_EQ(0U, lines.size());
-}  
+}
 
 // We are supposed to clip lines that extend beyond the end of the
 // address space.
@@ -316,7 +316,7 @@ TEST(ModuleErrors, BigLine) {
 
   ASSERT_EQ(1U, lines.size());
   EXPECT_EQ(1U, lines[0].size);
-}  
+}
 
 // The 'Omitted' tests verify that we correctly omit line information
 // for code in sections that the linker has dropped. See "GNU

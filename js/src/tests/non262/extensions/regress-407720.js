@@ -20,7 +20,7 @@ var start = new Date();
 gDelayTestDriverEnd = true;
 document.write('<iframe onload="onLoad()"><\/iframe>');
 
-function onLoad() 
+function onLoad()
 {
 
   if ( (new Date() - start) < 60*1000)

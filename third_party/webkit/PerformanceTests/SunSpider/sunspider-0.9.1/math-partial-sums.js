@@ -7,14 +7,14 @@ function partial(n){
     var twothirds = 2.0/3.0;
     var alt = -1.0;
     var k2 = k3 = sk = ck = 0.0;
-    
+
     for (var k = 1; k <= n; k++){
         k2 = k*k;
         k3 = k2*k;
         sk = Math.sin(k);
         ck = Math.cos(k);
         alt = -alt;
-        
+
         a1 += Math.pow(twothirds,k-1);
         a2 += Math.pow(k,-0.5);
         a3 += 1.0/(k*(k+1.0));

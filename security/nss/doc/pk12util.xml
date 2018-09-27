@@ -48,7 +48,7 @@
     <title>Description</title>
     <para>The PKCS #12 utility, <command>pk12util</command>, enables sharing certificates among any server that supports PKCS #12. The tool can import certificates and keys from PKCS #12 files into security databases, export certificates, and list certificates and keys.</para>
   </refsection>
-  
+
   <refsection id="options">
     <title>Options and Arguments</title>
     <para><command>Options</command></para>
@@ -119,7 +119,7 @@
 
       <varlistentry>
         <term>-P prefix</term>
-        <listitem><para>Specify the prefix used on the certificate and key databases. This option is provided as a special case. 
+        <listitem><para>Specify the prefix used on the certificate and key databases. This option is provided as a special case.
           Changing the names of the certificate and key databases is not recommended.</para></listitem>
       </varlistentry>
 
@@ -246,9 +246,9 @@ Enter a password which will be used to encrypt your keys.
 The password should be at least 8 characters long,
 and should contain at least one non-alphabetic character.
 
-Enter new password: 
-Re-enter password: 
-Enter password for PKCS12 file: 
+Enter new password:
+Re-enter password:
+Enter password for PKCS12 file:
 pk12util: PKCS12 IMPORT SUCCESSFUL</programlisting>
 
     <para><command>Exporting Keys and Certificates</command></para>
@@ -257,7 +257,7 @@ pk12util: PKCS12 IMPORT SUCCESSFUL</programlisting>
     <para>pk12util -o p12File -n certname [-c keyCipher] [-C certCipher] [-m|--key_len keyLen] [-n|--cert_key_len certKeyLen] [-d [sql:]directory] [-P dbprefix] [-k slotPasswordFile|-K slotPassword] [-w p12filePasswordFile|-W p12filePassword]</para>
     <para>For example:</para>
     <programlisting># pk12util -o certs.p12 -n Server-Cert -d sql:/home/my/sharednssdb
-Enter password for PKCS12 file: 
+Enter password for PKCS12 file:
 Re-enter password: </programlisting>
 
     <para><command>Listing Keys and Certificates</command></para>
@@ -267,7 +267,7 @@ Re-enter password: </programlisting>
     <para>For example, this prints the default ASCII output:</para>
     <programlisting># pk12util -l certs.p12
 
-Enter password for PKCS12 file: 
+Enter password for PKCS12 file:
 Key(shrouded):
     Friendly Name: Thawte Freemail Member's Thawte Consulting (Pty) Ltd. ID
 
@@ -287,7 +287,7 @@ Certificate:
     </programlisting>
     <para>Alternatively, the <option>-r</option> prints the certificates and then exports them into separate DER binary files. This allows the certificates to be fed to another application that supports <filename>.p12</filename> files. Each certificate is written to a sequentially-number file, beginning with <filename>file0001.der</filename> and continuing through <filename>file000N.der</filename>, incrementing the number for every certificate:</para>
     <programlisting>pk12util -l test.p12 -r
-Enter password for PKCS12 file: 
+Enter password for PKCS12 file:
 Key(shrouded):
     Friendly Name: Thawte Freemail Member's Thawte Consulting (Pty) Ltd. ID
 
@@ -308,7 +308,7 @@ Certificate    Friendly Name: Thawte Freemail Member's Thawte Consulting (Pty) L
     <para>The private key is always protected with strong encryption by default.</para>
     <para>Several types of ciphers are supported.</para>
     <variablelist>
-    
+
       <varlistentry>
         <term>PKCS #5 password-based encryption</term>
         <listitem>
@@ -335,7 +335,7 @@ Certificate    Friendly Name: Thawte Freemail Member's Thawte Consulting (Pty) L
   </refsection>
 
 <refsection id="databases"><title>NSS Database Types</title>
-<para>NSS originally used BerkeleyDB databases to store security information. 
+<para>NSS originally used BerkeleyDB databases to store security information.
 The last versions of these <emphasis>legacy</emphasis> databases are:</para>
 <itemizedlist>
 	<listitem>
@@ -355,11 +355,11 @@ The last versions of these <emphasis>legacy</emphasis> databases are:</para>
 	</listitem>
 </itemizedlist>
 
-<para>BerkeleyDB has performance limitations, though, which prevent it from being easily used by multiple applications simultaneously. NSS has 
+<para>BerkeleyDB has performance limitations, though, which prevent it from being easily used by multiple applications simultaneously. NSS has
 some flexibility that allows applications to use their own, independent database engine while keeping a shared database and working around the access issues. Still, NSS
 requires more flexibility to provide a truly shared security database.</para>
 
-<para>In 2009, NSS introduced a new set of databases that are SQLite databases rather than 
+<para>In 2009, NSS introduced a new set of databases that are SQLite databases rather than
 BerkleyDB. These new databases provide more accessibility and performance:</para>
 <itemizedlist>
 	<listitem>
@@ -381,7 +381,7 @@ BerkleyDB. These new databases provide more accessibility and performance:</para
 
 <para>Because the SQLite databases are designed to be shared, these are the <emphasis>shared</emphasis> database type. The shared database type is preferred; the legacy format is included for backward compatibility.</para>
 
-<para>By default, the tools (<command>certutil</command>, <command>pk12util</command>, <command>modutil</command>) assume that the given security databases follow the more common legacy type. 
+<para>By default, the tools (<command>certutil</command>, <command>pk12util</command>, <command>modutil</command>) assume that the given security databases follow the more common legacy type.
 Using the SQLite databases must be manually specified by using the <command>sql:</command> prefix with the given security directory. For example:</para>
 
 <programlisting># pk12util -i /tmp/cert-files/users.p12 -d sql:/home/my/sharednssdb</programlisting>

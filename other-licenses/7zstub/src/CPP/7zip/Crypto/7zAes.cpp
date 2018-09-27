@@ -52,15 +52,15 @@ void CKeyInfo::CalcKey()
     CObjArray<Byte> buf(bufSize);
     memcpy(buf, Salt, SaltSize);
     memcpy(buf + SaltSize, Password, Password.Size());
-    
+
     CSha256 sha;
     Sha256_Init(&sha);
-    
+
     Byte *ctr = buf + SaltSize + Password.Size();
-    
+
     for (unsigned i = 0; i < 8; i++)
       ctr[i] = 0;
-    
+
     UInt64 numRounds = (UInt64)1 << NumCyclesPower;
 
     do
@@ -136,7 +136,7 @@ void CBase::PrepareKey()
 {
   // BCJ2 threads use same password. So we use long lock.
   MT_LOCK
-  
+
   bool finded = false;
   if (!_cachedKeys.GetKey(_key))
   {
@@ -210,15 +210,15 @@ CDecoder::CDecoder()
 STDMETHODIMP CDecoder::SetDecoderProperties2(const Byte *data, UInt32 size)
 {
   _key.ClearProps();
- 
+
   _ivSize = 0;
   unsigned i;
   for (i = 0; i < sizeof(_iv); i++)
     _iv[i] = 0;
-  
+
   if (size == 0)
     return S_OK;
-  
+
   Byte b0 = data[0];
 
   _key.NumCyclesPower = b0 & 0x3F;
@@ -232,7 +232,7 @@ STDMETHODIMP CDecoder::SetDecoderProperties2(const Byte *data, UInt32 size)
 
   unsigned saltSize = ((b0 >> 7) & 1) + (b1 >> 4);
   unsigned ivSize   = ((b0 >> 6) & 1) + (b1 & 0x0F);
-  
+
   if (size != 2 + saltSize + ivSize)
     return E_INVALIDARG;
   _key.SaltSize = saltSize;
@@ -249,17 +249,17 @@ STDMETHODIMP CDecoder::SetDecoderProperties2(const Byte *data, UInt32 size)
 STDMETHODIMP CBaseCoder::CryptoSetPassword(const Byte *data, UInt32 size)
 {
   COM_TRY_BEGIN
-  
+
   _key.Password.CopyFrom(data, (size_t)size);
   return S_OK;
-  
+
   COM_TRY_END
 }
 
 STDMETHODIMP CBaseCoder::Init()
 {
   COM_TRY_BEGIN
-  
+
   PrepareKey();
   CMyComPtr<ICryptoProperties> cp;
   RINOK(_aesFilter.QueryInterface(IID_ICryptoProperties, &cp));
@@ -268,7 +268,7 @@ STDMETHODIMP CBaseCoder::Init()
   RINOK(cp->SetKey(_key.Key, kKeySize));
   RINOK(cp->SetInitVector(_iv, sizeof(_iv)));
   return _aesFilter->Init();
-  
+
   COM_TRY_END
 }
 

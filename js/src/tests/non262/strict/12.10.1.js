@@ -19,7 +19,7 @@ assertEq(testLenientAndStrict('function f() { "use strict"; with (1) {} }',
                               parseRaisesException(SyntaxError),
                               parseRaisesException(SyntaxError)),
          true);
-                              
+
 /*
  * A use strict directive in a function mustn't affect the strictness
  * of subsequent code.

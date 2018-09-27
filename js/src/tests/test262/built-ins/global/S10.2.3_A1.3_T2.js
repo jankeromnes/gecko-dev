@@ -9,7 +9,7 @@ es5id: 10.2.3_A1.3_T2
 description: Eval execution context - Function Properties
 ---*/
 
-var evalStr = 
+var evalStr =
 '//CHECK#4\n'+
 'if ( eval === null ) {\n'+
 '  $ERROR("#4: eval === null");\n'+

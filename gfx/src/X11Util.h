@@ -72,7 +72,7 @@ SCOPED_TEMPLATE(ScopedXFree, ScopedXFreePtrTraits)
 /**
  * On construction, set a graceful X error handler that doesn't crash the application and records X errors.
  * On destruction, restore the X error handler to what it was before construction.
- * 
+ *
  * The SyncAndGetError() method allows to know whether a X error occurred, optionally allows to get the full XErrorEvent,
  * and resets the recorded X error state so that a single X error will be reported only once.
  *

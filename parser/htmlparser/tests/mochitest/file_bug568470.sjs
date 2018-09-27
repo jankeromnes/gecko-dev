@@ -6,7 +6,7 @@ function handleRequest(request, response)
   response.setHeader("Content-Type", "text/html", false);
   response.write("<script src='file_bug568470-script.sjs'></script>");
   response.write("<div id='flushable'>");
-  for (var i = 0; i < 2000; i++) { 
+  for (var i = 0; i < 2000; i++) {
     response.write("Lorem ipsum dolor sit amet. ");
   }
   response.write("</div>");

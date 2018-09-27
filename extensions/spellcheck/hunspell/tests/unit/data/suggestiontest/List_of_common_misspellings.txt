@@ -688,7 +688,7 @@ challege	challenge
 Champange	Champagne
 changable	changeable
 charachter	character
-charactor	character 
+charactor	character
 charachters	characters
 charactersistic	characteristic
 charactors	characters

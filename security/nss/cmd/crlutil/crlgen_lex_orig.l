@@ -16,7 +16,7 @@ static PRFileDesc *src;
 	     ferror( yyin )) \
 	   return SECFailure; \
     } else  { return SECFailure; }
-              
+
 
 %}
 

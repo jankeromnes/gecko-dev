@@ -70,7 +70,7 @@ XPTC__InvokebyIndex PROC FRAME
     ; ...
     ;
     ; On Win64 ABI, the first 4 parameters are passed using registers,
-    ; and others are on stack. 
+    ; and others are on stack.
 
     ; 1st, 2nd and 3rd arguments are passed via registers
 

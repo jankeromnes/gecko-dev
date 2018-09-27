@@ -32,7 +32,7 @@ try{
     } catch (e) {
         var incatch__incatch__var;
     }
-    
+
 };
 
 reportCompare(0, 0);

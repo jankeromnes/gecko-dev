@@ -5,7 +5,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=172261
 -->
 <head>
   <title>Test for Bug 172261</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -14,7 +14,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=172261
   <iframe id="test"></iframe>
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -34,7 +34,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=172261
     // First, create a dummy document.  Use onunload handlers to make sure
     // bfcache doesn't screw us up.
     var doc = $("test").contentDocument;
-    
+
     doc.write("<html><body onunload=''>First</body></html>");
     doc.close();
 

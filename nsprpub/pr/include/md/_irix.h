@@ -141,7 +141,7 @@ NSPR_API(struct PRThread*) _MD_get_current_thread(void);
 			_exit(0);							\
 		}										\
 	}
-		
+
 #define _MD_ATTACH_THREAD(threadp)
 
 #define _MD_SAVE_ERRNO(_thread)			(_thread)->md.errcode = errno;

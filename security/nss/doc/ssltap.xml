@@ -50,13 +50,13 @@
       <varlistentry>
         <term>-f </term>
         <listitem><para>
-Turn on fancy printing. Output is printed in colored HTML. Data sent from the client to the server is in blue; the server's reply is in red. When used with looping mode, the different connections are separated with horizontal lines. You can use this option to upload the output into a browser. 
+Turn on fancy printing. Output is printed in colored HTML. Data sent from the client to the server is in blue; the server's reply is in red. When used with looping mode, the different connections are separated with horizontal lines. You can use this option to upload the output into a browser.
         </para></listitem>
       </varlistentry>
       <varlistentry>
         <term>-h </term>
         <listitem><para>
-Turn on hex/ASCII printing. Instead of outputting raw data, the command interprets each record as a numbered line of hex values, followed by the same data as ASCII characters. The two parts are separated by a vertical bar. Nonprinting characters are replaced by dots. 
+Turn on hex/ASCII printing. Instead of outputting raw data, the command interprets each record as a numbered line of hex values, followed by the same data as ASCII characters. The two parts are separated by a vertical bar. Nonprinting characters are replaced by dots.
         </para></listitem>
       </varlistentry>
       <varlistentry>
@@ -94,7 +94,7 @@ Turn on looping; that is, continue to accept connections rather than stopping af
           * NNTP   119
           </para>
           <para>
-          * NNTPS  563 (NNTP over SSL) 
+          * NNTPS  563 (NNTP over SSL)
           </para>
         </listitem>
       </varlistentry>
@@ -130,11 +130,11 @@ You can use the SSL Debugging Tool to intercept any connection information. Alth
       </para>
 <programlisting>$ ssltap www.netscape.com</programlisting>
       <para>
-The program waits for an incoming connection on the default port 1924. In your browser window, enter the URL http://intercept:1924. The browser retrieves the requested page from the server at www.netscape.com, but the page is intercepted and passed on to the browser by the debugging tool on intercept. On its way to the browser, the data is printed to the command shell from which you issued the command. Data sent from the client to the server is surrounded by the following symbols: --> [ data ] Data sent from the server to the client is surrounded by the following symbols: 
-"left arrow"-- [ data ] The raw data stream is sent to standard output and is not interpreted in any way. This can result in peculiar effects, such as sounds, flashes, and even crashes of the command shell window. To output a basic, printable interpretation of the data, use the -h option, or, if you are looking at an SSL connection, the -s option. You will notice that the page you retrieved looks incomplete in the browser. This is because, by default, the tool closes down after the first connection is complete, so the browser is not able to load images. To make the tool 
+The program waits for an incoming connection on the default port 1924. In your browser window, enter the URL http://intercept:1924. The browser retrieves the requested page from the server at www.netscape.com, but the page is intercepted and passed on to the browser by the debugging tool on intercept. On its way to the browser, the data is printed to the command shell from which you issued the command. Data sent from the client to the server is surrounded by the following symbols: --> [ data ] Data sent from the server to the client is surrounded by the following symbols:
+"left arrow"-- [ data ] The raw data stream is sent to standard output and is not interpreted in any way. This can result in peculiar effects, such as sounds, flashes, and even crashes of the command shell window. To output a basic, printable interpretation of the data, use the -h option, or, if you are looking at an SSL connection, the -s option. You will notice that the page you retrieved looks incomplete in the browser. This is because, by default, the tool closes down after the first connection is complete, so the browser is not able to load images. To make the tool
 continue to accept connections, switch on looping mode with the -l option. The following examples show the output from commonly used combinations of options.
       </para>
-	
+
       <para>Example 1 </para>
 <programlisting>$ ssltap.exe -sx -p 444 interzone.mcom.com:443 > sx.txt</programlisting>
 	  <para>Output </para>
@@ -487,7 +487,7 @@ Server socket closed.
 
       <para>Example 4</para>
       <para>
-In this example, the -s option turns on SSL parsing, and the -h option turns on hex/ASCII format. 
+In this example, the -s option turns on SSL parsing, and the -h option turns on hex/ASCII format.
 Both formats are shown for each record. The output is routed to a text file.
       </para>
 <programlisting>$ ssltap -hs -p 444 interzone.mcom.com:443 > hs.txt</programlisting>
@@ -536,17 +536,17 @@ Server socket closed.
     <refsection id="usage-tips">
     <title>Usage Tips</title>
       <para>
-When SSL restarts a previous session, it makes use of cached information to do a partial handshake. 
+When SSL restarts a previous session, it makes use of cached information to do a partial handshake.
 If you wish to capture a full SSL handshake, restart the browser to clear the session id cache.
       </para>
       <para>
-If you run the tool on a machine other than the SSL server to which you are trying to connect, 
-the browser will complain that the host name you are trying to connect to is different from the certificate. 
-If you are using the default BadCert callback, you can still connect through a dialog. If you are not using 
+If you run the tool on a machine other than the SSL server to which you are trying to connect,
+the browser will complain that the host name you are trying to connect to is different from the certificate.
+If you are using the default BadCert callback, you can still connect through a dialog. If you are not using
 the default BadCert callback, the one you supply must allow for this possibility.
       </para>
     </refsection>
-  
+
   <refsection id="seealso">
     <title>See Also</title>
 	<para>The NSS Security Tools are also documented at <ulink url="http://www.mozilla.org/projects/security/pki/nss/tools">http://www.mozilla.org/projects/security/pki/nss/</ulink>.</para>

@@ -25,10 +25,10 @@
 	.type  SharedStub,@function
 
 SharedStub:
-        stwu	sp,-112(sp)			// room for 
+        stwu	sp,-112(sp)			// room for
 						// linkage (8),
 						// gprData (32),
-						// fprData (64), 
+						// fprData (64),
 						// stack alignment(8)
         mflr	r0
 	stw	r0,116(sp)			// save LR backchain
@@ -52,22 +52,22 @@ SharedStub:
 #endif
 
 						// r3 has the 'self' pointer already
-	
+
 	mr      r4,r11				// r4 <= methodIndex selector, passed
 						// via r11 in the nsXPTCStubBase::StubXX() call
-	
+
 	addi	r5,sp,120			// r5 <= pointer to callers args area,
 						// beyond r3-r10/f1-f8 mapped range
-	
+
 	addi	r6,sp,8				// r6 <= gprData
 #ifndef __NO_FPRS__
 	addi	r7,sp,40			// r7 <= fprData
 #else
 	li	r7, 0				// r7 should be unused
 #endif
-      
+
 	bl	PrepareAndDispatch@local	// Go!
-    
+
 	lwz	r0,116(sp)			// restore LR
 	mtlr	r0
 	la	sp,112(sp)			// clean up the stack

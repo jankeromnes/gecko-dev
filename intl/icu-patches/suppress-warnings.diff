@@ -8,7 +8,7 @@ diff --git a/intl/icu/source/acinclude.m4 b/intl/icu/source/acinclude.m4
                  CFLAGS="$CFLAGS -std=c11"
                  ;;
              esac
-             
+
              CFLAGS="$CFLAGS -Wall -pedantic -Wshadow -Wpointer-arith -Wmissing-prototypes -Wwrite-strings"
 +
 +            # Suppress clang C warnings:
@@ -48,7 +48,7 @@ diff --git a/intl/icu/source/configure b/intl/icu/source/configure
                  CFLAGS="$CFLAGS -std=c11"
                  ;;
              esac
- 
+
              CFLAGS="$CFLAGS -Wall -pedantic -Wshadow -Wpointer-arith -Wmissing-prototypes -Wwrite-strings"
 +
 +            # Suppress clang C warnings:

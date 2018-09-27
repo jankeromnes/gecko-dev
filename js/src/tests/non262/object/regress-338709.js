@@ -70,5 +70,5 @@ if ("document" in this) {
     }
 else
   Object = this.constructor
- 
+
     reportCompare(expect, actual, summary);

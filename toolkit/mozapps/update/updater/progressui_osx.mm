@@ -76,9 +76,9 @@ static const char *sUpdatePath;
     [NSApp hide:self];
     [NSApp stop:self];
   }
-  
+
   float progress = sProgressVal;
-  
+
   [progressBar setDoubleValue:(double)progress];
 }
 
@@ -95,7 +95,7 @@ int
 InitProgressUI(int *pargc, char ***pargv)
 {
   sUpdatePath = (*pargv)[1];
-  
+
   return 0;
 }
 

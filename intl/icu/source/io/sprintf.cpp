@@ -64,7 +64,7 @@ u_sprintf_pad_and_justify(void                        *context,
     if(info->fWidth != -1 && resultLen < info->fWidth) {
         int32_t paddingLeft = info->fWidth - resultLen;
         int32_t outputPos = output->len - output->available;
-  
+
         if (paddingLeft + resultLen > output->available) {
             paddingLeft = output->available - resultLen;
             if (paddingLeft < 0) {
@@ -91,7 +91,7 @@ u_sprintf_pad_and_justify(void                        *context,
     else {
         written = u_sprintf_write(output, result, resultLen);
     }
-    
+
     if (written >= 0 && lengthOfResult > written) {
     	return lengthOfResult;
     }
@@ -203,13 +203,13 @@ u_vsnprintf(UChar       *buffer,
     return written;
 }
 
-U_CAPI int32_t U_EXPORT2 
-u_vsprintf_u(UChar       *buffer, 
-             const UChar *patternSpecification, 
-             va_list     ap) 
-{ 
-    return u_vsnprintf_u(buffer, INT32_MAX, patternSpecification, ap); 
-} 
+U_CAPI int32_t U_EXPORT2
+u_vsprintf_u(UChar       *buffer,
+             const UChar *patternSpecification,
+             va_list     ap)
+{
+    return u_vsnprintf_u(buffer, INT32_MAX, patternSpecification, ap);
+}
 
 static const u_printf_stream_handler g_sprintf_stream_handler = {
     u_sprintf_write,
@@ -241,7 +241,7 @@ u_vsnprintf_u(UChar    *buffer,
 
     /* parse and print the whole format string */
     result = u_printf_parse(&g_sprintf_stream_handler, patternSpecification, &outStr, &outStr, &outStr.fBundle, &written, ap);
-    
+
     /* Terminate the buffer, if there's room. */
     if (outStr.available > 0) {
         buffer[outStr.len - outStr.available] = 0x0000;
@@ -250,7 +250,7 @@ u_vsnprintf_u(UChar    *buffer,
     /* Release the cloned bundle, if we cloned it. */
     u_locbund_close(&outStr.fBundle);
 
-    /* parsing error */ 
+    /* parsing error */
     if (result < 0) {
     	return result;
     }

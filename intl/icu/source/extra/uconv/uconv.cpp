@@ -109,7 +109,7 @@ static void initMsg(const char *pname) {
                     "%s: setAppData was called, internal data %s failed to load\n",
                         pname, UCONVMSG);
 #endif
- 
+
             err = U_ZERO_ERROR;
             /* that was try #1, try again with a path */
             uprv_strcpy(dataPath, u_getDataDirectory());
@@ -1372,7 +1372,7 @@ main(int argc, char **argv)
 error_exit:
 #if !UCONFIG_NO_LEGACY_CONVERSION
     ret = 1;
-#else 
+#else
     fprintf(stderr, "uconv error: UCONFIG_NO_LEGACY_CONVERSION is on. See uconfig.h\n");
 #endif
 normal_exit:

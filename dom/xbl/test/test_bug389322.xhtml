@@ -63,7 +63,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=389322
           catch (e) { success = false }
           var win = XPCNativeWrapper.unwrap(window);
           win.report("XBL constructors", success)
-        
+
           var ev = document.createEvent("Events")
           ev.initEvent("custom", false, false)
           this.dispatchEvent(ev)
@@ -87,7 +87,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=389322
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=389322">Mozilla Bug 389322</a>
 <p id="display" style="-moz-binding: url(#test)"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">

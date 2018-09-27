@@ -30,7 +30,7 @@ NOMD_CFLAGS  += $(OPTIMIZER) $(NOMD_OS_CFLAGS) $(XP_DEFINE) $(DEFINES) \
 #     in a given source code directory (in manifest.mn)
 # =0: Never optimize the code for size.
 #
-# Default value = 0 
+# Default value = 0
 # Can be overridden from the make command line.
 ifndef OPT_CODE_SIZE
 OPT_CODE_SIZE = 0

@@ -224,7 +224,7 @@ pkix_Error_ToString(
 
         /* Get the description string */
         PKIX_Error_GetDescription(error, &desc, plContext);
-            
+
         /* Get the cause */
         cause = error->cause;
 

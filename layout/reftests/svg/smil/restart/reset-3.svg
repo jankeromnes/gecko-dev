@@ -1,6 +1,6 @@
 <!--
   A variation on reset-2.svg.
-  
+
   Perhaps surprisingly, restart behaviour only applies for the second interval
   onwards. This is inconsistent but it's the spec
   (see http://lists.w3.org/Archives/Public/www-smil/2009OctDec/0004.html)

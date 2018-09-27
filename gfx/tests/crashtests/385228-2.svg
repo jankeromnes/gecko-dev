@@ -12,7 +12,7 @@ function yaa()
   var g = document.getElementById("g");
   document.documentElement.removeChild(g);
   document.documentElement.appendChild(g);
-  
+
   document.documentElement.removeAttribute("class");
 }
 </script>

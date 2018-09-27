@@ -2,7 +2,7 @@
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
- 
+
 /**
  * Runs html5lib-formatted test cases in the browser. Requires SimpleTest.
  *
@@ -67,13 +67,13 @@ function makeTestChecker(input, expected, errors) {
       }
     }
     nextTest(e.target);
-  } 
+  }
 }
 
-function makeFragmentTestChecker(input, 
-                                 expected, 
-                                 errors, 
-                                 fragment, 
+function makeFragmentTestChecker(input,
+                                 expected,
+                                 errors,
+                                 fragment,
                                  testframe) {
   return function () {
     var context;
@@ -94,7 +94,7 @@ function makeFragmentTestChecker(input,
       writeErrorSummary(input, expected, domAsString, false);
     }
     nextTest(testframe);
-  } 
+  }
 }
 
 var testcases;
@@ -107,10 +107,10 @@ function nextTest(testframe) {
   }
   var [input, output, errors, fragment] = value;
   if (fragment) {
-    asyncRun(makeFragmentTestChecker(input, 
-                                     output, 
-                                     errors, 
-                                     fragment, 
+    asyncRun(makeFragmentTestChecker(input,
+                                     output,
+                                     errors,
+                                     fragment,
                                      testframe));
   } else {
     testframe.onload = makeTestChecker(input, output, errors);

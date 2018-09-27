@@ -403,7 +403,7 @@ public:
       */
      eIntID_ScrollbarFadeBeginDelay,
      eIntID_ScrollbarFadeDuration,
-      
+
      /**
       * Distance in pixels to offset the context menu from the cursor
       * on open.

@@ -305,7 +305,7 @@ MultiTouchInput::TransformToLocal(const ScreenToParentLayerMatrix4x4& aTransform
 {
   for (size_t i = 0; i < mTouches.Length(); i++) {
     Maybe<ParentLayerIntPoint> point = UntransformBy(aTransform, mTouches[i].mScreenPoint);
-    if (!point) { 
+    if (!point) {
       return false;
     }
     mTouches[i].mLocalScreenPoint = *point;
@@ -565,13 +565,13 @@ PanGestureInput::ToWidgetWheelEvent(nsIWidget* aWidget) const
 
 bool
 PanGestureInput::TransformToLocal(const ScreenToParentLayerMatrix4x4& aTransform)
-{ 
+{
   Maybe<ParentLayerPoint> panStartPoint = UntransformBy(aTransform, mPanStartPoint);
   if (!panStartPoint) {
     return false;
   }
   mLocalPanStartPoint = *panStartPoint;
-  
+
   Maybe<ParentLayerPoint> panDisplacement = UntransformVector(aTransform, mPanDisplacement, mPanStartPoint);
   if (!panDisplacement) {
     return false;

@@ -11,8 +11,8 @@ var expect = '';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 expect = 3;
 actual = "m\ucc44nd".split(/\b/).length;
- 
+
 reportCompare(expect, actual, summary);

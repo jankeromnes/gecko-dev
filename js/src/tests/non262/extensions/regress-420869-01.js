@@ -18,10 +18,10 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function f(i) {
-    if (i == 0) 
-      return 1; 
+    if (i == 0)
+      return 1;
     return i*f(i-1);
   }
 

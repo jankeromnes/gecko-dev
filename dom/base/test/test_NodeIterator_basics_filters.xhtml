@@ -21,7 +21,7 @@
   function compare_arrays(e, f, label) {
     var length = (e.length > f.length) ? e.length : f.length;
     for (var i = 0; i < length; i += 1) {
-      if (e[i] > 0) 
+      if (e[i] > 0)
         is(f[i], e[i], label + " - index " + i + ": ");
       else
         todo_is(f[i], -e[i], label + " - index " + i + ": ");
@@ -171,7 +171,7 @@
       ok(false, "iterator.nextNode() should have thrown, but instead it returned <" + p.nodeName + ">");
     } catch (x) { ok(true, x) }
   })();
-        
+
 ]]></script>
 </pre>
 </body>

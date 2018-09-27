@@ -39,7 +39,7 @@ example: ![imported-bindings]
 
 When Webpack is left to its own devices then dependencies are not mapped at all. In these cases, the original dependencies all map to the generated location `0,0`, which is equivalent to null.
 
-- example 1: ![webpack-es-modules]  
+- example 1: ![webpack-es-modules]
 - example 2: ![webpack-modules]
 
 ![](https://shipusercontent.com/cf65771d652824679cfe0ed8dab13f8b/Screen%20Shot%202018-03-28%20at%2010.09.36%20PM.png)

@@ -19,7 +19,7 @@ function sendResults() {
   for (var i = 0; i < ps.length; i++) {
     res.widths.push(ps[i].offsetWidth);
   }
-  
+
   try {
     res.anonChildCount =
       SpecialPowers.wrap(document).getAnonymousNodes(document.getElementById('b')).length;

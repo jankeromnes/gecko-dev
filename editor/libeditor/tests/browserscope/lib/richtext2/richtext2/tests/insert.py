@@ -4,7 +4,7 @@ INSERT_TESTS = {
   'caption':    'Insert Tests',
   'checkAttrs': False,
   'checkStyle': False,
-  
+
   'Proposed': [
     { 'desc':       '',
       'command':    '',

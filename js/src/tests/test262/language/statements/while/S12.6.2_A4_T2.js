@@ -14,7 +14,7 @@ do_out : while(1===1) {
     var __in__do__before__break="black";
     do_in : while (1) {
         var __in__do__IN__before__break="hole";
-        break do_in; 
+        break do_in;
         var __in__do__IN__after__break="sun";
     } ;
     var __in__do__after__break="won't you come";

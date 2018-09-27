@@ -5,7 +5,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=372086
 -->
 <head>
   <title>Test for Bug 372086</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -21,7 +21,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=372086
   <div id="d" style="-moz-binding: url(file_bug372086.xml)">abc</div>def
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -36,7 +36,7 @@ function runTest() {
 
   var c = $("d").firstChild;
   var a = $("d").nextSibling;
-  
+
   range.setStart(c, 1);
   range.setEnd(c, 3);
   is(SpecialPowers.unwrap(range.startContainer), c, "Unexpected start container");
@@ -66,7 +66,7 @@ function runTest() {
 
   anon = SpecialPowers.wrap(document).getAnonymousNodes($("d"))[2];
   // Collapses because one endpoint is anonymous from point of view of
-  // the other.  
+  // the other.
   range.setStart(anon, 1);
   is(SpecialPowers.unwrap(range.startContainer),
      SpecialPowers.unwrap(anon), "Unexpected newly collapsed start container");

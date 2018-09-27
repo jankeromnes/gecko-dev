@@ -9,7 +9,7 @@ mod grammar {
     // end up in the source directory. This could happen when `cargo build` builds the file out of
     // the Cargo cache (`$HOME/.cargo/registrysrc`), and the build script would then put its output
     // in that cached source directory because of https://github.com/lalrpop/lalrpop/issues/280.
-    // Later runs of `cargo vendor` then copy the source from that directory, including the 
+    // Later runs of `cargo vendor` then copy the source from that directory, including the
     // generated file.
     include!(concat!(env!("OUT_DIR"), "/parser/grammar.rs"));
 }

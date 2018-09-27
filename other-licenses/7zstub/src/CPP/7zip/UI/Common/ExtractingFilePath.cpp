@@ -34,7 +34,7 @@ static void ReplaceIncorrectChars(UString &s)
         s.ReplaceOneCharAtPos(i, '_');
     }
   }
-  
+
   if (g_PathTrailReplaceMode)
   {
     /*
@@ -164,11 +164,11 @@ UString Get_Correct_FsFile_Name(const UString &name)
 {
   UString res = name;
   Correct_PathPart(res);
-  
+
   #ifdef _WIN32
   CorrectUnsupportedName(res);
   #endif
-  
+
   if (res.IsEmpty())
     res = k_EmptyReplaceName;
   return res;
@@ -184,7 +184,7 @@ void Correct_FsPath(bool absIsAllowed, bool keepAndReplaceEmptyPrefixes, UString
     #if defined(_WIN32) && !defined(UNDER_CE)
     bool isDrive = false;
     #endif
-    
+
     if (parts[0].IsEmpty())
     {
       i = 1;
@@ -250,7 +250,7 @@ void Correct_FsPath(bool absIsAllowed, bool keepAndReplaceEmptyPrefixes, UString
       CorrectUnsupportedName(s);
       #endif
     }
-    
+
     i++;
   }
 

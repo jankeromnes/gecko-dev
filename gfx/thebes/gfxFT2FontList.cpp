@@ -454,7 +454,7 @@ FT2FontEntry::CairoFontFace(const gfxFontStyle* aStyle)
         int flags = gfxPlatform::GetPlatform()->FontHintingEnabled() ?
                     FT_LOAD_DEFAULT :
                     (FT_LOAD_NO_AUTOHINT | FT_LOAD_NO_HINTING);
-        mFontFace = cairo_ft_font_face_create_for_ft_face(face, flags, 
+        mFontFace = cairo_ft_font_face_create_for_ft_face(face, flags,
                                                           nullptr, 0);
         auto userFontData = new FTUserFontData(face, face.FontData(),
                                                face.DataLength());
@@ -531,7 +531,7 @@ FT2FontEntry::ReadCMAP(FontInfoData *aFontInfoData)
 
     AutoTArray<uint8_t, 16384> buffer;
     nsresult rv = CopyFontTable(TTAG_cmap, buffer);
-    
+
     if (NS_SUCCEEDED(rv)) {
         rv = gfxFontUtils::ReadCMAP(buffer.Elements(), buffer.Length(),
                                     *charmap, mUVSOffset);

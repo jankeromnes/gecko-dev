@@ -67,7 +67,7 @@ STDMETHODIMP CEncoder::SetOutBufSize(UInt32 streamIndex, UInt32 size) { _bufsNew
 STDMETHODIMP CEncoder::SetCoderProperties(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps)
 {
   UInt32 relatLim = BCJ2_RELAT_LIMIT;
-  
+
   for (UInt32 i = 0; i < numProps; i++)
   {
     const PROPVARIANT &prop = props[i];
@@ -102,13 +102,13 @@ STDMETHODIMP CEncoder::SetCoderProperties(const PROPID *propIDs, const PROPVARIA
         continue;
       case NCoderPropID::kLevel:
         continue;
-     
+
       default: return E_INVALIDARG;
     }
   }
-  
+
   _relatLim = relatLim;
-  
+
   return S_OK;
 }
 
@@ -134,10 +134,10 @@ HRESULT CEncoder::CodeReal(ISequentialInStream * const *inStreams, const UInt64 
   inStreams[0]->QueryInterface(IID_ICompressGetSubStreamSize, (void **)&getSubStreamSize);
 
   CBcj2Enc enc;
-    
+
   enc.src = _bufs[BCJ2_NUM_STREAMS];
   enc.srcLim = enc.src;
-    
+
   {
     for (int i = 0; i < BCJ2_NUM_STREAMS; i++)
     {
@@ -173,43 +173,43 @@ HRESULT CEncoder::CodeReal(ISequentialInStream * const *inStreams, const UInt64 
       enc.fileIp = 0;
       enc.fileSize = fileSize_for_Conv;
       enc.finishMode = BCJ2_ENC_FINISH_MODE_CONTINUE;
-      
+
       for (;;)
       {
         UInt64 subStreamSize = 0;
         HRESULT result = getSubStreamSize->GetSubStreamSize(subStreamIndex, &subStreamSize);
         needSubSize = false;
-        
+
         if (result == S_OK)
         {
           UInt64 newEndPos = subStreamStartPos + subStreamSize;
-          
+
           bool isAccurateEnd = (newEndPos < totalStreamRead ||
             (newEndPos <= totalStreamRead && readWasFinished));
-          
+
           if (newEndPos <= currentInPos && isAccurateEnd)
           {
             subStreamStartPos = newEndPos;
             subStreamIndex++;
             continue;
           }
-          
+
           enc.srcLim = _bufs[BCJ2_NUM_STREAMS] + numBytes_in_ReadBuf;
-          
+
           if (isAccurateEnd)
           {
             // data in enc.temp is possible here
             size_t rem = (size_t)(totalStreamRead - newEndPos);
-            
+
             /* Pos_of(enc.src) <= old newEndPos <= newEndPos
                in another case, it's fail in some code */
             if ((size_t)(enc.srcLim - enc.src) < rem)
               return E_FAIL;
-            
+
             enc.srcLim -= rem;
             enc.finishMode = BCJ2_ENC_FINISH_MODE_END_BLOCK;
           }
-          
+
           if (subStreamSize <= BCJ2_FileSize_MAX)
           {
             enc.fileIp = enc.ip + (UInt32)(subStreamStartPos - currentInPos);
@@ -217,7 +217,7 @@ HRESULT CEncoder::CodeReal(ISequentialInStream * const *inStreams, const UInt64 
           }
           break;
         }
-        
+
         if (result == S_FALSE)
           break;
         if (result == E_NOTIMPL)
@@ -235,7 +235,7 @@ HRESULT CEncoder::CodeReal(ISequentialInStream * const *inStreams, const UInt64 
     Bcj2Enc_Encode(&enc);
 
     currentInPos = totalStreamRead - numBytes_in_ReadBuf + (enc.src - _bufs[BCJ2_NUM_STREAMS]) - enc.tempPos;
-    
+
     if (Bcj2Enc_IsFinished(&enc))
       break;
 
@@ -264,11 +264,11 @@ HRESULT CEncoder::CodeReal(ISequentialInStream * const *inStreams, const UInt64 
 
       if (readWasFinished)
         continue;
-      
+
       numBytes_in_ReadBuf = 0;
       enc.src    = _bufs[BCJ2_NUM_STREAMS];
       enc.srcLim = _bufs[BCJ2_NUM_STREAMS];
- 
+
       UInt32 curSize = _bufsCurSizes[BCJ2_NUM_STREAMS];
       RINOK(inStreams[0]->Read(_bufs[BCJ2_NUM_STREAMS], curSize, &curSize));
 
@@ -348,7 +348,7 @@ void CDecoder::InitCommon()
       _readRes[i] = S_OK;
     }
   }
-    
+
   Bcj2Dec_Init(&dec);
 }
 
@@ -360,11 +360,11 @@ HRESULT CDecoder::Code(ISequentialInStream * const *inStreams, const UInt64 * co
     return E_INVALIDARG;
 
   RINOK(Alloc());
-    
+
   InitCommon();
 
   dec.destLim = dec.dest = _bufs[BCJ2_NUM_STREAMS];
-  
+
   UInt64 outSizeProcessed = 0;
   UInt64 prevProgress = 0;
 
@@ -374,7 +374,7 @@ HRESULT CDecoder::Code(ISequentialInStream * const *inStreams, const UInt64 * co
   {
     if (Bcj2Dec_Decode(&dec) != SZ_OK)
       return S_FALSE;
-    
+
     if (dec.state < BCJ2_NUM_STREAMS)
     {
       size_t totalRead = _extraReadSizes[dec.state];
@@ -534,7 +534,7 @@ STDMETHODIMP CDecoder::SetOutStreamSize(const UInt64 *outSize)
   _outSize_Processed = 0;
 
   HRESULT res = Alloc(false);
-  
+
   InitCommon();
   dec.destLim = dec.dest = NULL;
 
@@ -551,7 +551,7 @@ STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
     return S_OK;
 
   UInt32 totalProcessed = 0;
- 
+
   if (_outSizeDefined)
   {
     UInt64 rem = _outSize - _outSize_Processed;
@@ -568,7 +568,7 @@ STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
     SRes sres = Bcj2Dec_Decode(&dec);
     if (sres != SZ_OK)
       return S_FALSE;
-    
+
     {
       UInt32 curSize = (UInt32)(dec.dest - (Byte *)data);
       if (curSize != 0)
@@ -644,7 +644,7 @@ STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
     if (dec.state != BCJ2_STREAM_MAIN &&
         dec.state != BCJ2_DEC_STATE_ORIG)
       return S_FALSE;
-  
+
     /*
     for (int i = 0; i < BCJ2_NUM_STREAMS; i++)
       if (dec.bufs[i] != dec.lims[i] || _extraReadSizes[i] != 0)

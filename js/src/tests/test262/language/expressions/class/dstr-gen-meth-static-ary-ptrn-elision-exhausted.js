@@ -84,7 +84,7 @@ iter.next();
 var callCount = 0;
 var C = class {
   static *method([,]) {
-    
+
     callCount = callCount + 1;
   }
 };

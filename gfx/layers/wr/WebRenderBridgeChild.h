@@ -168,7 +168,7 @@ public:
   /// Do not use this for anything else.
   bool AllocResourceShmem(size_t aSize, RefCountedShmem& aShm);
   /// Dealloc shared memory that was allocated with AllocResourceShmem.
-  /// 
+  ///
   /// Do not use this for anything else.
   void DeallocResourceShmem(RefCountedShmem& aShm);
 

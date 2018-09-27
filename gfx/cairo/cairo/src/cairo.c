@@ -825,7 +825,7 @@ cairo_pop_group (cairo_t *cr)
 
     /* If we have a current path, we need to adjust it to compensate for
      * the device offset just removed. */
-    cairo_matrix_multiply (&device_transform_matrix, 
+    cairo_matrix_multiply (&device_transform_matrix,
                            &_cairo_gstate_get_target (cr->gstate)->device_transform,
 			   &group_surface->device_transform_inverse);
     _cairo_path_fixed_transform (cr->path, &device_transform_matrix);

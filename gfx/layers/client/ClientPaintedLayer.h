@@ -93,12 +93,12 @@ public:
   {
     aAttrs = PaintedLayerAttributes(GetValidRegion());
   }
-  
+
   ClientLayerManager* ClientManager()
   {
     return static_cast<ClientLayerManager*>(mManager);
   }
-  
+
   virtual Layer* AsLayer() override { return this; }
   virtual ShadowableLayer* AsShadowableLayer() override { return this; }
 

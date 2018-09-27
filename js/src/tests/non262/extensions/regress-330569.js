@@ -19,10 +19,10 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var s;
   expect = 'InternalError: regular expression too complex';
- 
+
   s = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">' +
     '<html>\n' +
     '<head>\n' +

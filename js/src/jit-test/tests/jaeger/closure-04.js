@@ -27,4 +27,4 @@ function test() {
   iter.next();
   iter.return();
   gc();
-} 
+}

@@ -33,5 +33,5 @@ var likeNumber = {
   var expect = 1;
 var actual = parseInt(likeString, likeNumber);
 printStatus("expect="+expect+" actual="+actual);
- 
+
 reportCompare(expect, actual, summary);

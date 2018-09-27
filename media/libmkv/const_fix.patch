@@ -3,7 +3,7 @@ diff --git a/WebMElement.c b/WebMElement.c
 +++ b/WebMElement.c
 @@ -56,7 +56,7 @@
  }
- 
+
  void writeVideoTrack(EbmlGlobal *glob, unsigned int trackNumber, int flagLacing,
 -                     char *codecId, unsigned int pixelWidth, unsigned int pixelHeight,
 +                     const char *codecId, unsigned int pixelWidth, unsigned int pixelHeight,
@@ -33,5 +33,5 @@ diff --git a/WebMElement.h b/WebMElement.h
 -                     char *codecId, double samplingFrequency, unsigned int channels,
 +                     const char *codecId, double samplingFrequency, unsigned int channels,
                       unsigned char *private_, unsigned long privateSize);
- 
+
  void writeSimpleBlock(EbmlGlobal *ebml, unsigned char trackNumber, short timeCode,

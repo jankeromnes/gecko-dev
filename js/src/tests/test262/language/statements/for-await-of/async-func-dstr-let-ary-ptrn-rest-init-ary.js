@@ -51,7 +51,7 @@ var iterCount = 0;
 
 async function fn() {
   for await (let [...[ x ] = []] of [[]]) {
-    
+
 
     iterCount += 1;
   }

@@ -111,12 +111,12 @@ nsNativeAppSupportCocoa::ReOpen()
   bool haveNonMiniaturized = false;
   bool haveOpenWindows = false;
   bool done = false;
-  
-  nsCOMPtr<nsIWindowMediator> 
+
+  nsCOMPtr<nsIWindowMediator>
     wm(do_GetService(NS_WINDOWMEDIATOR_CONTRACTID));
   if (!wm) {
     return NS_ERROR_FAILURE;
-  } 
+  }
   else {
     nsCOMPtr<nsISimpleEnumerator> windowList;
     wm->GetXULWindowEnumerator(nullptr, getter_AddRefs(windowList));
@@ -176,7 +176,7 @@ nsNativeAppSupportCocoa::ReOpen()
 
       return cmdLine->Run();
     }
-    
+
   } // got window mediator
   return NS_OK;
 

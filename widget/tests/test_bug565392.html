@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=565392
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=565392">Mozilla Bug 565392</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -24,7 +24,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=565392
   var dir1 = ds.get("ProfD", Ci.nsIFile);
   var clipboard = Cc["@mozilla.org/widget/clipboard;1"]
                     .getService(Ci.nsIClipboard);
-  
+
   function getLoadContext() {
     return window.docShell.QueryInterface(Ci.nsILoadContext);
   }
@@ -40,7 +40,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=565392
   function setClipboardData(transferable) {
     clipboard.setData(transferable, null, 1);
   }
-  
+
   function getClipboardData(mime) {
     var transferable = Cc['@mozilla.org/widget/transferable;1']
                          .createInstance(Ci.nsITransferable);

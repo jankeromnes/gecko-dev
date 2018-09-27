@@ -9,7 +9,7 @@ MODULE = nss
 
 CSRCS = ocspresp.c
 
-REQUIRES = seccmd 
+REQUIRES = seccmd
 
 PROGRAM = ocspresp
 

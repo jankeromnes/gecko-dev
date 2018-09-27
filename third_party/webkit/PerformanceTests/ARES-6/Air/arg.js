@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -29,7 +29,7 @@ class Arg {
     {
         this._kind = Arg.Invalid;
     }
-    
+
     static isAnyUse(role)
     {
         switch (role) {
@@ -50,7 +50,7 @@ class Arg {
             throw new Error("Bad role");
         }
     }
-    
+
     static isColdUse(role)
     {
         switch (role) {
@@ -71,12 +71,12 @@ class Arg {
             throw new Error("Bad role");
         }
     }
-    
+
     static isWarmUse(role)
     {
         return Arg.isAnyUse(role) && !Arg.isColdUse(role);
     }
-    
+
     static cooled(role)
     {
         switch (role) {
@@ -119,7 +119,7 @@ class Arg {
             throw new Error("Bad role");
         }
     }
-    
+
     static isLateUse(role)
     {
         switch (role) {
@@ -140,7 +140,7 @@ class Arg {
             throw new Error("Bad role");
         }
     }
-    
+
     static isAnyDef(role)
     {
         switch (role) {
@@ -161,7 +161,7 @@ class Arg {
             throw new Error("Bad role");
         }
     }
-    
+
     static isEarlyDef(role)
     {
         switch (role) {
@@ -182,7 +182,7 @@ class Arg {
             throw new Error("Bad role");
         }
     }
-    
+
     static isLateDef(role)
     {
         switch (role) {
@@ -203,7 +203,7 @@ class Arg {
             throw new Error("Bad role");
         }
     }
-    
+
     static isZDef(role)
     {
         switch (role) {
@@ -224,7 +224,7 @@ class Arg {
             throw new Error("Bad role");
         }
     }
-    
+
     static typeForB3Type(type)
     {
         switch (type) {
@@ -238,7 +238,7 @@ class Arg {
             throw new Error("Bad B3 type");
         }
     }
-    
+
     static widthForB3Type(type)
     {
         switch (type) {
@@ -252,22 +252,22 @@ class Arg {
             throw new Error("Bad B3 type");
         }
     }
-    
+
     static conservativeWidth(type)
     {
         return type == GP ? Ptr : 64;
     }
-    
+
     static minimumWidth(type)
     {
         return type == GP ? 8 : 32;
     }
-    
+
     static bytes(width)
     {
         return width / 8;
     }
-    
+
     static widthForBytes(bytes)
     {
         switch (bytes) {
@@ -285,7 +285,7 @@ class Arg {
             return 64;
         }
     }
-    
+
     static createTmp(tmp)
     {
         let result = new Arg();
@@ -293,12 +293,12 @@ class Arg {
         result._tmp = tmp;
         return result;
     }
-    
+
     static fromReg(reg)
     {
         return Arg.createTmp(reg);
     }
-    
+
     static createImm(value)
     {
         let result = new Arg();
@@ -306,7 +306,7 @@ class Arg {
         result._value = value;
         return result;
     }
-    
+
     static createBigImm(lowValue, highValue = 0)
     {
         let result = new Arg();
@@ -315,7 +315,7 @@ class Arg {
         result._highValue = highValue;
         return result;
     }
-    
+
     static createBitImm(value)
     {
         let result = new Arg();
@@ -323,7 +323,7 @@ class Arg {
         result._value = value;
         return result;
     }
-    
+
     static createBitImm64(lowValue, highValue = 0)
     {
         let result = new Arg();
@@ -332,7 +332,7 @@ class Arg {
         result._highValue = highValue;
         return result;
     }
-    
+
     static createAddr(base, offset = 0)
     {
         let result = new Arg();
@@ -341,7 +341,7 @@ class Arg {
         result._offset = offset;
         return result;
     }
-    
+
     static createStack(slot, offset = 0)
     {
         let result = new Arg();
@@ -350,7 +350,7 @@ class Arg {
         result._offset = offset;
         return result;
     }
-    
+
     static createCallArg(offset)
     {
         let result = new Arg();
@@ -358,7 +358,7 @@ class Arg {
         result._offset = offset;
         return result;
     }
-    
+
     static createStackAddr(offsetFromFP, frameSize, width)
     {
         let result = Arg.createAddr(Reg.callFrameRegister, offsetFromFP);
@@ -366,7 +366,7 @@ class Arg {
             result = Arg.createAddr(Reg.stackPointerRegister, offsetFromFP + frameSize);
         return result;
     }
-    
+
     static isValidScale(scale, width)
     {
         switch (scale) {
@@ -379,7 +379,7 @@ class Arg {
             return false;
         }
     }
-    
+
     static logScale(scale)
     {
         switch (scale) {
@@ -395,7 +395,7 @@ class Arg {
             throw new Error("Bad scale");
         }
     }
-    
+
     static createIndex(base, index, scale = 1, offset = 0)
     {
         let result = new Arg();
@@ -406,7 +406,7 @@ class Arg {
         result._offset = offset;
         return result;
     }
-    
+
     static createRelCond(condition)
     {
         let result = new Arg();
@@ -414,7 +414,7 @@ class Arg {
         result._condition = condition;
         return result;
     }
-    
+
     static createResCond(condition)
     {
         let result = new Arg();
@@ -422,7 +422,7 @@ class Arg {
         result._condition = condition;
         return result;
     }
-    
+
     static createDoubleCond(condition)
     {
         let result = new Arg();
@@ -430,7 +430,7 @@ class Arg {
         result._condition = condition;
         return result;
     }
-    
+
     static createWidth(width)
     {
         let result = new Arg();
@@ -438,14 +438,14 @@ class Arg {
         result._width = width;
         return result;
     }
-    
+
     static createSpecial()
     {
         let result = new Arg();
         result._kind = Arg.Special;
         return result;
     }
-    
+
     get kind() { return this._kind; }
     get isTmp() { return this._kind == Arg.Tmp; }
     get isImm() { return this._kind == Arg.Imm; }
@@ -518,35 +518,35 @@ class Arg {
     get isWidth() { return this._kind == Arg.Width; }
     get isSpecial() { return this._kind == Arg.Special; }
     get isAlive() { return this.isTmp || this.isStack; }
-    
+
     get tmp()
     {
         if (this._kind != Arg.Tmp)
             throw new Error("Called .tmp for non-tmp");
         return this._tmp;
     }
-    
+
     get value()
     {
         if (!this.isSomeImm)
             throw new Error("Called .value for non-imm");
         return this._value;
     }
-    
+
     get lowValue()
     {
         if (!this.isSomeBigImm)
             throw new Error("Called .lowValue for non-big-imm");
         return this._lowValue;
     }
-    
+
     get highValue()
     {
         if (!this.isSomeBigImm)
             throw new Error("Called .highValue for non-big-imm");
         return this._highValue;
     }
-    
+
     get base()
     {
         switch (this._kind) {
@@ -557,9 +557,9 @@ class Arg {
             throw new Error("Called .base for non-address");
         }
     }
-    
+
     get hasOffset() { return this.isMemory; }
-    
+
     get offset()
     {
         switch (this._kind) {
@@ -572,43 +572,43 @@ class Arg {
             throw new Error("Called .offset for non-address");
         }
     }
-    
+
     get stackSlot()
     {
         if (this._kind != Arg.Stack)
             throw new Error("Called .stackSlot for non-address");
         return this._slot;
     }
-    
+
     get index()
     {
         if (this._kind != Arg.Index)
             throw new Error("Called .index for non-Index");
         return this._index;
     }
-    
+
     get scale()
     {
         if (this._kind != Arg.Index)
             throw new Error("Called .scale for non-Index");
         return this._scale;
     }
-    
+
     get logScale()
     {
         return Arg.logScale(this.scale);
     }
-    
+
     get width()
     {
         if (this._kind != Arg.Width)
             throw new Error("Called .width for non-Width");
         return this._width;
     }
-    
+
     get isGPTmp() { return this.isTmp && this.tmp.isGP; }
     get isFPTmp() { return this.isTmp && this.tmp.isFP; }
-    
+
     get isGP()
     {
         switch (this._kind) {
@@ -634,7 +634,7 @@ class Arg {
             throw new Error("Bad kind");
         }
     }
-    
+
     get isFP()
     {
         switch (this._kind) {
@@ -660,7 +660,7 @@ class Arg {
             throw new Error("Bad kind");
         }
     }
-    
+
     get hasType()
     {
         switch (this._kind) {
@@ -673,12 +673,12 @@ class Arg {
             return false;
         }
     }
-    
+
     get type()
     {
         return this.isGP ? GP : FP;
     }
-    
+
     isType(type)
     {
         switch (type) {
@@ -690,7 +690,7 @@ class Arg {
             throw new Error("Bad type");
         }
     }
-    
+
     isCompatibleType(other)
     {
         if (this.hasType)
@@ -699,14 +699,14 @@ class Arg {
             return this.isType(other.type);
         return true;
     }
-    
+
     get isGPR() { return this.isTmp && this.tmp.isGPR; }
     get gpr() { return this.tmp.gpr; }
     get isFPR() { return this.isTmp && this.tmp.isFPR; }
     get fpr() { return this.tmp.fpr; }
     get isReg() { return this.isTmp && this.tmp.isReg; }
     get reg() { return this.tmp.reg; }
-    
+
     static isValidImmForm(value)
     {
         return isRepresentableAsInt32(value);
@@ -719,19 +719,19 @@ class Arg {
     {
         return isRepresentableAsInt32(value);
     }
-    
+
     static isValidAddrForm(offset, width)
     {
         return true;
     }
-    
+
     static isValidIndexForm(scale, offset, width)
     {
         if (!isValidScale(scale, width))
             return false;
         return true;
     }
-    
+
     isValidForm(width)
     {
         switch (this._kind) {
@@ -763,7 +763,7 @@ class Arg {
             throw new Error("Bad kind");
         }
     }
-    
+
     forEachTmpFast(func)
     {
         switch (this._kind) {
@@ -794,7 +794,7 @@ class Arg {
             break;
         }
     }
-    
+
     usesTmp(expectedTmp)
     {
         let usesTmp = false;
@@ -803,7 +803,7 @@ class Arg {
         });
         return usesTmp;
     }
-    
+
     forEachTmp(role, type, width, func)
     {
         switch (this._kind) {
@@ -834,10 +834,10 @@ class Arg {
             break;
         }
     }
-    
+
     is(thing) { return !!thing.extract(this); }
     as(thing) { return thing.extract(this); }
-    
+
     // This lets you say things like:
     // arg.forEach(Tmp | Reg | Arg | StackSlot, ...)
     //
@@ -850,7 +850,7 @@ class Arg {
     {
         return thing.forEach(this, role, type, width, func);
     }
-    
+
     static extract(arg) { return arg; }
     static forEachFast(arg, func) { return func(arg); }
     static forEach(arg, role, type, width, func) { return func(arg, role, type, width); }
@@ -866,7 +866,7 @@ class Arg {
             throw new Error("Called .condition for non-condition");
         }
     }
-    
+
     get isInvertible()
     {
         switch (this._kind) {
@@ -887,7 +887,7 @@ class Arg {
             return false;
         }
     }
-    
+
     static kindCode(kind)
     {
         switch (kind) {
@@ -925,11 +925,11 @@ class Arg {
             throw new Error("Bad kind");
         }
     }
-    
+
     hash()
     {
         let result = Arg.kindCode(this._kind);
-        
+
         switch (this._kind) {
         case Arg.Invalid:
         case Arg.Special:
@@ -993,10 +993,10 @@ class Arg {
             result |= 0;
             break;
         }
-        
+
         return result >>> 0;
     }
-    
+
     toString()
     {
         switch (this._kind) {

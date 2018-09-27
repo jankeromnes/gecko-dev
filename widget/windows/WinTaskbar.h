@@ -21,7 +21,7 @@ class WinTaskbar final : public nsIWinTaskbar
 {
   ~WinTaskbar();
 
-public: 
+public:
   WinTaskbar();
 
   NS_DECL_THREADSAFE_ISUPPORTS

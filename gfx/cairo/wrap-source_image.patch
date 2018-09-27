@@ -6,7 +6,7 @@ index 8278694..12f6242 100644
 @@ -1530,6 +1530,70 @@ _cairo_recording_surface_clone_similar (cairo_surface_t  *surface,
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 +struct acquire_source_image_data
 +{
 +    cairo_surface_t *src;

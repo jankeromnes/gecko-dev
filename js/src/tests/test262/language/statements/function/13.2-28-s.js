@@ -10,10 +10,10 @@ flags: [noStrict]
 ---*/
 
             function foo() {
-                "use strict"; 
+                "use strict";
                 for (var tempIndex in this) {
                     assert.notSameValue(tempIndex, "arguments", 'tempIndex');
-                } 
+                }
             }
             foo.call(foo);
 

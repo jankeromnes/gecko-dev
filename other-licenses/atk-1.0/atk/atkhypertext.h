@@ -28,7 +28,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 /*
- * The AtkHypertext interface provides standard  mechanisms for manipulating 
+ * The AtkHypertext interface provides standard  mechanisms for manipulating
  * hyperlinks.
  */
 

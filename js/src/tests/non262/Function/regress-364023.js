@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function exploit() {
     var code = "";
     for(var i = 0; i < 0x10000; i++) {

@@ -27,14 +27,14 @@
                       aStartIndex, aEndIndex, aValid)
     {
       testRole(aID, aRole);
-      is(aAcc.anchorCount, aAnchorCount, "Wrong number of anchors for ID " 
+      is(aAcc.anchorCount, aAnchorCount, "Wrong number of anchors for ID "
          + aID + "!");
       is(aAcc.getAnchor(0).name, aAnchorName, "Wrong name for ID " + aID + "!");
       is(aAcc.getURI(0).spec, aURI, "URI wrong for ID " + aID + "!");
-      is(aAcc.startIndex, aStartIndex, "Wrong startIndex value for ID " + aID 
+      is(aAcc.startIndex, aStartIndex, "Wrong startIndex value for ID " + aID
          + "!");
       is(aAcc.endIndex, aEndIndex, "Wrong endIndex value for ID " + aID + "!");
-      is(aAcc.valid, aValid, "Wrong valid state for ID " + aID + "!");      
+      is(aAcc.valid, aValid, "Wrong valid state for ID " + aID + "!");
     }
 
     var gQueue = null;

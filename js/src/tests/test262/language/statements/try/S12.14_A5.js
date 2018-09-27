@@ -11,7 +11,7 @@ description: Checking "catch" catches the Identifier in appropriate way
 
 // CHECK#1
 try {
-  throw "catchme";	
+  throw "catchme";
   throw "dontcatchme";
   $ERROR('#1.1: throw "catchme" lead to throwing exception');
 }
@@ -27,7 +27,7 @@ catch (e) {
 // CHECK#2
 function SwitchTest1(value){
   var result = 0;
-  try{  
+  try{
     switch(value) {
       case 1:
         result += 4;
@@ -39,7 +39,7 @@ function SwitchTest1(value){
     }
   return result;
   }
-  catch(e){	
+  catch(e){
     if ((value===1)&&(e!==4)) $ERROR('#2.1: Exception === 4. Actual: '+e);
     if ((value===4)&&(e!=="ex"))$ERROR('#2.2: Exception === "ex". Actual: '+e);
   }

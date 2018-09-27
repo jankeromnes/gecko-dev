@@ -6,8 +6,8 @@
 #
 # is supposed to clean up after a "hanging" QA
 #
-# 1) see if there is a lockfile 
-#    if yes: 
+# 1) see if there is a lockfile
+#    if yes:
 #    1a) kill the process of the lockfile and if possible it's children
 #    1b) rm the lockfile
 # 2) kill selfservers
@@ -57,13 +57,13 @@ Kill()
 }
 
 ########################### kill_by_name ################################
-# like killall, only without permissionproblems, kills the process whose 
+# like killall, only without permissionproblems, kills the process whose
 # name is given as parameter
 ########################################################################
 kill_by_name()
 {
     echo "Killing all $1"
- 
+
     for PID in `Ps | grep "$1" | grep -v grep | \
         sed -e "s/^[     ]*//g" -e "s/[     ].*//"`
     do
@@ -106,7 +106,7 @@ esac
 }
 
 nt_warning
-case $1 in 
+case $1 in
     -all)
         for w in tommy booboo kentuckyderby galileo shame axilla columbus \
                  smarch charm hp64 biggayal orville kwyjibo hbombaix raven \

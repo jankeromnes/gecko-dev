@@ -11,7 +11,7 @@
 /*
  * filterbanks.c
  *
- * This file contains function 
+ * This file contains function
  * WebRtcIsacfix_SplitAndFilter, and WebRtcIsacfix_FilterAndCombine
  * which implement filterbanks that produce decimated lowpass and
  * highpass versions of a signal, and performs reconstruction.

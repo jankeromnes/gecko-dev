@@ -27,7 +27,7 @@ CMPPS
 
 DONE?? :
 implicit operands: provide action ?
-e.g. add/inc for stach, write, etc 
+e.g. add/inc for stach, write, etc
 replace table numbers in opcodes.dat with
 #defines for table names
 
@@ -36,7 +36,7 @@ no wait that is only for prefix tables -- n/p
 
 if ( prefx) only use if insn != invalid
 
-these should cover all the wacky disasm exceptions 
+these should cover all the wacky disasm exceptions
 
 for the rep one we can chet, match only a 0x90
 

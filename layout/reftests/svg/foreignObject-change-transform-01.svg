@@ -13,7 +13,7 @@
   <script type="application/javascript">
 
 // The foreignObject is inverted so that it is outside the viewport.
-// After the rect has rendered the transform on the 
+// After the rect has rendered the transform on the
 // foreignObject is removed and the green div should fill the viewport.
 
   document.addEventListener("MozReftestInvalidate", doTest, false);

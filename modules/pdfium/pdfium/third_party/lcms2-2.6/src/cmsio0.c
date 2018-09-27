@@ -123,7 +123,7 @@ cmsIOHANDLER*  CMSEXPORT cmsOpenIOhandlerFromNULL(cmsContext ContextID)
 
     return iohandler;
 
-Error:    
+Error:
     if (iohandler) _cmsFree(ContextID, iohandler);
     return NULL;
 
@@ -202,7 +202,7 @@ cmsBool MemoryWrite(struct _cms_io_handler* iohandler, cmsUInt32Number size, con
     if (ResData->Pointer + size > ResData->Size) {
         size = ResData ->Size - ResData->Pointer;
     }
-      
+
     if (size == 0) return TRUE;     // Write zero bytes is ok, but does nothing
 
     memmove(ResData ->Block + ResData ->Pointer, Ptr, size);
@@ -406,7 +406,7 @@ cmsIOHANDLER* CMSEXPORT cmsOpenIOhandlerFromFile(cmsContext ContextID, const cha
     iohandler ->stream = (void*) fm;
     iohandler ->UsedSpace = 0;
 
-    // Keep track of the original file    
+    // Keep track of the original file
     strncpy(iohandler -> PhysicalFile, FileName, sizeof(iohandler -> PhysicalFile)-1);
     iohandler -> PhysicalFile[sizeof(iohandler -> PhysicalFile)-1] = 0;
 
@@ -554,7 +554,7 @@ int _cmsSearchTag(_cmsICCPROFILE* Icc, cmsTagSignature sig, cmsBool lFollowLinks
 			// fix bug mantis id#0055942
 			// assume that TRCTag and ColorantTag can't be linked.
 			// Xiaochuan Liu 2014-04-23
-			if ((sig == cmsSigRedTRCTag || sig == cmsSigGreenTRCTag || sig == cmsSigBlueTRCTag) && 
+			if ((sig == cmsSigRedTRCTag || sig == cmsSigGreenTRCTag || sig == cmsSigBlueTRCTag) &&
 				(LinkedSig == cmsSigRedColorantTag || LinkedSig == cmsSigGreenColorantTag || LinkedSig == cmsSigBlueColorantTag))
 			{
 				return n;
@@ -575,7 +575,7 @@ void _cmsDeleteTagByPos(_cmsICCPROFILE* Icc, int i)
     _cmsAssert(Icc != NULL);
     _cmsAssert(i >= 0);
 
-   
+
     if (Icc -> TagPtrs[i] != NULL) {
 
         // Free previous version
@@ -595,7 +595,7 @@ void _cmsDeleteTagByPos(_cmsICCPROFILE* Icc, int i)
             }
         }
 
-    } 
+    }
 }
 
 
@@ -664,13 +664,13 @@ cmsBool _cmsReadHeader(_cmsICCPROFILE* Icc)
     Icc -> DeviceClass     = (cmsProfileClassSignature) _cmsAdjustEndianess32(Header.deviceClass);
     Icc -> ColorSpace      = (cmsColorSpaceSignature)   _cmsAdjustEndianess32(Header.colorSpace);
     Icc -> PCS             = (cmsColorSpaceSignature)   _cmsAdjustEndianess32(Header.pcs);
-   
+
     Icc -> RenderingIntent = _cmsAdjustEndianess32(Header.renderingIntent);
     Icc -> flags           = _cmsAdjustEndianess32(Header.flags);
     Icc -> manufacturer    = _cmsAdjustEndianess32(Header.manufacturer);
     Icc -> model           = _cmsAdjustEndianess32(Header.model);
     Icc -> creator         = _cmsAdjustEndianess32(Header.creator);
-    
+
     _cmsAdjustEndianess64(&Icc -> attributes, &Header.attributes);
     Icc -> Version         = _cmsAdjustEndianess32(Header.version);
 
@@ -1198,7 +1198,7 @@ cmsBool SaveTags(_cmsICCPROFILE* Icc, _cmsICCPROFILE* FileOrig)
             // Search for support on this tag
             TagDescriptor = _cmsGetTagDescriptor(Icc-> ContextID, Icc -> TagNames[i]);
             if (TagDescriptor == NULL) continue;                        // Unsupported, ignore it
-           
+
             if (TagDescriptor ->DecideType != NULL) {
 
                 Type = TagDescriptor ->DecideType(Version, Data);
@@ -1607,8 +1607,8 @@ cmsBool CMSEXPORT cmsWriteTag(cmsHPROFILE hProfile, cmsTagSignature sig, const v
          // Delete the tag
          i = _cmsSearchTag(Icc, sig, FALSE);
          if (i >= 0) {
-                
-             // Use zero as a mark of deleted 
+
+             // Use zero as a mark of deleted
              _cmsDeleteTagByPos(Icc, i);
              Icc ->TagNames[i] = (cmsTagSignature) 0;
              _cmsUnlockMutex(Icc->ContextID, Icc ->UsrMutex);
@@ -1724,7 +1724,7 @@ cmsInt32Number CMSEXPORT cmsReadRawTag(cmsHPROFILE hProfile, cmsTagSignature sig
 
     // Search for given tag in ICC profile directory
     i = _cmsSearchTag(Icc, sig, TRUE);
-    if (i < 0) goto Error;                 // Not found, 
+    if (i < 0) goto Error;                 // Not found,
 
     // It is already read?
     if (Icc -> TagPtrs[i] == NULL) {
@@ -1795,7 +1795,7 @@ cmsInt32Number CMSEXPORT cmsReadRawTag(cmsHPROFILE hProfile, cmsTagSignature sig
         cmsCloseIOhandler(MemIO);
         goto Error;
     }
-    
+
     if (TypeHandler == NULL) goto Error;
 
     // Serialize

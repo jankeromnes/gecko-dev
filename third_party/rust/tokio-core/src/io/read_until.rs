@@ -3,7 +3,7 @@ use std::mem;
 
 use futures::{Poll, Future};
 
-/// A future which can be used to easily read the contents of a stream into a 
+/// A future which can be used to easily read the contents of a stream into a
 /// vector until the delimiter is reached.
 ///
 /// Created by the [`read_until`] function.

@@ -11,9 +11,9 @@
 
 <script>
 function doe() {
- document.getElementById('b').appendChild(document.getElementById('c')); 
- window.addEventListener('DOMAttrModified', function(e){document.getElementById('a').focus();}, true); 
- document.getElementById('d').setAttribute('rowspan', 3); 
+ document.getElementById('b').appendChild(document.getElementById('c'));
+ window.addEventListener('DOMAttrModified', function(e){document.getElementById('a').focus();}, true);
+ document.getElementById('d').setAttribute('rowspan', 3);
 }
 setTimeout(doe, 200);
 </script>

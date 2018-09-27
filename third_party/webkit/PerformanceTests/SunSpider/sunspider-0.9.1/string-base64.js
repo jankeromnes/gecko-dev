@@ -94,7 +94,7 @@ function base64ToString(data) {
         var padding = (data.charCodeAt(i) == base64Pad.charCodeAt(0));
         // Skip illegal characters and whitespace
         if (c == -1) continue;
-        
+
         // Collect data into leftdata, update bitcount
         leftdata = (leftdata << 6) | c;
         leftbits += 6;

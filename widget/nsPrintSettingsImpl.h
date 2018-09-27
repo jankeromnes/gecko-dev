@@ -7,10 +7,10 @@
 #ifndef nsPrintSettingsImpl_h__
 #define nsPrintSettingsImpl_h__
 
-#include "nsIPrintSettings.h"  
-#include "nsMargin.h"  
+#include "nsIPrintSettings.h"
+#include "nsMargin.h"
 #include "nsString.h"
-#include "nsWeakReference.h"  
+#include "nsWeakReference.h"
 
 #define NUM_HEAD_FOOT 3
 
@@ -32,10 +32,10 @@ public:
 protected:
   virtual ~nsPrintSettings();
 
-  // May be implemented by the platform-specific derived class                       
+  // May be implemented by the platform-specific derived class
   virtual nsresult _Clone(nsIPrintSettings **_retval);
   virtual nsresult _Assign(nsIPrintSettings *aPS);
-  
+
   typedef enum {
     eHeader,
     eFooter
@@ -44,7 +44,7 @@ protected:
 
   // Members
   nsWeakPtr     mSession; // Should never be touched by Clone or Assign
- 
+
   // mMargin, mEdge, and mUnwriteableMargin are stored in twips
   nsIntMargin   mMargin;
   nsIntMargin   mEdge;

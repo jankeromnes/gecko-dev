@@ -47,7 +47,7 @@ function runTest()
     is(pt1.x, x, str + " x");
     is(pt1.y, y, str + " y");
   }
-  
+
   function isPointCloseX(pt1, x, y, str)
   {
     isClose(pt1.x, x, str + " x");
@@ -110,13 +110,13 @@ function runTest()
   is(text1.getCharNumAtPosition(p), -1, "text1 finding no char on right");
 
   // Text along a thin rectangle path
-  
+
   charWidth = text2.getSubStringLength(0, 1);
 
   is(text2.getNumberOfChars(), 26, "text2 length");
   ok(text2.getComputedTextLength() > 0, "text2 measured length");
   is(text2.getComputedTextLength(), text2.getSubStringLength(0, 26), "text2 substring length");
-  
+
   // character 12 should be on the bottom side
   is(text2.getStartPositionOfChar(12).y, 860, "text2 char 12 start offset");
   isfuzzy(text2.getEndPositionOfChar(12).y, 860, 0.001, "text2 char 12 end offset");
@@ -137,7 +137,7 @@ function runTests() {
 
   var doc = $("svg").contentWindow.document;
   doc.getElementById("g").setAttribute("transform", "rotate(90 200 200)");
-  
+
   runTest();
 
   SimpleTest.finish();

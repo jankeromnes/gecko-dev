@@ -11,7 +11,7 @@ struct CUpdatePair2
   bool NewProps;
   bool UseArcProps; // if (UseArcProps && NewProps), we want to change only some properties.
   bool IsAnti; // if (!IsAnti) we use other ways to detect Anti status
-  
+
   int DirIndex;
   int ArcIndex;
   int NewNameIndex;

@@ -7,13 +7,13 @@
 
  /  ebp - 36:	caller's esi
  /  ebp - 32:	caller's edi
- /  ebp - 28:	
- /  ebp - 24:	
- /  ebp - 20:	
- /  ebp - 16:	
- /  ebp - 12:	
- /  ebp - 8:	
- /  ebp - 4:	
+ /  ebp - 28:
+ /  ebp - 24:
+ /  ebp - 20:
+ /  ebp - 16:
+ /  ebp - 12:
+ /  ebp - 8:
+ /  ebp - 4:
  /  ebp + 0:	caller's ebp
  /  ebp + 4:	return address
  /  ebp + 8:	a	argument
@@ -60,19 +60,19 @@ L2:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  /  ebp - 36:	caller's esi
  /  ebp - 32:	caller's edi
- /  ebp - 28:	
- /  ebp - 24:	
- /  ebp - 20:	
- /  ebp - 16:	
- /  ebp - 12:	
- /  ebp - 8:	
- /  ebp - 4:	
+ /  ebp - 28:
+ /  ebp - 24:
+ /  ebp - 20:
+ /  ebp - 16:
+ /  ebp - 12:
+ /  ebp - 8:
+ /  ebp - 4:
  /  ebp + 0:	caller's ebp
  /  ebp + 4:	return address
  /  ebp + 8:	a	argument
@@ -110,7 +110,7 @@ L3:
     add    %ebx,%eax		/ add carry (%ebx) to edx:eax
     adc    $0,%edx
     mov    0(%edi),%ebx		/ add in current word from *c
-    add    %ebx,%eax		
+    add    %ebx,%eax
     adc    $0,%edx
     mov    %edx,%ebx		/ high half of product becomes next carry
 
@@ -122,19 +122,19 @@ L4:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  /  ebp - 36:	caller's esi
  /  ebp - 32:	caller's edi
- /  ebp - 28:	
- /  ebp - 24:	
- /  ebp - 20:	
- /  ebp - 16:	
- /  ebp - 12:	
- /  ebp - 8:	
- /  ebp - 4:	
+ /  ebp - 28:
+ /  ebp - 24:
+ /  ebp - 20:
+ /  ebp - 16:
+ /  ebp - 12:
+ /  ebp - 8:
+ /  ebp - 4:
  /  ebp + 0:	caller's ebp
  /  ebp + 4:	return address
  /  ebp + 8:	a	argument
@@ -172,7 +172,7 @@ L5:
     add    %ebx,%eax		/ add carry (%ebx) to edx:eax
     adc    $0,%edx
     mov    0(%edi),%ebx		/ add in current word from *c
-    add    %ebx,%eax		
+    add    %ebx,%eax
     adc    $0,%edx
     mov    %edx,%ebx		/ high half of product becomes next carry
 
@@ -195,13 +195,13 @@ L8:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  /  ebp - 20:	caller's esi
  /  ebp - 16:	caller's edi
- /  ebp - 12:	
+ /  ebp - 12:
  /  ebp - 8:	carry
  /  ebp - 4:	a_len	local
  /  ebp + 0:	caller's ebp
@@ -209,7 +209,7 @@ L8:
  /  ebp + 8:	pa	argument
  /  ebp + 12:	a_len	argument
  /  ebp + 16:	ps	argument
- /  ebp + 20:	
+ /  ebp + 20:
  /  registers:
  / 	eax:
  /	ebx:	carry
@@ -267,8 +267,8 @@ L14:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  /
@@ -292,7 +292,7 @@ L14:
  /	edx:
  /	esi:	a ptr
  /	edi:	c ptr
- / 
+ /
 
 .globl	s_mpv_div_2dx1d
 .type	s_mpv_div_2dx1d,@function
@@ -308,6 +308,6 @@ s_mpv_div_2dx1d:
        mov    %edx,0(%ebx)
        xor    %eax,%eax		/ return zero
        pop    %ebx
-       ret    
+       ret
        nop
-  
+

@@ -53,7 +53,7 @@ function isBinaryChar(ch) {
 
 // Test chars on their own
 var i;
-for (i = 0; i <= 127; ++i) {  
+for (i = 0; i <= 127; ++i) {
   bodyList.push([ String.fromCharCode(i), isBinaryChar(i) ]);
 }
 
@@ -93,7 +93,7 @@ function makeListener(headerIdx, bodyIdx) {
         var chan = request.QueryInterface(Ci.nsIChannel);
 
         Assert.equal(chan.status, Cr.NS_OK);
-        
+
         var type = chan.contentType;
 
         var expectedType =
@@ -138,7 +138,7 @@ function makeListener(headerIdx, bodyIdx) {
       }
 
       do_test_finished();
-    }    
+    }
   };
 
   return listener;
@@ -151,7 +151,7 @@ function doTest(headerIdx, bodyIdx) {
 
   chan.asyncOpen2(listener);
 
-  do_test_pending();    
+  do_test_pending();
 }
 
 function createResponse(headerIdx, bodyIdx, metadata, response) {
@@ -161,7 +161,7 @@ function createResponse(headerIdx, bodyIdx, metadata, response) {
 }
 
 function makeHandler(headerIdx, bodyIdx) {
-  var f = 
+  var f =
     function handlerClosure(metadata, response) {
       return createResponse(headerIdx, bodyIdx, metadata, response);
     };

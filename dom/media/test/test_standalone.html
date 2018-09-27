@@ -21,7 +21,7 @@ for (var i=0; i<gSmallTests.length; ++i) {
   var tag = getMajorMimeType(test.type);
   if (tag != "video" || !document.createElement("video").canPlayType(test.type))
     continue;
-  
+
   var f = document.createElement("iframe");
   f.src = test.name;
   f._test = test;

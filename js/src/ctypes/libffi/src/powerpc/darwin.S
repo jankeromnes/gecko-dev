@@ -89,7 +89,7 @@ LFB1:
 	/* Save the old stack pointer as AP.  */
 	mr	r8,r1
 LCFI0:
-	
+
 	/* Save the retval type in parents frame.  */
 	sg	r9,(LINKAGE_SIZE+6*GPR_BYTES)(r8)
 
@@ -100,7 +100,7 @@ LCFI0:
 	mflr	r9
 	sg	r9,SAVED_LR_OFFSET(r8)
 
-	sg	r28,-(4 * GPR_BYTES)(r8)	
+	sg	r28,-(4 * GPR_BYTES)(r8)
 	sg	r29,-(3 * GPR_BYTES)(r8)
 	sg	r30,-(2 * GPR_BYTES)(r8)
 	sg	r31,-(    GPR_BYTES)(r8)
@@ -178,7 +178,7 @@ L2:
 	/* Now, deal with the return value.  */
 
 	/* m64 structure returns can occupy the same set of registers as
-	   would be used to pass such a structure as arg0 - so take care 
+	   would be used to pass such a structure as arg0 - so take care
 	   not to step on any possibly hot regs.  */
 
 	/* Get the flags.. */
@@ -186,10 +186,10 @@ L2:
 	; FLAG_RETURNS_NOTHING also covers struct ret-by-ref.
 	bt	30,L(done_return_value)	  ; FLAG_RETURNS_NOTHING
 	bf	27,L(scalar_return_value) ; not FLAG_RETURNS_STRUCT
-	
+
 	/* OK, so we have a struct.  */
 #if defined(__ppc64__)
-	bt	31,L(maybe_return_128) ; FLAG_RETURNS_128BITS, special case 
+	bt	31,L(maybe_return_128) ; FLAG_RETURNS_128BITS, special case
 
 	/* OK, we have to map the return back to a mem struct.
 	   We are about to trample the parents param area, so recover the
@@ -220,7 +220,7 @@ L2:
 	subf	r4,r5,r4
 L3:
 	bl	_memcpy
-	
+
 	/* ... do we need the FP registers? - recover the flags.. */
 	mtcrf	0x03,r31 ; we need c6 & cr7 now.
 	bf	29,L(done_return_value)	/* No floats in the struct.  */
@@ -275,14 +275,14 @@ L(float_return_value):
 
 L(scalar_return_value):
 	bt	29,L(fp_return_value)	; FLAG_RETURNS_FP
-	; ffi_arg is defined as unsigned long. 
+	; ffi_arg is defined as unsigned long.
 	sg	r3,0(r30)		; Save the reg.
-	bf	28,L(done_return_value) ; not FLAG_RETURNS_64BITS 
+	bf	28,L(done_return_value) ; not FLAG_RETURNS_64BITS
 
 #if defined(__ppc64__)
 L(maybe_return_128):
 	std	r3,0(r30)
-	bf	31,L(done_return_value) ; not FLAG_RETURNS_128BITS 
+	bf	31,L(done_return_value) ; not FLAG_RETURNS_128BITS
 	std	r4,8(r30)
 #else
 	stw	r4,4(r30)

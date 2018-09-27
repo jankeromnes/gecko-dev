@@ -52,7 +52,7 @@ general_src_iter_init (pixman_implementation_t *imp, pixman_iter_t *iter)
 	_pixman_bits_image_src_iter_init (image, iter);
     else if (image->type == SOLID)
         _pixman_log_error (FUNC, "Solid image not handled by noop");
-    else         
+    else
 	_pixman_log_error (FUNC, "Pixman bug: unknown image type\n");
 
     return TRUE;
@@ -167,7 +167,7 @@ general_composite_rect  (pixman_implementation_t *imp,
 	memset (mask_buffer, 0, width * Bpp);
 	memset (dest_buffer, 0, width * Bpp);
     }
-    
+
     /* src iter */
     src_iter_flags = narrow | op_flags[op].src | rgb16;
 

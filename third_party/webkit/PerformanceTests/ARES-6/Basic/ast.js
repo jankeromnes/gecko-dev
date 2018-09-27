@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -30,14 +30,14 @@ Basic.NumberApply = function(state)
 {
     // I'd call this arguments but we're in strict mode.
     let parameters = this.parameters.map(value => value.evaluate(state));
-    
+
     return state.getValue(this.name, parameters.length).apply(state, parameters);
 };
 
 Basic.Variable = function(state)
 {
     let parameters = this.parameters.map(value => value.evaluate(state));
-    
+
     return state.getValue(this.name, parameters.length).leftApply(state, parameters);
 }
 
@@ -211,7 +211,7 @@ Basic.Print = function*(state)
             throw new Error("Bad item kind: " + item.kind);
         }
     }
-    
+
     yield {kind: "output", string};
 }
 

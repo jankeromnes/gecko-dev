@@ -76,7 +76,7 @@ interface PPB_Iface_nowrap {
  *     Pnacl_WrapperInfo_PPB_SomeWrap_0_0.real_iface;
  *   return iface->foo1(*a);
  * }
- * 
+ *
  * static
  * void Pnacl_M13_PPB_SomeWrap_foo2(struct some_struct* _struct_result,
  *                                  int32_t a) {

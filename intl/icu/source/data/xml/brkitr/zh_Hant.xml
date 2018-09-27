@@ -14,7 +14,7 @@
     <identity>
         <version number="$ $"/>
         <generation date="$ $"/>
-        <language type="zh_Hant"/> 
+        <language type="zh_Hant"/>
     </identity>
     <special xmlns:icu="http://www.icu-project.org/">
         <icu:breakIteratorData>

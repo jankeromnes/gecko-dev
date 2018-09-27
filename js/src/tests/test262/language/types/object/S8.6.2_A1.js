@@ -20,7 +20,7 @@ if (!Object.prototype.isPrototypeOf(__obj)){
 
 //Establish proto (base) object
 /*function ProtoObj(){
-  
+
 };*/
 var protoObj={};
 //Establish foo object

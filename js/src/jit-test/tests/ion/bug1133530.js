@@ -1,5 +1,5 @@
 // |jit-test| error: InternalError
-x = {}; 
+x = {};
 y = x;
 if (x !== y) {}
 Object.defineProperty(this, "x", {
@@ -15,4 +15,4 @@ x;
 g = newGlobal();
 g.parent = this
 g.eval("Debugger(parent).onExceptionUnwind=(function(){})")
-y; 
+y;

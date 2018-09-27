@@ -173,7 +173,7 @@ OpenVRSession::Initialize(mozilla::gfx::VRSystemState& aSystemState)
 
   StartHapticThread();
   StartHapticTimer();
-  
+
   // Succeeded
   return true;
 }

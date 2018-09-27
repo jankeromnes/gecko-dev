@@ -47,7 +47,7 @@ void main(void) {
   var format = gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.HIGH_FLOAT);
   var prog = WebGLUtil.createProgramByIds(gl, 'shader-vs', 'shader-fs');
   checkGLError(ok);
-  
+
   if (format) {
     ok(prog, 'Frag shader with unconditional `precision highp float` should ' +
              'link if `getShaderPrecisionFormat` gives a format for it.');

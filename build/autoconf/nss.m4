@@ -78,7 +78,7 @@ AC_ARG_WITH(nss-exec-prefix,
 
 	if test -z "$no_nss"; then
 		AC_MSG_RESULT(yes)
-		ifelse([$2], , :, [$2])     
+		ifelse([$2], , :, [$2])
 	else
 		AC_MSG_RESULT(no)
 		ifelse([$3], , :, [$3])

@@ -51,7 +51,7 @@ namespace google_breakpad {
 
 using std::vector;
 
-// A StabsToModule is a handler that receives parsed STABS debugging 
+// A StabsToModule is a handler that receives parsed STABS debugging
 // information from a StabsReader, and uses that to populate
 // a Module. (All classes are in the google_breakpad namespace.) A
 // Module represents the contents of a Breakpad symbol file, and knows

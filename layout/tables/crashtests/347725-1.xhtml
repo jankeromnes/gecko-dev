@@ -4,15 +4,15 @@
 
 function foo()
 {
-  var e = document.createElement("td"); 
-  document.getElementById("h").appendChild(e); 
-  
-  e.setAttribute("rowspan", 2); 
+  var e = document.createElement("td");
+  document.getElementById("h").appendChild(e);
+
+  e.setAttribute("rowspan", 2);
   e.setAttribute("colspan", 3);
-  
-  var tbody = document.getElementById("tbody"); 
+
+  var tbody = document.getElementById("tbody");
   tbody.parentNode.removeChild(tbody);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

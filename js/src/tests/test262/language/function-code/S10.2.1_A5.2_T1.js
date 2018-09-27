@@ -15,7 +15,7 @@ description: >
 //CHECK#1
 function f1(x){
   var x;
-  
+
   return typeof x;
 }
 
@@ -24,7 +24,7 @@ assert.sameValue(f1(1), "number");
 //CHECK#2
 function f2(x){
   var x;
-  
+
   return x;
 }
 

@@ -24,4 +24,4 @@ for (s = 0; s < document.styleSheets.length; s++) {
      dump("    }\n");
    }
    dump("\n");
-} 
+}

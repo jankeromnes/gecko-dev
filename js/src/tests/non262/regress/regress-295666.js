@@ -18,5 +18,5 @@ try
 }
 catch(e)
 {
-} 
+}
 reportCompare(expect, actual, summary);

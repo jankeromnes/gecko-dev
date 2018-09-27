@@ -18,7 +18,7 @@ function test(length)
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
   var a = new Array();
   a[length - 2] = 'length-2';

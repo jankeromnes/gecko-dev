@@ -589,13 +589,13 @@ cairo_gl_shader_emit_variable (cairo_output_stream_t *stream,
     case CAIRO_GL_VAR_NONE:
         break;
     case CAIRO_GL_VAR_TEXCOORDS:
-        _cairo_output_stream_printf (stream, 
-                                     "varying vec2 %s_texcoords;\n", 
+        _cairo_output_stream_printf (stream,
+                                     "varying vec2 %s_texcoords;\n",
                                      operand_names[name]);
         break;
     case CAIRO_GL_VAR_COVERAGE:
-        _cairo_output_stream_printf (stream, 
-                                     "varying float %s_coverage;\n", 
+        _cairo_output_stream_printf (stream,
+                                     "varying float %s_coverage;\n",
                                      operand_names[name]);
         break;
     }
@@ -612,12 +612,12 @@ cairo_gl_shader_emit_vertex (cairo_output_stream_t *stream,
     case CAIRO_GL_VAR_NONE:
         break;
     case CAIRO_GL_VAR_TEXCOORDS:
-        _cairo_output_stream_printf (stream, 
+        _cairo_output_stream_printf (stream,
                                      "    %s_texcoords = gl_MultiTexCoord%d.xy;\n",
                                      operand_names[name], name);
         break;
     case CAIRO_GL_VAR_COVERAGE:
-        _cairo_output_stream_printf (stream, 
+        _cairo_output_stream_printf (stream,
                                      "    %s_coverage = gl_Color.a;\n",
                                      operand_names[name]);
         break;
@@ -672,7 +672,7 @@ cairo_gl_shader_emit_color (cairo_output_stream_t *stream,
         ASSERT_NOT_REACHED;
         break;
     case CAIRO_GL_OPERAND_NONE:
-        _cairo_output_stream_printf (stream, 
+        _cairo_output_stream_printf (stream,
             "vec4 get_%s()\n"
             "{\n"
             "    return vec4 (0, 0, 0, 1);\n"
@@ -680,7 +680,7 @@ cairo_gl_shader_emit_color (cairo_output_stream_t *stream,
             namestr);
         break;
     case CAIRO_GL_OPERAND_CONSTANT:
-        _cairo_output_stream_printf (stream, 
+        _cairo_output_stream_printf (stream,
             "uniform vec4 %s_constant;\n"
             "vec4 get_%s()\n"
             "{\n"
@@ -689,7 +689,7 @@ cairo_gl_shader_emit_color (cairo_output_stream_t *stream,
             namestr, namestr, namestr);
         break;
     case CAIRO_GL_OPERAND_TEXTURE:
-        _cairo_output_stream_printf (stream, 
+        _cairo_output_stream_printf (stream,
             "uniform sampler2D%s %s_sampler;\n"
             "varying vec2 %s_texcoords;\n"
             "vec4 get_%s()\n"
@@ -699,7 +699,7 @@ cairo_gl_shader_emit_color (cairo_output_stream_t *stream,
             rectstr, namestr, namestr, namestr, rectstr, namestr, namestr);
         break;
     case CAIRO_GL_OPERAND_LINEAR_GRADIENT:
-        _cairo_output_stream_printf (stream, 
+        _cairo_output_stream_printf (stream,
             "uniform sampler1D %s_sampler;\n"
             "uniform mat3 %s_matrix;\n"
             "uniform vec2 %s_segment;\n"
@@ -710,11 +710,11 @@ cairo_gl_shader_emit_color (cairo_output_stream_t *stream,
             "    float t = dot (pos, %s_segment) / dot (%s_segment, %s_segment);\n"
             "    return texture1D (%s_sampler, t);\n"
             "}\n",
-            namestr, namestr, namestr, namestr, namestr, 
+            namestr, namestr, namestr, namestr, namestr,
             namestr, namestr, namestr, namestr);
         break;
     case CAIRO_GL_OPERAND_RADIAL_GRADIENT:
-        _cairo_output_stream_printf (stream, 
+        _cairo_output_stream_printf (stream,
             "uniform sampler1D %s_sampler;\n"
             "uniform mat3 %s_matrix;\n"
             "uniform vec2 %s_circle_1;\n"
@@ -741,13 +741,13 @@ cairo_gl_shader_emit_color (cairo_output_stream_t *stream,
             "    float t = (-B + sqrt_det) / (2.0 * A);\n"
             "    return texture1D (%s_sampler, t);\n"
             "}\n",
-            namestr, namestr, namestr, namestr, namestr, 
-            namestr, namestr, namestr, namestr, namestr, 
-            namestr, namestr, namestr, namestr, namestr, 
+            namestr, namestr, namestr, namestr, namestr,
+            namestr, namestr, namestr, namestr, namestr,
+            namestr, namestr, namestr, namestr, namestr,
             namestr);
         break;
     case CAIRO_GL_OPERAND_SPANS:
-        _cairo_output_stream_printf (stream, 
+        _cairo_output_stream_printf (stream,
             "varying float %s_coverage;\n"
             "vec4 get_%s()\n"
             "{\n"

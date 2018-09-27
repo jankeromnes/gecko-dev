@@ -1,5 +1,5 @@
-function f(o) { 
-    Object.seal(o); 
+function f(o) {
+    Object.seal(o);
 }
 gc();
 if(2 != 2) {

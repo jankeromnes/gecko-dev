@@ -12,7 +12,7 @@ Expect: feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntry).link.sp
   <author><name>James Snell</name></author>
   <link href="http://www.intertwingly.net/wiki/pie/LinkConformanceTests" />
   <link rel="self" href="http://www.snellspace.com/public/linktests.xml" />
-  
+
   <entry>
     <id>tag:snellspace.com,2006:/atom/conformance/linktest/6</id>
     <title>Entry with a link relation identified by URI</title>
@@ -21,5 +21,5 @@ Expect: feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntry).link.sp
     <link href="http://www.snellspace.com/public/linktests/alternate" />
     <link rel="http://example.org" href="http://www.snellspace.com/public/linktests/example" />
   </entry>
-  
+
 </feed>

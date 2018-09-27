@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" 
+<svg xmlns="http://www.w3.org/2000/svg"
      xmlns:html="http://www.w3.org/1999/xhtml"
      class="reftest-wait"
      onload="setTimeout(doStuff, 30);">
@@ -14,7 +14,7 @@ function doStuff()
   document.addEventListener("DOMNodeRemoved", foopy, false);
   filter.removeChild(filter.firstChild);
   document.removeEventListener("DOMNodeRemoved", foopy, false);
-  
+
   function foopy()
   {
     document.removeEventListener("DOMNodeRemoved", foopy, false);
@@ -23,7 +23,7 @@ function doStuff()
 
   // Needed for the crash, but not for the assertion.
   svg.appendChild(ellipse);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

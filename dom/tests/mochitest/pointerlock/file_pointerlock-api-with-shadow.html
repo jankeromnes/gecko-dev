@@ -69,7 +69,7 @@
           pointerLockElement = document.pointerLockElement === host;
           is(host.shadowRoot.firstChild, host.shadowRoot.pointerLockElement,
              "ShadowRoot's pointerLockElement shouldn't be retargeted.");
- 
+
           window.addEventListener("contextmenu",
                                   function() { gotContextMenuEvent = true; },
                                   true);

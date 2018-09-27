@@ -13,7 +13,7 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 expect = true;
-actual = /\ca/.test( "\x01" ); 
+actual = /\ca/.test( "\x01" );
 reportCompare(expect, actual, summary + ':/\ca/.test( "\x01" )');
 
 expect = false

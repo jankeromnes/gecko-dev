@@ -8,7 +8,7 @@
     (lime 'circle') to be clipped when the 'path' is filtered.
   </desc>
   <defs>
-    <marker id="marker" markerWidth="200" markerHeight="200" refX="100" refY="100" 
+    <marker id="marker" markerWidth="200" markerHeight="200" refX="100" refY="100"
       markerUnits="userSpaceOnUse">
       <circle fill="lime" r="100" cx="100" cy="100"/>
     </marker>

@@ -184,7 +184,7 @@ PKIX_PL_Cert_CreateFromCERTCertificate(
 PKIX_Error *
 PKIX_PL_Cert_GetCERTCertificate(
         PKIX_PL_Cert *cert,
-        CERTCertificate **pnssCert, 
+        CERTCertificate **pnssCert,
         void *plContext);
 
 /*
@@ -375,7 +375,7 @@ PKIX_PL_Cert_GetSubjectPublicKey(
  * DESCRIPTION:
  *
  * Determines if the PublicKey pointed to by "pubKey" is a DSA Key with null
- * parameters and stores the result at "pNeedsParams". 
+ * parameters and stores the result at "pNeedsParams".
  *
  * PARAMETERS:
  *  "pubKey"
@@ -1533,7 +1533,7 @@ typedef enum PKIX_PL_TrustAnchorModeEnum {
  *  component in a successful chain.
  *
  *  If the Certificate is intrinsically untrustworthy, this function will return
- *  an error. 
+ *  an error.
  *
  * PARAMETERS
  *  "cert"
@@ -1564,17 +1564,17 @@ PKIX_PL_Cert_IsCertTrusted(
  * FUNCTION: PKIX_PL_Cert_IsLeafCertTrusted
  * DESCRIPTION:
  *
- *  Checks the Leaf Cert specified by "cert" to determine, in a manner that 
- *  depends on the underlying platform, whether it is trusted, and stores the 
+ *  Checks the Leaf Cert specified by "cert" to determine, in a manner that
+ *  depends on the underlying platform, whether it is trusted, and stores the
  *  result in "pTrusted". If a certificate is trusted it means that this
  *  End Entify certificate has been marked as trusted for the requested usage,
  *  policy, validity, and other tests.
  *
- *  If the Certificate is not intrinsically trustworthy, we can still try to 
+ *  If the Certificate is not intrinsically trustworthy, we can still try to
  *  build a successful chain.
  *
  *  If the Certificate is intrinsically untrustworthy, this function will return
- *  an error. 
+ *  an error.
  *
  * PARAMETERS
  *  "cert"
@@ -1599,7 +1599,7 @@ PKIX_PL_Cert_IsLeafCertTrusted(
 
 /* FUNCTION: PKIX_PL_Cert_SetAsTrustAnchor */
 PKIX_Error*
-PKIX_PL_Cert_SetAsTrustAnchor(PKIX_PL_Cert *cert, 
+PKIX_PL_Cert_SetAsTrustAnchor(PKIX_PL_Cert *cert,
                               void *plContext);
 
 /*
@@ -1818,7 +1818,7 @@ PKIX_PL_Cert_GetCrlDp(PKIX_PL_Cert *cert,
 
 
 /*
- * InfoAccess 
+ * InfoAccess
  *
  * To hold Authority Information Access or Subject Information Access
  * retrieved from a Certificate.
@@ -2373,7 +2373,7 @@ PKIX_PL_X500Name_Create (
 /*
  * FUNCTION: PKIX_PL_X500Name_CreateFromCERTName
  * DESCRIPTION:
- * 
+ *
  * The function creates x500Name using der encoded DN and/or pointer to
  * CERTName. If arument "name" is NULL, but derName is supplied when
  * the function generates nssDN(CERTName type) from der data. If derName
@@ -2580,7 +2580,7 @@ PKIX_PL_Date_Create_CurrentOffBySeconds(
  *
  *
  * NOTE: This function is allowed to be called only by pkix tests programs.
- * 
+ *
  * PARAMETERS:
  *  "nameType"
  *      Type of GeneralName to be created. This must be one of the GeneralName

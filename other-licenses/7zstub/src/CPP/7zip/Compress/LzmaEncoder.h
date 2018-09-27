@@ -27,7 +27,7 @@ public:
       ICompressSetCoderProperties,
       ICompressWriteCoderProperties,
       ICompressSetCoderPropertiesOpt)
-    
+
   STDMETHOD(Code)(ISequentialInStream *inStream, ISequentialOutStream *outStream,
       const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress);
   STDMETHOD(SetCoderProperties)(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps);

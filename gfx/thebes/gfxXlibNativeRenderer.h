@@ -48,7 +48,7 @@ public:
                                   mozilla::gfx::IntPoint offset,
                                   mozilla::gfx::IntRect* clipRects,
                                   uint32_t numClipRects) = 0;
-  
+
     enum {
         // If set, then Draw() is opaque, i.e., every pixel in the intersection
         // of the clipRect and (offset.x,offset.y,bounds.width,bounds.height)

@@ -11,7 +11,7 @@ var expect = 'No Crash';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 
 var commands =
   [{origCount:1, fun:(function anonymous() {allElements[2].style.background = "#fcd";})},

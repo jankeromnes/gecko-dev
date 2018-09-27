@@ -25,7 +25,7 @@ function t3(id,expected,pid) {
   var actual = el.offsetLeft;
   is(actual, expected, id+".offsetLeft");
 
-  var p = document.getElementById(id).offsetParent; 
+  var p = document.getElementById(id).offsetParent;
   is(p.id, pid, id+".offsetParent");
 }
 

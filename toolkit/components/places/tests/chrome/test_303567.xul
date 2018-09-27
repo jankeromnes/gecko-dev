@@ -39,7 +39,7 @@ const LIVEMARKS = [
       "http://feed-item-link.com/",
     ],
     message: "Ensure livemark item links did not inherit site uri."
-  },  
+  },
 ];
 
 function runTest()

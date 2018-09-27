@@ -18,7 +18,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=593959
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=593959">Mozilla Bug 593959</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -31,18 +31,18 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=593959
     e.initEvent("mousedown", false, false, window, 0, 1, 1, 1, 1,
                 false, false, false, false, 0, null);
     utils.dispatchDOMEventViaPresShell(document.body, e, true);
-    
+
     is(document.querySelector("body:active"), document.body, "body should be active!")
-    
+
     var ifrwindow = document.getElementById("ifr").contentWindow;
-    
+
     var utils2 = SpecialPowers.getDOMWindowUtils(ifrwindow);
-   
+
     var e2 = ifrwindow.document.createEvent("MouseEvent");
     e2.initEvent("mouseup", false, false, ifrwindow, 0, 1, 1, 1, 1,
                  false, false, false, false, 0, null);
     utils2.dispatchDOMEventViaPresShell(ifrwindow.document.body, e2, true);
-    
+
     isnot(document.querySelector("body:active"), document.body, "body shouldn't be active!")
 
     SimpleTest.finish();

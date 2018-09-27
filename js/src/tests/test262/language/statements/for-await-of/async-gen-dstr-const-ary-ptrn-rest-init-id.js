@@ -51,7 +51,7 @@ var iterCount = 0;
 
 async function *fn() {
   for await (const [...x = []] of [[]]) {
-    
+
 
     iterCount += 1;
   }

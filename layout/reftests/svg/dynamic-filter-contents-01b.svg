@@ -4,7 +4,7 @@
 -->
 <svg class="reftest-wait" xmlns="http://www.w3.org/2000/svg" onload="startTest()">
   <defs>
-    <filter id="f" filterUnits="objectBoundingBox" primitiveUnits="objectBoundingBox" 
+    <filter id="f" filterUnits="objectBoundingBox" primitiveUnits="objectBoundingBox"
             x="0" y="0" width="1" height="1">
       <feFlood flood-color="#ff0000" flood-opacity="0.5" result="flood"/>
       <feComposite id="comp" width="1" height="1" in="flood" operator="over" in2="SourceGraphic"/>

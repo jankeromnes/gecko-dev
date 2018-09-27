@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
   for (var j = 0; j < 5; ++j) { if([1][-0]) { } }
 

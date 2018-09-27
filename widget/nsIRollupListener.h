@@ -14,7 +14,7 @@ class nsIContent;
 class nsIWidget;
 
 class nsIRollupListener {
- public: 
+ public:
 
   /**
    * Notifies the object to rollup, optionally returning the node that

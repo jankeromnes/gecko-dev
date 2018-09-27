@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" 
-     xmlns:html="http://www.w3.org/1999/xhtml" 
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:html="http://www.w3.org/1999/xhtml"
      onload="setTimeout(boom, 200);"
      class="reftest-wait">
 
@@ -11,7 +11,7 @@ function boom()
     document.getElementById("grad2").gradientUnits.baseVal = "y";
   } catch (e) {
   }
-  
+
   document.documentElement.removeAttribute("class");
 }
 

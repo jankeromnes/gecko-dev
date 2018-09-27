@@ -2,8 +2,8 @@
 #
 # Creates man pages for the NSS security tools
 #
-# pk12util, certutil, modutil, ssltap, 
-# signtool, signver, cmsutil, crlutil,  
+# pk12util, certutil, modutil, ssltap,
+# signtool, signver, cmsutil, crlutil,
 # derdump, pp, vfychain, vfyserv
 #
 
@@ -21,7 +21,7 @@ all: prepare all-man all-html
 prepare: date-and-version
 	mkdir -p html
 	mkdir -p nroff
-	
+
 clean:
 	rm -f date.xml version.xml *.tar.bz2
 	rm -f html/*.proc
@@ -45,7 +45,7 @@ version.xml:
 
 nroff/%.1 : %.xml
 	$(COMPILE.1) $<
-	
+
 MANPAGES = \
 nroff/certutil.1 nroff/cmsutil.1 nroff/crlutil.1 nroff/pk12util.1 \
 nroff/modutil.1 nroff/ssltap.1 nroff/derdump.1 nroff/signtool.1 nroff/signver.1 \

@@ -1,7 +1,7 @@
 ftp> open netlab2.usu.edu
 Connected to netlab2.usu.edu.
 220 Service Ready for new User
-Name (netlab2.usu.edu:cyp): 
+Name (netlab2.usu.edu:cyp):
 331 Enter E-Mail id as Password
 230 User anonymous Logged in Successfully
 Remote system type is NETWARE.
@@ -40,12 +40,12 @@ d [RWCEAFMS] jrd                               512 Oct 21  2001 updates
 - [RWCEAFMS] jrd                               372 Jan 13  1993 README.TXT
 226 Transfer Complete
 ftp> site help
-214-Only DOS and LONG site commands are supported for Anonymous Users 
- DOS : 
- 	The DOS command shows the file/directory permissions in DOS format. 
- LONG	: 
- 	The LONG command shows the file/directory permissions in LONG format. 
+214-Only DOS and LONG site commands are supported for Anonymous Users
+ DOS :
+ 	The DOS command shows the file/directory permissions in DOS format.
+ LONG	:
+ 	The LONG command shows the file/directory permissions in LONG format.
 214 End of Help
 ftp> close
 221 Closing Session
-ftp> 
+ftp>

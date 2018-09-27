@@ -37,7 +37,7 @@ class ChildReaper : public base::MessagePumpLibevent::SignalEvent,
 public:
   explicit ChildReaper(pid_t process) : process_(process)
   {
-  } 
+  }
 
   virtual ~ChildReaper()
   {
@@ -82,7 +82,7 @@ public:
     : ChildReaper(process)
     , mozilla::Runnable("ChildGrimReaper")
   {
-  } 
+  }
 
   virtual ~ChildGrimReaper()
   {
@@ -132,7 +132,7 @@ class ChildLaxReaper : public ChildReaper,
 public:
   explicit ChildLaxReaper(pid_t process) : ChildReaper(process)
   {
-  } 
+  }
 
   virtual ~ChildLaxReaper()
   {

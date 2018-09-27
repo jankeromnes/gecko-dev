@@ -594,7 +594,7 @@ PKIX_ProcessingParams_GetUseAIAForCertFetching(
 PKIX_Error *
 PKIX_ProcessingParams_SetUseAIAForCertFetching(
         PKIX_ProcessingParams *params,
-        PKIX_Boolean useAIA,  
+        PKIX_Boolean useAIA,
         void *plContext)
 {
         PKIX_ENTER(PROCESSINGPARAMS, "PKIX_ProcessingParams_SetUseAIAForCertFetching");

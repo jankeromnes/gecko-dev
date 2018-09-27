@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////
 //
 // Utilities for navigation tests
-// 
+//
 ///////////////////////////////////////////////////////////////////////////
 
 var body = "This frame was navigated.";
@@ -178,10 +178,10 @@ function xpcWaitForFinishedFrames(callback, numFrames) {
   function searchForFinishedFrames(win) {
     if ((win.location.href.endsWith(target_url) ||
          win.location.href.endsWith(target_popup_url)) &&
-        win.document && 
-        win.document.body && 
+        win.document &&
+        win.document.body &&
         (win.document.body.textContent.trim() == body ||
-         win.document.body.textContent.trim() == popup_body) && 
+         win.document.body.textContent.trim() == popup_body) &&
         win.document.readyState == "complete") {
 
       var windowId = win.windowUtils.outerWindowID;

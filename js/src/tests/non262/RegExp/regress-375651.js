@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   /(.{2,3}){0,2}?t/.exec("abt");
 
   reportCompare(expect, actual, summary);

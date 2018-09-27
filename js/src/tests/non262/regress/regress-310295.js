@@ -17,5 +17,5 @@ var tmp = 23948730458647527874392837439299837412374859487593;
 tmp = new Number(tmp);
 tmp = tmp.valueOf()
   tmp = String(tmp);
- 
+
 reportCompare(expect, actual, summary);

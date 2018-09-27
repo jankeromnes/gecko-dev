@@ -11,7 +11,7 @@ description: >
     "function __func()"
 ---*/
 
-var x; 
+var x;
 
 function __func(){
     x = 1;

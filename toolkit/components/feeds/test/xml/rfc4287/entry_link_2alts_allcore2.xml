@@ -13,7 +13,7 @@ Expect: feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntry).link.sp
   <link href="http://www.intertwingly.net/wiki/pie/LinkConformanceTests" />
   <link rel="self" href="http://www.snellspace.com/public/linktests.xml" />
 
-  
+
 
   <entry>
 
@@ -28,6 +28,6 @@ Expect: feed.items.queryElementAt(0, Components.interfaces.nsIFeedEntry).link.sp
     <link rel="self" href="http://www.snellspace.com/public/linktests/self" />
     <link rel="via" href="http://www.snellspace.com/public/linktests/via" />
     <link rel="alternate" type="text/plain" href="http://www.snellspace.com/public/linktests/alternate2" />
-  </entry>  
-  
+  </entry>
+
 </feed>

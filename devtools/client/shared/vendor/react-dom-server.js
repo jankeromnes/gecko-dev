@@ -81,7 +81,7 @@ var _assign = ReactInternals.assign;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * 
+ *
  */
 
 function makeEmptyFunction(arg) {
@@ -210,7 +210,7 @@ var hyphenateStyleName_1 = hyphenateStyleName;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * 
+ *
  * @typechecks static-only
  */
 
@@ -1104,7 +1104,7 @@ function flattenOptionChildren(children) {
     if (typeof child === 'string' || typeof child === 'number') {
       content += child;
     } else {
-      
+
     }
   });
   return content;
@@ -1299,7 +1299,7 @@ function resolve(child, context) {
           !(contextKey in childContextTypes) ? reactProdInvariant('108', getComponentName(Component) || 'Unknown', contextKey) : void 0;
         }
       } else {
-        
+
       }
     }
     if (childContext) {
@@ -1337,7 +1337,7 @@ var ReactDOMServerRenderer = function () {
     this.contextIndex = -1;
     this.contextStack = [];
     this.contextValueStack = [];
-    
+
   }
 
   /**
@@ -1409,7 +1409,7 @@ var ReactDOMServerRenderer = function () {
       }
       var child = frame.children[frame.childIndex++];
       out += this.render(child, frame.context, frame.domNamespace);
-      
+
     }
     return out;
   };

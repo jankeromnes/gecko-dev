@@ -334,12 +334,12 @@ struct StackFrameARM64 : public StackFrame {
   uint64_t context_validity;
 };
 
-struct StackFrameMIPS : public StackFrame {  
-  // MIPS callee save registers for o32 ABI (32bit registers) are: 
-  // 1. $s0-$s7, 
+struct StackFrameMIPS : public StackFrame {
+  // MIPS callee save registers for o32 ABI (32bit registers) are:
+  // 1. $s0-$s7,
   // 2. $sp, $fp
-  // 3. $f20-$f31 
-  // 
+  // 3. $f20-$f31
+  //
   // The register structure is available at
   // http://en.wikipedia.org/wiki/MIPS_architecture#Compiler_register_usage
 
@@ -347,10 +347,10 @@ struct StackFrameMIPS : public StackFrame {
 #define INDEX_MIPS_REG_S7 MD_CONTEXT_MIPS_REG_S7  // 23
 #define INDEX_MIPS_REG_GP MD_CONTEXT_MIPS_REG_GP  // 28
 #define INDEX_MIPS_REG_RA MD_CONTEXT_MIPS_REG_RA  // 31
-#define INDEX_MIPS_REG_PC 34 
+#define INDEX_MIPS_REG_PC 34
 #define SHIFT_MIPS_REG_S0 0
 #define SHIFT_MIPS_REG_GP 8
-#define SHIFT_MIPS_REG_PC 12 
+#define SHIFT_MIPS_REG_PC 12
 
   enum ContextValidity {
     CONTEXT_VALID_NONE = 0,
@@ -366,11 +366,11 @@ struct StackFrameMIPS : public StackFrame {
     CONTEXT_VALID_GP = 1 << 8,  // $28
     CONTEXT_VALID_SP = 1 << 9,  // $29
     CONTEXT_VALID_FP = 1 << 10,  // $30
-    CONTEXT_VALID_RA = 1 << 11,  // $31  
+    CONTEXT_VALID_RA = 1 << 11,  // $31
     CONTEXT_VALID_PC = 1 << 12,  // $34
     CONTEXT_VALID_ALL = ~CONTEXT_VALID_NONE
   };
-  
+
   // Return the ContextValidity flag for register rN.
   static ContextValidity RegisterValidFlag(int n) {
     if (n >= INDEX_MIPS_REG_S0 && n <= INDEX_MIPS_REG_S7)
@@ -388,7 +388,7 @@ struct StackFrameMIPS : public StackFrame {
   // Register state. This is only fully valid for the topmost frame in a
   // stack. In other frames, which registers are present depends on what
   // debugging information were available. Refer to 'context_validity' below.
-  MDRawContextMIPS context;   
+  MDRawContextMIPS context;
 
   // For each register in context whose value has been recovered,
   // the corresponding CONTEXT_VALID_ bit in 'context_validity' is set.

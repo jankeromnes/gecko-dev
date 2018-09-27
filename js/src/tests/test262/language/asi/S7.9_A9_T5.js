@@ -10,7 +10,7 @@ description: Execute do { \n ; \n }while((false) \n )
 //CHECK#1
 do {
   ;
-} while ((false) 
+} while ((false)
 )
 
 reportCompare(0, 0);

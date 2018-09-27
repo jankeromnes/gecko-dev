@@ -28,7 +28,7 @@ function myFunction2(){
   try{
     throw "exc";
     return 1;
-  }catch(err){  	
+  }catch(err){
     return 2;
   }
   return 3;
@@ -42,7 +42,7 @@ if (x2!==2){
 function myFunction3(){
   try{
     return someValue;
-  }catch(err){  	
+  }catch(err){
     return 1;
   }
   return 2;

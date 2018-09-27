@@ -30,5 +30,5 @@ else
   var s = Script('var tmp = function(o) { switch(o) { case String: case 1: return ""; } }; print(String === S); print(String.prototype === Sp); "".trim();');
   s();
 }
- 
+
 reportCompare(expect, actual, summary);

@@ -11,13 +11,13 @@ description: Calling a function as a constructor
 
 function FACTORY(){
    this.id = 0;
-   
+
    this.id = this.func();
-   
+
    this.func = function (){
       return 5;
    }
-  
+
 }
 //////////////////////////////////////////////////////////////////////////////
 //CHECK#1

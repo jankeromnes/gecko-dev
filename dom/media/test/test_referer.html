@@ -7,13 +7,13 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=584480
   <title>Test for Bug 584480</title>
   <script type="application/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css"/>
-  <script type="text/javascript" src="manifest.js"></script> 
+  <script type="text/javascript" src="manifest.js"></script>
 </head>
 <body>
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=584480">Mozilla Bug </a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -65,7 +65,7 @@ for (var i=0; i<gSmallTests.length; ++i) {
   if (!v.canPlayType(test.type)) {
     continue;
   }
-  // ensure metadata is loaded for default preload is none on b2g 
+  // ensure metadata is loaded for default preload is none on b2g
   v.preload = "metadata";
   v.autoplay = "true";
   v._complete = false;

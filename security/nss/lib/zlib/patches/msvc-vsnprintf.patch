@@ -2,13 +2,13 @@
 +++ zlib/zutil.h	2010-08-21 18:07:03 -0700
 @@ -172,17 +172,18 @@
  #endif
- 
+
  #ifndef F_OPEN
  #  define F_OPEN(name, mode) fopen((name), (mode))
  #endif
- 
+
           /* functions */
- 
+
 -#if defined(STDC99) || (defined(__TURBOC__) && __TURBOC__ >= 0x550)
 +#if defined(STDC99) || (defined(__TURBOC__) && __TURBOC__ >= 0x550) || \
 +   (defined(_MSC_VER) && _MSC_VER >= 1500)

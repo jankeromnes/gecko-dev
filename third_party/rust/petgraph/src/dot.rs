@@ -29,7 +29,7 @@ use visit::{GraphRef};
 /// println!("{:?}", Dot::with_config(&graph, &[Config::EdgeNoLabel]));
 ///
 /// // In this case the output looks like this:
-/// // 
+/// //
 /// // digraph {
 /// //     0 [label="\"A\""]
 /// //     1 [label="\"B\""]

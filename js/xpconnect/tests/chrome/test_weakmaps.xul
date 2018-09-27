@@ -137,7 +137,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=668855
     is(black_map.get(black_key).my_key, 'black_black',
       "Black key should have the same value in black map.");
     is(ChromeUtils.nondeterministicGetWeakMapKeys(black_map).length, 2,
-      "Black map should have two entries.");    
+      "Black map should have two entries.");
 
   };
 
@@ -166,7 +166,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=668855
       all_ok = all_ok && k.count == i;
       dom = chainm.get(k).d.firstChild;
     };
-    ok(all_ok, "Count was invalid on a key in chained weak map entries.");    
+    ok(all_ok, "Count was invalid on a key in chained weak map entries.");
   };
 
   nested_cc_maps();

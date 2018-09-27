@@ -33,7 +33,7 @@ function runTest() {
   let updates = getLocalUpdateString(updateProps, patches);
   writeUpdatesToXMLFile(getLocalUpdatesXMLString(updates), true);
   writeStatusFile(STATE_SUCCEEDED);
-    
+
   reloadUpdateManagerData();
 
   is(gUpdateManager.activeUpdate.state, STATE_PENDING,
@@ -41,7 +41,7 @@ function runTest() {
 
   ok(gUpdateManager.activeUpdate.promptWaitTime == 1, "Checking that the " +
      "update's promptWaitTime attribute value was set by the XML");
-    
+
   gUP.showUpdateDownloaded(gUpdateManager.activeUpdate, true);
 }
 

@@ -14,5 +14,5 @@ printStatus (summary);
 
 var o = {hi: 'there'};
 eval("var r = /re(1)(2)(3)/g", o);
- 
+
 reportCompare(expect, actual, summary);

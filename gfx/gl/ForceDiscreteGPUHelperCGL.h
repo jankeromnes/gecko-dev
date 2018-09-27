@@ -9,7 +9,7 @@
 #include <OpenGL/OpenGL.h>
 
 /** This RAII helper guarantees that we're on the discrete GPU during its lifetime.
- * 
+ *
  * As long as any ForceDiscreteGPUHelperCGL object is alive, we're on the discrete GPU.
  */
 class ForceDiscreteGPUHelperCGL

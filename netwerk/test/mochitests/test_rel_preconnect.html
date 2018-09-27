@@ -18,7 +18,7 @@ var observer;
 function doTest()
 {
   SpecialPowers.setBoolPref("network.http.debug-observations", true);
-  
+
   observer = SpecialPowers.wrapCallback(function(subject, topic, data) {
     remainder--;
     ok(true, "observed remainder = " + remainder);

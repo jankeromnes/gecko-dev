@@ -20,7 +20,7 @@
     setTimeout(delay_go, 4000); // fallback for running outside reftest
   </script>
   <rect id="rect1" y="40" width="10" height="10" fill="white">
-    <animate id="anim" attributeName="x" 
+    <animate id="anim" attributeName="x"
              dur="2s" values="0; 50; 100; 150"
              calcMode="discrete" />
   </rect>

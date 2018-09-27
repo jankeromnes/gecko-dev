@@ -232,7 +232,7 @@ pkix_pl_HttpDefaultClient_HdrCheckComplete(
                         nextHeader = NULL;
                 }
         } while ((nextHeader != NULL) && (nextHeader < (eoh + crlfLen)));
-                
+
         /* Did caller provide a pointer to return content-type? */
         if (client->rcv_http_content_type != NULL) {
                 *(client->rcv_http_content_type) = client->rcvContentType;
@@ -246,7 +246,7 @@ pkix_pl_HttpDefaultClient_HdrCheckComplete(
          /* How many bytes remain in current buffer, beyond the header? */
          headerLength += eohMarkLen;
          client->filledupBytes -= headerLength;
- 
+
          /*
           * The headers have passed validation. Now figure out whether the
           * message is within the caller's size limit (if one was specified).
@@ -257,7 +257,7 @@ pkix_pl_HttpDefaultClient_HdrCheckComplete(
              client->connectStatus = HTTP_COMPLETE;
              *pKeepGoing = PKIX_FALSE;
              break;
- 
+
          case HTTP_UNKNOWN_CONTENT_LENGTH:
              /* Unknown contentLength indicator.Will be set by
               * pkix_pl_HttpDefaultClient_RecvBody whey connection get closed */
@@ -278,7 +278,7 @@ pkix_pl_HttpDefaultClient_HdrCheckComplete(
              client->connectStatus = HTTP_RECV_BODY;
              *pKeepGoing = PKIX_TRUE;
              break;
- 
+
          default:
              client->rcv_http_data_len = contentLength;
              if (client->maxResponseLen > 0 &&
@@ -286,7 +286,7 @@ pkix_pl_HttpDefaultClient_HdrCheckComplete(
                  client->connectStatus = HTTP_ERROR;
                  goto cleanup;
              }
-             
+
              /*
               * Do we have all of the message body, or do we need to read some more?
               */
@@ -298,19 +298,19 @@ pkix_pl_HttpDefaultClient_HdrCheckComplete(
                  *pKeepGoing = PKIX_FALSE;
              }
          }
- 
+
          if (contentLength > 0) {
              /* allocate a buffer of size contentLength  for the content */
              PKIX_CHECK(PKIX_PL_Malloc(contentLength, (void **)&body, plCtx),
                         PKIX_MALLOCFAILED);
-             
+
              /* copy any remaining bytes in current buffer into new buffer */
              if (client->filledupBytes > 0) {
                  PORT_Memcpy(body, &(client->rcvBuf[headerLength]),
                              client->filledupBytes);
              }
          }
- 
+
          PKIX_CHECK(PKIX_PL_Free(client->rcvBuf, plCtx),
                     PKIX_FREEFAILED);
          client->rcvBuf = body;
@@ -505,7 +505,7 @@ pkix_pl_HttpDefaultClient_RegisterSelf(void *plCtx)
         entry->description = "HttpDefaultClient";
         entry->typeObjectSize = sizeof(PKIX_PL_HttpDefaultClient);
         entry->destructor = pkix_pl_HttpDefaultClient_Destroy;
- 
+
         httpClient.version = 1;
         httpClient.fcnTable.ftable1 = vtable;
         (void)SEC_RegisterDefaultHttpClient(&httpClient);
@@ -985,7 +985,7 @@ pkix_pl_HttpDefaultClient_RecvBody(
             *pKeepGoing = PKIX_TRUE;
             goto cleanup;
         }
-        
+
         /* We got something. Did we get it all? */
         client->filledupBytes += bytesRead;
 
@@ -1156,8 +1156,8 @@ pkix_pl_HttpDefaultClient_RequestCreate(
         SEC_HTTP_SERVER_SESSION session,
         const char *http_protocol_variant, /* usually "http" */
         const char *path_and_query_string,
-        const char *http_request_method, 
-        const PRIntervalTime timeout, 
+        const char *http_request_method,
+        const PRIntervalTime timeout,
         SEC_HTTP_REQUEST_SESSION *pRequest,
         void *plCtx)
 {
@@ -1261,7 +1261,7 @@ cleanup:
 PKIX_Error *
 pkix_pl_HttpDefaultClient_SetPostData(
         SEC_HTTP_REQUEST_SESSION request,
-        const char *http_data, 
+        const char *http_data,
         const PRUint32 http_data_len,
         const char *http_content_type,
         void *plCtx)
@@ -1300,14 +1300,14 @@ cleanup:
 PKIX_Error *
 pkix_pl_HttpDefaultClient_TrySendAndReceive(
         SEC_HTTP_REQUEST_SESSION request,
-        PRUint16 *http_response_code, 
-        const char **http_response_content_type, 
-        const char **http_response_headers, 
-        const char **http_response_data, 
-        PRUint32 *http_response_data_len, 
+        PRUint16 *http_response_code,
+        const char **http_response_content_type,
+        const char **http_response_headers,
+        const char **http_response_data,
+        PRUint32 *http_response_data_len,
         PRPollDesc **pPollDesc,
         SECStatus *pSECReturn,
-        void *plCtx)        
+        void *plCtx)
 {
         PKIX_PL_HttpDefaultClient *client = NULL;
         PKIX_UInt32 postLen = 0;
@@ -1359,10 +1359,10 @@ pkix_pl_HttpDefaultClient_TrySendAndReceive(
                 /* prepare the message */
                 portstr[0] = '\0';
                 if (client->portnum != 80) {
-                        PR_snprintf(portstr, sizeof(portstr), ":%d", 
+                        PR_snprintf(portstr, sizeof(portstr), ":%d",
                                     client->portnum);
                 }
-                
+
                 if (client->send_http_method == HTTP_POST_METHOD) {
                         sendbuf = PR_smprintf
                             ("POST %s HTTP/1.0\r\nHost: %s%s\r\n"
@@ -1373,7 +1373,7 @@ pkix_pl_HttpDefaultClient_TrySendAndReceive(
                             client->send_http_content_type,
                             client->send_http_data_len);
                         postLen = PORT_Strlen(sendbuf);
-                            
+
                         client->POSTLen = postLen + client->send_http_data_len;
 
                         /* allocate postBuffer big enough for header + data */
@@ -1394,7 +1394,7 @@ pkix_pl_HttpDefaultClient_TrySendAndReceive(
                         /* PR_smprintf_free original header buffer */
                         PR_smprintf_free(sendbuf);
                         sendbuf = NULL;
-                        
+
                 } else if (client->send_http_method == HTTP_GET_METHOD) {
                         client->GETBuf = PR_smprintf
                             ("GET %s HTTP/1.0\r\nHost: %s%s\r\n\r\n",
@@ -1547,8 +1547,8 @@ pkix_pl_HttpDefaultClient_RequestCreateFcn(
         SEC_HTTP_SERVER_SESSION session,
         const char *http_protocol_variant, /* usually "http" */
         const char *path_and_query_string,
-        const char *http_request_method, 
-        const PRIntervalTime timeout, 
+        const char *http_request_method,
+        const PRIntervalTime timeout,
         SEC_HTTP_REQUEST_SESSION *pRequest)
 {
         PKIX_Error *err = pkix_pl_HttpDefaultClient_RequestCreate
@@ -1570,7 +1570,7 @@ pkix_pl_HttpDefaultClient_RequestCreateFcn(
 SECStatus
 pkix_pl_HttpDefaultClient_SetPostDataFcn(
         SEC_HTTP_REQUEST_SESSION request,
-        const char *http_data, 
+        const char *http_data,
         const PRUint32 http_data_len,
         const char *http_content_type)
 {
@@ -1589,7 +1589,7 @@ pkix_pl_HttpDefaultClient_SetPostDataFcn(
 SECStatus
 pkix_pl_HttpDefaultClient_AddHeaderFcn(
         SEC_HTTP_REQUEST_SESSION request,
-        const char *http_header_name, 
+        const char *http_header_name,
         const char *http_header_value)
 {
         /* Not supported */
@@ -1600,20 +1600,20 @@ SECStatus
 pkix_pl_HttpDefaultClient_TrySendAndReceiveFcn(
         SEC_HTTP_REQUEST_SESSION request,
         PRPollDesc **pPollDesc,
-        PRUint16 *http_response_code, 
-        const char **http_response_content_type, 
-        const char **http_response_headers, 
-        const char **http_response_data, 
-        PRUint32 *http_response_data_len) 
+        PRUint16 *http_response_code,
+        const char **http_response_content_type,
+        const char **http_response_headers,
+        const char **http_response_data,
+        PRUint32 *http_response_data_len)
 {
         SECStatus rv = SECFailure;
 
         PKIX_Error *err = pkix_pl_HttpDefaultClient_TrySendAndReceive
                 (request,
-                http_response_code, 
-                http_response_content_type, 
-                http_response_headers, 
-                http_response_data, 
+                http_response_code,
+                http_response_content_type,
+                http_response_headers,
+                http_response_data,
                 http_response_data_len,
                 pPollDesc,
                 &rv,

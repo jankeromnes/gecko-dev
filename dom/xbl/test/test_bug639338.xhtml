@@ -20,7 +20,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=403162
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=639338">Mozilla Bug 639338</a>
 <p id="display" style="-moz-binding: url(#test)"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -32,7 +32,7 @@ var controlCount = 0;
 function dispatchEvent(t, controlKey, shiftKey) {
   var ev = document.createEvent("MouseScrollEvents");
   ev.initMouseScrollEvent("DOMMouseScroll", true, true, window, 0, 0, 0, 0, 0, controlKey, false, shiftKey, false, 0, null, 0);
-  t.dispatchEvent(ev);  
+  t.dispatchEvent(ev);
 }
 
 /** Test for Bug 403162 **/

@@ -9,7 +9,7 @@ index b1d740e..61cb260 100644
 -# ADD LINK32 comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386 /out:"C:\Util\7zS.sfx" /opt:NOWIN98
 +# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib delayimp.lib /nologo /subsystem:windows /machine:I386 /out:"Release\7zS.sfx" /opt:NOWIN98 /delayload:user32.dll /delayload:shell32.dll /delayload:oleaut32.dll
  # SUBTRACT LINK32 /pdb:none
- 
+
  !ELSEIF  "$(CFG)" == "SFXSetup - Win32 Debug"
 @@ -81,7 +81,7 @@ BSC32=bscmake.exe
  # ADD BSC32 /nologo
@@ -17,9 +17,9 @@ index b1d740e..61cb260 100644
  # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
 -# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib comctl32.lib /nologo /subsystem:windows /debug /machine:I386 /out:"C:\UTIL\7zSfxS.exe" /pdbtype:sept
 +# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib delayimp.lib /nologo /subsystem:windows /debug /machine:I386 /out:"Debug\7zSfxS.exe" /pdbtype:sept /delayload:user32.dll /delayload:shell32.dll /delayload:oleaut32.dll
- 
+
  !ELSEIF  "$(CFG)" == "SFXSetup - Win32 ReleaseD"
- 
+
 @@ -107,9 +107,9 @@ BSC32=bscmake.exe
  # ADD BASE BSC32 /nologo
  # ADD BSC32 /nologo
@@ -30,8 +30,8 @@ index b1d740e..61cb260 100644
 -# ADD LINK32 comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386 /out:"C:\Util\7zSD.sfx" /opt:NOWIN98
 +# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib delayimp.lib /nologo /subsystem:windows /machine:I386 /out:"ReleaseD\7zSD.sfx" /opt:NOWIN98 /delayload:user32.dll /delayload:shell32.dll /delayload:oleaut32.dll
  # SUBTRACT LINK32 /pdb:none
- 
- !ENDIF 
+
+ !ENDIF
 diff --git a/c:/Users/mhowell/Downloads/lzma1805/CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp b/other-licenses/7zstub/src/CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp
 index 1705a8d..e3a3bb2 100644
 --- a/c:/Users/mhowell/Downloads/lzma1805/CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp
@@ -39,7 +39,7 @@ index 1705a8d..e3a3bb2 100644
 @@ -125,6 +125,179 @@ static void ShowErrorMessageSpec(const UString &name)
    ShowErrorMessage(NULL, message);
  }
- 
+
 +/* BEGIN Mozilla customizations */
 +
 +static char const *
@@ -236,9 +236,9 @@ index 1705a8d..e3a3bb2 100644
 +  /* END Mozilla customizations */
 +
    g_hInstance = (HINSTANCE)hInstance;
- 
+
    NT_CHECK
- 
+
 -  #ifdef _WIN32
 -  LoadSecurityDlls();
 -  #endif
@@ -252,9 +252,9 @@ index 1705a8d..e3a3bb2 100644
 +  //LoadSecurityDlls();
 +  //#endif
 +  // END Mozilla customizations
- 
+
    // InitCommonControls();
- 
+
 @@ -172,6 +367,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
    UString dirPrefix ("." STRING_PATH_SEPARATOR);
    UString appLaunched;
@@ -276,7 +276,7 @@ index 1705a8d..e3a3bb2 100644
      CObjectVector<CTextConfigPair> pairs;
 @@ -204,7 +411,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
    }
- 
+
    CTempDir tempDir;
 -  if (!tempDir.Create(kTempDirPrefix))
 +  /* Mozilla customizations - Added !extractOnly */
@@ -287,7 +287,7 @@ index 1705a8d..e3a3bb2 100644
 @@ -222,7 +430,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
      }
    }
- 
+
 -  const FString tempDirPath = tempDir.GetPath();
 +  /* BEGIN Mozilla customizations - added extractOnly  parameter support */
 +  const FString tempDirPath = extractOnly ? switches.Ptr(12) : GetUnicodeString(tempDir.GetPath());
@@ -298,7 +298,7 @@ index 1705a8d..e3a3bb2 100644
 @@ -250,6 +460,28 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
      }
    }
- 
+
 +  /* BEGIN Mozilla customizations */
 +  // Retrieve and store any data added to this file after signing.
 +  {
@@ -345,7 +345,7 @@ index 9e88fd4..9fda0d0 100644
 +  IDS_MIN_OS_TITLE  "Setup Error"
 +  IDS_MIN_OS_TEXT  "Microsoft Windows 7 or newer is required."
  END
- 
+
  #include "../../UI/FileManager/ProgressDialog.rc"
 diff --git a/c:/Users/mhowell/Downloads/lzma1805/CPP/7zip/UI/FileManager/ProgressDialog.cpp b/other-licenses/7zstub/src/CPP/7zip/UI/FileManager/ProgressDialog.cpp
 index 27d42b2..9b61369 100644

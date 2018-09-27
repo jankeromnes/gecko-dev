@@ -33,17 +33,17 @@ CHANGE_TESTS = {
       'tests':      [
         { 'id':         'U_U-1_SO',
           'desc':       'Underline partially underlined text',
-          'pad':        'foo[bar<u>baz</u>qoz]quz', 
+          'pad':        'foo[bar<u>baz</u>qoz]quz',
           'expected':   'foo<u>[barbazqoz]</u>quz' },
 
         { 'id':         'U_U-1_SL',
           'desc':       'Underline partially underlined text',
-          'pad':        'foo[bar<u>baz]qoz</u>quz', 
+          'pad':        'foo[bar<u>baz]qoz</u>quz',
           'expected':   'foo<u>[barbaz]qoz</u>quz' },
 
         { 'id':         'U_S-U-1_SO',
           'desc':       'Underline partially underlined text in striked context',
-          'pad':        '<s>foo[bar<u>baz</u>}</s>', 
+          'pad':        '<s>foo[bar<u>baz</u>}</s>',
           'expected':   '<s>foo<u>[barbaz]</u></s>' }
       ]
     },
@@ -202,35 +202,35 @@ CHANGE_TESTS = {
           'value':      '1',
           'pad':        '<font size="4">[foobarbaz]</font>',
           'expected':   '<font size="1">[foobarbaz]</font>' },
-                        
+
         { 'id':         'FS:1_SPAN.ass.s:fs:large-1_SW',
           'rte1-id':    'c-fontsize-1',
           'desc':       'Change existing font size from styled span to new size (without CSS)',
           'value':      '1',
           'pad':        '<span class="Apple-style-span" style="font-size: large">[foobarbaz]</span>',
           'expected':   '<font size="1">[foobarbaz]</font>' },
-                        
+
         { 'id':         'FS:5_FONTsz:1.s:fs:xs-1_SW',
           'rte1-id':    'c-fontsize-2',
           'desc':       'Change existing font size from tag with conflicting size and style to new size (without CSS)',
           'value':      '5',
           'pad':        '<font size="1" style="font-size:x-small">[foobarbaz]</font>',
           'expected':   '<font size="5">[foobarbaz]</font>' },
-                        
+
         { 'id':         'FS:2_FONTc:b.sz:6-1_SI',
           'desc':       'Change the font size in content with a different font size and font color',
           'value':      '2',
           'pad':        '<font color="blue" size="6">foo[bar]baz</font>',
           'expected':   [ '<font color="blue" size="6">foo<font size="2">[bar]</font>baz</font>',
                           '<font color="blue"><font size="6">foo</font><font size="2">[bar]</font><font size="6">baz</font></font>' ] },
-          
+
         { 'id':         'FS:larger_FONTsz:4',
           'desc':       'Change selection to use next larger font',
           'value':      'larger',
           'pad':        '<font size="4">foo[bar]baz</font>',
           'expected':   '<font size="4">foo<font size="larger">[bar]</font>baz</font>',
           'accept':     '<font size="4">foo</font><font size="5">[bar]</font><font size="4">baz</font>' },
-                        
+
         { 'id':         'FS:smaller_FONTsz:4',
           'desc':       'Change selection to use next smaller font',
           'value':      'smaller',

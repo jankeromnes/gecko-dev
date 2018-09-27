@@ -33,7 +33,7 @@ function test()
 			 gc();
 		       for (var i = 0; i != 50000; ++i) {
 			 var tmp = 1 / 3;
-			 tmp /= 10; 
+			 tmp /= 10;
 		       }
 		       for (var i = 0; i != 1000; ++i) {
 			 // Make string with 11 characters that would take

@@ -6,7 +6,7 @@
     PURPOSE: If a SVG subdocument is created dynamically, any timing-related
     animation API calls on the subdocument should silently fail until it's
     been attached to a document.
-    
+
     OPERATION: We start with a plain XHTML document, but later a div and an SVG
     subdocument are created. We attempt an animation API call on the SVG
     element before attaching it to the XHTML document.

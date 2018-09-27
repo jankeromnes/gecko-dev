@@ -870,7 +870,7 @@ WinUtils::GetTopLevelHWND(HWND aWnd,
 
     HWND upWnd = ::GetParent(curWnd); // Parent or owner (if has no parent)
 
-    // GetParent will only return the owner if the passed in window 
+    // GetParent will only return the owner if the passed in window
     // has the WS_POPUP style.
     if (!upWnd && !aStopIfNotPopup) {
       upWnd = ::GetWindow(curWnd, GW_OWNER);
@@ -1176,8 +1176,8 @@ WinUtils::InvalidatePluginAsWorkaround(nsIWidget* aWidget,
  * @param aURLShortcut : Differentiates between (false)Jumplistcache and (true)Shortcutcache
  ************************************************************************/
 
-AsyncFaviconDataReady::AsyncFaviconDataReady(nsIURI *aNewURI, 
-                                             nsCOMPtr<nsIThread> &aIOThread, 
+AsyncFaviconDataReady::AsyncFaviconDataReady(nsIURI *aNewURI,
+                                             nsCOMPtr<nsIThread> &aIOThread,
                                              const bool aURLShortcut):
   mNewURI(aNewURI),
   mIOThread(aIOThread),
@@ -1186,10 +1186,10 @@ AsyncFaviconDataReady::AsyncFaviconDataReady(nsIURI *aNewURI,
 }
 
 NS_IMETHODIMP
-myDownloadObserver::OnDownloadComplete(nsIDownloader *downloader, 
-                                     nsIRequest *request, 
-                                     nsISupports *ctxt, 
-                                     nsresult status, 
+myDownloadObserver::OnDownloadComplete(nsIDownloader *downloader,
+                                     nsIRequest *request,
+                                     nsISupports *ctxt,
+                                     nsresult status,
                                      nsIFile *result)
 {
   return NS_OK;
@@ -1210,7 +1210,7 @@ nsresult AsyncFaviconDataReady::OnFaviconDataNotAvailable(void)
   if (NS_FAILED(rv)) {
     return rv;
   }
- 
+
   nsCOMPtr<nsIChannel> channel;
   rv = NS_NewChannel(getter_AddRefs(channel),
                      mozIconURI,
@@ -1231,7 +1231,7 @@ nsresult AsyncFaviconDataReady::OnFaviconDataNotAvailable(void)
 NS_IMETHODIMP
 AsyncFaviconDataReady::OnComplete(nsIURI *aFaviconURI,
                                   uint32_t aDataLen,
-                                  const uint8_t *aData, 
+                                  const uint8_t *aData,
                                   const nsACString &aMimeType,
                                   uint16_t aWidth)
 {
@@ -1239,14 +1239,14 @@ AsyncFaviconDataReady::OnComplete(nsIURI *aFaviconURI,
     if (mURLShortcut) {
       OnFaviconDataNotAvailable();
     }
-    
+
     return NS_OK;
   }
 
   nsCOMPtr<nsIFile> icoFile;
   nsresult rv = FaviconHelper::GetOutputIconPath(mNewURI, icoFile, mURLShortcut);
   NS_ENSURE_SUCCESS(rv, rv);
-  
+
   nsAutoString path;
   rv = icoFile->GetPath(path);
   NS_ENSURE_SUCCESS(rv, rv);
@@ -1480,10 +1480,10 @@ AsyncDeleteAllFaviconsFromDisk::~AsyncDeleteAllFaviconsFromDisk()
 
 
 /*
- * (static) If the data is available, will return the path on disk where 
+ * (static) If the data is available, will return the path on disk where
  * the favicon for page aFaviconPageURI is stored.  If the favicon does not
  * exist, or its cache is expired, this method will kick off an async request
- * for the icon so that next time the method is called it will be available. 
+ * for the icon so that next time the method is called it will be available.
  * @param aFaviconPageURI The URI of the page to obtain
  * @param aICOFilePath The path of the icon file
  * @param aIOThread The thread to perform the Fetch on
@@ -1534,8 +1534,8 @@ nsresult FaviconHelper::ObtainCachedIconFile(nsCOMPtr<nsIURI> aFaviconPageURI,
   return rv;
 }
 
-nsresult FaviconHelper::HashURI(nsCOMPtr<nsICryptoHash> &aCryptoHash, 
-                                nsIURI *aUri, 
+nsresult FaviconHelper::HashURI(nsCOMPtr<nsICryptoHash> &aCryptoHash,
+                                nsIURI *aUri,
                                 nsACString& aUriHash)
 {
   if (!aUri)
@@ -1552,7 +1552,7 @@ nsresult FaviconHelper::HashURI(nsCOMPtr<nsICryptoHash> &aCryptoHash,
 
   rv = aCryptoHash->Init(nsICryptoHash::MD5);
   NS_ENSURE_SUCCESS(rv, rv);
-  rv = aCryptoHash->Update(reinterpret_cast<const uint8_t*>(spec.BeginReading()), 
+  rv = aCryptoHash->Update(reinterpret_cast<const uint8_t*>(spec.BeginReading()),
                            spec.Length());
   NS_ENSURE_SUCCESS(rv, rv);
   rv = aCryptoHash->Finish(true, aUriHash);
@@ -1602,7 +1602,7 @@ nsresult FaviconHelper::GetOutputIconPath(nsCOMPtr<nsIURI> aFaviconPageURI,
 
 // (static) Asynchronously creates a cached ICO file on disk for the favicon of
 // page aFaviconPageURI and stores it to disk at the path of aICOFile.
-nsresult 
+nsresult
   FaviconHelper::CacheIconFileFromFaviconURIAsync(nsCOMPtr<nsIURI> aFaviconPageURI,
                                                   nsCOMPtr<nsIFile> aICOFile,
                                                   nsCOMPtr<nsIThread> &aIOThread,
@@ -1614,9 +1614,9 @@ nsresult
     do_GetService("@mozilla.org/browser/favicon-service;1"));
   NS_ENSURE_TRUE(favIconSvc, NS_ERROR_FAILURE);
 
-  nsCOMPtr<nsIFaviconDataCallback> callback = 
-    new mozilla::widget::AsyncFaviconDataReady(aFaviconPageURI, 
-                                               aIOThread, 
+  nsCOMPtr<nsIFaviconDataCallback> callback =
+    new mozilla::widget::AsyncFaviconDataReady(aFaviconPageURI,
+                                               aIOThread,
                                                aURLShortcut);
 
   favIconSvc->GetFaviconDataForPage(aFaviconPageURI, callback, 0);
@@ -1641,7 +1641,7 @@ int32_t FaviconHelper::GetICOCacheSecondsTimeout() {
 
   // Obtain the pref
   const char PREF_ICOTIMEOUT[]  = "browser.taskbar.lists.icoTimeoutInSeconds";
-  icoReCacheSecondsTimeout = Preferences::GetInt(PREF_ICOTIMEOUT, 
+  icoReCacheSecondsTimeout = Preferences::GetInt(PREF_ICOTIMEOUT,
                                                  kSecondsPerDay);
   alreadyObtained = true;
   return icoReCacheSecondsTimeout;

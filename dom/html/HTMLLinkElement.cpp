@@ -317,7 +317,7 @@ HTMLLinkElement::AfterSetAttr(int32_t aNameSpaceID, nsAtom* aName,
 
   // If the link has `rel=localization` and its `href` attribute is changed,
   // update the list of localization links.
-  if (aNameSpaceID == kNameSpaceID_None && aName == nsGkAtoms::href && 
+  if (aNameSpaceID == kNameSpaceID_None && aName == nsGkAtoms::href &&
       AttrValueIs(kNameSpaceID_None, nsGkAtoms::rel, nsGkAtoms::localization, eIgnoreCase)) {
     nsIDocument* doc = GetComposedDoc();
     if (doc) {

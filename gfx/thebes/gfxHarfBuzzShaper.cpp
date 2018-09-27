@@ -851,7 +851,7 @@ GetKernValueVersion1Fmt3(const void* aSubtable,
         hdr->leftClassCount * hdr->rightClassCount > aSubtableLen) {
         return 0;
     }
-        
+
     if (aFirstGlyph >= glyphCount || aSecondGlyph >= glyphCount) {
         // glyphs are out of range for the class tables
         return 0;

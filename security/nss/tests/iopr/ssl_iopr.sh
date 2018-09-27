@@ -20,7 +20,7 @@
 IOPR_SSL_SOURCED=1
 
 ########################################################################
-# The functions works with variables defined in interoperability 
+# The functions works with variables defined in interoperability
 # configuration file that was downloaded from a webserver.
 # It tries to find unrevoked cert based on value of variable
 # "SslClntValidCertName" defined in the configuration file.
@@ -34,13 +34,13 @@ setValidCert() {
 }
 
 ########################################################################
-# The funtions works with variables defined in interoperability 
+# The funtions works with variables defined in interoperability
 # configuration file that was downloaded from a webserver.
 # The function sets port, url, param and description test parameters
 # that was defind for a particular type of testing.
 # Params:
 #      $1 - supported types of testing. Currently have maximum
-#           of two: forward and reverse. But more can be defined. 
+#           of two: forward and reverse. But more can be defined.
 # No return value
 #
 setTestParam() {
@@ -64,7 +64,7 @@ setTestParam() {
 #      $2 - testing host
 #      $3 - nss db location
 # No return value
-#  
+#
 ssl_iopr_cov_ext_server()
 {
   testType=$1
@@ -83,31 +83,31 @@ ssl_iopr_cov_ext_server()
 
   setValidCert; ret=$?
   if [ $ret -ne 0 ]; then
-      html_failed "Fail to find valid test cert(ws: $host)" 
+      html_failed "Fail to find valid test cert(ws: $host)"
       return $ret
   fi
 
   SSL_REQ_FILE=${TMP}/sslreq.dat.$$
   echo "GET $sslUrl HTTP/1.0" > $SSL_REQ_FILE
   echo >> $SSL_REQ_FILE
-  
+
   while read ecc tls param testname therest; do
       [ -z "$ecc" -o "$ecc" = "#" -o "`echo $testname | grep FIPS`" -o \
-          "$ecc" = "ECC" ] && continue; 
-      
+          "$ecc" = "ECC" ] && continue;
+
       echo "$SCRIPTNAME: running $testname ----------------------------"
       TLS_FLAG=-T
       if [ "$tls" = "TLS" ]; then
           TLS_FLAG=""
       fi
-      
+
       resFile=${TMP}/$HOST.tmpRes.$$
       rm $resFile 2>/dev/null
-      
+
       echo "tstclnt -p ${sslPort} -h ${host} -c ${param} ${TLS_FLAG} \\"
       echo "      -n $testUser -v -w nss ${CLIEN_OPTIONS} -f \\"
       echo "      -d ${dbDir} < ${SSL_REQ_FILE} > $resFile"
-      
+
       ${BINDIR}/tstclnt -p ${sslPort} -h ${host} -c ${param} \
           ${TLS_FLAG} ${CLIEN_OPTIONS} -f -n $testUser -v -w nss \
           -d ${dbDir} < ${SSL_REQ_FILE} >$resFile  2>&1
@@ -133,7 +133,7 @@ ssl_iopr_cov_ext_server()
 #      $2 - testing host
 #      $3 - nss db location
 # No return value
-#  
+#
 ssl_iopr_auth_ext_server()
 {
   testType=$1
@@ -152,14 +152,14 @@ ssl_iopr_auth_ext_server()
 
   setValidCert;ret=$?
   if [ $ret -ne 0 ]; then
-      html_failed "Fail to find valid test cert(ws: $host)" 
+      html_failed "Fail to find valid test cert(ws: $host)"
       return $ret
   fi
 
   SSL_REQ_FILE=${TMP}/sslreq.dat.$$
   echo "GET $sslUrl HTTP/1.0" > $SSL_REQ_FILE
   echo >> $SSL_REQ_FILE
-  
+
   SSLAUTH_TMP=${TMP}/authin.tl.tmp
   grep -v "^#" ${SSLAUTH} | grep -- "-r_-r_-r_-r" > ${SSLAUTH_TMP}
 
@@ -167,10 +167,10 @@ ssl_iopr_auth_ext_server()
       [ -z "$ecc" -o "$ecc" = "#" -o "$ecc" = "ECC" ] && continue;
 
       cparam=`echo $cparam | sed -e 's;_; ;g' -e "s/TestUser/$testUser/g" `
-      
+
       echo "tstclnt -p ${sslPort} -h ${host} ${CLIEN_OPTIONS} -f ${cparam} \\"
       echo "         -d ${dbDir} -v < ${SSL_REQ_FILE}"
-      
+
       resFile=${TMP}/$HOST.tmp.$$
       rm $rsFile 2>/dev/null
 
@@ -182,7 +182,7 @@ ssl_iopr_auth_ext_server()
       ret=$?
       [ $ret -ne 0 ] && cat $resFile
       rm $resFile 2>/dev/null
-      
+
       html_msg $ret $value "${testname}. Client params: $cparam"\
           "produced a returncode of $ret, expected is $value"
   done < ${SSLAUTH_TMP}
@@ -200,7 +200,7 @@ ssl_iopr_auth_ext_server()
 #      $2 - testing host
 #      $3 - nss db location
 # No return value
-#  
+#
 ssl_iopr_crl_ext_server()
 {
   testType=$1
@@ -215,11 +215,11 @@ ssl_iopr_crl_ext_server()
   fi
 
   html_head "CRL SSL Client Tests of WebServer($IOPR_HOSTADDR $BYPASS_STRING $NORM_EXT): $testDescription"
-  
+
   SSL_REQ_FILE=${TMP}/sslreq.dat.$$
   echo "GET $sslUrl HTTP/1.0" > $SSL_REQ_FILE
   echo >> $SSL_REQ_FILE
-  
+
   SSLAUTH_TMP=${TMP}/authin.tl.tmp
   grep -v "^#" ${SSLAUTH} | grep -- "-r_-r_-r_-r" | grep -v bogus | \
       grep -v none > ${SSLAUTH_TMP}
@@ -230,7 +230,7 @@ ssl_iopr_crl_ext_server()
       rev_modvalue=254
       for testUser in $SslClntValidCertName $SslClntRevokedCertName; do
           cparam=`echo $_cparam | sed -e 's;_; ;g' -e "s/TestUser/$testUser/g" `
-	  
+
           echo "tstclnt -p ${sslPort} -h ${host} ${CLIEN_OPTIONS} \\"
           echo "        -f -d ${dbDir} -v ${cparam}  < ${SSL_REQ_FILE}"
           resFile=${TMP}/$HOST.tmp.$$
@@ -258,7 +258,7 @@ ssl_iopr_crl_ext_server()
       done
   done < ${SSLAUTH_TMP}
   rm -f ${SSLAUTH_TMP} ${SSL_REQ_FILE}
-  
+
   html "</TABLE><BR>"
 }
 
@@ -275,7 +275,7 @@ ssl_iopr_crl_ext_server()
 #      $4 - port where selfserv is running
 #      $5 - selfserv nss db location
 # No return value
-#  
+#
 ssl_iopr_cov_ext_client()
 {
   host=$1
@@ -289,7 +289,7 @@ ssl_iopr_cov_ext_client()
   setValidCert
   ret=$?
   if [ $res -ne 0 ]; then
-      html_failed "Fail to find valid test cert(ws: $host)" 
+      html_failed "Fail to find valid test cert(ws: $host)"
       return $ret
   fi
 
@@ -302,22 +302,22 @@ ssl_iopr_cov_ext_client()
   testname=""
   sparam="-vvvc ABCDEFcdefgijklmnvyz"
   # Launch the server
-  start_selfserv 
-  
+  start_selfserv
+
   while read ecc tls param cipher therest; do
       [ -z "$ecc" -o "$ecc" = "#" -o "$ecc" = "ECC" ] && continue;
       echo "============= Beginning of the test ===================="
       echo
-      
+
       is_selfserv_alive
-      
+
       TEST_IN=${TMP}/${HOST}_IN.tmp.$$
       TEST_OUT=${TMP}/$HOST.tmp.$$
       rm -f $TEST_IN $TEST_OUT 2>/dev/null
-      
+
       echo "GET $reverseRunCGIScript?host=$sslHost&port=$sslPort&cert=$testUser&cipher=$cipher HTTP/1.0" > $TEST_IN
       echo >> $TEST_IN
-      
+
       echo "------- Request ----------------------"
       cat $TEST_IN
       echo "------- Command ----------------------"
@@ -325,12 +325,12 @@ ssl_iopr_cov_ext_client()
           -h $host \< $TEST_IN \>\> $TEST_OUT
 
       ${BINDIR}/tstclnt -d $serDbDir -v -w ${R_PWFILE} -o -p $port \
-          -h $host <$TEST_IN > $TEST_OUT 
+          -h $host <$TEST_IN > $TEST_OUT
 
       echo "------- Server output Begin ----------"
       cat $TEST_OUT
       echo "------- Server output End   ----------"
-      
+
       echo "Checking for errors in log file..."
       grep "SCRIPT=OK" $TEST_OUT 2>&1 >/dev/null
       if [ $? -eq 0 ]; then
@@ -339,12 +339,12 @@ ssl_iopr_cov_ext_client()
               echo "Skiping test: no support for the cipher $cipher on server side"
               continue
           fi
-          
+
           grep -i "SERVER ERROR:" $TEST_OUT
           ret=$?
           if [ $ret -eq 0 ]; then
               echo "Found problems. Reseting exit code to failure."
-              
+
               ret=1
           else
               ret=0
@@ -353,16 +353,16 @@ ssl_iopr_cov_ext_client()
           echo "Script was not executed. Reseting exit code to failure."
           ret=11
       fi
-      
+
       html_msg $ret 0 "Test ${cipher}. Server params: $sparam " \
           " produced a returncode of $ret, expected is 0"
       rm -f $TEST_OUT $TEST_IN 2>&1 > /dev/null
   done < ${SSLCOV}
   kill_selfserv
-  
+
   P_R_SERVERDIR=$OR_P_R_SERVERDIR
   P_R_CLIENTDIR=$OR_P_R_CLIENTDIR
-  
+
   rm -f ${TEST_IN} ${TEST_OUT}
   html "</TABLE><BR>"
 }
@@ -379,7 +379,7 @@ ssl_iopr_cov_ext_client()
 #      $4 - port where selfserv is running
 #      $5 - selfserv nss db location
 # No return value
-#  
+#
 ssl_iopr_auth_ext_client()
 {
   host=$1
@@ -393,7 +393,7 @@ ssl_iopr_auth_ext_client()
   setValidCert
   ret=$?
   if [ $res -ne 0 ]; then
-      html_failed "Fail to find valid test cert(ws: $host)" 
+      html_failed "Fail to find valid test cert(ws: $host)"
       return $ret
   fi
 
@@ -412,23 +412,23 @@ ssl_iopr_auth_ext_client()
       echo "Server params: $sparam"
       sparam=$sparam" -vvvc ABCDEFcdefgijklmnvyz"
       start_selfserv
-      
+
       TEST_IN=${TMP}/$HOST_IN.tmp.$$
       TEST_OUT=${TMP}/$HOST.tmp.$$
       rm -f $TEST_IN $TEST_OUT 2>/dev/null
 
       echo "GET $reverseRunCGIScript?host=$sslHost&port=$sslPort&cert=$testUser HTTP/1.0" > $TEST_IN
       echo >> $TEST_IN
-      
+
       echo "------- Request ----------------------"
       cat $TEST_IN
       echo "------- Command ----------------------"
       echo tstclnt -d $serDbDir -v -w ${R_PWFILE} -o -p $port \
           -h $host \< $TEST_IN \>\> $TEST_OUT
-      
+
       ${BINDIR}/tstclnt -d $serDbDir -v -w ${R_PWFILE} -o -p $port \
-          -h $host <$TEST_IN > $TEST_OUT 
-      
+          -h $host <$TEST_IN > $TEST_OUT
+
       echo "------- Server output Begin ----------"
       cat $TEST_OUT
       echo "------- Server output End   ----------"
@@ -449,7 +449,7 @@ ssl_iopr_auth_ext_client()
           echo "Script was not executed. Reseting exit code to failure."
           ret=11
       fi
-      
+
       html_msg $ret $value "${testname}. Server params: $sparam"\
           "produced a returncode of $ret, expected is $value"
       kill_selfserv
@@ -475,7 +475,7 @@ ssl_iopr_auth_ext_client()
 #      $4 - port where selfserv is running
 #      $5 - selfserv nss db location
 # No return value
-#  
+#
 ssl_iopr_crl_ext_client()
 {
   host=$1
@@ -485,7 +485,7 @@ ssl_iopr_crl_ext_client()
   serDbDir=$5
 
   html_head "CRL SSL Selfserv Tests from $IOPR_HOSTADDR. $BYPASS_STRING $NORM_EXT"
-  
+
   OR_P_R_SERVERDIR=$P_R_SERVERDIR
   P_R_SERVERDIR=${serDbDir}
   OR_P_R_CLIENTDIR=$P_R_CLIENTDIR
@@ -500,30 +500,30 @@ ssl_iopr_crl_ext_client()
       start_selfserv
 
       for testUser in $SslClntValidCertName $SslClntRevokedCertName; do
-	  
+
           is_selfserv_alive
-          
+
           TEST_IN=${TMP}/${HOST}_IN.tmp.$$
           TEST_OUT=${TMP}/$HOST.tmp.$$
           rm -f $TEST_IN $TEST_OUT 2>/dev/null
 
           echo "GET $reverseRunCGIScript?host=$sslHost&port=$sslPort&cert=$testUser HTTP/1.0" > $TEST_IN
           echo >> $TEST_IN
-          
+
           echo "------- Request ----------------------"
           cat $TEST_IN
           echo "------- Command ----------------------"
           echo tstclnt -d $serDbDir -v -w ${R_PWFILE} -o -p $port \
               -h ${host} \< $TEST_IN \>\> $TEST_OUT
-            
+
           ${BINDIR}/tstclnt -d $serDbDir -v -w ${R_PWFILE} -o -p $port \
-              -h ${host} <$TEST_IN > $TEST_OUT 
+              -h ${host} <$TEST_IN > $TEST_OUT
           echo "------- Request ----------------------"
           cat $TEST_IN
           echo "------- Server output Begin ----------"
           cat $TEST_OUT
           echo "------- Server output End   ----------"
-          
+
           echo "Checking for errors in log file..."
           grep "SCRIPT=OK" $TEST_OUT 2>&1 >/dev/null
           if [ $? -eq 0 ]; then
@@ -539,7 +539,7 @@ ssl_iopr_crl_ext_client()
               echo "Script was not executed. Reseting exit code to failure."
               ret=11
           fi
-          
+
           if [ "`echo $SslClntRevokedCertName | grep $testUser`" != "" ]; then
               modvalue=1
               testAddMsg="revoked"
@@ -547,7 +547,7 @@ ssl_iopr_crl_ext_client()
               testAddMsg="not revoked"
               modvalue=0
           fi
-          
+
           html_msg $ret $modvalue "${testname} (cert ${testUser} - $testAddMsg)" \
 		"produced a returncode of $ret, expected is $modvalue(selfserv args: $sparam)"
           rm -f $TEST_OUT $TEST_IN 2>&1 > /dev/null
@@ -565,18 +565,18 @@ ssl_iopr_crl_ext_client()
 #####################################################################
 # Initial point for running ssl test againt multiple hosts involved in
 # interoperability testing. Called from nss/tests/ssl/ssl.sh
-# It will only proceed with test run for a specific host if environment variable 
+# It will only proceed with test run for a specific host if environment variable
 # IOPR_HOSTADDR_LIST was set, had the host name in the list
 # and all needed file were successfully downloaded and installed for the host.
 #
-# Returns 1 if interoperability testing is off, 0 otherwise. 
+# Returns 1 if interoperability testing is off, 0 otherwise.
 #
 ssl_iopr_run() {
     if [ "$IOPR" -ne 1 ]; then
         return 1
     fi
     cd ${CLIENTDIR}
-    
+
     ORIG_ECC_CERT=${NO_ECC_CERTS}
     NO_ECC_CERTS=1 # disable ECC for interoperability tests
 
@@ -589,16 +589,16 @@ ssl_iopr_run() {
         IOPR_HOSTADDR=`echo $IOPR_HOST_PARAM | cut -f 1 -d':'`
         IOPR_OPEN_PORT=`echo "$IOPR_HOST_PARAM:" | cut -f 2 -d':'`
         [ -z "$IOPR_OPEN_PORT" ] && IOPR_OPEN_PORT=443
-        
+
         . ${IOPR_CADIR}_${IOPR_HOSTADDR}/iopr_server.cfg
         RES=$?
-        
+
         if [ $RES -ne 0 -o X`echo "$wsFlags" | grep NOIOPR` != X ]; then
             num=`expr $num + 1`
             IOPR_HOST_PARAM=`echo "${IOPR_HOSTADDR_LIST} " | cut -f $num -d' '`
             continue
         fi
-        
+
         #=======================================================
         # Check if server is capable to run ssl tests
         #
@@ -608,7 +608,7 @@ ssl_iopr_run() {
         echo "Testing ssl interoperability.
                 Client: local(tstclnt).
                 Server: remote($IOPR_HOSTADDR:$IOPR_OPEN_PORT)"
-        
+
         for sslTestType in ${supportedTests_new}; do
             if [ -z "`echo $sslTestType | grep -i ssl`" ]; then
                 continue
@@ -620,8 +620,8 @@ ssl_iopr_run() {
             ssl_iopr_crl_ext_server $sslTestType ${IOPR_HOSTADDR} \
                 ${IOPR_SSL_CLIENTDIR}_${IOPR_HOSTADDR}
         done
-        
-        
+
+
         # Testing selfserv with client located at the webserver.
         echo "Testing ssl interoperability.
                 Client: remote($IOPR_HOSTADDR:$PORT)

@@ -83,7 +83,7 @@ MochiKit.Async.Deferred.prototype = {
             this.results[0].cancel();
         }
     },
-            
+
     _resback: function (res) {
         /***
 
@@ -313,7 +313,7 @@ MochiKit.Base.update(MochiKit.Async, {
         req.abort();
     },
 
-    
+
     /** @id MochiKit.Async.sendXMLHttpRequest */
     sendXMLHttpRequest: function (req, /* optional */ sendContent) {
         if (typeof(sendContent) == "undefined" || sendContent === null) {
@@ -323,7 +323,7 @@ MochiKit.Base.update(MochiKit.Async, {
         var m = MochiKit.Base;
         var self = MochiKit.Async;
         var d = new self.Deferred(m.partial(self._xhr_canceller, req));
-        
+
         try {
             req.onreadystatechange = m.bind(self._xhr_onreadystatechange,
                 req, d);
@@ -381,7 +381,7 @@ MochiKit.Base.update(MochiKit.Async, {
         }
         return self.sendXMLHttpRequest(req, opts.sendContent);
     },
-            
+
     _buildURL: function (url/*, ...*/) {
         if (arguments.length > 1) {
             var m = MochiKit.Base;
@@ -392,7 +392,7 @@ MochiKit.Base.update(MochiKit.Async, {
         }
         return url;
     },
-    
+
     /** @id MochiKit.Async.doSimpleXMLHttpRequest */
     doSimpleXMLHttpRequest: function (url/*, ...*/) {
         var self = MochiKit.Async;
@@ -493,7 +493,7 @@ MochiKit.Async.DeferredList = function (list, /* optional */fireOnOneCallback, f
 
     // call parent constructor
     MochiKit.Async.Deferred.apply(this, [canceller]);
-    
+
     this.list = list;
     var resultList = [];
     this.resultList = resultList;
@@ -514,7 +514,7 @@ MochiKit.Async.DeferredList = function (list, /* optional */fireOnOneCallback, f
     if (list.length === 0 && !fireOnOneCallback) {
         this.callback(this.resultList);
     }
-    
+
 };
 
 MochiKit.Async.DeferredList.prototype = new MochiKit.Async.Deferred();
@@ -591,7 +591,7 @@ MochiKit.Async.EXPORT = [
     "maybeDeferred",
     "doXHR"
 ];
-    
+
 MochiKit.Async.EXPORT_OK = [
     "evalJSONRequest"
 ];
@@ -599,8 +599,8 @@ MochiKit.Async.EXPORT_OK = [
 MochiKit.Async.__new__ = function () {
     var m = MochiKit.Base;
     var ne = m.partial(m._newNamedError, this);
-    
-    ne("AlreadyCalledError", 
+
+    ne("AlreadyCalledError",
         /** @id MochiKit.Async.AlreadyCalledError */
         function (deferred) {
             /***
@@ -640,7 +640,7 @@ MochiKit.Async.__new__ = function () {
         }
     );
 
-    ne("GenericError", 
+    ne("GenericError",
         /** @id MochiKit.Async.GenericError */
         function (msg) {
             this.message = msg;

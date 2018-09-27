@@ -59,8 +59,8 @@ s_mpv_mul_d:
     emms
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  #  ebp - 8:    caller's esi
@@ -109,8 +109,8 @@ s_mpv_mul_d_add:
     emms
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  #  ebp - 12:   caller's ebx
@@ -175,8 +175,8 @@ s_mpv_mul_d_add_prop:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  #  ebp - 12:   caller's ebx
@@ -243,8 +243,8 @@ s_mpv_sqr_add_prop:
     pop    %ebx
     pop    %esi
     pop    %edi
-    leave  
-    ret    
+    leave
+    ret
     nop
 
  #
@@ -268,7 +268,7 @@ s_mpv_sqr_add_prop:
  #      edx:
  #      esi:    a ptr
  #      edi:    c ptr
- # 
+ #
 .globl s_mpv_div_2dx1d
 .private_extern s_mpv_div_2dx1d
 TYPE_FUNCTION(s_mpv_div_2dx1d)
@@ -284,7 +284,7 @@ s_mpv_div_2dx1d:
        mov    %edx, 0(%ebx)
        xor    %eax, %eax        # return zero
        pop    %ebx
-       ret    
+       ret
        nop
 
 #ifndef DARWIN

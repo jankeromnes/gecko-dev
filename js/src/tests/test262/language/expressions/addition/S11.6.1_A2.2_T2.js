@@ -10,25 +10,25 @@ description: If Type(value) is Date object, evaluate ToPrimitive(value, String)
 //CHECK#1
 var date = new Date();
 if (date + date !== date.toString() + date.toString()) {
-  $ERROR('#1: var date = new Date(); date + date === date.toString() + date.toString(). Actual: ' + (date + date));  
+  $ERROR('#1: var date = new Date(); date + date === date.toString() + date.toString(). Actual: ' + (date + date));
 }
 
 //CHECK#2
 var date = new Date();
 if (date + 0 !== date.toString() + "0") {
-  $ERROR('#2: var date = new Date(); date + 0 === date.toString() + "0". Actual: ' + (date + 0));  
+  $ERROR('#2: var date = new Date(); date + 0 === date.toString() + "0". Actual: ' + (date + 0));
 }
 
 //CHECK#3
 var date = new Date();
 if (date + true !== date.toString() + "true") {
-  $ERROR('#3: var date = new Date(); date + true === date.toString() + "true". Actual: ' + (date + true));  
+  $ERROR('#3: var date = new Date(); date + true === date.toString() + "true". Actual: ' + (date + true));
 }
 
 //CHECK#4
 var date = new Date();
 if (date + new Object() !== date.toString() + "[object Object]") {
-  $ERROR('#4: var date = new Date(); date + new Object() === date.toString() + "[object Object]". Actual: ' + (date + new Object()));  
+  $ERROR('#4: var date = new Date(); date + new Object() === date.toString() + "[object Object]". Actual: ' + (date + new Object()));
 }
 
 reportCompare(0, 0);

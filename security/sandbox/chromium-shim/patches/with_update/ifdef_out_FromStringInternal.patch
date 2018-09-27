@@ -22,27 +22,27 @@ diff --git a/security/sandbox/chromium/base/time/time.cc b/security/sandbox/chro
    NOTREACHED();
    return Time();
  }
- 
+
 +#if !defined(MOZ_SANDBOX)
  // static
  bool Time::FromStringInternal(const char* time_string,
                                bool is_local,
                                Time* parsed_time) {
    DCHECK((time_string != NULL) && (parsed_time != NULL));
- 
+
    if (time_string[0] == '\0')
      return false;
 @@ -261,16 +262,17 @@ bool Time::FromStringInternal(const char
                                         &result_time);
    if (PR_SUCCESS != result)
      return false;
- 
+
    result_time += kTimeTToMicrosecondsOffset;
    *parsed_time = Time(result_time);
    return true;
  }
 +#endif
- 
+
  // static
  bool Time::ExplodedMostlyEquals(const Exploded& lhs, const Exploded& rhs) {
    return lhs.year == rhs.year && lhs.month == rhs.month &&

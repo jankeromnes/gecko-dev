@@ -28,7 +28,7 @@ class CDecoder:
   Byte *_inBuf;
   UInt32 _inPos;
   UInt32 _inLim;
- 
+
   ELzmaStatus _lzmaStatus;
 
 public:
@@ -81,14 +81,14 @@ public:
 private:
   CMyComPtr<ISequentialInStream> _inStream;
 public:
-  
+
   STDMETHOD(SetInStream)(ISequentialInStream *inStream);
   STDMETHOD(ReleaseInStream)();
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
 
   HRESULT CodeResume(ISequentialOutStream *outStream, const UInt64 *outSize, ICompressProgressInfo *progress);
   HRESULT ReadFromInputStream(void *data, UInt32 size, UInt32 *processedSize);
-  
+
   #endif
 
   UInt64 GetInputProcessedSize() const { return _inProcessed; }

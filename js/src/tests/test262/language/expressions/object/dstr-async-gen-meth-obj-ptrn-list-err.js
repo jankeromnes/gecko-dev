@@ -36,7 +36,7 @@ function thrower() {
 
 var obj = {
   async *method({ a, b = thrower(), c = ++initCount }) {
-    
+
   }
 };
 

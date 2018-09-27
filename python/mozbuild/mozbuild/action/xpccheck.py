@@ -38,7 +38,7 @@ def verifyDirectory(initests, directory):
       if os.path.join(os.path.abspath(directory), name) == test['path']:
         found = True
         break
-   
+
     if not found:
       print >>sys.stderr, "TEST-UNEXPECTED-FAIL | xpccheck | test %s is missing from test manifest %s!" % (name, os.path.join(directory, 'xpcshell.ini'))
       sys.exit(1)

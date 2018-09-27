@@ -257,7 +257,7 @@ var emptyObject_1 = emptyObject;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * 
+ *
  */
 
 function makeEmptyFunction(arg) {
@@ -325,7 +325,7 @@ var ReactNoopUpdateQueue = {
    * @internal
    */
   enqueueForceUpdate: function (publicInstance, callback, callerName) {
-    
+
   },
 
   /**
@@ -342,7 +342,7 @@ var ReactNoopUpdateQueue = {
    * @internal
    */
   enqueueReplaceState: function (publicInstance, completeState, callback, callerName) {
-    
+
   },
 
   /**
@@ -358,7 +358,7 @@ var ReactNoopUpdateQueue = {
    * @internal
    */
   enqueueSetState: function (publicInstance, partialState, callback, callerName) {
-    
+
   }
 };
 
@@ -989,7 +989,7 @@ function createContext(defaultValue, calculateChangedBits) {
   if (calculateChangedBits === undefined) {
     calculateChangedBits = null;
   } else {
-    
+
   }
 
   var context = {

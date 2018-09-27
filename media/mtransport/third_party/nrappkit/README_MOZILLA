@@ -16,7 +16,7 @@ Out of the list in the README, we use:
 - configurable logging system
 - event and timer handling
   [though partly reimplemented]
- 
+
 Also, we use a bunch of the generic utilities such as string handling,
 generic hash tables in C, yet another concrete type mapping, etc.
 

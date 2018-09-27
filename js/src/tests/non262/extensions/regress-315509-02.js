@@ -38,5 +38,5 @@ for (var i = 0; i < 10; i++)
   x3();
   x4();
 }
- 
+
 reportCompare(expect, actual, summary);

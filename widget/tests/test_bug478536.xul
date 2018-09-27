@@ -15,7 +15,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=478536
 
 <body  xmlns="http://www.w3.org/1999/xhtml">
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 </pre>
@@ -25,7 +25,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=478536
 <![CDATA[
 
 SimpleTest.waitForExplicitFinish();
-window.open("window_bug478536.xul", "_blank", 
+window.open("window_bug478536.xul", "_blank",
             "chrome,width=600,height=600");
 
 ]]>

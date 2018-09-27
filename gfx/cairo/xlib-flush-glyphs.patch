@@ -12,14 +12,14 @@ index f0de3c7..e24c962 100644
  #include "cairo-surface-subsurface-private.h"
  #include "cairo-region-private.h"
 +#include "cairo-xlib-xrender-private.h"
- 
+
  #include <X11/Xutil.h> /* for XDestroyImage */
 +#include <X11/Xlibint.h> /* for access to XDisplay's innards */
- 
+
  #define XLIB_COORD_MAX 32767
- 
+
  #define DEBUG 0
- 
+
  #if DEBUG
  #define UNSUPPORTED(reason) \
      fprintf (stderr, \
@@ -29,7 +29,7 @@ index f0de3c7..e24c962 100644
  #else
  #define UNSUPPORTED(reason) CAIRO_INT_STATUS_UNSUPPORTED
  #endif
- 
+
  #if DEBUG
 -#include <X11/Xlibint.h>
  static void CAIRO_PRINTF_FORMAT (2, 3)
@@ -48,7 +48,7 @@ index f0de3c7..e24c962 100644
  	break;
      }
      /* XXX assume X server wants pixman padding. Xft assumes this as well */
- 
+
 +    struct _XDisplay *dpy = (struct _XDisplay *) display->display;
 +    int req_length = sz_xRenderAddGlyphsReq + 4;
 +    if (req_length & 3)
@@ -60,7 +60,7 @@ index f0de3c7..e24c962 100644
  		      &glyph_index, &glyph_info, 1,
  		      (char *) data,
  		      glyph_surface->stride * glyph_surface->height);
- 
+
      if (data != glyph_surface->data)
  	free (data);
- 
+

@@ -13,5 +13,5 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 [undefined,1].sort();
- 
+
 reportCompare(expect, actual, summary);

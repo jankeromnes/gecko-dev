@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   for (let a of [2, 2, 2]) { a %= a; a %= a; }
   reportCompare(expect, actual, summary);
 }

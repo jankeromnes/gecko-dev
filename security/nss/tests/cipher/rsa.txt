@@ -6,6 +6,6 @@
 #
 #
 # mode     keysize   bufsize   exponent  repetitions cxrepetitions
-  rsa        32         32       17          1000        5 
-  rsa        64         64        3          500         3 
-  rsa       128        128      65537        200         3 
+  rsa        32         32       17          1000        5
+  rsa        64         64        3          500         3
+  rsa       128        128      65537        200         3

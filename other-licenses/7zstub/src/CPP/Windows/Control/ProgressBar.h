@@ -23,7 +23,7 @@ public:
   int SetStep(int step) { return (int)SendMsg(PBM_SETSTEP, step, 0); }
   LRESULT StepIt() { return SendMsg(PBM_STEPIT, 0, 0); }
   INT GetRange(bool minValue, PPBRANGE range) { return (INT)SendMsg(PBM_GETRANGE, BoolToBOOL(minValue), (LPARAM)range); }
-  
+
   #ifndef UNDER_CE
   COLORREF SetBarColor(COLORREF color) { return (COLORREF)SendMsg(PBM_SETBARCOLOR, 0, color); }
   COLORREF SetBackgroundColor(COLORREF color) { return (COLORREF)SendMsg(PBM_SETBKCOLOR, 0, color); }

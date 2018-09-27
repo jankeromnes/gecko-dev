@@ -15,7 +15,7 @@ printStatus (summary);
 var arguments = [];
 
 expect = '[object Arguments]';
-actual = (function(){return (arguments + '');})(); 
+actual = (function(){return (arguments + '');})();
 reportCompare(expect, actual, summary);
 
 // see bug 336100 comment 29

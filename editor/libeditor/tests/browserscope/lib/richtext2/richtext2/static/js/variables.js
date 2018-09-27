@@ -1,5 +1,5 @@
 /**
- * @fileoverview 
+ * @fileoverview
  * Common constants and variables used in the RTE test suite.
  *
  * Copyright 2010 Google Inc.
@@ -76,10 +76,10 @@ var SELRESULT_EQUAL   = 5;
 var SELOUTPUT = [  // IMPORTANT: this array MUST be coordinated with the values above!!
     {css: 'grey',   output: 'grey',   title: 'The test has not been run yet.'},                           // SELRESULT_NOT_RUN
     {css: 'canary', output: 'CANARY', title: 'The selection escaped the contentEditable boundary!'},      // SELRESULT_CANARY
-    {css: 'fail',   output: 'FAIL',   title: 'The selection differs from the expectation(s).'},           // SELRESULT_DIFF   
-    {css: 'na',     output: 'N/A',    title: 'The correctness of the selection could not be verified.'},  // SELRESULT_NA     
-    {css: 'accept', output: 'ACC.',   title: 'The selection is technically correct, but sub-optimal.'},   // SELRESULT_ACCEPT 
-    {css: 'pass',   output: 'PASS',   title: 'The selection matches the expectation.'}                    // SELRESULT_EQUAL  
+    {css: 'fail',   output: 'FAIL',   title: 'The selection differs from the expectation(s).'},           // SELRESULT_DIFF
+    {css: 'na',     output: 'N/A',    title: 'The correctness of the selection could not be verified.'},  // SELRESULT_NA
+    {css: 'accept', output: 'ACC.',   title: 'The selection is technically correct, but sub-optimal.'},   // SELRESULT_ACCEPT
+    {css: 'pass',   output: 'PASS',   title: 'The selection matches the expectation.'}                    // SELRESULT_EQUAL
 ];
 
 // RegExp for selection markers
@@ -131,8 +131,8 @@ var IDOUT_EXPECTED   = '_:exp';   // per test
 var IDOUT_ACTUAL     = '_:act:';  // per container
 
 // Output strings to use for yes/no/NA
-var OUTSTR_YES = '&#x25CF;'; 
-var OUTSTR_NO  = '&#x25CB;'; 
+var OUTSTR_YES = '&#x25CF;';
+var OUTSTR_NO  = '&#x25CB;';
 var OUTSTR_NA  = '-';
 
 // Tags at the start of HTML strings where they were taken from
@@ -189,7 +189,7 @@ var editor = null;  // The contentEditable element (i.e., the <body> or <div>)
 var sel = null;     // The current selection after the pad is set up
 
 // Canonicalization emit flags for various purposes
-var emitFlagsForCanary = { 
+var emitFlagsForCanary = {
     emitAttrs:         true,
     emitStyle:         true,
     emitClass:         true,
@@ -197,7 +197,7 @@ var emitFlagsForCanary = {
     lowercase:         true,
     canonicalizeUnits: true
 };
-var emitFlagsForOutput = { 
+var emitFlagsForOutput = {
     emitAttrs:         true,
     emitStyle:         true,
     emitClass:         true,

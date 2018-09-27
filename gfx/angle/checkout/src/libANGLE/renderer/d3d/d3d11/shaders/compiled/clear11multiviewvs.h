@@ -8,8 +8,8 @@
 //
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
-// SV_VertexID              0   x           0   VERTID    uint   x   
-// SV_InstanceID            0   x           1   INSTID    uint   x   
+// SV_VertexID              0   x           0   VERTID    uint   x
+// SV_InstanceID            0   x           1   INSTID    uint   x
 //
 //
 // Output signature:
@@ -17,7 +17,7 @@
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
 // SV_POSITION              0   xyzw        0      POS   float   xyzw
-// TEXCOORD                 0   x           1     NONE    uint   x   
+// TEXCOORD                 0   x           1     NONE    uint   x
 //
 vs_4_0
 dcl_immediateConstantBuffer { { -1.000000, 1.000000, 0, 0},
@@ -35,7 +35,7 @@ mov r0.x, v0.x
 mov o0.xy, icb[r0.x + 0].xyxx
 mov o0.zw, l(0,0,0,1.000000)
 mov o1.x, v1.x
-ret 
+ret
 // Approximately 5 instruction slots used
 #endif
 

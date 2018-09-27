@@ -8,8 +8,8 @@ description: Checking if execution of "var x \n ,y = 1" passes
 ---*/
 
 //CHECK#1
-var 
-x 
+var
+x
 ,y = 1
 
 reportCompare(0, 0);

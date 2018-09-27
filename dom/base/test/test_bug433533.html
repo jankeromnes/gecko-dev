@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=433533
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=433533">Mozilla Bug 433533</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -84,7 +84,7 @@ iframe.setAttribute("marginwidth", "-9999999999999999999999%");
 is(iframe.getAttribute("marginwidth"), "-9999999999999999999999%",
    "Marginwidth attribute didn't store the original value");
 
-   
+
 // Test PRInt32 min/max value
 iframe.setAttribute("marginwidth", "2147483647");
 is(iframe.getAttribute("marginwidth"), "2147483647",
@@ -186,7 +186,7 @@ is(iframe.getAttribute("marginwidth"), "-0",
    "Marginwidth attribute didn't store the original value");
 iframe.setAttribute("marginwidth", "-0%");
 is(iframe.getAttribute("marginwidth"), "-0%",
-   "Marginwidth attribute didn't store the original value");   
+   "Marginwidth attribute didn't store the original value");
 iframe.setAttribute("marginwidth", " 0 ");
 is(iframe.getAttribute("marginwidth"), " 0 ",
    "Marginwidth attribute didn't store the original value");

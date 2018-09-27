@@ -11,7 +11,7 @@ XPCOMUtils.defineLazyGetter(this, "URL", function() {
 function inChildProcess() {
   return Cc["@mozilla.org/xre/app-info;1"]
            .getService(Ci.nsIXULRuntime)
-           .processType != Ci.nsIXULRuntime.PROCESS_TYPE_DEFAULT;  
+           .processType != Ci.nsIXULRuntime.PROCESS_TYPE_DEFAULT;
 }
 
 function check_request_header(chan, name, value) {

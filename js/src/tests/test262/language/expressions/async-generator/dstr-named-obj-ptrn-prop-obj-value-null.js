@@ -27,7 +27,7 @@ info: |
 
 var f;
 f = async function* g({ w: { x, y, z } = { x: 4, y: 5, z: 6 } }) {
-  
+
 };
 
 assert.throws(TypeError, function() {

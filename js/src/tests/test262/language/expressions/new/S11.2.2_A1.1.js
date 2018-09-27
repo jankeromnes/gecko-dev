@@ -16,7 +16,7 @@ if (eval("new\u0009Number") != 0) {
 
 //CHECK#2
 if (eval("new\u000BNumber") != 0) {
-  $ERROR('#2: new\\u000BNumber == 0');  
+  $ERROR('#2: new\\u000BNumber == 0');
 }
 
 //CHECK#3
@@ -36,7 +36,7 @@ if (eval("new\u00A0Number") != 0) {
 
 //CHECK#6
 if (eval("new\u000ANumber") != 0) {
-  $ERROR('#6: new\\u000ANumber == 0');  
+  $ERROR('#6: new\\u000ANumber == 0');
 }
 
 //CHECK#7

@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   Array.prototype[2] = "two";
   var a = [0,1,2,3];
   delete a[2];

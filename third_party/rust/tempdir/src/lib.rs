@@ -91,7 +91,7 @@ use rand::{thread_rng, Rng};
 /// run, such as via [`std::process::exit`], by segfaulting, or by
 /// receiving a signal like `SIGINT`, then the temporary directory
 /// will not be deleted.
-/// 
+///
 /// [`File`]: http://doc.rust-lang.org/std/fs/struct.File.html
 /// [`Path`]: http://doc.rust-lang.org/std/path/struct.Path.html
 /// [`ReadDir`]: http://doc.rust-lang.org/std/fs/struct.ReadDir.html

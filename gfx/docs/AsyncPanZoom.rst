@@ -50,7 +50,7 @@ into a multithreaded variant which looks something like this:
            send a copy of input to thread 2
            adjust painted content based on input
            display adjusted painted content
-       
+
        Thread 2 (main thread)
        while true:
            receive input from thread 1

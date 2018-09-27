@@ -24,7 +24,7 @@
 
   <!-- test 'opacity' -->
   <rect width="25%" height="100%" fill="url(#red)" opacity="1"/>
-  
+
   <!-- test 'fill-opacity' -->
   <rect x="25%" width="25%" height="100%" fill="url(#red)" opacity="0.5"/>
 

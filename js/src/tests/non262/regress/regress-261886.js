@@ -25,5 +25,5 @@ catch(e)
   actual = o.a;
   summary += ' ' + e;
 }
- 
+
 reportCompare(expect, actual, summary);

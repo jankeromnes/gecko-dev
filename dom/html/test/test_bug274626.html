@@ -65,14 +65,14 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=274626
 
 /** Test for Bug 274626 **/
 
-  function HandlesMouseMove(evt) { 
+  function HandlesMouseMove(evt) {
 	evt.target.handlesMouseMove = true;
   }
 
   var controls=["textbox_enabled","textbox_disabled",
-    "input_button_enabled", "input_button_disabled", "checkbox_enabled", 
+    "input_button_enabled", "input_button_disabled", "checkbox_enabled",
     "checkbox_disabled", "button_enabled", "button_disabled",
-    "textarea_enabled", "textarea_disabled", "select_enabled", 
+    "textarea_enabled", "textarea_disabled", "select_enabled",
     "select_disabled", "fieldset_enabled", "fieldset_disabled"];
 
   for (id of controls) {
@@ -84,7 +84,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=274626
       0, 0, 0, 0, 0, false, false, false, false, 0, null);
     ctrl.dispatchEvent(evt);
 
-    // Mouse move events are what causes tooltips to show up. 
+    // Mouse move events are what causes tooltips to show up.
     // Before this fix we would not allow mouse move events to go through
     // which in turn did not allow tooltips to be displayed.
     // This test will ensure that all HTML elements handle mouse move events

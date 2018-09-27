@@ -20,6 +20,6 @@ function test()
   printStatus (summary);
 
   for (var j = 0; j < 5; ++j) { "".substring(5); }
- 
+
   reportCompare(expect, actual, summary);
 }

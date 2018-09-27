@@ -16,7 +16,7 @@ if (eval("({})\u0009instanceof\u0009Object") !== true) {
 
 //CHECK#2
 if (eval("({})\u000Binstanceof\u000BObject") !== true) {
-  $ERROR('#2: ({})\\u000Binstanceof\\u000BObject === true');  
+  $ERROR('#2: ({})\\u000Binstanceof\\u000BObject === true');
 }
 
 //CHECK#3
@@ -36,7 +36,7 @@ if (eval("({})\u00A0instanceof\u00A0Object") !== true) {
 
 //CHECK#6
 if (eval("({})\u000Ainstanceof\u000AObject") !== true) {
-  $ERROR('#6: ({})\\u000Ainstanceof\\u000AObject === true');  
+  $ERROR('#6: ({})\\u000Ainstanceof\\u000AObject === true');
 }
 
 //CHECK#7

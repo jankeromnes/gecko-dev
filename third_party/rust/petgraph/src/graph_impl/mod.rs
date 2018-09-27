@@ -1269,7 +1269,7 @@ impl<N, E, Ty, Ix> Graph<N, E, Ty, Ix>
                 weight: node_map(NodeIndex::new(i), &node.weight),
                 next: node.next,
             }));
-        g.edges.extend(enumerate(&self.edges).map(|(i, edge)| 
+        g.edges.extend(enumerate(&self.edges).map(|(i, edge)|
             Edge {
                 weight: edge_map(EdgeIndex::new(i), &edge.weight),
                 next: edge.next,
@@ -1925,7 +1925,7 @@ impl<'a, N, Ix> Iterator for NodeReferences<'a, N, Ix>
     type Item = (NodeIndex<Ix>, &'a N);
 
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(i, node)| 
+        self.iter.next().map(|(i, node)|
             (node_index(i), &node.weight)
         )
     }
@@ -1984,7 +1984,7 @@ impl<'a, E, Ix> Iterator for EdgeReferences<'a, E, Ix>
     type Item = EdgeReference<'a, E, Ix>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(i, edge)| 
+        self.iter.next().map(|(i, edge)|
             EdgeReference {
                 index: edge_index(i),
                 node: edge.node,

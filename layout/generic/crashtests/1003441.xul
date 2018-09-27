@@ -23,7 +23,7 @@ function boom(i) {
     var temp = x[i+1].getAttribute('style');
     x[i+1].setAttribute('style', x[i].getAttribute('style'));
     x[i].setAttribute('style', temp);
-  } else { 
+  } else {
     return;
   }
   i++;

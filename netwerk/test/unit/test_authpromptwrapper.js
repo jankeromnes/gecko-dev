@@ -205,7 +205,7 @@ function run_test() {
     var uri2 = NetUtil.newURI("ftp://" + host);
     var ftpchan = NetUtil.newChannel({
       uri: uri2,
-      loadUsingSystemPrincipal: true 
+      loadUsingSystemPrincipal: true
     });
 
     prompt1 = new Prompt1();

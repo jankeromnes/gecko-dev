@@ -65,8 +65,8 @@ info: |
 
   #sec-isnan-number
 
-  NOTE: A reliable way for ECMAScript code to test if a value X is a NaN is 
-  an expression of the form  X !== X. The result will be true if and only 
+  NOTE: A reliable way for ECMAScript code to test if a value X is a NaN is
+  an expression of the form  X !== X. The result will be true if and only
   if X is a NaN.
 includes: [nans.js, testTypedArray.js]
 features: [TypedArray]

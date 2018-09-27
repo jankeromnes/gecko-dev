@@ -17,7 +17,7 @@ function f1(){
     return x;
   };
   return f2();
-  
+
   var x = 1;
 }
 

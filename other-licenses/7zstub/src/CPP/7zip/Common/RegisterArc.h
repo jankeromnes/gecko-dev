@@ -11,12 +11,12 @@ struct CArcInfo
   Byte Id;
   Byte SignatureSize;
   UInt16 SignatureOffset;
-  
+
   const Byte *Signature;
   const char *Name;
   const char *Ext;
   const char *AddExt;
-  
+
   Func_CreateInArchive CreateInArchive;
   Func_CreateOutArchive CreateOutArchive;
   Func_IsArc IsArc;

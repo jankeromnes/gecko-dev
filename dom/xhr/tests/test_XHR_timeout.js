@@ -85,7 +85,7 @@ RequestTracker.prototype = {
     req.ontimeout = handleEvent;
 
     req.timeout = this.timeLimit;
-    
+
     if (this.mustReset) {
       var resetTo = this.resetTo;
       self.setTimeout(function() {

@@ -18,7 +18,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=375003
         body {
             color:black; background-color:white; font-size:12px; padding:10px; margin:0;
         }
-	
+
         #div1,#abs1,#table1 {
           border: 20px solid lime;
           padding: 30px;
@@ -59,7 +59,7 @@ function t3(id,c,o,s,pid) {
   test(id,'client',c);
   test(id,'offset',o);
   test(id,'scroll',s);
-  var p = document.getElementById(id).offsetParent; 
+  var p = document.getElementById(id).offsetParent;
   is(p.id, pid, id+".offsetParent");
 }
 

@@ -182,7 +182,7 @@ PKIX_ValidateChain(
  *  value in all input variables except "params". If forced to suspend
  *  processing by a WOULDBLOCK return from some operation, such as a CertStore
  *  request, it stores the platform-dependent I/O context at "pNBIOContext" and
- *  stores other intermediate variables at "pCertIndex", "pAnchorIndex", 
+ *  stores other intermediate variables at "pCertIndex", "pAnchorIndex",
  *  "pCheckerIndex", "pRevChecking", and "pCheckers".
  *
  *  When called subsequently with that non-NULL value at "pNBIOContext", it

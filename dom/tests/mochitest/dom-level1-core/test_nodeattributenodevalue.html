@@ -37,13 +37,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,27 +73,27 @@ var docName = 'nodeattributenodevalue';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
+*
 
-    The string returned by the "getNodeValue()" method for an 
+    The string returned by the "getNodeValue()" method for an
 
     Attribute Node is the value of the Attribute.
 
-    
 
-    Retrieve the Attribute named "domestic" from the last 
 
-    child of the first employee and check the string returned 
+    Retrieve the Attribute named "domestic" from the last
 
-    by the "getNodeValue()" method.   It should be equal to 
+    child of the first employee and check the string returned
 
-    "Yes". 
+    by the "getNodeValue()" method.   It should be equal to
+
+    "Yes".
 
 
 * @author NIST
@@ -108,7 +108,7 @@ function nodeattributenodevalue() {
       var testAddr;
       var addrAttr;
       var attrValue;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -120,7 +120,7 @@ function nodeattributenodevalue() {
       attrValue = addrAttr.nodeValue;
 
       assertEquals("nodeAttributeNodeValueAssert1","Yes",attrValue);
-       
+
 }
 
 </script>
@@ -129,12 +129,12 @@ function nodeattributenodevalue() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/nodeattributenodevalue</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

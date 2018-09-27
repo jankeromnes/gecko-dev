@@ -1,4 +1,4 @@
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -46,7 +46,7 @@ MKSHLIB += -M $(MAPFILE)
 endif
 #
 # In Solaris 2.6 or earlier, -lrt is called -lposix4.
-# 
+#
 LIBRT_TEST=$(firstword $(sort 5.7 $(OS_RELEASE)))
 ifeq (5.7, $(LIBRT_TEST))
 LIBRT=-lrt

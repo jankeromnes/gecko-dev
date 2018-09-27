@@ -32,7 +32,7 @@ struct CUpdateItem
 {
   int IndexInArchive;
   int IndexInClient;
-  
+
   UInt64 CTime;
   UInt64 ATime;
   UInt64 MTime;
@@ -50,7 +50,7 @@ struct CUpdateItem
   // int ParentSortIndexEnd;
 
   UInt32 Attrib;
-  
+
   bool NewData;
   bool NewProps;
 
@@ -97,9 +97,9 @@ struct CUpdateOptions
   UInt64 NumSolidFiles;
   UInt64 NumSolidBytes;
   bool SolidExtension;
-  
+
   bool UseTypeSorting;
-  
+
   bool RemoveSfxBlock;
   bool MultiThreadMixer;
 

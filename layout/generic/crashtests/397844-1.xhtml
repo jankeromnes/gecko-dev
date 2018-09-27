@@ -15,21 +15,21 @@ function boom()
 {
   document.getElementById("td").nextSibling.splitText(11);
   document.getElementById("td").style.padding = "11px";
-  
+
   setTimeout(boom2, 10);
 }
 
 function boom2()
 {
   document.body.style.counterReset = "chicken";
-  
+
   setTimeout(boom3, 10);
 }
 
 function boom3()
 {
   document.getElementById("s").textContent = "#xxx { }";
-  
+
   setTimeout(boom4, 10);
 }
 

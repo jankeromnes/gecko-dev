@@ -10,7 +10,7 @@ info: |
   12. Let resultStr be a String value of length 1, containing one code unit
       from str, specifically the code unit at index index.
   13. Return a PropertyDescriptor{[[Value]]: resultStr, [[Writable]]: false,
-      [[Enumerable]]: true, [[Configurable]]: false}. 
+      [[Enumerable]]: true, [[Configurable]]: false}.
 includes: [propertyHelper.js]
 ---*/
 

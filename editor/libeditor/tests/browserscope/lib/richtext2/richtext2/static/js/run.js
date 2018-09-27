@@ -1,5 +1,5 @@
 /**
- * @fileoverview 
+ * @fileoverview
  * Main functions used in running the RTE test suite.
  *
  * Copyright 2010 Google Inc.
@@ -173,7 +173,7 @@ function runSingleTest(suite, group, test, container) {
     result.output = EXECUTION_EXCEPTION + ex.toString();
     return result;
   }
-  
+
   // 4.) Verify test result
   try {
     if (isHTMLTest) {
@@ -197,7 +197,7 @@ function runSingleTest(suite, group, test, container) {
     result.output = VERIFICATION_EXCEPTION + ex.toString();
     return result;
   }
-  
+
   return result;
 }
 
@@ -242,7 +242,7 @@ function initTestSuiteResults(suite) {
 
       for (var testIdx = 0; testIdx < testCount; ++testIdx) {
         var test = group.tests[testIdx];
-        
+
         results[suiteID][clsID ][test.id] = {
             valscore: 0,
             selscore: 0,
@@ -312,7 +312,7 @@ function runTestSuite(suite) {
           selresult = Math.min(selresult, result.selresult);
 
           resetContainer(container);
-        }          
+        }
 
         results[suiteID][clsID][test.id].valscore = valscore;
         results[suiteID][clsID][test.id].selscore = selscore;
@@ -376,7 +376,7 @@ function fillResults() {
     'queryValue='       + results['QV'].valscore,
     'queryValueCSS='    + results['QVC'].valscore
   ];
-  
+
   // Beacon copies category results
   beacon = categoryTotals.slice(0);
 }

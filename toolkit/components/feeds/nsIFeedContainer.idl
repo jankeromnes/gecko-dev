@@ -14,7 +14,7 @@ interface nsIFeedTextConstruct;
  * A shared base for feeds and items, which are pretty similar,
  * but they have some divergent attributes and require
  * different convenience methods.
- */ 
+ */
 [scriptable, uuid(577a1b4c-b3d4-4c76-9cf8-753e6606114f)]
 interface nsIFeedContainer : nsIFeedElementBase
 {
@@ -27,7 +27,7 @@ interface nsIFeedContainer : nsIFeedElementBase
   /**
   * The fields found in the document. Common Atom
   * and RSS fields are normalized. This includes some namespaced
-  * extensions such as dc:subject and content:encoded. 
+  * extensions such as dc:subject and content:encoded.
   * Consumers can avoid normalization by checking the feed type
   * and accessing specific fields.
   *

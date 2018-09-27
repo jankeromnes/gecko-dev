@@ -22,5 +22,5 @@ var a = [0, 1];
 a.__defineGetter__(0, index_getter);
 
 uneval(a.slice(0, 1));
- 
+
 reportCompare(expect, actual, summary);

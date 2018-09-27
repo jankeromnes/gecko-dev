@@ -13,7 +13,7 @@
     #div_absolute_test { position: absolute }
   /* ]]> */
   </style>
-  
+
 </head>
 <body>
 <h1>script.aculo.us Unit test file</h1>
@@ -48,7 +48,7 @@
 // <![CDATA[
 
   new Test.Unit.Runner({
-    
+
     testDraggableBasics: function() { with(this) {
       var d = new Draggable('p_test');
       assertInstanceOf(Draggable, d);
@@ -60,7 +60,7 @@
       d = new Draggable('p_test3', { endeffect: Prototype.EmptyFunction });
       assert(undefined === d.options.startEffect, 'There should be no default start effect.');
     }},
-    
+
     testAutoPositioning: function() { with(this) {
       assertEqual('static', Element.getStyle('div_test','position'));
       new Draggable('div_test');
@@ -70,28 +70,28 @@
       assertEqual('absolute', Element.getStyle('div_absolute_test','position'));
       assertEqual('absolute', Element.getStyle('div_absolute_inline_test','position'));
     }},
-    
+
     testDroppbalesBasics: function() { with(this) {
       assertEqual(0, Droppables.drops.length);
       assertEqual('static', Element.getStyle('droppable_test','position'));
-      
+
       Droppables.add('droppable_test');
       assertEqual(1, Droppables.drops.length);
       assertEqual('relative', Element.getStyle('droppable_test','position'));
-      
+
       Droppables.remove('droppable_test');
       assertEqual(0, Droppables.drops.length);
-      
+
       // accept option should take strings or array of strings
       Droppables.add('droppable_test',{accept:'document'});
       assertEqual(['document'].inspect(), Droppables.drops[0].accept.inspect());
       Droppables.remove('droppable_test');
-      
+
       Droppables.add('droppable_test',{accept:['document','image']});
       assertEqual(['document','image'].inspect(), Droppables.drops[0].accept.inspect());
       Droppables.remove('droppable_test');
     }},
-    
+
     testDroppableContainment: function() { with(this) {
       // Droppable containers should be cached
       Droppables.add('droppable_test', {
@@ -102,7 +102,7 @@
       assert(Droppables.isContained($('d2'), Droppables.drops[0]));
       assert(!Droppables.isContained($('d3'), Droppables.drops[0]));
       Droppables.remove('droppable_test');
-      
+
       Droppables.add('droppable_test', {
         containment:['droppable_container','droppable_container_2'] });
       assertEqual(2,  Droppables.drops[0]._containers.length);
@@ -113,17 +113,17 @@
       assert(Droppables.isContained($('d3'), Droppables.drops[0]));
       Droppables.remove('droppable_test');
     }},
-    
+
     testDroppablesIsAffected: function() { with(this) {
       Droppables.add('droppable_test');
-      
+
       Position.prepare();
       assert(!Droppables.isAffected([-10, -10], null, Droppables.drops[0]));
-      
+
       var p = Position.page($('droppable_test'));
       assert(Droppables.isAffected(p, null, Droppables.drops[0]));
     }}
-    
+
   }, "testlog");
 // ]]>
 </script>

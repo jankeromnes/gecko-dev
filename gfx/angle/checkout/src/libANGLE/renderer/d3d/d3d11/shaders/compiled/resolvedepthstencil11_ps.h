@@ -16,15 +16,15 @@
 //
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
-// SV_Position              0   xyzw        0      POS   float       
-// TEXCOORD                 0   xy          1     NONE   float   xy  
+// SV_Position              0   xyzw        0      POS   float
+// TEXCOORD                 0   xy          1     NONE   float   xy
 //
 //
 // Output signature:
 //
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
-// SV_Target                0   xy          0   TARGET   float   xy  
+// SV_Target                0   xy          0   TARGET   float   xy
 //
 ps_4_1
 dcl_globalFlags refactoringAllowed
@@ -42,7 +42,7 @@ ldms r0.z, r0.xyzw, t1.xzyw, l(0)
 ldms r0.x, r0.xyww, t0.xyzw, l(0)
 mov o0.x, r0.x
 utof o0.y, r0.z
-ret 
+ret
 // Approximately 10 instruction slots used
 #endif
 

@@ -171,7 +171,7 @@ end
 
 document ptarray
         Prints nsTArray information.
-        Syntax: ptarray   
+        Syntax: ptarray
         Note: idx, idx1 and idx2 must be in acceptable range [0...size()-1].
         Examples:
         ptarray a - Prints tarray content, size, capacity and T typedef

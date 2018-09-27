@@ -876,7 +876,7 @@ public class Encoder
 				}
 			}
 
-			int startLen = 2; // speed optimization 
+			int startLen = 2; // speed optimization
 
 			for (int repIndex = 0; repIndex < Base.kNumRepDistances; repIndex++)
 			{

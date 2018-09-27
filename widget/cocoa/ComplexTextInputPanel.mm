@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * Modified by Josh Aas of Mozilla Corporation.
  */
@@ -81,7 +81,7 @@ extern "C" OSStatus TSMProcessRawKeyEvent(EventRef anEvent);
 
   [self setFrame:frame display:NO];
 
-  mInputTextView = [[NSTextView alloc] initWithFrame:[self.contentView frame]];        
+  mInputTextView = [[NSTextView alloc] initWithFrame:[self.contentView frame]];
   mInputTextView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable | NSViewMaxXMargin | NSViewMinXMargin | NSViewMaxYMargin | NSViewMinYMargin;
 
   NSScrollView* scrollView = [[NSScrollView alloc] initWithFrame:[self.contentView frame]];
@@ -102,9 +102,9 @@ extern "C" OSStatus TSMProcessRawKeyEvent(EventRef anEvent);
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  
+
   [mInputTextView release];
-  
+
   [super dealloc];
 }
 

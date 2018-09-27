@@ -9,7 +9,7 @@ diff --git a/modules/fdlibm/src/math_private.h b/modules/fdlibm/src/math_private
  #define	__ieee754_ynf	ynf
  #define	__ieee754_remainderf remainderf
  #define	__ieee754_scalbf scalbf
- 
+
 +#define acos fdlibm::acos
 +#define asin fdlibm::asin
 +#define atan fdlibm::atan
@@ -47,7 +47,7 @@ diff --git a/modules/fdlibm/src/math_private.h b/modules/fdlibm/src/math_private
 +
  /* fdlibm kernel function */
  int	__kernel_rem_pio2(double*,double*,int,int,int);
- 
+
  /* double precision kernel functions */
  #ifndef INLINE_REM_PIO2
  int	__ieee754_rem_pio2(double,double*);

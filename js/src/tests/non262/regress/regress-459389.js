@@ -11,7 +11,7 @@ var expect = '';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 print('mmmm, food!');
 
 
@@ -19,7 +19,7 @@ var SNI = {};
 SNI.MetaData={};
 SNI.MetaData.Parameter=function()
 {
-var parameters={}; 
+var parameters={};
 this.addParameter=function(key,value)
 {
 parameters[key]=[];
@@ -29,7 +29,7 @@ this.getParameter=function(key,separator){
 if(!parameters[key])
 {
 return;
-} 
+}
 return parameters[key].join(separator);
 };
 this.getKeys=function()
@@ -38,8 +38,8 @@ return parameters;
 };
 };
 SNI.MetaData.Manager=function(){
-var m=new SNI.MetaData.Parameter(); 
-this.getParameter=m.getParameter; 
+var m=new SNI.MetaData.Parameter();
+this.getParameter=m.getParameter;
 };
 var MetaDataManager=SNI.MetaData.Manager;
 SNI.Ads={ };
@@ -74,7 +74,7 @@ for(var i=0;i<this.restriction.length;i++)
 {
 adRestriction=this.restriction[i];
 value=this.startMatch(ad,mdm,adRestriction);
-} 
+}
 }
 function startMatch(ad,mdm,adRestriction){
 for(var key in adRestriction.getKeys()){
@@ -84,8 +84,8 @@ match=this.isMatch(value,restrictions);
 if(!match){
 value=ad.getParameter(key,'')
 match=this.isMatch(value,restrictions);
-} 
-} 
+}
+}
 }
 function isMatch(value,restrictions){
 var match=false;
@@ -95,7 +95,7 @@ splitValue=value.split('');
 for(var x=0;x<splitValue.length;x++){
 for(var a;a<restrictions.length;a++){ }
 }
-} 
+}
 return match;
 }
 }

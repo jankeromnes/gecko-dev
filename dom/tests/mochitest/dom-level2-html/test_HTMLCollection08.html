@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "collection");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,8 +70,8 @@ function loadComplete() {
 
 
 /**
-* 
-    Nodes in a HTMLCollection object are numbered in tree order.         
+*
+    Nodes in a HTMLCollection object are numbered in tree order.
     (Depth-first traversal order).
 
     Retrieve the first TABLE element and create a HTMLCollection by invoking
@@ -91,7 +91,7 @@ function HTMLCollection08() {
       var rowsnodeList;
       var vrowindex;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -106,7 +106,7 @@ testNode = nodeList.item(0);
       vrowindex = rowNode.rowIndex;
 
       assertEquals("rowIndexLink",2,vrowindex);
-       
+
 }
 
 </script>
@@ -116,7 +116,7 @@ testNode = nodeList.item(0);
 <p>&lt;test name='HTMLCollection08' schemaLocation='http://www.w3.org/2001/DOM-Test-Suite/Level-1 dom1.xsd'&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;metadata&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;HTMLCollection08&lt;/title&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
-    Nodes in a HTMLCollection object are numbered in tree order.         
+    Nodes in a HTMLCollection object are numbered in tree order.
     (Depth-first traversal order).
 
     Retrieve the first TABLE element and create a HTMLCollection by invoking
@@ -138,7 +138,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/collection.html"></iframe>
 <br>

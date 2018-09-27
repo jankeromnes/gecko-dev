@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=581072
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=581072">Mozilla Bug 581072</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -29,8 +29,8 @@ setTimeout(function() { longTimerFired = true; }, 3600000);
 // Trigger suspend and resume timeouts
 (function() {
   var utils = SpecialPowers.getDOMWindowUtils(window);
-  utils.suspendTimeouts();  
-  utils.resumeTimeouts();  
+  utils.suspendTimeouts();
+  utils.resumeTimeouts();
 })()
 
 // Now set up another timeout which should fire before the one-hour one

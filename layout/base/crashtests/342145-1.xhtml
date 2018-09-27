@@ -4,13 +4,13 @@
 <![CDATA[
 
 function boom()
-{ 
+{
   var img = document.getElementById("img");
   var t1 = img.childNodes[1]; // a whitespace text node
   var t2 = document.createTextNode(' ');
-  
+
   img.insertBefore(t2, t1);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

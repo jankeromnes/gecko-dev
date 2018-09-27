@@ -36,5 +36,5 @@ for (var elem in obj) {
   }
 }
 
- 
+
 reportCompare(expect, actual, summary);

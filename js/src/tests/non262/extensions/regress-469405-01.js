@@ -13,7 +13,7 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 try
-{ 
+{
   (function() {
     var a, b;
     for (a of [{}, {__iterator__: function(){}}]) for (b in a) { }

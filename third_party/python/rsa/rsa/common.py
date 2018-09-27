@@ -26,7 +26,7 @@ def bit_size(num):
     to match the behavior of the Python 3 API.
 
     Usage::
-    
+
         >>> bit_size(1023)
         10
         >>> bit_size(1024)
@@ -67,7 +67,7 @@ def _bit_size(number):
 
     if number == 0:
         return 0
-    
+
     # This works, even with very large numbers. When using math.log(number, 2),
     # you'll get rounding errors and it'll fail.
     bits = 0
@@ -81,7 +81,7 @@ def _bit_size(number):
 def byte_size(number):
     '''
     Returns the number of bytes required to hold a specific long number.
-    
+
     The number of bytes is rounded up.
 
     Usage::
@@ -116,7 +116,7 @@ def extended_gcd(a, b):
     y = 1
     lx = 1
     ly = 0
-    oa = a                             #Remember original a/b to remove 
+    oa = a                             #Remember original a/b to remove
     ob = b                             #negative values from return results
     while b != 0:
         q = a // b
@@ -153,7 +153,7 @@ def crt(a_values, modulo_values):
     :param a_values: the a-values of the above equation
     :param modulo_values: the m-values of the above equation
     :returns: x such that x = a[i] (mod m[i]) for each i
-    
+
 
     >>> crt([2, 3], [3, 5])
     8
@@ -166,7 +166,7 @@ def crt(a_values, modulo_values):
     '''
 
     m = 1
-    x = 0 
+    x = 0
 
     for modulo in modulo_values:
         m *= modulo

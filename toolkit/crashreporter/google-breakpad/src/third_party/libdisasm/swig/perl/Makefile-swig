@@ -58,7 +58,7 @@ install: $(PERL_MOD)
 uninstall:
 
 # ==================================================================
-clean: 
+clean:
 	rm $(PERL_MOD) $(PERL_OBJ)
 	rm $(PERL_SHADOW)
 	rm -rf Makefile blib pm_to_blib

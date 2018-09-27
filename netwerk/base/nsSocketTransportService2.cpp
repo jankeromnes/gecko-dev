@@ -56,7 +56,7 @@ static Atomic<PRThread*, Relaxed> gSocketThread;
 #define MAX_TIME_FOR_PR_CLOSE_DURING_SHUTDOWN "network.sts.max_time_for_pr_close_during_shutdown"
 #define POLLABLE_EVENT_TIMEOUT "network.sts.pollable_event_timeout"
 #define ESNI_ENABLED "network.security.esni.enabled"
-#define ESNI_DISABLED_MITM "security.pki.mitm_detected" 
+#define ESNI_DISABLED_MITM "security.pki.mitm_detected"
 
 #define REPAIR_POLLABLE_EVENT_TIME 10
 

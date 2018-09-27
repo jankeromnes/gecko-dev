@@ -41,28 +41,28 @@ bool InitLocalPrivileges();
 
 CArchiveUpdateCallback::CArchiveUpdateCallback():
     _hardIndex_From((UInt32)(Int32)-1),
-    
+
     Callback(NULL),
-  
+
     DirItems(NULL),
     ParentDirItem(NULL),
-    
+
     Arc(NULL),
     ArcItems(NULL),
     UpdatePairs(NULL),
     NewNames(NULL),
     CommentIndex(-1),
     Comment(NULL),
-    
+
     ShareForWrite(false),
     StopAfterOpenError(false),
     StdInMode(false),
-    
+
     KeepOriginalItemNames(false),
     StoreNtSecurity(false),
     StoreHardLinks(false),
     StoreSymLinks(false),
-    
+
     ProcessedItemsStatuses(NULL)
 {
   #ifdef _USE_SECURITY_CODE
@@ -229,7 +229,7 @@ STDMETHODIMP CArchiveUpdateCallback::GetRawProp(UInt32 index, PROPID propID, con
       */
       if (up.IsAnti)
         return S_OK;
-      
+
       #ifndef UNDER_CE
       const CDirItem &di = DirItems->Items[up.DirIndex];
       #endif
@@ -264,7 +264,7 @@ STDMETHODIMP CArchiveUpdateCallback::GetRawProp(UInt32 index, PROPID propID, con
         }
         #endif
       }
- 
+
       return S_OK;
     }
   }
@@ -301,10 +301,10 @@ static UString GetRelativePath(const UString &to, const UString &from)
 
   UString s;
   unsigned k;
-  
+
   for (k = i + 1; k < partsFrom.Size(); k++)
     s += ".." STRING_PATH_SEPARATOR;
-  
+
   for (k = i; k < partsTo.Size(); k++)
   {
     if (k != i)
@@ -386,7 +386,7 @@ STDMETHODIMP CArchiveUpdateCallback::GetProperty(UInt32 index, PROPID propID, PR
       }
     }
   }
-  
+
   if (up.IsAnti
       && propID != kpidIsDir
       && propID != kpidPath
@@ -446,7 +446,7 @@ STDMETHODIMP CArchiveUpdateCallback::GetStream2(UInt32 index, ISequentialInStrea
   const CUpdatePair2 &up = (*UpdatePairs)[index];
   if (!up.NewData)
     return E_FAIL;
-  
+
   RINOK(Callback->CheckBreak());
   // RINOK(Callback->Finalize());
 
@@ -460,7 +460,7 @@ STDMETHODIMP CArchiveUpdateCallback::GetStream2(UInt32 index, ISequentialInStrea
     else if (up.DirIndex >= 0)
       name = DirItems->GetLogPath(up.DirIndex);
     RINOK(Callback->GetStream(name, isDir, true, mode));
-    
+
     /* 9.33: fixed. Handlers expect real stream object for files, even for anti-file.
        so we return empty stream */
 
@@ -473,9 +473,9 @@ STDMETHODIMP CArchiveUpdateCallback::GetStream2(UInt32 index, ISequentialInStrea
     }
     return S_OK;
   }
-  
+
   RINOK(Callback->GetStream(DirItems->GetLogPath(up.DirIndex), isDir, false, mode));
- 
+
   if (isDir)
     return S_OK;
 
@@ -556,7 +556,7 @@ STDMETHODIMP CArchiveUpdateCallback::GetStream2(UInt32 index, ISequentialInStrea
     }
     *inStream = inStreamLoc.Detach();
   }
-  
+
   return S_OK;
   COM_TRY_END
 }
@@ -598,11 +598,11 @@ STDMETHODIMP CArchiveUpdateCallback::ReportOperation(UInt32 indexType, UInt32 in
     }
     return Callback->ReportUpdateOpeartion(op, name.IsEmpty() ? NULL : name.Ptr(), isDir);
   }
-  
+
   wchar_t temp[16];
   UString s2;
   const wchar_t *s = NULL;
-  
+
   if (indexType == NArchive::NEventIndexType::kInArcIndex)
   {
     if (index != (UInt32)(Int32)-1)
@@ -644,7 +644,7 @@ STDMETHODIMP CArchiveUpdateCallback::ReportExtractResult(UInt32 indexType, UInt3
   wchar_t temp[16];
   UString s2;
   const wchar_t *s = NULL;
-  
+
   if (indexType == NArchive::NEventIndexType::kOutArcIndex)
   {
     /*
@@ -661,7 +661,7 @@ STDMETHODIMP CArchiveUpdateCallback::ReportExtractResult(UInt32 indexType, UInt3
     */
     return E_FAIL;
   }
- 
+
   if (indexType == NArchive::NEventIndexType::kInArcIndex)
   {
     if (index != (UInt32)(Int32)-1)

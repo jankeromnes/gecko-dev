@@ -61,7 +61,7 @@ public interface Cache {
     void onSpanTouched(Cache cache, CacheSpan oldSpan, CacheSpan newSpan);
 
   }
-  
+
   /**
    * Thrown when an error is encountered when writing data.
    */

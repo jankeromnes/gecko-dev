@@ -8,34 +8,34 @@ diff --git a/gfx/cairo/libpixman/src/pixman-bits-image.c b/gfx/cairo/libpixman/s
      int x1, y1, x2, y2;
      uint32_t tl, tr, bl, br;
      int32_t distx, disty;
- 
+
      x1 = x - pixman_fixed_1 / 2;
      y1 = y - pixman_fixed_1 / 2;
- 
+
 -    distx = (x1 >> 8) & 0xff;
 -    disty = (y1 >> 8) & 0xff;
 +    distx = interpolation_coord(x1);
 +    disty = interpolation_coord(y1);
- 
+
      x1 = pixman_fixed_to_int (x1);
      y1 = pixman_fixed_to_int (y1);
      x2 = x1 + 1;
      y2 = y1 + 1;
- 
+
      if (repeat_mode != PIXMAN_REPEAT_NONE)
      {
 @@ -190,17 +190,17 @@ bits_image_fetch_bilinear_no_repeat_8888
- 
+
      if (!pixman_transform_point_3d (bits->common.transform, &v))
  	return;
- 
+
      ux = ux_top = ux_bottom = bits->common.transform->matrix[0][0];
      x = x_top = x_bottom = v.vector[0] - pixman_fixed_1/2;
- 
+
      y = v.vector[1] - pixman_fixed_1/2;
 -    disty = (y >> 8) & 0xff;
 +    disty = interpolation_coord(y);
- 
+
      /* Load the pointers to the first and second lines from the source
       * image that bilinear code must read.
       *
@@ -48,15 +48,15 @@ diff --git a/gfx/cairo/libpixman/src/pixman-bits-image.c b/gfx/cairo/libpixman/s
      {
  	uint32_t tr, br;
  	int32_t distx;
- 
+
  	tr = top_row[pixman_fixed_to_int (x_top) + 1] | top_mask;
  	br = bottom_row[pixman_fixed_to_int (x_bottom) + 1] | bottom_mask;
- 
+
 -	distx = (x >> 8) & 0xff;
 +	distx = interpolation_coord(x);
- 
+
  	*buffer++ = bilinear_interpolation (0, tr, 0, br, distx, disty);
- 
+
  	x += ux;
  	x_top += ux_top;
  	x_bottom += ux_bottom;
@@ -65,18 +65,18 @@ diff --git a/gfx/cairo/libpixman/src/pixman-bits-image.c b/gfx/cairo/libpixman/s
 @@ -324,17 +324,17 @@ bits_image_fetch_bilinear_no_repeat_8888
  	    uint32_t tl, tr, bl, br;
  	    int32_t distx;
- 
+
  	    tl = top_row [pixman_fixed_to_int (x_top)] | top_mask;
  	    tr = top_row [pixman_fixed_to_int (x_top) + 1] | top_mask;
  	    bl = bottom_row [pixman_fixed_to_int (x_bottom)] | bottom_mask;
  	    br = bottom_row [pixman_fixed_to_int (x_bottom) + 1] | bottom_mask;
- 
+
 -	    distx = (x >> 8) & 0xff;
 +	    distx = interpolation_coord(x);
- 
+
  	    *buffer = bilinear_interpolation (tl, tr, bl, br, distx, disty);
  	}
- 
+
  	buffer++;
  	x += ux;
  	x_top += ux_top;
@@ -86,45 +86,45 @@ diff --git a/gfx/cairo/libpixman/src/pixman-bits-image.c b/gfx/cairo/libpixman/s
  	{
  	    uint32_t tl, bl;
  	    int32_t distx;
- 
+
  	    tl = top_row [pixman_fixed_to_int (x_top)] | top_mask;
  	    bl = bottom_row [pixman_fixed_to_int (x_bottom)] | bottom_mask;
- 
+
 -	    distx = (x >> 8) & 0xff;
 +	    distx = interpolation_coord(x);
- 
+
  	    *buffer = bilinear_interpolation (tl, 0, bl, 0, distx, disty);
  	}
- 
+
  	buffer++;
  	x += ux;
  	x_top += ux_top;
  	x_bottom += ux_bottom;
 @@ -675,18 +675,18 @@ bits_image_fetch_bilinear_affine (pixman
  	const uint8_t *row2;
- 
+
  	if (mask && !mask[i])
  	    goto next;
- 
+
  	x1 = x - pixman_fixed_1 / 2;
  	y1 = y - pixman_fixed_1 / 2;
- 
+
 -	distx = (x1 >> 8) & 0xff;
 -	disty = (y1 >> 8) & 0xff;
 +	distx = interpolation_coord(x1);
 +	disty = interpolation_coord(y1);
- 
+
  	y1 = pixman_fixed_to_int (y1);
  	y2 = y1 + 1;
  	x1 = pixman_fixed_to_int (x1);
  	x2 = x1 + 1;
- 
+
  	if (repeat_mode != PIXMAN_REPEAT_NONE)
  	{
 diff --git a/gfx/cairo/libpixman/src/pixman-inlines.h b/gfx/cairo/libpixman/src/pixman-inlines.h
 --- a/gfx/cairo/libpixman/src/pixman-inlines.h
 +++ b/gfx/cairo/libpixman/src/pixman-inlines.h
-@@ -76,16 +76,31 @@ repeat (pixman_repeat_t repeat, int *c, 
+@@ -76,16 +76,31 @@ repeat (pixman_repeat_t repeat, int *c,
      {
  	*c = MOD (*c, size * 2);
  	if (*c >= size)
@@ -132,7 +132,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-inlines.h b/gfx/cairo/libpixman/src/
      }
      return TRUE;
  }
- 
+
 +#ifdef MOZ_GFX_OPTIMIZE_MOBILE
 +#define LOW_QUALITY_INTERPOLATION
 +#endif
@@ -149,7 +149,7 @@ diff --git a/gfx/cairo/libpixman/src/pixman-inlines.h b/gfx/cairo/libpixman/src/
 +
 +
  #if SIZEOF_LONG > 4
- 
+
  static force_inline uint32_t
  bilinear_interpolation (uint32_t tl, uint32_t tr,
  			uint32_t bl, uint32_t br,
@@ -159,12 +159,12 @@ diff --git a/gfx/cairo/libpixman/src/pixman-inlines.h b/gfx/cairo/libpixman/src/
 @@ -122,16 +137,44 @@ bilinear_interpolation (uint32_t tl, uin
      f = tl64 * distixiy + tr64 * distxiy + bl64 * distixy + br64 * distxy;
      r |= ((f >> 16) & 0x000000ff00000000ull) | (f & 0xff000000ull);
- 
+
      return (uint32_t)(r >> 16);
  }
- 
+
  #else
- 
+
 +#ifdef LOW_QUALITY_INTERPOLATION
 +/* Based on Filter_32_opaque_portable from Skia */
 +static force_inline uint32_t
@@ -200,20 +200,20 @@ diff --git a/gfx/cairo/libpixman/src/pixman-inlines.h b/gfx/cairo/libpixman/src/
  {
      int distxy, distxiy, distixy, distixiy;
      uint32_t f, r;
- 
+
 @@ -164,17 +207,17 @@ bilinear_interpolation (uint32_t tl, uin
- 
+
      /* Alpha */
      f = (tl & 0x0000ff00) * distixiy + (tr & 0x0000ff00) * distxiy
        + (bl & 0x0000ff00) * distixy  + (br & 0x0000ff00) * distxy;
      r |= f & 0xff000000;
- 
+
      return r;
  }
 -
 +#endif
  #endif
- 
+
  /*
   * For each scanline fetched from source image with PAD repeat:
   * - calculate how many pixels need to be padded on the left side

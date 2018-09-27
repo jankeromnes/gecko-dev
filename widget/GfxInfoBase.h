@@ -26,7 +26,7 @@
 #include "nsWeakReference.h"
 
 namespace mozilla {
-namespace widget {  
+namespace widget {
 
 class GfxInfoBase : public nsIGfxInfo,
                     public nsIObserver,
@@ -42,7 +42,7 @@ public:
   NS_DECL_NSIOBSERVER
 
   // We only declare a subset of the nsIGfxInfo interface. It's up to derived
-  // classes to implement the rest of the interface.  
+  // classes to implement the rest of the interface.
   // Derived classes need to use
   // using GfxInfoBase::GetFeatureStatus;
   // using GfxInfoBase::GetFeatureSuggestedDriverVersion;
@@ -74,7 +74,7 @@ public:
   // Ideally, Init() would be void-return, but the rules of
   // NS_GENERIC_FACTORY_CONSTRUCTOR_INIT require it be nsresult return.
   virtual nsresult Init();
-  
+
   // only useful on X11
   NS_IMETHOD_(void) GetData() override { }
 

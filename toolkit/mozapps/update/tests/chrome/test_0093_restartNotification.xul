@@ -32,9 +32,9 @@ function runTest() {
   let updates = getLocalUpdateString({}, patches);
   writeUpdatesToXMLFile(getLocalUpdatesXMLString(updates), true);
   writeStatusFile(STATE_SUCCEEDED);
-  
+
   Services.prefs.setIntPref(PREF_APP_UPDATE_PROMPTWAITTIME, 1);
-    
+
   reloadUpdateManagerData();
 
   is(gUpdateManager.activeUpdate.state, STATE_PENDING,
@@ -43,7 +43,7 @@ function runTest() {
   ok(gUpdateManager.activeUpdate.promptWaitTime == 1, "Checking that the " +
      "update's promptWaitTime attribute value was set from the " +
      PREF_APP_UPDATE_PROMPTWAITTIME + " preference");
-    
+
   gUP.showUpdateDownloaded(gUpdateManager.activeUpdate, true);
 }
 

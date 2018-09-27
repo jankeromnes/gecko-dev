@@ -22,7 +22,7 @@ class nsDragService : public nsBaseDragService
 public:
   nsDragService();
   virtual ~nsDragService();
-  
+
   // nsBaseDragService
   virtual nsresult InvokeDragSessionImpl(nsIArray* anArrayTransferables,
                                          const mozilla::Maybe<mozilla::CSSIntRegion>& aRegion,

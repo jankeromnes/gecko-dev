@@ -36,9 +36,9 @@ static void apply_seg( x86_op_t *op, unsigned int prefixes ) {
 }
 
 static size_t decode_operand_value( unsigned char *buf, size_t buf_len,
-			    x86_op_t *op, x86_insn_t *insn, 
-			    unsigned int addr_meth, size_t op_size, 
-			    unsigned int op_value, unsigned char modrm, 
+			    x86_op_t *op, x86_insn_t *insn,
+			    unsigned int addr_meth, size_t op_size,
+			    unsigned int op_value, unsigned char modrm,
 			    size_t gen_regs ) {
 	size_t size = 0;
 
@@ -50,9 +50,9 @@ static size_t decode_operand_value( unsigned char *buf, size_t buf_len,
 
 		/* ---------------------- Addressing Method -------------- */
 		/* Note that decoding mod ModR/M operand adjusts the size of
-		 * the instruction, but decoding the reg operand does not. 
-		 * This should not cause any problems, as every 'reg' operand 
-		 * has an associated 'mod' operand. 
+		 * the instruction, but decoding the reg operand does not.
+		 * This should not cause any problems, as every 'reg' operand
+		 * has an associated 'mod' operand.
 		 * Goddamn-Intel-Note:
 		 *   Some Intel addressing methods [M, R] specify that modR/M
 		 *   byte may only refer to a memory address/may only refer to
@@ -60,28 +60,28 @@ static size_t decode_operand_value( unsigned char *buf, size_t buf_len,
 		 *   if, say, the modR/M for an M opcode decodes to a register
 		 *   rather than a memory address ... returning 0 is out of the
 		 *   question, as this would be an Immediate or a RelOffset, so
-		 *   instead these modR/Ms are decoded with total disregard to 
+		 *   instead these modR/Ms are decoded with total disregard to
 		 *   the M, R constraints. */
 
 		/* MODRM -- mod operand. sets size to at least 1! */
 		case ADDRMETH_E:	/* ModR/M present, Gen reg or memory  */
-			size = ia32_modrm_decode( buf, buf_len, op, insn, 
+			size = ia32_modrm_decode( buf, buf_len, op, insn,
 						  gen_regs );
 			break;
 		case ADDRMETH_M:	/* ModR/M only refers to memory */
-			size = ia32_modrm_decode( buf, buf_len, op, insn, 
+			size = ia32_modrm_decode( buf, buf_len, op, insn,
 						  gen_regs );
 			break;
 		case ADDRMETH_Q:	/* ModR/M present, MMX or Memory */
-			size = ia32_modrm_decode( buf, buf_len, op, insn, 
+			size = ia32_modrm_decode( buf, buf_len, op, insn,
 						  REG_MMX_OFFSET );
 			break;
 		case ADDRMETH_R:	/* ModR/M mod == gen reg */
-			size = ia32_modrm_decode( buf, buf_len, op, insn, 
+			size = ia32_modrm_decode( buf, buf_len, op, insn,
 						  gen_regs );
 			break;
 		case ADDRMETH_W:	/* ModR/M present, mem or SIMD reg */
-			size = ia32_modrm_decode( buf, buf_len, op, insn, 
+			size = ia32_modrm_decode( buf, buf_len, op, insn,
 						  REG_SIMD_OFFSET );
 			break;
 
@@ -113,14 +113,14 @@ static size_t decode_operand_value( unsigned char *buf, size_t buf_len,
 			op->type = op_absolute;
 
 			/* segment:offset address used in far calls */
-			x86_imm_sized( buf, buf_len, 
+			x86_imm_sized( buf, buf_len,
 				       &op->data.absolute.segment, 2 );
 			if ( insn->addr_size == 4 ) {
-				x86_imm_sized( buf, buf_len, 
+				x86_imm_sized( buf, buf_len,
 				    &op->data.absolute.offset.off32, 4 );
 				size = 6;
 			} else {
-				x86_imm_sized( buf, buf_len, 
+				x86_imm_sized( buf, buf_len,
 				    &op->data.absolute.offset.off16, 2 );
 				size = 4;
 			}
@@ -131,10 +131,10 @@ static size_t decode_operand_value( unsigned char *buf, size_t buf_len,
 			/* if it ever becomes legal to have imm as dest and
 			 * there is a src ModR/M operand, we are screwed! */
 			if ( op->flags & op_signed ) {
-				x86_imm_signsized(buf, buf_len, &op->data.byte, 
+				x86_imm_signsized(buf, buf_len, &op->data.byte,
 						op_size);
 			} else {
-				x86_imm_sized(buf, buf_len, &op->data.byte, 
+				x86_imm_sized(buf, buf_len, &op->data.byte,
 						op_size);
 			}
 			size = op_size;
@@ -147,12 +147,12 @@ static size_t decode_operand_value( unsigned char *buf, size_t buf_len,
 			if ( op_size == 1 ) {
 				/* one-byte near offset */
 				op->type = op_relative_near;
-				x86_imm_signsized(buf, buf_len, 
+				x86_imm_signsized(buf, buf_len,
 						&op->data.relative_near, 1);
 			} else {
 				/* far offset...is this truly signed? */
 				op->type = op_relative_far;
-				x86_imm_signsized(buf, buf_len, 
+				x86_imm_signsized(buf, buf_len,
 					&op->data.relative_far, op_size );
 			}
 			size = op_size;
@@ -163,7 +163,7 @@ static size_t decode_operand_value( unsigned char *buf, size_t buf_len,
 			   determine operand size */
 			op->type = op_offset;
 			op->flags |= op_pointer;
-			x86_imm_sized( buf, buf_len, &op->data.offset, 
+			x86_imm_sized( buf, buf_len, &op->data.offset,
 					insn->addr_size );
 
 			size = insn->addr_size;
@@ -179,38 +179,38 @@ static size_t decode_operand_value( unsigned char *buf, size_t buf_len,
 			op->type = op_expression;
 			op->flags |= op_hardcode;
 			op->flags |= op_ds_seg | op_pointer | op_string;
-			ia32_handle_register( &op->data.expression.base, 
+			ia32_handle_register( &op->data.expression.base,
 					     REG_DWORD_OFFSET + 6 );
 			break;
 		case ADDRMETH_Y:	/* Memory addressed by ES:DI [string] */
 			op->type = op_expression;
 			op->flags |= op_hardcode;
 			op->flags |= op_es_seg | op_pointer | op_string;
-			ia32_handle_register( &op->data.expression.base, 
+			ia32_handle_register( &op->data.expression.base,
 					     REG_DWORD_OFFSET + 7 );
 			break;
 		case ADDRMETH_RR:	/* Gen Register hard-coded in opcode */
 			op->type = op_register;
 			op->flags |= op_hardcode;
-			ia32_handle_register( &op->data.reg, 
+			ia32_handle_register( &op->data.reg,
 						op_value + gen_regs );
 			break;
 		case ADDRMETH_RS:	/* Seg Register hard-coded in opcode */
 			op->type = op_register;
 			op->flags |= op_hardcode;
-			ia32_handle_register( &op->data.reg, 
+			ia32_handle_register( &op->data.reg,
 						op_value + REG_SEG_OFFSET );
 			break;
 		case ADDRMETH_RF:	/* FPU Register hard-coded in opcode */
 			op->type = op_register;
 			op->flags |= op_hardcode;
-			ia32_handle_register( &op->data.reg, 
+			ia32_handle_register( &op->data.reg,
 						op_value + REG_FPU_OFFSET );
 			break;
 		case ADDRMETH_RT:	/* TST Register hard-coded in opcode */
 			op->type = op_register;
 			op->flags |= op_hardcode;
-			ia32_handle_register( &op->data.reg, 
+			ia32_handle_register( &op->data.reg,
 						op_value + REG_TEST_OFFSET );
 			break;
 		case ADDRMETH_II:	/* Immediate hard-coded in opcode */
@@ -229,7 +229,7 @@ static size_t decode_operand_value( unsigned char *buf, size_t buf_len,
 	return size;
 }
 
-static size_t decode_operand_size( unsigned int op_type, x86_insn_t *insn, 
+static size_t decode_operand_size( unsigned int op_type, x86_insn_t *insn,
 				   x86_op_t *op ){
 	size_t size;
 
@@ -281,7 +281,7 @@ static size_t decode_operand_size( unsigned int op_type, x86_insn_t *insn,
 			 * mode, or 8:24:16 in 16-bit mode. The high byte
 			 * is ignored in 16-bit mode. */
 			size = 6;
-			op->datatype = (insn->addr_size == 4) ? 
+			op->datatype = (insn->addr_size == 4) ?
 				op_pdescr32 : op_pdescr16;
 			break;
 		case OPTYPE_q:	/* qword, ignore op-size */
@@ -305,7 +305,7 @@ static size_t decode_operand_size( unsigned int op_type, x86_insn_t *insn,
 		case OPTYPE_ss:	/* Scalar elem of 128-bit FP data */
 			size = 16;
 			/* this only looks at the low dword (4 bytes)
-			 * of the xmmm register passed as a param. 
+			 * of the xmmm register passed as a param.
 			 * This is a 16-byte register where only 4 bytes
 			 * are used in the insn. Painful, ain't it? */
 			op->datatype = op_sssimd;
@@ -313,7 +313,7 @@ static size_t decode_operand_size( unsigned int op_type, x86_insn_t *insn,
 		case OPTYPE_sd:	/* Scalar elem of 128-bit FP data */
 			size = 16;
 			/* this only looks at the low qword (8 bytes)
-			 * of the xmmm register passed as a param. 
+			 * of the xmmm register passed as a param.
 			 * This is a 16-byte register where only 8 bytes
 			 * are used in the insn. Painful, again... */
 			op->datatype = op_sdsimd;
@@ -348,7 +348,7 @@ static size_t decode_operand_size( unsigned int op_type, x86_insn_t *insn,
 			break;
 		case OPTYPE_ft:	/* pointer to FPU env: 94 or 108 bytes */
 			size = (insn->addr_size == 4)? 108 : 94;
-			op->datatype = (size == 108)? 
+			op->datatype = (size == 108)?
 				op_fpustate32: op_fpustate16;
 			break;
 		case OPTYPE_fx:	/* 512-byte register stack */
@@ -377,8 +377,8 @@ static size_t decode_operand_size( unsigned int op_type, x86_insn_t *insn,
 }
 
 size_t ia32_decode_operand( unsigned char *buf, size_t buf_len,
-			      x86_insn_t *insn, unsigned int raw_op, 
-			      unsigned int raw_flags, unsigned int prefixes, 
+			      x86_insn_t *insn, unsigned int raw_op,
+			      unsigned int raw_flags, unsigned int prefixes,
 			      unsigned char modrm ) {
 	unsigned int addr_meth, op_type, op_size, gen_regs;
 	x86_op_t *op;
@@ -413,7 +413,7 @@ size_t ia32_decode_operand( unsigned char *buf, size_t buf_len,
 		gen_regs = REG_DWORD_OFFSET;
 	}
 
-	size = decode_operand_value( buf, buf_len, op, insn, addr_meth, 
+	size = decode_operand_value( buf, buf_len, op, insn, addr_meth,
 				      op_size, raw_op, modrm, gen_regs );
 
 	/* if operand is an address, apply any segment override prefixes */

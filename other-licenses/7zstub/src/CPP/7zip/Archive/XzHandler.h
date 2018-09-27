@@ -5,7 +5,7 @@
 
 namespace NArchive {
 namespace NXz {
- 
+
 }}
 
 #endif

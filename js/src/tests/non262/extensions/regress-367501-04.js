@@ -21,7 +21,7 @@ function test()
 
   try
   {
-    expect = actual = 'No Crash'; 
+    expect = actual = 'No Crash';
     var a = { set x(v) {} };
     for (var i = 0; i < 0x10050c - 3; ++i) a[i] = 1;
     a.x;

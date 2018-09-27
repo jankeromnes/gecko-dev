@@ -19,5 +19,5 @@ enum Message {
 
 #[test]
 fn expansion() {
-    
+
 }

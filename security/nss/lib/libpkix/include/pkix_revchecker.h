@@ -54,7 +54,7 @@ extern "C" {
  * certificates. This may be useful in many scenarios, including when the
  * caller wishes to use their own revocation checking mechanism instead of (or
  * in addition to) the default revocation checking mechanism provided by
- * libpkix, which uses CRLs and OCSP. 
+ * libpkix, which uses CRLs and OCSP.
  *
  * Once the caller has created the RevocationMethod object(s), the caller
  * then specifies the RevocationMethod object(s) in a RevocationCheck object
@@ -159,7 +159,7 @@ PKIX_RevocationChecker_CreateAndAddMethod(
  * revocation information during chain building stage(no trust anchor yes has
  * been found). The fresh revocation information fetching is done only at chain
  * verification stage after trust anchor was identified.
- * 
+ *
  * PARAMETERS:
  *  "cert"
  *      Address of Cert whose revocation status is to be determined.
@@ -207,7 +207,7 @@ PKIX_RevocationChecker_Check(PKIX_PL_Cert *cert,
                              PKIX_UInt32 *pReasonCode,
                              void **pNbioContext,
                              void *plContext);
-    
+
 #ifdef __cplusplus
 }
 #endif

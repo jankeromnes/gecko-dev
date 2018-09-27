@@ -114,7 +114,7 @@ function setupTests(throwing)
 
 
   //   add mapping, => interpreted
-  
+
   function contentAndCleanup(ch, cx, status, data)
   {
     checkContents(ch, cx, status, data);

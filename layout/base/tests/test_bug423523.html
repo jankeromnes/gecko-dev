@@ -32,7 +32,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=423523
   SimpleTest.waitForExplicitFinish();
   SimpleTest.requestFlakyTimeout("untriaged");
 
- 
+
   function divIsFocused() {
     // Check if div is directly focused.
     var divNode = document.getElementById("div1");
@@ -51,18 +51,18 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=423523
     // that's ok for this test).
     return false;
   }
-  
+
   function selectionOffsetIs(expectedOffset) {
     return window.getSelection().focusOffset == expectedOffset;
   }
-  
+
   function sendMouseClick() {
     var rect=document.getElementById('div1').getBoundingClientRect();
     var utils = SpecialPowers.getDOMWindowUtils(window);
     utils.sendMouseEvent('mousedown', rect.left+1, rect.top+1, 0, 1, 0);
     utils.sendMouseEvent('mouseup', rect.left+1, rect.top+1, 0, 1, 0);
   }
- 
+
   function runtests() {
     sendMouseClick();
     window.getSelection().collapse(document.getElementById("div1").firstChild, 0);
@@ -70,32 +70,32 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=423523
 
     ok(divIsFocused(), "Div should be focused [1].");
     ok(selectionOffsetIs(0), "Caret should be at offset 0");
-    
+
     synthesizeKey("KEY_ArrowLeft");
-    ok(divIsFocused(), "Div should be focused [2].");    
+    ok(divIsFocused(), "Div should be focused [2].");
     ok(selectionOffsetIs(0), "Caret should be at offset 0");
-    
+
     synthesizeKey("KEY_ArrowRight");
     ok(divIsFocused(), "Div should be focused [3].");
     ok(selectionOffsetIs(1), "Caret should be at offset 1");
-    
+
     synthesizeKey("KEY_ArrowLeft");
     ok(divIsFocused(), "Div should be focused [4].");
     ok(selectionOffsetIs(0), "Caret should be at offset 0");
 
-    ok(divIsFocused(), "Div should be focused [5].");    
+    ok(divIsFocused(), "Div should be focused [5].");
     ok(selectionOffsetIs(0), "Caret should be at offset 0");
     sendMouseClick();
 
-    ok(divIsFocused(), "Div should be focused [6].");    
-    ok(selectionOffsetIs(0), "Caret should be at offset 0");    
+    ok(divIsFocused(), "Div should be focused [6].");
+    ok(selectionOffsetIs(0), "Caret should be at offset 0");
     synthesizeKey("KEY_ArrowLeft");
 
     ok(divIsFocused(), "Div should be focused [7].");
     ok(selectionOffsetIs(0), "Caret should be at offset 0");
     SimpleTest.finish();
   }
-  
+
 
 </script>
 </pre>

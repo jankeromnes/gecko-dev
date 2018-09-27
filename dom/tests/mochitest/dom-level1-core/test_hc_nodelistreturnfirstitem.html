@@ -37,13 +37,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "hc_staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,15 +73,15 @@ var docName = 'hc_nodelistreturnfirstitem';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
+*
    Create a list of all the children elements of the third
-   employee and access its first child by invoking the 
+   employee and access its first child by invoking the
    "item(index)" method with an index=0.  This should
    result in node with a nodeName of "#text" or "em".
 
@@ -98,7 +98,7 @@ function hc_nodelistreturnfirstitem() {
       var employeeList;
       var child;
       var childName;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -111,19 +111,19 @@ function hc_nodelistreturnfirstitem() {
       child = employeeList.item(0);
       childName = child.nodeName;
 
-      
+
 	if(
 	("#text" == childName)
 	) {
 	assertEquals("nodeName_w_space","#text",childName);
-       
+
 	}
-	
+
 		else {
 			assertEqualsAutoCase("element", "nodeName_wo_space","em",childName);
-       
+
 		}
-	
+
 }
 
 </script>
@@ -132,12 +132,12 @@ function hc_nodelistreturnfirstitem() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/hc_nodelistreturnfirstitem</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 <iframe name="doc" src="files/hc_staff.html"></iframe>
 <br>

@@ -5,7 +5,7 @@ index 574e478..8c26e80 100644
 @@ -8,6 +8,31 @@
  #include <wchar.h>
  #include <string.h>
- 
+
 +void
 +Ebml_Serialize(EbmlGlobal *glob, const void *buffer_in, int buffer_size, unsigned long len)
 +{
@@ -37,24 +37,24 @@ index 574e478..8c26e80 100644
 @@ -19,12 +44,12 @@ static void _Serialize(EbmlGlobal *glob, const unsigned char *p, const unsigned
    while (q != p) {
      --q;
- 
+
 -    unsigned long cbWritten;
      memcpy(&(glob->buf[glob->offset]), q, 1);
      glob->offset++;
    }
  }
- 
+
 +/*
  void Ebml_Serialize(EbmlGlobal *glob, const void *buffer_in, unsigned long len) {
    // assert(buf);
- 
+
 @@ -33,22 +58,22 @@ void Ebml_Serialize(EbmlGlobal *glob, const void *buffer_in, unsigned long len)
- 
+
    _Serialize(glob, p, q);
  }
 -
 +*/
- 
+
  void Ebml_StartSubElement(EbmlGlobal *glob, EbmlLoc *ebmlLoc, unsigned long class_id) {
 +  unsigned long long unknownLen = 0x01FFFFFFFFFFFFFFLL;
    Ebml_WriteID(glob, class_id);
@@ -64,7 +64,7 @@ index 574e478..8c26e80 100644
 -  Ebml_Serialize(glob, (void *)&unknownLen, 8); // this is a key that says lenght unknown
 +  Ebml_Serialize(glob, (void *)&unknownLen,sizeof(unknownLen), 8); // this is a key that says lenght unknown
  }
- 
+
  void Ebml_EndSubElement(EbmlGlobal *glob, EbmlLoc *ebmlLoc) {
    unsigned long long size = glob->offset - ebmlLoc->offset - 8;
    unsigned long long curOffset = glob->offset;
@@ -75,7 +75,7 @@ index 574e478..8c26e80 100644
 +  Ebml_Serialize(glob, &size,sizeof(size), 8);
    glob->offset = curOffset;
  }
- 
+
 diff --git a/EbmlBufferWriter.h b/EbmlBufferWriter.h
 index acd5c2a..c135f29 100644
 --- a/EbmlBufferWriter.h
@@ -83,11 +83,11 @@ index acd5c2a..c135f29 100644
 @@ -11,9 +11,7 @@ typedef struct {
    unsigned int offset;
  } EbmlGlobal;
- 
+
 -
  void Ebml_StartSubElement(EbmlGlobal *glob, EbmlLoc *ebmlLoc, unsigned long class_id);
  void Ebml_EndSubElement(EbmlGlobal *glob,  EbmlLoc *ebmlLoc);
- 
+
 -
  #endif
 diff --git a/EbmlWriter.c b/EbmlWriter.c
@@ -97,7 +97,7 @@ index 27cfe86..ebefc1a 100644
 @@ -74,6 +74,13 @@ void Ebml_WriteID(EbmlGlobal *glob, unsigned long class_id) {
    Ebml_Serialize(glob, (void *)&class_id, sizeof(class_id), len);
  }
- 
+
 +void Ebml_SerializeUnsigned32(EbmlGlobal *glob, unsigned long class_id, uint32_t ui) {
 +  unsigned char sizeSerialized = 8 | 0x80;
 +  Ebml_WriteID(glob, class_id);
@@ -131,10 +131,10 @@ index 2f79a3c..02eefa4 100644
 +#include <stdint.h>
 +#include <stdlib.h>
 +#include <time.h>
- 
+
  #define kVorbisPrivateMaxSize  4000
 +#define UInt64 uint64_t
- 
+
  void writeHeader(EbmlGlobal *glob) {
    EbmlLoc start;
 @@ -30,15 +34,16 @@ void writeHeader(EbmlGlobal *glob) {
@@ -165,7 +165,7 @@ index 2f79a3c..02eefa4 100644
 +//  UInt64 rval = t ^ r;
 +  return t ^ r;
  }
- 
+
  void writeVideoTrack(EbmlGlobal *glob, unsigned int trackNumber, int flagLacing,
                       char *codecId, unsigned int pixelWidth, unsigned int pixelHeight,
                       double frameRate) {
@@ -177,7 +177,7 @@ index 2f79a3c..02eefa4 100644
 +  trackID = generateTrackID(trackNumber);
    Ebml_SerializeUnsigned(glob, TrackUID, trackID);
    Ebml_SerializeString(glob, CodecName, "VP8");  // TODO shouldn't be fixed
- 
+
 @@ -78,9 +84,10 @@ void writeAudioTrack(EbmlGlobal *glob, unsigned int trackNumber, int flagLacing,
                       char *codecId, double samplingFrequency, unsigned int channels,
                       unsigned char *private, unsigned long privateSize) {

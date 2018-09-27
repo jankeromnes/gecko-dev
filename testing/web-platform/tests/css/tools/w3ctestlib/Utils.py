@@ -16,7 +16,7 @@ from os.path import sep, pardir
 
 def assetName(path):
   return intern(os.path.splitext(os.path.basename(path))[0].lower().encode('ascii'))
-  
+
 def basepath(path):
   """ Returns the path part of os.path.split.
   """

@@ -178,7 +178,7 @@ PKIX_CertChainChecker_Create(
         *pChecker = checker;
         checker = NULL;
 cleanup:
-        
+
         PKIX_DECREF(checker);
 
         PKIX_RETURN(CERTCHAINCHECKER);

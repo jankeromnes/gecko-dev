@@ -16,7 +16,7 @@ if (eval("void\u00090") !== undefined) {
 
 //CHECK#2
 if (eval("void\u000B0") !== undefined) {
-  $ERROR('#2: void\\u000B0 === undefined');  
+  $ERROR('#2: void\\u000B0 === undefined');
 }
 
 //CHECK#3
@@ -36,7 +36,7 @@ if (eval("void\u00A00") !== undefined) {
 
 //CHECK#6
 if (eval("void\u000A0") !== undefined) {
-  $ERROR('#6: void\\u000A0 === undefined');  
+  $ERROR('#6: void\\u000A0 === undefined');
 }
 
 //CHECK#7

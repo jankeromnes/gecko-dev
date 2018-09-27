@@ -151,5 +151,5 @@ LRESULT CListView3::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
   return res;
 }
 */
-  
+
 }}

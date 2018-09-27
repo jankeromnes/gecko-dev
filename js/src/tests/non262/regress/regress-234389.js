@@ -19,9 +19,9 @@ var foo = {
     }
     return this.value;
   },
- 
+
   value: "foo",
- 
+
   re: /bar/
 };
 

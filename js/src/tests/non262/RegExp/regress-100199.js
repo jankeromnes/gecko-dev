@@ -168,7 +168,7 @@ status = inSection(22);
 actualmatch = string.match(pattern);
 expectedmatch = Array('[');
 addThis();
- 
+
 string = '[';
 status = inSection(23);
 actualmatch = string.match(pattern);

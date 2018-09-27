@@ -33,7 +33,7 @@ function runTests() {
   }
 
   function doClick(x,y,func) {
-    synthesizeMouse($("plugin1"), x, y, {}, window); 
+    synthesizeMouse($("plugin1"), x, y, {}, window);
     setTimeout(func,0);
   }
 
@@ -41,7 +41,7 @@ function runTests() {
     var p = $("plugin1").getLastMouseX();
     const delta = 2;
     var dpr = window.devicePixelRatio / SpecialPowers.getFullZoom(window);
-    ok(p-delta <= x * dpr && x * dpr <= p+delta, "test"+test+" LastMouseX got " + p + " expected " + x + 
+    ok(p-delta <= x * dpr && x * dpr <= p+delta, "test"+test+" LastMouseX got " + p + " expected " + x +
                                      " with fullZoom="+SpecialPowers.getFullZoom(window)+" MozTransform='"+$("container").style.MozTransform+"'");
     p = $("plugin1").getLastMouseY();
     ok(p-delta <= y * dpr && y * dpr <= p+delta, "test"+test+" LastMouseY got " + p + " expected " + y +
@@ -104,7 +104,7 @@ setTestPluginEnabledState(SpecialPowers.Ci.nsIPluginTag.STATE_ENABLED);
 </head>
 
 <body onload="runTests()">
- <div id="container" style="position:relative;top: 0px; left: 0px; width: 640px; height: 480px; -moz-transform:scale(2); -moz-transform-origin:0px 0px;"> 
+ <div id="container" style="position:relative;top: 0px; left: 0px; width: 640px; height: 480px; -moz-transform:scale(2); -moz-transform-origin:0px 0px;">
   <div id="abs" style="position:absolute; left:90px; top:90px; width:20px; height:20px; background:blue; pointer-events:none;"></div>
   <embed id="plugin1" type="application/x-test" wmode="transparent" width="200" height="200"></embed>
  </div>

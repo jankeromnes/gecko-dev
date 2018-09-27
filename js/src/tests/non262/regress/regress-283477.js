@@ -12,7 +12,7 @@ var status;
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 status = summary + ' ' + inSection(1) + " " + '"".lastIndexOf("hello", 0);';
 expect = -1;
 actual = "".lastIndexOf("hello", 0);

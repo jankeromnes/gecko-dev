@@ -11,8 +11,8 @@ var y;
 
 function f(a){
   var x;
-  
-  if (a === 1) 
+
+  if (a === 1)
     return x;
   else {
     if(x === undefined) {

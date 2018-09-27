@@ -20,7 +20,7 @@ expect = 'No Warning';
 try
 {
   var obj = {foo: 'baz'};
- 
+
   // this must either be top level or must be
   // evald since there is a bug in older versions
   // that suppresses the |with| warning inside of a

@@ -21,7 +21,7 @@
     let span = document.getElementById("measure");
     let rect = span.getBoundingClientRect();
     return { width: rect.right - rect.left,
-             height: rect.bottom - rect.top }; 
+             height: rect.bottom - rect.top };
   }
 
   function setStart(aDWU, aX, aY, aSelectType)
@@ -181,7 +181,7 @@
       dwuFrame.selectAtPoint(rect.right + 50, rect.top, Ci.nsIDOMWindowUtils.SELECT_WORD, false);
     } catch (ex)  { thr = true; }
     ok(thr == true, "selectAtPoint expected throw?");
-    
+
     done();
   }
 
@@ -189,7 +189,7 @@
   let pageLoad = false;
   let painted = false;
   function testReady() {
-    if (frameLoad && pageLoad && painted) 
+    if (frameLoad && pageLoad && painted)
       doTest();
   }
 

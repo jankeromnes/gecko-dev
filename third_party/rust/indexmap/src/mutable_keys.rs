@@ -21,7 +21,7 @@ pub struct PrivateMarker { }
 pub trait MutableKeys {
     type Key;
     type Value;
-    
+
     /// Return item index, mutable reference to key and value
     fn get_full_mut2<Q: ?Sized>(&mut self, key: &Q)
         -> Option<(usize, &mut Self::Key, &mut Self::Value)>

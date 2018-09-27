@@ -1034,7 +1034,7 @@ PKIX_PL_MonitorLock_Enter(
  * FUNCTION: PKIX_PL_MonitorLock_Exit
  * DESCRIPTION:
  *
- *  Unlocks the MonitorLock pointed to by "lock" if the lock counter of 
+ *  Unlocks the MonitorLock pointed to by "lock" if the lock counter of
  *  current thread holds the MonitorLock reach 0, the lock is released.
  *
  * PARAMETERS:
@@ -1251,7 +1251,7 @@ PKIX_PL_HashTable_Create(
  *  to the Hashtable pointed to by "ht".
  *
  *  Function increments key/value reference counts. Caller is responsible to
- *  to decrement(destroy) key/value ref counts(objects). 
+ *  to decrement(destroy) key/value ref counts(objects).
  *
  * PARAMETERS:
  *  "ht"
@@ -1537,7 +1537,7 @@ PKIX_PL_BigInt_Create(
  * THREAD SAFETY:
  *  Thread Safe (see Thread Safety Definitions in Programmer's Guide)
  * RETURNS:
- *  PL layer error code. 
+ *  PL layer error code.
  */
 int
 PKIX_PL_GetPLErrorCode();

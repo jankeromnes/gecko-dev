@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>CRLUTIL</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="CRLUTIL"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">CRLUTIL</th></tr></table><hr></div><div class="refentry"><a name="crlutil"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>crlutil — 
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>CRLUTIL</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="CRLUTIL"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">CRLUTIL</th></tr></table><hr></div><div class="refentry"><a name="crlutil"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>crlutil —
 List, generate, modify, or delete CRLs within the NSS security database file(s) and list, create, modify or delete certificates entries in a particular CRL.
     </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">crlutil</code>  [<em class="replaceable"><code>options</code></em>] [[<em class="replaceable"><code>arguments</code></em>]]</p></div></div><div class="refsection"><a name="idm233261315520"></a><h2>STATUS</h2><p>This documentation is still work in progress. Please contribute to the initial review in <a class="ulink" href="https://bugzilla.mozilla.org/show_bug.cgi?id=836477" target="_top">Mozilla NSS bug 836477</a>
     </p></div><div class="refsection"><a name="description"></a><h2>Description</h2><p>The Certificate Revocation List (CRL) Management Tool, <span class="command"><strong>crlutil</strong></span>, is a command-line utility that can list, generate, modify, or delete CRLs within the NSS security database file(s) and list, create, modify or delete certificates entries in a particular CRL.
@@ -14,7 +14,7 @@ crlutil option [arguments]
 where options and arguments are combinations of the options and arguments listed in the following section. Each command takes one option. Each option may take zero or more arguments. To see a usage string, issue the command without options, or with the -H option.
     </p></div><div class="refsection"><a name="options"></a><h2>Options and Arguments</h2><p>
 	</p><p><span class="command"><strong>Options</strong></span></p><p>
-Options specify an action. Option arguments modify an action. 
+Options specify an action. Option arguments modify an action.
 The options and arguments for the crlutil command are defined as follows:
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">-D </span></dt><dd><p>
 Delete Certificate Revocation List from cert database.
@@ -59,7 +59,7 @@ Specify the url.
           </p></dd><dt><span class="term">-w pwd-string</span></dt><dd><p>Provide db password in command line.</p></dd><dt><span class="term">-Z algorithm</span></dt><dd><p>Specify the hash algorithm to use for signing the CRL.</p></dd></dl></div></div><div class="refsection"><a name="syntax"></a><h2>CRL Generation script syntax</h2><p>CRL generation script file has the following syntax:</p><p>
     * Line with comments should have # as a first symbol of a line</p><p>
     * Set "this update" or "next update" CRL fields:
-    </p><p>           
+    </p><p>
              update=YYYYMMDDhhmmssZ
              nextupdate=YYYYMMDDhhmmssZ
      </p><p>
@@ -109,7 +109,7 @@ The authority key identifier extension provides a means of identifying the publi
      </p><p>
           authKeyIdent: identifies the name of an extension
           critical: value of 1 of 0. Should be set to 1 if this extension is critical or 0 otherwise.
-          key-id: key identifier represented in octet string. dn:: is a CA distinguished name cert-serial: authority certificate serial number. 
+          key-id: key identifier represented in octet string. dn:: is a CA distinguished name cert-serial: authority certificate serial number.
      </p><p>
     * Add Issuer Alternative Name extension:
      </p><p>
@@ -173,31 +173,31 @@ The Certificate Revocation List Management Tool's capabilities are grouped as fo
     </p><p>See "Implemented extensions" for more information regarding extensions and their parameters.</p><p>
     * Creating or modifying a CRL:
     </p><pre class="programlisting">
-crlutil -G|-M -c crl-gen-file -n nickname [-i crl] [-u url] [-d keydir] [-P dbprefix] [-l alg] [-a] [-B] 
+crlutil -G|-M -c crl-gen-file -n nickname [-i crl] [-u url] [-d keydir] [-P dbprefix] [-l alg] [-a] [-B]
       </pre><p>
     * Listing all CRls or a named CRL:
     </p><pre class="programlisting">
-	crlutil -L [-n crl-name] [-d krydir] 
+	crlutil -L [-n crl-name] [-d krydir]
       </pre><p>
     * Deleting CRL from db:
     </p><pre class="programlisting">
-	crlutil -D -n nickname [-d keydir] [-P dbprefix] 
+	crlutil -D -n nickname [-d keydir] [-P dbprefix]
       </pre><p>
     * Erasing CRLs from db:
     </p><pre class="programlisting">
-	crlutil -E [-d keydir] [-P dbprefix] 
+	crlutil -E [-d keydir] [-P dbprefix]
       </pre><p>
-    * Deleting CRL from db: 
+    * Deleting CRL from db:
     </p><pre class="programlisting">
           crlutil -D -n nickname [-d keydir] [-P dbprefix]
     </pre><p>
     * Erasing CRLs from db:
     </p><pre class="programlisting">
-          crlutil -E [-d keydir] [-P dbprefix] 
+          crlutil -E [-d keydir] [-P dbprefix]
     </pre><p>
     * Import CRL from file:
     </p><pre class="programlisting">
-          crlutil -I -i crl [-t crlType] [-u url] [-d keydir] [-P dbprefix] [-B] 
+          crlutil -I -i crl [-t crlType] [-u url] [-d keydir] [-P dbprefix] [-B]
     </pre></div><div class="refsection"><a name="seealso"></a><h2>See Also</h2><p>certutil(1)</p></div><div class="refsection"><a name="resources"></a><h2>Additional Resources</h2><p>For information about NSS and other tools related to NSS (like JSS), check out the NSS project wiki at <a class="ulink" href="http://www.mozilla.org/projects/security/pki/nss/" target="_top">http://www.mozilla.org/projects/security/pki/nss/</a>. The NSS site relates directly to NSS code changes and releases.</p><p>Mailing lists: https://lists.mozilla.org/listinfo/dev-tech-crypto</p><p>IRC: Freenode at #dogtag-pki</p></div><div class="refsection"><a name="authors"></a><h2>Authors</h2><p>The NSS tools were written and maintained by developers with Netscape, Red Hat,  Sun, Oracle, Mozilla, and Google.</p><p>
 	Authors: Elio Maldonado &lt;emaldona@redhat.com&gt;, Deon Lackey &lt;dlackey@redhat.com&gt;.
     </p></div><div class="refsection"><a name="license"></a><h2>LICENSE</h2><p>Licensed under the Mozilla Public License, v. 2.0.  If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.

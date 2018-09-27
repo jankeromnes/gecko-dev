@@ -29,7 +29,7 @@ macro_rules! test_suggest(
                         }
                         err => panic!("Error other than argv: {:?}", err)
                     }
-                }, 
+                },
                 _ => panic!("Error without program usage")
             }
         }
@@ -37,36 +37,36 @@ macro_rules! test_suggest(
 );
 
 
-test_suggest!(test_suggest_1, "Usage: prog [--release]", &["--releas"], "Unknown flag: '--releas'. Did you mean '--release'?"); 
+test_suggest!(test_suggest_1, "Usage: prog [--release]", &["--releas"], "Unknown flag: '--releas'. Did you mean '--release'?");
 
-test_suggest!(test_suggest_2, 
+test_suggest!(test_suggest_2,
 "Usage: prog [-a] <source> <dest>
         prog [-a] <source>... <dir>
         prog [-e]
  Options:
     -a, --archive  Copy everything.
-", 
-&["-d"], "Unknown flag: '-d'"); 
+",
+&["-d"], "Unknown flag: '-d'");
 
 
-test_suggest!(test_suggest_3, 
+test_suggest!(test_suggest_3,
 "Usage: prog [-a] <source> <dest>
         prog [-a] <source>... <dir>
         prog [-e]
  Options:
     -a, --archive  Copy everything.
     -e, --export Export all the things.
-", 
-&["--expotr"], "Unknown flag: '--expotr'. Did you mean '--export'?"); 
+",
+&["--expotr"], "Unknown flag: '--expotr'. Did you mean '--export'?");
 
 
-test_suggest!(test_suggest_4, 
+test_suggest!(test_suggest_4,
 "Usage: prog [--import] [--complete]
-", 
-&["--mport", "--complte"], "Unknown flag: '--mport'. Did you mean '--import'?"); 
+",
+&["--mport", "--complte"], "Unknown flag: '--mport'. Did you mean '--import'?");
 
-test_suggest!(test_suggest_5, 
+test_suggest!(test_suggest_5,
 "Usage: prog [--import] [--complete]
-", 
-&["--import", "--complte"], "Unknown flag: '--complte'. Did you mean '--complete'?"); 
+",
+&["--import", "--complte"], "Unknown flag: '--complte'. Did you mean '--complete'?");
 

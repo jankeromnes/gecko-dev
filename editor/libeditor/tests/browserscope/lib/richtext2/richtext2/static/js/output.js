@@ -1,5 +1,5 @@
 /**
- * @fileoverview 
+ * @fileoverview
  * Functions used to format the test result output.
  *
  * Copyright 2010 Google Inc.
@@ -66,7 +66,7 @@ function highlightSelectionMarkers(str) {
   str = str.replace(/\|/g, '<b class="sel">|</b>');
   return str;
 }
-                       
+
 /**
  * Function to highlight the selection markers
  *
@@ -79,7 +79,7 @@ function highlightSelectionMarkersAndTextNodes(str) {
   str = str.replace(/\xb4/g, '</span>');
   return str;
 }
-                       
+
 /**
  * Function to format output according to type
  *
@@ -91,20 +91,20 @@ function formatValueOrString(value) {
     return '<i>undefined</i>';
   if (value === null)
     return '<i>null</i>';
-  
+
   switch (typeof value) {
     case 'boolean':
       return '<i>' + value.toString() + '</i>';
-      
+
     case 'number':
       return value.toString();
-      
+
     case 'string':
       return "'" + escapeOutput(value) + "'";
-      
+
     default:
       return '<i>(' + escapeOutput(value.toString()) + ')</i>';
-  } 
+  }
 }
 
 /**
@@ -261,7 +261,7 @@ function outputTestResults(suite, clsID, group, test) {
     setTD(trID + IDOUT_CHECKATTRS, OUTSTR_NA, 'attributes not applicable');
     setTD(trID + IDOUT_CHECKSTYLE, OUTSTR_NA, 'style not applicable');
   }
-  
+
   // Fill in test pad specification cell (initial HTML + selection markers)
   setTD(trID + IDOUT_PAD, highlightSelectionMarkers(escapeOutput(getTestParameter(suite, group, test, PARAM_PAD))));
 
@@ -275,7 +275,7 @@ function outputTestResults(suite, clsID, group, test) {
     expectedOutput += testUsesHTML ? highlightSelectionMarkers(escapeOutput(expectedArr[idx]))
                                    : formatValueOrString(expectedArr[idx]);
   }
-  var acceptedArr = getExpectationArray(getTestParameter(suite, group, test, PARAM_ACCEPT));    
+  var acceptedArr = getExpectationArray(getTestParameter(suite, group, test, PARAM_ACCEPT));
   for (var idx = 0; idx < acceptedArr.length; ++idx) {
     expectedOutput += '<span class="accexp">\xA0\xA0\xA0<i>or</i></span><br><span class="accexp">';
     expectedOutput += testUsesHTML ? highlightSelectionMarkers(escapeOutput(acceptedArr[idx]))
@@ -321,7 +321,7 @@ function outputTestResults(suite, clsID, group, test) {
 
     // Fill in result status cell ("PASS", "ACC.", "FAIL", "EXC.", etc.)
     setTD(trID + IDOUT_STATUSVAL + cntID, cntValOut.output, cntValOut.title, cssVal);
-    
+
     // Fill in selection status cell ("PASS", "ACC.", "FAIL", "N/A")
     setTD(trID + IDOUT_STATUSSEL + cntID, cntSelOut.output, cntSelOut.title, cssSel);
 
@@ -372,13 +372,13 @@ function outputTestResults(suite, clsID, group, test) {
                 cssVal);
         } else if (cntResult.selresult == SELRESULT_CANARY) {
           cssCnt = suiteChecksSelOnly ? cssSel : cssVal;
-          setTD(trID + IDOUT_ACTUAL + cntID, 
+          setTD(trID + IDOUT_ACTUAL + cntID,
                 highlightSelectionMarkersAndTextNodes(escapeOutput(cntResult.output)),
                 '',
                 cssCnt);
         } else {
           cssCnt = suiteChecksSelOnly ? cssSel : cssVal;
-          setTD(trID + IDOUT_ACTUAL + cntID, 
+          setTD(trID + IDOUT_ACTUAL + cntID,
                 formatActualResult(suite, group, test, cntResult.output),
                 '',
                 cssCnt);
@@ -396,7 +396,7 @@ function outputTestResults(suite, clsID, group, test) {
     if (cntTD) {
       cntTD.className = cssCnt;
     }
-  }          
+  }
 }
 
 /**
@@ -441,7 +441,7 @@ function outputTestSuiteResults(suite) {
     }
 
     var groupCount = cls.length;
-    
+
     for (var groupIdx = 0; groupIdx < groupCount; ++groupIdx) {
       var group = cls[groupIdx];
       var testCount = group.tests.length;

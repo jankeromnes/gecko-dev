@@ -17,7 +17,7 @@ function test()
 {
     printBugNumber(BUGNUMBER);
     printStatus (summary);
- 
+
     for (var i = 0; i < 2000; ++i) {
       var ns = document.createElementNS("http://www.w3.org/1999/xhtml", "script");
       var nt = document.createTextNode("++j");

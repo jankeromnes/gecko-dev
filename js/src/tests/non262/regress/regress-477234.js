@@ -20,7 +20,7 @@ function test()
   printBugNumber(BUGNUMBER);
   printStatus (summary);
 
- 
+
   for (iters = 0; iters < 11500; ++iters) {
     for (let x of ['', '', '']){}
     eval("Object.defineProperty(__proto__, 'x', " +

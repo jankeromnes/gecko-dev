@@ -16,7 +16,7 @@ assertEq(strict.call(undefined), undefined);
 assertEq(strict.call(obj), obj);
 assertEq(new strict() instanceof Object, true);
 
-/* 
+/*
  * The compiler internally converts x['foo'] to x.foo. Writing x[s] where
  * s='foo' is enough to throw it off the scent for now.
  */

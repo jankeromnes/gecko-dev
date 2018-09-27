@@ -57,7 +57,7 @@ var listener = {
       try {
         request.referrer = uri;
         do_throw("Error should have been thrown before getting here");
-      } catch (ex) { } 
+      } catch (ex) { }
     } catch (ex) {
       do_throw("Exception: " + ex);
     }

@@ -10,13 +10,13 @@ description: Also this a test on FunctionExpression
 ---*/
 
 var check = 0;
-do {    
+do {
   if(typeof(f) === "function"){
-    check = -1;        
-    break; 
+    check = -1;
+    break;
   } else {
-    check = 1;        
-    break; 
+    check = 1;
+    break;
   }
 } while(function f(){});
 

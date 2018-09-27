@@ -28,7 +28,7 @@ info: |
 let iterCount = 0;
 async function fn() {
   for await ({} of ['']) {
-    
+
     iterCount += 1;
   }
 }

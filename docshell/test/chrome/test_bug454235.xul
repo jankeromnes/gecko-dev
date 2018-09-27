@@ -29,7 +29,7 @@ function doTest() {
   var offScreenBrowser = document.getElementById("offScreenBrowser");
   var offScreenSubBrowser = offScreenBrowser.contentDocument.getElementById("topBrowser");
   var offScreenBurriedBrowser = offScreenBrowser.contentDocument.getElementById("burriedBrowser");
-  
+
   hiddenBrowser.contentWindow.focus();
   ok(!hiddenBrowser.contentDocument.hasFocus(),"hidden browser is visible");
 

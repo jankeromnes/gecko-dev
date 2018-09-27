@@ -8,7 +8,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=339494
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>      
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>
 
 <body  xmlns="http://www.w3.org/1999/xhtml">
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=339494">Mozilla Bug 339494</a>
@@ -26,7 +26,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=339494
 /** Test for Bug 339494 **/
 
   var d = document.getElementById("d");
-  
+
   d.setAttribute("hhh", "testvalue");
 
   document.addEventListener("DOMAttrModified", removeItAgain, false);
@@ -42,9 +42,9 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=339494
     d.removeAttribute("hhh");
     ok(true, "Reachability", "We shouldn't have crashed");
   }
-  
+
   var s = document.getElementById("s");
-  
+
   s.setAttribute("ggg", "testvalue");
 
   document.addEventListener("DOMAttrModified", compareVal, false);

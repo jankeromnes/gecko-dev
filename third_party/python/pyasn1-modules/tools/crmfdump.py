@@ -16,13 +16,13 @@ if len(sys.argv) != 1:
     print("""Usage:
 $ cat crmf.pem | %s""" % sys.argv[0])
     sys.exit(-1)
-    
+
 certReq = rfc2511.CertReqMessages()
 
 substrate = pem.readBase64FromFile(sys.stdin)
 if not substrate:
     sys.exit(0)
-        
+
 cr, rest = decoder.decode(substrate, asn1Spec=certReq)
 
 print(cr.prettyPrint())

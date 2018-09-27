@@ -12,7 +12,7 @@
 
 
 <dialog id="certAuthAsk" title="&clientAuthAsk.title;"
-  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"      
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   buttons="accept,cancel"
   ondialogaccept="return doOK();"
   ondialogcancel="return doCancel();"

@@ -598,7 +598,7 @@ void ModuleRtpRtcpImpl::GetRtpPacketLossStats(
         stats_source->GetMultipleLossPacketCount();
   }
 }
- 
+
 int32_t ModuleRtpRtcpImpl::RemoteRTCPStat(RTCPSenderInfo* sender_info) {
   return rtcp_receiver_.SenderInfoReceived(sender_info);
 }

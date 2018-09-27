@@ -42,7 +42,7 @@ function next()
   return new Promise(r => SimpleTest.executeSoon(r));
 }
 
-function waitForPanel(panel, event)  
+function waitForPanel(panel, event)
 {
   return new Promise(resolve => {
     panel.addEventListener(event, () => { resolve(); }, { once: true });

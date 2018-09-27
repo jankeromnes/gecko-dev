@@ -34,7 +34,7 @@ interface nsICategoryManager : nsISupports
      * @return The value.
      */
     ACString getCategoryEntry(in ACString aCategory, in ACString aEntry);
-    
+
     /**
      * Add an entry to a category.
      * @param aCategory The name of the category ("protocol")

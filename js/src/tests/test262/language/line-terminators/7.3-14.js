@@ -10,7 +10,7 @@ description: >
 ---*/
 
         /*MultiLine
-        Comments 
+        Comments
         \u000A var = ;
         */
 

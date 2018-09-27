@@ -14,11 +14,11 @@ void CFolderInStream::Init(IArchiveUpdateCallback *updateCallback,
   _indexes = indexes;
   _numFiles = numFiles;
   _index = 0;
-  
+
   Processed.ClearAndReserve(numFiles);
   CRCs.ClearAndReserve(numFiles);
   Sizes.ClearAndReserve(numFiles);
-  
+
   _pos = 0;
   _crc = CRC_INIT_VAL;
   _size_Defined = false;
@@ -45,7 +45,7 @@ HRESULT CFolderInStream::OpenStream()
     }
 
     _stream = stream;
-    
+
     if (stream)
     {
       CMyComPtr<IStreamGetSize> streamGetSize;
@@ -57,7 +57,7 @@ HRESULT CFolderInStream::OpenStream()
       }
       return S_OK;
     }
-    
+
     _index++;
     RINOK(_updateCallback->SetOperationResult(NArchive::NUpdate::NOperationResult::kOK));
     AddFileInfo(result == S_OK);
@@ -93,7 +93,7 @@ STDMETHODIMP CFolderInStream::Read(void *data, UInt32 size, UInt32 *processedSiz
           *processedSize = cur;
         return S_OK;
       }
-      
+
       _stream.Release();
       _index++;
       AddFileInfo(true);
@@ -105,7 +105,7 @@ STDMETHODIMP CFolderInStream::Read(void *data, UInt32 size, UInt32 *processedSiz
 
       RINOK(_updateCallback->SetOperationResult(NArchive::NUpdate::NOperationResult::kOK));
     }
-    
+
     if (_index >= _numFiles)
       break;
     RINOK(OpenStream());
@@ -118,20 +118,20 @@ STDMETHODIMP CFolderInStream::GetSubStreamSize(UInt64 subStream, UInt64 *value)
   *value = 0;
   if (subStream > Sizes.Size())
     return S_FALSE; // E_FAIL;
-  
+
   unsigned index = (unsigned)subStream;
   if (index < Sizes.Size())
   {
     *value = Sizes[index];
     return S_OK;
   }
-  
+
   if (!_size_Defined)
   {
     *value = _pos;
     return S_FALSE;
   }
-  
+
   *value = (_pos > _size ? _pos : _size);
   return S_OK;
 }

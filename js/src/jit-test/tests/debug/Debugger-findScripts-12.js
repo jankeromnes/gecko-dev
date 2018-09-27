@@ -75,7 +75,7 @@ queryExpectOnly({ global:g2, url:url1, line:  8 }, [g2.f, g2.f()]);
 queryExpectOnly({ global:g2, url:url1, line: 15 }, [g2.g        ]);
 queryExpectOnly({ global:g2, url:url2, line:  6 }, [g2.h        ]);
 queryExpectOnly({ global:g2, url:url2, line:  8 }, [g2.h, g2.h()]);
-queryExpectOnly({ global:g2, url:url2, line: 15 }, [g2.i        ]); 
+queryExpectOnly({ global:g2, url:url2, line: 15 }, [g2.i        ]);
 
 // Filtering by global, url, and line, and requesting only the innermost
 // function at each point, should produce only one function.
@@ -90,7 +90,7 @@ queryExpectOnly({ global:g2, url:url1, line:  8, innermost: true }, [g2.f()]);
 queryExpectOnly({ global:g2, url:url1, line: 15, innermost: true }, [g2.g  ]);
 queryExpectOnly({ global:g2, url:url2, line:  6, innermost: true }, [g2.h  ]);
 queryExpectOnly({ global:g2, url:url2, line:  8, innermost: true }, [g2.h()]);
-queryExpectOnly({ global:g2, url:url2, line: 15, innermost: true }, [g2.i  ]); 
+queryExpectOnly({ global:g2, url:url2, line: 15, innermost: true }, [g2.i  ]);
 
 // Filtering by url and global should produce sets of three scripts.
 queryExpectOnly({ global:g1, url:url1 }, [g1.f, g1.f(), g1.g]);

@@ -20,7 +20,7 @@
 #   -d debug
 #   -f <filename> - write the (error)output to filename
 #   -cron equivalient to -y -s -d -f $RESULTDIR/$HOST.nssqa
-# 
+#
 # 12/1/00
 # took out the (unused) local directory for releasebuild QA on NT
 # cleaned up 32 - 64 bit issues
@@ -28,23 +28,23 @@
 ########################################################################
 
 O_OPTIONS=ON            # accept options (see above for listing)
-WIN_WAIT_FOREVER=ON     # first we wait forever for a TESTDIR to appear, than 
+WIN_WAIT_FOREVER=ON     # first we wait forever for a TESTDIR to appear, than
                         # we wait forever for the build to finish...
 
-TBX_EXIT=50             # in case we are running on a tinderbox build, any 
+TBX_EXIT=50             # in case we are running on a tinderbox build, any
                         # early exit needs to return an error
 . `dirname $0`/header   # utilities, shellfunctions etc, global to NSS QA
 
 if [ -z "$O_TBX" -o "$O_TBX" != "ON" ] ; then
-    is_running ${TMP}/nssqa 
-                        # checks if the file exists, if yes Exits, if not 
+    is_running ${TMP}/nssqa
+                        # checks if the file exists, if yes Exits, if not
                         # creates to implement a primitive locking mechanism
 fi
 
 KILL_SELFSERV=OFF       # cleanup will also kill the leftover selfserv processes
 
 ################################ check_distdir #########################
-# local shell function to check if the DIST directory exists, if not there 
+# local shell function to check if the DIST directory exists, if not there
 # is no use to continue the test
 ########################################################################
 check_distdir()
@@ -71,10 +71,10 @@ check_distdir()
 }
 
 ################################ run_all ###############################
-# local shell function to start the all.sh after asking user and redirect 
+# local shell function to start the all.sh after asking user and redirect
 # the output apropriately
 ########################################################################
-run_all()        
+run_all()
 {
     check_distdir || return 1
     #kill_by_name selfserv
@@ -109,14 +109,14 @@ wait_for_build()
 {
   if [ $O_WIN = "ON" ]
   then
-      WaitForever ${OSDIR}/SVbuild.InProgress.1 0 
+      WaitForever ${OSDIR}/SVbuild.InProgress.1 0
                      #Wait for the build to finish Windows a lot longer
       OS_TARGET=WINNT;export OS_TARGET;Debug "OS_TARGET set to $OS_TARGET"
       QA_OS_NAME=`cd ${TESTSCRIPTDIR}/common; gmake objdir_name | \
           sed -e "s/WINNT4.0.*/Windows-NT-4.0/" -e "s/WINNT5.0.*/Windows-2000/"`
       Echo "WINDOWS-OS-LINE: $QA_OS_NAME"
   else
-      Wait ${OSDIR}/SVbuild.InProgress.1 0     
+      Wait ${OSDIR}/SVbuild.InProgress.1 0
                      #Wait for the build to finish... Unix a few hours
       qa_stat_get_sysinfo
       Echo "UNIX-OS-LINE: $QA_OS"
@@ -126,7 +126,7 @@ wait_for_build()
 
 
 ########################### map_os #############################
-# local shell function: From the operatingsystem figure out the name of 
+# local shell function: From the operatingsystem figure out the name of
 #     the build ; needed to detemine if the build finished, passed and for
 #     the directory names
 ########################################################################
@@ -148,7 +148,7 @@ map_os32()
             ;;
         Darwin)
             MAPPED_OS=Darwin6.5
-            ;;	
+            ;;
         AIX)
             MAPPED_OS=AIX4.3
             ;;
@@ -156,7 +156,7 @@ map_os32()
             RH_MR=`cat /etc/redhat-release | sed \
                 -e "s/Red Hat Linux release //" -e "s/ .*//g" \
                 -e "s/\..*//g"`
-            
+
             if [ "$RH_MR" = "6" ] ; then
                 MAPPED_OS=Linux2.2
             else
@@ -201,7 +201,7 @@ nssqa_main()
       fi
   fi
 
-  if [ -d $TESTSCRIPTDIR ]    #the directory mozilla/security/nss/tests, 
+  if [ -d $TESTSCRIPTDIR ]    #the directory mozilla/security/nss/tests,
   then            # where all.sh lives
       cd $TESTSCRIPTDIR
   else
@@ -213,16 +213,16 @@ nssqa_main()
   Debug "HOST: $HOST, DOMSUF: $DOMSUF"
 
   if [  "$O_TBX" = "OFF" ] ; then
-      map_os32 # From the operatingsystem figure out the name of the build 
+      map_os32 # From the operatingsystem figure out the name of the build
       Debug Testing build for $MAPPED_OS in $OSDIR
       wait_for_build
   fi
   run_all
   BUILD_OPT=1; export BUILD_OPT; Debug "BUILD_OPT $BUILD_OPT"
   run_all
-  
+
   # now for the 64 bit build!
-  map_os64 # From the operatingsystem figure out the name of the build 
+  map_os64 # From the operatingsystem figure out the name of the build
   if [ -n "$IS_64" ] ; then #Wait for the 64 bit build to finish...
       Debug "This is a $IS_64 platform"
       USE_64=1;export USE_64;Debug "Use_64 set to $USE_64"
@@ -249,10 +249,10 @@ nssqa_main()
       Debug "This is a 32 bit platform"
   fi
 }
-  
+
 TEST_LEVEL=0
 
-while [ $TEST_LEVEL -lt 2 ] ; do 
+while [ $TEST_LEVEL -lt 2 ] ; do
     export TEST_LEVEL
     unset BUILD_OPT;export BUILD_OPT;Debug "BUILD_OPT $BUILD_OPT"
     unset USE_64;export USE_64;Debug "USE_64 $USE_64"
@@ -263,7 +263,7 @@ while [ $TEST_LEVEL -lt 2 ] ; do
     else
         nssqa_main
     fi
-    if [  "$O_TBX" = "ON" ] ; then      # do not do backward compatibility 
+    if [  "$O_TBX" = "ON" ] ; then      # do not do backward compatibility
          TEST_LEVEL=3                   # testing on tinderbox
     else
          TEST_LEVEL=`expr $TEST_LEVEL + 1 `
@@ -280,7 +280,7 @@ if [  "$O_TBX" = "ON" -o "$O_LOCAL" = "ON" ] ; then
     . `dirname $0`/qa_stat
 fi
 
-  
+
 qa_stat_get_sysinfo
 
 Exit "nssqa completed. Done `uname -n` $QA_OS_STRING"

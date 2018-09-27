@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   Array.prototype[0] = 1024;
 
   expect = (function(){ var a=[],[x]=a; return x; })();

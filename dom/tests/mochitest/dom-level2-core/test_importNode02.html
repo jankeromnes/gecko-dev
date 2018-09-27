@@ -36,19 +36,19 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
       var aNewDocRef = null;
       if (typeof(this.aNewDoc) != 'undefined') {
         aNewDocRef = this.aNewDoc;
       }
       docsLoaded += preload(aNewDocRef, "aNewDoc", "staffNS");
-        
+
        if (docsLoaded == 2) {
           setUpPage = 'complete';
        }
@@ -59,7 +59,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -78,12 +78,12 @@ var docName = 'importNode02';
 
 
 /**
-* 
-    The "importNode(importedNode,deep)" method for a 
+*
+    The "importNode(importedNode,deep)" method for a
    Document should import the given importedNode into that Document.
    The importedNode is of type CData_Section.
-   
-   Create a CDATASection node with value being the string "this is CDATASection data" in 
+
+   Create a CDATASection node with value being the string "this is CDATASection data" in
    a different document.  Invoke method importNode(importedNode,deep) on
    this document.  Method should return a CDATASection node whose value matches
    the above string. The returned node should belong to this document whose systemId is "staff.dtd"
@@ -103,13 +103,13 @@ function importNode02() {
       var docType;
       var system;
       var value;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       doc = load(docRef, "doc", "staffNS");
-      
+
       var aNewDocRef = null;
       if (typeof(this.aNewDoc) != 'undefined') {
         aNewDocRef = this.aNewDoc;
@@ -128,7 +128,7 @@ docType = ownerDocument.doctype;
 value = aNode.nodeValue;
 
       assertEquals("nodeValue","this is CDATASection data",value);
-       
+
 }
 
 </script>
@@ -137,12 +137,12 @@ value = aNode.nodeValue;
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/importNode02</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

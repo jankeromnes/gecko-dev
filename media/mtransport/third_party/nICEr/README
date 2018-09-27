@@ -38,7 +38,7 @@ BUILDING ON WINDOWS:
 -------------------
 The Visual C++ project files are configured to expect the
 directory structure described above.
- 
+
 Note: Binary Windows builds of OpenSSL can be found at:
    http://www.slproweb.com/products/Win32OpenSSL.html
 
@@ -53,7 +53,7 @@ STATUS:
 The ICE code has been tested on the following platforms:
 -- Fedora Core 4 (Intel 32-bit)
 -- Fedora Core 6 (Intel 32-bit)
--- Ubuntu 6.10 
+-- Ubuntu 6.10
 -- MacOSX 10.4.9
 -- Windows Vista (Home Premium)
 -- Windows XP Pro

@@ -286,7 +286,7 @@ LONG CKey::QueryValue(LPCWSTR name, UString &value)
     res = QueryValue(name == 0 ? 0 : (LPCSTR)GetSystemString(name), vTemp);
     value = GetUnicodeString(vTemp);
   }
-  
+
   return res;
 }
 
@@ -337,15 +337,15 @@ LONG CKey::EnumKeys(CSysStringVector &keyNames)
 LONG CKey::SetValue_Strings(LPCTSTR valueName, const UStringVector &strings)
 {
   size_t numChars = 0;
-  
+
   unsigned i;
-  
+
   for (i = 0; i < strings.Size(); i++)
     numChars += strings[i].Len() + 1;
-  
+
   CObjArray<wchar_t> buffer(numChars);
   size_t pos = 0;
-  
+
   for (i = 0; i < strings.Size(); i++)
   {
     const UString &s = strings[i];
@@ -373,7 +373,7 @@ LONG CKey::GetValue_Strings(LPCTSTR valueName, UStringVector &strings)
   size_t numChars = dataSize / sizeof(wchar_t);
   size_t prev = 0;
   UString s;
-  
+
   for (size_t i = 0; i < numChars; i++)
   {
     if (data[i] == 0)
@@ -383,7 +383,7 @@ LONG CKey::GetValue_Strings(LPCTSTR valueName, UStringVector &strings)
       prev = i + 1;
     }
   }
-  
+
   return res;
 }
 

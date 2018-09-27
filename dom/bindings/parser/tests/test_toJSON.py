@@ -129,7 +129,7 @@ def WebIDLTest(parser, harness):
         doTest("interface Test { record<DOMString, %s> toJSON(); };" % type, False,
                "record<DOMString, %s> should be a JSON type" % type)
 
-        doTest("interface Test { record<ByteString, %s> toJSON(); };" % type, False, 
+        doTest("interface Test { record<ByteString, %s> toJSON(); };" % type, False,
                "record<ByteString, %s> should be a JSON type" % type)
 
         doTest("interface Test { record<USVString, %s> toJSON(); };" % type, False,
@@ -159,7 +159,7 @@ def WebIDLTest(parser, harness):
                "sequence<%s> should not be a JSON type" % type)
 
         doTest("dictionary Foo { %s foo; }; "
-               "interface Test { Foo toJSON(); }; " % type, True, 
+               "interface Test { Foo toJSON(); }; " % type, True,
                "Dictionary containing a non-JSON type (%s) should not be a JSON type" % type)
 
         doTest("dictionary Foo { %s foo; }; dictionary Bar : Foo { }; "
@@ -174,12 +174,12 @@ def WebIDLTest(parser, harness):
 
         doTest("interface Test { record<USVString, %s> toJSON(); };" % type, True,
                "record<USVString, %s> should not be a JSON type" % type)
-        
+
         if type != "any":
             doTest("interface Foo { object toJSON(); }; "
                    "interface Test { (Foo or %s) toJSON(); };" % type, True,
                    "union containing a non-JSON type (%s) should not be a JSON type" % type)
-        
+
             doTest("interface test { %s? toJSON(); };" % type, True,
                    "Nullable type (%s) should not be a JSON type" % type)
 
@@ -188,5 +188,5 @@ def WebIDLTest(parser, harness):
            "dictionary containing a non-JSON type should not be a JSON type")
 
     doTest("interface Foo : InterfaceWithoutToJSON { }; "
-           "interface Test { Foo toJSON(); };", True, 
+           "interface Test { Foo toJSON(); };", True,
            "interface without toJSON should not be a JSON type")

@@ -1,5 +1,5 @@
 #!/bin/sh
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -19,7 +19,7 @@ if [ -z "${NIST_FILES_DIR}" ] ; then
     Display "The environment variable NIST_FILES_DIR is not defined. Therefore"
     Display "tests depending on it will be skipped. To enable these tests set"
     Display "NIST_FILES_DIR to the directory where NIST Certificates and CRLs"
-    Display "are located." 
+    Display "are located."
     Display "*******************************************************************************"
     Display ""
     doNIST=0
@@ -40,7 +40,7 @@ if [ ${doPD} -eq 1 -a -z "${PDVAL}" ] ; then
     Display "*******************************************************************************"
     Display "The environment variable PDVAL is not defined. Therefore tests"
     Display "depending on it will be skipped. To enable these tests set PDVAL to"
-    Display "the directory where NIST Path Discovery Certificates are located." 
+    Display "the directory where NIST Path Discovery Certificates are located."
     Display "*******************************************************************************"
     Display ""
     doNIST_PDTest=0
@@ -61,7 +61,7 @@ if [  ${doOCSP} -eq 1 -a -z "${OCSP}" ] ; then
     Display "*******************************************************************************"
     Display "The environment variable OCSP is not defined. Therefore tests"
     Display "depending on it will be skipped. To enable these tests set OCSP"
-    Display "non-NULL (the actual URI used is taken from the AIA extension)." 
+    Display "non-NULL (the actual URI used is taken from the AIA extension)."
     Display "*******************************************************************************"
     Display ""
     doOCSPTest=0

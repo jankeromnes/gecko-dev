@@ -111,7 +111,7 @@ typedef struct {
   MDFloatingSaveAreaX86 float_save;
 
   /* The next 4 registers are included with MD_CONTEXT_X86_SEGMENTS */
-  uint32_t             gs; 
+  uint32_t             gs;
   uint32_t             fs;
   uint32_t             es;
   uint32_t             ds;

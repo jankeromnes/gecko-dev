@@ -1,4 +1,4 @@
 (function() {}).apply(null, (function() {
     var x;
-    return (x = arguments);  
+    return (x = arguments);
 })());

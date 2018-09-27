@@ -23,7 +23,7 @@ namespace media {
 
 // Used by BaseFilter to enumerate pins on a DirectShow filter.
 // If the number of pins on the filter changes while an EnumPins
-// is enumerating pins on a filter, methods start failing with 
+// is enumerating pins on a filter, methods start failing with
 // return value VFW_E_ENUM_OUT_OF_SYNC. Really only an issue when
 // doing dynamic filter reconnections.
 //
@@ -90,15 +90,15 @@ public:
   {
     if (!aPinArray)
       return E_POINTER;
-  
+
     if (!aNumFetched && aNumPins != 1)
       return E_INVALIDARG;
-  
+
     if (IsOutOfSync())
       return VFW_E_ENUM_OUT_OF_SYNC;
-    
+
     unsigned int numFetched = 0;
-  
+
     while (numFetched < aNumPins && mPinIdx < mNumPins) {
       IPinPtr pin = mFilter->GetPin(mPinIdx);
       aPinArray[numFetched] = pin;
@@ -114,11 +114,11 @@ public:
       mPinIdx++;
       numFetched++;
     }
-  
+
     if (aNumFetched)
       *aNumFetched = numFetched;
-  
-  
+
+
     return (aNumPins == numFetched) ? S_OK : S_FALSE;
   }
 
@@ -126,12 +126,12 @@ public:
   {
     if (IsOutOfSync())
       return VFW_E_ENUM_OUT_OF_SYNC;
-  
+
     if ((mPinIdx + aNumPins) > mNumPins)
       return S_FALSE;
-  
+
     mPinIdx += aNumPins;
-  
+
     return S_OK;
   }
 
@@ -146,15 +146,15 @@ public:
   {
     if (!aEnum)
       return E_POINTER;
-  
+
     if (IsOutOfSync())
       return VFW_E_ENUM_OUT_OF_SYNC;
-  
+
     EnumPins *p = new EnumPins(this);
 
     *aEnum = p;
     NS_IF_ADDREF(p);
-  
+
     return S_OK;
   }
 private:
@@ -456,7 +456,7 @@ BaseFilter::NotifyEvent(long aEventCode,
   return E_NOTIMPL;
 }
 
-STDMETHODIMP_(ULONG) 
+STDMETHODIMP_(ULONG)
 BaseFilter::AddRef()
 {
   return ::InterlockedIncrement(&mRefCnt);

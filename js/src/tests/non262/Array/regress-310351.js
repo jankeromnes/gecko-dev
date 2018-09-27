@@ -21,7 +21,7 @@ else
 {
   printStatus('test using dummy array since no document available');
 }
- 
+
 var array = Array.prototype.slice.call(nodeList, 0);
 
 expect = 'Array';

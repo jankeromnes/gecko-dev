@@ -18,15 +18,15 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = 'SyntaxError: illegal character';
 
   var formatcontrolchars = ['\u200E',
-                            '\u0600', 
-                            '\u0601', 
-                            '\u0602', 
-                            '\u0603', 
-                            '\u06DD', 
+                            '\u0600',
+                            '\u0601',
+                            '\u0602',
+                            '\u0603',
+                            '\u06DD',
                             '\u070F'];
 
   for (var i = 0; i < formatcontrolchars.length; i++)

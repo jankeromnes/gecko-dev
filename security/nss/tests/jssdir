@@ -10,11 +10,11 @@ else
 	setenv JSSVER $1
 endif
 
-if ( ! ${?QAYEAR} ) then 
+if ( ! ${?QAYEAR} ) then
         setenv QAYEAR `date +%Y`
 else if ( "$QAYEAR" == ""  ) then
 	setenv QAYEAR `date +%Y`
-	
+
 endif
 
 setenv JSS_VER_DIR /share/builds/mccrel3/jss/jss$JSSVER

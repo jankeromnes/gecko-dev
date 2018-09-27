@@ -572,7 +572,7 @@ IMMHandler::OnUpdateComposition(nsWindow* aWindow)
   if (!gIMMHandler) {
     return;
   }
- 
+
   if (aWindow->PluginHasFocus()) {
     return;
   }
@@ -1483,7 +1483,7 @@ IMMHandler::HandleComposition(nsWindow* aWindow,
       ("HandleComposition, GCS_COMPCLAUSE, useA_API=%s",
        useA_API ? "TRUE" : "FALSE"));
 
-    long clauseArrayLength2 = 
+    long clauseArrayLength2 =
       useA_API ?
         ::ImmGetCompositionStringA(aContext.get(), GCS_COMPCLAUSE,
                                    mClauseArray.Elements(),
@@ -1513,7 +1513,7 @@ IMMHandler::HandleComposition(nsWindow* aWindow,
         mClauseArray[0] = 0; // first value must be 0
         for (int32_t i = 1; i < clauseArrayLength; i++) {
           uint32_t len = std::min(mClauseArray[i], maxlen);
-          mClauseArray[i] = ::MultiByteToWideChar(GetKeyboardCodePage(), 
+          mClauseArray[i] = ::MultiByteToWideChar(GetKeyboardCodePage(),
                                                   MB_PRECOMPOSED,
                                                   (LPCSTR)compANSIStr.get(),
                                                   len, nullptr, 0);
@@ -1532,7 +1532,7 @@ IMMHandler::HandleComposition(nsWindow* aWindow,
   //--------------------------------------------------------
   // 3. Get GCS_COMPATTR
   //--------------------------------------------------------
-  // This provides us with the attribute string necessary 
+  // This provides us with the attribute string necessary
   // for doing hiliting
   long attrArrayLength =
     ::ImmGetCompositionStringW(aContext.get(), GCS_COMPATTR, nullptr, 0);

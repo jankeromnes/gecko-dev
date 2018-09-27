@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
   for (let d=0;d<2;++d) for (let a=0;a<1;++a) "" + (d && function(){});
 

@@ -78,29 +78,29 @@ HRESULT CExternalCodecs::Load()
   if (GetCodecs)
   {
     CCodecInfoEx info;
-    
+
     UString s;
     UInt32 num;
     RINOK(GetCodecs->GetNumMethods(&num));
-    
+
     for (UInt32 i = 0; i < num; i++)
     {
       NWindows::NCOM::CPropVariant prop;
-      
+
       RINOK(GetCodecs->GetProperty(i, NMethodPropID::kID, &prop));
       if (prop.vt != VT_UI8)
         continue; // old Interface
       info.Id = prop.uhVal.QuadPart;
-      
+
       prop.Clear();
-      
+
       info.Name.Empty();
       RINOK(GetCodecs->GetProperty(i, NMethodPropID::kName, &prop));
       if (prop.vt == VT_BSTR)
         info.Name.SetFromWStr_if_Ascii(prop.bstrVal);
       else if (prop.vt != VT_EMPTY)
         continue;
-      
+
       RINOK(ReadNumberOfStreams(GetCodecs, i, NMethodPropID::kPackStreams, info.NumStreams));
       {
         UInt32 numUnpackStreams = 1;
@@ -110,16 +110,16 @@ HRESULT CExternalCodecs::Load()
       }
       RINOK(ReadIsAssignedProp(GetCodecs, i, NMethodPropID::kEncoderIsAssigned, info.EncoderIsAssigned));
       RINOK(ReadIsAssignedProp(GetCodecs, i, NMethodPropID::kDecoderIsAssigned, info.DecoderIsAssigned));
-      
+
       Codecs.Add(info);
     }
   }
-  
+
   if (GetHashers)
   {
     UInt32 num = GetHashers->GetNumHashers();
     CHasherInfoEx info;
-    
+
     for (UInt32 i = 0; i < num; i++)
     {
       NWindows::NCOM::CPropVariant prop;
@@ -128,20 +128,20 @@ HRESULT CExternalCodecs::Load()
       if (prop.vt != VT_UI8)
         continue;
       info.Id = prop.uhVal.QuadPart;
-      
+
       prop.Clear();
-      
+
       info.Name.Empty();
       RINOK(GetHashers->GetHasherProp(i, NMethodPropID::kName, &prop));
       if (prop.vt == VT_BSTR)
         info.Name.SetFromWStr_if_Ascii(prop.bstrVal);
       else if (prop.vt != VT_EMPTY)
         continue;
-      
+
       Hashers.Add(info);
     }
   }
-  
+
   return S_OK;
 }
 
@@ -167,9 +167,9 @@ int FindMethod_Index(
       return i;
     }
   }
-  
+
   #ifdef EXTERNAL_CODECS
-  
+
   CHECK_GLOBAL_CODECS
 
   if (__externalCodecs)
@@ -184,9 +184,9 @@ int FindMethod_Index(
         return g_NumCodecs + i;
       }
     }
-  
+
   #endif
-  
+
   return -1;
 }
 
@@ -202,9 +202,9 @@ static int FindMethod_Index(
     if (codec.Id == methodId && (encode ? codec.CreateEncoder : codec.CreateDecoder))
       return i;
   }
-  
+
   #ifdef EXTERNAL_CODECS
-  
+
   CHECK_GLOBAL_CODECS
 
   if (__externalCodecs)
@@ -214,9 +214,9 @@ static int FindMethod_Index(
       if (codec.Id == methodId && (encode ? codec.EncoderIsAssigned : codec.DecoderIsAssigned))
         return g_NumCodecs + i;
     }
-  
+
   #endif
-  
+
   return -1;
 }
 
@@ -227,7 +227,7 @@ bool FindMethod(
     AString &name)
 {
   name.Empty();
- 
+
   unsigned i;
   for (i = 0; i < g_NumCodecs; i++)
   {
@@ -238,7 +238,7 @@ bool FindMethod(
       return true;
     }
   }
-  
+
   #ifdef EXTERNAL_CODECS
 
   CHECK_GLOBAL_CODECS
@@ -253,9 +253,9 @@ bool FindMethod(
         return true;
       }
     }
-  
+
   #endif
-  
+
   return false;
 }
 
@@ -274,7 +274,7 @@ bool FindHashMethod(
       return true;
     }
   }
-  
+
   #ifdef EXTERNAL_CODECS
 
   CHECK_GLOBAL_CODECS
@@ -289,9 +289,9 @@ bool FindHashMethod(
         return true;
       }
     }
-  
+
   #endif
-  
+
   return false;
 }
 
@@ -303,15 +303,15 @@ void GetHashMethods(
   unsigned i;
   for (i = 0; i < g_NumHashers; i++)
     methods[i] = (*g_Hashers[i]).Id;
-  
+
   #ifdef EXTERNAL_CODECS
-  
+
   CHECK_GLOBAL_CODECS
 
   if (__externalCodecs)
     for (i = 0; i < __externalCodecs->Hashers.Size(); i++)
       methods.Add(__externalCodecs->Hashers[i].Id);
-  
+
   #endif
 }
 
@@ -358,7 +358,7 @@ HRESULT CreateCoder_Index(
   #ifdef EXTERNAL_CODECS
 
   CHECK_GLOBAL_CODECS
-  
+
   if (__externalCodecs)
   {
     i -= g_NumCodecs;
@@ -419,7 +419,7 @@ HRESULT CreateCoder_Index(
       EXTERNAL_CODECS_LOC_VARS
       index, encode,
       filter, cod);
-  
+
   if (filter)
   {
     cod.IsFilter = true;
@@ -427,7 +427,7 @@ HRESULT CreateCoder_Index(
     cod.Coder = coderSpec;
     coderSpec->Filter = filter;
   }
-  
+
   return res;
 }
 
@@ -455,7 +455,7 @@ HRESULT CreateCoder_Id(
       EXTERNAL_CODECS_LOC_VARS
       methodId, encode,
       filter, cod);
-  
+
   if (filter)
   {
     cod.IsFilter = true;
@@ -463,7 +463,7 @@ HRESULT CreateCoder_Id(
     cod.Coder = coderSpec;
     coderSpec->Filter = filter;
   }
-  
+
   return res;
 }
 

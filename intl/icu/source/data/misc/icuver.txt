@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 
-icuver:table(nofallback){ 
+icuver:table(nofallback){
     DataVersion { "62.1.0.0" }
     ICUVersion  { "62.1.0.0" }
 }

@@ -3,7 +3,7 @@
         xmlns:math="http://www.w3.org/1998/Math/MathML"
         class="reftest-wait"
         onload="boom();">
-        
+
 <html:style type="text/css">
 [class="mp"] { display: -moz-popup; }
 </html:style>

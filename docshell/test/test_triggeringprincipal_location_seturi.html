@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -75,7 +75,7 @@ function checkLoadFrame2() {
   myFrame2.contentWindow.location.hash = "#foo";
   is(SpecialPowers.wrap(myFrame2.contentWindow).location.href, "about:blank#foo",
       "about:blank#foo frame loaded");
-  
+
   myFrame2.addEventListener('load', checkHistoryFrame2);
   myFrame2.src = "about:blank";
 }

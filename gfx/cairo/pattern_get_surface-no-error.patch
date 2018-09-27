@@ -12,18 +12,18 @@ diff --git a/gfx/cairo/cairo/src/cairo-pattern.c b/gfx/cairo/cairo/src/cairo-pat
  			   cairo_surface_t **surface)
  {
      cairo_surface_pattern_t *spat = (cairo_surface_pattern_t*) pattern;
- 
+
      if (pattern->status)
  	return pattern->status;
- 
+
      if (pattern->type != CAIRO_PATTERN_TYPE_SURFACE)
 -	return _cairo_error (CAIRO_STATUS_PATTERN_TYPE_MISMATCH);
 +	return CAIRO_STATUS_PATTERN_TYPE_MISMATCH;
- 
+
      if (surface)
  	*surface = spat->surface;
- 
+
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
  /**

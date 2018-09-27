@@ -99,7 +99,7 @@ public:
     template<typename U>
     operator TemporaryRef<U>() { return TemporaryRef<U>(ptr); }
 
-    /** 
+    /**
      * WARNING for ease of use, passing a reference will release/clear out ptr!
      * We null out the ptr before returning its address so people passing byref
      * as input will most likely get functions returning errors rather than accessing

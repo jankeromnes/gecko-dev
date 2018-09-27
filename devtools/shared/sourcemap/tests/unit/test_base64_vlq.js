@@ -60,9 +60,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var base64VLQ = __webpack_require__(1);
-	
+
 	exports['test normal encoding and decoding'] = function (assert) {
 	  var result = {};
 	  for (var i = -255; i < 256; i++) {
@@ -114,9 +114,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 	 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	 */
-	
+
 	var base64 = __webpack_require__(2);
-	
+
 	// A single base 64 digit can contain 6 bits of data. For the base 64 variable
 	// length quantities we use in the source map spec, the first bit is the sign,
 	// the next four bits are the actual value, and the 6th bit is the
@@ -128,18 +128,18 @@ var SOURCE_MAP_TEST_MODULE =
 	//   |    |
 	//   V    V
 	//   101011
-	
+
 	var VLQ_BASE_SHIFT = 5;
-	
+
 	// binary: 100000
 	var VLQ_BASE = 1 << VLQ_BASE_SHIFT;
-	
+
 	// binary: 011111
 	var VLQ_BASE_MASK = VLQ_BASE - 1;
-	
+
 	// binary: 100000
 	var VLQ_CONTINUATION_BIT = VLQ_BASE;
-	
+
 	/**
 	 * Converts from a two-complement value to a value where the sign bit is
 	 * placed in the least significant bit.  For example, as decimals:
@@ -151,7 +151,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    ? ((-aValue) << 1) + 1
 	    : (aValue << 1) + 0;
 	}
-	
+
 	/**
 	 * Converts to a two-complement value from a value where the sign bit is
 	 * placed in the least significant bit.  For example, as decimals:
@@ -165,16 +165,16 @@ var SOURCE_MAP_TEST_MODULE =
 	    ? -shifted
 	    : shifted;
 	}
-	
+
 	/**
 	 * Returns the base 64 VLQ encoded value.
 	 */
 	exports.encode = function base64VLQ_encode(aValue) {
 	  var encoded = "";
 	  var digit;
-	
+
 	  var vlq = toVLQSigned(aValue);
-	
+
 	  do {
 	    digit = vlq & VLQ_BASE_MASK;
 	    vlq >>>= VLQ_BASE_SHIFT;
@@ -185,10 +185,10 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	    encoded += base64.encode(digit);
 	  } while (vlq > 0);
-	
+
 	  return encoded;
 	};
-	
+
 	/**
 	 * Decodes the next base 64 VLQ value from the given string and returns the
 	 * value and the rest of the string via the out parameter.
@@ -198,23 +198,23 @@ var SOURCE_MAP_TEST_MODULE =
 	  var result = 0;
 	  var shift = 0;
 	  var continuation, digit;
-	
+
 	  do {
 	    if (aIndex >= strLen) {
 	      throw new Error("Expected more digits in base 64 VLQ value.");
 	    }
-	
+
 	    digit = base64.decode(aStr.charCodeAt(aIndex++));
 	    if (digit === -1) {
 	      throw new Error("Invalid base64 digit: " + aStr.charAt(aIndex - 1));
 	    }
-	
+
 	    continuation = !!(digit & VLQ_CONTINUATION_BIT);
 	    digit &= VLQ_BASE_MASK;
 	    result = result + (digit << shift);
 	    shift += VLQ_BASE_SHIFT;
 	  } while (continuation);
-	
+
 	  aOutParam.value = fromVLQSigned(result);
 	  aOutParam.rest = aIndex;
 	};
@@ -230,9 +230,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var intToCharMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split('');
-	
+
 	/**
 	 * Encode an integer in the range of 0 to 63 to a single base 64 digit.
 	 */
@@ -242,7 +242,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	  throw new TypeError("Must be between 0 and 63: " + number);
 	};
-	
+
 	/**
 	 * Decode a single base 64 character code digit to an integer. Returns -1 on
 	 * failure.
@@ -250,44 +250,44 @@ var SOURCE_MAP_TEST_MODULE =
 	exports.decode = function (charCode) {
 	  var bigA = 65;     // 'A'
 	  var bigZ = 90;     // 'Z'
-	
+
 	  var littleA = 97;  // 'a'
 	  var littleZ = 122; // 'z'
-	
+
 	  var zero = 48;     // '0'
 	  var nine = 57;     // '9'
-	
+
 	  var plus = 43;     // '+'
 	  var slash = 47;    // '/'
-	
+
 	  var littleOffset = 26;
 	  var numberOffset = 52;
-	
+
 	  // 0 - 25: ABCDEFGHIJKLMNOPQRSTUVWXYZ
 	  if (bigA <= charCode && charCode <= bigZ) {
 	    return (charCode - bigA);
 	  }
-	
+
 	  // 26 - 51: abcdefghijklmnopqrstuvwxyz
 	  if (littleA <= charCode && charCode <= littleZ) {
 	    return (charCode - littleA + littleOffset);
 	  }
-	
+
 	  // 52 - 61: 0123456789
 	  if (zero <= charCode && charCode <= nine) {
 	    return (charCode - zero + numberOffset);
 	  }
-	
+
 	  // 62: +
 	  if (charCode == plus) {
 	    return 62;
 	  }
-	
+
 	  // 63: /
 	  if (charCode == slash) {
 	    return 63;
 	  }
-	
+
 	  // Invalid base64 digit.
 	  return -1;
 	};

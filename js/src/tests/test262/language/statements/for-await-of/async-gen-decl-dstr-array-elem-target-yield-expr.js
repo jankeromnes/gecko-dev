@@ -34,7 +34,7 @@ async function * fn() {
   for await ([ x[yield] ] of [[33]
 
 ]) {
-    
+
     iterCount += 1;
   }
 }

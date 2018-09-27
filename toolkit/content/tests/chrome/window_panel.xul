@@ -221,7 +221,7 @@ var tests = [
 
       panel.addEventListener("mousemove", mouseMoved, true);
       synthesizeMouse(panel, 10, 10, { type: "mousemove" });
-      ok(gotMouseEvent, "mouse event on panel");      
+      ok(gotMouseEvent, "mouse event on panel");
       panel.removeEventListener("mousemove", mouseMoved, true);
 
       var tree = $("tree");

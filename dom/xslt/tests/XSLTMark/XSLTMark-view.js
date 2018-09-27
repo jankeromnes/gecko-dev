@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-var view = 
+var view =
 {
     configUrl: null,
     testArray: null,
@@ -68,7 +68,7 @@ var view =
         this.mCurrentProgress = document.getElementById('currentProgress');
         this.mTotalProgress = document.getElementById('totalProgress');
         this.mOutput = document.getElementById('transformOutput');
-        this.mDetailOutput = 
+        this.mDetailOutput =
             document.getElementById('transformDetailedOutput');
         this.mDetail = true;
     },

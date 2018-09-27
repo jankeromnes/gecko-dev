@@ -20,17 +20,17 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
 class TmpBase {
     get isGP() { return this.type == GP; }
     get isFP() { return this.type == FP; }
-    
+
     get isGPR() { return this.isReg && this.isGP; }
     get isFPR() { return this.isReg && this.isFP; }
-    
+
     get reg()
     {
         if (!this.isReg)
@@ -44,7 +44,7 @@ class TmpBase {
             throw new Error("Called .gpr on non-GPR");
         return this;
     }
-    
+
     get fpr()
     {
         if (!this.isFPR)

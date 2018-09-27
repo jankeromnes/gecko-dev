@@ -6,9 +6,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,10 +20,10 @@ package org.mozilla.apache.commons.codec.language;
 
 /**
  * Encodes a string into a Caverphone 2.0 value.
- * 
+ *
  * This is an algorithm created by the Caversham Project at the University of Otago. It implements the Caverphone 2.0
  * algorithm:
- * 
+ *
  * @author Apache Software Foundation
  * @version $Id: Caverphone.java 1075947 2011-03-01 17:56:14Z ggregory $
  * @see <a href="http://en.wikipedia.org/wiki/Caverphone">Wikipedia - Caverphone</a>
@@ -36,7 +36,7 @@ public class Caverphone2 extends AbstractCaverphone {
 
     /**
      * Encodes the given String into a Caverphone 2.0 value.
-     * 
+     *
      * @param source
      *            String the source string
      * @return A caverphone code for the given String

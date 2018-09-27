@@ -1,4 +1,4 @@
-!  
+!
 ! This Source Code Form is subject to the terms of the Mozilla Public
 ! License, v. 2.0. If a copy of the MPL was not distributed with this
 ! file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -140,7 +140,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x0084	     (20 21) */		ble,a,pt	%icc,.L900000114	! tprob=0.86
 /* 0x0088	     (21 24) */		ldd	[%g1],%f8
                                    .L77000116:		/* frequency 1.0 confidence 0.0 */
-/* 0x008c	     ( 0  2) */		retl	! Result = 
+/* 0x008c	     ( 0  2) */		retl	! Result =
 /* 0x0090	     ( 1  2) */		nop
 /* 0x0094	   0 ( 0  0) */		.type	cleanup,2
 /* 0x0094	     ( 0  0) */		.size	cleanup,(.-cleanup)
@@ -329,7 +329,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x0204	     ( 5  6) */		sll	%o7,2,%g4
 /* 0x0208	     ( 5  6) */		and	%g2,%g3,%g2
 /* 0x020c	     ( 6  7) */		st	%g2,[%g5+%g4]
-/* 0x0210	     ( 7  9) */		ret	! Result = 
+/* 0x0210	     ( 7  9) */		ret	! Result =
 /* 0x0214	     ( 9 10) */		restore	%g0,%g0,%g0
 /* 0x0218	   0 ( 0  0) */		.type	conv_d16_to_i32,2
 /* 0x0218	     ( 0  0) */		.size	conv_d16_to_i32,(.-conv_d16_to_i32)
@@ -432,7 +432,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x0110	     ( 4  5) */		ble,a,pt	%icc,.L900000309	! tprob=0.86
 /* 0x0114	     ( 6  9) */		ld	[%g4],%f1
                                    .L77000140:		/* frequency 1.0 confidence 0.0 */
-/* 0x0118	     ( 0  2) */		retl	! Result = 
+/* 0x0118	     ( 0  2) */		retl	! Result =
 /* 0x011c	     ( 1  2) */		nop
 /* 0x0120	   0 ( 0  0) */		.type	conv_i32_to_d32,2
 /* 0x0120	     ( 0  0) */		.size	conv_i32_to_d32,(.-conv_i32_to_d32)
@@ -520,7 +520,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x00c0	     (11 14) */		ld	[%sp+92],%f3
 /* 0x00c4	     (13 16) */		fsubd	%f2,%f0,%f0
 /* 0x00c8	     (13 14) */		std	%f0,[%g2-8]
-/* 0x00cc	     (14 16) */		ret	! Result = 
+/* 0x00cc	     (14 16) */		ret	! Result =
 /* 0x00d0	     (16 17) */		restore	%g0,%g0,%g0
                                    .L77000154:		/* frequency 0.7 confidence 0.0 */
 /* 0x00d4	 111 ( 0  3) */		ld	[%o7],%o0
@@ -545,7 +545,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x011c	     (13 14) */		ble,a,pt	%icc,.L900000410	! tprob=0.86
 /* 0x0120	     (14 17) */		ld	[%o7],%o0
                                    .L77000150:		/* frequency 1.0 confidence 0.0 */
-/* 0x0124	     ( 0  2) */		ret	! Result = 
+/* 0x0124	     ( 0  2) */		ret	! Result =
 /* 0x0128	     ( 2  3) */		restore	%g0,%g0,%g0
 /* 0x012c	   0 ( 0  0) */		.type	conv_i32_to_d16,2
 /* 0x012c	     ( 0  0) */		.size	conv_i32_to_d16,(.-conv_i32_to_d16)
@@ -576,7 +576,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 !  120		                    !			  double * /*result16*/, double * /* result32 */,
 !  121		                    !			  float *  /*source - should be unsigned int*
 !  122		                    !		          	       converted to float* */);
-!  126		                    !void conv_i32_to_d32_and_d16(double *d32, double *d16, 
+!  126		                    !void conv_i32_to_d32_and_d16(double *d32, double *d16,
 !  127		                    !			     unsigned int *i32, int len)
 !  128		                    !{
 !  129		                    !int i;
@@ -784,7 +784,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x02c4	     (18 19) */		bl,a,pt	%icc,.L900000513	! tprob=0.86
 /* 0x02c8	     (19 22) */		ld	[%o0],%f3
                                    .L77000164:		/* frequency 1.0 confidence 0.0 */
-/* 0x02cc	     ( 0  2) */		ret	! Result = 
+/* 0x02cc	     ( 0  2) */		ret	! Result =
 /* 0x02d0	     ( 2  3) */		restore	%g0,%g0,%g0
 /* 0x02d4	   0 ( 0  0) */		.type	conv_i32_to_d32_and_d16,2
 /* 0x02d4	     ( 0  0) */		.size	conv_i32_to_d32_and_d16,(.-conv_i32_to_d32_and_d16)
@@ -913,7 +913,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x0114	 164 ( 2  3) */		sub	%g1,%g2,%g1
 /* 0x0118	     ( 3  4) */		add	%g1,%g5,%g1
 /* 0x011c	 167 ( 4  5) */		and	%g1,%g3,%g2
-/* 0x0120	     ( 5  7) */		retl	! Result = 
+/* 0x0120	     ( 5  7) */		retl	! Result =
 /* 0x0124	     ( 6  7) */		st	%g2,[%o4-4]
                                    .L77000199:		/* frequency 0.6 confidence 0.0 */
 /* 0x0128	 166 ( 0  3) */		ld	[%o4],%g1
@@ -931,7 +931,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x0154	     ( 4  5) */		ble,a,pt	%icc,.L900000609	! tprob=0.84
 /* 0x0158	     ( 4  7) */		ld	[%o4],%g1
                                    .L77000191:		/* frequency 1.0 confidence 0.0 */
-/* 0x015c	     ( 0  2) */		retl	! Result = 
+/* 0x015c	     ( 0  2) */		retl	! Result =
 /* 0x0160	     ( 1  2) */		nop
 /* 0x0164	   0 ( 0  0) */		.type	adjust_montf_result,2
 /* 0x0164	     ( 0  0) */		.size	adjust_montf_result,(.-adjust_montf_result)
@@ -1000,7 +1000,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 !  216		                    !	     pdtj[2*i]+=pdm1[i]*m2j+pdn[i]*digit;
 !  217		                    !	   }
 !  218		                    ! 	 if((jj==30)) {cleanup(dt,j/2+1,2*nlen+1); jj=0;}
-!  219		                    !	 
+!  219		                    !
 !  220		                    !	 digit=mod(lower32(b,Zero)*dn0,TwoToMinus16,TwoTo16);
 !  221		                    !       }
 !  222		                    !   }
@@ -1054,7 +1054,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 !  276		                    !       }
 !  277		                    !   }
 !  279		                    ! conv_d16_to_i32(result,dt+2*nlen,(long long *)dt,nlen+1);
-!  281		                    ! adjust_montf_result(result,nint,nlen); 
+!  281		                    ! adjust_montf_result(result,nint,nlen);
 
 /* 0x002c	 281 ( 4  5) */		or	%g0,1,%o4
 /* 0x0030	 187 ( 6  9) */		ldd	[%fp+96],%f0
@@ -1314,7 +1314,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x03e0	 220 ( 0  1) */		ba	.L900000748	! tprob=1.00
 /* 0x03e4	     ( 0  1) */		sll	%g1,4,%g2
 
-	
+
                                    .L77000289:		/* frequency 0.8 confidence 0.0 */
 /* 0x03e8	 225 ( 0  3) */		ldd	[%o1],%f6
 /* 0x03ec	 242 ( 0  1) */		add	%g4,-8,%g2
@@ -1437,7 +1437,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 	ldd [%i1+112],%f58
 
 	ldd [%i4+112],%f60
-	ldd [%i4+8],%f28	
+	ldd [%i4+8],%f28
 	ldd [%i4+104],%f38
 
 	nop
@@ -1492,7 +1492,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 !!!
 	ldd	[%o2+8],%f8
 	faddd	%f20,%f22,%f20
-	fmuld	%f50,%f0,%f50	
+	fmuld	%f50,%f0,%f50
 !12
 !!!
 	std	%f20,[%o2+16]
@@ -1689,11 +1689,11 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 !55
 	std %f8,[%o2]
 
-	
-	
-	
-	
-	
+
+
+
+
+
 	                                   .L77000285:		/* frequency 1.0 confidence 0.0 */
 /* 0x07a8	 279 ( 0  1) */		sll	%g1,4,%g2
                                    .L900000748:		/* frequency 1.0 confidence 0.0 */
@@ -1913,7 +1913,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x0acc	     ( 3  4) */		add	%o0,%o5,%o0
 /* 0x0ad0	     ( 4  5) */		and	%o0,%o4,%o1
 /* 0x0ad4	     ( 4  5) */		st	%o1,[%o3-4]
-/* 0x0ad8	     ( 5  7) */		ret	! Result = 
+/* 0x0ad8	     ( 5  7) */		ret	! Result =
 /* 0x0adc	     ( 7  8) */		restore	%g0,%g0,%g0
                                    .L77000288:		/* frequency 0.6 confidence 0.0 */
 /* 0x0ae0	     ( 0  3) */		ld	[%o3],%o0
@@ -1931,7 +1931,7 @@ TwoToMinus32:		/* frequency 1.0 confidence 0.0 */
 /* 0x0b0c	     ( 4  5) */		ble,a,pt	%icc,.L900000742	! tprob=0.84
 /* 0x0b10	     ( 4  7) */		ld	[%o3],%o0
                                    .L77000224:		/* frequency 1.0 confidence 0.0 */
-/* 0x0b14	     ( 0  2) */		ret	! Result = 
+/* 0x0b14	     ( 0  2) */		ret	! Result =
 /* 0x0b18	     ( 2  3) */		restore	%g0,%g0,%g0
 /* 0x0b1c	   0 ( 0  0) */		.type	mont_mulf_noconv,2
 /* 0x0b1c	     ( 0  0) */		.size	mont_mulf_noconv,(.-mont_mulf_noconv)

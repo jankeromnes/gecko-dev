@@ -10,13 +10,13 @@ description: Testing FunctionExpression too
 ---*/
 
 var check=0;
-while(function f(){}){    
+while(function f(){}){
   if(typeof(f) === "function") {
     check = -1;
-    break; 
+    break;
   } else {
     check = 1;
-    break; 
+    break;
   }
 }
 

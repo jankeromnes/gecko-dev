@@ -115,9 +115,9 @@ bool IsDevicePath(CFSTR s) throw()
     return false;
   // for reading use SG_REQ sg; if (DeviceIoControl(dsk, IOCTL_DISK_READ));
   */
-  
+
   #else
-  
+
   if (!IS_DEVICE_PATH(s))
     return false;
   unsigned len = MyStringLen(s);
@@ -129,7 +129,7 @@ bool IsDevicePath(CFSTR s) throw()
     if (s[i] < '0' || s[i] > '9')
       return false;
   return true;
-  
+
   #endif
 }
 
@@ -372,7 +372,7 @@ static bool ResolveDotsFolders(UString &s)
   #ifdef _WIN32
   // s.Replace(L'/', WCHAR_PATH_SEPARATOR);
   #endif
-  
+
   for (unsigned i = 0;;)
   {
     const wchar_t c = s[i];
@@ -390,7 +390,7 @@ static bool ResolveDotsFolders(UString &s)
             return false;
           int k = i - 2;
           i += 2;
-          
+
           for (;; k--)
           {
             if (k < 0)
@@ -402,9 +402,9 @@ static bool ResolveDotsFolders(UString &s)
           do
             k--;
           while (k >= 0 && !IS_SEPAR(s[(unsigned)k]));
-          
+
           unsigned num;
-          
+
           if (k >= 0)
           {
             num = i - k;
@@ -415,7 +415,7 @@ static bool ResolveDotsFolders(UString &s)
             num = (c2 == 0 ? i : (i + 1));
             i = 0;
           }
-          
+
           s.Delete(i, num);
           continue;
         }
@@ -542,17 +542,17 @@ int GetUseSuperPathType(CFSTR s) throw()
 static bool GetSuperPathBase(CFSTR s, UString &res)
 {
   res.Empty();
-  
+
   FChar c = s[0];
   if (c == 0)
     return true;
   if (c == '.' && (s[1] == 0 || (s[1] == '.' && s[2] == 0)))
     return true;
-  
+
   if (IsSuperOrDevicePath(s))
   {
     #ifdef LONG_PATH_DOTS_FOLDERS_PARSING
-    
+
     if ((s)[2] == '.')
       return true;
 
@@ -560,7 +560,7 @@ static bool GetSuperPathBase(CFSTR s, UString &res)
 
     if (!AreThereDotsFolders(s + kSuperPathPrefixSize))
       return true;
-    
+
     UString temp = fs2us(s);
     unsigned fixedSize = GetRootPrefixSize_Of_SuperPath(temp);
     if (fixedSize == 0)
@@ -573,7 +573,7 @@ static bool GetSuperPathBase(CFSTR s, UString &res)
     temp.DeleteFrom(fixedSize);
     res += temp;
     res += rem;
-    
+
     #endif
 
     return true;
@@ -651,7 +651,7 @@ static bool GetSuperPathBase(CFSTR s, UString &res)
       superMarker = kSuperUncPrefix;
     }
   }
-  
+
   UString temp;
   if (IS_SEPAR(c))
   {
@@ -675,7 +675,7 @@ static bool GetSuperPathBase(CFSTR s, UString &res)
 /*
   In that case if GetSuperPathBase doesn't return new path, we don't need
   to use same path that was used as main path
-                        
+
   GetSuperPathBase  superPath.IsEmpty() onlyIfNew
      false            *                *          GetCurDir Error
      true            false             *          use Super path
@@ -752,7 +752,7 @@ bool GetFullPath(CFSTR dirPrefix, CFSTR s, FString &res)
   {
     if (!AreThereDotsFolders(s + prefixSize))
       return true;
-    
+
     UString rem = fs2us(s + prefixSize);
     if (!ResolveDotsFolders(rem))
       return true; // maybe false;
@@ -809,7 +809,7 @@ bool GetFullPath(CFSTR dirPrefix, CFSTR s, FString &res)
   }
 
   #endif // _WIN32
-  
+
   UString temp;
   if (IS_SEPAR(s[0]))
   {
@@ -825,7 +825,7 @@ bool GetFullPath(CFSTR dirPrefix, CFSTR s, FString &res)
   curDir.DeleteFrom(fixedSize);
   res = us2fs(curDir);
   res += us2fs(temp);
-  
+
   #endif // UNDER_CE
 
   return true;

@@ -33,7 +33,7 @@ namespace detail {
 class DoneCommitListBuildCallback;
 } // namespace detail
 
-class JumpListBuilder : public nsIJumpListBuilder, 
+class JumpListBuilder : public nsIJumpListBuilder,
                         public nsIObserver
 {
   virtual ~JumpListBuilder();

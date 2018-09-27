@@ -7,5 +7,5 @@ function TryInWhile( object ) {
     try {
       object.thrower()
     } catch ( e ) {
-    }  
+    }
 }

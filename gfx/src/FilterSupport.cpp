@@ -1633,7 +1633,7 @@ ResultOfZeroUnderTransferFunction(const ComponentTransferAttributes& aFunctionAt
     {
       const nsTArray<float>& values =
         aFunctionAttributes.mValues[channel];
-      return values[kComponentTransferOffsetIndex]; 
+      return values[kComponentTransferOffsetIndex];
     }
 
     case SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY:

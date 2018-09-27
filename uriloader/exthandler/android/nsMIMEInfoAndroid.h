@@ -14,10 +14,10 @@ class nsMIMEInfoAndroid final : public nsIMIMEInfo
 {
 public:
   static MOZ_MUST_USE bool
-  GetMimeInfoForMimeType(const nsACString& aMimeType, 
+  GetMimeInfoForMimeType(const nsACString& aMimeType,
                          nsMIMEInfoAndroid** aMimeInfo);
   static MOZ_MUST_USE bool
-  GetMimeInfoForFileExt(const nsACString& aFileExt, 
+  GetMimeInfoForFileExt(const nsACString& aFileExt,
                         nsMIMEInfoAndroid** aMimeInfo);
 
   static MOZ_MUST_USE nsresult

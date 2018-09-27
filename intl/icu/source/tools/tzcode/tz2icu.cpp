@@ -143,7 +143,7 @@ struct ZoneType {
     bool isdst;
     bool isstd;
     bool isgmt;
-    
+
     ZoneType(const SimplifiedZoneType&); // used by optimizeTypeList
 
     ZoneType() : rawoffset(-1), dstoffset(-1), abbr(-1) {}
@@ -380,7 +380,7 @@ void readzoneinfo(ifstream& file, ZoneInfo& info, bool is64bitData) {
                     info.transitions.push_back(Transition(transitionTimes[i], transitionTypes[i]));
                 }
             }
-    
+
             if (minidx != -1) {
                 // If there are any transitions before the 32bit minimum time,
                 // put the type information with the 32bit minimum time
@@ -398,7 +398,7 @@ void readzoneinfo(ifstream& file, ZoneInfo& info, bool is64bitData) {
     }
 
     // Read types (except for the isdst and isgmt flags, which come later (why??))
-    for (i=0; i<typecnt; ++i) { 
+    for (i=0; i<typecnt; ++i) {
         ZoneType type;
 
         type.rawoffset = readcoded(file);
@@ -428,7 +428,7 @@ void readzoneinfo(ifstream& file, ZoneInfo& info, bool is64bitData) {
         if (info.types.at(0).dstoffset != 0) {
             // Initial type's rawoffset is same with the rawoffset after the
             // first transition, but no DST is observed.
-            int64_t rawoffset0 = (info.types.at(info.transitions.at(0).type)).rawoffset;    
+            int64_t rawoffset0 = (info.types.at(info.transitions.at(0).type)).rawoffset;
             // Look for matching type
             for (i=0; i<(int32_t)info.types.size(); ++i) {
                 if (info.types.at(i).rawoffset == rawoffset0
@@ -484,7 +484,7 @@ void readzoneinfo(ifstream& file, ZoneInfo& info, bool is64bitData) {
                 // make the array "abc", "def", "bc", and translate 1
                 // => 2.  NOT CRITICAL since we don't even use the
                 // abbr at this time.
-#if 0                
+#if 0
                 // TODO: Re-enable this warning if we start using
                 // the Olson abbr data, or if the above TODO is completed.
                 ostringstream os;
@@ -606,7 +606,7 @@ void handleFile(string path, string id) {
 void scandir(string dirname, string prefix="") {
     HANDLE          hList;
     WIN32_FIND_DATA FileData;
-    
+
     // Get the first file
     hList = FindFirstFile((dirname + "\\*").c_str(), &FileData);
     if (hList == INVALID_HANDLE_VALUE) {
@@ -630,7 +630,7 @@ void scandir(string dirname, string prefix="") {
                 exit(1);
             }
         }
-        
+
         if (!FindNextFile(hList, &FileData)) {
             if (GetLastError() == ERROR_NO_MORE_FILES) {
                 break;
@@ -1157,7 +1157,7 @@ operator<<(ostream& os, const ZoneMap& zoneinfo) {
     return os;
 }
 
-// print the string list 
+// print the string list
 ostream& printStringList( ostream& os, const ZoneMap& zoneinfo) {
   int32_t n = 0; // count
   int32_t col = 0; // column
@@ -1578,7 +1578,7 @@ int main(int argc, char *argv[]) {
     // Process links (including ICU aliases).  For each link set we have
     // a canonical ID (e.g., America/Los_Angeles) and a set of one or more
     // aliases (e.g., PST, PST8PDT, ...).
-    
+
     // 1. Add all aliases as zone objects in ZONEINFO
     for (map<string,set<string> >::const_iterator i = links.begin();
          i!=links.end(); ++i) {
@@ -1594,7 +1594,7 @@ int main(int argc, char *argv[]) {
             ZONEINFO[*j] = ZoneInfo();
         }
     }
- 
+
     // 2. Create a mapping from zones to index numbers 0..n-1.
     map<string,int32_t> zoneIDs;
     vector<string> zoneIDlist;
@@ -1871,7 +1871,7 @@ int main(int argc, char *argv[]) {
     }
 
     file.close();
-     
+
     if (file) { // recheck error bit
         cout << "Finished writing " << TZ_RESOURCE_NAME << ".txt" << endl;
     } else {

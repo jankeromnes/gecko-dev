@@ -25,7 +25,7 @@
  *  unpacking of bits from bitstream, i.e., vector of bytes
  *---------------------------------------------------------------*/
 
-void WebRtcIlbcfix_PackBits( 
+void WebRtcIlbcfix_PackBits(
     uint16_t *bitstream,   /* (o) The packetized bitstream */
     iLBC_bits *enc_bits,  /* (i) Encoded bits */
     int16_t mode     /* (i) Codec mode (20 or 30) */

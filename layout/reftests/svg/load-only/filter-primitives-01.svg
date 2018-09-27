@@ -9,7 +9,7 @@ function test(e) {
   root.removeAttribute("class")
 }
 
-window.addEventListener("MozReftestInvalidate", test, false); 
+window.addEventListener("MozReftestInvalidate", test, false);
 
   </script>
   <filter id="filter">

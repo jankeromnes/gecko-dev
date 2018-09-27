@@ -9,8 +9,8 @@ description: Checking if execution of "var \n x \n = \n 1" passes
 
 //CHECK#1
 var
-x 
-= 
+x
+=
 1
 
 reportCompare(0, 0);

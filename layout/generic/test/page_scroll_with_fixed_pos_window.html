@@ -70,7 +70,7 @@ function runTest() {
       document.getElementById("bottom").style.height = (window.innerHeight - 20) + "px";
       scrollDownOnePageWithContinuation(function() {
         is(document.documentElement.scrollTop, fullPageScrollDown - 10,
-           "Ignore really big elements when reducing scroll size");   
+           "Ignore really big elements when reducing scroll size");
         document.getElementById("bottom").style.height = "13px";
 
         document.getElementById("top").style.width = "100px";

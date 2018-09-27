@@ -18,10 +18,10 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   try
   {
-    p={}; 
+    p={};
     (p.z = [1].some(function(y) { return y > 0; }) ? 4 : [6])(5);
   }
   catch(ex)

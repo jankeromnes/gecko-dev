@@ -17,7 +17,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
   for (var p in this){} for (let a in [5,6,7]) for (var b=0;b<1;++b) break;
 

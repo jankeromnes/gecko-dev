@@ -219,7 +219,7 @@ public:
    * Does the nsITheme implementation draw its own focus ring for this widget?
    */
   virtual bool ThemeDrawsFocusForWidget(WidgetType aWidgetType) = 0;
-  
+
   /**
     * Should we insert a dropmarker inside of combobox button?
    */

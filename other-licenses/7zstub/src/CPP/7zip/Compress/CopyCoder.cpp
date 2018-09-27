@@ -33,7 +33,7 @@ STDMETHODIMP CCopyCoder::Code(ISequentialInStream *inStream,
   }
 
   TotalSize = 0;
-  
+
   for (;;)
   {
     UInt32 size = kBufSize;
@@ -41,7 +41,7 @@ STDMETHODIMP CCopyCoder::Code(ISequentialInStream *inStream,
       size = (UInt32)(*outSize - TotalSize);
     if (size == 0)
       return S_OK;
-    
+
     HRESULT readRes = inStream->Read(_buf, size, &size);
 
     if (size == 0)

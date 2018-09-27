@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   for (var i = 0; i < 5; i++)
     [(i > 3) ? 'a' : 'b'];
 

@@ -14,18 +14,18 @@ hbox[x] {
 "?>
 <window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         class="reftest-wait">
-  
+
   <script>
   <![CDATA[
-  
-  document.documentElement.addEventListener("MozReftestInvalidate", 
+
+  document.documentElement.addEventListener("MozReftestInvalidate",
     doTest, false);
 
   function doTest() {
     document.getElementById("hbox1").setAttribute("x",1);
-    document.documentElement.removeAttribute("class"); 
+    document.documentElement.removeAttribute("class");
   }
-  
+
   ]]>
   </script>
 

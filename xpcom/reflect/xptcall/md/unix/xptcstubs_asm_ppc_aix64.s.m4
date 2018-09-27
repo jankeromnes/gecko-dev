@@ -17,7 +17,7 @@
 .set f25,25; .set f26,26; .set f27,27; .set f28,28; .set f29,29
 .set f30,30; .set f31,31
 # Define the correct name of the stub function based on the object model
-define(STUB_NAME, 
+define(STUB_NAME,
        ifelse(AIX_OBJMODEL, ibm,
               `Stub'$1`__EI14nsXPTCStubBaseFv',
               `Stub'$1`__14nsXPTCStubBaseFv'))

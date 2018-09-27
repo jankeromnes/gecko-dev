@@ -72,7 +72,7 @@ def runTest(makefile, make, logfile, options):
 
     if retcode != options['returncode']:
         return False, "FAIL (returncode=%i)" % retcode
-        
+
     logfd = open(logfile)
     stdout = logfd.read()
     logfd.close()

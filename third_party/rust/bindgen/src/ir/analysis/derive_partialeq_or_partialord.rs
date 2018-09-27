@@ -43,7 +43,7 @@ use std::collections::hash_map::Entry;
 pub struct CannotDerivePartialEqOrPartialOrd<'ctx> {
     ctx: &'ctx BindgenContext,
 
-    // The incremental result of this analysis's computation. 
+    // The incremental result of this analysis's computation.
     // Contains information whether particular item can derive `PartialEq`/`PartialOrd`.
     can_derive_partialeq_or_partialord: HashMap<ItemId, CanDerive>,
 

@@ -138,7 +138,7 @@ class NoValueTestCase(BaseTestCase):
 
         else:
             assert False, 'boolean evaluation works for NoValue object'
-    
+
     def testSizeOf(self):
         try:
             if hasattr(sys, 'getsizeof'):

@@ -17,7 +17,7 @@ if (!object !== false) {
 var object = {valueOf: function() {return 1}, toString: function() {return 0}};
 if (!object !== false) {
   $ERROR('#2: var object = {valueOf: function() {return 1}, toString: function() {return 0}}; !object === false. Actual: ' + (!object));
-} 
+}
 
 //CHECK#3
 var object = {valueOf: function() {return 1}, toString: function() {return {}}};
@@ -47,7 +47,7 @@ if (!object !== false) {
 var object = {valueOf: function() {throw "error"}, toString: function() {return 1}};
 if (!object !== false) {
   $ERROR('#7: var object = {valueOf: function() {throw "error"}, toString: function() {return 1}}; !object === false. Actual: ' + (!object));
-}  
+}
 
 //CHECK#8
 var object = {valueOf: function() {return {}}, toString: function() {return {}}};

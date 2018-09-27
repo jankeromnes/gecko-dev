@@ -100,7 +100,7 @@ class StackwalkerMIPSFixture {
     EXPECT_CALL(supplier, FreeSymbolData(_)).Times(AnyNumber());
 
     // Reset max_frames_scanned since it's static.
-    Stackwalker::set_max_frames_scanned(1024);    
+    Stackwalker::set_max_frames_scanned(1024);
   }
 
   // Set the Breakpad symbol information that supplier should return for
@@ -316,7 +316,7 @@ TEST_F(GetCallerFrame, ScanWithFunctionSymbols) {
 
     .D32(0x00490000)                    // junk that's not
     .D32(0x00600000)                    // a return address
-    
+
     .D32(0x00401000)                    // a couple of plausible addresses
     .D32(0x0050F000)                    // that are not within functions
 
@@ -486,7 +486,7 @@ TEST_F(GetCallerFrame, ScanningNotAllowed) {
   StackwalkerMIPS walker(&system_info, &raw_context, &stack_region, &modules,
                          &frame_symbolizer);
   Stackwalker::set_max_frames_scanned(0);
-                         
+
   vector<const CodeModule*> modules_without_symbols;
   vector<const CodeModule*> modules_with_corrupt_symbols;
   ASSERT_TRUE(walker.Walk(&call_stack, &modules_without_symbols,
@@ -632,7 +632,7 @@ struct CFIFixture: public StackwalkerMIPSFixture {
     EXPECT_EQ(expected.epc, frame1->context.epc);
     EXPECT_EQ(expected.epc, frame1->instruction);
     EXPECT_EQ("epictetus", frame1->function_name);
-    EXPECT_EQ(0x00405000U, frame1->function_base);    
+    EXPECT_EQ(0x00405000U, frame1->function_base);
   }
 
   // The values we expect to find for the caller's registers.
@@ -669,7 +669,7 @@ TEST_F(CFI, RejectBackwards) {
   raw_context.epc = 0x40005000;
   raw_context.iregs[MD_CONTEXT_MIPS_REG_SP] = 0x80000000;
   raw_context.iregs[MD_CONTEXT_MIPS_REG_RA] = 0x00405510;
-  
+
   StackFrameSymbolizer frame_symbolizer(&supplier, &resolver);
   StackwalkerMIPS walker(&system_info, &raw_context, &stack_region, &modules,
                          &frame_symbolizer);
@@ -689,7 +689,7 @@ TEST_F(CFI, RejectBadExpressions) {
   raw_context.epc = 0x00407000;
   raw_context.iregs[MD_CONTEXT_MIPS_REG_SP] = 0x80000000;
   raw_context.iregs[MD_CONTEXT_MIPS_REG_RA] = 0x00405510;
-  
+
   StackFrameSymbolizer frame_symbolizer(&supplier, &resolver);
   StackwalkerMIPS walker(&system_info, &raw_context, &stack_region, &modules,
                          &frame_symbolizer);

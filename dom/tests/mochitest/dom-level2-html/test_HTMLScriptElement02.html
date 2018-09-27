@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "script");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,11 +70,11 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The charset attribute specifies the character encoding of the linked
     resource.
 
-    Retrieve the charset attribute and examine its value.  
+    Retrieve the charset attribute and examine its value.
 
 * @author NIST
 * @author Mary Brady
@@ -87,7 +87,7 @@ function HTMLScriptElement02() {
       var testNode;
       var vcharset;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -99,7 +99,7 @@ testNode = nodeList.item(0);
       vcharset = testNode.charset;
 
       assertEquals("charsetLink","US-ASCII",vcharset);
-       
+
 }
 
 </script>
@@ -112,7 +112,7 @@ testNode = nodeList.item(0);
     The charset attribute specifies the character encoding of the linked
     resource.
 
-    Retrieve the charset attribute and examine its value.  
+    Retrieve the charset attribute and examine its value.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Mary Brady&lt;/contributor&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;date qualifier='created'&gt;2002-02-22&lt;/date&gt;
@@ -129,7 +129,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/script.html"></iframe>
 <br>

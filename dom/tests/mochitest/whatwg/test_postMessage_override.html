@@ -5,7 +5,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=postMessage
 -->
 <head>
   <title>postMessage override test</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -38,7 +38,7 @@ function test(callback)
       case 2:
         window.frames[0].postMessage("PASS 2", "http://example.org:8000");
         break;
-  
+
       default:
         ok(false, "unexpected");
     }

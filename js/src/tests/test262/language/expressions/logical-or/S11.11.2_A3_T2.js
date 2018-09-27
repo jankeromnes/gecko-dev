@@ -29,7 +29,7 @@ if ((-0 || 0) !== 0) {
 var y = new Number(-1);
 if ((0 || y) !== y) {
   $ERROR('#3: (var y = new Number(-1); 0 || y) === y');
-} 
+}
 
 //CHECK#4
 var y = new Number(0);

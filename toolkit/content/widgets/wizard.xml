@@ -537,7 +537,7 @@
             </xul:hbox>
             <xul:hbox>
               <xul:button label="&button-next-unix.label;" accesskey="&button-next-unix.accesskey;"
-                          class="wizard-button" dlgtype="next" 
+                          class="wizard-button" dlgtype="next"
                           default="true" flex="1"/>
             </xul:hbox>
           </xul:deck>
@@ -551,7 +551,7 @@
             </xul:hbox>
             <xul:hbox>
               <xul:button label="&button-next-win.label;" accesskey="&button-next-win.accesskey;"
-                          class="wizard-button" dlgtype="next" 
+                          class="wizard-button" dlgtype="next"
                           default="true" flex="1"/>
             </xul:hbox>
           </xul:deck>

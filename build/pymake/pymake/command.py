@@ -52,7 +52,7 @@ def parsemakeflags(env):
             if i == len(makeflags):
                 raise data.DataError("MAKEFLAGS has trailing backslash")
             c = makeflags[i]
-            
+
         curopt += c
         i += 1
 

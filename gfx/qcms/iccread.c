@@ -3,22 +3,22 @@
 //  Copyright (C) 2009 Mozilla Foundation
 //  Copyright (C) 1998-2007 Marti Maria
 //
-// Permission is hereby granted, free of charge, to any person obtaining 
-// a copy of this software and associated documentation files (the "Software"), 
-// to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, 
-// and/or sell copies of the Software, and to permit persons to whom the Software 
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the Software
 // is furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in 
+// The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
-// THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <math.h>
@@ -422,7 +422,7 @@ static struct XYZNumber read_tag_XYZType(struct mem_source *src, struct tag_inde
 	return num;
 }
 
-// Read the tag at a given offset rather then the tag_index. 
+// Read the tag at a given offset rather then the tag_index.
 // This method is used when reading mAB tags where nested curveType are
 // present that are not part of the tag_index.
 static struct curveType *read_curveType(struct mem_source *src, uint32_t offset, uint32_t *len)
@@ -473,7 +473,7 @@ static struct curveType *read_curveType(struct mem_source *src, uint32_t offset,
 		curve->type = PARAMETRIC_CURVE_TYPE;
 
 		for (i=0; i < COUNT_TO_LENGTH[count]; i++) {
-			curve->parameter[i] = s15Fixed16Number_to_float(read_s15Fixed16Number(src, offset + 12 + i*4));	
+			curve->parameter[i] = s15Fixed16Number_to_float(read_s15Fixed16Number(src, offset + 12 + i*4));
 		}
 		*len = 12 + COUNT_TO_LENGTH[count] * 4;
 
@@ -1269,7 +1269,7 @@ void qcms_data_from_path(const char *path, void **mem, size_t *size)
 	FILE *file = NULL;
 	*mem = NULL;
 	*size  = 0;
-	
+
 	file = fopen(path, "rb");
 	if (file) {
 		qcms_data_from_file(file, mem, size);
@@ -1295,7 +1295,7 @@ void qcms_data_from_unicode_path(const wchar_t *path, void **mem, size_t *size)
 	FILE *file = NULL;
 	*mem = NULL;
 	*size  = 0;
-	
+
 	file = _wfopen(path, L"rb");
 	if (file) {
 		qcms_data_from_file(file, mem, size);
@@ -1309,7 +1309,7 @@ void qcms_data_from_unicode_path(const wchar_t *path, void **mem, size_t *size)
 * which can be read via qcms_profile_from_memory(). that means, we must satisfy
 * the profiler header type check (which seems not complete till now) and proper
 * information to read data from the tag table and tag data elements memory.
-* 
+*
 * To construct a valid ICC profile, its divided into three steps :
 *	(1) construct the r/g/bXYZ part
 *	(2) construct the r/g/bTRC part
@@ -1336,15 +1336,15 @@ void qcms_data_create_rgb_with_gamma(qcms_CIE_xyY white_point, qcms_CIE_xyYTRIPL
 	*mem = NULL;
 	*size = 0;
 
-	/* 
-	* total length = icc profile header(128) + tag count(4) + 
+	/*
+	* total length = icc profile header(128) + tag count(4) +
 	* (tag table item (12) * total tag (6 = 3 rTRC + 3 rXYZ)) + rTRC elements data (3 * 20)
 	* + rXYZ elements data (3*16), and all tag data elements must start at the 4-byte boundary.
 	*/
 	xyz_count = 3; // rXYZ, gXYZ, bXYZ
 	trc_count = 3; // rTRC, gTRC, bTRC
 	length =  ICC_PROFILE_HEADER_LENGTH + 4 + (12 * (xyz_count + trc_count)) + (xyz_count * 20) + (trc_count * 16);
-	
+
 	// reserve the total memory.
 	data = malloc(length);
 	if (!data)
@@ -1399,7 +1399,7 @@ void qcms_data_create_rgb_with_gamma(qcms_CIE_xyY white_point, qcms_CIE_xyYTRIPL
 	/* Part3 : write profile header
 	 *
 	 * Important header fields are left empty. This generates a profile for internal use only.
-	 * We should be generating: Profile version (04300000h), Profile signature (acsp), 
+	 * We should be generating: Profile version (04300000h), Profile signature (acsp),
 	 * PCS illumiant field. Likewise mandatory profile tags are omitted.
 	 */
 	write_u32(data, 0, length); // the total length of this memory

@@ -41,7 +41,7 @@ def runTests(testFileSearch):
                         else:
                             print '  PASS: "' + test[0] + '" == None'
                         continue
-                    
+
                     result = template.expand(**vars)
                     if (isinstance(expectedResult, basestring)):
                         if (expectedResult != result):
@@ -79,7 +79,7 @@ def debugHook(type, value, tb):
 
 if __name__ == "__main__":      # called from the command line
     sys.excepthook = debugHook
-    
+
 #    runTests(os.path.join('test', '*.json'))
 
 #    runTests(os.path.join('uritemplate-test', 'spec-examples.json'))

@@ -11,7 +11,7 @@ es5id: 12.9_A4
 description: Return very sophisticated expression and function
 ---*/
 
-// second derivative 
+// second derivative
 function DD_operator(f, delta){return function(x){return (f(x+delta)-2*f(x)+f(x-delta))/(delta*delta)};}
 
 var DDsin;

@@ -7,11 +7,11 @@ function boom()
 {
   var c = document.createElementNS("http://www.w3.org/1999/xhtml", "caption");
   var m = document.getElementById("m");
-  
+
   m.insertBefore(c, m.firstChild);
   m.removeChild(c);
   document.body.style.visibility = "collapse";
-  
+
   document.documentElement.removeAttribute("class");
 }
 

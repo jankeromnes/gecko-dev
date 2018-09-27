@@ -56,11 +56,11 @@ enum x86_report_codes {
         report_unknown
 };
 
-/* 'arg' is optional arbitrary data provided by the code passing the 
+/* 'arg' is optional arbitrary data provided by the code passing the
  *       callback -- for example, it could be 'this' or 'self' in OOP code.
  * 'code' is provided by libdisasm, it is one of the above
  * 'data' is provided by libdisasm and is context-specific, per the enums */
-typedef void (*DISASM_REPORTER)( enum x86_report_codes code, 
+typedef void (*DISASM_REPORTER)( enum x86_report_codes code,
 				 void *data, void *arg );
 
 
@@ -148,7 +148,7 @@ typedef struct {
 	union {
 		unsigned short	off16;	/* loaded directly into IP */
 		uint32_t		off32;	/* loaded directly into EIP */
-	} offset;	
+	} offset;
 } x86_absolute_t;
 
 enum x86_op_type {      /* mutually exclusive */
@@ -458,7 +458,7 @@ enum x86_insn_cpu {
 /* CPU ISA subsets: These are derived from the Instruction Groups in
  * Intel Vol 1 Chapter 5; they represent subsets of the IA32 ISA but
  * do not reflect the 'type' of the instruction in the same way that
- * x86_insn_group does. In short, these are AMD/Intel's somewhat useless 
+ * x86_insn_group does. In short, these are AMD/Intel's somewhat useless
  * designations.
  * NOTE : These may not be accurate for all instructions; updates to the
  * opcode tables have not been completed. */
@@ -608,7 +608,7 @@ unsigned int x86_disasm_forward( unsigned char *buf, unsigned int buf_len,
  * iterated over, and 'op' is the current x86_op_t */
 typedef void (*x86_operand_fn)(x86_op_t *op, x86_insn_t *insn, void *arg);
 
-/* FOREACH types: these are used to limit the foreach results to 
+/* FOREACH types: these are used to limit the foreach results to
  * operands which match a certain "type" (implicit or explicit)
  * or which are accessed in certain ways (e.g. read or write). Note
  * that this operates on the operand list of single instruction, so
@@ -669,7 +669,7 @@ uint32_t x86_get_address( x86_insn_t *insn );
 int32_t x86_get_rel_offset( x86_insn_t *insn );
 
 /* Get Branch Target: return the x86_op_t containing the target of
- * a jump or call operand, or NULL if there is no branch target. 
+ * a jump or call operand, or NULL if there is no branch target.
  * Internally, a 'branch target' is defined as any operand with
  * Execute Access set. There can be only one branch target per instruction. */
 x86_op_t * x86_get_branch_target( x86_insn_t *insn );
@@ -696,17 +696,17 @@ void x86_set_insn_addr( x86_insn_t *insn, uint32_t addr );
 /* set the offset (usually offset into file) of the insn */
 void x86_set_insn_offset( x86_insn_t *insn, unsigned int offset );
 
-/* set a pointer to the function owning the instruction. The 
+/* set a pointer to the function owning the instruction. The
  * type of 'func' is user-defined; libdisasm does not use the func field. */
 void x86_set_insn_function( x86_insn_t *insn, void * func );
 
-/* set a pointer to the block of code owning the instruction. The 
+/* set a pointer to the block of code owning the instruction. The
  * type of 'block' is user-defined; libdisasm does not use the block field. */
 void x86_set_insn_block( x86_insn_t *insn, void * block );
 
 /* instruction tagging: these routines allow the programmer to mark
  * instructions as "seen" in a DFS, for example. libdisasm does not use
- * the tag field.*/ 
+ * the tag field.*/
 /* set insn->tag to 1 */
 void x86_tag_insn( x86_insn_t *insn );
 /* set insn->tag to 0 */
@@ -722,7 +722,7 @@ int x86_insn_is_tagged( x86_insn_t *insn );
  *      XML is your typical <insn> ... </insn>
  *      Raw is addr|offset|size|bytes|prefix... see libdisasm_formats.7
  */
-enum x86_asm_format { 
+enum x86_asm_format {
 	unknown_syntax = 0,		/* never use! */
 	native_syntax, 			/* header: 35 bytes */
 	intel_syntax, 			/* header: 23 bytes */
@@ -778,13 +778,13 @@ void x86_reg_from_id( unsigned int id, x86_reg_t * reg );
 
 
 /* ================================== Invariant Instruction Representation */
-/* Invariant instructions are used for generating binary signatures; 
+/* Invariant instructions are used for generating binary signatures;
  * the instruction is modified so that all variant bytes in an instruction
- * are replaced with a wildcard byte. 
+ * are replaced with a wildcard byte.
  *
- * A 'variant byte' is one that is expected to be modified by either the 
- * static or the dynamic linker: for example, an address encoded in an 
- * instruction. 
+ * A 'variant byte' is one that is expected to be modified by either the
+ * static or the dynamic linker: for example, an address encoded in an
+ * instruction.
  *
  * By comparing the invariant representation of one instruction [or of a
  * sequence of instructions] with the invariant representation of another,
@@ -794,7 +794,7 @@ void x86_reg_from_id( unsigned int id, x86_reg_t * reg );
  * library routines which have been statically-linked into a binary.
  *
  * The invariant routines are faster and smaller than the disassembly
- * routines; they can be used to determine the size of an instruction 
+ * routines; they can be used to determine the size of an instruction
  * without all of the overhead of a full instruction disassembly.
  */
 
@@ -815,10 +815,10 @@ typedef struct {
         enum x86_insn_type type;        /* type, e.g. INS_BRANCH */
 	x86_invariant_op_t operands[3];	/* operands: dest, src, imm */
 } x86_invariant_t;
- 
+
 
 /* return a version of the instruction with the variant bytes masked out */
-size_t x86_invariant_disasm( unsigned char *buf, int buf_len, 
+size_t x86_invariant_disasm( unsigned char *buf, int buf_len,
 			  x86_invariant_t *inv );
 /* return the size in bytes of the intruction pointed to by 'buf';
  * this used x86_invariant_disasm since it faster than x86_disasm */

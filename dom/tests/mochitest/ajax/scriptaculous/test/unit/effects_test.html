@@ -17,7 +17,7 @@
       background: #fed;
       padding: 1em;
       width: 400px;
-    } 
+    }
     .final {
       color: #fff;
       font-style: italic;
@@ -67,10 +67,10 @@
   var COMBINED_EFFECTS =
     ['Fade','Appear','BlindUp','BlindDown','Puff','SwitchOff','DropOut','Shake',
      'SlideUp','SlideDown','Pulsate','Squish','Fold','Grow','Shrink'];
-  
+
   var COMBINED_RJS_EFFECTS = $w('fade appear blind_up blind_down puff switch_off '+
     'drop_out shake slide_up slide_down pulsate squish fold grow shrink');
-     
+
   var tmp, tmp2;
 
   new Test.Unit.Runner({
@@ -78,46 +78,46 @@
     setup: function() { with (this) {
       $('sandbox').innerHTML = "";
     }},
-    
+
     teardown: function() { with(this) {
       // remove all queued effects
       Effect.Queue.each(function(e) { e.cancel() });
     }},
-    
+
     testBackwardsCompat: function() { with(this) {
       assertInstanceOf(Effect.Opacity, new Effect2.Fade('sandbox'));
     }},
-    
+
     testExceptionOnNonExistingElement: function() { with(this) {
-      assertRaise('ElementDoesNotExistError', 
+      assertRaise('ElementDoesNotExistError',
         function(){new Effect.Opacity('nothing-to-see-here')});
-      assertRaise('ElementDoesNotExistError', 
+      assertRaise('ElementDoesNotExistError',
         function(){new Effect.Move('nothing-to-see-here')});
-      assertRaise('ElementDoesNotExistError', 
+      assertRaise('ElementDoesNotExistError',
         function(){new Effect.Scale('nothing-to-see-here')});
-      assertRaise('ElementDoesNotExistError', 
+      assertRaise('ElementDoesNotExistError',
         function(){new Effect.Highlight('nothing-to-see-here')});
     }},
-    
+
     testEffectsQueue: function() { with(this) {
       var e1 = new Effect.Highlight('sandbox');
       var e2 = new Effect.Appear('sandbox');
-      
+
       assertEqual(2, Effect.Queue.effects.length);
-      
+
       tmp = 0;
       Effect.Queue.each(function(e) { tmp++ });
       assertEqual(2, tmp);
-      
+
       // the internal interval timer should be active
       assertNotNull(Effect.Queue.interval);
       e1.cancel();
       e2.cancel();
       assertEqual(0, Effect.Queue.effects.length);
-      
+
       // should be inactive after all effects are removed from queue
       assertNull(Effect.Queue.interval);
-      
+
       // should be in e3,e1,e2 order
       var e1 = new Effect.Highlight('sandbox');
       var e2 = new Effect.Appear('sandbox',{queue:'end'});
@@ -126,42 +126,42 @@
       assert(e3.startOn < e1.startOn);
       assert(e3.startOn < e2.startOn);
       assertEqual(3, Effect.Queue.effects.length);
-      
+
       Effect.Queue.each(function(e) { e.cancel() });
       assertEqual(0, Effect.Queue.effects.length);
     }},
-    
+
     testScopedEffectsQueue: function() { with(this) {
       var e1 = new Effect.Highlight('sandbox', {queue: {scope:'myscope'} } );
       var e2 = new Effect.Appear('sandbox', {queue: {scope:'myscope'} } );
       var e3 = new Effect.Highlight('sandbox', {queue: {scope:'secondscope'} } );
       var e4 = new Effect.Appear('sandbox');
-     
+
       assertEqual(2, Effect.Queues.get('myscope').effects.length);
       assertEqual(1, Effect.Queues.get('secondscope').effects.length);
       assertEqual(1, Effect.Queues.get('global').effects.length);
       assertEqual(Effect.Queue.effects.length, Effect.Queues.get('global').effects.length);
-     
+
       var tmp = 0;
       Effect.Queues.get('myscope').effects.each(function(e) { tmp++ });
       assertEqual(2, tmp);
-     
+
       // the internal interval timer should be active
       assertNotNull(Effect.Queues.get('myscope').interval);
       assertNotNull(Effect.Queues.get('secondscope').interval);
       assertNotNull(Effect.Queues.get('global').interval);
-    
+
       e1.cancel(); e2.cancel(); e3.cancel(); e4.cancel();
-     
+
       assertEqual(0, Effect.Queues.get('myscope').effects.length);
       assertEqual(0, Effect.Queues.get('secondscope').effects.length);
       assertEqual(0, Effect.Queues.get('global').effects.length);
-     
+
       // should be inactive after all effects are removed from queues
       assertNull(Effect.Queues.get('myscope').interval);
       assertNull(Effect.Queues.get('secondscope').interval);
       assertNull(Effect.Queues.get('global').interval);
-     
+
       // should be in e3 and e4 together and then e1,e2 order
       var e1 = new Effect.Highlight('sandbox', {queue: {scope:'myscope'} } );
       var e2 = new Effect.Appear('sandbox', {queue: {position: 'end', scope:'myscope'} } );
@@ -172,44 +172,44 @@
       assert(e3.startOn < e2.startOn);
       assert(e3.startOn = e4.startOn);
       assertEqual(3, Effect.Queues.get('myscope').effects.length);
-     
+
       Effect.Queues.get('myscope').each(function(e) { e.cancel() });
       assertEqual(0, Effect.Queues.get('myscope').effects.length);
-    
+
       Effect.Queues.get('global').each(function(e) { e.cancel() });
       assertEqual(0, Effect.Queues.get('global').effects.length);
-     
+
       // should only allow the first two effects and ignore the third
       var e1 = new Effect.Highlight('sandbox', {queue: {scope:'myscope', limit: 2} } );
       var e2 = new Effect.Appear('sandbox', {queue: {position: 'end', scope:'myscope', limit: 2} } );
       var e3 = new Effect.Fade('sandbox', {queue: {position: 'front', scope:'myscope', limit: 2} } );
-     
+
       assertEqual(2, Effect.Queues.get('myscope').effects.length);
     }},
-    
+
     testEffectMultiple: function() { with(this) {
       $('sandbox').appendChild(Builder.node('div',{id:'test_1'}));
       $('sandbox').appendChild(Builder.node('div',{id:'test_2'},[Builder.node('div',{id:'test_2a'})]));
       $('sandbox').appendChild(Builder.node('div',{id:'test_3'}));
-      
+
       // only direct child elements
       Effect.multiple('sandbox',Effect.Fade);
       assertEqual(3, Effect.Queue.effects.length);
-      
+
       Effect.Queue.each(function(e) { e.cancel() });
       assertEqual(0, Effect.Queue.effects.length);
-      
+
       // call with array
       Effect.multiple(['test_1','test_3'],Effect.Puff);
       assertEqual(2, Effect.Queue.effects.length);
     }},
-    
+
     testEffectTagifyText: function() { with(this) {
       $('sandbox').innerHTML = "Blah<strong>bleb</strong> Blub";
       assertEqual(3, $('sandbox').childNodes.length);
       Effect.tagifyText('sandbox');
       assertEqual(10, $('sandbox').childNodes.length);
-      
+
       Effect.multiple('sandbox', Effect.Fade);
       assertEqual(10, Effect.Queue.effects.length);
     }},
@@ -222,18 +222,18 @@
         $('sandbox').appendChild(
           Builder.node('div',{id:'test_element'},
             Builder.node('span','test'))); //some effects require a child element
-            
+
         // should work with new Effect.Blah syntax
         var effect = new Effect[fx]('test_element');
         assertEqual(0, effect.currentFrame);
-        
+
         // and without the 'new'
         var effect = Effect[fx]('test_element');
         assertEqual(0, effect.currentFrame);
-        
+
         // and, for visualEffect
         assert($('test_element') == $('test_element').visualEffect(COMBINED_RJS_EFFECTS[idx]));
-        
+
         // options parsing (shake, squish and grow are special here)
         if(!['Shake','Squish','Grow'].include(fx)) {
           var effect = Effect[fx]('test_element',{duration:2.0});
@@ -241,7 +241,7 @@
         }
       });
     }},
-    
+
   });
 
 // ]]>

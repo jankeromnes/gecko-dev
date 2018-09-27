@@ -163,9 +163,9 @@ $ cmake -G "Visual Studio 10" ..   # Or whatever generator you want to use cmake
 $ start libevent.sln
 ```
 
-In the above, the ".." refers to the dir containing the Libevent source code. 
+In the above, the ".." refers to the dir containing the Libevent source code.
 You can build multiple versions (with different compile time settings) from the same source tree
-by creating other build directories. 
+by creating other build directories.
 
 It is highly recommended to build "out of source" when using
 CMake instead of "in source" like the normal behaviour of autoconf for this reason.
@@ -217,7 +217,7 @@ __Bugs, Features [RFC], and Issus__: https://github.com/libevent/libevent/issues
 > Or you can do it via the mailing list.
 
 There's also a libevent-users mailing list for talking about Libevent
-use and development: 
+use and development:
 
 <http://archives.seul.org/libevent/users/>
 

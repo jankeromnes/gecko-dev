@@ -23,7 +23,7 @@ Expect: var content = feed.items.queryElementAt(1, Components.interfaces.nsIFeed
   <rights type="xhtml">
     <div xmlns="http://www.w3.org/1999/xhtml"><i>test</i> rights</div>
   </rights>
-  
+
 
   <entry></entry>
 

@@ -13,7 +13,7 @@ index 42386be..e8f7402 100644
  	src/common/linux/elf_symbols_to_module.cc \
 @@ -573,6 +575,8 @@ src_tools_mac_dump_syms_dump_syms_CXXFLAGS= \
  	-DHAVE_MACH_O_NLIST_H
- 
+
  src_common_dumper_unittest_SOURCES = \
 +	src/common/arm_ex_reader.cc \
 +	src/common/arm_ex_to_module.cc \
@@ -991,7 +991,7 @@ index 1e96ca6..4222ce3 100644
 @@ -52,6 +52,7 @@
  #include <utility>
  #include <vector>
- 
+
 +#include "common/arm_ex_reader.h"
  #include "common/dwarf/bytereader-inl.h"
  #include "common/dwarf/dwarf2diehandler.h"
@@ -999,7 +999,7 @@ index 1e96ca6..4222ce3 100644
 @@ -71,6 +72,11 @@
  #endif
  #include "common/using_std_string.h"
- 
+
 +#ifndef SHT_ARM_EXIDX
 +// bionic and older glibc don't define this
 +# define SHT_ARM_EXIDX (SHT_LOPROC + 1)
@@ -1007,11 +1007,11 @@ index 1e96ca6..4222ce3 100644
 +
  // This namespace contains helper functions.
  namespace {
- 
+
 @@ -373,6 +379,52 @@ bool LoadDwarfCFI(const string& dwarf_filename,
    return true;
  }
- 
+
 +template<typename ElfClass>
 +bool LoadARMexidx(const typename ElfClass::Ehdr* elf_header,
 +                  const typename ElfClass::Shdr* exidx_section,
@@ -1064,7 +1064,7 @@ index 1e96ca6..4222ce3 100644
 @@ -756,6 +808,29 @@ bool LoadSymbols(const string& obj_file,
      }
    }
- 
+
 +  // ARM has special unwind tables that can be used.
 +  const Shdr* arm_exidx_section =
 +      FindElfSectionByName<ElfClass>(".ARM.exidx", SHT_ARM_EXIDX,
@@ -1107,7 +1107,7 @@ index fa798f4..ca52f9f 100644
 @@ -119,8 +119,14 @@ void Module::AddFunctions(vector<Function *>::iterator begin,
      AddFunction(*it);
  }
- 
+
 -void Module::AddStackFrameEntry(StackFrameEntry *stack_frame_entry) {
 -  stack_frame_entries_.push_back(stack_frame_entry);
 +void Module::AddStackFrameEntry(StackFrameEntry* stack_frame_entry) {
@@ -1119,12 +1119,12 @@ index fa798f4..ca52f9f 100644
 +    delete stack_frame_entry;
 +  }
  }
- 
+
  void Module::AddExtern(Extern *ext) {
 @@ -180,8 +186,25 @@ void Module::GetFiles(vector<File *> *vec) {
      vec->push_back(it->second);
  }
- 
+
 -void Module::GetStackFrameEntries(vector<StackFrameEntry *> *vec) const {
 -  *vec = stack_frame_entries_;
 +void Module::GetStackFrameEntries(vector<StackFrameEntry*>* vec) const {
@@ -1147,10 +1147,10 @@ index fa798f4..ca52f9f 100644
 +
 +  return NULL;
  }
- 
+
  void Module::AssignSourceIds() {
 @@ -286,7 +309,7 @@ bool Module::Write(std::ostream &stream, SymbolData symbol_data) {
- 
+
    if (symbol_data != NO_CFI) {
      // Write out 'STACK CFI INIT' and 'STACK CFI' records.
 -    vector<StackFrameEntry *>::const_iterator frame_it;
@@ -1165,7 +1165,7 @@ index 65b5595..299bc38 100644
 @@ -176,6 +176,13 @@ class Module {
      }
    };
- 
+
 +  struct StackFrameEntryCompare {
 +    bool operator() (const StackFrameEntry* lhs,
 +                     const StackFrameEntry* rhs) const {
@@ -1179,7 +1179,7 @@ index 65b5595..299bc38 100644
 @@ -256,6 +263,10 @@ class Module {
    // a more appropriate interface.)
    void GetStackFrameEntries(vector<StackFrameEntry *> *vec) const;
- 
+
 +  // If this module has a StackFrameEntry whose address range covers
 +  // ADDRESS, return it. Otherwise return NULL.
 +  StackFrameEntry* FindStackFrameEntryByAddress(Address address);
@@ -1190,7 +1190,7 @@ index 65b5595..299bc38 100644
 @@ -316,6 +327,9 @@ class Module {
    // A set containing Extern structures, sorted by address.
    typedef set<Extern *, ExternCompare> ExternSet;
- 
+
 +  // A set containing StackFrameEntry structures, sorted by address.
 +  typedef set<StackFrameEntry*, StackFrameEntryCompare> StackFrameEntrySet;
 +
@@ -1198,12 +1198,12 @@ index 65b5595..299bc38 100644
    // to it; destroying the module frees the Files and Functions these
    // point to.
 @@ -324,7 +338,7 @@ class Module {
- 
+
    // The module owns all the call frame info entries that have been
    // added to it.
 -  vector<StackFrameEntry *> stack_frame_entries_;
 +  StackFrameEntrySet stack_frame_entries_;
- 
+
    // The module owns all the externs that have been added to it;
    // destroying the module frees the Externs these point to.
 diff --git a/src/common/module_unittest.cc b/src/common/module_unittest.cc
@@ -1234,7 +1234,7 @@ index 0b64327..bf72736 100644
 +               " stromboli: a poem lovely as a tree\n"
 +               "STACK CFI INIT ddb5f41285aa7757 1486493370dc5073 \n",
                 contents.c_str());
- 
+
    // Check that GetStackFrameEntries works.
 @@ -346,10 +346,18 @@ TEST(Construct, AddFrames) {
    m.GetStackFrameEntries(&entries);
@@ -1280,7 +1280,7 @@ index 0b64327..bf72736 100644
 +  ASSERT_EQ(0U, entries[2]->initial_rules.size());
 +  ASSERT_EQ(0U, entries[2]->rule_changes.size());
  }
- 
+
  TEST(Construct, UniqueFiles) {
 @@ -544,3 +544,62 @@ TEST(Construct, FunctionsAndThumbExternsWithSameAddress) {
                 "PUBLIC cc00 0 arm_func\n",

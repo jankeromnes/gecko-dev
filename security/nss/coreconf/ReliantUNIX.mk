@@ -27,7 +27,7 @@ else
 	CC   = cc
 	CCC  = /usr/bin/CC
 	AS   = /usr/bin/cc
-	ODD_CFLAGS  = 
+	ODD_CFLAGS  =
 	ifdef BUILD_OPT
 		OPTIMIZER += -O -F Olimit,4000
 	endif

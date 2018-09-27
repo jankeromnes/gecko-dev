@@ -74,10 +74,10 @@ HRESULT SetLzmaProp(PROPID propID, const PROPVARIANT &prop, CLzmaEncProps &ep)
       return E_INVALIDARG;
     return ParseMatchFinder(prop.bstrVal, &ep.btMode, &ep.numHashBytes) ? S_OK : E_INVALIDARG;
   }
-  
+
   if (propID > NCoderPropID::kReduceSize)
     return S_OK;
-  
+
   if (propID == NCoderPropID::kReduceSize)
   {
     if (prop.vt == VT_UI8)
@@ -175,7 +175,7 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
   RET_IF_WRAP_ERROR(inWrap.Res, res, SZ_ERROR_READ)
   RET_IF_WRAP_ERROR(outWrap.Res, res, SZ_ERROR_WRITE)
   RET_IF_WRAP_ERROR(progressWrap.Res, res, SZ_ERROR_PROGRESS)
-  
+
   return SResToHRESULT(res);
 }
 

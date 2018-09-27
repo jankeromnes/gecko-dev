@@ -63,7 +63,7 @@ public:
 struct CVirtFile
 {
   CGrowBuf Data;
-  
+
   UInt64 Size; // real size
   UInt64 ExpectedSize; // the size from props request. 0 if unknown
 
@@ -73,10 +73,10 @@ struct CVirtFile
   bool ATimeDefined;
   bool MTimeDefined;
   bool AttribDefined;
-  
+
   bool IsDir;
   bool IsAltStream;
-  
+
   DWORD Attrib;
 
   FILETIME CTime;
@@ -108,7 +108,7 @@ public:
   CObjectVector<CVirtFile> Files;
   UInt64 MaxTotalAllocSize;
   FString DirPrefix;
- 
+
   CVirtFile &AddNewFile()
   {
     if (!Files.IsEmpty())
@@ -162,7 +162,7 @@ public:
 };
 
 #endif
-  
+
 class CExtractCallbackImp:
   public IExtractCallbackUI, // it includes IFolderArchiveExtractCallback
   public IOpenCallbackUI,
@@ -296,16 +296,16 @@ public:
     OverwriteMode(NExtract::NOverwriteMode::kAsk),
     StreamMode(false),
     ProcessAltStreams(true),
-    
+
     _totalFilesDefined(false),
     _totalBytesDefined(false),
     MultiArcMode(false)
-    
+
     #ifndef _SFX
     , _hashCalc(NULL)
     #endif
     {}
-   
+
   ~CExtractCallbackImp();
   void Init();
 

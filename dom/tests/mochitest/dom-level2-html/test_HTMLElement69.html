@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "element");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,10 +70,10 @@ function loadComplete() {
 
 
 /**
-* 
-    The lang attribute specifies the language code defined in RFC 1766. 
+*
+    The lang attribute specifies the language code defined in RFC 1766.
 
-    Retrieve the lang attribute of the STRIKE element and examine its value.  
+    Retrieve the lang attribute of the STRIKE element and examine its value.
 
 * @author NIST
 * @author Mary Brady
@@ -86,7 +86,7 @@ function HTMLElement69() {
       var testNode;
       var vlang;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -98,7 +98,7 @@ testNode = nodeList.item(0);
       vlang = testNode.lang;
 
       assertEquals("langLink","en",vlang);
-       
+
 }
 
 </script>
@@ -108,9 +108,9 @@ testNode = nodeList.item(0);
 <p>&lt;test name='HTMLElement69' schemaLocation='http://www.w3.org/2001/DOM-Test-Suite/Level-1 dom1.xsd'&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;metadata&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;HTMLElement69&lt;/title&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
-    The lang attribute specifies the language code defined in RFC 1766. 
+    The lang attribute specifies the language code defined in RFC 1766.
 
-    Retrieve the lang attribute of the STRIKE element and examine its value.  
+    Retrieve the lang attribute of the STRIKE element and examine its value.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Mary Brady&lt;/contributor&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;date qualifier='created'&gt;2002-02-22&lt;/date&gt;
@@ -127,7 +127,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/element.html"></iframe>
 <br>

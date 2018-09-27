@@ -9,21 +9,21 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=392318
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
   <script class="testbody" type="text/javascript">
   /** Test for Bug 392318 **/
-  
+
   SimpleTest.waitForExplicitFinish();
   var testRan = false;
-  
+
   function runTest() {
     isnot($("t").offsetWidth, 0, "Unexpected offsetWidth");
     testRan = true;
   }
-  
+
   document.addEventListener("DOMContentLoaded", runTest);
-  
+
   addLoadEvent(function() {
     is(testRan, true, "Onload firing too early");
   });
-  
+
   addLoadEvent(SimpleTest.finish);
   </script>
   <!-- IMPORTANT: This sheet must come after the test that sets up the
@@ -34,7 +34,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=392318
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=392318">Mozilla Bug 392318</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <div id="t"></div>

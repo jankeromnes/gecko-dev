@@ -1483,7 +1483,7 @@ var clean = function(item, retain){
 			}
 			Element.dispose(item);
 		}
-	}	
+	}
 	if (!uid) return;
 	collected[uid] = storage[uid] = null;
 };

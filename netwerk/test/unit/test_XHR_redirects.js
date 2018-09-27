@@ -86,10 +86,10 @@ function run_test() {
   //   methodToSend is the HTTP method to send
   //   redirectedMethod is the method to use for the redirect, if any
   //   finalStatus is 200 when the redirect takes place, redirectType otherwise
-  
+
   // Note that unsafe methods should not follow the redirect automatically
   // Of the methods below, DELETE, POST and PUT are unsafe
-  
+
   sRedirectPromptPref = Preferences.get("network.http.prompt-temp-redirect");
   // Following Bug 677754 we don't prompt for unsafe redirects
 
@@ -136,25 +136,25 @@ function run_test() {
   var othertests = tests; // for now these have identical results
 
   var xhr;
-  
+
   for (var i = 0; i < tests.length; ++i) {
     dump("Testing " + tests[i] + "\n");
     xhr = createXHR(false, tests[i][1], "/bug" + BUGID + "-redirect" + tests[i][0]);
     xhr.send(null);
     checkResults(xhr, tests[i][2], tests[i][3], tests[i][4]);
-  }  
+  }
 
   for (var i = 0; i < othertests.length; ++i) {
     dump("Testing " + othertests[i] + " (cross-origin)\n");
     xhr = createXHR(false, othertests[i][1], "/bug" + OTHERBUGID + "-redirect" + othertests[i][0]);
     xhr.send(null);
     checkResults(xhr, othertests[i][2], tests[i][3], tests[i][4]);
-  }  
+  }
 
   sSame.stop(do_test_finished);
   sOther.stop(do_test_finished);
 }
- 
+
 function redirect(metadata, response, status, port, bugid) {
   // set a proper reason string to avoid confusion when looking at the
   // HTTP messages
@@ -174,11 +174,11 @@ function redirect(metadata, response, status, port, bugid) {
   else if (status == 308) {
     reason = "Permanent Redirect";
   }
-  
+
   response.setStatusLine(metadata.httpVersion, status, reason);
   response.setHeader("Location", "http://localhost:" + port + "/bug" + bugid + "-target");
-} 
- 
+}
+
 // PATH HANDLER FOR /bug676059-redirect301
 function bug676059redirect301(metadata, response) {
   redirect(metadata, response, 301, pSame, BUGID);

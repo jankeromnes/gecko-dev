@@ -17,7 +17,7 @@ include $(top_builddir)/icudefs.mk
 OUTPUTFILE=icupkg.inc
 MIDDLE_SO_TARGET=
 
-all : clean 
+all : clean
 	@echo GENCCODE_ASSEMBLY_TYPE=$(GENCCODE_ASSEMBLY) >> $(OUTPUTFILE)
 	@echo SO=$(SO) >> $(OUTPUTFILE)
 	@echo SOBJ=$(SOBJ) >> $(OUTPUTFILE)
@@ -37,6 +37,6 @@ all : clean
 	@echo INSTALL_CMD=$(INSTALL) >> $(OUTPUTFILE)
 
 
-clean : 
+clean :
 	$(RMV) $(OUTPUTFILE)
 

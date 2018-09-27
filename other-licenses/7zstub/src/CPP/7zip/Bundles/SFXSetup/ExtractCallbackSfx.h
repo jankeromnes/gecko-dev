@@ -25,7 +25,7 @@ class CExtractCallbackImp:
   public CMyUnknownImp
 {
 public:
-  
+
   MY_UNKNOWN_IMP
 
   INTERFACE_IArchiveExtractCallback(;)

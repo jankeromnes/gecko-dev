@@ -24,5 +24,5 @@ expect = '({get foo()\n\
     {\n\
       return "foo";\n\
     }})';
- 
+
 compareSource(expect, actual, summary);

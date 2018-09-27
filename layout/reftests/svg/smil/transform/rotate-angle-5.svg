@@ -37,7 +37,7 @@
     </path>
   </g>
   <!-- to animation: rotate and scale
-       
+
        Here again the scale animation can't interpolate from its base value
        which is of a different type so it assumes a zero matrix NOT an identity
        matrix (this is what the SVG WG have decided in the SVGT1.2 Tiny test
@@ -53,7 +53,7 @@
     </path>
   </g>
   <!-- to animation: translate and rotate
-       
+
        Likewise here we end up rotating from 0 to 180 because we can't
        interpolate from the underlying translation transformation.
    -->

@@ -376,7 +376,7 @@ PKIX_PL_HashTable_Lookup(
         *pResult = result;
 
 cleanup:
-        
+
         PKIX_MUTEX_UNLOCK(ht->tableLock);
 
         PKIX_RETURN(HASHTABLE);

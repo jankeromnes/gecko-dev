@@ -36,7 +36,7 @@ interface nsIWebBrowser : nsISupports
      * callbacks. The browser stores a weak reference to the listener
      * to avoid any circular dependencies.
      * Typically this method will be called to register an object
-     * to receive <CODE>nsIWebProgressListener</CODE> or 
+     * to receive <CODE>nsIWebProgressListener</CODE> or
      * <CODE>nsISHistoryListener</CODE> notifications in which case the
      * the IID is that of the interface.
      *
@@ -83,7 +83,7 @@ interface nsIWebBrowser : nsISupports
      * must create one chrome object for <I>each</I> browser object
      * that is instantiated. The embedder must associate the two by setting
      * this property to point to the chrome object before creating the browser
-     * window via the browser's <CODE>nsIBaseWindow</CODE> interface. 
+     * window via the browser's <CODE>nsIBaseWindow</CODE> interface.
      *
      * The chrome object must also implement <CODE>nsIEmbeddingSiteWindow</CODE>.
      *
@@ -93,12 +93,12 @@ interface nsIWebBrowser : nsISupports
      * <CODE>nsITooltipListener</CODE> to receive additional notifications
      * from the browser object.
      *
-     * The chrome object may optionally implement <CODE>nsIWebProgressListener</CODE> 
+     * The chrome object may optionally implement <CODE>nsIWebProgressListener</CODE>
      * instead of explicitly calling <CODE>addWebBrowserListener</CODE> and
      * <CODE>removeWebBrowserListener</CODE> to register a progress listener
      * object. If the implementation does this, it must also implement
      * <CODE>nsIWeakReference</CODE>.
-     * 
+     *
      * @note The implementation should not refcount the supplied chrome
      *       object; it should assume that a non <CODE>nullptr</CODE> value is
      *       always valid. The embedder must explicitly set this value back

@@ -17,7 +17,7 @@ function handleRequest(request, response)
       "# v" + getState("offline.changingManifest") + "\n" +
       "changing1Hour.sjs\n" +
       "changing1Sec.sjs\n");
-      
+
     if (getState("offline.changingManifest") != "2") {
       response.write(
         "NETWORK:\n" +

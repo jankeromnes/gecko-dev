@@ -234,11 +234,11 @@ radix4SetLoop\name :
         .endif
 
         @//  data[3] & update pSrc to data[0]
-        @// But don't read on the very last iteration because that reads past 
+        @// But don't read on the very last iteration because that reads past
 	@// the end of pSrc. The last iteration is grpCount = 4, setCount = 2.
         cmp     grpCount, #4
         cmpeq   setCount, #2                      @// Test setCount if grpCount = 4
-        @// These are executed only if both grpCount = 4 and setCount = 2       
+        @// These are executed only if both grpCount = 4 and setCount = 2
         addeq   pSrc, pSrc, setStep
         beq     radix4SkipRead\name
         VLD2    {dXr3,dXi3},[pSrc],setStep

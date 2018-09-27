@@ -6,9 +6,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,38 +32,38 @@ import org.mozilla.apache.commons.codec.StringEncoder;
 import org.mozilla.apache.commons.codec.binary.StringUtils;
 
 /**
- * <p>Implements the 'www-form-urlencoded' encoding scheme, 
+ * <p>Implements the 'www-form-urlencoded' encoding scheme,
  * also misleadingly known as URL encoding.</p>
- *  
- * <p>For more detailed information please refer to 
+ *
+ * <p>For more detailed information please refer to
  * <a href="http://www.w3.org/TR/html4/interact/forms.html#h-17.13.4.1">
- * Chapter 17.13.4 'Form content types'</a> of the 
+ * Chapter 17.13.4 'Form content types'</a> of the
  * <a href="http://www.w3.org/TR/html4/">HTML 4.01 Specification<a></p>
- * 
- * <p> 
+ *
+ * <p>
  * This codec is meant to be a replacement for standard Java classes
- * {@link java.net.URLEncoder} and {@link java.net.URLDecoder} 
- * on older Java platforms, as these classes in Java versions below 
+ * {@link java.net.URLEncoder} and {@link java.net.URLDecoder}
+ * on older Java platforms, as these classes in Java versions below
  * 1.4 rely on the platform's default charset encoding.
  * </p>
- * 
+ *
  * @author Apache Software Foundation
  * @since 1.2
  * @version $Id: URLCodec.java 1079537 2011-03-08 20:56:19Z ggregory $
  */
 public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, StringDecoder {
-    
+
     /**
      * Radix used in encoding and decoding.
      */
     static final int RADIX = 16;
-    
+
     /**
      * The default charset used for string decoding and encoding. Consider this field final. The next major release may
      * break compatibility and make this field be final.
      */
     protected String charset;
-    
+
     /**
      * Release 1.5 made this field final.
      */
@@ -72,7 +72,7 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
      * BitSet of www-form-url safe characters.
      */
     protected static final BitSet WWW_FORM_URL = new BitSet(256);
-    
+
     // Static initializer for www_form_url
     static {
         // alpha characters
@@ -105,7 +105,7 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
 
     /**
      * Constructor which allows for the selection of a default charset
-     * 
+     *
      * @param charset the default string charset to use.
      */
     public URLCodec(String charset) {
@@ -115,7 +115,7 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
 
     /**
      * Encodes an array of bytes into an array of URL safe 7-bit characters. Unsafe characters are escaped.
-     * 
+     *
      * @param urlsafe
      *            bitset of characters deemed URL safe
      * @param bytes
@@ -153,12 +153,12 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
     }
 
     /**
-     * Decodes an array of URL safe 7-bit characters into an array of 
-     * original bytes. Escaped characters are converted back to their 
+     * Decodes an array of URL safe 7-bit characters into an array of
+     * original bytes. Escaped characters are converted back to their
      * original representation.
      *
      * @param bytes array of URL safe characters
-     * @return array of original bytes 
+     * @return array of original bytes
      * @throws DecoderException Thrown if URL decoding is unsuccessful
      */
     public static final byte[] decodeUrl(byte[] bytes) throws DecoderException {
@@ -186,7 +186,7 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
     }
 
     /**
-     * Encodes an array of bytes into an array of URL safe 7-bit 
+     * Encodes an array of bytes into an array of URL safe 7-bit
      * characters. Unsafe characters are escaped.
      *
      * @param bytes array of bytes to convert to URL safe characters
@@ -198,12 +198,12 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
 
 
     /**
-     * Decodes an array of URL safe 7-bit characters into an array of 
-     * original bytes. Escaped characters are converted back to their 
+     * Decodes an array of URL safe 7-bit characters into an array of
+     * original bytes. Escaped characters are converted back to their
      * original representation.
      *
      * @param bytes array of URL safe characters
-     * @return array of original bytes 
+     * @return array of original bytes
      * @throws DecoderException Thrown if URL decoding is unsuccessful
      */
     public byte[] decode(byte[] bytes) throws DecoderException {
@@ -212,7 +212,7 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
 
     /**
      * Encodes a string into its URL safe form using the specified string charset. Unsafe characters are escaped.
-     * 
+     *
      * @param pString
      *            string to convert to a URL safe form
      * @param charset
@@ -229,13 +229,13 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
     }
 
     /**
-     * Encodes a string into its URL safe form using the default string 
+     * Encodes a string into its URL safe form using the default string
      * charset. Unsafe characters are escaped.
      *
      * @param pString string to convert to a URL safe form
      * @return URL safe string
      * @throws EncoderException Thrown if URL encoding is unsuccessful
-     * 
+     *
      * @see #getDefaultCharset()
      */
     public String encode(String pString) throws EncoderException {
@@ -251,16 +251,16 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
 
 
     /**
-     * Decodes a URL safe string into its original form using the 
-     * specified encoding. Escaped characters are converted back 
+     * Decodes a URL safe string into its original form using the
+     * specified encoding. Escaped characters are converted back
      * to their original representation.
      *
      * @param pString URL safe string to convert into its original form
      * @param charset the original string charset
-     * @return original string 
+     * @return original string
      * @throws DecoderException Thrown if URL decoding is unsuccessful
      * @throws UnsupportedEncodingException Thrown if charset is not
-     *                                      supported 
+     *                                      supported
      */
     public String decode(String pString, String charset) throws DecoderException, UnsupportedEncodingException {
         if (pString == null) {
@@ -271,13 +271,13 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
 
     /**
      * Decodes a URL safe string into its original form using the default
-     * string charset. Escaped characters are converted back to their 
+     * string charset. Escaped characters are converted back to their
      * original representation.
      *
      * @param pString URL safe string to convert into its original form
-     * @return original string 
+     * @return original string
      * @throws DecoderException Thrown if URL decoding is unsuccessful
-     * 
+     *
      * @see #getDefaultCharset()
      */
     public String decode(String pString) throws DecoderException {
@@ -292,12 +292,12 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
     }
 
     /**
-     * Encodes an object into its URL safe form. Unsafe characters are 
+     * Encodes an object into its URL safe form. Unsafe characters are
      * escaped.
      *
      * @param pObject string to convert to a URL safe form
      * @return URL safe object
-     * @throws EncoderException Thrown if URL encoding is not 
+     * @throws EncoderException Thrown if URL encoding is not
      *                          applicable to objects of this type or
      *                          if encoding is unsuccessful
      */
@@ -310,15 +310,15 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
             return encode((String)pObject);
         } else {
             throw new EncoderException("Objects of type " +
-                pObject.getClass().getName() + " cannot be URL encoded"); 
-              
+                pObject.getClass().getName() + " cannot be URL encoded");
+
         }
     }
 
     /**
      * Decodes a URL safe object into its original form. Escaped characters are converted back to their original
      * representation.
-     * 
+     *
      * @param pObject
      *                  URL safe object to convert into its original form
      * @return original object
@@ -341,9 +341,9 @@ public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, St
 
     /**
      * The <code>String</code> encoding used for decoding and encoding.
-     * 
+     *
      * @return Returns the encoding.
-     * 
+     *
      * @deprecated Use {@link #getDefaultCharset()}, will be removed in 2.0.
      */
     public String getEncoding() {

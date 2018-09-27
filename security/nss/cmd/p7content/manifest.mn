@@ -9,7 +9,7 @@ MODULE = nss
 
 CSRCS = p7content.c
 
-REQUIRES = seccmd 
+REQUIRES = seccmd
 
 PROGRAM = p7content
 

@@ -55,7 +55,7 @@ it.next().then(function(ret) {
       }).then($DONE, $DONE);
 
     }).catch($DONE);
-    
+
   }).catch($DONE);
 
 }).catch($DONE);

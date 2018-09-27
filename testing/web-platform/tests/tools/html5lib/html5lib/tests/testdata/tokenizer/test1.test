@@ -9,19 +9,19 @@
 "output":[["DOCTYPE", "html", null, null, true]]},
 
 {"description":"Correct Doctype mixed case",
-"input":"<!DOCTYPE HtMl>", 
+"input":"<!DOCTYPE HtMl>",
 "output":[["DOCTYPE", "html", null, null, true]]},
 
 {"description":"Correct Doctype case with EOF",
-"input":"<!DOCTYPE HtMl", 
+"input":"<!DOCTYPE HtMl",
 "output":["ParseError", ["DOCTYPE", "html", null, null, false]]},
 
 {"description":"Truncated doctype start",
-"input":"<!DOC>", 
+"input":"<!DOC>",
 "output":["ParseError", ["Comment", "DOC"]]},
 
 {"description":"Doctype in error",
-"input":"<!DOCTYPE foo>", 
+"input":"<!DOCTYPE foo>",
 "output":[["DOCTYPE", "foo", null, null, true]]},
 
 {"description":"Single Start Tag",

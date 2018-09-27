@@ -631,7 +631,7 @@ struct AlignedFixture {
   ByteReader reader;
   size_t pointer_size;
 };
-  
+
 const uint8_t AlignedFixture::data[10] = {
   0xfe, 0x6e, 0x93, 0xd8, 0x34, 0xd5, 0x1c, 0xd3, 0xac, 0x2b
 };
@@ -704,4 +704,4 @@ TEST_F(Aligned, DW_EH_PE_aligned03) {
                                       dwarf2reader::DW_EH_PE_aligned,
                                       &pointer_size));
   EXPECT_EQ(5U, pointer_size);
-}  
+}

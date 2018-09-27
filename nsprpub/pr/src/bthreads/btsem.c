@@ -21,7 +21,7 @@ PR_IMPLEMENT(PRSemaphore*)
 	if (NULL != semaphore) {
 		if ((semaphore->sem = create_sem(value, "nspr_sem")) < B_NO_ERROR)
 			return NULL;
-		else 
+		else
 			return semaphore;
 	}
 	return NULL;
@@ -40,11 +40,11 @@ PR_IMPLEMENT(void)
 	result = delete_sem(sem->sem);
 	PR_ASSERT(result == B_NO_ERROR);
 	PR_DELETE(sem);
-} 
+}
 
 /*
 ** Wait on a Semaphore.
-** 
+**
 ** This routine allows a calling thread to wait or proceed depending upon
 ** the state of the semahore sem. The thread can proceed only if the
 ** counter value of the semaphore sem is currently greater than 0. If the
@@ -52,8 +52,8 @@ PR_IMPLEMENT(void)
 ** routine returns immediately allowing the calling thread to continue. If
 ** the value of semaphore sem is 0, the calling thread blocks awaiting the
 ** semaphore to be released by another thread.
-** 
-** This routine can return PR_PENDING_INTERRUPT if the waiting thread 
+**
+** This routine can return PR_PENDING_INTERRUPT if the waiting thread
 ** has been interrupted.
 */
 PR_IMPLEMENT(PRStatus)

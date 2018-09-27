@@ -375,7 +375,7 @@ static void iterateTestsWithLevel ( const TestNode* root,
         UDate startTime, stopTime;
         char timeDelta[256];
         char timeSeconds[256];
-#else 
+#else
         const char timeDelta[] = "(unknown)";
         const char timeSeconds[] = "0.000";
 #endif
@@ -405,7 +405,7 @@ static void iterateTestsWithLevel ( const TestNode* root,
 #if SHOW_TIMES
         str_timeDelta(timeDelta, stopTime-startTime);
         sprintf(timeSeconds, "%f", (stopTime-startTime)/1000.0);
-#endif        
+#endif
         ctest_xml_testcase(pathToFunction, pathToFunction, timeSeconds, (myERROR_COUNT!=ERROR_COUNT)?"error":NULL);
 
         if (myERROR_COUNT != ERROR_COUNT) {
@@ -425,11 +425,11 @@ static void iterateTestsWithLevel ( const TestNode* root,
             log_testinfo(" %*s[OK] ", spaces,"---");
           }
         }
-                           
+
 #if SHOW_TIMES
         if(timeDelta[0]) printf("%s", timeDelta);
 #endif
-         
+
         ON_LINE = TRUE; /* we are back on-line */
     }
 
@@ -636,12 +636,12 @@ getTest(const TestNode* root, const char* name)
 
 static void go_offline_with_marker(const char *mrk) {
   UBool wasON_LINE = ON_LINE;
-  
+
   if(ON_LINE) {
     log_testinfo(" {\n");
     ON_LINE=FALSE;
   }
-  
+
   if(!HANGING_OUTPUT || wasON_LINE) {
     if(mrk != NULL) {
       fputs(mrk, stdout);
@@ -817,10 +817,10 @@ log_err_status(UErrorCode status, const char* pattern, ...)
 {
     va_list ap;
     va_start(ap, pattern);
-    
+
     if ((status == U_FILE_ACCESS_ERROR || status == U_MISSING_RESOURCE_ERROR)) {
         ++DATA_ERROR_COUNT; /* for informational message at the end */
-        
+
         if (WARN_ON_MISSING_DATA == 0) {
             first_line_err();
             /* Fatal error. */
@@ -831,7 +831,7 @@ log_err_status(UErrorCode status, const char* pattern, ...)
             }
             vlog_err(NULL, pattern, ap); /* no need for prefix in default case */
         } else {
-            vlog_info("[DATA] ", pattern, ap); 
+            vlog_info("[DATA] ", pattern, ap);
         }
     } else {
         first_line_err();
@@ -880,7 +880,7 @@ log_data_err(const char* pattern, ...)
         }
         vlog_err(NULL, pattern, ap); /* no need for prefix in default case */
     } else {
-        vlog_info("[DATA] ", pattern, ap); 
+        vlog_info("[DATA] ", pattern, ap);
     }
 }
 
@@ -892,15 +892,15 @@ static int traceFnNestingDepth = 0;
 U_CDECL_BEGIN
 static void U_CALLCONV TraceEntry(const void *context, int32_t fnNumber) {
     char buf[500];
-    utrace_format(buf, sizeof(buf), traceFnNestingDepth*3, "%s() enter.\n", utrace_functionName(fnNumber));    buf[sizeof(buf)-1]=0;  
+    utrace_format(buf, sizeof(buf), traceFnNestingDepth*3, "%s() enter.\n", utrace_functionName(fnNumber));    buf[sizeof(buf)-1]=0;
     fputs(buf, stdout);
     traceFnNestingDepth++;
-}   
- 
+}
+
 static void U_CALLCONV TraceExit(const void *context, int32_t fnNumber, const char *fmt, va_list args) {    char buf[500];
-    
+
     if (traceFnNestingDepth>0) {
-        traceFnNestingDepth--; 
+        traceFnNestingDepth--;
     }
     utrace_format(buf, sizeof(buf), traceFnNestingDepth*3, "%s() ", utrace_functionName(fnNumber));    buf[sizeof(buf)-1]=0;
     fputs(buf, stdout);
@@ -1158,7 +1158,7 @@ runTestRequest(const TestNode* root,
     }
 
     REPEAT_TESTS_INIT = 1;
-    
+
     if(ctest_xml_fini()) {
       errorCount++;
     }

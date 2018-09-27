@@ -18,14 +18,14 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
-  for (let b of [eval, eval, 4, 4]) { 
-      ++b; 
-      for (b of [(void 0), (void 0), (void 0), 3, (void 0), 3]) { 
-          b ^= b; 
+
+  for (let b of [eval, eval, 4, 4]) {
+      ++b;
+      for (b of [(void 0), (void 0), (void 0), 3, (void 0), 3]) {
+          b ^= b;
           for (var c of [1/0]) {
           }
-      } 
+      }
   }
 
   reportCompare(expect, actual, summary);

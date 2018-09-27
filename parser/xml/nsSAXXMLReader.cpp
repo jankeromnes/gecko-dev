@@ -324,7 +324,7 @@ nsSAXXMLReader::TryChannelCharset(nsIChannel *aChannel,
 {
   if (aCharsetSource >= kCharsetFromChannel)
     return true;
-  
+
   if (aChannel) {
     nsAutoCString charsetVal;
     nsresult rv = aChannel->GetContentCharset(charsetVal);
@@ -345,7 +345,7 @@ nsSAXXMLReader::TryChannelCharset(nsIChannel *aChannel,
 nsresult
 nsSAXXMLReader::EnsureBaseURI()
 {
-  if (mBaseURI) 
+  if (mBaseURI)
     return NS_OK;
 
   return NS_NewURI(getter_AddRefs(mBaseURI), "about:blank");

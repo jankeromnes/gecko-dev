@@ -21,12 +21,12 @@ addMessageListener("nonEmptyFile.open", function (e) {
   tmpFile.append('file.txt');
   tmpFile.createUnique(Ci.nsIFile.FILE_TYPE, 0o600);
 
-  var outStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream); 
+  var outStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
   outStream.init(tmpFile, 0x02 | 0x08 | 0x20, // write, create, truncate
-                 0o666, 0);                         
+                 0o666, 0);
   var fileData = "Hello world!";
   outStream.write(fileData, fileData.length);
-  outStream.close();                           
+  outStream.close();
 
 
   File.createFromNsIFile(tmpFile).then(function(file) {

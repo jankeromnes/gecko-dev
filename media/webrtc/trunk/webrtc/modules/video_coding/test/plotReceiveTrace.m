@@ -35,14 +35,14 @@ while ischar(line)%line ~= -1
     ms=tempres(4);
     timeInMs=hr*60*60*1000 + mn*60*1000 + sec*1000 + ms;
     label = tempres(5:end);
-    I = find(label ~= 32); 
+    I = find(label ~= 32);
     label = label(I(1):end); % remove white spaces
     if ~strncmp(char(label), 'VIDEO', 5) & ~strncmp(char(label), 'VIDEO CODING', 12)
         line = fgetl(fid);
         continue;
     end
     message = line(72:end);
-    
+
     % Parse message
     [p, count] = sscanf(message, 'ExtrapolateLocalTime(%lu)=%lu ms');
     if count == 2
@@ -50,28 +50,28 @@ while ischar(line)%line ~= -1
         line = fgetl(fid);
         continue;
     end
-    
+
     [p, count] = sscanf(message, 'Packet seqNo %u of frame %lu at %lu');
     if count == 3
         packetTime = [packetTime; p'];
         line = fgetl(fid);
         continue;
     end
-    
+
     [p, count] = sscanf(message, 'First packet of frame %lu at %lu');
     if count == 2
         firstPacketTime = [firstPacketTime; p'];
         line = fgetl(fid);
         continue;
     end
-    
+
     [p, count] = sscanf(message, 'Decoding timestamp %lu at %lu');
     if count == 2
         decodeTime = [decodeTime; p'];
         line = fgetl(fid);
-        continue;        
+        continue;
     end
-    
+
     [p, count] = sscanf(message, 'Render frame %lu at %lu. Render delay %lu, required delay %lu, max decode time %lu, min total delay %lu');
     if count == 6
         renderTime = [renderTime; p'];
@@ -92,7 +92,7 @@ while ischar(line)%line ~= -1
         line = fgetl(fid);
         continue;
     end
-    
+
     line = fgetl(fid);
 end
 fclose(fid);
@@ -159,14 +159,14 @@ if prod(size(renderTime)) > 0
         slope = x;
     end
     plot(x, renderTime(:,2) - firstTime - slope, 'c-');
-    
+
     % Plot the render time if there were no render delay or decoding delay.
     x = (renderTime(:,1) - firstTimeStamp)/90;
     if flat
         slope = x;
     end
     plot(x, renderTime(:,2) - firstTime - slope - renderTime(:, 3) - renderTime(:, 5), 'c--');
-    
+
     % Plot the render time if there were no render delay.
     x = (renderTime(:,1) - firstTimeStamp)/90;
     if flat

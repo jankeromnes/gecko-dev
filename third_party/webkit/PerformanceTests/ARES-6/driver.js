@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -39,28 +39,28 @@ class Driver {
         if (isInBrowser)
             window[key] = this;
     }
-    
+
     addBenchmark(benchmark)
     {
         this._benchmarks.set(benchmark, new Results(benchmark));
     }
-    
-    readyTrigger() 
+
+    readyTrigger()
     {
         if (isInBrowser) {
             this._triggerCell.addEventListener('click', this._triggerLink);
             this._triggerCell.classList.add('ready');
         }
     }
-    
-    disableTrigger() 
+
+    disableTrigger()
     {
         if (isInBrowser) {
             this._triggerCell.removeEventListener('click', this._triggerLink);
             this._triggerCell.classList.remove('ready');
         }
     }
-    
+
     start(numIterations)
     {
         this.disableTrigger();
@@ -74,14 +74,14 @@ class Driver {
         this._iterator = null;
         this._iterate();
     }
-    
+
     reportResult(...args)
     {
         this._benchmarks.get(this._benchmark).reportResult(...args);
         this._recomputeSummary();
         this._iterate();
     }
-    
+
     reportError(...args)
     {
         if (isInBrowser)
@@ -95,7 +95,7 @@ class Driver {
         } else
             print("Test failure");
     }
-    
+
     _recomputeSummary()
     {
         class Geomean {
@@ -104,19 +104,19 @@ class Driver {
                 this._count = 0;
                 this._sum = 0;
             }
-            
+
             add(value)
             {
                 this._count++;
                 this._sum += Math.log(value);
             }
-            
+
             get result()
             {
                 return Math.exp(this._sum * (1 / this._count));
             }
         }
-        
+
         let statses = [];
         for (let [benchmark, results] of this._benchmarks) {
             for (let subResult of Results.subResults) {
@@ -133,7 +133,7 @@ class Driver {
         let data = new Array(numIterations);
         for (let i = 0; i < data.length; ++i)
             data[i] = new Geomean();
-        
+
         for (let stats of statses) {
             for (let i = 0; i < data.length; ++i)
                 data[i].add(stats.valueForIteration(i));
@@ -168,18 +168,18 @@ class Driver {
             this._iterator = this._benchmarks.keys();
             this._benchmark = this._iterator.next().value;
         }
-        
+
         this._benchmarks.get(this._benchmark).reportRunning();
-        
+
         let benchmark = this._benchmark;
         if (isInBrowser) {
             window.setTimeout(() => {
                 if (!this._isRunning)
                     return;
-                
+
                 this._magicCell.contentDocument.body.textContent = "";
                 this._magicCell.contentDocument.body.innerHTML = "<iframe id=\"magicFrame\" frameborder=\"0\">";
-                
+
                 let magicFrame = this._magicCell.contentDocument.getElementById("magicFrame");
                 magicFrame.contentDocument.open();
                 magicFrame.contentDocument.write(
@@ -197,7 +197,7 @@ class Driver {
             Promise.resolve(20).then(() => {
                 if (!this._isRunning)
                     return;
-                
+
                 try {
                     print(`Running... ${this._benchmark.name} ( ${this._numIterations + 1}  to go)`);
                     benchmark.run();
@@ -209,12 +209,12 @@ class Driver {
             });
         }
     }
-    
+
     _updateIterations()
     {
         if (isInBrowser) {
             this._statusCell.innerHTML = "Running Tests... " + ( this._startIterations - this._numIterations ) + "/" + this._startIterations;
         }
-        
+
     }
 }

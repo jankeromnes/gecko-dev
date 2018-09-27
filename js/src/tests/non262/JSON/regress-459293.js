@@ -13,7 +13,7 @@ var expect = '';
 
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   try
   {
     eval('var JSON = "foo";');

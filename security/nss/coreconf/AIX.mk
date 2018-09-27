@@ -12,7 +12,7 @@ include $(CORE_DEPTH)/coreconf/UNIX.mk
 # pthreads, and pthreads-user.  The default is pthreads.
 # In both strategies, we need to use pthread_user.c, instead of
 # aix.c.  The fact that aix.c is never used is somewhat strange.
-# 
+#
 # So we need to do the following:
 # - Default (PTHREADS_USER not defined in the environment or on
 #   the command line):

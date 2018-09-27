@@ -70,7 +70,7 @@ class WEBRTC_DLLEXPORT VoEHardware {
   virtual int GetPlayoutDeviceName(int index,
                                    char strNameUTF8[128],
                                    char strGuidUTF8[128]) = 0;
- 
+
   // Checks if the sound card is available to be opened for recording.
   virtual int GetRecordingDeviceStatus(bool& isAvailable) = 0;
 
@@ -90,7 +90,7 @@ class WEBRTC_DLLEXPORT VoEHardware {
 
   // Gets the currently used (active) audio device layer.
   virtual int GetAudioDeviceLayer(AudioLayers& audioLayer) = 0;
- 
+
   // Gets the VoiceEngine's current CPU consumption in terms of the percent
   // of total CPU availability. [Windows only]
   virtual int GetCPULoad(int& loadPercent) = 0;

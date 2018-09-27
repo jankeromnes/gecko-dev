@@ -55,7 +55,7 @@ var poisonedProperty = Object.defineProperty({}, 'poisoned', {
 
 class C {
   static async *method({ poisoned }) {
-    
+
   }
 };
 

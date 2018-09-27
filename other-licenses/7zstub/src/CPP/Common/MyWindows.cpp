@@ -17,7 +17,7 @@ static inline void FreeForBSTR(void *pv) { ::free(pv);}
     if (CBstrSizeType is UINT32),
           then we support only strings smaller than 4 GB.
           Win32 version always has that limitation.
-  
+
     if (CBstrSizeType is UINT),
           (UINT can be 16/32/64-bit)
           We can support strings larger than 4 GB (if UINT is 64-bit),

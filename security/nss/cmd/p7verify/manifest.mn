@@ -7,9 +7,9 @@ CORE_DEPTH = ../..
 
 MODULE = nss
 
-CSRCS = p7verify.c  
+CSRCS = p7verify.c
 
-REQUIRES = seccmd 
+REQUIRES = seccmd
 
 PROGRAM = p7verify
 

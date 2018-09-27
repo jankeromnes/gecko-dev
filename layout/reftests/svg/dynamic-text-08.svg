@@ -17,7 +17,7 @@
 
       // A dynamic change
       document.getElementById("g").removeAttribute("transform");
-      
+
       document.documentElement.removeAttribute("class");
     }
   </script>

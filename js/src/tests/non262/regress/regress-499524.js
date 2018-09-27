@@ -16,7 +16,7 @@ function isSyntaxError(code) {
   };
 };
 
-/* 
+/*
  * Duplicate parameter names must be tolerated (as per ES3), unless
  * the parameter list uses destructuring, in which case we claim the
  * user has opted in to a modicum of sanity, and we forbid duplicate

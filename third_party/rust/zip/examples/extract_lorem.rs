@@ -18,7 +18,7 @@ fn real_main() -> i32
     let zipfile = std::fs::File::open(&fname).unwrap();
 
     let mut archive = zip::ZipArchive::new(zipfile).unwrap();
-    
+
     let mut file = match archive.by_name("test/lorem_ipsum.txt")
     {
         Ok(file) => file,

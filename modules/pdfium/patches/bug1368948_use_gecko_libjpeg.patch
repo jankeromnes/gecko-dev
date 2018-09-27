@@ -14,7 +14,7 @@ diff --git a/modules/pdfium/pdfium/core/fxcodec/codec/fx_codec_jpeg.cpp b/module
 @@ -15,17 +15,17 @@
  #include "core/fxge/fx_dib.h"
  #include "third_party/base/ptr_util.h"
- 
+
  extern "C" {
  #undef FAR
  #if defined(USE_SYSTEM_LIBJPEG)
@@ -26,7 +26,7 @@ diff --git a/modules/pdfium/pdfium/core/fxcodec/codec/fx_codec_jpeg.cpp b/module
  #include "third_party/libjpeg/jpeglib.h"
  #endif
  }
- 
+
  extern "C" {
- 
+
  static void JpegScanSOI(const uint8_t** src_buf, uint32_t* src_size) {

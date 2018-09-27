@@ -76,7 +76,7 @@ TEST_F(StringTableTest, Basic) {
   const string s1("table fills with strings");
   const string s2("offsets preserved as labels");
   const string s3("verified with tests");
-  const char* kExpectedContents = 
+  const char* kExpectedContents =
     "\0table fills with strings\0"
     "offsets preserved as labels\0"
     "verified with tests\0";

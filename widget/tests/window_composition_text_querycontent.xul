@@ -37,7 +37,7 @@
 <input id="input" type="text"/><br/>
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 </pre>
@@ -3087,7 +3087,7 @@ function runCharAtPointTest(aFocusedEditor, aTargetName)
 {
   aFocusedEditor.value = "This is a test of the\nContent Events";
                        // 012345678901234567890  12345678901234
-                       // 0         1         2           3    
+                       // 0         1         2           3
 
   aFocusedEditor.focus();
 

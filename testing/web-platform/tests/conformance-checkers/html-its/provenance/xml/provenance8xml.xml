@@ -2,7 +2,7 @@
   xmlns:its="http://www.w3.org/2005/11/its" its:version="2.0">
   <title>Translation Revision Provenance Agent: Local Test in XML</title>
   <body>
-    <its:span personRef="http://www.provdata.com/person/#John_Doe" 
+    <its:span personRef="http://www.provdata.com/person/#John_Doe"
       toolRef="http://www.onlinemtex.com/2012/7/25/wsdl/"
       org="acme-CAT-v2.3"
       revToolRef="http://www.mycat.com/v1.0/download"

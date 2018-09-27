@@ -44,7 +44,7 @@ public:
   using GfxInfoBase::GetFeatureSuggestedDriverVersion;
 
   virtual nsresult Init() override;
-  
+
   NS_IMETHOD_(void) GetData() override;
 
 #ifdef DEBUG

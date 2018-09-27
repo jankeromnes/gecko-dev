@@ -140,7 +140,7 @@ android_get_result:
 	rm -f $(WORKDIR)/result.sftp $(WORKDIR)/$(RESULTSPACKAGE)
 	echo "progress" > $(WORKDIR)/result.sftp
 	echo 'get nsstest/$(RESULTSPACKAGE) $(WORKDIR)' >> $(WORKDIR)/result.sftp
-	sftp -o Port=$(ANDROID_PORT) -o CheckHostIP=no -b $(WORKDIR)/result.sftp $(ANDROID_ADDR) 
+	sftp -o Port=$(ANDROID_PORT) -o CheckHostIP=no -b $(WORKDIR)/result.sftp $(ANDROID_ADDR)
 	(cd $(WORKDIR); tar xzf $(RESULTSPACKAGE); rm -f result.sftp $(RESULTSPACKAGE) )
 
 # Android testing assumes having built with: OS_TARGET=Android CROSS_COMPILE=1

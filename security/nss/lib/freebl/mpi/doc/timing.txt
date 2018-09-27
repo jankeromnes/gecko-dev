@@ -97,7 +97,7 @@ A7      200     min=0.20, avg=4.03, max=14.65, sum=806.02
 Modular Exponentation (metime)
 
 The following results are aggregated from 200 pseudo-randomly
-generated tests, based on a fixed seed. 
+generated tests, based on a fixed seed.
 
                       base, exponent, and modulus size (bits)
 P/C       128   192   256   320   384   448   512   640   768   896  1024

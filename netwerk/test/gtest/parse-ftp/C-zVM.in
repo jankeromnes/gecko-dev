@@ -4,7 +4,7 @@ ftp> open vm.marist.edu
 220-All usage logged. Usage restricted.
 220-FTPSERVE IBM VM Level 420 at VM.MARIST.EDU, 05:06:00 EDT WEDNESDAY 2002-07-10
 220 Connection will close if idle for more than 5 minutes.
-Name (vm.marist.edu:cyp): 
+Name (vm.marist.edu:cyp):
 230-
 230-
 230-Listserv logs for certain lists are available via CD ACADEM:listname.

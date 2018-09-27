@@ -30,7 +30,7 @@ let _;
 let iterCount = 0;
 async function * fn() {
   for await ([[ _ ]] of [[null]]) {
-    
+
     iterCount += 1;
   }
 }

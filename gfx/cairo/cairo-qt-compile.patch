@@ -9,7 +9,7 @@ diff -r 2563fa2763b0 -r 9ab15e95a354 gfx/cairo/cairo/src/cairo-qt-surface.cpp
      }
 +    return QPainter::CompositionMode_Source;
  }
- 
+
  static bool
 @@ -668,7 +669,6 @@
  static cairo_status_t

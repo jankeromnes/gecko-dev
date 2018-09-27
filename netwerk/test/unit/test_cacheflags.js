@@ -38,7 +38,7 @@ function make_channel(url, flags, usePrivateBrowsing) {
   return req;
 }
 
-function Test(path, flags, expectSuccess, readFromCache, hitServer, 
+function Test(path, flags, expectSuccess, readFromCache, hitServer,
               usePrivateBrowsing /* defaults to false */) {
   this.path = path;
   this.flags = flags;

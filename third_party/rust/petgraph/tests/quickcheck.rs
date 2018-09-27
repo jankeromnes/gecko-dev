@@ -21,7 +21,7 @@ use itertools::cloned;
 
 use petgraph::prelude::*;
 use petgraph::{
-    EdgeType, 
+    EdgeType,
 };
 use petgraph::dot::{Dot, Config};
 use petgraph::algo::{

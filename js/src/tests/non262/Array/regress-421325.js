@@ -18,12 +18,12 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   Array.prototype[1] = 'bar';
 
-  var a = []; 
-  a[0]='foo'; 
-  a[2] = 'baz'; 
+  var a = [];
+  a[0]='foo';
+  a[2] = 'baz';
   expect = 'foo,bar,baz';
   actual = a + '';
 

@@ -11,7 +11,7 @@ info: |
        a. If SameValue(e.[[Symbol]], sym) is true, return e.[[Key]].
     3. Assert: GlobalSymbolRegistry does not currently contain an entry for
        sym.
-    4. Return undefined. 
+    4. Return undefined.
 features: [Symbol.iterator, Symbol]
 ---*/
 

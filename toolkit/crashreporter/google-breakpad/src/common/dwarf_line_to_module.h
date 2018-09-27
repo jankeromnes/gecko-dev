@@ -47,7 +47,7 @@
 namespace google_breakpad {
 
 // A class for producing a vector of google_breakpad::Module::Line
-// instances from parsed DWARF line number data.  
+// instances from parsed DWARF line number data.
 //
 // An instance of this class can be provided as a handler to a
 // dwarf2reader::LineInfo DWARF line number information parser. The
@@ -76,7 +76,7 @@ namespace google_breakpad {
 //    Special opcode 119: advance Address by 8 to 0xb and Line by 2 to 18
 //    Advance PC by 2 to 0xd
 //    Extended opcode 1: End of Sequence
-// 
+//
 //    Extended opcode 2: set Address to 0x0
 //    Advance Line by 14 to 15
 //    Copy
@@ -84,7 +84,7 @@ namespace google_breakpad {
 //    Special opcode 119: advance Address by 8 to 0xb and Line by 2 to 18
 //    Advance PC by 2 to 0xd
 //    Extended opcode 1: End of Sequence
-// 
+//
 //    Extended opcode 2: set Address to 0x0
 //    Advance Line by 19 to 20
 //    Copy
@@ -92,7 +92,7 @@ namespace google_breakpad {
 //    Special opcode 76: advance Address by 5 to 0x8 and Line by 1 to 22
 //    Advance PC by 2 to 0xa
 //    Extended opcode 1: End of Sequence
-// 
+//
 //    Extended opcode 2: set Address to 0x80483a4
 //    Advance Line by 23 to 24
 //    Copy
@@ -129,7 +129,7 @@ class DwarfLineToModule: public dwarf2reader::LineInfoHandler {
         omitted_line_end_(0),
         warned_bad_file_number_(false),
         warned_bad_directory_number_(false) { }
-  
+
   ~DwarfLineToModule() { }
 
   void DefineDir(const string &name, uint32 dir_num);
@@ -172,7 +172,7 @@ class DwarfLineToModule: public dwarf2reader::LineInfoHandler {
   // The highest file number we've seen so far, or -1 if we've seen
   // none.  Used for dynamically defined file numbers.
   int32 highest_file_number_;
-  
+
   // This is the ending address of the last line we omitted, or zero if we
   // didn't omit the previous line. It is zero before we have received any
   // AddLine calls.

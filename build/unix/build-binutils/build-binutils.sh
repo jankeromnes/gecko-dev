@@ -57,7 +57,7 @@ index 8878ccd..d644b56 100644
        h->type = bfd_link_hash_undefined;
        h->u.undef.abfd = NULL;
      }
--- 
+--
 2.17.1
 EOF
 

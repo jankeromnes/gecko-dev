@@ -71,7 +71,7 @@
 
               # Stats
               src/stats/nrstats.h
-              
+
               # Meta-files
               COPYRIGHT
               VERSION
@@ -83,5 +83,5 @@
 
 
 
-              
+
 

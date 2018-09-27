@@ -34,9 +34,9 @@ index 1a24ae3dba1..f9ecbc04326 100644
 --- a/llvm/lib/Analysis/BasicAliasAnalysis.cpp
 +++ b/llvm/lib/Analysis/BasicAliasAnalysis.cpp
 @@ -801,14 +801,15 @@ ModRefInfo BasicAAResult::getModRefInfo(ImmutableCallSite CS,
- 
+
    const Value *Object = GetUnderlyingObject(Loc.Ptr, DL);
- 
+
 -  // If this is a tail call and Loc.Ptr points to a stack location, we know that
 -  // the tail call cannot access or modify the local stack.
 -  // We cannot exclude byval arguments here; these belong to the caller of
@@ -53,7 +53,7 @@ index 1a24ae3dba1..f9ecbc04326 100644
 +      if (CI->isTailCall() &&
 +          !CI->getAttributes().hasAttrSomewhere(Attribute::ByVal))
          return ModRefInfo::NoModRef;
- 
+
    // If the pointer is to a locally allocated object that does not escape,
 diff --git a/llvm/test/Analysis/BasicAA/tail-byval.ll b/llvm/test/Analysis/BasicAA/tail-byval.ll
 new file mode 100644
@@ -105,6 +105,6 @@ index 00000000000..ed2fbd434a7
 +; CHECK-LABEL: define void @f(i32* byval %x)
 +; CHECK:   store i32 %v, i32* %p
 +; CHECK:   tail call void @g(i32* byval %p)
--- 
+--
 2.18.0
 

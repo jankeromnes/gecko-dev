@@ -16,7 +16,7 @@ try {
 } catch(e) {
   if ((e instanceof SyntaxError) !== true) {
     $ERROR('#1.2: return must throw SyntaxError. Actual: ' + (e));
-  }  
+  }
 }
 
 //CHECK#2
@@ -24,12 +24,12 @@ try {
 function f() {  eval("return;"); };
 
 try {
-  f();      
+  f();
   $ERROR('#2.1: return must throw SyntaxError. Actual: ' + (f()));
 } catch(e) {
   if ((e instanceof SyntaxError) !== true) {
     $ERROR('#2.2: return must throw SyntaxError. Actual: ' + (e));
-  }  
+  }
 }
 
 reportCompare(0, 0);

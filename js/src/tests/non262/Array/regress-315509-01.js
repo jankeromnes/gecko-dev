@@ -24,5 +24,5 @@ a.unshift('a','b');
 
 expect = 'a,b,0,,2,3,4';
 actual = a.toString();
- 
+
 reportCompare(expect, actual, summary);

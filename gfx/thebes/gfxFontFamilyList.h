@@ -22,7 +22,7 @@ namespace mozilla {
  * type of font family name, either a name (e.g. Helvetica) or a
  * generic (e.g. serif, sans-serif), with the ability to distinguish
  * between unquoted and quoted names for serializaiton
- */ 
+ */
 
 enum FontFamilyType : uint8_t {
   eFamily_none = 0,  // used when finding generics

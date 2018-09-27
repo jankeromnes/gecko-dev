@@ -118,7 +118,7 @@ function openContextMenu() {
           ok(y >= mouseY,
              "menu top " + y + " should be below click point " + mouseY);
         }
-        
+
         ok(y <= mouseY + 20,
            "menu top " + y + " should not be too far below click point " + mouseY);
 

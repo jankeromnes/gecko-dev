@@ -104,4 +104,4 @@ def WebIDLTest(parser, harness):
         threw = True
 
     harness.ok(threw, "[EnforceRange] must take no arguments")
-    
+

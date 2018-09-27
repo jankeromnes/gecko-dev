@@ -56,7 +56,7 @@ function testWithToLocale(f, options, expected) {
                     ", got " + formatted + ".");
         });
     });
-}   
+}
 
 // any/date: steps 5a, 6a, 7a
 testWithDateTimeFormat(undefined, {year: "numeric", month: "numeric", day: "numeric"});

@@ -1,4 +1,4 @@
-#!/bin/bash    
+#!/bin/bash
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -79,7 +79,7 @@ EOF
                 break
                 exit 1
                 ;;
-        AIA)    
+        AIA)
                 extCmdLine="$extCmdLine -9"
                 cat <<EOF >> $extCmdFile
 2
@@ -163,7 +163,7 @@ generateAndExportSSLCerts() {
     createSignedCert $dir $certDir $certName 501 "$certSubj" dsa
     ret=$?
     [ "$ret" -ne 0 ] && return $ret
-   
+
     certName=TestUser510
     createSignedCert $dir $certDir $certName 510 "$certSubj" rsa
     ret=$?
@@ -235,9 +235,9 @@ generateAndExportOCSPCerts() {
 
     generateAndExportCACert $dir "" TestCA-unknown
     [ $? -ne 0 ] && return $ret
-    
+
     certSigner=TestCA-unknown
-    
+
     certName=ocspTRUnkownIssuerCert
     createSignedCert $dir $certDir $certName 531 "$certSubj" rsa
     ret=$?
@@ -256,7 +256,7 @@ generateAndExportOCSPCerts() {
     [ "$ret" -ne 0 ] && return $ret
 
     certSigner=""
-    
+
     return 0
 }
 
@@ -282,9 +282,9 @@ EOF
 
     if [ "$certDirL" ]; then
         repAndExec \
-            certutil -L -n $certName -r -d ${dir} -o $certDirL/$certName.crt 
+            certutil -L -n $certName -r -d ${dir} -o $certDirL/$certName.crt
         [ "$RET" -ne 0 ] && return $RET
-        
+
         repAndExec \
             pk12util -d $dir -o $certDirL/$certName.p12 -n $certName -k ${PW_FILE} -W iopr
         [ "$RET" -ne 0 ] && return $RET
@@ -297,33 +297,33 @@ generateCerts() {
     serverName=$2
     reuseCACert=$3
     servCertReq=$4
-    
+
     [ -z "$certDir" ] && echo "Cert directory should not be empty" && exit 1
     [ -z "$serverName" ] && echo "Server name should not be empty" && exit 1
 
     mkdir -p $certDir
     [ $? -ne 0 ] && echo "Can not create dir: $certDir" && exit 1
-    
+
 
     dir=/tmp/db.$$
     if [ -z "$reuseCACert" ]; then
         if [ -d "$dir" ]; then
             rm -f $dir
         fi
-   
+
         PW_FILE=$dir/nss.pwd
         NOISE_FILE=$dir/nss.noise
 
         mkdir -p $dir
         [ $? -ne 0 ] && echo "Can not create dir: $dir" && exit 1
-        
+
         echo nss > $PW_FILE
         date >> ${NOISE_FILE} 2>&1
-        
+
         repAndExec \
             certutil -d $dir -N -f $PW_FILE
         [ "$RET" -ne 0 ] && return $RET
-        
+
         generateAndExportCACert $dir $certDir
         [ "$RET" -ne 0 ] && return $RET
     else

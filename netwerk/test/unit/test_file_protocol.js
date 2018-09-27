@@ -133,7 +133,7 @@ function test_read_file() {
 
     /* read completed successfully.  now read data directly from file,
        and compare the result. */
-    var stream = new_file_input_stream(file, false);   
+    var stream = new_file_input_stream(file, false);
     var result = read_stream(stream, stream.available());
     if (result != data)
       do_throw("Stream contents do not match with direct read!");
@@ -200,8 +200,8 @@ function test_upload_file() {
     if (data.length != 0)
       do_throw("Upload resulted in data!");
 
-    var oldstream = new_file_input_stream(file, false);   
-    var newstream = new_file_input_stream(dest, false);   
+    var oldstream = new_file_input_stream(file, false);
+    var newstream = new_file_input_stream(dest, false);
     var olddata = read_stream(oldstream, oldstream.available());
     var newdata = read_stream(newstream, newstream.available());
     if (olddata != newdata)
@@ -209,7 +209,7 @@ function test_upload_file() {
     oldstream.close();
     newstream.close();
 
-    /* cleanup... also ensures that the destination file is not in 
+    /* cleanup... also ensures that the destination file is not in
        use when OnStopRequest is called. */
     try {
       dest.remove(false);
@@ -217,7 +217,7 @@ function test_upload_file() {
       dump(e + "\n");
       do_throw("Unable to remove uploaded file!\n");
     }
-    
+
     run_next_test();
   }
 

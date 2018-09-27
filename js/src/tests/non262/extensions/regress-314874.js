@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var thisArg = { valueOf: function() { return {a: 'a', b: 'b'}; } };
 
   var f = function () { return (this); };

@@ -52,7 +52,7 @@ else
 	endif
 endif
 
-ODD_CFLAGS	+= -DSVR4 -DIRIX 
+ODD_CFLAGS	+= -DSVR4 -DIRIX
 
 CPU_ARCH	= mips
 

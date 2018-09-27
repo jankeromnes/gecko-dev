@@ -19,7 +19,7 @@ SharedStub:
         mov     %o0, %o1            ! shuffle the index up to 2nd place
         mov     %i0, %o0            ! the original 'this'
         add     %fp, 72, %o2        ! previous stack top adjusted to the first argument slot (beyond 'this')
-! save off the original incoming parameters that arrived in 
+! save off the original incoming parameters that arrived in
 ! registers, the ABI guarantees the space for us to do this
         st      %i1, [%fp + 72]
         st      %i2, [%fp + 76]
@@ -32,7 +32,7 @@ SharedStub:
 ! our function now appears to have been called
 ! as SharedStub(nsISupports* that, uint32_t index, uint32_t* args)
 ! so we can just copy these through
-        
+
         mov     %i0, %o0
         mov     %i1, %o1
         mov     %i2, %o2

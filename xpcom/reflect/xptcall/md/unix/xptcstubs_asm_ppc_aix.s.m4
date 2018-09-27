@@ -19,7 +19,7 @@
 
 # Define the correct name of the stub function based on the object model
 
-define(STUB_NAME, 
+define(STUB_NAME,
        ifelse(AIX_OBJMODEL, ibm,
               `Stub'$1`__EI14nsXPTCStubBaseFv',
               `Stub'$1`__14nsXPTCStubBaseFv'))
@@ -35,7 +35,7 @@ define(STUB_ENTRY, `
     li      r12, '$1`
     b       .SharedStub
     nop
-        
+
 
     .toc
 T.18.'STUB_NAME($1)`:
@@ -98,7 +98,7 @@ include(xptcstubsdef.inc)
     bl      .PrepareAndDispatch
     nop
 
-    
+
     lwz     r0,184(sp)
     addi    sp,sp,176
     mtlr    r0

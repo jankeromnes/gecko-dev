@@ -275,7 +275,7 @@ pub trait FromElements : Create {
         }
         gr
     }
-        
+
 }
 
 fn from_elements_indexable<G, I>(iterable: I) -> G

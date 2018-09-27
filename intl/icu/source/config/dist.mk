@@ -51,7 +51,7 @@ $(DISTY_DOC_ZIP):  $(DOCZIP) $(DISTY_FILE_DIR)
 	cp $(DOCZIP) $(DISTY_DOC_ZIP)
 	ln -sf $(shell basename $(DISTY_DOC_ZIP)) $(DISTY_FILE_DIR)/icu4c-docs.zip
 
-$(DISTY_DAT): 
+$(DISTY_DAT):
 	echo Missing $@
 	/bin/false
 
@@ -66,7 +66,7 @@ $(DISTY_FILE_TGZ) $(DISTY_FILE_ZIP) $(DISTY_DATA_ZIP):  $(DISTY_DAT) $(DISTY_TMP
 	-$(RMV) $(DISTY_FILE) $(DISTY_TMP)
 	$(MKINSTALLDIRS) $(DISTY_TMP)
 	@echo collecting excludes to $(EXCLUDES_FILE)
-	(cd "$(SVNTOP)" ; svn status --no-ignore  | grep '^I' | cut -c2- > "$(EXCLUDES_FILE)" ) 
+	(cd "$(SVNTOP)" ; svn status --no-ignore  | grep '^I' | cut -c2- > "$(EXCLUDES_FILE)" )
 	@echo pseudo-exporting $(SVNVER)
 	@#svn export -r $(shell echo $(SVNVER) | tr -d 'a-zA-Z' ) $(SVNURL) "$(DISTY_TMP)/icu"
 	rsync -a --exclude-from="$(EXCLUDES_FILE)" "$(SVNTOP)" "$(DISTY_TMP)/icu"

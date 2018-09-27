@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   Function["prototype"].inherits=function(a){};
   function foo(){};
   function bar(){};

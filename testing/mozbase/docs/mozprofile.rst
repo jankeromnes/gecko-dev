@@ -20,7 +20,7 @@ Addons may be installed individually or from a manifest.
 Example::
 
 	from mozprofile import FirefoxProfile
-	
+
 	# create new profile to pass to mozmill/mozrunner
 	profile = FirefoxProfile(addons=["adblock.xpi"])
 
@@ -85,7 +85,7 @@ their management.
 
 - ProfileManager_: XULRunner application for managing profiles. Has a GUI and CLI.
 - python-profilemanager_: python CLI interface similar to ProfileManager
-- profile documentation_ 
+- profile documentation_
 
 
 .. _Mozprofile: https://github.com/mozilla/mozbase/tree/master/mozprofile

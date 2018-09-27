@@ -30,18 +30,18 @@
         }
         return tokens;
     };
-    
+
     var parse = function (tokens, opt) {
         var line = 1;
         tokens = tokens.slice();
-        
+
         var FLOAT = "float"
         ,   INT = "integer"
         ,   ID = "identifier"
         ,   STR = "string"
         ,   OTHER = "other"
         ;
-        
+
         var WebIDLParseError = function (str, line, input, tokens) {
             this.message = str;
             this.line = line;
@@ -52,7 +52,7 @@
             return this.message + ", line " + this.line + " (tokens: '" + this.input + "')\n" +
                    JSON.stringify(this.tokens, null, 4);
         };
-        
+
         var error = function (str) {
             var tok = "", numTokens = 0, maxTokens = 5;
             while (numTokens < maxTokens && tokens.length > numTokens) {
@@ -61,9 +61,9 @@
             }
             throw new WebIDLParseError(str, line, tok, tokens.slice(0, 5));
         };
-        
+
         var last_token = null;
-        
+
         var consume = function (type, value) {
             if (!tokens.length || tokens[0].type !== type) return;
             if (typeof value === "undefined" || tokens[0].value === value) {
@@ -72,7 +72,7 @@
                  return last_token;
              }
         };
-        
+
         var ws = function () {
             if (!tokens.length) return;
             if (tokens[0].type === "whitespace") {
@@ -81,7 +81,7 @@
                 return t;
             }
         };
-        
+
         var all_ws = function (store, pea) { // pea == post extended attribute, tpea = same for types
             var t = { type: "whitespace", value: "" };
             while (true) {
@@ -118,7 +118,7 @@
                 return t;
             }
         };
-        
+
         var integer_type = function () {
             var ret = "";
             all_ws();
@@ -133,7 +133,7 @@
             }
             if (ret) error("Failed to parse integer type");
         };
-        
+
         var float_type = function () {
             var ret = "";
             all_ws();
@@ -143,7 +143,7 @@
             if (consume(ID, "double")) return ret + "double";
             if (ret) error("Failed to parse float type");
         };
-        
+
         var primitive_type = function () {
             var num_type = integer_type() || float_type();
             if (num_type) return num_type;
@@ -152,7 +152,7 @@
             if (consume(ID, "byte")) return "byte";
             if (consume(ID, "octet")) return "octet";
         };
-        
+
         var const_value = function () {
             if (consume(ID, "true")) return { type: "boolean", value: true };
             if (consume(ID, "false")) return { type: "boolean", value: false };
@@ -167,7 +167,7 @@
                 else tokens.unshift(tok);
             }
         };
-        
+
         var type_suffix = function (obj) {
             while (true) {
                 all_ws();
@@ -191,7 +191,7 @@
                 else return;
             }
         };
-        
+
         var single_type = function () {
             var prim = primitive_type()
             ,   ret = { sequence: false, generic: null, nullable: false, array: false, union: false }
@@ -229,7 +229,7 @@
             if (ret.nullable && !ret.array && ret.idlType === "any") error("Type any cannot be made nullable");
             return ret;
         };
-        
+
         var union_type = function () {
             all_ws();
             if (!consume(OTHER, "(")) return;
@@ -246,11 +246,11 @@
             type_suffix(ret);
             return ret;
         };
-        
+
         var type = function () {
             return single_type() || union_type();
         };
-        
+
         var argument = function (store) {
             var ret = { optional: false, variadic: false };
             ret.extAttrs = extended_attrs(store);
@@ -293,7 +293,7 @@
             }
             return ret;
         };
-        
+
         var argument_list = function (store) {
             var ret = []
             ,   arg = argument(store ? ret : null)
@@ -307,7 +307,7 @@
                 ret.push(nxt);
             }
         };
-        
+
         var type_pair = function () {
             all_ws();
             var k = type();
@@ -319,7 +319,7 @@
             if (!v) return;
             return [k, v];
         };
-        
+
         var simple_extended_attr = function (store) {
             all_ws();
             var name = consume(ID);
@@ -355,7 +355,7 @@
             }
             return ret;
         };
-        
+
         // Note: we parse something simpler than the official syntax. It's all that ever
         // seems to be used
         var extended_attrs = function (store) {
@@ -371,7 +371,7 @@
             consume(OTHER, "]") || error("No end of extended attribute");
             return eas;
         };
-        
+
         var default_ = function () {
             all_ws();
             if (consume(OTHER, "=")) {
@@ -387,7 +387,7 @@
                 }
             }
         };
-        
+
         var const_ = function (store) {
             all_ws(store, "pea");
             if (!consume(ID, "const")) return;
@@ -416,7 +416,7 @@
             consume(OTHER, ";") || error("Unterminated const");
             return ret;
         };
-        
+
         var inheritance = function () {
             all_ws();
             if (consume(OTHER, ":")) {
@@ -425,7 +425,7 @@
                 return inh.value;
             }
         };
-        
+
         var operation_rest = function (ret, store) {
             all_ws();
             if (!ret) ret = {};
@@ -440,7 +440,7 @@
             consume(OTHER, ";") || error("Unterminated operation");
             return ret;
         };
-        
+
         var callback = function (store) {
             all_ws(store, "pea");
             var ret;
@@ -516,7 +516,7 @@
             consume(OTHER, ";") || error("Unterminated attribute");
             return ret;
         };
-        
+
         var return_type = function () {
             var typ = type();
             if (!typ) {
@@ -527,7 +527,7 @@
             }
             return typ;
         };
-        
+
         var operation = function (store) {
             all_ws(store, "pea");
             var ret = {
@@ -591,7 +591,7 @@
                 return ret;
             }
         };
-        
+
         var identifiers = function (arr) {
             while (true) {
                 all_ws();
@@ -603,7 +603,7 @@
                 else break;
             }
         };
-        
+
         var serialiser = function (store) {
             all_ws(store, "pea");
             if (!consume(ID, "serializer")) return;
@@ -667,7 +667,7 @@
             }
             return ret;
         };
-        
+
         var interface_ = function (isPartial, store) {
             all_ws(isPartial ? null : store, "pea");
             if (!consume(ID, "interface")) return;
@@ -706,7 +706,7 @@
                 ret.members.push(mem);
             }
         };
-        
+
         var partial = function (store) {
             all_ws(store, "pea");
             if (!consume(ID, "partial")) return;
@@ -716,7 +716,7 @@
             thing.partial = true;
             return thing;
         };
-        
+
         var dictionary = function (isPartial, store) {
             all_ws(isPartial ? null : store, "pea");
             if (!consume(ID, "dictionary")) return;
@@ -755,7 +755,7 @@
                 consume(OTHER, ";") || error("Unterminated dictionary member");
             }
         };
-        
+
         var exception = function (store) {
             all_ws(store, "pea");
             if (!consume(ID, "exception")) return;
@@ -799,7 +799,7 @@
                 }
             }
         };
-        
+
         var enum_ = function (store) {
             all_ws(store, "pea");
             if (!consume(ID, "enum")) return;
@@ -835,7 +835,7 @@
                 }
             }
         };
-        
+
         var typedef = function (store) {
             all_ws(store, "pea");
             if (!consume(ID, "typedef")) return;
@@ -853,7 +853,7 @@
             consume(OTHER, ";") || error("Unterminated typedef");
             return ret;
         };
-        
+
         var implements_ = function (store) {
             all_ws(store, "pea");
             var target = consume(ID);
@@ -877,7 +877,7 @@
                 tokens.unshift(target);
             }
         };
-        
+
         var definition = function (store) {
             return  callback(store)             ||
                     interface_(false, store)    ||
@@ -889,7 +889,7 @@
                     implements_(store)
                     ;
         };
-        
+
         var definitions = function (store) {
             if (!tokens.length) return [];
             var defs = [];

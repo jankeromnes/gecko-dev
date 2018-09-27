@@ -1,4 +1,4 @@
-#! /bin/bash  
+#! /bin/bash
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -8,7 +8,7 @@
 #
 # mozilla/security/nss/tests/tools/tools.sh
 #
-# Script to test basic functionality of NSS tools 
+# Script to test basic functionality of NSS tools
 #
 # needs to work on all Unix and Windows platforms
 #
@@ -45,7 +45,7 @@
 
   export pkcs12v2pbeWithSha1AndDESCBC=\
 "PKCS #5 Password Based Encryption with SHA-1 and DES-CBC"
-  
+
   export pkcs5pbeWithMD2AndDEScbc=\
 "PKCS #5 Password Based Encryption with MD2 and DES-CBC"
 
@@ -56,7 +56,7 @@
 "PKCS #5 Password Based Encryption with SHA-1 and DES-CBC"
 
 ############################## tools_init ##############################
-# local shell function to initialize this script 
+# local shell function to initialize this script
 ########################################################################
 tools_init()
 {
@@ -117,7 +117,7 @@ list_p12_file()
 {
   echo "$SCRIPTNAME: Listing Alice's pk12 file"
   echo "pk12util -l ${1} -w ${R_PWFILE}"
-    
+
   ${BINDIR}/pk12util -l ${1} -w ${R_PWFILE} 2>&1
   ret=$?
   html_msg $ret 0 "Listing ${1} (pk12util -l)"
@@ -131,7 +131,7 @@ import_p12_file()
 {
   echo "$SCRIPTNAME: Importing Alice's pk12 ${1} file"
   echo "pk12util -i ${1} -d ${P_R_COPYDIR} -k ${R_PWFILE} -w ${R_PWFILE}"
-    
+
   ${BINDIR}/pk12util -i ${1} -d ${P_R_COPYDIR} -k ${R_PWFILE} -w ${R_PWFILE} 2>&1
   ret=$?
   html_msg $ret 0 "Importing ${1} (pk12util -i)"
@@ -141,14 +141,14 @@ import_p12_file()
 ########################################################################
 # Export the key and cert to a p12 file using default ciphers
 ########################################################################
-export_with_default_ciphers() 
+export_with_default_ciphers()
 {
   echo "$SCRIPTNAME: Exporting Alice's key & cert with [default:default] (pk12util -o)"
   echo "pk12util -o Alice.p12 -n \"Alice\" -d ${P_R_ALICEDIR} \\"
   echo "         -k ${R_PWFILE} -w ${R_PWFILE}"
   ${BINDIR}/pk12util -o Alice.p12 -n "Alice" -d ${P_R_ALICEDIR} \
-                       -k ${R_PWFILE} -w ${R_PWFILE} 2>&1  
-  ret=$?  
+                       -k ${R_PWFILE} -w ${R_PWFILE} 2>&1
+  ret=$?
   html_msg $ret 0 "Exporting Alices's key & cert with [default:default] (pk12util -o)"
   check_tmpfile
   return $ret
@@ -158,15 +158,15 @@ export_with_default_ciphers()
 # Exports key/cert to a p12 file, the key encryption cipher is specified
 # and the cert encryption cipher is blank for default.
 ########################################################################
-export_with_key_cipher() 
+export_with_key_cipher()
 {
-  # $1 key encryption cipher   
+  # $1 key encryption cipher
   echo "$SCRIPTNAME: Exporting with [${1}:default]"
   echo "pk12util -o Alice.p12 -n \"Alice\" -d ${P_R_ALICEDIR} \\"
   echo "         -k ${R_PWFILE} -w ${R_PWFILE} -c ${1}"
   ${BINDIR}/pk12util -o Alice.p12 -n "Alice" -d ${P_R_ALICEDIR} \
-                     -k ${R_PWFILE} -w ${R_PWFILE} -c "${1}" 2>&1  
-  ret=$?  
+                     -k ${R_PWFILE} -w ${R_PWFILE} -c "${1}" 2>&1
+  ret=$?
   html_msg $ret 0 "Exporting with [${1}:default] (pk12util -o)"
   check_tmpfile
   return $ret
@@ -176,15 +176,15 @@ export_with_key_cipher()
 # Exports key/cert to a p12 file, the key encryption cipher is left
 # empty for default and the cert encryption cipher is specified.
 ########################################################################
-export_with_cert_cipher() 
+export_with_cert_cipher()
 {
   # $1 certificate encryption cipher
   echo "$SCRIPTNAME: Exporting with [default:${1}]"
   echo "pk12util -o Alice.p12 -n \"Alice\" -d ${P_R_ALICEDIR} \\"
   echo "         -k ${R_PWFILE} -w ${R_PWFILE} -C ${1}"
   ${BINDIR}/pk12util -o Alice.p12 -n "Alice" -d ${P_R_ALICEDIR} \
-                     -k ${R_PWFILE} -w ${R_PWFILE} -C "${1}" 2>&1  
-  ret=$?  
+                     -k ${R_PWFILE} -w ${R_PWFILE} -C "${1}" 2>&1
+  ret=$?
   html_msg $ret 0 "Exporting with [default:${1}] (pk12util -o)"
   check_tmpfile
   return $ret
@@ -198,20 +198,20 @@ export_with_both_key_and_cert_cipher()
 {
   # $1 key encryption cipher or ""
   # $2 certificate encryption cipher or ""
-  
+
   echo "pk12util -o Alice.p12 -n \"Alice\" -d ${P_R_ALICEDIR} \\"
-  echo "         -k ${R_PWFILE} -w ${R_PWFILE} -c ${1} -C ${2}"     
+  echo "         -k ${R_PWFILE} -w ${R_PWFILE} -c ${1} -C ${2}"
   ${BINDIR}/pk12util -o Alice.p12 -n Alice -d ${P_R_ALICEDIR} \
                        -k ${R_PWFILE} -w ${R_PWFILE} \
-                       -c "${1}" -C "${2}" 2>&1  
-  ret=$?    
+                       -c "${1}" -C "${2}" 2>&1
+  ret=$?
   html_msg $ret 0 "Exporting with [${1}:${2}] (pk12util -o)"
   check_tmpfile
   return $ret
 }
 
 ########################################################################
-# Exports key and cert to a p12 file, both the key encryption cipher 
+# Exports key and cert to a p12 file, both the key encryption cipher
 # and the cert encryption cipher are specified. The key and cert are
 # imported and the p12 file is listed
 ########################################################################
@@ -219,7 +219,7 @@ export_list_import()
 {
   # $1 key encryption cipher
   # $2 certificate encryption cipher
-    
+
   if [ "${1}" != "DEFAULT" -a "${2}" != "DEFAULT" ]; then
       export_with_both_key_and_cert_cipher "${1}" "${2}"
   elif [ "${1}" != "DEFAULT" -a "${2}" = "DEFAULT" ]; then
@@ -229,7 +229,7 @@ export_list_import()
   else
       export_with_default_ciphers
   fi
-    
+
   list_p12_file Alice.p12
   import_p12_file Alice.p12
 }
@@ -239,7 +239,7 @@ export_list_import()
 # List the contents of and import from the p12 file.
 ########################################################################
 tools_p12_export_list_import_all_pkcs5pbe_ciphers()
-{  
+{
   # specify each on key and cert cipher
   for key_cipher in "${pkcs5pbeWithMD2AndDEScbc}" \
                     "${pkcs5pbeWithMD5AndDEScbc}" \
@@ -251,7 +251,7 @@ tools_p12_export_list_import_all_pkcs5pbe_ciphers()
                          "DEFAULT"\
                          "none"; do
             export_list_import "${key_cipher}" "${cert_cipher}"
-      done       
+      done
   done
 }
 
@@ -280,7 +280,7 @@ tools_p12_export_list_import_all_pkcs5v2_ciphers()
 #    CAMELLIA-192-CBC, \
 #    CAMELLIA-256-CBC, \
 #  when 452464 is fixed
-#---------------------------------------------------------------  
+#---------------------------------------------------------------
     for cert_cipher in \
       RC2-CBC \
       DES-EDE3-CBC \
@@ -298,10 +298,10 @@ tools_p12_export_list_import_all_pkcs5v2_ciphers()
 # List the contents of and import from the p12 file.
 ########################################################################
 tools_p12_export_list_import_all_pkcs12v2pbe_ciphers()
-{ 
+{
 #---------------------------------------------------------------
 # Bug 452471 - pk12util -o fails when -c option specifies pkcs12v2 PBE ciphers
-# FIXME - Restore these to the list 
+# FIXME - Restore these to the list
 #                "${pkcs12v2pbeWithSha1And128BitRc4}" \
 #                "${pkcs12v2pbeWithSha1And40BitRc4}" \
 #	             "${pkcs12v2pbeWithSha1AndTripleDESCBC}" \
@@ -324,8 +324,8 @@ tools_p12_export_list_import_all_pkcs12v2pbe_ciphers()
                   "${pkcs12v2pbeWithMd5AndDESCBC}" \
                   "${pkcs12v2pbeWithSha1AndDESCBC}" \
                   "DEFAULT"\
-                  "none"; do        
-	  export_list_import "${key_cipher}" "${cert_cipher}" 
+                  "none"; do
+	  export_list_import "${key_cipher}" "${cert_cipher}"
 	done
   #done
 }
@@ -337,28 +337,28 @@ tools_p12_export_with_none_ciphers()
 {
   # use none as the key encryption algorithm default for the cert one
   # should fail
-  
+
   echo "pk12util -o Alice.p12 -n \"Alice\" -d ${P_R_ALICEDIR} \\"
-  echo "         -k ${R_PWFILE} -w ${R_PWFILE} -c none"     
+  echo "         -k ${R_PWFILE} -w ${R_PWFILE} -c none"
   ${BINDIR}/pk12util -o Alice.p12 -n Alice -d ${P_R_ALICEDIR} \
                        -k ${R_PWFILE} -w ${R_PWFILE} \
-                       -c none 2>&1  
+                       -c none 2>&1
   ret=$?
   html_msg $ret 30 "Exporting with [none:default] (pk12util -o)"
   check_tmpfile
 
   # use default as the key encryption algorithm none for the cert one
   # should pass
-  
+
   echo "pk12util -o Alice.p12 -n \"Alice\" -d ${P_R_ALICEDIR} \\"
-  echo "         -k ${R_PWFILE} -w ${R_PWFILE} -C none"     
+  echo "         -k ${R_PWFILE} -w ${R_PWFILE} -C none"
   ${BINDIR}/pk12util -o Alice.p12 -n Alice -d ${P_R_ALICEDIR} \
                        -k ${R_PWFILE} -w ${R_PWFILE} \
-                       -C none 2>&1  
+                       -C none 2>&1
   ret=$?
   html_msg $ret 0 "Exporting with [default:none] (pk12util -o)"
   check_tmpfile
- 
+
 }
 
 #########################################################################
@@ -394,14 +394,14 @@ tools_p12_export_with_invalid_ciphers()
 tools_p12_export_list_import_with_default_ciphers()
 {
   echo "$SCRIPTNAME: Exporting Alice's email cert & key - default ciphers"
-  
+
   export_list_import "DEFAULT" "DEFAULT"
 
   echo "$SCRIPTNAME: Exporting Alice's email EC cert & key---------------"
   echo "pk12util -o Alice-ec.p12 -n \"Alice-ec\" -d ${P_R_ALICEDIR} -k ${R_PWFILE} \\"
   echo "         -w ${R_PWFILE}"
   ${BINDIR}/pk12util -o Alice-ec.p12 -n "Alice-ec" -d ${P_R_ALICEDIR} -k ${R_PWFILE} \
-       -w ${R_PWFILE} 2>&1 
+       -w ${R_PWFILE} 2>&1
   ret=$?
   html_msg $ret 0 "Exporting Alice's email EC cert & key (pk12util -o)"
   check_tmpfile
@@ -473,7 +473,7 @@ tools_p12()
 
 ############################## tools_sign ##############################
 # local shell function pk12util uses a hardcoded tmp file, if this exists
-# and is owned by another user we don't get reasonable errormessages 
+# and is owned by another user we don't get reasonable errormessages
 ########################################################################
 check_tmpfile()
 {
@@ -554,7 +554,7 @@ tools_modutil()
 }
 
 ############################## tools_cleanup ###########################
-# local shell function to finish this script (no exit since it might be 
+# local shell function to finish this script (no exit since it might be
 # sourced)
 ########################################################################
 tools_cleanup()

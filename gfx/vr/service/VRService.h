@@ -34,7 +34,7 @@ public:
 private:
   VRService();
   ~VRService();
-  
+
   bool InitShmem();
   void PushState(const mozilla::gfx::VRSystemState& aState);
   void PullState(mozilla::gfx::VRBrowserState& aState);

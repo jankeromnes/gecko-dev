@@ -3,4 +3,4 @@ function run_test() {
 
   var rv = Cu.evalInSandbox("this.Components", sb);
   Assert.equal(rv, undefined);
-}  
+}

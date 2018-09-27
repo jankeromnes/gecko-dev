@@ -37,11 +37,11 @@ function handleRequest(request, response)
     var name = parseQuery(request, "name");
     var range = request.hasHeader("Range") ? request.getHeader("Range")
                                            : undefined;
-    
+
     // Should not get request for 1st subsegment from 2nd stream, nor 2nd
     // subsegment from 1st stream.
     if (name == "dash-webm-video-320x180.webm" && range == "bytes=25514-32767" ||
-        name == "dash-webm-video-428x240.webm" && range == "bytes=228-35852") 
+        name == "dash-webm-video-428x240.webm" && range == "bytes=228-35852")
     {
       throw "Should not request " + name + " with byte-range " + range;
     } else {
@@ -88,7 +88,7 @@ function handleRequest(request, response)
       }
       fis.seek(Components.interfaces.nsISeekableStream.NS_SEEK_SET, startOffset);
       bis.setInputStream(fis);
-      
+
       var byteLengthToRead = endOffset + 1 - startOffset;
       var totalBytesExpected = byteLengthToRead + startOffset;
       if (DEBUG) {

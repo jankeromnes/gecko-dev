@@ -14,7 +14,7 @@ http://creativecommons.org/licenses/publicdomain/
       document.getElementById("main").style.backgroundColor = "red";
     }
   }
-  
+
   try {
     assert(document.firstChild.id == "main", "nothing in prolog");
     var winEl = document.documentElement;

@@ -36,7 +36,7 @@ public:
   bool IsContentOpaque() override;
 
   // PaintedLayer
-  void InvalidateRegion(const nsIntRegion& aRegion) override { 
+  void InvalidateRegion(const nsIntRegion& aRegion) override {
     MOZ_CRASH("PaintedLayerMLGPU can't fill invalidated regions");
   }
 

@@ -2,7 +2,7 @@ var TOC = {
     load: function () {
         $('#toc_button').click(TOC.toggle);
     },
-    
+
     toggle: function () {
         if ($('#sphinxsidebar').toggle().is(':hidden')) {
             $('div.document').css('left', "0px");

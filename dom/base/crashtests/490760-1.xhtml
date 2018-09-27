@@ -6,7 +6,7 @@
 function boom()
 {
   var q = document.getElementsByTagName("style")[0];
-  
+
   window.addEventListener("DOMNodeRemoved", f);
   q.innerHTML = "<span><\/span>";
   window.removeEventListener("DOMNodeRemoved", f);

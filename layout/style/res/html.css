@@ -287,7 +287,7 @@ table[align="right"] {
      in what authors should expect */
 
   /* Put this first so 'border' and 'frame' rules can override it. */
-table[rules] { 
+table[rules] {
   border-width: thin;
   border-style: hidden;
 }
@@ -299,7 +299,7 @@ table[rules] {
   /* :-moz-table-border-nonzero is like [border]:not([border="0"]) except it
      also checks for other zero-like values according to HTML attribute
      parsing rules */
-table:-moz-table-border-nonzero { 
+table:-moz-table-border-nonzero {
   border-width: thin;
   border-style: outset;
 }
@@ -319,7 +319,7 @@ table[frame="vsides"] { border-style: hidden outset; }
 table[frame="box"],
 table[frame="border"] { border-style: outset; }
 
- 
+
 /* Internal Table Borders */
 
   /* 'border' cell borders first */
@@ -340,7 +340,7 @@ table[rules]:not([rules="none"]):not([rules=""]) {
   border-collapse: collapse;
 }
 
-/* only specified rules override 'border' settings  
+/* only specified rules override 'border' settings
   (increased specificity to achieve this) */
 table[rules]:not([rules=""])> tr > td,
 table[rules]:not([rules=""])> * > tr > td,
@@ -370,7 +370,7 @@ table[rules][rules="all"] > * > tr > td,
 table[rules][rules="all"] > tr > th,
 table[rules][rules="all"] > * > tr > th,
 table[rules][rules="all"] > td,
-table[rules][rules="all"] > th 
+table[rules][rules="all"] > th
 {
   border-width: thin;
   border-style: solid;
@@ -409,9 +409,9 @@ table[rules][rules="groups"] > tbody {
   border-block-start-style: solid;
   border-block-start-style: solid;
 }
-  
-  
-/* caption inherits from table not table-outer */  
+
+
+/* caption inherits from table not table-outer */
 caption {
   display: table-caption;
   text-align: center;
@@ -469,10 +469,10 @@ table > tr {
   vertical-align: middle;
 }
 
-td { 
+td {
   display: table-cell;
   vertical-align: inherit;
-  text-align: unset; 
+  text-align: unset;
   padding: 1px;
 }
 
@@ -682,7 +682,7 @@ frameset {
   border: none ! important;
 }
 
-link { 
+link {
   display: none;
 }
 

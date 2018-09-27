@@ -16,7 +16,7 @@ LABEL_DO_LOOP : do {
     if(x===10)return;
     break LABEL_DO_LOOP;
     LABEL_IN_2 : y++;
-    
+
     function IN_DO_FUNC(){}
 } while(0);
 

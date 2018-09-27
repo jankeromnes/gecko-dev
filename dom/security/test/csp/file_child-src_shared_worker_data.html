@@ -12,7 +12,7 @@
                         "port.addEventListener('message'," +
                         "function(e) { port.postMessage('success'); });" +
                         "port.start(); }";
-    
+
     try {
       var worker = new SharedWorker('data:application/javascript;charset=UTF-8,'+
           escape(shared_worker), page_id);
@@ -26,7 +26,7 @@
       worker.port.onmessage = function(ev) {
         window.parent.postMessage({id:page_id, message:"allowed"}, 'http://mochi.test:8888');
       };
-      
+
       worker.port.postMessage('foo');
     }
     catch (e) {

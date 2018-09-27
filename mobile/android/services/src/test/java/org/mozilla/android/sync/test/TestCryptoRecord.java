@@ -99,7 +99,7 @@ public class TestCryptoRecord {
         + "5QgzmlNyvB+KPFvPsYzxDnSCjOoRSLx7"
         + "GG86wT59QZw=";
     String base64IV = "GX8L37AAb2FZJMzIoXlX8w==";
-    String base16Hmac = 
+    String base16Hmac =
           "b1e6c18ac30deb70236bc0d65a46f7a4"
         + "dce3b8b0e02cf92182b914e3afa5eebc";
 
@@ -111,7 +111,7 @@ public class TestCryptoRecord {
     body.put("payload", payload.toJSONString());
     CryptoRecord record = CryptoRecord.fromJSONRecord(body);
     byte[] decodedKey  = Base64.decodeBase64(base64EncryptionKey.getBytes(StringUtils.UTF_8));
-    byte[] decodedHMAC = Base64.decodeBase64(base64HmacKey.getBytes(StringUtils.UTF_8)); 
+    byte[] decodedHMAC = Base64.decodeBase64(base64HmacKey.getBytes(StringUtils.UTF_8));
     record.keyBundle = new KeyBundle(decodedKey, decodedHMAC);
 
     record.decrypt();
@@ -124,7 +124,7 @@ public class TestCryptoRecord {
     // These values pulled straight out of Firefox.
     String key  = "6m8mv8ex2brqnrmsb9fjuvfg7y";
     String user = "c6o7dvmr2c4ud2fyv6woz2u4zi22bcyd";
-    
+
     // Check our friendly base32 decoding.
     assertTrue(Arrays.equals(Utils.decodeFriendlyBase32(key), Base64.decodeBase64("8xbKrJfQYwbFkguKmlSm/g==".getBytes(StringUtils.UTF_8))));
     KeyBundle bundle = new KeyBundle(user, key);

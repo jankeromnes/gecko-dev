@@ -70,7 +70,7 @@ function* g() {
 var counter = 0;
 
 for ([ {} = yield , ] of [iterable]) {
-  
+
   counter += 1;
 }
 

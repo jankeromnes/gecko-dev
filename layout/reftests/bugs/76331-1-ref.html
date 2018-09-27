@@ -27,8 +27,8 @@ td {
  <table class="empty">
   <tr><td class="empty">                </td><td>X</td></tr>
   <tr><td>X</td><td class="empty">
-  
-  
+
+
   </td></tr>
  </table>
  <!-- not collapsed whitespace:  space + tab  should not be marked as empty-->
@@ -36,20 +36,20 @@ td {
   <tr><td>  </td><td>X</td></tr>
   <tr><td>X</td><td>	</td></tr>
  </table>
- 
- 
+
+
  <!-- div with whitespace, empty span - should not be marked as empty -->
  <table>
   <tr><td><div> </div></td><td>X</td></tr>
   <tr><td>X</td><td><span></span></td></tr>
  </table>
- 
+
   <!--float empty or not  should not be marked as empty -->
  <table>
   <tr><td><div style="float:left;">X</div></td><td>X</td></tr>
   <tr><td>X</td><td><div style="float:left;"></div></td></tr>
  </table>
- 
+
  <!-- position:fixed and position:absolute  - both should be marked as empty -->
  <table class="empty">
   <tr><td class="empty"><div style="position:fixed; left: 30px;">X</div></td><td>X</td></tr>

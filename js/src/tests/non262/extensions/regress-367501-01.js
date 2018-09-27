@@ -20,7 +20,7 @@ function test()
   printStatus (summary);
 
   try
-  { 
+  {
     expect = 'undefined';
     var a = { set x(v) {} };
     actual = a.x + '';

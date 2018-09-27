@@ -10,7 +10,7 @@ function g() {
 {
     function f() {
         gc();
-        g();        
+        g();
     }
     f();
 }

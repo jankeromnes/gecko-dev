@@ -32,7 +32,7 @@ OBJDIR = ..
 ########################################################################
 # Linux configuration
 #
-ifneq (,$(filter Linux%, $(UNAME))) 
+ifneq (,$(filter Linux%, $(UNAME)))
 
 EXESUFFIX =
 
@@ -40,7 +40,7 @@ else
 ########################################################################
 # Darwin configuration
 #
-ifneq (,$(filter Darwin%, $(UNAME))) 
+ifneq (,$(filter Darwin%, $(UNAME)))
 
 EXESUFFIX =
 
@@ -48,7 +48,7 @@ else
 ########################################################################
 # Windows (cygwin but using MS compiler) configuration
 #
-ifneq (,$(filter CYGWIN%, $(UNAME))) 
+ifneq (,$(filter CYGWIN%, $(UNAME)))
 
 EXESUFFIX = .exe
 
@@ -65,7 +65,7 @@ DTD = $(OBJDIR)/widlprocxml.dtd
 VALID_WIDLS = $(patsubst $(VALIDTESTDIR)/%, %, $(wildcard $(VALIDTESTDIR)/*.widl))
 INVALID_WIDLS = $(patsubst $(INVALIDTESTDIR)/%, %, $(wildcard $(INVALIDTESTDIR)/*.widl))
 
-test : $(patsubst %.widl, $(VALIDTESTOBJDIR)/%.widlprocxml, $(VALID_WIDLS)) $(patsubst %.widl, $(INVALIDTESTOBJDIR)/%.txt, $(INVALID_WIDLS)) $(WIDLPROC) 
+test : $(patsubst %.widl, $(VALIDTESTOBJDIR)/%.widlprocxml, $(VALID_WIDLS)) $(patsubst %.widl, $(INVALIDTESTOBJDIR)/%.txt, $(INVALID_WIDLS)) $(WIDLPROC)
 	@echo "$@ pass"
 
 #$(EXAMPLESOBJDIR)/%.html : $(EXAMPLESOBJDIR)/%.widlprocxml $(SRCDIR)/widlprocxmltohtml.xsl Makefile

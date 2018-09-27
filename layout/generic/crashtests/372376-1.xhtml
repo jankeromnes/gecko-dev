@@ -16,12 +16,12 @@ function boom()
   $tr.style.display = "inherit";
   $table.insertBefore($tr, $oldtd);
 
-  var $td = document.createElementNS(HTML_NS, 'td'); 
+  var $td = document.createElementNS(HTML_NS, 'td');
   $tr.appendChild($td);
 
-  var $anothertr = document.createElementNS(HTML_NS, 'tr'); 
+  var $anothertr = document.createElementNS(HTML_NS, 'tr');
   $table.insertBefore($anothertr, $tr);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

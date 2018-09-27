@@ -1,7 +1,7 @@
 ## -*-makefile-*-
 ## Copyright (C) 2016 and later: Unicode, Inc. and others.
 ## License & terms of use: http://www.unicode.org/copyright.html
-## os/390, z/OS specific setup 
+## os/390, z/OS specific setup
 ## Copyright (c) 1999-2014, International Business Machines Corporation and
 ## others. All Rights Reserved.
 
@@ -94,7 +94,7 @@ DEFS            += -DOS390BATCH#M#
 endif
 
 ## Commands to generate dependency files
-GEN_DEPS.c=	makedep                        
+GEN_DEPS.c=	makedep
 GEN_DEPS.cc=	makedep
 
 ## Commands to compile

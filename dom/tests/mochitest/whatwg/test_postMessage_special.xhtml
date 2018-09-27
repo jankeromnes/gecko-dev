@@ -5,7 +5,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=postMessage
 -->
 <head>
   <title>postMessage from about:blank, data URLs</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <script type="text/javascript" src="browserFu.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
@@ -109,12 +109,12 @@ function messageReceiver(evt)
   {
     ok(evt instanceof MessageEvent, "umm, how did we get this?");
     is(evt.type, "message", "expected events of type 'message'");
-  
+
     if (isMozilla)
     {
       ok(evt.isTrusted === false, "shouldn't have been a trusted event");
     }
-  
+
     if (evt.data === "about:blank-response")
     {
       // This isn't clarified in HTML5 yet, but the origin for a document which
@@ -165,7 +165,7 @@ function getContents(description, responseText)
   var contents =
     "<!DOCTYPE html>\n" +
     "<html>\n" +
-    "<head>\n" + 
+    "<head>\n" +
     "  <title>about:blank</title>\n" +
     "  <script type='application/javascript'>\n" +
     "function receive(evt)\n" +

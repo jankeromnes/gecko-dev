@@ -417,7 +417,7 @@ impl<T> Drop for FuturesUnordered<T> {
 }
 
 impl<F: Future> FromIterator<F> for FuturesUnordered<F> {
-    fn from_iter<T>(iter: T) -> Self 
+    fn from_iter<T>(iter: T) -> Self
         where T: IntoIterator<Item = F>
     {
         let mut new = FuturesUnordered::new();

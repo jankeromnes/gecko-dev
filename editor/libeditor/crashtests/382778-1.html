@@ -18,7 +18,7 @@ function init2()
 {
   targetWindow = targetIframe.contentWindow;
   targetDocument = targetWindow.document;
-  
+
   p = document.getElementById("p");
   pText = p.firstChild;
 
@@ -32,14 +32,14 @@ function init2()
 
 function boom()
 {
-  var rng = targetDocument.createRange(); 
+  var rng = targetDocument.createRange();
   rng.setStart(pText, 3);
   rng.setEnd(pText, 3);
-  
-  targetWindow.getSelection().addRange(rng); 
+
+  targetWindow.getSelection().addRange(rng);
 
   targetDocument.execCommand("insertorderedlist", false, null);
-  
+
   document.documentElement.removeAttribute("class")
 }
 

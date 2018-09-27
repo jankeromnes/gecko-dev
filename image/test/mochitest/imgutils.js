@@ -1,6 +1,6 @@
 /* -*- indent-tabs-mode: nil; js-indent-level: 2 -*- */
 // Helper file for shared image functionality
-// 
+//
 // Note that this is use by tests elsewhere in the source tree. When in doubt,
 // check mxr before removing or changing functionality.
 
@@ -72,7 +72,7 @@ function forceDecode(id)
 
 // Functions to facilitate getting/setting various image-related prefs
 //
-// If you change a pref in a mochitest, Don't forget to reset it to its 
+// If you change a pref in a mochitest, Don't forget to reset it to its
 // original value!
 //
 // Null indicates no pref set

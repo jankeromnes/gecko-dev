@@ -19,7 +19,7 @@ while ischar(line)
     lineOrig = line;
     line = line(72:end);
     if ~foundStart
-        if strncmp(line, testName, length(testName)) 
+        if strncmp(line, testName, length(testName))
             foundStart = 1;
         end
         line = fgetl(fid);
@@ -42,7 +42,7 @@ while ischar(line)
         renderTime = [renderTime; p'];
         line = fgetl(fid);
         continue;
-    end    
+    end
     line = fgetl(fid);
 end
 fclose(fid);

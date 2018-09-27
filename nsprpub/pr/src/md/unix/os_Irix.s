@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* 
+/*
  *  Atomically add a new element to the top of the stack
  *
  *  usage : PR_StackPush(listp, elementp);
@@ -28,7 +28,7 @@ retry_push:
         ll      v0,0(a0)
 		beq		v0,t1,retry_push
 		nop
-		sc		t1,0(a0)	
+		sc		t1,0(a0)
 		beq		t1,0,retry_push
 		nop
 		sw		v0,0(a1)
@@ -83,16 +83,16 @@ retry_pop:
 		lw		v0,0(a0)
 		li		t1,1
 		beq		v0,0,done
-		nop	
+		nop
 		beq		v0,t1,retry_pop
-		nop	
+		nop
 
         ll      v0,0(a0)
 		beq		v0,0,done
 		nop
 		beq		v0,t1,retry_pop
 		nop
-		sc		t1,0(a0)	
+		sc		t1,0(a0)
 		beq		t1,0,retry_pop
 		nop
 		lw		t0,0(v0)

@@ -8,7 +8,7 @@
 <script>
 
 
-function init() { 
+function init() {
 
   var menupopup = document.getElementsByTagName("menupopup")[0];
   menupopup.ordinal = null;
@@ -26,6 +26,6 @@ window.addEventListener("load", init, false);
   </menupopup>
 </menulist>
 
-        
+
 
 </window>

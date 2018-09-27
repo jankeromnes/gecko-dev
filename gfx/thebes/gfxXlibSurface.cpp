@@ -111,7 +111,7 @@ gfxXlibSurface::TakePixmap()
     // The bit depth returned from Cairo is technically int, but this is
     // the last place we'd be worried about that scenario.
     unsigned int bitDepth = cairo_xlib_surface_get_depth(CairoSurface());
-    MOZ_ASSERT((bitDepth % 8) == 0, "Memory used not recorded correctly");    
+    MOZ_ASSERT((bitDepth % 8) == 0, "Memory used not recorded correctly");
 
     // Divide by 8 because surface_get_depth gives us the number of *bits* per
     // pixel.
@@ -487,7 +487,7 @@ gfxXlibSurface::DepthOfVisual(const Screen* screen, const Visual* visual)
     NS_ERROR("Visual not on Screen.");
     return 0;
 }
-    
+
 /* static */
 Visual*
 gfxXlibSurface::FindVisual(Screen *screen, gfxImageFormat format)

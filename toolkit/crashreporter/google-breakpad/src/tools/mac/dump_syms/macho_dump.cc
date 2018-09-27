@@ -110,7 +110,7 @@ class DumpCommand: public mach_o::Reader::LoadCommandHandler {
            segment.vmaddr, segment.vmsize, segment.maxprot,
            segment.initprot, mach_o::SegmentFlags(segment.flags),
            segment.section_list.Size());
-           
+
     DumpSection dump_section;
     return reader_->WalkSegmentSections(segment, &dump_section);
   }
@@ -174,7 +174,7 @@ void DumpFile(const char *filename) {
       NXGetArchInfoFromCpuType(reader.cpu_type(),
                                reader.cpu_subtype());
     printf("    Mach-O header:\n"
-           "      word size: %s\n" 
+           "      word size: %s\n"
            "      CPU type: %s (%s)\n"
            "      File type: %d\n"
            "      flags: %x\n",

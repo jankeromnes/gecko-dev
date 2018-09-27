@@ -11,7 +11,7 @@ HWND g_hwndParent;
 // To work with Unicode version of NSIS, please use TCHAR-type
 // functions for accessing the variables and the stack.
 
-void __declspec(dllexport) myFunction(HWND hwndParent, int string_size, 
+void __declspec(dllexport) myFunction(HWND hwndParent, int string_size,
                                       TCHAR *variables, stack_t **stacktop,
                                       extra_parameters *extra)
 {
@@ -23,7 +23,7 @@ void __declspec(dllexport) myFunction(HWND hwndParent, int string_size,
   // note if you want parameters from the stack, pop them off in order.
   // i.e. if you are called via exdll::myFunction file.dat poop.dat
   // calling popstring() the first time would give you file.dat,
-  // and the second time would give you poop.dat. 
+  // and the second time would give you poop.dat.
   // you should empty the stack of your parameters, and ONLY your
   // parameters.
 

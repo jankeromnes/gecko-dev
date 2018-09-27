@@ -58,8 +58,8 @@ typedef enum {
 } AtkScrollType;
 
 /*
- * The AtkComponent interface should be supported by any object that is 
- * rendered on the screen. The interface provides the standard mechanism 
+ * The AtkComponent interface should be supported by any object that is
+ * rendered on the screen. The interface provides the standard mechanism
  * for an assistive technology to determine and set the graphical
  * representation of an object.
  */
@@ -135,7 +135,7 @@ struct _AtkComponentIface
   gboolean                 (* set_size)         (AtkComponent   *component,
                                                  gint           width,
                                                  gint           height);
-  	
+
   AtkLayer                 (* get_layer)        (AtkComponent   *component);
   gint                     (* get_mdi_zorder)   (AtkComponent   *component);
 

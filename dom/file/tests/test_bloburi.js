@@ -21,7 +21,7 @@ function run_test()
     let uri = ios.newURI(uris[i].uri);
     let handler = ios.getProtocolHandler(uri.scheme).QueryInterface(Ci.nsIProtocolHandler);
     let flags = handler.protocolFlags;
-    
+
     Assert.equal(Ci.nsIProtocolHandler.URI_IS_LOCAL_RESOURCE & flags,
                  (uris[i].local) ? Ci.nsIProtocolHandler.URI_IS_LOCAL_RESOURCE : 0);
   }

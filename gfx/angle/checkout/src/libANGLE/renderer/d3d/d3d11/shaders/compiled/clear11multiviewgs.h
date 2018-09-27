@@ -9,7 +9,7 @@
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
 // SV_Position              0   xyzw        0      POS   float   xyzw
-// TEXCOORD                 0   x           1     NONE    uint   x   
+// TEXCOORD                 0   x           1     NONE    uint   x
 //
 //
 // Output signature:
@@ -17,28 +17,28 @@
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
 // SV_Position              0   xyzw        0      POS   float   xyzw
-// SV_RenderTargetArrayIndex     0   x           1  RTINDEX    uint   x   
+// SV_RenderTargetArrayIndex     0   x           1  RTINDEX    uint   x
 //
 gs_4_0
 dcl_input_siv v[3][0].xyzw, position
 dcl_input v[3][1].x
 dcl_temps 1
-dcl_inputprimitive triangle 
-dcl_outputtopology trianglestrip 
+dcl_inputprimitive triangle
+dcl_outputtopology trianglestrip
 dcl_output_siv o0.xyzw, position
 dcl_output_siv o1.x, rendertarget_array_index
 dcl_maxout 3
 mov r0.x, l(0)
-loop 
+loop
   ige r0.y, r0.x, l(3)
   breakc_nz r0.y
   mov o0.xyzw, v[r0.x + 0][0].xyzw
   mov o1.x, v[r0.x + 0][1].x
-  emit 
+  emit
   iadd r0.x, r0.x, l(1)
-endloop 
-cut 
-ret 
+endloop
+cut
+ret
 // Approximately 11 instruction slots used
 #endif
 

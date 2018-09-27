@@ -14,10 +14,10 @@ function run_test() {
 
   const protoSvc = Cc["@mozilla.org/uriloader/external-protocol-service;1"].
                    getService(Ci.nsIExternalProtocolService);
-  
+
   const prefSvc = Cc["@mozilla.org/preferences-service;1"].
                   getService(Ci.nsIPrefService);
-                  
+
   const ioService = Cc["@mozilla.org/network/io-service;1"].
                     getService(Ci.nsIIOService);
 
@@ -25,7 +25,7 @@ function run_test() {
               getService(Ci.nsIEnvironment);
 
   const rootPrefBranch = prefSvc.getBranch("");
-  
+
   let noMailto = false;
   if (mozinfo.os == "win") {
     // Check mailto handler from registry.
@@ -116,7 +116,7 @@ function run_test() {
 
   // test some default protocol info properties
   var haveDefaultHandlersVersion = false;
-  try { 
+  try {
     // If we have a defaultHandlersVersion pref, then assume that we're in the
     // firefox tree and that we'll also have default handlers.
     // Bug 395131 has been filed to make this test work more generically
@@ -126,26 +126,26 @@ function run_test() {
     haveDefaultHandlersVersion = true;
   } catch (ex) {}
 
-  const kExternalWarningDefault = 
+  const kExternalWarningDefault =
     "network.protocol-handler.warn-external-default";
   prefSvc.setBoolPref(kExternalWarningDefault, true);
 
   // XXX add more thorough protocol info property checking
-  
+
   // no OS default handler exists
   var protoInfo = protoSvc.getProtocolHandlerInfo("x-moz-rheet");
   Assert.equal(protoInfo.preferredAction, protoInfo.alwaysAsk);
   Assert.ok(protoInfo.alwaysAskBeforeHandling);
-  
-  // OS default exists, injected default does not exist, 
+
+  // OS default exists, injected default does not exist,
   // explicit warning pref: false
   const kExternalWarningPrefPrefix = "network.protocol-handler.warn-external.";
   prefSvc.setBoolPref(kExternalWarningPrefPrefix + "http", false);
   protoInfo = protoSvc.getProtocolHandlerInfo("http");
   Assert.equal(0, protoInfo.possibleApplicationHandlers.length);
   Assert.ok(!protoInfo.alwaysAskBeforeHandling);
-  
-  // OS default exists, injected default does not exist, 
+
+  // OS default exists, injected default does not exist,
   // explicit warning pref: true
   prefSvc.setBoolPref(kExternalWarningPrefPrefix + "http", true);
   protoInfo = protoSvc.getProtocolHandlerInfo("http");
@@ -362,7 +362,7 @@ function run_test() {
 
   var localApp2 = Cc["@mozilla.org/uriloader/local-handler-app;1"].
                   createInstance(Ci.nsILocalHandlerApp);
-  
+
   localApp2.executable = executable;
 
   localApp.clearParameters();

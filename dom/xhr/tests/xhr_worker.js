@@ -58,7 +58,7 @@ xhr.removeEventListener("doopety", function(event) {});
 
 xhr.onloadend = function(event) {
   var message = { type: "loadend" };
-  postMessage(message);  
+  postMessage(message);
 }
 
 var upload = xhr.upload;

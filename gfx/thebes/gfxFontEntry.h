@@ -578,7 +578,7 @@ private:
      * repeatedly (each time we construct a text run; in some cases, for
      * each character/glyph within the run) without re-fetching large tables
      * every time.
-     * 
+     *
      * Because we may instantiate many gfxFonts for the same physical font
      * file (at different sizes), we should ensure that they can share a
      * single cached copy of the font tables. To do this, we implement table
@@ -744,7 +744,7 @@ public:
     bool CheckForLegacyFamilyNames(gfxPlatformFontList* aFontList);
 
     nsTArray<RefPtr<gfxFontEntry> >& GetFontList() { return mAvailableFonts; }
-    
+
     void AddFontEntry(RefPtr<gfxFontEntry> aFontEntry) {
         // bug 589682 - set the IgnoreGDEF flag on entries for Italic faces
         // of Times New Roman, because of buggy table in those fonts
@@ -781,7 +781,7 @@ public:
     // choose a specific face to match a style using CSS font matching
     // rules (weight matching occurs here).  may return a face that doesn't
     // precisely match (e.g. normal face when no italic face exists).
-    gfxFontEntry *FindFontForStyle(const gfxFontStyle& aFontStyle, 
+    gfxFontEntry *FindFontForStyle(const gfxFontStyle& aFontStyle,
                                    bool aIgnoreSizeTolerance = false);
 
     virtual void

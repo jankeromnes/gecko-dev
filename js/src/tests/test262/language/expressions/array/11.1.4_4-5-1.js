@@ -3,7 +3,7 @@
 
 /*---
 info: |
-    Refer 11.1.4; 
+    Refer 11.1.4;
     The production
     ElementList : Elisionopt AssignmentExpression
     5.Call the [[DefineOwnProperty]] internal method of array with arguments ToString(firstIndex), the Property Descriptor { [[Value]]: initValue, [[Writable]]: true

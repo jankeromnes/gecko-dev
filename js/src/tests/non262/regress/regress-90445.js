@@ -33,7 +33,7 @@ function compte() {
   var activite1 = document.formtest.activite1.options.selectedIndex;
   var activite2 = document.formtest.activite2.options.selectedIndex;
   var activite3 = document.formtest.activite3.options.selectedIndex;
-   
+
   var ret = 0;
   var liste;
   var taille;
@@ -211,9 +211,9 @@ function compte() {
     [1,21,25,1,2,5,3,0,[],[]],
     [1,21,25,6,3,4,3,0,[],[]]
     ];
-   
+
   var nbVillages = V.length;
-   
+
   for (i=0; i<nbVillages; i++) {
     if ((((mois   == 0) && (1==V[i][0])) || ((mois >= V[i][1]) && (mois <= V[i][2]))) &&
 	((region  == 0)                  || (region  == V[i][3]                    )) &&
@@ -225,7 +225,7 @@ function compte() {
 	 ((encadrement>3)&&(encadrement==V[i][5])                       )) &&
 	((typeVillage == 0) || (typeVillage == V[i][6]                ))   &&
 	((budget == 0)      || (budget      == V[i][7]                ))) {
-           
+
       bl = 1;
       if ((sport1 != 0) || (sport2 != 0) || (sport3 != 0)) {
 	bl = 0;

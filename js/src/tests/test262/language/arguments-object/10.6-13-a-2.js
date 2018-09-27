@@ -9,7 +9,7 @@ features: [caller]
 ---*/
 
     var called = false;
-    
+
     function test1(flag) {
         if (flag!==true) {
             test2();
@@ -25,7 +25,7 @@ features: [caller]
           arguments.callee.caller(true);
         }
     }
-    
+
     test1();
 
 assert(called, 'called !== true');

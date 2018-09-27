@@ -42,7 +42,7 @@ struct _qcms_transform {
 	float *output_clut_table_g;
 	float *output_clut_table_b;
 	uint16_t output_clut_table_length;
- 
+
 	float *input_gamma_table_gray;
 
 	float out_gamma_r;
@@ -95,7 +95,7 @@ struct qcms_modular_transform {
 	float *output_clut_table_g;
 	float *output_clut_table_b;
 	uint16_t output_clut_table_length;
- 
+
 	uint16_t *output_gamma_lut_r;
 	uint16_t *output_gamma_lut_g;
 	uint16_t *output_gamma_lut_b;

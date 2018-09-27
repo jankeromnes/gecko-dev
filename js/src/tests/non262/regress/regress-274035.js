@@ -26,4 +26,4 @@ status = summary + ' ' + inSection(3) + ' Array.prototype.splice.length ';
 expect = 2;
 actual   = Array.prototype.splice.length;
 reportCompare(expect, actual, status);
- 
+

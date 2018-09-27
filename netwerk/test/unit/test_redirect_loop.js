@@ -12,10 +12,10 @@ var httpServer = new HttpServer();
 httpServer.start(-1);
 const PORT = httpServer.identity.primaryPort;
 
-var fullLoopPath = "/fullLoop"; 
+var fullLoopPath = "/fullLoop";
 var fullLoopURI = "http://localhost:" + PORT + fullLoopPath;
 
-var relativeLoopPath = "/relativeLoop"; 
+var relativeLoopPath = "/relativeLoop";
 var relativeLoopURI = "http://localhost:" + PORT + relativeLoopPath;
 
 // must use directory-style URI, so empty Location redirects back to self

@@ -82,7 +82,7 @@ __ADJOIN(MODULE_NAME,C_Initialize)
 }
 
 #ifdef DECLARE_STRICT_CRYPTOKI_NAMES
-CK_RV CK_ENTRY 
+CK_RV CK_ENTRY
 C_Initialize
 (
   CK_VOID_PTR pInitArgs

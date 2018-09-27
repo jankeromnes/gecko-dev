@@ -32,7 +32,7 @@ class BigfileTest(unittest2.TestCase):
 
         bigfile.decrypt_bigfile(cryptfile, clearfile, priv_key)
         self.assertEquals(clearfile.getvalue(), message)
-        
+
         # We have 2x6 bytes in the message, so that should result in two
         # bigfile.
         cryptfile.seek(0)

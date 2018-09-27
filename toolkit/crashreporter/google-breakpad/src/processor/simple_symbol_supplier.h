@@ -33,7 +33,7 @@
 // that stores symbol files in a filesystem tree.  A SimpleSymbolSupplier is
 // created with one or more base directories, which are the root paths for all
 // symbol files.  Each symbol file contained therein has a directory entry in
-// the base directory with a name identical to the corresponding debugging 
+// the base directory with a name identical to the corresponding debugging
 // file (pdb).  Within each of these directories, there are subdirectories
 // named for the debugging file's identifier.  For recent pdb files, this is
 // a concatenation of the pdb's uuid and age, presented in hexadecimal form,

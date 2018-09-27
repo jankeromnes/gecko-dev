@@ -420,10 +420,10 @@ OfflineCacheUpdateChild::Schedule()
     // This tells the update to cache this document even in case the manifest
     // has not been changed since the last fetch.
     // See also nsOfflineCacheUpdate::ScheduleImplicit.
-    bool stickDocument = mDocument != nullptr; 
+    bool stickDocument = mDocument != nullptr;
 
     // Need to addref ourself here, because the IPC stack doesn't hold
-    // a reference to us. Will be released in RecvFinish() that identifies 
+    // a reference to us. Will be released in RecvFinish() that identifies
     // the work has been done.
     ContentChild::GetSingleton()->SendPOfflineCacheUpdateConstructor(
         this, manifestURI, documentURI, loadingPrincipalInfo,

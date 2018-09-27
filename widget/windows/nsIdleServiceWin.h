@@ -33,7 +33,7 @@ public:
         if (!idleService) {
             idleService = new nsIdleServiceWin();
         }
-        
+
         return idleService.forget();
     }
 

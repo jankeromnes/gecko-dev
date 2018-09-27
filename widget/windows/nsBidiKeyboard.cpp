@@ -40,16 +40,16 @@ NS_IMETHODIMP nsBidiKeyboard::IsLangRTL(bool *aIsRTL)
     return result;
 
   HKL  currentLocale;
- 
+
   currentLocale = ::GetKeyboardLayout(0);
   *aIsRTL = IsRTLLanguage(currentLocale);
-  
+
   if (!::GetKeyboardLayoutNameW(mCurrentLocaleName))
     return NS_ERROR_FAILURE;
 
-  NS_ASSERTION(*mCurrentLocaleName, 
+  NS_ASSERTION(*mCurrentLocaleName,
     "GetKeyboardLayoutName return string length == 0");
-  NS_ASSERTION((wcslen(mCurrentLocaleName) < KL_NAMELENGTH), 
+  NS_ASSERTION((wcslen(mCurrentLocaleName) < KL_NAMELENGTH),
     "GetKeyboardLayoutName return string length >= KL_NAMELENGTH");
 
   // The language set by the user overrides the default language for that direction
@@ -61,9 +61,9 @@ NS_IMETHODIMP nsBidiKeyboard::IsLangRTL(bool *aIsRTL)
     mLTRKeyboard[KL_NAMELENGTH-1] = '\0'; // null terminate
   }
 
-  NS_ASSERTION((wcslen(mRTLKeyboard) < KL_NAMELENGTH), 
+  NS_ASSERTION((wcslen(mRTLKeyboard) < KL_NAMELENGTH),
     "mLTRKeyboard has string length >= KL_NAMELENGTH");
-  NS_ASSERTION((wcslen(mLTRKeyboard) < KL_NAMELENGTH), 
+  NS_ASSERTION((wcslen(mLTRKeyboard) < KL_NAMELENGTH),
     "mRTLKeyboard has string length >= KL_NAMELENGTH");
   return NS_OK;
 }
@@ -95,7 +95,7 @@ nsresult nsBidiKeyboard::SetupBidiKeyboards()
   wchar_t localeName[KL_NAMELENGTH];
   bool isLTRKeyboardSet = false;
   bool isRTLKeyboardSet = false;
-  
+
   // GetKeyboardLayoutList with 0 as first parameter returns the number of keyboard layouts available
   keyboards = ::GetKeyboardLayoutList(0, nullptr);
   if (!keyboards)
@@ -143,9 +143,9 @@ nsresult nsBidiKeyboard::SetupBidiKeyboards()
   if (!::GetKeyboardLayoutNameW(localeName))
     return NS_ERROR_FAILURE;
 
-  NS_ASSERTION(*localeName, 
+  NS_ASSERTION(*localeName,
     "GetKeyboardLayoutName return string length == 0");
-  NS_ASSERTION((wcslen(localeName) < KL_NAMELENGTH), 
+  NS_ASSERTION((wcslen(localeName) < KL_NAMELENGTH),
     "GetKeyboardLayout return string length >= KL_NAMELENGTH");
 
   if (IsRTLLanguage(locale)) {
@@ -157,9 +157,9 @@ nsresult nsBidiKeyboard::SetupBidiKeyboards()
     mLTRKeyboard[KL_NAMELENGTH-1] = '\0'; // null terminate
   }
 
-  NS_ASSERTION(*mRTLKeyboard, 
+  NS_ASSERTION(*mRTLKeyboard,
     "mLTRKeyboard has string length == 0");
-  NS_ASSERTION(*mLTRKeyboard, 
+  NS_ASSERTION(*mLTRKeyboard,
     "mLTRKeyboard has string length == 0");
 
   return NS_OK;

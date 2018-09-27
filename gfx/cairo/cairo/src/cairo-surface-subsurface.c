@@ -281,7 +281,7 @@ cairo_surface_paint_to_target (cairo_surface_t            *target,
                                cairo_surface_subsurface_t *subsurface)
 {
     cairo_t *cr;
-    
+
     cr = cairo_create (target);
 
     cairo_set_source_surface (cr,
@@ -290,7 +290,7 @@ cairo_surface_paint_to_target (cairo_surface_t            *target,
                               - subsurface->extents.y);
     cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
     cairo_paint (cr);
-    
+
     cairo_destroy (cr);
 }
 

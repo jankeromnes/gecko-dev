@@ -7,12 +7,12 @@
  </head>
  <info>
   <item type="title" its:translate="yes">The Life of a <b>Simple Man</b></item>
-  <!-- Note that the contents of <b> and <span> should end up 
+  <!-- Note that the contents of <b> and <span> should end up
        translatable with these settings -->
   <item type="date-main">Dec-05-2006</item>
  </info>
  <content>
-  <p>Everything started when Zebulon discovered that he had 
+  <p>Everything started when Zebulon discovered that he had
    a <span>doppelgänger</span> who was a
    serious baseball <span>aficionado</span>.</p>
  </content>

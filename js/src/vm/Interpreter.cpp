@@ -5518,7 +5518,7 @@ js::NewObjectOperation(JSContext* cx, HandleScript script, jsbytecode* pc,
                 if (group->maybeUnboxedLayout(sweep)) {
                     // This sets the allocation site so that the template object
                     // can be read back but if op is NEWINIT, then the template
-                    // is null. 
+                    // is null.
                     MOZ_ASSERT(JSOp(*pc) != JSOP_NEWINIT);
                     group->maybeUnboxedLayout(sweep)->setAllocationSite(script, pc);
                 }

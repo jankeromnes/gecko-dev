@@ -6,7 +6,7 @@ if (d.openPopup) {
   d.openPopup(document.documentElement, 'before_start', 0, 0, false, false);
 //  alert(d.state);
 }
-  
+
 setTimeout(doe, 200);
 </script>
 </menupopup>

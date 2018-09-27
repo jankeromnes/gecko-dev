@@ -18,7 +18,7 @@ This test ensures that a resizer in content doesn't resize the window.
     SimpleTest.waitForExplicitFinish();
 
     function testResizer()
-    { 
+    {
       var oldScreenX = window.screenX;
       var oldScreenY = window.screenY;
       var oldWidth = window.outerWidth;

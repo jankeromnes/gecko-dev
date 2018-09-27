@@ -19,7 +19,7 @@ THREADSCPPFLAGS = -D_REENTRANT
 LIBCPPFLAGS =
 
 ## Compiler switch to embed a runtime search path
-LD_RPATH=	
+LD_RPATH=
 LD_RPATH_PRE=	-Wl,-rpath,
 
 ## Compiler switch to embed a library name
@@ -66,7 +66,7 @@ STATIC_O = ao
 	$(RM) $@ && ln -s ${*F}.$(SO).$(SO_TARGET_VERSION) $@
 
 ##  Bind internal references
- 
+
 # LDflags that pkgdata will use
 BIR_LDFLAGS= -Wl,-Bsymbolic
 
@@ -74,8 +74,8 @@ BIR_LDFLAGS= -Wl,-Bsymbolic
 BIR_DEPS=
 
 ## Remove shared library 's'
-STATIC_PREFIX_WHEN_USED = 
-STATIC_PREFIX = 
+STATIC_PREFIX_WHEN_USED =
+STATIC_PREFIX =
 
 ## End BSD-specific setup
 

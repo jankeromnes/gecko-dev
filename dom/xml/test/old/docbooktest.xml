@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="docbook.css" type="text/css"?>
 <!DOCTYPE Book SYSTEM "docbook.dtd">
-<Book xmlns:xlink="http://www.w3.org/1999/xlink"> 
+<Book xmlns:xlink="http://www.w3.org/1999/xlink">
 <Title>SoftQuad
 Inc.</Title>
 <p xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml">
@@ -10,19 +10,19 @@ Inc.</Title>
 <button><b>some text</b></button>
 </p>
 <BookInfo> <BookBiblio> <Title>Demo Product Documentation</Title>
-<AuthorGroup><CorpAuthor>SoftQuad Inc.</CorpAuthor></AuthorGroup> 
+<AuthorGroup><CorpAuthor>SoftQuad Inc.</CorpAuthor></AuthorGroup>
 </BookBiblio> </BookInfo> <Preface> <Title><Anchor
 Id="SDK3"/>Element Overview</Title>
-<BridgeHead>Introduction to Elements</BridgeHead> 
+<BridgeHead>Introduction to Elements</BridgeHead>
 <Para>By far the vast majority of objects (apart from text) that authors
-encounter when traversing a document are Element nodes. </Para> </Preface> 
+encounter when traversing a document are Element nodes. </Para> </Preface>
 <Part> <Title><Anchor Id="SDK273"/>Element Interfaces</Title>
 <Chapter Label="1"> <Title><Anchor Id="SDK274"/>Elements and
 Attributes</Title>
 <Sect1> <Title><Anchor Id="SDK279"/>Introduction to Attributes
 </Title>
 <Para>Elements may have attributes associated with them; since the Element
-interface inherits from Node, the generic Node interface method 
+interface inherits from Node, the generic Node interface method
 <Function>getAttributes</Function> may be used to retrieve the set of all
 attributes for an element. </Para>
 <Para>There are methods on the Element interface to retrieve either an Attr
@@ -47,69 +47,69 @@ of a given type. Furthermore, Attr nodes may not be immediate children of a
 DocumentFragment. However, they can be associated with Element nodes contained
 within a DocumentFragment. In short, users and implementors of the DOM need to
 be aware that Attr nodes have some things in common with other objects
-inheriting the Node interface, but they also are quite distinct. </Para> 
-<Para>The attribute's effective value is determined as follows:</Para> 
-<ItemizedList Mark="Bullet"> <ListItem> 
+inheriting the Node interface, but they also are quite distinct. </Para>
+<Para>The attribute's effective value is determined as follows:</Para>
+<ItemizedList Mark="Bullet"> <ListItem>
 <Para>If this attribute has been explicitly assigned any value, that value is
-the attribute's effective value</Para></ListItem> <ListItem> 
+the attribute's effective value</Para></ListItem> <ListItem>
 <Para>Otherwise, if there is a declaration for this attribute, and that
 declaration includes a default value, then that default value is the
-attribute's effective value</Para></ListItem> <ListItem> 
+attribute's effective value</Para></ListItem> <ListItem>
 <Para>Otherwise, the attribute does not exist on this element in the structure
-model until it has been explicitly added.</Para></ListItem> </ItemizedList> 
+model until it has been explicitly added.</Para></ListItem> </ItemizedList>
 <Para>In XML, where the value of an attribute can contain entity references,
 the child nodes of the Attr node provide a representation in which entity
 references are not expanded. These child nodes may be either Text or
 EntityReference nodes. Because the attribute type may be unknown, there are no
-tokenized attribute values. </Para> 
-<Para>The following topics describe DOM attributes: </Para> 
-<ItemizedList Mark="Bullet"> <ListItem> 
-<Para> 
+tokenized attribute values. </Para>
+<Para>The following topics describe DOM attributes: </Para>
+<ItemizedList Mark="Bullet"> <ListItem>
+<Para>
 <ULink xlink:type="simple" xlink:show="replace"
  xlink:href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-637646024">Interface
-Attr</ULink> </Para></ListItem> <ListItem> 
-<Para> 
+Attr</ULink> </Para></ListItem> <ListItem>
+<Para>
 <ULink xlink:type="simple" xlink:show="new"
  xlink:href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-745549614">
 Interface Element</ULink> </Para></ListItem> </ItemizedList> </Sect1></Chapter>
 
 <Chapter Label="26" Role="funcref"> <Title><Anchor
 Id="SDK48"/>DOM Level 1 Core: Element Functions</Title>
-<RefEntry> <RefMeta><RefEntryTitle> <Anchor Id="setAttribute"/>setAttribute 
-</RefEntryTitle></RefMeta> <RefNameDiv> <RefName>setAttribute</RefName> 
-<RefPurpose>Sets the Attributes on the associated Element object</RefPurpose> 
+<RefEntry> <RefMeta><RefEntryTitle> <Anchor Id="setAttribute"/>setAttribute
+</RefEntryTitle></RefMeta> <RefNameDiv> <RefName>setAttribute</RefName>
+<RefPurpose>Sets the Attributes on the associated Element object</RefPurpose>
 <RefClass>Fundamental</RefClass> </RefNameDiv> <RefSynopsisDiv> <Title>
 <Anchor Id="SDK85"/>Syntax</Title>
 <RefSect2> <Title>OMG IDL</Title>
-<Synopsis><Type>void</Type> <Function>setAttribute</Function> (in 
-<Type>DOMString</Type> <Parameter>name</Parameter>, in <Type>DOMString</Type> 
+<Synopsis><Type>void</Type> <Function>setAttribute</Function> (in
+<Type>DOMString</Type> <Parameter>name</Parameter>, in <Type>DOMString</Type>
 <Parameter>value</Parameter>) raises (<ErrorType>DOMException</ErrorType>);
 </Synopsis></RefSect2><RefSect2> <Title><Anchor Id="SDK86"/>Java</Title>
 <Synopsis><Type>public void</Type> <Function>setAttribute</Function> (
-<Type>String</Type> <Parameter>name</Parameter>, <Type>String</Type> 
-<Parameter>value</Parameter>) throws (<ErrorType>DOMException</ErrorType>); 
+<Type>String</Type> <Parameter>name</Parameter>, <Type>String</Type>
+<Parameter>value</Parameter>) throws (<ErrorType>DOMException</ErrorType>);
 </Synopsis> </RefSect2><RefSect2> <Title><Anchor Id="SDK87"/>ECMA Script
 </Title>
 <Synopsis> <Function>setAttribute</Function> (<Parameter>name, value
 </Parameter>)</Synopsis> </RefSect2></RefSynopsisDiv><RefSect1> <Title>
 <Anchor Id="SDK88"/>Parameters</Title>
-<VariableList> <VarListEntry><Term> <Parameter>name</Parameter></Term> 
-<ListItem> 
+<VariableList> <VarListEntry><Term> <Parameter>name</Parameter></Term>
+<ListItem>
 <Para>(IN) The name of the attribute to create or alter.</Para> </ListItem>
-</VarListEntry><VarListEntry><Term> <Parameter>value</Parameter></Term> 
-<ListItem> 
+</VarListEntry><VarListEntry><Term> <Parameter>value</Parameter></Term>
+<ListItem>
 <Para>(IN) Value to set in string form</Para> </ListItem></VarListEntry>
 </VariableList></RefSect1><RefSect1> <Title><Anchor Id="SDK89"/>Exceptions
 </Title>
-<Para>These are the applicable exceptions. </Para> <InformalTable> <TGroup cols="2"> 
-<colspec colname="1" colnum="1" colwidth="0.630in"/> 
+<Para>These are the applicable exceptions. </Para> <InformalTable> <TGroup cols="2">
+<colspec colname="1" colnum="1" colwidth="0.630in"/>
 <colspec colname="2" colnum="2" colwidth="5.203in"/> <tbody>
 <row> <entry colname="1">
-<Para>INVALID_CHARACTER_ERR</Para></entry> <entry colname="2"> 
+<Para>INVALID_CHARACTER_ERR</Para></entry> <entry colname="2">
 <Para>Raised if the specified name contains an invalid character.</Para>
 </entry></row> <row> <entry colname="1">
 <Para> NO_MODIFICATION_ALLOWED_ERR</Para></entry> <entry colname="2">
-<Para>Raised if this node is readonly.</Para></entry> </row> 
+<Para>Raised if this node is readonly.</Para></entry> </row>
 </tbody>
 </TGroup></InformalTable></RefSect1><RefSect1> <Title><Anchor
 Id="SDK90"/>Remarks</Title>

@@ -18,13 +18,13 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var obj;
 
   print('1');
 
   obj = {
-    set inn(value) {this.for = value;}, 
+    set inn(value) {this.for = value;},
     get inn() {return this.for;}
   };
 
@@ -35,7 +35,7 @@ function test()
   print('2');
 
   obj = {
-    set in(value) {this.for = value;}, 
+    set in(value) {this.for = value;},
     get in() {return this.for;}
   };
 
@@ -46,7 +46,7 @@ function test()
   print('3');
 
   obj = {
-    set inn(value) {this.for = value;}, 
+    set inn(value) {this.for = value;},
     get in() {return this.for;}
   };
 
@@ -57,7 +57,7 @@ function test()
   print('4');
 
   obj = {
-    set in(value) {this.for = value;}, 
+    set in(value) {this.for = value;},
     get inn() {return this.for;}
   };
 

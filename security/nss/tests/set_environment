@@ -7,11 +7,11 @@
 # sourced from the header if running from cron to get the full environment
 # to run nssqa    - also used to unify all nssqa environments
 #
-# This is derived from the .cshrc file for the svbld account.  
+# This is derived from the .cshrc file for the svbld account.
 #
 ########################################################################
 
-if [ -z "$HOME" ] 
+if [ -z "$HOME" ]
 then
     HOME=/u/svbld
 fi
@@ -69,7 +69,7 @@ then
     XAPPLRESDIR=/usr/openwin/lib/app-defaults:/usr/local/lib/X11/app-defaults
     OPENWINHOME=/usr/openwin
     LD_LIBRARY_PATH=$OPENWINHOME/lib
-    if [ "$os_full" = "SOLARISx86 2.8" -o "$os_full" = "SOLARISx86 2.9" ] 
+    if [ "$os_full" = "SOLARISx86 2.8" -o "$os_full" = "SOLARISx86 2.9" ]
     then
         #PATH=/usr/ucb:/opt/usr/local/bin:$PATH
         JAVA_HOME="/usr/java1.2"
@@ -80,7 +80,7 @@ then
         JAVA_HOME="/share/builds/components/jdk/1.2.2/SunOS"
 	JAVA_HOME14=/share/builds/components/jdk/1.4.0/SunOS64
         PATH=/tools/ns/bin:$PATH:/opt/SUNWspro/bin:/usr/bin/X11:/usr/openwin/bin:/usr/openwin/demo
-    
+
         if [ "$os_version" = "5.8" -o "$os_version" = "5.7" -o \
              "$os_version" = "5.9" ]
         then
@@ -108,7 +108,7 @@ elif [ "$os_name" = "Linux" ]
 then
     PATH=/lib:/usr/lib:/bin:/sbin:/usr/bin:/usr/sbin:$PATH
     RMAIL=sendmail
-    #the gnu grep, on Linux can output 10 lines above and 3 lines below 
+    #the gnu grep, on Linux can output 10 lines above and 3 lines below
     #the errormessage
     BEFORE_CONTEXT_GREP="--before-context=10"
     AFTER_CONTEXT_GREP="--after-context=3"
@@ -116,7 +116,7 @@ then
     JAVA_HOME14=/share/builds/components/jdk/1.4.0/Linux
 elif [ "$os_name" = "AIX" ]
 then
-    PATH=$PATH:/tools/contrib/bin:/usr/local/bin 
+    PATH=$PATH:/tools/contrib/bin:/usr/local/bin
     TERM=vt100
     export TERM
     JAVA_HOME="/share/builds/components/cms_jdk/AIX/1.3.0"
@@ -152,7 +152,7 @@ then
     O_CYGNUS=ON
     O_WIN=ON
     PATH="`dirname $0`:.:/cygdrive/c/cygwin/bin:/cygdrive/z/nstools/bin:/cygdrive/z/nstools/perl5:/cygdrive/z/bin:/cygdrive/c/WINNT/System32:/cygdrive/c/WINNT"
-    RM=/cygdrive/c/cygwin/bin/rm.exe    #FIXME - in case we cant cporrect 
+    RM=/cygdrive/c/cygwin/bin/rm.exe    #FIXME - in case we cant cporrect
                                         #these with the PATH alone
     PATH=`perl $QASCRIPT_DIR/path_uniq "$PATH"`
     RSH=/cygdrive/c/winnt/system32/rsh
@@ -195,17 +195,17 @@ then
         PATH="${PATH};C:/WINNT/System32;C:/WINNT;.;"
     fi
     PATH="`dirname $0`;$PATH"
-    
+
     PATH=`perl $QASCRIPT_DIR/path_uniq -d ';' "$PATH"`
     echo $PATH
     os_full=$os_name
     os_name="Windows"
     O_MKS=ON
     O_WIN=ON
-    if [ -z $RSH ] ; then 
+    if [ -z $RSH ] ; then
         RSH=c:/winnt/system32/rsh
     fi
-    
+
 else
     EDITOR=vi
     EMACSLOADPATH=/u/svbld/emacs
@@ -217,7 +217,7 @@ else
     RSH=rsh
 fi
 
-BASEPATH=$PATH    # in  case we we set and reset DIST directories the PATH 
+BASEPATH=$PATH    # in  case we we set and reset DIST directories the PATH
                 # needs to change accordingly
 export PATH EDITOR EMACSLOADPATH PYTHONPATH PAGER XMCD_LIBDIR DISPLAY MANPATH os_full os_name BASEPATH RSH O_WIN
 

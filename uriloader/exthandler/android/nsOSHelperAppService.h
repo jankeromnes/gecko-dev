@@ -32,7 +32,7 @@ public:
     CreateAndroidHandlerApp(const nsAString& aName,
                             const nsAString& aDescription,
                             const nsAString& aPackageName,
-                            const nsAString& aClassName, 
+                            const nsAString& aClassName,
                             const nsACString& aMimeType,
                             const nsAString& aAction = EmptyString());
 };

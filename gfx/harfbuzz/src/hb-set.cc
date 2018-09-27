@@ -136,9 +136,9 @@ hb_set_get_user_data (hb_set_t           *set,
  * hb_set_allocation_successful:
  * @set: a set.
  *
- * 
  *
- * Return value: 
+ *
+ * Return value:
  *
  * Since: 0.9.2
  **/
@@ -152,7 +152,7 @@ hb_set_allocation_successful (const hb_set_t  *set)
  * hb_set_clear:
  * @set: a set.
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -166,9 +166,9 @@ hb_set_clear (hb_set_t *set)
  * hb_set_is_empty:
  * @set: a set.
  *
- * 
  *
- * Return value: 
+ *
+ * Return value:
  *
  * Since: 0.9.7
  **/
@@ -181,11 +181,11 @@ hb_set_is_empty (const hb_set_t *set)
 /**
  * hb_set_has:
  * @set: a set.
- * @codepoint: 
+ * @codepoint:
  *
- * 
  *
- * Return value: 
+ *
+ * Return value:
  *
  * Since: 0.9.2
  **/
@@ -199,9 +199,9 @@ hb_set_has (const hb_set_t *set,
 /**
  * hb_set_add:
  * @set: a set.
- * @codepoint: 
+ * @codepoint:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -215,10 +215,10 @@ hb_set_add (hb_set_t       *set,
 /**
  * hb_set_add_range:
  * @set: a set.
- * @first: 
- * @last: 
+ * @first:
+ * @last:
  *
- * 
+ *
  *
  * Since: 0.9.7
  **/
@@ -233,9 +233,9 @@ hb_set_add_range (hb_set_t       *set,
 /**
  * hb_set_del:
  * @set: a set.
- * @codepoint: 
+ * @codepoint:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -249,10 +249,10 @@ hb_set_del (hb_set_t       *set,
 /**
  * hb_set_del_range:
  * @set: a set.
- * @first: 
- * @last: 
+ * @first:
+ * @last:
  *
- * 
+ *
  *
  * Since: 0.9.7
  **/
@@ -269,7 +269,7 @@ hb_set_del_range (hb_set_t       *set,
  * @set: a set.
  * @other: other set.
  *
- * 
+ *
  *
  * Return value: %TRUE if the two sets are equal, %FALSE otherwise.
  *
@@ -303,9 +303,9 @@ hb_set_is_subset (const hb_set_t *set,
 /**
  * hb_set_set:
  * @set: a set.
- * @other: 
+ * @other:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -319,9 +319,9 @@ hb_set_set (hb_set_t       *set,
 /**
  * hb_set_union:
  * @set: a set.
- * @other: 
+ * @other:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -335,9 +335,9 @@ hb_set_union (hb_set_t       *set,
 /**
  * hb_set_intersect:
  * @set: a set.
- * @other: 
+ * @other:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -351,9 +351,9 @@ hb_set_intersect (hb_set_t       *set,
 /**
  * hb_set_subtract:
  * @set: a set.
- * @other: 
+ * @other:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -367,9 +367,9 @@ hb_set_subtract (hb_set_t       *set,
 /**
  * hb_set_symmetric_difference:
  * @set: a set.
- * @other: 
+ * @other:
  *
- * 
+ *
  *
  * Since: 0.9.2
  **/
@@ -384,7 +384,7 @@ hb_set_symmetric_difference (hb_set_t       *set,
  * hb_set_invert:
  * @set: a set.
  *
- * 
+ *
  *
  * Since: 0.9.10
  *

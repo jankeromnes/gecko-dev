@@ -44,7 +44,7 @@ function f() {
     g();
     g();
     g();
-    var result = [[2, 1, 3], [6, 5, 4]];    
+    var result = [[2, 1, 3], [6, 5, 4]];
     result = result.invoke('invoke', 'toString', 2);
     result[0].join(', ');
 };

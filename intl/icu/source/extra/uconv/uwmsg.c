@@ -77,7 +77,7 @@ uprint(const UChar *s,
         myTarget     = buf;
         arraySize    = BUF_SIZE;
     }
-    while(*status == U_BUFFER_OVERFLOW_ERROR); 
+    while(*status == U_BUFFER_OVERFLOW_ERROR);
 
 finish:
 
@@ -114,7 +114,7 @@ U_CFUNC UResourceBundle *u_wmsg_setPath(const char *path, UErrorCode *err)
 
     U_STRING_INIT(gNoFormatting, " (UCONFIG_NO_FORMATTING see uconfig.h)", 38);
   }
-  
+
   return gBundle;
 }
 

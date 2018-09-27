@@ -603,7 +603,7 @@ udata_swapPackage(const char *inFilename, const char *outFilename,
 
         /* swap each data item */
         for(i=0; i<itemCount; ++i) {
-            /* first copy the item bytes to make sure that unreachable bytes are copied */ 
+            /* first copy the item bytes to make sure that unreachable bytes are copied */
             uprv_memcpy(outBytes+table[i].outOffset, inBytes+table[i].inOffset, table[i].length);
 
             /* swap the item */

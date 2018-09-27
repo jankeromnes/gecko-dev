@@ -181,7 +181,7 @@ nsOSXSystemProxySettings::FindSCProxyPort(const nsACString &aScheme, nsACString&
     NS_ENSURE_TRUE(enabled == NULL || [enabled isKindOfClass:[NSNumber class]], NS_ERROR_FAILURE);
     if ([enabled intValue] == 0)
       continue;
-    
+
     // Get the proxy host
     NSString* host = [mProxyDict objectForKey:(NSString*)keys->mHost];
     if (host == NULL)
@@ -291,7 +291,7 @@ nsOSXSystemProxySettings::GetProxyForURI(const nsACString & aSpec,
     aResult.AssignLiteral("DIRECT");
   } else if (proxySocks) {
     aResult.Assign(NS_LITERAL_CSTRING("SOCKS ") + proxyHost + nsPrintfCString(":%d", proxyPort));
-  } else {      
+  } else {
     aResult.Assign(NS_LITERAL_CSTRING("PROXY ") + proxyHost + nsPrintfCString(":%d", proxyPort));
   }
 

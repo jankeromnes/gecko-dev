@@ -77,13 +77,13 @@ class nsIParser : public nsParserBase {
      * Select given content sink into parser for parser output
      * @update	gess5/11/98
      * @param   aSink is the new sink to be used by parser
-     * @return  
+     * @return
      */
     NS_IMETHOD_(void) SetContentSink(nsIContentSink* aSink)=0;
 
 
     /**
-     * retrieve the sink set into the parser 
+     * retrieve the sink set into the parser
      * @update	gess5/11/98
      * @return  current sink
      */
@@ -93,7 +93,7 @@ class nsIParser : public nsParserBase {
      *  Call this method once you've created a parser, and want to instruct it
 	   *  about the command which caused the parser to be constructed. For example,
      *  this allows us to select a DTD which can do, say, view-source.
-     *  
+     *
      *  @update  gess 3/25/98
      *  @param   aCommand -- ptrs to string that contains command
      *  @return	 nada
@@ -105,7 +105,7 @@ class nsIParser : public nsParserBase {
     /**
      *  Call this method once you've created a parser, and want to instruct it
      *  about what charset to load
-     *  
+     *
      *  @update  ftang 4/23/99
      *  @param   aCharset- the charest of a document
      *  @param   aCharsetSource- the soure of the chares
@@ -114,7 +114,7 @@ class nsIParser : public nsParserBase {
     virtual void SetDocumentCharset(NotNull<const Encoding*> aCharset,
                                     int32_t aSource) = 0;
 
-    /** 
+    /**
      * Get the channel associated with this parser
      * @update harishd,gagan 07/17/01
      * @param aChannel out param that will contain the result
@@ -122,14 +122,14 @@ class nsIParser : public nsParserBase {
      */
     NS_IMETHOD GetChannel(nsIChannel** aChannel) override = 0;
 
-    /** 
+    /**
      * Get the DTD associated with this parser
      * @update vidur 9/29/99
      * @param aDTD out param that will contain the result
      * @return NS_OK if successful, NS_ERROR_FAILURE for runtime error
      */
     NS_IMETHOD GetDTD(nsIDTD** aDTD) = 0;
-    
+
     /**
      * Get the nsIStreamListener for this parser
      */
@@ -140,7 +140,7 @@ class nsIParser : public nsParserBase {
      *  conversions until you wind up being emitted to the given contentsink
      *  (which may or may not be a proxy for the NGLayout content model).
      ************************************************************************/
-    
+
     // Call this method to resume the parser from an unblocked state.
     // This can happen, for example, if parsing was interrupted and then the
     // consumer needed to restart the parser without waiting for more data.
@@ -148,12 +148,12 @@ class nsIParser : public nsParserBase {
     // order to process the output of document.write() and then need to
     // continue on with the page load on an enabled parser.
     NS_IMETHOD ContinueInterruptedParsing() = 0;
-    
+
     // Stops parsing temporarily.
     NS_IMETHOD_(void) BlockParser() = 0;
-    
-    // Open up the parser for tokenization, building up content 
-    // model..etc. However, this method does not resume parsing 
+
+    // Open up the parser for tokenization, building up content
+    // model..etc. However, this method does not resume parsing
     // automatically. It's the callers' responsibility to restart
     // the parsing engine.
     NS_IMETHOD_(void) UnblockParser() = 0;
@@ -165,7 +165,7 @@ class nsIParser : public nsParserBase {
 
     NS_IMETHOD_(bool) IsParserEnabled() override = 0;
     NS_IMETHOD_(bool) IsComplete() = 0;
-    
+
     NS_IMETHOD Parse(nsIURI* aURL,
                      nsIRequestObserver* aListener = nullptr,
                      void* aKey = 0,
@@ -198,7 +198,7 @@ class nsIParser : public nsParserBase {
      *  Parsing events may be pending if all of the document's content
      *  has been passed to the parser but the parser has been interrupted
      *  because processing the tokens took too long.
-     *  
+     *
      *  @update  kmcclusk 05/18/01
      *  @return  NS_OK if succeeded else ERROR.
      */

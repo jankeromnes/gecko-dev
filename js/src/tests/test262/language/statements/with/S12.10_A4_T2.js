@@ -10,7 +10,7 @@ flags: [noStrict]
 
 this.p1 = 'a';
 var myObj = {
-  p1: 1, 
+  p1: 1,
 }
 eval("with(myObj){p1=2}");
 

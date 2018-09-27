@@ -10,7 +10,7 @@ assertEq(x, NaN);
 function overdiv() {
   for(var i=0; i<25; i++) {
     var a, b;
-    function f() { 
+    function f() {
     }
     a = f();
     b = (123 ^ 1) / 1234;

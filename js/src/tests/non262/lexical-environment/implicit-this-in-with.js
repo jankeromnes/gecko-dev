@@ -4,7 +4,7 @@
 let g = function () { "use strict"; assertEq(this, undefined); }
 function f() { "use strict"; assertEq(this, undefined); }
 
-with ({}) { 
+with ({}) {
   // f is resolved on the global object
   f();
   // g is resolved on the global lexical environment

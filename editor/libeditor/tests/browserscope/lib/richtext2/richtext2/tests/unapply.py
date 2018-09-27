@@ -39,7 +39,7 @@ UNAPPLY_TESTS = {
       ]
     }
   ],
-    
+
   'Proposed': [
     { 'desc':       '',
       'command':    '',

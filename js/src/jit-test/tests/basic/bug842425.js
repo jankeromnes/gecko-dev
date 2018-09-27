@@ -6,7 +6,7 @@ function g() {
     a.push(i, 1.5);
   for (var i = 0; i < 32 ; i++) {
     print(i);
-    a[i].m = function() {} 
+    a[i].m = function() {}
   }
 }
 g();

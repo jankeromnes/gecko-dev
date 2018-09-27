@@ -11,7 +11,7 @@ description: Checking if deleting arguments.length property fails
 
 //CHECK#1
 function f1(){
-  return (delete arguments.length); 
+  return (delete arguments.length);
 }
 
 try{
@@ -25,7 +25,7 @@ catch(e){
 
 //CHECK#2
 var f2 = function(){
-  return (delete arguments.length); 
+  return (delete arguments.length);
 }
 
 try{

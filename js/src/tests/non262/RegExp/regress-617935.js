@@ -27,8 +27,8 @@ for (i = 0; i < 9; ++i) {
     bar += bar;
 }
 
-/* 
- * Resulting string should be 
+/*
+ * Resulting string should be
  * len(foo) * len(bar) = (2**10 * 32 + 1) * 8192 = 268443648
  * which will be larger than the max string length (2**28, or 268435456).
  */

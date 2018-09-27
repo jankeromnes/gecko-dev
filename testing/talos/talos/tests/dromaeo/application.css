@@ -19,19 +19,19 @@ body  {
 	font: normal 11px "Lucida Grande", Helvetica, Arial, sans-serif;
 	background: black url(images/bg.png) repeat-x;
 	margin: 0px auto;
-	padding: 0px; 
-	color: #eee; 
+	padding: 0px;
+	color: #eee;
 	text-align: center;
 	line-height: 180%;
-}	
+}
 div, img, form, ul {
-	margin: 0px; 
+	margin: 0px;
 	padding: 0px;
-	border: 0px; 
+	border: 0px;
 }
 small			{font-size: 9px;}
-div, span, td, .text_l {text-align: left;}	
-.clear 			{clear: both;}	
+div, span, td, .text_l {text-align: left;}
+.clear 			{clear: both;}
 .text_r 		{text-align: right;}
 .text_c 		{text-align: center;}
 a 				{font: normal  "Arial", sans-serif; color: #f9f2a1; }

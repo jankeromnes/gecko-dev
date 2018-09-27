@@ -12,7 +12,7 @@
       }
     ]]>
   </style>
-  <!-- 
+  <!--
       Test that transforms within SVG glyph documents are applied properly
   -->
   <text x="0" y="100">

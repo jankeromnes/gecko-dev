@@ -69,5 +69,5 @@ def WebIDLTest(parser, harness):
         threw = True
 
     harness.ok(threw, "There are no indexed deleters")
-        
-        
+
+

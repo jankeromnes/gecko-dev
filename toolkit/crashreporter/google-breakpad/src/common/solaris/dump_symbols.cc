@@ -63,7 +63,7 @@ typedef Elf32_Sym   Elf_Sym;
 struct slist {
   // String table index.
   unsigned int n_strx;
-  // Stab type. 
+  // Stab type.
   unsigned char n_type;
   char n_other;
   short n_desc;
@@ -194,7 +194,7 @@ std::string Demangle(const char *mangled) {
   free(demangled);
 
 out:
-  return str; 
+  return str;
 }
 
 bool WriteFormat(int fd, const char *fmt, ...) {
@@ -399,7 +399,7 @@ bool LoadAllSymbols(const GElf_Shdr *stab_section,
   if (stab_section == NULL || stabstr_section == NULL)
     return false;
 
-  char *stabstr = 
+  char *stabstr =
     reinterpret_cast<char *>(stabstr_section->sh_offset + base);
   struct slist *lists =
     reinterpret_cast<struct slist *>(stab_section->sh_offset + base);

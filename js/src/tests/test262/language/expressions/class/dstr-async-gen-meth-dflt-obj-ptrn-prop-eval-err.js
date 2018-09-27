@@ -53,7 +53,7 @@ function thrower() {
 
 var C = class {
   async *method({ [thrower()]: x } = {}) {
-    
+
   }
 };
 

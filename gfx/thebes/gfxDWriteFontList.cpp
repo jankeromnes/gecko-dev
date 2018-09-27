@@ -319,12 +319,12 @@ gfxDWriteFontFamily::LocalizedName(nsACString &aLocalizedName)
     }
     AutoTArray<WCHAR, 32> famName;
     UINT32 length;
-    
+
     hr = names->GetStringLength(idx, &length);
     if (FAILED(hr)) {
         return;
     }
-    
+
     if (!famName.SetLength(length + 1, fallible)) {
         // Eeep - running out of memory. Unlikely to end well.
         return;
@@ -859,7 +859,7 @@ gfxDWriteFontEntry::InitLogFont(IDWriteFont *aFont, LOGFONTW *aLogFont)
     HRESULT hr;
 
     BOOL isInSystemCollection;
-    IDWriteGdiInterop *gdi = 
+    IDWriteGdiInterop *gdi =
         gfxDWriteFontList::PlatformFontList()->GetGDIInterop();
     hr = gdi->ConvertFontToLOGFONT(aFont, aLogFont, &isInSystemCollection);
     // If the font is not in the system collection, GDI will be unable to
@@ -948,7 +948,7 @@ gfxDWriteFontList::GetDefaultFontForPlatform(const gfxFontStyle *aStyle)
     // otherwise, use local default
     NONCLIENTMETRICSW ncm;
     ncm.cbSize = sizeof(ncm);
-    BOOL status = ::SystemParametersInfoW(SPI_GETNONCLIENTMETRICS, 
+    BOOL status = ::SystemParametersInfoW(SPI_GETNONCLIENTMETRICS,
                                           sizeof(ncm), &ncm, 0);
 
     if (status) {
@@ -1015,7 +1015,7 @@ gfxDWriteFontList::MakePlatformFont(const nsACString& aFontName,
     DWRITE_FONT_FILE_TYPE fileType;
     UINT32 numFaces;
 
-    gfxDWriteFontEntry *entry = 
+    gfxDWriteFontEntry *entry =
         new gfxDWriteFontEntry(NS_ConvertUTF16toUTF8(uniqueName),
                                fontFile,
                                fontFileStream,
@@ -1337,7 +1337,7 @@ gfxDWriteFontList::GetFontSubstitutes()
     WCHAR aliasName[MAX_VALUE_NAME];
     WCHAR actualName[MAX_VALUE_DATA];
 
-    if (RegOpenKeyExW(HKEY_LOCAL_MACHINE, 
+    if (RegOpenKeyExW(HKEY_LOCAL_MACHINE,
           L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\FontSubstitutes",
           0, KEY_READ, &hKey) != ERROR_SUCCESS)
     {
@@ -1367,7 +1367,7 @@ gfxDWriteFontList::GetFontSubstitutes()
         RemoveCharsetFromFontSubstitute(actualFontName);
         BuildKeyNameFromFontName(actualFontName);
         gfxFontFamily *ff;
-        if (!actualFontName.IsEmpty() && 
+        if (!actualFontName.IsEmpty() &&
             (ff = mFontFamilies.GetWeak(actualFontName))) {
             mFontSubstitutes.Put(substituteName, ff);
         } else {

@@ -85,7 +85,7 @@ SharedStub:
         addi    r5,r1,STACK_PARAMS              # r5 --> extra stack args
 
         std     r0, 16(r1)
-	
+
         stdu    r1,-288(r1)
                                                 # r3 has the 'self' pointer
                                                 # already

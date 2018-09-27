@@ -4,7 +4,7 @@ use syn::{Ident, NestedMeta, Meta};
 
 use {FromMetaItem, Result, Error};
 
-/// A list of `syn::Ident` instances. This type is used to extract a list of words from an 
+/// A list of `syn::Ident` instances. This type is used to extract a list of words from an
 /// attribute.
 ///
 /// # Usage

@@ -16,7 +16,7 @@ info: |
     8. Let lnum be ? ToNumber(lprim).
     9. Let rnum be ? ToNumber(rprim).
     10. Return the result of applying the addition operation to lnum and rnum.
-        See the Note below 12.8.5. 
+        See the Note below 12.8.5.
 
     ES6 Section 7.1.1 ToPrimitive ( input [, PreferredType] )
 

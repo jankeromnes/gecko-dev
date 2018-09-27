@@ -62,7 +62,7 @@ GetSystemTextQuality()
 
   if (font_smoothing) {
       if (!SystemParametersInfo(SPI_GETFONTSMOOTHINGTYPE,
-                                0, &smoothing_type, 0)) { 
+                                0, &smoothing_type, 0)) {
         return DEFAULT_QUALITY;
       }
 
@@ -311,7 +311,7 @@ gfxDWriteFont::ComputeMetrics(AntialiasOption anAAOption)
 
     mMetrics->underlineOffset =
         fontMetrics.underlinePosition * mFUnitsConvFactor;
-    mMetrics->underlineSize = 
+    mMetrics->underlineSize =
         fontMetrics.underlineThickness * mFUnitsConvFactor;
     mMetrics->strikeoutOffset =
         fontMetrics.strikethroughPosition * mFUnitsConvFactor;
@@ -514,7 +514,7 @@ gfxDWriteFont::CairoFontFace()
 {
     if (!mCairoFontFace) {
 #ifdef CAIRO_HAS_DWRITE_FONT
-        mCairoFontFace = 
+        mCairoFontFace =
             cairo_dwrite_font_face_create_for_dwrite_fontface(
             ((gfxDWriteFontEntry*)mFontEntry.get())->mFont, mFontFace);
 #endif
@@ -554,7 +554,7 @@ gfxDWriteFont::InitCairoScaledFont()
     }
 
     NS_ASSERTION(mAdjustedSize == 0.0 ||
-                 cairo_scaled_font_status(mScaledFont) 
+                 cairo_scaled_font_status(mScaledFont)
                    == CAIRO_STATUS_SUCCESS,
                  "Failed to make scaled font");
 

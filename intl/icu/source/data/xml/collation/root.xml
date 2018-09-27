@@ -13,7 +13,7 @@
 <ldml>
     <identity>
         <version number="$Revision$"/>
-        <language type="root"/> 
+        <language type="root"/>
     </identity>
     <special xmlns:icu="http://www.icu-project.org/">
         <icu:UCARules icu:uca_rules="../unidata/UCARules.txt"/>

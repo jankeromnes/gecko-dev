@@ -16,7 +16,7 @@
         window.addEventListener('securitypolicyviolation', function(e) {
             log("violated-directive=" + e.violatedDirective);
         });
-    </script>    
+    </script>
 
     Given a `plugin-types` directive, plugins have to declare a type explicitly. No declared type, no load. This test passes if there&apos;s an error report is sent.
     <object data="/plugins/resources/mock-plugin.pl" log="FAIL!"></object>

@@ -12,7 +12,7 @@ typedef struct
 {
   size_t inBufSize_ST;
   size_t outStep_ST;
-  
+
   #ifndef _7ZIP_ST
   unsigned numThreads;
   size_t inBufSize_MT;
@@ -52,7 +52,7 @@ SRes Lzma2DecMt_Decode(CLzma2DecMtHandle p,
     // Byte *outBuf, size_t *outBufSize,
     ISeqInStream *inStream,
     // const Byte *inData, size_t inDataSize,
-    
+
     // out variables:
     UInt64 *inProcessed,
     int *isMT,  /* out: (*isMT == 0), if single thread decoding was used */

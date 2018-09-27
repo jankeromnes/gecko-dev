@@ -24,7 +24,7 @@ GetHighResClock(void *buf, size_t maxbytes)
     }
     return 0;
 }
-
+
 #elif defined(HPUX)
 
 #ifdef __ia64
@@ -53,7 +53,7 @@ GetHighResClock(void *buf, size_t maxbytes)
     return(_pr_CopyLowBits(buf, maxbytes, &cr16val, sizeof(cr16val)));
 }
 #endif
-
+
 #elif defined(OSF1)
 
 #include <c_asm.h>
@@ -75,7 +75,7 @@ GetHighResClock(void *buf, size_t maxbytes)
 #endif
     return _pr_CopyLowBits(buf, maxbytes, &t, sizeof(t));
 }
-
+
 #elif defined(AIX)
 
 static size_t
@@ -83,7 +83,7 @@ GetHighResClock(void *buf, size_t maxbytes)
 {
     return 0;
 }
-
+
 #elif (defined(LINUX) || defined(FREEBSD) || defined(__FreeBSD_kernel__) \
     || defined(NETBSD) || defined(__NetBSD_kernel__) || defined(OPENBSD) \
     || defined(SYMBIAN) || defined(__GNU__))
@@ -122,10 +122,10 @@ static size_t GetDevURandom( void *buf, size_t size )
 
 static size_t
 GetHighResClock(void *buf, size_t maxbytes)
-{             
+{
     return(GetDevURandom( buf, maxbytes ));
 }
-
+
 #elif defined(IRIX)
 #include <fcntl.h>
 #undef PRIVATE
@@ -184,10 +184,10 @@ static size_t GetHighResClock(void *buf, size_t maxbuf)
 	        if (cntr_size < 0) {
     		    struct utsname utsinfo;
 
-		        /* 
+		        /*
 		         * We must be executing on a 6.0 or earlier system, since the
 		         * SGI_CYCLECNTR_SIZE call is not supported.
-		         * 
+		         *
 		         * The only pre-6.1 platforms with 64-bit counters are
 		         * IP19 and IP21 (Challenge, PowerChallenge, Onyx).
 		         */
@@ -208,7 +208,7 @@ static size_t GetHighResClock(void *buf, size_t maxbuf)
     memcpy(buf, (char *)&s0[0], cntr_size);
     return _pr_CopyLowBits(buf, maxbuf, &s0, cntr_size);
 }
-
+
 #elif defined(SCO) || defined(UNIXWARE) || defined(BSDI) || defined(NTO) \
     || defined(QNX) || defined(DARWIN) || defined(RISCOS)
 #include <sys/times.h>
@@ -225,7 +225,7 @@ GetHighResClock(void *buf, size_t maxbytes)
 #else
 #error! Platform undefined
 #endif /* defined(SOLARIS) */
-
+
 extern PRSize _PR_MD_GetRandomNoise( void *buf, PRSize size )
 {
     struct timeval tv;

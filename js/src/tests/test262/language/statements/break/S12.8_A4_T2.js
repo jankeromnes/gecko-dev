@@ -20,9 +20,9 @@ LABEL_DO_LOOP : do {
         break LABEL_NESTED_LOOP;
         LABEL_IN_NESTED_2 : yy++;
     } while (0);
-    
+
     LABEL_IN_2 : y++;
-    
+
     function IN_DO_FUNC(){}
 } while(0);
 

@@ -113,9 +113,9 @@
         document.getElementById("content")
                 .addEventListener("visibilitychange", detector, true);
       }
-      
+
       generateDetector("hidden", true, "new load", "Going hidden");
-        
+
       // Now flip our docshell to not active
       document.getElementById("content").docShellIsActive = false;
       yield undefined;

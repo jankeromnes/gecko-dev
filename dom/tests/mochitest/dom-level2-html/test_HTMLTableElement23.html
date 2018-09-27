@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "table");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,14 +70,14 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The createTFoot() method creates a table footer row or returns
     an existing one.
 
-    Try to create a new TFOOT element on the second TABLE element.  
+    Try to create a new TFOOT element on the second TABLE element.
     Since a TFOOT element already exists in the TABLE element a new
     TFOOT element is not created and information from the already
-    existing TFOOT element is returned.  
+    existing TFOOT element is returned.
 
 * @author NIST
 * @author Rick Rivello
@@ -92,7 +92,7 @@ function HTMLTableElement23() {
       var newFoot;
       var valign;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -107,7 +107,7 @@ testNode = nodeList.item(1);
       valign = vsection.align;
 
       assertEquals("alignLink","center",valign);
-       
+
 }
 
 </script>
@@ -120,10 +120,10 @@ testNode = nodeList.item(1);
     The createTFoot() method creates a table footer row or returns
     an existing one.
 
-    Try to create a new TFOOT element on the second TABLE element.  
+    Try to create a new TFOOT element on the second TABLE element.
     Since a TFOOT element already exists in the TABLE element a new
     TFOOT element is not created and information from the already
-    existing TFOOT element is returned.  
+    existing TFOOT element is returned.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;date qualifier='created'&gt;2002-05-02&lt;/date&gt;
@@ -140,7 +140,7 @@ testNode = nodeList.item(1);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/table.html"></iframe>
 <br>

@@ -13,7 +13,7 @@ nsIURILoader
 */
 
 %{ C++
-//	{9F6D5D40-90E7-11d3-AF93-00A024FFC08C} - 
+//	{9F6D5D40-90E7-11d3-AF93-00A024FFC08C} -
 #define NS_URI_LOADER_CID \
 { 0x9f6d5d40, 0x90e7, 0x11d3, { 0xaf, 0x80, 0x00, 0xa0, 0x24, 0xff, 0xc0, 0x8c } }
 #define NS_URI_LOADER_CONTRACTID \

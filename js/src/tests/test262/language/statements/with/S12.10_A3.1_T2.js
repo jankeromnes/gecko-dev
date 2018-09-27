@@ -17,7 +17,7 @@ this.p1 = 1;
 var result = "result";
 
 var myObj = {
-    p1: 'a', 
+    p1: 'a',
     value: 'myObj_value',
     valueOf : function(){return 'obj_valueOf';}
 }
@@ -25,10 +25,10 @@ var myObj = {
 try {
 
     with(myObj){
-  
+
         p1 = 'x1'
         throw value;
-    
+
     }
 } catch(e){
     result = p1;

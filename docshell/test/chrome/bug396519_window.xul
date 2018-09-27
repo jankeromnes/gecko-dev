@@ -32,7 +32,7 @@
       for (let eventType of LISTEN_EVENTS) {
         gBrowser.removeEventListener(eventType, eventListener, true);
       }
-    
+
       window.close();
       window.opener.wrappedJSObject.SimpleTest.finish();
     }
@@ -43,7 +43,7 @@
       for (let eventType of LISTEN_EVENTS) {
         gBrowser.addEventListener(eventType, eventListener, true);
       }
-      
+
       gTestsIterator = testsIterator();
       nextTest();
     }

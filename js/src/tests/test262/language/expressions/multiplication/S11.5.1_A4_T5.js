@@ -29,7 +29,7 @@ if (Number.POSITIVE_INFINITY * -1 !== Number.NEGATIVE_INFINITY) {
 //CHECK#4
 if (-1 * Number.POSITIVE_INFINITY !== Number.NEGATIVE_INFINITY) {
   $ERROR('#4: -1 * Infinity === -Infinity. Actual: ' + (-1 * Infinity));
-}  
+}
 
 //CHECK#5
 if (Number.POSITIVE_INFINITY * Number.MAX_VALUE !== Number.POSITIVE_INFINITY) {

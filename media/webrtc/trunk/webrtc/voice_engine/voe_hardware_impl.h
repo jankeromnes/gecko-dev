@@ -26,7 +26,7 @@ class VoEHardwareImpl : public VoEHardware {
   int GetRecordingDeviceName(int index,
                              char strNameUTF8[128],
                              char strGuidUTF8[128]) override;
- 
+
   int GetRecordingDeviceStatus(bool& isAvailable) override;
 
   int GetPlayoutDeviceStatus(bool& isAvailable) override;
@@ -41,7 +41,7 @@ class VoEHardwareImpl : public VoEHardware {
   int SetPlayoutDevice(int index) override;
 
   int SetAudioDeviceLayer(AudioLayers audioLayer) override;
- 
+
   int GetCPULoad(int& loadPercent) override;
 
   int ResetAudioDevice() override;

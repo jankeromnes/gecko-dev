@@ -223,7 +223,7 @@ PKIX_ProcessingParams_GetRevocationChecker(
  * FUNCTION: PKIX_ProcessingParams_SetRevocationChecker
  * DESCRIPTION:
  *
- *  Sets the ProcessingParams pointed to by "params" with a 
+ *  Sets the ProcessingParams pointed to by "params" with a
  *  RevocationChecker pointed to by "revChecker". Revocation
  *  checker object should be created and assigned to processing
  *  parameters before chain build or validation can begin.
@@ -764,7 +764,7 @@ PKIX_ProcessingParams_GetUseAIAForCertFetching(
  *
  * Sets switch value that defines if url in cert AIA extension
  * may be used for cert fetching.
- * 
+ *
  * PARAMETERS:
  *  "params"
  *      Address of ProcessingParams.
@@ -783,7 +783,7 @@ PKIX_ProcessingParams_GetUseAIAForCertFetching(
 PKIX_Error *
 PKIX_ProcessingParams_SetUseAIAForCertFetching(
         PKIX_ProcessingParams *params,
-        PKIX_Boolean useAIA,  
+        PKIX_Boolean useAIA,
         void *plContext);
 
 /*
@@ -884,7 +884,7 @@ PKIX_ProcessingParams_SetHintCerts(
  *
  *  Retrieves a pointer to the ResourceLimits (if any) that is set in the
  *  ProcessingParams pointed to by "params" and stores it at "pResourceLimits".
- *  The ResourceLimits represent the maximum resource usage that the caller 
+ *  The ResourceLimits represent the maximum resource usage that the caller
  *  desires (such as MaxTime). The ValidateChain or BuildChain call will not
  *  exceed these maximum limits. If "params" does not have any ResourceLimits
  *  set, this function stores NULL at "pResourceLimits".
@@ -1686,7 +1686,7 @@ PKIX_ResourceLimits_GetMaxNumberOfCerts(
  *
  *  Sets the maximum number of traversed certs of the ResourceLimits object
  *  pointed to by "resourceLimits" using the PKIX_UInt32 value of "maxNumber".
- *  This maximum number of traversed certs should not be exceeded by the function 
+ *  This maximum number of traversed certs should not be exceeded by the function
  *  whose ProcessingParams contain this ResourceLimits object (typically ValidateChain
  *  or BuildChain). If the builder traverses more than this number of certs
  *  during the build process, it should abort and return an Error. This parameter
@@ -1757,7 +1757,7 @@ PKIX_ResourceLimits_GetMaxNumberOfCRLs(
  *
  *  Sets the maximum number of traversed CRLs of the ResourceLimits object
  *  pointed to by "resourceLimits" using the PKIX_UInt32 value of "maxNumber".
- *  This maximum number of traversed CRLs should not be exceeded by the function 
+ *  This maximum number of traversed CRLs should not be exceeded by the function
  *  whose ProcessingParams contain this ResourceLimits object (typically ValidateChain
  *  or BuildChain). If the builder traverses more than this number of CRLs
  *  during the build process, it should abort and return an Error. This parameter

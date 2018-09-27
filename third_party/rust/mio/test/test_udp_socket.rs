@@ -145,7 +145,7 @@ pub fn test_udp_socket_discard() {
 
     let tx_addr = tx.local_addr().unwrap();
     let rx_addr = rx.local_addr().unwrap();
- 
+
     assert!(tx.connect(rx_addr).is_ok());
     assert!(udp_outside.connect(rx_addr).is_ok());
     assert!(rx.connect(tx_addr).is_ok());

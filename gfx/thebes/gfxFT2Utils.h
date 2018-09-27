@@ -10,9 +10,9 @@
 #include "gfxFT2FontBase.h"
 #include "mozilla/Likely.h"
 
-// Rounding and truncation functions for a FreeType fixed point number 
+// Rounding and truncation functions for a FreeType fixed point number
 // (FT26Dot6) stored in a 32bit integer with high 26 bits for the integer
-// part and low 6 bits for the fractional part. 
+// part and low 6 bits for the fractional part.
 #define FLOAT_FROM_26_6(x) ((x) / 64.0)
 #define FLOAT_FROM_16_16(x) ((x) / 65536.0)
 #define ROUND_26_6_TO_INT(x) ((x) >= 0 ?  ((32 + (x)) >> 6) \

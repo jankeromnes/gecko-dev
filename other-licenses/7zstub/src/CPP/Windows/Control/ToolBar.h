@@ -1,5 +1,5 @@
 // Windows/Control/ToolBar.h
-  
+
 #ifndef __WINDOWS_CONTROL_TOOLBAR_H
 #define __WINDOWS_CONTROL_TOOLBAR_H
 
@@ -13,7 +13,7 @@ class CToolBar: public NWindows::CWindow
 public:
   void AutoSize() { SendMsg(TB_AUTOSIZE, 0, 0); }
   DWORD GetButtonSize() { return (DWORD)SendMsg(TB_GETBUTTONSIZE, 0, 0); }
-  
+
   bool GetMaxSize(LPSIZE size)
   #ifdef UNDER_CE
   {

@@ -17,7 +17,7 @@ interface nsIInputStream;
 interface nsIFeedProcessor : nsIStreamListener {
 
   /**
-   * The listener that will respond to feed events. 
+   * The listener that will respond to feed events.
    */
   attribute nsIFeedResultListener listener;
 
@@ -26,7 +26,7 @@ interface nsIFeedProcessor : nsIStreamListener {
   //
   // XXX todo void registerExtensionHandler(in
   // nsIFeedExtensionHandler, in long level);
-  
+
   /**
    * Parse a feed asynchronously. The caller must then call the
    * nsIFeedProcessor's nsIStreamListener methods to drive the

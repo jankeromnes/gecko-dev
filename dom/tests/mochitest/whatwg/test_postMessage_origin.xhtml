@@ -5,7 +5,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=417075
 -->
 <head>
   <title>postMessage from about:blank, data URLs</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <script type="text/javascript" src="browserFu.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
@@ -462,9 +462,9 @@ function registerMessageListener(func, callback)
     if (callback)
       callback();
   }
-  
+
   window.addEventListener("message", receive);
-  
+
   return receive;
 }
 
@@ -491,7 +491,7 @@ function oddballTests(callback)
   {
     is(called, true, "should have been called");
     removeListener(listener);
-    
+
     called = false;
     listener = registerMessageListener(eventChecks, function()
     {
@@ -500,7 +500,7 @@ function oddballTests(callback)
       removeListener(listener);
       callback();
     });
-    
+
     window.postMessage("PASS", "http://mochi.test:8888");
   });
 

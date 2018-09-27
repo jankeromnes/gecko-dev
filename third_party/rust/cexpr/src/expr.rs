@@ -65,7 +65,7 @@ impl EvalResult {
 	result_opt!(fn as_float: Float -> f64);
 	result_opt!(fn as_char: Char -> CChar);
 	result_opt!(fn as_str: Str -> Vec<u8>);
-	
+
 	fn as_numeric(self) -> Option<EvalResult> {
 		match self {
 			EvalResult::Int(_) | EvalResult::Float(_) => Some(self),
@@ -465,7 +465,7 @@ impl<'ident> IdentifierParser<'ident> {
 	fn as_ref(&self) -> PRef {
 		PRef(self)
 	}
-	
+
 	/// Create a new `IdentifierParser` with a set of known identifiers. When
 	/// a known identifier is encountered during parsing, it is substituted
 	/// for the value specified.

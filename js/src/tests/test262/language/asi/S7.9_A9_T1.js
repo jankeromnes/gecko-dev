@@ -8,7 +8,7 @@ description: Execute do { \n }while(false)
 ---*/
 
 //CHECK#1
-do {  
+do {
 } while (false)
 
 reportCompare(0, 0);

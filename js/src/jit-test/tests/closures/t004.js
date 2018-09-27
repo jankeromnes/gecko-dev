@@ -1,7 +1,7 @@
 actual = '';
 expected = 'NaN,60,74,';
 
-function k(a, b, f_arg, c) { 
+function k(a, b, f_arg, c) {
   for (var i = 0; i < 5; ++i) {
     f_arg(i + a);
   }

@@ -8,7 +8,7 @@
 
   <!-- From https://bugzilla.mozilla.org/show_bug.cgi?id=524104 -->
 
-  <filter id="filter" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"> 
+  <filter id="filter" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%">
     <feFlood in="SourceGraphic" flood-color="blue"/>
   </filter>
 

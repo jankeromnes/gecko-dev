@@ -9,7 +9,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-ft-font.c b/gfx/cairo/cairo/src/cairo-ft-
         default:
             break;
             }
- 
+
          if (!initialized_setLcdFilter) {
            initialized_setLcdFilter = 1;
 +#ifdef HAVE_FT_LIBRARY_SETLCDFILTER
@@ -18,13 +18,13 @@ diff --git a/gfx/cairo/cairo/src/cairo-ft-font.c b/gfx/cairo/cairo/src/cairo-ft-
            setLcdFilter = (setLcdFilterFunc) dlsym(RTLD_DEFAULT, "FT_Library_SetLcdFilter");
 +#endif
          }
- 
+
         if (setLcdFilter)
            setLcdFilter (library, lcd_filter);
- 
+
         fterror = FT_Render_Glyph (face->glyph, render_mode);
- 
+
         if (setLcdFilter)
            setLcdFilter (library, FT_LCD_FILTER_NONE);
- 
+
 

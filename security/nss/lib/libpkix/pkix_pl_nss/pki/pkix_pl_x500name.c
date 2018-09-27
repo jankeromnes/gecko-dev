@@ -213,7 +213,7 @@ pkix_pl_X500Name_RegisterSelf(void *plContext)
  *
  * NOTE: ifdefed BUILD_LIBPKIX_TESTS function: this function is allowed to be
  * called only by pkix tests programs.
- * 
+ *
  * PARAMETERS:
  *  "stringRep"
  *      Address of the RFC1485 string to be converted. Must be non-NULL.
@@ -240,7 +240,7 @@ pkix_pl_X500Name_CreateFromUtf8(
         PLArenaPool *arena = NULL;
         CERTName *nssDN = NULL;
         SECItem *resultSecItem = NULL;
-        
+
         PKIX_ENTER(X500NAME, "pkix_pl_X500Name_CreateFromUtf8");
         PKIX_NULLCHECK_TWO(pName, stringRep);
 
@@ -263,11 +263,11 @@ pkix_pl_X500Name_CreateFromUtf8(
         x500Name->arena = arena;
         x500Name->nssDN.arena = arena;
         x500Name->nssDN.rdns = nssDN->rdns;
-        
+
         resultSecItem =
             SEC_ASN1EncodeItem(arena, &x500Name->derName, nssDN,
                                CERT_NameTemplate);
-        
+
         if (resultSecItem == NULL){
             PKIX_ERROR(PKIX_SECASN1ENCODEITEMFAILED);
         }
@@ -293,7 +293,7 @@ cleanup:
  * FUNCTION: pkix_pl_X500Name_GetCERTName
  *
  * DESCRIPTION:
- * 
+ *
  * Returns the pointer to CERTName member of X500Name structure.
  *
  * Returned pointed should not be freed.2
@@ -337,7 +337,7 @@ pkix_pl_X500Name_GetCERTName(
 PKIX_Error *
 PKIX_PL_X500Name_CreateFromCERTName(
         SECItem *derName,
-        CERTName *name, 
+        CERTName *name,
         PKIX_PL_X500Name **pName,
         void *plContext)
 {
@@ -355,7 +355,7 @@ PKIX_PL_X500Name_CreateFromCERTName(
         if (arena == NULL) {
             PKIX_ERROR(PKIX_OUTOFMEMORY);
         }
-        
+
         PKIX_CHECK(PKIX_PL_Object_Alloc
                     (PKIX_X500NAME_TYPE,
                     sizeof (PKIX_PL_X500Name),
@@ -371,7 +371,7 @@ PKIX_PL_X500Name_CreateFromCERTName(
             if (rv == SECFailure) {
                 PKIX_ERROR(PKIX_OUTOFMEMORY);
             }
-        }            
+        }
 
         if (name != NULL) {
             rv = CERT_CopyName(arena, &x500Name->nssDN, name);
@@ -394,7 +394,7 @@ cleanup:
             if (x500Name) {
                 PKIX_PL_Object_DecRef((PKIX_PL_Object*)x500Name,
                                       plContext);
-            } else if (arena) {                
+            } else if (arena) {
                 PORT_FreeArena(arena, PR_FALSE);
             }
         }
@@ -484,7 +484,7 @@ PKIX_PL_X500Name_Match(
         }
 
         *pResult = (cmpResult == SECEqual);
-                   
+
 cleanup:
 
         PKIX_RETURN(X500NAME);

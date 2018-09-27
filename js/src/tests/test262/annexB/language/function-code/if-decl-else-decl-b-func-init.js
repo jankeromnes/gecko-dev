@@ -34,7 +34,7 @@ var init, changed;
 
   if (false) function _f() {} else function f() {  }
 
-  
+
 }());
 
 assert.sameValue(init, undefined, 'binding is initialized to `undefined`');

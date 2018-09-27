@@ -42,9 +42,9 @@ close(FILE2);
 
 
 print "<BR><B>Signed Data:</B><BR>", "$dataToSign", "<BR>";
- 
+
 print "<BR><b>Verification Info:</b><BR>";
- 
+
 $verInfo = `./signver -D . -s signature -d data -v`;
 print "<font color=red><b>$verInfo</b></font><BR>";
 

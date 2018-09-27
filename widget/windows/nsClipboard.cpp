@@ -129,7 +129,7 @@ nsresult nsClipboard::CreateNativeDataObject(nsITransferable * aTransferable, ID
     return NS_ERROR_FAILURE;
   }
 
-  // Create our native DataObject that implements 
+  // Create our native DataObject that implements
   // the OLE IDataObject interface
   nsDataObj * dataObj = new nsDataObj(uri);
 
@@ -142,7 +142,7 @@ nsresult nsClipboard::CreateNativeDataObject(nsITransferable * aTransferable, ID
   // Now set it up with all the right data flavors & enums
   nsresult res = SetupNativeDataObject(aTransferable, dataObj);
   if (NS_OK == res) {
-    *aDataObj = dataObj; 
+    *aDataObj = dataObj;
   } else {
     delete dataObj;
   }
@@ -158,7 +158,7 @@ nsresult nsClipboard::SetupNativeDataObject(nsITransferable * aTransferable, IDa
 
   nsDataObj * dObj = static_cast<nsDataObj *>(aDataObj);
 
-  // Now give the Transferable to the DataObject 
+  // Now give the Transferable to the DataObject
   // for getting the data out of it
   dObj->SetTransferable(aTransferable);
 
@@ -180,12 +180,12 @@ nsresult nsClipboard::SetupNativeDataObject(nsITransferable * aTransferable, IDa
       // ("text/html") and not map it to CF_HTML here since this will be done below.
       UINT format = GetFormat(flavorStr.get(), false);
 
-      // Now tell the native IDataObject about both our mime type and 
+      // Now tell the native IDataObject about both our mime type and
       // the native data format
       FORMATETC fe;
       SET_FORMATETC(fe, format, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL);
       dObj->AddDataFlavor(flavorStr.get(), &fe);
-      
+
       // Do various things internal to the implementation, like map one
       // flavor to another or add additional flavors based on what's required
       // for the win32 impl.
@@ -201,7 +201,7 @@ nsresult nsClipboard::SetupNativeDataObject(nsITransferable * aTransferable, IDa
         // on our own in nsDataObj::GetText().
         FORMATETC htmlFE;
         SET_FORMATETC(htmlFE, CF_HTML, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL);
-        dObj->AddDataFlavor(kHTMLMime, &htmlFE);     
+        dObj->AddDataFlavor(kHTMLMime, &htmlFE);
       }
       else if (flavorStr.EqualsLiteral(kURLMime)) {
         // if we're a url, in addition to also being text, we need to register
@@ -209,15 +209,15 @@ nsresult nsClipboard::SetupNativeDataObject(nsITransferable * aTransferable, IDa
         // shortcut when it sees one of these beasts.
         FORMATETC shortcutFE;
         SET_FORMATETC(shortcutFE, ::RegisterClipboardFormat(CFSTR_FILEDESCRIPTORA), 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL)
-        dObj->AddDataFlavor(kURLMime, &shortcutFE);      
+        dObj->AddDataFlavor(kURLMime, &shortcutFE);
         SET_FORMATETC(shortcutFE, ::RegisterClipboardFormat(CFSTR_FILEDESCRIPTORW), 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL)
-        dObj->AddDataFlavor(kURLMime, &shortcutFE);      
+        dObj->AddDataFlavor(kURLMime, &shortcutFE);
         SET_FORMATETC(shortcutFE, ::RegisterClipboardFormat(CFSTR_FILECONTENTS), 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL)
-        dObj->AddDataFlavor(kURLMime, &shortcutFE);  
+        dObj->AddDataFlavor(kURLMime, &shortcutFE);
         SET_FORMATETC(shortcutFE, ::RegisterClipboardFormat(CFSTR_INETURLA), 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL)
-        dObj->AddDataFlavor(kURLMime, &shortcutFE);      
+        dObj->AddDataFlavor(kURLMime, &shortcutFE);
         SET_FORMATETC(shortcutFE, ::RegisterClipboardFormat(CFSTR_INETURLW), 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL)
-        dObj->AddDataFlavor(kURLMime, &shortcutFE);      
+        dObj->AddDataFlavor(kURLMime, &shortcutFE);
       }
       else if (flavorStr.EqualsLiteral(kPNGImageMime) ||
                flavorStr.EqualsLiteral(kJPEGImageMime) ||
@@ -229,12 +229,12 @@ nsresult nsClipboard::SetupNativeDataObject(nsITransferable * aTransferable, IDa
         // Add DIBv5
         SET_FORMATETC(imageFE, CF_DIBV5, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL)
         dObj->AddDataFlavor(flavorStr.get(), &imageFE);
-        // Add DIBv3 
+        // Add DIBv3
         SET_FORMATETC(imageFE, CF_DIB, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL)
         dObj->AddDataFlavor(flavorStr.get(), &imageFE);
       }
       else if (flavorStr.EqualsLiteral(kFilePromiseMime)) {
-         // if we're a file promise flavor, also register the 
+         // if we're a file promise flavor, also register the
          // CFSTR_PREFERREDDROPEFFECT format.  The data object
          // returns a value of DROPEFFECTS_MOVE to the drop target
          // when it asks for the value of this format.  This causes
@@ -298,7 +298,7 @@ nsresult nsClipboard::GetGlobalData(HGLOBAL aHGBL, void ** aData, uint32_t * aLe
     LPSTR lpStr = (LPSTR) GlobalLock(aHGBL);
     DWORD allocSize = GlobalSize(aHGBL);
     char* data = static_cast<char*>(malloc(allocSize + sizeof(char16_t)));
-    if ( data ) {    
+    if ( data ) {
       memcpy ( data, lpStr, allocSize );
       data[allocSize] = data[allocSize + 1] = '\0';     // null terminate for safety
 
@@ -315,14 +315,14 @@ nsresult nsClipboard::GetGlobalData(HGLOBAL aHGBL, void ** aData, uint32_t * aLe
     *aLen  = 0;
     LPVOID lpMsgBuf;
 
-    FormatMessageW( 
+    FormatMessageW(
         FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
         nullptr,
         GetLastError(),
         MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
         (LPWSTR) &lpMsgBuf,
         0,
-        nullptr 
+        nullptr
     );
 
     // Display the string.
@@ -330,7 +330,7 @@ nsresult nsClipboard::GetGlobalData(HGLOBAL aHGBL, void ** aData, uint32_t * aLe
                  MB_OK | MB_ICONINFORMATION );
 
     // Free the buffer.
-    LocalFree( lpMsgBuf );    
+    LocalFree( lpMsgBuf );
   }
 
   return result;
@@ -339,19 +339,19 @@ nsresult nsClipboard::GetGlobalData(HGLOBAL aHGBL, void ** aData, uint32_t * aLe
 //-------------------------------------------------------------------------
 nsresult nsClipboard::GetNativeDataOffClipboard(nsIWidget * aWidget, UINT /*aIndex*/, UINT aFormat, void ** aData, uint32_t * aLen)
 {
-  HGLOBAL   hglb; 
+  HGLOBAL   hglb;
   nsresult  result = NS_ERROR_FAILURE;
 
   HWND nativeWin = nullptr;
-  if (::OpenClipboard(nativeWin)) { 
-    hglb = ::GetClipboardData(aFormat); 
+  if (::OpenClipboard(nativeWin)) {
+    hglb = ::GetClipboardData(aFormat);
     result = GetGlobalData(hglb, aData, aLen);
     ::CloseClipboard();
   }
   return result;
 }
 
-static void DisplayErrCode(HRESULT hres) 
+static void DisplayErrCode(HRESULT hres)
 {
 #if defined(DEBUG_rods) || defined(DEBUG_pinkerton)
   if (hres == E_INVALIDARG) {
@@ -387,7 +387,7 @@ static void DisplayErrCode(HRESULT hres)
   if (hres == S_OK) {
     MOZ_LOG(gWin32ClipboardLog, LogLevel::Info, ("S_OK\n"));
   } else {
-    MOZ_LOG(gWin32ClipboardLog, LogLevel::Info, 
+    MOZ_LOG(gWin32ClipboardLog, LogLevel::Info,
            ("****** DisplayErrCode 0x%X\n", hres));
   }
 #endif
@@ -428,7 +428,7 @@ nsresult nsClipboard::GetNativeDataOffClipboard(IDataObject * aDataObject, UINT 
   HRESULT hres   = S_FALSE;
 
   // XXX at the moment we only support global memory transfers
-  // It is here where we will add support for native images 
+  // It is here where we will add support for native images
   // and IStream
   FORMATETC fe;
   STGMEDIUM stm;
@@ -437,13 +437,13 @@ nsresult nsClipboard::GetNativeDataOffClipboard(IDataObject * aDataObject, UINT 
   // Currently this is only handling TYMED_HGLOBAL data
   // For Text, Dibs, Files, and generic data (like HTML)
   if (S_OK == hres) {
-    static CLIPFORMAT fileDescriptorFlavorA = ::RegisterClipboardFormat( CFSTR_FILEDESCRIPTORA ); 
-    static CLIPFORMAT fileDescriptorFlavorW = ::RegisterClipboardFormat( CFSTR_FILEDESCRIPTORW ); 
-    static CLIPFORMAT fileFlavor = ::RegisterClipboardFormat( CFSTR_FILECONTENTS ); 
+    static CLIPFORMAT fileDescriptorFlavorA = ::RegisterClipboardFormat( CFSTR_FILEDESCRIPTORA );
+    static CLIPFORMAT fileDescriptorFlavorW = ::RegisterClipboardFormat( CFSTR_FILEDESCRIPTORW );
+    static CLIPFORMAT fileFlavor = ::RegisterClipboardFormat( CFSTR_FILECONTENTS );
     static CLIPFORMAT preferredDropEffect = ::RegisterClipboardFormat(CFSTR_PREFERREDDROPEFFECT);
 
     switch (stm.tymed) {
-     case TYMED_HGLOBAL: 
+     case TYMED_HGLOBAL:
         {
           switch (fe.cfFormat) {
             case CF_TEXT:
@@ -451,8 +451,8 @@ nsresult nsClipboard::GetNativeDataOffClipboard(IDataObject * aDataObject, UINT 
                 // Get the data out of the global data handle. The size we return
                 // should not include the null because the other platforms don't
                 // use nulls, so just return the length we get back from strlen(),
-                // since we know CF_TEXT is null terminated. Recall that GetGlobalData() 
-                // returns the size of the allocated buffer, not the size of the data 
+                // since we know CF_TEXT is null terminated. Recall that GetGlobalData()
+                // returns the size of the allocated buffer, not the size of the data
                 // (on 98, these are not the same) so we can't use that.
                 uint32_t allocLen = 0;
                 if ( NS_SUCCEEDED(GetGlobalData(stm.hGlobal, aData, &allocLen)) ) {
@@ -466,8 +466,8 @@ nsresult nsClipboard::GetNativeDataOffClipboard(IDataObject * aDataObject, UINT 
                 // Get the data out of the global data handle. The size we return
                 // should not include the null because the other platforms don't
                 // use nulls, so just return the length we get back from strlen(),
-                // since we know CF_UNICODETEXT is null terminated. Recall that GetGlobalData() 
-                // returns the size of the allocated buffer, not the size of the data 
+                // since we know CF_UNICODETEXT is null terminated. Recall that GetGlobalData()
+                // returns the size of the allocated buffer, not the size of the data
                 // (on 98, these are not the same) so we can't use that.
                 uint32_t allocLen = 0;
                 if ( NS_SUCCEEDED(GetGlobalData(stm.hGlobal, aData, &allocLen)) ) {
@@ -494,7 +494,7 @@ nsresult nsClipboard::GetNativeDataOffClipboard(IDataObject * aDataObject, UINT 
                 }
               } break;
 
-            case CF_HDROP : 
+            case CF_HDROP :
               {
                 // in the case of a file drop, multiple files are stashed within a
                 // single data object. In order to match mozilla's D&D apis, we
@@ -520,14 +520,14 @@ nsresult nsClipboard::GetNativeDataOffClipboard(IDataObject * aDataObject, UINT 
             default: {
               if ( fe.cfFormat == fileDescriptorFlavorA || fe.cfFormat == fileDescriptorFlavorW || fe.cfFormat == fileFlavor ) {
                 NS_WARNING ( "Mozilla doesn't yet understand how to read this type of file flavor" );
-              } 
+              }
               else
               {
                 // Get the data out of the global data handle. The size we return
                 // should not include the null because the other platforms don't
                 // use nulls, so just return the length we get back from strlen(),
-                // since we know CF_UNICODETEXT is null terminated. Recall that GetGlobalData() 
-                // returns the size of the allocated buffer, not the size of the data 
+                // since we know CF_UNICODETEXT is null terminated. Recall that GetGlobalData()
+                // returns the size of the allocated buffer, not the size of the data
                 // (on 98, these are not the same) so we can't use that.
                 //
                 // NOTE: we are assuming that anything that falls into this default case
@@ -552,7 +552,7 @@ nsresult nsClipboard::GetNativeDataOffClipboard(IDataObject * aDataObject, UINT 
                       "CFSTR_PREFERREDDROPEFFECT should return a DWORD");
                     *aLen = allocLen;
                   } else {
-                    *aLen = NS_strlen(reinterpret_cast<char16_t*>(*aData)) * 
+                    *aLen = NS_strlen(reinterpret_cast<char16_t*>(*aData)) *
                             sizeof(char16_t);
                   }
                   result = NS_OK;
@@ -562,10 +562,10 @@ nsresult nsClipboard::GetNativeDataOffClipboard(IDataObject * aDataObject, UINT 
           } // switch
         } break;
 
-      case TYMED_GDI: 
+      case TYMED_GDI:
         {
 #ifdef DEBUG
-          MOZ_LOG(gWin32ClipboardLog, LogLevel::Info, 
+          MOZ_LOG(gWin32ClipboardLog, LogLevel::Info,
                  ("*********************** TYMED_GDI\n"));
 #endif
         } break;
@@ -573,7 +573,7 @@ nsresult nsClipboard::GetNativeDataOffClipboard(IDataObject * aDataObject, UINT 
       default:
         break;
     } //switch
-    
+
     ReleaseStgMedium(&stm);
   }
 
@@ -594,7 +594,7 @@ nsresult nsClipboard::GetDataFromDataObject(IDataObject     * aDataObject,
 
   nsresult res = NS_ERROR_FAILURE;
 
-  // get flavor list that includes all flavors that can be written (including ones 
+  // get flavor list that includes all flavors that can be written (including ones
   // obtained through conversion)
   nsCOMPtr<nsIArray> flavorList;
   res = aTransferable->FlavorsTransferableCanImport ( getter_AddRefs(flavorList) );
@@ -622,7 +622,7 @@ nsresult nsClipboard::GetDataFromDataObject(IDataObject     * aDataObject,
         if (NS_SUCCEEDED(GetNativeDataOffClipboard(aDataObject, anIndex, format, flavorStr.get(), &data, &dataLen))) {
           dataFound = true;
         }
-      } 
+      }
       else if (nullptr != aWindow) {
         if (NS_SUCCEEDED(GetNativeDataOffClipboard(aWindow, anIndex, format, &data, &dataLen))) {
           dataFound = true;
@@ -700,7 +700,7 @@ nsresult nsClipboard::GetDataFromDataObject(IDataObject     * aDataObject,
         else {
           // Treat custom types as a string of bytes.
           if (!flavorStr.EqualsLiteral(kCustomTypesMime)) {
-            // we probably have some form of text. The DOM only wants LF, so convert from Win32 line 
+            // we probably have some form of text. The DOM only wants LF, so convert from Win32 line
             // endings to DOM line endings.
             int32_t signedLen = static_cast<int32_t>(dataLen);
             nsLinebreakHelpers::ConvertPlatformToDOMLinebreaks(flavorStr, &data, &signedLen);
@@ -717,7 +717,7 @@ nsresult nsClipboard::GetDataFromDataObject(IDataObject     * aDataObject,
           nsPrimitiveHelpers::CreatePrimitiveForData(flavorStr, data, dataLen, getter_AddRefs(genericDataWrapper));
           free(data);
         }
-        
+
         NS_ASSERTION ( genericDataWrapper, "About to put null data into the transferable" );
         aTransferable->SetTransferData(flavorStr.get(), genericDataWrapper, dataLen);
         res = NS_OK;
@@ -748,9 +748,9 @@ nsClipboard :: FindPlatformHTML ( IDataObject* inDataObject, UINT inIndex,
   // Reference: MSDN doc entitled "HTML Clipboard Format"
   // http://msdn.microsoft.com/en-us/library/aa767917(VS.85).aspx#unknown_854
   // CF_HTML is UTF8, not unicode. We also can't rely on it being null-terminated
-  // so we have to check the CF_HTML header for the correct length. 
+  // so we have to check the CF_HTML header for the correct length.
   // The length we return is the bytecount from the beginning of the selected data to the end
-  // of the selected data, without the null termination. Because it's UTF8, we're guaranteed 
+  // of the selected data, without the null termination. Because it's UTF8, we're guaranteed
   // the header is ASCII.
 
   if (!outData || !*outData) {
@@ -760,7 +760,7 @@ nsClipboard :: FindPlatformHTML ( IDataObject* inDataObject, UINT inIndex,
   char version[8] = { 0 };
   int32_t startOfData = 0;
   int32_t endOfData = 0;
-  int numFound = sscanf((char*)*outData, "Version:%7s\nStartHTML:%d\nEndHTML:%d", 
+  int numFound = sscanf((char*)*outData, "Version:%7s\nStartHTML:%d\nEndHTML:%d",
                         version, &startOfData, &endOfData);
 
   if (numFound != 3 || startOfData < -1 || endOfData < -1) {
@@ -778,12 +778,12 @@ nsClipboard :: FindPlatformHTML ( IDataObject* inDataObject, UINT inIndex,
   // Make sure we were passed sane values within our buffer size.
   // (Note that we've handled all cases of negative endOfData above, so we can
   // safely cast it to be unsigned here.)
-  if (!endOfData || startOfData >= endOfData || 
+  if (!endOfData || startOfData >= endOfData ||
       static_cast<uint32_t>(endOfData) > *outDataLen) {
     return false;
   }
-  
-  // We want to return the buffer not offset by startOfData because it will be 
+
+  // We want to return the buffer not offset by startOfData because it will be
   // parsed out later (probably by HTMLEditor::ParseCFHTML) when it is still
   // in CF_HTML format.
 
@@ -831,7 +831,7 @@ nsClipboard :: FindUnicodeFromPlainText ( IDataObject* inDataObject, UINT inInde
 //
 // FindURLFromLocalFile
 //
-// we are looking for a URL and couldn't find it, try again with looking for 
+// we are looking for a URL and couldn't find it, try again with looking for
 // a local file. If we have one, it may either be a normal file or an internet shortcut.
 // In both cases, however, we can get a URL (it will be a file:// url in the
 // local file case).
@@ -973,14 +973,14 @@ nsClipboard :: ResolveShortcut ( nsIFile* aFile, nsACString& outURL )
 // A file is an Internet Shortcut if it ends with .URL
 //
 bool
-nsClipboard :: IsInternetShortcut ( const nsAString& inFileName ) 
+nsClipboard :: IsInternetShortcut ( const nsAString& inFileName )
 {
   return StringEndsWith(inFileName, NS_LITERAL_STRING(".url"), nsCaseInsensitiveStringComparator());
 } // IsInternetShortcut
 
 
 //-------------------------------------------------------------------------
-NS_IMETHODIMP 
+NS_IMETHODIMP
 nsClipboard::GetNativeClipboardData ( nsITransferable * aTransferable, int32_t aWhichClipboard )
 {
   // make sure we have a good transferable
@@ -996,7 +996,7 @@ nsClipboard::GetNativeClipboardData ( nsITransferable * aTransferable, int32_t a
     // Use OLE IDataObject for clipboard operations
     res = GetDataFromDataObject(dataObj, 0, nullptr, aTransferable);
     dataObj->Release();
-  } 
+  }
   else {
     // do it the old manual way
     res = GetDataFromDataObject(nullptr, 0, mWindow, aTransferable);

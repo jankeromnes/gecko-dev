@@ -162,7 +162,7 @@ HRESULT CDecoder::Code(const CHeader &header, ISequentialOutStream *outStream,
     if (res == S_OK)
       res = res2;
   }
-  
+
   RINOK(res);
 
   if (header.HasSize())
@@ -182,7 +182,7 @@ class CHandler:
   bool _lzma86;
   CMyComPtr<IInStream> _stream;
   CMyComPtr<ISequentialInStream> _seqStream;
-  
+
   bool _isArc;
   bool _needSeekToStart;
   bool _dataAfterEnd;
@@ -285,7 +285,7 @@ void CHandler::GetMethod(NCOM::CPropVariant &prop)
   s = MyStpCpy(s, "LZMA:");
   DictSizeToString(_header.GetDicSize(), s);
   s += strlen(s);
-  
+
   UInt32 d = _header.GetProp();
   // if (d != 0x5D)
   {
@@ -360,18 +360,18 @@ API_FUNC_static_IsArc IsArc_Lzma86(const Byte *p, size_t size)
 STDMETHODIMP CHandler::Open(IInStream *inStream, const UInt64 *, IArchiveOpenCallback *)
 {
   Close();
-  
+
   const UInt32 kBufSize = 1 + 5 + 8 + 2;
   Byte buf[kBufSize];
-  
+
   RINOK(ReadStream_FALSE(inStream, buf, kBufSize));
-  
+
   if (!_header.Parse(buf, _lzma86))
     return S_FALSE;
   const Byte *start = buf + GetHeaderSize();
   if (start[0] != 0 /* || (start[1] & 0x80) != 0 */ ) // empty stream with EOS is not 0x80
     return S_FALSE;
-  
+
   RINOK(inStream->Seek(0, STREAM_SEEK_END, &_packSize));
   if (_packSize >= 24 && _header.Size == 0 && _header.FilterID == 0 && _header.LzmaProps[0] == 0)
     return S_FALSE;
@@ -418,7 +418,7 @@ class CCompressProgressInfoImp:
   CMyComPtr<IArchiveOpenCallback> Callback;
 public:
   UInt64 Offset;
- 
+
   MY_UNKNOWN_IMP1(ICompressProgressInfo)
   STDMETHOD(SetRatioInfo)(const UInt64 *inSize, const UInt64 *outSize);
   void Init(IArchiveOpenCallback *callback) { Callback = callback; }
@@ -447,8 +447,8 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   if (_packSize_Defined)
     extractCallback->SetTotal(_packSize);
-    
-  
+
+
   CMyComPtr<ISequentialOutStream> realOutStream;
   Int32 askMode = testMode ?
       NExtract::NAskMode::kTest :
@@ -456,7 +456,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   RINOK(extractCallback->GetStream(0, &realOutStream, askMode));
   if (!testMode && !realOutStream)
     return S_OK;
-  
+
   extractCallback->PrepareOperation(askMode);
 
   CDummyOutStream *outStreamSpec = new CDummyOutStream;
@@ -481,7 +481,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   CDecoder decoder;
   HRESULT result = decoder.Create(_lzma86, _seqStream);
   RINOK(result);
- 
+
   bool firstItem = true;
 
   UInt64 packSize = 0;
@@ -489,7 +489,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   UInt64 numStreams = 0;
 
   bool dataAfterEnd = false;
-  
+
   for (;;)
   {
     lps->InSize = packSize;
@@ -507,7 +507,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         dataAfterEnd = true;
       break;
     }
-  
+
     CHeader st;
     if (!st.Parse(buf, _lzma86))
     {
@@ -521,7 +521,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
     packSize = decoder.GetInputProcessedSize();
     unpackSize = outStreamSpec->GetSize();
-    
+
     if (result == E_NOTIMPL)
     {
       _unsupported = true;
@@ -548,12 +548,12 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     _packSize = packSize;
     _unpackSize = unpackSize;
     _numStreams = numStreams;
-  
+
     _packSize_Defined = true;
     _unpackSize_Defined = true;
     _numStreams_Defined = true;
   }
-  
+
   Int32 opResult = NExtract::NOperationResult::kOK;
 
   if (!_isArc)
@@ -588,7 +588,7 @@ REGISTER_ARC_I_CLS_NO_SIG(
   NArcInfoFlags::kStartOpen |
   NArcInfoFlags::kKeepName,
   IsArc_Lzma)
- 
+
 }
 
 namespace NLzma86Ar {
@@ -599,7 +599,7 @@ REGISTER_ARC_I_CLS_NO_SIG(
   0,
   NArcInfoFlags::kKeepName,
   IsArc_Lzma86)
- 
+
 }
 
 }}

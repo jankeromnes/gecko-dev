@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=685798
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=685798">Mozilla Bug 685798</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -30,7 +30,7 @@ is(document.documentElement.firstChild.parentElement, document.documentElement,
 var df = document.createRange().createContextualFragment("<div>foo</div>");
 is(df.parentElement, null,
    "DocumentFragment should be null.");
-is(df.firstChild.parentElement, null, 
+is(df.firstChild.parentElement, null,
    "DocumentFragment's child shouldn't have parentElement");
 is(df.firstChild.firstChild.parentElement, df.firstChild,
    "Text node's parent should be element.");

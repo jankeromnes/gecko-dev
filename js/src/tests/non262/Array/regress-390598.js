@@ -19,14 +19,14 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
 
-  function F() {} 
-  F.prototype = []; 
+
+  function F() {}
+  F.prototype = [];
 
   // override inherited length from the prototype.
   expect = 10;
-  var x = new F(); 
+  var x = new F();
 
   print('x = new F(); x instanceof Array: ' + (x instanceof Array));
 

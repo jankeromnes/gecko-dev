@@ -77,7 +77,7 @@ class nsImageFromClipboard
 public:
   nsImageFromClipboard () ;
   ~nsImageFromClipboard ( ) ;
-  
+
     // Retrieve the newly created image
   nsresult GetEncodedImageStream (unsigned char * aClipboardData, const char * aMIMEFormat, nsIInputStream** outImage);
 

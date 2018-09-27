@@ -5,7 +5,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #--------------------------------------------------------------
-# cgi script that parses request argument to appropriate 
+# cgi script that parses request argument to appropriate
 # open ssl or tstclntw options and starts ssl client.
 #
 
@@ -41,7 +41,7 @@ sub svr_error {
 #
 sub debug {
     my ($str, $inVal) = @_;
-    
+
     print "-- DEBUG: $str ($inVal)\n" if ($DEBUG == 1);
 }
 
@@ -65,7 +65,7 @@ sub init {
         debug "Debug is ON";
     }
     $DEBUG=1;
-    
+
     $svrSoft = $ENV{'SERVER_SOFTWARE'};
     if (defined $svrSoft) {
         $_ = $svrSoft;
@@ -95,7 +95,7 @@ sub osSpecific {
 #    1 upon success, or 0 upon failure(if OS was not recognized)
 #
 sub setFunctRefs {
-    
+
     debug("Entering setFunctRefs function", $osDataArr{wserv});
 
     if ($osDataArr{wserv} eq "Apache") {
@@ -120,7 +120,7 @@ sub setFunctRefs {
 #--------------------------------------------------------------
 # Parses data from HTTP request. Will print a form if request
 # does not contain sufficient number of parameters.
-# Returns: 
+# Returns:
 #     1 if request has sufficient number of parameters
 #     0 if not.
 sub getReqData {
@@ -230,12 +230,12 @@ sub configClient {
         eval $_;
     }
     close(CFILE);
-   
+
     local @cipherTablePtr = ();
     $osDataArr{'buildCipherTableFn'}->($cipherTableFile, $clientSys) || return 0;
     $osDataArr{cipherTable} = $cipherTablePtr[0];
     $osDataArr{rcipherTable} = $cipherTablePtr[1];
-    
+
     local $suppCiphersTablePrt;
     &{$osDataArr{'loadSupportedCipthersFn'}} || return 0;
     $osDataArr{suppCiphersTable} = $suppCiphersTablePrt;
@@ -262,7 +262,7 @@ sub verifyCipherSupport {
 }
 
 #--------------------------------------------------------------
-# Converts long(?name of the type?) cipher name to 
+# Converts long(?name of the type?) cipher name to
 # openssl/tstclntw cipher name.
 # Returns:
 #   0 if cipher was not listed. 1 upon success.
@@ -279,7 +279,7 @@ sub convertCipher {
         if (!defined $cphr) {
             $ERR = "cipher is not listed.";
             return 0;
-        }        
+        }
         &{$osDataArr{'cipherIsSupportedFn'}}($cphr) || return 0;
         $ciphers = "$cphr";
         return 1;
@@ -341,7 +341,7 @@ sub execClientCmd_Unix {
     }
 
     my @cmdOutArr = <CMD_OUT>;
-    
+
     foreach (@cmdOutArr) {
         print $_;
     }
@@ -453,7 +453,7 @@ sub execClientCmd_Win {
     }
 
     my @cmdOutArr = <CMD_OUT>;
-    
+
     foreach (@cmdOutArr) {
         print $_;
     }
@@ -507,14 +507,14 @@ if ($osDataArr{wservRun}) {
     print header('text/html').
         start_html('iopr client');
 }
- 
+
 print "SCRIPT=OK\n";
 
-if (!&getReqData) { 
+if (!&getReqData) {
     svr_error($ERR, 1);
 }
 
-if (!&configClient) { 
+if (!&configClient) {
     svr_error($ERR, 1);
 }
 

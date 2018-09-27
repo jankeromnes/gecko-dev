@@ -20,7 +20,7 @@
     <!-- This message will be logged in the project's build output. -->
     <Message Text="Copying @(OutputFiles->Count()) header files to $(CopyDestionationPath). Files copied: @(OutputFiles)" Importance="high"/>
     <!-- Perform the copy. -->
-    <Copy SourceFiles="@(OutputFiles)" 
+    <Copy SourceFiles="@(OutputFiles)"
           DestinationFolder="$(CopyDestionationPath)\%(RecursiveDir)"
           SkipUnchangedFiles="false"></Copy>
   </Target>

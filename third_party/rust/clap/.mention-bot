@@ -1,9 +1,9 @@
 {
-  "findPotentialReviewers": false, 
+  "findPotentialReviewers": false,
   "alwaysNotifyForPaths": [
     {
-      "name": "kbknapp", 
-      "files": ["**/*.rs", "**/*.md", "*"] 
+      "name": "kbknapp",
+      "files": ["**/*.rs", "**/*.md", "*"]
     }
   ]
 }

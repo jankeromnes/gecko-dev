@@ -10,7 +10,7 @@
       var UP = 38;
       var DOWN = 40;
       comboInfo = {};
-      
+
       function toArray (/* NodeList */ nodeList) {
           var result = [];
           for (var i=0; i < nodeList.length; i++) {
@@ -18,7 +18,7 @@
           }
           return result;
       }
-      
+
       function initComboInfo() {
           comboInfo.comboBox = document.getElementById ('test');
           comboInfo.textEntry = document.getElementById ('testEntry');
@@ -40,7 +40,7 @@
               if (nextIndex < 0)
                   nextIndex = comboInfo.options.length - 1;
           }
-          
+
           if (nextIndex != currentIndex) {
               active.removeAttribute ('class');
               active = comboInfo.options[nextIndex];
@@ -49,14 +49,14 @@
               event.target.value = active.innerHTML;
           }
       }
-      
+
       function doOnload() {
           var active = initComboInfo();
           comboInfo.textEntry.value = active.innerHTML;
           comboInfo.textEntry.focus();
           active.setAttribute ('class', 'hasFocus');
       }
-      
+
     </script>
   </head>
   <body onload='doOnload()'>

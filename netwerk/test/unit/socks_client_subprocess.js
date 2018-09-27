@@ -13,7 +13,7 @@ function launchConnection(socks_vers, socks_port, dest_host, dest_port, dns)
   var pi_flags = 0;
   if (dns == 'remote')
     pi_flags = Ci.nsIProxyInfo.TRANSPARENT_PROXY_RESOLVES_HOST;
-  
+
   var pps = new ProtocolProxyService();
   var pi = pps.newProxyInfo(socks_vers, 'localhost', socks_port,
           pi_flags, -1, null);

@@ -37,7 +37,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=486990
     <menuitem label="Freshmeat" value="http://freshmeat.net"/>
   </menupopup>
   <button label="test button" contextmenu="cm" id="testbutton"/>
-  
+
   <!-- test code goes here -->
   <script type="application/javascript">
   <![CDATA[

@@ -8,7 +8,7 @@ require('coreconf.pl');
 #######-- read in variables on command line into %var
 
 &parse_argv;
- 
+
 ### do the copy
 
 print STDERR "RELEASE TREE / MODULE =  $var{RELEASE_TREE} $var{MODULE}\n";
@@ -23,7 +23,7 @@ if ($var{RELEASE} eq "") { exit; } # Can't do release here, so exit.
 #    $component = $var{RELEASE};
 #}
 #else {  # if a subcomponent/version is given in the RELEASE variable
-#        $var{RELEASE} =~ m|^([^/]*)/|;  
+#        $var{RELEASE} =~ m|^([^/]*)/|;
 #	$component = $1;           # everything before the first slash;
 #    }
 
@@ -82,14 +82,14 @@ if ($create_current == 1) {
 # unlinking and linking always occurs, even if the link is correct
     print "unlinking $dir/current\n";
     unlink("$dir/current");
-    
+
     print "putting version number $today into 'current' file..";
 
     open(FILE,">$dir/current") || die " couldn't open current\n";
     print FILE "$today\n";
     close(FILE);
     print " ..done\n"
-    
+
 }
 
 &rec_mkdir("$dir/$version/$var{'RELEASE_MD_DIR'}");
@@ -100,20 +100,20 @@ if ($create_current == 1) {
 
 foreach $jarfile (split(/ /,$var{FILES}) ) {
     print STDERR "---------------------------------------------\n";
-    
+
     $jarinfo = $var{$jarfile};
- 
+
     ($jardir,$jaropts) = split(/\|/,$jarinfo);
- 
+
     if ($jaropts =~ /f/) {
       print STDERR "Copying files $jardir....\n";
     }
     else {
       print STDERR "Copying jar file $jarfile....\n";
     }
-    
+
     print "jaropts = $jaropts\n";
-    
+
     if ($jaropts =~ /m/) {
       $destdir = $var{"RELEASE_MD_DIR"};
       print "found m, using MD dir $destdir\n";
@@ -125,10 +125,10 @@ foreach $jarfile (split(/ /,$var{FILES}) ) {
     else {
       die "Error: must specify m or x in jar options in $jarinfo line\n";
     }
-    
-    
+
+
     $distdir = "$dir/$version/$destdir";
-    
+
 
 
     if ($jaropts =~ /f/) {
@@ -155,13 +155,13 @@ foreach $jarfile (split(/ /,$var{FILES}) ) {
     }
     else {
       $srcfile = "$var{SOURCE_RELEASE_PREFIX}/$jardir/$jarfile";
-      
+
       print "copy: from $srcfile\n";
       print "      to   $distdir\n";
-      
+
       system("cp $srcfile $distdir");
-      
+
     }
-    
+
   }
 

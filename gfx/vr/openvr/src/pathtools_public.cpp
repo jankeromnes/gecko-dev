@@ -123,7 +123,7 @@ std::string Path_StripDirectory( const std::string & sPath, char slash )
 		return std::string( sPath.begin() + n + 1, sPath.end() );
 }
 
-/** returns just the filename with no extension of the provided filename. 
+/** returns just the filename with no extension of the provided filename.
 * If there is a path the path is left intact. */
 std::string Path_StripExtension( const std::string & sPath )
 {
@@ -265,12 +265,12 @@ std::string Path_Join( const std::string & first, const std::string & second, co
 	return Path_Join( Path_Join( Path_Join( first, second, slash ), third, slash ), fourth, slash );
 }
 
-std::string Path_Join( 
-	const std::string & first, 
-	const std::string & second, 
-	const std::string & third, 
-	const std::string & fourth, 
-	const std::string & fifth, 
+std::string Path_Join(
+	const std::string & first,
+	const std::string & second,
+	const std::string & third,
+	const std::string & fourth,
+	const std::string & fifth,
 	char slash )
 {
 	return Path_Join( Path_Join( Path_Join( Path_Join( first, second, slash ), third, slash ), fourth, slash ), fifth, slash );
@@ -301,17 +301,17 @@ std::string Path_RemoveTrailingSlash( const std::string & sRawPath, char slash )
 			break;
 		}
 	}
-		
+
 	if ( nLastFound >= 0 )
 	{
 		sPath.erase( nLastFound, std::string::npos );
 	}
-	
+
 	return sPath;
 }
 
 
-/** Removes redundant <dir>/.. elements in the path. Returns an empty path if the 
+/** Removes redundant <dir>/.. elements in the path. Returns an empty path if the
 * specified path has a broken number of directories for its number of ..s */
 std::string Path_Compact( const std::string & sRawPath, char slash )
 {
@@ -346,7 +346,7 @@ std::string Path_Compact( const std::string & sRawPath, char slash )
 		}
 	}
 
-	// get rid of leading ./ 
+	// get rid of leading ./
 	if( sPath.length() > 2 )
 	{
 		if( sPath[ 0 ] == '.'  && sPath[ 1 ] == slash )
@@ -360,7 +360,7 @@ std::string Path_Compact( const std::string & sRawPath, char slash )
 	std::string::size_type i = 0;
 	while( i < sPath.length() )
 	{
-		if( i > 0 && sPath.length() - i >= 2 
+		if( i > 0 && sPath.length() - i >= 2
 			&& sPath[i] == '.'
 			&& sPath[i+1] == '.'
 			&& ( i + 2 == sPath.length() || sPath[ i+2 ] == slash )
@@ -369,7 +369,7 @@ std::string Path_Compact( const std::string & sRawPath, char slash )
 			// check if we've hit the start of the string and have a bogus path
 			if( i == 1 )
 				return "";
-			
+
 			// find the separator before i-1
 			std::string::size_type iDirStart = i-2;
 			while( iDirStart > 0 && sPath[ iDirStart - 1 ] != slash )
@@ -566,7 +566,7 @@ unsigned char * Path_ReadBinaryFile( const std::string &strFilename, int *pSize 
 	// the open operation needs to be sharable, therefore use of _wfsopen instead of _wfopen_s
 	f = _wfsopen( wstrFilename.c_str(), L"rb", _SH_DENYNO );
 #endif
-	
+
 	unsigned char* buf = NULL;
 
 	if ( f != NULL )
@@ -695,7 +695,7 @@ bool Path_WriteStringToTextFile( const std::string &strFilename, const char *pch
 		f = NULL;
 	}
 #endif
-	
+
 	bool ok = false;
 
 	if ( f != NULL )
@@ -801,7 +801,7 @@ std::string GetUserDocumentsPath()
 		{
 			return "";
 		}
-		
+
 		return [[paths objectAtIndex:0] UTF8String];
 	}
 #elif defined( LINUX )

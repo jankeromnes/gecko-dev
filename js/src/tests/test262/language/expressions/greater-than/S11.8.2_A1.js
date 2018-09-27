@@ -16,7 +16,7 @@ if (eval("0\u0009>\u00091") !== false) {
 
 //CHECK#2
 if (eval("0\u000B>\u000B1") !== false) {
-  $ERROR('#2: 0\\u000B>\\u000B1) === false');  
+  $ERROR('#2: 0\\u000B>\\u000B1) === false');
 }
 
 //CHECK#3
@@ -36,7 +36,7 @@ if (eval("0\u00A0>\u00A01") !== false) {
 
 //CHECK#6
 if (eval("0\u000A>\u000A1") !== false) {
-  $ERROR('#6: (0\\u000A>\\u000A1) === false');  
+  $ERROR('#6: (0\\u000A>\\u000A1) === false');
 }
 
 //CHECK#7

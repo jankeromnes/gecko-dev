@@ -8,7 +8,7 @@
 
 Name "Sample liteFirewall"
 OutFile "Sample.exe"
-ShowInstDetails show	
+ShowInstDetails show
 
 Section "Main program"
 	; Add NOTEPAD to the authorized list

@@ -179,10 +179,10 @@ const PRETTY_TRICKY: &'static str = r##"[example]
 f = "\f"
 glass = '''
 Nothing too unusual, except that I can eat glass in:
-- Greek: Μπορώ να φάω σπασμένα γυαλιά χωρίς να πάθω τίποτα. 
-- Polish: Mogę jeść szkło, i mi nie szkodzi. 
-- Hindi: मैं काँच खा सकता हूँ, मुझे उस से कोई पीडा नहीं होती. 
-- Japanese: 私はガラスを食べられます。それは私を傷つけません。 
+- Greek: Μπορώ να φάω σπασμένα γυαλιά χωρίς να πάθω τίποτα.
+- Polish: Mogę jeść szkło, i mi nie szkodzi.
+- Hindi: मैं काँच खा सकता हूँ, मुझे उस से कोई पीडा नहीं होती.
+- Japanese: 私はガラスを食べられます。それは私を傷つけません。
 '''
 r = "\r"
 r_newline = """
@@ -265,10 +265,10 @@ const PRETTY_TRICKY_NON_LITERAL: &'static str = r##"[example]
 f = "\f"
 glass = """
 Nothing too unusual, except that I can eat glass in:
-- Greek: Μπορώ να φάω σπασμένα γυαλιά χωρίς να πάθω τίποτα. 
-- Polish: Mogę jeść szkło, i mi nie szkodzi. 
-- Hindi: मैं काँच खा सकता हूँ, मुझे उस से कोई पीडा नहीं होती. 
-- Japanese: 私はガラスを食べられます。それは私を傷つけません。 
+- Greek: Μπορώ να φάω σπασμένα γυαλιά χωρίς να πάθω τίποτα.
+- Polish: Mogę jeść szkło, i mi nie szkodzi.
+- Hindi: मैं काँच खा सकता हूँ, मुझे उस से कोई पीडा नहीं होती.
+- Japanese: 私はガラスを食べられます。それは私を傷つけません。
 """
 plain = """
 This has a couple of lines

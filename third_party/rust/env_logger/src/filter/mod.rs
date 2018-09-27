@@ -1,15 +1,15 @@
 //! Filtering for log records.
-//! 
+//!
 //! This module contains the log filtering used by `env_logger` to match records.
-//! You can use the `Filter` type in your own logger implementation to use the same 
-//! filter parsing and matching as `env_logger`. For more details about the format 
+//! You can use the `Filter` type in your own logger implementation to use the same
+//! filter parsing and matching as `env_logger`. For more details about the format
 //! for directive strings see [Enabling Logging].
-//! 
+//!
 //! ## Using `env_logger` in your own logger
 //!
 //! You can use `env_logger`'s filtering functionality with your own logger.
-//! Call [`Builder::parse`] to parse directives from a string when constructing 
-//! your logger. Call [`Filter::matches`] to check whether a record should be 
+//! Call [`Builder::parse`] to parse directives from a string when constructing
+//! your logger. Call [`Filter::matches`] to check whether a record should be
 //! logged based on the parsed filters when log records are received.
 //!
 //! ```
@@ -54,7 +54,7 @@
 //! }
 //! # fn main() {}
 //! ```
-//! 
+//!
 //! [Enabling Logging]: ../index.html#enabling-logging
 //! [`Builder::parse`]: struct.Builder.html#method.parse
 //! [`Filter::matches`]: struct.Filter.html#method.matches
@@ -73,11 +73,11 @@ mod inner;
 mod inner;
 
 /// A log filter.
-/// 
+///
 /// This struct can be used to determine whether or not a log record
 /// should be written to the output.
 /// Use the [`Builder`] type to parse and construct a `Filter`.
-/// 
+///
 /// [`Builder`]: struct.Builder.html
 pub struct Filter {
     directives: Vec<Directive>,
@@ -85,10 +85,10 @@ pub struct Filter {
 }
 
 /// A builder for a log filter.
-/// 
+///
 /// It can be used to parse a set of directives from a string before building
 /// a [`Filter`] instance.
-/// 
+///
 /// ## Example
 ///
 /// ```
@@ -111,7 +111,7 @@ pub struct Filter {
 ///     let filter = builder.build();
 /// }
 /// ```
-/// 
+///
 /// [`Filter`]: struct.Filter.html
 pub struct Builder {
     directives: Vec<Directive>,
@@ -214,7 +214,7 @@ impl Builder {
     /// Parses the directives string.
     ///
     /// See the [Enabling Logging] section for more details.
-    /// 
+    ///
     /// [Enabling Logging]: ../index.html#enabling-logging
     pub fn parse(&mut self, filters: &str) -> &mut Self {
         let (directives, filter) = parse_spec(filters);

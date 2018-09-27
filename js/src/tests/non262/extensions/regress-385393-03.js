@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   f = (function() { new (delete y) });
   eval(uneval(f))
 

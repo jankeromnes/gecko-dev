@@ -1,6 +1,6 @@
 ftp> open ftp.microsoft.com
 220 Microsoft FTP Service
-Name (ftp.microsoft.com:cyp): 
+Name (ftp.microsoft.com:cyp):
 331 Anonymous access allowed, send identity (e-mail name) as password.
 230-This is FTP.Microsoft.Com
 230 Anonymous user logged in.
@@ -65,4 +65,4 @@ dr-xr-xr-x   1 owner    group               0 Jun 15  2000 zoe
 226 Transfer complete.
 ftp> close
 221  Thank-You For Using Microsoft Products!
-ftp> 
+ftp>

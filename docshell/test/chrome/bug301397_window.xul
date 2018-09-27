@@ -11,7 +11,7 @@
   <script type="application/javascript" src= "chrome://mochikit/content/chrome-harness.js" />
   <script type="application/javascript" src="docshell_helpers.js" />
   <script type="application/javascript"><![CDATA[
-  
+
     // Define the generator-iterator for the tests.
     var tests = testIterator();
 
@@ -21,7 +21,7 @@
     function nextTest() {
       tests.next();
     }
-    
+
     ////
     // Return the document element with the specified id.
     //
@@ -34,11 +34,11 @@
     function verifyIframeInnerHtml(string) {
       var iframeInnerHtml = $("iframe").contentDocument.body.innerHTML;
       ok(iframeInnerHtml.includes(string),
-        "iframe contains wrong document: " + iframeInnerHtml);    
+        "iframe contains wrong document: " + iframeInnerHtml);
     }
-    
+
     ////
-    // Generator function for test steps for bug 301397:  
+    // Generator function for test steps for bug 301397:
     // The correct page should be displayed in an iframe when
     // navigating back and forwards, when the parent page
     // occupies multiple spots in the session history.
@@ -54,7 +54,7 @@
         onNavComplete: nextTest
       });
       yield undefined;
-      
+
       // Load a page containing an iframe.
       doPageNavigation({
         uri: getHttpUrl("bug301397_1.html"),
@@ -71,7 +71,7 @@
         onNavComplete: nextTest
       });
       yield undefined;
-      
+
       // Click a link in the iframe to cause the iframe to navigate
       // to a new page, and wait until the related pagehide/pageshow
       // events have occurred.
@@ -93,7 +93,7 @@
           0, null);
       link.dispatchEvent(event);
       yield undefined;
-       
+
       // Load another dummy page.  Verify that both the outgoing parent and
       // iframe pages are stored in the bfcache.
       doPageNavigation({
@@ -111,8 +111,8 @@
         onNavComplete: nextTest
       });
       yield undefined;
-      
-      // Go back.  The iframe should show the second page loaded in it. 
+
+      // Go back.  The iframe should show the second page loaded in it.
       // Both the parent and the iframe pages should be loaded from
       // the bfcache.
       doPageNavigation({
@@ -130,9 +130,9 @@
         onNavComplete: nextTest
       });
       yield undefined;
-      
+
       verifyIframeInnerHtml("You made it");
-      
+
       // Go gack again.  The iframe should show the first page loaded in it.
       doPageNavigation({
         back: true,
@@ -144,13 +144,13 @@
                             title: "iframe content #1",
                             // false since this page was never stored
                             // in the bfcache in the first place
-                            persisted: false } ], 
+                            persisted: false } ],
         onNavComplete: nextTest
       });
       yield undefined;
-      
+
       verifyIframeInnerHtml("go to next page");
-      
+
       // Go back to the generic page.  Now go forward to the last page,
       // again verifying that the iframe shows the first and second
       // pages in order.
@@ -165,7 +165,7 @@
                             persisted: true },
                           { type: "pageshow",
                             title: "generic page",
-                            persisted: true } ], 
+                            persisted: true } ],
         onNavComplete: nextTest
       });
       yield undefined;
@@ -184,7 +184,7 @@
       yield undefined;
 
       verifyIframeInnerHtml("go to next page");
-      
+
       doPageNavigation({
         forward: true,
         eventsToListenFor: ["pageshow", "pagehide"],
@@ -193,15 +193,15 @@
                             persisted: false },   // false, subframe nav
                           { type: "pageshow",
                             title: "iframe content #2",
-                            // false because the page wasn't stored in 
+                            // false because the page wasn't stored in
                             // bfcache last time it was unloaded
-                            persisted: false } ], 
+                            persisted: false } ],
         onNavComplete: nextTest
       });
       yield undefined;
 
       verifyIframeInnerHtml("You made it");
-      
+
       doPageNavigation({
         forward: true,
         eventsToListenFor: ["pageshow", "pagehide"],
@@ -235,13 +235,13 @@
         onNavComplete: nextTest
       });
       yield undefined;
-      
+
       verifyIframeInnerHtml("You made it");
-      
+
       // Tell the framework the test is finished.
       finish();
     }
-    
+
   ]]></script>
 
   <browser type="content" primary="true" flex="1" id="content" src="about:blank"/>

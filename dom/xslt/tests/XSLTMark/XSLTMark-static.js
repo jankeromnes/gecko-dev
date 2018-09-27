@@ -28,7 +28,7 @@ function loadFile(aUriSpec)
         uri: aUriSpec,
         loadUsingSystemPrincipal: true
     });
-    var instream = 
+    var instream =
         Cc[SIS_CTRID].createInstance(nsISIS);
     instream.init(chan.open2());
 

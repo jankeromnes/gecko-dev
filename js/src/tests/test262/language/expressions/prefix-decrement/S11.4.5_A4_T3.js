@@ -20,7 +20,7 @@ if (isNaN(--x) !== true) {
 }
 
 //CHECK#3
-var x = new String("-1"); 
+var x = new String("-1");
 if (--x !== -1 - 1) {
   $ERROR('#3: var x = new String("-1"); --x === -1 - 1. Actual: ' + (--x));
 }

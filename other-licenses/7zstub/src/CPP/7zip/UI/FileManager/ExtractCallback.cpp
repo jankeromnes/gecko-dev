@@ -204,10 +204,10 @@ STDMETHODIMP CExtractCallbackImp::AskOverwrite(
   dialog.NewFileInfo.SetTime(newTime);
   dialog.NewFileInfo.SetSize(newSize);
   dialog.NewFileInfo.Name = newName;
-  
+
   ProgressDialog->WaitCreating();
   INT_PTR writeAnswer = dialog.Create(*ProgressDialog);
-  
+
   switch (writeAnswer)
   {
     case IDCANCEL:        *answer = NOverwriteAnswer::kCancel; return E_ABORT;
@@ -365,7 +365,7 @@ STDMETHODIMP CExtractCallbackImp::SetOperationResult(Int32 opRes, Int32 encrypte
       AddError_Message(s);
     }
   }
-  
+
   #ifndef _SFX
   if (_isFolder)
     NumFolders++;
@@ -373,7 +373,7 @@ STDMETHODIMP CExtractCallbackImp::SetOperationResult(Int32 opRes, Int32 encrypte
     NumFiles++;
   ProgressDialog->Sync.Set_NumFilesCur(NumFiles);
   #endif
-  
+
   return S_OK;
 }
 
@@ -472,7 +472,7 @@ UString GetOpenArcErrorMessage(UInt32 errorFlags)
     s += m;
     errorFlags &= ~f;
   }
-  
+
   if (errorFlags != 0)
   {
     char sz[16];
@@ -483,7 +483,7 @@ UString GetOpenArcErrorMessage(UInt32 errorFlags)
       s.Add_LF();
     s += sz;
   }
-  
+
   return s;
 }
 
@@ -494,10 +494,10 @@ static void ErrorInfo_Print(UString &s, const CArcErrorInfo &er)
 
   if (errorFlags != 0)
     AddNewLineString(s, GetOpenArcErrorMessage(errorFlags));
-      
+
   if (!er.ErrorMessage.IsEmpty())
     AddNewLineString(s, er.ErrorMessage);
-  
+
   if (warningFlags != 0)
   {
     s += GetNameOfProperty(kpidWarningFlags, L"Warnings");
@@ -505,7 +505,7 @@ static void ErrorInfo_Print(UString &s, const CArcErrorInfo &er)
     s.Add_LF();
     AddNewLineString(s, GetOpenArcErrorMessage(warningFlags));
   }
-  
+
   if (!er.WarningMessage.IsEmpty())
   {
     s += GetNameOfProperty(kpidWarning, L"Warning");
@@ -538,12 +538,12 @@ void OpenResult_GUI(UString &s, const CCodecs *codecs, const CArchiveLink &arcLi
       s += name;
       s.Add_LF();
     }
-    
+
     if (level != 0)
     {
       AddNewLineString(s, arc.Path);
     }
-      
+
     ErrorInfo_Print(s, er);
 
     if (er.ErrorFormatIndex >= 0)
@@ -567,7 +567,7 @@ void OpenResult_GUI(UString &s, const CCodecs *codecs, const CArchiveLink &arcLi
     s.Add_LF();
     if (!arcLink.Arcs.IsEmpty())
       AddNewLineString(s, arcLink.NonOpen_ArcPath);
-    
+
     if (arcLink.NonOpen_ErrorInfo.ErrorFormatIndex >= 0 || result == S_FALSE)
     {
       UINT id = IDS_CANT_OPEN_ARCHIVE;
@@ -695,7 +695,7 @@ STDMETHODIMP CExtractCallbackImp::AskWrite(
   FString destPathSys = us2fs(destPath);
   bool srcIsFolderSpec = IntToBool(srcIsFolder);
   CFileInfo destFileInfo;
-  
+
   if (destFileInfo.Find(destPathSys))
   {
     if (srcIsFolderSpec)
@@ -708,7 +708,7 @@ STDMETHODIMP CExtractCallbackImp::AskWrite(
       *writeAnswer = BoolToInt(false);
       return S_OK;
     }
-  
+
     if (destFileInfo.IsDir())
     {
       RINOK(MessageError("can not replace folder with file with same name", destPathSys));
@@ -734,7 +734,7 @@ STDMETHODIMP CExtractCallbackImp::AskWrite(
             srcPath,
             srcTime, srcSize,
             &overwriteResult));
-        
+
         switch (overwriteResult)
         {
           case NOverwriteAnswer::kCancel: return E_ABORT;
@@ -748,7 +748,7 @@ STDMETHODIMP CExtractCallbackImp::AskWrite(
         }
       }
     }
-    
+
     if (OverwriteMode == NExtract::NOverwriteMode::kRename)
     {
       if (!AutoRenamePath(destPathSys))
@@ -848,9 +848,9 @@ STDMETHODIMP CExtractCallbackImp::GetStream7(const wchar_t *name,
     return S_OK;
 
   _needUpdateStat = true;
-  
+
   CMyComPtr<ISequentialOutStream> outStreamLoc;
-  
+
   if (VirtFileSystem && askExtractMode == NArchive::NExtract::NAskMode::kExtract)
   {
     CVirtFile &file = VirtFileSystemSpec->AddNewFile();

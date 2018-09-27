@@ -65,7 +65,7 @@ enum State {
     Ready(*mut Executor),
     // default executor is currently active (used to detect recursive calls)
     Active
-} 
+}
 
 /// Thread-local tracking the current executor
 thread_local!(static EXECUTOR: Cell<State> = Cell::new(State::Empty));

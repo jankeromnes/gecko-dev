@@ -411,7 +411,7 @@ def write_sources(f, values, indent):
 
   write_list(f, "UNIFIED_SOURCES", sources['unified'], indent)
   write_list(f, "SOURCES", sources['nonunified'], indent)
-  
+
 def write_list(f, name, values, indent):
   def write_indent(indent):
     for _ in range(indent):

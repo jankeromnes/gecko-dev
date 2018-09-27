@@ -1727,7 +1727,7 @@ _cairo_quartz_setup_surface_source (cairo_quartz_surface_t *surface,
     patternSpace = CGColorSpaceCreatePattern (NULL);
     CGContextSetFillColorSpace (context, patternSpace);
     CGContextSetFillPattern (context, pattern, &patternAlpha);
-    CGContextSetStrokeColorSpace (context, patternSpace); 
+    CGContextSetStrokeColorSpace (context, patternSpace);
     CGContextSetStrokePattern (context, pattern, &patternAlpha);
     CGColorSpaceRelease (patternSpace);
 

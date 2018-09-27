@@ -13,7 +13,7 @@ Expect: var encs = feed.items.queryElementAt(0, Components.interfaces.nsIFeedEnt
   <link href="http://www.intertwingly.net/wiki/pie/LinkConformanceTests" />
   <link rel="self" href="http://www.snellspace.com/public/linktests.xml" />
 
-  
+
 
   <entry>
 
@@ -21,7 +21,7 @@ Expect: var encs = feed.items.queryElementAt(0, Components.interfaces.nsIFeedEnt
     <title>One of each core link rel type + An additional alternate link</title>
     <updated>2005-01-18T15:00:04Z</updated>
     <summary>The aggregator should pick either the first or last links as the alternate. First link is likely better.</summary>
-    <link rel="enclosure" length="24986239" type="audio/mpeg" href="http://dallas.example.com/joebob_050689.mp3" /> 
-  </entry>  
-  
+    <link rel="enclosure" length="24986239" type="audio/mpeg" href="http://dallas.example.com/joebob_050689.mp3" />
+  </entry>
+
 </feed>

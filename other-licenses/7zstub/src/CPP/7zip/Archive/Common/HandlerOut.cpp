@@ -74,7 +74,7 @@ bool CCommonMethodProps::SetCommonProperty(const UString &name, const PROPVARIAN
     #endif
     return true;
   }
-  
+
   if (name.IsPrefixedBy_Ascii_NoCase("memuse"))
   {
     if (!ParseSizeString(name.Ptr(6), value, _memAvail, _memUsage))
@@ -131,7 +131,7 @@ HRESULT CMultiMethodProps::SetProperty(const wchar_t *nameSpec, const PROPVARIAN
   name.MakeLower_Ascii();
   if (name.IsEmpty())
     return E_INVALIDARG;
-  
+
   if (name[0] == 'x')
   {
     name.Delete(0);
@@ -147,7 +147,7 @@ HRESULT CMultiMethodProps::SetProperty(const wchar_t *nameSpec, const PROPVARIAN
     _analysisLevel = (int)v;
     return S_OK;
   }
-  
+
   if (name.IsPrefixedBy_Ascii_NoCase("crc"))
   {
     name.Delete(0, 3);
@@ -160,7 +160,7 @@ HRESULT CMultiMethodProps::SetProperty(const wchar_t *nameSpec, const PROPVARIAN
     if (SetCommonProperty(name, value, hres))
       return hres;
   }
-  
+
   UInt32 number;
   unsigned index = ParseStringToUInt32(name, number);
   UString realName = name.Ptr(index);
@@ -197,7 +197,7 @@ void CSingleMethodProps::Init()
 HRESULT CSingleMethodProps::SetProperties(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps)
 {
   Init();
-  
+
   for (UInt32 i = 0; i < numProps; i++)
   {
     UString name = names[i];

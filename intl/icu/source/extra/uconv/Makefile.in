@@ -164,7 +164,7 @@ $(RESDIR)/$(RESDIR).lst: Makefile $(srcdir)/resfiles.mk
 
 # no install for static mode
 ifneq ($(UCONVMSG_MODE),static)
-install-resfiles: $(RESFILES) $(RESDIR)/$(RESDIR).lst pkgdata.inc 
+install-resfiles: $(RESFILES) $(RESDIR)/$(RESDIR).lst pkgdata.inc
 	$(MKINSTALLDIRS) $(DESTDIR)$(ICUDATA_DIR)
 	$(INVOKE) $(TOOLBINDIR)/pkgdata -p $(RESDIR) -O pkgdata.inc -m $(PKGMODE) -d $(RESDIR) -I $(INSTALLTO) -T $(RESDIR) $(RESDIR)/$(RESDIR).lst
 else

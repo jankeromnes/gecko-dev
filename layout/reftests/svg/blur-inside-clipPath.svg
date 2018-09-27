@@ -2,7 +2,7 @@
 	<defs>
 		<clipPath id="clip-vXP8Ybe5">
 			<path d="M0,512v-512h512v512z"/>
-		</clipPath>		
+		</clipPath>
 		<filter id="filter-wVmTgUOU" filterUnits="objectBoundingBox" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB">
 			<feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0" in="SourceGraphic"/>
 			<feOffset dy="28"/>

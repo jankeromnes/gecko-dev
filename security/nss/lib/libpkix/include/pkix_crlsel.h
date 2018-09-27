@@ -529,7 +529,7 @@ PKIX_ComCRLSelParams_SetDateAndTime(
         PKIX_PL_Date *date,
         void *plContext);
 
-/* 
+/*
  * FUNCTION: PKIX_ComCRLSelParams_GetNISTPolicyEnabled
  * DESCRIPTION:
  *
@@ -729,7 +729,7 @@ PKIX_ComCRLSelParams_SetMinCRLNumber(
  * DESCRIPTION:
  *
  * Sets crldp list that can be used to download a crls.
- * 
+ *
  * PARAMETERS:
  *  "params"
  *      Address of ComCRLSelParamsParams whose minCRLNumber criterion is to be

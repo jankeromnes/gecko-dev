@@ -181,7 +181,7 @@ void UPerfTest::init(UOption addOptions[], int32_t addOptionsCount,
         bulk_mode = TRUE;
         line_mode = FALSE;
     }
-    
+
     if(options[LOCALE].doesOccur) {
         locale = options[LOCALE].value;
     }
@@ -390,7 +390,7 @@ UBool UPerfTest::runTestLoop( char* testname, char* par )
                         loops = failsafe;
                         failsafe *= 10;
                     } else {
-                        //System.out.println("# " + meth.getName() + " x " + loops + " = " + t);                            
+                        //System.out.println("# " + meth.getName() + " x " + loops + " = " + t);
                         loops = (int)((double)n / t * loops + 0.5);
                         if (loops == 0) {
                             fprintf(stderr,"Unable to converge on desired duration");

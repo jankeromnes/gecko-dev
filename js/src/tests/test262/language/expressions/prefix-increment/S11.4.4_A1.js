@@ -16,7 +16,7 @@ if (eval("var x = 0; ++\u0009x") !== 1) {
 
 //CHECK#2
 if (eval("var x = 0; ++\u000Bx") !== 1) {
-  $ERROR('#2: var x = 0; ++\\u000Bx; x === 1. Actual: ' + (x));  
+  $ERROR('#2: var x = 0; ++\\u000Bx; x === 1. Actual: ' + (x));
 }
 
 //CHECK#3
@@ -36,7 +36,7 @@ if (eval("var x = 0; ++\u00A0x") !== 1) {
 
 //CHECK#6
 if (eval("var x = 0; ++\u000Ax") !== 1) {
-  $ERROR('#6: var x = 0; ++\\u000Ax; x === 1. Actual: ' + (x));  
+  $ERROR('#6: var x = 0; ++\\u000Ax; x === 1. Actual: ' + (x));
 }
 
 //CHECK#7

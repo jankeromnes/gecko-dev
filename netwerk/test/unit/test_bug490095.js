@@ -18,7 +18,7 @@ var tests = [
 
     // Finally, check that request is validated with no flags set
     {url: "/freshness?a", server: "99", expected: "99"},
-    
+
     {url: "/freshness?b", server: "0", expected: "0"},
     {url: "/freshness?b", server: "1", expected: "1"},
 
@@ -88,7 +88,7 @@ function handler(metadata, response) {
     response.setHeader("Content-Type", "text/plain", false);
     response.setHeader("Date", getDateString(0), false);
     response.setHeader("Cache-Control", "max-age=0", false);
-    
+
     var header = tests[index].responseheader;
     if (header == null) {
         response.setHeader("Last-Modified", getDateString(-1), false);
@@ -96,11 +96,11 @@ function handler(metadata, response) {
         var splitHdr = header.split(": ");
         response.setHeader(splitHdr[0], splitHdr[1], false);
     }
-    
+
     response.setStatusLine(metadata.httpVersion, 200, "OK");
     response.bodyOutputStream.write(body, body.length);
 }
- 
+
 function getDateString(yearDelta) {
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

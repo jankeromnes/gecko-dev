@@ -19,7 +19,7 @@ function test()
   printBugNumber(BUGNUMBER);
   printStatus (summary);
 
- 
+
   function x (w, z) {
     var h = 0;
     var q = 0;

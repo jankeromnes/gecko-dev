@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
   var a = new String("foo");
   for (i = 0; i < 300; i++) {

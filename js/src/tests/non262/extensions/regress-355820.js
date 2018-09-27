@@ -20,7 +20,7 @@ function test()
   printStatus (summary);
 
   print('This test will fail in gecko prior to 1.9');
- 
+
   expect = 'undefined';
   actual = typeof Script;
 

@@ -3,7 +3,7 @@
 
 /*---
 esid: sec-intl.getcanonicallocales
-description: Test Intl.getCanonicalLocales for step 7.c.i. 
+description: Test Intl.getCanonicalLocales for step 7.c.i.
 info: |
   9.2.1 CanonicalizeLocaleList (locales)
     7. Repeat, while k < len.

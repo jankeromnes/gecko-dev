@@ -11,7 +11,7 @@ var expect = 'no error';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 var s='';
 for (i=0; i < 1<<16; i++)
   s += 'x' + i + '=' + i + ';\n';

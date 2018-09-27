@@ -25,7 +25,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=662519
   let steps = [
     function() {
       w = window.open("file_popup_blocker_chrome.html", "", "width=200,height=200");
-      ok(w, "The window object shouldn't be null");    
+      ok(w, "The window object shouldn't be null");
       // next() is called within file_popup_blocker_chrome.html
     },
     function() {

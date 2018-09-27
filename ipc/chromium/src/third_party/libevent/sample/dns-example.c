@@ -159,7 +159,7 @@ main(int c, char **v) {
 	struct evdns_base *evdns_base = NULL;
 
 	memset(&o, 0, sizeof(o));
-	
+
 	if (c < 2) {
 		fprintf(stderr, "syntax: %s [-x] [-v] [-c resolv.conf] [-s ns] hostname\n", v[0]);
 		fprintf(stderr, "syntax: %s [-T]\n", v[0]);

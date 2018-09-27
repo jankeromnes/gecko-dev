@@ -27,7 +27,7 @@ interface PPB_MouseLock {
    *
    * While the mouse is locked, the cursor is implicitly hidden from the user.
    * Any movement of the mouse will generate a
-   * <code>PP_INPUTEVENT_TYPE_MOUSEMOVE</code> event. The    
+   * <code>PP_INPUTEVENT_TYPE_MOUSEMOVE</code> event. The
    * <code>GetPosition()</code> function in the <code>PPB_MouseInputEvent</code>
    * interface reports the last known mouse position just as mouse lock was
    * entered. The <code>GetMovement()</code> function provides relative movement

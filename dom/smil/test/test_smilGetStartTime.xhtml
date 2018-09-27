@@ -10,7 +10,7 @@
 <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="120px" height="120px"
      onload="this.pauseAnimations()">
   <circle cx="20" cy="20" r="15" fill="blue">
-    <animate attributeName="cx" attributeType="XML" 
+    <animate attributeName="cx" attributeType="XML"
       from="20" to="100" begin="indefinite" dur="1s" id="anim"/>
   </circle>
 </svg>
@@ -28,7 +28,7 @@ function main() {
   is(svg.getCurrentTime(), 0, "should be paused at 0 in <svg> load handler");
 
   var anim = document.getElementById("anim");
-  // indefinite 
+  // indefinite
   var exceptionCaught = false;
   try {
     anim.getStartTime();
@@ -65,7 +65,7 @@ function main() {
   // intervals
   anim.setAttribute("begin", "1s; 3s");
   is(anim.getStartTime(), 1, "Unexpected start time before first interval");
-  
+
   svg.setCurrentTime(1);
   is(anim.getStartTime(), 1,
      "Unexpected start time at start of first interval");

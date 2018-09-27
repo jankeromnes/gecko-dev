@@ -100,6 +100,6 @@ private:
 
 } // namespace rtc
 
-#endif // WEBRTC_WIN 
+#endif // WEBRTC_WIN
 
 #endif // WEBRTC_BASE_WINPING_H__

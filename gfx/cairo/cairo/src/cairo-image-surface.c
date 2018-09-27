@@ -4704,7 +4704,7 @@ _cairo_image_surface_coerce (cairo_image_surface_t *surface)
 {
     return _cairo_image_surface_coerce_to_format (surface,
 		                                  _cairo_format_from_content (surface->base.content));
-        
+
 }
 
 /* A convenience function for when one needs to coerce an image

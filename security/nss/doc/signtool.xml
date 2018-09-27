@@ -86,11 +86,11 @@
     <para>You must also have a certificate for the CA that issues your signing certificate before you can sign files. If the certificate authority's certificate isn't already installed in your copy of Communicator, you typically install it by clicking the appropriate link on the certificate authority's web site, for example on the page from which you initiated enrollment for your signing certificate. This is the case for some test certificates, as well as certificates issued by Netscape Certificate Management System: you must download the the CA certificate in addition to obtaining your own signing certificate. CA certificates for several certificate authorities are preinstalled in the Communicator certificate database.</para>
     <para>When you receive an object-signing certificate for your own use, it is automatically installed in your copy of the Communicator client software. Communicator supports the public-key cryptography standard known as PKCS #12, which governs key portability. You can, for example, move an object-signing certificate and its associated private key from one computer to another on a credit-card-sized device called a smart card.</para>
   </refsection>
-  
+
   <refsection id="options">
     <title>Options</title>
 
-<!-- for the moment, I can't find a way for italics and bold tags to work in varlist entries --> 
+<!-- for the moment, I can't find a way for italics and bold tags to work in varlist entries -->
     <variablelist>
       <varlistentry>
         <term>-b basename</term>
@@ -469,23 +469,23 @@ Everything before the = sign on a single line is a keyword, and everything from 
     </para>
 	<para><command>Listing Available Signing Certificates</command></para>
 	<para>You use the -L option to list the nicknames for all available certificates and check which ones are signing certificates.</para>
-<programlisting >signtool -L 
+<programlisting >signtool -L
 
-using certificate directory: /u/jsmith/.netscape 
-S Certificates 
-- ------------ 
-  BBN Certificate Services CA Root 1 
-  IBM World Registry CA 
-  VeriSign Class 1 CA - Individual Subscriber - VeriSign, Inc. 
-  GTE CyberTrust Root CA 
-  Uptime Group Plc. Class 4 CA 
-* Verisign Object Signing Cert 
-  Integrion CA 
-  GTE CyberTrust Secure Server CA 
-  AT&amp;T Directory Services 
-* test object signing cert 
-  Uptime Group Plc. Class 1 CA 
-  VeriSign Class 1 Primary CA 
+using certificate directory: /u/jsmith/.netscape
+S Certificates
+- ------------
+  BBN Certificate Services CA Root 1
+  IBM World Registry CA
+  VeriSign Class 1 CA - Individual Subscriber - VeriSign, Inc.
+  GTE CyberTrust Root CA
+  Uptime Group Plc. Class 4 CA
+* Verisign Object Signing Cert
+  Integrion CA
+  GTE CyberTrust Secure Server CA
+  AT&amp;T Directory Services
+* test object signing cert
+  Uptime Group Plc. Class 1 CA
+  VeriSign Class 1 Primary CA
 - ------------
 
 Certificates that can be used to sign objects have *'s to their left. </programlisting>
@@ -501,7 +501,7 @@ Verisign Object Signing Cert
     Issued by: VeriSign, Inc. - Verisign, Inc.
     Expires: Tue May 19, 1998
 test object signing cert
-    Issued by: test object signing cert (Signtool 1.0 Testing 
+    Issued by: test object signing cert (Signtool 1.0 Testing
 Certificate (960187691))
     Expires: Sun May 17, 1998
 ---------------------------------------</programlisting>
@@ -541,13 +541,13 @@ archive "testjar.jar" has passed crypto verification.
 
 	<para><command>Using Netscape Signing Tool with a ZIP Utility</command></para>
 	<para>To use Netscape Signing Tool with a ZIP utility, you must have the utility in your path environment variable. You should use the zip.exe utility rather than pkzip.exe, which cannot handle long filenames. You can use a ZIP utility instead of the -Z option to package a signed archive into a JAR file after you have signed it:</para>
-<programlisting >cd signdir 
+<programlisting >cd signdir
 
-  zip -r ../myjar.jar * 
-  adding: META-INF/ (stored 0%) 
-  adding: META-INF/manifest.mf (deflated 15%) 
-  adding: META-INF/signtool.sf (deflated 28%) 
-  adding: META-INF/signtool.rsa (stored 0%) 
+  zip -r ../myjar.jar *
+  adding: META-INF/ (stored 0%)
+  adding: META-INF/manifest.mf (deflated 15%)
+  adding: META-INF/signtool.sf (deflated 28%)
+  adding: META-INF/signtool.rsa (stored 0%)
   adding: text.txt (stored 0%)</programlisting>
 
 	<para><command>Generating the Keys and Certificate</command></para>
@@ -580,23 +580,23 @@ Exported certificate to x509.raw and x509.cacert.</programlisting>
 <programlisting >signtool -d "c:\netscape\users\jsmith" -M
 
 using certificate directory: c:\netscape\users\username
-Listing of PKCS11 modules 
------------------------------------------------ 
-	1. Netscape Internal PKCS #11 Module 
-			  (this module is internally loaded) 
-			  slots: 2 slots attached 
-			  status: loaded 
-	  slot: Communicator Internal Cryptographic Services Version 4.0 
-	 token: Communicator Generic Crypto Svcs 
-	  slot: Communicator User Private Key and Certificate Services 
-	 token: Communicator Certificate DB 
-	2. CryptOS 
-			  (this is an external module) 
- DLL name: core32 
-	 slots: 1 slots attached 
-	status: loaded 
-	  slot: Litronic 210 
-	 token: 
+Listing of PKCS11 modules
+-----------------------------------------------
+	1. Netscape Internal PKCS #11 Module
+			  (this module is internally loaded)
+			  slots: 2 slots attached
+			  status: loaded
+	  slot: Communicator Internal Cryptographic Services Version 4.0
+	 token: Communicator Generic Crypto Svcs
+	  slot: Communicator User Private Key and Certificate Services
+	 token: Communicator Certificate DB
+	2. CryptOS
+			  (this is an external module)
+ DLL name: core32
+	 slots: 1 slots attached
+	status: loaded
+	  slot: Litronic 210
+	 token:
 	----------------------------------------------- </programlisting>
 
 	<para><command>Using Netscape Signing Tool and a Smart Card to Sign Files</command></para>

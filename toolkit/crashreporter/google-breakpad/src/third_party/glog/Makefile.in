@@ -487,7 +487,7 @@ COMMON_LIBS = $(PTHREAD_LIBS) $(GFLAGS_LIBS) $(UNWIND_LIBS)
 TEST_CFLAGS = $(GTEST_CFLAGS) $(GMOCK_CFLAGS) $(GFLAGS_CFLAGS) $(AM_CXXFLAGS)
 # Libraries for our unittest.
 TEST_LIBS = $(GTEST_LIBS) $(GMOCK_LIBS) $(GFLAGS_LIBS)
-TESTS_ENVIRONMENT = 
+TESTS_ENVIRONMENT =
 check_SCRIPTS = logging_striplog_test_sh demangle_unittest_sh \
 	signalhandler_unittest_sh
 # Every time you add a unittest to check_SCRIPTS, add it here too
@@ -662,7 +662,7 @@ src/config.h: src/stamp-h1
 src/stamp-h1: $(top_srcdir)/src/config.h.in $(top_builddir)/config.status
 	@rm -f src/stamp-h1
 	cd $(top_builddir) && $(SHELL) ./config.status src/config.h
-$(top_srcdir)/src/config.h.in:  $(am__configure_deps) 
+$(top_srcdir)/src/config.h.in:  $(am__configure_deps)
 	($(am__cd) $(top_srcdir) && $(AUTOHEADER))
 	rm -f src/stamp-h1
 	touch $@
@@ -710,7 +710,7 @@ clean-libLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
-libglog.la: $(libglog_la_OBJECTS) $(libglog_la_DEPENDENCIES) 
+libglog.la: $(libglog_la_OBJECTS) $(libglog_la_DEPENDENCIES)
 	$(libglog_la_LINK) -rpath $(libdir) $(libglog_la_OBJECTS) $(libglog_la_LIBADD) $(LIBS)
 
 clean-noinstPROGRAMS:
@@ -721,37 +721,37 @@ clean-noinstPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-demangle_unittest$(EXEEXT): $(demangle_unittest_OBJECTS) $(demangle_unittest_DEPENDENCIES) 
+demangle_unittest$(EXEEXT): $(demangle_unittest_OBJECTS) $(demangle_unittest_DEPENDENCIES)
 	@rm -f demangle_unittest$(EXEEXT)
 	$(demangle_unittest_LINK) $(demangle_unittest_OBJECTS) $(demangle_unittest_LDADD) $(LIBS)
-logging_striptest0$(EXEEXT): $(logging_striptest0_OBJECTS) $(logging_striptest0_DEPENDENCIES) 
+logging_striptest0$(EXEEXT): $(logging_striptest0_OBJECTS) $(logging_striptest0_DEPENDENCIES)
 	@rm -f logging_striptest0$(EXEEXT)
 	$(logging_striptest0_LINK) $(logging_striptest0_OBJECTS) $(logging_striptest0_LDADD) $(LIBS)
-logging_striptest10$(EXEEXT): $(logging_striptest10_OBJECTS) $(logging_striptest10_DEPENDENCIES) 
+logging_striptest10$(EXEEXT): $(logging_striptest10_OBJECTS) $(logging_striptest10_DEPENDENCIES)
 	@rm -f logging_striptest10$(EXEEXT)
 	$(logging_striptest10_LINK) $(logging_striptest10_OBJECTS) $(logging_striptest10_LDADD) $(LIBS)
-logging_striptest2$(EXEEXT): $(logging_striptest2_OBJECTS) $(logging_striptest2_DEPENDENCIES) 
+logging_striptest2$(EXEEXT): $(logging_striptest2_OBJECTS) $(logging_striptest2_DEPENDENCIES)
 	@rm -f logging_striptest2$(EXEEXT)
 	$(logging_striptest2_LINK) $(logging_striptest2_OBJECTS) $(logging_striptest2_LDADD) $(LIBS)
-logging_unittest$(EXEEXT): $(logging_unittest_OBJECTS) $(logging_unittest_DEPENDENCIES) 
+logging_unittest$(EXEEXT): $(logging_unittest_OBJECTS) $(logging_unittest_DEPENDENCIES)
 	@rm -f logging_unittest$(EXEEXT)
 	$(logging_unittest_LINK) $(logging_unittest_OBJECTS) $(logging_unittest_LDADD) $(LIBS)
-mock_log_test$(EXEEXT): $(mock_log_test_OBJECTS) $(mock_log_test_DEPENDENCIES) 
+mock_log_test$(EXEEXT): $(mock_log_test_OBJECTS) $(mock_log_test_DEPENDENCIES)
 	@rm -f mock_log_test$(EXEEXT)
 	$(mock_log_test_LINK) $(mock_log_test_OBJECTS) $(mock_log_test_LDADD) $(LIBS)
-signalhandler_unittest$(EXEEXT): $(signalhandler_unittest_OBJECTS) $(signalhandler_unittest_DEPENDENCIES) 
+signalhandler_unittest$(EXEEXT): $(signalhandler_unittest_OBJECTS) $(signalhandler_unittest_DEPENDENCIES)
 	@rm -f signalhandler_unittest$(EXEEXT)
 	$(signalhandler_unittest_LINK) $(signalhandler_unittest_OBJECTS) $(signalhandler_unittest_LDADD) $(LIBS)
-stacktrace_unittest$(EXEEXT): $(stacktrace_unittest_OBJECTS) $(stacktrace_unittest_DEPENDENCIES) 
+stacktrace_unittest$(EXEEXT): $(stacktrace_unittest_OBJECTS) $(stacktrace_unittest_DEPENDENCIES)
 	@rm -f stacktrace_unittest$(EXEEXT)
 	$(stacktrace_unittest_LINK) $(stacktrace_unittest_OBJECTS) $(stacktrace_unittest_LDADD) $(LIBS)
-stl_logging_unittest$(EXEEXT): $(stl_logging_unittest_OBJECTS) $(stl_logging_unittest_DEPENDENCIES) 
+stl_logging_unittest$(EXEEXT): $(stl_logging_unittest_OBJECTS) $(stl_logging_unittest_DEPENDENCIES)
 	@rm -f stl_logging_unittest$(EXEEXT)
 	$(stl_logging_unittest_LINK) $(stl_logging_unittest_OBJECTS) $(stl_logging_unittest_LDADD) $(LIBS)
-symbolize_unittest$(EXEEXT): $(symbolize_unittest_OBJECTS) $(symbolize_unittest_DEPENDENCIES) 
+symbolize_unittest$(EXEEXT): $(symbolize_unittest_OBJECTS) $(symbolize_unittest_DEPENDENCIES)
 	@rm -f symbolize_unittest$(EXEEXT)
 	$(symbolize_unittest_LINK) $(symbolize_unittest_OBJECTS) $(symbolize_unittest_LDADD) $(LIBS)
-utilities_unittest$(EXEEXT): $(utilities_unittest_OBJECTS) $(utilities_unittest_DEPENDENCIES) 
+utilities_unittest$(EXEEXT): $(utilities_unittest_OBJECTS) $(utilities_unittest_DEPENDENCIES)
 	@rm -f utilities_unittest$(EXEEXT)
 	$(utilities_unittest_LINK) $(utilities_unittest_OBJECTS) $(utilities_unittest_LDADD) $(LIBS)
 

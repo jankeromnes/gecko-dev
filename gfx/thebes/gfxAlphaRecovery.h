@@ -63,7 +63,7 @@ public:
     /** from cairo-xlib-utils.c, modified */
     /**
      * Given the RGB data for two image surfaces, one a source image composited
-     * with OVER onto a black background, and one a source image composited with 
+     * with OVER onto a black background, and one a source image composited with
      * OVER onto a white background, reconstruct the original image data into
      * black_data.
      *

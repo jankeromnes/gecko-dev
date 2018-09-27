@@ -22,7 +22,7 @@ struct CCoderInfo
   CMethodId MethodID;
   CByteBuffer Props;
   UInt32 NumStreams;
-  
+
   bool IsSimpleCoder() const { return NumStreams == 1; }
 };
 
@@ -61,7 +61,7 @@ public:
         return i;
     return -1;
   }
-  
+
   /*
   int FindBond_for_UnpackStream(UInt32 unpackStream) const
   {
@@ -136,13 +136,13 @@ struct CUInt64DefVector
 {
   CBoolVector Defs;
   CRecordVector<UInt64> Vals;
-  
+
   void Clear()
   {
     Defs.Clear();
     Vals.Clear();
   }
-  
+
   void ReserveDown()
   {
     Defs.ReserveDown();
@@ -159,7 +159,7 @@ struct CUInt64DefVector
     value = 0;
     return false;
   }
-  
+
   bool CheckSize(unsigned size) const { return Defs.Size() == size || Defs.Size() == 0; }
 
   void SetItem(unsigned index, bool defined, UInt64 value);

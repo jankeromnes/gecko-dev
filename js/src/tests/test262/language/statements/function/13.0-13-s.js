@@ -3,7 +3,7 @@
 
 /*---
 info: |
-    Refer 13; 
+    Refer 13;
     The production FunctionBody : SourceElementsopt is evaluated as follows:
 es5id: 13.0-13-s
 description: >
@@ -13,7 +13,7 @@ description: >
 flags: [noStrict]
 ---*/
 
-       
+
 assert.throws(SyntaxError, function() {
             eval("var _13_0_13_fun = new Function(\" \", \"'use strict'; eval = 42;\"); _13_0_13_fun();");
 });

@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -39,7 +39,7 @@ const ShuffleCustom = {
             inst.visitArg(i + 2, func, Arg.Use, GP, 8);
         }
     },
-    
+
     hasNonArgNonControlEffects(inst)
     {
         return false;
@@ -54,7 +54,7 @@ const PatchCustom = {
             inst.visitArg(i, func, role, type, width);
         }
     },
-    
+
     hasNonArgNonControlEffects(inst)
     {
         return inst.patchHasNonArgEffects;
@@ -66,19 +66,19 @@ const CCallCustom = {
     {
         let index = 0;
         inst.visitArg(index++, func, Arg.Use, GP, Ptr); // callee
-        
+
         if (inst.cCallType != Void) {
             inst.visitArg(
                 index++, func, Arg.Def, Arg.typeForB3Type(inst.cCallType),
                 Arg.widthForB3Type(inst.cCallType));
         }
-        
+
         for (let type of inst.cCallArgTypes) {
             inst.visitArg(
                 index++, func, Arg.Use, Arg.typeForB3Type(type), Arg.widthForB3Type(type));
         }
     },
-    
+
     hasNonArgNonControlEffects(inst)
     {
         return true;
@@ -94,7 +94,7 @@ const ColdCCallCustom = {
                 return func(arg, Arg.cooled(role), type, width);
             });
     },
-    
+
     hasNonArgNonControlEffects(inst)
     {
         return true;

@@ -22,12 +22,12 @@ inline void EnablePrivilege_SymLink()
   /* Probably we do not to set any Privilege for junction points.
      But we need them for Symbolic links */
   NSecurity::EnablePrivilege(SE_RESTORE_NAME);
-  
+
   /* Probably we need only SE_RESTORE_NAME, but there is also
      SE_CREATE_SYMBOLIC_LINK_NAME. So we set it also. Do we need it? */
 
   NSecurity::EnablePrivilege(TEXT("SeCreateSymbolicLinkPrivilege")); // SE_CREATE_SYMBOLIC_LINK_NAME
-  
+
   // Do we need to set SE_BACKUP_NAME ?
 }
 

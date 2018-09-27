@@ -38,10 +38,10 @@ LDFLAGSCTESTFW += $(LDFLAGS_FINI)
 endif
 
 ## We need to delete things prior to linking, or else we'll get
-## SEVERE ERROR: output file in use ..  on AIX. 
+## SEVERE ERROR: output file in use ..  on AIX.
 ## But, shell script version should NOT delete target as we don't
 ## have $@ in that context.  (SH = only shell script, icu-config)
-AIX_PREDELETE=rm -f $@ ; 
+AIX_PREDELETE=rm -f $@ ;
 #SH# AIX_PREDELETE=
 
 ## Commands to link
@@ -59,7 +59,7 @@ SHLIB.cc=	$(AIX_PREDELETE) $(CXX) -qmkshrobj -G $(LDFLAGS)
 
 ## Compiler switch to embed a runtime search path
 LD_RPATH=	-I
-LD_RPATH_PRE=	
+LD_RPATH_PRE=
 
 ## Environment variable to set a runtime search path
 LDLIBRARYPATH_ENVVAR = LIBPATH
@@ -72,7 +72,7 @@ ifeq ($(ENABLE_SHARED),YES)
 SO_TARGET_VERSION_SUFFIX = $(SO_TARGET_VERSION_MAJOR)
 endif
 
-LD_SONAME = 
+LD_SONAME =
 
 ## The type of assembly needed when pkgdata is used for generating shared libraries.
 GENCCODE_ASSEMBLY=-a xlc
@@ -92,11 +92,11 @@ SHARED_OBJECT_NO_VERSION=  $(basename $(SO_TARGET)).$(SOBJ)
 
 ## Build archive from shared object
 %.a : %.so
-	ln -f $< $(SHARED_OBJECT_NO_VERSION) 
+	ln -f $< $(SHARED_OBJECT_NO_VERSION)
 	$(AIX_PREDELETE) $(AR) $(ARFLAGS) $@ $(SHARED_OBJECT_NO_VERSION)
 	rm -f $(SHARED_OBJECT_NO_VERSION)
 $(LIBDIR)/%.a : %.so
-	ln -f $< $(SHARED_OBJECT_NO_VERSION) 
+	ln -f $< $(SHARED_OBJECT_NO_VERSION)
 	$(AIX_PREDELETE) $(AR) $(ARFLAGS) $@ $(SHARED_OBJECT_NO_VERSION)
 	rm -f $(SHARED_OBJECT_NO_VERSION)
 

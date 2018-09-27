@@ -100,7 +100,7 @@ function test_channel(createChanClosure) {
   var inputStream = chan.open2();
   check_open_throws(NS_ERROR_IN_PROGRESS);
   check_async_open_throws([NS_ERROR_IN_PROGRESS, NS_ERROR_ALREADY_OPENED]);
-  
+
   // Then, asynchronous one
   chan = createChanClosure();
   chan.asyncOpen2(listener);

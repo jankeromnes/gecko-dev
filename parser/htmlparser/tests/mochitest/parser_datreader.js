@@ -5,7 +5,7 @@
 
 /**
  * A test suite that runs WHATWG HTML parser tests.
- * The tests are from html5lib. 
+ * The tests are from html5lib.
  *
  * http://html5lib.googlecode.com/
  */
@@ -14,7 +14,7 @@
  * A few utility functions.
  */
 function log(entry) {
-    
+
 }
 
 function startsWith(s, s2) {
@@ -94,7 +94,7 @@ function* test_parser(testlist) {
 }
 
 /**
- * Transforms a DOM document to a string matching the format in 
+ * Transforms a DOM document to a string matching the format in
  * the test cases.
  *
  * @param the DOM document
@@ -165,7 +165,7 @@ function addLevels(walker, buf, indent) {
             }
             var keys = Object.keys(valuesByName).sort();
             for (var i = 0; i < keys.length; ++i) {
-              buf += "\n" + indent + "  " + keys[i] + 
+              buf += "\n" + indent + "  " + keys[i] +
                      "=\"" + valuesByName[keys[i]] +"\"";
             }
           }

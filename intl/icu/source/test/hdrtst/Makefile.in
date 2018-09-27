@@ -8,7 +8,7 @@
 ##  THE PURPOSE OF THIS TEST
 ##
 ##     This tests all public header files  - as installed.  icu-config needs to be on the PATH
-##  
+##
 ##     To run it simply type 'make check' after ICU is installed. You SHOULD see:
 ##
 ##  unicode/uchar.h -	0
@@ -16,7 +16,7 @@
 ##  unicode/ucnv.h -	0
 ##
 ##    .. etc.  Anything other than zero is an error. (except for the deprecation tests, where '1' is the correct value)
-##              
+##
 ##
 ##  If a header fails the C compile because it's a C++ header, add it to the
 ##  file named 'cxxfiles.txt' in this directory.
@@ -39,7 +39,7 @@ ECHO_T=@ECHO_T@
 ECHO_C=@ECHO_C@
 ECHO_N=@ECHO_N@
 
-all: 
+all:
 	@echo Please read this Makefile for more information.
 	@echo run \'$(MAKE) check\' to run the test "(use -k if you don't want to stop on errs)"
 

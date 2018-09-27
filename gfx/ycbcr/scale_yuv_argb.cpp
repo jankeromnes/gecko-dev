@@ -54,7 +54,7 @@ extern "C" {
 // -[3] Modified scaling functions as to handle YUV conversion buffer and
 //      use YUVBuferIter.
 // -[4] Color conversion function selections in YUVBuferIter were borrowed from
-//      I444ToARGBMatrix(), I422ToARGBMatrix() and I420ToARGBMatrix() 
+//      I444ToARGBMatrix(), I422ToARGBMatrix() and I420ToARGBMatrix()
 
 static __inline int Abs(int v) {
   return v >= 0 ? v : -v;
@@ -531,7 +531,7 @@ static void ScaleYUVToARGBBilinearDown(int src_width, int src_height,
   // Allocate 2 row of ARGB for source conversion.
   const int kRowSize = (src_width * 4 + 15) & ~15;
   align_buffer_64(argb_cnv_row, kRowSize * 2);
-  uint8* argb_cnv_rowptr = argb_cnv_row; 
+  uint8* argb_cnv_rowptr = argb_cnv_row;
   int argb_cnv_rowstride = kRowSize;
 
 #if defined(HAS_INTERPOLATEROW_SSSE3)

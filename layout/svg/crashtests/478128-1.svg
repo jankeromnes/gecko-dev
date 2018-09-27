@@ -6,7 +6,7 @@
       document.documentElement.style.MozColumnCount = '15';
     }
     window.onload = function() { setTimeout(boom, 20); };
-    
+
   </script>
 
   <foreignObject width="50" height="50" filter="url(#f1)"/>

@@ -60,7 +60,7 @@ child:
   async GiveBuffer(Shmem aShmem);
 
   async PurgeShmems();
-  
+
 
 parent:
   async __delete__();

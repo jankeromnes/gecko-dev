@@ -59,7 +59,7 @@ struct cell_aa  {
     void set_cover(int c, int a);
     void add_cover(int c, int a);
 };
-class outline_aa 
+class outline_aa
 {
     enum cell_block_scale_e {
         cell_block_shift = 12,
@@ -137,7 +137,7 @@ private:
     int       m_max_y;
     bool      m_sorted;
 };
-class scanline_hit_test 
+class scanline_hit_test
 {
 public:
     scanline_hit_test(int x) : m_x(x), m_hit(false) {}
@@ -171,7 +171,7 @@ enum filling_rule_e {
     fill_non_zero,
     fill_even_odd
 };
-class rasterizer_scanline_aa 
+class rasterizer_scanline_aa
 {
     enum status {
         status_initial,

@@ -26,7 +26,7 @@ info: |
   3. Let globalObject be the binding object for ObjRec.
   4. Let hasProperty be ? HasOwnProperty(globalObject, N).
   5. If hasProperty is true, return true.
-  6. Return ? IsExtensible(globalObject). 
+  6. Return ? IsExtensible(globalObject).
 ---*/
 
 var executed = false;

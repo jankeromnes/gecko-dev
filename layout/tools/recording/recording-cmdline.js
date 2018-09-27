@@ -5,7 +5,7 @@
 ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
 
 const nsISupports                    = Ci.nsISupports;
-  
+
 const nsICommandLine                 = Ci.nsICommandLine;
 const nsICommandLineHandler          = Ci.nsICommandLineHandler;
 const nsISupportsString              = Ci.nsISupportsString;

@@ -70,7 +70,7 @@ function nextTest()
   }
   else {
     // this second test ensures that the popupshowing coordinates when a popup in
-    // a frame is opened are correct 
+    // a frame is opened are correct
     isSecondTest = true;
     synthesizeMouse(document.getElementById("button"), 6, 6, { });
   }

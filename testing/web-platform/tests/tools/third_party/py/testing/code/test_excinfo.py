@@ -886,7 +886,7 @@ raise ValueError()
                              ids=['funcargs', 'nofuncargs'])
     def test_format_excinfo(self, importasmod,
                             style, showlocals, tbfilter, funcargs):
-        
+
         mod = importasmod("""
             def g(x):
                 raise ValueError(x)

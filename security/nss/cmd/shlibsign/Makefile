@@ -80,7 +80,7 @@ include ../platrules.mk
 
 SRCDIR = $(call core_abspath,.)
 
-%.chk: %.$(DLL_SUFFIX) 
+%.chk: %.$(DLL_SUFFIX)
 ifeq ($(OS_TARGET), OS2)
 	cd $(OBJDIR) ; cmd.exe /c $(SRCDIR)/sign.cmd $(DIST) \
 	$(call core_abspath,$(OBJDIR)) $(OS_TARGET) \

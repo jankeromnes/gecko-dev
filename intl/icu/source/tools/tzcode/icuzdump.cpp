@@ -266,7 +266,7 @@ private:
     int32_t numids;
 };
 
-enum { 
+enum {
   kOptHelpH = 0,
   kOptHelpQuestionMark,
   kOptAllZones,

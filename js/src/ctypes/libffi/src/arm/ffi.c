@@ -80,19 +80,19 @@ static size_t ffi_put_arg(ffi_type **arg_type, void **arg, char *stack)
       case FFI_TYPE_SINT8:
         *(signed int *) argp = (signed int)*(SINT8 *)(* p_argv);
         break;
-        
+
       case FFI_TYPE_UINT8:
         *(unsigned int *) argp = (unsigned int)*(UINT8 *)(* p_argv);
         break;
-        
+
       case FFI_TYPE_SINT16:
         *(signed int *) argp = (signed int)*(SINT16 *)(* p_argv);
         break;
-        
+
       case FFI_TYPE_UINT16:
         *(unsigned int *) argp = (unsigned int)*(UINT16 *)(* p_argv);
         break;
-        
+
       case FFI_TYPE_STRUCT:
         memcpy(argp, *p_argv, (*p_arg)->size);
         break;
@@ -120,7 +120,7 @@ static size_t ffi_put_arg(ffi_type **arg_type, void **arg, char *stack)
 }
 /* ffi_prep_args is called by the assembly routine once stack space
    has been allocated for the function's arguments
-   
+
    The vfp_space parameter is the load area for VFP regs, the return
    value is cif->vfp_used (word bitset of VFP regs used for passing
    arguments). These are only used for the VFP hard-float ABI.
@@ -132,7 +132,7 @@ int ffi_prep_args_SYSV(char *stack, extended_cif *ecif, float *vfp_space)
   register char *argp;
   register ffi_type **p_arg;
   argp = stack;
-  
+
 
   if ( ecif->cif->flags == FFI_TYPE_STRUCT ) {
     *(void **) argp = ecif->rvalue;
@@ -169,7 +169,7 @@ int ffi_prep_args_VFP(char *stack, extended_cif *ecif, float *vfp_space)
    * registers. */
   regp = stack;
   eo_regp = argp = regp + 16;
-  
+
 
   /* if the function returns an FFI_TYPE_STRUCT in memory, that address is
    * passed in r0 to the function */
@@ -197,7 +197,7 @@ int ffi_prep_args_VFP(char *stack, extended_cif *ecif, float *vfp_space)
       else if (!done_with_regs && !is_vfp_type)
         {
           char *tregp = ffi_align(p_arg, regp);
-          size_t size = (*p_arg)->size; 
+          size_t size = (*p_arg)->size;
           size = (size < 4)? 4 : size; // pad
           /* Check if there is space left in the aligned register area to place
            * the argument */
@@ -209,10 +209,10 @@ int ffi_prep_args_VFP(char *stack, extended_cif *ecif, float *vfp_space)
               FFI_ASSERT(regp <= argp);
               continue;
             }
-          /* In case there are no arguments in the stack area yet, 
+          /* In case there are no arguments in the stack area yet,
           the argument is passed in the remaining core registers and on the
           stack. */
-          else if (!stack_used) 
+          else if (!stack_used)
             {
               stack_used = 1;
               done_with_regs = 1;
@@ -234,7 +234,7 @@ int ffi_prep_args_VFP(char *stack, extended_cif *ecif, float *vfp_space)
 ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
 {
   int type_code;
-  /* Round the stack up to a multiple of 8 bytes.  This isn't needed 
+  /* Round the stack up to a multiple of 8 bytes.  This isn't needed
      everywhere, but it is on some platforms, and it doesn't harm anything
      when it isn't needed.  */
   cif->bytes = (cif->bytes + 7) & ~7;
@@ -305,20 +305,20 @@ void ffi_call(ffi_cif *cif, void (*fn)(void), void *rvalue, void **avalue)
 {
   extended_cif ecif;
 
-  int small_struct = (cif->flags == FFI_TYPE_INT 
+  int small_struct = (cif->flags == FFI_TYPE_INT
 		      && cif->rtype->type == FFI_TYPE_STRUCT);
   int vfp_struct = (cif->flags == FFI_TYPE_STRUCT_VFP_FLOAT
 		    || cif->flags == FFI_TYPE_STRUCT_VFP_DOUBLE);
 
   unsigned int temp;
-  
+
   ecif.cif = cif;
   ecif.avalue = avalue;
 
   /* If the return value is a struct and we don't have a return	*/
   /* value address then we need to make one			*/
 
-  if ((rvalue == NULL) && 
+  if ((rvalue == NULL) &&
       (cif->flags == FFI_TYPE_STRUCT))
     {
       ecif.rvalue = alloca(cif->rtype->size);
@@ -333,7 +333,7 @@ void ffi_call(ffi_cif *cif, void (*fn)(void), void *rvalue, void **avalue)
   else
     ecif.rvalue = rvalue;
 
-  switch (cif->abi) 
+  switch (cif->abi)
     {
     case FFI_SYSV:
       ffi_call_SYSV (fn, &ecif, cif->bytes, cif->flags, ecif.rvalue);
@@ -354,13 +354,13 @@ void ffi_call(ffi_cif *cif, void (*fn)(void), void *rvalue, void **avalue)
       FFI_ASSERT(rvalue != NULL);
       memcpy (rvalue, &temp, cif->rtype->size);
     }
-    
+
   else if (vfp_struct)
     {
       FFI_ASSERT(rvalue != NULL);
       memcpy (rvalue, ecif.rvalue, cif->rtype->size);
     }
-    
+
 }
 
 /** private members **/
@@ -378,7 +378,7 @@ void ffi_closure_VFP (ffi_closure *);
 /* This function is jumped to by the trampoline */
 
 unsigned int FFI_HIDDEN
-ffi_closure_inner (ffi_closure *closure, 
+ffi_closure_inner (ffi_closure *closure,
 		   void **respp, void *args, void *vfp_args)
 {
   // our various things...
@@ -386,10 +386,10 @@ ffi_closure_inner (ffi_closure *closure,
   void         **arg_area;
 
   cif         = closure->cif;
-  arg_area    = (void**) alloca (cif->nargs * sizeof (void*));  
+  arg_area    = (void**) alloca (cif->nargs * sizeof (void*));
 
   /* this call will initialize ARG_AREA, such that each
-   * element in that array points to the corresponding 
+   * element in that array points to the corresponding
    * value on the stack; and if the function returns
    * a structure, it will re-set RESP to point to the
    * structure return address.  */
@@ -404,7 +404,7 @@ ffi_closure_inner (ffi_closure *closure,
 }
 
 /*@-exportheader@*/
-static void 
+static void
 ffi_prep_incoming_args_SYSV(char *stack, void **rvalue,
 			    void **avalue, ffi_cif *cif,
 			    /* Used only under VFP hard-float ABI. */
@@ -440,12 +440,12 @@ ffi_prep_incoming_args_SYSV(char *stack, void **rvalue,
       p_argv++;
       argp += z;
     }
-  
+
   return;
 }
 
 /*@-exportheader@*/
-static void 
+static void
 ffi_prep_incoming_args_VFP(char *stack, void **rvalue,
 			    void **avalue, ffi_cif *cif,
 			    /* Used only under VFP hard-float ABI. */
@@ -474,7 +474,7 @@ ffi_prep_incoming_args_VFP(char *stack, void **rvalue,
   for (i = cif->nargs, p_arg = cif->arg_types; (i != 0); i--, p_arg++)
     {
     size_t z;
-    is_vfp_type = vfp_type_p (*p_arg); 
+    is_vfp_type = vfp_type_p (*p_arg);
 
     if(vi < cif->vfp_nargs && is_vfp_type)
       {
@@ -485,12 +485,12 @@ ffi_prep_incoming_args_VFP(char *stack, void **rvalue,
       {
         char* tregp = ffi_align(p_arg, regp);
 
-        z = (*p_arg)->size; 
+        z = (*p_arg)->size;
         z = (z < 4)? 4 : z; // pad
-        
+
         /* if the arguments either fits into the registers or uses registers
          * and stack, while we haven't read other things from the stack */
-        if(tregp + z <= eo_regp || !stack_used) 
+        if(tregp + z <= eo_regp || !stack_used)
           {
           /* because we're little endian, this is what it turns into. */
           *p_argv = (void*) tregp;
@@ -529,7 +529,7 @@ ffi_prep_incoming_args_VFP(char *stack, void **rvalue,
     p_argv++;
     argp += z;
     }
-  
+
   return;
 }
 

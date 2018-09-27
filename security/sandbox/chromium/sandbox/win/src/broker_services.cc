@@ -83,7 +83,7 @@ void JobTracker::FreeResources() {
     policy = nullptr;
   }
 }
- 
+
 // Helper structure that allows the broker to track peer processes
 struct PeerTracker {
   PeerTracker(DWORD process_id, HANDLE broker_job_port)

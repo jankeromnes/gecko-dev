@@ -35,10 +35,10 @@ namespace mozilla {
  * Creates an 8-bit alpha channel context for callers to draw in,
  * spreads the contents of that context, blurs the contents, and applies
  * it as an alpha mask on a different existing context.
- * 
+ *
  * A spread N makes each output pixel the maximum value of all source
  * pixels within a square of side length 2N+1 centered on the output pixel.
- * 
+ *
  * A temporary surface is created in the Init function. The caller then draws
  * any desired content onto the context acquired through GetContext, and lastly
  * calls Paint to apply the blurred content as an alpha mask.

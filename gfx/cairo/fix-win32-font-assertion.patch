@@ -10,11 +10,11 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-font.c b/gfx/cairo/cairo/src/cairo-
          _cairo_error_throw (CAIRO_STATUS_NO_MEMORY);
  	goto FAIL;
      }
- 
+
      _cairo_win32_font_face_init_key (font_face, logfont, font);
      _cairo_font_face_init (&font_face->base, &_cairo_win32_font_face_backend);
 -    assert (font_face->base.hash_entry.hash == key.base.hash_entry.hash);
- 
+
      if (!font) {
 +        assert (font_face->base.hash_entry.hash == key.base.hash_entry.hash);
          status = _cairo_hash_table_insert (hash_table,
@@ -22,6 +22,6 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-font.c b/gfx/cairo/cairo/src/cairo-
          if (unlikely (status))
  	    goto FAIL;
      }
- 
+
  DONE:
      if (!font) {

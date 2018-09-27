@@ -135,5 +135,5 @@ ScopedGfxFeatureReporter::AppNote(const nsACString& aMessage)
     SystemGroup::Dispatch(TaskCategory::Other, r.forget());
   }
 }
-  
+
 } // end namespace mozilla

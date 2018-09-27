@@ -41,4 +41,3 @@ var node = document.documentElement
 traverse(node, "")
 dump("\n")
 
-  

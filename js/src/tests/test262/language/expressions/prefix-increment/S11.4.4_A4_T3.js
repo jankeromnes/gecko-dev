@@ -14,7 +14,7 @@ if (++x !== 1 + 1) {
 }
 
 //CHECK#2
-var x = "x"; 
+var x = "x";
 if (isNaN(++x) !== true) {
   $ERROR('#2: var x = "x"; ++x === Not-a-Number. Actual: ' + (++x));
 }

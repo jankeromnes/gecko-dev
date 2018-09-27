@@ -7,21 +7,21 @@
 CFG=Alone - Win32 DebugU
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
-!MESSAGE 
+!MESSAGE
 !MESSAGE NMAKE /f "Alone.mak".
-!MESSAGE 
+!MESSAGE
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
-!MESSAGE 
+!MESSAGE
 !MESSAGE NMAKE /f "Alone.mak" CFG="Alone - Win32 DebugU"
-!MESSAGE 
+!MESSAGE
 !MESSAGE Possible choices for configuration are:
-!MESSAGE 
+!MESSAGE
 !MESSAGE "Alone - Win32 Release" (based on "Win32 (x86) Console Application")
 !MESSAGE "Alone - Win32 Debug" (based on "Win32 (x86) Console Application")
 !MESSAGE "Alone - Win32 ReleaseU" (based on "Win32 (x86) Console Application")
 !MESSAGE "Alone - Win32 DebugU" (based on "Win32 (x86) Console Application")
-!MESSAGE 
+!MESSAGE
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
@@ -131,7 +131,7 @@ LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /out:"c:\UTIL\7za.exe" /pdbtype:sept
 # ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /out:"c:\UTIL\7zr.exe" /pdbtype:sept
 
-!ENDIF 
+!ENDIF
 
 # Begin Target
 
@@ -1252,7 +1252,7 @@ SOURCE=..\..\..\..\C\Sha256.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1280,7 +1280,7 @@ SOURCE=..\..\..\..\C\Xz.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1308,7 +1308,7 @@ SOURCE=..\..\..\..\C\XzCrc64.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1336,7 +1336,7 @@ SOURCE=..\..\..\..\C\XzCrc64Opt.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1360,7 +1360,7 @@ SOURCE=..\..\..\..\C\XzDec.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1384,7 +1384,7 @@ SOURCE=..\..\..\..\C\XzEnc.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1412,7 +1412,7 @@ SOURCE=..\..\..\..\C\XzIn.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # End Group
@@ -1447,7 +1447,7 @@ SOURCE=..\..\..\..\C\7zCrcOpt.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1476,7 +1476,7 @@ SOURCE=..\..\..\..\C\Aes.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1504,7 +1504,7 @@ SOURCE=..\..\..\..\C\AesOpt.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1537,7 +1537,7 @@ SOURCE=..\..\..\..\C\Bcj2.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1565,7 +1565,7 @@ SOURCE=..\..\..\..\C\Bcj2Enc.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1609,7 +1609,7 @@ SOURCE=..\..\..\..\C\CpuArch.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1637,7 +1637,7 @@ SOURCE=..\..\..\..\C\Delta.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1695,7 +1695,7 @@ SOURCE=..\..\..\..\C\Lzma2Dec.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1723,7 +1723,7 @@ SOURCE=..\..\..\..\C\Lzma2DecMt.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1751,7 +1751,7 @@ SOURCE=..\..\..\..\C\Lzma2Enc.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1779,7 +1779,7 @@ SOURCE=..\..\..\..\C\LzmaDec.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1816,7 +1816,7 @@ SOURCE=..\..\..\..\C\MtCoder.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File
@@ -1844,7 +1844,7 @@ SOURCE=..\..\..\..\C\MtDec.c
 
 # SUBTRACT CPP /YX /Yc /Yu
 
-!ENDIF 
+!ENDIF
 
 # End Source File
 # Begin Source File

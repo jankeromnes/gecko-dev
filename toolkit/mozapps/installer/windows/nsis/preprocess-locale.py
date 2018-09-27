@@ -7,7 +7,7 @@
 #
 # Preprocesses installer locale properties files and creates a basic NSIS nlf
 # file when invoked with --preprocess-locale.
-# 
+#
 # Converts a UTF-8 file to a new UTF-16LE file when invoked with
 # --convert-utf8-utf16le.
 

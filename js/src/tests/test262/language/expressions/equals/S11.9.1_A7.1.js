@@ -33,7 +33,7 @@ if ((new Object() == new Object()) !== false) {
 
 //CHECK#5
 var x, y;
-x = {}; 
+x = {};
 y = x;
 if ((x == y) !== true) {
   $ERROR('#5: x = {}; y = x; (x == y) === true');

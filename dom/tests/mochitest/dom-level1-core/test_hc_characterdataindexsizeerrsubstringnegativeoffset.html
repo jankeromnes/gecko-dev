@@ -38,13 +38,13 @@ function setUpPage() {
        setImplementationAttribute("signed", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "hc_staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -55,7 +55,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -74,17 +74,17 @@ var docName = 'hc_characterdataindexsizeerrsubstringnegativeoffset';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
+*
     The "substringData(offset,count)" method raises an
    INDEX_SIZE_ERR DOMException if the specified offset
-   is negative. 
-   
+   is negative.
+
    Retrieve the character data of the last child of the
    first employee and invoke its "substringData(offset,count)
    method with offset=-5 and count=3.  It should raise the
@@ -103,7 +103,7 @@ function hc_characterdataindexsizeerrsubstringnegativeoffset() {
       var nameNode;
       var child;
       var badString;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -113,7 +113,7 @@ function hc_characterdataindexsizeerrsubstringnegativeoffset() {
       nameNode = elementList.item(0);
       child = nameNode.firstChild;
 
-      
+
 	{
 		success = false;
 		try {
@@ -133,12 +133,12 @@ function hc_characterdataindexsizeerrsubstringnegativeoffset() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/hc_characterdataindexsizeerrsubstringnegativeoffset</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 <iframe name="doc" src="files/hc_staff.html"></iframe>
 <br>

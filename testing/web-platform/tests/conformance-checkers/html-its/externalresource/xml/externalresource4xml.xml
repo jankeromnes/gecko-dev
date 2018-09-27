@@ -1,5 +1,5 @@
 <doc
-  xmlns:its="http://www.w3.org/2005/11/its" 
+  xmlns:its="http://www.w3.org/2005/11/its"
   xmlns:dbk="http://docbook.org/ns/docbook" >
  <its:rules version="2.0">
    <its:param name="externalResourceParam">movie-frame.gif</its:param>

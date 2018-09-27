@@ -16,7 +16,7 @@
   <!--=  All Rights Reserved.                                              =-->
   <!--=  See http://www.w3.org/Consortium/Legal/.                          =-->
   <!--======================================================================-->
-  
+
   <title id="test-title">$RCSfile: struct-dom-11-f.svg,v $</title>
   <defs>
     <font-face
@@ -50,7 +50,7 @@
 				var corners = [];
 				for(var i = 0; i < 4; i++)
 					corners.push(svg.createSVGPoint());
-				
+
 				corners[0].x = r.x;
 				corners[0].y = r.y;
 				corners[1].x = r.x + r.width;
@@ -62,30 +62,30 @@
 
 				for(var i = 0; i < 4; i++)
 					corners[i] = corners[i].matrixTransform(ctm);
-				
+
 				var min = svg.createSVGPoint();
 				var max = svg.createSVGPoint();
 				min.x = corners[0].x;
 				min.y = corners[0].y;
 				max.x = corners[0].x;
 				max.y = corners[0].y;
-				
+
 				for(var i = 1; i < 4; i++)
 				{
 					var x = corners[i].x;
 					var y = corners[i].y;
-					
+
 					if(x < min.x)
 						min.x = x;
 					else if(x > max.x)
 						max.x = x;
-					
+
 					if(y < min.y)
 						min.y = y;
 					else if(y > max.y)
 						max.y = y;
 				}
-				
+
 				var res = svg.createSVGRect();
 				res.x = min.x;
 				res.y = min.y;
@@ -93,7 +93,7 @@
 				res.height = max.y - min.y;
 				return res;
 			}
-		
+
       var svg = document.documentElement,
           c = document.getElementById('c'),
           r1 = document.getElementById('r1'),
@@ -109,9 +109,9 @@
         r.y = 95;
         r.width = 5;
         r.height = 5;
-		
+
 				r = userspace2viewport(g1, r);
-		
+
         nl = svg.getIntersectionList(r, null);
         if (nl && nl.length == 1) {
           c1.parentNode.removeChild(c1);
@@ -127,7 +127,7 @@
         r.height = 20;
 
 				r = userspace2viewport(g1, r);
-				
+
         nl = svg.getEnclosureList(r, null);
         if (nl && nl.length == 1) {
           c2.parentNode.removeChild(c2);

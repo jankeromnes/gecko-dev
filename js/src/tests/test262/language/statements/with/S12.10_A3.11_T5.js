@@ -15,7 +15,7 @@ flags: [noStrict]
 this.p1 = 1;
 var result = "result";
 var value = "value";
-var myObj = {p1: 'a', 
+var myObj = {p1: 'a',
              value: 'myObj_value',
              valueOf : function(){return 'obj_valueOf';}
 }

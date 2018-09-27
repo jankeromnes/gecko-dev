@@ -15,7 +15,7 @@
   </script>
   <rect height="90" width="90" fill="green"></rect>
   <rect x="40" y="40" width="10" height="10" fill="red">
-    <animate attributeName="x" 
+    <animate attributeName="x"
              dur="5s" values="40; 41; 42; 43; 44; 45; 46; 47; 48; 49; 50; -950"
              calcMode="paced" fill="freeze"/>
   </rect>

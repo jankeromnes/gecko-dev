@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=662678
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=662678">Mozilla Bug 662678</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -140,7 +140,7 @@ var event = DeviceMotionEvent;
 ok(!!event, "Should have seen DeviceMotionEvent!");
 
 event = document.createEvent("DeviceMotionEvent");
-event.initDeviceMotionEvent('devicemotion', true, true, 
+event.initDeviceMotionEvent('devicemotion', true, true,
                             {x:1.5,y:2.5,z:3.5},
                             {x:4.5,y:5.5,z:6.5},
                             {alpha:7.5,beta:8.5,gamma:9.5},

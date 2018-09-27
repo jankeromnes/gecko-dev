@@ -69,7 +69,7 @@ G_CONST_RETURN gchar* atk_document_get_document_type (AtkDocument   *document);
 gpointer atk_document_get_document (AtkDocument   *document);
 G_CONST_RETURN gchar* atk_document_get_locale (AtkDocument *document);
 AtkAttributeSet*      atk_document_get_attributes (AtkDocument *document);
-G_CONST_RETURN gchar* atk_document_get_attribute_value (AtkDocument *document, 
+G_CONST_RETURN gchar* atk_document_get_attribute_value (AtkDocument *document,
                                                         const gchar *attribute_name);
 gboolean              atk_document_set_attribute_value (AtkDocument *document,
                                                         const gchar *attribute_name,

@@ -5,7 +5,7 @@
 #include "ia32_reg.h"
 #include "x86_operand_list.h"
 
-/* Conventions: Register operands which are aliases of another register 
+/* Conventions: Register operands which are aliases of another register
  *   operand (e.g. AX in one operand and AL in another) assume that the
  *   operands are different registers and that alias tracking will resolve
  *   data flow. This means that something like
@@ -17,86 +17,86 @@ typedef struct {
 	uint32_t operand;
 } op_implicit_list_t;
 
-static op_implicit_list_t list_aaa[] = 
+static op_implicit_list_t list_aaa[] =
 	/* 37 : AAA : rw AL */
 	/* 3F : AAS : rw AL */
 	{{ OP_R | OP_W, REG_BYTE_OFFSET }, {0}};	/* aaa */
 
-static op_implicit_list_t list_aad[] = 
+static op_implicit_list_t list_aad[] =
 	/* D5 0A, D5 (ib) : AAD : rw AX */
 	/* D4 0A, D4 (ib) : AAM : rw AX */
 	{{ OP_R | OP_W, REG_WORD_OFFSET }, {0}};	/* aad */
 
-static op_implicit_list_t list_call[] = 
+static op_implicit_list_t list_call[] =
 	/* E8, FF, 9A, FF : CALL : rw ESP, rw EIP */
 	/* C2, C3, CA, CB : RET  : rw ESP, rw EIP */
-	{{ OP_R | OP_W, REG_EIP_INDEX }, 
+	{{ OP_R | OP_W, REG_EIP_INDEX },
 	 { OP_R | OP_W, REG_ESP_INDEX }, {0}};	/* call, ret */
 
-static op_implicit_list_t list_cbw[] = 
+static op_implicit_list_t list_cbw[] =
 	/* 98 : CBW : r AL, rw AX */
 	{{ OP_R | OP_W, REG_WORD_OFFSET },
 	 { OP_R, REG_BYTE_OFFSET}, {0}};		/* cbw */
 
-static op_implicit_list_t list_cwde[] = 
+static op_implicit_list_t list_cwde[] =
 	/* 98 : CWDE : r AX, rw EAX */
 	{{ OP_R | OP_W, REG_DWORD_OFFSET },
 	 { OP_R, REG_WORD_OFFSET }, {0}};		/* cwde */
 
-static op_implicit_list_t list_clts[] = 
+static op_implicit_list_t list_clts[] =
 	/* 0F 06 : CLTS : rw CR0 */
 	{{ OP_R | OP_W, REG_CTRL_OFFSET}, {0}};	/* clts */
 
-static op_implicit_list_t list_cmpxchg[] = 
+static op_implicit_list_t list_cmpxchg[] =
 	/* 0F B0 : CMPXCHG : rw AL */
 	{{ OP_R | OP_W, REG_BYTE_OFFSET }, {0}};	/* cmpxchg */
 
-static op_implicit_list_t list_cmpxchgb[] = 
+static op_implicit_list_t list_cmpxchgb[] =
 	/* 0F B1 : CMPXCHG : rw EAX */
 	{{ OP_R | OP_W, REG_DWORD_OFFSET }, {0}};	/* cmpxchg */
 
-static op_implicit_list_t list_cmpxchg8b[] = 
+static op_implicit_list_t list_cmpxchg8b[] =
 	/* 0F C7 : CMPXCHG8B : rw EDX, rw EAX, r ECX, r EBX */
-	{{ OP_R | OP_W, REG_DWORD_OFFSET }, 
-	 { OP_R | OP_W, REG_DWORD_OFFSET + 2 }, 
-	 { OP_R, REG_DWORD_OFFSET + 1 }, 
+	{{ OP_R | OP_W, REG_DWORD_OFFSET },
+	 { OP_R | OP_W, REG_DWORD_OFFSET + 2 },
+	 { OP_R, REG_DWORD_OFFSET + 1 },
 	 { OP_R, REG_DWORD_OFFSET + 3 }, {0}};	/* cmpxchg8b */
 
-static op_implicit_list_t list_cpuid[] = 
+static op_implicit_list_t list_cpuid[] =
 	/* 0F A2 : CPUID : rw EAX, w EBX, w ECX, w EDX */
-	{{ OP_R | OP_W, REG_DWORD_OFFSET }, 
-	 { OP_W, REG_DWORD_OFFSET + 1 }, 
-	 { OP_W, REG_DWORD_OFFSET + 2 }, 
+	{{ OP_R | OP_W, REG_DWORD_OFFSET },
+	 { OP_W, REG_DWORD_OFFSET + 1 },
+	 { OP_W, REG_DWORD_OFFSET + 2 },
 	 { OP_W, REG_DWORD_OFFSET + 3 }, {0}};	/* cpuid */
 
-static op_implicit_list_t list_cwd[] = 
+static op_implicit_list_t list_cwd[] =
 	/* 99 : CWD/CWQ : rw EAX, w EDX */
-	{{ OP_R | OP_W, REG_DWORD_OFFSET }, 
+	{{ OP_R | OP_W, REG_DWORD_OFFSET },
 	 { OP_W, REG_DWORD_OFFSET + 2 }, {0}};	/* cwd */
 
-static op_implicit_list_t list_daa[] = 
+static op_implicit_list_t list_daa[] =
 	/* 27 : DAA : rw AL */
 	/* 2F : DAS : rw AL */
 	{{ OP_R | OP_W, REG_BYTE_OFFSET }, {0}};	/* daa */
 
-static op_implicit_list_t list_idiv[] = 
+static op_implicit_list_t list_idiv[] =
 	/* F6 : DIV, IDIV : r AX, w AL, w AH */
 	/* FIXED: first op was EAX, not Aw. TODO: verify! */
-	{{ OP_R, REG_WORD_OFFSET }, 
+	{{ OP_R, REG_WORD_OFFSET },
 	  { OP_W, REG_BYTE_OFFSET },
 	  { OP_W, REG_BYTE_OFFSET + 4 }, {0}};	/* div */
 
-static op_implicit_list_t list_div[] = 
+static op_implicit_list_t list_div[] =
 	/* F7 : DIV, IDIV : rw EDX, rw EAX */
-	{{ OP_R | OP_W, REG_DWORD_OFFSET + 2 }, 
+	{{ OP_R | OP_W, REG_DWORD_OFFSET + 2 },
 	  { OP_R | OP_W, REG_DWORD_OFFSET }, {0}};	/* div */
 
-static op_implicit_list_t list_enter[] = 
+static op_implicit_list_t list_enter[] =
 	/* C8 : ENTER : rw ESP w EBP */
-	{{ OP_R | OP_W, REG_DWORD_OFFSET + 4 }, 
+	{{ OP_R | OP_W, REG_DWORD_OFFSET + 4 },
 	 { OP_R, REG_DWORD_OFFSET + 5 }, {0}};	/* enter */
 
-static op_implicit_list_t list_f2xm1[] = 
+static op_implicit_list_t list_f2xm1[] =
 	/* D9 F0 : F2XM1 : rw ST(0) */
 	/* D9 E1 : FABS : rw ST(0) */
 	/* D9 E0 : FCHS : rw ST(0) */
@@ -111,7 +111,7 @@ static op_implicit_list_t list_f2xm1[] =
 	/* D9 F4 : FXTRACT : rw ST(0) */
 	{{ OP_R | OP_W, REG_FPU_OFFSET }, {0}};	/* f2xm1 */
 
-static op_implicit_list_t list_fcom[] = 
+static op_implicit_list_t list_fcom[] =
 	/* D8, DC, DE D9 : FCOM : r ST(0) */
 	/* DE, DA : FICOM : r ST(0) */
 	/* DF, D8 : FIST : r ST(0) */
@@ -119,17 +119,17 @@ static op_implicit_list_t list_fcom[] =
 	/* D9 E5 : FXAM : r ST(0) */
 	{{ OP_R, REG_FPU_OFFSET }, {0}};		/* fcom */
 
-static op_implicit_list_t list_fpatan[] = 
+static op_implicit_list_t list_fpatan[] =
 	/* D9 F3 : FPATAN : r ST(0), rw ST(1) */
 	{{ OP_R, REG_FPU_OFFSET }, {0}};		/* fpatan */
 
-static op_implicit_list_t list_fprem[] = 
+static op_implicit_list_t list_fprem[] =
 	/* D9 F8, D9 F5 : FPREM : rw ST(0) r ST(1) */
 	/* D9 FD : FSCALE : rw ST(0), r ST(1) */
-	{{ OP_R | OP_W, REG_FPU_OFFSET }, 	
+	{{ OP_R | OP_W, REG_FPU_OFFSET },
 	 { OP_R, REG_FPU_OFFSET + 1 }, {0}};	/* fprem */
 
-static op_implicit_list_t list_faddp[] = 
+static op_implicit_list_t list_faddp[] =
 	/* DE C1 : FADDP : r ST(0), rw ST(1) */
 	/* DE E9 : FSUBP : r ST(0), rw ST(1) */
 	/* D9 F1 : FYL2X : r ST(0), rw ST(1) */
@@ -137,67 +137,67 @@ static op_implicit_list_t list_faddp[] =
 	{{ OP_R, REG_FPU_OFFSET },
 	 { OP_R | OP_W, REG_FPU_OFFSET + 1 }, {0}};	/* faddp */
 
-static op_implicit_list_t list_fucompp[] = 
+static op_implicit_list_t list_fucompp[] =
 	/* DA E9 : FUCOMPP : r ST(0), r ST(1) */
 	{{ OP_R, REG_FPU_OFFSET },
 	 { OP_R, REG_FPU_OFFSET + 1 }, {0}};	/* fucompp */
 
-static op_implicit_list_t list_imul[] = 
+static op_implicit_list_t list_imul[] =
 	/* F6 : IMUL : r AL, w AX */
 	/* F6 : MUL : r AL, w AX */
 	{{ OP_R, REG_BYTE_OFFSET },
 	 { OP_W, REG_WORD_OFFSET }, {0}};		/* imul */
 
-static op_implicit_list_t list_mul[] = 
+static op_implicit_list_t list_mul[] =
 	/* F7 : IMUL : rw EAX, w EDX */
 	/* F7 : MUL : rw EAX, w EDX */
 	{{ OP_R | OP_W, REG_DWORD_OFFSET },
 	 { OP_W, REG_DWORD_OFFSET + 2 }, {0}};	/* imul */
 
-static op_implicit_list_t list_lahf[] = 
+static op_implicit_list_t list_lahf[] =
 	/* 9F : LAHF : r EFLAGS, w AH */
 	{{ OP_R, REG_FLAGS_INDEX },
 	 { OP_W, REG_BYTE_OFFSET + 4 }, {0}};	/* lahf */
 
-static op_implicit_list_t list_ldmxcsr[] = 
+static op_implicit_list_t list_ldmxcsr[] =
 	/* 0F AE : LDMXCSR : w MXCSR SSE Control Status Reg */
 	{{ OP_W, REG_MXCSG_INDEX }, {0}};		/* ldmxcsr */
 
-static op_implicit_list_t list_leave[] = 
+static op_implicit_list_t list_leave[] =
 	/* C9 : LEAVE :  rw ESP, w EBP */
 	{{ OP_R | OP_W, REG_ESP_INDEX },
 	 { OP_W, REG_DWORD_OFFSET + 5 }, {0}};	/* leave */
 
-static op_implicit_list_t list_lgdt[] = 
+static op_implicit_list_t list_lgdt[] =
 	/* 0F 01 : LGDT : w GDTR */
 	{{ OP_W, REG_GDTR_INDEX }, {0}};		/* lgdt */
 
-static op_implicit_list_t list_lidt[] = 
+static op_implicit_list_t list_lidt[] =
 	/* 0F 01 : LIDT : w IDTR */
 	{{ OP_W, REG_IDTR_INDEX }, {0}};		/* lidt */
 
-static op_implicit_list_t list_lldt[] = 
+static op_implicit_list_t list_lldt[] =
 	/* 0F 00 : LLDT : w LDTR */
 	{{ OP_W, REG_LDTR_INDEX }, {0}};		/* lldt */
 
-static op_implicit_list_t list_lmsw[] = 
+static op_implicit_list_t list_lmsw[] =
 	/* 0F 01 : LMSW : w CR0 */
 	{{ OP_W, REG_CTRL_OFFSET }, {0}};		/* lmsw */
 
-static op_implicit_list_t list_loop[] = 
+static op_implicit_list_t list_loop[] =
 	/* E0, E1, E2 : LOOP : rw ECX */
 	{{ OP_R | OP_W, REG_DWORD_OFFSET + 1 }, {0}};/* loop */
 
-static op_implicit_list_t list_ltr[] = 
+static op_implicit_list_t list_ltr[] =
 	/* 0F 00 : LTR : w Task Register */
 	{{ OP_W, REG_TR_INDEX }, {0}};		/* ltr */
 
-static op_implicit_list_t list_pop[] = 
+static op_implicit_list_t list_pop[] =
 	/* 8F, 58, 1F, 07, 17, 0F A1, 0F A9 : POP : rw ESP */
 	/* FF, 50, 6A, 68, 0E, 16, 1E, 06, 0F A0, 0F A8 : PUSH : rw ESP */
 	{{ OP_R | OP_W, REG_ESP_INDEX }, {0}};	/* pop, push */
 
-static op_implicit_list_t list_popad[] = 
+static op_implicit_list_t list_popad[] =
 	/* 61 : POPAD : rw esp, w edi esi ebp ebx edx ecx eax */
 	{{ OP_R | OP_W, REG_ESP_INDEX },
 	 { OP_W, REG_DWORD_OFFSET + 7 },
@@ -208,12 +208,12 @@ static op_implicit_list_t list_popad[] =
 	 { OP_W, REG_DWORD_OFFSET + 1 },
 	 { OP_W, REG_DWORD_OFFSET }, {0}};		/* popad */
 
-static op_implicit_list_t list_popfd[] = 
+static op_implicit_list_t list_popfd[] =
 	/* 9D : POPFD : rw esp, w eflags */
 	{{ OP_R | OP_W, REG_ESP_INDEX },
 	 { OP_W, REG_FLAGS_INDEX }, {0}};		/* popfd */
 
-static op_implicit_list_t list_pushad[] = 
+static op_implicit_list_t list_pushad[] =
 	/* FF, 50, 6A, 68, 0E, 16, 1E, 06, 0F A0, 0F A8 : PUSH : rw ESP */
 	/* 60 : PUSHAD : rw esp, r eax ecx edx ebx esp ebp esi edi */
 	{{ OP_R | OP_W, REG_ESP_INDEX },
@@ -225,89 +225,89 @@ static op_implicit_list_t list_pushad[] =
 	 { OP_R, REG_DWORD_OFFSET + 6 },
 	 { OP_R, REG_DWORD_OFFSET + 7 }, {0}};	/* pushad */
 
-static op_implicit_list_t list_pushfd[] = 
+static op_implicit_list_t list_pushfd[] =
 	/* 9C : PUSHFD : rw esp, r eflags */
 	{{ OP_R | OP_W, REG_ESP_INDEX },
 	 { OP_R, REG_FLAGS_INDEX }, {0}};		/* pushfd */
 
-static op_implicit_list_t list_rdmsr[] = 
+static op_implicit_list_t list_rdmsr[] =
 	/* 0F 32 : RDMSR : r ECX, w EDX, w EAX */
 	{{ OP_R, REG_DWORD_OFFSET + 1 },
 	 { OP_W, REG_DWORD_OFFSET + 2 },
 	 { OP_W, REG_DWORD_OFFSET }, {0}};	/* rdmsr */
 
-static op_implicit_list_t list_rdpmc[] = 
+static op_implicit_list_t list_rdpmc[] =
 	/* 0F 33 : RDPMC : r ECX, w EDX, w EAX */
 	{{ OP_R, REG_DWORD_OFFSET + 1 },
 	 { OP_W, REG_DWORD_OFFSET + 2 },
 	 { OP_W, REG_DWORD_OFFSET }, {0}};		/* rdpmc */
 
-static op_implicit_list_t list_rdtsc[] = 
+static op_implicit_list_t list_rdtsc[] =
 	/* 0F 31 : RDTSC : rw EDX, rw EAX */
 	{{ OP_R | OP_W, REG_DWORD_OFFSET + 2 },
 	 { OP_R | OP_W, REG_DWORD_OFFSET }, {0}};	/* rdtsc */
 
-static op_implicit_list_t list_rep[] = 
+static op_implicit_list_t list_rep[] =
 	/* F3, F2 ... : REP : rw ECX */
 	{{ OP_R | OP_W, REG_DWORD_OFFSET + 1 }, {0}};/* rep */
 
-static op_implicit_list_t list_rsm[] = 
+static op_implicit_list_t list_rsm[] =
 	/* 0F AA : RSM : r CR4, r CR0 */
-	{{ OP_R, REG_CTRL_OFFSET + 4 }, 
+	{{ OP_R, REG_CTRL_OFFSET + 4 },
 	 { OP_R, REG_CTRL_OFFSET }, {0}};		/* rsm */
 
-static op_implicit_list_t list_sahf[] = 
+static op_implicit_list_t list_sahf[] =
 	/* 9E : SAHF : r ah, rw eflags (set SF ZF AF PF CF) */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* sahf */
 
-static op_implicit_list_t list_sgdt[] = 
+static op_implicit_list_t list_sgdt[] =
 	/* 0F : SGDT : r gdtr */
 	/* TODO: finish this! */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* sgdt */
 
-static op_implicit_list_t list_sidt[] = 
+static op_implicit_list_t list_sidt[] =
 	/* 0F : SIDT : r idtr */
 	/* TODO: finish this! */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* sidt */
 
-static op_implicit_list_t list_sldt[] = 
+static op_implicit_list_t list_sldt[] =
 	/* 0F : SLDT : r ldtr */
 	/* TODO: finish this! */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* sldt */
 
-static op_implicit_list_t list_smsw[] = 
+static op_implicit_list_t list_smsw[] =
 	/* 0F : SMSW : r CR0 */
 	/* TODO: finish this! */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* smsw */
 
-static op_implicit_list_t list_stmxcsr[] = 
+static op_implicit_list_t list_stmxcsr[] =
 	/* 0F AE : STMXCSR : r MXCSR */
 	/* TODO: finish this! */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* stmxcsr */
 
-static op_implicit_list_t list_str[] = 
+static op_implicit_list_t list_str[] =
 	/* 0F 00 : STR : r TR (task register) */
 	/* TODO: finish this! */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* str */
 
-static op_implicit_list_t list_sysenter[] = 
+static op_implicit_list_t list_sysenter[] =
 	/* 0F 34 : SYSENTER : w cs, w eip, w ss, w esp, r CR0, w eflags
 	 *         r sysenter_cs_msr, sysenter_esp_msr, sysenter_eip_msr */
 	/* TODO: finish this! */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* sysenter */
 
-static op_implicit_list_t list_sysexit[] = 
+static op_implicit_list_t list_sysexit[] =
 	/* 0F 35 : SYSEXIT : r edx, r ecx, w cs, w eip, w ss, w esp
 	 * 	   r sysenter_cs_msr */
 	/* TODO: finish this! */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* sysexit */
 
-static op_implicit_list_t list_wrmsr[] = 
+static op_implicit_list_t list_wrmsr[] =
 	/* 0F 30 : WRMST : r edx, r eax, r ecx */
 	/* TODO: finish this! */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* wrmsr */
 
-static op_implicit_list_t list_xlat[] = 
+static op_implicit_list_t list_xlat[] =
 	/* D7 : XLAT : rw al r ebx (ptr) */
 	/* TODO: finish this! */
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* xlat */
@@ -315,9 +315,9 @@ static op_implicit_list_t list_xlat[] =
  * monitor 0f 01 c8 eax OP_R ecx OP_R edx OP_R
  * mwait 0f 01 c9 eax OP_R ecx OP_R
  */
-static op_implicit_list_t list_monitor[] = 
+static op_implicit_list_t list_monitor[] =
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* monitor */
-static op_implicit_list_t list_mwait[] = 
+static op_implicit_list_t list_mwait[] =
 	{{ OP_R, REG_DWORD_OFFSET }, {0}};		/* mwait */
 
 op_implicit_list_t *op_implicit_list[] = {
@@ -417,6 +417,6 @@ unsigned int ia32_insn_implicit_ops( x86_insn_t *insn, unsigned int impl_idx ) {
 		op->flags |= flags;
 		op->flags |= op_implied;
 	}
-	
+
 	return num;
 }

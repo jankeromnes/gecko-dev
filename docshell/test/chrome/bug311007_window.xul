@@ -104,7 +104,7 @@ function step1B(aWebProgress, aRequest, aLocation, aFlags) {
 }
 
 /******************************************************************************
- * Step 2: Load a HTTPS page, and confirm it's secure. 
+ * Step 2: Load a HTTPS page, and confirm it's secure.
  ******************************************************************************/
 
 function step2A() {

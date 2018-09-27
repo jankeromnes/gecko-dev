@@ -473,7 +473,7 @@ class TestChecksConfigure(unittest.TestCase):
         self.assertEqual(status, 1)
         self.assertEqual(config, {})
         self.assertEqual(out, textwrap.dedent('''\
-            checking for a... 
+            checking for a...
             DEBUG: a: Trying known-a
             ERROR: Paths provided to find_program must be a list of strings, not %r
         ''' % mozpath.dirname(self.OTHER_A)))
@@ -678,7 +678,7 @@ class TestChecksConfigure(unittest.TestCase):
              checking for jarsigner... %s
              checking for keytool... %s
              checking for javac... %s
-             checking for javac version... 
+             checking for javac version...
              ERROR: javac 1.8 or higher is required (found 1.6.9). Check the JAVA_HOME environment variable.
         ''' % (java, javah, jar, jarsigner, keytool, javac)))
 

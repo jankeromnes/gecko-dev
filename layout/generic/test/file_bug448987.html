@@ -23,12 +23,12 @@ var counter = 0;
 function focus_area() {
   document.getElementById("pre").onfocus = function() {
     document.getElementById("pre").onfocus = null;
-    document.getElementById("area").onfocus = function() { 
+    document.getElementById("area").onfocus = function() {
       clearInterval(timer);
       parent.SimpleTest.executeSoon(parent.firstIframeLoaded, 0);
     }
 
-    //XXX This code tries to shift focus to the image map for some reason. This is not 
+    //XXX This code tries to shift focus to the image map for some reason. This is not
     // working directly after page load, hence it is retried 10 times, see bug bug 922524
     timer = setInterval(function() {
       if (counter > 10) {
@@ -37,7 +37,7 @@ function focus_area() {
         parent.finish();
         return;
       }
-      synthesizeKey("VK_TAB", { shiftKey: shiftKeyOn }, window); 
+      synthesizeKey("VK_TAB", { shiftKey: shiftKeyOn }, window);
       shiftKeyOn = !shiftKeyOn;
       counter++;
     }, 100);

@@ -401,7 +401,7 @@
                 this.innerDiv.style.padding = height + " 0";
                 this.dirsign = 1;
                 this.startAt = (this._behavior == 'alternate') ? (this.originalHeight - corrvalue) : 0;
-                this.stopAt  = (this._behavior == 'alternate' || this._behavior == 'slide') ? 
+                this.stopAt  = (this._behavior == 'alternate' || this._behavior == 'slide') ?
                                 (parseInt(height) + corrvalue) : (this.originalHeight + parseInt(height));
               break;
 
@@ -415,7 +415,7 @@
                 this.dirsign = -1;
                 this.startAt  = (this._behavior == 'alternate') ?
                                 (parseInt(height) + corrvalue) : (this.originalHeight + parseInt(height));
-                this.stopAt = (this._behavior == 'alternate' || this._behavior == 'slide') ? 
+                this.stopAt = (this._behavior == 'alternate' || this._behavior == 'slide') ?
                               (this.originalHeight - corrvalue) : 0;
               break;
 
@@ -424,10 +424,10 @@
                     corrvalue = this.innerDiv.offsetWidth - this.outerDiv.offsetWidth;
                 }
                 this.dirsign = -1;
-                this.stopAt  = (this._behavior == 'alternate' || this._behavior == 'slide') ? 
+                this.stopAt  = (this._behavior == 'alternate' || this._behavior == 'slide') ?
                                (this.innerDiv.offsetWidth - corrvalue) : 0;
-                this.startAt = this.outerDiv.offsetWidth + ((this._behavior == 'alternate') ? 
-                               corrvalue : (this.innerDiv.offsetWidth + this.stopAt));   
+                this.startAt = this.outerDiv.offsetWidth + ((this._behavior == 'alternate') ?
+                               corrvalue : (this.innerDiv.offsetWidth + this.stopAt));
               break;
 
               case "left":
@@ -437,8 +437,8 @@
                 }
                 this.dirsign = 1;
                 this.startAt = (this._behavior == 'alternate') ? (this.innerDiv.offsetWidth - corrvalue) : 0;
-                this.stopAt  = this.outerDiv.offsetWidth + 
-                               ((this._behavior == 'alternate' || this._behavior == 'slide') ? 
+                this.stopAt  = this.outerDiv.offsetWidth +
+                               ((this._behavior == 'alternate' || this._behavior == 'slide') ?
                                corrvalue : (this.innerDiv.offsetWidth + this.startAt));
             }
 
@@ -453,7 +453,7 @@
           if ((this.dirsign == 1 && this.newPosition > this.stopAt) ||
               (this.dirsign == -1 && this.newPosition < this.stopAt))
           {
-            switch (this._behavior) 
+            switch (this._behavior)
             {
               case 'alternate':
                 // lets start afresh
@@ -531,8 +531,8 @@
             var width = window.getComputedStyle(this).width;
             this.innerDiv.parentNode.style.margin = '0 ' + width;
 
-            //XXX Adding the margin sometimes causes the marquee to widen, 
-            // see testcase from bug bug 364434: 
+            //XXX Adding the margin sometimes causes the marquee to widen,
+            // see testcase from bug bug 364434:
             // https://bugzilla.mozilla.org/attachment.cgi?id=249233
             // Just add a fixed width with current marquee's width for now
             if (width != window.getComputedStyle(this).width) {
@@ -673,7 +673,7 @@
            extends="chrome://xbl-marquee/content/xbl-marquee.xml#marquee"
            inheritstyle="false">
 
-    <!-- White-space isn't allowed because a marquee could be 
+    <!-- White-space isn't allowed because a marquee could be
          inside 'white-space: pre' -->
     <content>
       <html:div style="display: -moz-box; overflow: hidden; width: -moz-available;"
@@ -693,7 +693,7 @@
            extends="chrome://xbl-marquee/content/xbl-marquee.xml#marquee"
            inheritstyle="false">
 
-    <!-- White-space isn't allowed because a marquee could be 
+    <!-- White-space isn't allowed because a marquee could be
          inside 'white-space: pre' -->
     <content>
       <html:div style="overflow: hidden; width: -moz-available;"
@@ -708,7 +708,7 @@
   <binding id="marquee-horizontal-editable" bindToUntrustedContent="true"
            inheritstyle="false">
 
-    <!-- White-space isn't allowed because a marquee could be 
+    <!-- White-space isn't allowed because a marquee could be
          inside 'white-space: pre' -->
     <content>
       <html:div style="display: inline-block; overflow: auto; width: -moz-available;"
@@ -721,7 +721,7 @@
   <binding id="marquee-vertical-editable" bindToUntrustedContent="true"
            inheritstyle="false">
 
-    <!-- White-space isn't allowed because a marquee could be 
+    <!-- White-space isn't allowed because a marquee could be
          inside 'white-space: pre' -->
     <content>
       <html:div style="overflow: auto; height: inherit; width: -moz-available;"

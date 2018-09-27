@@ -14,9 +14,9 @@
 ]>
 
 <dialog id="removemp" title="&removePassword.title;"
-        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
-        style="width: 35em;" 
-        ondialogaccept="gRemovePasswordDialog.removePassword();" 
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        style="width: 35em;"
+        ondialogaccept="gRemovePasswordDialog.removePassword();"
         onload="gRemovePasswordDialog.init()">
 
   <script type="application/javascript" src="chrome://mozapps/content/preferences/removemp.js"/>
@@ -27,20 +27,20 @@
     <description>&removeWarning1.label;</description>
     <description class="header">&removeWarning2.label;</description>
   </vbox>
-  
+
   <separator class="thin"/>
-    
+
   <groupbox>
     <caption label="&removeInfo.label;"/>
 
     <hbox align="center">
-      <label control="password" value="&setPassword.oldPassword.label;"/> 
+      <label control="password" value="&setPassword.oldPassword.label;"/>
       <textbox id="password" type="password"
                oninput="gRemovePasswordDialog.validateInput();"
                aria-describedby="warnings"/>
     </hbox>
   </groupbox>
-  
+
   <separator/>
 
 </dialog>

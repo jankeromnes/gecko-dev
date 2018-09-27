@@ -40,7 +40,7 @@ typedef void PPB_Audio_Callback([out] mem_t sample_buffer,
  * <code>PPB_Audio</code> and <code>PPB_AudioConfig</code> follows.
  *
  * <strong>Example: </strong>
- * 
+ *
  * @code
  * void audio_callback(void* sample_buffer,
  *                     uint32_t buffer_size_in_bytes,

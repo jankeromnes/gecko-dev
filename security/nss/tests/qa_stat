@@ -1,4 +1,4 @@
-#! /bin/sh 
+#! /bin/sh
 ########################################################################
 #
 # /u/sonmi/bin/qa_stat - /u/svbld/bin/init/nss/qa_stat
@@ -53,7 +53,7 @@ HTML_INCOMPLETEMSG=Incomplete
 HTML_PASSEDCOLOR=\"#66FF99\"
 HTML_PASSEDMSG=Passed
 
-# this file is used to deal with hanging rsh - a new shell is started 
+# this file is used to deal with hanging rsh - a new shell is started
 # for each rsh, and a function is called after it is finished - they
 # communicate with this file
 
@@ -77,12 +77,12 @@ Debug "RESULTDIR $RESULTDIR"
 # local shell function, deals with a hanging rsh (kills it...)
 # this function is started as a backgroundprocess before the rsh is started,
 # and writes info to the RSH_FILE, after the rsh is finished it writes finish
-# info to the same file (this time called as a function, forground). 
-# the backgroundprocess stays around for RSH_WAIT_TIME, if then the finish 
+# info to the same file (this time called as a function, forground).
+# the backgroundprocess stays around for RSH_WAIT_TIME, if then the finish
 # information is not there attempts to kill the rsh
 #
 # watch_rsh start qa_computername &
-# watch_rsh stop qa_computername 
+# watch_rsh stop qa_computername
 #
 ########################################################################
 watch_rsh()
@@ -91,9 +91,9 @@ watch_rsh()
         start)
             echo "$2 started" >>$RSH_FILE
             sleep $RSH_WAIT_TIME
-            O_ALWAYS_YES=ON # may modify global flags because this is a 
+            O_ALWAYS_YES=ON # may modify global flags because this is a
                             # forked off bg process - kill_by_name otherwise
-                            # will ask the user if it really should be killed 
+                            # will ask the user if it really should be killed
             grep "$2 finished" $RSH_FILE >/dev/null || kill_by_name "rsh $2"
             exit
             ;;
@@ -134,13 +134,13 @@ do
              #-e "s/.*-OS-LINE: /${QA_SYS}_/" >>$PLATFORMLIST
         #if [ "$O_SILENT" != ON ] ; then
             #grep OS-LINE ${RESULTDIR}/${QA_SYS}.nssqa | sort -u | sed \
-                 #-e "s/.*-OS-LINE:/${QA_SYS}/" 
+                 #-e "s/.*-OS-LINE:/${QA_SYS}/"
         #fi
     else
         REM_SYSNAME=$QA_SYS
         watch_rsh start $REM_SYSNAME &
         qa_stat_get_sysinfo $QA_SYS
-        watch_rsh stop $REM_SYSNAME 
+        watch_rsh stop $REM_SYSNAME
         echo $QA_OS_STRING >>$PLATFORMLIST
                           # use later for missing list
     fi
@@ -151,15 +151,15 @@ done
 ################################### qa_stat_init ##########################
 # local shell function, sets the name of the resultfile to:
 #    <filename> if option -f <filename>
-#    $RESULTDIR/result if write permission 
+#    $RESULTDIR/result if write permission
 #        (mozilla/tests_results/security/result)
 #    $HOME/resultNSS${NSSVER}-${BUILDDATE} if no write permission in $RESULTDIR
 ########################################################################
 qa_stat_init()
 {
-    if [ $O_FILE = ON -a $O_CRON = OFF ]    # if -f was specified write there 
+    if [ $O_FILE = ON -a $O_CRON = OFF ]    # if -f was specified write there
     then
-        RFILE=$FILENAME    
+        RFILE=$FILENAME
     else
         RFILE=${RESULTDIR}/result.$$
         if [ ! -w $RESULTDIR ]
@@ -168,10 +168,10 @@ qa_stat_init()
             Debug "Using alternate resultfile $RFILE"
         #elif [ $O_CRON = ON ]
         #then
-             ##find ${RESULTDIR} -exec chmod a+rw {} \;    #FIXME - umask 
+             ##find ${RESULTDIR} -exec chmod a+rw {} \;    #FIXME - umask
                             ##doesn't seem to work - this is a tmp workaround
         fi
-    
+
         if [ ! -x $RESULTDIR -o ! -r  $RESULTDIR -o ! -w $RESULTDIR ]
         then
             glob_usage "$RESULTDIR does not have the right permissions `ls -l $RESULTDIR`"
@@ -365,7 +365,7 @@ html_line()
       echo '<td BGCOLOR='$HTML_INCOMPLETECOLOR' NOSAVE>'$HTML_INCOMPLETEMSG'</td>'
   else
       TBX_EXIT=`expr $TBX_EXIT + 1`
-      echo '<td BGCOLOR='$HTML_MISSINGCOLOR' NOSAVE>'$HTML_MISSINGMSG'</td>'    
+      echo '<td BGCOLOR='$HTML_MISSINGCOLOR' NOSAVE>'$HTML_MISSINGMSG'</td>'
   fi
   if [ "$CURRENT_TABLE" != "BC" ] ; then
       if [ "$RESULT" = "0" ] ; then
@@ -426,26 +426,26 @@ html_line()
 
 ################################# qa_errorlist #########################
 # local shell function, finds problems in the previously run QA
-# linux:the gnu grep, on Linux can output 10 lines above and 3 lines below 
+# linux:the gnu grep, on Linux can output 10 lines above and 3 lines below
 # the errormessage
 ########################################################################
 qa_errorlist()
 {
-    grep "bgcolor=red" ${MACHINES_TO_CHECK}*/results.html | 
+    grep "bgcolor=red" ${MACHINES_TO_CHECK}*/results.html |
         sed -e 's/.results.html:<TR><TD>/ /' -e 's/<[^>]*>/ /g'
     grep 'cache hits; .* cache misses, .* cache not reusable' \
-        ${MACHINES_TO_CHECK}*/output.log | 
+        ${MACHINES_TO_CHECK}*/output.log |
         grep strsclnt |
-        grep -v '0 cache hits; 0 cache misses, 0 cache not reusable' | 
+        grep -v '0 cache hits; 0 cache misses, 0 cache not reusable' |
         grep -v ' cache hits; 1 cache misses, 0 cache not reusable'
     for logfile in ${MACHINES_TO_CHECK}*/output.log; do
         grep -vi "write to SSL socket" $logfile |
             grep -vi "HDX PR_Read returned error" |
             grep -vi "no error" |
             grep -vi "12285" |
-            grep -i  $BEFORE_CONTEXT_GREP $AFTER_CONTEXT_GREP error 
+            grep -i  $BEFORE_CONTEXT_GREP $AFTER_CONTEXT_GREP error
             #grep -vi "5938" |  needed for -v option
-            #grep -vi "HDX PR_Read hit EOF" | 
+            #grep -vi "HDX PR_Read hit EOF" |
         grep  -vi "write to SSL socket" $logfile |
             grep -vi "peer cannot verify" |
             grep -vi "error" |
@@ -469,10 +469,10 @@ qa_errorlist()
 
     if [ -n "${MACHINES_TO_CHECK}" ] ; then
         find ${MACHINES_TO_CHECK}* -name core -print 2>/dev/null |
-            grep -v bct 
+            grep -v bct
     else
         find . -name core -print 2>/dev/null |
-            grep -v bct 
+            grep -v bct
     fi
 }
 
@@ -502,11 +502,11 @@ tbx_missing_platforms ()
 ########################################################################
 platformlist()
 {
-    grep Platform ${MACHINES_TO_CHECK}*/results.html | 
+    grep Platform ${MACHINES_TO_CHECK}*/results.html |
         sed -e 's/.results.html:<H4>Platform: /---/' \
             -e 's/<BR>//' >$TMPFILE
-    # this is done a little complicated to avoid starting a subshell in 
-    # a while read that gets the input from a pipeline, and variables set 
+    # this is done a little complicated to avoid starting a subshell in
+    # a while read that gets the input from a pipeline, and variables set
     #in or underneath this function get unset after done...
     for  MB in `cat $TMPFILE` ; do
         MACHINE=`echo $MB | sed -e "s/---.*//"`
@@ -522,7 +522,7 @@ platformlist()
             echo "Passed $MACHINE $BUILDPLATFORM" >>$RFILE
             html_line passed >>$TMP_HTML_FILE
         fi
-    done 
+    done
 }
 
 ############################ missing_platforms ###########################
@@ -549,14 +549,14 @@ missing_platforms()
 ########################################################################
 incomplete_results ()
 {
-    
+
     for w in `ls ${MACHINES_TO_CHECK}*/results.html`
     do
       grep bgcolor=red $w || {
         PASSED_LINES=""
         PASSED_LINES=`grep bgcolor=lightGreen $w | wc -l`
         if [ -n "$PASSED_LINES" -a "$PASSED_LINES" -lt "$TOTAL_TESTS" ] ; then
-            BUILDPLATFORM=`grep Platform $w | sed -e 's/<H4>Platform:/    /'                   -e 's/<BR>//'` 
+            BUILDPLATFORM=`grep Platform $w | sed -e 's/<H4>Platform:/    /'                   -e 's/<BR>//'`
             MACHINE=`echo $w | sed -e "s/.results.html//"`
             #MACHINE=`echo $w | sed -e "s/\.[0-9]*.results.html//"`
             setQAsysvars
@@ -587,7 +587,7 @@ qa_stat_table()
 rsaperf()
 {
     grep RSAPERF */output.log | grep -v "_DBG" > $PERFLIST
-    
+
     qa_stat_table "Performance list"
 
     echo '<td NOSAVE><b><font size=+1>Build-OS and version</font></b></td>'
@@ -597,7 +597,7 @@ rsaperf()
     echo '<td><b><font size=+1>Total</font></b></td>'
     echo '<td><b><font size=+1>QA time / #</font></b></td>'
     echo '</tr>'
-    cat $PERFLIST | 
+    cat $PERFLIST |
     while read MACHINE BUILDPLATFORM no_iter t1 t2 total total_unit t3 \
                t4 t5 average average_unit
     do
@@ -651,7 +651,7 @@ qa_stat_cleanup()
 bc_header()
 {
 CURRENT_TABLE="BC"   #so html_line can determine which fields to write
-  
+
   qa_stat_table "Backward Compatibility Test"
   echo '<td NOSAVE><b><font size=+1>Build-OS and version</font></b></td>'
   echo '<td><b><font size=+1>QA-OS</font></b></td>'
@@ -669,7 +669,7 @@ CURRENT_TABLE="BC"   #so html_line can determine which fields to write
 old_bc_test()
 {
 CURRENT_TABLE="BC"   #so html_line can determine which fields to write
-  
+
   qa_stat_table "Backward Compatibility Test"
   echo '<td NOSAVE><b><font size=+1>Build-OS and version</font></b></td>'
   echo '<td><b><font size=+1>QA-OS</font></b></td>'
@@ -705,32 +705,32 @@ CURRENT_TABLE="BC"   #so html_line can determine which fields to write
                 diff $TMP_RESULT $TMP_BC_RESULT 2>&1 |
                      grep -v "Create_objsign_cert_.signtool_-G.*Passed" |
                      grep -v "porting_Alice.s_email_cert" |
-                     grep -v "Can.t_run_pk12util_tests_for_NSS_3.2"  
+                     grep -v "Can.t_run_pk12util_tests_for_NSS_3.2"
            )  2>&1 >>$BCERRORLIST
 
-      #diff -b $w bct/$w  2>>$BCMISSINGLIST | 
+      #diff -b $w bct/$w  2>>$BCMISSINGLIST |
            #grep -v "Create objsign cert .signtool -G.*Passed" |
            #grep -v "Listing signed files in jar .signtool -v.*Passed" |
            #grep -v "Listing signed files in jar .signtool -w.*Passed" |
            #grep -v "backward compatibility" |
            #grep -v "Can.t run pk12util tests for NSS 3.2" |
            #grep -v "porting Alice.s email cert " |
-           #grep -v "^---$" | grep -v "^[<> ] $" | 
-           #grep -v "^---.$" | grep -v "^[<> ] .$" | 
+           #grep -v "^---$" | grep -v "^[<> ] $" |
+           #grep -v "^---.$" | grep -v "^[<> ] .$" |
            #grep -v '< </BODY></HTML>' |
            #grep -v "^[0-9,cad]*$" 2>>$BCMISSINGLIST >/dev/null &&  (
                 #echo "$w differs" >> $BCMISSINGLIST
                 #echo "========================================="
                 #echo "diff $w bct/$w"
                 #echo "========================================="
-                #diff -b $w bct/$w 2>&1 | 
+                #diff -b $w bct/$w 2>&1 |
                      #grep -v "Listing signed files in jar .signtool -v.*Passed" |
                      #grep -v "Listing signed files in jar .signtool -w.*Passed" |
                      #grep -v "backward compatibility" |
                      #grep -v "Can.t run pk12util tests for NSS 3.2" |
                      #grep -v "porting Alice.s email cert " |
-                     #grep -v "^---$" | grep -v "^[<> ] $" | 
-                     #grep -v "^---.$" | grep -v "^[<> ] .$" | 
+                     #grep -v "^---$" | grep -v "^[<> ] $" |
+                     #grep -v "^---.$" | grep -v "^[<> ] .$" |
                      #grep -v '< </BODY></HTML>' |
                      #grep -v "^[0-9,cad]*$" \
            #)  2>&1 >>$BCERRORLIST
@@ -738,19 +738,19 @@ CURRENT_TABLE="BC"   #so html_line can determine which fields to write
   done
   rm $ERRORLIST
   cat $BCMISSINGLIST | sed -e "s/^diff: bc_...s.//" \
-                    -e "s/.results.html.*/\/results.html/" | 
+                    -e "s/.results.html.*/\/results.html/" |
                 sort -u > $ERRORLIST
 
-  platformlist  
+  platformlist
   echo '</table>' >>$TMP_HTML_FILE
 
-  head -200 $BCERRORLIST | sed -e 's/<[^>]*>//g' -e "s/^/<br>/" 
+  head -200 $BCERRORLIST | sed -e 's/<[^>]*>//g' -e "s/^/<br>/"
 }
 
 bc_test()
 {
 CURRENT_TABLE="BC"   #so html_line can determine which fields to write
-  
+
   qa_stat_table "Backward Compatibility Test"
   echo '<td NOSAVE><b><font size=+1>Build-OS and version</font></b></td>'
   echo '<td><b><font size=+1>QA-OS</font></b></td>'
@@ -769,7 +769,7 @@ set -x
       BCT_DIR=`dirname "bct/$w"`
       BCT_RESULT="bct/$w"
       BCT_LOG="$BCT_DIR/output.log"
-      grep "bgcolor=red" $BCT_RESULT | 
+      grep "bgcolor=red" $BCT_RESULT |
            sed -e 's/.results.html:<TR><TD>/ /' -e 's/<[^>]*>/ /g'
       grep 'cache hits; .* cache misses, .* cache not reusable' \
         $BCT_LOG |
@@ -800,13 +800,13 @@ set -x
   done 2>&1 >>$BCERRORLIST
   rm $ERRORLIST
   cat $BCMISSINGLIST | sed -e "s/^diff: bc_...s.//" \
-                    -e "s/.results.html.*/\/results.html/" | 
+                    -e "s/.results.html.*/\/results.html/" |
                 sort -u > $ERRORLIST
 
-  platformlist  
+  platformlist
   echo '</table>' >>$TMP_HTML_FILE
 
-  head -200 $BCERRORLIST | sed -e 's/<[^>]*>//g' -e "s/^/<br>/" 
+  head -200 $BCERRORLIST | sed -e 's/<[^>]*>//g' -e "s/^/<br>/"
 }
 
 
@@ -818,7 +818,7 @@ set -x
 bc_test_old()
 {
 CURRENT_TABLE="BC"   #so html_line can determine which fields to write
-  
+
   qa_stat_table "Backward Compatibility Test"
   echo '<td NOSAVE><b><font size=+1>Build-OS and version</font></b></td>'
   echo '<td><b><font size=+1>QA-OS</font></b></td>'
@@ -833,42 +833,42 @@ CURRENT_TABLE="BC"   #so html_line can determine which fields to write
 
   for w in `ls */results.html`
   do
-      diff -b $w bct/$w  2>>$BCMISSINGLIST | 
+      diff -b $w bct/$w  2>>$BCMISSINGLIST |
            grep -v "Create objsign cert .signtool -G.*Passed" |
            grep -v "Listing signed files in jar .signtool -v.*Passed" |
            grep -v "Listing signed files in jar .signtool -w.*Passed" |
            grep -v "backward compatibility" |
            grep -v "Can.t run pk12util tests for NSS 3.2" |
            grep -v "porting Alice.s email cert " |
-           grep -v "^---$" | grep -v "^[<> ] $" | 
-           grep -v "^---.$" | grep -v "^[<> ] .$" | 
+           grep -v "^---$" | grep -v "^[<> ] $" |
+           grep -v "^---.$" | grep -v "^[<> ] .$" |
            grep -v '< </BODY></HTML>' |
            grep -v "^[0-9,cad]*$" 2>>$BCMISSINGLIST >/dev/null &&  (
                 echo "$w differs" >> $BCMISSINGLIST
                 echo "========================================="
                 echo "diff $w bct/$w"
                 echo "========================================="
-                diff -b $w bct/$w 2>&1 | 
+                diff -b $w bct/$w 2>&1 |
                      grep -v "Listing signed files in jar .signtool -v.*Passed" |
                      grep -v "Listing signed files in jar .signtool -w.*Passed" |
                      grep -v "backward compatibility" |
                      grep -v "Can.t run pk12util tests for NSS 3.2" |
                      grep -v "porting Alice.s email cert " |
-                     grep -v "^---$" | grep -v "^[<> ] $" | 
-                     grep -v "^---.$" | grep -v "^[<> ] .$" | 
+                     grep -v "^---$" | grep -v "^[<> ] $" |
+                     grep -v "^---.$" | grep -v "^[<> ] .$" |
                      grep -v '< </BODY></HTML>' |
                      grep -v "^[0-9,cad]*$" \
            )  2>&1 >>$BCERRORLIST
   done
   rm $ERRORLIST
   cat $BCMISSINGLIST | sed -e "s/^diff: bc_...s.//" \
-                    -e "s/.results.html.*/\/results.html/" | 
+                    -e "s/.results.html.*/\/results.html/" |
                 sort -u > $ERRORLIST
 
-  platformlist  
+  platformlist
   echo '</table>' >>$TMP_HTML_FILE
 
-  head -200 $BCERRORLIST | sed -e 's/<[^>]*>//g' -e "s/^/<br>/" 
+  head -200 $BCERRORLIST | sed -e 's/<[^>]*>//g' -e "s/^/<br>/"
 
 }
 
@@ -880,14 +880,14 @@ tbx_main()
     TBX_EXIT=47
     qa_stat_get_sysinfo # find out the OS we are running and all required tests
                         # on this OS
-    
+
     MACHINES_TO_CHECK=$HOST  #`uname -n` only search the local tests for errors
-    qa_errorlist > $ERRORLIST        # 
-    platformlist 
+    qa_errorlist > $ERRORLIST        #
+    platformlist
     #tbx_missing_platforms  #temp. taken out until we find a better way to
-    #determine if all necessary QA ran - right now we run different 
+    #determine if all necessary QA ran - right now we run different
     #tinderboxes on one machine
-    incomplete_results 
+    incomplete_results
     echo '</table>' >>$TMP_HTML_FILE
     echo '<a NAME="errorlist"></a>' >> $TMP_HTML_FILE
     cat $ERRORLIST  | sed -e "s/^/<br>/" >>$TMP_HTML_FILE
@@ -902,9 +902,9 @@ qa_stat_main()
     find_qa_systems 2>/dev/null
     MACHINES_TO_CHECK=""   # check all founf qa runs
     qa_errorlist > $ERRORLIST
-    platformlist 
-    missing_platforms 
-    incomplete_results 
+    platformlist
+    missing_platforms
+    incomplete_results
     echo '</table>' >>$TMP_HTML_FILE
     echo '<a NAME="errorlist"></a>' >> $TMP_HTML_FILE
     cat $ERRORLIST  | sed -e "s/^/<br>/" >>$TMP_HTML_FILE
@@ -913,12 +913,12 @@ qa_stat_main()
     bc_header >>$TMP_HTML_FILE
     MACHINES_TO_CHECK="bct/"
     TOTAL_TESTS=$BCT_TOTAL_TESTS
-    BEFORE_CONTEXT_GREP="" #WORKAROUND - errors in one outputlog within the first 
+    BEFORE_CONTEXT_GREP="" #WORKAROUND - errors in one outputlog within the first
     AFTER_CONTEXT_GREP=""  # or last lines will show up in the next/previos file
     qa_errorlist > $ERRORLIST
-    platformlist 
-    missing_platforms 
-    incomplete_results 
+    platformlist
+    missing_platforms
+    incomplete_results
     echo '</table>' >>$TMP_HTML_FILE
     echo '<a NAME="errorlist"></a>' >> $TMP_HTML_FILE
     cat $ERRORLIST  | sed -e "s/^/<br>/" >>$TMP_HTML_FILE

@@ -4,12 +4,12 @@
 <script>
 function runTest() {
   var v = document.createElement('video');
-  
+
   var endTest = function() {
     setTimeout(function(){document.documentElement.className = '';}, 0);
   };
-  
-  var play = 
+
+  var play =
     function() {
       v.removeEventListener('loadeddata', play);
       v.play();

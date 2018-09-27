@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -30,28 +30,28 @@ class Inst {
         this._opcode = opcode;
         this._args = args;
     }
-    
+
     append(...args)
     {
         this._args.push(...args);
     }
-    
+
     clear()
     {
         this._opcode = Nop;
         this._args = [];
     }
-    
+
     get opcode() { return this._opcode; }
     get args() { return this._args; }
-    
+
     visitArg(index, func, ...args)
     {
         let replacement = func(this._args[index], ...args);
         if (replacement)
             this._args[index] = replacement;
     }
-    
+
     forEachTmpFast(func)
     {
         for (let i = 0; i < this._args.length; ++i) {
@@ -60,26 +60,26 @@ class Inst {
                 this._args[i] = replacement;
         }
     }
-    
+
     forEachArg(func)
     {
         Inst_forEachArg(this, func);
     }
-    
+
     forEachTmp(func)
     {
         this.forEachArg((arg, role, type, width) => {
             return arg.forEachTmp(role, type, width, func);
         });
     }
-    
+
     forEach(thing, func)
     {
         this.forEachArg((arg, role, type, width) => {
             return arg.forEach(thing, role, type, width, func);
         });
     }
-    
+
     static forEachDef(thing, prevInst, nextInst, func)
     {
         if (prevInst) {
@@ -90,7 +90,7 @@ class Inst {
                         return func(value, role, type, width);
                 });
         }
-        
+
         if (nextInst) {
             nextInst.forEach(
                 thing,
@@ -100,31 +100,31 @@ class Inst {
                 });
         }
     }
-    
+
     static forEachDefWithExtraClobberedRegs(thing, prevInst, nextInst, func)
     {
         forEachDef(thing, prevInst, nextInst, func);
-        
+
         let regDefRole;
-        
+
         let reportReg = reg => {
             let type = reg.isGPR ? GP : FP;
             func(thing.fromReg(reg), regDefRole, type, Arg.conservativeWidth(type));
         };
-        
+
         if (prevInst && prevInst.opcode == Patch) {
             regDefRole = Arg.Def;
             prevInst.extraClobberedRegs.forEach(reportReg);
         }
-        
+
         if (nextInst && nextInst.opcode == Patch) {
             regDefRole = Arg.EarlyDef;
             nextInst.extraEarlyClobberedRegs.forEach(reportReg);
         }
     }
-    
+
     get hasNonArgEffects() { return Inst_hasNonArgEffects(this); }
-    
+
     hash()
     {
         let result = opcodeCode(this.opcode);
@@ -134,7 +134,7 @@ class Inst {
         }
         return result >>> 0;
     }
-    
+
     toString()
     {
         return "" + symbolName(this._opcode) + " " + this._args.join(", ");

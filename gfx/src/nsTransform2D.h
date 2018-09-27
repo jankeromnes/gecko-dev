@@ -39,7 +39,7 @@ public:
   **/
 
   void SetToTranslate(float tx, float ty)    { m00 = m11 = 1.0f; m20 = tx; m21 = ty; }
-  
+
  /**
   * get the translation portion of this transform
   *

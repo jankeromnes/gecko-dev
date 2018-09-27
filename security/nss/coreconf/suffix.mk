@@ -42,7 +42,7 @@ endif
 
 # WIN% overridese this
 ifndef IMPORT_LIB_SUFFIX
-    IMPORT_LIB_SUFFIX = 
+    IMPORT_LIB_SUFFIX =
 endif
 
 

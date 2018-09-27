@@ -31,7 +31,7 @@ struct CDecoder
       MainDecodeSRes(SZ_OK),
       MainDecodeSRes_wasUsed(false)
     {}
-  
+
   ~CDecoder()
   {
     if (xz)
@@ -70,7 +70,7 @@ public:
   MY_QUERYINTERFACE_ENTRY(ICompressSetCoderMt)
   MY_QUERYINTERFACE_ENTRY(ICompressSetMemLimit)
   #endif
-  
+
   MY_QUERYINTERFACE_END
   MY_ADDREF_RELEASE
 

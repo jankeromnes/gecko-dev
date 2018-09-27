@@ -7,10 +7,10 @@ index 5a5e043..0594119 100644
      flags |= 1 << 11;
    cif->flags = flags;
    cif->bytes = (unsigned)ALIGN (bytes, 8);
- 
+
    return FFI_OK;
  }
- 
+
 +#ifndef __SANITIZE_ADDRESS__
 +# ifdef __clang__
 +#  if __has_feature(address_sanitizer)

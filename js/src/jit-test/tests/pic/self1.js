@@ -5,7 +5,7 @@ var actual = '';
 
 function f() {
   var o = { a: 11, b: 22, c: 33 };
-  
+
   for (var i = 0; i < 5; ++i) {
     actual += o.a + ',';
     actual += o.b + ',';

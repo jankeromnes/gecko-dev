@@ -6,7 +6,7 @@ es6id: 20.3.3.4
 description: Values specified to MakeDay exceed their calendar boundaries
 info: |
   [...]
-  9. Return TimeClip(MakeDate(MakeDay(yr, m, dt), MakeTime(h, min, s, milli))). 
+  9. Return TimeClip(MakeDate(MakeDay(yr, m, dt), MakeTime(h, min, s, milli))).
 
   MakeDay (year, month, date)
 

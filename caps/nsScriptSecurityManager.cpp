@@ -1112,7 +1112,7 @@ nsScriptSecurityManager::ReportError(const char* aMessageTag, nsIURI* aSource,
     NS_ENSURE_TRUE(error, NS_ERROR_FAILURE);
 
     // using category of "SOP" so we can link to MDN
-    rv = error->Init(message, EmptyString(), 
+    rv = error->Init(message, EmptyString(),
                      EmptyString(), 0, 0,
                      nsIScriptError::errorFlag,
                     "SOP", aFromPrivateWindow);

@@ -26,7 +26,7 @@ ifdef NS_USE_NATIVE
 	CC       = cc
 	CCC      = ncc
 	CXX      = ncc
-#	OS_LIBS += -L/opt/ncc/lib 
+#	OS_LIBS += -L/opt/ncc/lib
 else
 #	OS_LIBS	+=
 endif
@@ -48,7 +48,7 @@ ARCH        = ncr
 NOSUCHFILE  = /solaris-rm-f-sucks
 
 # now take care of default GCC (rus@5/5/97)
- 
+
 ifdef NS_USE_GCC
 	# if gcc-settings are redefined already - don't touch it
 	#

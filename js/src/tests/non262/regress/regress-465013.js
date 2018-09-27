@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = 'bgcolor="dummy" quality="dummy" allowScriptAccess="dummy" ';
 
 

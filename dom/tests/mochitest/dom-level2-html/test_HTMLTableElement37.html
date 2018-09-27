@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "table");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,10 +70,10 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The deleteRow() method throws a INDEX_SIZE_ERR DOMException
-    if the specified index is equal the number of rows. 
- 
+    if the specified index is equal the number of rows.
+
     Retrieve the second TABLE element which has four rows.  Try
     to delete a new row using an index of four.  This should throw
     a INDEX_SIZE_ERR DOMException since the index is equal to the
@@ -90,7 +90,7 @@ function HTMLTableElement37() {
     var nodeList;
       var testNode;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -99,7 +99,7 @@ function HTMLTableElement37() {
       nodeList = doc.getElementsByTagName("table");
       assertSize("Asize",3,nodeList);
 testNode = nodeList.item(1);
-      
+
 	{
 		success = false;
 		try {
@@ -121,8 +121,8 @@ testNode = nodeList.item(1);
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
     The deleteRow() method throws a INDEX_SIZE_ERR DOMException
-    if the specified index is equal the number of rows. 
- 
+    if the specified index is equal the number of rows.
+
     Retrieve the second TABLE element which has four rows.  Try
     to delete a new row using an index of four.  This should throw
     a INDEX_SIZE_ERR DOMException since the index is equal to the
@@ -144,7 +144,7 @@ testNode = nodeList.item(1);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/table.html"></iframe>
 <br>

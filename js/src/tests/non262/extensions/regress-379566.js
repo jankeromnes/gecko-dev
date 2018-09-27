@@ -19,7 +19,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = '({' +
     'get in() { return this.for; }, ' +
     'set in(value) { this.for = value; }' +
@@ -27,8 +27,8 @@ function test()
   try
   {
     var obj = eval('({ ' +
-                   'get in() { return this.for; }, ' + 
-                   'set in(value) { this.for = value; } ' + 
+                   'get in() { return this.for; }, ' +
+                   'set in(value) { this.for = value; } ' +
                    '})');
     actual = obj.toSource();
 

@@ -12,7 +12,7 @@ var expect = '';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 
 var testString = "test|string";
 var idx = testString.indexOf("|");

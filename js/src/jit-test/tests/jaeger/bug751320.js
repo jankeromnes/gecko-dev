@@ -15,8 +15,8 @@ datediff = function(date1, date2, interval) {
   return Math.round(delta);
 };
 
-var diff = datediff(new Date("2012-04-28T14:30:00Z"), new Date("2012-04-29T14:30:00Z"), "day"); 
+var diff = datediff(new Date("2012-04-28T14:30:00Z"), new Date("2012-04-29T14:30:00Z"), "day");
 for (var i = 0; i < 50; i++) {
-  diff = datediff(new Date("2012-04-28T17:00:00Z"), new Date("2012-04-28T17:30:00Z"), "minute"); 
+  diff = datediff(new Date("2012-04-28T17:00:00Z"), new Date("2012-04-28T17:30:00Z"), "minute");
   assertEq(diff, 30);
 }

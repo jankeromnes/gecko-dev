@@ -39,14 +39,14 @@ public:
       // _totalBytesDefined(false),
       _totalBytes(0),
       MultiArcMode(false)
-      
+
       #ifndef _NO_CRYPTO
       , PasswordIsDefined(false)
       // , PasswordWasAsked(false)
       #endif
-      
+
       {}
-  
+
   void Init(CStdOutStream *outStream, CStdOutStream *errorStream, CStdOutStream *percentStream)
   {
     _so = outStream;
@@ -55,7 +55,7 @@ public:
   }
 
   INTERFACE_IOpenCallbackUI(;)
-  
+
   #ifndef _NO_CRYPTO
   bool PasswordIsDefined;
   // bool PasswordWasAsked;

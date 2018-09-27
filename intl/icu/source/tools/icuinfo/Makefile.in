@@ -22,7 +22,7 @@ CLEANFILES = *~ $(DEPS) $(PLUGIN_OBJECTS) $(PLUGINFILE) $(PLUGIN)
 ## Target information
 TARGET = icuinfo$(EXEEXT)
 
-CPPFLAGS += -I$(top_srcdir)/common -I$(srcdir)/../toolutil -I$(top_srcdir)/tools/ctestfw 
+CPPFLAGS += -I$(top_srcdir)/common -I$(srcdir)/../toolutil -I$(top_srcdir)/tools/ctestfw
 CPPFLAGS+= -I$(top_srcdir)/i18n
 LIBS = $(LIBICUTOOLUTIL) $(LIBICUI18N) $(LIBICUUC) $(DEFAULT_LIBS) $(LIB_M)
 
@@ -50,7 +50,7 @@ distclean : distclean-local
 dist: dist-local
 check: all check-local
 
-all-local: $(TARGET) 
+all-local: $(TARGET)
 
 install-local: all-local
 	$(MKINSTALLDIRS) $(DESTDIR)$(bindir)
@@ -74,7 +74,7 @@ Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
 -include Makefile.local
 
 $(TARGET) : $(OBJECTS)
-	$(LINK.cc) $(OUTOPT)$@ $^ $(LIBS) 
+	$(LINK.cc) $(OUTOPT)$@ $^ $(LIBS)
 	$(POST_BUILD_STEP)
 
 PLUGIN=$(LIBPREFIX)plugin.$(SO)

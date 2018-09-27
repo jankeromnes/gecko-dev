@@ -30,13 +30,13 @@ public:
   enum ProcessResult { PR_CONTINUE, PR_BLOCK, PR_COMPLETE };
   HttpParser();
   virtual ~HttpParser();
-  
+
   void reset();
   ProcessResult Process(const char* buffer, size_t len, size_t* processed,
                         HttpError* error);
   bool is_valid_end_of_input() const;
   void complete(HttpError err);
-  
+
   size_t GetDataRemaining() const { return data_size_; }
 
 protected:
@@ -53,7 +53,7 @@ protected:
   virtual ProcessResult ProcessData(const char* data, size_t len, size_t& read,
                                     HttpError* error) = 0;
   virtual void OnComplete(HttpError err) = 0;
-  
+
 private:
   enum State {
     ST_LEADER, ST_HEADERS,

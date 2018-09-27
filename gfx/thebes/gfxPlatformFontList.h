@@ -150,7 +150,7 @@ public:
         // immediately; if clear, InitOtherFamilyNames is allowed to defer
         // loading to avoid blocking.
         eForceOtherFamilyNamesLoading = 1 << 0,
-        
+
         // If set, FindAndAddFamilies should not check for legacy "styled
         // family" names to add to the font list. This is used to avoid
         // a recursive search when using FindFamily to find a potential base

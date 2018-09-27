@@ -26,7 +26,7 @@
 #include "agg_array.h"
 namespace agg
 {
-template<class CoverT> class scanline_u 
+template<class CoverT> class scanline_u
 {
 public:
     typedef scanline_u<CoverT> self_type;

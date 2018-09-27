@@ -2,12 +2,12 @@
 
 <head>
 <script>
-function foo() { 
-  var cell2 = document.createElementNS("http://www.w3.org/1999/xhtml", "td"); 
+function foo() {
+  var cell2 = document.createElementNS("http://www.w3.org/1999/xhtml", "td");
   cell2.appendChild(document.createTextNode('2'));
 
   document.getElementById("row2").appendChild(cell2);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

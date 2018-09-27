@@ -59,7 +59,7 @@ public:
   COneMethodInfo _filterMethod;
   bool _autoFilter;
 
-  
+
   void SetGlobalLevelTo(COneMethodInfo &oneMethodInfo) const;
 
   #ifndef _7ZIP_ST
@@ -98,7 +98,7 @@ class CSingleMethodProps: public COneMethodInfo, public CCommonMethodProps
 public:
   void Init();
   CSingleMethodProps() { InitSingle(); }
-  
+
   int GetLevel() const { return _level == (UInt32)(Int32)-1 ? 5 : (int)_level; }
   HRESULT SetProperties(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps);
 };

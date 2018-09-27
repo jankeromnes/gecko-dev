@@ -47,7 +47,7 @@ var DeltaBlue = new BenchmarkSuite('DeltaBlue', [66118], [
 /* --- O b j e c t   M o d e l --- */
 
 Object.defineProperty(Object.prototype, "inheritsFrom", {
-  
+
   value: function (shuper) {
     function Inheriter() { }
     Inheriter.prototype = shuper.prototype;

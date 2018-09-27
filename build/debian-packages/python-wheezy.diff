@@ -17,7 +17,7 @@ diff -u python2.7-2.7.9/debian/changelog python2.7-2.7.9/debian/changelog
 + -- Mike Hommey <glandium@mozilla.com>  Fri, 13 Oct 2017 19:20:21 +0900
 +
  python2.7 (2.7.9-2+deb8u1) jessie; urgency=medium
- 
+
    * Backport upstream commit b3ce713fb9beebfff9848cefa0acbd59acc68fe9
 diff -u python2.7-2.7.9/debian/control.in python2.7-2.7.9/debian/control.in
 --- python2.7-2.7.9/debian/control.in
@@ -51,7 +51,7 @@ diff -u python2.7-2.7.9/debian/control.in python2.7-2.7.9/debian/control.in
 @@ -161,27 +160,6 @@
   IDLE is an Integrated Development Environment for Python (v@VER@).
   IDLE is written using Tkinter and therefore quite platform-independent.
- 
+
 -Package: @PVER@-doc
 -Section: doc
 -Architecture: all
@@ -82,12 +82,12 @@ diff -u python2.7-2.7.9/debian/rules python2.7-2.7.9/debian/rules
 @@ -121,8 +121,8 @@
  CC = $(DEB_HOST_GNU_TYPE)-gcc
  CXX=$(DEB_HOST_GNU_TYPE)-g++
- 
+
 -AR=$(DEB_HOST_GNU_TYPE)-ar
 -RANLIB=$(DEB_HOST_GNU_TYPE)-ranlib
 +AR=$(DEB_HOST_GNU_TYPE)-gcc-ar-4.7
 +RANLIB=$(DEB_HOST_GNU_TYPE)-gcc-ranlib-4.7
- 
+
  DPKG_CFLAGS  := $(shell dpkg-buildflags --get CPPFLAGS; dpkg-buildflags --get CFLAGS)
  DPKG_LDFLAGS := $(shell dpkg-buildflags --get LDFLAGS)
 @@ -171,8 +171,6 @@
@@ -97,20 +97,20 @@ diff -u python2.7-2.7.9/debian/rules python2.7-2.7.9/debian/rules
 -    AR=$(DEB_HOST_GNU_TYPE)-gcc-ar
 -    RANLIB=$(DEB_HOST_GNU_TYPE)-gcc-ranlib
  endif
- 
+
  make_build_target = $(if $(with_pgo),profile-opt)
 @@ -628,7 +626,6 @@
- 
+
  stamps/stamp-doc-html:
  	dh_testdir
 -	$(MAKE) -C Doc html
  	touch stamps/stamp-doc-html
- 
+
  build-doc: stamps/stamp-patch stamps/stamp-build-doc
 @@ -1215,30 +1212,6 @@
  	dh_testdir -i
  	dh_testroot -i
- 
+
 -	: # $(p_doc) package
 -	dh_installdirs -p$(p_doc) \
 -		usr/share/doc/$(p_base) \
@@ -140,7 +140,7 @@ diff -u python2.7-2.7.9/debian/rules python2.7-2.7.9/debian/rules
  	  ln -s $(p_lbase) debian/$$i/usr/share/doc/$$i; \
 @@ -1298,7 +1271,7 @@
  endif
- 
+
  	find $(d_ldbg) $(d_ldev) -name '*.a' ! -type l \
 -		| xargs -n 1 $(DEB_HOST_GNU_TYPE)-objcopy -p --remove-section=.gnu.lto_.*
 +		| xargs -n 1 objcopy -p --remove-section=.gnu.lto_.*

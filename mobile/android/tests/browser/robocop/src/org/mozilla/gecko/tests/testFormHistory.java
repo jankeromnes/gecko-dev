@@ -52,19 +52,19 @@ public class testFormHistory extends OldBaseTest {
         expectedUri = formHistoryUri.buildUpon().appendPath("1").build();
         mAsserter.is(expectedUri.toString(), insertUri.toString(), "Insert returned correct uri");
         SqliteCompare(DB_NAME, "SELECT * FROM moz_formhistory", cvs);
-  
+
         cvs[0].put("fieldname", "fieldname2");
         cvs[0].putNull("guid");
-  
+
         numUpdated = cr.update(formHistoryUri, cvs[0], null, null);
         mAsserter.is(1, numUpdated, "Correct number updated");
         SqliteCompare(DB_NAME, "SELECT * FROM moz_formhistory", cvs);
-  
+
         numDeleted = cr.delete(formHistoryUri, null, null);
         mAsserter.is(1, numDeleted, "Correct number deleted");
         cvs = new ContentValues[0];
         SqliteCompare(DB_NAME, "SELECT * FROM moz_formhistory", cvs);
-        
+
         cvs = new ContentValues[1];
         cvs[0] = new ContentValues();
         cvs[0].put("fieldname", "fieldname");
@@ -76,13 +76,13 @@ public class testFormHistory extends OldBaseTest {
         expectedUri = formHistoryUri.buildUpon().appendPath("1").build();
         mAsserter.is(expectedUri.toString(), insertUri.toString(), "Insert returned correct uri");
         SqliteCompare(DB_NAME, "SELECT * FROM moz_formhistory", cvs);
-  
+
         cvs[0].put("guid", "guid");
-  
+
         numUpdated = cr.update(formHistoryUri, cvs[0], null, null);
         mAsserter.is(1, numUpdated, "Correct number updated");
         SqliteCompare(DB_NAME, "SELECT * FROM moz_formhistory", cvs);
- 
+
         numDeleted = cr.delete(formHistoryUri, null, null);
         mAsserter.is(1, numDeleted, "Correct number deleted");
         cvs = new ContentValues[0];

@@ -189,7 +189,7 @@ TEST_P(DwarfHeader, Header) {
         .WillOnce(Return(true));
     EXPECT_CALL(handler, StartDIE(_, dwarf2reader::DW_TAG_compile_unit))
         .WillOnce(Return(true));
-    EXPECT_CALL(handler, ProcessAttributeString(_, dwarf2reader::DW_AT_name, 
+    EXPECT_CALL(handler, ProcessAttributeString(_, dwarf2reader::DW_AT_name,
                                                 dwarf2reader::DW_FORM_string,
                                                 "sam"))
         .WillOnce(Return());
@@ -303,7 +303,7 @@ TEST_P(DwarfForms, addr) {
   info.Finish();
 
   ExpectBeginCompilationUnit(GetParam(), dwarf2reader::DW_TAG_compile_unit);
-  EXPECT_CALL(handler, ProcessAttributeUnsigned(_, dwarf2reader::DW_AT_low_pc, 
+  EXPECT_CALL(handler, ProcessAttributeUnsigned(_, dwarf2reader::DW_AT_low_pc,
                                                 dwarf2reader::DW_FORM_addr,
                                                 value))
       .InSequence(s)

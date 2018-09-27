@@ -227,7 +227,7 @@ evutil_ersatz_socketpair_(int family, int type, int protocol,
 	ev_socklen_t size;
 	int saved_errno = -1;
 	int family_test;
-	
+
 	family_test = family != AF_INET;
 #ifdef AF_UNIX
 	family_test = family_test && (family != AF_UNIX);
@@ -236,7 +236,7 @@ evutil_ersatz_socketpair_(int family, int type, int protocol,
 		EVUTIL_SET_SOCKET_ERROR(ERR(EAFNOSUPPORT));
 		return -1;
 	}
-	
+
 	if (!fd) {
 		EVUTIL_SET_SOCKET_ERROR(ERR(EINVAL));
 		return -1;
@@ -392,9 +392,9 @@ evutil_make_tcp_listen_socket_deferred(evutil_socket_t sock)
 	int one = 1;
 
 	/* TCP_DEFER_ACCEPT tells the kernel to call defer accept() only after data
-	 * has arrived and ready to read */ 
+	 * has arrived and ready to read */
 	return setsockopt(sock, IPPROTO_TCP, TCP_DEFER_ACCEPT, &one,
-		(ev_socklen_t)sizeof(one)); 
+		(ev_socklen_t)sizeof(one));
 #endif
 	return 0;
 }

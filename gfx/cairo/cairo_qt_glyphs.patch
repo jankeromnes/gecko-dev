@@ -6,17 +6,17 @@ index 2ac06ef..5b61b42 100644
 @@ -45,6 +45,7 @@
  #include "cairo-surface-clipper-private.h"
  #include "cairo-types-private.h"
- 
+
 +#include "cairo-ft.h"
  #include "cairo-qt.h"
- 
+
  #include <memory>
 @@ -58,14 +59,10 @@
  #include <QtGui/QPen>
  #include <QtGui/QWidget>
  #include <QtGui/QX11Info>
 +#include <QtCore/QVarLengthArray>
- 
+
 -#if CAIRO_HAS_XLIB_XRENDER_SURFACE
 -#include "cairo-xlib.h"
 -#include "cairo-xlib-xrender.h"
@@ -27,12 +27,12 @@ index 2ac06ef..5b61b42 100644
 +#if (QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)) || defined(QT_GLYPHS_API_BACKPORT)
 +extern void qt_draw_glyphs(QPainter *, const quint32 *glyphs, const QPointF *positions, int count);
  #endif
- 
+
  #include <sys/time.h>
 @@ -118,15 +115,6 @@ struct cairo_qt_surface_t {
- 
+
      cairo_bool_t supports_porter_duff;
- 
+
 -#if defined(Q_WS_X11) && CAIRO_HAS_XLIB_XRENDER_SURFACE
 -    /* temporary, so that we can share the xlib surface's glyphs code */
 -    bool xlib_has_clipping;
@@ -43,12 +43,12 @@ index 2ac06ef..5b61b42 100644
 -#endif
 -
      QPainter *p;
- 
+
      /* The pixmap/image constructors will store their objects here */
 @@ -145,11 +133,6 @@ struct cairo_qt_surface_t {
   */
  static cairo_bool_t _qpixmaps_have_no_alpha = FALSE;
- 
+
 -#if defined(Q_WS_X11) && CAIRO_HAS_XLIB_XRENDER_SURFACE
 -slim_hidden_proto (cairo_xlib_surface_create);
 -slim_hidden_proto (cairo_xlib_surface_create_with_xrender_format);
@@ -58,9 +58,9 @@ index 2ac06ef..5b61b42 100644
   ** Helper methods
   **/
 @@ -498,11 +481,6 @@ _cairo_qt_surface_finish (void *abstract_surface)
- 
+
      _cairo_surface_clipper_reset (&qs->clipper);
- 
+
 -#if defined(Q_WS_X11) && CAIRO_HAS_XLIB_XRENDER_SURFACE
 -    if (qs->xlib_equiv)
 -        cairo_surface_destroy (qs->xlib_equiv);
@@ -68,14 +68,14 @@ index 2ac06ef..5b61b42 100644
 -
      if (qs->image)
          delete qs->image;
- 
+
 @@ -1392,33 +1370,40 @@ _cairo_qt_surface_show_glyphs (void *abstract_surface,
  			       cairo_clip_t *clip,
  			       int *remaining_glyphs)
  {
 +#if (QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)) || defined(QT_GLYPHS_API_BACKPORT)
      cairo_qt_surface_t *qs = (cairo_qt_surface_t *) abstract_surface;
- 
+
 -#if defined(Q_WS_X11) && CAIRO_HAS_XLIB_XRENDER_SURFACE
 -    /* If we have an equivalent X surface, let the xlib surface handle this
 -     * until we figure out how to do this natively with Qt.
@@ -131,11 +131,11 @@ index 2ac06ef..5b61b42 100644
      return CAIRO_INT_STATUS_UNSUPPORTED;
 +#endif
  }
- 
+
  static cairo_int_status_t
 @@ -1555,24 +1540,6 @@ _cairo_qt_surface_composite (cairo_operator_t op,
  }
- 
+
  static cairo_status_t
 -_cairo_qt_surface_flush (void *abstract_surface)
 -{
@@ -170,7 +170,7 @@ index 2ac06ef..5b61b42 100644
 @@ -1629,64 +1596,6 @@ static const cairo_surface_backend_t cairo_qt_surface_backend = {
      NULL, /* show_text_glyphs */
  };
- 
+
 -#if defined(Q_WS_X11) && CAIRO_HAS_XLIB_XRENDER_SURFACE
 -static cairo_surface_t *
 -_cairo_qt_create_xlib_surface (cairo_qt_surface_t *qs)
@@ -233,9 +233,9 @@ index 2ac06ef..5b61b42 100644
  cairo_qt_surface_create (QPainter *painter)
  {
 @@ -1717,10 +1626,6 @@ cairo_qt_surface_create (QPainter *painter)
- 
+
      qs->window = painter->window();
- 
+
 -#if defined(Q_WS_X11) && CAIRO_HAS_XLIB_XRENDER_SURFACE
 -    qs->xlib_equiv = _cairo_qt_create_xlib_surface (qs);
 -#endif
@@ -244,9 +244,9 @@ index 2ac06ef..5b61b42 100644
                qs->window.x(), qs->window.y(), qs->window.width(), qs->window.height(),
                qs->supports_porter_duff));
 @@ -1819,10 +1724,6 @@ cairo_qt_surface_create_with_qpixmap (cairo_content_t content,
- 
+
      qs->window = QRect(0, 0, width, height);
- 
+
 -#if defined(Q_WS_X11) && CAIRO_HAS_XLIB_XRENDER_SURFACE
 -    qs->xlib_equiv = _cairo_qt_create_xlib_surface (qs);
 -#endif

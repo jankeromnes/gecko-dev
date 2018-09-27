@@ -4,7 +4,7 @@ http://liangsun.info/portfolio/nsis-plugin-litefirewall/
 http://nsis.sourceforge.net/LiteFirewall_Plugin
 
 ---------------------------------------------------------
-liteFirewall resolved the issue nsisFirewall exists on Vista/Windows 7 platforms. 
+liteFirewall resolved the issue nsisFirewall exists on Vista/Windows 7 platforms.
 It support the profiles (private, domain, public) of firewall rules.
 It support Unicode NSIS, while another firewall plugin SimpleFC not.
 ------------------------------------------------------------

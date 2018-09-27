@@ -18,11 +18,11 @@ if (x !== 0) {
 }
 
 //CHECK#3
-var // y = 1; 
+var // y = 1;
 y;
 if (y !== undefined) {
   $ERROR('#3: var // y = 1; \\n y; y === undefined. Actual: ' + (y));
-}  
+}
 
 //CHECK#4
 //$ERROR('#4: Correct interpretation single line comments') //$ERROR('#4: Correct interpretation single line comments'); //
@@ -34,7 +34,7 @@ if (y !== undefined) {
 //}
 
 //CHECK#6
-//var this.y = 1; 
+//var this.y = 1;
 this.y++;
 if (isNaN(y) !== true) {
   $ERROR('#6: //var this.y = 1; \\n this.y++; y === Not-a-Number. Actual: ' + (y));

@@ -1472,8 +1472,8 @@ pkix_pl_Cert_CreateToList(
 
         handle  = CERT_GetDefaultCertDB();
         nssCert = CERT_NewTempCertificate(handle, derCertItem,
-					  /* nickname */ NULL, 
-					  /* isPerm   */ PR_FALSE, 
+					  /* nickname */ NULL,
+					  /* isPerm   */ PR_FALSE,
 					  /* copyDer  */ PR_TRUE);
         if (!nssCert) {
             goto cleanup;
@@ -1543,8 +1543,8 @@ PKIX_PL_Cert_Create(
          */
         handle  = CERT_GetDefaultCertDB();
         nssCert = CERT_NewTempCertificate(handle, derCertItem,
-					  /* nickname */ NULL, 
-					  /* isPerm   */ PR_FALSE, 
+					  /* nickname */ NULL,
+					  /* isPerm   */ PR_FALSE,
 					  /* copyDer  */ PR_TRUE);
         if (!nssCert){
                 PKIX_ERROR(PKIX_CERTDECODEDERCERTIFICATEFAILED);
@@ -2463,15 +2463,15 @@ PKIX_PL_Cert_GetBasicConstraints(
                         }
 
                         if (constraintSource == absentBC) {
-                            /* can we deduce it's a CA and create a 
+                            /* can we deduce it's a CA and create a
                                synthetic constraint?
                             */
                             CERTCertTrust trust;
                             rv = CERT_GetCertTrust(nssCert, &trust);
                             if (rv == SECSuccess) {
                                 int anyWantedFlag = CERTDB_TRUSTED_CA | CERTDB_VALID_CA;
-                                if ((trust.sslFlags & anyWantedFlag) 
-                                    || (trust.emailFlags & anyWantedFlag) 
+                                if ((trust.sslFlags & anyWantedFlag)
+                                    || (trust.emailFlags & anyWantedFlag)
                                     || (trust.objectSigningFlags & anyWantedFlag)) {
 
                                     constraintSource = synthBC;
@@ -2491,7 +2491,7 @@ PKIX_PL_Cert_GetBasicConstraints(
                     pathLen = PKIX_UNLIMITED_PATH_CONSTRAINT;
                 } else {
                     isCA = (nssBasicConstraint.isCA)?PKIX_TRUE:PKIX_FALSE;
-    
+
                     /* The pathLen has meaning only for CAs */
                     if (isCA) {
                         if (CERT_UNLIMITED_PATH_CONSTRAINT ==
@@ -2607,13 +2607,13 @@ PKIX_PL_Cert_GetPolicyMappings(
                 PKIX_OBJECT_UNLOCK(cert);
 
                 /* save a cached copy in case it is asked for again */
-                cert->certPolicyMappings = policyMappings; 
+                cert->certPolicyMappings = policyMappings;
                 policyMappings = NULL;
         }
 
         PKIX_INCREF(cert->certPolicyMappings);
         *pPolicyMappings = cert->certPolicyMappings;
-        
+
 cleanup:
 	PKIX_OBJECT_UNLOCK(lockedObject);
 
@@ -2969,15 +2969,15 @@ PKIX_PL_Cert_VerifyCertAndKeyType(
     unsigned int requiredCertType;
     unsigned int certType;
     SECStatus rv = SECSuccess;
-    
+
     PKIX_ENTER(CERT, "PKIX_PL_Cert_VerifyCertType");
     PKIX_NULLCHECK_TWO(cert, plContext);
-    
+
     certificateUsage = ((PKIX_PL_NssContext*)plContext)->certificateUsage;
-    
+
     /* ensure we obtained a single usage bit only */
     PORT_Assert(!(certificateUsage & (certificateUsage - 1)));
-    
+
     /* convert SECertificateUsage (bit mask) to SECCertUsage (enum) */
     while (0 != (certificateUsage = certificateUsage >> 1)) { certUsage++; }
 
@@ -3383,14 +3383,14 @@ cleanup:
 
 /* FUNCTION: PKIX_PL_Cert_SetAsTrustAnchor */
 PKIX_Error*
-PKIX_PL_Cert_SetAsTrustAnchor(PKIX_PL_Cert *cert, 
+PKIX_PL_Cert_SetAsTrustAnchor(PKIX_PL_Cert *cert,
                               void *plContext)
 {
     PKIX_ENTER(CERT, "PKIX_PL_Cert_SetAsTrustAnchor");
     PKIX_NULLCHECK_ONE(cert);
-    
+
     cert->isUserTrustAnchor = PKIX_TRUE;
-    
+
     PKIX_RETURN(CERT);
 }
 
@@ -3651,12 +3651,12 @@ PKIX_PL_Cert_GetCrlDp(
     void *plContext)
 {
     PKIX_UInt32 dpIndex = 0;
-    pkix_pl_CrlDp *dp = NULL; 
+    pkix_pl_CrlDp *dp = NULL;
     CERTCrlDistributionPoints *dpoints = NULL;
 
     PKIX_ENTER(CERT, "PKIX_PL_Cert_GetCrlDp");
     PKIX_NULLCHECK_THREE(cert, cert->nssCert, pDpList);
-                
+
     /* if we don't have a cached copy from before, we create one */
     if (cert->crldpList == NULL) {
         PKIX_OBJECT_LOCK(cert);
@@ -3702,7 +3702,7 @@ cleanup:
 PKIX_Error *
 PKIX_PL_Cert_GetCERTCertificate(
         PKIX_PL_Cert *cert,
-        CERTCertificate **pnssCert, 
+        CERTCertificate **pnssCert,
         void *plContext)
 {
     PKIX_ENTER(CERT, "PKIX_PL_Cert_GetNssCert");

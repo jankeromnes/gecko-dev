@@ -13,6 +13,6 @@ diff --git a/lld/COFF/Driver.cpp b/lld/COFF/Driver.cpp
    Symtab->addAbsolute(mangle("__guard_longjmp_table"), 0);
 +  // Needed for MSVC 2017 15.5 CRT.
 +  Symtab->addAbsolute(mangle("__enclave_config"), 0);
- 
+
    // This code may add new undefined symbols to the link, which may enqueue more
    // symbol resolution tasks, so we need to continue executing tasks until we

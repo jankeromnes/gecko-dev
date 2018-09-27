@@ -1,4 +1,4 @@
-function returnZero() { return 0; } 
+function returnZero() { return 0; }
 function test() {
   var a = "a";
   var b = "b";

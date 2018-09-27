@@ -39,6 +39,6 @@ function test()
       actual = "FAILED: " + e;
     }
   }
- 
+
   reportCompare(expect, actual, summary);
 }

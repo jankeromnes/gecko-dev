@@ -4,7 +4,7 @@ function asmModule(g, foreign, heap) {
     "use asm";
     let HEAP8 = new g.Int8Array(heap);
 
-    function f() { return 99; } 
+    function f() { return 99; }
     return {f: f};
 }
 

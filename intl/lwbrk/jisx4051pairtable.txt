@@ -1,7 +1,7 @@
 
 
 
-/* 
+/*
 
    Simplification of Pair Table in JIS X 4051
 
@@ -11,7 +11,7 @@
 
    Class of
    Leading    Class of Trailing Char Class
-   Char        
+   Char
 
               1  2  3  4  5  6  7  8  9 10 11 12 13 13 14 14 15 16 17 18 19 20
                                                  *  #  *  #
@@ -21,18 +21,18 @@
         4        X  X  X  X  X                                               X
         5        X  X  X  X  X                                               X
         6        X  X  X  X  X                                               X
-        7        X  X  X  X  X  X                                            X 
-        8        X  X  X  X  X                                X              E 
+        7        X  X  X  X  X  X                                            X
+        8        X  X  X  X  X                                X              E
         9        X  X  X  X  X                                               X
        10        X  X  X  X  X                                               X
        11        X  X  X  X  X                                               X
-       12        X  X  X  X  X                                               X  
+       12        X  X  X  X  X                                               X
        13        X  X  X  X  X                    X                          X
        14        X  X  X  X  X                          X                    X
-       15        X  X  X  X  X        X                       X        X     X 
+       15        X  X  X  X  X        X                       X        X     X
        16        X  X  X  X  X                                   X     X     X
-       17        X  X  X  X  X                                               E 
-       18        X  X  X  X  X                                X  X     X     X 
+       17        X  X  X  X  X                                               E
+       18        X  X  X  X  X                                X  X     X     X
        19     X  E  E  E  E  E  X  X  X  X  X  X  X  X  X  X  X  X  E  X  E  E
        20        X  X  X  X  X                                               E
 
@@ -41,62 +41,62 @@
 
    2. Simplified by remove the class which we do not care
 
-   However, since we do not care about class 13(Subscript), 14(Ruby), 
-   19(split line note begin quote), and 20(split line note end quote) 
-   we can simplify this par table into the following 
+   However, since we do not care about class 13(Subscript), 14(Ruby),
+   19(split line note begin quote), and 20(split line note end quote)
+   we can simplify this par table into the following
 
    Class of
    Leading    Class of Trailing Char Class
-   Char        
+   Char
 
-              1  2  3  4  5  6  7  8  9 10 11 12 15 16 17 18 
-                                                 
+              1  2  3  4  5  6  7  8  9 10 11 12 15 16 17 18
+
         1     X  X  X  X  X  X  X  X  X  X  X  X  X  X  X  X
-        2        X  X  X  X  X                             
-        3        X  X  X  X  X                            
-        4        X  X  X  X  X                           
-        5        X  X  X  X  X                          
-        6        X  X  X  X  X                         
-        7        X  X  X  X  X  X                      
-        8        X  X  X  X  X                    X    
-        9        X  X  X  X  X                                   
-       10        X  X  X  X  X                                  
-       11        X  X  X  X  X                                 
-       12        X  X  X  X  X                                
-       15        X  X  X  X  X        X           X        X    
-       16        X  X  X  X  X                       X     X    
-       17        X  X  X  X  X                                  
-       18        X  X  X  X  X                    X  X     X    
+        2        X  X  X  X  X
+        3        X  X  X  X  X
+        4        X  X  X  X  X
+        5        X  X  X  X  X
+        6        X  X  X  X  X
+        7        X  X  X  X  X  X
+        8        X  X  X  X  X                    X
+        9        X  X  X  X  X
+       10        X  X  X  X  X
+       11        X  X  X  X  X
+       12        X  X  X  X  X
+       15        X  X  X  X  X        X           X        X
+       16        X  X  X  X  X                       X     X
+       17        X  X  X  X  X
+       18        X  X  X  X  X                    X  X     X
 
    3. Simplified by merged classes
 
-   After the 2 simplification, the pair table have some duplication 
+   After the 2 simplification, the pair table have some duplication
    a. class 2, 3, 4, 5, 6,  are the same- we can merged them
    b. class 10, 11, 12, 17  are the same- we can merged them
 
 
    Class of
    Leading    Class of Trailing Char Class
-   Char        
+   Char
 
-              1 [a] 7  8  9 [b]15 16 18 
-                                     
+              1 [a] 7  8  9 [b]15 16 18
+
         1     X  X  X  X  X  X  X  X  X
-      [a]        X                             
-        7        X  X                      
-        8        X              X    
-        9        X                                   
-      [b]        X                                  
-       15        X        X     X     X    
-       16        X                 X  X    
-       18        X              X  X  X    
+      [a]        X
+        7        X  X
+        8        X              X
+        9        X
+      [b]        X
+       15        X        X     X     X
+       16        X                 X  X
+       18        X              X  X  X
 
 
    4. Now we use one bit to encode weather it is breakable, and use 2 bytes
       for one row, then the bit table will look like:
 
                  18    <-   1
-            
+
        1  0000 0001 1111 1111  = 0x01FF
       [a] 0000 0000 0000 0010  = 0x0002
        7  0000 0000 0000 0110  = 0x0006
@@ -132,14 +132,14 @@ nsJISx4051Cls XXXX::GetClass(
    {
      return kJISx4051Cls_15;
    }
-   
+
    nsJISx4051Cls cls;
    if(gSingle->Lookup(aChar, &cls))
      return cls;
 
    if(gRange->Lookup(aChar, &cls))
      return cls;
- 
+
    return kJISx4051Cls_15;
 }
 
@@ -244,7 +244,7 @@ typedef enum {
   // Table 5
   YYYY(kJISx4051Cls_4 , 0x0021),
   YYYY(kJISx4051Cls_4 , 0x003F),
-   
+
   // Table 6
   YYYY(kJISx4051Cls_5 , 0x003A),
   YYYY(kJISx4051Cls_5 , 0x003B),

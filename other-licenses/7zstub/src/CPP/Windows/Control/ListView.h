@@ -26,7 +26,7 @@ public:
     ListView_SetUnicodeFormat(_window, TRUE);
     #endif
   }
- 
+
   bool DeleteAllItems() { return BOOLToBool(ListView_DeleteAllItems(_window)); }
   bool DeleteColumn(int columnIndex) { return BOOLToBool(ListView_DeleteColumn(_window, columnIndex)); }
 
@@ -73,7 +73,7 @@ public:
   int GetNextItem(int startIndex, UINT flags) const { return ListView_GetNextItem(_window, startIndex, flags); }
   int GetNextSelectedItem(int startIndex) const { return GetNextItem(startIndex, LVNI_SELECTED); }
   int GetFocusedItem() const { return GetNextItem(-1, LVNI_FOCUSED); }
-  
+
   bool GetItem(LVITEM* item) const { return BOOLToBool(ListView_GetItem(_window, item)); }
   bool GetItemParam(int itemIndex, LPARAM &param) const;
   void GetItemText(int itemIndex, int subItemIndex, LPTSTR text, int textSizeMax) const
@@ -118,7 +118,7 @@ public:
     return true;
   }
   bool RedrawItem(int index) { return RedrawItems(index, index); }
- 
+
   int HitTest(LPLVHITTESTINFO info) { return ListView_HitTest(_window, info); }
   COLORREF GetBkColor() { return ListView_GetBkColor(_window); }
   bool SetColumnWidth(int iCol, int cx) { return BOOLToBool(ListView_SetColumnWidth(_window, iCol, cx)); }

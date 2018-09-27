@@ -6,7 +6,7 @@ CORE_DEPTH = ../..
 
 MODULE = nss
 
-EXPORTS = 
+EXPORTS =
 
 CSRCS = signtool.c		\
 		certgen.c	\

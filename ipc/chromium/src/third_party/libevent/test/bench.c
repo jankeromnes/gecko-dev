@@ -136,7 +136,7 @@ run_once(void)
 int
 main(int argc, char **argv)
 {
-#ifdef HAVE_SETRLIMIT 
+#ifdef HAVE_SETRLIMIT
 	struct rlimit rl;
 #endif
 	int i, c;

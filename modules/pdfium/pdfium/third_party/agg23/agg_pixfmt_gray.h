@@ -40,7 +40,7 @@ template<class ColorT> struct blender_gray  {
     }
 };
 template<class Blender, unsigned Step = 1, unsigned Offset = 0>
-class pixel_formats_gray 
+class pixel_formats_gray
 {
 public:
     typedef rendering_buffer::row_data row_data;

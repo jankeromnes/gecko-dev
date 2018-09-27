@@ -9,14 +9,14 @@ public class BinTree extends InWindow
 	int _cyclicBufferPos;
 	int _cyclicBufferSize = 0;
 	int _matchMaxLen;
-	
+
 	int[] _son;
 	int[] _hash;
-	
+
 	int _cutValue = 0xFF;
 	int _hashMask;
 	int _hashSizeSum = 0;
-	
+
 	boolean HASH_ARRAY = true;
 
 	static final int kHash2Size = 1 << 10;
@@ -26,7 +26,7 @@ public class BinTree extends InWindow
 	static final int kHash3Offset = kHash2Size;
 	static final int kEmptyHashValue = 0;
 	static final int kMaxValForNormalize = (1 << 30) - 1;
-	
+
 	int kNumHashDirectBytes = 0;
 	int kMinMatchCheck = 4;
 	int kFixHashSize = kHash2Size + kHash3Size;
@@ -47,9 +47,9 @@ public class BinTree extends InWindow
 			kFixHashSize = 0;
 		}
 	}
-	
 
-	
+
+
 
 	public void Init() throws IOException
 	{
@@ -59,7 +59,7 @@ public class BinTree extends InWindow
 		_cyclicBufferPos = 0;
 		ReduceOffsets(-1);
 	}
-	
+
 	public void MovePos() throws IOException
 	{
 		if (++_cyclicBufferPos >= _cyclicBufferSize)
@@ -68,14 +68,14 @@ public class BinTree extends InWindow
 		if (_pos == kMaxValForNormalize)
 			Normalize();
 	}
-	
 
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 	public boolean Create(int historySize, int keepAddBufferBefore,
 			int matchMaxLen, int keepAddBufferAfter)
 	{
@@ -85,9 +85,9 @@ public class BinTree extends InWindow
 
 		int windowReservSize = (historySize + keepAddBufferBefore +
 				matchMaxLen + keepAddBufferAfter) / 2 + 256;
-		
+
 		super.Create(historySize + keepAddBufferBefore, matchMaxLen + keepAddBufferAfter, windowReservSize);
-		
+
 		_matchMaxLen = matchMaxLen;
 
 		int cyclicBufferSize = historySize + 1;
@@ -135,7 +135,7 @@ public class BinTree extends InWindow
 		int cur = _bufferOffset + _pos;
 		int maxLen = kStartMaxLen; // to avoid items for len < hashSize;
 		int hashValue, hash2Value = 0, hash3Value = 0;
-		
+
 		if (HASH_ARRAY)
 		{
 			int temp = CrcTable[_bufferBase[cur] & 0xFF] ^ (_bufferBase[cur + 1] & 0xFF);
@@ -268,7 +268,7 @@ public class BinTree extends InWindow
 
 			int matchMinPos = (_pos > _cyclicBufferSize) ? (_pos - _cyclicBufferSize) : 0;
 			int cur = _bufferOffset + _pos;
-			
+
 			int hashValue;
 
 			if (HASH_ARRAY)
@@ -340,7 +340,7 @@ public class BinTree extends InWindow
 		}
 		while (--num != 0);
 	}
-	
+
 	void NormalizeLinks(int[] items, int numItems, int subValue)
 	{
 		for (int i = 0; i < numItems; i++)
@@ -353,7 +353,7 @@ public class BinTree extends InWindow
 			items[i] = value;
 		}
 	}
-	
+
 	void Normalize()
 	{
 		int subValue = _pos - _cyclicBufferSize;
@@ -361,7 +361,7 @@ public class BinTree extends InWindow
 		NormalizeLinks(_hash, _hashSizeSum, subValue);
 		ReduceOffsets(subValue);
 	}
-	
+
 	public void SetCutValue(int cutValue) { _cutValue = cutValue; }
 
 	private static final int[] CrcTable = new int[256];

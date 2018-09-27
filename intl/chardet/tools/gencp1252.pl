@@ -37,7 +37,7 @@ my($cp1252_ver);
 
 package genverifier;
 @cp1252_st = (
-# 0  1  2  
+# 0  1  2
   1, 3, 0,  # Start State - 0
   1, 1, 1,  # Error State - 1
   2, 2, 2,  # ItsMe State - 2
@@ -47,7 +47,7 @@ package genverifier;
 );
 
 
-$cp1252_ver = genverifier::GenVerifier("CP1252", "windows-1252", 
+$cp1252_ver = genverifier::GenVerifier("CP1252", "windows-1252",
          \@cp1252_cls, 3,     \@cp1252_st);
 print $cp1252_ver;
 

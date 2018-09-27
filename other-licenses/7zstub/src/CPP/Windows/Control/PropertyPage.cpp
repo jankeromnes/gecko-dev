@@ -72,7 +72,7 @@ INT_PTR MyPropertySheet(const CObjectVector<CPageInfo> &pagesInfo, HWND hwndPare
       page.pszTemplate = MAKEINTRESOURCE(pageInfo.ID);
       page.pszIcon = NULL;
       page.pfnDlgProc = NWindows::NControl::MyProperyPageProcedure;
-      
+
       if (titles[i].IsEmpty())
         page.pszTitle = NULL;
       else
@@ -93,7 +93,7 @@ INT_PTR MyPropertySheet(const CObjectVector<CPageInfo> &pagesInfo, HWND hwndPare
       page.pszTemplate = MAKEINTRESOURCEW(pageInfo.ID);
       page.pszIcon = NULL;
       page.pfnDlgProc = NWindows::NControl::MyProperyPageProcedure;
-      
+
       if (pageInfo.Title.IsEmpty())
         page.pszTitle = NULL;
       else

@@ -5,5 +5,5 @@ function DoWhileObject( d, e, s ) {
 }
 function DoWhile( object ) {
   while ( object.whileExpression ) eval(  );
-  Boolean  
+  Boolean
 }

@@ -3,7 +3,7 @@
         Test that solid colors are inherited when using the objectStroke
       paint server value in SVG glyphs
   -->
-  
+
   <style type="text/css">
     <![CDATA[
       @font-face {
@@ -17,7 +17,7 @@
       }
     ]]>
   </style>
-  
+
   <text stroke="cornflowerblue" x="0" y="200">
   P
   </text>

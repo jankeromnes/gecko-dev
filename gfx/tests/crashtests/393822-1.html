@@ -10,9 +10,9 @@ function boom()
   ff = document.createElement("font");
   ff.setAttribute("size", "-2");
   ff.appendChild(document.createTextNode("G"));
-  
+
   jj = document.getElementById("jj");
-  
+
   jj.appendChild(ff);
   setTimeout(boom2, 30);
 }
@@ -20,10 +20,10 @@ function boom()
 function boom2()
 {
   jj.removeChild(ff);
-  
+
   document.documentElement.removeAttribute("class");
 }
-  
+
 </script>
 </head>
 

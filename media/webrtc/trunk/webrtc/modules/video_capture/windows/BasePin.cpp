@@ -75,14 +75,14 @@ public:
   {
     if (!aMediaTypes)
       return E_POINTER;
-  
+
     if (aNumFetched) {
       *aNumFetched = 0;
     } else if (aCount > 1) {
       // !aNumFetched && aCount>1, we can't report how many media types we read.
       return E_INVALIDARG;
     }
-  
+
     unsigned int numFetched = 0;
     while (numFetched < aCount) {
       // Get the media type
@@ -91,7 +91,7 @@ public:
       if (hr != S_OK) {
         break;
       }
-  
+
       // Create a copy of media type on the free store.
       MediaType* m = new MediaType(mediaType);
       if (!m)
@@ -99,13 +99,13 @@ public:
       aMediaTypes[numFetched] = m;
       if (!aMediaTypes[numFetched])
         break;
-  
+
       numFetched++;
     }
-  
+
     if (aNumFetched)
       *aNumFetched = numFetched;
-  
+
     return (numFetched == aCount) ? S_OK : S_FALSE;
   }
 
@@ -113,20 +113,20 @@ public:
   {
     if (aCount == 0)
       return S_OK;
-  
+
     // Advance the media type index by |aCount|.
     mIndex += aCount;
-  
+
     // See if the new index is *past* the end by querying for a media type.
     MediaType mediaType;
     HRESULT hr = mPin->GetMediaType(mIndex-1, &mediaType);
-  
+
     // Forget mediaTypes pointers, so nsMediaType destructor it won't release them.
     mediaType.Forget();
-  
+
     return (hr != S_OK) ? S_OK : S_FALSE;
   }
-  
+
   STDMETHODIMP Reset()
   {
     mIndex = 0;
@@ -137,15 +137,15 @@ public:
   {
     if (!aClone)
       return E_POINTER;
-  
+
     EnumMediaTypes* e = new EnumMediaTypes(this);
     if (!e)
       return E_OUTOFMEMORY;
-  
+
     e->AddRef();
-  
+
     *aClone = static_cast<IEnumMediaTypes*>(e);
-  
+
     return S_OK;
   }
 
@@ -245,7 +245,7 @@ BasePin::QueryId(LPWSTR * aId)
   WCHAR* str = NULL;
 
   // Length not including null-terminator.
-  unsigned int sz = mName.length() * sizeof(WCHAR); 
+  unsigned int sz = mName.length() * sizeof(WCHAR);
 
   // Allocate memory for new string copy, plus 1 for null-terminator.
   str = (LPWSTR)CoTaskMemAlloc(sz + sizeof(WCHAR));

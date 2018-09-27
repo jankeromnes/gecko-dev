@@ -21,7 +21,7 @@ UNNECESSARY EXECUTABLE PERMISSION:specs/1.0
 UNNECESSARY EXECUTABLE PERMISSION:specs/2.0
 
 ## Ignore INDENT TABS ##
- 
+
 INDENT TABS:*.frag
 INDENT TABS:*.vert
 #The original dEQP tests used tabs throughout.

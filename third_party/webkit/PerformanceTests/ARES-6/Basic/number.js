@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -29,21 +29,21 @@ class NumberValue {
     {
         this._value = value;
     }
-    
+
     get value() { return this._value; }
-    
+
     apply(state, parameters)
     {
         state.validate(parameters.length == 0, "Should not pass arguments to simple numeric variables");
         return this._value;
     }
-    
+
     leftApply(state, parameters)
     {
         state.validate(parameters.length == 0, "Should not pass arguments to simple numeric variables");
         return this;
     }
-    
+
     assign(value)
     {
         this._value = value;
@@ -65,16 +65,16 @@ class NumberArray {
             }
             return result;
         }
-        
+
         this._array = allocateDim(0);
         this._dim = dim;
     }
-    
+
     apply(state, parameters)
     {
         return this.leftApply(state, parameters).apply(state, []);
     }
-    
+
     leftApply(state, parameters)
     {
         if (this._dim.length != parameters.length)
@@ -96,7 +96,7 @@ class NumberFunction {
         this._parameters = parameters;
         this._code = code;
     }
-    
+
     apply(state, parameters)
     {
         if (this._parameters.length != parameters.length)
@@ -109,7 +109,7 @@ class NumberFunction {
         state.values = oldValues;
         return result;
     }
-    
+
     leftApply(state, parameters)
     {
         state.abort("Cannot use a function as an lvalue");
@@ -121,14 +121,14 @@ class NativeFunction {
     {
         this._callback = callback;
     }
-    
+
     apply(state, parameters)
     {
         if (this._callback.length != parameters.length)
             state.abort("Expected " + this._callback.length + " arguments but " + parameters.length + " were passed");
         return this._callback(...parameters);
     }
-    
+
     leftApply(state, parameters)
     {
         state.abort("Cannot use a native function as an lvalue");

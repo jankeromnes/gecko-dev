@@ -31,6 +31,6 @@ function test()
   f();
   print(f());
 
- 
+
   reportCompare(expect, actual, summary);
 }

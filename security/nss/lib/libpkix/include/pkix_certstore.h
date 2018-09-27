@@ -56,7 +56,7 @@ extern "C" {
  * ToString, Compare, Duplicate). Please note that each certStoreContext must
  * provide Equals and Hashcode functions in order for the caching (on Cert and
  * CertChain) to work correctly. When providing those two functions, it is not
- * required that all the components of the object be hashed or checked for 
+ * required that all the components of the object be hashed or checked for
  * equality, but merely that the functions distinguish between unique
  * instances of the certStoreContext.
  *
@@ -142,7 +142,7 @@ typedef PKIX_Error *
  * DESCRIPTION:
  *
  *  This function continues the non-blocking operation initiated by an earlier
- *  call to the CertCallback function, for the CertStore pointed to by "store". 
+ *  call to the CertCallback function, for the CertStore pointed to by "store".
  *  If an earlier call did not terminate with the WOULDBLOCK indication (non-NULL
  *  value returned in "pNBIOContext") calling this function will return a fatal
  *  error. If the operation is completed the certificates found are placed in a
@@ -290,7 +290,7 @@ typedef PKIX_Error *
  * The function checks revocation status of a cert with specified
  * issuer, date. It returns revocation status of a cert and
  * a reason code(if any) if a cert was revoked.
- * 
+ *
  * PARAMETERS:
  *  "store"
  *      Address of CertStore from which CRLs are to be retrieved.
@@ -337,7 +337,7 @@ typedef PKIX_Error *
  * DESCRIPTION:
  *
  *  This function continues the non-blocking operation initiated by an earlier
- *  call to the CRLCallback function, for the CertStore pointed to by "store". 
+ *  call to the CRLCallback function, for the CertStore pointed to by "store".
  *  If an earlier call did not terminate with the WOULDBLOCK indication (non-NULL
  *  value returned in "pNBIOContext") calling this function will return a fatal
  *  error. If the operation is completed the crls found are placed in a List, a

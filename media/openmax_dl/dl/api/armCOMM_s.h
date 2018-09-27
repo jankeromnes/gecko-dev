@@ -11,16 +11,16 @@
 @//  This file was originally licensed as follows. It has been
 @//  relicensed with permission from the copyright holders.
 @//
-	
-@// 
+
+@//
 @// File Name:  armCOMM_s.h
 @// OpenMAX DL: v1.0.2
 @// Last Modified Revision:   13871
 @// Last Modified Date:       Fri, 09 May 2008
-@// 
+@//
 @// (c) Copyright 2007-2008 ARM Limited. All Rights Reserved.
-@// 
-@// 
+@//
+@//
 @//
 @// ARM optimized OpenMAX common header file
 @//
@@ -32,7 +32,7 @@
 	.set	_DRegList, 0	@ D saved register list (last register number)
 
         @// Work out a list of R saved registers, and how much stack space is needed.
-	@// gas doesn't support setting a variable to a string, so we set _RRegList to 
+	@// gas doesn't support setting a variable to a string, so we set _RRegList to
 	@// the register number.
 	.macro	_M_GETRREGLIST	rreg
 	.ifeqs "\rreg", ""
@@ -145,14 +145,14 @@
 
 @//////////////////////////////////////////////////////////
 @// Function header and footer macros
-@//////////////////////////////////////////////////////////      
-	
-        @ Function Header Macro    
+@//////////////////////////////////////////////////////////
+
+        @ Function Header Macro
         @ Generates the function prologue
         @ Note that functions should all be "stack-moves-once"
         @ The FNSTART and FNEND macros should be the only places
         @ where the stack moves.
-        @    
+        @
         @  name  = function name
         @  rreg  = ""   don't stack any registers
         @          "lr" stack "lr" only
@@ -174,7 +174,7 @@
 	.fpu neon
 	.object_arch armv4
 	.align	2
-\name :		
+\name :
 .fnstart
 	@ Save specified R registers
 	_M_GETRREGLIST	\rreg
@@ -190,10 +190,10 @@
 	.endif
 	.if _SBytes != 0
 		sub	sp, sp, #_SBytes
-	.endif	
+	.endif
 	.endm
 
-        @ Function Footer Macro        
+        @ Function Footer Macro
         @ Generates the function epilogue
 	.macro M_END
 	@ Restore the stack pointer to its original value on function entry
@@ -202,80 +202,80 @@
 	.endif
 	@ Restore any saved R or D registers.
 	_M_RET
-	.fnend	
+	.fnend
 	.endfunc
         @ Reset the global stack tracking variables back to their
 	@ initial values.
 	.set _SBytes, 0
 	.endm
 
-	@// Based on the value of _DRegList, push the specified set of registers 
+	@// Based on the value of _DRegList, push the specified set of registers
 	@// to the stack.  Is there a better way?
 	.macro _M_PUSH_DREG
 	.if _DRegList == 8
 		vpush	{d8}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 9
 		vpush	{d8-d9}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 10
 		vpush	{d8-d10}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 11
 		vpush	{d8-d11}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 12
 		vpush	{d8-d12}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 13
 		vpush	{d8-d13}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 14
 		vpush	{d8-d14}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 15
 		vpush	{d8-d15}
 	.exitm
 	.endif
 	.endm
 
-	@// Based on the value of _RRegList, push the specified set of registers 
+	@// Based on the value of _RRegList, push the specified set of registers
 	@// to the stack.  Is there a better way?
 	.macro _M_PUSH_RREG
 	.if _RRegList == 4
 		stmfd	sp!, {r4, lr}
 	.exitm
 	.endif
-	
+
 	.if _RRegList == 6
 		stmfd	sp!, {r4-r6, lr}
 	.exitm
 	.endif
-	
+
 	.if _RRegList == 8
 		stmfd	sp!, {r4-r8, lr}
 	.exitm
 	.endif
-	
+
 	.if _RRegList == 10
 		stmfd	sp!, {r4-r10, lr}
 	.exitm
 	.endif
-	
+
 	.if _RRegList == 12
 		stmfd	sp!, {r4-r12, lr}
 	.exitm
@@ -288,37 +288,37 @@
 		vpop	{d8}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 9
 		vpop	{d8-d9}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 10
 		vpop	{d8-d10}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 11
 		vpop	{d8-d11}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 12
 		vpop	{d8-d12}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 13
 		vpop	{d8-d13}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 14
 		vpop	{d8-d14}
 	.exitm
 	.endif
-	
+
 	.if _DRegList == 15
 		vpop	{d8-d15}
 	.exitm
@@ -335,34 +335,34 @@
 		ldm\cc\()fd	sp!, {r4, pc}
 	.exitm
 	.endif
-	
+
 	.if _RRegList == 6
 		ldm\cc\()fd	sp!, {r4-r6, pc}
 	.exitm
 	.endif
-	
+
 	.if _RRegList == 8
 		ldm\cc\()fd	sp!, {r4-r8, pc}
 	.exitm
 	.endif
-	
+
 	.if _RRegList == 10
 		ldm\cc\()fd	sp!, {r4-r10, pc}
 	.exitm
 	.endif
-	
+
 	.if _RRegList == 12
 		ldm\cc\()fd	sp!, {r4-r12, pc}
 	.exitm
 	.endif
 	.endm
-	
+
         @ Produce function return instructions
 	.macro	_M_RET cc
 	_M_POP_DREG \cc
 	_M_POP_RREG \cc
-	.endm	
-	
+	.endm
+
         @// Allocate 4-byte aligned area of name
         @// |name| and size |size| bytes.
 	.macro	M_ALLOC4 name, size
@@ -371,7 +371,7 @@
 	.endif
 	.set	\name\()_F, _SBytes
 	.set	_SBytes, _SBytes + \size
-	
+
 	.endm
 
         @ Load word from stack
@@ -408,5 +408,5 @@
 	@ WARNING: Most of the above are not supported, except the first case.
 	.macro _M_DATA i, a, r, a0, a1, a2, a3
 	.set	_Offset, _Workspace + \a0\()_F
-	\i\a1	\r, [sp, #_Offset]	
+	\i\a1	\r, [sp, #_Offset]
 	.endm

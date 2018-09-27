@@ -40,7 +40,7 @@
  * CJK
  *  3100 - 312f (bopomofo)
  *  31a0 - 31bf (bopomofo extended)
- *  3000 - 303f (CJK Symbols and Punctuation) 
+ *  3000 - 303f (CJK Symbols and Punctuation)
  *  2e80 - 2eff (CJK radicals supplement)
  *  2f00 - 2fdf (Kangxi Radicals)
  *  2ff0 - 2fff (Ideographic Description Characters)
@@ -54,8 +54,8 @@
  *  ff00 - ffef (halfwidth and fullwidth forms)
  *
  * Armenian
- *  0530 - 058f 
- * Sriac 
+ *  0530 - 058f
+ * Sriac
  *  0700 - 074f
  * Thaana
  *  0780 - 07bf
@@ -95,7 +95,7 @@
  *  1400 - 167f
  * Ogham
  *  1680 - 169f
- * Runic 
+ * Runic
  *  16a0 - 16ff
  * Khmer
  *  1780 - 17ff
@@ -117,7 +117,7 @@
  *  2440 - 2450
  * Misc - Enclose Alphanumerics
  *  2460 - 24ff
- * Misc - Box Drawing 
+ * Misc - Box Drawing
  *  2500 - 257f
  * Misc - Block Elements
  *  2580 - 259f
@@ -148,8 +148,8 @@
 #define NUM_OF_SUBTABLES      10
 #define SUBTABLE_SIZE         16
 
-static const uint8_t gUnicodeSubrangeTable[NUM_OF_SUBTABLES][SUBTABLE_SIZE] = 
-{ 
+static const uint8_t gUnicodeSubrangeTable[NUM_OF_SUBTABLES][SUBTABLE_SIZE] =
+{
   { // table for X---
     kRangeTableBase+1,  //u0xxx
     kRangeTableBase+2,  //u1xxx
@@ -259,17 +259,17 @@ static const uint8_t gUnicodeSubrangeTable[NUM_OF_SUBTABLES][SUBTABLE_SIZE] =
     kRangeSurrogate          //udfxx
   },
   { // table for fx--
-    kRangePrivate,           //uf0xx 
-    kRangePrivate,           //uf1xx 
-    kRangePrivate,           //uf2xx 
-    kRangePrivate,           //uf3xx 
-    kRangePrivate,           //uf4xx 
-    kRangePrivate,           //uf5xx 
-    kRangePrivate,           //uf6xx 
-    kRangePrivate,           //uf7xx 
-    kRangePrivate,           //uf8xx 
-    kRangeSetCJK,            //uf9xx 
-    kRangeSetCJK,            //ufaxx 
+    kRangePrivate,           //uf0xx
+    kRangePrivate,           //uf1xx
+    kRangePrivate,           //uf2xx
+    kRangePrivate,           //uf3xx
+    kRangePrivate,           //uf4xx
+    kRangePrivate,           //uf5xx
+    kRangePrivate,           //uf6xx
+    kRangePrivate,           //uf7xx
+    kRangePrivate,           //uf8xx
+    kRangeSetCJK,            //uf9xx
+    kRangeSetCJK,            //ufaxx
     kRangeArabic,            //ufbxx, includes alphabic presentation form
     kRangeArabic,            //ufcxx
     kRangeArabic,            //ufdxx
@@ -332,15 +332,15 @@ static const uint8_t gUnicodeSubrangeTable[NUM_OF_SUBTABLES][SUBTABLE_SIZE] =
   },
 };
 
-// Most scripts between U+0700 and U+16FF are assigned a chunk of 128 (0x80) 
+// Most scripts between U+0700 and U+16FF are assigned a chunk of 128 (0x80)
 // code points  so that the number of entries in the tertiary range
 // table for that range is obtained by dividing (0x1700 - 0x0700) by 128.
-// Exceptions: Ethiopic, Tibetan, Hangul Jamo and Canadian aboriginal 
+// Exceptions: Ethiopic, Tibetan, Hangul Jamo and Canadian aboriginal
 // syllabaries take multiple chunks and Ogham and Runic share  a single chunk.
 #define TERTIARY_TABLE_SIZE ((0x1700 - 0x0700) / 0x80)
 
 static const uint8_t gUnicodeTertiaryRangeTable[TERTIARY_TABLE_SIZE] =
-{ //table for 0x0700 - 0x1600 
+{ //table for 0x0700 - 0x1600
     kRangeSyriac,            //u070x
     kRangeThaana,            //u078x
     kRangeUnassigned,        //u080x  place holder(resolved in the 2ndary tab.)
@@ -355,7 +355,7 @@ static const uint8_t gUnicodeTertiaryRangeTable[TERTIARY_TABLE_SIZE] =
     kRangeKannada,           //u0c8x
     kRangeMalayalam,         //u0d0x
     kRangeSinhala,           //u0d8x
-    kRangeThai,              //u0e0x  
+    kRangeThai,              //u0e0x
     kRangeLao,               //u0e8x
     kRangeTibetan,           //u0f0x  place holder(resolved in the 2ndary tab.)
     kRangeTibetan,           //u0f8x  place holder(resolved in the 2ndary tab.)
@@ -365,28 +365,28 @@ static const uint8_t gUnicodeTertiaryRangeTable[TERTIARY_TABLE_SIZE] =
     kRangeKorean,            //u118x  place holder(resolved in the 2ndary tab.)
     kRangeEthiopic,          //u120x  place holder(resolved in the 2ndary tab.)
     kRangeEthiopic,          //u128x  place holder(resolved in the 2ndary tab.)
-    kRangeEthiopic,          //u130x  
+    kRangeEthiopic,          //u130x
     kRangeCherokee,          //u138x
     kRangeCanadian,          //u140x  place holder(resolved in the 2ndary tab.)
     kRangeCanadian,          //u148x  place holder(resolved in the 2ndary tab.)
     kRangeCanadian,          //u150x  place holder(resolved in the 2ndary tab.)
     kRangeCanadian,          //u158x  place holder(resolved in the 2ndary tab.)
-    kRangeCanadian,          //u160x  
+    kRangeCanadian,          //u160x
     kRangeOghamRunic         //u168x  this contains two scripts, Ogham & Runic
 };
 
-// A two level index is almost enough for locating a range, with the 
+// A two level index is almost enough for locating a range, with the
 // exception of u03xx and u05xx. Since we don't really care about range for
-// combining diacritical marks in our font application, they are 
-// not discriminated further. But future adoption of this module for other use 
-// should be aware of this limitation. The implementation can be extended if 
+// combining diacritical marks in our font application, they are
+// not discriminated further. But future adoption of this module for other use
+// should be aware of this limitation. The implementation can be extended if
 // there is such a need.
 // For Indic, Southeast Asian scripts and some other scripts between
 // U+0700 and U+16FF, it's extended to the third level.
 uint32_t FindCharUnicodeRange(uint32_t ch)
 {
   uint32_t range;
-  
+
   // aggregate ranges for non-BMP codepoints
   if (ch > 0xFFFF) {
     uint32_t p = (ch >> 16);
@@ -401,10 +401,10 @@ uint32_t FindCharUnicodeRange(uint32_t ch)
   // lookup explicit range for BMP codepoints
   // first general range
   range = gUnicodeSubrangeTable[0][ch >> 12];
-  
+
   // if general range is good enough, return that
   if (range < kRangeTableBase)
-    // we try to get a specific range 
+    // we try to get a specific range
     return range;
 
   // otherwise, use subrange tables

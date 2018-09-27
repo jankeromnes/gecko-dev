@@ -12,7 +12,7 @@ var expect = '';
 printBugNumber(BUGNUMBER);
 printStatus (summary);
 print('This test requires WAY_TOO_MUCH_GC');
- 
+
 expect = 'No';
 actual = 'No'.replace(/\&\&/g, '&');
 

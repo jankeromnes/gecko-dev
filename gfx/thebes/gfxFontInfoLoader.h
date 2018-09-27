@@ -107,7 +107,7 @@ public:
     virtual bool GetOtherFamilyNames(const nsACString& aFamilyName,
                                      nsTArray<nsCString>& aOtherFamilyNames)
     {
-        return mOtherFamilyNames.Get(aFamilyName, &aOtherFamilyNames); 
+        return mOtherFamilyNames.Get(aFamilyName, &aOtherFamilyNames);
     }
 
     nsTArray<nsCString> mFontFamiliesToLoad;

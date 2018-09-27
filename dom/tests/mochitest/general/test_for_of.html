@@ -14,7 +14,7 @@ function doTest() {
   var a = [];
   for (var e of document.body.childNodes)
     if (e.nodeType === 1)
-      a.push(e.tagName); 
+      a.push(e.tagName);
   is("P DIV SCRIPT", a.join(" "), "for-of should see each element in the body");
 
   SimpleTest.finish();

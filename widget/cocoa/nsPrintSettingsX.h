@@ -6,7 +6,7 @@
 #ifndef nsPrintSettingsX_h_
 #define nsPrintSettingsX_h_
 
-#include "nsPrintSettingsImpl.h"  
+#include "nsPrintSettingsImpl.h"
 #import <Cocoa/Cocoa.h>
 
 // The constants for paper orientation were renamed in 10.9. __MAC_10_9 is

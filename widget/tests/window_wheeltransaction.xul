@@ -1321,7 +1321,7 @@ function testRestartScroll()
 function onScrollView(aEvent)
 {
   /**
-   * Scroll event handler of |gRootView|, |gSubView1|, |gSubView2| and 
+   * Scroll event handler of |gRootView|, |gSubView1|, |gSubView2| and
    * |gSubView3|.  If testing is failed, this function cancels all left tests.
    * For checking the event is expected, the event firer must call
    * |_saveScrollPositions|.

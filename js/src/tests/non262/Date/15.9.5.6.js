@@ -11,7 +11,7 @@
    This function returns a string value. The contents of the string are
    implementation dependent, but are intended to represent the "date"
    portion of the Date in the current time zone in a convenient,
-   human-readable form.   We can't test the content of the string, 
+   human-readable form.   We can't test the content of the string,
    but can verify that the string is parsable by Date.parse
 
    The toLocaleDateString function is not generic; it generates a runtime error
@@ -25,10 +25,10 @@
 */
 
 var SECTION = "15.9.5.6";
-var TITLE   = "Date.prototype.toLocaleDateString()"; 
- 
+var TITLE   = "Date.prototype.toLocaleDateString()";
+
 var status = '';
-var actual = ''; 
+var actual = '';
 var expect = '';
 
 
@@ -38,14 +38,14 @@ var now = new Date();
 
 // first, some generic tests -
 
-status = "typeof (now.toLocaleDateString())"; 
+status = "typeof (now.toLocaleDateString())";
 actual =   typeof (now.toLocaleDateString());
 expect = "string";
 addTestCase();
 
-status = "Date.prototype.toLocaleDateString.length";  
+status = "Date.prototype.toLocaleDateString.length";
 actual =  Date.prototype.toLocaleDateString.length;
-expect =  0;  
+expect =  0;
 addTestCase();
 
 /* Date.parse is accurate to the second;  valueOf() to the millisecond.
@@ -59,22 +59,22 @@ addTestCase();
 
 // 1970
 addDateTestCase(0);
-addDateTestCase(TZ_ADJUST);  
+addDateTestCase(TZ_ADJUST);
 
-  
+
 // 1900
 addDateTestCase(UTC_01_JAN_1900);
 addDateTestCase(UTC_01_JAN_1900 - TZ_ADJUST);
 
-  
+
 // 2000
 addDateTestCase(UTC_01_JAN_2000);
 addDateTestCase(UTC_01_JAN_2000 - TZ_ADJUST);
 
-   
+
 // 29 Feb 2000
 addDateTestCase(UTC_29_FEB_2000);
-addDateTestCase(UTC_29_FEB_2000 - 1000);   
+addDateTestCase(UTC_29_FEB_2000 - 1000);
 addDateTestCase(UTC_29_FEB_2000 - TZ_ADJUST);
 
 
@@ -82,7 +82,7 @@ addDateTestCase(UTC_29_FEB_2000 - TZ_ADJUST);
 addDateTestCase(UTC_01_JAN_2005);
 addDateTestCase(UTC_01_JAN_2005 - 1000);
 addDateTestCase(UTC_01_JAN_2005 - TZ_ADJUST);
-  
+
 
 
 //-----------------------------------------------------------------------------------------------------

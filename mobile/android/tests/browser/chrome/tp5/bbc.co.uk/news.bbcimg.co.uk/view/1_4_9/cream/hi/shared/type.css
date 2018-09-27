@@ -34,7 +34,7 @@ body #blq-container #blq-main {
    line-height: 40px;
    text-rendering: optimizeLegibility;
 }
- 
+
 /* 48px */
 .special-48 {
    font-size: 3.692em; /* 13px < 48px */
@@ -63,7 +63,7 @@ body #blq-container #blq-main {
    font-size: 2.461em; /* 13px < 32px */
    font-weight: bold;
    letter-spacing: -1px;
-   line-height: 34px;   
+   line-height: 34px;
    text-rendering: optimizeLegibility;
 }
 
@@ -173,7 +173,7 @@ body #blq-container #blq-main {
 /* 13px Normal */
 .container-local-weather-and-travel .data-feed-now h3#weather_sitelabel,
 .secondary-top-story .see-also .story,
-.see-also ul li a, #main-content .internet-links a, .features p, 
+.see-also ul li a, #main-content .internet-links a, .features p,
 #related-services,
 .weather-3day .next3daysweather .stripes li,.weather-3day .next3daysweather .stripes li strong,.weather-3day .next3daysweather .stripes h3,.story-body #heading-2,
 .story-body table p,
@@ -201,9 +201,9 @@ body #blq-container #blq-main {
 }
 
 /* Storybody Color */
-.story-body p, 
-.story-body p strong, 
-.story-body p em, 
+.story-body p,
+.story-body p strong,
+.story-body p em,
 .media_asset .emp-decription p,
 .photo-gallery .hypertabs li {
 	color: #333;

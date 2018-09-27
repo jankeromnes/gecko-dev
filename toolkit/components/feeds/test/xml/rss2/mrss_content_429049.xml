@@ -9,7 +9,7 @@ Expect: var encs = feed.items.queryElementAt(0, Components.interfaces.nsIFeedEnt
 <channel>
 
 <item>
-<media:content fileSize="24986239" type="audio/mpeg" url="http://dallas.example.com/joebob_050689.mp3" /> 
+<media:content fileSize="24986239" type="audio/mpeg" url="http://dallas.example.com/joebob_050689.mp3" />
 <author>jbb@dallas.example.com (Joe Bob Briggs)</author>
 <comments>http://example.org</comments>
 <title>test</title>

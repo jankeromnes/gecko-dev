@@ -237,7 +237,7 @@ function publishRegistrationName(registrationName, pluginModule, eventName) {
   registrationNameModules[registrationName] = pluginModule;
   registrationNameDependencies[registrationName] = pluginModule.eventTypes[eventName].dependencies;
 
-  
+
 }
 
 /**
@@ -335,7 +335,7 @@ var EventPluginRegistry = ({
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * 
+ *
  */
 
 function makeEmptyFunction(arg) {
@@ -382,7 +382,7 @@ var injection$1 = {
     getInstanceFromNode = Injected.getInstanceFromNode;
     getNodeFromInstance = Injected.getNodeFromInstance;
 
-    
+
   }
 };
 
@@ -1470,7 +1470,7 @@ _assign(SyntheticEvent.prototype, {
     for (var i = 0; i < shouldBeReleasedProperties.length; i++) {
       this[shouldBeReleasedProperties[i]] = null;
     }
-    
+
   }
 });
 
@@ -3405,7 +3405,7 @@ var getActiveElement_1 = getActiveElement;
  * LICENSE file in the root directory of this source tree.
  *
  * @typechecks
- * 
+ *
  */
 
 /*eslint-disable no-self-compare */
@@ -4172,7 +4172,7 @@ var SimpleEventPlugin = {
         EventConstructor = SyntheticPointerEvent;
         break;
       default:
-        
+
         // HTML Events
         // @see http://www.w3.org/TR/html5/index.html#events-0
         EventConstructor = SyntheticEvent;
@@ -4554,7 +4554,7 @@ var isTextNode_1 = isTextNode;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * 
+ *
  */
 
 
@@ -5578,7 +5578,7 @@ function initWrapperState$1(element, props) {
     wasMultiple: !!props.multiple
   };
 
-  
+
 }
 
 function postMountWrapper$2(element, props) {
@@ -6244,7 +6244,7 @@ function setInitialProperties$1(domElement, tag, rawProps, rootContainerElement)
       ensureListeningTo(rootContainerElement, 'onChange');
       break;
     case 'option':
-      
+
       props = getHostProps$1(domElement, rawProps);
       break;
     case 'select':
@@ -6522,7 +6522,7 @@ function diffHydratedProperties$1(domElement, tag, rawProps, parentNamespace, ro
       ensureListeningTo(rootContainerElement, 'onChange');
       break;
     case 'option':
-      
+
       break;
     case 'select':
       initWrapperState$1(domElement, rawProps);
@@ -6612,23 +6612,23 @@ function diffHydratedText$1(textNode, text) {
 }
 
 function warnForUnmatchedText$1(textNode, text) {
-  
+
 }
 
 function warnForDeletedHydratableElement$1(parentNode, child) {
-  
+
 }
 
 function warnForDeletedHydratableText$1(parentNode, child) {
-  
+
 }
 
 function warnForInsertedHydratedElement$1(parentNode, tag, props) {
-  
+
 }
 
 function warnForInsertedHydratedText$1(parentNode, text) {
-  
+
 }
 
 function restoreControlledState$1(domElement, tag, props) {
@@ -7654,7 +7654,7 @@ function FiberNode(tag, pendingProps, key, mode) {
     this.treeBaseTime = 0;
   }
 
-  
+
 }
 
 // This is a constructor function, rather than a POJO constructor, still
@@ -7883,7 +7883,7 @@ function catchErrors(fn) {
     try {
       return fn(arg);
     } catch (err) {
-      
+
     }
   };
 }
@@ -7914,7 +7914,7 @@ function injectInternals(internals) {
     });
   } catch (err) {
     // Catch all errors because it is unsafe to throw during initialization.
-    
+
   }
   // DevTools exists
   return true;
@@ -8327,7 +8327,7 @@ function enqueueUpdate(fiber, update, expirationTime) {
     }
   }
 
-  
+
 }
 
 function enqueueCapturedUpdate(workInProgress, update, renderExpirationTime) {
@@ -8532,7 +8532,7 @@ function processUpdateQueue(workInProgress, queue, props, instance, renderExpira
 
   workInProgress.memoizedState = resultState;
 
-  
+
 }
 
 function callCallback(callback, context) {
@@ -8611,7 +8611,7 @@ function pushProvider(providerFiber) {
 
     context._currentValue = providerFiber.pendingProps.value;
     context._changedBits = providerFiber.stateNode;
-    
+
   } else {
     push(changedBitsCursor, context._changedBits2, providerFiber);
     push(valueCursor, context._currentValue2, providerFiber);
@@ -8619,7 +8619,7 @@ function pushProvider(providerFiber) {
 
     context._currentValue2 = providerFiber.pendingProps.value;
     context._changedBits2 = providerFiber.stateNode;
-    
+
   }
 }
 
@@ -8900,7 +8900,7 @@ function adoptClassInstance(workInProgress, instance) {
   workInProgress.stateNode = instance;
   // The instance needs access to the fiber so that it can schedule updates
   set(instance, workInProgress);
-  
+
 }
 
 function constructClassInstance(workInProgress, props, renderExpirationTime) {
@@ -9915,7 +9915,7 @@ function ChildReconciler(shouldTrackSideEffects) {
       switch (returnFiber.tag) {
         case ClassComponent:
           {
-            
+
           }
         // Intentionally fall through to the next case, which handles both
         // functions and classes
@@ -9997,7 +9997,7 @@ function deleteHydratableInstance(returnFiber, instance) {
 
 function insertNonHydratedInstance(returnFiber, fiber) {
   fiber.effectTag |= Placement;
-  
+
 }
 
 function tryHydrate(fiber, nextInstance) {
@@ -12319,7 +12319,7 @@ function commitAllHostEffects() {
     nextEffect = nextEffect.nextEffect;
   }
 
-  
+
 }
 
 function commitBeforeMutationLifecycles() {

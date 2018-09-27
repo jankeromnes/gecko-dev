@@ -10,7 +10,7 @@ var log;
 dbg.onEnterFrame = function handleEnter(f) {
     log += "(" + f.callee.name;
     f.onPop = function handlePop(c) {
-        log += ")" + f.callee.name;  
+        log += ")" + f.callee.name;
         assertEq(dbg.getNewestFrame(), this);
     };
 };

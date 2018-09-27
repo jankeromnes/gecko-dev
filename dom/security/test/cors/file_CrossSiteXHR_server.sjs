@@ -50,7 +50,7 @@ function handleRequest(request, response)
   if (!isPreflight && "headers" in query) {
     headers = eval(query.headers);
     for(headerName in headers) {
-      // Content-Type is changed if there was a body 
+      // Content-Type is changed if there was a body
       if (!(headerName == "Content-Type" && body) &&
           (!request.hasHeader(headerName) ||
           request.getHeader(headerName) != headers[headerName])) {
@@ -95,7 +95,7 @@ function handleRequest(request, response)
       var [name, value] = val.split('=');
       cookies[name] = unescape(value);
     });
-    
+
     query.cookie.split(",").forEach(function (val) {
       var [name, value] = val.split('=');
       if (cookies[name] != value) {
@@ -121,7 +121,7 @@ function handleRequest(request, response)
   if (isPreflight && query.preflightStatus) {
     response.setStatusLine(null, query.preflightStatus, "preflight status");
   }
-  
+
   if (query.allowOrigin && (!isPreflight || !query.noAllowPreflight))
     response.setHeader("Access-Control-Allow-Origin", query.allowOrigin);
 

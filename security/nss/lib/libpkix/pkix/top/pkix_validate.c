@@ -788,7 +788,7 @@ pkix_CheckChain(
                 PKIX_CHECK(PKIX_List_GetItem(
                                certs, j, (PKIX_PL_Object **)&cert, plContext),
                            PKIX_LISTGETITEMFAILED);
-                
+
                 /* check if cert pointer is valid */
                 PORT_Assert(cert);
                 if (cert == NULL) {
@@ -862,7 +862,7 @@ pkix_CheckChain(
 cleanup:
         if (PKIX_ERROR_RECEIVED && cert) {
             checkCertError = pkixErrorResult;
-            
+
             PKIX_CHECK_FATAL(
                 pkix_AddToVerifyLog(cert, j, checkCertError, pVerifyTree,
                                     plContext),

@@ -1,5 +1,5 @@
 try {
-  evaluate(` 
+  evaluate(`
     function runTestCase() $ERROR()
     function $ERROR() {
       throw Error

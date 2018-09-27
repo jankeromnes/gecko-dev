@@ -18,7 +18,7 @@ info: |
   8.3.4 ResolveThisBinding ( )
   [...]
   2. Return ? envRec.GetThisBinding().
-  
+
   8.1.1.3.4 GetThisBinding ( )
   [...]
   3. If envRec.[[ThisBindingStatus]] is "uninitialized", throw a ReferenceError exception.

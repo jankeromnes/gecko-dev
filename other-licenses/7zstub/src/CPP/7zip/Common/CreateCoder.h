@@ -18,9 +18,9 @@
       executable modules, that can be linked dynamically at run-time:
         - EXE module can use codecs from external DLL files.
         - DLL module can use codecs from external EXE and DLL files.
-     
+
       CExternalCodecs contains information about codecs and interfaces to create them.
-  
+
   The order of codecs:
     1) Internal codecs
     2) External codecs
@@ -35,7 +35,7 @@ struct CCodecInfoEx
   UInt32 NumStreams;
   bool EncoderIsAssigned;
   bool DecoderIsAssigned;
-  
+
   CCodecInfoEx(): EncoderIsAssigned(false), DecoderIsAssigned(false) {}
 };
 
@@ -142,7 +142,7 @@ struct CCreatedCoder
 {
   CMyComPtr<ICompressCoder> Coder;
   CMyComPtr<ICompressCoder2> Coder2;
-  
+
   bool IsExternal;
   bool IsFilter; // = true, if Coder was created from filter
   UInt32 NumStreams;

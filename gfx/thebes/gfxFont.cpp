@@ -3512,7 +3512,7 @@ gfxFont::InitFakeSmallCapsRun(DrawTarget     *aDrawTarget,
                     RefPtr<gfxTextRun> tempRun(
                         gfxTextRun::Create(&params, convertedString.Length(),
                                            aTextRun->GetFontGroup(),
-                                           gfx::ShapedTextFlags(), 
+                                           gfx::ShapedTextFlags(),
                                            nsTextFrameUtils::Flags()));
                     tempRun->AddGlyphRun(f, aMatchType, 0, true, aOrientation);
                     if (!f->SplitAndInitTextRun(aDrawTarget, tempRun.get(),
@@ -3524,7 +3524,7 @@ gfxFont::InitFakeSmallCapsRun(DrawTarget     *aDrawTarget,
                         RefPtr<gfxTextRun> mergedRun(
                             gfxTextRun::Create(&params, runLength,
                                                aTextRun->GetFontGroup(),
-                                               gfx::ShapedTextFlags(), 
+                                               gfx::ShapedTextFlags(),
                                                nsTextFrameUtils::Flags()));
                         MergeCharactersInTextRun(mergedRun.get(), tempRun.get(),
                                                  charsToMergeArray.Elements(),

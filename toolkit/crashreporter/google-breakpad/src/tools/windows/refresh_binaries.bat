@@ -1,8 +1,8 @@
-REM This batch file is meant to facilitate regenerating prebuilt binaries for 
+REM This batch file is meant to facilitate regenerating prebuilt binaries for
 REM the Windows tools.
 REM You MUST run it from a Visual Studio xxxx Command Prompt.  To do this,
 REM navigate to:
-REM 
+REM
 REM    Start->Programs->Microsoft Visual Studio XXXX->Tools->
 REM                        Visual Studio Command Prompt
 REM

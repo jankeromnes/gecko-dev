@@ -36,7 +36,7 @@ function testGetElements (root, classtestCount) {
   nodes = document.getElementById('example').getElementsByClassName('aaa');
   is(nodes.length, 2, "returns 2 elements");
 
-  nodes = document.getElementById('example').getElementsByClassName('ccc bbb') 
+  nodes = document.getElementById('example').getElementsByClassName('ccc bbb')
   is(nodes.length, 1, "only match elements that have all the classes specified in that array. tokenize string arg.")
   is(nodes[0], $('p3'), "matched tokenized string");
 
@@ -54,11 +54,11 @@ addLoadEvent(function() {
   if (document.getElementsByName) {
     var anchorNodes = document.getElementsByName("nametest");
     is(anchorNodes.length, 1, "getElementsByName still works");
-    is(anchorNodes[0].getAttribute("name"), "nametest", 
+    is(anchorNodes[0].getAttribute("name"), "nametest",
        "getElementsByName still works");
   }
   testGetElements($("content"), 1);
   testGetElements(document.documentElement, 3);
-  testGetElements(document, 3); 
+  testGetElements(document, 3);
 });
 addLoadEvent(SimpleTest.finish);

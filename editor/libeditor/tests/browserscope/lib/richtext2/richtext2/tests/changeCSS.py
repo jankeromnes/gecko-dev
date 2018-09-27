@@ -188,7 +188,7 @@ CHANGE_TESTS_CSS = {
           'value':      '4',
           'pad':        '<span style="font-size: 18px">[foobarbaz]</span>',
           'expected':   '<span style="font-size: 18px">[foobarbaz]</span>' },
-          
+
         { 'id':         'FS:larger_SPANs:fs:l-1_SI',
           'desc':       'Change selection to use next larger font',
           'value':      'larger',
@@ -196,7 +196,7 @@ CHANGE_TESTS_CSS = {
           'expected':   [ '<span style="font-size: large">foo<span style="font-size: x-large">[bar]</span>baz</span>',
                           '<span style="font-size: large">foo</span><span style="font-size: x-large">[bar]</span><span style="font-size: large">baz</span>' ],
           'accept':     '<span style="font-size: large">foo<font size="larger">[bar]</font>baz</span>' },
-                        
+
         { 'id':         'FS:smaller_SPANs:fs:l-1_SI',
           'desc':       'Change selection to use next smaller font',
           'value':      'smaller',

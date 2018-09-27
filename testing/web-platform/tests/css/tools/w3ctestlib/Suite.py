@@ -70,7 +70,7 @@ class TestSuite:
 
   def setFormats(self, formats):
     self.formats = formats
-    
+
   def buildInto(self, dest, indexer):
     """Builds test suite through all OutputFormats into directory at path `dest`
        or through OutputFormat destination `dest`, using Indexer `indexer`.
@@ -118,4 +118,4 @@ class TestSuite:
 
     rawtests.sort()
     indexer.writeOverview(dest, addTests=rawtests)
-    
+

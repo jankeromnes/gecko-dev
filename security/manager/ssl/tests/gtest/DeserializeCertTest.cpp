@@ -49,7 +49,7 @@ deserializeAndVerify(const nsCString &serializedSecInfo,
   nsCOMPtr<nsIX509CertList> failedChain;
   rv = securityInfo->GetFailedCertChain(getter_AddRefs(failedChain));
   ASSERT_EQ(NS_OK, rv);
- 
+
   if (hasFailedCertChain) {
     ASSERT_TRUE(failedChain);
     nsCOMPtr<nsISimpleEnumerator> enumerator;

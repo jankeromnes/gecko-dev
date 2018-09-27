@@ -91,7 +91,7 @@ pkix_List_Destroy(
             list->next = nextItem->next;
             nextItem->next = NULL;
             PKIX_DECREF(nextItem);
-        }      
+        }
         list->immutable = PKIX_FALSE;
         list->length = 0;
         list->isHeader = PKIX_FALSE;
@@ -861,7 +861,7 @@ pkix_List_MergeLists(
 cleanup:
         PKIX_DECREF(list);
         PKIX_DECREF(item);
- 
+
         PKIX_RETURN(LIST);
 }
 
@@ -1191,7 +1191,7 @@ pkix_List_BubbleSort(
 
         PKIX_ENTER(BUILD, "pkix_List_BubbleSort");
         PKIX_NULLCHECK_THREE(fromList, comparator, pSortedList);
-        
+
         if (fromList->immutable) {
             PKIX_ERROR(PKIX_CANNOTSORTIMMUTABLELIST);
         }
@@ -1242,7 +1242,7 @@ pkix_List_BubbleSort(
 
                 PKIX_DECREF(leastObj);
             }
-                
+
         }
 
         *pSortedList = sortedList;

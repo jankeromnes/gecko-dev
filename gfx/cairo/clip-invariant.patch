@@ -3,24 +3,24 @@ index 2acc8b5..019249e 100644
 --- a/src/cairo-gl-surface.c
 +++ b/src/cairo-gl-surface.c
 @@ -2012,13 +2012,14 @@ typedef struct _cairo_gl_surface_span_renderer {
- 
+
      cairo_gl_composite_setup_t setup;
- 
+
 +    int xmin, xmax;
 +
      cairo_operator_t op;
      cairo_antialias_t antialias;
- 
+
      cairo_gl_surface_t *dst;
      cairo_region_t *clip;
- 
+
 -    cairo_composite_rectangles_t composite_rectangles;
      GLuint vbo;
      void *vbo_base;
      unsigned int vbo_size;
 @@ -2049,11 +2050,11 @@ _cairo_gl_span_renderer_flush (cairo_gl_surface_span_renderer_t *renderer)
  	    cairo_region_get_rectangle (renderer->clip, i, &rect);
- 
+
  	    glScissor (rect.x, rect.y, rect.width, rect.height);
 -	    glDrawArrays (GL_LINES, 0, count);
 +	    glDrawArrays (GL_QUADS, 0, count);
@@ -31,9 +31,9 @@ index 2acc8b5..019249e 100644
 +	glDrawArrays (GL_QUADS, 0, count);
      }
  }
- 
+
 @@ -2134,72 +2135,87 @@ _cairo_gl_emit_span_vertex (cairo_gl_surface_span_renderer_t *renderer,
- 
+
  static void
  _cairo_gl_emit_span (cairo_gl_surface_span_renderer_t *renderer,
 -		     int x1, int x2, int y, uint8_t alpha)
@@ -41,14 +41,14 @@ index 2acc8b5..019249e 100644
 +		     uint8_t alpha)
  {
      float *vertices = _cairo_gl_span_renderer_get_vbo (renderer, 2);
- 
+
 -    _cairo_gl_emit_span_vertex (renderer, x1, y, alpha, vertices);
 -    _cairo_gl_emit_span_vertex (renderer, x2, y, alpha,
 +    _cairo_gl_emit_span_vertex (renderer, x, y1, alpha, vertices);
 +    _cairo_gl_emit_span_vertex (renderer, x, y2, alpha,
  			       vertices + renderer->vertex_size / 4);
  }
- 
+
 -/* Emits the contents of the span renderer rows as GL_LINES with the span's
 - * alpha.
 - *
@@ -92,7 +92,7 @@ index 2acc8b5..019249e 100644
 +
 +    if (num_spans == 0)
  	return CAIRO_STATUS_SUCCESS;
- 
+
 -    x_translate = renderer->composite_rectangles.dst.x -
 -	renderer->composite_rectangles.mask.x;
 -    y += renderer->composite_rectangles.dst.y -
@@ -104,20 +104,20 @@ index 2acc8b5..019249e 100644
 +				      spans[1].x, y + height,
 +				      spans[0].coverage);
 +	}
- 
+
 -    /* Find the first span within x-range. */
 -    for (i=0; i < num_spans && spans[i].x < xmin; i++) {}
 -    if (i>0)
 -	prev_alpha = spans[i-1].coverage;
 +	spans++;
 +    } while (--num_spans > 1);
- 
+
 -    /* Set the intermediate spans. */
 -    for (; i < num_spans; i++) {
 -	int x = spans[i].x;
 +    return CAIRO_STATUS_SUCCESS;
 +}
- 
+
 -	if (x >= xmax)
 -	    break;
 +static cairo_status_t
@@ -127,7 +127,7 @@ index 2acc8b5..019249e 100644
 +				  unsigned num_spans)
 +{
 +    cairo_gl_surface_span_renderer_t *renderer = abstract_renderer;
- 
+
 -	_cairo_gl_emit_span (renderer,
 -			     prev_x + x_translate, x + x_translate, y,
 -			     prev_alpha);
@@ -138,7 +138,7 @@ index 2acc8b5..019249e 100644
 +				  0);
 +	return CAIRO_STATUS_SUCCESS;
 +    }
- 
+
 -	prev_x = x;
 -	prev_alpha = spans[i].coverage;
 +    if (spans[0].x != renderer->xmin) {
@@ -147,7 +147,7 @@ index 2acc8b5..019249e 100644
 +				  spans[0].x, y + height,
 +				  0);
      }
- 
+
 -    if (prev_x < xmax) {
 -	_cairo_gl_emit_span (renderer,
 -			     prev_x + x_translate, xmax + x_translate, y,
@@ -166,7 +166,7 @@ index 2acc8b5..019249e 100644
 +				  renderer->xmax, y + height,
 +				  0);
      }
- 
+
      return CAIRO_STATUS_SUCCESS;
 @@ -2274,8 +2290,6 @@ _cairo_gl_surface_create_span_renderer (cairo_operator_t	 op,
      cairo_gl_surface_t *dst = abstract_dst;
@@ -176,7 +176,7 @@ index 2acc8b5..019249e 100644
 -    int height = rects->height;
      cairo_surface_attributes_t *src_attributes;
      GLenum err;
- 
+
 diff --git a/src/cairo-image-surface.c b/src/cairo-image-surface.c
 index 48d8013..d52979d 100644
 --- a/src/cairo-image-surface.c
@@ -184,7 +184,7 @@ index 48d8013..d52979d 100644
 @@ -1390,11 +1390,13 @@ typedef struct _cairo_image_surface_span_renderer {
      const cairo_pattern_t *pattern;
      cairo_antialias_t antialias;
- 
+
 +    uint8_t *mask_data;
 +    uint32_t mask_stride;
 +
@@ -195,7 +195,7 @@ index 48d8013..d52979d 100644
 -
      cairo_composite_rectangles_t composite_rectangles;
  } cairo_image_surface_span_renderer_t;
- 
+
 @@ -1403,66 +1405,46 @@ _cairo_image_surface_span_render_row (
      int                                  y,
      const cairo_half_open_span_t        *spans,
@@ -211,13 +211,13 @@ index 48d8013..d52979d 100644
 -    int prev_x = xmin;
 -    int prev_alpha = 0;
      unsigned i;
- 
+
 -    /* Make sure we're within y-range. */
 -    y -= rects->mask.y;
 -    if (y < 0 || y >= rects->height)
 +    if (num_spans == 0)
  	return;
- 
+
 -    row = (uint8_t*)(mask->data) + y*(size_t)mask->stride - xmin;
 -
 -    /* Find the first span within x-range. */
@@ -269,7 +269,7 @@ index 48d8013..d52979d 100644
 -	memset(row + prev_x, prev_alpha, xmax - prev_x);
      }
  }
- 
+
  static cairo_status_t
 -_cairo_image_surface_span_renderer_render_row (
 +_cairo_image_surface_span_renderer_render_rows (
@@ -285,7 +285,7 @@ index 48d8013..d52979d 100644
 +	_cairo_image_surface_span_render_row (y++, spans, num_spans, renderer->mask_data, renderer->mask_stride);
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 @@ -1517,11 +1499,11 @@ _cairo_image_surface_span_renderer_finish (void *abstract_renderer)
  		&dst->base,
  		src_attributes,
@@ -301,7 +301,7 @@ index 48d8013..d52979d 100644
  	}
      }
 @@ -1567,7 +1549,7 @@ _cairo_image_surface_create_span_renderer (cairo_operator_t	 op,
- 
+
      renderer->base.destroy = _cairo_image_surface_span_renderer_destroy;
      renderer->base.finish = _cairo_image_surface_span_renderer_finish;
 -    renderer->base.render_row = _cairo_image_surface_span_renderer_render_row;
@@ -318,7 +318,7 @@ index 48d8013..d52979d 100644
 +    renderer->mask_stride = renderer->mask->stride;
      return &renderer->base;
  }
- 
+
 diff --git a/src/cairo-spans-private.h b/src/cairo-spans-private.h
 index e29a567..af3b38c 100644
 --- a/src/cairo-spans-private.h
@@ -332,7 +332,7 @@ index e29a567..af3b38c 100644
 +
      /* Called to destroy the renderer. */
      cairo_destroy_func_t	destroy;
- 
+
 -    /* Render the spans on row y of the source by whatever compositing
 -     * method is required.  The function should ignore spans outside
 -     * the bounding box set by the init() function. */
@@ -348,7 +348,7 @@ index e29a567..af3b38c 100644
 +		    int y, int height,
 +		    const cairo_half_open_span_t	*coverages,
 +		    unsigned num_coverages);
- 
+
      /* Called after all rows have been rendered to perform whatever
       * final rendering step is required.  This function is called just
       * once before the renderer is destroyed. */
@@ -359,7 +359,7 @@ index e29a567..af3b38c 100644
 -    cairo_status_t status;
 +    cairo_status_t (*finish) (void *abstract_renderer);
  };
- 
+
  /* Scan converter interface. */
 diff --git a/src/cairo-spans.c b/src/cairo-spans.c
 index af3b85f..69894c1 100644
@@ -367,7 +367,7 @@ index af3b85f..69894c1 100644
 +++ b/src/cairo-spans.c
 @@ -275,13 +275,15 @@ _cairo_scan_converter_create_in_error (cairo_status_t status)
  }
- 
+
  static cairo_status_t
 -_cairo_nil_span_renderer_render_row (
 +_cairo_nil_span_renderer_render_rows (
@@ -402,15 +402,15 @@ index 29262c2..2b9fb1b 100644
 +    int				 height,
      int				 xmin,
      int				 xmax);
- 
+
  static glitter_status_t
 -blit_empty_with_span_renderer (cairo_span_renderer_t *renderer, int y);
 +blit_empty_with_span_renderer (cairo_span_renderer_t *renderer, int y, int height);
- 
+
  #define GLITTER_BLIT_COVERAGES_ARGS \
  	cairo_span_renderer_t *span_renderer, \
  	struct pool *span_pool
- 
+
 -#define GLITTER_BLIT_COVERAGES(cells, y, xmin, xmax) do {		\
 +#define GLITTER_BLIT_COVERAGES(cells, y, height,xmin, xmax) do {	\
      cairo_status_t status = blit_with_span_renderer (cells,		\
@@ -422,7 +422,7 @@ index 29262c2..2b9fb1b 100644
      if (unlikely (status))						\
  	return status;							\
  } while (0)
- 
+
 -#define GLITTER_BLIT_COVERAGES_EMPTY(y, xmin, xmax) do {		\
 -    cairo_status_t status = blit_empty_with_span_renderer (span_renderer, y); \
 +#define GLITTER_BLIT_COVERAGES_EMPTY(y, height, xmin, xmax) do {		\
@@ -432,14 +432,14 @@ index 29262c2..2b9fb1b 100644
  } while (0)
 @@ -309,8 +311,8 @@ typedef int grid_area_t;
  #define UNROLL3(x) x x x
- 
+
  struct quorem {
 -    int quo;
 -    int rem;
 +    int32_t quo;
 +    int32_t rem;
  };
- 
+
  /* Header for a chunk of memory in a memory pool. */
 @@ -382,6 +384,7 @@ struct edge {
      /* Original sign of the edge: +1 for downwards, -1 for upwards
@@ -447,12 +447,12 @@ index 29262c2..2b9fb1b 100644
      int dir;
 +    int vertical;
  };
- 
+
  /* Number of subsample rows per y-bucket. Must be GRID_Y. */
 @@ -389,18 +392,28 @@ struct edge {
- 
+
  #define EDGE_Y_BUCKET_INDEX(y, ymin) (((y) - (ymin))/EDGE_Y_BUCKET_HEIGHT)
- 
+
 +struct bucket {
 +    /* Unsorted list of edges starting within this bucket. */
 +    struct edge *edges;
@@ -470,7 +470,7 @@ index 29262c2..2b9fb1b 100644
 +    /* The clip extents. */
 +    grid_scaled_x_t xmin, xmax;
      grid_scaled_y_t ymin, ymax;
- 
+
      /* Array of edges all starting in the same bucket.	An edge is put
       * into bucket EDGE_BUCKET_INDEX(edge->ytop, polygon->ymin) when
       * it is added to the polygon. */
@@ -478,7 +478,7 @@ index 29262c2..2b9fb1b 100644
 -    struct edge *y_buckets_embedded[64];
 +    struct bucket *y_buckets;
 +    struct bucket  y_buckets_embedded[64];
- 
+
      struct {
  	struct pool base[1];
 @@ -702,7 +715,6 @@ static void
@@ -487,12 +487,12 @@ index 29262c2..2b9fb1b 100644
      pool_fini (cells->cell_pool.base);
 -    cell_list_init (cells);
  }
- 
+
  /* Empty the cell list.  This is called at the start of every pixel
 @@ -715,6 +727,26 @@ cell_list_reset (struct cell_list *cells)
      pool_reset (cells->cell_pool.base);
  }
- 
+
 +static struct cell *
 +cell_list_alloc (struct cell_list *cells,
 +		 struct cell **cursor,
@@ -519,7 +519,7 @@ index 29262c2..2b9fb1b 100644
 @@ -737,22 +769,10 @@ cell_list_find (struct cell_list *cells, int x)
      }
      cells->cursor = cursor;
- 
+
 -    if (tail->x == x) {
 +    if (tail->x == x)
  	return tail;
@@ -529,7 +529,7 @@ index 29262c2..2b9fb1b 100644
 -	cell = pool_alloc (cells->cell_pool.base, sizeof (struct cell));
 -	if (unlikely (NULL == cell))
 -	    return NULL;
- 
+
 -	*cursor = cell;
 -	cell->next = tail;
 -	cell->x = x;
@@ -539,7 +539,7 @@ index 29262c2..2b9fb1b 100644
 -    }
 +    return cell_list_alloc (cells, cursor, tail, x);
  }
- 
+
  /* Find two cells at x1 and x2.	 This is exactly equivalent
 @@ -832,9 +852,8 @@ cell_list_find_pair(struct cell_list *cells, int x1, int x2)
  /* Add an unbounded subpixel span covering subpixels >= x to the
@@ -563,7 +563,7 @@ index 29262c2..2b9fb1b 100644
      grid_scaled_x_t dx;
      int ix1, ix2;
      grid_scaled_x_t fx1, fx2;
- 
+
 -    x2.quo += edge->dxdy_full.quo;
 -    x2.rem += edge->dxdy_full.rem;
 -    if (x2.rem >= 0) {
@@ -583,7 +583,7 @@ index 29262c2..2b9fb1b 100644
 +	edge->x = x2;
      }
 -    edge->x = x2;
- 
+
      GRID_X_TO_INT_FRAC(x1.quo, ix1, fx1);
      GRID_X_TO_INT_FRAC(x2.quo, ix2, fx2);
 @@ -1026,6 +1049,7 @@ static void
@@ -621,13 +621,13 @@ index 29262c2..2b9fb1b 100644
      }
 -    memset (polygon->y_buckets, 0, num_buckets * sizeof (struct edge *));
 +    memset (polygon->y_buckets, 0, num_buckets * sizeof (struct bucket));
- 
+
      polygon->ymin = ymin;
      polygon->ymax = ymax;
 +    polygon->xmin = xmin;
 +    polygon->xmax = xmax;
      return GLITTER_STATUS_SUCCESS;
- 
+
   bail_no_mem:
 @@ -1086,10 +1113,13 @@ _polygon_insert_edge_into_its_y_bucket(
      struct polygon *polygon,
@@ -643,7 +643,7 @@ index 29262c2..2b9fb1b 100644
      *ptail = e;
 +    polygon->y_buckets[ix].have_inside_edges |= offset;
  }
- 
+
  inline static glitter_status_t
 @@ -1115,30 +1145,53 @@ polygon_add_edge (struct polygon *polygon,
      dx = edge->line.p2.x - edge->line.p1.x;
@@ -670,7 +670,7 @@ index 29262c2..2b9fb1b 100644
      e->ytop = ytop;
 -    ybot = edge->bottom < ymax ? edge->bottom : ymax;
      e->height_left = ybot - ytop;
- 
+
 -    if (e->height_left >= GRID_Y) {
 -	e->dxdy_full = floored_muldivrem (GRID_Y, dx, dy);
 -    } else {
@@ -715,12 +715,12 @@ index 29262c2..2b9fb1b 100644
 +	    e->dxdy_full.rem = 0;
 +	}
      }
- 
+
      _polygon_insert_edge_into_its_y_bucket (polygon, e);
 @@ -1161,31 +1214,30 @@ active_list_init(struct active_list *active)
      active_list_reset(active);
  }
- 
+
 -static void
 -active_list_fini(
 -    struct active_list *active)
@@ -737,7 +737,7 @@ index 29262c2..2b9fb1b 100644
 -    struct edge *head = unsorted_head;
      struct edge **cursor = &sorted_head;
      int x;
- 
+
 -    while (NULL != head) {
 +    if (sorted_head == NULL) {
 +	sorted_head = unsorted_head;
@@ -752,31 +752,31 @@ index 29262c2..2b9fb1b 100644
  	struct edge *prev = *cursor;
 -	struct edge *next = head->next;
 -	x = head->x.quo;
- 
+
 -	if (NULL == prev || x < prev->x.quo) {
 +	x = unsorted_head->x.quo;
 +	if (x < prev->x.quo)
  	    cursor = &sorted_head;
 -	}
- 
+
  	while (1) {
  	    UNROLL3({
 @@ -1196,26 +1248,29 @@ merge_unsorted_edges(struct edge *sorted_head, struct edge *unsorted_head)
  	    });
  	}
- 
+
 -	head->next = *cursor;
 -	*cursor = head;
 +	unsorted_head->next = *cursor;
 +	*cursor = unsorted_head;
 +	unsorted_head = next;
 +    } while (unsorted_head != NULL);
- 
+
 -	head = next;
 -    }
      return sorted_head;
  }
- 
+
  /* Test if the edges on the active list can be safely advanced by a
   * full row without intersections or any edges ending. */
  inline static int
@@ -793,7 +793,7 @@ index 29262c2..2b9fb1b 100644
      if (active->min_height <= 0) {
 -	struct edge *e = active->head;
  	int min_height = INT_MAX;
- 
+
 +	e = active->head;
  	while (NULL != e) {
  	    if (e->height_left < min_height)
@@ -801,7 +801,7 @@ index 29262c2..2b9fb1b 100644
 @@ -1225,27 +1280,38 @@ active_list_can_step_full_row(
  	active->min_height = min_height;
      }
- 
+
 -    /* Check for intersections only if no edges end during the next
 -     * row. */
 -    if (active->min_height >= GRID_Y) {
@@ -811,7 +811,7 @@ index 29262c2..2b9fb1b 100644
 -	    struct quorem x = e->x;
 +    if (active->min_height < GRID_Y)
 +	return 0;
- 
+
 +    /* Check for intersections as no edges end during the next row. */
 +    e = active->head;
 +    while (NULL != e) {
@@ -823,7 +823,7 @@ index 29262c2..2b9fb1b 100644
  	    if (x.rem >= 0)
  		++x.quo;
 +	}
- 
+
 -	    if (x.quo <= prev_x)
 +	/* There's may be an intersection if the edge sort order might
 +	 * change. */
@@ -846,7 +846,7 @@ index 29262c2..2b9fb1b 100644
 +
 +    return 1;
  }
- 
+
  /* Merges edges on the given subpixel row from the polygon to the
 @@ -1261,7 +1327,7 @@ active_list_merge_edges_from_polygon(
      unsigned ix = EDGE_Y_BUCKET_INDEX(y, polygon->ymin);
@@ -854,7 +854,7 @@ index 29262c2..2b9fb1b 100644
      struct edge *subrow_edges = NULL;
 -    struct edge **ptail = &polygon->y_buckets[ix];
 +    struct edge **ptail = &polygon->y_buckets[ix].edges;
- 
+
      while (1) {
  	struct edge *tail = *ptail;
 @@ -1277,8 +1343,10 @@ active_list_merge_edges_from_polygon(
@@ -868,12 +868,12 @@ index 29262c2..2b9fb1b 100644
 +	active->min_height = min_height;
 +    }
  }
- 
+
  /* Advance the edges on the active list by one subsample row by
 @@ -1439,11 +1507,13 @@ apply_nonzero_fill_rule_and_step_edges (struct active_list *active,
  		}
  	    }
- 
+
 -	    right_edge->x.quo += right_edge->dxdy_full.quo;
 -	    right_edge->x.rem += right_edge->dxdy_full.rem;
 -	    if (right_edge->x.rem >= 0) {
@@ -888,19 +888,19 @@ index 29262c2..2b9fb1b 100644
 +		}
  	    }
  	}
- 
+
 @@ -1472,6 +1542,7 @@ apply_evenodd_fill_rule_and_step_edges (struct active_list *active,
      left_edge = *cursor;
      while (NULL != left_edge) {
  	struct edge *right_edge;
 +	int winding = left_edge->dir;
- 
+
  	left_edge->height_left -= GRID_Y;
  	if (left_edge->height_left)
 @@ -1490,17 +1561,22 @@ apply_evenodd_fill_rule_and_step_edges (struct active_list *active,
  	    else
  		*cursor = right_edge->next;
- 
+
 +	    winding += right_edge->dir;
 +	    if ((winding & 1) == 0) {
  	    if (right_edge->next == NULL ||
@@ -909,7 +909,7 @@ index 29262c2..2b9fb1b 100644
  		break;
  	    }
 +	    }
- 
+
 -	    right_edge->x.quo += right_edge->dxdy_full.quo;
 -	    right_edge->x.rem += right_edge->dxdy_full.rem;
 -	    if (right_edge->x.rem >= 0) {
@@ -924,11 +924,11 @@ index 29262c2..2b9fb1b 100644
 +		}
  	    }
  	}
- 
+
 @@ -1537,8 +1613,14 @@ blit_span(
      }
  }
- 
+
 -#define GLITTER_BLIT_COVERAGES(coverages, y, xmin, xmax) \
 -	blit_cells(coverages, raster_pixels + (y)*raster_stride, xmin, xmax)
 +#define GLITTER_BLIT_COVERAGES(coverages, y, height, xmin, xmax) \
@@ -939,7 +939,7 @@ index 29262c2..2b9fb1b 100644
 +	    blit_cells(coverages, raster_pixels + (__y)*raster_stride, xmin, xmax); \
 +	} while (--__h); \
 +    } while (0)
- 
+
  static void
  blit_cells(
 @@ -1597,7 +1679,6 @@ static void
@@ -951,22 +951,22 @@ index 29262c2..2b9fb1b 100644
      converter->xmin=0;
      converter->ymin=0;
 @@ -1641,7 +1722,7 @@ glitter_scan_converter_reset(
- 
+
      active_list_reset(converter->active);
      cell_list_reset(converter->coverages);
 -    status = polygon_reset(converter->polygon, ymin, ymax);
 +    status = polygon_reset(converter->polygon, xmin, xmax, ymin, ymax);
      if (status)
  	return status;
- 
+
 @@ -1711,19 +1792,48 @@ glitter_scan_converter_add_edge (glitter_scan_converter_t *converter,
  #endif
- 
+
  #ifndef GLITTER_BLIT_COVERAGES_EMPTY
 -# define GLITTER_BLIT_COVERAGES_EMPTY(y, xmin, xmax)
 +# define GLITTER_BLIT_COVERAGES_EMPTY(y0, y1, xmin, xmax)
  #endif
- 
+
 +static cairo_bool_t
 +active_list_is_vertical (struct active_list *active)
 +{
@@ -1012,13 +1012,13 @@ index 29262c2..2b9fb1b 100644
      struct cell_list *coverages = converter->coverages;
 @@ -1738,22 +1848,28 @@ glitter_scan_converter_render(
      GLITTER_BLIT_COVERAGES_BEGIN;
- 
+
      /* Render each pixel row. */
 -    for (i=0; i<h; i++) {
 +    for (i = 0; i < h; i = j) {
  	int do_full_step = 0;
  	glitter_status_t status = 0;
- 
+
 +	j = i + 1;
 +
  	/* Determine if we can ignore this row or use the full pixel
@@ -1043,7 +1043,7 @@ index 29262c2..2b9fb1b 100644
  	}
 -
 -	cell_list_reset (coverages);
- 
+
  	if (do_full_step) {
  	    /* Step by a full pixel row's worth. */
 @@ -1764,8 +1880,20 @@ glitter_scan_converter_render(
@@ -1071,11 +1071,11 @@ index 29262c2..2b9fb1b 100644
 @@ -1787,13 +1915,13 @@ glitter_scan_converter_render(
  	if (unlikely (status))
  	    return status;
- 
+
 -	GLITTER_BLIT_COVERAGES(coverages, i+ymin_i, xmin_i, xmax_i);
 +	GLITTER_BLIT_COVERAGES(coverages, i+ymin_i, j-i, xmin_i, xmax_i);
 +	cell_list_reset (coverages);
- 
+
 -	if (! active->head) {
 +	if (! active->head)
  	    active->min_height = INT_MAX;
@@ -1084,11 +1084,11 @@ index 29262c2..2b9fb1b 100644
  	    active->min_height -= GRID_Y;
 -	}
      }
- 
+
      /* Clean up the coverage blitter. */
 @@ -1807,21 +1935,20 @@ glitter_scan_converter_render(
   * scan converter subclass. */
- 
+
  static glitter_status_t
 -blit_with_span_renderer(
 -    struct cell_list *cells,
@@ -1112,7 +1112,7 @@ index 29262c2..2b9fb1b 100644
      if (cell == NULL)
 -	return CAIRO_STATUS_SUCCESS;
 +	return blit_empty_with_span_renderer (renderer, y, height);
- 
+
      /* Skip cells to the left of the clip region. */
      while (cell != NULL && cell->x < xmin) {
 @@ -1833,12 +1960,12 @@ blit_with_span_renderer(
@@ -1129,7 +1129,7 @@ index 29262c2..2b9fb1b 100644
 -	num_spans = 2*num_spans + 1;
 +	num_spans = 2*num_spans;
      }
- 
+
      /* Allocate enough spans for the row. */
 @@ -1853,6 +1980,7 @@ blit_with_span_renderer(
      for (; cell != NULL; cell = cell->next) {
@@ -1138,18 +1138,18 @@ index 29262c2..2b9fb1b 100644
 +
  	if (x >= xmax)
  	    break;
- 
+
 @@ -1872,20 +2000,26 @@ blit_with_span_renderer(
  	prev_x = x+1;
      }
- 
+
 -    if (prev_x < xmax) {
 +    if (prev_x <= xmax) {
  	spans[num_spans].x = prev_x;
  	spans[num_spans].coverage = GRID_AREA_TO_ALPHA (cover);
  	++num_spans;
      }
- 
+
 +    if (prev_x < xmax && cover) {
 +	spans[num_spans].x = xmax;
 +	spans[num_spans].coverage = 0;
@@ -1160,7 +1160,7 @@ index 29262c2..2b9fb1b 100644
 -    return renderer->render_row (renderer, y, spans, num_spans);
 +    return renderer->render_rows (renderer, y, height, spans, num_spans);
  }
- 
+
  static glitter_status_t
 -blit_empty_with_span_renderer (cairo_span_renderer_t *renderer, int y)
 +blit_empty_with_span_renderer (cairo_span_renderer_t *renderer, int y, int height)
@@ -1168,7 +1168,7 @@ index 29262c2..2b9fb1b 100644
 -    return renderer->render_row (renderer, y, NULL, 0);
 +    return renderer->render_rows (renderer, y, height, NULL, 0);
  }
- 
+
  struct _cairo_tor_scan_converter {
 diff --git a/src/cairo-win32-surface.c b/src/cairo-win32-surface.c
 index 82d1cf5..d4575a3 100644
@@ -1177,7 +1177,7 @@ index 82d1cf5..d4575a3 100644
 @@ -1954,6 +1954,9 @@ typedef struct _cairo_win32_surface_span_renderer {
      const cairo_pattern_t *pattern;
      cairo_antialias_t antialias;
- 
+
 +    uint8_t *mask_data;
 +    uint32_t mask_stride;
 +
@@ -1186,7 +1186,7 @@ index 82d1cf5..d4575a3 100644
      cairo_region_t *clip_region;
 @@ -1962,14 +1965,16 @@ typedef struct _cairo_win32_surface_span_renderer {
  } cairo_win32_surface_span_renderer_t;
- 
+
  static cairo_status_t
 -_cairo_win32_surface_span_renderer_render_row (
 +_cairo_win32_surface_span_renderer_render_rows (
@@ -1202,9 +1202,9 @@ index 82d1cf5..d4575a3 100644
 +	_cairo_image_surface_span_render_row (y++, spans, num_spans, renderer->mask_data, renderer->mask_stride);
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
 @@ -2066,8 +2071,7 @@ _cairo_win32_surface_create_span_renderer (cairo_operator_t	 op,
- 
+
      renderer->base.destroy = _cairo_win32_surface_span_renderer_destroy;
      renderer->base.finish = _cairo_win32_surface_span_renderer_finish;
 -    renderer->base.render_row =
@@ -1222,7 +1222,7 @@ index 82d1cf5..d4575a3 100644
 +    renderer->mask_stride = renderer->mask->stride;
      return &renderer->base;
  }
- 
+
 diff --git a/src/cairo-xlib-display.c b/src/cairo-xlib-display.c
 index a7a40b8..566d9fb 100644
 --- a/src/cairo-xlib-display.c
@@ -1230,7 +1230,7 @@ index a7a40b8..566d9fb 100644
 @@ -407,6 +407,10 @@ _cairo_xlib_display_get (Display *dpy,
  	display->buggy_pad_reflect = TRUE;
      }
- 
+
 +    /* gradients don't seem to work */
 +    display->buggy_gradients = TRUE;
 +
@@ -1250,6 +1250,6 @@ index 58850ab..1cdf6ff 100644
 -				      const cairo_composite_rectangles_t *rects);
 +				      uint8_t				*data,
 +				      uint32_t				 stride);
- 
+
  cairo_private cairo_image_transparency_t
  _cairo_image_analyze_transparency (cairo_image_surface_t      *image);

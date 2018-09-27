@@ -9,7 +9,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-surface.c b/gfx/cairo/cairo/src/cair
  	return FALSE;
      }
  }
- 
+
 -/* Returns true if the given operator and source-alpha combination
 - * requires alpha compositing to complete.
 +/* Returns true if the given operator and alpha combination requires alpha
@@ -35,10 +35,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-surface.c b/gfx/cairo/cairo/src/cair
 +	op == CAIRO_OPERATOR_IN ||
 +	op == CAIRO_OPERATOR_ATOP)
 +	return surfaces_have_alpha;
- 
+
      return TRUE;
  }
- 
+
  /* There is a bug in most older X servers with compositing using a
   * untransformed repeating source pattern when the source is in off-screen
   * video memory, and another with repeated transformed images using a
@@ -68,11 +68,11 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-surface.c b/gfx/cairo/cairo/src/cair
      {
  	if (src_attr->extend == CAIRO_EXTEND_NONE)
  	    return DO_XCOPYAREA;
- 
+
  	if (dst->buggy_repeat && src_attr->extend == CAIRO_EXTEND_REPEAT)
  	    return DO_XTILE;
      }
- 
+
 @@ -2211,34 +2212,28 @@ _cairo_xlib_surface_composite (cairo_ope
      cairo_surface_attributes_t	src_attr, mask_attr;
      cairo_xlib_surface_t	*dst = abstract_dst;
@@ -84,24 +84,24 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-surface.c b/gfx/cairo/cairo/src/cair
      cairo_bool_t		is_integer_translation;
 -    cairo_bool_t		needs_alpha_composite;
      GC				gc;
- 
+
      if (mask_pattern != NULL && ! CAIRO_SURFACE_RENDER_HAS_COMPOSITE (dst))
  	return UNSUPPORTED ("no support for masks");
- 
+
      operation = _categorize_composite_operation (dst, op, src_pattern,
  						 mask_pattern != NULL);
      if (operation == DO_UNSUPPORTED)
  	return UNSUPPORTED ("unsupported operation");
- 
+
      X_DEBUG ((dst->dpy, "composite (dst=%x)", (unsigned int) dst->drawable));
- 
+
 -    needs_alpha_composite =
 -	_operator_needs_alpha_composite (op,
 -					 _surface_has_alpha (dst),
 -					 ! _cairo_pattern_is_opaque (src_pattern));
 -
      _cairo_xlib_display_notify (dst->display);
- 
+
      status =
  	_cairo_xlib_surface_acquire_pattern_surfaces (dst,
  						      src_pattern, mask_pattern,

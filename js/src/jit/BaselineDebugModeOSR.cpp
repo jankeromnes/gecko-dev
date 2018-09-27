@@ -701,7 +701,7 @@ RecompileBaselineScriptForDebugMode(JSContext* cx, JSScript* script,
     }
 
     JitSpew(JitSpew_BaselineDebugModeOSR, "Recompiling (%s:%u:%u) for %s",
-            script->filename(), script->lineno(), script->column(), 
+            script->filename(), script->lineno(), script->column(),
             observing ? "DEBUGGING" : "NORMAL EXECUTION");
 
     AutoKeepTypeScripts keepTypes(cx);

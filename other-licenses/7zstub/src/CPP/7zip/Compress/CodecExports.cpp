@@ -55,18 +55,18 @@ static HRESULT FindCodecClassId(const GUID *clsid, bool isCoder2, bool isFilter,
   if (clsid->Data1 != k_7zip_GUID_Data1 ||
       clsid->Data2 != k_7zip_GUID_Data2)
     return S_OK;
-  
+
   encode = true;
-  
+
        if (clsid->Data3 == k_7zip_GUID_Data3_Decoder) encode = false;
   else if (clsid->Data3 != k_7zip_GUID_Data3_Encoder) return S_OK;
-  
+
   UInt64 id = GetUi64(clsid->Data4);
-  
+
   for (unsigned i = 0; i < g_NumCodecs; i++)
   {
     const CCodecInfo &codec = *g_Codecs[i];
-    
+
     if (id != codec.Id
         || (encode ? !codec.CreateEncoder : !codec.CreateDecoder)
         || (isFilter ? !codec.IsFilter : codec.IsFilter))
@@ -74,26 +74,26 @@ static HRESULT FindCodecClassId(const GUID *clsid, bool isCoder2, bool isFilter,
 
     if (codec.NumStreams == 1 ? isCoder2 : !isCoder2)
       return E_NOINTERFACE;
-    
+
     index = i;
     return S_OK;
   }
-  
+
   return S_OK;
 }
 
 static HRESULT CreateCoderMain(unsigned index, bool encode, void **coder)
 {
   COM_TRY_BEGIN
-  
+
   const CCodecInfo &codec = *g_Codecs[index];
-  
+
   void *c;
   if (encode)
     c = codec.CreateEncoder();
   else
     c = codec.CreateDecoder();
-  
+
   if (c)
   {
     IUnknown *unk;
@@ -107,7 +107,7 @@ static HRESULT CreateCoderMain(unsigned index, bool encode, void **coder)
     *coder = c;
   }
   return S_OK;
-  
+
   COM_TRY_END
 }
 
@@ -132,7 +132,7 @@ static HRESULT CreateCoder2(bool encode, UInt32 index, const GUID *iid, void **o
   {
     if (*iid != IID_ICompressCoder) return E_NOINTERFACE;
   }
-  
+
   return CreateCoderMain(index, encode, outObject);
 }
 
@@ -163,7 +163,7 @@ STDAPI CreateCoder(const GUID *clsid, const GUID *iid, void **outObject)
         return E_NOINTERFACE;
     }
   }
-  
+
   bool encode;
   int codecIndex;
   HRESULT res = FindCodecClassId(clsid, isCoder2, isFilter, encode, codecIndex);
@@ -174,7 +174,7 @@ STDAPI CreateCoder(const GUID *clsid, const GUID *iid, void **outObject)
 
   return CreateCoderMain(codecIndex, encode, outObject);
 }
- 
+
 STDAPI GetMethodProperty(UInt32 codecIndex, PROPID propID, PROPVARIANT *value)
 {
   ::VariantClear((VARIANTARG *)value);

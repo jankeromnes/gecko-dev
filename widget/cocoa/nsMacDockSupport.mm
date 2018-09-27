@@ -109,7 +109,7 @@ nsMacDockSupport::SetProgressState(nsTaskbarProgressState aState,
   }
 
   if (mProgressState == STATE_NORMAL || mProgressState == STATE_INDETERMINATE) {
-    int perSecond = 8; // Empirically determined, see bug 848792 
+    int perSecond = 8; // Empirically determined, see bug 848792
     mProgressTimer->InitWithNamedFuncCallback(RedrawIconCallback, this, 1000 / perSecond,
                                               nsITimer::TYPE_REPEATING_SLACK,
                                               "nsMacDockSupport::RedrawIconCallback");

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin" type="text/css"?>
-<?xml-stylesheet 
+<?xml-stylesheet
   href="chrome://mochikit/content/tests/SimpleTest/test.css"
   type="text/css"?>
 <!--
@@ -9,16 +9,16 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=429723
 <window title="Mozilla Bug 429723"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script type="application/javascript" 
-          src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script> 
-     
+  <script type="application/javascript"
+          src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>
+
 
 <body  xmlns="http://www.w3.org/1999/xhtml">
-<a target="_blank" 
+<a target="_blank"
    href="https://bugzilla.mozilla.org/show_bug.cgi?id=429723">Mozilla Bug 429723</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 </pre>
@@ -29,7 +29,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=429723
 
 /** Test for Bug 429723 **/
 SimpleTest.waitForExplicitFinish();
-window.open("bug429723_window.xul", "429723test", 
+window.open("bug429723_window.xul", "429723test",
             "chrome,width=600,height=600");
 
 ]]>

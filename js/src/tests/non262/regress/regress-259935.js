@@ -29,7 +29,7 @@ if (f.ie) {
 } else {
   actual = 'not detected';
 }
- 
+
 reportCompare(expect, actual, summary);
 
 f = {ie: document.all};
@@ -39,5 +39,5 @@ if (f.ie) {
 } else {
   actual = 'not detected';
 }
- 
+
 reportCompare(expect, actual, summary);

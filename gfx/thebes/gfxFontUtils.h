@@ -143,7 +143,7 @@ public:
 
         return false;
     }
-    
+
     void set(uint32_t aIndex) {
         uint32_t i = aIndex / BLOCK_SIZE_BITS;
         while (i >= mBlockIndex.Length()) {
@@ -452,14 +452,14 @@ struct SFNTHeader {
     AutoSwap_PRUint16    numTables;              // Number of tables.
     AutoSwap_PRUint16    searchRange;            // (Maximum power of 2 <= numTables) x 16.
     AutoSwap_PRUint16    entrySelector;          // Log2(maximum power of 2 <= numTables).
-    AutoSwap_PRUint16    rangeShift;             // NumTables x 16-searchRange.        
+    AutoSwap_PRUint16    rangeShift;             // NumTables x 16-searchRange.
 };
 
 struct TableDirEntry {
     AutoSwap_PRUint32    tag;                    // 4 -byte identifier.
     AutoSwap_PRUint32    checkSum;               // CheckSum for this table.
     AutoSwap_PRUint32    offset;                 // Offset from beginning of TrueType font file.
-    AutoSwap_PRUint32    length;                 // Length of this table.        
+    AutoSwap_PRUint32    length;                 // Length of this table.
 };
 
 struct HeadTable {
@@ -637,7 +637,7 @@ struct FontDataOverlay {
     uint32_t  overlaySrcLen; // src length
     uint32_t  overlayDest;   // dest offset from start of font data
 };
-    
+
 enum gfxUserFontType {
     GFX_USERFONT_UNKNOWN = 0,
     GFX_USERFONT_OPENTYPE = 1,
@@ -709,8 +709,8 @@ public:
         LANG_ID_MAC_SLOVAK = 39,
 
         LANG_ID_MICROSOFT_EN_US = 0x0409,        // with Microsoft platformID, EN US lang code
-        
-        CMAP_MAX_CODEPOINT = 0x10ffff     // maximum possible Unicode codepoint 
+
+        CMAP_MAX_CODEPOINT = 0x10ffff     // maximum possible Unicode codepoint
                                           // contained in a cmap
     };
 
@@ -758,7 +758,7 @@ public:
     static inline uint32_t
     ReadLongAt(const uint8_t *aBuf, uint32_t aIndex)
     {
-        return ((aBuf[aIndex] << 24) | (aBuf[aIndex + 1] << 16) | 
+        return ((aBuf[aIndex] << 24) | (aBuf[aIndex + 1] << 16) |
                 (aBuf[aIndex + 2] << 8) | (aBuf[aIndex + 3]));
     }
 
@@ -767,15 +767,15 @@ public:
                           gfxSparseBitSet& aCharacterMap);
 
     static nsresult
-    ReadCMAPTableFormat12or13(const uint8_t *aBuf, uint32_t aLength, 
+    ReadCMAPTableFormat12or13(const uint8_t *aBuf, uint32_t aLength,
                               gfxSparseBitSet& aCharacterMap);
 
-    static nsresult 
-    ReadCMAPTableFormat4(const uint8_t *aBuf, uint32_t aLength, 
+    static nsresult
+    ReadCMAPTableFormat4(const uint8_t *aBuf, uint32_t aLength,
                          gfxSparseBitSet& aCharacterMap);
 
     static nsresult
-    ReadCMAPTableFormat14(const uint8_t *aBuf, uint32_t aLength, 
+    ReadCMAPTableFormat14(const uint8_t *aBuf, uint32_t aLength,
                           mozilla::UniquePtr<uint8_t[]>& aTable);
 
     static uint32_t
@@ -859,9 +859,9 @@ public:
     // create a new name table and build a new font with that name table
     // appended on the end, returns true on success
     static nsresult
-    RenameFont(const nsAString& aName, const uint8_t *aFontData, 
+    RenameFont(const nsAString& aName, const uint8_t *aFontData,
                uint32_t aFontDataLength, FallibleTArray<uint8_t> *aNewFont);
-    
+
     // read all names matching aNameID, returning in aNames array
     static nsresult
     ReadNames(const char *aNameData, uint32_t aDataLen, uint32_t aNameID,
@@ -881,7 +881,7 @@ public:
     // provided we know how; return true if successful, or false
     // if we can't handle the encoding
     static bool
-    DecodeFontName(const char *aBuf, int32_t aLength, 
+    DecodeFontName(const char *aBuf, int32_t aLength,
                    uint32_t aPlatformCode, uint32_t aScriptCode,
                    uint32_t aLangCode, nsACString& dest);
 
@@ -970,7 +970,7 @@ public:
                                     nsTArray<nsCString>& aFontList);
 
     // for a given font list pref name, initialize a list of font names
-    static void GetPrefsFontList(const char *aPrefName, 
+    static void GetPrefsFontList(const char *aPrefName,
                                  nsTArray<nsCString>& aFontList);
 
     // generate a unique font name

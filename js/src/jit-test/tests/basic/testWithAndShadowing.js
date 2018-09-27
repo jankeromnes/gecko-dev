@@ -7,7 +7,7 @@ for (var j = 0; j < 3; ++j) {
 	for (i = 0; i < 2; ++i) {
 	    s.push(j);
             s.push(i);
-	} 
+	}
     }
 }
 assertEq(s.join(), '0,0,0,1,1,0,1,1,2,0,2,1');

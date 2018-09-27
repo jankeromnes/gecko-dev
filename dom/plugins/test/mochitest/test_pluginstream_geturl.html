@@ -1,15 +1,15 @@
 <html>
 <head>
   <title>NPAPI NPN_GetURL NPStream Test</title>
-  <script type="text/javascript" 
+  <script type="text/javascript"
           src="/tests/SimpleTest/SimpleTest.js"></script>
-  <script type="text/javascript" 
+  <script type="text/javascript"
           src="pluginstream.js"></script>
   <script type="text/javascript" src="plugin-utils.js"></script>
   <script type="text/javascript">
     setTestPluginEnabledState(SpecialPowers.Ci.nsIPluginTag.STATE_ENABLED);
   </script>
-  <link rel="stylesheet" type="text/css" 
+  <link rel="stylesheet" type="text/css"
         href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -19,7 +19,7 @@
 
   <!--
    - The plugin reports that data can be sent to
-   - it in 1024-byte chunks, and the stream is initiated by a call to 
+   - it in 1024-byte chunks, and the stream is initiated by a call to
    - NPN_GetURL.
    -->
   <embed geturl="loremipsum.txt" streammode="normal"
@@ -28,4 +28,3 @@
          type="application/x-test"></embed>
  </body>
  </html>
- 

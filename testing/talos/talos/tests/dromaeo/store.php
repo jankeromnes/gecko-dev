@@ -20,10 +20,10 @@
 		foreach ($ids as $i) {
 			$query = mysql_query( "SELECT * FROM runs WHERE id=$i;" );
 			$data = mysql_fetch_assoc($query);
-	
+
 			$query = mysql_query( "SELECT * FROM results WHERE run_id=$i;" );
 			$results = array();
-		
+
 			while ( $row = mysql_fetch_assoc($query) ) {
 				array_push($results, $row);
 			}

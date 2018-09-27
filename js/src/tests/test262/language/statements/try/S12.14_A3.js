@@ -37,7 +37,7 @@ try{
   x3=someValue;
   $ERROR('#3.1: "x3=someValues" lead to throwing exception');
 }
-catch(err){  	
+catch(err){
   x3=1;
 }
 finally{

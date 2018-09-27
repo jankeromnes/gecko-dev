@@ -16,15 +16,15 @@ var __openParen = '(?:';
 var __closeParen = ')';
 var __pattern = '';
 var numParens = 200;
-  
+
 for (var i=0; i<numParens; i++)
     __pattern += __openParen;
-    
+
 __pattern += __strOriginal;
 
-for (i=0; i<numParens; i++) 
+for (i=0; i<numParens; i++)
     __pattern += __closeParen;
-    
+
 var __re = new RegExp(__pattern);
 
 var __executed = __re.exec(__strOriginal);

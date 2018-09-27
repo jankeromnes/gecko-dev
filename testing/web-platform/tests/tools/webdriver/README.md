@@ -24,11 +24,11 @@ which is useful if you want to contribute patches back:
 
     % cd /path/to/wdclient
     % python
-    Python 2.7.12+ (default, Aug  4 2016, 20:04:34) 
+    Python 2.7.12+ (default, Aug  4 2016, 20:04:34)
     [GCC 6.1.1 20160724] on linux2
     Type "help", "copyright", "credits" or "license" for more information.
     >>> import webdriver
-    >>> 
+    >>>
 
 If you are writing WebDriver specification tests for
 [WPT](https://github.com/web-platform-tests/wpt),

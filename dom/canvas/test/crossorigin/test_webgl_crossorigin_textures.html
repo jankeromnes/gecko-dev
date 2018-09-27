@@ -31,11 +31,11 @@
     }
     else if (crossOriginAttribute != "missing-value-default")
       image.crossOrigin = crossOriginAttribute;
-    
+
 
     function testDone() {
       number_of_tests_live--;
-        
+
       if (number_of_tests_live == 0 && all_tests_started)
         SimpleTest.finish();
     }

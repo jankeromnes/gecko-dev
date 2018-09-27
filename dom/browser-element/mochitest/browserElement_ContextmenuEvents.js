@@ -244,7 +244,7 @@ function sendContextMenuTo(selector, callback, ignorePreventDefault) {
     iframe.removeEventListener(e.type, oncontextmenu);
 
     // The embedder should call preventDefault() on the event if it will handle
-    // it. Not calling preventDefault() means it won't handle the event and 
+    // it. Not calling preventDefault() means it won't handle the event and
     // should not be able to deal with context menu callbacks.
     if (ignorePreventDefault !== true) {
       e.preventDefault();

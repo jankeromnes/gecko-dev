@@ -337,26 +337,26 @@ You use the \-L option to list the nicknames for all available certificates and 
 .RS 4
 .\}
 .nf
-signtool \-L 
+signtool \-L
 
-using certificate directory: /u/jsmith/\&.netscape 
-S Certificates 
-\- \-\-\-\-\-\-\-\-\-\-\-\- 
-  BBN Certificate Services CA Root 1 
-  IBM World Registry CA 
-  VeriSign Class 1 CA \- Individual Subscriber \- VeriSign, Inc\&. 
-  GTE CyberTrust Root CA 
-  Uptime Group Plc\&. Class 4 CA 
-* Verisign Object Signing Cert 
-  Integrion CA 
-  GTE CyberTrust Secure Server CA 
-  AT&T Directory Services 
-* test object signing cert 
-  Uptime Group Plc\&. Class 1 CA 
-  VeriSign Class 1 Primary CA 
+using certificate directory: /u/jsmith/\&.netscape
+S Certificates
+\- \-\-\-\-\-\-\-\-\-\-\-\-
+  BBN Certificate Services CA Root 1
+  IBM World Registry CA
+  VeriSign Class 1 CA \- Individual Subscriber \- VeriSign, Inc\&.
+  GTE CyberTrust Root CA
+  Uptime Group Plc\&. Class 4 CA
+* Verisign Object Signing Cert
+  Integrion CA
+  GTE CyberTrust Secure Server CA
+  AT&T Directory Services
+* test object signing cert
+  Uptime Group Plc\&. Class 1 CA
+  VeriSign Class 1 Primary CA
 \- \-\-\-\-\-\-\-\-\-\-\-\-
 
-Certificates that can be used to sign objects have *\*(Aqs to their left\&. 
+Certificates that can be used to sign objects have *\*(Aqs to their left\&.
 .fi
 .if n \{\
 .RE
@@ -380,7 +380,7 @@ Verisign Object Signing Cert
     Issued by: VeriSign, Inc\&. \- Verisign, Inc\&.
     Expires: Tue May 19, 1998
 test object signing cert
-    Issued by: test object signing cert (Signtool 1\&.0 Testing 
+    Issued by: test object signing cert (Signtool 1\&.0 Testing
 Certificate (960187691))
     Expires: Sun May 17, 1998
 \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
@@ -471,13 +471,13 @@ To use Netscape Signing Tool with a ZIP utility, you must have the utility in yo
 .RS 4
 .\}
 .nf
-cd signdir 
+cd signdir
 
-  zip \-r \&.\&./myjar\&.jar * 
-  adding: META\-INF/ (stored 0%) 
-  adding: META\-INF/manifest\&.mf (deflated 15%) 
-  adding: META\-INF/signtool\&.sf (deflated 28%) 
-  adding: META\-INF/signtool\&.rsa (stored 0%) 
+  zip \-r \&.\&./myjar\&.jar *
+  adding: META\-INF/ (stored 0%)
+  adding: META\-INF/manifest\&.mf (deflated 15%)
+  adding: META\-INF/signtool\&.sf (deflated 28%)
+  adding: META\-INF/signtool\&.rsa (stored 0%)
   adding: text\&.txt (stored 0%)
 .fi
 .if n \{\
@@ -542,24 +542,24 @@ You can use the \-M option to list the PKCS #11 modules, including smart cards, 
 signtool \-d "c:\enetscape\eusers\ejsmith" \-M
 
 using certificate directory: c:\enetscape\eusers\eusername
-Listing of PKCS11 modules 
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- 
-	1\&. Netscape Internal PKCS #11 Module 
-			  (this module is internally loaded) 
-			  slots: 2 slots attached 
-			  status: loaded 
-	  slot: Communicator Internal Cryptographic Services Version 4\&.0 
-	 token: Communicator Generic Crypto Svcs 
-	  slot: Communicator User Private Key and Certificate Services 
-	 token: Communicator Certificate DB 
-	2\&. CryptOS 
-			  (this is an external module) 
- DLL name: core32 
-	 slots: 1 slots attached 
-	status: loaded 
-	  slot: Litronic 210 
-	 token: 
-	\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- 
+Listing of PKCS11 modules
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+	1\&. Netscape Internal PKCS #11 Module
+			  (this module is internally loaded)
+			  slots: 2 slots attached
+			  status: loaded
+	  slot: Communicator Internal Cryptographic Services Version 4\&.0
+	 token: Communicator Generic Crypto Svcs
+	  slot: Communicator User Private Key and Certificate Services
+	 token: Communicator Certificate DB
+	2\&. CryptOS
+			  (this is an external module)
+ DLL name: core32
+	 slots: 1 slots attached
+	status: loaded
+	  slot: Litronic 210
+	 token:
+	\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
 .fi
 .if n \{\
 .RE

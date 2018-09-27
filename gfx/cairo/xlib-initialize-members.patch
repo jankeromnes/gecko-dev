@@ -14,6 +14,6 @@ diff -r 059e9961a122 gfx/cairo/cairo/src/cairo-xlib-display.c
 +         */
 +        render_major = render_minor = 0;
 +    }
- 
+
      codes = XAddExtension (dpy);
      if (unlikely (codes == NULL)) {

@@ -93,7 +93,7 @@ function testHtmlSerializer_1 () {
   var node = document.getElementById('draggable');
 
   var select = window.getSelection();
-  select.selectAllChildren(node);  
+  select.selectAllChildren(node);
 
   encoder.init(document, "application/xhtml+xml", de.OutputLFLineBreak | de.OutputSelectionOnly);
   encoder.setSelection(select);
@@ -117,7 +117,7 @@ function testHtmlSerializer_1 () {
   node = document.getElementById('aList');
 
   var select = window.getSelection();
-  select.selectAllChildren(node);  
+  select.selectAllChildren(node);
 
   encoder.init(document, "application/xhtml+xml", de.OutputLFLineBreak | de.OutputSelectionOnly);
   encoder.setSelection(select);

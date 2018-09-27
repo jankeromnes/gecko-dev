@@ -8,7 +8,7 @@
 #include "nsIURI.h"
 #include "nsIProcess.h"
 
-// XXX why does nsMIMEInfoImpl have a threadsafe nsISupports?  do we need one 
+// XXX why does nsMIMEInfoImpl have a threadsafe nsISupports?  do we need one
 // here too?
 NS_IMPL_ISUPPORTS(nsLocalHandlerApp, nsILocalHandlerApp, nsIHandlerApp)
 
@@ -24,7 +24,7 @@ NS_IMETHODIMP nsLocalHandlerApp::GetName(nsAString& aName)
   } else {
     aName.Assign(mName);
   }
-  
+
   return NS_OK;
 }
 
@@ -47,7 +47,7 @@ NS_IMETHODIMP
 nsLocalHandlerApp::GetDetailedDescription(nsAString& aDescription)
 {
   aDescription.Assign(mDetailedDescription);
-  
+
   return NS_OK;
 }
 

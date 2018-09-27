@@ -340,7 +340,7 @@
         </cldr-build>
     </target>
     <!-- we don't generate en.txt or el.txt - so don't change trnsfiles.mk for now. -->
-<!--   
+<!--
      <target name="trnsfiles" depends="init, setup" description="builds trnsfiles.mk">
         <cldr-build toolName="org.unicode.cldr.icu.ConvertTransforms" srcFile=".*xml" destFile="trnsfiles.mk" noArgs="true">
             <run>
@@ -362,17 +362,17 @@
                 <include name="resfiles.mk" />
             </fileset>
             <fileset id="locales_split" dir="${env.ICU4C_DIR}/source/data">
-               <include name="curr/*.txt" /> 
-               <include name="curr/resfiles.mk" /> 
-               <include name="lang/*.txt" /> 
-               <include name="lang/resfiles.mk" /> 
-               <include name="region/*.txt" /> 
-               <include name="region/resfiles.mk" /> 
-               <include name="zone/*.txt" /> 
-               <include name="zone/resfiles.mk" /> 
-               <exclude name="zone/tzdbNames.txt" /> 
-               <include name="unit/*.txt" /> 
-               <include name="unit/resfiles.mk" /> 
+               <include name="curr/*.txt" />
+               <include name="curr/resfiles.mk" />
+               <include name="lang/*.txt" />
+               <include name="lang/resfiles.mk" />
+               <include name="region/*.txt" />
+               <include name="region/resfiles.mk" />
+               <include name="zone/*.txt" />
+               <include name="zone/resfiles.mk" />
+               <exclude name="zone/tzdbNames.txt" />
+               <include name="unit/*.txt" />
+               <include name="unit/resfiles.mk" />
 	    </fileset>
             <fileset id="collation" dir="${env.ICU4C_DIR}/source/data/coll">
                 <include name="*.txt" />

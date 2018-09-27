@@ -1,4 +1,4 @@
-//! **arrayvec** provides the types `ArrayVec` and `ArrayString`: 
+//! **arrayvec** provides the types `ArrayVec` and `ArrayString`:
 //! array-backed vector and string types, which store their contents inline.
 //!
 //! The arrayvec package has the following cargo features:
@@ -372,7 +372,7 @@ impl<A: Array> ArrayVec<A> {
 
     /// Remove the element at `index` and swap the last element into its place.
     ///
-    /// This is a checked version of `.swap_remove`.  
+    /// This is a checked version of `.swap_remove`.
     /// This operation is O(1).
     ///
     /// Return `Some(` *element* `)` if the index is in bounds, else `None`.
@@ -749,7 +749,7 @@ impl<A: Array> Drop for IntoIter<A> {
 }
 
 /// A draining iterator for `ArrayVec`.
-pub struct Drain<'a, A> 
+pub struct Drain<'a, A>
     where A: Array,
           A::Item: 'a,
 {
@@ -800,7 +800,7 @@ impl<'a, A: Array> DoubleEndedIterator for Drain<'a, A>
 
 impl<'a, A: Array> ExactSizeIterator for Drain<'a, A> where A::Item: 'a {}
 
-impl<'a, A: Array> Drop for Drain<'a, A> 
+impl<'a, A: Array> Drop for Drain<'a, A>
     where A::Item: 'a
 {
     fn drop(&mut self) {
@@ -843,7 +843,7 @@ impl<T, Data, F> Drop for ScopeExitGuard<T, Data, F>
 
 
 /// Extend the `ArrayVec` with an iterator.
-/// 
+///
 /// Does not extract more items than there is space for. No error
 /// occurs if there are more iterator elements.
 impl<A: Array> Extend<A::Item> for ArrayVec<A> {
@@ -873,7 +873,7 @@ impl<A: Array> Extend<A::Item> for ArrayVec<A> {
 }
 
 /// Create an `ArrayVec` from an iterator.
-/// 
+///
 /// Does not extract more items than there is space for. No error
 /// occurs if there are more iterator elements.
 impl<A: Array> iter::FromIterator<A::Item> for ArrayVec<A> {

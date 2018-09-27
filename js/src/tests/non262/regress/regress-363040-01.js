@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function f(x,y) { return '(' + x + '+' + y + ')';}
 
   var testdesc;

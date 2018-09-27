@@ -7,15 +7,15 @@
 var div;
 
 function boo()
-{  
+{
   var newSpan = document.createElement('span');
   div = document.getElementById('div');
 
   var newScript = document.createElement('script');
   var nt = document.createTextNode("document.body.removeChild(div);");
-  newScript.appendChild(nt); 
+  newScript.appendChild(nt);
   newSpan.appendChild(newScript);
-  
+
   div.appendChild(newSpan);
 
   document.documentElement.removeAttribute("class");

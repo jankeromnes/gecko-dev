@@ -9,10 +9,10 @@
  *
  *SUMMARY: Testing numeric literals that begin with 0.
  *This test arose from Bugzilla bug 49233.
- *The best explanation is from jsscan.c:               
+ *The best explanation is from jsscan.c:
  *
  *     "We permit 08 and 09 as decimal numbers, which makes
- *     our behaviour a superset of the ECMA numeric grammar. 
+ *     our behaviour a superset of the ECMA numeric grammar.
  *     We might not always be so permissive, so we warn about it."
  *
  *Thus an expression 010 will evaluate, as always, as an octal (to 8).

@@ -1,4 +1,4 @@
-<?xml version="1.0"?> 
+<?xml version="1.0"?>
 
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -23,7 +23,7 @@
         <column/>
         <column/>
       </columns>
-      
+
       <rows>
         <row>
           <hbox pack="end">
@@ -31,7 +31,7 @@
           </hbox>
           <label id="dialog.title"/>
         </row>
-        <row class="thin-separator">             
+        <row class="thin-separator">
           <hbox pack="end">
             <label id="dialog.progressSpaces" value="&progress;"/>
           </hbox>

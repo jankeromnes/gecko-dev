@@ -11,7 +11,7 @@ var expect = 'No Crash';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 this.__defineSetter__("x", function() {}); x %= 5;
 
 reportCompare(expect, actual, summary);

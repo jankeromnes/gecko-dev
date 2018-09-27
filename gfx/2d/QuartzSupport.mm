@@ -136,7 +136,7 @@ nsresult nsCARenderer::SetupRenderer(void *aCALayer, int aWidth, int aHeight,
   }
   ::CGLDestroyPixelFormat(format);
 
-  CARenderer* caRenderer = [[CARenderer rendererWithCGLContext:mOpenGLContext 
+  CARenderer* caRenderer = [[CARenderer rendererWithCGLContext:mOpenGLContext
                                                        options:nil] retain];
   if (caRenderer == nil) {
     mUnsupportedWidth = aWidth;
@@ -386,7 +386,7 @@ IOSurfaceID nsCARenderer::GetIOSurfaceID() {
   return mIOSurface->GetIOSurfaceID();
 }
 
-nsresult nsCARenderer::Render(int aWidth, int aHeight, 
+nsresult nsCARenderer::Render(int aWidth, int aHeight,
                               double aContentsScaleFactor,
                               CGImageRef *aOutCGImage) {
   if (!aOutCGImage && !mIOSurface) {
@@ -484,8 +484,8 @@ nsresult nsCARenderer::Render(int aWidth, int aHeight,
   return NS_OK;
 }
 
-nsresult nsCARenderer::DrawSurfaceToCGContext(CGContextRef aContext, 
-                                              MacIOSurface *surf, 
+nsresult nsCARenderer::DrawSurfaceToCGContext(CGContextRef aContext,
+                                              MacIOSurface *surf,
                                               CGColorSpaceRef aColorSpace,
                                               int aX, int aY,
                                               size_t aWidth, size_t aHeight) {
@@ -496,9 +496,9 @@ nsresult nsCARenderer::DrawSurfaceToCGContext(CGContextRef aContext,
 
   // We get rendering glitches if we use a width/height that falls
   // outside of the IOSurface.
-  if (aWidth + aX > ioWidth) 
+  if (aWidth + aX > ioWidth)
     aWidth = ioWidth - aX;
-  if (aHeight + aY > ioHeight) 
+  if (aHeight + aY > ioHeight)
     aHeight = ioHeight - aY;
 
   if (aX < 0 || static_cast<size_t>(aX) >= ioWidth ||
@@ -511,8 +511,8 @@ nsresult nsCARenderer::DrawSurfaceToCGContext(CGContextRef aContext,
   double scaleFactor = surf->GetContentsScaleFactor();
   size_t intScaleFactor = ceil(surf->GetContentsScaleFactor());
   CGDataProviderRef dataProvider = ::CGDataProviderCreateWithData(ioData,
-                                      ioData, ioHeight*intScaleFactor*(bytesPerRow)*4, 
-                                      nullptr); //No release callback 
+                                      ioData, ioHeight*intScaleFactor*(bytesPerRow)*4,
+                                      nullptr); //No release callback
   if (!dataProvider) {
     surf->Unlock();
     return NS_ERROR_FAILURE;
@@ -539,11 +539,11 @@ nsresult nsCARenderer::DrawSurfaceToCGContext(CGContextRef aContext,
   }
 
   ::CGContextScaleCTM(aContext, 1.0f, -1.0f);
-  ::CGContextDrawImage(aContext, 
+  ::CGContextDrawImage(aContext,
                        CGRectMake(aX * scaleFactor,
-                                  (-(CGFloat)aY - (CGFloat)aHeight) * scaleFactor, 
+                                  (-(CGFloat)aY - (CGFloat)aHeight) * scaleFactor,
                                   aWidth * scaleFactor,
-                                  aHeight * scaleFactor), 
+                                  aHeight * scaleFactor),
                        subImage);
 
   ::CGImageRelease(subImage);
@@ -577,8 +577,8 @@ void nsCARenderer::SaveToDisk(MacIOSurface *surf) {
   size_t ioHeight = surf->GetHeight();
   void* ioData = surf->GetBaseAddress();
   CGDataProviderRef dataProvider = ::CGDataProviderCreateWithData(ioData,
-                                      ioData, ioHeight*(bytesPerRow)*4, 
-                                      nullptr); //No release callback 
+                                      ioData, ioHeight*(bytesPerRow)*4,
+                                      nullptr); //No release callback
   if (!dataProvider) {
     surf->Unlock();
     return;

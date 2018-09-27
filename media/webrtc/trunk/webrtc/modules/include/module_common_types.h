@@ -477,7 +477,7 @@ inline bool IsNewerTimestamp(uint32_t timestamp, uint32_t prev_timestamp) {
   return timestamp != prev_timestamp &&
          static_cast<uint32_t>(timestamp - prev_timestamp) < 0x80000000;
 }
- 
+
 inline bool IsNewerOrSameTimestamp(uint32_t timestamp, uint32_t prev_timestamp) {
   return timestamp == prev_timestamp ||
       static_cast<uint32_t>(timestamp - prev_timestamp) < 0x80000000;

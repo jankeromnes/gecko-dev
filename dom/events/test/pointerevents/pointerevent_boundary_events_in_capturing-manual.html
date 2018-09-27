@@ -46,7 +46,7 @@
                                     checkPointerEventType(event);
                                     assert_array_equals(eventsRecieved, ['lostpointercapture@listener', 'pointerout@listener', 'pointerleave@listener', 'pointerover@target', 'pointerenter@target', 'pointermove@target'],
                                         'lostpointercapture and pointerout/leave should be dispatched to the capturing target and pointerover/enter should be dispatched to the hit-test element before the first pointermove event after releasing pointer capture');
-                                }, expectedPointerType + " pointer events boundary events when releasing capture"); 
+                                }, expectedPointerType + " pointer events boundary events when releasing capture");
                                 phase = PhaseEnum.WaitingForUp;
                             }
                         }

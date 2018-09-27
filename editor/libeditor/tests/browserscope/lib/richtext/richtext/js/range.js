@@ -694,7 +694,7 @@ goog$dom$browserrange$WebKitRange.prototype.selectInternal = function(selection,
   selection.removeAllRanges();
   reversed ? selection.setBaseAndExtent(this.getEndNode(), this.getEndOffset(), this.getStartNode(), this.getStartOffset()) : selection.setBaseAndExtent(this.getStartNode(), this.getStartOffset(), this.getEndNode(), this.getEndOffset())
 };var goog$dom$browserrange$createRangeFromNodes = function(startNode, startOffset, endNode, endOffset) {
-  return goog$userAgent$IE ? new goog$dom$browserrange$IeRange(goog$dom$browserrange$IeRange$getBrowserRangeForNodes_(startNode, startOffset, endNode, endOffset), goog$dom$getOwnerDocument(startNode)) : goog$userAgent$WEBKIT ? new goog$dom$browserrange$WebKitRange(goog$dom$browserrange$W3cRange$getBrowserRangeForNodes_(startNode, startOffset, endNode, endOffset)) : goog$userAgent$GECKO ? new goog$dom$browserrange$GeckoRange(goog$dom$browserrange$W3cRange$getBrowserRangeForNodes_(startNode, startOffset, 
+  return goog$userAgent$IE ? new goog$dom$browserrange$IeRange(goog$dom$browserrange$IeRange$getBrowserRangeForNodes_(startNode, startOffset, endNode, endOffset), goog$dom$getOwnerDocument(startNode)) : goog$userAgent$WEBKIT ? new goog$dom$browserrange$WebKitRange(goog$dom$browserrange$W3cRange$getBrowserRangeForNodes_(startNode, startOffset, endNode, endOffset)) : goog$userAgent$GECKO ? new goog$dom$browserrange$GeckoRange(goog$dom$browserrange$W3cRange$getBrowserRangeForNodes_(startNode, startOffset,
   endNode, endOffset)) : new goog$dom$browserrange$W3cRange(goog$dom$browserrange$W3cRange$getBrowserRangeForNodes_(startNode, startOffset, endNode, endOffset))
 };var goog$dom$TextRange = function() {
 };

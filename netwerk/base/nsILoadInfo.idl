@@ -383,7 +383,7 @@ interface nsILoadInfo : nsISupports
    */
   [binaryname(LoadingContextXPCOM)]
   readonly attribute nsISupports loadingContext;
-  
+
   /**
    * A C++ friendly version of the loadingContext.
    */
@@ -698,7 +698,7 @@ interface nsILoadInfo : nsISupports
   /**
    * Returns true if the load was triggered from an external application
    * (e.g. Thunderbird). Please note that this flag will only ever be true
-   * if the load is of TYPE_DOCUMENT. 
+   * if the load is of TYPE_DOCUMENT.
    */
   [infallible] attribute boolean loadTriggeredFromExternal;
 

@@ -41,11 +41,11 @@ nsHTMLTokenizer::WillTokenize(bool aIsFinalChunk)
 }
 
 /**
- * This method is repeatedly called by the tokenizer. 
- * Each time, we determine the kind of token we're about to 
+ * This method is repeatedly called by the tokenizer.
+ * Each time, we determine the kind of token we're about to
  * read, and then we call the appropriate method to handle
  * that token type.
- *  
+ *
  * @param  aScanner The source of our input.
  * @param  aFlushTokens An OUT parameter to tell the caller whether it should
  *                      process our queued tokens up to now (e.g., when we

@@ -28,8 +28,8 @@ extern "C" {
 #endif /* __cplusplus */
 
 /*
- * The AtkImage interface should be supported by any object that has an 
- * associated image. This interface provides the standard mechanism for 
+ * The AtkImage interface should be supported by any object that has an
+ * associated image. This interface provides the standard mechanism for
  * an assistive technology to get descriptive information about images.
  */
 
@@ -60,7 +60,7 @@ struct _AtkImageIface
   G_CONST_RETURN gchar* ( *get_image_locale)      (AtkImage              *image);
 
   AtkFunction           pad1;
-	
+
 };
 
 GType  atk_image_get_type             (void);

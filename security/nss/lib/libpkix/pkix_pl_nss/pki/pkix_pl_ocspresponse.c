@@ -388,7 +388,7 @@ pkix_pl_OcspResponse_Create(
         SECItem *encodedRequest = NULL;
         PRUint16 responseCode = 0;
         char *responseData = NULL;
- 
+
         PKIX_ENTER(OCSPRESPONSE, "pkix_pl_OcspResponse_Create");
         PKIX_NULLCHECK_TWO(pNBIOContext, pResponse);
 
@@ -439,7 +439,7 @@ pkix_pl_OcspResponse_Create(
                                 (request, &location, plContext),
                                 PKIX_OCSPREQUESTGETLOCATIONFAILED);
 
-                        /* parse location -> hostname, port, path */    
+                        /* parse location -> hostname, port, path */
                         rv = CERT_ParseURL(location, &hostname, &port, &path);
                         if (rv == SECFailure || hostname == NULL || path == NULL) {
                                 PKIX_ERROR(PKIX_URLPARSINGFAILED);
@@ -449,7 +449,7 @@ pkix_pl_OcspResponse_Create(
                                                        &serverSession);
                         if (rv != SECSuccess) {
                                 PKIX_ERROR(PKIX_OCSPSERVERERROR);
-                        }       
+                        }
 
 			if (usePOST) {
 				sessionPath = path;
@@ -499,10 +499,10 @@ pkix_pl_OcspResponse_Create(
 				PORT_Free(fullGetPath);
 				fullGetPath = NULL;
 			}
-			
+
                         if (rv != SECSuccess) {
                                 PKIX_ERROR(PKIX_OCSPSERVERERROR);
-                        }       
+                        }
 
 			if (usePOST) {
 				rv = (*hcv1->setPostDataFcn)(sessionRequest,
@@ -543,7 +543,7 @@ pkix_pl_OcspResponse_Create(
 
         /* begin or resume IO to HTTPClient */
         if (httpClient && (httpClient->version == 1)) {
-                PRUint32 responseDataLen = 
+                PRUint32 responseDataLen =
                    ((PKIX_PL_NssContext*)plContext)->maxResponseLength;
 
                 hcv1 = &(httpClient->fcnTable.ftable1);
@@ -562,7 +562,7 @@ pkix_pl_OcspResponse_Create(
                 /* responseContentType is a pointer to the null-terminated
                  * string returned by httpclient. Memory allocated for context
                  * type will be freed with freeing of the HttpClient struct. */
-                if (PORT_Strcasecmp(responseContentType, 
+                if (PORT_Strcasecmp(responseContentType,
                                    "application/ocsp-response")) {
                        PKIX_ERROR(PKIX_OCSPSERVERERROR);
                 }
@@ -726,7 +726,7 @@ pkix_pl_OcspResponse_VerifyResponse(
 
     if (response->verifyFcn != NULL) {
         void *lplContext = NULL;
-        
+
         PKIX_CHECK(
             PKIX_PL_NssContext_Create(((SECCertificateUsage)1) << certUsage,
                                       PKIX_FALSE, NULL, &lplContext),
@@ -824,7 +824,7 @@ pkix_pl_OcspResponse_VerifySignature(
 
         tbsData =
             ocsp_GetResponseData(nssOCSPResponse, &tbsResponseDataDER);
-        
+
         signature = ocsp_GetResponseSignature(nssOCSPResponse);
 
 
@@ -834,7 +834,7 @@ pkix_pl_OcspResponse_VerifySignature(
 
             issuerCert = CERT_FindCertIssuer(cert->nssCert, PR_Now(),
                                              certUsageAnyCA);
-            
+
             /*
              * If this signature has already gone through verification,
              * just return the cached result.
@@ -848,24 +848,24 @@ pkix_pl_OcspResponse_VerifySignature(
                     goto cleanup;
                 }
             }
-            
-            response->signerCert = 
+
+            response->signerCert =
                 ocsp_GetSignerCertificate(response->handle, tbsData,
                                           signature, issuerCert);
-            
+
             if (response->signerCert == NULL) {
                 if (PORT_GetError() == SEC_ERROR_UNKNOWN_CERT) {
                     /* Make the error a little more specific. */
                     PORT_SetError(SEC_ERROR_OCSP_INVALID_SIGNING_CERT);
                 }
                 goto cleanup;
-            }            
-            PKIX_CHECK( 
+            }
+            PKIX_CHECK(
                 PKIX_PL_Cert_CreateFromCERTCertificate(response->signerCert,
                                                        &(response->pkixSignerCert),
                                                        plContext),
                 PKIX_CERTCREATEWITHNSSCERTFAILED);
-            
+
             /*
              * We could mark this true at the top of this function, or
              * always below at "finish", but if the problem was just that
@@ -874,7 +874,7 @@ pkix_pl_OcspResponse_VerifySignature(
              * have better luck.
              */
             signature->wasChecked = PR_TRUE;
-            
+
             /*
              * We are about to verify the signer certificate; we need to
              * specify *when* that certificate must be valid -- for our
@@ -887,22 +887,22 @@ pkix_pl_OcspResponse_VerifySignature(
                 PORT_SetError(SEC_ERROR_OCSP_MALFORMED_RESPONSE);
                 goto cleanup;
             }
-            
+
             /*
              * We need producedAtDate and pkixSignerCert if we are calling a
              * user-supplied verification function. Let's put their
              * creation before the code that gets repeated when
              * non-blocking I/O is used.
              */
-            
+
             PKIX_CHECK(
                 pkix_pl_Date_CreateFromPRTime((PRTime)response->producedAt,
                                               &(response->producedAtDate),
                                               plContext),
                 PKIX_DATECREATEFROMPRTIMEFAILED);
-            
+
 	}
-        
+
         /*
          * Just because we have a cert does not mean it is any good; check
          * it for validity, trust and usage. Use the caller-supplied
@@ -931,24 +931,24 @@ pkix_pl_OcspResponse_VerifySignature(
             if (nbio != NULL) {
                 *pNBIOContext = nbio;
                 goto cleanup;
-            }            
+            }
         }
 
         rv = ocsp_VerifyResponseSignature(response->signerCert, signature,
                                           tbsResponseDataDER, NULL);
-        
+
 cleanup:
         if (rv == SECSuccess) {
             *pPassed = PKIX_TRUE;
         } else {
             *pPassed = PKIX_FALSE;
         }
-        
+
         if (signature) {
             if (signature->wasChecked) {
                 signature->status = rv;
             }
-            
+
             if (rv != SECSuccess) {
                 signature->failureReason = PORT_GetError();
                 if (response->signerCert != NULL) {
@@ -963,7 +963,7 @@ cleanup:
 
 	if (issuerCert)
 	    CERT_DestroyCertificate(issuerCert);
-        
+
         PKIX_RETURN(OCSPRESPONSE);
 }
 
@@ -1027,12 +1027,12 @@ pkix_pl_OcspResponse_GetStatusForCert(
 
         rv = ocsp_GetVerifiedSingleResponseForCertID(response->handle,
                                                      response->nssOCSPResponse,
-                                                     cid->certID, 
+                                                     cid->certID,
                                                      response->signerCert,
                                                      time, &single);
         if (rv == SECSuccess) {
                 /*
-                 * Check whether the status says revoked, and if so 
+                 * Check whether the status says revoked, and if so
                  * how that compares to the time value passed into this routine.
                  */
                 rv = ocsp_CertHasGoodStatus(single->certStatus, time);

@@ -9,4 +9,4 @@
 */
 
 MSG_DEF(JSSMSG_NOT_AN_ERROR,             0, 0, JSEXN_ERR, "<Error #0 is reserved>")
-MSG_DEF(JSSMSG_CANT_OPEN,                1, 2, JSEXN_ERR, "can't open {0}: {1}") 
+MSG_DEF(JSSMSG_CANT_OPEN,                1, 2, JSEXN_ERR, "can't open {0}: {1}")

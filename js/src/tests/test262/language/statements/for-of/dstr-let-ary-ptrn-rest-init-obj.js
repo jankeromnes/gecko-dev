@@ -51,7 +51,7 @@ throw "Test262: This statement should not be evaluated.";
 var iterCount = 0;
 
 for (let [...{ x } = []] of [[]]) {
-  
+
 
   iterCount += 1;
 }

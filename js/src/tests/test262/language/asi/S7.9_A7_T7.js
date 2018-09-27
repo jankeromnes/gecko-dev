@@ -8,7 +8,7 @@ description: Checking if execution of "var x \n y" passes
 ---*/
 
 assert.throws(ReferenceError, function() {
-var x 
+var x
 y
 });
 

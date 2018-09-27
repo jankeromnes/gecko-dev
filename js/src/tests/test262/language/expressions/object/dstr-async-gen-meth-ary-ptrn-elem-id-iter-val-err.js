@@ -54,7 +54,7 @@ g[Symbol.iterator] = function() {
 
 var obj = {
   async *method([x]) {
-    
+
   }
 };
 

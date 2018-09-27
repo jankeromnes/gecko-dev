@@ -8,17 +8,17 @@ Author-email: me@gsnedders.com
 License: BSD
 Description: python-webencodings
         ===================
-        
+
         This is a Python implementation of the `WHATWG Encoding standard
         <http://encoding.spec.whatwg.org/>`_.
-        
+
         * Latest documentation: http://packages.python.org/webencodings/
         * Source code and issue tracker:
           https://github.com/gsnedders/python-webencodings
         * PyPI releases: http://pypi.python.org/pypi/webencodings
         * License: BSD
         * Python 2.6+ and 3.3+
-        
+
         In order to be compatible with legacy web content
         when interpreting something like ``Content-Type: text/html; charset=latin1``,
         tools need to use a particular set of aliases for encoding labels
@@ -28,10 +28,10 @@ Description: python-webencodings
         over any other encoding declaration.
         The Encoding standard defines all such details so that implementations do
         not have to reverse-engineer each other.
-        
+
         This module has encoding labels and BOM detection,
         but the actual implementation for encoders and decoders is Python’s.
-        
+
 Platform: UNKNOWN
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers

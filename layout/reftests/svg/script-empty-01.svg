@@ -7,7 +7,7 @@
   <title>Testcase for that xlink:href attribute overrides script content</title>
 
   <rect id="r" width="100%" height="100%" fill="lime"/>
-  
+
   <script xlink:href="">
     document.getElementById("r").style.fill = "red";
   </script>

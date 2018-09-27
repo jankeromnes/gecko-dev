@@ -10,35 +10,35 @@ Description-Content-Type: UNKNOWN
 Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.svg?maxAge=3600&label=Linux%20/%20OSX
             :target: https://travis-ci.org/giampaolo/psutil
             :alt: Linux tests (Travis)
-        
+
         .. image:: https://img.shields.io/appveyor/ci/giampaolo/psutil/master.svg?maxAge=3600&label=Windows
             :target: https://ci.appveyor.com/project/giampaolo/psutil
             :alt: Windows tests (Appveyor)
-        
+
         .. image:: https://coveralls.io/repos/github/giampaolo/psutil/badge.svg?branch=master
             :target: https://coveralls.io/github/giampaolo/psutil?branch=master
             :alt: Test coverage (coverall.io)
-        
+
         .. image:: https://readthedocs.org/projects/psutil/badge/?version=latest
             :target: http://psutil.readthedocs.io/en/latest/?badge=latest
             :alt: Documentation Status
-        
+
         .. image:: https://img.shields.io/pypi/v/psutil.svg?label=pypi
             :target: https://pypi.python.org/pypi/psutil/
             :alt: Latest version
-        
+
         .. image:: https://img.shields.io/github/stars/giampaolo/psutil.svg
             :target: https://github.com/giampaolo/psutil/
             :alt: Github stars
-        
+
         .. image:: https://img.shields.io/pypi/l/psutil.svg
             :target: https://pypi.python.org/pypi/psutil/
             :alt: License
-        
+
         ===========
         Quick links
         ===========
-        
+
         - `Home page <https://github.com/giampaolo/psutil>`_
         - `Install <https://github.com/giampaolo/psutil/blob/master/INSTALL.rst>`_
         - `Documentation <http://psutil.readthedocs.io>`_
@@ -47,11 +47,11 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
         - `Blog <http://grodola.blogspot.com/search/label/psutil>`_
         - `Development guide <https://github.com/giampaolo/psutil/blob/master/DEVGUIDE.rst>`_
         - `What's new <https://github.com/giampaolo/psutil/blob/master/HISTORY.rst>`_
-        
+
         =======
         Summary
         =======
-        
+
         psutil (process and system utilities) is a cross-platform library for
         retrieving information on **running processes** and **system utilization**
         (CPU, memory, disks, network, sensors) in Python.
@@ -61,22 +61,22 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
         ps, top, lsof, netstat, ifconfig, who, df, kill, free, nice, ionice, iostat,
         iotop, uptime, pidof, tty, taskset, pmap.
         psutil currently supports the following platforms:
-        
+
         - **Linux**
         - **Windows**
         - **OSX**,
         - **FreeBSD, OpenBSD**, **NetBSD**
         - **Sun Solaris**
         - **AIX**
-        
+
         ...both **32-bit** and **64-bit** architectures, with Python
         versions from **2.6 to 3.6**.
         `PyPy <http://pypy.org/>`__ is also known to work.
-        
+
         ====================
         Example applications
         ====================
-        
+
         +------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
         | .. image:: https://github.com/giampaolo/psutil/blob/master/docs/_static/procinfo-small.png     | .. image:: https://github.com/giampaolo/psutil/blob/master/docs/_static/top-small.png      |
         |    :target: https://github.com/giampaolo/psutil/blob/master/docs/_static/procinfo.png          |     :target: https://github.com/giampaolo/psutil/blob/master/docs/_static/top.png          |
@@ -84,48 +84,48 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
         | .. image:: https://github.com/giampaolo/psutil/blob/master/docs/_static/procsmem-small.png     | .. image:: https://github.com/giampaolo/psutil/blob/master/docs/_static/pmap-small.png     |
         |     :target: https://github.com/giampaolo/psutil/blob/master/docs/_static/procsmem.png         |     :target: https://github.com/giampaolo/psutil/blob/master/docs/_static/pmap.png         |
         +------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
-        
+
         Also see `scripts directory <https://github.com/giampaolo/psutil/tree/master/scripts>`__
         and `doc recipes <http://psutil.readthedocs.io/#recipes/>`__.
-        
+
         =====================
         Projects using psutil
         =====================
-        
+
         At the time of writing psutil has roughly
         `2.9 milion downloads <https://github.com/giampaolo/psutil/issues/1053#issuecomment-340166262>`__
         per month and there are over
         `6000 open source projects <https://libraries.io/pypi/psutil/dependent_repositories?page=1>`__
         on github which depend from psutil.
         Here's some I find particularly interesting:
-        
+
         - https://github.com/facebook/osquery/
         - https://github.com/nicolargo/glances
         - https://github.com/google/grr
         - https://github.com/Jahaja/psdash
         - https://github.com/ajenti/ajenti
         - https://github.com/home-assistant/home-assistant/
-        
+
         ========
         Portings
         ========
-        
+
         - Go: https://github.com/shirou/gopsutil
         - C: https://github.com/hamon-in/cpslib
         - Node: https://github.com/christkv/node-psutil
         - Rust: https://github.com/borntyping/rust-psutil
         - Ruby: https://github.com/spacewander/posixpsutil
         - Nim: https://github.com/johnscillieri/psutil-nim
-        
+
         ==============
         Example usages
         ==============
-        
+
         CPU
         ===
-        
+
         .. code-block:: python
-        
+
             >>> import psutil
             >>> psutil.cpu_times()
             scputimes(user=3961.46, nice=169.729, system=2150.659, idle=16900.540, iowait=629.59, irq=0.0, softirq=19.42, steal=0.0, guest=0, nice=0.0)
@@ -162,24 +162,24 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
             >>> psutil.cpu_freq()
             scpufreq(current=931.42925, min=800.0, max=3500.0)
             >>>
-        
+
         Memory
         ======
-        
+
         .. code-block:: python
-        
+
             >>> import psutil
             >>> psutil.virtual_memory()
             svmem(total=10367352832, available=6472179712, percent=37.6, used=8186245120, free=2181107712, active=4748992512, inactive=2758115328, buffers=790724608, cached=3500347392, shared=787554304)
             >>> psutil.swap_memory()
             sswap(total=2097147904, used=296128512, free=1801019392, percent=14.1, sin=304193536, sout=677842944)
             >>>
-        
+
         Disks
         =====
-        
+
         .. code-block:: python
-        
+
             >>> import psutil
             >>> psutil.disk_partitions()
             [sdiskpart(device='/dev/sda1', mountpoint='/', fstype='ext4', opts='rw,nosuid'),
@@ -191,12 +191,12 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
             >>> psutil.disk_io_counters(perdisk=False)
             sdiskio(read_count=719566, write_count=1082197, read_bytes=18626220032, write_bytes=24081764352, read_time=5023392, write_time=63199568, read_merged_count=619166, write_merged_count=812396, busy_time=4523412)
             >>>
-        
+
         Network
         =======
-        
+
         .. code-block:: python
-        
+
             >>> import psutil
             >>> psutil.net_io_counters(pernic=True)
             {'eth0': netio(bytes_sent=485291293, bytes_recv=6004858642, packets_sent=3251564, packets_recv=4787798, errin=0, errout=0, dropin=0, dropout=0),
@@ -221,12 +221,12 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
             {'eth0': snicstats(isup=True, duplex=<NicDuplex.NIC_DUPLEX_FULL: 2>, speed=100, mtu=1500),
              'lo': snicstats(isup=True, duplex=<NicDuplex.NIC_DUPLEX_UNKNOWN: 0>, speed=0, mtu=65536)}
             >>>
-        
+
         Sensors
         =======
-        
+
         .. code-block:: python
-        
+
             >>> import psutil
             >>> psutil.sensors_temperatures()
             {'acpitz': [shwtemp(label='', current=47.0, high=103.0, critical=103.0)],
@@ -243,12 +243,12 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
             >>> psutil.sensors_battery()
             sbattery(percent=93, secsleft=16628, power_plugged=False)
             >>>
-        
+
         Other system info
         =================
-        
+
         .. code-block:: python
-        
+
             >>> import psutil
             >>> psutil.users()
             [suser(name='giampaolo', terminal='pts/2', host='localhost', started=1340737536.0, pid=1352),
@@ -257,12 +257,12 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
             >>> psutil.boot_time()
             1365519115.0
             >>>
-        
+
         Process management
         ==================
-        
+
         .. code-block:: python
-        
+
             >>> import psutil
             >>> psutil.pids()
             [1, 2, 3, 4, 5, 6, 7, 46, 48, 50, 51, 178, 182, 222, 223, 224, 268, 1215, 1216, 1220, 1221, 1243, 1244,
@@ -392,12 +392,12 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
             giampaolo  31721  0.0  2.2  773060  181896            00:04   10:30  chrome
             root       31763  0.0  0.0       0       0            00:05   00:00  kworker/0:1
             >>>
-        
+
         Further process APIs
         ====================
-        
+
         .. code-block:: python
-        
+
             >>> import psutil
             >>> for proc in psutil.process_iter(attrs=['pid', 'name']):
             ...     print(proc.info)
@@ -416,11 +416,11 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
             >>> # waits for multiple processes to terminate
             >>> gone, alive = psutil.wait_procs(procs_list, timeout=3, callback=on_terminate)
             >>>
-        
+
         Popen wrapper:
-        
+
         .. code-block:: python
-        
+
             >>> import psutil
             >>> from subprocess import PIPE
             >>> p = psutil.Popen(["/usr/bin/python", "-c", "print('hello')"], stdout=PIPE)
@@ -433,12 +433,12 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
             >>> p.wait(timeout=2)
             0
             >>>
-        
+
         Windows services
         ================
-        
+
         .. code-block:: python
-        
+
             >>> list(psutil.win_service_iter())
             [<WindowsService(name='AeLookupSvc', display_name='Application Experience') at 38850096>,
              <WindowsService(name='ALG', display_name='Application Layer Gateway Service') at 38850128>,
@@ -455,29 +455,29 @@ Description: .. image:: https://img.shields.io/travis/giampaolo/psutil/master.sv
              'start_type': 'manual',
              'status': 'stopped',
              'username': 'NT AUTHORITY\\LocalService'}
-        
+
         Other samples
         =============
-        
+
         See `doc recipes <http://psutil.readthedocs.io/#recipes>`__.
-        
+
         ======
         Author
         ======
-        
+
         psutil was created and is maintained by
         `Giampaolo Rodola' <http://grodola.blogspot.com/p/about.html>`__.
         A lot of time and effort went into making psutil as it is right now.
         If you feel psutil is useful to you or your business and want to support its
         future development please consider donating me
         (`Giampaolo <http://grodola.blogspot.com/p/about.html>`__) some money.
-        
+
         .. image:: http://www.paypal.com/en_US/i/btn/x-click-but04.gif
             :target: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A9ZS7PKKRM3S8
             :alt: Donate via PayPal
-        
+
         Don't want to donate money? Then maybe you could `write me a recommendation on Linkedin <https://www.linkedin.com/in/grodola>`_.
-        
+
 Keywords: ps,top,kill,free,lsof,netstat,nice,tty,ionice,uptime,taskmgr,process,df,iotop,iostat,ifconfig,taskset,who,pidof,pmap,smem,pstree,monitoring,ulimit,prlimit,smem
 Platform: Platform Independent
 Classifier: Development Status :: 5 - Production/Stable

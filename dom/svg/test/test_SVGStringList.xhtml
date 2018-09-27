@@ -36,8 +36,8 @@ function initializeThrowsFor(stringList, value)
   return false;
 }
 
-function insertItemBeforeThrowsFor(stringList, value) 
-{  
+function insertItemBeforeThrowsFor(stringList, value)
+{
   try {
     stringList.insertItemBefore(value, 0);
   } catch (e) {
@@ -46,8 +46,8 @@ function insertItemBeforeThrowsFor(stringList, value)
   return false;
 }
 
-function replaceItemThrowsFor(stringList, value) 
-{  
+function replaceItemThrowsFor(stringList, value)
+{
   try {
     stringList.replaceItem(value, 0);
   } catch (e) {
@@ -56,8 +56,8 @@ function replaceItemThrowsFor(stringList, value)
   return false;
 }
 
-function appendItemThrowsFor(stringList, value) 
-{  
+function appendItemThrowsFor(stringList, value)
+{
   try {
     stringList.appendItem(value);
   } catch (e) {
@@ -83,19 +83,19 @@ function run_tests()
 
   ok(!insertItemBeforeThrowsFor(strings, null),
      "SVGStringList.insertItemBefore() should not throw when passed null");
-  ok(insertItemBeforeThrowsFor(strings, ""),     
+  ok(insertItemBeforeThrowsFor(strings, ""),
      "SVGStringList.insertItemBefore() should throw when passed the empty string");
   is(strings.length, 1, 'length should be 1');
 
   ok(!replaceItemThrowsFor(strings, null),
      "SVGStringList.replaceItem() should not throw when passed null");
-  ok(replaceItemThrowsFor(strings, ""),     
+  ok(replaceItemThrowsFor(strings, ""),
      "SVGStringList.replaceItem() should throw when passed the empty string");
   is(strings.length, 1, 'length should be 1');
 
   ok(!appendItemThrowsFor(strings, null),
      "SVGStringList.appendItem() should not throw when passed null");
-  ok(appendItemThrowsFor(strings, ""),     
+  ok(appendItemThrowsFor(strings, ""),
      "SVGStringList.appendItem() should throw when passed the empty string");
   is(strings.length, 2, 'length should be 2');
 

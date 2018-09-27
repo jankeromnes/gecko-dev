@@ -43,7 +43,7 @@ if (objectx.prop !== objecty.prop) {
 } else {
   if (objectx === objecty) {
     $ERROR('#5: var objectx = new Object(); var objecty = new Object(); objecty.prop = 1; objectx.prop = objecty.prop; objectx !== objecty');
-  } 
+  }
 }
 
 reportCompare(0, 0);

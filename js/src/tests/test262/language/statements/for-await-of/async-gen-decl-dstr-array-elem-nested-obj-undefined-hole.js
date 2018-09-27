@@ -30,7 +30,7 @@ let x;
 let iterCount = 0;
 async function * fn() {
   for await ([{ x }] of [[ , ]]) {
-    
+
     iterCount += 1;
   }
 }

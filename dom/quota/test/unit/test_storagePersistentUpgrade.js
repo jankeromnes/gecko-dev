@@ -10,7 +10,7 @@ function* testSteps()
   const origins = [
     {
       oldPath: "indexedDB/http+++www.mozilla.org",
-      newPath: "storage/default/http+++www.mozilla.org", 
+      newPath: "storage/default/http+++www.mozilla.org",
       url: "http://www.mozilla.org",
       persistence: "default"
     },

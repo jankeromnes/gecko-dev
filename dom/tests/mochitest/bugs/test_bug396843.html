@@ -14,7 +14,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=396843
   <iframe src="http://example.org:80/" id="t"></iframe>
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -219,7 +219,7 @@ allNodes.push(document.createComment("some text"));
 allNodes.push(document.createDocumentFragment());
 XMLNodes.push(XMLDoc.createCDATASection("some text"));
 XMLNodes.push(XMLDoc.createProcessingInstruction("PI", "data"));
-               
+
 function runTest() {
   ok(document.nodePrincipal === undefined, "Must not have document principal");
   ok(document.baseURIObject === undefined, "Must not have document base URI");

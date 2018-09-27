@@ -17,7 +17,7 @@ public:
     { SendMsg(TBM_SETPOS, BoolToBOOL(redraw), pos); }
   void SetTicFreq(int freq)
     { SendMsg(TBM_SETTICFREQ, freq); }
-  
+
   int GetPos()
     { return (int)SendMsg(TBM_GETPOS); }
 };

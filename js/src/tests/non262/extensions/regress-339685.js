@@ -11,7 +11,7 @@ var expect = 'No Error';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 var d = { a:2, b:3 };
 
 d.__proto__ = null;

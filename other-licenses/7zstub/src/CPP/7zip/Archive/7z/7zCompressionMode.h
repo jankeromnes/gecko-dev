@@ -55,7 +55,7 @@ struct CCompressionMethodMode
   UInt32 NumThreads;
   bool MultiThreadMixer;
   #endif
-  
+
   bool PasswordIsDefined;
   UString Password;
 

@@ -97,14 +97,14 @@ GfxInfo::GetData()
     }
 
     bool exited_with_error_code = !waiting_for_glxtest_process_failed &&
-                                  WIFEXITED(glxtest_status) && 
+                                  WIFEXITED(glxtest_status) &&
                                   WEXITSTATUS(glxtest_status) != EXIT_SUCCESS;
     bool received_signal = !waiting_for_glxtest_process_failed &&
                            WIFSIGNALED(glxtest_status);
 
     bool error = waiting_for_glxtest_process_failed || exited_with_error_code || received_signal;
 
-    nsCString textureFromPixmap; 
+    nsCString textureFromPixmap;
     nsCString *stringToFill = nullptr;
     char *bufptr = buf;
     if (!error) {

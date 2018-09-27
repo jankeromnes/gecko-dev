@@ -35,10 +35,10 @@ function test(inString) {
 	            gConverter.Finish();
 
     var outLen = outString.length;
-    if (IsASCII(inString.charCodeAt(1)) && 
+    if (IsASCII(inString.charCodeAt(1)) &&
 	inString.charCodeAt(1) != outString.charCodeAt(outLen - 5))  {
 	error(inString, outString, "ASCII second byte eaten");
-    } else if (IsASCII(inString.charCodeAt(2)) && 
+    } else if (IsASCII(inString.charCodeAt(2)) &&
 	       inString.charCodeAt(2) != outString.charCodeAt(outLen - 4)) {
 	error(inString, outString, "ASCII third byte eaten");
     } else if (inString.charCodeAt(0) == 0x8f &&

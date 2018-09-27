@@ -57,7 +57,7 @@ FORWARDDELETE_TESTS = {
           'desc':        'Delete text selection',
           'pad':         'foo[bar]baz',
           'expected':    'foo^baz' },
-          
+
         { 'id':          'B-1_SE',
           'desc':        'Forward-delete at end of span',
           'pad':         'foo<b>bar^</b>baz',
@@ -128,7 +128,7 @@ FORWARDDELETE_TESTS = {
       'tests':      [
         { 'id':          'OL-LI2-1_SO1',
           'desc':        'Delete fully wrapped list item',
-          'pad':         'foo<ol>{<li>bar</li>}<li>baz</li></ol>qoz', 
+          'pad':         'foo<ol>{<li>bar</li>}<li>baz</li></ol>qoz',
           'expected':    ['foo<ol>|<li>baz</li></ol>qoz',
                           'foo<ol><li>^baz</li></ol>qoz'] },
 

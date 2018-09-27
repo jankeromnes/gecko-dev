@@ -1,7 +1,7 @@
 actual = '';
 expected = '2,';
 
-function k(f_arg) { 
+function k(f_arg) {
   for (var i = 0; i < 100; ++i) {
     f_arg();
   }

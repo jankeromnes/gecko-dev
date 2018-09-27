@@ -19,5 +19,5 @@ function f()
 
 expect = 'f';
 actual = f.name;
- 
+
 reportCompare(expect, actual, summary);

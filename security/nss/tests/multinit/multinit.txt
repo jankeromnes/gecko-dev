@@ -10,7 +10,7 @@
 # Main calls the traditional NSS init calls (simulating the main application)
 # lib1 and lib2 call NSS_InitContext().
 #
-# All functions call NSS_ShutdownContext unless 'main shutdown type' is set to 
+# All functions call NSS_ShutdownContext unless 'main shutdown type' is set to
 # 'old', in which case main will call the traditional NSS_Shutdown().
 #
 # Commands: comma separated list of commands to execute. These simulate

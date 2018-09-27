@@ -116,7 +116,7 @@ public:
     /**
      * Important! Note the key here -has- to be a pointer to a uint64_t.
      */
-    virtual HRESULT STDMETHODCALLTYPE 
+    virtual HRESULT STDMETHODCALLTYPE
         CreateStreamFromKey(void const* fontFileReferenceKey,
                             UINT32 fontFileReferenceKeySize,
                             OUT IDWriteFontFileStream** fontFileStream);
@@ -155,6 +155,6 @@ public:
 
 private:
     static IDWriteFontFileLoader* mInstance;
-}; 
+};
 
 #endif /* GFX_DWRITECOMMON_H */

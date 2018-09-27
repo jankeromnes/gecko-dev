@@ -62,7 +62,7 @@ g[Symbol.iterator] = function() {
 
 var C = class {
   static async *method([x]) {
-    
+
   }
 };
 

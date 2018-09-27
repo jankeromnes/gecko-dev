@@ -469,7 +469,7 @@
       ok(found.unichar      === expected.unichar,      "non-instant cancel system unichar");
       ok(found.wstring_data === expected.wstring_data, "non-instant cancel system wstring");
       todo(found.file_data  === expected.file_data,    "non-instant cancel system file"   );
-      
+
       // - test Accept
       InitTestPrefs(false);
       openDialog("window_preferences.xul", "", "modal", RunNonInstantPrefTestClose, true);

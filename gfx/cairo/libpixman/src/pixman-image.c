@@ -723,7 +723,7 @@ pixman_image_set_filter (pixman_image_t *      image,
 	return_val_if_fail (
 	    n_params == 4 + n_x_phases * width + n_y_phases * height, FALSE);
     }
-    
+
     new_params = NULL;
     if (params)
     {
@@ -949,7 +949,7 @@ _pixman_image_get_solid (pixman_implementation_t *imp,
 	    imp, &iter, image, 0, 0, 1, 1,
 	    (uint8_t *)&result,
 	    ITER_NARROW, image->common.flags);
-	
+
 	result = *iter.get_scanline (&iter, NULL);
     }
 

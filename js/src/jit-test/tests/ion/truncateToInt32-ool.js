@@ -23,6 +23,6 @@ var table = [
     [-0x7fffffff, -0x7fffffff]
 ]
 
-for (var i = 0; i < table.length; i++) {    
+for (var i = 0; i < table.length; i++) {
     assertEq(f(table[i][0]), table[i][1]);
 }

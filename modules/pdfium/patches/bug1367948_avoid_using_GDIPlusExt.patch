@@ -18,7 +18,7 @@ diff --git a/modules/pdfium/pdfium/core/fxge/win32/fx_win32_device.cpp b/modules
    }
    return false;
  }
- 
+
  bool IsGDIEnabled() {
 +  // In Chromium, PDFium runs in sandboxed process which can't get the screen
 +  // DC. Therefore, we |return false| here to avoid using the GDIPlusExt class
@@ -34,4 +34,4 @@ diff --git a/modules/pdfium/pdfium/core/fxge/win32/fx_win32_device.cpp b/modules
    ::ReleaseDC(nullptr, hdc);
    return true;
  }
- 
+

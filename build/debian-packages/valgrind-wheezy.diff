@@ -2,7 +2,7 @@ diff -Nru valgrind-3.13.0/debian/patches/05_fix-callgrind_control.patch valgrind
 --- valgrind-3.13.0/debian/patches/05_fix-callgrind_control.patch	2017-07-24 08:41:05.000000000 +0900
 +++ valgrind-3.14.0.git20180806/debian/patches/05_fix-callgrind_control.patch	2018-08-10 16:00:19.142494503 +0900
 @@ -7,9 +7,9 @@
- 
+
  --- a/callgrind/callgrind_control.in
  +++ b/callgrind/callgrind_control.in
 -@@ -29,7 +29,7 @@
@@ -50,20 +50,20 @@ diff -Nru valgrind-3.13.0/debian/patches/07_fix-spelling-in-binary.patch valgrin
 -@@ -946,7 +946,7 @@
 +@@ -961,7 +961,7 @@
         FP("n%u: %llu %s\n", n_groups, top_total, header->top_node_desc);
-  
+
         /* Output depth 0 groups. */
 diff -Nru valgrind-3.13.0/debian/patches/09_fix-armhf-detect.patch valgrind-3.14.0.git20180806/debian/patches/09_fix-armhf-detect.patch
 --- valgrind-3.13.0/debian/patches/09_fix-armhf-detect.patch	2017-07-24 08:41:05.000000000 +0900
 +++ valgrind-3.14.0.git20180806/debian/patches/09_fix-armhf-detect.patch	2018-08-10 16:02:01.462846319 +0900
 @@ -6,7 +6,7 @@
- 
+
  --- a/configure.ac
  +++ b/configure.ac
 -@@ -234,7 +234,7 @@
 +@@ -252,7 +252,7 @@
           ARCH_MAX="s390x"
           ;;
-  
+
 diff -Nru valgrind-3.13.0/debian/patches/series valgrind-3.14.0.git20180806/debian/patches/series
 --- valgrind-3.13.0/debian/patches/series	2017-07-24 08:41:05.000000000 +0900
 +++ valgrind-3.14.0.git20180806/debian/patches/series	2018-08-10 15:59:43.434371705 +0900

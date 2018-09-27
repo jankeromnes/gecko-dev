@@ -17,13 +17,13 @@ this.p1 = 1;
 var result = "result";
 
 var myObj = {
-    p1: 'a', 
+    p1: 'a',
     value: 'myObj_value',
     valueOf : function(){return 'obj_valueOf';}
 }
 
 var theirObj = {
-    p1: true, 
+    p1: true,
     value: 'theirObj_value',
     valueOf : function(){return 'thr_valueOf';}
 }

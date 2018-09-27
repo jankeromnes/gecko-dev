@@ -1600,7 +1600,7 @@ public class testBrowserProvider extends ContentProviderTest {
 
             try {
                 mAsserter.is(c.getCount(), 3, "3 combined entries found");
-    
+
                 // First combined entry is basic history entry
                 mAsserter.is(c.moveToFirst(), true, "Found basic history entry");
                 mAsserter.is(c.getLong(c.getColumnIndex(BrowserContract.Combined._ID)), 0L,
@@ -1618,7 +1618,7 @@ public class testBrowserProvider extends ContentProviderTest {
                              "Basic history entry has correct number of visits");
                 mAsserter.is(c.getLong(c.getColumnIndex(BrowserContract.Combined.DATE_LAST_VISITED)), LAST_VISITED,
                              "Basic history entry has correct last visit time");
-    
+
                 // Second combined entry is basic bookmark entry
                 mAsserter.is(c.moveToNext(), true, "Found basic bookmark entry");
                 mAsserter.is(c.getLong(c.getColumnIndex(BrowserContract.Combined._ID)), 0L,
@@ -1635,7 +1635,7 @@ public class testBrowserProvider extends ContentProviderTest {
                              "Visits should be -1 for basic bookmark entry");
                 mAsserter.is(c.getLong(c.getColumnIndex(BrowserContract.Combined.DATE_LAST_VISITED)), -1L,
                              "Basic entry has correct last visit time");
-    
+
                 // Third combined entry is a combined history/bookmark entry
                 mAsserter.is(c.moveToNext(), true, "Found third combined entry");
                 mAsserter.is(c.getLong(c.getColumnIndex(BrowserContract.Combined._ID)), 0L,

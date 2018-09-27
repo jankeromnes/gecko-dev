@@ -372,7 +372,7 @@ fn fanout_backpressure() {
 
     let sink = StartSendFut::new(sink, 0).wait().unwrap();
     let sink = StartSendFut::new(sink, 1).wait().unwrap();
- 
+
     let flag = Flag::new();
     let mut task = executor::spawn(sink.send(2));
     assert!(!flag.get());

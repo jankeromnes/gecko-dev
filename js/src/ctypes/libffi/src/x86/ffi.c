@@ -345,7 +345,7 @@ void ffi_call(ffi_cif *cif, void (*fn)(void), void *rvalue, void **avalue)
 
   ecif.cif = cif;
   ecif.avalue = avalue;
-  
+
   /* If the return value is a struct and we don't have a return */
   /* value address then we need to make one                     */
 
@@ -367,9 +367,9 @@ void ffi_call(ffi_cif *cif, void (*fn)(void), void *rvalue, void **avalue)
 #endif
   else
     ecif.rvalue = rvalue;
-    
-  
-  switch (cif->abi) 
+
+
+  switch (cif->abi)
     {
 #ifdef X86_WIN64
     case FFI_WIN64:
@@ -465,16 +465,16 @@ ffi_closure_win64_inner (ffi_closure *closure, void *args) {
   void          *resp = &result;
 
   cif         = closure->cif;
-  arg_area    = (void**) alloca (cif->nargs * sizeof (void*));  
+  arg_area    = (void**) alloca (cif->nargs * sizeof (void*));
 
   /* this call will initialize ARG_AREA, such that each
-   * element in that array points to the corresponding 
+   * element in that array points to the corresponding
    * value on the stack; and if the function returns
    * a structure, it will change RESP to point to the
    * structure return address.  */
 
   ffi_prep_incoming_args_SYSV(args, &resp, arg_area, cif);
-  
+
   (closure->fun) (cif, resp, arg_area, closure->user_data);
 
   /* The result is returned in rax.  This does the right thing for
@@ -494,10 +494,10 @@ ffi_closure_SYSV_inner (ffi_closure *closure, void **respp, void *args)
   void         **arg_area;
 
   cif         = closure->cif;
-  arg_area    = (void**) alloca (cif->nargs * sizeof (void*));  
+  arg_area    = (void**) alloca (cif->nargs * sizeof (void*));
 
   /* this call will initialize ARG_AREA, such that each
-   * element in that array points to the corresponding 
+   * element in that array points to the corresponding
    * value on the stack; and if the function returns
    * a structure, it will change RESP to point to the
    * structure return address.  */
@@ -561,12 +561,12 @@ ffi_prep_incoming_args_SYSV(char *stack, void **rvalue, void **avalue,
 #endif
         {
           z = (*p_arg)->size;
-          
+
           /* because we're little endian, this is what it turns into.   */
-          
+
           *p_argv = (void*) argp;
         }
-          
+
       p_argv++;
 #ifdef X86_WIN64
       argp += (z + sizeof(void*) - 1) & ~(sizeof(void*) - 1);
@@ -574,7 +574,7 @@ ffi_prep_incoming_args_SYSV(char *stack, void **rvalue, void **avalue,
       argp += z;
 #endif
     }
-  
+
   return;
 }
 
@@ -659,7 +659,7 @@ ffi_prep_closure_loc (ffi_closure* closure,
 #ifdef X86_WIN64
 #define ISFLOAT(IDX) (cif->arg_types[IDX]->type == FFI_TYPE_FLOAT || cif->arg_types[IDX]->type == FFI_TYPE_DOUBLE)
 #define FLAG(IDX) (cif->nargs>(IDX)&&ISFLOAT(IDX)?(1<<(IDX)):0)
-  if (cif->abi == FFI_WIN64) 
+  if (cif->abi == FFI_WIN64)
     {
       int mask = FLAG(0)|FLAG(1)|FLAG(2)|FLAG(3);
       FFI_INIT_TRAMPOLINE_WIN64 (&closure->tramp[0],
@@ -705,7 +705,7 @@ ffi_prep_closure_loc (ffi_closure* closure,
     {
       return FFI_BAD_ABI;
     }
-    
+
   closure->cif  = cif;
   closure->user_data = user_data;
   closure->fun  = fun;
@@ -743,7 +743,7 @@ ffi_prep_raw_closure_loc (ffi_raw_closure* closure,
       FFI_ASSERT (cif->arg_types[i]->type != FFI_TYPE_STRUCT);
       FFI_ASSERT (cif->arg_types[i]->type != FFI_TYPE_LONGDOUBLE);
     }
-  
+
 #ifdef X86_WIN32
   if (cif->abi == FFI_SYSV)
     {
@@ -764,7 +764,7 @@ ffi_prep_raw_closure_loc (ffi_raw_closure* closure,
   return FFI_OK;
 }
 
-static void 
+static void
 ffi_prep_args_raw(char *stack, extended_cif *ecif)
 {
   memcpy (stack, ecif->avalue, ecif->cif->bytes);
@@ -783,7 +783,7 @@ ffi_raw_call(ffi_cif *cif, void (*fn)(void), void *rvalue, ffi_raw *fake_avalue)
 
   ecif.cif = cif;
   ecif.avalue = avalue;
-  
+
   /* If the return value is a struct and we don't have a return */
   /* value address then we need to make one                     */
 
@@ -795,9 +795,9 @@ ffi_raw_call(ffi_cif *cif, void (*fn)(void), void *rvalue, ffi_raw *fake_avalue)
     }
   else
     ecif.rvalue = rvalue;
-    
-  
-  switch (cif->abi) 
+
+
+  switch (cif->abi)
     {
 #ifndef X86_WIN32
     case FFI_SYSV:

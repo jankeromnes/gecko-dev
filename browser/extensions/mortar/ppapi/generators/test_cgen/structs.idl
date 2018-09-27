@@ -33,7 +33,7 @@ struct st2 {
 };
 
 /* typedef float (*func_t)(const s_array data); */
-typedef float_t func_t([in] s_array data); 
+typedef float_t func_t([in] s_array data);
 
 /* typedef func_t (*findfunc_t)(const char* x); */
 typedef func_t findfunc_t([in] str_t x);

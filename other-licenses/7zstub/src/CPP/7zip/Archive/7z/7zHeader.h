@@ -57,11 +57,11 @@ namespace NID
     kHeader,
 
     kArchiveProperties,
-    
+
     kAdditionalStreamsInfo,
     kMainStreamsInfo,
     kFilesInfo,
-    
+
     kPackInfo,
     kUnpackInfo,
     kSubStreamsInfo,

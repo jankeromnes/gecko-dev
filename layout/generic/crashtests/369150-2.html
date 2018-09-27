@@ -6,7 +6,7 @@
 function boom()
 {
   document.getElementById("frameset").appendChild(document.createElement("frame"));
-  document.getElementById("frameset").setAttribute("rows", "100%, *"); 
+  document.getElementById("frameset").setAttribute("rows", "100%, *");
   document.documentElement.removeAttribute("class");
 }
 
@@ -18,5 +18,5 @@ function boom()
    <frame src="data:text/html,foo">
    <frame src="data:text/html,bar">
  </frameset>
- 
+
 </html>

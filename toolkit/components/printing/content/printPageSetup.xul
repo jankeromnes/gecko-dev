@@ -223,7 +223,7 @@
                     <menuitem value="6" label="&hfCustom;"/>
                   </menupopup>
                 </menulist>
-              </row>  
+              </row>
             </rows>
           </grid>
         </groupbox>

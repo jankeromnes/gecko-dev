@@ -5,7 +5,7 @@ index ff2ae57..7e12436 100755
 @@ -29,9 +29,10 @@ BOOTSTRAP_DIR = os.path.dirname(os.path.abspath(__file__))
  GN_ROOT = os.path.dirname(BOOTSTRAP_DIR)
  SRC_ROOT = os.path.dirname(os.path.dirname(GN_ROOT))
- 
+
 +is_mac_cross = os.environ.get('MAC_CROSS', False)
  is_win = sys.platform.startswith('win')
 -is_linux = sys.platform.startswith('linux')
@@ -14,7 +14,7 @@ index ff2ae57..7e12436 100755
 +is_mac = sys.platform.startswith('darwin') or is_mac_cross
  is_aix = sys.platform.startswith('aix')
  is_posix = is_linux or is_mac or is_aix
- 
+
 @@ -595,7 +596,6 @@ def write_gn_ninja(path, root_gen_dir, options):
          'base/synchronization/condition_variable_posix.cc',
          'base/synchronization/lock_impl_posix.cc',
@@ -74,5 +74,5 @@ index ff2ae57..7e12436 100755
          'ws2_32.lib',
 +        'shlwapi.lib',
      ])
- 
+
    # we just build static libraries that GN needs

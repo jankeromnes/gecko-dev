@@ -23,7 +23,7 @@ function testLirBufOOM()
              "/()",
              "(.)$"
              ];
-    
+
     for (var j = 0; j < 200; ++j) {
         var js = "" + j;
         for (var i = 0; i < a.length; i++)

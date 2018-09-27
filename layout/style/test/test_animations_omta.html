@@ -182,7 +182,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=964646
 "use strict";
 
 /** Test for css3-animations running on the compositor thread (Bug 964646) **/
- 
+
 // Global state
 var gDisplay = document.getElementById("display")
   , gDiv     = null;
@@ -317,7 +317,7 @@ async function testFillMode(fillMode, fillsBackwards, fillsForwards)
                   animationName: "anim1", elapsedTime: 10.0,
                   pseudoElement: "" }],
                "right after end in testFillMode");
-  
+
   // Currently the compositor will apply a forwards fill until it gets told by
   // the main thread to clear the animation. As a result we should wait for
   // paints to be flushed before checking that the animated value does *not*
@@ -1182,7 +1182,7 @@ addAsyncAnimTest(async function() {
   done_div();
 
   // The corresponding test in test_animations.html tests various cases of
-  // pausing individual animations in a list of three different animations 
+  // pausing individual animations in a list of three different animations
   // but since there are only two OMTA properties we can animate
   // independently this test is substantially simpler.
   new_div("");

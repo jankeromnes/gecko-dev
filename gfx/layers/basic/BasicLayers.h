@@ -33,7 +33,7 @@ class ReadbackLayer;
 
 /**
  * This is a cairo/Thebes-only, main-thread-only implementation of layers.
- * 
+ *
  * In each transaction, the client sets up the layer tree and then during
  * the drawing phase, each PaintedLayer is painted directly into the target
  * context (with appropriate clipping and Push/PopGroups performed
@@ -65,7 +65,7 @@ public:
    * aWidget's GetThebesSurface if there is no default target context, or
    * to the passed-in context if there is no widget and no default
    * target context.
-   * 
+   *
    * This does not keep a strong reference to the widget, so the caller
    * must ensure that the widget outlives the layer manager or call
    * ClearWidget before the widget dies.
@@ -81,7 +81,7 @@ public:
   /**
    * Set the default target context that will be used when BeginTransaction
    * is called. This can only be called outside a transaction.
-   * 
+   *
    * aDoubleBuffering can request double-buffering for drawing to the
    * default target. When BUFFERED, the layer manager avoids blitting
    * temporary results to aContext and then overpainting them with final

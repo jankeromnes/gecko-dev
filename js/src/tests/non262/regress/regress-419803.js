@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   for (var i=0; i<2; ++i) ({ p: 5, p: 7 });
 
   reportCompare(expect, actual, summary);

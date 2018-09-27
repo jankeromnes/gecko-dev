@@ -21,7 +21,7 @@ var bufferSource;
 var panner;
 var position;
 var time;
-      
+
 var renderedBuffer;
 var renderedLeft;
 var renderedRight;
@@ -93,17 +93,17 @@ function equalPowerGain(angle) {
     } else {
         if (azimuth <= 0) {
             var panPosition = (azimuth + 90) / 90;
-    
+
             var gainL = 1 + Math.cos(0.5 * Math.PI * panPosition);
             var gainR = Math.sin(0.5 * Math.PI * panPosition);
-    
+
             return { left : gainL, right : gainR };
         } else {
             var panPosition = azimuth / 90;
-    
+
             var gainL = Math.cos(0.5 * Math.PI * panPosition);
             var gainR = 1 + Math.sin(0.5 * Math.PI * panPosition);
-    
+
             return { left : gainL, right : gainR };
         }
     }
@@ -118,7 +118,7 @@ function checkResult(event) {
     // expected value.  This value is experimentally determined.  Set
     // to 0 to make the test fail to see what the actual error is.
     var maxAllowedError = 1.3e-6;
-  
+
     var success = true;
 
     // Number of impulses found in the rendered result.

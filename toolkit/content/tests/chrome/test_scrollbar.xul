@@ -11,7 +11,7 @@
 
   <!-- test results are displayed in the html:body -->
   <body xmlns="http://www.w3.org/1999/xhtml"/>
-  
+
   <hbox>
       <scrollbar orient="horizontal"
                  id="scroller"
@@ -21,7 +21,7 @@
                  width="500"
                  style="margin:0"/>
   </hbox>
-  
+
   <!-- test code goes here -->
   <script type="application/javascript"><![CDATA[
 
@@ -46,12 +46,12 @@ var scrollbarTester = {
     this.reset();
     var x = 160; // on the right half of the thumb
     var y = 5;
-    
+
     var isMac = navigator.platform.includes("Mac");
     var runtime = Cc["@mozilla.org/xre/app-info;1"]
                     .getService(Ci.nsIXULRuntime);
     var isGtk = runtime.widgetToolkit.includes("gtk");
-    
+
     // Start the drag.
     this.mousedown(x, y, button, withAlt, withShift);
     var newPos = this.getPos();
@@ -67,7 +67,7 @@ var scrollbarTester = {
                         "thumb with the middle mouse button should center it "+
                         "around the cursor.")
     }
-    
+
     // Move one pixel to the right.
     this.mousemove(x+1, y, button, withAlt, withShift);
     var newPos2 = this.getPos();

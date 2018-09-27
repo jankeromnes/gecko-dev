@@ -61,13 +61,13 @@ public:
 
   virtual Transparency GetWidgetTransparency(nsIFrame* aFrame, WidgetType aWidgetType) override;
 
-  NS_IMETHOD WidgetStateChanged(nsIFrame* aFrame, WidgetType aWidgetType, 
+  NS_IMETHOD WidgetStateChanged(nsIFrame* aFrame, WidgetType aWidgetType,
                                 nsAtom* aAttribute, bool* aShouldRepaint,
                                 const nsAttrValue* aOldValue) override;
 
   NS_IMETHOD ThemeChanged() override;
 
-  bool ThemeSupportsWidget(nsPresContext* aPresContext, 
+  bool ThemeSupportsWidget(nsPresContext* aPresContext,
                              nsIFrame* aFrame,
                              WidgetType aWidgetType) override;
 

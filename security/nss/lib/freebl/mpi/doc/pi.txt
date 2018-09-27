@@ -16,7 +16,7 @@ compute.  It turns out, the last few digits will be wrong, but the
 number that are wrong is usually very small (ordinarly only 2-3).
 Having done this, we compute the arctan() function using the formula:
 
-                       1      1       1       1       1     
+                       1      1       1       1       1
        arctan(1/x) := --- - ----- + ----- - ----- + ----- - ...
                        x    3 x^3   5 x^5   7 x^7   9 x^9
 

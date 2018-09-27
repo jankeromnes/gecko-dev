@@ -15,7 +15,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=618176
     const TEST_PAGE =
 "data:text/html,<script>var a=[1,2,3];</script>Hi";
 
-    const FRAME_SCRIPT = 
+    const FRAME_SCRIPT =
 "data:,addEventListener('pageshow', function() { sendAsyncMessage('test', content.wrappedJSObject.a) }, false);";
    // s/content.wrappedJSObject.a/[ 1, 2, 3]/ and the test passes
 

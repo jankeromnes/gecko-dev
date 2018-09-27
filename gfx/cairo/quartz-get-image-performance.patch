@@ -11,12 +11,12 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
 @@ -1909,30 +1909,30 @@ _cairo_quartz_get_image (cairo_quartz_su
      unsigned char *imageData;
      cairo_image_surface_t *isurf;
- 
+
      if (IS_EMPTY(surface)) {
  	*image_out = (cairo_image_surface_t*) cairo_image_surface_create (CAIRO_FORMAT_ARGB32, 0, 0);
  	return CAIRO_STATUS_SUCCESS;
      }
- 
+
 -    CGContextFlush(surface->cgContext);
 -
      if (surface->imageSurfaceEquiv) {
@@ -24,17 +24,17 @@ diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/ca
  	*image_out = (cairo_image_surface_t*) cairo_surface_reference(surface->imageSurfaceEquiv);
  	return CAIRO_STATUS_SUCCESS;
      }
- 
+
      if (_cairo_quartz_is_cgcontext_bitmap_context(surface->cgContext)) {
  	unsigned int stride;
  	unsigned int bitinfo;
  	unsigned int bpc, bpp;
  	CGColorSpaceRef colorspace;
  	unsigned int color_comps;
- 
+
 +	CGContextFlush(surface->cgContext);
  	imageData = (unsigned char *) CGBitmapContextGetData(surface->cgContext);
- 
+
  #ifdef USE_10_3_WORKAROUNDS
  	bitinfo = CGBitmapContextGetAlphaInfo (surface->cgContext);
  #else

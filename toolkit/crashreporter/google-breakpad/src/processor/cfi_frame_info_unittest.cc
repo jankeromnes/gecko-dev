@@ -497,7 +497,7 @@ TEST_F(SimpleWalker, Walk) {
   // sp ->  saved r0
   //        garbage
   //        return address
-  // cfa -> 
+  // cfa ->
   //
   // r0 has been saved on the stack.
   // r1 has been saved in r2.

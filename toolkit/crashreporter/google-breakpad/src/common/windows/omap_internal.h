@@ -53,7 +53,7 @@ typedef std::vector<OMAP> OmapTable;
 struct OmapData {
   // The table of OMAP entries describing the transformation from the
   // original image to the transformed image.
-  OmapTable omap_from;  
+  OmapTable omap_from;
   // The table of OMAP entries describing the transformation from the
   // instrumented image to the original image.
   OmapTable omap_to;

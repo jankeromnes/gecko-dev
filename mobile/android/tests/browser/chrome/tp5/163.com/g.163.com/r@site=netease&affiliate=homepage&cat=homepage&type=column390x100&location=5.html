@@ -7,11 +7,11 @@ var dcswf_click = escape(swf_click);
 var ShockMode = 0;
 var plugin = (navigator.mimeTypes && navigator.mimeTypes["application/x-shockwave-flash"]) ? navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin : 0;
 
-if (plugin && parseInt(plugin.description.substring(plugin.description.indexOf(".")-2)) >= 8) 
+if (plugin && parseInt(plugin.description.substring(plugin.description.indexOf(".")-2)) >= 8)
 {
 ShockMode = 1;
 }
-else if (navigator.userAgent && navigator.userAgent.indexOf("MSIE")>=0 
+else if (navigator.userAgent && navigator.userAgent.indexOf("MSIE")>=0
 && navigator.userAgent.indexOf("Opera")<0) {
 void('<SCRIPT LANGUAGE=VBScript\> \n');
 void('on error resume next \n');
@@ -22,10 +22,10 @@ if ( ShockMode ) {
 void('<objectdisabled classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"');
 void(' codebase="httpdisabled://downloaddisabled.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0"');
 void(' ID=flashad WIDTH=390 HEIGHT=100>');
-void(' <PARAM NAME=movie VALUE="httpdisabled://img1.126.net/channel5/008977/5v390100_110406.swf?clickTag='+dcswf_click+'"> '); 
+void(' <PARAM NAME=movie VALUE="httpdisabled://img1.126.net/channel5/008977/5v390100_110406.swf?clickTag='+dcswf_click+'"> ');
 void(' <PARAM NAME=quality VALUE=autohigh> ');
 void(' <PARAM NAME=wmode VALUE=opaque> ');
-void(' <embeddisabled SRC="httpdisabled://img1.126.net/channel5/008977/5v390100_110406.swf?clickTag='+dcswf_click+'" QUALITY=autohigh  wmode=opaque'); 
+void(' <embeddisabled SRC="httpdisabled://img1.126.net/channel5/008977/5v390100_110406.swf?clickTag='+dcswf_click+'" QUALITY=autohigh  wmode=opaque');
 void(' NAME=flashad swLiveConnect=TRUE WIDTH=390 HEIGHT=100');
 void(' TYPE="application/x-shockwave-flash" PLUGINSPAGE="httpdisabled://www.macromedia.com/shockwave/downloaddisabled/index.cgi?P1_Prod_Version=ShockwaveFlash">');
 void('</EMBED>');

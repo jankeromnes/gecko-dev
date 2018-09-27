@@ -8,22 +8,22 @@ use std::str;
 
 
 /// Primary object used to write constant files.
-/// 
+///
 /// # Example
 /// ```no_run
 /// # use std::path::Path;
 /// # #[derive(Debug)]
 /// # struct Point { x: u8, y: u8 }
 /// use build_const::ConstWriter;
-/// 
+///
 /// // use `for_build` in `build.rs`
 /// let mut consts = ConstWriter::from_path(
 ///     &Path::new("/tmp/constants.rs")
 /// ).unwrap();
-/// 
+///
 /// // add an external dependency (`use xyz::Point`)
 /// consts.add_dependency("xyz::Point");
-/// 
+///
 /// // finish dependencies and starting writing constants
 /// let mut consts = consts.finish_dependencies();
 ///
@@ -33,7 +33,7 @@ use std::str;
 ///
 /// // Add a value that is a result of "complex" calculations
 /// consts.add_value("VALUE", "u8", values.iter().sum::<u8>());
-/// 
+///
 /// // Add a value from an external crate (must implement `Debug`)
 /// consts.add_value("VALUE", "Point", &Point { x: 3, y: 7});
 /// ```
@@ -82,7 +82,7 @@ impl ConstWriter {
     }
 
     /// Add a raw string to the constants file.
-    /// 
+    ///
     /// This method only changes `raw` by adding a `\n` at the end.
     pub fn add_raw(&mut self, raw: &str) {
         write!(self.f, "{}\n", raw).unwrap();
@@ -92,10 +92,10 @@ impl ConstWriter {
 
 impl ConstValueWriter {
     /// Add a value to the constants file.
-    /// 
+    ///
     /// You have to manually specify the `name`, type (`ty`) and `value`
     /// of the constant you want to add.
-    /// 
+    ///
     /// The `value` uses the `Debug` trait to determine the formating of
     /// the value being added. If `Debug` is not accurate or will not work,
     /// you must use `add_value_raw` instead and format it yourself.
@@ -104,29 +104,29 @@ impl ConstValueWriter {
     }
 
     /// Add a pre-formatted value to the constants file.
-    /// 
+    ///
     /// `add_value` depends on `Debug` being implemented in such a way
     /// that it accurately represents the type's creation. Sometimes that
     /// cannot be relied on and `add_value_raw` has to be used instead.
     pub fn add_value_raw(&mut self, name: &str, ty: &str, raw_value: &str) {
         write!(
-            self.f, "pub const {}: {} = {};\n", 
-            name, 
+            self.f, "pub const {}: {} = {};\n",
+            name,
             ty,
             raw_value,
         ).unwrap();
     }
 
     /// Add an array of len > 0 to the constants
-    /// 
-    /// You have to manually specify the `name`, type (`ty`) of the **items** and 
+    ///
+    /// You have to manually specify the `name`, type (`ty`) of the **items** and
     /// `values` of the array constant you want to add. The length of the array
     /// is determined automatically.
-    /// 
+    ///
     /// Example: `const.add_array("foo", "u16", &[1,2,3])`
-    /// 
-    /// The `value` of each item uses the `Debug` trait to determine the 
-    /// formatting of the value being added. If `Debug` is not accurate or will 
+    ///
+    /// The `value` of each item uses the `Debug` trait to determine the
+    /// formatting of the value being added. If `Debug` is not accurate or will
     /// not work, you must use `add_array_raw` instead and format it yourself.
     pub fn add_array<T: Debug>(&mut self, name: &str, ty: &str, values: &[T]) {
         write_array(&mut self.f, name, ty, values);
@@ -134,7 +134,7 @@ impl ConstValueWriter {
 
     /// Add an array of pre-formatted values to the constants file. The length of the array is
     /// determined automatically.
-    /// 
+    ///
     /// `add_array` depends on `Debug` being implemented for each item in such a way that it
     /// accurately represents the item's creation. Sometimes that cannot be relied on and
     /// `add_array_raw` has to be used instead.
@@ -143,7 +143,7 @@ impl ConstValueWriter {
     }
 
     /// Add a raw string to the constants file.
-    /// 
+    ///
     /// This method only changes `raw` by adding a `\n` at the end.
     pub fn add_raw(&mut self, raw: &str) {
         write!(self.f, "{}\n", raw).unwrap();
@@ -159,13 +159,13 @@ impl ConstValueWriter {
 // Public Functions
 
 /// Write an array and return the array's full type representation.
-/// 
+///
 /// This can be used to create nested array constant types.
-pub fn write_array<T: Debug, W: Write>(w: &mut W, name: &str, ty: &str, values: &[T]) 
+pub fn write_array<T: Debug, W: Write>(w: &mut W, name: &str, ty: &str, values: &[T])
     -> String
 {
     assert!(
-        !values.is_empty(), 
+        !values.is_empty(),
         "attempting to add an array of len zero. If this is intentional, use \
         add_value_raw instead."
     );
@@ -178,15 +178,15 @@ pub fn write_array<T: Debug, W: Write>(w: &mut W, name: &str, ty: &str, values: 
 }
 
 /// Write an array of raw values and return the array's full type representation.
-/// 
+///
 /// This can be used to create nested array constant types.
 pub fn write_array_raw<W: Write>(
         w: &mut W, name: &str, ty: &str, raw_values: &[&str]
-    ) 
+    )
     -> String
 {
     assert!(
-        !raw_values.is_empty(), 
+        !raw_values.is_empty(),
         "attempting to add an array of len zero. If this is intentional, use \
         add_value_raw instead."
     );

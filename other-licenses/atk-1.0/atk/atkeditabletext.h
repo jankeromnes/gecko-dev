@@ -96,7 +96,7 @@ void atk_editable_text_delete_text          (AtkEditableText  *text,
                                              gint             end_pos);
 void atk_editable_text_paste_text           (AtkEditableText  *text,
                                              gint             position);
- 
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

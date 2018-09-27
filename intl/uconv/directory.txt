@@ -5,7 +5,7 @@ idl        - public .idl files
 public     - public header file
 src        - source directory of charset converter manager and utilities, and
              charset converters for ISO-8859-1, CP1252, MacRoman and UTF-8
-tests      - tests program and application for charset converter 
+tests      - tests program and application for charset converter
 tests/unit - xpcshell tests
 tools      - tools to build the tables used by the converters
 util       - utility functions used by the converters

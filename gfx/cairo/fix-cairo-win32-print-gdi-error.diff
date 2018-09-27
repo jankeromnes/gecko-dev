@@ -12,15 +12,15 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
      } else {
 -	fwprintf (stderr, "%S: %s", context, (char *)lpMsgBuf);
 +	fprintf (stderr, "%s: %S", context, (char *)lpMsgBuf);
- 
+
  	LocalFree (lpMsgBuf);
      }
 +    fflush(stderr);
- 
+
      /* We should switch off of last_status, but we'd either return
       * CAIRO_STATUS_NO_MEMORY or CAIRO_STATUS_UNKNOWN_ERROR and there
       * is no CAIRO_STATUS_UNKNOWN_ERROR.
       */
- 
+
      return _cairo_error (CAIRO_STATUS_NO_MEMORY);
  }

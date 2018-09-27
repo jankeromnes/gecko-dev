@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "table1");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,11 +70,11 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The insertRow() method inserts a new empty table row.  In addition, when
     the table is empty the row is inserted into a TBODY which is created
     and inserted into the table.
-    
+
     Load the table1 file which has a non-empty table element.
     Create an empty TABLE element and append to the document.
     Check to make sure that the empty TABLE element doesn't
@@ -99,7 +99,7 @@ function HTMLTableElement31() {
       var doc;
       var table;
       var tbodiesLength;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -123,7 +123,7 @@ tbodiesnodeList = tableNode.tBodies;
       tbodiesLength = tbodiesnodeList.length;
 
       assertEquals("Asize4",1,tbodiesLength);
-       
+
 }
 
 </script>
@@ -136,7 +136,7 @@ tbodiesnodeList = tableNode.tBodies;
     The insertRow() method inserts a new empty table row.  In addition, when
     the table is empty the row is inserted into a TBODY which is created
     and inserted into the table.
-    
+
     Load the table1 file which has a non-empty table element.
     Create an empty TABLE element and append to the document.
     Check to make sure that the empty TABLE element doesn't
@@ -161,7 +161,7 @@ tbodiesnodeList = tableNode.tBodies;
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/table1.html"></iframe>
 <br>

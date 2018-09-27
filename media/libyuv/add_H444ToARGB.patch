@@ -17,7 +17,7 @@ diff --git a/media/libyuv/libyuv/include/libyuv/convert_argb.h b/media/libyuv/li
                 int dst_stride_argb,
                 int width,
                 int height);
- 
+
 +LIBYUV_API
 +int H444ToARGB(const uint8_t* src_y,
 +               int src_stride_y,
@@ -49,7 +49,7 @@ diff --git a/media/libyuv/libyuv/source/convert_argb.cc b/media/libyuv/libyuv/so
                            src_stride_v, dst_argb, dst_stride_argb,
                            &kYuvI601Constants, width, height);
  }
- 
+
 +// Convert H444 to ARGB.
 +LIBYUV_API
 +int H444ToARGB(const uint8_t* src_y,

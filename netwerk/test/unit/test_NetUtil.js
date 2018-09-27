@@ -571,7 +571,7 @@ function test_newChannel_with_options()
                                                         Ci.nsIContentPolicy.TYPE_OTHER);
 
   function checkEqualToIOSChannel(channel) {
-    Assert.ok(iosChannel.URI.equals(channel.URI));  
+    Assert.ok(iosChannel.URI.equals(channel.URI));
   }
 
   checkEqualToIOSChannel(NetUtil.newChannel({

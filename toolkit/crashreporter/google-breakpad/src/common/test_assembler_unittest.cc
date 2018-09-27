@@ -344,7 +344,7 @@ TEST(IsKnownOffsetFrom, Related) {
 // symmetrically --- that is, 'a = b' should put a and b in
 // indistinguishable states --- there's a distinction made internally
 // between the target (a) and the source (b).
-// 
+//
 // So there are five test axes to cover:
 //
 // - Do we construct the chain with assignment ("Assign") or with constructors
@@ -1088,7 +1088,7 @@ TEST_F(Append, B64) {
   section.Append(1, 0x2a);
   section.B64(0x3402a013111e68adULL);
   ASSERT_TRUE(section.GetContents(&contents));
-  ASSERT_BYTES(contents, 
+  ASSERT_BYTES(contents,
                I9(0x2a, 0x34, 0x02, 0xa0, 0x13, 0x11, 0x1e, 0x68, 0xad));
 }
 
@@ -1098,7 +1098,7 @@ TEST_F(Append, B64Label) {
   section.B64(l);
   l = 0x355dbfbb4ac6d57fULL;
   ASSERT_TRUE(section.GetContents(&contents));
-  ASSERT_BYTES(contents, 
+  ASSERT_BYTES(contents,
                I9(0x2a, 0x35, 0x5d, 0xbf, 0xbb, 0x4a, 0xc6, 0xd5, 0x7f));
 }
 
@@ -1154,7 +1154,7 @@ TEST_F(Append, L64) {
   section.Append(1, 0x2a);
   section.L64(0x564384f7579515bfULL);
   ASSERT_TRUE(section.GetContents(&contents));
-  ASSERT_BYTES(contents, 
+  ASSERT_BYTES(contents,
                I9(0x2a, 0xbf, 0x15, 0x95, 0x57, 0xf7, 0x84, 0x43, 0x56));
 }
 
@@ -1164,7 +1164,7 @@ TEST_F(Append, L64Label) {
   section.L64(l);
   l = 0x424b1d020667c8dbULL;
   ASSERT_TRUE(section.GetContents(&contents));
-  ASSERT_BYTES(contents, 
+  ASSERT_BYTES(contents,
                I9(0x2a, 0xdb, 0xc8, 0x67, 0x06, 0x02, 0x1d, 0x4b, 0x42));
 }
 
@@ -1227,7 +1227,7 @@ TEST_F(Append, D64Big) {
   section.Append(1, 0x2a);
   section.D64(0xb109843500dbcb16ULL);
   ASSERT_TRUE(section.GetContents(&contents));
-  ASSERT_BYTES(contents, 
+  ASSERT_BYTES(contents,
                I9(0x2a, 0xb1, 0x09, 0x84, 0x35, 0x00, 0xdb, 0xcb, 0x16));
 }
 
@@ -1238,7 +1238,7 @@ TEST_F(Append, D64BigLabel) {
   section.D64(l);
   l = 0x9a0d61b70f671fd7ULL;
   ASSERT_TRUE(section.GetContents(&contents));
-  ASSERT_BYTES(contents, 
+  ASSERT_BYTES(contents,
                I9(0x2a, 0x9a, 0x0d, 0x61, 0xb7, 0x0f, 0x67, 0x1f, 0xd7));
 }
 
@@ -1301,7 +1301,7 @@ TEST_F(Append, D64Little) {
   section.Append(1, 0x2a);
   section.D64(0x42de75c61375a1deULL);
   ASSERT_TRUE(section.GetContents(&contents));
-  ASSERT_BYTES(contents, 
+  ASSERT_BYTES(contents,
                I9(0x2a, 0xde, 0xa1, 0x75, 0x13, 0xc6, 0x75, 0xde, 0x42));
 }
 
@@ -1312,7 +1312,7 @@ TEST_F(Append, D64LittleLabel) {
   section.D64(l);
   l = 0x8b3bececf3fb5312ULL;
   ASSERT_TRUE(section.GetContents(&contents));
-  ASSERT_BYTES(contents, 
+  ASSERT_BYTES(contents,
                I9(0x2a, 0x12, 0x53, 0xfb, 0xf3, 0xec, 0xec, 0x3b, 0x8b));
 }
 

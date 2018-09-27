@@ -24,31 +24,31 @@ var elements = ["col", "colgroup", "tbody", "tfoot", "thead", "tr", "td", "th"];
 for(var i = 0; i < elements.length; i++)
 {
   reflectString({
-    element: document.createElement(elements[i]), 
+    element: document.createElement(elements[i]),
     attribute: "align",
     otherValues: [ "left", "right", "center", "justify", "char" ]
   });
-  
+
   reflectString({
-    element: document.createElement(elements[i]), 
+    element: document.createElement(elements[i]),
     attribute: "vAlign",
     otherValues: [ "top", "middle", "bottom", "baseline" ]
   });
-  
+
   reflectString({
-    element: document.createElement(elements[i]), 
+    element: document.createElement(elements[i]),
     attribute: {idl: "ch", content: "char"}
   });
 }
 
 // table.border, table.width
 reflectString({
-  element: document.createElement("table"), 
+  element: document.createElement("table"),
   attribute: "border"
 });
 
 reflectString({
-  element: document.createElement("table"), 
+  element: document.createElement("table"),
   attribute: "width"
 });
 </script>

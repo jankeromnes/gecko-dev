@@ -19,8 +19,8 @@ STATICCPPFLAGS = -DU_STATIC_IMPLEMENTATION
 endif
 
 ## Flags for position independent code
-SHAREDLIBCFLAGS = 
-SHAREDLIBCXXFLAGS = 
+SHAREDLIBCFLAGS =
+SHAREDLIBCXXFLAGS =
 SHAREDLIBCPPFLAGS = -DPIC
 
 ## Additional flags when building libraries and with threads
@@ -39,14 +39,14 @@ LD_SOOPTIONS= -Wl,-Bsymbolic
 # lines from the shell script (Make only)
 SHLIB.c=	$(CC) $(CFLAGS) $(LDFLAGS) -shared $(LD_SOOPTIONS) -Wl,--enable-auto-import -Wl,--out-implib=$(subst cyg,lib,$@).$(A)#M#
 SHLIB.cc=	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(LD_SOOPTIONS) -Wl,--enable-auto-import -Wl,--out-implib=$(subst cyg,lib,$@).$(A)#M#
-# the #SH# lines don't go through further postprocessing. 
+# the #SH# lines don't go through further postprocessing.
 # so, they must be valid shell script starting from column 4
 #SH#SHLIB_c="$(CC) $(CFLAGS) $(LDFLAGS) -shared "
 #SH#SHLIB_cc="$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared "
 
 
 ## Compiler switch to embed a runtime search path
-LD_RPATH=	
+LD_RPATH=
 LD_RPATH_PRE=	-Wl,-rpath,
 
 ## Compiler switch to embed a library name
@@ -137,7 +137,7 @@ GENCCODE_ASSEMBLY=-a gcc-cygwin
 #SH#ICULIBS_LAYOUT="-l${LIBICU}le${ICULIBSUFFIX}${ICULIBSUFFIX_VERSION}"
 #SH#ICULIBS_LAYOUTEX="-l${LIBICU}lx${ICULIBSUFFIX}${ICULIBSUFFIX_VERSION}"
 #SH#ICULIBS_BASE="${LIBS} -L${libdir}"
-#SH#ICULIBS="${ICULIBS_BASE} ${ICULIBS_I18N} ${ICULIBS_COMMON} ${ICULIBS_DATA}" 
+#SH#ICULIBS="${ICULIBS_BASE} ${ICULIBS_I18N} ${ICULIBS_COMMON} ${ICULIBS_DATA}"
 
 ## End Cygwin-specific setup
 

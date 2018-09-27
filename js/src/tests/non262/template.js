@@ -2,7 +2,7 @@
 /*
  * Any copyright is dedicated to the Public Domain.
  * http://creativecommons.org/licenses/publicdomain/
- * Contributor: 
+ * Contributor:
  */
 
 //-----------------------------------------------------------------------------
@@ -20,6 +20,6 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   reportCompare(expect, actual, summary);
 }

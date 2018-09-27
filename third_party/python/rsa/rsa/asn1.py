@@ -14,7 +14,7 @@ class PubKeyHeader(univ.Sequence):
 class OpenSSLPubKey(univ.Sequence):
     componentType = namedtype.NamedTypes(
         namedtype.NamedType('header', PubKeyHeader()),
-        
+
         # This little hack (the implicit tag) allows us to get a Bit String as Octet String
         namedtype.NamedType('key', univ.OctetString().subtype(
                                           implicitTag=tag.Tag(tagClass=0, tagFormat=0, tagId=3))),
@@ -23,7 +23,7 @@ class OpenSSLPubKey(univ.Sequence):
 
 class AsnPubKey(univ.Sequence):
     '''ASN.1 contents of DER encoded public key:
-    
+
     RSAPublicKey ::= SEQUENCE {
          modulus           INTEGER,  -- n
          publicExponent    INTEGER,  -- e

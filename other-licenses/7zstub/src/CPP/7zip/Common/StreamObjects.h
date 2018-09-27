@@ -17,7 +17,7 @@ class CBufferInStream:
 public:
   CByteBuffer Buf;
   void Init() { _pos = 0; }
- 
+
   MY_UNKNOWN_IMP2(ISequentialInStream, IInStream)
 
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);

@@ -24,5 +24,5 @@ if (typeof clearTimeout === 'function')
   {
   }
 }
- 
+
 reportCompare(expect, actual, summary);

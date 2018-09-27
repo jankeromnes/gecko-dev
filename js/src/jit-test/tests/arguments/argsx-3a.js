@@ -8,7 +8,7 @@ function f(t) {
     var b = arguments;
     appendToActual(b[0]);
   }
-  
+
   for (var i = 0; i < 10; ++i) {
     var a = arguments;
     appendToActual(a.callee);

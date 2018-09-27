@@ -316,7 +316,7 @@ u_file_write_flush(const UChar *chars,
     /* Set up conversion parameters */
     UErrorCode  status       = U_ZERO_ERROR;
     const UChar *mySource    = chars;
-    const UChar *mySourceBegin; 
+    const UChar *mySourceBegin;
     const UChar *mySourceEnd;
     char        charBuffer[UFILE_CHARBUFFER_SIZE];
     char        *myTarget   = charBuffer;
@@ -363,14 +363,14 @@ u_file_write_flush(const UChar *chars,
                 flushIO,
                 &status);
         } else { /*weiv: do the invariant conversion */
-            int32_t convertChars = (int32_t) (mySourceEnd - mySource); 
-            if (convertChars > UFILE_CHARBUFFER_SIZE) { 
-                convertChars = UFILE_CHARBUFFER_SIZE; 
-                status = U_BUFFER_OVERFLOW_ERROR; 
-            } 
-            u_UCharsToChars(mySource, myTarget, convertChars); 
-            mySource += convertChars; 
-            myTarget += convertChars; 
+            int32_t convertChars = (int32_t) (mySourceEnd - mySource);
+            if (convertChars > UFILE_CHARBUFFER_SIZE) {
+                convertChars = UFILE_CHARBUFFER_SIZE;
+                status = U_BUFFER_OVERFLOW_ERROR;
+            }
+            u_UCharsToChars(mySource, myTarget, convertChars);
+            mySource += convertChars;
+            myTarget += convertChars;
         }
         numConverted = (int32_t)(myTarget - charBuffer);
 

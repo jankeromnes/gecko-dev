@@ -12,11 +12,11 @@ https://hg.mozilla.org/mozilla-central/rev/c70d06fa5302
 diff --git a/security/sandbox/chromium/sandbox/win/src/win_utils.cc b/security/sandbox/chromium/sandbox/win/src/win_utils.cc
 --- a/security/sandbox/chromium/sandbox/win/src/win_utils.cc
 +++ b/security/sandbox/chromium/sandbox/win/src/win_utils.cc
-@@ -190,63 +190,68 @@ bool ResolveRegistryName(base::string16 
- 
+@@ -190,63 +190,68 @@ bool ResolveRegistryName(base::string16
+
    return false;
  }
- 
+
  // |full_path| can have any of the following forms:
  //    \??\c:\some\foo\bar
  //    \Device\HarddiskVolume0\some\foo\bar
@@ -26,15 +26,15 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/win_utils.cc b/security/s
    // Check if it's a pipe. We can't query the attributes of a pipe.
    if (IsPipe(full_path))
      return ERROR_NOT_A_REPARSE_POINT;
- 
+
    base::string16 path;
    bool nt_path = IsNTPath(full_path, &path);
    bool has_drive = StartsWithDriveLetter(path);
    bool is_device_path = IsDevicePath(path, &path);
- 
+
    if (!has_drive && !is_device_path && !nt_path)
      return ERROR_INVALID_NAME;
- 
+
 -  bool added_implied_device = false;
    if (!has_drive) {
 -      path = base::string16(kNTDotPrefix) + path;
@@ -42,7 +42,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/win_utils.cc b/security/s
 +    // Add Win32 device namespace prefix, required for some Windows APIs.
 +    path.insert(0, kNTDotPrefix);
    }
- 
+
 -  base::string16::size_type last_pos = base::string16::npos;
 -  bool passed_once = false;
 +  // Ensure that volume path matches start of path.
@@ -58,7 +58,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/win_utils.cc b/security/s
 +  if (!EqualPath(path, vol_path, vol_path_len)) {
 +    return ERROR_INVALID_NAME;
 +  }
- 
+
    do {
 -    path = path.substr(0, last_pos);
 -
@@ -81,16 +81,16 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/win_utils.cc b/security/s
        // This is a reparse point.
        return ERROR_SUCCESS;
      }
- 
+
 -    passed_once = true;
 -    last_pos = path.rfind(L'\\');
 -  } while (last_pos > 2);  // Skip root dir.
 +    path.resize(path.rfind(L'\\'));
 +  } while (path.size() > vol_path_len);  // Skip root dir.
- 
+
    return ERROR_NOT_A_REPARSE_POINT;
  }
- 
+
  // We get a |full_path| of the forms accepted by IsReparsePoint(), and the name
  // we'll get from |handle| will be \device\harddiskvolume1\some\foo\bar.
  bool SameObject(HANDLE handle, const wchar_t* full_path) {
@@ -99,10 +99,10 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/win_utils.cc b/security/s
    base::string16 actual_path;
    if (!GetPathFromHandle(handle, &actual_path))
      return false;
- 
+
    base::string16 path(full_path);
    DCHECK_NT(!path.empty());
- 
+
    // This may end with a backslash.
 -  const wchar_t kBackslash = '\\';
 -  if (path.back() == kBackslash)
@@ -110,15 +110,15 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/win_utils.cc b/security/s
 +  if (path.back() == L'\\') {
 +    path.pop_back();
 +  }
- 
+
 -  // Perfect match (case-insesitive check).
 +  // Perfect match (case-insensitive check).
    if (EqualPath(actual_path, path))
      return true;
- 
+
    bool nt_path = IsNTPath(path, &path);
    bool has_drive = StartsWithDriveLetter(path);
- 
+
    if (!has_drive && nt_path) {
      base::string16 simple_actual_path;
 -    if (!IsDevicePath(actual_path, &simple_actual_path))
@@ -138,7 +138,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/win_utils.cc b/security/s
 +      path.insert(0, kNTDotPrefix);
 +    }
    }
- 
+
 -  if (!has_drive)
 +  // Get the volume path in the same format as actual_path.
 +  wchar_t vol_path[MAX_PATH];
@@ -162,30 +162,30 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/win_utils.cc b/security/s
 -  // Ignore the nulls at the end.
 -  vol_length = static_cast<DWORD>(wcslen(vol_name));
 +  }
- 
+
    // The two paths should be the same length.
 -  if (vol_length + path.size() - 2 != actual_path.size())
 +  if (nt_vol.size() + path.size() - vol_path_len != actual_path.size()) {
      return false;
 +  }
- 
+
 -  // Check up to the drive letter.
 -  if (!EqualPath(actual_path, vol_name, vol_length))
 +  // Check the volume matches.
 +  if (!EqualPath(actual_path, nt_vol.c_str(), nt_vol.size())) {
      return false;
 +  }
- 
+
 -  // Check the path after the drive letter.
 -  if (!EqualPath(actual_path, vol_length, path, 2))
 +  // Check the path after the volume matches.
 +  if (!EqualPath(actual_path, nt_vol.size(), path, vol_path_len)) {
      return false;
 +  }
- 
+
    return true;
  }
- 
+
  // Just make a best effort here.  There are lots of corner cases that we're
  // not expecting - and will fail to make long.
  bool ConvertToLongPath(base::string16* native_path,

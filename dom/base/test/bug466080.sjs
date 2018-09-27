@@ -6,7 +6,7 @@ function handleRequest(request, response)
     try {
         var origin = request.getHeader("Origin");
      } catch(e) {}
-    
+
     response.setHeader("Access-Control-Allow-Origin",
                         origin,
                         false);

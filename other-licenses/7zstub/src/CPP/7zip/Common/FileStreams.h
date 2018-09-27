@@ -43,7 +43,7 @@ class CInFileStream:
 public:
   #ifdef USE_WIN_FILE
   NWindows::NFile::NIO::CInFile File;
-  
+
   #ifdef SUPPORT_DEVICE_FILE
   UInt64 VirtPos;
   UInt64 PhyPos;
@@ -64,12 +64,12 @@ public:
   virtual ~CInFileStream();
 
   CInFileStream();
-  
+
   bool Open(CFSTR fileName)
   {
     return File.Open(fileName);
   }
-  
+
   bool OpenShared(CFSTR fileName, bool shareForWrite)
   {
     return File.OpenShared(fileName, shareForWrite);
@@ -128,7 +128,7 @@ public:
   }
 
   HRESULT Close();
-  
+
   UInt64 ProcessedSize;
 
   #ifdef USE_WIN_FILE

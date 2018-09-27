@@ -10,7 +10,7 @@ description: >
         var obj = {};
         Object.defineProperty(obj, "prop", {
             get: function () {
-                return "abc"; 
+                return "abc";
             },
             configurable: true
         });

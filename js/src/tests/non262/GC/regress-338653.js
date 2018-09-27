@@ -36,6 +36,6 @@ function dosubst()
 
 }
 
-dosubst(); 
+dosubst();
 
 reportCompare(expect, actual, summary);

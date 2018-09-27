@@ -259,7 +259,7 @@ while (<FH>) {
     if ($2 eq "Simplified") {
       $hasSC = 1;
     }
-  } 
+  }
 }
 close FH;
 
@@ -410,7 +410,7 @@ sub genTables
   my %pageMapIndex = ();
   my @pageMap = ();
   my @char = ();
-  
+
   my $planeMap = "\x00" x $maxPlane;
   foreach my $plane (0 .. $maxPlane) {
     my $pageMap = "\x00" x $indexLen * 2;
@@ -428,7 +428,7 @@ sub genTables
         }
         substr($pageMap, $page * 2, 2) = pack('S', $charIndex{$charValues});
     }
-    
+
     unless (exists $pageMapIndex{$pageMap}) {
         $pageMapIndex{$pageMap} = scalar keys %pageMapIndex;
         $pageMap[$pageMapIndex{$pageMap}] = $pageMap;
@@ -470,7 +470,7 @@ sub genTables
   print DATA_TABLES "};\n";
 
   my $dataSize = $pmCount * $indexLen * $pmBits/8 +
-                 $chCount * $pageLen * $bytesPerEntry + 
+                 $chCount * $pageLen * $bytesPerEntry +
                  $maxPlane;
   $totalData += $dataSize;
 

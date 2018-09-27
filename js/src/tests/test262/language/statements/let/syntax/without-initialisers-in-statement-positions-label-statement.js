@@ -4,7 +4,7 @@
 /*---
 es6id: 13.1
 description: >
-    let declarations without initialisers in statement positions: 
+    let declarations without initialisers in statement positions:
     label: Statement
 negative:
   phase: parse

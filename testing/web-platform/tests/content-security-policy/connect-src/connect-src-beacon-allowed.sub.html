@@ -19,7 +19,7 @@ connect-src 'self' http://{{host}}:{{ports[http][0]}}; script-src 'self' 'unsafe
         window.addEventListener('securitypolicyviolation', function(e) {
             log("FAIL");
         });
-    
+
  	      if (typeof navigator.sendBeacon != 'function') {
             t_log.set_status(t_log.NOTRUN, "No navigator.sendBeacon, cannot run test.");
             t_log.phase = t_log.phases.HAS_RESULT;

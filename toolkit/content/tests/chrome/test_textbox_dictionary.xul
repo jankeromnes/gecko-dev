@@ -34,12 +34,12 @@ function leftClickElement(element)
   synthesizeMouseAtCenter(element, { button: 0 });
 }
 
-function startTests() 
-{     
+function startTests()
+{
   textbox = document.getElementById("t1");
   textbox.focus();
   testNum = 0;
-  
+
   ChromeUtils.import(
     "resource://testing-common/AsyncSpellCheckTestHelper.jsm");
   onSpellCheck(textbox, function () {
@@ -52,9 +52,9 @@ function runContextMenuTest()
   SimpleTest.executeSoon( function() {
     // The textbox has its children in an hbox XUL element, so get that first
     var inputBox = document.getAnonymousElementByAttribute(textbox, "anonid", "moz-input-box");
-    
+
     var contextMenu = inputBox.menupopup;
-   
+
     switch(testNum)
     {
       case 0: // "Add to Dictionary" button
@@ -65,15 +65,15 @@ function runContextMenuTest()
         ok(!separator.hidden, "Is separator visible?");
 
         addToDict.doCommand();
-        
+
         contextMenu.hidePopup();
         testNum++;
-        
+
         onSpellCheck(textbox, function () {
           bringUpContextMenu(textbox);
         });
         break;
-        
+
       case 1: // "Undo Add to Dictionary" button
         var undoAddDict = inputBox.getMenuItem("spell-undo-add-to-dictionary");
         ok(!undoAddDict.hidden, "Is Undo Add to Dictioanry visible?");
@@ -82,7 +82,7 @@ function runContextMenuTest()
         ok(!separator.hidden, "Is separator hidden?");
 
         undoAddDict.doCommand();
-        
+
         contextMenu.hidePopup();
         onSpellCheck(textbox, function () {
           SimpleTest.finish();

@@ -26,7 +26,7 @@ ONLYINCOMPOUND X
 
 CIRCUMFIX Y
 
-# for handling Fuge-elements with dashes (Arbeits-) 
+# for handling Fuge-elements with dashes (Arbeits-)
 # dash will be a special word
 
 COMPOUNDMIN 1

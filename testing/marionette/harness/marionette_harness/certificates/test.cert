@@ -32,18 +32,18 @@ Certificate:
                     a5:d7
                 Exponent: 65537 (0x10001)
         X509v3 extensions:
-            X509v3 Basic Constraints: 
+            X509v3 Basic Constraints:
                 CA:FALSE
-            X509v3 Subject Key Identifier: 
+            X509v3 Subject Key Identifier:
                 2D:98:A3:99:39:1C:FE:E9:9A:6D:17:94:D2:3A:96:EE:C8:9E:04:22
-            X509v3 Authority Key Identifier: 
+            X509v3 Authority Key Identifier:
                 keyid:6A:AB:53:64:92:36:87:23:34:B3:1D:6F:85:4B:F5:DF:5A:5C:74:8F
 
-            X509v3 Key Usage: 
+            X509v3 Key Usage:
                 Digital Signature, Non Repudiation, Key Encipherment
-            X509v3 Extended Key Usage: 
+            X509v3 Extended Key Usage:
                 TLS Web Server Authentication
-            X509v3 Subject Alternative Name: 
+            X509v3 Subject Alternative Name:
                 DNS:web-platform.test, DNS:www.web-platform.test, DNS:xn--n8j6ds53lwwkrqhv28a.web-platform.test, DNS:xn--lve-6lad.web-platform.test, DNS:www2.web-platform.test, DNS:www1.web-platform.test
     Signature Algorithm: sha256WithRSAEncryption
          33:db:f7:f0:f6:92:16:4f:2d:42:bc:b8:aa:e6:ab:5e:f9:b9:

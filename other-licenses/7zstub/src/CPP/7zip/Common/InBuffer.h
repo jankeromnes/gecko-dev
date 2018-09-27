@@ -43,7 +43,7 @@ public:
   bool WasFinished() const { return _wasFinished; }
 
   void SetStream(ISequentialInStream *stream) { _stream = stream; }
-  
+
   void SetBuf(Byte *buf, size_t bufSize, size_t end, size_t pos)
   {
     _bufBase = buf;
@@ -59,7 +59,7 @@ public:
   }
 
   void Init() throw();
-  
+
   MY_FORCE_INLINE
   bool ReadByte(Byte &b)
   {
@@ -68,7 +68,7 @@ public:
     b = *_buf++;
     return true;
   }
-  
+
   MY_FORCE_INLINE
   Byte ReadByte()
   {
@@ -76,7 +76,7 @@ public:
       return ReadByte_FromNewBlock();
     return *_buf++;
   }
-  
+
   size_t ReadBytes(Byte *buf, size_t size);
   size_t Skip(size_t size);
 };

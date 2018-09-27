@@ -45,7 +45,7 @@
 /* STRING_STORE_SIZE + TAG_STORE_SIZE <= ((2^16 - 1) * 2)
  That is the maximum size for the string stores combined
  because the strings are index at 16-bit boundries by a
- 16-bit index, and there is only one section for the 
+ 16-bit index, and there is only one section for the
  strings.
  */
 #define STRING_STORE_SIZE 0x1FBFE   /* 130046 */
@@ -632,7 +632,7 @@ addToKnownAliases(const char *alias) {
         if (knownAliases[idx] != num
             && uprv_strcmp(alias, GET_ALIAS_STR(knownAliases[idx])) == 0)
         {
-            fprintf(stderr, "%s:%d: warning: duplicate alias %s and %s found\n", path, 
+            fprintf(stderr, "%s:%d: warning: duplicate alias %s and %s found\n", path,
                 lineNum, alias, GET_ALIAS_STR(knownAliases[idx]));
             duplicateKnownAliasesCount++;
             break;
@@ -641,7 +641,7 @@ addToKnownAliases(const char *alias) {
             && ucnv_compareNames(alias, GET_ALIAS_STR(knownAliases[idx])) == 0)
         {
             if (verbose) {
-                fprintf(stderr, "%s:%d: information: duplicate alias %s and %s found\n", path, 
+                fprintf(stderr, "%s:%d: information: duplicate alias %s and %s found\n", path,
                     lineNum, alias, GET_ALIAS_STR(knownAliases[idx]));
             }
             duplicateKnownAliasesCount++;
@@ -678,12 +678,12 @@ addAlias(const char *alias, uint16_t standard, uint16_t converter, UBool default
     aliasList = &tags[standard].aliasList[converter];
 
     if (strchr(alias, '}')) {
-        fprintf(stderr, "%s:%d: error: unmatched } found\n", path, 
+        fprintf(stderr, "%s:%d: error: unmatched } found\n", path,
             lineNum);
     }
 
     if(aliasList->aliasCount + 1 >= MAX_TC_ALIAS_COUNT) {
-        fprintf(stderr, "%s:%d: error: too many aliases for alias %s and converter %s\n", path, 
+        fprintf(stderr, "%s:%d: error: too many aliases for alias %s and converter %s\n", path,
             lineNum, alias, GET_ALIAS_STR(converters[converter].converter));
         exit(U_BUFFER_OVERFLOW_ERROR);
     }
@@ -720,13 +720,13 @@ addAlias(const char *alias, uint16_t standard, uint16_t converter, UBool default
                          * not just a lenient-match duplicate.
                          */
                         if (verbose || 0 == uprv_strcmp(alias, GET_ALIAS_STR(aliasNum))) {
-                            fprintf(stderr, "%s:%d: warning: duplicate aliases %s and %s found for standard %s and converter %s\n", path, 
+                            fprintf(stderr, "%s:%d: warning: duplicate aliases %s and %s found for standard %s and converter %s\n", path,
                                 lineNum, alias, GET_ALIAS_STR(aliasNum),
                                 GET_TAG_STR(tags[standard].tag),
                                 GET_ALIAS_STR(converters[converter].converter));
                         }
                     } else {
-                        fprintf(stderr, "%s:%d: warning: duplicate aliases %s and %s found for standard tag %s between converter %s and converter %s\n", path, 
+                        fprintf(stderr, "%s:%d: warning: duplicate aliases %s and %s found for standard tag %s between converter %s and converter %s\n", path,
                             lineNum, alias, GET_ALIAS_STR(aliasNum),
                             GET_TAG_STR(tags[standard].tag),
                             GET_ALIAS_STR(converters[converter].converter),
@@ -746,7 +746,7 @@ addAlias(const char *alias, uint16_t standard, uint16_t converter, UBool default
                     if (aliasNum
                         && ucnv_compareNames(alias, GET_ALIAS_STR(aliasNum)) == 0)
                     {
-                        fprintf(stderr, "%s:%d: warning: duplicate alias %s found for converter %s and standard tag %s\n", path, 
+                        fprintf(stderr, "%s:%d: warning: duplicate alias %s found for converter %s and standard tag %s\n", path,
                             lineNum, alias, GET_ALIAS_STR(converters[converter].converter), GET_TAG_STR(tags[standard].tag));
                         break;
                     }
@@ -765,7 +765,7 @@ addAlias(const char *alias, uint16_t standard, uint16_t converter, UBool default
     }
     if (defaultName) {
         if (aliasList->aliases[0] != 0) {
-            fprintf(stderr, "%s:%d: error: Alias %s and %s cannot both be the default alias for standard tag %s and converter %s\n", path, 
+            fprintf(stderr, "%s:%d: error: Alias %s and %s cannot both be the default alias for standard tag %s and converter %s\n", path,
                 lineNum,
                 alias,
                 GET_ALIAS_STR(aliasList->aliases[0]),
@@ -871,7 +871,7 @@ resolveAliases(uint16_t *uniqueAliasArr, uint16_t *uniqueAliasToConverterArr, ui
                 uniqueAliasToConverterArr[uniqueAliasIdx - 1] = currConvNum;
                 uniqueAliasArr[uniqueAliasIdx - 1] = knownAliases[idx] + aliasOffset;
                 if (verbose) {
-                    printf("using %s instead of %s -> %s", 
+                    printf("using %s instead of %s -> %s",
                         GET_ALIAS_STR(knownAliases[idx]),
                         lastName,
                         GET_ALIAS_STR(converters[currConvNum].converter));

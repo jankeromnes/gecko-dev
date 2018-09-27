@@ -70,9 +70,9 @@ public:
             const UnicodeString &hm,
             const UnicodeString &ms,
             const UnicodeString &hms,
-            UErrorCode &status) : 
+            UErrorCode &status) :
             hourMinute(hm, status),
-            minuteSecond(ms, status), 
+            minuteSecond(ms, status),
             hourMinuteSecond(hms, status) {
         const TimeZone *gmt = TimeZone::getGMT();
         hourMinute.setTimeZone(*gmt);
@@ -627,7 +627,7 @@ MeasureFormat::MeasureFormat(
         const Locale &locale,
         UMeasureFormatWidth w,
         NumberFormat *nfToAdopt,
-        UErrorCode &status) 
+        UErrorCode &status)
         : cache(NULL),
           numberFormat(NULL),
           pluralRules(NULL),
@@ -924,7 +924,7 @@ UBool MeasureFormat::setMeasureFormatLocale(const Locale &locale, UErrorCode &st
     }
     initMeasureFormat(locale, width, NULL, status);
     return U_SUCCESS(status);
-} 
+}
 
 const NumberFormat &MeasureFormat::getNumberFormat() const {
     return **numberFormat;
@@ -978,7 +978,7 @@ UnicodeString &MeasureFormat::formatNumeric(
     if (U_FAILURE(status)) {
         return appendTo;
     }
-    UDate millis = 
+    UDate millis =
         (UDate) (((uprv_trunc(hms[0].getDouble(status)) * 60.0
              + uprv_trunc(hms[1].getDouble(status))) * 60.0
                   + uprv_trunc(hms[2].getDouble(status))) * 1000.0);

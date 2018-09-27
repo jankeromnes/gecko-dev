@@ -36,13 +36,13 @@ STDMETHODIMP nsDataObjCollection::QueryInterface(REFIID riid, void** ppv)
   *ppv=nullptr;
 
   if ( (IID_IUnknown == riid) || (IID_IDataObject  == riid) ) {
-    *ppv = static_cast<IDataObject*>(this); 
+    *ppv = static_cast<IDataObject*>(this);
     AddRef();
     return NOERROR;
   }
 
   if ( IID_IDataObjCollection  == riid ) {
-    *ppv = static_cast<nsIDataObjCollection*>(this); 
+    *ppv = static_cast<nsIDataObjCollection*>(this);
     AddRef();
     return NOERROR;
   }
@@ -175,7 +175,7 @@ HRESULT nsDataObjCollection::GetFile(LPFORMATETC pFE, LPSTGMEDIUM pSTM)
   uint32_t alloclen = 0;
   char16_t* realbuffer;
   nsAutoString filename;
-  
+
   hGlobalMemory = GlobalAlloc(GHND, buffersize);
 
   for (uint32_t i = 0; i < mDataObjects.Length(); ++i) {

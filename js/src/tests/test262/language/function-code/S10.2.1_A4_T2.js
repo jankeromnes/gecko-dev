@@ -14,9 +14,9 @@ description: Checking existence of a function with declared variable
 //CHECK#1
 function f1(){
   var x;
-  
+
   return x;
-  
+
   function x(){
     return 7;
   }
@@ -27,9 +27,9 @@ assert.sameValue(f1().constructor.prototype, Function.prototype);
 //CHECK#2
 function f2(){
   var x;
-  
+
   return typeof x;
-  
+
   function x(){
     return 7;
   }

@@ -151,7 +151,7 @@ function run_test() {
 
   //**************************************************************************//
   // getBranch tests
-  
+
   Assert.equal(ps.root, "");
 
   // bool ...
@@ -206,29 +206,29 @@ function run_test() {
   // bool...
   pb1 = ps.getDefaultBranch("");
   pb1.setBoolPref("DefaultPref.bool", true);
-  Assert.equal(pb1.getBoolPref("DefaultPref.bool"), true);  
+  Assert.equal(pb1.getBoolPref("DefaultPref.bool"), true);
   Assert.ok(!pb1.prefHasUserValue("DefaultPref.bool"));
   ps.setBoolPref("DefaultPref.bool", false);
   Assert.ok(pb1.prefHasUserValue("DefaultPref.bool"));
-  Assert.equal(ps.getBoolPref("DefaultPref.bool"), false); 
+  Assert.equal(ps.getBoolPref("DefaultPref.bool"), false);
 
   // int...
   pb1 = ps.getDefaultBranch("");
   pb1.setIntPref("DefaultPref.int", 100);
-  Assert.equal(pb1.getIntPref("DefaultPref.int"), 100);  
+  Assert.equal(pb1.getIntPref("DefaultPref.int"), 100);
   Assert.ok(!pb1.prefHasUserValue("DefaultPref.int"));
   ps.setIntPref("DefaultPref.int", 50);
   Assert.ok(pb1.prefHasUserValue("DefaultPref.int"));
-  Assert.equal(ps.getIntPref("DefaultPref.int"), 50); 
+  Assert.equal(ps.getIntPref("DefaultPref.int"), 50);
 
   // char...
   pb1 = ps.getDefaultBranch("");
   pb1.setCharPref("DefaultPref.char", "_default");
-  Assert.equal(pb1.getCharPref("DefaultPref.char"), "_default");  
+  Assert.equal(pb1.getCharPref("DefaultPref.char"), "_default");
   Assert.ok(!pb1.prefHasUserValue("DefaultPref.char"));
   ps.setCharPref("DefaultPref.char", "_user");
   Assert.ok(pb1.prefHasUserValue("DefaultPref.char"));
-  Assert.equal(ps.getCharPref("DefaultPref.char"), "_user"); 
+  Assert.equal(ps.getCharPref("DefaultPref.char"), "_user");
 
   //**************************************************************************//
   // pref Locking/Unlocking tests
@@ -242,12 +242,12 @@ function run_test() {
   // getting a locked pref branch should return the "default" value
   Assert.ok(!ps.prefIsLocked("DefaultPref.char"));
   ps.lockPref("DefaultPref.char");
-  Assert.equal(ps.getCharPref("DefaultPref.char"), "_default"); 
+  Assert.equal(ps.getCharPref("DefaultPref.char"), "_default");
   Assert.ok(ps.prefIsLocked("DefaultPref.char"));
 
-  // getting an unlocked pref branch should return the "user" value 
+  // getting an unlocked pref branch should return the "user" value
   ps.unlockPref("DefaultPref.char");
-  Assert.equal(ps.getCharPref("DefaultPref.char"), "_user"); 
+  Assert.equal(ps.getCharPref("DefaultPref.char"), "_user");
   Assert.ok(!ps.prefIsLocked("DefaultPref.char"));
 
   // setting the "default" value to a user pref branch should

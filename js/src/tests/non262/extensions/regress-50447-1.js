@@ -41,7 +41,7 @@ function test()
 
 }
 
-// Normalize filenames so this test can work on Windows. This 
+// Normalize filenames so this test can work on Windows. This
 // function is also used on strings that contain filenames.
 function normalize(filename)
 {

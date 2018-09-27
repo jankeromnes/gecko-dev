@@ -19,7 +19,7 @@ interface DOMPointReadOnly {
     readonly attribute unrestricted double x;
     readonly attribute unrestricted double y;
     readonly attribute unrestricted double z;
-    readonly attribute unrestricted double w; 
+    readonly attribute unrestricted double w;
 
     [Default] object toJSON();
 };

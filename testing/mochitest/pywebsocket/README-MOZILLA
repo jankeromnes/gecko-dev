@@ -58,20 +58,20 @@ diff --git a/testing/mochitest/pywebsocket/mod_pywebsocket/handshake/hybi.py b/t
              'Unsupported version %r for header %s' %
              (version, common.SEC_WEBSOCKET_VERSION_HEADER),
              supported_versions=', '.join(map(str, _SUPPORTED_VERSIONS)))
- 
+
      def _set_protocol(self):
          self._request.ws_protocol = None
 +        # MOZILLA
 +        self._request.sts = None
 +        # /MOZILLA
- 
+
          protocol_header = self._request.headers_in.get(
              common.SEC_WEBSOCKET_PROTOCOL_HEADER)
- 
+
          if protocol_header is None:
              self._request.ws_requested_protocols = None
              return
- 
+
 @@ -396,16 +399,21 @@ class Handshaker(object):
              response.append(format_header(
                  common.SEC_WEBSOCKET_PROTOCOL_HEADER,
@@ -86,11 +86,11 @@ diff --git a/testing/mochitest/pywebsocket/mod_pywebsocket/handshake/hybi.py b/t
 +            response.append(format_header("Strict-Transport-Security",
 +                                          self._request.sts))
 +        # /MOZILLA
- 
+
          # Headers not specific for WebSocket
          for name, value in self._request.extra_headers:
              response.append(format_header(name, value))
- 
+
          response.append('\r\n')
- 
+
          return ''.join(response)

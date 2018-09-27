@@ -30,7 +30,7 @@ var tests = [
     base2: "",
     action: "enforce-csp",
     result: "http://mochi.test",
-    desc: "CSP allows base uri" 
+    desc: "CSP allows base uri"
   },
   { csp: "base-uri http://example.com;",
     base1: "http://mochi.test",
@@ -91,7 +91,7 @@ function receiveMessage(event) {
   var result = event.data.result;
   // we only care about the base uri, so instead of comparing the complete uri
   // we just make sure that the base is correct which is sufficient here.
-  ok(result.startsWith(tests[counter].result), 
+  ok(result.startsWith(tests[counter].result),
      `${tests[counter].desc}: Expected a base URI that starts
       with ${tests[counter].result} but got ${result}`);
   loadNextTest();

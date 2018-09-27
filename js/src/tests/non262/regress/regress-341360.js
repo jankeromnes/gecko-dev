@@ -21,7 +21,7 @@ function xxx()
     window.clearInterval(t);
     t = null;
     setTimeout('yyy()', 2000);
-   
+
   }
   else {
     print('Clearing interval failed...');

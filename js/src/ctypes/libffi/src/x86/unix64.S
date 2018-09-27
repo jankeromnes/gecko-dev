@@ -3,7 +3,7 @@
 	    - Copyright (c) 2008  Red Hat, Inc
 	    - Copyright (c) 2002  Bo Thorsen <bo@suse.de>
 
-   x86-64 Foreign Function Interface 
+   x86-64 Foreign Function Interface
 
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the
@@ -27,7 +27,7 @@
    ----------------------------------------------------------------------- */
 
 #ifdef __x86_64__
-#define LIBFFI_ASM	
+#define LIBFFI_ASM
 #include <fficonfig.h>
 #include <ffi.h>
 
@@ -424,7 +424,7 @@ ffi_closure_unix64:
 .LEFDE3:
 
 #endif /* __GNUC__ */
-	
+
 #endif /* __x86_64__ */
 
 #if defined __ELF__ && defined __linux__

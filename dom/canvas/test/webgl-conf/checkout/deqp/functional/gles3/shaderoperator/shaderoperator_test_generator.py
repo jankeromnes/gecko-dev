@@ -98,7 +98,7 @@ _GROUPS = [
     'selection',
     'sequence',
 ]
-    
+
 def GenerateFilename(group):
   """Generate test filename."""
   filename = group

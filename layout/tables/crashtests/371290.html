@@ -3,14 +3,14 @@
 <title>BC crash</title>
 <script>
 function doit() {
-  var C = document.getElementById('C'); 
-  var newNode = document.createElement('td'); 
-  newNode.setAttribute('id', 'D'); 
-  C.insertBefore(newNode, document.getElementById('B')); 
-  var D = document.getElementById('D'); 
-  D.remove();  
-  var A = document.getElementById('A'); 
-  A.remove();  
+  var C = document.getElementById('C');
+  var newNode = document.createElement('td');
+  newNode.setAttribute('id', 'D');
+  C.insertBefore(newNode, document.getElementById('B'));
+  var D = document.getElementById('D');
+  D.remove();
+  var A = document.getElementById('A');
+  A.remove();
   document.documentElement.removeAttribute("class");
 }
 </script>

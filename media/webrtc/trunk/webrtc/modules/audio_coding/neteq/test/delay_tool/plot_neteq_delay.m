@@ -67,7 +67,7 @@ nonun_ix=setdiff(1:length(s.sn),un_ix);
 if ~isempty(nonun_ix)
     warning('RTP sequence numbers are in error');
 end
-            
+
 % sort vectors
 [s.sn,sort_ix]=sort(s.sn);
 s.ts=s.ts(sort_ix);
@@ -105,7 +105,7 @@ plot_nw_delay=nan*ones(max(seq_ix),1);
 plot_nw_delay(seq_ix)=s.arrival-send_t;
 
 cng_ix=find(s.pt~=13); % find those packets that are not CNG/SID
-    
+
 if noplot==0
     h=plot(plot_send_t/1000,plot_nw_delay);
     set(h,'color',0.75*[1 1 1]);
@@ -152,7 +152,7 @@ delay_struct=struct('mean_delay',mean_delay,'neteq_delay',neteq_delay,...
     'tot_expand',round(s.tot_expand),'tot_accelerate',round(s.tot_accelerate),...
     'tot_preemptive',round(s.tot_preemptive),'tot_time',tot_time,...
     'filename',delayfile,'units','ms','fs',unique(s.fs));
-    
+
 if not(isempty(delaypoints))
     delayvalues=interp1(send_t(cng_ix),...
         s.decode(cng_ix)+s.playout_delay(cng_ix)-send_t(cng_ix),...
@@ -178,7 +178,7 @@ while ~isempty(jumps)
         % positive jump
         x(n+1:end)=x(n+1:end)-65536;
     end
-    
+
     jumps=find(abs((diff(x(n+1:end))-1))>65000);
 end
 

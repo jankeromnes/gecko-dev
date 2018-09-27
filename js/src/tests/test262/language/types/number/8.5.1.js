@@ -8,7 +8,7 @@ description: Valid Number ranges
 
 // Check range support for Number values (IEEE 754 64-bit floats having the form s*m*2**e)
 //
-// For normalized floats, sign (s) is +1 or -1, m (mantisa) is a positive integer less 
+// For normalized floats, sign (s) is +1 or -1, m (mantisa) is a positive integer less
 // than 2**53 but not less than 2**52 and e (exponent) is an integer ranging from -1074 to 971
 //
 // For denormalized floats, s is +1 or -1, m is a positive integer less than 2**52, and
@@ -20,7 +20,7 @@ description: Valid Number ranges
 // MIN_NORM   = ~2.2250738585072013830902327173324e-308 = 2**-1022
 // MAX_DENORM = ~2.2250738585072008890245868760859e-308 = MIN_NORM - MIN_DENORM = (2**-1022) - (2**-1074)
 // MIN_DENORM = ~4.9406564584124654417656879286822e-324 = 2**-1074
- 
+
 // Fill an array with 2 to the power of (0 ... -1075)
 var value = 1;
 var floatValues = new Array(1076);

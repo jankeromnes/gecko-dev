@@ -60,9 +60,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var base64 = __webpack_require__(1);
-	
+
 	exports['test out of range encoding'] = function (assert) {
 	  assert.throws(function () {
 	    base64.encode(-1);
@@ -71,11 +71,11 @@ var SOURCE_MAP_TEST_MODULE =
 	    base64.encode(64);
 	  }, /Must be between 0 and 63/);
 	};
-	
+
 	exports['test out of range decoding'] = function (assert) {
 	  assert.equal(base64.decode('='.charCodeAt(0)), -1);
 	};
-	
+
 	exports['test normal encoding and decoding'] = function (assert) {
 	  for (var i = 0; i < 64; i++) {
 	    assert.equal(base64.decode(base64.encode(i).charCodeAt(0)), i);
@@ -93,9 +93,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var intToCharMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split('');
-	
+
 	/**
 	 * Encode an integer in the range of 0 to 63 to a single base 64 digit.
 	 */
@@ -105,7 +105,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	  throw new TypeError("Must be between 0 and 63: " + number);
 	};
-	
+
 	/**
 	 * Decode a single base 64 character code digit to an integer. Returns -1 on
 	 * failure.
@@ -113,44 +113,44 @@ var SOURCE_MAP_TEST_MODULE =
 	exports.decode = function (charCode) {
 	  var bigA = 65;     // 'A'
 	  var bigZ = 90;     // 'Z'
-	
+
 	  var littleA = 97;  // 'a'
 	  var littleZ = 122; // 'z'
-	
+
 	  var zero = 48;     // '0'
 	  var nine = 57;     // '9'
-	
+
 	  var plus = 43;     // '+'
 	  var slash = 47;    // '/'
-	
+
 	  var littleOffset = 26;
 	  var numberOffset = 52;
-	
+
 	  // 0 - 25: ABCDEFGHIJKLMNOPQRSTUVWXYZ
 	  if (bigA <= charCode && charCode <= bigZ) {
 	    return (charCode - bigA);
 	  }
-	
+
 	  // 26 - 51: abcdefghijklmnopqrstuvwxyz
 	  if (littleA <= charCode && charCode <= littleZ) {
 	    return (charCode - littleA + littleOffset);
 	  }
-	
+
 	  // 52 - 61: 0123456789
 	  if (zero <= charCode && charCode <= nine) {
 	    return (charCode - zero + numberOffset);
 	  }
-	
+
 	  // 62: +
 	  if (charCode == plus) {
 	    return 62;
 	  }
-	
+
 	  // 63: /
 	  if (charCode == slash) {
 	    return 63;
 	  }
-	
+
 	  // Invalid base64 digit.
 	  return -1;
 	};

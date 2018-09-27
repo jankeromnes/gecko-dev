@@ -58,13 +58,13 @@ for (var j = 0; j < trimMethods.length; ++j)
   str      = '';
   expected = '';
   actual   = str[method]();
-  reportCompare(expected, actual, '"' + toPrinted(str) + '".' + method + '()');                        
+  reportCompare(expected, actual, '"' + toPrinted(str) + '".' + method + '()');
 
   print('Test string with no whitespace.');
   str      = 'a';
   expected = 'a';
   actual   = str[method]();
-  reportCompare(expected, actual, '"' + toPrinted(str) + '".' + method + '()');                        
+  reportCompare(expected, actual, '"' + toPrinted(str) + '".' + method + '()');
 
   for (var i = 0; i < whitespace.length; ++i)
   {
@@ -101,7 +101,7 @@ for (var j = 0; j < trimMethods.length; ++j)
     }
     actual   = str[method]();
     reportCompare(expected, actual, t + ':' + '"' + toPrinted(str) + '".' + method + '()');
-      
+
     print('Test ' + method + ' with with trailing whitespace. : ' + t);
     str = 'a' + v;
     switch(method)
@@ -135,7 +135,7 @@ for (var j = 0; j < trimMethods.length; ++j)
     }
     actual = str[method]();
     reportCompare(expected, actual, t + ':' + '"' + toPrinted(str) + '".' + method + '()');
-      
+
   }
 }
 

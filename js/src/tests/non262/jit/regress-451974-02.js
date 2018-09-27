@@ -26,21 +26,21 @@ function test()
   var densearray = [];
   var lsize = size;
 
-  while (lsize--) 
-  { 
-    densearray.push(chars); 
+  while (lsize--)
+  {
+    densearray.push(chars);
   }
 
   function loop()
   {
     var start = new Date();
 
-    for (var a = 0; a < mult; a++) 
+    for (var a = 0; a < mult; a++)
     {
-      var f = (function(x){}); 
-      for (var i = 0, len = densearray.length; i < len; i++) 
-      { 
-        f(densearray[i]); 
+      var f = (function(x){});
+      for (var i = 0, len = densearray.length; i < len; i++)
+      {
+        f(densearray[i]);
       }
     }
 

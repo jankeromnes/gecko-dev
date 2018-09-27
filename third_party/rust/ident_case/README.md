@@ -1,7 +1,7 @@
 Crate for manipulating case of identifiers in Rust programs.
 
 # Features
-* Supports `snake_case`, `lowercase`, `camelCase`, 
+* Supports `snake_case`, `lowercase`, `camelCase`,
   `PascalCase`, `SCREAMING_SNAKE_CASE`, and `kebab-case`
 * Rename variants, and fields
 

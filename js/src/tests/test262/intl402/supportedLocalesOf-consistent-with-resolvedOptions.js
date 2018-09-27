@@ -26,7 +26,7 @@ testWithIntlConstructors(function (Constructor) {
         assert.sameValue(i < supportedByConstructor.length, false, "Locale " + supportedByConstructor[i] + " is returned by resolvedOptions but not by supportedLocalesOf.");
         assert.sameValue(i < supported.length, false, "Locale " + supported[i] + " is returned by supportedLocalesOf but not by resolvedOptions.");
     });
-    
+
     // this test is only valid for lookup - best fit may find additional locales supported
     var unsupportedByConstructor = info.unsupported;
     var supported = Constructor.supportedLocalesOf(unsupportedByConstructor,

@@ -238,19 +238,19 @@ SELECTION_TESTS = {
           'function':   'sel.modify("move", "forward", "character");',
           'pad':        '<p dir="rtl">foo b^ar baz</p>',
           'expected':   '<p dir="rtl">foo ba^r baz</p>' },
-        
+
         { 'id':         'SM:m.b.c_Pdir:rtl-1_SC-1',
           'desc':       'move caret backward 1 character in right-to-left text',
           'function':   'sel.modify("move", "backward", "character");',
           'pad':        '<p dir="rtl">foo ba^r baz</p>',
           'expected':   '<p dir="rtl">foo b^ar baz</p>' },
-        
+
         { 'id':         'SM:m.r.c_Pdir:rtl-1_SC-1',
           'desc':       'move caret 1 character to the right in LTR text within RTL context',
           'function':   'sel.modify("move", "right", "character");',
           'pad':        '<p dir="rtl">foo b^ar baz</p>',
           'expected':   '<p dir="rtl">foo ba^r baz</p>' },
-        
+
         { 'id':         'SM:m.l.c_Pdir:rtl-1_SC-1',
           'desc':       'move caret 1 character to the left in LTR text within RTL context',
           'function':   'sel.modify("move", "left", "character");',
@@ -263,19 +263,19 @@ SELECTION_TESTS = {
           'function':   'sel.modify("move", "forward", "character");',
           'pad':        '&#1605;&#x0631;&#1581;^&#1576;&#x0627; &#x0627;&#1604;&#x0639;&#x0627;&#1604;&#1605;',
           'expected':   '&#1605;&#x0631;&#1581;&#1576;^&#x0627; &#x0627;&#1604;&#x0639;&#x0627;&#1604;&#1605;' },
-        
+
         { 'id':         'SM:m.b.c_TEXT:ar-1_SC-1',
           'desc':       'move caret backward 1 character in Arabic text',
           'function':   'sel.modify("move", "backward", "character");',
           'pad':        '&#1605;&#x0631;&#1581;^&#1576;&#x0627; &#x0627;&#1604;&#x0639;&#x0627;&#1604;&#1605;',
           'expected':   '&#1605;&#x0631;^&#1581;&#1576;&#x0627; &#x0627;&#1604;&#x0639;&#x0627;&#1604;&#1605;' },
-        
+
         { 'id':         'SM:m.f.c_TEXT:he-1_SC-1',
           'desc':       'move caret forward 1 character in Hebrew text',
           'function':   'sel.modify("move", "forward", "character");',
           'pad':        '&#x05E9;&#x05DC;^&#x05D5;&#x05DD; &#x05E2;&#x05D5;&#x05DC;&#x05DD;',
           'expected':   '&#x05E9;&#x05DC;&#x05D5;^&#x05DD; &#x05E2;&#x05D5;&#x05DC;&#x05DD;' },
-        
+
         { 'id':         'SM:m.b.c_TEXT:he-1_SC-1',
           'desc':       'move caret backward 1 character in Hebrew text',
           'function':   'sel.modify("move", "backward", "character");',
@@ -288,50 +288,50 @@ SELECTION_TESTS = {
           'function':   'sel.modify("move", "forward", "character");',
           'pad':        'foo <bdo dir="rtl">b^ar</bdo> baz',
           'expected':   'foo <bdo dir="rtl">ba^r</bdo> baz' },
-        
+
         { 'id':         'SM:m.b.c_BDOdir:rtl-1_SC-1',
           'desc':       'move caret backward 1 character inside <bdo>',
           'function':   'sel.modify("move", "backward", "character");',
           'pad':        'foo <bdo dir="rtl">ba^r</bdo> baz',
           'expected':   'foo <bdo dir="rtl">b^ar</bdo> baz' },
-        
+
         { 'id':         'SM:m.r.c_BDOdir:rtl-1_SC-1',
           'desc':       'move caret 1 character to the right inside <bdo>',
           'function':   'sel.modify("move", "right", "character");',
           'pad':        'foo <bdo dir="rtl">ba^r</bdo> baz',
           'expected':   'foo <bdo dir="rtl">b^ar</bdo> baz' },
-        
+
         { 'id':         'SM:m.l.c_BDOdir:rtl-1_SC-1',
           'desc':       'move caret 1 character to the left inside <bdo>',
           'function':   'sel.modify("move", "left", "character");',
           'pad':        'foo <bdo dir="rtl">b^ar</bdo> baz',
           'expected':   'foo <bdo dir="rtl">ba^r</bdo> baz' },
-        
+
 
         { 'id':         'SM:m.f.c_TEXTrle-1_SC-rtl-1',
           'desc':       'move caret forward in RTL text within RLE-PDF marks',
           'function':   'sel.modify("move", "forward", "character");',
           'pad':        'I said, "(RLE)&#x202B;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;^&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
           'expected':   'I said, "(RLE)&#x202B;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;^&#x0631;&#x0629;&#x202C;(PDF)".' },
-        
+
         { 'id':         'SM:m.b.c_TEXTrle-1_SC-rtl-1',
           'desc':       'move caret backward in RTL text within RLE-PDF marks',
           'function':   'sel.modify("move", "backward", "character");',
           'pad':        'I said, "(RLE)&#x202B;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;^&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
           'expected':   'I said, "(RLE)&#x202B;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;^&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".' },
-        
+
         { 'id':         'SM:m.r.c_TEXTrle-1_SC-rtl-1',
           'desc':       'move caret 1 character to the right in RTL text within RLE-PDF marks',
           'function':   'sel.modify("move", "right", "character");',
           'pad':        'I said, "(RLE)&#x202B;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;^&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
           'expected':   'I said, "(RLE)&#x202B;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;^&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".' },
-        
+
         { 'id':         'SM:m.l.c_TEXTrle-1_SC-rtl-1',
           'desc':       'move caret 1 character to the left in RTL text within RLE-PDF marks',
           'function':   'sel.modify("move", "left", "character");',
           'pad':        'I said, "(RLE)&#x202B;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;^&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
           'expected':   'I said, "(RLE)&#x202B;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;^&#x0631;&#x0629;&#x202C;(PDF)".' },
-        
+
         { 'id':         'SM:m.f.c_TEXTrle-1_SC-ltr-1',
           'desc':       'move caret forward in LTR text within RLE-PDF marks',
           'function':   'sel.modify("move", "forward", "character");',
@@ -361,69 +361,69 @@ SELECTION_TESTS = {
           'desc':       'move caret forward in RTL text within RLO-PDF marks',
           'function':   'sel.modify("move", "forward", "character");',
           'pad':        'I said, "(RLO)&#x202E;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;^&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
-          'expected':   'I said, "(RLO)&#x202E;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;^&#x0631;&#x0629;&#x202C;(PDF)".' },    
+          'expected':   'I said, "(RLO)&#x202E;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;^&#x0631;&#x0629;&#x202C;(PDF)".' },
 
         { 'id':         'SM:m.b.c_TEXTrlo-1_SC-rtl-1',
           'desc':       'move caret backward in RTL text within RLO-PDF marks',
           'function':   'sel.modify("move", "backward", "character");',
           'pad':        'I said, "(RLO)&#x202E;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;^&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
           'expected':   'I said, "(RLO)&#x202E;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;^&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".' },
-        
+
         { 'id':         'SM:m.r.c_TEXTrlo-1_SC-rtl-1',
           'desc':       'move caret 1 character to the right in RTL text within RLO-PDF marks',
           'function':   'sel.modify("move", "right", "character");',
           'pad':        'I said, "(RLO)&#x202E;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;^&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
-          'expected':   'I said, "(RLO)&#x202E;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;^&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".' },    
+          'expected':   'I said, "(RLO)&#x202E;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;^&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".' },
 
         { 'id':         'SM:m.l.c_TEXTrlo-1_SC-rtl-1',
           'desc':       'move caret 1 character to the left in RTL text within RLO-PDF marks',
           'function':   'sel.modify("move", "left", "character");',
           'pad':        'I said, "(RLO)&#x202E;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;^&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
           'expected':   'I said, "(RLO)&#x202E;car &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;^&#x0631;&#x0629;&#x202C;(PDF)".' },
-        
+
         { 'id':         'SM:m.f.c_TEXTrlo-1_SC-ltr-1',
           'desc':       'move caret forward in Latin text within RLO-PDF marks',
           'function':   'sel.modify("move", "forward", "character");',
           'pad':        'I said, "(RLO)&#x202E;c^ar &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
           'expected':   'I said, "(RLO)&#x202E;ca^r &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".' },
-        
+
         { 'id':         'SM:m.b.c_TEXTrlo-1_SC-ltr-1',
           'desc':       'move caret backward in Latin text within RLO-PDF marks',
           'function':   'sel.modify("move", "backward", "character");',
           'pad':        'I said, "(RLO)&#x202E;ca^r &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
           'expected':   'I said, "(RLO)&#x202E;c^ar &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".' },
-        
+
         { 'id':         'SM:m.r.c_TEXTrlo-1_SC-ltr-1',
           'desc':       'move caret 1 character to the right in Latin text within RLO-PDF marks',
           'function':   'sel.modify("move", "right", "character");',
           'pad':        'I said, "(RLO)&#x202E;ca^r &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
-          'expected':   'I said, "(RLO)&#x202E;c^ar &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".' },    
+          'expected':   'I said, "(RLO)&#x202E;c^ar &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".' },
 
         { 'id':         'SM:m.l.c_TEXTrlo-1_SC-ltr-1',
           'desc':       'move caret 1 character to the left in Latin text within RLO-PDF marks',
           'function':   'sel.modify("move", "left", "character");',
           'pad':        'I said, "(RLO)&#x202E;c^ar &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".',
           'expected':   'I said, "(RLO)&#x202E;ca^r &#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;&#x202C;(PDF)".' },
-        
+
 
         { 'id':         'SM:m.f.c_TEXTrlm-1_SC-1',
           'desc':       'move caret forward in RTL text within neutral characters followed by RLM',
           'function':   'sel.modify("move", "forward", "character");',
           'pad':        'I said, "&#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;!^?!&#x200F;(RLM)".',
           'expected':   'I said, "&#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;!?^!&#x200F;(RLM)".' },
-        
+
         { 'id':         'SM:m.b.c_TEXTrlm-1_SC-1',
           'desc':       'move caret backward in RTL text within neutral characters followed by RLM',
           'function':   'sel.modify("move", "backward", "character");',
           'pad':        'I said, "&#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;!?^!&#x200F;(RLM)".',
           'expected':   'I said, "&#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;!^?!&#x200F;(RLM)".' },
-        
+
         { 'id':         'SM:m.r.c_TEXTrlm-1_SC-1',
           'desc':       'move caret 1 character to the right in RTL text within neutral characters followed by RLM',
           'function':   'sel.modify("move", "right", "character");',
           'pad':        'I said, "&#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;!?^!&#x200F;(RLM)".',
           'expected':   'I said, "&#x064A;&#x0639;&#x0646;&#x064A; &#x0633;&#x064A;&#x0627;&#x0631;&#x0629;!^?!&#x200F;(RLM)".' },
-        
+
         { 'id':         'SM:m.l.c_TEXTrlm-1_SC-1',
           'desc':       'move caret 1 character to the left in RTL text within neutral characters followed by RLM',
           'function':   'sel.modify("move", "left", "character");',
@@ -439,26 +439,26 @@ SELECTION_TESTS = {
           'function':   'sel.modify("move", "forward", "word");',
           'pad':        '^&#x9762;&#x767D;&#x3044;&#x4F8B;&#x6587;&#x3092;&#x30C6;&#x30B9;&#x30C8;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;',
           'expected':   '&#x9762;&#x767D;&#x3044;^&#x4F8B;&#x6587;&#x3092;&#x30C6;&#x30B9;&#x30C8;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;' },
-        
+
         { 'id':         'SM:m.f.w_TEXT-jp_SC-2',
           'desc':       'move caret forward 1 word in Japanese text (in the middle of a word)',
           'function':   'sel.modify("move", "forward", "word");',
           'pad':        '&#x9762;^&#x767D;&#x3044;&#x4F8B;&#x6587;&#x3092;&#x30C6;&#x30B9;&#x30C8;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;',
           'expected':   '&#x9762;&#x767D;&#x3044;^&#x4F8B;&#x6587;&#x3092;&#x30C6;&#x30B9;&#x30C8;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;' },
-        
+
         { 'id':         'SM:m.f.w_TEXT-jp_SC-3',
           'desc':       'move caret forward 1 word in Japanese text (noun)',
           'function':   'sel.modify("move", "forward", "word");',
           'pad':        '&#x9762;&#x767D;&#x3044;^&#x4F8B;&#x6587;&#x3092;&#x30C6;&#x30B9;&#x30C8;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;',
           'expected':   [ '&#x9762;&#x767D;&#x3044;&#x4F8B;&#x6587;^&#x3092;&#x30C6;&#x30B9;&#x30C8;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;',
                           '&#x9762;&#x767D;&#x3044;&#x4F8B;&#x6587;&#x3092;^&#x30C6;&#x30B9;&#x30C8;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;' ] },
-        
+
         { 'id':         'SM:m.f.w_TEXT-jp_SC-4',
           'desc':       'move caret forward 1 word in Japanese text (Katakana)',
           'function':   'sel.modify("move", "forward", "word");',
           'pad':        '&#x9762;&#x767D;&#x3044;&#x4F8B;&#x6587;&#x3092;^&#x30C6;&#x30B9;&#x30C8;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;',
           'expected':   '&#x9762;&#x767D;&#x3044;&#x4F8B;&#x6587;&#x3092;&#x30C6;&#x30B9;&#x30C8;^&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;' },
-        
+
         { 'id':         'SM:m.f.w_TEXT-jp_SC-5',
           'desc':       'move caret forward 1 word in Japanese text (verb)',
           'function':   'sel.modify("move", "forward", "word");',

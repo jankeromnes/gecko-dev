@@ -203,7 +203,7 @@ public:
   {
     return BaseMatrix<T>(aScaleX, 0.0f, 0.0f, aScaleY, 0.0f, 0.0f);
   }
-  
+
   /**
    * Similar to PreTranslate, but applies a scale instead of a translation.
    */
@@ -1349,7 +1349,7 @@ public:
     }
     return Nothing();
   }
-  
+
   void Normalize()
   {
       for (int i = 0; i < 4; i++) {

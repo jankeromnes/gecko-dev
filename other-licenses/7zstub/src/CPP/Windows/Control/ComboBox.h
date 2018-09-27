@@ -23,7 +23,7 @@ public:
   LRESULT SetCurSel(int index) { return SendMsg(CB_SETCURSEL, index, 0); }
   int GetCurSel() { return (int)SendMsg(CB_GETCURSEL, 0, 0); }
   int GetCount() { return (int)SendMsg(CB_GETCOUNT, 0, 0); }
-  
+
   LRESULT GetLBTextLen(int index) { return SendMsg(CB_GETLBTEXTLEN, index, 0); }
   LRESULT GetLBText(int index, LPTSTR s) { return SendMsg(CB_GETLBTEXT, index, (LPARAM)s); }
   LRESULT GetLBText(int index, CSysString &s);

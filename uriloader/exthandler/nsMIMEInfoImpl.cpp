@@ -94,7 +94,7 @@ nsMIMEInfoBase::GetPrimaryExtension(nsACString& _retval)
       return NS_ERROR_NOT_INITIALIZED;
 
     _retval = mExtensions[0];
-    return NS_OK;    
+    return NS_OK;
 }
 
 NS_IMETHODIMP
@@ -116,7 +116,7 @@ nsMIMEInfoBase::SetPrimaryExtension(const nsACString& aExtension)
   }
 
   mExtensions.InsertElementAt(0, aExtension);
-  
+
   return NS_OK;
 }
 
@@ -155,7 +155,7 @@ nsMIMEInfoBase::GetDescription(nsAString& aDescription)
 }
 
 NS_IMETHODIMP
-nsMIMEInfoBase::SetDescription(const nsAString& aDescription) 
+nsMIMEInfoBase::SetDescription(const nsAString& aDescription)
 {
     mDescription = aDescription;
     return NS_OK;
@@ -180,7 +180,7 @@ nsMIMEInfoBase::SetFileExtensions(const nsACString& aExtensions)
 {
     mExtensions.Clear();
     nsCString extList( aExtensions );
-    
+
     int32_t breakLocation = -1;
     while ( (breakLocation= extList.FindChar(',') )!= -1)
     {
@@ -206,7 +206,7 @@ nsMIMEInfoBase::GetPreferredApplicationHandler(nsIHandlerApp ** aPreferredAppHan
   NS_IF_ADDREF(*aPreferredAppHandler);
   return NS_OK;
 }
- 
+
 NS_IMETHODIMP
 nsMIMEInfoBase::SetPreferredApplicationHandler(nsIHandlerApp * aPreferredAppHandler)
 {
@@ -234,7 +234,7 @@ nsMIMEInfoBase::GetPreferredAction(nsHandlerInfoAction * aPreferredAction)
   *aPreferredAction = mPreferredAction;
   return NS_OK;
 }
- 
+
 NS_IMETHODIMP
 nsMIMEInfoBase::SetPreferredAction(nsHandlerInfoAction aPreferredAction)
 {
@@ -258,7 +258,7 @@ nsMIMEInfoBase::SetAlwaysAskBeforeHandling(bool aAlwaysAsk)
 }
 
 /* static */
-nsresult 
+nsresult
 nsMIMEInfoBase::GetLocalFileFromURI(nsIURI *aURI, nsIFile **aFile)
 {
   nsresult rv;
@@ -296,7 +296,7 @@ nsMIMEInfoBase::LaunchWithFile(nsIFile* aFile)
       return NS_ERROR_FILE_NOT_FOUND;
 
     // at the moment, we only know how to hand files off to local handlers
-    nsCOMPtr<nsILocalHandlerApp> localHandler = 
+    nsCOMPtr<nsILocalHandlerApp> localHandler =
       do_QueryInterface(mPreferredApplication, &rv);
     NS_ENSURE_SUCCESS(rv, rv);
 
@@ -329,7 +329,7 @@ nsMIMEInfoBase::LaunchWithURI(nsIURI* aURI,
       return NS_ERROR_FILE_NOT_FOUND;
 
     return mPreferredApplication->LaunchWithURI(aURI, aWindowContext);
-  } 
+  }
 
   return NS_ERROR_INVALID_ARG;
 }
@@ -399,7 +399,7 @@ nsMIMEInfoImpl::GetDefaultDescription(nsAString& aDefaultDescription)
   } else {
     aDefaultDescription = mDefaultAppDescription;
   }
-  
+
   return NS_OK;
 }
 

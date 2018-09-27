@@ -1,7 +1,7 @@
 # Copyright (C) 2016 and later: Unicode, Inc. and others.
 # License & terms of use: http://www.unicode.org/copyright.html
 # Copyright (C) 2010-2014, International Business Machines Corporation and others.
-# All Rights Reserved.                  
+# All Rights Reserved.
 #
 # Commands for regenerating ICU4C locale data (.txt files) from CLDR.
 #
@@ -9,7 +9,7 @@
 #    - CLDR (the source of most of the data, and some Java tools)
 #    - ICU4J  (used only for checking the converted data)
 #    - ICU4C  (the destination for the new data, and the source for some of it)
-#             (Either check out ICU4C from Subversion, or download the additional 
+#             (Either check out ICU4C from Subversion, or download the additional
 #              icu4c-*-data.zip file so that the icu/source/data/ directory is fully
 #              populated.)
 #

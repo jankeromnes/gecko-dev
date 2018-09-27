@@ -13,7 +13,7 @@ description: >
 function __func(param1, param2, param3) {
  	return arguments.length;
  }
- 
+
 //////////////////////////////////////////////////////////////////////////////
 //CHECK#1
 if (__func('A') !== 1) {

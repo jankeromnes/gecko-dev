@@ -143,5 +143,5 @@ if test "$echo_libs" = "yes"; then
         fi
       done
       echo $libdirs @OS_LIBS@
-fi      
+fi
 

@@ -12,14 +12,14 @@
       // Primary regression test:
       parent.isnot(ta.value, "",
         "Content of dynamically disabled textarea disappeared on page reload.");
-      
+
       // Bonus regression test: changing the textarea's defaultValue after
       // reloading should also update the textarea's value.
       var newDefaultValue = "new default value";
       ta.defaultValue = newDefaultValue;
       parent.is(ta.value, newDefaultValue,
         "Changing the defaultValue attribute of a textarea fails to update its value attribute.");
-        
+
       parent.SimpleTest.finish();
     }
   </script>

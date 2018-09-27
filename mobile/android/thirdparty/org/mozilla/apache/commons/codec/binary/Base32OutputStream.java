@@ -6,9 +6,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,7 +32,7 @@ import java.io.OutputStream;
  * Since this class operates directly on byte streams, and not character streams, it is hard-coded to only encode/decode
  * character encodings which are compatible with the lower 127 ASCII chart (ISO-8859-1, Windows-1252, UTF-8, etc).
  * </p>
- * 
+ *
  * @version $Revision: 1064132 $
  * @see <a href="http://www.ietf.org/rfc/rfc4648.txt">RFC 4648</a>
  * @since 1.5
@@ -41,7 +41,7 @@ public class Base32OutputStream extends BaseNCodecOutputStream {
 
     /**
      * Creates a Base32OutputStream such that all data written is Base32-encoded to the original provided OutputStream.
-     * 
+     *
      * @param out
      *            OutputStream to wrap.
      */
@@ -52,7 +52,7 @@ public class Base32OutputStream extends BaseNCodecOutputStream {
     /**
      * Creates a Base32OutputStream such that all data written is either Base32-encoded or Base32-decoded to the
      * original provided OutputStream.
-     * 
+     *
      * @param out
      *            OutputStream to wrap.
      * @param doEncode
@@ -65,7 +65,7 @@ public class Base32OutputStream extends BaseNCodecOutputStream {
     /**
      * Creates a Base32OutputStream such that all data written is either Base32-encoded or Base32-decoded to the
      * original provided OutputStream.
-     * 
+     *
      * @param out
      *            OutputStream to wrap.
      * @param doEncode

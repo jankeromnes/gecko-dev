@@ -67,9 +67,9 @@ the xpcom interface <code>that</code>.
 
 <p>
 
-Here are examples of this implementation for 
+Here are examples of this implementation for
 <a href="http://lxr.mozilla.org/mozilla/source/xpcom/reflect/xptcall/md/win32/xptcinvoke.cpp">Win32</a>
-and 
+and
 <a href="http://lxr.mozilla.org/mozilla/source/xpcom/reflect/xptcall/md/unix/xptcinvoke_unixish_x86.cpp">Linux x86, NetBSD x86, and FreeBSD</a>.
 
 Both of these implementations use the basic strategy of: figure out how much
@@ -107,7 +107,7 @@ public:
 };
 </pre>
 
-Code that wishes to make use of this <i>stubs</i> functionality (such as 
+Code that wishes to make use of this <i>stubs</i> functionality (such as
 <a href="http://www.mozilla.org/scriptable/">XPConnect</a>) implement a class
 which inherits from <code>nsXPTCStubBase</code> and implements the
 <code>GetInterfaceInfo</code> and <code>CallMethod</code> to let the
@@ -174,11 +174,11 @@ time involved.
 
 <p>
 
-I put together 
+I put together
 <a
 href="http://lxr.mozilla.org/mozilla/source/xpcom/reflect/xptcall/md/test">xptcall/md/test
 </a> as a place to evolve the basic functionality as a port is coming together.
-Not all of the functionality is exercised, but it is a place to get started. 
+Not all of the functionality is exercised, but it is a place to get started.
 <a
 href="http://lxr.mozilla.org/mozilla/source/xpcom/reflect/xptcall/tests">xptcall/tests
 </a> has an api level test for <code>NS_InvokeByIndex</code>, but no tests for

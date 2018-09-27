@@ -23,14 +23,14 @@ t.one = "one";
 t.two = "two";
 t.three = "three";
 t.four = "four";
-   
+
 for (var prop in t) {
   if (count==1) delete(t.three);
   count++;
   value = value + t[prop];
   result = result + prop;
 }
- 
+
 expect = 'onetwofour:onetwofour';
 actual = value + ':' + result;
 

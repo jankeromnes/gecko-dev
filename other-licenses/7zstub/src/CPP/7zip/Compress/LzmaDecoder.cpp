@@ -117,7 +117,7 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream *inStream, ISequentialOutStream *
 {
   if (!_inBuf || !_propsWereSet)
     return S_FALSE;
-  
+
   const UInt64 startInProgress = _inProcessed;
   SizeT wrPos = _state.dicPos;
   HRESULT readRes = S_OK;
@@ -153,7 +153,7 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream *inStream, ISequentialOutStream *
 
     SizeT inProcessed = _inLim - _inPos;
     ELzmaStatus status;
-    
+
     SRes res = LzmaDec_DecodeToDic(&_state, dicPos + size, _inBuf + _inPos, &inProcessed, finishMode, &status);
 
     _lzmaStatus = status;
@@ -177,7 +177,7 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream *inStream, ISequentialOutStream *
       if (_state.dicPos == _state.dicBufSize)
         _state.dicPos = 0;
       wrPos = _state.dicPos;
-      
+
       RINOK(res2);
 
       if (needStop)
@@ -192,15 +192,15 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream *inStream, ISequentialOutStream *
               return S_FALSE;
           return readRes;
         }
-        
+
         if (outFinished && status != LZMA_STATUS_NEEDS_MORE_INPUT)
           if (!FinishStream || status == LZMA_STATUS_MAYBE_FINISHED_WITHOUT_MARK)
             return readRes;
-          
+
         return S_FALSE;
       }
     }
-    
+
     if (progress)
     {
       const UInt64 inSize = _inProcessed - startInProgress;
@@ -248,7 +248,7 @@ STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
   }
 
   HRESULT readRes = S_OK;
-  
+
   for (;;)
   {
     if (_inPos == _inLim && readRes == S_OK)
@@ -260,10 +260,10 @@ STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
     SizeT inProcessed = _inLim - _inPos;
     SizeT outProcessed = size;
     ELzmaStatus status;
-    
+
     SRes res = LzmaDec_DecodeToBuf(&_state, (Byte *)data, &outProcessed,
         _inBuf + _inPos, &inProcessed, finishMode, &status);
-    
+
     _lzmaStatus = status;
     _inPos += (UInt32)inProcessed;
     _inProcessed += inProcessed;
@@ -275,7 +275,7 @@ STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
 
     if (res != 0)
       return S_FALSE;
-    
+
     /*
     if (status == LZMA_STATUS_FINISHED_WITH_MARK)
       return readRes;
@@ -306,7 +306,7 @@ HRESULT CDecoder::CodeResume(ISequentialOutStream *outStream, const UInt64 *outS
 HRESULT CDecoder::ReadFromInputStream(void *data, UInt32 size, UInt32 *processedSize)
 {
   RINOK(CreateInputBuffer());
-  
+
   if (processedSize)
     *processedSize = 0;
 
@@ -334,7 +334,7 @@ HRESULT CDecoder::ReadFromInputStream(void *data, UInt32 size, UInt32 *processed
     if (processedSize)
       *processedSize += cur;
   }
-  
+
   return readRes;
 }
 

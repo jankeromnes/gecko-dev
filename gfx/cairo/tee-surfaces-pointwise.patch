@@ -13,10 +13,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
  				     cairo_font_options_t  *options)
  {
      cairo_tee_surface_t *surface = abstract_surface;
- 
+
      _cairo_surface_wrapper_get_font_options (&surface->master, options);
  }
- 
+
 +static const cairo_pattern_t *
 +_cairo_tee_surface_match_source (cairo_tee_surface_t *surface,
 +                                 const cairo_pattern_t *source,
@@ -56,7 +56,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
      cairo_status_t status;
 +    const cairo_pattern_t *matched_source;
 +    cairo_surface_pattern_t temp;
- 
+
 -    status = _cairo_surface_wrapper_paint (&surface->master, op, source, clip);
 +    matched_source = _cairo_tee_surface_match_source (surface, source, 0, &surface->master, &temp);
 +    status = _cairo_surface_wrapper_paint (&surface->master, op, matched_source, clip);
@@ -65,7 +65,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
 +    }
      if (unlikely (status))
  	return status;
- 
+
      num_slaves = _cairo_array_num_elements (&surface->slaves);
      slaves = _cairo_array_index (&surface->slaves, 0);
      for (n = 0; n < num_slaves; n++) {
@@ -78,10 +78,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
  	if (unlikely (status))
  	    return status;
      }
- 
+
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
  static cairo_int_status_t
 @@ -223,27 +260,37 @@ _cairo_tee_surface_mask (void			*abstrac
  			 const cairo_pattern_t	*source,
@@ -94,7 +94,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
      cairo_status_t status;
 +    const cairo_pattern_t *matched_source;
 +    cairo_surface_pattern_t temp;
- 
+
 +    matched_source = _cairo_tee_surface_match_source (surface, source, 0, &surface->master, &temp);
      status = _cairo_surface_wrapper_mask (&surface->master,
 -					  op, source, mask, clip);
@@ -104,7 +104,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
 +    }
      if (unlikely (status))
  	return status;
- 
+
      num_slaves = _cairo_array_num_elements (&surface->slaves);
      slaves = _cairo_array_index (&surface->slaves, 0);
      for (n = 0; n < num_slaves; n++) {
@@ -118,10 +118,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
  	if (unlikely (status))
  	    return status;
      }
- 
+
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
  static cairo_int_status_t
 @@ -257,35 +304,45 @@ _cairo_tee_surface_stroke (void				*abst
  			   double			 tolerance,
@@ -134,7 +134,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
      cairo_status_t status;
 +    const cairo_pattern_t *matched_source;
 +    cairo_surface_pattern_t temp;
- 
+
 +    matched_source = _cairo_tee_surface_match_source (surface, source, 0, &surface->master, &temp);
      status = _cairo_surface_wrapper_stroke (&surface->master,
 -					    op, source,
@@ -148,7 +148,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
 +    }
      if (unlikely (status))
  	return status;
- 
+
      num_slaves = _cairo_array_num_elements (&surface->slaves);
      slaves = _cairo_array_index (&surface->slaves, 0);
      for (n = 0; n < num_slaves; n++) {
@@ -166,10 +166,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
  	if (unlikely (status))
  	    return status;
      }
- 
+
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
  static cairo_int_status_t
 @@ -297,33 +354,43 @@ _cairo_tee_surface_fill (void				*abstra
  			 double				 tolerance,
@@ -182,7 +182,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
      cairo_status_t status;
 +    const cairo_pattern_t *matched_source;
 +    cairo_surface_pattern_t temp;
- 
+
 +    matched_source = _cairo_tee_surface_match_source (surface, source, 0, &surface->master, &temp);
      status = _cairo_surface_wrapper_fill (&surface->master,
 -					  op, source,
@@ -195,7 +195,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
 +    }
      if (unlikely (status))
  	return status;
- 
+
      num_slaves = _cairo_array_num_elements (&surface->slaves);
      slaves = _cairo_array_index (&surface->slaves, 0);
      for (n = 0; n < num_slaves; n++) {
@@ -212,10 +212,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
  	if (unlikely (status))
  	    return status;
      }
- 
+
      return CAIRO_STATUS_SUCCESS;
  }
- 
+
  static cairo_bool_t
 @@ -346,46 +413,56 @@ _cairo_tee_surface_show_text_glyphs (voi
  				     cairo_scaled_font_t    *scaled_font,
@@ -228,12 +228,12 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
      cairo_glyph_t *glyphs_copy;
 +    const cairo_pattern_t *matched_source;
 +    cairo_surface_pattern_t temp;
- 
+
      /* XXX: This copying is ugly. */
      glyphs_copy = _cairo_malloc_ab (num_glyphs, sizeof (cairo_glyph_t));
      if (unlikely (glyphs_copy == NULL))
  	return _cairo_error (CAIRO_STATUS_NO_MEMORY);
- 
+
      memcpy (glyphs_copy, glyphs, sizeof (cairo_glyph_t) * num_glyphs);
 +    matched_source = _cairo_tee_surface_match_source (surface, source, 0, &surface->master, &temp);
      status = _cairo_surface_wrapper_show_text_glyphs (&surface->master, op,
@@ -250,7 +250,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
 +    }
      if (unlikely (status))
  	goto CLEANUP;
- 
+
      num_slaves = _cairo_array_num_elements (&surface->slaves);
      slaves = _cairo_array_index (&surface->slaves, 0);
      for (n = 0; n < num_slaves; n++) {
@@ -271,7 +271,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-tee-surface.c b/gfx/cairo/cairo/src/cairo
  	if (unlikely (status))
  	    goto CLEANUP;
      }
- 
+
    CLEANUP:
      free (glyphs_copy);
      return status;

@@ -124,7 +124,7 @@ XSLT stylesheet to convert widlprocxml into html documentation.
 
         <h2>Summary of Methods</h2>
         <xsl:call-template name="summary"/>
-        
+
         <h2 id="intro">Introduction</h2>
 
         <xsl:apply-templates select="descriptive/description"/>
@@ -574,7 +574,7 @@ XSLT stylesheet to convert widlprocxml into html documentation.
 	    </xsl:if>
 	    <xsl:if test="@stringvalue">
 	      <xsl:text>Default value: "</xsl:text><xsl:value-of select="@stringvalue"/><xsl:text>"</xsl:text>
-	    </xsl:if>	    
+	    </xsl:if>
         </xsl:when>
         <xsl:otherwise>
             <!--$nodesc is false: output the documentation-->

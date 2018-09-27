@@ -235,7 +235,7 @@ pkix_pl_AIAMgr_GetHTTPCerts(
 	const SEC_HttpClientFcnV1 *hcv1 = NULL;
 	SECStatus rv = SECFailure;
 	SEC_HTTP_SERVER_SESSION serverSession = NULL;
-	SEC_HTTP_REQUEST_SESSION requestSession = NULL;	
+	SEC_HTTP_REQUEST_SESSION requestSession = NULL;
 	char *path = NULL;
 	char *hostname = NULL;
 	char *locationAscii = NULL;
@@ -290,7 +290,7 @@ pkix_pl_AIAMgr_GetHTTPCerts(
 				PKIX_ERROR(PKIX_URLPARSINGFAILED);
 			}
 
-                        rv = (*hcv1->createSessionFcn)(hostname, port, 
+                        rv = (*hcv1->createSessionFcn)(hostname, port,
                                                        &serverSession);
 	                if (rv != SECSuccess) {
 				PKIX_ERROR(PKIX_HTTPCLIENTCREATESESSIONFAILED);
@@ -315,7 +315,7 @@ pkix_pl_AIAMgr_GetHTTPCerts(
 	httpClient = aiaMgr->client.hdata.httpClient;
 
 	if (httpClient->version == 1) {
-                PRUint32 responseDataLen = 
+                PRUint32 responseDataLen =
                    ((PKIX_PL_NssContext*)plContext)->maxResponseLength;
 
 		hcv1 = &(httpClient->fcnTable.ftable1);
@@ -347,7 +347,7 @@ pkix_pl_AIAMgr_GetHTTPCerts(
 	                pCerts,
 	                plContext),
 	                PKIX_HTTPCERTSTOREPROCESSCERTRESPONSEFAILED);
-                
+
                 /* Session and request cleanup in case of success */
                 if (aiaMgr->client.hdata.requestSession != NULL) {
                     (*hcv1->freeFcn)(aiaMgr->client.hdata.requestSession);
@@ -631,7 +631,7 @@ PKIX_PL_AIAMgr_GetAIACerts(
                     PKIX_DECREF(ia);
                     continue;
                 }
-                
+
                 PKIX_CHECK(PKIX_PL_InfoAccess_GetLocationType
                         (ia, &iaType, plContext),
                         PKIX_INFOACCESSGETLOCATIONTYPEFAILED);

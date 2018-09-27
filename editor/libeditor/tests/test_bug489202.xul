@@ -48,7 +48,7 @@ function runTest() {
   window.docShell
      .rootTreeItem
      .QueryInterface(Ci.nsIDocShell)
-     .appType = Ci.nsIDocShell.APP_TYPE_EDITOR; 
+     .appType = Ci.nsIDocShell.APP_TYPE_EDITOR;
   var e = document.getElementById('i1');
   var doc = e.contentDocument;
   doc.designMode = "on";

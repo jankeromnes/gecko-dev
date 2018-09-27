@@ -27,7 +27,7 @@
  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
 <title>Kraken JavaScript Benchmark (kraken-1.1 test suite - In Progress...)</title>
@@ -100,18 +100,18 @@ function completeSquare() {
     }
 }
 
-function start() 
+function start()
 {
     initSquares();
     window.setTimeout(reallyNext, 500);
 }
 
-function next() 
+function next()
 {
     window.setTimeout(reallyNext, 10);
 }
 
-function reallyNext() 
+function reallyNext()
 {
     completeSquare();
     document.getElementById("frameparent").innerHTML = "";
@@ -127,7 +127,7 @@ function reallyNext()
         testFrame.contentDocument.open();
         testFrame.contentDocument.write(test_data);
         testFrame.contentDocument.close;
-    } else if (++currentRepeat < repeatCount) { 
+    } else if (++currentRepeat < repeatCount) {
         testIndex = 0;
         if (param_index < 0) {
             test_data = testContents[testIndex];

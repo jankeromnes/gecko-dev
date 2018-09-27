@@ -57,7 +57,7 @@ function run1()
     var first = doc.getElementById("first");
     var second = doc.getElementById("second");
     var third = doc.getElementById("third");
-  
+
     first.setAttribute("systemLanguage", "fr");
 
     /* test for an exact match */
@@ -75,7 +75,7 @@ function run1()
     /* test that we use the default if nothing matches */
     second.setAttribute("systemLanguage", "fr");
     checkWidth(s, 80);
-    
+
     /* test we still ignore non-matches */
     second.removeAttribute("systemLanguage");
     third.setAttribute("systemLanguage", "fr");

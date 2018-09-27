@@ -13,7 +13,7 @@
 <ldml>
     <identity>
         <version number="$Revision$"/>
-        <language type="fi"/> 
+        <language type="fi"/>
     </identity>
     <special xmlns:icu="http://www.icu-project.org/">
         <icu:breakIteratorData>

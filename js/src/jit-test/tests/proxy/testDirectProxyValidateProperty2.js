@@ -10,7 +10,7 @@ Object.defineProperty(target, 'foo', {
     enumerable: true
 });
 var caught = false;
-assertThrowsInstanceOf(function () { 
+assertThrowsInstanceOf(function () {
     Object.getOwnPropertyDescriptor(new Proxy(target, {
         getOwnPropertyDescriptor: function (target, name) {
             return {
@@ -27,7 +27,7 @@ Object.defineProperty(target, 'foo', {
     enumerable: false
 });
 var caught = false;
-assertThrowsInstanceOf(function () { 
+assertThrowsInstanceOf(function () {
     Object.getOwnPropertyDescriptor(new Proxy(target, {
         getOwnPropertyDescriptor: function (target, name) {
             return {

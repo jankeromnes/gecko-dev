@@ -78,9 +78,9 @@ pkix_ResourceLimits_Equals(
         cmpResult = (firstRLimits->maxTime == secondRLimits->maxTime) &&
                     (firstRLimits->maxFanout == secondRLimits->maxFanout) &&
                     (firstRLimits->maxDepth == secondRLimits->maxDepth) &&
-                    (firstRLimits->maxCertsNumber == 
+                    (firstRLimits->maxCertsNumber ==
                         secondRLimits->maxCertsNumber) &&
-                    (firstRLimits->maxCrlsNumber == 
+                    (firstRLimits->maxCrlsNumber ==
                         secondRLimits->maxCrlsNumber);
 
         *pResult = cmpResult;

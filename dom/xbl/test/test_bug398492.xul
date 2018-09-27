@@ -25,7 +25,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=398492
   </body>
 
   <hbox id="testbox" style="-moz-binding: url(#test)">Text</hbox>
-  
+
   <!-- test code goes here -->
   <script type="application/javascript"><![CDATA[
 
@@ -66,16 +66,16 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=398492
          "Must be a XUL element after addBinding");
       is(anonKid3, getXBLParent(kid3),
          "Unexpected anonymous nodes after addBinding");
-      
+
 
       n.removeChild(kid);
       isnot(anonKid, getXBLParent(kid),
             "Should have removed kid from insertion point");
-    
+
       n3.removeChild(kid3);
       isnot(anonKid3, getXBLParent(kid3),
             "Should have removed kid3 from insertion point");
-    
+
       SimpleTest.finish();
     });
 

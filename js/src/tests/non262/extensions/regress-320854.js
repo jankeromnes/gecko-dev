@@ -16,5 +16,5 @@ var o = {__proto__:function(){}};
 
 expect = false;
 actual = o.hasOwnProperty('length')
- 
+
   reportCompare(expect, actual, summary);

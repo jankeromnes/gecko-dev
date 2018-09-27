@@ -37,13 +37,13 @@ function setUpPage() {
        setImplementationAttribute("namespaceAware", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,8 +73,8 @@ var docName = 'namednodemapremovenameditemns05';
 
 
 /**
-* 
-	Retreive an entity and notation node and remove the first notation from the 
+*
+	Retreive an entity and notation node and remove the first notation from the
 	entity node map and first entity node from the notation map.  Since both these
 	maps are readonly, a NO_MODIFICATION_ALLOWED_ERR should be raised.
 
@@ -95,7 +95,7 @@ function namednodemapremovenameditemns05() {
       var removedNode;
       var nullNS = null;
 
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -113,9 +113,9 @@ notations = docType.notations;
       try {
       removedNode = entities.removeNamedItemNS(nullNS,"ent1");
       fail("entity_throw_DOMException");
-     
+
       } catch (ex) {
-		  if (typeof(ex.code) != 'undefined') {      
+		  if (typeof(ex.code) != 'undefined') {
        switch(ex.code) {
        case /* NOT_FOUND_ERR */ 8 :
        break;
@@ -124,17 +124,17 @@ notations = docType.notations;
           default:
           throw ex;
           }
-       } else { 
+       } else {
        throw ex;
         }
          }
-        
+
       try {
       removedNode = notations.removeNamedItemNS(nullNS,"notation1");
       fail("notation_throw_DOMException");
-     
+
       } catch (ex) {
-		  if (typeof(ex.code) != 'undefined') {      
+		  if (typeof(ex.code) != 'undefined') {
        switch(ex.code) {
        case /* NOT_FOUND_ERR */ 8 :
        break;
@@ -143,11 +143,11 @@ notations = docType.notations;
           default:
           throw ex;
           }
-       } else { 
+       } else {
        throw ex;
         }
          }
-        
+
 }
 
 </script>
@@ -156,12 +156,12 @@ notations = docType.notations;
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapremovenameditemns05</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

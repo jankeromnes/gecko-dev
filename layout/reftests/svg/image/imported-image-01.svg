@@ -8,5 +8,5 @@
       document.documentElement.appendChild(doc.documentElement.firstChild);
     ]]>
   </script>
-  
+
 </svg>

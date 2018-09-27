@@ -232,7 +232,7 @@ LookupCatalogData(const char16_t* aPublicID)
   return nullptr;
 }
 
-// This function provides a resource URI to a local DTD 
+// This function provides a resource URI to a local DTD
 // in resource://gre/res/dtd/ which may or may not exist.
 // If aCatalogData is provided, it is used to remap the
 // DTD instead of taking the filename from the URI.
@@ -532,7 +532,7 @@ nsExpatDriver::HandleEndDoctypeDecl()
                                            mSystemID, mPublicID, data);
     MaybeStopParser(rv);
   }
-  
+
   mInternalSubset.Truncate();
 
   return NS_OK;
@@ -835,9 +835,9 @@ nsExpatDriver::HandleError()
   bool shouldReportError = NS_SUCCEEDED(rv);
 
   if (mSink && shouldReportError) {
-    rv = mSink->ReportError(errorText.get(), 
-                            sourceText.get(), 
-                            serr, 
+    rv = mSink->ReportError(errorText.get(),
+                            sourceText.get(),
+                            serr,
                             &shouldReportError);
     if (NS_FAILED(rv)) {
       shouldReportError = true;
@@ -853,7 +853,7 @@ nsExpatDriver::HandleError()
 
   if (shouldReportError) {
     nsCOMPtr<nsIConsoleService> cs
-      (do_GetService(NS_CONSOLESERVICE_CONTRACTID));  
+      (do_GetService(NS_CONSOLESERVICE_CONTRACTID));
     if (cs) {
       cs->LogMessage(serr);
     }
@@ -904,7 +904,7 @@ nsExpatDriver::ParseBuffer(const char16_t *aBuffer,
     NS_ASSERTION(*aConsumed <= aLength + mExpatBuffered,
                  "Too many bytes consumed?");
 
-    NS_ASSERTION(status != XML_STATUS_SUSPENDED || BlockedOrInterrupted(), 
+    NS_ASSERTION(status != XML_STATUS_SUSPENDED || BlockedOrInterrupted(),
                  "Inconsistent expat suspension state.");
 
     if (status == XML_STATUS_ERROR) {
@@ -1144,7 +1144,7 @@ nsExpatDriver::WillBuildModel(const CParserContext& aParserContext,
   }
 
   // Set up the callbacks
-  XML_SetXmlDeclHandler(mExpatParser, Driver_HandleXMLDeclaration); 
+  XML_SetXmlDeclHandler(mExpatParser, Driver_HandleXMLDeclaration);
   XML_SetElementHandler(mExpatParser, Driver_HandleStartElement,
                         Driver_HandleEndElement);
   XML_SetCharacterDataHandler(mExpatParser, Driver_HandleCharacterData);

@@ -33,7 +33,7 @@ interface PPB_IsolatedFileSystem_Private {
    * Open() opens a file system corresponding the given file system type.
    *
    * When opening the CRX file system, this should be called from an extension
-   * context, otherwise it will fail. 
+   * context, otherwise it will fail.
    *
    * @param[in] instance A <code>PP_Instance</code> identifying the instance
    * with the file system.

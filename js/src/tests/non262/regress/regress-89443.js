@@ -83,7 +83,7 @@ function FindProxyForURL(url, host)
 	   || dnsDomainIs(host, ".searchopolis.com")
 	   || dnsDomainIs(host, ".onekey.com")
 	   || dnsDomainIs(host, ".askjeeves.com")
- 
+
 //  Non-subscription Reference Tools URLs from the RecWebSites DBData table
 	   || dnsDomainIs(host, "www.cnn.com")
 	   || dnsDomainIs(host, "www.emulateme.com")
@@ -105,7 +105,7 @@ function FindProxyForURL(url, host)
 	   || dnsDomainIs(host, "www.homeworkcentral.com")
 	   || dnsDomainIs(host, "www.studyweb.com")
 	   || dnsDomainIs(host, "www.mnpro.com")
- 
+
 //  custom URLs for local and other access
 	   || dnsDomainIs(host, ".dsdukes.com")
 	   || dnsDomainIs(host, ".spsaints.com")

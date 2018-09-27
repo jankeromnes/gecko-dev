@@ -67,7 +67,7 @@ function redirect(metadata, response) {
       failed = true;
       return pac(metadata, response);
    }
-  
+
   called = true;
   response.setStatusLine(metadata.httpVersion, 302, "Found");
   response.setHeader("Location", "/pac", false);

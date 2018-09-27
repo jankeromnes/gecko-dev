@@ -3,23 +3,23 @@
 
 signatureValid=yes</pre></div><div class="refsection"><a name="idm233261087840"></a><h3>Printing Signature Data</h3><p>
 			The <code class="option">-A</code> option prints all of the information contained in a signature file. Using the <code class="option">-o</code> option prints the signature file information to the given output file rather than stdout.
-		</p><pre class="programlisting">signver -A -s <em class="replaceable"><code>signature_file</code></em> -o <em class="replaceable"><code>output_file</code></em></pre></div></div><div class="refsection"><a name="databases"></a><h2>NSS Database Types</h2><p>NSS originally used BerkeleyDB databases to store security information. 
+		</p><pre class="programlisting">signver -A -s <em class="replaceable"><code>signature_file</code></em> -o <em class="replaceable"><code>output_file</code></em></pre></div></div><div class="refsection"><a name="databases"></a><h2>NSS Database Types</h2><p>NSS originally used BerkeleyDB databases to store security information.
 The last versions of these <span class="emphasis"><em>legacy</em></span> databases are:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
 			cert8.db for certificates
 		</p></li><li class="listitem"><p>
 			key3.db for keys
 		</p></li><li class="listitem"><p>
 			secmod.db for PKCS #11 module information
-		</p></li></ul></div><p>BerkeleyDB has performance limitations, though, which prevent it from being easily used by multiple applications simultaneously. NSS has 
+		</p></li></ul></div><p>BerkeleyDB has performance limitations, though, which prevent it from being easily used by multiple applications simultaneously. NSS has
 some flexibility that allows applications to use their own, independent database engine while keeping a shared database and working around the access issues. Still, NSS
-requires more flexibility to provide a truly shared security database.</p><p>In 2009, NSS introduced a new set of databases that are SQLite databases rather than 
+requires more flexibility to provide a truly shared security database.</p><p>In 2009, NSS introduced a new set of databases that are SQLite databases rather than
 BerkleyDB. These new databases provide more accessibility and performance:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
 			cert9.db for certificates
 		</p></li><li class="listitem"><p>
 			key4.db for keys
 		</p></li><li class="listitem"><p>
 			pkcs11.txt, which is listing of all of the PKCS #11 modules contained in a new subdirectory in the security databases directory
-		</p></li></ul></div><p>Because the SQLite databases are designed to be shared, these are the <span class="emphasis"><em>shared</em></span> database type. The shared database type is preferred; the legacy format is included for backward compatibility.</p><p>By default, the tools (<span class="command"><strong>certutil</strong></span>, <span class="command"><strong>pk12util</strong></span>, <span class="command"><strong>modutil</strong></span>) assume that the given security databases follow the more common legacy type. 
+		</p></li></ul></div><p>Because the SQLite databases are designed to be shared, these are the <span class="emphasis"><em>shared</em></span> database type. The shared database type is preferred; the legacy format is included for backward compatibility.</p><p>By default, the tools (<span class="command"><strong>certutil</strong></span>, <span class="command"><strong>pk12util</strong></span>, <span class="command"><strong>modutil</strong></span>) assume that the given security databases follow the more common legacy type.
 Using the SQLite databases must be manually specified by using the <span class="command"><strong>sql:</strong></span> prefix with the given security directory. For example:</p><pre class="programlisting"># signver -A -s <em class="replaceable"><code>signature</code></em> -d sql:/home/my/sharednssdb</pre><p>To set the shared database type as the default type for the tools, set the <code class="envar">NSS_DEFAULT_DB_TYPE</code> environment variable to <code class="envar">sql</code>:</p><pre class="programlisting">export NSS_DEFAULT_DB_TYPE="sql"</pre><p>This line can be added to the <code class="filename">~/.bashrc</code> file to make the change permanent for the user.</p><p>Most applications do not use the shared database by default, but they can be configured to use them. For example, this how-to article covers how to configure Firefox and Thunderbird to use the new shared NSS databases:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
 			https://wiki.mozilla.org/NSS_Shared_DB_Howto</p></li></ul></div><p>For an engineering draft on the changes in the shared NSS databases, see the NSS project wiki:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
 			https://wiki.mozilla.org/NSS_Shared_DB

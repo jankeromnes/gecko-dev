@@ -234,7 +234,7 @@ function doTest()
 // When xaltsvc is set to h2Route (i.e. :port with the implied hostname) it doesn't match the alt-used,
 // which is always explicit, so it needs to be changed after the channel is created but before the
 // listener is invoked
-    
+
 // http://foo served from h2=:port
 function doTest1()
 {

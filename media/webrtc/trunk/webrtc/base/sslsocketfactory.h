@@ -43,7 +43,7 @@ class SslSocketFactory : public SocketFactory {
   void SetIgnoreBadCert(bool ignore) { ignore_bad_cert_ = ignore; }
   bool ignore_bad_cert() const { return ignore_bad_cert_; }
 
-  void SetLogging(LoggingSeverity level, const std::string& label, 
+  void SetLogging(LoggingSeverity level, const std::string& label,
                   bool binary_mode = false) {
     logging_level_ = level;
     logging_label_ = label;

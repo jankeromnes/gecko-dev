@@ -149,19 +149,19 @@ pkix_pl_Socket_CreateByHostAndPort(
  *              PKIX_PL_Socket *socket,
  *              PKIX_UInt32 backlog,
  *              void *plContext);
- *      
+ *
  *      static PKIX_Error *
  *      pkix_pl_Socket_Accept(
  *              PKIX_PL_Socket *socket,
  *              PKIX_PL_Socket **pRendezvousSock,
  *              void *plContext);
- *      
+ *
  *      static PKIX_Error *
  *      pkix_pl_Socket_ConnectContinue(
  *              PKIX_PL_Socket *socket,
  *              PRErrorCode *pStatus,
  *              void *plContext);
- *      
+ *
  *      static PKIX_Error *
  *      pkix_pl_Socket_Send(
  *              PKIX_PL_Socket *sendSock,
@@ -169,7 +169,7 @@ pkix_pl_Socket_CreateByHostAndPort(
  *              PKIX_UInt32 bytesToWrite,
  *              PKIX_Int32 *pBytesWritten,
  *              void *plContext);
- *      
+ *
  *      static PKIX_Error *
  *      pkix_pl_Socket_Recv(
  *              PKIX_PL_Socket *rcvSock,
@@ -177,14 +177,14 @@ pkix_pl_Socket_CreateByHostAndPort(
  *              PKIX_UInt32 capacity,
  *              PKIX_Int32 *pBytesRead,
  *              void *plContext);
- *      
+ *
  *      static PKIX_Error *
  *      pkix_pl_Socket_Poll(
  *              PKIX_PL_Socket *sock,
  *              PKIX_Int32 *pBytesWritten,
  *              PKIX_Int32 *pBytesRead,
  *              void *plContext);
- *      
+ *
  *      static PKIX_Error *
  *      pkix_pl_Socket_Shutdown(
  *              PKIX_PL_Socket *socket, void *plContext);

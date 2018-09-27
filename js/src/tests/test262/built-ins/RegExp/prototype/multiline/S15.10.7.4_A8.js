@@ -24,7 +24,7 @@ if (__re.propertyIsEnumerable('multiline') !== false) {
  //CHECK#2
 var count = 0
 for (var p in __re){
-  if (p==="multiline") count++   
+  if (p==="multiline") count++
 }
 
 if (count !== 0) {

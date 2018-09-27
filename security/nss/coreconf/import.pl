@@ -35,7 +35,7 @@ foreach $import (split(/ /,$var{IMPORTS}) ) {
     if ($import =~ /\//) {
         # $component=everything before the first slash of $import
 
-	$import =~ m|^([^/]*)/|; 
+	$import =~ m|^([^/]*)/|;
 	$component = $1;
 
 	$import =~ m|^(.*)/([^/]*)$|;
@@ -59,7 +59,7 @@ foreach $import (split(/ /,$var{IMPORTS}) ) {
     $releasejardir = "$var{RELEASE_TREE}/$path";
     if ($version eq "current") {
 	print STDERR "Current version specified. Reading 'current' file ... \n";
-	
+
 	open(CURRENT,"$releasejardir/current") || die "NO CURRENT FILE\n";
 	$version = <CURRENT>;
 	$version =~ s/(\r?\n)*$//; # remove any trailing [CR/]LF's
@@ -69,7 +69,7 @@ foreach $import (split(/ /,$var{IMPORTS}) ) {
 	    die "Current version file empty. Stopping\n";
 	}
     }
-    
+
     $releasejardir = "$releasejardir/$version";
     if ( ! -d $releasejardir) {
 	die "$releasejardir doesn't exist (Invalid Version?)\n";
@@ -98,15 +98,15 @@ foreach $import (split(/ /,$var{IMPORTS}) ) {
 
 	if (-e "$releasejarpathname/$jarfile") {
 	    print STDERR "\nWorking on jarfile: $jarfile\n";
-	    
+
 	    if ($distpath =~ m|/$|) {
 		$distpathname = "$distpath$component";
 	    }
 	    else {
-		$distpathname = "$distpath"; 
+		$distpathname = "$distpath";
 	    }
-	  
-	  
+
+
 #the block below is used to determine whether or not the xp headers have
 #already been imported for this component
 
@@ -125,14 +125,14 @@ foreach $import (split(/ /,$var{IMPORTS}) ) {
 		  }
 	      }
 	  }
-	  
+
 	  if ($doimport == 1) {
 	      if (! -d "$distpathname") {
 		  &rec_mkdir("$distpathname");
 	      }
 	      # delete the stuff in there already.
 	      # (this should really be recursive delete.)
-	      
+
 	      if ($options =~ /v/) {
 		  $remheader = "\nREMOVING files in '$distpathname/' :";
 		  opendir(DIR,"$distpathname") ||
@@ -155,10 +155,10 @@ foreach $import (split(/ /,$var{IMPORTS}) ) {
 	      print STDERR "\n\n";
 
 	      print STDERR "\nExtracting jarfile '$jarfile' to local directory $distpathname/\n";
-	      
+
 	      print STDERR "$var{UNZIP} $releasejarpathname/$jarfile -d $distpathname\n";
 	      system("$var{UNZIP} $releasejarpathname/$jarfile -d $distpathname");
-	      
+
 	      $r = $?;
 
 	      if ($options =~ /v/) {

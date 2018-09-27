@@ -1062,15 +1062,15 @@ void MacroAssembler::AddSubMacro(const Register& rd,
       // extend encoding.
       if (rd.IsSP()) {
         // If the destination is SP and flags will be set, we can't pre-shift
-        // the immediate at all. 
+        // the immediate at all.
         mode = (S == SetFlags) ? kNoShift : kLimitShiftForSP;
       } else if (rn.IsSP()) {
         mode = kLimitShiftForSP;
-      } 
+      }
 
       Operand imm_operand =
           MoveImmediateForShiftedOp(temp, operand.immediate(), mode);
-      AddSub(rd, rn, imm_operand, S, op); 
+      AddSub(rd, rn, imm_operand, S, op);
     } else {
       Mov(temp, operand);
       AddSub(rd, rn, temp, S, op);

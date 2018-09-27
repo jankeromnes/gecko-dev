@@ -33,7 +33,7 @@ U_NAMESPACE_USE
 //|         TESTCASE(0,TestSomething);
 //|         TESTCASE(1,TestSomethingElse);
 //|         TESTCASE(2,TestAnotherThing);
-//|         default: 
+//|         default:
 //|             name = "";
 //|             break;
 //|     }
@@ -119,7 +119,7 @@ public:
      */
      virtual double time(int32_t n, UErrorCode* status) {
         UTimer start, stop;
-        utimer_getTime(&start); 
+        utimer_getTime(&start);
         while (n-- > 0) {
             call(status);
         }
@@ -134,15 +134,15 @@ class T_CTEST_EXPORT_API UPerfTest {
 public:
     UBool run();
     UBool runTest( char* name = NULL, char* par = NULL ); // not to be overidden
-        
+
     virtual void usage( void ) ;
-    
+
     virtual ~UPerfTest();
 
     void setCaller( UPerfTest* callingTest ); // for internal use only
-    
+
     void setPath( char* path ); // for internal use only
-    
+
     ULine* getLines(UErrorCode& status);
 
     const UChar* getBuffer(int32_t& len,UErrorCode& status);

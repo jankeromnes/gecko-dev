@@ -76,7 +76,7 @@ class NewSocketPool : public StreamPool {
 public:
   NewSocketPool(SocketFactory* factory);
   ~NewSocketPool() override;
-  
+
   // StreamPool Interface
   StreamInterface* RequestConnectedStream(const SocketAddress& remote,
                                           int* err) override;

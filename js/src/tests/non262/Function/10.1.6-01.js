@@ -25,5 +25,5 @@ for (p in f)
   actual += p + ',';
 }
 expect = '';
- 
+
 reportCompare(expect, actual, summary);

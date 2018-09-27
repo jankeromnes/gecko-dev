@@ -51,7 +51,7 @@
 
     <para>The Signature Verification Tool, <command>signver</command>, is a simple command-line utility that unpacks a base-64-encoded PKCS#7 signed object and verifies the digital signature using standard cryptographic techniques. The Signature Verification Tool can also display the contents of the signed object.</para>
   </refsection>
-  
+
   <refsection id="options">
     <title>Options</title>
     <variablelist>
@@ -109,7 +109,7 @@ signatureValid=yes</programlisting>
   </refsection>
 
 <refsection id="databases"><title>NSS Database Types</title>
-<para>NSS originally used BerkeleyDB databases to store security information. 
+<para>NSS originally used BerkeleyDB databases to store security information.
 The last versions of these <emphasis>legacy</emphasis> databases are:</para>
 <itemizedlist>
 	<listitem>
@@ -129,11 +129,11 @@ The last versions of these <emphasis>legacy</emphasis> databases are:</para>
 	</listitem>
 </itemizedlist>
 
-<para>BerkeleyDB has performance limitations, though, which prevent it from being easily used by multiple applications simultaneously. NSS has 
+<para>BerkeleyDB has performance limitations, though, which prevent it from being easily used by multiple applications simultaneously. NSS has
 some flexibility that allows applications to use their own, independent database engine while keeping a shared database and working around the access issues. Still, NSS
 requires more flexibility to provide a truly shared security database.</para>
 
-<para>In 2009, NSS introduced a new set of databases that are SQLite databases rather than 
+<para>In 2009, NSS introduced a new set of databases that are SQLite databases rather than
 BerkleyDB. These new databases provide more accessibility and performance:</para>
 <itemizedlist>
 	<listitem>
@@ -155,7 +155,7 @@ BerkleyDB. These new databases provide more accessibility and performance:</para
 
 <para>Because the SQLite databases are designed to be shared, these are the <emphasis>shared</emphasis> database type. The shared database type is preferred; the legacy format is included for backward compatibility.</para>
 
-<para>By default, the tools (<command>certutil</command>, <command>pk12util</command>, <command>modutil</command>) assume that the given security databases follow the more common legacy type. 
+<para>By default, the tools (<command>certutil</command>, <command>pk12util</command>, <command>modutil</command>) assume that the given security databases follow the more common legacy type.
 Using the SQLite databases must be manually specified by using the <command>sql:</command> prefix with the given security directory. For example:</para>
 
 <programlisting># signver -A -s <replaceable>signature</replaceable> -d sql:/home/my/sharednssdb</programlisting>

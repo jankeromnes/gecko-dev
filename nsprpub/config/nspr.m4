@@ -70,7 +70,7 @@ AC_ARG_WITH(nspr-exec-prefix,
 
 	if test -z "$no_nspr"; then
 		AC_MSG_RESULT(yes)
-		ifelse([$2], , :, [$2])     
+		ifelse([$2], , :, [$2])
 	else
 		AC_MSG_RESULT(no)
 	fi

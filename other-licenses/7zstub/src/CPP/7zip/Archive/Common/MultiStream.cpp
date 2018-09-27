@@ -31,7 +31,7 @@ STDMETHODIMP CMultiStream::Read(void *data, UInt32 size, UInt32 *processedSize)
     }
     _streamIndex = mid;
   }
-  
+
   CSubStreamInfo &s = Streams[_streamIndex];
   UInt64 localPos = _pos - s.GlobalOffset;
   if (localPos != s.LocalPos)
@@ -48,7 +48,7 @@ STDMETHODIMP CMultiStream::Read(void *data, UInt32 size, UInt32 *processedSize)
     *processedSize = size;
   return result;
 }
-  
+
 STDMETHODIMP CMultiStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition)
 {
   switch (seekOrigin)
@@ -91,12 +91,12 @@ public:
     _file.Name = name;
     _file.IsStartPosDefined = true;
     _file.StartPos = 0;
-    
+
     VolumeCallback = volumeCallback;
     _volIndex = 0;
     _volSize = 0;
   }
-  
+
   HRESULT Flush();
   STDMETHOD(Write)(const void *data, UInt32 size, UInt32 *processedSize);
 };

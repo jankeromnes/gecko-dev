@@ -10,8 +10,8 @@ description: "Checking if execution of \"{ \\n a: \\n 1 \\n } \\n 3\" passes"
 //CHECK#1
 {
 a:
-1 
-} 
+1
+}
 3
 
 reportCompare(0, 0);

@@ -121,7 +121,7 @@ function test() {
 
     // Self-modifying object.
     // This should never read through to b's prototype.
-    b = Object.create({y: 2}, 
+    b = Object.create({y: 2},
                       {x: {enumerable: true,
                            configurable: true,
                            get: function() { if (this.hasOwnProperty("y")) delete this.y; return 1; }},

@@ -1,4 +1,4 @@
-The source from this directory was copied from the vorbis 
+The source from this directory was copied from the vorbis
 git repository using the update.sh script. The only changes
 made were those applied by update.sh and the addition/update of
 Makefile.in and moz.build files for the Mozilla build system.

@@ -10,12 +10,12 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/broker_services.cc b/secu
 --- a/security/sandbox/chromium/sandbox/win/src/broker_services.cc
 +++ b/security/sandbox/chromium/sandbox/win/src/broker_services.cc
 @@ -346,16 +346,20 @@ ResultCode BrokerServicesBase::SpawnTarg
- 
+
    base::win::ScopedHandle job;
    result = policy_base->MakeJobObject(&job);
    if (SBOX_ALL_OK != result)
      return result;
- 
+
    // Initialize the startup information from the policy.
    base::win::StartupInformation startup_info;
 +

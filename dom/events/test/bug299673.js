@@ -6,14 +6,14 @@ log({},">>> OpenWindow");
 	popup = window.open("","Test");
 
 	var output = "<html>";
-	
+
 	output+="<body>";
 	output+="<form>"
 	output+="<input id='popupText1' type='text' onfocus='opener.log(event)' onblur='opener.log(event)'>";
 	output+="</form>"
 	output+="</body>";
 	output+="</html>";
-	
+
 	popup.document.open();
 	popup.document.write(output);
 	popup.document.close();

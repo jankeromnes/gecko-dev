@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" 
+<svg xmlns="http://www.w3.org/2000/svg"
      xmlns:html="http://www.w3.org/1999/xhtml"
      onload="setTimeout(boom, 30);"
      class="reftest-wait">
@@ -8,12 +8,12 @@
 function boom()
 {
   document.getElementById("text").appendChild(document.getElementById("fo"));
-  
+
   document.documentElement.removeAttribute("class");
 }
 
 </html:script>
-  
+
 <defs>
   <marker>
     <text id="text">svg:text</text>

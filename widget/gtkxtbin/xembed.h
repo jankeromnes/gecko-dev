@@ -1,6 +1,6 @@
 /* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*-
  * vim: set expandtab shiftwidth=2 tabstop=2: */
- 
+
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
@@ -20,7 +20,7 @@
 #define XEMBED_MODALITY_OFF             11
 
 /* Non standard messages*/
-#define XEMBED_GTK_GRAB_KEY             108 
+#define XEMBED_GTK_GRAB_KEY             108
 #define XEMBED_GTK_UNGRAB_KEY           109
 
 /* Details for  XEMBED_FOCUS_IN: */

@@ -27,7 +27,7 @@ my($gb18030_ver);
 
 package genverifier;
 @gb18030_st = (
-#  0  1  2  3  4  5  6 
+#  0  1  2  3  4  5  6
    1, 0, 0, 0, 0, 0, 3, # state 0
    1, 1, 1, 1, 1, 1, 1, # Error State - 1
    2, 2, 2, 2, 2, 2, 2, # ItsMe State - 2

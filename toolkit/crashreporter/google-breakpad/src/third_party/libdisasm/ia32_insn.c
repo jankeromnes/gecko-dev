@@ -22,7 +22,7 @@ extern ia32_settings_t ia32_settings;
 #define IS_IMM( op ) (op->type == op_immediate )
 
 #ifdef WIN32
-#  define INLINE 
+#  define INLINE
 #else
 #  define INLINE inline
 #endif
@@ -50,7 +50,7 @@ static INLINE int32_t long_from_operand( x86_op_t *op ) {
 
 	return 0L;
 }
-		
+
 
 /* determine what this insn does to the stack */
 static void ia32_stack_mod(x86_insn_t *insn) {
@@ -59,13 +59,13 @@ static void ia32_stack_mod(x86_insn_t *insn) {
 	if (! insn || ! insn->operands ) {
 		return;
 	}
-       
+
 	dest = &insn->operands->op;
 	if ( dest ) {
 		src = &insn->operands->next->op;
 	}
 
-	insn->stack_mod = 0; 
+	insn->stack_mod = 0;
 	insn->stack_mod_val = 0;
 
 	switch ( insn->type ) {
@@ -117,13 +117,13 @@ static void ia32_stack_mod(x86_insn_t *insn) {
 		case insn_add:
 			if ( IS_SP( dest ) ) {
 				insn->stack_mod = 1;
-				insn->stack_mod_val = long_from_operand( src ); 
+				insn->stack_mod_val = long_from_operand( src );
 			}
 			break;
 		case insn_sub:
 			if ( IS_SP( dest ) ) {
 				insn->stack_mod = 1;
-				insn->stack_mod_val = long_from_operand( src ); 
+				insn->stack_mod_val = long_from_operand( src );
 				insn->stack_mod_val *= -1;
 			}
 			break;
@@ -223,15 +223,15 @@ static void ia32_handle_prefix( x86_insn_t *insn, unsigned int prefixes ) {
 
         /* concat all prefix strings */
         if ( (unsigned int)insn->prefix & PREFIX_LOCK ) {
-                strncat(insn->prefix_string, "lock ", 32 - 
+                strncat(insn->prefix_string, "lock ", 32 -
 				strlen(insn->prefix_string));
         }
 
         if ( (unsigned int)insn->prefix & PREFIX_REPNZ ) {
-                strncat(insn->prefix_string, "repnz ", 32  - 
+                strncat(insn->prefix_string, "repnz ", 32  -
 				strlen(insn->prefix_string));
         } else if ( (unsigned int)insn->prefix & PREFIX_REPZ ) {
-                strncat(insn->prefix_string, "repz ", 32 - 
+                strncat(insn->prefix_string, "repz ", 32 -
 				strlen(insn->prefix_string));
         }
 
@@ -242,10 +242,10 @@ static void ia32_handle_prefix( x86_insn_t *insn, unsigned int prefixes ) {
 static void reg_32_to_16( x86_op_t *op, x86_insn_t *insn, void *arg ) {
 
 	/* if this is a 32-bit register and it is a general register ... */
-	if ( op->type == op_register && op->data.reg.size == 4 && 
+	if ( op->type == op_register && op->data.reg.size == 4 &&
 	     (op->data.reg.type & reg_gen) ) {
 		/* WORD registers are 8 indices off from DWORD registers */
-		ia32_handle_register( &(op->data.reg), 
+		ia32_handle_register( &(op->data.reg),
 				op->data.reg.id + 8 );
 	}
 }
@@ -258,7 +258,7 @@ static void handle_insn_metadata( x86_insn_t *insn, ia32_insn_t *raw_insn ) {
 	ia32_stack_mod( insn );
 }
 
-static size_t ia32_decode_insn( unsigned char *buf, size_t buf_len, 
+static size_t ia32_decode_insn( unsigned char *buf, size_t buf_len,
 			   ia32_insn_t *raw_insn, x86_insn_t *insn,
 			   unsigned int prefixes ) {
 	size_t size, op_size;
@@ -299,24 +299,24 @@ static size_t ia32_decode_insn( unsigned char *buf, size_t buf_len,
 	 * the first is 'dest', the second is 'src', and the third
 	 * is an additional source value (usually an immediate value,
 	 * e.g. in the MUL instructions). These three explicit operands
-	 * are encoded in the opcode tables, even if they are not used 
+	 * are encoded in the opcode tables, even if they are not used
 	 * by the instruction. Additional implicit operands are stored
 	 * in a supplemental table and are handled later. */
 
-	op_size = ia32_decode_operand( buf, buf_len, insn, raw_insn->dest, 
+	op_size = ia32_decode_operand( buf, buf_len, insn, raw_insn->dest,
 					raw_insn->dest_flag, prefixes, modrm );
 	/* advance buffer, increase size if necessary */
 	buf += op_size;
 	buf_len -= op_size;
 	size = op_size;
 
-	op_size = ia32_decode_operand( buf, buf_len, insn, raw_insn->src, 
+	op_size = ia32_decode_operand( buf, buf_len, insn, raw_insn->src,
 					raw_insn->src_flag, prefixes, modrm );
 	buf += op_size;
 	buf_len -= op_size;
 	size += op_size;
 
-	op_size = ia32_decode_operand( buf, buf_len, insn, raw_insn->aux, 
+	op_size = ia32_decode_operand( buf, buf_len, insn, raw_insn->aux,
 					raw_insn->aux_flag, prefixes, modrm );
 	size += op_size;
 
@@ -324,7 +324,7 @@ static size_t ia32_decode_insn( unsigned char *buf, size_t buf_len,
 	/*  ++++   3. Decode Implicit Operands */
 	/* apply implicit operands */
 	ia32_insn_implicit_ops( insn, raw_insn->implicit_ops );
-	/* we have one small inelegant hack here, to deal with 
+	/* we have one small inelegant hack here, to deal with
 	 * the two prefixes that have implicit operands. If Intel
 	 * adds more, we'll change the algorithm to suit :) */
 	if ( (prefixes & PREFIX_REPZ) || (prefixes & PREFIX_REPNZ) ) {
@@ -364,12 +364,12 @@ static int uses_modrm_flag( unsigned int flag ) {
  * index into the table, then check the table row at that index to
  * determine what to do next. But is anything that simple with Intel?
  * This is now a huge, convoluted mess, mostly of bitter comments. */
-/* buf: pointer to next byte to read from stream 
+/* buf: pointer to next byte to read from stream
  * buf_len: length of buf
  * table: index of table to use for lookups
  * raw_insn: output pointer that receives opcode definition
- * prefixes: output integer that is encoded with prefixes in insn 
- * returns : number of bytes consumed from stream during lookup */ 
+ * prefixes: output integer that is encoded with prefixes in insn
+ * returns : number of bytes consumed from stream during lookup */
 size_t ia32_table_lookup( unsigned char *buf, size_t buf_len,
 				 unsigned int table, ia32_insn_t **raw_insn,
 				 unsigned int *prefixes ) {
@@ -421,7 +421,7 @@ size_t ia32_table_lookup( unsigned char *buf, size_t buf_len,
 
 	/* Yay! 'op' is now fully adjusted to be an index into 'table' */
 	*raw_insn = &(table_desc->table[op]);
-	//printf("BYTE %X TABLE %d OP %X\n", buf[0], table, op ); 
+	//printf("BYTE %X TABLE %d OP %X\n", buf[0], table, op );
 
 	if ( (*raw_insn)->mnem_flag & INS_FLAG_PREFIX ) {
 		prefix = (*raw_insn)->mnem_flag & PREFIX_MASK;
@@ -431,7 +431,7 @@ size_t ia32_table_lookup( unsigned char *buf, size_t buf_len,
 	/* handle escape to a multibyte/coproc/extension/etc table */
 	/* NOTE: if insn is a prefix and has a subtable, then we
 	 *       only recurse if this is the first prefix byte --
-	 *       that is, if *prefixes is 0. 
+	 *       that is, if *prefixes is 0.
 	 * NOTE also that suffix tables are handled later */
 	subtable = (*raw_insn)->table;
 
@@ -450,20 +450,20 @@ size_t ia32_table_lookup( unsigned char *buf, size_t buf_len,
 				next_len = buf_len - 1;
 			}
 			else {
-				// buffer is truncated 
+				// buffer is truncated
 				return INVALID_INSN;
 			}
 		}
 		/* we encountered a multibyte opcode: recurse using the
 		 * table specified in the opcode definition */
-		sub_size = ia32_table_lookup( next, next_len, subtable, 
+		sub_size = ia32_table_lookup( next, next_len, subtable,
 				raw_insn, prefixes );
 
-		/* SSE/prefix hack: if the original opcode def was a 
+		/* SSE/prefix hack: if the original opcode def was a
 		 * prefix that specified a subtable, and the subtable
 		 * lookup returned a valid insn, then we have encountered
 		 * an SSE opcode definition; otherwise, we pretend we
-		 * never did the subtable lookup, and deal with the 
+		 * never did the subtable lookup, and deal with the
 		 * prefix normally later */
 		if ( prefix && ( sub_size == INVALID_INSN  ||
 		       INS_TYPE((*raw_insn)->mnem_flag) == INS_INVALID ) ) {
@@ -490,7 +490,7 @@ size_t ia32_table_lookup( unsigned char *buf, size_t buf_len,
 	if ( recurse_table ) {
 		/* this must have been a prefix: use the same table for
 		 * lookup of the next byte */
-		sub_size = ia32_table_lookup( &buf[1], buf_len - 1, table, 
+		sub_size = ia32_table_lookup( &buf[1], buf_len - 1, table,
 				raw_insn, prefixes );
 
 		// short-circuit lookup on invalid insn
@@ -513,7 +513,7 @@ size_t ia32_table_lookup( unsigned char *buf, size_t buf_len,
 		(*prefixes) |= prefix;
 	}
 
-	/* if this lookup was in a ModR/M table, then an opcode byte is 
+	/* if this lookup was in a ModR/M table, then an opcode byte is
 	 * NOT consumed: subtract accordingly. NOTE that if none of the
 	 * operands used the ModR/M, then we need to consume the byte
 	 * here, but ONLY in the 'top-level' opcode extension table */
@@ -521,12 +521,12 @@ size_t ia32_table_lookup( unsigned char *buf, size_t buf_len,
 	if ( table_desc->type == tbl_ext_ext ) {
 		/* extensions-to-extensions never consume a byte */
 		--size;
-	} else if ( (table_desc->type == tbl_extension || 
+	} else if ( (table_desc->type == tbl_extension ||
 	       	     table_desc->type == tbl_fpu ||
-		     table_desc->type == tbl_fpu_ext ) && 
+		     table_desc->type == tbl_fpu_ext ) &&
 		/* extensions that have an operand encoded in ModR/M
 		 * never consume a byte */
-	      	    (uses_modrm_flag((*raw_insn)->dest_flag) || 
+	      	    (uses_modrm_flag((*raw_insn)->dest_flag) ||
 	             uses_modrm_flag((*raw_insn)->src_flag) )  	) {
 		--size;
 	}
@@ -563,19 +563,19 @@ static size_t handle_insn_suffix( unsigned char *buf, size_t buf_len,
 
 /* this function is called by the controlling disassembler, so its name and
  * calling convention cannot be changed */
-/*    buf   points to the loc of the current opcode (start of the 
- *          instruction) in the instruction stream. The instruction 
- *          stream is assumed to be a buffer of bytes read directly 
- *          from the file for the purpose of disassembly; a mem-mapped 
+/*    buf   points to the loc of the current opcode (start of the
+ *          instruction) in the instruction stream. The instruction
+ *          stream is assumed to be a buffer of bytes read directly
+ *          from the file for the purpose of disassembly; a mem-mapped
  *          file is ideal for *        this.
  *    insn points to a code structure to be filled by instr_decode
  *    returns the size of the decoded instruction in bytes */
-size_t ia32_disasm_addr( unsigned char * buf, size_t buf_len, 
+size_t ia32_disasm_addr( unsigned char * buf, size_t buf_len,
 		x86_insn_t *insn ) {
 	ia32_insn_t *raw_insn = NULL;
 	unsigned int prefixes = 0;
 	size_t size, sfx_size;
-	
+
 	if ( (ia32_settings.options & opt_ignore_nulls) && buf_len > 3 &&
 	    !buf[0] && !buf[1] && !buf[2] && !buf[3]) {
 		/* IF IGNORE_NULLS is set AND
@@ -596,7 +596,7 @@ size_t ia32_disasm_addr( unsigned char * buf, size_t buf_len,
 
 	/* We now have the opcode itself figured out: we can decode
 	 * the rest of the instruction. */
-	size += ia32_decode_insn( &buf[size], buf_len - size, raw_insn, insn, 
+	size += ia32_decode_insn( &buf[size], buf_len - size, raw_insn, insn,
 				  prefixes );
 	if ( raw_insn->mnem_flag & INS_FLAG_SUFFIX ) {
 		/* AMD 3DNow! suffix -- get proper operand type here */

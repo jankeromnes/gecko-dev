@@ -24,7 +24,7 @@ LDAP_HEADERS = \
 	pkix_pl_ldaprequest.h \
 	pkix_pl_ldapdefaultclient.h \
  	$(NULL)
- 
+
 LDAP_CSRCS = \
 	pkix_pl_ldaptemplates.c \
 	pkix_pl_ldapcertstore.c \

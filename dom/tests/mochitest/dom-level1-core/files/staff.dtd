@@ -7,11 +7,11 @@
 <!ELEMENT gender ( #PCDATA | entElement )* >
 <!ELEMENT employee (employeeId, name, position, salary, gender, address) >
 <!ELEMENT staff (employee)+>
-<!ATTLIST entElement 
+<!ATTLIST entElement
           attr1 CDATA "Attr">
 <!ATTLIST address
-          domestic CDATA #IMPLIED 
+          domestic CDATA #IMPLIED
           street CDATA "Yes">
-<!ATTLIST entElement 
+<!ATTLIST entElement
           domestic CDATA "MALE" >
 

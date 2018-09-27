@@ -178,7 +178,7 @@ public:
   static void ForEachFeature(const FeatureIterCallback& aCallback);
 
   // Run a callback for each enabled fallback.
-  typedef std::function<void(const char* aName, const char* aMsg)> 
+  typedef std::function<void(const char* aName, const char* aMsg)>
     FallbackIterCallback;
   static void ForEachFallback(const FallbackIterCallback& aCallback);
 

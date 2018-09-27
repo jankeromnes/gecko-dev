@@ -141,8 +141,8 @@ function _EU_maybeUnwrap(o) {
  */
 function getElement(id) {
   return ((typeof(id) == "string") ?
-    document.getElementById(id) : id); 
-};   
+    document.getElementById(id) : id);
+};
 
 this.$ = this.getElement;
 

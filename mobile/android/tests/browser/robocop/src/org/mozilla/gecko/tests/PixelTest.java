@@ -18,7 +18,7 @@ abstract class PixelTest extends OldBaseTest {
         paintExpecter.unregisterListener();
         PaintedSurface p = mDriver.getPaintedSurface();
         if (p == null) {
-            mAsserter.ok(p != null, "checking that painted surface loaded", 
+            mAsserter.ok(p != null, "checking that painted surface loaded",
                  "painted surface loaded");
         }
         return p;
@@ -40,7 +40,7 @@ abstract class PixelTest extends OldBaseTest {
         paintExpecter.unregisterListener();
         PaintedSurface p = mDriver.getPaintedSurface();
         if (p == null) {
-            mAsserter.ok(p != null, "checking that painted surface loaded", 
+            mAsserter.ok(p != null, "checking that painted surface loaded",
                  "painted surface loaded");
         }
         return p;
@@ -55,7 +55,7 @@ abstract class PixelTest extends OldBaseTest {
         expecter.blockUntilClear(PAINT_CLEAR_DELAY);
         PaintedSurface p = mDriver.getPaintedSurface();
         if (p == null) {
-            mAsserter.ok(p != null, "checking that painted surface loaded", 
+            mAsserter.ok(p != null, "checking that painted surface loaded",
                  "painted surface loaded");
         }
         return p;
@@ -70,7 +70,7 @@ abstract class PixelTest extends OldBaseTest {
         mAsserter.is(expecter.eventReceived(), false, "Checking gecko didn't draw unnecessarily");
         PaintedSurface p = mDriver.getPaintedSurface();
         if (p == null) {
-            mAsserter.ok(p != null, "checking that painted surface loaded", 
+            mAsserter.ok(p != null, "checking that painted surface loaded",
                  "painted surface loaded");
         }
         return p;

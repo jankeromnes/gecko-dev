@@ -63,12 +63,12 @@
     really all that useful.
 
     We could reserve one extra bit to indicate floating point, but
-    we may also just add 
+    we may also just add
 
        	   PIXMAN_TYPE_ARGB_FLOAT
 	   PIXMAN_TYPE_BGRA_FLOAT
 	   PIXMAN_TYPE_A_FLOAT
-    
+
     image types. With five bits we can support up to 32 different
     format types, which should be enough for everybody, even if we
     decide to support all the various video formats here:
@@ -109,8 +109,8 @@ done:
 
   - Test if pseudo color still works. It does, but it also shows that
     copying a pixman_indexed_t on every composite operation is not
-    going to fly. So, for now set_indexed() does not copy the 
-    indexed table. 
+    going to fly. So, for now set_indexed() does not copy the
+    indexed table.
 
     Also just the malloc() to allocate a pixman image shows up pretty
     high.
@@ -119,7 +119,7 @@ done:
 
       - Make all the setters not copy their arguments
 
-      - Possibly combined with going back to the stack allocated 
+      - Possibly combined with going back to the stack allocated
         approach that we already use for regions.
 
       - Keep a cached pixman_image_t around for every picture. It would

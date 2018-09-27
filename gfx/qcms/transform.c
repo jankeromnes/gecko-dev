@@ -3,22 +3,22 @@
 //  Copyright (C) 2009 Mozilla Corporation
 //  Copyright (C) 1998-2007 Marti Maria
 //
-// Permission is hereby granted, free of charge, to any person obtaining 
-// a copy of this software and associated documentation files (the "Software"), 
-// to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, 
-// and/or sell copies of the Software, and to permit persons to whom the Software 
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the Software
 // is furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in 
+// The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
-// THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <stdlib.h>
@@ -514,7 +514,7 @@ static void qcms_transform_data_rgba_out_lut_precache(qcms_transform *transform,
 }
 
 // Not used
-/* 
+/*
 static void qcms_transform_data_clut(qcms_transform *transform, unsigned char *src, unsigned char *dest, size_t length) {
 	unsigned int i;
 	int xy_len = 1;
@@ -523,7 +523,7 @@ static void qcms_transform_data_clut(qcms_transform *transform, unsigned char *s
 	float* r_table = transform->r_clut;
 	float* g_table = transform->g_clut;
 	float* b_table = transform->b_clut;
-  
+
 	for (i = 0; i < length; i++) {
 		unsigned char in_r = *src++;
 		unsigned char in_g = *src++;
@@ -536,9 +536,9 @@ static void qcms_transform_data_clut(qcms_transform *transform, unsigned char *s
 		int x_n = ceilf(linear_r * (transform->grid_size-1));
 		int y_n = ceilf(linear_g * (transform->grid_size-1));
 		int z_n = ceilf(linear_b * (transform->grid_size-1));
-		float x_d = linear_r * (transform->grid_size-1) - x; 
+		float x_d = linear_r * (transform->grid_size-1) - x;
 		float y_d = linear_g * (transform->grid_size-1) - y;
-		float z_d = linear_b * (transform->grid_size-1) - z; 
+		float z_d = linear_b * (transform->grid_size-1) - z;
 
 		float r_x1 = lerp(CLU(r_table,x,y,z), CLU(r_table,x_n,y,z), x_d);
 		float r_x2 = lerp(CLU(r_table,x,y_n,z), CLU(r_table,x_n,y_n,z), x_d);
@@ -567,7 +567,7 @@ static void qcms_transform_data_clut(qcms_transform *transform, unsigned char *s
 		*dest++ = clamp_u8(clut_r*255.0f);
 		*dest++ = clamp_u8(clut_g*255.0f);
 		*dest++ = clamp_u8(clut_b*255.0f);
-	}	
+	}
 }
 */
 
@@ -601,9 +601,9 @@ static void qcms_transform_data_tetra_clut_rgba(qcms_transform *transform, unsig
 		int x_n = int_div_ceil(in_r * (transform->grid_size-1), 255);
 		int y_n = int_div_ceil(in_g * (transform->grid_size-1), 255);
 		int z_n = int_div_ceil(in_b * (transform->grid_size-1), 255);
-		float rx = linear_r * (transform->grid_size-1) - x; 
+		float rx = linear_r * (transform->grid_size-1) - x;
 		float ry = linear_g * (transform->grid_size-1) - y;
-		float rz = linear_b * (transform->grid_size-1) - z; 
+		float rz = linear_b * (transform->grid_size-1) - z;
 
 		c0_r = CLU(r_table, x, y, z);
 		c0_g = CLU(g_table, x, y, z);
@@ -620,7 +620,7 @@ static void qcms_transform_data_tetra_clut_rgba(qcms_transform *transform, unsig
 				c1_b = CLU(b_table, x_n, y, z) - c0_b;
 				c2_b = CLU(b_table, x_n, y_n, z) - CLU(b_table, x_n, y, z);
 				c3_b = CLU(b_table, x_n, y_n, z_n) - CLU(b_table, x_n, y_n, z);
-			} else { 
+			} else {
 				if (rx >= rz) { //rx >= rz && rz >= ry
 					c1_r = CLU(r_table, x_n, y, z) - c0_r;
 					c2_r = CLU(r_table, x_n, y_n, z_n) - CLU(r_table, x_n, y, z_n);
@@ -655,7 +655,7 @@ static void qcms_transform_data_tetra_clut_rgba(qcms_transform *transform, unsig
 				c2_b = CLU(b_table, x, y_n, z) - c0_b;
 				c3_b = CLU(b_table, x_n, y_n, z_n) - CLU(b_table, x_n, y_n, z);
 			} else {
-				if (ry >= rz) { //ry >= rz && rz > rx 
+				if (ry >= rz) { //ry >= rz && rz > rx
 					c1_r = CLU(r_table, x_n, y_n, z_n) - CLU(r_table, x, y_n, z_n);
 					c2_r = CLU(r_table, x, y_n, z) - c0_r;
 					c3_r = CLU(r_table, x, y_n, z_n) - CLU(r_table, x, y_n, z);
@@ -678,7 +678,7 @@ static void qcms_transform_data_tetra_clut_rgba(qcms_transform *transform, unsig
 				}
 			}
 		}
-				
+
 		clut_r = c0_r + c1_r*rx + c2_r*ry + c3_r*rz;
 		clut_g = c0_g + c1_g*rx + c2_g*ry + c3_g*rz;
 		clut_b = c0_b + c1_b*rx + c2_b*ry + c3_b*rz;
@@ -688,7 +688,7 @@ static void qcms_transform_data_tetra_clut_rgba(qcms_transform *transform, unsig
 		dest[OUTPUT_B_INDEX] = clamp_u8(clut_b*255.0f);
 		dest[OUTPUT_A_INDEX] = in_a;
 		dest += RGBA_OUTPUT_COMPONENTS;
-	}	
+	}
 }
 
 // Using lcms' tetra interpolation code.
@@ -735,7 +735,7 @@ static void qcms_transform_data_tetra_clut(qcms_transform *transform, unsigned c
 				c1_b = CLU(b_table, x_n, y, z) - c0_b;
 				c2_b = CLU(b_table, x_n, y_n, z) - CLU(b_table, x_n, y, z);
 				c3_b = CLU(b_table, x_n, y_n, z_n) - CLU(b_table, x_n, y_n, z);
-			} else { 
+			} else {
 				if (rx >= rz) { //rx >= rz && rz >= ry
 					c1_r = CLU(r_table, x_n, y, z) - c0_r;
 					c2_r = CLU(r_table, x_n, y_n, z_n) - CLU(r_table, x_n, y, z_n);
@@ -770,7 +770,7 @@ static void qcms_transform_data_tetra_clut(qcms_transform *transform, unsigned c
 				c2_b = CLU(b_table, x, y_n, z) - c0_b;
 				c3_b = CLU(b_table, x_n, y_n, z_n) - CLU(b_table, x_n, y_n, z);
 			} else {
-				if (ry >= rz) { //ry >= rz && rz > rx 
+				if (ry >= rz) { //ry >= rz && rz > rx
 					c1_r = CLU(r_table, x_n, y_n, z_n) - CLU(r_table, x, y_n, z_n);
 					c2_r = CLU(r_table, x, y_n, z) - c0_r;
 					c3_r = CLU(r_table, x, y_n, z_n) - CLU(r_table, x, y_n, z);
@@ -793,7 +793,7 @@ static void qcms_transform_data_tetra_clut(qcms_transform *transform, unsigned c
 				}
 			}
 		}
-				
+
 		clut_r = c0_r + c1_r*rx + c2_r*ry + c3_r*rz;
 		clut_g = c0_g + c1_g*rx + c2_g*ry + c3_g*rz;
 		clut_b = c0_b + c1_b*rx + c2_b*ry + c3_b*rz;
@@ -802,7 +802,7 @@ static void qcms_transform_data_tetra_clut(qcms_transform *transform, unsigned c
 		dest[OUTPUT_G_INDEX] = clamp_u8(clut_g*255.0f);
 		dest[OUTPUT_B_INDEX] = clamp_u8(clut_b*255.0f);
 		dest += RGB_OUTPUT_COMPONENTS;
-	}	
+	}
 }
 
 static void qcms_transform_data_rgb_out_lut(qcms_transform *transform, unsigned char *src, unsigned char *dest, size_t length)
@@ -827,11 +827,11 @@ static void qcms_transform_data_rgb_out_lut(qcms_transform *transform, unsigned 
 		out_linear_g = clamp_float(out_linear_g);
 		out_linear_b = clamp_float(out_linear_b);
 
-		out_device_r = lut_interp_linear(out_linear_r, 
+		out_device_r = lut_interp_linear(out_linear_r,
 				transform->output_gamma_lut_r, transform->output_gamma_lut_r_length);
-		out_device_g = lut_interp_linear(out_linear_g, 
+		out_device_g = lut_interp_linear(out_linear_g,
 				transform->output_gamma_lut_g, transform->output_gamma_lut_g_length);
-		out_device_b = lut_interp_linear(out_linear_b, 
+		out_device_b = lut_interp_linear(out_linear_b,
 				transform->output_gamma_lut_b, transform->output_gamma_lut_b_length);
 
 		dest[OUTPUT_R_INDEX] = clamp_u8(out_device_r*255);
@@ -864,11 +864,11 @@ static void qcms_transform_data_rgba_out_lut(qcms_transform *transform, unsigned
 		out_linear_g = clamp_float(out_linear_g);
 		out_linear_b = clamp_float(out_linear_b);
 
-		out_device_r = lut_interp_linear(out_linear_r, 
+		out_device_r = lut_interp_linear(out_linear_r,
 				transform->output_gamma_lut_r, transform->output_gamma_lut_r_length);
-		out_device_g = lut_interp_linear(out_linear_g, 
+		out_device_g = lut_interp_linear(out_linear_g,
 				transform->output_gamma_lut_g, transform->output_gamma_lut_g_length);
-		out_device_b = lut_interp_linear(out_linear_b, 
+		out_device_b = lut_interp_linear(out_linear_b,
 				transform->output_gamma_lut_b, transform->output_gamma_lut_b_length);
 
 		dest[OUTPUT_R_INDEX] = clamp_u8(out_device_r*255);
@@ -1046,7 +1046,7 @@ static void cpuid(uint32_t fxn, uint32_t *a, uint32_t *b, uint32_t *c, uint32_t 
 static void cpuid(uint32_t fxn, uint32_t *a, uint32_t *b, uint32_t *c, uint32_t *d) {
 
 	uint32_t a_, b_, c_, d_;
-       __asm__ __volatile__ ("xchgl %%ebx, %%esi; cpuid; xchgl %%ebx, %%esi;" 
+       __asm__ __volatile__ ("xchgl %%ebx, %%esi; cpuid; xchgl %%ebx, %%esi;"
                              : "=a" (a_), "=S" (b_), "=c" (c_), "=d" (d_) : "a" (fxn));
 	   *a = a_;
 	   *b = b_;
@@ -1095,12 +1095,12 @@ static int sse_version_available(void)
 
 static const struct matrix bradford_matrix = {{	{ 0.8951f, 0.2664f,-0.1614f},
 						{-0.7502f, 1.7135f, 0.0367f},
-						{ 0.0389f,-0.0685f, 1.0296f}}, 
+						{ 0.0389f,-0.0685f, 1.0296f}},
 						false};
 
 static const struct matrix bradford_matrix_inv = {{ { 0.9869929f,-0.1470543f, 0.1599627f},
 						    { 0.4323053f, 0.5183603f, 0.0492912f},
-						    {-0.0085287f, 0.0400428f, 0.9684867f}}, 
+						    {-0.0085287f, 0.0400428f, 0.9684867f}},
 						    false};
 
 // See ICCv4 E.3
@@ -1162,7 +1162,7 @@ void qcms_profile_precache_output_transform(qcms_profile *profile)
 }
 
 /* Replace the current transformation with a LUT transformation using a given number of sample points */
-qcms_transform* qcms_transform_precacheLUT_float(qcms_transform *transform, qcms_profile *in, qcms_profile *out, 
+qcms_transform* qcms_transform_precacheLUT_float(qcms_transform *transform, qcms_profile *in, qcms_profile *out,
                                                  int samples, qcms_data_type in_type)
 {
 	/* The range between which 2 consecutive sample points can be used to interpolate */
@@ -1251,7 +1251,7 @@ qcms_transform* qcms_transform_create(
 			(in->A2B0 || out->B2A0 || in->mAB || out->mAB))
 		{
 		// Precache the transformation to a CLUT 33x33x33 in size.
-		// 33 is used by many profiles and works well in pratice. 
+		// 33 is used by many profiles and works well in pratice.
 		// This evenly divides 256 into blocks of 8x8x8.
 		// TODO For transforming small data sets of about 200x200 or less
 		// precaching should be avoided.

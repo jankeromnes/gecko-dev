@@ -6,8 +6,8 @@ var SVG_NS = "http://www.w3.org/2000/svg";
 
 function foo()
 {
-  var rect = document.createElementNS(SVG_NS, 'rect'); 
-  rect.setAttribute('opacity', ".3"); 
+  var rect = document.createElementNS(SVG_NS, 'rect');
+  rect.setAttribute('opacity', ".3");
   document.documentElement.appendChild(rect);
   document.documentElement.removeAttribute("class");
 }

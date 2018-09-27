@@ -50,7 +50,7 @@ interface nsISAXContentHandler : nsISupports
    * of an unrecoverable error) or reached the end of input.
    */
   void endDocument();
-  
+
   /**
    * Receive notification of the beginning of an element.
    *

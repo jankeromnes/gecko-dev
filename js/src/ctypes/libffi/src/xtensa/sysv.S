@@ -1,7 +1,7 @@
 /* -----------------------------------------------------------------------
    sysv.S - Copyright (c) 2013 Tensilica, Inc.
-   
-   XTENSA Foreign Function Interface 
+
+   XTENSA Foreign Function Interface
 
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the
@@ -68,12 +68,12 @@ ENTRY(ffi_call_SYSV)
 	# prepare to move stack pointer back up to 6 arguments
 	# note that 'bytes' is already aligned
 
-	movi	a10, 6*4 
+	movi	a10, 6*4
 	sub	a11, a6, a10
 	movgez	a6, a10, a11
 	add	a6, a1, a6
 
-	
+
 	# we can pass up to 6 arguments in registers
 	# for simplicity, just load 6 arguments
 	# (the stack size is at least 32 bytes, so no risk to cross boundaries)

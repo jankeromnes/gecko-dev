@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "table");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,12 +70,12 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The rows attribute returns a collection of all the rows in the table,
     including al in THEAD, TFOOT, all TBODY elements.
 
     Retrieve the rows attribute from the second TABLE element and
-    examine the items of the returned collection. 
+    examine the items of the returned collection.
 
 * @author NIST
 * @author Mary Brady
@@ -98,7 +98,7 @@ function HTMLTableElement07() {
       expectedOptions[2] = "tr";
       expectedOptions[3] = "tr";
 
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -117,7 +117,7 @@ testNode = nodeList.item(1);
 
 	}
    assertEqualsListAutoCase("element", "rowsLink",expectedOptions,result);
-       
+
 }
 
 </script>
@@ -131,7 +131,7 @@ testNode = nodeList.item(1);
     including al in THEAD, TFOOT, all TBODY elements.
 
     Retrieve the rows attribute from the second TABLE element and
-    examine the items of the returned collection. 
+    examine the items of the returned collection.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Mary Brady&lt;/contributor&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;date qualifier='created'&gt;2002-02-22&lt;/date&gt;
@@ -148,7 +148,7 @@ testNode = nodeList.item(1);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/table.html"></iframe>
 <br>

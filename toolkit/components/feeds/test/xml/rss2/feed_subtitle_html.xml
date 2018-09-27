@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!--
 
-Description: channel description works 
+Description: channel description works
 Expect:      feed.subtitle.plainText() == '<i><b>test</b></i>'
 
 -->

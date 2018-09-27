@@ -74,7 +74,7 @@ async function test_simple_stepping() {
 function evaluateTestCode() {
   /* eslint-disable */
   Cu.evalInSandbox(
-    `                                   // 1                       
+    `                                   // 1
     debugger;                           // 2
     var a = 1;                          // 3
     var b = 2;`,                        // 4

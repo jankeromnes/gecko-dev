@@ -6,6 +6,6 @@
 </head>
 <body>
 <p><span class="v">Hello</span></p>
-<m:math><m:mstyle><m:mi style="font-size:24px; font-family:Verdana">Id</m:mi></m:mstyle></m:math> 
+<m:math><m:mstyle><m:mi style="font-size:24px; font-family:Verdana">Id</m:mi></m:mstyle></m:math>
 </body>
 </html>

@@ -54,7 +54,7 @@ index 1e2a18e..f9ff0b1 100644
 @@ -2233,9 +2235,10 @@ _cairo_ft_font_face_destroy (void *abstract_face)
      if (font_face == NULL)
  	return;
- 
+
 -    /* When destroying the face created by cairo_ft_font_face_create_for_ft_face,
 +    /* When destroying a face created by cairo_ft_font_face_create_for_ft_face,
       * we have a special "zombie" state for the face when the unscaled font
@@ -65,7 +65,7 @@ index 1e2a18e..f9ff0b1 100644
       * We go from:
       *
 @@ -2249,6 +2252,8 @@ _cairo_ft_font_face_destroy (void *abstract_face)
- 
+
      if (font_face->unscaled &&
  	font_face->unscaled->from_face &&
 +	font_face->next == NULL &&
@@ -84,7 +84,7 @@ index 1e2a18e..f9ff0b1 100644
 +		*prev_font_face = font_face->next;
 +		break;
 +	    }
- 
+
 -	    /* The font_face has been left in an error state, abandon it. */
 -	    *prev_font_face = font_face->next;
 -	    break;
@@ -99,11 +99,11 @@ index 1e2a18e..f9ff0b1 100644
 +		return cairo_font_face_reference (&font_face->base);
  	}
      }
- 
+
 @@ -2415,6 +2429,14 @@ _cairo_ft_font_face_create (cairo_ft_unscaled_font_t *unscaled,
- 
+
      font_face->ft_options = *ft_options;
- 
+
 +    if (unscaled->faces && unscaled->faces->unscaled == NULL) {
 +	/* This "zombie" font_face (from _cairo_ft_font_face_destroy)
 +	 * is no longer needed. */
@@ -114,6 +114,6 @@ index 1e2a18e..f9ff0b1 100644
 +
      font_face->next = unscaled->faces;
      unscaled->faces = font_face;
- 
+
 --
 cgit v0.8.2

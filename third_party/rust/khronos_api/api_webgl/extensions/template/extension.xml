@@ -6,7 +6,7 @@
 http://www.khronos.org/registry/webgl/extensions/
 -->
 <extension href="template/">
-  <!-- The name of the extension. This is also the string which is passed to the 
+  <!-- The name of the extension. This is also the string which is passed to the
        WebGLRenderingContext getExtension API to enable the extension. For example, if
        the extension were OES_texture_float, then the extension would be fetched and
        enabled with a call to getExtension("OES_texture_float")

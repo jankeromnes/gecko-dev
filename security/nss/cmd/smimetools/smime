@@ -528,7 +528,7 @@ if (defined $opt_D) {
     }
 
     if (defined($opt_E)) {
-	$mimeentity = encryptentity($mimeentity, $encryptopts);	
+	$mimeentity = encryptentity($mimeentity, $encryptopts);
     }
 
     #

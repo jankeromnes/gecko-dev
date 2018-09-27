@@ -21,10 +21,10 @@
 #include "unicode/currunit.h"
 
 /**
- * \file 
+ * \file
  * \brief C++ API: Currency Amount Object.
  */
- 
+
 U_NAMESPACE_BEGIN
 
 /**
@@ -67,7 +67,7 @@ class U_I18N_API CurrencyAmount: public Measure {
      * @stable ICU 3.0
      */
     CurrencyAmount(const CurrencyAmount& other);
- 
+
     /**
      * Assignment operator
      * @stable ICU 3.0
@@ -86,7 +86,7 @@ class U_I18N_API CurrencyAmount: public Measure {
      * @stable ICU 3.0
      */
     virtual ~CurrencyAmount();
-    
+
     /**
      * Returns a unique class ID for this object POLYMORPHICALLY.
      * This method implements a simple form of RTTI used by ICU.

@@ -18,17 +18,17 @@ var path = "http://mochi.test:8888/tests/dom/base/test/";
 function fromCache(xhr)
 {
   var ch = SpecialPowers.wrap(xhr).channel.QueryInterface(SpecialPowers.Ci.nsICacheInfoChannel);
-  return ch.isFromCache();  
+  return ch.isFromCache();
 }
 
 var tests = [
   // First just init the file with an ETag
   {
-    init: function(xhr) 
+    init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs?etag=a1");
     },
-    
+
     loading: function(xhr)
     {
     },
@@ -39,7 +39,7 @@ var tests = [
   },
 
   // Try to load the file the first time regularly, we have to get 200 OK
-  {    
+  {
     init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs");
@@ -59,7 +59,7 @@ var tests = [
   },
 
   // Try to load the file the second time regularly, we have to get 304 Not Modified
-  {    
+  {
     init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs");
@@ -80,7 +80,7 @@ var tests = [
   },
 
   // Try to load the file the third time regularly, we have to get 304 Not Modified
-  {    
+  {
     init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs");
@@ -102,7 +102,7 @@ var tests = [
 
   // Now modify the ETag
   {
-    init: function(xhr) 
+    init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs?etag=a2");
     },
@@ -117,7 +117,7 @@ var tests = [
   },
 
   // Try to load the file, we have to get 200 OK with the new content
-  {    
+  {
     init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs");
@@ -138,7 +138,7 @@ var tests = [
   },
 
   // Try to load the file the second time regularly, we have to get 304 Not Modified
-  {    
+  {
     init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs");
@@ -159,7 +159,7 @@ var tests = [
   },
 
   // Try to load the file the third time regularly, we have to get 304 Not Modified
-  {    
+  {
     init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs");
@@ -181,7 +181,7 @@ var tests = [
 
   // Now modify the ETag ones more
   {
-    init: function(xhr) 
+    init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs?etag=a3");
     },
@@ -196,7 +196,7 @@ var tests = [
   },
 
   // Try to load the file, we have to get 200 OK with the new content
-  {    
+  {
     init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs");
@@ -217,7 +217,7 @@ var tests = [
   },
 
   // Try to load the file the second time regularly, we have to get 304 Not Modified
-  {    
+  {
     init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs");
@@ -238,7 +238,7 @@ var tests = [
   },
 
   // Try to load the file the third time regularly, we have to get 304 Not Modified
-  {    
+  {
     init: function(xhr)
     {
       xhr.open("GET", path + "bug475156.sjs");

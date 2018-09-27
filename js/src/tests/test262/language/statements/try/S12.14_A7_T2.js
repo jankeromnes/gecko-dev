@@ -58,7 +58,7 @@ try{
     finally{
       throw "ex3";
     }
-  }	
+  }
 }
 catch(er1){
   if (er1!=="ex3") $ERROR('#3.2: Exception === "ex3". Actual:  Exception ==='+er1 );

@@ -31,7 +31,7 @@ throw "Test262: This statement should not be evaluated.";
 
 var callCount = 0;
 async function* f([...[x], y]) {
-  
+
   callCount = callCount + 1;
 };
 f([1, 2, 3]).next().then(() => {

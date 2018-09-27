@@ -17,7 +17,7 @@ var __obj = {a:2};
 with (__obj)
 {
     try {
-        
+
     	var __func = function()
         {
             return a;

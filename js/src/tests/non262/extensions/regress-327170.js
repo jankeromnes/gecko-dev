@@ -21,5 +21,5 @@ var g_rx = /(?:)/;
 				  // that's currently in use by the replace fn.
 				  g_rx.compile("string", "g");
 				});
- 
+
 reportCompare(expect, actual, summary);

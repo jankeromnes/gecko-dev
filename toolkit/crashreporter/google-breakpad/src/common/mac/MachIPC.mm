@@ -57,7 +57,7 @@ bool MachMessage::SetData(void *data,
   // first check to make sure we have enough space
   size_t size = CalculateSize();
   size_t new_size = size + data_length;
-  
+
   if (new_size > sizeof(MachMessage)) {
     return false;  // not enough space
   }
@@ -76,16 +76,16 @@ bool MachMessage::SetData(void *data,
 //    messsage size <= sizeof(MachMessage)
 mach_msg_size_t MachMessage::CalculateSize() {
   size_t size = sizeof(mach_msg_header_t) + sizeof(mach_msg_body_t);
-  
+
   // add space for MessageDataPacket
   int32_t alignedDataLength = (GetDataLength() + 3) & ~0x3;
   size += 2*sizeof(int32_t) + alignedDataLength;
-  
+
   // add space for descriptors
   size += GetDescriptorCount() * sizeof(MachMsgPortDescriptor);
-  
+
   head.msgh_size = static_cast<mach_msg_size_t>(size);
-  
+
   return head.msgh_size;
 }
 
@@ -112,7 +112,7 @@ bool MachMessage::AddDescriptor(const MachMsgPortDescriptor &desc) {
   // first check to make sure we have enough space
   int size = CalculateSize();
   size_t new_size = size + sizeof(MachMsgPortDescriptor);
-  
+
   if (new_size > sizeof(MachMessage)) {
     return false;  // not enough space
   }
@@ -121,12 +121,12 @@ bool MachMessage::AddDescriptor(const MachMsgPortDescriptor &desc) {
   // new descriptor
   u_int8_t *p = reinterpret_cast<u_int8_t*>(GetDataPacket());
   bcopy(p, p+sizeof(MachMsgPortDescriptor), GetDataLength()+2*sizeof(int32_t));
-  
+
   SetDescriptor(GetDescriptorCount(), desc);
   SetDescriptorCount(GetDescriptorCount() + 1);
 
   CalculateSize();
-  
+
   return true;
 }
 
@@ -148,7 +148,7 @@ MachMsgPortDescriptor *MachMessage::GetDescriptor(int n) {
       reinterpret_cast<MachMsgPortDescriptor*>(padding);
     return desc + n;
   }
-  
+
   return nil;
 }
 
@@ -173,7 +173,7 @@ ReceivePort::ReceivePort(const char *receive_port_name) {
 
   if (init_result_ != KERN_SUCCESS)
     return;
-    
+
   init_result_ = mach_port_insert_right(current_task,
                                         port_,
                                         port_,
@@ -236,7 +236,7 @@ kern_return_t ReceivePort::WaitForMessage(MachReceiveMessage *out_message,
   // return any error condition encountered in constructor
   if (init_result_ != KERN_SUCCESS)
     return init_result_;
-  
+
   out_message->head.msgh_bits = 0;
   out_message->head.msgh_local_port = port_;
   out_message->head.msgh_remote_port = MACH_PORT_NULL;
@@ -263,9 +263,9 @@ kern_return_t ReceivePort::WaitForMessage(MachReceiveMessage *out_message,
 // get a port with send rights corresponding to a named registered service
 MachPortSender::MachPortSender(const char *receive_port_name) {
   mach_port_t task_bootstrap_port = 0;
-  init_result_ = task_get_bootstrap_port(mach_task_self(), 
+  init_result_ = task_get_bootstrap_port(mach_task_self(),
                                          &task_bootstrap_port);
-  
+
   if (init_result_ != KERN_SUCCESS)
     return;
 
@@ -275,7 +275,7 @@ MachPortSender::MachPortSender(const char *receive_port_name) {
 }
 
 //==============================================================================
-MachPortSender::MachPortSender(mach_port_t send_port) 
+MachPortSender::MachPortSender(mach_port_t send_port)
   : send_port_(send_port),
     init_result_(KERN_SUCCESS) {
 }
@@ -286,10 +286,10 @@ kern_return_t MachPortSender::SendMessage(MachSendMessage &message,
   if (message.head.msgh_size == 0) {
     return KERN_INVALID_VALUE;    // just for safety -- never should occur
   };
-  
+
   if (init_result_ != KERN_SUCCESS)
     return init_result_;
-  
+
   message.head.msgh_remote_port = send_port_;
 
   kern_return_t result = mach_msg(&message.head,

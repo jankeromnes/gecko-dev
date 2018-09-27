@@ -43,11 +43,11 @@
 /// span_of!(Struct, start ..)
 /// ```
 ///
-/// *Note*: 
+/// *Note*:
 /// This macro uses recursion in order to resolve the range expressions, so there is a limit to the complexity of the expression.
 /// In order to raise the limit, the compiler's recursion limit should be lifted.
 ///
-/// *Note*: 
+/// *Note*:
 /// This macro may not make much sense when used on structs that are not `#[repr(C, packed)]`
 ///
 /// ## Examples
@@ -121,7 +121,7 @@ macro_rules! span_of {
     };
 
     ($sty:ty, $($exp:tt)+) => ({
-        unsafe { 
+        unsafe {
             let root: $sty = $crate::mem::uninitialized();
             let base = &root as *const _ as usize;
             let (begin, end) = span_of!(@helper root, [] $($exp)*);

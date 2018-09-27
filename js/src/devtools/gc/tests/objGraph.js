@@ -8,7 +8,7 @@ function test()
     f(root, 17);
     return root;
     function f(parent, depth) {
-      if (depth == 0) 
+      if (depth == 0)
           return;
       --depth;
 
@@ -22,7 +22,7 @@ function test()
       return arguments;
   }
 
-  for(var i = 0; i != 10; ++i) 
+  for(var i = 0; i != 10; ++i)
   {
     gc();
     var x = null;

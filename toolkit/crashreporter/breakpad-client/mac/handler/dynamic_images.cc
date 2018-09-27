@@ -242,7 +242,7 @@ bool FindTextSection(DynamicImage& image) {
   typedef typename MachBits::mach_header_type mach_header_type;
   typedef typename MachBits::mach_segment_command_type
       mach_segment_command_type;
-  
+
   const mach_header_type* header =
       reinterpret_cast<const mach_header_type*>(&image.header_[0]);
 

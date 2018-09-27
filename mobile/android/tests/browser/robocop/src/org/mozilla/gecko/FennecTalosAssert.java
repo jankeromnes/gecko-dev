@@ -63,7 +63,7 @@ public class FennecTalosAssert implements Assert {
     public void todo_is(Object actual, Object expected, String name) {
         throw new UnsupportedOperationException();
     }
-    
+
     public void todo_isnot(Object actual, Object notExpected, String name) {
         throw new UnsupportedOperationException();
     }

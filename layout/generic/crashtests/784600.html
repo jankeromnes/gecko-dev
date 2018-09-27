@@ -6,7 +6,7 @@ setTimeout("boom()", 2000);
 function boom() {
 document.designMode = "on";
 document.execCommand("InsertHTML", false, "<dl>")
-r = document.createRange(); 
+r = document.createRange();
 window.getSelection().removeAllRanges();
 r.setStart(test1, 0);
 r.setEnd(test2, test2.childNodes.length);

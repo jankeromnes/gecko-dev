@@ -26,7 +26,7 @@ function createTrianglePulseBuffer(context, sampleFrameLength) {
     var n = audioBuffer.length;
     var halfLength = n / 2;
     var data = audioBuffer.getChannelData(0);
-    
+
     for (var i = 0; i < halfLength; ++i)
         data[i] = i + 1;
 
@@ -77,7 +77,7 @@ function checkTriangularPulse(rendered, reference) {
     }
 
     return match;
-}        
+}
 
 // Verify that the rendered data is close to zero for the first part
 // of the tail.
@@ -124,7 +124,7 @@ function checkTail2(data, reference, breakpoint) {
     var threshold2 = 0;
     for (var i = reference.length + breakpoint; i < data.length; ++i) {
         if (Math.abs(data[i]) > 0) {
-            isZero = false; 
+            isZero = false;
             break;
         }
     }
@@ -144,13 +144,13 @@ function checkConvolvedResult(trianglePulse) {
 
         var referenceData = trianglePulse.getChannelData(0);
         var renderedData = renderedBuffer.getChannelData(0);
-    
+
         var success = true;
-    
+
         // Verify the triangular pulse is actually triangular.
 
         success = success && checkTriangularPulse(renderedData, referenceData);
-        
+
         // Make sure that portion after convolved portion is totally
         // silent.  But round-off prevents this from being completely
         // true.  At the end of the triangle, it should be close to
@@ -162,15 +162,15 @@ function checkConvolvedResult(trianglePulse) {
         // parts.  The first is the at the beginning of the tail,
         // where we tolerate a small but non-zero value.  The second part is
         // farther along the tail where the result should be zero.
-        
+
         // breakpoint is the point dividing the first two tail parts
         // we're looking at.  Experimentally determined.
         var breakpoint = 12800;
 
         success = success && checkTail1(renderedData, referenceData, breakpoint);
-        
+
         success = success && checkTail2(renderedData, referenceData, breakpoint);
-        
+
         if (success) {
             testPassed("Test signal was correctly convolved.");
         } else {

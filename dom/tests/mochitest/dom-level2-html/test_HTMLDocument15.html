@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "document");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,9 +70,9 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The getElementById method returns the Element whose id is given by
-    elementId.  If no such element exists, returns null.  
+    elementId.  If no such element exists, returns null.
 
     Retrieve the element whose id is "mapid".
     Check the value of the element.
@@ -90,7 +90,7 @@ function HTMLDocument15() {
     var elementNode;
       var elementValue;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -100,7 +100,7 @@ function HTMLDocument15() {
       elementValue = elementNode.nodeName;
 
       assertEqualsAutoCase("element", "elementId","map",elementValue);
-       
+
 }
 
 </script>
@@ -111,7 +111,7 @@ function HTMLDocument15() {
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;NIST&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
     The getElementById method returns the Element whose id is given by
-    elementId.  If no such element exists, returns null.  
+    elementId.  If no such element exists, returns null.
 
     Retrieve the element whose id is "mapid".
     Check the value of the element.
@@ -134,7 +134,7 @@ function HTMLDocument15() {
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/document.html"></iframe>
 <br>

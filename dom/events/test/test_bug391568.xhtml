@@ -17,13 +17,13 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=391568
         <span><xbl:children/></span>
         (anonumous content)</span>
       </xbl:content>
-  
+
       <xbl:implementation>
         <xbl:constructor>
           var win = XPCNativeWrapper.unwrap(window);
           ++win.constructorFired;
           document.getAnonymousNodes(this)[0].addEventListener(
-            "DOMCharacterDataModified", 
+            "DOMCharacterDataModified",
             function(evt) {
               ++win.characterdatamodified;
             },
@@ -49,7 +49,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=391568
 var characterdatamodified = 0;
 
 document.getElementById('real1').addEventListener(
-  "DOMCharacterDataModified", 
+  "DOMCharacterDataModified",
   function(evt) {},
   true);
 

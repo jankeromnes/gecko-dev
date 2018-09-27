@@ -22,7 +22,7 @@
       <path d="m-11 7a13,13 0 0,0 22,0" fill="none" stroke="black"/>
     </g>
   </defs>
-  <!-- to animation 
+  <!-- to animation
 
        This should interpolate from 0 (not 1) to 4 to match the behaviour
        required by the SVGT1.2 test suite and Opera's behaviour.

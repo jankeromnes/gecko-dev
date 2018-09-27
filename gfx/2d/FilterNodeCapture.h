@@ -94,7 +94,7 @@ private:
   // This always contains all inputs, so that Validate may be called on input
   // filter nodes.
   std::unordered_map<uint32_t, Variant<RefPtr<SourceSurface>, RefPtr<FilterNode>>> mInputs;
-  
+
   // This is true if SetInput was called since the last validation.
   bool mInputsChanged;
 };

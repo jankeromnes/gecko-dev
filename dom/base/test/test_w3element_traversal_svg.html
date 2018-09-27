@@ -19,7 +19,7 @@ SimpleTest.waitForExplicitFinish();
 function run()
 {
   var doc = $("svg").contentDocument;
-  
+
   //et-namespace.svg
   var parentEl = doc.getElementById("parentEl_namespace");
   var nChild = parentEl.firstElementChild;
@@ -94,7 +94,7 @@ function run()
   //et-childElementCount-nochild.svg
   var parentEl = doc.getElementById("parentEl_nochild");
   is(0, parentEl.childElementCount, "got wrong childElementCount");
-  
+
 
   SimpleTest.finish();
 }

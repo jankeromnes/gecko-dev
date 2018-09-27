@@ -28,7 +28,7 @@ try {
 
 test();
 function test() {
-  try  { 
+  try  {
     eval('let(z) { with({}) let y = 3; }');
   } catch(ex) {
     (function(x) { return !(x) })(0/0)

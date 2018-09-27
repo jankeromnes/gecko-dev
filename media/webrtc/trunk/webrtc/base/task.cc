@@ -150,7 +150,7 @@ void Task::Abort(bool nowake) {
     blocked_ = true;
     error_ = true;
 
-    // "done_" is set before calling "Stop()" to ensure that this code 
+    // "done_" is set before calling "Stop()" to ensure that this code
     // doesn't execute more than once (recursively) for the same task.
     Stop();
 #if RTC_DCHECK_IS_ON

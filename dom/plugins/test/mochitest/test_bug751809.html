@@ -25,7 +25,7 @@
     var plugin = document.getElementById('plugin');
     var objLoadingContent = SpecialPowers.wrap(plugin);
     ok(!objLoadingContent.activated, "plugin should not be activated");
-    
+
     SimpleTest.waitForFocus(afterWindowFocus);
   }
 
@@ -38,7 +38,7 @@
     SimpleTest.waitForCondition(condition, afterPluginActivation,
                                 "Waited too long for plugin to activate");
   }
-    
+
   function afterPluginActivation() {
     var plugin = document.getElementById('plugin');
     var objLoadingContent = SpecialPowers.wrap(plugin);

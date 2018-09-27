@@ -629,18 +629,18 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 RIDL!{#[uuid(0x0000002F, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl){
     fn RecordInit(
-        pvNew: PVOID, 
+        pvNew: PVOID,
     ) -> HRESULT,
     fn RecordClear(
         pvExisting: PVOID,
     ) -> HRESULT,
     fn RecordCopy(
-        pvExisting: PVOID, 
+        pvExisting: PVOID,
         pvNew: PVOID,
     ) -> HRESULT,
     fn GetGuid(
-        pguid: *mut GUID, 
-    ) -> HRESULT, 
+        pguid: *mut GUID,
+    ) -> HRESULT,
     fn GetName(
         pbstrName: *mut BSTR,
     ) -> HRESULT,
@@ -651,26 +651,26 @@ interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl){
         ppTypeInfo: *mut *mut ITypeInfo,
     ) -> HRESULT,
     fn GetField(
-        pvData: PVOID, 
-        szFieldName: LPCOLESTR, 
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
         pvarField: *mut VARIANT,
     ) -> HRESULT,
     fn GetFieldNoCopy(
-        pvData: PVOID, 
-        szFieldName: LPCOLESTR, 
-        pvarField: *mut VARIANT, 
-        ppvDataCArray: *mut PVOID, 
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
+        pvarField: *mut VARIANT,
+        ppvDataCArray: *mut PVOID,
     ) -> HRESULT,
     fn PutField(
-        wFlags: ULONG, 
-        pvData: PVOID, 
-        szFieldName: LPCOLESTR, 
+        wFlags: ULONG,
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
         pvarField: *mut VARIANT,
     ) -> HRESULT,
     fn PutFieldNoCopy(
-        wFlags: ULONG, 
-        pvData: PVOID, 
-        szFieldName: LPCOLESTR, 
+        wFlags: ULONG,
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
         pvarField: *mut VARIANT,
     ) -> HRESULT,
     fn GetFieldNames(
@@ -678,13 +678,13 @@ interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl){
         rgBstrNames: *mut BSTR,
     ) -> HRESULT,
     fn IsMatchingType(
-        pRecordInfo: *mut IRecordInfo, 
+        pRecordInfo: *mut IRecordInfo,
     ) -> BOOL,
     fn RecordCreate() -> PVOID,
     fn RecordCreateCopy(
-        pvSource: PVOID, 
+        pvSource: PVOID,
         ppvDest: *mut PVOID,
-    ) -> HRESULT, 
+    ) -> HRESULT,
     fn RecordDestroy(
         pvRecord: PVOID,
     ) -> HRESULT,

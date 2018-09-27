@@ -525,7 +525,7 @@ cairo_gl_surface_swapbuffers (cairo_surface_t *abstract_surface)
 
         status = _cairo_gl_context_release (ctx, status);
         if (status)
-            status = _cairo_surface_set_error (abstract_surface, status);         
+            status = _cairo_surface_set_error (abstract_surface, status);
     }
 }
 
@@ -647,7 +647,7 @@ _cairo_gl_surface_draw_image (cairo_gl_surface_t *dst,
 	}
     } else {
         cairo_surface_t *tmp;
-        
+
         tmp = _cairo_gl_surface_create_scratch (ctx,
                                                 dst->base.content,
                                                 width, height);

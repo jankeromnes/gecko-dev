@@ -44,7 +44,7 @@ LMDB 0.9.18 Release (2016/02/05)
 	Documentation
 		Add Getting Started page
 		Update WRITEMAP description
-	
+
 
 LMDB 0.9.17 Release (2015/11/30)
 	Fix ITS#7377 catch calloc failure

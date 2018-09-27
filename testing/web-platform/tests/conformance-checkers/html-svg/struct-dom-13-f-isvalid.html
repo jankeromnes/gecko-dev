@@ -16,7 +16,7 @@
   <!--=  All Rights Reserved.                                              =-->
   <!--=  See http://www.w3.org/Consortium/Legal/.                          =-->
   <!--======================================================================-->
-  
+
   <title id="test-title">$RCSfile: struct-dom-13-f.svg,v $</title>
   <defs>
     <font-face
@@ -47,10 +47,10 @@
 
 		<circle id="c4" cx="80" cy="50" r="10" fill="yellow"/>
 	</g>
-	
+
 	<script><![CDATA[
 	var ypos = 100;
-	
+
 	function verify(str, result)
 	{
 		var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
@@ -70,7 +70,7 @@
 		ypos += 10;
 		document.getElementById("test-body-content").appendChild(g);
 	}
-		
+
 	function test()
 	{
 		var root = document.documentElement; //document.getElementById("test-root");
@@ -79,35 +79,35 @@
 		rect.y = 10;
 		rect.width = 50;
 		rect.height = 50;
-		
+
 		var tests = { "c1" : true, "c2" : true, "c3" : true, "l1" : true, "l2" : true, "r1" : true, "c4" : false };
-		
+
 		verify("checkIntersection", root.checkIntersection);
-		
+
 		if(root.checkIntersection)
 		{
 			for(var test in tests)
 			{
-				try 
+				try
 				{
 					var elm = document.getElementById(test);
 					var result = root.checkIntersection(elm, rect);
-				
+
 					verify(test, result == tests[test]);
-				} 
+				}
 				catch(e)
 				{
 					verify(test, false);
 				}
 			}
 		}
-		
+
 		verify("getIntersectionList", root.getIntersectionList);
-		
+
 		if(root.getIntersectionList)
 		{
 			var expected = [ "c1", "c2", "c3", "l1", "l2", "r1" ];
-			try 
+			try
 			{
 				var list = root.getIntersectionList(rect, null);
 				verify("call", true);
@@ -116,7 +116,7 @@
 			{
 				verify("call", false);
 			}
-			
+
 			try
 			{
 				verify("length", expected.length == list.length);
@@ -125,7 +125,7 @@
 			{
 				verify("length", false);
 			}
-			
+
 			for(var i = 0; i < expected.length; i++)
 			{
 				var elm = document.getElementById(expected[i]);

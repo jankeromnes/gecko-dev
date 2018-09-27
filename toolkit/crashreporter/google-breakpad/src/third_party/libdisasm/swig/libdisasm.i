@@ -32,10 +32,10 @@
 %rename(op_access) x86_op_access;
 %rename(op_flags) x86_op_flags;
 %rename(operand) x86_op_t;
-%rename(insn_group) x86_insn_group; 
+%rename(insn_group) x86_insn_group;
 %rename(insn_type) x86_insn_type;
 %rename(insn_note) x86_insn_note ;
-%rename(flag_status) x86_flag_status; 
+%rename(flag_status) x86_flag_status;
 %rename(insn_cpu) x86_insn_cpu ;
 %rename(insn_isa) x86_insn_isa ;
 %rename(insn_prefix) x86_insn_prefix ;
@@ -88,8 +88,8 @@
 %array_class( unsigned char, byteArray );
 
 
-%apply (unsigned char *STRING, int LENGTH) { 
-	(unsigned char *buf, size_t buf_len) 
+%apply (unsigned char *STRING, int LENGTH) {
+	(unsigned char *buf, size_t buf_len)
 };
 
 
@@ -97,7 +97,7 @@
 %inline %{
 	x86_op_t * x86_op_copy( x86_op_t * src ) {
 		x86_op_t *op;
-		
+
 		if (! src ) {
 			return NULL;
 		}
@@ -121,7 +121,7 @@
 	} x86_op_list;
 
 	x86_op_list * x86_op_list_new () {
-		x86_op_list *list = (x86_op_list *) 
+		x86_op_list *list = (x86_op_list *)
 				calloc( sizeof(x86_op_list), 1 );
 		list->count = 0;
 		return list;
@@ -141,15 +141,15 @@
 		free( list );
 	}
 
-	x86_op_list_node * x86_op_list_first(x86_op_list *list) { 
-		return list->head; 
+	x86_op_list_node * x86_op_list_first(x86_op_list *list) {
+		return list->head;
 	}
 
-	x86_op_list_node * x86_op_list_last(x86_op_list *list) { 
-		return list->tail; 
+	x86_op_list_node * x86_op_list_last(x86_op_list *list) {
+		return list->tail;
 	}
 
-	x86_op_list_node * x86_op_list_next(x86_op_list *list) { 
+	x86_op_list_node * x86_op_list_next(x86_op_list *list) {
 		if (! list->curr ) {
 			list->curr = list->head;
 			return list->head;
@@ -159,7 +159,7 @@
 		return list->curr;
 	}
 
-	x86_op_list_node * x86_op_list_prev(x86_op_list *list) { 
+	x86_op_list_node * x86_op_list_prev(x86_op_list *list) {
 		if (! list->curr ) {
 			list->curr = list->tail;
 			return list->tail;
@@ -276,7 +276,7 @@
 
 %inline %{
 	x86_insn_list * x86_insn_list_new () {
-		x86_insn_list *list = (x86_insn_list *) 
+		x86_insn_list *list = (x86_insn_list *)
 				calloc( sizeof(x86_insn_list), 1 );
 		list->count = 0;
 		return list;
@@ -300,21 +300,21 @@
 		free( list );
 	}
 
-	x86_insn_list_node * x86_insn_list_first( x86_insn_list *list ) { 
+	x86_insn_list_node * x86_insn_list_first( x86_insn_list *list ) {
 		if (! list ) {
 			return NULL;
 		}
-		return list->head; 
+		return list->head;
 	}
 
-	x86_insn_list_node * x86_insn_list_last( x86_insn_list *list ) { 
+	x86_insn_list_node * x86_insn_list_last( x86_insn_list *list ) {
 		if (! list ) {
 			return NULL;
 		}
-		return list->tail; 
+		return list->tail;
 	}
 
-	x86_insn_list_node * x86_insn_list_next( x86_insn_list *list ) { 
+	x86_insn_list_node * x86_insn_list_next( x86_insn_list *list ) {
 		if (! list ) {
 			return NULL;
 		}
@@ -327,7 +327,7 @@
 		return list->curr;
 	}
 
-	x86_insn_list_node * x86_insn_list_prev( x86_insn_list *list ) { 
+	x86_insn_list_node * x86_insn_list_prev( x86_insn_list *list ) {
 		if (! list ) {
 			return NULL;
 		}
@@ -377,7 +377,7 @@
 		void * disasm_resolver;
 	} x86disasm;
 
-	void x86_default_reporter( enum x86_report_codes code, 
+	void x86_default_reporter( enum x86_report_codes code,
 				   void *data, void *arg ) {
 		x86disasm *dis = (x86disasm *) arg;
 		if ( dis ) {
@@ -404,7 +404,7 @@
 		return 0;
 	}
 
-	
+
 %}
 
 %newobject x86disasm_new;
@@ -426,14 +426,14 @@
 %newobject x86_disasm;
 
 %inline %{
-	x86_insn_t * disasm( unsigned char *buf, size_t buf_len, 
+	x86_insn_t * disasm( unsigned char *buf, size_t buf_len,
 		           unsigned long buf_rva, unsigned int offset ) {
 		x86_insn_t *insn = calloc( sizeof( x86_insn_t ), 1 );
 		x86_disasm( buf, buf_len, buf_rva, offset, insn );
 		return insn;
 	}
 
-	int disasm_range( unsigned char *buf, size_t buf_len, 
+	int disasm_range( unsigned char *buf, size_t buf_len,
 	              unsigned long buf_rva, unsigned int offset,
 		      unsigned int len ) {
 
@@ -443,7 +443,7 @@
 			len = buf_len;
 		}
 
-		return x86_disasm_range( buf, buf_rva, offset, len, 
+		return x86_disasm_range( buf, buf_rva, offset, len,
 				x86_default_callback, list );
 	}
 
@@ -453,11 +453,11 @@
 
 		/* use default resolver: damn SWIG callbacks! */
 		return x86_disasm_forward( buf, buf_len, buf_rva, offset,
-			                   x86_default_callback, list, 
+			                   x86_default_callback, list,
 					   x86_default_resolver, NULL );
 	}
 
-	size_t disasm_invariant( unsigned char *buf, size_t buf_len, 
+	size_t disasm_invariant( unsigned char *buf, size_t buf_len,
 			  x86_invariant_t *inv ) {
 		return x86_invariant_disasm( buf, buf_len, inv );
 	}

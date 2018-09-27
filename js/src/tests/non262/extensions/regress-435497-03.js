@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   try
   {
     eval('(function() { x getter= function(){} ; var x5, x = 0x99; })();');

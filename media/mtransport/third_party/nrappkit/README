@@ -1,4 +1,4 @@
-$Id: README,v 1.3 2007/11/21 00:09:10 adamcain Exp $ 
+$Id: README,v 1.3 2007/11/21 00:09:10 adamcain Exp $
 
 nrappkit 1.0b2
 Copyright (C) 2006 Network Resonance, Inc.
@@ -16,8 +16,8 @@ appliances. It provides:
 - launcher daemon
 
 The contents of nrappkit were extracted from Network Resonance's
-product on the theory that they were generally useful for 
-application developers. 
+product on the theory that they were generally useful for
+application developers.
 
 THIS PACKAGE DOES NOT GRANT A LICENSE OR RIGHT TO ANY OTHER NETWORK
 RESONANCE TECHNOLOGY OR SOFTWARE.
@@ -46,7 +46,7 @@ like (e.g., nobody).
 If you want to include the 'nrsh' command-line configuration
 tool in your build, you will need to make sure the line
   BUILD_NRSH=yes
-appears (uncommented-out) in your platform Makefile.  You will 
+appears (uncommented-out) in your platform Makefile.  You will
 also need to to build OpenSSL and libedit and point your nrappkit
 Makefile to the correct paths. You can obtain these packages at:
     openssl-0.9.7l
@@ -97,7 +97,7 @@ following commands recognized:
                         a form easily parsed by scripts
 
   enable             -- alters the mode.txt file so that captured
-                        starts 
+                        starts
 
   disable            -- alters the mode.txt file so that captured
                         does not start

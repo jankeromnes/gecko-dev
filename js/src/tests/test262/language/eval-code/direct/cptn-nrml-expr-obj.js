@@ -14,7 +14,7 @@ var x = {};
 var y;
 if (eval("y = x") !== x) {
   $ERROR('#1: var x = {}; eval("y = x") === x. Actual: ' + (eval("y = x")));
-}    
+}
 
 
 //CHECK#2

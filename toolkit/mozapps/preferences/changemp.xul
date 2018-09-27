@@ -15,7 +15,7 @@
 
 <dialog id="changemp" title="&setPassword.title;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        style="width: 40em;" 
+        style="width: 40em;"
         ondialogaccept="setPassword();"
         onload="init()">
 

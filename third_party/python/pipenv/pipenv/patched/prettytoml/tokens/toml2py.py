@@ -19,7 +19,7 @@ def deserialize(token):
 
     Raises DeserializationError when appropriate.
     """
-    
+
     if token.type == TYPE_BOOLEAN:
         return _to_boolean(token)
     elif token.type == TYPE_INTEGER:

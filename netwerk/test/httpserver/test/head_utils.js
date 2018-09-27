@@ -433,7 +433,7 @@ function runRawTests(testArray, done)
   var currentThread = Cc["@mozilla.org/thread-manager;1"]
                         .getService()
                         .currentThread;
-  
+
   /** Kicks off running the next test in the array. */
   function performNextTest()
   {
@@ -560,7 +560,7 @@ function runRawTests(testArray, done)
     };
 
   /** Writes data to the socket. */
-  var writer = 
+  var writer =
     {
       onOutputStreamReady: function(stream)
       {
@@ -583,7 +583,7 @@ function runRawTests(testArray, done)
 
         try
         {
-          // Keep writing data while we can write and 
+          // Keep writing data while we can write and
           // until there's no more data to read
           if (written > 0 && dataIndex < testArray[testIndex].data.length)
             waitToWriteOutput(stream);

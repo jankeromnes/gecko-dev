@@ -15,7 +15,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=343416
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=343416">Mozilla Bug 343416</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 </pre>
@@ -43,7 +43,7 @@ var idleObserver =
     {
         if (topic != "idle")
             return;
-        
+
         var diff = Math.abs(data - newIdleSeconds * 1000);
 
 //        ok (diff < 5000, "The idle time should have increased by roughly 6 seconds, " +
@@ -51,7 +51,7 @@ var idleObserver =
 //        if (diff >= 5000)
 //            alert(data + "  " + newIdleSeconds);
 
-        // Attempt to get to the nsIIdleService        
+        // Attempt to get to the nsIIdleService
         var subjectOK = false;
         try {
             var idleService = subject.QueryInterface(nsIIdleService);
@@ -189,7 +189,7 @@ function finishThisTest()
         }
         catch (ex)
         {}
-    
+
         ok(removedListener, "We added a listener and we should be able to remove it.");
     }
     // Done:

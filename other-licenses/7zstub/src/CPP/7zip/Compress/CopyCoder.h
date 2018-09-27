@@ -21,7 +21,7 @@ class CCopyCoder:
   CMyComPtr<ISequentialInStream> _inStream;
 public:
   UInt64 TotalSize;
-  
+
   CCopyCoder(): _buf(0), TotalSize(0) {};
   ~CCopyCoder();
 

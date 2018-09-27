@@ -34,7 +34,7 @@ function myFunction2(){
   try{
     throw "exc";
     return 1;
-  }catch(err){  	
+  }catch(err){
     return 0;
   }finally{
     c2=1;
@@ -54,7 +54,7 @@ var c3=0;
 function myFunction3(){
   try{
     return someValue;
-  }catch(err){  	
+  }catch(err){
     return 1;
   }finally{
     c3=1;
@@ -96,7 +96,7 @@ catch(e){
   }
   if (c4!==1){
     $ERROR('#4.4: "finally" block must be evaluated');
-  }	
+  }
 }
 
 // CHECK#5
@@ -126,7 +126,7 @@ catch(e){
   }
   if (c5!==1){
     $ERROR('#5.4: "finally" block must be evaluated');
-  } 	
+  }
 }
 
 // CHECK#6
@@ -157,7 +157,7 @@ catch(e){
   }
   if(e!=="ex3"){
     $ERROR('#6.4: Exception === "ex3". Actual:  Exception ==='+ e  );
-  }	
+  }
   if(c6!==1) $ERROR('#6.5: "finally" block must be evaluated');
 }
 

@@ -62,7 +62,7 @@ void COverwriteDialog::SetFileInfoControl(int textID, int iconID,
 
   ReduceString(s1);
   ReduceString(s2);
-  
+
   UString s = s1;
   s.Add_LF();
   s += s2;

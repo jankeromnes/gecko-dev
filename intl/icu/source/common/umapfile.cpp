@@ -102,7 +102,7 @@
     {
         HANDLE map;
         HANDLE file;
-        
+
         UDataMemory_init(pData); /* Clear the output struct.        */
 
         /* open the input file */
@@ -333,14 +333,14 @@
         }
         return dest;
     }
-    
+
     /*------------------------------------------------------------------------------
-     *                                                                              
-     *  computeDirPath   given a user-supplied path of an item to be opened,             
-     *                         compute and return 
-     *                            - the full directory path to be used 
+     *
+     *  computeDirPath   given a user-supplied path of an item to be opened,
+     *                         compute and return
+     *                            - the full directory path to be used
      *                              when opening the file.
-     *                            - Pointer to null at end of above returned path    
+     *                            - Pointer to null at end of above returned path
      *
      *                       Parameters:
      *                          path:        input path.  Buffer is not altered.
@@ -352,23 +352,23 @@
      *                    TODO:  This works the way ICU historically has, but the
      *                           whole data fallback search path is so complicated that
      *                           proabably almost no one will ever really understand it,
-     *                           the potential for confusion is large.  (It's not just 
+     *                           the potential for confusion is large.  (It's not just
      *                           this one function, but the whole scheme.)
-     *                            
+     *
      *------------------------------------------------------------------------------*/
     static char *uprv_computeDirPath(const char *path, char *pathBuffer)
     {
         char   *finalSlash;       /* Ptr to last dir separator in input path, or null if none. */
         int32_t pathLen;          /* Length of the returned directory path                     */
-        
+
         finalSlash = 0;
         if (path != 0) {
             finalSlash = uprv_strrchr(path, U_FILE_SEP_CHAR);
         }
-        
+
         *pathBuffer = 0;
         if (finalSlash == 0) {
-        /* No user-supplied path.  
+        /* No user-supplied path.
             * Copy the ICU_DATA path to the path buffer and return that*/
             const char *icuDataDir;
             icuDataDir=u_getDataDirectory();
@@ -378,8 +378,8 @@
                 /* there is no icuDataDir either.  Just return the empty pathBuffer. */
                 return pathBuffer;
             }
-        } 
-        
+        }
+
         /* User supplied path did contain a directory portion.
         * Copy it to the output path buffer */
         pathLen = (int32_t)(finalSlash - path + 1);
@@ -387,7 +387,7 @@
         *(pathBuffer+pathLen) = 0;
         return pathBuffer+pathLen;
     }
-    
+
 
 #   define DATA_TYPE "dat"
 
@@ -490,7 +490,7 @@
             pData->map     = NULL;
             pData->mapAddr = NULL;
             pData->pHeader = NULL;
-        }   
+        }
     }
 
 #else

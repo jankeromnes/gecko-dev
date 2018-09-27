@@ -49,7 +49,7 @@ class Indexer:
 
        The toc data file should be list of tab-separated records, one
        per line, of each spec section's uri, number/letter, and title.
-       `splitChapter` selects a single page index if False, chapter 
+       `splitChapter` selects a single page index if False, chapter
        indicies if True.
        `extraData` can be a dictionary whose data gets passed to the templates.
        `overviewCopyExts` lists file extensions that should be found
@@ -88,7 +88,7 @@ class Indexer:
       numstr = escapeToNamedASCII(numstr)
       title = escapeToNamedASCII(title) if title else None
       self.sections[uriKey] = Section(uri, title, numstr)
-    
+
     self.suites = suites
     self.flags = flags
 
@@ -194,7 +194,7 @@ class Indexer:
     data['suite']      = self.suite.name
     data['specroot']   = self.suite.specroot
     data['draftroot']  = self.suite.draftroot
-    
+
     data['indexext']   = format.indexExt
     data['isXML']      = format.indexExt.startswith('.x')
     data['formatdir']  = format.formatDirName

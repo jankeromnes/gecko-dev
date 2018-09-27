@@ -10,7 +10,7 @@ description: this is not coerced to an object (function)
   {
     'use strict';
     return typeof(this);
-  } 
+  }
 
   function bar()
   {

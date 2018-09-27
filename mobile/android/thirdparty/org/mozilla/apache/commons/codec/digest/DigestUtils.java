@@ -6,9 +6,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,7 +28,7 @@ import org.mozilla.apache.commons.codec.binary.StringUtils;
 
 /**
  * Operations to simplify common {@link java.security.MessageDigest} tasks. This class is thread safe.
- * 
+ *
  * @author Apache Software Foundation
  * @version $Id: DigestUtils.java 1064793 2011-01-28 17:42:55Z ggregory $
  */
@@ -38,7 +38,7 @@ public class DigestUtils {
 
     /**
      * Read through an InputStream and returns the digest for the data
-     * 
+     *
      * @param digest
      *            The MessageDigest to use (e.g. MD5)
      * @param data
@@ -61,7 +61,7 @@ public class DigestUtils {
 
     /**
      * Calls {@link StringUtils#getBytesUtf8(String)}
-     * 
+     *
      * @param data
      *            the String to encode
      * @return encoded bytes
@@ -72,7 +72,7 @@ public class DigestUtils {
 
     /**
      * Returns a <code>MessageDigest</code> for the given <code>algorithm</code>.
-     * 
+     *
      * @param algorithm
      *            the name of the algorithm requested. See <a
      *            href="http://java.sun.com/j2se/1.3/docs/guide/security/CryptoSpec.html#AppA">Appendix A in the Java
@@ -93,7 +93,7 @@ public class DigestUtils {
 
     /**
      * Returns an MD5 MessageDigest.
-     * 
+     *
      * @return An MD5 digest instance.
      * @throws RuntimeException
      *             when a {@link java.security.NoSuchAlgorithmException} is caught.
@@ -107,7 +107,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @return An SHA-256 digest instance.
      * @throws RuntimeException
      *             when a {@link java.security.NoSuchAlgorithmException} is caught.
@@ -121,7 +121,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @return An SHA-384 digest instance.
      * @throws RuntimeException
      *             when a {@link java.security.NoSuchAlgorithmException} is caught.
@@ -135,7 +135,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @return An SHA-512 digest instance.
      * @throws RuntimeException
      *             when a {@link java.security.NoSuchAlgorithmException} is caught.
@@ -146,7 +146,7 @@ public class DigestUtils {
 
     /**
      * Returns an SHA-1 digest.
-     * 
+     *
      * @return An SHA-1 digest instance.
      * @throws RuntimeException
      *             when a {@link java.security.NoSuchAlgorithmException} is caught.
@@ -157,7 +157,7 @@ public class DigestUtils {
 
     /**
      * Calculates the MD5 digest and returns the value as a 16 element <code>byte[]</code>.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return MD5 digest
@@ -168,7 +168,7 @@ public class DigestUtils {
 
     /**
      * Calculates the MD5 digest and returns the value as a 16 element <code>byte[]</code>.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return MD5 digest
@@ -182,7 +182,7 @@ public class DigestUtils {
 
     /**
      * Calculates the MD5 digest and returns the value as a 16 element <code>byte[]</code>.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return MD5 digest
@@ -193,7 +193,7 @@ public class DigestUtils {
 
     /**
      * Calculates the MD5 digest and returns the value as a 32 character hex string.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return MD5 digest as a hex string
@@ -204,7 +204,7 @@ public class DigestUtils {
 
     /**
      * Calculates the MD5 digest and returns the value as a 32 character hex string.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return MD5 digest as a hex string
@@ -218,7 +218,7 @@ public class DigestUtils {
 
     /**
      * Calculates the MD5 digest and returns the value as a 32 character hex string.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return MD5 digest as a hex string
@@ -229,7 +229,7 @@ public class DigestUtils {
 
     /**
      * Calculates the SHA-1 digest and returns the value as a <code>byte[]</code>.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-1 digest
@@ -240,7 +240,7 @@ public class DigestUtils {
 
     /**
      * Calculates the SHA-1 digest and returns the value as a <code>byte[]</code>.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-1 digest
@@ -254,7 +254,7 @@ public class DigestUtils {
 
     /**
      * Calculates the SHA-1 digest and returns the value as a <code>byte[]</code>.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-1 digest
@@ -268,7 +268,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-256 digest
@@ -283,7 +283,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-256 digest
@@ -300,7 +300,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-256 digest
@@ -315,7 +315,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-256 digest as a hex string
@@ -330,7 +330,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-256 digest as a hex string
@@ -347,7 +347,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-256 digest as a hex string
@@ -362,7 +362,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-384 digest
@@ -377,7 +377,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-384 digest
@@ -394,7 +394,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-384 digest
@@ -409,7 +409,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-384 digest as a hex string
@@ -424,7 +424,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-384 digest as a hex string
@@ -441,7 +441,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-384 digest as a hex string
@@ -456,7 +456,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-512 digest
@@ -471,7 +471,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-512 digest
@@ -488,7 +488,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-512 digest
@@ -503,7 +503,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-512 digest as a hex string
@@ -518,7 +518,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-512 digest as a hex string
@@ -535,7 +535,7 @@ public class DigestUtils {
      * <p>
      * Throws a <code>RuntimeException</code> on JRE versions prior to 1.4.0.
      * </p>
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-512 digest as a hex string
@@ -547,7 +547,7 @@ public class DigestUtils {
 
     /**
      * Calculates the SHA-1 digest and returns the value as a hex string.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-1 digest as a hex string
@@ -558,7 +558,7 @@ public class DigestUtils {
 
     /**
      * Calculates the SHA-1 digest and returns the value as a hex string.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-1 digest as a hex string
@@ -572,7 +572,7 @@ public class DigestUtils {
 
     /**
      * Calculates the SHA-1 digest and returns the value as a hex string.
-     * 
+     *
      * @param data
      *            Data to digest
      * @return SHA-1 digest as a hex string

@@ -15,9 +15,9 @@ try{
 	$ERROR('#1: 1 instanceof Math throw TypeError');
 }
 catch(e){
-  if (e  instanceof TypeError !== true) { 
+  if (e  instanceof TypeError !== true) {
     $ERROR('#1: 1 instanceof Math throw TypeError');
-  }  
+  }
 }
 
 reportCompare(0, 0);

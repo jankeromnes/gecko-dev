@@ -459,7 +459,7 @@ nsDragService::GetData(nsITransferable* aTransferable, uint32_t aItemIndex)
         continue;
 
       aTransferable->SetTransferData(flavorStr.get(), file, dataLength);
-      
+
       break;
     }
     else if (flavorStr.EqualsLiteral(kCustomTypesMime)) {
@@ -539,7 +539,7 @@ nsDragService::GetData(nsITransferable* aTransferable, uint32_t aItemIndex)
       nsLinebreakHelpers::ConvertPlatformToDOMLinebreaks(flavorStr, &clipboardDataPtr, &signedDataLength);
       dataLength = signedDataLength;
 
-      // skip BOM (Byte Order Mark to distinguish little or big endian)      
+      // skip BOM (Byte Order Mark to distinguish little or big endian)
       char16_t* clipboardDataPtrNoBOM = (char16_t*)clipboardDataPtr;
       if ((dataLength > 2) &&
           ((clipboardDataPtrNoBOM[0] == 0xFEFF) ||

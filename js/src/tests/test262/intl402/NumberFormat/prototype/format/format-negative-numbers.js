@@ -15,7 +15,7 @@ author: Roozbeh Pournader
 ---*/
 
 var formatter = new Intl.NumberFormat();
-  
+
 assert.notSameValue(formatter.format(1), formatter.format(-1), 'Intl.NumberFormat is formatting 1 and -1 the same way.');
 
 assert.notSameValue(formatter.format(0), formatter.format(-0), 'Intl.NumberFormat is formatting 0 and -0 the same way.');

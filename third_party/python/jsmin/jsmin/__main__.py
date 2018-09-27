@@ -6,5 +6,5 @@ for f in sys.argv[1:]:
         minifier = JavascriptMinify(js, sys.stdout)
         minifier.minify()
     sys.stdout.write('\n')
-    
-    
+
+

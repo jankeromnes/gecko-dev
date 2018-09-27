@@ -14,7 +14,7 @@
 <script type="application/javascript">
 <![CDATA[
 /*
- Test loading feeds with text/html 
+ Test loading feeds with text/html
  */
 SimpleTest.waitForExplicitFinish();
 

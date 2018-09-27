@@ -6,8 +6,8 @@
 //  TO ADD NEW TESTS:
 //  1) Increment up 'lastTest' to new number (say, "99")
 //  2) Add new test 'handler99' and 'completeTest99' functions.
-//  3) If your test should fail the necko channel, set 
-//     test_flags[99] = CL_EXPECT_FAILURE.   
+//  3) If your test should fail the necko channel, set
+//     test_flags[99] = CL_EXPECT_FAILURE.
 //
 // TO DEBUG JUST ONE TEST: temporarily change firstTest and lastTest to equal
 //                         the test # you're interested in.
@@ -54,7 +54,7 @@ function runNextTest()
     do_throw("handler" + nextTest + " undefined!");
   if (eval("completeTest" + nextTest) == undefined)
     do_throw("completeTest" + nextTest + " undefined!");
-  
+
   run_test_number(nextTest);
 }
 
@@ -104,11 +104,11 @@ function completeTest1(request, data, ctx)
   } catch (ex) {
     do_throw("error parsing Content-Disposition: " + ex);
   }
-  runNextTest();  
+  runNextTest();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Test 2: no filename 
+// Test 2: no filename
 function handler2(metadata, response)
 {
   response.setStatusLine(metadata.httpVersion, 200, "OK");
@@ -128,9 +128,9 @@ function completeTest2(request, data, ctx)
     filename = chan.contentDispositionFilename;  // should barf
     do_throw("Should have failed getting Content-Disposition filename");
   } catch (ex) {
-    info("correctly ate exception");    
+    info("correctly ate exception");
   }
-  runNextTest();  
+  runNextTest();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -154,9 +154,9 @@ function completeTest3(request, data, ctx)
     filename = chan.contentDispositionFilename;  // should barf
     do_throw("Should have failed getting Content-Disposition filename");
   } catch (ex) {
-    info("correctly ate exception");    
+    info("correctly ate exception");
   }
-  runNextTest();  
+  runNextTest();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -180,7 +180,7 @@ function completeTest4(request, data, ctx)
     filename = chan.contentDispositionFilename;  // should barf
     do_throw("Should have failed getting Content-Disposition filename");
   } catch (ex) {
-    info("correctly ate exception");    
+    info("correctly ate exception");
   }
   runNextTest();
 }

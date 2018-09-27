@@ -5,16 +5,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-          
+
   <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
   <title>Detailed Design Template</title>
 </head>
   <body>
- 
+
 <h1><font color="#cc0000">Gecko Layout Detailed Design Document</font></h1>
- 
+
 <h1>Space Manager Detailed Design</h1>
- 
+
 <h2>Overview</h2>
 <p>
   The Space Manager and related classes and structures are an important of
@@ -23,10 +23,10 @@
  to the classes, structures and algorithms container in this, the Detailed
  Design Document.
 </p>
- 
 
- 
-<hr width="100%" size="2"> 
+
+
+<hr width="100%" size="2">
 <h2>nsSpaceManager</h2>
 <p>
    The Space Manager is the central class is a group of classes that manage
@@ -34,14 +34,14 @@
 a  canvas. &nbsp;The primary goal of the Space Manager is to provide information
  about those bands of space to support the CSS notion of floated elements.
 </p>
- 
+
 <p>
-  There are three important parts to the Space Manager API: the parts that 
+  There are three important parts to the Space Manager API: the parts that
 deal with the coordinate space of the Space Manager, the parts that deal with
 the regions managed by the Space Manager, and the parts that manage float
 impact intervals.
 </p>
- 
+
 <p>
   The class nsSpaceManager is declared in the file <a href="http://lxr.mozilla.org/seamonkey/source/layout/base/src/nsSpaceManager.h">
   nsSpaceManger.h</a>
@@ -50,13 +50,13 @@ impact intervals.
  purpose class, and is not intended to be subclasses<font color="#cc0000">
  .</font>
 </p>
- 
+
 <p>
   Here is the class declaration, taken from the source file as of 01.08.02
 </p>
- 
 
- 
+
+
 <pre>/**
  * Class for dealing with bands of available space. The space manager
  * defines a coordinate space with an origin at (0, 0) that grows down
@@ -318,16 +318,16 @@ private:
 };
 
 </pre>
- 
+
 <h3>Public API</h3>
- 
+
 <h4>Life Cycle:</h4>
 <p>
   The Constructor requires a Presentation Shell, used for arena allocations
  mostly, and a frame that this Space Manager is rooted on. &nbsp;The coordinate
  space of this Space Manager is relative to the frame passed in to the constructor.
 </p>
- 
+
 <pre>  nsSpaceManager(nsIPresShell* aPresShell, nsIFrame* aFrame);
   ~nsSpaceManager();
 </pre>
@@ -340,25 +340,25 @@ of Space Manager instances that can be present in the recycler, currently
 4. &nbsp;If more than NS_SPACE_MANAGER_CACHE_SIZE are allocated at a time,
 then standard allocation is used.
 </p>
- 
+
 <pre>
   void* operator new(size_t aSize);
   void operator delete(void* aPtr, size_t aSize);
 
 </pre>
 <p>
- A Static method is used to shutdown the Space Manager recycling. &nbsp;This 
-method deletes all of the Space Mangers inthe recycler,and prevents further 
+ A Static method is used to shutdown the Space Manager recycling. &nbsp;This
+method deletes all of the Space Mangers inthe recycler,and prevents further
 recycling. &nbsp;It is meant to be called only when the layout module is being
 terminated.
 </p>
- 
+
 <pre>  static void Shutdown();
 
 </pre>
- 
+
 <h4>Origin / Coordinate Space Translation</h4>
- 
+
 <pre>  /**
    * Translate the current origin by the specified (dx, dy). This
    * creates a new local coordinate space relative to the current
@@ -380,9 +380,9 @@ terminated.
    */
   PRBool YMost(nscoord&amp; aYMost) const;
 </pre>
- 
+
 <h4>Region Management</h4>
- 
+
 <pre>  /**
    * Returns a band starting at the specified y-offset. The band data
    * indicates which parts of the band are available, and which parts
@@ -459,9 +459,9 @@ terminated.
    */
   void ClearRegions();
 </pre>
- 
+
 <h4>Float Impact</h4>
- 
+
 <pre>  /**
    * Methods for dealing with the propagation of float damage during
    * reflow.
@@ -481,9 +481,9 @@ terminated.
     return mFloatDamage.Intersects(aIntervalBegin + mY, aIntervalEnd + mY);
   }
 </pre>
- 
+
 <h4>Debug Only Methods</h4>
- 
+
 <pre>  /**
    * Dump the state of the spacemanager out to a file
    */
@@ -492,9 +492,9 @@ terminated.
   void SizeOf(nsISizeOfHandler* aHandler, uint32_t* aResult) const;
 
 </pre>
- 
+
 <h4>Unused / Obsolete Methods</h4>
- 
+
 <pre>  /*
    * Get the frame that's associated with the space manager. This frame
    * created the space manager, and the world coordinate space is
@@ -506,11 +506,11 @@ terminated.
    nsIFrame* GetFrame() const { return mFrame; }
 
 </pre>
- 
+
 <h3>Implementation Notes</h3>
- 
+
 <h4></h4>
- 
+
 <h4>Algorithm 1: GetBandData</h4>
 <p>
 GetBandData is used to provide information to clients about what space if
@@ -590,7 +590,7 @@ as available, and with a rect corresponding to the area remainin in the band
     </ul>
   </ul>
 </ul>
- 
+
 <h4>Algorithm 2: AddRectRegion</h4>
 Clients call into this method to notify the Space Manager that a new frame
 is occupying some space.
@@ -678,7 +678,7 @@ below, or between a band rect. &nbsp;From the current implementation, it
 might be worth verifying that the final result of the inserts is a correctly
 ordered liest of bandRects (debug mode only).</i>
 
- 
+
 <h4>Algorithm 3: RemoveRegion</h4>
  When a float is removed, the Space Manager is notified by a call to RemoveRegion,
 passing in the frame that is being removed.
@@ -716,28 +716,28 @@ then try to join the two bands via JoinBands</li>
 
   </li>
 </ul>
-  
+
 <br>
- 
-<hr width="100%" size="2"> 
+
+<hr width="100%" size="2">
 <h2>Cross-Component Algorithms</h2>
 
 <br>
- 
 
- 
-<hr width="100%" size="2"> 
+
+
+<hr width="100%" size="2">
 <h2>Tech Notes</h2>
 <ul>
   <li>
 
   </li>
- 
+
 </ul>
- 
 
- 
 
- 
+
+
+
 </body>
 </html>

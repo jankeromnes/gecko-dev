@@ -34,7 +34,7 @@ function handleRequest(request, response)
 {
   // avoid confusing cache behaviors
   response.setHeader("Cache-Control", "no-cache", false);
- 
+
   var queryString = request.queryString;
 
   if (queryString == "baseline") {

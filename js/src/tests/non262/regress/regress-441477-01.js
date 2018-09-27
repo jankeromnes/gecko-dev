@@ -20,15 +20,15 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   try
   {
-    for (i = 0; i < 5;) 
-    { 
-      if (i > 5) 
-        throw "bad"; 
-      i++; 
-      continue; 
+    for (i = 0; i < 5;)
+    {
+      if (i > 5)
+        throw "bad";
+      i++;
+      continue;
     }
   }
   catch(ex)

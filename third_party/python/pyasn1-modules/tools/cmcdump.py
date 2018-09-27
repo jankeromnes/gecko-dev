@@ -11,7 +11,7 @@ if len(sys.argv) != 1:
     print("""Usage:
 $ cat cmc_request.pem | %s""" % (sys.argv[0],))
     sys.exit(-1)
-    
+
 reqCnt = 0
 
 substrate = pem.readBase64FromFile(sys.stdin)
@@ -26,7 +26,7 @@ while next_layer:
         layer, rest = decoder.decode(data, asn1Spec=rfc5652.ContentInfo())
         assert encoder.encode(layer) == data, 'wrapper recode fails'
         assert not rest
-    
+
         print(" * New layer (wrapper):")
         print(layer.prettyPrint())
 

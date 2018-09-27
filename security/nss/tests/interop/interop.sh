@@ -38,15 +38,15 @@ interop_init()
   BORING=$(cd "$BORING";pwd -P)
   mkdir "$BORING/build"
   cd "$BORING/build"
-  
-  # Build boring explicitly with gcc because it fails on builds where 
+
+  # Build boring explicitly with gcc because it fails on builds where
   # CC=clang-5.0, for example on asan-builds.
   export CC=gcc
   cmake ..
   make -j$(nproc)
 
-  # Check out and build OpenSSL. 
-  # Build with "enable-external-tests" to include the shim in the build. 
+  # Check out and build OpenSSL.
+  # Build with "enable-external-tests" to include the shim in the build.
   cd "${HOSTDIR}"
   OSSL=${OSSL:=openssl}
   if [ ! -d "$OSSL" ]; then

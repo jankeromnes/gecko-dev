@@ -5,7 +5,7 @@ index d9ad0a0..717e739 100644
 @@ -10,11 +10,6 @@
  #ifndef MKV_CONTEXT_HPP
  #define MKV_CONTEXT_HPP 1
- 
+
 -void writeSimpleBock(EbmlGlobal *ebml, unsigned char trackNumber, unsigned short timeCode,
 -                     int isKeyframe, unsigned char lacingFlag, int  discardable,
 -                     unsigned char *data, unsigned long dataLength);

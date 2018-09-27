@@ -9,9 +9,9 @@ flags: [onlyStrict]
 ---*/
 
     function foo() {};
-    Object.defineProperty(foo.prototype, "bar", {value: "unwritable"}); 
-    
-    var o = new foo(); 
+    Object.defineProperty(foo.prototype, "bar", {value: "unwritable"});
+
+    var o = new foo();
 assert.throws(TypeError, function() {
         o.bar = "overridden";
 });

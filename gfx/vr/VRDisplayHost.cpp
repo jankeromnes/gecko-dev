@@ -228,7 +228,7 @@ VRDisplayHost::StartFrame()
   mFrameStarted = true;
 #if defined(MOZ_WIDGET_ANDROID)
   mLastStartedFrame = mDisplayInfo.mFrameId;
-#endif // !defined(MOZ_WIDGET_ANDROID)  
+#endif // !defined(MOZ_WIDGET_ANDROID)
 }
 
 void
@@ -370,7 +370,7 @@ VRDisplayHost::SubmitFrame(VRLayerParent* aLayer,
 
 #if defined(MOZ_WIDGET_ANDROID)
   /**
-   * Do not queue more submit frames until the last submitted frame is already processed 
+   * Do not queue more submit frames until the last submitted frame is already processed
    * and the new WebGL texture is ready.
    */
   if (mLastSubmittedFrameId > 0 && mLastSubmittedFrameId != mDisplayInfo.mDisplayState.mLastSubmittedFrameId) {
@@ -413,13 +413,13 @@ VRDisplayHost::CheckClearDisplayInfoDirty()
 void
 VRDisplayHost::StartVRNavigation()
 {
-  
+
 }
 
 void
 VRDisplayHost::StopVRNavigation(const TimeDuration& aTimeout)
 {
-  
+
 }
 
 VRControllerHost::VRControllerHost(VRDeviceType aType, dom::GamepadHand aHand,

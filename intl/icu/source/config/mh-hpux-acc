@@ -83,7 +83,7 @@ SHLIB.cc=	$(CXX) $(CXXFLAGS) $(LDFLAGS) -b $(LD_SOOPTIONS)
 
 ## Compiler switch to embed a runtime search path
 LD_RPATH=	-Wl,+b,
-LD_RPATH_PRE= 	
+LD_RPATH_PRE=
 
 ## Environment variable to set a runtime search path
 LDLIBRARYPATH_ENVVAR = SHLIB_PATH
@@ -132,7 +132,7 @@ STATIC_O = o
 INSTALL-L=$(INSTALL_PROGRAM)
 
 ## Remove shared library 's'
-STATIC_PREFIX_WHEN_USED = 
-STATIC_PREFIX = 
+STATIC_PREFIX_WHEN_USED =
+STATIC_PREFIX =
 
 ## End HP/UX-specific setup

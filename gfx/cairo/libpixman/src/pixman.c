@@ -140,9 +140,9 @@ optimize_operator (pixman_op_t     op,
     pixman_bool_t is_source_opaque, is_dest_opaque;
 
 #define OPAQUE_SHIFT 13
-    
+
     COMPILE_TIME_ASSERT (FAST_PATH_IS_OPAQUE == (1 << OPAQUE_SHIFT));
-    
+
     is_dest_opaque = (dst_flags & FAST_PATH_IS_OPAQUE);
     is_source_opaque = ((src_flags & mask_flags) & FAST_PATH_IS_OPAQUE);
 
@@ -462,7 +462,7 @@ analyze_extent (pixman_image_t       *image,
 	    width = params[0];
 	    height = params[1];
 	    break;
-	    
+
 	case PIXMAN_FILTER_GOOD:
 	case PIXMAN_FILTER_BEST:
 	case PIXMAN_FILTER_BILINEAR:
@@ -535,7 +535,7 @@ analyze_extent (pixman_image_t       *image,
 
     if (!compute_transformed_extents (transform, &exp_extents, &transformed))
 	return FALSE;
-    
+
     if (!IS_16_16 (transformed.x1 + x_off - 8 * pixman_fixed_e)	||
 	!IS_16_16 (transformed.y1 + y_off - 8 * pixman_fixed_e)	||
 	!IS_16_16 (transformed.x2 + x_off + 8 * pixman_fixed_e + width)	||
@@ -727,7 +727,7 @@ pixman_image_composite (pixman_op_t      op,
                         uint16_t         width,
                         uint16_t         height)
 {
-    pixman_image_composite32 (op, src, mask, dest, src_x, src_y, 
+    pixman_image_composite32 (op, src, mask, dest, src_x, src_y,
                               mask_x, mask_y, dest_x, dest_y, width, height);
 }
 
@@ -869,7 +869,7 @@ pixman_image_fill_rectangles (pixman_op_t                 op,
 
     if (boxes != stack_boxes)
         free (boxes);
-    
+
     return result;
 }
 
@@ -885,7 +885,7 @@ pixman_image_fill_boxes (pixman_op_t           op,
     int i;
 
     _pixman_image_validate (dest);
-    
+
     if (color->alpha == 0xffff)
     {
         if (op == PIXMAN_OP_OVER)

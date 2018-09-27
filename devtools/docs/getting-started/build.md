@@ -78,7 +78,7 @@ Create a file on the root of the repository, called `mozconfig`, with the follow
 ```
 # Automatically download and use compiled C++ components:
 ac_add_options --enable-artifact-builds
- 
+
 # Write build artifacts to:
 mk_add_options MOZ_OBJDIR=./objdir-frontend
 ```

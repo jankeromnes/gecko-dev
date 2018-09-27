@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "anchor2");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,10 +70,10 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The target attribute specifies the frame to render the source in.
 
-    Retrieve the target attribute and examine it's value.  
+    Retrieve the target attribute and examine it's value.
 
 * @author NIST
 * @author Rick Rivello
@@ -86,7 +86,7 @@ function HTMLAnchorElement11() {
       var testNode;
       var vtarget;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -98,7 +98,7 @@ testNode = nodeList.item(0);
       vtarget = testNode.target;
 
       assertEquals("targetLink","dynamic",vtarget);
-       
+
 }
 
 </script>
@@ -110,7 +110,7 @@ testNode = nodeList.item(0);
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
     The target attribute specifies the frame to render the source in.
 
-    Retrieve the target attribute and examine it's value.  
+    Retrieve the target attribute and examine it's value.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;date qualifier='created'&gt;2002-05-09&lt;/date&gt;
@@ -127,7 +127,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/anchor2.html"></iframe>
 <br>

@@ -1,5 +1,5 @@
-div { 
-  background: yellow; 
+div {
+  background: yellow;
 }
 table {
   background: grey;
@@ -7,7 +7,7 @@ table {
   border-collapse: collapse;
 }
 
-td, th { 
+td, th {
   padding: 0;
   vertical-align: top;
 }

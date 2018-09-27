@@ -1,7 +1,7 @@
 ftp> open ftp.netmanage.com
 Connected to ftp.netmanage.com.
 220 ProFTPD 1.2.4 Server (Netmanage FTP Server) [156.27.8.3]
-Name (ftp.netmanage.com:cyp): 
+Name (ftp.netmanage.com:cyp):
 331 Anonymous login ok, send your complete email address as your password.
 230 Anonymous access granted, restrictions apply.
 Remote system type is UNIX.
@@ -18,4 +18,4 @@ ftp> syst
 215 UNIX Type: L8
 ftp> close
 221 Goodbye.
-ftp> 
+ftp>

@@ -21,7 +21,7 @@
 ########################################################################
 
 ############################# memleak_init #############################
-# local shell function to initialize this script 
+# local shell function to initialize this script
 ########################################################################
 memleak_init()
 {
@@ -29,7 +29,7 @@ memleak_init()
 		cd ../common
 		. ./init.sh
 	fi
-	
+
 	if [ ! -r ${CERT_LOG_FILE} ]; then
 		cd ${QADIR}/cert
 		. ./cert.sh
@@ -48,45 +48,45 @@ memleak_init()
 	DBXOUT="${HOSTDIR}/dbxout"
 	DBXERR="${HOSTDIR}/dbxerr"
 	DBXCMD="${HOSTDIR}/dbxcmd"
-	
+
 	PORT=${PORT:-8443}
-	
+
 	MODE_LIST="NORMAL BYPASS FIPS"
-	
+
 	SERVER_DB="${HOSTDIR}/server_memleak"
 	CLIENT_DB="${HOSTDIR}/client_memleak"
 	cp -r ${HOSTDIR}/server ${SERVER_DB}
 	cp -r ${HOSTDIR}/client ${CLIENT_DB}
-	
+
 	LOGDIR="${HOSTDIR}/memleak_logs"
 	mkdir -p ${LOGDIR}
 
 	FOUNDLEAKS="${LOGDIR}/foundleaks"
-	
+
 	REQUEST_FILE="${QADIR}/memleak/sslreq.dat"
 	IGNORED_STACKS="${QADIR}/memleak/ignored"
-	
+
 	gline=`echo ${OBJDIR} | grep "_64_"`
 	if [ -n "${gline}" ] ; then
 		BIT_NAME="64"
 	else
 		BIT_NAME="32"
 	fi
-		
+
 	case "${OS_NAME}" in
 	"SunOS")
 		DBX=`which dbx`
 		AWK=nawk
-		
+
 		if [ $? -eq 0 ] ; then
 			echo "${SCRIPTNAME}: DBX found: ${DBX}"
 		else
 			echo "${SCRIPTNAME}: DBX not found, skipping memory leak checking."
 			exit 0
 		fi
-		
+
 		PROC_ARCH=`uname -p`
-				
+
 		if [ "${PROC_ARCH}" = "sparc" ] ; then
 			if [ "${BIT_NAME}" = "64" ] ; then
 				FREEBL_DEFAULT="libfreebl_64fpu_3"
@@ -100,18 +100,18 @@ memleak_init()
 				echo "${SCRIPTNAME}: OS not supported for memory leak checking."
 				exit 0
 			fi
-			
+
 			FREEBL_DEFAULT="libfreebl_3"
 			FREEBL_LIST="${FREEBL_DEFAULT}"
 		fi
-		
+
 		RUN_COMMAND_DBG="run_command_dbx"
 		PARSE_LOGFILE="parse_logfile_dbx"
 		;;
 	"Linux")
 		VALGRIND=`which valgrind`
 		AWK=awk
-		
+
 		if [ $? -eq 0 ] ; then
 			echo "${SCRIPTNAME}: Valgrind found: ${VALGRIND}"
 		else
@@ -121,7 +121,7 @@ memleak_init()
 
 		FREEBL_DEFAULT="libfreebl_3"
 		FREEBL_LIST="${FREEBL_DEFAULT}"
-				
+
 		RUN_COMMAND_DBG="run_command_valgrind"
 		PARSE_LOGFILE="parse_logfile_valgrind"
 		;;
@@ -133,7 +133,7 @@ memleak_init()
 
 	if [ "${BUILD_OPT}" = "1" ] ; then
 		OPT="OPT"
-	else 
+	else
 		OPT="DBG"
 	fi
 
@@ -147,19 +147,19 @@ memleak_init()
 	tbytes=0
 	tblocks=0
 	truns=0
-	
+
 	MEMLEAK_DBG=1
 	export MEMLEAK_DBG
 }
 
 ########################### memleak_cleanup ############################
-# local shell function to clean up after this script 
+# local shell function to clean up after this script
 ########################################################################
 memleak_cleanup()
 {
 	unset MEMLEAK_DBG
 	unset NSS_DISABLE_UNLOAD
-	
+
 	. ${QADIR}/common/cleanup.sh
 }
 
@@ -181,22 +181,22 @@ set_test_mode()
 		SERVER_OPTION=""
 		CLIENT_OPTION=""
 	fi
-	
+
 	if [ "${server_mode}" = "FIPS" ] ; then
 		${BINDIR}/modutil -dbdir ${SERVER_DB} -fips true -force
 		${BINDIR}/modutil -dbdir ${SERVER_DB} -list
 		${BINDIR}/modutil -dbdir ${CLIENT_DB} -fips false -force
 		${BINDIR}/modutil -dbdir ${CLIENT_DB} -list
-		
+
 		echo "${SCRIPTNAME}: FIPS is ON"
 		cipher_list="c d e i j k n v y z"
 	elif [ "${client_mode}" = "FIPS" ] ; then
-		
+
 		${BINDIR}/modutil -dbdir ${SERVER_DB} -fips false -force
 		${BINDIR}/modutil -dbdir ${SERVER_DB} -list
 		${BINDIR}/modutil -dbdir ${CLIENT_DB} -fips true -force
 		${BINDIR}/modutil -dbdir ${CLIENT_DB} -list
-		
+
 		echo "${SCRIPTNAME}: FIPS is ON"
 		cipher_list="c d e i j k n v y z"
 	else
@@ -204,7 +204,7 @@ set_test_mode()
 		${BINDIR}/modutil -dbdir ${SERVER_DB} -list
 		${BINDIR}/modutil -dbdir ${CLIENT_DB} -fips false -force
 		${BINDIR}/modutil -dbdir ${CLIENT_DB} -list
-		
+
 		echo "${SCRIPTNAME}: FIPS is OFF"
 		# ciphers l and m removed, see bug 1136095
 		cipher_list=":C001 :C002 :C003 :C004 :C005 :C006 :C007 :C008 :C009 :C00A :C010 :C011 :C012 :C013 :C014 c d e f g i j k n v y z"
@@ -229,7 +229,7 @@ set_freebl()
 
 		cp ${DIST}/${OBJDIR}/lib/*.so ${DIST}/${OBJDIR}/lib/*.chk ${TMP_LIBDIR}
 		[ $? -ne 0 ] && html_failed "Copy libraries to temp directory" && return 1
-		
+
 		echo "${SCRIPTNAME}: Using ${freebl} instead of ${FREEBL_DEFAULT}"
 
 		mv ${TMP_LIBDIR}/${FREEBL_DEFAULT}.so ${TMP_LIBDIR}/${FREEBL_DEFAULT}.so.orig
@@ -255,8 +255,8 @@ set_freebl()
 }
 
 ############################# clear_freebl #############################
-# local shell function to set default library path and clear temporary 
-# directory for libraries created by function set_freebl 
+# local shell function to set default library path and clear temporary
+# directory for libraries created by function set_freebl
 ########################################################################
 clear_freebl()
 {
@@ -276,28 +276,28 @@ run_command_dbx()
 	COMMAND=$1
 	shift
 	ATTR=$*
-	
+
 	COMMAND=`which ${COMMAND}`
-	
+
 	echo "dbxenv follow_fork_mode parent" > ${DBXCMD}
 	echo "dbxenv rtc_mel_at_exit verbose" >> ${DBXCMD}
 	echo "dbxenv rtc_biu_at_exit verbose" >> ${DBXCMD}
 	echo "check -memuse -match 16 -frames 16" >> ${DBXCMD}
 	echo "run ${ATTR}" >> ${DBXCMD}
-	
+
 	export NSS_DISABLE_ARENA_FREE_LIST=1
-	
+
 	echo "${SCRIPTNAME}: -------- Running ${COMMAND} under DBX:"
 	echo "${DBX} ${COMMAND}"
 	echo "${SCRIPTNAME}: -------- DBX commands:"
 	cat ${DBXCMD}
-	
+
 	( ${DBX} ${COMMAND} < ${DBXCMD} > ${DBXOUT} 2> ${DBXERR} )
 	grep -v Reading ${DBXOUT} 1>&2
 	cat ${DBXERR}
-	
+
 	unset NSS_DISABLE_ARENA_FREE_LIST
-	
+
 	grep "exit code is" ${DBXOUT}
 	grep "exit code is 0" ${DBXOUT} > /dev/null
 	return $?
@@ -311,18 +311,18 @@ run_command_valgrind()
 	COMMAND=$1
 	shift
 	ATTR=$*
-	
+
 	export NSS_DISABLE_ARENA_FREE_LIST=1
-	
+
 	echo "${SCRIPTNAME}: -------- Running ${COMMAND} under Valgrind:"
 	echo "${VALGRIND} --tool=memcheck --leak-check=yes --show-reachable=yes --partial-loads-ok=yes --leak-resolution=high --num-callers=50 ${COMMAND} ${ATTR}"
 	echo "Running: ${COMMAND} ${ATTR}" 1>&2
 	${VALGRIND} --tool=memcheck --leak-check=yes --show-reachable=yes --partial-loads-ok=yes --leak-resolution=high --num-callers=50 ${COMMAND} ${ATTR} 1>&2
 	ret=$?
 	echo "==0=="
-	
+
 	unset NSS_DISABLE_ARENA_FREE_LIST
-	
+
 	return $ret
 }
 
@@ -386,7 +386,7 @@ run_strsclnt()
 				"Strsclnt produced a returncode of ${ret} - FAILED"
 		fi
 	done
-	
+
 	ATTR="${TSTCLNT_ATTR} -V ssl3:tls1.2"
 	echo "${SCRIPTNAME}: -------- Stopping server:"
 	echo "tstclnt ${ATTR} < ${REQUEST_FILE}"
@@ -397,13 +397,13 @@ run_strsclnt()
 		echo "${SCRIPTNAME} ${LOGNAME}: " \
 			"Tstclnt produced a returncode of ${ret} - FAILED"
 	fi
-	
+
 	sleep 20
 	kill $(jobs -p) 2> /dev/null
 }
 
 ########################### run_strsclnt_dbg ###########################
-# local shell function to run strsclnt under debug tool for all ciphers 
+# local shell function to run strsclnt under debug tool for all ciphers
 # and send stop command to selfserv over tstclnt
 ########################################################################
 run_strsclnt_dbg()
@@ -426,7 +426,7 @@ run_strsclnt_dbg()
 				"Strsclnt produced a returncode of ${ret} - FAILED"
 		fi
 	done
-	
+
 	ATTR="${TSTCLNT_ATTR} -V ssl3:tls1.2"
 	echo "${SCRIPTNAME}: -------- Stopping server:"
 	echo "tstclnt ${ATTR} < ${REQUEST_FILE}"
@@ -437,7 +437,7 @@ run_strsclnt_dbg()
 		echo "${SCRIPTNAME} ${LOGNAME}: " \
 			"Tstclnt produced a returncode of ${ret} - FAILED"
 	fi
-	
+
 	kill $(jobs -p) 2> /dev/null
 }
 
@@ -456,29 +456,29 @@ stat_add()
 {
 	read hash lbytes bytes_str lblocks blocks_str in_str lruns runs_str \
 		minbytes minbytes_str maxbytes maxbytes_str minblocks \
-		minblocks_str maxblocks maxblocks_str rest < ${TMP_COUNT} 
+		minblocks_str maxblocks maxblocks_str rest < ${TMP_COUNT}
 	rm ${TMP_COUNT}
-	
+
 	tbytes=`expr ${tbytes} + ${lbytes}`
 	tblocks=`expr ${tblocks} + ${lblocks}`
 	truns=`expr ${truns} + ${lruns}`
-	
+
 	if [ ${stat_minbytes} -gt ${minbytes} ]; then
 		stat_minbytes=${minbytes}
 	fi
-			
+
 	if [ ${stat_maxbytes} -lt ${maxbytes} ]; then
 		stat_maxbytes=${maxbytes}
 	fi
-			
+
 	if [ ${stat_minblocks} -gt ${minblocks} ]; then
 		stat_minblocks=${minblocks}
 	fi
-			
+
 	if [ ${stat_maxblocks} -lt ${maxblocks} ]; then
 		stat_maxblocks=${maxblocks}
 	fi
-			
+
 	stat_bytes=`expr ${stat_bytes} + ${lbytes}`
 	stat_blocks=`expr ${stat_blocks} + ${lblocks}`
 	stat_runs=`expr ${stat_runs} + ${lruns}`
@@ -489,7 +489,7 @@ stat_print()
 	if [ ${stat_runs} -gt 0 ]; then
 		stat_avgbytes=`expr "${stat_bytes}" / "${stat_runs}"`
 		stat_avgblocks=`expr "${stat_blocks}" / "${stat_runs}"`
-		
+
 		echo
 		echo "$1 statistics:"
 		echo "Leaked bytes: ${stat_minbytes} min, ${stat_avgbytes} avg, ${stat_maxbytes} max"
@@ -505,38 +505,38 @@ stat_print()
 run_ciphers_server()
 {
 	html_head "Memory leak checking - server"
-	
+
 	stat_clear
-	
-	client_mode="NORMAL"	
+
+	client_mode="NORMAL"
 	for server_mode in ${MODE_LIST}; do
 		set_test_mode
-		
+
 		for freebl in ${FREEBL_LIST}; do
 			set_freebl || continue
-			
+
 			LOGNAME=server-${BIT_NAME}-${freebl}-${server_mode}
 			LOGFILE=${LOGDIR}/${LOGNAME}.log
 			echo "Running ${LOGNAME}"
-			
+
 			(
 			    run_selfserv_dbg 2>> ${LOGFILE} &
 			    sleep 5
 			    run_strsclnt
 			)
-			
+
 			sleep 20
 			clear_freebl
-			
+
 			log_parse
 			ret=$?
-			
+
 			html_msg ${ret} 0 "${LOGNAME}" "produced a returncode of $ret, expected is 0"
 		done
 	done
-	
+
 	stat_print "Selfserv"
-	
+
 	html "</TABLE><BR>"
 }
 
@@ -546,37 +546,37 @@ run_ciphers_server()
 run_ciphers_client()
 {
 	html_head "Memory leak checking - client"
-	
+
 	stat_clear
-	
+
 	server_mode="NORMAL"
 	for client_mode in ${MODE_LIST}; do
 		set_test_mode
-		
+
 		for freebl in ${FREEBL_LIST}; do
 			set_freebl || continue
-			
+
 			LOGNAME=client-${BIT_NAME}-${freebl}-${client_mode}
 			LOGFILE=${LOGDIR}/${LOGNAME}.log
 			echo "Running ${LOGNAME}"
-			
+
 			(
 			    run_selfserv &
 			    sleep 5
 			    run_strsclnt_dbg 2>> ${LOGFILE}
 			)
-			
+
 			sleep 20
 			clear_freebl
-			
+
 			log_parse
 			ret=$?
 			html_msg ${ret} 0 "${LOGNAME}" "produced a returncode of $ret, expected is 0"
 		done
 	done
-	
+
 	stat_print "Strsclnt"
-	
+
 	html "</TABLE><BR>"
 }
 
@@ -664,7 +664,7 @@ parse_logfile_dbx()
 		minbytes " minbytes " maxbytes " maxbytes " minblocks " minblocks " \
 		maxblocks " maxblocks " > "/dev/stderr"
 	}' 2> ${TMP_COUNT}
-	
+
 	stat_add
 }
 
@@ -687,10 +687,10 @@ parse_logfile_valgrind()
 		maxblocks = 0
 		runs = 0
 		stack_string = ""
-		bin_name = "" 
+		bin_name = ""
 	}
-	!/==[0-9]*==/ { 
-		if ( $1 == "Running:" ) 
+	!/==[0-9]*==/ {
+		if ( $1 == "Running:" )
 			bin_name = $2
 			bin_nf = split(bin_name, bin_fields, "/")
 			bin_name = bin_fields[bin_nf]
@@ -705,7 +705,7 @@ parse_logfile_valgrind()
 		in_sum = 1
 		next
 	}
-	/^==[0-9]*== *$/ { 
+	/^==[0-9]*== *$/ {
 		if (in_mel)
 			print bin_name stack_string
 		if (in_sum) {
@@ -723,7 +723,7 @@ parse_logfile_valgrind()
 		in_mel = 0
 		next
 	}
-	in_mel == 1 {	
+	in_mel == 1 {
 		new_line = $4
 		if ( new_line == "(within")
 			new_line = "*"
@@ -748,7 +748,7 @@ parse_logfile_valgrind()
 		minbytes " minbytes " maxbytes " maxbytes " minblocks " minblocks " \
 		maxblocks " maxblocks " > "/dev/stderr"
 	}' 2> ${TMP_COUNT}
-	
+
 	stat_add
 }
 
@@ -828,10 +828,10 @@ log_parse()
 	cat ${TMP_STACKS} | sort -u | check_ignored >> ${TMP_SORTED}
 	ret=$?
 	echo >> ${TMP_SORTED}
-	
+
 	cat ${TMP_SORTED} | tee -a ${FOUNDLEAKS}
 	rm ${TMP_STACKS} ${TMP_SORTED}
-	
+
 	return ${ret}
 }
 
@@ -853,11 +853,11 @@ cnt_total()
 run_ocsp()
 {
 	stat_clear
-	
+
 	cd ${QADIR}/iopr
 	. ./ocsp_iopr.sh
 	ocsp_iopr_run
-	
+
 	stat_print "Ocspclnt"
 }
 
@@ -880,7 +880,7 @@ run_chains()
 # local shell function to run memory leak tests
 #
 # NSS_MEMLEAK_TESTS - list of tests to run, if not defined before,
-# then is redefined to default list 
+# then is redefined to default list
 ########################################################################
 memleak_run_tests()
 {

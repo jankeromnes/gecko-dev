@@ -23,5 +23,5 @@ function foo(e) {
 foo('foo');
 
 actual = 'No Crash';
- 
+
 reportCompare(expect, actual, summary);

@@ -121,7 +121,7 @@ fn test_mapvec_legal() {
   // rendered in block mode, which is not legal (as far as I can tell)
   // inside the flow mode of the key. We need to either fully render
   // everything that's in a key in flow mode (which may make for some
-  // long lines), or use the explicit map identifier '?': 
+  // long lines), or use the explicit map identifier '?':
   //
   //  ```yaml
   //  ---

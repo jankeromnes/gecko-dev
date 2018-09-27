@@ -23,7 +23,7 @@ public:
     }
     _size = 0;
   }
-  
+
   CBuffer(): _items(0), _size(0) {};
   CBuffer(size_t size): _items(0), _size(0) { _items = new T[size]; _size = size; }
   CBuffer(const CBuffer &buffer): _items(0), _size(0)
@@ -151,10 +151,10 @@ public:
   }
   CObjArray(): _items(0) {};
   ~CObjArray() { delete []_items; }
-  
+
   operator       T *()       { return _items; }
   operator const T *() const { return _items; }
-  
+
   void Alloc(size_t newSize)
   {
     delete []_items;
@@ -179,7 +179,7 @@ template <class T> class CObjArray2
   CObjArray2(const CObjArray2 &buffer);
   void operator=(const CObjArray2 &buffer);
 public:
-  
+
   void Free()
   {
     delete []_items;
@@ -214,10 +214,10 @@ public:
   */
 
   ~CObjArray2() { delete []_items; }
-  
+
   operator       T *()       { return _items; }
   operator const T *() const { return _items; }
-  
+
   unsigned Size() const { return (unsigned)_size; }
   bool IsEmpty() const { return _size == 0; }
 

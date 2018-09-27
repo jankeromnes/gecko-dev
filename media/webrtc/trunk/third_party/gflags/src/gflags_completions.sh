@@ -98,7 +98,7 @@ fi
 # that bash added), and appending a '--tab_completion_word "WORD"' to
 # the arguments.
 params=""
-for ((i=1; i<=$(($# - 3)); ++i)); do 
+for ((i=1; i<=$(($# - 3)); ++i)); do
   params="$params \"${!i}\"";
 done
 params="$params --tab_completion_word \"$completion_word\""

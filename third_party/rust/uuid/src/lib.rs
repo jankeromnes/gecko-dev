@@ -215,7 +215,7 @@ pub const NAMESPACE_X500: Uuid = Uuid {
             0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30, 0xc8]
 };
 
-/// The number of 100 ns ticks between 
+/// The number of 100 ns ticks between
 /// the UUID epoch 1582-10-15 00:00:00 and the Unix epoch 1970-01-01 00:00:00
 #[cfg(feature = "v1")]
 const UUID_TICKS_BETWEEN_EPOCHS : u64 = 0x01B21DD213814000;
@@ -348,13 +348,13 @@ impl Uuid {
             _ => None,
         }
     }
-    
+
     /// Creates a new `Uuid` (version 1 style) using a time value + seq + NodeID
     ///
-    /// This expects two values representing a monotonically increasing value 
+    /// This expects two values representing a monotonically increasing value
     /// as well as a unique 6 byte NodeId, and a `UuidV1Context`
     /// This function is only guaranteed to produce unique values if the following
-    /// conditions hold: 
+    /// conditions hold:
     /// 1. The NodeID is unique for this process.
     /// 2. The Context is shared across all threads which are generating V1 UUIDs
     /// 3. The supplied seconds+nsecs values are monotonically increasing.
@@ -364,10 +364,10 @@ impl Uuid {
     ///
     /// The function is not guaranteed to produce monotonically increasing values
     /// however.  There is a slight possibility that two successive equal time values
-    /// could be supplied and the sequence counter wraps back over to 0. 
+    /// could be supplied and the sequence counter wraps back over to 0.
     ///
     /// If uniqueness and monotonicity is required, the user is responsibile for ensuring
-    /// that the time value always increases between calls. 
+    /// that the time value always increases between calls.
     /// (including between restarts of the process and device)
     ///
     /// Note that usage of this method requires the `v1` feature of this crate
@@ -391,9 +391,9 @@ impl Uuid {
         }
         let count = (context.count.fetch_add(1, Ordering::SeqCst) & 0xffff) as u16;
         let timestamp = seconds * 10_000_000 + (nsecs / 100) as u64;
-        let uuidtime = timestamp + UUID_TICKS_BETWEEN_EPOCHS; 
+        let uuidtime = timestamp + UUID_TICKS_BETWEEN_EPOCHS;
         let time_low : u32 = (uuidtime & 0xFFFFFFFF) as u32;
-        let time_mid : u16 = ((uuidtime >> 32) & 0xFFFF) as u16; 
+        let time_mid : u16 = ((uuidtime >> 32) & 0xFFFF) as u16;
         let time_hi_and_ver : u16 = (((uuidtime >> 48) & 0x0FFF) as u16) | (1 << 12);
         let mut d4 = [0_u8; 8];
         d4[0] = (((count & 0x3F00) >> 8) as u8) | 0x80;
@@ -426,7 +426,7 @@ impl Uuid {
         uuid.set_version(UuidVersion::Md5);
         uuid
     }
-    
+
     /// Creates a random `Uuid`.
     ///
     /// This uses the `rand` crate's default task RNG as the source of random numbers.
@@ -717,8 +717,8 @@ impl Uuid {
     }
 
 
-    /// Returns an Optional Tuple of (u64, u16) representing the timestamp and 
-    /// counter portion of a V1 UUID.  If the supplied UUID is not V1, this 
+    /// Returns an Optional Tuple of (u64, u16) representing the timestamp and
+    /// counter portion of a V1 UUID.  If the supplied UUID is not V1, this
     /// will return None
     pub fn to_timestamp(&self) -> Option<(u64, u16)> {
 
@@ -1023,7 +1023,7 @@ mod tests {
         assert!(Uuid::new(UuidVersion::Md5) == None);
         assert!(Uuid::new(UuidVersion::Sha1) == None);
     }
-    
+
     #[cfg(feature = "v1")]
     #[test]
     fn test_new_v1() {
@@ -1241,7 +1241,7 @@ mod tests {
             assert_eq!(uuid.hyphenated().to_string(), *expected);
         }
     }
-    
+
     #[cfg(feature = "v5")]
     #[test]
     fn test_v5_to_hypenated_string() {

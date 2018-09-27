@@ -150,7 +150,7 @@ int16_t WebRtcIsac_CorrelateInterVec(
  * WebRtcIsac_AddLarMean()
  *
  * This is the inverse of WebRtcIsac_RemoveLarMean()
- * 
+ *
  * Input:
  *      -data               : pointer to mean-removed LAR:s.
  *      -bandwidth          : indicates if the given LAR vectors belong
@@ -219,7 +219,7 @@ int16_t WebRtcIsac_DecorrelateLPGain(
  * WebRtcIsac_QuantizeLpcGain()
  *
  * Quantize the decorrelated log-domain gains.
- * 
+ *
  * Input:
  *      -lpcGain            : uncorrelated LPC gains.
  *

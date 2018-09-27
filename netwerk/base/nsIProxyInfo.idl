@@ -35,7 +35,7 @@ interface nsIProxyInfo : nsISupports
    *
    * A future version of this interface may define additional types.
    */
-  readonly attribute ACString type; 
+  readonly attribute ACString type;
 
   /**
    * This attribute specifies flags that modify the proxy type.  The value of
@@ -46,7 +46,7 @@ interface nsIProxyInfo : nsISupports
 
   /**
    * This attribute specifies flags that were used by nsIProxyProtocolService when
-   * creating this ProxyInfo element. 
+   * creating this ProxyInfo element.
    */
   readonly attribute unsigned long resolveFlags;
 

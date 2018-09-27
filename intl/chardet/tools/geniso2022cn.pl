@@ -50,7 +50,7 @@ package genverifier;
   1, 1, 1, 1, 1, 1, 1, 2, 1, # state 6 - got ESC $ *
 );
 
-$iso2022cn_ver = genverifier::GenVerifier("ISO2022CN", "ISO-2022-CN", 
+$iso2022cn_ver = genverifier::GenVerifier("ISO2022CN", "ISO-2022-CN",
       \@iso2022cn_cls, 9, \@iso2022cn_st);
 print $iso2022cn_ver;
 

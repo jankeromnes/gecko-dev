@@ -4,7 +4,7 @@ function run_test() {
 
   var ParserUtils =  Cc["@mozilla.org/parserutils;1"].getService(Ci.nsIParserUtils);
   var sanitizeFlags = ParserUtils.SanitizerCidEmbedsOnly|ParserUtils.SanitizerDropForms|ParserUtils.SanitizerDropNonCSSPresentation;
-  // flags according to 
+  // flags according to
   // http://mxr.mozilla.org/comm-central/source/mailnews/mime/src/mimemoz2.cpp#2218
   // and default settings
 

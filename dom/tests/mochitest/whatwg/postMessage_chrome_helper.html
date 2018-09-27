@@ -34,12 +34,12 @@
         respond(msg);
       }
     }
-    
+
     function respond(msg)
     {
       SpecialPowers.wrap(window).parent.postMessage(msg, "*");
     }
-    
+
     window.addEventListener("message", receiveMessage);
   </script>
 </head>

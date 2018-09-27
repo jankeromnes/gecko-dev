@@ -10,10 +10,10 @@
 
     /* we set the width to 5 inches/360pt/127mm in the reftest-paged class*/
     @media (max-width: 5in) { .c { color: aqua; } }    /* y */
-    @media (max-width: 360pt) { .d { color: aqua; } }  /* y */ 
+    @media (max-width: 360pt) { .d { color: aqua; } }  /* y */
     @media (max-width: 127mm) { .e { color: aqua; } }  /* y */
 
-    @media print and (max-width: 5in) { .f {color: aqua; } }  /* y */ 
+    @media print and (max-width: 5in) { .f {color: aqua; } }  /* y */
     @media print and (max-width: 360pt) { .g {color: aqua; } }/* y */
     @media print and (max-width: 127mm) { .h {color: aqua; } }/* y */
 
@@ -23,11 +23,11 @@
     /* negative cases - values < set values */
     @media all and (max-width: 4in) { .j { color: aqua; } } /* n */
 
-    @media (max-width: 31mm) { .k { color: aqua; } } /* n */ 
+    @media (max-width: 31mm) { .k { color: aqua; } } /* n */
     @media (max-width: 3.14in) { .l { color: aqua; } }  /* n */
     @media (max-width: 314pt) { .m { color: aqua; } } /* n */
 
-    @media screen and (max-width: 5in) { .n {color: aqua; } }   /* n */ 
+    @media screen and (max-width: 5in) { .n {color: aqua; } }   /* n */
     @media screen and (max-width: 360pt) { .o {color: aqua; } } /* n */
     @media screen and (max-width: 127mm) { .p {color: aqua; } } /* n */
 

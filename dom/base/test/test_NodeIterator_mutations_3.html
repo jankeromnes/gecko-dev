@@ -16,7 +16,7 @@
   }
   var initInner = $('content').innerHTML;
   var content = $('content');
-  
+
 
   function resetContent() {
     content.innerHTML = initInner;
@@ -138,22 +138,22 @@
 
   removeNode(E1);
   checkseq(it, root, "root C [E] *");
-  
+
   n = makeSpan('n');
   root.insertBefore(n, E);
   checkseq(it, root, "root C n [E] *");
-  
+
   n2 = makeSpan('n2');
   E.appendChild(n2);
   checkseq(it, root, "root C n [E] * n2");
-  
+
   it.nextNode();
   checkseq(it, root, "root C n E [n2] *");
 
   removeNode(E);
   checkseq(it, root, "root C n");
 
-  
+
 </script>
 </pre>
 </body>

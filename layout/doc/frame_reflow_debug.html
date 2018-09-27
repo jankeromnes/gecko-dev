@@ -15,7 +15,7 @@
  <body>
 <h1>Debugging Frame Reflow HowTo</h1>
 <h2>General Overview</h2>
-<p> The frame reflow can be logged with the debug capabilities implemented in <a href="http://lxr.mozilla.org/seamonkey/source/layout/html/base/src/nsFrame.cpp"><code>nsFrame.cpp</code></a>. 
+<p> The frame reflow can be logged with the debug capabilities implemented in <a href="http://lxr.mozilla.org/seamonkey/source/layout/html/base/src/nsFrame.cpp"><code>nsFrame.cpp</code></a>.
 It provides the following information for each frame at the
 start of its reflow
 <ul>
@@ -81,66 +81,66 @@ logfile will contain all the promised information.
 <p> will create the following log:</p>
 <table class="log"><tr><td>
 <pre>
-VP 00B97C30 r=0 a=9180,4470 c=9180,4470 cnt=856 
- scroll 00B97EE0 r=0 a=9180,4470 c=9180,4470 cnt=857 
- scroll 00B97EE0 r=0 a=9180,4470 c=9180,4470 cnt=858 
-  canvas 00B97C6C r=0 a=9180,UC c=9180,4470 cnt=859 
-   area 02D7AFE4 r=0 a=9180,UC c=9180,UC cnt=860 
-    text 02D7B150 r=0 a=9180,UC c=UC,UC cnt=861 
-    text 02D7B150 d=0,0 
-    block 02D7B210 r=0 a=9180,UC c=8940,UC cnt=862 
-    block 02D7B210 d=8940,0 
-   area 02D7AFE4 d=9180,120 
-  canvas 00B97C6C d=9180,4470 
- scroll 00B97EE0 d=9180,4470 
- scroll 00B97EE0 d=9180,4470 
-VP 00B97C30 d=9180,4470 
-VP 00B97C30 r=1 a=9180,4470 c=9180,4470 cnt=863 
- scroll 00B97EE0 r=1 a=9180,4470 c=9180,4470 cnt=864 
- scroll 00B97EE0 r=1 a=9180,4470 c=9180,4470 cnt=865 
-  canvas 00B97C6C r=1 a=9180,UC c=9180,4470 cnt=866 
-   area 02D7AFE4 r=1 a=9180,UC c=9180,UC cnt=867 
-    block 02D7B210 r=1 a=9180,UC c=8940,UC cnt=868 
-     text 02D7B3F8 r=0 a=8940,UC c=UC,UC cnt=869 
-     text 02D7B3F8 d=0,0 
-     tblW 02D7B5F0 r=0 a=8940,UC c=0,0 cnt=870 
-      tbl 02D7B7EC r=0 a=8940,UC c=1500,UC cnt=871 
-       rowG 00B984A4 r=0 a=UC,UC c=UC,UC cnt=872 
-        row 02D7BAF8 r=0 a=UC,UC c=UC,UC cnt=873 
-         cell 02D7BC98 r=0 a=UC,UC c=UC,UC cnt=874 
-          block 02D7BCF8 r=0 a=UC,UC c=UC,UC cnt=875 
-           text 02D7BE84 r=0 a=UC,UC c=UC,UC cnt=876 
-           text 02D7BE84 d=300,285 me=300 
-          block 02D7BCF8 d=300,300 me=300 
-         cell 02D7BC98 d=330,330 me=330 
-        row 02D7BAF8 d=UC,330 
-       rowG 00B984A4 d=UC,330 
-       colG 02D7BFB0 r=0 a=UC,UC c=UC,UC cnt=877 
-        col 02D7C0D8 r=0 a=0,0 c=1500,UC cnt=878 
-        col 02D7C0D8 d=0,0 
-       colG 02D7BFB0 d=0,0 
-       rowG 00B984A4 r=2 a=1500,UC c=1500,UC cnt=879 
-        row 02D7BAF8 r=2 a=1500,UC c=1500,UC cnt=880 
-         cell 02D7BC98 r=2 a=1440,UC c=1410,UC cnt=881 
-          block 02D7BCF8 r=2 a=1410,UC c=1410,UC cnt=882 
-          block 02D7BCF8 d=1410,300 
-         cell 02D7BC98 d=1440,330 
-        row 02D7BAF8 d=1500,330 
-       rowG 00B984A4 d=1500,330 
-       colG 02D7BFB0 r=2 a=1500,UC c=1500,UC cnt=883 
-        col 02D7C0D8 r=0 a=0,0 c=1500,UC cnt=884 
-        col 02D7C0D8 d=0,0 
-       colG 02D7BFB0 d=0,0 
-      tbl 02D7B7EC d=1500,390 
-     tblW 02D7B5F0 d=1500,390 
-     text 02D7C130 r=0 a=8940,UC c=UC,UC cnt=885 
-     text 02D7C130 d=0,0 
-    block 02D7B210 d=8940,390 
-   area 02D7AFE4 d=9180,630 
-  canvas 00B97C6C d=9180,4470 
- scroll 00B97EE0 d=9180,4470 
- scroll 00B97EE0 d=9180,4470 
-VP 00B97C30 d=9180,4470 
+VP 00B97C30 r=0 a=9180,4470 c=9180,4470 cnt=856
+ scroll 00B97EE0 r=0 a=9180,4470 c=9180,4470 cnt=857
+ scroll 00B97EE0 r=0 a=9180,4470 c=9180,4470 cnt=858
+  canvas 00B97C6C r=0 a=9180,UC c=9180,4470 cnt=859
+   area 02D7AFE4 r=0 a=9180,UC c=9180,UC cnt=860
+    text 02D7B150 r=0 a=9180,UC c=UC,UC cnt=861
+    text 02D7B150 d=0,0
+    block 02D7B210 r=0 a=9180,UC c=8940,UC cnt=862
+    block 02D7B210 d=8940,0
+   area 02D7AFE4 d=9180,120
+  canvas 00B97C6C d=9180,4470
+ scroll 00B97EE0 d=9180,4470
+ scroll 00B97EE0 d=9180,4470
+VP 00B97C30 d=9180,4470
+VP 00B97C30 r=1 a=9180,4470 c=9180,4470 cnt=863
+ scroll 00B97EE0 r=1 a=9180,4470 c=9180,4470 cnt=864
+ scroll 00B97EE0 r=1 a=9180,4470 c=9180,4470 cnt=865
+  canvas 00B97C6C r=1 a=9180,UC c=9180,4470 cnt=866
+   area 02D7AFE4 r=1 a=9180,UC c=9180,UC cnt=867
+    block 02D7B210 r=1 a=9180,UC c=8940,UC cnt=868
+     text 02D7B3F8 r=0 a=8940,UC c=UC,UC cnt=869
+     text 02D7B3F8 d=0,0
+     tblW 02D7B5F0 r=0 a=8940,UC c=0,0 cnt=870
+      tbl 02D7B7EC r=0 a=8940,UC c=1500,UC cnt=871
+       rowG 00B984A4 r=0 a=UC,UC c=UC,UC cnt=872
+        row 02D7BAF8 r=0 a=UC,UC c=UC,UC cnt=873
+         cell 02D7BC98 r=0 a=UC,UC c=UC,UC cnt=874
+          block 02D7BCF8 r=0 a=UC,UC c=UC,UC cnt=875
+           text 02D7BE84 r=0 a=UC,UC c=UC,UC cnt=876
+           text 02D7BE84 d=300,285 me=300
+          block 02D7BCF8 d=300,300 me=300
+         cell 02D7BC98 d=330,330 me=330
+        row 02D7BAF8 d=UC,330
+       rowG 00B984A4 d=UC,330
+       colG 02D7BFB0 r=0 a=UC,UC c=UC,UC cnt=877
+        col 02D7C0D8 r=0 a=0,0 c=1500,UC cnt=878
+        col 02D7C0D8 d=0,0
+       colG 02D7BFB0 d=0,0
+       rowG 00B984A4 r=2 a=1500,UC c=1500,UC cnt=879
+        row 02D7BAF8 r=2 a=1500,UC c=1500,UC cnt=880
+         cell 02D7BC98 r=2 a=1440,UC c=1410,UC cnt=881
+          block 02D7BCF8 r=2 a=1410,UC c=1410,UC cnt=882
+          block 02D7BCF8 d=1410,300
+         cell 02D7BC98 d=1440,330
+        row 02D7BAF8 d=1500,330
+       rowG 00B984A4 d=1500,330
+       colG 02D7BFB0 r=2 a=1500,UC c=1500,UC cnt=883
+        col 02D7C0D8 r=0 a=0,0 c=1500,UC cnt=884
+        col 02D7C0D8 d=0,0
+       colG 02D7BFB0 d=0,0
+      tbl 02D7B7EC d=1500,390
+     tblW 02D7B5F0 d=1500,390
+     text 02D7C130 r=0 a=8940,UC c=UC,UC cnt=885
+     text 02D7C130 d=0,0
+    block 02D7B210 d=8940,390
+   area 02D7AFE4 d=9180,630
+  canvas 00B97C6C d=9180,4470
+ scroll 00B97EE0 d=9180,4470
+ scroll 00B97EE0 d=9180,4470
+VP 00B97C30 d=9180,4470
 </pre>
 </td></tr></table>
 <p>
@@ -159,13 +159,13 @@ Below this is a line that reads:<p><code class="log">tblW 02D7B5F0 r=0 a=8940,UC
 The table cell requires its children to compute the MES. It is reported back from the block as:
 <p><code class="log">block 02D7BCF8 d=300,300 me=300</code></p>
 <p>The  block max. element size is 300 twips.
-<p> The second table reflow is started at 
+<p> The second table reflow is started at
 <p><code class="log">rowG 00B984A4 r=2 a=1500,UC c=1500,UC cnt=879</code></p>
-<p>where the previous information is used. 
+<p>where the previous information is used.
 The block has been required to compute the max. element size only once and it reports now:
 <p> <code class="log">block 02D7BCF8 d=1410,300</code></p>
-<p>The block shows the same address as the previous one. 
-<p>Frames with children that overflow  the parent will return <code>PR_TRUE</code> from <code>HasOverflowRect()</code>. For these frames 
+<p>The block shows the same address as the previous one.
+<p>Frames with children that overflow  the parent will return <code>PR_TRUE</code> from <code>HasOverflowRect()</code>. For these frames
 the overflow area  is displayed as  <code class="log">block 025ED8F0 d=8940,1020 o=(0,0) 9180 x 1020</code>. The overflow area is specified as (x,y) origin and width x height.
 <p> The reflow finishes at the same level where it started.
 
@@ -216,15 +216,15 @@ The entries in the reflow log can be controlled on a frame level.  For instance 
 Setting this option via <code>set GECKO_DISPLAY_REFLOW_FLAG_PIXEL_ERRORS = 1</code> enables a verification for each coordinate value that the coordinates are aligned at pixel boundaries.
 <table class="log"><tr><td>
 <pre>
-              row 0268A594 r=0 a=UC,UC c=UC,20 cnt=870 
-VALUE 20 is not a whole pixel 
-               cell 0268A6C0 r=0 a=UC,UC c=UC,15 cnt=871 
-                block 0268A764 r=0 a=UC,UC c=UC,UC cnt=872 
-                block 0268A764 d=0,0 me=0 
-               cell 0268A6C0 d=0,0 me=0 
-              row 0268A594 d=UC,20 
-VALUE 20 is not a whole pixel 
-             rowG 0268A02C d=UC,695 
+              row 0268A594 r=0 a=UC,UC c=UC,20 cnt=870
+VALUE 20 is not a whole pixel
+               cell 0268A6C0 r=0 a=UC,UC c=UC,15 cnt=871
+                block 0268A764 r=0 a=UC,UC c=UC,UC cnt=872
+                block 0268A764 d=0,0 me=0
+               cell 0268A6C0 d=0,0 me=0
+              row 0268A594 d=UC,20
+VALUE 20 is not a whole pixel
+             rowG 0268A02C d=UC,695
 VALUE 695 is not a whole pixel</pre>
 </td></tr></table>
 <p>
@@ -232,6 +232,6 @@ While unaligned values at the entrance of a frame reflow can be ignored,  when t
 
 <h3>GECKO_DISPLAY_REFLOW_INDENT_UNDISPLAYED_FRAMES</h3>
 <p>
-Setting this option via <code>set GECKO_DISPLAY_REFLOW_INDENT_UNDISPLAYED_FRAMES = 1</code> will cause an advance of the indent even for frames which are blocked via the reflow rules file.  
+Setting this option via <code>set GECKO_DISPLAY_REFLOW_INDENT_UNDISPLAYED_FRAMES = 1</code> will cause an advance of the indent even for frames which are blocked via the reflow rules file.
  </body>
 </html>

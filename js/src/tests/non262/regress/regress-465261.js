@@ -18,12 +18,12 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
 
-  for (let z = 0; z < 2; ++z) { 
-    for (let x of [0, true, (void 0), 0, (void 0)]) { 
-        if(x){} 
-    } 
+
+  for (let z = 0; z < 2; ++z) {
+    for (let x of [0, true, (void 0), 0, (void 0)]) {
+        if(x){}
+    }
   };
 
 

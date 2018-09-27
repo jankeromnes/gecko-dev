@@ -13,7 +13,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=102699
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=102699">Mozilla Bug 102699</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -64,7 +64,7 @@ function continueAfterReport() {
   ok(!d.documentElement.hasAttribute("data-fail"), "Should not have a data-fail attribute.");
 
   d = p.parseFromString("<!DOCTYPE html>", "text/html");
-  is(d.compatMode, "CSS1Compat", "Should be in the standards mode.");  
+  is(d.compatMode, "CSS1Compat", "Should be in the standards mode.");
 
   SimpleTest.finish();
 }

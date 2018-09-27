@@ -599,7 +599,7 @@ gfxPlatformFontList::SystemFindFontForChar(uint32_t aCh, uint32_t aNextCh,
     gfxFontFamily *fallbackFamily = nullptr;
     fontEntry = CommonFontFallback(aCh, aNextCh, aRunScript, aStyle,
                                    &fallbackFamily);
- 
+
     // if didn't find a font, do system-wide fallback (except for specials)
     uint32_t cmapCount = 0;
     if (!fontEntry) {
@@ -632,7 +632,7 @@ gfxPlatformFontList::SystemFindFontForChar(uint32_t aCh, uint32_t aNextCh,
     } else if (aCh == 0xFFFD && fontEntry && fallbackFamily) {
         mReplacementCharFallbackFamily = fallbackFamily;
     }
- 
+
     // track system fallback time
     static bool first = true;
     int32_t intElapsed = int32_t(first ? elapsed.ToMilliseconds() :
@@ -842,7 +842,7 @@ gfxPlatformFontList::FindFontForFamily(const nsACString& aFamily,
     return nullptr;
 }
 
-void 
+void
 gfxPlatformFontList::AddOtherFamilyName(gfxFontFamily *aFamilyEntry, nsCString& aOtherFamilyName)
 {
     nsAutoCString key;

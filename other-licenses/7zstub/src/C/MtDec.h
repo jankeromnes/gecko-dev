@@ -84,7 +84,7 @@ typedef struct
 typedef struct
 {
   void (*Parse)(void *p, unsigned coderIndex, CMtDecCallbackInfo *ci);
-  
+
   // PreCode() and Code():
   // (SRes_return_result != SZ_OK) means stop decoding, no need another blocks
   SRes (*PreCode)(void *p, unsigned coderIndex);
@@ -119,7 +119,7 @@ typedef struct
 typedef struct _CMtDec
 {
   /* input variables */
-  
+
   size_t inBufSize;        /* size of input block */
   unsigned numThreadsMax;
   // size_t inBlockMax;
@@ -135,9 +135,9 @@ typedef struct _CMtDec
   IMtDecCallback *mtCallback;
   void *mtCallbackObject;
 
-  
+
   /* internal variables */
-  
+
   size_t allocatedBufsSize;
 
   Bool exitThread;
@@ -187,7 +187,7 @@ MtDec_Code() returns:
   SZ_OK - in most cases
   MY_SRes_HRESULT_FROM_WRes(WRes_error) - in case of unexpected error in threading function
 */
-  
+
 SRes MtDec_Code(CMtDec *p);
 Byte *MtDec_GetCrossBuff(CMtDec *p);
 

@@ -29,7 +29,7 @@
       <command>pp -t type [-a] [-i input] [-o output] [-u] [-w]</command>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsection>
     <title>STATUS</title>
     <para>This documentation is still work in progress. Please contribute to the initial review in <ulink url="https://bugzilla.mozilla.org/show_bug.cgi?id=836477">Mozilla NSS bug 836477</ulink>
@@ -47,7 +47,7 @@
 
 <refsection>
     <title>Options</title>
-    
+
     <variablelist>
 
       <varlistentry>

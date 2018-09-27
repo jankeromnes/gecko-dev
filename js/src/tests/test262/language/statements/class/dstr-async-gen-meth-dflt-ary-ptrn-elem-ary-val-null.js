@@ -61,7 +61,7 @@ info: |
 
 class C {
   async *method([[x]] = [null]) {
-    
+
   }
 };
 

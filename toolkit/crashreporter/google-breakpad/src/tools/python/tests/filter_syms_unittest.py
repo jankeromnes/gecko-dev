@@ -51,7 +51,7 @@ class FilterSysmsTest(unittest.TestCase):
                                           ignored_prefixes, ntpath)
     parser.Process()
     self.assertEqual(output_io.getvalue(), expected)
-    
+
   def testDuplicateFiles(self):
     """Tests that duplicate files in FILE records are correctly removed and
     that Line records are updated."""

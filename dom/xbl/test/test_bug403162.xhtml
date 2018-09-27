@@ -18,7 +18,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=403162
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=403162">Mozilla Bug 403162</a>
 <p id="display" style="-moz-binding: url(#test)"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -28,7 +28,7 @@ var triggerCount = 0;
 function dispatchEvent(t) {
   var ev = document.createEvent("Events");
   ev.initEvent("foo", true, true);
-  t.dispatchEvent(ev);  
+  t.dispatchEvent(ev);
 }
 
 /** Test for Bug 403162 **/

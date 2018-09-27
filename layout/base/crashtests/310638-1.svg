@@ -9,15 +9,15 @@ function init()
 
   docElt.appendChild(div2);
   div2.appendChild(titleText);
-  
-  function second () 
+
+  function second ()
   {
     div2.appendChild(div1);
     removeNode(titleText);
     removeNode(div2);
     document.documentElement.removeAttribute("class");
   }
-  
+
   setTimeout(second, 30);
 }
 

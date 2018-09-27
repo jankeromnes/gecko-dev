@@ -1,4 +1,4 @@
-This directory contains source code to 
+This directory contains source code to
 
     SQLite: An Embeddable SQL Database Engine
 
@@ -25,7 +25,7 @@ show what changes are needed.
 
 The linux binaries on the website are created using the generic makefile,
 not the configure script.  The windows binaries on the website are created
-using MinGW32 configured as a cross-compiler running under Linux.  For 
+using MinGW32 configured as a cross-compiler running under Linux.  For
 details, see the ./publish.sh script at the top-level of the source tree.
 The developers do not use teh configure script.
 

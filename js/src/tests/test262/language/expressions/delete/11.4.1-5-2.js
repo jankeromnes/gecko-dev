@@ -10,7 +10,7 @@ flags: [noStrict]
 ---*/
 
   function foo(a,b) {
-  
+
     // Now, deleting 'a' directly should fail
     // because 'a' is direct reference to a function argument;
     var d = delete a;

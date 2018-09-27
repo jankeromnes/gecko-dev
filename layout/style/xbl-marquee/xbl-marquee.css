@@ -5,8 +5,8 @@
 /* PRINT ONLY rules */
 @media print {
 
-  marquee > * > * { 
-    margin: 0 !important; 
+  marquee > * > * {
+    margin: 0 !important;
     padding: 0 !important;
   } /* This hack is needed until bug 119078 gets fixed */
 }

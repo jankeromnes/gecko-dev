@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!--
 
-Description: channel managingEditor works 
+Description: channel managingEditor works
 Expect:      feed.authors.queryElementAt(0, Components.interfaces.nsIFeedPerson).email == 'example@example.com'
 
 -->

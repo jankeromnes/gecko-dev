@@ -5,7 +5,7 @@
     <title>Testcase for dynamic changes to link styles</title>
 
     <!-- From https://bugzilla.mozilla.org/show_bug.cgi?id=398105 -->
-	
+
     <style type="text/css">
       a:link rect { fill: red; }
     </style>

@@ -19,19 +19,19 @@
   in semantics.
 
     > Change 145624 by shanec@shanec-ocelotl on 2005/05/24 16:51:55
-    > 
+    >
     >     make which work better on OSX
     >     - add support for searching /Applications and /Network/Applications
     >     - add support for .app bundles
-    > 
+    >
     > Affected files ...
-    > 
+    >
     > ... //depot/main/Apps/Komodo-devel/src/python-sitelib/which.py#7 edit
-    > 
+    >
     > Differences ...
-    > 
+    >
     > ==== //depot/main/Apps/Komodo-devel/src/python-sitelib/which.py#7 (text) ====
-    > 
+    >
     > @@ -126,10 +126,11 @@
     >                  sys.stderr.write("duplicate: %s (%s)\n" % potential)
     >              return None
@@ -55,7 +55,7 @@
     > +            path.insert(0, '/Applications')
     >      else:
     >          usingGivenPath = 1
-    >  
+    >
     > @@ -182,6 +186,9 @@
     >                  exts = ['.COM', '.EXE', '.BAT']
     >          elif not isinstance(exts, list):

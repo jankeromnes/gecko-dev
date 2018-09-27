@@ -35,7 +35,7 @@ function init_iframe(d) {
 function test_iframe(iframe, i) {
   iframe.contentDocument.write(
     '<'+'style>span { text-decoration:underline; } <'+'/style>' +
-    '<'+'script>' + 
+    '<'+'script>' +
         'window.parent.init_iframe(document);' +
         'setTimeout(function(){' + window.parent.tests[i] + '; ++window.parent.tests_done; },0)' +
     '<'+'/script>'

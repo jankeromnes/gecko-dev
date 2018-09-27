@@ -59,7 +59,7 @@
       {
         if (evt.origin != "http://mochi.test:8888")
           response += " unexpected-origin(" + evt.origin + ")";
-          
+
         try
         {
           var threw = false;
@@ -71,7 +71,7 @@
         }
         if (threw || privateVariable !== window.parent.privateVariable)
           response += " accessed-source!!!";
-  
+
       }
       finally
       {
@@ -84,7 +84,7 @@
       var source = evt.source;
       if (evt.origin != "http://mochi.test:8888")
         response += " unexpected-origin(" + evt.origin + ")";
-        
+
       try
       {
         var threw = false;

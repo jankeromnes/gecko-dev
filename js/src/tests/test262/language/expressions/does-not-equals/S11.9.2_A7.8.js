@@ -22,8 +22,8 @@ if ((1 != {valueOf: function() {return 1}, toString: function() {return 0}}) !==
 //CHECK#3
 if (("+1" != {valueOf: function() {return 1}, toString: function() {return {}}}) !== false) {
   $ERROR('#3: ("+1" != {valueOf: function() {return 1}, toString: function() {return {}}}) === false');
-} 
-  
+}
+
 //CHECK#4
 try {
   if ((true != {valueOf: function() {return "+1"}, toString: function() {throw "error"}}) !== false) {
@@ -56,22 +56,22 @@ if (("1" != {valueOf: function() {return {}}, toString: function() {return "+1"}
 try {
   (1 != {valueOf: function() {throw "error"}, toString: function() {return 1}});
   $ERROR('#7: (1 != {valueOf: function() {throw "error"}, toString: function() {return 1}}) throw "error"');
-}  
+}
 catch (e) {
   if (e !== "error") {
     $ERROR('#7: (1 != {valueOf: function() {throw "error"}, toString: function() {return 1}}) throw "error"');
-  } 
+  }
 }
 
 //CHECK#8
 try {
   (1 != {valueOf: function() {return {}}, toString: function() {return {}}});
   $ERROR('#8: (1 != {valueOf: function() {return {}}, toString: function() {return {}}}) throw TypeError');
-}  
+}
 catch (e) {
   if ((e instanceof TypeError) !== true) {
     $ERROR('#8: (1 != {valueOf: function() {return {}}, toString: function() {return {}}}) throw TypeError');
-  } 
+  }
 }
 
 reportCompare(0, 0);

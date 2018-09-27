@@ -7,7 +7,7 @@ function run_test() {
 
   var chan1 = NetUtil.newChannel({
     uri: about1,
-    loadUsingSystemPrincipal: true 
+    loadUsingSystemPrincipal: true
   }).QueryInterface(Ci.nsIPropertyBag2);
 
   var chan2 = NetUtil.newChannel({

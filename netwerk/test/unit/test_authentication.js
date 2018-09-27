@@ -599,7 +599,7 @@ function authNonascii(metadata, response) {
 
 //
 // Digest functions
-// 
+//
 function bytesFromString(str) {
  var converter =
    Cc["@mozilla.org/intl/scriptableunicodeconverter"]
@@ -635,7 +635,7 @@ function authDigest(metadata, response) {
  var responseRE = /response="(\w+)"/;
  var usernameRE = /username="(\w+)"/;
  var authenticate = 'Digest realm="secret", domain="/",  qop=auth,' +
-                    'algorithm=MD5, nonce="' + nonce+ '" opaque="' + 
+                    'algorithm=MD5, nonce="' + nonce+ '" opaque="' +
                      opaque + '"';
  var body;
  // check creds if we have them
@@ -645,7 +645,7 @@ function authDigest(metadata, response) {
    var clientDigest = (auth.match(responseRE))[1];
    var username = (auth.match(usernameRE))[1];
    var nc = "00000001";
-   
+
    if (username != "guest") {
      response.setStatusLine(metadata.httpVersion, 400, "bad request");
      body = "should never get here";
@@ -671,7 +671,7 @@ function authDigest(metadata, response) {
    response.setHeader("WWW-Authenticate", authenticate, false);
    body = "failed, no header";
  }
- 
+
  response.bodyOutputStream.write(body, body.length);
 }
 

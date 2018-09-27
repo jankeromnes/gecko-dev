@@ -7,9 +7,9 @@ function boom()
   anim = document.createElementNS("http://www.w3.org/2000/svg", "animate");
   document.documentElement.appendChild(anim);
   document.documentElement.removeChild(anim);
-  
+
   setTimeout(t, 0);
-  
+
   function t()
   {
     document.getElementById("w").appendChild(anim);

@@ -10,7 +10,7 @@
       var UP = 38;
       var DOWN = 40;
       comboInfo = {};
-      
+
       function toArray (/* NodeList */ nodeList) {
           var result = [];
           for (var i=0; i < nodeList.length; i++) {
@@ -26,7 +26,7 @@
           comboInfo.options = toArray (active.parentElement.children);
           return active;
       }
-      
+
       function handleArrow (/* Event */ event) {
           /* NOTE:  With respect to IE, assumes IE9 as per CR criteria (http://www.w3.org/WAI/ARIA/1.0/CR/implementation-report) */
           var active = document.getElementById (comboInfo.comboBox.getAttribute ('aria-activedescendant'));
@@ -40,7 +40,7 @@
               if (nextIndex < 0)
                   nextIndex = comboInfo.options.length - 1;
           }
-          
+
           if (nextIndex != currentIndex) {
               active.removeAttribute ('class');
               active = comboInfo.options[nextIndex];
@@ -56,7 +56,7 @@
           comboInfo.textEntry.focus();
           active.setAttribute ('class', 'hasFocus');
       }
-      
+
     </script>
   </head>
   <body onload='doOnload()'>

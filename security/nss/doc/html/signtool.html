@@ -155,23 +155,23 @@ Everything before the = sign on a single line is a keyword, and everything from 
 </p></dd><dt><span class="term">outfile</span></dt><dd><p>
 	Name of a file to which output and error messages will be redirected. This option has no command-line equivalent.
 	</p></dd></dl></div></div><div class="refsection"><a name="examples"></a><h2>Extended Examples</h2><p>The following example will do this and that
-    </p><p><span class="command"><strong>Listing Available Signing Certificates</strong></span></p><p>You use the -L option to list the nicknames for all available certificates and check which ones are signing certificates.</p><pre class="programlisting">signtool -L 
+    </p><p><span class="command"><strong>Listing Available Signing Certificates</strong></span></p><p>You use the -L option to list the nicknames for all available certificates and check which ones are signing certificates.</p><pre class="programlisting">signtool -L
 
-using certificate directory: /u/jsmith/.netscape 
-S Certificates 
-- ------------ 
-  BBN Certificate Services CA Root 1 
-  IBM World Registry CA 
-  VeriSign Class 1 CA - Individual Subscriber - VeriSign, Inc. 
-  GTE CyberTrust Root CA 
-  Uptime Group Plc. Class 4 CA 
-* Verisign Object Signing Cert 
-  Integrion CA 
-  GTE CyberTrust Secure Server CA 
-  AT&amp;T Directory Services 
-* test object signing cert 
-  Uptime Group Plc. Class 1 CA 
-  VeriSign Class 1 Primary CA 
+using certificate directory: /u/jsmith/.netscape
+S Certificates
+- ------------
+  BBN Certificate Services CA Root 1
+  IBM World Registry CA
+  VeriSign Class 1 CA - Individual Subscriber - VeriSign, Inc.
+  GTE CyberTrust Root CA
+  Uptime Group Plc. Class 4 CA
+* Verisign Object Signing Cert
+  Integrion CA
+  GTE CyberTrust Secure Server CA
+  AT&amp;T Directory Services
+* test object signing cert
+  Uptime Group Plc. Class 1 CA
+  VeriSign Class 1 Primary CA
 - ------------
 
 Certificates that can be used to sign objects have *'s to their left. </pre><p>Two signing certificates are displayed: Verisign Object Signing Cert and test object signing cert.</p><p>You use the -l option to get a list of signing certificates only, including the signing CA for each.</p><pre class="programlisting">signtool -l
@@ -184,7 +184,7 @@ Verisign Object Signing Cert
     Issued by: VeriSign, Inc. - Verisign, Inc.
     Expires: Tue May 19, 1998
 test object signing cert
-    Issued by: test object signing cert (Signtool 1.0 Testing 
+    Issued by: test object signing cert (Signtool 1.0 Testing
 Certificate (960187691))
     Expires: Sun May 17, 1998
 ---------------------------------------</pre><p>For a list including CAs, use the <code class="option">-L</code> option.</p><p><span class="command"><strong>Signing a File</strong></span></p><p>1. Create an empty directory.</p><pre class="programlisting">mkdir signdir</pre><p>2. Put some file into it.</p><pre class="programlisting">echo boo &gt; signdir/test.f</pre><p>3. Specify the name of your object-signing certificate and sign the directory.</p><pre class="programlisting">signtool -k MySignCert -Z testjar.jar signdir
@@ -207,13 +207,13 @@ using certificate directory: /u/jsmith/.netscape
 archive "testjar.jar" has passed crypto verification.
            status   path
      ------------   -------------------
-         verified   test.f</pre><p><span class="command"><strong>Using Netscape Signing Tool with a ZIP Utility</strong></span></p><p>To use Netscape Signing Tool with a ZIP utility, you must have the utility in your path environment variable. You should use the zip.exe utility rather than pkzip.exe, which cannot handle long filenames. You can use a ZIP utility instead of the -Z option to package a signed archive into a JAR file after you have signed it:</p><pre class="programlisting">cd signdir 
+         verified   test.f</pre><p><span class="command"><strong>Using Netscape Signing Tool with a ZIP Utility</strong></span></p><p>To use Netscape Signing Tool with a ZIP utility, you must have the utility in your path environment variable. You should use the zip.exe utility rather than pkzip.exe, which cannot handle long filenames. You can use a ZIP utility instead of the -Z option to package a signed archive into a JAR file after you have signed it:</p><pre class="programlisting">cd signdir
 
-  zip -r ../myjar.jar * 
-  adding: META-INF/ (stored 0%) 
-  adding: META-INF/manifest.mf (deflated 15%) 
-  adding: META-INF/signtool.sf (deflated 28%) 
-  adding: META-INF/signtool.rsa (stored 0%) 
+  zip -r ../myjar.jar *
+  adding: META-INF/ (stored 0%)
+  adding: META-INF/manifest.mf (deflated 15%)
+  adding: META-INF/signtool.sf (deflated 28%)
+  adding: META-INF/signtool.rsa (stored 0%)
   adding: text.txt (stored 0%)</pre><p><span class="command"><strong>Generating the Keys and Certificate</strong></span></p><p>The signtool option -G generates a new public-private key pair and certificate. It takes the nickname of the new certificate as an argument. The newly generated keys and certificate are installed into the key and certificate databases in the directory specified by the -d option. With the NT version of Netscape Signing Tool, you must use the -d option with the -G option. With the Unix version of Netscape Signing Tool, omitting the -d option causes the tool to install the keys and certificate in the Communicator key and certificate databases. In all cases, the certificate is also output to a file named x509.cacert, which has the MIME-type application/x-x509-ca-cert.</p><p>Certificates contain standard information about the entity they identify, such as the common name and organization name. Netscape Signing Tool prompts you for this information when you run the command with the -G option. However, all of the requested fields are optional for test certificates. If you do not enter a common name, the tool provides a default name. In the following example, the user input is in boldface:</p><pre class="programlisting">signtool -G MyTestCert
 
 using certificate directory: /u/someuser/.netscape
@@ -234,23 +234,23 @@ certificate "MyTestCert" added to database
 Exported certificate to x509.raw and x509.cacert.</pre><p>The certificate information is read from standard input. Therefore, the information can be read from a file using the redirection operator (&lt;) in some operating systems. To create a file for this purpose, enter each of the seven input fields, in order, on a separate line. Make sure there is a newline character at the end of the last line. Then run signtool with standard input redirected from your file as follows:</p><pre class="programlisting">signtool -G MyTestCert inputfile</pre><p>The prompts show up on the screen, but the responses will be automatically read from the file. The password will still be read from the console unless you use the -p option to give the password on the command line.</p><p><span class="command"><strong>Using the -M Option to List Smart Cards</strong></span></p><p>You can use the -M option to list the PKCS #11 modules, including smart cards, that are available to signtool:</p><pre class="programlisting">signtool -d "c:\netscape\users\jsmith" -M
 
 using certificate directory: c:\netscape\users\username
-Listing of PKCS11 modules 
------------------------------------------------ 
-	1. Netscape Internal PKCS #11 Module 
-			  (this module is internally loaded) 
-			  slots: 2 slots attached 
-			  status: loaded 
-	  slot: Communicator Internal Cryptographic Services Version 4.0 
-	 token: Communicator Generic Crypto Svcs 
-	  slot: Communicator User Private Key and Certificate Services 
-	 token: Communicator Certificate DB 
-	2. CryptOS 
-			  (this is an external module) 
- DLL name: core32 
-	 slots: 1 slots attached 
-	status: loaded 
-	  slot: Litronic 210 
-	 token: 
+Listing of PKCS11 modules
+-----------------------------------------------
+	1. Netscape Internal PKCS #11 Module
+			  (this module is internally loaded)
+			  slots: 2 slots attached
+			  status: loaded
+	  slot: Communicator Internal Cryptographic Services Version 4.0
+	 token: Communicator Generic Crypto Svcs
+	  slot: Communicator User Private Key and Certificate Services
+	 token: Communicator Certificate DB
+	2. CryptOS
+			  (this is an external module)
+ DLL name: core32
+	 slots: 1 slots attached
+	status: loaded
+	  slot: Litronic 210
+	 token:
 	----------------------------------------------- </pre><p><span class="command"><strong>Using Netscape Signing Tool and a Smart Card to Sign Files</strong></span></p><p>The signtool command normally takes an argument of the -k option to specify a signing certificate. To sign with a smart card, you supply only the fully qualified name of the certificate.</p><p>To see fully qualified certificate names when you run Communicator, click the Security button in Navigator, then click Yours under Certificates in the left frame. Fully qualified names are of the format smart card:certificate, for example "MyCard:My Signing Cert". You use this name with the -k argument as follows:</p><pre class="programlisting">signtool -k "MyCard:My Signing Cert" directory</pre><p><span class="command"><strong>Verifying FIPS Mode</strong></span></p><p>Use the -M option to verify that you are using the FIPS-140-1 module.</p><pre class="programlisting">signtool -d "c:\netscape\users\jsmith" -M
 
 using certificate directory: c:\netscape\users\jsmith

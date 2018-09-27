@@ -6,13 +6,13 @@
      class="reftest-wait">
   <script>
     function go() {
-      // Use try/catch, so that we make sure to remove the reftest-wait 
+      // Use try/catch, so that we make sure to remove the reftest-wait
       // attribute  even on older browser versions that don't support
       // pauseAnimations.
       try {
         document.documentElement.pauseAnimations();
       } catch (e) {
-        // pauseAnimations not implemented. Change rect to red, 
+        // pauseAnimations not implemented. Change rect to red,
 	    // and clear class to fail/end immediately.
         document.documentElement.removeAttribute("class");
         var rect = document.getElementById("rect");
@@ -31,7 +31,7 @@
     setTimeout(delay_go, 4000); // fallback for running outside reftest
   </script>
   <rect y="40" width="10" height="10" fill="blue">
-    <animate id="rect" attributeName="x" 
+    <animate id="rect" attributeName="x"
              dur="3s" values="0; 50; 100; 150; 200; 250"
              calcMode="discrete" fill="freeze"/>
   </rect>

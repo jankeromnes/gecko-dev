@@ -25,7 +25,7 @@ function make_channel_for_offline_use(url, callback, ctx) {
   var cacheService = Cc["@mozilla.org/network/application-cache-service;1"].
                      getService(Ci.nsIApplicationCacheService);
   appCache = cacheService.getApplicationCache(cacheClientID);
-  
+
   var appCacheChan = chan.QueryInterface(Ci.nsIApplicationCacheChannel);
   appCacheChan.applicationCacheForWrite = appCache;
   return chan;

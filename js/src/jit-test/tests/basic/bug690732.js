@@ -1,4 +1,4 @@
 
-var o4 = Object.freeze({ 
-  set: function(summary) {}       
+var o4 = Object.freeze({
+  set: function(summary) {}
 });

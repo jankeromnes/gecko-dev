@@ -24,7 +24,7 @@ if (__re.propertyIsEnumerable('global') !== false) {
  //CHECK#2
 var count = 0
 for (var p in __re){
-  if (p==="global") count++   
+  if (p==="global") count++
 }
 
 if (count !== 0) {

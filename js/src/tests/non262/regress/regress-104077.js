@@ -245,7 +245,7 @@ captureThis();
 
 status = inSection(7);
 actual = testfunc();
-expect = 100; 
+expect = 100;
 captureThis();
 
 

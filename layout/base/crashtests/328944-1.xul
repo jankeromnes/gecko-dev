@@ -7,7 +7,7 @@
 
 function gE(i) { return document.getElementById(i); }
 
-function init() 
+function init()
 {
   gE("button").insertBefore(gE("popup"), gE("hbox4"));
 }

@@ -20,7 +20,7 @@ conference.  No video this week!</description>
 </item>
 
 <item>
-<enclosure length="3000000" type="video/mpeg" url="http://dallas.example.com/joebob_pants.mpeg" /> 
+<enclosure length="3000000" type="video/mpeg" url="http://dallas.example.com/joebob_pants.mpeg" />
 <author>jbb@dallas.example.com (Joe Bob Briggs)</author>
 <comments>http://example.org</comments>
 <title>orange keyboard</title>

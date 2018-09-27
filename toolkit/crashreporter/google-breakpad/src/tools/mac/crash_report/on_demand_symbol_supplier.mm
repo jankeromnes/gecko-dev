@@ -63,14 +63,14 @@ OnDemandSymbolSupplier::OnDemandSymbolSupplier(const string &search_dir,
     // or
     // MODULE mac ppc BBF0A8F9BEADDD2048E6464001CA193F0 GoogleDesktopDaemon
     const char *symbolSearchStr = symbol_search_dir.c_str();
-    NSString *symbolSearchPath = 
-      [mgr stringWithFileSystemRepresentation:symbolSearchStr 
+    NSString *symbolSearchPath =
+      [mgr stringWithFileSystemRepresentation:symbolSearchStr
                                        length:strlen(symbolSearchStr)];
     NSDirectoryEnumerator *dirEnum = [mgr enumeratorAtPath:symbolSearchPath];
     NSString *fileName;
-    NSCharacterSet *hexSet = 
+    NSCharacterSet *hexSet =
       [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEF"];
-    NSCharacterSet *newlineSet = 
+    NSCharacterSet *newlineSet =
       [NSCharacterSet characterSetWithCharactersInString:@"\r\n"];
     while ((fileName = [dirEnum nextObject])) {
       // Check to see what type of file we have
@@ -93,14 +93,14 @@ OnDemandSymbolSupplier::OnDemandSymbolSupplier(const string &search_dir,
                         [scanner scanString:@"ppc " intoString:nil]);
             if (goodScan) {
               NSString *moduleID;
-              goodScan = [scanner scanCharactersFromSet:hexSet 
+              goodScan = [scanner scanCharactersFromSet:hexSet
                                              intoString:&moduleID];
               if (goodScan) {
                 // Module IDs are always 33 chars long
                 goodScan = [moduleID length] == 33;
                 if (goodScan) {
                   NSString *moduleName;
-                  goodScan = [scanner scanUpToCharactersFromSet:newlineSet 
+                  goodScan = [scanner scanUpToCharactersFromSet:newlineSet
                                                      intoString:&moduleName];
                   if (goodScan) {
                     goodScan = [moduleName length] > 0;

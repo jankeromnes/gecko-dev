@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "optionscollection");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,12 +70,12 @@ function loadComplete() {
 
 
 /**
-* 
+*
     An HTMLOptionsCollection is a list of nodes representing HTML option
     element.
     An individual node may be accessed by either ordinal index, the node's
     name or id attributes.  (Test ordinal index).
-    The item() method retrieves a node specified by ordinal index.  
+    The item() method retrieves a node specified by ordinal index.
     A value of null is returned if the index is out of range.
 
     Retrieve the first SELECT element.  Create a HTMLOptionsCollection.
@@ -96,7 +96,7 @@ function HTMLOptionsCollection06() {
       var optionsList;
       var vvalue;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -109,7 +109,7 @@ testNode = nodeList.item(0);
 
       optionsNode = optionsList.item(10);
       assertNull("optionsIndexLink",optionsNode);
-    
+
 }
 
 </script>
@@ -123,7 +123,7 @@ testNode = nodeList.item(0);
     element.
     An individual node may be accessed by either ordinal index, the node's
     name or id attributes.  (Test ordinal index).
-    The item() method retrieves a node specified by ordinal index.  
+    The item() method retrieves a node specified by ordinal index.
     A value of null is returned if the index is out of range.
 
     Retrieve the first SELECT element.  Create a HTMLOptionsCollection.
@@ -145,7 +145,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/optionscollection.html"></iframe>
 <br>

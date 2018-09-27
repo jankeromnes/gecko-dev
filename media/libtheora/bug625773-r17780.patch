@@ -15,7 +15,7 @@ diff --git a/media/libtheora/lib/decode.c b/media/libtheora/lib/decode.c
 +  yoffset=yhstride*(ptrdiff_t)(yheight-OC_UMV_PADDING-1)+OC_UMV_PADDING;
    memset(_dec->state.ref_frame_data[0]-yoffset,0x80,yplane_sz+2*cplane_sz);
  }
- 
+
  int th_decode_packetin(th_dec_ctx *_dec,const ogg_packet *_op,
   ogg_int64_t *_granpos){
    int ret;

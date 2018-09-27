@@ -11,7 +11,7 @@ fully align with how the code is structured here, so we perform a manual adjustm
 mostly around header and footer.
 
 The result difference is stored in `./fluent.js.patch` file which can be used to
-approximate the changes needed to be applied on the output of the 
+approximate the changes needed to be applied on the output of the
 fluent.js/fluent-gecko's make.
 
-In b.m.o. bug 1434434 we will try to reduce this difference to zero. 
+In b.m.o. bug 1434434 we will try to reduce this difference to zero.

@@ -21,19 +21,19 @@ function boom()
 		document.documentElement.appendChild(outer);
     setTimeout(b, 10);
   }
-  
+
   function b()
   {
     outer.appendChild(document.createElementNS(HTML_NS, "span"));
     setTimeout(c, 10);
   }
-  
+
   function c()
   {
     q.appendChild(document.createElementNS(HTML_NS, "div"));
     document.documentElement.removeAttribute("class");
   }
-  
+
   a();
 }
 

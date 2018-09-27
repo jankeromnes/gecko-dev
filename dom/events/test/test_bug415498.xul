@@ -80,7 +80,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=415498
       ok(verifyErrorReceived("HierarchyRequestError"),
          "Error message not reported in window.onload!");
     }
-    
+
     function verifyErrorReceived(errorString) {
       for (var i = 0; i < gMessages.length; i++) {
         if (gMessages[i].message.includes(errorString))

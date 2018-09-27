@@ -6,16 +6,16 @@
 ifndef FREEBL_CHILD_BUILD
 
 # We're going to change this build so that it builds libfreebl.a with
-# just loader.c.  Then we have to build this directory twice again to 
+# just loader.c.  Then we have to build this directory twice again to
 # build the two DSOs.
 # To build libfreebl.a with just loader.c, we must now override many
 # of the make variables setup by the prior inclusion of CORECONF's config.mk
 
-CSRCS		= loader.c 
+CSRCS		= loader.c
 SIMPLE_OBJS 	= $(CSRCS:.c=$(OBJ_SUFFIX))
 OBJS 		= $(addprefix $(OBJDIR)/$(PROG_PREFIX), $(SIMPLE_OBJS))
 ALL_TRASH :=    $(TARGETS) $(OBJS) $(OBJDIR) LOGS TAGS $(GARBAGE) \
-                $(NOSUCHFILE) so_locations 
+                $(NOSUCHFILE) so_locations
 
 # this is not a recursive child make.  We make a static lib. (archive)
 

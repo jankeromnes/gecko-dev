@@ -202,7 +202,7 @@ sub readBloatFile($\%\%) {
 			}
 			print STDERR "Duplicate entry $name in '$file'\n" if $$h{$name};
 			$$h{$name} = [$bytesAlloc, $bytesNet, $objectsAlloc, $objectsNet, $refsAlloc, $refsNet];
-			
+
 			my $oldSize = $$sizes{$name};
 			print STDERR "Mismatch of sizes of class $name: $oldSize and $size\n" if defined($oldSize) && $size ne $oldSize;
 			$$sizes{$name} = $size;
@@ -288,7 +288,7 @@ foreach (@ARGV) {
 	unless ($tables{$_}) {
 		my $f = $_;
 		my %table;
-		
+
 		readBloatFile $_, %table, %sizes;
 		$tables{$_} = \%table;
 	}
@@ -339,7 +339,7 @@ function sortCompare(x, y) {
 		if (xc < yc || xc === undefined && yc !== undefined) return 1;
 		if (yc < xc || yc === undefined && xc !== undefined) return -1;
 	}
-	
+
 	var x0 = x[0];
 	var y0 = y[0];
 	if (x0 > y0 || x0 === undefined && y0 !== undefined) return 1;

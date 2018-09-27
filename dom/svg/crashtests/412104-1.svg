@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" 
-     xmlns:xbl="http://www.mozilla.org/xbl" 
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xbl="http://www.mozilla.org/xbl"
      onload="document.documentElement.style.MozBinding = 'url(#tsw)';">
 
 <xbl:bindings><xbl:binding id="tsw"><xbl:content>

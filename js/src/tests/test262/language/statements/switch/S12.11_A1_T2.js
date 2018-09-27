@@ -13,7 +13,7 @@ var x = new Number(2);
 
 function SwitchTest(value){
   var result = 0;
-  
+
   switch(value) {
     case 0:
       result += 2;
@@ -38,10 +38,10 @@ function SwitchTest(value){
     case 1:
       result += 512;
   }
-  
+
   return result;
 }
-        
+
 if(!(SwitchTest(0) === 6)){
   $ERROR("#1: SwitchTest(0) === 6. Actual:  SwitchTest(0) ==="+ SwitchTest(0)  );
 }

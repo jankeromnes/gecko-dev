@@ -33,8 +33,8 @@ endif
 CPPFLAGS += -DWINVER=0x0601 -D_WIN32_WINNT=0x0601
 
 ## Flags for position independent code
-SHAREDLIBCFLAGS = 
-SHAREDLIBCXXFLAGS = 
+SHAREDLIBCFLAGS =
+SHAREDLIBCXXFLAGS =
 SHAREDLIBCPPFLAGS = -DPIC
 
 ## Additional flags when building libraries and with threads
@@ -54,11 +54,11 @@ SHLIB.c=	$(CC) $(CFLAGS) $(LDFLAGS) -shared $(LD_SOOPTIONS) -Wl,--enable-auto-im
 SHLIB.cc=	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(LD_SOOPTIONS) -Wl,--enable-auto-import -Wl,--out-implib=$(dir $@)lib$(notdir $(@:$(SO_TARGET_VERSION_MAJOR).$(SO)=))$(IMPORT_LIB_EXT)#M#
 
 ## Compiler switch to embed a runtime search path
-LD_RPATH=	
+LD_RPATH=
 LD_RPATH_PRE=	-Wl,-rpath,
 
 ## Compiler switch to embed a library name
-LD_SONAME = 
+LD_SONAME =
 
 ## Shared object suffix
 SO = dll
@@ -68,7 +68,7 @@ STATIC_O = ao
 ifeq ($(ENABLE_SHARED),YES)
 SO_TARGET_VERSION_SUFFIX = $(SO_TARGET_VERSION_MAJOR)
 else
-SO_TARGET_VERSION_SUFFIX = 
+SO_TARGET_VERSION_SUFFIX =
 endif
 
 # Static library prefix and file extension
@@ -95,7 +95,7 @@ LIBICU = $(STATIC_PREFIX_WHEN_USED)$(ICUPREFIX)
 #SH#ICULIBS_I18N="-l$(ICUPREFIX)$(I18N_STUBNAME)$(ICULIBSUFFIX)$(ICULIBSUFFIX_VERSION)"
 #SH#
 #SH## ICULIBS is the set of libraries your application should link
-#SH## with usually. Many applications will want to add ${ICULIBS_I18N} as well. 
+#SH## with usually. Many applications will want to add ${ICULIBS_I18N} as well.
 #SH#ICULIBS="${ICULIBS_BASE} ${ICULIBS_I18N} ${ICULIBS_COMMON} ${ICULIBS_DATA} "
 
 # The #M# is used to delete lines for icu-config

@@ -138,7 +138,7 @@ TEST(Dwarf2DIEHandler, SkipRootDIE) {
       .InSequence(s)
       .WillOnce(Return(false));
 
-  EXPECT_TRUE(die_dispatcher.StartCompilationUnit(0xde8994029fc8b999LL, 
+  EXPECT_TRUE(die_dispatcher.StartCompilationUnit(0xde8994029fc8b999LL,
                                                   0xf4, 0x02,
                                                   0xb00febffa76e2b2bLL, 0x5c));
   EXPECT_FALSE(die_dispatcher.StartDIE(0x7d08242b4b510cf2LL,
@@ -362,7 +362,7 @@ TEST(Dwarf2DIEHandler, FindAndSkipChildren) {
     }
   }
 
-    
+
   // Drive the dispatcher.
 
   // Report the CU header.
@@ -397,7 +397,7 @@ TEST(Dwarf2DIEHandler, FindAndSkipChildren) {
           EXPECT_FALSE(die_dispatcher
                        .StartDIE(0xb3076285d25cac25LL,
                                  (DwarfTag) 0xcff4061b));
-          die_dispatcher.EndDIE(0xb3076285d25cac25LL);          
+          die_dispatcher.EndDIE(0xb3076285d25cac25LL);
         }
         die_dispatcher.EndDIE(0xd68de1ee0bd29419LL);
       }
@@ -410,7 +410,7 @@ TEST(Dwarf2DIEHandler, FindAndSkipChildren) {
                                            (DwarfTag) 0x505a068b));
       die_dispatcher.EndDIE(0x97412be24875de9dLL);
     }
-    
+
     // Third child DIE.
     {
       EXPECT_TRUE(die_dispatcher.StartDIE(0x753c964c8ab538aeLL,
@@ -421,7 +421,7 @@ TEST(Dwarf2DIEHandler, FindAndSkipChildren) {
                                             0x3ea5c609d7d7560fLL);
       die_dispatcher.EndDIE(0x753c964c8ab538aeLL);
     }
-    
+
     // Finish the root DIE (and thus the CU).
     die_dispatcher.EndDIE(0x15f0e06bdfe3c372LL);
   }
@@ -450,7 +450,7 @@ TEST(Dwarf2DIEHandler, FreeHandlersOnStack) {
         .WillOnce(Return(true));
       EXPECT_CALL(mock_root_handler, EndAttributes())
         .WillOnce(Return(true));
-      
+
       // Child DIE.
       EXPECT_CALL(mock_root_handler,
                   FindChildHandler(0x058f09240c5fc8c9LL,
@@ -491,7 +491,7 @@ TEST(Dwarf2DIEHandler, FreeHandlersOnStack) {
 
   // The dispatcher.
   DIEDispatcher die_dispatcher(&mock_root_handler);
-  
+
   // Report the CU header.
   EXPECT_TRUE(die_dispatcher
               .StartCompilationUnit(0x87b41ba8381cd71cLL, 0xff, 0x89,

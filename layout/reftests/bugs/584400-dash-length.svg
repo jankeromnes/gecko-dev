@@ -5,14 +5,14 @@
   <rect x="90px" y="80px" width="245px" height="45px"
         style="fill: none; stroke-dasharray: 120px, 89px">
   </rect>
-  
+
   <rect x="70px" y="20px" width="145px" height="145px"
         style="stroke: none; stroke-dasharray: 20px, 5px">
   </rect>
   <rect x="270px" y="20px" width="145px" height="145px"
         style="stroke: none; stroke-dasharray: 20px, 5px">
   </rect>
-  
+
   <rect x="70px" y="220px" width="145px" height="145px"
         style="stroke: none; stroke-dasharray: 20px, 5px">
   </rect>

@@ -3,6 +3,6 @@
   <symbol id="foo">
     <use xlink:href="#foo"/>
   </symbol>
-  
+
   <use xlink:href="#foo"/>
 </svg>

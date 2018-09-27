@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "tablecell");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,9 +70,9 @@ function loadComplete() {
 
 
 /**
-* 
+*
 Abbreviation for header cells.
-The index of this cell in the row. 
+The index of this cell in the row.
 The value of attribute abbr of the tablecell element is read and checked against the expected value.
 
 * @author Netscape
@@ -86,7 +86,7 @@ function table19() {
       var testNode;
       var vabbr;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -98,7 +98,7 @@ testNode = nodeList.item(1);
       vabbr = testNode.abbr;
 
       assertEquals("abbrLink","hd2",vabbr);
-       
+
 }
 
 </script>
@@ -109,7 +109,7 @@ testNode = nodeList.item(1);
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;creator&gt;Netscape&lt;/creator&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;
 Abbreviation for header cells.
-The index of this cell in the row. 
+The index of this cell in the row.
 The value of attribute abbr of the tablecell element is read and checked against the expected value.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Sivakiran Tummala&lt;/contributor&gt;
@@ -127,7 +127,7 @@ The value of attribute abbr of the tablecell element is read and checked against
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/tablecell.html"></iframe>
 <br>

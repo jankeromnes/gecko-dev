@@ -26,7 +26,7 @@ iframe source is
 SimpleTest.waitForExplicitFinish();
 
 function runTest() {
-  
+
   var source = document.getElementById('source').contentWindow;
   var canvasWidth = 50;
   var canvasHeight = 50;
@@ -35,7 +35,7 @@ function runTest() {
            width: canvasWidth, height: canvasHeight };
   var canvas = SpecialPowers.snapshotRect(source, rect, "transparent");
   var context = canvas.getContext("2d");
-  
+
   var data = context.getImageData(0, 0, canvasWidth, canvasHeight).data;
   var failed = false;
   for (var i = 0; i < data.length; i+=4) {
@@ -45,7 +45,7 @@ function runTest() {
     }
   }
   ok(!failed, "all pixels blue");
-  
+
   SimpleTest.finish();
 }
 

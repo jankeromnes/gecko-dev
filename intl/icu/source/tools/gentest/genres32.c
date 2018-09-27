@@ -68,7 +68,7 @@ genres32(const char *prog, const char *path) {
                 prog, file);
         return 1;
     }
-    
+
     /* find the limit of the key string */
     for(limit=key; *limit!=0; ++limit) {
     }

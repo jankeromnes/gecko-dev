@@ -23,7 +23,7 @@ diff --git a/media/libopus/sources.mozbuild b/media/libopus/sources.mozbuild
      'celt/rate.c',
      'celt/vq.c',
  ]
- 
+
  opus_nonunified_sources = [
 +    # Disabled because of undefined reference to celt_fatal at link time
 +    'celt/celt.c',

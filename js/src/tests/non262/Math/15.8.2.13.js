@@ -63,7 +63,7 @@ new TestCase(
               Math.pow(1,Number.NaN) );
 
 new TestCase(
-	      "Math.pow(0,NaN)",	
+	      "Math.pow(0,NaN)",
 	      Number.NaN,
               Math.pow(0,Number.NaN) );
 
@@ -93,12 +93,12 @@ new TestCase(
 	      Math.pow(1.00000001, Number.POSITIVE_INFINITY) );
 
 new TestCase(
-	      "Math.pow(1.00000001, -Infinity)", 
+	      "Math.pow(1.00000001, -Infinity)",
 	      0,
 	      Math.pow(1.00000001, Number.NEGATIVE_INFINITY) );
 
 new TestCase(
-	      "Math.pow(-1.00000001, Infinity)", 
+	      "Math.pow(-1.00000001, Infinity)",
 	      Number.POSITIVE_INFINITY,
 	      Math.pow(-1.00000001,Number.POSITIVE_INFINITY) );
 
@@ -128,7 +128,7 @@ new TestCase(
               Math.pow(-1, Number.NEGATIVE_INFINITY) );
 
 new TestCase(
-	      "Math.pow(.0000000009, Infinity)", 
+	      "Math.pow(.0000000009, Infinity)",
 	      0,
 	      Math.pow(.0000000009, Number.POSITIVE_INFINITY) );
 

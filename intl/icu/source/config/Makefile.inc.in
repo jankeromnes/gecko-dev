@@ -12,7 +12,7 @@
 # 1). Base configuration information and linkage
 # 2). Variables giving access to ICU tools
 # 3). Host information
-# 4). Compiler flags and settings 
+# 4). Compiler flags and settings
 # 5). Data Packaging directives
 # 6). Include of platform make fragment (mh-* file)
 
@@ -23,7 +23,7 @@
 #
 ##################################################################
 # The PREFIX is the base of where ICU is installed.
-# Inside this directory you should find  bin, lib, include/unicode, 
+# Inside this directory you should find  bin, lib, include/unicode,
 # etc.  If ICU is not installed in this directory, you must change the
 # following line.  There should exist $(prefix)/include/unicode/utypes.h
 # for example.
@@ -65,7 +65,7 @@ RPATHLDFLAGS = $(LD_RPATH)$(LD_RPATH_PRE)$(libdir)
 endif
 
 #SH## icu-config version of above 'if':
-#SH#case "x$ENABLE_RPATH" in 
+#SH#case "x$ENABLE_RPATH" in
 #SH#     x[yY]*)
 #SH# 	ENABLE_RPATH=YES
 #SH# 	RPATHLDFLAGS="${LD_RPATH}${LD_RPATH_PRE}${libdir}"
@@ -96,7 +96,7 @@ LAYOUTEX_STUBNAME = lx
 IO_STUBNAME = io
 TOOLUTIL_STUBNAME = tu
 CTESTFW_STUBNAME = test
- 
+
 
 
 ### To link your application with ICU:
@@ -121,8 +121,8 @@ ICULIBS_COMMON_LIB_NAME = ${LIBICU}${COMMON_STUBNAME}${ICULIBSUFFIX}${ICULIBSUFF
 ICULIBS_COMMON_LIB_NAME_A = ${LIBICU}${COMMON_STUBNAME}${ICULIBSUFFIX}.${A}
 
 # ICULIBS is the set of libraries your application should link
-# with usually. Many applications will want to add $(ICULIBS_I18N) as well. 
-ICULIBS = $(ICULIBS_BASE) $(ICULIBS_I18N) $(ICULIBS_COMMON) $(ICULIBS_DATA) 
+# with usually. Many applications will want to add $(ICULIBS_I18N) as well.
+ICULIBS = $(ICULIBS_BASE) $(ICULIBS_I18N) $(ICULIBS_COMMON) $(ICULIBS_DATA)
 
 # Proper echo newline handling is needed in icu-config
 ECHO_N=@ICU_ECHO_N@
@@ -145,7 +145,7 @@ FINAL_SO_TARGET = $(SO_TARGET).$(SO_TARGET_VERSION)
 MIDDLE_SO_TARGET = $(SO_TARGET).$(SO_TARGET_VERSION_MAJOR)
 
 # Access to important ICU tools.
-# Use as follows:  $(INVOKE) $(GENRB) arguments .. 
+# Use as follows:  $(INVOKE) $(GENRB) arguments ..
 INVOKE = $(LDLIBRARYPATH_ENVVAR)=$(libdir):$$$(LDLIBRARYPATH_ENVVAR) $(LEAK_CHECKER)
 GENCCODE = $(sbindir)/genccode
 ICUPKG   = $(sbindir)/icupkg
@@ -186,13 +186,13 @@ AR = @AR@
 #SH#ARFLAGS="@ARFLAGS@ ${ARFLAGS}"
 CC = @CC@
 CPP = @CPP@
-CFLAGS = @UCONFIG_CFLAGS@ 
+CFLAGS = @UCONFIG_CFLAGS@
 CPPFLAGS = @UCONFIG_CPPFLAGS@ -I$(prefix)/include
 CXXFLAGS = @UCONFIG_CXXFLAGS@
 CXX = @CXX@
 DEFAULT_MODE = @DATA_PACKAGING_MODE@
-DEFS = @DEFS@ 
-# use a consistent INSTALL 
+DEFS = @DEFS@
+# use a consistent INSTALL
 INSTALL  =  $(SHELL) $(pkgdatadir)/install-sh -c
 INSTALL_DATA  =  @INSTALL_DATA@
 INSTALL_DATA = @INSTALL_DATA@
@@ -200,7 +200,7 @@ INSTALL_PROGRAM  =  @INSTALL_PROGRAM@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 LDFLAGS = $(RPATHLDFLAGS)
-LIBS = @LIBS@ 
+LIBS = @LIBS@
 LIB_M = @LIB_M@
 LIB_VERSION = @LIB_VERSION@
 LIB_VERSION_MAJOR = @LIB_VERSION_MAJOR@
@@ -238,7 +238,7 @@ ICUDATA_CHAR = @ICUDATA_CHAR@
 ICUDATA_NAME = icudt@LIB_VERSION_MAJOR@@ICUDATA_CHAR@
 
 # Defaults for pkgdata's mode and directories
-# The default data dir changes depending on what packaging mode 
+# The default data dir changes depending on what packaging mode
 # is being used
 ifeq ($(strip $(PKGDATA_MODE)),)
 #SH# if [ "x$PKGDATA_MODE" = "x" ];
@@ -277,7 +277,7 @@ GENCCODE_ASSEMBLY = @GENCCODE_ASSEMBLY@
 #       *6* Inclusion of platform make fragment (mh-* file)
 #
 ##################################################################
-# The mh- file ("make fragment") for the platform is included here. 
+# The mh- file ("make fragment") for the platform is included here.
 # It may override the above settings.
 # It is put last so that the mh-file can override anything.
 # The selfcheck is just a sanity check that this makefile is

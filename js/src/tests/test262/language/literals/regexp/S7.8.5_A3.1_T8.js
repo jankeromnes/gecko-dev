@@ -9,7 +9,7 @@ description: "IdentifierPart :: \\u0069 (i)"
 
 //CHECK#1
 var regexp;
-eval("regexp = /(?:)/\u0069"); 
+eval("regexp = /(?:)/\u0069");
 if (regexp.ignoreCase !== true) {
   $ERROR('#1: var regexp = /(?:)/\\u0069; regexp.ignoreCase === true. Actual: ' + (regexp.ignoreCase));
 }

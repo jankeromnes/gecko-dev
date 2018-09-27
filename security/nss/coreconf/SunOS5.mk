@@ -6,7 +6,7 @@
 include $(CORE_DEPTH)/coreconf/UNIX.mk
 
 # Sun's WorkShop defines v8, v8plus and v9 architectures.
-# gcc on Solaris defines v8 and v9 "cpus".  
+# gcc on Solaris defines v8 and v9 "cpus".
 # gcc's v9 is equivalent to Workshop's v8plus.
 # gcc's -m64 is equivalent to Workshop's v9
 

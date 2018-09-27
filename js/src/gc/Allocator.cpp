@@ -389,7 +389,7 @@ js::gc::AllocateCellInGC(Zone* zone, AllocKind thingKind)
     return TenuredCell::fromPointer(cell);
 }
 
-
+
 // ///////////  Arena -> Thing Allocator  //////////////////////////////////////
 
 bool
@@ -567,7 +567,7 @@ ArenaLists::setParallelAllocEnabled(bool enabled)
     }
 }
 
-
+
 // ///////////  Chunk -> Arena Allocator  //////////////////////////////////////
 
 bool
@@ -677,7 +677,7 @@ Chunk::findDecommittedArenaOffset()
     MOZ_CRASH("No decommitted arenas found.");
 }
 
-
+
 // ///////////  System -> Chunk Allocator  /////////////////////////////////////
 
 Chunk*

@@ -13,10 +13,10 @@
 #
 # options
 # -------
-#     -d delimiter - default : 
+#     -d delimiter - default :
 #     -s shortens the path
 #
-# usefull enhancements: in the usage part, try to guess what was meant as 
+# usefull enhancements: in the usage part, try to guess what was meant as
 # a path and echo it to stdout to not break for PATHs with blanks
 #
 ########################################################################
@@ -79,7 +79,7 @@ for ( $i = 0; $i <= $#pathcomponents; $i++ ) {
               "\/usr\/etc\/" eq $pathcomponents[$i] ||
               "\/usr\/demos\/bin" eq $pathcomponents[$i] ) {
 
-            
+
             #print "dumped: $pathcomponents[$i]\n";
             next;
         }

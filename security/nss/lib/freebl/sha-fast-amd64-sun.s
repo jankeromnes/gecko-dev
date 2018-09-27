@@ -45,7 +45,7 @@ shaCompress:
 	movq	%r13, %r9
 	roll	$5, %edx
 	movl	4(%rsi), %ebx
-	xorq	%r8, %r9 
+	xorq	%r8, %r9
 /APP
 	bswap %eax
 /NO_APP
@@ -53,13 +53,13 @@ shaCompress:
 	mov	%eax, %r15d
 	roll	$30, %r10d
 	movq	%r15, -48(%rdi)
-	xorq	%r8, %r9 
+	xorq	%r8, %r9
 	movq	-48(%rdi), %r14
 	addq	%r9, %rdx
 	movq	%r10, %rax
 	movl	%r12d, %r15d
 	addq	%rcx, %rdx
-	xorq	%r13, %rax 
+	xorq	%r13, %rax
 	roll	$30, %r15d
 	leaq	1518500249(%rdx,%r14), %rdx
 	andq	%r12, %rax
@@ -69,18 +69,18 @@ shaCompress:
 /NO_APP
 	movl	%edx, %ecx
 	mov	%ebx, %r11d
-	xorq	%r13, %rax 
+	xorq	%r13, %rax
 	movq	%r11, -40(%rdi)
 	roll	$5, %ecx
 	movq	-40(%rdi), %r9
 	addq	%rax, %rcx
-	xorq	%r10, %r12 
+	xorq	%r10, %r12
 	movl	8(%rsi), %r14d
 	addq	%r8, %rcx
 	andq	%rdx, %r12
 	movl	%edx, %r11d
 	leaq	1518500249(%rcx,%r9), %rcx
-	xorq	%r10, %r12 
+	xorq	%r10, %r12
 	roll	$30, %r11d
 /APP
 	bswap %r14d
@@ -95,7 +95,7 @@ shaCompress:
 	movq	%r11, %r12
 	movl	%ecx, %ebx
 	addq	%r13, %r8
-	xorq	%r15, %r12 
+	xorq	%r15, %r12
 	roll	$30, %ebx
 	leaq	1518500249(%r8,%rax), %r8
 	andq	%rcx, %r12
@@ -105,7 +105,7 @@ shaCompress:
 /NO_APP
 	movl	%r8d, %edx
 	mov	%r9d, %r14d
-	xorq	%r15, %r12 
+	xorq	%r15, %r12
 	movq	%r14, -24(%rdi)
 	roll	$5, %edx
 	movq	-24(%rdi), %r13
@@ -121,21 +121,21 @@ shaCompress:
 	movl	%edx, %ecx
 	mov	%eax, %r9d
 	roll	$5, %ecx
-	xorq	%r11, %r12 
+	xorq	%r11, %r12
 	movq	%r9, -16(%rdi)
 	andq	%r8, %r12
 	movq	-16(%rdi), %r10
 	roll	$30, %r14d
-	xorq	%r11, %r12 
+	xorq	%r11, %r12
 	movq	%r14, %rax
 	movl	%edx, %r9d
 	addq	%r12, %rcx
-	xorq	%rbx, %rax 
+	xorq	%rbx, %rax
 	roll	$30, %r9d
 	addq	%r15, %rcx
 	andq	%rdx, %rax
 	leaq	1518500249(%rcx,%r10), %rcx
-	xorq	%rbx, %rax 
+	xorq	%rbx, %rax
 	movl	24(%rsi), %r10d
 /APP
 	bswap %r13d
@@ -151,7 +151,7 @@ shaCompress:
 	movq	%r9, %r11
 	roll	$30, %r15d
 	leaq	1518500249(%r8,%r12), %r8
-	xorq	%r14, %r11 
+	xorq	%r14, %r11
 	movl	28(%rsi), %r12d
 /APP
 	bswap %r10d
@@ -160,18 +160,18 @@ shaCompress:
 	mov	%r10d, %r13d
 	movl	%r8d, %edx
 	movq	%r13, (%rdi)
-	xorq	%r14, %r11 
+	xorq	%r14, %r11
 	movq	(%rdi), %rax
 	roll	$5, %edx
 	movq	%r15, %r10
 	movl	%r8d, %r13d
 	addq	%r11, %rdx
-	xorq	%r9, %r10 
+	xorq	%r9, %r10
 	roll	$30, %r13d
 	addq	%rbx, %rdx
 	andq	%r8, %r10
 	leaq	1518500249(%rdx,%rax), %rdx
-	xorq	%r9, %r10 
+	xorq	%r9, %r10
 	movl	32(%rsi), %eax
 /APP
 	bswap %r12d
@@ -192,22 +192,22 @@ shaCompress:
 	movl	%ecx, %r8d
 	mov	%eax, %r12d
 	roll	$5, %r8d
-	xorq	%r15, %r10 
+	xorq	%r15, %r10
 	movq	%r12, 16(%rdi)
 	andq	%rdx, %r10
 	movq	16(%rdi), %r14
 	roll	$30, %ebx
-	xorq	%r15, %r10 
+	xorq	%r15, %r10
 	movq	%rbx, %rax
 	movl	36(%rsi), %r11d
 	addq	%r10, %r8
-	xorq	%r13, %rax 
+	xorq	%r13, %rax
 	movl	%ecx, %r12d
 	addq	%r9, %r8
 	andq	%rcx, %rax
 	roll	$30, %r12d
 	leaq	1518500249(%r8,%r14), %r8
-	xorq	%r13, %rax 
+	xorq	%r13, %rax
 	movl	40(%rsi), %r14d
 /APP
 	bswap %r11d
@@ -219,13 +219,13 @@ shaCompress:
 	roll	$5, %edx
 	movq	24(%rdi), %r10
 	addq	%rax, %rdx
-	xorq	%rbx, %r11 
+	xorq	%rbx, %r11
 	movl	%r8d, %r9d
 	addq	%r15, %rdx
 	andq	%r8, %r11
 	roll	$30, %r9d
 	leaq	1518500249(%rdx,%r10), %rdx
-	xorq	%rbx, %r11 
+	xorq	%rbx, %r11
 	movl	44(%rsi), %r10d
 /APP
 	bswap %r14d
@@ -239,7 +239,7 @@ shaCompress:
 	movq	%r9, %r11
 	movl	%edx, %r15d
 	addq	%r13, %rcx
-	xorq	%r12, %r11 
+	xorq	%r12, %r11
 	roll	$30, %r15d
 	leaq	1518500249(%rcx,%rax), %rcx
 	andq	%rdx, %r11
@@ -249,7 +249,7 @@ shaCompress:
 /NO_APP
 	movl	%ecx, %r8d
 	mov	%r10d, %r14d
-	xorq	%r12, %r11 
+	xorq	%r12, %r11
 	movq	%r14, 40(%rdi)
 	roll	$5, %r8d
 	movq	40(%rdi), %r13
@@ -257,7 +257,7 @@ shaCompress:
 	movq	%r15, %r10
 	movl	%ecx, %r14d
 	addq	%rbx, %r8
-	xorq	%r9, %r10 
+	xorq	%r9, %r10
 	leaq	1518500249(%r8,%r13), %r8
 	movl	52(%rsi), %r13d
 /APP
@@ -268,14 +268,14 @@ shaCompress:
 	roll	$5, %edx
 	andq	%rcx, %r10
 	movq	%rbx, 48(%rdi)
-	xorq	%r9, %r10 
+	xorq	%r9, %r10
 	movq	48(%rdi), %r11
 	roll	$30, %r14d
 	addq	%r10, %rdx
 	movq	%r14, %rax
 	movl	%r8d, %ebx
 	addq	%r12, %rdx
-	xorq	%r15, %rax 
+	xorq	%r15, %rax
 	roll	$30, %ebx
 	leaq	1518500249(%rdx,%r11), %rdx
 	andq	%r8, %rax
@@ -285,7 +285,7 @@ shaCompress:
 /NO_APP
 	movl	%edx, %ecx
 	mov	%r13d, %r12d
-	xorq	%r15, %rax 
+	xorq	%r15, %rax
 	movq	%r12, 56(%rdi)
 	roll	$5, %ecx
 	movq	56(%rdi), %r10
@@ -295,7 +295,7 @@ shaCompress:
 	movq	%rbx, %r9
 	roll	$30, %r12d
 	leaq	1518500249(%rcx,%r10), %rcx
-	xorq	%r14, %r9 
+	xorq	%r14, %r9
 	movl	60(%rsi), %r10d
 /APP
 	bswap %r11d
@@ -304,18 +304,18 @@ shaCompress:
 	mov	%r11d, %r13d
 	movl	%ecx, %r8d
 	movq	%r13, 64(%rdi)
-	xorq	%r14, %r9 
+	xorq	%r14, %r9
 	movq	64(%rdi), %rax
 	roll	$5, %r8d
 	movq	%r12, %r11
 	movl	%ecx, %r13d
 	addq	%r9, %r8
-	xorq	%rbx, %r11 
+	xorq	%rbx, %r11
 	roll	$30, %r13d
 	addq	%r15, %r8
 	andq	%rcx, %r11
 	leaq	1518500249(%r8,%rax), %r8
-	xorq	%rbx, %r11 
+	xorq	%rbx, %r11
 /APP
 	bswap %r10d
 /NO_APP
@@ -333,17 +333,17 @@ shaCompress:
 	leaq	1518500249(%rsi,%r9), %r14
 	movq	%r13, %r11
 	movl	%r8d, %r15d
-	xorq	%rcx, %r10 
-	xorq	%rdx, %r10 
+	xorq	%rcx, %r10
+	xorq	%rdx, %r10
 	movl	%r14d, %ecx
 	xorl	%eax, %r10d
 	roll	%r10d
 	roll	$5, %ecx
-	xorq	%r12, %r11 
+	xorq	%r12, %r11
 	andq	%r8, %r11
 	movq	%r10, -48(%rdi)
 	movq	-48(%rdi), %r9
-	xorq	%r12, %r11 
+	xorq	%r12, %r11
 	roll	$30, %r15d
 	movl	%r14d, %r10d
 	addq	%r11, %rcx
@@ -355,13 +355,13 @@ shaCompress:
 	leaq	1518500249(%rcx,%r9), %rcx
 	movq	%r15, %r8
 	roll	$30, %r10d
-	xorq	%rdx, %r11 
-	xorq	%r13, %r8 
-	xorq	%rbx, %r11 
+	xorq	%rdx, %r11
+	xorq	%r13, %r8
+	xorq	%rbx, %r11
 	andq	%r14, %r8
 	movl	%ecx, %r9d
 	xorl	%eax, %r11d
-	xorq	%r13, %r8 
+	xorq	%r13, %r8
 	roll	$5, %r9d
 	roll	%r11d
 	addq	%r8, %r9
@@ -371,16 +371,16 @@ shaCompress:
 	addq	%r12, %r9
 	movq	72(%rdi), %rbx
 	movq	32(%rdi), %rdx
-	xorq	%r15, %rax 
+	xorq	%r15, %rax
 	movq	-16(%rdi), %r14
 	movq	-32(%rdi), %r12
 	andq	%rcx, %rax
 	leaq	1518500249(%r9,%rsi), %r9
-	xorq	%r15, %rax 
+	xorq	%r15, %rax
 	movl	%ecx, %r11d
-	xorq	%rdx, %rbx 
+	xorq	%rdx, %rbx
 	roll	$30, %r11d
-	xorq	%r14, %rbx 
+	xorq	%r14, %rbx
 	movl	%r9d, %esi
 	xorl	%r12d, %ebx
 	roll	$5, %esi
@@ -396,21 +396,21 @@ shaCompress:
 	movq	-24(%rdi), %rcx
 	movl	%r9d, %ebx
 	leaq	1518500249(%rsi,%r8), %rsi
-	xorq	%rdx, %r12 
-	xorq	%r14, %r12 
+	xorq	%rdx, %r12
+	xorq	%r14, %r12
 	movl	%esi, %r8d
 	xorl	%ecx, %r12d
 	roll	%r12d
 	roll	$5, %r8d
-	xorq	%r10, %r13 
+	xorq	%r10, %r13
 	andq	%r9, %r13
 	movq	%r12, -24(%rdi)
 	movq	-24(%rdi), %rax
-	xorq	%r10, %r13 
+	xorq	%r10, %r13
 	roll	$30, %ebx
 	movl	%esi, %r12d
 	addq	%r13, %r8
-	xorq	%rbx, %rsi 
+	xorq	%rbx, %rsi
 	roll	$30, %r12d
 	addq	%r15, %r8
 	movq	-40(%rdi), %r15
@@ -418,10 +418,10 @@ shaCompress:
 	movq	(%rdi), %r14
 	movq	-16(%rdi), %r9
 	leaq	1518500249(%r8,%rax), %r13
-	xorq	%r11, %rsi 
-	xorq	%rdx, %r15 
+	xorq	%r11, %rsi
+	xorq	%rdx, %r15
 	movl	%r13d, %ecx
-	xorq	%r14, %r15 
+	xorq	%r14, %r15
 	roll	$5, %ecx
 	xorl	%r9d, %r15d
 	addq	%rsi, %rcx
@@ -432,14 +432,14 @@ shaCompress:
 	movl	%r13d, %r15d
 	movq	-32(%rdi), %r14
 	movq	56(%rdi), %rax
-	xorq	%r12, %r13 
+	xorq	%r12, %r13
 	movq	8(%rdi), %rdx
 	movq	-8(%rdi), %r10
-	xorq	%rbx, %r13 
+	xorq	%rbx, %r13
 	leaq	1859775393(%rcx,%rsi), %r9
 	roll	$30, %r15d
-	xorq	%rax, %r14 
-	xorq	%rdx, %r14 
+	xorq	%rax, %r14
+	xorq	%rdx, %r14
 	movl	%r9d, %esi
 	xorl	%r10d, %r14d
 	roll	$5, %esi
@@ -453,15 +453,15 @@ shaCompress:
 	movl	%r9d, %r14d
 	movq	16(%rdi), %rdx
 	movq	(%rdi), %r11
-	xorq	%r15, %r9 
+	xorq	%r15, %r9
 	leaq	1859775393(%rsi,%r8), %r10
-	xorq	%rax, %r13 
-	xorq	%rdx, %r13 
+	xorq	%rax, %r13
+	xorq	%rdx, %r13
 	movl	%r10d, %r8d
 	xorl	%r11d, %r13d
 	roll	$5, %r8d
 	roll	%r13d
-	xorq	%r12, %r9 
+	xorq	%r12, %r9
 	roll	$30, %r14d
 	addq	%r9, %r8
 	movq	%r13, (%rdi)
@@ -473,11 +473,11 @@ shaCompress:
 	movq	8(%rdi), %r9
 	movl	%r10d, %r13d
 	leaq	1859775393(%r8,%rcx), %r11
-	xorq	%r14, %r10 
+	xorq	%r14, %r10
 	roll	$30, %r13d
-	xorq	%rax, %rbx 
-	xorq	%r15, %r10 
-	xorq	%rdx, %rbx 
+	xorq	%rax, %rbx
+	xorq	%r15, %r10
+	xorq	%rdx, %rbx
 	movl	%r11d, %ecx
 	xorl	%r9d, %ebx
 	roll	$5, %ecx
@@ -491,12 +491,12 @@ shaCompress:
 	movl	%r11d, %ebx
 	movq	32(%rdi), %rdx
 	movq	16(%rdi), %r9
-	xorq	%r13, %r11 
+	xorq	%r13, %r11
 	leaq	1859775393(%rcx,%rsi), %r10
-	xorq	%r14, %r11 
+	xorq	%r14, %r11
 	roll	$30, %ebx
-	xorq	%rax, %r12 
-	xorq	%rdx, %r12 
+	xorq	%rax, %r12
+	xorq	%rdx, %r12
 	movl	%r10d, %esi
 	xorl	%r9d, %r12d
 	roll	$5, %esi
@@ -510,11 +510,11 @@ shaCompress:
 	movl	%r10d, %r12d
 	movq	40(%rdi), %rdx
 	movq	24(%rdi), %r9
-	xorq	%rbx, %r10 
+	xorq	%rbx, %r10
 	leaq	1859775393(%rsi,%r8), %r11
-	xorq	%r13, %r10 
-	xorq	%rax, %r15 
-	xorq	%rdx, %r15 
+	xorq	%r13, %r10
+	xorq	%rax, %r15
+	xorq	%rdx, %r15
 	movl	%r11d, %r8d
 	xorl	%r9d, %r15d
 	roll	$5, %r8d
@@ -530,11 +530,11 @@ shaCompress:
 	movq	32(%rdi), %r10
 	movl	%r11d, %r15d
 	leaq	1859775393(%r8,%rcx), %r9
-	xorq	%r12, %r11 
+	xorq	%r12, %r11
 	roll	$30, %r15d
-	xorq	%rax, %r14 
-	xorq	%rbx, %r11 
-	xorq	%rdx, %r14 
+	xorq	%rax, %r14
+	xorq	%rbx, %r11
+	xorq	%rdx, %r14
 	movl	%r9d, %ecx
 	xorl	%r10d, %r14d
 	roll	$5, %ecx
@@ -548,12 +548,12 @@ shaCompress:
 	movl	%r9d, %r14d
 	movq	56(%rdi), %rdx
 	movq	40(%rdi), %r11
-	xorq	%r15, %r9 
+	xorq	%r15, %r9
 	leaq	1859775393(%rcx,%rsi), %r10
-	xorq	%r12, %r9 
+	xorq	%r12, %r9
 	roll	$30, %r14d
-	xorq	%rax, %r13 
-	xorq	%rdx, %r13 
+	xorq	%rax, %r13
+	xorq	%rdx, %r13
 	movl	%r10d, %esi
 	xorl	%r11d, %r13d
 	roll	$5, %esi
@@ -567,12 +567,12 @@ shaCompress:
 	movl	%r10d, %r13d
 	movq	64(%rdi), %rdx
 	movq	48(%rdi), %r9
-	xorq	%r14, %r10 
+	xorq	%r14, %r10
 	leaq	1859775393(%rsi,%r8), %r11
-	xorq	%r15, %r10 
+	xorq	%r15, %r10
 	roll	$30, %r13d
-	xorq	%rax, %rbx 
-	xorq	%rdx, %rbx 
+	xorq	%rax, %rbx
+	xorq	%rdx, %rbx
 	movl	%r11d, %r8d
 	xorl	%r9d, %ebx
 	roll	$5, %r8d
@@ -587,13 +587,13 @@ shaCompress:
 	movq	72(%rdi), %rdx
 	movq	56(%rdi), %r9
 	leaq	1859775393(%r8,%rcx), %r10
-	xorq	%rax, %r12 
-	xorq	%rdx, %r12 
+	xorq	%rax, %r12
+	xorq	%rdx, %r12
 	movl	%r10d, %ecx
 	xorl	%r9d, %r12d
-	xorq	%r13, %r11 
+	xorq	%r13, %r11
 	roll	$5, %ecx
-	xorq	%r14, %r11 
+	xorq	%r14, %r11
 	roll	%r12d
 	roll	$30, %ebx
 	addq	%r11, %rcx
@@ -606,11 +606,11 @@ shaCompress:
 	movq	64(%rdi), %r9
 	movl	%r10d, %r12d
 	leaq	1859775393(%rcx,%rsi), %r11
-	xorq	%rbx, %r10 
+	xorq	%rbx, %r10
 	roll	$30, %r12d
-	xorq	%rax, %r15 
-	xorq	%r13, %r10 
-	xorq	%rdx, %r15 
+	xorq	%rax, %r15
+	xorq	%r13, %r10
+	xorq	%rdx, %r15
 	movl	%r11d, %esi
 	xorl	%r9d, %r15d
 	roll	$5, %esi
@@ -624,12 +624,12 @@ shaCompress:
 	movl	%r11d, %r15d
 	movq	-40(%rdi), %rdx
 	movq	72(%rdi), %r10
-	xorq	%r12, %r11 
+	xorq	%r12, %r11
 	leaq	1859775393(%rsi,%r8), %r9
-	xorq	%rbx, %r11 
+	xorq	%rbx, %r11
 	roll	$30, %r15d
-	xorq	%rax, %r14 
-	xorq	%rdx, %r14 
+	xorq	%rax, %r14
+	xorq	%rdx, %r14
 	movl	%r9d, %r8d
 	xorl	%r10d, %r14d
 	roll	$5, %r8d
@@ -644,31 +644,31 @@ shaCompress:
 	movq	-32(%rdi), %rdx
 	movq	-48(%rdi), %r11
 	leaq	1859775393(%r8,%rcx), %r10
-	xorq	%rax, %r13 
-	xorq	%rdx, %r13 
+	xorq	%rax, %r13
+	xorq	%rdx, %r13
 	movl	%r10d, %ecx
 	xorl	%r11d, %r13d
 	roll	$5, %ecx
 	roll	%r13d
-	xorq	%r15, %r9 
+	xorq	%r15, %r9
 	roll	$30, %r14d
-	xorq	%r12, %r9 
+	xorq	%r12, %r9
 	movq	%r13, -48(%rdi)
 	movq	-48(%rdi), %rsi
 	addq	%r9, %rcx
 	movl	%r10d, %r13d
-	xorq	%r14, %r10 
+	xorq	%r14, %r10
 	addq	%rbx, %rcx
 	movq	64(%rdi), %rbx
 	movq	24(%rdi), %rax
 	movq	-24(%rdi), %rdx
 	leaq	1859775393(%rcx,%rsi), %r11
 	movq	-40(%rdi), %r9
-	xorq	%r15, %r10 
+	xorq	%r15, %r10
 	roll	$30, %r13d
-	xorq	%rax, %rbx 
+	xorq	%rax, %rbx
 	movl	%r11d, %esi
-	xorq	%rdx, %rbx 
+	xorq	%rdx, %rbx
 	roll	$5, %esi
 	xorl	%r9d, %ebx
 	addq	%r10, %rsi
@@ -679,14 +679,14 @@ shaCompress:
 	movl	%r11d, %ebx
 	movq	72(%rdi), %r12
 	movq	32(%rdi), %rax
-	xorq	%r13, %r11 
+	xorq	%r13, %r11
 	movq	-16(%rdi), %rdx
 	movq	-32(%rdi), %r9
-	xorq	%r14, %r11 
+	xorq	%r14, %r11
 	leaq	1859775393(%rsi,%r8), %r10
 	roll	$30, %ebx
-	xorq	%rax, %r12 
-	xorq	%rdx, %r12 
+	xorq	%rax, %r12
+	xorq	%rdx, %r12
 	movl	%r10d, %r8d
 	xorl	%r9d, %r12d
 	roll	$5, %r8d
@@ -700,11 +700,11 @@ shaCompress:
 	movl	%r10d, %r12d
 	movq	-8(%rdi), %rdx
 	movq	-24(%rdi), %r9
-	xorq	%rbx, %r10 
+	xorq	%rbx, %r10
 	leaq	1859775393(%r8,%rcx), %r11
-	xorq	%r13, %r10 
-	xorq	%rax, %r15 
-	xorq	%rdx, %r15 
+	xorq	%r13, %r10
+	xorq	%rax, %r15
+	xorq	%rdx, %r15
 	movl	%r11d, %ecx
 	xorl	%r9d, %r15d
 	roll	$5, %ecx
@@ -720,11 +720,11 @@ shaCompress:
 	movq	-16(%rdi), %r10
 	movl	%r11d, %r15d
 	leaq	1859775393(%rcx,%rsi), %r9
-	xorq	%r12, %r11 
+	xorq	%r12, %r11
 	roll	$30, %r15d
-	xorq	%rax, %r14 
-	xorq	%rbx, %r11 
-	xorq	%rdx, %r14 
+	xorq	%rax, %r14
+	xorq	%rbx, %r11
+	xorq	%rdx, %r14
 	movl	%r9d, %esi
 	xorl	%r10d, %r14d
 	roll	$5, %esi
@@ -738,30 +738,30 @@ shaCompress:
 	movl	%r9d, %r14d
 	movq	8(%rdi), %rdx
 	movq	-8(%rdi), %r10
-	xorq	%r15, %r9 
+	xorq	%r15, %r9
 	leaq	1859775393(%rsi,%r8), %r13
-	xorq	%r12, %r9 
+	xorq	%r12, %r9
 	roll	$30, %r14d
-	xorq	%rax, %r11 
-	xorq	%rdx, %r11 
+	xorq	%rax, %r11
+	xorq	%rdx, %r11
 	movl	%r13d, %r8d
 	xorl	%r10d, %r11d
 	roll	$5, %r8d
 	movl	%r13d, %r10d
 	roll	%r11d
 	addq	%r9, %r8
-	xorq	%r14, %r13 
+	xorq	%r14, %r13
 	movq	%r11, -8(%rdi)
 	addq	%rbx, %r8
 	movq	-8(%rdi), %rbx
 	movq	-24(%rdi), %r9
 	movq	64(%rdi), %rax
-	xorq	%r15, %r13 
+	xorq	%r15, %r13
 	movq	16(%rdi), %rdx
 	movq	(%rdi), %rcx
 	leaq	1859775393(%r8,%rbx), %r11
-	xorq	%rax, %r9 
-	xorq	%rdx, %r9 
+	xorq	%rax, %r9
+	xorq	%rdx, %r9
 	movl	%r11d, %ebx
 	xorl	%ecx, %r9d
 	roll	$5, %ebx
@@ -777,14 +777,14 @@ shaCompress:
 	movl	%r10d, %ebx
 	movq	24(%rdi), %r10
 	movq	8(%rdi), %rax
-	xorq	%r13, %r12 
+	xorq	%r13, %r12
 	roll	$30, %ebx
 	movl	%ecx, %esi
-	xorq	%r10, %r12 
-	xorq	%rbx, %r11 
+	xorq	%r10, %r12
+	xorq	%rbx, %r11
 	roll	$5, %esi
 	xorl	%eax, %r12d
-	xorq	%r14, %r11 
+	xorq	%r14, %r11
 	roll	$30, %r9d
 	roll	%r12d
 	addq	%r11, %rsi
@@ -801,10 +801,10 @@ shaCompress:
 	leaq	1859775393(%rsi,%rdx), %rsi
 	andq	%rbx, %rcx
 	andq	%r9, %rax
-	xorq	%r13, %r11 
+	xorq	%r13, %r11
 	orq	%rcx, %rax
 	roll	$30, %r12d
-	xorq	%r10, %r11 
+	xorq	%r10, %r11
 	movq	%rsi, %r10
 	xorl	%r8d, %r11d
 	movl	%esi, %r8d
@@ -823,10 +823,10 @@ shaCompress:
 	addq	%r15, %r8
 	movl	$2400959708, %r15d
 	orq	%r12, %rsi
-	xorq	%rdx, %r13 
+	xorq	%rdx, %r13
 	addq	%r15, %r8
 	andq	%r9, %rsi
-	xorq	%r14, %r13 
+	xorq	%r14, %r13
 	orq	%rsi, %r10
 	xorl	%ecx, %r13d
 	movl	%r8d, %ecx
@@ -844,10 +844,10 @@ shaCompress:
 	addq	%rax, %rcx
 	movl	%r8d, %r13d
 	movq	%r8, %r10
-	xorq	%rdx, %r14 
+	xorq	%rdx, %r14
 	addq	%r15, %rcx
 	orq	%r11, %r8
-	xorq	%rbx, %r14 
+	xorq	%rbx, %r14
 	andq	%r12, %r8
 	andq	%r11, %r10
 	xorl	%esi, %r14d
@@ -868,10 +868,10 @@ shaCompress:
 	addq	%rax, %rsi
 	movq	%rcx, %r10
 	orq	%r13, %rcx
-	xorq	%rdx, %r9 
+	xorq	%rdx, %r9
 	addq	%r15, %rsi
 	andq	%r11, %rcx
-	xorq	%rbx, %r9 
+	xorq	%rbx, %r9
 	andq	%r13, %r10
 	roll	$30, %r14d
 	xorl	%r8d, %r9d
@@ -890,9 +890,9 @@ shaCompress:
 	movl	%esi, %r9d
 	addq	%rax, %r8
 	movq	%rsi, %r12
-	xorq	%rdx, %r10 
+	xorq	%rdx, %r10
 	addq	%r15, %r8
-	xorq	%rbx, %r10 
+	xorq	%rbx, %r10
 	orq	%r14, %rsi
 	andq	%r14, %r12
 	andq	%r13, %rsi
@@ -913,10 +913,10 @@ shaCompress:
 	addq	%rax, %rcx
 	movl	%r8d, %r10d
 	movq	%r8, %r11
-	xorq	%rdx, %r12 
+	xorq	%rdx, %r12
 	addq	%r15, %rcx
 	orq	%r9, %r8
-	xorq	%rbx, %r12 
+	xorq	%rbx, %r12
 	andq	%r14, %r8
 	andq	%r9, %r11
 	xorl	%esi, %r12d
@@ -937,9 +937,9 @@ shaCompress:
 	addq	%rax, %rsi
 	andq	%r10, %r13
 	movl	%ecx, %r12d
-	xorq	%rdx, %r11 
+	xorq	%rdx, %r11
 	addq	%r15, %rsi
-	xorq	%rbx, %r11 
+	xorq	%rbx, %r11
 	xorl	%r8d, %r11d
 	movl	%esi, %r8d
 	roll	%r11d
@@ -960,10 +960,10 @@ shaCompress:
 	addq	%rax, %r8
 	movq	%rsi, %r14
 	orq	%r12, %rsi
-	xorq	%rdx, %r13 
+	xorq	%rdx, %r13
 	addq	%r15, %r8
 	andq	%r10, %rsi
-	xorq	%rbx, %r13 
+	xorq	%rbx, %r13
 	andq	%r12, %r14
 	roll	$30, %r11d
 	xorl	%ecx, %r13d
@@ -983,10 +983,10 @@ shaCompress:
 	addq	%rax, %rcx
 	movq	%r8, %r9
 	orq	%r11, %r8
-	xorq	%rdx, %r14 
+	xorq	%rdx, %r14
 	addq	%r15, %rcx
 	andq	%r12, %r8
-	xorq	%rbx, %r14 
+	xorq	%rbx, %r14
 	andq	%r11, %r9
 	xorl	%esi, %r14d
 	movl	%ecx, %esi
@@ -1005,10 +1005,10 @@ shaCompress:
 	addq	%rax, %rsi
 	roll	$30, %r13d
 	movq	%rcx, %r9
-	xorq	%rdx, %r10 
+	xorq	%rdx, %r10
 	addq	%r15, %rsi
 	orq	%r13, %rcx
-	xorq	%rbx, %r10 
+	xorq	%rbx, %r10
 	andq	%r11, %rcx
 	andq	%r13, %r9
 	xorl	%r8d, %r10d
@@ -1029,10 +1029,10 @@ shaCompress:
 	addq	%rax, %r8
 	movq	%rsi, %r9
 	orq	%r14, %rsi
-	xorq	%rdx, %r12 
+	xorq	%rdx, %r12
 	addq	%r15, %r8
 	andq	%r13, %rsi
-	xorq	%rbx, %r12 
+	xorq	%rbx, %r12
 	andq	%r14, %r9
 	roll	$30, %r10d
 	xorl	%ecx, %r12d
@@ -1051,9 +1051,9 @@ shaCompress:
 	movl	%r8d, %r12d
 	addq	%rax, %rcx
 	movq	%r8, %r9
-	xorq	%rdx, %r11 
+	xorq	%rdx, %r11
 	addq	%r15, %rcx
-	xorq	%rbx, %r11 
+	xorq	%rbx, %r11
 	xorl	%esi, %r11d
 	orq	%r10, %r8
 	andq	%r10, %r9
@@ -1075,10 +1075,10 @@ shaCompress:
 	addq	%rax, %rsi
 	movq	%rcx, %r9
 	orq	%r12, %rcx
-	xorq	%rdx, %r13 
+	xorq	%rdx, %r13
 	addq	%r15, %rsi
 	andq	%r10, %rcx
-	xorq	%rbx, %r13 
+	xorq	%rbx, %r13
 	andq	%r12, %r9
 	roll	$30, %r11d
 	xorl	%r8d, %r13d
@@ -1098,10 +1098,10 @@ shaCompress:
 	addq	%rax, %r8
 	movq	%rsi, %r14
 	orq	%r11, %rsi
-	xorq	%rdx, %r9 
+	xorq	%rdx, %r9
 	addq	%r15, %r8
 	andq	%r11, %r14
-	xorq	%rcx, %r9 
+	xorq	%rcx, %r9
 	xorl	%ebx, %r9d
 	movl	%r8d, %ebx
 	roll	%r9d
@@ -1119,10 +1119,10 @@ shaCompress:
 	roll	$30, %r13d
 	addq	%rax, %rbx
 	movl	%r8d, %r9d
-	xorq	%rdx, %r14 
+	xorq	%rdx, %r14
 	addq	%r15, %rbx
 	movq	%r8, %r10
-	xorq	%rcx, %r14 
+	xorq	%rcx, %r14
 	orq	%r13, %r8
 	andq	%r13, %r10
 	andq	%r11, %r8
@@ -1143,10 +1143,10 @@ shaCompress:
 	addq	%rax, %rsi
 	movl	%ebx, %r14d
 	movq	%rbx, %r10
-	xorq	%rdx, %r12 
+	xorq	%rdx, %r12
 	addq	%r15, %rsi
 	orq	%r9, %rbx
-	xorq	%rcx, %r12 
+	xorq	%rcx, %r12
 	andq	%r13, %rbx
 	andq	%r9, %r10
 	xorl	%r8d, %r12d
@@ -1166,9 +1166,9 @@ shaCompress:
 	addq	%rax, %r8
 	movq	%rsi, %r10
 	addq	%r15, %r8
-	xorq	%rdx, %rbx 
+	xorq	%rdx, %rbx
 	roll	$30, %r14d
-	xorq	%r11, %rbx 
+	xorq	%r11, %rbx
 	orq	%r14, %rsi
 	andq	%r14, %r10
 	xorl	%ecx, %ebx
@@ -1189,10 +1189,10 @@ shaCompress:
 	addq	%rsi, %rcx
 	movl	%r8d, %ebx
 	movq	%r8, %r10
-	xorq	%rax, %r11 
+	xorq	%rax, %r11
 	addq	%r15, %rcx
 	orq	%r12, %r8
-	xorq	%rdx, %r11 
+	xorq	%rdx, %r11
 	andq	%r14, %r8
 	andq	%r12, %r10
 	xorl	%r13d, %r11d
@@ -1212,9 +1212,9 @@ shaCompress:
 	movl	%ecx, %r11d
 	addq	%rsi, %r13
 	movq	%rcx, %r9
-	xorq	%rax, %r10 
+	xorq	%rax, %r10
 	addq	%r15, %r13
-	xorq	%rdx, %r10 
+	xorq	%rdx, %r10
 	xorl	%r8d, %r10d
 	movl	%r13d, %r8d
 	roll	%r10d
@@ -1238,9 +1238,9 @@ shaCompress:
 	addq	%r15, %r10
 	orq	%r11, %r13
 	andq	%r11, %rcx
-	xorq	%rax, %r14 
+	xorq	%rax, %r14
 	andq	%rbx, %r13
-	xorq	%rdx, %r14 
+	xorq	%rdx, %r14
 	orq	%r13, %rcx
 	xorl	%r9d, %r14d
 	movl	%r10d, %r9d
@@ -1258,13 +1258,13 @@ shaCompress:
 	movl	%r8d, %esi
 	addq	%r15, %r9
 	movq	48(%rdi), %r15
-	xorq	%r12, %r13 
+	xorq	%r12, %r13
 	roll	$30, %esi
-	xorq	%rax, %r13 
-	xorq	%rsi, %r10 
+	xorq	%rax, %r13
+	xorq	%rsi, %r10
 	xorl	%r15d, %r13d
 	movl	%r9d, %r15d
-	xorq	%r11, %r10 
+	xorq	%r11, %r10
 	roll	$5, %r15d
 	roll	%r13d
 	addq	%r10, %r15
@@ -1279,11 +1279,11 @@ shaCompress:
 	addq	%r10, %r15
 	movl	$3395469782, %r10d
 	movl	%r9d, %r13d
-	xorq	%r8, %rbx 
+	xorq	%r8, %rbx
 	addq	%r10, %r15
-	xorq	%r14, %r9 
-	xorq	%rdx, %rbx 
-	xorq	%rsi, %r9 
+	xorq	%r14, %r9
+	xorq	%rdx, %rbx
+	xorq	%rsi, %r9
 	roll	$30, %r13d
 	xorl	%ecx, %ebx
 	movl	%r15d, %ecx
@@ -1299,12 +1299,12 @@ shaCompress:
 	movq	64(%rdi), %r11
 	movl	%r15d, %ebx
 	addq	%r12, %rcx
-	xorq	%r13, %r15 
+	xorq	%r13, %r15
 	roll	$30, %ebx
-	xorq	%rax, %r9 
+	xorq	%rax, %r9
 	addq	%r10, %rcx
-	xorq	%r14, %r15 
-	xorq	%r8, %r9 
+	xorq	%r14, %r15
+	xorq	%r8, %r9
 	xorl	%r11d, %r9d
 	movl	%ecx, %r11d
 	roll	%r9d
@@ -1319,15 +1319,15 @@ shaCompress:
 	movq	72(%rdi), %r8
 	movl	%ecx, %r9d
 	addq	%rdx, %r11
-	xorq	%r12, %r15 
+	xorq	%r12, %r15
 	addq	%r10, %r11
-	xorq	%rax, %r15 
+	xorq	%rax, %r15
 	xorl	%r8d, %r15d
 	movl	%r11d, %r8d
 	roll	%r15d
 	roll	$5, %r8d
-	xorq	%rbx, %rcx 
-	xorq	%r13, %rcx 
+	xorq	%rbx, %rcx
+	xorq	%r13, %rcx
 	movq	%r15, 72(%rdi)
 	movq	72(%rdi), %rsi
 	addq	%rcx, %r8
@@ -1339,11 +1339,11 @@ shaCompress:
 	addq	%rsi, %r8
 	roll	$30, %r9d
 	movl	%r11d, %r15d
-	xorq	%rcx, %r12 
+	xorq	%rcx, %r12
 	addq	%r10, %r8
-	xorq	%r9, %r11 
-	xorq	%rdx, %r12 
-	xorq	%rbx, %r11 
+	xorq	%r9, %r11
+	xorq	%rdx, %r12
+	xorq	%rbx, %r11
 	roll	$30, %r15d
 	xorl	%r14d, %r12d
 	movl	%r8d, %r14d
@@ -1359,12 +1359,12 @@ shaCompress:
 	movq	-40(%rdi), %r11
 	movl	%r8d, %r12d
 	addq	%rax, %r14
-	xorq	%r15, %r8 
+	xorq	%r15, %r8
 	roll	$30, %r12d
-	xorq	%rsi, %r13 
+	xorq	%rsi, %r13
 	addq	%r10, %r14
-	xorq	%r9, %r8 
-	xorq	%rcx, %r13 
+	xorq	%r9, %r8
+	xorq	%rcx, %r13
 	xorl	%r11d, %r13d
 	movl	%r14d, %r11d
 	roll	$5, %r11d
@@ -1379,13 +1379,13 @@ shaCompress:
 	movq	-32(%rdi), %r8
 	movl	%r14d, %r13d
 	addq	%rdx, %r11
-	xorq	%rax, %rbx 
+	xorq	%rax, %rbx
 	addq	%r10, %r11
-	xorq	%rsi, %rbx 
+	xorq	%rsi, %rbx
 	xorl	%r8d, %ebx
-	xorq	%r12, %r14 
+	xorq	%r12, %r14
 	movl	%r11d, %r8d
-	xorq	%r15, %r14 
+	xorq	%r15, %r14
 	roll	%ebx
 	roll	$5, %r8d
 	movq	%rbx, -32(%rdi)
@@ -1399,11 +1399,11 @@ shaCompress:
 	roll	$30, %r13d
 	addq	%rcx, %r8
 	movl	%r11d, %ebx
-	xorq	%r13, %r11 
-	xorq	%rdx, %r14 
+	xorq	%r13, %r11
+	xorq	%rdx, %r14
 	addq	%r10, %r8
-	xorq	%r12, %r11 
-	xorq	%rax, %r14 
+	xorq	%r12, %r11
+	xorq	%rax, %r14
 	roll	$30, %ebx
 	xorl	%r9d, %r14d
 	movl	%r8d, %r9d
@@ -1419,11 +1419,11 @@ shaCompress:
 	movq	-16(%rdi), %r11
 	movl	%r8d, %r14d
 	addq	%rsi, %r9
-	xorq	%rbx, %r8 
-	xorq	%rcx, %r15 
+	xorq	%rbx, %r8
+	xorq	%rcx, %r15
 	addq	%r10, %r9
-	xorq	%r13, %r8 
-	xorq	%rdx, %r15 
+	xorq	%r13, %r8
+	xorq	%rdx, %r15
 	xorl	%r11d, %r15d
 	movl	%r9d, %r11d
 	roll	%r15d
@@ -1440,13 +1440,13 @@ shaCompress:
 	addq	%rax, %r11
 	addq	%r10, %r11
 	roll	$30, %r14d
-	xorq	%rsi, %r12 
-	xorq	%rcx, %r12 
-	xorq	%r14, %r9 
+	xorq	%rsi, %r12
+	xorq	%rcx, %r12
+	xorq	%r14, %r9
 	roll	$30, %r15d
 	xorl	%r8d, %r12d
 	movl	%r11d, %r8d
-	xorq	%rbx, %r9 
+	xorq	%rbx, %r9
 	roll	$5, %r8d
 	roll	%r12d
 	addq	%r9, %r8
@@ -1459,12 +1459,12 @@ shaCompress:
 	movq	(%rdi), %rcx
 	movl	%r11d, %r12d
 	addq	%rdx, %r8
-	xorq	%r15, %r11 
+	xorq	%r15, %r11
 	roll	$30, %r12d
-	xorq	%rax, %r13 
+	xorq	%rax, %r13
 	addq	%r10, %r8
-	xorq	%r14, %r11 
-	xorq	%rsi, %r13 
+	xorq	%r14, %r11
+	xorq	%rsi, %r13
 	xorl	%ecx, %r13d
 	movl	%r8d, %ecx
 	roll	$5, %ecx
@@ -1479,11 +1479,11 @@ shaCompress:
 	movq	8(%rdi), %rsi
 	movl	%r8d, %r13d
 	addq	%r9, %rcx
-	xorq	%r12, %r8 
-	xorq	%rdx, %rbx 
+	xorq	%r12, %r8
+	xorq	%rdx, %rbx
 	addq	%r10, %rcx
-	xorq	%r15, %r8 
-	xorq	%rax, %rbx 
+	xorq	%r15, %r8
+	xorq	%rax, %rbx
 	xorl	%esi, %ebx
 	movl	%ecx, %esi
 	roll	$5, %esi
@@ -1499,11 +1499,11 @@ shaCompress:
 	roll	$30, %r13d
 	addq	%r11, %rsi
 	movl	%ecx, %ebx
-	xorq	%r13, %rcx 
-	xorq	%r9, %r14 
+	xorq	%r13, %rcx
+	xorq	%r9, %r14
 	addq	%r10, %rsi
-	xorq	%r12, %rcx 
-	xorq	%rdx, %r14 
+	xorq	%r12, %rcx
+	xorq	%rdx, %r14
 	roll	$30, %ebx
 	xorl	%r8d, %r14d
 	movl	%esi, %r8d
@@ -1519,12 +1519,12 @@ shaCompress:
 	movq	24(%rdi), %rcx
 	movl	%esi, %r14d
 	addq	%rax, %r8
-	xorq	%rbx, %rsi 
+	xorq	%rbx, %rsi
 	roll	$30, %r14d
-	xorq	%r11, %r15 
+	xorq	%r11, %r15
 	addq	%r10, %r8
-	xorq	%r13, %rsi 
-	xorq	%r9, %r15 
+	xorq	%r13, %rsi
+	xorq	%r9, %r15
 	xorl	%ecx, %r15d
 	movl	%r8d, %ecx
 	roll	%r15d
@@ -1539,9 +1539,9 @@ shaCompress:
 	movq	32(%rdi), %rsi
 	movl	%r8d, %r15d
 	addq	%rdx, %rcx
-	xorq	%rax, %r11 
+	xorq	%rax, %r11
 	addq	%r10, %rcx
-	xorq	%r12, %r11 
+	xorq	%r12, %r11
 	xorl	%esi, %r11d
 	movl	%ecx, %esi
 	roll	%r11d
@@ -1549,21 +1549,21 @@ shaCompress:
 	movl	%ecx, %r11d
 	movq	32(%rdi), %r9
 	roll	$5, %r11d
-	xorq	%r14, %r8 
+	xorq	%r14, %r8
 	movq	16(%rdi), %r12
-	xorq	%rbx, %r8 
+	xorq	%rbx, %r8
 	movq	-24(%rdi), %rdx
 	movq	56(%rdi), %rax
 	addq	%r8, %r11
 	movq	40(%rdi), %r8
 	roll	$30, %r15d
 	addq	%r13, %r11
-	xorq	%r15, %rcx 
+	xorq	%r15, %rcx
 	addq	%r9, %r11
-	xorq	%rdx, %r12 
-	xorq	%r14, %rcx 
+	xorq	%rdx, %r12
+	xorq	%r14, %rcx
 	addq	%r10, %r11
-	xorq	%rax, %r12 
+	xorq	%rax, %r12
 	xorl	%r8d, %r12d
 	movl	%r11d, %r8d
 	roll	$5, %r8d
@@ -1580,14 +1580,14 @@ shaCompress:
 	addq	%r13, %r8
 	movl	%esi, %r13d
 	roll	$30, %r12d
-	xorq	%r9, %rbx 
+	xorq	%r9, %rbx
 	addq	%r10, %r8
 	roll	$30, %r13d
-	xorq	%rdx, %rbx 
-	xorq	%r13, %r11 
+	xorq	%rdx, %rbx
+	xorq	%r13, %r11
 	xorl	%ecx, %ebx
 	movl	%r8d, %ecx
-	xorq	%r15, %r11 
+	xorq	%r15, %r11
 	roll	%ebx
 	roll	$5, %ecx
 	movq	%rbx, 48(%rdi)
@@ -1600,13 +1600,13 @@ shaCompress:
 	movq	56(%rdi), %r14
 	movl	%r8d, %ebx
 	addq	%rax, %rcx
-	xorq	%rsi, %r11 
+	xorq	%rsi, %r11
 	addq	%r10, %rcx
-	xorq	%r9, %r11 
+	xorq	%r9, %r11
 	xorl	%r14d, %r11d
-	xorq	%r12, %r8 
+	xorq	%r12, %r8
 	movl	%ecx, %r14d
-	xorq	%r13, %r8 
+	xorq	%r13, %r8
 	roll	%r11d
 	roll	$5, %r14d
 	movq	%r11, 56(%rdi)
@@ -1620,11 +1620,11 @@ shaCompress:
 	roll	$30, %ebx
 	addq	%rdx, %r14
 	movl	%ecx, %r11d
-	xorq	%rbx, %rcx 
-	xorq	%rax, %r8 
+	xorq	%rbx, %rcx
+	xorq	%rax, %r8
 	addq	%r10, %r14
-	xorq	%r12, %rcx 
-	xorq	%r15, %r8 
+	xorq	%r12, %rcx
+	xorq	%r15, %r8
 	roll	$30, %r11d
 	xorl	%esi, %r8d
 	movl	%r14d, %esi
@@ -1640,11 +1640,11 @@ shaCompress:
 	movq	72(%rdi), %rax
 	movl	%r14d, %r8d
 	addq	%r9, %rsi
-	xorq	%r11, %r14 
+	xorq	%r11, %r14
 	addq	%r10, %rsi
-	xorq	%rcx, %r15 
-	xorq	%rbx, %r14 
-	xorq	%rdx, %r15 
+	xorq	%rcx, %r15
+	xorq	%rbx, %r14
+	xorq	%rdx, %r15
 	movl	%esi, %r13d
 	xorl	%eax, %r15d
 	roll	$5, %r13d

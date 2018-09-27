@@ -14,9 +14,9 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.cc
 +++ b/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.cc
 @@ -17,16 +17,17 @@
  #include "sandbox/win/src/sid.h"
- 
+
  namespace sandbox {
- 
+
  DWORD CreateRestrictedToken(TokenLevel security_level,
                              IntegrityLevel integrity_level,
                              TokenType token_type,
@@ -27,7 +27,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.cc
    restricted_token.Init(NULL);  // Initialized with the current process token
    if (lockdown_default_dacl)
      restricted_token.SetLockdownDefaultDacl();
- 
+
    std::vector<base::string16> privilege_exceptions;
    std::vector<Sid> sid_exceptions;
 @@ -39,19 +40,22 @@ DWORD CreateRestrictedToken(TokenLevel s
@@ -38,7 +38,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.cc
      case USER_RESTRICTED_SAME_ACCESS: {
        deny_sids = false;
        remove_privileges = false;
- 
+
 -      unsigned err_code = restricted_token.AddRestrictingSidAllSids();
 -      if (ERROR_SUCCESS != err_code)
 -        return err_code;
@@ -48,7 +48,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.cc
 +          return err_code;
 +        }
 +      }
- 
+
        break;
      }
      case USER_NON_ADMIN: {
@@ -91,7 +91,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.cc
 +        restricted_token.AddRestrictingSid(WinBuiltinUsersSid);
 +        restricted_token.AddRestrictingSid(WinWorldSid);
 +        restricted_token.AddRestrictingSid(WinRestrictedCodeSid);
- 
+
 -      // This token has to be able to create objects in BNO.
 -      // Unfortunately, on Vista+, it needs the current logon sid
 -      // in the token to achieve this. You should also set the process to be
@@ -128,7 +128,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.cc
        return ERROR_BAD_ARGUMENTS;
      }
    }
- 
+
    DWORD err_code = ERROR_SUCCESS;
 diff --git a/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.h b/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.h
 --- a/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.h
@@ -144,25 +144,25 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/restricted_token_utils.h 
                              bool lockdown_default_dacl,
 +                            bool use_restricting_sids,
                              base::win::ScopedHandle* token);
- 
+
  // Sets the integrity label on a object handle.
  DWORD SetObjectIntegrityLabel(HANDLE handle, SE_OBJECT_TYPE type,
                                const wchar_t* ace_access,
                                const wchar_t* integrity_level_sid);
- 
+
  // Sets the integrity level on a token. This is only valid on Vista. It returns
 diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy.h b/security/sandbox/chromium/sandbox/win/src/sandbox_policy.h
 --- a/security/sandbox/chromium/sandbox/win/src/sandbox_policy.h
 +++ b/security/sandbox/chromium/sandbox/win/src/sandbox_policy.h
 @@ -95,16 +95,21 @@ class TargetPolicy {
    virtual ResultCode SetTokenLevel(TokenLevel initial, TokenLevel lockdown) = 0;
- 
+
    // Returns the initial token level.
    virtual TokenLevel GetInitialTokenLevel() const = 0;
- 
+
    // Returns the lockdown token level.
    virtual TokenLevel GetLockdownTokenLevel() const = 0;
- 
+
 +  // Sets that we should not use restricting SIDs in the access tokens. We need
 +  // to do this in some circumstances even though it weakens the sandbox.
 +  // The default is to use them.
@@ -183,11 +183,11 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.cc b/
  TokenLevel PolicyBase::GetInitialTokenLevel() const {
    return initial_level_;
  }
- 
+
  TokenLevel PolicyBase::GetLockdownTokenLevel() const {
    return lockdown_level_;
  }
- 
+
 +void PolicyBase::SetDoNotUseRestrictingSIDs() {
 +  use_restricting_sids_ = false;
 +}
@@ -201,7 +201,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.cc b/
    return SBOX_ALL_OK;
  }
 @@ -438,17 +442,18 @@ ResultCode PolicyBase::MakeJobObject(bas
- 
+
  ResultCode PolicyBase::MakeTokens(base::win::ScopedHandle* initial,
                                    base::win::ScopedHandle* lockdown,
                                    base::win::ScopedHandle* lowbox) {
@@ -214,7 +214,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.cc b/
 +                            lockdown);
    if (ERROR_SUCCESS != result)
      return SBOX_ERROR_GENERIC;
- 
+
    // If we're launching on the alternate desktop we need to make sure the
    // integrity label on the object is no higher than the sandboxed process's
    // integrity level. So, we lower the label on the desktop process if it's
@@ -223,7 +223,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.cc b/
 @@ -509,17 +514,18 @@ ResultCode PolicyBase::MakeTokens(base::
      lowbox->Set(token_lowbox);
    }
- 
+
    // Create the 'better' token. We use this token as the one that the main
    // thread uses when booting up the process. It should contain most of
    // what we need (before reaching main( ))
@@ -234,10 +234,10 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.cc b/
 +                            initial);
    if (ERROR_SUCCESS != result)
      return SBOX_ERROR_GENERIC;
- 
+
    return SBOX_ALL_OK;
  }
- 
+
  PSID PolicyBase::GetLowBoxSid() const {
    return lowbox_sid_;
 diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.h b/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.h
@@ -245,7 +245,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.h b/s
 +++ b/security/sandbox/chromium/sandbox/win/src/sandbox_policy_base.h
 @@ -37,16 +37,17 @@ class PolicyBase final : public TargetPo
    PolicyBase();
- 
+
    // TargetPolicy:
    void AddRef() override;
    void Release() override;

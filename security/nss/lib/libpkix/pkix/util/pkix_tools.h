@@ -71,7 +71,7 @@ typedef struct pkixStdVarsStr {
 #define pkixReturnResult            stdVars->aPkixReturnResult
 #define pkixErrorCode               stdVars->aPkixErrorCode
 #define pkixErrorReceived           stdVars->aPkixErrorReceived
-#define pkixTempErrorReceived       stdVars->aPkixTempErrorReceived 
+#define pkixTempErrorReceived       stdVars->aPkixTempErrorReceived
 #define pkixErrorClass              stdVars->aPkixErrorClass
 #define pkixType                    stdVars->aPkixType
 #define lockedObject                stdVars->aLockedObject
@@ -84,7 +84,7 @@ typedef struct pkixStdVarsStr {
 #define pkixReturnResult            stdVars.aPkixReturnResult
 #define pkixErrorCode               stdVars.aPkixErrorCode
 #define pkixErrorReceived           stdVars.aPkixErrorReceived
-#define pkixTempErrorReceived       stdVars.aPkixTempErrorReceived 
+#define pkixTempErrorReceived       stdVars.aPkixTempErrorReceived
 #define pkixErrorClass              stdVars.aPkixErrorClass
 #define pkixType                    stdVars.aPkixType
 #define lockedObject                stdVars.aLockedObject
@@ -92,24 +92,24 @@ typedef struct pkixStdVarsStr {
 #define stdVarsPtr                  &stdVars
 #endif
 
-extern PKIX_Error * PKIX_DoReturn(PKIX_StdVars * stdVars, 
-                                  PKIX_ERRORCLASS errClass, 
+extern PKIX_Error * PKIX_DoReturn(PKIX_StdVars * stdVars,
+                                  PKIX_ERRORCLASS errClass,
                                   PKIX_Boolean doLogger,
                                   void * plContext);
 
-extern PKIX_Error * PKIX_DoThrow(PKIX_StdVars * stdVars, 
-                                 PKIX_ERRORCLASS errClass, 
+extern PKIX_Error * PKIX_DoThrow(PKIX_StdVars * stdVars,
+                                 PKIX_ERRORCLASS errClass,
                                  PKIX_ERRORCODE errCode,
-                                 PKIX_ERRORCLASS overrideClass, 
+                                 PKIX_ERRORCLASS overrideClass,
                                  void * plContext);
 
-extern void PKIX_DoAddError(PKIX_StdVars * stdVars, 
+extern void PKIX_DoAddError(PKIX_StdVars * stdVars,
                             PKIX_Error * error,
                             void * plContext);
 
 #ifdef PKIX_OBJECT_LEAK_TEST
-extern PKIX_Error * pkix_CheckForGeneratedError(PKIX_StdVars * stdVars, 
-                                                PKIX_ERRORCLASS errClass, 
+extern PKIX_Error * pkix_CheckForGeneratedError(PKIX_StdVars * stdVars,
+                                                PKIX_ERRORCLASS errClass,
                                                 char * fnName,
                                                 PKIX_Boolean *errorStateSet,
                                                 void * plContext);
@@ -199,7 +199,7 @@ extern PLHashNumber PR_CALLBACK pkix_ErrorGen_Hash (const void *key);
 	} \
     } while (0)
 #else
-#define _PKIX_DEBUG_TRACE(cond, prefix, level) 
+#define _PKIX_DEBUG_TRACE(cond, prefix, level)
 #endif
 
 #define _PKIX_LOG_ERROR(code, level) \
@@ -445,7 +445,7 @@ extern PLHashNumber PR_CALLBACK pkix_ErrorGen_Hash (const void *key);
 	    pkixTempResult = NULL; \
 	} \
     }
-		
+
 
 #define PKIX_ERROR_RECEIVED \
     (pkixErrorReceived || pkixErrorResult || pkixTempErrorReceived || \
@@ -1576,8 +1576,8 @@ pkix_CacheCrlEntry_Add(
 #ifdef PR_LOGGING
 void
 pkix_trace_dump_cert(
-        const char *info, 
-        PKIX_PL_Cert *cert, 
+        const char *info,
+        PKIX_PL_Cert *cert,
         void *plContext);
 #endif
 

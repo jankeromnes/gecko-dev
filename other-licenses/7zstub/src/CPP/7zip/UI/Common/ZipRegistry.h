@@ -16,7 +16,7 @@ namespace NExtract
     NOverwriteMode::EEnum OverwriteMode;
     bool PathMode_Force;
     bool OverwriteMode_Force;
-    
+
     CBoolPair SplitDest;
     CBoolPair ElimDup;
     // CBoolPair AltStreams;
@@ -28,7 +28,7 @@ namespace NExtract
     void Save() const;
     void Load();
   };
-  
+
   void Save_ShowPassword(bool showPassword);
   bool Read_ShowPassword();
 }
@@ -42,7 +42,7 @@ namespace NCompression
     UInt32 Order;
     UInt32 BlockLogSize;
     UInt32 NumThreads;
-    
+
     CSysString FormatID;
     UString Method;
     UString Options;

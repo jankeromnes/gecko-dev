@@ -16,5 +16,5 @@ var o = {toString: function() { return 'foo'; }};
 
 expect = o.toString();
 actual = o.toLocaleString();
- 
+
 reportCompare(expect, actual, summary);

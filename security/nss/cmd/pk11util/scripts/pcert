@@ -11,7 +11,7 @@ C_GetTokenInfo slotID tokenInfo
 C_OpenSession slotID CK_SESSION_SERIAL session
 #
 #uncomment the following line and include the correct password
-#C_Login session CKU_USER 0000 4 
+#C_Login session CKU_USER 0000 4
 #
 # build the search template
 #

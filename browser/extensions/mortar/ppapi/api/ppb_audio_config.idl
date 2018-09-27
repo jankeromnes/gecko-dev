@@ -161,7 +161,7 @@ interface PPB_AudioConfig {
    *
    * @param[in] resource A <code>PP_Resource</code> corresponding to an audio
    * config resource.
-   * 
+   *
    * @return A <code>PP_Bool</code> containing <code>PP_TRUE</code> if the given
    * resource is an <code>AudioConfig</code> resource, otherwise
    * <code>PP_FALSE</code>.

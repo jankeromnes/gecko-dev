@@ -7,7 +7,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
      struct _cairo_boxes_chunk *chunk;
      uint32_t pixel;
      int i;
- 
+
      if (clip != NULL) {
  	status = _cairo_clip_get_region (clip, &clip_region);
 +	if (unlikely (status == CAIRO_INT_STATUS_NOTHING_TO_DO))
@@ -18,14 +18,14 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  	{
  	    return CAIRO_INT_STATUS_UNSUPPORTED;
  	}
- 
+
  	if (clip_region != NULL && cairo_region_num_rectangles (clip_region) == 1)
 @@ -3200,30 +3202,20 @@ static cairo_status_t
      return _clip_and_composite (dst, op, src,
  				_composite_traps, &info,
  				extents, clip);
  }
- 
+
  static cairo_clip_path_t *
  _clip_get_single_path (cairo_clip_t *clip)
  {
@@ -48,9 +48,9 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
 +
 +    return NULL;
  }
- 
+
  /* high level image interface */
- 
+
  static cairo_int_status_t
  _cairo_image_surface_paint (void			*abstract_surface,
  			    cairo_operator_t		 op,

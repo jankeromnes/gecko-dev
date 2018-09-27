@@ -85,7 +85,7 @@ class ErrorMaker(ModuleType):
                     raise value
             raise cls("%s%r" % (func.__name__, args))
             __tracebackhide__ = True
-            
+
 
 error = ErrorMaker('py.error')
 sys.modules[error.__name__] = error

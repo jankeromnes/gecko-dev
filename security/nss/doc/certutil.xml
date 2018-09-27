@@ -45,11 +45,11 @@
     <para>Certificate issuance, part of the key and certificate management process, requires that keys and certificates be created in the key database. This document discusses certificate and key database management. For information on the security module database management, see the <command>modutil</command> manpage.</para>
 
   </refsection>
-  
+
   <refsection id="options">
     <title>Command Options and Arguments</title>
 	<para>Running <command>certutil</command> always requires one and only one command option to specify the type of certificate operation. Each command option may take zero or more arguments. The command option <option>-H</option> will list all the command options and their relevant arguments.</para>
-   	<para><command>Command Options</command></para> 
+   	<para><command>Command Options</command></para>
     <variablelist>
 
       <varlistentry>
@@ -61,7 +61,7 @@
         <term>-B</term>
         <listitem><para>Run a series of commands from the specified batch file. This requires the <option>-i</option> argument.</para></listitem>
       </varlistentry>
-    
+
       <varlistentry>
         <term>-C </term>
         <listitem><para>Create a new binary certificate file from a binary certificate request file. Use the <option>-i</option> argument to specify the certificate request file. If this argument is not used, <command>certutil</command> prompts for a filename. </para></listitem>
@@ -175,7 +175,7 @@ Use the -a argument to specify ASCII output.</para></listitem>
 	<variablelist>
       <varlistentry>
         <term>-a</term>
-        <listitem><para>Use ASCII format or allow the use of ASCII format for input or output. This formatting follows RFC 1113. 
+        <listitem><para>Use ASCII format or allow the use of ASCII format for input or output. This formatting follows RFC 1113.
 For certificate requests, ASCII output defaults to standard output unless redirected.</para></listitem>
       </varlistentry>
 
@@ -189,8 +189,8 @@ If this option is not used, the validity check defaults to the current system ti
 
       <varlistentry>
         <term>-c issuer</term>
-        <listitem><para>Identify the certificate of the CA from which a new certificate will derive its authenticity. 
- Use the exact nickname or alias of the CA certificate, or use the CA's email address. Bracket the issuer string 
+        <listitem><para>Identify the certificate of the CA from which a new certificate will derive its authenticity.
+ Use the exact nickname or alias of the CA certificate, or use the CA's email address. Bracket the issuer string
  with quotation marks if it contains spaces. </para></listitem>
       </varlistentry>
 
@@ -245,8 +245,8 @@ Add one or multiple extensions that certutil cannot encode yet, by loading their
 
       <varlistentry>
         <term>-f password-file</term>
-        <listitem><para>Specify a file that will automatically supply the password to include in a certificate 
- or to access a certificate database. This is a plain-text file containing one password. Be sure to prevent 
+        <listitem><para>Specify a file that will automatically supply the password to include in a certificate
+ or to access a certificate database. This is a plain-text file containing one password. Be sure to prevent
  unauthorized access to this file.</para></listitem>
       </varlistentry>
 
@@ -271,10 +271,10 @@ Add one or multiple extensions that certutil cannot encode yet, by loading their
         <listitem>
           <para>Specify the type or specific ID of a key.</para>
           <para>
-           The valid key type options are rsa, dsa, ec, or all. The default 
+           The valid key type options are rsa, dsa, ec, or all. The default
            value is rsa. Specifying the type of key can avoid mistakes caused by
-           duplicate nicknames. Giving a key type generates a new key pair; 
-           giving the ID of an existing key reuses that key pair (which is 
+           duplicate nicknames. Giving a key type generates a new key pair;
+           giving the ID of an existing key reuses that key pair (which is
            required to renew certificates).
           </para>
         </listitem>
@@ -336,7 +336,7 @@ Add one or multiple extensions that certutil cannot encode yet, by loading their
            sect131r1, sect131r2
         </para>
         </listitem>
-        
+
       </varlistentry>
 
       <varlistentry>
@@ -352,7 +352,7 @@ Add one or multiple extensions that certutil cannot encode yet, by loading their
       <varlistentry>
         <term>-t trustargs</term>
         <listitem><para>Specify the trust attributes to modify in an existing certificate or to apply to a certificate when creating it or adding it to a database. There are three available trust categories for each certificate, expressed in the order <emphasis>SSL, email, object signing</emphasis> for each trust setting. In each category position, use none, any, or all
-of the attribute codes: 
+of the attribute codes:
 	</para>
 	<itemizedlist>
 	<listitem>
@@ -432,11 +432,11 @@ of the attribute codes:
 
       <varlistentry>
         <term>-w offset-months</term>
-        <listitem><para>Set an offset from the current system time, in months, 
- for the beginning of a certificate's validity period. Use when creating 
- the certificate or adding it to a database. Express the offset in integers, 
- using a minus sign (-) to indicate a negative offset. If this argument is 
- not used, the validity period begins at the current system time. The length 
+        <listitem><para>Set an offset from the current system time, in months,
+ for the beginning of a certificate's validity period. Use when creating
+ the certificate or adding it to a database. Express the offset in integers,
+ using a minus sign (-) to indicate a negative offset. If this argument is
+ not used, the validity period begins at the current system time. The length
  of the validity period is set with the -v argument. </para></listitem>
       </varlistentry>
 
@@ -889,7 +889,7 @@ Certificate Nickname                                         Trust Attributes
 
 CA Administrator of Instance pki-ca1's Example Domain ID     u,u,u
 TPS Administrator's Example Domain ID                        u,u,u
-Google Internet Authority                                    ,,   
+Google Internet Authority                                    ,,
 Certificate Authority - Example Domain                       CT,C,C</programlisting>
 	<para>
 		Using additional arguments with <option>-L</option> can return and print the information for a single, specific certificate. For example, the <option>-n</option> argument passes the certificate name, while the <option>-a</option> argument prints the certificate in ASCII format:
@@ -978,7 +978,7 @@ Certificate:
 
 	<para><command>Listing Keys</command></para>
 	<para>
-		Keys are the original material used to encrypt certificate data. The keys generated for certificates are stored separately, in the key database. 
+		Keys are the original material used to encrypt certificate data. The keys generated for certificates are stored separately, in the key database.
 	</para>
 	<para>
 		To list all keys in the database, use the <option>-K</option> command option and the (required) <option>-d</option> argument to give the path to the directory.
@@ -1004,7 +1004,7 @@ certutil: Checking token "NSS Certificate DB" in slot "NSS User Private Key and 
 	</listitem>
 	<listitem>
 	<para>
-		If there are multiple key types available, then the <option>-k</option> <emphasis>key-type</emphasis> argument can search a specific type of key, like RSA, DSA, or ECC. 
+		If there are multiple key types available, then the <option>-k</option> <emphasis>key-type</emphasis> argument can search a specific type of key, like RSA, DSA, or ECC.
 	</para>
 	</listitem>
 	</itemizedlist>
@@ -1015,10 +1015,10 @@ certutil: Checking token "NSS Certificate DB" in slot "NSS User Private Key and 
 	</para>
 <programlisting>$ certutil -U -d sql:/home/my/sharednssdb
 
-    slot: NSS User Private Key and Certificate Services                  
+    slot: NSS User Private Key and Certificate Services
    token: NSS Certificate DB
 
-    slot: NSS Internal Cryptographic Services                            
+    slot: NSS Internal Cryptographic Services
    token: NSS Generic Crypto Services</programlisting>
 
 	<para><command>Adding Certificates to the Database</command></para>
@@ -1115,7 +1115,7 @@ certutil: Checking token "NSS Certificate DB" in slot "NSS User Private Key and 
   </refsection>
 
 <refsection id="databases"><title>NSS Database Types</title>
-<para>NSS originally used BerkeleyDB databases to store security information. 
+<para>NSS originally used BerkeleyDB databases to store security information.
 The last versions of these <emphasis>legacy</emphasis> databases are:</para>
 <itemizedlist>
 	<listitem>
@@ -1135,11 +1135,11 @@ The last versions of these <emphasis>legacy</emphasis> databases are:</para>
 	</listitem>
 </itemizedlist>
 
-<para>BerkeleyDB has performance limitations, though, which prevent it from being easily used by multiple applications simultaneously. NSS has 
+<para>BerkeleyDB has performance limitations, though, which prevent it from being easily used by multiple applications simultaneously. NSS has
 some flexibility that allows applications to use their own, independent database engine while keeping a shared database and working around the access issues. Still, NSS
 requires more flexibility to provide a truly shared security database.</para>
 
-<para>In 2009, NSS introduced a new set of databases that are SQLite databases rather than 
+<para>In 2009, NSS introduced a new set of databases that are SQLite databases rather than
 BerkeleyDB. These new databases provide more accessibility and performance:</para>
 <itemizedlist>
 	<listitem>
@@ -1161,7 +1161,7 @@ BerkeleyDB. These new databases provide more accessibility and performance:</par
 
 <para>Because the SQLite databases are designed to be shared, these are the <emphasis>shared</emphasis> database type. The shared database type is preferred; the legacy format is included for backward compatibility.</para>
 
-<para>By default, the tools (<command>certutil</command>, <command>pk12util</command>, <command>modutil</command>) assume that the given security databases follow the more common legacy type. 
+<para>By default, the tools (<command>certutil</command>, <command>pk12util</command>, <command>modutil</command>) assume that the given security databases follow the more common legacy type.
 Using the SQLite databases must be manually specified by using the <command>sql:</command> prefix with the given security directory. For example:</para>
 
 <programlisting>$ certutil -L -d sql:/home/my/sharednssdb</programlisting>

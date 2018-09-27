@@ -94,9 +94,9 @@ Calls NPN_Evaluate on the 'script' argument, which is a string containing
 some script to be executed.  Returns the result of the evaluation.
 
 * npnInvokeTest(method, expected, args...)
-Causes the plugin to call the specified script method using NPN_Invoke, 
-passing it 1 or more arguments specified in args.  The return value of this 
-call is compared against 'expected', and if they match, npnInvokeTest will 
+Causes the plugin to call the specified script method using NPN_Invoke,
+passing it 1 or more arguments specified in args.  The return value of this
+call is compared against 'expected', and if they match, npnInvokeTest will
 return true.  Otherwise, it will return false.
 
 * npnInvokeDefaultTest(object, argument)
@@ -110,7 +110,7 @@ this will return a string error message, otherwise it returns "pass".
 * throwExceptionNextInvoke()
 Sets a flag which causes the next call to a scriptable method to throw
 one or more exceptions.  If no parameters are passed to the next
-scriptable method call, it will cause a generic exception to be thrown. 
+scriptable method call, it will cause a generic exception to be thrown.
 Otherwise there will be one exception thrown per argument, with the argument
 used as the exception message.  Example:
 
@@ -118,7 +118,7 @@ used as the exception message.  Example:
   plugin.npnInvokeTest("first exception message", "second exception message");
 
 * () - default method
-Returns a string consisting of the plugin name, concatenated with any 
+Returns a string consisting of the plugin name, concatenated with any
 arguments passed to the method.
 
 * .crash() - Crashes the plugin
@@ -131,8 +131,8 @@ arguments passed to the method.
   test_multipleinstanceobjects.html.
 
 * callOnDestroy(fn) - Calls `fn` when the plugin instance is being destroyed
-  
-* getAuthInfo(protocol, host, port, scheme, realm) - a wrapper for 
+
+* getAuthInfo(protocol, host, port, scheme, realm) - a wrapper for
 NPN_GetAuthenticationInfo().  Returns a string "username|password" for
 the specified auth criteria, or throws an exception if no data is
 available.
@@ -290,13 +290,13 @@ NPN_ScheduleTimer.
 
 The test plugin enables a variety of NPAPI streaming tests, which are
 initiated by passing a variety of attributes to the <embed> element which
-causes the plugin to be initialized.  The plugin stream test code is 
+causes the plugin to be initialized.  The plugin stream test code is
 designed to receive a stream from the browser (by specifying a "src",
 "geturl", or "geturlnotify" attribute), and then (if a "frame" attribute
 is specified) send the data from that stream back to the browser in another
 stream, whereupon it will be displayed in the specified frame.  If some
 error occurs during stream processing, an error message will appear in the
-frame instead of the stream data. If no "frame" attribute is present, a 
+frame instead of the stream data. If no "frame" attribute is present, a
 stream can still be received by the plugin, but the plugin will do nothing
 with it.
 
@@ -314,17 +314,17 @@ The attributes which control stream tests are:
 
 "geturlnotify": a url.  If specified, the plugin will request this url
   from the browser when the plugin is initialized, via a call to
-  NPN_GetURLNotify. The plugin passes some "notifyData" to 
+  NPN_GetURLNotify. The plugin passes some "notifyData" to
   NPN_GetURLNotify, which it verifies is present in the call to
   NPP_URLNotify.  If the "notifyData" does not match, an error
-  will be displayed in the test frame (if any), instead of the stream 
+  will be displayed in the test frame (if any), instead of the stream
   data.
 
 "frame": the name of a frame in the same HTML document as the <embed>
   element which instantiated the plugin. For any of the preceding three
   attributes, a stream is received by the plugin via calls to NPP_NewStream,
   NPP_WriteReady, NPP_Write, and NPP_DestroyStream.  When NPP_DestroyStream
-  is called (or NPP_UrlNotify, in the case of "geturlnotify"), and a 
+  is called (or NPP_UrlNotify, in the case of "geturlnotify"), and a
   "frame" attribute is present, the data from the stream is converted into a
   data: url, and sent back to the browser in another stream via a call to
   NPN_GetURL, whereupon it should be displayed in the specified frame.
@@ -343,7 +343,7 @@ The attributes which control stream tests are:
   in the specified frame via NPN_GetURL.
 
 "newstream": if "true", then any stream which is sent to a frame in the browser
-  is sent via calls to NPN_NewStream and NPN_Write.  Doing so will cause 
+  is sent via calls to NPN_NewStream and NPN_Write.  Doing so will cause
   the browser to store the stream data in a file, and set the frame's
   location to the corresponding file:// url.
 

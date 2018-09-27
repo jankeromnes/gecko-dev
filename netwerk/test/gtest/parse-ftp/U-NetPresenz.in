@@ -1,7 +1,7 @@
 ftp> open gean5.pfmb.uni-mb.si
 Connected to gean5.pfmb.uni-mb.si.
 220 NetPresenz v4.1 (Unregistered) awaits your command.
-Name (gean5.pfmb.uni-mb.si:cyp): 
+Name (gean5.pfmb.uni-mb.si:cyp):
 331 Guest log in, send Email address (user@host) as password.
 230-This file must be in the Startup Messages folder in either the same
     folder as NetPresenz or in the NetPresenz Preferences folder in the
@@ -28,4 +28,4 @@ drwxr-xr-x               folder        3 Mar 22 10:06 Upcoming Events_files
 226 Transfer complete.
 ftp>ftp> close
 221 Nice chatting with you.
-ftp> 
+ftp>

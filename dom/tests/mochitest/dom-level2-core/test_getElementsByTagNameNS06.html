@@ -37,13 +37,13 @@ function setUpPage() {
        setImplementationAttribute("namespaceAware", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,16 +73,16 @@ var docName = 'getElementsByTagNameNS06';
 
 
 /**
-* 
+*
     The "getElementsByTagNameNS(namespaceURI,localName)" method returns a NodeList
    of all descendant Elements with a given local name and namespace URI in the
    order in which they are encountered in a preorder traversal of this Element tree.
-   
+
    Create a NodeList of all the descendant elements
-   using the "http://www.nomatch.com" as the namespaceURI and "address" as the 
+   using the "http://www.nomatch.com" as the namespaceURI and "address" as the
    localName.
    The method should return a NodeList whose length is
-   "0".  
+   "0".
 
 * @author NIST
 * @author Mary Brady
@@ -93,7 +93,7 @@ function getElementsByTagNameNS06() {
     if(checkInitialization(builder, "getElementsByTagNameNS06") != null) return;
     var doc;
       var elementList;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -110,12 +110,12 @@ function getElementsByTagNameNS06() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/getElementsByTagNameNS06</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

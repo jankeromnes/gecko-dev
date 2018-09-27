@@ -1,5 +1,5 @@
 /**
- * @fileoverview 
+ * @fileoverview
  * Comparison functions used in the RTE test suite.
  *
  * Copyright 2010 Google Inc.
@@ -21,7 +21,7 @@
  */
 
 /**
- * constants used only in the compare functions. 
+ * constants used only in the compare functions.
  */
 var RESULT_DIFF  = 0;  // actual result doesn't match expectation
 var RESULT_SEL   = 1;  // actual result matches expectation in HTML only
@@ -167,7 +167,7 @@ function compareHTMLTestResultTo(expected, accepted, actual, emitFlags, result) 
       }
       break;
   }
-  
+
   throw INTERNAL_ERR + HTML_COMPARISON;
 }
 
@@ -246,7 +246,7 @@ function compareHTMLTestResult(suite, group, test, container, result) {
       canonicalizeUnits: true
   };
 
-  // 2a.) Compare opening tag - 
+  // 2a.) Compare opening tag -
   //      decide whether to compare vs. outer or inner HTML based on this.
   var openingTagEnd = result.outerHTML.indexOf('>') + 1;
   var openingTag = result.outerHTML.substr(0, openingTagEnd);
@@ -288,7 +288,7 @@ function insertSelectionIndicator(node, offs, textInd, elemInd) {
       var text = node.data;
       node.data = text.substring(0, offs) + textInd + text.substring(offs);
       break;
-      
+
     case DOM_NODE_TYPE_ELEMENT:
       var child = node.firstChild;
       try {
@@ -338,7 +338,7 @@ function encloseTextNodesWithQuotes(node) {
         encloseTextNodesWithQuotes(node.childNodes[i]);
       }
       break;
-      
+
     case DOM_NODE_TYPE_TEXT:
       node.data = '\x60' + node.data + '\xb4';
       break;
@@ -389,7 +389,7 @@ function prepareHTMLTestResult(container, result) {
 
   // 2.) insert markers for text node boundaries;
   encloseTextNodesWithQuotes(container.editor);
-  
+
   // 3.) retrieve inner and outer HTML
   result.innerHTML = initialCanonicalizationOf(container.editor.innerHTML);
   result.bodyInnerHTML = initialCanonicalizationOf(container.body.innerHTML);
@@ -421,12 +421,12 @@ function compareTextTestResultWith(suite, group, test, actual, expected) {
   // Find the most favorable result among the possible expectation strings.
   var count = expectedArr.length;
 
-  // If the value matches the expectation exactly, then we're fine.  
+  // If the value matches the expectation exactly, then we're fine.
   for (var idx = 0; idx < count; ++idx) {
     if (actual === expectedArr[idx])
       return true;
   }
-  
+
   // Otherwise see if we should canonicalize specific value types.
   //
   // We only need to look at font name, color and size units if the originating
@@ -443,14 +443,14 @@ function compareTextTestResultWith(suite, group, test, actual, expected) {
           return true;
       }
       return false;
-    
+
     case 'fontname':
       for (var idx = 0; idx < count; ++idx) {
         if (new FontName(actual).compare(new FontName(expectedArr[idx])))
           return true;
       }
       return false;
-    
+
     case 'fontsize':
       for (var idx = 0; idx < count; ++idx) {
         if (new FontSize(actual).compare(new FontSize(expectedArr[idx])))
@@ -458,7 +458,7 @@ function compareTextTestResultWith(suite, group, test, actual, expected) {
       }
       return false;
   }
-  
+
   return false;
 }
 

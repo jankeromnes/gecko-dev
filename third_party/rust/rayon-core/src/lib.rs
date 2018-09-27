@@ -384,7 +384,7 @@ impl Configuration {
     pub fn thread_name<F>(mut self, closure: F) -> Self
     where F: FnMut(usize) -> String + 'static {
         self.builder = self.builder.thread_name(closure);
-        self 
+        self
     }
 
     /// Deprecated in favor of `ThreadPoolBuilder::num_threads`.

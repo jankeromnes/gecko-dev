@@ -435,7 +435,7 @@ TEST_F(ExceptionHandlerTest, InstructionPointerMemoryMinBound) {
     // of the block of memory, to ensure that the memory bounding
     // works properly.
     memcpy(memory + kOffset, instructions, sizeof(instructions));
-    
+
     // Now execute the instructions, which should crash.
     typedef void (*void_function)(void);
     void_function memory_function =
@@ -534,7 +534,7 @@ TEST_F(ExceptionHandlerTest, InstructionPointerMemoryMaxBound) {
     // of the block of memory, to ensure that the memory bounding
     // works properly.
     memcpy(memory + kOffset, instructions, sizeof(instructions));
-    
+
     // Now execute the instructions, which should crash.
     typedef void (*void_function)(void);
     void_function memory_function =

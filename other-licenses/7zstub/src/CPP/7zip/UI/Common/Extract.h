@@ -17,12 +17,12 @@
 struct CExtractOptionsBase
 {
   CBoolPair ElimDup;
-  
+
   bool PathMode_Force;
   bool OverwriteMode_Force;
   NExtract::NPathMode::EEnum PathMode;
   NExtract::NOverwriteMode::EEnum OverwriteMode;
-  
+
   FString OutputDir;
   CExtractNtOptions NtOptions;
 
@@ -40,7 +40,7 @@ struct CExtractOptions: public CExtractOptionsBase
   bool StdOutMode;
   bool YesToAll;
   bool TestMode;
-  
+
   // bool ShowDialog;
   // bool PasswordEnabled;
   // UString Password;

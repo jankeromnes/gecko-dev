@@ -63,7 +63,7 @@ info: |
        FormalsList using iteratorRecord and environment as the arguments.
     2. ReturnIfAbrupt(status).
     3. Return the result of performing IteratorBindingInitialization for
-       FormalParameter using iteratorRecord and environment as the arguments. 
+       FormalParameter using iteratorRecord and environment as the arguments.
 ---*/
 
 var callCount = 0;

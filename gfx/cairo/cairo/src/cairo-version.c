@@ -176,7 +176,7 @@
  * @major: the major component of the version number
  * @minor: the minor component of the version number
  * @micro: the micro component of the version number
- * 
+ *
  * This macro encodes the given cairo version into an integer.  The numbers
  * returned by %CAIRO_VERSION and cairo_version() are encoded using this macro.
  * Two encoded version numbers can be compared as integers.  The encoding ensures

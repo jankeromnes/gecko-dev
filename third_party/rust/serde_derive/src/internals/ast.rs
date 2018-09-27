@@ -140,8 +140,8 @@ impl Repr {
 }
 
 fn enum_from_ast<'a>(
-    cx: &Ctxt, 
-    item: &'a syn::DeriveInput, 
+    cx: &Ctxt,
+    item: &'a syn::DeriveInput,
     variants: &'a Punctuated<syn::Variant, Token![,]>,
     container_default: &attr::Default
 ) -> (Repr, Vec<Variant<'a>>) {
@@ -150,7 +150,7 @@ fn enum_from_ast<'a>(
         .map(
             |variant| {
                 let attrs = attr::Variant::from_ast(cx, variant);
-                let (style, fields) = 
+                let (style, fields) =
                     struct_from_ast(cx, &variant.fields, Some(&attrs), container_default);
                 Variant {
                     ident: variant.ident.clone(),

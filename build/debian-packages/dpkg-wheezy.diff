@@ -10,7 +10,7 @@ diff -Nru dpkg-1.17.20/debian/changelog dpkg-1.17.20.deb7moz1/debian/changelog
 + -- Mike Hommey <glandium@mozilla.com>  Wed, 17 Jan 2018 18:30:46 +0900
 +
  dpkg (1.17.20) unstable; urgency=low
- 
+
    [ Guillem Jover ]
 diff -Nru dpkg-1.17.20/dselect/mkcurkeys.pl dpkg-1.17.20.deb7moz1/dselect/mkcurkeys.pl
 --- dpkg-1.17.20/dselect/mkcurkeys.pl	2014-10-21 09:45:43.000000000 +0900
@@ -18,7 +18,7 @@ diff -Nru dpkg-1.17.20/dselect/mkcurkeys.pl dpkg-1.17.20.deb7moz1/dselect/mkcurk
 @@ -140,6 +140,6 @@
  sub p {
      my ($k, $v) = @_;
- 
+
 -    $v =~ s/["\\]/\\${^MATCH}/pg;
 +    $v =~ s/(["\\])/\\$1/g;
      printf("  { %-15s \"%-20s },\n", $k . ',', $v . '"') or die $!;

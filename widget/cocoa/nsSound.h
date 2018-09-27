@@ -13,7 +13,7 @@
 class nsSound : public nsISound,
                 public nsIStreamLoaderObserver
 {
-public: 
+public:
     nsSound();
 
     NS_DECL_ISUPPORTS

@@ -46,8 +46,8 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=429785
       serv.unregisterListener(listener);
       SimpleTest.finish();
     }
-        
-    serv.registerListener(listener);    
+
+    serv.registerListener(listener);
 
     var p = new DOMParser();
     p.parseFromString("<root/>", "application/xml");

@@ -63,12 +63,12 @@ xmlns="http://purl.org/rss/1.0/">
 Some notes:</p>
 
 <ul>
-  <li>Assume the scratched out section for "Retracing Your Steps" will be part 
+  <li>Assume the scratched out section for "Retracing Your Steps" will be part
       of a future release.
-  <li>The priorities shown are my opinion, and relate to potential impact on 
-      the user.      
-  <li>The document does not represent all of the work being done, just a 
-      readily marketable subset. 
+  <li>The priorities shown are my opinion, and relate to potential impact on
+      the user.
+  <li>The document does not represent all of the work being done, just a
+      readily marketable subset.
 </ul>
 
 <p>All in all, I think there's easily enough here to justify a "2" designation. That's just my opinion though. I also think whole numbers are probably easier for the general populace to understand than decimals. </p>
@@ -95,14 +95,14 @@ users, and I think that with the updated plan we're still on a trajectory that s
 <p>What we have decided to do is as follows:</p>
 
 <ul>
-<li>We will disable places on the 1.8 branch, reverting the user interface and back end to Firefox 1.x functionality. 
-<li>We will continue to aggressively develop the capabilities of Places on the 1.9 trunk. Places will remain enabled here. 
+<li>We will disable places on the 1.8 branch, reverting the user interface and back end to Firefox 1.x functionality.
+<li>We will continue to aggressively develop the capabilities of Places on the 1.9 trunk. Places will remain enabled here.
 </ul>
 
 <p>We think this is a good decision for two reasons:</p>
 
 <ul>
-<li>It reduces the pressure on the Places team to deliver a lot of bug fixes and additional features on the very immediate timeframe required by the Firefox 2 testing releases. It is my opinion that doing so would impact the quality of the feature, if we did not add at least a couple more alpha cycles to the process. This decision provides us with an opportunity to really make the architecture and user interface of Places reach their full potential. 
+<li>It reduces the pressure on the Places team to deliver a lot of bug fixes and additional features on the very immediate timeframe required by the Firefox 2 testing releases. It is my opinion that doing so would impact the quality of the feature, if we did not add at least a couple more alpha cycles to the process. This decision provides us with an opportunity to really make the architecture and user interface of Places reach their full potential.
 <li>It allows us as a group to circle around and consider the content of the Firefox 2 release holistically, identify high impact at risk areas and spend some more time on them. One of those for me was Feed Handling.
 </ul>
 
@@ -155,7 +155,7 @@ users, and I think that with the updated plan we're still on a trajectory that s
 <description><![CDATA[<p>My laptop was running pretty slowly yesterday so I decided to scan the Add/Remove Programs list to clear out the cruft. Things were really chugging along. I sequentially uninstalled several pieces of software, and the process was very dissatisfying. I became more and more enfuriated at my computer as it proceeded. Here are some of the nuisances:</p>
 
 <ul>
-<li>I could only remove one thing at a time. 
+<li>I could only remove one thing at a time.
 <li>Many pieces of software used the Windows Installer system which seemed to take forever and report very inconsistent progress (I know, Firefox isn't the best at this in its installer, either)
 <li>Most annoyingly, the uninstaller apps all reported themselves as performing a variety of actions that I never requested, as explanations for what they were doing during long periods of inactivity and progress-bar freeze. Common excuses were "Windows is Configuring <blah>" and "InstallShield is preparing a report on <bleh>".
 </ul>
@@ -261,8 +261,8 @@ me.</p>
  <li>Making important points up front
  <li>Clear taxonomy of headings, and lots of them
  <li>Writing clearly and succinctly
- <li>No long, unbroken paragraphs or tracts of text. 
- <li>Preferring bulleted lists with clear points to paragraphs. 
+ <li>No long, unbroken paragraphs or tracts of text.
+ <li>Preferring bulleted lists with clear points to paragraphs.
  <li>Use of emphasis in formatting to make important things clear
 </ul>
 
@@ -320,7 +320,7 @@ me.</p>
 
 <ul>
  <li>Better define the things that are important to us. The things that define who we are. Impart the positive aspects of open development culture and practice on everyone involved because  they're effective, and as a safeguard against recurrence of some of the <a href="http://weblogs.mozillazine.org/ben/archives/009698.html">troubles of the past</a>.
- <li>Engage the community more effectively. Create and maintain an infrastructure of open communication to remove the "mystery" behind the decision making process. Organize our contributor materials better to make the project more accessible to newcomers. These are just a couple of examples. 
+ <li>Engage the community more effectively. Create and maintain an infrastructure of open communication to remove the "mystery" behind the decision making process. Organize our contributor materials better to make the project more accessible to newcomers. These are just a couple of examples.
 </ul>
 
 <p>For my part, I'm starting out this year by doing things <a href="http://www.producingoss.com/">a little differently</a>. I think we need to grow more as a project. I'm hopeful that I'll be able to achieve some positive change. </p>

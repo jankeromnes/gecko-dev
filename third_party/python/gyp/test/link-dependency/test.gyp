@@ -30,7 +30,7 @@
         'prune_self_dependency': 1,
         # Targets with type 'none' won't depend on this target.
         'link_dependency': 1,
-      },  
+      },
       'sources': [ 'mymalloc.c' ],
     },
   ],

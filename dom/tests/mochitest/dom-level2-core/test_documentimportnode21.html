@@ -38,13 +38,13 @@ function setUpPage() {
        setImplementationAttribute("expandEntityReferences", false);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -55,7 +55,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -74,19 +74,19 @@ var docName = 'documentimportnode21';
 
 
 /**
-* 
-	The importNode method imports a node from another document to this document. 
-	The returned node has no parent; (parentNode is null). The source node is not 
+*
+	The importNode method imports a node from another document to this document.
+	The returned node has no parent; (parentNode is null). The source node is not
 	altered or removed from the original document but a new copy of the source node
 	is created.
-	
-	Using the method importNode with deep=true, retreive the entity refs present in the 
-	second element node whose tagName is address and import these nodes into another document. 
-	Verify if the nodes have been imported correctly by checking the nodeNames of the 
+
+	Using the method importNode with deep=true, retreive the entity refs present in the
+	second element node whose tagName is address and import these nodes into another document.
+	Verify if the nodes have been imported correctly by checking the nodeNames of the
 	imported nodes, since they are imported into a new document which doesnot have thes defined,
 	the imported nodes should not have any children.
-	Now import the entityRef nodes into the same document and verify if the nodes have been 
-	imported correctly by checking the nodeNames of the imported nodes, and by checking the 
+	Now import the entityRef nodes into the same document and verify if the nodes have been
+	imported correctly by checking the nodeNames of the imported nodes, and by checking the
 	value of the replacement text of the imported nodes.
 
 * @author IBM
@@ -118,7 +118,7 @@ function documentimportnode21() {
       var nodeImp2;
       var nodeValueImp2;
       var nodeValueImp3;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -158,7 +158,7 @@ docImp = domImpl.createDocument("http://www.w3.org/DOM/Test","a:b",docTypeNull);
 
       assertEquals("documentimportnode21_Ent2NodeValue","1900 Dallas Road",nodeValueImp2);
        assertEquals("documentimportnode21_Ent3Nodevalue","Texas",nodeValueImp3);
-       
+
 }
 
 </script>
@@ -167,12 +167,12 @@ docImp = domImpl.createDocument("http://www.w3.org/DOM/Test","a:b",docTypeNull);
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/documentimportnode21</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

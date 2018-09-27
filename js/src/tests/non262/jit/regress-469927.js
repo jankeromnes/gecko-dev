@@ -19,11 +19,11 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function letitbe() {
     var start = new Date();
-    for (let i = 0; i < 500000; ++i) { 
-      for (let j = 0; j < 4; ++j) { } 
+    for (let i = 0; i < 500000; ++i) {
+      for (let j = 0; j < 4; ++j) { }
     }
     var stop = new Date();
     return stop - start;

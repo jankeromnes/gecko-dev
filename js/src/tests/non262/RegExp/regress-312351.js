@@ -13,5 +13,5 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 var x = RegExp(null);
- 
+
 reportCompare(expect, actual, summary);

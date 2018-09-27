@@ -41,7 +41,7 @@ for file in ${SRC_FILES}; do
     ${cmd}
   fi
 done
- 
+
 # copy files into the target directory
 for file in ${STATIC_FILES} ${SRC_FILES} ${HDR_FILES}; do
   cmd="cp $1/${file} ${TARGET}/${file}"

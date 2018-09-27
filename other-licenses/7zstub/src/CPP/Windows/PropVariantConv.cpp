@@ -35,12 +35,12 @@ bool ConvertUtcFileTimeToString(const FILETIME &utc, char *s, int level) throw()
   }
   UINT_TO_STR_2('-', st.wMonth);
   UINT_TO_STR_2('-', st.wDay);
-  
+
   if (level > kTimestampPrintLevel_DAY)
   {
     UINT_TO_STR_2(' ', st.wHour);
     UINT_TO_STR_2(':', st.wMinute);
-    
+
     if (level >= kTimestampPrintLevel_SEC)
     {
       UINT_TO_STR_2(':', st.wSecond);
@@ -58,7 +58,7 @@ bool ConvertUtcFileTimeToString(const FILETIME &utc, char *s, int level) throw()
         }
         *s++ = ' ';
         */
-        
+
         {
           unsigned numDigits = 7;
           UInt32 val = (UInt32)((((UInt64)ft.dwHighDateTime << 32) + ft.dwLowDateTime) % 10000000);
@@ -74,7 +74,7 @@ bool ConvertUtcFileTimeToString(const FILETIME &utc, char *s, int level) throw()
       }
     }
   }
-  
+
   *s = 0;
   return true;
 }

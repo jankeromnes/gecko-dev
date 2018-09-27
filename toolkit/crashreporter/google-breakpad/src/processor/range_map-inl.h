@@ -98,7 +98,7 @@ bool RangeMap<AddressType, EntryType>::StoreRangeInternal(
                                 delta + additional_delta,
                                 size - additional_delta, entry);
     } else {
-      // The processor hits this case too frequently with common symbol files. 
+      // The processor hits this case too frequently with common symbol files.
       // This is most appropriate for a DEBUG channel, but since none exists
       // now simply comment out this logging.
       // AddressType other_base = iterator_base->second.base();

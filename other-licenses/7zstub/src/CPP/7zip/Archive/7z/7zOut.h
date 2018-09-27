@@ -157,7 +157,7 @@ struct CArchiveDatabaseOut: public COutFolders
     PackSizes.Clear();
     PackCRCs.Clear();
     Folders.Clear();
-  
+
     Files.Clear();
     Names.Clear();
     CTime.Clear();
@@ -180,7 +180,7 @@ struct CArchiveDatabaseOut: public COutFolders
     PackSizes.ReserveDown();
     PackCRCs.ReserveDown();
     Folders.ReserveDown();
-    
+
     Files.ReserveDown();
     Names.ReserveDown();
     CTime.ReserveDown();
@@ -243,7 +243,7 @@ class COutArchive
   UInt64 _prefixHeaderPos;
 
   HRESULT WriteDirect(const void *data, UInt32 size) { return WriteStream(SeqStream, data, size); }
-  
+
   UInt64 GetPos() const;
   void WriteBytes(const void *data, size_t size);
   void WriteBytes(const CByteBuffer &data) { WriteBytes(data, data.Size()); }
@@ -287,7 +287,7 @@ class COutArchive
       const CArchiveDatabaseOut &db,
       // const CHeaderOptions &headerOptions,
       UInt64 &headerOffset);
-  
+
   bool _countMode;
   bool _writeToStream;
   size_t _countSize;

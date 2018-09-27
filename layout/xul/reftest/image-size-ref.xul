@@ -5,7 +5,7 @@
 
 <html:style>
 div { margin: 0px; line-height: 0px; }
-div div { background: blue; display: inline; float: left; } 
+div div { background: blue; display: inline; float: left; }
 </html:style>
 
 <html:div><html:img
@@ -103,7 +103,7 @@ div div { background: blue; display: inline; float: left; }
       style="width: 10px; height: 8px;"/><html:div
       style="width: 10px; height: 8px;"/>
 </html:div>
-    
+
 <html:div><html:div style="width: 20px; height: 15px;"/></html:div>
 
 <html:div><html:div style="width: 20px; height: 15px;"/></html:div>

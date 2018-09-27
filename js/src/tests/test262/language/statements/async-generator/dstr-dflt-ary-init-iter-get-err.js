@@ -30,7 +30,7 @@ iter[Symbol.iterator] = function() {
 
 
 async function* f([x] = iter) {
-  
+
 };
 
 assert.throws(Test262Error, function() {

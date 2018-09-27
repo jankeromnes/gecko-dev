@@ -12,7 +12,7 @@ description: >
 function __func() {
  	return arguments.length;
  }
- 
+
 //////////////////////////////////////////////////////////////////////////////
 //CHECK#1
 if (__func('A') !== 1) {

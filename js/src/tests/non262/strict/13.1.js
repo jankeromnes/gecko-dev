@@ -102,7 +102,7 @@ assertEq(testLenientAndStrict('(function (x,y) {})',
  *     and getter and setter property definitions,
  *     - For forms that inherit their context's strictness, and forms that
  *       include their own strictness directives,
- *       - For ordinary parameters, array destructuring parameters, and 
+ *       - For ordinary parameters, array destructuring parameters, and
  *         object destructuring parameters,
  *         - the magic identifiers may be used to name such parameters
  *           in lenient code, but not in strict code

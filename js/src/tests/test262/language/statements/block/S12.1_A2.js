@@ -24,7 +24,7 @@ assert.throws(ReferenceError, function() {
 //////////////////////////////////////////////////////////////////////////////
 //CHECK#2
 try {
-    throw "catchme";	
+    throw "catchme";
     $ERROR('#2: throw "catchme" lead to throwing exception');
 } catch (e) {
 	if (e!=="catchme") {

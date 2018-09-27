@@ -5,7 +5,7 @@ esid: sec-date.prototype.gettime
 es6id: 20.3.4.10
 description: Behavior when "this" value is not an Object
 info: |
-  1. Return ? thisTimeValue(this value). 
+  1. Return ? thisTimeValue(this value).
 
   The abstract operation thisTimeValue(value) performs the following steps:
 

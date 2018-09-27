@@ -37,7 +37,7 @@ static const nscolor kColors[] = {
 
 static nsStaticCaseInsensitiveNameTable* gColorTable = nullptr;
 
-void nsColorNames::AddRefTable(void) 
+void nsColorNames::AddRefTable(void)
 {
   NS_ASSERTION(!gColorTable, "pre existing array!");
   if (!gColorTable) {
@@ -65,7 +65,7 @@ static int ComponentValue(const char16_t* aColorSpec, int aLen, int color, int d
     char16_t ch = ((index < aLen) ? aColorSpec[index++] : '0');
     if (('0' <= ch) && (ch <= '9')) {
       component = (component * 16) + (ch - '0');
-    } else if ((('a' <= ch) && (ch <= 'f')) || 
+    } else if ((('a' <= ch) && (ch <= 'f')) ||
                (('A' <= ch) && (ch <= 'F'))) {
       // "ch&7" handles lower and uppercase hex alphabetics
       component = (component * 16) + (ch & 7) + 9;
@@ -267,7 +267,7 @@ HSL_HueToRGB(float m1, float m2, float h)
     return m2;
   if (h < (float)(2.0/3.0))
     return m1 + (m2 - m1)*((float)(2.0/3.0) - h)*6.0f;
-  return m1;      
+  return m1;
 }
 
 // The float parameters are all expected to be in the range 0-1
@@ -287,7 +287,7 @@ NS_HSL2RGB(float h, float s, float l)
   r = ClampColor(255 * HSL_HueToRGB(m1, m2, h + 1.0f/3.0f));
   g = ClampColor(255 * HSL_HueToRGB(m1, m2, h));
   b = ClampColor(255 * HSL_HueToRGB(m1, m2, h - 1.0f/3.0f));
-  return NS_RGB(r, g, b);  
+  return NS_RGB(r, g, b);
 }
 
 const char*

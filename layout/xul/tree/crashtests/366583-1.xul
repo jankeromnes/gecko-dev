@@ -7,7 +7,7 @@
         class="reftest-wait">
 
 <script>
-        
+
 var tree;
 
 function boom1()

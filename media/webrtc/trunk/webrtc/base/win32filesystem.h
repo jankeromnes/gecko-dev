@@ -19,7 +19,7 @@ class Win32Filesystem : public FilesystemInterface {
  public:
   // Opens a file. Returns an open StreamInterface if function succeeds. Otherwise,
   // returns NULL.
-  virtual FileStream *OpenFile(const Pathname &filename, 
+  virtual FileStream *OpenFile(const Pathname &filename,
                                const std::string &mode);
 
   // This will attempt to delete the path located at filename.
@@ -34,20 +34,20 @@ class Win32Filesystem : public FilesystemInterface {
   // /foo does not exist.
   // Returns TRUE if function succeeds
   virtual bool CreateFolder(const Pathname &pathname);
-  
-  // This moves a file from old_path to new_path. If the new path is on a 
+
+  // This moves a file from old_path to new_path. If the new path is on a
   // different volume than the old, it will attempt to copy and then delete
   // the folder
   // Returns true if the file is successfully moved
   virtual bool MoveFile(const Pathname &old_path, const Pathname &new_path);
-  
+
   // This copies a file from old_path to _new_path
   // Returns true if function succeeds
   virtual bool CopyFile(const Pathname &old_path, const Pathname &new_path);
 
   // Returns true if a pathname is a directory
   virtual bool IsFolder(const Pathname& pathname);
-  
+
   // Returns true if a file exists at path
   virtual bool IsFile(const Pathname &path);
 

@@ -44,9 +44,9 @@
     <para>The <command>cmsutil</command> command-line uses the S/MIME Toolkit to perform basic operations, such as encryption and decryption, on Cryptographic Message Syntax (CMS) messages.
 	</para>
 	<para>
-To run cmsutil, type the command cmsutil option [arguments] where option and arguments are combinations of the options and arguments listed in the following section. 
-Each command takes one option. Each option may take zero or more arguments. 
-To see a usage string, issue the command without options. 
+To run cmsutil, type the command cmsutil option [arguments] where option and arguments are combinations of the options and arguments listed in the following section.
+Each command takes one option. Each option may take zero or more arguments.
+To see a usage string, issue the command without options.
 	</para>
 
   </refsection>
@@ -55,9 +55,9 @@ To see a usage string, issue the command without options.
     <title>Options and Arguments</title>
 	<para>
 	</para>
-   	<para><command>Options</command></para> 
+   	<para><command>Options</command></para>
    	<para>
-Options specify an action. Option arguments modify an action. 
+Options specify an action. Option arguments modify an action.
 The options and arguments for the cmsutil command are defined as follows:
     </para>
     <variablelist>
@@ -65,7 +65,7 @@ The options and arguments for the cmsutil command are defined as follows:
         <term>-C</term>
         <listitem><para>Encrypt a message.</para></listitem>
       </varlistentry>
-    
+
       <varlistentry>
         <term>-D </term>
         <listitem><para>Decode a message.</para></listitem>
@@ -200,7 +200,7 @@ The options and arguments for the cmsutil command are defined as follows:
         <term>-r recipient1,recipient2, ...</term>
         <listitem>
           <para>
-Specify list of recipients (email addresses) for an encrypted or enveloped message. 
+Specify list of recipients (email addresses) for an encrypted or enveloped message.
 For certificates-only message, list of certificates to send.
           </para>
         </listitem>

@@ -25,7 +25,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof eval != 'undefined' && typeof uneval != 'undefined')
   {
     expect = '(function f () /x/g)';

@@ -5,7 +5,7 @@
         <script type="text/javascript" charset="utf-8">
             function selectExisting() {
                 window.getSelection().removeAllRanges();
-                
+
                 var range = document.createRange();
                 range.selectNode(document.getElementById('existing_node'));
                 window.getSelection().addRange(range);

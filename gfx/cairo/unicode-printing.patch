@@ -3,12 +3,12 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-printing-surface.c b/gfx/cairo/cair
 +++ b/gfx/cairo/cairo/src/cairo-win32-printing-surface.c
 @@ -1426,16 +1426,104 @@ _cairo_win32_printing_surface_fill (void
      }
- 
+
      fflush(stderr);
- 
+
      return status;
  }
- 
+
  static cairo_int_status_t
 +_cairo_win32_printing_surface_emit_win32_glyphs (cairo_win32_surface_t 	*surface,
 +						 cairo_operator_t	 op,
@@ -110,7 +110,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-printing-surface.c b/gfx/cairo/cair
          }
      }
  #endif
- 
+
  #if CAIRO_HAS_WIN32_FONT
      if (cairo_scaled_font_get_type (scaled_font) == CAIRO_FONT_TYPE_WIN32 &&
  	source->type == CAIRO_PATTERN_TYPE_SOLID)
@@ -187,7 +187,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-printing-surface.c b/gfx/cairo/cair
  	goto FINISH;
      }
  #endif
- 
+
      SaveDC (surface->dc);
      old_ctm = surface->ctm;
      old_has_ctm = surface->has_ctm;
@@ -195,14 +195,14 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-printing-surface.c b/gfx/cairo/cair
 diff --git a/gfx/cairo/cairo/src/cairo-win32-private.h b/gfx/cairo/cairo/src/cairo-win32-private.h
 --- a/gfx/cairo/cairo/src/cairo-win32-private.h
 +++ b/gfx/cairo/cairo/src/cairo-win32-private.h
-@@ -157,16 +157,27 @@ _cairo_win32_surface_get_extents (void		
+@@ -157,16 +157,27 @@ _cairo_win32_surface_get_extents (void
  uint32_t
  _cairo_win32_flags_for_dc (HDC dc);
- 
+
  cairo_status_t
  _cairo_win32_surface_set_clip_region (void           *abstract_surface,
  				      cairo_region_t *region);
- 
+
  cairo_int_status_t
 +_cairo_win32_surface_show_glyphs_internal (void			 *surface,
 +					   cairo_operator_t	  op,
@@ -231,9 +231,9 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
  {
      return _cairo_win32_surface_set_clip_region (abstract_surface, NULL);
  }
- 
+
  #define STACK_GLYPH_SIZE 256
- 
+
  cairo_int_status_t
 -_cairo_win32_surface_show_glyphs (void			*surface,
 -				  cairo_operator_t	 op,
@@ -260,15 +260,15 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
  #endif
      } else {
  	cairo_win32_surface_t *dst = surface;
-@@ -1737,29 +1738,20 @@ _cairo_win32_surface_show_glyphs (void		
+@@ -1737,29 +1738,20 @@ _cairo_win32_surface_show_glyphs (void
  		dxy_buf[j+1] = _cairo_lround (logical_y - next_logical_y);
  		    /* note that GDI coordinate system is inverted */
- 
+
  		logical_x = next_logical_x;
  		logical_y = next_logical_y;
  	    }
  	}
- 
+
 -	/* Using glyph indices for a Type 1 font does not work on a
 -	 * printer DC. The win32 printing surface will convert the the
 -	 * glyph indices of Type 1 fonts to the unicode values.
@@ -285,7 +285,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
 -	{
 -	    glyph_index_option = ETO_GLYPH_INDEX;
 -	}
- 
+
  	win_result = ExtTextOutW(dst->dc,
  				 start_x,
  				 start_y,
@@ -293,15 +293,15 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
  				 NULL,
  				 glyph_buf,
  				 num_glyphs,
-@@ -1778,16 +1770,37 @@ _cairo_win32_surface_show_glyphs (void		
+@@ -1778,16 +1770,37 @@ _cairo_win32_surface_show_glyphs (void
      }
  #else
      return CAIRO_INT_STATUS_UNSUPPORTED;
  #endif
  }
- 
+
  #undef STACK_GLYPH_SIZE
- 
+
 +cairo_int_status_t
 +_cairo_win32_surface_show_glyphs (void			*surface,
 + 				  cairo_operator_t	 op,
@@ -327,7 +327,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-surface.c b/gfx/cairo/cairo/src/cai
  cairo_win32_surface_create_internal (HDC hdc, cairo_format_t format)
  {
      cairo_win32_surface_t *surface;
- 
+
      RECT rect;
- 
+
      surface = malloc (sizeof (cairo_win32_surface_t));

@@ -66,7 +66,7 @@ struct CExtractNtOptions
     SymLinks.Val = true;
     HardLinks.Val = true;
     AltStreams.Val = true;
-    
+
     PreAllocateOutFile =
       #ifdef _WIN32
         true;
@@ -164,7 +164,7 @@ struct CDirPathTime
   bool MTimeDefined;
 
   FString Path;
-  
+
   bool SetDirTime();
 };
 
@@ -198,7 +198,7 @@ class CArchiveExtractCallback:
   CMyComPtr<IFolderExtractToStreamCallback> ExtractToStreamCallback;
   CGetProp *GetProp_Spec;
   CMyComPtr<IGetProp> GetProp;
-  
+
   #endif
 
   CReadArcItem _item;
@@ -220,7 +220,7 @@ class CArchiveExtractCallback:
     FILETIME ATime;
     FILETIME MTime;
     UInt32 Attrib;
-  
+
     bool CTimeDefined;
     bool ATimeDefined;
     bool MTimeDefined;
@@ -235,16 +235,16 @@ class CArchiveExtractCallback:
   CMyComPtr<ISequentialOutStream> _outFileStream;
 
   #ifndef _SFX
-  
+
   COutStreamWithHash *_hashStreamSpec;
   CMyComPtr<ISequentialOutStream> _hashStream;
   bool _hashStreamWasUsed;
-  
+
   #endif
 
   bool _removePartsForAltStreams;
   UStringVector _removePathParts;
-  
+
   #ifndef _SFX
   bool _use_baseParentFolder_mode;
   UInt32 _baseParentFolder;
@@ -256,7 +256,7 @@ class CArchiveExtractCallback:
 
   CMyComPtr<ICompressProgressInfo> _localProgress;
   UInt64 _packTotal;
-  
+
   UInt64 _progressTotal;
   bool _progressTotal_Defined;
 
@@ -283,7 +283,7 @@ public:
   UInt64 NumAltStreams;
   UInt64 UnpackSize;
   UInt64 AltStreams_UnpackSize;
-  
+
   MY_UNKNOWN_IMP3(IArchiveExtractCallbackMessage, ICryptoGetTextPassword, ICompressProgressInfo)
 
   INTERFACE_IArchiveExtractCallback(;)
@@ -377,9 +377,9 @@ private:
 struct CArchiveExtractCallback_Closer
 {
   CArchiveExtractCallback *_ref;
-  
+
   CArchiveExtractCallback_Closer(CArchiveExtractCallback *ref): _ref(ref) {}
-  
+
   HRESULT Close()
   {
     HRESULT res = S_OK;
@@ -390,7 +390,7 @@ struct CArchiveExtractCallback_Closer
     }
     return res;
   }
-  
+
   ~CArchiveExtractCallback_Closer()
   {
     Close();

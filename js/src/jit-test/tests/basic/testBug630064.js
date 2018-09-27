@@ -39,7 +39,7 @@ while (true) {
 function loadFiles(x) {
 	for (i in x) {
 		try {
-			eval(x[i]); 
+			eval(x[i]);
 		} catch (e) {
 		}
 	}

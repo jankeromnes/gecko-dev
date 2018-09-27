@@ -1,6 +1,6 @@
 220 server IBM TCP/IP for OS/2 - FTP Server ver 23:04:36 on Jan 15 1997
 
-This listing is just a guess because I couldn't find an FTP server that 
+This listing is just a guess because I couldn't find an FTP server that
 LISTs like this. This guess is based on comments in Perl mirror project.
 I'm particularly unsure of the contents of cols 19-34.
 

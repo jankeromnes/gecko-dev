@@ -10,7 +10,7 @@
 
 <body  xmlns="http://www.w3.org/1999/xhtml">
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 </pre>
@@ -26,7 +26,7 @@
 // Strangely, this doesn't occur with RDP on Windows.
 SimpleTest.expectAssertions(0, 3);
 SimpleTest.waitForExplicitFinish();
-window.open("window_composition_text_querycontent.xul", "_blank", 
+window.open("window_composition_text_querycontent.xul", "_blank",
             "chrome,width=600,height=600");
 
 ]]>

@@ -587,27 +587,27 @@ pkix_CertSelector_Match_SubjAltNames(
             PKIX_CHECK(PKIX_List_GetLength
                        (subjAltNamesList, &numItems, plContext),
                        PKIX_LISTGETLENGTHFAILED);
-            
+
             for (i = 0; i < numItems; i++) {
-                
+
                 PKIX_CHECK(PKIX_List_GetItem
                            (subjAltNamesList,
                             i,
                             (PKIX_PL_Object **) &name,
                             plContext),
                            PKIX_LISTGETITEMFAILED);
-                
+
                 PKIX_CHECK(pkix_List_Contains
                            (certSubjAltNames,
                             (PKIX_PL_Object *) name,
                             &checkPassed,
                             plContext),
                            PKIX_LISTCONTAINSFAILED);
-                
+
                 PKIX_DECREF(name);
-                
+
                 if (checkPassed == PKIX_TRUE) {
-                    
+
                     if (matchAll == PKIX_FALSE) {
                         /* one match is good enough */
                         matchCount = numItems;
@@ -616,11 +616,11 @@ pkix_CertSelector_Match_SubjAltNames(
                         /* else continue checking next */
                         matchCount++;
                     }
-                    
+
                 }
-                
+
             }
-            
+
             if (matchCount != numItems) {
                 *pResult = PKIX_FALSE;
                 PKIX_ERROR(PKIX_CERTSELECTORMATCHSUBJALTNAMESFAILED);
@@ -851,7 +851,7 @@ pkix_CertSelector_Match_SubjKeyId(
                             &equals,
                             plContext),
                            PKIX_OBJECTEQUALSFAILED);
-                
+
                 if (equals == PKIX_FALSE) {
                     *pResult = PKIX_FALSE;
                     PKIX_ERROR(PKIX_CERTSELECTORMATCHSUBJKEYIDFAILED);
@@ -927,7 +927,7 @@ pkix_CertSelector_Match_AuthKeyId(
                             &equals,
                             plContext),
                            PKIX_OBJECTEQUALSFAILED);
-                
+
                 if (equals != PKIX_TRUE) {
                     *pResult = PKIX_FALSE;
                     PKIX_ERROR(PKIX_CERTSELECTORMATCHAUTHKEYIDFAILED);
@@ -1003,7 +1003,7 @@ pkix_CertSelector_Match_SubjPKAlgId(
                             &equals,
                             plContext),
                            PKIX_OBJECTEQUALSFAILED);
-                
+
                 if (equals != PKIX_TRUE) {
                     *pResult = PKIX_FALSE;
                     PKIX_ERROR(PKIX_CERTSELECTORMATCHSUBJPKALGIDFAILED);
@@ -1079,7 +1079,7 @@ pkix_CertSelector_Match_SubjPubKey(
                             &equals,
                             plContext),
                            PKIX_OBJECTEQUALSFAILED);
-                
+
                 if (equals != PKIX_TRUE) {
                     *pResult = PKIX_FALSE;
                     PKIX_ERROR(PKIX_CERTSELECTORMATCHSUBJPUBKEYFAILED);

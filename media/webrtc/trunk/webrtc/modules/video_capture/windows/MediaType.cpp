@@ -53,7 +53,7 @@ MediaType::operator new(size_t sz) throw()
 }
 
 
-void 
+void
 MediaType::Clear()
 {
   if (cbFormat) {
@@ -113,7 +113,7 @@ MediaType::IsEqual(const AM_MEDIA_TYPE* aMediaType)
 {
   if (!aMediaType)
     return false;
-  
+
   if (aMediaType == this)
     return true;
 

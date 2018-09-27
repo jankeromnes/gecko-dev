@@ -19,7 +19,7 @@ dbg.onDebuggerStatement = function (frame) {
     assertEq(args[2] instanceof Debugger.Object, true);
     assertEq(args[2].class, "Object");
     var x = getprop.apply(args[2], ["x"]).return;
-    assertEq(x.class, "Array"); 
+    assertEq(x.class, "Array");
     assertEq(getprop.apply(x, ["0"]).return, 4);
     assertEq(getprop.apply(args[2], ["z"]).return, 5);
 

@@ -1,55 +1,55 @@
 /*************************************************************************
  *
  *  File Name (AccessibleHyperlink.idl)
- * 
- *  IAccessible2 IDL Specification 
- * 
- *  Copyright (c) 2007, 2010 Linux Foundation 
- *  Copyright (c) 2006 IBM Corporation 
- *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
- *  All rights reserved. 
- *   
- *   
- *  Redistribution and use in source and binary forms, with or without 
- *  modification, are permitted provided that the following conditions 
- *  are met: 
- *   
- *   1. Redistributions of source code must retain the above copyright 
- *      notice, this list of conditions and the following disclaimer. 
- *   
- *   2. Redistributions in binary form must reproduce the above 
- *      copyright notice, this list of conditions and the following 
- *      disclaimer in the documentation and/or other materials 
- *      provided with the distribution. 
  *
- *   3. Neither the name of the Linux Foundation nor the names of its 
- *      contributors may be used to endorse or promote products 
- *      derived from this software without specific prior written 
- *      permission. 
- *   
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
- *  CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
- *  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
- *  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
- *  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
- *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
- *  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
- *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
- *  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
- *  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- *  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
- *   
- *  This BSD License conforms to the Open Source Initiative "Simplified 
- *  BSD License" as published at: 
- *  http://www.opensource.org/licenses/bsd-license.php 
- *   
- *  IAccessible2 is a trademark of the Linux Foundation. The IAccessible2 
- *  mark may be used in accordance with the Linux Foundation Trademark 
- *  Policy to indicate compliance with the IAccessible2 specification. 
- * 
- ************************************************************************/ 
+ *  IAccessible2 IDL Specification
+ *
+ *  Copyright (c) 2007, 2010 Linux Foundation
+ *  Copyright (c) 2006 IBM Corporation
+ *  Copyright (c) 2000, 2006 Sun Microsystems, Inc.
+ *  All rights reserved.
+ *
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *
+ *   1. Redistributions of source code must retain the above copyright
+ *      notice, this list of conditions and the following disclaimer.
+ *
+ *   2. Redistributions in binary form must reproduce the above
+ *      copyright notice, this list of conditions and the following
+ *      disclaimer in the documentation and/or other materials
+ *      provided with the distribution.
+ *
+ *   3. Neither the name of the Linux Foundation nor the names of its
+ *      contributors may be used to endorse or promote products
+ *      derived from this software without specific prior written
+ *      permission.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+ *  CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ *  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ *  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ *  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ *  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ *  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ *  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ *  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *  This BSD License conforms to the Open Source Initiative "Simplified
+ *  BSD License" as published at:
+ *  http://www.opensource.org/licenses/bsd-license.php
+ *
+ *  IAccessible2 is a trademark of the Linux Foundation. The IAccessible2
+ *  mark may be used in accordance with the Linux Foundation Trademark
+ *  Policy to indicate compliance with the IAccessible2 specification.
+ *
+ ************************************************************************/
 
 import "objidl.idl";
 import "oaidl.idl";
@@ -58,16 +58,16 @@ import "AccessibleAction.idl";
 
 /** @brief This interface represents hyperlinks.
 
- This interface represents a hyperlink associated with a single substring 
-  of text or single non-text object.  Non-text objects can have either a 
-  single link or a collection of links such as when the non-text object is 
+ This interface represents a hyperlink associated with a single substring
+  of text or single non-text object.  Non-text objects can have either a
+  single link or a collection of links such as when the non-text object is
   an image map.
 
  Linked objects and anchors are implementation dependent. This interface is derived
-  from IAccessibleAction.  IAccessibleAction::nActions is one greater than the 
+  from IAccessibleAction.  IAccessibleAction::nActions is one greater than the
   maximum value for the indices used with the methods of this interface.
-        
- Furthermore, the object that implements this interface has to be connected 
+
+ Furthermore, the object that implements this interface has to be connected
   implicitly or explicitly with an object that implements IAccessibleText.
   IAccessibleHyperlink::startIndex and IAccessibleHyperlink::endIndex are
   indices with respect to the text exposed by IAccessibleText.
@@ -99,16 +99,16 @@ interface IAccessibleHyperlink : IAccessibleAction
 {
 
   /** @brief Returns an object that represents the link anchor, as appropriate
-   for the link at the specified index.       
+   for the link at the specified index.
    @param [in] index
     A 0 based index identifies the anchor when, as in the case of an image map,
     there is more than one link represented by this object.  The valid maximal
     index is indicated by IAccessibleAction::nActions.
    @param [out] anchor
-    This is an implementation dependent value.  For example, for a text link this 
+    This is an implementation dependent value.  For example, for a text link this
 	method could return the substring of the containing string where the substring
-	is overridden with link behavior, and for an image link this method could return 
-	an IUnknown VARIANT for IAccessibleImage.  See the section about 
+	is overridden with link behavior, and for an image link this method could return
+	an IUnknown VARIANT for IAccessibleImage.  See the section about
 	@ref _variants "VARIANTs" for additional information.
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
@@ -120,7 +120,7 @@ interface IAccessibleHyperlink : IAccessibleAction
     );
 
   /** @brief Returns an object representing the target of the link, as appropriate
-   for the link at the specified index.       
+   for the link at the specified index.
    @param [in] index
     A 0 based index identifies the anchor when, as in the case of an image map,
     there is more than one link represented by this object.  The valid maximal
@@ -128,8 +128,8 @@ interface IAccessibleHyperlink : IAccessibleAction
    @param [out] anchorTarget
     This is an implementation dependent value.  For example this method could
 	return a BSTR VARIANT of the URI.  Alternatively this method could return an
-	IUnknown VARIANT of a COM interface representing a target object to be 
-	activated when the link is activated.  See the section about 
+	IUnknown VARIANT of a COM interface representing a target object to be
+	activated when the link is activated.  See the section about
 	@ref _variants "VARIANTs" for additional information.
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
@@ -142,8 +142,8 @@ interface IAccessibleHyperlink : IAccessibleAction
 
   /** @brief Returns the 0 based character offset at which the textual representation of the hyperlink starts.
 
-   The returned value is related to the IAccessibleText interface of the object that 
-   owns this hyperlink. 
+   The returned value is related to the IAccessibleText interface of the object that
+   owns this hyperlink.
    @param [out] index
    @retval S_OK
   */
@@ -153,9 +153,9 @@ interface IAccessibleHyperlink : IAccessibleAction
     );
 
   /** @brief Returns the 0 based character offset at which the textual representation of the hyperlink ends.
-    
-   The returned value is related to the IAccessibleText interface of the object that 
-   owns this hyperlink. The character at the index is not part of the hypertext.  
+
+   The returned value is related to the IAccessibleText interface of the object that
+   owns this hyperlink. The character at the index is not part of the hypertext.
    @param [out] index
    @retval S_OK
   */
@@ -165,7 +165,7 @@ interface IAccessibleHyperlink : IAccessibleAction
     );
 
   /** @brief Returns whether the target object referenced by this link is still valid.
-        
+
    This is a volatile state that may change without sending an appropriate event.
    Returns TRUE if the referenced target is still valid and FALSE otherwise.
 

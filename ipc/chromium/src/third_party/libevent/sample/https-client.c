@@ -26,7 +26,7 @@
 #include <ws2tcpip.h>
 
 #define snprintf _snprintf
-#define strcasecmp _stricmp 
+#define strcasecmp _stricmp
 #else
 #include <sys/socket.h>
 #include <netinet/in.h>

@@ -9,9 +9,9 @@ description: >
 ---*/
 
     var fooCalled = false;
-    function foo(){ fooCalled = true; } 
-    
-    var o = { }; 
+    function foo(){ fooCalled = true; }
+
+    var o = { };
 assert.throws(TypeError, function() {
         eval("o.bar( foo() );");
         $ERROR("o.bar does not exist!");

@@ -7,13 +7,13 @@ diff --git jdhuff.c jdhuff.c
 +++ jdhuff.c
 @@ -664,17 +664,17 @@ decode_mcu_fast (j_decompress_ptr cinfo,
    ASSIGN_STATE(state, entropy->saved);
- 
+
    for (blkn = 0; blkn < cinfo->blocks_in_MCU; blkn++) {
      JBLOCKROW block = MCU_data ? MCU_data[blkn] : NULL;
      d_derived_tbl *dctbl = entropy->dc_cur_tbls[blkn];
      d_derived_tbl *actbl = entropy->ac_cur_tbls[blkn];
      register int s, k, r, l;
- 
+
 -    HUFF_DECODE_FAST(s, l, dctbl);
 +    HUFF_DECODE_FAST(s, l, dctbl, slow_decode_mcu);
      if (s) {
@@ -21,7 +21,7 @@ diff --git jdhuff.c jdhuff.c
        r = GET_BITS(s);
        s = HUFF_EXTEND(r, s);
      }
- 
+
      if (entropy->dc_needed[blkn]) {
        int ci = cinfo->MCU_membership[blkn];
 @@ -682,17 +682,17 @@ decode_mcu_fast (j_decompress_ptr cinfo,
@@ -29,15 +29,15 @@ diff --git jdhuff.c jdhuff.c
        if (block)
          (*block)[0] = (JCOEF) s;
      }
- 
+
      if (entropy->ac_needed[blkn] && block) {
- 
+
        for (k = 1; k < DCTSIZE2; k++) {
 -        HUFF_DECODE_FAST(s, l, actbl);
 +        HUFF_DECODE_FAST(s, l, actbl, slow_decode_mcu);
          r = s >> 4;
          s &= 15;
- 
+
          if (s) {
            k += r;
            FILL_BIT_BUFFER_FAST
@@ -48,15 +48,15 @@ diff --git jdhuff.c jdhuff.c
            k += 15;
          }
        }
- 
+
      } else {
- 
+
        for (k = 1; k < DCTSIZE2; k++) {
 -        HUFF_DECODE_FAST(s, l, actbl);
 +        HUFF_DECODE_FAST(s, l, actbl, slow_decode_mcu);
          r = s >> 4;
          s &= 15;
- 
+
          if (s) {
            k += r;
            FILL_BIT_BUFFER_FAST
@@ -68,13 +68,13 @@ diff --git jdhuff.c jdhuff.c
        }
      }
    }
- 
+
    if (cinfo->unread_marker != 0) {
 +slow_decode_mcu:
      cinfo->unread_marker = 0;
      return FALSE;
    }
- 
+
    br_state.bytes_in_buffer -= (buffer - br_state.next_input_byte);
    br_state.next_input_byte = buffer;
    BITREAD_SAVE_STATE(cinfo,entropy->bitstate);
@@ -90,7 +90,7 @@ diff --git jdhuff.h jdhuff.h
      get_buffer = state.get_buffer; bits_left = state.bits_left; \
    } \
  }
- 
+
 -#define HUFF_DECODE_FAST(s,nb,htbl) \
 +#define HUFF_DECODE_FAST(s,nb,htbl,slowlabel) \
    FILL_BIT_BUFFER_FAST; \
@@ -114,7 +114,7 @@ diff --git jdhuff.h jdhuff.h
 +      goto slowlabel; \
 +    s = htbl->pub->huffval[ (int) (s + htbl->valoffset[nb]) ]; \
    }
- 
+
  /* Out-of-line case for Huffman code fetching */
  EXTERN(int) jpeg_huff_decode
          (bitread_working_state *state, register bit_buf_type get_buffer,

@@ -8,33 +8,33 @@ Bug 363861. Part 2: Introduce cairo_surface_get/set_subpixel_antialiasing. r=jrm
 diff --git a/gfx/cairo/cairo/src/cairo-quartz-surface.c b/gfx/cairo/cairo/src/cairo-quartz-surface.c
 --- a/gfx/cairo/cairo/src/cairo-quartz-surface.c
 +++ b/gfx/cairo/cairo/src/cairo-quartz-surface.c
-@@ -2473,16 +2473,17 @@ _cairo_quartz_surface_show_glyphs (void 
+@@ -2473,16 +2473,17 @@ _cairo_quartz_surface_show_glyphs (void
      cairo_int_status_t rv = CAIRO_STATUS_SUCCESS;
      cairo_quartz_drawing_state_t state;
      float xprev, yprev;
      int i;
      CGFontRef cgfref = NULL;
- 
+
      cairo_bool_t isClipping = FALSE;
      cairo_bool_t didForceFontSmoothing = FALSE;
 +    cairo_antialias_t effective_antialiasing;
- 
+
      if (IS_EMPTY(surface))
  	return CAIRO_STATUS_SUCCESS;
- 
+
      if (num_glyphs <= 0)
  	return CAIRO_STATUS_SUCCESS;
- 
+
      if (cairo_scaled_font_get_type (scaled_font) != CAIRO_FONT_TYPE_QUARTZ)
-@@ -2514,16 +2515,22 @@ _cairo_quartz_surface_show_glyphs (void 
+@@ -2514,16 +2515,22 @@ _cairo_quartz_surface_show_glyphs (void
  	goto BAIL;
      }
- 
+
      /* this doesn't addref */
      cgfref = _cairo_quartz_scaled_font_get_cg_font_ref (scaled_font);
      CGContextSetFont (state.context, cgfref);
      CGContextSetFontSize (state.context, 1.0);
- 
+
 +    effective_antialiasing = scaled_font->options.antialias;
 +    if (effective_antialiasing == CAIRO_ANTIALIAS_SUBPIXEL &&
 +        !surface->base.permit_subpixel_antialiasing) {
@@ -53,22 +53,22 @@ diff --git a/gfx/cairo/cairo/src/cairo-surface-private.h b/gfx/cairo/cairo/src/c
 --- a/gfx/cairo/cairo/src/cairo-surface-private.h
 +++ b/gfx/cairo/cairo/src/cairo-surface-private.h
 @@ -58,16 +58,17 @@ struct _cairo_surface {
- 
+
      cairo_reference_count_t ref_count;
      cairo_status_t status;
      unsigned int unique_id;
- 
+
      unsigned finished : 1;
      unsigned is_clear : 1;
      unsigned has_font_options : 1;
 +    unsigned permit_subpixel_antialiasing : 1;
- 
+
      cairo_user_data_array_t user_data;
      cairo_user_data_array_t mime_data;
- 
+
      cairo_matrix_t device_transform;
      cairo_matrix_t device_transform_inverse;
- 
+
      /* The actual resolution of the device, in dots per inch. */
 diff --git a/gfx/cairo/cairo/src/cairo-surface.c b/gfx/cairo/cairo/src/cairo-surface.c
 --- a/gfx/cairo/cairo/src/cairo-surface.c
@@ -96,7 +96,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-surface.c b/gfx/cairo/cairo/src/cairo-sur
 @@ -342,46 +343,48 @@ _cairo_surface_init (cairo_surface_t			*
      surface->content = content;
      surface->type = backend->type;
- 
+
      CAIRO_REFERENCE_COUNT_INIT (&surface->ref_count, 1);
      surface->status = CAIRO_STATUS_SUCCESS;
      surface->unique_id = _cairo_surface_allocate_unique_id ();
@@ -104,55 +104,55 @@ diff --git a/gfx/cairo/cairo/src/cairo-surface.c b/gfx/cairo/cairo/src/cairo-sur
      surface->is_clear = FALSE;
 +    surface->has_font_options = FALSE;
 +    surface->permit_subpixel_antialiasing = TRUE;
- 
+
      _cairo_user_data_array_init (&surface->user_data);
      _cairo_user_data_array_init (&surface->mime_data);
- 
+
      cairo_matrix_init_identity (&surface->device_transform);
      cairo_matrix_init_identity (&surface->device_transform_inverse);
- 
+
      surface->x_resolution = CAIRO_SURFACE_RESOLUTION_DEFAULT;
      surface->y_resolution = CAIRO_SURFACE_RESOLUTION_DEFAULT;
- 
+
      surface->x_fallback_resolution = CAIRO_SURFACE_FALLBACK_RESOLUTION_DEFAULT;
      surface->y_fallback_resolution = CAIRO_SURFACE_FALLBACK_RESOLUTION_DEFAULT;
- 
+
      _cairo_array_init (&surface->snapshots, sizeof (cairo_surface_t *));
      surface->snapshot_of = NULL;
 -
 -    surface->has_font_options = FALSE;
  }
- 
+
  static void
  _cairo_surface_copy_similar_properties (cairo_surface_t *surface,
  					cairo_surface_t *other)
  {
      if (other->has_font_options || other->backend != surface->backend) {
  	cairo_font_options_t options;
- 
+
  	cairo_surface_get_font_options (other, &options);
  	_cairo_surface_set_font_options (surface, &options);
      }
- 
+
 +    surface->permit_subpixel_antialiasing = other->permit_subpixel_antialiasing;
 +
      cairo_surface_set_fallback_resolution (surface,
  					   other->x_fallback_resolution,
  					   other->y_fallback_resolution);
  }
- 
+
  cairo_surface_t *
  _cairo_surface_create_similar_scratch (cairo_surface_t *other,
  				       cairo_content_t	content,
 @@ -2482,16 +2485,67 @@ cairo_surface_has_show_text_glyphs (cair
- 
+
      if (surface->backend->has_show_text_glyphs)
  	return surface->backend->has_show_text_glyphs (surface);
      else
  	return surface->backend->show_text_glyphs != NULL;
  }
  slim_hidden_def (cairo_surface_has_show_text_glyphs);
- 
+
 +/**
 + * cairo_surface_set_subpixel_antialiasing:
 + * @surface: a #cairo_surface_t
@@ -218,18 +218,18 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-font.c b/gfx/cairo/cairo/src/cairo-
 @@ -1380,16 +1380,17 @@ _cairo_win32_scaled_font_show_glyphs (vo
      cairo_win32_surface_t *surface = (cairo_win32_surface_t *)generic_surface;
      cairo_status_t status;
- 
+
      if (width == 0 || height == 0)
  	return CAIRO_STATUS_SUCCESS;
- 
+
      if (_cairo_surface_is_win32 (generic_surface) &&
  	surface->format == CAIRO_FORMAT_RGB24 &&
 +	(generic_surface->permit_subpixel_antialiasing || scaled_font->quality != CLEARTYPE_QUALITY) &&
  	op == CAIRO_OPERATOR_OVER &&
  	_cairo_pattern_is_opaque_solid (pattern)) {
- 
+
  	cairo_solid_pattern_t *solid_pattern = (cairo_solid_pattern_t *)pattern;
- 
+
  	/* When compositing OVER on a GDI-understood surface, with a
  	 * solid opaque color, we can just call ExtTextOut directly.
  	 */
@@ -245,11 +245,11 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-font.c b/gfx/cairo/cairo/src/cairo-
 +	cairo_bool_t use_subpixel_antialiasing =
 +	    scaled_font->quality == CLEARTYPE_QUALITY && generic_surface->permit_subpixel_antialiasing;
  	RECT r;
- 
+
  	tmp_surface = (cairo_win32_surface_t *)cairo_win32_surface_create_with_dib (CAIRO_FORMAT_ARGB32, width, height);
  	if (tmp_surface->base.status)
  	    return tmp_surface->base.status;
- 
+
  	r.left = 0;
  	r.top = 0;
 @@ -1432,17 +1435,17 @@ _cairo_win32_scaled_font_show_glyphs (vo
@@ -260,7 +260,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-font.c b/gfx/cairo/cairo/src/cairo-
  	    cairo_surface_destroy (&tmp_surface->base);
  	    return status;
  	}
- 
+
 -	if (scaled_font->quality == CLEARTYPE_QUALITY) {
 +	if (use_subpixel_antialiasing) {
  	    /* For ClearType, we need a 4-channel mask. If we are compositing on
@@ -268,22 +268,22 @@ diff --git a/gfx/cairo/cairo/src/cairo-win32-font.c b/gfx/cairo/cairo/src/cairo-
  	     * the mask (we just copy the green channel). But for a destination
  	     * surface without alpha the alpha channel of the mask is ignored
  	     */
- 
+
  	    if (surface->format != CAIRO_FORMAT_RGB24)
  		_compute_argb32_mask_alpha (tmp_surface);
 @@ -1460,17 +1463,17 @@ _cairo_win32_scaled_font_show_glyphs (vo
- 
+
  	/* For op == OVER, no-cleartype, a possible optimization here is to
  	 * draw onto an intermediate ARGB32 surface and alpha-blend that with the
  	 * destination
  	 */
  	_cairo_pattern_init_for_surface (&mask, mask_surface);
  	cairo_surface_destroy (mask_surface);
- 
+
 -	if (scaled_font->quality == CLEARTYPE_QUALITY)
 +	if (use_subpixel_antialiasing)
  	    mask.base.has_component_alpha = TRUE;
- 
+
  	status = _cairo_surface_composite (op, pattern,
  					   &mask.base,
  					   &surface->base,
@@ -299,7 +299,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-surface.c b/gfx/cairo/cairo/src/cair
      XRenderPictFormat	*xrender_format;
      cairo_xlib_font_glyphset_free_glyphs_t *pending_free_glyphs;
  } cairo_xlib_font_glyphset_info_t;
- 
+
  typedef struct _cairo_xlib_surface_font_private {
      cairo_scaled_font_t		    *scaled_font;
 +    cairo_scaled_font_t         *grayscale_font;
@@ -307,19 +307,19 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-surface.c b/gfx/cairo/cairo/src/cair
      cairo_xlib_display_t	    *display;
      cairo_xlib_font_glyphset_info_t  glyphset_info[NUM_GLYPHSETS];
  } cairo_xlib_surface_font_private_t;
- 
+
  /* callback from CloseDisplay */
  static void
  _cairo_xlib_surface_remove_scaled_font (cairo_xlib_display_t	*display,
 @@ -3599,16 +3600,20 @@ _cairo_xlib_surface_remove_scaled_font (
- 
+
      _cairo_scaled_font_reset_cache (scaled_font);
      CAIRO_MUTEX_UNLOCK (scaled_font->mutex);
- 
+
      if (font_private != NULL) {
  	Display *dpy;
  	int i;
- 
+
 +    if (font_private->grayscale_font) {
 +        cairo_scaled_font_destroy (font_private->grayscale_font);
 +    }
@@ -327,19 +327,19 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-surface.c b/gfx/cairo/cairo/src/cair
  	dpy = _cairo_xlib_display_get_dpy (display);
  	for (i = 0; i < NUM_GLYPHSETS; i++) {
  	    cairo_xlib_font_glyphset_info_t *glyphset_info;
- 
+
  	    glyphset_info = &font_private->glyphset_info[i];
  	    if (glyphset_info->glyphset)
  		XRenderFreeGlyphSet (dpy, glyphset_info->glyphset);
- 
-@@ -3629,16 +3634,17 @@ _cairo_xlib_surface_font_init (Display		
+
+@@ -3629,16 +3634,17 @@ _cairo_xlib_surface_font_init (Display
      cairo_status_t status;
      int i;
- 
+
      font_private = malloc (sizeof (cairo_xlib_surface_font_private_t));
      if (unlikely (font_private == NULL))
  	return _cairo_error (CAIRO_STATUS_NO_MEMORY);
- 
+
      font_private->scaled_font = scaled_font;
 +    font_private->grayscale_font = NULL;
      status = _cairo_xlib_display_get (dpy, &font_private->display);
@@ -347,18 +347,18 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-surface.c b/gfx/cairo/cairo/src/cair
  	free (font_private);
  	return status;
      }
- 
+
      /* initialize and hook into the CloseDisplay callback */
      font_private->close_display_hook.func =
 @@ -3671,16 +3677,20 @@ _cairo_xlib_surface_scaled_font_fini (ca
  {
      cairo_xlib_surface_font_private_t *font_private;
- 
+
      font_private = scaled_font->surface_private;
      if (font_private != NULL) {
  	cairo_xlib_display_t *display;
  	int i;
- 
+
 +	if (font_private->grayscale_font) {
 +        cairo_scaled_font_destroy (font_private->grayscale_font);
 +	}
@@ -366,20 +366,20 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-surface.c b/gfx/cairo/cairo/src/cair
  	display = font_private->display;
  	_cairo_xlib_remove_close_display_hook (display,
  					       &font_private->close_display_hook);
- 
+
  	for (i = 0; i < NUM_GLYPHSETS; i++) {
  	    cairo_xlib_font_glyphset_info_t *glyphset_info;
- 
+
  	    glyphset_info = &font_private->glyphset_info[i];
 @@ -4417,16 +4427,62 @@ _cairo_xlib_surface_owns_font (cairo_xli
  	(font_private != NULL && font_private->display != dst->display))
      {
  	return FALSE;
      }
- 
+
      return TRUE;
  }
- 
+
 +/* Gets a grayscale version of scaled_font. The grayscale version is cached
 + * in our surface_private data.
 + */
@@ -434,40 +434,40 @@ diff --git a/gfx/cairo/cairo/src/cairo-xlib-surface.c b/gfx/cairo/cairo/src/cair
  				 int		      num_glyphs,
  				 cairo_scaled_font_t *scaled_font,
  				 cairo_clip_t	     *clip,
-@@ -4475,16 +4531,21 @@ _cairo_xlib_surface_show_glyphs (void   
- 
+@@ -4475,16 +4531,21 @@ _cairo_xlib_surface_show_glyphs (void
+
      operation = _categorize_composite_operation (dst, op, src_pattern, TRUE);
      if (operation == DO_UNSUPPORTED)
  	return UNSUPPORTED ("unsupported op");
- 
+
      if (! _cairo_xlib_surface_owns_font (dst, scaled_font))
  	return UNSUPPORTED ("unowned font");
- 
+
 +    if (!dst->base.permit_subpixel_antialiasing &&
 +        scaled_font->options.antialias == CAIRO_ANTIALIAS_SUBPIXEL) {
 +        scaled_font = _cairo_xlib_get_grayscale_font (dst, scaled_font);
 +    }
 +
      X_DEBUG ((dst->dpy, "show_glyphs (dst=%x)", (unsigned int) dst->drawable));
- 
+
      if (clip_region != NULL &&
  	cairo_region_num_rectangles (clip_region) == 1)
      {
  	cairo_rectangle_int_t glyph_extents;
  	const cairo_rectangle_int_t *clip_extents;
- 
+
 diff --git a/gfx/cairo/cairo/src/cairo.h b/gfx/cairo/cairo/src/cairo.h
 --- a/gfx/cairo/cairo/src/cairo.h
 +++ b/gfx/cairo/cairo/src/cairo.h
 @@ -2101,16 +2101,35 @@ cairo_public void
  cairo_surface_copy_page (cairo_surface_t *surface);
- 
+
  cairo_public void
  cairo_surface_show_page (cairo_surface_t *surface);
- 
+
  cairo_public cairo_bool_t
  cairo_surface_has_show_text_glyphs (cairo_surface_t *surface);
- 
+
 +/**
 + * _cairo_subpixel_antialiasing_t:
 + * @CAIRO_SUBPIXEL_ANTIALIASING_ENABLED: subpixel antialiasing is enabled
@@ -488,7 +488,7 @@ diff --git a/gfx/cairo/cairo/src/cairo.h b/gfx/cairo/cairo/src/cairo.h
 +cairo_surface_get_subpixel_antialiasing (cairo_surface_t *surface);
 +
  /* Image-surface functions */
- 
+
  /**
   * cairo_format_t:
   * @CAIRO_FORMAT_ARGB32: each pixel is a 32-bit quantity, with

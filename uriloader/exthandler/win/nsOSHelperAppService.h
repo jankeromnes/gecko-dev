@@ -37,7 +37,7 @@ public:
 
   // method overrides for windows registry look up steps....
   already_AddRefed<nsIMIMEInfo> GetMIMEInfoFromOS(const nsACString& aMIMEType, const nsACString& aFileExt, bool *aFound);
-  NS_IMETHOD GetProtocolHandlerInfoFromOS(const nsACString &aScheme, 
+  NS_IMETHOD GetProtocolHandlerInfoFromOS(const nsACString &aScheme,
                                           bool *found,
                                           nsIHandlerInfo **_retval);
   virtual bool GetMIMETypeFromOSForExtension(const nsACString& aExtension,

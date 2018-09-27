@@ -27,14 +27,14 @@ function handleRequest(request, response)
   for (var i=0; i < strings_to_send.length; ++i) {
     b += strings_to_send[i].length;
   }
-  
+
   response.seizePower();
   response.write("HTTP/1.1 200 OK\r\n")
   response.write("Content-Length: " + b + "\r\n");
   response.write("Content-Type: text/event-stream; charset=utf-8\r\n");
   response.write("Cache-Control: no-cache, must-revalidate\r\n");
   response.write("\r\n");
-  
+
   resp = response;
 
   timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);

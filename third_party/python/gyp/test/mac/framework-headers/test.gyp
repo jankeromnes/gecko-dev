@@ -3,7 +3,7 @@
 # found in the LICENSE file.
 {
   'targets': [
-    {    
+    {
       'target_name': 'test_framework_headers_framework',
       'product_name': 'TestFramework',
       'type': 'shared_library',
@@ -20,13 +20,13 @@
           '$(SDKROOT)/System/Library/Frameworks/Foundation.framework',
         ],
       },
-    },{    
+    },{
       'target_name': 'test_framework_headers_static',
       'product_name': 'TestLibrary',
       'type': 'static_library',
       'xcode_settings': {
         'PUBLIC_HEADERS_FOLDER_PATH': 'include',
-      },      
+      },
       'sources': [
         'myframework.h',
         'myframework.m',
@@ -38,7 +38,7 @@
         'libraries': [
           '$(SDKROOT)/System/Library/Frameworks/Foundation.framework',
         ],
-      },      
-    },  
+      },
+    },
   ],
 }

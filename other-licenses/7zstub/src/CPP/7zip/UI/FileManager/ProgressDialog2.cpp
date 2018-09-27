@@ -250,7 +250,7 @@ CProgressDialog::CProgressDialog():
   _needClose = false;
   _inCancelMessageBox = false;
   _externalCloseMessageWasReceived = false;
-  
+
   _numPostedMessages = 0;
   _numAutoSizeMessages = 0;
   _errorsWereDisplayed = false;
@@ -340,7 +340,7 @@ bool CProgressDialog::OnInit()
 
   INIT_AS_UNDEFINED(_prevSpeed);
   _prevSpeed_MoveBits = 0;
-  
+
   _prevTime = ::GetTickCount();
   _elapsedTime = 0;
 
@@ -425,7 +425,7 @@ static const UINT kIDs[] =
   IDT_PROGRESS_FILES,     IDT_PROGRESS_FILES_VAL,
   IDT_PROGRESS_RATIO,     IDT_PROGRESS_RATIO_VAL,
   IDT_PROGRESS_ERRORS,    IDT_PROGRESS_ERRORS_VAL,
-  
+
   IDT_PROGRESS_TOTAL,     IDT_PROGRESS_TOTAL_VAL,
   IDT_PROGRESS_SPEED,     IDT_PROGRESS_SPEED_VAL,
   IDT_PROGRESS_PROCESSED, IDT_PROGRESS_PROCESSED_VAL,
@@ -825,7 +825,7 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
         needSetTitle = true;
       }
     }
-    
+
     {
       wchar_t s[64];
       ConvertUInt64ToString(completedFiles, s);
@@ -840,7 +840,7 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
         SetItemText(IDT_PROGRESS_FILES_VAL, s);
       }
     }
-    
+
     const UInt64 packSize   = CompressingMode ? outSize : inSize;
     const UInt64 unpackSize = CompressingMode ? inSize : outSize;
 
@@ -854,7 +854,7 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     {
       ShowSize(IDT_PROGRESS_PROCESSED_VAL, unpackSize, _processed_Prev);
       ShowSize(IDT_PROGRESS_PACKED_VAL, packSize, _packed_Prev);
-      
+
       if (IS_DEFINED_VAL(packSize) &&
           IS_DEFINED_VAL(unpackSize) &&
           unpackSize != 0)
@@ -941,7 +941,7 @@ INT_PTR CProgressDialog::Create(const UString &title, NWindows::CThread &thread,
     {
       CWaitCursor waitCursor;
       HANDLE h[] = { thread, _createDialogEvent };
-      
+
       WRes res2 = WaitForMultipleObjects(ARRAY_SIZE(h), h, FALSE, kCreateDelay);
       if (res2 == WAIT_OBJECT_0 && !Sync.ThereIsMessage())
         return 0;
@@ -972,7 +972,7 @@ bool CProgressDialog::OnExternalCloseMessage()
   // SetText(L"Finished2 ");
 
   UpdateStatInfo(true);
-  
+
   SetItemText(IDCANCEL, LangString(IDS_CLOSE));
   ::SendMessage(GetItem(IDCANCEL), BM_SETSTYLE, BS_DEFPUSHBUTTON, MAKELPARAM(TRUE, 0));
   HideItem(IDB_PROGRESS_BACKGROUND);
@@ -1199,7 +1199,7 @@ bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
         End(IDCLOSE);
         break;
       }
-        
+
       bool paused = Sync.Get_Paused();
       if (!paused)
         OnPauseButton();
@@ -1244,7 +1244,7 @@ void CProgressDialog::ProcessWasFinished()
   // Set Window title here.
   if (!WaitMode)
     WaitCreating();
-  
+
   if (_wasCreated)
     PostMsg(kCloseMessage);
   else

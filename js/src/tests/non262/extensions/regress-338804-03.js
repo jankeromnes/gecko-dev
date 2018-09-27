@@ -25,5 +25,5 @@ function fillHeap() {
     tmp = x / 3;
   }
 }
- 
+
 reportCompare(expect, actual, summary);

@@ -88,7 +88,7 @@ converts, or transcodes, each given
 .I file
 is specified) from one
 .I encoding
-to another. 
+to another.
 The transcoding is done using Unicode as a pivot encoding
 (i.e. the data are first transcoded from their original encoding to
 Unicode, and then from Unicode to the destination encoding).
@@ -136,7 +136,7 @@ and ICU are the same as the ones used by
 .BR iconv (1).
 Also, options that provide informational data, such as the
 .B \-l\fP, \fB\-\-list
-one offered by some 
+one offered by some
 .BR iconv (1)
 variants such as GNU's, produce data in a slightly different and
 easier to parse format.
@@ -241,7 +241,7 @@ bytes at a time. The default block size is
 4096.
 .TP
 .BI "\-f\fP, \fB\-\-from\-code" " encoding"
-Set the original encoding of the data to 
+Set the original encoding of the data to
 .IR encoding .
 .TP
 .BI "\-t\fP, \fB\-\-to\-code" " encoding"
@@ -403,7 +403,7 @@ in this example):
 .br
 {KATAKANA LETTER KA}{LINE FEED}
 .br
-$ 
+$
 .RE
 
 (The names are delimited by curly braces.

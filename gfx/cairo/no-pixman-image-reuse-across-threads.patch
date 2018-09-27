@@ -13,13 +13,13 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
      }
      return fabs (*tx) < PIXMAN_MAX_INT && fabs (*ty) < PIXMAN_MAX_INT;
  }
- 
+
 -#if HAS_ATOMIC_OPS
 +#if PIXMAN_HAS_ATOMIC_OPS
  static pixman_image_t *__pixman_transparent_image;
  static pixman_image_t *__pixman_black_image;
  static pixman_image_t *__pixman_white_image;
- 
+
  static pixman_image_t *
  _pixman_transparent_image (void)
  {
@@ -30,7 +30,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
      } else {
  	pixman_image_ref (image);
      }
- 
+
      return image;
  }
 -#else
@@ -50,7 +50,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
 -    return _pixman_image_for_solid (&_cairo_pattern_white);
 -}
 -#endif
- 
+
  static uint32_t
  hars_petruska_f54_1_random (void)
  {
@@ -59,13 +59,13 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
      return x = (x ^ rol (x, 5) ^ rol (x, 24)) + 0x37798849;
  #undef rol
  }
- 
+
  static struct {
      cairo_color_t color;
      pixman_image_t *image;
  } cache[16];
  static int n_cached;
- 
+
 +#else  /* !PIXMAN_HAS_ATOMIC_OPS */
 +static pixman_image_t *
 +_pixman_transparent_image (void)
@@ -92,20 +92,20 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
 +#if PIXMAN_HAS_ATOMIC_OPS
      while (n_cached)
  	pixman_image_unref (cache[--n_cached].image);
- 
+
 -#if HAS_ATOMIC_OPS
      if (__pixman_transparent_image) {
  	pixman_image_unref (__pixman_transparent_image);
  	__pixman_transparent_image = NULL;
      }
- 
+
      if (__pixman_black_image) {
  	pixman_image_unref (__pixman_black_image);
  	__pixman_black_image = NULL;
 @@ -1026,19 +1029,20 @@ void
  #endif
  }
- 
+
  static pixman_image_t *
  _pixman_image_for_solid (const cairo_solid_pattern_t *pattern)
  {
@@ -114,18 +114,18 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
 +
 +#if PIXMAN_HAS_ATOMIC_OPS
      int i;
- 
+
 -#if HAS_ATOMIC_OPS
      if (pattern->color.alpha_short <= 0x00ff)
  	return _pixman_transparent_image ();
- 
+
      if (pattern->color.alpha_short >= 0xff00) {
  	if (pattern->color.red_short <= 0x00ff &&
  	    pattern->color.green_short <= 0x00ff &&
  	    pattern->color.blue_short <= 0x00ff)
  	{
 @@ -1047,46 +1051,48 @@ static pixman_image_t *
- 
+
  	if (pattern->color.red_short >= 0xff00 &&
  	    pattern->color.green_short >= 0xff00 &&
  	    pattern->color.blue_short >= 0xff00)
@@ -134,7 +134,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  	}
      }
 -#endif
- 
+
      CAIRO_MUTEX_LOCK (_cairo_image_solid_cache_mutex);
      for (i = 0; i < n_cached; i++) {
  	if (_cairo_color_equal (&cache[i].color, &pattern->color)) {
@@ -143,17 +143,17 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  	}
      }
 +#endif
- 
+
      color.red   = pattern->color.red_short;
      color.green = pattern->color.green_short;
      color.blue  = pattern->color.blue_short;
      color.alpha = pattern->color.alpha_short;
- 
+
      image = pixman_image_create_solid_fill (&color);
 +#if PIXMAN_HAS_ATOMIC_OPS
      if (image == NULL)
  	goto UNLOCK;
- 
+
      if (n_cached < ARRAY_LENGTH (cache)) {
  	i = n_cached++;
      } else {
@@ -162,13 +162,13 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
      }
      cache[i].image = pixman_image_ref (image);
      cache[i].color = pattern->color;
- 
+
  UNLOCK:
      CAIRO_MUTEX_UNLOCK (_cairo_image_solid_cache_mutex);
 +#endif
      return image;
  }
- 
+
  static double
  clamp (double val, double min, double max)
  {
@@ -182,7 +182,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  		    return _pixel_to_solid (source, sample.x, sample.y);
  		}
  	    }
- 
+
 +#if PIXMAN_HAS_ATOMIC_OPS
  	    /* avoid allocating a 'pattern' image if we can reuse the original */
  	    if (extend == CAIRO_EXTEND_NONE &&
@@ -194,7 +194,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  		return pixman_image_ref (source->pixman_image);
  	    }
 +#endif
- 
+
  	    pixman_image = pixman_image_create_bits (source->pixman_format,
  						     source->width,
  						     source->height,
@@ -210,7 +210,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  			return _pixman_transparent_image ();
  		}
  	    }
- 
+
 +#if PIXMAN_HAS_ATOMIC_OPS
  	    if (is_contained &&
  		_cairo_matrix_is_translation (&pattern->base.matrix) &&
@@ -221,7 +221,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  		return pixman_image_ref (source->pixman_image);
  	    }
 +#endif
- 
+
  	    /* Avoid sub-byte offsets, force a copy in that case. */
  	    if (PIXMAN_FORMAT_BPP (source->pixman_format) >= 8) {
 +		void *data = source->data
@@ -238,5 +238,5 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  	    }
  	}
      }
- 
+
      if (pixman_image == NULL) {

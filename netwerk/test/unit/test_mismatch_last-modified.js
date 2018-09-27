@@ -29,11 +29,11 @@ var listener_3 = {
     },
 
     onStartRequest: function test_onStartR(request, ctx) {},
-    
+
     onDataAvailable: function test_ODA(request, cx, inputStream,
                                        offset, count) {
 	var data = new BinaryInputStream(inputStream).readByteArray(count);
-      
+
 	Assert.equal(data[0], "B".charCodeAt(0));
     },
 
@@ -56,14 +56,14 @@ XPCOMUtils.defineLazyGetter(this, "listener_2", function() {
     },
 
     onStartRequest: function test_onStartR(request, ctx) {},
-    
+
     onDataAvailable: function test_ODA(request, cx, inputStream,
                                        offset, count) {
 	var data = new BinaryInputStream(inputStream).readByteArray(count);
-      
+
 	// This is 'A' from a cache revalidation, but that reval will clean the cache
 	// because of mismatched last-modified response headers
-	
+
 	Assert.equal(data[0], "A".charCodeAt(0));
     },
 
@@ -92,7 +92,7 @@ XPCOMUtils.defineLazyGetter(this, "listener_1", function() {
     },
 
     onStartRequest: function test_onStartR(request, ctx) {},
-    
+
     onDataAvailable: function test_ODA(request, cx, inputStream,
                                        offset, count) {
 	var data = new BinaryInputStream(inputStream).readByteArray(count);
@@ -136,7 +136,7 @@ function handler(metadata, response) {
     if (metadata.hasHeader("If-Modified-Since")) {
 	response.setStatusLine(metadata.httpVersion, 304, "Not Modified");
 	response.setHeader("Last-Modified", "Tue, 15 Nov 1994 12:45:26 GMT", false);
-    }    
+    }
     else {
 	response.setStatusLine(metadata.httpVersion, 200, "OK");
 	response.setHeader("Cache-Control", "max-age=0", false)

@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" 
+<svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
      onload="boom();"
     class="reftest-wait">
-     
+
 <script>
 
 function boom()
@@ -12,10 +12,10 @@ function boom()
 
   grad1.appendChild(grad2);
 
-  setTimeout(function() { 
+  setTimeout(function() {
     grad1.removeChild(grad2);
     document.documentElement.removeAttribute("class");
-  }, 30);  
+  }, 30);
 }
 
 </script>

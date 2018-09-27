@@ -15,7 +15,7 @@
   <!--=  All Rights Reserved.                                              =-->
   <!--=  See http://www.w3.org/Consortium/Legal/.                          =-->
   <!--======================================================================-->
-  
+
   <title id="test-title">$RCSfile: text-dom-04-f.svg,v $</title>
   <defs>
     <font-face
@@ -47,10 +47,10 @@
 			var r = document.getElementById("r");
 			var res = document.getElementById("res");
 			var isPassed = true;
-			
+
 			// string:  abca&#x1D352;cb
 			// indices: 0123   4  5  67
-			
+
 			var tests = new Array("getSubStringLength(0,1)", "4100", 	// 'a'
 								  "getSubStringLength(0,2)", "6100", 	// 'ab'
 								  "getSubStringLength(0,3)", "7500", 	// 'abc'
@@ -78,7 +78,7 @@
 								  "getSubStringLength(5,0)", "0",		// high surrogate of 1D352
 								  "getSubStringLength(4,0)", "0"		// low surrogate of 1D352
 								  );
-			
+
 			try
 			{
 				for(var i = 0; i < tests.length; i=i+2)
@@ -98,7 +98,7 @@
 							val = e;
 						}
 					}
-					
+
 					if(val != tests[i+1])
 					{
 						throw "Failed " + tests[i] + " got " + val + " but expected " + tests[i+1];
@@ -110,14 +110,14 @@
 				isPassed = false;
 				res.textContent = f;
 			}
-			
+
 			if(isPassed)
 			{
 				r.setAttribute("fill", "none");
 			}
 		}
 	]]></script>
-	
+
 	<g transform="scale(0.02 0.02) translate(4000 2000)">
 		<g id="reference" fill="red">
 			<path d="M0 4000l2000 -4000l2000 4000Z" transform="scale(1 -1) translate(0 -8000)"/>
@@ -127,7 +127,7 @@
 			<path d="M1000,0 h1000 v-1000 h-1000 z" transform="scale(1 -1) translate(11600 -8000)"/>
 			<path d="M0 0l2000 2000l-2000 2000Z" transform="scale(1 -1) translate(13700 -8000)"/>
 		</g>
-		
+
 		<text id="t" font-family="simplesvgfont" font-size="4000" y="2em" fill="lime">abca&#x1D352;cb</text>
 		<rect id="r" x="5000" y="10%" width="2000" height="2000" fill="red"/>
 		<text id="res" x="50%" text-anchor="middle" font-family="sans-serif" font-size="200" y="80%"></text>

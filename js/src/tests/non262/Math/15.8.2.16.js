@@ -79,12 +79,12 @@ new TestCase(
 	      Math.sin(0.7853981633974));
 
 new TestCase(
-	      "Math.sin(1.570796326795)",	
+	      "Math.sin(1.570796326795)",
 	      1,
 	      Math.sin(1.570796326795));
 
 new TestCase(
-	      "Math.sin(2.356194490192)",	
+	      "Math.sin(2.356194490192)",
 	      0.7071067811865,
 	      Math.sin(2.356194490192));
 

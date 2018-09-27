@@ -51,7 +51,7 @@ inline uint8_t ClampColor(T aColor)
 
 // Fast approximate division by 255. It has the property that
 // for all 0 <= n <= 255*255, FAST_DIVIDE_BY_255(n) == n/255.
-// But it only uses two adds and two shifts instead of an 
+// But it only uses two adds and two shifts instead of an
 // integer division (which is expensive on many processors).
 //
 // equivalent to target=v/255

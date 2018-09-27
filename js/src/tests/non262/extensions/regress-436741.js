@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof window == 'undefined')
   {
     print('This test is only meaningful in the browser.');

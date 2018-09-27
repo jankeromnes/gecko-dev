@@ -7,7 +7,7 @@ esid: prod-NumericLiteralSeparator
 description: NumericLiteralSeparator is not valid on string conversions for ToNumber operations
 info: |
   DecimalDigits NumericLiteralSeparator DecimalDigit
-  
+
   NumericLiteralSeparator ::
     _
 

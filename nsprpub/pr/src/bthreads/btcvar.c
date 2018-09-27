@@ -49,7 +49,7 @@ PR_IMPLEMENT(void)
 {
     status_t result = delete_sem( cvar->sem );
     PR_ASSERT( result == B_NO_ERROR );
-    
+
     result = delete_sem( cvar->handshakeSem );
     PR_ASSERT( result == B_NO_ERROR );
 
@@ -91,38 +91,38 @@ PR_IMPLEMENT(PRStatus)
     PR_WaitCondVar (PRCondVar *cvar, PRIntervalTime timeout)
 {
     status_t err;
-    if( timeout == PR_INTERVAL_NO_WAIT ) 
+    if( timeout == PR_INTERVAL_NO_WAIT )
     {
         PR_Unlock( cvar->lock );
         PR_Lock( cvar->lock );
         return PR_SUCCESS;
     }
 
-    if( atomic_add( &cvar->signalBenCount, 1 ) > 0 ) 
+    if( atomic_add( &cvar->signalBenCount, 1 ) > 0 )
     {
-        if (acquire_sem(cvar->signalSem) == B_INTERRUPTED) 
+        if (acquire_sem(cvar->signalSem) == B_INTERRUPTED)
         {
             atomic_add( &cvar->signalBenCount, -1 );
             return PR_FAILURE;
         }
     }
     cvar->nw += 1;
-    if( atomic_add( &cvar->signalBenCount, -1 ) > 1 ) 
+    if( atomic_add( &cvar->signalBenCount, -1 ) > 1 )
     {
         release_sem_etc(cvar->signalSem, 1, B_DO_NOT_RESCHEDULE);
     }
 
     PR_Unlock( cvar->lock );
-    if( timeout==PR_INTERVAL_NO_TIMEOUT ) 
+    if( timeout==PR_INTERVAL_NO_TIMEOUT )
     {
     	err = acquire_sem(cvar->sem);
-    } 
-    else 
+    }
+    else
     {
     	err = acquire_sem_etc(cvar->sem, 1, B_RELATIVE_TIMEOUT, PR_IntervalToMicroseconds(timeout) );
     }
 
-    if( atomic_add( &cvar->signalBenCount, 1 ) > 0 ) 
+    if( atomic_add( &cvar->signalBenCount, 1 ) > 0 )
     {
         while (acquire_sem(cvar->signalSem) == B_INTERRUPTED);
     }
@@ -133,13 +133,13 @@ PR_IMPLEMENT(PRStatus)
         cvar->ns -= 1;
     }
     cvar->nw -= 1;
-    if( atomic_add( &cvar->signalBenCount, -1 ) > 1 ) 
+    if( atomic_add( &cvar->signalBenCount, -1 ) > 1 )
     {
         release_sem_etc(cvar->signalSem, 1, B_DO_NOT_RESCHEDULE);
     }
 
     PR_Lock( cvar->lock );
-    if(err!=B_NO_ERROR) 
+    if(err!=B_NO_ERROR)
     {
         return PR_FAILURE;
     }
@@ -150,7 +150,7 @@ PR_IMPLEMENT(PRStatus)
 ** Notify ONE thread that is currently waiting on 'cvar'. Which thread is
 ** dependent on the implementation of the runtime. Common sense would dictate
 ** that all threads waiting on a single condition have identical semantics,
-** therefore which one gets notified is not significant. 
+** therefore which one gets notified is not significant.
 **
 ** The calling thead must hold the lock that protects the condition, as
 ** well as the invariants that are tightly bound to the condition, when
@@ -163,9 +163,9 @@ PR_IMPLEMENT(PRStatus)
     PR_NotifyCondVar (PRCondVar *cvar)
 {
     status_t err ;
-    if( atomic_add( &cvar->signalBenCount, 1 ) > 0 ) 
+    if( atomic_add( &cvar->signalBenCount, 1 ) > 0 )
     {
-        if (acquire_sem(cvar->signalSem) == B_INTERRUPTED) 
+        if (acquire_sem(cvar->signalSem) == B_INTERRUPTED)
         {
             atomic_add( &cvar->signalBenCount, -1 );
             return PR_FAILURE;
@@ -175,14 +175,14 @@ PR_IMPLEMENT(PRStatus)
     {
         cvar->ns += 1;
         release_sem_etc(cvar->sem, 1, B_DO_NOT_RESCHEDULE);
-        if( atomic_add( &cvar->signalBenCount, -1 ) > 1 ) 
+        if( atomic_add( &cvar->signalBenCount, -1 ) > 1 )
         {
             release_sem_etc(cvar->signalSem, 1, B_DO_NOT_RESCHEDULE);
         }
 
-        while (acquire_sem(cvar->handshakeSem) == B_INTERRUPTED) 
+        while (acquire_sem(cvar->handshakeSem) == B_INTERRUPTED)
         {
-            err = B_INTERRUPTED; 
+            err = B_INTERRUPTED;
         }
     }
     else
@@ -192,7 +192,7 @@ PR_IMPLEMENT(PRStatus)
             release_sem_etc(cvar->signalSem, 1, B_DO_NOT_RESCHEDULE);
         }
     }
-    return PR_SUCCESS; 
+    return PR_SUCCESS;
 }
 
 /*
@@ -209,9 +209,9 @@ PR_IMPLEMENT(PRStatus)
     int32 handshakes;
     status_t err = B_OK;
 
-    if( atomic_add( &cvar->signalBenCount, 1 ) > 0 ) 
+    if( atomic_add( &cvar->signalBenCount, 1 ) > 0 )
     {
-        if (acquire_sem(cvar->signalSem) == B_INTERRUPTED) 
+        if (acquire_sem(cvar->signalSem) == B_INTERRUPTED)
         {
             atomic_add( &cvar->signalBenCount, -1 );
             return PR_FAILURE;
@@ -221,21 +221,21 @@ PR_IMPLEMENT(PRStatus)
     if (cvar->nw > cvar->ns)
     {
         handshakes = cvar->nw - cvar->ns;
-        cvar->ns = cvar->nw;				
-        release_sem_etc(cvar->sem, handshakes, B_DO_NOT_RESCHEDULE);	
-        if( atomic_add( &cvar->signalBenCount, -1 ) > 1 ) 
+        cvar->ns = cvar->nw;
+        release_sem_etc(cvar->sem, handshakes, B_DO_NOT_RESCHEDULE);
+        if( atomic_add( &cvar->signalBenCount, -1 ) > 1 )
         {
             release_sem_etc(cvar->signalSem, 1, B_DO_NOT_RESCHEDULE);
         }
 
-        while (acquire_sem_etc(cvar->handshakeSem, handshakes, 0, 0) == B_INTERRUPTED) 
+        while (acquire_sem_etc(cvar->handshakeSem, handshakes, 0, 0) == B_INTERRUPTED)
         {
-            err = B_INTERRUPTED; 
+            err = B_INTERRUPTED;
         }
     }
     else
     {
-        if( atomic_add( &cvar->signalBenCount, -1 ) > 1 ) 
+        if( atomic_add( &cvar->signalBenCount, -1 ) > 1 )
         {
             release_sem_etc(cvar->signalSem, 1, B_DO_NOT_RESCHEDULE);
         }

@@ -53,7 +53,7 @@ function b()
 
   for (i=0; i<i2; i++) {n[i] = 0;}
   i = 0;
- 
+
   while (k++ <= i2)
   {
     switch (j = (k*73)%i2)

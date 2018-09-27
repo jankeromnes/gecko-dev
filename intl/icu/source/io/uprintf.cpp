@@ -109,7 +109,7 @@ u_printf_pad_and_justify(void                        *context,
     return written;
 }
 
-U_CAPI int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2
 u_fprintf(    UFILE        *f,
           const char    *patternSpecification,
           ... )
@@ -136,7 +136,7 @@ u_printf(const char *patternSpecification,
     return count;
 }
 
-U_CAPI int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2
 u_fprintf_u(    UFILE        *f,
             const UChar    *patternSpecification,
             ... )

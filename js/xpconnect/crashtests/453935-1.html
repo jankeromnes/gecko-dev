@@ -21,7 +21,7 @@ function boom()
 function search(a, start)
 {
   var N = a.length;
-  
+
   for (var j = start; j < N; ++j) {
     var e = a[j];
     if (typeof e == "object" && "nodeType" in e && e.nodeType == 99)

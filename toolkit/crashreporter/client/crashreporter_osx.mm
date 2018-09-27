@@ -184,7 +184,7 @@ static bool RestartApplication()
     [userDefaults setBool:submitChecked forKey:@"submitReport"];
   }
   [mSubmitReportButton setState:(submitChecked ? NSOnState : NSOffState)];
-  
+
   [self updateSubmit];
   [self updateURL];
   [self updateEmail];
@@ -388,7 +388,7 @@ static bool RestartApplication()
     // between the buttons
     float neededWidth = closeFrame.size.width + restartFrame.size.width +
                         2*20 + 12;
-    
+
     if (neededWidth > windowFrame.size.width) {
       windowFrame.size.width = neededWidth;
       [mWindow setFrame:windowFrame display: true animate: NO];
@@ -725,7 +725,7 @@ static bool RestartApplication()
   if (gRTLlayout)
     [mPlaceHolderString setAlignment:NSRightTextAlignment
      range:NSMakeRange(0, [placeholder length])];
-  
+
 }
 
 - (void)insertTab:(id)sender

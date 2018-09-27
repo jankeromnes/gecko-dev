@@ -25,7 +25,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=402210
   <a id="testlink">Test Link</a>
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -35,10 +35,10 @@ SimpleTest.waitForExplicitFinish();
 function runTest() {
   $("testlink").href = "https:example.com";
   is($("testlink").href, "https://example.com/", "Setting href on an anchor tag should fixup missing slashes after https protocol");
-  
+
   $("testlink").href = "ftp:example.com";
   is($("testlink").href, "ftp://example.com/", "Setting href on an anchor tag should fixup missing slashes after non-http protocol");
-  
+
   SimpleTest.finish();
 }
 

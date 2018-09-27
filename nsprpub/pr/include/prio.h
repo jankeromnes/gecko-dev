@@ -498,7 +498,7 @@ NSPR_API(PRFileDesc*) PR_CreateIOLayerStub(
  * A new stack may be created by calling PR_CreateIOLayer(). The
  * file descriptor returned will point to the top of the stack, which has
  * the layer 'fd' as the topmost layer.
- * 
+ *
  * NOTE: This function creates a new style stack, which has a fixed, dummy
  * header. The old style stack, created by a call to PR_PushIOLayer,
  * results in modifying contents of the top layer of the stack, when
@@ -562,7 +562,7 @@ NSPR_API(PRFileDesc*) PR_PopIOLayer(PRFileDesc *fd_stack, PRDescIdentity id);
  *                              the file prior to each write.
  *		PR_TRUNCATE      If the file exists, its length is truncated to 0.
  *      PR_EXCL          With PR_CREATE_FILE, if the file does not exist,
- *                              the file is created. If the file already 
+ *                              the file is created. If the file already
  *                              exists, no action and NULL is returned
  *
  *     PRIntn mode
@@ -1425,8 +1425,8 @@ NSPR_API(PRStatus)    PR_Shutdown(PRFileDesc *fd, PRShutdownHow how);
  * FUNCTION: PR_Recv
  * DESCRIPTION:
  *    Receive a specified number of bytes from a connected socket.
- *     The operation will block until some positive number of bytes are 
- *     transferred, a time out has occurred, or there is an error. 
+ *     The operation will block until some positive number of bytes are
+ *     transferred, a time out has occurred, or there is an error.
  *     No more than 'amount' bytes will be transferred.
  * INPUTS:
  *     PRFileDesc *fd
@@ -1459,8 +1459,8 @@ NSPR_API(PRInt32)    PR_Recv(PRFileDesc *fd, void *buf, PRInt32 amount,
  * FUNCTION: PR_Send
  * DESCRIPTION:
  *    Send a specified number of bytes from a connected socket.
- *     The operation will block until all bytes are 
- *     processed, a time out has occurred, or there is an error. 
+ *     The operation will block until all bytes are
+ *     processed, a time out has occurred, or there is an error.
  * INPUTS:
  *     PRFileDesc *fd
  *       points to a PRFileDesc object representing a socket.
@@ -1491,8 +1491,8 @@ NSPR_API(PRInt32)    PR_Send(PRFileDesc *fd, const void *buf, PRInt32 amount,
  * DESCRIPTION:
  *     Receive up to a specified number of bytes from socket which may
  *     or may not be connected.
- *     The operation will block until one or more bytes are 
- *     transferred, a time out has occurred, or there is an error. 
+ *     The operation will block until one or more bytes are
+ *     transferred, a time out has occurred, or there is an error.
  *     No more than 'amount' bytes will be transferred.
  * INPUTS:
  *     PRFileDesc *fd
@@ -1526,8 +1526,8 @@ NSPR_API(PRInt32) PR_RecvFrom(
  * FUNCTION: PR_SendTo
  * DESCRIPTION:
  *    Send a specified number of bytes from an unconnected socket.
- *    The operation will block until all bytes are 
- *    sent, a time out has occurred, or there is an error. 
+ *    The operation will block until all bytes are
+ *    sent, a time out has occurred, or there is an error.
  * INPUTS:
  *     PRFileDesc *fd
  *       points to a PRFileDesc object representing an unconnected socket.
@@ -1558,10 +1558,10 @@ NSPR_API(PRInt32) PR_SendTo(
 *************************************************************************
 ** FUNCTION: PR_TransmitFile
 ** DESCRIPTION:
-**    Transmitfile sends a complete file (sourceFile) across a socket 
+**    Transmitfile sends a complete file (sourceFile) across a socket
 **    (networkSocket).  If headers is non-NULL, the headers will be sent across
 **    the socket prior to sending the file.
-** 
+**
 **    Optionally, the PR_TRANSMITFILE_CLOSE_SOCKET flag may be passed to
 **    transmitfile.  This flag specifies that transmitfile should close the
 **    socket after sending the data.
@@ -1578,7 +1578,7 @@ NSPR_API(PRInt32) PR_SendTo(
 **    PRTransmitFileFlags       flags
 **        If the flags indicate that the connection should be closed,
 **        it will be done immediately after transferring the file, unless
-**        the operation is unsuccessful. 
+**        the operation is unsuccessful.
 .*     PRIntervalTime timeout
  *        Time limit for completion of the transmit operation.
 **
@@ -1599,12 +1599,12 @@ NSPR_API(PRInt32) PR_TransmitFile(
 *************************************************************************
 ** FUNCTION: PR_SendFile
 ** DESCRIPTION:
-**    PR_SendFile sends data from a file (sendData->fd) across a socket 
+**    PR_SendFile sends data from a file (sendData->fd) across a socket
 **    (networkSocket).  If specified, a header and/or trailer buffer are sent
 **	  before and after the file, respectively. The file offset, number of bytes
 ** 	  of file data to send, the header and trailer buffers are specified in the
 **	  sendData argument.
-** 
+**
 **    Optionally, if the PR_TRANSMITFILE_CLOSE_SOCKET flag is passed, the
 **    socket is closed after successfully sending the data.
 **
@@ -1617,7 +1617,7 @@ NSPR_API(PRInt32) PR_TransmitFile(
 **    PRTransmitFileFlags       flags
 **        If the flags indicate that the connection should be closed,
 **        it will be done immediately after transferring the file, unless
-**        the operation is unsuccessful. 
+**        the operation is unsuccessful.
 .*     PRIntervalTime timeout
  *        Time limit for completion of the send operation.
 **
@@ -1652,15 +1652,15 @@ NSPR_API(PRInt32) PR_SendFile(
 ** DESCRIPTION:
 **    AcceptRead accepts a new connection, returns the newly created
 **    socket's descriptor and also returns the connecting peer's address.
-**    AcceptRead, as its name suggests, also receives the first block of data 
+**    AcceptRead, as its name suggests, also receives the first block of data
 **    sent by the peer.
 **
 ** INPUTS:
 **    PRFileDesc *listenSock
-**        A socket descriptor that has been called with the PR_Listen() 
+**        A socket descriptor that has been called with the PR_Listen()
 **        function, also known as the rendezvous socket.
 **    void *buf
-**        A pointer to a buffer to receive data sent by the client.  This 
+**        A pointer to a buffer to receive data sent by the client.  This
 **        buffer must be large enough to receive <amount> bytes of data
 **        and two PRNetAddr structures, plus an extra 32 bytes. See:
 **        PR_ACCEPT_READ_BUF_OVERHEAD.
@@ -1669,9 +1669,9 @@ NSPR_API(PRInt32) PR_SendFile(
 **        the size of the PRNetAddr structures.  If 0, no data will be read
 **        from the client.
 **    PRIntervalTime timeout
-**        The timeout interval only applies to the read portion of the 
-**        operation.  PR_AcceptRead will block indefinitely until the 
-**        connection is accepted; the read will timeout after the timeout 
+**        The timeout interval only applies to the read portion of the
+**        operation.  PR_AcceptRead will block indefinitely until the
+**        connection is accepted; the read will timeout after the timeout
 **        interval elapses.
 ** OUTPUTS:
 **    PRFileDesc **acceptedSock
@@ -1681,13 +1681,13 @@ NSPR_API(PRInt32) PR_SendFile(
 **        The address of the remote socket.  This parameter will only be
 **        valid if the function return does not indicate failure.  The
 **        returned address is not guaranteed to be properly aligned.
-** 
+**
 ** RETURNS:
-**     The number of bytes read from the client or -1 on failure.  The reason 
+**     The number of bytes read from the client or -1 on failure.  The reason
 **     for the failure is obtained by calling PR_GetError().
 **************************************************************************
-**/       
-/* define buffer overhead constant. Add this value to the user's 
+**/
+/* define buffer overhead constant. Add this value to the user's
 ** data length when allocating a buffer to accept data.
 **    Example:
 **    #define USER_DATA_SIZE 10
@@ -1714,7 +1714,7 @@ NSPR_API(PRInt32) PR_AcceptRead(
 **    PRFileDesc *fds[2]
 **        The file descriptor pair for the newly created TCP sockets.
 ** RETURN: PRStatus
-**     Upon successful completion of TCP socket pair, PR_NewTCPSocketPair 
+**     Upon successful completion of TCP socket pair, PR_NewTCPSocketPair
 **     returns PR_SUCCESS.  Otherwise, it returns PR_FAILURE.  Further
 **     failure information can be obtained by calling PR_GetError().
 ** XXX can we implement this on windoze and mac?
@@ -1735,8 +1735,8 @@ NSPR_API(PRStatus) PR_NewTCPSocketPair(PRFileDesc *fds[2]);
 **     PRNetAddr *addr
 **       Returns the address of the socket in its own communication space.
 ** RETURN: PRStatus
-**     Upon successful completion, PR_GetSockName returns PR_SUCCESS.  
-**     Otherwise, it returns PR_FAILURE.  Further failure information can 
+**     Upon successful completion, PR_GetSockName returns PR_SUCCESS.
+**     Otherwise, it returns PR_FAILURE.  Further failure information can
 **     be obtained by calling PR_GetError().
 **************************************************************************
 **/
@@ -1746,7 +1746,7 @@ NSPR_API(PRStatus)	PR_GetSockName(PRFileDesc *fd, PRNetAddr *addr);
 *************************************************************************
 ** FUNCTION: PR_GetPeerName
 ** DESCRIPTION:
-**    Get name of the connected peer.  Return the network address for the 
+**    Get name of the connected peer.  Return the network address for the
 **    connected peer socket.
 **
 ** INPUTS:
@@ -1757,8 +1757,8 @@ NSPR_API(PRStatus)	PR_GetSockName(PRFileDesc *fd, PRNetAddr *addr);
 **       Returns the address of the connected peer in its own communication
 **       space.
 ** RETURN: PRStatus
-**     Upon successful completion, PR_GetPeerName returns PR_SUCCESS.  
-**     Otherwise, it returns PR_FAILURE.  Further failure information can 
+**     Upon successful completion, PR_GetPeerName returns PR_SUCCESS.
+**     Otherwise, it returns PR_FAILURE.  Further failure information can
 **     be obtained by calling PR_GetError().
 **************************************************************************
 **/
@@ -1792,8 +1792,8 @@ NSPR_API(PRStatus)	PR_SetSocketOption(
  *       by a child process.  If PR_FALSE, the file descriptor is set
  *       to be not inheritable by a child process.
  * RETURN: PRStatus
- *     Upon successful completion, PR_SetFDInheritable returns PR_SUCCESS.  
- *     Otherwise, it returns PR_FAILURE.  Further failure information can 
+ *     Upon successful completion, PR_SetFDInheritable returns PR_SUCCESS.
+ *     Otherwise, it returns PR_FAILURE.  Further failure information can
  *     be obtained by calling PR_GetError().
  *************************************************************************
  */
@@ -1812,7 +1812,7 @@ NSPR_API(PRStatus) PR_SetFDInheritable(
  *       The name of the inherited file descriptor.
  * RETURN: PRFileDesc *
  *     Upon successful completion, PR_GetInheritedFD returns the
- *     inherited file descriptor with the specified name.  Otherwise,  
+ *     inherited file descriptor with the specified name.  Otherwise,
  *     it returns NULL.  Further failure information can be obtained
  *     by calling PR_GetError().
  *************************************************************************

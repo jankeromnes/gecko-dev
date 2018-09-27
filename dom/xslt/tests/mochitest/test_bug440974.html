@@ -12,7 +12,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=440974
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=440974">Mozilla Bug 440974</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -37,8 +37,8 @@ var processor = new XSLTProcessor;
 processor.importStylesheet(xsltdoc);
 var result = processor.transformToDocument(xmldoc);
 var resultElements = Array.prototype.filter.call(result.getElementsByTagName('*'), isTxResult);
-is(resultElements.length, 1, "there should be only one 'transformiix:result' element"); 
-is(resultElements[0], result.documentElement, "the 'transformiix:result' element should be the document element"); 
+is(resultElements.length, 1, "there should be only one 'transformiix:result' element");
+is(resultElements[0], result.documentElement, "the 'transformiix:result' element should be the document element");
 
 </script>
 </pre>

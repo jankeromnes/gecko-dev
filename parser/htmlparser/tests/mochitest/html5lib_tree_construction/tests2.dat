@@ -638,8 +638,8 @@ x { content:"</style" } "
 |       <optgroup>
 
 #data
- 
- 
+
+
 #errors
 (2,1): expected-doctype-but-got-eof
 #document
@@ -719,7 +719,7 @@ x { content:"</style" } "
 |     "XX"
 
 #data
-<!DOCTYPE html>X</html> 
+<!DOCTYPE html>X</html>
 #errors
 #document
 | <!DOCTYPE html>

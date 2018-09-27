@@ -105,7 +105,7 @@ bool CrashGenerationServer::WaitForOneMessage() {
     switch (message.GetMessageID()) {
       case kDumpRequestMessage: {
         ExceptionInfo &info = (ExceptionInfo &)*message.GetData();
-      
+
         mach_port_t remote_task = message.GetTranslatedPort(0);
         mach_port_t crashing_thread = message.GetTranslatedPort(1);
         mach_port_t handler_thread = message.GetTranslatedPort(2);
@@ -119,7 +119,7 @@ bool CrashGenerationServer::WaitForOneMessage() {
 
           MinidumpGenerator generator(remote_task, handler_thread);
           dump_path = generator.UniqueNameInDirectory(dump_dir_, NULL);
-        
+
           if (info.exception_type && info.exception_code) {
             generator.SetExceptionInformation(info.exception_type,
                                               info.exception_code,
@@ -138,7 +138,7 @@ bool CrashGenerationServer::WaitForOneMessage() {
         // TODO(ted): support a way for the client to send additional data,
         // perhaps with a callback so users of the server can read the data
         // themselves?
-      
+
         if (ack_port != MACH_PORT_DEAD && ack_port != MACH_PORT_NULL) {
           MachPortSender sender(ack_port);
           MachSendMessage ack_message(kAcknowledgementMessage);

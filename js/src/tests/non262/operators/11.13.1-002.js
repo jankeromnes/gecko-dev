@@ -17,7 +17,7 @@ printStatus (summary);
 
 var re = /x/g;
 var y = re.lastIndex = "7";
- 
+
 expect = "string";
 actual = typeof y;
 

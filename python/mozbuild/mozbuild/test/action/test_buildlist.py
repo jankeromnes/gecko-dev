@@ -42,7 +42,7 @@ class TestBuildList(unittest.TestCase):
                    "ran out of expected lines! (expected '{0}', got '{1}')"
                    .format(l, lines))
       self.assertEqual(line, l.pop(0))
-    self.assert_(len(l) == 0, 
+    self.assert_(len(l) == 0,
                  "not enough lines in file! (expected '{0}',"
                  " got '{1}'".format(l, lines))
 

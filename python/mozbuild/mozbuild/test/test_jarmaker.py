@@ -219,7 +219,7 @@ class TestJarMaker(unittest.TestCase):
         # create reference
         refpath = os.path.join(self.refdir, 'chrome', 'test.jar', 'dir')
         os.makedirs(refpath)
-        open(os.path.join(refpath, 'foo'), 'w').write('content\n')        
+        open(os.path.join(refpath, 'foo'), 'w').write('content\n')
 
     def test_a_simple_jar(self):
         '''Test a simple jar.mn'''

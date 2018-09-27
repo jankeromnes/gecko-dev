@@ -164,7 +164,7 @@ ChangeStyleTransaction::DoTransaction()
   NS_ENSURE_TRUE(inlineStyles, NS_ERROR_NULL_POINTER);
 
   nsCOMPtr<nsICSSDeclaration> cssDecl = inlineStyles->Style();
- 
+
   nsAutoString propertyNameString;
   mProperty->ToString(propertyNameString);
 

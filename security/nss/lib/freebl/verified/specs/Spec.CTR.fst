@@ -55,7 +55,7 @@ let rec counter_mode_blocks ctx block_enc key nonce counter plain =
   Math.Lemmas.lemma_div_mod len (ctx.blocklen * ctx.incr) ;
   if len = 0 then Seq.createEmpty #UInt8.t
   else (
-    let prefix, block = split plain (len - ctx.blocklen * ctx.incr) in    
+    let prefix, block = split plain (len - ctx.blocklen * ctx.incr) in
       (* TODO: move to a single lemma for clarify *)
       Math.Lemmas.lemma_mod_plus (length prefix) 1 (ctx.blocklen * ctx.incr);
       Math.Lemmas.lemma_div_le (length prefix) len ctx.blocklen;

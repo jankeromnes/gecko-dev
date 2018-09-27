@@ -165,8 +165,8 @@ public:
 
   void SetShadowTarget(gfxContext* aTarget) { mShadowTarget = aTarget; }
 
-  bool CompositorMightResample() { return mCompositorMightResample; } 
-  
+  bool CompositorMightResample() { return mCompositorMightResample; }
+
   DrawPaintedLayerCallback GetPaintedLayerCallback() const
   { return mPaintedLayerCallback; }
 

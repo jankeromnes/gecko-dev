@@ -11,7 +11,7 @@
       document.documentElement.pauseAnimations();
       document.documentElement.setCurrentTime(4.99);
       // This test is designed to pass quickly and fail slowly.
-      // 
+      //
       // In the success case, the second animation will start almost
       // immediately, fire a beginEvent and trigger gotBegin below.
       //

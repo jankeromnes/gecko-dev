@@ -24,7 +24,7 @@ gc();
 
 for(var i = 0; i < N; i++)
     t[i] = "asdf";
-    
+
 gc();
 
 t = [];
@@ -34,7 +34,7 @@ gc();
 
 for(var i = 0; i < N; i++)
     t[i] = 1.12345;
-    
+
 gc();
 
 t=[];
@@ -46,7 +46,7 @@ for(var i = 0; i < N; i++) {
     if (i != 0)
         t[i].a = t[i-1];
 }
-    
+
 gc();
 
 t = [];

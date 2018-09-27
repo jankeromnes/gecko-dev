@@ -5,15 +5,15 @@
 
 function boom()
 {
-  var table = document.getElementById('table'); 
+  var table = document.getElementById('table');
 
-  var newTR = document.createElement('tr'); 
-  var newTD = document.createElement('td'); 
-  newTR.appendChild(newTD); 
-  table.appendChild(newTR); 
+  var newTR = document.createElement('tr');
+  var newTD = document.createElement('td');
+  newTR.appendChild(newTD);
+  table.appendChild(newTR);
 
-  newTD.setAttribute('rowspan', 3); 
-  
+  newTD.setAttribute('rowspan', 3);
+
   document.documentElement.removeAttribute("class");
 }
 

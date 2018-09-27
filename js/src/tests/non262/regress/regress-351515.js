@@ -21,7 +21,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function f(yield, let) { return yield+let; }
 
   var yield = 1;

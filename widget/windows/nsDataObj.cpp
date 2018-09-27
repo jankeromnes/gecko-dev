@@ -235,7 +235,7 @@ STDMETHODIMP nsDataObj::CStream::Seek(LARGE_INTEGER nMove,
     return STG_E_INVALIDPOINTER;
 
   if (nMove.LowPart == 0 && nMove.HighPart == 0 &&
-      (dwOrigin == STREAM_SEEK_SET || dwOrigin == STREAM_SEEK_CUR)) { 
+      (dwOrigin == STREAM_SEEK_SET || dwOrigin == STREAM_SEEK_CUR)) {
     nNewPos->LowPart = 0;
     nNewPos->HighPart = 0;
     return S_OK;
@@ -261,7 +261,7 @@ STDMETHODIMP nsDataObj::CStream::Stat(STATSTG* statstg, DWORD dwFlags)
 
   memset((void*)statstg, 0, sizeof(STATSTG));
 
-  if (dwFlags != STATFLAG_NONAME) 
+  if (dwFlags != STATFLAG_NONAME)
   {
     nsCOMPtr<nsIURI> sourceURI;
     if (NS_FAILED(mChannel->GetURI(getter_AddRefs(sourceURI)))) {
@@ -280,7 +280,7 @@ STDMETHODIMP nsDataObj::CStream::Stat(STATSTG* statstg, DWORD dwFlags)
 
     uint32_t nMaxNameLength = (wideFileName.Length()*2) + 2;
     void * retBuf = CoTaskMemAlloc(nMaxNameLength); // freed by caller
-    if (!retBuf) 
+    if (!retBuf)
       return STG_E_INSUFFICIENTMEMORY;
 
     ZeroMemory(retBuf, nMaxNameLength);
@@ -361,10 +361,10 @@ HRESULT nsDataObj::CreateStream(IStream **outStream)
 static GUID CLSID_nsDataObj =
 	{ 0x1bba7640, 0xdf52, 0x11cf, { 0x82, 0x7b, 0, 0xa0, 0x24, 0x3a, 0xe5, 0x05 } };
 
-/* 
+/*
  * deliberately not using MAX_PATH. This is because on platforms < XP
  * a file created with a long filename may be mishandled by the shell
- * resulting in it not being able to be deleted or moved. 
+ * resulting in it not being able to be deleted or moved.
  * See bug 250392 for more details.
  */
 #define NS_MAX_FILEDESCRIPTOR 128 + 1
@@ -374,13 +374,13 @@ static GUID CLSID_nsDataObj =
  */
 
 //-----------------------------------------------------
-// construction 
+// construction
 //-----------------------------------------------------
 nsDataObj::nsDataObj(nsIURI * uri)
   : m_cRef(0), mTransferable(nullptr),
     mIsAsyncMode(FALSE), mIsInOperation(FALSE)
 {
-  mIOThread = new LazyIdleThread(DEFAULT_THREAD_TIMEOUT_MS, 
+  mIOThread = new LazyIdleThread(DEFAULT_THREAD_TIMEOUT_MS,
                                  NS_LITERAL_CSTRING("nsDataObj"),
                                  LazyIdleThread::ManualShutdown);
   m_enumFE = new CEnumFormatEtc();
@@ -521,7 +521,7 @@ RemoveTempFileHelper::Observe(nsISupports* aSubject, const char* aTopic, const c
 STDMETHODIMP_(ULONG) nsDataObj::Release()
 {
 	--m_cRef;
-	
+
 	NS_LOG_RELEASE(this, m_cRef, "nsDataObj");
 	if (0 != m_cRef)
 		return m_cRef;
@@ -564,11 +564,11 @@ STDMETHODIMP nsDataObj::GetData(LPFORMATETC aFormat, LPSTGMEDIUM pSTM)
 
   uint32_t dfInx = 0;
 
-  static CLIPFORMAT fileDescriptorFlavorA = ::RegisterClipboardFormat( CFSTR_FILEDESCRIPTORA ); 
-  static CLIPFORMAT fileDescriptorFlavorW = ::RegisterClipboardFormat( CFSTR_FILEDESCRIPTORW ); 
+  static CLIPFORMAT fileDescriptorFlavorA = ::RegisterClipboardFormat( CFSTR_FILEDESCRIPTORA );
+  static CLIPFORMAT fileDescriptorFlavorW = ::RegisterClipboardFormat( CFSTR_FILEDESCRIPTORW );
   static CLIPFORMAT uniformResourceLocatorA = ::RegisterClipboardFormat( CFSTR_INETURLA );
   static CLIPFORMAT uniformResourceLocatorW = ::RegisterClipboardFormat( CFSTR_INETURLW );
-  static CLIPFORMAT fileFlavor = ::RegisterClipboardFormat( CFSTR_FILECONTENTS ); 
+  static CLIPFORMAT fileFlavor = ::RegisterClipboardFormat( CFSTR_FILECONTENTS );
   static CLIPFORMAT PreferredDropEffect = ::RegisterClipboardFormat( CFSTR_PREFERREDDROPEFFECT );
 
   // Arbitrary system formats are used for image feedback during drag
@@ -620,7 +620,7 @@ STDMETHODIMP nsDataObj::GetData(LPFORMATETC aFormat, LPSTGMEDIUM pSTM)
           return GetFileContents ( *aFormat, *pSTM );
         if ( format == PreferredDropEffect )
           return GetPreferredDropEffect( *aFormat, *pSTM );
-        //MOZ_LOG(gWindowsLog, LogLevel::Info, 
+        //MOZ_LOG(gWindowsLog, LogLevel::Info,
         //       ("***** nsDataObj::GetData - Unknown format %u\n", format));
         return GetText(df, *aFormat, *pSTM);
       } //switch
@@ -639,7 +639,7 @@ STDMETHODIMP nsDataObj::GetDataHere(LPFORMATETC pFE, LPSTGMEDIUM pSTM)
 
 
 //-----------------------------------------------------
-// Other objects querying to see if we support a 
+// Other objects querying to see if we support a
 // particular format
 //-----------------------------------------------------
 STDMETHODIMP nsDataObj::QueryGetData(LPFORMATETC pFE)
@@ -723,8 +723,8 @@ nsDataObj::LookupArbitraryFormat(FORMATETC *aFormat, LPDATAENTRY *aDataEntry, BO
         mDataEntryList[idx]->fe.dwAspect == aFormat->dwAspect &&
         mDataEntryList[idx]->fe.lindex == aFormat->lindex) {
       if (aAddorUpdate || (mDataEntryList[idx]->fe.tymed & aFormat->tymed)) {
-        // If the caller requests we update, or if the 
-        // medium type matches, return the entry. 
+        // If the caller requests we update, or if the
+        // medium type matches, return the entry.
         *aDataEntry = mDataEntryList[idx];
         return true;
       } else {
@@ -741,7 +741,7 @@ nsDataObj::LookupArbitraryFormat(FORMATETC *aFormat, LPDATAENTRY *aDataEntry, BO
   LPDATAENTRY dataEntry = (LPDATAENTRY)CoTaskMemAlloc(sizeof(DATAENTRY));
   if (!dataEntry)
     return false;
-  
+
   dataEntry->fe = *aFormat;
   *aDataEntry = dataEntry;
   memset(&dataEntry->stgm, 0, sizeof(STGMEDIUM));
@@ -760,7 +760,7 @@ bool
 nsDataObj::CopyMediumData(STGMEDIUM *aMediumDst, STGMEDIUM *aMediumSrc, LPFORMATETC aFormat, BOOL aSetData)
 {
   STGMEDIUM stgmOut = *aMediumSrc;
-  
+
   switch (stgmOut.tymed) {
     case TYMED_ISTREAM:
       stgmOut.pstm->AddRef();
@@ -891,7 +891,7 @@ HRESULT nsDataObj::AddGetFormat(FORMATETC& aFE)
 // Someone is asking for a bitmap. The data in the transferable will be a straight
 // imgIContainer, so just QI it.
 //
-HRESULT 
+HRESULT
 nsDataObj::GetDib(const nsACString& inFlavor,
                   FORMATETC &aFormat,
                   STGMEDIUM & aSTG)
@@ -912,7 +912,7 @@ nsDataObj::GetDib(const nsACString& inFlavor,
       image = do_QueryInterface(supports);
     }
   }
-  
+
   if ( image ) {
     // use the |nsImageToClipboard| helper class to build up a bitmap. We now own
     // the bits, and pass them back to the OS in |aSTG|.
@@ -925,7 +925,7 @@ nsDataObj::GetDib(const nsACString& inFlavor,
       result = S_OK;
     }
   } // if we have an image
-  else  
+  else
     NS_WARNING ( "Definitely not an image on clipboard" );
 	return result;
 }
@@ -936,11 +936,11 @@ nsDataObj::GetDib(const nsACString& inFlavor,
 // GetFileDescriptor
 //
 
-HRESULT 
+HRESULT
 nsDataObj :: GetFileDescriptor ( FORMATETC& aFE, STGMEDIUM& aSTG, bool aIsUnicode )
 {
   HRESULT res = S_OK;
-  
+
   // How we handle this depends on if we're dealing with an internet
   // shortcut, since those are done under the covers.
   if (IsFlavourPresent(kFilePromiseMime) ||
@@ -960,17 +960,17 @@ nsDataObj :: GetFileDescriptor ( FORMATETC& aFE, STGMEDIUM& aSTG, bool aIsUnicod
   }
   else
     NS_WARNING ( "Not yet implemented\n" );
-  
+
 	return res;
 } // GetFileDescriptor
 
 
 //
-HRESULT 
+HRESULT
 nsDataObj :: GetFileContents ( FORMATETC& aFE, STGMEDIUM& aSTG )
 {
   HRESULT res = S_OK;
-  
+
   // How we handle this depends on if we're dealing with an internet
   // shortcut, since those are done under the covers.
   if (IsFlavourPresent(kFilePromiseMime) ||
@@ -982,13 +982,13 @@ nsDataObj :: GetFileContents ( FORMATETC& aFE, STGMEDIUM& aSTG )
     NS_WARNING ( "Not yet implemented\n" );
 
 	return res;
-	
+
 } // GetFileContents
 
-// 
+//
 // Given a unicode string, we ensure that it contains only characters which are valid within
-// the file system. Remove all forbidden characters from the name, and completely disallow 
-// any title that starts with a forbidden name and extension (e.g. "nul" is invalid, but 
+// the file system. Remove all forbidden characters from the name, and completely disallow
+// any title that starts with a forbidden name and extension (e.g. "nul" is invalid, but
 // "nul." and "nul.txt" are also invalid and will cause problems).
 //
 // It would seem that this is more functionality suited to being in nsIFile.
@@ -997,7 +997,7 @@ static void
 MangleTextToValidFilename(nsString & aText)
 {
   static const char* forbiddenNames[] = {
-    "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", 
+    "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9",
     "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9",
     "CON", "PRN", "AUX", "NUL", "CLOCK$"
   };
@@ -1017,7 +1017,7 @@ MangleTextToValidFilename(nsString & aText)
   }
 }
 
-// 
+//
 // Given a unicode string, convert it down to a valid local charset filename
 // with the supplied extension. This ensures that we do not cut MBCS characters
 // in the middle.
@@ -1025,17 +1025,17 @@ MangleTextToValidFilename(nsString & aText)
 // It would seem that this is more functionality suited to being in nsIFile.
 //
 static bool
-CreateFilenameFromTextA(nsString & aText, const char * aExtension, 
+CreateFilenameFromTextA(nsString & aText, const char * aExtension,
                          char * aFilename, uint32_t aFilenameLen)
 {
-  // ensure that the supplied name doesn't have invalid characters. If 
+  // ensure that the supplied name doesn't have invalid characters. If
   // a valid mangled filename couldn't be created then it will leave the
   // text empty.
   MangleTextToValidFilename(aText);
   if (aText.IsEmpty())
     return false;
 
-  // repeatably call WideCharToMultiByte as long as the title doesn't fit in the buffer 
+  // repeatably call WideCharToMultiByte as long as the title doesn't fit in the buffer
   // available to us. Continually reduce the length of the source title until the MBCS
   // version will fit in the buffer with room for the supplied extension. Doing it this
   // way ensures that even in MBCS environments there will be a valid MBCS filename of
@@ -1044,7 +1044,7 @@ CreateFilenameFromTextA(nsString & aText, const char * aExtension,
   int currLen, textLen = (int) std::min(aText.Length(), aFilenameLen);
   char defaultChar = '_';
   do {
-    currLen = WideCharToMultiByte(CP_ACP, 
+    currLen = WideCharToMultiByte(CP_ACP,
       WC_COMPOSITECHECK|WC_DEFAULTCHAR,
       aText.get(), textLen--, aFilename, maxUsableFilenameLen, &defaultChar, nullptr);
   }
@@ -1060,10 +1060,10 @@ CreateFilenameFromTextA(nsString & aText, const char * aExtension,
 }
 
 static bool
-CreateFilenameFromTextW(nsString & aText, const wchar_t * aExtension, 
+CreateFilenameFromTextW(nsString & aText, const wchar_t * aExtension,
                          wchar_t * aFilename, uint32_t aFilenameLen)
 {
-  // ensure that the supplied name doesn't have invalid characters. If 
+  // ensure that the supplied name doesn't have invalid characters. If
   // a valid mangled filename couldn't be created then it will leave the
   // text empty.
   MangleTextToValidFilename(aText);
@@ -1122,13 +1122,13 @@ nsDataObj :: GetFileDescriptorInternetShortcutA ( FORMATETC& aFE, STGMEDIUM& aST
     return E_OUTOFMEMORY;
   }
 
-  // get a valid filename in the following order: 1) from the page title, 
+  // get a valid filename in the following order: 1) from the page title,
   // 2) localized string for an untitled page, 3) just use "Untitled.URL"
-  if (!CreateFilenameFromTextA(title, ".URL", 
+  if (!CreateFilenameFromTextA(title, ".URL",
                                fileGroupDescA->fgd[0].cFileName, NS_MAX_FILEDESCRIPTOR)) {
     nsAutoString untitled;
     if (!GetLocalizedString("noPageTitle", untitled) ||
-        !CreateFilenameFromTextA(untitled, ".URL", 
+        !CreateFilenameFromTextA(untitled, ".URL",
                                  fileGroupDescA->fgd[0].cFileName, NS_MAX_FILEDESCRIPTOR)) {
       strcpy(fileGroupDescA->fgd[0].cFileName, "Untitled.URL");
     }
@@ -1163,7 +1163,7 @@ nsDataObj :: GetFileDescriptorInternetShortcutW ( FORMATETC& aFE, STGMEDIUM& aST
     return E_OUTOFMEMORY;
   }
 
-  // get a valid filename in the following order: 1) from the page title, 
+  // get a valid filename in the following order: 1) from the page title,
   // 2) localized string for an untitled page, 3) just use "Untitled.URL"
   if (!CreateFilenameFromTextW(title, L".URL",
                                fileGroupDescW->fgd[0].cFileName, NS_MAX_FILEDESCRIPTOR)) {
@@ -1264,10 +1264,10 @@ nsDataObj :: GetFileContentsInternetShortcut ( FORMATETC& aFE, STGMEDIUM& aSTG )
     ::GlobalFree( hGlobalMemory );
     return E_OUTOFMEMORY;
   }
-    
-  //NOTE: we intentionally use the Microsoft version of snprintf here because it does NOT null 
-  // terminate strings which reach the maximum size of the buffer. Since we know that the 
-  // formatted length here is totalLen, this call to _snprintf will format the string into 
+
+  //NOTE: we intentionally use the Microsoft version of snprintf here because it does NOT null
+  // terminate strings which reach the maximum size of the buffer. Since we know that the
+  // formatted length here is totalLen, this call to _snprintf will format the string into
   // the buffer without appending the null character.
 
   if (!Preferences::GetBool(kShellIconPref, true)) {
@@ -1288,7 +1288,7 @@ bool nsDataObj :: IsFlavourPresent(const char *inFlavour)
 {
   bool retval = false;
   NS_ENSURE_TRUE(mTransferable, false);
-  
+
   // get the list of flavors available in the transferable
   nsCOMPtr<nsIArray> flavorList;
   mTransferable->FlavorsTransferableCanExport(getter_AddRefs(flavorList));
@@ -1316,7 +1316,7 @@ HRESULT nsDataObj::GetPreferredDropEffect ( FORMATETC& aFE, STGMEDIUM& aSTG )
 {
   HRESULT res = S_OK;
   aSTG.tymed = TYMED_HGLOBAL;
-  aSTG.pUnkForRelease = nullptr;    
+  aSTG.pUnkForRelease = nullptr;
   HGLOBAL hGlobalMemory = nullptr;
   hGlobalMemory = ::GlobalAlloc(GMEM_MOVEABLE, sizeof(DWORD));
   if (hGlobalMemory) {
@@ -1325,7 +1325,7 @@ HRESULT nsDataObj::GetPreferredDropEffect ( FORMATETC& aFE, STGMEDIUM& aSTG )
     // of an image happens from Mozilla to the desktop.  We want its value
     // to be DROPEFFECT_MOVE in that case so that the file is moved from the
     // temporary location, not copied.
-    // This value should, ideally, be set on the data object via SetData() but 
+    // This value should, ideally, be set on the data object via SetData() but
     // our IDataObject implementation doesn't implement SetData.  It adds data
     // to the data object lazily only when the drop target asks for it.
     *pdw = (DWORD) DROPEFFECT_MOVE;
@@ -1343,7 +1343,7 @@ HRESULT nsDataObj::GetText(const nsACString & aDataFlavor, FORMATETC& aFE, STGME
 {
   void* data = nullptr;
   uint32_t   len;
-  
+
   // if someone asks for text/plain, look up text/unicode instead in the transferable.
   const char* flavorStr;
   const nsPromiseFlatCString& flat = PromiseFlatCString(aDataFlavor);
@@ -1402,7 +1402,7 @@ HRESULT nsDataObj::GetText(const nsACString & aDataFlavor, FORMATETC& aFE, STGME
     NS_ConvertUTF16toUTF8 converter ( reinterpret_cast<char16_t*>(data) );
     char* utf8HTML = nullptr;
     nsresult rv = BuildPlatformHTML ( converter.get(), &utf8HTML );      // null terminates
-    
+
     free(data);
     if ( NS_SUCCEEDED(rv) && utf8HTML ) {
       // replace the unicode data with our HTML data. Don't forget the null.
@@ -1544,7 +1544,7 @@ HRESULT nsDataObj::DropImage(FORMATETC& aFE, STGMEDIUM& aSTG)
       }
     }
 
-    if (!image) 
+    if (!image)
       return E_FAIL;
 
     // Use the clipboard helper class to build up a memory bitmap.
@@ -1562,7 +1562,7 @@ HRESULT nsDataObj::DropImage(FORMATETC& aFE, STGMEDIUM& aSTG)
       return E_FAIL;
     }
 
-    // Save the bitmap to a temporary location.      
+    // Save the bitmap to a temporary location.
     nsCOMPtr<nsIFile> dropFile;
     rv = NS_GetSpecialDirectory(NS_OS_TEMP_DIR, getter_AddRefs(dropFile));
     if (!dropFile) {
@@ -1579,7 +1579,7 @@ HRESULT nsDataObj::DropImage(FORMATETC& aFE, STGMEDIUM& aSTG)
     filename.Append(nsDependentCString(buf, 12));
     dropFile->AppendNative(filename);
     rv = dropFile->CreateUnique(nsIFile::NORMAL_FILE_TYPE, 0660);
-    if (NS_FAILED(rv)) { 
+    if (NS_FAILED(rv)) {
       GlobalFree(bits);
       return E_FAIL;
     }
@@ -1592,7 +1592,7 @@ HRESULT nsDataObj::DropImage(FORMATETC& aFE, STGMEDIUM& aSTG)
     // Write the data to disk.
     nsCOMPtr<nsIOutputStream> outStream;
     rv = NS_NewLocalFileOutputStream(getter_AddRefs(outStream), dropFile);
-    if (NS_FAILED(rv)) { 
+    if (NS_FAILED(rv)) {
       GlobalFree(bits);
       return E_FAIL;
     }
@@ -1621,7 +1621,7 @@ HRESULT nsDataObj::DropImage(FORMATETC& aFE, STGMEDIUM& aSTG)
     if (NS_FAILED(rv))
       return E_FAIL;
   }
-  
+
   // Pass the file name back to the drop target so that it can access the file.
   nsAutoString path;
   rv = mCachedTempFile->GetPath(path);
@@ -1653,7 +1653,7 @@ HRESULT nsDataObj::DropImage(FORMATETC& aFE, STGMEDIUM& aSTG)
   char16_t* dest = (char16_t*)(((char*)pDropFile) + pDropFile->pFiles);
   memcpy(dest, path.get(), (allocLen - 1) * sizeof(char16_t)); // Copies the null character in path as well.
 
-  // Two null characters are needed at the end of the file name.  
+  // Two null characters are needed at the end of the file name.
   // Lookup the CF_HDROP shell clipboard format for more info.
   // Add the second null character right after the first one.
   dest[allocLen - 1] = L'\0';
@@ -1669,7 +1669,7 @@ HRESULT nsDataObj::DropTempFile(FORMATETC& aFE, STGMEDIUM& aSTG)
 {
   nsresult rv;
   if (!mCachedTempFile) {
-    // Tempfile will need a temporary location.      
+    // Tempfile will need a temporary location.
     nsCOMPtr<nsIFile> dropFile;
     rv = NS_GetSpecialDirectory(NS_OS_TEMP_DIR, getter_AddRefs(dropFile));
     if (!dropFile)
@@ -1754,7 +1754,7 @@ HRESULT nsDataObj::DropTempFile(FORMATETC& aFE, STGMEDIUM& aSTG)
   char16_t* dest = (char16_t*)(((char*)pDropFile) + pDropFile->pFiles);
   memcpy(dest, path.get(), (allocLen - 1) * sizeof(char16_t)); // Copies the null character in path as well.
 
-  // Two null characters are needed at the end of the file name.  
+  // Two null characters are needed at the end of the file name.
   // Lookup the CF_HDROP shell clipboard format for more info.
   // Add the second null character right after the first one.
   dest[allocLen - 1] = L'\0';
@@ -1850,7 +1850,7 @@ nsDataObj :: ExtractShortcutURL ( nsString & outURL )
 {
   NS_ASSERTION ( mTransferable, "We don't have a good transferable" );
   nsresult rv = NS_ERROR_FAILURE;
-  
+
   uint32_t len = 0;
   nsCOMPtr<nsISupports> genericURL;
   if ( NS_SUCCEEDED(mTransferable->GetTransferData(kURLMime, getter_AddRefs(genericURL), &len)) ) {
@@ -1860,13 +1860,13 @@ nsDataObj :: ExtractShortcutURL ( nsString & outURL )
       urlObject->GetData ( url );
       outURL = url;
 
-      // find the first linefeed in the data, that's where the url ends. trunc the 
+      // find the first linefeed in the data, that's where the url ends. trunc the
       // result string at that point.
       int32_t lineIndex = outURL.FindChar ( '\n' );
       NS_ASSERTION ( lineIndex > 0, "Format for url flavor is <url> <linefeed> <page title>" );
       if ( lineIndex > 0 ) {
         outURL.Truncate ( lineIndex );
-        rv = NS_OK;    
+        rv = NS_OK;
       }
     }
   } else if ( NS_SUCCEEDED(mTransferable->GetTransferData(kURLDataMime, getter_AddRefs(genericURL), &len)) ||
@@ -1877,11 +1877,11 @@ nsDataObj :: ExtractShortcutURL ( nsString & outURL )
       urlObject->GetData ( url );
       outURL = url;
 
-      rv = NS_OK;    
+      rv = NS_OK;
     }
 
   }  // if found flavor
-  
+
   return rv;
 
 } // ExtractShortcutURL
@@ -1901,7 +1901,7 @@ nsDataObj :: ExtractShortcutTitle ( nsString & outTitle )
 {
   NS_ASSERTION ( mTransferable, "We'd don't have a good transferable" );
   nsresult rv = NS_ERROR_FAILURE;
-  
+
   uint32_t len = 0;
   nsCOMPtr<nsISupports> genericURL;
   if ( NS_SUCCEEDED(mTransferable->GetTransferData(kURLMime, getter_AddRefs(genericURL), &len)) ) {
@@ -1916,11 +1916,11 @@ nsDataObj :: ExtractShortcutTitle ( nsString & outTitle )
       NS_ASSERTION ( lineIndex != -1, "Format for url flavor is <url> <linefeed> <page title>" );
       if ( lineIndex != -1 ) {
         url.Mid ( outTitle, lineIndex + 1, (len/2) - (lineIndex + 1) );
-        rv = NS_OK;    
+        rv = NS_OK;
       }
     }
   } // if found flavor
-  
+
   return rv;
 
 } // ExtractShortcutTitle
@@ -1938,8 +1938,8 @@ nsDataObj :: ExtractShortcutTitle ( nsString & outTitle )
 // or <BODY> tags). We'll wrap the fragment with them to make other apps
 // happy.
 //
-nsresult 
-nsDataObj :: BuildPlatformHTML ( const char* inOurHTML, char** outPlatformHTML ) 
+nsresult
+nsDataObj :: BuildPlatformHTML ( const char* inOurHTML, char** outPlatformHTML )
 {
   *outPlatformHTML = nullptr;
 
@@ -1965,8 +1965,8 @@ nsDataObj :: BuildPlatformHTML ( const char* inOurHTML, char** outPlatformHTML )
 
   const int32_t kTotalHeaderLen     = strlen(startHTMLPrefix) +
                                       strlen(endHTMLPrefix) +
-                                      strlen(startFragPrefix) + 
-                                      strlen(endFragPrefix) + 
+                                      strlen(startFragPrefix) +
+                                      strlen(endFragPrefix) +
                                       strlen(endFragTrailer) +
                                       (kSourceURLLength > 0 ? strlen(startSourceURLPrefix) : 0) +
                                       kSourceURLLength +
@@ -2000,7 +2000,7 @@ nsDataObj :: BuildPlatformHTML ( const char* inOurHTML, char** outPlatformHTML )
   clipboardString.Append(startHTMLPrefix);
   clipboardString.Append(nsPrintfCString("%08u", startHTMLOffset));
 
-  clipboardString.Append(endHTMLPrefix);  
+  clipboardString.Append(endHTMLPrefix);
   clipboardString.Append(nsPrintfCString("%08u", endHTMLOffset));
 
   clipboardString.Append(startFragPrefix);
@@ -2028,7 +2028,7 @@ nsDataObj :: BuildPlatformHTML ( const char* inOurHTML, char** outPlatformHTML )
   return NS_OK;
 }
 
-HRESULT 
+HRESULT
 nsDataObj :: GetUniformResourceLocator( FORMATETC& aFE, STGMEDIUM& aSTG, bool aIsUnicode )
 {
   HRESULT res = S_OK;
@@ -2115,7 +2115,7 @@ HRESULT nsDataObj::GetDownloadDetails(nsIURI **aSourceURI,
   mTransferable->GetTransferData(kFilePromiseURLMime, getter_AddRefs(urlPrimitive), &dataSize);
   nsCOMPtr<nsISupportsString> srcUrlPrimitive = do_QueryInterface(urlPrimitive);
   NS_ENSURE_TRUE(srcUrlPrimitive, E_FAIL);
-  
+
   nsAutoString srcUri;
   srcUrlPrimitive->GetData(srcUri);
   if (srcUri.IsEmpty())
@@ -2133,7 +2133,7 @@ HRESULT nsDataObj::GetDownloadDetails(nsIURI **aSourceURI,
     nsCOMPtr<nsIURL> sourceURL = do_QueryInterface(sourceURI);
     if (!sourceURL)
       return E_FAIL;
-    
+
     nsAutoCString urlFileName;
     sourceURL->GetFileName(urlFileName);
     NS_UnescapeURL(urlFileName);
@@ -2173,7 +2173,7 @@ HRESULT nsDataObj::GetFileDescriptor_IStreamA(FORMATETC& aFE, STGMEDIUM& aSTG)
 
   nsAutoCString nativeFileName;
   NS_CopyUnicodeToNative(wideFileName, nativeFileName);
-  
+
   strncpy(fileGroupDescA->fgd[0].cFileName, nativeFileName.get(), NS_MAX_FILEDESCRIPTOR - 1);
   fileGroupDescA->fgd[0].cFileName[NS_MAX_FILEDESCRIPTOR - 1] = '\0';
 

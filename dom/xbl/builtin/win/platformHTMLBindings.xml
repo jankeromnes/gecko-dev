@@ -7,7 +7,7 @@
 <bindings id="htmlBindings"
    xmlns="http://www.mozilla.org/xbl"
    xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
- 
+
   <binding id="inputFields" bindToUntrustedContent="true">
     <handlers>
 #include ../input-fields-base.inc

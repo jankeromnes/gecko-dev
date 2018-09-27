@@ -46,7 +46,7 @@ SETUPTOOLS_METADATA = dict(
         'License :: OSI Approved :: MIT License',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Communications',
-        'Topic :: Security :: Cryptography', 
+        'Topic :: Security :: Cryptography',
         'Topic :: Internet',
     ],
 ##    test_suite = 'distacc_test',

@@ -69,7 +69,7 @@ class CFileBase
 {
 protected:
   HANDLE _handle;
-  
+
   bool Create(CFSTR path, DWORD desiredAccess,
       DWORD shareMode, DWORD creationDisposition, DWORD flagsAndAttributes);
 
@@ -112,7 +112,7 @@ public:
   bool Seek(UInt64 position, UInt64 &newPosition) const throw();
   bool SeekToBegin() const throw();
   bool SeekToEnd(UInt64 &newPosition) const throw();
-  
+
   bool GetFileInformation(BY_HANDLE_FILE_INFORMATION *info) const
     { return BOOLToBool(GetFileInformationByHandle(_handle, info)); }
 
@@ -146,7 +146,7 @@ class CInFile: public CFileBase
   #ifdef SUPPORT_DEVICE_FILE
 
   #ifndef UNDER_CE
-  
+
   bool GetGeometry(DISK_GEOMETRY *res) const
     { return DeviceIoControlOut(IOCTL_DISK_GET_DRIVE_GEOMETRY, res, sizeof(*res)); }
 
@@ -155,15 +155,15 @@ class CInFile: public CFileBase
 
   bool GetCdRomGeometry(DISK_GEOMETRY *res) const
     { return DeviceIoControlOut(IOCTL_CDROM_GET_DRIVE_GEOMETRY, res, sizeof(*res)); }
-  
+
   bool GetPartitionInfo(PARTITION_INFORMATION *res)
     { return DeviceIoControlOut(IOCTL_DISK_GET_PARTITION_INFO, LPVOID(res), sizeof(*res)); }
-  
+
   #endif
 
   void CorrectDeviceSize();
   void CalcDeviceSize(CFSTR name);
-  
+
   #endif
 
 public:
@@ -183,7 +183,7 @@ public:
         FILE_SHARE_READ, OPEN_EXISTING,
         FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_BACKUP_SEMANTICS);
   }
-  
+
   #endif
 
   bool Read1(void *data, UInt32 size, UInt32 &processedSize) throw();

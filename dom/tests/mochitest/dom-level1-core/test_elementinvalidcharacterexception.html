@@ -37,13 +37,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,27 +73,27 @@ var docName = 'elementinvalidcharacterexception';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
+*
 
-    The "setAttribute(name,value)" method raises an 
+    The "setAttribute(name,value)" method raises an
 
-   "INVALID_CHARACTER_ERR DOMException if the specified 
+   "INVALID_CHARACTER_ERR DOMException if the specified
 
    name contains an invalid character.
 
-   
 
-   Retrieve the last child of the first employee and 
 
-   call its "setAttribute(name,value)" method with    
+   Retrieve the last child of the first employee and
 
-   "name" containing an invalid character. 
+   call its "setAttribute(name,value)" method with
+
+   "name" containing an invalid character.
 
 
 * @author NIST
@@ -109,7 +109,7 @@ function elementinvalidcharacterexception() {
     var doc;
       var elementList;
       var testAddress;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -117,7 +117,7 @@ function elementinvalidcharacterexception() {
       doc = load(docRef, "doc", "staff");
       elementList = doc.getElementsByTagName("address");
       testAddress = elementList.item(0);
-      
+
 	{
 		success = false;
 		try {
@@ -137,12 +137,12 @@ function elementinvalidcharacterexception() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/elementinvalidcharacterexception</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

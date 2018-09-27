@@ -15,7 +15,7 @@
        drawmode="solid" color="FF00FF00"></embed>
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -47,10 +47,10 @@ document.addEventListener("DOMContentLoaded", startTest, true);
 const minimumAfterPaintsToPass = 10;
 
 function doPluginFlicker() {
-  ok(true, "Plugin color iteration " + color + 
+  ok(true, "Plugin color iteration " + color +
      ", afterpaint count: " + afterPaintCount +
      ", mozpaint count: " + window.mozPaintCount);
-  if (afterPaintCount >= minimumAfterPaintsToPass) { 
+  if (afterPaintCount >= minimumAfterPaintsToPass) {
     ok(true, "afterPaintCount incremented enough from plugin color changes.");
     SimpleTest.finish();
     return;
@@ -67,7 +67,7 @@ function doPluginFlicker() {
 }
 
 function doBackgroundFlicker() {
-  ok(true, "Background color iteration " + color + 
+  ok(true, "Background color iteration " + color +
      ", afterpaint count: " + afterPaintCount +
      ", mozpaint count: " + window.mozPaintCount);
   if (afterPaintCount >= minimumAfterPaintsToPass) {

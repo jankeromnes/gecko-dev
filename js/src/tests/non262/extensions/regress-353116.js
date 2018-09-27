@@ -50,7 +50,7 @@ function test()
 
   try
   {
-    x = undefined; 
+    x = undefined;
     x.y;
   }
   catch(ex)
@@ -64,7 +64,7 @@ function test()
 
   try
   {
-    x = null; 
+    x = null;
     x.y;
   }
   catch(ex)

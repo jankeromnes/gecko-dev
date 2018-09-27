@@ -24,7 +24,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=1111995
         ++clicks;
       });
     }
-    
+
     for (var i = 0; i < elms.length; ++i) {
       var e = elms[i];
       synthesizeMouse(e, 3, 3, {});
@@ -35,7 +35,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=1111995
     synthesizeMouse($("t3"), 17, 17, {});
     synthesizeMouse($("t4"), 17, 17, {});
     is(clicks, 2, "click events on border with radius");
-    
+
     SimpleTest.finish();
   }
   </script>

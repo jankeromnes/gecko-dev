@@ -47,7 +47,7 @@ function ParseXML(data) {
   }
 
   Assert.equal(data instanceof nsIInputStream, true);
-  
+
   return getParser().parseFromStream(data, "UTF-8", data.available(),
                                      "application/xml");
 }

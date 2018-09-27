@@ -6,7 +6,7 @@
 <window title="Bug 562554" width="400" height="400"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>  
+  <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>
   <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/EventUtils.js"></script>
 
 <xbl:bindings xmlns:xbl="http://www.mozilla.org/xbl">
@@ -17,7 +17,7 @@
       <xul:stack>
          <xul:button width="100" left="0" top="0" height="30" allowevents="true"
                      onclick="eventReceived('clickbutton1'); return false;"/>
-         <xul:button width="100" left="70" top="0" height="30" 
+         <xul:button width="100" left="70" top="0" height="30"
                      onclick="eventReceived('clickbutton2'); return false;"/>
       </xul:stack>
     </xbl:content>

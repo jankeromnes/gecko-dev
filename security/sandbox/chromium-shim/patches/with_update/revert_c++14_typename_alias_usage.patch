@@ -28,7 +28,7 @@ diff --git a/security/sandbox/chromium/base/bind.h b/security/sandbox/chromium/b
        param_is_forwardable,
        "Bound argument |i| of type |Arg| cannot be forwarded as "
        "|Unwrapped| to the bound functor, which declares it as |Param|.");
- 
+
    static constexpr bool arg_is_storable =
        std::is_constructible<Storage, Arg>::value;
    static_assert(arg_is_storable ||
@@ -40,7 +40,7 @@ diff --git a/security/sandbox/chromium/base/bind.h b/security/sandbox/chromium/b
                  "Bound argument |i| of type |Arg| cannot be converted and "
                  "bound as |Storage|.");
  };
- 
+
  // Takes three same-length TypeLists, and applies AssertConstructible for each
 @@ -83,34 +83,34 @@ struct AssertBindArgsValidity;
  template <size_t... Ns,
@@ -55,11 +55,11 @@ diff --git a/security/sandbox/chromium/base/bind.h b/security/sandbox/chromium/b
 +    : AssertConstructible<Ns, Args, typename std::decay<Args>::type, Unwrapped, Params>... {
    static constexpr bool ok = true;
  };
- 
+
  // The implementation of TransformToUnwrappedType below.
  template <bool is_once, typename T>
  struct TransformToUnwrappedTypeImpl;
- 
+
  template <typename T>
  struct TransformToUnwrappedTypeImpl<true, T> {
 -  using StoredType = std::decay_t<T>;
@@ -67,7 +67,7 @@ diff --git a/security/sandbox/chromium/base/bind.h b/security/sandbox/chromium/b
    using ForwardType = StoredType&&;
    using Unwrapped = decltype(Unwrap(std::declval<ForwardType>()));
  };
- 
+
  template <typename T>
  struct TransformToUnwrappedTypeImpl<false, T> {
 -  using StoredType = std::decay_t<T>;
@@ -75,16 +75,16 @@ diff --git a/security/sandbox/chromium/base/bind.h b/security/sandbox/chromium/b
    using ForwardType = const StoredType&;
    using Unwrapped = decltype(Unwrap(std::declval<ForwardType>()));
  };
- 
+
  // Transform |T| into `Unwrapped` type, which is passed to the target function.
  // Example:
  //   In is_once == true case,
  //     `int&&` -> `int&&`,
 @@ -148,21 +148,22 @@ using MakeUnwrappedTypeList =
      typename MakeUnwrappedTypeListImpl<is_once, is_method, Args...>::Type;
- 
+
  }  // namespace internal
- 
+
  // Bind as OnceCallback.
  template <typename Functor, typename... Args>
  inline OnceCallback<MakeUnboundRunType<Functor, Args...>>
@@ -100,7 +100,7 @@ diff --git a/security/sandbox/chromium/base/bind.h b/security/sandbox/chromium/b
 +           !std::is_const<typename std::remove_reference<Functor>::type>()),
 +      "BindOnce requires non-const rvalue for OnceCallback binding."
 +      " I.e.: base::BindOnce(std::move(callback)).");
- 
+
    // This block checks if each |args| matches to the corresponding params of the
    // target function. This check does not affect the behavior of Bind, but its
    // error message should be more readable.
@@ -111,7 +111,7 @@ diff --git a/security/sandbox/chromium/base/bind.h b/security/sandbox/chromium/b
 @@ -192,17 +193,17 @@ BindOnce(Functor&& functor, Args&&... ar
        std::forward<Args>(args)...));
  }
- 
+
  // Bind as RepeatingCallback.
  template <typename Functor, typename... Args>
  inline RepeatingCallback<MakeUnboundRunType<Functor, Args...>>
@@ -120,7 +120,7 @@ diff --git a/security/sandbox/chromium/base/bind.h b/security/sandbox/chromium/b
 -      !internal::IsOnceCallback<std::decay_t<Functor>>(),
 +      !internal::IsOnceCallback<typename std::decay<Functor>::type>(),
        "BindRepeating cannot bind OnceCallback. Use BindOnce with std::move().");
- 
+
    // This block checks if each |args| matches to the corresponding params of the
    // target function. This check does not affect the behavior of Bind, but its
    // error message should be more readable.
@@ -132,24 +132,24 @@ diff --git a/security/sandbox/chromium/base/bind_helpers.h b/security/sandbox/ch
 +++ b/security/sandbox/chromium/base/bind_helpers.h
 @@ -277,17 +277,17 @@ class PassedWrapper {
    }
- 
+
   private:
    mutable bool is_valid_;
    mutable T scoper_;
  };
- 
+
  template <typename T>
 -using Unwrapper = BindUnwrapTraits<std::decay_t<T>>;
 +using Unwrapper = BindUnwrapTraits<typename std::decay<T>::type>;
- 
+
  template <typename T>
  auto Unwrap(T&& o) -> decltype(Unwrapper<T>::Unwrap(std::forward<T>(o))) {
    return Unwrapper<T>::Unwrap(std::forward<T>(o));
  }
- 
+
  // IsWeakMethod is a helper that determine if we are binding a WeakPtr<> to a
  // method.  It is used internally by Bind() to select the correct
-@@ -433,17 +433,17 @@ static inline internal::OwnedWrapper<T> 
+@@ -433,17 +433,17 @@ static inline internal::OwnedWrapper<T>
  // We offer 2 syntaxes for calling Passed().  The first takes an rvalue and
  // is best suited for use with the return value of a function or other temporary
  // rvalues. The second takes a pointer to the scoper and is just syntactic sugar
@@ -167,11 +167,11 @@ diff --git a/security/sandbox/chromium/base/bind_helpers.h b/security/sandbox/ch
  static inline internal::PassedWrapper<T> Passed(T* scoper) {
    return internal::PassedWrapper<T>(std::move(*scoper));
  }
- 
+
 @@ -532,19 +532,19 @@ struct CallbackCancellationTraits {
    static constexpr bool is_cancellable = false;
  };
- 
+
  // Specialization for method bound to weak pointer receiver.
  template <typename Functor, typename... BoundArgs>
  struct CallbackCancellationTraits<
@@ -183,7 +183,7 @@ diff --git a/security/sandbox/chromium/base/bind_helpers.h b/security/sandbox/ch
 -                               BoundArgs...>::value>> {
 +                               BoundArgs...>::value>::type> {
    static constexpr bool is_cancellable = true;
- 
+
    template <typename Receiver, typename... Args>
    static bool IsCancelled(const Functor&,
                            const Receiver& receiver,
@@ -193,10 +193,10 @@ diff --git a/security/sandbox/chromium/base/bind_helpers.h b/security/sandbox/ch
 diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/chromium/base/bind_internal.h
 --- a/security/sandbox/chromium/base/bind_internal.h
 +++ b/security/sandbox/chromium/base/bind_internal.h
-@@ -93,19 +93,19 @@ struct IsConvertibleToRunType<Callable, 
+@@ -93,19 +93,19 @@ struct IsConvertibleToRunType<Callable,
  template <typename... Args>
  struct HasRefCountedTypeAsRawPtr : std::false_type {};
- 
+
  // Implementation note: Select true_type if the first parameter is a raw pointer
  // to a RefCounted type. Otherwise, skip the first parameter and check rest of
  // parameters recursively.
@@ -208,18 +208,18 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
 +    : std::conditional<NeedsScopedRefptrButGetsRawPtr<T>::value,
 +                       std::true_type,
 +                       HasRefCountedTypeAsRawPtr<Args...>>::type {};
- 
+
  // ForceVoidReturn<>
  //
  // Set of templates that support forcing the function return type to void.
  template <typename Sig>
  struct ForceVoidReturn;
- 
+
  template <typename R, typename... Args>
 @@ -119,18 +119,19 @@ struct ForceVoidReturn<R(Args...)> {
  template <typename Functor, typename SFINAE>
  struct FunctorTraits;
- 
+
  // For a callable type that is convertible to the corresponding function type.
  // This specialization is intended to allow binding captureless lambdas by
  // base::Bind(), based on the fact that captureless lambdas can be convertible
@@ -233,7 +233,7 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
    using RunType = ExtractCallableRunType<Functor>;
    static constexpr bool is_method = false;
    static constexpr bool is_nullable = false;
- 
+
    template <typename... RunArgs>
    static ExtractReturnType<RunType>
    Invoke(const Functor& functor, RunArgs&&... args) {
@@ -245,11 +245,11 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
          std::forward<RunArgs>(args)...);
    }
  };
- 
+
  template <typename Functor>
 -using MakeFunctorTraits = FunctorTraits<std::decay_t<Functor>>;
 +using MakeFunctorTraits = FunctorTraits<typename std::decay<Functor>::type>;
- 
+
  // InvokeHelper<>
  //
  // There are 2 logical InvokeHelper<> specializations: normal, WeakCalls.
@@ -265,7 +265,7 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
                            std::index_sequence<indices...>,
                            UnboundArgs&&... unbound_args) {
      static constexpr bool is_method = MakeFunctorTraits<Functor>::is_method;
- 
+
 -    using DecayedArgsTuple = std::decay_t<BoundArgsTuple>;
 +    using DecayedArgsTuple = typename std::decay<BoundArgsTuple>::type;
      static constexpr bool is_weak_call =
@@ -274,22 +274,22 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
 +                     typename std::tuple_element<
 +                         indices,
 +                         DecayedArgsTuple>::type...>::value;
- 
+
      return InvokeHelper<is_weak_call, R>::MakeItSo(
          std::forward<Functor>(functor),
          Unwrap(std::get<indices>(std::forward<BoundArgsTuple>(bound)))...,
          std::forward<UnboundArgs>(unbound_args)...);
    }
  };
- 
+
 @@ -378,24 +381,24 @@ struct BindTypeHelper {
    using UnboundParamsList = DropTypeListItem<num_bounds, RunParamsList>;
- 
+
    using BoundArgsList = TypeList<BoundArgs...>;
- 
+
    using UnboundRunType = MakeFunctionType<ReturnType, UnboundParamsList>;
  };
- 
+
  template <typename Functor>
 -std::enable_if_t<FunctorTraits<Functor>::is_nullable, bool> IsNull(
 -    const Functor& functor) {
@@ -297,7 +297,7 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
 +IsNull(const Functor& functor) {
    return !functor;
  }
- 
+
  template <typename Functor>
 -std::enable_if_t<!FunctorTraits<Functor>::is_nullable, bool> IsNull(
 -    const Functor&) {
@@ -305,7 +305,7 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
 +IsNull(const Functor&) {
    return false;
  }
- 
+
  // Used by ApplyCancellationTraits below.
  template <typename Functor, typename BoundArgsTuple, size_t... indices>
  bool ApplyCancellationTraitsImpl(const Functor& functor,
@@ -313,11 +313,11 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
                                   std::index_sequence<indices...>) {
 @@ -474,43 +477,48 @@ struct BindState final : BindStateBase {
  };
- 
+
  // Used to implement MakeBindStateType.
  template <bool is_method, typename Functor, typename... BoundArgs>
  struct MakeBindStateTypeImpl;
- 
+
  template <typename Functor, typename... BoundArgs>
  struct MakeBindStateTypeImpl<false, Functor, BoundArgs...> {
 -  static_assert(!HasRefCountedTypeAsRawPtr<std::decay_t<BoundArgs>...>::value,
@@ -328,13 +328,13 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
 +  using Type = BindState<typename std::decay<Functor>::type,
 +                         typename std::decay<BoundArgs>::type...>;
  };
- 
+
  template <typename Functor>
  struct MakeBindStateTypeImpl<true, Functor> {
 -  using Type = BindState<std::decay_t<Functor>>;
 +  using Type = BindState<typename std::decay<Functor>::type>;
  };
- 
+
  template <typename Functor, typename Receiver, typename... BoundArgs>
  struct MakeBindStateTypeImpl<true, Functor, Receiver, BoundArgs...> {
 -  static_assert(!std::is_array<std::remove_reference_t<Receiver>>::value,
@@ -346,11 +346,11 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
 +  static_assert(!HasRefCountedTypeAsRawPtr<
 +                    typename std::decay<BoundArgs>::type...>::value,
                  "A parameter is a refcounted type and needs scoped_refptr.");
- 
+
   private:
 -  using DecayedReceiver = std::decay_t<Receiver>;
 +  using DecayedReceiver = typename std::decay<Receiver>::type;
- 
+
   public:
    using Type = BindState<
 -      std::decay_t<Functor>,
@@ -365,10 +365,10 @@ diff --git a/security/sandbox/chromium/base/bind_internal.h b/security/sandbox/c
 +          DecayedReceiver>::type,
 +      typename std::decay<BoundArgs>::type...>;
  };
- 
+
  template <typename Functor, typename... BoundArgs>
  using MakeBindStateType =
      typename MakeBindStateTypeImpl<MakeFunctorTraits<Functor>::is_method,
                                     Functor,
                                     BoundArgs...>::Type;
- 
+

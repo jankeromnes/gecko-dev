@@ -36,11 +36,11 @@ int main(int argc, const char *argv[]) {
     u_versionToString(version, verString);
     fprintf(stderr, "Generating data for ICU %s, Collation %s\n", U_ICU_VERSION, verString);
     int32_t rangeCount = unsafeBackwardSet->getRangeCount();
-    
+
 #if SERIALIZE
     fprintf(stderr, ".. serializing\n");
     // UnicodeSet serialization
-    
+
     UErrorCode preflightCode = U_ZERO_ERROR;
     // preflight
     int32_t serializedCount = unsafeBackwardSet->serialize(NULL,0,preflightCode);
@@ -57,11 +57,11 @@ int main(int argc, const char *argv[]) {
       return 1;
     }
 #endif
-    
+
 #if PATTERN
     fprintf(stderr,".. pattern. (Note: collationdatareader.cpp does not support this form also see #11891)\n");
     // attempt to use pattern
-    
+
     UnicodeString pattern;
     UnicodeSet set(*unsafeBackwardSet);
     set.compact();
@@ -69,7 +69,7 @@ int main(int argc, const char *argv[]) {
 
     if(U_SUCCESS(errorCode)) {
       // This fails (bug# ?) - which is why this method was abandoned.
-      
+
       // UnicodeSet usA(pattern, errorCode);
       // fprintf(stderr, "\n%s:%d: err creating set A %s\n", __FILE__, __LINE__, u_errorName(errorCode));
       // return 1;
@@ -113,8 +113,8 @@ int main(int argc, const char *argv[]) {
          "#define COLLUNSAFE_ICU_VERSION \"" U_ICU_VERSION "\"\n");
   printf("#define COLLUNSAFE_COLL_VERSION \"%s\"\n", verString);
 
-  
-  
+
+
 #if PATTERN
   printf("#define COLLUNSAFE_PATTERN 1\n");
   printf("static const int32_t collunsafe_len = %d;\n", needed);
@@ -146,7 +146,7 @@ int main(int argc, const char *argv[]) {
 #endif
 
 #if SERIALIZE
-    printf("#define COLLUNSAFE_SERIALIZE 1\n");    
+    printf("#define COLLUNSAFE_SERIALIZE 1\n");
     printf("static const int32_t unsafe_serializedCount = %d;\n", serializedCount);
     printf("static const uint16_t unsafe_serializedData[%d] = { \n", serializedCount);
     for(int32_t i=0;i<serializedCount;i++) {
@@ -157,10 +157,10 @@ int main(int argc, const char *argv[]) {
       if(i != (serializedCount-1)) {
         printf(", ");
       }
-    }  
+    }
     printf("};\n");
 #endif
-    
+
     printf("#endif\n");
     fflush(stderr);
     fflush(stdout);

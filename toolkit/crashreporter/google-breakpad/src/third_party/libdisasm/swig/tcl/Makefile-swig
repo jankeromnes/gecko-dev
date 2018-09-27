@@ -57,7 +57,7 @@ install: $(TCL_MOD)
 uninstall:
 
 # ==================================================================
-clean: 
+clean:
 	rm $(TCL_MOD) $(TCL_SWIG) $(TCL_OBJ)
 	rm $(TCL_SHADOW)
 

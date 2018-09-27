@@ -26,7 +26,7 @@
 
         tree = document.getElementById("tr");
         col = tree.columns[0];
-        alert(tree.view.getItemAtIndex(1, col)); 
+        alert(tree.view.getItemAtIndex(1, col));
     }
     ]]></script>
 </window>

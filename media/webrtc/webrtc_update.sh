@@ -32,7 +32,7 @@ cd trunk
 export date=`date`
 export revision=`svnversion -n`
 if [ $1 ] ; then
-  echo "WebRTC revision overridden from $revision to $1" 
+  echo "WebRTC revision overridden from $revision to $1"
   export revision=$1
 else
   echo "WebRTC revision = $revision"

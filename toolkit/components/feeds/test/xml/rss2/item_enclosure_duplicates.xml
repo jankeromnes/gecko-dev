@@ -9,8 +9,8 @@ Expect: ((feed.type == 4) && (feed.enclosureCount == 1));
 <channel>
 
 <item>
-<enclosure length="24986239" type="video/mpeg" url="http://dallas.example.com/joebob_050689.mpeg" /> 
-<media:content fileSize="24986239" type="video/mpeg" url="http://dallas.example.com/joebob_050689.mpeg" /> 
+<enclosure length="24986239" type="video/mpeg" url="http://dallas.example.com/joebob_050689.mpeg" />
+<media:content fileSize="24986239" type="video/mpeg" url="http://dallas.example.com/joebob_050689.mpeg" />
 <author>jbb@dallas.example.com (Joe Bob Briggs)</author>
 <comments>http://example.org</comments>
 <title>test audio</title>

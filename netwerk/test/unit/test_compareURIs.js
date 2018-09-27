@@ -15,7 +15,7 @@ function run_test()
 	[ "http://mozilla.org/", "http://mozilla.org:80", true ],
 	[ "http://mozilla.org/", "http://mozilla.org:90", false ],
 	[ "http://mozilla.org", "https://mozilla.org", false ],
-	[ "http://mozilla.org", "https://mozilla.org:80", false ],	
+	[ "http://mozilla.org", "https://mozilla.org:80", false ],
 	[ "http://mozilla.org:443", "https://mozilla.org", false ],
 	[ "https://mozilla.org:443", "https://mozilla.org", true ],
 	[ "https://mozilla.org:443", "https://mozilla.org/somewhere/", true ],

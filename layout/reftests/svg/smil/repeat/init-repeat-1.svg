@@ -1,4 +1,4 @@
-<!-- 
+<!--
   The following tests an anomaly in the SMIL Animation spec.
 
   SMILANIM 3.6.8 says:
@@ -19,7 +19,7 @@
   not filtered. Furthermore, the pseudocode is in agreement with the first
   statement so we conclude that if an interval finishes at time zero it is not
   an acceptable interval and is filtered out.
-  
+
   The following animation sets up such an interval, that, based on its
   repeatCount has an active duration of 1s, producing an interval of (-1s, 0s).
   Therefore this interval should be filtered out and no animation effect should

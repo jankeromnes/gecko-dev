@@ -4,7 +4,7 @@ from prettytoml.util import is_sequence_like, is_dict_like, chunkate_string
 def test_is_sequence_like():
     assert is_sequence_like([1, 3, 4])
     assert not is_sequence_like(42)
-    
+
 
 def test_is_dict_like():
     assert is_dict_like({'name': False})

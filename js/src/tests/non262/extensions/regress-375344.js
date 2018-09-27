@@ -15,11 +15,11 @@ printStatus (summary);
 if (typeof HTMLElement != 'undefined')
 {
   expect = /TypeError/;
-  try 
+  try
   {
     print(HTMLElement.prototype.nodeName);
   }
-  catch(ex) 
+  catch(ex)
   {
     actual = ex + '';
     print(actual);

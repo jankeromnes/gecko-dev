@@ -2,7 +2,7 @@
 // This code is governed by the license found in the LICENSE file.
 
 /*---
-description: Intl.DateTimeFormat.prototype.formatToParts.length. 
+description: Intl.DateTimeFormat.prototype.formatToParts.length.
 includes: [propertyHelper.js]
 ---*/
 

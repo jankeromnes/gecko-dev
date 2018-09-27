@@ -1,8 +1,8 @@
 /* -----------------------------------------------------------------------
    v8.S - Copyright (c) 2013  The Written Word, Inc.
 	  Copyright (c) 1996, 1997, 2003, 2004, 2008  Red Hat, Inc.
-   
-   SPARC Foreign Function Interface 
+
+   SPARC Foreign Function Interface
 
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the
@@ -25,25 +25,25 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#define LIBFFI_ASM	
+#define LIBFFI_ASM
 #include <fficonfig.h>
 #include <ffi.h>
 
 #define STACKFRAME 96		/* Minimum stack framesize for SPARC */
 #define ARGS (64+4)		/* Offset of register area in frame */
 
-#ifndef __GNUC__	
+#ifndef __GNUC__
 	.text
         .align 8
 .globl ffi_flush_icache
 .globl _ffi_flush_icache
 
 ffi_flush_icache:
-_ffi_flush_icache:	
+_ffi_flush_icache:
         add %o0, %o1, %o2
-#ifdef SPARC64	
+#ifdef SPARC64
 1:	flush %o0
-#else	
+#else
 1:	iflush %o0
 #endif
 	add %o0, 8, %o0
@@ -64,15 +64,15 @@ _ffi_flush_icache:
         .align 8
 .globl ffi_call_v8
 .globl _ffi_call_v8
-	
+
 ffi_call_v8:
 _ffi_call_v8:
 .LLFB1:
 	save	%sp, -STACKFRAME, %sp
 .LLCFI0:
-	
+
 	sub	%sp, %i2, %sp	! alloca() space in stack for frame to set up
-	add	%sp, STACKFRAME, %l0	! %l0 has start of 
+	add	%sp, STACKFRAME, %l0	! %l0 has start of
 					! frame to set up
 
 	mov	%l0, %o0	! call routine to set up frame
@@ -170,7 +170,7 @@ longlong:
 
 #undef STACKFRAME
 #define	STACKFRAME	104	/* 16*4 register window +
-				   1*4 struct return +	
+				   1*4 struct return +
 				   6*4 args backing store +
 				   3*4 locals */
 

@@ -486,7 +486,7 @@ PKIX_PL_Sprintf(
                                     asciiText = PR_smprintf
                                         ((const char *)convertedAsciiFormat,
                                         tempUInt);
-                                }     
+                                }
                                 convertedAsciiFormat += j;
                                 j = 0;
                                 break;

@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Test bug 529119</title>
-<script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+<script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
 <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 
 <script class="testbody" type="text/javascript">
@@ -25,7 +25,7 @@ function pollForPage(expectErrorPage, f, w)
     var iterationsLeft = 200;
     var int = window.setInterval(function() {
       iterationsLeft--;
-      
+
       var haveErrorPage = false;
       try {
         var title = w.document.title;
@@ -33,7 +33,7 @@ function pollForPage(expectErrorPage, f, w)
       catch (ex) {
         haveErrorPage = true;
       }
-  
+
       if (iterationsLeft == 0 || expectErrorPage == haveErrorPage) {
         window.clearInterval(int);
         f(iterationsLeft > 0);
@@ -51,7 +51,7 @@ function windowLoaded()
   isWindowLoaded = true;
 
   /* 2. We have successfully loaded a page, now go to a faulty URL */
-  // XXX The test fails when we change the location synchronously 
+  // XXX The test fails when we change the location synchronously
   window.setTimeout(function() {
     w.location.href = faultyURL;
   }, 0);

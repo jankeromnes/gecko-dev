@@ -187,7 +187,7 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
       bool outgoing,
       uint32_t ssrc,
       struct RtpPacketLossStats* loss_stats) const override;
- 
+
   // Get received RTCP report, sender info.
   int32_t RemoteRTCPStat(RTCPSenderInfo* sender_info) override;
 

@@ -16,7 +16,7 @@ try{
   }
   $ERROR('#1.2: throw "ex1" inside the "if" statement lead to throwing exception');
 }
-catch(er1){	
+catch(er1){
   if (er1!=="ex1") $ERROR('#1.3: Exception ==="ex1". Actual:  Exception ==='+er1);
 }
 

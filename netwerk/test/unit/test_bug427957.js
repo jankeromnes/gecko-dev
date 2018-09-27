@@ -29,7 +29,7 @@ function run_test() {
   var pbi = Cc["@mozilla.org/preferences-service;1"]
     .getService(Ci.nsIPrefBranch);
   pbi.setBoolPref("network.IDN.whitelist.com", true);
- 
+
   idnService = Cc["@mozilla.org/network/idn-service;1"]
     .getService(Ci.nsIIDNService);
   /*
@@ -74,7 +74,7 @@ function run_test() {
   /*
    * 2) If a string contains any RandALCat character, the string MUST NOT
    *    contain any LCat character.
-   */   
+   */
 
   // www.מיץpetel.com is invalid
   expected_fail("www.\u05DE\u05D9\u05E5petel.com");
@@ -101,4 +101,4 @@ function run_test() {
   // But www.מיץ1פטל.com is fine
   expected_pass("www.\u05DE\u05D9\u05E51\u05E4\u05D8\u05DC.com");
 }
-  
+

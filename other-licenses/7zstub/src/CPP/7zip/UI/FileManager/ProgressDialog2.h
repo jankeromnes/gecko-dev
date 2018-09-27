@@ -42,7 +42,7 @@ public:
   UInt64 _curFiles;
   UInt64 _inSize;
   UInt64 _outSize;
-  
+
   UString _titleFileName;
   UString _status;
   UString _filePath;
@@ -65,20 +65,20 @@ public:
     NWindows::NSynchronization::CCriticalSectionLock lock(_cs);
     _stopped = val;
   }
-  
+
   bool Get_Paused();
   void Set_Paused(bool val)
   {
     NWindows::NSynchronization::CCriticalSectionLock lock(_cs);
     _paused = val;
   }
-  
+
   void Set_BytesProgressMode(bool bytesProgressMode)
   {
     NWindows::NSynchronization::CCriticalSectionLock lock(_cs);
     _bytesProgressMode = bytesProgressMode;
   }
-  
+
   HRESULT CheckStop();
   HRESULT ScanProgress(UInt64 numFiles, UInt64 totalSize, const FString &fileName, bool isDir = false);
 
@@ -143,14 +143,14 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
       return res;
     }
   };
-  
+
   CU64ToI32Converter _progressConv;
   UInt64 _progressBar_Pos;
   UInt64 _progressBar_Range;
-  
+
   NWindows::NControl::CProgressBar m_ProgressBar;
   NWindows::NControl::CListView _messageList;
-  
+
   int _numMessages;
 
   #ifdef __ITaskbarList3_INTERFACE_DEFINED__
@@ -188,7 +188,7 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
 
   bool _waitCloseByCancelButton;
   bool _cancelWasPressed;
-  
+
   bool _inCancelMessageBox;
   bool _externalCloseMessageWasReceived;
 

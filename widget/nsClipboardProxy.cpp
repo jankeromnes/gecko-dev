@@ -50,7 +50,7 @@ NS_IMETHODIMP
 nsClipboardProxy::GetData(nsITransferable *aTransferable, int32_t aWhichClipboard)
 {
    nsTArray<nsCString> types;
-  
+
   nsCOMPtr<nsIArray> flavorList;
   aTransferable->FlavorsTransferableCanImport(getter_AddRefs(flavorList));
   if (flavorList) {

@@ -17,6 +17,6 @@ index 7978a6941cb..0159e89fa27 100644
 -        llvm::StringRef ExpectedPrefixes[] = {"",     "Host",  "bin", "",
 -                                              "MSVC", "Tools", "VC"};
 +        llvm::StringRef ExpectedPrefixes[] = {"", "Host",  "bin"};
- 
+
          auto It = llvm::sys::path::rbegin(PathEntry);
          auto End = llvm::sys::path::rend(PathEntry);

@@ -18,7 +18,7 @@
   <!--=  All Rights Reserved.                                              =-->
   <!--=  See http://www.w3.org/Consortium/Legal/.                          =-->
   <!--======================================================================-->
-  
+
   <title id="test-title">$RCSfile: interact-order-01-b.svg,v $</title>
   <defs>
     <font-face font-family="SVGFreeSansASCII" unicode-range="U+0-7F">
@@ -54,7 +54,7 @@
     <g fill="#000" font-family="Arial" font-size="40">
       <!-- Event bubbling (i.e., propagation) is not turned off, so
               event if first processed by 'circle', but then processed by 'g',
-              with result that circle turns blue, but then instantaneously 
+              with result that circle turns blue, but then instantaneously
               turns pink. -->
       <g onmouseover="bubbleYes(evt, '#F08')" onmouseout="bubbleYes(evt, 'inherit')">
         <circle onmouseover="bubbleYes(evt, '#00F')" onmouseout="bubbleYes(evt, 'inherit')" cx="70" cy="120" r="50"/>

@@ -28,7 +28,7 @@ bool CComboDialog::OnInit()
   _comboBox.SetStyle(style);
   */
   SetText(Title);
-  
+
   NControl::CStatic staticContol;
   staticContol.Attach(GetItem(IDT_COMBO));
   staticContol.SetText(Static);

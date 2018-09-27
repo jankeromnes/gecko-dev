@@ -60,9 +60,9 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var libUtil = __webpack_require__(1);
-	
+
 	exports['test urls'] = function (assert) {
 	  var assertUrl = function (url) {
 	    assert.equal(url, libUtil.urlGenerate(libUtil.urlParse(url)));
@@ -75,11 +75,11 @@ var SOURCE_MAP_TEST_MODULE =
 	  assertUrl('http://www.example.com/foo/bar');
 	  assertUrl('http://www.example.com/foo/bar/');
 	  assertUrl('http://user:pass@www.example.com:80/foo/bar/');
-	
+
 	  assertUrl('//');
 	  assertUrl('//www.example.com');
 	  assertUrl('file:///www.example.com');
-	
+
 	  assert.equal(libUtil.urlParse(''), null);
 	  assert.equal(libUtil.urlParse('.'), null);
 	  assert.equal(libUtil.urlParse('..'), null);
@@ -88,12 +88,12 @@ var SOURCE_MAP_TEST_MODULE =
 	  assert.equal(libUtil.urlParse('a//b'), null);
 	  assert.equal(libUtil.urlParse('/a'), null);
 	  assert.equal(libUtil.urlParse('data:foo,bar'), null);
-	
+
 	  var parsed = libUtil.urlParse('http://x-y.com/bar');
 	  assert.equal(parsed.scheme, 'http');
 	  assert.equal(parsed.host, 'x-y.com');
 	  assert.equal(parsed.path, '/bar');
-	
+
 	  var webpackURL = 'webpack:///webpack/bootstrap 67e184f9679733298d44'
 	  parsed = libUtil.urlParse(webpackURL);
 	  assert.equal(parsed.scheme, 'webpack');
@@ -101,44 +101,44 @@ var SOURCE_MAP_TEST_MODULE =
 	  assert.equal(parsed.path, '/webpack/bootstrap 67e184f9679733298d44');
 	  assert.equal(webpackURL, libUtil.urlGenerate(parsed));
 	};
-	
+
 	exports['test normalize()'] = function (assert) {
 	  assert.equal(libUtil.normalize('/..'), '/');
 	  assert.equal(libUtil.normalize('/../'), '/');
 	  assert.equal(libUtil.normalize('/../../../..'), '/');
 	  assert.equal(libUtil.normalize('/../../../../a/b/c'), '/a/b/c');
 	  assert.equal(libUtil.normalize('/a/b/c/../../../d/../../e'), '/e');
-	
+
 	  assert.equal(libUtil.normalize('..'), '..');
 	  assert.equal(libUtil.normalize('../'), '../');
 	  assert.equal(libUtil.normalize('../../a/'), '../../a/');
 	  assert.equal(libUtil.normalize('a/..'), '.');
 	  assert.equal(libUtil.normalize('a/../../..'), '../..');
-	
+
 	  assert.equal(libUtil.normalize('/.'), '/');
 	  assert.equal(libUtil.normalize('/./'), '/');
 	  assert.equal(libUtil.normalize('/./././.'), '/');
 	  assert.equal(libUtil.normalize('/././././a/b/c'), '/a/b/c');
 	  assert.equal(libUtil.normalize('/a/b/c/./././d/././e'), '/a/b/c/d/e');
-	
+
 	  assert.equal(libUtil.normalize(''), '.');
 	  assert.equal(libUtil.normalize('.'), '.');
 	  assert.equal(libUtil.normalize('./'), '.');
 	  assert.equal(libUtil.normalize('././a'), 'a');
 	  assert.equal(libUtil.normalize('a/./'), 'a/');
 	  assert.equal(libUtil.normalize('a/././.'), 'a');
-	
+
 	  assert.equal(libUtil.normalize('/a/b//c////d/////'), '/a/b/c/d/');
 	  assert.equal(libUtil.normalize('///a/b//c////d/////'), '///a/b/c/d/');
 	  assert.equal(libUtil.normalize('a/b//c////d'), 'a/b/c/d');
-	
+
 	  assert.equal(libUtil.normalize('.///.././../a/b//./..'), '../../a')
-	
+
 	  assert.equal(libUtil.normalize('http://www.example.com'), 'http://www.example.com');
 	  assert.equal(libUtil.normalize('http://www.example.com/'), 'http://www.example.com/');
 	  assert.equal(libUtil.normalize('http://www.example.com/./..//a/b/c/.././d//'), 'http://www.example.com/a/b/d/');
 	};
-	
+
 	exports['test join()'] = function (assert) {
 	  assert.equal(libUtil.join('a', 'b'), 'a/b');
 	  assert.equal(libUtil.join('a/', 'b'), 'a/b');
@@ -147,56 +147,56 @@ var SOURCE_MAP_TEST_MODULE =
 	  assert.equal(libUtil.join('a', 'b//'), 'a/b/');
 	  assert.equal(libUtil.join('a/', '/b'), '/b');
 	  assert.equal(libUtil.join('a//', '//b'), '//b');
-	
+
 	  assert.equal(libUtil.join('a', '..'), '.');
 	  assert.equal(libUtil.join('a', '../b'), 'b');
 	  assert.equal(libUtil.join('a/b', '../c'), 'a/c');
-	
+
 	  assert.equal(libUtil.join('a', '.'), 'a');
 	  assert.equal(libUtil.join('a', './b'), 'a/b');
 	  assert.equal(libUtil.join('a/b', './c'), 'a/b/c');
-	
+
 	  assert.equal(libUtil.join('a', 'http://www.example.com'), 'http://www.example.com');
 	  assert.equal(libUtil.join('a', 'data:foo,bar'), 'data:foo,bar');
-	
-	
+
+
 	  assert.equal(libUtil.join('', 'b'), 'b');
 	  assert.equal(libUtil.join('.', 'b'), 'b');
 	  assert.equal(libUtil.join('', 'b/'), 'b/');
 	  assert.equal(libUtil.join('.', 'b/'), 'b/');
 	  assert.equal(libUtil.join('', 'b//'), 'b/');
 	  assert.equal(libUtil.join('.', 'b//'), 'b/');
-	
+
 	  assert.equal(libUtil.join('', '..'), '..');
 	  assert.equal(libUtil.join('.', '..'), '..');
 	  assert.equal(libUtil.join('', '../b'), '../b');
 	  assert.equal(libUtil.join('.', '../b'), '../b');
-	
+
 	  assert.equal(libUtil.join('', '.'), '.');
 	  assert.equal(libUtil.join('.', '.'), '.');
 	  assert.equal(libUtil.join('', './b'), 'b');
 	  assert.equal(libUtil.join('.', './b'), 'b');
-	
+
 	  assert.equal(libUtil.join('', 'http://www.example.com'), 'http://www.example.com');
 	  assert.equal(libUtil.join('.', 'http://www.example.com'), 'http://www.example.com');
 	  assert.equal(libUtil.join('', 'data:foo,bar'), 'data:foo,bar');
 	  assert.equal(libUtil.join('.', 'data:foo,bar'), 'data:foo,bar');
-	
-	
+
+
 	  assert.equal(libUtil.join('..', 'b'), '../b');
 	  assert.equal(libUtil.join('..', 'b/'), '../b/');
 	  assert.equal(libUtil.join('..', 'b//'), '../b/');
-	
+
 	  assert.equal(libUtil.join('..', '..'), '../..');
 	  assert.equal(libUtil.join('..', '../b'), '../../b');
-	
+
 	  assert.equal(libUtil.join('..', '.'), '..');
 	  assert.equal(libUtil.join('..', './b'), '../b');
-	
+
 	  assert.equal(libUtil.join('..', 'http://www.example.com'), 'http://www.example.com');
 	  assert.equal(libUtil.join('..', 'data:foo,bar'), 'data:foo,bar');
-	
-	
+
+
 	  assert.equal(libUtil.join('a', ''), 'a');
 	  assert.equal(libUtil.join('a', '.'), 'a');
 	  assert.equal(libUtil.join('a/', ''), 'a');
@@ -225,8 +225,8 @@ var SOURCE_MAP_TEST_MODULE =
 	  assert.equal(libUtil.join('http://foo.org//', '.'), 'http://foo.org/');
 	  assert.equal(libUtil.join('//www.example.com', ''), '//www.example.com/');
 	  assert.equal(libUtil.join('//www.example.com', '.'), '//www.example.com/');
-	
-	
+
+
 	  assert.equal(libUtil.join('http://foo.org/a', 'b'), 'http://foo.org/a/b');
 	  assert.equal(libUtil.join('http://foo.org/a/', 'b'), 'http://foo.org/a/b');
 	  assert.equal(libUtil.join('http://foo.org/a//', 'b'), 'http://foo.org/a/b');
@@ -234,35 +234,35 @@ var SOURCE_MAP_TEST_MODULE =
 	  assert.equal(libUtil.join('http://foo.org/a', 'b//'), 'http://foo.org/a/b/');
 	  assert.equal(libUtil.join('http://foo.org/a/', '/b'), 'http://foo.org/b');
 	  assert.equal(libUtil.join('http://foo.org/a//', '//b'), 'http://b');
-	
+
 	  assert.equal(libUtil.join('http://foo.org/a', '..'), 'http://foo.org/');
 	  assert.equal(libUtil.join('http://foo.org/a', '../b'), 'http://foo.org/b');
 	  assert.equal(libUtil.join('http://foo.org/a/b', '../c'), 'http://foo.org/a/c');
-	
+
 	  assert.equal(libUtil.join('http://foo.org/a', '.'), 'http://foo.org/a');
 	  assert.equal(libUtil.join('http://foo.org/a', './b'), 'http://foo.org/a/b');
 	  assert.equal(libUtil.join('http://foo.org/a/b', './c'), 'http://foo.org/a/b/c');
-	
+
 	  assert.equal(libUtil.join('http://foo.org/a', 'http://www.example.com'), 'http://www.example.com');
 	  assert.equal(libUtil.join('http://foo.org/a', 'data:foo,bar'), 'data:foo,bar');
-	
-	
+
+
 	  assert.equal(libUtil.join('http://foo.org', 'a'), 'http://foo.org/a');
 	  assert.equal(libUtil.join('http://foo.org/', 'a'), 'http://foo.org/a');
 	  assert.equal(libUtil.join('http://foo.org//', 'a'), 'http://foo.org/a');
 	  assert.equal(libUtil.join('http://foo.org', '/a'), 'http://foo.org/a');
 	  assert.equal(libUtil.join('http://foo.org/', '/a'), 'http://foo.org/a');
 	  assert.equal(libUtil.join('http://foo.org//', '/a'), 'http://foo.org/a');
-	
-	
+
+
 	  assert.equal(libUtil.join('http://', 'www.example.com'), 'http://www.example.com');
 	  assert.equal(libUtil.join('file:///', 'www.example.com'), 'file:///www.example.com');
 	  assert.equal(libUtil.join('http://', 'ftp://example.com'), 'ftp://example.com');
-	
+
 	  assert.equal(libUtil.join('http://www.example.com', '//foo.org/bar'), 'http://foo.org/bar');
 	  assert.equal(libUtil.join('//www.example.com', '//foo.org/bar'), '//foo.org/bar');
 	};
-	
+
 	// TODO Issue #128: Define and test this function properly.
 	exports['test relative()'] = function (assert) {
 	  assert.equal(libUtil.relative('/the/root', '/the/root/one.js'), 'one.js');
@@ -271,16 +271,16 @@ var SOURCE_MAP_TEST_MODULE =
 	  assert.equal(libUtil.relative('http://the/root', 'http://the/rootone.js'), '../rootone.js');
 	  assert.equal(libUtil.relative('/the/root', '/therootone.js'), '/therootone.js');
 	  assert.equal(libUtil.relative('http://the/root', '/therootone.js'), '/therootone.js');
-	
+
 	  assert.equal(libUtil.relative('', '/the/root/one.js'), '/the/root/one.js');
 	  assert.equal(libUtil.relative('.', '/the/root/one.js'), '/the/root/one.js');
 	  assert.equal(libUtil.relative('', 'the/root/one.js'), 'the/root/one.js');
 	  assert.equal(libUtil.relative('.', 'the/root/one.js'), 'the/root/one.js');
-	
+
 	  assert.equal(libUtil.relative('/', '/the/root/one.js'), 'the/root/one.js');
 	  assert.equal(libUtil.relative('/', 'the/root/one.js'), 'the/root/one.js');
 	};
-	
+
 	exports['test computeSourceURL'] = function (assert) {
 	  // Tests with sourceMapURL.
 	  assert.equal(libUtil.computeSourceURL('', 'src/test.js', 'http://example.com'),
@@ -297,7 +297,7 @@ var SOURCE_MAP_TEST_MODULE =
 	               'http://mozilla.com/src/test.js');
 	  assert.equal(libUtil.computeSourceURL('', 'test.js', 'http://example.com/src/test.js.map'),
 	               'http://example.com/src/test.js');
-	
+
 	  // Legacy code won't pass in the sourceMapURL.
 	  assert.equal(libUtil.computeSourceURL('', 'src/test.js'), 'src/test.js');
 	  assert.equal(libUtil.computeSourceURL(undefined, 'src/test.js'), 'src/test.js');
@@ -306,7 +306,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  assert.equal(libUtil.computeSourceURL('src', '/test.js'), 'src/test.js');
 	  assert.equal(libUtil.computeSourceURL('src', '../test.js'), 'test.js');
 	  assert.equal(libUtil.computeSourceURL('src/dir', '../././../test.js'), 'test.js');
-	
+
 	  // This gives different results with the old algorithm and the new
 	  // spec-compliant algorithm.
 	  assert.equal(libUtil.computeSourceURL('http://example.com/dir', '/test.js'),
@@ -324,7 +324,7 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	/**
 	 * This is a helper function for getting values from parameter/options
 	 * objects.
@@ -345,10 +345,10 @@ var SOURCE_MAP_TEST_MODULE =
 	  }
 	}
 	exports.getArg = getArg;
-	
+
 	var urlRegexp = /^(?:([\w+\-.]+):)?\/\/(?:(\w+:\w+)@)?([\w.-]*)(?::(\d+))?(.*)$/;
 	var dataUrlRegexp = /^data:.+\,.+$/;
-	
+
 	function urlParse(aUrl) {
 	  var match = aUrl.match(urlRegexp);
 	  if (!match) {
@@ -363,7 +363,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  };
 	}
 	exports.urlParse = urlParse;
-	
+
 	function urlGenerate(aParsedUrl) {
 	  var url = '';
 	  if (aParsedUrl.scheme) {
@@ -385,7 +385,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  return url;
 	}
 	exports.urlGenerate = urlGenerate;
-	
+
 	/**
 	 * Normalizes a path, or the path portion of a URL:
 	 *
@@ -407,7 +407,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    path = url.path;
 	  }
 	  var isAbsolute = exports.isAbsolute(path);
-	
+
 	  var parts = path.split(/\/+/);
 	  for (var part, up = 0, i = parts.length - 1; i >= 0; i--) {
 	    part = parts[i];
@@ -429,11 +429,11 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	  }
 	  path = parts.join('/');
-	
+
 	  if (path === '') {
 	    path = isAbsolute ? '/' : '.';
 	  }
-	
+
 	  if (url) {
 	    url.path = path;
 	    return urlGenerate(url);
@@ -441,7 +441,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  return path;
 	}
 	exports.normalize = normalize;
-	
+
 	/**
 	 * Joins two paths/URLs.
 	 *
@@ -470,7 +470,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (aRootUrl) {
 	    aRoot = aRootUrl.path || '/';
 	  }
-	
+
 	  // `join(foo, '//www.example.org')`
 	  if (aPathUrl && !aPathUrl.scheme) {
 	    if (aRootUrl) {
@@ -478,21 +478,21 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	    return urlGenerate(aPathUrl);
 	  }
-	
+
 	  if (aPathUrl || aPath.match(dataUrlRegexp)) {
 	    return aPath;
 	  }
-	
+
 	  // `join('http://', 'www.example.com')`
 	  if (aRootUrl && !aRootUrl.host && !aRootUrl.path) {
 	    aRootUrl.host = aPath;
 	    return urlGenerate(aRootUrl);
 	  }
-	
+
 	  var joined = aPath.charAt(0) === '/'
 	    ? aPath
 	    : normalize(aRoot.replace(/\/+$/, '') + '/' + aPath);
-	
+
 	  if (aRootUrl) {
 	    aRootUrl.path = joined;
 	    return urlGenerate(aRootUrl);
@@ -500,11 +500,11 @@ var SOURCE_MAP_TEST_MODULE =
 	  return joined;
 	}
 	exports.join = join;
-	
+
 	exports.isAbsolute = function (aPath) {
 	  return aPath.charAt(0) === '/' || urlRegexp.test(aPath);
 	};
-	
+
 	/**
 	 * Make a path relative to a URL or another path.
 	 *
@@ -515,9 +515,9 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (aRoot === "") {
 	    aRoot = ".";
 	  }
-	
+
 	  aRoot = aRoot.replace(/\/$/, '');
-	
+
 	  // It is possible for the path to be above the root. In this case, simply
 	  // checking whether the root is a prefix of the path won't work. Instead, we
 	  // need to remove components from the root one by one, until either we find
@@ -528,7 +528,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (index < 0) {
 	      return aPath;
 	    }
-	
+
 	    // If the only part of the root that is left is the scheme (i.e. http://,
 	    // file:///, etc.), one or more slashes (/), or simply nothing at all, we
 	    // have exhausted all components, so the path is not relative to the root.
@@ -536,24 +536,24 @@ var SOURCE_MAP_TEST_MODULE =
 	    if (aRoot.match(/^([^\/]+:\/)?\/*$/)) {
 	      return aPath;
 	    }
-	
+
 	    ++level;
 	  }
-	
+
 	  // Make sure we add a "../" for each component we removed from the root.
 	  return Array(level + 1).join("../") + aPath.substr(aRoot.length + 1);
 	}
 	exports.relative = relative;
-	
+
 	var supportsNullProto = (function () {
 	  var obj = Object.create(null);
 	  return !('__proto__' in obj);
 	}());
-	
+
 	function identity (s) {
 	  return s;
 	}
-	
+
 	/**
 	 * Because behavior goes wacky when you set `__proto__` on objects, we
 	 * have to prefix all the strings in our set with an arbitrary character.
@@ -567,31 +567,31 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (isProtoString(aStr)) {
 	    return '$' + aStr;
 	  }
-	
+
 	  return aStr;
 	}
 	exports.toSetString = supportsNullProto ? identity : toSetString;
-	
+
 	function fromSetString(aStr) {
 	  if (isProtoString(aStr)) {
 	    return aStr.slice(1);
 	  }
-	
+
 	  return aStr;
 	}
 	exports.fromSetString = supportsNullProto ? identity : fromSetString;
-	
+
 	function isProtoString(s) {
 	  if (!s) {
 	    return false;
 	  }
-	
+
 	  var length = s.length;
-	
+
 	  if (length < 9 /* "__proto__".length */) {
 	    return false;
 	  }
-	
+
 	  if (s.charCodeAt(length - 1) !== 95  /* '_' */ ||
 	      s.charCodeAt(length - 2) !== 95  /* '_' */ ||
 	      s.charCodeAt(length - 3) !== 111 /* 'o' */ ||
@@ -603,16 +603,16 @@ var SOURCE_MAP_TEST_MODULE =
 	      s.charCodeAt(length - 9) !== 95  /* '_' */) {
 	    return false;
 	  }
-	
+
 	  for (var i = length - 10; i >= 0; i--) {
 	    if (s.charCodeAt(i) !== 36 /* '$' */) {
 	      return false;
 	    }
 	  }
-	
+
 	  return true;
 	}
-	
+
 	/**
 	 * Comparator between two mappings where the original positions are compared.
 	 *
@@ -626,31 +626,31 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalLine - mappingB.originalLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalColumn - mappingB.originalColumn;
 	  if (cmp !== 0 || onlyCompareOriginal) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedColumn - mappingB.generatedColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedLine - mappingB.generatedLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  return strcmp(mappingA.name, mappingB.name);
 	}
 	exports.compareByOriginalPositions = compareByOriginalPositions;
-	
+
 	/**
 	 * Comparator between two mappings with deflated source and name indices where
 	 * the generated positions are compared.
@@ -665,51 +665,51 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedColumn - mappingB.generatedColumn;
 	  if (cmp !== 0 || onlyCompareGenerated) {
 	    return cmp;
 	  }
-	
+
 	  cmp = strcmp(mappingA.source, mappingB.source);
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalLine - mappingB.originalLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalColumn - mappingB.originalColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  return strcmp(mappingA.name, mappingB.name);
 	}
 	exports.compareByGeneratedPositionsDeflated = compareByGeneratedPositionsDeflated;
-	
+
 	function strcmp(aStr1, aStr2) {
 	  if (aStr1 === aStr2) {
 	    return 0;
 	  }
-	
+
 	  if (aStr1 === null) {
 	    return 1; // aStr2 !== null
 	  }
-	
+
 	  if (aStr2 === null) {
 	    return -1; // aStr1 !== null
 	  }
-	
+
 	  if (aStr1 > aStr2) {
 	    return 1;
 	  }
-	
+
 	  return -1;
 	}
-	
+
 	/**
 	 * Comparator between two mappings with inflated source and name strings where
 	 * the generated positions are compared.
@@ -719,31 +719,31 @@ var SOURCE_MAP_TEST_MODULE =
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.generatedColumn - mappingB.generatedColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = strcmp(mappingA.source, mappingB.source);
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalLine - mappingB.originalLine;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  cmp = mappingA.originalColumn - mappingB.originalColumn;
 	  if (cmp !== 0) {
 	    return cmp;
 	  }
-	
+
 	  return strcmp(mappingA.name, mappingB.name);
 	}
 	exports.compareByGeneratedPositionsInflated = compareByGeneratedPositionsInflated;
-	
+
 	/**
 	 * Strip any JSON XSSI avoidance prefix from the string (as documented
 	 * in the source maps specification), and then parse the string as
@@ -753,14 +753,14 @@ var SOURCE_MAP_TEST_MODULE =
 	  return JSON.parse(str.replace(/^\)]}'[^\n]*\n/, ''));
 	}
 	exports.parseSourceMapInput = parseSourceMapInput;
-	
+
 	/**
 	 * Compute the URL of a source given the the source root, the source's
 	 * URL, and the source map's URL.
 	 */
 	function computeSourceURL(sourceRoot, sourceURL, sourceMapURL) {
 	  sourceURL = sourceURL || '';
-	
+
 	  if (sourceRoot) {
 	    // This follows what Chrome does.
 	    if (sourceRoot[sourceRoot.length - 1] !== '/' && sourceURL[0] !== '/') {
@@ -773,7 +773,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    //   entries in the “source” field.
 	    sourceURL = sourceRoot + sourceURL;
 	  }
-	
+
 	  // Historically, SourceMapConsumer did not take the sourceMapURL as
 	  // a parameter.  This mode is still somewhat supported, which is why
 	  // this code block is conditional.  However, it's preferable to pass
@@ -802,7 +802,7 @@ var SOURCE_MAP_TEST_MODULE =
 	    }
 	    sourceURL = join(urlGenerate(parsed), sourceURL);
 	  }
-	
+
 	  return normalize(sourceURL);
 	}
 	exports.computeSourceURL = computeSourceURL;

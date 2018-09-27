@@ -20,7 +20,7 @@ function startTest()
   is(localStorage.exists("test_prototype"), true, "Prototype overridden");
   is(functionCalled, true, "Overridden function called");
   localStorage.clear();
-  
+
   SimpleTest.finish();
 }
 

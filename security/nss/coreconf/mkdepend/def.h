@@ -82,7 +82,7 @@ in this Software without prior written authorization from The Open Group.
 extern int	_debugmask;
 /*
  * debug levels are:
- * 
+ *
  *     0	show ifn*(def)*,endif
  *     1	trace defined/!defined
  *     2	show #include
@@ -149,7 +149,7 @@ struct symtab		**isdefined(char *symbol, struct inclist *file,
 struct symtab		**fdefined(char *symbol, struct inclist *file,
 				   struct inclist **srcfile);
 struct filepointer	*getfile(char *file);
-void                    included_by(struct inclist *ip, 
+void                    included_by(struct inclist *ip,
 				    struct inclist *newfile);
 struct inclist		*newinclude(char *newfile, char *incstring);
 void                    inc_clean (void);
@@ -160,16 +160,16 @@ void                    freefile(struct filepointer *fp);
 void                    define2(char *name, char *val, struct inclist *file);
 void                    define(char *def, struct inclist *file);
 void                    undefine(char *symbol, struct inclist *file);
-int                     find_includes(struct filepointer *filep, 
-				      struct inclist *file, 
-				      struct inclist *file_red, 
+int                     find_includes(struct filepointer *filep,
+				      struct inclist *file,
+				      struct inclist *file_red,
 				      int recursion, boolean failOK);
 
-void                    recursive_pr_include(struct inclist *head, 
+void                    recursive_pr_include(struct inclist *head,
 					     char *file, char *base);
-void                    add_include(struct filepointer *filep, 
-				    struct inclist *file, 
-				    struct inclist *file_red, 
+void                    add_include(struct filepointer *filep,
+				    struct inclist *file,
+				    struct inclist *file_red,
 				    char *include, int type,
 				    boolean failOK);
 

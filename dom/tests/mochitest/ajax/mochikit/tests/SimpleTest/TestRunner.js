@@ -1,7 +1,7 @@
 /**
  * TestRunner: A test runner for SimpleTest
  * TODO:
- * 
+ *
  *  * Avoid moving iframes: That causes reloads on mozilla and opera.
  *
  *
@@ -15,13 +15,13 @@ TestRunner._currentTest = 0;
 TestRunner._urls = [];
 TestRunner._testsDiv = DIV();
 TestRunner._progressDiv = DIV();
-TestRunner._summaryDiv = DIV(null, 
+TestRunner._summaryDiv = DIV(null,
     H1(null, "Tests Summary"),
-    TABLE(null, 
-        THEAD(null, 
+    TABLE(null,
+        THEAD(null,
             TR(null,
-                TH(null, "Test"), 
-                TH(null, "Passed"), 
+                TH(null, "Test"),
+                TH(null, "Passed"),
                 TH(null, "Failed")
             )
         ),
@@ -77,7 +77,7 @@ TestRunner._makeIframe = function (url) {
 TestRunner.runTests = function (/*url...*/) {
     if (TestRunner.logEnabled)
         TestRunner.logger.log("SimpleTest START");
-  
+
     var body = document.getElementsByTagName("body")[0];
     appendChildNodes(body,
         TestRunner._testsDiv,
@@ -85,7 +85,7 @@ TestRunner.runTests = function (/*url...*/) {
         TestRunner._summaryDiv
     );
     for (var i = 0; i < arguments.length; i++) {
-        TestRunner._urls.push(arguments[i]); 
+        TestRunner._urls.push(arguments[i]);
     }
     TestRunner.runNextTest();
 };
@@ -99,10 +99,10 @@ TestRunner.runNextTest = function() {
         var progress = SPAN(null,
             "Running ", A({href:url}, url), "..."
         );
-        
+
         if (TestRunner.logEnabled)
             TestRunner.logger.log(scrapeText(progress));
-        
+
         TestRunner._progressDiv.appendChild(progress);
         TestRunner._iframes[url] = TestRunner._makeIframe(url);
     }  else {
@@ -118,10 +118,10 @@ TestRunner.runNextTest = function() {
 TestRunner.testFinished = function (doc) {
     appendChildNodes(TestRunner._progressDiv, SPAN(null, "Done"), BR());
     var finishedURL = TestRunner._urls[TestRunner._currentTest];
-    
+
     if (TestRunner.logEnabled)
         TestRunner.logger.debug("SimpleTest finished " + finishedURL);
-    
+
     TestRunner._iframeDocuments[finishedURL] = doc;
     // TestRunner._iframes[finishedURL].style.display = "none";
     TestRunner._toggle(TestRunner._iframes[finishedURL]);
@@ -147,7 +147,7 @@ TestRunner.makeSummary = function() {
         var toggle = partial(TestRunner._toggle, TestRunner._iframes[url]);
         var jsurl = "TestRunner._toggle(TestRunner._iframes['" + url + "'])";
         var row = TR(
-            {'style': {'backgroundColor': nNotOK > 0 ? "#f00":"#0f0"}}, 
+            {'style': {'backgroundColor': nNotOK > 0 ? "#f00":"#0f0"}},
             TD(null, url),
             TD(null, nOK),
             TD(null, nNotOK)

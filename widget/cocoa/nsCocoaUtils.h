@@ -240,7 +240,7 @@ public:
   // unless the window the event was originally targeted at is still alive!
   // anEvent may be nil -- in that case the current mouse location is returned.
   static NSPoint ScreenLocationForEvent(NSEvent* anEvent);
-  
+
   // Determines if an event happened over a window, whether or not the event
   // is for the window. Does not take window z-order into account.
   static BOOL IsEventOverWindow(NSEvent* anEvent, NSWindow* aWindow);
@@ -272,10 +272,10 @@ public:
 
   // 3 utility functions to go from a frame of imgIContainer to CGImage and then to NSImage
   // Convert imgIContainer -> CGImageRef, caller owns result
-  
+
   /** Creates a <code>CGImageRef</code> from a frame contained in an <code>imgIContainer</code>.
       Copies the pixel data from the indicated frame of the <code>imgIContainer</code> into a new <code>CGImageRef</code>.
-      The caller owns the <code>CGImageRef</code>. 
+      The caller owns the <code>CGImageRef</code>.
       @param aFrame the frame to convert
       @param aResult the resulting CGImageRef
       @param aIsEntirelyBlack an outparam that, if non-null, will be set to a
@@ -286,10 +286,10 @@ public:
   static nsresult CreateCGImageFromSurface(SourceSurface* aSurface,
                                            CGImageRef* aResult,
                                            bool* aIsEntirelyBlack = nullptr);
-  
+
   /** Creates a Cocoa <code>NSImage</code> from a <code>CGImageRef</code>.
       Copies the pixel data from the <code>CGImageRef</code> into a new <code>NSImage</code>.
-      The caller owns the <code>NSImage</code>. 
+      The caller owns the <code>NSImage</code>.
       @param aInputImage the image to convert
       @param aResult the resulting NSImage
       @return NS_OK if the conversion worked, NS_ERROR_FAILURE otherwise
@@ -303,7 +303,7 @@ public:
       @param aResult the resulting NSImage
       @param scaleFactor the desired scale factor of the NSImage (2 for a retina display)
       @return NS_OK if the conversion worked, NS_ERROR_FAILURE otherwise
-   */  
+   */
   static nsresult CreateNSImageFromImageContainer(imgIContainer *aImage, uint32_t aWhichFrame, NSImage **aResult, CGFloat scaleFactor);
 
   /**

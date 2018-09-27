@@ -1,7 +1,7 @@
 ftp> open cr.yp.to
 Connected to cr.yp.to.
 220 Features: a p .
-Name (cr.yp.to:cyp): 
+Name (cr.yp.to:cyp):
 230 Hi. No need to log in; I'm an anonymous ftp server.
 Remote system type is UNIX.
 Using binary mode to transfer files.
@@ -186,4 +186,4 @@ ftp> ls
 +i0.236499,m1022972131,r,s466,	contact.html
 226 Success.
 ftp> close
-ftp> 
+ftp>

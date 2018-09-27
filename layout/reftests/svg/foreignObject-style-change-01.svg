@@ -16,7 +16,7 @@
 
   function doTest() {
     document.getElementById('fo').style.opacity = '1';
-    
+
     document.documentElement.removeAttribute('class');
   }
   </script>

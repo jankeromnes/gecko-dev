@@ -100,7 +100,7 @@
 
 /**
  * CAIRO_HAS_PS_SURFACE:
- * 
+ *
  * Defined if the PostScript surface backend is available.
  * This macro can be used to conditionally compile backend-specific code.
  */

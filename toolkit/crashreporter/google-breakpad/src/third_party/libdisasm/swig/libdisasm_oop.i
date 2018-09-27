@@ -44,15 +44,15 @@ const char * version_string( void );
 %array_class( unsigned char, byteArray );
 
 
-%apply (unsigned char *STRING, int LENGTH) { 
-	(unsigned char *buf, size_t buf_len) 
+%apply (unsigned char *STRING, int LENGTH) {
+	(unsigned char *buf, size_t buf_len)
 };
 
 
 %inline %{
 
 
-enum x86_asm_format { 
+enum x86_asm_format {
 	unknown_syntax = 0,		/* never use! */
 	native_syntax, 			/* header: 35 bytes */
 	intel_syntax, 			/* header: 23 bytes */
@@ -102,7 +102,7 @@ enum x86_asm_format {
 	        op_immediate = 2,
 	        op_relative_near = 3,
 	        op_relative_far = 4,
-	        op_absolute = 5, 
+	        op_absolute = 5,
 	        op_expression = 6,
 	        op_offset = 7,
 	        op_unknown
@@ -128,8 +128,8 @@ enum x86_asm_format {
 	};
 
 	enum x86_op_flags {
-	        op_signed = 1, op_string = 2, 
-	        op_constant = 4, op_pointer = 8,  
+	        op_signed = 1, op_string = 2,
+	        op_constant = 4, op_pointer = 8,
 		op_sysref = 0x010, op_implied = 0x020,
 		op_hardcode = 0x40, op_es_seg = 0x100,
 	        op_cs_seg = 0x200, op_ss_seg = 0x300,
@@ -215,7 +215,7 @@ enum x86_asm_format {
 		free(buf);
 		return str;
 	}
-	
+
 	int is_address( ) {
 		if ( self->type == op_absolute ||
 		     self->type == op_offset ) {
@@ -262,7 +262,7 @@ enum x86_asm_format {
 
 %extend X86_OpList {
 	X86_OpList () {
-		X86_OpList *list = (X86_OpList *) 
+		X86_OpList *list = (X86_OpList *)
 				calloc( sizeof(X86_OpList), 1 );
 		list->count = 0;
 		return list;
@@ -282,17 +282,17 @@ enum x86_asm_format {
 		free( self );
 	}
 
-	X86_OpListNode * first() { 
+	X86_OpListNode * first() {
 		self->curr = self->head;
-		return self->head; 
+		return self->head;
 	}
 
-	X86_OpListNode * last() { 
+	X86_OpListNode * last() {
 		self->curr = self->tail;
-		return self->tail; 
+		return self->tail;
 	}
 
-	X86_OpListNode * next() { 
+	X86_OpListNode * next() {
 		if (! self->curr ) {
 			self->curr = self->head;
 			return self->head;
@@ -302,7 +302,7 @@ enum x86_asm_format {
 		return self->curr;
 	}
 
-	X86_OpListNode * prev() { 
+	X86_OpListNode * prev() {
 		if (! self->curr ) {
 			self->curr = self->tail;
 			return self->tail;
@@ -411,9 +411,9 @@ enum x86_asm_format {
 	        insn_bound = 0xD004, insn_debug = 0xD005,
 	        insn_trace = 0xD006, insn_invalid_op = 0xD007,
 	        insn_oflow = 0xD008, insn_halt = 0xE001,
-	        insn_in = 0xE002, insn_out = 0xE003, 
+	        insn_in = 0xE002, insn_out = 0xE003,
 	        insn_cpuid = 0xE004, insn_nop = 0xF001,
-	        insn_bcdconv = 0xF002, insn_szconv = 0xF003 
+	        insn_bcdconv = 0xF002, insn_szconv = 0xF003
 	};
 
 	enum x86_insn_note {
@@ -428,7 +428,7 @@ enum x86_asm_format {
 	        insn_oflow_set = 0x4,
 	        insn_dir_set = 0x8,
 	        insn_sign_set = 0x10,
-	        insn_parity_set = 0x20,	
+	        insn_parity_set = 0x20,
 	        insn_carry_or_zero_set = 0x40,
 	        insn_zero_set_or_sign_ne_oflow = 0x80,
 	        insn_carry_clear = 0x100,
@@ -456,9 +456,9 @@ enum x86_asm_format {
 		isa_fpumgt	= 3, isa_mmx		= 4,
 		isa_sse1	= 5, isa_sse2	= 6,
 		isa_sse3	= 7, isa_3dnow	= 8,
-		isa_sys		= 9	
+		isa_sys		= 9
 	};
-	
+
 	enum x86_insn_prefix {
 	        insn_no_prefix = 0,
 	        insn_rep_zero = 1,
@@ -494,7 +494,7 @@ enum x86_asm_format {
 	        int tag;
 	} x86_insn_t;
 
-	typedef void (*x86_operand_fn)(x86_op_t *op, x86_insn_t *insn, 
+	typedef void (*x86_operand_fn)(x86_op_t *op, x86_insn_t *insn,
 		      void *arg);
 
 	enum x86_op_foreach_type {
@@ -509,7 +509,7 @@ enum x86_asm_format {
 		op_explicit = 0x20
 	};
 
-	size_t x86_operand_count( x86_insn_t *insn, 
+	size_t x86_operand_count( x86_insn_t *insn,
 				enum x86_op_foreach_type type );
 	x86_op_t * x86_operand_1st( x86_insn_t *insn );
 	x86_op_t * x86_operand_2nd( x86_insn_t *insn );
@@ -521,7 +521,7 @@ enum x86_asm_format {
 	void x86_set_insn_addr( x86_insn_t *insn, unsigned long addr );
 	int x86_format_mnemonic(x86_insn_t *insn, char *buf, int len,
                         enum x86_asm_format format);
-	int x86_format_insn(x86_insn_t *insn, char *buf, int len, 
+	int x86_format_insn(x86_insn_t *insn, char *buf, int len,
 				enum x86_asm_format);
 	void x86_oplist_free( x86_insn_t *insn );
 	int x86_insn_is_valid( x86_insn_t *insn );
@@ -721,7 +721,7 @@ enum x86_asm_format {
 
 %extend X86_InsnList {
 	X86_InsnList () {
-		X86_InsnList *list = (X86_InsnList *) 
+		X86_InsnList *list = (X86_InsnList *)
 				calloc( sizeof(X86_InsnList), 1 );
 		list->count = 0;
 		return list;
@@ -745,7 +745,7 @@ enum x86_asm_format {
 
 	X86_InsnListNode * last() { return self->tail; }
 
-	X86_InsnListNode * next() { 
+	X86_InsnListNode * next() {
 		if (! self->curr ) {
 			self->curr = self->head;
 			return self->head;
@@ -755,7 +755,7 @@ enum x86_asm_format {
 		return self->curr;
 	}
 
-	X86_InsnListNode * prev() { 
+	X86_InsnListNode * prev() {
 		if (! self->curr ) {
 			self->curr = self->tail;
 			return self->tail;
@@ -814,15 +814,15 @@ enum x86_asm_format {
 		void * disasm_resolver;
 	} X86_Disasm;
 
-	typedef void (*DISASM_REPORTER)( enum x86_report_codes code, 
+	typedef void (*DISASM_REPORTER)( enum x86_report_codes code,
 				 	 void *data, void *arg );
 	typedef void (*DISASM_CALLBACK)( x86_insn_t *insn, void * arg );
-	typedef long (*DISASM_RESOLVER)( x86_op_t *op, 
+	typedef long (*DISASM_RESOLVER)( x86_op_t *op,
 					 x86_insn_t * current_insn,
 				 	 void *arg );
 
 	void x86_report_error( enum x86_report_codes code, void *data );
-	int x86_init( enum x86_options options, DISASM_REPORTER reporter, 
+	int x86_init( enum x86_options options, DISASM_REPORTER reporter,
 		      void *arg);
 	void x86_set_reporter( DISASM_REPORTER reporter, void *arg);
 	void x86_set_options( enum x86_options options );
@@ -837,7 +837,7 @@ enum x86_asm_format {
 	unsigned int x86_sp_reg(void);
 	unsigned int x86_fp_reg(void);
 	unsigned int x86_ip_reg(void);
-	size_t x86_invariant_disasm( unsigned char *buf, int buf_len, 
+	size_t x86_invariant_disasm( unsigned char *buf, int buf_len,
 			  x86_invariant_t *inv );
 	size_t x86_size_disasm( unsigned char *buf, unsigned int buf_len );
 	int x86_disasm( unsigned char *buf, unsigned int buf_len,
@@ -850,8 +850,8 @@ enum x86_asm_format {
 	                        unsigned long buf_rva, unsigned int offset,
 	                        DISASM_CALLBACK func, void *arg,
 	                        DISASM_RESOLVER resolver, void *r_arg );
-	
-	void x86_default_reporter( enum x86_report_codes code, 
+
+	void x86_default_reporter( enum x86_report_codes code,
 				   void *data, void *arg ) {
 		X86_Disasm *dis = (X86_Disasm *) arg;
 		if ( dis ) {
@@ -880,8 +880,8 @@ enum x86_asm_format {
 
 %}
 
-%extend X86_Disasm { 
-	
+%extend X86_Disasm {
+
 	X86_Disasm( ) {
 		X86_Disasm * dis = (X86_Disasm *)
 				calloc( sizeof( X86_Disasm ), 1 );
@@ -937,14 +937,14 @@ enum x86_asm_format {
 	}
 
 	%newobject disasm;
-	x86_insn_t * disasm( unsigned char *buf, size_t buf_len, 
+	x86_insn_t * disasm( unsigned char *buf, size_t buf_len,
 		           unsigned long buf_rva, unsigned int offset ) {
 		x86_insn_t *insn = calloc( sizeof( x86_insn_t ), 1 );
 		x86_disasm( buf, buf_len, buf_rva, offset, insn );
 		return insn;
 	}
 
-	int disasm_range( unsigned char *buf, size_t buf_len, 
+	int disasm_range( unsigned char *buf, size_t buf_len,
 	              unsigned long buf_rva, unsigned int offset,
 		      unsigned int len ) {
 
@@ -954,7 +954,7 @@ enum x86_asm_format {
 			len = buf_len;
 		}
 
-		return x86_disasm_range( buf, buf_rva, offset, len, 
+		return x86_disasm_range( buf, buf_rva, offset, len,
 				x86_default_callback, list );
 	}
 
@@ -964,11 +964,11 @@ enum x86_asm_format {
 
 		/* use default resolver: damn SWIG callbacks! */
 		return x86_disasm_forward( buf, buf_len, buf_rva, offset,
-			                   x86_default_callback, list, 
+			                   x86_default_callback, list,
 					   x86_default_resolver, NULL );
 	}
 
-	size_t disasm_invariant( unsigned char *buf, size_t buf_len, 
+	size_t disasm_invariant( unsigned char *buf, size_t buf_len,
 			  x86_invariant_t *inv ) {
 		return x86_invariant_disasm( buf, buf_len, inv );
 	}

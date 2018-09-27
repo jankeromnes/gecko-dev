@@ -1,5 +1,5 @@
 #! gmake
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -28,8 +28,8 @@ include $(CORE_DEPTH)/coreconf/config.mk
 include config.mk
 
 ifeq ($(OS_TARGET)$(OS_RELEASE), AIX4.2)
-OS_LIBS += -lsvld 
-endif 
+OS_LIBS += -lsvld
+endif
 
 ifeq ($(OS_TARGET)$(OS_RELEASE), SunOS5.6)
 OS_LIBS += -ldl -lxnet -lposix4 -lsocket -lnsl

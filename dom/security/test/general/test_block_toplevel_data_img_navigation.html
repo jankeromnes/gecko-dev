@@ -22,7 +22,7 @@ function test_toplevel_data_image() {
   let win1 = window.open(DATA_PNG);
   let wrappedWin1 = SpecialPowers.wrap(win1);
   setTimeout(function () {
-    let images = wrappedWin1.document.getElementsByTagName('img'); 
+    let images = wrappedWin1.document.getElementsByTagName('img');
     is(images.length, 1, "Loading data:image/png should be allowed");
     is(images[0].src, DATA_PNG, "Sanity: img src matches");
     wrappedWin1.close();

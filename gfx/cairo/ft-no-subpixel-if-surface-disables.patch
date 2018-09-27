@@ -11,10 +11,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-ft-font.c b/gfx/cairo/cairo/src/cairo-ft-
 --- a/gfx/cairo/cairo/src/cairo-ft-font.c
 +++ b/gfx/cairo/cairo/src/cairo-ft-font.c
 @@ -1759,23 +1759,26 @@ static void
- 
+
      if (load_flags & FT_LOAD_NO_HINTING)
  	other->base.hint_style = CAIRO_HINT_STYLE_NONE;
- 
+
      if (other->base.antialias == CAIRO_ANTIALIAS_NONE ||
  	options->base.antialias == CAIRO_ANTIALIAS_NONE) {
  	options->base.antialias = CAIRO_ANTIALIAS_NONE;
@@ -37,10 +37,10 @@ diff --git a/gfx/cairo/cairo/src/cairo-ft-font.c b/gfx/cairo/cairo/src/cairo-ft-
 +	if (options->base.subpixel_order == CAIRO_SUBPIXEL_ORDER_DEFAULT)
 +	    options->base.subpixel_order = other->base.subpixel_order;
      }
- 
+
      if (options->base.hint_style == CAIRO_HINT_STYLE_DEFAULT)
  	options->base.hint_style = other->base.hint_style;
- 
+
      if (other->base.hint_style == CAIRO_HINT_STYLE_NONE)
  	options->base.hint_style = CAIRO_HINT_STYLE_NONE;
- 
+

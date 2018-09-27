@@ -256,7 +256,7 @@ in mozilla/layout/html/src:
 <Body><RunIn>The core frame classes</RunIn> implement the CSS viewport abstraction, scrolling,
 block and inline display of flowed elements, floats, and absolute positioning.</Body>
 
-<Body>For more information on block layout, click 
+<Body>For more information on block layout, click
 <A xlink:type="simple" xlink:show="replace" xlink:href="block.html">here</A>. For more information about
 line layout, click <A xlink:type="simple" xlink:show="replace" xlink:href="line-layout.html">here</A>.</Body>
 

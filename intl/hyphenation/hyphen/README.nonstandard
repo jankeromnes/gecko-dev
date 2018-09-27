@@ -9,7 +9,7 @@ German (before the new orthography): Schiffahrt -> Schiff-fahrt,
 Hungarian: asszonnyal -> asz-szony-nyal (multiple occurance!)
 Swedish: tillata -> till-lata.
 
-Using this extended library, you can define 
+Using this extended library, you can define
 non-standard hyphenation patterns. For example:
 
 l·1l/l=l
@@ -47,7 +47,7 @@ substring will be replaced with the "change".
 
 For example, a German ff -> ff-f hyphenation:
 
-f1f/ff=f 
+f1f/ff=f
 
 or with expansion
 
@@ -60,7 +60,7 @@ A more real example:
 % simple ff -> f-f hyphenation
 f1f
 % Schiffahrt -> Schiff-fahrt hyphenation
-% 
+%
 schif3fahrt/ff=f,5,2
 
 Specification
@@ -84,7 +84,7 @@ Specification
   - start dot doesn't matter: .schif3fahrt/ff=f,5,2
   - numbers don't matter: .s2c2h2i2f3f2ahrt/ff=f,5,2
   - In UTF-8 encoding, use Unicode character positions: Ã¶ssze/sz=sz,2,3
-    ("össze" looks "Ã¶ssze" in an ISO 8859-1 8-bit editor). 
+    ("össze" looks "Ã¶ssze" in an ISO 8859-1 8-bit editor).
 
 - Cut: length of the removed character sequence in the original word.
   - In UTF-8 encoding, use Unicode character length: paralÂ·1lel/l=l,5,3

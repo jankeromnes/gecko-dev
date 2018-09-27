@@ -20,7 +20,7 @@
 
   function doTest() {
     document.getElementById('g').style.fontSize = '16px';
-    
+
     document.documentElement.removeAttribute('class');
   }
   </script>

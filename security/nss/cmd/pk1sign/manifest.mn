@@ -7,9 +7,9 @@ CORE_DEPTH = ../..
 
 MODULE = nss
 
-CSRCS = pk1sign.c  
+CSRCS = pk1sign.c
 
-REQUIRES = seccmd 
+REQUIRES = seccmd
 
 PROGRAM = pk1sign
 

@@ -201,7 +201,7 @@ impl<T: Debug> Debug for FuturesOrdered<T>
 }
 
 impl<F: Future> FromIterator<F> for FuturesOrdered<F> {
-    fn from_iter<T>(iter: T) -> Self 
+    fn from_iter<T>(iter: T) -> Self
         where T: IntoIterator<Item = F>
     {
         let mut new = FuturesOrdered::new();

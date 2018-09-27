@@ -201,7 +201,7 @@ cmsPipeline* BuildGrayInputMatrixPipeline(cmsHPROFILE hProfile)
     return Lut;
 
 Error:
-	// memory pointed by GrayTRC is not a new malloc memory, so don't free it here, 
+	// memory pointed by GrayTRC is not a new malloc memory, so don't free it here,
 	// memory pointed by GrayTRC will be freed when hProfile is closed.
 	// test file :0047776_Pocket Medicine_ The Massachusetts General Hospital Handbook of Internal Medicine-2.pdf
 	// Xiaochuan Liu, 20140421
@@ -246,8 +246,8 @@ cmsPipeline* BuildRGBInputMatrixShaper(cmsHPROFILE hProfile)
             goto Error;
 
         // Note that it is certainly possible a single profile would have a LUT based
-        // tag for output working in lab and a matrix-shaper for the fallback cases. 
-        // This is not allowed by the spec, but this code is tolerant to those cases    
+        // tag for output working in lab and a matrix-shaper for the fallback cases.
+        // This is not allowed by the spec, but this code is tolerant to those cases
         if (cmsGetPCS(hProfile) == cmsSigLabData) {
 
             if (!cmsPipelineInsertStage(Lut, cmsAT_END, _cmsStageAllocXYZ2Lab(ContextID)))
@@ -273,10 +273,10 @@ cmsPipeline* _cmsReadFloatInputTag(cmsHPROFILE hProfile, cmsTagSignature tagFloa
     cmsPipeline* Lut           = cmsPipelineDup((cmsPipeline*) cmsReadTag(hProfile, tagFloat));
     cmsColorSpaceSignature spc = cmsGetColorSpace(hProfile);
     cmsColorSpaceSignature PCS = cmsGetPCS(hProfile);
-    
+
     if (Lut == NULL) return NULL;
-    
-    // input and output of transform are in lcms 0..1 encoding.  If XYZ or Lab spaces are used, 
+
+    // input and output of transform are in lcms 0..1 encoding.  If XYZ or Lab spaces are used,
     //  these need to be normalized into the appropriate ranges (Lab = 100,0,0, XYZ=1.0,1.0,1.0)
     if ( spc == cmsSigLabData)
     {
@@ -288,7 +288,7 @@ cmsPipeline* _cmsReadFloatInputTag(cmsHPROFILE hProfile, cmsTagSignature tagFloa
         if (!cmsPipelineInsertStage(Lut, cmsAT_BEGIN, _cmsStageNormalizeToXyzFloat(ContextID)))
             goto Error;
     }
-    
+
     if ( PCS == cmsSigLabData)
     {
         if (!cmsPipelineInsertStage(Lut, cmsAT_END, _cmsStageNormalizeFromLabFloat(ContextID)))
@@ -299,7 +299,7 @@ cmsPipeline* _cmsReadFloatInputTag(cmsHPROFILE hProfile, cmsTagSignature tagFloa
         if (!cmsPipelineInsertStage(Lut, cmsAT_END, _cmsStageNormalizeFromXyzFloat(ContextID)))
             goto Error;
     }
-    
+
     return Lut;
 
 Error:
@@ -495,8 +495,8 @@ cmsPipeline* BuildRGBOutputMatrixShaper(cmsHPROFILE hProfile)
     if (Lut != NULL) {
 
         // Note that it is certainly possible a single profile would have a LUT based
-        // tag for output working in lab and a matrix-shaper for the fallback cases. 
-        // This is not allowed by the spec, but this code is tolerant to those cases    
+        // tag for output working in lab and a matrix-shaper for the fallback cases.
+        // This is not allowed by the spec, but this code is tolerant to those cases
         if (cmsGetPCS(hProfile) == cmsSigLabData) {
 
             if (!cmsPipelineInsertStage(Lut, cmsAT_END, _cmsStageAllocLab2XYZ(ContextID)))
@@ -546,9 +546,9 @@ cmsPipeline* _cmsReadFloatOutputTag(cmsHPROFILE hProfile, cmsTagSignature tagFlo
     cmsPipeline* Lut           = cmsPipelineDup((cmsPipeline*) cmsReadTag(hProfile, tagFloat));
     cmsColorSpaceSignature PCS = cmsGetPCS(hProfile);
     cmsColorSpaceSignature dataSpace = cmsGetColorSpace(hProfile);
-    
+
     if (Lut == NULL) return NULL;
-    
+
     // If PCS is Lab or XYZ, the floating point tag is accepting data in the space encoding,
     // and since the formatter has already accomodated to 0..1.0, we should undo this change
     if ( PCS == cmsSigLabData)
@@ -562,7 +562,7 @@ cmsPipeline* _cmsReadFloatOutputTag(cmsHPROFILE hProfile, cmsTagSignature tagFlo
             if (!cmsPipelineInsertStage(Lut, cmsAT_BEGIN, _cmsStageNormalizeToXyzFloat(ContextID)))
                 goto Error;
         }
-    
+
     // the output can be Lab or XYZ, in which case normalisation is needed on the end of the pipeline
     if ( dataSpace == cmsSigLabData)
     {
@@ -574,7 +574,7 @@ cmsPipeline* _cmsReadFloatOutputTag(cmsHPROFILE hProfile, cmsTagSignature tagFlo
         if (!cmsPipelineInsertStage(Lut, cmsAT_END, _cmsStageNormalizeFromXyzFloat(ContextID)))
             goto Error;
     }
-    
+
     return Lut;
 
 Error:
@@ -654,7 +654,7 @@ Error:
         return BuildGrayOutputPipeline(hProfile);
     }
 
-    // Not gray, create a normal matrix-shaper, which only operates in XYZ space  
+    // Not gray, create a normal matrix-shaper, which only operates in XYZ space
     return BuildRGBOutputMatrixShaper(hProfile);
 }
 

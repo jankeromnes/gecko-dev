@@ -46,14 +46,14 @@ py.io object reference
 ============================
 
 .. autoclass:: py.io.StdCaptureFD
-    :members: 
+    :members:
     :inherited-members:
 
 .. autoclass:: py.io.StdCapture
-    :members: 
+    :members:
     :inherited-members:
 
 .. autoclass:: py.io.TerminalWriter
-    :members: 
+    :members:
     :inherited-members:
 

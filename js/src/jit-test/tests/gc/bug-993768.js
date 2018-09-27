@@ -9,5 +9,5 @@ function test() {
         f32[i + 1] = f32[i] - 1;
         SECTION += 1;
     }
-} 
+}
 test();

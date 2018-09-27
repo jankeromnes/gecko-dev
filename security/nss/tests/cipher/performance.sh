@@ -1,4 +1,4 @@
-#!/bin/sh  
+#!/bin/sh
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -54,14 +54,14 @@ do
 	echo "bltest -D -m $mode -i ${CIPHERDIR}/$mode.out -k ${CIPHERDIR}/$mode.key -v ${CIPHERDIR}/$mode.iv -p $reps -o ${CIPHERDIR}/$mode.inv"
 	${BINDIR}/bltest -D -m $mode -i ${CIPHERDIR}/$mode.out -k ${CIPHERDIR}/$mode.key -v ${CIPHERDIR}/$mode.iv -p $reps -o ${CIPHERDIR}/$mode.inv >> ${SKPERFOUT}
     fi
-done < ${SKTESTS} 
+done < ${SKTESTS}
 
 while read md buf sk rps cxrps cx op
 do
     if [ $md != "#" ]; then
 	echo "<TR><TH>$md</TH><TD align=right>$buf</TD><TD align=right>$sk</TD><TD align=right>$cxrps/$rps</TD><TD align=right>$cx</TD><TD align=right>$op</TD></TR>" >> ${PERFRESULTS}
     fi
-done < ${SKPERFOUT} 
+done < ${SKPERFOUT}
 
 echo "</TABLE><BR>" >> ${PERFRESULTS}
 
@@ -80,7 +80,7 @@ do
 	echo "bltest -D -m $mode -i ${CIPHERDIR}/$mode.out -k ${CIPHERDIR}/$mode.key -p $reps -o ${CIPHERDIR}/$mode.inv"
 	${BINDIR}/bltest -D -m $mode -i ${CIPHERDIR}/$mode.out -k ${CIPHERDIR}/$mode.key -p $reps -o ${CIPHERDIR}/$mode.inv >> ${RSAPERFOUT}
     fi
-done < ${RSATESTS} 
+done < ${RSATESTS}
 
 echo "<TABLE BORDER=1><TR><TH COLSPAN=7>RSA Cipher Performance</TH></TR>" >> ${PERFRESULTS}
 echo "<TR bgcolor=lightGreen><TH>MODE</TH><TH>INPUT SIZE (bytes)</TH><TH>KEY SIZE (bits)</TH><TH>PUBLIC EXPONENT</TH><TH>REPETITIONS (cx/op)</TH><TH>CONTEXT CREATION TIME (ms)</TH><TH>OPERATION TIME (ms)</TH></TR>" >> ${PERFRESULTS}
@@ -90,7 +90,7 @@ do
     if [ $md != "#" ]; then
 	echo "<TR><TH>$md</TH><TD align=right>$buf</TD><TD align=right>$mod</TD><TD align=right>$pe</TD><TD align=right>$cxrps/$rps</TD><TD align=right>$cx</TD><TD align=right>$op</TD></TR>" >> ${PERFRESULTS}
     fi
-done < ${RSAPERFOUT} 
+done < ${RSAPERFOUT}
 
 echo "</TABLE><BR>" >> ${PERFRESULTS}
 fi
@@ -110,7 +110,7 @@ do
 	echo "bltest -V -m $mode -f ${CIPHERDIR}/$mode.out -k ${CIPHERDIR}/$mode.key -p $reps -i ${CIPHERDIR}/$mode.in -o ${CIPHERDIR}/$mode.out"
 	${BINDIR}/bltest -V -m $mode -f ${CIPHERDIR}/$mode.out -k ${CIPHERDIR}/$mode.key -p $reps -i ${CIPHERDIR}/$mode.in -o ${CIPHERDIR}/$mode.out >> ${DSAPERFOUT}
     fi
-done < ${DSATESTS} 
+done < ${DSATESTS}
 
 echo "<TABLE BORDER=1><TR><TH COLSPAN=6>DSA Cipher Performance</TH></TR>" >> ${PERFRESULTS}
 echo "<TR bgcolor=lightGreen><TH>MODE</TH><TH>INPUT SIZE (bytes)</TH><TH>KEY SIZE (bits)</TH><TH>REPETITIONS (cx/op)</TH><TH>CONTEXT CREATION TIME (ms)</TH><TH>OPERATION TIME (ms)</TH></TR>" >> ${PERFRESULTS}
@@ -120,7 +120,7 @@ do
     if [ $md != "#" ]; then
 	echo "<TR><TH>$md</TH><TD align=right>$buf</TD><TD align=right>$mod</TD><TD align=right>$cxrps/$rps</TD><TD align=right>$cx</TD><TD align=right>$op</TD></TR>" >> ${PERFRESULTS}
     fi
-done < ${DSAPERFOUT} 
+done < ${DSAPERFOUT}
 
 echo "</TABLE><BR>" >> ${PERFRESULTS}
 fi
@@ -135,7 +135,7 @@ do
 	echo "bltest -H -m $mode -i ${CIPHERDIR}/$mode.in -p $reps -o ${CIPHERDIR}/$mode.out"
 	${BINDIR}/bltest -H -m $mode -i ${CIPHERDIR}/$mode.in -p $reps -o ${CIPHERDIR}/$mode.out >> ${HASHPERFOUT}
     fi
-done < ${HASHTESTS} 
+done < ${HASHTESTS}
 
 echo "<TABLE BORDER=1><TR><TH COLSPAN=6>Hash Cipher Performance</TH></TR>" >> ${PERFRESULTS}
 echo "<TR bgcolor=lightGreen><TH>MODE</TH><TH>INPUT SIZE (bytes)</TH><TH>REPETITIONS</TH><TH>OPERATION TIME (ms)</TH></TR>" >> ${PERFRESULTS}
@@ -145,7 +145,7 @@ do
     if [ $md != "#" ]; then
 	echo "<TR><TH>$md</TH><TD align=right>$buf</TD><TD align=right>$rps</TD><TD align=right>$op</TD></TR>" >> ${PERFRESULTS}
     fi
-done < ${HASHPERFOUT} 
+done < ${HASHPERFOUT}
 
 echo "</TABLE><BR>" >> ${PERFRESULTS}
 fi

@@ -7,7 +7,7 @@
 
     <!-- From https://bugzilla.mozilla.org/show_bug.cgi?id=521207 -->
     <defs>
-        <filter primitiveUnits="objectBoundingBox" filterUnits="objectBoundingBox" 
+        <filter primitiveUnits="objectBoundingBox" filterUnits="objectBoundingBox"
                 id="filter_1" x="-50%" y="-50%" width="200%" height="200%">
             <feTile />
         </filter>

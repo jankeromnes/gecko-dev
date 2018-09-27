@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!--
 
-Description: channel copyright works 
+Description: channel copyright works
 Expect:      feed.fields.getProperty('wfw:commentRss') == 'http://example.org'
 
 -->

@@ -18,7 +18,7 @@ catch(e){
 finally{
   fin=1;
 }
-if (fin!==1) $ERROR('#1.2: "finally" block must be evaluated'); 
+if (fin!==1) $ERROR('#1.2: "finally" block must be evaluated');
 
 // CHECK#2
 fin=0;
@@ -31,7 +31,7 @@ catch(e){
 finally{
   fin=1;
 }
-if (fin!==1) $ERROR('#2.2: "finally" block must be evaluated'); 
+if (fin!==1) $ERROR('#2.2: "finally" block must be evaluated');
 
 // CHECK#3
 fin=0;
@@ -45,7 +45,7 @@ catch(e){
 finally{
   fin=1;
 }
-if (fin!==1) $ERROR('#3.2: "finally" block must be evaluated'); 
+if (fin!==1) $ERROR('#3.2: "finally" block must be evaluated');
 
 // CHECK#4
 fin=0;
@@ -58,7 +58,7 @@ catch(e){
 finally{
   fin=1;
 }
-if (fin!==1) $ERROR('#4.2: "finally" block must be evaluated'); 
+if (fin!==1) $ERROR('#4.2: "finally" block must be evaluated');
 
 // CHECK#5
 fin=0;
@@ -71,7 +71,7 @@ catch(e){
 finally{
   fin=1;
 }
-if (fin!==1) $ERROR('#5.2: "finally" block must be evaluated'); 
+if (fin!==1) $ERROR('#5.2: "finally" block must be evaluated');
 
 // CHECK#6
 fin=0;
@@ -84,12 +84,12 @@ catch(e){
 finally{
   fin=1;
 }
-if (fin!==1) $ERROR('#6.2: "finally" block must be evaluated'); 
+if (fin!==1) $ERROR('#6.2: "finally" block must be evaluated');
 
 // CHECK#7
 fin=0;
 try{
-  throw URIError("message", "fileName", "1"); 
+  throw URIError("message", "fileName", "1");
 }
 catch(e){
   if (e.toString()!=="URIError: message") $ERROR('#7.1: Exception.toString()==="URIError: message". Actual: Exception is '+e);

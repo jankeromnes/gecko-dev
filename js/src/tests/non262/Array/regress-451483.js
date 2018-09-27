@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = true;
   var result = [].splice.call(0);
   print('[].splice.call(0) = ' + result);

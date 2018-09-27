@@ -1,6 +1,6 @@
 ftp> open pandora.anglistik.uni-mainz.de
 220 pandora FTP Server for NW 3.1x, 4.xx  (v1.10), (c) 1994 HellSoft.
-Name (pandora.anglistik.uni-mainz.de:cyp): 
+Name (pandora.anglistik.uni-mainz.de:cyp):
 331 Password required.
 230-User Logged.
 230 Home Directory: /SYS/USER/FTP

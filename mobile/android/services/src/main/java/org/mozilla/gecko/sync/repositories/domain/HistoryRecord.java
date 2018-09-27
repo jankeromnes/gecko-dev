@@ -160,7 +160,7 @@ public class HistoryRecord extends Record {
     // Now they can't both be null.
     int aSize = this.visits == null ? 0 : this.visits.size();
     int bSize = other.visits == null ? 0 : other.visits.size();
-    
+
     if (aSize != bSize) {
       return false;
     }
@@ -173,7 +173,7 @@ public class HistoryRecord extends Record {
       JSONObject visit = (JSONObject) other.visits.get(i);
       otherVisits.put((Long) visit.get("date"), (Long) visit.get("type"));
     }
-    
+
     for (int i = 0; i < aSize; i++) {
       JSONObject visit = (JSONObject) this.visits.get(i);
       if (!otherVisits.containsKey(visit.get("date"))) {
@@ -188,11 +188,11 @@ public class HistoryRecord extends Record {
         return false;
       }
     }
-    
+
     return true;
   }
-  
-//  
+
+//
 //  Example record (note microsecond resolution):
 //
 //  {id:"--DUvUomABNq",
@@ -209,7 +209,7 @@ public class HistoryRecord extends Record {
 //           {date:1319678117125234, type:1},
 //           {date:1319677508862901, type:1}]
 //  }
-//   
+//
 //"type" is a transition type:
 //
 //https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsINavHistoryService#Transition_type_constants

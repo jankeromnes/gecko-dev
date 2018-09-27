@@ -20,7 +20,7 @@ class nsILocalFileMac;
 class nsFilePicker : public nsBaseFilePicker
 {
 public:
-  nsFilePicker(); 
+  nsFilePicker();
 
   NS_DECL_ISUPPORTS
 
@@ -60,12 +60,12 @@ protected:
   void     SetDialogTitle(const nsString& inTitle, id aDialog);
   NSString *PanelDefaultDirectory();
   NSView* GetAccessoryView();
-                                                
+
   nsString               mTitle;
   nsCOMArray<nsIFile>    mFiles;
   nsString               mDefault;
 
-  nsTArray<nsString>     mFilters; 
+  nsTArray<nsString>     mFilters;
   nsTArray<nsString>     mTitles;
 
   int32_t                mSelectedTypeIndex;

@@ -11,9 +11,9 @@ var expect = 'No Crash';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 this.__proto__.x = eval;
-for (i = 0; i < 16; ++i) 
+for (i = 0; i < 16; ++i)
   delete eval;
 (function w() { x = 1; })();
 

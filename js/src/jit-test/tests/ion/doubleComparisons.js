@@ -1,7 +1,7 @@
 
 function gen_f(x) {
     var f = "{\n" +
-	    "    var x = " + x + ";\n" + 
+	    "    var x = " + x + ";\n" +
 	    "    if (x)\n" +
 	    "        return true;\n" +
 	    "    return false;\n" +

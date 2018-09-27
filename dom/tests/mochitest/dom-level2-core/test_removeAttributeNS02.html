@@ -38,13 +38,13 @@ function setUpPage() {
        setImplementationAttribute("validating", true);
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staffNS");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -55,7 +55,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -74,14 +74,14 @@ var docName = 'removeAttributeNS02';
 
 
 /**
-* 
-    The "removeAttributeNS(namespaceURI,localName)" removes an attribute by 
+*
+    The "removeAttributeNS(namespaceURI,localName)" removes an attribute by
    local name and namespace URI.  If the removed attribute has a
    default value it is immediately replaced.  The replacing attribute has the same
    namespace URI and local name, as well as the original prefix.
-   
+
    Retrieve the attribute named "emp:local" from emp:address
-   node, then remove the "emp:local" 
+   node, then remove the "emp:local"
    attribute by invoking the "removeAttributeNS(namespaceURI,localName)" method.
    The "emp:local" attribute has a default value defined in the
    DTD file, that value should immediately replace the old
@@ -103,7 +103,7 @@ function removeAttributeNS02() {
       var namespaceURI;
       var localName;
       var prefix;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -126,7 +126,7 @@ function removeAttributeNS02() {
        assertEquals("uri","http://www.nist.gov",namespaceURI);
        assertEquals("lname","local1",localName);
        assertEquals("prefix","emp",prefix);
-       
+
 }
 
 </script>
@@ -135,12 +135,12 @@ function removeAttributeNS02() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level2/core/removeAttributeNS02</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

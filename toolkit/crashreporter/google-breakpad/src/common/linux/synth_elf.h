@@ -103,7 +103,7 @@ class ELF : public Section {
   int AddSection(const string& name, const Section& section,
                  uint32_t type, uint32_t flags = 0, uint64_t addr = 0,
                  uint32_t link = 0, uint64_t entsize = 0, uint64_t offset = 0);
-                  
+
   // Add a segment containing from section index start to section index end.
   // The indexes must have been gotten from AddSection.
   void AddSegment(int start, int end, uint32_t type, uint32_t flags = 0);

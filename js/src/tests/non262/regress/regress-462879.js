@@ -26,6 +26,6 @@ function test()
   catch(ex)
   {
   }
- 
+
   reportCompare(expect, actual, summary);
 }

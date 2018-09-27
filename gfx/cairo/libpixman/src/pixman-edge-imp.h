@@ -90,7 +90,7 @@ RASTERIZE_EDGES (pixman_image_t  *image,
 #define RIGHT_MASK(x)							\
 		(((32 - (x)) & 0x1f) ?					\
 		 SCREEN_SHIFT_LEFT (0xffffffff, (32 - (x)) & 0x1f) : 0)
-		
+
 #define MASK_BITS(x,w,l,n,r) {						\
 		    n = (w);						\
 		    r = RIGHT_MASK ((x) + n);				\
@@ -105,17 +105,17 @@ RASTERIZE_EDGES (pixman_image_t  *image,
 		    }							\
 		    n >>= 5;						\
 		}
-		
+
 		uint32_t  *a = line;
 		uint32_t  startmask;
 		uint32_t  endmask;
 		int	    nmiddle;
 		int	    width = rxi - lxi;
 		int	    x = lxi;
-		
+
 		a += x >> 5;
 		x &= 0x1f;
-		
+
 		MASK_BITS (x, width, startmask, nmiddle, endmask);
 
 		if (startmask) {

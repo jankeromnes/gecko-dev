@@ -18,7 +18,7 @@ class CPropertyPage: public CDialog
 {
 public:
   CPropertyPage(HWND window = NULL): CDialog(window){};
-  
+
   void Changed() { PropSheet_Changed(GetParent(), (HWND)*this); }
   void UnChanged() { PropSheet_UnChanged(GetParent(), (HWND)*this); }
 

@@ -29,7 +29,7 @@ function test()
 
     function createArray()
     {
-      var a;                
+      var a;
       for (var i = 0; i < 10; i++)
         a = [1, 2, 3, 4, 5];
       return a;

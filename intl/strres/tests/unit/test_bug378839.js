@@ -28,7 +28,7 @@ const value_hello = "Hello World"; // tests formatStringFromName with parameter
 
 
 function run_test() {
-    var StringBundle = 
+    var StringBundle =
 	Cc["@mozilla.org/intl/stringbundle;1"]
 	 .getService(Ci.nsIStringBundleService);
     var ios = Cc["@mozilla.org/network/io-service;1"]
@@ -61,4 +61,4 @@ function run_test() {
     var bundle_hello = bundle.formatStringFromName(name_hello, [var_hello], 1);
     Assert.equal(bundle_hello, value_hello);
 }
-    
+

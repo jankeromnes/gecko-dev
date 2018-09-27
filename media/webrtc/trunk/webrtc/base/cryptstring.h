@@ -76,7 +76,7 @@ public:
     length_ = 0;
     storage_[0] = 0;
   }
-  
+
   void Append(const std::string & text) {
     Append(text.data(), text.length());
   }
@@ -87,7 +87,7 @@ public:
     length_ += length;
     storage_[length_] = '\0';
   }
-  
+
   void Append(const CryptString * password) {
     size_t len = password->GetLength();
     EnsureStorage(length_ + len + 1);
@@ -123,7 +123,7 @@ public:
 
     if (old_capacity) {
       memcpy(storage_, old_storage, length_);
-    
+
       // zero memory in a way that an optimizer won't optimize it out
       old_storage[0] = 0;
       for (size_t i = 1; i < old_capacity; i++) {
@@ -131,7 +131,7 @@ public:
       }
       delete[] old_storage;
     }
-  }  
+  }
 
   ~FormatCryptString() {
     if (capacity_) {

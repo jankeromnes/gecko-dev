@@ -17,7 +17,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
 
   var z = 0; for (let j = 0; j < 5; ++j) { ({p: (-z)}); }
 

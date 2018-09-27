@@ -205,10 +205,10 @@ cleanup:
  *
  * During the most recent enhancement of this function, it has been found that
  * it doesn't correctly implement non-blocking I/O.
- * 
+ *
  * The nbioContext is used in two places, for "response-obtaining" and
  * for "response-verification".
- * 
+ *
  * However, if this function gets called to resume, it always
  * repeats the "request creation" and "response fetching" steps!
  * As a result, the earlier operation is never resumed.
@@ -252,14 +252,14 @@ pkix_OcspChecker_CheckExternal(
             PKIX_PL_OcspCertID_Create(cert, NULL, &cid,
                                       plContext),
             PKIX_OCSPCERTIDCREATEFAILED);
-        
+
         /* create request */
         PKIX_CHECK(
-            pkix_pl_OcspRequest_Create(cert, cid, validity, NULL, 
+            pkix_pl_OcspRequest_Create(cert, cid, validity, NULL,
                                        methodFlags, &uriFound, &request,
                                        plContext),
             PKIX_OCSPREQUESTCREATEFAILED);
-        
+
         if (uriFound == PKIX_FALSE) {
             /* no caching for certs lacking URI */
             resultCode = 0;
@@ -313,7 +313,7 @@ pkix_OcspChecker_CheckExternal(
                             passed = PKIX_FALSE;
                         }
                 }
-                
+
                 if (passed){
                         PKIX_CHECK_NO_GOTO(
                             pkix_pl_OcspResponse_GetStatus(response, &passed,
@@ -327,7 +327,7 @@ pkix_OcspChecker_CheckExternal(
                 if (passed){
                         PKIX_CHECK_NO_GOTO(
                             pkix_pl_OcspResponse_VerifySignature(response, cert,
-                                                                 procParams, &passed, 
+                                                                 procParams, &passed,
                                                                  &nbioContext, plContext),
                             PKIX_OCSPRESPONSEVERIFYSIGNATUREFAILED);
                         if (pkixErrorResult) {
@@ -349,7 +349,7 @@ pkix_OcspChecker_CheckExternal(
                          * been a failure yet, we must cache the POST
                          * failure now.
                          */
-                         
+
                         if (cid && cid->certID) {
                                 /* Caching MIGHT consume the cid. */
                                 PKIX_Error *err;
@@ -364,7 +364,7 @@ pkix_OcspChecker_CheckExternal(
                 if (passed){
                         PKIX_Boolean allowCachingOfFailures =
                                 (currentStage == stagePOST) ? PKIX_TRUE : PKIX_FALSE;
-                        
+
                         PKIX_CHECK_NO_GOTO(
                             pkix_pl_OcspResponse_GetStatusForCert(cid, response,
                                                                   allowCachingOfFailures,
@@ -397,7 +397,7 @@ pkix_OcspChecker_CheckExternal(
         } while (retry);
 
 cleanup:
-        if (revStatus == PKIX_RevStatus_NoInfo && (uriFound || 
+        if (revStatus == PKIX_RevStatus_NoInfo && (uriFound ||
 	    methodFlags & PKIX_REV_M_REQUIRE_INFO_ON_MISSING_SOURCE) &&
             methodFlags & PKIX_REV_M_FAIL_ON_MISSING_FRESH_INFO) {
             revStatus = PKIX_RevStatus_Revoked;

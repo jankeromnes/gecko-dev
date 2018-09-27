@@ -13,7 +13,7 @@ if (isNaN(-NaN) !== true) {
 }
 
 //CHECK#2
-var x = NaN; 
+var x = NaN;
 if (isNaN(-x) != true) {
   $ERROR('#2: var x = NaN; -x === Not-a-Number. Actual: ' + (-x));
 }

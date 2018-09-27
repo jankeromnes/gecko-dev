@@ -73,7 +73,7 @@ typedef struct CnvExtData {
 NewConverter *
 CnvExtOpen(UCMFile *ucm) {
     CnvExtData *extData;
-    
+
     extData=(CnvExtData *)uprv_malloc(sizeof(CnvExtData));
     if(extData==NULL) {
         printf("out of memory\n");

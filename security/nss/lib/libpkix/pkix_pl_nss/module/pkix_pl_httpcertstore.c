@@ -179,7 +179,7 @@ certCallback(void *arg, SECItem **secitemCerts, int numcerts)
                     if (error->errClass == PKIX_FATAL_ERROR) {
                         cbContext->error = error;
                         return SECFailure;
-                    } 
+                    }
                     /* reuse "error" since we could not destruct the old *
                      * value */
                     error = PKIX_PL_Object_DecRef((PKIX_PL_Object *)error,
@@ -204,7 +204,7 @@ typedef SECStatus (*pkix_DecodeCertsFunc)(char *certbuf, int certlen,
 
 
 struct pkix_DecodeFuncStr {
-    pkix_DecodeCertsFunc func;          /* function pointer to the 
+    pkix_DecodeCertsFunc func;          /* function pointer to the
                                          * CERT_DecodeCertPackage function */
     PRLibrary *smimeLib;                /* Pointer to the smime shared lib*/
     PRCallOnceType once;
@@ -223,7 +223,7 @@ static const PRCallOnceType pkix_pristine;
  */
 static PRStatus PR_CALLBACK pkix_getDecodeFunction(void)
 {
-    pkix_decodeFunc.smimeLib = 
+    pkix_decodeFunc.smimeLib =
 		PR_LoadLibrary(SHLIB_PREFIX"smime3."SHLIB_SUFFIX);
     if (pkix_decodeFunc.smimeLib == NULL) {
 	return PR_FAILURE;
@@ -239,7 +239,7 @@ static PRStatus PR_CALLBACK pkix_getDecodeFunction(void)
 }
 
 /*
- * clears our global state on shutdown. 
+ * clears our global state on shutdown.
  */
 void
 pkix_pl_HttpCertStore_Shutdown(void *plContext)
@@ -265,7 +265,7 @@ pkix_pl_HttpCertStore_DecodeCertPackage
         void *arg,
         void *plContext)
 {
-   
+
         PRStatus status;
         SECStatus rv;
 
@@ -290,7 +290,7 @@ pkix_pl_HttpCertStore_DecodeCertPackage
         if (rv != SECSuccess) {
                 PKIX_ERROR (PKIX_SECREADPKCS7CERTSFAILED);
         }
-    
+
 
 cleanup:
 
@@ -341,7 +341,7 @@ pkix_pl_HttpCertStore_ProcessCertResponse(
 
         PKIX_ENTER(HTTPCERTSTORECONTEXT,
                 "pkix_pl_HttpCertStore_ProcessCertResponse");
-        
+
         cbContext.error = NULL;
         cbContext.plContext = plContext;
         cbContext.pkixCertList = NULL;
@@ -364,7 +364,7 @@ pkix_pl_HttpCertStore_ProcessCertResponse(
         PKIX_CHECK(
             PKIX_List_Create(&cbContext.pkixCertList, plContext),
             PKIX_LISTCREATEFAILED);
-        
+
         PKIX_CHECK_ONLY_FATAL(
             pkix_pl_HttpCertStore_DecodeCertPackage(responseData,
                                                     responseDataLen,
@@ -377,7 +377,7 @@ pkix_pl_HttpCertStore_ProcessCertResponse(
             pkixErrorResult = cbContext.error;
             goto cleanup;
         }
-        
+
         *pCertList = cbContext.pkixCertList;
         cbContext.pkixCertList = NULL;
 
@@ -539,13 +539,13 @@ pkix_pl_HttpCertStore_CreateRequestSession(
             (*hcv1->freeFcn)(context->requestSession);
             context->requestSession = 0;
         }
-        
+
         rv = (*hcv1->createFcn)(context->serverSession, "http",
                          context->path, "GET",
                          PR_SecondsToInterval(
                              ((PKIX_PL_NssContext*)plContext)->timeoutSeconds),
                          &(context->requestSession));
-        
+
         if (rv != SECSuccess) {
             PKIX_ERROR(PKIX_HTTPSERVERERROR);
         }
@@ -591,16 +591,16 @@ pkix_pl_HttpCertStore_GetCert(
         if (context->client->version != 1) {
             PKIX_ERROR(PKIX_UNSUPPORTEDVERSIONOFHTTPCLIENT);
         }
-        
+
         hcv1 = &(context->client->fcnTable.ftable1);
 
         PKIX_CHECK(pkix_pl_HttpCertStore_CreateRequestSession
                    (context, plContext),
                    PKIX_HTTPCERTSTORECREATEREQUESTSESSIONFAILED);
-        
-        responseDataLen = 
+
+        responseDataLen =
             ((PKIX_PL_NssContext*)plContext)->maxResponseLength;
-        
+
         rv = (*hcv1->trySendAndReceiveFcn)(context->requestSession,
                                         (PRPollDesc **)&nbioContext,
                                         &responseCode,
@@ -611,7 +611,7 @@ pkix_pl_HttpCertStore_GetCert(
         if (rv != SECSuccess) {
             PKIX_ERROR(PKIX_HTTPSERVERERROR);
         }
-        
+
         if (nbioContext != 0) {
             *pNBIOContext = nbioContext;
             goto cleanup;
@@ -674,7 +674,7 @@ pkix_pl_HttpCertStore_GetCertContinue(
         hcv1 = &(context->client->fcnTable.ftable1);
         PKIX_NULLCHECK_ONE(context->requestSession);
 
-        responseDataLen = 
+        responseDataLen =
             ((PKIX_PL_NssContext*)plContext)->maxResponseLength;
 
         rv = (*hcv1->trySendAndReceiveFcn)(context->requestSession,
@@ -688,7 +688,7 @@ pkix_pl_HttpCertStore_GetCertContinue(
         if (rv != SECSuccess) {
             PKIX_ERROR(PKIX_HTTPSERVERERROR);
         }
-        
+
         if (nbioContext != 0) {
             *pNBIOContext = nbioContext;
             goto cleanup;
@@ -707,7 +707,7 @@ pkix_pl_HttpCertStore_GetCertContinue(
 
 cleanup:
         PKIX_DECREF(context);
-        
+
         PKIX_RETURN(CERTSTORE);
 }
 
@@ -753,7 +753,7 @@ pkix_pl_HttpCertStore_GetCRL(
                    (context, plContext),
                    PKIX_HTTPCERTSTORECREATEREQUESTSESSIONFAILED);
 
-        responseDataLen = 
+        responseDataLen =
             ((PKIX_PL_NssContext*)plContext)->maxResponseLength;
 
         rv = (*hcv1->trySendAndReceiveFcn)(context->requestSession,
@@ -767,7 +767,7 @@ pkix_pl_HttpCertStore_GetCRL(
         if (rv != SECSuccess) {
             PKIX_ERROR(PKIX_HTTPSERVERERROR);
         }
-        
+
         if (nbioContext != 0) {
             *pNBIOContext = nbioContext;
             goto cleanup;
@@ -826,12 +826,12 @@ pkix_pl_HttpCertStore_GetCRLContinue(
             PKIX_ERROR(PKIX_UNSUPPORTEDVERSIONOFHTTPCLIENT);
         }
         hcv1 = &(context->client->fcnTable.ftable1);
-                
+
         PKIX_CHECK(pkix_pl_HttpCertStore_CreateRequestSession
                    (context, plContext),
                    PKIX_HTTPCERTSTORECREATEREQUESTSESSIONFAILED);
-        
-        responseDataLen = 
+
+        responseDataLen =
             ((PKIX_PL_NssContext*)plContext)->maxResponseLength;
 
         rv = (*hcv1->trySendAndReceiveFcn)(context->requestSession,
@@ -841,11 +841,11 @@ pkix_pl_HttpCertStore_GetCRLContinue(
                         NULL, /* &responseHeaders */
                         (const char **)&responseData,
                         &responseDataLen);
-        
+
         if (rv != SECSuccess) {
             PKIX_ERROR(PKIX_HTTPSERVERERROR);
         }
-        
+
         if (nbioContext != 0) {
             *pNBIOContext = nbioContext;
             goto cleanup;
@@ -1129,7 +1129,7 @@ portnum = 2001;
                         (PKIX_PL_Object *)socket,
                         plContext),
                         PKIX_HASHTABLEADDFAILED);
-#endif 
+#endif
         }
 
         *pSocket = socket;

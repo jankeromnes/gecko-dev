@@ -11,7 +11,7 @@ description: >
 
 // CHECK#1
 try {
-  throw "catchme";	
+  throw "catchme";
   $ERROR('#1: throw "catchme" lead to throwing exception');
 }
 catch(e){}
@@ -31,14 +31,14 @@ catch(e){
     $ERROR('#2.2: "finally" block must be evaluated');
   }
 }
- 
+
 // CHECK#3
 var c3=0;
 try{
   throw "exc";
   $ERROR('#3.1: throw "exc" lead to throwing exception');
 }
-catch(err){  	
+catch(err){
   var x3=1;
 }
 finally{
@@ -46,7 +46,7 @@ finally{
 }
 if (x3!==1){
   $ERROR('#3.2: "catch" block must be evaluated');
-}  
+}
 if (c3!==1){
   $ERROR('#3.3: "finally" block must be evaluated');
 }

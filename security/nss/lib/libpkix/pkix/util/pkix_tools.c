@@ -185,10 +185,10 @@ pkix_Throw(
 
         *pError = NULL;
 
-#ifdef PKIX_OBJECT_LEAK_TEST        
+#ifdef PKIX_OBJECT_LEAK_TEST
         noErrorState = PKIX_TRUE;
         if (pkixLog) {
-#ifdef PKIX_ERROR_DESCRIPTION            
+#ifdef PKIX_ERROR_DESCRIPTION
             PR_LOG(pkixLog, 4, ("Error in function \"%s\":\"%s\" with cause \"%s\"\n",
                                 funcName, PKIX_ErrorText[errorCode],
                                 (cause ? PKIX_ErrorText[cause->errCode] : "null")));
@@ -208,14 +208,14 @@ pkix_Throw(
                         goto cleanup;
                 }
         }
-        
+
         if (overrideClass == PKIX_FATAL_ERROR){
                 errorClass = overrideClass;
         }
 
        pkixTempResult = PKIX_Error_Create(errorClass, cause, NULL,
                                            errorCode, &error, plContext);
-       
+
        if (!pkixTempResult) {
            /* Setting plErr error code:
             *    get it from PORT_GetError if it is a leaf error and
@@ -231,7 +231,7 @@ cleanup:
 
         PKIX_DEBUG_EXIT(ERROR);
         pkixErrorClass = 0;
-#ifdef PKIX_OBJECT_LEAK_TEST        
+#ifdef PKIX_OBJECT_LEAK_TEST
         noErrorState = PKIX_FALSE;
 
         if (runningLeakTest && fnStackNameArr) {
@@ -522,13 +522,13 @@ pkix_isPlaintext(unsigned char c, PKIX_Boolean debug) {
  *  and "anchors" as the hash keys. If there is no item to match the key,
  *  PKIX_FALSE is stored at "pFound". If an item is found, its cache time is
  *  compared to "testDate". If expired, the item is removed and PKIX_FALSE is
- *  stored at "pFound". Otherwise, PKIX_TRUE is stored at "pFound" and the 
+ *  stored at "pFound". Otherwise, PKIX_TRUE is stored at "pFound" and the
  *  BuildResult is stored at "pBuildResult".
  *  The hashtable is maintained in the following ways:
  *  1) When creating the hashtable, maximum bucket size can be specified (0 for
  *     unlimited). If items in a bucket reaches its full size, an new addition
  *     will trigger the removal of the old as FIFO sequence.
- *  2) A PKIX_PL_Date created with current time offset by constant 
+ *  2) A PKIX_PL_Date created with current time offset by constant
  *     CACHE_ITEM_PERIOD_SECONDS is attached to each item in the Hash Table.
  *     When an item is retrieved, this date is compared against "testDate" for
  *     validity. If comparison indicates this item is expired, the item is
@@ -536,7 +536,7 @@ pkix_isPlaintext(unsigned char c, PKIX_Boolean debug) {
  *
  * PARAMETERS:
  *  "targetCert"
- *      Address of Target Cert as key to retrieve this CertChain. Must be 
+ *      Address of Target Cert as key to retrieve this CertChain. Must be
  *      non-NULL.
  *  "anchors"
  *      Address of PKIX_List of "anchors" is used as key to retrive CertChain.
@@ -692,7 +692,7 @@ cleanup:
  *  1) When creating the hashtable, maximum bucket size can be specified (0 for
  *     unlimited). If items in a bucket reaches its full size, an new addition
  *     will trigger the removal of the old as FIFO sequence.
- *  2) A PKIX_PL_Date created with current time offset by constant 
+ *  2) A PKIX_PL_Date created with current time offset by constant
  *     CACHE_ITEM_PERIOD_SECONDS is attached to each item in the Hash Table.
  *     When an item is retrieved, this date is compared against "testDate" for
  *     validity. If comparison indicates this item is expired, the item is
@@ -700,7 +700,7 @@ cleanup:
  *
  * PARAMETERS:
  *  "targetCert"
- *      Address of Target Cert as key to retrieve this CertChain. Must be 
+ *      Address of Target Cert as key to retrieve this CertChain. Must be
  *      non-NULL.
  *  "anchors"
  *      Address of PKIX_List of "anchors" is used as key to retrive CertChain.
@@ -770,7 +770,7 @@ cleanup:
  *  1) When creating the hashtable, maximum bucket size can be specified (0 for
  *     unlimited). If items in a bucket reaches its full size, an new addition
  *     will trigger the removal of the old as FIFO sequence.
- *  2) A PKIX_PL_Date created with current time offset by constant 
+ *  2) A PKIX_PL_Date created with current time offset by constant
  *     CACHE_ITEM_PERIOD_SECONDS is attached to each item in the Hash Table.
  *     When an item is retrieved, this date is compared against "testDate" for
  *     validity. If comparison indicates this item is expired, the item is
@@ -778,7 +778,7 @@ cleanup:
  *
  * PARAMETERS:
  *  "targetCert"
- *      Address of Target Cert as key to retrieve this CertChain. Must be 
+ *      Address of Target Cert as key to retrieve this CertChain. Must be
  *      non-NULL.
  *  "anchors"
  *      Address of PKIX_List of "anchors" is used as key to retrive CertChain.
@@ -886,7 +886,7 @@ cleanup:
  *  1) When creating the hashtable, maximum bucket size can be specified (0 for
  *     unlimited). If items in a bucket reaches its full size, an new addition
  *     will trigger the removal of the old as FIFO sequence.
- *  2) A PKIX_PL_Date created with current time offset by constant 
+ *  2) A PKIX_PL_Date created with current time offset by constant
  *     CACHE_ITEM_PERIOD_SECONDS is attached to each item in the Hash Table.
  *     If the CertStore this Cert is from is a trusted one, the cache period is
  *     shorter so cache can be updated more frequently.
@@ -896,7 +896,7 @@ cleanup:
  *
  * PARAMETERS:
  *  "store"
- *      Address of CertStore as key to retrieve this CertChain. Must be 
+ *      Address of CertStore as key to retrieve this CertChain. Must be
  *      non-NULL.
  *  "certSelParams"
  *      Address of ComCertSelParams that its subject is used as key to retrieve
@@ -1021,7 +1021,7 @@ pkix_CacheCert_Lookup(
                     PKIX_CHECK(PKIX_List_Create(&selCertList, plContext),
                             PKIX_LISTCREATEFAILED);
 
-                    /* 
+                    /*
                      * If any of the Cert on the list is out-dated, invalidate
                      * this cache item.
                      */
@@ -1099,7 +1099,7 @@ pkix_CacheCert_Lookup(
                                 PKIX_HASHTABLEREMOVEFAILED);
                 }
 
-        } 
+        }
 
 cleanup:
 
@@ -1128,7 +1128,7 @@ cleanup:
  *  1) When creating the hashtable, maximum bucket size can be specified (0 for
  *     unlimited). If items in a bucket reaches its full size, an new addition
  *     will trigger the removal of the old as FIFO sequence.
- *  2) A PKIX_PL_Date created with current time offset by constant 
+ *  2) A PKIX_PL_Date created with current time offset by constant
  *     CACHE_ITEM_PERIOD_SECONDS is attached to each item in the Hash Table.
  *     If the CertStore this Cert is from is a trusted one, the cache period is
  *     shorter so cache can be updated more frequently.
@@ -1138,7 +1138,7 @@ cleanup:
  *
  * PARAMETERS:
  *  "store"
- *      Address of CertStore as key to retrieve this CertChain. Must be 
+ *      Address of CertStore as key to retrieve this CertChain. Must be
  *      non-NULL.
  *  "certSelParams"
  *      Address of ComCertSelParams that its subject is used as key to retrieve
@@ -1264,7 +1264,7 @@ cleanup:
  *
  * PARAMETERS:
  *  "store"
- *      Address of CertStore as key to retrieve this CertChain. Must be 
+ *      Address of CertStore as key to retrieve this CertChain. Must be
  *      non-NULL.
  *  "certIssuer"
  *      Address of X500Name that is used as key to retrieve the CRLEntries.
@@ -1306,7 +1306,7 @@ pkix_CacheCrlEntry_Lookup(
         *pFound = PKIX_FALSE;
 
         /* Find CrlEntry(s) by issuer and serial number */
-         
+
         PKIX_CHECK(PKIX_List_Create(&cachedKeys, plContext),
                     PKIX_LISTCREATEFAILED);
 
@@ -1331,7 +1331,7 @@ pkix_CacheCrlEntry_Lookup(
                     plContext);
         pkix_ceLookupCount++;
 
-        /* 
+        /*
          * We don't need check Date to invalidate this cache item,
          * the item is uniquely defined and won't be reverted. Let
          * the FIFO for cleaning up.
@@ -1373,7 +1373,7 @@ cleanup:
  *
  * PARAMETERS:
  *  "store"
- *      Address of CertStore as key to retrieve this CertChain. Must be 
+ *      Address of CertStore as key to retrieve this CertChain. Must be
  *      non-NULL.
  *  "certIssuer"
  *      Address of X500Name that is used as key to retrieve the CRLEntries.
@@ -1408,7 +1408,7 @@ pkix_CacheCrlEntry_Add(
         PKIX_NULLCHECK_ONE(crls);
 
         /* Add CrlEntry(s) by issuer and serial number */
-         
+
         PKIX_CHECK(PKIX_List_Create(&cachedKeys, plContext),
                     PKIX_LISTCREATEFAILED);
 
@@ -1454,8 +1454,8 @@ cleanup:
 #define TEST_START_FN "PKIX_BuildChain"
 
 PKIX_Error*
-pkix_CheckForGeneratedError(PKIX_StdVars * stdVars, 
-                            PKIX_ERRORCLASS errClass, 
+pkix_CheckForGeneratedError(PKIX_StdVars * stdVars,
+                            PKIX_ERRORCLASS errClass,
                             char * fnName,
                             PKIX_Boolean *errSetFlag,
                             void * plContext)
@@ -1464,7 +1464,7 @@ pkix_CheckForGeneratedError(PKIX_StdVars * stdVars,
     PKIX_UInt32 pos = 0;
     PKIX_UInt32 strLen = 0;
 
-    if (fnName) { 
+    if (fnName) {
         if (fnStackNameArr[testStartFnStackPosition] == NULL ||
             strcmp(fnStackNameArr[testStartFnStackPosition], TEST_START_FN)
             ) {
@@ -1476,7 +1476,7 @@ pkix_CheckForGeneratedError(PKIX_StdVars * stdVars,
             noErrorState = PKIX_FALSE;
             errorGenerated = PKIX_FALSE;
         }
-    }   
+    }
 
     if (noErrorState || errorGenerated)  return NULL;
 
@@ -1513,7 +1513,7 @@ pkix_CheckForGeneratedError(PKIX_StdVars * stdVars,
         strcat(errorFnStackString, fnStackNameArr[pos++]);
     }
     noErrorState = PKIX_FALSE;
-    
+
     return genErr;
 }
 #endif /* PKIX_OBJECT_LEAK_TEST */

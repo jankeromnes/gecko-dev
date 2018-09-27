@@ -46,7 +46,7 @@ sub open_log {
             $output_file = "/dev/null";
         }
     }
-    
+
     # use STDOUT for OF (to print summary of test results)
     open(OF, ">&STDOUT") or die "Can't reuse STDOUT for OF\n";
     OF->autoflush;
@@ -56,7 +56,7 @@ sub open_log {
     # redirect STDERR to STDOUT
     open(STDERR, ">&STDOUT") or die "Can't redirect STDERR to STDOUT\n";
     STDERR->autoflush;
-    
+
     # Print header test in summary
     $now = getTime;
     print OF "\nNSPR Test Results - tests\n";
@@ -120,12 +120,12 @@ $lprog = shift; # command to run
     # Create a process group for the child
     # so we can kill all of it if needed
     setsid or die "setsid failed: $!";
-    # Start test program    
+    # Start test program
     exec("./$lprog");
     # We should not be here unless exec failed.
     print "Faild to exec $lprog";
     exit 1 << 8;
-}   
+}
 
 sub ux_wait_timeout {
 # parameters:
@@ -155,7 +155,7 @@ $ltimeout = shift; # timeout
             }
         }
     }
-    
+
     if ($ltimeout == 0) {
         # we ran all the timeout: it's time to kill the child
         print "Timeout ! Kill child process $lpid\n";
@@ -163,7 +163,7 @@ $ltimeout = shift; # timeout
         kill(-9,$lpid);
         $lstatus = 9;
     }
-    
+
     return $lstatus;
 }
 
@@ -198,7 +198,7 @@ $lpath = shift;
     $lpath =~ s/^\/cygdrive\/(\w)\//$1:\//;
     # replace / with \\
     $lpath =~ s/\//\\\\/g;
-    
+
     return $lpath;
 }
 
@@ -214,9 +214,9 @@ $prog = shift;  # Program to test
     $curdir = getcwd;
     $curdir = win_path($curdir);
     $prog_path = "$curdir\\$prog.exe";
-    
+
     print_begin($prog);
-    
+
     Win32::Process::Create($ProcessObj,
                            "$prog_path",
                            "$prog",
@@ -224,7 +224,7 @@ $prog = shift;  # Program to test
                            NORMAL_PRIORITY_CLASS,
                            ".")|| die win_ErrorReport();
     $retwait = $ProcessObj->Wait($timeout * 1000);
-        
+
     if ( $retwait == 0) {
         # the prog didn't finish after the timeout: kill
         $ProcessObj->Kill($status);

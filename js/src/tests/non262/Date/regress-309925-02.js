@@ -11,5 +11,5 @@ var expect = new Date('Sep 24, 11:58:00 (comment) 105') + '';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 reportCompare(expect, actual, summary);

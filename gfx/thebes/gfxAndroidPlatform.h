@@ -30,7 +30,7 @@ public:
     virtual already_AddRefed<gfxASurface>
     CreateOffscreenSurface(const IntSize& aSize,
                            gfxImageFormat aFormat) override;
-    
+
     virtual gfxImageFormat GetOffscreenFormat() override { return mOffscreenFormat; }
 
     // to support IPC font list (sharing between chrome and content)

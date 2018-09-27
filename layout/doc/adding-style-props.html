@@ -111,7 +111,7 @@ The third value is the name of the DOM property used to access your style.<br>
 The last value indicates what must change when the value of the property
 changes. It should be an
 <a href="http://lxr.mozilla.org/seamonkey/source/content/shared/public/nsChangeHint.h">nsChangeHint</a>.</p>
- 
+
 <p>If you need to introduce new constants for the values of the property, they
 must be added to <a href="http://lxr.mozilla.org/seamonkey/source/layout/base/public/nsStyleConsts.h">
 nsStyleConsts.h</a>
@@ -155,7 +155,7 @@ this example we will find the 'UserInterface' section and add our new property
           case eCSSProperty_user_input:       theUserInterface-&gt;mUserInput = aValue;      break;
           case eCSSProperty_user_modify:      theUserInterface-&gt;mUserModify = aValue;     break;
           case eCSSProperty_user_select:      theUserInterface-&gt;mUserSelect = aValue;     break;
-          case eCSSProperty_key_equivalent: 
+          case eCSSProperty_key_equivalent:
             CSS_ENSURE_DATA(theUserInterface-&gt;mKeyEquivalent, nsCSSValueList) {
               theUserInterface-&gt;mKeyEquivalent-&gt;mValue = aValue;
               CSS_IF_DELETE(theUserInterface-&gt;mKeyEquivalent-&gt;mNext);
@@ -237,7 +237,7 @@ the 'List' method to output the property value.<br>
   }
   mUserFocus.AppendToString(buffer, eCSSProperty_user_focus);
   mResizer.AppendToString(buffer, eCSSProperty_resizer);
-  
+
   nsCSSValueList*  cursor = mCursor;
   while (nullptr != cursor) {
     cursor-&gt;mValue.AppendToString(buffer, eCSSProperty_cursor);
@@ -250,7 +250,7 @@ the 'List' method to output the property value.<br>
 }
 
 </pre>
- 
+
   <h3><a name="Parser">CSS Parser</a></h3>
 Next, the CSSParser must be educated about this new property so that it can
 read in the formal declarations and build up the internal declarations that
@@ -359,7 +359,7 @@ MapUIForDeclaration(nsCSSDeclaration* aDecl, const nsStyleStructID&amp; aID, nsC
   if (aID == eStyleStruct_UserInterface) {
     if (aUI.mUserFocus.GetUnit() == eCSSUnit_Null &amp;&amp; ourUI-&gt;mUserFocus.GetUnit() != eCSSUnit_Null)
       aUI.mUserFocus = ourUI-&gt;mUserFocus;
-    
+
     if (aUI.mUserInput.GetUnit() == eCSSUnit_Null &amp;&amp; ourUI-&gt;mUserInput.GetUnit() != eCSSUnit_Null)
       aUI.mUserInput = ourUI-&gt;mUserInput;
 
@@ -374,7 +374,7 @@ MapUIForDeclaration(nsCSSDeclaration* aDecl, const nsStyleStructID&amp; aID, nsC
   else if (aID == eStyleStruct_UIReset) {
     if (aUI.mUserSelect.GetUnit() == eCSSUnit_Null &amp;&amp; ourUI-&gt;mUserSelect.GetUnit() != eCSSUnit_Null)
       aUI.mUserSelect = ourUI-&gt;mUserSelect;
-   
+
     if (!aUI.mKeyEquivalent &amp;&amp; ourUI-&gt;mKeyEquivalent)
       aUI.mKeyEquivalent = ourUI-&gt;mKeyEquivalent;
 
@@ -434,7 +434,7 @@ to the style struct:<br>
   } else if (eCSSUnit_Initial == uiData.mForceBrokenImageIcons.GetUnit()) {
     ui-&gt;mForceBrokenImageIcons = 0;
   }</b>
-  
+
   if (inherited)
     // We inherited, and therefore can't be cached in the rule node.  We have to be put right on the
     // style context.

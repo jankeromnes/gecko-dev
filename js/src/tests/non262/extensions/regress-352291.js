@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   if (typeof dis != 'function')
   {
     actual = expect = 'disassembly not supported, test skipped.';

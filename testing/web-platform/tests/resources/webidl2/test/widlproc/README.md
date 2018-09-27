@@ -30,7 +30,7 @@ Install requirements
 * Cygwin - must install must install libs/libxslt
 * Visual Studio express 2012 or 2010 (see difference below)
 
-makefile uses cygwin make. References are coded in the make file to detect teh current version of visual studio 
+makefile uses cygwin make. References are coded in the make file to detect teh current version of visual studio
 
 # Future work
 windows build could be improved to handle multipe versions with vcvars.bat

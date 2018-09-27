@@ -49,7 +49,7 @@ g[Symbol.iterator] = function() {
 
 var f;
 f = async function*([x]) {
-  
+
 };
 
 assert.throws(Test262Error, function() {

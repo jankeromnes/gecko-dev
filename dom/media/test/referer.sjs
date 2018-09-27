@@ -15,7 +15,7 @@ function parseQuery(request, key) {
 function handleRequest(request, response)
 {
   var referer = request.hasHeader("Referer") ? request.getHeader("Referer")
-                                             : undefined; 
+                                             : undefined;
   if (referer == "http://mochi.test:8888/tests/dom/media/test/test_referer.html") {
     var name = parseQuery(request, "name");
 	var type = parseQuery(request, "type");

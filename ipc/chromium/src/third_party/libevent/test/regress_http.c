@@ -2956,7 +2956,7 @@ http_base_test(void *ptr)
 	const char *http_request;
 	ev_uint16_t port = 0;
 	struct evhttp *http;
-	
+
 	test_ok = 0;
 	base = event_base_new();
 	tt_assert(base);

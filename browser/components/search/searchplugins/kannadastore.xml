@@ -10,5 +10,5 @@
 <Url type="text/html" method="GET" template="http://www.kannadastore.com/advanced_search_result.php" resultdomain="kannadastore.com">
     <Param name="keywords" value="{searchTerms}"/>
 </Url>
-<SearchForm>http://www.kannadastore.com/advanced_search_result.php</SearchForm> 
+<SearchForm>http://www.kannadastore.com/advanced_search_result.php</SearchForm>
 </SearchPlugin>

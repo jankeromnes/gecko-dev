@@ -12,7 +12,7 @@ var expect = 'No Crash';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 var myErr = new Error( "Error Text" );
 myErr.name = myErr;
 

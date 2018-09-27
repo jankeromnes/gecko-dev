@@ -30,6 +30,6 @@ function testInt32ToId()
   return a.join(",") + b.join(",");
 }
 
-assertEq(testInt32ToId(),   
+assertEq(testInt32ToId(),
 	 "false,false,false,false,false,false,false,false,false,true" +
 	 "false,false,false,false,false,false,false,false,false,false");

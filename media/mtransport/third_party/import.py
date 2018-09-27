@@ -14,7 +14,7 @@ import shutil
 def die(msg):
     sys.stderr.write('ERROR:' + msg + '\n')
     sys.exit(1)
-    
+
 DISTRO = sys.argv[1]
 IMPORT_DIR = sys.argv[2]
 FILES = []

@@ -11,7 +11,7 @@ var expect = 'between 47.5% and 52.5%';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 var r = Math.random;
 var c = Math.pow( 2, 53 );
 

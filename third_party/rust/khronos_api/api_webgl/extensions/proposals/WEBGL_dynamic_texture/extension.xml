@@ -202,7 +202,7 @@ interface WEBGL_dynamic_texture {
   const GLenum REQUIRED_TEXTURE_IMAGE_UNITS_OES = 0x8D68;
 
   WDTStream? createStream();
- 
+
   WDTNanoTime getLastDrawingBufferPresentTime();
   void setDrawingBufferPresentTime(WDTNanoTime pt);
   WDTNanoTime ustnow();
@@ -360,7 +360,7 @@ interface WEBGL_dynamic_texture {
     following <code>/* Uniform Types */</code>:<pre class="idl"
     xml:space="preserve">SAMPLER_EXTERNAL = 0x8D66;</pre></li><li>In the
     alphabetical list of commands add the following :<pre class="idl"
-    xml:space="preserve">WDTStream? createStream(); 
+    xml:space="preserve">WDTStream? createStream();
 WDTNanoTime getLastDrawingBufferPresentTime();
 void setDrawingBufferPresentationTime(WDTNanoTime pt);
 WDTNanoTime ustnow();</pre></li></p>
@@ -549,7 +549,7 @@ WDTNanoTime ustnow();</pre></li></p>
 
   readonly attribute WDTNanoTime minFrameDuration;
 
-  readonly attribute GLenum state;  
+  readonly attribute GLenum state;
 
   attribute WDTNanotime acquireTimeout;
   attribute WDTNanoTime consumerLatency;
@@ -800,7 +800,7 @@ WDTNanoTime ustnow();</pre></li></p>
     Note that the surrounding <code>&lt;script&gt;</code> tag is not
     essential; it is merely one way to include shader text in an HTML
     file.<pre xml:space="preserve">&lt;script id="fshader" type="x-shader/x-fragment"&gt;
-  #extension OES_EGL_image_external : enable 
+  #extension OES_EGL_image_external : enable
   precision mediump float;
 
   uniform samplerExternalOES videoSampler;

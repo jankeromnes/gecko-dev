@@ -68,7 +68,7 @@ class DeviceInfoAndroid : public DeviceInfoImpl {
 
  private:
   enum { kExpectedCaptureDelay = 190};
-  static void BuildDeviceList();  
+  static void BuildDeviceList();
 };
 
 }  // namespace videocapturemodule

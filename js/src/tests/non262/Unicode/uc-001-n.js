@@ -11,7 +11,7 @@ function test()
 {
   printStatus ("Unicode Characters 1C-1F negative test.");
   printBugNumber (BUGNUMBER);
-   
+
   reportCompare ("error", eval ("'no'\u001C+' error'"),
 		 "Unicode whitespace test (1C.)");
   reportCompare ("error", eval ("'no'\u001D+' error'"),

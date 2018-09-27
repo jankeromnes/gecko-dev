@@ -20,7 +20,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = 5;
 
   (function(){var x;eval("for (x = 0; x < 5; x++);");print(actual = x);})();

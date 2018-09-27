@@ -83,7 +83,7 @@ class ByteCursor {
   // Create a cursor reading bytes from the start of BUFFER. By default, the
   // cursor reads multi-byte values in little-endian form.
   ByteCursor(const ByteBuffer *buffer, bool big_endian = false)
-      : buffer_(buffer), here_(buffer->start), 
+      : buffer_(buffer), here_(buffer->start),
         big_endian_(big_endian), complete_(true) { }
 
   // Accessor and setter for this cursor's endianness flag.
@@ -147,7 +147,7 @@ class ByteCursor {
   template<typename T>
   ByteCursor &operator>>(T &result) {
     bool T_is_signed = (T)-1 < 0;
-    return Read(sizeof(T), T_is_signed, &result); 
+    return Read(sizeof(T), T_is_signed, &result);
   }
 
   // Copy the SIZE bytes at the cursor to BUFFER, and advance this
@@ -190,7 +190,7 @@ class ByteCursor {
   // - Otherwise, if the LIMIT bytes at the cursor contain any '\0'
   //   characters, set *STR to a copy of the bytes before the first '\0',
   //   and advance the cursor by LIMIT bytes.
-  //   
+  //
   // - Otherwise, set *STR to a copy of those LIMIT bytes, and advance the
   //   cursor by LIMIT bytes.
   ByteCursor &CString(string *str, size_t limit) {

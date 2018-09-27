@@ -12,15 +12,15 @@
  */
 
 /**
- * 
+ *
  * File Name:  omxSP_FFTGetBufSize_R_S16S32.c
  * OpenMAX DL: v1.0.2
  * Last Modified Revision:   7777
  * Last Modified Date:       Thu, 27 Sep 2007
- * 
+ *
  * (c) Copyright 2007-2008 ARM Limited. All Rights Reserved.
- * 
- * 
+ *
+ *
  * Description:
  * Computes the size of the specification structure required.
  */
@@ -53,35 +53,35 @@
  */
 
 OMXResult omxSP_FFTGetBufSize_R_S16S32(
-     OMX_INT order,     
+     OMX_INT order,
      OMX_INT *pSize
  )
 {
     OMX_INT     NBy2,N,twiddleSize;
-    
-    
+
+
     /* Check for order zero */
     if (order == 0)
     {
-        *pSize = sizeof(ARMsFFTSpec_R_SC32)  
-                 + sizeof(OMX_S32) * (2); /* Extra size 'N' is used in FFTInv_CCSToR_S32S16_Sfs as a temporary buf */   
-        
+        *pSize = sizeof(ARMsFFTSpec_R_SC32)
+                 + sizeof(OMX_S32) * (2); /* Extra size 'N' is used in FFTInv_CCSToR_S32S16_Sfs as a temporary buf */
+
         return OMX_Sts_NoErr;
     }
-    
+
     NBy2 = 1 << (order - 1);
     N = NBy2<<1;
     twiddleSize = 5*N/8;            /* 3/4(N/2) + N/4 */
-    
+
     /* 2 pointers to store bitreversed array and twiddle factor array */
     *pSize = sizeof(ARMsFFTSpec_R_SC32)
         /* Twiddle factors  */
            + sizeof(OMX_SC32) * twiddleSize
-        /* Ping Pong buffer for doing the N/2 point complex FFT  */      
+        /* Ping Pong buffer for doing the N/2 point complex FFT  */
            + sizeof(OMX_S32) * (N<<1)  /* Extra size 'N' is used in FFTInv_CCSToR_S32S16_Sfs as a temporary buf */
-           + 62 ;  /* Extra bytes to get 32 byte alignment of ptwiddle and pBuf */ 
-           
-           
+           + 62 ;  /* Extra bytes to get 32 byte alignment of ptwiddle and pBuf */
+
+
     return OMX_Sts_NoErr;
 }
 

@@ -18,10 +18,10 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   expect = '-1073741824,-1073741824,-1073741824,-1073741824,-1073741824,';
 
-  for (let j=0;j<5;++j) 
+  for (let j=0;j<5;++j)
     print(actual += "" + (0 | ((0x60000009) * 0x60000009)) + ',');
 
   reportCompare(expect, actual, summary);

@@ -829,7 +829,7 @@ VRSystemManagerExternal::PullState(VRDisplayState* aDisplayState,
   }
   return true;
 }
-#else 
+#else
 bool
 VRSystemManagerExternal::PullState(VRDisplayState* aDisplayState,
                                    VRHMDSensorState* aSensorState /* = nullptr */,

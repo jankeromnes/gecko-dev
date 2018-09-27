@@ -300,7 +300,7 @@ function setupViewport(contentRootElement) {
 
     // XXX support viewconfig when needed
 }
- 
+
 function setupDisplayport(contentRootElement) {
     if (!contentRootElement) {
         return;

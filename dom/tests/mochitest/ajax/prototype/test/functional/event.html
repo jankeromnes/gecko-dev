@@ -5,7 +5,7 @@
   <title>Prototype functional test file</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <script src="../../dist/prototype.js"       type="text/javascript"></script>
-  
+
   <style type="text/css" media="screen">
   /* <![CDATA[ */
     body { margin:1em 2em; padding:0; font-size:0.8em }
@@ -23,7 +23,7 @@
     a:hover { color:red }
   /* ]]> */
   </style>
-  
+
   <script type="text/javascript">
     Element.addMethods({
       passed: function(el, message) {
@@ -31,14 +31,14 @@
         el.className = 'passed';
         (el.down('span') || el).update(message || 'Test passed!');
       },
-      
+
       failed: function(el, message) {
         el = $(el);
         el.className = 'failed';
         (el.down('span') || el).update(message || 'Test failed');
       }
     });
-    
+
     function log(obj) {
       var line, all = [];
       for (prop in obj) {
@@ -52,14 +52,14 @@
 </head>
 <body>
   <h1>Prototype functional tests for the Event module</h1>
-  
+
   <div id="log">log empty</div>
-  
+
   <p id="basic">A basic event test - <strong>click here</strong></p>
   <p id="basic_remove" class="subtest"><strong>click</strong> to stop observing the first test</p>
-  
+
   <p id="inline_test" onclick="Event.stop(event); $(this).passed();"><strong>click</strong> to ensure generic Event methods work on inline handlers</p>
-  
+
   <script type="text/javascript">
     var basic_callback = function(e){
       $('basic').passed();
@@ -76,9 +76,9 @@
       log(e);
     }).hide()
   </script>
-  
+
   <p id="basic2"><strong>Scope</strong> test - scope of the handler should be this element</p>
-  
+
   <script type="text/javascript">
     $('basic2').observe('click', function(e) {
       if (this === window) $('basic2').failed('Window scope! (needs scope correction)');
@@ -88,7 +88,7 @@
   </script>
 
   <p id="basic3"><strong>Event object</strong> test - should be present as a first argument</p>
-  
+
   <script type="text/javascript">
     $('basic3').observe('click', function(evt) {
       el = $('basic3');
@@ -99,7 +99,7 @@
   </script>
 
   <p><a href="#wrong" id="hijack">Hijack link test</a> (preventDefault)</p>
-  
+
   <script type="text/javascript">
     $('hijack').observe('click', function(e){
       el = $(this.parentNode);
@@ -113,13 +113,13 @@
       }, 50)
     })
   </script>
-  
+
   <hr />
 
 
   <p>Mouse click:
   <span class="button" id="left">left</span> <span class="button" id="middle">middle</span> <span class="button" id="right">right</span></p>
-  
+
   <script type="text/javascript">
     $w('left middle right').each(function(button) {
       Event.observe(button, 'mousedown', function(e) {
@@ -129,9 +129,9 @@
       });
     });
   </script>
-  
+
   <p id="context">Context menu event (tries to prevent default)</p>
-  
+
   <script type="text/javascript">
     $('context').observe('contextmenu', function(e){
       this.passed();
@@ -141,7 +141,7 @@
   </script>
 
   <p id="target">Event.element() test</p>
-  
+
   <script type="text/javascript">
     $('target').observe('click', function(e) {
       if (e.element() == this && e.target == this) this.passed();
@@ -151,7 +151,7 @@
   </script>
 
   <p id="currentTarget"><span>Event.currentTarget test</span></p>
-  
+
   <script type="text/javascript">
     $('currentTarget').observe('click', function(e){
       if (e.currentTarget !== this) this.failed();
@@ -159,9 +159,9 @@
       log(e);
     })
   </script>
-  
+
   <p id="findElement"><span>Event.findElement() test</span></p>
-  
+
   <script type="text/javascript">
     $('findElement').observe('click', function(e){
       if (e.findElement('p') == this && e.findElement('body') == document.body &&
@@ -170,9 +170,9 @@
       log(e);
     })
   </script>
-  
+
   <div id="container"><p id="stop"><strong>Stop propagation</strong> test (bubbling)</p></div>
-  
+
   <script type="text/javascript">
     $('stop').observe('click', function(e){
       e.stop();
@@ -184,12 +184,12 @@
       log(e);
     })
   </script>
-  
+
   <div>
     <p id="keyup_log"><strong>Keyup</strong> test - focus on the textarea and type</p>
     <textarea id="keyup" class="subtest"></textarea>
   </div>
-  
+
   <script type="text/javascript">
     $('keyup').observe('keyup', function(e){
       el = $('keyup_log');
@@ -197,9 +197,9 @@
       log(e);
     })
   </script>
-  
+
   <p id="bind"><code>bindAsEventListener()</code> test</p>
-  
+
   <script type="text/javascript">
     $('bind').observe('click', function(e, str, arr){
       el = $('bind')
@@ -213,9 +213,9 @@
       log(e);
     }.bindAsEventListener(document.body, 'foo', [1,2,3]))
   </script>
-  
+
   <p id="obj_inspect"><code>Object.inspect(event)</code> test</p>
-  
+
   <script type="text/javascript">
     $('obj_inspect').observe('click', function(e){
       el = $('obj_inspect')
@@ -224,9 +224,9 @@
       log(e);
     })
   </script>
-  
+
   <p id="addunload">Add unload events</p>
-  
+
   <script type="text/javascript">
     $('addunload').observe('click', function(e){
       if (this._done) return

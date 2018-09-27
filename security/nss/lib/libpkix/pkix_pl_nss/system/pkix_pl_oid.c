@@ -144,13 +144,13 @@ pkix_pl_OID_ToString(
                     PKIX_OBJECTNOTANOID);
         oid = (PKIX_PL_OID*)object;
         oidString = CERT_GetOidString(&oid->derOid);
-        
+
         PKIX_CHECK(PKIX_PL_String_Create
                 (PKIX_ESCASCII, oidString , 0, pString, plContext),
                 PKIX_STRINGCREATEFAILED);
 cleanup:
         PR_smprintf_free(oidString);
-        
+
         PKIX_RETURN(OID);
 }
 
@@ -247,7 +247,7 @@ pkix_pl_OID_GetCriticalExtensionOIDs(
 
         *pOidsList = oidsList;
         oidsList = NULL;
-        
+
 cleanup:
         PKIX_DECREF(oidsList);
         PKIX_DECREF(pkixOID);
@@ -267,7 +267,7 @@ PKIX_PL_OID_CreateBySECItem(
 {
         PKIX_PL_OID *oid = NULL;
         SECStatus rv;
-        
+
         PKIX_ENTER(OID, "PKIX_PL_OID_CreateBySECItem");
         PKIX_NULLCHECK_TWO(pOID, derOid);
 
@@ -283,10 +283,10 @@ PKIX_PL_OID_CreateBySECItem(
         }
         *pOID = oid;
         oid = NULL;
-        
+
 cleanup:
         PKIX_DECREF(oid);
-        
+
         PKIX_RETURN(OID);
 }
 
@@ -300,7 +300,7 @@ PKIX_PL_OID_Create(
         void *plContext)
 {
         SECOidData *oidData = NULL;
-    
+
         PKIX_ENTER(OID, "PKIX_PL_OID_Create");
         PKIX_NULLCHECK_ONE(pOID);
 
@@ -308,8 +308,8 @@ PKIX_PL_OID_Create(
         if (!oidData) {
             PKIX_ERROR(PKIX_SECOIDFINDOIDTAGDESCRIPTIONFAILED);
         }
-        
-        pkixErrorResult = 
+
+        pkixErrorResult =
             PKIX_PL_OID_CreateBySECItem(&oidData->oid, pOID, plContext);
 cleanup:
         PKIX_RETURN(OID);

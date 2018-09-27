@@ -11,7 +11,7 @@ var expect = 'function:function';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 function fn()
 {
   var o = {

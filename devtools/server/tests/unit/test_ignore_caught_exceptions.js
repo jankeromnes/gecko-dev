@@ -47,10 +47,10 @@ function evaluateTestCode() {
   try {
   Cu.evalInSandbox(`                    // 1
    debugger;                            // 2
-   try {                                // 3           
+   try {                                // 3
      throw "foo";                       // 4
    } catch (e) {}                       // 5
-   throw "bar";                         // 6  
+   throw "bar";                         // 6
   `,                                    // 7
     gDebuggee,
     "1.8",

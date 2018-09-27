@@ -44,7 +44,7 @@ info: |
 var callCount = 0;
 var f;
 f = async (_ = (function() { throw new Test262Error(); }())) => {
-  
+
   callCount = callCount + 1;
 };
 

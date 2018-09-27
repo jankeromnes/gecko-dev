@@ -36,9 +36,9 @@ public:
 
   WRes CreateEvents();
   void CreateStreams(ISequentialInStream **inStream, ISequentialOutStream **outStream);
-  
+
   void ReInit();
-  
+
   HRESULT Read(void *data, UInt32 size, UInt32 *processedSize);
   HRESULT Write(const void *data, UInt32 size, UInt32 *processedSize);
 
@@ -48,7 +48,7 @@ public:
     // _readingWasClosed = true;
     // _canWrite_Event.Set();
   }
-  
+
   void CloseWrite()
   {
     _buf = NULL;

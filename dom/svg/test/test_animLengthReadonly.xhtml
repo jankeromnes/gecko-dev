@@ -151,7 +151,7 @@ function checkSameValue(animLength)
   is(animLength.animVal.value, 2,
     "un-animated animVal.value not changed after setting "
     + "baseValue.valueInSpecifiedUnits");
-   
+
   // valueAsString
   animLength.baseVal.valueAsString = "3";
   is(animLength.animVal.value, 3,
@@ -187,7 +187,7 @@ function checkDiffValue(animLength)
   is(animLength.animVal.value, origValue,
     "animated animVal.value changed after setting "
     + "baseValue.valueInSpecifiedUnits");
-   
+
   // valueAsString
   animLength.baseVal.valueAsString = "3";
   is(animLength.animVal.value, origValue,

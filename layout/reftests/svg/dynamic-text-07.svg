@@ -16,7 +16,7 @@
 
       // A dynamic change
       document.getElementById("t").appendChild(document.createTextNode("B"));
-      
+
       document.documentElement.removeAttribute("class");
     }
   </script>

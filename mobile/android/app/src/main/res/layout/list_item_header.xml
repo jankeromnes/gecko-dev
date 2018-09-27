@@ -4,11 +4,11 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"  
-    android:id="@android:id/text1"  
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"  
-    android:paddingTop="2dip"  
+    android:layout_height="wrap_content"
+    android:paddingTop="2dip"
     android:paddingBottom="2dip"
     android:paddingLeft="5dip"
     android:paddingStart="5dip"

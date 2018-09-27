@@ -211,7 +211,7 @@ QUERYSUPPORTED_TESTS = {
           'qcsupported': 'paste' }
       ]
     },
-    
+
     { 'desc':       'Other tests',
       'tests':      [
         { 'id':          'garbage-1_TEXT-1',

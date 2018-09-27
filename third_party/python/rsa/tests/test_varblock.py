@@ -14,7 +14,7 @@ from rsa import varblock
 class VarintTest(unittest.TestCase):
 
     def test_read_varint(self):
-        
+
         encoded = b('\xac\x02crummy')
         infile = BytesIO(encoded)
 
@@ -28,7 +28,7 @@ class VarintTest(unittest.TestCase):
         self.assertEqual(b('crummy'), infile.read())
 
     def test_read_zero(self):
-        
+
         encoded = b('\x00crummy')
         infile = BytesIO(encoded)
 
@@ -42,7 +42,7 @@ class VarintTest(unittest.TestCase):
         self.assertEqual(b('crummy'), infile.read())
 
     def test_write_varint(self):
-        
+
         expected = b('\xac\x02')
         outfile = BytesIO()
 
@@ -54,7 +54,7 @@ class VarintTest(unittest.TestCase):
 
 
     def test_write_zero(self):
-        
+
         outfile = BytesIO()
         written = varblock.write_varint(outfile, 0)
 

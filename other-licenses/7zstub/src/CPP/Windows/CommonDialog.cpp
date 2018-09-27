@@ -134,7 +134,7 @@ bool MyGetOpenFileName(HWND hwnd, LPCWSTR title,
       p.lpstrFilter = filterBuf;
       p.nFilterIndex = 1;
     }
-    
+
     p.lpstrFile = buf;
     p.nMaxFile = kBufSize;
     CONV_U_To_A(p.lpstrInitialDir, initialDir, initialDirA);
@@ -155,7 +155,7 @@ bool MyGetOpenFileName(HWND hwnd, LPCWSTR title,
     memset(&p, 0, sizeof(p));
     p.lStructSize = my_compatib_OPENFILENAMEW_size;
     p.hwndOwner = hwnd;
-    
+
     WCHAR filterBuf[kFilterBufSize];
     {
       CDoubleZeroStringListW dz(filterBuf, kFilterBufSize);
@@ -165,7 +165,7 @@ bool MyGetOpenFileName(HWND hwnd, LPCWSTR title,
       p.lpstrFilter = filterBuf;
       p.nFilterIndex = 1;
     }
-        
+
     p.lpstrFile = buf;
     p.nMaxFile = kBufSize;
     p.lpstrInitialDir = initialDir;

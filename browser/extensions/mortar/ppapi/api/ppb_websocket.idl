@@ -174,7 +174,7 @@ enum PP_WebSocketCloseCode {
   PP_WEBSOCKETSTATUSCODE_USER_PRIVATE_MAX = 4999
 };
 
-/** 
+/**
  * The <code>PPB_WebSocket</code> interface provides bi-directional,
  * full-duplex, communications over a single TCP socket.
  */
@@ -395,7 +395,7 @@ interface PPB_WebSocket {
    * WebSocket.
    *
    * @return Returns <code>PP_FALSE</code> if called before the connection is
-   * closed, called on an invalid resource, or closed for abnormal reasons. 
+   * closed, called on an invalid resource, or closed for abnormal reasons.
    * Otherwise, returns <code>PP_TRUE</code> if the connection was closed
    * cleanly.
    */

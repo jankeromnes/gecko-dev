@@ -71,7 +71,7 @@ public final class PlaybackParameters {
     PlaybackParameters other = (PlaybackParameters) obj;
     return this.speed == other.speed && this.pitch == other.pitch;
   }
-  
+
   @Override
   public int hashCode() {
     int result = 17;

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <script type="text/javascript" src="/tests/SimpleTest/EventUtils.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
-  <script type="text/javascript" src="NavigationUtils.js"></script>        
+  <script type="text/javascript" src="NavigationUtils.js"></script>
 </head>
 <body>
 
@@ -18,16 +18,16 @@
  * TriggeringPrincipal and LoadingPrincipal of the navigated iframe (Frame A).
  *
  * +---------------------------------------+
- * |   Parent                              | 
- * |                                       |   
+ * |   Parent                              |
+ * |                                       |
  * |  +----------------------------+       |
- * |  | Frame A                    |       | 
+ * |  | Frame A                    |       |
  * |  |                            |       |
  * |  |                            |       |
  * |  +----------------------------+       |
- * |                                       |   
+ * |                                       |
  * |  +----------------------------+       |
- * |  | Frame B                    |       | 
+ * |  | Frame B                    |       |
  * |  |                            |       |
  * |  | win.open("http://", "A")   |       |
  * |  +----------------------------+       |
@@ -63,7 +63,7 @@ function checkResults() {
 
   is(loadingPrincipal, LOADING_PRINCIPAL_URI,
     "LoadingPrincipal for targeted window.open() should be the containing document");
- 
+
   SimpleTest.finish();
 }
 

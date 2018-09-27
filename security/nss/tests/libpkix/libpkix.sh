@@ -1,5 +1,5 @@
 #! /bin/sh
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -41,7 +41,7 @@ libpkix_init()
 ########################################################################
 libpkix_cleanup()
 {
-  html "</TABLE><BR>" 
+  html "</TABLE><BR>"
   cd ${QADIR}
   . common/cleanup.sh
 }
@@ -69,7 +69,7 @@ libpkix_UT_main()
 
 html_head "LIBPKIX Unit Tests"
 
-ParseArgs 
+ParseArgs
 
 echo "*******************************************************************************"
 echo "START OF ALL TESTS${memText}"
@@ -128,12 +128,12 @@ fi
 libpkix_run_tests()
 {
     if [ -n "${BUILD_LIBPKIX_TESTS}" ]; then
-         libpkix_UT_main 
+         libpkix_UT_main
     fi
 }
 
 ################## main #################################################
 
-libpkix_init 
+libpkix_init
 libpkix_run_tests
 libpkix_cleanup

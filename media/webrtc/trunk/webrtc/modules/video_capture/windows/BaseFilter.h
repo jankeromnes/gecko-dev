@@ -11,13 +11,13 @@
 #include <comdef.h>
 #include "DShowTools.h"
 
-#include <string> 
- 
+#include <string>
+
 namespace mozilla {
 namespace media {
 
 _COM_SMARTPTR_TYPEDEF(IReferenceClock, __uuidof(IReferenceClock));
- 
+
 class BasePin;
 
 // Base class for a data source filter which supplies media streams

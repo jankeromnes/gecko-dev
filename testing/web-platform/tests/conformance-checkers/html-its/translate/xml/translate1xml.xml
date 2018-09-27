@@ -13,7 +13,7 @@
  </head>
  <body>
   <par>Text with an image: <img alt="Image description" src="img.png"/>.</par>
-  <par id="100" title="Text">This is the first paragraph. It has some <verbatim>un-translatable 
+  <par id="100" title="Text">This is the first paragraph. It has some <verbatim>un-translatable
    code with an image: <img src="test.png" alt="Image description"/></verbatim>.</par>
   <insert xmlns:z="myChineseMakupLanguage" xmlns:i="http://www.w3.org/2005/11/its">
    <z:书籍>

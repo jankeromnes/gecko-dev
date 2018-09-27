@@ -28,7 +28,7 @@ sdr_init()
   if [ -z "${CLEANUP}" ] ; then
       CLEANUP="${SCRIPTNAME}"
   fi
-  
+
   if [ -z "${INIT_SOURCED}" -o "${INIT_SOURCED}" != "TRUE" ]; then
       cd ../common
       . ./init.sh

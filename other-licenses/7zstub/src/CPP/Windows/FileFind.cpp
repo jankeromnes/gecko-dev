@@ -101,7 +101,7 @@ static void Convert_WIN32_FIND_DATA_to_FileInfo(const WIN32_FIND_DATA &fd, CFile
   #endif
 }
 #endif
-  
+
 ////////////////////////////////
 // CFindFile
 
@@ -128,21 +128,21 @@ WinXP-64 FindFirstFile():
   \\               - ERROR_INVALID_NAME
   \\Server         - ERROR_INVALID_NAME
   \\Server\        - ERROR_INVALID_NAME
-      
+
   \\Server\Share            - ERROR_BAD_NETPATH
   \\Server\Share            - ERROR_BAD_NET_NAME (Win7).
              !!! There is problem : Win7 makes some requests for "\\Server\Shar" (look in Procmon),
                  when we call it for "\\Server\Share"
-                      
+
   \\Server\Share\           - ERROR_FILE_NOT_FOUND
-  
+
   \\?\UNC\Server\Share      - ERROR_INVALID_NAME
   \\?\UNC\Server\Share      - ERROR_BAD_PATHNAME (Win7)
   \\?\UNC\Server\Share\     - ERROR_FILE_NOT_FOUND
-  
+
   \\Server\Share_RootDrive  - ERROR_INVALID_NAME
   \\Server\Share_RootDrive\ - ERROR_INVALID_NAME
-  
+
   c:\* - ERROR_FILE_NOT_FOUND, if thare are no item in that folder
 */
 
@@ -424,7 +424,7 @@ bool CFileInfo::Find(CFSTR path)
     ClearBase();
     Name = path + 4;
     IsDevice = true;
-    
+
     if (NName::IsDrivePath2(path + 4) && path[6] == 0)
     {
       FChar drive[4] = { path[4], ':', '\\', 0 };
@@ -465,7 +465,7 @@ bool CFileInfo::Find(CFSTR path)
       streamName += ":$DATA";
 
     bool isOk = true;
-    
+
     if (IsDrivePath2(filePath) &&
         (colonPos == 2 || colonPos == 3 && filePath[2] == '\\'))
     {
@@ -507,7 +507,7 @@ bool CFileInfo::Find(CFSTR path)
       }
     }
   }
-  
+
   #endif
 
   CFindFile finder;
@@ -523,11 +523,11 @@ bool CFileInfo::Find(CFSTR path)
         || lastError == ERROR_BAD_PATHNAME // Win7: "\\?\UNC\Server\Share"
         )
     */
-    
+
     unsigned rootSize = 0;
     if (IsSuperPath(path))
       rootSize = kSuperPathPrefixSize;
-    
+
     if (NName::IsDrivePath(path + rootSize) && path[rootSize + 3] == 0)
     {
       DWORD attrib = GetFileAttrib(path);
@@ -562,7 +562,7 @@ bool CFileInfo::Find(CFSTR path)
             FString s (path);
             s.Add_PathSepar();
             s += '*'; // CHAR_ANY_MASK
-            
+
             bool isOK = false;
             if (finder.FindFirst(s, *this))
             {
@@ -667,7 +667,7 @@ bool CFindChangeNotification::Close() throw()
   _handle = INVALID_HANDLE_VALUE;
   return true;
 }
-           
+
 HANDLE CFindChangeNotification::FindFirst(CFSTR path, bool watchSubtree, DWORD notifyFilter)
 {
   #ifndef _UNICODE

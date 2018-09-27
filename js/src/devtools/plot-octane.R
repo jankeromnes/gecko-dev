@@ -35,4 +35,4 @@ ggplot(data, aes(label, score, color=label, pch=label)) +
   geom_boxplot(outlier.shape=NA) +
   # Adding jitter plot on top of the boxplot. If you want to spread the points
   # more, increase jitter.
-  geom_jitter(position=position_jitter(width=0.05)) 
+  geom_jitter(position=position_jitter(width=0.05))

@@ -3,10 +3,10 @@
 	     Copyright (c) 2001  John Beniton
 	     Copyright (c) 2002  Ranjit Mathew
 	     Copyright (c) 2009  Daniel Witte
-			
- 
+
+
    X86 Foreign Function Interface
- 
+
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the
    ``Software''), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
    distribute, sublicense, and/or sell copies of the Software, and to
    permit persons to whom the Software is furnished to do so, subject to
    the following conditions:
- 
+
    The above copyright notice and this permission notice shall be included
    in all copies or substantial portions of the Software.
- 
+
    THE SOFTWARE IS PROVIDED ``AS IS'', WITHOUT WARRANTY OF ANY KIND,
    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,7 +28,7 @@
    DEALINGS IN THE SOFTWARE.
    -----------------------------------------------------------------------
    */
- 
+
 #define LIBFFI_ASM
 #include <fficonfig.h>
 #include <ffi.h>
@@ -510,7 +510,7 @@ END
 #define USCORE_SYMBOL(x) x
 #endif
 	.text
- 
+
         # This assumes we are using gas.
         .balign 16
 FFI_HIDDEN(ffi_call_win32)
@@ -525,16 +525,16 @@ USCORE_SYMBOL(ffi_call_win32):
         movl  %esp,%ebp
 .LCFI1:
         # Make room for all of the new args.
-        movl  20(%ebp),%ecx                                                     
+        movl  20(%ebp),%ecx
         subl  %ecx,%esp
- 
+
         movl  %esp,%eax
- 
+
         # Place all of the ffi_prep_args in position
         pushl 12(%ebp)
         pushl %eax
         call  *8(%ebp)
- 
+
         # Return stack to previous state and call the function
         addl  $8,%esp
 
@@ -552,27 +552,27 @@ USCORE_SYMBOL(ffi_call_win32):
 	addl $4, %esp
 
 .do_fncall:
-	 
+
         # FIXME: Align the stack to a 128-bit boundary to avoid
         # potential performance hits.
 
         call  *32(%ebp)
- 
+
         # stdcall functions pop arguments off the stack themselves
 
         # Load %ecx with the return type code
         movl  24(%ebp),%ecx
- 
+
         # If the return value pointer is NULL, assume no return value.
         cmpl  $0,28(%ebp)
         jne   0f
- 
+
         # Even if there is no space for the return value, we are
         # obliged to handle floating-point values.
         cmpl  $FFI_TYPE_FLOAT,%ecx
         jne   .Lnoretval
         fstp  %st(0)
- 
+
         jmp   .Lepilogue
 
 0:
@@ -628,25 +628,25 @@ USCORE_SYMBOL(ffi_call_win32):
         movl  28(%ebp),%ecx
         movl  %eax,0(%ecx)
         jmp   .Lepilogue
- 
+
 .Lretfloat:
          # Load %ecx with the pointer to storage for the return value
         movl  28(%ebp),%ecx
         fstps (%ecx)
         jmp   .Lepilogue
- 
+
 .Lretdouble:
         # Load %ecx with the pointer to storage for the return value
         movl  28(%ebp),%ecx
         fstpl (%ecx)
         jmp   .Lepilogue
- 
+
 .Lretlongdouble:
         # Load %ecx with the pointer to storage for the return value
         movl  28(%ebp),%ecx
         fstpt (%ecx)
         jmp   .Lepilogue
- 
+
 .Lretint64:
         # Load %ecx with the pointer to storage for the return value
         movl  28(%ebp),%ecx
@@ -659,7 +659,7 @@ USCORE_SYMBOL(ffi_call_win32):
         movl  28(%ebp),%ecx
         movb  %al,0(%ecx)
         jmp   .Lepilogue
- 
+
 .Lretstruct2b:
         # Load %ecx with the pointer to storage for the return value
         movl  28(%ebp),%ecx
@@ -674,7 +674,7 @@ USCORE_SYMBOL(ffi_call_win32):
 
 .Lretstruct:
         # Nothing to do!
- 
+
 .Lnoretval:
 .Lepilogue:
         movl %ebp,%esp

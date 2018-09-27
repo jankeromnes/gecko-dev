@@ -59,7 +59,7 @@ var tests = [
 
     // Below are the cases which actually matters
     {url: "/precedence", server: "1", expected: "0"}, // should be cached
-     
+
     {url: "/precedence?0", server: "1", expected: "0"}, // should be cached
 
     {url: "/precedence?1", server: "1", expected: "1"}, // should have expired
@@ -71,7 +71,7 @@ var tests = [
     {url: "/precedence?4", server: "1", expected: "1"}, // should have expired
 
     {url: "/precedence?5", server: "1", expected: "1"}, // should have expired
-    
+
     {url: "/precedence?6", server: "1", expected: "0"}, // should be cached
 
 ];
@@ -157,11 +157,11 @@ function handler(metadata, response) {
             response.setHeader(splitHdr[0], splitHdr[1], false);
         }
     }
-    
+
     response.setStatusLine(metadata.httpVersion, 200, "OK");
     response.bodyOutputStream.write(body, body.length);
 }
- 
+
 function getDateString(yearDelta) {
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
                   'Sep', 'Oct', 'Nov', 'Dec'];

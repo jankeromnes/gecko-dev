@@ -1,7 +1,7 @@
 // © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /********************************************************************
- * COPYRIGHT: 
+ * COPYRIGHT:
  * Copyright (c) 2004-2010, International Business Machines Corporation and
  * others. All Rights Reserved.
  ********************************************************************/
@@ -17,9 +17,9 @@
 #include "unicode/unistr.h"
 #include "unicode/testtype.h"
 
-/** Facilitates internal logging of data driven test service 
- *  It would be interesting to develop this into a full      
- *  fledged control system as in Java.                       
+/** Facilitates internal logging of data driven test service
+ *  It would be interesting to develop this into a full
+ *  fledged control system as in Java.
  */
 class T_CTEST_EXPORT_API TestLog {
 public:

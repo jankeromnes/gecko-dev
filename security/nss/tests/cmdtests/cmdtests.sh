@@ -1,4 +1,4 @@
-#! /bin/sh  
+#! /bin/sh
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,7 +9,7 @@
 #
 # needs to work on all Unix and Windows platforms
 #
-# included from 
+# included from
 # --------------
 #   all.sh
 #
@@ -24,7 +24,7 @@
 ########################################################################
 
 ############################## cmdtests_init ###########################
-# local shell function to initialize this script 
+# local shell function to initialize this script
 ########################################################################
 cmdtests_init()
 {
@@ -68,7 +68,7 @@ cmdtests_init()
 }
 
 ############################## ct_vercrt ##################################
-# CERT_VerifyCert should not fail when verifying encryption cert 
+# CERT_VerifyCert should not fail when verifying encryption cert
 # Bugzilla Bug 119059
 ########################################################################
 #ct_vercrt()
@@ -83,7 +83,7 @@ cmdtests_init()
 
 
 ############################## cmdtests_cleanup ########################
-# local shell function to finish this script (no exit since it might be 
+# local shell function to finish this script (no exit since it might be
 # sourced)
 ########################################################################
 cmdtests_cleanup()

@@ -240,7 +240,7 @@ STDMETHODIMP CDecoder::SetOutStreamSize(const UInt64 *outSize)
 
 STDMETHODIMP CDecoder::SetInStream(ISequentialInStream *inStream) { _inStream = inStream; return S_OK; }
 STDMETHODIMP CDecoder::ReleaseInStream() { _inStream.Release(); return S_OK; }
-  
+
 
 STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
 {

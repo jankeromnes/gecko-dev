@@ -37,13 +37,13 @@ public:
 
   BasePin(BaseFilter* aFilter,
           CriticalSection* aLock,
-          const wchar_t* aName, 
+          const wchar_t* aName,
           PIN_DIRECTION aDirection);
 
   virtual ~BasePin() {}
 
   // Reference count of the pin is actually stored on the owning filter.
-  // So don't AddRef() the filter from the pin, else you'll create a cycle. 
+  // So don't AddRef() the filter from the pin, else you'll create a cycle.
   STDMETHODIMP QueryInterface(REFIID aIId, void **aInterface);
   STDMETHODIMP_(ULONG) AddRef() { return mFilter->AddRef(); }
   STDMETHODIMP_(ULONG) Release() { return mFilter->Release(); }
@@ -105,7 +105,7 @@ public:
 
 
   // IQualityControl overrides.
- 
+
   // Notifies the recipient that a quality change is requested.
   STDMETHODIMP Notify(IBaseFilter * aSender, Quality aQuality);
 
@@ -166,7 +166,7 @@ protected:
 
   // The pin's name, as returned by QueryPinInfo().
   std::wstring mName;
-  
+
   // Event sink for quality messages.
   IQualityControl *mQualitySink;
 
@@ -184,7 +184,7 @@ protected:
 
   // Our owning filter.
   BaseFilter *mFilter;
- 
+
   // This pin attempts to connect to |aPin| with media type |aMediaType|.
   // If |aMediaType| is fully specified, we must attempt to connect with
   // that, else we just enumerate our types, then the other pin's type and

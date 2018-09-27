@@ -37,13 +37,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "staff");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 }
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -73,16 +73,16 @@ var docName = 'nodeinsertbefore';
 
 
 
-window.doc = window;  
+window.doc = window;
 SimpleTest.waitForExplicitFinish();
 addLoadEvent(setUpPage);
 
 
 /**
-* 
+*
     The "insertBefore(newChild,refChild)" method inserts the
-    node "newChild" before the node "refChild". 
-    
+    node "newChild" before the node "refChild".
+
     Insert a newly created Element node before the eigth
     child of the second employee and check the "newChild"
     and "refChild" after insertion for correct placement.
@@ -133,7 +133,7 @@ function nodeinsertbefore() {
 
       var expected = new Array();
 
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -145,7 +145,7 @@ function nodeinsertbefore() {
 
       length = childList.length;
 
-      
+
 	if(
 	(6 == length)
 	) {
@@ -153,7 +153,7 @@ function nodeinsertbefore() {
       expected =  expectedWithoutWhitespace;
 
 	}
-	
+
 		else {
 			refChild = childList.item(7);
       expected =  expectedWithWhitespace;
@@ -169,7 +169,7 @@ function nodeinsertbefore() {
 
 	}
    assertEqualsList("nodeNames",expected,actual);
-       
+
 }
 
 </script>
@@ -178,12 +178,12 @@ function nodeinsertbefore() {
 <h2>Test http://www.w3.org/2001/DOM-Test-Suite/level1/core/nodeinsertbefore</h2>
 <p></p>
 <p>
-Copyright (c) 2001-2004 World Wide Web Consortium, 
-(Massachusetts Institute of Technology, European Research Consortium 
-for Informatics and Mathematics, Keio University). All 
-Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the 
-hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
-the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+Copyright (c) 2001-2004 World Wide Web Consortium,
+(Massachusetts Institute of Technology, European Research Consortium
+for Informatics and Mathematics, Keio University). All
+Rights Reserved. This work is distributed under the <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C(r) Software License</a> in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </p>
 </body>
 </html>

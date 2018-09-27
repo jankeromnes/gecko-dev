@@ -37,7 +37,7 @@ all: all-recursive
 install: install-recursive
 clean: clean-local clean-recursive
 distclean : distclean-recursive
-dist: dist-recursive 
+dist: dist-recursive
 check: all check-recursive
 
 check-exhaustive: check
@@ -70,10 +70,10 @@ install-local:
 
 dist-local:
 
-clean-local: 
+clean-local:
 	test -z "$(CLEANFILES)" || $(RMV) $(CLEANFILES)
 
-# Clean up any old variations.. 
+# Clean up any old variations..
 distclean-local: clean-local
 	$(RMV) Makefile
 

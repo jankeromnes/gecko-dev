@@ -12,14 +12,14 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=199692
   margin: 2px;
   clear: both;
   height: 20px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 #txt, #static, #fixed, #absolute, #relative, #hidden, #float, #empty, #static, #relative {
   width: 200px !important;
 }
   </style>
-  
+
 </head>
 <!--
 Elements are styled in such a way that they don't overlap visually
@@ -117,7 +117,7 @@ function testPoints()
 {
   ok('elementFromPoint' in document, "document.elementFromPoint must exist");
   ok(typeof document.elementFromPoint === "function", "must be a function");
-  
+
   var doc = document;
   doc.pt = doc.elementFromPoint; // for shorter lines
   is(doc.pt(-1, 0), null, "Negative coordinates (-1, 0) should return null");

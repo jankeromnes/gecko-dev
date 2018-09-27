@@ -165,7 +165,7 @@ public class TestSyncStorageRequest {
     r.post(new JSONObject());
     // Server is stopped in the callback.
   }
-  
+
   // Test that the X-Weave-Backoff header is correctly parsed and that handleRequestSuccess
   // is still being called.
   public class TestWeaveBackoffSyncStorageRequestDelegate extends
@@ -182,7 +182,7 @@ public class TestSyncStorageRequest {
       super.handleRequestSuccess(res);
     }
   }
-  
+
   public class WeaveBackoffMockServer extends MockServer {
     @Override
     public void handle(Request request, Response response) {

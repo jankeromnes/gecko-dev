@@ -12,7 +12,7 @@ The weak curves cannot be used for signing but provide a faster way to
 obfuscate non-critical transmissions.
 '''
 
-# FIPS approved elliptic curves over prime fields 
+# FIPS approved elliptic curves over prime fields
 # (see FIPS 186-3, Appendix D.1.2)
 DOMAINS = {
     # Bits : (p, order of E(GF(P)), parameter b, base point x, base point y)
@@ -21,7 +21,7 @@ DOMAINS = {
            0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1L,
            0x188da80eb03090f67cbf20eb43a18800f4ff0afd82ff1012L,
            0x07192b95ffc8da78631011ed6b24cdd573f977a11e794811L),
-    
+
     224 : (0xffffffffffffffffffffffffffffffff000000000000000000000001L,
            0xffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3dL,
            0xb4050a850c04b3abf54132565044b0b7d7bfd8ba270b39432355ffb4L,
@@ -57,17 +57,17 @@ DOMAINS.update({
            0xd83d3eb8266a89927d73d5fe263d5f23L,
            0xa94d2d8531f7af8bde367def12b98eadL,
            0x9f44e1d671beb68fd2df7f877ab13fa6L),
-    
+
     160 : (0xffffffffffffffffffffffffffffffffffffffd1L,
            None,
            0x94bfe70deef7b94742c089ca4db3ca27fbe1f754L,
            0xcc6562c2969ac57524b8d0f300d1f598c908c121L,
            0x952ddde80a252683dd7ba90fb5919899b5af69f5L)
-    })     
+    })
 
 CURVE_P = 3     # global parameter of all curves (for efficiency reasons)
 
-           
+
 def get_curve(bits):
     '''Get a known curve of the given size => (bits, prime, order, p, q, point).
     Order may be None if unknown.'''
@@ -76,6 +76,6 @@ def get_curve(bits):
         return bits, p, n, CURVE_P, p - b, (x, y)
     else:
         raise KeyError, "Key size not implemented: %s" % bits
- 
+
 def implemented_keys(must_sign = False):
     return [k for k in DOMAINS if not must_sign or DOMAINS[k][1]]

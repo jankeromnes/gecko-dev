@@ -47,7 +47,7 @@
 //           ...
 //         } break;
 //       ...
-//     } 
+//     }
 //
 //   In C++ it's much nicer to use virtual function dispatch to find
 //   the right code for a given case than to switch on the DIE tag
@@ -142,12 +142,12 @@
 //       this procedure recursively.  Alternatively, if
 //       FindChildHandler returns NULL, die_dispatcher ignores that
 //       child and its descendants.
-// 
+//
 //   - When die_dispatcher has finished processing all the DIE's
 //     children, it invokes the handler's Finish() member function,
 //     and destroys the handler.  (As a special case, it doesn't
 //     destroy the root DIE handler.)
-// 
+//
 // This allows the code for handling a particular kind of DIE to be
 // gathered together in a single class, makes it easy to skip all the
 // children or individual children of a particular DIE, and provides

@@ -16,4 +16,4 @@ window.addEventListener("load", init, false);
 
 <text x="125" y="30">Foo</text>
 
-</svg>
+</svg>

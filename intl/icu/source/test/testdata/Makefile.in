@@ -21,9 +21,9 @@ include $(top_builddir)/icudefs.mk
 subdir = test/testdata
 
 ## Files to remove for 'make clean'
-CLEANFILES = *~ 
+CLEANFILES = *~
 
-SUBDIRS = 
+SUBDIRS =
 
 -include Makefile.local
 
@@ -52,7 +52,7 @@ check-exhaustive: check
 
 all-local: build-dir build-testdata testdata packagetest
 
-install-local: 
+install-local:
 
 dist-local:
 
@@ -127,7 +127,7 @@ TESTDATA=testdata
 # prefix for files that are testdata
 TESTDT=$(TESTDATA)
 
-# File definitions 
+# File definitions
 TEST_DAT_FILES=$(TESTBUILDDIR)/test.icu
 TEST_SPP_FILES=$(TESTBUILDDIR)/nfscsi.spp $(TESTBUILDDIR)/nfscss.spp $(TESTBUILDDIR)/nfscis.spp $(TESTBUILDDIR)/nfsmxs.spp $(TESTBUILDDIR)/nfsmxp.spp
 
@@ -161,10 +161,10 @@ build-testdata: build-dir $(ALL_TEST_FILES) $(TESTBUILDDIR)/testdata.lst $(TESTB
 
 # test.icu
 $(TESTBUILDDIR)/test.icu: $(GENTEST)
-	$(INVOKE) $(GENTEST) -d $(TESTBUILDDIR) 
+	$(INVOKE) $(GENTEST) -d $(TESTBUILDDIR)
 
 $(TESTBUILDDIR)/testtable32.txt:  $(GENTEST)
-	$(INVOKE) $(GENTEST) -r -d $(TESTBUILDDIR) 
+	$(INVOKE) $(GENTEST) -r -d $(TESTBUILDDIR)
 
 $(TESTBUILDDIR)/testtable32.res: $(TESTBUILDDIR)/testtable32.txt $(TOOLBINDIR)/genrb$(EXEEXT)
 	$(INVOKE) $(TOOLBINDIR)/genrb $(GENRBOPTS) -s $(TESTBUILDDIR) $(ICU_DATA_OPT) -d $(TESTBUILDDIR) $(<F)
@@ -224,7 +224,7 @@ testdata: build-dir $(ALL_TEST_FILES) $(UNPACKAGEDTESTDATA)
 
 #$(ALL_TEST_FILES) $(TESTBUILDDIR)/testtable32.txt $(TESTBUILDDIR)/testdata.lst: build-dir
 
-packagetest: build-dir testdata pkgdata.inc $(TESTBUILDDIR)/testdata.lst 
+packagetest: build-dir testdata pkgdata.inc $(TESTBUILDDIR)/testdata.lst
 	$(PKGDATA_INVOKE) $(PKGDATA) -T $(TESTBUILDDIR) -d $(TESTOUTDIR) -s $(TESTBUILDDIR) -p $(TESTDATA) -m common $(TESTBUILDDIR)/testdata.lst
 
 build-dir: $(BUILD_DIRS)

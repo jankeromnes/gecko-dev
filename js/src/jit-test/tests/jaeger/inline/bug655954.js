@@ -1,5 +1,5 @@
 // |jit-test| error: TypeError
-foo(); 
-function foo() { 
+foo();
+function foo() {
     this();
 }

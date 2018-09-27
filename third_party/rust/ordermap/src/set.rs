@@ -46,7 +46,7 @@ type Bucket<T> = super::Bucket<T, ()>;
 ///
 /// // Collects which letters appear in a sentence.
 /// let letters: OrderSet<_> = "a short treatise on fungi".chars().collect();
-/// 
+///
 /// assert!(letters.contains(&'s'));
 /// assert!(letters.contains(&'t'));
 /// assert!(letters.contains(&'u'));

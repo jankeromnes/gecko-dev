@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 "use strict";
 
@@ -36,11 +36,11 @@ class State {
         this.dataIndex = 0;
         this.program = program;
         this.rng = createRNGWithFixedSeed();
-        
+
         let addNative = (name, callback) => {
             this.values.set(name, new NativeFunction(callback));
         };
-        
+
         addNative("abs", x => Math.abs(x));
         addNative("atn", x => Math.atan(x));
         addNative("cos", x => Math.cos(x));
@@ -53,7 +53,7 @@ class State {
         addNative("sqr", x => Math.sqrt(x));
         addNative("tan", x => Math.tan(x));
     }
-    
+
     getValue(name, numParameters)
     {
         if (this.values.has(name))
@@ -71,7 +71,7 @@ class State {
         this.values.set(name, result);
         return result;
     }
-    
+
     getSideState(key)
     {
         if (!this.sideState.has(key)) {
@@ -81,14 +81,14 @@ class State {
         }
         return this.sideState.get(key);
     }
-    
+
     abort(text)
     {
         if (!this.statement)
             throw new Error("At beginning of execution: " + text);
         throw new Error("At " + this.statement.sourceLineNumber + ": " + text);
     }
-    
+
     validate(predicate, text)
     {
         if (!predicate)

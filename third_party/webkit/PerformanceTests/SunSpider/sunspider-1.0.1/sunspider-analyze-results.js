@@ -20,7 +20,7 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 var count = output.length;
@@ -186,7 +186,7 @@ function formatResult(meanWidth, mean, stdErr, n, mode)
             result += "ERROR: Some tests failed.";
         return result;
     }
-    
+
     var meanString = mean.toFixed(1).toString();
     while (meanString.length < meanWidth) {
         meanString = " " + meanString;
@@ -237,13 +237,13 @@ function resultLine(labelWidth, indent, label, meanWidth, mean, stdErr, mode)
     for (i = 0; i < indent; i++) {
         result += " ";
     }
-    
+
     result += label + ": ";
 
     for (i = 0; i < (labelWidth - (label.length + indent)); i++) {
         result += " ";
     }
-    
+
     return result + formatResult(meanWidth, mean, stdErr, count, mode);
 }
 

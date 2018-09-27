@@ -7,6 +7,6 @@ function f( )  {
     }
     h();
   assertEq(x, 8);
-} 
+}
 f();
 

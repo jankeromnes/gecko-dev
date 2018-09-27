@@ -2,14 +2,14 @@ diff -r c1195334f839 gfx/cairo/cairo/src/cairo-xlib-surface.c
 --- a/gfx/cairo/cairo/src/cairo-xlib-surface.c	Fri May 21 17:42:55 2010 +0300
 +++ b/gfx/cairo/cairo/src/cairo-xlib-surface.c	Fri May 21 19:12:29 2010 +0300
 @@ -189,16 +189,57 @@ static const XTransform identity = { {
- 
+
  #define CAIRO_SURFACE_RENDER_HAS_PDF_OPERATORS(surface)	CAIRO_SURFACE_RENDER_AT_LEAST((surface), 0, 11)
- 
+
  #define CAIRO_SURFACE_RENDER_SUPPORTS_OPERATOR(surface, op)	\
       ((op) <= CAIRO_OPERATOR_SATURATE ||			\
        (CAIRO_SURFACE_RENDER_HAS_PDF_OPERATORS(surface) &&	\
         (op) <= CAIRO_OPERATOR_HSL_LUMINOSITY))
- 
+
 +static Visual *
 +_visual_for_xrender_format(Screen *screen,
 +			    XRenderPictFormat *xrender_format)
@@ -56,7 +56,7 @@ diff -r c1195334f839 gfx/cairo/cairo/src/cairo-xlib-surface.c
  				     cairo_region_t *region)
  {
      cairo_bool_t had_clip_rects = surface->clip_region != NULL;
- 
+
      if (had_clip_rects == FALSE && region == NULL)
  	return CAIRO_STATUS_SUCCESS;
 @@ -313,16 +354,19 @@ _cairo_xlib_surface_create_similar (void
@@ -64,14 +64,14 @@ diff -r c1195334f839 gfx/cairo/cairo/src/cairo-xlib-surface.c
  	pix = XCreatePixmap (src->dpy, src->drawable,
  			     width <= 0 ? 1 : width, height <= 0 ? 1 : height,
  			     xrender_format->depth);
- 
+
  	visual = NULL;
  	if (xrender_format == src->xrender_format)
  	    visual = src->visual;
 +	else
 +	    visual = _visual_for_xrender_format(src->screen->screen,
 +					        xrender_format);
- 
+
  	surface = (cairo_xlib_surface_t *)
  		  _cairo_xlib_surface_create_internal (src->screen, pix,
  						       visual,
@@ -89,16 +89,16 @@ diff -r c1195334f839 gfx/cairo/cairo/src/cairo-xlib-surface.c
      cairo_surface_t *surface;
      cairo_status_t status;
 +    Visual *visual;
- 
+
      if (width > XLIB_COORD_MAX || height > XLIB_COORD_MAX)
  	return _cairo_surface_create_in_error (CAIRO_STATUS_INVALID_SIZE);
- 
+
      status = _cairo_xlib_screen_get (dpy, scr, &screen);
      if (unlikely (status))
  	return _cairo_surface_create_in_error (status);
- 
+
      X_DEBUG ((dpy, "create_with_xrender_format (drawable=%x)", (unsigned int) drawable));
- 
+
 +    if (format)
 +    visual = _visual_for_xrender_format (scr, format);
 +
@@ -107,17 +107,17 @@ diff -r c1195334f839 gfx/cairo/cairo/src/cairo-xlib-surface.c
 +						   visual, format,
  						   width, height, 0);
      _cairo_xlib_screen_destroy (screen);
- 
+
      return surface;
  }
  slim_hidden_def (cairo_xlib_surface_create_with_xrender_format);
- 
+
  /**
 @@ -3413,33 +3461,37 @@ cairo_xlib_surface_get_screen (cairo_sur
- 
+
      return surface->screen->screen;
  }
- 
+
  /**
   * cairo_xlib_surface_get_visual:
   * @surface: a #cairo_xlib_surface_t
@@ -147,11 +147,11 @@ diff -r c1195334f839 gfx/cairo/cairo/src/cairo-xlib-surface.c
  	_cairo_error_throw (CAIRO_STATUS_SURFACE_TYPE_MISMATCH);
  	return NULL;
      }
- 
+
 -    return surface->visual;
 +    return xlib_surface->visual;
  }
- 
+
  /**
   * cairo_xlib_surface_get_depth:
   * @surface: a #cairo_xlib_surface_t

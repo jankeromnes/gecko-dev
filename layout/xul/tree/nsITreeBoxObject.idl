@@ -84,13 +84,13 @@ interface nsITreeBoxObject : nsISupports
    */
   void getCellAt(in long x, in long y, out long row, out TreeColumn col, out AString childElt);
 
-  /** 
-   * Find the coordinates of an element within a specific cell. 
+  /**
+   * Find the coordinates of an element within a specific cell.
    */
   void getCoordsForCellItem(in long row, in TreeColumn col, in AString element,
                             out long x, out long y, out long width, out long height);
 
-  /** 
+  /**
    * Determine if the text of a cell is being cropped or not.
    */
   boolean isCellCropped(in long row, in TreeColumn col);
@@ -102,7 +102,7 @@ interface nsITreeBoxObject : nsISupports
    * non-contiguous additions/removals, this method should be called multiple times.
    */
   void rowCountChanged(in long index, in long count);
-  
+
   /**
    * Notify the tree that the view is about to perform a batch
    * update, that is, add, remove or invalidate several rows at once.

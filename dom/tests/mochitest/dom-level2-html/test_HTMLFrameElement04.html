@@ -35,13 +35,13 @@ function setUpPage() {
      builder = createConfiguredBuilder();
 
       docsLoaded = 0;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
       }
       docsLoaded += preload(docRef, "doc", "frame");
-        
+
        if (docsLoaded == 1) {
           setUpPage = 'complete';
        }
@@ -54,7 +54,7 @@ function setUpPage() {
 
 
 //
-//   This method is called on the completion of 
+//   This method is called on the completion of
 //      each asychronous load started in setUpTests.
 //
 //   When every synchronous loaded document has completed,
@@ -70,11 +70,11 @@ function loadComplete() {
 
 
 /**
-* 
+*
     The marginWidth attribute specifies the frame margin width, in pixels.
 
     Retrieve the marginWidth attribute of the first FRAME element and examine
-    it's value.  
+    it's value.
 
 * @author NIST
 * @author Rick Rivello
@@ -87,7 +87,7 @@ function HTMLFrameElement04() {
       var testNode;
       var vmarginwidth;
       var doc;
-      
+
       var docRef = null;
       if (typeof(this.doc) != 'undefined') {
         docRef = this.doc;
@@ -99,7 +99,7 @@ testNode = nodeList.item(0);
       vmarginwidth = testNode.marginWidth;
 
       assertEquals("marginwidthLink","5",vmarginwidth);
-       
+
 }
 
 </script>
@@ -112,7 +112,7 @@ testNode = nodeList.item(0);
     The marginWidth attribute specifies the frame margin width, in pixels.
 
     Retrieve the marginWidth attribute of the first FRAME element and examine
-    it's value.  
+    it's value.
 &lt;/description&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;contributor&gt;Rick Rivello&lt;/contributor&gt;
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;date qualifier='created'&gt;2002-05-08&lt;/date&gt;
@@ -129,7 +129,7 @@ testNode = nodeList.item(0);
 			the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 			PURPOSE.
 			</p>
-<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a> 
+<p>See W3C License <a href="http://www.w3.org/Consortium/Legal/">http://www.w3.org/Consortium/Legal/</a>
  for more details.</p>
 <iframe name="doc" src="files/frame.html"></iframe>
 <br>

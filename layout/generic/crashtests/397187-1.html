@@ -11,7 +11,7 @@ function boom()
 {
   document.body.style.overflow = "auto";
   document.body.className = "a";
-  
+
   setTimeout(boom2, 30);
 }
 
@@ -19,7 +19,7 @@ function boom2()
 {
   var span = document.createElement("span");
   document.body.appendChild(span);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

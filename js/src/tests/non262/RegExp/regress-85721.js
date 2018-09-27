@@ -76,7 +76,7 @@ testRegExp([status], [re], [str], [result], [expect]);
  */
 
 //# Some things for avoiding backslashitis later on.
-$esc        = '\\\\';     
+$esc        = '\\\\';
 $Period      = '\.';
 $space      = '\040';              $tab         = '\t';
 $OpenBR     = '\\[';               $CloseBR     = '\\]';

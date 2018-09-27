@@ -77,7 +77,7 @@ new TestCase( "Math.exp(Infinity)",
 	      Number.POSITIVE_INFINITY,
 	      Math.exp(Number.POSITIVE_INFINITY) );
 
-new TestCase( "Math.exp(-Infinity)", 
+new TestCase( "Math.exp(-Infinity)",
 	      0,
 	      Math.exp(Number.NEGATIVE_INFINITY) );
 

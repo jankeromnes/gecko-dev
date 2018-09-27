@@ -14,7 +14,7 @@ info: |
         AsyncGeneratorBody }
 
 
-    
+
 ---*/
 var log = [];
 var obj = {

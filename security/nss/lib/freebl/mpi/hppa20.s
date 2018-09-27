@@ -68,7 +68,7 @@
 ; We have left the comments describing cycle numbers in the code.
 ; These are intended for reference when comparing with the main loop,
 ; and have no particular relationship to actual cycle numbers.
-
+
 #ifdef LITTLE_WORDIAN
 maxpy_little
 #else
@@ -156,7 +156,7 @@ maxpy_big
         FSTD    %fr27,-48(%sp)
 ;        MFCTL   %cr16,%r21         ; for timing
 ;        STD     %r21,-112(%sp)
-
+
 ; Here is the loop.
 
 $LOOP   XMPYU   %fr9L,%fr28L,%fr28  ; Cycle 1
@@ -175,7 +175,7 @@ $LOOP   XMPYU   %fr9L,%fr28L,%fr28  ; Cycle 1
 
         XMPYU   %fr9R,%fr24L,%fr25  ; Cycle 4
         ADD,DC  %r21,%r4,%r28
-        FSTD    %fr29,-72(%sp)    
+        FSTD    %fr29,-72(%sp)
         LDD     -96(%sp),%r3
 
         XMPYU   %fr9L,%fr24L,%fr26  ; Cycle 5
@@ -219,7 +219,7 @@ $LOOP   XMPYU   %fr9L,%fr28L,%fr28  ; Cycle 1
         ADD     %r22,%r1,%r1
         ADDIB,> -2,%r26,$LOOP       ; actually happens in cycle 12
         FSTD    %fr27,-48(%sp)
-
+
 $ENDLOOP
 
 ; Shutdown code, first stage.
@@ -243,7 +243,7 @@ $ENDLOOP
         LDD     UN_EIGHT(%r23),%r21
 
         ADD,DC  %r21,%r4,%r28       ; Cycle 4
-        FSTD    %fr29,-72(%sp)    
+        FSTD    %fr29,-72(%sp)
         STD     %r28,UN_EIGHT(%r23) ; moved up from cycle 9
         LDD     -96(%sp),%r3
 
@@ -313,7 +313,7 @@ $FINAL1 LDO     EIGHT(%r23),%r23
         STD     %r21,UN_SIXTEEN(%r23)
         B       $L0
         NOP
-
+
 ; Here is the code that handles the difficult cases N=1, N=2, and N=3.
 ; We do the usual trick -- branch out of the startup code at appropriate
 ; points, and branch into the shutdown code.
@@ -360,7 +360,7 @@ $N_IS_ONE
         FSTD    %fr26,-88(%sp)      ; Cycle 2
         B       $JOIN5
         ADD     %r0,%r0,%r22
-
+
 ; We came out of the unrolled loop with wrong parity.  Do one more
 ; single cycle.  This is quite tricky, because of the way the
 ; carry chains and SHRPD chains have been chopped up.
@@ -382,7 +382,7 @@ $ONEMORE
         ADD,DC  %r21,%r4,%r28
         STD     %r28,UN_EIGHT(%r23) ; moved from cycle 9
         LDD     -96(%sp),%r3
-        FSTD    %fr29,-72(%sp)    
+        FSTD    %fr29,-72(%sp)
 
         XMPYU   %fr9L,%fr24L,%fr26  ; Cycle 5
         ADD,DC  %r20,%r31,%r22
@@ -423,7 +423,7 @@ $JOIN3
         ADD,DC  %r29,%r4,%r4        ; Cycle 1
 
         LDO     SIXTEEN(%r23),%r23  ; Cycle 2
-        ADD,DC  %r0,%r20,%r20     
+        ADD,DC  %r0,%r20,%r20
         FSTD    %fr26,-88(%sp)
 
         LDD     UN_EIGHT(%r23),%r21 ; Cycle 3
@@ -468,7 +468,7 @@ $L0
         LDW,MB  -128(%sp),%r3
 
         .PROCEND
-
+
 ; ***************************************************************
 ;
 ;                 add_diag_[little/big]
@@ -517,7 +517,7 @@ add_diag_big
         ADD     %r0,%r0,%r0         ; clear the carry bit
         ADDIB,<= -2,%r26,$ENDDIAGLOOP ; Cycle 7
         FSTD    %fr24,-64(%sp)
-
+
 ; Here is the loop.  It is unrolled twice, modelled after the "alternate body" and then the "main body".
 
 $DIAGLOOP
@@ -527,7 +527,7 @@ $DIAGLOOP
         FSTD    %fr31,-104(%sp)
         SHRPD   %r0,%r31,31,%r4     ; Cycle 2
         ADD,DC  %r22,%r3,%r3
-        FLDD    UN_SIXTEEN(%r25),%fr7   
+        FLDD    UN_SIXTEEN(%r25),%fr7
         ADD,DC  %r0,%r20,%r20       ; Cycle 3
         ADD     %r1,%r3,%r3
         XMPYU   %fr7R,%fr7R,%fr29   ; Cycle 4
@@ -535,8 +535,8 @@ $DIAGLOOP
         STD     %r3,0(%r24)
         XMPYU   %fr7L,%fr7R,%fr27   ; Cycle 5
         XMPYU   %fr7L,%fr7L,%fr30
-        LDD     -64(%sp),%r29       
-        LDD     EIGHT(%r24),%r1  
+        LDD     -64(%sp),%r29
+        LDD     EIGHT(%r24),%r1
         ADD,DC  %r4,%r20,%r20       ; Cycle 6
         LDD     -104(%sp),%r19
         FSTD    %fr29,-88(%sp)
@@ -566,10 +566,10 @@ $DIAGLOOP
         FSTD    %fr24,-64(%sp)
         ADDIB,> -2,%r26,$DIAGLOOP   ; Cycle 8
         STD     %r28,UN_EIGHT(%r24)
-
+
 $ENDDIAGLOOP
 
-        ADD,DC  %r0,%r22,%r22    
+        ADD,DC  %r0,%r22,%r22
         CMPIB,= 0,%r26,$ONEMOREDIAG
         SHRPD   %r31,%r0,31,%r3
 
@@ -603,7 +603,7 @@ $ENDDIAGLOOP
         ADD     %r4,%r1,%r4
         STD     %r4,UN_SIXTEEN(%r24); Cycle 4
         LDD     UN_EIGHT(%r24),%r28 ; Cycle 5
-        ADD,DC  %r3,%r19,%r19       ; Cycle 6       
+        ADD,DC  %r3,%r19,%r19       ; Cycle 6
         ADD     %r19,%r28,%r28      ; Cycle 7
         ADD,DC  %r0,%r0,%r22        ; Cycle 8
         CMPIB,*= 0,%r22,$Z0         ; if no overflow, exit
@@ -620,7 +620,7 @@ $FDIAG2
 
         B   $Z0
         NOP
-
+
 ; Here is the code that handles the difficult case N=1.
 ; We do the usual trick -- branch out of the startup code at appropriate
 ; points, and branch into the shutdown code.
@@ -631,7 +631,7 @@ $DIAG_N_IS_ONE
         LDD     -72(%sp),%r31
         B       $JOINDIAG
         LDD     -96(%sp),%r20
-
+
 ; We came out of the unrolled loop with wrong parity.  Do one more
 ; single cycle.  This is the "alternate body".  It will, of course,
 ; give us opposite registers from the other case, so we need
@@ -684,7 +684,7 @@ $ONEMOREDIAG
 
 $JOINDIAG
         SHRPD   %r31,%r0,31,%r3     ; Cycle 1 (alternate body)
-        LDD     0(%r24),%r28        
+        LDD     0(%r24),%r28
         SHRPD   %r0,%r31,31,%r4     ; Cycle 2
         ADD     %r3,%r22,%r3
         ADD,DC  %r0,%r20,%r20       ; Cycle 3
@@ -713,7 +713,7 @@ $Z0
         LDW,MB  -128(%sp),%r3
         .PROCEND
 ;	.ALLOW
-
+
         .SPACE         $TEXT$
         .SUBSPA        $CODE$
 #ifdef LITTLE_WORDIAN
@@ -733,22 +733,22 @@ $Z0
 
 
 ; How to use "maxpy_PA20_little" and "maxpy_PA20_big"
-; 
+;
 ; The routine "maxpy_PA20_little" or "maxpy_PA20_big"
 ; performs a 64-bit x any-size multiply, and adds the
 ; result to an area of memory.  That is, it performs
 ; something like
-; 
+;
 ;      A B C D
 ;    *       Z
 ;   __________
 ;    P Q R S T
-; 
+;
 ; and then adds the "PQRST" vector into an area of memory,
 ; handling all carries.
-; 
+;
 ; Digression on nomenclature and endian-ness:
-; 
+;
 ; Each of the capital letters in the above represents a 64-bit
 ; quantity.  That is, you could think of the discussion as
 ; being in terms of radix-16-quintillion arithmetic.  The data
@@ -756,9 +756,9 @@ $Z0
 ; requires the 64-bit extension of the HP-UX C compiler,
 ; available at release 10.  You need these compiler flags to
 ; enable these extensions:
-; 
+;
 ;       -Aa +e +DA2.0 +DS2.0
-; 
+;
 ; (The first specifies ANSI C, the second enables the
 ; extensions, which are beyond ANSI C, and the third and
 ; fourth tell the compiler to use whatever features of the
@@ -767,72 +767,72 @@ $Z0
 ; make the program unable to run on anything less than PA2.0,
 ; you might as well gain the performance enhancements in the C
 ; code as well.)
-; 
+;
 ; Questions of "endian-ness" often come up, usually in the
 ; context of byte ordering in a word.  These routines have a
 ; similar issue, that could be called "wordian-ness".
 ; Independent of byte ordering (PA is always big-endian), one
 ; can make two choices when representing extremely large
 ; numbers as arrays of 64-bit doublewords in memory.
-; 
+;
 ; "Little-wordian" layout means that the least significant
 ; word of a number is stored at the lowest address.
-; 
+;
 ;   MSW     LSW
 ;    |       |
 ;    V       V
-; 
+;
 ;    A B C D E
-; 
+;
 ;    ^     ^ ^
 ;    |     | |____ address 0
 ;    |     |
 ;    |     |_______address 8
 ;    |
 ;    address 32
-; 
+;
 ; "Big-wordian" means that the most significant word is at the
 ; lowest address.
-; 
+;
 ;   MSW     LSW
 ;    |       |
 ;    V       V
-; 
+;
 ;    A B C D E
-; 
+;
 ;    ^     ^ ^
 ;    |     | |____ address 32
 ;    |     |
 ;    |     |_______address 24
 ;    |
 ;    address 0
-; 
+;
 ; When you compile the file, you must specify one or the other, with
 ; a switch "-DLITTLE_WORDIAN" or "-DBIG_WORDIAN".
-; 
+;
 ;     Incidentally, you assemble this file as part of your
 ;     project with the same C compiler as the rest of the program.
 ;     My "makefile" for a superprecision arithmetic package has
 ;     the following stuff:
-; 
+;
 ;     # definitions:
 ;     CC = cc -Aa +e -z +DA2.0 +DS2.0 +w1
 ;     CFLAGS = +O3
 ;     LDFLAGS = -L /usr/lib -Wl,-aarchive
-; 
+;
 ;     # general build rule for ".s" files:
 ;     .s.o:
 ;             $(CC) $(CFLAGS) -c $< -DBIG_WORDIAN
-; 
+;
 ;     # Now any bind step that calls for pa20.o will assemble pa20.s
-; 
+;
 ; End of digression, back to arithmetic:
-; 
+;
 ; The way we multiply two huge numbers is, of course, to multiply
 ; the "ABCD" vector by each of the "WXYZ" doublewords, adding
 ; the result vectors with increasing offsets, the way we learned
 ; in school, back before we all used calculators:
-; 
+;
 ;            A B C D
 ;          * W X Y Z
 ;         __________
@@ -842,31 +842,31 @@ $Z0
 ;  + R S T U V
 ;    _______________
 ;    F I N A L S U M
-; 
+;
 ; So we call maxpy_PA20_big (in my case; my package is
 ; big-wordian) repeatedly, giving the W, X, Y, and Z arguments
 ; in turn as the "scalar", and giving the "ABCD" vector each
 ; time.  We direct it to add its result into an area of memory
 ; that we have cleared at the start.  We skew the exact
 ; location into that area with each call.
-; 
+;
 ; The prototype for the function is
-; 
+;
 ; extern void maxpy_PA20_big(
 ;    int length,        /* Number of doublewords in the multiplicand vector. */
 ;    const long long int *scalaraddr,    /* Address to fetch the scalar. */
 ;    const long long int *multiplicand,  /* The multiplicand vector. */
 ;    long long int *result);             /* Where to accumulate the result. */
-; 
+;
 ; (You should place a copy of this prototype in an include file
 ; or in your C file.)
-; 
+;
 ; Now, IN ALL CASES, the given address for the multiplicand or
 ; the result is that of the LEAST SIGNIFICANT DOUBLEWORD.
 ; That word is, of course, the word at which the routine
 ; starts processing.  "maxpy_PA20_little" then increases the
 ; addresses as it computes.  "maxpy_PA20_big" decreases them.
-; 
+;
 ; In our example above, "length" would be 4 in each case.
 ; "multiplicand" would be the "ABCD" vector.  Specifically,
 ; the address of the element "D".  "scalaraddr" would be the
@@ -880,14 +880,14 @@ $Z0
 ; area must be the the sum of the sizes of the multiplicand
 ; and multiplier vectors, and must be initialized to zero
 ; before we start.
-; 
+;
 ; Whenever the routine adds its partial product into the result
 ; vector, it follows carry chains as far as they need to go.
-; 
+;
 ; Here is the super-precision multiply routine that I use for
 ; my package.  The package is big-wordian.  I have taken out
 ; handling of exponents (it's a floating point package):
-; 
+;
 ; static void mul_PA20(
 ;   int size,
 ;   const long long int *arg1,
@@ -895,9 +895,9 @@ $Z0
 ;   long long int *result)
 ; {
 ;    int i;
-; 
+;
 ;    for (i=0 ; i<2*size ; i++) result[i] = 0ULL;
-; 
+;
 ;    for (i=0 ; i<size ; i++) {
 ;       maxpy_PA20_big(size, &arg2[i], &arg1[size-1], &result[size+i]);
 ;    }

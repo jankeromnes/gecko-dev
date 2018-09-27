@@ -20,5 +20,5 @@ function f() {
   return(i);
 }
 actual = f();
- 
+
 reportCompare(expect, actual, summary);

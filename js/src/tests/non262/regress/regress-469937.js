@@ -11,8 +11,8 @@ var expect = true;
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
-(function(){ 
+
+(function(){
     var o = { }
     o.PageLeft = 1;
     o.Rect2 = 6;
@@ -21,7 +21,7 @@ printStatus (summary);
     o.Rect3 = 7;
     found = false;
     for (var p in o) if (p == 'Rect3') found = true;
-    actual = found;    
+    actual = found;
 })();
 
 reportCompare(expect, actual, summary);

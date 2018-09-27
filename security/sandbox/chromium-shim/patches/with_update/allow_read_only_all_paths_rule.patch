@@ -19,13 +19,13 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
  #include "sandbox/win/src/sandbox_nt_util.h"
  #include "sandbox/win/src/sharedmem_ipc_client.h"
  #include "sandbox/win/src/target_services.h"
- 
+
 +// This status occurs when trying to access a network share on the machine from
 +// which it is shared.
 +#define STATUS_NETWORK_OPEN_RESTRICTION ((NTSTATUS)0xC0000201L)
 +
  namespace sandbox {
- 
+
  NTSTATUS WINAPI TargetNtCreateFile(NtCreateFileFunction orig_CreateFile,
                                     PHANDLE file, ACCESS_MASK desired_access,
                                     POBJECT_ATTRIBUTES object_attributes,
@@ -43,11 +43,11 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
 +  if (STATUS_ACCESS_DENIED != status &&
 +      STATUS_NETWORK_OPEN_RESTRICTION != status)
      return status;
- 
+
    // We don't trust that the IPC can work this early.
    if (!SandboxFactory::GetTargetServices()->GetState()->InitCalled())
      return status;
- 
+
    wchar_t* name = NULL;
    do {
 @@ -101,17 +106,18 @@ NTSTATUS WINAPI TargetNtCreateFile(NtCre
@@ -63,16 +63,16 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
 +  if (STATUS_ACCESS_DENIED != status &&
 +      STATUS_NETWORK_OPEN_RESTRICTION != status)
      return status;
- 
+
    // We don't trust that the IPC can work this early.
    if (!SandboxFactory::GetTargetServices()->GetState()->InitCalled())
      return status;
- 
+
    wchar_t* name = NULL;
    do {
 @@ -173,17 +179,18 @@ NTSTATUS WINAPI TargetNtOpenFile(NtOpenF
  }
- 
+
  NTSTATUS WINAPI TargetNtQueryAttributesFile(
      NtQueryAttributesFileFunction orig_QueryAttributes,
      POBJECT_ATTRIBUTES object_attributes,
@@ -83,15 +83,15 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
 +  if (STATUS_ACCESS_DENIED != status &&
 +      STATUS_NETWORK_OPEN_RESTRICTION != status)
      return status;
- 
+
    // We don't trust that the IPC can work this early.
    if (!SandboxFactory::GetTargetServices()->GetState()->InitCalled())
      return status;
- 
+
    wchar_t* name = NULL;
    do {
 @@ -231,17 +238,18 @@ NTSTATUS WINAPI TargetNtQueryAttributesF
- 
+
  NTSTATUS WINAPI TargetNtQueryFullAttributesFile(
      NtQueryFullAttributesFileFunction orig_QueryFullAttributes,
      POBJECT_ATTRIBUTES object_attributes,
@@ -103,11 +103,11 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_interception.c
 +  if (STATUS_ACCESS_DENIED != status &&
 +      STATUS_NETWORK_OPEN_RESTRICTION != status)
      return status;
- 
+
    // We don't trust that the IPC can work this early.
    if (!SandboxFactory::GetTargetServices()->GetState()->InitCalled())
      return status;
- 
+
    wchar_t* name = NULL;
    do {
 diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_policy.cc b/security/sandbox/chromium/sandbox/win/src/filesystem_policy.cc
@@ -121,7 +121,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_policy.cc b/se
    if (mod_name.empty()) {
      return false;
    }
- 
+
 -  if (!PreProcessName(&mod_name)) {
 +  // Don't pre-process the path name and check for reparse points if it is the
 +  // special case of allowing read access to all paths.
@@ -132,7 +132,7 @@ diff --git a/security/sandbox/chromium/sandbox/win/src/filesystem_policy.cc b/se
      NOTREACHED();
      return false;
    }
- 
+
    // TODO(cpu) bug 32224: This prefix add is a hack because we don't have the
    // infrastructure to normalize names. In any case we need to escape the
    // question marks.

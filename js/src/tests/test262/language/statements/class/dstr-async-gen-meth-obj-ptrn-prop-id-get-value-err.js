@@ -55,7 +55,7 @@ var poisonedProperty = Object.defineProperty({}, 'poisoned', {
 
 class C {
   async *method({ poisoned: x = ++initEvalCount }) {
-    
+
   }
 };
 

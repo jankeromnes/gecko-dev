@@ -688,7 +688,7 @@ int glslang_initialize(TParseContext* context) {
 int glslang_finalize(TParseContext* context) {
     yyscan_t scanner = context->getScanner();
     if (scanner == NULL) return 0;
-    
+
     context->setScanner(NULL);
     yylex_destroy(scanner);
 

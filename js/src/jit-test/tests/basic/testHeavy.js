@@ -1,4 +1,4 @@
-function heavyFn1(i) { 
+function heavyFn1(i) {
     if (i == 3) {
 	var x = 3;
         return [0, i].map(function (i) { return i + x; });

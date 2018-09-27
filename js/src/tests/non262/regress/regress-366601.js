@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var N = 100*1000;
   var src = 'var x = ["';
   var array = Array(N);

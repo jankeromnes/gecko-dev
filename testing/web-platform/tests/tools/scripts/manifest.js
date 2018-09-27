@@ -59,7 +59,7 @@ function __result_handler() {
 	    var a = [];
 	    for (var i = 0; i<arr.length;i++) {
 		a[i] = arr[i];
-	    }	
+	    }
 	    obj[prop] = a;
 	}
     }
@@ -67,7 +67,7 @@ function __result_handler() {
 
     var ret = new Object();
     ret.location = document.location.href;
-    ret.type  = "manual";    
+    ret.type  = "manual";
     ret.tests = new Object();
 
     var node = document.querySelector('script[src$="/resources/testharness.js"]');
@@ -87,17 +87,17 @@ function __result_handler() {
 		if (typeof obj.help === "undefined") {
 		    copy(newtest, "help", meta.help);
 		} else if (typeof obj.help === "string") {
-		    newtest.help = [ obj.help ];	  
+		    newtest.help = [ obj.help ];
 		}
 		if (typeof obj.author === "undefined") {
 		    copy(newtest, "author", meta.author);
 		} else if (typeof obj.author === "string") {
-		    newtest.author = [ obj.author ];	  
+		    newtest.author = [ obj.author ];
 		}
 		if (typeof obj.assert === "undefined") {
 		    copy(newtest, "assert", meta.assert);
 		} else if (typeof obj.assert === "string") {
-		    newtest.assert = [ obj.assert ];	  
+		    newtest.assert = [ obj.assert ];
 		}
 		copy(newtest, "match", meta.match);
 		copy(newtest, "mismatch", meta.mismatch);
@@ -107,7 +107,7 @@ function __result_handler() {
 	}
     } else {
 	var newtest = meta;
-	ret.tests[document.title]= newtest;	
+	ret.tests[document.title]= newtest;
 
 	if (typeof newtest.match !== "undefined"
 	    || typeof newtest.mismatch !== "undefined") {
@@ -122,7 +122,7 @@ function __result_handler() {
 function __give_up() {
     var ret = new Object();
     ret.location = document.location.href;
-    ret.type  = "manual";    
+    ret.type  = "manual";
     ret.tests = new Object();
 
     var node = document.querySelector('script[src$="/resources/testharness.js"]');
@@ -134,7 +134,7 @@ function __give_up() {
     }
 
     var newtest = __get_metadata();
-    ret.tests[document.title]= newtest;	
-    
+    ret.tests[document.title]= newtest;
+
     return ret;
 }

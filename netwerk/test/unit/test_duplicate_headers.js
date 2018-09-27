@@ -126,7 +126,7 @@ function completeTest3(request, data, ctx)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Test 4: ensure that blank C-len header doesn't allow attacker to reset Clen, 
+// Test 4: ensure that blank C-len header doesn't allow attacker to reset Clen,
 // then insert CRLF attack
 test_flags[4] = CL_EXPECT_FAILURE;
 
@@ -276,7 +276,7 @@ function completeTest8(request, data, ctx)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Test 9: ensure that blank Location header doesn't allow attacker to reset, 
+// Test 9: ensure that blank Location header doesn't allow attacker to reset,
 // then insert an evil one
 test_flags[9] = CL_EXPECT_FAILURE;
 
@@ -287,7 +287,7 @@ function handler9(metadata, response)
   response.write("HTTP/1.0 301 Moved\r\n");
   response.write("Content-Type: text/plain\r\n");
   response.write("Content-Length: 30\r\n");
-  // redirect to previous test handler that completes OK: test 2 
+  // redirect to previous test handler that completes OK: test 2
   response.write("Location: " + URL + testPathBase + "2\r\n");
   response.write("Location:\r\n");
   // redirect to previous test handler that completes OK: test 4
@@ -307,7 +307,7 @@ function completeTest9(request, data, ctx)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Test 10: FAIL:  if conflicting values for Content-Dispo 
+// Test 10: FAIL:  if conflicting values for Content-Dispo
 test_flags[10] = CL_EXPECT_FAILURE;
 
 function handler10(metadata, response)

@@ -6,7 +6,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=255820
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Test for Bug 255820</title>
-  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>        
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
 </head>
 <body>
@@ -17,7 +17,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=255820
   <iframe id="f3"></iframe>
 </p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
@@ -59,7 +59,7 @@ function f3Continue() {
      "Wrong color before reload");
   $("f3").
     setAttribute("onload",
-                 'var doc = this.contentDocument; ' + 
+                 'var doc = this.contentDocument; ' +
                  'is(doc.defaultView.getComputedStyle(doc.body, "").color, ' +
                  '   "rgb(0, 180, 0)",' +
                  '   "Wrong color after reload");' +

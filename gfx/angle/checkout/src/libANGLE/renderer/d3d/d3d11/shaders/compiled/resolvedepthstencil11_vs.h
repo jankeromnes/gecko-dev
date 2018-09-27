@@ -8,7 +8,7 @@
 //
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
-// SV_VertexID              0   x           0   VERTID    uint   x   
+// SV_VertexID              0   x           0   VERTID    uint   x
 //
 //
 // Output signature:
@@ -16,7 +16,7 @@
 // Name                 Index   Mask Register SysValue  Format   Used
 // -------------------- ----- ------ -------- -------- ------- ------
 // SV_Position              0   xyzw        0      POS   float   xyzw
-// TEXCOORD                 0   xy          1     NONE   float   xy  
+// TEXCOORD                 0   xy          1     NONE   float   xy
 //
 vs_4_1
 dcl_globalFlags refactoringAllowed
@@ -36,7 +36,7 @@ mov o0.xy, icb[r0.x + 0].xyxx
 add r0.y, l(1.000000), icb[r0.x + 0].x
 add r0.x, l(1.000000), -icb[r0.x + 0].y
 mul o1.xy, r0.yxyy, l(0.500000, 0.500000, 0.000000, 0.000000)
-ret 
+ret
 // Approximately 7 instruction slots used
 #endif
 

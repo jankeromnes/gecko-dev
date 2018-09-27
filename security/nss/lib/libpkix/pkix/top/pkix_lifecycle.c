@@ -15,7 +15,7 @@ static PKIX_Boolean pkixIsInitialized;
 /* Lock used by Logger - is reentrant by the same thread */
 extern PKIX_PL_MonitorLock *pkixLoggerLock;
 
-/* 
+/*
  * Following pkix_* variables are for debugging purpose. They should be taken
  * out eventually. The purpose is to verify cache tables usage (via debugger).
  */
@@ -91,27 +91,27 @@ PKIX_Initialize(
         PKIX_CHECK(PKIX_PL_HashTable_Create
                    (32, 0, &cachedCertSigTable, plContext),
                    PKIX_HASHTABLECREATEFAILED);
-        
+
         PKIX_CHECK(PKIX_PL_HashTable_Create
                    (32, 0, &cachedCrlSigTable, plContext),
                    PKIX_HASHTABLECREATEFAILED);
-        
+
         PKIX_CHECK(PKIX_PL_HashTable_Create
                        (32, 10, &cachedCertChainTable, plContext),
                    PKIX_HASHTABLECREATEFAILED);
-        
+
         PKIX_CHECK(PKIX_PL_HashTable_Create
                        (32, 10, &cachedCertTable, plContext),
                    PKIX_HASHTABLECREATEFAILED);
-        
+
         PKIX_CHECK(PKIX_PL_HashTable_Create
                    (32, 10, &cachedCrlEntryTable, plContext),
                    PKIX_HASHTABLECREATEFAILED);
-        
+
         PKIX_CHECK(PKIX_PL_HashTable_Create
                    (5, 5, &aiaConnectionCache, plContext),
                    PKIX_HASHTABLECREATEFAILED);
-        
+
 #ifdef PKIX_SOCKETCACHE
         PKIX_CHECK(PKIX_PL_HashTable_Create
                    (5, 5, &httpSocketCache, plContext),
@@ -129,7 +129,7 @@ PKIX_Initialize(
         if (!fnInvTable) {
             PKIX_ERROR(PKIX_HASHTABLECREATEFAILED);
         }
-        
+
         fnStackNameArr = PORT_ZNewArray(char*, MAX_STACK_DEPTH);
         if (!fnStackNameArr) {
             PKIX_ERROR(PKIX_HASHTABLECREATEFAILED);

@@ -9,7 +9,7 @@ setTimeout("oneShot(2, 'one shot timer with string argument');", 2000);
 
 function reschedule(testNum, numTimes)
 {
-  if (numTimes == 4) { 
+  if (numTimes == 4) {
     dump("Test #" + testNum + " successful: Creating a timeout in a timeout\n");
     kickoff4();
   }
@@ -19,7 +19,7 @@ function reschedule(testNum, numTimes)
   }
 }
 
-setTimeout(reschedule, 3000, 3, 0); 
+setTimeout(reschedule, 3000, 3, 0);
 
 var count = 0;
 var repeat_timer = null;

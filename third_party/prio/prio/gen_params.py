@@ -1,10 +1,10 @@
 """
 /*
  * Copyright (c) 2018, Henry Corrigan-Gibbs
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. 
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 """
 
@@ -33,8 +33,8 @@ assert ((rootsL[2**12 - 1] * gen12) % modulus) == 1
 gen12inv = rootsL[2**12 - 1]
 for i in range(1, 2**12):
     rootsInvL[i] = (rootsInvL[i-1] * gen12inv) % modulus
-    
-    assert rootsInvL[i] != 1 
+
+    assert rootsInvL[i] != 1
 assert ((rootsInvL[2**12 - 1] * gen12inv) % modulus) == 1
 
 rootsL = map(lambda x: '   "%x"' % x, rootsL)
@@ -46,10 +46,10 @@ rootsInv = ",\n".join(rootsInvL)
 output = """
 /*
  * Copyright (c) 2018, Henry Corrigan-Gibbs
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. 
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
 /****
@@ -83,8 +83,8 @@ static const char *RootsInv[] = {
     'modulus': modulus,
     'generator': gen12,
     'twoorder': 12,
-    'roots': roots, 
-    'rootsInv': rootsInv, 
+    'roots': roots,
+    'rootsInv': rootsInv,
 }
 
 print output

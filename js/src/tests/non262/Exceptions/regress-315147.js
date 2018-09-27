@@ -32,5 +32,5 @@ catch(ex)
 {
   actual = ex.name;
 }
- 
+
 reportCompare(expect, actual, summary);

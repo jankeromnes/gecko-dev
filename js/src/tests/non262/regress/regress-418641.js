@@ -11,7 +11,7 @@ var expect = '';
 
 printBugNumber(BUGNUMBER);
 printStatus (summary);
- 
+
 function get_pre_check(operand, op)
 {
   return "{\n"+
@@ -21,7 +21,7 @@ function get_pre_check(operand, op)
     "        throw Error('"+op+op+operand+" case 1 for '+uneval(I));\n"+
     "    if (tmp !== "+operand+")\n"+
     "        throw Error('"+op+op+operand+" case 2 for '+uneval(I));\n"+
-    "}\n";    
+    "}\n";
 }
 
 function get_post_check(operand, op)
@@ -33,7 +33,7 @@ function get_post_check(operand, op)
     "        throw Error('"+operand+op+op+" case 1 for '+uneval(I));\n"+
     "    if (tmp !== Number(I))\n"+
     "        throw Error('"+op+op+operand+" case 2 for '+uneval(I));\n"+
-    "}\n";    
+    "}\n";
 }
 
 function get_check_source(operand)

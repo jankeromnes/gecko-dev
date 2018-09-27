@@ -1445,7 +1445,7 @@ impl BytesMut {
         }
 
         unsafe {
-            ptr = self.inner.ptr.offset(self.inner.len as isize); 
+            ptr = self.inner.ptr.offset(self.inner.len as isize);
         }
         if ptr == other.inner.ptr &&
            self.inner.kind() == KIND_ARC &&

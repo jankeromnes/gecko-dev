@@ -16,7 +16,7 @@ description: catch introduces scope - scope removed when exiting catch block
 
       var o = {foo: 1};
       var catchAccessed = false;
-      
+
       try {
         throw o;
       }

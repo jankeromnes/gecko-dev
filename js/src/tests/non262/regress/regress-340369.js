@@ -13,7 +13,7 @@ printBugNumber(BUGNUMBER);
 printStatus (summary);
 
 try
-{ 
+{
   eval('return /;');
 }
 catch(ex)

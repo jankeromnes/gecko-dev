@@ -177,7 +177,7 @@ def WebIDLTest(parser, harness):
     harness.ok(threw,
                "Should not allow callback interfaces on the left-hand side of "
                "'implements'")
-    
+
     parser = parser.reset()
     threw = False
     try:

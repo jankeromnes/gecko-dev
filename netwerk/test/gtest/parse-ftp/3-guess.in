@@ -1,11 +1,11 @@
 I couldn't find any SuperTCP or Chameleon/Newt FTP servers, so the
 following is based on guesswork from the mirror.pl and lynx projects.
 The first 8 are Chameleon/Newt, the remaining 16 entries are SuperTCP
-with two different date styles. The precise amount of whitespace 
+with two different date styles. The precise amount of whitespace
 between columns might not be correct, but the parser shouldn't care.
 
-.               <DIR>      Nov 16 1994 17:16   
-..              <DIR>      Nov 16 1994 17:16   
+.               <DIR>      Nov 16 1994 17:16
+..              <DIR>      Nov 16 1994 17:16
 INSTALL         <DIR>      Nov 16 1994 17:17
 CMT             <DIR>      Nov 21 1994 10:17
 DESIGN1.DOC     11264      May 11 1995 14:20   A

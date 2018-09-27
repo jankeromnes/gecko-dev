@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   function f() { for (k in it) return k }
 
   if (typeof it == 'undefined')
@@ -27,17 +27,17 @@ function test()
   }
   else
   {
-    try 
+    try
     {
       it.enum_fail = true;
       var r = f();
       actual = 'No exception r: ' + r.toString();
-    } 
-    catch (e) 
+    }
+    catch (e)
     {
       actual = e + '';
-    } 
-    finally 
+    }
+    finally
     {
       it.enum_fail = false;
     }

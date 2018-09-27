@@ -9,13 +9,13 @@ function boom()
   var a = document.getElementById("a");
   var plus = document.getElementById("plus");
   var frameset = document.createElementNS(HTML_NS, "frameset");
-  
+
   document.body.style.width = "300px";
 
   a.parentNode.removeChild(a);
-  
+
   plus.appendChild(frameset);
-  
+
   document.documentElement.removeAttribute("class");
 }
 

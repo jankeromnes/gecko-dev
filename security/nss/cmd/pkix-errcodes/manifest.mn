@@ -7,9 +7,9 @@ CORE_DEPTH = ../..
 
 MODULE = nss
 
-CSRCS = pkix-errcodes.c  
+CSRCS = pkix-errcodes.c
 
-REQUIRES = seccmd 
+REQUIRES = seccmd
 
 PROGRAM = pkix-errcodes
 

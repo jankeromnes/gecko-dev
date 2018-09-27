@@ -14,7 +14,7 @@ use unicode_normalization::UnicodeNormalization;
 
 fn main() {
     assert_eq!(compose('A','\u{30a}'), Some('Å'));
-    
+
     let s = "ÅΩ";
     let c = s.nfc().collect::<String>();
     assert_eq!(c, "ÅΩ");

@@ -1,4 +1,4 @@
-#! /bin/bash  
+#! /bin/bash
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -130,7 +130,7 @@ merge_init()
 	TEST_MODE=UPGRADE_DB
 
   fi
-	
+
 }
 
 #
@@ -254,7 +254,7 @@ merge_main()
   html_msg $? 0 "Verifying TestCA CRL"
 
 }
-  
+
 ############################## smime_cleanup ###########################
 # local shell function to finish this script (no exit since it might be
 # sourced)

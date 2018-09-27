@@ -23,7 +23,7 @@ info: |
     b. Let d be "0".
   [...]
   14. Let m be the concatenation of the four Strings m, "e", c, and d.
-  15. Return the concatenation of the Strings s and m. 
+  15. Return the concatenation of the Strings s and m.
 ---*/
 
 assert.sameValue(Number.prototype.toExponential(0), "0e+0", "Number.prototype");

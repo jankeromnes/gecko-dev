@@ -28,7 +28,7 @@ using mozilla::NumberEqualsInt32;
 
 using JS::DoubleNaNValue;
 
-
+
 /*** HashableValue *******************************************************************************/
 
 bool
@@ -137,7 +137,7 @@ HashableValue::trace(JSTracer* trc) const
     return hv;
 }
 
-
+
 /*** MapIterator *********************************************************************************/
 
 namespace {
@@ -409,7 +409,7 @@ MapIteratorObject::createResultPair(JSContext* cx)
     return resultPairObj;
 }
 
-
+
 /*** Map *****************************************************************************************/
 
 static JSObject*
@@ -1040,7 +1040,7 @@ MapObject::clear(JSContext* cx, HandleObject obj)
     return true;
 }
 
-
+
 /*** SetIterator *********************************************************************************/
 
 static const ClassOps SetIteratorObjectClassOps = {
@@ -1271,7 +1271,7 @@ SetIteratorObject::createResult(JSContext* cx)
     return resultObj;
 }
 
-
+
 /*** Set *****************************************************************************************/
 
 static JSObject*

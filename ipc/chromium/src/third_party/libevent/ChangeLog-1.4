@@ -80,17 +80,17 @@ Changes in 1.4.8-stable:
  o Match the query in DNS replies to the query in the request; from Vsevolod Stakhov.
  o Fix a merge problem in which name_from_addr returned pointers to the stack; found by Jiang Hong.
  o Do not remove Accept-Encoding header
-	
+
 Changes in 1.4.7-stable:
  o Fix a bug where headers arriving in multiple packets were not parsed; fix from Jiang Hong; test by me.
-	
+
 Changes in 1.4.6-stable:
  o evutil.h now includes <stdarg.h> directly
  o switch all uses of [v]snprintf over to evutil
  o Correct handling of trailing headers in chunked replies; from Scott Lamb.
  o Support multi-line HTTP headers; based on a patch from Moshe Litvin
  o Reject negative Content-Length headers; anonymous bug report
- o Detect CLOCK_MONOTONIC at runtime for evdns; anonymous bug report	
+ o Detect CLOCK_MONOTONIC at runtime for evdns; anonymous bug report
  o Fix a bug where deleting signals with the kqueue backend would cause subsequent adds to fail
  o Support multiple events listening on the same signal; make signals regular events that go on the same event queue; problem report by Alexander Drozdov.
  o Deal with evbuffer_read() returning -1 on EINTR|EAGAIN; from Adam Langley.
@@ -98,7 +98,7 @@ Changes in 1.4.6-stable:
  o Fix a bug where setting the timeout on a bufferevent would take not effect if the event was already pending.
  o Fix a memory leak when using signals for some event bases; reported by Alexander Drozdov.
  o Add libevent.vcproj file to distribution to help with Windows build.
- o Fix a problem with epoll() and reinit; problem report by Alexander Drozdov.	
+ o Fix a problem with epoll() and reinit; problem report by Alexander Drozdov.
  o Fix off-by-one errors in devpoll; from Ian Bell
  o Make event_add not change any state if it fails; reported by Ian Bell.
  o Do not warn on accept when errno is either EAGAIN or EINTR

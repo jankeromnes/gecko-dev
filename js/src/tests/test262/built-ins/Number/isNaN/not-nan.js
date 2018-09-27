@@ -11,7 +11,7 @@ info: |
 
   1. If Type(number) is not Number, return false.
   2. If number is NaN, return true.
-  3. Otherwise, return false. 
+  3. Otherwise, return false.
 ---*/
 
 assert.sameValue(Number.isNaN(0), false, "0");

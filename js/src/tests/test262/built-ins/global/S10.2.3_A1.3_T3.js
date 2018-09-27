@@ -9,7 +9,7 @@ es5id: 10.2.3_A1.3_T3
 description: Eval execution context - Constructor Properties
 ---*/
 
-var evalStr = 
+var evalStr =
 '//CHECK#13\n'+
 'if ( Object === null ) {\n'+
 '  $ERROR("#13: Object === null");\n'+

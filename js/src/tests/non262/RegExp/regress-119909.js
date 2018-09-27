@@ -43,7 +43,7 @@ function testThis(numParens, doBackRefs, strOriginal, strReplace)
   var openParen = doBackRefs? '(' : '(?:';
   var closeParen = ')';
   var pattern = '';
- 
+
   for (var i=0; i<numParens; i++) {pattern += openParen;}
   pattern += strOriginal;
   for (i=0; i<numParens; i++) {pattern += closeParen;}

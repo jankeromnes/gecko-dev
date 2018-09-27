@@ -49,9 +49,9 @@
     margin: 0;
   }
 
-  li { margin: 0; 
-       margin-top: 0.5em; 
-	   padding: 0; 
+  li { margin: 0;
+       margin-top: 0.5em;
+	   padding: 0;
 	   font-size: 1.0em;}
 
   div.slide {
@@ -187,7 +187,7 @@
   <ul>
     <li>Review of reflow</li>
     <li>Table frames</li>
-    <li>Table reflow</li> 
+    <li>Table reflow</li>
     <li>Intro to paginated reflow</li>
     <li>Table paginated reflow</li>
   </ul>
@@ -203,10 +203,10 @@
     <li>Reflow process starts when
       <ul>
         <li>An html document starts loading (the frame tree contains only viewport, scroll(s), canvas, html, body).</li>
-        <li>The initial chunk of an xml doc is loaded.</li> 
-        <li>The initial chunk of an html doc (or a subsequent chunk of an xml doc) is loaded. The container posts a 
+        <li>The initial chunk of an xml doc is loaded.</li>
+        <li>The initial chunk of an html doc (or a subsequent chunk of an xml doc) is loaded. The container posts a
         dirty reflow command with itself as the target. </li>
-        <li>Content is inserted, appended, or deleted through the DOM. The container posts a dirty reflow command 
+        <li>Content is inserted, appended, or deleted through the DOM. The container posts a dirty reflow command
         with itself as the target.</li>
         <li>Style changes through the DOM - javascript, browser change font (CTRL+/-), a preference changes, etc.</li>
       </ul>
@@ -230,9 +230,9 @@
     <li>Ususally it starts when the pres shell processes its queue of reflow commands.</li>
     <li>The reflower
 	 <ul>
-         <li>Positions reflowee (if it can) before actually reflowing in case views are involved 
+         <li>Positions reflowee (if it can) before actually reflowing in case views are involved
 		 (e.g. absolutely positioned elements) </li>
-         <li>Reflows reflowee and passes a reflow state (in) and a reflow metrics (in/out)</li> 
+         <li>Reflows reflowee and passes a reflow state (in) and a reflow metrics (in/out)</li>
 	 </ul>
     </li>
   </ul>
@@ -249,14 +249,14 @@
 	 <ul>
       <li>Is a node in a tree structurally equivalent to the frame tree of reflow participants</li>
       <li>contains:
-        <ul> 
+        <ul>
          <li>reflow type,</li>
-         <li>avail size,</li> 
+         <li>avail size,</li>
          <li>various computed values,</li>
          <li>resolved style structs</li>
          <li>possible request for preferred size and more.</li>
         </ul>
-      </li> 
+      </li>
      </ul>
     </li>
    </ul>
@@ -272,8 +272,8 @@
     </li>
       <li>the reflow metrics contains:
     	 <ul class=nested>
-      <li>max element size (if requested) - the minimum size it can be</li> 
-      <li>preferred size (if requested) - the size it would like to be given no size constraints.</li> 
+      <li>max element size (if requested) - the minimum size it can be</li>
+      <li>preferred size (if requested) - the size it would like to be given no size constraints.</li>
       <li>desired size - the size it would like to be given the avail size. This
 	  is equivalent to preferred size if the avail size is not constrained.</li>
 	 </ul>
@@ -288,12 +288,12 @@
   </div>
   <h1>Review of Reflow</h1>
  <ul>
- <li>The reflowee sets various sizes in the reflow metrics after (possibly) reflowing some or all of its children 
+ <li>The reflowee sets various sizes in the reflow metrics after (possibly) reflowing some or all of its children
     which reflows it children, etc.</li>
  <li>The reflowee returns a reflow status which indicates
 	 <ul class=nested>
       <li>if it is complete, and thus not have to continue (split)</li>
-      <li>breaking status (in the case of some inline frames)</li> 
+      <li>breaking status (in the case of some inline frames)</li>
       <li>if there is truncation (it can't fit in the space and can't split). This is just a convience mechanism.</li>
 	 </ul>
 	</li>
@@ -308,14 +308,14 @@
 
   <h1>Kinds of reflows</h1>
   <ul>
-    <li>Initial - reflowee's first reflow must be of this type (reflower's responsibility).</li> 
-    <li>Resize - reflowee gets a change in available space only. Similar to initial, except it can reoccur.</li> 
-    <li>Incremental - has a reflow path (tree) where each node has a command with a target frame, <br>reflow command types are:</li> 
+    <li>Initial - reflowee's first reflow must be of this type (reflower's responsibility).</li>
+    <li>Resize - reflowee gets a change in available space only. Similar to initial, except it can reoccur.</li>
+    <li>Incremental - has a reflow path (tree) where each node has a command with a target frame, <br>reflow command types are:</li>
    	 <ul class=nested>
       <li>dirty - something changed inside a target (e.g. it gains, loses children)</li>
-      <li>style changed - a target changed stylisticly (recall, size is a style property)</li> 
-      <li>content changed - a target's content changed (e.g. a text run)</li> 
-      <li>user defined - currently only used for fixed positioned frames </li> 
+      <li>style changed - a target changed stylisticly (recall, size is a style property)</li>
+      <li>content changed - a target's content changed (e.g. a text run)</li>
+      <li>user defined - currently only used for fixed positioned frames </li>
 	 </ul>
 	</li>
   </ul>
@@ -331,13 +331,13 @@
     <li>Incremental reflow (continued)
 	 <ul class=nested>
       <li>reflower not allowed to change available size of reflowee</li>
-      <li>reflow commands get coalesced to streamline processing</li> 
+      <li>reflow commands get coalesced to streamline processing</li>
 	 </ul>
 	</li>
-    <li>Style change 
+    <li>Style change
 	 <ul class=nested>
       <li>a target changed stylistic if there is a target, otherwise every frame may need to respond</li>
-      <li>parent of target usually turns it into an incremental reflow with a style changed command type</li> 
+      <li>parent of target usually turns it into an incremental reflow with a style changed command type</li>
 	 </ul>
 	</li>
   </ul>
@@ -376,14 +376,14 @@
   <h1>Table Reflow</h1>
   <ul>
     <li>table wrapper reflows table and caption (if present)</li>
-	<li>Table reflows row groups in multiple passes</li> 
+	<li>Table reflows row groups in multiple passes</li>
 	 <ul class=nested>
       <li>Pass 1 - unconstrained width, height and requests max elem width.</li>
       <li>The table figures out the column widths (balances) given the style width constraints
-	  on the table, col groups, cols, cells the preferred and max element sizes of the cells 
-	  (from the pass 1 reflow), and considers colspans</li> 
-      <li>Pass 2 - cell widths are constrained by the column widths (heights are only 
-	  constrained in paginated mode).</li> 
+	  on the table, col groups, cols, cells the preferred and max element sizes of the cells
+	  (from the pass 1 reflow), and considers colspans</li>
+      <li>Pass 2 - cell widths are constrained by the column widths (heights are only
+	  constrained in paginated mode).</li>
 	 </ul>
 	</li>
   </ul>
@@ -396,11 +396,11 @@
   </div>
   <h1>Table Reflow</h1>
   <ul>
-	<li>Table reflows row groups (continued)</li> 
+	<li>Table reflows row groups (continued)</li>
 	 <ul class=nested>
       <li>The row group figures out the row heights given the its style height constraints
-	  its rows and cells and the actual heights of its rows and cells from the pass 2 reflow</li> 
-      <li>If the table has a style height, it allocates extra height to its row groups, rows and cells.</li> 
+	  its rows and cells and the actual heights of its rows and cells from the pass 2 reflow</li>
+      <li>If the table has a style height, it allocates extra height to its row groups, rows and cells.</li>
 	 </ul>
 	</li>
     <li>In each pass, row groups reflow rows which reflow cells which reflow cell blocks</li>
@@ -419,7 +419,7 @@
 	 <pre style="font-size:.6em;">
 tblW 030176CC r=0 a=8940,UC c=0,0 cnt=429
   tbl 030178C4 r=0 a=8940,UC c=4470,UC cnt=430
-   rowG 03017A7C r=0 a=UC,UC c=UC,UC cnt=431 
+   rowG 03017A7C r=0 a=UC,UC c=UC,UC cnt=431
     row 03017C08 r=0 a=UC,UC c=UC,UC cnt=432
      cell 03017DA8 r=0 a=UC,UC c=UC,UC cnt=433
       block 03017E08 r=0 a=UC,UC c=UC,UC cnt=434
@@ -446,7 +446,7 @@ tblW 030176CC r=0 a=8940,UC c=0,0 cnt=429
   tbl 030178C4 d=4500,450
  tblW 030176CC d=4500,450
 
- <a href="frame_reflow_debug.html">frame reflow debugging</a> gives instructions 
+ <a href="frame_reflow_debug.html">frame reflow debugging</a> gives instructions
  for turning this on.
  </pre>
    </td>
@@ -464,9 +464,9 @@ tblW 030176CC r=0 a=8940,UC c=0,0 cnt=429
 	 <pre style="font-size:.7em;">
 Key:
 
-  r  = reflow reason, 
+  r  = reflow reason,
        0 (initial),
-       2 (resize) 
+       2 (resize)
   a  = avail w, h
   c  = computed w, h
   d  = desired w, h
@@ -485,7 +485,7 @@ Key:
   <h1>Table reflow optimizations</h1>
   <ul>
     <li>If the table is already balanced, pass 1 constrains the width (like a normal pass 2) based on the current
-	column widths. The pass 2 will get skipped if the table doesn't need to rebalance. <!--<span class="comment">please clarify when can this happen</span>--></li> 
+	column widths. The pass 2 will get skipped if the table doesn't need to rebalance. <!--<span class="comment">please clarify when can this happen</span>--></li>
     <li>Nested table reflowed with an unconstrained width (i.e. an ancestor is doing a pass 1 reflow)
 	will only do a pass 1 reflow on its children</li>
     <li>table wrapper caches last avail width and avoids reflowing children if resize reflow is the same as previous</li>
@@ -502,11 +502,11 @@ Key:
   </div>
   <h1>Table incremental reflow</h1>
   <ul>
-    <li>table wrapper is a target when a caption is added or removed (dirty) or the table or caption margin 
-  changes (style changed).</li> 
+    <li>table wrapper is a target when a caption is added or removed (dirty) or the table or caption margin
+  changes (style changed).</li>
     <li>Caption is a target when it changes stylistically (style changed).</li>
     <li>Table, row group, row, col group, col is a target when a child is added or removed (dirty) or it changes
-  stylistically (style changed). <!--<span class="comment">please show how the column style change is propagated 
+  stylistically (style changed). <!--<span class="comment">please show how the column style change is propagated
                into the cell reflows as the cells are reflowed by their parent rows and not cols</span>--></li>
     <li>In the dirty cases, a target posted the reflow command in AppendFrames, InsertFrames, or DeleteFrame.</li>
   </ul>
@@ -520,7 +520,7 @@ Key:
   <h1>Table incremental reflow</h1>
   <ul>
     <li>In the style change cases where a target is between the table and the cell, the table is told to rebalance.</li>
-    <li>When a target is the cell or below and the cell changes size, the row tells the table so it can decide if 
+    <li>When a target is the cell or below and the cell changes size, the row tells the table so it can decide if
   it needs to rebalance</li>
     <li>When a target is inside the cell's block, the cell
   requests max element, preferred sizes of its block in case they change</li>
@@ -560,10 +560,10 @@ Key:
 &lt;<span class=html>table</span> border=2 width=300&gt;
   &lt;<span class=html>tr</span>&gt;
     &lt;<span class=html>td</span>&gt;
-      This cell's width is 
-      constrained by the 
-      table and image widths. 
-      Its exact height is 
+      This cell's width is
+      constrained by the
+      table and image widths.
+      Its exact height is
       hard to determine.
     &lt;<span class=html>/td</span>&gt;
     &lt;<span class=html>td</span>&gt;
@@ -577,12 +577,12 @@ Key:
     <td>
 	 <table border=2 width=300>
       <tr>
-       <td style="font-size:.7em;">This cell's width is constrained 
+       <td style="font-size:.7em;">This cell's width is constrained
         by the table and image widths. <BR><BR>Its height
 		is hard to determine.<BR><BR> The image needs to be as high as the cell.
        <td>
        <!-- need ?raw=1 for lxr to cough up the image data, not a pretty page -->
-       <img src="raptor.jpg?raw=1" 
+       <img src="raptor.jpg?raw=1"
       width=200 height=100%>
     </td>
    </tr>
@@ -641,7 +641,7 @@ Key:
   </div>
   <h1>Intro to paginated reflow</h1>
   <ul>
-    <li>When a reflowee's available height is constrained, it may not fit and need to either 
+    <li>When a reflowee's available height is constrained, it may not fit and need to either
 	split/continue on the next page, or start on the next page.</li>
 	  <ul class=nested>
 	    <li>If it can continue, it returns an incomplete status.</li>
@@ -743,10 +743,10 @@ Key:
   <h1>Intro to paginated reflow</h1>
   <ul>
     <li>The page sequence starts with one page and reflows it. If the page is incomplete then the page sequence
-        creates a continuation for the page and sets it as the page's next sibling (it is also the page's 
+        creates a continuation for the page and sets it as the page's next sibling (it is also the page's
 		nextInFlow).</li>
     <li>The page was incomplete because the page content was incomplete because the doc root was incomplete</li>
-    <li>The doc root was incomplete because it contained lines that didn't fit (or if it was mapped to a table, 
+    <li>The doc root was incomplete because it contained lines that didn't fit (or if it was mapped to a table,
 	    because the table didn't fit) becacause a line contained something that didn't fit, etc.</li>
   </ul>
 </div>
@@ -763,12 +763,12 @@ Key:
 	    <li>Create a continuation for the reflowee</li>
 	    <li>Ensure that the continuation gets put in the frame hierarchy at the right place
 		and gets reflowed at the right time.</li>
-	    <li>Typically, a reflower accomplishes this by putting the continuation (c) on an overflow 
-		list which the reflower owns. When the reflower's continuation gets reflowed, it takes c 
+	    <li>Typically, a reflower accomplishes this by putting the continuation (c) on an overflow
+		list which the reflower owns. When the reflower's continuation gets reflowed, it takes c
 		and its siblings as children and reflows them.</li>
 	  </ul>
 	</li>
-    <li>If the reflowee is complete, truncated (it didn't fit), not at the top of page, 
+    <li>If the reflowee is complete, truncated (it didn't fit), not at the top of page,
     the reflower should put the reflowee on its overflow list and return an incomplete status.</li>
   </ul>
 </div>
@@ -782,9 +782,9 @@ Key:
   <ul>
     <li>Special assumptions
 	  <ul>
-	    <li>There are only initial and (possibly) resize reflows. Incremental 
+	    <li>There are only initial and (possibly) resize reflows. Incremental
 		and style change reflows are not allowed.</li>
-	    <li>Multiple resize reflows may be necessary (e.g. a child is truncated and gets reflowed on a 
+	    <li>Multiple resize reflows may be necessary (e.g. a child is truncated and gets reflowed on a
 		subsequent page) but they should not change the available width from the last time.</li>
 	    <li>Multiple resize reflows may require special handling if a frame split previously. It may need
 		to "pull up" children from a continuation.</li>
@@ -866,17 +866,17 @@ Key:
   </div>
   <h1>Table paginated reflow</h1>
   <ul>
-	<li>The row and cells (getting the constrained height reflow) just reflow their children with a constrained height.  
+	<li>The row and cells (getting the constrained height reflow) just reflow their children with a constrained height.
     They don't need an overflow list for continued children because the continuations were created when the
     row group created the row's continutation.</li>
-    <li>A cell is incomplete because its block is incomplete. The block uses the overflow lines mechanism 
+    <li>A cell is incomplete because its block is incomplete. The block uses the overflow lines mechanism
     (mentioned above) for its continued children</li>
 	</li>
 	<li>There are two splitting scenarios for a table
 	  <ul>
 	    <li>An incomplete cells block causes the cell, row, row group, table, table wrapper to
 	    be incomplete</li>
-	    <li>A truncated row or a row that started too far down the page causes the row group, 
+	    <li>A truncated row or a row that started too far down the page causes the row group,
 		table, table wrapper to be incomplete.</li>
 	  </ul>
 	</li>

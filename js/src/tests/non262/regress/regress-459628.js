@@ -18,12 +18,12 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
 
-(function() { 
-  for (var odjoff = 0; odjoff < 4; ++odjoff) { 
-    new Date()[0] = 3; 
-  } 
+
+(function() {
+  for (var odjoff = 0; odjoff < 4; ++odjoff) {
+    new Date()[0] = 3;
+  }
 })();
 
 

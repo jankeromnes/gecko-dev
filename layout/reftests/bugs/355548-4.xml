@@ -10,7 +10,7 @@ function addMathML() {
   function createMathMLElement(tag) {
     return document.createElementNS("http://www.w3.org/1998/Math/MathML", tag);
   }
-  
+
   var body = document.getElementById("body");
   body.offsetTop;
 

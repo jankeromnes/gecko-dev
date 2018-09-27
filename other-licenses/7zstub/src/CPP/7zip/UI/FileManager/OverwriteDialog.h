@@ -17,7 +17,7 @@ namespace NOverwriteDialog
     UInt64 Size;
     FILETIME Time;
     UString Name;
-    
+
     void SetTime(const FILETIME *t)
     {
       if (t == 0)

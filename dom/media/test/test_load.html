@@ -13,7 +13,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=479859
 <a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=479859">Mozilla Bug 479859</a>
 <p id="display"></p>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="text/javascript">
@@ -42,7 +42,7 @@ function listener(evt) {
   is(evt.type, expected, gTestName+" - events received in order");
   gEventNum++;
   if (gEventNum == gExpectedEvents.length) {
-    setTimeout(nextTest, 0); 
+    setTimeout(nextTest, 0);
   }
 }
 
@@ -54,7 +54,7 @@ function source_error(evt) {
   is("source_error", expected, gTestName+" - events received in order");
   gEventNum++;
   if (gEventNum == gExpectedEvents.length) {
-    setTimeout(nextTest, 0); 
+    setTimeout(nextTest, 0);
   }
 }
 
@@ -198,7 +198,7 @@ function nextTest() {
 
   var t = gTests[gTestNum];
   gTestNum++;
-  
+
   createMedia(type.match(/^audio\//) ? "audio" : "video");
   if (!gMedia.canPlayType(type)) {
     // Unsupported type, skip to next test

@@ -114,9 +114,9 @@ class Automation(object):
     self.lastTestSeen = "automation.py"
     self.haveDumpedScreen = False
 
-  def setServerInfo(self, 
-                    webServer = _DEFAULT_WEB_SERVER, 
-                    httpPort = _DEFAULT_HTTP_PORT, 
+  def setServerInfo(self,
+                    webServer = _DEFAULT_WEB_SERVER,
+                    httpPort = _DEFAULT_HTTP_PORT,
                     sslPort = _DEFAULT_SSL_PORT,
                     webSocketPort = _DEFAULT_WEBSOCKET_PORT):
     self.webServer = webServer
@@ -230,7 +230,7 @@ class Automation(object):
         totalMemory = int(os.popen("free").readlines()[1].split()[1])
 
         # Only 4 GB RAM or less available? Use custom ASan options to reduce
-        # the amount of resources required to do the tests. Standard options 
+        # the amount of resources required to do the tests. Standard options
         # will otherwise lead to OOM conditions on the current test slaves.
         if totalMemory <= 1024 * 1024 * 4:
           self.log.info("INFO | automation.py | ASan running in low-memory configuration")
@@ -323,7 +323,7 @@ class Automation(object):
         wpid, wstatus = os.waitpid(pid, os.WNOHANG)
         return wpid == 0
       except OSError, err:
-        # Catch the errors we might expect from os.kill/os.waitpid, 
+        # Catch the errors we might expect from os.kill/os.waitpid,
         # and re-raise any others
         if err.errno == errno.ESRCH or err.errno == errno.ECHILD:
           return False

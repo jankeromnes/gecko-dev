@@ -27,7 +27,7 @@ EXAMPLESOBJDIR = obj
 ########################################################################
 # Linux configuration
 #
-ifneq (,$(filter Linux%, $(UNAME))) 
+ifneq (,$(filter Linux%, $(UNAME)))
 
 EXESUFFIX =
 
@@ -35,7 +35,7 @@ else
 ########################################################################
 # Darwin configuration
 #
-ifneq (,$(filter Darwin%, $(UNAME))) 
+ifneq (,$(filter Darwin%, $(UNAME)))
 
 EXESUFFIX =
 
@@ -43,7 +43,7 @@ else
 ########################################################################
 # Windows (cygwin but using MS compiler) configuration
 #
-ifneq (,$(filter CYGWIN%, $(UNAME))) 
+ifneq (,$(filter CYGWIN%, $(UNAME)))
 
 EXESUFFIX = .exe
 

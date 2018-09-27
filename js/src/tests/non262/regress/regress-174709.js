@@ -63,7 +63,7 @@ for (Qp3[5][kh1] in this)
         Qp3[5][kh1].substr(kh1,kh1+1) == Qp3[5][kh1+1].substr(kh1,kh1+1))
       Qp3[5][kh1 + 2] = Qp3[5][kh1];
 
-               
+
 actual = 'PASS';
 
 reportCompare(expect, actual, summary);

@@ -23,10 +23,10 @@ function run_test() {
   const kPassword = "pass";
   const kPassword2 = "pass2";
   const kEmpty = "";
-  
+
   const PRIVATE = true;
   const NOT_PRIVATE = false;
-  
+
   try {
     var domain = {value: kEmpty}, user = {value: kEmpty}, pass = {value: kEmpty};
     // simulate a login via HTTP auth outside of the private mode

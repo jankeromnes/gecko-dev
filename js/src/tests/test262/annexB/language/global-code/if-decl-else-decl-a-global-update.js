@@ -28,7 +28,7 @@ info: |
        iv. Let benvRec be benv's EnvironmentRecord.
        v. Let fobj be ! benvRec.GetBindingValue(F, false).
        vi. Perform ? genvRec.SetMutableBinding(F, fobj, false).
-       vii. Return NormalCompletion(empty). 
+       vii. Return NormalCompletion(empty).
 ---*/
 
 if (true) function f() { return 'declaration'; } else function _f() {}

@@ -20,7 +20,7 @@
 	      iframeLoadedFirst = true;
 	    }
 	  }
-	  
+
 	  window.onload = function() {
 	    if (iframeLoadedFirst) {
 				testScroll(document.getElementById("ifrm").contentWindow, 10);
@@ -28,7 +28,7 @@
 	      parentLoadedFirst = true;
 	    }
 	  }
-  </script>	
+  </script>
   <foreignObject x="5%" height="85%" width="90%">
     <iframe onload="iframeLoad();" id="ifrm" width="99%" height="99%" xmlns="http://www.w3.org/1999/xhtml" src="drac.htm"/>
   </foreignObject>

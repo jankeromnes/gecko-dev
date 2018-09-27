@@ -83,7 +83,7 @@ public:
                                      Float aSigma,
                                      CompositionOp aOperator) override;
 
-  /* 
+  /*
    * Clear a rectangle on the draw target to transparent black. This will
    * respect the clipping region and transform.
    *
@@ -153,7 +153,7 @@ public:
                       const Pattern &aPattern,
                       const StrokeOptions &aStrokeOptions = StrokeOptions(),
                       const DrawOptions &aOptions = DrawOptions()) override;
-  
+
   /*
    * Fill a path on the draw target with a certain source pattern.
    *

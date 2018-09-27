@@ -46,7 +46,7 @@ public:
   }
 
   virtual bool RemoveChild(Layer* aChild) override
-  { 
+  {
     if (!BasicManager()->InConstruction()) {
       NS_ERROR("Can only set properties in construction phase");
       return false;

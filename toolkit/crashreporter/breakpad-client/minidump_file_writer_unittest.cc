@@ -114,7 +114,7 @@ static bool WriteFile(const char *path) {
 static bool CompareFile(const char *path) {
   unsigned long expected[] = {
 #if defined(__BIG_ENDIAN__)
-    0x0000beef, 0x0000001e, 0x00000018, 0x00000020, 0x00000038, 0x00000000, 
+    0x0000beef, 0x0000001e, 0x00000018, 0x00000020, 0x00000038, 0x00000000,
     0x00000018, 0x00460069, 0x00720073, 0x00740020, 0x00530074, 0x00720069,
     0x006e0067, 0x00000000, 0x0000001a, 0x00530065, 0x0063006f, 0x006e0064,
     0x00200053, 0x00740072, 0x0069006e, 0x00670000, 0x00000001, 0x00000002,
@@ -149,7 +149,7 @@ static bool CompareFile(const char *path) {
   void *buffer = malloc(expected_byte_count);
   ASSERT_NE(fd, -1);
   ASSERT_TRUE(buffer);
-  ASSERT_EQ(read(fd, buffer, expected_byte_count), 
+  ASSERT_EQ(read(fd, buffer, expected_byte_count),
             static_cast<ssize_t>(expected_byte_count));
 
   char *b1, *b2;

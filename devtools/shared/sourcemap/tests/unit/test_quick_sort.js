@@ -60,42 +60,42 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	var quickSort = __webpack_require__(1).quickSort;
-	
+
 	function numberCompare(a, b) {
 	  return a - b;
 	}
-	
+
 	exports['test sorting sorted array'] = function (assert) {
 	  var ary = [0,1,2,3,4,5,6,7,8,9];
-	
+
 	  var quickSorted = ary.slice();
 	  quickSort(quickSorted, numberCompare);
-	
+
 	  assert.equal(JSON.stringify(ary),
 	               JSON.stringify(quickSorted));
 	};
-	
+
 	exports['test sorting reverse-sorted array'] = function (assert) {
 	  var ary = [9,8,7,6,5,4,3,2,1,0];
-	
+
 	  var quickSorted = ary.slice();
 	  quickSort(quickSorted, numberCompare);
-	
+
 	  assert.equal(JSON.stringify(ary.sort(numberCompare)),
 	               JSON.stringify(quickSorted));
 	};
-	
+
 	exports['test sorting unsorted array'] = function (assert) {
 	  var ary = [];
 	  for (var i = 0; i < 10; i++) {
 	    ary.push(Math.random());
 	  }
-	
+
 	  var quickSorted = ary.slice();
 	  quickSort(quickSorted, numberCompare);
-	
+
 	  assert.equal(JSON.stringify(ary.sort(numberCompare)),
 	               JSON.stringify(quickSorted));
 	};
@@ -111,7 +111,7 @@ var SOURCE_MAP_TEST_MODULE =
 	 * Licensed under the New BSD license. See LICENSE or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	
+
 	// It turns out that some (most?) JavaScript engines don't self-host
 	// `Array.prototype.sort`. This makes sense because C++ will likely remain
 	// faster than JS when doing raw CPU-intensive sorting. However, when using a
@@ -121,7 +121,7 @@ var SOURCE_MAP_TEST_MODULE =
 	// fact, when sorting with a comparator, these costs outweigh the benefits of
 	// sorting in C++. By using our own JS-implemented Quick Sort (below), we get
 	// a ~3500ms mean speed-up in `bench/bench.html`.
-	
+
 	/**
 	 * Swap the elements indexed by `x` and `y` in the array `ary`.
 	 *
@@ -137,7 +137,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  ary[x] = ary[y];
 	  ary[y] = temp;
 	}
-	
+
 	/**
 	 * Returns a random integer within the range `low .. high` inclusive.
 	 *
@@ -149,7 +149,7 @@ var SOURCE_MAP_TEST_MODULE =
 	function randomIntInRange(low, high) {
 	  return Math.round(low + (Math.random() * (high - low)));
 	}
-	
+
 	/**
 	 * The Quick Sort algorithm.
 	 *
@@ -166,7 +166,7 @@ var SOURCE_MAP_TEST_MODULE =
 	  // If our lower bound is less than our upper bound, we (1) partition the
 	  // array into two pieces and (2) recurse on each half. If it is not, this is
 	  // the empty array and our base case.
-	
+
 	  if (p < r) {
 	    // (1) Partitioning.
 	    //
@@ -176,15 +176,15 @@ var SOURCE_MAP_TEST_MODULE =
 	    // once partition is done, the pivot is in the exact place it will be when
 	    // the array is put in sorted order, and it will not need to be moved
 	    // again. This runs in O(n) time.
-	
+
 	    // Always choose a random pivot so that an input array which is reverse
 	    // sorted does not cause O(n^2) running time.
 	    var pivotIndex = randomIntInRange(p, r);
 	    var i = p - 1;
-	
+
 	    swap(ary, pivotIndex, r);
 	    var pivot = ary[r];
-	
+
 	    // Immediately after `j` is incremented in this loop, the following hold
 	    // true:
 	    //
@@ -197,17 +197,17 @@ var SOURCE_MAP_TEST_MODULE =
 	        swap(ary, i, j);
 	      }
 	    }
-	
+
 	    swap(ary, i + 1, j);
 	    var q = i + 1;
-	
+
 	    // (2) Recurse on each half.
-	
+
 	    doQuickSort(ary, comparator, p, q - 1);
 	    doQuickSort(ary, comparator, q + 1, r);
 	  }
 	}
-	
+
 	/**
 	 * Sort the given array in-place with the given comparator function.
 	 *

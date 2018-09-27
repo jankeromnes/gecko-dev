@@ -21,19 +21,19 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=335976
 
 
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script class="testbody" type="text/javascript">
 <![CDATA[
 
-function lookAtTextboxesIn(root, numExpected) 
+function lookAtTextboxesIn(root, numExpected)
 {
   var textboxes = root.getElementsByTagName("textbox");
   var threw;
   var i;
   var n;
-  
+
   for (i = 0; n = textboxes[i]; ++i) {
     threw = true;
     try { n.nodeType; threw = false; } catch(e) { }
@@ -49,12 +49,12 @@ function init()
   lookAtTextboxesIn(document.getElementById('rootish'), 1);
 
   // Move the yellow div into the iframe.
-  var nd = window.frames[0].document; 
+  var nd = window.frames[0].document;
   nd.body.appendChild(nd.adoptNode(document.getElementById('rootish')));
-  
+
   // Look at the textboxes in the iframe.
   lookAtTextboxesIn(window.frames[0].document.body, 2);
-  
+
   SimpleTest.finish();
 }
 

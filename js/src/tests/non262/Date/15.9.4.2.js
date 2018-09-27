@@ -46,7 +46,7 @@ function TZInMonth(month){
 function test()
 {
   printBugNumber(BUGNUMBER);
- 
+
   JanTZ = TZInMonth(1);
   JulTZ = TZInMonth(7);
   CurrTZ = TZAtDate(new Date());

@@ -516,7 +516,7 @@ ContentClientBasic::CreateBuffer(gfxContentType aType,
   RefPtr<gfx::DrawTarget> drawTarget;
 
 #ifdef XP_WIN
-  if (mBackend == BackendType::CAIRO && 
+  if (mBackend == BackendType::CAIRO &&
       (aType == gfxContentType::COLOR || aType == gfxContentType::COLOR_ALPHA)) {
     RefPtr<gfxASurface> surf =
       new gfxWindowsSurface(size, aType == gfxContentType::COLOR ? gfxImageFormat::X8R8G8B8_UINT32 :

@@ -21,7 +21,7 @@ catch(ex)
 {
   actual = ex + '';
 }
- 
+
 reportCompare(expect, actual, summary + ': if (test1());');
 
 try
@@ -33,7 +33,7 @@ catch(ex)
 {
   actual = ex + '';
 }
- 
+
 reportCompare(expect, actual, summary + ': if (test2());');
 
 

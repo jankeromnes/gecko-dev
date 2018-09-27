@@ -18,7 +18,7 @@ function test()
 {
   printBugNumber(BUGNUMBER);
   printStatus (summary);
- 
+
   var obj = { get __noSuchMethod__() {
       print("Executed");
       return new Object();

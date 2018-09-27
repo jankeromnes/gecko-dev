@@ -65,7 +65,7 @@ MochiKit.Base.update(MochiKit.Signal.Event.prototype, {
             }
             str += '}';
         }
-        if (this.type() == 'mouseover' || this.type() == 'mouseout' || 
+        if (this.type() == 'mouseover' || this.type() == 'mouseout' ||
             this.type() == 'mouseenter' || this.type() == 'mouseleave') {
             str += ', relatedTarget(): ' + repr(this.relatedTarget());
         }
@@ -538,10 +538,10 @@ MochiKit.Base.update(MochiKit.Signal, {
             if (sig === 'onload' || sig === 'onunload') {
                 return function (nativeEvent) {
                     obj[func].apply(obj, [new E(src, nativeEvent)]);
-                    
+
                     var ident = new MochiKit.Signal.Ident({
                         source: src, signal: sig, objOrFunc: obj, funcOrStr: func});
-                    
+
                     MochiKit.Signal._disconnect(ident);
                 };
             } else {
@@ -553,10 +553,10 @@ MochiKit.Base.update(MochiKit.Signal, {
             if (sig === 'onload' || sig === 'onunload') {
                 return function (nativeEvent) {
                     func.apply(obj, [new E(src, nativeEvent)]);
-                    
+
                     var ident = new MochiKit.Signal.Ident({
                         source: src, signal: sig, objOrFunc: func});
-                    
+
                     MochiKit.Signal._disconnect(ident);
                 };
             } else {
@@ -662,12 +662,12 @@ MochiKit.Base.update(MochiKit.Signal, {
         }
 
         var ident = new MochiKit.Signal.Ident({
-            source: src, 
-            signal: sig, 
-            listener: listener, 
-            isDOM: isDOM, 
-            objOrFunc: objOrFunc, 
-            funcOrStr: funcOrStr, 
+            source: src,
+            signal: sig,
+            listener: listener,
+            isDOM: isDOM,
+            objOrFunc: objOrFunc,
+            funcOrStr: funcOrStr,
             connected: true
         });
         self._observers.push(ident);

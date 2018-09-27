@@ -27,7 +27,7 @@ public:
   bool PrintNameInPercents;
 
   bool PrintHeaders;
-  
+
   bool PrintSize;
   bool PrintName;
 
@@ -37,7 +37,7 @@ public:
       PrintSize(true),
       PrintName(true)
     {}
-  
+
   ~CHashCallbackConsole() { }
 
   INTERFACE_IHashCallbackUI(;)

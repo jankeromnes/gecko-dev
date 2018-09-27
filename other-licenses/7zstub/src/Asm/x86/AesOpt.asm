@@ -63,7 +63,7 @@ endm
 LOAD_OP macro op:req, offs:req
     op      xmm0, [r1 + r3 offs]
 endm
-  
+
 LOAD_OP_W macro op:req, offs:req
     movdqa  xmm7, [r1 + r3 offs]
     OP_W    op, xmm7
@@ -187,7 +187,7 @@ MY_PROC AesCtr_Code_Intel, 3
     mov     DWORD PTR [r5 + 4], 0
     mov     DWORD PTR [r5 + 8], 0
     mov     DWORD PTR [r5 + 12], 0
-    
+
     add     r1, r6
     neg     r6
     add     r6, 32

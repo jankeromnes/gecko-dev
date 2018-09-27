@@ -6,7 +6,7 @@
 
   <browser type="content"
            src="data:text/html,&lt;script&gt;var x = new XMLHttpRequest(); x.onreadystatechange = function() {}&lt;/script&gt;"/>
-  
+
   <script type="application/javascript"><![CDATA[
     window.onload = function() {
       var z = new XPCNativeWrapper(window.frames[0].wrappedJSObject.x).onreadystatechange;

@@ -4,7 +4,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-dtdTests = ["attrgetownerelement01", "documentimportnode03", 
+dtdTests = ["attrgetownerelement01", "documentimportnode03",
             "documentimportnode04", "documentimportnode19",
             "documentimportnode20", "documentimportnode21",
             "documentimportnode22",
@@ -17,7 +17,7 @@ dtdTests = ["attrgetownerelement01", "documentimportnode03",
             "namednodemapremovenameditemns02",
             "namednodemapremovenameditemns05", "namednodemapsetnameditemns05",
             "namednodemapsetnameditemns09", "namednodemapsetnameditemns10",
-            "namednodemapsetnameditemns11", "namespaceURI01", 
+            "namednodemapsetnameditemns11", "namespaceURI01",
             "nodeissupported04", "nodenormalize01", "nodesetprefix04",
             "prefix08", "removeAttributeNS01", "removeAttributeNS02",
             "removeNamedItemNS03", "setAttributeNodeNS02", "setAttributeNS03",
@@ -45,6 +45,6 @@ function concat(lst/*...*/) {
 var todoTests = {};
 var exclusions = concat(dtdTests, bug371552, wrongDocError, attrExodus,
                         bogusPrefix, prefixReplacement);
-for (var excludedTestName in exclusions) { 
-  todoTests[exclusions[excludedTestName]] = true; 
+for (var excludedTestName in exclusions) {
+  todoTests[exclusions[excludedTestName]] = true;
 }

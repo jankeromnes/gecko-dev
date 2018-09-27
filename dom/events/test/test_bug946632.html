@@ -32,7 +32,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=946632
  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 </div>
 <div id="content" style="display: none">
-  
+
 </div>
 <pre id="test">
 <script type="application/javascript">
@@ -72,7 +72,7 @@ function prepare(check)
 }
 
 var tests = [
-  { 
+  {
     check: function(event) {
       is(event.target, container, "<input> vertical line scroll targets container");
       ok(container.scrollTop > 0, "<input> vertical line scroll container.scrollTop");
@@ -86,7 +86,7 @@ var tests = [
       lineOrPageDeltaY: 1,
     }
   },
- { 
+ {
     check: function(event) {
       is(event.target, input, "<input> horizontal line scroll targets <input>");
       is(input.scrollTop, 0, "<input> horizontal line scroll input.scrollTop");
@@ -100,7 +100,7 @@ var tests = [
       lineOrPageDeltaX: 1
     }
   },
- { 
+ {
     check: function(event) {
       is(event.target, container, "<input> vertical page scroll targets container");
       ok(container.scrollTop > 0, "<input> vertical line scroll container.scrollTop");
@@ -114,7 +114,7 @@ var tests = [
       lineOrPageDeltaY: 1
     }
   },
- { 
+ {
     check: function(event) {
       is(event.target, input, "<input> horizontal page scroll targets <input>");
       is(input.scrollTop, 0, "<input> horizontal page scroll input.scrollTop");

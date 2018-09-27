@@ -358,7 +358,7 @@ VRService::UpdateHaptics()
 {
   MOZ_ASSERT(IsInServiceThread());
   MOZ_ASSERT(mSession);
-  
+
   for (size_t i = 0; i < ArrayLength(mBrowserState.hapticState); i++) {
     VRHapticState& state = mBrowserState.hapticState[i];
     VRHapticState& lastState = mLastHapticState[i];

@@ -1,4 +1,4 @@
-# -@- Mode: Makefile -@- 
+# -@- Mode: Makefile -@-
 
 unexport VAR1
 

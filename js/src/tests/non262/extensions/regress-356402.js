@@ -17,7 +17,7 @@ if (typeof Script == 'undefined')
   print('Test skipped. Script not defined.');
 }
 else
-{ 
+{
   (function() { new Script('for(var x in x) { }')(); })();
 }
 reportCompare(expect, actual, summary);
