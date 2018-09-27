@@ -86,7 +86,7 @@ void GrSurfaceProxyRef::markPendingIO() const {
 }
 
 void GrSurfaceProxyRef::pendingIOComplete() const {
-    // This should only be called when the owner's pending executions have ocurred but it is still
+    // This should only be called when the owner's pending executions have occurred but it is still
     // reffed.
     SkASSERT(fOwnRef);
     SkASSERT(fPendingIO);

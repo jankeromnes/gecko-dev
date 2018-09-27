@@ -52,7 +52,7 @@ int32_t TestUtils::EncodeOneChar(UConverter* encoder, int16_t uchar) {
                    (const UChar**)&source_end, source + sizeof(UChar),
                    NULL, TRUE, &status);
   if (!U_SUCCESS(status)) {
-    fprintf(stderr, "Error occured in conversion of %d: %s\n",
+    fprintf(stderr, "Error occurred in conversion of %d: %s\n",
             uchar, u_errorName(status));
     delete[] source;
     delete[] target;

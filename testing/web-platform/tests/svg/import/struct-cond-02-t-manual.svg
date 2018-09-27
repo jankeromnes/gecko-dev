@@ -251,15 +251,15 @@ Tibetan needs complex layout: this will not work correctly though the font has t
         </g>
         <!-- test two specific types of Portugese, then a generic alternative -->
         <g systemLanguage="pt-PT">
-          <text x="20" y="220" xml:lang="pt-PT" font-size="18">Porque é que eles não falam simplesmente em Português ?</text>
+          <text x="20" y="220" xml:lang="pt-PT" font-size="18">Porque é que else não falam simplesmente em Português ?</text>
           <text x="230" y="150" xml:lang="en">Portugese (PT)</text>
         </g>
         <g systemLanguage="pt-BR">
-          <text x="20" y="220" xml:lang="pt-BR" font-size="17">Porque é que eles não falam em Português (do Brasil) ?</text>
+          <text x="20" y="220" xml:lang="pt-BR" font-size="17">Porque é que else não falam em Português (do Brasil) ?</text>
           <text x="230" y="150" xml:lang="en">Portugese (BR)</text>
         </g>
         <g systemLanguage="pt">
-          <text x="20" y="220" xml:lang="pt-PT" font-size="18">Porque é que eles não falam simplesmente em Português ?</text>
+          <text x="20" y="220" xml:lang="pt-PT" font-size="18">Porque é que else não falam simplesmente em Português ?</text>
           <text x="230" y="150" xml:lang="en">Portugese</text>
         </g>
         <g systemLanguage="ro">

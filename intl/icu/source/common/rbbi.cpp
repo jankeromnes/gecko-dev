@@ -236,7 +236,7 @@ RuleBasedBreakIterator::operator=(const RuleBasedBreakIterator& that) {
     fCharIter = &fSCharIter;
 
     if (that.fCharIter != NULL && that.fCharIter != &that.fSCharIter) {
-        // This is a little bit tricky - it will intially appear that
+        // This is a little bit tricky - it will initially appear that
         //  this->fCharIter is adopted, even if that->fCharIter was
         //  not adopted.  That's ok.
         fCharIter = that.fCharIter->clone();
@@ -1007,7 +1007,7 @@ int32_t RuleBasedBreakIterator::handleSafePrevious(int32_t fromPosition) {
 
         if (state == STOP_STATE) {
             // This is the normal exit from the lookup state machine.
-            // Transistion to state zero means we have found a safe point.
+            // Transition to state zero means we have found a safe point.
             break;
         }
     }

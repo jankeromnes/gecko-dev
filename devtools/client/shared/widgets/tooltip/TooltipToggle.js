@@ -56,7 +56,7 @@ TooltipToggle.prototype = {
    *        - a DOM node to display the tooltip on the returned anchor
    *        The function can also return a promise that will resolve to one of
    *        the values listed above.
-   *        If omitted, the tooltip will be shown everytime.
+   *        If omitted, the tooltip will be shown every time.
    * @param {Object} options
             Set of optional arguments:
    *        - {Number} toggleDelay

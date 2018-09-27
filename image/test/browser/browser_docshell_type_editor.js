@@ -96,13 +96,13 @@ add_task(async function() {
         let doc = content.document;
         let image = doc.createElement("img");
         image.onload = function() {
-          ok(false, "APP_TYPE_UNKNOWN is *not* allowed to acces privileged image");
+          ok(false, "APP_TYPE_UNKNOWN is *not* allowed to access privileged image");
           // restore appType of rootDocShell before moving on to the next test
           rootDocShell.appType = defaultAppType;
           resolve();
         }
         image.onerror = function() {
-          ok(true, "APP_TYPE_UNKNOWN is *not* allowed to acces privileged image");
+          ok(true, "APP_TYPE_UNKNOWN is *not* allowed to access privileged image");
           // restore appType of rootDocShell before moving on to the next test
           rootDocShell.appType = defaultAppType;
           resolve();

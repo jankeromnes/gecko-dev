@@ -10,7 +10,7 @@
 
 //The following macros can be defined to affect the MD5 code generated.
 //SK_MD5_CLEAR_DATA causes all intermediate state to be overwritten with 0's.
-//SK_CPU_LENDIAN allows 32 bit <=> 8 bit conversions without copies (if alligned).
+//SK_CPU_LENDIAN allows 32 bit <=> 8 bit conversions without copies (if aligned).
 //SK_CPU_FAST_UNALIGNED_ACCESS allows 32 bit <=> 8 bit conversions without copies if SK_CPU_LENDIAN.
 
 #include "SkMD5.h"
@@ -96,12 +96,12 @@ void SkMD5::finish(Digest& digest) {
 
 struct F { uint32_t operator()(uint32_t x, uint32_t y, uint32_t z) {
     //return (x & y) | ((~x) & z);
-    return ((y ^ z) & x) ^ z; //equivelent but faster
+    return ((y ^ z) & x) ^ z; //equivalent but faster
 }};
 
 struct G { uint32_t operator()(uint32_t x, uint32_t y, uint32_t z) {
     return (x & z) | (y & (~z));
-    //return ((x ^ y) & z) ^ y; //equivelent but slower
+    //return ((x ^ y) & z) ^ y; //equivalent but slower
 }};
 
 struct H { uint32_t operator()(uint32_t x, uint32_t y, uint32_t z) {

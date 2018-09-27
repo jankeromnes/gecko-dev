@@ -312,7 +312,7 @@ MozTagAnonymousMemory(const void* aPtr, size_t aLength, const char* aTag)
  * Since we're not going to fork anyways, make it a dummy function. */
 int
 pthread_atfork(void (*aPrepare)(void),
-               void (*aParent)(void),
+               void (*apparent)(void),
                void (*aChild)(void))
 {
   return 0;

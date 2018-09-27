@@ -639,7 +639,7 @@ ArrayBufferObject::changeContents(JSContext* cx, BufferContents newContents,
  *          0          length              maxSize  boundsCheckLimit  mappedSize
  *
  * \_______________________/
- *          COMMITED
+ *          COMMITTED
  *                          \____________________________________________/
  *                                           SLOP
  * \_____________________________________________________________________/

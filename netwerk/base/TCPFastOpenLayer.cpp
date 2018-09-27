@@ -45,7 +45,7 @@ static PRIOMethods   *sTCPFastOpenLayerMethodsPtr = nullptr;
  *      connectcontinue transfers from this state to CONNECTED. Any other
  *      function (e.g. send, recv) returns PR_WOULD_BLOCK_ERROR.
  *    CONNECTED:
- *      The size of mFirstPacketBuf is 1440/1460 (RFC7413 recomends that packet
+ *      The size of mFirstPacketBuf is 1440/1460 (RFC7413 recommends that packet
  *      does exceeds these sizes). SendTo does not have to consume all buffered
  *      data and some data can be still in mFirstPacketBuf. Before sending any
  *      new data we need to send the remaining buffered data.

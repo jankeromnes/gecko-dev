@@ -34,7 +34,7 @@ BuildRequires:  desktop-file-utils
 %if %{?createtests:1}
 %package tests
 Summary:    %{pr_name} tests
-Group:      Developement/Libraries
+Group:      Development/Libraries
 requires:   %{name} = %{version}-%{release}
 %description tests
 %{pr_name} test harness files and test cases

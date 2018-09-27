@@ -217,12 +217,12 @@ public:
   NS_DECL_ISUPPORTS_INHERITED
 
   CreateBlobRunnable(MutableBlobStorage* aBlobStorage,
-                     already_AddRefed<nsISupports> aParent,
+                     already_AddRefed<nsISupports> apparent,
                      const nsACString& aContentType,
                      already_AddRefed<MutableBlobStorageCallback> aCallback)
     : Runnable("dom::CreateBlobRunnable")
     , mBlobStorage(aBlobStorage)
-    , mParent(aParent)
+    , mParent(apparent)
     , mContentType(aContentType)
     , mCallback(aCallback)
   {
@@ -284,12 +284,12 @@ class LastRunnable final : public Runnable
 {
 public:
   LastRunnable(MutableBlobStorage* aBlobStorage,
-               nsISupports* aParent,
+               nsISupports* apparent,
                const nsACString& aContentType,
                MutableBlobStorageCallback* aCallback)
     : Runnable("dom::LastRunnable")
     , mBlobStorage(aBlobStorage)
-    , mParent(aParent)
+    , mParent(apparent)
     , mContentType(aContentType)
     , mCallback(aCallback)
   {
@@ -378,7 +378,7 @@ MutableBlobStorage::~MutableBlobStorage()
 }
 
 void
-MutableBlobStorage::GetBlobWhenReady(nsISupports* aParent,
+MutableBlobStorage::GetBlobWhenReady(nsISupports* apparent,
                                      const nsACString& aContentType,
                                      MutableBlobStorageCallback* aCallback)
 {
@@ -409,7 +409,7 @@ MutableBlobStorage::GetBlobWhenReady(nsISupports* aParent,
     // executed in order and this LastRunnable will be... the last one.
     // This Runnable will also close the FD on the I/O thread.
     RefPtr<Runnable> runnable =
-      new LastRunnable(this, aParent, aContentType, aCallback);
+      new LastRunnable(this, apparent, aContentType, aCallback);
 
     // If the dispatching fails, we are shutting down and it's fine to do not
     // run the callback.
@@ -419,7 +419,7 @@ MutableBlobStorage::GetBlobWhenReady(nsISupports* aParent,
 
   // If we are waiting for the temporary file, it's better to wait...
   if (previousState == eWaitingForTemporaryFile) {
-    mPendingParent = aParent;
+    mPendingParent = apparent;
     mPendingContentType = aContentType;
     mPendingCallback = aCallback;
     return;
@@ -438,7 +438,7 @@ MutableBlobStorage::GetBlobWhenReady(nsISupports* aParent,
     blobImpl = new EmptyBlobImpl(NS_ConvertUTF8toUTF16(aContentType));
   }
 
-  RefPtr<Blob> blob = Blob::Create(aParent, blobImpl);
+  RefPtr<Blob> blob = Blob::Create(apparent, blobImpl);
   RefPtr<BlobCreationDoneRunnable> runnable =
     new BlobCreationDoneRunnable(this, aCallback, blob, NS_OK);
 

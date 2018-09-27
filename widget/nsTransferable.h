@@ -45,7 +45,7 @@ protected:
   nsresult ReadCache(nsISupports** aData, uint32_t* aDataLen );
   
   // mData + mDataLen OR mCacheFD should be used, not both.
-  nsCOMPtr<nsISupports> mData;   // OWNER - some varient of primitive wrapper
+  nsCOMPtr<nsISupports> mData;   // OWNER - some variant of primitive wrapper
   uint32_t mDataLen;
   PRFileDesc* mCacheFD;
   const nsCString mFlavor;

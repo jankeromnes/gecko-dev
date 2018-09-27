@@ -684,7 +684,7 @@ PK11_ProtectedAuthenticationPath(PK11SlotInfo *slot)
 }
 
 /*
- * we can initialize the password if 1) The toke is not inited
+ * we can initialize the password if 1) The took is not inited
  * (need login == true and see need UserInit) or 2) the token has
  * a NULL password. (slot->needLogin = false & need user Init = false).
  */

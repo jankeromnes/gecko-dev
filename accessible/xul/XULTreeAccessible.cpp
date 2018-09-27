@@ -685,12 +685,12 @@ XULTreeAccessible::CreateTreeItemAccessible(int32_t aRow) const
 
 XULTreeItemAccessibleBase::
   XULTreeItemAccessibleBase(nsIContent* aContent, DocAccessible* aDoc,
-                            Accessible* aParent, nsITreeBoxObject* aTree,
+                            Accessible* apparent, nsITreeBoxObject* aTree,
                             nsITreeView* aTreeView, int32_t aRow) :
   AccessibleWrap(aContent, aDoc),
   mTree(aTree), mTreeView(aTreeView), mRow(aRow)
 {
-  mParent = aParent;
+  mParent = apparent;
   mStateFlags |= eSharedNode;
 }
 
@@ -1065,9 +1065,9 @@ XULTreeItemAccessibleBase::GetCellName(nsTreeColumn* aColumn, nsAString& aName) 
 
 XULTreeItemAccessible::
   XULTreeItemAccessible(nsIContent* aContent, DocAccessible* aDoc,
-                        Accessible* aParent, nsITreeBoxObject* aTree,
+                        Accessible* apparent, nsITreeBoxObject* aTree,
                         nsITreeView* aTreeView, int32_t aRow) :
-  XULTreeItemAccessibleBase(aContent, aDoc, aParent, aTree, aTreeView, aRow)
+  XULTreeItemAccessibleBase(aContent, aDoc, apparent, aTree, aTreeView, aRow)
 {
   mStateFlags |= eNoKidsFromDOM;
   mColumn = nsCoreUtils::GetFirstSensibleColumn(mTree);

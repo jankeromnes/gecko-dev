@@ -632,7 +632,7 @@ int event_config_set_num_cpus_hint(struct event_config *cfg, int cpus);
 /**
  * Record an interval and/or a number of callbacks after which the event base
  * should check for new events.  By default, the event base will run as many
- * events are as activated at the higest activated priority before checking
+ * events are as activated at the highest activated priority before checking
  * for new events.  If you configure it by setting max_interval, it will check
  * the time after each callback, and not allow more than max_interval to
  * elapse before checking for new events.  If you configure it by setting

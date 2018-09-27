@@ -1274,7 +1274,7 @@ secmod_matchPrefix(char *prefix1, char *prefix2)
     return PR_FALSE;
 }
 
-/* do two config paramters match? Not all callers are compariing
+/* do two config parameters match? Not all callers are compariing
  * SECMODConfigLists directly, so this function breaks them out to their
  * components. */
 static PRBool

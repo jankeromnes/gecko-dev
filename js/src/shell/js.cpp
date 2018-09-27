@@ -8311,7 +8311,7 @@ JS_FN_HELP("parseBin", BinParse, 1, 0,
     JS_FN_HELP("runOffThreadScript", runOffThreadScript, 0, 0,
 "runOffThreadScript([jobID])",
 "  Wait for an off-thread compilation job to complete. The job ID can be\n"
-"  ommitted if there is only one job pending. If an error occurred,\n"
+"  omitted if there is only one job pending. If an error occurred,\n"
 "  throw the appropriate exception; otherwise, run the script and return\n"
 "  its value."),
 
@@ -8324,7 +8324,7 @@ JS_FN_HELP("parseBin", BinParse, 1, 0,
     JS_FN_HELP("finishOffThreadModule", FinishOffThreadModule, 0, 0,
 "finishOffThreadModule([jobID])",
 "  Wait for an off-thread compilation job to complete. The job ID can be\n"
-"  ommitted if there is only one job pending. If an error occurred,\n"
+"  omitted if there is only one job pending. If an error occurred,\n"
 "  throw the appropriate exception; otherwise, return the module record object."),
 
     JS_FN_HELP("offThreadDecodeScript", OffThreadDecodeScript, 1, 0,
@@ -8336,7 +8336,7 @@ JS_FN_HELP("parseBin", BinParse, 1, 0,
 
     JS_FN_HELP("runOffThreadDecodedScript", runOffThreadDecodedScript, 0, 0,
 "runOffThreadDecodedScript([jobID])",
-"  Wait for off-thread decoding to complete. The job ID can be ommitted if there\n"
+"  Wait for off-thread decoding to complete. The job ID can be omitted if there\n"
 "  is only one job pending. If an error occurred, throw the appropriate\n"
 "  exception; otherwise, run the script and return its value."),
 

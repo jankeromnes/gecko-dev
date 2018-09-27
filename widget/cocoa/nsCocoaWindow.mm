@@ -215,7 +215,7 @@ nsCocoaWindow::~nsCocoaWindow()
 
   NS_IF_RELEASE(mPopupContentView);
 
-  // Deal with the possiblity that we're being destroyed while running modal.
+  // Deal with the possibility that we're being destroyed while running modal.
   if (mModal) {
     NS_WARNING("Widget destroyed while running modal!");
     --gXULModalLevel;
@@ -296,7 +296,7 @@ static bool UseNativePopupWindows()
 
 // aRect here is specified in desktop pixels
 nsresult
-nsCocoaWindow::Create(nsIWidget* aParent,
+nsCocoaWindow::Create(nsIWidget* apparent,
                       nsNativeWidget aNativeParent,
                       const DesktopIntRect& aRect,
                       nsWidgetInitData* aInitData)
@@ -317,10 +317,10 @@ nsCocoaWindow::Create(nsIWidget* aParent,
   // Ensure that the toolkit is created.
   nsToolkit::GetToolkit();
 
-  Inherited::BaseCreate(aParent, aInitData);
+  Inherited::BaseCreate(apparent, aInitData);
 
-  mParent = aParent;
-  mAncestorLink = aParent;
+  mParent = apparent;
+  mAncestorLink = apparent;
 
   // Applications that use native popups don't want us to create popup windows.
   if ((mWindowType == eWindowType_popup) && UseNativePopupWindows())
@@ -350,14 +350,14 @@ nsCocoaWindow::Create(nsIWidget* aParent,
 }
 
 nsresult
-nsCocoaWindow::Create(nsIWidget* aParent,
+nsCocoaWindow::Create(nsIWidget* apparent,
                       nsNativeWidget aNativeParent,
                       const LayoutDeviceIntRect& aRect,
                       nsWidgetInitData* aInitData)
 {
   DesktopIntRect desktopRect =
     RoundedToInt(aRect / GetDesktopToDeviceScale());
-  return Create(aParent, aNativeParent, desktopRect, aInitData);
+  return Create(apparent, aNativeParent, desktopRect, aInitData);
 }
 
 static unsigned int WindowMaskForBorderStyle(nsBorderStyle aBorderStyle)
@@ -2354,7 +2354,7 @@ void nsCocoaWindow::SetShowsFullScreenButton(bool aShow)
 
   // If the window is currently in fullscreen mode, then we're going to
   // transition out first, then set the collection behavior & toggle
-  // mSupportsNativeFullScreen, then transtion back into fullscreen mode. This
+  // mSupportsNativeFullScreen, then transition back into fullscreen mode. This
   // prevents us from getting into a conflicting state with MakeFullScreen
   // where mSupportsNativeFullScreen would lead us down the wrong path.
   bool wasFullScreen = mInFullScreenMode;

@@ -21,9 +21,9 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(FlexLine)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-FlexLine::FlexLine(Flex* aParent,
+FlexLine::FlexLine(Flex* apparent,
                    const ComputedFlexLineInfo* aLine)
-  : mParent(aParent)
+  : mParent(apparent)
 {
   MOZ_ASSERT(aLine,
     "Should never be instantiated with a null ComputedFlexLineInfo.");

@@ -117,7 +117,7 @@ if (!gl) {
  *
  * The issue did not occur:
  * - if step 1. and 2. were swapped
- * - or if step5 was ommited (probably because that makes step 2 a no-op since the VAO is bound)
+ * - or if step5 was omitted (probably because that makes step 2 a no-op since the VAO is bound)
  */
 function runBufferDataTest() {
     debug("Testing draws with bufferData");
@@ -128,7 +128,7 @@ function runBufferDataTest() {
     var testColor = [0, 255, 0, 255];
     var clearColor = [255, 0, 0, 255];
 
-    // Where the issue occures, this is the sequence of success/failure every time:
+    // Where the issue occurs, this is the sequence of success/failure every time:
     // result:           success fail fail fail fail ... success fail fail ...
     // currentTestCount: 0       1    2    3    4    ... 64      65   66   ...
     // So with just 1 test it passes, but 2 tests are enough. Here we use 3.

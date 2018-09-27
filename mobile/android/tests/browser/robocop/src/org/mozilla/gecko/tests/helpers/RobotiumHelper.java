@@ -86,25 +86,25 @@ public final class RobotiumHelper {
         }
 
         final int finalX;
-        final int finalY;
+        final int finally;
         if (overshoot) {
             // Overshoot the destination by a little bit.
             final int extra = 10;
             final int extraX = extra * (int) Math.signum(deltaX);
             final int extraY = extra * (int) Math.signum(deltaY);
             finalX = toTabCoords[0] + extraX;
-            finalY = toTabCoords[1] + extraY;
+            finally = toTabCoords[1] + extraY;
 
             eventTime = SystemClock.uptimeMillis();
-            event = MotionEvent.obtain(timeAtDownPress, eventTime, MotionEvent.ACTION_MOVE, finalX, finalY, 0);
+            event = MotionEvent.obtain(timeAtDownPress, eventTime, MotionEvent.ACTION_MOVE, finalX, finally, 0);
             sInstrumentation.sendPointerSync(event);
         } else {
             finalX = toTabCoords[0];
-            finalY = toTabCoords[1];
+            finally = toTabCoords[1];
         }
 
         eventTime = SystemClock.uptimeMillis();
-        event = MotionEvent.obtain(timeAtDownPress, eventTime, MotionEvent.ACTION_UP, finalX, finalY, 0);
+        event = MotionEvent.obtain(timeAtDownPress, eventTime, MotionEvent.ACTION_UP, finalX, finally, 0);
         sInstrumentation.sendPointerSync(event);
     }
 }

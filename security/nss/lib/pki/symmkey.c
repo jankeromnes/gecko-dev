@@ -205,7 +205,7 @@ NSSSymmetricKey_UnwrapPrivateKey(
     NSSItem *wrappedKey,
     NSSUTF8 *labelOpt,
     NSSItem *keyIDOpt,
-    PRBool persistant,
+    PRBool persistent,
     PRBool sensitive,
     NSSToken *destinationOpt,
     NSSCallback *uhh)

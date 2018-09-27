@@ -185,7 +185,7 @@ NSPR_API(void)
 
 
 /* -----------------------------------------------------------------------
-** FUNCTION: PR_GetCounterHandleFromName() -- Retreive a
+** FUNCTION: PR_GetCounterHandleFromName() -- Retrieve a
 ** counter's handle give its name.
 ** 
 ** DESCRIPTION: PR_GetCounterHandleFromName() retreives a
@@ -218,7 +218,7 @@ NSPR_API(PRCounterHandle)
 );
 
 /* -----------------------------------------------------------------------
-** FUNCTION: PR_GetCounterNameFromHandle() -- Retreive a
+** FUNCTION: PR_GetCounterNameFromHandle() -- Retrieve a
 ** counter's name, given its handle.
 ** 
 ** DESCRIPTION: PR_GetCounterNameFromHandle() retreives a
@@ -375,10 +375,10 @@ NSPR_API(void)
 
 
 /* -----------------------------------------------------------------------
-** FUNCTION: PR_GetCounter() -- Retreive the value of a counter
+** FUNCTION: PR_GetCounter() -- Retrieve the value of a counter
 ** 
 ** DESCRIPTION:
-** Retreive the value of a counter.
+** Retrieve the value of a counter.
 ** 
 ** INPUTS:
 **  handle: the PR_CounterHandle of the counter to be retreived
@@ -436,15 +436,15 @@ NSPR_API(void)
 
 
 /* -----------------------------------------------------------------------
-** FUNCTION: PR_FindNextCounterQname() -- Retreive the next QName counter
+** FUNCTION: PR_FindNextCounterQname() -- Retrieve the next QName counter
 ** handle iterator
 ** 
 ** DESCRIPTION:
 ** PR_FindNextCounterQname() retreives the first or next Qname
 ** the counter data base, depending on the value of handle. When
-** handle is NULL, the function attempts to retreive the first
+** handle is NULL, the function attempts to retrieve the first
 ** QName handle in the database. When handle is a handle previosly
-** retreived QName handle, then the function attempts to retreive
+** retreived QName handle, then the function attempts to retrieve
 ** the next QName handle.
 ** 
 ** INPUTS: 
@@ -477,20 +477,20 @@ NSPR_API(PRCounterHandle)
 );
 
 /* -----------------------------------------------------------------------
-** FUNCTION: PR_FindNextCounterRname() -- Retreive the next RName counter
+** FUNCTION: PR_FindNextCounterRname() -- Retrieve the next RName counter
 ** handle iterator
 ** 
 ** DESCRIPTION:
 ** PR_FindNextCounterRname() retreives the first or next RNname
 ** handle from the counter data base, depending on the
 ** value of handle. When handle is NULL, the function attempts to
-** retreive the first RName handle in the database. When handle is
+** retrieve the first RName handle in the database. When handle is
 ** a handle previosly retreived RName handle, then the function
-** attempts to retreive the next RName handle.
+** attempts to retrieve the next RName handle.
 ** 
 ** INPUTS:
 **  handle: PRCounterHandle or NULL.
-**  qhandle: PRCounterHandle of a previously aquired via
+**  qhandle: PRCounterHandle of a previously acquired via
 ** PR_FIND_NEXT_QNAME_HANDLE()
 ** 
 ** OUTPUTS: returned

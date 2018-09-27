@@ -233,7 +233,7 @@ NSS_GetErrorStack(void)
  * nss_SetError
  *
  * This routine places a new error code on the top of the calling
- * thread's error stack.  Calling this routine wiht an error code
+ * thread's error stack.  Calling this routine with an error code
  * of zero will clear the error stack.
  */
 

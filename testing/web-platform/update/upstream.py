@@ -281,7 +281,7 @@ class CheckRebase(Step):
             return exit_clean
 
 class MergeUpstream(Step):
-    """Run steps to push local commits as seperate PRs and merge upstream."""
+    """Run steps to push local commits as separate PRs and merge upstream."""
 
     provides = ["merge_index", "gh_repo"]
 

@@ -76,7 +76,7 @@ public:
                               SkDrawFilter*, const SkIRect& clipBounds);
 
     /**
-     * Provides a perfomance hint that the render target's contents are allowed
+     * Provides a performance hint that the render target's contents are allowed
      * to become undefined.
      */
     void discard();

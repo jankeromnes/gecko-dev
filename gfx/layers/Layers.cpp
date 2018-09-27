@@ -812,7 +812,7 @@ Layer::GetVisibleRegionRelativeToRootLayer(nsIntRegion& aResult,
         continue;
       }
 
-      // Retreive the translation from sibling to |layer|. The accumulated
+      // Retrieve the translation from sibling to |layer|. The accumulated
       // visible region is currently oriented with |layer|.
       auto siblingOffset = IntPoint::Round(siblingMatrix.GetTranslation());
       nsIntRegion siblingVisibleRegion(sibling->GetLocalVisibleRegion().ToUnknownRegion());
@@ -1715,16 +1715,16 @@ Layer::DumpSelf(std::stringstream& aStream, const char* aPrefix,
 }
 
 void
-Layer::Dump(layerscope::LayersPacket* aPacket, const void* aParent)
+Layer::Dump(layerscope::LayersPacket* aPacket, const void* apparent)
 {
-  DumpPacket(aPacket, aParent);
+  DumpPacket(aPacket, apparent);
 
   if (Layer* kid = GetFirstChild()) {
     kid->Dump(aPacket, this);
   }
 
   if (Layer* next = GetNextSibling()) {
-    next->Dump(aPacket, aParent);
+    next->Dump(aPacket, apparent);
   }
 }
 
@@ -1946,7 +1946,7 @@ DumpRegion(layerscope::LayersPacket::Layer::Region* aLayerRegion, const nsIntReg
 }
 
 void
-Layer::DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent)
+Layer::DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent)
 {
   // Add a new layer (UnknownLayer)
   using namespace layerscope;
@@ -1954,7 +1954,7 @@ Layer::DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent)
   // Basic information
   layer->set_type(LayersPacket::Layer::UnknownLayer);
   layer->set_ptr(reinterpret_cast<uint64_t>(this));
-  layer->set_parentptr(reinterpret_cast<uint64_t>(aParent));
+  layer->set_parentptr(reinterpret_cast<uint64_t>(apparent));
   // Shadow
   if (HostLayer* lc = AsHostLayer()) {
     LayersPacket::Layer::Shadow* s = layer->mutable_shadow();
@@ -2074,9 +2074,9 @@ PaintedLayer::PrintInfo(std::stringstream& aStream, const char* aPrefix)
 }
 
 void
-PaintedLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent)
+PaintedLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent)
 {
-  Layer::DumpPacket(aPacket, aParent);
+  Layer::DumpPacket(aPacket, apparent);
   // get this layer data
   using namespace layerscope;
   LayersPacket::Layer* layer = aPacket->mutable_layer(aPacket->layer_size()-1);
@@ -2103,9 +2103,9 @@ ContainerLayer::PrintInfo(std::stringstream& aStream, const char* aPrefix)
 }
 
 void
-ContainerLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent)
+ContainerLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent)
 {
-  Layer::DumpPacket(aPacket, aParent);
+  Layer::DumpPacket(aPacket, apparent);
   // Get this layer data
   using namespace layerscope;
   LayersPacket::Layer* layer = aPacket->mutable_layer(aPacket->layer_size()-1);
@@ -2121,9 +2121,9 @@ ColorLayer::PrintInfo(std::stringstream& aStream, const char* aPrefix)
 }
 
 void
-ColorLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent)
+ColorLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent)
 {
-  Layer::DumpPacket(aPacket, aParent);
+  Layer::DumpPacket(aPacket, apparent);
   // Get this layer data
   using namespace layerscope;
   LayersPacket::Layer* layer = aPacket->mutable_layer(aPacket->layer_size()-1);
@@ -2172,9 +2172,9 @@ DumpFilter(layerscope::LayersPacket::Layer* aLayer,
 }
 
 void
-CanvasLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent)
+CanvasLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent)
 {
-  Layer::DumpPacket(aPacket, aParent);
+  Layer::DumpPacket(aPacket, apparent);
   // Get this layer data
   using namespace layerscope;
   LayersPacket::Layer* layer = aPacket->mutable_layer(aPacket->layer_size()-1);
@@ -2202,9 +2202,9 @@ ImageLayer::PrintInfo(std::stringstream& aStream, const char* aPrefix)
 }
 
 void
-ImageLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent)
+ImageLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent)
 {
-  Layer::DumpPacket(aPacket, aParent);
+  Layer::DumpPacket(aPacket, apparent);
   // Get this layer data
   using namespace layerscope;
   LayersPacket::Layer* layer = aPacket->mutable_layer(aPacket->layer_size()-1);
@@ -2228,9 +2228,9 @@ RefLayer::PrintInfo(std::stringstream& aStream, const char* aPrefix)
 }
 
 void
-RefLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent)
+RefLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent)
 {
-  Layer::DumpPacket(aPacket, aParent);
+  Layer::DumpPacket(aPacket, apparent);
   // Get this layer data
   using namespace layerscope;
   LayersPacket::Layer* layer = aPacket->mutable_layer(aPacket->layer_size()-1);
@@ -2254,9 +2254,9 @@ ReadbackLayer::PrintInfo(std::stringstream& aStream, const char* aPrefix)
 }
 
 void
-ReadbackLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent)
+ReadbackLayer::DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent)
 {
-  Layer::DumpPacket(aPacket, aParent);
+  Layer::DumpPacket(aPacket, apparent);
   // Get this layer data
   using namespace layerscope;
   LayersPacket::Layer* layer = aPacket->mutable_layer(aPacket->layer_size()-1);

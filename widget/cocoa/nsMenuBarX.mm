@@ -44,7 +44,7 @@ static nsIContent* sQuitItemContent   = nullptr;
 
 NS_IMPL_ISUPPORTS(nsNativeMenuServiceX, nsINativeMenuService)
 
-NS_IMETHODIMP nsNativeMenuServiceX::CreateNativeMenuBar(nsIWidget* aParent,
+NS_IMETHODIMP nsNativeMenuServiceX::CreateNativeMenuBar(nsIWidget* apparent,
                                                         mozilla::dom::Element* aMenuBarElement)
 {
   NS_ASSERTION(NS_IsMainThread(), "Attempting to create native menu bar on wrong thread!");
@@ -53,7 +53,7 @@ NS_IMETHODIMP nsNativeMenuServiceX::CreateNativeMenuBar(nsIWidget* aParent,
   if (!mb)
     return NS_ERROR_OUT_OF_MEMORY;
 
-  return mb->Create(aParent, aMenuBarElement);
+  return mb->Create(apparent, aMenuBarElement);
 }
 
 //
@@ -132,12 +132,12 @@ nsMenuBarX::~nsMenuBarX()
   NS_OBJC_END_TRY_ABORT_BLOCK;
 }
 
-nsresult nsMenuBarX::Create(nsIWidget* aParent, Element* aContent)
+nsresult nsMenuBarX::Create(nsIWidget* apparent, Element* aContent)
 {
-  if (!aParent)
+  if (!apparent)
     return NS_ERROR_INVALID_ARG;
 
-  mParentWindow = aParent;
+  mParentWindow = apparent;
   mContent = aContent;
 
   if (mContent) {
@@ -680,7 +680,7 @@ nsresult nsMenuBarX::CreateApplicationMenu(nsMenuX* inMenu)
   = Quit                 = <- menu_FileQuitItem
   ========================
 
-  If any of them are ommitted from the application's DOM, we just don't add
+  If any of them are omitted from the application's DOM, we just don't add
   them. We always add a "Quit" item, but if an app developer does not provide a
   DOM node with the right ID for the Quit item, we add it in English. App
   developers need only add each node with a label and a key equivalent (if they
@@ -814,9 +814,9 @@ nsresult nsMenuBarX::CreateApplicationMenu(nsMenuX* inMenu)
   NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
 }
 
-void nsMenuBarX::SetParent(nsIWidget* aParent)
+void nsMenuBarX::SetParent(nsIWidget* apparent)
 {
-  mParentWindow = aParent;
+  mParentWindow = apparent;
 }
 
 //

@@ -41,10 +41,10 @@ interface nsIProgressEventSink : nsISupports
      *        context passed to nsIChannel::asyncOpen.
      * @param aProgress
      *        numeric value in the range 0 to aProgressMax indicating the
-     *        number of bytes transfered thus far.
+     *        number of bytes transferred thus far.
      * @param aProgressMax
      *        numeric value indicating maximum number of bytes that will be
-     *        transfered (or -1 if total is unknown).
+     *        transferred (or -1 if total is unknown).
      */
     void onProgress(in nsIRequest aRequest,
                     in nsISupports aContext,

@@ -91,8 +91,8 @@ function getOutputContext() {
 // This functions calls a callback with each API object as specified
 // by https://immersive-web.github.io/webxr/spec/latest/, allowing
 // checks to be made on all ojects.
-// Arguements:
-//      callback: A callback function with two arguements, the first
+// Arguments:
+//      callback: A callback function with two arguments, the first
 //                being the API object, the second being the name of
 //                that API object.
 function forEachWebxrObject(callback) {

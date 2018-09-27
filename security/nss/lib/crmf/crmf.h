@@ -198,8 +198,8 @@ extern SECStatus CRMF_DestroyCertRequest(CRMFCertRequest *inCertReq);
  *        correspond to a valid Certificate Extension, if not the function
  *        will fail.
  *    isCritical
- *        A boolean value stating if the extension value is crtical.  PR_TRUE
- *        means the value is crtical.  PR_FALSE indicates the value is not
+ *        A boolean value stating if the extension value is critical.  PR_TRUE
+ *        means the value is critical.  PR_FALSE indicates the value is not
  *        critical.
  *    data
  *        This is the data associated with the extension.  The user of the
@@ -1070,7 +1070,7 @@ extern int CRMF_CertRequestGetNumberOfExtensions(CRMFCertRequest *inCertReq);
  *    inCertReq
  *        The Certificate request to operate on.
  *    index
- *        The index of the extension array whihc the user wants to access.
+ *        The index of the extension array which the user wants to access.
  * NOTES:
  * This function retrieves the extension at the index corresponding to the
  * parameter "index" indicates.  Indexing is done like a C array.

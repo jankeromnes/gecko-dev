@@ -273,7 +273,7 @@ nsresult nsZipHandle::Init(const uint8_t* aData, uint32_t aLen,
 // CRX header reference: (CRX version 2)
 //    Header requires little-endian byte ordering with 4-byte alignment.
 //    32 bits       : magicNumber   - Defined as a |char m[] = "Cr24"|.
-//                                    Equivilant to |uint32_t m = 0x34327243|.
+//                                    Equivalent to |uint32_t m = 0x34327243|.
 //    32 bits       : version       - Unsigned integer representing the CRX file
 //                                    format version. Currently equal to 2.
 //    32 bits       : pubKeyLength  - Unsigned integer representing the length

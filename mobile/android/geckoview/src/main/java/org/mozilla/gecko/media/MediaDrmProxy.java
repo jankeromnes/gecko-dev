@@ -65,7 +65,7 @@ public final class MediaDrmProxy {
             return MediaDrm.isCryptoSchemeSupported(WIDEVINE_SCHEME_UUID)
                     && MediaCrypto.isCryptoSchemeSupported(WIDEVINE_SCHEME_UUID);
         }
-        if (DEBUG) Log.d(LOGTAG, "isSchemeSupported key sytem = " + keySystem);
+        if (DEBUG) Log.d(LOGTAG, "isSchemeSupported key system = " + keySystem);
         return false;
     }
 
@@ -78,7 +78,7 @@ public final class MediaDrmProxy {
         if (keySystem.equals(WIDEVINE_KEY_SYSTEM)) {
             return MediaDrm.isCryptoSchemeSupported(WIDEVINE_SCHEME_UUID, container);
         }
-        if (DEBUG) Log.d(LOGTAG, "cannot decrypt key sytem = " + keySystem + ", container = " + container);
+        if (DEBUG) Log.d(LOGTAG, "cannot decrypt key system = " + keySystem + ", container = " + container);
         return false;
     }
 

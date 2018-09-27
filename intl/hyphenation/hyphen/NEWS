@@ -50,7 +50,7 @@
   - improved English dictionaries
 
 2010-08-10 Hyphen 2.6 release:
-  - maintainance release, fix all warnings, tidy up
+  - maintenance release, fix all warnings, tidy up
     make check with VALGRIND=memcheck, etc.
 
 2010-02-23 Hyphen 2.5 release:

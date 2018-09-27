@@ -285,7 +285,7 @@ int WebRtcIsacfix_EncodeImpl(int16_t      *in,
     int16_t bytesLeftQ5;
     int16_t ratioQ5[8] = {0, 6, 9, 12, 16, 19, 22, 25};
 
-    // According to experiments on TIMIT the following is proper for audio, but it is not agressive enough for tonal inputs
+    // According to experiments on TIMIT the following is proper for audio, but it is not aggressive enough for tonal inputs
     // such as DTMF, sweep-sine, ...
     //
     // (0.55 - (0.8 - ratio[i]/32) * 5 / 6) * 2^14
@@ -329,7 +329,7 @@ int WebRtcIsacfix_EncodeImpl(int16_t      *in,
       arithLenDFTByte = (ISACenc_obj->bitstr_obj.stream_index << 1) + (1-ISACenc_obj->bitstr_obj.full) - arithLenBeforeEncodingDFT;
       bytesLeftQ5 = (payloadLimitBytes - arithLenBeforeEncodingDFT) << 5;
 
-      // bytesLeft / arithLenDFTBytes indicates how much scaling is required a rough estimate (agressive)
+      // bytesLeft / arithLenDFTBytes indicates how much scaling is required a rough estimate (aggressive)
       // scale = 0.55 - (0.8 - bytesLeft / arithLenDFTBytes) * 5 / 6
       // bytesLeft / arithLenDFTBytes below 0.2 will have a scale of zero and above 0.8 are treated as 0.8
       // to avoid division we do more simplification.
@@ -346,7 +346,7 @@ int WebRtcIsacfix_EncodeImpl(int16_t      *in,
     else
     {
       // we are here because the bit-stream did not fit into the buffer, in this case, the stream_index is not
-      // trustable, especially if the is the first 30ms of a packet. Thereforem, we will go for the most agressive
+      // trustable, especially if the is the first 30ms of a packet. Thereforem, we will go for the most aggressive
       // case.
       idx = 0;
     }
@@ -443,7 +443,7 @@ int WebRtcIsacfix_EncodeImpl(int16_t      *in,
 
     /* Make sure we don't allow more than 255 bytes of garbage data.
        We store the length of the garbage data in 8 bits in the bitstream,
-       255 is the max garbage lenght we can signal using 8 bits. */
+       255 is the max garbage length we can signal using 8 bits. */
     if( MinBytes > usefulstr_len + 255 ) {
       MinBytes = usefulstr_len + 255;
     }
@@ -489,7 +489,7 @@ int WebRtcIsacfix_EncodeImpl(int16_t      *in,
 }
 
 /* This function is used to create a new bitstream with new BWE.
-   The same data as previously encoded with the fucntion WebRtcIsacfix_EncodeImpl()
+   The same data as previously encoded with the function WebRtcIsacfix_EncodeImpl()
    is used. The data needed is taken from the struct, where it was stored
    when calling the encoder. */
 int WebRtcIsacfix_EncodeStoredData(IsacFixEncoderInstance  *ISACenc_obj,

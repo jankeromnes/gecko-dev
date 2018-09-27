@@ -10,11 +10,11 @@
 
 using namespace mozilla::dom;
 
-PerformanceMeasure::PerformanceMeasure(nsISupports* aParent,
+PerformanceMeasure::PerformanceMeasure(nsISupports* apparent,
                                        const nsAString& aName,
                                        DOMHighResTimeStamp aStartTime,
                                        DOMHighResTimeStamp aEndTime)
-: PerformanceEntry(aParent, aName, NS_LITERAL_STRING("measure")),
+: PerformanceEntry(apparent, aName, NS_LITERAL_STRING("measure")),
   mStartTime(aStartTime),
   mDuration(aEndTime - aStartTime)
 {

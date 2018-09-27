@@ -53,12 +53,12 @@ NS_IMPL_ISUPPORTS0(MediaMgrError)
 namespace dom {
 
 MediaStreamError::MediaStreamError(
-    nsPIDOMWindowInner* aParent,
+    nsPIDOMWindowInner* apparent,
     Name aName,
     const nsAString& aMessage,
     const nsAString& aConstraint)
   : BaseMediaMgrError(aName, aMessage, aConstraint)
-  , mParent(aParent) {}
+  , mParent(apparent) {}
 
 NS_IMPL_CYCLE_COLLECTION_WRAPPERCACHE(MediaStreamError, mParent)
 NS_IMPL_CYCLE_COLLECTING_ADDREF(MediaStreamError)

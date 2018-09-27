@@ -21,7 +21,7 @@ interface nsIByteRangeRequest : nsISupports
     readonly attribute long long startRange;
 
     /**
-     * Absolute end postion in remote file for this request
+     * Absolute end position in remote file for this request
      */
     readonly attribute long long endRange;
 };

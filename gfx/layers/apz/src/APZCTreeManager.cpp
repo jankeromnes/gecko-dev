@@ -707,12 +707,12 @@ APZCTreeManager::PrintAPZCInfo(const ScrollNode& aLayer,
 
 void
 APZCTreeManager::AttachNodeToTree(HitTestingTreeNode* aNode,
-                                  HitTestingTreeNode* aParent,
+                                  HitTestingTreeNode* apparent,
                                   HitTestingTreeNode* aNextSibling)
 {
   if (aNextSibling) {
     aNextSibling->SetPrevSibling(aNode);
-  } else if (aParent) {
+  } else if (apparent) {
     aParent->SetLastChild(aNode);
   } else {
     MOZ_ASSERT(!mRootNode);
@@ -758,7 +758,7 @@ APZCTreeManager::RecycleOrCreateNode(const RecursiveMutexAutoLock& aProofOfTreeL
 }
 
 template<class ScrollNode> static EventRegionsOverride
-GetEventRegionsOverride(HitTestingTreeNode* aParent,
+GetEventRegionsOverride(HitTestingTreeNode* apparent,
                        const ScrollNode& aLayer)
 {
   // Make it so that if the flag is set on the layer tree, it automatically
@@ -770,7 +770,7 @@ GetEventRegionsOverride(HitTestingTreeNode* aParent,
     // Overrides should only ever get set for ref layers.
     MOZ_ASSERT(aLayer.GetReferentId());
   }
-  if (aParent) {
+  if (apparent) {
     result |= aParent->GetEventRegionsOverride();
   }
   return result;
@@ -848,7 +848,7 @@ APZCTreeManager::PrepareNodeForLayer(const RecursiveMutexAutoLock& aProofOfTreeL
                                      const FrameMetrics& aMetrics,
                                      LayersId aLayersId,
                                      const AncestorTransform& aAncestorTransform,
-                                     HitTestingTreeNode* aParent,
+                                     HitTestingTreeNode* apparent,
                                      HitTestingTreeNode* aNextSibling,
                                      TreeBuildingState& aState)
 {
@@ -880,7 +880,7 @@ APZCTreeManager::PrepareNodeForLayer(const RecursiveMutexAutoLock& aProofOfTreeL
     // LayerTransactionParent.cpp must ensure that APZ will be notified
     // when those properties change.
     node = RecycleOrCreateNode(aProofOfTreeLock, aState, nullptr, aLayersId);
-    AttachNodeToTree(node, aParent, aNextSibling);
+    AttachNodeToTree(node, apparent, aNextSibling);
     node->SetHitTestData(
         GetEventRegions(aLayer),
         aLayer.GetVisibleRegion(),
@@ -888,7 +888,7 @@ APZCTreeManager::PrepareNodeForLayer(const RecursiveMutexAutoLock& aProofOfTreeL
         (!parentHasPerspective && aLayer.GetClipRect())
           ? Some(ParentLayerIntRegion(*aLayer.GetClipRect()))
           : Nothing(),
-        GetEventRegionsOverride(aParent, aLayer),
+        GetEventRegionsOverride(apparent, aLayer),
         aLayer.IsBackfaceHidden());
     node->SetScrollbarData(aLayer.GetScrollbarAnimationId(),
                            aLayer.GetScrollbarData());
@@ -1002,14 +1002,14 @@ APZCTreeManager::PrepareNodeForLayer(const RecursiveMutexAutoLock& aProofOfTreeL
         aLayer.GetVisibleRegion(),
         aLayer.GetTransformTyped(),
         clipRegion,
-        GetEventRegionsOverride(aParent, aLayer),
+        GetEventRegionsOverride(apparent, aLayer),
         aLayer.IsBackfaceHidden());
     apzc->SetAncestorTransform(aAncestorTransform);
 
     PrintAPZCInfo(aLayer, apzc);
 
     // Bind the APZC instance into the tree of APZCs
-    AttachNodeToTree(node, aParent, aNextSibling);
+    AttachNodeToTree(node, apparent, aNextSibling);
 
     // For testing, log the parent scroll id of every APZC that has a
     // parent. This allows test code to reconstruct the APZC tree.
@@ -1060,7 +1060,7 @@ APZCTreeManager::PrepareNodeForLayer(const RecursiveMutexAutoLock& aProofOfTreeL
     // to be updated to deal with the new layer's hit region.
 
     node = RecycleOrCreateNode(aProofOfTreeLock, aState, apzc, aLayersId);
-    AttachNodeToTree(node, aParent, aNextSibling);
+    AttachNodeToTree(node, apparent, aNextSibling);
 
     // Even though different layers associated with a given APZC may be at
     // different levels in the layer tree (e.g. one being an uncle of another),
@@ -1102,7 +1102,7 @@ APZCTreeManager::PrepareNodeForLayer(const RecursiveMutexAutoLock& aProofOfTreeL
         aLayer.GetVisibleRegion(),
         aLayer.GetTransformTyped(),
         clipRegion,
-        GetEventRegionsOverride(aParent, aLayer),
+        GetEventRegionsOverride(apparent, aLayer),
         aLayer.IsBackfaceHidden());
   }
 

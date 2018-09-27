@@ -462,7 +462,7 @@
 	For `Index' and `TOC' links, we now simply use the `text-align' CSS
 	property of `<td>' to enforce flush-left and flush-right,
 	eliminating the hack with an empty, full-width `<td>' element
-	inbetween.
+	between.
 
 	The change also enforces the same (smaller) size for all index and
 	TOC links.
@@ -4705,7 +4705,7 @@
 
 	This code, present since eight(!) years in the unused `CACHE'
 	branch, has been forgotten to apply to the master branch.  It's
-	really amazing that noone has ever complained since
+	really amazing that no one has ever complained since
 	`FTC_Manager_Reset' is pretty useless without flushing the cache.
 
 2013-06-07  Werner Lemberg  <wl@gnu.org>

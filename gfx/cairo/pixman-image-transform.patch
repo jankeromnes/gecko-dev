@@ -32,7 +32,7 @@ diff --git a/gfx/cairo/cairo/src/cairo-image-surface.c b/gfx/cairo/cairo/src/cai
  	goto CLEANUP_SURFACES;
  
 +    /* we sometimes get destinations with transforms.
-+     * we're not equiped to deal with this */
++     * we're not equipped to deal with this */
 +    {
 +        static const pixman_transform_t id = {
 +           {{ pixman_fixed_1, 0, 0 },

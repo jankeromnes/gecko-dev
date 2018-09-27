@@ -25,7 +25,7 @@ namespace webrtc {
 #define WEBRTC_TRACE_MAX_MESSAGE_SIZE 1024
 // Total buffer size is WEBRTC_TRACE_NUM_ARRAY (number of buffer partitions) *
 // WEBRTC_TRACE_MAX_QUEUE (number of lines per buffer partition) *
-// WEBRTC_TRACE_MAX_MESSAGE_SIZE (number of 1 byte charachters per line) =
+// WEBRTC_TRACE_MAX_MESSAGE_SIZE (number of 1 byte characters per line) =
 // 1 or 4 Mbyte.
 
 #define WEBRTC_TRACE_MAX_FILE_SIZE 100*1000

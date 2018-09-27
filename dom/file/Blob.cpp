@@ -64,37 +64,37 @@ Blob::MakeValidBlobType(nsAString& aType)
 }
 
 /* static */ Blob*
-Blob::Create(nsISupports* aParent, BlobImpl* aImpl)
+Blob::Create(nsISupports* apparent, BlobImpl* aImpl)
 {
   MOZ_ASSERT(aImpl);
 
-  return aImpl->IsFile() ? new File(aParent, aImpl)
-                         : new Blob(aParent, aImpl);
+  return aImpl->IsFile() ? new File(apparent, aImpl)
+                         : new Blob(apparent, aImpl);
 }
 
 /* static */ already_AddRefed<Blob>
-Blob::CreateStringBlob(nsISupports* aParent, const nsACString& aData,
+Blob::CreateStringBlob(nsISupports* apparent, const nsACString& aData,
                        const nsAString& aContentType)
 {
   RefPtr<BlobImpl> blobImpl = StringBlobImpl::Create(aData, aContentType);
-  RefPtr<Blob> blob = Blob::Create(aParent, blobImpl);
+  RefPtr<Blob> blob = Blob::Create(apparent, blobImpl);
   MOZ_ASSERT(!blob->mImpl->IsFile());
   return blob.forget();
 }
 
 /* static */ already_AddRefed<Blob>
-Blob::CreateMemoryBlob(nsISupports* aParent, void* aMemoryBuffer,
+Blob::CreateMemoryBlob(nsISupports* apparent, void* aMemoryBuffer,
                        uint64_t aLength, const nsAString& aContentType)
 {
-  RefPtr<Blob> blob = Blob::Create(aParent,
+  RefPtr<Blob> blob = Blob::Create(apparent,
     new MemoryBlobImpl(aMemoryBuffer, aLength, aContentType));
   MOZ_ASSERT(!blob->mImpl->IsFile());
   return blob.forget();
 }
 
-Blob::Blob(nsISupports* aParent, BlobImpl* aImpl)
+Blob::Blob(nsISupports* apparent, BlobImpl* aImpl)
   : mImpl(aImpl)
-  , mParent(aParent)
+  , mParent(apparent)
 {
   MOZ_ASSERT(mImpl);
 }

@@ -32,7 +32,7 @@ private:
   // This class must be constructed by CacheChild or CacheStorageChild using
   // their ExecuteOp() factory method.
   CacheOpChild(CacheWorkerHolder* aWorkerHolder, nsIGlobalObject* aGlobal,
-               nsISupports* aParent, Promise* aPromise);
+               nsISupports* apparent, Promise* aPromise);
   ~CacheOpChild();
 
   // PCacheOpChild methods

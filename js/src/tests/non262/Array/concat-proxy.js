@@ -1,5 +1,5 @@
 var BUGNUMBER = 1287520;
-var summary = 'Array.prototype.concat should check HasProperty everytime for non-dense array';
+var summary = 'Array.prototype.concat should check HasProperty every time for non-dense array';
 
 print(BUGNUMBER + ": " + summary);
 

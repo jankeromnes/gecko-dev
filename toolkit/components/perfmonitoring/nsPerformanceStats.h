@@ -135,7 +135,7 @@ protected:
   friend nsPerformanceGroup;
 
   /**
-   * `false` until `Init()` and after `Dispose()`, `true` inbetween.
+   * `false` until `Init()` and after `Dispose()`, `true` between.
    */
   bool mIsAvailable;
 
@@ -319,7 +319,7 @@ protected:
   /**
    * Commit performance measures of a single group.
    *
-   * Data is transfered from `group->recent*` to `group->data`.
+   * Data is transferred from `group->recent*` to `group->data`.
    *
    *
    * @param iteration The current iteration.

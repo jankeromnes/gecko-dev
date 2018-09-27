@@ -355,7 +355,7 @@ interface nsIXPCComponents_Utils : nsISupports
 
     /*
      * Schedule a shrinking garbage collection cycle for a point in the future
-     * when no JS is running. Call the provided function once this has occured.
+     * when no JS is running. Call the provided function once this has occurred.
      */
     void schedulePreciseShrinkingGC(in ScheduledGCCallback callback);
 
@@ -620,7 +620,7 @@ interface nsIXPCComponents_Utils : nsISupports
 
     /**
       * Retrieve the last time, in microseconds since epoch, that a given
-      * watchdog-related event occured.
+      * watchdog-related event occurred.
       *
       * Valid categories:
       *   "ContextStateChange"      - Context switching between active and inactive states

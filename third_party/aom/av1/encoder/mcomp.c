@@ -1162,7 +1162,7 @@ static int pattern_search(
                      get_buf_from_mv(in_what, start_mv), in_what->stride) +
             mvsad_err_cost(x, start_mv, &fcenter_mv, sad_per_bit);
 
-  // Search all possible scales upto the search param around the center point
+  // Search all possible scales up to the search param around the center point
   // pick the scale of the point that is best as the starting scale of
   // further steps around it.
   if (do_init_search) {

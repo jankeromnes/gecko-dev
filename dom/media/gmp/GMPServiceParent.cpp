@@ -1403,7 +1403,7 @@ DeleteDir(nsIFile* aPath)
 
 struct NodeFilter {
   explicit NodeFilter(const nsTArray<nsCString>& nodeIDs) : mNodeIDs(nodeIDs) {}
-  bool operator()(GMPParent* aParent) {
+  bool operator()(GMPParent* apparent) {
     return mNodeIDs.Contains(aParent->GetNodeId());
   }
 private:
@@ -1607,7 +1607,7 @@ GeckoMediaPluginServiceParent::ForgetThisSiteNative(const nsAString& aSite,
       aPattern));
 }
 
-static bool IsNodeIdValid(GMPParent* aParent) {
+static bool IsNodeIdValid(GMPParent* apparent) {
   return !aParent->GetNodeId().IsEmpty();
 }
 

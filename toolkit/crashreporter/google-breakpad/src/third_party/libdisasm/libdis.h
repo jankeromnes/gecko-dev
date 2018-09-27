@@ -603,7 +603,7 @@ unsigned int x86_disasm_forward( unsigned char *buf, unsigned int buf_len,
  * implicit operands. It is recommended that the 'foreach' routines
  * be used to when examining operands for purposes of data flow analysis */
 
-/* Operand FOREACH callback: 'arg' is an abritrary parameter passed to the
+/* Operand FOREACH callback: 'arg' is an arbitrary parameter passed to the
  * foreach routine, 'insn' is the x86_insn_t whose operands are being
  * iterated over, and 'op' is the current x86_op_t */
 typedef void (*x86_operand_fn)(x86_op_t *op, x86_insn_t *insn, void *arg);
@@ -820,7 +820,7 @@ typedef struct {
 /* return a version of the instruction with the variant bytes masked out */
 size_t x86_invariant_disasm( unsigned char *buf, int buf_len, 
 			  x86_invariant_t *inv );
-/* return the size in bytes of the intruction pointed to by 'buf';
+/* return the size in bytes of the instruction pointed to by 'buf';
  * this used x86_invariant_disasm since it faster than x86_disasm */
 size_t x86_size_disasm( unsigned char *buf, unsigned int buf_len );
 

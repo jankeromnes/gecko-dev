@@ -468,16 +468,16 @@ nsWebBrowser::SetItemType(int32_t aItemType)
 }
 
 NS_IMETHODIMP
-nsWebBrowser::GetParent(nsIDocShellTreeItem** aParent)
+nsWebBrowser::GetParent(nsIDocShellTreeItem** apparent)
 {
-  *aParent = nullptr;
+  *apparent = nullptr;
   return NS_OK;
 }
 
 NS_IMETHODIMP
-nsWebBrowser::GetSameTypeParent(nsIDocShellTreeItem** aParent)
+nsWebBrowser::GetSameTypeParent(nsIDocShellTreeItem** apparent)
 {
-  *aParent = nullptr;
+  *apparent = nullptr;
 
   return NS_OK;
 }

@@ -112,7 +112,7 @@ JS_FOR_EACH_TRACEKIND(JS_EXPAND_DEF);
 #undef JS_EXPAND_DEF
 
 // RootKind is closely related to TraceKind. Whereas TraceKind's indices are
-// laid out for convenient embedding as a pointer tag, the indicies of RootKind
+// laid out for convenient embedding as a pointer tag, the indices of RootKind
 // are designed for use as array keys via EnumeratedArray.
 enum class RootKind : int8_t
 {

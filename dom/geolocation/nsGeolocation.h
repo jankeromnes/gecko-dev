@@ -209,7 +209,7 @@ private:
 
   // Two callback arrays.  The first |mPendingCallbacks| holds objects for only
   // one callback and then they are released/removed from the array.  The second
-  // |mWatchingCallbacks| holds objects until the object is explictly removed or
+  // |mWatchingCallbacks| holds objects until the object is explicitly removed or
   // there is a page change. All requests held by either array are active, that
   // is, they have been allowed and expect to be fulfilled.
 

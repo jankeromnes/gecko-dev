@@ -45,7 +45,7 @@ const PREF_ORIG_SOURCES = "devtools.source-map.client-service.enabled";
  * Emits events:
  *   'editor-added': A new editor was added to the UI
  *   'editor-selected': An editor was selected
- *   'error': An error occured
+ *   'error': An error occurred
  *
  * @param {StyleEditorFront} debuggee
  *        Client-side front for interacting with the page's stylesheets

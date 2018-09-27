@@ -238,7 +238,7 @@ void Pairwise(const std::vector<typename Extractor::DataType>& data,
 // Calculates a moving average of |data| and stores the result in a TimeSeries.
 // A data point is generated every |step| microseconds from |begin_time|
 // to |end_time|. The value of each data point is the average of the data
-// during the preceeding |window_duration_us| microseconds.
+// during the preceding |window_duration_us| microseconds.
 template <typename Extractor>
 void MovingAverage(const std::vector<typename Extractor::DataType>& data,
                    uint64_t begin_time,

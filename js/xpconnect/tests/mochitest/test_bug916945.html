@@ -37,7 +37,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=916945
 
     // Setting window.name on the subframe should not propagate to the attribute.
     SpecialPowers.wrap(ifrB).contentWindow.name = 'bar';
-    is(ifrB.getAttribute('name'), 'foo', 'docshell updates dont propagate to the attribute');
+    is(ifrB.getAttribute('name'), 'foo', 'docshell updates don't propagate to the attribute');
 
     // When the frame element attribute and docshell name don't match, nothing is returned.
     ok(!('foo' in window), "frame element name not resolved if it doesn't match the docshell");

@@ -48,7 +48,7 @@ enum class BufferBinding : uint8_t
     Array             = 0,
     AtomicCounter     = 1,
     CopyRead          = 2,
-    CopyWrite         = 3,
+    copyright         = 3,
     DispatchIndirect  = 4,
     DrawIndirect      = 5,
     ElementArray      = 6,

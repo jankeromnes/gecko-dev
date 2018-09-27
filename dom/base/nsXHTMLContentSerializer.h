@@ -113,7 +113,7 @@ protected:
 
   /*
    * mDisableEntityEncoding is higher than 0 while the serializer is serializing
-   * the content of a element whose content is considerd CDATA by the
+   * the content of a element whose content is considered CDATA by the
    * serializer (such elements are 'script', 'style', 'noscript' and
    * possibly others in XHTML) This doesn't have anything to do with if the
    * element is defined as CDATA in the DTD, it simply means we'll

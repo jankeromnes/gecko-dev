@@ -245,7 +245,7 @@ static __m128 mm_pow_ps(__m128 a, __m128 b) {
     //    the mantissa, putting eight into the biased exponent (to shift/
     //    compensate the fact that the exponent has been shifted in the top/
     //    fractional part and finally getting rid of the implicit leading one
-    //    from the mantissa by substracting it out.
+    //    from the mantissa by subtracting it out.
     static const ALIGN16_BEG int float_exponent_mask[4] ALIGN16_END = {
         0x7F800000, 0x7F800000, 0x7F800000, 0x7F800000};
     static const ALIGN16_BEG int eight_biased_exponent[4] ALIGN16_END = {

@@ -295,7 +295,7 @@
         if (!body.contains(obj)
             && (!state.loading || expectedMode != "image")
             && (!state.initialPlugin || expectedMode != "plugin")) {
-          // Images are handled by nsIImageLoadingContent so we dont track
+          // Images are handled by nsIImageLoadingContent so we don't track
           // their state change as they're detached and reattached. All other
           // types switch to state "loading", and are completely unloaded
           expectedMode = "loading";

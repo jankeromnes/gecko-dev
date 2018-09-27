@@ -23,8 +23,8 @@ NS_WRAPPERCACHE_INTERFACE_MAP_ENTRY
 NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-TestInterfaceMaplikeObject::TestInterfaceMaplikeObject(nsPIDOMWindowInner* aParent)
-: mParent(aParent)
+TestInterfaceMaplikeObject::TestInterfaceMaplikeObject(nsPIDOMWindowInner* apparent)
+: mParent(apparent)
 {
 }
 

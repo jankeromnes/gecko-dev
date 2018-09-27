@@ -232,10 +232,10 @@ nsFilePicker::ReadValuesFromFileChooser(GtkWidget *file_chooser)
 }
 
 void
-nsFilePicker::InitNative(nsIWidget *aParent,
+nsFilePicker::InitNative(nsIWidget *apparent,
                          const nsAString& aTitle)
 {
-  mParentWidget = aParent;
+  mParentWidget = apparent;
   mTitle.Assign(aTitle);
 }
 

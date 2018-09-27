@@ -339,14 +339,14 @@ class Automation(object):
 
 
   def killAndGetStack(self, processPID, utilityPath, debuggerInfo):
-    """Kill the process, preferrably in a way that gets us a stack trace.
+    """Kill the process, preferably in a way that gets us a stack trace.
        Also attempts to obtain a screenshot before killing the process."""
     if not debuggerInfo:
       self.dumpScreen(utilityPath)
     self.killAndGetStackNoScreenshot(processPID, utilityPath, debuggerInfo)
 
   def killAndGetStackNoScreenshot(self, processPID, utilityPath, debuggerInfo):
-    """Kill the process, preferrably in a way that gets us a stack trace."""
+    """Kill the process, preferably in a way that gets us a stack trace."""
     if self.CRASHREPORTER and not debuggerInfo:
       if not self.IS_WIN32:
         # ABRT will get picked up by Breakpad's signal handler

@@ -23,7 +23,7 @@ use semver_parser;
 
 /// An identifier in the pre-release or build metadata.
 ///
-/// See sections 9 and 10 of the spec for more about pre-release identifers and
+/// See sections 9 and 10 of the spec for more about pre-release identifiers and
 /// build metadata.
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub enum Identifier {
@@ -86,7 +86,7 @@ impl From<semver_parser::version::Version> for Version {
 /// Currently, just a generic error. Will make this nicer later.
 #[derive(Clone,PartialEq,Debug,PartialOrd)]
 pub enum SemVerError {
-    /// An error ocurred while parsing.
+    /// An error occurred while parsing.
     ParseError(String),
 }
 

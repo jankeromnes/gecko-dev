@@ -22,7 +22,7 @@
 
   eSureAnswer  is used to indicate that the detector is 100% sure about the
                answer.
-               Exmaple 1; the Shift_JIS/ISO-2022-JP/EUC-JP detector return
+               Example 1; the Shift_JIS/ISO-2022-JP/EUC-JP detector return
                this w/ ISO-2022-JP when it hit one of the following ESC seq
                   ESC ( J
                   ESC $ @

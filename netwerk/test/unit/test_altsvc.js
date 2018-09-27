@@ -16,8 +16,8 @@ var h1Bar; // server http://bar.example.com:(h1bar.identity.primaryPort)
 var h2FooRoute; // foo.example.com:H2PORT
 var h2BarRoute; // bar.example.com:H2PORT
 var h2Route;    // :H2PORT
-var httpFooOrigin; // http://foo.exmaple.com:PORT/
-var httpsFooOrigin; // https://foo.exmaple.com:PORT/
+var httpFooOrigin; // http://foo.example.com:PORT/
+var httpsFooOrigin; // https://foo.example.com:PORT/
 var httpBarOrigin; // http://bar.example.com:PORT/
 var httpsBarOrigin; // https://bar.example.com:PORT/
 

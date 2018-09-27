@@ -174,7 +174,7 @@ const int CUBEB_BACKEND_INIT_FAILURE_OTHER = CUBEB_BACKEND_INIT_FAILURE_FIRST + 
 /* Index for an unknown backend. */
 const int CUBEB_BACKEND_UNKNOWN = CUBEB_BACKEND_INIT_FAILURE_FIRST + 2;
 
-// Prefered samplerate, in Hz (characteristic of the hardware, mixer, platform,
+// Preferred samplerate, in Hz (characteristic of the hardware, mixer, platform,
 // and API used).
 //
 // sMutex protects *initialization* of this, which must be performed from each

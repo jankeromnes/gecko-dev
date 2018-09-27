@@ -51,7 +51,7 @@ PluginWidgetProxy::~PluginWidgetProxy()
 }
 
 nsresult
-PluginWidgetProxy::Create(nsIWidget* aParent,
+PluginWidgetProxy::Create(nsIWidget* apparent,
                           nsNativeWidget aNativeParent,
                           const LayoutDeviceIntRect& aRect,
                           nsWidgetInitData* aInitData)
@@ -68,8 +68,8 @@ PluginWidgetProxy::Create(nsIWidget* aParent,
     return rv;
   }
 
-  BaseCreate(aParent, aInitData);
-  mParent = aParent;
+  BaseCreate(apparent, aInitData);
+  mParent = apparent;
 
   mBounds = aRect;
   mEnabled = true;

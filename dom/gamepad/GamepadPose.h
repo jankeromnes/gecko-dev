@@ -17,8 +17,8 @@ namespace dom {
 class GamepadPose final : public Pose
 {
 public:
-  GamepadPose(nsISupports* aParent, const GamepadPoseState& aState);
-  explicit GamepadPose(nsISupports* aParent);
+  GamepadPose(nsISupports* apparent, const GamepadPoseState& aState);
+  explicit GamepadPose(nsISupports* apparent);
 
   virtual JSObject* WrapObject(JSContext* aCx, JS::Handle<JSObject*> aGivenProto) override;
 

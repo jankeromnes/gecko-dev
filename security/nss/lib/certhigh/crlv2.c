@@ -26,7 +26,7 @@ CERT_FindCRLExtension(CERTCrl *crl, int tag, SECItem *value)
     return (cert_FindExtension(crl->extensions, tag, value));
 }
 
-/* Callback to set extensions and adjust verison */
+/* Callback to set extensions and adjust version */
 static void
 SetCrlExts(void *object, CERTCertExtension **exts)
 {

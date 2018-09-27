@@ -62,7 +62,7 @@ function test1() {
   gRunningTests++;
   sendMouseEvent({type: "click"}, "testlink2");
 
-  // targetted load into an existing window
+  // targeted load into an existing window
   var testWin = window.open("about:blank", "alreadyOpened");
   gRunningTests++;
   sendMouseEvent({type: "click"}, "testlink3");

@@ -100,7 +100,7 @@ public:
   // Override BindToTree() so that we can trigger a load when we become
   // the child of a media element.
   virtual nsresult BindToTree(nsIDocument* aDocument,
-                              nsIContent* aParent,
+                              nsIContent* apparent,
                               nsIContent* aBindingParent) override;
   virtual void UnbindFromTree(bool aDeep, bool aNullParent) override;
 

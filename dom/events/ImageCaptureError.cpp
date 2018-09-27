@@ -18,10 +18,10 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(ImageCaptureError)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-ImageCaptureError::ImageCaptureError(nsISupports* aParent,
+ImageCaptureError::ImageCaptureError(nsISupports* apparent,
                                      uint16_t aCode,
                                      const nsAString& aMessage)
-  : mParent(aParent)
+  : mParent(apparent)
   , mMessage(aMessage)
   , mCode(aCode)
 {

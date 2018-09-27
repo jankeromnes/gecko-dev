@@ -185,7 +185,7 @@ pub struct Local {
 
     /// Total number of pinnings performed.
     ///
-    /// This is just an auxilliary counter that sometimes kicks off collection.
+    /// This is just an auxiliary counter that sometimes kicks off collection.
     pin_count: Cell<Wrapping<usize>>,
 }
 

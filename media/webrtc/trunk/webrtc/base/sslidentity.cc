@@ -282,7 +282,7 @@ int64_t ASN1TimeToSec(const unsigned char* s, size_t length, bool long_format) {
   size_t bytes_left = length;
 
   // Make sure the string ends with Z.  Doing it here protects the strspn call
-  // from running off the end of the string in Z's absense.
+  // from running off the end of the string in Z's absence.
   if (length == 0 || s[length - 1] != 'Z')
     return -1;
 

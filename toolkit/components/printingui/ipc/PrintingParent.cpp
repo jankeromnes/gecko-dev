@@ -87,16 +87,16 @@ PrintingParent::RecvShowProgress(PBrowserParent* parent,
 }
 
 nsresult
-PrintingParent::ShowPrintDialog(PBrowserParent* aParent,
+PrintingParent::ShowPrintDialog(PBrowserParent* apparent,
                                 const PrintData& aData,
                                 PrintData* aResult)
 {
-  // If aParent is null this call is just being used to get print settings from
+  // If apparent is null this call is just being used to get print settings from
   // the printer for print preview.
-  bool isPrintPreview = !aParent;
+  bool isPrintPreview = !apparent;
   nsCOMPtr<nsPIDOMWindowOuter> parentWin;
-  if (aParent) {
-    parentWin = DOMWindowFromBrowserParent(aParent);
+  if (apparent) {
+    parentWin = DOMWindowFromBrowserParent(apparent);
     if (!parentWin) {
       return NS_ERROR_FAILURE;
     }
@@ -176,11 +176,11 @@ PrintingParent::ShowPrintDialog(PBrowserParent* aParent,
 
 mozilla::ipc::IPCResult
 PrintingParent::RecvShowPrintDialog(PPrintSettingsDialogParent* aDialog,
-                                    PBrowserParent* aParent,
+                                    PBrowserParent* apparent,
                                     const PrintData& aData)
 {
   PrintData resultData;
-  nsresult rv = ShowPrintDialog(aParent, aData, &resultData);
+  nsresult rv = ShowPrintDialog(apparent, aData, &resultData);
 
   // The child has been spinning an event loop while waiting
   // to hear about the print settings. We return the results

@@ -4,7 +4,7 @@
 "use strict";
 
 // Test for following ComputedTimingPath component works.
-// * element existance
+// * element existence
 // * iterations: path, count
 // * delay: path
 // * fill: path
@@ -406,7 +406,7 @@ add_task(async function() {
     const animationItemEl =
       findAnimationItemElementsByTargetSelector(panel, `.${ targetClass }`);
 
-    info(`Checking computed timing path existance for ${ targetClass }`);
+    info(`Checking computed timing path existence for ${ targetClass }`);
     const computedTimingPathEl =
       animationItemEl.querySelector(".animation-computed-timing-path");
     ok(computedTimingPathEl,
@@ -416,10 +416,10 @@ add_task(async function() {
     const delayPathEl = computedTimingPathEl.querySelector(".animation-delay-path");
 
     if (expectedDelayPath) {
-      ok(delayPathEl, "delay path should be existance");
+      ok(delayPathEl, "delay path should be existence");
       assertPathSegments(delayPathEl, true, expectedDelayPath);
     } else {
-      ok(!delayPathEl, "delay path should not be existance");
+      ok(!delayPathEl, "delay path should not be existence");
     }
 
     info(`Checking iteration path list for ${ targetClass }`);
@@ -445,10 +445,10 @@ add_task(async function() {
     const endDelayPathEl = computedTimingPathEl.querySelector(".animation-enddelay-path");
 
     if (expectedEndDelayPath) {
-      ok(endDelayPathEl, "endDelay path should be existance");
+      ok(endDelayPathEl, "endDelay path should be existence");
       assertPathSegments(endDelayPathEl, true, expectedEndDelayPath);
     } else {
-      ok(!endDelayPathEl, "endDelay path should not be existance");
+      ok(!endDelayPathEl, "endDelay path should not be existence");
     }
 
     info(`Checking forwards fill path for ${ targetClass }`);
@@ -456,10 +456,10 @@ add_task(async function() {
       computedTimingPathEl.querySelector(".animation-fill-forwards-path");
 
     if (expectedForwardsPath) {
-      ok(forwardsPathEl, "forwards path should be existance");
+      ok(forwardsPathEl, "forwards path should be existence");
       assertPathSegments(forwardsPathEl, true, expectedForwardsPath);
     } else {
-      ok(!forwardsPathEl, "forwards path should not be existance");
+      ok(!forwardsPathEl, "forwards path should not be existence");
     }
   }
 });

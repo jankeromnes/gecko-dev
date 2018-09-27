@@ -160,7 +160,7 @@ class PermittedAlphabetConstraint(SingleValueConstraint):
 
 # This is a bit kludgy, meaning two op modes within a single constraint
 class InnerTypeConstraint(AbstractConstraint):
-    """Value must satisfy type and presense constraints"""
+    """Value must satisfy type and presence constraints"""
 
     def _testValue(self, value, idx):
         if self.__singleTypeConstraint:
@@ -169,7 +169,7 @@ class InnerTypeConstraint(AbstractConstraint):
             if idx not in self.__multipleTypeConstraint:
                 raise error.ValueConstraintError(value)
             constraint, status = self.__multipleTypeConstraint[idx]
-            if status == 'ABSENT':  # XXX presense is not checked!
+            if status == 'ABSENT':  # XXX presence is not checked!
                 raise error.ValueConstraintError(value)
             constraint(value)
 

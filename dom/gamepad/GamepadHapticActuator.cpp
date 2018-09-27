@@ -21,9 +21,9 @@ NS_INTERFACE_MAP_END
 
 NS_IMPL_CYCLE_COLLECTION_WRAPPERCACHE(GamepadHapticActuator, mParent)
 
-GamepadHapticActuator::GamepadHapticActuator(nsISupports* aParent, uint32_t aGamepadId,
+GamepadHapticActuator::GamepadHapticActuator(nsISupports* apparent, uint32_t aGamepadId,
                                              uint32_t aIndex)
-  : mParent(aParent), mGamepadId(aGamepadId),
+  : mParent(apparent), mGamepadId(aGamepadId),
     mType(GamepadHapticActuatorType::Vibration), mIndex(aIndex)
 {
 

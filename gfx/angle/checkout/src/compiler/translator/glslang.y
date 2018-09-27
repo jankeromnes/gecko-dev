@@ -100,7 +100,7 @@ using namespace sh;
             TQualifierWrapperBase *qualifierWrapper;
             TTypeQualifierBuilder *typeQualifierBuilder;
         };
-    } interm;
+    } interim;
 }
 
 %{
@@ -195,54 +195,54 @@ extern void yyerror(YYLTYPE* yylloc, TParseContext* context, void *scanner, cons
 %token <lex> LEFT_ANGLE RIGHT_ANGLE VERTICAL_BAR CARET AMPERSAND QUESTION
 
 %type <lex> identifier
-%type <interm.op> assignment_operator unary_operator
-%type <interm.intermTypedNode> variable_identifier primary_expression postfix_expression
-%type <interm.intermTypedNode> expression integer_expression assignment_expression
-%type <interm.intermTypedNode> unary_expression multiplicative_expression additive_expression
-%type <interm.intermTypedNode> relational_expression equality_expression
-%type <interm.intermTypedNode> conditional_expression constant_expression
-%type <interm.intermTypedNode> logical_or_expression logical_xor_expression logical_and_expression
-%type <interm.intermTypedNode> shift_expression and_expression exclusive_or_expression inclusive_or_expression
-%type <interm.intermTypedNode> function_call initializer
+%type <interim.op> assignment_operator unary_operator
+%type <interim.intermTypedNode> variable_identifier primary_expression postfix_expression
+%type <interim.intermTypedNode> expression integer_expression assignment_expression
+%type <interim.intermTypedNode> unary_expression multiplicative_expression additive_expression
+%type <interim.intermTypedNode> relational_expression equality_expression
+%type <interim.intermTypedNode> conditional_expression constant_expression
+%type <interim.intermTypedNode> logical_or_expression logical_xor_expression logical_and_expression
+%type <interim.intermTypedNode> shift_expression and_expression exclusive_or_expression inclusive_or_expression
+%type <interim.intermTypedNode> function_call initializer
 
-%type <interm.intermNode> condition conditionopt
-%type <interm.intermBlock> translation_unit
-%type <interm.intermNode> function_definition statement simple_statement
-%type <interm.intermBlock> statement_list compound_statement_with_scope compound_statement_no_new_scope
-%type <interm.intermNode> declaration_statement selection_statement expression_statement
-%type <interm.intermNode> declaration external_declaration
-%type <interm.intermNode> for_init_statement
-%type <interm.nodePair> selection_rest_statement for_rest_statement
-%type <interm.intermSwitch> switch_statement
-%type <interm.intermCase> case_label
-%type <interm.intermNode> iteration_statement jump_statement statement_no_new_scope statement_with_scope
-%type <interm> single_declaration init_declarator_list
+%type <interim.intermNode> condition conditionopt
+%type <interim.intermBlock> translation_unit
+%type <interim.intermNode> function_definition statement simple_statement
+%type <interim.intermBlock> statement_list compound_statement_with_scope compound_statement_no_new_scope
+%type <interim.intermNode> declaration_statement selection_statement expression_statement
+%type <interim.intermNode> declaration external_declaration
+%type <interim.intermNode> for_init_statement
+%type <interim.nodePair> selection_rest_statement for_rest_statement
+%type <interim.intermSwitch> switch_statement
+%type <interim.intermCase> case_label
+%type <interim.intermNode> iteration_statement jump_statement statement_no_new_scope statement_with_scope
+%type <interim> single_declaration init_declarator_list
 
-%type <interm.param> parameter_declaration parameter_declarator parameter_type_specifier
-%type <interm.layoutQualifier> layout_qualifier_id_list layout_qualifier_id
+%type <interim.param> parameter_declaration parameter_declarator parameter_type_specifier
+%type <interim.layoutQualifier> layout_qualifier_id_list layout_qualifier_id
 
 // Note: array_specifier guaranteed to be non-null.
-%type <interm.arraySizes> array_specifier
+%type <interim.arraySizes> array_specifier
 
-%type <interm.type> fully_specified_type type_specifier
+%type <interim.type> fully_specified_type type_specifier
 
-%type <interm.precision> precision_qualifier
-%type <interm.layoutQualifier> layout_qualifier
-%type <interm.qualifier> interpolation_qualifier
-%type <interm.qualifierWrapper> storage_qualifier single_type_qualifier invariant_qualifier
-%type <interm.typeQualifierBuilder> type_qualifier
+%type <interim.precision> precision_qualifier
+%type <interim.layoutQualifier> layout_qualifier
+%type <interim.qualifier> interpolation_qualifier
+%type <interim.qualifierWrapper> storage_qualifier single_type_qualifier invariant_qualifier
+%type <interim.typeQualifierBuilder> type_qualifier
 
-%type <interm.typeSpecifierNonArray> type_specifier_nonarray struct_specifier
-%type <interm.type> type_specifier_no_prec
-%type <interm.declarator> struct_declarator
-%type <interm.declaratorList> struct_declarator_list
-%type <interm.fieldList> struct_declaration struct_declaration_list
-%type <interm.function> function_header function_declarator
-%type <interm.function> function_header_with_parameters
-%type <interm.functionLookup> function_identifier function_call_header
-%type <interm.functionLookup> function_call_header_with_parameters function_call_header_no_parameters
-%type <interm.functionLookup> function_call_generic function_call_or_method
-%type <interm> function_prototype
+%type <interim.typeSpecifierNonArray> type_specifier_nonarray struct_specifier
+%type <interim.type> type_specifier_no_prec
+%type <interim.declarator> struct_declarator
+%type <interim.declaratorList> struct_declarator_list
+%type <interim.fieldList> struct_declaration struct_declaration_list
+%type <interim.function> function_header function_declarator
+%type <interim.function> function_header_with_parameters
+%type <interim.functionLookup> function_identifier function_call_header
+%type <interim.functionLookup> function_call_header_with_parameters function_call_header_no_parameters
+%type <interim.functionLookup> function_call_generic function_call_or_method
+%type <interim> function_prototype
 
 %type <lex> enter_struct
 

@@ -30,7 +30,7 @@ extern LazyLogModule gMediaTimerLog;
 // it not to be. Feel free to change that.
 typedef MozPromise<bool, bool, /* IsExclusive = */ true> MediaTimerPromise;
 
-// Timers only know how to fire at a given thread, which creates an impedence
+// Timers only know how to fire at a given thread, which creates an impedance
 // mismatch with code that operates with TaskQueues. This class solves
 // that mismatch with a dedicated (but shared) thread and a nice MozPromise-y
 // interface.

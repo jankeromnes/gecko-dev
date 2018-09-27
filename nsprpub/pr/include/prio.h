@@ -1012,7 +1012,7 @@ struct PRDirEntryUTF16 {
  * OUTPUTS:
  *     None
  * RETURN: PRDir *
- *     If the directory is sucessfully opened, a PRDir object is
+ *     If the directory is successfully opened, a PRDir object is
  *     dynamically allocated and a pointer to it is returned.
  *     If the directory cannot be opened, a NULL pointer is returned.
  * MEMORY:
@@ -1106,7 +1106,7 @@ NSPR_API(PRStatus) PR_CloseDirUTF16(PRDirUTF16 *dir);
  *        The name of the directory to be created. All the path components
  *        up to but not including the leaf component must already exist.
  *     PRIntn mode
- *        See 'mode' definiton in PR_Open().
+ *        See 'mode' definition in PR_Open().
  * OUTPUTS:
  *     None
  * RETURN: PRStatus

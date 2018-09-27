@@ -1486,7 +1486,7 @@ const ModifierMap = [
 ];
 
 // An abstract object to expose and handle all viewport-related properties and
-// operations, so we can seperate the UI logic from other parts in runtime.
+// operations, so we can separate the UI logic from other parts in runtime.
 // Methods below can be overridden separately in UI layer by creating a
 // "createCustomViewport" function in "viewer.html" returning an object with the
 // same methods. It is useful if you want to customize your layout in UI layer.

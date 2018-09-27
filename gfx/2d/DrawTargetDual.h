@@ -24,7 +24,7 @@ namespace gfx {
   virtual void funcName(var1Type var1Name) override { mA->funcName(var1Name); mB->funcName(var1Name); }
 
 /* This is a special type of DrawTarget. It duplicates all drawing calls
- * accross two drawtargets. An exception to this is when a snapshot of another
+ * across two drawtargets. An exception to this is when a snapshot of another
  * dual DrawTarget is used as the source for any surface data. In this case
  * the snapshot of the first source DrawTarget is used as a source for the call
  * to the first destination DrawTarget (mA) and the snapshot of the second

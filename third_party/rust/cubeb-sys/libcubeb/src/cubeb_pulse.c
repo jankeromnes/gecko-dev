@@ -260,7 +260,7 @@ trigger_user_callback(pa_stream * s, void const * input_data, size_t nbytes, cub
   while (towrite) {
     size = towrite;
     r = WRAP(pa_stream_begin_write)(s, &buffer, &size);
-    // Note: this has failed running under rr on occassion - needs investigation.
+    // Note: this has failed running under rr on occasion - needs investigation.
     assert(r == 0);
     assert(size > 0);
     assert(size % frame_size == 0);

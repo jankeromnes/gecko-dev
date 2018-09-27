@@ -23,8 +23,8 @@
 #define MAX_ITERATIONS 1000 /* Maximum number of iterations of primegen */
 
 typedef enum {
-    FIPS186_1_TYPE,   /* Probablistic */
-    FIPS186_3_TYPE,   /* Probablistic */
+    FIPS186_1_TYPE,   /* Probabilistic */
+    FIPS186_3_TYPE,   /* Probabilistic */
     FIPS186_3_ST_TYPE /* Shawe-Taylor provable */
 } pqgGenType;
 
@@ -417,8 +417,8 @@ makeQfromSeed(
         U[i] = sha1[i] ^ sha2[i];
     /* ******************************************************************
     ** Step 3.
-    ** "Form Q from U by setting the most signficant bit (the 2**159 bit)
-    **  and the least signficant bit to 1.  In terms of boolean operations,
+    ** "Form Q from U by setting the most significant bit (the 2**159 bit)
+    **  and the least significant bit to 1.  In terms of boolean operations,
     **  Q = U OR 2**159 OR 1.  Note that 2**159 < Q < 2**160."
     */
     U[0] |= 0x80; /* U is MSB first */
@@ -1355,8 +1355,8 @@ step_5:
     ** "Compute U = HASH[SEED] 2**(N-1).  (186-3)"
     **
     ** Step 7. (Step 3 in 186-1)
-    ** "Form Q from U by setting the most signficant bit (the 2**159 bit)
-    **  and the least signficant bit to 1.  In terms of boolean operations,
+    ** "Form Q from U by setting the most significant bit (the 2**159 bit)
+    **  and the least significant bit to 1.  In terms of boolean operations,
     **  Q = U OR 2**159 OR 1.  Note that 2**159 < Q < 2**160. (186-1)"
     **
     ** "q = 2**(N-1) + U + 1 - (U mod 2) (186-3)

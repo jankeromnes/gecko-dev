@@ -27,7 +27,7 @@ class PerformanceMetricsCollector;
 //
 // Once every process have sent back its results, AggregatedResults will
 // resolve the promise with all the collected data and send back the
-// dictionnary.
+// dictionary.
 //
 class AggregatedResults final
 {
@@ -57,7 +57,7 @@ private:
 
 //
 // PerformanceMetricsCollector is instanciated as a singleton, and creates
-// one AggregatedResults instance everytime metrics are requested.
+// one AggregatedResults instance every time metrics are requested.
 //
 // Each AggregatedResults has a unique identifier (UUID) that is used
 // to send metrics requests via IPDL. When metrics are back in an

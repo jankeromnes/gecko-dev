@@ -107,7 +107,7 @@ OMXResult omxSP_FFTInit_C_SC32(
     /* 
      * Filling Twiddle factors : 
      * The original twiddle table "armSP_FFT_S32TwiddleTable" is of size (MaxSize/8 + 1)
-     * Rest of the values i.e., upto MaxSize are calculated using the symmetries of sin and cos
+     * Rest of the values i.e., up to MaxSize are calculated using the symmetries of sin and cos
      * The max size of the twiddle table needed is 3N/4 for a radix-4 stage
      *
      * W = (-2 * PI) / N 

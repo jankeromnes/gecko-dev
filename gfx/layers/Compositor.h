@@ -65,7 +65,7 @@
  *
  * Most layer classes own a Compositable plus some extra information like
  * transforms and clip rects. They are platform independent.
- * Compositable classes manipulate Texture objects and are reponsible for
+ * Compositable classes manipulate Texture objects and are responsible for
  * things like tiling, buffer rotation or double buffering. Compositables
  * are also platform-independent. Examples of compositable classes are:
  *  - ImageClient
@@ -188,7 +188,7 @@ protected:
 
 public:
   explicit Compositor(widget::CompositorWidget* aWidget,
-                      CompositorBridgeParent* aParent = nullptr);
+                      CompositorBridgeParent* apparent = nullptr);
 
   virtual bool Initialize(nsCString* const out_failureReason) = 0;
   virtual void Destroy() override;

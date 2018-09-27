@@ -1544,7 +1544,7 @@ RegExpParser<CharT>::ParseDisjunction()
             builder->AddAtom(body);
             if (unicode_ && (group_type == POSITIVE_LOOKAHEAD || group_type == NEGATIVE_LOOKAHEAD))
                 continue;
-            // For compatability with JSC and ES3, we allow quantifiers after
+            // For compatibility with JSC and ES3, we allow quantifiers after
             // lookaheads, and break in all cases.
             break;
           }

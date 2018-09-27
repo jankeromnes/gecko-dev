@@ -530,7 +530,7 @@ class ShadersEditorsView {
         // just display them on the currently edited line.
         line: e.lineMatch[0] > lineCount ? currentLine : e.lineMatch[0] - 1,
         // Trim whitespace from the beginning and the end of the message,
-        // and replace all other occurences of double spaces to a single space.
+        // and replace all other occurrences of double spaces to a single space.
         text: e.textMatch[0].trim().replace(/\s{2,}/g, " ")
       };
     }

@@ -177,7 +177,7 @@ function loadFrameScripts(browser, ...scripts) {
     let frameScript;
     if (typeof script === "string") {
       if (script.includes(".js")) {
-        // If script string includes a .js extention, assume it is a script
+        // If script string includes a .js extension, assume it is a script
         // path.
         frameScript = `${CURRENT_DIR}${script}`;
       } else {

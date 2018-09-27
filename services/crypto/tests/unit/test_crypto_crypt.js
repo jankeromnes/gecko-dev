@@ -67,7 +67,7 @@ add_task(async function test_encrypt_decrypt() {
   Assert.notEqual(cipherText, mySecret); // just to be explicit
 
 
-  // Do some more tests with a fixed key/iv, to check for reproducable results.
+  // Do some more tests with a fixed key/iv, to check for reproducible results.
   key = "St1tFCor7vQEJNug/465dQ==";
   iv  = "oLjkfrLIOnK2bDRvW4kXYA==";
 

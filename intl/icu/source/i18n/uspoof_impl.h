@@ -299,7 +299,7 @@ struct SpoofDataHeader {
     int32_t       fMagic;                // (0x3845fdef)
     uint8_t       fFormatVersion[4];     // Data Format. Same as the value in struct UDataInfo
                                          //   if there is one associated with this data.
-    int32_t       fLength;               // Total lenght in bytes of this spoof data,
+    int32_t       fLength;               // Total length in bytes of this spoof data,
                                          //   including all sections, not just the header.
 
     // The following four sections refer to data representing the confusable data

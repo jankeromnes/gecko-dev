@@ -17,7 +17,7 @@ If scaling down, the stepping rate is always src_width / dst_width.
 
     dx = src_width / dst_width;
 
-e.g. If scaling from 1280x720 to 640x360, the step thru the source will be 2.0, stepping over 2 pixels of source for each pixel of destination.
+e.g. If scaling from 1280x720 to 640x360, the step through the source will be 2.0, stepping over 2 pixels of source for each pixel of destination.
 
 Centering, depends on filter mode.
 
@@ -47,7 +47,7 @@ For a scale factor of 2x down, this is equivalent to bilinear.
     x = 0;
     dx = src_width / dst_width;
 
-e.g. If scaling from 640x360 to 1280x720 the step thru the source will be 0.0, stepping half a pixel of source for each pixel of destination. Each pixel is replicated by the scale factor.
+e.g. If scaling from 640x360 to 1280x720 the step through the source will be 0.0, stepping half a pixel of source for each pixel of destination. Each pixel is replicated by the scale factor.
 
 **Bilinear** filter stretches such that the first pixel of source maps to the first pixel of destination, and the last pixel of source maps to the last pixel of destination.
 

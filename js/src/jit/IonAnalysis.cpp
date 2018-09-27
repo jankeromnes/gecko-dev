@@ -412,7 +412,7 @@ jit::PruneUnusedBranches(MIRGenerator* mir, MIRGraph& graph)
             // confidence is not enough to compensate for the cost of a bailout.
             //
             //   1. Confidence for removal varies with the number of hit counts
-            //      of the predecessor. The reason being that the likelyhood of
+            //      of the predecessor. The reason being that the likelihood of
             //      taking this branch is decreasing with the number of hit
             //      counts of the predecessor.
             //

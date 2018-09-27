@@ -362,7 +362,7 @@ GetOBJREFSize(NotNull<IStream*> aStream)
     }
 
     if (clsid != CLSID_StdMarshal) {
-      // We can only calulate the size if the payload is a standard OBJREF as
+      // We can only calculate the size if the payload is a standard OBJREF as
       // identified by clsid == CLSID_StdMarshal.
       return 0;
     }

@@ -22,8 +22,8 @@
  * NameSpace prefixes are managed by nsINameSpaces.
  *
  * All NameSpace URIs are stored in a global table so that IDs are
- * consistent accross the app. NameSpace IDs are only consistent at runtime
- * ie: they are not guaranteed to be consistent accross app sessions.
+ * consistent across the app. NameSpace IDs are only consistent at runtime
+ * ie: they are not guaranteed to be consistent across app sessions.
  *
  * The nsNameSpaceManager needs to have a live reference for as long as
  * the NameSpace IDs are needed.

@@ -832,7 +832,7 @@ function createObjectGrip(value) {
 
 /**
  * Converts all TypedArrays of the array that cannot
- * be passed over the wire into a normal Array equivilent.
+ * be passed over the wire into a normal Array equivalent.
  */
 function sanitizeAutomationArgs(args) {
   return args.reduce((newArgs, el) => {

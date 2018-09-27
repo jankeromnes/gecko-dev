@@ -118,7 +118,7 @@ add_test(async function() {
   run_next_test();
 });
 
-// Remove the type while it is beng viewed and check it is replaced with the
+// Remove the type while it is being viewed and check it is replaced with the
 // default view
 add_test(async function() {
   await gCategoryUtilities.openType("type1");

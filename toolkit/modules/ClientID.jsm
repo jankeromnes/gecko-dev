@@ -137,7 +137,7 @@ var ClientIDImpl = {
       // fall through to next option
     }
 
-    // We dont have an id from the DRS state file yet, generate a new ID.
+    // We don't have an id from the DRS state file yet, generate a new ID.
     this.updateClientID(CommonUtils.generateUUID());
     this._saveClientIdTask = this._saveClientID();
 

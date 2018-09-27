@@ -17,7 +17,7 @@ NS_IMPL_NS_NEW_HTML_ELEMENT(TableSection)
 namespace mozilla {
 namespace dom {
 
-// you will see the phrases "rowgroup" and "section" used interchangably
+// you will see the phrases "rowgroup" and "section" used interchangeably
 
 HTMLTableSectionElement::~HTMLTableSectionElement()
 {

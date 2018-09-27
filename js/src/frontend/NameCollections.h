@@ -60,7 +60,7 @@ class CollectionPool
         recyclable_.clearAndFree();
     }
 
-    // Fallibly aquire one of the supported collection types from the pool.
+    // Fallibly acquire one of the supported collection types from the pool.
     template <typename Collection>
     Collection* acquire(JSContext* cx) {
         ConcreteCollectionPool::template assertInvariants<Collection>();

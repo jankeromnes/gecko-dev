@@ -143,7 +143,7 @@ static void get_operand_regtype_str( int regtype, char *str, int len )
 
         memset( str, 0, len );
 
-        //go thru every type in the enum
+        //go through every type in the enum
         for ( i = 0; operand_regtypes[i].name; i++ ) {
                 //skip if type is not set
                 if(! (regtype & operand_regtypes[i].value) )
@@ -584,7 +584,7 @@ static const char *get_insn_type_str( enum x86_insn_type type ) {
 
         unsigned int i;
 
-        //go thru every type in the enum
+        //go through every type in the enum
         for ( i = 0; types[i].name; i++ ) {
                 if ( types[i].value == type )
                         return types[i].name;

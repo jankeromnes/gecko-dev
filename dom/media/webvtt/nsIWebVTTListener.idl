@@ -30,7 +30,7 @@ interface nsIWebVTTListener : nsISupports
   /**
    * Is called when the WebVTT parser encounters a parsing error.
    *
-   * @param error The error code of the ParserError the occured.
+   * @param error The error code of the ParserError the occurred.
    */
   [implicit_jscontext]
   void onParsingError(in long errorCode);

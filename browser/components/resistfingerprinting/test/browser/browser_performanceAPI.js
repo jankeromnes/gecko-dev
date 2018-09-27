@@ -94,7 +94,7 @@ add_task(async function runRPTests() {
   let runTests = async function(data) {
     let timerlist = data.list;
     let expectedPrecision = data.precision;
-    // eslint beleives that isrounded is available in this scope, but if you
+    // eslint believes that isrounded is available in this scope, but if you
     // remove the assignment, you will see it is not
     // eslint-disable-next-line
     let isRounded = eval(data.isRoundedFunc);
@@ -134,7 +134,7 @@ add_task(async function runRTPTests() {
   let runTests = async function(data) {
     let timerlist = data.list;
     let expectedPrecision = data.precision;
-    // eslint beleives that isrounded is available in this scope, but if you
+    // eslint believes that isrounded is available in this scope, but if you
     // remove the assignment, you will see it is not
     // eslint-disable-next-line
     let isRounded = eval(data.isRoundedFunc);

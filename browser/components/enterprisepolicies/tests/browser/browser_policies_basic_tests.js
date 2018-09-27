@@ -86,7 +86,7 @@ add_task(async function test_simple_policies() {
   await ContentTask.spawn(gBrowser.selectedBrowser, null, async function() {
     if (Services.appinfo.processType == Services.appinfo.PROCESS_TYPE_CONTENT) {
       is(Services.policies.isAllowed("feature1"), false, "Correctly disallowed in the content process");
-      // Feature 2 wasn't explictly marked as needed in the content process, so it is not marked
+      // Feature 2 wasn't explicitly marked as needed in the content process, so it is not marked
       // as disallowed there.
       is(Services.policies.isAllowed("feature2"), true, "Correctly missing in the content process");
     }

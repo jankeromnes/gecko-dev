@@ -417,7 +417,7 @@ txStylesheetCompiler::loadURI(const nsAString& aUri,
                               txStylesheetCompiler* aCompiler)
 {
     MOZ_LOG(txLog::xslt, LogLevel::Info,
-           ("Compiler::loadURI forwards %s thru %s\n",
+           ("Compiler::loadURI forwards %s through %s\n",
             NS_LossyConvertUTF16toASCII(aUri).get(),
             NS_LossyConvertUTF16toASCII(mStylesheetURI).get()));
     if (mStylesheetURI.Equals(aUri)) {

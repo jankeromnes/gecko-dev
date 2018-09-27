@@ -178,7 +178,7 @@ class WidgetRenderingContext;
   // discard the spurious gesture event so as not to confuse Gecko.
   //
   // mCumulativeMagnification keeps track of the total amount of
-  // magnification peformed during a magnify gesture so that we can
+  // magnification performed during a magnify gesture so that we can
   // send that value with the final MozMagnifyGesture event.
   //
   // mCumulativeRotation keeps track of the total amount of rotation
@@ -308,7 +308,7 @@ public:
   nsChildView();
 
   // nsIWidget interface
-  virtual MOZ_MUST_USE nsresult Create(nsIWidget* aParent,
+  virtual MOZ_MUST_USE nsresult Create(nsIWidget* apparent,
                                        nsNativeWidget aNativeParent,
                                        const LayoutDeviceIntRect& aRect,
                                        nsWidgetInitData* aInitData = nullptr)

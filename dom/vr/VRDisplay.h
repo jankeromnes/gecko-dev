@@ -38,10 +38,10 @@ class Navigator;
 class VRFieldOfView final : public nsWrapperCache
 {
 public:
-  VRFieldOfView(nsISupports* aParent,
+  VRFieldOfView(nsISupports* apparent,
                 double aUpDegrees, double aRightDegrees,
                 double aDownDegrees, double aLeftDegrees);
-  VRFieldOfView(nsISupports* aParent, const gfx::VRFieldOfView& aSrc);
+  VRFieldOfView(nsISupports* apparent, const gfx::VRFieldOfView& aSrc);
 
   NS_INLINE_DECL_CYCLE_COLLECTING_NATIVE_REFCOUNTING(VRFieldOfView)
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_NATIVE_CLASS(VRFieldOfView)
@@ -68,8 +68,8 @@ protected:
 class VRDisplayCapabilities final : public nsWrapperCache
 {
 public:
-  VRDisplayCapabilities(nsISupports* aParent, const gfx::VRDisplayCapabilityFlags& aFlags)
-    : mParent(aParent)
+  VRDisplayCapabilities(nsISupports* apparent, const gfx::VRDisplayCapabilityFlags& aFlags)
+    : mParent(apparent)
     , mFlags(aFlags)
   {
   }
@@ -100,8 +100,8 @@ class VRPose final : public Pose
 {
 
 public:
-  VRPose(nsISupports* aParent, const gfx::VRHMDSensorState& aState);
-  explicit VRPose(nsISupports* aParent);
+  VRPose(nsISupports* apparent, const gfx::VRHMDSensorState& aState);
+  explicit VRPose(nsISupports* apparent);
 
   virtual void GetPosition(JSContext* aCx,
                            JS::MutableHandle<JSObject*> aRetval,
@@ -163,7 +163,7 @@ public:
   NS_INLINE_DECL_CYCLE_COLLECTING_NATIVE_REFCOUNTING(VRFrameData)
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_NATIVE_CLASS(VRFrameData)
 
-  explicit VRFrameData(nsISupports* aParent);
+  explicit VRFrameData(nsISupports* apparent);
   static already_AddRefed<VRFrameData> Constructor(const GlobalObject& aGlobal,
                                                    ErrorResult& aRv);
 
@@ -209,7 +209,7 @@ protected:
 class VRStageParameters final : public nsWrapperCache
 {
 public:
-  VRStageParameters(nsISupports* aParent,
+  VRStageParameters(nsISupports* apparent,
                     const gfx::Matrix4x4& aSittingToStandingTransform,
                     const gfx::Size& aSize);
 
@@ -238,7 +238,7 @@ protected:
 class VREyeParameters final : public nsWrapperCache
 {
 public:
-  VREyeParameters(nsISupports* aParent,
+  VREyeParameters(nsISupports* apparent,
                   const gfx::Point3D& aEyeTranslation,
                   const gfx::VRFieldOfView& aFOV,
                   const gfx::IntSize& aRenderSize);
@@ -274,7 +274,7 @@ public:
   NS_INLINE_DECL_CYCLE_COLLECTING_NATIVE_REFCOUNTING(VRSubmitFrameResult)
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_NATIVE_CLASS(VRSubmitFrameResult)
 
-  explicit VRSubmitFrameResult(nsISupports* aParent);
+  explicit VRSubmitFrameResult(nsISupports* apparent);
   static already_AddRefed<VRSubmitFrameResult> Constructor(const GlobalObject& aGlobal,
                                                            ErrorResult& aRv);
 

@@ -106,8 +106,8 @@ impl<'a> BufReader<'a> {
  * { end, extra_end, bounds }
  *
  * - end is the offset of the end of an item's data
- *   an item's data goes from the begining of the stream or
- *   the begining of the last item til end
+ *   an item's data goes from the beginning of the stream or
+ *   the beginning of the last item til end
  * - extra_end is the offset of the end of an item's extra data
  *   an item's extra data goes from 'end' until 'extra_end'
  * - bounds is a set of 4 ints {x1, y1, x2, y2 }

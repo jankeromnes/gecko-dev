@@ -339,7 +339,7 @@ void BweTest::RunFairnessTest(BandwidthEstimatorType bwe_type,
     metric_recorders[media_flow]->set_start_computing_metrics_ms(max_offset_ms);
   }
   // Delays is not being plotted only for TCP flows. To plot all of them,
-  // replace first "false" occurence with "true" on new PacketReceiver().
+  // replace first "false" occurrence with "true" on new PacketReceiver().
   for (int tcp_flow : tcp_flow_ids) {
     metric_recorders.push_back(
         new MetricRecorder(bwe_names[kTcpEstimator], static_cast<int>(tcp_flow),
@@ -823,7 +823,7 @@ void BweTest::RunMultipleShortTcpFairness(
   }
 
   // Delays is not being plotted only for TCP flows. To plot all of them,
-  // replace first "false" occurence with "true" on new PacketReceiver().
+  // replace first "false" occurrence with "true" on new PacketReceiver().
   for (size_t id : kAllTcpFlowIds) {
     metric_recorders[id].reset(
         new MetricRecorder(bwe_names[kTcpEstimator], static_cast<int>(id),

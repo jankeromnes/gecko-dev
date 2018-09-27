@@ -256,10 +256,10 @@ protected:
   }
 
   nsMutationReceiverBase(nsINode* aRegisterTarget,
-                         nsMutationReceiverBase* aParent)
+                         nsMutationReceiverBase* apparent)
     : mTarget(nullptr)
     , mObserver(nullptr)
-    , mParent(aParent)
+    , mParent(apparent)
     , mRegisterTarget(aRegisterTarget)
     , mKungFuDeathGrip(aParent->Target())
     , mSubtree(false)
@@ -358,9 +358,9 @@ public:
   }
 
   static nsMutationReceiver* Create(nsINode* aRegisterTarget,
-                                    nsMutationReceiverBase* aParent)
+                                    nsMutationReceiverBase* apparent)
   {
-    nsMutationReceiver* r = new nsMutationReceiver(aRegisterTarget, aParent);
+    nsMutationReceiver* r = new nsMutationReceiver(aRegisterTarget, apparent);
     aParent->AddClone(r);
     r->AddObserver();
     return r;
@@ -417,10 +417,10 @@ public:
 protected:
   nsMutationReceiver(nsINode* aTarget, nsDOMMutationObserver* aObserver);
 
-  nsMutationReceiver(nsINode* aRegisterTarget, nsMutationReceiverBase* aParent)
-  : nsMutationReceiverBase(aRegisterTarget, aParent)
+  nsMutationReceiver(nsINode* aRegisterTarget, nsMutationReceiverBase* apparent)
+  : nsMutationReceiverBase(aRegisterTarget, apparent)
   {
-    NS_ASSERTION(!static_cast<nsMutationReceiver*>(aParent)->GetParent(),
+    NS_ASSERTION(!static_cast<nsMutationReceiver*>(apparent)->GetParent(),
                  "Shouldn't create deep observer hierarchies!");
   }
 
@@ -442,9 +442,9 @@ public:
   }
 
   static nsAnimationReceiver* Create(nsINode* aRegisterTarget,
-                                     nsMutationReceiverBase* aParent)
+                                     nsMutationReceiverBase* apparent)
   {
-    nsAnimationReceiver* r = new nsAnimationReceiver(aRegisterTarget, aParent);
+    nsAnimationReceiver* r = new nsAnimationReceiver(aRegisterTarget, apparent);
     aParent->AddClone(r);
     r->AddObserver();
     return r;
@@ -462,8 +462,8 @@ protected:
   nsAnimationReceiver(nsINode* aTarget, nsDOMMutationObserver* aObserver)
     : nsMutationReceiver(aTarget, aObserver) {}
 
-  nsAnimationReceiver(nsINode* aRegisterTarget, nsMutationReceiverBase* aParent)
-    : nsMutationReceiver(aRegisterTarget, aParent) {}
+  nsAnimationReceiver(nsINode* aRegisterTarget, nsMutationReceiverBase* apparent)
+    : nsMutationReceiver(aRegisterTarget, apparent) {}
 
   virtual void AddMutationObserver() override
   {

@@ -60,7 +60,7 @@ public:
   static already_AddRefed<GetFileOrDirectoryTaskParent>
   Create(FileSystemBase* aFileSystem,
          const FileSystemGetFileOrDirectoryParams& aParam,
-         FileSystemRequestParent* aParent,
+         FileSystemRequestParent* apparent,
          ErrorResult& aRv);
 
   nsresult
@@ -76,7 +76,7 @@ protected:
 private:
   GetFileOrDirectoryTaskParent(FileSystemBase* aFileSystem,
                                const FileSystemGetFileOrDirectoryParams& aParam,
-                               FileSystemRequestParent* aParent);
+                               FileSystemRequestParent* apparent);
 
   nsCOMPtr<nsIFile> mTargetPath;
 

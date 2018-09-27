@@ -180,7 +180,7 @@ struct lutType { // used by lut8Type/lut16Type (mft2) only
 	float table_data[];
 };
 #if 0
-/* this is from an intial idea of having the struct correspond to the data in
+/* this is from an initial idea of having the struct correspond to the data in
  * the file. I decided that it wasn't a good idea.
  */
 struct tag_value {

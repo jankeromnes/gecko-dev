@@ -153,7 +153,7 @@ void OnSetDirAttr(mozilla::dom::Element* aElement,
  * NodeAncestorHasDirAuto flag and set the direction of the element and its
  * ancestors if necessary
  */
-void SetDirOnBind(mozilla::dom::Element* aElement, nsIContent* aParent);
+void SetDirOnBind(mozilla::dom::Element* aElement, nsIContent* apparent);
 
 /**
  * Called when unbinding an element from the tree, to recompute the

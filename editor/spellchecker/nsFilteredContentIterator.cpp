@@ -226,13 +226,13 @@ nsFilteredContentIterator::Last()
 // ContentToParentOffset: returns the content node's parent and offset.
 //
 static void
-ContentToParentOffset(nsIContent* aContent, nsIContent** aParent,
+ContentToParentOffset(nsIContent* aContent, nsIContent** apparent,
                       int32_t* aOffset)
 {
-  if (!aParent || !aOffset)
+  if (!apparent || !aOffset)
     return;
 
-  *aParent = nullptr;
+  *apparent = nullptr;
   *aOffset  = 0;
 
   if (!aContent)
@@ -243,7 +243,7 @@ ContentToParentOffset(nsIContent* aContent, nsIContent** aParent,
     return;
 
   *aOffset = parent->ComputeIndexOf(aContent);
-  parent.forget(aParent);
+  parent.forget(apparent);
 }
 
 ///////////////////////////////////////////////////////////////////////////

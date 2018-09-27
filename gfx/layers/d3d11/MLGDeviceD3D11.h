@@ -63,7 +63,7 @@ private:
 class MLGSwapChainD3D11 final : public MLGSwapChain
 {
 public:
-  static RefPtr<MLGSwapChainD3D11> Create(MLGDeviceD3D11* aParent,
+  static RefPtr<MLGSwapChainD3D11> Create(MLGDeviceD3D11* apparent,
                                           ID3D11Device* aDevice,
                                           widget::CompositorWidget* aWidget);
 
@@ -76,7 +76,7 @@ public:
   void Destroy() override;
 
 private:
-  MLGSwapChainD3D11(MLGDeviceD3D11* aParent, ID3D11Device* aDevice);
+  MLGSwapChainD3D11(MLGDeviceD3D11* apparent, ID3D11Device* aDevice);
   ~MLGSwapChainD3D11() override;
 
   bool Initialize(widget::CompositorWidget* aWidget);

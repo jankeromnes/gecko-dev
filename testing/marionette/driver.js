@@ -593,7 +593,7 @@ GeckoDriver.prototype.listeningPromise = function() {
  *   are implicitly trusted on navigation for the duration of the session.
  *
  *  <dt><code>timeouts</code> (Timeouts object)
- *  <dd>Describes the timeouts imposed on certian session operations.
+ *  <dd>Describes the timeouts imposed on certain session operations.
  *
  *  <dt><code>proxy</code> (Proxy object)
  *  <dd>Defines the proxy configuration.
@@ -644,7 +644,7 @@ GeckoDriver.prototype.listeningPromise = function() {
  *   <code>proxyType</code> is "<tt>manual</tt>".
  *
  *  <dt><code>noProxy</code> (string)
- *  <dd>Lists the adress for which the proxy should be bypassed when
+ *  <dd>Lists the address for which the proxy should be bypassed when
  *   the <code>proxyType</code> is "<tt>manual</tt>".  Must be a JSON
  *   List containing any number of any of domains, IPv4 addresses, or IPv6
  *   addresses.

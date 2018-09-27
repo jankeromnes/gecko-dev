@@ -75,7 +75,7 @@ enum CaptureState {
 //
 // Assumption:
 //   The Start() and Stop() methods are called by a single thread (E.g., the
-//   media engine thread). Hence, the VideoCapture subclasses dont need to be
+//   media engine thread). Hence, the VideoCapture subclasses don't need to be
 //   thread safe.
 //
 class VideoCapturer : public sigslot::has_slots<>,

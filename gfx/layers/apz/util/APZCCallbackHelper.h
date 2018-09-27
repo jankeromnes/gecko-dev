@@ -105,7 +105,7 @@ public:
                                            const ScrollableLayerGuid& aGuid);
 
     /* Same as above, but operates on LayoutDeviceIntPoint.
-       Requires an additonal |aScale| parameter to convert between CSS and
+       Requires an additional |aScale| parameter to convert between CSS and
        LayoutDevice space. */
     static mozilla::LayoutDeviceIntPoint
     ApplyCallbackTransform(const LayoutDeviceIntPoint& aPoint,

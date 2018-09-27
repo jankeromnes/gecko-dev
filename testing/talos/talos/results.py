@@ -220,7 +220,7 @@ class PageloaderResults(Results):
 
     def __init__(self, string, counter_results=None, format_pagename=True):
         """
-        - string : string of relevent part of browser dump
+        - string : string of relevant part of browser dump
         - counter_results : counter results dictionary
         """
 

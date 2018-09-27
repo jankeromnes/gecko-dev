@@ -643,7 +643,7 @@ public class DoubleMetaphone implements StringEncoder {
         } else if ((index == 0 && contains(value, index + 1, 1, "M", "N", "L", "W")) || contains(value, index + 1, 1, "Z")) {
             //-- german & anglicisations, e.g. "smith" match "schmidt" //
             // "snider" match "schneider" --//
-            //-- also, -sz- in slavic language altho in hungarian it //
+            //-- also, -sz- in slavic language although in hungarian it //
             //   is pronounced "s" --//
             result.append('S', 'X');
             index = contains(value, index + 1, 1, "Z") ? index + 2 : index + 1;
@@ -885,7 +885,7 @@ public class DoubleMetaphone implements StringEncoder {
 
     /**
      * Determines whether or not a value is of slavo-germanic orgin. A value is
-     * of slavo-germanic origin if it contians any of 'W', 'K', 'CZ', or 'WITZ'.
+     * of slavo-germanic origin if it contains any of 'W', 'K', 'CZ', or 'WITZ'.
      */
     private boolean isSlavoGermanic(String value) {
         return value.indexOf('W') > -1 || value.indexOf('K') > -1 || 

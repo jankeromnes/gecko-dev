@@ -20,14 +20,14 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(GridTrack)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-GridTrack::GridTrack(GridTracks* aParent)
-  : mParent(aParent)
+GridTrack::GridTrack(GridTracks* apparent)
+  : mParent(apparent)
   , mStart(0.0)
   , mBreadth(0.0)
   , mType(GridDeclaration::Implicit)
   , mState(GridTrackState::Static)
 {
-  MOZ_ASSERT(aParent, "Should never be instantiated with a null GridTracks");
+  MOZ_ASSERT(apparent, "Should never be instantiated with a null GridTracks");
 }
 
 GridTrack::~GridTrack()

@@ -203,13 +203,13 @@ public:
     NS_DECL_ISUPPORTS_INHERITED
     NS_DECL_NSPIWIDGETCOCOA
 
-    virtual MOZ_MUST_USE nsresult Create(nsIWidget* aParent,
+    virtual MOZ_MUST_USE nsresult Create(nsIWidget* apparent,
                                          nsNativeWidget aNativeParent,
                                          const DesktopIntRect& aRect,
                                          nsWidgetInitData* aInitData = nullptr)
                                          override;
 
-    virtual MOZ_MUST_USE nsresult Create(nsIWidget* aParent,
+    virtual MOZ_MUST_USE nsresult Create(nsIWidget* apparent,
                                          nsNativeWidget aNativeParent,
                                          const LayoutDeviceIntRect& aRect,
                                          nsWidgetInitData* aInitData = nullptr)

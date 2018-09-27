@@ -14,7 +14,7 @@ const HEADLESS_URL = `${BASE}/headless.html`;
 const HEADLESS_BUTTON_URL = `${BASE}/headless_button.html`;
 registerCleanupFunction(() => { server.stop(() => {})});
 
-// Refrences to the progress listeners to keep them from being gc'ed
+// References to the progress listeners to keep them from being gc'ed
 // before they are called.
 const progressListeners = new Map();
 

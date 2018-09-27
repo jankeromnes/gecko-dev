@@ -63,7 +63,7 @@ public:
    * Ctor for creating the objects returned by SVGSVGElement.createSVGNumber(),
    * which do not initially belong to an attribute.
    */
-  explicit DOMSVGNumber(nsISupports* aParent);
+  explicit DOMSVGNumber(nsISupports* apparent);
 
   /**
    * Create an unowned copy. The caller is responsible for the first AddRef().

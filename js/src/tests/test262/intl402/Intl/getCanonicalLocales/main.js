@@ -3,7 +3,7 @@
 
 /*---
 esid: sec-intl.getcanonicallocales
-description: Tests for existance and behavior of Intl.getCanonicalLocales
+description: Tests for existence and behavior of Intl.getCanonicalLocales
 info: |
   8.2.1 Intl.getCanonicalLocales (locales)
   1. Let ll be ? CanonicalizeLocaleList(locales).

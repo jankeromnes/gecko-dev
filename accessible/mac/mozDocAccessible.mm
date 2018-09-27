@@ -65,7 +65,7 @@ getNativeViewFromRootAccessible(Accessible* aAccessible)
 }
 
 
-// return the AXParent that our parallell NSView tells us about.
+// return the AXParent that our parallel NSView tells us about.
 - (id)parent
 {
   NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NIL;
@@ -87,7 +87,7 @@ getNativeViewFromRootAccessible(Accessible* aAccessible)
   return YES;
 }
 
-// this will return our parallell NSView. see mozDocAccessible.h
+// this will return our parallel NSView. see mozDocAccessible.h
 - (id)representedView
 {
   NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NIL;

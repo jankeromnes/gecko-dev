@@ -451,7 +451,7 @@ def make_comparison_result(base_and_reference_results):
                              'base_runs': base_result_runs,
                              'ref_runs': ref_result_runs})
 
-        # now step thru each result, compare 'base' vs 'ref', and store the difference in 'runs'
+        # now step through each result, compare 'base' vs 'ref', and store the difference in 'runs'
         _index = 0
         for next_ref in comp_results[subtest_index]['ref_runs']:
             diff = abs(next_ref - comp_results[subtest_index]['base_runs'][_index])

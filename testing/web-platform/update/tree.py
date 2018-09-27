@@ -20,7 +20,7 @@ class HgTree(wptupdate.tree.HgTree):
 class GitTree(wptupdate.tree.GitTree):
     def __init__(self, *args, **kwargs):
         """Extension of the basic GitTree with extra methods for
-        transfering patches"""
+        transferring patches"""
         commit_cls = kwargs.pop("commit_cls", Commit)
         wptupdate.tree.GitTree.__init__(self, *args, **kwargs)
         self.commit_cls = commit_cls
@@ -58,7 +58,7 @@ class GitTree(wptupdate.tree.GitTree):
         return [self.commit_cls(self, sha1) for sha1 in data.split("\0")]
 
     def log(self, base_commit=None, path=None):
-        """List commits touching a certian path from a given base commit.
+        """List commits touching a certain path from a given base commit.
 
         :base_param commit: Commit object for the base commit from which to log
         :param path: Path that the commits must touch

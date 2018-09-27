@@ -246,7 +246,7 @@ class SessionHistoryListener extends Handler {
     // We want to send down a historychange even for full collects in case our
     // session history is a partial session history, in which case we don't have
     // enough information for a full update. collectFrom(-1) tells the collect
-    // function to collect all data avaliable in this process.
+    // function to collect all data available in this process.
     if (this.mm.docShell) {
       this.collectFrom(-1);
     }
@@ -254,11 +254,11 @@ class SessionHistoryListener extends Handler {
 
   // History can grow relatively big with the nested elements, so if we don't have to, we
   // don't want to send the entire history all the time. For a simple optimization
-  // we keep track of the smallest index from after any change has occured and we just send
+  // we keep track of the smallest index from after any change has occurred and we just send
   // the elements from that index. If something more complicated happens we just clear it
   // and send the entire history. We always send the additional info like the current selected
   // index (so for going back and forth between history entries we set the index to kLastIndex
-  // if nothing else changed send an empty array and the additonal info like the selected index)
+  // if nothing else changed send an empty array and the additional info like the selected index)
   collectFrom(idx) {
     if (this._fromIdx <= idx) {
       // If we already know that we need to update history fromn index N we can ignore any changes

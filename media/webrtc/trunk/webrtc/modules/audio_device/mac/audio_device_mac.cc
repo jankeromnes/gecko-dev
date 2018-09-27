@@ -671,7 +671,7 @@ int32_t AudioDeviceMac::MicrophoneBoostIsAvailable(bool& available) {
   bool isAvailable(false);
   bool wasInitialized = _mixerManager.MicrophoneIsInitialized();
 
-  // Enumerate all avaliable microphone and make an attempt to open up the
+  // Enumerate all available microphone and make an attempt to open up the
   // input mixer corresponding to the currently selected input device.
   //
   if (!wasInitialized && InitMicrophone() == -1) {
@@ -899,7 +899,7 @@ int32_t AudioDeviceMac::SetPlayoutDevice(uint16_t index) {
   uint32_t nDevices = GetNumberDevices(kAudioDevicePropertyScopeOutput,
                                        playDevices, MaxNumberDevices);
   WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
-               "  number of availiable waveform-audio output devices is %u",
+               "  number of available waveform-audio output devices is %u",
                nDevices);
 
   if (index > (nDevices - 1)) {
@@ -972,7 +972,7 @@ int32_t AudioDeviceMac::SetRecordingDevice(uint16_t index) {
   uint32_t nDevices = GetNumberDevices(kAudioDevicePropertyScopeInput,
                                        recDevices, MaxNumberDevices);
   WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
-               "  number of availiable waveform-audio input devices is %u",
+               "  number of available waveform-audio input devices is %u",
                nDevices);
 
   if (index > (nDevices - 1)) {

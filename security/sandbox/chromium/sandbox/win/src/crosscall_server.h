@@ -205,7 +205,7 @@ class Dispatcher {
   // that can handle it.
   virtual Dispatcher* OnMessageReady(IPCParams* ipc, CallbackGeneric* callback);
 
-  // Called when a target proces is created, to setup the interceptions related
+  // Called when a target process is created, to setup the interceptions related
   // with the given service (IPC).
   virtual bool SetupService(InterceptionManager* manager, int service) = 0;
 

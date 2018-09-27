@@ -54,7 +54,7 @@ class CodespellProcess(ProcessHandlerMixin):
             print('Unable to match regex against output: {}'.format(line))
             return
 
-        # Ignore false positive like aParent (which would be fixed to apparent)
+        # Ignore false positive like apparent (which would be fixed to apparent)
         # See https://github.com/lucasdemarchi/codespell/issues/314
         m = re.match(r'^[a-z][A-Z][a-z]*', typo)
         if m:

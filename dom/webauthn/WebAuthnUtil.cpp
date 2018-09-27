@@ -22,7 +22,7 @@ const uint8_t FLAG_TUP = 0x01; // Test of User Presence required
 const uint8_t FLAG_AT = 0x40; // Authenticator Data is provided
 
 bool
-EvaluateAppID(nsPIDOMWindowInner* aParent, const nsString& aOrigin,
+EvaluateAppID(nsPIDOMWindowInner* apparent, const nsString& aOrigin,
               const U2FOperation& aOp, /* in/out */ nsString& aAppId)
 {
   // Facet is the specification's way of referring to the web origin.

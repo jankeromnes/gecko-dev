@@ -349,16 +349,16 @@ HTMLTrackElement::LoadResource()
 
 nsresult
 HTMLTrackElement::BindToTree(nsIDocument* aDocument,
-                             nsIContent* aParent,
+                             nsIContent* apparent,
                              nsIContent* aBindingParent)
 {
   nsresult rv = nsGenericHTMLElement::BindToTree(aDocument,
-                                                 aParent,
+                                                 apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
   LOG(LogLevel::Debug, ("Track Element bound to tree."));
-  auto* parent = HTMLMediaElement::FromNodeOrNull(aParent);
+  auto* parent = HTMLMediaElement::FromNodeOrNull(apparent);
   if (!parent) {
     return NS_OK;
   }

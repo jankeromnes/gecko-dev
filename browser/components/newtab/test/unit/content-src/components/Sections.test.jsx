@@ -304,7 +304,7 @@ describe("<Section>", () => {
       renderSection(props);
       assert.notCalled(dispatch);
     });
-    it("should send 1 impression when the page becomes visibile after loading", () => {
+    it("should send 1 impression when the page becomes visible after loading", () => {
       const props = {
         dispatch: sinon.spy(),
         document: {

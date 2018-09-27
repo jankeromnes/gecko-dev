@@ -17,7 +17,7 @@ In chronological order:
 
   - Improved compression efficiency.
 
-- Jim Carreer (@jimcarreer)
+- Jim Career (@jimcarreer)
 
   - Support for 'never indexed' header fields.
   - Refactor of header table code.

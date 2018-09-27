@@ -776,7 +776,7 @@ function defaultClearTimeout () {
 } ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
+        //normal environments in sane situations
         return setTimeout(fun, 0);
     }
     // if setTimeout wasn't available but was latter defined
@@ -801,7 +801,7 @@ function runTimeout(fun) {
 }
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
+        //normal environments in sane situations
         return clearTimeout(marker);
     }
     // if clearTimeout wasn't available but was latter defined
@@ -1592,7 +1592,7 @@ function extractSymbol(path, symbols) {
   }
 
   if ((t.isStringLiteral(path) || t.isNumericLiteral(path)) && t.isMemberExpression(path.parentPath)) {
-    // We only need literals that are part of computed memeber expressions
+    // We only need literals that are part of computed member expressions
     const { start, end } = path.node.loc;
     symbols.literals.push({
       name: path.node.value,
@@ -16842,7 +16842,7 @@ convert.hwb.rgb = function (hwb) {
 	var f;
 	var n;
 
-	// wh + bl cant be > 1
+	// wh + bl can't be > 1
 	if (ratio > 1) {
 		wh /= ratio;
 		bl /= ratio;
@@ -22997,7 +22997,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * "implicit"
- * Variables added automaticly like "this" and "arguments"
+ * Variables added automatically like "this" and "arguments"
  *
  * "var"
  * Variables declared with "var" or non-block function declarations

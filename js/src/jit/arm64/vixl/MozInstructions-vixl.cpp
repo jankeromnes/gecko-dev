@@ -172,7 +172,7 @@ Instruction::IsStackPtrSync() const
 
 // Skip over a constant pool at |this| if there is one.
 //
-// If |this| is pointing to the artifical guard branch around a constant pool,
+// If |this| is pointing to the artificial guard branch around a constant pool,
 // return the instruction after the pool. Otherwise return |this| itself.
 //
 // This function does not skip constant pools with a natural guard branch. It

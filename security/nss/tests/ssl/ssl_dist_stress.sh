@@ -287,7 +287,7 @@ get_certrange()
   if [ -z "$FROM_CERT" ] ; then    # start new on top of the cert stack
       FROM_CERT=$GLOB_MAX_CERT
   elif [ `expr $FROM_CERT - $range + 1 ` -lt  0 ] ; then 
-          FROM_CERT=$GLOB_MAX_CERT # dont let it fall below 0 on the TO_CERT
+          FROM_CERT=$GLOB_MAX_CERT # don't let it fall below 0 on the TO_CERT
 
   fi
   TO_CERT=`expr $FROM_CERT - $range + 1 `

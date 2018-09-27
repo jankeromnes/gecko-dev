@@ -21,7 +21,7 @@
       ],
       'sources': [
         # As this test is written it could easily be made into an action.
-        # An acutal use case would have a number of these 'sources'.
+        # An actual use case would have a number of these 'sources'.
         '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)main<(EXECUTABLE_SUFFIX)',
       ],
       'rules': [

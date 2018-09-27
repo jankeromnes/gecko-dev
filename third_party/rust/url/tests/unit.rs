@@ -116,10 +116,10 @@ fn from_str() {
 
 #[test]
 fn parse_with_params() {
-    let url = Url::parse_with_params("http://testing.com/this?dont=clobberme",
+    let url = Url::parse_with_params("http://testing.com/this?don't=clobberme",
                                      &[("lang", "rust")]).unwrap();
 
-    assert_eq!(url.as_str(), "http://testing.com/this?dont=clobberme&lang=rust");
+    assert_eq!(url.as_str(), "http://testing.com/this?don't=clobberme&lang=rust");
 }
 
 #[test]

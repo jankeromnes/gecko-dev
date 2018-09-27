@@ -655,7 +655,7 @@
 <!ENTITY amp              "&#38;#38;" ><!--AMPERSAND -->
 <!ENTITY and              "&#x02227;" ><!--LOGICAL AND -->
 <!ENTITY andand           "&#x02A55;" ><!--TWO INTERSECTING LOGICAL AND -->
-<!ENTITY andd             "&#x02A5C;" ><!--LOGICAL AND WITH HORIZONTAL DASH -->
+<!ENTITY and             "&#x02A5C;" ><!--LOGICAL AND WITH HORIZONTAL DASH -->
 <!ENTITY andslope         "&#x02A58;" ><!--SLOPING LARGE AND -->
 <!ENTITY andv             "&#x02A5A;" ><!--LOGICAL AND WITH MIDDLE STEM -->
 <!ENTITY ang              "&#x02220;" ><!--ANGLE -->

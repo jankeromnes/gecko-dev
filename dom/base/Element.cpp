@@ -1627,32 +1627,32 @@ EditableInclusiveDescendantCount(nsIContent* aContent)
 }
 
 nsresult
-Element::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+Element::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                     nsIContent* aBindingParent)
 {
-  MOZ_ASSERT(aParent || aDocument, "Must have document if no parent!");
-  MOZ_ASSERT((NODE_FROM(aParent, aDocument)->OwnerDoc() == OwnerDoc()),
+  MOZ_ASSERT(apparent || aDocument, "Must have document if no parent!");
+  MOZ_ASSERT((NODE_FROM(apparent, aDocument)->OwnerDoc() == OwnerDoc()),
              "Must have the same owner document");
-  MOZ_ASSERT(!aParent || aDocument == aParent->GetUncomposedDoc(),
-             "aDocument must be current doc of aParent");
+  MOZ_ASSERT(!apparent || aDocument == apparent->GetUncomposedDoc(),
+             "aDocument must be current doc of apparent");
   MOZ_ASSERT(!IsInComposedDoc(), "Already have a document.  Unbind first!");
   MOZ_ASSERT(!IsInUncomposedDoc(), "Already have a document.  Unbind first!");
   // Note that as we recurse into the kids, they'll have a non-null parent.  So
   // only assert if our parent is _changing_ while we have a parent.
-  MOZ_ASSERT(!GetParent() || aParent == GetParent(),
+  MOZ_ASSERT(!GetParent() || apparent == GetParent(),
              "Already have a parent.  Unbind first!");
   MOZ_ASSERT(!GetBindingParent() ||
              aBindingParent == GetBindingParent() ||
-             (!aBindingParent && aParent &&
+             (!aBindingParent && apparent &&
               aParent->GetBindingParent() == GetBindingParent()),
              "Already have a binding parent.  Unbind first!");
   MOZ_ASSERT(aBindingParent != this,
              "Content must not be its own binding parent");
   MOZ_ASSERT(!IsRootOfNativeAnonymousSubtree() ||
-             aBindingParent == aParent,
+             aBindingParent == apparent,
              "Native anonymous content must have its parent as its "
              "own binding parent");
-  MOZ_ASSERT(aBindingParent || !aParent ||
+  MOZ_ASSERT(aBindingParent || !apparent ||
              aBindingParent == aParent->GetBindingParent(),
              "We should be passed the right binding parent");
 
@@ -1673,10 +1673,10 @@ Element::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
   }
   NS_ASSERTION(!aBindingParent || IsRootOfNativeAnonymousSubtree() ||
                !HasFlag(NODE_IS_IN_NATIVE_ANONYMOUS_SUBTREE) ||
-               (aParent && aParent->IsInNativeAnonymousSubtree()),
+               (apparent && apparent->IsInNativeAnonymousSubtree()),
                "Trying to re-bind content from native anonymous subtree to "
                "non-native anonymous parent!");
-  if (aParent) {
+  if (apparent) {
     if (aParent->IsInNativeAnonymousSubtree()) {
       SetFlags(NODE_IS_IN_NATIVE_ANONYMOUS_SUBTREE);
     }
@@ -1697,15 +1697,15 @@ Element::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
   bool hadParent = !!GetParentNode();
 
   // Now set the parent.
-  if (aParent) {
+  if (apparent) {
     if (!GetParent()) {
-      NS_ADDREF(aParent);
+      NS_ADDREF(apparent);
     }
-    mParent = aParent;
+    mParent = apparent;
   } else {
     mParent = aDocument;
   }
-  SetParentIsContent(aParent);
+  SetParentIsContent(apparent);
 
   // XXXbz sXBL/XBL2 issue!
 
@@ -1767,7 +1767,7 @@ Element::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
   //  because it has to happen after updating the parent pointer, but before
   //  recursively binding the kids.
   if (IsHTMLElement()) {
-    SetDirOnBind(this, aParent);
+    SetDirOnBind(this, apparent);
   }
 
   uint32_t editableDescendantCount = 0;
@@ -1866,7 +1866,7 @@ Element::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
   // postcondition asserts....  But we do want that, since things will
   // generally be quite broken when that happens.
   MOZ_ASSERT(aDocument == GetUncomposedDoc(), "Bound to wrong document");
-  MOZ_ASSERT(aParent == GetParent(), "Bound to wrong parent");
+  MOZ_ASSERT(apparent == GetParent(), "Bound to wrong parent");
   MOZ_ASSERT(aBindingParent == GetBindingParent(),
              "Bound to wrong binding parent");
 

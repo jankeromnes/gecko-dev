@@ -129,22 +129,22 @@ public:
   class Slice;
 
   /**
-   * Append aFrameList to this list.  If aParent is not null,
+   * Append aFrameList to this list.  If apparent is not null,
    * reparents the newly added frames.  Clears out aFrameList and
    * returns a list slice represening the newly-appended frames.
    */
-  Slice AppendFrames(nsContainerFrame* aParent, nsFrameList& aFrameList) {
-    return InsertFrames(aParent, LastChild(), aFrameList);
+  Slice AppendFrames(nsContainerFrame* apparent, nsFrameList& aFrameList) {
+    return InsertFrames(apparent, LastChild(), aFrameList);
   }
 
 
   /**
-   * Append aFrame to this list.  If aParent is not null,
+   * Append aFrame to this list.  If apparent is not null,
    * reparents the newly added frame.
    */
-  void AppendFrame(nsContainerFrame* aParent, nsIFrame* aFrame) {
+  void AppendFrame(nsContainerFrame* apparent, nsIFrame* aFrame) {
     nsFrameList temp(aFrame, aFrame);
-    AppendFrames(aParent, temp);
+    AppendFrames(apparent, temp);
   }
 
   /**
@@ -206,24 +206,24 @@ public:
 
   /**
    * Insert aFrame right after aPrevSibling, or prepend it to this
-   * list if aPrevSibling is null. If aParent is not null, also
+   * list if aPrevSibling is null. If apparent is not null, also
    * reparents newly-added frame. Note that this method always
    * sets the frame's nextSibling pointer.
    */
-  void InsertFrame(nsContainerFrame* aParent, nsIFrame* aPrevSibling,
+  void InsertFrame(nsContainerFrame* apparent, nsIFrame* aPrevSibling,
                    nsIFrame* aFrame) {
     nsFrameList temp(aFrame, aFrame);
-    InsertFrames(aParent, aPrevSibling, temp);
+    InsertFrames(apparent, aPrevSibling, temp);
   }
 
 
   /**
    * Inserts aFrameList into this list after aPrevSibling (at the beginning if
-   * aPrevSibling is null).  If aParent is not null, reparents the newly added
+   * aPrevSibling is null).  If apparent is not null, reparents the newly added
    * frames.  Clears out aFrameList and returns a list slice representing the
    * newly-inserted frames.
    */
-  Slice InsertFrames(nsContainerFrame* aParent, nsIFrame* aPrevSibling,
+  Slice InsertFrames(nsContainerFrame* apparent, nsIFrame* aPrevSibling,
                      nsFrameList& aFrameList);
 
   class FrameLinkEnumerator;
@@ -306,10 +306,10 @@ public:
   }
 
   /**
-   * Call SetParent(aParent) for each frame in this list.
-   * @param aParent the new parent frame, must be non-null
+   * Call SetParent(apparent) for each frame in this list.
+   * @param apparent the new parent frame, must be non-null
    */
-  void ApplySetParent(nsContainerFrame* aParent) const;
+  void ApplySetParent(nsContainerFrame* apparent) const;
 
   /**
    * If this frame list is non-empty then append it to aLists as the

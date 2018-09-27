@@ -125,7 +125,7 @@ StaticVertexBufferInterface *BufferD3D::getStaticVertexBuffer(const gl::VertexAt
     size_t sizeThreshold = std::max(getSize() * 4u, static_cast<size_t>(0x1000u));
 
     // If we're past the threshold, clear the buffer cache. Note that this will release buffers
-    // that are currenly bound, and in an edge case can even translate the same attribute twice
+    // that are currently bound, and in an edge case can even translate the same attribute twice
     // in the same draw call. It will not delete currently bound buffers, however, because they
     // are ref counted.
     if (currentTotalSize > sizeThreshold)

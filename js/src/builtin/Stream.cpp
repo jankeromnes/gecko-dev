@@ -4309,7 +4309,7 @@ ReadableByteStreamControllerEnqueueChunkToQueue(JSContext* cx,
 // Streams spec, 3.12.10. ReadableByteStreamControllerError ( controller, e )
 // Unified with 3.9.6 above.
 
-// Streams spec, 3.12.11. ReadableByteStreamControllerFillHeadPullIntoDescriptor ( controler, size, pullIntoDescriptor )
+// Streams spec, 3.12.11. ReadableByteStreamControllerFillHeadPullIntoDescriptor ( controller, size, pullIntoDescriptor )
 static void
 ReadableByteStreamControllerFillHeadPullIntoDescriptor(ReadableByteStreamController* controller, uint32_t size,
                                                        Handle<PullIntoDescriptor*> pullIntoDescriptor)

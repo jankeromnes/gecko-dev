@@ -25,7 +25,7 @@ using webrtc::rtcp::Rrtr;
 using webrtc::rtcp::VoipMetric;
 
 namespace webrtc {
-// Define comparision operators that shouldn't be needed in production,
+// Define comparison operators that shouldn't be needed in production,
 // but make testing matches more clear.
 bool operator==(const RTCPVoIPMetric& metric1, const RTCPVoIPMetric& metric2) {
   return metric1.lossRate == metric2.lossRate &&

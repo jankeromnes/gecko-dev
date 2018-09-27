@@ -35,7 +35,7 @@ RemoveIntersection(const _PrefixArray& inArray, _PrefixArray& outArray)
   }
 }
 
-// This fucntion removes elements from outArray by index specified in
+// This function removes elements from outArray by index specified in
 // removal array.
 static void
 RemoveElements(const nsTArray<uint32_t>& removal, _PrefixArray& outArray)
@@ -519,7 +519,7 @@ TEST(UrlClassifierTableUpdateV4, MultipleTableUpdates)
 
   GenerateUpdateData(false, pMap, nullptr, &checksum, tableUpdates);
 
-  // Generate thrid partial update
+  // Generate third partial update
   fArray.AppendElements(pArray);
   fArray.Sort();
   pArray.Clear();

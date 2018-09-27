@@ -12,7 +12,7 @@ const {
 
 /**
  * Sent with the 'mutations' event as part of an array of changes, used to
- * inform fronts of the type of change that occured.
+ * inform fronts of the type of change that occurred.
  */
 types.addDictType("animationMutationChange", {
   // The type of change ("added" or "removed").

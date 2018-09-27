@@ -39,7 +39,7 @@ def PrintPerfResult(measurement, trace, values, units, result_type='default',
         the output to caller.
 
     Returns:
-      String of the formated perf result.
+      String of the formatted perf result.
   """
   assert result_type in RESULT_TYPES, 'result type: %s is invalid' % result_type
 

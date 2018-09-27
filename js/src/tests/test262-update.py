@@ -70,7 +70,7 @@ def loadTest262Parser(test262Dir):
 def tryParseTestFile(test262parser, source, testName):
     """
     Returns the result of test262parser.parseTestRecord() or None if a parser
-    error occured.
+    error occurred.
 
     See <https://github.com/tc39/test262/blob/master/INTERPRETING.md> for an
     overview of the returned test attributes.

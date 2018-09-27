@@ -400,7 +400,7 @@ BroadcastChannel::Close()
     return;
   }
 
-  // We cannot call Shutdown() immediatelly because we could have some
+  // We cannot call Shutdown() immediately because we could have some
   // postMessage runnable already dispatched. Instead, we change the state to
   // StateClosed and we shutdown the actor asynchrounsly.
 

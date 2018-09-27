@@ -1066,7 +1066,7 @@ BrowserElementChild.prototype = {
   },
 
   /**
-   * Actually take a screenshot and foward the result up to our parent, given
+   * Actually take a screenshot and forward the result up to our parent, given
    * the desired maxWidth and maxHeight (in CSS pixels), and given the
    * DOMRequest ID associated with the request from the parent.
    */

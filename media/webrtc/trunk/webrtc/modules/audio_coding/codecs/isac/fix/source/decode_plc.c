@@ -459,7 +459,7 @@ void WebRtcIsacfix_DecodePlcImpl(int16_t *signal_out16,
   pitchGains_Q12[0] = (int16_t)(pitchGains_Q12[1] * 1010 >> 10);
 
 
-  /* most of the time either B or A are zero so seperating */
+  /* most of the time either B or A are zero so separating */
   if( (ISACdec_obj->plcstr_obj).B == 0 )
   {
     for( i = 0; i < FRAMESAMPLES_HALF; i++ )

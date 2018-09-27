@@ -33,8 +33,8 @@ public:
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(URL)
 
-  URL(nsISupports* aParent)
-    : mParent(aParent)
+  URL(nsISupports* apparent)
+    : mParent(apparent)
   {}
 
   // WebIDL methods

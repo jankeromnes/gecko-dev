@@ -114,7 +114,7 @@ public:
                                ErrorResult& aError) const;
 
 protected:
-  bool BuildClonedMessageDataForParent(nsIContentParent* aParent,
+  bool BuildClonedMessageDataForParent(nsIContentParent* apparent,
                                        StructuredCloneData& aData,
                                        ClonedMessageData& aClonedData);
   bool BuildClonedMessageDataForChild(nsIContentChild* aChild,

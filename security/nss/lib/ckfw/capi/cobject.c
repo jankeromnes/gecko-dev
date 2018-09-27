@@ -412,7 +412,7 @@ nss_ckcapi_UTF8ToWide(
 }
 
 /*
- * keep all the knowlege of how the internalObject is laid out in this function
+ * keep all the knowledge of how the internalObject is laid out in this function
  *
  * nss_ckcapi_FetchKeyContainer
  *

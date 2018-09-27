@@ -23,7 +23,7 @@ enum class U2FOperation
 };
 
 bool
-EvaluateAppID(nsPIDOMWindowInner* aParent, const nsString& aOrigin,
+EvaluateAppID(nsPIDOMWindowInner* apparent, const nsString& aOrigin,
               const U2FOperation& aOp, /* in/out */ nsString& aAppId);
 
 nsresult

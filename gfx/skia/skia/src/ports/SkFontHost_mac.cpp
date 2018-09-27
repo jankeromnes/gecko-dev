@@ -206,7 +206,7 @@ static CGAffineTransform MatrixToCGAffineTransform(const SkMatrix& matrix) {
 #define BITMAP_INFO_RGB (kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Host)
 
 /**
- * There does not appear to be a publicly accessable API for determining if lcd
+ * There does not appear to be a publicly accessible API for determining if lcd
  * font smoothing will be applied if we request it. The main issue is that if
  * smoothing is applied a gamma of 2.0 will be used, if not a gamma of 1.0.
  */
@@ -2149,7 +2149,7 @@ void SkTypeface_Mac::onFilterRec(SkScalerContextRec* rec) const {
     // [AA][yes-hint]: use CoreGraphic's LCD output and reduce it to a single
     // channel. This matches [LCD][yes-hint] in weight.
     // [LCD][no-hint]: curently unable to honor, and must pick which to respect.
-    // Currenly side with LCD, effectively ignoring the hinting setting.
+    // Currently side with LCD, effectively ignoring the hinting setting.
     // [LCD][yes-hint]: generate LCD using CoreGraphic's LCD output.
 
     if (rec->fMaskFormat == SkMask::kLCD16_Format) {
@@ -2540,7 +2540,7 @@ protected:
 
             // The assumption is that values produced by kCTFontVariationAxisNameKey and
             // kCGFontVariationAxisName will always be equal.
-            // If they are ever not, seach the project history for "get_tag_for_name".
+            // If they are ever not, search the project history for "get_tag_for_name".
             CFTypeRef axisName = CFDictionaryGetValue(axisInfoDict, kCTFontVariationAxisNameKey);
             if (!axisName || CFGetTypeID(axisName) != CFStringGetTypeID()) {
                 return nullptr;

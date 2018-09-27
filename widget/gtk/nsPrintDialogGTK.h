@@ -30,9 +30,9 @@ public:
   NS_DECL_ISUPPORTS
 
   NS_IMETHOD Init() override;
-  NS_IMETHOD Show(nsPIDOMWindowOuter *aParent, nsIPrintSettings *aSettings,
+  NS_IMETHOD Show(nsPIDOMWindowOuter *apparent, nsIPrintSettings *aSettings,
                   nsIWebBrowserPrint *aWebBrowserPrint) override;
-  NS_IMETHOD ShowPageSetup(nsPIDOMWindowOuter *aParent,
+  NS_IMETHOD ShowPageSetup(nsPIDOMWindowOuter *apparent,
                            nsIPrintSettings *aSettings) override;
 };
 

@@ -348,7 +348,7 @@ add_task(async function test_windows_zoneInformation() {
   let normalTargetFile = FileUtils.getFile("LocalAppData",
                                            ["xpcshell-download-test.txt"]);
 
-  // The template file name lenght is more than MAX_PATH characters. The final
+  // The template file name length is more than MAX_PATH characters. The final
   // full path will be shortened to MAX_PATH length by the createUnique call.
   let longTargetFile = FileUtils.getFile("LocalAppData",
                                          ["T".repeat(256) + ".txt"]);
@@ -1995,7 +1995,7 @@ add_task(async function test_blocked_applicationReputation_race() {
   let download;
 
   try {
-    // 1. Start the download and get a reference to the promise asociated with
+    // 1. Start the download and get a reference to the promise associated with
     //    the first attempt, before allowing the response to continue.
     download = await promiseStartDownload_tryToKeepPartialData();
     let firstAttempt = promiseDownloadStopped(download);

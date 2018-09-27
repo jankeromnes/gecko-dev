@@ -1,6 +1,6 @@
 /** Test for Bug 1012662 **/
 // This test is called from both test_bug1012662_editor.html and test_bug1012662_noeditor.html
-// This is to test that the code works both in the presence of a contentEditable node, and in the absense of one
+// This is to test that the code works both in the presence of a contentEditable node, and in the absence of one
 var WATCH_TIMEOUT = 300;
 
 // Some global variables to make the debug messages easier to track down

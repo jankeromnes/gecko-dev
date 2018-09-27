@@ -173,7 +173,7 @@ CompositorManagerChild::CreateSameProcessWidgetCompositorBridge(LayerManager* aL
   return bridge.forget();
 }
 
-CompositorManagerChild::CompositorManagerChild(CompositorManagerParent* aParent,
+CompositorManagerChild::CompositorManagerChild(CompositorManagerParent* apparent,
                                                uint64_t aProcessToken,
                                                uint32_t aNamespace)
   : mProcessToken(aProcessToken)
@@ -181,7 +181,7 @@ CompositorManagerChild::CompositorManagerChild(CompositorManagerParent* aParent,
   , mResourceId(0)
   , mCanSend(false)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   SetOtherProcessId(base::GetCurrentProcId());
   MessageLoop* loop = CompositorThreadHolder::Loop();

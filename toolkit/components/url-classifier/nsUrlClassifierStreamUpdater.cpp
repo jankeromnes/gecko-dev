@@ -34,7 +34,7 @@ using namespace mozilla;
 #define DEFAULT_RESPONSE_TIMEOUT_MS 15 * 1000
 #define DEFAULT_TIMEOUT_MS 60 * 1000
 static_assert(DEFAULT_TIMEOUT_MS > DEFAULT_RESPONSE_TIMEOUT_MS,
-  "General timeout must be greater than reponse timeout");
+  "General timeout must be greater than response timeout");
 
 static const char* gQuitApplicationMessage = "quit-application";
 

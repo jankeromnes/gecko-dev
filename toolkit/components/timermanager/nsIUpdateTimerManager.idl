@@ -29,7 +29,7 @@ interface nsIUpdateTimerManager : nsISupports
    *          The length of time, in seconds, of the interval
    *
    * Note: to avoid having to instantiate a component to call registerTimer
-   * the component can intead register an update-timer category with comma
+   * the component can instead register an update-timer category with comma
    * separated values as a single string:
    *
    * contractID,method,id,preference,interval

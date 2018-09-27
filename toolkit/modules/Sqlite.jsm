@@ -187,7 +187,7 @@ XPCOMUtils.defineLazyGetter(this, "Barriers", () => {
  *
  * To support auto-closing in the event of garbage collection, this
  * data structure contains all the connection data of an opened
- * connection and all of the methods needed for sucessfully closing
+ * connection and all of the methods needed for successfully closing
  * it.
  *
  * By putting this information in its own separate object, it is
@@ -1151,7 +1151,7 @@ function wrapStorageConnection(options) {
  * performance (either their own or wasting resources in the overall
  * application). Because of the performance considerations, it is recommended
  * to avoid `execute` unless the statement you are executing will only be
- * executed once or seldomly.
+ * executed once or seldom.
  *
  * `executeCached` is used to execute a statement that will presumably be
  * executed multiple times. The statement is parsed once and stuffed away

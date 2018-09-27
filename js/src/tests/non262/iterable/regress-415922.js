@@ -5,7 +5,7 @@
 
 //-----------------------------------------------------------------------------
 var BUGNUMBER = 415922;
-var summary = 'Support exception from withing JSNewEnumerateOp on JSENUMERATE_NEXT';
+var summary = 'Support exception from within JSNewEnumerateOp on JSENUMERATE_NEXT';
 var actual = 'No Error';
 var expect = 'Error: its enumeration failed';
 

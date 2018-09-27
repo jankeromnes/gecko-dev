@@ -308,7 +308,7 @@ impl NaiveDateTime {
     /// Note also that this does reduce the number of years that can be
     /// represented from ~584 Billion to ~584. (If this is a problem,
     /// please file an issue to let me know what domain needs nanosecond
-    /// precision over millenia, I'm curious.)
+    /// precision over millennia, I'm curious.)
     ///
     /// # Example
     ///

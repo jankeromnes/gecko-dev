@@ -28,8 +28,8 @@ the various releases.
     Release         Derived     Year        Owner       GPL-
                     from                                compatible? (1)
 
-    0.9.0 thru 1.2              1991-1995   CWI         yes
-    1.3 thru 1.5.2  1.2         1995-1999   CNRI        yes
+    0.9.0 through 1.2              1991-1995   CWI         yes
+    1.3 through 1.5.2  1.2         1995-1999   CNRI        yes
     1.6             1.5.2       2000        CNRI        no
     2.0             1.6         2000        BeOpen.com  no
     1.6.1           1.6         2001        CNRI        yes (2)

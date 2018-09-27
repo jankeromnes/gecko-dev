@@ -177,7 +177,7 @@ if [ -z "${INIT_SOURCED}" -o "${INIT_SOURCED}" != "TRUE" ]; then
         return $res
     }
 
-#html functions to give the resultfiles a consistant look
+#html functions to give the resultfiles a consistent look
     html() #########################    write the results.html file
     {      # 3 functions so we can put targets in the output.log easier
         echo $* >>${RESULTS}

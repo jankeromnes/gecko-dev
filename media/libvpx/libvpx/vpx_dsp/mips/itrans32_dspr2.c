@@ -971,7 +971,7 @@ void vpx_idct32x32_1024_add_dspr2(const int16_t *input, uint8_t *dest,
   int16_t *outptr = out;
   uint32_t pos = 45;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
                        :
                        : [pos] "r"(pos));
@@ -990,7 +990,7 @@ void vpx_idct32x32_34_add_dspr2(const int16_t *input, uint8_t *dest,
   uint32_t i;
   uint32_t pos = 45;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
                        :
                        : [pos] "r"(pos));
@@ -1050,7 +1050,7 @@ void vpx_idct32x32_1_add_dspr2(const int16_t *input, uint8_t *dest,
   int32_t vector_1, vector_2, vector_3, vector_4;
   uint32_t pos = 45;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
 
                        :

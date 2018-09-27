@@ -41,7 +41,7 @@ export class _Search extends React.PureComponent {
       // The "searchSource" needs to be "newtab" or "homepage" and is sent with
       // the search data and acts as context for the search request (See
       // nsISearchEngine.getSubmission). It is necessary so that search engine
-      // plugins can correctly atribute referrals. (See github ticket #3321 for
+      // plugins can correctly attribute referrals. (See github ticket #3321 for
       // more details)
       const searchSource = IS_NEWTAB ? "newtab" : "homepage";
 

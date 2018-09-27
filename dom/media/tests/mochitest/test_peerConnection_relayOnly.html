@@ -12,8 +12,8 @@ createHTML({
 });
 
 function PC_LOCAL_NO_CANDIDATES(test) {
-  var isnt = can => is(can, null, "No candidates: " + JSON.stringify(can));
-  test.pcLocal._pc.addEventListener("icecandidate", e => isnt(e.candidate));
+  var isn't = can => is(can, null, "No candidates: " + JSON.stringify(can));
+  test.pcLocal._pc.addEventListener("icecandidate", e => isn't(e.candidate));
 }
 
 function PC_BOTH_WAIT_FOR_ICE_FAILED(test) {

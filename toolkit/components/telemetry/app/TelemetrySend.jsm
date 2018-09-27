@@ -353,7 +353,7 @@ var SendScheduler = {
   // backoff timeout.
   _sendsFailed: false,
   // The current retry delay after ping send failures. We use this for the exponential backoff,
-  // increasing this value everytime we had send failures since the last tick.
+  // increasing this value every time we had send failures since the last tick.
   _backoffDelay: SEND_TICK_DELAY,
   _shutdown: false,
   _sendTask: null,

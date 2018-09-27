@@ -38,7 +38,7 @@ public:
   MessagePort* GetPort(ErrorResult& aRv) const;
 
 private:
-  explicit AudioWorkletProcessor(nsIGlobalObject* aParent);
+  explicit AudioWorkletProcessor(nsIGlobalObject* apparent);
   ~AudioWorkletProcessor() = default;
   nsCOMPtr<nsIGlobalObject> mParent;
 };

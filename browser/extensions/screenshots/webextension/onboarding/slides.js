@@ -15,7 +15,7 @@ this.slides = (function() {
 
   exports.display = function(addCallbacks) {
     if (iframe) {
-      throw new Error("Attemted to call slides.display() twice");
+      throw new Error("Attempted to call slides.display() twice");
     }
     return new Promise((resolve, reject) => {
       callbacks = addCallbacks;

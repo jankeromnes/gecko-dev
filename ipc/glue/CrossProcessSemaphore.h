@@ -60,7 +60,7 @@ public:
    * Decrements the current value of the semaphore. This will block if the
    * current value of the semaphore is 0, up to a maximum of aWaitTime (if
    * specified).
-   * Returns true if the semaphore was succesfully decremented, false otherwise.
+   * Returns true if the semaphore was successfully decremented, false otherwise.
    **/
   bool Wait(const Maybe<TimeDuration>& aWaitTime = Nothing());
 

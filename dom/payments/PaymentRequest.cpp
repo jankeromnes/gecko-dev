@@ -186,7 +186,7 @@ PaymentRequest::IsValidPaymentMethodIdentifier(const nsAString& aIdentifier,
   if (NS_FAILED(rv)) {
     // Handle the special cases that URLParser treats it as an invalid URL, but
     // are used in web-platform-test
-    // For exmaple:
+    // For example:
     //     https://:@example.com             // should be considered as valid
     //     https://:password@example.com.    // should be considered as invalid
     int32_t atPos = authority.FindChar('@');

@@ -569,9 +569,9 @@ var OutputGenerator = {
  * An utterance is an array of speech data.
  *
  * It should not be assumed that flattening an utterance array would create a
- * gramatically correct sentence. For example, {@link genForObject} might
+ * grammatically correct sentence. For example, {@link genForObject} might
  * return: ['graphic', 'Welcome to my home page'].
- * Each string element in an utterance should be gramatically correct in itself.
+ * Each string element in an utterance should be grammatically correct in itself.
  * Another example from {@link genForObject}: ['list item 2 of 5', 'Alabama'].
  *
  * An utterance is ordered from the least to the most important. Speaking the

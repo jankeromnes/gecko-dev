@@ -37,7 +37,7 @@ class CJBig2_GRRDProc {
   int32_t GRREFERENCEDX;
   int32_t GRREFERENCEDY;
   bool TPGRON;
-  int8_t GRAT[4];
+  int8_t GREAT[4];
 };
 
 #endif  // CORE_FXCODEC_JBIG2_JBIG2_GRRDPROC_H_

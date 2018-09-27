@@ -32,9 +32,9 @@ class HTMLEditRules;
 // Throughout I refer to LeadingWS, NormalWS, TrailingWS.  LeadingWS & TrailingWS
 // are runs of ascii ws that are insignificant (do not render) because they
 // are adjacent to block boundaries, or after a break.  NormalWS is ws that
-// does cause soem rendering.  Note that not all the ws in a NormalWS run need
+// does cause some rendering.  Note that not all the ws in a NormalWS run need
 // render.  For example, two ascii spaces surrounded by text on both sides
-// will only render as one space (in non-preformatted stlye html), yet both
+// will only render as one space (in non-preformatted style html), yet both
 // spaces count as NormalWS.  Together, they render as the one visible space.
 
 /**
@@ -177,14 +177,14 @@ public:
                                      int32_t aOffset = -1);
 
   // PrepareToJoinBlocks fixes up ws at the end of aLeftBlock and the
-  // beginning of aRightBlock in preperation for them to be joined.  Example
+  // beginning of aRightBlock in preparation for them to be joined.  Example
   // of fixup: trailingws in aLeftBlock needs to be removed.
   static nsresult PrepareToJoinBlocks(HTMLEditor* aHTMLEditor,
                                       dom::Element* aLeftBlock,
                                       dom::Element* aRightBlock);
 
   // PrepareToDeleteRange fixes up ws before {aStartNode,aStartOffset}
-  // and after {aEndNode,aEndOffset} in preperation for content
+  // and after {aEndNode,aEndOffset} in preparation for content
   // in that range to be deleted.  Note that the nodes and offsets
   // are adjusted in response to any dom changes we make while
   // adjusting ws.

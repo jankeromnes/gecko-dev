@@ -875,7 +875,7 @@ TEST_F(DtlsTransportChannelTest, TestDtlsReOfferFromAnswerer) {
   TestTransfer(1, 1000, 100, true);
 }
 
-// Test that any change in role after the intial setup will result in failure.
+// Test that any change in role after the initial setup will result in failure.
 TEST_F(DtlsTransportChannelTest, TestDtlsRoleReversal) {
   MAYBE_SKIP_TEST(HaveDtlsSrtp);
   SetChannelCount(2);

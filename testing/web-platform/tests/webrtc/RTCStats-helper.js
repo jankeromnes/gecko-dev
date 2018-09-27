@@ -99,7 +99,7 @@ function getRequiredStats(statsReport, type) {
 }
 
 // Get stats object by the stats ID.
-// This is used to retreive other stats objects
+// This is used to retrieve other stats objects
 // linked to a stats object
 function getStatsById(statsReport, statsId) {
   assert_true(statsReport.has(statsId),

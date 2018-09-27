@@ -1331,10 +1331,10 @@ ProcessHangMonitor::AddProcess(ContentParent* aContentParent)
 }
 
 /* static */ void
-ProcessHangMonitor::RemoveProcess(PProcessHangMonitorParent* aParent)
+ProcessHangMonitor::RemoveProcess(PProcessHangMonitorParent* apparent)
 {
   MOZ_RELEASE_ASSERT(NS_IsMainThread());
-  auto parent = static_cast<HangMonitorParent*>(aParent);
+  auto parent = static_cast<HangMonitorParent*>(apparent);
   parent->Shutdown();
   delete parent;
 }
@@ -1349,13 +1349,13 @@ ProcessHangMonitor::ClearHang()
 }
 
 /* static */ void
-ProcessHangMonitor::PaintWhileInterruptingJS(PProcessHangMonitorParent* aParent,
+ProcessHangMonitor::PaintWhileInterruptingJS(PProcessHangMonitorParent* apparent,
                                              dom::TabParent* aTabParent,
                                              bool aForceRepaint,
                                              const layers::LayersObserverEpoch& aEpoch)
 {
   MOZ_RELEASE_ASSERT(NS_IsMainThread());
-  auto parent = static_cast<HangMonitorParent*>(aParent);
+  auto parent = static_cast<HangMonitorParent*>(apparent);
   parent->PaintWhileInterruptingJS(aTabParent, aForceRepaint, aEpoch);
 }
 

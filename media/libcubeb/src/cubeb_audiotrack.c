@@ -50,7 +50,7 @@ void audiotrack_destroy(cubeb * context);
 void audiotrack_stream_destroy(cubeb_stream * stream);
 
 struct AudioTrack {
-  /* only available on ICS and later. The second int paramter is in fact of type audio_stream_type_t. */
+  /* only available on ICS and later. The second int parameter is in fact of type audio_stream_type_t. */
   /* static */ status_t (*get_min_frame_count)(int* frame_count, int stream_type, uint32_t rate);
   /* if we have a recent ctor, but can't find the above symbol, we
    * can get the minimum frame count with this signature, and we are

@@ -266,7 +266,7 @@ ContainerPrepare(ContainerT* aContainer,
 
       if (!surface) {
         // If we don't need a copy we can render to the intermediate now to avoid
-        // unecessary render target switching. This brings a big perf boost on mobile gpus.
+        // unnecessary render target switching. This brings a big perf boost on mobile gpus.
         surface = CreateOrRecycleTarget(aContainer, aManager);
 
         MOZ_PERFORMANCE_WARNING("gfx", "[%p] Container layer requires intermediate surface rendering\n", aContainer);

@@ -147,7 +147,7 @@ The configure script also supports the following flags:
 ## CMake (Windows)
 
 (Note that autoconf is currently the most mature and supported build
-enviroment for libevent; the cmake instructions here are new and
+environment for libevent; the cmake instructions here are new and
 experimental, though they _should_ be solid.  We hope that cmake will
 still be supported in future versions of Libevent, and will try to
 make sure that happens.)

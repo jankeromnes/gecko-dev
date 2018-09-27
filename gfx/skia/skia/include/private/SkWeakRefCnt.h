@@ -97,7 +97,7 @@ private:
 public:
     /** Creates a strong reference from a weak reference, if possible. The
         caller must already be an owner. If try_ref() returns true the owner
-        is in posession of an additional strong reference. Both the original
+        is in possession of an additional strong reference. Both the original
         reference and new reference must be properly unreferenced. If try_ref()
         returns false, no strong reference could be created and the owner's
         reference is in the same state as before the call.

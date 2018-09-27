@@ -7,7 +7,7 @@ from mozilla.prettyprinters import ptr_pretty_printer
 try:
     chr(10000)  # UPPER RIGHT PENCIL
 except ValueError as exc:  # yuck, we are in Python 2.x, so chr() is 8-bit
-    chr = unichr  # replace with teh unicodes
+    chr = unichr  # replace with the unicodes
 
 # Forget any printers from previous loads of this module.
 mozilla.prettyprinters.clear_module_printers(__name__)

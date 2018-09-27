@@ -83,7 +83,7 @@ typedef const unsigned short* FPDF_WIDESTRING;
 
 #ifdef PDF_ENABLE_XFA
 // Structure for a byte string.
-// Note, a byte string commonly means a UTF-16LE formated string.
+// Note, a byte string commonly means a UTF-16LE formatted string.
 typedef struct _FPDF_BSTR {
   // String buffer.
   char* str;
@@ -251,7 +251,7 @@ DLLEXPORT void STDCALL FPDF_SetPrintTextWithGDI(FPDF_BOOL use_gdi);
 //                              3 to print with postscript level 3.
 //                              All other values are invalid.
 // Return value:
-//          True if successful, false if unsucessful (typically invalid input).
+//          True if successful, false if unsuccessful (typically invalid input).
 DLLEXPORT FPDF_BOOL STDCALL
 FPDF_SetPrintPostscriptLevel(FPDF_BOOL postscript_level);
 #endif  // defined(_WIN32)

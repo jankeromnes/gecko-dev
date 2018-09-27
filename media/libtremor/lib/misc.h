@@ -107,7 +107,7 @@ STIN ogg_int32_t MULT31_SHIFT15(ogg_int32_t x, ogg_int32_t y) {
 
 /*
  * This should be used as a memory barrier, forcing all cached values in
- * registers to wr writen back to memory.  Might or might not be beneficial
+ * registers to wr written back to memory.  Might or might not be beneficial
  * depending on the architecture and compiler.
  */
 #define MB()

@@ -153,7 +153,7 @@ public:
                               nsIPrincipal* aMaybeScriptedPrincipal,
                               nsAttrValue& aResult) override;
 
-  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent) override;
   virtual void UnbindFromTree(bool aDeep = true,
                               bool aNullParent = true) override;
@@ -1263,7 +1263,7 @@ protected:
   // Seeks to aTime seconds. aSeekType can be Exact to seek to exactly the
   // seek target, or PrevSyncPoint if a quicker but less precise seek is
   // desired, and we'll seek to the sync point (keyframe and/or start of the
-  // next block of audio samples) preceeding seek target.
+  // next block of audio samples) preceding seek target.
   already_AddRefed<Promise> Seek(double aTime, SeekTarget::Type aSeekType, ErrorResult& aRv);
 
   // Update the audio channel playing state
@@ -1847,7 +1847,7 @@ private:
 
   // Media elements also have a default playback start position, which must
   // initially be set to zero seconds. This time is used to allow the element to
-  // be seeked even before the media is loaded.
+  // be sought even before the media is loaded.
   double mDefaultPlaybackStartPosition = 0.0;
 
   // True if media element has been marked as 'tainted' and can't

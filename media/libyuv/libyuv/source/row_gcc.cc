@@ -4865,7 +4865,7 @@ void ARGBSepiaRow_SSSE3(uint8_t* dst_argb, int width) {
 #endif  // HAS_ARGBSEPIAROW_SSSE3
 
 #ifdef HAS_ARGBCOLORMATRIXROW_SSSE3
-// Tranform 8 ARGB pixels (32 bytes) with color matrix.
+// Transform 8 ARGB pixels (32 bytes) with color matrix.
 // Same as Sepia except matrix is provided.
 void ARGBColorMatrixRow_SSSE3(const uint8_t* src_argb,
                               uint8_t* dst_argb,
@@ -6363,7 +6363,7 @@ void HalfFloat1Row_F16C(const uint16_t* src, uint16_t* dst, float, int width) {
 #endif  // HAS_HALFFLOATROW_F16C
 
 #ifdef HAS_ARGBCOLORTABLEROW_X86
-// Tranform ARGB pixels with color table.
+// Transform ARGB pixels with color table.
 void ARGBColorTableRow_X86(uint8_t* dst_argb,
                            const uint8_t* table_argb,
                            int width) {
@@ -6396,7 +6396,7 @@ void ARGBColorTableRow_X86(uint8_t* dst_argb,
 #endif  // HAS_ARGBCOLORTABLEROW_X86
 
 #ifdef HAS_RGBCOLORTABLEROW_X86
-// Tranform RGB pixels with color table.
+// Transform RGB pixels with color table.
 void RGBColorTableRow_X86(uint8_t* dst_argb,
                           const uint8_t* table_argb,
                           int width) {
@@ -6426,7 +6426,7 @@ void RGBColorTableRow_X86(uint8_t* dst_argb,
 #endif  // HAS_RGBCOLORTABLEROW_X86
 
 #ifdef HAS_ARGBLUMACOLORTABLEROW_SSSE3
-// Tranform RGB pixels with luma table.
+// Transform RGB pixels with luma table.
 void ARGBLumaColorTableRow_SSSE3(const uint8_t* src_argb,
                                  uint8_t* dst_argb,
                                  int width,

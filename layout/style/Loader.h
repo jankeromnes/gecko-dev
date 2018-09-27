@@ -582,7 +582,7 @@ private:
   // directly or indirectly @importing the sheet this SheetLoadData represents.
   void MarkLoadTreeFailed(SheetLoadData* aLoadData);
 
-  // If there's Referrer-Policy reponse header, the loading data and key should
+  // If there's Referrer-Policy response header, the loading data and key should
   // be updated with the referer policy parsed from the header.
   void UpdateLoadingData(URIPrincipalReferrerPolicyAndCORSModeHashKey* aOldKey,
                          SheetLoadData* aData);

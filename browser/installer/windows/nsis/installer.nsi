@@ -285,7 +285,7 @@ Section "-InstallStartCleanup"
     Delete "$INSTDIR\update-settings.ini"
   ${EndIf}
 
-  ; Explictly remove empty webapprt dir in case it exists (bug 757978).
+  ; Explicitly remove empty webapprt dir in case it exists (bug 757978).
   RmDir "$INSTDIR\webapprt\components"
   RmDir "$INSTDIR\webapprt"
 

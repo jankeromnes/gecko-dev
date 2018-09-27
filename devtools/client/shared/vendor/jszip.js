@@ -4,7 +4,7 @@ JSZip v3.1.3 - A Javascript class for generating and reading zip files
 <http://stuartk.com/jszip>
 
 (c) 2009-2016 Stuart Knightley <stuart [at] stuartk.com>
-Dual licenced under the MIT license or GPLv3. See https://raw.github.com/Stuk/jszip/master/LICENSE.markdown.
+Dual licensed under the MIT license or GPLv3. See https://raw.github.com/Stuk/jszip/master/LICENSE.markdown.
 
 JSZip uses the library pako released under the MIT license :
 https://github.com/nodeca/pako/blob/master/LICENSE
@@ -743,7 +743,7 @@ function ZipFileWorker(streamFiles, comment, platform, encodeFileName) {
     // The total number of entries in this zip file.
     this.entriesCount = 0;
     // the name of the file currently being added, null when handling the end of the zip file.
-    // Used for the emited metadata.
+    // Used for the emitted metadata.
     this.currentFile = null;
 
 
@@ -1628,7 +1628,7 @@ var out = {
           opts.type = opts.type.toLowerCase();
           opts.compression = opts.compression.toUpperCase();
 
-          // "binarystring" is prefered but the internals use "string".
+          // "binarystring" is preferred but the internals use "string".
           if(opts.type === "binarystring") {
             opts.type = "string";
           }
@@ -1837,9 +1837,9 @@ DataReader.prototype = {
         // see implementations
     },
     /**
-     * Find the last occurence of a zip signature (4 bytes).
+     * Find the last occurrence of a zip signature (4 bytes).
      * @param {string} sig the signature to find.
-     * @return {number} the index of the last occurence, -1 if not found.
+     * @return {number} the index of the last occurrence, -1 if not found.
      */
     lastIndexOfSignature: function(sig) {
         // see implementations
@@ -5528,7 +5528,7 @@ Inflate.prototype.onEnd = function (status) {
   if (status === c.Z_OK) {
     if (this.options.to === 'string') {
       // Glue & convert here, until we teach pako to send
-      // utf8 alligned strings to onData
+      // utf8 aligned strings to onData
       this.result = this.chunks.join('');
     } else {
       this.result = utils.flattenChunks(this.chunks);

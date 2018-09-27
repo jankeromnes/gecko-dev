@@ -695,7 +695,7 @@ MacroAssemblerMIPS64::ma_bal(Label* label, DelaySlotFill delaySlotFill)
     // Second word holds a pointer to the next branch in label's chain.
     uint32_t nextInChain = label->used() ? label->offset() : LabelBase::INVALID_OFFSET;
 
-    // Make the whole branch continous in the buffer. The '6'
+    // Make the whole branch continuous in the buffer. The '6'
     // instructions are writing at below (contain delay slot).
     m_buffer.ensureSpace(6 * sizeof(uint32_t));
 
@@ -772,7 +772,7 @@ MacroAssemblerMIPS64::branchWithCode(InstImm code, Label* label, JumpKind jumpKi
     uint32_t nextInChain = label->used() ? label->offset() : LabelBase::INVALID_OFFSET;
 
     if (jumpKind == ShortJump) {
-        // Make the whole branch continous in the buffer.
+        // Make the whole branch continuous in the buffer.
         m_buffer.ensureSpace(2 * sizeof(uint32_t));
 
         // Indicate that this is short jump with offset 4.
@@ -790,7 +790,7 @@ MacroAssemblerMIPS64::branchWithCode(InstImm code, Label* label, JumpKind jumpKi
 
     bool conditional = code.encode() != inst_beq.encode();
 
-    // Make the whole branch continous in the buffer. The '7'
+    // Make the whole branch continuous in the buffer. The '7'
     // instructions are writing at below (contain conditional nop).
     m_buffer.ensureSpace(7 * sizeof(uint32_t));
 

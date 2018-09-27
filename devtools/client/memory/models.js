@@ -20,7 +20,7 @@ const {
 } = require("./constants");
 
 /**
- * ONLY USE THIS FOR MODEL VALIDATORS IN CONJUCTION WITH assert()!
+ * ONLY USE THIS FOR MODEL VALIDATORS IN CONJUNCTION WITH assert()!
  *
  * React checks that the returned values from validator functions are instances
  * of Error, but because React is loaded in its own global, that check is always
@@ -28,7 +28,7 @@ const {
  *
  * To work around this and still get model validation, just call assert() inside
  * a function passed to catchAndIgnore. The assert() function will still report
- * assertion failures, but this funciton will swallow the errors so that React
+ * assertion failures, but this function will swallow the errors so that React
  * doesn't go crazy and drown out the real error in irrelevant and incorrect
  * warnings.
  *

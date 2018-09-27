@@ -310,7 +310,7 @@ nsMultiplexInputStream::Close()
 {
   nsTArray<nsCOMPtr<nsIInputStream>> streams;
 
-  // Let's take a copy of the streams becuase, calling close() it could trigger
+  // Let's take a copy of the streams because, calling close() it could trigger
   // a nsIInputStreamCallback immediately and we don't want to create a deadlock
   // with mutex.
   {
@@ -717,7 +717,7 @@ nsMultiplexInputStream::Seek(int32_t aWhence, int64_t aOffset)
     for (uint32_t i = mStreams.Length() - 1; i != (uint32_t)-1; --i) {
       nsCOMPtr<nsISeekableStream> stream = mStreams[i].mSeekableStream;
 
-      // See if all remaining streams should be seeked to end
+      // See if all remaining streams should be sought to end
       if (remaining == 0) {
         if (i >= oldCurrentStream) {
           rv = stream->Seek(NS_SEEK_END, 0);

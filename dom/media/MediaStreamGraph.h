@@ -1287,7 +1287,7 @@ protected:
 
 /**
  * There is a single MediaStreamGraph per window.
- * Additionaly, each OfflineAudioContext object creates its own MediaStreamGraph
+ * Additionally, each OfflineAudioContext object creates its own MediaStreamGraph
  * object too..
  */
 class MediaStreamGraph

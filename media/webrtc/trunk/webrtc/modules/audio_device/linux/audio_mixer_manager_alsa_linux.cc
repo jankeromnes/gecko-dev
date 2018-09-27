@@ -383,7 +383,7 @@ int32_t AudioMixerManagerLinuxALSA::SetSpeakerVolume(
     if (_outputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable output mixer element exists");
+                     "  no available output mixer element exists");
         return -1;
     }
 
@@ -408,7 +408,7 @@ int32_t AudioMixerManagerLinuxALSA::SpeakerVolume(
     if (_outputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable output mixer element exists");
+                     "  no available output mixer element exists");
         return -1;
     }
 
@@ -442,7 +442,7 @@ int32_t AudioMixerManagerLinuxALSA::MaxSpeakerVolume(
     if (_outputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avilable output mixer element exists");
+                     "  no available output mixer element exists");
         return -1;
     }
 
@@ -476,7 +476,7 @@ int32_t AudioMixerManagerLinuxALSA::MinSpeakerVolume(
     if (_outputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable output mixer element exists");
+                     "  no available output mixer element exists");
         return -1;
     }
 
@@ -517,7 +517,7 @@ int32_t AudioMixerManagerLinuxALSA::MinSpeakerVolume(
  if (_outputMixerElement == NULL)
  {
  WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
- "  no avaliable output mixer element exists");
+ "  no available output mixer element exists");
  return -1;
  }
 
@@ -558,7 +558,7 @@ int32_t AudioMixerManagerLinuxALSA::MinSpeakerVolume(
  if (_outputMixerElement == NULL)
  {
  WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
- "  no avaliable output mixer element exists");
+ "  no available output mixer element exists");
  return -1;
  }
 
@@ -596,7 +596,7 @@ int32_t AudioMixerManagerLinuxALSA::SpeakerVolumeStepSize(
     if (_outputMixerHandle == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable output mixer exists");
+                     "  no available output mixer exists");
         return -1;
     }
 
@@ -612,7 +612,7 @@ int32_t AudioMixerManagerLinuxALSA::SpeakerVolumeIsAvailable(
     if (_outputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable output mixer element exists");
+                     "  no available output mixer element exists");
         return -1;
     }
 
@@ -627,7 +627,7 @@ int32_t AudioMixerManagerLinuxALSA::SpeakerMuteIsAvailable(
     if (_outputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable output mixer element exists");
+                     "  no available output mixer element exists");
         return -1;
     }
 
@@ -647,7 +647,7 @@ int32_t AudioMixerManagerLinuxALSA::SetSpeakerMute(bool enable)
     if (_outputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable output mixer element exists");
+                     "  no available output mixer element exists");
         return -1;
     }
 
@@ -682,7 +682,7 @@ int32_t AudioMixerManagerLinuxALSA::SpeakerMute(bool& enabled) const
     if (_outputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable output mixer exists");
+                     "  no available output mixer exists");
         return -1;
     }
 
@@ -725,7 +725,7 @@ int32_t AudioMixerManagerLinuxALSA::MicrophoneMuteIsAvailable(
     if (_inputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer element exists");
+                     "  no available input mixer element exists");
         return -1;
     }
 
@@ -744,7 +744,7 @@ int32_t AudioMixerManagerLinuxALSA::SetMicrophoneMute(bool enable)
     if (_inputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer element exists");
+                     "  no available input mixer element exists");
         return -1;
     }
 
@@ -779,7 +779,7 @@ int32_t AudioMixerManagerLinuxALSA::MicrophoneMute(bool& enabled) const
     if (_inputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer exists");
+                     "  no available input mixer exists");
         return -1;
     }
 
@@ -822,7 +822,7 @@ int32_t AudioMixerManagerLinuxALSA::MicrophoneBoostIsAvailable(
     if (_inputMixerHandle == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer exists");
+                     "  no available input mixer exists");
         return -1;
     }
 
@@ -843,7 +843,7 @@ int32_t AudioMixerManagerLinuxALSA::SetMicrophoneBoost(bool enable)
     if (_inputMixerHandle == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer exists");
+                     "  no available input mixer exists");
         return -1;
     }
 
@@ -868,7 +868,7 @@ int32_t AudioMixerManagerLinuxALSA::MicrophoneBoost(bool& enabled) const
     if (_inputMixerHandle == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer exists");
+                     "  no available input mixer exists");
         return -1;
     }
 
@@ -884,7 +884,7 @@ int32_t AudioMixerManagerLinuxALSA::MicrophoneVolumeIsAvailable(
     if (_inputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer element exists");
+                     "  no available input mixer element exists");
         return -1;
     }
 
@@ -905,7 +905,7 @@ int32_t AudioMixerManagerLinuxALSA::SetMicrophoneVolume(
     if (_inputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer element exists");
+                     "  no available input mixer element exists");
         return -1;
     }
 
@@ -938,7 +938,7 @@ int32_t AudioMixerManagerLinuxALSA::SetMicrophoneVolume(
  if (_inputMixerElement == NULL)
  {
  WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-  "  no avaliable output mixer element exists");
+  "  no available output mixer element exists");
  return -1;
  }
 
@@ -979,7 +979,7 @@ int32_t AudioMixerManagerLinuxALSA::SetMicrophoneVolume(
  if (_inputMixerElement == NULL)
  {
  WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-  "  no avaliable output mixer element exists");
+  "  no available output mixer element exists");
  return -1;
  }
 
@@ -1019,7 +1019,7 @@ int32_t AudioMixerManagerLinuxALSA::MicrophoneVolume(
     if (_inputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer element exists");
+                     "  no available input mixer element exists");
         return -1;
     }
 
@@ -1054,7 +1054,7 @@ int32_t AudioMixerManagerLinuxALSA::MaxMicrophoneVolume(
     if (_inputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer element exists");
+                     "  no available input mixer element exists");
         return -1;
     }
 
@@ -1095,7 +1095,7 @@ int32_t AudioMixerManagerLinuxALSA::MinMicrophoneVolume(
     if (_inputMixerElement == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer element exists");
+                     "  no available input mixer element exists");
         return -1;
     }
 
@@ -1128,7 +1128,7 @@ int32_t AudioMixerManagerLinuxALSA::MicrophoneVolumeStepSize(
     if (_inputMixerHandle == NULL)
     {
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id,
-                     "  no avaliable input mixer exists");
+                     "  no available input mixer exists");
         return -1;
     }
 

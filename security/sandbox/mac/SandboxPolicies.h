@@ -797,7 +797,7 @@ static const char flashPluginSandboxRules[] = R"SANDBOX_LITERAL(
   ; Tests revealed file-write-{data,create,flags} are required for the
   ; accesses to the mds files. file-write-{data,create,mode,unlink}
   ; required for CertStore.dat access. Allow file-write* to match system
-  ; profiles and for better compatibilty.
+  ; profiles and for better compatibility.
   (allow file-read* file-write*
       (require-all
           (vnode-type REGULAR-FILE)

@@ -1124,7 +1124,7 @@ sec_asn1d_prepare_for_contents(sec_asn1d_state *state)
             state = sec_asn1d_push_state(state->top, subt, NULL, PR_TRUE);
             if (state != NULL) {
                 if (!state->top->filter_only)
-                    state->allocate = PR_TRUE; /* XXX propogate this? */
+                    state->allocate = PR_TRUE; /* XXX propagate this? */
                 /*
                  * Do the "before" field notification for next in group.
                  */
@@ -1386,7 +1386,7 @@ sec_asn1d_prepare_for_contents(sec_asn1d_state *state)
                 state->place = duringConstructedString;
                 state = sec_asn1d_push_state(state->top, sub, item, PR_TRUE);
                 if (state != NULL) {
-                    state->substring = PR_TRUE; /* XXX propogate? */
+                    state->substring = PR_TRUE; /* XXX propagate? */
                     (void)sec_asn1d_init_state_based_on_template(state);
                 }
             } else if (state->indefinite) {

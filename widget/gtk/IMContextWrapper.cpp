@@ -944,7 +944,7 @@ IMContextWrapper::OnKeyEvent(nsWindow* aCaller,
                 break;
             default:
                 MOZ_ASSERT_UNREACHABLE("IME may handle key event "
-                    "asyncrhonously, but not yet confirmed if it comes agian "
+                    "asyncrhonously, but not yet confirmed if it comes again "
                     "actually");
         }
     }

@@ -250,7 +250,7 @@ const clickOnPlaybackRateSelector = async function(animationInspector, panel, ra
  * @param {Element} summaryGraphEl
  */
 const clickOnSummaryGraph = async function(animationInspector, panel, summaryGraphEl) {
-  // Disable pointer-events of the scrubber in order to avoid to click accidently.
+  // Disable pointer-events of the scrubber in order to avoid to click accidentally.
   const scrubberEl = panel.querySelector(".current-time-scrubber");
   scrubberEl.style.pointerEvents = "none";
   // Scroll to show the timeBlock since the element may be out of displayed area.

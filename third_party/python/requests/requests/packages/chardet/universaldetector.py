@@ -161,7 +161,7 @@ class UniversalDetector:
                 return self.result
 
         if constants._debug:
-            sys.stderr.write('no probers hit minimum threshhold\n')
+            sys.stderr.write('no probers hit minimum threshold\n')
             for prober in self._mCharSetProbers[0].mProbers:
                 if not prober:
                     continue

@@ -518,7 +518,7 @@ function check_test8thru10(aTestTimerCallback) {
   Assert.ok(Math.abs(TESTS[8].notifyTime - TESTS[9].notifyTime) >=
                      MAIN_TIMER_INTERVAL * 0.5,
             "staggering between two timers that want to fire at the same " +
-            "time should have occured");
+            "time should have occurred");
 
   let time = gPref.getIntPref(PREF_BRANCH_LAST_UPDATE_TIME + TESTS[8].timerID);
   Assert.notEqual(time, 1,

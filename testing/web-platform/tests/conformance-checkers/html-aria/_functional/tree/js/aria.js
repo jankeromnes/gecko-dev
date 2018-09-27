@@ -3,7 +3,7 @@
 var Aria = {
 	Trees: new Array(), // instances of Aria.Tree Class
 	isEnabled: function(inNode){
-		// todo: this may need to check isEnabled on all parentNodes, inheritence of aria-enabled is ambiguous
+		// todo: this may need to check isEnabled on all parentNodes, inheritance of aria-enabled is ambiguous
 		if(inNode.getAttribute('aria-enabled') && inNode.getAttribute('aria-enabled').toLowerCase()=='false') return false;
 		else return true;
 	},

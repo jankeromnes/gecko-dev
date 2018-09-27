@@ -595,7 +595,7 @@ nsslowkey_UpdateKeyDBPass1(NSSLOWKEYDBHandle *handle)
     }
 
     /* create a full DB Handle for our update so we
-     * can use the correct locks for the db primatives */
+     * can use the correct locks for the db primitives */
     update = nsslowkey_NewHandle(handle->updatedb);
     if (update == NULL) {
         return SECSuccess;

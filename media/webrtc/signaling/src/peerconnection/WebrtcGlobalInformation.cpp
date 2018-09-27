@@ -192,7 +192,7 @@ class WebrtcContentParents
 {
 public:
   static WebrtcGlobalParent* Alloc();
-  static void Dealloc(WebrtcGlobalParent* aParent);
+  static void Dealloc(WebrtcGlobalParent* apparent);
   static bool Empty()
   {
     return sContentParents.empty();
@@ -217,11 +217,11 @@ WebrtcGlobalParent* WebrtcContentParents::Alloc()
   return cp.get();
 }
 
-void WebrtcContentParents::Dealloc(WebrtcGlobalParent* aParent)
+void WebrtcContentParents::Dealloc(WebrtcGlobalParent* apparent)
 {
-  if (aParent) {
+  if (apparent) {
     aParent->mShutdown = true;
-    auto cp = std::find(sContentParents.begin(), sContentParents.end(), aParent);
+    auto cp = std::find(sContentParents.begin(), sContentParents.end(), apparent);
     if (cp != sContentParents.end()) {
       sContentParents.erase(cp);
     }

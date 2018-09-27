@@ -181,8 +181,8 @@ for (let offset of [0, 1, 2, 3, 4, 8, 16, 41, 0xfff8]) {
 
     // TODO: Just loops
     //         - loop invariant checks
-    //         - loop dependant checks remaining inbounds
-    //         - loop dependant checks going out-of bounds.
+    //         - loop dependent checks remaining inbounds
+    //         - loop dependent checks going out-of bounds.
     //
     // TODO: Loops + branching
     //         - loop invariant checks guarded by a loop invariant branch?

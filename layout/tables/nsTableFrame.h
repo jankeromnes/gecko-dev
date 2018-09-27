@@ -150,7 +150,7 @@ public:
     * @see nsIFrame::Init
     */
   virtual void Init(nsIContent*       aContent,
-                    nsContainerFrame* aParent,
+                    nsContainerFrame* apparent,
                     nsIFrame*         aPrevInFlow) override;
 
   static float GetTwipsToPixels(nsPresContext* aPresContext);

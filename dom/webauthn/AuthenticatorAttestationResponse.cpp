@@ -32,8 +32,8 @@ NS_IMPL_RELEASE_INHERITED(AuthenticatorAttestationResponse, AuthenticatorRespons
 NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(AuthenticatorAttestationResponse)
 NS_INTERFACE_MAP_END_INHERITING(AuthenticatorResponse)
 
-AuthenticatorAttestationResponse::AuthenticatorAttestationResponse(nsPIDOMWindowInner* aParent)
-  : AuthenticatorResponse(aParent)
+AuthenticatorAttestationResponse::AuthenticatorAttestationResponse(nsPIDOMWindowInner* apparent)
+  : AuthenticatorResponse(apparent)
   , mAttestationObjectCachedObj(nullptr)
 {
   mozilla::HoldJSObjects(this);

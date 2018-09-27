@@ -285,7 +285,7 @@ static float32x4_t vpowq_f32(float32x4_t a, float32x4_t b) {
     //    the mantissa, putting eight into the biased exponent (to shift/
     //    compensate the fact that the exponent has been shifted in the top/
     //    fractional part and finally getting rid of the implicit leading one
-    //    from the mantissa by substracting it out.
+    //    from the mantissa by subtracting it out.
     const uint32x4_t vec_float_exponent_mask = vdupq_n_u32(0x7F800000);
     const uint32x4_t vec_eight_biased_exponent = vdupq_n_u32(0x43800000);
     const uint32x4_t vec_implicit_leading_one = vdupq_n_u32(0x43BF8000);

@@ -41,8 +41,8 @@ BHRTelemetryService.prototype = Object.freeze({
       return;
     }
 
-    // Create a mapping from module indicies in the original nsIHangDetails
-    // object to this.payload.modules indicies.
+    // Create a mapping from module indices in the original nsIHangDetails
+    // object to this.payload.modules indices.
     let moduleIdxs = modules.map(module => {
       let idx = this.payload.modules.findIndex(m => {
         return m[0] === module[0] && m[1] === module[1];

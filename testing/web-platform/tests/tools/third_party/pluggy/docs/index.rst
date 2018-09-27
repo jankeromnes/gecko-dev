@@ -31,7 +31,7 @@ event system.
 
 ``pluggy``'s approach is meant to let a designer think carefuly about which objects are
 explicitly needed by an extension writer. This is in contrast to subclass-based extension
-systems which may expose unecessary state and behaviour or encourage `tight coupling`_
+systems which may expose unnecessary state and behaviour or encourage `tight coupling`_
 in overlying frameworks.
 
 
@@ -277,7 +277,7 @@ should be added before registering corresponding *hookimpls*:
 
     @hookspec
     def setup_project(config, args):
-        """This hook is used to process the inital config and input
+        """This hook is used to process the initial config and input
         arguments.
         """
 

@@ -39,8 +39,8 @@ public:
    * To avoid that, the PreallocatedProcessManager won't start up any processes while
    * there is a blocker active.
    */
-  static void AddBlocker(ContentParent* aParent);
-  static void RemoveBlocker(ContentParent* aParent);
+  static void AddBlocker(ContentParent* apparent);
+  static void RemoveBlocker(ContentParent* apparent);
 
   /**
    * Take the preallocated process, if we have one.  If we don't have one, this
@@ -55,7 +55,7 @@ public:
    */
   static already_AddRefed<ContentParent> Take();
 
-  static bool Provide(ContentParent* aParent);
+  static bool Provide(ContentParent* apparent);
 
 private:
   PreallocatedProcessManager();

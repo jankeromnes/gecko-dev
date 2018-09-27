@@ -355,7 +355,7 @@ if win32_and_ctypes:
     def _getdimensions():
         handle = GetStdHandle(STD_OUTPUT_HANDLE)
         info = GetConsoleInfo(handle)
-        # Substract one from the width, otherwise the cursor wraps
+        # Subtract one from the width, otherwise the cursor wraps
         # and the ending \n causes an empty line to display.
         return info.dwSize.Y, info.dwSize.X - 1
 

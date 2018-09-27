@@ -176,7 +176,7 @@ public:
   mozilla::dom::Promise* GetLoaded(mozilla::ErrorResult& aRv);
 
 private:
-  FontFace(nsISupports* aParent, FontFaceSet* aFontFaceSet);
+  FontFace(nsISupports* apparent, FontFaceSet* aFontFaceSet);
   ~FontFace();
 
   void InitializeSource(const StringOrArrayBufferOrArrayBufferView& aSource);

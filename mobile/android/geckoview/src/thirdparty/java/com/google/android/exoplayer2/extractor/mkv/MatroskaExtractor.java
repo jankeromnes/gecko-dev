@@ -1338,7 +1338,7 @@ public final class MatroskaExtractor implements Extractor {
       return true;
     }
     // After parsing Cues, seek back to original position if available. We will not do this unless
-    // we seeked to get to the Cues in the first place.
+    // we sought to get to the Cues in the first place.
     if (sentSeekMap && seekPositionAfterBuildingCues != C.POSITION_UNSET) {
       seekPosition.position = seekPositionAfterBuildingCues;
       seekPositionAfterBuildingCues = C.POSITION_UNSET;

@@ -36,14 +36,14 @@ Gamepad::UpdateTimestamp()
   }
 }
 
-Gamepad::Gamepad(nsISupports* aParent,
+Gamepad::Gamepad(nsISupports* apparent,
                  const nsAString& aID, uint32_t aIndex,
                  uint32_t aHashKey,
                  GamepadMappingType aMapping,
                  GamepadHand aHand,
                  uint32_t aDisplayID, uint32_t aNumButtons,
                  uint32_t aNumAxes, uint32_t aNumHaptics)
-  : mParent(aParent),
+  : mParent(apparent),
     mID(aID),
     mIndex(aIndex),
     mHashKey(aHashKey),
@@ -59,7 +59,7 @@ Gamepad::Gamepad(nsISupports* aParent,
     mButtons.InsertElementAt(i, new GamepadButton(mParent));
   }
   mAxes.InsertElementsAt(0, aNumAxes, 0.0f);
-  mPose = new GamepadPose(aParent);
+  mPose = new GamepadPose(apparent);
   for (uint32_t i = 0; i < aNumHaptics; ++i) {
     mHapticActuators.AppendElement(new GamepadHapticActuator(mParent, mHashKey, i));
   }
@@ -152,10 +152,10 @@ Gamepad::SyncState(Gamepad* aOther)
 }
 
 already_AddRefed<Gamepad>
-Gamepad::Clone(nsISupports* aParent)
+Gamepad::Clone(nsISupports* apparent)
 {
   RefPtr<Gamepad> out =
-    new Gamepad(aParent, mID, mIndex, mHashKey, mMapping,
+    new Gamepad(apparent, mID, mIndex, mHashKey, mMapping,
                 mHand, mDisplayId, mButtons.Length(), mAxes.Length(),
                 mHapticActuators.Length());
   out->SyncState(this);

@@ -252,7 +252,7 @@ MP3TrackDemuxer::ScanUntil(const TimeUnit& aTime)
   }
 
   if (Duration(mFrameIndex) > aTime) {
-    // We've seeked past the target time, rewind back a little to correct it.
+    // We've sought past the target time, rewind back a little to correct it.
     const int64_t rewind = aTime.ToMicroseconds() / 100;
     FastSeek(aTime - TimeUnit::FromMicroseconds(rewind));
   }

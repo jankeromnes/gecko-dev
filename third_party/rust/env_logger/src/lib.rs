@@ -657,7 +657,7 @@ impl Log for Logger {
     fn log(&self, record: &Record) {
         if self.matches(record) {
             // Log records are written to a thread-local buffer before being printed
-            // to the terminal. We clear these buffers afterwards, but they aren't shrinked
+            // to the terminal. We clear these buffers afterwards, but they aren't shrunk
             // so will always at least have capacity for the largest log record formatted
             // on that thread.
             //

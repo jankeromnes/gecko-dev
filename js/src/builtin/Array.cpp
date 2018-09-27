@@ -4009,7 +4009,7 @@ CreateArrayPrototype(JSContext* cx, JSProtoKey key)
 
     /*
      * The default 'new' group of Array.prototype is required by type inference
-     * to have unknown properties, to simplify handling of e.g. heterogenous
+     * to have unknown properties, to simplify handling of e.g. heterogeneous
      * arrays in JSON and script literals and allows setDenseArrayElement to
      * be used without updating the indexed type set for such default arrays.
      */

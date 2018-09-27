@@ -30,7 +30,7 @@ class ServiceWorkerDescriptor;
 [scriptable, uuid(52ee2c9d-ee87-4caf-9588-23ae77ff8798)]
 interface nsIServiceWorkerUnregisterCallback : nsISupports
 {
-  // aState is true if the unregistration succeded.
+  // aState is true if the unregistration succeeded.
   // It's false if this ServiceWorkerRegistration doesn't exist.
   void unregisterSucceeded(in bool aState);
   void unregisterFailed();

@@ -259,7 +259,7 @@ impl ThreadPoolBuilder {
     /// **Old environment variable:** `RAYON_NUM_THREADS` is a one-to-one
     /// replacement of the now deprecated `RAYON_RS_NUM_CPUS` environment
     /// variable. If both variables are specified, `RAYON_NUM_THREADS` will
-    /// be prefered.
+    /// be preferred.
     pub fn num_threads(mut self, num_threads: usize) -> ThreadPoolBuilder {
         self.num_threads = num_threads;
         self

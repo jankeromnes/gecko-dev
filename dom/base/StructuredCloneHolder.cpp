@@ -305,17 +305,17 @@ StructuredCloneHolder::Write(JSContext* aCx,
 }
 
 void
-StructuredCloneHolder::Read(nsISupports* aParent,
+StructuredCloneHolder::Read(nsISupports* apparent,
                             JSContext* aCx,
                             JS::MutableHandle<JS::Value> aValue,
                             ErrorResult& aRv)
 {
   MOZ_ASSERT_IF(mStructuredCloneScope == StructuredCloneScope::SameProcessSameThread,
                 mCreationEventTarget->IsOnCurrentThread());
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   mozilla::AutoRestore<nsISupports*> guard(mParent);
-  mParent = aParent;
+  mParent = apparent;
 
   if (!StructuredCloneHolderBase::Read(aCx, aValue)) {
     JS_ClearPendingException(aCx);
@@ -334,18 +334,18 @@ StructuredCloneHolder::Read(nsISupports* aParent,
 }
 
 void
-StructuredCloneHolder::ReadFromBuffer(nsISupports* aParent,
+StructuredCloneHolder::ReadFromBuffer(nsISupports* apparent,
                                       JSContext* aCx,
                                       JSStructuredCloneData& aBuffer,
                                       JS::MutableHandle<JS::Value> aValue,
                                       ErrorResult& aRv)
 {
-  ReadFromBuffer(aParent, aCx, aBuffer,
+  ReadFromBuffer(apparent, aCx, aBuffer,
                  JS_STRUCTURED_CLONE_VERSION, aValue, aRv);
 }
 
 void
-StructuredCloneHolder::ReadFromBuffer(nsISupports* aParent,
+StructuredCloneHolder::ReadFromBuffer(nsISupports* apparent,
                                       JSContext* aCx,
                                       JSStructuredCloneData& aBuffer,
                                       uint32_t aAlgorithmVersion,
@@ -358,7 +358,7 @@ StructuredCloneHolder::ReadFromBuffer(nsISupports* aParent,
   MOZ_ASSERT(!mBuffer, "ReadFromBuffer() must be called without a Write().");
 
   mozilla::AutoRestore<nsISupports*> guard(mParent);
-  mParent = aParent;
+  mParent = apparent;
 
   if (!JS_ReadStructuredClone(aCx, aBuffer, aAlgorithmVersion,
                               mStructuredCloneScope, aValue, &sCallbacks,

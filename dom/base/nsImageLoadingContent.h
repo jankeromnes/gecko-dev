@@ -217,7 +217,7 @@ protected:
   virtual mozilla::net::ReferrerPolicy GetImageReferrerPolicy();
 
   // Subclasses are *required* to call BindToTree/UnbindFromTree.
-  void BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+  void BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                   nsIContent* aBindingParent);
   void UnbindFromTree(bool aDeep, bool aNullParent);
 

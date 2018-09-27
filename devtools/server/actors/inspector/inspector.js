@@ -175,7 +175,7 @@ exports.InspectorActor = protocol.ActorClassWithSpec(inspectorSpec, {
    * If consumers need to display several highlighters at the same time or
    * different types of highlighters, then this method should be used, passing
    * the type name of the highlighter needed as argument.
-   * A new instance will be created everytime the method is called, so it's up
+   * A new instance will be created every time the method is called, so it's up
    * to the consumer to release it when it is not needed anymore
    *
    * @param {String} type The type of highlighter to create
@@ -198,7 +198,7 @@ exports.InspectorActor = protocol.ActorClassWithSpec(inspectorSpec, {
    *
    * Accepts a maxDim request parameter to resize images that are larger. This
    * is important as the resizing occurs server-side so that image-data being
-   * transfered in the longstring back to the client will be that much smaller
+   * transferred in the longstring back to the client will be that much smaller
    */
   getImageDataFromURL: function(url, maxDim) {
     const img = new this.window.Image();

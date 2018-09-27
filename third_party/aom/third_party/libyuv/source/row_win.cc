@@ -4586,7 +4586,7 @@ void ARGBSepiaRow_SSSE3(uint8* dst_argb, int width) {
 #endif  // HAS_ARGBSEPIAROW_SSSE3
 
 #ifdef HAS_ARGBCOLORMATRIXROW_SSSE3
-// Tranform 8 ARGB pixels (32 bytes) with color matrix.
+// Transform 8 ARGB pixels (32 bytes) with color matrix.
 // Same as Sepia except matrix is provided.
 // TODO(fbarchard): packuswbs only use half of the reg. To make RGBA, combine R
 // and B into a high and low, then G/A, unpackl/hbw and then unpckl/hwd.
@@ -6159,7 +6159,7 @@ void ARGBPolynomialRow_AVX2(const uint8* src_argb,
 #endif  // HAS_ARGBPOLYNOMIALROW_AVX2
 
 #ifdef HAS_ARGBCOLORTABLEROW_X86
-// Tranform ARGB pixels with color table.
+// Transform ARGB pixels with color table.
 __declspec(naked)
 void ARGBColorTableRow_X86(uint8* dst_argb, const uint8* table_argb,
                            int width) {
@@ -6193,7 +6193,7 @@ void ARGBColorTableRow_X86(uint8* dst_argb, const uint8* table_argb,
 #endif  // HAS_ARGBCOLORTABLEROW_X86
 
 #ifdef HAS_RGBCOLORTABLEROW_X86
-// Tranform RGB pixels with color table.
+// Transform RGB pixels with color table.
 __declspec(naked)
 void RGBColorTableRow_X86(uint8* dst_argb, const uint8* table_argb, int width) {
   __asm {
@@ -6224,7 +6224,7 @@ void RGBColorTableRow_X86(uint8* dst_argb, const uint8* table_argb, int width) {
 #endif  // HAS_RGBCOLORTABLEROW_X86
 
 #ifdef HAS_ARGBLUMACOLORTABLEROW_SSSE3
-// Tranform RGB pixels with luma table.
+// Transform RGB pixels with luma table.
 __declspec(naked)
 void ARGBLumaColorTableRow_SSSE3(const uint8* src_argb, uint8* dst_argb,
                                  int width,

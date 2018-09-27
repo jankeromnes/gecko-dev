@@ -1247,7 +1247,7 @@ commit e750dc0f054ba74b0ce76dd2013e6728cc7a41c5
 Author: snappy.mirrorbot@gmail.com <snappy.mirrorbot@gmail.com@03e5f5b5-db94-4691-08a0-1a8bf15f6143>
 Date:   Sun Jan 8 17:55:48 2012 +0000
 
-    Minor refactoring to accomodate changes in Google's internal code tree.
+    Minor refactoring to accommodate changes in Google's internal code tree.
     
     
     git-svn-id: https://snappy.googlecode.com/svn/trunk@57 03e5f5b5-db94-4691-08a0-1a8bf15f6143

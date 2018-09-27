@@ -1015,7 +1015,7 @@
 
             out_dir = af_direction_compute( out_x, out_y );
 
-            /* adjust directions for all points inbetween; */
+            /* adjust directions for all points between; */
             /* the loop also updates position of `curr'    */
             curr->out_dir = (FT_Char)out_dir;
             for ( curr = curr->next; curr != next; curr = curr->next )

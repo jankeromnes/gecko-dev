@@ -36,8 +36,8 @@ else:
 try:
     _compat_int_from_byte_vals = int.from_bytes
 except AttributeError:
-    def _compat_int_from_byte_vals(bytvals, endianess):
-        assert endianess == 'big'
+    def _compat_int_from_byte_vals(bytvals, endianness):
+        assert endianness == 'big'
         res = 0
         for bv in bytvals:
             assert isinstance(bv, _compat_int_types)
@@ -45,9 +45,9 @@ except AttributeError:
         return res
 
 
-def _compat_to_bytes(intval, length, endianess):
+def _compat_to_bytes(intval, length, endianness):
     assert isinstance(intval, _compat_int_types)
-    assert endianess == 'big'
+    assert endianness == 'big'
     if length == 4:
         if intval < 0 or intval >= 2 ** 32:
             raise struct.error("integer out of range for 'I' format code")

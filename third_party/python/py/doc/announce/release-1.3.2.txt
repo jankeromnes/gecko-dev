@@ -195,7 +195,7 @@ Changes between 1.2.1 and 1.3.0
 - extend and refine xfail mechanism:
   ``@py.test.mark.xfail(run=False)`` do not run the decorated test
   ``@py.test.mark.xfail(reason="...")`` prints the reason string in xfail summaries
-  specifiying ``--runxfail`` on command line virtually ignores xfail markers
+  specifying ``--runxfail`` on command line virtually ignores xfail markers
 
 - expose (previously internal) commonly useful methods:
   py.io.get_terminal_with() -> return terminal width
@@ -420,7 +420,7 @@ Changes between 1.1.0 and 1.0.2
 
 * add the ability to specify a path for py.lookup to search in
 
-* fix a funcarg cached_setup bug probably only occuring
+* fix a funcarg cached_setup bug probably only occurring
   in distributed testing and "module" scope with teardown.
 
 * many fixes and changes for making the code base python3 compatible,

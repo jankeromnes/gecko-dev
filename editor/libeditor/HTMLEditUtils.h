@@ -35,7 +35,7 @@ public:
   static bool IsMailCite(nsINode* aNode);
   static bool IsFormWidget(nsINode* aNode);
   static bool SupportsAlignAttr(nsINode& aNode);
-  static bool CanContain(int32_t aParent, int32_t aChild);
+  static bool CanContain(int32_t apparent, int32_t aChild);
   static bool IsContainer(int32_t aTag);
 
   /**

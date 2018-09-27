@@ -744,7 +744,7 @@ ICStubCompiler::getStubCode()
     JitContext jctx(cx, nullptr);
     StackMacroAssembler masm;
 #ifndef JS_USE_LINK_REGISTER
-    // The first value contains the return addres,
+    // The first value contains the return address,
     // which we pull into ICTailCallReg for tail calls.
     masm.adjustFrame(sizeof(intptr_t));
 #endif
@@ -4178,7 +4178,7 @@ ICCallStubCompiler::pushArrayArguments(MacroAssembler& masm, Address arrayVal,
                                        AllocatableGeneralRegisterSet regs)
 {
     // Load start and end address of values to copy.
-    // guardFunApply has already gauranteed that the array is packed and contains
+    // guardFunApply has already guaranteed that the array is packed and contains
     // no holes.
     Register startReg = regs.takeAny();
     Register endReg = regs.takeAny();

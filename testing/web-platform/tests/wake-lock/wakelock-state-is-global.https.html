@@ -55,12 +55,12 @@ promise_test(async t => {
 
   assert_false(wakeLock.active, "wakeLock is initially false");
 
-  //when iframe wake lock is acquired, parent wake lock should be actived
+  //when iframe wake lock is acquired, parent wake lock should be activated
   iframe.contentWindow.postMessage("ACQUIRED", "*");
   const isActive1 = await wait_for_message(iframe);
   await eventWatcher.wait_for("activechange");
-  assert_true(isActive1, "the iframe wake lock state is actived when iframe wake lock is acquired");
-  assert_true(wakeLock.active, "the wake lock state is actived when iframe wake lock is acquired");
+  assert_true(isActive1, "the iframe wake lock state is activated when iframe wake lock is acquired");
+  assert_true(wakeLock.active, "the wake lock state is activated when iframe wake lock is acquired");
 
   //when iframe wake lock is released, parent wake lock should be inactived
   iframe.contentWindow.postMessage("RELEASED", "*");

@@ -219,7 +219,7 @@ class Histogram {
   virtual Inconsistencies FindCorruption(const SampleSet& snapshot) const;
 
   //----------------------------------------------------------------------------
-  // Accessors for factory constuction, serialization and testing.
+  // Accessors for factory construction, serialization and testing.
   //----------------------------------------------------------------------------
   virtual ClassType histogram_type() const;
   Sample declared_min() const { return declared_min_; }

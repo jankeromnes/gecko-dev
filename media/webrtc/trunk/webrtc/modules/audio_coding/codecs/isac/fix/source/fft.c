@@ -407,7 +407,7 @@ int16_t WebRtcIsacfix_FftRadix16Fastest(int16_t RexQx[], int16_t ImxQx[], int16_
   //
   // If this FFT is called 2 time each frame, i.e. 67 times per second, it will correspond to
   // a C54 complexity of 67*18891/1000000 = 1.27 MIPS with 16x16-muls, and 67*30451/1000000 =
-  // = 2.04 MIPS with 16x32-muls. Note that this routine somtimes is called 6 times during the
+  // = 2.04 MIPS with 16x32-muls. Note that this routine sometimes is called 6 times during the
   // encoding of a frame, i.e. the max complexity would be 7/2*1.27 = 4.4 MIPS for the 16x16 mul case.
 
 

@@ -132,19 +132,19 @@ DOMSubtreeIterator::~DOMSubtreeIterator()
 
 bool
 EditorUtils::IsDescendantOf(const nsINode& aNode,
-                            const nsINode& aParent,
+                            const nsINode& apparent,
                             EditorRawDOMPoint* aOutPoint /* = nullptr */)
 {
   if (aOutPoint) {
     aOutPoint->Clear();
   }
 
-  if (&aNode == &aParent) {
+  if (&aNode == &apparent) {
     return false;
   }
 
   for (const nsINode* node = &aNode; node; node = node->GetParentNode()) {
-    if (node->GetParentNode() == &aParent) {
+    if (node->GetParentNode() == &apparent) {
       if (aOutPoint) {
         MOZ_ASSERT(node->IsContent());
         aOutPoint->Set(node->AsContent());
@@ -158,17 +158,17 @@ EditorUtils::IsDescendantOf(const nsINode& aNode,
 
 bool
 EditorUtils::IsDescendantOf(const nsINode& aNode,
-                            const nsINode& aParent,
+                            const nsINode& apparent,
                             EditorDOMPoint* aOutPoint)
 {
   MOZ_ASSERT(aOutPoint);
   aOutPoint->Clear();
-  if (&aNode == &aParent) {
+  if (&aNode == &apparent) {
     return false;
   }
 
   for (const nsINode* node = &aNode; node; node = node->GetParentNode()) {
-    if (node->GetParentNode() == &aParent) {
+    if (node->GetParentNode() == &apparent) {
       MOZ_ASSERT(node->IsContent());
       aOutPoint->Set(node->AsContent());
       return true;

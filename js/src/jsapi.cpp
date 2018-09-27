@@ -4547,7 +4547,7 @@ JS::AddPromiseReactions(JSContext* cx, JS::HandleObject promiseObj,
  * Unforgeable version of Promise.all for internal use.
  *
  * Takes a dense array of Promise objects and returns a promise that's
- * resolved with an array of resolution values when all those promises ahve
+ * resolved with an array of resolution values when all those promises have
  * been resolved, or rejected with the rejection value of the first rejected
  * promise.
  *

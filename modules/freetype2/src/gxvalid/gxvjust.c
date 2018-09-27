@@ -247,7 +247,7 @@
   {
     FT_Bytes   p = table;
 #ifdef GXV_LOAD_UNUSED_VARS
-    FT_Fixed      substThreshhold; /* Apple misspelled "Threshhold" */
+    FT_Fixed      substThreshhold; /* Apple misspelled "Threshold" */
 #endif
     FT_UShort  addGlyph;
     FT_UShort  substGlyph;

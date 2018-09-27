@@ -239,7 +239,7 @@ namespace {
 // Helper class for ReadResources().
 class ResourceReader final : public nsIWebBrowserPersistDocumentReceiver {
 public:
-    ResourceReader(WebBrowserPersistLocalDocument* aParent,
+    ResourceReader(WebBrowserPersistLocalDocument* apparent,
                    nsIWebBrowserPersistResourceVisitor* aVisitor);
     nsresult OnWalkDOMNode(nsINode* aNode);
 
@@ -280,9 +280,9 @@ private:
 
 NS_IMPL_ISUPPORTS(ResourceReader, nsIWebBrowserPersistDocumentReceiver)
 
-ResourceReader::ResourceReader(WebBrowserPersistLocalDocument* aParent,
+ResourceReader::ResourceReader(WebBrowserPersistLocalDocument* apparent,
                                nsIWebBrowserPersistResourceVisitor* aVisitor)
-: mParent(aParent)
+: mParent(apparent)
 , mVisitor(aVisitor)
 , mCurrentBaseURI(aParent->GetBaseURI())
 , mPersistFlags(aParent->GetPersistFlags())
@@ -557,7 +557,7 @@ ResourceReader::OnWalkDOMNode(nsINode* aNode)
 // Helper class for node rewriting in writeContent().
 class PersistNodeFixup final : public nsIDocumentEncoderNodeFixup {
 public:
-    PersistNodeFixup(WebBrowserPersistLocalDocument* aParent,
+    PersistNodeFixup(WebBrowserPersistLocalDocument* apparent,
                      nsIWebBrowserPersistURIMap* aMap,
                      nsIURI* aTargetURI);
 
@@ -588,10 +588,10 @@ private:
 
 NS_IMPL_ISUPPORTS(PersistNodeFixup, nsIDocumentEncoderNodeFixup)
 
-PersistNodeFixup::PersistNodeFixup(WebBrowserPersistLocalDocument* aParent,
+PersistNodeFixup::PersistNodeFixup(WebBrowserPersistLocalDocument* apparent,
                                    nsIWebBrowserPersistURIMap* aMap,
                                    nsIURI* aTargetURI)
-: mParent(aParent)
+: mParent(apparent)
 , mCurrentBaseURI(aParent->GetBaseURI())
 , mTargetBaseURI(aTargetURI)
 {

@@ -5,7 +5,7 @@
 "use strict";
 
 // Check that, even though the AnimationPlayerActor only sends the bits of its
-// state that change, the front reconstructs the whole state everytime.
+// state that change, the front reconstructs the whole state every time.
 
 add_task(async function() {
   const {client, walker, animations} =

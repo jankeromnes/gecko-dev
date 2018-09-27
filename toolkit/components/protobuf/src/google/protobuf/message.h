@@ -971,7 +971,7 @@ class LIBPROTOBUF_EXPORT Reflection {
 
   // If key is in map field: Saves the value pointer to val and returns
   // false. If key in not in map field: Insert the key into map, saves
-  // value pointer to val and retuns true.
+  // value pointer to val and returns true.
   virtual bool InsertOrLookupMapValue(Message* /* message */,
                                       const FieldDescriptor* /* field */,
                                       const MapKey& /* key */,

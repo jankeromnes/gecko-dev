@@ -279,7 +279,7 @@ gtk_xtbin_new (GdkWindow *parent_window, String * f)
   /* Launch X event loop */
   xt_client_xloop_create();
 
-  /* Build the hierachy */
+  /* Build the hierarchy */
   xtbin->xtdisplay = xtbin->xtclient.xtdisplay;
   gtk_widget_set_parent_window(GTK_WIDGET(xtbin), parent_window);
   gdk_window_get_user_data(xtbin->parent_window, &user_data);

@@ -24,7 +24,7 @@ var add_task = (function () {
       // Don't stop tests until asynchronous tasks are finished.
       SimpleTest.waitForExplicitFinish();
       // Because the client is using add_task for this set of tests,
-      // we need to spawn a "master task" that calls each task in succesion.
+      // we need to spawn a "master task" that calls each task in succession.
       // Use setTimeout to ensure the master task runs after the client
       // script finishes.
       setTimeout(function () {

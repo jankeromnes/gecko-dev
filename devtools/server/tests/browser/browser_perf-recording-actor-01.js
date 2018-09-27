@@ -65,7 +65,7 @@ add_task(async function() {
 
   ok(importedModel.isCompleted(), "All imported recordings should be completed");
   ok(!importedModel.isRecording(), "All imported recordings should not be recording");
-  ok(importedModel.isImported(), "All imported recordings should be considerd imported");
+  ok(importedModel.isImported(), "All imported recordings should be considered imported");
 
   checkSystemInfo(importedModel, "Host");
   checkSystemInfo(importedModel, "Client");

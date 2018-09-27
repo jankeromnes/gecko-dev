@@ -22,7 +22,7 @@ class FlexItem : public nsISupports
                , public nsWrapperCache
 {
 public:
-  explicit FlexItem(FlexLine* aParent,
+  explicit FlexItem(FlexLine* apparent,
                     const ComputedFlexItemInfo* aItem);
 
 protected:

@@ -49,7 +49,7 @@ add_task(async function() {
   let onMessageReceived = waitForMessage(hud, "3");
   jsterm.execute("1 + 2");
   let message = await onMessageReceived;
-  ok(message, "`1 + 2` was evaluated whith debugger paused");
+  ok(message, "`1 + 2` was evaluated with debugger paused");
 
   info("Executing command using scoped variables while paused");
   onMessageReceived = waitForMessage(hud, `"globalFooBug783499foo2SecondCall"`);

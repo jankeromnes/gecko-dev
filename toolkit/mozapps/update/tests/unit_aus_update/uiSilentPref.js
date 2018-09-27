@@ -3,11 +3,11 @@
  */
 
 const WindowWatcher = {
-  openWindow(aParent, aUrl, aName, aFeatures, aArgs) {
+  openWindow(apparent, aUrl, aName, aFeatures, aArgs) {
     do_throw("should not have called openWindow!");
   },
 
-  getNewPrompter(aParent) {
+  getNewPrompter(apparent) {
     do_throw("should not have seen getNewPrompter!");
   },
 

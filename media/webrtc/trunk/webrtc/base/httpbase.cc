@@ -501,7 +501,7 @@ bool HttpBase::DoReceiveLoop(HttpError* error) {
   RTC_DCHECK(NULL != error);
 
   // Do to the latency between receiving read notifications from
-  // pseudotcpchannel, we rely on repeated calls to read in order to acheive
+  // pseudotcpchannel, we rely on repeated calls to read in order to achieve
   // ideal throughput.  The number of reads is limited to prevent starving
   // the caller.
 

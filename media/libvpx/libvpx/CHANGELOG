@@ -297,7 +297,7 @@
       of particular interest to real time streaming applications.
 
       Temporal scalability allows the encoder to produce a stream that can
-      be decimated to different frame rates, with independent rate targetting
+      be decimated to different frame rates, with independent rate targeting
       for each substream.
 
       Multiframe quality enhancement postprocessing can make visual quality
@@ -465,7 +465,7 @@
       on ARM platforms.
 
         Improved encoder threading
-        Dont pick encoder filter level when loopfilter is disabled.
+        Don't pick encoder filter level when loopfilter is disabled.
         Avoid double copying of key frames into alt and golden buffer
         FDCT optimizations.
         x86 sse2 temporal filter
@@ -669,7 +669,7 @@
       arm: fix missing dependency with --enable-shared
       configure: support directories containing .o
       Replace pinsrw (SSE) with MMX instructions
-      apple: include proper mach primatives
+      apple: include proper mach primitives
       Fixed rate control bug with long key frame interval.
       Fix DSO link errors on x86-64 when not using a version script
       Fixed buffer selection for UV in AltRef filtering

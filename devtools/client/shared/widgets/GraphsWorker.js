@@ -53,7 +53,7 @@ function getMinMaxAvg(source, timestamps, duration) {
 
 /**
  * Takes a list of numbers and plots them on a line graph representing
- * the rate of occurences in a specified interval.
+ * the rate of occurrences in a specified interval.
  *
  * @param array timestamps
  *        A list of numbers representing time, ordered ascending. For example,

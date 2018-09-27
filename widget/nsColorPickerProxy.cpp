@@ -13,10 +13,10 @@ using namespace mozilla::dom;
 NS_IMPL_ISUPPORTS(nsColorPickerProxy, nsIColorPicker)
 
 NS_IMETHODIMP
-nsColorPickerProxy::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
+nsColorPickerProxy::Init(mozIDOMWindowProxy* apparent, const nsAString& aTitle,
                          const nsAString& aInitialColor)
 {
-  TabChild* tabChild = TabChild::GetFrom(aParent);
+  TabChild* tabChild = TabChild::GetFrom(apparent);
   if (!tabChild) {
     return NS_ERROR_FAILURE;
   }

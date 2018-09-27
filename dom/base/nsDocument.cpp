@@ -4847,7 +4847,7 @@ nsIDocument::SetScriptGlobalObject(nsIScriptGlobalObject *aScriptGlobalObject)
   mWindow = window;
 
   // Now that we know what our window is, we can flush the CSP errors to the
-  // Web Console. We are flushing all messages that occured and were stored
+  // Web Console. We are flushing all messages that occurred and were stored
   // in the queue prior to this point.
   nsCOMPtr<nsIContentSecurityPolicy> csp;
   NodePrincipal()->GetCsp(getter_AddRefs(csp));
@@ -13288,7 +13288,7 @@ PrincipalFlashClassifier::OnClassifyComplete(nsresult /*aErrorCode*/,
 }
 
 // We resolve the classification result based on aIsThirdParty
-// and the matched tables we got ealier on (via either sync or async API).
+// and the matched tables we got earlier on (via either sync or async API).
 FlashClassification
 PrincipalFlashClassifier::Resolve(bool aIsThirdParty)
 {
@@ -13809,7 +13809,7 @@ nsIDocument::RecordNavigationTiming(ReadyState aReadyState)
   if (!IsTopLevelContentDocument()) {
     return;
   }
-  // If we dont have the timing yet (mostly because the doc is still loading),
+  // If we don't have the timing yet (mostly because the doc is still loading),
   // get it from docshell.
   RefPtr<nsDOMNavigationTiming> timing = mTiming;
   if (!timing) {

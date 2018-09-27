@@ -285,7 +285,7 @@ NSPR_API(PRMonitor*) PR_CTestAndEnterMonitor(void *address);
 ---------------------------------------------------------------------------*/
 #if defined(IRIX)
 /*
-** Irix specific initialization funtion to be called before PR_Init
+** Irix specific initialization function to be called before PR_Init
 ** is called by the application. Sets the CONF_INITUSERS and CONF_INITSIZE
 ** attributes of the shared arena set up by nspr.
 **

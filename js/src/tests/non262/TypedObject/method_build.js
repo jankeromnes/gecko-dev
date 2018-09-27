@@ -41,7 +41,7 @@ function oneDimensionalArrayOfStructs() {
 // and base-10 digit in the output.
 //
 // (Note that leading zeros must be elided in the expected-values to
-// avoid inadvertantly interpreting the numbers as octal constants.)
+// avoid inadvertently interpreting the numbers as octal constants.)
 
 function twoDimensionalArrayOfStructsWithDepth2() {
   var grain = new StructType({f: uint32});

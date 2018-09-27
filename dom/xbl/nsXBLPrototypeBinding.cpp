@@ -1381,7 +1381,7 @@ nsXBLPrototypeBinding::WriteContentNode(nsIObjectOutputStream* aStream,
   nsresult rv;
 
   if (!aNode->IsElement()) {
-    // Text is writen out as a single byte for the type, followed by the text.
+    // Text is written out as a single byte for the type, followed by the text.
     uint8_t type = XBLBinding_Serialize_NoContent;
     switch (aNode->NodeType()) {
       case nsINode::TEXT_NODE:

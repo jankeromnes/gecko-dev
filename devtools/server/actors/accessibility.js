@@ -1031,7 +1031,7 @@ const AccessibilityActor = ActorClassWithSpec(accessibilitySpec, {
   },
 
   /**
-   * Getter for a message manager that corresponds to a current tab. It is onyl
+   * Getter for a message manager that corresponds to a current tab. It is only
    * used if the AccessibilityActor runs in the child process.
    *
    * @return {Object}

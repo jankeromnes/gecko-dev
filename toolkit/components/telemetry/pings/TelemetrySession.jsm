@@ -309,7 +309,7 @@ var TelemetryScheduler = {
   _sentDailyPingToday(nowDate) {
     // This is today's date and also the previous midnight (0:00).
     const todayDate = Utils.truncateToDays(nowDate);
-    // We consider a ping sent for today if it occured after or at 00:00 today.
+    // We consider a ping sent for today if it occurred after or at 00:00 today.
     return (this._lastDailyPingTime >= todayDate.getTime());
   },
 

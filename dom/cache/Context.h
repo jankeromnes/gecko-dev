@@ -211,7 +211,7 @@ private:
   RefPtr<Action> mInitAction;
   nsTArray<PendingAction> mPendingActions;
 
-  // Weak refs since activites must remove themselves from this list before
+  // Weak refs since activities must remove themselves from this list before
   // being destroyed by calling RemoveActivity().
   typedef nsTObserverArray<Activity*> ActivityList;
   ActivityList mActivityList;

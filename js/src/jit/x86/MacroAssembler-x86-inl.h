@@ -1135,7 +1135,7 @@ MacroAssembler::truncateFloat32ToUInt64(Address src, Address dest, Register temp
 
     truncateFloat32ToInt64(src, dest, temp);
 
-    // For unsigned conversion the case of [INT64, UINT64] needs to get handle seperately.
+    // For unsigned conversion the case of [INT64, UINT64] needs to get handle separately.
     load32(HighWord(dest), temp);
     branch32(Assembler::Condition::NotSigned, temp, Imm32(0), &done);
 
@@ -1163,7 +1163,7 @@ MacroAssembler::truncateDoubleToUInt64(Address src, Address dest, Register temp,
 
     truncateDoubleToInt64(src, dest, temp);
 
-    // For unsigned conversion the case of [INT64, UINT64] needs to get handle seperately.
+    // For unsigned conversion the case of [INT64, UINT64] needs to get handle separately.
     load32(HighWord(dest), temp);
     branch32(Assembler::Condition::NotSigned, temp, Imm32(0), &done);
 

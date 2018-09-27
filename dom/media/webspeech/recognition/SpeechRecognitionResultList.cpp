@@ -21,8 +21,8 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(SpeechRecognitionResultList)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-SpeechRecognitionResultList::SpeechRecognitionResultList(SpeechRecognition* aParent)
-  : mParent(aParent)
+SpeechRecognitionResultList::SpeechRecognitionResultList(SpeechRecognition* apparent)
+  : mParent(apparent)
 {
 }
 

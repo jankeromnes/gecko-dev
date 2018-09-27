@@ -299,7 +299,7 @@ protected:
 
   /**
    * Since we've removed the XPCOM interface to HTML elements, we need a way to
-   * retreive async state from script elements without bringing the type in.
+   * retrieve async state from script elements without bringing the type in.
    */
   virtual bool GetAsyncState() = 0;
 

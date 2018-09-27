@@ -4713,10 +4713,10 @@ nsContentUtils::HasMutationListeners(nsIDocument* aDocument,
 }
 
 void
-nsContentUtils::MaybeFireNodeRemoved(nsINode* aChild, nsINode* aParent)
+nsContentUtils::MaybeFireNodeRemoved(nsINode* aChild, nsINode* apparent)
 {
   MOZ_ASSERT(aChild, "Missing child");
-  MOZ_ASSERT(aChild->GetParentNode() == aParent, "Wrong parent");
+  MOZ_ASSERT(aChild->GetParentNode() == apparent, "Wrong parent");
   MOZ_ASSERT(aChild->OwnerDoc() == aParent->OwnerDoc(), "Wrong owner-doc");
 
   // Having an explicit check here since it's an easy mistake to fall into,
@@ -4744,11 +4744,11 @@ nsContentUtils::MaybeFireNodeRemoved(nsINode* aChild, nsINode* aParent)
   }
 
   if (HasMutationListeners(aChild,
-        NS_EVENT_BITS_MUTATION_NODEREMOVED, aParent)) {
+        NS_EVENT_BITS_MUTATION_NODEREMOVED, apparent)) {
     InternalMutationEvent mutation(true, eLegacyNodeRemoved);
-    mutation.mRelatedNode = aParent;
+    mutation.mRelatedNode = apparent;
 
-    mozAutoSubtreeModified subtree(aParent->OwnerDoc(), aParent);
+    mozAutoSubtreeModified subtree(apparent->OwnerDoc(), apparent);
     EventDispatcher::Dispatch(aChild, nullptr, &mutation);
   }
 }
@@ -7692,7 +7692,7 @@ struct UIStateChangeInfo {
 };
 
 bool
-SetKeyboardIndicatorsChild(TabParent* aParent, void* aArg)
+SetKeyboardIndicatorsChild(TabParent* apparent, void* aArg)
 {
   UIStateChangeInfo* stateInfo = static_cast<UIStateChangeInfo*>(aArg);
   Unused << aParent->SendSetKeyboardIndicators(stateInfo->mShowAccelerators,
@@ -7789,7 +7789,7 @@ nsContentUtils::TransferablesToIPCTransferables(nsIArray* aTransferables,
                                                 nsTArray<IPCDataTransfer>& aIPC,
                                                 bool aInSyncMessage,
                                                 mozilla::dom::nsIContentChild* aChild,
-                                                mozilla::dom::nsIContentParent* aParent)
+                                                mozilla::dom::nsIContentParent* apparent)
 {
   aIPC.Clear();
   if (aTransferables) {
@@ -7798,7 +7798,7 @@ nsContentUtils::TransferablesToIPCTransferables(nsIArray* aTransferables,
     for (uint32_t i = 0; i < transferableCount; ++i) {
       IPCDataTransfer* dt = aIPC.AppendElement();
       nsCOMPtr<nsITransferable> transferable = do_QueryElementAt(aTransferables, i);
-      TransferableToIPCTransferable(transferable, dt, aInSyncMessage, aChild, aParent);
+      TransferableToIPCTransferable(transferable, dt, aInSyncMessage, aChild, apparent);
     }
   }
 }
@@ -7932,14 +7932,14 @@ nsContentUtils::IsFlavorImage(const nsACString& aFlavor)
 
 static Shmem
 ConvertToShmem(mozilla::dom::nsIContentChild* aChild,
-               mozilla::dom::nsIContentParent* aParent,
+               mozilla::dom::nsIContentParent* apparent,
                const nsACString& aInput)
 {
-  MOZ_ASSERT((aChild && !aParent) || (!aChild && aParent));
+  MOZ_ASSERT((aChild && !apparent) || (!aChild && apparent));
 
   IShmemAllocator* allocator =
     aChild ? static_cast<IShmemAllocator*>(aChild)
-           : static_cast<IShmemAllocator*>(aParent);
+           : static_cast<IShmemAllocator*>(apparent);
 
   Shmem result;
   if (!allocator->AllocShmem(aInput.Length(),
@@ -7960,9 +7960,9 @@ nsContentUtils::TransferableToIPCTransferable(nsITransferable* aTransferable,
                                               IPCDataTransfer* aIPCDataTransfer,
                                               bool aInSyncMessage,
                                               mozilla::dom::nsIContentChild* aChild,
-                                              mozilla::dom::nsIContentParent* aParent)
+                                              mozilla::dom::nsIContentParent* apparent)
 {
-  MOZ_ASSERT((aChild && !aParent) || (!aChild && aParent));
+  MOZ_ASSERT((aChild && !apparent) || (!aChild && apparent));
 
   if (aTransferable) {
     nsCOMPtr<nsIArray> flavorList;
@@ -8000,7 +8000,7 @@ nsContentUtils::TransferableToIPCTransferable(nsITransferable* aTransferable,
           IPCDataTransferItem* item = aIPCDataTransfer->items().AppendElement();
           item->flavor() = flavorStr;
 
-          Shmem dataAsShmem = ConvertToShmem(aChild, aParent, dataAsString);
+          Shmem dataAsShmem = ConvertToShmem(aChild, apparent, dataAsString);
           if (!dataAsShmem.IsReadable() || !dataAsShmem.Size<char>()) {
             continue;
           }
@@ -8022,7 +8022,7 @@ nsContentUtils::TransferableToIPCTransferable(nsITransferable* aTransferable,
             nsCString imageData;
             NS_ConsumeStream(stream, UINT32_MAX, imageData);
 
-            Shmem imageDataShmem = ConvertToShmem(aChild, aParent, imageData);
+            Shmem imageDataShmem = ConvertToShmem(aChild, apparent, imageData);
             if (!imageDataShmem.IsReadable() || !imageDataShmem.Size<char>()) {
               continue;
             }
@@ -8048,7 +8048,7 @@ nsContentUtils::TransferableToIPCTransferable(nsITransferable* aTransferable,
             size_t length;
             int32_t stride;
             IShmemAllocator* allocator = aChild ? static_cast<IShmemAllocator*>(aChild)
-                                                : static_cast<IShmemAllocator*>(aParent);
+                                                : static_cast<IShmemAllocator*>(apparent);
             Maybe<Shmem> surfaceData = GetSurfaceData(dataSurface, &length, &stride,
                                                       allocator);
 
@@ -8088,14 +8088,14 @@ nsContentUtils::TransferableToIPCTransferable(nsITransferable* aTransferable,
                 nsAutoCString data;
                 SlurpFileToString(file, data);
 
-                Shmem dataAsShmem = ConvertToShmem(aChild, aParent, data);
+                Shmem dataAsShmem = ConvertToShmem(aChild, apparent, data);
                 item->data() = dataAsShmem;
               }
 
               continue;
             }
 
-            if (aParent) {
+            if (apparent) {
               bool isDir = false;
               if (NS_SUCCEEDED(file->IsDirectory(&isDir)) && isDir) {
                 nsAutoString path;
@@ -8144,8 +8144,8 @@ nsContentUtils::TransferableToIPCTransferable(nsITransferable* aTransferable,
               }
 
               data = ipcBlob;
-            } else if (aParent) {
-              nsresult rv = IPCBlobUtils::Serialize(blobImpl, aParent, ipcBlob);
+            } else if (apparent) {
+              nsresult rv = IPCBlobUtils::Serialize(blobImpl, apparent, ipcBlob);
               if (NS_WARN_IF(NS_FAILED(rv))) {
                 continue;
               }
@@ -8762,13 +8762,13 @@ nsContentUtils::StorageAllowedForDocument(nsIDocument* aDoc)
 nsContentUtils::StorageAccess
 nsContentUtils::StorageAllowedForNewWindow(nsIPrincipal* aPrincipal,
                                            nsIURI* aURI,
-                                           nsPIDOMWindowInner* aParent)
+                                           nsPIDOMWindowInner* apparent)
 {
   MOZ_ASSERT(aPrincipal);
   MOZ_ASSERT(aURI);
   // parent may be nullptr
 
-  return InternalStorageAllowedForPrincipal(aPrincipal, aParent, aURI, nullptr);
+  return InternalStorageAllowedForPrincipal(aPrincipal, apparent, aURI, nullptr);
 }
 
 // static, public
@@ -9028,7 +9028,7 @@ nsContentUtils::InternalStorageAllowedForPrincipal(nsIPrincipal* aPrincipal,
   //   within a specific whitelist.
   //
   // This means that behavior for storage with internal about: URIs should not be
-  // affected, which is desireable due to the lack of automated testing for about:
+  // affected, which is desirable due to the lack of automated testing for about:
   // URIs with these preferences set, and the importance of the correct functioning
   // of these URIs even with custom preferences.
   nsCOMPtr<nsIURI> uri = aURI;
@@ -9557,9 +9557,9 @@ StartElement(Element* aContent, StringBuilder& aBuilder)
 }
 
 static inline bool
-ShouldEscape(nsIContent* aParent)
+ShouldEscape(nsIContent* apparent)
 {
-  if (!aParent || !aParent->IsHTMLElement()) {
+  if (!apparent || !apparent->IsHTMLElement()) {
     return true;
   }
 

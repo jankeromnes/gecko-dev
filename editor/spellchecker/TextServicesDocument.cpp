@@ -1501,11 +1501,11 @@ TextServicesDocument::CreateDocumentContentRange()
 
 already_AddRefed<nsRange>
 TextServicesDocument::CreateDocumentContentRootToNodeOffsetRange(
-                        nsINode* aParent,
+                        nsINode* apparent,
                         uint32_t aOffset,
                         bool aToStart)
 {
-  if (NS_WARN_IF(!aParent)) {
+  if (NS_WARN_IF(!apparent)) {
     return nullptr;
   }
 
@@ -1520,17 +1520,17 @@ TextServicesDocument::CreateDocumentContentRootToNodeOffsetRange(
 
   if (aToStart) {
     // The range should begin at the start of the document
-    // and extend up until (aParent, aOffset).
+    // and extend up until (apparent, aOffset).
 
     startNode = bodyNode;
     startOffset = 0;
-    endNode     = aParent;
+    endNode     = apparent;
     endOffset   = aOffset;
   } else {
-    // The range should begin at (aParent, aOffset) and
+    // The range should begin at (apparent, aOffset) and
     // extend to the end of the document.
 
-    startNode   = aParent;
+    startNode   = apparent;
     startOffset = aOffset;
     endNode = bodyNode;
     endOffset = endNode ? endNode->GetChildCount() : 0;
@@ -3009,7 +3009,7 @@ TextServicesDocument::DidSplitNode(nsINode* aExistingRightNode,
 NS_IMETHODIMP
 TextServicesDocument::DidJoinNodes(nsINode* aLeftNode,
                                    nsINode* aRightNode,
-                                   nsINode* aParent,
+                                   nsINode* apparent,
                                    nsresult aResult)
 {
   if (NS_WARN_IF(NS_FAILED(aResult))) {

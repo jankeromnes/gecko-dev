@@ -2044,7 +2044,7 @@ class MacroAssembler : public MacroAssemblerSpecific
     //   - Use conditional move instructions. Some CPUs have a branch predictor,
     //     and not a flag predictor. In such cases, using a conditional move
     //     instruction to zero some pointer/index is enough to add a
-    //     data-dependency which prevents any futher executions until the load is
+    //     data-dependency which prevents any further executions until the load is
     //     resolved.
 
     void spectreMaskIndex(Register index, Register length, Register output);

@@ -4492,7 +4492,7 @@ static MV_REFERENCE_FRAME get_frame_type(const AV1_COMP *cpi) {
     return GOLDEN_FRAME;
   else
     // TODO(zoeliu): To investigate whether a frame_type other than
-    // INTRA/ALTREF/GOLDEN/LAST needs to be specified seperately.
+    // INTRA/ALTREF/GOLDEN/LAST needs to be specified separately.
     return LAST_FRAME;
 }
 
@@ -4780,7 +4780,7 @@ static void enforce_max_ref_frames(AV1_COMP *cpi) {
       total_valid_refs++;
   }
 
-  // NOTE(zoeliu): When all the possible reference frames are availble, we
+  // NOTE(zoeliu): When all the possible reference frames are available, we
   // reduce the number of reference frames by 1, following the rules of:
   // (1) Retain GOLDEN_FARME/ALTEF_FRAME;
   // (2) Check the earliest 2 remaining reference frames, and remove the one
@@ -5348,7 +5348,7 @@ void av1_encode_frame(AV1_COMP *cpi) {
     // It does the same analysis for transform size selection also.
     //
     // TODO(zoeliu): To investigate whether a frame_type other than
-    // INTRA/ALTREF/GOLDEN/LAST needs to be specified seperately.
+    // INTRA/ALTREF/GOLDEN/LAST needs to be specified separately.
     const MV_REFERENCE_FRAME frame_type = get_frame_type(cpi);
     int64_t *const mode_thrs = rd_opt->prediction_type_threshes[frame_type];
     const int is_alt_ref = frame_type == ALTREF_FRAME;

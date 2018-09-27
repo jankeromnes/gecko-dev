@@ -42,7 +42,7 @@ js::CompileError::throwError(JSContext* cx)
     }
 
     // If there's a runtime exception type associated with this error
-    // number, set that as the pending exception.  For errors occuring at
+    // number, set that as the pending exception.  For errors occurring at
     // compile time, this is very likely to be a JSEXN_SYNTAXERR.
     //
     // If an exception is thrown but not caught, the JSREPORT_EXCEPTION

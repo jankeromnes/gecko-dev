@@ -44,8 +44,8 @@ protected:
   virtual ~DocumentObserver() = default;
 
 private:
-  explicit DocumentObserver(nsISupports* aParent, dom::MozDocumentCallback& aCallbacks)
-    : mParent(aParent)
+  explicit DocumentObserver(nsISupports* apparent, dom::MozDocumentCallback& aCallbacks)
+    : mParent(apparent)
     , mCallbacks(&aCallbacks)
   {}
 

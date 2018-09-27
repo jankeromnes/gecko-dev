@@ -84,7 +84,7 @@ Projects using psutil
 =====================
 
 At the time of writing psutil has roughly
-`2.9 milion downloads <https://github.com/giampaolo/psutil/issues/1053#issuecomment-340166262>`__
+`2.9 million downloads <https://github.com/giampaolo/psutil/issues/1053#issuecomment-340166262>`__
 per month and there are over
 `6000 open source projects <https://libraries.io/pypi/psutil/dependent_repositories?page=1>`__
 on github which depend from psutil.

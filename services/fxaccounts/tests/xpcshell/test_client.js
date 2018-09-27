@@ -593,7 +593,7 @@ add_task(async function test_accountExists() {
           break;
 
         // This user's account doesn't exist
-        case "i.dont.exist@example.com":
+        case "i.don't.exist@example.com":
           response.setStatusLine(request.httpVersion, 400, "Bad request");
           response.bodyOutputStream.write(doesntExistMessage, doesntExistMessage.length);
           break;
@@ -620,7 +620,7 @@ add_task(async function test_accountExists() {
   result = await client.accountExists("i.also.exist@example.com");
   Assert.ok(result);
 
-  result = await client.accountExists("i.dont.exist@example.com");
+  result = await client.accountExists("i.don't.exist@example.com");
   Assert.ok(!result);
 
   try {

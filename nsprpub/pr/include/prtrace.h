@@ -416,7 +416,7 @@ NSPR_API(PRTraceHandle)
 );
 
 /* -----------------------------------------------------------------------
-** FUNCTION: PR_GetTraceNameFromHandle() -- Retreive trace name
+** FUNCTION: PR_GetTraceNameFromHandle() -- Retrieve trace name
 ** by bandle.
 ** 
 ** DESCRIPTION:
@@ -471,7 +471,7 @@ NSPR_API(void)
 **  PRTraceHandle or NULL when there are no trace handles.
 ** 
 ** RESTRICTIONS:
-**  Iterating thru the trace handles via FindFirst/FindNext
+**  Iterating through the trace handles via FindFirst/FindNext
 ** should be done under protection of the trace handle lock.
 ** See: PR_SetTraceOption( PRLockTraceHandles ).
 ** 
@@ -513,7 +513,7 @@ NSPR_API(PRTraceHandle)
 **  PRTraceHandle or NULL when there are no trace handles.
 ** 
 ** RESTRICTIONS:
-**  Iterating thru the trace handles via FindNext should be done
+**  Iterating through the trace handles via FindNext should be done
 ** under protection of the trace handle lock. See: (
 ** PR_SetTraceOption( PRLockTraceHandles ).
 ** 
@@ -587,7 +587,7 @@ NSPR_API(void)
 );
 
 /* -----------------------------------------------------------------------
-** FUNCTION: PR_GetTraceEntries() -- Retreive trace entries from
+** FUNCTION: PR_GetTraceEntries() -- Retrieve trace entries from
 ** the Trace Facility
 ** 
 ** DESCRIPTION:

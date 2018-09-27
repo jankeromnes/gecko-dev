@@ -364,10 +364,10 @@ private:
   RefPtr<Worklet> mWorklet;
   nsTArray<UniquePtr<WebAudioDecodeJob> > mDecodeJobs;
   // This array is used to keep the suspend/close promises alive until
-  // they are resolved, so we can safely pass them accross threads.
+  // they are resolved, so we can safely pass them across threads.
   nsTArray<RefPtr<Promise>> mPromiseGripArray;
   // This array is used to onlly keep the resume promises alive until they are
-  // resolved, so we can safely pass them accross threads. If the audio context
+  // resolved, so we can safely pass them across threads. If the audio context
   // is not allowed to play, the promise would be pending in this array and be
   // resolved until audio context has been allowed and user call resume() again.
   nsTArray<RefPtr<Promise>> mPendingResumePromises;

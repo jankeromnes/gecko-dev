@@ -20,7 +20,7 @@ from voluptuous import Any, Required, Optional
 
 
 # Until bug 1331141 is fixed, if you are adding any new artifacts here that
-# need to be transfered to S3, please be aware you also need to follow-up
+# need to be transferred to S3, please be aware you also need to follow-up
 # with a beetmover patch in https://github.com/mozilla-releng/beetmoverscript/.
 # See example in bug 1348286
 _MOBILE_UPSTREAM_ARTIFACTS_UNSIGNED_EN_US = [
@@ -44,7 +44,7 @@ _MOBILE_UPSTREAM_ARTIFACTS_UNSIGNED_EN_US = [
     "en-US/target.jsshell.zip",
 ]
 # Until bug 1331141 is fixed, if you are adding any new artifacts here that
-# need to be transfered to S3, please be aware you also need to follow-up
+# need to be transferred to S3, please be aware you also need to follow-up
 # with a beetmover patch in https://github.com/mozilla-releng/beetmoverscript/.
 # See example in bug 1348286
 _MOBILE_UPSTREAM_ARTIFACTS_UNSIGNED_MULTI = [
@@ -57,14 +57,14 @@ _MOBILE_UPSTREAM_ARTIFACTS_UNSIGNED_MULTI = [
     "robocop.apk",
 ]
 # Until bug 1331141 is fixed, if you are adding any new artifacts here that
-# need to be transfered to S3, please be aware you also need to follow-up
+# need to be transferred to S3, please be aware you also need to follow-up
 # with a beetmover patch in https://github.com/mozilla-releng/beetmoverscript/.
 # See example in bug 1348286
 _MOBILE_UPSTREAM_ARTIFACTS_SIGNED_EN_US = [
     "en-US/target.apk",
 ]
 # Until bug 1331141 is fixed, if you are adding any new artifacts here that
-# need to be transfered to S3, please be aware you also need to follow-up
+# need to be transferred to S3, please be aware you also need to follow-up
 # with a beetmover patch in https://github.com/mozilla-releng/beetmoverscript/.
 # See example in bug 1348286
 _MOBILE_UPSTREAM_ARTIFACTS_SIGNED_MULTI = [
@@ -73,7 +73,7 @@ _MOBILE_UPSTREAM_ARTIFACTS_SIGNED_MULTI = [
 
 
 # Until bug 1331141 is fixed, if you are adding any new artifacts here that
-# need to be transfered to S3, please be aware you also need to follow-up
+# need to be transferred to S3, please be aware you also need to follow-up
 # with a beetmover patch in https://github.com/mozilla-releng/beetmoverscript/.
 # See example in bug 1348286
 UPSTREAM_ARTIFACT_UNSIGNED_PATHS = {
@@ -88,7 +88,7 @@ UPSTREAM_ARTIFACT_UNSIGNED_PATHS = {
     'android-api-16-nightly-multi': _MOBILE_UPSTREAM_ARTIFACTS_UNSIGNED_MULTI,
 }
 # Until bug 1331141 is fixed, if you are adding any new artifacts here that
-# need to be transfered to S3, please be aware you also need to follow-up
+# need to be transferred to S3, please be aware you also need to follow-up
 # with a beetmover patch in https://github.com/mozilla-releng/beetmoverscript/.
 # See example in bug 1348286
 UPSTREAM_ARTIFACT_SIGNED_PATHS = {
@@ -103,7 +103,7 @@ UPSTREAM_ARTIFACT_SIGNED_PATHS = {
     'android-api-16-nightly-multi': ["target.apk"],
 }
 # Until bug 1331141 is fixed, if you are adding any new artifacts here that
-# need to be transfered to S3, please be aware you also need to follow-up
+# need to be transferred to S3, please be aware you also need to follow-up
 # with a beetmover patch in https://github.com/mozilla-releng/beetmoverscript/.
 # See example in bug 1348286
 UPSTREAM_SOURCE_ARTIFACTS = [

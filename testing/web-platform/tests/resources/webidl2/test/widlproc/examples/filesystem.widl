@@ -137,7 +137,7 @@ module filesystem {
 	 */
 	[Callback=FunctionOnly, NoInterfaceObject] interface FileSystemSuccessCallback {
 	   /**
-	    * \brief Method invoked when the asynchronous call completes succesfully
+	    * \brief Method invoked when the asynchronous call completes successfully
 	    *
 	    * \param file The file resulting from the asynchronous call
 	    */
@@ -640,7 +640,7 @@ module filesystem {
 		 * \endcode
 		 *
 		 * \param successCallback called when the file has been copied.
-		 * \param errorCallback called if an error occured.
+		 * \param errorCallback called if an error occurred.
 		 * \param filePath the new file path, [a-Z0-9_- /]+ are allowed 
 		 * \param overwrite <em>true</em> enforces overwriting an existing file.
 		 * \return PendingOperation enabling the requester to cancel this request.
@@ -676,7 +676,7 @@ module filesystem {
 		 * \endcode
 		 *
 		 * \param successCallback called when the file has been copied.
-		 * \param errorCallback called if an error occured.
+		 * \param errorCallback called if an error occurred.
 		 * \param filePath the new file name, [a-Z0-9_- /]+ are allowed
 		 * \param overwrite <em>true</em> enforces overwriting an existing file.
 		 * \return PendingOperation enabling the requester to cancel this request.

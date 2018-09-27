@@ -148,7 +148,7 @@ stun_get_win32_addrs(nr_local_addr addrs[], int maxaddrs, int *count)
 {
     int r, _status;
     PIP_ADAPTER_ADDRESSES AdapterAddresses = NULL, tmpAddress = NULL;
-    // recomended per https://msdn.microsoft.com/en-us/library/windows/desktop/aa365915(v=vs.85).aspx
+    // recommended per https://msdn.microsoft.com/en-us/library/windows/desktop/aa365915(v=vs.85).aspx
     static const ULONG initialBufLen = 15000;
     ULONG buflen = initialBufLen;
     char bin_hashed_ifname[NR_MD5_HASH_LENGTH];

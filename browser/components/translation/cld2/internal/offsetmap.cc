@@ -160,7 +160,7 @@ void OffsetMap::Flush() {
     return;
   }
   // We may be emitting a copy op just after a copy op because +1 -1 cancelled
-  // inbetween. If the lengths don't need a prefix byte, combine them
+  // between. If the lengths don't need a prefix byte, combine them
   if ((pending_op_ == COPY_OP) && !diffs_.empty()) {
     char c = diffs_[diffs_.size() - 1];
     MapOp prior_op = static_cast<MapOp>(OpPart(c));

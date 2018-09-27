@@ -2,7 +2,7 @@
 // - src/dstr-assignment/array-rest-iteration.case
 // - src/dstr-assignment/default/assignment-expr.template
 /*---
-description: In the presense of an AssignmentRestElement, value iteration exhausts the iterable value; (AssignmentExpression)
+description: In the presence of an AssignmentRestElement, value iteration exhausts the iterable value; (AssignmentExpression)
 esid: sec-variable-statement-runtime-semantics-evaluation
 es6id: 13.3.2.4
 features: [generators, destructuring-binding]

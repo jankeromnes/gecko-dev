@@ -1421,7 +1421,7 @@ class Process(object):
         """Parse /proc/{pid}/stat file. Return a list of fields where
         process name is in position 0.
         Using "man proc" as a reference: where "man proc" refers to
-        position N, always substract 2 (e.g starttime pos 22 in
+        position N, always subtract 2 (e.g starttime pos 22 in
         'man proc' == pos 20 in the list returned here).
         The return value is cached in case oneshot() ctx manager is
         in use.
@@ -1430,7 +1430,7 @@ class Process(object):
             data = f.read()
         # Process name is between parentheses. It can contain spaces and
         # other parentheses. This is taken into account by looking for
-        # the first occurrence of "(" and the last occurence of ")".
+        # the first occurrence of "(" and the last occurrence of ")".
         rpar = data.rfind(b')')
         name = data[data.find(b'(') + 1:rpar]
         others = data[rpar + 2:].split()

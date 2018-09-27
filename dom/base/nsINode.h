@@ -219,7 +219,7 @@ public:
    * finding the difference between two elements of the group Z < 2^64.  Once
    * we know the difference between two elements we only need to check that is
    * less than the given number of mutations to know less than that many
-   * mutations occured.  Assuming constant 1ns mutations it would take 584
+   * mutations occurred.  Assuming constant 1ns mutations it would take 584
    * years for sGeneration to fully wrap around so we can ignore a guard living
    * through a full wrap around.
    */
@@ -1965,7 +1965,7 @@ protected:
   }
 
 #ifdef DEBUG
-  // Note: virtual so that IsInNativeAnonymousSubtree can be called accross
+  // Note: virtual so that IsInNativeAnonymousSubtree can be called across
   // module boundaries.
   virtual void CheckNotNativeAnonymous() const;
 #endif

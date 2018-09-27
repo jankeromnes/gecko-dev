@@ -255,7 +255,7 @@ protected:
    */
   FileSystemTaskParentBase(FileSystemBase* aFileSystem,
                            const FileSystemParams& aParam,
-                           FileSystemRequestParent* aParent);
+                           FileSystemRequestParent* apparent);
 
   virtual
   ~FileSystemTaskParentBase();

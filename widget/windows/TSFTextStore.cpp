@@ -7602,7 +7602,7 @@ TSFTextStore::CurrentKeyboardLayoutHasIME()
   }
   if (FAILED(hr)) {
     MOZ_LOG(sTextStoreLog, LogLevel::Error,
-      ("  TSFTextStore::CurrentKeyboardLayoutHasIME() FAILED to retreive "
+      ("  TSFTextStore::CurrentKeyboardLayoutHasIME() FAILED to retrieve "
        "active profile"));
     return false;
   }

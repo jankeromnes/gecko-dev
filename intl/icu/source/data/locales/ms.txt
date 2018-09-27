@@ -2164,10 +2164,10 @@ ms{
             }
             relativeTime{
                 future{
-                    other{"dlm {0} suku thn"}
+                    other{"dlm {0} suku then"}
                 }
                 past{
-                    other{"{0} suku thn lalu"}
+                    other{"{0} suku then lalu"}
                 }
             }
         }
@@ -2180,10 +2180,10 @@ ms{
             }
             relativeTime{
                 future{
-                    other{"dlm {0} suku thn"}
+                    other{"dlm {0} suku then"}
                 }
                 past{
-                    other{"{0} suku thn lalu"}
+                    other{"{0} suku then lalu"}
                 }
             }
         }
@@ -2549,34 +2549,34 @@ ms{
             }
         }
         year-narrow{
-            dn{"thn"}
+            dn{"then"}
             relative{
-                "-1"{"thn lepas"}
-                "0"{"thn ini"}
-                "1"{"thn depan"}
+                "-1"{"then lepas"}
+                "0"{"then ini"}
+                "1"{"then depan"}
             }
             relativeTime{
                 future{
-                    other{"dalam {0} thn"}
+                    other{"dalam {0} then"}
                 }
                 past{
-                    other{"{0} thn lalu"}
+                    other{"{0} then lalu"}
                 }
             }
         }
         year-short{
-            dn{"thn"}
+            dn{"then"}
             relative{
-                "-1"{"thn lepas"}
-                "0"{"thn ini"}
-                "1"{"thn depan"}
+                "-1"{"then lepas"}
+                "0"{"then ini"}
+                "1"{"then depan"}
             }
             relativeTime{
                 future{
-                    other{"dalam {0} thn"}
+                    other{"dalam {0} then"}
                 }
                 past{
-                    other{"{0} thn lalu"}
+                    other{"{0} then lalu"}
                 }
             }
         }

@@ -100,7 +100,7 @@ class BrowserAction extends EventEmitter {
    * Retreives a property of the browser action for the specified tab.
    *
    * @param {Object} tab The tab to retrieve the property from. If null, the default value is returned.
-   * @param {string} prop The property to retreive. Currently only "name" is supported.
+   * @param {string} prop The property to retrieve. Currently only "name" is supported.
    * @returns {string} the value stored for the specified property. If the value is undefined, then the
    *    default value is returned.
    */

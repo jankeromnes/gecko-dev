@@ -643,7 +643,7 @@ bool ProcessGeneric(ots::FontFile *header,
       uncompressed_sum += tables[i].uncompressed_length;
     }
     // since we required that the file be < 1GB in length, and that the table
-    // length is < 1GB, the following addtion doesn't overflow
+    // length is < 1GB, the following addition doesn't overflow
     uint32_t end_byte = tables[i].offset + tables[i].length;
     // Tables in the WOFF file must be aligned 4-byte boundary.
     if (signature == OTS_TAG('w','O','F','F')) {
@@ -723,8 +723,8 @@ bool ProcessGeneric(ots::FontFile *header,
       // No TrueType glyph found.
       //
       // We don't sanitize bitmap tables, but don’t reject bitmap-only fonts if
-      // we are asked to pass them thru.
-      // Also don’t reject if we are asked to pass glyf/loca thru.
+      // we are asked to pass them through.
+      // Also don’t reject if we are asked to pass glyf/loca through.
       if (!font->GetTable(OTS_TAG('C','B','D','T')) &&
           !font->GetTable(OTS_TAG('C','B','L','C'))) {
         return OTS_FAILURE_MSG_HDR("no supported glyph shapes table(s) present");

@@ -656,7 +656,7 @@ XPCJSContext::GetStringName(unsigned index) const
 
 // No virtuals
 // XPCCallContext is ALWAYS declared as a local variable in some function;
-// i.e. instance lifetime is always controled by some C++ function returning.
+// i.e. instance lifetime is always controlled by some C++ function returning.
 //
 // These things are created frequently in many places. We *intentionally* do
 // not inialialize all members in order to save on construction overhead.

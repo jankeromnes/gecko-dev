@@ -44,7 +44,7 @@ public:
 class BasicCompositor : public Compositor
 {
 public:
-  explicit BasicCompositor(CompositorBridgeParent* aParent, widget::CompositorWidget* aWidget);
+  explicit BasicCompositor(CompositorBridgeParent* apparent, widget::CompositorWidget* aWidget);
 
 protected:
   virtual ~BasicCompositor();

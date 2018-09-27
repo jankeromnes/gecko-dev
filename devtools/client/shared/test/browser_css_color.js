@@ -81,7 +81,7 @@ function testColorMatch(name, hex, hsl, rgb, rgba, canvas) {
   };
   const test = function(color, type) {
     // hsla -> rgba -> hsla produces inaccurate results so we
-    // need some tolerence here.
+    // need some tolerance here.
     const tolerance = 3;
     clearCanvas();
 

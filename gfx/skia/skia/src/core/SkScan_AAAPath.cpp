@@ -811,7 +811,7 @@ static SK_ALWAYS_INLINE void blit_trapezoid_row(AdditiveBlitter* blitter, int y,
         return;
     }
 
-    // Edge crosses. Approximate it. This should only happend due to precision limit,
+    // Edge crosses. Approximate it. This should only happened due to precision limit,
     // so the approximation could be very coarse.
     if (ll > lr) {
 #ifdef SK_DEBUG
@@ -1188,7 +1188,7 @@ static inline void aaa_walk_convex_edges(SkAnalyticEdge* prevHead,
             SkASSERT(dY <= SK_Fixed1);
             // Smooth jumping to integer y may make the last nextLeft/nextRite out of bound.
             // Take them back into the bound here.
-            // Note that we substract kSnapHalf later so we have to add them to leftBound/riteBound
+            // Note that we subtract kSnapHalf later so we have to add them to leftBound/riteBound
             SkFixed nextLeft = SkTMax(left + SkFixedMul(dLeft, dY), leftBound + kSnapHalf);
             SkFixed nextRite = SkTMin(rite + SkFixedMul(dRite, dY), riteBound + kSnapHalf);
             SkASSERT((left & kSnapMask) >= leftBound && (rite & kSnapMask) <= riteBound &&
@@ -1296,7 +1296,7 @@ static inline bool edges_too_close(SkAnalyticEdge* prev, SkAnalyticEdge* next, S
 
     // Note that even if the following test failed, the edges might still be very close to each
     // other at some point within the current pixel row because of prev->fDX and next->fDX.
-    // However, to handle that case, we have to sacrafice more performance.
+    // However, to handle that case, we have to sacrifice more performance.
     // I think the current quality is good enough (mainly by looking at Nebraska-StateSeal.svg)
     // so I'll ignore fDX for performance tradeoff.
     return next && prev && next->fUpperY < lowerY && prev->fX + SLACK >=

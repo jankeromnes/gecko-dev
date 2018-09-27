@@ -369,7 +369,7 @@ mod tests {
     let(_, res) = p.tag_abc(input);
     match res {
       Done(extra, output) => { assert!(extra == leftover, "`Parser.tag_abc` consumed leftover input. leftover: {}", extra);
-                               assert!(output == consumed, "`Parser.tag_abc` doesnt return the string it consumed \
+                               assert!(output == consumed, "`Parser.tag_abc` doesn't return the string it consumed \
                                 on success. Expected `{}`, got `{}`.", consumed, output);
                              },
       other => panic!("`Parser.tag_abc` didn't succeed when it should have. \

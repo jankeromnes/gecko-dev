@@ -357,7 +357,7 @@ else
     print "U_NAMESPACE_BEGIN\n";
 
     #
-    # Emit the constants for indicies of Unicode Sets
+    # Emit the constants for indices of Unicode Sets
     #   Define one constant for each of the character classes encountered.
     #   At the same time, store the index corresponding to the set name back into hash.
     #
@@ -382,7 +382,7 @@ else
     print "    rbbiLastAction};\n\n";
 
     #
-    # Emit the struct definition for transtion table elements.
+    # Emit the struct definition for transition table elements.
     #
     print "//-------------------------------------------------------------------------------\n";
     print "//\n";

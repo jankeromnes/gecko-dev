@@ -37,10 +37,10 @@ public:
   void RemovePortInfo(MIDIPortInfo& aPortInfo);
 
   // Adds a newly created manager protocol object to manager array.
-  void AddManager(MIDIManagerParent* aParent);
+  void AddManager(MIDIManagerParent* apparent);
 
   // Removes a deleted manager protocol object from manager array.
-  void RemoveManager(MIDIManagerParent* aParent);
+  void RemoveManager(MIDIManagerParent* apparent);
 
   // Adds a newly created port protocol object to port array.
   void AddPort(MIDIPortParent* aPort);

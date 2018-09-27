@@ -234,10 +234,10 @@ nsSVGElement::Init()
 // nsIContent methods
 
 nsresult
-nsSVGElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+nsSVGElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                          nsIContent* aBindingParent)
 {
-  nsresult rv = nsSVGElementBase::BindToTree(aDocument, aParent,
+  nsresult rv = nsSVGElementBase::BindToTree(aDocument, apparent,
                                              aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

@@ -3131,7 +3131,7 @@ static void
 IncreaseDescriptorLimits()
 {
 #ifdef XP_UNIX
-  // Increase the fd limit to accomodate IPC resources like shared memory.
+  // Increase the fd limit to accommodate IPC resources like shared memory.
   static const rlim_t kFDs = 4096;
   struct rlimit rlim;
 
@@ -3798,7 +3798,7 @@ namespace mozilla {
 static void SetShutdownChecks() {
   // Set default first. On debug builds we crash. On nightly and local
   // builds we record. Nightlies will then send the info via telemetry,
-  // but it is usefull to have the data in about:telemetry in local builds
+  // but it is useful to have the data in about:telemetry in local builds
   // too.
 
 #ifdef DEBUG

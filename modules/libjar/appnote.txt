@@ -125,7 +125,7 @@ General Format of a ZIP file
           5 - Atari ST                  6 - OS/2 H.P.F.S.
           7 - Macintosh                 8 - Z-System
           9 - CP/M                     10 - Windows NTFS
-         11 thru 255 - unused
+         11 through 255 - unused
 
           The lower byte indicates the version number of the
           software used to encode the file.  The value/10
@@ -318,7 +318,7 @@ General Format of a ZIP file
           The Header ID field indicates the type of data that is in
           the following data block.
 
-          Header ID's of 0 thru 31 are reserved for use by PKWARE.
+          Header ID's of 0 through 31 are reserved for use by PKWARE.
           The remaining ID's can be used by third party vendors for
           proprietary usage.
 
@@ -856,7 +856,7 @@ Example:   0x02, 0x42, 0x01, 0x13
     This would generate the original bit length array of:
     (3, 3, 3, 3, 3, 2, 4, 4)
 
-    There are 8 codes in this table for the values 0 thru 7.  Using 
+    There are 8 codes in this table for the values 0 through 7.  Using 
     the algorithm to obtain the Shannon-Fano codes produces:
 
                                   Reversed     Order     Original
@@ -996,8 +996,8 @@ The bit lengths for the literal tables are sent first with the number
 of entries sent described by the 5 bits sent earlier.  There are up
 to 286 literal characters; the first 256 represent the respective 8
 bit character, code 256 represents the End-Of-Block code, the remaining
-29 codes represent copy lengths of 3 thru 258.  There are up to 30
-distance codes representing distances from 1 thru 32k as described
+29 codes represent copy lengths of 3 through 258.  There are up to 30
+distance codes representing distances from 1 through 32k as described
 below.
 
                              Length Codes
@@ -1120,7 +1120,7 @@ keys, based on random data, to render a plaintext attack on the
 data ineffective.
 
 Read the 12-byte encryption header into Buffer, in locations
-Buffer(0) thru Buffer(11).
+Buffer(0) through Buffer(11).
 
 loop for i <- 0 to 11
     C <- buffer(i) ^ decrypt_byte()

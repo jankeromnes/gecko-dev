@@ -235,7 +235,7 @@ void SendSideBandwidthEstimation::UpdateEstimate(int64_t now_ms) {
       // Note that by remembering the bitrate over the last second one can
       // rampup up one second faster than if only allowed to start ramping
       // at 8% per second rate now. E.g.:
-      //   If sending a constant 100kbps it can rampup immediatly to 108kbps
+      //   If sending a constant 100kbps it can rampup immediately to 108kbps
       //   whenever a receiver report is received with lower packet loss.
       //   If instead one would do: bitrate_ *= 1.08^(delta time), it would
       //   take over one second since the lower packet loss to achieve

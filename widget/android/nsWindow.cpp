@@ -1398,20 +1398,20 @@ nsWindow::IsTopLevel()
 }
 
 nsresult
-nsWindow::Create(nsIWidget* aParent,
+nsWindow::Create(nsIWidget* apparent,
                  nsNativeWidget aNativeParent,
                  const LayoutDeviceIntRect& aRect,
                  nsWidgetInitData* aInitData)
 {
-    ALOG("nsWindow[%p]::Create %p [%d %d %d %d]", (void*)this, (void*)aParent,
+    ALOG("nsWindow[%p]::Create %p [%d %d %d %d]", (void*)this, (void*)apparent,
          aRect.x, aRect.y, aRect.width, aRect.height);
 
-    nsWindow *parent = (nsWindow*) aParent;
+    nsWindow *parent = (nsWindow*) apparent;
     if (aNativeParent) {
         if (parent) {
             ALOG("Ignoring native parent on Android window [%p], "
                  "since parent was specified (%p %p)", (void*)this,
-                 (void*)aNativeParent, (void*)aParent);
+                 (void*)aNativeParent, (void*)apparent);
         } else {
             parent = (nsWindow*) aNativeParent;
         }

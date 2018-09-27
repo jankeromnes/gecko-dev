@@ -22,10 +22,10 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(GridTracks)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-GridTracks::GridTracks(GridDimension *aParent)
-  : mParent(aParent)
+GridTracks::GridTracks(GridDimension *apparent)
+  : mParent(apparent)
 {
-  MOZ_ASSERT(aParent,
+  MOZ_ASSERT(apparent,
     "Should never be instantiated with a null GridDimension");
 }
 

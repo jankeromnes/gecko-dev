@@ -216,7 +216,7 @@ WaylandDataOffer::SetDragStatus(GdkDragAction aAction, uint32_t aTime)
        signal (which routes to nsDragService::GetData() call) we need to
        accept at least one mime type before data_device_leave().
 
-       Real wl_data_offer_accept() for actualy requested data mime type is
+       Real wl_data_offer_accept() for actually requested data mime type is
        called from nsDragService::GetData().
     */
     if (mTargetMIMETypes[0]) {
@@ -660,7 +660,7 @@ data_device_drop (void                  *data,
  *                     valid any more.
  * data_device_motion - It's called when the drag and drop selection moves across
  *                      wl_surface.
- * data_device_drop - It's called when D&D operation is sucessfully finished and
+ * data_device_drop - It's called when D&D operation is successfully finished and
  *                    we can read the data from D&D.
  *                    It's generated only if we call wl_data_offer_accept() and
  *                    wl_data_offer_set_actions() from data_device_motion callback.

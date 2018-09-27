@@ -138,7 +138,7 @@ fips_140()
   echo "certutil -d ${P_R_FIPSDIR} -K -f ${R_FIPSPWFILE}"
   ${BINDIR}/certutil -d ${P_R_FIPSDIR} -K -f ${R_FIPSPWFILE} 2>&1
   # certutil -K now returns a failure if no keys are found. This verifies that
-  # our delete succeded.
+  # our delete succeeded.
   html_msg $? 255 "List the FIPS module keys (certutil -K)" "."
 
 

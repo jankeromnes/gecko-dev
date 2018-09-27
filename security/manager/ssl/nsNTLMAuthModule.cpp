@@ -778,7 +778,7 @@ GenerateType3Msg(const nsString &domain,
 
     time_t unix_time;
     uint64_t nt_time = time(&unix_time);
-    nt_time += 11644473600LL;    // Number of seconds betwen 1601 and 1970
+    nt_time += 11644473600LL;    // Number of seconds between 1601 and 1970
     nt_time *= 1000 * 1000 * 10; // Convert seconds to 100 ns units
 
     ntlmv2_blob1[0] = 1;

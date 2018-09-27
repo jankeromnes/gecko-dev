@@ -1182,7 +1182,7 @@ var ActivityStreamProvider = {
       map.set(host, link);
     }
 
-    // Convert all links that are supposed to be a seach shortcut to its canonical URL
+    // Convert all links that are supposed to be a search shortcut to its canonical URL
     if (didSuccessfulImport && Services.prefs.getBoolPref(`browser.newtabpage.activity-stream.${searchShortcuts.SEARCH_SHORTCUTS_EXPERIMENT}`)) {
       links.forEach(link => {
         let searchProvider = searchShortcuts.getSearchProvider(shortURL.shortURL(link));

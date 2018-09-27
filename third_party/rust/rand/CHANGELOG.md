@@ -70,7 +70,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.3.14] - 2016-02-13
 ### Fixed
-- Inline definitions from winapi/advapi32, wich decreases build times
+- Inline definitions from winapi/advapi32, which decreases build times
 
 
 ## [0.3.13] - 2016-01-09
@@ -265,5 +265,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.10-pre] - 2014-03-02
 ### Added
-- Seperate `rand` out of the standard library
+- Separate `rand` out of the standard library
 

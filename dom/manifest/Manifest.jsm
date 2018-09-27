@@ -42,7 +42,7 @@ function generateHash(aString) {
 }
 
 /**
- * Trims the query paramters from a url
+ * Trims the query parameters from a url
  */
 function stripQuery(url) {
   return url.split("?")[0];
@@ -158,7 +158,7 @@ var Manifests = {
       this._store = new JSONFile({path: this._path});
       await this._store.load();
 
-      // If we dont have any existing data, initialise empty
+      // If we don't have any existing data, initialise empty
       if (!this._store.data.hasOwnProperty("scopes")) {
         this._store.data.scopes = new Map();
       }

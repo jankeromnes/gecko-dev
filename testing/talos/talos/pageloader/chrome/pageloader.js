@@ -501,7 +501,7 @@ function plRecordTime(time) {
     // when doing base vs ref type of test, add pre 'base' or 'ref' to reported page name;
     // this is necessary so that if multiple subtests use same reference page, results for
     // each ref page run will be kept separate for each base vs ref run, and not grouped
-    // into just one set of results values for everytime that reference page was loaded
+    // into just one set of results values for every time that reference page was loaded
     if (baseVsRef) {
       recordedName = pages[pageIndex].pre + pageUrls[pageIndex];
     } else {

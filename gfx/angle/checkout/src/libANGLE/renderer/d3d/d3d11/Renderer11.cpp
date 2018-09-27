@@ -1496,7 +1496,7 @@ angle::Result Renderer11::drawArrays(const gl::Context *context, const gl::DrawC
                 }
 
                 // If pointsprite emulation is used with glDrawArraysInstanced then we need to take
-                // a less efficent code path. Instanced rendering of emulated pointsprites requires
+                // a less efficient code path. Instanced rendering of emulated pointsprites requires
                 // a loop to draw each batch of points. An offset into the instanced data buffer is
                 // calculated and applied on each iteration to ensure all instances are rendered
                 // correctly. Each instance being rendered requires the inputlayout cache to reapply
@@ -1588,7 +1588,7 @@ angle::Result Renderer11::drawElements(const gl::Context *context, const gl::Dra
     // rendered. Each instance is referenced by the bound index buffer from the the caller.
     //
     // Indexed pointsprite emulation replicates data for duplicate entries found in the index
-    // buffer. This is not an efficent rendering mechanism and is only used on downlevel renderers
+    // buffer. This is not an efficient rendering mechanism and is only used on downlevel renderers
     // that do not support geometry shaders.
     if (params.instances() == 0)
     {
@@ -1597,7 +1597,7 @@ angle::Result Renderer11::drawElements(const gl::Context *context, const gl::Dra
     }
 
     // If pointsprite emulation is used with glDrawElementsInstanced then we need to take a less
-    // efficent code path. Instanced rendering of emulated pointsprites requires a loop to draw each
+    // efficient code path. Instanced rendering of emulated pointsprites requires a loop to draw each
     // batch of points. An offset into the instanced data buffer is calculated and applied on each
     // iteration to ensure all instances are rendered correctly.
     UINT clampedVertexCount = params.getClampedVertexCount<UINT>();

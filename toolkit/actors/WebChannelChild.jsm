@@ -18,7 +18,7 @@ function getMessageManager(event) {
 
 // Preference containing the list (space separated) of origins that are
 // allowed to send non-string values through a WebChannel, mainly for
-// backwards compatability. See bug 1238128 for more information.
+// backwards compatibility. See bug 1238128 for more information.
 const URL_WHITELIST_PREF = "webchannel.allowObject.urlWhitelist";
 
 // Cached list of whitelisted principals, we avoid constructing this if the

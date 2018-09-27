@@ -136,7 +136,7 @@ add_task(async function test_something() {
 
   // Check that a sync completes even when there's bad data in the
   // collection. This will throw on fail, so just calling maybeSync is an
-  // acceptible test (the data below with last_modified of 300 is nonsense).
+  // acceptable test (the data below with last_modified of 300 is nonsense).
   Services.prefs.setCharPref("services.settings.server",
                              `http://localhost:${server.identity.primaryPort}/v1`);
   await PinningPreloadClient.maybeSync(5000, Date.now());

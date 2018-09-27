@@ -488,7 +488,7 @@ setBranchIslandTarget(
     ((short*)island->instructions)[kAddressHi]
     	= (((long) branchTo) >> 16) & 0x0000FFFF;
 
-    //	Fill in the (optional) instuction.
+    //	Fill in the (optional) instruction.
     if( instruction != 0 ) {
         ((short*)island->instructions)[kInstructionLo]
         	= instruction & 0x0000FFFF;

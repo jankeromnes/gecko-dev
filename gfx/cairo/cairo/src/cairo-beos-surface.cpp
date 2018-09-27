@@ -854,7 +854,7 @@ _cairo_beos_surface_set_clip_region (void              *abstract_surface,
     pixman_box16_t* rects = pixman_region_rects(region);
     BRegion bregion;
     for (int i = 0; i < count; ++i) {
-	// Have to substract one, because for pixman, the second coordinate
+	// Have to subtract one, because for pixman, the second coordinate
 	// lies outside the rectangle.
 	bregion.Include(BRect(rects[i].x1, rects[i].y1, rects[i].x2 - 1, rects[i].y2  - 1));
     }

@@ -314,7 +314,7 @@ impl Url {
     /// # use url::ParseError;
     ///
     /// # fn run() -> Result<(), ParseError> {
-    /// let url = Url::parse_with_params("https://example.net?dont=clobberme",
+    /// let url = Url::parse_with_params("https://example.net?don't=clobberme",
     ///                                  &[("lang", "rust"), ("browser", "servo")])?;
     /// # Ok(())
     /// # }

@@ -6,7 +6,7 @@
  * when opened through a touch event (long tap). */
 
 async function openAndCheckContextMenu(contextMenu, target) {
-  is(contextMenu.state, "closed", "Context menu is initally closed.");
+  is(contextMenu.state, "closed", "Context menu is initially closed.");
 
   let popupshown = BrowserTestUtils.waitForEvent(contextMenu, "popupshown");
   EventUtils.synthesizeNativeTapAtCenter(target, true);

@@ -906,7 +906,7 @@ ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
         return;
       }
 
-      // If the specified intial position is greater then the max position then
+      // If the specified initial position is greater then the max position then
       // clamp the box to the amount of steps it would take for the box to
       // reach the max position.
       if (Math.abs(position) > maxPosition) {
@@ -1090,7 +1090,7 @@ ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
 
           if (!regionNodeBoxes[cue.region.id]) {
             // create regionNode
-            // Adjust the container hieght to exclude the controlBar
+            // Adjust the container height to exclude the controlBar
             var adjustContainerBox = BoxPosition.getSimpleBoxPosition(rootOfCues);
             if (controlBarShown) {
               adjustContainerBox.height -= controlBarBox.height;
@@ -1115,7 +1115,7 @@ ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
           cue.displayState = styleBox.div;
           boxPositions.push(BoxPosition.getSimpleBoxPosition(currentRegionBox));
         } else {
-          // Compute the intial position and styles of the cue div.
+          // Compute the initial position and styles of the cue div.
           styleBox = new CueStyleBox(window, cue, styleOptions);
           styleBox.cueDiv.style.setProperty("--cue-font-size", fontSize + "px");
           rootOfCues.appendChild(styleBox.div);

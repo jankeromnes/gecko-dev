@@ -30,7 +30,7 @@ function spawnWithObserver(browser, observerFunc, func) {
     // Create a promise to be resolved when the text is complete. It is stored
     // on content, such that it can be waited on by calling waitForResolve. This
     // is done rather than returning it from this function such that the
-    // initialization can be yeilded on before yeilding on the conclusion of the
+    // initialization can be yeilded on before yielding on the conclusion of the
     // test.
     "content._promise = new Promise(_resolve => {",
     // These are variables which are used by the test runner to communicate
@@ -40,7 +40,7 @@ function spawnWithObserver(browser, observerFunc, func) {
     "    gLevel = level;",
     "    gArgs = Array.slice(arguments, 1);",
     "  }",
-    // To ease the transition to the new format, content.window is avaliable as gWindow
+    // To ease the transition to the new format, content.window is available as gWindow
     // in the content.
     "  let gWindow = content.window;",
     // This method is called rather than _resolve such that the observer is removed

@@ -53,24 +53,24 @@ static const uint32_t MAX_CENC_INIT_DATA_LENGTH = 64 * 1024;
 
 
 MediaKeySession::MediaKeySession(JSContext* aCx,
-                                 nsPIDOMWindowInner* aParent,
+                                 nsPIDOMWindowInner* apparent,
                                  MediaKeys* aKeys,
                                  const nsAString& aKeySystem,
                                  MediaKeySessionType aSessionType,
                                  ErrorResult& aRv)
-  : DOMEventTargetHelper(aParent)
+  : DOMEventTargetHelper(apparent)
   , mKeys(aKeys)
   , mKeySystem(aKeySystem)
   , mSessionType(aSessionType)
   , mToken(sMediaKeySessionNum++)
   , mIsClosed(false)
   , mUninitialized(true)
-  , mKeyStatusMap(new MediaKeyStatusMap(aParent))
+  , mKeyStatusMap(new MediaKeyStatusMap(apparent))
   , mExpiration(JS::GenericNaN())
 {
   EME_LOG("MediaKeySession[%p,''] ctor", this);
 
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
   if (aRv.Failed()) {
     return;
   }

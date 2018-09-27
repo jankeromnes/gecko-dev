@@ -43,15 +43,15 @@ var DownloadUIHelper = {
    * the most recently active window, for example if the prompt is displayed in
    * response to global notifications that are not associated with any window.
    *
-   * @param aParent
+   * @param apparent
    *        If specified, should reference the nsIDOMWindow to which the prompts
    *        should be attached.  If omitted, the prompts will be attached to the
    *        most recently active window.
    *
    * @return A DownloadPrompter object.
    */
-  getPrompter(aParent) {
-    return new DownloadPrompter(aParent || null);
+  getPrompter(apparent) {
+    return new DownloadPrompter(apparent || null);
   },
 };
 
@@ -82,12 +82,12 @@ XPCOMUtils.defineLazyGetter(DownloadUIHelper, "strings", function() {
 /**
  * Allows displaying prompts related to downloads.
  *
- * @param aParent
+ * @param apparent
  *        The nsIDOMWindow to which prompts should be attached, or null to
  *        attach prompts to the most recently active window.
  */
-var DownloadPrompter = function(aParent) {
-  this._prompter = Services.ww.getNewPrompter(aParent);
+var DownloadPrompter = function(apparent) {
+  this._prompter = Services.ww.getNewPrompter(apparent);
 };
 
 this.DownloadPrompter.prototype = {

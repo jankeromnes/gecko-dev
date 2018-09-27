@@ -884,7 +884,7 @@ void CrashGenerationServer::HandleDumpRequest(const ClientInfo& client_info) {
   std::wstring dump_path;
   if (generate_dumps_) {
     if (!GenerateDump(client_info, &dump_path)) {
-      // client proccess terminated or some other error
+      // client process terminated or some other error
       execute_callback = false;
     }
   }

@@ -79,7 +79,7 @@ GetActiveDHCPNetworkAdapterName(nsACString& aNetworkAdapterName,
   //
   // The possibility of the buffer size changing between calls to
   // GetAdaptersAddresses is why we allow the following code to be called several times,
-  // rather than just the two that would be neccessary if we could rely on the
+  // rather than just the two that would be necessary if we could rely on the
   // value returned in outBufLen being the true size needed.
 
   std::vector<IP_ADAPTER_ADDRESSES> pAddresses;
@@ -164,7 +164,7 @@ IterateDHCPInformRequestsUntilBufferLargeEnough(
   //
   //
   // This is why we allow this DHCPRequestParams to be called several times,
-  // rather than just the two that would be neccessary if we could rely on the
+  // rather than just the two that would be necessary if we could rely on the
   // value returned in outBufLen being the true size needed.
   do {
     aBuffer.resize(outBufLen);

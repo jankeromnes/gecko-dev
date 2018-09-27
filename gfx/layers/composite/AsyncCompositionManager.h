@@ -71,7 +71,7 @@ class AsyncCompositionManager final
 public:
   NS_INLINE_DECL_REFCOUNTING(AsyncCompositionManager)
 
-  explicit AsyncCompositionManager(CompositorBridgeParent* aParent, HostLayerManager* aManager);
+  explicit AsyncCompositionManager(CompositorBridgeParent* apparent, HostLayerManager* aManager);
 
   /**
    * This forces the is-first-paint flag to true. This is intended to
@@ -187,7 +187,7 @@ private:
    * aResolvePlugins - incoming value indicates if plugin windows should be
    *  updated through a call on aCompositor's UpdatePluginWindowState. Applies
    *  to linux and windows only, may be null. On return value indicates
-   *  if any updates occured.
+   *  if any updates occurred.
    */
   void ResolveRefLayers(CompositorBridgeParent* aCompositor, bool* aHasRemoteContent,
                         bool* aResolvePlugins);

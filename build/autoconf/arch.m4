@@ -230,7 +230,7 @@ if test "$CPU_ARCH" = "arm"; then
       AC_DEFINE(HAVE_ARM_NEON)
       HAVE_ARM_NEON=1
 
-      dnl We don't need to build NEON support if we're targetting a non-NEON device.
+      dnl We don't need to build NEON support if we're targeting a non-NEON device.
       dnl This matches media/webrtc/trunk/webrtc/build/common.gypi.
       if test -n "$ARM_ARCH"; then
           if test "$ARM_ARCH" -lt 7; then

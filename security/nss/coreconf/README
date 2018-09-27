@@ -2,7 +2,7 @@ OVERVIEW of "ns/coreconf":
 
     This README file is an attempt to provide the reader with a simple
     synopsis of the "ns/coreconf" build system which was originally
-    fundamentally designed and built to accomodate Netscape's binary
+    fundamentally designed and built to accommodate Netscape's binary
     release model.  Wherever possible, an attempt has been made to
     comply with the NSPR 2.0 build system, including mimicing the
     compiler/linker flags, and directory naming structure.  The reader

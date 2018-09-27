@@ -272,7 +272,7 @@ impl<T, S> IndexSet<T, S>
     ///
     /// Like `Vec::swap_remove`, the value is removed by swapping it with the
     /// last element of the set and popping it off. **This perturbs
-    /// the postion of what used to be the last element!**
+    /// the position of what used to be the last element!**
     ///
     /// Return `false` if `value` was not in the set.
     ///
@@ -297,7 +297,7 @@ impl<T, S> IndexSet<T, S>
     ///
     /// Like `Vec::swap_remove`, the value is removed by swapping it with the
     /// last element of the set and popping it off. **This perturbs
-    /// the postion of what used to be the last element!**
+    /// the position of what used to be the last element!**
     ///
     /// Return `None` if `value` was not in the set.
     ///
@@ -312,7 +312,7 @@ impl<T, S> IndexSet<T, S>
     ///
     /// Like `Vec::swap_remove`, the value is removed by swapping it with the
     /// last element of the set and popping it off. **This perturbs
-    /// the postion of what used to be the last element!**
+    /// the position of what used to be the last element!**
     ///
     /// Return `None` if `value` was not in the set.
     pub fn swap_remove_full<Q: ?Sized>(&mut self, value: &Q) -> Option<(usize, T)>

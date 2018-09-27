@@ -35,7 +35,7 @@ async function addNormalizedVisit(aURI, aTime, aDayOffset) {
   let previousDateObj = new Date(dateObj.getTime() + aDayOffset * 86400000);
   let DSTCorrection = (dateObj.getTimezoneOffset() -
                        previousDateObj.getTimezoneOffset()) * 60 * 1000;
-  // Substract aDayOffset
+  // Subtract aDayOffset
   let PRTimeWithOffset = (previousDateObj.getTime() - DSTCorrection) * 1000;
   info("Adding visit to " + aURI.spec + " at " + PlacesUtils.toDate(PRTimeWithOffset));
   await PlacesTestUtils.addVisits({

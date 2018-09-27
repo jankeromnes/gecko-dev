@@ -3,7 +3,7 @@
 
 /*---
 esid: sec-asyncgenerator-prototype-return
-description: return() results in fullfilled promise when called on completed iterator
+description: return() results in fulfilled promise when called on completed iterator
 info: |
   AsyncGenerator.prototype.return ( value )
   1. Let generator be the this value.

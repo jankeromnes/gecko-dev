@@ -234,8 +234,8 @@ static const struct codepair {
   { 0x05c6, 0x0626 }, /*           Arabic_hamzaonyeh ئ ARABIC LETTER YEH WITH HAMZA ABOVE */
   { 0x05c7, 0x0627 }, /*                 Arabic_alef ا ARABIC LETTER ALEF */
   { 0x05c8, 0x0628 }, /*                  Arabic_beh ب ARABIC LETTER BEH */
-  { 0x05c9, 0x0629 }, /*           Arabic_tehmarbuta ة ARABIC LETTER TEH MARBUTA */
-  { 0x05ca, 0x062a }, /*                  Arabic_teh ت ARABIC LETTER TEH */
+  { 0x05c9, 0x0629 }, /*           Arabic_tehmarbuta ة ARABIC LETTER THE MARBUTA */
+  { 0x05ca, 0x062a }, /*                  Arabic_teh ت ARABIC LETTER THE */
   { 0x05cb, 0x062b }, /*                 Arabic_theh ث ARABIC LETTER THEH */
   { 0x05cc, 0x062c }, /*                 Arabic_jeem ج ARABIC LETTER JEEM */
   { 0x05cd, 0x062d }, /*                  Arabic_hah ح ARABIC LETTER HAH */

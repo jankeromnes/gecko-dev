@@ -1876,7 +1876,7 @@ jQuery.each( "ajaxStart,ajaxStop,ajaxComplete,ajaxError,ajaxSuccess,ajaxSend".sp
 
 jQuery.extend({
 	get: function( url, data, callback, type, ifModified ) {
-		// shift arguments if data argument was ommited
+		// shift arguments if data argument was omitted
 		if ( jQuery.isFunction( data ) ) {
 			callback = data;
 			data = null;

@@ -59,7 +59,7 @@ add_task(async function test_results_as_visit() {
      info("result: " + root.getChild(i).uri + " Title: " + root.getChild(i).title);
    }
 
-   // Check our inital result set
+   // Check our initial result set
    compareArrayToResult(testData, root);
 
    // If that passes, check liveupdate

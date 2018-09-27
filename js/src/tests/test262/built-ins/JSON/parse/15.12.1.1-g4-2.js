@@ -5,7 +5,7 @@
 es5id: 15.12.1.1-g4-2
 description: >
     The JSON lexical grammar does not allow a JSONStringCharacter to
-    be any of the Unicode characters U+0008 thru U+000F
+    be any of the Unicode characters U+0008 through U+000F
 ---*/
 
 assert.throws(SyntaxError, function() {

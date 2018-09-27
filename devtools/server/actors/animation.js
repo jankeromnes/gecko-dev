@@ -621,7 +621,7 @@ exports.AnimationsActor = protocol.ActorClassWithSpec(animationsSpec, {
         // actually removed from the node (e.g. css class removed) or when they
         // are finished and don't have forwards animation-fill-mode.
         // In the latter case, we don't send an event, because the corresponding
-        // animation can still be seeked/resumed, so we want the client to keep
+        // animation can still be sought/resumed, so we want the client to keep
         // its reference to the AnimationPlayerActor.
         if (player.playState !== "idle") {
           continue;

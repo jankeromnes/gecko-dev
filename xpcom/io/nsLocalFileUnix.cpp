@@ -106,7 +106,7 @@ public:
   // nsIDirectoryEnumerator interface
   NS_DECL_NSIDIRECTORYENUMERATOR
 
-  NS_IMETHOD Init(nsLocalFile* aParent, bool aIgnored);
+  NS_IMETHOD Init(nsLocalFile* apparent, bool aIgnored);
 
   NS_FORWARD_NSISIMPLEENUMERATORBASE(nsSimpleEnumerator::)
 
@@ -138,7 +138,7 @@ NS_IMPL_ISUPPORTS_INHERITED(nsDirEnumeratorUnix, nsSimpleEnumerator,
                             nsIDirectoryEnumerator)
 
 NS_IMETHODIMP
-nsDirEnumeratorUnix::Init(nsLocalFile* aParent,
+nsDirEnumeratorUnix::Init(nsLocalFile* apparent,
                           bool aResolveSymlinks /*ignored*/)
 {
   nsAutoCString dirPath;
@@ -1485,13 +1485,13 @@ nsLocalFile::GetDiskSpaceAvailable(int64_t* aDiskSpaceAvailable)
 }
 
 NS_IMETHODIMP
-nsLocalFile::GetParent(nsIFile** aParent)
+nsLocalFile::GetParent(nsIFile** apparent)
 {
   CHECK_mPath();
-  if (NS_WARN_IF(!aParent)) {
+  if (NS_WARN_IF(!apparent)) {
     return NS_ERROR_INVALID_ARG;
   }
-  *aParent = nullptr;
+  *apparent = nullptr;
 
   // if '/' we are at the top of the volume, return null
   if (mPath.EqualsLiteral("/")) {
@@ -1527,7 +1527,7 @@ nsLocalFile::GetParent(nsIFile** aParent)
     return rv;
   }
 
-  localFile.forget(aParent);
+  localFile.forget(apparent);
   return NS_OK;
 }
 

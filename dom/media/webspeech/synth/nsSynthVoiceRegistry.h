@@ -39,7 +39,7 @@ public:
              const nsAString& aUri, const float& aVolume,  const float& aRate,
              const float& aPitch, nsSpeechTask* aTask);
 
-  bool SendInitialVoicesAndState(SpeechSynthesisParent* aParent);
+  bool SendInitialVoicesAndState(SpeechSynthesisParent* apparent);
 
   void SpeakNext();
 

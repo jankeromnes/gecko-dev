@@ -323,7 +323,7 @@ class _MuxReaderThread(threading.Thread):
         try:
             while not self._stop_requested:
                 # opcode is OPCODE_BINARY or control opcodes when a message
-                # is succesfully received.
+                # is successfully received.
                 opcode, message = self._receive_message()
                 if not opcode:
                     return

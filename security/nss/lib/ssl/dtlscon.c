@@ -76,7 +76,7 @@ dtls_TLSVersionToDTLSVersion(SSL3ProtocolVersion tlsv)
 /* Map known DTLS versions to known TLS versions.
  * - Invalid versions (< 1.0) return a version of 0
  * - Versions > known return a version one higher than we know of
- * to accomodate a theoretically newer version */
+ * to accommodate a theoretically newer version */
 SSL3ProtocolVersion
 dtls_DTLSVersionToTLSVersion(SSL3ProtocolVersion dtlsv)
 {
@@ -829,7 +829,7 @@ dtls_TransmitMessageFlight(sslSocket *ss)
 
     /* DTLS does not buffer its handshake messages in ss->pendingBuf, but rather
      * in the lastMessageFlight structure. This is just a sanity check that some
-     * programming error hasn't inadvertantly stuffed something in
+     * programming error hasn't inadvertently stuffed something in
      * ss->pendingBuf.  This function uses ss->pendingBuf temporarily and it
      * needs to be empty to start.
      */

@@ -81,8 +81,8 @@ let test;
 //  list - menulist id
 //  initial - initial selected index
 //  scroll - index of item at top of the visible scrolled area, -1 to skip this test
-//  downs - array of indicies that will be selected when pressing down in sequence
-//  ups - array of indicies that will be selected when pressing up in sequence
+//  downs - array of indices that will be selected when pressing down in sequence
+//  ups - array of indices that will be selected when pressing up in sequence
 let tests = [
   { list: "menulist1", initial: 0, scroll: 0, downs: [3, 6, 9, 9],
                                    ups: [6, 3, 0, 0] },

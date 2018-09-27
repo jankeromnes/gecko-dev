@@ -426,7 +426,7 @@ EditorEventListener::HandleEvent(Event* aEvent)
     // mouseup
     case eMouseUp: {
       // See above comment in the eMouseDown case, first.
-      // This code assumes that case #1 is occuring.  However, if case #3 may
+      // This code assumes that case #1 is occurring.  However, if case #3 may
       // occurs after case #2 and the mousedown is consumed,
       // mMouseDownOrUpConsumedByIME is true even though EditorEventListener
       // has not received the preceding mousedown event of this mouseup event.
@@ -987,7 +987,7 @@ EditorEventListener::CanDrop(DragEvent* aEvent)
     IgnoredErrorResult rv;
     bool inRange = range->IsPointInRange(*parent, offset, rv);
     if (!rv.Failed() && inRange) {
-      // Okay, now you can bail, we are over the orginal selection
+      // Okay, now you can bail, we are over the orignal selection
       return false;
     }
   }

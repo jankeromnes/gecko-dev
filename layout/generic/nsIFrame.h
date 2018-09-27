@@ -639,11 +639,11 @@ public:
    * CreateView() after calling its base class Init().
    *
    * @param   aContent the content object associated with the frame
-   * @param   aParent the parent frame
+   * @param   apparent the parent frame
    * @param   aPrevInFlow the prev-in-flow frame
    */
   virtual void Init(nsIContent*       aContent,
-                    nsContainerFrame* aParent,
+                    nsContainerFrame* apparent,
                     nsIFrame*         aPrevInFlow) = 0;
 
   using PostDestroyData = mozilla::layout::PostFrameDestroyData;
@@ -849,7 +849,7 @@ public:
    * to insert styles into the style tree, then you should create pseudo element
    * frames to own them.
    *
-   * The indicies must be consecutive and implementations MUST return null if
+   * The indices must be consecutive and implementations MUST return null if
    * asked for an index that is out of range.
    */
   virtual ComputedStyle* GetAdditionalComputedStyle(int32_t aIndex) const = 0;
@@ -888,12 +888,12 @@ public:
   }
 
   /**
-   * Set this frame's parent to aParent.
+   * Set this frame's parent to apparent.
    * If the frame may have moved into or out of a scrollframe's
    * frame subtree, StickyScrollContainer::NotifyReparentedFrameAcrossScrollFrameBoundary
    * must also be called.
    */
-  void SetParent(nsContainerFrame* aParent);
+  void SetParent(nsContainerFrame* apparent);
 
   /**
    * The frame's writing-mode, used for logical layout computations.

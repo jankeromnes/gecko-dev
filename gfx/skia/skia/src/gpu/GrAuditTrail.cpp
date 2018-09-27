@@ -108,7 +108,7 @@ void GrAuditTrail::getBoundsByClientID(SkTArray<OpInfo>* outInfo, int clientID) 
         for (int i = 0; i < (*opsLookup)->count(); i++) {
             const Op* op = (**opsLookup)[i];
 
-            // Because we will copy out all of the ops associated with a given op list id everytime
+            // Because we will copy out all of the ops associated with a given op list id every time
             // the id changes, we only have to update our struct when the id changes.
             if (kGrAuditTrailInvalidID == currentOpListID || op->fOpListID != currentOpListID) {
                 OpInfo& outOpInfo = outInfo->push_back();

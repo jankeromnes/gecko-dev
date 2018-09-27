@@ -295,10 +295,10 @@ goog.scope(function() {
     };
 
     /**
-    * isnt
+    * isn't
     * @return {boolean} returns true if the current object is not equivalent to other.
     */
-    gluVarType.VarType.prototype.isnt = function(other) {
+    gluVarType.VarType.prototype.isn't = function(other) {
         return !(this.is(other));
     };
 

@@ -88,7 +88,7 @@ class MessagePumpLibevent : public MessagePump {
                            Watcher *delegate);
 
 
-  // This is analagous to FileDescriptorWatcher above, which really is
+  // This is analogous to FileDescriptorWatcher above, which really is
   // just a wrapper around libevent's |struct event|.  This class acts
   // as a sort of "scoped event watcher" in that it guarantees that
   // when this class is out of scope, the signal-event it wraps is

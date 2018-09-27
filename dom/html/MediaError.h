@@ -21,7 +21,7 @@ class MediaError final : public nsISupports,
   ~MediaError() {}
 
 public:
-  MediaError(HTMLMediaElement* aParent, uint16_t aCode,
+  MediaError(HTMLMediaElement* apparent, uint16_t aCode,
              const nsACString& aMessage = nsCString());
 
   // nsISupports

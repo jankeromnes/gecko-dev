@@ -133,7 +133,7 @@ struct CRLDPCacheStr {
     /* array of full CRLs matching this distribution point */
     PRUint32 ncrls;   /* total number of CRLs in crls */
     CachedCrl** crls; /* array of all matching CRLs */
-    /* XCRL With iCRLs and multiple DPs, the CRL can be shared accross several
+    /* XCRL With iCRLs and multiple DPs, the CRL can be shared across several
        issuers. In the future, we'll need to globally recycle the CRL in a
        separate list in order to avoid extra lookups, decodes, and copies */
 

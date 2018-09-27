@@ -34,7 +34,7 @@ public:
     PAUSE_SCRIPT   =  2, // Paused by script.
     PAUSE_PAGEHIDE =  4, // Paused because our doc is hidden.
     PAUSE_USERPREF =  8, // Paused because animations are disabled in prefs.
-    PAUSE_IMAGE    = 16  // Paused becuase we're in an image that's suspended.
+    PAUSE_IMAGE    = 16  // Paused because we're in an image that's suspended.
   };
 
   /*
@@ -159,7 +159,7 @@ public:
    *
    * The callee still retains ownership of the time container.
    */
-  nsresult SetParent(nsSMILTimeContainer* aParent);
+  nsresult SetParent(nsSMILTimeContainer* apparent);
 
   /*
    * Registers an element for a sample at the given time.

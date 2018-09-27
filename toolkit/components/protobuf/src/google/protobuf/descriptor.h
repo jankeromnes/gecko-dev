@@ -257,7 +257,7 @@ class LIBPROTOBUF_EXPORT Descriptor {
   // isn't, the result may be garbage.
   void CopyTo(DescriptorProto* proto) const;
 
-  // Write the contents of this decriptor in a human-readable form. Output
+  // Write the contents of this descriptor in a human-readable form. Output
   // will be suitable for re-parsing.
   string DebugString() const;
 

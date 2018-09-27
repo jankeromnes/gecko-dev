@@ -1561,7 +1561,7 @@ TEST_F(GetCallerFrame, ReturnAddressIsNotInKnownModule) {
               frame1->context_validity);
     EXPECT_EQ(0x7c80f10fU, frame1->instruction + 1);
     EXPECT_EQ(0x7c80f10fU, frame1->context.eip);
-    // frame 1 was skipped, so intead of frame1_ebp compare with frame2_ebp.
+    // frame 1 was skipped, so instead of frame1_ebp compare with frame2_ebp.
     EXPECT_EQ(frame2_ebp.Value(), frame1->context.ebp);
     EXPECT_EQ(&kernel32_dll, frame1->module);
     EXPECT_EQ("FindNextFileW", frame1->function_name);
@@ -1585,7 +1585,7 @@ TEST_F(GetCallerFrame, ReturnAddressIsNotInKnownModule) {
               frame2->context_validity);
     EXPECT_EQ(0x01d13f91U, frame2->instruction + 1);
     EXPECT_EQ(0x01d13f91U, frame2->context.eip);
-    // frame 1 was skipped, so intead of frame2_ebp compare with frame3_ebp.
+    // frame 1 was skipped, so instead of frame2_ebp compare with frame3_ebp.
     EXPECT_EQ(frame3_ebp.Value(), frame2->context.ebp);
     EXPECT_EQ(&chrome_dll, frame2->module);
     EXPECT_EQ("file_util::FileEnumerator::Next()", frame2->function_name);

@@ -104,7 +104,7 @@ var AccessFu = {
 
   receiveMessage: function receiveMessage(aMessage) {
     Logger.debug(() => {
-      return ["Recieved", aMessage.name, JSON.stringify(aMessage.json)];
+      return ["Received", aMessage.name, JSON.stringify(aMessage.json)];
     });
 
     switch (aMessage.name) {

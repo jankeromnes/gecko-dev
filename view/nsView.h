@@ -361,7 +361,7 @@ public:
   bool GetZIndexIsAuto() const { return (mVFlags & NS_VIEW_FLAG_AUTO_ZINDEX) != 0; }
   int32_t GetZIndex() const { return mZIndex; }
 
-  void SetParent(nsView *aParent) { mParent = aParent; }
+  void SetParent(nsView *apparent) { mParent = apparent; }
   void SetNextSibling(nsView *aSibling)
   {
     NS_ASSERTION(aSibling != this, "Can't be our own sibling!");

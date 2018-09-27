@@ -232,7 +232,7 @@ SelectorAutocompleter.prototype = {
     // never go to Tag state without a space or '>' character; Or like, a Class
     // state with only '.' cannot go to an Id state without any [a-zA-Z] after
     // the '.' which means that '.#' is a selector matching a class name '#'.
-    // Similarily for '#.' which means a selctor matching an id '.'.
+    // Similarly for '#.' which means a selctor matching an id '.'.
     for (let i = 1; i <= query.length; i++) {
       // Calculate the state.
       subQuery = query.slice(0, i);
@@ -501,7 +501,7 @@ SelectorAutocompleter.prototype = {
       query = query.slice(0, query.length - firstPart.length - 1);
     }
     // TODO: implement some caching so that over the wire request is not made
-    // everytime.
+    // every time.
     if (/[\s+>~]$/.test(query)) {
       query += "*";
     }

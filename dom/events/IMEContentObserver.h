@@ -241,10 +241,10 @@ private:
   }
 
   /**
-   * Returns true if the passed-in node in aParent is the next node of
+   * Returns true if the passed-in node in apparent is the next node of
    * mLastAddedContent in pre-order tree traversal of the DOM.
    */
-  bool IsNextNodeOfLastAddedNode(nsINode* aParent, nsIContent* aChild) const;
+  bool IsNextNodeOfLastAddedNode(nsINode* apparent, nsIContent* aChild) const;
 
   void PostFocusSetNotification();
   void MaybeNotifyIMEOfFocusSet();

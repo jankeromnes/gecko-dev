@@ -110,7 +110,7 @@ public:
     // AudioOutputStream has not been created yet, or if all the streams have finished
     // but we're still running.
     // Note: it's also ok if we had data in the scratch buffer - and we usually do - and
-    // all the streams were ended (no mixer callback occured).
+    // all the streams were ended (no mixer callback occurred).
     // XXX Remove this warning, or find a way to avoid it if the mixer callback
     // isn't called.
     NS_WARNING_ASSERTION(

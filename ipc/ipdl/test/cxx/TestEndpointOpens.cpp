@@ -46,7 +46,7 @@ TestEndpointOpensParent::Main()
 }
 
 static void
-OpenParent(TestEndpointOpensOpenedParent* aParent,
+OpenParent(TestEndpointOpensOpenedParent* apparent,
            Endpoint<PTestEndpointOpensOpenedParent>&& aEndpoint)
 {
   AssertNotMainThread();
@@ -54,7 +54,7 @@ OpenParent(TestEndpointOpensOpenedParent* aParent,
   // Open the actor on the off-main thread to park it there.
   // Messages will be delivered to this thread's message loop
   // instead of the main thread's.
-  if (!aEndpoint.Bind(aParent)) {
+  if (!aEndpoint.Bind(apparent)) {
     fail("binding Parent");
   }
 }

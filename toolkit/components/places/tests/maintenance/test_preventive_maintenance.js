@@ -76,7 +76,7 @@ function addPlace(aUrl, aFavicon, aGuid = PlacesUtils.history.makeGuid(),
   return id;
 }
 
-function addBookmark(aPlaceId, aType, aParent, aKeywordId, aFolderType, aTitle,
+function addBookmark(aPlaceId, aType, apparent, aKeywordId, aFolderType, aTitle,
                      aGuid = PlacesUtils.history.makeGuid(),
                      aSyncStatus = PlacesUtils.bookmarks.SYNC_STATUS.NEW,
                      aSyncChangeCounter = 0) {
@@ -87,7 +87,7 @@ function addBookmark(aPlaceId, aType, aParent, aKeywordId, aFolderType, aTitle,
              :guid, :sync_status, :change_counter)`);
   stmt.params.place_id = aPlaceId || null;
   stmt.params.type = aType || bs.TYPE_BOOKMARK;
-  stmt.params.parent = aParent || gUnfiledFolderId;
+  stmt.params.parent = apparent || gUnfiledFolderId;
   stmt.params.keyword_id = aKeywordId || null;
   stmt.params.folder_type = aFolderType || null;
   stmt.params.title = typeof(aTitle) == "string" ? aTitle : null;
@@ -716,8 +716,8 @@ tests.push({
       source: PlacesUtils.bookmarks.SOURCES.SYNC,
     });
 
-    async function randomize_positions(aParent, aResultArray) {
-      let parentId = await PlacesUtils.promiseItemId(aParent);
+    async function randomize_positions(apparent, aResultArray) {
+      let parentId = await PlacesUtils.promiseItemId(apparent);
       let stmt = mDBConn.createStatement(
         `UPDATE moz_bookmarks SET position = :rand
          WHERE id IN (
@@ -762,8 +762,8 @@ tests.push({
   async check() {
     let db = await PlacesUtils.promiseDBConnection();
 
-    async function check_order(aParent, aResultArray) {
-      let parentId = await PlacesUtils.promiseItemId(aParent);
+    async function check_order(apparent, aResultArray) {
+      let parentId = await PlacesUtils.promiseItemId(apparent);
       // Build the expected ordered list of bookmarks.
       let childRows = await db.executeCached(
         `SELECT id, position, syncChangeCounter FROM moz_bookmarks

@@ -40,7 +40,7 @@
 
 /* These cipher flags are visible to all other libraries, */
 /* But they must be converted before used in functions */
-/* withing the security module */
+/* within the security module */
 #define PUBLIC_CIPHER_FORTEZZA_FLAG 0x00000001ul
 
 /* warning: reserved means reserved */
@@ -129,7 +129,7 @@ extern PK11SlotInfo *SECMOD_LookupSlot(SECMODModuleID module,
                                        unsigned long slotID);
 extern PK11SlotInfo *SECMOD_FindSlot(SECMODModule *module, const char *name);
 
-/* Funtion reports true if at least one of the modules */
+/* Function reports true if at least one of the modules */
 /* of modType has been installed */
 PRBool SECMOD_IsModulePresent(unsigned long int pubCipherEnableFlags);
 
@@ -157,7 +157,7 @@ SECStatus SECMOD_CancelWait(SECMODModule *mod);
  * check to see if the module has added new slots. PKCS 11 v2.20 allows for
  * modules to add new slots, but never remove them. Slots not be added between
  * a call to C_GetSlotLlist(Flag, NULL, &count) and the corresponding
- * C_GetSlotList(flag, &data, &count) so that the array doesn't accidently
+ * C_GetSlotList(flag, &data, &count) so that the array doesn't accidentally
  * grow on the caller. It is permissible for the slots to increase between
  * corresponding calls with NULL to get the size.
  */

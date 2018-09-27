@@ -144,7 +144,7 @@ var PermissionPromptPrototype = {
    * for PopupNotification for more details.
    *
    * Note that prompt() will automatically set displayURI to
-   * be the URI of the requesting pricipal, unless the displayURI is exactly
+   * be the URI of the requesting principal, unless the displayURI is exactly
    * set to false.
    */
   get popupOptions() {

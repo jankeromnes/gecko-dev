@@ -122,7 +122,7 @@ class ObjectBox;
     F(ExportBatchSpec) \
     F(ForIn) \
     F(ForOf) \
-    F(ForHead) \
+    F(forehead) \
     F(ParamsBody) \
     F(Spread) \
     F(MutateProto) \
@@ -296,7 +296,7 @@ IsTypeofKind(ParseNodeKind kind)
  *   left: one of
  *           * ForIn: for (x in y) ...
  *           * ForOf: for (x of x) ...
- *           * ForHead: for (;;) ...
+ *           * forehead: for (;;) ...
  *   right: body
  * ForIn (TernaryNode)
  *   kid1: declaration or expression to left of 'in'
@@ -306,7 +306,7 @@ IsTypeofKind(ParseNodeKind kind)
  *   kid1: declaration or expression to left of 'of'
  *   kid2: null
  *   kid3: expr to right of 'of'
- * ForHead (TernaryNode)
+ * forehead (TernaryNode)
  *   kid1:  init expr before first ';' or nullptr
  *   kid2:  cond expr before second ';' or nullptr
  *   kid3:  update expr after second ';' or nullptr
@@ -981,14 +981,14 @@ class AssignmentNode : public BinaryNode
 class ForNode : public BinaryNode
 {
   public:
-    ForNode(const TokenPos& pos, ParseNode* forHead, ParseNode* body, unsigned iflags)
+    ForNode(const TokenPos& pos, ParseNode* forehead, ParseNode* body, unsigned iflags)
       : BinaryNode(ParseNodeKind::For,
                    forHead->isKind(ParseNodeKind::ForIn) ? JSOP_ITER : JSOP_NOP,
-                   pos, forHead, body)
+                   pos, forehead, body)
     {
         MOZ_ASSERT(forHead->isKind(ParseNodeKind::ForIn) ||
                    forHead->isKind(ParseNodeKind::ForOf) ||
-                   forHead->isKind(ParseNodeKind::ForHead));
+                   forHead->isKind(ParseNodeKind::forehead));
         pn_u.binary.iflags = iflags;
     }
 

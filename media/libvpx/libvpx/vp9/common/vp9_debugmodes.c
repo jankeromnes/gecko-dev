@@ -57,7 +57,7 @@ void vp9_print_modes_and_motion_vectors(VP9_COMMON *cm, const char *file) {
   print_mi_data(cm, mvs, "Transform:", offsetof(MODE_INFO, tx_size));
   print_mi_data(cm, mvs, "UV Modes:", offsetof(MODE_INFO, uv_mode));
 
-  // output skip infomation.
+  // output skip information.
   log_frame_info(cm, "Skips:", mvs);
   for (mi_row = 0; mi_row < rows; mi_row++) {
     fprintf(mvs, "S ");

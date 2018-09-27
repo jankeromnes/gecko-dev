@@ -17,7 +17,7 @@
 window.talosDebug = {
   // Optional config properties
   disabled: false,
-  ignore: -1, // Number of items to ignore at the begining of the set. -1 for auto-detect.
+  ignore: -1, // Number of items to ignore at the beginning of the set. -1 for auto-detect.
   displayData: false, // If true, will also display all the data points.
   fixed: 2, // default floating point digits for display.
   // End of config

@@ -40,7 +40,7 @@ SOURCES += [
 
 FINAL_LIBRARY = 'xul'
 
-# Supress warnnings for now.
+# Suppress warnnings for now.
 if CONFIG['CC_TYPE'] in ('msvc', 'clang-cl'):
     CFLAGS += [
         '-wd4013', # 'function' undefined; assuming extern returning int

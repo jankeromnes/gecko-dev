@@ -30,7 +30,7 @@ public:
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(TestInterfaceIterableSingle)
 
-  explicit TestInterfaceIterableSingle(nsPIDOMWindowInner* aParent);
+  explicit TestInterfaceIterableSingle(nsPIDOMWindowInner* apparent);
   nsPIDOMWindowInner* GetParentObject() const;
   virtual JSObject* WrapObject(JSContext* aCx,
                                JS::Handle<JSObject*> aGivenProto) override;

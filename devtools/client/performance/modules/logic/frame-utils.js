@@ -71,7 +71,7 @@ function parseLocation(location, fallbackLine, fallbackColumn) {
   // are urlencoded, so the last occurrence of ' (' is the separator between
   // the function name and the resource.
   //
-  // For 2) and 3), there can be no occurences of ' (' since ' ' characters
+  // For 2) and 3), there can be no occurrences of ' (' since ' ' characters
   // are urlencoded in the resource string.
   //
   // XXX: Note that 3) is ambiguous with Gecko Profiler marker locations like

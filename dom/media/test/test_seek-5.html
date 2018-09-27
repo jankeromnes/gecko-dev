@@ -49,7 +49,7 @@ function playbackEnded() {
   if (completed)
     return;
   ok(startPassed, "Got seeking event");
-  ok(endPassed, "Got seeked event");
+  ok(endPassed, "Got sought event");
   completed = true;
   finish();
 }
@@ -57,7 +57,7 @@ function playbackEnded() {
 v.addEventListener("ended", playbackEnded);
 v.addEventListener("loadedmetadata", startTest);
 v.addEventListener("seeking", seekStarted);
-v.addEventListener("seeked", seekEnded);
+v.addEventListener("sought", seekEnded);
 
 }
 

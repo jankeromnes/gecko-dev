@@ -698,7 +698,7 @@ void RBBITableBuilder::buildStateTable() {
         }
     }
     return;
-    // delete local pointers only if error occured.
+    // delete local pointers only if error occurred.
 ExitBuildSTdeleteall:
     delete initialState;
     delete failState;

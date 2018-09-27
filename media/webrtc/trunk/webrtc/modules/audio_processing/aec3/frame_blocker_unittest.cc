@@ -302,7 +302,7 @@ TEST(FrameBlocker, WrongNumberOfPreceedingApiCallsForExtractBlock) {
     for (size_t num_calls = 0; num_calls < 4; ++num_calls) {
       std::ostringstream ss;
       ss << "Sample rate: " << rate;
-      ss << ", Num preceeding InsertSubFrameAndExtractBlock calls: "
+      ss << ", Num preceding InsertSubFrameAndExtractBlock calls: "
          << num_calls;
 
       SCOPED_TRACE(ss.str());

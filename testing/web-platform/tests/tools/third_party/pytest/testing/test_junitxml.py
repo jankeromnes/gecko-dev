@@ -598,7 +598,7 @@ class TestPython(object):
             assert "hx" in fnode.toxml()
 
     def test_assertion_binchars(self, testdir):
-        """this test did fail when the escaping wasnt strict"""
+        """this test did fail when the escaping wasn't strict"""
         testdir.makepyfile(
             """
 
@@ -722,7 +722,7 @@ def test_dont_configure_on_slaves(tmpdir):
             return "pytest"
 
         junitprefix = None
-        # XXX: shouldnt need tmpdir ?
+        # XXX: shouldn't need tmpdir ?
         xmlpath = str(tmpdir.join("junix.xml"))
         register = gotten.append
 
@@ -805,7 +805,7 @@ def test_nullbyte_replace(testdir):
 def test_invalid_xml_escape():
     # Test some more invalid xml chars, the full range should be
     # tested really but let's just thest the edges of the ranges
-    # intead.
+    # instead.
     # XXX This only tests low unicode character points for now as
     #     there are some issues with the testing infrastructure for
     #     the higher ones.

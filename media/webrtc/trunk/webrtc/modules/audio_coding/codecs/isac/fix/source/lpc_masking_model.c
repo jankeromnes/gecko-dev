@@ -561,7 +561,7 @@ void WebRtcIsacfix_GetLpcCoef(int16_t *inLoQ0,
   /* less-noise-at-low-frequencies factor */
   int16_t aaQ14;
 
-  /* Multiplication with 1/sqrt(12) ~= 0.28901734104046 can be done by convertion to
+  /* Multiplication with 1/sqrt(12) ~= 0.28901734104046 can be done by conversion to
      Q15, i.e. round(0.28901734104046*32768) = 9471, and use 9471/32768.0 ~= 0.289032
   */
   int16_t snrq;

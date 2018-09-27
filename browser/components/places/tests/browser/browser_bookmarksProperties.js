@@ -417,7 +417,7 @@ function open_properties_dialog(test) {
         try {
           executeSoon(resolve);
         } catch (ex) {
-          Assert.ok(false, "An error occured during test run: " + ex.message);
+          Assert.ok(false, "An error occurred during test run: " + ex.message);
         }
       }, observerWindow);
     }

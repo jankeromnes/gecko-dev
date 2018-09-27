@@ -86,7 +86,7 @@ public:
      * GrNEW_APPEND_WITH_DATA_TO_RECORDER().
      *
      * @param item  The item whose data to retrieve. The pointer must be of the same type
-     *              that was allocated initally; it can't be a pointer to a base class.
+     *              that was allocated initially; it can't be a pointer to a base class.
      *
      * @return The item's associated data.
      */

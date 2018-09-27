@@ -54,7 +54,7 @@ bool GetOmapDataAndDisableTranslation(IDiaSession* dia_session,
 void BuildImageMap(const OmapData& omap_data, ImageMap* image_map);
 
 // Given an address range in the original image space determines how exactly it
-// has been tranformed.
+// has been transformed.
 // |omap_data| is the OMAP data extracted from the PDB, which must not be
 //     empty.
 // |original_range| is the address range in the original image being queried.

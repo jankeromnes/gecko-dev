@@ -1758,7 +1758,7 @@ bool Tracks::AddTrack(Track* track, int32_t number) {
 
   delete[] track_entries_;
 
-  // Find the lowest availible track number > 0.
+  // Find the lowest available track number > 0.
   if (track_num == 0) {
     track_num = count;
 
@@ -1894,7 +1894,7 @@ Chapter::Chapter() {
   // done in Init() (called in Chapters::AddChapter()).  The only
   // reason we bother implementing this ctor is because we had to
   // declare it as private (along with the dtor), in order to prevent
-  // clients from creating Chapter instances (a privelege we grant
+  // clients from creating Chapter instances (a privilege we grant
   // only to the Chapters class).  Doing no initialization here also
   // means that creating arrays of chapter objects is more efficient,
   // because we only initialize each new chapter object as it becomes

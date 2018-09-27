@@ -141,7 +141,7 @@ pub trait StateType {}
 impl StateType for tdefl_compressor {}
 impl StateType for inflate_state {}
 
-/// Wrapper for a heap-allocated compressor/decompressor that frees the stucture on drop.
+/// Wrapper for a heap-allocated compressor/decompressor that frees the structure on drop.
 pub struct BoxedState<ST: StateType> {
     pub inner: *mut ST,
     pub alloc: mz_alloc_func,

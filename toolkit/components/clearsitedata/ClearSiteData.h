@@ -71,7 +71,7 @@ private:
                        const char* aMsg,
                        const nsTArray<nsString>& aParams) const;
 
-  // This method converts a Type to the corrisponding string format.
+  // This method converts a Type to the corresponding string format.
   void
   TypeToString(Type aType, nsAString& aStr) const;
 

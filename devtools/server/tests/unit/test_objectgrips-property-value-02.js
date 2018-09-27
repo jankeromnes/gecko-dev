@@ -64,7 +64,7 @@ function eval_and_resume(debuggee, threadClient, code, callback) {
     wait_for_pause(threadClient, callback).then(resolve, reject);
 
     // This synchronously blocks until 'threadClient.resume()' above runs
-    // because the 'paused' event runs everthing in a new event loop.
+    // because the 'paused' event runs everything in a new event loop.
     debuggee.eval(code);
   });
 }

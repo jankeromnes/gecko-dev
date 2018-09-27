@@ -139,12 +139,12 @@ public:
   NS_DECL_NSIHANDLERAPP
   NS_DECL_NSIGIOMIMEAPP
 
-  explicit nsGIOMimeApp(GAppInfo* aApp) : mApp(aApp) {}
+  explicit nsGIOMimeApp(GAppInfo* aApp) : map(aApp) {}
 
 private:
-  ~nsGIOMimeApp() { g_object_unref(mApp); }
+  ~nsGIOMimeApp() { g_object_unref(map); }
 
-  GAppInfo *mApp;
+  GAppInfo *map;
 };
 
 NS_IMPL_ISUPPORTS(nsGIOMimeApp, nsIGIOMimeApp, nsIHandlerApp)
@@ -152,14 +152,14 @@ NS_IMPL_ISUPPORTS(nsGIOMimeApp, nsIGIOMimeApp, nsIHandlerApp)
 NS_IMETHODIMP
 nsGIOMimeApp::GetId(nsACString& aId)
 {
-  aId.Assign(g_app_info_get_id(mApp));
+  aId.Assign(g_app_info_get_id(map));
   return NS_OK;
 }
 
 NS_IMETHODIMP
 nsGIOMimeApp::GetName(nsAString& aName)
 {
-  aName.Assign(NS_ConvertUTF8toUTF16(g_app_info_get_name(mApp)));
+  aName.Assign(NS_ConvertUTF8toUTF16(g_app_info_get_name(map)));
   return NS_OK;
 }
 
@@ -174,7 +174,7 @@ nsGIOMimeApp::SetName(const nsAString& aName)
 NS_IMETHODIMP
 nsGIOMimeApp::GetCommand(nsACString& aCommand)
 {
-  const char *cmd = g_app_info_get_commandline(mApp);
+  const char *cmd = g_app_info_get_commandline(map);
   if (!cmd)
     return NS_ERROR_FAILURE;
   aCommand.Assign(cmd);
@@ -184,7 +184,7 @@ nsGIOMimeApp::GetCommand(nsACString& aCommand)
 NS_IMETHODIMP
 nsGIOMimeApp::GetExpectsURIs(int32_t* aExpects)
 {
-  *aExpects = g_app_info_supports_uris(mApp);
+  *aExpects = g_app_info_supports_uris(map);
   return NS_OK;
 }
 
@@ -255,7 +255,7 @@ nsGIOMimeApp::LaunchWithURI(nsIURI* aUri, nsIInterfaceRequestor* aRequestor)
   uris.data = const_cast<char*>(spec.get());
 
   GError *error = nullptr;
-  gboolean result = g_app_info_launch_uris(mApp, &uris, nullptr, &error);
+  gboolean result = g_app_info_launch_uris(map, &uris, nullptr, &error);
 
   if (!result) {
     g_warning("Cannot launch application: %s", error->message);
@@ -339,7 +339,7 @@ nsGIOMimeApp::SetAsDefaultForMimeType(nsACString const& aMimeType)
   if (!content_type)
     return NS_ERROR_FAILURE;
   GError *error = nullptr;
-  g_app_info_set_as_default_for_type(mApp,
+  g_app_info_set_as_default_for_type(map,
                                      content_type,
                                      &error);
   if (error) {
@@ -372,7 +372,7 @@ nsGIOMimeApp::SetAsDefaultForFileExtensions(nsACString const& fileExts)
     if (space_pos) {
       *space_pos = '\0';
     }
-    g_app_info_set_as_default_for_extension(mApp, ext_pos, &error);
+    g_app_info_set_as_default_for_extension(map, ext_pos, &error);
     if (error) {
       g_warning("Cannot set application as default for extension (%s): %s",
                 ext_pos,
@@ -404,7 +404,7 @@ nsGIOMimeApp::SetAsDefaultForURIScheme(nsACString const& aURIScheme)
   nsAutoCString contentType("x-scheme-handler/");
   contentType.Append(aURIScheme);
 
-  g_app_info_set_as_default_for_type(mApp,
+  g_app_info_set_as_default_for_type(map,
                                      contentType.get(),
                                      &error);
   if (error) {

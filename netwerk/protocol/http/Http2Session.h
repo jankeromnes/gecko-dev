@@ -335,7 +335,7 @@ private:
   // pointer to the real network-level nsHttpConnection object.
   RefPtr<nsAHttpConnection> mConnection;
 
-  // The underlying socket transport object is needed to propogate some events
+  // The underlying socket transport object is needed to propagate some events
   nsISocketTransport         *mSocketTransport;
 
   // These are temporary state variables to hold the argument to
@@ -440,7 +440,7 @@ private:
   // the session received the opening SETTINGS frame from the server
   bool                 mReceivedSettings;
 
-  // The TLS comlpiance checks are not done in the ctor beacuse of bad
+  // The TLS comlpiance checks are not done in the ctor because of bad
   // exception handling - so we do them at IO time and cache the result
   bool                 mTLSProfileConfirmed;
 
@@ -492,7 +492,7 @@ private:
   // This is a output queue of bytes ready to be written to the SSL stream.
   // When that streams returns WOULD_BLOCK on direct write the bytes get
   // coalesced together here. This results in larger writes to the SSL layer.
-  // The buffer is not dynamically grown to accomodate stream writes, but
+  // The buffer is not dynamically grown to accommodate stream writes, but
   // does expand to accept infallible session wide frames like GoAway and RST.
   uint32_t             mOutputQueueSize;
   uint32_t             mOutputQueueUsed;

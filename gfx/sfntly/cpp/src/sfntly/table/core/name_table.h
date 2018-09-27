@@ -593,7 +593,7 @@ class NameTable : public SubTableContainerTable, public RefCounted<NameTable> {
     // Clear the name builders for the name table.
     // void clear();
 
-    // Check the existance of a name entry builder by key.
+    // Check the existence of a name entry builder by key.
     bool Has(int32_t platform_id, int32_t encoding_id, int32_t language_id,
              int32_t name_id);
 
@@ -616,7 +616,7 @@ class NameTable : public SubTableContainerTable, public RefCounted<NameTable> {
     void Initialize(ReadableFontData* data);
     NameEntryBuilderMap* GetNameBuilders();
 
-    // Note: callers should use the getter funtion provided above to ensure that
+    // Note: callers should use the getter function provided above to ensure that
     // this is lazily initialized instead of accessing directly.
     NameEntryBuilderMap name_entry_map_;
   };

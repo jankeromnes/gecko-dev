@@ -314,7 +314,7 @@ VRManagerChild::CreateVRLayer(uint32_t aDisplayID,
 }
 
 
-// XXX TODO - VRManagerChild::FrameRequest is the same as nsIDocument::FrameRequest, should we consolodate these?
+// XXX TODO - VRManagerChild::FrameRequest is the same as nsIDocument::FrameRequest, should we consolidate these?
 struct VRManagerChild::FrameRequest
 {
   FrameRequest(mozilla::dom::FrameRequestCallback& aCallback,

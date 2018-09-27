@@ -101,9 +101,9 @@ DOMSVGNumber::DOMSVGNumber(DOMSVGNumberList *aList,
   MOZ_ASSERT(IndexIsValid(), "Bad index for DOMSVGNumber!");
 }
 
-DOMSVGNumber::DOMSVGNumber(nsISupports* aParent)
+DOMSVGNumber::DOMSVGNumber(nsISupports* apparent)
   : mList(nullptr)
-  , mParent(aParent)
+  , mParent(apparent)
   , mListIndex(0)
   , mAttrEnum(0)
   , mIsAnimValItem(false)

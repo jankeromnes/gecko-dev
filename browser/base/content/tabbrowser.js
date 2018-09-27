@@ -3056,7 +3056,7 @@ window._gBrowser = {
     }
 
     // This will unload the document. An unload handler could remove
-    // dependant tabs, so it's important that the tabbrowser is now in
+    // dependent tabs, so it's important that the tabbrowser is now in
     // a consistent state (tab removed, tab positions updated, etc.).
     browser.remove();
 
@@ -3122,7 +3122,7 @@ window._gBrowser = {
   },
 
   swapBrowsersAndCloseOther(aOurTab, aOtherTab) {
-    // Do not allow transfering a private tab to a non-private window
+    // Do not allow transferring a private tab to a non-private window
     // and vice versa.
     if (PrivateBrowsingUtils.isWindowPrivate(window) !=
       PrivateBrowsingUtils.isWindowPrivate(aOtherTab.ownerGlobal))
@@ -3869,7 +3869,7 @@ window._gBrowser = {
    *
    *
    * Single selected tab could even happen with a none-focused tab.
-   * For exemple with the menu "Close other tabs", it could happen
+   * For example with the menu "Close other tabs", it could happen
    * with a multi-selected pinned tab.
    * For illustration, consider 4 tabs A,B,C,D with B active
    * 1. pin A and Ctrl-select it

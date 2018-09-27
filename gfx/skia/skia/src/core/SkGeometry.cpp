@@ -753,7 +753,7 @@ static SkScalar SkScalarCubeRoot(SkScalar x) {
 }
 
 /*  Solve coeff(t) == 0, returning the number of roots that
-    lie withing 0 < t < 1.
+    lie within 0 < t < 1.
     coeff[0]t^3 + coeff[1]t^2 + coeff[2]t + coeff[3]
 
     Eliminates repeated roots (so that all tValues are distinct, and are always
@@ -1421,7 +1421,7 @@ int SkConic::BuildUnitArc(const SkVector& uStart, const SkVector& uStop, SkRotat
         dst[i].set(&quadrantPts[i * 2], quadrantWeight);
     }
 
-    // Now compute any remaing (sub-90-degree) arc for the last conic
+    // Now compute any remaining (sub-90-degree) arc for the last conic
     const SkPoint finalP = { x, y };
     const SkPoint& lastQ = quadrantPts[quadrant * 2];  // will already be a unit-vector
     const SkScalar dot = SkVector::DotProduct(lastQ, finalP);

@@ -442,13 +442,13 @@ message ThreatEntrySet {
   optional RiceDeltaEncoding rice_hashes = 4;
 
   // The encoded local, lexicographically-sorted list indices, using a
-  // Golomb-Rice encoding. Used for sending compressed removal indicies.
+  // Golomb-Rice encoding. Used for sending compressed removal indices.
   optional RiceDeltaEncoding rice_indices = 5;
 }
 
-// A set of raw indicies to remove from a local list.
+// A set of raw indices to remove from a local list.
 message RawIndices {
-  // The indicies to remove from a lexicographically-sorted local list.
+  // The indices to remove from a lexicographically-sorted local list.
   repeated int32 indices = 1;
 }
 

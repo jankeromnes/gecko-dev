@@ -1161,7 +1161,7 @@ public:
         webgl->BeginComposition();
     }
 
-    /** DidTransactionCallback gets called by the Layers code everytime the WebGL canvas gets composite,
+    /** DidTransactionCallback gets called by the Layers code every time the WebGL canvas gets composite,
       * so it really is the right place to put actions that have to be performed upon compositing
       */
     static void DidTransactionCallback(void* data) {

@@ -288,7 +288,7 @@ function runTests()
 
 async function prepareRunningTests()
 {
-  // Before actually running tests, we disable auto-dir scrolling, becasue the
+  // Before actually running tests, we disable auto-dir scrolling, because the
   // horizontal scrolling tests in this file are mostly meant to ensure that the
   // tested controls in the default style should only have one scrollbar and it
   // must always be in the block-flow direction so they are not really meant to

@@ -12,7 +12,7 @@ ChromeUtils.defineModuleGetter(this, "Services",
 var OnboardingTourType = {
   /**
    * Determine the current tour type (new user tour or update user tour).
-   * The function checks 2 criterias
+   * The function checks 2 criteria
    *  - TOURSET_VERSION: current onboarding tourset version
    *  - PREF_SEEN_TOURSET_VERSION: the user seen tourset version
    * As the result the function will set the right current tour type in the tour type pref (PREF_TOUR_TYPE) for later use.

@@ -50,7 +50,7 @@
  *
  * All this data/functionality *could* be duplicated for both single-byte and
  * double-byte tokenizing, but there are two problems.  First, it's potentially
- * wasteful if the compiler doesnt recognize it can unify the concepts.  (And
+ * wasteful if the compiler doesn't recognize it can unify the concepts.  (And
  * if any-character concepts are intermixed with character-specific concepts,
  * potentially the compiler *can't* unify them because offsets into the
  * hypothetical TokenStream<CharT>s would differ.)  Second, some of this stuff

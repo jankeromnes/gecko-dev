@@ -4,7 +4,7 @@
 "use strict";
 
 // Test for following NegativeEndDelayPath component works.
-// * element existance
+// * element existence
 // * path
 
 const TEST_DATA = [
@@ -32,7 +32,7 @@ add_task(async function() {
     const animationItemEl =
       findAnimationItemElementsByTargetSelector(panel, `.${ targetClass }`);
 
-    info(`Checking negative endDelay path existance for ${ targetClass }`);
+    info(`Checking negative endDelay path existence for ${ targetClass }`);
     const negativeEndDelayPathEl =
       animationItemEl.querySelector(".animation-negative-end-delay-path");
 

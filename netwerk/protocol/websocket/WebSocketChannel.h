@@ -206,7 +206,7 @@ private:
 
   nsCString                       mHashedSecret;
 
-  // Used as key for connection managment: Initially set to hostname from URI,
+  // Used as key for connection management: Initially set to hostname from URI,
   // then to IP address (unless we're leaving DNS resolution to a proxy server)
   nsCString                       mAddress;
   int32_t                         mPort;          // WS server port

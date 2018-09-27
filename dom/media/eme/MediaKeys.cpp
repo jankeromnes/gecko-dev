@@ -48,10 +48,10 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(MediaKeys)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-MediaKeys::MediaKeys(nsPIDOMWindowInner* aParent,
+MediaKeys::MediaKeys(nsPIDOMWindowInner* apparent,
                      const nsAString& aKeySystem,
                      const MediaKeySystemConfiguration& aConfig)
-  : mParent(aParent)
+  : mParent(apparent)
   , mKeySystem(aKeySystem)
   , mCreatePromiseId(0)
   , mConfig(aConfig)

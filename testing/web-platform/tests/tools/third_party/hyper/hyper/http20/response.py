@@ -34,7 +34,7 @@ class HTTP20Response(object):
     provides access to the response headers and the entity body. The response
     is an iterable object and can be used in a with statement (though due to
     the persistent connections used in HTTP/2 this has no effect, and is done
-    soley for compatibility).
+    solely for compatibility).
     """
     def __init__(self, headers, stream):
         #: The reason phrase returned by the server. This is not used in
@@ -51,7 +51,7 @@ class HTTP20Response(object):
         #: once, and never assigned again.
         self.headers = headers
 
-        # The response trailers. These are always intially ``None``.
+        # The response trailers. These are always initially ``None``.
         self._trailers = None
 
         # The stream this response is being sent over.

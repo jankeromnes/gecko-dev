@@ -116,7 +116,7 @@ function runBeginInputTransactionMethodTests()
   TIP1.setPendingCompositionString(composingStr);
   TIP1.appendClauseToPendingComposition(composingStr.length, TIP1.ATTR_RAW_CLAUSE);
   ok(TIP1.flushPendingComposition(),
-     description + "TIP1.flushPendingComposition() should return true becuase it should be valid composition");
+     description + "TIP1.flushPendingComposition() should return true because it should be valid composition");
   is(input.value, composingStr,
      description + "The input element should have composing string");
 

@@ -59,7 +59,7 @@ function removeNodeAndListener(n) {
   n.removeEventListener("playing", playing);
   n.removeEventListener("loadeddata", loadedData);
   n.removeEventListener("seeking", seekStarted);
-  n.removeEventListener("seeked", seekEnded);
+  n.removeEventListener("sought", seekEnded);
   removeNodeAndSource(n);
 }
 
@@ -108,7 +108,7 @@ function startTest(test, token) {
   v.addEventListener("playing", playing);
   v.addEventListener("loadeddata", loadedData);
   v.addEventListener("seeking", seekStarted);
-  v.addEventListener("seeked", seekEnded);
+  v.addEventListener("sought", seekEnded);
   document.body.appendChild(v);
 }
 

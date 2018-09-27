@@ -17,7 +17,7 @@ namespace test {
 namespace mozilla {
 
 /* Observes reception of RTP packets and tabulates data about the
- * most recent arival times by source (csrc or ssrc) and audio level information
+ * most recent arrival times by source (csrc or ssrc) and audio level information
  *  * csrc-audio-level RTP header extension
  *  * ssrc-audio-level RTP header extension
  */

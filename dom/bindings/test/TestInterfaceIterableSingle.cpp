@@ -22,8 +22,8 @@ NS_WRAPPERCACHE_INTERFACE_MAP_ENTRY
 NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-TestInterfaceIterableSingle::TestInterfaceIterableSingle(nsPIDOMWindowInner* aParent)
-  : mParent(aParent)
+TestInterfaceIterableSingle::TestInterfaceIterableSingle(nsPIDOMWindowInner* apparent)
+  : mParent(apparent)
 {
   for (int i = 0; i < 3; ++i) {
     mValues.AppendElement(i);

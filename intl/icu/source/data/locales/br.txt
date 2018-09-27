@@ -57,7 +57,7 @@ br{
                 timeSeparator{":"}
             }
         }
-        beng{
+        being{
             symbols{
                 timeSeparator{":"}
             }
@@ -179,25 +179,25 @@ br{
                         two{"000 viliad"}
                     }
                     1000000{
-                        few{"0 milion"}
+                        few{"0 million"}
                         many{"0 a v/milionoù"}
-                        one{"0 milion"}
-                        other{"0 milion"}
-                        two{"0 v/milion"}
+                        one{"0 million"}
+                        other{"0 million"}
+                        two{"0 v/million"}
                     }
                     10000000{
-                        few{"00 milion"}
+                        few{"00 million"}
                         many{"00 a v/milionoù"}
-                        one{"00 milion"}
-                        other{"00 milion"}
-                        two{"00 v/milion"}
+                        one{"00 million"}
+                        other{"00 million"}
+                        two{"00 v/million"}
                     }
                     100000000{
-                        few{"000 milion"}
+                        few{"000 million"}
                         many{"000 a v/milionoù"}
-                        one{"000 milion"}
-                        other{"000 milion"}
-                        two{"000 v/milion"}
+                        one{"000 million"}
+                        other{"000 million"}
+                        two{"000 v/million"}
                     }
                     1000000000{
                         few{"0 miliard"}

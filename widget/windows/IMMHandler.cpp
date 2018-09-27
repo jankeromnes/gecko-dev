@@ -746,7 +746,7 @@ IMMHandler::ProcessMessageForPlugin(nsWindow* aWindow,
       aRet = true;
       return true;
     case WM_IME_REQUEST:
-       // Our plugin implementation is alwasy OOP.  So WM_IME_REQUEST doesn't
+       // Our plugin implementation is always OOP.  So WM_IME_REQUEST doesn't
        // allow that parameter is pointer and shouldn't handle into Gecko.
        aRet = false;
        return true;
@@ -2156,7 +2156,7 @@ IMMHandler::GetTargetClauseRange(uint32_t* aOffset,
   }
 
   if (!found) {
-    // The all composition string is targetted when there is no ATTR_TARGET_*
+    // The all composition string is targeted when there is no ATTR_TARGET_*
     // clause. E.g., there is only ATTR_INPUT
     *aLength = mCompositionString.Length();
     return true;
@@ -2345,7 +2345,7 @@ IMMHandler::SetIMERelatedWindowsPos(nsWindow* aWindow,
     // Get a rect of first character in current target in composition string.
     LayoutDeviceIntRect firstTargetCharRect, lastTargetCharRect;
     if (mIsComposing && !mCompositionString.IsEmpty()) {
-      // If there are no targetted selection, we should use it's first character
+      // If there are no targeted selection, we should use it's first character
       // rect instead.
       uint32_t offset, length;
       if (!GetTargetClauseRange(&offset, &length)) {

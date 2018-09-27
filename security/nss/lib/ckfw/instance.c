@@ -80,11 +80,11 @@ struct NSSCKFWInstanceStr {
      * The invariants the mutex protects are:
      *
      *  1) Each of the cached descriptions (versions, etc.) are in an
-     *     internally consistant state.
+     *     internally consistent state.
      *
-     *  2) The session handle hashes and count are consistant
+     *  2) The session handle hashes and count are consistent
      *
-     *  3) The object handle hashes and count are consistant.
+     *  3) The object handle hashes and count are consistent.
      *
      * I could use multiple locks, but let's wait to see if that's
      * really necessary.

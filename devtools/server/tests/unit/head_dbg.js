@@ -612,7 +612,7 @@ const Test = task => () => {
 const assert = Assert.ok.bind(Assert);
 
 /**
- * Create a promise that is resolved on the next occurence of the given event.
+ * Create a promise that is resolved on the next occurrence of the given event.
  *
  * @param DebuggerClient client
  * @param String event
@@ -641,7 +641,7 @@ function waitForEvent(client, type, predicate) {
  * the next pause.
  *
  * When using promises and Task.jsm, we often want to do an action that causes a
- * pause and continue the task once the pause has ocurred. Unfortunately, if we
+ * pause and continue the task once the pause has occurred. Unfortunately, if we
  * do the action that causes the pause within the task's current tick we will
  * pause before we have a chance to yield the promise that waits for the pause
  * and we enter a dead lock. The solution is to create the promise that waits

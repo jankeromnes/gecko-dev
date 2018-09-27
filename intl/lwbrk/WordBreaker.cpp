@@ -41,7 +41,7 @@ bool WordBreaker::BreakInBetween(
 #define IS_KATAKANA(c)         (( 0x30A0 <= (c)) && ((c) <= 0x30FF))
 #define IS_HIRAGANA(c)         (( 0x3040 <= (c)) && ((c) <= 0x309F))
 #define IS_HALFWIDTHKATAKANA(c)         (( 0xFF60 <= (c)) && ((c) <= 0xFF9F))
-#define IS_THAI(c)         (0x0E00 == (0xFF80 & (c) )) // Look at the higest 9 bits
+#define IS_THAI(c)         (0x0E00 == (0xFF80 & (c) )) // Look at the highest 9 bits
 
 /* static */ WordBreakClass
 WordBreaker::GetClass(char16_t c)

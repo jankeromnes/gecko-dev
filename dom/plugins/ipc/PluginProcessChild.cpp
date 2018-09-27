@@ -75,7 +75,7 @@ PluginProcessChild::Init(int aArgc, char* aArgv[])
             if (!interpose.IsEmpty()) {
                 setInterpose.Append(interpose);
             }
-            // Values passed to PR_SetEnv() must be seperately allocated.
+            // Values passed to PR_SetEnv() must be separately allocated.
             char* setInterposePtr = strdup(setInterpose.get());
             PR_SetEnv(setInterposePtr);
         }

@@ -81,7 +81,7 @@ UdpSocket2Windows::UdpSocket2Windows(const int32_t id,
     if(!disableGQOS)
     {
         DWORD dwBufLen = 0;
-        // Set dwBufLen to the size needed to retreive all the requested
+        // Set dwBufLen to the size needed to retrieve all the requested
         // information from WSAEnumProtocols.
         int32_t nRet = WSAEnumProtocols(NULL, lpProtocolBuf, &dwBufLen);
         lpProtocolBuf = (WSAPROTOCOL_INFO*)malloc(dwBufLen);
@@ -377,7 +377,7 @@ int32_t UdpSocket2Windows::SendTo(const int8_t* buf, size_t len,
         _mgr->PushIoContext(pIoContext);
         return -1;
     }
-    // Assume that the WSASendTo call will be successfull to make sure that
+    // Assume that the WSASendTo call will be successful to make sure that
     // _outstandingCalls is positive. Roll back if WSASendTo failed.
     if(!NewOutstandingCall())
     {
@@ -569,7 +569,7 @@ int32_t UdpSocket2Windows::PostRecv(PerIoContext* pIoContext)
         return -1;
     }
 
-    // Assume that the WSARecvFrom() call will be successfull to make sure that
+    // Assume that the WSARecvFrom() call will be successful to make sure that
     // _outstandingCalls is positive. Roll back if WSARecvFrom() failed.
     if(!NewOutstandingCall())
     {
@@ -600,7 +600,7 @@ int32_t UdpSocket2Windows::PostRecv(PerIoContext* pIoContext)
                     kTraceTransport,
                     _id,
                     "UdpSocket2Windows(%d)::PostRecv(?), WSAerror:%d when\
- posting new recieve,trie:%d",
+ posting new receive,trie:%d",
                     (int32_t)this,
                     rxError,
                     tries);

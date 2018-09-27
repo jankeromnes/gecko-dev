@@ -22,8 +22,8 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(MediaKeyStatusMap)
 NS_INTERFACE_MAP_END
 NS_IMPL_CYCLE_COLLECTION_WRAPPERCACHE(MediaKeyStatusMap, mParent)
 
-MediaKeyStatusMap::MediaKeyStatusMap(nsPIDOMWindowInner* aParent)
-  : mParent(aParent)
+MediaKeyStatusMap::MediaKeyStatusMap(nsPIDOMWindowInner* apparent)
+  : mParent(apparent)
 {
 }
 

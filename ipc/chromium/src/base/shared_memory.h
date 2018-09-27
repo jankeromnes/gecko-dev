@@ -50,7 +50,7 @@ class SharedMemory {
   // shared memory file.
   bool SetHandle(SharedMemoryHandle handle, bool read_only);
 
-  // Return true iff the given handle is valid (i.e. not the distingished
+  // Return true iff the given handle is valid (i.e. not the distinguished
   // invalid value; NULL for a HANDLE and -1 for a file descriptor)
   static bool IsHandleValid(const SharedMemoryHandle& handle);
 

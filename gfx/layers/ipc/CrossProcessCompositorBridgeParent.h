@@ -102,7 +102,7 @@ public:
                               const uint64_t& aInputBlockId,
                               const nsTArray<ScrollableLayerGuid>& aTargets) override;
 
-  AsyncCompositionManager* GetCompositionManager(LayerTransactionParent* aParent) override;
+  AsyncCompositionManager* GetCompositionManager(LayerTransactionParent* apparent) override;
   mozilla::ipc::IPCResult RecvRemotePluginsReady()  override { return IPC_FAIL_NO_REASON(this); }
 
   // Use DidCompositeLocked if you already hold a lock on

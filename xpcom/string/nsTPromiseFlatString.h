@@ -16,7 +16,7 @@
  * resort, and this may be necessary when dealing with legacy or OS calls,
  * but in general, requiring a null-terminated array of characters kills many
  * of the performance wins the string classes offer.  Write your own code to
- * use |nsA[C]String&|s for parameters.  Write your string proccessing
+ * use |nsA[C]String&|s for parameters.  Write your string processing
  * algorithms to exploit iterators.  If you do this, you will benefit from
  * being able to chain operations without copying or allocating and your code
  * will be significantly more efficient.  Remember, a function that takes an

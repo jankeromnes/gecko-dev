@@ -24,7 +24,7 @@ const SEC_ASN1Template DSA_SignatureTemplate[] =
     };
 
 /* Input is variable length multi-byte integer, MSB first (big endian).
-** Most signficant bit of first byte is NOT treated as a sign bit.
+** Most significant bit of first byte is NOT treated as a sign bit.
 ** May be one or more leading bytes of zeros.
 ** Output is variable length multi-byte integer, MSB first (big endian).
 ** Most significant bit of first byte will be zero (positive sign bit)

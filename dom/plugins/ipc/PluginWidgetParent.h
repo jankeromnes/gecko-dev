@@ -42,7 +42,7 @@ public:
   void ParentDestroy();
 
   // Sets mWidget's parent
-  void SetParent(nsIWidget* aParent);
+  void SetParent(nsIWidget* apparent);
 
 private:
   // The tab our connection is associated with.

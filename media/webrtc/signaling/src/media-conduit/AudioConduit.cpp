@@ -763,7 +763,7 @@ WebrtcAudioConduit::GetAudioFrame(int16_t speechData[],
   }
 
   int lengthSamplesAllowed = lengthSamples;
-  lengthSamples = 0;  //output paramter
+  lengthSamples = 0;  //output parameter
 
   if (mPtrVoEXmedia->GetAudioFrame(mChannel,
                                    samplingFreqHz,

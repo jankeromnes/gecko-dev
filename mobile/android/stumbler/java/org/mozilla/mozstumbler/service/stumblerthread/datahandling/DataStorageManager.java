@@ -218,7 +218,7 @@ public class DataStorageManager {
 
     /*
      *  Setup a new global instance. A WeakReference will be kept to the supplied tracker, the caller
-     *  is reponsible for the tracker lifetime.
+     *  is responsible for the tracker lifetime.
      */
     public static synchronized void createGlobalInstance(Context context, StorageIsEmptyTracker tracker) {
         DataStorageManager.createGlobalInstance(context, tracker,

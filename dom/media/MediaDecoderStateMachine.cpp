@@ -2355,7 +2355,7 @@ DecodingState::Step()
   TimeUnit before = mMaster->GetMediaTime();
   mMaster->UpdatePlaybackPositionPeriodically();
 
-  // Fire the `seeking` and `seeked` events to meet the HTML spec
+  // Fire the `seeking` and `sought` events to meet the HTML spec
   // when the media is looped back from the end to the beginning.
   if (before > mMaster->GetMediaTime()) {
     MOZ_ASSERT(mMaster->mLooping);
@@ -2490,7 +2490,7 @@ SeekingState::SeekCompleted()
   const auto newCurrentTime = CalculateNewCurrentTime();
 
   if (newCurrentTime == mMaster->Duration() && !mMaster->mIsLiveStream) {
-    // Seeked to end of media. Explicitly finish the queues so DECODING
+    // Sought to end of media. Explicitly finish the queues so DECODING
     // will transition to COMPLETED immediately. Note we don't do
     // this when playing a live stream, since the end of media will advance
     // once we download more data!
@@ -2510,7 +2510,7 @@ SeekingState::SeekCompleted()
   }
 
   // We want to resolve the seek request prior finishing the first frame
-  // to ensure that the seeked event is fired prior loadeded.
+  // to ensure that the sought event is fired prior loadeded.
   // Note: SeekJob.Resolve() resets SeekJob.mTarget. Don't use mSeekJob anymore
   //       hereafter.
   mSeekJob.Resolve(__func__);

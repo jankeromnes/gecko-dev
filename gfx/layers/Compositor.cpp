@@ -22,9 +22,9 @@ namespace mozilla {
 namespace layers {
 
 Compositor::Compositor(widget::CompositorWidget* aWidget,
-                      CompositorBridgeParent* aParent)
+                      CompositorBridgeParent* apparent)
   : mDiagnosticTypes(DiagnosticTypes::NO_DIAGNOSTIC)
-  , mParent(aParent)
+  , mParent(apparent)
   , mPixelsPerFrame(0)
   , mPixelsFilled(0)
   , mScreenRotation(ROTATION_0)

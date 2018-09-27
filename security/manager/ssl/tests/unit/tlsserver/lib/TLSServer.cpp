@@ -366,7 +366,7 @@ HandleConnection(PRFileDesc* aSocket, const UniquePRFileDesc& aModelSocket)
   // TODO: On tests that are expected to fail (e.g. due to a revoked
   // certificate), the client will close the connection wtihout sending us the
   // request byte. In those cases, we should keep going. But, in the cases
-  // where the connection is supposed to suceed, we should verify that we
+  // where the connection is supposed to succeed, we should verify that we
   // successfully receive the request and send the response.
   rv = ReadRequest(&conn);
   if (NS_SUCCEEDED(rv)) {

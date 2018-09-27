@@ -1147,7 +1147,7 @@ MachExceptionHandlerThread(JSContext* cx)
             MOZ_CRASH();
         }
 
-        // Some thread just commited an EXC_BAD_ACCESS and has been suspended by
+        // Some thread just committed an EXC_BAD_ACCESS and has been suspended by
         // the kernel. The kernel is waiting for us to reply with instructions.
         // Our default is the "not handled" reply (by setting the RetCode field
         // of the reply to KERN_FAILURE) which tells the kernel to continue

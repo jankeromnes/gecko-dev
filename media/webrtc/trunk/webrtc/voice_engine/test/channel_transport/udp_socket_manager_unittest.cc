@@ -72,7 +72,7 @@ TEST(UdpSocketManager, UnremovedSocketsGetCollectedAtManagerDeletion) {
       false,  // ipV6Enable
       false);  // disableGQOS
   // The constructor will do AddSocket on the manager.
-  // Call a member funtion to work around "set but not used" compliation
+  // Call a member function to work around "set but not used" compliation
   // error on ChromeOS ARM.
   unused_socket->SetEventToNull();
   unused_socket = NULL;

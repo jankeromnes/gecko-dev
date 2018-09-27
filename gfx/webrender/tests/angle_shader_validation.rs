@@ -141,7 +141,7 @@ fn validate(validator: &ShaderValidator, name: &str, source: String) {
     // Run Angle validator
     match validator.compile_and_translate(&[&source]) {
         Ok(_) => {
-            println!("Shader translated succesfully: {}", name);
+            println!("Shader translated successfully: {}", name);
         }
         Err(_) => {
             panic!(

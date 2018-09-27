@@ -10,4 +10,4 @@
 
 // TODO(deadbeef): Remove this file when Chrome build files no longer reference
 // it.
-#error "DONT INCLUDE THIS"
+#error "DON'T INCLUDE THIS"

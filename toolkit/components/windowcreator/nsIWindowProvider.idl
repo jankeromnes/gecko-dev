@@ -38,10 +38,10 @@ interface nsIWindowProvider : nsISupports
    * those is the caller's responsibility.  The provider can always return null
    * to have the caller create a brand-new window.
    *
-   * @param aParent Must not be null.  This is the window that the caller wants
+   * @param apparent Must not be null.  This is the window that the caller wants
    *        to use as the parent for the new window.  Generally,
    *        nsIWindowProvider implementors can expect to be somehow related to
-   *        aParent; the relationship may depend on the nsIWindowProvider
+   *        apparent; the relationship may depend on the nsIWindowProvider
    *        implementation.
    *
    * @param aChromeFlags The chrome flags the caller will use to create a new
@@ -97,7 +97,7 @@ interface nsIWindowProvider : nsISupports
    * @see nsIWindowWatcher for more information on aFeatures.
    * @see nsIWebBrowserChrome for more information on aChromeFlags.
    */
-  mozIDOMWindowProxy provideWindow(in mozIDOMWindowProxy aParent,
+  mozIDOMWindowProxy provideWindow(in mozIDOMWindowProxy apparent,
                                    in unsigned long aChromeFlags,
                                    in boolean aCalledFromJS,
                                    in boolean aPositionSpecified,

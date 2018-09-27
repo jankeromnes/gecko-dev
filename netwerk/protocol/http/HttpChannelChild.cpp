@@ -224,7 +224,7 @@ HttpChannelChild::ReleaseMainThreadOnlyReferences()
   nsTArray<nsCOMPtr<nsISupports>> arrayToRelease;
   arrayToRelease.AppendElement(mRedirectChannelChild.forget());
 
-  // To solve multiple inheritence of nsISupports in InterceptStreamListener
+  // To solve multiple inheritance of nsISupports in InterceptStreamListener
   nsCOMPtr<nsIStreamListener> listener = mInterceptListener.forget();
   arrayToRelease.AppendElement(listener.forget());
 

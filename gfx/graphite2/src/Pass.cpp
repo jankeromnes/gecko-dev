@@ -954,7 +954,7 @@ bool Pass::resolveCollisions(Segment *seg, Slot *slotFix, Slot *start,
             cFix->shift(), cFix->offset(), dir, dbgout))
         return false;
     bool collides = false;
-    // When we're processing forward, ignore kernable glyphs that preceed the target glyph.
+    // When we're processing forward, ignore kernable glyphs that precede the target glyph.
     // When processing backward, don't ignore these until we pass slotFix.
     bool ignoreForKern = !isRev;
     bool rtl = dir & 1;

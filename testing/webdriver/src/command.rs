@@ -426,7 +426,7 @@ pub struct LocatorParameters {
     pub value: String,
 }
 
-/// Wrapper around the two supported variants of new session paramters
+/// Wrapper around the two supported variants of new session parameters
 ///
 /// The Spec variant is used for storing spec-compliant parameters whereas
 /// the legacy variant is used to store desiredCapabilities/requiredCapabilities

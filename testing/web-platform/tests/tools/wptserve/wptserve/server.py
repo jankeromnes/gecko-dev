@@ -44,7 +44,7 @@ for parsing the incoming request. A RequestRewriter is then
 applied and may change the request data if it matches a
 supplied rule.
 
-Once the request data had been finalised, Request and Reponse
+Once the request data had been finalised, Request and Response
 objects are constructed. These are used by the other parts of the
 system to read information about the request and manipulate the
 response.

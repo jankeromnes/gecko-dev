@@ -1039,7 +1039,7 @@ GetWidgetRootStyle(WidgetNodeType aNodeType)
     case MOZ_GTK_TOOLTIP:
       if (gtk_check_version(3, 20, 0) != nullptr) {
           // The tooltip style class is added first in CreateTooltipWidget()
-          // and transfered to style in CreateStyleForWidget().
+          // and transferred to style in CreateStyleForWidget().
           GtkWidget* tooltipWindow = CreateTooltipWidget();
           style = CreateStyleForWidget(tooltipWindow, nullptr);
           gtk_widget_destroy(tooltipWindow); // Release GtkWindow self-reference.
@@ -1095,12 +1095,12 @@ CreateSubStyleWithClass(WidgetNodeType aWidgetType, const gchar* aStyleClass)
   //
   // gtk_style_context_save(context) changes the node hierarchy of |context|
   // to add a new GtkCssNodeDeclaration that is a copy of its original node.
-  // The new node is a child of the original node, and so the new heirarchy is
+  // The new node is a child of the original node, and so the new hierarchy is
   // one level deeper.  The new node receives the same classes as the
   // original, but any changes to the classes on |context| will change only
   // the new node.  The new node inherits properties from the original node
-  // (which retains the original heirarchy and classes) and matches CSS rules
-  // with the new heirarchy and any changes to the classes.
+  // (which retains the original hierarchy and classes) and matches CSS rules
+  // with the new hierarchy and any changes to the classes.
   //
   // The change in hierarchy can produce some surprises in matching theme CSS
   // rules (e.g. https://bugzilla.gnome.org/show_bug.cgi?id=761870#c2), but it
@@ -1108,8 +1108,8 @@ CreateSubStyleWithClass(WidgetNodeType aWidgetType, const gchar* aStyleClass)
   // same widget parts in Gecko as they do in GTK.
   //
   // When using public GTK API to construct style contexts, a widget path is
-  // required.  CSS rules are not matched against the style context heirarchy
-  // but according to the heirarchy in the widget path.  The path that matches
+  // required.  CSS rules are not matched against the style context hierarchy
+  // but according to the hierarchy in the widget path.  The path that matches
   // the same CSS rules as a saved context is like the path of |parentStyle|
   // but with an extra copy of the head (last) object appended.  Setting
   // |parentStyle| as the parent context provides the same inheritance of

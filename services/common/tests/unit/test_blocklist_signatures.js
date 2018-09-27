@@ -303,7 +303,7 @@ add_task(async function test_check_signatures() {
 
   let endHistogram = getUptakeTelemetrySnapshot(TELEMETRY_HISTOGRAM_KEY);
 
-  // ensure that a success histogram is tracked when a succesful sync occurs.
+  // ensure that a success histogram is tracked when a successful sync occurs.
   let expectedIncrements = {[UptakeTelemetry.STATUS.SUCCESS]: 1};
   checkUptakeTelemetry(startHistogram, endHistogram, expectedIncrements);
 
@@ -460,7 +460,7 @@ add_task(async function test_check_signatures() {
   // was not sent.
   equal(syncEventSent, false);
 
-  // ensure that the failure count is incremented for a succesful sync with an
+  // ensure that the failure count is incremented for a successful sync with an
   // (initial) bad signature - only SERVICES_SETTINGS_SYNC_SIG_FAIL should
   // increment.
   expectedIncrements = {[UptakeTelemetry.STATUS.SIGNATURE_ERROR]: 1};

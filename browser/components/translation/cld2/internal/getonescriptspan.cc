@@ -613,7 +613,7 @@ int ScriptScanner::SkipToFrontOfSpan(const char* src, int len, int* script) {
     // We are at a letter, nonletter, tag, or entity
     if (IsSpecial(src[skip]) && !is_plain_text_) {
       if (src[skip] == '<') {
-        // Begining of tag; skip to end and go around again
+        // Beginning of tag; skip to end and go around again
         tlen = ScanToPossibleLetter(src + skip, len - skip,
                                     exit_state_);
         sc = 0;
@@ -730,7 +730,7 @@ bool ScriptScanner::GetOneTextSpan(LangSpan* span) {
             c = LF;
           }
         }
-        // Begining of tag; skip to end and go around again
+        // Beginning of tag; skip to end and go around again
         tlen = 1 + ScanToPossibleLetter(next_byte_ + take, byte_length_ - take,
                                     exit_state_);
         // Copy one byte, compressing spaces
@@ -866,7 +866,7 @@ bool ScriptScanner::GetOneScriptSpan(LangSpan* span) {
       // We are at a letter, nonletter, tag, or entity
       if (IsSpecial(next_byte_[take]) && !is_plain_text_) {
         if (next_byte_[take] == '<') {
-          // Begining of tag
+          // Beginning of tag
           sc = 0;
           break;
         } else if (next_byte_[take] == '>') {
@@ -961,7 +961,7 @@ bool ScriptScanner::GetOneScriptSpan(LangSpan* span) {
       // We are at a letter, nonletter, tag, or entity
       if (IsSpecial(next_byte_[take]) && !is_plain_text_) {
         if (next_byte_[take] == '<') {
-          // Begining of tag; skip to end and go around again
+          // Beginning of tag; skip to end and go around again
           tlen = ScanToPossibleLetter(next_byte_ + take, byte_length_ - take,
                                       exit_state_);
           sc = 0;

@@ -430,7 +430,7 @@ rng_init(void)
         globalrng->isKatTest = PR_FALSE;
 
         /* fetch one random value so that we can populate rng->oldV for our
-         * continous random number test. */
+         * continuous random number test. */
         prng_generateNewBytes(globalrng, bytes, SHA256_LENGTH, NULL, 0);
 
         /* Fetch more entropy into the PRNG */

@@ -1207,7 +1207,7 @@ function getTransactionsForCopy(items, insertionIndex,
     let guid = item.itemGuid;
 
     if (PlacesUIUtils.PLACES_FLAVORS.includes(item.type) &&
-        // For anything that is comming from within this session, we do a
+        // For anything that is coming from within this session, we do a
         // direct copy, otherwise we fallback and form a new item below.
         "instanceId" in item && item.instanceId == PlacesUtils.instanceId &&
         // If the Item doesn't have a guid, this could be a virtual tag query or

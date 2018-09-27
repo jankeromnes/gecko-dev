@@ -49,7 +49,7 @@ void ScreenCapturerWinMagnifier::Start(Callback* callback) {
   callback_ = callback;
 
   if (!InitializeMagnifier()) {
-    LOG_F(LS_WARNING) << "Switching to fallback screen capturer becuase "
+    LOG_F(LS_WARNING) << "Switching to fallback screen capturer because "
                          "magnifier initialization failed.";
     StartFallbackCapturer();
   }
@@ -271,7 +271,7 @@ bool ScreenCapturerWinMagnifier::InitializeMagnifier() {
   }
 
   // Register the host window class. See the MSDN documentation of the
-  // Magnification API for more infomation.
+  // Magnification API for more information.
   WNDCLASSEX wcex = {};
   wcex.cbSize = sizeof(WNDCLASSEX);
   wcex.lpfnWndProc = &DefWindowProc;

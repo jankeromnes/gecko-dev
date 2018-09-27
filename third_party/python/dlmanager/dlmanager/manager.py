@@ -18,7 +18,7 @@ class DownloadInterrupt(Exception):
 
 class Download(object):
     """
-    Download is reponsible of downloading one file in the background.
+    Download is responsible of downloading one file in the background.
 
     Example of use: ::
 
@@ -196,7 +196,7 @@ class DownloadManager(object):
     is not already there.
 
     Note that background downloads needs to be stopped. For example, if
-    you have an exception while a download is occuring, python will only
+    you have an exception while a download is occurring, python will only
     exit when the download will finish. To get rid of that, there is a
     possible idiom: ::
 

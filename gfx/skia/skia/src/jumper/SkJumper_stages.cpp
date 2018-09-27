@@ -1475,7 +1475,7 @@ STAGE(load_tables_u16_be, const SkJumper_LoadTablesCtx* c) {
     U16 R,G,B,A;
     load4(ptr, tail, &R,&G,&B,&A);
 
-    // c->src is big-endian, so & 0xff grabs the 8 most signficant bits.
+    // c->src is big-endian, so & 0xff grabs the 8 most significant bits.
     r = gather(c->r, expand(R) & 0xff);
     g = gather(c->g, expand(G) & 0xff);
     b = gather(c->b, expand(B) & 0xff);
@@ -1487,7 +1487,7 @@ STAGE(load_tables_rgb_u16_be, const SkJumper_LoadTablesCtx* c) {
     U16 R,G,B;
     load3(ptr, tail, &R,&G,&B);
 
-    // c->src is big-endian, so & 0xff grabs the 8 most signficant bits.
+    // c->src is big-endian, so & 0xff grabs the 8 most significant bits.
     r = gather(c->r, expand(R) & 0xff);
     g = gather(c->g, expand(G) & 0xff);
     b = gather(c->b, expand(B) & 0xff);

@@ -890,7 +890,7 @@ static int vp9_pattern_search(
                      in_what->stride) +
             mvsad_err_cost(x, ref_mv, &fcenter_mv, sad_per_bit);
 
-  // Search all possible scales upto the search param around the center point
+  // Search all possible scales up to the search param around the center point
   // pick the scale of the point that is best as the starting scale of
   // further steps around it.
   if (do_init_search) {
@@ -1064,7 +1064,7 @@ static int vp9_pattern_search_sad(
                      in_what->stride) +
             mvsad_err_cost(x, ref_mv, &fcenter_mv, sad_per_bit);
 
-  // Search all possible scales upto the search param around the center point
+  // Search all possible scales up to the search param around the center point
   // pick the scale of the point that is best as the starting scale of
   // further steps around it.
   if (do_init_search) {

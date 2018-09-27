@@ -148,7 +148,7 @@ interface nsIXPConnectWrappedJSUnmarkGray : nsIXPConnectWrappedJS
  * 2) The underlying JSObject actually implements a "wrappedJSObject"
  *    property that returns a JSObject. This is called by XPConnect. This
  *    restriction allows wrapped objects to only allow access to the underlying
- *    JSObject if they choose to do so. Ususally this just means that 'foo'
+ *    JSObject if they choose to do so. Usually this just means that 'foo'
  *    would have a property tht looks like:
  *       this.wrappedJSObject = this.
  * 3) The implemementation of nsIXPCSecurityManager (if installed) allows

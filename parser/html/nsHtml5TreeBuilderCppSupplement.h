@@ -568,10 +568,10 @@ nsHtml5TreeBuilder::detachFromParent(nsIContentHandle* aElement)
 
 void
 nsHtml5TreeBuilder::appendElement(nsIContentHandle* aChild,
-                                  nsIContentHandle* aParent)
+                                  nsIContentHandle* apparent)
 {
   MOZ_ASSERT(aChild, "Null child");
-  MOZ_ASSERT(aParent, "Null parent");
+  MOZ_ASSERT(apparent, "Null parent");
   if (deepTreeSurrogateParent) {
     return;
   }
@@ -579,7 +579,7 @@ nsHtml5TreeBuilder::appendElement(nsIContentHandle* aChild,
   if (mBuilder) {
     nsresult rv =
       nsHtml5TreeOperation::Append(static_cast<nsIContent*>(aChild),
-                                   static_cast<nsIContent*>(aParent),
+                                   static_cast<nsIContent*>(apparent),
                                    mBuilder);
     if (NS_FAILED(rv)) {
       MarkAsBrokenAndRequestSuspensionWithBuilder(rv);
@@ -592,7 +592,7 @@ nsHtml5TreeBuilder::appendElement(nsIContentHandle* aChild,
     MarkAsBrokenAndRequestSuspensionWithoutBuilder(NS_ERROR_OUT_OF_MEMORY);
     return;
   }
-  treeOp->Init(eTreeOpAppend, aChild, aParent);
+  treeOp->Init(eTreeOpAppend, aChild, apparent);
 }
 
 void
@@ -700,13 +700,13 @@ nsHtml5TreeBuilder::insertFosterParentedChild(nsIContentHandle* aChild,
 }
 
 void
-nsHtml5TreeBuilder::appendCharacters(nsIContentHandle* aParent,
+nsHtml5TreeBuilder::appendCharacters(nsIContentHandle* apparent,
                                      char16_t* aBuffer,
                                      int32_t aStart,
                                      int32_t aLength)
 {
   MOZ_ASSERT(aBuffer, "Null buffer");
-  MOZ_ASSERT(aParent, "Null parent");
+  MOZ_ASSERT(apparent, "Null parent");
   MOZ_ASSERT(!aStart, "aStart must always be zero.");
 
   if (mBuilder) {
@@ -714,7 +714,7 @@ nsHtml5TreeBuilder::appendCharacters(nsIContentHandle* aParent,
       aBuffer, // XXX aStart always ignored???
       aLength,
       static_cast<nsIContent*>(deepTreeSurrogateParent ? deepTreeSurrogateParent
-                                                       : aParent),
+                                                       : apparent),
       mBuilder);
     if (NS_FAILED(rv)) {
       MarkAsBrokenAndRequestSuspensionWithBuilder(rv);
@@ -741,17 +741,17 @@ nsHtml5TreeBuilder::appendCharacters(nsIContentHandle* aParent,
   treeOp->Init(eTreeOpAppendText,
                bufferCopy.release(),
                aLength,
-               deepTreeSurrogateParent ? deepTreeSurrogateParent : aParent);
+               deepTreeSurrogateParent ? deepTreeSurrogateParent : apparent);
 }
 
 void
-nsHtml5TreeBuilder::appendComment(nsIContentHandle* aParent,
+nsHtml5TreeBuilder::appendComment(nsIContentHandle* apparent,
                                   char16_t* aBuffer,
                                   int32_t aStart,
                                   int32_t aLength)
 {
   MOZ_ASSERT(aBuffer, "Null buffer");
-  MOZ_ASSERT(aParent, "Null parent");
+  MOZ_ASSERT(apparent, "Null parent");
   MOZ_ASSERT(!aStart, "aStart must always be zero.");
 
   if (deepTreeSurrogateParent) {
@@ -760,7 +760,7 @@ nsHtml5TreeBuilder::appendComment(nsIContentHandle* aParent,
 
   if (mBuilder) {
     nsresult rv = nsHtml5TreeOperation::AppendComment(
-      static_cast<nsIContent*>(aParent),
+      static_cast<nsIContent*>(apparent),
       aBuffer, // XXX aStart always ignored???
       aLength,
       mBuilder);
@@ -786,7 +786,7 @@ nsHtml5TreeBuilder::appendComment(nsIContentHandle* aParent,
     MarkAsBrokenAndRequestSuspensionWithoutBuilder(NS_ERROR_OUT_OF_MEMORY);
     return;
   }
-  treeOp->Init(eTreeOpAppendComment, bufferCopy.release(), aLength, aParent);
+  treeOp->Init(eTreeOpAppendComment, bufferCopy.release(), aLength, apparent);
 }
 
 void

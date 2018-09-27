@@ -51,9 +51,9 @@ testPropertyEscapes(
   "\\p{Script_Extensions=Bengali}"
 );
 testPropertyEscapes(
-  /^\p{Script_Extensions=Beng}+$/u,
+  /^\p{Script_Extensions=Being}+$/u,
   matchSymbols,
-  "\\p{Script_Extensions=Beng}"
+  "\\p{Script_Extensions=Being}"
 );
 testPropertyEscapes(
   /^\p{scx=Bengali}+$/u,
@@ -61,9 +61,9 @@ testPropertyEscapes(
   "\\p{scx=Bengali}"
 );
 testPropertyEscapes(
-  /^\p{scx=Beng}+$/u,
+  /^\p{scx=Being}+$/u,
   matchSymbols,
-  "\\p{scx=Beng}"
+  "\\p{scx=Being}"
 );
 
 const nonMatchSymbols = buildString({
@@ -106,9 +106,9 @@ testPropertyEscapes(
   "\\P{Script_Extensions=Bengali}"
 );
 testPropertyEscapes(
-  /^\P{Script_Extensions=Beng}+$/u,
+  /^\P{Script_Extensions=Being}+$/u,
   nonMatchSymbols,
-  "\\P{Script_Extensions=Beng}"
+  "\\P{Script_Extensions=Being}"
 );
 testPropertyEscapes(
   /^\P{scx=Bengali}+$/u,
@@ -116,9 +116,9 @@ testPropertyEscapes(
   "\\P{scx=Bengali}"
 );
 testPropertyEscapes(
-  /^\P{scx=Beng}+$/u,
+  /^\P{scx=Being}+$/u,
   nonMatchSymbols,
-  "\\P{scx=Beng}"
+  "\\P{scx=Being}"
 );
 
 reportCompare(0, 0);

@@ -614,7 +614,7 @@ js::PrintError(JSContext* cx, FILE* file, JS::ConstUTF8CharsZ toStringResult,
 class MOZ_RAII AutoMessageArgs
 {
     size_t totalLength_;
-    /* only {0} thru {9} supported */
+    /* only {0} through {9} supported */
     mozilla::Array<const char*, JS::MaxNumErrorArguments> args_;
     mozilla::Array<size_t, JS::MaxNumErrorArguments> lengths_;
     uint16_t count_;

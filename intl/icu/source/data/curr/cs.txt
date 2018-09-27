@@ -1583,7 +1583,7 @@ cs{
             other{"brazilských cruzeir (1990–1993)"}
         }
         BRL{
-            few{"brazilské realy"}
+            few{"brazilské really"}
             many{"brazilského realu"}
             one{"brazilský real"}
             other{"brazilských realů"}

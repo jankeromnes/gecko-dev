@@ -149,7 +149,7 @@ interface nsIWinTaskbar : nsISupports
    * @throw NS_ERROR_FAILURE if the property on the window could not be set.
    * @throw NS_ERROR_UNEXPECTED for general failures.
    */
-  void setGroupIdForWindow(in mozIDOMWindow aParent, in AString aIdentifier);
+  void setGroupIdForWindow(in mozIDOMWindow apparent, in AString aIdentifier);
 
   /**
    * Notify the taskbar that a window is about to enter full screen mode.

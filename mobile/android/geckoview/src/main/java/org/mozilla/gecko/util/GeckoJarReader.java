@@ -115,7 +115,7 @@ public final class GeckoJarReader {
      * @param url to open.  Can include jar: to "reach into" nested archives.
      * @param dir to write temporary file to.
      * @return a <code>File</code>, if one could be written; otherwise null.
-     * @throws IOException if an error occured.
+     * @throws IOException if an error occurred.
      */
     public static File extractStream(Context context, String url, File dir, String suffix) throws IOException {
         InputStream input = null;

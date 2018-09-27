@@ -327,7 +327,7 @@ public:
           const wr::RasterSpace& aRasterSpace);
   void PopStackingContext(bool aIsReferenceFrame);
 
-  wr::WrClipChainId DefineClipChain(const Maybe<wr::WrClipChainId>& aParent,
+  wr::WrClipChainId DefineClipChain(const Maybe<wr::WrClipChainId>& apparent,
                                     const nsTArray<wr::WrClipId>& aClips);
 
   wr::WrClipId DefineClip(const Maybe<wr::WrClipId>& aParentId,

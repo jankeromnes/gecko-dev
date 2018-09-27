@@ -135,11 +135,11 @@ public:
 
   static nsresult AppendText(const char16_t* aBuffer,
                              uint32_t aLength,
-                             nsIContent* aParent,
+                             nsIContent* apparent,
                              nsHtml5DocumentBuilder* aBuilder);
 
   static nsresult Append(nsIContent* aNode,
-                         nsIContent* aParent,
+                         nsIContent* apparent,
                          nsHtml5DocumentBuilder* aBuilder);
 
   static nsresult AppendToDocument(nsIContent* aNode,
@@ -148,11 +148,11 @@ public:
   static void Detach(nsIContent* aNode, nsHtml5DocumentBuilder* aBuilder);
 
   static nsresult AppendChildrenToNewParent(nsIContent* aNode,
-                                            nsIContent* aParent,
+                                            nsIContent* apparent,
                                             nsHtml5DocumentBuilder* aBuilder);
 
   static nsresult FosterParent(nsIContent* aNode,
-                               nsIContent* aParent,
+                               nsIContent* apparent,
                                nsIContent* aTable,
                                nsHtml5DocumentBuilder* aBuilder);
 
@@ -185,7 +185,7 @@ public:
                                          nsNodeInfoManager* aNodeInfoManager,
                                          nsHtml5DocumentBuilder* aBuilder);
 
-  static void SetFormElement(nsIContent* aNode, nsIContent* aParent);
+  static void SetFormElement(nsIContent* aNode, nsIContent* apparent);
 
   static nsresult AppendIsindexPrompt(nsIContent* parent,
                                       nsHtml5DocumentBuilder* aBuilder);
@@ -196,7 +196,7 @@ public:
                                    nsIContent* aTable,
                                    nsHtml5DocumentBuilder* aBuilder);
 
-  static nsresult AppendComment(nsIContent* aParent,
+  static nsresult AppendComment(nsIContent* apparent,
                                 char16_t* aBuffer,
                                 int32_t aLength,
                                 nsHtml5DocumentBuilder* aBuilder);
@@ -247,15 +247,15 @@ public:
 
   inline void Init(eHtml5TreeOperation aOpCode,
                    nsIContentHandle* aNode,
-                   nsIContentHandle* aParent)
+                   nsIContentHandle* apparent)
   {
     MOZ_ASSERT(mOpCode == eTreeOpUninitialized,
                "Op code must be uninitialized when initializing.");
     MOZ_ASSERT(aNode, "Initialized tree op with null node.");
-    MOZ_ASSERT(aParent, "Initialized tree op with null parent.");
+    MOZ_ASSERT(apparent, "Initialized tree op with null parent.");
     mOpCode = aOpCode;
     mOne.node = static_cast<nsIContent**>(aNode);
-    mTwo.node = static_cast<nsIContent**>(aParent);
+    mTwo.node = static_cast<nsIContent**>(apparent);
   }
 
   inline void Init(eHtml5TreeOperation aOpCode,
@@ -310,17 +310,17 @@ public:
 
   inline void Init(eHtml5TreeOperation aOpCode,
                    nsIContentHandle* aNode,
-                   nsIContentHandle* aParent,
+                   nsIContentHandle* apparent,
                    nsIContentHandle* aTable)
   {
     MOZ_ASSERT(mOpCode == eTreeOpUninitialized,
                "Op code must be uninitialized when initializing.");
     MOZ_ASSERT(aNode, "Initialized tree op with null node.");
-    MOZ_ASSERT(aParent, "Initialized tree op with null parent.");
+    MOZ_ASSERT(apparent, "Initialized tree op with null parent.");
     MOZ_ASSERT(aTable, "Initialized tree op with null table.");
     mOpCode = aOpCode;
     mOne.node = static_cast<nsIContent**>(aNode);
-    mTwo.node = static_cast<nsIContent**>(aParent);
+    mTwo.node = static_cast<nsIContent**>(apparent);
     mThree.node = static_cast<nsIContent**>(aTable);
   }
 
@@ -396,13 +396,13 @@ public:
   inline void Init(eHtml5TreeOperation aOpCode,
                    char16_t* aBuffer,
                    int32_t aLength,
-                   nsIContentHandle* aParent)
+                   nsIContentHandle* apparent)
   {
     MOZ_ASSERT(mOpCode == eTreeOpUninitialized,
                "Op code must be uninitialized when initializing.");
     MOZ_ASSERT(aBuffer, "Initialized tree op with null buffer.");
     mOpCode = aOpCode;
-    mOne.node = static_cast<nsIContent**>(aParent);
+    mOne.node = static_cast<nsIContent**>(apparent);
     mTwo.unicharPtr = aBuffer;
     mFour.integer = aLength;
   }

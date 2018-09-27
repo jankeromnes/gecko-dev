@@ -53,7 +53,7 @@ module.exports = {
   },
 
   /**
-   * Remove the viewport's device assocation.
+   * Remove the viewport's device association.
    */
   removeDeviceAssociation(id) {
     post(window, "remove-device-association");

@@ -142,15 +142,15 @@ HTMLSourceElement::AfterSetAttr(int32_t aNameSpaceID, nsAtom* aName,
 
 nsresult
 HTMLSourceElement::BindToTree(nsIDocument *aDocument,
-                              nsIContent *aParent,
+                              nsIContent *apparent,
                               nsIContent *aBindingParent)
 {
   nsresult rv = nsGenericHTMLElement::BindToTree(aDocument,
-                                                 aParent,
+                                                 apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
-  if (auto* media = HTMLMediaElement::FromNodeOrNull(aParent)) {
+  if (auto* media = HTMLMediaElement::FromNodeOrNull(apparent)) {
     media->NotifyAddedSource();
   }
 

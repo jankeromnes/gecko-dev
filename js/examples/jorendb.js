@@ -336,7 +336,7 @@ function continueCommand(rest) {
 
     var match = rest.match(/^(\d+)$/);
     if (match) {
-        return doStepOrNext({upto:true, stopLine:match[1]});
+        return doStepOrNext({up to:true, stopLine:match[1]});
     }
 
     return [undefined];
@@ -526,7 +526,7 @@ function doStepOrNext(kind) {
             // 'finish' set a one-time onStep for stopping at the frame it
             // wants to return to
             stop = true;
-        } else if (kind.upto) {
+        } else if (kind.up to) {
             // running until a given line is reached
             if (this.line == kind.stopLine)
                 stop = true;

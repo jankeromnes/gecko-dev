@@ -248,7 +248,7 @@ GetProtocolVersion(HttpVersion pv)
     case HttpVersion::v1_1:
         return "http/1.1";
     default:
-        NS_WARNING(nsPrintfCString("Unkown protocol version: 0x%X. "
+        NS_WARNING(nsPrintfCString("Unknown protocol version: 0x%X. "
                                    "Please file a bug", static_cast<uint32_t>(pv)).get());
         return "http/1.1";
     }
@@ -493,7 +493,7 @@ GetHttpResponseHeadFromCacheEntry(nsICacheEntry *entry, nsHttpResponseHead *cach
 
     buf.Adopt(nullptr);
     // A "response-head" metadata element holds response head, e.g. response status
-    // line and headers in the form Firefox uses them internally (no dupicate
+    // line and headers in the form Firefox uses them internally (no duplicate
     // headers, etc.).
     rv = entry->GetMetaDataElement("response-head", getter_Copies(buf));
     NS_ENSURE_SUCCESS(rv, rv);
@@ -540,7 +540,7 @@ DetermineFramingAndImmutability(nsICacheEntry *entry,
     nsCString framedBuf;
     nsresult rv = entry->GetMetaDataElement("strongly-framed", getter_Copies(framedBuf));
     // describe this in terms of explicitly weakly framed so as to be backwards
-    // compatible with old cache contents which dont have strongly-framed makers
+    // compatible with old cache contents which don't have strongly-framed makers
     *weaklyFramed = NS_SUCCEEDED(rv) && framedBuf.EqualsLiteral("0");
     *isImmutable = !*weaklyFramed && isHttps && responseHead->Immutable();
 }

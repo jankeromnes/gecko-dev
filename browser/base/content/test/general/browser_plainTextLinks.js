@@ -105,7 +105,7 @@ add_task(async function() {
     () => testExpected(true, "Link options should not show for mailto: links"),
     () => {
       testExpected(false, "Link options should show for ftp.example.com");
-      testLinkExpected("http://ftp.example.com/", "ftp.example.com should be preceeded with http://");
+      testLinkExpected("http://ftp.example.com/", "ftp.example.com should be preceded with http://");
     },
     () => testExpected(false, "Link options should show for www.example.com  "),
     () => testExpected(false, "Link options should show for triple-click selections"),

@@ -15,12 +15,12 @@ namespace dom {
 class WebKitCSSMatrix final : public DOMMatrix
 {
 public:
-  explicit WebKitCSSMatrix(nsISupports* aParent)
-    : DOMMatrix(aParent)
+  explicit WebKitCSSMatrix(nsISupports* apparent)
+    : DOMMatrix(apparent)
   {}
 
-  WebKitCSSMatrix(nsISupports* aParent, const DOMMatrixReadOnly& other)
-    : DOMMatrix(aParent, other)
+  WebKitCSSMatrix(nsISupports* apparent, const DOMMatrixReadOnly& other)
+    : DOMMatrix(apparent, other)
   {}
 
   static bool FeatureEnabled(JSContext* aCx, JSObject* aObj);

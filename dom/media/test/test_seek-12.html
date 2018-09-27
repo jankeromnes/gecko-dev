@@ -40,15 +40,15 @@ function seekEnded() {
   if (completed)
     return;
   completed = true;
-  //is(v.currentTime, seekTime, "seeked: currentTime must be seekTime");
-  ok(Math.abs(v.currentTime - seekTime) < 0.01, "seeked: currentTime must be seekTime");
+  //is(v.currentTime, seekTime, "sought: currentTime must be seekTime");
+  ok(Math.abs(v.currentTime - seekTime) < 0.01, "sought: currentTime must be seekTime");
   is(v.seeking, false, "seeking flag on end should be false");
   finish();
 }
 
 v.addEventListener("loadedmetadata", startTest);
 v.addEventListener("seeking", seekStarted);
-v.addEventListener("seeked", seekEnded);
+v.addEventListener("sought", seekEnded);
 }
 
 manager.runTests(createTestArray(), startTest);

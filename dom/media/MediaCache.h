@@ -96,7 +96,7 @@ class MonitorAutoLock;
  * future as the last use was in the past.
  * PLAYED_BLOCK: these are blocks that have not been read in "metadata
  * mode", and contain data behind the current decoder read point. (They
- * may not actually have been read by the decoder, if the decoder seeked
+ * may not actually have been read by the decoder, if the decoder sought
  * forward.) These blocks are managed with an LRU policy except that we add
  * REPLAY_DELAY seconds of penalty to their predicted "time of next use",
  * to reflect the uncertainty about whether replay will actually happen
@@ -104,7 +104,7 @@ class MonitorAutoLock;
  * READAHEAD_BLOCK: these are blocks that have not been read in
  * "metadata mode" and that are entirely ahead of the current decoder
  * read point. (They may actually have been read by the decoder in the
- * past if the decoder has since seeked backward.) We predict the
+ * past if the decoder has since sought backward.) We predict the
  * time of next use for these blocks by assuming steady playback and
  * dividing the number of bytes between the block and the current decoder
  * read point by the decoder's estimate of its playback rate in bytes
@@ -502,7 +502,7 @@ private:
   // full and the priority of the data that would be received is lower
   // than the priority of the data already in the cache
   bool mCacheSuspended;
-  // True if the channel ended and we haven't seeked it again.
+  // True if the channel ended and we haven't sought it again.
   bool mChannelEnded;
 
   // The following fields are protected by the cache's monitor and can be written

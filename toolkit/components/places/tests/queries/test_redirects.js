@@ -287,7 +287,7 @@ add_task(async function test_redirects() {
   // combinations.
   let includeHidden_options = [true, false];
   let maxResults_options = [5, 10, 20, null];
-  // These sortingMode are choosen to toggle using special queries for history
+  // These sortingMode are chosen to toggle using special queries for history
   // menu.
   let sorting_options = [Ci.nsINavHistoryQueryOptions.SORT_BY_NONE,
                          Ci.nsINavHistoryQueryOptions.SORT_BY_VISITCOUNT_DESCENDING,

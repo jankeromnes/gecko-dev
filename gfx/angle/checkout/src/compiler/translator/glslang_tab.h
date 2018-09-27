@@ -252,7 +252,7 @@ union YYSTYPE {
             TQualifierWrapperBase *qualifierWrapper;
             TTypeQualifierBuilder *typeQualifierBuilder;
         };
-    } interm;
+    } interim;
 };
 
 typedef union YYSTYPE YYSTYPE;

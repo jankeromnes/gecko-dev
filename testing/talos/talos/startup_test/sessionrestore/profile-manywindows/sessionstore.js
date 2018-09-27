@@ -2868,7 +2868,7 @@
                     "docIdentifier": 17,
                     "children": [{
                         "url": "http://localhost:8080/?url=player.vimeo.com/video/73623354?title=0&byline=0&portrait=0",
-                        "title": "Hamdam Centre Walk Thru at World Jnr Champs from SWIMSWAM on Vimeo",
+                        "title": "Hamdam Centre Walk Through at World Jnr Champs from SWIMSWAM on Vimeo",
                         "ID": 19,
                         "docshellID": 16,
                         "referrer": "http://localhost:8080/?url=swimswam.com/video-walk-2013-junior-world-championships-hamdem-center/",
@@ -5360,7 +5360,7 @@
                     "docIdentifier": 17,
                     "children": [{
                         "url": "http://localhost:8080/?url=player.vimeo.com/video/73623354?title=0&byline=0&portrait=0",
-                        "title": "Hamdam Centre Walk Thru at World Jnr Champs from SWIMSWAM on Vimeo",
+                        "title": "Hamdam Centre Walk Through at World Jnr Champs from SWIMSWAM on Vimeo",
                         "ID": 19,
                         "docshellID": 16,
                         "referrer": "http://localhost:8080/?url=swimswam.com/video-walk-2013-junior-world-championships-hamdem-center/",
@@ -7855,7 +7855,7 @@
                     "docIdentifier": 17,
                     "children": [{
                         "url": "http://localhost:8080/?url=player.vimeo.com/video/73623354?title=0&byline=0&portrait=0",
-                        "title": "Hamdam Centre Walk Thru at World Jnr Champs from SWIMSWAM on Vimeo",
+                        "title": "Hamdam Centre Walk Through at World Jnr Champs from SWIMSWAM on Vimeo",
                         "ID": 19,
                         "docshellID": 16,
                         "referrer": "http://localhost:8080/?url=swimswam.com/video-walk-2013-junior-world-championships-hamdem-center/",

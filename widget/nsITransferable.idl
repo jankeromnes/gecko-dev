@@ -18,7 +18,7 @@ interface nsIPrincipal;
 #define kTextMime                   "text/plain"
 #define kRTFMime                    "text/rtf"
 #define kUnicodeMime                "text/unicode"
-#define kMozTextInternal          "text/x-moz-text-internal"  // text data which isn't suppoed to be parsed by other apps.
+#define kMozTextInternal          "text/x-moz-text-internal"  // text data which isn't supposed to be parsed by other apps.
 #define kHTMLMime                   "text/html"
 #define kAOLMailMime                "AOLMAIL"
 #define kPNGImageMime               "image/png"

@@ -225,7 +225,7 @@ nsXBLStreamListener::OnStartRequest(nsIRequest* request, nsISupports* aCtxt)
   NS_ENSURE_SUCCESS(rv, rv);
 
   // Make sure to add ourselves as a listener after StartDocumentLoad,
-  // since that resets the event listners on the document.
+  // since that resets the event listeners on the document.
   doc->AddEventListener(NS_LITERAL_STRING("load"), this, false);
 
   return mInner->OnStartRequest(request, aCtxt);

@@ -62,7 +62,7 @@ public:
   /**
    * This method is a total hack to help with parsing fragments. It is called to
    * tell the fragment sink that a container from the context will be delivered
-   * after the call to WillBuildContent(). This is only relevent for HTML
+   * after the call to WillBuildContent(). This is only relevant for HTML
    * fragments that use nsHTMLTokenizer/CNavDTD.
    */
   NS_IMETHOD IgnoreFirstContainer() = 0;

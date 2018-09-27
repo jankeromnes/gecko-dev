@@ -701,7 +701,7 @@ NeedTooltipSupport(const nsXULElement& aXULElement)
 
 nsresult
 nsXULElement::BindToTree(nsIDocument* aDocument,
-                         nsIContent* aParent,
+                         nsIContent* apparent,
                          nsIContent* aBindingParent)
 {
   if (!aBindingParent &&
@@ -712,7 +712,7 @@ nsXULElement::BindToTree(nsIDocument* aDocument,
     nsContentUtils::AddScriptRunner(new XULInContentErrorReporter(aDocument));
   }
 
-  nsresult rv = nsStyledElement::BindToTree(aDocument, aParent, aBindingParent);
+  nsresult rv = nsStyledElement::BindToTree(aDocument, apparent, aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
   nsIDocument* doc = GetComposedDoc();

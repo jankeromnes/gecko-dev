@@ -532,7 +532,7 @@ public:
     // in the future for the NEXT frame. Large parts of Gecko, such
     // as animations assume a timestamp at either now or in the past.
     // Normalize the timestamps given to the VsyncDispatchers to the vsync
-    // that just occured, not the vsync that is upcoming.
+    // that just occurred, not the vsync that is upcoming.
     TimeStamp mPreviousTimestamp;
 
   private:

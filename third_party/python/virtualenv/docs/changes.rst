@@ -107,7 +107,7 @@ Release History
 
 * Upgrade setuptools to 19.6
 
-* Supress any errors from `unset` on different shells (:pull:`843`)
+* Suppress any errors from `unset` on different shells (:pull:`843`)
 
 * Normalize letter case for prefix path checking. Fixes :issue:`837`
 

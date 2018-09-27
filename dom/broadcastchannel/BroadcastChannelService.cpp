@@ -58,29 +58,29 @@ BroadcastChannelService::GetOrCreate()
 }
 
 void
-BroadcastChannelService::RegisterActor(BroadcastChannelParent* aParent,
+BroadcastChannelService::RegisterActor(BroadcastChannelParent* apparent,
                                        const nsAString& aOriginChannelKey)
 {
   AssertIsOnBackgroundThread();
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   nsTArray<BroadcastChannelParent*>* parents =
     mAgents.LookupForAdd(aOriginChannelKey).OrInsert(
       [] () { return new nsTArray<BroadcastChannelParent*>(); });
 
-  MOZ_ASSERT(!parents->Contains(aParent));
-  parents->AppendElement(aParent);
+  MOZ_ASSERT(!parents->Contains(apparent));
+  parents->AppendElement(apparent);
 }
 
 void
-BroadcastChannelService::UnregisterActor(BroadcastChannelParent* aParent,
+BroadcastChannelService::UnregisterActor(BroadcastChannelParent* apparent,
                                          const nsAString& aOriginChannelKey)
 {
   AssertIsOnBackgroundThread();
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   if (auto entry = mAgents.Lookup(aOriginChannelKey)) {
-    entry.Data()->RemoveElement(aParent);
+    entry.Data()->RemoveElement(apparent);
     // remove the entry if the array is now empty
     if (entry.Data()->IsEmpty()) {
       entry.Remove();
@@ -91,12 +91,12 @@ BroadcastChannelService::UnregisterActor(BroadcastChannelParent* aParent,
 }
 
 void
-BroadcastChannelService::PostMessage(BroadcastChannelParent* aParent,
+BroadcastChannelService::PostMessage(BroadcastChannelParent* apparent,
                                      const ClonedMessageData& aData,
                                      const nsAString& aOriginChannelKey)
 {
   AssertIsOnBackgroundThread();
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   nsTArray<BroadcastChannelParent*>* parents;
   if (!mAgents.Get(aOriginChannelKey, &parents)) {
@@ -121,7 +121,7 @@ BroadcastChannelService::PostMessage(BroadcastChannelParent* aParent,
     BroadcastChannelParent* parent = parents->ElementAt(i);
     MOZ_ASSERT(parent);
 
-    if (parent == aParent) {
+    if (parent == apparent) {
       continue;
     }
 

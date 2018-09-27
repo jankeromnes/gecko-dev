@@ -39,7 +39,7 @@ import ch.boye.httpclientandroidlib.annotation.Immutable;
 public final class AUTH {
 
     /**
-     * The www authenticate challange header.
+     * The www authenticate challenge header.
      */
     public static final String WWW_AUTH = "WWW-Authenticate";
 
@@ -49,7 +49,7 @@ public final class AUTH {
     public static final String WWW_AUTH_RESP = "Authorization";
 
     /**
-     * The proxy authenticate challange header.
+     * The proxy authenticate challenge header.
      */
     public static final String PROXY_AUTH = "Proxy-Authenticate";
 

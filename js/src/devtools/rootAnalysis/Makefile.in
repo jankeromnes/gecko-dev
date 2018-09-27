@@ -30,7 +30,7 @@ SIXGILL ?= @SIXGILL_PATH@
 # place as this Makefile.in, which is probably what you want.
 ANALYSIS_SCRIPT_DIR ?= $(srcdir)
 
-# Number of simultanous analyzeRoots.js scripts to run.
+# Number of simultaneous analyzeRoots.js scripts to run.
 JOBS ?= 6
 
 all : rootingHazards.txt allFunctions.txt

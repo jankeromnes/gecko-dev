@@ -71,7 +71,7 @@ window.gActivityStreamStrings = {
   "topsites_form_save_button": "Alzar",
   "topsites_form_cancel_button": "Cancelar",
   "topsites_form_url_validation": "Fa falta una URL valida",
-  "topsites_form_image_validation": "Ha fallau la carga d'a imachen. Preba con una URL diferent.",
+  "topsites_form_image_validation": "Ha fallau la carga d'a imachen. Preba con una URL different.",
   "pocket_read_more": "Temas populars:",
   "pocket_read_even_more": "Amostrar mas articlos",
   "pocket_more_reccommendations": "More Recommendations",

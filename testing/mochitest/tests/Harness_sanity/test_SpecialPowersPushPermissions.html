@@ -73,7 +73,7 @@ function test1() {
 }
 
 function test2() {
-  ok(SpecialPowers.testPermission('pUNKNOWN', UNKNOWN_ACTION, document), 'pUNKNOWN value should have UNKOWN permission');
+  ok(SpecialPowers.testPermission('pUNKNOWN', UNKNOWN_ACTION, document), 'pUNKNOWN value should have UNKNOWN permission');
   SpecialPowers.pushPermissions([{'type': 'pUNKNOWN', 'allow': true, 'context': document}, {'type': 'pALLOW', 'allow': false, 'context': document}, {'type': 'pDENY', 'allow': true, 'context': document}, {'type': 'pPROMPT', 'allow': true, 'context': document}, {'type': 'pSESSION', 'allow': true, 'context': document}, {'type': 'pFIRSTPARTY', 'allow': true, 'context': document}, {'type': 'pTHIRDPARTY', 'allow': true, 'context': document}, {'type': 'pREMOVE', 'remove': true, 'context': document}], test3);
 }
 

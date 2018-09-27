@@ -125,7 +125,7 @@
 
 #black-boxed-message,
 #source-progress-container {
-  /* Prevent the container deck from aquiring the size from this message. */
+  /* Prevent the container deck from acquiring the size from this message. */
   min-width: 1px;
   min-height: 1px;
 }

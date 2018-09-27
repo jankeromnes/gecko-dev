@@ -55,7 +55,7 @@ public:
    *
    * @param aStatements
    *        The statements to execute and possibly bind in the background.
-   *        Ownership is transfered from the caller.
+   *        Ownership is transferred from the caller.
    * @param aConnection
    *        The connection that created the statements to execute.
    * @param aNativeConnection

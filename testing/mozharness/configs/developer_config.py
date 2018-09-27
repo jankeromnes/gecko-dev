@@ -7,7 +7,7 @@ In other words, this config allows you to run any job
 outside of the Release Engineering network
 
 Using this config file should be accompanied with using
---test-url and --installer-url where appropiate
+--test-url and --installer-url where appropriate
 """
 
 import os

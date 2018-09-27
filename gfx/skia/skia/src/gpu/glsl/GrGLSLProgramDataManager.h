@@ -24,7 +24,7 @@ public:
 
     virtual ~GrGLSLProgramDataManager() {}
 
-    /** Functions for uploading uniform values. The varities ending in v can be used to upload to an
+    /** Functions for uploading uniform values. The varieties ending in v can be used to upload to an
      *  array of uniforms. arrayCount must be <= the array count of the uniform.
      */
     virtual void set1i(UniformHandle, int32_t) const = 0;

@@ -610,8 +610,8 @@ def p_OptionalProtocolSendSemanticsQual(p):
 def p_ProtocolSendSemanticsQual(p):
     """ProtocolSendSemanticsQual : ASYNC
                                  | SYNC
-                                 | NESTED '(' UPTO Nested ')' ASYNC
-                                 | NESTED '(' UPTO Nested ')' SYNC
+                                 | NESTED '(' UP TO Nested ')' ASYNC
+                                 | NESTED '(' UP TO Nested ')' SYNC
                                  | INTR"""
     if p[1] == 'nested':
         mtype = p[6]

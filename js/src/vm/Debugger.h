@@ -1297,9 +1297,9 @@ class DebuggerArguments : public NativeObject {
 struct OnStepHandler : Handler {
     /*
      * If we have made a small amount of progress in a frame, this method is
-     * called with the frame as argument. If succesful, this method should
+     * called with the frame as argument. If successful, this method should
      * return true, with `resumeMode` and `vp` set to a resumption value
-     * specifiying how execution should continue.
+     * specifying how execution should continue.
      */
     virtual bool onStep(JSContext* cx, HandleDebuggerFrame frame, ResumeMode& resumeMode,
                         MutableHandleValue vp) = 0;

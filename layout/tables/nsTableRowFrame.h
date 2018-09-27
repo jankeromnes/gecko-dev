@@ -37,7 +37,7 @@ public:
   virtual ~nsTableRowFrame();
 
   virtual void Init(nsIContent*       aContent,
-                    nsContainerFrame* aParent,
+                    nsContainerFrame* apparent,
                     nsIFrame*         aPrevInFlow) override;
 
   virtual void DestroyFrom(nsIFrame* aDestructRoot, PostDestroyData& aPostDestroyData) override;

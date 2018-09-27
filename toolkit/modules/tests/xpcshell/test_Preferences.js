@@ -270,7 +270,7 @@ add_test(function test_observe_prefs_nsIObserver() {
 //
 // Existing consumers of the observer API depend on the observer only
 // being triggered for the exact preference they are observing. This is
-// expecially true for consumers of the function callback variant which
+// especially true for consumers of the function callback variant which
 // passes the preference's new value but not its name.
 add_test(function test_observe_exact_pref() {
   let observed = false;

@@ -287,11 +287,11 @@ namespace {
   public:
     NS_DECL_ISUPPORTS_INHERITED
 
-    IdleDispatchRunnable(nsIGlobalObject* aParent,
+    IdleDispatchRunnable(nsIGlobalObject* apparent,
                          IdleRequestCallback& aCallback)
       : IdleRunnable("ChromeUtils::IdleDispatch")
       , mCallback(&aCallback)
-      , mParent(aParent)
+      , mParent(apparent)
     {}
 
     NS_IMETHOD Run() override

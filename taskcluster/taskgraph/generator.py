@@ -155,7 +155,7 @@ class TaskGraphGenerator(object):
     @property
     def target_task_set(self):
         """
-        The set of targetted tasks (a graph without edges)
+        The set of targeted tasks (a graph without edges)
 
         @type: TaskGraph
         """
@@ -164,7 +164,7 @@ class TaskGraphGenerator(object):
     @property
     def target_task_graph(self):
         """
-        The set of targetted tasks and all of their dependencies
+        The set of targeted tasks and all of their dependencies
 
         @type: TaskGraph
         """
@@ -173,7 +173,7 @@ class TaskGraphGenerator(object):
     @property
     def optimized_task_graph(self):
         """
-        The set of targetted tasks and all of their dependencies; tasks that
+        The set of targeted tasks and all of their dependencies; tasks that
         have been optimized out are either omitted or replaced with a Task
         instance containing only a task_id.
 

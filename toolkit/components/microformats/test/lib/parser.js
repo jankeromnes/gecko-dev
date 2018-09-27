@@ -158,7 +158,7 @@ var Modules = (function (modules) {
 						}
 						// find v1 names
 						for(var key in modules.maps) {
-							// dont double count if v1 and v2 roots are present
+							// don't double count if v1 and v2 roots are present
 							if(modules.maps[key].root === classItems[x] && !classItems.includes(key)) {
 								this.appendCount(key, 1, out);
 							}

@@ -23,7 +23,7 @@ class GridTracks : public nsISupports
                  , public nsWrapperCache
 {
 public:
-  explicit GridTracks(GridDimension* aParent);
+  explicit GridTracks(GridDimension* apparent);
 
 protected:
   virtual ~GridTracks();

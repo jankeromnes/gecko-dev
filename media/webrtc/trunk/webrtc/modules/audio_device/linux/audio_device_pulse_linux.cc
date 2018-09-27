@@ -596,7 +596,7 @@ int32_t AudioDeviceLinuxPulse::MicrophoneBoostIsAvailable(bool& available)
     bool isAvailable(false);
     bool wasInitialized = _mixerManager.MicrophoneIsInitialized();
 
-    // Enumerate all avaliable microphone and make an attempt to open up the
+    // Enumerate all available microphone and make an attempt to open up the
     // input mixer corresponding to the currently selected input device.
     //
     if (!wasInitialized && InitMicrophone() == -1)
@@ -897,7 +897,7 @@ int32_t AudioDeviceLinuxPulse::SetPlayoutDevice(uint16_t index)
     const uint16_t nDevices = PlayoutDevices();
 
     WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
-                 "  number of availiable output devices is %u", nDevices);
+                 "  number of available output devices is %u", nDevices);
 
     if (index > (nDevices - 1))
     {
@@ -1034,7 +1034,7 @@ int32_t AudioDeviceLinuxPulse::SetRecordingDevice(uint16_t index)
     const uint16_t nDevices(RecordingDevices());
 
     WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
-                 "  number of availiable input devices is %u", nDevices);
+                 "  number of available input devices is %u", nDevices);
 
     if (index > (nDevices - 1))
     {

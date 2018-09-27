@@ -78,7 +78,7 @@ class HLSTrackDemuxer
   , public DecoderDoctorLifeLogger<HLSTrackDemuxer>
 {
 public:
-  HLSTrackDemuxer(HLSDemuxer* aParent,
+  HLSTrackDemuxer(HLSDemuxer* apparent,
                   TrackInfo::TrackType aType,
                   UniquePtr<TrackInfo> aTrackInfo);
   ~HLSTrackDemuxer();

@@ -34,7 +34,7 @@ index 8c26e80..5925504 100644
    Ebml_WriteID(glob, class_id);
    ebmlLoc->offset = glob->offset;
    // todo this is always taking 8 bytes, this may need later optimization
--  Ebml_Serialize(glob, (void *)&unknownLen,sizeof(unknownLen), 8); // this is a key that says lenght unknown
+-  Ebml_Serialize(glob, (void *)&unknownLen,sizeof(unknownLen), 8); // this is a key that says length unknown
 +  Ebml_Serialize(glob, (void *)&unknownLen,sizeof(unknownLen), 8); // this is a key that says length unknown
  }
  

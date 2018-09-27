@@ -30,7 +30,7 @@
         For each animation test, the element on which the animation is applied is also
         translated by an animation so that the various states of the animation can
         be checked more easily. There is a gray reference marker which shows
-        the expected animation state at the begining of the animation, mid-way, or at the
+        the expected animation state at the beginning of the animation, mid-way, or at the
         end of the animation.
       </p>
     </d:testDescription>

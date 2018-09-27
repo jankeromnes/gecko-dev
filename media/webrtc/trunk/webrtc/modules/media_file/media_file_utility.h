@@ -65,7 +65,7 @@ public:
 
     // Write one audio frame, i.e. the bufferLength first bytes of audioBuffer,
     // to file. The audio frame size is determined by the codecInst.pacsize
-    // parameter of the last sucessfull StartRecordingAudioFile(..) call.
+    // parameter of the last successful StartRecordingAudioFile(..) call.
     // The return value is the number of bytes written to audioBuffer.
     int32_t WriteWavData(OutStream& stream,
                          const int8_t* audioBuffer,
@@ -101,7 +101,7 @@ public:
 
     // Write one 10ms audio frame, i.e. the bufferLength first bytes of
     // audioBuffer, to file. The audio frame size is determined by the freqInHz
-    // parameter of the last sucessfull InitPCMWriting(..) call.
+    // parameter of the last successful InitPCMWriting(..) call.
     // The return value is the number of bytes written to audioBuffer.
     int32_t WritePCMData(OutStream& stream,
                          const int8_t* audioBuffer,
@@ -128,7 +128,7 @@ public:
 
     // Write one audio frame, i.e. the bufferLength first bytes of audioBuffer,
     // to file. The audio frame size is determined by the codecInst.pacsize
-    // parameter of the last sucessfull InitCompressedWriting(..) call.
+    // parameter of the last successful InitCompressedWriting(..) call.
     // The return value is the number of bytes written to stream.
     // Note: bufferLength must be exactly one frame.
     int32_t WriteCompressedData(OutStream& stream,
@@ -154,7 +154,7 @@ public:
 
     // Write one audio frame, i.e. the bufferLength first bytes of audioBuffer,
     // to stream. The audio frame size is determined by the codecInst.pacsize
-    // parameter of the last sucessfull InitPreEncodedWriting(..) call.
+    // parameter of the last successful InitPreEncodedWriting(..) call.
    // The return value is the number of bytes written to stream.
     // Note: bufferLength must be exactly one frame.
     int32_t WritePreEncodedData(OutStream& stream,

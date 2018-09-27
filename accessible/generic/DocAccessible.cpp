@@ -532,7 +532,7 @@ DocAccessible::RelativeBounds(nsIFrame** aRelativeFrame) const
       scrollPort = rootFrame->GetRect();
     }
 
-    if (parentDoc) {  // After first time thru loop
+    if (parentDoc) {  // After first time through loop
       // XXXroc bogus code! scrollPort is relative to the viewport of
       // this document, but we're intersecting rectangles derived from
       // multiple documents and assuming they're all in the same coordinate

@@ -235,7 +235,7 @@ public:
   // UI Events defines that "keypress" event should be fired "if and only if
   // that key normally produces a character value".
   // <https://www.w3.org/TR/uievents/#event-type-keypress>
-  // Additionally, for backward compatiblity with all existing browsers,
+  // Additionally, for backward compatibility with all existing browsers,
   // there is a spec issue for Enter key press.
   // <https://github.com/w3c/uievents/issues/183>
   bool IsInputtingText() const

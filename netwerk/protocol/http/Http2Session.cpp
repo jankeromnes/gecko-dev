@@ -52,7 +52,7 @@ NS_INTERFACE_MAP_BEGIN(Http2Session)
 NS_INTERFACE_MAP_ENTRY_AMBIGUOUS(nsISupports, nsAHttpConnection)
 NS_INTERFACE_MAP_END
 
-// "magic" refers to the string that preceeds HTTP/2 on the wire
+// "magic" refers to the string that precedes HTTP/2 on the wire
 // to help find any intermediaries speaking an older version of HTTP
 const uint8_t Http2Session::kMagicHello[] = {
   0x50, 0x52, 0x49, 0x20, 0x2a, 0x20, 0x48, 0x54,
@@ -391,7 +391,7 @@ Http2Session::RegisterStreamID(Http2Stream *stream, uint32_t aNewID)
 
   mStreamIDHash.Put(aNewID, stream);
 
-  // If TCP fast Open has been used and conection was idle for some time
+  // If TCP fast Open has been used and connection was idle for some time
   // we will be cautious and watch out for bug 1395494.
   if (!mCheckNetworkStallsWithTFO && mConnection) {
     RefPtr<nsHttpConnection> conn = mConnection->HttpConnection();
@@ -608,7 +608,7 @@ Http2Session::FlushOutputQueue()
   LOG3(("Http2Session::FlushOutputQueue %p sz=%d rv=%" PRIx32 " actual=%d",
         this, avail, static_cast<uint32_t>(rv), countRead));
 
-  // Dont worry about errors on write, we will pick this up as a read error too
+  // Don't worry about errors on write, we will pick this up as a read error too
   if (NS_FAILED(rv))
     return;
 
@@ -2690,7 +2690,7 @@ Http2Session::RecvOrigin(Http2Session *self)
     if (port == -1) {
       port = 443;
     }
-    // dont use ->GetHostPort because we want explicit 443
+    // don't use ->GetHostPort because we want explicit 443
     nsAutoCString host;
     originURL->GetHost(host);
     nsAutoCString key(host);
@@ -3635,7 +3635,7 @@ Http2Session::UpdateLocalStreamWindow(Http2Stream *stream, uint32_t bytes)
   NetworkEndian::writeUint32(packet + kFrameHeaderBytes, toack);
 
   LogIO(this, stream, "Stream Window Update", packet, kFrameHeaderBytes + 4);
-  // dont flush here, this write can commonly be coalesced with a
+  // don't flush here, this write can commonly be coalesced with a
   // session window update to immediately follow.
 }
 
@@ -3678,7 +3678,7 @@ Http2Session::UpdateLocalSessionWindow(uint32_t bytes)
   NetworkEndian::writeUint32(packet + kFrameHeaderBytes, toack);
 
   LogIO(this, nullptr, "Session Window Update", packet, kFrameHeaderBytes + 4);
-  // dont flush here, this write can commonly be coalesced with others
+  // don't flush here, this write can commonly be coalesced with others
 }
 
 void

@@ -431,35 +431,35 @@ CharacterData::ToCString(nsAString& aBuf, int32_t aOffset,
 
 nsresult
 CharacterData::BindToTree(nsIDocument* aDocument,
-                          nsIContent* aParent,
+                          nsIContent* apparent,
                           nsIContent* aBindingParent)
 {
-  MOZ_ASSERT(aParent || aDocument, "Must have document if no parent!");
-  MOZ_ASSERT(NODE_FROM(aParent, aDocument)->OwnerDoc() == OwnerDoc(),
+  MOZ_ASSERT(apparent || aDocument, "Must have document if no parent!");
+  MOZ_ASSERT(NODE_FROM(apparent, aDocument)->OwnerDoc() == OwnerDoc(),
              "Must have the same owner document");
-  MOZ_ASSERT(!aParent || aDocument == aParent->GetUncomposedDoc(),
-             "aDocument must be current doc of aParent");
+  MOZ_ASSERT(!apparent || aDocument == apparent->GetUncomposedDoc(),
+             "aDocument must be current doc of apparent");
   MOZ_ASSERT(!GetUncomposedDoc() && !IsInUncomposedDoc(),
              "Already have a document.  Unbind first!");
   MOZ_ASSERT(!IsInComposedDoc(),
              "Already have a document.  Unbind first!");
   // Note that as we recurse into the kids, they'll have a non-null parent.  So
   // only assert if our parent is _changing_ while we have a parent.
-  MOZ_ASSERT(!GetParent() || aParent == GetParent(),
+  MOZ_ASSERT(!GetParent() || apparent == GetParent(),
              "Already have a parent.  Unbind first!");
   MOZ_ASSERT(!GetBindingParent() ||
              aBindingParent == GetBindingParent() ||
-             (!aBindingParent && aParent &&
+             (!aBindingParent && apparent &&
               aParent->GetBindingParent() == GetBindingParent()),
              "Already have a binding parent.  Unbind first!");
   MOZ_ASSERT(aBindingParent != this,
              "Content must not be its own binding parent");
   MOZ_ASSERT(!IsRootOfNativeAnonymousSubtree() ||
-             aBindingParent == aParent,
+             aBindingParent == apparent,
              "Native anonymous content must have its parent as its "
              "own binding parent");
 
-  if (!aBindingParent && aParent) {
+  if (!aBindingParent && apparent) {
     aBindingParent = aParent->GetBindingParent();
   }
 
@@ -467,7 +467,7 @@ CharacterData::BindToTree(nsIDocument* aDocument,
   if (aBindingParent) {
     NS_ASSERTION(IsRootOfNativeAnonymousSubtree() ||
                  !HasFlag(NODE_IS_IN_NATIVE_ANONYMOUS_SUBTREE) ||
-                 (aParent && aParent->IsInNativeAnonymousSubtree()),
+                 (apparent && apparent->IsInNativeAnonymousSubtree()),
                  "Trying to re-bind content from native anonymous subtree to "
                  "non-native anonymous parent!");
     ExtendedContentSlots()->mBindingParent = aBindingParent; // Weak, so no addref happens.
@@ -482,7 +482,7 @@ CharacterData::BindToTree(nsIDocument* aDocument,
     }
   }
 
-  if (aParent && aParent->IsInShadowTree()) {
+  if (apparent && apparent->IsInShadowTree()) {
     ClearSubtreeRootPointer();
     SetFlags(NODE_IS_IN_SHADOW_TREE);
     SetIsConnected(aParent->IsInComposedDoc());
@@ -493,15 +493,15 @@ CharacterData::BindToTree(nsIDocument* aDocument,
   bool hadParent = !!GetParentNode();
 
   // Set parent
-  if (aParent) {
+  if (apparent) {
     if (!GetParent()) {
-      NS_ADDREF(aParent);
+      NS_ADDREF(apparent);
     }
-    mParent = aParent;
+    mParent = apparent;
   } else {
     mParent = aDocument;
   }
-  SetParentIsContent(aParent);
+  SetParentIsContent(apparent);
 
   // XXXbz sXBL/XBL2 issue!
 
@@ -533,7 +533,7 @@ CharacterData::BindToTree(nsIDocument* aDocument,
   UpdateEditableState(false);
 
   MOZ_ASSERT(aDocument == GetUncomposedDoc(), "Bound to wrong document");
-  MOZ_ASSERT(aParent == GetParent(), "Bound to wrong parent");
+  MOZ_ASSERT(apparent == GetParent(), "Bound to wrong parent");
   MOZ_ASSERT(aBindingParent == GetBindingParent(),
              "Bound to wrong binding parent");
 

@@ -993,7 +993,7 @@ TabChild::GetInterface(const nsIID & aIID, void **aSink)
 }
 
 NS_IMETHODIMP
-TabChild::ProvideWindow(mozIDOMWindowProxy* aParent,
+TabChild::ProvideWindow(mozIDOMWindowProxy* apparent,
                         uint32_t aChromeFlags,
                         bool aCalledFromJS,
                         bool aPositionSpecified, bool aSizeSpecified,
@@ -1004,10 +1004,10 @@ TabChild::ProvideWindow(mozIDOMWindowProxy* aParent,
 {
     *aReturn = nullptr;
 
-    // If aParent is inside an <iframe mozbrowser> and this isn't a request to
+    // If apparent is inside an <iframe mozbrowser> and this isn't a request to
     // open a modal-type window, we're going to create a new <iframe mozbrowser>
     // and return its window here.
-    nsCOMPtr<nsIDocShell> docshell = do_GetInterface(aParent);
+    nsCOMPtr<nsIDocShell> docshell = do_GetInterface(apparent);
     bool iframeMoz = (docshell && docshell->GetIsInMozBrowser() &&
                       !(aChromeFlags & (nsIWebBrowserChrome::CHROME_MODAL |
                                         nsIWebBrowserChrome::CHROME_OPENAS_DIALOG |
@@ -1015,7 +1015,7 @@ TabChild::ProvideWindow(mozIDOMWindowProxy* aParent,
 
     if (!iframeMoz) {
       int32_t openLocation =
-        nsWindowWatcher::GetWindowOpenLocation(nsPIDOMWindowOuter::From(aParent),
+        nsWindowWatcher::GetWindowOpenLocation(nsPIDOMWindowOuter::From(apparent),
                                                aChromeFlags, aCalledFromJS,
                                                aPositionSpecified, aSizeSpecified);
 
@@ -1033,7 +1033,7 @@ TabChild::ProvideWindow(mozIDOMWindowProxy* aParent,
     // code back to our caller.
     ContentChild* cc = ContentChild::GetSingleton();
     return cc->ProvideWindowCommon(this,
-                                   aParent,
+                                   apparent,
                                    iframeMoz,
                                    aChromeFlags,
                                    aCalledFromJS,
@@ -3429,7 +3429,7 @@ TabChild::DeallocPPluginWidgetChild(mozilla::plugins::PPluginWidgetChild* aActor
 
 #ifdef XP_WIN
 nsresult
-TabChild::CreatePluginWidget(nsIWidget* aParent, nsIWidget** aOut)
+TabChild::CreatePluginWidget(nsIWidget* apparent, nsIWidget** aOut)
 {
   *aOut = nullptr;
   mozilla::plugins::PluginWidgetChild* child =
@@ -3449,7 +3449,7 @@ TabChild::CreatePluginWidget(nsIWidget* aParent, nsIWidget** aOut)
   initData.mUnicode = false;
   initData.clipChildren = true;
   initData.clipSiblings = true;
-  nsresult rv = pluginWidget->Create(aParent, nullptr,
+  nsresult rv = pluginWidget->Create(apparent, nullptr,
                                      LayoutDeviceIntRect(0, 0, 0, 0),
                                      &initData);
   if (NS_FAILED(rv)) {

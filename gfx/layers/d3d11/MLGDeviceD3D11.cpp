@@ -208,8 +208,8 @@ MLGRenderTargetD3D11::GetTexture()
   return mTextureSource;
 }
 
-MLGSwapChainD3D11::MLGSwapChainD3D11(MLGDeviceD3D11* aParent, ID3D11Device* aDevice)
- : mParent(aParent),
+MLGSwapChainD3D11::MLGSwapChainD3D11(MLGDeviceD3D11* apparent, ID3D11Device* aDevice)
+ : mParent(apparent),
    mDevice(aDevice),
    mWidget(nullptr),
    mCanUsePartialPresents(CanUsePartialPresents(aDevice))
@@ -233,9 +233,9 @@ MLGSwapChainD3D11::Destroy()
 }
 
 RefPtr<MLGSwapChainD3D11>
-MLGSwapChainD3D11::Create(MLGDeviceD3D11* aParent, ID3D11Device* aDevice, CompositorWidget* aWidget)
+MLGSwapChainD3D11::Create(MLGDeviceD3D11* apparent, ID3D11Device* aDevice, CompositorWidget* aWidget)
 {
-  RefPtr<MLGSwapChainD3D11> swapChain = new MLGSwapChainD3D11(aParent, aDevice);
+  RefPtr<MLGSwapChainD3D11> swapChain = new MLGSwapChainD3D11(apparent, aDevice);
   if (!swapChain->Initialize(aWidget)) {
     return nullptr;
   }

@@ -1000,7 +1000,7 @@ nsHttpConnectionMgr::DispatchPendingQ(nsTArray<RefPtr<nsHttpConnectionMgr::Pendi
             if (pendingQ.RemoveElement(pendingTransInfo)) {
                 // pendingTransInfo is now potentially destroyed
                 dispatchedSuccessfully = true;
-                continue; // dont ++i as we just made the array shorter
+                continue; // don't ++i as we just made the array shorter
             }
 
             LOG(("  transaction not found in pending queue\n"));

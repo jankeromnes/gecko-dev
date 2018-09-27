@@ -129,7 +129,7 @@ PhysicalSocket::PhysicalSocket(PhysicalSocketServer* ss, SOCKET s)
 #if defined(WEBRTC_WIN)
   // EnsureWinsockInit() ensures that winsock is initialized. The default
   // version of this function doesn't do anything because winsock is
-  // initialized by constructor of a static object. If neccessary libjingle
+  // initialized by constructor of a static object. If necessary libjingle
   // users can link it with a different version of this function by replacing
   // win32socketinit.cc. See win32socketinit.cc for more details.
   EnsureWinsockInit();

@@ -45,7 +45,7 @@ NS_IMETHODIMP nsMacWebAppUtils::LaunchAppWithIdentifier(const nsAString& bundleI
 
   nsAutoreleasePool localPool;
 
-  // Note this might return false, meaning the app wasnt launched for some reason. 
+  // Note this might return false, meaning the app wasn't launched for some reason. 
   BOOL success = [[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:
                         [NSString stringWithCharacters:reinterpret_cast<const unichar*>(((nsString)bundleIdentifier).get())
                                                 length:((nsString)bundleIdentifier).Length()]

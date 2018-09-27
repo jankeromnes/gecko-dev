@@ -288,7 +288,7 @@ goog.scope(function() {
         if (!(gl = gl || window.gl)) throw new Error('Invalid gl object');
         var extensions = gl.getSupportedExtensions();
 
-        // loop through the range, looking at the extentions.
+        // loop through the range, looking at the extensions.
         for (var ext = extFmts.reset(); ext = extFmts.current(); extFmts.next()) {
             var tokens = ext.extensions.split(/\s+/);
 

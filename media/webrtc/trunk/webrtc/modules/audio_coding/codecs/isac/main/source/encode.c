@@ -231,7 +231,7 @@ int WebRtcIsac_EncodeLb(const TransformTables* transform_tables,
   }
 
   /* If buffersize is not equal to current framesize then increase index
-   * and return. We do no encoding untill we have enough audio.  */
+   * and return. We do no encoding until we have enough audio.  */
   if (ISACencLB_obj->buffer_index + FRAMESAMPLES_10ms != FRAMESAMPLES) {
     ISACencLB_obj->buffer_index += FRAMESAMPLES_10ms;
     return 0;

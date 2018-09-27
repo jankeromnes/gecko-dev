@@ -5,7 +5,7 @@ ml{
     collations{
         standard{
             Sequence{
-                "[reorder Mlym Latn Deva Arab Taml Knda Telu Beng Guru Gujr Orya Sinh]"
+                "[reorder Mlym Latn Deva Arab Taml Knda Telu Being Guru Gujr Orya Sinh]"
                 "&ഃ<<ഽ"
                 "&\u0D4C<<\u0D57"
                 "&ക്<<ക്\u200D<<<ൿ"

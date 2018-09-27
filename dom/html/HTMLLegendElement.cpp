@@ -71,10 +71,10 @@ HTMLLegendElement::GetAttributeChangeHint(const nsAtom* aAttribute,
 }
 
 nsresult
-HTMLLegendElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLLegendElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent)
 {
-  return nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  return nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                           aBindingParent);
 }
 

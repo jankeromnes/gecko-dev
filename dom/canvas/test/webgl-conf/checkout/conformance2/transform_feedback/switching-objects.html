@@ -111,7 +111,7 @@ debug("<h3>Generic binding is not changed when switching TF object</h3>");
 
 // According to the GL ES spec historically, TRANSFORM_FEEDBACK_BUFFER_BINDING is listed as part
 // of the transform feedback object state. However, many drivers treat it as global context state
-// and not part of the tranform feedback object, which means that it does not change when
+// and not part of the transform feedback object, which means that it does not change when
 // bindTransformFeedback is called. Khronos has resolved to change the spec to specify the latter
 // behavior: https://gitlab.khronos.org/opengl/API/issues/66 (Khronos private link). This tests
 // for the new behavior.

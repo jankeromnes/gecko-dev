@@ -187,7 +187,7 @@ add_task(function test_normalize() {
   let card = new CreditCard({number: "0000000000000000"});
   card.expirationYear = "22";
   card.expirationMonth = "11";
-  Assert.equal(card.expirationYear, 2022, "Years less than four digits are in the third millenium");
+  Assert.equal(card.expirationYear, 2022, "Years less than four digits are in the third millennium");
   card.expirationYear = "-200";
   ok(isNaN(card.expirationYear), "Negative years are blocked");
   card.expirationYear = "1998";

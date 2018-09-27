@@ -34,7 +34,7 @@ const frameTargetPrototype = extend({}, browsingContextTargetPrototype);
  * Target actor for a frame / docShell in the content process.
  *
  * @param connection DebuggerServerConnection
- *        The conection to the client.
+ *        The connection to the client.
  * @param chromeGlobal
  *        The content script global holding |content| and |docShell| properties for a tab.
  * @param prefix

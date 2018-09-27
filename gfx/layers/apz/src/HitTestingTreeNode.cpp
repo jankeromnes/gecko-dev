@@ -399,14 +399,14 @@ HitTestingTreeNode::Dump(const char* aPrefix) const
 }
 
 void
-HitTestingTreeNode::SetApzcParent(AsyncPanZoomController* aParent)
+HitTestingTreeNode::SetApzcParent(AsyncPanZoomController* apparent)
 {
   // precondition: GetApzc() is non-null
   MOZ_ASSERT(GetApzc() != nullptr);
   if (IsPrimaryHolder()) {
-    GetApzc()->SetParent(aParent);
+    GetApzc()->SetParent(apparent);
   } else {
-    MOZ_ASSERT(GetApzc()->GetParent() == aParent);
+    MOZ_ASSERT(GetApzc()->GetParent() == apparent);
   }
 }
 

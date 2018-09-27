@@ -34,7 +34,7 @@ class HTTP11Response(object):
         #: once, and never assigned again.
         self.headers = headers
 
-        #: The response trailers. These are always intially ``None``.
+        #: The response trailers. These are always initially ``None``.
         self.trailers = None
 
         # The socket this response is being sent over.
@@ -261,7 +261,7 @@ class HTTP11Response(object):
         to be closed by the remote end.
         """
         # In this case, just read until we cannot read anymore. Then, close the
-        # socket, becuase we know we have to.
+        # socket, because we know we have to.
         chunks = []
         while True:
             try:

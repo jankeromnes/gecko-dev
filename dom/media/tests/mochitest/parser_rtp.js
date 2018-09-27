@@ -120,7 +120,7 @@ var ParseRtpPacket = (buffer) => {
           offset = expectedEnd;
           break;
         }
-        // the length of the extention is len + 1
+        // the length of the extension is len + 1
         let len = (byte & 0x0F) + 1;
         addExtension(id, len);
         offset += len;

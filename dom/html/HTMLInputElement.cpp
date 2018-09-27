@@ -3690,7 +3690,7 @@ HTMLInputElement::PreHandleEvent(EventChainVisitor& aVisitor)
     MOZ_ASSERT(numberControlFrame);
     MOZ_ASSERT(numberControlFrame->GetAnonTextControl() ==
                aVisitor.mEvent->mOriginalTarget);
-    // Propogate the anon text control's new value to our HTMLInputElement:
+    // Propagate the anon text control's new value to our HTMLInputElement:
     nsAutoString value;
     numberControlFrame->GetValueOfAnonTextControl(value);
     numberControlFrame->HandlingInputEvent(true);
@@ -4608,14 +4608,14 @@ HTMLInputElement::MaybeLoadImage()
 }
 
 nsresult
-HTMLInputElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLInputElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                              nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLFormElementWithState::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLFormElementWithState::BindToTree(aDocument, apparent,
                                                               aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
-  nsImageLoadingContent::BindToTree(aDocument, aParent, aBindingParent);
+  nsImageLoadingContent::BindToTree(aDocument, apparent, aBindingParent);
 
   if (mType == NS_FORM_INPUT_IMAGE) {
     // Our base URI may have changed; claim that our URI changed, and the

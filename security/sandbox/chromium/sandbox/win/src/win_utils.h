@@ -88,7 +88,7 @@ bool SameObject(HANDLE handle, const wchar_t* full_path);
 bool GetPathFromHandle(HANDLE handle, base::string16* path);
 
 // Resolves a win32 path to an nt path using GetPathFromHandle. The path must
-// exist. Returs true if the translation was succesful.
+// exist. Returs true if the translation was successful.
 bool GetNtPathFromWin32Path(const base::string16& path,
                             base::string16* nt_path);
 

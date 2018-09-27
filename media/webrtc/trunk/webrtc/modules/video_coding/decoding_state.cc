@@ -302,7 +302,7 @@ bool VCMDecodingState::UsingFlexibleMode(const VCMFrameBuffer* frame) const {
   return is_flexible_mode;
 }
 
-// TODO(philipel): change how check work, this check practially
+// TODO(philipel): change how check work, this check practically
 // limits the max p_diff to 64.
 bool VCMDecodingState::AheadOfFramesDecodedClearedTo(uint16_t index) const {
   // No way of knowing for sure if we are actually ahead of

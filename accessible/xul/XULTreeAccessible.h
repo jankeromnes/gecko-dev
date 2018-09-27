@@ -136,7 +136,7 @@ class XULTreeItemAccessibleBase : public AccessibleWrap
 {
 public:
   XULTreeItemAccessibleBase(nsIContent* aContent, DocAccessible* aDoc,
-                            Accessible* aParent, nsITreeBoxObject* aTree,
+                            Accessible* apparent, nsITreeBoxObject* aTree,
                             nsITreeView* aTreeView, int32_t aRow);
 
   // nsISupports and cycle collection
@@ -181,7 +181,7 @@ public:
     { return nullptr; }
 
   /**
-   * Proccess row invalidation. Used to fires name change events.
+   * Process row invalidation. Used to fires name change events.
    */
   virtual void RowInvalidated(int32_t aStartColIdx, int32_t aEndColIdx) = 0;
 
@@ -224,7 +224,7 @@ class XULTreeItemAccessible : public XULTreeItemAccessibleBase
 {
 public:
   XULTreeItemAccessible(nsIContent* aContent, DocAccessible* aDoc,
-                        Accessible* aParent, nsITreeBoxObject* aTree,
+                        Accessible* apparent, nsITreeBoxObject* aTree,
                         nsITreeView* aTreeView, int32_t aRow);
 
   // nsISupports and cycle collection

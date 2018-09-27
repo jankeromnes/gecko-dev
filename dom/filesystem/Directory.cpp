@@ -62,20 +62,20 @@ Directory::Constructor(const GlobalObject& aGlobal,
 }
 
 /* static */ already_AddRefed<Directory>
-Directory::Create(nsISupports* aParent, nsIFile* aFile,
+Directory::Create(nsISupports* apparent, nsIFile* aFile,
                   FileSystemBase* aFileSystem)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
   MOZ_ASSERT(aFile);
 
-  RefPtr<Directory> directory = new Directory(aParent, aFile, aFileSystem);
+  RefPtr<Directory> directory = new Directory(apparent, aFile, aFileSystem);
   return directory.forget();
 }
 
-Directory::Directory(nsISupports* aParent,
+Directory::Directory(nsISupports* apparent,
                      nsIFile* aFile,
                      FileSystemBase* aFileSystem)
-  : mParent(aParent)
+  : mParent(apparent)
   , mFile(aFile)
 {
   MOZ_ASSERT(aFile);

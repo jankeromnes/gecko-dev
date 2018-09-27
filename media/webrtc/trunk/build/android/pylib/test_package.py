@@ -72,7 +72,7 @@ class TestPackage(object):
       initial_io_stats: I/O stats object got from _BeginGetIOStats.
 
     Return:
-      String for formated diso I/O statistics.
+      String for formatted diso I/O statistics.
     """
     disk_io = ''
     if self.performance_test and initial_io_stats:

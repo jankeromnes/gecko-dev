@@ -130,7 +130,7 @@ EventListenersView.prototype = extend(WidgetMethods, {
       group = L10N.getStr("gamepadEvents");
     } else if (is("canplay", "canplaythrough", "durationchange", "emptied",
       "ended", "loadeddata", "loadedmetadata", "pause", "play", "playing",
-      "ratechange", "seeked", "seeking", "stalled", "suspend", "timeupdate",
+      "ratechange", "sought", "seeking", "stalled", "suspend", "timeupdate",
       "volumechange", "waiting")) {
       group = L10N.getStr("mediaEvents");
     } else if (is("blocked", "complete", "success", "upgradeneeded", "versionchange")) {

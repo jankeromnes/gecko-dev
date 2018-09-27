@@ -13,7 +13,7 @@ add_task(async function() {
   Services.prefs.setBoolPref(gRestyleSearchesPref, true);
 
   // This test is sensitive to the mouse position hovering awesome
-  // bar elements, so make sure it doesnt
+  // bar elements, so make sure it doesn't
   await EventUtils.synthesizeNativeMouseMove(document.documentElement, 0, 0);
 });
 

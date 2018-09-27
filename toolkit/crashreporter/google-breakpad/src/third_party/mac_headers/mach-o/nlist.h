@@ -155,7 +155,7 @@ struct nlist_64 {
  * field is NO_SECT then it's n_value field is not changed by the link editor.
  */
 #define	NO_SECT		0	/* symbol is not in any section */
-#define MAX_SECT	255	/* 1 thru 255 inclusive */
+#define MAX_SECT	255	/* 1 through 255 inclusive */
 
 /*
  * Common symbols are represented by undefined (N_UNDF) external (N_EXT) types
@@ -284,7 +284,7 @@ struct nlist_64 {
 
 /*
  * The N_ARM_THUMB_DEF bit of the n_desc field indicates that the symbol is
- * a defintion of a Thumb function.
+ * a definition of a Thumb function.
  */
 #define N_ARM_THUMB_DEF	0x0008 /* symbol is a Thumb function (ARM) */
 

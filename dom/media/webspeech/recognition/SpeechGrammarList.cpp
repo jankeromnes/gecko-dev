@@ -22,8 +22,8 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(SpeechGrammarList)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-SpeechGrammarList::SpeechGrammarList(nsISupports* aParent)
-  : mParent(aParent)
+SpeechGrammarList::SpeechGrammarList(nsISupports* apparent)
+  : mParent(apparent)
 {
 }
 

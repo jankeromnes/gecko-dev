@@ -1584,7 +1584,7 @@ sk{
             other{"brazílskych cruzeir (1990 – 1993)"}
         }
         BRL{
-            few{"brazílske realy"}
+            few{"brazílske really"}
             many{"brazílskeho realu"}
             one{"brazílsky real"}
             other{"brazílskych realov"}

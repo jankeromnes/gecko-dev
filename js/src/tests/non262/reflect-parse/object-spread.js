@@ -5,7 +5,7 @@ function property(key, value = key, shorthand = key === value) {
 }
 
 function test() {
-    // Any expression can be spreaded.
+    // Any expression can be spread.
     assertExpr("({...x})", objExpr([spread(ident("x"))]));
     assertExpr("({...f()})", objExpr([spread(callExpr(ident("f"), []))]));
     assertExpr("({...123})", objExpr([spread(lit(123))]));

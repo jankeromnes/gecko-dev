@@ -43,7 +43,7 @@ namespace mozilla {
 namespace net {
 
 //-------------------------------------------------------------------
-nested(upto inside_cpow) sync protocol PNecko
+nested(up to inside_cpow) sync protocol PNecko
 {
   manager PContent;
   manages PHttpChannel;

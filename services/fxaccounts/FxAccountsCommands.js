@@ -150,7 +150,7 @@ class SendTab {
    * @param {string} tab.url
    * @param {string} tab.title
    * @returns A report object, in the shape of
-   *          {succeded: [Device], error: [{device: Device, error: Exception}]}
+   *          {succeeded: [Device], error: [{device: Device, error: Exception}]}
    */
   async send(to, tab) {
     log.info(`Sending a tab to ${to.length} devices.`);

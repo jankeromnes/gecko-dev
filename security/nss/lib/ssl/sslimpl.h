@@ -429,7 +429,7 @@ struct sslSessionIDStr {
             /* what's the key index for the wrapping key */
             PRUint16 masterWrapSeries;
             /* keep track of the slot series, so we don't
-             * accidently try to use new keys after the
+             * accidentally try to use new keys after the
              * card gets removed and replaced.*/
 
             /* The following values pertain to the slot that did the signature
@@ -1386,7 +1386,7 @@ extern SECStatus ssl3_HandleV2ClientHello(
 SECStatus ssl3_SendClientHello(sslSocket *ss, sslClientHelloType type);
 
 /*
- * input into the SSL3 machinery from the actualy network reading code
+ * input into the SSL3 machinery from the actually network reading code
  */
 SECStatus ssl3_HandleRecord(sslSocket *ss, SSL3Ciphertext *cipher);
 SECStatus ssl3_HandleNonApplicationData(sslSocket *ss, SSLContentType rType,

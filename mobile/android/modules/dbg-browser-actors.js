@@ -24,7 +24,7 @@ const { BrowserTabList, BrowserAddonList, sendShutdownEvent } =
  *   when it exits.
  *
  * * @param aConnection DebuggerServerConnection
- *        The conection to the client.
+ *        The connection to the client.
  */
 exports.createRootActor = function createRootActor(aConnection) {
   let parameters = {

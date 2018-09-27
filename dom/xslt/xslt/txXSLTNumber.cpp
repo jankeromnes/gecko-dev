@@ -196,7 +196,7 @@ txXSLTNumber::getValueList(Expr* aValueExpr, txPattern* aCountPattern,
 
         } while (walker.moveToParent());
 
-        // Spec says to only match ancestors that are decendants of the
+        // Spec says to only match ancestors that are descendants of the
         // ancestor that matches the from-pattern, so keep going to make
         // sure that there is an ancestor that does.
         if (aFromPattern && aValues.getLength()) {
@@ -248,7 +248,7 @@ txXSLTNumber::getValueList(Expr* aValueExpr, txPattern* aCountPattern,
             }
         } while (walker.moveToParent());
 
-        // Spec says to only match ancestors that are decendants of the
+        // Spec says to only match ancestors that are descendants of the
         // ancestor that matches the from-pattern, so if none did then
         // we shouldn't search anything
         if (aFromPattern && !matchedFrom) {

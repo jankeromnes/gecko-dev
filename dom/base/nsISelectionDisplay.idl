@@ -11,7 +11,7 @@ interface nsISelectionDisplay : nsISupports
 {
    const short DISPLAY_TEXT = 1;   //display text selected.
    const short DISPLAY_IMAGES = 2; //show images selected
-   const short DISPLAY_FRAMES = 4; //display hrules ect.
+   const short DISPLAY_FRAMES = 4; //display hrules etc.
    const short DISPLAY_ALL = 7; //display all. used for isEditor as well
 
    /*

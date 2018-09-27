@@ -29,10 +29,10 @@ runWithMSE(async (ms, el) => {
   el.currentTime = 4.5; // Seek to a gap in the video
   await p;
   ok(true, "Got seeking event");
-  p = once(el, "seeked");
+  p = once(el, "sought");
   el.currentTime = 6; // Seek past the gap.
   await p;
-  ok(true, "Got seeked event");
+  ok(true, "Got sought event");
   ok(el.currentTime >= 6, "Time >= 6");
   ms.endOfStream();
   await once(el, "ended");

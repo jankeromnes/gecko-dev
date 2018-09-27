@@ -79,7 +79,7 @@ class ExpressionParserTest(unittest.TestCase):
         # means a new implementation must handle them explicitly.
         self.assertTrue(parse("true == true # it does!"))
         self.assertTrue(parse("false == false # it does"))
-        self.assertTrue(parse("false != true # it doesnt"))
+        self.assertTrue(parse("false != true # it doesn't"))
         self.assertTrue(parse('"string with #" == "string with #" # really, it does'))
         self.assertTrue(parse('"string with #" != "string with # but not the same" # no match!'))
 

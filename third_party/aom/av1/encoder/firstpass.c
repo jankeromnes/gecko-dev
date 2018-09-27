@@ -1757,7 +1757,7 @@ void define_customized_gf_group_structure(AV1_COMP *cpi) {
 #endif
 }
 
-// It is an example of how to define a GF stucture manually. The function will
+// It is an example of how to define a GF structure manually. The function will
 // result in exactly the same GF group structure as
 // define_customized_gf_group_structure() when rc->baseline_gf_interval == 4
 #if USE_MANUAL_GF4_STRUCT
@@ -2644,7 +2644,7 @@ static void define_gf_group(AV1_COMP *cpi, FIRSTPASS_STATS *this_frame) {
 
 #if GROUP_ADAPTIVE_MAXQ
   // Calculate an estimate of the maxq needed for the group.
-  // We are more agressive about correcting for sections
+  // We are more aggressive about correcting for sections
   // where there could be significant overshoot than for easier
   // sections where we do not wish to risk creating an overshoot
   // of the allocated bit budget.
@@ -3257,7 +3257,7 @@ void av1_rc_get_second_pass_params(AV1_COMP *cpi) {
 
   if (!twopass->stats_in) return;
 
-  // If this is an arf frame then we dont want to read the stats file or
+  // If this is an arf frame then we don't want to read the stats file or
   // advance the input pointer as we already have what we need.
   if (gf_group->update_type[gf_group->index] == ARF_UPDATE ||
       gf_group->update_type[gf_group->index] == INTNL_ARF_UPDATE) {

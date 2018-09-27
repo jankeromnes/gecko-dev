@@ -21,7 +21,7 @@
 #include <Foundation/Foundation.h>
 #include <AppKit/AppKit.h>
 #include <mach-o/dyld.h>
-#define _S_IFDIR S_IFDIR     // really from tier0/platform.h which we dont have yet
+#define _S_IFDIR S_IFDIR     // really from tier0/platform.h which we don't have yet
 #endif
 
 #include <sys/stat.h>

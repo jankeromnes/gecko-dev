@@ -28,7 +28,7 @@ public:
                          uint32_t, uint32_t) const = 0;
 };
 
-// The default string comparator (case-sensitive comparision)
+// The default string comparator (case-sensitive comparison)
 template <typename T> class nsTDefaultStringComparator
   : public nsTStringComparator<T>
 {
@@ -52,7 +52,7 @@ namespace mozilla {
 // on something other than `T`. We keep this in the `mozilla` namespace rather
 // than `nsTStringRepr` as it's intentionally not dependent on `T`.
 //
-// The 'T' at the end of `Char[16]OnlyT` is refering to the `::type` portion
+// The 'T' at the end of `Char[16]OnlyT` is referring to the `::type` portion
 // which will only be defined if the character class is correct. This is similar
 // to `std::enable_if_t` which is available in C++14, but not C++11.
 //

@@ -38,7 +38,7 @@ size_t ia32_disasm_addr( unsigned char * buf, size_t buf_len,
 
 
 /* --------------------------------------------------------- Table Lookup */
-/* IA32 Instruction defintion for ia32_opcodes.c */
+/* IA32 Instruction definition for ia32_opcodes.c */
 typedef struct {
    unsigned int table;          /* escape to this sub-table */
    unsigned int mnem_flag;      /* Flags referring to mnemonic */
@@ -487,7 +487,7 @@ typedef struct {	/* representation of an insn during decoding */
 	unsigned int cpu_ver;		/* TODO: cpu version */
 	unsigned int clocks;		/* TODO: clock cycles: min/max */
 	unsigned char last_prefix;
-	/* runtime intruction decoding helpers */
+	/* runtime instruction decoding helpers */
 	unsigned char mode;		/* 16, 32, 64 */
 	unsigned char gen_regs;		/* offset of default general reg set */
 	unsigned char sz_operand;	/* operand size for insn */

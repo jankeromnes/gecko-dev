@@ -701,7 +701,7 @@ nsHttpChannelAuthProvider::GetCredentialsForChallenge(const char *challenge,
     ParseRealm(challenge, realm);
 
     // if no realm, then use the auth type as the realm.  ToUpperCase so the
-    // ficticious realm stands out a bit more.
+    // fictitious realm stands out a bit more.
     // XXX this will cause some single signon misses!
     // XXX this was meant to be used with NTLM, which supplies no realm.
     /*
@@ -791,7 +791,7 @@ nsHttpChannelAuthProvider::GetCredentialsForChallenge(const char *challenge,
 
     if (mConnectionBased && identityInvalid) {
         // If the flag is set and identity is invalid, it means we received the first
-        // challange for a new negotiation round after negotiating a connection based
+        // challenge for a new negotiation round after negotiating a connection based
         // auth failed (invalid password).
         // The mConnectionBased flag is set later for the newly received challenge,
         // so here it reflects the previous 401/7 response schema.

@@ -285,7 +285,7 @@ private:
 };
 
 namespace {
-// This is a class soley so it can be partially specialized (functions cannot be).
+// This is a class solely so it can be partially specialized (functions cannot be).
 template<GrAA, typename Vertex> class VertexAAHandler;
 
 template<typename Vertex> class VertexAAHandler<GrAA::kNo, Vertex> {

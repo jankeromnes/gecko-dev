@@ -77,7 +77,7 @@ void ReadFloatSamplesFromStereoFile(size_t samples_per_channel,
     rtc::ArrayView<const float> output,
     float element_error_bound) {
   // Form vectors to compare the reference to. Only the first values of the
-  // outputs are compared in order not having to specify all preceeding frames
+  // outputs are compared in order not having to specify all preceding frames
   // as testvectors.
   const size_t reference_frame_length =
       rtc::CheckedDivExact(reference.size(), num_channels);

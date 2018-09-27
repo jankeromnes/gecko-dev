@@ -209,7 +209,7 @@ class WindowTracker extends WindowTrackerBase {
  *        The name of the EventDispatcher event to listen for.
  * @param {function} listener
  *        The listener function to call when an EventDispatcher event is
- *        recieved.
+ *        received.
  *
  * @returns {object} An injectable api for the new event.
  */

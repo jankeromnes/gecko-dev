@@ -3,7 +3,7 @@ include protocol PTestPaintThread;
 namespace mozilla {
 namespace _ipdltest {
 
-// This is supposed to be analagous to PLayerTransaction.
+// This is supposed to be analogous to PLayerTransaction.
 sync protocol PTestLayoutThread
 {
 parent:

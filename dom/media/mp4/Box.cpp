@@ -39,8 +39,8 @@ BoxOffset(AtomType aType)
   return 0;
 }
 
-Box::Box(BoxContext* aContext, uint64_t aOffset, const Box* aParent)
-  : mContext(aContext), mParent(aParent)
+Box::Box(BoxContext* aContext, uint64_t aOffset, const Box* apparent)
+  : mContext(aContext), mParent(apparent)
 {
   uint8_t header[8];
 

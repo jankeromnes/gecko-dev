@@ -69,7 +69,7 @@ function array2LengthBail(i) {
 }
 
 // Check that we can correctly gc in the middle of an incomplete object
-// intialization.
+// initialization.
 function arrayWithGCInit0(i) {
     var a = [ (i == 99 ? (gc(), i) : i), i ];
     assertRecoveredOnBailout(a, true);

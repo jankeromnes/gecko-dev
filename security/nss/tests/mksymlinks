@@ -12,7 +12,7 @@ fi
 if [ -d "$NSS_VER_DIR" ] ; then
     cd $NSS_VER_DIR
 else
-    glob_usage "cant cd to $NSS_VER_DIR Exiting"
+    glob_usage "can't cd to $NSS_VER_DIR Exiting"
 fi
 
 if [ -d "$NTDIST" ] ; then
@@ -41,7 +41,7 @@ if [ -d "$NTDIST" ] ; then
     fi
 else
     if [ $O_DEBUG = ON ] ; then
-        Debug "WARNING!!! cant cd to $NTDIST "
+        Debug "WARNING!!! can't cd to $NTDIST "
     fi
 fi
 
@@ -49,7 +49,7 @@ if [ -d "$UXDIST" ]
 then
     cd $UXDIST
 else
-    glob_usage "Error!!! cant cd to $UXDIST "
+    glob_usage "Error!!! can't cd to $UXDIST "
 fi
 
 ErrorFlag=0

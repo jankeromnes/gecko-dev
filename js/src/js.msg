@@ -437,7 +437,7 @@ MSG_DEF(JSMSG_CANT_REPORT_NC_AS_NE,    1, JSEXN_TYPEERR, "proxy can't report a n
 MSG_DEF(JSMSG_CANT_REPORT_NEW,         1, JSEXN_TYPEERR, "proxy can't report a new property '{0}' on a non-extensible object")
 MSG_DEF(JSMSG_CANT_REPORT_NE_AS_NC,    1, JSEXN_TYPEERR, "proxy can't report a non-existent property '{0}' as non-configurable")
 MSG_DEF(JSMSG_CANT_SET_NW_NC,          1, JSEXN_TYPEERR, "proxy can't successfully set a non-writable, non-configurable property '{0}'")
-MSG_DEF(JSMSG_CANT_SET_WO_SETTER,      1, JSEXN_TYPEERR, "proxy can't succesfully set an accessor property '{0}' without a setter")
+MSG_DEF(JSMSG_CANT_SET_WO_SETTER,      1, JSEXN_TYPEERR, "proxy can't successfully set an accessor property '{0}' without a setter")
 MSG_DEF(JSMSG_CANT_SKIP_NC,            1, JSEXN_TYPEERR, "proxy can't skip a non-configurable property '{0}'")
 MSG_DEF(JSMSG_OWNKEYS_STR_SYM,         0, JSEXN_TYPEERR, "proxy [[OwnPropertyKeys]] must return an array with only string and symbol elements")
 MSG_DEF(JSMSG_OWNKEYS_DUPLICATE,       1, JSEXN_TYPEERR, "proxy [[OwnPropertyKeys]] can't report property '{0}' more than once")

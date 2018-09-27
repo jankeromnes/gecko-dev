@@ -30,7 +30,7 @@ interface nsIChannelEventSink : nsISupports
 
     /**
      * This is a permanent redirect. New requests for this resource should use
-     * the URI of the new channel (This might be an HTTP 301 reponse).
+     * the URI of the new channel (This might be an HTTP 301 response).
      * If this flag is not set, this is a temporary redirect.
      *
      * The new URI may be identical to the old one.

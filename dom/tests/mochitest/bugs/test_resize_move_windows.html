@@ -103,7 +103,7 @@ function checkChangeIsDisabled(aWindow) {
   var originalHeight = getProp("innerHeight");
 
   var originalX = getProp("screenX");
-  var originalY = getProp("screenY");
+  var originally = getProp("screenY");
 
   var oWidth = getProp("outerWidth");
   var oHeight = getProp("outerHeight");
@@ -111,7 +111,7 @@ function checkChangeIsDisabled(aWindow) {
   function changeCondition() {
     return aWindow.innerWidth != originalWidth ||
            aWindow.innerHeight != originalHeight ||
-           aWindow.screenX != originalX || aWindow.screenY != originalY ||
+           aWindow.screenX != originalX || aWindow.screenY != originally ||
            aWindow.outerWidth != oWidth || aWindow.outerHeight != oHeight;
   }
 
@@ -122,7 +122,7 @@ function checkChangeIsDisabled(aWindow) {
        "Window height shouldn't have changed");
     is(getProp("screenX"), originalX,
        "Window x position shouldn't have changed");
-    is(getProp("screenY"), originalY,
+    is(getProp("screenY"), originally,
        "Window y position shouldn't have changed");
     is(getProp("outerWidth"), oWidth,
        "Window outerWidth shouldn't have changed");

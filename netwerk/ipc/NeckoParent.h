@@ -76,7 +76,7 @@ public:
   public:
     NS_DECL_ISUPPORTS
 
-    NestedFrameAuthPrompt(PNeckoParent* aParent, TabId aNestedFrameId);
+    NestedFrameAuthPrompt(PNeckoParent* apparent, TabId aNestedFrameId);
 
     NS_IMETHOD PromptAuth(nsIChannel*, uint32_t, nsIAuthInformation*, bool*) override
     {

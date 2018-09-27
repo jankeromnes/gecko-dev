@@ -591,7 +591,7 @@ add_task(async function test_place_id_ignored() {
 });
 
 add_task(async function test_handleCompletion_called_when_complete() {
-  // We test a normal visit, and embeded visit, and a uri that would fail
+  // We test a normal visit, and embedded visit, and a uri that would fail
   // the canAddURI test to make sure that the notification happens after *all*
   // of them have had a callback.
   let places = [

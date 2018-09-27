@@ -363,7 +363,7 @@ public:
                        mozilla::EventChainVisitor& aVisitor) override;
     // nsIContent
     virtual nsresult BindToTree(nsIDocument* aDocument,
-                                nsIContent* aParent,
+                                nsIContent* apparent,
                                 nsIContent* aBindingParent) override;
     virtual void UnbindFromTree(bool aDeep, bool aNullParent) override;
     virtual void DestroyContent() override;

@@ -604,7 +604,7 @@ impl<'i: 't, 't> Parser<'i, 't> {
     ///
     /// Successful results are accumulated in a vector.
     ///
-    /// This method retuns `Err(())` the first time that a closure call does,
+    /// This method returns `Err(())` the first time that a closure call does,
     /// or if a closure call leaves some input before the next comma or the end of the input.
     #[inline]
     pub fn parse_comma_separated<F, T, E>(&mut self, mut parse_one: F) -> Result<Vec<T>, ParseError<'i, E>>

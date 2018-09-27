@@ -6,7 +6,7 @@
 "use strict";
 
 /**
- * Tests that the debugger is succesfully loaded in the Browser Content Toolbox.
+ * Tests that the debugger is successfully loaded in the Browser Content Toolbox.
  */
 
 const {

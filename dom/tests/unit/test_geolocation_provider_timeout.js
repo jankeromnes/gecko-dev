@@ -9,7 +9,7 @@ function geoHandler(metadata, response)
 }
 
 function successCallback() {
-  // The call shouldn't be sucessful.
+  // The call shouldn't be successful.
   Assert.ok(false);
   do_test_finished();
 }

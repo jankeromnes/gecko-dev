@@ -505,7 +505,7 @@ loser:
  *           smart card tokens will not work).
  * allowAlreadyInitializedModules - if a module has already been loaded and
  *           initialize try to use it.
- * don'tFinalizeModules -  dont shutdown modules we may have loaded.
+ * don'tFinalizeModules -  don't shutdown modules we may have loaded.
  */
 
 static PRBool nssIsInitted = PR_FALSE;

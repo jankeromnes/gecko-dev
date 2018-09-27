@@ -166,7 +166,7 @@ typedef struct OSVR_PoseReport {
 typedef struct OSVR_VelocityReport {
     /** @brief Identifies the sensor that the report comes from */
     int32_t sensor;
-    /** @brief The data state - note that not all fields are neccesarily valid,
+    /** @brief The data state - note that not all fields are necessarily valid,
         use the `Valid` members to check the status of the other fields.
     */
     OSVR_VelocityState state;
@@ -196,7 +196,7 @@ typedef struct OSVR_AngularVelocityReport {
 typedef struct OSVR_AccelerationReport {
     /** @brief Identifies the sensor that the report comes from */
     int32_t sensor;
-    /** @brief The data state - note that not all fields are neccesarily valid,
+    /** @brief The data state - note that not all fields are necessarily valid,
         use the `Valid` members to check the status of the other fields.
     */
     OSVR_AccelerationState state;

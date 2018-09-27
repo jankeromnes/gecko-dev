@@ -77,7 +77,7 @@ extern const int kOpusDefaultUseInbandFec;
 extern const int kOpusDefaultUseDtx;
 extern const int kOpusDefaultMaxPlaybackRate;
 
-// Prefered values in this code base. Note that they may differ from the default
+// Preferred values in this code base. Note that they may differ from the default
 // values in http://tools.ietf.org/html/draft-spittka-payload-rtp-opus-03
 // Only frames larger or equal to 10 ms are currently supported in this code
 // base.

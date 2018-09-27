@@ -149,7 +149,7 @@ class HeadersPanel extends Component {
       div({ className: "treeValueCellDivider" },
         Rep(Object.assign(props, {
           // FIXME: A workaround for the issue in StringRep
-          // Force StringRep to crop the text everytime
+          // Force StringRep to crop the text every time
           member: Object.assign({}, member, { open: false }),
           mode: MODE.TINY,
           cropLimit: 60,

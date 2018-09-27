@@ -166,7 +166,7 @@ public:
    /** Change the storage of this auto array, copying the elements to the new
     * storage.
     * @returns true in case of success
-    * @returns false if the new capacity is not big enough to accomodate for the
+    * @returns false if the new capacity is not big enough to accommodate for the
     *                elements in the array.
     */
   bool reserve(size_t new_capacity)

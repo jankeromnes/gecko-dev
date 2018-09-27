@@ -380,7 +380,7 @@ pref("browser.search.openintab", false);
 // context menu searches open in the foreground
 pref("browser.search.context.loadInBackground", false);
 
-// comma seperated list of of engines to hide in the search panel.
+// comma separated list of of engines to hide in the search panel.
 pref("browser.search.hiddenOneOffs", "");
 
 // Mirrors whether the search-container widget is in the navigation toolbar.
@@ -1395,7 +1395,7 @@ pref("identity.sync.tokenserver.uri", "https://token.services.mozilla.com/1.0/sy
 
 // Auto-config URL for FxA self-hosters, makes an HTTP request to
 // [identity.fxaccounts.autoconfig.uri]/.well-known/fxa-client-configuration
-// This is now the prefered way of pointing to a custom FxA server, instead
+// This is now the preferred way of pointing to a custom FxA server, instead
 // of making changes to "identity.fxaccounts.*.uri".
 pref("identity.fxaccounts.autoconfig.uri", "");
 

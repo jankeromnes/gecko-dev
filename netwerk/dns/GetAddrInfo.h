@@ -53,7 +53,7 @@ GetAddrInfoInit();
  * Shutdown the GetAddrInfo module.
  *
  * This function should be called for every time GetAddrInfoInit() is called.
- * An assertion may throw (but is not guarenteed) if this function is called
+ * An assertion may throw (but is not guaranteed) if this function is called
  * too many times.
  */
 nsresult

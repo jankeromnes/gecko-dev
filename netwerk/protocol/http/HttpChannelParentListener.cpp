@@ -354,7 +354,7 @@ HttpChannelParentListener::ShouldPrepareForIntercept(nsIURI* aURI,
                                                      bool* aShouldIntercept)
 {
   // If parent-side interception is enabled just forward to the real
-  // network controler.
+  // network controller.
   if (mInterceptController) {
     return mInterceptController->ShouldPrepareForIntercept(aURI, aChannel,
                                                            aShouldIntercept);
@@ -407,7 +407,7 @@ NS_IMETHODIMP
 HttpChannelParentListener::ChannelIntercepted(nsIInterceptedChannel* aChannel)
 {
   // If parent-side interception is enabled just forward to the real
-  // network controler.
+  // network controller.
   if (mInterceptController) {
     return mInterceptController->ChannelIntercepted(aChannel);
   }
@@ -532,7 +532,7 @@ HttpChannelParentListener::ClearInterceptedChannel(nsIStreamListener* aListener)
     mInterceptedChannel = nullptr;
   }
   // Note that channel interception has been canceled.  If we got this before
-  // the interception even occured we will trigger the cancel later.
+  // the interception even occurred we will trigger the cancel later.
   mInterceptCanceled = true;
 }
 

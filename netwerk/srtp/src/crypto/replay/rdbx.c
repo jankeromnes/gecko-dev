@@ -82,7 +82,7 @@
  *
  * A srtp_rdbx_t consists of a srtp_xtd_seq_num_t and a bitmask.  The index is
  * highest sequence number that has been received, and the bitmask indicates
- * which of the recent indicies have been received as well.  The
+ * which of the recent indices have been received as well.  The
  * highest bit in the bitmask corresponds to the index in the bitmask.
  */
 

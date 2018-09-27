@@ -23,7 +23,7 @@ public:
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(Credential)
 
 public:
-  explicit Credential(nsPIDOMWindowInner* aParent);
+  explicit Credential(nsPIDOMWindowInner* apparent);
 
 protected:
   virtual ~Credential();

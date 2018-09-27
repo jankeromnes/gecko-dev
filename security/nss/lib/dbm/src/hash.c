@@ -238,7 +238,7 @@ __hash_open(const char *file, int flags, int mode, const HASHINFO *info, int dfl
                  (hashp->BSHIFT + BYTE_SHIFT);
 
         hashp->nmaps = bpages;
-        (void)memset(&hashp->mapp[0], 0, bpages * sizeof(uint32 *));
+        (void)memset(&hashp->map[0], 0, bpages * sizeof(uint32 *));
     }
 
     /* Initialize Buffer Manager */
@@ -476,8 +476,8 @@ hdestroy(HTAB *hashp)
         save_errno = errno;
     /* Free Bigmaps */
     for (i = 0; i < hashp->nmaps; i++)
-        if (hashp->mapp[i])
-            free(hashp->mapp[i]);
+        if (hashp->map[i])
+            free(hashp->map[i]);
 
     if (hashp->fp != -1)
         (void)close(hashp->fp);
@@ -634,8 +634,8 @@ flush_meta(HTAB *hashp)
         return (-1);
     }
     for (i = 0; i < NCACHED; i++)
-        if (hashp->mapp[i])
-            if (__put_page(hashp, (char *)hashp->mapp[i],
+        if (hashp->map[i])
+            if (__put_page(hashp, (char *)hashp->map[i],
                            hashp->BITMAPS[i], 0, 1))
                 return (-1);
     return (0);

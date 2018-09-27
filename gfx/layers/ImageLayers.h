@@ -82,7 +82,7 @@ protected:
   ImageLayer(LayerManager* aManager, void* aImplData);
   ~ImageLayer();
   virtual void PrintInfo(std::stringstream& aStream, const char* aPrefix) override;
-  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent) override;
+  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent) override;
 
   RefPtr<ImageContainer> mContainer;
   gfx::SamplingFilter mSamplingFilter;

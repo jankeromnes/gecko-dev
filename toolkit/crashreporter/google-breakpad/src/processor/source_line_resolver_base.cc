@@ -238,7 +238,7 @@ bool SourceLineResolverBase::LoadModuleUsingMemoryBuffer(
 
   Module *basic_module = module_factory_->CreateModule(module->code_file());
 
-  // Ownership of memory is NOT transfered to Module::LoadMapFromMemory().
+  // Ownership of memory is NOT transferred to Module::LoadMapFromMemory().
   if (!basic_module->LoadMapFromMemory(memory_buffer, memory_buffer_size)) {
     BPLOG(ERROR) << "Too many error while parsing symbol data for module "
                  << module->code_file();

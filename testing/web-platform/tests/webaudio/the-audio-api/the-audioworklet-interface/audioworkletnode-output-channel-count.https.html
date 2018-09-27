@@ -43,7 +43,7 @@
                 task.done();
               };
 
-              // We need to make an actual connection becasue the channel count
+              // We need to make an actual connection because the channel count
               // change happen when the rendering starts. It is to test if the
               // channel count adapts to the upstream node correctly.
               source.connect(node).connect(context.destination);
@@ -69,7 +69,7 @@
                 task.done();
               };
 
-              // We need to make an actual connection becasue the channel count
+              // We need to make an actual connection because the channel count
               // change might happen when the rendering starts. It is to test
               // if the specified channel count is kept correctly.
               node.connect(context.destination);

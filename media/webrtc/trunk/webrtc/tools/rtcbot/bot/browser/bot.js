@@ -50,7 +50,7 @@ function createPeerConnection(config, doneCallback, failCallback) {
 
   // Return an array of Objects, each Object is a copy of RTCStateReport
   // and has the following attributes (id, type, names, and stats).
-  // names: array originaly returned by calling RTCStateReport.names().
+  // names: array originally returned by calling RTCStateReport.names().
   // stats: dictionary of stat name as key and stat value as dictionary
   // value.
   obj.getStats = function(callback, mediaTrack) {

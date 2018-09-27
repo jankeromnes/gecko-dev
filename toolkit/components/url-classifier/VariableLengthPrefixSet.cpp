@@ -83,7 +83,7 @@ VariableLengthPrefixSet::SetPrefixes(const PrefixStringMap& aPrefixMap)
     const uint32_t* arrayPtr = reinterpret_cast<const uint32_t*>(prefixes->BeginReading());
 #else
     FallibleTArray<uint32_t> array;
-    // Prefixes are lexicographically-sorted, so the interger array
+    // Prefixes are lexicographically-sorted, so the integer array
     // passed to nsUrlClassifierPrefixSet should also follow the same order.
     // To make sure of that, we convert char array to integer with Big-Endian
     // instead of casting to integer directly.

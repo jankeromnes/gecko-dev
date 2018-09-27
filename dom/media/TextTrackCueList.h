@@ -27,7 +27,7 @@ public:
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(TextTrackCueList)
 
   // TextTrackCueList WebIDL
-  explicit TextTrackCueList(nsISupports* aParent);
+  explicit TextTrackCueList(nsISupports* apparent);
 
   JSObject* WrapObject(JSContext* aCx, JS::Handle<JSObject*> aGivenProto) override;
 

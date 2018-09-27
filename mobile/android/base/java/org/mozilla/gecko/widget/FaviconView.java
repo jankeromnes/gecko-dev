@@ -192,7 +192,7 @@ public class FaviconView extends AppCompatImageView {
     }
 
     private void scaleBitmap() {
-        // If the Favicon can be resized to fill the view exactly without an enlargment of more than
+        // If the Favicon can be resized to fill the view exactly without an enlargement of more than
         // a factor of two, do so.
         int doubledSize = mIconBitmap.getWidth() * 2;
         if (getWidth() > doubledSize) {

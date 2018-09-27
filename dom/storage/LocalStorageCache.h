@@ -225,7 +225,7 @@ private:
                          const MutationSource aSource=ContentMutation);
 
 private:
-  // When a cache is reponsible for its life time (in case of localStorage data
+  // When a cache is responsible for its life time (in case of localStorage data
   // cache) we need to refer our manager since removal of the cache from the
   // hash table is handled in the destructor by call to the manager.  Cache
   // could potentially overlive the manager, hence the hard ref.

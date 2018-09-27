@@ -69,7 +69,7 @@ public:
   static already_AddRefed<GetFilesTaskParent>
   Create(FileSystemBase* aFileSystem,
          const FileSystemGetFilesParams& aParam,
-         FileSystemRequestParent* aParent,
+         FileSystemRequestParent* apparent,
          ErrorResult& aRv);
 
   nsresult
@@ -78,7 +78,7 @@ public:
 private:
   GetFilesTaskParent(FileSystemBase* aFileSystem,
                      const FileSystemGetFilesParams& aParam,
-                     FileSystemRequestParent* aParent);
+                     FileSystemRequestParent* apparent);
 
   virtual FileSystemResponseValue
   GetSuccessRequestResult(ErrorResult& aRv) const override;

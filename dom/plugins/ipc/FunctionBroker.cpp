@@ -257,7 +257,7 @@ static void GrantFileAccess(base::ProcessId aClientId, LPOPENFILENAME& aLpofn,
     std::wstring path = std::wstring(aLpofn->lpstrFile);
     MOZ_ASSERT(aLpofn->nFileOffset > 0);
     // For condition #1, nFileOffset points to the file name in the path.
-    // It will be preceeded by a non-NULL character from the path.
+    // It will be preceded by a non-NULL character from the path.
     if (aLpofn->lpstrFile[aLpofn->nFileOffset-1] != L'\0') {
       FunctionBrokerParent::GetSandboxPermissions()->GrantFileAccess(aClientId, path.c_str(), isSave);
     }
@@ -1220,7 +1220,7 @@ bool CMWReqHandler::ShouldBroker(Endpoint endpoint,
                                  const BOOL& aOwner,
                                  const LPCWSTR& aName)
 {
-  // Statically hold the camera mutex name so that we dont recompute it for
+  // Statically hold the camera mutex name so that we don't recompute it for
   // every CreateMutexW call in the client process.
   static std::wstring camMutexName = GetCameraMutexName();
 
@@ -1235,7 +1235,7 @@ bool CMWReqHandler::ShouldBroker(Endpoint endpoint,
   return (!aOwner) && aName && (!camMutexName.empty()) && (camMutexName == aName);
 }
 
-// We dont need to marshal any parameters.  We construct all of them server-side.
+// We don't need to marshal any parameters.  We construct all of them server-side.
 template<> template<>
 struct CMWReqInfo::ShouldMarshal<0> { static const bool value = false; };
 template<> template<>

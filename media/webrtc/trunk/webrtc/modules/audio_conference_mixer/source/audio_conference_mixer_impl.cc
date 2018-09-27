@@ -385,7 +385,7 @@ int32_t AudioConferenceMixerImpl::SetMixabilityStatus(
         // API must be called with a new state.
         if(!(mixable ^ isMixed)) {
             WEBRTC_TRACE(kTraceWarning, kTraceAudioMixerServer, _id,
-                         "Mixable is aready %s",
+                         "Mixable is already %s",
                          isMixed ? "ON" : "off");
             return -1;
         }

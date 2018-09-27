@@ -74,7 +74,7 @@ Test01_raw_optimized( nsINode* aDOMNode, nsString* aResult )
 			*/
 
 // -- the following code is assumed, but is commented out so we compare only
-//		 the relevent generated code
+//		 the relevant generated code
 
 //		if ( !aDOMNode )
 //			return;

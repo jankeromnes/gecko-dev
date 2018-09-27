@@ -127,7 +127,7 @@ typedef struct {
 
 typedef struct {
 
-  //for inital estimator
+  //for initial estimator
   double         dec_buffer[PITCH_CORR_LEN2 + PITCH_CORR_STEP2 +
                             PITCH_MAX_LAG/2 - PITCH_FRAME_LEN/2+2];
   double        decimator_state[2*ALLPASSSECTIONS+1];

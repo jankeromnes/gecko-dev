@@ -123,7 +123,7 @@ public:
   // Will assert off main thread
   void ClearMappedServoStyle();
 
-  // Increases capacity (if necessary) to have enough space to accomodate the
+  // Increases capacity (if necessary) to have enough space to accommodate the
   // unmapped attributes of |aOther|.
   nsresult EnsureCapacityToClone(const AttrArray& aOther);
 

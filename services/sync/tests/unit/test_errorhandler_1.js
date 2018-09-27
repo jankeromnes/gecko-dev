@@ -35,7 +35,7 @@ async function clean() {
   await promiseLogReset;
   Status.resetSync();
   Status.resetBackoff();
-  // Move log levels back to trace (startOver will have reversed this), sicne
+  // Move log levels back to trace (startOver will have reversed this), since
   syncTestLogging();
 }
 

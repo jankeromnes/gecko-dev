@@ -67,9 +67,9 @@ nsIContentParent::AllocPJavaScriptParent()
 }
 
 bool
-nsIContentParent::DeallocPJavaScriptParent(PJavaScriptParent* aParent)
+nsIContentParent::DeallocPJavaScriptParent(PJavaScriptParent* apparent)
 {
-  ReleaseJavaScriptParent(aParent);
+  ReleaseJavaScriptParent(apparent);
   return true;
 }
 

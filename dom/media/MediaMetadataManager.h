@@ -41,11 +41,11 @@ public:
 
   // The time, in microseconds, at which those metadata should be available.
   media::TimeUnit mPublishTime;
-  // The metadata. The ownership is transfered to the element when dispatching to
+  // The metadata. The ownership is transferred to the element when dispatching to
   // the main threads.
   nsAutoPtr<MetadataTags> mTags;
   // The media info, including the info of audio tracks and video tracks.
-  // The ownership is transfered to MediaDecoder when dispatching to the
+  // The ownership is transferred to MediaDecoder when dispatching to the
   // main thread.
   nsAutoPtr<MediaInfo> mInfo;
 };

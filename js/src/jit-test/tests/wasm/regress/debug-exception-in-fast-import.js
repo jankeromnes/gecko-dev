@@ -14,7 +14,7 @@ let { exports } = wasmEvalText(`
     }
 });
 
-// after instanciation, the start function has been executed and o is undefined.
+// after instantiation, the start function has been executed and o is undefined.
 // This second call will throw in the imported function:
 
 assertErrorMessage(exports[""], TypeError, /undefined/);

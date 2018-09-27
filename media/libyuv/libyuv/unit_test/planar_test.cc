@@ -2098,7 +2098,7 @@ static void EnableFlushDenormalToZero(void) {
 #endif
 
 // 5 bit exponent with bias of 15 will underflow to a denormal if scale causes
-// exponent to be less than 0.  15 - log2(65536) = -1/  This shouldnt normally
+// exponent to be less than 0.  15 - log2(65536) = -1/  This shouldn't normally
 // happen since scale is 1/(1<<bits) where bits is 9, 10 or 12.
 
 TEST_F(LibYUVPlanarTest, TestHalfFloatPlane_16bit_denormal) {

@@ -22,7 +22,7 @@ class Grid : public nsISupports
            , public nsWrapperCache
 {
 public:
-  explicit Grid(nsISupports* aParent, nsGridContainerFrame* aFrame);
+  explicit Grid(nsISupports* apparent, nsGridContainerFrame* aFrame);
 
 protected:
   virtual ~Grid();

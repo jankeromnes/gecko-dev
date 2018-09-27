@@ -225,9 +225,9 @@ public:
   }
 
   void
-  SetAfterRef(nsINode* aParent, nsIContent* aRef)
+  SetAfterRef(nsINode* apparent, nsIContent* aRef)
   {
-    mParent = aParent;
+    mParent = apparent;
     mRef = aRef;
     if (!mRef) {
       mOffset = mozilla::Some(0);

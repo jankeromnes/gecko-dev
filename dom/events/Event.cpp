@@ -52,9 +52,9 @@ Event::Event(EventTarget* aOwner,
   ConstructorInit(aOwner, aPresContext, aEvent);
 }
 
-Event::Event(nsPIDOMWindowInner* aParent)
+Event::Event(nsPIDOMWindowInner* apparent)
 {
-  ConstructorInit(nsGlobalWindowInner::Cast(aParent), nullptr, nullptr);
+  ConstructorInit(nsGlobalWindowInner::Cast(apparent), nullptr, nullptr);
 }
 
 void

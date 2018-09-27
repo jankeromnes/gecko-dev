@@ -2,7 +2,7 @@ var testTimeout = 10000;
 
 setup({timeout: testTimeout});
 
-// This block is excecuted if running in WebKit's harness
+// This block is executed if running in WebKit's harness
 if (window.testRunner)
 {
 	testRunner.dumpEditingCallbacks();

@@ -37,7 +37,7 @@ public:
     SkTypeface* typeface() const { return fTypeface.get(); }
 
     /** Returns the font type represented in this font.  For Type0 fonts,
-     *  returns the type of the decendant font.
+     *  returns the type of the descendant font.
      */
     SkAdvancedTypefaceMetrics::FontType getType() const { return fFontType; }
 

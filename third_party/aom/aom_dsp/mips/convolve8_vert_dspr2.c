@@ -332,7 +332,7 @@ void aom_convolve8_vert_dspr2(const uint8_t *src, ptrdiff_t src_stride,
   } else {
     uint32_t pos = 38;
 
-    /* bit positon for extract from acc */
+    /* bit position for extract from acc */
     __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
                          :
                          : [pos] "r"(pos));

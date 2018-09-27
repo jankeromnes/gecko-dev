@@ -1105,7 +1105,7 @@ public:
    * or speed. PAINT_WIDGET_LAYERS must be set if aRenderingContext is null.
    * If PAINT_DOCUMENT_RELATIVE is used, the visible region is interpreted
    * as being relative to the document (normally it's relative to the CSS
-   * viewport) and the document is painted as if no scrolling has occured.
+   * viewport) and the document is painted as if no scrolling has occurred.
    * Only considered if nsIPresShell::IgnoringViewportScrolling is true.
    * PAINT_TO_WINDOW sets painting to window to true on the display list
    * builder even if we can't tell that we are painting to the window.
@@ -1339,11 +1339,11 @@ public:
   }
 
   /**
-   * Find the immediate child of aParent whose frame subtree contains
+   * Find the immediate child of apparent whose frame subtree contains
    * aDescendantFrame. Returns null if aDescendantFrame is not a descendant
-   * of aParent.
+   * of apparent.
    */
-  static nsIFrame* FindChildContainingDescendant(nsIFrame* aParent, nsIFrame* aDescendantFrame);
+  static nsIFrame* FindChildContainingDescendant(nsIFrame* apparent, nsIFrame* aDescendantFrame);
 
   /**
    * Find the nearest ancestor that's a block
@@ -2693,7 +2693,7 @@ public:
 
  /**
   * Calculate the compostion size for a frame. See FrameMetrics.h for
-  * defintion of composition size (or bounds).
+  * definition of composition size (or bounds).
   * Note that for the root content document's root scroll frame (RCD-RSF),
   * the returned size does not change as the document's resolution changes,
   * but for all other frames it does. This means that callers that pass in
@@ -2721,7 +2721,7 @@ public:
 
  /**
   * Calculate the scrollable rect for a frame. See FrameMetrics.h for
-  * defintion of scrollable rect. aScrollableFrame is the scroll frame to calculate
+  * definition of scrollable rect. aScrollableFrame is the scroll frame to calculate
   * the scrollable rect for. If it's null then we calculate the scrollable rect
   * as the rect of the root frame.
   */
@@ -2730,7 +2730,7 @@ public:
 
  /**
   * Calculate the expanded scrollable rect for a frame. See FrameMetrics.h for
-  * defintion of expanded scrollable rect.
+  * definition of expanded scrollable rect.
   */
   static nsRect
   CalculateExpandedScrollableRect(nsIFrame* aFrame);
@@ -2919,7 +2919,7 @@ public:
   /**
    * Get the text content inside the frame. This methods traverse the
    * frame tree and collect the content from text frames. Note that this
-   * method is similiar to nsContentUtils::GetNodeTextContent, but it at
+   * method is similar to nsContentUtils::GetNodeTextContent, but it at
    * least differs from that method in the following things:
    * 1. it skips text content inside nodes like style, script, textarea
    *    which don't generate an in-tree text frame for the text;

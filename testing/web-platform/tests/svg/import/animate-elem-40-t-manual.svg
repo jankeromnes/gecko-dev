@@ -50,7 +50,7 @@
         <li>In the fifth subtest ("x/y on &lt;text>(2)"), the number "1" moves clockwise
         along the perimeter of a square as in the first four subtests, while the number "2"
         does the same except in an anti-clockise direction.</li>
-        <li>In the sixth subtest, the width and height of the image are animated continously,
+        <li>In the sixth subtest, the width and height of the image are animated continuously,
         from the initial square size, to the wide and short rectangle, to the narrow and
         tall rectangle, and back to the square.  At each point when it reaches one of these
         key sizes, the yellow outline indicating the size is shown thicker momentarily.

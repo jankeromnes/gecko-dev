@@ -100,7 +100,7 @@ nsFilePicker::~nsFilePicker()
 }
 
 void
-nsFilePicker::InitNative(nsIWidget *aParent, const nsAString& aTitle)
+nsFilePicker::InitNative(nsIWidget *apparent, const nsAString& aTitle)
 {
   mTitle = aTitle;
 }

@@ -94,10 +94,10 @@ add_task(function() {
   try {
     MarkerBlueprintUtils.getMarkerGenericName("fakemarker");
     ok(false,
-       "getMarkerGenericName() should throw when label function returnd undefined.");
+       "getMarkerGenericName() should throw when label function returned undefined.");
   } catch (e) {
     ok(true,
-       "getMarkerGenericName() should throw when label function returnd undefined.");
+       "getMarkerGenericName() should throw when label function returned undefined.");
   }
 
   delete TIMELINE_BLUEPRINT.fakemarker;

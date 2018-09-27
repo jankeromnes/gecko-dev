@@ -23,12 +23,12 @@ function isEmptyString(str) {
   return typeof str == "string" && str === "";
 }
 
-// Validate the content is an interger
+// Validate the content is an integer
 function isInteger(i) {
   return Number.isInteger(i);
 }
 
-// Validate the content is a positive interger
+// Validate the content is a positive integer
 function isPositiveInteger(i) {
   return Number.isInteger(i) && i > 0;
 }

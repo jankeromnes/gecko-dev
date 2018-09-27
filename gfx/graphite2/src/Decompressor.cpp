@@ -52,7 +52,7 @@ bool read_sequence(u8 const * &src, u8 const * const end, u8 const * &literal,
     literal = src;
     src += literal_len;
 
-    // Normal exit for end of stream, wrap arround check and parital match check.
+    // Normal exit for end of stream, wrap around check and parital match check.
     if (src > end - sizeof(u16) || src < literal)
         return false;
 
@@ -94,7 +94,7 @@ int lz4::decompress(void const *in, size_t in_size, void *out, size_t out_size)
             // Copy in literal. At this point the a minimal literal + minminal
             // match plus the coda (1 + 2 + 5) must be 8 bytes or more allowing
             // us to remain within the src buffer for an overrun_copy on
-            // machines upto 64 bits.
+            // machines up to 64 bits.
             if (align(literal_len) > out_size)
                 return -1;
             dst = overrun_copy(dst, literal, literal_len);

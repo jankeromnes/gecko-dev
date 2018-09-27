@@ -27,7 +27,7 @@ class SpeechSynthesisVoice final : public nsISupports,
   friend class SpeechSynthesis;
 
 public:
-  SpeechSynthesisVoice(nsISupports* aParent, const nsAString& aUri);
+  SpeechSynthesisVoice(nsISupports* apparent, const nsAString& aUri);
 
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(SpeechSynthesisVoice)

@@ -8,7 +8,7 @@ Bug 1402065 Remove __in and __out from our in-tree copy of pdfium
 
 These macros are not used by anything other than Microsoft static analysis
 tools, but they break the MinGW compile. MinGW cannot define these macros
-in C++ code, because they conflict with libstdc++ arguement names.
+in C++ code, because they conflict with libstdc++ argument names.
 
 See Line 222 of https://sourceforge.net/p/mingw-w64/mingw-w64/ci/cef07470773f3c56e5189125f6b82bf278265e69/tree/mingw-w64-headers/include/sal.h
 

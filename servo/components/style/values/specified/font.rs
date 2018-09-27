@@ -52,7 +52,7 @@ macro_rules! system_font_methods {
             $ty::System(f)
         }
 
-        /// Retreive a SystemFont from the specified value.
+        /// Retrieve a SystemFont from the specified value.
         pub fn get_system(&self) -> Option<SystemFont> {
             if let $ty::System(s) = *self {
                 Some(s)

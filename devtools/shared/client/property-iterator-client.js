@@ -10,7 +10,7 @@ const {arg, DebuggerClient} = require("devtools/shared/client/debugger-client");
  * A PropertyIteratorClient provides a way to access to property names and
  * values of an object efficiently, slice by slice.
  * Note that the properties can be sorted in the backend,
- * this is controled while creating the PropertyIteratorClient
+ * this is controlled while creating the PropertyIteratorClient
  * from ObjectClient.enumProperties.
  *
  * @param client DebuggerClient

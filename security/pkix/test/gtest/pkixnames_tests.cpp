@@ -250,7 +250,7 @@ static const PresentedMatchesReference DNSID_MATCH_PARAMS[] =
   // labels after the wildcard label.
   DNS_ID_MATCH("*.test.example", "www.test.example"),
   DNS_ID_MATCH("*.example.co.uk", "test.example.co.uk"),
-  DNS_ID_BAD_DER("*.exmaple", "test.example"),
+  DNS_ID_BAD_DER("*.example", "test.example"),
 
   // The result is different than Chromium, because Chromium takes into account
   // the additional knowledge it has that "co.uk" is a TLD. mozilla::pkix does

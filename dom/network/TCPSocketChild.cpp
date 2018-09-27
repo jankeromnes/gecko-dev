@@ -36,7 +36,7 @@ DeserializeArrayBuffer(JSContext* cx,
   if (!obj)
       return false;
   // If JS_NewArrayBufferWithContents returns non-null, the ownership of
-  // the data is transfered to obj, so we release the ownership here.
+  // the data is transferred to obj, so we release the ownership here.
   mozilla::Unused << data.release();
 
   aVal.setObject(*obj);

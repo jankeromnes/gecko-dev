@@ -83,7 +83,7 @@ there. The entry should look something like `127.0.0.1 nss.local nss`.
 
 ### Running tests
 
-**Runnning all tests will take a while!**
+**Running all tests will take a while!**
 
     cd tests
     ./all.sh

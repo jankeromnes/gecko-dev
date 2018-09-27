@@ -125,7 +125,7 @@ impl KeyframesAnimationState {
         true
     }
 
-    /// Updates the appropiate state from other animation.
+    /// Updates the appropriate state from other animation.
     ///
     /// This happens when an animation is re-submitted to layout, presumably
     /// because of an state change.

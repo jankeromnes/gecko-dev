@@ -41,8 +41,8 @@ class CallbackHelper :
   public rtc::VideoSinkInterface<webrtc::VideoFrame>
 {
 public:
-  CallbackHelper(CaptureEngine aCapEng, uint32_t aStreamId, CamerasParent *aParent)
-    : mCapEngine(aCapEng), mStreamId(aStreamId), mParent(aParent) {};
+  CallbackHelper(CaptureEngine aCapEng, uint32_t aStreamId, CamerasParent *apparent)
+    : mCapEngine(aCapEng), mStreamId(aStreamId), mParent(apparent) {};
 
   // These callbacks end up running on the VideoCapture thread.
   // From  VideoCaptureCallback
@@ -61,8 +61,8 @@ class InputObserver :  public webrtc::VideoInputFeedBack
 public:
   NS_INLINE_DECL_THREADSAFE_REFCOUNTING(InputObserver)
 
-  explicit InputObserver(CamerasParent* aParent)
-    : mParent(aParent) {};
+  explicit InputObserver(CamerasParent* apparent)
+    : mParent(apparent) {};
 
   virtual void OnDeviceChange() override;
 

@@ -651,7 +651,7 @@ File.prototype = {
    *
    * @param {Typed array | C pointer} buffer The buffer in which the
    * the bytes are stored. The buffer must be large enough to
-   * accomodate |bytes| bytes. Using the buffer before the operation
+   * accommodate |bytes| bytes. Using the buffer before the operation
    * is complete is a BAD IDEA.
    * @param {*=} options Optionally, an object that may contain the
    * following fields:

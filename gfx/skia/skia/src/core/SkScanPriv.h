@@ -12,7 +12,7 @@
 #include "SkScan.h"
 #include "SkBlitter.h"
 
-// controls how much we super-sample (when we use that scan convertion)
+// controls how much we super-sample (when we use that scan conversion)
 #define SK_SUPERSAMPLE_SHIFT    2
 
 class SkScanClipper {

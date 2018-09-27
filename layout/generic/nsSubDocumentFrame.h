@@ -47,7 +47,7 @@ public:
   }
 
   void Init(nsIContent*       aContent,
-            nsContainerFrame* aParent,
+            nsContainerFrame* apparent,
             nsIFrame*         aPrevInFlow) override;
 
   void DestroyFrom(nsIFrame* aDestructRoot, PostDestroyData& aPostDestroyData) override;

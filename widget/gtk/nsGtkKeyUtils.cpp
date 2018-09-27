@@ -754,7 +754,7 @@ KeymapWrapper::OnKeysChanged(GdkKeymap *aGdkKeymap,
     MOZ_ASSERT(sInstance == aKeymapWrapper,
                "This instance must be the singleton instance");
 
-    // We cannot reintialize here becasue we don't have GdkWindow which is using
+    // We cannot reintialize here because we don't have GdkWindow which is using
     // the GdkKeymap.  We'll reinitialize it when next GetInstance() is called.
     sInstance->mInitialized = false;
     ResetBidiKeyboard();

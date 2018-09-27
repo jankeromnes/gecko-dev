@@ -366,7 +366,7 @@ extern "system" {
     pub fn ScriptStringXtoCP(
         ssa: SCRIPT_STRING_ANALYSIS,
         iX: c_int,
-        piCh: *mut c_int,
+        pitch: *mut c_int,
         piTrailing: *mut c_int,
     ) -> HRESULT;
     pub fn ScriptStringGetLogicalWidths(

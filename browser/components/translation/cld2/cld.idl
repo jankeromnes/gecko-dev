@@ -4,7 +4,7 @@
 
 // Note: This is a variant of WebIDL, but its semantics differ from our
 // internal WebIDL implementation. Some particular differences that are
-// relevent here include:
+// relevant here include:
 //
 //  - Attribute declarations refer directly to member variables of the
 //    underlying class, and are not forwarded to explicit getter methods.

@@ -308,7 +308,7 @@ private:
     bool mProxyTransparentResolvesHost;
     bool mHttpsProxy;
     uint32_t     mConnectionFlags;
-    // When we fail to connect using a prefered IP family, we tell the consumer to reset
+    // When we fail to connect using a preferred IP family, we tell the consumer to reset
     // the IP family preference on the connection entry.
     bool         mResetFamilyPreference;
     uint32_t     mTlsFlags;
@@ -396,7 +396,7 @@ private:
                                             // operations.
 
     // A delete protector reference to gSocketTransportService held for lifetime
-    // of 'this'. Sometimes used interchangably with gSocketTransportService due
+    // of 'this'. Sometimes used interchangeably with gSocketTransportService due
     // to scoping.
     RefPtr<nsSocketTransportService> mSocketTransportService;
 

@@ -4,7 +4,7 @@
 /*---
 info: |
     Promise.all expects an iterable argument;
-    fails if recieves an abrupt completion
+    fails if receives an abrupt completion
     ref 7.4.1 non-Object fails CheckIterable
     ref 7.4.2 GetIterator throws TypeError if CheckIterable fails
 es6id: S25.4.4.1_A3.1_T2

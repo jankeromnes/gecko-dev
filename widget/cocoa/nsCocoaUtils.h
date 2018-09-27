@@ -253,7 +253,7 @@ public:
 
   // Compatibility wrappers for the -[NSEvent phase], -[NSEvent momentumPhase],
   // -[NSEvent hasPreciseScrollingDeltas] and -[NSEvent scrollingDeltaX/Y] APIs
-  // that became availaible starting with the 10.7 SDK.
+  // that became available starting with the 10.7 SDK.
   // All of these can be removed once we drop support for 10.6.
   static NSEventPhase EventPhase(NSEvent* aEvent);
   static NSEventPhase EventMomentumPhase(NSEvent* aEvent);

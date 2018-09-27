@@ -21,7 +21,7 @@ function ATTAcomm(params) {
   'use strict';
 
   this.Params = null;       // parameters passed in
-  this.Promise = null;      // master Promise that resolves when intialization is complete
+  this.Promise = null;      // master Promise that resolves when initialization is complete
   this.Properties = null;   // testharness_properties from the opening window
   this.Tests = null;        // test object being processed
   this.testName = "";       // name of test being run

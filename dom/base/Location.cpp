@@ -42,7 +42,7 @@ namespace dom {
 Location::Location(nsPIDOMWindowInner* aWindow, nsIDocShell *aDocShell)
   : mInnerWindow(aWindow)
 {
-  // aDocShell can be null if it gets called after nsDocShell::Destory().
+  // aDocShell can be null if it gets called after nsDocShell::Destroy().
   mDocShell = do_GetWeakReference(aDocShell);
 }
 
@@ -142,7 +142,7 @@ Location::CheckURL(nsIURI* aURI, nsDocShellLoadInfo** aLoadInfo)
     }
     else {
       // No document; determine triggeringPrincipal by quering the
-      // subjectPrincipal, wich is the principal of the current JS
+      // subjectPrincipal, which is the principal of the current JS
       // compartment, or a null principal in case there is no
       // compartment yet.
       triggeringPrincipal = nsContentUtils::SubjectPrincipal();

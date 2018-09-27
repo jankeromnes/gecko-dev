@@ -641,7 +641,7 @@ public:
 
   /**
    * If true, this flag indicates that all mixed content subresource
-   * loads for this document (and also embeded browsing contexts) will
+   * loads for this document (and also embedded browsing contexts) will
    * be blocked.
    */
   bool GetBlockAllMixedContent(bool aPreload) const
@@ -1199,10 +1199,10 @@ public:
   /**
    * Set the parent document of this document.
    */
-  void SetParentDocument(nsIDocument* aParent)
+  void SetParentDocument(nsIDocument* apparent)
   {
-    mParentDocument = aParent;
-    if (aParent) {
+    mParentDocument = apparent;
+    if (apparent) {
       mIgnoreDocGroupMismatches = aParent->mIgnoreDocGroupMismatches;
     }
   }
@@ -1553,7 +1553,7 @@ public:
   /**
    * Replace the stylesheets in aOldSheets with the stylesheets in
    * aNewSheets. The two lists must have equal length, and the sheet
-   * at positon J in the first list will be replaced by the sheet at
+   * at position J in the first list will be replaced by the sheet at
    * position J in the second list.  Some sheets in the second list
    * may be null; if so the corresponding sheets in the first list
    * will simply be removed.

@@ -226,7 +226,7 @@ ParsingResultComparer::CompareAttrLists(const SdpAttributeList& rustAttrlist,
           typeStr += NS_LITERAL_STRING("_inequal");
           Telemetry::ScalarAdd(Telemetry::ScalarID::WEBRTC_SDP_PARSER_DIFF,
                                typeStr, 1);
-          LOGD(("%s is neither equal to sipcc nor to the orginal sdp\n"
+          LOGD(("%s is neither equal to sipcc nor to the orignal sdp\n"
                 "--------------rsdparsa attribute---------------\n"
                 "%s"
                 "--------------sipcc attribute---------------\n"

@@ -38,7 +38,7 @@ function run_test() {
 
   // Pattern doesn't mind objects with extra properties, so we'll restrict this
   // list to the object classes we're pretty sure are going to stick around for
-  // the forseeable future.
+  // the foreseeable future.
   Pattern({
     Function: { count: Pattern.NATURAL },
     Object: { count: Pattern.NATURAL },

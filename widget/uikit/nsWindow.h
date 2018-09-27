@@ -29,7 +29,7 @@ public:
     // nsIWidget
     //
 
-    virtual MOZ_MUST_USE nsresult Create(nsIWidget* aParent,
+    virtual MOZ_MUST_USE nsresult Create(nsIWidget* apparent,
                                          nsNativeWidget aNativeParent,
                                          const LayoutDeviceIntRect& aRect,
                                          nsWidgetInitData* aInitData = nullptr)

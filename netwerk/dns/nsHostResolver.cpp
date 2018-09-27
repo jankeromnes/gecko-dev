@@ -1660,7 +1660,7 @@ nsHostResolver::CompleteLookup(nsHostRecord* rec, nsresult status, AddrInfo* aNe
         if (NS_SUCCEEDED(status)) {
             rec->mTRRSuccess++;
             if (rec->mTRRSuccess == 1) {
-                // Store the duration on first succesful TRR response.  We
+                // Store the duration on first successful TRR response.  We
                 // don't know that there will be a second response nor can we
                 // tell which of two has useful data, especially in
                 // MODE_SHADOW where the actual results are discarded.

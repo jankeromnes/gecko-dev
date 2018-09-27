@@ -247,7 +247,7 @@
                   parent.appendChild(popup);
 
                   // longPressBehavior == 2 means that the menu is shown after X
-                  // millisecs. Otherwise, with 1, the menu is open immediatelly.
+                  // millisecs. Otherwise, with 1, the menu is open immediately.
                   if (longPressBehavior == 2) {
                     gClickAndHoldListenersOnElement.add(parent);
                   }
@@ -850,7 +850,7 @@
                 sourceNode.ownerGlobal.isChromeWindow &&
                 sourceNode.ownerDocument.documentElement.getAttribute("windowtype") == "navigator:browser" &&
                 sourceNode.ownerGlobal.gBrowser.tabContainer == sourceNode.parentNode) {
-              // Do not allow transfering a private tab to a non-private window
+              // Do not allow transferring a private tab to a non-private window
               // and vice versa.
               if (PrivateBrowsingUtils.isWindowPrivate(window) !=
                   PrivateBrowsingUtils.isWindowPrivate(sourceNode.ownerGlobal))

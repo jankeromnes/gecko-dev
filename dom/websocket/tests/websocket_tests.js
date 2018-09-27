@@ -850,7 +850,7 @@ function test37() {
       var wsb = CreateTestWS("ws://mochi.test:8888/tests/dom/websocket/tests/file_websocket", "test-37b");
 
       wsb.onopen = function(e) {
-        // now test that a rejected close code and reason dont persist
+        // now test that a rejected close code and reason don't persist
         ok(true, "test 37b open");
         try {
           wsb.close(3101,"0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123");
@@ -1065,7 +1065,7 @@ function test43() {
   });
 }
 
-// test44: Test sending/receving binary ArrayBuffer
+// test44: Test sending/receiving binary ArrayBuffer
 function test44() {
   return new Promise(function(resolve, reject) {
     var ws = CreateTestWS("ws://mochi.test:8888/tests/dom/websocket/tests/file_websocket", "test-44");
@@ -1098,7 +1098,7 @@ function test44() {
   });
 }
 
-// test45: Test sending/receving binary Blob
+// test45: Test sending/receiving binary Blob
 function test45() {
   return new Promise(function(resolve, reject) {
     function test45Real(blobFile) {

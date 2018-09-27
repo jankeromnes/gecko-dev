@@ -3676,7 +3676,7 @@ HTMLEditor::SelectEntireDocument(Selection* aSelection)
     // get editor root node
     Element* rootElement = GetRoot();
 
-    // if its empty dont select entire doc - that would select the bogus node
+    // if its empty don't select entire doc - that would select the bogus node
     return aSelection->Collapse(rootElement, 0);
   }
 
@@ -5152,7 +5152,7 @@ HTMLEditor::IsAcceptableInputEvent(WidgetGUIEvent* aGUIEvent)
       return false;
     }
     // If clicked on non-editable root element but the body element is the
-    // active editing host, we should assume that the click event is targetted.
+    // active editing host, we should assume that the click event is targeted.
     if (targetContent == document->GetRootElement() &&
         !targetContent->HasFlag(NODE_IS_EDITABLE) &&
         editingHost == document->GetBodyElement()) {

@@ -23,7 +23,7 @@ parent:
   async __delete__();
 
 child:
-  // The parent calls this method to signal that an error has ocurred.
+  // The parent calls this method to signal that an error has occurred.
   // This may mean that opening the output stream has failed or that writing to
   // the stream has returned an error.
   async Error(nsresult err);

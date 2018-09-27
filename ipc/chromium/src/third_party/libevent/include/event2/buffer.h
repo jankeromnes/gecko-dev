@@ -649,7 +649,7 @@ int evbuffer_add_file_segment(struct evbuffer *buf,
 /**
   Append a formatted string to the end of an evbuffer.
 
-  The string is formated as printf.
+  The string is formatted as printf.
 
   @param buf the evbuffer that will be appended to
   @param fmt a format string

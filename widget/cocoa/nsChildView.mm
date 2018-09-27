@@ -430,7 +430,7 @@ nsChildView::ReleaseTitlebarCGContext()
 }
 
 nsresult
-nsChildView::Create(nsIWidget* aParent,
+nsChildView::Create(nsIWidget* apparent,
                     nsNativeWidget aNativeParent,
                     const LayoutDeviceIntRect& aRect,
                     nsWidgetInitData* aInitData)
@@ -461,17 +461,17 @@ nsChildView::Create(nsIWidget* aParent,
   // Ensure that the toolkit is created.
   nsToolkit::GetToolkit();
 
-  BaseCreate(aParent, aInitData);
+  BaseCreate(apparent, aInitData);
 
   // inherit things from the parent view and create our parallel
   // NSView in the Cocoa display system
   mParentView = nil;
-  if (aParent) {
+  if (apparent) {
     // inherit the top-level window. NS_NATIVE_WIDGET is always a NSView
     // regardless of if we're asking a window or a view (for compatibility
     // with windows).
     mParentView = (NSView<mozView>*)aParent->GetNativeData(NS_NATIVE_WIDGET);
-    mParentWidget = aParent;
+    mParentWidget = apparent;
   } else {
     // This is the normal case. When we're the root widget of the view hiararchy,
     // aNativeParent will be the contentView of our window, since that's what

@@ -394,7 +394,7 @@ ScriptLoadHandler::OnStreamComplete(nsIIncrementalStreamLoader* aLoader,
       LOG(("ScriptLoadRequest (%p): Bytecode length = %u",
            mRequest.get(), unsigned(mRequest->mScriptBytecode.length())));
 
-      // If we abort while decoding the SRI, we fallback on explictly requesting
+      // If we abort while decoding the SRI, we fallback on explicitly requesting
       // the source. Thus, we should not continue in
       // ScriptLoader::OnStreamComplete, which removes the request from the
       // waiting lists.

@@ -105,8 +105,8 @@ class VRManagerPromise final
   friend class VRManager;
 
 public:
-  explicit VRManagerPromise(RefPtr<VRManagerParent> aParent, uint32_t aPromiseID)
-  : mParent(aParent), mPromiseID(aPromiseID)
+  explicit VRManagerPromise(RefPtr<VRManagerParent> apparent, uint32_t aPromiseID)
+  : mParent(apparent), mPromiseID(aPromiseID)
   {}
   ~VRManagerPromise() {
     mParent = nullptr;

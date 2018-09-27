@@ -600,7 +600,7 @@ keyTypeData:table(nofallback){
             armn{""}
             armnlow{""}
             bali{""}
-            beng{""}
+            being{""}
             bhks{""}
             brah{""}
             cakm{""}

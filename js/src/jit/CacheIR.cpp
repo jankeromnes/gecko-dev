@@ -737,7 +737,7 @@ GeneratePrototypeGuards(CacheIRWriter& writer, JSObject* obj, JSObject* holder, 
     // "holder". To optimize this access we need to ensure that neither D nor C
     // has since defined a shadowing property 'x'. Since C is a prototype that
     // we assume is rarely mutated we would like to avoid checking each time if
-    // new properties are added. To do this we require that everytime C is
+    // new properties are added. To do this we require that every time C is
     // mutated that in addition to generating a new shape for itself, it will
     // walk the proto chain and generate new shapes for those objects on the
     // chain (B and A). As a result, checking the shape of D and B is
@@ -5489,7 +5489,7 @@ CompareIRGenerator::tryAttachStub()
         }
     }
 
-    // This should preceed the Int32/Number cases to allow
+    // This should precede the Int32/Number cases to allow
     // them to not concern themselves with handling undefined
     // or null.
     if (tryAttachNumberUndefined(lhsId, rhsId)) {

@@ -13,15 +13,15 @@
 namespace mozilla {
 namespace dom {
 
-GamepadPose::GamepadPose(nsISupports* aParent, const GamepadPoseState& aState)
-  : Pose(aParent),
+GamepadPose::GamepadPose(nsISupports* apparent, const GamepadPoseState& aState)
+  : Pose(apparent),
     mPoseState(aState)
 {
   mozilla::HoldJSObjects(this);
 }
 
-GamepadPose::GamepadPose(nsISupports* aParent)
-  : Pose(aParent)
+GamepadPose::GamepadPose(nsISupports* apparent)
+  : Pose(apparent)
 {
   mozilla::HoldJSObjects(this);
   mPoseState.Clear();

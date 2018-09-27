@@ -738,11 +738,11 @@ nsNavBookmarks::RemoveItem(int64_t aItemId, uint16_t aSource)
 
 
 NS_IMETHODIMP
-nsNavBookmarks::CreateFolder(int64_t aParent, const nsACString& aTitle,
+nsNavBookmarks::CreateFolder(int64_t apparent, const nsACString& aTitle,
                              int32_t aIndex, const nsACString& aGUID,
                              uint16_t aSource, int64_t* aNewFolderId)
 {
-  // NOTE: aParent can be null for root creation, so not checked
+  // NOTE: apparent can be null for root creation, so not checked
   NS_ENSURE_ARG_POINTER(aNewFolderId);
   NS_ENSURE_ARG_MIN(aIndex, nsINavBookmarksService::DEFAULT_INDEX);
   if (!aGUID.IsEmpty() && !IsValidGUID(aGUID))
@@ -752,7 +752,7 @@ nsNavBookmarks::CreateFolder(int64_t aParent, const nsACString& aTitle,
   int32_t index = aIndex, folderCount;
   int64_t grandParentId;
   nsAutoCString folderGuid;
-  nsresult rv = FetchFolderInfo(aParent, &folderCount, folderGuid, &grandParentId);
+  nsresult rv = FetchFolderInfo(apparent, &folderCount, folderGuid, &grandParentId);
   NS_ENSURE_SUCCESS(rv, rv);
 
   mozStorageTransaction transaction(mDB->MainConn(), false);
@@ -761,7 +761,7 @@ nsNavBookmarks::CreateFolder(int64_t aParent, const nsACString& aTitle,
     index = folderCount;
   } else {
     // Create space for the insertion.
-    rv = AdjustIndices(aParent, index, INT32_MAX, 1);
+    rv = AdjustIndices(apparent, index, INT32_MAX, 1);
     NS_ENSURE_SUCCESS(rv, rv);
   }
 
@@ -771,7 +771,7 @@ nsNavBookmarks::CreateFolder(int64_t aParent, const nsACString& aTitle,
   nsCString title;
   TruncateTitle(aTitle, title);
 
-  rv = InsertBookmarkInDB(-1, FOLDER, aParent, index,
+  rv = InsertBookmarkInDB(-1, FOLDER, apparent, index,
                           title, dateAdded, 0, folderGuid, grandParentId,
                           nullptr, aSource, aNewFolderId, guid);
   NS_ENSURE_SUCCESS(rv, rv);
@@ -782,8 +782,8 @@ nsNavBookmarks::CreateFolder(int64_t aParent, const nsACString& aTitle,
   int64_t tagsRootId = TagsRootId();
 
   NOTIFY_BOOKMARKS_OBSERVERS(mCanNotify, mObservers,
-                             SKIP_TAGS(aParent == tagsRootId),
-                             OnItemAdded(*aNewFolderId, aParent, index, FOLDER,
+                             SKIP_TAGS(apparent == tagsRootId),
+                             OnItemAdded(*aNewFolderId, apparent, index, FOLDER,
                                          nullptr, title, dateAdded, guid,
                                          folderGuid, aSource));
 

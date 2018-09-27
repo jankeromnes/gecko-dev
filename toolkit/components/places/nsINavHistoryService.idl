@@ -313,7 +313,7 @@ interface nsINavHistoryResultObserver : nsISupports
    * The item previously at index (if any) and everything below it will have
    * been shifted down by one. The item may be a container or a leaf.
    */
-  void nodeInserted(in nsINavHistoryContainerResultNode aParent,
+  void nodeInserted(in nsINavHistoryContainerResultNode apparent,
                     in nsINavHistoryResultNode aNode,
                     in unsigned long aNewIndex);
 
@@ -323,7 +323,7 @@ interface nsINavHistoryResultObserver : nsISupports
    * has been removed from its parent list, but before anything else (including
    * NULLing out the item's parent) has happened.
    */
-  void nodeRemoved(in nsINavHistoryContainerResultNode aParent,
+  void nodeRemoved(in nsINavHistoryContainerResultNode apparent,
                    in nsINavHistoryResultNode aItem,
                    in unsigned long aOldIndex);
 

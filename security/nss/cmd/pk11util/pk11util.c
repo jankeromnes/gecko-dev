@@ -1543,7 +1543,7 @@ quitIf(CK_ULONG a, const char *cmp, CK_ULONG b)
     } else if (strcmp(cmp, "!=") == 0) {
         return (a != b) ? CKR_QUIT : CKR_OK;
     }
-    printf("Unkown integer comparator: '%s'\n", cmp);
+    printf("Unknown integer comparator: '%s'\n", cmp);
     return CKR_ARGUMENTS_BAD;
 }
 
@@ -1556,7 +1556,7 @@ quitIfString(const char *a, const char *cmp, const char *b)
     } else if (strcmp(cmp, "!=") == 0) {
         return (strcmp(a, b) != 0) ? CKR_QUIT : CKR_OK;
     }
-    printf("Unkown string comparator: '%s'\n", cmp);
+    printf("Unknown string comparator: '%s'\n", cmp);
     return CKR_ARGUMENTS_BAD;
 }
 

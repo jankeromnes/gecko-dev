@@ -197,7 +197,7 @@
 //      [logger setWriter:writers];
 //      [logger logInfo:@"hi"];  // Output goes to stdout and /tmp/f.log
 //
-// For futher details on log writers, formatters, and filters, see the
+// For further details on log writers, formatters, and filters, see the
 // documentation below.
 //
 // NOTE: GTMLogger is application level logging.  By default it does nothing

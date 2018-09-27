@@ -391,7 +391,7 @@ import java.util.concurrent.atomic.AtomicInteger;
     } else if (lastPathSegment.endsWith(MP3_FILE_EXTENSION)) {
       extractor = new Mp3Extractor(0, startTimeUs);
     } else {
-      throw new IllegalArgumentException("Unkown extension for audio file: " + lastPathSegment);
+      throw new IllegalArgumentException("Unknown extension for audio file: " + lastPathSegment);
     }
     extractor.init(extractorOutput);
     return extractor;

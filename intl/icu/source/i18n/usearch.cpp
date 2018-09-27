@@ -1560,7 +1560,7 @@ inline void cleanUpSafeText(const UStringSearch *strsrch, UChar *safetext,
 
 /**
 * Take the rearranged end accents and tries matching. If match failed at
-* a seperate preceding set of accents (seperated from the rearranged on by
+* a separate preceding set of accents (separated from the rearranged on by
 * at least a base character) then we rearrange the preceding accents and
 * tries matching again.
 * We allow skipping of the ends of the accent set if the ces do not match.
@@ -2220,7 +2220,7 @@ int32_t doPreviousCanonicalSuffixMatch(UStringSearch *strsrch,
 
 /**
 * Take the rearranged start accents and tries matching. If match failed at
-* a seperate following set of accents (seperated from the rearranged on by
+* a separate following set of accents (separated from the rearranged on by
 * at least a base character) then we rearrange the preceding accents and
 * tries matching again.
 * We allow skipping of the ends of the accent set if the ces do not match.
@@ -3107,7 +3107,7 @@ usearch_getPattern(const UStringSearch *strsrch,
     return NULL;
 }
 
-// miscellanous methods --------------------------------------------------
+// miscellaneous methods --------------------------------------------------
 
 U_CAPI int32_t U_EXPORT2 usearch_first(UStringSearch *strsrch,
                                            UErrorCode    *status)
@@ -3262,7 +3262,7 @@ U_CAPI int32_t U_EXPORT2 usearch_next(UStringSearch *strsrch,
                 }
                 else {
                     // for boundary check purposes. this will ensure that the
-                    // next match will not preceed the current offset
+                    // next match will not precede the current offset
                     // note search->matchedIndex will always be set to something
                     // in the code
                     search->matchedIndex = offset - 1;
@@ -3856,7 +3856,7 @@ U_CAPI UBool U_EXPORT2 usearch_search(UStringSearch  *strsrch,
 
 #endif
     // Input parameter sanity check.
-    //  TODO:  should input indicies clip to the text length
+    //  TODO:  should input indices clip to the text length
     //         in the same way that UText does.
     if(strsrch->pattern.cesLength == 0         ||
        startIdx < 0                           ||
@@ -4156,7 +4156,7 @@ U_CAPI UBool U_EXPORT2 usearch_searchBackwards(UStringSearch  *strsrch,
 
 #endif
     // Input parameter sanity check.
-    //  TODO:  should input indicies clip to the text length
+    //  TODO:  should input indices clip to the text length
     //         in the same way that UText does.
     if(strsrch->pattern.cesLength == 0         ||
        startIdx < 0                           ||

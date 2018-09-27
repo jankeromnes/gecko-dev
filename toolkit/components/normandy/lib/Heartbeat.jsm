@@ -248,7 +248,7 @@ var Heartbeat = class {
 
   maybeNotifyHeartbeat(name, data = {}) {
     if (this.pingSent) {
-      log.warn("Heartbeat event recieved after Telemetry ping sent. name:", name, "data:", data);
+      log.warn("Heartbeat event received after Telemetry ping sent. name:", name, "data:", data);
       return;
     }
 

@@ -168,7 +168,7 @@ static BackgroundHangMonitor* sMainHangMonitor;
 
 // Registry Factory creation function defined in nsRegistry.cpp
 // We hook into this function locally to create and register the registry
-// Since noone outside xpcom needs to know about this and nsRegistry.cpp
+// Since no one outside xpcom needs to know about this and nsRegistry.cpp
 // does not have a local include file, we are putting this definition
 // here rather than in nsIRegistry.h
 extern nsresult NS_RegistryGetFactory(nsIFactory** aFactory);

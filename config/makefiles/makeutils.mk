@@ -30,7 +30,7 @@ getargv = $(if $(call isvar,$(1)),$($(1)),$(argv))
 
 ###########################################################################
 # Strip [n] leading options from an argument list.  This will allow passing
-# extra args to user functions that will not propogate to sub-$(call )'s
+# extra args to user functions that will not propagate to sub-$(call )'s
 # Usage: $(call subargv,2)
 subargv =$(wordlist $(1),$(words $(getargv)),$(getargv))
 

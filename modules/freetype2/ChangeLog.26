@@ -451,7 +451,7 @@
 	* src/autofit/afranges.c: Remove `UL' postfix from hex numbers.
 
 	Suggested by Alexei.  `UL' is only needed for 16bit compilers, but
-	it seems noone is using this anymore (and we no longer test whether
+	it seems no one is using this anymore (and we no longer test whether
 	FreeType compiles in such an environment).  Otherwise, it is easy to
 	add the postfix to the `AF_UNICODE_RANGE' macro.
 
@@ -3645,7 +3645,7 @@
 	glyph indices differed between the Type 42 font and the embedded
 	TTF.
 
-	Apparently, noone ever noticed it; this shows how much Type 42 fonts
+	Apparently, no one ever noticed it; this shows how much Type 42 fonts
 	are in use...
 
 	* src/type42/t42objs.c (T42_GlyphSlot_Load): Map Type 42 glyph index
@@ -4253,7 +4253,7 @@
 	unsigned.  I trust `ttx' (which has exactly such code) that it does
 	the right thing here...
 
-	The reason that noone has ever noticed this bug is probably the fact
+	The reason that no one has ever noticed this bug is probably the fact
 	that point-aligned subglyphs are rare, as are subglyphs with a
 	number of points in the range [128;255], which is quite large (or
 	even in the range [32768;65535], which is extremely unlikely).

@@ -21,9 +21,9 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(SpeechRecognitionAlternative)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-SpeechRecognitionAlternative::SpeechRecognitionAlternative(SpeechRecognition* aParent)
+SpeechRecognitionAlternative::SpeechRecognitionAlternative(SpeechRecognition* apparent)
   : mConfidence(0)
-  , mParent(aParent)
+  , mParent(apparent)
 {
 }
 

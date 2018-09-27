@@ -21,7 +21,7 @@ public:
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(CredentialsContainer)
 
-  explicit CredentialsContainer(nsPIDOMWindowInner* aParent);
+  explicit CredentialsContainer(nsPIDOMWindowInner* apparent);
 
   nsPIDOMWindowInner*
   GetParentObject() const

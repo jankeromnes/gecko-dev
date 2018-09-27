@@ -88,7 +88,7 @@ typedef Scoped<ScopedCloseFileTraits> ScopedCloseFile;
 /**
  * Fallocate efficiently and continuously allocates files via fallocate-type APIs.
  * This is useful for avoiding fragmentation.
- * On sucess the file be padded with zeros to grow to aLength.
+ * On success the file be padded with zeros to grow to aLength.
  *
  * @param aFD file descriptor.
  * @param aLength length of file to grow to.

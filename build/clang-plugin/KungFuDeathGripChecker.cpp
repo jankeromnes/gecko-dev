@@ -36,7 +36,7 @@ void KungFuDeathGripChecker::check(const MatchFinder::MatchResult &Result) {
   }
 
   // We don't want to look at the single argument conversion constructors
-  // which are inbetween the declaration and the actual object which we are
+  // which are between the declaration and the actual object which we are
   // assigning into the nsCOMPtr/RefPtr. To do this, we repeatedly
   // IgnoreTrivials, then look at the expression. If it is one of these
   // conversion constructors, we ignore it and continue to dig.

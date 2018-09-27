@@ -51,7 +51,7 @@ runWithMSE(async (ms, v) => {
     is(sb.updating, false, "SourceBuffer.updating is expected value in update event");
     updateCount++;
     /* Ensure that we endOfStream on the first update event only as endOfStream can
-       raise more if the duration of the last buffered range and the intial duration
+       raise more if the duration of the last buffered range and the initial duration
        differ. See bug 1065207 */
     if (updateCount == 1) {
       ms.endOfStream();

@@ -167,7 +167,7 @@ var MasterPassword = {
       Services.obs.addObserver(observer, "passwordmgr-crypto-loginCanceled");
 
       // Focus and draw attention to the existing master password dialog for the
-      // occassions where it's not attached to the current window.
+      // occasions where it's not attached to the current window.
       let promptWin = Services.wm.getMostRecentWindow("prompt:promptPassword");
       promptWin.focus();
       promptWin.getAttention();

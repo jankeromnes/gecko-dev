@@ -537,7 +537,7 @@ struct DIGroup
           // currently have a good way of checking if the transform has changed
           // so we just store it and see if it see if it has changed.
           // If we want this to go faster, we can probably put a flag on the frame
-          // using the style sytem UpdateTransformLayer hint and check for that.
+          // using the style system UpdateTransformLayer hint and check for that.
 
           UniquePtr<nsDisplayItemGeometry> geometry(aItem->AllocateGeometry(aBuilder));
           if (!IsContainerLayerItem(aItem)) {
@@ -771,7 +771,7 @@ struct DIGroup
         // Hit test items don't have anything to paint so skip them. Ideally we
         // would drop these items earlier...
         if (dirty && item->GetType() != DisplayItemType::TYPE_COMPOSITOR_HITTEST_INFO) {
-          // What should the clip settting strategy be? We can set the full clip everytime.
+          // What should the clip settting strategy be? We can set the full clip every time.
           // this is probably easiest for now. An alternative would be to put the push and the pop
           // into separate items and let invalidation handle it that way.
           DisplayItemClip currentClip = item->GetClip();

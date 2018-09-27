@@ -547,7 +547,7 @@ int WebRtcIsac_Encode(ISACStruct* ISAC_main_inst,
   /* This function will update the bottleneck if required. */
   UpdateBottleneck(instISAC);
 
-  /* Get the bandwith information which has to be sent to the other side. */
+  /* Get the bandwidth information which has to be sent to the other side. */
   GetSendBandwidthInfo(instISAC, &bottleneckIdx, &jitterInfo);
 
   /* Encode lower-band. */
@@ -688,7 +688,7 @@ int WebRtcIsac_Encode(ISACStruct* ISAC_main_inst,
       memset(ptrGarbage, 0, garbageLen);
 
       /* For a correct length of the upper-band bit-stream together
-       * with the garbage. Garbage is embeded in upper-band bit-stream.
+       * with the garbage. Garbage is embedded in upper-band bit-stream.
        * That is the only way to preserve backward compatibility. */
       if ((instISAC->bandwidthKHz == isac8kHz) ||
           (streamLenUB == 0)) {
@@ -732,7 +732,7 @@ int WebRtcIsac_Encode(ISACStruct* ISAC_main_inst,
 /******************************************************************************
  * WebRtcIsac_GetNewBitStream(...)
  *
- * This function returns encoded data, with the recieved bwe-index in the
+ * This function returns encoded data, with the received bwe-index in the
  * stream. If the rate is set to a value less than bottleneck of codec
  * the new bistream will be re-encoded with the given target rate.
  * It should always return a complete packet, i.e. only called once
@@ -1484,7 +1484,7 @@ int16_t WebRtcIsac_Control(ISACStruct* ISAC_main_inst,
   }
 
   if (instISAC->encoderSamplingRateKHz == kIsacWideband) {
-    /* If the sampling rate is 16kHz then bandwith should be 8kHz,
+    /* If the sampling rate is 16kHz then bandwidth should be 8kHz,
      * regardless of bottleneck. */
     bandwidthKHz = isac8kHz;
     rateLB = (bottleneckBPS > 32000) ? 32000 : bottleneckBPS;
@@ -1609,7 +1609,7 @@ int16_t WebRtcIsac_ControlBwe(ISACStruct* ISAC_main_inst,
     instISAC->instLB.ISACencLB_obj.enforceFrameSize = 0;
   }
 
-  /* Set the initial rate. If the input value is zero then the default intial
+  /* Set the initial rate. If the input value is zero then the default initial
    * rate is used. Otehrwise, values between 10 to 32 kbps are accepted. */
   if (bottleneckBPS != 0) {
     double rateLB;
@@ -1822,7 +1822,7 @@ int16_t WebRtcIsac_ReadFrameLen(ISACStruct* ISAC_main_inst,
  * Input:
  *        - ISAC_main_inst     : iSAC struct
  *
- * Return Value                : frame lenght in samples
+ * Return Value                : frame length in samples
  *
  */
 int16_t WebRtcIsac_GetNewFrameLen(ISACStruct* ISAC_main_inst) {

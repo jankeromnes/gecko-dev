@@ -22,8 +22,8 @@ class PaintRequest final : public nsISupports
                          , public nsWrapperCache
 {
 public:
-  explicit PaintRequest(Event* aParent)
-    : mParent(aParent)
+  explicit PaintRequest(Event* apparent)
+    : mParent(apparent)
   {
   }
 
@@ -57,7 +57,7 @@ class PaintRequestList final : public nsISupports,
                                public nsWrapperCache
 {
 public:
-  explicit PaintRequestList(Event *aParent) : mParent(aParent)
+  explicit PaintRequestList(Event *apparent) : mParent(apparent)
   {
   }
 

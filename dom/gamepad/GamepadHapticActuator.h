@@ -20,7 +20,7 @@ class GamepadHapticActuator : public nsISupports,
                               public nsWrapperCache
 {
 public:
-  GamepadHapticActuator(nsISupports* aParent, uint32_t aGamepadId,
+  GamepadHapticActuator(nsISupports* apparent, uint32_t aGamepadId,
                         uint32_t aIndex);
 
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS

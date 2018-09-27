@@ -85,11 +85,11 @@ public:
      * type can contain a tag of another type.
      *
      * @update  gess 3/25/98
-     * @param   aParent -- int tag of parent container
+     * @param   apparent -- int tag of parent container
      * @param   aChild -- int tag of child container
      * @return true if parent can contain child
      */
-    NS_IMETHOD_(bool) CanContain(int32_t aParent,int32_t aChild) const = 0;
+    NS_IMETHOD_(bool) CanContain(int32_t apparent,int32_t aChild) const = 0;
 
     /**
      * This method gets called to determine whether a given
@@ -128,7 +128,7 @@ NS_DEFINE_STATIC_IID_ACCESSOR(nsIDTD, NS_IDTD_IID)
     NS_IMETHOD WillBuildModel(  const CParserContext& aParserContext, nsITokenizer* aTokenizer, nsIContentSink* aSink) override;\
     NS_IMETHOD DidBuildModel(nsresult anErrorCode) override;\
     NS_IMETHOD BuildModel(nsITokenizer* aTokenizer, nsIContentSink* aSink) override;\
-    NS_IMETHOD_(bool) CanContain(int32_t aParent,int32_t aChild) const override;\
+    NS_IMETHOD_(bool) CanContain(int32_t apparent,int32_t aChild) const override;\
     NS_IMETHOD_(bool) IsContainer(int32_t aTag) const override;\
     NS_IMETHOD_(void)  Terminate() override;\
     NS_IMETHOD_(int32_t) GetType() override;\

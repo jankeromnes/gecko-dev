@@ -384,12 +384,12 @@ interface nsIEditor  : nsISupports
   void cloneAttributes(in Element aDestElement, in Element aSourceElement);
 
   /**
-   * insertNode inserts aNode into aParent at aPosition.
+   * insertNode inserts aNode into apparent at aPosition.
    * No checking is done to verify the legality of the insertion.
    * That is the responsibility of the caller.
    * @param aNode     The DOM Node to insert.
-   * @param aParent   The node to insert the new object into
-   * @param aPosition The place in aParent to insert the new node
+   * @param apparent   The node to insert the new object into
+   * @param aPosition The place in apparent to insert the new node
    *                  0=first child, 1=second child, etc.
    *                  any number > number of current children = last child
    */
@@ -416,7 +416,7 @@ interface nsIEditor  : nsISupports
    * joinNodes() takes 2 nodes and merge their content|children.
    * @param aLeftNode     The left node.  It will be deleted.
    * @param aRightNode    The right node. It will remain after the join.
-   * @param aParent       The parent of aExistingRightNode
+   * @param apparent       The parent of aExistingRightNode
    *
    *                      There is no requirement that the two nodes be
    *                      of the same type.  However, a text node can be
@@ -427,7 +427,7 @@ interface nsIEditor  : nsISupports
                  in Node parent);
 
   /**
-   * deleteNode removes aChild from aParent.
+   * deleteNode removes aChild from apparent.
    * @param aChild    The node to delete
    */
   void deleteNode(in Node child);

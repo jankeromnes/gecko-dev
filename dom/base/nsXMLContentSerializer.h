@@ -370,7 +370,7 @@ class nsXMLContentSerializer : public nsIContentSerializer {
   MOZ_INIT_OUTSIDE_CTOR bool mDoFormat;
 
   // true = no formatting,(OutputRaw flag)
-  // no newline convertion and no rewrap long lines even if OutputWrap is set.
+  // no newline conversion and no rewrap long lines even if OutputWrap is set.
   MOZ_INIT_OUTSIDE_CTOR bool mDoRaw;
 
   // true = wrapping should be done (OutputWrap flag)
@@ -407,7 +407,7 @@ class nsXMLContentSerializer : public nsIContentSerializer {
   bool          mAddSpace;
 
   // says that if the next string to add contains a newline character at the
-  // begining, then this newline character should be ignored, because a
+  // beginning, then this newline character should be ignored, because a
   // such character has already been added into the output string
   bool          mMayIgnoreLineBreakSequence;
 

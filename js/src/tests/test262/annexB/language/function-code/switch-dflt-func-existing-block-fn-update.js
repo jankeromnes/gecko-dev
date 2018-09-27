@@ -2,7 +2,7 @@
 // - src/annex-b-fns/func-existing-block-fn-update.case
 // - src/annex-b-fns/func/switch-dflt.template
 /*---
-description: Variable-scoped binding is updated (Funtion declaration in the `default` clause of a `switch` statement in function scope)
+description: Variable-scoped binding is updated (Function declaration in the `default` clause of a `switch` statement in function scope)
 esid: sec-web-compat-functiondeclarationinstantiation
 es6id: B.3.3.1
 flags: [generated, noStrict]

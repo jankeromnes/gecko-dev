@@ -634,7 +634,7 @@ bool tokenize_first(const std::string& source,
     return false;
   }
 
-  // Look for additional occurrances of delimiter.
+  // Look for additional occurrences of delimiter.
   size_t right_pos = left_pos + 1;
   while (source[right_pos] == delimiter) {
     right_pos++;

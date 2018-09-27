@@ -141,7 +141,7 @@ public interface MediaPeriod extends SequenceableLoader {
    * This method should only be called when at least one track is selected.
    *
    * @param positionUs The seek position in microseconds.
-   * @return The actual position to which the period was seeked, in microseconds.
+   * @return The actual position to which the period was sought, in microseconds.
    */
   long seekToUs(long positionUs);
 

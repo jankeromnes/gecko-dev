@@ -142,7 +142,7 @@ class ServerPlayback:
         # find the best match between the request and the available flow candidates
         match = -1
         flow = None
-        ctx.log.debug("Candiate flows for request: {}".format(request.url))
+        ctx.log.debug("Candidate flows for request: {}".format(request.url))
         for candidate_flow in flows:
             candidate_match = self._match(candidate_flow.request, request)
             ctx.log.debug("  score={} url={}".format(candidate_match, candidate_flow.request.url))

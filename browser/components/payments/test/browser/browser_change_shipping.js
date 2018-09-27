@@ -338,7 +338,7 @@ add_task(async function test_address_edit() {
     selectedIndex = addressOptions.selectedOptionIndex;
     let newSelectedAddressGuid = addressOptions.options[selectedIndex].guid;
 
-    is(newSelectedAddressGuid, selectedAddressGuid, "Selected guid hasnt changed");
+    is(newSelectedAddressGuid, selectedAddressGuid, "Selected guid hasn't changed");
     selectedAddress = await formAutofillStorage.addresses.get(selectedAddressGuid);
 
     is(selectedIndex, 0, "First address should be selected");

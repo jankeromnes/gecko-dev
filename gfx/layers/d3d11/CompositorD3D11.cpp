@@ -48,8 +48,8 @@ bool CanUsePartialPresents(ID3D11Device* aDevice);
 
 const FLOAT sBlendFactor[] = { 0, 0, 0, 0 };
 
-CompositorD3D11::CompositorD3D11(CompositorBridgeParent* aParent, widget::CompositorWidget* aWidget)
-  : Compositor(aWidget, aParent)
+CompositorD3D11::CompositorD3D11(CompositorBridgeParent* apparent, widget::CompositorWidget* aWidget)
+  : Compositor(aWidget, apparent)
   , mAttachments(nullptr)
   , mHwnd(nullptr)
   , mDisableSequenceForNextFrame(false)
@@ -958,7 +958,7 @@ CompositorD3D11::BeginFrame(const nsIntRegion& aInvalidRegion,
                             IntRect* aClipRectOut,
                             IntRect* aRenderBoundsOut)
 {
-  // Don't composite if we are minimised. Other than for the sake of efficency,
+  // Don't composite if we are minimised. Other than for the sake of efficiency,
   // this is important because resizing our buffers when mimised will fail and
   // cause a crash when we're restored.
   NS_ASSERTION(mHwnd, "Couldn't find an HWND when initialising?");

@@ -1294,8 +1294,8 @@ private:
    * while holding the lock in the associated APZCTreeManager instance.
    */
 public:
-  void SetParent(AsyncPanZoomController* aParent) {
-    mParent = aParent;
+  void SetParent(AsyncPanZoomController* apparent) {
+    mParent = apparent;
   }
 
   AsyncPanZoomController* GetParent() const {

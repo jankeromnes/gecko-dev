@@ -1107,7 +1107,7 @@ exports.Library = Library;
 var declareFFI = function declareFFI(lib, symbol, abi,
                                      returnType /* , argTypes ...*/) {
   LOG("Attempting to declare FFI ", symbol);
-  // We guard agressively, to avoid any late surprise
+  // We guard aggressively, to avoid any late surprise
   if (typeof symbol != "string") {
     throw new TypeError("declareFFI expects as first argument a string");
   }

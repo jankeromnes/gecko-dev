@@ -33,11 +33,11 @@ public:
   // Constructor for intermediate surfaces.
   RenderViewMLGPU(FrameBuilder* aBuilder,
                   ContainerLayerMLGPU* aContainer,
-                  RenderViewMLGPU* aParent);
+                  RenderViewMLGPU* apparent);
 
   void Prepare();
   void Render();
-  void AddChild(RenderViewMLGPU* aParent);
+  void AddChild(RenderViewMLGPU* apparent);
   void AddItem(LayerMLGPU* aItem,
                const gfx::IntRect& aBounds,
                Maybe<gfx::Polygon>&& aGeometry);
@@ -69,7 +69,7 @@ public:
   }
 
 private:
-  RenderViewMLGPU(FrameBuilder* aBuilder, RenderViewMLGPU* aParent);
+  RenderViewMLGPU(FrameBuilder* aBuilder, RenderViewMLGPU* apparent);
   ~RenderViewMLGPU();
 
   void ExecuteRendering();

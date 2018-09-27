@@ -40,9 +40,9 @@ function seekStarted() {
 function seekEnded() {
   if (completed)
     return;
-  //is(v.currentTime, v.duration, "seeked: currentTime must be duration");
+  //is(v.currentTime, v.duration, "sought: currentTime must be duration");
   ok(Math.abs(v.currentTime - v.duration) < 0.01,
-     "seeked: currentTime (" + v.currentTime + ") must be duration (" + v.duration + ")");
+     "sought: currentTime (" + v.currentTime + ") must be duration (" + v.duration + ")");
   is(v.seeking, false, "seeking flag on end should be false");
 }
 
@@ -60,7 +60,7 @@ function playbackEnded() {
 
 v.addEventListener("loadedmetadata", startTest);
 v.addEventListener("seeking", seekStarted);
-v.addEventListener("seeked", seekEnded);
+v.addEventListener("sought", seekEnded);
 v.addEventListener("ended", playbackEnded);
 }
 

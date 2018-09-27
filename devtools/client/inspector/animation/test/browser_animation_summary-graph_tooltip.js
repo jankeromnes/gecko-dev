@@ -3,7 +3,7 @@
 
 "use strict";
 
-// Test for existance and content of tooltip on summary graph element.
+// Test for existence and content of tooltip on summary graph element.
 
 const TEST_DATA = [
   {

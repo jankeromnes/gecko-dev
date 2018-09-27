@@ -67,11 +67,11 @@ struct DisplayItemClipChain
 
   DisplayItemClipChain(const DisplayItemClip& aClip,
                        const ActiveScrolledRoot* aASR,
-                       const DisplayItemClipChain* aParent,
+                       const DisplayItemClipChain* apparent,
                        DisplayItemClipChain* aNextClipChainToDestroy)
     : mClip(aClip)
     , mASR(aASR)
-    , mParent(aParent)
+    , mParent(apparent)
     , mNextClipChainToDestroy(aNextClipChainToDestroy)
 #ifdef DEBUG
     , mOnStack(true)

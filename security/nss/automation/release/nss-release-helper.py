@@ -268,12 +268,12 @@ elif action in ('set_version_to_patch_release'):
     set_version_to_patch_release()
 
 # change the release candidate number, usually increased by one,
-# usually if previous release candiate had a bug
+# usually if previous release candidate had a bug
 # 1 parameter
 elif action in ('set_release_candidate_number'):
     set_release_candidate_number()
 
-# use the build/release candiate number in the identifying version number
+# use the build/release candidate number in the identifying version number
 # 4 parameters
 elif action in ('set_4_digit_release_number'):
     set_4_digit_release_number()

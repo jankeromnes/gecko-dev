@@ -160,8 +160,8 @@ class nsWebBrowserPersist::OnWalk final
     : public nsIWebBrowserPersistResourceVisitor
 {
 public:
-    OnWalk(nsWebBrowserPersist* aParent, nsIURI* aFile, nsIFile* aDataPath)
-    : mParent(aParent)
+    OnWalk(nsWebBrowserPersist* apparent, nsIURI* aFile, nsIFile* aDataPath)
+    : mParent(apparent)
     , mFile(aFile)
     , mDataPath(aDataPath)
     { }
@@ -183,10 +183,10 @@ class nsWebBrowserPersist::OnWrite final
     : public nsIWebBrowserPersistWriteCompletion
 {
 public:
-    OnWrite(nsWebBrowserPersist* aParent,
+    OnWrite(nsWebBrowserPersist* apparent,
             nsIURI* aFile,
             nsIFile* aLocalFile)
-    : mParent(aParent)
+    : mParent(apparent)
     , mFile(aFile)
     , mLocalFile(aLocalFile)
     { }

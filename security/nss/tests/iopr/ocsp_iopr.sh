@@ -20,7 +20,7 @@
 IOPR_OCSP_SOURCED=1
 
 ########################################################################
-# The funtion works with variables defined in interoperability 
+# The function works with variables defined in interoperability 
 # configuration file that gets downloaded from a webserver.
 # The function sets test parameters defind for a particular type
 # of testing.
@@ -40,7 +40,7 @@ setTestParam() {
 }
 
 ########################################################################
-# The funtion checks status of a cert using ocspclnt.
+# The function checks status of a cert using ocspclnt.
 # Params:
 #    dbDir - nss cert db location
 #    cert - cert in question
@@ -82,7 +82,7 @@ ocsp_get_cert_status() {
 }
 
 ########################################################################
-# The funtion checks status of a cert using ocspclnt.
+# The function checks status of a cert using ocspclnt.
 # Params:
 #    testType - type of the test based on type of used responder
 #    servName - FQDM of the responder server

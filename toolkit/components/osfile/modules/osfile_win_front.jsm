@@ -1028,7 +1028,7 @@
       * numeric, milliseconds since epoch. If omitted or null, then the current
       * date will be used.
       *
-      * @throws {TypeError} In case of invalid paramters.
+      * @throws {TypeError} In case of invalid parameters.
       * @throws {OS.File.Error} In case of I/O error.
       */
      File.setDates = function setDates(path, accessDate, modificationDate) {

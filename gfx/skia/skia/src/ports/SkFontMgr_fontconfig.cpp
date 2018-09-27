@@ -817,7 +817,7 @@ protected:
         FcConfigSubstitute(fFC, pattern, FcMatchPattern);
         FcDefaultSubstitute(pattern);
 
-        // We really want to match strong (prefered) and same (acceptable) only here.
+        // We really want to match strong (preferred) and same (acceptable) only here.
         // If a family name was specified, assume that any weak matches after the last strong match
         // are weak (default) and ignore them.
         // The reason for is that after substitution the pattern for 'sans-serif' looks like

@@ -55,7 +55,7 @@ public:
   nsMenuObjectTypeX MenuObjectType() override {return eMenuItemObjectType;}
 
   // nsMenuItemX
-  nsresult      Create(nsMenuX* aParent, const nsString& aLabel, EMenuItemType aItemType,
+  nsresult      Create(nsMenuX* apparent, const nsString& aLabel, EMenuItemType aItemType,
                        nsMenuGroupOwnerX* aMenuGroupOwner, nsIContent* aNode);
   nsresult      SetChecked(bool aIsChecked);
   EMenuItemType GetMenuItemType();

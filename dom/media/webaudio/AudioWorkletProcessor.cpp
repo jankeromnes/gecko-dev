@@ -19,8 +19,8 @@ NS_IMPL_CYCLE_COLLECTION_WRAPPERCACHE(AudioWorkletProcessor, mParent)
 NS_IMPL_CYCLE_COLLECTION_ROOT_NATIVE(AudioWorkletProcessor, AddRef)
 NS_IMPL_CYCLE_COLLECTION_UNROOT_NATIVE(AudioWorkletProcessor, Release)
 
-AudioWorkletProcessor::AudioWorkletProcessor(nsIGlobalObject* aParent)
-  : mParent(aParent)
+AudioWorkletProcessor::AudioWorkletProcessor(nsIGlobalObject* apparent)
+  : mParent(apparent)
 {
 }
 

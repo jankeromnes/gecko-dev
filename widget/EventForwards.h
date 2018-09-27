@@ -13,7 +13,7 @@
 
 /**
  * XXX Following enums should be in BasicEvents.h.  However, currently, it's
- *     impossible to use foward delearation for enum.
+ *     impossible to use forward delearation for enum.
  */
 
 /**

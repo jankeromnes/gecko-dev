@@ -50,7 +50,7 @@ static inline int floor_div(int a, int b)
   if (rem == 0) {
     return div;
   } else {
-    // If the signs are different substract 1.
+    // If the signs are different subtract 1.
     int sub;
     sub = a ^ b;
     // The results of this shift is either 0 or -1.

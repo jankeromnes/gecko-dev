@@ -156,7 +156,7 @@ async function test_noUint8Array_continue(r, that) {
 async function test_pendingStream(compartment) {
   let r = new Response(new ReadableStream({start : controller => {
     controller.enqueue(makeBuffer(BIG_BUFFER_SIZE));
-    // Let's keep this controler open.
+    // Let's keep this controller open.
     self.ccc = controller;
   }}));
 

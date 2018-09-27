@@ -487,7 +487,7 @@ types.JSON = types.addType("json");
  * Arg and Option placeholders where arguments should be
  * placed.
  *
- * Reponse packets are also specified as json templates,
+ * Response packets are also specified as json templates,
  * with a RetVal placeholder where the return value should be
  * placed.
  */
@@ -1433,7 +1433,7 @@ Front.prototype = extend(Pool.prototype, {
 exports.Front = Front;
 
 /**
- * A method tagged with preEvent will be called after recieving a packet
+ * A method tagged with preEvent will be called after receiving a packet
  * for that event, and before the front emits the event.
  */
 exports.preEvent = function(eventName, fn) {

@@ -112,7 +112,7 @@
 #define SK_CPU_SSE_LEVEL_AVX      51
 #define SK_CPU_SSE_LEVEL_AVX2     52
 
-// When targetting iOS and using gyp to generate the build files, it is not
+// When targeting iOS and using gyp to generate the build files, it is not
 // possible to select files to build depending on the architecture (i.e. it
 // is not possible to use hand optimized assembly implementation). In that
 // configuration SK_BUILD_NO_OPTS is defined. Remove optimisation then.

@@ -182,8 +182,8 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(Position)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-Position::Position(nsISupports* aParent, nsIDOMGeoPosition* aGeoPosition)
-  : mParent(aParent)
+Position::Position(nsISupports* apparent, nsIDOMGeoPosition* aGeoPosition)
+  : mParent(apparent)
   , mGeoPosition(aGeoPosition)
 {
 }

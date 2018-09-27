@@ -109,7 +109,7 @@ dbtest_main()
     ${BINDIR}/tstclnt -h  ${HOST}  -d $EMPTY_DIR 
     ret=$?
     if [ $ret -ne 1 ]; then
-      html_failed "Tstclnt succeded in an empty directory $ret"
+      html_failed "Tstclnt succeeded in an empty directory $ret"
     else
       html_passed "Tstclnt didn't work in an empty dir $ret"
     fi

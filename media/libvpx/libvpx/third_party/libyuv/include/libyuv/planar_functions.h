@@ -273,7 +273,7 @@ int ARGBLumaColorTable(const uint8* src_argb, int src_stride_argb,
 // g squared, r squared and a squared.  The 4rd row is coefficients for b to
 // the 3, g to the 3, r to the 3 and a to the 3.  The values are summed and
 // result clamped to 0 to 255.
-// A polynomial approximation can be dirived using software such as 'R'.
+// A polynomial approximation can be derived using software such as 'R'.
 
 LIBYUV_API
 int ARGBPolynomial(const uint8* src_argb, int src_stride_argb,

@@ -4,7 +4,7 @@ qu_EC{
     Version{"2.1.38.69"}
     zoneStrings{
         "meta:Ecuador"{
-            ss{"ECT"}
+            ss{"ETC"}
         }
         "meta:Peru"{
             sd{"∅∅∅"}

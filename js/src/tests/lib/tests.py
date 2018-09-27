@@ -176,7 +176,7 @@ class RefTestCase(object):
         # The tag between |...| in the test header.
         self.tag = None
 
-        # Anything occuring after -- in the test header.
+        # Anything occurring after -- in the test header.
         self.comment = None
 
         self.extra_helper_paths = extra_helper_paths or []

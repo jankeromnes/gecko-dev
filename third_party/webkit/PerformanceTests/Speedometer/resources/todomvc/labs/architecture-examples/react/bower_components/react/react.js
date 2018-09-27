@@ -8146,7 +8146,7 @@ var EVENT_SUPPRESSION = {
 
   /**
    * @param {boolean} previouslyEnabled Enabled status of `ReactEventEmitter`
-   *   before the reconciliation occured. `close` restores the previous value.
+   *   before the reconciliation occurred. `close` restores the previous value.
    */
   close: function(previouslyEnabled) {
     ReactEventEmitter.setEnabled(previouslyEnabled);
@@ -9634,7 +9634,7 @@ var Mixin = {
 var Transaction = {
   Mixin: Mixin,
   /**
-   * Token to look for to determine if an error occured.
+   * Token to look for to determine if an error occurred.
    */
   OBSERVED_ERROR: {}
 
@@ -10749,7 +10749,7 @@ module.exports = keyMirror;
 
 /**
  * Allows extraction of a minified key. Let's the build system minify keys
- * without loosing the ability to dynamically use key strings as values
+ * without losing the ability to dynamically use key strings as values
  * themselves. Pass in an object with a single key/val pair and it will return
  * you the string key of that single record. Suppose you want to grab the
  * value for a key 'className' inside of an object. Key/val minification may

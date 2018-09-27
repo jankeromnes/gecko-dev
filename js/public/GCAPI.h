@@ -494,7 +494,7 @@ NonIncrementalGC(JSContext* cx, JSGCInvocationKind gckind, gcreason::Reason reas
  * slices, allowing client JavaScript code to run between each slice. This
  * allows interactive apps to avoid long collection pauses. Incremental GC does
  * not make collection take less time, it merely spreads that time out so that
- * the pauses are less noticable.
+ * the pauses are less noticeable.
  *
  * For a collection to be carried out incrementally the following conditions
  * must be met:

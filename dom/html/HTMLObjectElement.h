@@ -49,7 +49,7 @@ public:
   // EventTarget
   virtual void AsyncEventRunning(AsyncEventDispatcher* aEvent) override;
 
-  virtual nsresult BindToTree(nsIDocument *aDocument, nsIContent *aParent,
+  virtual nsresult BindToTree(nsIDocument *aDocument, nsIContent *apparent,
                               nsIContent *aBindingParent) override;
   virtual void UnbindFromTree(bool aDeep = true,
                               bool aNullParent = true) override;

@@ -1191,7 +1191,7 @@ protected:
   static bool
   UIResolutionChangedSubdocumentCallback(nsIDocument* aDocument, void* aData);
 
-  void SetImgAnimations(nsIContent *aParent, uint16_t aMode);
+  void SetImgAnimations(nsIContent *apparent, uint16_t aMode);
   void SetSMILAnimations(nsIDocument *aDoc, uint16_t aNewMode,
                                      uint16_t aOldMode);
   void GetDocumentColorPreferences();

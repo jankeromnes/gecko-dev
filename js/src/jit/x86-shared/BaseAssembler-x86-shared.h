@@ -4490,7 +4490,7 @@ threeByteOpImmSimd("vblendps", VEX_PD, OP3_BLENDPS_VpsWpsIb, ESCAPE_3A, imm, off
     public:
         // Legacy prefix bytes:
         //
-        // These are emmitted prior to the instruction.
+        // These are emitted prior to the instruction.
 
         void prefix(OneByteOpcodeID pre)
         {
@@ -4952,7 +4952,7 @@ threeByteOpImmSimd("vblendps", VEX_PD, OP3_BLENDPS_VpsWpsIb, ESCAPE_3A, imm, off
         // decide to emit REX prefixes.  These should be used where any register
         // operand signifies a byte register.
         //
-        // The disctinction is due to the handling of register numbers in the
+        // The distinction is due to the handling of register numbers in the
         // range 4..7 on x86-64.  These register numbers may either represent
         // the second byte of the first four registers (ah..bh) or the first
         // byte of the second four registers (spl..dil).

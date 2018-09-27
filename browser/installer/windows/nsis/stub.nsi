@@ -361,7 +361,7 @@ Function .onInit
       ; But only do that override if the existing install is in Program Files,
       ; because that's the only place we can be sure is specific
       ; to either 32 or 64 bit applications.
-      ; The WordFind syntax below searches for the first occurence of the
+      ; The WordFind syntax below searches for the first occurrence of the
       ; "delimiter" (the Program Files path) in the install path and returns
       ; anything that appears before that. If nothing appears before that,
       ; then the install is under Program Files.

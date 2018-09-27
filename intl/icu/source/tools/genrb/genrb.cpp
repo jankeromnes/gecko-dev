@@ -541,7 +541,7 @@ main(int argc,
 
     u_cleanup();
 
-    /* Dont return warnings as a failure */
+    /* Don't return warnings as a failure */
     if (U_SUCCESS(status)) {
         return 0;
     }
@@ -615,7 +615,7 @@ processFile(const char *filename, const char *cp,
             openFileName[0] = '\0';
             /*
              * append the input dir to openFileName if the first char in
-             * filename is not file seperation char and the last char input directory is  not '.'.
+             * filename is not file separation char and the last char input directory is  not '.'.
              * This is to support :
              * genrb -s. /home/icu/data
              * genrb -s. icu/data

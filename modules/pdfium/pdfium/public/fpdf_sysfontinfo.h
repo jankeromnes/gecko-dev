@@ -109,7 +109,7 @@ typedef struct _FPDF_SYSFONTINFO {
    *          bExact      -   Pointer to a boolean value receiving the indicator
    *whether mapper found the exact match.
    *                          If mapper is not sure whether it's exact match,
-   *ignore this paramter.
+   *ignore this parameter.
    * Return Value:
    *          An opaque pointer for font handle, or NULL if system mapping is
    *not supported.

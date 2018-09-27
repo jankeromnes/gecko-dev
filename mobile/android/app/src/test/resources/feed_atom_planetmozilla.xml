@@ -1275,7 +1275,7 @@
                     parser was built for a very specific use case (text wrapping) and was
                     incomplete. It was not parsing all of the reStructuredText syntax.</p>
                 <p>Inspired by it, I wrote my own little parser using <strong>docutils</strong>.</p>
-                <p>Understanding docutils is not a small task. This project is very powerfull
+                <p>Understanding docutils is not a small task. This project is very powerful
                     but quite complex. One thing that cruelly misses in docutils parser tools
                     is the ability to get the source text from any node, including its children,
                     so you can render back the same source.</p>
@@ -4234,7 +4234,7 @@
             <p>First, about the agenda-setting KPI for 2016, should these KPI be an evaluation of the inclusion and rank in others strategic agendas, governance systems and productions (outcome/products) ? Others org could be from different domains: political, social, economy orgs.<br/>
                 Then, as a wide size audience KPI, Mozilla wants « <em>celebration of our campaigns with ‘headline KPIs’ including number of actions, and number of advocates.</em>« . While doing this could be the right thing to do for some cultures, it could be the worst for others. I think that these KPI don’t carry a meaning for people and are too org centric. In a way, they are to generic: it’s just an amount. <strong>Accumulation is not our goal: we want impact that is the grow of articulated actions</strong> made by diverse people toward the same aim. <strong>We need our massive KPI to be more qualitative</strong>, or at least find a way to present them in a more qualitative way: interactive map ? a global to local prism that engages people for the next step ?</p>
             <h5>Best practices &amp; massive impact</h5>
-            <p>Selecting best practices are an appealing method when we want to have a fast and strong impact in a wide area. However, <strong>when we unify we should avoid to homogenize</strong>. The gain in area by scaling-up is always at the cost of loosing local impact because it is not corresponding to local specificities, hence to local expectations. Federating instead of scaling-up is a way to solve this challenge. So we should be careful to not <strong>use best practice as absolute solutions, but as solutions in a context</strong> if we want to transpose them massively.</p>
+            <p>Selecting best practices are an appealing method when we want to have a fast and strong impact in a wide area. However, <strong>when we unify we should avoid to homogenize</strong>. The gain in area by scaling-up is always at the cost of losing local impact because it is not corresponding to local specificities, hence to local expectations. Federating instead of scaling-up is a way to solve this challenge. So we should be careful to not <strong>use best practice as absolute solutions, but as solutions in a context</strong> if we want to transpose them massively.</p>
             <h5>Tools &amp; platform balanced between user-centric and org-centric outcomes</h5>
             <p>It’s good to hear that we will build a advocacy platform. As we ‘had’ bugzilla+svn then mercurial (hg)+… and are going to the <strong>integrated</strong>, <strong>pluggable</strong> and <strong>content-centric</strong> (but non-free; admin tools are closed source) github (targeting more coder than users, but with a lower entry price for users still), we need to be able to have the same kind of tool for advocates and leaders. Something inspired maybe at some levels by the remixing tools we built in Webmakers for web users.</p>
             <h4>From experiment to production: support (self made to mass product) + modularity (dev code patch to users add-ons).</h4>
@@ -4505,7 +4505,7 @@
                         <ul>
                             <li>The <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1238620" target="_blank">uploading issues reported by many users are being tracked here.</a></li>
                             <li><a href="https://support.mozilla.org/questions/firefox?tagged=bug1208145&amp;show=all" target="_blank">The “show passwords” button has been removed from the password manager for the Beta of Version 44</a>. The developers are looking into <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1208145" target="_blank">last minute fixes for that in this bug</a>.</li>
-                            <li>Also in Version 44, the <span class="author-a-kz88zz80zhz89z6hlz81znytez70zz66zz68z"><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=606655" target="_blank">“ask me everytime” option for cookies will be removed from the privacy panel.</a></span></li>
+                            <li>Also in Version 44, the <span class="author-a-kz88zz80zhz89z6hlz81znytez70zz66zz68z"><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=606655" target="_blank">“ask me every time” option for cookies will be removed from the privacy panel.</a></span></li>
                         </ul>
                     </li>
                 </ul>

@@ -120,7 +120,7 @@ bool NodeIterator::NodePointer::MoveForward(nsINode *aRoot, nsINode *aNode)
     return false;
 }
 
-void NodeIterator::NodePointer::MoveBackward(nsINode *aParent, nsINode *aNode)
+void NodeIterator::NodePointer::MoveBackward(nsINode *apparent, nsINode *aNode)
 {
     if (aNode) {
         do {
@@ -128,7 +128,7 @@ void NodeIterator::NodePointer::MoveBackward(nsINode *aParent, nsINode *aNode)
             aNode = aNode->GetLastChild();
         } while (aNode);
     } else {
-        mNode = aParent;
+        mNode = apparent;
     }
 }
 

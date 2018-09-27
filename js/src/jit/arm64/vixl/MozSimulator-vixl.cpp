@@ -283,7 +283,7 @@ int64_t Simulator::call(uint8_t* entry, int argument_count, ...) {
   VIXL_ASSERT(argument_count <= 8);
   // This code should use the type of the called function
   // (with templates, like the callVM machinery), but since the
-  // number of called functions is miniscule, their types have been
+  // number of called functions is minuscule, their types have been
   // divined from the number of arguments.
   if (argument_count == 8) {
       // EnterJitData::jitcode.

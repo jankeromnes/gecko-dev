@@ -935,7 +935,7 @@ static int rc_pick_q_and_bounds_one_pass_vbr(const VP9_COMP *cpi,
     } else {
       q = rc->avg_frame_qindex[KEY_FRAME];
     }
-    // For constrained quality dont allow Q less than the cq level
+    // For constrained quality don't allow Q less than the cq level
     if (oxcf->rc_mode == VPX_CQ) {
       if (q < cq_level) q = cq_level;
 
@@ -1126,7 +1126,7 @@ static int rc_pick_q_and_bounds_two_pass(const VP9_COMP *cpi, int *bottom_index,
     } else {
       q = active_worst_quality;
     }
-    // For constrained quality dont allow Q less than the cq level
+    // For constrained quality don't allow Q less than the cq level
     if (oxcf->rc_mode == VPX_CQ) {
       if (q < cq_level) q = cq_level;
 
@@ -1912,8 +1912,8 @@ void vp9_rc_update_framerate(VP9_COMP *cpi) {
   // The baseline for this aligns with HW implementations that
   // can support decode of 1080P content up to a bitrate of MAX_MB_RATE bits
   // per 16x16 MB (averaged over a frame). However this limit is extended if
-  // a very high rate is given on the command line or the the rate cannnot
-  // be acheived because of a user specificed max q (e.g. when the user
+  // a very high rate is given on the command line or the the rate cannot
+  // be achieved because of a user specificed max q (e.g. when the user
   // specifies lossless encode.
   vbr_max_bits =
       (int)(((int64_t)rc->avg_frame_bandwidth * oxcf->two_pass_vbrmax_section) /
@@ -1955,7 +1955,7 @@ static void vbr_rate_correction(VP9_COMP *cpi, int *this_frame_target) {
   }
 
   // Fast redistribution of bits arising from massive local undershoot.
-  // Dont do it for kf,arf,gf or overlay frames.
+  // Don't do it for kf,arf,gf or overlay frames.
   if (!frame_is_kf_gf_arf(cpi) && !rc->is_src_frame_alt_ref &&
       rc->vbr_bits_off_target_fast) {
     int one_frame_bits = VPXMAX(rc->avg_frame_bandwidth, *this_frame_target);

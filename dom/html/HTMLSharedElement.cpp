@@ -248,10 +248,10 @@ HTMLSharedElement::AfterSetAttr(int32_t aNamespaceID, nsAtom* aName,
 }
 
 nsresult
-HTMLSharedElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLSharedElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

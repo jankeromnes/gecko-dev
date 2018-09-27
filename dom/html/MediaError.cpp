@@ -26,9 +26,9 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(MediaError)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-MediaError::MediaError(HTMLMediaElement* aParent, uint16_t aCode,
+MediaError::MediaError(HTMLMediaElement* apparent, uint16_t aCode,
                        const nsACString& aMessage)
-  : mParent(aParent)
+  : mParent(apparent)
   , mCode(aCode)
   , mMessage(aMessage)
 {

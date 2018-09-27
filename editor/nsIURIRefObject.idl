@@ -12,7 +12,7 @@ webidl Node;
   * external URI, e.g. <a>, <img>, <script> etc,
   * and has the capability to rewrite URLs to be
   * relative or absolute.
-  * Used by the editor but not dependant on it.
+  * Used by the editor but not dependent on it.
   */
 
 [scriptable, uuid(2226927e-1dd2-11b2-b57f-faab47288563)]

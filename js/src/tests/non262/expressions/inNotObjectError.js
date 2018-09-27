@@ -1,5 +1,5 @@
 var BUGNUMBER = 1352429;
-var summary = 'Error message should provide enough infomation for use of in operator';
+var summary = 'Error message should provide enough information for use of in operator';
 
 print(BUGNUMBER + ": " + summary);
 

@@ -16,7 +16,7 @@
 #     -d delimiter - default : 
 #     -s shortens the path
 #
-# usefull enhancements: in the usage part, try to guess what was meant as 
+# useful enhancements: in the usage part, try to guess what was meant as 
 # a path and echo it to stdout to not break for PATHs with blanks
 #
 ########################################################################

@@ -906,7 +906,7 @@ nsLookAndFeel::GetAccentColorText(nscolor& aColor)
   // a background that has the accent color to have good contrast with
   // the accent color.  Windows itself uses either white or black text
   // depending on how light or dark the accent color is.  We do the same
-  // here based on the luminance of the accent color with a threshhold
+  // here based on the luminance of the accent color with a threshold
   // value.  This algorithm should match what Windows does.  It comes from:
   //
   // https://docs.microsoft.com/en-us/windows/uwp/style/color

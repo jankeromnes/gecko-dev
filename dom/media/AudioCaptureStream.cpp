@@ -133,7 +133,7 @@ AudioCaptureStream::ProcessInput(GraphTime aFrom, GraphTime aTo,
     mMixer.FinishMixing();
   }
 
-  // Regardless of the status of the input tracks, we go foward.
+  // Regardless of the status of the input tracks, we go forward.
   mTracks.AdvanceKnownTracksTime(GraphTimeToStreamTimeWithBlocking((aTo)));
 }
 

@@ -417,7 +417,7 @@ goog.scope(function() {
             /** @type {Array<number>} */ var resultDerivative = es3fShaderDerivateTests.readDerivate(result, derivScale, derivBias, x, y);
 
             // sample at the front of the back pixel and the back of the front pixel to cover the whole area of
-            // legal sample positions. In general case this is NOT OK, but we know that the target funtion is
+            // legal sample positions. In general case this is NOT OK, but we know that the target function is
             // (mostly*) linear which allows us to take the sample points at arbitrary points. This gets us the
             // maximum difference possible in exponents which are used in error bound calculations.
             // * non-linearity may happen around zero or with very high function values due to subnorms not

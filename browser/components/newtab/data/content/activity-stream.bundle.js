@@ -2431,7 +2431,7 @@ class _Search extends react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent
       // The "searchSource" needs to be "newtab" or "homepage" and is sent with
       // the search data and acts as context for the search request (See
       // nsISearchEngine.getSubmission). It is necessary so that search engine
-      // plugins can correctly atribute referrals. (See github ticket #3321 for
+      // plugins can correctly attribute referrals. (See github ticket #3321 for
       // more details)
       const searchSource = content_src_lib_constants__WEBPACK_IMPORTED_MODULE_3__["IS_NEWTAB"] ? "newtab" : "homepage";
 
@@ -2927,7 +2927,7 @@ const LinkMenuOptions = {
     userEvent: "BLOCK"
   }),
 
-  // This is an option for web extentions which will result in remove items from
+  // This is an option for web extensions which will result in remove items from
   // memory and notify the web extenion, rather than using the built-in block list.
   WebExtDismiss: (site, index, eventSource) => ({
     id: "menu_action_webext_dismiss",

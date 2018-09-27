@@ -123,8 +123,8 @@ void RunBitexactnessTest(int sample_rate_hz,
 
   // Compare the output with the reference. Only the first values of the output
   // from last frame processed are compared in order not having to specify all
-  // preceeding frames as testvectors. As the algorithm being tested has a
-  // memory, testing only the last frame implicitly also tests the preceeding
+  // preceding frames as testvectors. As the algorithm being tested has a
+  // memory, testing only the last frame implicitly also tests the preceding
   // frames.
   const float kElementErrorBound = 1.0f / 32768.0f;
   EXPECT_TRUE(test::VerifyDeinterleavedArray(

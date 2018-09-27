@@ -54,7 +54,7 @@ exports.sendShutdownEvent = sendShutdownEvent;
  *   when it exits.
  *
  * * @param connection DebuggerServerConnection
- *          The conection to the client.
+ *          The connection to the client.
  */
 exports.createRootActor = function createRootActor(connection) {
   return new RootActor(connection, {

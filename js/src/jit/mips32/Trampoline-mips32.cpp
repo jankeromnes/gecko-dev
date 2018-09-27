@@ -349,7 +349,7 @@ JitRuntime::generateInvalidator(MacroAssembler& masm, Label* bailoutTail)
     static const uint32_t STACK_DATA_SIZE = sizeof(InvalidationBailoutStack) -
                                             2 * sizeof(uintptr_t);
 
-    // Stack has to be alligned here. If not, we will have to fix it.
+    // Stack has to be aligned here. If not, we will have to fix it.
     masm.checkStackAlignment();
 
     // Make room for data on stack.
@@ -363,7 +363,7 @@ JitRuntime::generateInvalidator(MacroAssembler& masm, Label* bailoutTail)
     }
 
     // Save floating point registers
-    // We can use as_sd because stack is alligned.
+    // We can use as_sd because stack is aligned.
     for (uint32_t i = 0; i < FloatRegisters::TotalDouble; i ++) {
         masm.as_sdc1(FloatRegister::FromIndex(i, FloatRegister::Double), StackPointer,
                      InvalidationBailoutStack::offsetOfFpRegs() + i * sizeof(double));
@@ -577,7 +577,7 @@ PushBailoutFrame(MacroAssembler& masm, uint32_t frameClass, Register spArg)
     }
 
     // Save floating point registers
-    // We can use as_sdc1 because stack is alligned.
+    // We can use as_sdc1 because stack is aligned.
     for (uint32_t i = 0; i < FloatRegisters::TotalDouble; i++) {
         masm.as_sdc1(FloatRegister::FromIndex(i, FloatRegister::Double), StackPointer,
                      BailoutStack::offsetOfFpRegs() + i * sizeof(double));

@@ -475,7 +475,7 @@
 
 	* builds/unix/freetype-config.in: Remove code for handling `rpath'.
 	The use of $rpath has been accidentally removed in a patch from
-	2009-12-22, and apparently noone has missed it since.
+	2009-12-22, and apparently no one has missed it since.
 	Use `%' instead of `@' as a variable substitution marker.
 	Use quotes.
 

@@ -115,7 +115,7 @@ function doPageNavigation(params) {
   if (reload && (forward || back || uri))
     throw "Can't specify reload and another navigation type";
   if (!back && !forward && !uri && !reload && !waitOnly)
-    throw "Must specify back or foward or reload or uri";
+    throw "Must specify back or forward or reload or uri";
   if (params.onNavComplete && eventsToListenFor.length == 0)
     throw "Can't use onNavComplete when eventsToListenFor == []";
   if (params.preventBFCache && eventsToListenFor.length == 0)

@@ -14,15 +14,15 @@
 namespace mozilla {
 namespace a11y {
 
-HandlerTextLeaf::HandlerTextLeaf(IDispatch* aParent,
+HandlerTextLeaf::HandlerTextLeaf(IDispatch* apparent,
                                  long aIndexInParent, HWND aHwnd,
                                  AccChildData& aData)
-: mParent(aParent)
+: mParent(apparent)
 , mIndexInParent(aIndexInParent)
 , mHwnd(aHwnd)
 , mData(aData)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 }
 
 HandlerTextLeaf::~HandlerTextLeaf()

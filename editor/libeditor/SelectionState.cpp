@@ -380,7 +380,7 @@ RangeUpdater::SelAdjSplitNode(nsIContent& aRightNode,
 nsresult
 RangeUpdater::SelAdjJoinNodes(nsINode& aLeftNode,
                               nsINode& aRightNode,
-                              nsINode& aParent,
+                              nsINode& apparent,
                               int32_t aOffset,
                               int32_t aOldLeftNodeLength)
 {
@@ -397,8 +397,8 @@ RangeUpdater::SelAdjJoinNodes(nsINode& aLeftNode,
     RangeItem* item = mArray[i];
     NS_ENSURE_TRUE(item, NS_ERROR_NULL_POINTER);
 
-    if (item->mStartContainer == &aParent) {
-      // adjust start point in aParent
+    if (item->mStartContainer == &apparent) {
+      // adjust start point in apparent
       if (item->mStartOffset > aOffset) {
         item->mStartOffset--;
       } else if (item->mStartOffset == aOffset) {
@@ -414,8 +414,8 @@ RangeUpdater::SelAdjJoinNodes(nsINode& aLeftNode,
       item->mStartContainer = &aRightNode;
     }
 
-    if (item->mEndContainer == &aParent) {
-      // adjust end point in aParent
+    if (item->mEndContainer == &apparent) {
+      // adjust end point in apparent
       if (item->mEndOffset > aOffset) {
         item->mEndOffset--;
       } else if (item->mEndOffset == aOffset) {
@@ -549,14 +549,14 @@ RangeUpdater::WillRemoveContainer()
 
 nsresult
 RangeUpdater::DidRemoveContainer(nsINode* aNode,
-                                 nsINode* aParent,
+                                 nsINode* apparent,
                                  int32_t aOffset,
                                  uint32_t aNodeOrigLen)
 {
   NS_ENSURE_TRUE(mLock, NS_ERROR_UNEXPECTED);
   mLock = false;
 
-  NS_ENSURE_TRUE(aNode && aParent, NS_ERROR_NULL_POINTER);
+  NS_ENSURE_TRUE(aNode && apparent, NS_ERROR_NULL_POINTER);
   size_t count = mArray.Length();
   if (!count) {
     return NS_OK;
@@ -567,17 +567,17 @@ RangeUpdater::DidRemoveContainer(nsINode* aNode,
     NS_ENSURE_TRUE(item, NS_ERROR_NULL_POINTER);
 
     if (item->mStartContainer == aNode) {
-      item->mStartContainer = aParent;
+      item->mStartContainer = apparent;
       item->mStartOffset += aOffset;
-    } else if (item->mStartContainer == aParent &&
+    } else if (item->mStartContainer == apparent &&
                item->mStartOffset > aOffset) {
       item->mStartOffset += (int32_t)aNodeOrigLen - 1;
     }
 
     if (item->mEndContainer == aNode) {
-      item->mEndContainer = aParent;
+      item->mEndContainer = apparent;
       item->mEndOffset += aOffset;
-    } else if (item->mEndContainer == aParent && item->mEndOffset > aOffset) {
+    } else if (item->mEndContainer == apparent && item->mEndOffset > aOffset) {
       item->mEndOffset += (int32_t)aNodeOrigLen - 1;
     }
   }

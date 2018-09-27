@@ -5534,7 +5534,7 @@
         ; But only do that override if the existing install is in Program Files,
         ; because that's the only place we can be sure is specific
         ; to either 32 or 64 bit applications.
-        ; The WordFind syntax below searches for the first occurence of the
+        ; The WordFind syntax below searches for the first occurrence of the
         ; "delimiter" (the Program Files path) in the install path and returns
         ; anything that appears before that. If nothing appears before that,
         ; then the install is under Program Files (32 or 64).
@@ -6586,7 +6586,7 @@
  * to the installation log along with a header.
  *
  * !IMPORTANT - When calling this macro from an uninstaller do not specify a
- *              parameter. The paramter is hardcoded with 0x00000000 to remove
+ *              parameter. The parameter is hardcoded with 0x00000000 to remove
  *              the LSP category for the application when performing an
  *              uninstall.
  *
@@ -7213,7 +7213,7 @@
  * will attempt to load from HKLM/_REG_PATH first, then HKCU/_REG_PATH. If found
  * in either it will return the hash it finds. If not found it will generate a
  * new hash and attempt to store the hash in HKLM/_REG_PATH, then HKCU/_REG_PATH.
- * Subsequent calls will then retreive the stored hash value. On any failure,
+ * Subsequent calls will then retrieve the stored hash value. On any failure,
  * $AppUserModelID will be set to an empty string.
  *
  * Registry format: root/_REG_PATH/"_EXE_PATH" = "hash"

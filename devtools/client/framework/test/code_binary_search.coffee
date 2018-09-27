@@ -5,7 +5,7 @@ window.binary_search = (items, value) ->
   stop  = items.length - 1
   pivot = Math.floor (start + stop) / 2
 
-  while items[pivot] isnt value and start < stop
+  while items[pivot] isn't value and start < stop
 
     # Adjust the search area.
     stop  = pivot - 1 if value < items[pivot]

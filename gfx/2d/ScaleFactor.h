@@ -20,7 +20,7 @@ namespace gfx {
  * combination with the known-type instances of gfx::Point, gfx::Rect, etc.
  *
  * This class is meant to be used in cases where a single scale applies to
- * both the x and y axes. For cases where two diferent scales apply, use
+ * both the x and y axes. For cases where two different scales apply, use
  * ScaleFactors2D.
  */
 template<class src, class dst>

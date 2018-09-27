@@ -825,7 +825,7 @@ public class Tab {
     }
 
     /**
-     * The "MediaPlaying" is used for controling media control interface and
+     * The "MediaPlaying" is used for controlling media control interface and
      * means the tab has playing media.
      *
      * @param isMediaPlaying the tab has any playing media or not

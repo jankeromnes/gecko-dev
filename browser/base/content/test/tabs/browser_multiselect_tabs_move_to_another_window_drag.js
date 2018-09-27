@@ -64,7 +64,7 @@ add_task(async function test() {
   await BrowserTestUtils.waitForCondition(() => getUrl(tab3) == "http://mochi.test:8888/3");
   await BrowserTestUtils.waitForCondition(() => getUrl(tab5) == "http://mochi.test:8888/5");
 
-  ok(true, "Tab3 and tab5 are duplicated succesfully");
+  ok(true, "Tab3 and tab5 are duplicated successfully");
 
   BrowserTestUtils.closeWindow(newWindow);
   BrowserTestUtils.removeTab(tab4);

@@ -101,7 +101,7 @@ protected:
       // The reported scroll offset should be the same throughout.
       EXPECT_EQ(aExpectedScrollOffset, pointOut);
 
-      // Trigger computation of the overscroll tranform, to make sure
+      // Trigger computation of the overscroll transform, to make sure
       // no assetions fire during the calculation.
       apzc->GetOverscrollTransform(AsyncPanZoomController::eForHitTesting);
 

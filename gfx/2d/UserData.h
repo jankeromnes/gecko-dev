@@ -42,7 +42,7 @@ public:
     // We could keep entries in a std::vector instead of managing it by hand
     // but that would propagate an stl dependency out which we'd rather not
     // do (see bug 666609). Plus, the entries array is expect to stay small
-    // so doing a realloc everytime we add a new entry shouldn't be too costly
+    // so doing a realloc every time we add a new entry shouldn't be too costly
     entries = static_cast<Entry*>(realloc(entries, sizeof(Entry)*(count+1)));
 
     if (!entries) {

@@ -338,7 +338,7 @@ bool HTTPUpload::GetFileContents(const wstring &filename,
   if (file.is_open()) {
     file.seekg(0, ios::end);
     std::streamoff length = file.tellg();
-    // Check for loss of data when converting lenght from std::streamoff into
+    // Check for loss of data when converting length from std::streamoff into
     // std::vector<char>::size_type
     std::vector<char>::size_type vector_size =
         static_cast<std::vector<char>::size_type>(length);

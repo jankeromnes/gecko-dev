@@ -205,7 +205,7 @@ var DE_ASSERT = function(x) {
         /** @type {number} */ var x = rnd.getInt(0, gl.drawingBufferWidth - width);
         /** @type {number} */ var y = rnd.getInt(0, gl.drawingBufferHeight - height);
 
-        // Surface format and storage is choosen by render().
+        // Surface format and storage is chosen by render().
         /** @type {tcuSurface.Surface} */ var reference = new tcuSurface.Surface(width, height);
         /** @type {tcuSurface.Surface} */ var result = new tcuSurface.Surface(width, height);
 

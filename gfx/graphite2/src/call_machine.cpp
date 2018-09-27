@@ -78,7 +78,7 @@ struct regbank  {
 typedef bool        (* ip_t)(registers);
 
 // Pull in the opcode definitions
-// We pull these into a private namespace so these otherwise common names dont
+// We pull these into a private namespace so these otherwise common names don't
 // pollute the toplevel namespace.
 namespace {
 #define smap    reg.smap

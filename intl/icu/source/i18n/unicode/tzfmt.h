@@ -353,7 +353,7 @@ public:
      * Sets the localized GMT format pattern. The pattern must contain
      * a single argument {0}, for example "GMT {0}".
      * @param pattern The localized GMT format pattern to be used by this object.
-     * @param status Recieves the status.
+     * @param status Receives the status.
      * @see #getGMTPattern
      * @stable ICU 50
      */
@@ -1056,7 +1056,7 @@ private:
      * Returns the time zone ID of a match at the specified index within
      * the MatchInfoCollection.
      * @param matches the collection of matches
-     * @param idx the index withing matches
+     * @param idx the index within matches
      * @param tzID receives the resolved time zone ID
      * @return a reference to tzID.
      */

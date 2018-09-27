@@ -155,7 +155,7 @@ public:
   }
 
 protected:
-  ProxyAccessibleBase(uint64_t aID, Derived* aParent,
+  ProxyAccessibleBase(uint64_t aID, Derived* apparent,
                       DocAccessibleParent* aDoc, role aRole,
                       uint32_t aInterfaces)
     : mParent(aParent->ID())
@@ -178,7 +178,7 @@ protected:
   {}
 
 protected:
-  void SetParent(Derived* aParent);
+  void SetParent(Derived* apparent);
 
 private:
   uintptr_t mParent;

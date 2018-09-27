@@ -865,7 +865,7 @@ HRESULT EnumerateItems(
 
 void CDirItems::FillFixedReparse()
 {
-  /* imagex/WIM reduces absolute pathes in links (raparse data),
+  /* imagex/WIM reduces absolute paths in links (raparse data),
      if we archive non root folder. We do same thing here */
 
   if (!SymLinks)

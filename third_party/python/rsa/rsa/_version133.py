@@ -7,7 +7,7 @@ signing and verification. Includes generating public and private keys.
 WARNING: this code implements the mathematics of RSA. It is not suitable for
 real-world secure cryptography purposes. It has not been reviewed by a security
 expert. It does not include padding of data. There are many ways in which the
-output of this module, when used without any modification, can be sucessfully
+output of this module, when used without any modification, can be successfully
 attacked.
 """
 

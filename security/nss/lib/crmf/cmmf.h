@@ -424,12 +424,12 @@ CMMF_POPODecKeyChallContentSetNextChallenge(CMMFPOPODecKeyChallContent *inDecKey
  *        The CMMFCertRepContent to DER-encode.
  *    inCallback
  *        A callback function that the ASN1 encoder will call whenever it
- *        wants to write out DER-encoded bytes.  Look at the defintion of
+ *        wants to write out DER-encoded bytes.  Look at the definition of
  *        CRMFEncoderOutputCallback in crmft.h for a description of the
  *        parameters to the function.
  *    inArg
  *        An opaque pointer to a user-supplied argument that will be passed
- *        to the callback funtion whenever the function is called.
+ *        to the callback function whenever the function is called.
  * NOTES:
  *    The CMMF library will use the same DER-encoding scheme as the CRMF
  *    library.  In other words, when reading CRMF comments that pertain to
@@ -455,12 +455,12 @@ CMMF_EncodeCertRepContent(CMMFCertRepContent *inCertRepContent,
  *        The CMMFKeyRepContent to DER-encode.
  *    inCallback
  *        A callback function that the ASN1 encoder will call whenever it
- *        wants to write out DER-encoded bytes.  Look at the defintion of
+ *        wants to write out DER-encoded bytes.  Look at the definition of
  *        CRMFEncoderOutputCallback in crmft.h for a description of the
  *        parameters to the function.
  *    inArg
  *        An opaque pointer to a user-supplied argument that will be passed
- *        to the callback funtion whenever the function is called.
+ *        to the callback function whenever the function is called.
  * NOTES:
  *    The CMMF library will use the same DER-encoding scheme as the CRMF
  *    library.  In other words, when reading CRMF comments that pertain to
@@ -486,7 +486,7 @@ CMMF_EncodeKeyRecRepContent(CMMFKeyRecRepContent *inKeyRecRep,
  *        The CMMFDecKeyChallContent to operate on.
  *    inCallback
  *        A callback function that the ASN1 encoder will call whenever it
- *        wants to write out DER-encoded bytes.  Look at the defintion of
+ *        wants to write out DER-encoded bytes.  Look at the definition of
  *        CRMFEncoderOutputCallback in crmft.h for a description of the
  *        parameters to the function.
  *    inArg
@@ -523,12 +523,12 @@ CMMF_EncodePOPODecKeyChallContent(CMMFPOPODecKeyChallContent *inDecKeyChall,
  *        The number of random integers contained in the array 'inDecodedRand'
  *    inCallback
  *        A callback function that the ASN1 encoder will call whenever it
- *        wants to write out DER-encoded bytes.  Look at the defintion of
+ *        wants to write out DER-encoded bytes.  Look at the definition of
  *        CRMFEncoderOutputCallback in crmft.h for a description of the
  *        parameters to the function.
  *    inArg
  *        An opaque pointer to a user-supplied argument that will be passed
- *        to the callback funtion whenever the function is called.
+ *        to the callback function whenever the function is called.
  * NOTES:
  *    The CMMF library will use the same DER-encoding scheme as the CRMF
  *    library.  In other words, when reading CRMF comments that pertain to

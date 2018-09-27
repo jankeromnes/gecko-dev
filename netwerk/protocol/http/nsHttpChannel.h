@@ -301,7 +301,7 @@ private:
     // We might synchronously or asynchronously call BeginConnectActual,
     // which includes DNS prefetch and speculative connection, according to
     // whether an async tracker lookup is required. If the tracker lookup
-    // is required, this funciton will just return NS_OK and BeginConnectActual()
+    // is required, this function will just return NS_OK and BeginConnectActual()
     // will be called when callback. See Bug 1325054 for more information.
     nsresult BeginConnect();
     MOZ_MUST_USE nsresult ContinueBeginConnectWithResult();

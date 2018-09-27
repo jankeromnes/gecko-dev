@@ -150,7 +150,7 @@ add_task(async function test_sessions_tab_value_persistence() {
   await extension.startup();
 
   await extension.awaitMessage("testComplete");
-  ok(true, "Testing completed for persistance of set tab values.");
+  ok(true, "Testing completed for persistence of set tab values.");
 
   await extension.unload();
 });
@@ -272,7 +272,7 @@ add_task(async function test_sessions_window_value_persistence() {
   await extension.startup();
 
   await extension.awaitMessage("testComplete");
-  ok(true, "Testing completed for persistance of set window values.");
+  ok(true, "Testing completed for persistence of set window values.");
 
   await extension.unload();
 });

@@ -167,7 +167,7 @@ XPCOMUtils.defineLazyGetter(this, "gStartupScanScopes", () => {
 });
 
 /**
- * Spins the event loop until the given promise resolves, and then eiter returns
+ * Spins the event loop until the given promise resolves, and then either returns
  * its success value or throws its rejection value.
  *
  * @param {Promise} promise

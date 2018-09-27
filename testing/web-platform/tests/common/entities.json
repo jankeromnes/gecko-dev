@@ -41,7 +41,7 @@
   "&andand;": { "codepoints": [10837], "characters": "\u2A55" },
   "&And;": { "codepoints": [10835], "characters": "\u2A53" },
   "&and;": { "codepoints": [8743], "characters": "\u2227" },
-  "&andd;": { "codepoints": [10844], "characters": "\u2A5C" },
+  "&and;": { "codepoints": [10844], "characters": "\u2A5C" },
   "&andslope;": { "codepoints": [10840], "characters": "\u2A58" },
   "&andv;": { "codepoints": [10842], "characters": "\u2A5A" },
   "&ang;": { "codepoints": [8736], "characters": "\u2220" },

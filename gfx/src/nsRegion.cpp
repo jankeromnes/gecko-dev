@@ -718,7 +718,7 @@ nsIntRegion nsRegion::ScaleToInsidePixels (float aScaleX, float aScaleY,
 // The implementation of steps 1 and 2 are rather straightforward. However our
 // implementation of step 3 uses dynamic programming to achieve its efficiency.
 //
-// Psuedo code for step 3 is as follows where G is the grid from step 1 and A
+// Pseudo code for step 3 is as follows where G is the grid from step 1 and A
 // is the array from step 2:
 // Phase3 = function (G, A, m, n) {
 //   let (t,b,l,r,_) = MaxSum2D(A,m,n)
@@ -849,7 +849,7 @@ namespace {
   // given array (A,n), assuming the array is already in prefix sum form.
   SizePair MaxSum1D(const nsTArray<SizePair> &A, int32_t n,
                     int32_t *minIdx, int32_t *maxIdx) {
-    // The min/max indicies of the largest subarray found so far
+    // The min/max indices of the largest subarray found so far
     SizePair min, max;
     int32_t currentMinIdx = 0;
 

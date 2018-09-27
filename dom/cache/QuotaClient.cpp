@@ -422,7 +422,7 @@ public:
       // XXXtt: Maybe have a method in the QuotaManager to clean the usage under
       // the quota client and the origin.
       // There is nothing we can do to recover the file.
-      NS_WARNING("Cannnot read padding size from file!");
+      NS_WARNING("Cannot read padding size from file!");
       paddingSize = 0;
     }
 

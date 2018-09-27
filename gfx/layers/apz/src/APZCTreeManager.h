@@ -606,7 +606,7 @@ private:
                                 uint32_t aPaintSequenceNumber);
 
   void AttachNodeToTree(HitTestingTreeNode* aNode,
-                        HitTestingTreeNode* aParent,
+                        HitTestingTreeNode* apparent,
                         HitTestingTreeNode* aNextSibling);
   already_AddRefed<AsyncPanZoomController> GetTargetAPZC(const ScrollableLayerGuid& aGuid);
   already_AddRefed<HitTestingTreeNode> GetTargetNode(const ScrollableLayerGuid& aGuid,
@@ -702,7 +702,7 @@ private:
                                           const FrameMetrics& aMetrics,
                                           LayersId aLayersId,
                                           const AncestorTransform& aAncestorTransform,
-                                          HitTestingTreeNode* aParent,
+                                          HitTestingTreeNode* apparent,
                                           HitTestingTreeNode* aNextSibling,
                                           TreeBuildingState& aState);
 

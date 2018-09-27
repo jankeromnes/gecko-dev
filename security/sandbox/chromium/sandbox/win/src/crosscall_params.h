@@ -109,7 +109,7 @@ class CrossCallParams {
   // Returns the tag (ipc unique id) associated with this IPC.
   uint32_t GetTag() const { return tag_; }
 
-  // Returns the beggining of the buffer where the IPC params can be stored.
+  // Returns the beginning of the buffer where the IPC params can be stored.
   // prior to an IPC call
   const void* GetBuffer() const {
     return this;
@@ -211,7 +211,7 @@ class ActualCallParams : public CrossCallParams {
     return previous_size;
   }
 
-  // Copies each paramter into the internal buffer. For each you must supply:
+  // Copies each parameter into the internal buffer. For each you must supply:
   // index: 0 for the first param, 1 for the next an so on
   bool CopyParamIn(uint32_t index,
                    const void* parameter_address,
@@ -265,7 +265,7 @@ class ActualCallParams : public CrossCallParams {
     return reinterpret_cast<char*>(this) + param_info_[index].offset_;
   }
 
-  // Returns the total size of the buffer. Only valid once all the paramters
+  // Returns the total size of the buffer. Only valid once all the parameters
   // have been copied in with CopyParamIn.
   uint32_t GetSize() const { return param_info_[NUMBER_PARAMS].offset_; }
 

@@ -123,7 +123,7 @@ add_task(async function setup() {
   video.addEventListener("pause", verifyExpectedEvent);
   video.addEventListener("volumechange", verifyExpectedEvent);
   video.addEventListener("seeking", verifyExpectedEvent);
-  video.addEventListener("seeked", verifyExpectedEvent);
+  video.addEventListener("sought", verifyExpectedEvent);
   document.addEventListener("mozfullscreenchange", verifyExpectedEvent);
 
   ["mousedown", "mouseup", "dblclick", "click"]
@@ -210,12 +210,12 @@ add_task(async function styled_video() {
 });
 
 /*
- * Previous tests have moved playback postion, reset it to 0.
+ * Previous tests have moved playback position, reset it to 0.
  */
 add_task(async function reset_currentTime() {
   ok(true, "video position is at " + video.currentTime);
   video.currentTime = 0.0;
-  await waitForEvent("seeking", "seeked");
+  await waitForEvent("seeking", "sought");
   // Bug 477434 -- sometimes we get 0.098999 here instead of 0!
   // is(video.currentTime, 0.0, "checking playback position");
   ok(true, "video position is at " + video.currentTime);
@@ -239,7 +239,7 @@ add_task(async function drag_slider() {
   synthesizeMouse(video, beginDragX, scrubberCenterY, {type: "mousedown", button: 0});
   synthesizeMouse(video, endDragX, scrubberCenterY, {type: "mousemove", button: 0});
   synthesizeMouse(video, endDragX, scrubberCenterY, {type: "mouseup",   button: 0});
-  await waitForEvent("seeking", "seeked");
+  await waitForEvent("seeking", "sought");
   ok(true, "video position is at " + video.currentTime);
   // The width of srubber is not equal in every platform as we use system default font
   // in duration and position box. We can not precisely drag to expected position, so
@@ -254,7 +254,7 @@ add_task(async function drag_slider() {
  */
 add_task(async function click_slider() {
   synthesizeMouse(video, scrubberOffsetX + (scrubberWidth / 4), scrubberCenterY, {});
-  await waitForEvent("seeking", "seeked");
+  await waitForEvent("seeking", "sought");
   ok(true, "video position is at " + video.currentTime);
   // The scrubber currently just jumps towards the nearest pageIncrement point, not
   // precisely to the point clicked. So, expectedTime isn't (videoDuration / 4).
@@ -351,7 +351,7 @@ add_task(async function whitespace_pause_video() {
  */
 add_task(async function click_and_hold_slider() {
   synthesizeMouse(video, scrubberOffsetX + 10, scrubberCenterY, {type: "mousedown", button: 0});
-  await waitForEvent("pause", "seeking", "seeked");
+  await waitForEvent("pause", "seeking", "sought");
 
   synthesizeMouse(video, scrubberOffsetX + 10, scrubberCenterY, {});
   await waitForEvent("play");
@@ -369,10 +369,10 @@ add_task(async function click_event_dispatch() {
   video.pause();
   await waitForEvent("pause");
   video.currentTime = 0.0;
-  await waitForEvent("seeking", "seeked");
+  await waitForEvent("seeking", "sought");
   is(video.paused, true, "checking video play state");
   synthesizeMouse(video, scrubberOffsetX + 10, scrubberCenterY, {});
-  await waitForEvent("seeking", "seeked");
+  await waitForEvent("seeking", "sought");
 
   video.removeEventListener("click", clientScriptClickHandler);
 });

@@ -465,7 +465,7 @@ public:
   /**
    * Called at composition time, just before compositing the TextureSource composited.
    *
-   * Note that this is called only withing lock/unlock.
+   * Note that this is called only within lock/unlock.
    */
   virtual bool BindTextureSource(CompositableTextureSourceRef& aTexture) = 0;
 

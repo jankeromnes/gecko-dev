@@ -44,7 +44,7 @@ function runTest() {
       is(e.detail.title, 'Test OpenSearch');
       is(e.detail.href, 'http://example.com/mysearch.xml');
 
-      // We should recieve opensearch events when the user creates new links
+      // We should receive opensearch events when the user creates new links
       // to a search engine, but only when we listen for them
       SpecialPowers.getBrowserFrameMessageManager(iframe1)
                    .loadFrameScript("data:,content.document.title='New title';",
@@ -67,7 +67,7 @@ function runTest() {
     else if (numLinkChanges == 3) {
       is(e.detail.href, 'http://example.com/3rdsearch.xml');
 
-      // the rel attribute can have various space seperated values, make
+      // the rel attribute can have various space separated values, make
       // sure we only pick up correct values for 'opensearch'
       SpecialPowers.getBrowserFrameMessageManager(iframe1)
                    .loadFrameScript("data:,content.document.head.insertAdjacentHTML('beforeend', '<link rel=someopensearch type=application/opensearchdescription+xml href=http://example.com/newsearch.xml>')",
@@ -101,7 +101,7 @@ function runTest() {
 
 
   iframe1.src = createHtml(createLink('mysearch'));
-  // We should not recieve opensearch change events for either of the below iframes
+  // We should not receive opensearch change events for either of the below iframes
   iframe2.src = createHtml(createLink('mysearch'));
   iframe3.src = createHtml(createLink('mysearch'));
 

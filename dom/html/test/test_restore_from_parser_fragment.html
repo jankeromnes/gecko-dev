@@ -20,14 +20,14 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=644959
 
 var content = document.getElementById('content');
 
-function appendHTML(aParent, aElementString)
+function appendHTML(apparent, aElementString)
 {
-  aParent.innerHTML = "<form>" + aElementString + "</form>";
+  apparent.innerHTML = "<form>" + aElementString + "</form>";
 }
 
-function clearHTML(aParent)
+function clearHTML(apparent)
 {
-  aParent.innerHTML = "";
+  apparent.innerHTML = "";
 }
 
 var tests = [

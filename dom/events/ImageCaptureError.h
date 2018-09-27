@@ -27,7 +27,7 @@ public:
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(ImageCaptureError)
 
-  ImageCaptureError(nsISupports* aParent, uint16_t aCode, const nsAString& aMessage);
+  ImageCaptureError(nsISupports* apparent, uint16_t aCode, const nsAString& aMessage);
 
   nsISupports* GetParentObject() const;
 

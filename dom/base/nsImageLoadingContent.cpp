@@ -1532,7 +1532,7 @@ nsImageLoadingContent::HaveSize(imgIRequest *aImage)
 }
 
 void
-nsImageLoadingContent::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+nsImageLoadingContent::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                                   nsIContent* aBindingParent)
 {
   // We may be entering the document, so if our image should be tracked,

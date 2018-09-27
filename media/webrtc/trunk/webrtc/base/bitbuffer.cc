@@ -51,7 +51,7 @@ uint8_t WritePartialByte(uint8_t source,
   uint8_t mask =
       // The number of bits we want, in the most significant bits...
       static_cast<uint8_t>(0xFF << (8 - source_bit_count))
-      // ...shifted over to the target offset from the most signficant bit.
+      // ...shifted over to the target offset from the most significant bit.
       >> target_bit_offset;
 
   // We want the target, with the bits we'll overwrite masked off, or'ed with

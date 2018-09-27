@@ -173,7 +173,7 @@ public:
     }
 
 protected:
-// OPTIMIZE: Functions of the form add .. points are indentical to the conic routines.
+// OPTIMIZE: Functions of the form add .. points are identical to the conic routines.
     // add endpoints first to get zero and one t values exactly
     void addExactEndPoints() {
         for (int cIndex = 0; cIndex < SkDConic::kPointCount; cIndex += SkDConic::kPointLast) {

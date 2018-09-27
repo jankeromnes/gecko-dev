@@ -53,16 +53,16 @@ sq{
                         other{"000 mijë"}
                     }
                     1000000{
-                        one{"0 milion"}
-                        other{"0 milion"}
+                        one{"0 million"}
+                        other{"0 million"}
                     }
                     10000000{
-                        one{"00 milion"}
-                        other{"00 milion"}
+                        one{"00 million"}
+                        other{"00 million"}
                     }
                     100000000{
-                        one{"000 milion"}
-                        other{"000 milion"}
+                        one{"000 million"}
+                        other{"000 million"}
                     }
                     1000000000{
                         one{"0 miliard"}
@@ -875,7 +875,7 @@ sq{
         japanese_kana{"shkrim japonez kana"}
         kanbun{"shkrim kinez kanbun"}
         kanji{"shkrim japonez kanxhi"}
-        keycap{"tast"}
+        keycap{"taste"}
         leftwards_arrows{"shigjeta për së majti"}
         leftwards_rightwards_arrows{"shigjeta majtas-djathtas"}
         letterlike_symbols{"simbole të ngjashme me germat"}

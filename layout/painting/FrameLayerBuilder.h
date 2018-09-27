@@ -129,7 +129,7 @@ public:
   RefPtr<TransformClipNode> mOldTransform;
 
 private:
-  DisplayItemData(LayerManagerData* aParent,
+  DisplayItemData(LayerManagerData* apparent,
                   uint32_t aKey,
                   layers::Layer* aLayer,
                   nsIFrame* aFrame = nullptr);
@@ -301,20 +301,20 @@ struct ContainerLayerParameters
   ContainerLayerParameters(float aXScale,
                            float aYScale,
                            const nsIntPoint& aOffset,
-                           const ContainerLayerParameters& aParent)
+                           const ContainerLayerParameters& apparent)
     : mXScale(aXScale)
     , mYScale(aYScale)
     , mLayerContentsVisibleRect(nullptr)
     , mOffset(aOffset)
-    , mBackgroundColor(aParent.mBackgroundColor)
-    , mScrollMetadataASR(aParent.mScrollMetadataASR)
-    , mCompositorASR(aParent.mCompositorASR)
-    , mInTransformedSubtree(aParent.mInTransformedSubtree)
-    , mInActiveTransformedSubtree(aParent.mInActiveTransformedSubtree)
+    , mBackgroundColor(apparent.mBackgroundColor)
+    , mScrollMetadataASR(apparent.mScrollMetadataASR)
+    , mCompositorASR(apparent.mCompositorASR)
+    , mInTransformedSubtree(apparent.mInTransformedSubtree)
+    , mInActiveTransformedSubtree(apparent.mInActiveTransformedSubtree)
     , mDisableSubpixelAntialiasingInDescendants(
-        aParent.mDisableSubpixelAntialiasingInDescendants)
-    , mForEventsAndPluginsOnly(aParent.mForEventsAndPluginsOnly)
-    , mLayerCreationHint(aParent.mLayerCreationHint)
+        apparent.mDisableSubpixelAntialiasingInDescendants)
+    , mForEventsAndPluginsOnly(apparent.mForEventsAndPluginsOnly)
+    , mLayerCreationHint(apparent.mLayerCreationHint)
   {
   }
 

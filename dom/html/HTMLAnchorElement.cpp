@@ -116,12 +116,12 @@ HTMLAnchorElement::HasDeferredDNSPrefetchRequest()
 }
 
 nsresult
-HTMLAnchorElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLAnchorElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent)
 {
   Link::ResetLinkState(false, Link::ElementHasHref());
 
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

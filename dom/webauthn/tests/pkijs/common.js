@@ -195,8 +195,8 @@ function(in_window)
     function(input_view1, input_view2)
     {
         /// <summary>Compare two Uint8Arrays</summary>
-        /// <param name="input_view1" type="Uint8Array">First Uint8Array for comparision</param>
-        /// <param name="input_view2" type="Uint8Array">Second Uint8Array for comparision</param>
+        /// <param name="input_view1" type="Uint8Array">First Uint8Array for comparison</param>
+        /// <param name="input_view2" type="Uint8Array">Second Uint8Array for comparison</param>
 
         if(input_view1.length !== input_view2.length)
             return false;
@@ -214,8 +214,8 @@ function(in_window)
     function(input_buffer1, input_buffer2)
     {
         /// <summary>Compare two array buffers</summary>
-        /// <param name="input_buffer1" type="ArrayBuffer">First ArrayBuffer for comparision</param>
-        /// <param name="input_buffer2" type="ArrayBuffer">Second ArrayBuffer for comparision</param>
+        /// <param name="input_buffer1" type="ArrayBuffer">First ArrayBuffer for comparison</param>
+        /// <param name="input_buffer2" type="ArrayBuffer">Second ArrayBuffer for comparison</param>
 
         if(input_buffer1.byteLength != input_buffer2.byteLength)
             return false;
@@ -278,7 +278,7 @@ function(in_window)
     {
         /// <summary>String preparation function. In a future here will be realization of algorithm from RFC4518.</summary>
         /// <param name="input_string" type="String">JavaScript string. As soon as for each ASN.1 string type we have a specific transformation function here we will work with pure JavaScript string</param>
-        /// <returns type="String">Formated string</returns>
+        /// <returns type="String">Formatted string</returns>
 
         var result = input_string.replace(/^\s+|\s+$/g, ""); // Trim input string
         result = result.replace(/\s+/g, " "); // Change all sequence of SPACE down to SPACE char

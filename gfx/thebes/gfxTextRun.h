@@ -341,7 +341,7 @@ public:
      * i and i+1, we require that if there is a break after cluster i, a break
      * will be specified before cluster i+1. This may be temporarily violated
      * (e.g. after reflowing line L and before reflowing line L+1); to handle
-     * these temporary violations, we say that there is a break betwen i and i+1
+     * these temporary violations, we say that there is a break between i and i+1
      * if a break is specified after i OR a break is specified before i+1.
      *
      * This can change textrun geometry! The existence of a linebreak can affect

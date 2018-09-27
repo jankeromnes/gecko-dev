@@ -185,7 +185,7 @@ template<typename T>
 static void
 TestAll()
 {
-  // Assert that we don't accidently hit type's range limits in tests.
+  // Assert that we don't accidentally hit type's range limits in tests.
   const T value = StartValue<T>();
   A(std::numeric_limits<T>::min() + static_cast<T>(sNumOps) <= value);
   A(std::numeric_limits<T>::max() - static_cast<T>(sNumOps) >= value);

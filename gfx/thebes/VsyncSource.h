@@ -35,12 +35,12 @@ public:
       virtual ~Display();
 
       // Notified when this display's vsync occurs, on the vsync thread
-      // The aVsyncTimestamp should normalize to the Vsync time that just occured
+      // The aVsyncTimestamp should normalize to the Vsync time that just occurred
       // However, different platforms give different vsync notification times.
       // OSX - The vsync timestamp of the upcoming frame, in the future
       // Windows: It's messy, see gfxWindowsPlatform.
       // Android: TODO
-      // All platforms should normalize to the vsync that just occured.
+      // All platforms should normalize to the vsync that just occurred.
       // Large parts of Gecko assume TimeStamps should not be in the future such as animations
       virtual void NotifyVsync(TimeStamp aVsyncTimestamp);
 

@@ -1606,7 +1606,7 @@
      * `pullAllWith`, `pullAt`, `push`, `range`, `rangeRight`, `rearg`, `reject`,
      * `remove`, `rest`, `reverse`, `sampleSize`, `set`, `setWith`, `shuffle`,
      * `slice`, `sort`, `sortBy`, `splice`, `spread`, `tail`, `take`, `takeRight`,
-     * `takeRightWhile`, `takeWhile`, `tap`, `throttle`, `thru`, `toArray`,
+     * `takeRightWhile`, `takeWhile`, `tap`, `throttle`, `through`, `toArray`,
      * `toPairs`, `toPairsIn`, `toPath`, `toPlainObject`, `transform`, `unary`,
      * `union`, `unionBy`, `unionWith`, `uniq`, `uniqBy`, `uniqWith`, `unset`,
      * `unshift`, `unzip`, `unzipWith`, `update`, `updateWith`, `values`,
@@ -5111,7 +5111,7 @@
       return flatRest(function(funcs) {
         var length = funcs.length,
             index = length,
-            prereq = LodashWrapper.prototype.thru;
+            prereq = LodashWrapper.prototype.through;
 
         if (fromRight) {
           funcs.reverse();
@@ -5140,7 +5140,7 @@
           } else {
             wrapper = (func.length == 1 && isLaziable(func))
               ? wrapper[funcName]()
-              : wrapper.thru(func);
+              : wrapper.through(func);
           }
         }
         return function() {
@@ -5601,7 +5601,7 @@
 
     /**
      * Used by `_.defaultsDeep` to customize its `_.merge` use to merge source
-     * objects into destination objects that are passed thru.
+     * objects into destination objects that are passed through.
      *
      * @private
      * @param {*} objValue The destination value.
@@ -8787,7 +8787,7 @@
 
     /**
      * This method is like `_.tap` except that it returns the result of `interceptor`.
-     * The purpose of this method is to "pass thru" values replacing intermediate
+     * The purpose of this method is to "pass through" values replacing intermediate
      * results in a method chain sequence.
      *
      * @static
@@ -8802,13 +8802,13 @@
      * _('  abc  ')
      *  .chain()
      *  .trim()
-     *  .thru(function(value) {
+     *  .through(function(value) {
      *    return [value];
      *  })
      *  .value();
      * // => ['abc']
      */
-    function thru(value, interceptor) {
+    function through(value, interceptor) {
       return interceptor(value);
     }
 
@@ -8836,15 +8836,15 @@
 
       if (length > 1 || this.__actions__.length ||
           !(value instanceof LazyWrapper) || !isIndex(start)) {
-        return this.thru(interceptor);
+        return this.through(interceptor);
       }
       value = value.slice(start, +start + (length ? 1 : 0));
       value.__actions__.push({
-        'func': thru,
+        'func': through,
         'args': [interceptor],
         'thisArg': undefined
       });
-      return new LodashWrapper(value, this.__chain__).thru(function(array) {
+      return new LodashWrapper(value, this.__chain__).through(function(array) {
         if (length && !array.length) {
           array.push(undefined);
         }
@@ -9040,13 +9040,13 @@
         }
         wrapped = wrapped.reverse();
         wrapped.__actions__.push({
-          'func': thru,
+          'func': through,
           'args': [reverse],
           'thisArg': undefined
         });
         return new LodashWrapper(wrapped, this.__chain__);
       }
-      return this.thru(reverse);
+      return this.through(reverse);
     }
 
     /**
@@ -9071,7 +9071,7 @@
 
     /**
      * Creates an object composed of keys generated from the results of running
-     * each element of `collection` thru `iteratee`. The corresponding value of
+     * each element of `collection` through `iteratee`. The corresponding value of
      * each key is the number of times the key was returned by `iteratee`. The
      * iteratee is invoked with one argument: (value).
      *
@@ -9251,7 +9251,7 @@
 
     /**
      * Creates a flattened array of values by running each element in `collection`
-     * thru `iteratee` and flattening the mapped results. The iteratee is invoked
+     * through `iteratee` and flattening the mapped results. The iteratee is invoked
      * with three arguments: (value, index|key, collection).
      *
      * @static
@@ -9386,7 +9386,7 @@
 
     /**
      * Creates an object composed of keys generated from the results of running
-     * each element of `collection` thru `iteratee`. The order of grouped values
+     * each element of `collection` through `iteratee`. The order of grouped values
      * is determined by the order they occur in `collection`. The corresponding
      * value of each key is an array of elements responsible for generating the
      * key. The iteratee is invoked with one argument: (value).
@@ -9494,7 +9494,7 @@
 
     /**
      * Creates an object composed of keys generated from the results of running
-     * each element of `collection` thru `iteratee`. The corresponding value of
+     * each element of `collection` through `iteratee`. The corresponding value of
      * each key is the last element responsible for generating the key. The
      * iteratee is invoked with one argument: (value).
      *
@@ -9525,7 +9525,7 @@
     });
 
     /**
-     * Creates an array of values by running each element in `collection` thru
+     * Creates an array of values by running each element in `collection` through
      * `iteratee`. The iteratee is invoked with three arguments:
      * (value, index|key, collection).
      *
@@ -9656,7 +9656,7 @@
 
     /**
      * Reduces `collection` to a value which is the accumulated result of running
-     * each element in `collection` thru `iteratee`, where each successive
+     * each element in `collection` through `iteratee`, where each successive
      * invocation is supplied the return value of the previous. If `accumulator`
      * is not given, the first element of `collection` is used as the initial
      * value. The iteratee is invoked with four arguments:
@@ -9916,7 +9916,7 @@
 
     /**
      * Creates an array of elements, sorted in ascending order by the results of
-     * running each element in a collection thru each iteratee. This method
+     * running each element in a collection through each iteratee. This method
      * performs a stable sort, that is, it preserves the original sort order of
      * equal elements. The iteratees are invoked with one argument: (value).
      *
@@ -13201,7 +13201,7 @@
 
     /**
      * This method is like `_.invert` except that the inverted object is generated
-     * from the results of running each element of `object` thru `iteratee`. The
+     * from the results of running each element of `object` through `iteratee`. The
      * corresponding inverted value of each inverted key is an array of keys
      * responsible for generating the inverted value. The iteratee is invoked
      * with one argument: (value).
@@ -13315,7 +13315,7 @@
     /**
      * The opposite of `_.mapValues`; this method creates an object with the
      * same values as `object` and keys generated by running each own enumerable
-     * string keyed property of `object` thru `iteratee`. The iteratee is invoked
+     * string keyed property of `object` through `iteratee`. The iteratee is invoked
      * with three arguments: (value, key, object).
      *
      * @static
@@ -13345,7 +13345,7 @@
 
     /**
      * Creates an object with the same keys as `object` and values generated
-     * by running each own enumerable string keyed property of `object` thru
+     * by running each own enumerable string keyed property of `object` through
      * `iteratee`. The iteratee is invoked with three arguments:
      * (value, key, object).
      *
@@ -13736,7 +13736,7 @@
     /**
      * An alternative to `_.reduce`; this method transforms `object` to a new
      * `accumulator` object which is the result of running each of its own
-     * enumerable string keyed properties thru `iteratee`, with each invocation
+     * enumerable string keyed properties through `iteratee`, with each invocation
      * potentially mutating the `accumulator` object. If `accumulator` is not
      * provided, a new object with the same `[[Prototype]]` will be used. The
      * iteratee is invoked with four arguments: (accumulator, value, key, object).
@@ -16613,7 +16613,7 @@
     lodash.takeWhile = takeWhile;
     lodash.tap = tap;
     lodash.throttle = throttle;
-    lodash.thru = thru;
+    lodash.through = through;
     lodash.toArray = toArray;
     lodash.toPairs = toPairs;
     lodash.toPairsIn = toPairsIn;
@@ -16983,13 +16983,13 @@
         if (!retUnwrapped && useLazy) {
           value = onlyLazy ? value : new LazyWrapper(this);
           var result = func.apply(value, args);
-          result.__actions__.push({ 'func': thru, 'args': [interceptor], 'thisArg': undefined });
+          result.__actions__.push({ 'func': through, 'args': [interceptor], 'thisArg': undefined });
           return new LodashWrapper(result, chainAll);
         }
         if (isUnwrapped && onlyLazy) {
           return func.apply(this, args);
         }
-        result = this.thru(interceptor);
+        result = this.through(interceptor);
         return isUnwrapped ? (isTaker ? result.value()[0] : result.value()) : result;
       };
     });

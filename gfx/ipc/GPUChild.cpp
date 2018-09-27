@@ -332,7 +332,7 @@ GPUChild::RecvBHRThreadHang(const HangDetails& aDetails)
 {
   nsCOMPtr<nsIObserverService> obs = mozilla::services::GetObserverService();
   if (obs) {
-    // Copy the HangDetails recieved over the network into a nsIHangDetails, and
+    // Copy the HangDetails received over the network into a nsIHangDetails, and
     // then fire our own observer notification.
     // XXX: We should be able to avoid this potentially expensive copy here by
     // moving our deserialized argument.

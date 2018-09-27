@@ -148,10 +148,10 @@ XULFrameElement::SwapFrameLoaders(nsIFrameLoaderOwner* aOtherLoaderOwner,
 
 nsresult
 XULFrameElement::BindToTree(nsIDocument* aDocument,
-                            nsIContent* aParent,
+                            nsIContent* apparent,
                             nsIContent* aBindingParent)
 {
-  nsresult rv = nsXULElement::BindToTree(aDocument, aParent, aBindingParent);
+  nsresult rv = nsXULElement::BindToTree(aDocument, apparent, aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
   if (aDocument) {

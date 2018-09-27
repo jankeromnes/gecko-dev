@@ -15,10 +15,10 @@ namespace layers {
 InProcessCompositorSession::InProcessCompositorSession(widget::CompositorWidget* aWidget,
                                                        nsBaseWidget* baseWidget,
                                                        CompositorBridgeChild* aChild,
-                                                       CompositorBridgeParent* aParent)
+                                                       CompositorBridgeParent* apparent)
  : CompositorSession(aWidget->AsDelegate(), aChild, aParent->RootLayerTreeId()),
    mWidget(baseWidget),
-   mCompositorBridgeParent(aParent),
+   mCompositorBridgeParent(apparent),
    mCompositorWidget(aWidget)
 {
   GPUProcessManager::Get()->RegisterInProcessSession(this);

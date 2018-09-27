@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
         switch (c) {
         case 'b':
             b64_input = 1;
-        /* fall thru */
+        /* fall through */
         case 'k':
             input_key = optarg_s;
             break;

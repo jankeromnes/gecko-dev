@@ -509,7 +509,7 @@ For the most part, :mod:`six.moves` aliases are the names of the modules in
 Python 3.  When the new Python 3 name is a package, the components of the name
 are separated by underscores.  For example, ``html.parser`` becomes
 ``html_parser``.  In some cases where several modules have been combined, the
-Python 2 name is retained.  This is so the appropiate modules can be found when
+Python 2 name is retained.  This is so the appropriate modules can be found when
 running on Python 2.  For example, ``BaseHTTPServer`` which is in
 ``http.server`` in Python 3 is aliased as ``BaseHTTPServer``.
 

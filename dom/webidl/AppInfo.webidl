@@ -3,7 +3,7 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /**
-  * This dictionnary holds the parameters supporting the app:// protocol.
+  * This dictionary holds the parameters supporting the app:// protocol.
   */
 dictionary AppInfo
 {

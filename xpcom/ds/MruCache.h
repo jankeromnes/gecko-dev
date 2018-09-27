@@ -38,7 +38,7 @@ struct EmptyChecker<Value, true>
 
 // Provides a most recently used cache that can be used as a layer on top of
 // a larger container where lookups can be expensive. The default size is 31,
-// which as a prime number provides a better distrubution of cached entries.
+// which as a prime number provides a better distribution of cached entries.
 //
 // Users are expected to provide a `Cache` class that defines two required
 // methods:

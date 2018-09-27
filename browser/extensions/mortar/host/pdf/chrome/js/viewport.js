@@ -8,7 +8,7 @@
 // different from PDFium engine. Our origin is at bottom-left of every page,
 // while PDFium counts y position continuously from the top of page 1.
 // Moreover, the coordinate used in PDF.js is scaled by 0.75 for some reason,
-// so we keep it here for backward compability.
+// so we keep it here for backward compatibility.
 const PAGE_COORDINATE_RATIO = 0.75;
 
 class Viewport {

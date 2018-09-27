@@ -1202,7 +1202,7 @@ int vp8cx_encode_inter_macroblock(VP8_COMP *cpi, MACROBLOCK *x, TOKENEXTRA **t,
   {
     /* Experimental code.
      * Special case for gf and arf zeromv modes, for 1 temporal layer.
-     * Increase zbin size to supress noise.
+     * Increase zbin size to suppress noise.
      */
     x->zbin_mode_boost = 0;
     if (x->zbin_mode_boost_enabled) {

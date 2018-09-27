@@ -99,7 +99,7 @@ js::Nursery::setDirectForwardingPointer(void* oldData, void* newData)
 namespace js {
 
 // The allocation methods below will not run the garbage collector. If the
-// nursery cannot accomodate the allocation, the malloc heap will be used
+// nursery cannot accommodate the allocation, the malloc heap will be used
 // instead.
 
 template <typename T>

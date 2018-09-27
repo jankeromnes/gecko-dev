@@ -195,7 +195,7 @@ function entryFunction(testStr, subtests, offscreenCanvas) {
   }
 
   if (test != "subworker") {
-    ok(canvas, "Canvas successfully transfered to worker");
+    ok(canvas, "Canvas successfully transferred to worker");
     ok(canvas.getContext, "Canvas has getContext");
 
     ok(canvas.width == 64, "OffscreenCanvas width should be 64");

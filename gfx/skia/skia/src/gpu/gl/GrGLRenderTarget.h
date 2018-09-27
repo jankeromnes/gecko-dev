@@ -68,7 +68,7 @@ public:
     bool canAttemptStencilAttachment() const override;
 
     // GrGLRenderTarget overrides dumpMemoryStatistics so it can log its texture and renderbuffer
-    // components seperately.
+    // components separately.
     void dumpMemoryStatistics(SkTraceMemoryDump* traceMemoryDump) const override;
 
 protected:

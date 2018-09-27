@@ -16,5 +16,5 @@ def main(request, response):
             response.headers.set("rtt-received", request.headers.get("rtt"))
     if "downlink" in request.headers:
             response.headers.set("downlink-received", request.headers.get("downlink"))
-    if "ect" in request.headers:
-            response.headers.set("ect-received", request.headers.get("ect"))
+    if "etc" in request.headers:
+            response.headers.set("etc-received", request.headers.get("etc"))

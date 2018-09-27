@@ -74,8 +74,8 @@ function MockColorPickerInstance(window) {
 }
 MockColorPickerInstance.prototype = {
   QueryInterface: ChromeUtils.generateQI([Ci.nsIColorPicker]),
-  init(aParent, aTitle, aInitialColor) {
-    this.parent = aParent;
+  init(apparent, aTitle, aInitialColor) {
+    this.parent = apparent;
     this.initialColor = aInitialColor;
   },
   initialColor: "",

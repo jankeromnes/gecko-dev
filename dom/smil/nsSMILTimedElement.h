@@ -120,7 +120,7 @@ public:
    */
 
   /**
-   * Returns the time to seek the document to when this element is targetted by
+   * Returns the time to seek the document to when this element is targeted by
    * a hyperlink.
    *
    * The behavior is defined here:

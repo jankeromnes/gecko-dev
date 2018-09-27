@@ -1,7 +1,7 @@
 // This tests that module instantiation can succeed when executed a second
 // time after a failure.
 //
-// The first attempt fails becuase module 'a' is not available. The second
+// The first attempt fails because module 'a' is not available. The second
 // attempt succeeds as 'a' is now available.
 //
 // This test exercises the path where the previously instantiated module is

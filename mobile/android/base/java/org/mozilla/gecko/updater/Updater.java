@@ -108,7 +108,7 @@ public class Updater {
     }
 
     /**
-     * Must be called everytime the caller finished it's work to cleanup used resources.
+     * Must be called every time the caller finished it's work to cleanup used resources.
      */
     void finish() {
         unregisterFromLocalBroadcasts();

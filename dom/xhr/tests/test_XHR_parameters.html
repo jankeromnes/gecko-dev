@@ -53,7 +53,7 @@ function runTests() {
     }
     ok(xhr instanceof XMLHttpRequest, "passed " + JSON.stringify(value));
 
-    // If the page doesnt have privileges to create a system XHR,
+    // If the page doesn't have privileges to create a system XHR,
     // this flag will always be false no matter what is passed.
     let expectedAnon = Boolean(value && value.mozAnon);
     let expectedSystem = false;

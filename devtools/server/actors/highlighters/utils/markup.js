@@ -371,7 +371,7 @@ CanvasFrameAnonymousContentHelper.prototype = {
    * See https://wiki.mozilla.org/DevTools/Highlighter#The_AnonymousContent_API
    * Unfortunately, the inserted nodes are still available via
    * event.originalTarget, and that's what the event handler here uses to check
-   * that the event actually occured on the right element, but that also means
+   * that the event actually occurred on the right element, but that also means
    * consumers of this code would be able to access the inserted elements.
    * Therefore, the originalTarget property will be nullified before the event
    * is passed to your handler.

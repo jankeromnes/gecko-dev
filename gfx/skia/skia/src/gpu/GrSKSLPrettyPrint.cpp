@@ -54,7 +54,7 @@ public:
                  *
                  * ';' means add a new line
                  *
-                 * '\t' and '\n' are ignored in general parsing for backwards compatability with
+                 * '\t' and '\n' are ignored in general parsing for backwards compatibility with
                  * existing shader code and we also have a special case for handling whitespace
                  * at the beginning of fresh lines.
                  *

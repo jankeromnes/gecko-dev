@@ -26,7 +26,7 @@ public:
   NS_INLINE_DECL_CYCLE_COLLECTING_NATIVE_REFCOUNTING(PositionError)
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_NATIVE_CLASS(PositionError)
 
-  PositionError(Geolocation* aParent, int16_t aCode);
+  PositionError(Geolocation* apparent, int16_t aCode);
 
   nsWrapperCache* GetParentObject() const;
 

@@ -72,7 +72,7 @@ class BitrateProber {
   };
 
   // A probe cluster consists of a set of probes. Each probe in turn can be
-  // divided into a number of packets to accomodate the MTU on the network.
+  // divided into a number of packets to accommodate the MTU on the network.
   struct ProbeCluster {
     int min_probes = 0;
     int sent_probes = 0;

@@ -1635,7 +1635,7 @@
 
               /* a segment is round if either its first or last point */
               /* is a control point, and the length of the on points  */
-              /* inbetween doesn't exceed a heuristic limit           */
+              /* between doesn't exceed a heuristic limit           */
               if ( ( min_flags | max_flags ) & AF_FLAG_CONTROL      &&
                    ( max_on_coord - min_on_coord ) < flat_threshold )
                 segment->flags |= AF_EDGE_ROUND;

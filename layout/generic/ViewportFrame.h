@@ -39,7 +39,7 @@ public:
   virtual ~ViewportFrame() { } // useful for debugging
 
   virtual void Init(nsIContent*       aContent,
-                    nsContainerFrame* aParent,
+                    nsContainerFrame* apparent,
                     nsIFrame*         aPrevInFlow) override;
 
 #ifdef DEBUG

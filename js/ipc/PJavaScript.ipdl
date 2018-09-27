@@ -15,7 +15,7 @@ using struct mozilla::void_t from "ipc/IPCMessageUtils.h";
 namespace mozilla {
 namespace jsipc {
 
-nested(upto inside_sync) sync protocol PJavaScript
+nested(up to inside_sync) sync protocol PJavaScript
 {
     manager PContent or PContentBridge;
 

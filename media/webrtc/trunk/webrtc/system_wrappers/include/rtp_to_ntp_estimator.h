@@ -19,7 +19,7 @@
 namespace webrtc {
 // Class for converting an RTP timestamp to the NTP domain in milliseconds.
 // The class needs to be trained with (at least 2) RTP/NTP timestamp pairs from
-// RTCP sender reports before the convertion can be done.
+// RTCP sender reports before the conversion can be done.
 class RtpToNtpEstimator {
  public:
   RtpToNtpEstimator();

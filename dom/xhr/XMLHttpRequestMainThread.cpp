@@ -2629,7 +2629,7 @@ XMLHttpRequestMainThread::InitiateFetch(already_AddRefed<nsIInputStream> aUpload
     // Also don't block on the cache entry on async if it is busy - favoring parallelism
     // over cache hit rate for xhr. This does not disable the cache everywhere -
     // only in cases where more than one channel for the same URI is accessed
-    // simultanously.
+    // simultaneously.
     AddLoadFlags(mChannel, nsICachingChannel::LOAD_BYPASS_LOCAL_CACHE_IF_BUSY);
   }
 

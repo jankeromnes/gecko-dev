@@ -134,7 +134,7 @@ public:
   virtual bool IsEventAttributeNameInternal(nsAtom* aName) override;
 
 
-  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent) override;
   /**
    * Called when an attribute has just been changed

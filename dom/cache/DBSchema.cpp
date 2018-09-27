@@ -2552,7 +2552,7 @@ GetEffectiveSchemaVersion(mozIStorageConnection* aConn,
 
   if (schemaVersion == kHackyDowngradeSchemaVersion) {
     // This is the special case.  Check for the existence of the
-    // "response_padding_size" colum in table "entries".
+    // "response_padding_size" column in table "entries".
     //
     // (pragma_table_info is a table-valued function format variant of
     // "PRAGMA table_info" supported since SQLite 3.16.0.  Firefox 53 shipped
@@ -3270,7 +3270,7 @@ nsresult MigrateFrom25To26(mozIStorageConnection* aConn, bool& aRewriteSchema)
   MOZ_DIAGNOSTIC_ASSERT(aConn);
 
   // Add the response_padding_size column.
-  // Note: only opaque repsonse should be non-null interger.
+  // Note: only opaque repsonse should be non-null integer.
   nsresult rv = aConn->ExecuteSimpleSQL(NS_LITERAL_CSTRING(
     "ALTER TABLE entries "
     "ADD COLUMN response_padding_size INTEGER NULL "

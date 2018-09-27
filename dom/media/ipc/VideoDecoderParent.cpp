@@ -42,7 +42,7 @@ private:
   virtual ~KnowsCompositorVideo() = default;
 };
 
-VideoDecoderParent::VideoDecoderParent(VideoDecoderManagerParent* aParent,
+VideoDecoderParent::VideoDecoderParent(VideoDecoderManagerParent* apparent,
                                        const VideoInfo& aVideoInfo,
                                        float aFramerate,
                                        const layers::TextureFactoryIdentifier& aIdentifier,
@@ -50,7 +50,7 @@ VideoDecoderParent::VideoDecoderParent(VideoDecoderManagerParent* aParent,
                                        TaskQueue* aDecodeTaskQueue,
                                        bool* aSuccess,
                                        nsCString* aErrorDescription)
-  : mParent(aParent)
+  : mParent(apparent)
   , mManagerTaskQueue(aManagerTaskQueue)
   , mDecodeTaskQueue(aDecodeTaskQueue)
   , mKnowsCompositor(new KnowsCompositorVideo)
@@ -59,7 +59,7 @@ VideoDecoderParent::VideoDecoderParent(VideoDecoderManagerParent* aParent,
   MOZ_COUNT_CTOR(VideoDecoderParent);
   MOZ_ASSERT(OnManagerThread());
   // We hold a reference to ourselves to keep us alive until IPDL
-  // explictly destroys us. There may still be refs held by
+  // explicitly destroys us. There may still be refs held by
   // tasks, but no new ones should be added after we're
   // destroyed.
   mIPDLSelfRef = this;

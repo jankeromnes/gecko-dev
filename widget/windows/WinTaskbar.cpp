@@ -62,14 +62,14 @@ GetHWNDFromDOMWindow(mozIDOMWindow *dw) {
 }
 
 nsresult
-SetWindowAppUserModelProp(mozIDOMWindow *aParent,
+SetWindowAppUserModelProp(mozIDOMWindow *apparent,
                           const nsString & aIdentifier) {
-  NS_ENSURE_ARG_POINTER(aParent);
+  NS_ENSURE_ARG_POINTER(apparent);
 
   if (aIdentifier.IsEmpty())
     return NS_ERROR_INVALID_ARG;
 
-  HWND toplevelHWND = ::GetAncestor(GetHWNDFromDOMWindow(aParent), GA_ROOT);
+  HWND toplevelHWND = ::GetAncestor(GetHWNDFromDOMWindow(apparent), GA_ROOT);
 
   if (!toplevelHWND)
     return NS_ERROR_INVALID_ARG;
@@ -412,9 +412,9 @@ WinTaskbar::CreateJumpListBuilder(nsIJumpListBuilder * *aJumpListBuilder) {
 }
 
 NS_IMETHODIMP
-WinTaskbar::SetGroupIdForWindow(mozIDOMWindow *aParent,
+WinTaskbar::SetGroupIdForWindow(mozIDOMWindow *apparent,
                                 const nsAString & aIdentifier) {
-  return SetWindowAppUserModelProp(aParent, nsString(aIdentifier));
+  return SetWindowAppUserModelProp(apparent, nsString(aIdentifier));
 }
 
 NS_IMETHODIMP

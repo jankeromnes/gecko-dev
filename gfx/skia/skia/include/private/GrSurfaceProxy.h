@@ -435,7 +435,7 @@ private:
     // The last opList that wrote to or is currently going to write to this surface
     // The opList can be closed (e.g., no surface context is currently bound
     // to this proxy).
-    // This back-pointer is required so that we can add a dependancy between
+    // This back-pointer is required so that we can add a dependency between
     // the opList used to create the current contents of this surface
     // and the opList of a destination surface to which this one is being drawn or copied.
     // This pointer is unreffed. OpLists own a ref on their surface proxies.

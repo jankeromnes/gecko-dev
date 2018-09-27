@@ -49,7 +49,7 @@ enum class DispatchTarget
     // Call happens synchronously on the calling thread (default).
     CURRENT,
     // Call happens synchronously on the calling thread, but the call is
-    // wrapped in a function object and is passed thru UsesNativeCallProxy.
+    // wrapped in a function object and is passed through UsesNativeCallProxy.
     // Method must return void.
     PROXY,
     // Call is dispatched asynchronously on the Gecko thread to the XPCOM

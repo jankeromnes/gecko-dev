@@ -88,7 +88,7 @@ TEST(SandboxBrokerPolicyLookup, Recursive)
 
   psrc.AddDir(MAY_READ, "/tmp");
   EXPECT_EQ(MAY_ACCESS | MAY_READ, psrc.Lookup("/tmp/good/a"))
-    << "Check whether dir add with no trailing / was sucessful.";
+    << "Check whether dir add with no trailing / was successful.";
   EXPECT_EQ(0, psrc.Lookup("/tmp_good_but_bad"))
     << "Enforce terminator on directories.";
   EXPECT_EQ(0, psrc.Lookup("/tmp/."))

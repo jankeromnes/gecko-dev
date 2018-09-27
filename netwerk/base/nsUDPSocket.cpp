@@ -466,7 +466,7 @@ nsUDPSocket::OnSocketReady(PRFileDesc *fd, int16_t outFlags)
 
   PRNetAddr prClientAddr;
   uint32_t count;
-  // Bug 1252755 - use 9216 bytes to allign with nICEr and transportlayer to
+  // Bug 1252755 - use 9216 bytes to align with nICEr and transportlayer to
   // support the maximum size of jumbo frames
   char buff[9216];
   count = PR_RecvFrom(mFD, buff, sizeof(buff), 0, &prClientAddr, PR_INTERVAL_NO_WAIT);
@@ -599,7 +599,7 @@ nsUDPSocket::Init2(const nsACString& aAddr, int32_t aPort, nsIPrincipal *aPrinci
       prAddr.ipv6.port = PR_htons(aPort);
       break;
     default:
-      MOZ_ASSERT_UNREACHABLE("Dont accept address other than IPv4 and IPv6");
+      MOZ_ASSERT_UNREACHABLE("Don't accept address other than IPv4 and IPv6");
       return NS_ERROR_ILLEGAL_VALUE;
   }
 

@@ -2456,7 +2456,7 @@ private:
     BasicTimeZone* getBasicTimeZone() const;
 
     /**
-     * Find the previous zone transtion near the given time.
+     * Find the previous zone transition near the given time.
      * @param base The base time, inclusive
      * @param transitionTime Receives the result time
      * @param status The error status

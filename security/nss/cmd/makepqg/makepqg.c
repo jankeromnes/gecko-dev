@@ -258,7 +258,7 @@ main(int argc, char **argv)
         gMax = 2048;
         if ((qSizeInBits != 0) && (qSizeInBits != 160)) {
             fprintf(stderr, "%s: Illegal subprime length, \n"
-                            "\tonly 160 is acceptible for primes <= 1024\n",
+                            "\tonly 160 is acceptable for primes <= 1024\n",
                     progName);
             return 2;
         }

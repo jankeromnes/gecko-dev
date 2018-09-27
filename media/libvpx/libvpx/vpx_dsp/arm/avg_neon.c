@@ -223,7 +223,7 @@ void vpx_minmax_8x8_neon(const uint8_t *a, int a_stride, const uint8_t *b,
   uint8x8_t ab_max = vmax_u8(vget_high_u8(ab07_max), vget_low_u8(ab07_max));
   uint8x8_t ab_min = vmin_u8(vget_high_u8(ab07_min), vget_low_u8(ab07_min));
 
-  // Enough runs of vpmax/min propogate the max/min values to every position.
+  // Enough runs of vpmax/min propagate the max/min values to every position.
   ab_max = vpmax_u8(ab_max, ab_max);
   ab_min = vpmin_u8(ab_min, ab_min);
 

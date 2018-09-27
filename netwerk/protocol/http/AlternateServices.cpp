@@ -609,7 +609,7 @@ public:
              mTransactionOrigin->mWKResponse.get(),
              mTransactionAlternate->mWKResponse.get()));
       } else if (!mAlternateCT.Equals(mOriginCT)) {
-        LOG(("WellKnownChecker::Done %p alternate and origin content types dont match\n", this));
+        LOG(("WellKnownChecker::Done %p alternate and origin content types don't match\n", this));
       } else if (!mAlternateCT.EqualsLiteral("application/json")) {
         LOG(("WellKnownChecker::Done %p .wk content type is %s\n", this, mAlternateCT.get()));
       } else if (!uu) {

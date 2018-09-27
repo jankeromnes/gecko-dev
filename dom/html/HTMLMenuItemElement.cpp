@@ -297,10 +297,10 @@ HTMLMenuItemElement::PostHandleEvent(EventChainPostVisitor& aVisitor)
 }
 
 nsresult
-HTMLMenuItemElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLMenuItemElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                                 nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                  aBindingParent);
 
   if (NS_SUCCEEDED(rv) && aDocument && mType == CMD_TYPE_RADIO) {

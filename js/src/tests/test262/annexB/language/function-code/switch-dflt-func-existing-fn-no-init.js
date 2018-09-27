@@ -2,7 +2,7 @@
 // - src/annex-b-fns/func-existing-fn-no-init.case
 // - src/annex-b-fns/func/switch-dflt.template
 /*---
-description: Existing variable binding is not modified (Funtion declaration in the `default` clause of a `switch` statement in function scope)
+description: Existing variable binding is not modified (Function declaration in the `default` clause of a `switch` statement in function scope)
 esid: sec-web-compat-functiondeclarationinstantiation
 es6id: B.3.3.1
 flags: [generated, noStrict]

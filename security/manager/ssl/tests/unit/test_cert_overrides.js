@@ -179,7 +179,7 @@ function add_simple_tests() {
                                    SEC_ERROR_INADEQUATE_KEY_USAGE);
 
   // Test triggering the MitM detection. We don't set-up a proxy here. Just
-  // set the pref. Without the pref set we expect an unkown issuer error.
+  // set the pref. Without the pref set we expect an unknown issuer error.
   add_cert_override_test("mitm.example.com",
                          Ci.nsICertOverrideService.ERROR_UNTRUSTED,
                          SEC_ERROR_UNKNOWN_ISSUER);

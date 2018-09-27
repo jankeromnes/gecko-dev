@@ -113,7 +113,7 @@ PuppetWidget::~PuppetWidget()
 }
 
 void
-PuppetWidget::InfallibleCreate(nsIWidget* aParent,
+PuppetWidget::InfallibleCreate(nsIWidget* apparent,
                                nsNativeWidget aNativeParent,
                                const LayoutDeviceIntRect& aRect,
                                nsWidgetInitData* aInitData)
@@ -131,7 +131,7 @@ PuppetWidget::InfallibleCreate(nsIWidget* aParent,
 
   mNeedIMEStateInit = MightNeedIMEFocus(aInitData);
 
-  PuppetWidget* parent = static_cast<PuppetWidget*>(aParent);
+  PuppetWidget* parent = static_cast<PuppetWidget*>(apparent);
   if (parent) {
     parent->SetChild(this);
     mLayerManager = parent->GetLayerManager();
@@ -143,12 +143,12 @@ PuppetWidget::InfallibleCreate(nsIWidget* aParent,
 }
 
 nsresult
-PuppetWidget::Create(nsIWidget* aParent,
+PuppetWidget::Create(nsIWidget* apparent,
                      nsNativeWidget aNativeParent,
                      const LayoutDeviceIntRect& aRect,
                      nsWidgetInitData* aInitData)
 {
-  InfallibleCreate(aParent, aNativeParent, aRect, aInitData);
+  InfallibleCreate(apparent, aNativeParent, aRect, aInitData);
   return NS_OK;
 }
 

@@ -416,7 +416,7 @@ PathD2D::TransformedCopyToBuilder(const Matrix &aTransform, FillRule aFillRule) 
                              sink);
   }
   if (FAILED(hr)) {
-    gfxWarning() << "Failed to simplify PathGeometry to tranformed copy. Code: " << hexa(hr) << " Active: " << mEndedActive;
+    gfxWarning() << "Failed to simplify PathGeometry to transformed copy. Code: " << hexa(hr) << " Active: " << mEndedActive;
     return nullptr;
   }
 

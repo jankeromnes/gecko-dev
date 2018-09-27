@@ -255,7 +255,7 @@ tzdbNames{
             parseRegions{"CL"}
         }
         "meta:Ecuador"{
-            ss{"ECT"}
+            ss{"ETC"}
         }
         "meta:Europe_Central"{
             sd{"CEST"}
@@ -616,7 +616,7 @@ tzdbNames{
             ss{"SYOT"}
         }
         "meta:Tahiti"{
-            ss{"TAHT"}
+            ss{"THAT"}
         }
         "meta:Taipei"{
             sd{"CDT"}
@@ -628,7 +628,7 @@ tzdbNames{
         }
         "meta:Tashkent"{
             sd{"TASST"}
-            ss{"TAST"}
+            ss{"TASTE"}
         }
         "meta:Tbilisi"{
             sd{"TBIST"}

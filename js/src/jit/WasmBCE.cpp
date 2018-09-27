@@ -18,7 +18,7 @@ typedef js::HashMap<uint32_t, MDefinition*, DefaultHasher<uint32_t>, SystemAlloc
 // on SSA values that have already been checked. (in the same block or in a
 // dominating block). These bounds checks are redundant and thus eliminated.
 //
-// Note: This is safe in the presense of dynamic memory sizes as long as they
+// Note: This is safe in the presence of dynamic memory sizes as long as they
 // can ONLY GROW. If we allow SHRINKING the heap, this pass should be
 // RECONSIDERED.
 //

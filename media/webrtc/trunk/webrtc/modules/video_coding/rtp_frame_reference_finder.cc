@@ -655,7 +655,7 @@ bool RtpFrameReferenceFinder::Vp9PidTl0Fix(const RtpFrameObject& frame,
 
   if (has_jumped) {
     // First we calculate the offset to get to the previous picture id, and then
-    // we add kMaxPid to avoid accidently referencing any previous
+    // we add kMaxPid to avoid accidentally referencing any previous
     // frames that was inserted into the FrameBuffer.
     vp9_fix_pid_offset_ = ForwardDiff<uint16_t, kPicIdLength>(
         *picture_id, vp9_fix_last_picture_id_);

@@ -79,7 +79,7 @@ Changelog 1.0.2 -> 1.1.0
 
 * add the ability to specify a path for py.lookup to search in
 
-* fix a funcarg cached_setup bug probably only occuring
+* fix a funcarg cached_setup bug probably only occurring
   in distributed testing and "module" scope with teardown.
 
 * many fixes and changes for making the code base python3 compatible,

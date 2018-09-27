@@ -490,7 +490,7 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
         if (so_sock_ct) {
           if ((r=nr_ice_component_create_tcp_host_candidate(ctx, component, &addrs[i].addr,
             TCP_TYPE_SO, 0, so_sock_ct, lufrag, pwd, &isock_so))) {
-            r_log(LOG_ICE,LOG_WARNING,"ICE(%s): failed to create simultanous open TCP host candidate: %d",ctx->label,r);
+            r_log(LOG_ICE,LOG_WARNING,"ICE(%s): failed to create simultaneous open TCP host candidate: %d",ctx->label,r);
           }
         }
 

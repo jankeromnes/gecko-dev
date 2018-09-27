@@ -4,7 +4,7 @@
 es6id: 25.3.1.4
 description: >
     When a generator is paused within a `try` block of a `try..catch` statement
-    and following a nested `try..catch` statment, `throw` should interrupt
+    and following a nested `try..catch` statement, `throw` should interrupt
     control flow as if a `throw` statement had appeared at that location in the
     function body.
 features: [generators]

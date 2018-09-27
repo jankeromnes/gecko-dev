@@ -41,7 +41,7 @@ static __inline float FAbs(float v) {
 }
 #define OFFBY 0
 
-// Scaling uses 16.16 fixed point to step thru the source image, so a
+// Scaling uses 16.16 fixed point to step through the source image, so a
 // maximum size of 32767.999 can be expressed.  32768 is valid because
 // the step is 1 beyond the image but not used.
 // Destination size is mainly constrained by valid scale step not the

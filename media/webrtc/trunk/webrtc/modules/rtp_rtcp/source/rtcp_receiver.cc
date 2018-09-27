@@ -624,7 +624,7 @@ bool RTCPReceiver::UpdateRTCPReceiveInformationTimers() {
       }
       ++receive_info_it;
     } else if (receive_info->ready_for_delete) {
-      // When we dont have a last_time_received_ms and the object is marked
+      // When we don't have a last_time_received_ms and the object is marked
       // ready_for_delete it's removed from the map.
       receive_info_it = received_infos_.erase(receive_info_it);
     } else {

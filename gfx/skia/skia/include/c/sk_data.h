@@ -27,7 +27,7 @@ SK_API sk_data_t* sk_data_new_empty(void);
 SK_API sk_data_t* sk_data_new_with_copy(const void* src, size_t length);
 /**
     Pass ownership of the given memory to a new sk_data_t, which will
-    call free() when the refernce count of the data goes to zero.  For
+    call free() when the references count of the data goes to zero.  For
     example:
         size_t length = 1024;
         void* buffer = malloc(length);

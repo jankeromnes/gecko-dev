@@ -6,7 +6,7 @@ te{
         standard{
             Sequence{
                 "[normalization on]"
-                "[reorder Telu Deva Beng Guru Gujr Orya Taml Knda Mlym Sinh]"
+                "[reorder Telu Deva Being Guru Gujr Orya Taml Knda Mlym Sinh]"
                 "&ఔ<ఁ<ం<ః"
             }
             Version{"33.1"}

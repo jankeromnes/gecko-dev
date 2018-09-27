@@ -26,7 +26,7 @@ public:
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS_INHERITED(AuthenticatorAssertionResponse,
                                                          AuthenticatorResponse)
 
-  explicit AuthenticatorAssertionResponse(nsPIDOMWindowInner* aParent);
+  explicit AuthenticatorAssertionResponse(nsPIDOMWindowInner* apparent);
 
 protected:
   ~AuthenticatorAssertionResponse() override;

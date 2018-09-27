@@ -2367,7 +2367,7 @@ HTMLEditor::SplitCellIntoRows(Element* aTable,
       if (startColIndex2 + actualColSpan2 == startColIndex) {
         break;
       }
-      // If cell found is AFTER desired new cell colum,
+      // If cell found is AFTER desired new cell column,
       //  we have multiple cells with rowspan > 1 that
       //  prevented us from finding a cell to insert after...
       if (startColIndex2 > startColIndex) {

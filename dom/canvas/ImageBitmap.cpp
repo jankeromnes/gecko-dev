@@ -1430,13 +1430,13 @@ ImageBitmap::Create(nsIGlobalObject* aGlobal, const ImageBitmapSource& aSrc,
 /*static*/ JSObject*
 ImageBitmap::ReadStructuredClone(JSContext* aCx,
                                  JSStructuredCloneReader* aReader,
-                                 nsIGlobalObject* aParent,
+                                 nsIGlobalObject* apparent,
                                  const nsTArray<RefPtr<DataSourceSurface>>& aClonedSurfaces,
                                  uint32_t aIndex)
 {
   MOZ_ASSERT(aCx);
   MOZ_ASSERT(aReader);
-  // aParent might be null.
+  // apparent might be null.
 
   uint32_t picRectX_;
   uint32_t picRectY_;
@@ -1475,7 +1475,7 @@ ImageBitmap::ReadStructuredClone(JSContext* aCx,
     }
 #endif
     RefPtr<layers::Image> img = CreateImageFromSurface(aClonedSurfaces[aIndex]);
-    RefPtr<ImageBitmap> imageBitmap = new ImageBitmap(aParent, img, alphaType);
+    RefPtr<ImageBitmap> imageBitmap = new ImageBitmap(apparent, img, alphaType);
 
     imageBitmap->mIsCroppingAreaOutSideOfSourceImage =
       isCroppingAreaOutSideOfSourceImage_;

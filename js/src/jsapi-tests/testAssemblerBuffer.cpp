@@ -85,7 +85,7 @@ BEGIN_TEST(testAssemblerBuffer_AssemblerBuffer)
     CHECK_EQUAL(ab.size(), 24u);
     CHECK_EQUAL(ab.nextOffset().getOffset(), 24);
 
-    // Reference previous slice. Excercise the finger.
+    // Reference previous slice. Exercise the finger.
     CHECK_EQUAL(*ab.getInst(off1), 1000017u);
     CHECK_EQUAL(*ab.getInst(off6), 1000022u);
     CHECK_EQUAL(*ab.getInst(off1), 1000017u);

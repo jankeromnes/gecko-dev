@@ -75,7 +75,7 @@ TEST_F(FPDFTextEmbeddertest, Text) {
   EXPECT_EQ(-1, FPDFText_GetCharIndexAtPos(textpage, 0.0, 0.0, 1.0, 1.0));
   EXPECT_EQ(-1, FPDFText_GetCharIndexAtPos(textpage, 199.0, 199.0, 1.0, 1.0));
 
-  // Test out of range indicies.
+  // Test out of range indices.
   EXPECT_EQ(-1,
             FPDFText_GetCharIndexAtPos(textpage, 42.0, 10000000.0, 1.0, 1.0));
   EXPECT_EQ(-1, FPDFText_GetCharIndexAtPos(textpage, -1.0, 50.0, 1.0, 1.0));
@@ -93,7 +93,7 @@ TEST_F(FPDFTextEmbeddertest, Text) {
   EXPECT_NEAR(96.655, bottom, 0.001);
   EXPECT_NEAR(116.000, top, 0.001);
 
-  // Test out of range indicies set outputs to (0.0, 0.0, 0.0, 0.0).
+  // Test out of range indices set outputs to (0.0, 0.0, 0.0, 0.0).
   left = -1.0;
   right = -1.0;
   bottom = -1.0;
@@ -157,7 +157,7 @@ TEST_F(FPDFTextEmbeddertest, TextSearch) {
   std::unique_ptr<unsigned short, pdfium::FreeDeleter> world_substr =
       GetFPDFWideString(L"orld");
 
-  // No occurences of "nope" in test page.
+  // No occurrences of "nope" in test page.
   FPDF_SCHHANDLE search = FPDFText_FindStart(textpage, nope.get(), 0, 0);
   EXPECT_TRUE(search);
   EXPECT_EQ(0, FPDFText_GetSchResultIndex(search));
@@ -174,7 +174,7 @@ TEST_F(FPDFTextEmbeddertest, TextSearch) {
   EXPECT_EQ(0, FPDFText_GetSchCount(search));
   FPDFText_FindClose(search);
 
-  // Two occurences of "world" in test page.
+  // Two occurrences of "world" in test page.
   search = FPDFText_FindStart(textpage, world.get(), 0, 2);
   EXPECT_TRUE(search);
 
@@ -182,12 +182,12 @@ TEST_F(FPDFTextEmbeddertest, TextSearch) {
   EXPECT_EQ(0, FPDFText_GetSchResultIndex(search));
   EXPECT_EQ(0, FPDFText_GetSchCount(search));
 
-  // First occurence of "world" in this test page.
+  // First occurrence of "world" in this test page.
   EXPECT_TRUE(FPDFText_FindNext(search));
   EXPECT_EQ(7, FPDFText_GetSchResultIndex(search));
   EXPECT_EQ(5, FPDFText_GetSchCount(search));
 
-  // Last occurence of "world" in this test page.
+  // Last occurrence of "world" in this test page.
   EXPECT_TRUE(FPDFText_FindNext(search));
   EXPECT_EQ(24, FPDFText_GetSchResultIndex(search));
   EXPECT_EQ(5, FPDFText_GetSchCount(search));
@@ -197,7 +197,7 @@ TEST_F(FPDFTextEmbeddertest, TextSearch) {
   EXPECT_EQ(24, FPDFText_GetSchResultIndex(search));
   EXPECT_EQ(5, FPDFText_GetSchCount(search));
 
-  // Back to first occurence.
+  // Back to first occurrence.
   EXPECT_TRUE(FPDFText_FindPrev(search));
   EXPECT_EQ(7, FPDFText_GetSchResultIndex(search));
   EXPECT_EQ(5, FPDFText_GetSchCount(search));
@@ -307,7 +307,7 @@ TEST_F(FPDFTextEmbeddertest, WebLinks) {
       check_unsigned_shorts(expected_url, fixed_buffer, expected_len - 1));
   EXPECT_EQ(0xbdbd, fixed_buffer[expected_len - 1]);
 
-  // Retreive link with exactly-sized buffer.
+  // Retrieve link with exactly-sized buffer.
   memset(fixed_buffer, 0xbd, sizeof(fixed_buffer));
   EXPECT_EQ(static_cast<int>(expected_len),
             FPDFLink_GetURL(pagelink, 0, fixed_buffer, expected_len));
@@ -315,7 +315,7 @@ TEST_F(FPDFTextEmbeddertest, WebLinks) {
   EXPECT_EQ(0u, fixed_buffer[expected_len - 1]);
   EXPECT_EQ(0xbdbd, fixed_buffer[expected_len]);
 
-  // Retreive link with ample-sized-buffer.
+  // Retrieve link with ample-sized-buffer.
   memset(fixed_buffer, 0xbd, sizeof(fixed_buffer));
   EXPECT_EQ(static_cast<int>(expected_len),
             FPDFLink_GetURL(pagelink, 0, fixed_buffer, 128));

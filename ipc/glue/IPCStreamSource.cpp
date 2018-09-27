@@ -87,7 +87,7 @@ private:
   }
 
   // This is a raw pointer because the source keeps alive the callback and,
-  // before beeing destroyed, it nullifies this pointer (this happens when
+  // before being destroyed, it nullifies this pointer (this happens when
   // ActorDestroyed() is called).
   IPCStreamSource* mSource;
 

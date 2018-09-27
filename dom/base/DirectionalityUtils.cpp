@@ -1273,13 +1273,13 @@ OnSetDirAttr(Element* aElement, const nsAttrValue* aNewValue,
 }
 
 void
-SetDirOnBind(Element* aElement, nsIContent* aParent)
+SetDirOnBind(Element* aElement, nsIContent* apparent)
 {
   // Set the AncestorHasDirAuto flag, unless this element shouldn't affect
   // ancestors that have dir=auto
   if (!DoesNotParticipateInAutoDirection(aElement) &&
       !aElement->IsHTMLElement(nsGkAtoms::bdi) &&
-      aParent && aParent->NodeOrAncestorHasDirAuto()) {
+      apparent && apparent->NodeOrAncestorHasDirAuto()) {
     aElement->SetAncestorHasDirAuto();
 
     SetAncestorHasDirAutoOnDescendants(aElement);

@@ -235,7 +235,7 @@ private:
 
   // Hold to prevent multiple outstanding requests. We don't use
   // request IDs so we only support one at a time. Don't want try
-  // to use the webrtc.org API from multiple threads simultanously.
+  // to use the webrtc.org API from multiple threads simultaneously.
   // The monitor below isn't sufficient for this, as it will drop
   // the lock when Wait-ing for a response, allowing us to send a new
   // request. The Notify on receiving the response will then unblock

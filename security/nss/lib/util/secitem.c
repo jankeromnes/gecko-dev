@@ -326,7 +326,7 @@ SECITEM_ZfreeItem(SECItem *zap, PRBool freeit)
 /*
  * This is the hash function.  We simply XOR the encoded form with
  * itself in sizeof(PLHashNumber)-byte chunks.  Improving this
- * routine is left as an excercise for the more mathematically
+ * routine is left as an exercise for the more mathematically
  * inclined student.
  */
 PLHashNumber PR_CALLBACK

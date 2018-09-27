@@ -116,7 +116,7 @@
 
 #define BWE_TEST_LOGGING_BASELINEBAR(figure, name, value, flow_id)
 
-// |num_flows| is an integer refering to the number of RMCAT flows in the
+// |num_flows| is an integer referring to the number of RMCAT flows in the
 // scenario.
 // Define |x_label| and |y_label| for plots.
 #define BWE_TEST_LOGGING_LABEL(figure, x_label, y_label, num_flows)

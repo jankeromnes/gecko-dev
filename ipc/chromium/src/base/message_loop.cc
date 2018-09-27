@@ -471,7 +471,7 @@ bool MessageLoop::DeferOrRunPendingTask(PendingTask&& pending_task) {
 void MessageLoop::AddToDelayedWorkQueue(const PendingTask& pending_task) {
   // Move to the delayed work queue.  Initialize the sequence number
   // before inserting into the delayed_work_queue_.  The sequence number
-  // is used to faciliate FIFO sorting when two tasks have the same
+  // is used to facilitate FIFO sorting when two tasks have the same
   // delayed_run_time value.
   PendingTask new_pending_task(pending_task);
   new_pending_task.sequence_num = next_sequence_num_++;

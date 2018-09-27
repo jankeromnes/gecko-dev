@@ -288,7 +288,7 @@ public:
   };
 
   /**
-   * Skips any occurence of whitespaces specified in mWhitespaces member,
+   * Skips any occurrence of whitespaces specified in mWhitespaces member,
    * optionally skip also new lines.
    */
   void SkipWhites(WhiteSkipping aIncludeNewLines = DONT_INCLUDE_NEW_LINE);
@@ -436,7 +436,7 @@ public:
    * Returns the read cursor position back as it was before the last call of any parsing
    * method of TTokenizer (Next, Check*, Skip*, Read*) so that the last operation
    * can be repeated.
-   * Rollback cannot be used multiple times, it only reverts the last successfull parse
+   * Rollback cannot be used multiple times, it only reverts the last successful parse
    * operation.  It also cannot be used before any parsing operation has been called
    * on the TTokenizer.
    */
@@ -460,7 +460,7 @@ public:
   };
 
   /**
-   * Start the process of recording.  Based on aInclude value the begining of the recorded
+   * Start the process of recording.  Based on aInclude value the beginning of the recorded
    * sub-string is at the current position (EXCLUDE_LAST) or at the position before the last
    * parsed token (INCLUDE_LAST).
    */

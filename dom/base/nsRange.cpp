@@ -778,7 +778,7 @@ nsRange::ContentRemoved(nsIContent* aChild, nsIContent* aPreviousSibling)
     }
   }
 
-  // Do same thing for end boundry.
+  // Do same thing for end boundary.
   if (container == mEnd.Container()) {
     if (aChild == mEnd.Ref()) {
       newEnd.SetAfterRef(container, aPreviousSibling);
@@ -2814,7 +2814,7 @@ nsRange::ToString(nsAString& aReturn, ErrorResult& aErr)
       printf("Range dump: -----------------------\n");
 #endif /* DEBUG */
 
-  // effeciency hack for simple case
+  // efficiency hack for simple case
   if (mStart.Container() == mEnd.Container()) {
     Text* textNode = mStart.Container() ? mStart.Container()->GetAsText() : nullptr;
 

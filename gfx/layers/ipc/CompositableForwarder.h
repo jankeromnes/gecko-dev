@@ -33,7 +33,7 @@ class ThebesBufferData;
 class PTextureChild;
 
 /**
- * A transaction is a set of changes that happenned on the content side, that
+ * A transaction is a set of changes that happened on the content side, that
  * should be sent to the compositor side.
  * CompositableForwarder is an interface to manage a transaction of
  * compositable objetcs.

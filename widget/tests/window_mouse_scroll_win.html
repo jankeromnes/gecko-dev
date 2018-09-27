@@ -306,7 +306,7 @@ var gPreparingSteps = [
 ];
 
 var gBasicTests = [
-  // Widget shouldn't dispatch a pixel event if the delta can be devided by
+  // Widget shouldn't dispatch a pixel event if the delta can be divided by
   // lines to be scrolled.  However, pixel events should be fired by ESM.
   { description: "WM_MOUSEWHEEL, -120, 3 lines",
     message: WM_MOUSEWHEEL, delta: -120,
@@ -468,7 +468,7 @@ var gBasicTests = [
 
   // Even if the mouse cursor is an element whose font-size is different than
   // the scrollable element, the pixel scroll amount shouldn't be changed.
-  // Widget shouldn't dispatch a pixel event if the delta can be devided by
+  // Widget shouldn't dispatch a pixel event if the delta can be divided by
   // lines to be scrolled.  However, pixel events should be fired by ESM.
   { description: "WM_MOUSEWHEEL, -120, 3 lines, on the other div whose font-size is larger",
     message: WM_MOUSEWHEEL, delta: -120,

@@ -149,7 +149,7 @@ function StartTestURI(type, uri, uriTargetType, timeout)
 {
     // The GC is only able to clean up compartments after the CC runs. Since
     // the JS ref tests disable the normal browser chrome and do not otherwise
-    // create substatial DOM garbage, the CC tends not to run enough normally.
+    // create substantial DOM garbage, the CC tends not to run enough normally.
     windowUtils().runNextCollectorTimer();
 
     // Reset gExplicitPendingPaintCount in case there was a timeout or
@@ -219,7 +219,7 @@ function setupPrintMode() {
    docShell.contentViewer.setPageMode(true, ps);
 }
 
-// Prints current page to a PDF file and calls callback when sucessfully
+// Prints current page to a PDF file and calls callback when successfully
 // printed and written.
 function printToPdf(callback) {
     let currentDoc = content.document;

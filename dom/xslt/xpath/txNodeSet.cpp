@@ -158,7 +158,7 @@ nsresult txNodeSet::addAndTransfer(txNodeSet* aNodes)
  * _ _ _ _ _ _ _ _   <- result
  *
  *
- * When merging these nodesets into the result, the nodes are transfered
+ * When merging these nodesets into the result, the nodes are transferred
  * in chunks to the end of the buffer so that each chunk does not contain
  * a node from the other nodeset, in document order.
  *
@@ -167,7 +167,7 @@ nsresult txNodeSet::addAndTransfer(txNodeSet* aNodes)
  * take the 7 from the first nodeset and find the position between the
  * 6 and 8 in the second. We then take the nodes after the insert-position
  * and transfer them to the end of the resulting nodeset. Which in this case
- * means that we first transfered the 8 and 9 nodes, giving us the following:
+ * means that we first transferred the 8 and 9 nodes, giving us the following:
  *
  * 1 3 7             <- source 1
  * 2 3 6             <- source 2

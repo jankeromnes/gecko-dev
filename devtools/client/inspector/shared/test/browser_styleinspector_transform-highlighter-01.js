@@ -31,7 +31,7 @@ add_task(async function() {
   is(h, overlay.highlighters[TYPE], "The right highlighter has been created");
   const h2 = await overlay._getHighlighter(TYPE);
   is(h, h2,
-    "The same instance of highlighter is returned everytime in the rule-view");
+    "The same instance of highlighter is returned every time in the rule-view");
 
   const onComputedViewReady = inspector.once("computed-view-refreshed");
   const cView = selectComputedView(inspector);
@@ -40,6 +40,6 @@ add_task(async function() {
 
   ok(overlay.highlighters[TYPE], "The highlighter exists in the computed-view");
   const h3 = await overlay._getHighlighter(TYPE);
-  is(h, h3, "The same instance of highlighter is returned everytime " +
+  is(h, h3, "The same instance of highlighter is returned every time " +
     "in the computed-view");
 });

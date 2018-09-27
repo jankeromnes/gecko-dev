@@ -28,7 +28,7 @@ Snippets (the remote notification that handled by activity stream) will only be 
 
 During booting from `bootstrap.js`, `OnboardingTourType.jsm` will check the onboarding tour type (`new` and `update` are supported types) and set required initial states into preferences.
 
-Everytime `about:home`, `about:newtab`, or `about:welcome` page is opened, `onboarding.js` is injected into that page via [frame scripts](https://developer.mozilla.org/en-US/Firefox/Multiprocess_Firefox/Message_Manager/Communicating_with_frame_scripts).
+Every time `about:home`, `about:newtab`, or `about:welcome` page is opened, `onboarding.js` is injected into that page via [frame scripts](https://developer.mozilla.org/en-US/Firefox/Multiprocess_Firefox/Message_Manager/Communicating_with_frame_scripts).
 
 Then in `onboarding.js`, all tours are defined inside of `onboardingTourset` dictionary. `getTourIDList` function will load tours from proper preferences. (Check `How to change the order of tours` section for more detail).
 

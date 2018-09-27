@@ -83,7 +83,7 @@ public:
     // Scope chain in which the execution takes place.
     JS::AutoObjectVector mScopeChain;
 
-    // returned value forwarded when we have to interupt the execution eagerly
+    // returned value forwarded when we have to interrupt the execution eagerly
     // with mSkip.
     nsresult mRv;
 

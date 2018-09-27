@@ -1250,8 +1250,8 @@ nsresult
 WSRunObject::PrepareToDeleteRangePriv(WSRunObject* aEndObject)
 {
   // this routine adjust whitespace before *this* and after aEndObject
-  // in preperation for the two areas to become adjacent after the
-  // intervening content is deleted.  It's overly agressive right
+  // in preparation for the two areas to become adjacent after the
+  // intervening content is deleted.  It's overly aggressive right
   // now.  There might be a block boundary remaining between them after
   // the deletion, in which case these adjstments are unneeded (though
   // I don't think they can ever be harmful?)

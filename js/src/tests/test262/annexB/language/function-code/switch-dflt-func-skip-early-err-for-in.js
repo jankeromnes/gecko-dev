@@ -2,7 +2,7 @@
 // - src/annex-b-fns/func-skip-early-err-for-in.case
 // - src/annex-b-fns/func/switch-dflt.template
 /*---
-description: Extension not observed when creation of variable binding would produce an early error (for-of statement) (Funtion declaration in the `default` clause of a `switch` statement in function scope)
+description: Extension not observed when creation of variable binding would produce an early error (for-of statement) (Function declaration in the `default` clause of a `switch` statement in function scope)
 esid: sec-web-compat-functiondeclarationinstantiation
 es6id: B.3.3.1
 flags: [generated, noStrict]

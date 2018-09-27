@@ -2167,7 +2167,7 @@ nsHttpChannel::ProcessSecurityReport(nsresult status) {
         return;
     }
 
-    // if the content was not loaded succesfully and we have security info,
+    // if the content was not loaded successfully and we have security info,
     // send a TLS error report - we must do this early as other parts of
     // OnStopRequest can return early
     bool reportingEnabled =
@@ -3639,7 +3639,7 @@ nsHttpChannel::ProcessNotModified()
     rv = AddCacheEntryHeaders(mCacheEntry);
     if (NS_FAILED(rv)) return rv;
 
-    // notify observers interested in looking at a reponse that has been
+    // notify observers interested in looking at a response that has been
     // merged with any cached headers
     gHttpHandler->OnExamineMergedResponse(this);
 
@@ -5952,7 +5952,7 @@ NS_IMETHODIMP nsHttpChannel::OnAuthCancelled(bool userCancel)
         // If the channel is trying to authenticate to a proxy and
         // that was canceled we cannot show the http response body
         // from the 40x as that might mislead the user into thinking
-        // it was a end host response instead of a proxy reponse.
+        // it was a end host response instead of a proxy response.
         // This must check explicitly whether a proxy auth was being done
         // because we do want to show the content if this is an error from
         // the origin server.

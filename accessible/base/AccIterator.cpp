@@ -63,9 +63,9 @@ AccIterator::Next()
 ////////////////////////////////////////////////////////////////////////////////
 // nsAccIterator::IteratorState
 
-AccIterator::IteratorState::IteratorState(const Accessible* aParent,
+AccIterator::IteratorState::IteratorState(const Accessible* apparent,
                                           IteratorState *mParentState) :
-  mParent(aParent), mIndex(0), mParentState(mParentState)
+  mParent(apparent), mIndex(0), mParentState(mParentState)
 {
 }
 

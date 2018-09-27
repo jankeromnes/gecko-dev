@@ -782,7 +782,7 @@ mod tests {
         // With mirrorable characters in RTL run
         assert_eq!(reorder_paras("א(ב)ג."), vec![".ג)ב(א"]);
 
-        // With mirrorable characters on level boundry
+        // With mirrorable characters on level boundary
         assert_eq!(
             reorder_paras("אב(גד[&ef].)gh"),
             vec!["ef].)gh&[דג(בא"]

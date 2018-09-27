@@ -4976,7 +4976,7 @@ CodeGenerator::emitCopyValuesForApply(Register argvSrcBase, Register argvIndex, 
     masm.bind(&loop);
 
     // As argvIndex is off by 1, and we use the decBranchPtr instruction
-    // to loop back, we have to substract the size of the word which are
+    // to loop back, we have to subtract the size of the word which are
     // copied.
     BaseValueIndex srcPtr(argvSrcBase, argvIndex, argvSrcOffset - sizeof(void*));
     BaseValueIndex dstPtr(masm.getStackPointer(), argvIndex, argvDstOffset - sizeof(void*));
@@ -10548,8 +10548,8 @@ CodeGenerator::link(JSContext* cx, CompilerConstraintList* constraints)
         cx->zone()->types.currentCompilationIdRef().reset();
     });
 
-    // Record constraints. If an error occured, returns false and potentially
-    // prevent future compilations. Otherwise, if an invalidation occured, then
+    // Record constraints. If an error occurred, returns false and potentially
+    // prevent future compilations. Otherwise, if an invalidation occurred, then
     // skip the current compilation.
     bool isValid = false;
     if (!FinishCompilation(cx, script, constraints, compilationId, &isValid)) {
@@ -13883,15 +13883,15 @@ CodeGenerator::emitIonToWasmCallBase(LIonToWasmCallBase<NumDefs>* lir)
             break;
           }
           case ABIArg::Stack: {
-            const LAllocation* larg = lir->getOperand(i);
+            const LAllocation* large = lir->getOperand(i);
             if (larg->isConstant()) {
-                stackArgs.infallibleEmplaceBack(ToInt32(larg));
+                stackArgs.infallibleEmplaceBack(ToInt32(large));
             } else if (larg->isGeneralReg()) {
-                stackArgs.infallibleEmplaceBack(ToRegister(larg));
+                stackArgs.infallibleEmplaceBack(ToRegister(large));
             } else if (larg->isFloatReg()) {
-                stackArgs.infallibleEmplaceBack(ToFloatRegister(larg));
+                stackArgs.infallibleEmplaceBack(ToFloatRegister(large));
             } else {
-                stackArgs.infallibleEmplaceBack(ToAddress(larg));
+                stackArgs.infallibleEmplaceBack(ToAddress(large));
             }
             break;
           }

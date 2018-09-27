@@ -204,7 +204,7 @@ public class SwitchBoard {
     }
 
     private static List<String> getExperimentNames(Context c) throws JSONException {
-        // TODO: cache the array into a mapping so we don't do a loop everytime we are looking for a experiment key
+        // TODO: cache the array into a mapping so we don't do a loop every time we are looking for a experiment key
         final List<String> returnList = new ArrayList<>();
         final String config = Preferences.getDynamicConfigJson(c);
         final JSONArray experiments = new JSONObject(config).getJSONArray(KEY_DATA);
@@ -218,7 +218,7 @@ public class SwitchBoard {
 
     @Nullable
     private static JSONObject getExperiment(Context c, String experimentName) throws JSONException {
-        // TODO: cache the array into a mapping so we don't do a loop everytime we are looking for a experiment key
+        // TODO: cache the array into a mapping so we don't do a loop every time we are looking for a experiment key
         final String config = Preferences.getDynamicConfigJson(c);
         final JSONArray experiments = new JSONObject(config).getJSONArray(KEY_DATA);
         JSONObject experiment = null;

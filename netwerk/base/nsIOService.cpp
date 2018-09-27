@@ -794,7 +794,7 @@ nsIOService::NewChannelFromURIWithProxyFlagsInternal(nsIURI* aURI,
     //
     // Note, historically this could be called with nullptr aLoadingNode,
     // aLoadingPrincipal, and aTriggeringPrincipal from addons using
-    // newChannelFromURIWithProxyFlags().  This code tried to accomodate
+    // newChannelFromURIWithProxyFlags().  This code tried to accommodate
     // by not creating a LoadInfo in such cases.  Now that both the legacy
     // addons and that API are gone we could possibly require always creating a
     // LoadInfo here.  See bug 1432205.
@@ -1693,7 +1693,7 @@ IOServiceProxyCallback::OnProxyAvailable(nsICancelable *request, nsIChannel *cha
     if (NS_SUCCEEDED(status) && pi &&
         NS_SUCCEEDED(pi->GetType(type)) &&
         !type.EqualsLiteral("direct")) {
-        // proxies dont do speculative connect
+        // proxies don't do speculative connect
         return NS_OK;
     }
 

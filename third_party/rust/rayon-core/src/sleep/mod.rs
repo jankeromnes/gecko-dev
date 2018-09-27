@@ -190,7 +190,7 @@ impl Sleep {
             //
             // If we observe that the state has changed, it must be
             // due to a tickle, and then the Acquire means we also see
-            // any events that occured before that.
+            // any events that occurred before that.
             let state = self.state.load(Ordering::Acquire);
             if self.worker_is_sleepy(state, worker_index) {
                 // It is important that we hold the lock when we do

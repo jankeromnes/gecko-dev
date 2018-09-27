@@ -119,7 +119,7 @@ djConfig = {
 	// modulePaths: Object
 	//		A map of module names to paths relative to `dojo.baseUrl`. The
 	//		key/value pairs correspond directly to the arguments which
-	//		`dojo.registerModulePath` accepts. Specifiying
+	//		`dojo.registerModulePath` accepts. Specifying
 	//		`djConfig.modulePaths = { "foo": "../../bar" }` is the equivalent
 	//		of calling `dojo.registerModulePath("foo", "../../bar");`. Multiple
 	//		modules may be configured via `djConfig.modulePaths`.
@@ -389,7 +389,7 @@ dojo.global = {
 		//	|	if(!obj.parent["child"]){ obj.parent.child= {}; }
 		//	|	// now we can safely set the property
 		//	|	obj.parent.child.prop = "some value";
-		//		wheras with `dojo.setObject`, we can shorten that to:
+		//		whereas with `dojo.setObject`, we can shorten that to:
 		//	|	dojo.setObject("parent.child.prop", "some value", obj);
 		var parts=name.split("."), p=parts.pop(), obj=d._getProp(parts, true, context);
 		return obj && p ? (obj[p]=value) : undefined; // Object
@@ -574,7 +574,7 @@ dojo.global = {
 		//		A relative path to a script (no leading '/', and typically ending
 		//		in '.js').
 		// module: 
-		//		A module whose existance to check for after loading a path.  Can be
+		//		A module whose existence to check for after loading a path.  Can be
 		//		used to determine success or failure of the load.
 		// cb: 
 		//		a callback function to pass the result of evaluating the script
@@ -641,7 +641,7 @@ dojo.global = {
 		//		this method in order to handle initialization tasks that
 		//		require the environment to be initialized. In a browser host,
 		//		declarative widgets will be constructed when this function
-		//		finishes runing.
+		//		finishes running.
 		this._loadNotifying = true;
 		this._postLoad = true;
 		var mll = d._loaders;
@@ -719,7 +719,7 @@ dojo.global = {
 	dojo.addOnUnload = function(/*Object?*/obj, /*String|Function?*/functionName){
 		// summary:
 		//		registers a function to be triggered when the page unloads. In a browser
-		//		enviroment, the functions will be triggered during the window.onbeforeunload
+		//		environment, the functions will be triggered during the window.onbeforeunload
 		//		event. Be careful doing work during window.onbeforeunload. onbeforeunload
 		//		can be triggered if a link to download a file is clicked, or if the link is a
 		//		javascript: link. In these cases, the onbeforeunload event fires, but the
@@ -918,7 +918,7 @@ dojo.global = {
 		//		optionally load dojo modules. The map is indexed by the
 		//		possible dojo.name_ values, with two additional values:
 		//		"default" and "common". The items in the "default" array will
-		//		be loaded if none of the other items have been choosen based on
+		//		be loaded if none of the other items have been chosen based on
 		//		dojo.name_, set by your host environment. The items in the
 		//		"common" array will *always* be loaded, regardless of which
 		//		list is chosen.
@@ -1503,7 +1503,7 @@ if(typeof window != 'undefined'){
 	dojo._loadInit = function(e){
 		dojo._initFired = true;
 		// allow multiple calls, only first one will take effect
-		// A bug in khtml calls events callbacks for document for event which isnt supported
+		// A bug in khtml calls events callbacks for document for event which isn't supported
 		// for example a created contextmenu event calls DOMContentLoaded, workaround
 		var type = (e && e.type) ? e.type.toLowerCase() : "load";
 		if(arguments.callee.initialized || (type != "domcontentloaded" && type != "load")){ return; }
@@ -1659,7 +1659,7 @@ dojo.isFunction = (function(){
 	};
 
 	return dojo.isSafari ?
-		// only slow this down w/ gratuitious casting in Safari since it's what's b0rken
+		// only slow this down w/ gratuitous casting in Safari since it's what's b0rken
 		function(/*anything*/ it){
 			if(typeof it == "function" && it == "[object NodeList]"){ return false; }
 			return _isFunction(it); // Boolean
@@ -2011,7 +2011,7 @@ dojo.mixin(dojo.declare, {
 				//		should we allow the preamble here NOT to modify the
 				//		default args, but instead to act on each mixin
 				//		independently of the class instance being constructed
-				//		(for impedence matching)?
+				//		(for impedance matching)?
 
 				// allow any first argument w/ a "preamble" property to act as a
 				// class preamble (not exclusive of the prototype preamble)
@@ -2259,7 +2259,7 @@ dojo.connect = function(/*Object|null*/ obj,
 
 	// normalize arguments
 	var a=arguments, args=[], i=0;
-	// if a[0] is a String, obj was ommited
+	// if a[0] is a String, obj was omitted
 	args.push(dojo.isString(a[0]) ? null : a[i++], a[i++]);
 	// if the arg-after-next is a String or Function, context was NOT omitted
 	var a1 = a[i+1];
@@ -2355,7 +2355,7 @@ dojo.connectPublisher = function(	/*String*/ topic,
 									/*Object|null*/ obj, 
 									/*String*/ event){
 	//	summary:
-	//	 	Ensure that everytime obj.event() is called, a message is published
+	//	 	Ensure that every time obj.event() is called, a message is published
 	//	 	on the topic. Returns a handle which can be passed to
 	//	 	dojo.disconnect() to disable subsequent automatic publication on
 	//	 	the topic.
@@ -2605,7 +2605,7 @@ dojo.extend(dojo.Deferred, {
 		// summary:
 		//		returns a new, empty deferred, which is already in the called
 		//		state. Calling callback() or errback() on this deferred will
-		//		yeild an error and adding new handlers to it will result in
+		//		yield an error and adding new handlers to it will result in
 		//		them being called immediately.
 		var deferred = new dojo.Deferred();
 		deferred.callback();
@@ -4023,11 +4023,11 @@ if(dojo.isIE || dojo.isOpera){
 			if(te && te.attributes.id.value == id){
 				return te;
 			}else{
-				var eles = _d.all[id];
-				if(!eles || !eles.length){ return eles; }
+				var else = _d.all[id];
+				if(!else || !else.length){ return else; }
 				// if more than 1, choose first with the correct id
 				var i=0;
-				while((te=eles[i++])){
+				while((te=else[i++])){
 					if(te.attributes.id.value == id){ return te; }
 				}
 			}
@@ -4709,7 +4709,7 @@ if(dojo.isIE || dojo.isOpera){
 	dojo._setBox = function(/*DomNode*/node, /*Number?*/l, /*Number?*/t, /*Number?*/w, /*Number?*/h, /*String?*/u){
 		//	summary:
 		//		sets width/height/left/top in the current (native) box-model
-		//		dimentions. Uses the unit passed in u.
+		//		dimensions. Uses the unit passed in u.
 		//	node: DOM Node reference. Id string not supported for performance reasons.
 		//	l: optional. left offset from parent.
 		//	t: optional. top offset from parent.
@@ -5743,7 +5743,7 @@ dojo.provide("dojo._base.NodeList");
 			//			* "after"
 			// 		or an offset in the childNodes property
 			//	example:
-			//		appends content to the end if the position is ommitted
+			//		appends content to the end if the position is omitted
 			//	|	dojo.query("h3 > p").addContent("hey there!");
 			//	example:
 			//		add something to the front of each element that has a "thinger" property:
@@ -6263,7 +6263,7 @@ dojo.provide("dojo._base.query");
 
 		// see if we can constrain our next level to direct children
 		if(tqp.oper){
-			// find some eligable children to search
+			// find some eligible children to search
 			var ecn = (tqp.oper == ">") ? 
 				_childElements(element) :
 				_nextSiblings(element, (tqp.oper == "+"));
@@ -6422,7 +6422,7 @@ dojo.provide("dojo._base.query");
 			// NOTE: 
 			//		could be incorrect in some cases (node swaps involving the
 			//		passed node, etc.), but we ignore those due to the relative
-			//		unlikelihood of that occuring
+			//		unlikelihood of that occurring
 			nidx = ci;
 		}
 		return nidx;
@@ -7535,7 +7535,7 @@ dojo.provide("dojo._base.xhr");
 		d.ioArgs = ioArgs;
 	
 		// FIXME: need to wire up the xhr object's abort method to something
-		// analagous in the Deferred
+		// analogous in the Deferred
 		return d;
 	}
 
@@ -7790,7 +7790,7 @@ dojo.provide("dojo._base.xhr");
 
 	dojo.rawXhrPost = dojo.xhrPost = function(/*dojo.__XhrArgs*/ args){
 		//	summary:
-		//		Sends an HTTP POST request to the server. In addtion to the properties
+		//		Sends an HTTP POST request to the server. In addition to the properties
 		//		listed for the dojo.__XhrArgs type, the following property is allowed:
 		//	postData:
 		//		String. Send raw data in the body of the POST request.
@@ -7799,7 +7799,7 @@ dojo.provide("dojo._base.xhr");
 
 	dojo.rawXhrPut = dojo.xhrPut = function(/*dojo.__XhrArgs*/ args){
 		//	summary:
-		//		Sends an HTTP PUT request to the server. In addtion to the properties
+		//		Sends an HTTP PUT request to the server. In addition to the properties
 		//		listed for the dojo.__XhrArgs type, the following property is allowed:
 		//	putData:
 		//		String. Send raw data in the body of the PUT request.
@@ -8303,7 +8303,7 @@ dojo.provide("dojo._base.fx");
 		//	example:
 		//		Like all `dojo._Animation`s, animateProperty returns a handle to the
 		//		Animation instance, which fires the events common to Dojo FX. Use `dojo.connect`
-		//		to access these events outside of the Animation definiton:
+		//		to access these events outside of the Animation definition:
 		//	|	var anim = dojo.animateProperty({
 		//	|		node:"someId",
 		//	|		properties:{

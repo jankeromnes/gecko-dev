@@ -790,7 +790,7 @@ NS_IMETHODIMP nsContentTreeOwner::SetTitle(const nsAString& aTitle)
 // nsContentTreeOwner: nsIWindowProvider
 //*****************************************************************************
 NS_IMETHODIMP
-nsContentTreeOwner::ProvideWindow(mozIDOMWindowProxy* aParent,
+nsContentTreeOwner::ProvideWindow(mozIDOMWindowProxy* apparent,
                                   uint32_t aChromeFlags,
                                   bool aCalledFromJS,
                                   bool aPositionSpecified,
@@ -803,9 +803,9 @@ nsContentTreeOwner::ProvideWindow(mozIDOMWindowProxy* aParent,
                                   bool* aWindowIsNew,
                                   mozIDOMWindowProxy** aReturn)
 {
-  NS_ENSURE_ARG_POINTER(aParent);
+  NS_ENSURE_ARG_POINTER(apparent);
 
-  auto* parent = nsPIDOMWindowOuter::From(aParent);
+  auto* parent = nsPIDOMWindowOuter::From(apparent);
 
   *aReturn = nullptr;
 
@@ -815,17 +815,17 @@ nsContentTreeOwner::ProvideWindow(mozIDOMWindowProxy* aParent,
   }
 
 #ifdef DEBUG
-  nsCOMPtr<nsIWebNavigation> parentNav = do_GetInterface(aParent);
+  nsCOMPtr<nsIWebNavigation> parentNav = do_GetInterface(apparent);
   nsCOMPtr<nsIDocShellTreeOwner> parentOwner = do_GetInterface(parentNav);
   NS_ASSERTION(SameCOMIdentity(parentOwner,
                                static_cast<nsIDocShellTreeOwner*>(this)),
                "Parent from wrong docshell tree?");
 #endif
 
-  // If aParent is inside an <iframe mozbrowser> and this isn't a request to
+  // If apparent is inside an <iframe mozbrowser> and this isn't a request to
   // open a modal-type window, we're going to create a new <iframe mozbrowser>
   // and return its window here.
-  nsCOMPtr<nsIDocShell> docshell = do_GetInterface(aParent);
+  nsCOMPtr<nsIDocShell> docshell = do_GetInterface(apparent);
   if (docshell && docshell->GetIsInMozBrowser() &&
       !(aChromeFlags & (nsIWebBrowserChrome::CHROME_MODAL |
                         nsIWebBrowserChrome::CHROME_OPENAS_DIALOG |
@@ -904,7 +904,7 @@ nsContentTreeOwner::ProvideWindow(mozIDOMWindowProxy* aParent,
     // This method handles setting the opener for us, so we don't need to set it
     // ourselves.
     RefPtr<NullPrincipal> nullPrincipal = NullPrincipal::CreateWithoutOriginAttributes();
-    return browserDOMWin->CreateContentWindow(aURI, aParent, openLocation,
+    return browserDOMWin->CreateContentWindow(aURI, apparent, openLocation,
                                               flags, nullPrincipal, aReturn);
   }
 }

@@ -78,7 +78,7 @@
 
 1.2 (Feb 23, 2004)
     interface change -- cfg object is forward declaration of struct instead of void*
-    This maintains type saftey and lets the compiler warn/error about stupid mistakes.
+    This maintains type safety and lets the compiler warn/error about stupid mistakes.
             (prompted by suggestion from Erik de Castro Lopo)
 
     small speed improvements

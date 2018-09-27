@@ -465,7 +465,7 @@ SVGSVGElement::GetTimedDocumentRoot()
 // nsSVGElement
 nsresult
 SVGSVGElement::BindToTree(nsIDocument* aDocument,
-                          nsIContent* aParent,
+                          nsIContent* apparent,
                           nsIContent* aBindingParent)
 {
   nsSMILAnimationController* smilController = nullptr;
@@ -474,7 +474,7 @@ SVGSVGElement::BindToTree(nsIDocument* aDocument,
     smilController = aDocument->GetAnimationController();
     if (smilController) {
       // SMIL is enabled in this document
-      if (WillBeOutermostSVG(aParent, aBindingParent)) {
+      if (WillBeOutermostSVG(apparent, aBindingParent)) {
         // We'll be the outermost <svg> element.  We'll need a time container.
         if (!mTimedDocumentRoot) {
           mTimedDocumentRoot = new nsSMILTimeContainer();
@@ -489,7 +489,7 @@ SVGSVGElement::BindToTree(nsIDocument* aDocument,
     }
   }
 
-  nsresult rv = SVGGraphicsElement::BindToTree(aDocument, aParent,
+  nsresult rv = SVGGraphicsElement::BindToTree(aDocument, apparent,
                                               aBindingParent);
   NS_ENSURE_SUCCESS(rv,rv);
 
@@ -599,10 +599,10 @@ SVGSVGElement::FlushImageTransformInvalidation()
 // implementation helpers
 
 bool
-SVGSVGElement::WillBeOutermostSVG(nsIContent* aParent,
+SVGSVGElement::WillBeOutermostSVG(nsIContent* apparent,
                                   nsIContent* aBindingParent) const
 {
-  nsIContent* parent = aBindingParent ? aBindingParent : aParent;
+  nsIContent* parent = aBindingParent ? aBindingParent : apparent;
 
   while (parent && parent->IsSVGElement()) {
     if (parent->IsSVGElement(nsGkAtoms::foreignObject)) {

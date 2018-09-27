@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>screen wake lock will not be actived in hidden document</title>
+<title>screen wake lock will not be activated in hidden document</title>
 <link rel="help" href="https://w3c.github.io/wake-lock/#dfn-requesting-the-wake-lock">
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
@@ -22,6 +22,6 @@ promise_test(async t => {
   assert_false(document.hidden, "document is visiable when new window is closed");
   assert_true(wakeLock.active, "the active is true when document regains visibility");
   request.cancel();
-}, "Test that screen wake lock will not be actived in hidden document");
+}, "Test that screen wake lock will not be activated in hidden document");
 
 </script>

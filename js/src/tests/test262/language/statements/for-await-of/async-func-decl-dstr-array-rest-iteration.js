@@ -2,7 +2,7 @@
 // - src/dstr-assignment-for-await/array-rest-iteration.case
 // - src/dstr-assignment-for-await/default/async-func-decl.template
 /*---
-description: In the presense of an AssignmentRestElement, value iteration exhausts the iterable value; (for-await-of statement in an async function declaration)
+description: In the presence of an AssignmentRestElement, value iteration exhausts the iterable value; (for-await-of statement in an async function declaration)
 esid: sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation
 features: [generators, destructuring-binding, async-iteration]
 flags: [generated, async]

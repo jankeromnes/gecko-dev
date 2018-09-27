@@ -1635,9 +1635,9 @@ test("map()", function() {
 test("contents()", function() {
 	expect(12);
 	equals( $("#ap").contents().length, 9, "Check element contents" );
-	ok( $("#iframe").contents()[0], "Check existance of IFrame document" );
+	ok( $("#iframe").contents()[0], "Check existence of IFrame document" );
 	var ibody = $("#loadediframe").contents()[0].body;
-	ok( ibody, "Check existance of IFrame body" );
+	ok( ibody, "Check existence of IFrame body" );
 
 	equals( $("span", ibody).text(), "span text", "Find span in IFrame and check its text" );
 

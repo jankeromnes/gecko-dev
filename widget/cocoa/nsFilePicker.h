@@ -46,7 +46,7 @@ public:
 protected:
   virtual ~nsFilePicker();
 
-  virtual void InitNative(nsIWidget *aParent, const nsAString& aTitle) override;
+  virtual void InitNative(nsIWidget *apparent, const nsAString& aTitle) override;
   nsresult Show(int16_t *_retval) override;
 
   // actual implementations of get/put dialogs using NSOpenPanel & NSSavePanel

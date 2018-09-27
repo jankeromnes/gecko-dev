@@ -12,7 +12,7 @@ info: |
    ...
 
   ToString ( argument )
-  If arguement is Object:
+  If argument is Object:
     1. Let primValue be ? ToPrimitive(argument, hint String).
    ...
 

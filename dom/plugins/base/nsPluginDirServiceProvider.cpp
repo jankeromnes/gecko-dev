@@ -40,13 +40,13 @@ NS_IMPL_ISUPPORTS(nsPluginDirServiceProvider,
 //*****************************************************************************
 
 NS_IMETHODIMP
-nsPluginDirServiceProvider::GetFile(const char *charProp, bool *persistant,
+nsPluginDirServiceProvider::GetFile(const char *charProp, bool *persistent,
                                     nsIFile **_retval)
 {
   NS_ENSURE_ARG(charProp);
 
   *_retval = nullptr;
-  *persistant = false;
+  *persistent = false;
 
   return NS_ERROR_FAILURE;
 }

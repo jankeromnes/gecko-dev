@@ -7,7 +7,7 @@
   <script src="/resources/testharnessreport.js"></script>
   <script>
     function OnDocumentLoaded() {
-      let test = async_test("form submission targetting _blank allowed after a redirect");
+      let test = async_test("form submission targeting _blank allowed after a redirect");
       window.addEventListener("message", function(event) {
         if (event.data == "DocumentNotBlocked") {
           event.source.close();

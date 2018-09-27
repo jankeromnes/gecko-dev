@@ -583,7 +583,7 @@ add_task(async function test_private_persist_addresses() {
        "Check street-address in response");
     is(responseAddress.country, addressToAdd.country, "Check country in response");
   });
-  // verify formautofill store doesnt have the new temp addresses
+  // verify formautofill store doesn't have the new temp addresses
   is((await formAutofillStorage.addresses.getAll()).length, 1,
      "Original 1 stored address at end of test");
 });

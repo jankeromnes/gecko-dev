@@ -1,7 +1,7 @@
 /* Any copyright is dedicated to the Public Domain.
    http://creativecommons.org/publicdomain/zero/1.0/ */
 
-// Bug 532173 - Dont sync tabs like about:* , weave firstrun etc
+// Bug 532173 - Don't sync tabs like about:* , weave firstrun etc
 
 /*
  * The list of phases mapped to their corresponding profiles.  The object

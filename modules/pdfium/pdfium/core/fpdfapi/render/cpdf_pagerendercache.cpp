@@ -52,7 +52,7 @@ void CPDF_PageRenderCache::CacheOptimization(int32_t dwLimitCacheSize) {
   uint32_t nTimeCount = m_nTimeCount;
 
   // Check if time value is about to roll over and reset all entries.
-  // The comparision is legal because uint32_t is an unsigned type.
+  // The comparison is legal because uint32_t is an unsigned type.
   if (nTimeCount + 1 < nTimeCount) {
     for (i = 0; i < nCount; i++)
       m_ImageCache[pCACHEINFO[i].pStream]->m_dwTimeCount = i;

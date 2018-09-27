@@ -20,7 +20,7 @@ TableAccessible::IsProbablyLayoutTable()
 {
   // Implement a heuristic to determine if table is most likely used for layout.
 
-  // XXX do we want to look for rowspan or colspan, especialy that span all but
+  // XXX do we want to look for rowspan or colspan, especially that span all but
   // a couple cells  at the beginning or end of a row/col, and especially when
   // they occur at the edge of a table?
 

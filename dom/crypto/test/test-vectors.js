@@ -23,7 +23,7 @@ tv = {
     "4478b713eb854c4f6b3ef052f0463b65d8217daec0099834"
   ),
 
-  // Truncated form of the PKCS#8 stucture above
+  // Truncated form of the PKCS#8 structure above
   negative_pkcs8: util.hex2abv("30820154020100300d06092a864886f70d010"),
 
   // Extracted from a cert via http://lapo.it/asn1js/
@@ -36,7 +36,7 @@ tv = {
     "0001"
   ),
 
-  // Truncated form of the PKCS#8 stucture above
+  // Truncated form of the PKCS#8 structure above
   negative_spki: util.hex2abv("30819F300D06092A864886F70D010101050003"),
 
   // From the NESSIE project

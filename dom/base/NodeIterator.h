@@ -83,7 +83,7 @@ private:
         bool MoveToPrevious(nsINode *aRoot);
 
         bool MoveForward(nsINode *aRoot, nsINode *aNode);
-        void MoveBackward(nsINode *aParent, nsINode *aNode);
+        void MoveBackward(nsINode *apparent, nsINode *aNode);
 
         void AdjustAfterRemoval(nsINode *aRoot, nsINode *aContainer, nsIContent *aChild, nsIContent *aPreviousSibling);
 

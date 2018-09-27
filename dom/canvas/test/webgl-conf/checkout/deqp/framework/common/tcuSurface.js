@@ -43,7 +43,7 @@ var DE_ASSERT = function(x) {
  * (RGBA8888) is supported.
  *
  * PixelBufferAccess (see tcuTexture.h) provides much more flexible API
- * for handling various pixel formats. This is mainly a convinience class.
+ * for handling various pixel formats. This is mainly a convenience class.
  * @constructor
  * @param {number=} width
  * @param {number=} height

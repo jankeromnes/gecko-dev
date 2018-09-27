@@ -21,7 +21,7 @@ interface nsIMutableArray;
  * nsIASN1Printable Items are all the other types that
  * can be viewed by themselves without interpreting further.
  * Examples would include INTEGER, UTF-8 STRING, OID.
- * These are not intended to directly reflect the numberous
+ * These are not intended to directly reflect the numerous
  * types that exist in ASN1, but merely an interface to ease
  * producing a tree display the ASN1 structure of any DER
  * object.

@@ -240,7 +240,7 @@ class Arena
 
   public:
     /*
-     * When collecting we sometimes need to keep an auxillary list of arenas,
+     * When collecting we sometimes need to keep an auxiliary list of arenas,
      * for which we use the following fields. This happens for several reasons:
      *
      * When recursive marking uses too much stack, the marking is delayed and

@@ -33,7 +33,7 @@ const {TYPE_ONE_SHOT, TYPE_REPEATING_SLACK} = Ci.nsITimer;
  *     resolved value.
  * @param {function} reject
  *     To be called when the condition has not been met.  Will cause
- *     the condition to be revaluated or time out.
+ *     the condition to be reevaluated or time out.
  *
  * @return {*}
  *     The value from calling ``resolve``.
@@ -42,7 +42,7 @@ const {TYPE_ONE_SHOT, TYPE_REPEATING_SLACK} = Ci.nsITimer;
 /**
  * Runs a Promise-like function off the main thread until it is resolved
  * through ``resolve`` or ``rejected`` callbacks.  The function is
- * guaranteed to be run at least once, irregardless of the timeout.
+ * guaranteed to be run at least once, regardless of the timeout.
  *
  * The ``func`` is evaluated every ``interval`` for as long as its
  * runtime duration does not exceed ``interval``.  Evaluations occur

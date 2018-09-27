@@ -77,7 +77,7 @@ public:
   explicit PerformanceCounter(const nsACString& aName);
 
   /**
-   * This is called everytime a runnable is dispatched.
+   * This is called every time a runnable is dispatched.
    *
    * aCategory can be used to distinguish counts per TaskCategory
    *

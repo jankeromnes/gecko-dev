@@ -205,7 +205,7 @@ umtx_atomic_dec(u_atomic_int32_t *p);
 
 U_NAMESPACE_END
 
-#endif  /* Low Level Atomic Ops Platfrom Chain */
+#endif  /* Low Level Atomic Ops Platform Chain */
 
 
 

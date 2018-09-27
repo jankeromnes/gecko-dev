@@ -188,7 +188,7 @@ ShutdownThread(nsCOMPtr<nsIThread>& aThread)
   aThread->Shutdown();
 }
 
-// Base runnable class to repeatly pull MediaCodec output buffers in seperate thread.
+// Base runnable class to repeatly pull MediaCodec output buffers in separate thread.
 // How to use:
 // - implementing DrainOutput() to get output. Remember to return false to tell
 //   drain not to pop input queue.

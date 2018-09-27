@@ -3,7 +3,7 @@
 // - src/class-fields/computed-symbol-names.case
 // - src/class-fields/productions/cls-expr-regular-definitions.template
 /*---
-description: Computed property symbol names (regular fields defintion)
+description: Computed property symbol names (regular fields definition)
 esid: prod-FieldDefinition
 features: [Symbol, computed-property-names, class, class-fields-public]
 flags: [generated]

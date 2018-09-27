@@ -369,7 +369,7 @@ kea{
             dayNames{
                 format{
                     abbreviated{
-                        "dum",
+                        "dumb",
                         "sig",
                         "ter",
                         "kua",
@@ -407,7 +407,7 @@ kea{
                 }
                 stand-alone{
                     abbreviated{
-                        "dum",
+                        "dumb",
                         "sig",
                         "ter",
                         "kua",
@@ -984,16 +984,16 @@ kea{
         }
         sun-narrow{
             relative{
-                "-1"{"dum. pasadu"}
-                "0"{"es dum. li"}
-                "1"{"prósimu dum."}
+                "-1"{"dumb. pasadu"}
+                "0"{"es dumb. li"}
+                "1"{"prósimu dumb."}
             }
         }
         sun-short{
             relative{
-                "-1"{"dum. pasadu"}
-                "0"{"es dum. li"}
-                "1"{"prósimu dum."}
+                "-1"{"dumb. pasadu"}
+                "0"{"es dumb. li"}
+                "1"{"prósimu dumb."}
             }
         }
         thu{

@@ -465,15 +465,15 @@
       };
     }
 
-    function setARIAOwnsOnElToRemove(aParent, aChild) {
+    function setARIAOwnsOnElToRemove(apparent, aChild) {
       this.eventSeq = [
-        new invokerChecker(EVENT_HIDE, getAccessible(aParent))
+        new invokerChecker(EVENT_HIDE, getAccessible(apparent))
       ];
 
       this.invoke = function setARIAOwnsOnElToRemove_invoke() {
         getNode(aChild).setAttribute("aria-owns", "no_id");
-        getNode(aParent).removeChild(getNode(aChild));
-        getNode(aParent).remove();
+        getNode(apparent).removeChild(getNode(aChild));
+        getNode(apparent).remove();
       };
 
       this.getID = function setARIAOwnsOnElToRemove_getID() {

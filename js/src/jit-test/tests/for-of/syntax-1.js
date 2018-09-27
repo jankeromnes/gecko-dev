@@ -10,7 +10,7 @@ function assertSyntaxError(code) {
 }
 
 function test(badForHead) {
-    assertSyntaxError(badForHead + " {}");  // apply directly to forHead
+    assertSyntaxError(badForHead + " {}");  // apply directly to forehead
     assertSyntaxError("[0 " + badForHead + "];");
 }
 

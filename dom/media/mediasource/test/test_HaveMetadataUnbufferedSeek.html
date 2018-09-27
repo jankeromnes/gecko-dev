@@ -28,7 +28,7 @@ runWithMSE(async (ms, v) => {
   await once(v, "seeking");
   is(v.readyState, v.HAVE_METADATA, "readyState is HAVE_METADATA");
   sb.appendBuffer(new Uint8Array(await fetchWithXHR("seek.webm"), 67833));
-  await once(v, "seeked");
+  await once(v, "sought");
   SimpleTest.finish();
 });
 

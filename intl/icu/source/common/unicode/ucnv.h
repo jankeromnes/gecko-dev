@@ -2030,7 +2030,7 @@ ucnv_toUCountPending(const UConverter* cnv, UErrorCode* status);
  * fixed ratio of bytes to Unicode codes <i>units</i> for any particular Unicode encoding form.
  * FALSE is returned with the UErrorCode if error occurs or cnv is NULL.
  * @param cnv       The converter to be tested
- * @param status    ICU error code in/out paramter
+ * @param status    ICU error code in/out parameter
  * @return TRUE if the converter is fixed-width
  * @stable ICU 4.8
  */

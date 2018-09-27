@@ -21,11 +21,11 @@ public:
               const Optional<nsAString>& aBase, ErrorResult& aRv);
 
   static already_AddRefed<URLMainThread>
-  Constructor(nsISupports* aParent, const nsAString& aURL,
+  Constructor(nsISupports* apparent, const nsAString& aURL,
               const nsAString& aBase, ErrorResult& aRv);
 
   static already_AddRefed<URLMainThread>
-  Constructor(nsISupports* aParent, const nsAString& aURL, nsIURI* aBase,
+  Constructor(nsISupports* apparent, const nsAString& aURL, nsIURI* aBase,
               ErrorResult& aRv);
 
   static void
@@ -44,7 +44,7 @@ public:
   IsValidURL(const GlobalObject& aGlobal, const nsAString& aURL,
              ErrorResult& aRv);
 
-  explicit URLMainThread(nsISupports* aParent);
+  explicit URLMainThread(nsISupports* apparent);
 
   virtual void
   SetHref(const nsAString& aHref, ErrorResult& aRv) override;

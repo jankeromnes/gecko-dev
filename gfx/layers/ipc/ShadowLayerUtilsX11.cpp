@@ -15,7 +15,7 @@
 #include "GLDefs.h"                     // for GLenum
 #include "gfxPlatform.h"                // for gfxPlatform
 #include "gfxXlibSurface.h"             // for gfxXlibSurface
-#include "gfx2DGlue.h"                  // for Moz2D transistion helpers
+#include "gfx2DGlue.h"                  // for Moz2D transition helpers
 #include "mozilla/X11Util.h"            // for DefaultXDisplay, FinishX, etc
 #include "mozilla/gfx/Point.h"          // for IntSize
 #include "mozilla/layers/CompositableForwarder.h"

@@ -63,7 +63,7 @@ enum matrixprod_init_case {
 };
 
 /*
-  This function implements the fix-point correspondant function to lrint.
+  This function implements the fix-point correspondent function to lrint.
 
   FLP: (int32_t)floor(flt+.499999999999)
   FIP: (fixVal+roundVal)>>qDomain

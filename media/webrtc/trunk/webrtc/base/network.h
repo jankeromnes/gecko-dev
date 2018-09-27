@@ -302,7 +302,7 @@ class Network {
     default_local_address_provider_ = provider;
   }
 
-  // Returns the name of the interface this network is associated wtih.
+  // Returns the name of the interface this network is associated with.
   const std::string& name() const { return name_; }
 
   // Returns the OS-assigned name for this network. This is useful for

@@ -23,7 +23,7 @@ __all__ = ['ProcessHandlerMixin', 'ProcessHandler', 'LogOutput',
 # Set the MOZPROCESS_DEBUG environment variable to 1 to see some debugging output
 MOZPROCESS_DEBUG = os.getenv("MOZPROCESS_DEBUG")
 
-# We dont use mozinfo because it is expensive to import, see bug 933558.
+# We don't use mozinfo because it is expensive to import, see bug 933558.
 isWin = os.name == "nt"
 isPosix = os.name == "posix"  # includes MacOS X
 
@@ -563,7 +563,7 @@ falling back to not using job objects for managing child processes""", file=sys.
                         print("Single process terminated successfully")
                         self.returncode = winprocess.GetExitCodeProcess(self._handle)
                     else:
-                        # An error occured we should probably throw
+                        # An error occurred we should probably throw
                         rc = winprocess.GetLastError()
                         if rc:
                             raise WinError(rc)

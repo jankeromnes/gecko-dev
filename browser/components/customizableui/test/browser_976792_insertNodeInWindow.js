@@ -228,7 +228,7 @@ add_task(async function() {
   window.resizeTo(kForceOverflowWidthPx, window.outerHeight);
   // Wait for all the widgets to overflow. We can't just wait for the
   // `overflowing` attribute because we leave time for layout flushes
-  // inbetween, so it's possible for the timeout to run before the
+  // between, so it's possible for the timeout to run before the
   // navbar has "settled"
   await waitForCondition(() => {
     return navbar.hasAttribute("overflowing") &&

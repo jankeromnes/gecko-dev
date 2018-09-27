@@ -1,5 +1,5 @@
 /**
- * Test for the "alternative data stream" stored withing a cache entry.
+ * Test for the "alternative data stream" stored within a cache entry.
  *
  * - we load a URL with preference for an alt data (check what we get is the raw data,
  *   since there was nothing previously cached)

@@ -235,8 +235,8 @@ static INLINE void dc_predictor(uint8_t *dst, ptrdiff_t stride, int bw, int bh,
 
 static INLINE int divide_using_multiply_shift(int num, int shift1,
                                               int multiplier, int shift2) {
-  const int interm = num >> shift1;
-  return interm * multiplier >> shift2;
+  const int interim = num >> shift1;
+  return interim * multiplier >> shift2;
 }
 
   // The constants (multiplier and shifts) for a given block size are obtained

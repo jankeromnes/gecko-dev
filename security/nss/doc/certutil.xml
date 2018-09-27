@@ -861,7 +861,7 @@ Generating key.  This may take a few moments...
 	</para>
 <programlisting>$ certutil -S -s "CN=Example CA" -n my-ca-cert -x -t "C,C,C" -1 -2 -5 -m 3650</programlisting>
 	<para>
-The interative prompts for key usage and whether any extensions are critical and responses have been ommitted for brevity.
+The interative prompts for key usage and whether any extensions are critical and responses have been omitted for brevity.
 	</para>
 	<para>
 		From there, new certificates can reference the self-signed certificate:

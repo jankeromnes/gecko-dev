@@ -528,7 +528,7 @@ function isComposite(g, u) {
 }
 
 function bind(func, thisArg) {
-  // For some reason PhantomJS occassionally fails when using the builtin bind,
+  // For some reason PhantomJS occasionally fails when using the builtin bind,
   // so we check if it is available and if not, use a degenerate polyfill.
   if (func.bind) {
     return func.bind(thisArg);

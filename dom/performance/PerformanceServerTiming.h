@@ -21,8 +21,8 @@ class PerformanceServerTiming final : public nsISupports,
                                       public nsWrapperCache
 {
 public:
-  PerformanceServerTiming(nsISupports* aParent, nsIServerTiming* aServerTiming)
-    : mParent(aParent)
+  PerformanceServerTiming(nsISupports* apparent, nsIServerTiming* aServerTiming)
+    : mParent(apparent)
     , mServerTiming(aServerTiming)
   {
     MOZ_ASSERT(mServerTiming);

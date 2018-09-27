@@ -139,7 +139,7 @@ public:
   virtual UniquePtr<TrackInfo> GetInfo() const = 0;
 
   // Seeks to aTime. Upon success, SeekPromise will be resolved with the
-  // actual time seeked to. Typically the random access point time
+  // actual time sought to. Typically the random access point time
   virtual RefPtr<SeekPromise> Seek(const media::TimeUnit& aTime) = 0;
 
   // Returns the next aNumSamples sample(s) available.

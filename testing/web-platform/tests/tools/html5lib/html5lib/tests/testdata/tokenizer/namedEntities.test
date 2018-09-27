@@ -12403,18 +12403,18 @@
             ]
         }, 
         {
-            "input": "&andd", 
-            "description": "Bad named entity: andd without a semi-colon", 
+            "input": "&and", 
+            "description": "Bad named entity: and without a semi-colon", 
             "output": [
                 [
                     "Character", 
-                    "&andd"
+                    "&and"
                 ]
             ]
         }, 
         {
-            "input": "&andd;", 
-            "description": "Named entity: andd; with a semi-colon", 
+            "input": "&and;", 
+            "description": "Named entity: and; with a semi-colon", 
             "output": [
                 [
                     "Character", 

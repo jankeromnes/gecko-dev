@@ -5266,7 +5266,7 @@ LIRGenerator::updateResumeState(MBasicBlock* block)
     // As Value Numbering phase can remove edges from the entry basic block to a
     // code paths reachable from the OSR entry point, we have to add fixup
     // blocks to keep the dominator tree organized the same way. These fixup
-    // blocks are flaged as unreachable, and should only exist iff the graph has
+    // blocks are flagged as unreachable, and should only exist iff the graph has
     // an OSR block.
     //
     // Note: RangeAnalysis can flag blocks as unreachable, but they are only

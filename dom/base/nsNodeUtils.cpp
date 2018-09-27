@@ -377,11 +377,11 @@ nsNodeUtils::CloneAndAdopt(nsINode *aNode, bool aClone, bool aDeep,
                            nsNodeInfoManager *aNewNodeInfoManager,
                            JS::Handle<JSObject*> aReparentScope,
                            nsCOMArray<nsINode> *aNodesWithProperties,
-                           nsINode* aParent, ErrorResult& aError)
+                           nsINode* apparent, ErrorResult& aError)
 {
   MOZ_ASSERT((!aClone && aNewNodeInfoManager) || !aReparentScope,
               "If cloning or not getting a new nodeinfo we shouldn't rewrap");
-  MOZ_ASSERT(!aParent || aNode->IsContent(),
+  MOZ_ASSERT(!apparent || aNode->IsContent(),
              "Can't insert document or attribute nodes into a parent");
 
   // First deal with aNode and walk its attributes (and their children). Then,
@@ -458,7 +458,7 @@ nsNodeUtils::CloneAndAdopt(nsINode *aNode, bool aClone, bool aDeep,
       }
     }
 
-    if (aParent) {
+    if (apparent) {
       // If we're cloning we need to insert the cloned children into the cloned
       // parent.
       rv = aParent->AppendChildTo(static_cast<nsIContent*>(clone.get()),

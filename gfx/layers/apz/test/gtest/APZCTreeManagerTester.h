@@ -111,7 +111,7 @@ protected:
     SetEventRegionsBasedOnBottommostMetrics(aLayer);
   }
 
-  void SetScrollHandoff(Layer* aChild, Layer* aParent) {
+  void SetScrollHandoff(Layer* aChild, Layer* apparent) {
     ScrollMetadata metadata = aChild->GetScrollMetadata(0);
     metadata.SetScrollParentId(aParent->GetFrameMetrics(0).GetScrollId());
     aChild->SetScrollMetadata(metadata);

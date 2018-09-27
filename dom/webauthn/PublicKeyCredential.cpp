@@ -32,8 +32,8 @@ NS_IMPL_RELEASE_INHERITED(PublicKeyCredential, Credential)
 NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(PublicKeyCredential)
 NS_INTERFACE_MAP_END_INHERITING(Credential)
 
-PublicKeyCredential::PublicKeyCredential(nsPIDOMWindowInner* aParent)
-  : Credential(aParent)
+PublicKeyCredential::PublicKeyCredential(nsPIDOMWindowInner* apparent)
+  : Credential(apparent)
   , mRawIdCachedObj(nullptr)
 {
   mozilla::HoldJSObjects(this);

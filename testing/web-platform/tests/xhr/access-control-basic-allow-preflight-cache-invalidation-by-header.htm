@@ -37,7 +37,7 @@
           assert_equals(xhr.responseText, "PASS: Second OPTIONS request was sent.");
           test.done();
         });
-        // Send a header not included in the inital cache.
+        // Send a header not included in the initial cache.
         xhr.open("PUT", get_host_info().HTTP_REMOTE_ORIGIN + "/xhr/resources/access-control-basic-preflight-cache-invalidation.py?token=" + uuid, true);
         xhr.setRequestHeader("x-test", "headerValue");
         xhr.send();

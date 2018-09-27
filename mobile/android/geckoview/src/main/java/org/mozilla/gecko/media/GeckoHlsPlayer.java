@@ -163,7 +163,7 @@ public class GeckoHlsPlayer implements BaseHlsPlayer, ExoPlayer.EventListener {
 
         if (DEBUG) {
             Log.d(LOGTAG, "[checkInitDone] VReady:" + mTracksInfo.videoReady() +
-                    ",AReady:" + mTracksInfo.audioReady() +
+                    ",already:" + mTracksInfo.audioReady() +
                     ",hasV:" + mTracksInfo.hasVideo() +
                     ",hasA:" + mTracksInfo.hasAudio());
         }

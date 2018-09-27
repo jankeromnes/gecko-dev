@@ -41,7 +41,7 @@ class TextureClient;
  * among main, worker and ImageBridgeChild threads.
  *
  * Each HTMLCanvasElement object is responsible for creating
- * AsyncCanvasRenderer object. Once Canvas is transfered to worker,
+ * AsyncCanvasRenderer object. Once Canvas is transferred to worker,
  * OffscreenCanvas will keep reference pointer of this object.
  *
  * Sometimes main thread needs AsyncCanvasRenderer's result, such as layers

@@ -133,7 +133,7 @@ LineGraphWidget.prototype = extend(AbstractCanvasGraph.prototype, {
 
   /**
    * Takes a list of numbers and plots them on a line graph representing
-   * the rate of occurences in a specified interval. Useful for drawing
+   * the rate of occurrences in a specified interval. Useful for drawing
    * framerate, for example, from a sequence of timestamps.
    *
    * @param array timestamps

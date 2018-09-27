@@ -18,7 +18,7 @@ class GamepadButton : public nsISupports,
                       public nsWrapperCache
 {
 public:
-  explicit GamepadButton(nsISupports* aParent) : mParent(aParent),
+  explicit GamepadButton(nsISupports* apparent) : mParent(apparent),
                                                  mValue(0),
                                                  mPressed(false),
                                                  mTouched(false)

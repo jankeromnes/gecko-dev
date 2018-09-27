@@ -26,7 +26,7 @@ while (loop) {
       $ERROR('This code is unreachable (following `continue` statement).');
     } catch (err) {}
 
-    $ERROR('This code is unreachable (following `try` statment).');
+    $ERROR('This code is unreachable (following `try` statement).');
   }
 
   $ERROR('This code is unreachable (following `for..of` statement).');

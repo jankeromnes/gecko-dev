@@ -609,12 +609,12 @@ nsAppStartup::GetInterrupted(bool *aInterrupted)
 //
 
 NS_IMETHODIMP
-nsAppStartup::CreateChromeWindow(nsIWebBrowserChrome *aParent,
+nsAppStartup::CreateChromeWindow(nsIWebBrowserChrome *apparent,
                                  uint32_t aChromeFlags,
                                  nsIWebBrowserChrome **_retval)
 {
   bool cancel;
-  return CreateChromeWindow2(aParent, aChromeFlags, nullptr, nullptr, 0, &cancel, _retval);
+  return CreateChromeWindow2(apparent, aChromeFlags, nullptr, nullptr, 0, &cancel, _retval);
 }
 
 
@@ -634,7 +634,7 @@ nsAppStartup::SetScreenId(uint32_t aScreenId)
 }
 
 NS_IMETHODIMP
-nsAppStartup::CreateChromeWindow2(nsIWebBrowserChrome *aParent,
+nsAppStartup::CreateChromeWindow2(nsIWebBrowserChrome *apparent,
                                   uint32_t aChromeFlags,
                                   nsITabParent *aOpeningTab,
                                   mozIDOMWindowProxy* aOpener,
@@ -653,8 +653,8 @@ nsAppStartup::CreateChromeWindow2(nsIWebBrowserChrome *aParent,
 
   nsCOMPtr<nsIXULWindow> newWindow;
 
-  if (aParent) {
-    nsCOMPtr<nsIXULWindow> xulParent(do_GetInterface(aParent));
+  if (apparent) {
+    nsCOMPtr<nsIXULWindow> xulParent(do_GetInterface(apparent));
     NS_ASSERTION(xulParent, "window created using non-XUL parent. that's unexpected, but may work.");
 
     if (xulParent)
@@ -985,7 +985,7 @@ nsAppStartup::TrackStartupCrashEnd()
     rv = Preferences::SetInt(kPrefRecentCrashes, maxResumedCrashes);
     NS_ENSURE_SUCCESS(rv, rv);
   } else if (!inSafeMode) {
-    // clear the count of recent crashes after a succesful startup when not in safe mode
+    // clear the count of recent crashes after a successful startup when not in safe mode
     rv = Preferences::ClearUser(kPrefRecentCrashes);
     if (NS_FAILED(rv)) NS_WARNING("Could not clear startup crash count.");
   }

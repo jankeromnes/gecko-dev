@@ -1753,7 +1753,7 @@ void SkOpCoincidence::debugAddIfMissing(SkPathOpsDebug::GlitchLog* log, const Sk
 }
 
 /* Commented-out lines keep this in sync addOrOverlap() */
-// If this is called by addEndMovedSpans(), a returned false propogates out to an abort.
+// If this is called by addEndMovedSpans(), a returned false propagates out to an abort.
 // If this is called by AddIfMissing(), a returned false indicates there was nothing to add
 void SkOpCoincidence::debugAddOrOverlap(SkPathOpsDebug::GlitchLog* log,
         const SkOpSegment* coinSeg, const SkOpSegment* oppSeg,

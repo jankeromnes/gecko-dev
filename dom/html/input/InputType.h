@@ -236,7 +236,7 @@ protected:
 };
 
 // Custom deleter for UniquePtr<InputType> to avoid freeing memory pre-allocated
-// for InputType, but we still need to call the destructor explictly.
+// for InputType, but we still need to call the destructor explicitly.
 struct DoNotDelete { void operator()(::InputType* p) { p->~InputType(); } };
 
 #endif /* InputType_h__ */

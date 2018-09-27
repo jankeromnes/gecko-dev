@@ -205,7 +205,7 @@ protected:
 
   /**
    * Lock guarding mRequestedRect, mCachedRect, and mCachedOutput. All uses
-   * of those members must aquire this lock.
+   * of those members must acquire this lock.
    */
   Mutex mCacheMutex;
 

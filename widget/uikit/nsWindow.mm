@@ -456,13 +456,13 @@ nsWindow::IsTopLevel()
 //
 
 nsresult
-nsWindow::Create(nsIWidget* aParent,
+nsWindow::Create(nsIWidget* apparent,
                  nsNativeWidget aNativeParent,
                  const LayoutDeviceIntRect& aRect,
                  nsWidgetInitData* aInitData)
 {
-    ALOG("nsWindow[%p]::Create %p/%p [%d %d %d %d]", (void*)this, (void*)aParent, (void*)aNativeParent, aRect.x, aRect.y, aRect.width, aRect.height);
-    nsWindow* parent = (nsWindow*) aParent;
+    ALOG("nsWindow[%p]::Create %p/%p [%d %d %d %d]", (void*)this, (void*)apparent, (void*)aNativeParent, aRect.x, aRect.y, aRect.width, aRect.height);
+    nsWindow* parent = (nsWindow*) apparent;
     ChildView* nativeParent = (ChildView*)aNativeParent;
 
     if (parent == nullptr && nativeParent)
@@ -492,7 +492,7 @@ nsWindow::Create(nsIWidget* aParent,
     mWindowType = eWindowType_toplevel;
     mBorderStyle = eBorderStyle_default;
 
-    Inherited::BaseCreate(aParent, aInitData);
+    Inherited::BaseCreate(apparent, aInitData);
 
     NS_ASSERTION(IsTopLevel() || parent, "non top level window doesn't have a parent!");
 

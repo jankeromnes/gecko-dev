@@ -52,7 +52,7 @@ function seekStarted() {
 function seekEnded() {
   ok(!completed, "shuld not be completed yet");
   ok(Math.abs(v.currentTime - seekTime) < 0.1,
-     "Video currentTime should be around " + seekTime + ": " + v.currentTime + " (seeked)");
+     "Video currentTime should be around " + seekTime + ": " + v.currentTime + " (sought)");
   endPassed = true;
   seekFlagEnd = v.seeking;
   v.play();
@@ -63,7 +63,7 @@ function playbackEnded() {
 
   completed = true;
   ok(startPassed, "seeking event");
-  ok(endPassed, "seeked event");
+  ok(endPassed, "sought event");
   ok(seekFlagStart, "seeking flag on start should be true");
   ok(!seekFlagEnd, "seeking flag on end should be false");
   finish();
@@ -72,7 +72,7 @@ function playbackEnded() {
 once(v, "ended", playbackEnded);
 once(v, "loadedmetadata", startTest);
 once(v, "seeking", seekStarted);
-once(v, "seeked", seekEnded);
+once(v, "sought", seekEnded);
 
 }
 

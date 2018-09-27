@@ -551,7 +551,7 @@ int32_t AudioDeviceWindowsWave::SpeakerVolumeIsAvailable(bool& available)
 
     bool isAvailable(false);
 
-    // Enumerate all avaliable speakers and make an attempt to open up the
+    // Enumerate all available speakers and make an attempt to open up the
     // output mixer corresponding to the currently selected output device.
     //
     if (InitSpeaker() == -1)
@@ -798,7 +798,7 @@ int32_t AudioDeviceWindowsWave::SpeakerMuteIsAvailable(bool& available)
 
     bool isAvailable(false);
 
-    // Enumerate all avaliable speakers and make an attempt to open up the
+    // Enumerate all available speakers and make an attempt to open up the
     // output mixer corresponding to the currently selected output device.
     //
     if (InitSpeaker() == -1)
@@ -858,7 +858,7 @@ int32_t AudioDeviceWindowsWave::MicrophoneMuteIsAvailable(bool& available)
 
     bool isAvailable(false);
 
-    // Enumerate all avaliable microphones and make an attempt to open up the
+    // Enumerate all available microphones and make an attempt to open up the
     // input mixer corresponding to the currently selected input device.
     //
     if (InitMicrophone() == -1)
@@ -918,7 +918,7 @@ int32_t AudioDeviceWindowsWave::MicrophoneBoostIsAvailable(bool& available)
 
     bool isAvailable(false);
 
-    // Enumerate all avaliable microphones and make an attempt to open up the
+    // Enumerate all available microphones and make an attempt to open up the
     // input mixer corresponding to the currently selected input device.
     //
     if (InitMicrophone() == -1)
@@ -1099,7 +1099,7 @@ int32_t AudioDeviceWindowsWave::MicrophoneVolumeIsAvailable(bool& available)
 
     bool isAvailable(false);
 
-    // Enumerate all avaliable microphones and make an attempt to open up the
+    // Enumerate all available microphones and make an attempt to open up the
     // input mixer corresponding to the currently selected output device.
     //
     if (InitMicrophone() == -1)
@@ -1219,7 +1219,7 @@ int32_t AudioDeviceWindowsWave::SetPlayoutDevice(uint16_t index)
     }
 
     UINT nDevices = waveOutGetNumDevs();
-    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, "number of availiable waveform-audio output devices is %u", nDevices);
+    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, "number of available waveform-audio output devices is %u", nDevices);
 
     if (index < 0 || index > (nDevices-1))
     {
@@ -1492,7 +1492,7 @@ int32_t AudioDeviceWindowsWave::SetRecordingDevice(uint16_t index)
     }
 
     UINT nDevices = waveInGetNumDevs();
-    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, "number of availiable waveform-audio input devices is %u", nDevices);
+    WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, "number of available waveform-audio input devices is %u", nDevices);
 
     if (index < 0 || index > (nDevices-1))
     {
@@ -1608,7 +1608,7 @@ int32_t AudioDeviceWindowsWave::InitPlayout()
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "InitSpeaker() failed");
     }
 
-    // Enumerate all availiable output devices
+    // Enumerate all available output devices
     EnumeratePlayoutDevices();
 
     // Start by closing any existing wave-output devices
@@ -1666,7 +1666,7 @@ int32_t AudioDeviceWindowsWave::InitPlayout()
             }
             else
             {
-                // use default device since default communication device was not avaliable
+                // use default device since default communication device was not available
                 res = waveOutOpen(&hWaveOut, WAVE_MAPPER, &waveFormat, 0, 0, CALLBACK_NULL);
                 WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, "unable to open default communication device => using default instead");
             }
@@ -1690,7 +1690,7 @@ int32_t AudioDeviceWindowsWave::InitPlayout()
         return -1;
     }
 
-    // Log information about the aquired output device
+    // Log information about the acquired output device
     //
     WAVEOUTCAPS caps;
 
@@ -1807,7 +1807,7 @@ int32_t AudioDeviceWindowsWave::InitRecording()
         WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "InitMicrophone() failed");
     }
 
-    // Enumerate all availiable input devices
+    // Enumerate all available input devices
     EnumerateRecordingDevices();
 
     // Start by closing any existing wave-input devices
@@ -1865,7 +1865,7 @@ int32_t AudioDeviceWindowsWave::InitRecording()
             }
             else
             {
-                // use default device since default communication device was not avaliable
+                // use default device since default communication device was not available
                 res = waveInOpen(&hWaveIn, WAVE_MAPPER, &waveFormat, 0, 0, CALLBACK_NULL);
                 WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, "unable to open default communication device => using default instead");
             }
@@ -1889,7 +1889,7 @@ int32_t AudioDeviceWindowsWave::InitRecording()
         return -1;
     }
 
-    // Log information about the aquired input device
+    // Log information about the acquired input device
     //
     WAVEINCAPS caps;
 
@@ -2708,7 +2708,7 @@ int32_t AudioDeviceWindowsWave::GetPlayoutBufferDelay(uint32_t& writtenSamples, 
         // sound cards that uses less than 32 bits to keep track of number of played out
         // sampels. To avoid being fooled by sound cards that sometimes produces false
         // output we compare old value minus the new value with a large value. This is
-        // neccessary because some SC:s produce an output like 153, 198, 175, 230 which
+        // necessary because some SC:s produce an output like 153, 198, 175, 230 which
         // would trigger the wrap-around function if we didn't compare with a large value.
         // The value 64000 is chosen because 2^16=65536 so we allow wrap around at 16 bits.
 
@@ -2719,9 +2719,9 @@ int32_t AudioDeviceWindowsWave::GetPlayoutBufferDelay(uint32_t& writtenSamples, 
 
         if((i < 31) && (i > 14)) {
             // Avoid adjusting when there is 32-bit wrap-around since that is
-            // something neccessary.
+            // something necessary.
             //
-            WEBRTC_TRACE(kTraceDebug, kTraceUtility, _id, "msecleft() => wrap around occured: %d bits used by sound card)", (i+1));
+            WEBRTC_TRACE(kTraceDebug, kTraceUtility, _id, "msecleft() => wrap around occurred: %d bits used by sound card)", (i+1));
 
             _writtenSamples = _writtenSamples - POW2(i + 1);
             writtenSamples = _writtenSamples;
@@ -2738,7 +2738,7 @@ int32_t AudioDeviceWindowsWave::GetPlayoutBufferDelay(uint32_t& writtenSamples, 
             i--;
         }
 
-        WEBRTC_TRACE(kTraceDebug, kTraceUtility, _id, "  msecleft() (wrap around occured after having used all 32 bits)");
+        WEBRTC_TRACE(kTraceDebug, kTraceUtility, _id, "  msecleft() (wrap around occurred after having used all 32 bits)");
 
         _writtenSamplesOld = writtenSamples;
         _playedSamplesOld = playedSamples;
@@ -2751,7 +2751,7 @@ int32_t AudioDeviceWindowsWave::GetPlayoutBufferDelay(uint32_t& writtenSamples, 
         // playedSampels so we have to adjust for this until also playedSampels
         // has had wrap around.
 
-        WEBRTC_TRACE(kTraceDebug, kTraceUtility, _id, "  msecleft() (wrap around occured: correction of output is done)");
+        WEBRTC_TRACE(kTraceDebug, kTraceUtility, _id, "  msecleft() (wrap around occurred: correction of output is done)");
 
         _writtenSamplesOld = writtenSamples;
         _playedSamplesOld = playedSamples;
@@ -2921,7 +2921,7 @@ int32_t AudioDeviceWindowsWave::GetRecordingBufferDelay(uint32_t& readSamples, u
         // sound cards that uses less than 32 bits to keep track of number of played out
         // sampels. To avoid being fooled by sound cards that sometimes produces false
         // output we compare old value minus the new value with a large value. This is
-        // neccessary because some SC:s produce an output like 153, 198, 175, 230 which
+        // necessary because some SC:s produce an output like 153, 198, 175, 230 which
         // would trigger the wrap-around function if we didn't compare with a large value.
         // The value 64000 is chosen because 2^16=65536 so we allow wrap around at 16 bits.
         //
@@ -2931,7 +2931,7 @@ int32_t AudioDeviceWindowsWave::GetRecordingBufferDelay(uint32_t& readSamples, u
 
         if((i < 31) && (i > 14)) {
             // Avoid adjusting when there is 32-bit wrap-around since that is
-            // somethying neccessary.
+            // somethying necessary.
             //
             _read_samples = _read_samples - POW2(i + 1);
             readSamples = _read_samples;
@@ -3118,7 +3118,7 @@ bool AudioDeviceWindowsWave::ThreadProcess()
             int32_t nRecordedBytes(0);
             uint16_t maxIter(10);
 
-            // Deliver all availiable recorded buffers and update the CPU load measurement.
+            // Deliver all available recorded buffers and update the CPU load measurement.
             // We use a while loop here to compensate for the fact that the multi-media timer
             // can sometimed enter a "bad state" after hibernation where the resolution is
             // reduced from ~1ms to ~10-15 ms.

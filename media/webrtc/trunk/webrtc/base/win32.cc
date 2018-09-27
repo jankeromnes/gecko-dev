@@ -167,7 +167,7 @@ int inet_pton_v4(const char* src, void* dst) {
   unsigned char result[kIpv4AddressSize] = {0};
 
   while (*src_pos != '\0') {
-    // strtol won't treat whitespace characters in the begining as an error,
+    // strtol won't treat whitespace characters in the beginning as an error,
     // so check to ensure this is started with digit before passing to strtol.
     if (!isdigit(*src_pos)) {
       return 0;

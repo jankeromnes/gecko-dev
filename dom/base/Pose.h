@@ -16,7 +16,7 @@ namespace dom {
 class Pose : public nsWrapperCache
 {
 public:
-  explicit Pose(nsISupports* aParent);
+  explicit Pose(nsISupports* apparent);
 
   NS_INLINE_DECL_CYCLE_COLLECTING_NATIVE_REFCOUNTING(Pose)
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_NATIVE_CLASS(Pose)

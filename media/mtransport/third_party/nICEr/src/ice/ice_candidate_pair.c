@@ -471,7 +471,7 @@ int nr_ice_candidate_pair_do_triggered_check(nr_ice_peer_ctx *pctx, nr_ice_cand_
           break;
         case NR_ICE_PAIR_STATE_IN_PROGRESS:
           /* Instead of trying to maintain two stun contexts on the same pair,
-           * and handling heterogenous responses and error conditions, we instead
+           * and handling heterogeneous responses and error conditions, we instead
            * create a second pair that is identical except that it has the
            * |triggered| bit set. We also cancel the original pair, but it can
            * still succeed on its own in the special waiting state. */

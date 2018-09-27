@@ -51,7 +51,7 @@ public:
    */
   virtual bool IsContextInitialized() = 0;
 
-  // SetProperty is suspect and jst believes should not be needed.  Currenly
+  // SetProperty is suspect and jst believes should not be needed.  Currently
   // used only for "arguments".
   virtual nsresult SetProperty(JS::Handle<JSObject*> aTarget,
                                const char* aPropName, nsISupports* aVal) = 0;

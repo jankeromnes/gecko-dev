@@ -83,7 +83,7 @@ window.gActivityStreamStrings = {
   "manual_migration_explanation2": "Provu Firefox kun la legosignoj, historio kaj pasvortoj de alia retumilo.",
   "manual_migration_cancel_button": "Ne, dankon",
   "manual_migration_import_button": "Importi nun",
-  "error_fallback_default_info": "Fuŝ', io malbona okazis dum ŝargo de tiu ĉi enhavo.",
+  "error_fallback_default_info": "Fuŝ', io malbona okazis dumb ŝargo de tiu ĉi enhavo.",
   "error_fallback_default_refresh_suggestion": "Refreŝigi paĝon por klopodi denove.",
   "section_menu_action_remove_section": "Forigi sekcion",
   "section_menu_action_collapse_section": "Faldi sekcion",

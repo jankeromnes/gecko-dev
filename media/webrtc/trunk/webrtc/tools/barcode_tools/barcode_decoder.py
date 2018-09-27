@@ -193,7 +193,7 @@ def _check_barcode(barcode):
     dsum += int(barcode[i])
   # Get the modulo 10
   dsum = dsum % 10
-  # If not 0 substract from 10
+  # If not 0 subtract from 10
   if dsum != 0:
     dsum = 10 - dsum
   # Compare result and check digit

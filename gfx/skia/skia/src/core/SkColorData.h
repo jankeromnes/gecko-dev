@@ -26,7 +26,7 @@
  *
  *  For easier compatibility with Skia's GPU backend, we further restrict these
  *  to either (in memory-byte-order) RGBA or BGRA. Note that this "order" does
- *  not directly correspond to the same shift-order, since we have to take endianess
+ *  not directly correspond to the same shift-order, since we have to take endianness
  *  into account.
  *
  *  Here we enforce this constraint.

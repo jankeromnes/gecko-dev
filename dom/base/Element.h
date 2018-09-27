@@ -668,7 +668,7 @@ public:
   void UpdateEditableState(bool aNotify) override;
 
   nsresult BindToTree(nsIDocument* aDocument,
-                      nsIContent* aParent,
+                      nsIContent* apparent,
                       nsIContent* aBindingParent) override;
 
   void UnbindFromTree(bool aDeep = true,

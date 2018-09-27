@@ -31,7 +31,7 @@ taskref_or_string = Any(
     {Required('task-reference'): basestring})
 
 signing_description_schema = Schema({
-    # the dependant task (object) for this signing job, used to inform signing.
+    # the dependent task (object) for this signing job, used to inform signing.
     Required('dependent-task'): object,
 
     # Artifacts from dep task to sign - Sync with taskgraph/transforms/task.py

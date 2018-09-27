@@ -211,7 +211,7 @@ ClientSingleTiledLayerBuffer::PaintThebes(const nsIntRegion& aNewValidRegion,
       copyableRegion.MoveBy(-mTilingOrigin);
       tileDirtyRegion.SubOut(copyableRegion);
     } else {
-      gfxWarning() << "[Tiling:Client] Failed to aquire the discarded front buffer's draw target";
+      gfxWarning() << "[Tiling:Client] Failed to acquire the discarded front buffer's draw target";
     }
   }
 

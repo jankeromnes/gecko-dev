@@ -2285,7 +2285,7 @@ sftk_HashNumber(const void *key)
 }
 
 /*
- * eventually I'd like to expunge all occurances of XXX_SLOT_ID and
+ * eventually I'd like to expunge all occurrences of XXX_SLOT_ID and
  * just go with the info in the slot. This is one place, however,
  * where it might be a little difficult.
  */
@@ -2649,7 +2649,7 @@ sftk_CloseAllSessions(SFTKSlot *slot, PRBool logout)
     /* NOTE: If you try to open new sessions before NSC_CloseAllSessions
      * completes, some of those new sessions may or may not be closed by
      * NSC_CloseAllSessions... but any session running when this code starts
-     * will guarrenteed be close, and no session will be partially closed */
+     * will guaranteed be close, and no session will be partially closed */
     for (i = 0; i < slot->sessHashSize; i++) {
         PZLock *lock = SFTK_SESSION_LOCK(slot, i);
         do {
@@ -2717,7 +2717,7 @@ SFTK_ShutdownSlot(SFTKSlot *slot)
     slot->present = PR_FALSE;
 
     /* close all outstanding sessions
-     * the sessHashSize variable guarentees we have all the session
+     * the sessHashSize variable guarantees we have all the session
      * mechanism set up */
     if (slot->head) {
         sftk_CloseAllSessions(slot, PR_TRUE);
@@ -2725,7 +2725,7 @@ SFTK_ShutdownSlot(SFTKSlot *slot)
 
     /* clear all objects.. session objects are cleared as a result of
      * closing all the sessions. We just need to clear the token object
-     * cache. slot->tokObjHashTable guarentees we have the token
+     * cache. slot->tokObjHashTable guarantees we have the token
      * infrastructure set up. */
     if (slot->tokObjHashTable) {
         SFTK_ClearTokenKeyHashTable(slot);
@@ -3142,7 +3142,7 @@ nsc_CommonFinalize(CK_VOID_PTR pReserved, PRBool isFIPS)
     sftk_CleanupFreeLists();
     sftkdb_Shutdown();
 
-    /* This function does not discard all our previously aquired entropy. */
+    /* This function does not discard all our previously acquired entropy. */
     RNG_RNGShutdown();
 
     /* tell freeBL to clean up after itself */
@@ -3374,7 +3374,7 @@ NSC_GetTokenInfo(CK_SLOT_ID slotID, CK_TOKEN_INFO_PTR pInfo)
     PORT_Memcpy(pInfo->utcTime, "0000000000000000", 16);
     pInfo->ulMaxSessionCount = 0; /* arbitrarily large */
     pInfo->ulSessionCount = slot->sessionCount;
-    pInfo->ulMaxRwSessionCount = 0; /* arbitarily large */
+    pInfo->ulMaxRwSessionCount = 0; /* arbitrarily large */
     pInfo->ulRwSessionCount = slot->rwSessionCount;
     pInfo->firmwareVersion.major = 0;
     pInfo->firmwareVersion.minor = 0;
@@ -4390,7 +4390,7 @@ NSC_CopyObject(CK_SESSION_HANDLE hSession,
      * now copy the old attributes from the new attributes
      */
     /* don't create a token object if we aren't in a rw session */
-    /* we need to hold the lock to copy a consistant version of
+    /* we need to hold the lock to copy a consistent version of
      * the object. */
     crv = sftk_CopyObject(destObject, srcObject);
 

@@ -244,7 +244,7 @@ APPENDIX I
   Working functions for each MacOS are summarized as
   following.
 
-  upto MacOS 6:
+  up to MacOS 6:
     not tested (you have to obtain MPW 2.x)
 
   MacOS 7.x, 8.x, 9.x (without CarbonLib):
@@ -258,7 +258,7 @@ APPENDIX I
     FT_New_Face_From_FSSpec()
     FT_New_Face_From_FSRef()
 
-  Mac OS X upto 10.4.x:
+  Mac OS X up to 10.4.x:
     FT_GetFile_From_Mac_Name()     deprecated
     FT_New_Face_From_FSSpec()      deprecated
     FT_GetFile_From_Mac_ATS_Name() deprecated?

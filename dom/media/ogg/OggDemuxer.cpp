@@ -1059,7 +1059,7 @@ OggDemuxer::SeekInternal(TrackInfo::TrackType aType, const TimeUnit& aTarget)
   }
 
   if (!HaveStartTime(aType) || adjustedTarget == startTime) {
-    // We've seeked to the media start or we can't seek.
+    // We've sought to the media start or we can't seek.
     // Just seek to the offset of the first content page.
     res = Resource(aType)->Seek(nsISeekableStream::NS_SEEK_SET, 0);
     NS_ENSURE_SUCCESS(res,res);
@@ -1100,7 +1100,7 @@ OggDemuxer::SeekInternal(TrackInfo::TrackType aType, const TimeUnit& aTarget)
 
   // Demux forwards until we find the first keyframe prior the target.
   // there may be non-keyframes in the page before the keyframe.
-  // Additionally, we may have seeked to the first page referenced by the
+  // Additionally, we may have sought to the first page referenced by the
   // page index which may be quite far off the target.
   // When doing fastSeek we display the first frame after the seek, so
   // we need to advance the decode to the keyframe otherwise we'll get
@@ -1287,10 +1287,10 @@ OggDemuxer::PageSync(MediaResourceIndex* aResource,
 }
 
 //OggTrackDemuxer
-OggTrackDemuxer::OggTrackDemuxer(OggDemuxer* aParent,
+OggTrackDemuxer::OggTrackDemuxer(OggDemuxer* apparent,
                                  TrackInfo::TrackType aType,
                                  uint32_t aTrackNumber)
-  : mParent(aParent)
+  : mParent(apparent)
   , mType(aType)
 {
   mInfo = mParent->GetTrackInfo(aType, aTrackNumber);
@@ -1311,16 +1311,16 @@ RefPtr<OggTrackDemuxer::SeekPromise>
 OggTrackDemuxer::Seek(const TimeUnit& aTime)
 {
   // Seeks to aTime. Upon success, SeekPromise will be resolved with the
-  // actual time seeked to. Typically the random access point time
+  // actual time sought to. Typically the random access point time
   mQueuedSample = nullptr;
   TimeUnit seekTime = aTime;
   if (mParent->SeekInternal(mType, aTime) == NS_OK) {
     RefPtr<MediaRawData> sample(NextSample());
 
-    // Check what time we actually seeked to.
+    // Check what time we actually sought to.
     if (sample != nullptr) {
       seekTime = sample->mTime;
-      OGG_DEBUG("%p seeked to time %" PRId64, this, seekTime.ToMicroseconds());
+      OGG_DEBUG("%p sought to time %" PRId64, this, seekTime.ToMicroseconds());
     }
     mQueuedSample = sample;
 

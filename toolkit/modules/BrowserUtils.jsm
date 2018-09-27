@@ -361,7 +361,7 @@ var BrowserUtils = {
    * Sets the --toolbarbutton-button-height CSS property on the closest
    * toolbar to the provided element. Useful if you need to vertically
    * center a position:absolute element within a toolbar that uses
-   * -moz-pack-align:stretch, and thus a height which is dependant on
+   * -moz-pack-align:stretch, and thus a height which is dependent on
    * the font-size.
    *
    * @param element An element within the toolbar whose height is desired.

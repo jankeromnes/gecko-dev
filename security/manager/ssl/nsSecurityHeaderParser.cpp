@@ -240,6 +240,6 @@ void
 nsSecurityHeaderParser::LWS()
 {
   // Note that becaue of how we're called, we don't have to check for
-  // the mandatory presense of at least one of SP or HT.
+  // the mandatory presence of at least one of SP or HT.
   while (Accept(' ') || Accept('\t'));
 }

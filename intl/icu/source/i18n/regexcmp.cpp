@@ -3912,7 +3912,7 @@ void RegexCompile::error(UErrorCode e) {
         UErrorCode status = U_ZERO_ERROR; // throwaway status for extracting context
 
         // Fill in the context.
-        //   Note: extractBetween() pins supplied indicies to the string bounds.
+        //   Note: extractBetween() pins supplied indices to the string bounds.
         uprv_memset(fParseErr->preContext,  0, sizeof(fParseErr->preContext));
         uprv_memset(fParseErr->postContext, 0, sizeof(fParseErr->postContext));
         utext_extract(fRXPat->fPattern, fScanIndex-U_PARSE_CONTEXT_LEN+1, fScanIndex, fParseErr->preContext, U_PARSE_CONTEXT_LEN, &status);

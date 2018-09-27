@@ -32,7 +32,7 @@ public:
 class Box
 {
 public:
-  Box(BoxContext* aContext, uint64_t aOffset, const Box* aParent = nullptr);
+  Box(BoxContext* aContext, uint64_t aOffset, const Box* apparent = nullptr);
   Box();
 
   bool IsAvailable() const { return !mRange.IsEmpty(); }

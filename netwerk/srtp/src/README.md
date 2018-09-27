@@ -114,7 +114,7 @@ state associated with an SRTP stream, including the keys and
 parameters for cipher and message authentication functions and the
 anti-replay data. A particular `srtp_stream_t` holds the information
 needed to protect a particular RTP and RTCP stream. This datatype
-is intentionally opaque in order to better seperate the libSRTP
+is intentionally opaque in order to better separate the libSRTP
 API from its implementation.
 
 Within an SRTP session, there can be multiple streams, each
@@ -209,7 +209,7 @@ supported. This includes
 - the cipher F8,
 - the use of the packet index to select between master keys.
 
-The user should be aware that it is possible to misuse this libary,
+The user should be aware that it is possible to misuse this library,
 and that the result may be that the security level it provides is
 inadequate. If you are implementing a feature using this library, you
 will want to read the Security Considerations section of [RFC 3711](https://www.ietf.org/rfc/rfc3711.txt).

@@ -17,9 +17,9 @@ NS_IMPL_CYCLE_COLLECTION_WRAPPERCACHE(PositionError, mParent)
 NS_IMPL_CYCLE_COLLECTION_ROOT_NATIVE(PositionError, AddRef)
 NS_IMPL_CYCLE_COLLECTION_UNROOT_NATIVE(PositionError, Release)
 
-PositionError::PositionError(Geolocation* aParent, int16_t aCode)
+PositionError::PositionError(Geolocation* apparent, int16_t aCode)
   : mCode(aCode)
-  , mParent(aParent)
+  , mParent(apparent)
 {
 }
 

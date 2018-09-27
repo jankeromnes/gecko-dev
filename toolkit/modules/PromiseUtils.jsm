@@ -61,7 +61,7 @@ function Deferred() {
    */
   this.resolve = null;
 
-  /* A method to reject the assocaited Promise with the value passed.
+  /* A method to reject the associated Promise with the value passed.
    * If the promise is already settled it does nothing.
    *
    * @param {anything} reason: The reason for the rejection of the Promise.

@@ -19,14 +19,14 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(GridArea)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-GridArea::GridArea(Grid* aParent,
+GridArea::GridArea(Grid* apparent,
                    const nsString& aName,
                    GridDeclaration aType,
                    uint32_t aRowStart,
                    uint32_t aRowEnd,
                    uint32_t aColumnStart,
                    uint32_t aColumnEnd)
-  : mParent(aParent)
+  : mParent(apparent)
   , mName(aName)
   , mType(aType)
   , mRowStart(aRowStart)

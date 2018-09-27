@@ -137,7 +137,7 @@ static std::unique_ptr<QueuedTask> NewClosure(const Closure& closure,
 //         ++count_;
 //         TaskQueue::Current()->PostDelayedTask(
 //             std::unique_ptr<QueuedTask>(this), 1000);
-//         // Ownership has been transferred to the next occurance,
+//         // Ownership has been transferred to the next occurrence,
 //         // so return false to prevent from being deleted now.
 //         return false;
 //       }

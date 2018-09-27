@@ -29,7 +29,7 @@
     </d:operatorScript>
     <d:passCriteria xmlns="http://www.w3.org/1999/xhtml">
       <p>
-        The text should be positioned such that the begining of the start of the
+        The text should be positioned such that the beginning of the start of the
         Arabic text is at very right of the test and runs towards the left of
         the test border.
       </p>

@@ -54,7 +54,7 @@ typedef struct _IPDF_JsPlatform {
   *                           3-Status.
   *                           4-Asterisk
   * Return Value:
-  *           The return value could be the folowing type:
+  *           The return value could be the following type:
   *                           1-OK;
   *                           2-Cancel;
   *                           3-NO;

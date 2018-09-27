@@ -1001,7 +1001,7 @@ function runTest() {
       animations.forEach(p => p.currentTime = 50 * MS_PER_SEC);
 
       // Prepare the set of expected change MutationRecords, one for each
-      // animation that was seeked.
+      // animation that was sought.
       var seekRecords = animations.map(
         p => ({ added: [], changed: [p], removed: [] })
       );

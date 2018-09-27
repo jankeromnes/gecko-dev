@@ -213,7 +213,7 @@ AutocompletePopup.prototype = {
   /**
    * Destroy the object instance. Please note that the panel DOM elements remain
    * in the DOM, because they might still be in use by other instances of the
-   * same code. It is the responsability of the client code to perform DOM
+   * same code. It is the responsibility of the client code to perform DOM
    * cleanup.
    */
   destroy: function() {
@@ -268,7 +268,7 @@ AutocompletePopup.prototype = {
   setItems: function(items, selectedIndex, options) {
     this.clearItems();
 
-    // If there is no new items, no need to do unecessary work.
+    // If there is no new items, no need to do unnecessary work.
     if (items.length === 0) {
       return;
     }

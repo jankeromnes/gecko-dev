@@ -1134,7 +1134,7 @@ DrawTargetD2D1::Init(ID3D11Texture2D* aTexture, SurfaceFormat aFormat)
   mSize.height = desc.Height;
 
   // This single solid color brush system is not very 'threadsafe', however,
-  // issueing multiple drawing commands simultaneously to a single drawtarget
+  // issuing multiple drawing commands simultaneously to a single drawtarget
   // from multiple threads is unexpected since there's no way to guarantee
   // ordering in that situation anyway.
   hr = mDC->CreateSolidColorBrush(D2D1::ColorF(0, 0), getter_AddRefs(mSolidColorBrush));

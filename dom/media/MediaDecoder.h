@@ -132,7 +132,7 @@ public:
   virtual double GetCurrentTime();
 
   // Seek to the time position in (seconds) from the start of the video.
-  // If aDoFastSeek is true, we'll seek to the sync point/keyframe preceeding
+  // If aDoFastSeek is true, we'll seek to the sync point/keyframe preceding
   // the seek target.
   void Seek(double aTime, SeekTarget::Type aSeekType);
 
@@ -204,7 +204,7 @@ public:
   // supports range requests, we are playing a file, etc.).
   virtual bool IsTransportSeekable() = 0;
 
-  // Return the time ranges that can be seeked into.
+  // Return the time ranges that can be sought into.
   virtual media::TimeIntervals GetSeekable();
 
   // Set the end time of the media resource. When playback reaches
@@ -339,7 +339,7 @@ private:
   {
     MOZ_ASSERT(NS_IsMainThread());
     MOZ_DIAGNOSTIC_ASSERT(!IsShutdown());
-    // Per spec, offical position remains stable during pause and seek.
+    // Per spec, official position remains stable during pause and seek.
     if (mPlayState == PLAY_STATE_PAUSED || IsSeeking()) {
       return;
     }

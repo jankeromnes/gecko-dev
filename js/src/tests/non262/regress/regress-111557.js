@@ -5131,7 +5131,7 @@ MTMIconList = new IconList();
 																																top.printList = "";
 																																top.printCount = 0;  
 
-// asign the menu handle to the created tree
+// assign the menu handle to the created tree
 																																var menu = null;
 
 

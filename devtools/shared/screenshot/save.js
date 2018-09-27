@@ -116,7 +116,7 @@ function getFormattedHelpData() {
 function saveScreenshot(window, args = {}, value) {
   if (args.help) {
     const message = getFormattedHelpData();
-    // Wrap message in an array so that the return value is consistant with save
+    // Wrap message in an array so that the return value is consistent with save
     return [message];
   }
   simulateCameraShutter(window);

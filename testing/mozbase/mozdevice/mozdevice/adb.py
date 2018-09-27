@@ -1664,7 +1664,7 @@ class ADBDevice(ADBCommand):
                                      (mask, path, e.message))
             return
         # Obtain a list of the directories and files which match path
-        # and construct a shell script which explictly calls chmod on
+        # and construct a shell script which explicitly calls chmod on
         # each of them.
         entries = self.ls(path, recursive=recursive, timeout=timeout,
                           root=root)

@@ -581,7 +581,7 @@ bool GrAtlasTextContext::canDrawAsDistanceFields(const SkPaint& skPaint, const S
         SkScalar maxScale = viewMatrix.getMaxScale();
         SkScalar scaledTextSize = maxScale * skPaint.getTextSize();
         // Hinted text looks far better at small resolutions
-        // Scaling up beyond 2x yields undesireable artifacts
+        // Scaling up beyond 2x yields undesirable artifacts
         if (scaledTextSize < fMinDistanceFieldFontSize ||
             scaledTextSize > fMaxDistanceFieldFontSize) {
             return false;

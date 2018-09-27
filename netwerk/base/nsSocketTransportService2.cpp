@@ -896,7 +896,7 @@ nsSocketTransportService::OnDispatchedEvent()
     if (OnSocketThread()) {
         // this check is redundant to one done inside ::Signal(), but
         // we can do it here and skip obtaining the lock - given that
-        // this is a relatively common occurance its worth the
+        // this is a relatively common occurrence its worth the
         // redundant code
         SOCKET_LOG(("OnDispatchedEvent Same Thread Skip Signal\n"));
         return NS_OK;

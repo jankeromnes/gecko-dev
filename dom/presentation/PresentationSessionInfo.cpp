@@ -886,7 +886,7 @@ PresentationControllingInfo::NotifyDisconnected(nsresult aReason)
     }
 
     // If |aReason| is NS_OK, it implies that the user closes the connection
-    // before becomming connected. No need to call |ReplyError| in this case.
+    // before becoming connected. No need to call |ReplyError| in this case.
     if (NS_FAILED(aReason)) {
       if (mIsReconnecting) {
         NotifyReconnectResult(NS_ERROR_DOM_OPERATION_ERR);
@@ -975,7 +975,7 @@ PresentationControllingInfo::OnStopListening(nsIServerSocket* aServerSocket,
  *     |EstablishControlChannel| is called to create a new control channel.
  *     At this point, |mControlChannel| is not able to use yet. Set
  *     |mIsReconnecting| to true and wait until |NotifyConnected|.
- * 3.2 |mControlChannel| is not null and is avaliable.
+ * 3.2 |mControlChannel| is not null and is available.
  *     We can just call |ContinueReconnect| to send reconnect command.
  * 4. |NotifyReconnected| of |nsIPresentationControlChannelListener| is called
  *    to indicate the receiver is ready for reconnecting.

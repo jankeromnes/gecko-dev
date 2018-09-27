@@ -107,7 +107,7 @@ class WEBRTC_DLLEXPORT VoECodec {
 
   // Sets the VAD/DTX (silence suppression) status and |mode| for a
   // specified |channel|. Disabling VAD (through |enable|) will also disable
-  // DTX; it is not necessary to explictly set |disableDTX| in this case.
+  // DTX; it is not necessary to explicitly set |disableDTX| in this case.
   virtual int SetVADStatus(int channel,
                            bool enable,
                            VadModes mode = kVadConventional,

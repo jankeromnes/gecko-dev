@@ -19,8 +19,8 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(SpeechGrammar)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-SpeechGrammar::SpeechGrammar(nsISupports* aParent)
-  : mParent(aParent)
+SpeechGrammar::SpeechGrammar(nsISupports* apparent)
+  : mParent(apparent)
 {
 }
 

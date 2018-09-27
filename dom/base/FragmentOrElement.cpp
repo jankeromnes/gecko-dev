@@ -1335,7 +1335,7 @@ FragmentOrElement::SaveSubtreeState()
 
 void
 FragmentOrElement::FireNodeInserted(nsIDocument* aDoc,
-                                   nsINode* aParent,
+                                   nsINode* apparent,
                                    nsTArray<nsCOMPtr<nsIContent> >& aNodes)
 {
   uint32_t count = aNodes.Length();
@@ -1343,11 +1343,11 @@ FragmentOrElement::FireNodeInserted(nsIDocument* aDoc,
     nsIContent* childContent = aNodes[i];
 
     if (nsContentUtils::HasMutationListeners(childContent,
-          NS_EVENT_BITS_MUTATION_NODEINSERTED, aParent)) {
+          NS_EVENT_BITS_MUTATION_NODEINSERTED, apparent)) {
       InternalMutationEvent mutation(true, eLegacyNodeInserted);
-      mutation.mRelatedNode = aParent;
+      mutation.mRelatedNode = apparent;
 
-      mozAutoSubtreeModified subtree(aDoc, aParent);
+      mozAutoSubtreeModified subtree(aDoc, apparent);
       (new AsyncEventDispatcher(childContent, mutation))->RunDOMEventWhenSafe();
     }
   }

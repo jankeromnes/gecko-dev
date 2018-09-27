@@ -540,7 +540,7 @@ Revision 0.0.5a
 - Bugix to the way to distinguish Set from SetOf at CER/DER SetOfEncoder
 - Adjustments to make it running on Python 1.5.
 - In tests, substrate constants converted from hex escaped literals into
-  octals to overcome indefinite hex width issue occuring in young Python.
+  octals to overcome indefinite hex width issue occurring in young Python.
 - Minor performance optimization of TagSet.isSuperTagSetOf() method
 - examples/sshkey.py added
 

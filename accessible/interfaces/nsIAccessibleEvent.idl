@@ -292,7 +292,7 @@ interface nsIAccessibleEvent : nsISupports
   const unsigned long EVENT_TEXT_SELECTION_CHANGED = 0x0034;
 
   /**
-   * A visibile data event indicates the change of the visual appearance
+   * A visible data event indicates the change of the visual appearance
    * of an accessible object.  This includes for example most of the
    * attributes available via the IAccessibleComponent interface.
    */
@@ -366,7 +366,7 @@ interface nsIAccessibleEvent : nsISupports
   const unsigned long EVENT_HYPERLINK_END_INDEX_CHANGED = 0x004D;
 
   /**
-   * The number of anchors assoicated with this hyperlink object has changed.
+   * The number of anchors associated with this hyperlink object has changed.
    */
   const unsigned long EVENT_HYPERLINK_NUMBER_OF_ANCHORS_CHANGED = 0x004E;
 

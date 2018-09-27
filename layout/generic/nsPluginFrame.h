@@ -74,7 +74,7 @@ public:
   friend nsIFrame* NS_NewObjectFrame(nsIPresShell* aPresShell, ComputedStyle* aStyle);
 
   virtual void Init(nsIContent*       aContent,
-                    nsContainerFrame* aParent,
+                    nsContainerFrame* apparent,
                     nsIFrame*         aPrevInFlow) override;
   virtual nscoord GetMinISize(gfxContext *aRenderingContext) override;
   virtual nscoord GetPrefISize(gfxContext *aRenderingContext) override;

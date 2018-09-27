@@ -62,14 +62,14 @@ class Test(object):
                                          universal_newlines=True)
         return json.loads(output)
 
-    def run_analysis_script(self, phase, upto=None):
+    def run_analysis_script(self, phase, up to=None):
         open("defaults.py", "w").write('''\
 analysis_scriptdir = '{scriptdir}'
 sixgill_bin = '{bindir}'
 '''.format(scriptdir=scriptdir, bindir=self.cfg.sixgill_bin))
         cmd = [os.path.join(scriptdir, "analyze.py"), '-v' if self.verbose else '-q', phase]
-        if upto:
-            cmd += ["--upto", upto]
+        if up to:
+            cmd += ["--up to", up to]
         cmd.append("--source=%s" % self.indir)
         cmd.append("--objdir=%s" % self.outdir)
         cmd.append("--js=%s" % self.cfg.js)
@@ -79,7 +79,7 @@ sixgill_bin = '{bindir}'
         subprocess.check_call(cmd)
 
     def computeGCTypes(self):
-        self.run_analysis_script("gcTypes", upto="gcTypes")
+        self.run_analysis_script("gcTypes", up to="gcTypes")
 
     def computeHazards(self):
         self.run_analysis_script("gcTypes")

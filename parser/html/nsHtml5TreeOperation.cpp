@@ -149,7 +149,7 @@ nsHtml5TreeOperation::AppendTextToTextNode(const char16_t* aBuffer,
 nsresult
 nsHtml5TreeOperation::AppendText(const char16_t* aBuffer,
                                  uint32_t aLength,
-                                 nsIContent* aParent,
+                                 nsIContent* apparent,
                                  nsHtml5DocumentBuilder* aBuilder)
 {
   nsresult rv = NS_OK;
@@ -166,12 +166,12 @@ nsHtml5TreeOperation::AppendText(const char16_t* aBuffer,
   rv = text->SetText(aBuffer, aLength, false);
   NS_ENSURE_SUCCESS(rv, rv);
 
-  return Append(text, aParent, aBuilder);
+  return Append(text, apparent, aBuilder);
 }
 
 nsresult
 nsHtml5TreeOperation::Append(nsIContent* aNode,
-                             nsIContent* aParent,
+                             nsIContent* apparent,
                              nsHtml5DocumentBuilder* aBuilder)
 {
   MOZ_ASSERT(aBuilder);
@@ -181,7 +181,7 @@ nsHtml5TreeOperation::Append(nsIContent* aNode,
   rv = aParent->AppendChildTo(aNode, false);
   if (NS_SUCCEEDED(rv)) {
     aNode->SetParserHasNotified();
-    nsNodeUtils::ContentAppended(aParent, aNode);
+    nsNodeUtils::ContentAppended(apparent, aNode);
   }
   return rv;
 }
@@ -248,7 +248,7 @@ nsHtml5TreeOperation::Detach(nsIContent* aNode,
 nsresult
 nsHtml5TreeOperation::AppendChildrenToNewParent(
   nsIContent* aNode,
-  nsIContent* aParent,
+  nsIContent* apparent,
   nsHtml5DocumentBuilder* aBuilder)
 {
   MOZ_ASSERT(aBuilder);
@@ -264,14 +264,14 @@ nsHtml5TreeOperation::AppendChildrenToNewParent(
     didAppend = true;
   }
   if (didAppend) {
-    nsNodeUtils::ContentAppended(aParent, aParent->GetLastChild());
+    nsNodeUtils::ContentAppended(apparent, apparent->GetLastChild());
   }
   return NS_OK;
 }
 
 nsresult
 nsHtml5TreeOperation::FosterParent(nsIContent* aNode,
-                                   nsIContent* aParent,
+                                   nsIContent* apparent,
                                    nsIContent* aTable,
                                    nsHtml5DocumentBuilder* aBuilder)
 {
@@ -289,7 +289,7 @@ nsHtml5TreeOperation::FosterParent(nsIContent* aNode,
     return rv;
   }
 
-  return Append(aNode, aParent, aBuilder);
+  return Append(aNode, apparent, aBuilder);
 }
 
 nsresult
@@ -633,7 +633,7 @@ nsHtml5TreeOperation::CreateMathMLElement(nsAtom* aName,
 }
 
 void
-nsHtml5TreeOperation::SetFormElement(nsIContent* aNode, nsIContent* aParent)
+nsHtml5TreeOperation::SetFormElement(nsIContent* aNode, nsIContent* apparent)
 {
   nsCOMPtr<nsIFormControl> formControl(do_QueryInterface(aNode));
   RefPtr<dom::HTMLImageElement> domImageElement =
@@ -643,7 +643,7 @@ nsHtml5TreeOperation::SetFormElement(nsIContent* aNode, nsIContent* aParent)
   // TODO: uncomment the above line when <keygen> (bug 101019) is supported by
   // Gecko
   RefPtr<dom::HTMLFormElement> formElement =
-    dom::HTMLFormElement::FromNodeOrNull(aParent);
+    dom::HTMLFormElement::FromNodeOrNull(apparent);
   NS_ASSERTION(formElement,
                "The form element doesn't implement HTMLFormElement.");
   // avoid crashing on <keygen>
@@ -693,7 +693,7 @@ nsHtml5TreeOperation::FosterParentText(nsIContent* aStackParent,
 }
 
 nsresult
-nsHtml5TreeOperation::AppendComment(nsIContent* aParent,
+nsHtml5TreeOperation::AppendComment(nsIContent* apparent,
                                     char16_t* aBuffer,
                                     int32_t aLength,
                                     nsHtml5DocumentBuilder* aBuilder)
@@ -704,7 +704,7 @@ nsHtml5TreeOperation::AppendComment(nsIContent* aParent,
   nsresult rv = comment->SetText(aBuffer, aLength, false);
   NS_ENSURE_SUCCESS(rv, rv);
 
-  return Append(comment, aParent, aBuilder);
+  return Append(comment, apparent, aBuilder);
 }
 
 nsresult

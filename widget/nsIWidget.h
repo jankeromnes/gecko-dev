@@ -419,7 +419,7 @@ class nsIWidget : public nsISupports
      * calling code must handle paint messages and clear the background
      * itself.
      *
-     * In practice at least one of aParent and aNativeParent will be null. If
+     * In practice at least one of apparent and aNativeParent will be null. If
      * both are null the widget isn't parented (e.g. context menus or
      * independent top level windows).
      *
@@ -429,14 +429,14 @@ class nsIWidget : public nsISupports
      * windows, which use the desktop pixel coordinate system; a separate
      * method is provided for these.
      *
-     * @param     aParent       parent nsIWidget
+     * @param     apparent       parent nsIWidget
      * @param     aNativeParent native parent widget
      * @param     aRect         the widget dimension
      * @param     aInitData     data that is used for widget initialization
      *
      */
     virtual MOZ_MUST_USE nsresult
-    Create(nsIWidget* aParent,
+    Create(nsIWidget* apparent,
            nsNativeWidget aNativeParent,
            const LayoutDeviceIntRect& aRect,
            nsWidgetInitData* aInitData = nullptr) = 0;
@@ -450,14 +450,14 @@ class nsIWidget : public nsISupports
      * desktop pixel values directly.
      */
     virtual MOZ_MUST_USE nsresult
-    Create(nsIWidget* aParent,
+    Create(nsIWidget* apparent,
            nsNativeWidget aNativeParent,
            const DesktopIntRect& aRect,
            nsWidgetInitData* aInitData = nullptr)
     {
         LayoutDeviceIntRect devPixRect =
           RoundedToInt(aRect * GetDesktopToDeviceScale());
-        return Create(aParent, aNativeParent, devPixRect, aInitData);
+        return Create(apparent, aNativeParent, devPixRect, aInitData);
     }
 
     /**
@@ -1088,7 +1088,7 @@ class nsIWidget : public nsISupports
     static nsIWidget* LookupRegisteredPluginWindow(uintptr_t aWindowID);
 
     /**
-     * Iterates across the list of registered plugin widgets and updates thier
+     * Iterates across the list of registered plugin widgets and updates their
      * visibility based on which plugins are included in the 'visible' list.
      *
      * The compositor knows little about tabs, but it does know which plugin

@@ -5322,10 +5322,10 @@ GeneralParser<ParseHandler, CharT>::declarationPattern(DeclarationKind declKind,
                 declKind = DeclarationKind::ForOfVar;
             }
         } else {
-            *forHeadKind = ParseNodeKind::ForHead;
+            *forHeadKind = ParseNodeKind::forehead;
         }
 
-        if (*forHeadKind != ParseNodeKind::ForHead) {
+        if (*forHeadKind != ParseNodeKind::forehead) {
             *forInOrOfExpression = expressionAfterForInOrOf(*forHeadKind, yieldHandling);
             if (!*forInOrOfExpression) {
                 return null();
@@ -5403,7 +5403,7 @@ GeneralParser<ParseHandler, CharT>::initializerInNameDeclaration(NameNodeType bi
                 return false;
             }
         } else {
-            *forHeadKind = ParseNodeKind::ForHead;
+            *forHeadKind = ParseNodeKind::forehead;
         }
     }
 
@@ -5471,11 +5471,11 @@ GeneralParser<ParseHandler, CharT>::declarationName(DeclarationKind declKind, To
                     declKind = DeclarationKind::ForOfVar;
                 }
             } else {
-                *forHeadKind = ParseNodeKind::ForHead;
+                *forHeadKind = ParseNodeKind::forehead;
             }
         }
 
-        if (forHeadKind && *forHeadKind != ParseNodeKind::ForHead) {
+        if (forHeadKind && *forHeadKind != ParseNodeKind::forehead) {
             *forInOrOfExpression = expressionAfterForInOrOf(*forHeadKind, yieldHandling);
             if (!*forInOrOfExpression) {
                 return null();
@@ -5534,7 +5534,7 @@ GeneralParser<ParseHandler, CharT>::declarationList(YieldHandling yieldHandling,
     bool initialDeclaration = true;
     do {
         MOZ_ASSERT_IF(!initialDeclaration && forHeadKind,
-                      *forHeadKind == ParseNodeKind::ForHead);
+                      *forHeadKind == ParseNodeKind::forehead);
 
         TokenKind tt;
         if (!tokenStream.getToken(&tt)) {
@@ -5554,7 +5554,7 @@ GeneralParser<ParseHandler, CharT>::declarationList(YieldHandling yieldHandling,
 
         // If we have a for-in/of loop, the above call matches the entirety
         // of the loop head (up to the closing parenthesis).
-        if (forHeadKind && *forHeadKind != ParseNodeKind::ForHead) {
+        if (forHeadKind && *forHeadKind != ParseNodeKind::forehead) {
             break;
         }
 
@@ -6957,7 +6957,7 @@ GeneralParser<ParseHandler, CharT>::forHeadStart(YieldHandling yieldHandling,
     // component.
     if (tt == TokenKind::Semi) {
         *forInitialPart = null();
-        *forHeadKind = ParseNodeKind::ForHead;
+        *forHeadKind = ParseNodeKind::forehead;
         return true;
     }
 
@@ -7047,7 +7047,7 @@ GeneralParser<ParseHandler, CharT>::forHeadStart(YieldHandling yieldHandling,
             return false;
         }
 
-        *forHeadKind = ParseNodeKind::ForHead;
+        *forHeadKind = ParseNodeKind::forehead;
         return true;
     }
 
@@ -7135,7 +7135,7 @@ GeneralParser<ParseHandler, CharT>::forStatement(YieldHandling yieldHandling)
                                            ? JSMSG_FOR_AWAIT_OUTSIDE_ASYNC
                                            : JSMSG_PAREN_AFTER_FOR));
 
-    // ParseNodeKind::ForHead, ParseNodeKind::ForIn, or
+    // ParseNodeKind::forehead, ParseNodeKind::ForIn, or
     // ParseNodeKind::ForOf depending on the loop type.
     ParseNodeKind headKind;
 
@@ -7177,15 +7177,15 @@ GeneralParser<ParseHandler, CharT>::forStatement(YieldHandling yieldHandling)
 
     MOZ_ASSERT(headKind == ParseNodeKind::ForIn ||
                headKind == ParseNodeKind::ForOf ||
-               headKind == ParseNodeKind::ForHead);
+               headKind == ParseNodeKind::forehead);
 
     if (iterKind == IteratorKind::Async && headKind != ParseNodeKind::ForOf) {
         errorAt(begin, JSMSG_FOR_AWAIT_NOT_OF);
         return null();
     }
 
-    TernaryNodeType forHead;
-    if (headKind == ParseNodeKind::ForHead) {
+    TernaryNodeType forehead;
+    if (headKind == ParseNodeKind::forehead) {
         Node init = startNode;
 
         // Look for an operand: |for (;| means we might have already examined
@@ -7226,8 +7226,8 @@ GeneralParser<ParseHandler, CharT>::forStatement(YieldHandling yieldHandling)
         MUST_MATCH_TOKEN_MOD(TokenKind::RightParen, TokenStream::Operand, JSMSG_PAREN_AFTER_FOR_CTRL);
 
         TokenPos headPos(begin, pos().end);
-        forHead = handler.newForHead(init, test, update, headPos);
-        if (!forHead) {
+        forehead = handler.newForHead(init, test, update, headPos);
+        if (!forehead) {
             return null();
         }
     } else {
@@ -7251,8 +7251,8 @@ GeneralParser<ParseHandler, CharT>::forStatement(YieldHandling yieldHandling)
         MUST_MATCH_TOKEN_MOD(TokenKind::RightParen, TokenStream::Operand, JSMSG_PAREN_AFTER_FOR_CTRL);
 
         TokenPos headPos(begin, pos().end);
-        forHead = handler.newForInOrOfHead(headKind, target, iteratedExpr, headPos);
-        if (!forHead) {
+        forehead = handler.newForInOrOfHead(headKind, target, iteratedExpr, headPos);
+        if (!forehead) {
             return null();
         }
     }
@@ -7262,7 +7262,7 @@ GeneralParser<ParseHandler, CharT>::forStatement(YieldHandling yieldHandling)
         return null();
     }
 
-    ForNodeType forLoop = handler.newForStatement(begin, forHead, body, iflags);
+    ForNodeType forLoop = handler.newForStatement(begin, forehead, body, iflags);
     if (!forLoop) {
         return null();
     }

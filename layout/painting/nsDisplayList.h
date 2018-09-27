@@ -172,7 +172,7 @@ struct AnimatedGeometryRoot
 {
   static already_AddRefed<AnimatedGeometryRoot> CreateAGRForFrame(
     nsIFrame* aFrame,
-    AnimatedGeometryRoot* aParent,
+    AnimatedGeometryRoot* apparent,
     bool aIsAsync,
     bool aIsRetained)
   {
@@ -182,10 +182,10 @@ struct AnimatedGeometryRoot
     }
 
     if (result) {
-      result->mParentAGR = aParent;
+      result->mParentAGR = apparent;
       result->mIsAsync = aIsAsync;
     } else {
-      result = new AnimatedGeometryRoot(aFrame, aParent, aIsAsync, aIsRetained);
+      result = new AnimatedGeometryRoot(aFrame, apparent, aIsAsync, aIsRetained);
     }
     return result.forget();
   }
@@ -223,11 +223,11 @@ protected:
                                       DetachAGR)
 
   AnimatedGeometryRoot(nsIFrame* aFrame,
-                       AnimatedGeometryRoot* aParent,
+                       AnimatedGeometryRoot* apparent,
                        bool aIsAsync,
                        bool aIsRetained)
     : mFrame(aFrame)
-    , mParentAGR(aParent)
+    , mParentAGR(apparent)
     , mIsAsync(aIsAsync)
     , mIsRetained(aIsRetained)
   {
@@ -269,7 +269,7 @@ namespace mozilla {
 struct ActiveScrolledRoot
 {
   static already_AddRefed<ActiveScrolledRoot> CreateASRForFrame(
-    const ActiveScrolledRoot* aParent,
+    const ActiveScrolledRoot* apparent,
     nsIScrollableFrame* aScrollableFrame,
     bool aIsRetained)
   {
@@ -288,10 +288,10 @@ struct ActiveScrolledRoot
         f->SetProperty(ActiveScrolledRootCache(), ref.forget().take());
       }
     }
-    asr->mParent = aParent;
+    asr->mParent = apparent;
     asr->mScrollableFrame = aScrollableFrame;
     asr->mViewId = Nothing();
-    asr->mDepth = aParent ? aParent->mDepth + 1 : 1;
+    asr->mDepth = apparent ? apparent->mDepth + 1 : 1;
     asr->mRetained = aIsRetained;
 
     return asr.forget();
@@ -1086,7 +1086,7 @@ public:
    * automatically when the arena goes away.
    */
   ActiveScrolledRoot* AllocateActiveScrolledRoot(
-    const ActiveScrolledRoot* aParent,
+    const ActiveScrolledRoot* apparent,
     nsIScrollableFrame* aScrollableFrame);
 
   /**
@@ -1096,7 +1096,7 @@ public:
   const DisplayItemClipChain* AllocateDisplayItemClipChain(
     const DisplayItemClip& aClip,
     const ActiveScrolledRoot* aASR,
-    const DisplayItemClipChain* aParent);
+    const DisplayItemClipChain* apparent);
 
   /**
    * Intersect two clip chains, allocating the new clip chain items in this
@@ -1802,7 +1802,7 @@ public:
 
   /**
    * Add the current frame to the will-change budget if possible and
-   * remeber the outcome. Subsequent calls to IsInWillChangeBudget
+   * remember the outcome. Subsequent calls to IsInWillChangeBudget
    * will return the same value as return here.
    */
   bool AddToWillChangeBudget(nsIFrame* aFrame, const nsSize& aSize);
@@ -1961,7 +1961,7 @@ private:
    */
   AGRState IsAnimatedGeometryRoot(nsIFrame* aFrame,
                                   bool& aIsAsync,
-                                  nsIFrame** aParent = nullptr);
+                                  nsIFrame** apparent = nullptr);
 
   /**
    * Returns the nearest ancestor frame to aFrame that is considered to have
@@ -1993,7 +1993,7 @@ private:
   AnimatedGeometryRoot* WrapAGRForFrame(
     nsIFrame* aAnimatedGeometryRoot,
     bool aIsAsync,
-    AnimatedGeometryRoot* aParent = nullptr);
+    AnimatedGeometryRoot* apparent = nullptr);
 
   nsDataHashtable<nsPtrHashKey<nsIFrame>, RefPtr<AnimatedGeometryRoot>>
     mFrameToAnimatedGeometryRootMap;

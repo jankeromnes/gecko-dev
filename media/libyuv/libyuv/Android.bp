@@ -62,7 +62,7 @@ cc_library {
     export_include_dirs: ["include"],
 }
 
-// compatibilty static library until all uses of libyuv_static are replaced
+// compatibility static library until all uses of libyuv_static are replaced
 // with libyuv (b/37646797)
 cc_library_static {
     name: "libyuv_static",

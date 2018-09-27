@@ -12,7 +12,7 @@
 
 /*
  * This code maps PKCS #11 Finds to legacy database searches. This code
- * was orginally in pkcs11.c in previous versions of NSS.
+ * was originally in pkcs11.c in previous versions of NSS.
  */
 
 struct SDBFindStr {
@@ -377,7 +377,7 @@ lg_cert_collect(NSSLOWCERTCertificate *cert, void *arg)
     return SECSuccess;
 }
 
-/* provide impedence matching ... */
+/* provide impedance matching ... */
 static SECStatus
 lg_cert_collect2(NSSLOWCERTCertificate *cert, SECItem *dymmy, void *arg)
 {

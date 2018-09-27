@@ -1334,7 +1334,7 @@ nsAttrValue::ParseStringOrAtom(const nsAString& aValue)
 {
   uint32_t len = aValue.Length();
   // Don't bother with atoms if it's an empty string since
-  // we can store those efficently anyway.
+  // we can store those efficiently anyway.
   if (len && len <= NS_ATTRVALUE_MAX_STRINGLENGTH_ATOM) {
     ParseAtom(aValue);
   }

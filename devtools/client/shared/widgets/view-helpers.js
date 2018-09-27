@@ -803,7 +803,7 @@ const WidgetMethods = exports.WidgetMethods = {
     const i = this._indexOfElement(firstTarget);
     const j = this._indexOfElement(secondTarget);
 
-    // 2. Remeber the selection index, to reselect an item, if necessary.
+    // 2. Remember the selection index, to reselect an item, if necessary.
     const selectedTarget = this._widget.selectedItem;
     let selectedIndex = -1;
     if (selectedTarget == firstTarget) {

@@ -241,7 +241,7 @@ private:
   dom::Element* GetDocumentContentRootNode() const;
   already_AddRefed<nsRange> CreateDocumentContentRange();
   already_AddRefed<nsRange> CreateDocumentContentRootToNodeOffsetRange(
-                              nsINode* aParent,
+                              nsINode* apparent,
                               uint32_t aOffset,
                               bool aToStart);
   nsresult CreateDocumentContentIterator(nsIContentIterator** aIterator);

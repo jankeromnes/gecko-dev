@@ -160,7 +160,7 @@ void Task::Abort(bool nowake) {
     if (!nowake) {
       // WakeTasks to self-delete.
       // Don't call Wake() because it is a no-op after "done_" is set.
-      // Even if Wake() did run, it clears "blocked_" which isn't desireable.
+      // Even if Wake() did run, it clears "blocked_" which isn't desirable.
       GetRunner()->WakeTasks();
     }
   }

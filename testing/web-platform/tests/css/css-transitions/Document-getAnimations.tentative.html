@@ -75,7 +75,7 @@ test(t => {
                 'The animation targeting the ::after element comes third');
   assert_equals(anims[3].effect.target, child,
                 'The animation targeting the child element comes last');
-}, 'CSS Transitions targetting (pseudo-)elements should have correct order ' +
+}, 'CSS Transitions targeting (pseudo-)elements should have correct order ' +
    'after sorting');
 
 promise_test(async t => {

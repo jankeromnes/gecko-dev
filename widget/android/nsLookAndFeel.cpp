@@ -108,7 +108,7 @@ nsLookAndFeel::NativeGetColor(ColorID aID, nscolor &aColor)
     }
 
     // XXX we'll want to use context.obtainStyledAttributes on the java side to
-    // get all of these; see TextView.java for a good exmaple.
+    // get all of these; see TextView.java for a good example.
 
     switch (aID) {
         // These colors don't seem to be used for anything anymore in Mozilla

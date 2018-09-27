@@ -12,7 +12,7 @@ loadScripts({ name: "relations.js", dir: MOCHITESTS_DIR });
  * [
  *   attr                 relevant aria attribute
  *   hostRelation         corresponding host relation type
- *   dependantRelation    corresponding dependant relation type
+ *   dependantRelation    corresponding dependent relation type
  * ]
  */
 const attrRelationsSpec = [

@@ -71,7 +71,7 @@ public:
   using Accessible::GetChildAt;
 
   XULTreeGridRowAccessible(nsIContent* aContent, DocAccessible* aDoc,
-                           Accessible* aParent, nsITreeBoxObject* aTree,
+                           Accessible* apparent, nsITreeBoxObject* aTree,
                            nsITreeView* aTreeView, int32_t aRow);
 
   // nsISupports and cycle collection

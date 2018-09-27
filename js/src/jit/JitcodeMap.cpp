@@ -626,14 +626,14 @@ JitcodeGlobalTable::searchInternal(const JitcodeGlobalEntry& query, JitcodeGloba
         // Non-null result at a given level must sort < query.
         MOZ_ASSERT(cur->compareTo(query) < 0);
 
-        // The entry must have a tower height that accomodates level.
+        // The entry must have a tower height that accommodates level.
         if (!cur->tower_->next(level)) {
             continue;
         }
 
         JitcodeGlobalEntry* next = cur->tower_->next(level);
 
-        // Next entry must have tower height that accomodates level.
+        // Next entry must have tower height that accommodates level.
         MOZ_ASSERT(unsigned(level) < next->tower_->height());
 
         // Next entry must sort >= query.

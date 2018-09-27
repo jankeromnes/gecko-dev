@@ -85,7 +85,7 @@
 
 /**
  * The following are the CIDs and Contract IDs of the nsISupports wrappers for
- * primative types.
+ * primitive types.
  */
 #define NS_SUPPORTS_ID_CID \
 { 0xacf8dc40, 0x4a25, 0x11d3, \

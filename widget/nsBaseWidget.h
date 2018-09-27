@@ -411,7 +411,7 @@ public:
   // These functions should be called at the start and end of a "live" widget
   // resize (i.e. when the window contents are repainting during the resize,
   // such as when the user drags a window border). It will suppress the
-  // displayport during the live resize to avoid unneccessary overpainting.
+  // displayport during the live resize to avoid unnecessary overpainting.
   void NotifyLiveResizeStarted();
   void NotifyLiveResizeStopped();
 
@@ -469,7 +469,7 @@ protected:
                                   const nsAString &aIconSuffix,
                                   nsIFile **aResult);
   virtual void    OnDestroy();
-  void            BaseCreate(nsIWidget *aParent,
+  void            BaseCreate(nsIWidget *apparent,
                              nsWidgetInitData* aInitData);
 
   virtual void ConfigureAPZCTreeManager();

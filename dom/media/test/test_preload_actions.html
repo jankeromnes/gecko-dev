@@ -63,7 +63,7 @@ var tests = [
   {
     // 1. Add preload:none video with src to document. Load should halt at NETWORK_IDLE and HAVE_NOTHING,
     // after receiving a suspend event. Should not receive loaded events until after we call load().
-    // Note the suspend event is explictly sent by our "stop the load" code, but other tests can't rely
+    // Note the suspend event is explicitly sent by our "stop the load" code, but other tests can't rely
     // on it for the preload:metadata case, as there can be multiple suspend events when loading metadata.
     suspend:
     function(e) {
@@ -317,7 +317,7 @@ var tests = [
   },
   /*{
     // 9. Change preload value from metadata to auto should cause entire media to be loaded.
-    // For some reason we don't always receive the canplaythrough event, particuarly on this test.
+    // For some reason we don't always receive the canplaythrough event, particularly on this test.
     // We've disabled this test until bug 568402 is fixed.
     canplaythrough:
     function(e) {

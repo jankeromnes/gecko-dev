@@ -583,7 +583,7 @@ public:
         return do_AddRef(mVideoTrack);
       }
       default: {
-        MOZ_CRASH("Unkown media type");
+        MOZ_CRASH("Unknown media type");
       }
     }
   }

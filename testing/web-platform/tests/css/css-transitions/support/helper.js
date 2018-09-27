@@ -244,7 +244,7 @@ root.waitForFrame = () => {
 
 /**
  * Returns a Promise that is resolved after the given number of consecutive
- * animation frames have occured (using requestAnimationFrame callbacks).
+ * animation frames have occurred (using requestAnimationFrame callbacks).
  *
  * @param frameCount  The number of animation frames.
  * @param onFrame  An optional function to be processed in each animation frame.

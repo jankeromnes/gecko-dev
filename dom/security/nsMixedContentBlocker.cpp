@@ -988,7 +988,7 @@ nsMixedContentBlocker::ShouldLoad(bool aHadInsecureImageRedirect,
 
   } else if (sBlockMixedScript && classification == eMixedScript) {
     // If the content is active content, and the pref says active content should be blocked, block it
-    // unless the user has choosen to override the pref
+    // unless the user has chosen to override the pref
     if (allowMixedContent) {
       LogMixedContentMessage(classification, aContentLocation, rootDoc, eUserOverride);
       *aDecision = nsIContentPolicy::ACCEPT;

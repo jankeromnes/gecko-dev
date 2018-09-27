@@ -184,7 +184,7 @@ MediaTimer::Reject()
 
 /*
  * We use a callback function, rather than a callback method, to ensure that
- * the nsITimer does not artifically keep the refcount of the MediaTimer above
+ * the nsITimer does not artificially keep the refcount of the MediaTimer above
  * zero. When the MediaTimer is destroyed, it safely cancels the nsITimer so that
  * we never fire against a dangling closure.
  */

@@ -2518,7 +2518,7 @@ int32_t UdpTransport::LocalHostAddressIPV6(char n_localIP[16])
     req.r.ifa_family = AF_INET6;
 
     // Fill up all the attributes for the rtnetlink header.
-    // The lenght is very important. 16 signifies the ipv6 address.
+    // The length is very important. 16 signifies the ipv6 address.
     rta = (struct rtattr*)(((char*)&req) + NLMSG_ALIGN(req.n.nlmsg_len));
     rta->rta_len = RTA_LENGTH(16);
 

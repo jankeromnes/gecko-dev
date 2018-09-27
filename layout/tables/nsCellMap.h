@@ -531,7 +531,7 @@ protected:
   // XXXbz once we have auto TArrays, we should probably use them here.
   nsTArray<CellDataArray> mRows;
 
-  /** the number of rows in the table (content) which is not indentical to the
+  /** the number of rows in the table (content) which is not identical to the
     * number of rows in the cell map due to row spans extending beyond the end
     * of thetable (dead rows) or empty tr tags
     */

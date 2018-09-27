@@ -43,7 +43,7 @@
 #   interop.sh   - Interoperability tests (disabled by default)
 #                  https://github.com/ekr/tls_interop
 #
-# NSS testing is now devided to 4 cycles:
+# NSS testing is now divided to 4 cycles:
 # ---------------------------------------
 #   standard     - run test suites with defaults settings
 #   pkix         - run test suites with PKIX enabled

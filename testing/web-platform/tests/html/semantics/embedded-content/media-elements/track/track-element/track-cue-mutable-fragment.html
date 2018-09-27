@@ -32,7 +32,7 @@ p, div { display: none; }
                 createExpectedFragment(document.createDocumentFragment());
                 assert_true(fragment.isEqualNode(testCue.getCueAsHTML()));
 
-                // Appending getCuesAsHTML() twice to the DOM should be succesful.
+                // Appending getCuesAsHTML() twice to the DOM should be successful.
                 document.getElementsByTagName("div")[0].appendChild(testCue.getCueAsHTML());
                 document.getElementsByTagName("div")[1].appendChild(testCue.getCueAsHTML());
 

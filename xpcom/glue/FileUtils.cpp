@@ -63,7 +63,7 @@ mozilla::fallocate(PRFileDesc* aFD, int64_t aLength)
 #elif defined(XP_MACOSX)
   int fd = PR_FileDesc2NativeHandle(aFD);
   fstore_t store = {F_ALLOCATECONTIG, F_PEOFPOSMODE, 0, aLength};
-  // Try to get a continous chunk of disk space
+  // Try to get a continuous chunk of disk space
   int ret = fcntl(fd, F_PREALLOCATE, &store);
   if (ret == -1) {
     // OK, perhaps we are too fragmented, allocate non-continuous

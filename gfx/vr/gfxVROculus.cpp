@@ -504,7 +504,7 @@ VROculusSession::StartRendering()
     * side-by-side within the buffer.
     *
     * XXX - An optimization would be to dynamically resize this buffer
-    *       to accomodate sites that are choosing to render in a lower
+    *       to accommodate sites that are choosing to render in a lower
     *       resolution or are using space outside of the left and right
     *       eye textures for other purposes.  (Bug 1291443)
     */

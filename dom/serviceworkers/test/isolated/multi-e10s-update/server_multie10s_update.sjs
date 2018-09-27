@@ -27,7 +27,7 @@ function completeBlockingRequest(response)
 const BLOCKING_KEY = "multie10s-update-release";
 // This tracks the number of blocking requests we received up to this point in
 // time.  This value will be cleared when fetched.  It's on the caller to make
-// sure that all the blocking requests that might occurr have already occurred.
+// sure that all the blocking requests that might occur have already occurred.
 const COUNT_KEY = "multie10s-update-count";
 
 /**

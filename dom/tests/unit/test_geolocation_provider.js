@@ -54,7 +54,7 @@ function geoHandler(metadata, response)
   var position = JSON.stringify(georesponse);
   response.setStatusLine("1.0", 200, "OK");
   response.setHeader("Cache-Control", "no-cache", false);
-  response.setHeader("Content-Type", "aplication/x-javascript", false);
+  response.setHeader("Content-Type", "application/x-javascript", false);
   response.write(position);
 }
 

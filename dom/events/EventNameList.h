@@ -421,7 +421,7 @@ EVENT(reset,
       eFormReset,
       EventNameType_HTMLXUL,
       eBasicEventClass)
-EVENT(seeked,
+EVENT(sought,
       eSeeked,
       EventNameType_HTML,
       eBasicEventClass)

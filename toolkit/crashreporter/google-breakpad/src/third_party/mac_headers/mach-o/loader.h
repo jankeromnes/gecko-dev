@@ -990,7 +990,7 @@ struct dysymtab_command {
 
 /*
  * An indirect symbol table entry is simply a 32bit index into the symbol table 
- * to the symbol that the pointer or stub is refering to.  Unless it is for a
+ * to the symbol that the pointer or stub is referring to.  Unless it is for a
  * non-lazy symbol pointer section for a defined symbol which strip(1) as 
  * removed.  In which case it has the value INDIRECT_SYMBOL_LOCAL.  If the
  * symbol was also absolute INDIRECT_SYMBOL_ABS is or'ed with that.

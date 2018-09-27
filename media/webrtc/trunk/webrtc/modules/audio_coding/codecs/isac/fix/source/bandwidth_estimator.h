@@ -79,7 +79,7 @@ int16_t WebRtcIsacfix_UpdateUplinkBwRec(BwEstimatorstr *bwest_str,
  *      - bweStr       : BWE struct
  *
  * Return:
- *      bandwith and jitter index (0..23)
+ *      bandwidth and jitter index (0..23)
  */
 uint16_t WebRtcIsacfix_GetDownlinkBwIndexImpl(BwEstimatorstr *bwest_str);
 

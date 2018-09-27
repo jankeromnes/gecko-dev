@@ -21,15 +21,15 @@
 using namespace mozilla::a11y;
 
 NS_IMETHODIMP
-xpcAccessible::GetParent(nsIAccessible** aParent)
+xpcAccessible::GetParent(nsIAccessible** apparent)
 {
-  NS_ENSURE_ARG_POINTER(aParent);
-  *aParent = nullptr;
+  NS_ENSURE_ARG_POINTER(apparent);
+  *apparent = nullptr;
   if (IntlGeneric().IsNull())
     return NS_ERROR_FAILURE;
 
   AccessibleOrProxy parent = IntlGeneric().Parent();
-  NS_IF_ADDREF(*aParent = ToXPC(parent));
+  NS_IF_ADDREF(*apparent = ToXPC(parent));
   return NS_OK;
 }
 

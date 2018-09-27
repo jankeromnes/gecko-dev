@@ -63,10 +63,10 @@ public:
   already_AddRefed<gfx::Path> GetPath(const CanvasWindingRule& aWinding,
                                   const gfx::DrawTarget* aTarget) const;
 
-  explicit CanvasPath(nsISupports* aParent);
+  explicit CanvasPath(nsISupports* apparent);
   // already_AddRefed arg because the return value from Path::CopyToBuilder()
   // is passed directly and we can't drop the only ref to have a raw pointer.
-  CanvasPath(nsISupports* aParent,
+  CanvasPath(nsISupports* apparent,
              already_AddRefed<gfx::PathBuilder> aPathBuilder);
 
   void AddPath(CanvasPath& aCanvasPath,

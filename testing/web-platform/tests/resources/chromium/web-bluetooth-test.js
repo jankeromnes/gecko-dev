@@ -151,7 +151,7 @@ class FakeCentral {
     }
 
     // Convert the optional appearance and txPower fields to the corresponding
-    // Mojo structures, since Mojo does not support optional interger values. If
+    // Mojo structures, since Mojo does not support optional integer values. If
     // the fields are undefined, set the hasValue field as false and value as 0.
     // Otherwise, set the hasValue field as true and value with the field value.
     const has_appearance = 'appearance' in scanResult.scanRecord;

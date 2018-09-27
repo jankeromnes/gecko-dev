@@ -422,7 +422,7 @@ goog.scope(function() {
      * @extends {tcuTestCase.DeqpTest}
      */
     es3fVertexArrayTests.SingleVertexArrayOffsetTests = function() {
-        tcuTestCase.DeqpTest.call(this, 'single_attribute.offset', 'Single vertex atribute offset element');
+        tcuTestCase.DeqpTest.call(this, 'single_attribute.offset', 'Single vertex attribute offset element');
         this.makeExecutable();
     };
 

@@ -704,7 +704,7 @@ add_task(async function test_keywords_complex() {
               source: PlacesUtils.bookmarks.SOURCES.SYNC },
   }, {
     // These `onItemMoved` notifications aren't necessary: we only moved
-    // (B C D E) to accomodate (A A1 B1), and Places doesn't usually fire move
+    // (B C D E) to accommodate (A A1 B1), and Places doesn't usually fire move
     // notifications for repositioned siblings. However, detecting and filtering
     // these out complicates `noteObserverChanges`, so, for simplicity, we
     // record and fire the extra notifications.

@@ -66,8 +66,8 @@
       assert_equals(results.length, 2, "Two mousemove events");
       assert_equals(results[0].event.type, "mousemove", "First event is a mousemove event");
       assert_equals(results[1].event.type, "mousemove", "Second event is a mousemove event");
-      assert_equals(results[0].event.target, "div#start", "First event targetted #start");
-      assert_equals(results[1].event.target, "div#end", "Second event targetted #end");
+      assert_equals(results[0].event.target, "div#start", "First event targeted #start");
+      assert_equals(results[1].event.target, "div#end", "Second event targeted #end");
     }
 
     EventRecorder.start();

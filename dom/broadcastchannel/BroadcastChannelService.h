@@ -28,12 +28,12 @@ public:
 
   static already_AddRefed<BroadcastChannelService> GetOrCreate();
 
-  void RegisterActor(BroadcastChannelParent* aParent,
+  void RegisterActor(BroadcastChannelParent* apparent,
                      const nsAString& aOriginChannelKey);
-  void UnregisterActor(BroadcastChannelParent* aParent,
+  void UnregisterActor(BroadcastChannelParent* apparent,
                        const nsAString& aOriginChannelKey);
 
-  void PostMessage(BroadcastChannelParent* aParent,
+  void PostMessage(BroadcastChannelParent* apparent,
                    const ClonedMessageData& aData,
                    const nsAString& aOriginChannelKey);
 

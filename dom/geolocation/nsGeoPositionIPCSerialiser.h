@@ -52,7 +52,7 @@ struct ParamTraits<nsIDOMGeoPositionCoords>
   static bool Read(const Message* aMsg, PickleIterator* aIter,
                    RefPtr<nsIDOMGeoPositionCoords>* aResult)
   {
-    // Check if it is the null pointer we have transfered
+    // Check if it is the null pointer we have transferred
     bool isNull;
     if (!ReadParam(aMsg, aIter, &isNull)) return false;
 
@@ -116,7 +116,7 @@ struct ParamTraits<nsIDOMGeoPosition>
   static bool Read(const Message* aMsg, PickleIterator* aIter,
                    RefPtr<nsIDOMGeoPosition>* aResult)
   {
-    // Check if it is the null pointer we have transfered
+    // Check if it is the null pointer we have transferred
     bool isNull;
     if (!ReadParam(aMsg, aIter, &isNull)) return false;
 

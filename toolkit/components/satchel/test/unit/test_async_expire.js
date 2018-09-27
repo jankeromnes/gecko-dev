@@ -113,7 +113,7 @@ add_task(async function() {
   Assert.equal(505, await promiseCountEntries(null, null));
 
   // Set override pref to 10 days and expire. This expires a large batch of
-  // entries, and should trigger a VACCUM to reduce file size.
+  // entries, and should trigger a VACUUM to reduce file size.
   Services.prefs.setIntPref("browser.formfill.expire_days", 10);
 
   Assert.ok(await promiseCountEntries("bar", "29days") > 0);

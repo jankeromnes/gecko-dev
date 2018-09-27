@@ -280,7 +280,7 @@ var AppManager = exports.AppManager = {
 
     return (async function() {
       // Once we asked the app to launch, the app isn't necessary completely loaded.
-      // launch request only ask the app to launch and immediatly returns.
+      // launch request only ask the app to launch and immediately returns.
       // We have to keep trying to get app target actors required to create its target.
 
       for (let i = 0; i < 10; i++) {

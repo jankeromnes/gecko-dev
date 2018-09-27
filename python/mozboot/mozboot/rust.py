@@ -9,7 +9,7 @@ import os
 import sys
 
 # Base url for pulling the rustup installer.
-# Use the no-CNAME host for compatibilty with Python 2.7
+# Use the no-CNAME host for compatibility with Python 2.7
 # which doesn't support SNI.
 RUSTUP_URL_BASE = 'https://static-rust-lang-org.s3.amazonaws.com/rustup'
 

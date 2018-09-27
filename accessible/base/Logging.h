@@ -142,7 +142,7 @@ void TreeInfo(const char* aMsg, uint32_t aExtraFlags, ...);
 void TreeInfo(const char* aMsg, uint32_t aExtraFlags,
               const char* aMsg1, Accessible* aAcc,
               const char* aMsg2, nsINode* aNode);
-void TreeInfo(const char* aMsg, uint32_t aExtraFlags, Accessible* aParent);
+void TreeInfo(const char* aMsg, uint32_t aExtraFlags, Accessible* apparent);
 
 /**
  * Log the accessible/DOM tree.

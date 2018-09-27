@@ -67,22 +67,22 @@ nsPrintDialogServiceWin::Init()
 }
 
 NS_IMETHODIMP
-nsPrintDialogServiceWin::Show(nsPIDOMWindowOuter* aParent,
+nsPrintDialogServiceWin::Show(nsPIDOMWindowOuter* apparent,
                               nsIPrintSettings* aSettings,
                               nsIWebBrowserPrint* aWebBrowserPrint)
 {
-  NS_ENSURE_ARG(aParent);
-  HWND hWnd = GetHWNDForDOMWindow(aParent);
+  NS_ENSURE_ARG(apparent);
+  HWND hWnd = GetHWNDForDOMWindow(apparent);
   NS_ASSERTION(hWnd, "Couldn't get native window for PRint Dialog!");
 
   return NativeShowPrintDialog(hWnd, aWebBrowserPrint, aSettings);
 }
 
 NS_IMETHODIMP
-nsPrintDialogServiceWin::ShowPageSetup(nsPIDOMWindowOuter* aParent,
+nsPrintDialogServiceWin::ShowPageSetup(nsPIDOMWindowOuter* apparent,
                                        nsIPrintSettings* aNSSettings)
 {
-  NS_ENSURE_ARG(aParent);
+  NS_ENSURE_ARG(apparent);
   NS_ENSURE_ARG(aNSSettings);
 
   ParamBlock block;
@@ -91,7 +91,7 @@ nsPrintDialogServiceWin::ShowPageSetup(nsPIDOMWindowOuter* aParent,
     return rv;
 
   block->SetInt(0, 0);
-  rv = DoDialog(aParent, block, aNSSettings, kPageSetupDialogURL);
+  rv = DoDialog(apparent, block, aNSSettings, kPageSetupDialogURL);
 
   // if aWebBrowserPrint is not null then we are printing
   // so we want to pass back NS_ERROR_ABORT on cancel
@@ -105,7 +105,7 @@ nsPrintDialogServiceWin::ShowPageSetup(nsPIDOMWindowOuter* aParent,
 }
 
 nsresult
-nsPrintDialogServiceWin::DoDialog(mozIDOMWindowProxy* aParent,
+nsPrintDialogServiceWin::DoDialog(mozIDOMWindowProxy* apparent,
                                   nsIDialogParamBlock* aParamBlock,
                                   nsIPrintSettings* aPS,
                                   const char* aChromeURL)
@@ -122,9 +122,9 @@ nsPrintDialogServiceWin::DoDialog(mozIDOMWindowProxy* aParent,
   // no failure or null check.)
   // retain ownership for method lifetime
   nsCOMPtr<mozIDOMWindowProxy> activeParent;
-  if (!aParent) {
+  if (!apparent) {
     mWatcher->GetActiveWindow(getter_AddRefs(activeParent));
-    aParent = activeParent;
+    apparent = activeParent;
   }
 
   // create a nsIMutableArray of the parameters
@@ -140,7 +140,7 @@ nsPrintDialogServiceWin::DoDialog(mozIDOMWindowProxy* aParent,
   array->AppendElement(blkSupps);
 
   nsCOMPtr<mozIDOMWindowProxy> dialog;
-  nsresult rv = mWatcher->OpenWindow(aParent,
+  nsresult rv = mWatcher->OpenWindow(apparent,
                                      aChromeURL,
                                      "_blank",
                                      "centerscreen,chrome,modal,titlebar",

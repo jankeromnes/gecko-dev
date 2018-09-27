@@ -12,7 +12,7 @@
 //   web-animations/interfaces/Animatable/animate-no-browsing-context.html
 //
 // Specifically, it covers the case where we have a running animation
-// targetting an element in a document without a browsing context.
+// targeting an element in a document without a browsing context.
 //
 // Currently the behavior in this case is not well-defined. For example,
 // if we were to simply take an element from such a document, and do:
@@ -81,7 +81,7 @@ promise_test(t => {
     assert_not_equals(getComputedStyle(div).opacity, '0',
                       'Style should NOT be updated');
   });
-}, 'Forcing an animation targetting an element in a document without a'
+}, 'Forcing an animation targeting an element in a document without a'
     + ' browsing context to play does not cause style to update');
 
 promise_test(t => {

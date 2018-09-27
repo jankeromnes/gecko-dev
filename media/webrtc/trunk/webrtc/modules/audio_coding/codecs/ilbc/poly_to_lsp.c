@@ -106,7 +106,7 @@ void WebRtcIlbcfix_Poly2Lsp(
       }
 
       /*
-        Calculater xint by linear interpolation:
+        Calculator xint by linear interpolation:
         xint = xlow - ylow*(xhigh-xlow)/(yhigh-ylow);
       */
 

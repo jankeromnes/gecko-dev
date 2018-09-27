@@ -52,7 +52,7 @@ fi
 usage() {
   echo "usage: ${0##*/} [-p package_name] [-l shared_lib_dir] [-g gdb] [-r]"
   echo "-p package_name     the android APK package to be debugged"
-  echo "-l shared_lib_dir   directory containes native shared library"
+  echo "-l shared_lib_dir   directory contains native shared library"
   echo "-g gdb_args         agruments for gdb, eg: -g '-n -write'"
   echo "-r                  the target device is rooted"
 }

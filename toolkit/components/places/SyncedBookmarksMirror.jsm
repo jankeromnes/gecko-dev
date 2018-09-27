@@ -2965,7 +2965,7 @@ class BookmarkNode {
     if (this.kind == remoteNode.kind) {
       return true;
     }
-    // bookmarks and queries are interchangable as simply changing the URL
+    // bookmarks and queries are interchangeable as simply changing the URL
     // can cause it to flip kinds - and webextensions are able to change the
     // URL of any bookmark.
     if ((this.kind == SyncedBookmarksMirror.KIND.BOOKMARK &&

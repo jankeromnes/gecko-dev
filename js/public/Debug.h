@@ -324,7 +324,7 @@ class MOZ_STACK_CLASS JS_PUBLIC_API(AutoEntryMonitor) {
     explicit AutoEntryMonitor(JSContext* cx);
     ~AutoEntryMonitor();
 
-    // SpiderMonkey reports the JavaScript entry points occuring within this
+    // SpiderMonkey reports the JavaScript entry points occurring within this
     // AutoEntryMonitor's scope to the following member functions, which the
     // embedding is expected to override.
     //

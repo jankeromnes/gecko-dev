@@ -645,7 +645,7 @@ class NameResolver
           // initializers) also contain functions to name.
           case ParseNodeKind::ForIn:
           case ParseNodeKind::ForOf: {
-            TernaryNode* forHead = &cur->as<TernaryNode>();
+            TernaryNode* forehead = &cur->as<TernaryNode>();
             if (!resolve(forHead->kid1(), prefix)) {
                 return false;
             }
@@ -658,8 +658,8 @@ class NameResolver
 
           // Every part of a for(;;) head may contain a function needing name
           // resolution.
-          case ParseNodeKind::ForHead: {
-            TernaryNode* forHead = &cur->as<TernaryNode>();
+          case ParseNodeKind::forehead: {
+            TernaryNode* forehead = &cur->as<TernaryNode>();
             if (ParseNode* init = forHead->kid1()) {
                 if (!resolve(init, prefix)) {
                     return false;

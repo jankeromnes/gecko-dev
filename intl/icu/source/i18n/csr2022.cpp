@@ -87,7 +87,7 @@ scanInput:
     //   unrecognized escape sequences. 
     //   All good:  quality = 100;
     //   half or less good: quality = 0;
-    //   linear inbetween.
+    //   linear between.
     quality = (100*hits - 100*misses) / (hits + misses);
 
     // Back off quality if there were too few escape sequences seen.

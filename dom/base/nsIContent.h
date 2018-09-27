@@ -83,17 +83,17 @@ public:
    * the parent's child list and before nsIDocumentObserver notifications for
    * the addition are dispatched.
    * @param aDocument The new document for the content node.  May not be null
-   *                  if aParent is null.  Must match the current document of
-   *                  aParent, if aParent is not null (note that
+   *                  if apparent is null.  Must match the current document of
+   *                  apparent, if apparent is not null (note that
    *                  aParent->GetUncomposedDoc() can be null, in which case
    *                  this must also be null).
-   * @param aParent The new parent for the content node.  May be null if the
+   * @param apparent The new parent for the content node.  May be null if the
    *                node is being bound as a direct child of the document.
    * @param aBindingParent The new binding parent for the content node.
    *                       This is must either be non-null if a particular
    *                       binding parent is desired or match aParent's binding
    *                       parent.
-   * @note either aDocument or aParent must be non-null.  If both are null,
+   * @note either aDocument or apparent must be non-null.  If both are null,
    *       this method _will_ crash.
    * @note This method must not be called by consumers of nsIContent on a node
    *       that is already bound to a tree.  Call UnbindFromTree first.
@@ -106,7 +106,7 @@ public:
    * FragmentOrElement / CharacterData duplicated code?
    */
   virtual nsresult BindToTree(nsIDocument* aDocument,
-                              nsIContent* aParent,
+                              nsIContent* apparent,
                               nsIContent* aBindingParent) = 0;
 
   /**

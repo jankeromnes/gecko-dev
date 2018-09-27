@@ -609,7 +609,7 @@ SpecialPowersAPI.prototype = {
 
       // Try to fetch a test runner from the mochitest
       // in order to properly log these assertions and notify
-      // all usefull log observers
+      // all useful log observers
       let window = this.window.get();
       let parentRunner, repr = o => o;
       if (window) {

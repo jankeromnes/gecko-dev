@@ -41,7 +41,7 @@ static const int kCLDPriorLanguageWeight = 8;   // 10000x more likely
 // Alternately, weaker boost but mark others of set as negative;
 // makes "neither" an easier result.
 // lang=en low weight 4
-// tld=lu boost lu maaybe 4. but lang= alwyas overcomes tld and encoding
+// tld=lu boost lu maaybe 4. but lang= always overcomes tld and encoding
 // (except maybe en)
 
 // TLD to separate, e.g., burundi from rwanda

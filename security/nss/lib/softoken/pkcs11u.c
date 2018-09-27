@@ -1500,7 +1500,7 @@ sftk_CopyTokenObject(SFTKObject *destObject, SFTKObject *srcObject)
 
     PORT_Assert(src_to);
     if (src_to == NULL) {
-        return CKR_DEVICE_ERROR; /* internal state inconsistant */
+        return CKR_DEVICE_ERROR; /* internal state inconsistent */
     }
 
     crv = stfk_CopyTokenAttributes(destObject, src_to, commonAttrs,

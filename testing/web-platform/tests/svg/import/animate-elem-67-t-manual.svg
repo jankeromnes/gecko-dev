@@ -28,7 +28,7 @@
       <p>
         On the first row, the &lt;set&gt; animation has a begin attribute set to
         '0s;1s' and a dur attribute set to 4s. This should result in a first
-        interval of (0s &lt;= t &lt; 4s) which should be superceeded, at 1s, by a new interval
+        interval of (0s &lt;= t &lt; 4s) which should be superseded, at 1s, by a new interval
         of (1s &lt;= t &lt; 5s) because the default restart behavior is 'always'.
         Consequently, the rectangle should be in the right position during the
         (0s &lt;= t &lt; 5s) interval and move to the left position at 5s.

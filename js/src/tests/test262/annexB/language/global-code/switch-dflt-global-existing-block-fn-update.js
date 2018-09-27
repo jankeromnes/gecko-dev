@@ -2,7 +2,7 @@
 // - src/annex-b-fns/global-existing-block-fn-update.case
 // - src/annex-b-fns/global/switch-dflt.template
 /*---
-description: Variable-scoped binding is updated (Funtion declaration in the `default` clause of a `switch` statement in the global scope)
+description: Variable-scoped binding is updated (Function declaration in the `default` clause of a `switch` statement in the global scope)
 esid: sec-web-compat-globaldeclarationinstantiation
 es6id: B.3.3.2
 flags: [generated, noStrict]

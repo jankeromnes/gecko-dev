@@ -138,7 +138,7 @@ public class GeckoPopupMenu implements GeckoMenu.Callback,
      */
     public void show() {
         if (mAnchor == null) {
-            throw new IllegalStateException("GeckoPopupMenu.show() called without preceeding call to setAnchor()");
+            throw new IllegalStateException("GeckoPopupMenu.show() called without preceding call to setAnchor()");
         }
 
         if (!mMenuPopup.isShowing())

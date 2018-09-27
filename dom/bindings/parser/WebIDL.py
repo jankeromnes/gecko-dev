@@ -1678,7 +1678,7 @@ class IDLInterface(IDLInterfaceOrNamespace):
                     # We need to detect conflicts for NamedConstructors across
                     # interfaces. We first call resolve on the parentScope,
                     # which will merge all NamedConstructors with the same
-                    # identifier accross interfaces as overloads.
+                    # identifier across interfaces as overloads.
                     method.resolve(self.parentScope)
 
                     # Then we look up the identifier on the parentScope. If the
@@ -3592,7 +3592,7 @@ class IDLInterfaceMember(IDLObjectWithIdentifier, IDLExposureMixins):
                                   [self.location])
             if (self.getExtendedAttribute("Cached") or
                 self.getExtendedAttribute("StoreInSlot")):
-                raise WebIDLError("A [NewObject] attribute shouldnt be "
+                raise WebIDLError("A [NewObject] attribute shouldn't be "
                                   "[Cached] or [StoreInSlot], since the point "
                                   "of those is to keep returning the same "
                                   "thing across multiple calls, which is not "

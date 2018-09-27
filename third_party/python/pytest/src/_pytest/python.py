@@ -1255,7 +1255,7 @@ class Function(FunctionMixin, nodes.Item, fixtures.FuncargnamesCompatAttr):
             # this will be redeemed later
             for mark in callspec.marks:
                 # feel free to cry, this was broken for years before
-                # and keywords cant fix it per design
+                # and keywords can't fix it per design
                 self.keywords[mark.name] = mark
             self.own_markers.extend(callspec.marks)
         if keywords:

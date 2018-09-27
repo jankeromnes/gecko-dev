@@ -199,7 +199,7 @@ class ScriptMixin(PlatformMixin):
             error_level (str): log level name to be used in case of error.
 
         Returns:
-            None: for sucess.
+            None: for success.
             int: -1 on error
         """
 
@@ -459,7 +459,7 @@ class ScriptMixin(PlatformMixin):
 
     def _download_file(self, url, file_name):
         """ Helper function for download_file()
-        Additionaly this function logs all exceptions as warnings before
+        Additionally this function logs all exceptions as warnings before
         re-raising them
 
         Args:
@@ -1134,7 +1134,7 @@ class ScriptMixin(PlatformMixin):
                 none of the attempts success. Defaults to
                 '%(action)s failed after %(attempts)d tries!'
             failure_status (int, optional): flag to return in case the retries
-                were not successfull. Defaults to -1.
+                were not successful. Defaults to -1.
             log_level (str, optional): log level name to use for normal activity.
                 Defaults to `INFO`.
             args (tuple, optional): positional arguments to pass onto `action`.
@@ -1526,7 +1526,7 @@ class ScriptMixin(PlatformMixin):
             log_level (str, optional): log level name to use on normal execution.
               Defaults to `INFO`.
             tmpfile_base_path (str, optional): base path of the file to which
-              the output will be writen to. Defaults to 'tmpfile'.
+              the output will be written to. Defaults to 'tmpfile'.
             return_type (str, optional): if equal to 'output' then the complete
               output of the executed command is returned, otherwise the written
               filenames are returned. Defaults to 'output'.

@@ -66,7 +66,7 @@ public:
      */
     void     removeColumn(int32_t column);
 
-    /** Check for, and remove dupicate states (table rows). */
+    /** Check for, and remove duplicate states (table rows). */
     void     removeDuplicateStates();
 
     /** Build the safe reverse table from the already-constructed forward table. */

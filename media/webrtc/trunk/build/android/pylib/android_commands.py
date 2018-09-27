@@ -773,7 +773,7 @@ class AndroidCommands(object):
         self.StartMonitoringLogcat(clear)
       try:
         while True:
-          # Note this will block for upto the timeout _per log line_, so we need
+          # Note this will block for up to the timeout _per log line_, so we need
           # to calculate the overall timeout remaining since t0.
           time_remaining = t0 + self._logcat.timeout - time.time()
           if time_remaining < 0: raise pexpect.TIMEOUT(self._logcat)

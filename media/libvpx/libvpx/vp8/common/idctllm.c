@@ -17,7 +17,7 @@
  * constants:
  *         1.   sqrt(2) * cos (pi/8)
  *         2.   sqrt(2) * sin (pi/8)
- * Becuase the first constant is bigger than 1, to maintain the same 16 bit
+ * Because the first constant is bigger than 1, to maintain the same 16 bit
  * fixed point precision as the second one, we use a trick of
  *         x * a = x + x*(a-1)
  * so

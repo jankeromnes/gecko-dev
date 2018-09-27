@@ -351,7 +351,7 @@ nsIconChannel::Init(nsIURI* aURI)
     GtkIconTheme* icon_theme = gtk_icon_theme_get_default();
     // Micking what gtk_icon_set_render_icon does with sizes, though it's not
     // critical as icons will be scaled to suit size.  It just means we follow
-    // the same pathes and so share caches.
+    // the same paths and so share caches.
     gint width, height;
     if (gtk_icon_size_lookup(icon_size, &width, &height)) {
       gint size = std::min(width, height);
@@ -377,7 +377,7 @@ nsIconChannel::Init(nsIURI* aURI)
   }
 
   if (!icon_set) {
-    // Either we have choosen icon-name lookup for a bidi icon, or stockIcon is
+    // Either we have chosen icon-name lookup for a bidi icon, or stockIcon is
     // not a stock id so we assume it is an icon name.
     useIconName = true;
     // Creating a GtkIconSet is a convenient way to allow the style to

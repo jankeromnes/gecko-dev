@@ -106,7 +106,7 @@ bool ExtractResolutionFromFilename(const char* name,
 }
 
 // Scale Y channel from 16..240 to 0..255.
-// This can be useful when comparing codecs that are inconsistant about Y
+// This can be useful when comparing codecs that are inconsistent about Y
 uint8_t ScaleY(uint8_t y) {
   int ny = (y - 16) * 256 / 224;
   if (ny < 0) {

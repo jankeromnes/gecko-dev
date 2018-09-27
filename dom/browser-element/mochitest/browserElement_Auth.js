@@ -87,7 +87,7 @@ function testHttpAuth(e) {
 function testProxyAuth(e) {
   // The testingSJS simulates the 407 proxy authentication required response
   // for proxy server, which will trigger the browser element to send prompt
-  // event with proxy infomation.
+  // event with proxy information.
   var testingSJS = 'http://test/tests/dom/browser-element/mochitest/file_http_407_response.sjs';
   var mozproxy;
 

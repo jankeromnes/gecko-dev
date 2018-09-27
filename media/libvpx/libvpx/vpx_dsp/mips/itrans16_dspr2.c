@@ -873,7 +873,7 @@ void vpx_idct16x16_256_add_dspr2(const int16_t *input, uint8_t *dest,
   DECLARE_ALIGNED(32, int16_t, out[16 * 16]);
   uint32_t pos = 45;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp    %[pos],    1    \n\t" : : [pos] "r"(pos));
 
   // First transform rows
@@ -890,7 +890,7 @@ void vpx_idct16x16_10_add_dspr2(const int16_t *input, uint8_t *dest,
   uint32_t i;
   uint32_t pos = 45;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp    %[pos],    1    \n\t" : : [pos] "r"(pos));
 
   // First transform rows. Since all non-zero dct coefficients are in
@@ -937,7 +937,7 @@ void vpx_idct16x16_1_add_dspr2(const int16_t *input, uint8_t *dest,
   int32_t t1, t2, t3, t4;
   int32_t vector_1, vector_2, vector_3, vector_4;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
 
                        :

@@ -191,7 +191,7 @@ int32_t AudioMixerManager::EnumerateSpeakers()
 
     ClearSpeakerState();
 
-    // scan all avaliable mixer devices
+    // scan all available mixer devices
     for (mixId = 0; mixId < nDevices; mixId++)
     {
         // get capabilities for the specified mixer ID
@@ -199,7 +199,7 @@ int32_t AudioMixerManager::EnumerateSpeakers()
             continue;
 
         WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, "[mixerID=%d] %s: ", mixId, WideToUTF8(caps.szPname));
-        // scan all avaliable destinations for this mixer
+        // scan all available destinations for this mixer
         for (destId = 0; destId < caps.cDestinations; destId++)
         {
             GetDestinationLineInfo(mixId, destId, destLine);
@@ -278,7 +278,7 @@ int32_t AudioMixerManager::EnumerateMicrophones()
 
     ClearMicrophoneState();
 
-    // scan all avaliable mixer devices
+    // scan all available mixer devices
     for (mixId = 0; mixId < nDevices; mixId++)
     {
         // get capabilities for the specified mixer ID
@@ -286,7 +286,7 @@ int32_t AudioMixerManager::EnumerateMicrophones()
             continue;
 
         WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id, "[mixerID=%d] %s: ", mixId, WideToUTF8(caps.szPname));
-        // scan all avaliable destinations for this mixer
+        // scan all available destinations for this mixer
         for (destId = 0; destId < caps.cDestinations; destId++)
         {
             GetDestinationLineInfo(mixId, destId, destLine);
@@ -619,7 +619,7 @@ int32_t AudioMixerManager::OpenSpeaker(AudioDeviceModule::WindowsDeviceType devi
         }
         else
         {
-            // use default device since default communication device was not avaliable
+            // use default device since default communication device was not available
             res = waveOutOpen(&hWaveOut, WAVE_MAPPER, &waveFormat, 0, 0, CALLBACK_NULL);
             WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
                 "unable to open default communication device => using default instead");
@@ -642,7 +642,7 @@ int32_t AudioMixerManager::OpenSpeaker(AudioDeviceModule::WindowsDeviceType devi
     HMIXER hMixer(NULL);
 
     // Retrieve the device identifier for a mixer device associated with the
-    // aquired waveform-audio output handle.
+    // acquired waveform-audio output handle.
     //
     res = mixerGetID((HMIXEROBJ)hWaveOut, &mixerId, MIXER_OBJECTF_HWAVEOUT);
     if (MMSYSERR_NOERROR != res)
@@ -738,7 +738,7 @@ int32_t AudioMixerManager::OpenSpeaker(uint16_t index)
     HMIXER hMixer(NULL);
 
     // Retrieve the device identifier for a mixer device associated with the
-    // aquired waveform-audio output handle.
+    // acquired waveform-audio output handle.
     //
     res = mixerGetID((HMIXEROBJ)hWaveOut, &mixerId, MIXER_OBJECTF_HWAVEOUT);
     if (MMSYSERR_NOERROR != res)
@@ -841,7 +841,7 @@ int32_t AudioMixerManager::OpenMicrophone(AudioDeviceModule::WindowsDeviceType d
         }
         else
         {
-            // use default device since default communication device was not avaliable
+            // use default device since default communication device was not available
             res = waveInOpen(&hWaveIn, WAVE_MAPPER, &waveFormat, 0, 0, CALLBACK_NULL);
             WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
                 "unable to open default communication device => using default instead");
@@ -864,7 +864,7 @@ int32_t AudioMixerManager::OpenMicrophone(AudioDeviceModule::WindowsDeviceType d
     HMIXER hMixer(NULL);
 
     // Retrieve the device identifier for a mixer device associated with the
-    // aquired waveform-audio input handle.
+    // acquired waveform-audio input handle.
     //
     res = mixerGetID((HMIXEROBJ)hWaveIn, &mixerId, MIXER_OBJECTF_HWAVEIN);
     if (MMSYSERR_NOERROR != res)
@@ -960,7 +960,7 @@ int32_t AudioMixerManager::OpenMicrophone(uint16_t index)
     HMIXER hMixer(NULL);
 
     // Retrieve the device identifier for a mixer device associated with the
-    // aquired waveform-audio input handle.
+    // acquired waveform-audio input handle.
     //
     res = mixerGetID((HMIXEROBJ)hWaveIn, &mixerId, MIXER_OBJECTF_HWAVEIN);
     if (MMSYSERR_NOERROR != res)
@@ -1040,7 +1040,7 @@ int32_t AudioMixerManager::SetSpeakerVolume(uint32_t volume)
 
     if (_outputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable output mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available output mixer exists");
         return -1;
     }
 
@@ -1070,7 +1070,7 @@ int32_t AudioMixerManager::SpeakerVolume(uint32_t& volume) const
 
     if (_outputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable output mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available output mixer exists");
         return -1;
     }
 
@@ -1102,7 +1102,7 @@ int32_t AudioMixerManager::MaxSpeakerVolume(uint32_t& maxVolume) const
 
     if (_outputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable output mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available output mixer exists");
         return -1;
     }
 
@@ -1131,7 +1131,7 @@ int32_t AudioMixerManager::MinSpeakerVolume(uint32_t& minVolume) const
 
     if (_outputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable output mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available output mixer exists");
         return -1;
     }
 
@@ -1160,7 +1160,7 @@ int32_t AudioMixerManager::SpeakerVolumeStepSize(uint16_t& stepSize) const
 
     if (_outputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable output mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available output mixer exists");
         return -1;
     }
 
@@ -1187,7 +1187,7 @@ int32_t AudioMixerManager::SpeakerVolumeIsAvailable(bool& available)
 {
     if (_outputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable output mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available output mixer exists");
         return -1;
     }
 
@@ -1204,7 +1204,7 @@ int32_t AudioMixerManager::SpeakerMuteIsAvailable(bool& available)
 {
     if (_outputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable output mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available output mixer exists");
         return -1;
     }
 
@@ -1227,7 +1227,7 @@ int32_t AudioMixerManager::SetSpeakerMute(bool enable)
 
     if (_outputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable output mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available output mixer exists");
         return -1;
     }
 
@@ -1262,7 +1262,7 @@ int32_t AudioMixerManager::SpeakerMute(bool& enabled) const
 
     if (_outputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable output mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available output mixer exists");
         return -1;
     }
 
@@ -1299,7 +1299,7 @@ int32_t AudioMixerManager::MicrophoneMuteIsAvailable(bool& available)
 {
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1322,7 +1322,7 @@ int32_t AudioMixerManager::SetMicrophoneMute(bool enable)
 
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1357,7 +1357,7 @@ int32_t AudioMixerManager::MicrophoneMute(bool& enabled) const
 
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1394,7 +1394,7 @@ int32_t AudioMixerManager::MicrophoneBoostIsAvailable(bool& available)
 {
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1415,7 +1415,7 @@ int32_t AudioMixerManager::SetMicrophoneBoost(bool enable)
 
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1450,7 +1450,7 @@ int32_t AudioMixerManager::MicrophoneBoost(bool& enabled) const
 
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1487,7 +1487,7 @@ int32_t AudioMixerManager::MicrophoneVolumeIsAvailable(bool& available)
 {
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1506,7 +1506,7 @@ int32_t AudioMixerManager::SetMicrophoneVolume(uint32_t volume)
 
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1534,7 +1534,7 @@ int32_t AudioMixerManager::MicrophoneVolume(uint32_t& volume) const
 
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1564,7 +1564,7 @@ int32_t AudioMixerManager::MaxMicrophoneVolume(uint32_t& maxVolume) const
 
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1593,7 +1593,7 @@ int32_t AudioMixerManager::MinMicrophoneVolume(uint32_t& minVolume) const
 
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1622,7 +1622,7 @@ int32_t AudioMixerManager::MicrophoneVolumeStepSize(uint16_t& stepSize) const
 
     if (_inputMixerHandle == NULL)
     {
-        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no avaliable input mixer exists");
+        WEBRTC_TRACE(kTraceWarning, kTraceAudioDevice, _id, "no available input mixer exists");
         return -1;
     }
 
@@ -1835,7 +1835,7 @@ bool AudioMixerManager::GetSourceLineInfo(UINT mixId, DWORD destId, DWORD srcId,
 
 bool AudioMixerManager::GetAllLineControls(UINT mixId, const MIXERLINE& line, MIXERCONTROL* controlArray, bool trace) const
 {
-    // Ensure that we don't try to aquire information if there are no controls for this line
+    // Ensure that we don't try to acquire information if there are no controls for this line
     //
     if (line.cControls == 0)
         return false;

@@ -616,7 +616,7 @@ protected:
   nsCOMPtr<nsIPrincipal> mPendingPrincipal;
   RefPtr<PrincipalHandleListener> mPrincipalHandleListener;
   // Keep tracking MediaStreamTrackListener and DirectMediaStreamTrackListener,
-  // so we can remove them in |Destory|.
+  // so we can remove them in |Destroy|.
   nsTArray<RefPtr<MediaStreamTrackListener>> mTrackListeners;
   nsTArray<RefPtr<DirectMediaStreamTrackListener>> mDirectTrackListeners;
   nsString mID;

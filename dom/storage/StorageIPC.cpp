@@ -999,14 +999,14 @@ public:
     loadDone
   };
 
-  LoadRunnable(StorageDBParent* aParent,
+  LoadRunnable(StorageDBParent* apparent,
                TaskType aType,
                const nsACString& aOriginSuffix,
                const nsACString& aOriginNoSuffix,
                const nsAString& aKey = EmptyString(),
                const nsAString& aValue = EmptyString())
     : Runnable("dom::LoadRunnable")
-    , mParent(aParent)
+    , mParent(apparent)
     , mType(aType)
     , mSuffix(aOriginSuffix)
     , mOrigin(aOriginNoSuffix)
@@ -1015,13 +1015,13 @@ public:
     , mRv(NS_ERROR_NOT_INITIALIZED)
   { }
 
-  LoadRunnable(StorageDBParent* aParent,
+  LoadRunnable(StorageDBParent* apparent,
                TaskType aType,
                const nsACString& aOriginSuffix,
                const nsACString& aOriginNoSuffix,
                nsresult aRv)
     : Runnable("dom::LoadRunnable")
-    , mParent(aParent)
+    , mParent(apparent)
     , mType(aType)
     , mSuffix(aOriginSuffix)
     , mOrigin(aOriginNoSuffix)
@@ -1156,11 +1156,11 @@ namespace {
 class UsageRunnable : public Runnable
 {
 public:
-  UsageRunnable(StorageDBParent* aParent,
+  UsageRunnable(StorageDBParent* apparent,
                 const nsACString& aOriginScope,
                 const int64_t& aUsage)
     : Runnable("dom::UsageRunnable")
-    , mParent(aParent)
+    , mParent(apparent)
     , mOriginScope(aOriginScope)
     , mUsage(aUsage)
   {}

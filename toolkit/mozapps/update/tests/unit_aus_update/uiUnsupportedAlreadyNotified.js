@@ -3,7 +3,7 @@
  */
 
 const WindowWatcher = {
-  openWindow(aParent, aUrl, aName, aFeatures, aArgs) {
+  openWindow(apparent, aUrl, aName, aFeatures, aArgs) {
     check_showUpdateAvailable();
   },
 

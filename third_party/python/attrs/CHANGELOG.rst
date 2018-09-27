@@ -37,7 +37,7 @@ Changes
 - Setting the cell type is now completely best effort.
   This fixes ``attrs`` on Jython.
 
-  We cannot make any guarantees regarding Jython though, because our test suite cannot run due to dependency incompatabilities.
+  We cannot make any guarantees regarding Jython though, because our test suite cannot run due to dependency incompatibilities.
 
   `#321 <https://github.com/python-attrs/attrs/issues/321>`_,
   `#334 <https://github.com/python-attrs/attrs/issues/334>`_

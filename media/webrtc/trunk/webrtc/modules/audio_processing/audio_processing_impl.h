@@ -121,7 +121,7 @@ class AudioProcessingImpl : public AudioProcessing {
   AudioProcessingStatistics GetStatistics() const override;
 
   // Methods returning pointers to APM submodules.
-  // No locks are aquired in those, as those locks
+  // No locks are acquired in those, as those locks
   // would offer no protection (the submodules are
   // created only once in a single-treaded manner
   // during APM creation).

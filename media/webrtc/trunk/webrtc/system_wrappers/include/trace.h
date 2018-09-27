@@ -31,7 +31,7 @@ namespace webrtc {
 
 class Trace {
  public:
-  // The length of the trace text preceeding the log message.
+  // The length of the trace text preceding the log message.
   static const int kBoilerplateLength;
   // The position of the timestamp text within a trace.
   static const int kTimestampPosition;

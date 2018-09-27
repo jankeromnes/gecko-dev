@@ -35,7 +35,7 @@ void vpx_comp_avg_pred_sse2(uint8_t *comp, const uint8_t *pred, int width,
   } else {  // width must be 4 or 8.
     int i;
     // Process 16 elements at a time. comp and pred have width == stride and
-    // therefore live in contigious memory. 4*4, 4*8, 8*4, 8*8, and 8*16 are all
+    // therefore live in contiguous memory. 4*4, 4*8, 8*4, 8*8, and 8*16 are all
     // divisible by 16 so just ref needs to be massaged when loading.
     for (i = 0; i < width * height; i += 16) {
       const __m128i p = _mm_load_si128((const __m128i *)pred);

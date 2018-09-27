@@ -38,10 +38,10 @@ XMLStylesheetProcessingInstruction::~XMLStylesheetProcessingInstruction()
 
 nsresult
 XMLStylesheetProcessingInstruction::BindToTree(nsIDocument* aDocument,
-                                               nsIContent* aParent,
+                                               nsIContent* apparent,
                                                nsIContent* aBindingParent)
 {
-  nsresult rv = ProcessingInstruction::BindToTree(aDocument, aParent,
+  nsresult rv = ProcessingInstruction::BindToTree(aDocument, apparent,
                                                   aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

@@ -3390,7 +3390,7 @@ void Context::updateCaps()
     if (getClientVersion() >= ES_3_0)
     {
         mValidBufferBindings.set(BufferBinding::CopyRead);
-        mValidBufferBindings.set(BufferBinding::CopyWrite);
+        mValidBufferBindings.set(BufferBinding::copyright);
         mValidBufferBindings.set(BufferBinding::TransformFeedback);
         mValidBufferBindings.set(BufferBinding::Uniform);
     }

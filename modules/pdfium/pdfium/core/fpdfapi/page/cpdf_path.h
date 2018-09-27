@@ -39,7 +39,7 @@ class CPDF_Path {
   void AppendRect(FX_FLOAT left, FX_FLOAT bottom, FX_FLOAT right, FX_FLOAT top);
   void AppendPoint(const CFX_PointF& point, FXPT_TYPE type, bool close);
 
-  // TODO(tsepez): Remove when all access thru this class.
+  // TODO(tsepez): Remove when all access through this class.
   const CFX_PathData* GetObject() const { return m_Ref.GetObject(); }
 
  private:

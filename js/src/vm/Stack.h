@@ -543,7 +543,7 @@ class InterpreterFrame
      *
      * Given that an InterpreterFrame corresponds roughly to a ES Execution
      * Context (ES 10.3), InterpreterFrame::varObj corresponds to the
-     * VariableEnvironment component of a Exection Context. Intuitively, the
+     * VariableEnvironment component of a Execution Context. Intuitively, the
      * variables object is where new bindings (variables and functions) are
      * stored. One might expect that this is either the Call object or
      * envChain.globalObj for function or global code, respectively, however

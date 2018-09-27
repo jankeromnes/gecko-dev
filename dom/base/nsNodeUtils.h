@@ -278,7 +278,7 @@ private:
    *                             true every node will be followed by its
    *                             clone. Null can be passed to prevent this from
    *                             being populated.
-   * @param aParent If aClone is true the cloned node will be appended to
+   * @param apparent If aClone is true the cloned node will be appended to
    *                aParent's children. May be null. If not null then aNode
    *                must be an nsIContent.
    * @param aError The error, if any.
@@ -292,7 +292,7 @@ private:
                   nsNodeInfoManager* aNewNodeInfoManager,
                   JS::Handle<JSObject*> aReparentScope,
                   nsCOMArray<nsINode>* aNodesWithProperties,
-                  nsINode *aParent, mozilla::ErrorResult& aError);
+                  nsINode *apparent, mozilla::ErrorResult& aError);
 
   enum class AnimationMutationType
   {

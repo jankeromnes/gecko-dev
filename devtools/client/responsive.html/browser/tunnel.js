@@ -316,7 +316,7 @@ exports.tunnelToInnerBrowser = tunnelToInnerBrowser;
 
 /**
  * This module allows specific messages of interest to be directed from the
- * outer browser to the inner browser (and vice versa) in a targetted fashion
+ * outer browser to the inner browser (and vice versa) in a targeted fashion
  * without having to touch the original code paths that use them.
  */
 function MessageManagerTunnel(outer, inner) {

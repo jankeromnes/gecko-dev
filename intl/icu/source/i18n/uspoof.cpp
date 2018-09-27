@@ -598,7 +598,7 @@ int32_t checkImpl(const SpoofImpl* This, const UnicodeString& id, CheckResult* c
         gNfdNormalizer->normalize(id, nfdText, *status);
         int32_t nfdLength = nfdText.length();
 
-        // scan for more than one occurence of the same non-spacing mark
+        // scan for more than one occurrence of the same non-spacing mark
         // in a sequence of non-spacing marks.
         int32_t     i;
         UChar32     c;

@@ -66,7 +66,7 @@ public:
   // The mode is initially MODE_METADATA.
   virtual void SetReadMode(MediaCacheStream::ReadMode aMode) = 0;
 
-  // Returns true if the resource can be seeked to unbuffered ranges, i.e.
+  // Returns true if the resource can be sought to unbuffered ranges, i.e.
   // for an HTTP network stream this returns true if HTTP1.1 Byte Range
   // requests are supported by the connection/server.
   virtual bool IsTransportSeekable() = 0;

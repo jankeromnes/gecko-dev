@@ -91,7 +91,7 @@ struct oc_dec_pipeline_state{
     gcc (as of 4.2.1) only seems to be able to give stack variables 8-byte
      alignment, and silently produces incorrect results if you ask for 16.
     Finally, keeping it off the stack means there's less likely to be a data
-     hazard beween the NEON co-processor and the regular ARM core, which avoids
+     hazard between the NEON co-processor and the regular ARM core, which avoids
      unnecessary stalls.*/
   OC_ALIGN16(ogg_int16_t dct_coeffs[128]);
   OC_ALIGN16(signed char bounding_values[256]);

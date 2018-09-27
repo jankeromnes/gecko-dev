@@ -54,7 +54,7 @@
         async function runTest() {
           for (testCase of testCases) {
             // Run each test in a new window, to ensure its user gesture
-            // activation state isn't tainted by preceeding tests.
+            // activation state isn't tainted by preceding tests.
             let child = window.open(child_url, "", "width=500,height=500");
             await once(child, "load");
             child.postMessage(testCase, window.origin);

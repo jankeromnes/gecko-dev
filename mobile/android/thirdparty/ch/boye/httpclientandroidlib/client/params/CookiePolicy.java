@@ -41,7 +41,7 @@ import ch.boye.httpclientandroidlib.annotation.Immutable;
 public final class CookiePolicy {
 
     /**
-     * The policy that provides high degree of compatibilty
+     * The policy that provides high degree of compatibility
      * with common cookie management of popular HTTP agents.
      */
     public static final String BROWSER_COMPATIBILITY = "compatibility";

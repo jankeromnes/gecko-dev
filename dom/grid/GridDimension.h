@@ -23,7 +23,7 @@ class GridDimension : public nsISupports
                     , public nsWrapperCache
 {
 public:
-  explicit GridDimension(Grid* aParent);
+  explicit GridDimension(Grid* apparent);
 
 protected:
   virtual ~GridDimension();

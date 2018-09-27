@@ -83,7 +83,7 @@ public:
 
   // Indicates the position of the cursor for the event (so we can compute
   // mNoCheckRange). It can be nullptr if we don't care about the cursor position
-  // (such as for the intial check of everything).
+  // (such as for the initial check of everything).
   //
   // For mOp == eOpNavigation, this is the NEW position of the cursor
   RefPtr<nsRange> mAnchorRange;

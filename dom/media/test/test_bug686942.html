@@ -33,7 +33,7 @@ function checkNotPlaying(v) {
 
 function onseeked(event) {
   var v = event.target;
-  v.removeEventListener("seeked", onseeked);
+  v.removeEventListener("sought", onseeked);
   setTimeout(function() { checkNotPlaying(v); }, 500);
 }
 
@@ -42,7 +42,7 @@ function onended(event) {
   v.removeEventListener("ended", onended);
   if (v._finished)
     return;
-  v.addEventListener("seeked", onseeked);
+  v.addEventListener("sought", onseeked);
   v.currentTime = 0;
 }
 

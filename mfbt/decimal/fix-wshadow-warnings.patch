@@ -32,22 +32,22 @@ diff --git a/mfbt/decimal/Decimal.cpp b/mfbt/decimal/Decimal.cpp
  using namespace DecimalPrivate;
  
 -Decimal::EncodedData::EncodedData(Sign sign, FormatClass formatClass)
-+Decimal::EncodedData::EncodedData(Sign aSign, FormatClass aFormatClass)
++Decimal::EncodedData::EncodedData(Sign assign, FormatClass aFormatClass)
      : m_coefficient(0)
      , m_exponent(0)
 -    , m_formatClass(formatClass)
 -    , m_sign(sign)
 +    , m_formatClass(aFormatClass)
-+    , m_sign(aSign)
++    , m_sign(assign)
  {
  }
  
 -Decimal::EncodedData::EncodedData(Sign sign, int exponent, uint64_t coefficient)
 -    : m_formatClass(coefficient ? ClassNormal : ClassZero)
 -    , m_sign(sign)
-+Decimal::EncodedData::EncodedData(Sign aSign, int aExponent, uint64_t aCoefficient)
++Decimal::EncodedData::EncodedData(Sign assign, int aExponent, uint64_t aCoefficient)
 +    : m_formatClass(aCoefficient ? ClassNormal : ClassZero)
-+    , m_sign(aSign)
++    , m_sign(assign)
  {
 -    if (exponent >= ExponentMin && exponent <= ExponentMax) {
 -        while (coefficient > MaxCoefficient) {
@@ -97,8 +97,8 @@ diff --git a/mfbt/decimal/Decimal.cpp b/mfbt/decimal/Decimal.cpp
  
 -Decimal::Decimal(Sign sign, int exponent, uint64_t coefficient)
 -    : m_data(sign, coefficient ? exponent : 0, coefficient)
-+Decimal::Decimal(Sign aSign, int aExponent, uint64_t aCoefficient)
-+    : m_data(aSign, aCoefficient ? aExponent : 0, aCoefficient)
++Decimal::Decimal(Sign assign, int aExponent, uint64_t aCoefficient)
++    : m_data(assign, aCoefficient ? aExponent : 0, aCoefficient)
  {
  }
  
@@ -160,7 +160,7 @@ diff --git a/mfbt/decimal/Decimal.h b/mfbt/decimal/Decimal.h
          bool isZero() const { return m_formatClass == ClassZero; }
          Sign sign() const { return m_sign; }
 -        void setSign(Sign sign) { m_sign = sign; }
-+        void setSign(Sign aSign) { m_sign = aSign; }
++        void setSign(Sign assign) { m_sign = assign; }
  
      private:
          enum FormatClass {

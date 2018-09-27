@@ -156,7 +156,7 @@
         LDR     pTwiddle, [pFFTSpec, #ARMsFFTSpec_pTwiddle]
         LDR     pOut, [pFFTSpec, #ARMsFFTSpec_pBuf]
 
-        @//  N=1 Treat seperately
+        @//  N=1 Treat separately
         CMP     N,#1
         BGT     sizeGreaterThanOne
         VLD1    dX0[0],[pSrc]

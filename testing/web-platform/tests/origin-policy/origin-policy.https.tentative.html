@@ -30,7 +30,7 @@
     // Generate a more descriptive error message. Re-throw the error.
     function descriptive_message(policy, expect_inline, expect_eval,
                                  index, error) {
-      error.message = `Error occured on entry #${index + 1} ["${policy
+      error.message = `Error occurred on entry #${index + 1} ["${policy
           }", ${expect_inline}, ${expect_eval}]: "${error}".`;
       throw(error);
     }

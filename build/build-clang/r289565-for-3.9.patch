@@ -405,7 +405,7 @@ index 00000000000..e33b9fbc8cb
 +  /// non-contiguous address ranges from the DW_AT_ranges attribute for this DIE
 +  /// and all children.
 +  ///
-+  /// \param Ranges the addres range vector to fill in.
++  /// \param Ranges the address range vector to fill in.
 +  void collectChildrenAddressRanges(DWARFAddressRangesVector &Ranges) const;
 +  
 +  bool addressRangeContainsAddress(const uint64_t Address) const;
@@ -1936,7 +1936,7 @@ index bea30ded591..70bdc50131e 100644
 @@ -1576,14 +1572,13 @@ PointerIntPair<DeclContext *, 1> DeclContextTree::getChildDeclContext(
      // created on demand. For example implicitely defined constructors
      // are ambiguous because of the way we identify contexts, and they
-     // won't be generated everytime everywhere.
+     // won't be generated every time everywhere.
 -    if (DIE->getAttributeValueAsUnsignedConstant(&U.getOrigUnit(),
 -                                                 dwarf::DW_AT_artificial, 0))
 +    if (DIE.getAttributeValueAsUnsignedConstant(dwarf::DW_AT_artificial, 0))
@@ -2284,7 +2284,7 @@ index bea30ded591..70bdc50131e 100644
    AttributesInfo AttrInfo;
  
 @@ -2757,12 +2750,12 @@ DIE *DwarfLinker::DIECloner::cloneDIE(
-     // independantly by the linker). The computation of the actual
+     // independently by the linker). The computation of the actual
      // high_pc value is done in cloneAddressAttribute().
      AttrInfo.OrigHighPc =
 -        InputDIE.getAttributeValueAsAddress(&U, dwarf::DW_AT_high_pc, 0);

@@ -21,8 +21,8 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(Credential)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-Credential::Credential(nsPIDOMWindowInner* aParent)
-  : mParent(aParent)
+Credential::Credential(nsPIDOMWindowInner* apparent)
+  : mParent(apparent)
 {}
 
 Credential::~Credential()

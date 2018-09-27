@@ -77,7 +77,7 @@ CNavDTD::GetMode() const
 }
 
 NS_IMETHODIMP_(bool)
-CNavDTD::CanContain(int32_t aParent,int32_t aChild) const
+CNavDTD::CanContain(int32_t apparent,int32_t aChild) const
 {
   MOZ_CRASH("nobody calls this");
   return false;

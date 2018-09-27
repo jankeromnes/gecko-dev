@@ -193,7 +193,7 @@ nsSynthVoiceRegistry::GetInstanceForService()
 }
 
 bool
-nsSynthVoiceRegistry::SendInitialVoicesAndState(SpeechSynthesisParent* aParent)
+nsSynthVoiceRegistry::SendInitialVoicesAndState(SpeechSynthesisParent* apparent)
 {
   MOZ_ASSERT(XRE_IsParentProcess());
 
@@ -244,8 +244,8 @@ nsSynthVoiceRegistry::RecvInitialVoicesAndState(const nsTArray<RemoteVoice>& aVo
 void
 nsSynthVoiceRegistry::RecvRemoveVoice(const nsAString& aUri)
 {
-  // If we dont have a local instance of the registry yet, we will recieve current
-  // voices at contruction time.
+  // If we don't have a local instance of the registry yet, we will receive current
+  // voices at construction time.
   if(!gSynthVoiceRegistry) {
     return;
   }
@@ -256,8 +256,8 @@ nsSynthVoiceRegistry::RecvRemoveVoice(const nsAString& aUri)
 void
 nsSynthVoiceRegistry::RecvAddVoice(const RemoteVoice& aVoice)
 {
-  // If we dont have a local instance of the registry yet, we will recieve current
-  // voices at contruction time.
+  // If we don't have a local instance of the registry yet, we will receive current
+  // voices at construction time.
   if(!gSynthVoiceRegistry) {
     return;
   }
@@ -270,8 +270,8 @@ nsSynthVoiceRegistry::RecvAddVoice(const RemoteVoice& aVoice)
 void
 nsSynthVoiceRegistry::RecvSetDefaultVoice(const nsAString& aUri, bool aIsDefault)
 {
-  // If we dont have a local instance of the registry yet, we will recieve current
-  // voices at contruction time.
+  // If we don't have a local instance of the registry yet, we will receive current
+  // voices at construction time.
   if(!gSynthVoiceRegistry) {
     return;
   }
@@ -282,7 +282,7 @@ nsSynthVoiceRegistry::RecvSetDefaultVoice(const nsAString& aUri, bool aIsDefault
 void
 nsSynthVoiceRegistry::RecvIsSpeakingChanged(bool aIsSpeaking)
 {
-  // If we dont have a local instance of the registry yet, we will get the
+  // If we don't have a local instance of the registry yet, we will get the
   // speaking state on construction.
   if(!gSynthVoiceRegistry) {
     return;
@@ -294,7 +294,7 @@ nsSynthVoiceRegistry::RecvIsSpeakingChanged(bool aIsSpeaking)
 void
 nsSynthVoiceRegistry::RecvNotifyVoicesChanged()
 {
-  // If we dont have a local instance of the registry yet, we don't care.
+  // If we don't have a local instance of the registry yet, we don't care.
   if(!gSynthVoiceRegistry) {
     return;
   }

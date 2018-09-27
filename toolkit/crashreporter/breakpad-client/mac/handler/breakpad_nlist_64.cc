@@ -135,7 +135,7 @@ __breakpad_fdnlist(int fd, nlist_type *list, const char **symbolNames,
                    cpu_type_t cpu_type);
 
 /*
- * nlist - retreive attributes from name list (string table version)
+ * nlist - retrieve attributes from name list (string table version)
  */
 
 template <typename nlist_type>

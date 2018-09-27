@@ -579,7 +579,7 @@ size_t ia32_disasm_addr( unsigned char * buf, size_t buf_len,
 	if ( (ia32_settings.options & opt_ignore_nulls) && buf_len > 3 &&
 	    !buf[0] && !buf[1] && !buf[2] && !buf[3]) {
 		/* IF IGNORE_NULLS is set AND
-		 * first 4 bytes in the intruction stream are NULL
+		 * first 4 bytes in the instruction stream are NULL
 		 * THEN return 0 (END_OF_DISASSEMBLY) */
 		/* TODO: set errno */
 		MAKE_INVALID( insn, buf );

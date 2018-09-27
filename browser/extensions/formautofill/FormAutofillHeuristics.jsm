@@ -295,11 +295,11 @@ var LabelUtils = {
   EXCLUDED_TAGS: ["SCRIPT", "NOSCRIPT", "OPTION", "STYLE"],
 
   // A map object, whose keys are the id's of form fields and each value is an
-  // array consisting of label elements correponding to the id.
+  // array consisting of label elements corresponding to the id.
   // @type {Map<string, array>}
   _mappedLabels: null,
 
-  // An array consisting of label elements whose correponding form field doesn't
+  // An array consisting of label elements whose corresponding form field doesn't
   // have an id attribute.
   // @type {Array<HTMLLabelElement>}
   _unmappedLabels: null,
@@ -920,7 +920,7 @@ this.FormAutofillHeuristics = {
   },
 
   /**
-   * Find the first matched field name of the element wih given regex list.
+   * Find the first matched field name of the element with given regex list.
    *
    * @param {HTMLElement} element
    * @param {Array<string>} regexps

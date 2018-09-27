@@ -216,7 +216,7 @@ impl<'de, R: Read<'de>> Deserializer<R> {
             }
             b'f' => {
                 self.eat_char();
-                if let Err(err) = self.parse_ident(b"alse") {
+                if let Err(err) = self.parse_ident(b"else") {
                     return err;
                 }
                 de::Error::invalid_type(Unexpected::Bool(false), exp)
@@ -763,7 +763,7 @@ impl<'de, R: Read<'de>> Deserializer<R> {
             }
             b'f' => {
                 self.eat_char();
-                self.parse_ident(b"alse")
+                self.parse_ident(b"else")
             }
             b'-' => {
                 self.eat_char();
@@ -1031,7 +1031,7 @@ impl<'de, 'a, R: Read<'de>> de::Deserializer<'de> for &'a mut Deserializer<R> {
             }
             b'f' => {
                 self.eat_char();
-                try!(self.parse_ident(b"alse"));
+                try!(self.parse_ident(b"else"));
                 visitor.visit_bool(false)
             }
             b'-' => {
@@ -1112,7 +1112,7 @@ impl<'de, 'a, R: Read<'de>> de::Deserializer<'de> for &'a mut Deserializer<R> {
             }
             b'f' => {
                 self.eat_char();
-                try!(self.parse_ident(b"alse"));
+                try!(self.parse_ident(b"else"));
                 visitor.visit_bool(false)
             }
             _ => Err(self.peek_invalid_type(&visitor)),

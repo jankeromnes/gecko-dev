@@ -777,7 +777,7 @@ NS_IMETHODIMP nsZipWriter::AlignStoredFiles(uint16_t aAlignSize)
         uint32_t read;
         char buf[4096];
 
-        // Shift data to aligned postion.
+        // Shift data to aligned position.
         while (count > 0) {
             read = std::min(count, (uint32_t) sizeof(buf));
 

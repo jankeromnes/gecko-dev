@@ -604,7 +604,7 @@ class TestFunctional(object):
                 def test_b(self):
                     assert True
                 class TestC(object):
-                    # this one didnt get marked
+                    # this one didn't get marked
                     def test_d(self):
                         assert True
         """
@@ -1049,7 +1049,7 @@ def test_legacy_transfer():
     # legacy marks transfer smeared
     assert fake_method.nofun
     assert fake_method.fun
-    # pristine marks dont transfer
+    # pristine marks don't transfer
     assert fake_method.pytestmark == [pytest.mark.fun.mark]
 
 

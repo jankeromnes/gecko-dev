@@ -1715,7 +1715,7 @@ nsPluginInstanceOwner::DispatchCompositionToPlugin(Event* aEvent)
     // is a bug of Flash's protected mode.
     // ImmGetCompositionString with GCS_RESULTSTR returns *LAST* committed
     // string.  So when windowed mode Flash handles IME composition,
-    // windowless plugin can get windowed mode's commited string by that API.
+    // windowless plugin can get windowed mode's committed string by that API.
     // So we never post WM_IME_COMPOSITION when plugin doesn't call
     // ImmGetCompositionString() during WM_IME_COMPOSITION correctly.
     HandleNoConsumedCompositionMessage(compositionEvent, pPluginEvent);

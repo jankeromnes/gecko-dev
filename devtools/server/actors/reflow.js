@@ -87,7 +87,7 @@ exports.ReflowActor = protocol.ActorClassWithSpec(reflowSpec, {
  * Base class for all sorts of observers that need to listen to events on the
  * targetActor's windows.
  * @param {BrowsingContextTargetActor} targetActor
- * @param {Function} callback Executed everytime the observer observes something
+ * @param {Function} callback Executed every time the observer observes something
  */
 function Observable(targetActor, callback) {
   this.targetActor = targetActor;
@@ -216,8 +216,8 @@ exports.setIgnoreLayoutChanges = function(ignore, syncReflowNode) {
  * have happened since the last loop iteration. If there are, it sends the
  * corresponding events:
  *
- * - "reflows", with an array of all the reflows that occured,
- * - "resizes", with an array of all the resizes that occured,
+ * - "reflows", with an array of all the reflows that occurred,
+ * - "resizes", with an array of all the resizes that occurred,
  *
  * @param {BrowsingContextTargetActor} targetActor
  */
@@ -359,7 +359,7 @@ LayoutChangesObserver.prototype = {
 
   /**
    * Executed whenever a resize is observed. Only store a flag saying that a
-   * resize occured.
+   * resize occurred.
    * The EVENT_BATCHING_DELAY loop will take care of it later.
    */
   _onResize: function() {
@@ -421,7 +421,7 @@ exports.releaseLayoutChangesObserver = releaseLayoutChangesObserver;
  * Reports any reflow that occurs in the targetActor's docshells.
  * @extends Observable
  * @param {BrowsingContextTargetActor} targetActor
- * @param {Function} callback Executed everytime a reflow occurs
+ * @param {Function} callback Executed every time a reflow occurs
  */
 class ReflowObserver extends Observable {
   constructor(targetActor, callback) {
@@ -461,7 +461,7 @@ ReflowObserver.prototype.QueryInterface = ChromeUtils
  * Reports window resize events on the targetActor's windows.
  * @extends Observable
  * @param {BrowsingContextTargetActor} targetActor
- * @param {Function} callback Executed everytime a resize occurs
+ * @param {Function} callback Executed every time a resize occurs
  */
 class WindowResizeObserver extends Observable {
   constructor(targetActor, callback) {

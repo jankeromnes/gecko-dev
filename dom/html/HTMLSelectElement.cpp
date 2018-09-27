@@ -48,7 +48,7 @@ namespace dom {
 //
 
 SafeOptionListMutation::SafeOptionListMutation(nsIContent* aSelect,
-                                               nsIContent* aParent,
+                                               nsIContent* apparent,
                                                nsIContent* aKid,
                                                uint32_t aIndex,
                                                bool aNotify)
@@ -72,9 +72,9 @@ SafeOptionListMutation::SafeOptionListMutation(nsIContent* aSelect,
     }
     nsresult rv;
     if (aKid) {
-      rv = mSelect->WillAddOptions(aKid, aParent, aIndex, mNotify);
+      rv = mSelect->WillAddOptions(aKid, apparent, aIndex, mNotify);
     } else {
-      rv = mSelect->WillRemoveOptions(aParent, aIndex, mNotify);
+      rv = mSelect->WillRemoveOptions(apparent, aIndex, mNotify);
     }
     mNeedsRebuild = NS_FAILED(rv);
   }
@@ -392,14 +392,14 @@ HTMLSelectElement::RemoveOptionsFromList(nsIContent* aOptions,
 // options are the root content node.
 NS_IMETHODIMP
 HTMLSelectElement::WillAddOptions(nsIContent* aOptions,
-                                  nsIContent* aParent,
+                                  nsIContent* apparent,
                                   int32_t aContentIndex,
                                   bool aNotify)
 {
-  if (this != aParent && this != aParent->GetParent()) {
+  if (this != apparent && this != apparent->GetParent()) {
     return NS_OK;
   }
-  int32_t level = aParent == this ? 0 : 1;
+  int32_t level = apparent == this ? 0 : 1;
 
   // Get the index where the options will be inserted
   int32_t ind = -1;
@@ -414,7 +414,7 @@ HTMLSelectElement::WillAddOptions(nsIContent* aOptions,
     if (aContentIndex >= children) {
       // If the content insert is after the end of the parent, then we want to get
       // the next index *after* the parent and insert there.
-      ind = GetOptionIndexAfter(aParent);
+      ind = GetOptionIndexAfter(apparent);
     } else {
       // If the content insert is somewhere in the middle of the container, then
       // we want to get the option currently at the index and insert in front of
@@ -434,14 +434,14 @@ HTMLSelectElement::WillAddOptions(nsIContent* aOptions,
 }
 
 NS_IMETHODIMP
-HTMLSelectElement::WillRemoveOptions(nsIContent* aParent,
+HTMLSelectElement::WillRemoveOptions(nsIContent* apparent,
                                      int32_t aContentIndex,
                                      bool aNotify)
 {
-  if (this != aParent && this != aParent->GetParent()) {
+  if (this != apparent && this != apparent->GetParent()) {
     return NS_OK;
   }
-  int32_t level = this == aParent ? 0 : 1;
+  int32_t level = this == apparent ? 0 : 1;
 
   // Get the index where the options will be removed
   nsIContent* currentKid = aParent->GetChildAt_Deprecated(aContentIndex);
@@ -1107,10 +1107,10 @@ HTMLSelectElement::SelectSomething(bool aNotify)
 }
 
 nsresult
-HTMLSelectElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLSelectElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLFormElementWithState::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLFormElementWithState::BindToTree(aDocument, apparent,
                                                               aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

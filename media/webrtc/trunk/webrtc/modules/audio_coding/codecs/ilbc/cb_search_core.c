@@ -89,7 +89,7 @@ void WebRtcIlbcfix_CbSearchCore(
     max = 0;
   }
 
-  /* Modify the criterias, so that all of them use the same Q domain */
+  /* Modify the criteria, so that all of them use the same Q domain */
   critPtr=Crit;
   inverseEnergyShiftPtr=inverseEnergyShift;
   for (i=0;i<range;i++) {

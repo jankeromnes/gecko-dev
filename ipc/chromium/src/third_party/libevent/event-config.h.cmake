@@ -515,7 +515,7 @@
 /* Define to `unsigned' if <sys/types.h> does not define. */
 #define EVENT__size_t @EVENT__size_t@
 
-/* Define to unsigned int if you dont have it */
+/* Define to unsigned int if you don't have it */
 #define EVENT__socklen_t @EVENT__socklen_t@
 
 /* Define to `int' if <sys/types.h> does not define. */

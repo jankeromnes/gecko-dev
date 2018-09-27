@@ -265,7 +265,7 @@ escapesFunction(const Expr *Arg, const FunctionDecl *FuncDecl,
     }
   }
 
-  // No early-return, this means that we haven't found any case of funciton
+  // No early-return, this means that we haven't found any case of function
   // escaping and that therefore the parameter remains in the function scope.
   return std::make_tuple((const Stmt *)nullptr, (const Decl *)nullptr);
 }

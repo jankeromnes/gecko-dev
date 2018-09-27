@@ -17,7 +17,7 @@ language records or lists.
 
 In pyasn1, all ASN.1 types and values are implemented as Python
 objects.  The same pyasn1 object can represent either ASN.1 type
-and/or value depending of the presense of value initializer on object
+and/or value depending of the presence of value initializer on object
 instantiation.  We will further refer to these as *pyasn1 type object*
 versus *pyasn1 value object*.
 
@@ -91,7 +91,7 @@ And here's pyasn1 version of :py:class:`~pyasn1.type.univ.Boolean`:
 Null type
 +++++++++
 
-The *NULL* type is sometimes used to express the absense of
+The *NULL* type is sometimes used to express the absence of
 information.
 
 .. code-block:: bash
@@ -520,7 +520,7 @@ Character string types
 
 ASN.1 standard introduces a diverse set of text-specific types. All of
 them were designed to handle various types of characters. Some of
-these types seem be obsolete nowdays, as their target technologies are
+these types seem be obsolete nowadays, as their target technologies are
 gone. Another issue to be aware of is that raw OCTET STRING type is
 sometimes used in practice by ASN.1 users instead of specialized
 character string types, despite explicit prohibition imposed by ASN.1
@@ -1603,7 +1603,7 @@ and the constrained one.
      ValueRangeConstraint(0, 9) failed at: 13
    >>> 
 
-Similarily to encoders, to use CER or DER decoders application has to
+Similarly to encoders, to use CER or DER decoders application has to
 explicitly import and call them - all APIs are compatible.
 
 .. code-block:: pycon
@@ -1689,7 +1689,7 @@ Sure enough, that kind of substrate will decode into an OctetString
 object, unless original Choice type object is passed to decoder to
 guide the decoding process.
 
-Similarily untagged ANY type behaves differently on decoding phase -
+Similarly untagged ANY type behaves differently on decoding phase -
 when decoder bumps into an Any object in pyasn1 specification, it
 stops decoding and puts all the substrate into a new Any value object
 in form of an octet string. Concerned application could then re-run

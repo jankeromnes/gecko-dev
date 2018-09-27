@@ -277,7 +277,7 @@ int main(int argc, const char* argv[]) {
       break;
     }
 
-    // TODO(fbarchard): Attenuate doesnt need to know dimensions.
+    // TODO(fbarchard): Attenuate doesn't need to know dimensions.
     // ARGB attenuate frame
     if (org_is_argb && attenuate) {
       libyuv::ARGBAttenuate(ch_org, 0, ch_org, 0, org_size / 4, 1);

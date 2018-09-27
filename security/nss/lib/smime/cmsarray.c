@@ -107,7 +107,7 @@ NSS_CMSArray_Count(void **array)
  *  < 0 when the first element is less than the second
  *  = 0 when the first element is equal to the second
  *  > 0 when the first element is greater than the second
- * to acheive ascending ordering.
+ * to achieve ascending ordering.
  */
 void
 NSS_CMSArray_Sort(void **primary, int (*compare)(void *, void *), void **secondary, void **tertiary)

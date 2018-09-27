@@ -96,7 +96,7 @@ public:
   // nsIContent interface methods
 
   virtual nsresult BindToTree(nsIDocument* aDocument,
-                              nsIContent* aParent,
+                              nsIContent* apparent,
                               nsIContent* aBindingParent) override;
 
   virtual nsChangeHint GetAttributeChangeHint(const nsAtom* aAttribute,

@@ -1937,7 +1937,7 @@ xpc::EvalInSandbox(JSContext* cx, HandleObject sandboxArg, const nsAString& sour
     }
 
     //
-    // Alright, we're back on the caller's cx. If an error occured, try to
+    // Alright, we're back on the caller's cx. If an error occurred, try to
     // wrap and set the exception. Otherwise, wrap the return value.
     //
 

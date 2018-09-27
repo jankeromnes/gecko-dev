@@ -798,12 +798,12 @@ FilePickerDelegate.prototype = {
   QueryInterface: ChromeUtils.generateQI([Ci.nsIFilePicker]),
 
   /* ----------  nsIFilePicker  ---------- */
-  init: function(aParent, aTitle, aMode) {
+  init: function(apparent, aTitle, aMode) {
     if (aMode === Ci.nsIFilePicker.modeGetFolder ||
         aMode === Ci.nsIFilePicker.modeSave) {
       throw Cr.NS_ERROR_NOT_IMPLEMENTED;
     }
-    this._prompt = new PromptDelegate(aParent);
+    this._prompt = new PromptDelegate(apparent);
     this._msg = {
       type: "file",
       title: aTitle,
@@ -976,8 +976,8 @@ ColorPickerDelegate.prototype = {
 
   QueryInterface: ChromeUtils.generateQI([Ci.nsIColorPicker]),
 
-  init: function(aParent, aTitle, aInitialColor) {
-    this._prompt = new PromptDelegate(aParent);
+  init: function(apparent, aTitle, aInitialColor) {
+    this._prompt = new PromptDelegate(apparent);
     this._msg = {
       type: "color",
       title: aTitle,

@@ -39,7 +39,7 @@ fi
 
 dnl ============================================================================
 dnl C++ rtti
-dnl We don't use it in the code, but it can be usefull for debugging, so give
+dnl We don't use it in the code, but it can be useful for debugging, so give
 dnl the user the option of enabling it.
 dnl ============================================================================
 AC_DEFUN([MOZ_RTTI],

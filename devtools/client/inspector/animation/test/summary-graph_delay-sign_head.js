@@ -6,7 +6,7 @@
 /* import-globals-from head.js */
 
 // Test for following DelaySign component works.
-// * element existance
+// * element existence
 // * marginInlineStart position
 // * width
 // * additinal class
@@ -61,7 +61,7 @@ async function testSummaryGraphDelaySign() {
     const animationItemEl =
       findAnimationItemElementsByTargetSelector(panel, `.${ targetClass }`);
 
-    info(`Checking delay sign existance for ${ targetClass }`);
+    info(`Checking delay sign existence for ${ targetClass }`);
     const delaySignEl = animationItemEl.querySelector(".animation-delay-sign");
 
     if (expectedResult) {

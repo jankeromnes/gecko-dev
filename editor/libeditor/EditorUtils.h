@@ -718,16 +718,16 @@ class EditorUtils final
 {
 public:
   /**
-   * IsDescendantOf() checks if aNode is a child or a descendant of aParent.
-   * aOutPoint is set to the child of aParent.
+   * IsDescendantOf() checks if aNode is a child or a descendant of apparent.
+   * aOutPoint is set to the child of apparent.
    *
-   * @return            true if aNode is a child or a descendant of aParent.
+   * @return            true if aNode is a child or a descendant of apparent.
    */
   static bool IsDescendantOf(const nsINode& aNode,
-                             const nsINode& aParent,
+                             const nsINode& apparent,
                              EditorRawDOMPoint* aOutPoint = nullptr);
   static bool IsDescendantOf(const nsINode& aNode,
-                             const nsINode& aParent,
+                             const nsINode& apparent,
                              EditorDOMPoint* aOutPoint);
 };
 

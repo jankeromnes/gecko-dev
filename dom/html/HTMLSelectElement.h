@@ -43,12 +43,12 @@ public:
   /**
    * @param aSelect The select element which option list is being mutated.
    *                Can be null.
-   * @param aParent The content object which is being mutated.
+   * @param apparent The content object which is being mutated.
    * @param aKid    If not null, a new child element is being inserted to
-   *                aParent. Otherwise a child element will be removed.
+   *                apparent. Otherwise a child element will be removed.
    * @param aIndex  The index of the content object in the parent.
    */
-  SafeOptionListMutation(nsIContent* aSelect, nsIContent* aParent,
+  SafeOptionListMutation(nsIContent* aSelect, nsIContent* apparent,
                          nsIContent* aKid, uint32_t aIndex, bool aNotify);
   ~SafeOptionListMutation();
   void MutationFailed() { mNeedsRebuild = true; }
@@ -266,12 +266,12 @@ public:
    *
    * @param aOptions the content that was added (usually just an option, but
    *        could be an optgroup node with many child options)
-   * @param aParent the parent the options were added to (could be an optgroup)
+   * @param apparent the parent the options were added to (could be an optgroup)
    * @param aContentIndex the index where the options are being added within the
    *        parent (if the parent is an optgroup, the index within the optgroup)
    */
   NS_IMETHOD WillAddOptions(nsIContent* aOptions,
-                            nsIContent* aParent,
+                            nsIContent* apparent,
                             int32_t aContentIndex,
                             bool aNotify);
 
@@ -279,11 +279,11 @@ public:
    * To be called when stuff is removed under a child of the select--but
    * *before* they are actually removed.
    *
-   * @param aParent the parent the option(s) are being removed from
+   * @param apparent the parent the option(s) are being removed from
    * @param aContentIndex the index of the option(s) within the parent (if the
    *        parent is an optgroup, the index within the optgroup)
    */
-  NS_IMETHOD WillRemoveOptions(nsIContent* aParent,
+  NS_IMETHOD WillRemoveOptions(nsIContent* apparent,
                                int32_t aContentIndex,
                                bool aNotify);
 
@@ -317,7 +317,7 @@ public:
   /**
    * Called when an attribute is about to be changed
    */
-  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                                nsIContent* aBindingParent) override;
   virtual void UnbindFromTree(bool aDeep, bool aNullParent) override;
   virtual nsresult BeforeSetAttr(int32_t aNameSpaceID, nsAtom* aName,

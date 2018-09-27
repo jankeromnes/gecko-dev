@@ -344,9 +344,9 @@ nsNavHistoryResultNode::GetIcon(nsACString& aIcon)
 
 
 NS_IMETHODIMP
-nsNavHistoryResultNode::GetParent(nsINavHistoryContainerResultNode** aParent)
+nsNavHistoryResultNode::GetParent(nsINavHistoryContainerResultNode** apparent)
 {
-  NS_IF_ADDREF(*aParent = mParent);
+  NS_IF_ADDREF(*apparent = mParent);
   return NS_OK;
 }
 

@@ -174,11 +174,11 @@ CompositorOGL::BindBackdrop(ShaderProgramOGL* aProgram, GLuint aBackdrop, GLenum
   aProgram->SetBackdropTextureUnit(aTexUnit - LOCAL_GL_TEXTURE0);
 }
 
-CompositorOGL::CompositorOGL(CompositorBridgeParent* aParent,
+CompositorOGL::CompositorOGL(CompositorBridgeParent* apparent,
                              widget::CompositorWidget* aWidget,
                              int aSurfaceWidth, int aSurfaceHeight,
                              bool aUseExternalSurfaceSize)
-  : Compositor(aWidget, aParent)
+  : Compositor(aWidget, apparent)
   , mWidgetSize(-1, -1)
   , mSurfaceSize(aSurfaceWidth, aSurfaceHeight)
   , mFBOTextureTarget(0)
@@ -509,7 +509,7 @@ CompositorOGL::Initialize(nsCString* const out_failureReason)
   if (console) {
     nsString msg;
     msg +=
-      NS_LITERAL_STRING("OpenGL compositor Initialized Succesfully.\nVersion: ");
+      NS_LITERAL_STRING("OpenGL compositor Initialized Successfully.\nVersion: ");
     msg += NS_ConvertUTF8toUTF16(
       nsDependentCString((const char*)mGLContext->fGetString(LOCAL_GL_VERSION)));
     msg += NS_LITERAL_STRING("\nVendor: ");

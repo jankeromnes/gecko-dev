@@ -322,7 +322,7 @@ nsHttpNTLMAuth::GenerateCredentials(nsIHttpAuthenticableChannel *authChannel,
         // but only when we are using the native NTLM implementation and
         // not the internal one.
         // It is a valid case not having the security info object.  This
-        // occures when we connect an https site through an ntlm proxy.
+        // occurs when we connect an https site through an ntlm proxy.
         // After the ssl tunnel has been created, we get here the second
         // time and now generate the CBT from now valid security info.
         nsCOMPtr<nsIChannel> channel = do_QueryInterface(authChannel, &rv);

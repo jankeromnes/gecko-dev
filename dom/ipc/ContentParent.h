@@ -526,7 +526,7 @@ public:
 
   virtual mozilla::ipc::IPCResult RecvFinishShutdown() override;
 
-  void MaybeInvokeDragSession(TabParent* aParent);
+  void MaybeInvokeDragSession(TabParent* apparent);
 
   virtual PContentPermissionRequestParent*
   AllocPContentPermissionRequestParent(const InfallibleTArray<PermissionRequest>& aRequests,
@@ -1401,9 +1401,9 @@ public:
   NS_DECL_ISUPPORTS
   NS_DECL_NSIOBSERVER
 
-  ParentIdleListener(mozilla::dom::ContentParent* aParent,
+  ParentIdleListener(mozilla::dom::ContentParent* apparent,
                      uint64_t aObserver, uint32_t aTime)
-    : mParent(aParent), mObserver(aObserver), mTime(aTime)
+    : mParent(apparent), mObserver(aObserver), mTime(aTime)
   {}
 
 private:

@@ -29,7 +29,7 @@ public:
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(TestInterfaceSetlike)
   explicit TestInterfaceSetlike(JSContext* aCx,
-                                nsPIDOMWindowInner* aParent);
+                                nsPIDOMWindowInner* apparent);
   nsPIDOMWindowInner* GetParentObject() const;
   virtual JSObject* WrapObject(JSContext* aCx,
                                JS::Handle<JSObject*> aGivenProto) override;

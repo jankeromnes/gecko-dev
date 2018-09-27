@@ -543,7 +543,7 @@ var gMainPane = {
       }
     }
 
-    // Initilize Application section.
+    // Initialize Application section.
 
     // Observe preferences that influence what we display so we can rebuild
     // the view when they change.

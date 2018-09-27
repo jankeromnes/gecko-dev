@@ -37,7 +37,7 @@ public:
 
   /**
    * Show the print dialog.
-   * @param aParent   A DOM window the dialog will be parented to.
+   * @param apparent   A DOM window the dialog will be parented to.
    * @param aSettings On entry, this contains initial settings for the
    *                  print dialog. On return, if the print operation should
    *                  proceed then this contains settings for the print
@@ -48,20 +48,20 @@ public:
    * @return NS_ERROR_ABORT if the user indicated not to proceed
    * @return a suitable error for failures to show the print dialog.
    */
-  NS_IMETHOD Show(nsPIDOMWindowOuter *aParent, nsIPrintSettings *aSettings,
+  NS_IMETHOD Show(nsPIDOMWindowOuter *apparent, nsIPrintSettings *aSettings,
                   nsIWebBrowserPrint *aWebBrowserPrint) = 0;
 
   /**
    * Show the page setup dialog. Note that there is no way to tell whether the
    * user clicked OK or Cancel on the dialog.
-   * @param aParent   A DOM window the dialog will be parented to.
+   * @param apparent   A DOM window the dialog will be parented to.
    * @param aSettings On entry, this contains initial settings for the
    *                  page setup dialog. On return, this contains new default
    *                  page setup options.
    * @return NS_OK if everything is OK.
    * @return a suitable error for failures to show the page setup dialog.
    */
-  NS_IMETHOD ShowPageSetup(nsPIDOMWindowOuter *aParent, nsIPrintSettings *aSettings) = 0;
+  NS_IMETHOD ShowPageSetup(nsPIDOMWindowOuter *apparent, nsIPrintSettings *aSettings) = 0;
 
 };
 

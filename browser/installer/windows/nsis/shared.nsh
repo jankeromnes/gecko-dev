@@ -765,7 +765,7 @@
 ; whether the installer has write access to HKLM. The bug would happen when
 ; HCKU was checked and didn't exist since programs aren't required to set the
 ; HKCU Software\Classes keys when associating handlers. The fix uses the merged
-; view in HKCR to check for existance of an existing association. This macro
+; view in HKCR to check for existence of an existing association. This macro
 ; cleans affected installations by removing the HKLM and HKCU value if it is set
 ; to FirefoxHTML when there is a value for PersistentHandler or by removing the
 ; HKCU value when the HKLM value has a value other than an empty string.

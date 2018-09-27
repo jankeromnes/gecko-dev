@@ -64,7 +64,7 @@ public:
   virtual bool IsNodeOfType(uint32_t aFlags) const override;
 
   nsresult BindToTree(nsIDocument* aDocument,
-                      nsIContent* aParent,
+                      nsIContent* apparent,
                       nsIContent* aBindingParent) override
   {
     NS_ASSERTION(false, "Trying to bind a fragment to a tree");

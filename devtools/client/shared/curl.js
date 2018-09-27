@@ -187,7 +187,7 @@ const CurlUtils = {
   },
 
   /**
-   * Write out paramters from post data text.
+   * Write out parameters from post data text.
    *
    * @param object postDataText
    *        Post data text.
@@ -318,7 +318,7 @@ const CurlUtils = {
 
     for (const line of headerLines) {
       // Create a header for each line in fields that spans across multiple lines.
-      // Subsquent lines always begins with at least one space or tab character.
+      // Subsequent lines always begins with at least one space or tab character.
       // (rfc2616)
       if (lastHeaderName && /^\s+/.test(line)) {
         headers.push({ name: lastHeaderName, value: line.trim() });

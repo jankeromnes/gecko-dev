@@ -367,7 +367,7 @@ JitRuntime::generateInvalidator(MacroAssembler& masm, Label* bailoutTail)
 {
     invalidatorOffset_ = startTrampolineCode(masm);
 
-    // Stack has to be alligned here. If not, we will have to fix it.
+    // Stack has to be aligned here. If not, we will have to fix it.
     masm.checkStackAlignment();
 
     // Push registers such that we can access them from [base + code].

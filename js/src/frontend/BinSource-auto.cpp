@@ -5336,9 +5336,9 @@ BinASTParser<Tok>::parseInterfaceForInStatement(const size_t start, const BinKin
 
     BINJS_MOZ_TRY_DECL(body, parseStatement());
 
-    BINJS_TRY_DECL(forHead, factory_.newForInOrOfHead(ParseNodeKind::ForIn, left, right, tokenizer_->pos(start)));
+    BINJS_TRY_DECL(forehead, factory_.newForInOrOfHead(ParseNodeKind::ForIn, left, right, tokenizer_->pos(start)));
     ParseNode* result;
-    BINJS_TRY_VAR(result, factory_.newForStatement(start, forHead, body, /*flags*/ 0));
+    BINJS_TRY_VAR(result, factory_.newForStatement(start, forehead, body, /*flags*/ 0));
 
     if (!scope.isEmpty()) {
         BINJS_TRY_DECL(bindings, NewLexicalScopeData(cx_, scope, alloc_, parseContext_));
@@ -5432,9 +5432,9 @@ BinASTParser<Tok>::parseInterfaceForStatement(const size_t start, const BinKind 
 
     BINJS_MOZ_TRY_DECL(body, parseStatement());
 
-    BINJS_TRY_DECL(forHead, factory_.newForHead(init, test, update, tokenizer_->pos(start)));
+    BINJS_TRY_DECL(forehead, factory_.newForHead(init, test, update, tokenizer_->pos(start)));
     ParseNode* result;
-    BINJS_TRY_VAR(result, factory_.newForStatement(start, forHead, body, /* iflags = */ 0));
+    BINJS_TRY_VAR(result, factory_.newForStatement(start, forehead, body, /* iflags = */ 0));
 
     if (!scope.isEmpty()) {
         BINJS_TRY_DECL(bindings, NewLexicalScopeData(cx_, scope, alloc_, parseContext_));

@@ -196,9 +196,9 @@ public:
   void UpdateFollowAnchor();
   void CheckForAnchorChange();
 
-  // set the parent of this item to aParent, also changing the parent
+  // set the parent of this item to apparent, also changing the parent
   // to have this as a child.
-  void SetParent(nsMenuChainItem* aParent);
+  void SetParent(nsMenuChainItem* apparent);
 
   // Removes an item from the chain. The root pointer must be supplied in case
   // the item is the first item in the chain in which case the pointer will be
@@ -396,18 +396,18 @@ public:
   //
   // Both methods will loop around the beginning or end if needed.
   //
-  // aParent - the parent menubar or menupopup
+  // apparent - the parent menubar or menupopup
   // aStart - the menu/menuitem to start navigation from. GetPreviousMenuItem
   //          returns the item before it, while GetNextMenuItem returns the
   //          item after it.
   // aIsPopup - true for menupopups, false for menubars
   // aWrap - true to wrap around to the beginning and continue searching if not
   //         found. False to end at the beginning or end of the menu.
-  static nsMenuFrame* GetPreviousMenuItem(nsContainerFrame* aParent,
+  static nsMenuFrame* GetPreviousMenuItem(nsContainerFrame* apparent,
                                           nsMenuFrame* aStart,
                                           bool aIsPopup,
                                           bool aWrap);
-  static nsMenuFrame* GetNextMenuItem(nsContainerFrame* aParent,
+  static nsMenuFrame* GetNextMenuItem(nsContainerFrame* apparent,
                                       nsMenuFrame* aStart,
                                       bool aIsPopup,
                                       bool aWrap);

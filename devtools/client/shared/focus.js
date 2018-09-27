@@ -4,7 +4,7 @@
 
 "use strict";
 
-// Simplied selector targetting elements that can receive the focus, full
+// Simplied selector targeting elements that can receive the focus, full
 // version at
 // http://stackoverflow.com/questions/1599660/which-html-elements-can-receive-focus
 // .

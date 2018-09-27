@@ -2708,7 +2708,7 @@ const char *ValidateDrawStates(Context *context)
             }
         }
 
-        // Do some additonal WebGL-specific validation
+        // Do some additional WebGL-specific validation
         if (extensions.webglCompatibility)
         {
             const TransformFeedback *transformFeedbackObject = state.getCurrentTransformFeedback();

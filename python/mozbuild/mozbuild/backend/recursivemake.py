@@ -897,7 +897,7 @@ class RecursiveMakeBackend(CommonBackend):
         if include_curdir_build_rules:
             makefile.add_statement('\n'
                 '# Make sometimes gets confused between "foo" and "$(CURDIR)/foo".\n'
-                '# Help it out by explicitly specifiying dependencies.')
+                '# Help it out by explicitly specifying dependencies.')
             makefile.add_statement('all_absolute_unified_files := \\\n'
                                    '  $(addprefix $(CURDIR)/,$(%s))'
                                    % unified_files_makefile_variable)
@@ -1755,7 +1755,7 @@ class RecursiveMakeBackend(CommonBackend):
         # This should ideally be using PP_TARGETS. However, since the input
         # filenames match the output filenames, the existing PP_TARGETS rules
         # result in circular dependencies and other make weirdness. One
-        # solution is to rename the input or output files repsectively. See
+        # solution is to rename the input or output files respectively. See
         # bug 928195 comment 129.
         for source in sorted(webidls.all_preprocessed_sources()):
             basename = os.path.basename(source)

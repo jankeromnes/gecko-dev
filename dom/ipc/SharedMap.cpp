@@ -378,12 +378,12 @@ WritableSharedMap::Serialize()
 }
 
 void
-WritableSharedMap::SendTo(ContentParent* aParent) const
+WritableSharedMap::SendTo(ContentParent* apparent) const
 {
     nsTArray<IPCBlob> blobs(mBlobImpls.Length());
 
     for (auto& blobImpl : mBlobImpls) {
-      nsresult rv = IPCBlobUtils::Serialize(blobImpl, aParent,
+      nsresult rv = IPCBlobUtils::Serialize(blobImpl, apparent,
                                             *blobs.AppendElement());
       if (NS_WARN_IF(NS_FAILED(rv))) {
         continue;

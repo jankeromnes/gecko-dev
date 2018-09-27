@@ -44,14 +44,14 @@ getInteger256(unsigned char *data, unsigned int nb)
     return val;
 }
 
-// This function is used to retrieve the lenght of a DER encoded
+// This function is used to retrieve the length of a DER encoded
 // item.  It looks to see if this a multibyte length and then
 // interprets the buffer accordingly to get the actual length value.
-// This funciton is used mostly while parsing the DER headers.
+// This function is used mostly while parsing the DER headers.
 //
 // A DER encoded item has the following structure:
 //
-//  <tag><length<data consisting of lenght bytes>
+//  <tag><length<data consisting of length bytes>
 static int32_t
 getDERItemLength(unsigned char *data, unsigned char *end,
                  unsigned long *bytesUsed, bool *indefinite)

@@ -155,7 +155,7 @@ this.BrowserWindowTracker = {
    *        * private: true to restrict the search to private windows
    *            only, false to restrict the search to non-private only.
    *            Omit the property to search in both groups.
-   *        * allowPopups: true if popup windows are permissable.
+   *        * allowPopups: true if popup windows are permissible.
    */
   getTopWindow(options = {}) {
     for (let win of _trackedWindows) {

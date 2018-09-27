@@ -980,7 +980,7 @@ ClientStore.prototype = {
       record.version = Services.appinfo.version;
       record.protocols = SUPPORTED_PROTOCOL_VERSIONS;
 
-      // Substract the commands we recorded that we've already executed
+      // Subtract the commands we recorded that we've already executed
       if (commandsChanges && commandsChanges.length &&
           this.engine.localCommands && this.engine.localCommands.length) {
         record.commands = this.engine.localCommands.filter(command => !hasDupeCommand(commandsChanges, command));

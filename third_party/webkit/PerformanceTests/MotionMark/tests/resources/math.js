@@ -155,7 +155,7 @@ PIDController = Utilities.createClass(
             // This is the second stage of the ZieglerâNichols method. It measures the
             // oscillation period.
             if (typeof this._t0 == "undefined") {
-                // t is the time of the begining of the first overshot
+                // t is the time of the beginning of the first overshot
                 this._t0 = t;
                 this._Kp /= 2;
             }

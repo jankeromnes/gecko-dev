@@ -3795,7 +3795,7 @@ HttpBaseChannel::SetupReplacementChannel(nsIURI       *newURI,
   if (appCacheChannel) {
     appCacheChannel->SetApplicationCache(mApplicationCache);
     appCacheChannel->SetInheritApplicationCache(mInheritApplicationCache);
-    // We purposely avoid transfering mChooseApplicationCache.
+    // We purposely avoid transferring mChooseApplicationCache.
   }
 
   // transfer any properties

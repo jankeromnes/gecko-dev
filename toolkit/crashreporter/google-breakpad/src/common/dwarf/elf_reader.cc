@@ -996,7 +996,7 @@ class ElfReaderImpl {
   vector<ElfSectionReader<ElfArch>*> sections_;
 
   // For PowerPC64 we need to keep track of function descriptors when looking up
-  // values for funtion symbols values. Function descriptors are kept in the
+  // values for function symbols values. Function descriptors are kept in the
   // .opd section and are dereferenced to find the function address.
   ElfReader::SectionInfo opd_info_;
   const char *opd_section_;  // Must be checked for NULL before use.

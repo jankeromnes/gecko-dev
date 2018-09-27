@@ -19,7 +19,7 @@ function onSeeked() {
     return;
 
   var s = start == null ? 0 : start;
-  ok(v.currentTime - s < 0.1, "seeked currentTime is " + v.currentTime + " != " + s + " (fuzzy compare +-0.1)");
+  ok(v.currentTime - s < 0.1, "sought currentTime is " + v.currentTime + " != " + s + " (fuzzy compare +-0.1)");
 
   seekedRaised = true;
 }
@@ -51,7 +51,7 @@ function onEnded() {
   completed = true;
   ok(loadedMetadataRaised, "loadedmetadata event");
   if (start) {
-    ok(seekedRaised, "seeked event");
+    ok(seekedRaised, "sought event");
   }
   if (end) {
     ok(pausedRaised, "paused event: " + end + " " + v.duration);
@@ -61,7 +61,7 @@ function onEnded() {
 
 v.addEventListener("ended", onEnded);
 v.addEventListener("loadedmetadata", onLoadedMetadata);
-v.addEventListener("seeked", onSeeked);
+v.addEventListener("sought", onSeeked);
 v.addEventListener("pause", onPause);
 v.addEventListener("timeupdate", onTimeUpdate);
 }

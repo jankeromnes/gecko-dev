@@ -65,11 +65,11 @@ SVGTitleElement::ContentRemoved(nsIContent* aChild,
 
 nsresult
 SVGTitleElement::BindToTree(nsIDocument *aDocument,
-                             nsIContent *aParent,
+                             nsIContent *apparent,
                              nsIContent *aBindingParent)
 {
   // Let this fall through.
-  nsresult rv = SVGTitleElementBase::BindToTree(aDocument, aParent,
+  nsresult rv = SVGTitleElementBase::BindToTree(aDocument, apparent,
                                                 aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

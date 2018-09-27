@@ -81,7 +81,7 @@ public:
   NS_DECL_ISUPPORTS_INHERITED
 
   // nsWebShellWindow methods...
-  nsresult Initialize(nsIXULWindow * aParent, nsIXULWindow * aOpener,
+  nsresult Initialize(nsIXULWindow * apparent, nsIXULWindow * aOpener,
                       nsIURI* aUrl,
                       int32_t aInitialWidth, int32_t aInitialHeight,
                       bool aIsHiddenWindow,

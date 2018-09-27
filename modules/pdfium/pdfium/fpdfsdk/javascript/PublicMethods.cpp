@@ -935,7 +935,7 @@ bool CJS_PublicMethods::AFNumber_Keystroke(CJS_Runtime* pRuntime,
 
   bool bHasSign = wstrValue.Find(L'-') != -1 && wstrSelected.Find(L'-') == -1;
   if (bHasSign) {
-    // can't insert "change" in front to sign postion.
+    // can't insert "change" in front to sign position.
     if (pEvent->SelStart() == 0) {
       bool& bRc = pEvent->Rc();
       bRc = false;

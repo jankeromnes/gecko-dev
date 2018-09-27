@@ -58,7 +58,7 @@ public:
 
   // This method can be called just once.
   // The callback will be called when the Blob is ready.
-  void GetBlobWhenReady(nsISupports* aParent,
+  void GetBlobWhenReady(nsISupports* apparent,
                         const nsACString& aContentType,
                         MutableBlobStorageCallback* aCallback);
 

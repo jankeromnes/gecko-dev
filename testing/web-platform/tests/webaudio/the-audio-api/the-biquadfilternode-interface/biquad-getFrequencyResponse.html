@@ -149,7 +149,7 @@
       }
 
       // Look through the array and find any NaN or infinity. Returns the index
-      // of the first occurence or -1 if none.
+      // of the first occurrence or -1 if none.
       function findBadNumber(signal) {
         for (let k = 0; k < signal.length; ++k) {
           if (!isValidNumber(signal[k])) {

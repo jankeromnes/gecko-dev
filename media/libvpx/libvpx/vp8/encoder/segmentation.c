@@ -19,7 +19,7 @@ void vp8_update_gf_useage_maps(VP8_COMP *cpi, VP8_COMMON *cm, MACROBLOCK *x) {
   x->gf_active_ptr = (signed char *)cpi->gf_active_flags;
 
   if ((cm->frame_type == KEY_FRAME) || (cm->refresh_golden_frame)) {
-    /* Reset Gf useage monitors */
+    /* Reset Gf usage monitors */
     memset(cpi->gf_active_flags, 1, (cm->mb_rows * cm->mb_cols));
     cpi->gf_active_count = cm->mb_rows * cm->mb_cols;
   } else {

@@ -55,7 +55,7 @@ protected:
 private:
   friend class MatchPattern;
 
-  explicit MatchGlob(nsISupports* aParent) : mParent(aParent) {}
+  explicit MatchGlob(nsISupports* apparent) : mParent(apparent) {}
 
   void Init(JSContext* aCx, const nsAString& aGlob, bool aAllowQuestion, ErrorResult& aRv);
 

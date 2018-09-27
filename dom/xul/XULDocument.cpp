@@ -868,7 +868,7 @@ void
 XULDocument::Persist(Element* aElement, int32_t aNameSpaceID,
                      nsAtom* aAttribute)
 {
-    // For non-chrome documents, persistance is simply broken
+    // For non-chrome documents, persistence is simply broken
     if (!nsContentUtils::IsSystemPrincipal(NodePrincipal()))
         return;
 
@@ -1141,7 +1141,7 @@ XULDocument::PrepareToLoadPrototype(nsIURI* aURI, const char* aCommand,
 nsresult
 XULDocument::ApplyPersistentAttributes()
 {
-    // For non-chrome documents, persistance is simply broken
+    // For non-chrome documents, persistence is simply broken
     if (!nsContentUtils::IsSystemPrincipal(NodePrincipal()))
         return NS_ERROR_NOT_AVAILABLE;
 
@@ -1449,10 +1449,10 @@ XULDocument::PrepareToWalk()
 
 nsresult
 XULDocument::CreateAndInsertPI(const nsXULPrototypePI* aProtoPI,
-                               nsINode* aParent, nsINode* aBeforeThis)
+                               nsINode* apparent, nsINode* aBeforeThis)
 {
     MOZ_ASSERT(aProtoPI, "null ptr");
-    MOZ_ASSERT(aParent, "null ptr");
+    MOZ_ASSERT(apparent, "null ptr");
 
     RefPtr<ProcessingInstruction> node =
         NS_NewXMLProcessingInstruction(mNodeInfoManager, aProtoPI->mTarget,
@@ -1460,7 +1460,7 @@ XULDocument::CreateAndInsertPI(const nsXULPrototypePI* aProtoPI,
 
     nsresult rv;
     if (aProtoPI->mTarget.EqualsLiteral("xml-stylesheet")) {
-        rv = InsertXMLStylesheetPI(aProtoPI, aParent, aBeforeThis, node);
+        rv = InsertXMLStylesheetPI(aProtoPI, apparent, aBeforeThis, node);
     } else {
         // No special processing, just add the PI to the document.
         rv = aParent->InsertChildBefore(node->AsContent(),
@@ -1474,7 +1474,7 @@ XULDocument::CreateAndInsertPI(const nsXULPrototypePI* aProtoPI,
 
 nsresult
 XULDocument::InsertXMLStylesheetPI(const nsXULPrototypePI* aProtoPI,
-                                   nsINode* aParent,
+                                   nsINode* apparent,
                                    nsINode* aBeforeThis,
                                    nsIContent* aPINode)
 {

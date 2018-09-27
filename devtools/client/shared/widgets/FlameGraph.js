@@ -1058,7 +1058,7 @@ FlameGraph.prototype = {
 
   /**
    * Makes sure the start and end points of the current selection
-   * are withing the graph's visible bounds, and that they form a selection
+   * are within the graph's visible bounds, and that they form a selection
    * wider than the allowed minimum width.
    */
   _normalizeSelectionBounds: function() {

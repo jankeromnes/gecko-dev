@@ -41,11 +41,11 @@ _SharedStub:
                                 // Original sp saved at 0(r1)
 
                                 // Parameter area, 20 bytes from 24(r1) to
-                                //   44(r1) to accomodate 5 arguments passed
+                                //   44(r1) to accommodate 5 arguments passed
                                 //   to PrepareAndDispatch
 
                                 // Local variables, 132 bytes from 44(r1)
-                                //   to 176(r1), to accomodate 5 words and
+                                //   to 176(r1), to accommodate 5 words and
                                 //   13 doubles
 
         stw      r4,  44(r1)    // Save parameters passed in GPRs r4-r10;

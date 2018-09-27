@@ -35,7 +35,7 @@ function test()
   print(l);
   if (this.hasOwnProperty("Intl")) {
     // ECMA-402 specifies that toLocaleString uses a proleptic Gregorian
-    // calender without year 0.
+    // calendar without year 0.
     // Also, localized strings usually use era indicators such as "BC"
     // instead of minus signs.
     expect = Math.abs(y - 1) + '';

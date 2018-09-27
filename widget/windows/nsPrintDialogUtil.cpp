@@ -130,9 +130,9 @@ SetTextOnWnd(HWND aControl, const nsAString& aStr)
 //--------------------------------------------------------
 // Will get the control and localized string by "key"
 static void
-SetText(HWND aParent, UINT aId, nsIStringBundle* aStrBundle, const char* aKey)
+SetText(HWND apparent, UINT aId, nsIStringBundle* aStrBundle, const char* aKey)
 {
-  HWND wnd = GetDlgItem(aParent, aId);
+  HWND wnd = GetDlgItem(apparent, aId);
   if (!wnd) {
     return;
   }
@@ -145,9 +145,9 @@ SetText(HWND aParent, UINT aId, nsIStringBundle* aStrBundle, const char* aKey)
 
 //--------------------------------------------------------
 static void
-SetRadio(HWND aParent, UINT aId, bool aIsSet, bool isEnabled = true)
+SetRadio(HWND apparent, UINT aId, bool aIsSet, bool isEnabled = true)
 {
-  HWND wnd = ::GetDlgItem(aParent, aId);
+  HWND wnd = ::GetDlgItem(apparent, aId);
   if (!wnd) {
     return;
   }
@@ -197,13 +197,13 @@ static PropKeyInfo gAllPropKeys[] = { { "printFramesTitleWindows", grp3 },
 // Get the absolute coords of the child windows relative
 // to its parent window
 static void
-GetLocalRect(HWND aWnd, RECT& aRect, HWND aParent)
+GetLocalRect(HWND aWnd, RECT& aRect, HWND apparent)
 {
   ::GetWindowRect(aWnd, &aRect);
 
   // MapWindowPoints converts screen coordinates to client coordinates.
   // It works correctly in both left-to-right and right-to-left windows.
-  ::MapWindowPoints(nullptr, aParent, (LPPOINT)&aRect, 2);
+  ::MapWindowPoints(nullptr, apparent, (LPPOINT)&aRect, 2);
 }
 
 //--------------------------------------------------------

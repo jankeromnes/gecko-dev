@@ -10,7 +10,7 @@ use traits::FnBox;
 /// Instead of `Box<FnOnce(Args...) -> Result>` (or `Box<FnBox(Args...)
 /// -> Result>`) the box type is `BoxFnOnce<(Args...,), Result>`  (the
 /// arguments are always given as tuple type).  If the function doesn't
-/// return a value (i.e. the empty tuple) `Result` can be ommitted:
+/// return a value (i.e. the empty tuple) `Result` can be omitted:
 /// `BoxFnOnce<(Args...,)>`.
 ///
 /// Internally it is implemented similar to `Box<FnBox()>`, but there is

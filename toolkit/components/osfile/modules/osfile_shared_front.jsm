@@ -96,7 +96,7 @@ AbstractFile.prototype = {
    * operations to ensure that the buffer is fully written.
    *
    * @param {Typed array} buffer The buffer in which the the bytes are
-   * stored. The buffer must be large enough to accomodate |bytes| bytes.
+   * stored. The buffer must be large enough to accommodate |bytes| bytes.
    * @param {*=} options Optionally, an object that may contain the
    * following fields:
    * - {number} bytes The number of |bytes| to write from the buffer. If

@@ -40,7 +40,7 @@
  * This replaces an older homebrew implementation of nsRegion. The
  * representation used here may use more rectangles than nsRegion however, the
  * representation is canonical.  This means that there's no need for an
- * Optimize() method because for a paticular region there is only one
+ * Optimize() method because for a particular region there is only one
  * representation. This means that nsIntRegion will have more predictable
  * performance characteristics than the old nsRegion and should not become
  * degenerate.

@@ -188,7 +188,7 @@ nsSMILTimeContainer::Sample()
 }
 
 nsresult
-nsSMILTimeContainer::SetParent(nsSMILTimeContainer* aParent)
+nsSMILTimeContainer::SetParent(nsSMILTimeContainer* apparent)
 {
   if (mParent) {
     mParent->RemoveChild(*this);
@@ -202,7 +202,7 @@ nsSMILTimeContainer::SetParent(nsSMILTimeContainer* aParent)
     mPauseStart = 0L;
   }
 
-  mParent = aParent;
+  mParent = apparent;
 
   nsresult rv = NS_OK;
   if (mParent) {
@@ -218,7 +218,7 @@ nsSMILTimeContainer::AddMilestone(const nsSMILMilestone& aMilestone,
 {
   // We record the milestone time and store it along with the element but this
   // time may change (e.g. if attributes are changed on the timed element in
-  // between samples). If this happens, then we may do an unecessary sample
+  // between samples). If this happens, then we may do an unnecessary sample
   // but that's pretty cheap.
   MOZ_ASSERT(!mHoldingEntries);
   return mMilestoneEntries.Push(MilestoneEntry(aMilestone, aElement));

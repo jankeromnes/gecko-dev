@@ -875,7 +875,7 @@ nsCSPParser::reportURIList(nsCSPDirective* aDir)
 
     rv = NS_NewURI(getter_AddRefs(uri), mCurToken, "", mSelfURI);
 
-    // If creating the URI casued an error, skip this URI
+    // If creating the URI caused an error, skip this URI
     if (NS_FAILED(rv)) {
       const char16_t* params[] = { mCurToken.get() };
       logWarningErrorToConsole(nsIScriptError::warningFlag, "couldNotParseReportURI",

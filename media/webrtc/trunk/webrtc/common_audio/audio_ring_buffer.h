@@ -41,7 +41,7 @@ class AudioRingBuffer final {
   size_t WriteFramesAvailable() const;
 
   // Moves the read position. The forward version advances the read pointer
-  // towards the write pointer and the backward verison withdraws the read
+  // towards the write pointer and the backward version withdraws the read
   // pointer away from the write pointer (i.e. flushing and stuffing the buffer
   // respectively.)
   void MoveReadPositionForward(size_t frames);

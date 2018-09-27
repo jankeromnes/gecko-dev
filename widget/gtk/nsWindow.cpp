@@ -508,9 +508,9 @@ nsWindow::ReleaseGlobals()
 }
 
 void
-nsWindow::CommonCreate(nsIWidget *aParent, bool aListenForResizes)
+nsWindow::CommonCreate(nsIWidget *apparent, bool aListenForResizes)
 {
-    mParent = aParent;
+    mParent = apparent;
     mListenForResizes = aListenForResizes;
     mCreated = true;
 }
@@ -3620,7 +3620,7 @@ CreateGdkWindow(GdkWindow *parent, GtkWidget *widget)
 }
 
 nsresult
-nsWindow::Create(nsIWidget* aParent,
+nsWindow::Create(nsIWidget* apparent,
                  nsNativeWidget aNativeParent,
                  const LayoutDeviceIntRect& aRect,
                  nsWidgetInitData* aInitData)
@@ -3631,7 +3631,7 @@ nsWindow::Create(nsIWidget* aParent,
         (aInitData->mWindowType == eWindowType_dialog ||
          aInitData->mWindowType == eWindowType_toplevel ||
          aInitData->mWindowType == eWindowType_invisible) ?
-        nullptr : aParent;
+        nullptr : apparent;
 
 #ifdef ACCESSIBILITY
     // Send a DBus message to check whether a11y is enabled
@@ -3650,7 +3650,7 @@ nsWindow::Create(nsIWidget* aParent,
         listenForResizes = true;
 
     // and do our common creation
-    CommonCreate(aParent, listenForResizes);
+    CommonCreate(apparent, listenForResizes);
 
     // save our bounds
     mBounds = aRect;
@@ -3675,8 +3675,8 @@ nsWindow::Create(nsIWidget* aParent,
         needsAlphaVisual = TopLevelWindowUseARGBVisual();
     }
 
-    if (aParent) {
-        parentnsWindow = static_cast<nsWindow*>(aParent);
+    if (apparent) {
+        parentnsWindow = static_cast<nsWindow*>(apparent);
         parentGdkWindow = parentnsWindow->mGdkWindow;
     } else if (aNativeParent && GDK_IS_WINDOW(aNativeParent)) {
         parentGdkWindow = GDK_WINDOW(aNativeParent);

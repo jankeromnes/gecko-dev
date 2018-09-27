@@ -307,7 +307,7 @@ class DesktopSingleLocale(LocalesMixin, AutomationMixin,
 
     def _query_make_variable(self, variable, make_args=None):
         """returns the value of make echo-variable-<variable>
-           it accepts extra make arguements (make_args)
+           it accepts extra make arguments (make_args)
         """
         dirs = self.query_abs_dirs()
         make_args = make_args or []

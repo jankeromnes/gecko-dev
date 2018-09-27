@@ -66,7 +66,7 @@
 // The 'reporting' flags.  They all call gflags_exitfunc().
 DEFINE_bool(help, false,
             "show help on all flags [tip: all flags can have two dashes]");
-DEFINE_bool(helpfull, false,
+DEFINE_bool(helpful, false,
             "show help on all flags -- same as -help");
 DEFINE_bool(helpshort, false,
             "show help on only the main module for this program");

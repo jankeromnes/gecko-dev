@@ -22,7 +22,7 @@ interface nsIUrlClassifierParseFindFullHashCallback : nsISupports {
    * @param aCompleteHash A 32-byte complete hash string.
    * @param aTableNames The table names that this complete hash is associated with.
    *                    Since the server responded with a threat type, multiple
-   *                    list names can be returned. The caller is reponsible
+   *                    list names can be returned. The caller is responsible
    *                    for filtering out the unrequested table names.
    *                    See |convertThreatTypeToListNames| for the format.
    * @param aPerHashCacheDuration See "FindFullHashesResponse" in safebrowsing.proto.

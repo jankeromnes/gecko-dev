@@ -171,7 +171,7 @@ var Microformats; // jshint ignore:line
                     }
                     // find v1 names
                     for (var key in modules.maps) {
-                        // dont double count if v1 and v2 roots are present
+                        // don't double count if v1 and v2 roots are present
                         if (modules.maps[key].root === classItems[x] && !classItems.includes(key)) {
                             this.appendCount(key, 1, out);
                         }
@@ -3011,7 +3011,7 @@ var Microformats; // jshint ignore:line
                     this._baseNode.href = baseUrl;
                     this._linkNode.href = url;
 
-                    // dont use getAttribute as it returns orginal value not resolved
+                    // don't use getAttribute as it returns orignal value not resolved
                     return this._linkNode.href;
                 }
             } else {
@@ -3814,7 +3814,7 @@ var Microformats; // jshint ignore:line
          */
         normalise( doc, text ) {
             text = text.replace( /&nbsp;/g, " ") ;    // exchanges html entity for space into space char
-            text = modules.utils.collapseWhiteSpace( text );     // removes linefeeds, tabs and addtional spaces
+            text = modules.utils.collapseWhiteSpace( text );     // removes linefeeds, tabs and additional spaces
             text = modules.domUtils.decodeEntities( doc, text );  // decode HTML entities
             text = text.replace( "–", "-" );          // correct dash decoding
             return modules.utils.trim( text );

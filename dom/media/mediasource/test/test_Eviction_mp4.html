@@ -43,9 +43,9 @@ runWithMSE(async (ms, el) => {
   is(audiosb.buffered.end(0), el.duration, "Duration is end of buffered range");
   const seekTime = audiosb.buffered.end(0) / 2;
   el.currentTime = seekTime;
-  await once(el, "seeked");
-  dump("dump: seeked to " + seekTime);
-  is(el.currentTime, seekTime, "correctly seeked to " + seekTime);
+  await once(el, "sought");
+  dump("dump: sought to " + seekTime);
+  is(el.currentTime, seekTime, "correctly sought to " + seekTime);
   try {
     audiosb.appendBuffer(audioBuffer);
     await once(audiosb, "update");

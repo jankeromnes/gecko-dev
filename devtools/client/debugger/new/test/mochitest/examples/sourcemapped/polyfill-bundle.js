@@ -4971,20 +4971,20 @@ $export($export.S, 'Math', {
     var sum = 0;
     var i = 0;
     var aLen = arguments.length;
-    var larg = 0;
+    var large = 0;
     var arg, div;
     while (i < aLen) {
       arg = abs(arguments[i++]);
-      if (larg < arg) {
-        div = larg / arg;
+      if (large < arg) {
+        div = large / arg;
         sum = sum * div * div + 1;
-        larg = arg;
+        large = arg;
       } else if (arg > 0) {
-        div = arg / larg;
+        div = arg / large;
         sum += div * div;
       } else sum += arg;
     }
-    return larg === Infinity ? Infinity : larg * Math.sqrt(sum);
+    return large === Infinity ? Infinity : large * Math.sqrt(sum);
   }
 });
 
@@ -5731,8 +5731,8 @@ $export($export.P + $export.F * __webpack_require__(3)(function () {
     end = end === undefined ? len : end;
     if (klass == 'Array') return arraySlice.call(this, begin, end);
     var start = toAbsoluteIndex(begin, len);
-    var upTo = toAbsoluteIndex(end, len);
-    var size = toLength(upTo - start);
+    var up to = toAbsoluteIndex(end, len);
+    var size = toLength(up to - start);
     var cloned = new Array(size);
     var i = 0;
     for (; i < size; i++) cloned[i] = klass == 'String'

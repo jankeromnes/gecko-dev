@@ -132,7 +132,7 @@ private:
   // wrappers nested in it.  Returns the number of entries from
   // mPendingWrapperRestyles that we processed.  The return value is always at
   // least 1.
-  size_t ProcessMaybeNestedWrapperRestyle(nsIFrame* aParent, size_t aIndex);
+  size_t ProcessMaybeNestedWrapperRestyle(nsIFrame* apparent, size_t aIndex);
 
   ServoStyleSet& mStyleSet;
   nsStyleChangeList& mChangeList;

@@ -18,8 +18,8 @@
 namespace mozilla {
 namespace dom {
 
-File::File(nsISupports* aParent, BlobImpl* aImpl)
-  : Blob(aParent, aImpl)
+File::File(nsISupports* apparent, BlobImpl* aImpl)
+  : Blob(apparent, aImpl)
 {
   MOZ_ASSERT(aImpl->IsFile());
 }
@@ -28,50 +28,50 @@ File::~File()
 {}
 
 /* static */ File*
-File::Create(nsISupports* aParent, BlobImpl* aImpl)
+File::Create(nsISupports* apparent, BlobImpl* aImpl)
 {
   MOZ_ASSERT(aImpl);
   MOZ_ASSERT(aImpl->IsFile());
 
-  return new File(aParent, aImpl);
+  return new File(apparent, aImpl);
 }
 
 /* static */ already_AddRefed<File>
-File::Create(nsISupports* aParent, const nsAString& aName,
+File::Create(nsISupports* apparent, const nsAString& aName,
              const nsAString& aContentType, uint64_t aLength,
              int64_t aLastModifiedDate)
 {
-  RefPtr<File> file = new File(aParent,
+  RefPtr<File> file = new File(apparent,
     new BaseBlobImpl(aName, aContentType, aLength, aLastModifiedDate));
   return file.forget();
 }
 
 /* static */ already_AddRefed<File>
-File::CreateMemoryFile(nsISupports* aParent, void* aMemoryBuffer,
+File::CreateMemoryFile(nsISupports* apparent, void* aMemoryBuffer,
                        uint64_t aLength, const nsAString& aName,
                        const nsAString& aContentType,
                        int64_t aLastModifiedDate)
 {
-  RefPtr<File> file = new File(aParent,
+  RefPtr<File> file = new File(apparent,
     new MemoryBlobImpl(aMemoryBuffer, aLength, aName,
                        aContentType, aLastModifiedDate));
   return file.forget();
 }
 
 /* static */ already_AddRefed<File>
-File::CreateFromFile(nsISupports* aParent, nsIFile* aFile)
+File::CreateFromFile(nsISupports* apparent, nsIFile* aFile)
 {
   MOZ_DIAGNOSTIC_ASSERT(XRE_IsParentProcess());
-  RefPtr<File> file = new File(aParent, new FileBlobImpl(aFile));
+  RefPtr<File> file = new File(apparent, new FileBlobImpl(aFile));
   return file.forget();
 }
 
 /* static */ already_AddRefed<File>
-File::CreateFromFile(nsISupports* aParent, nsIFile* aFile,
+File::CreateFromFile(nsISupports* apparent, nsIFile* aFile,
                      const nsAString& aName, const nsAString& aContentType)
 {
   MOZ_DIAGNOSTIC_ASSERT(XRE_IsParentProcess());
-  RefPtr<File> file = new File(aParent,
+  RefPtr<File> file = new File(apparent,
     new FileBlobImpl(aFile, aName, aContentType));
   return file.forget();
 }

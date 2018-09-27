@@ -399,7 +399,7 @@ class _ASRouter {
         this.normalizeItemFrequency(message);
       }
 
-      // Some messages have triggers that require us to initalise trigger listeners
+      // Some messages have triggers that require us to initialise trigger listeners
       const unseenListeners = new Set(ASRouterTriggerListeners.keys());
       for (const {trigger} of newState.messages) {
         if (trigger && ASRouterTriggerListeners.has(trigger.id)) {

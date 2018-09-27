@@ -89,7 +89,7 @@ gfxTextRun::GlyphRunIterator::NextRun()
 
 #ifdef DEBUG_TEXT_RUN_STORAGE_METRICS
 static void
-AccountStorageForTextRun(gfxTextRun *aTextRun, int32_t aSign)
+AccountStorageForTextRun(gfxTextRun *aTextRun, int32_t assign)
 {
     // Ignores detailed glyphs... we don't know when those have been constructed
     // Also ignores gfxSkipChars dynamic storage (which won't be anything
@@ -100,7 +100,7 @@ AccountStorageForTextRun(gfxTextRun *aTextRun, int32_t aSign)
     uint32_t length = aTextRun->GetLength();
     int32_t bytes = length * sizeof(gfxTextRun::CompressedGlyph);
     bytes += sizeof(gfxTextRun);
-    gTextRunStorage += bytes*aSign;
+    gTextRunStorage += bytes*assign;
     gTextRunStorageHighWaterMark = std::max(gTextRunStorageHighWaterMark, gTextRunStorage);
 }
 #endif

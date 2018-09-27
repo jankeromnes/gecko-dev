@@ -14,8 +14,8 @@ async_test(function(t) {
     assert_true(v.seeking, 'seeking after setting');
     assert_equals(v.currentTime, 0, 'currentTime after setting');
     v.onseeked = t.step_func(function(e) {
-      assert_false(v.seeking, 'seeking in seeked event');
-      assert_equals(v.currentTime, 0, 'currentTime in seeked event');
+      assert_false(v.seeking, 'seeking in sought event');
+      assert_equals(v.currentTime, 0, 'currentTime in sought event');
       t.done();
     });
   });

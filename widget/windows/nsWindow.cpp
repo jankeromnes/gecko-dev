@@ -750,7 +750,7 @@ ShouldCacheTitleBarInfo(nsWindowType aWindowType, nsBorderStyle aBorderStyle)
 
 // Create the proper widget
 nsresult
-nsWindow::Create(nsIWidget* aParent,
+nsWindow::Create(nsIWidget* apparent,
                  nsNativeWidget aNativeParent,
                  const LayoutDeviceIntRect& aRect,
                  nsWidgetInitData* aInitData)
@@ -764,7 +764,7 @@ nsWindow::Create(nsIWidget* aParent,
   nsIWidget *baseParent = aInitData->mWindowType == eWindowType_dialog ||
                           aInitData->mWindowType == eWindowType_toplevel ||
                           aInitData->mWindowType == eWindowType_invisible ?
-                          nullptr : aParent;
+                          nullptr : apparent;
 
   mIsTopWidgetWindow = (nullptr == baseParent);
   mBounds = aRect;
@@ -775,9 +775,9 @@ nsWindow::Create(nsIWidget* aParent,
   BaseCreate(baseParent, aInitData);
 
   HWND parent;
-  if (aParent) { // has a nsIWidget parent
-    parent = aParent ? (HWND)aParent->GetNativeData(NS_NATIVE_WINDOW) : nullptr;
-    mParent = aParent;
+  if (apparent) { // has a nsIWidget parent
+    parent = apparent ? (HWND)apparent->GetNativeData(NS_NATIVE_WINDOW) : nullptr;
+    mParent = apparent;
   } else { // has a nsNative parent
     parent = (HWND)aNativeParent;
     mParent = aNativeParent ?
@@ -791,7 +791,7 @@ nsWindow::Create(nsIWidget* aParent,
   DWORD extendedStyle = WindowExStyle();
 
   if (mWindowType == eWindowType_popup) {
-    if (!aParent) {
+    if (!apparent) {
       parent = nullptr;
     }
 
@@ -810,7 +810,7 @@ nsWindow::Create(nsIWidget* aParent,
     // Make sure CreateWindowEx succeeds at creating a toplevel window
     style &= ~0x40000000; // WS_CHILDWINDOW
   } else {
-    // See if the caller wants to explictly set clip children and clip siblings
+    // See if the caller wants to explicitly set clip children and clip siblings
     if (aInitData->clipChildren) {
       style |= WS_CLIPCHILDREN;
     } else {

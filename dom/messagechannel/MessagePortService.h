@@ -25,21 +25,21 @@ public:
   static MessagePortService* Get();
   static MessagePortService* GetOrCreate();
 
-  bool RequestEntangling(MessagePortParent* aParent,
+  bool RequestEntangling(MessagePortParent* apparent,
                          const nsID& aDestinationUUID,
                          const uint32_t& aSequenceID);
 
   bool DisentanglePort(
-                 MessagePortParent* aParent,
+                 MessagePortParent* apparent,
                  FallibleTArray<RefPtr<SharedMessagePortMessage>>& aMessages);
 
-  bool ClosePort(MessagePortParent* aParent);
+  bool ClosePort(MessagePortParent* apparent);
 
   bool PostMessages(
-                 MessagePortParent* aParent,
+                 MessagePortParent* apparent,
                  FallibleTArray<RefPtr<SharedMessagePortMessage>>& aMessages);
 
-  void ParentDestroy(MessagePortParent* aParent);
+  void ParentDestroy(MessagePortParent* apparent);
 
   bool ForceClose(const nsID& aUUID,
                   const nsID& aDestinationUUID,

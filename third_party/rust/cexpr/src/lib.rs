@@ -43,7 +43,7 @@ macro_rules! identity (
     ($i:expr,$e:expr) => ($e);
 );
 
-/// If the input result indicates a succesful parse, but there is data left,
+/// If the input result indicates a successful parse, but there is data left,
 /// return an `Error::Partial` instead.
 pub fn assert_full_parse<I,O,E>(result: IResult<&[I],O,E>) -> IResult<&[I],O,::Error> {
 	match fix_error!((),::Error,identity!(result)) {

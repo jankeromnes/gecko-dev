@@ -54,9 +54,9 @@ struct PK11SlotInfoStr {
     PZLock *sessionLock; /* lock for this session */
     /* our ID */
     CK_SLOT_ID slotID;
-    /* persistant flags saved from startup to startup */
+    /* persistent flags saved from startup to startup */
     unsigned long defaultFlags;
-    /* keep track of who is using us so we don't accidently get freed while
+    /* keep track of who is using us so we don't accidentally get freed while
      * still in use */
     PRInt32 refCount; /* to be in/decremented by atomic calls ONLY! */
     PZLock *freeListLock;

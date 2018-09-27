@@ -62,9 +62,9 @@ void RunBitexactnessTest(int sample_rate,
   }
 
   // Form vector to compare the reference to. Only the last frame processed
-  // is compared in order not having to specify all preceeding frames as
+  // is compared in order not having to specify all preceding frames as
   // inputs. As the algorithm being tested has a memory, testing only
-  // the last frame implicitly also tests the preceeding frames.
+  // the last frame implicitly also tests the preceding frames.
   const size_t reference_frame_length =
       reference.size() / stream_config.num_channels();
   std::vector<float> output_to_verify;

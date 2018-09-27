@@ -421,7 +421,7 @@ void OpenSLESPlayer::EnqueuePlayoutData(bool silence) {
   SLint8* audio_ptr = audio_buffers_[buffer_index_].get();
   if (silence) {
     RTC_DCHECK(thread_checker_.CalledOnValidThread());
-    // Avoid aquiring real audio data from WebRTC and fill the buffer with
+    // Avoid acquiring real audio data from WebRTC and fill the buffer with
     // zeros instead. Used to prime the buffer with silence and to avoid asking
     // for audio data from two different threads.
     memset(audio_ptr, 0, audio_parameters_.GetBytesPerBuffer());

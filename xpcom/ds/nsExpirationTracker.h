@@ -229,7 +229,7 @@ public:
 
   /**
    * The timer calls this, but it can also be manually called if you want
-   * to age objects "artifically". This can result in calls to NotifyExpiredLocked.
+   * to age objects "artificially". This can result in calls to NotifyExpiredLocked.
    */
   void AgeOneGenerationLocked(const AutoLock& aAutoLock)
   {

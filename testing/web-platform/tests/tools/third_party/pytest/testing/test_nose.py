@@ -298,7 +298,7 @@ def test_nose_setup_ordering(testdir):
 
 def test_apiwrapper_problem_issue260(testdir):
     # this would end up trying a call an optional teardown on the class
-    # for plain unittests we dont want nose behaviour
+    # for plain unittests we don't want nose behaviour
     testdir.makepyfile(
         """
         import unittest
@@ -322,7 +322,7 @@ def test_apiwrapper_problem_issue260(testdir):
 
 
 def test_setup_teardown_linking_issue265(testdir):
-    # we accidentally didnt integrate nose setupstate with normal setupstate
+    # we accidentally didn't integrate nose setupstate with normal setupstate
     # this test ensures that won't happen again
     testdir.makepyfile(
         '''

@@ -14,7 +14,7 @@
     <d:testDescription xmlns="http://www.w3.org/1999/xhtml" href="http://www.w3.org/TR/SVG11/interact.html#PointerEventsProperty">
       <p>
         This tests that zero opacity pixels in a mask do not affect
-        hit testing for the purpose of pointer event targetting.
+        hit testing for the purpose of pointer event targeting.
       </p>
     </d:testDescription>
     <d:operatorScript xmlns="http://www.w3.org/1999/xhtml">

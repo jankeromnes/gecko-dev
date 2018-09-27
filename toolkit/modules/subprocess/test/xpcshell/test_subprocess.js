@@ -589,7 +589,7 @@ add_task(async function test_subprocess_kill() {
     arguments: ["-u", TEST_SCRIPT, "echo"],
   });
 
-  // Force kill with no gracefull termination timeout.
+  // Force kill with no graceful termination timeout.
   let {exitCode} = await proc.kill(0);
 
   equal(exitCode, -9, "Got expected exit code");

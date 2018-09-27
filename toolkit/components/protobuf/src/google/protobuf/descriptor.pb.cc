@@ -812,7 +812,7 @@ void AddDescriptorsImpl() {
       "_package\030\013 \001(\t\022\"\n\023cc_generic_services\030\020 "
       "\001(\010:\005false\022$\n\025java_generic_services\030\021 \001("
       "\010:\005false\022\"\n\023py_generic_services\030\022 \001(\010:\005f"
-      "alse\022#\n\024php_generic_services\030* \001(\010:\005fals"
+      "else\022#\n\024php_generic_services\030* \001(\010:\005fals"
       "e\022\031\n\ndeprecated\030\027 \001(\010:\005false\022\037\n\020cc_enabl"
       "e_arenas\030\037 \001(\010:\005false\022\031\n\021objc_class_pref"
       "ix\030$ \001(\t\022\030\n\020csharp_namespace\030% \001(\t\022\024\n\014sw"

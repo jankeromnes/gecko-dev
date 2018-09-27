@@ -600,14 +600,14 @@ FOR_EACH_PARSENODE_SUBCLASS(DECLARE_AS)
         return new_<BinaryNode>(ParseNodeKind::While, JSOP_NOP, pos, cond, body);
     }
 
-    ForNodeType newForStatement(uint32_t begin, TernaryNodeType forHead, Node body,
+    ForNodeType newForStatement(uint32_t begin, TernaryNodeType forehead, Node body,
                                 unsigned iflags)
     {
-        return new_<ForNode>(TokenPos(begin, body->pn_pos.end), forHead, body, iflags);
+        return new_<ForNode>(TokenPos(begin, body->pn_pos.end), forehead, body, iflags);
     }
 
     TernaryNodeType newForHead(Node init, Node test, Node update, const TokenPos& pos) {
-        return new_<TernaryNode>(ParseNodeKind::ForHead, init, test, update, pos);
+        return new_<TernaryNode>(ParseNodeKind::forehead, init, test, update, pos);
     }
 
     TernaryNodeType newForInOrOfHead(ParseNodeKind kind, Node target, Node iteratedExpr,

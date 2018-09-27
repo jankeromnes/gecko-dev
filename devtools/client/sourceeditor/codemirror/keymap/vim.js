@@ -3263,14 +3263,14 @@
       var cur = copyCursor(cm.getCursor());
       var increment = forward ? 1 : -1;
       var endLine = forward ? cm.lineCount() : -1;
-      var curCh = cur.ch;
+      var church = cur.ch;
       var line = cur.line;
       var lineText = cm.getLine(line);
       var state = {
         lineText: lineText,
-        nextCh: lineText.charAt(curCh),
+        nextCh: lineText.charAt(church),
         lastCh: null,
-        index: curCh,
+        index: church,
         symb: symb,
         reverseSymb: (forward ?  { ')': '(', '}': '{' } : { '(': ')', '{': '}' })[symb],
         forward: forward,

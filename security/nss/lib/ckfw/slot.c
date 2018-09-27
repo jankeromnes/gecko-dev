@@ -58,10 +58,10 @@ struct NSSCKFWSlotStr {
      * The invariants the mutex protects are:
      *
      * 1) Each of the cached descriptions (versions, etc.) are in an
-     *    internally consistant state.
+     *    internally consistent state.
      *
      * 2) The fwToken points to the token currently in the slot, and
-     *    it is in a consistant state.
+     *    it is in a consistent state.
      *
      * Note that the calls accessing the cached descriptions will
      * call the NSSCKMDSlot methods with the mutex locked.  Those

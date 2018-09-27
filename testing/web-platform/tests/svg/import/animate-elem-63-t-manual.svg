@@ -59,7 +59,7 @@
         (1s;4s) and should behave like the rectangles of the first three
         rows for the first 5 seconds of the document's timeline. In addition,
         the end condition has a click event base and thus, the rectangle
-        should immediately move to the left position if the user everytime the user
+        should immediately move to the left position if the user every time the user
         clicks clicks on the rectangle when it is on the right position.
         Finally, the end condition also has an accessKey condition
         for the 'b' character. Thus, the rectangle should move to the left

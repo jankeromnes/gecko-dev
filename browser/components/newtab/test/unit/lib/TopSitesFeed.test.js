@@ -605,7 +605,7 @@ describe("Top Sites Feed", () => {
     });
   });
   describe("#getScreenshotPreview", () => {
-    it("should dispatch preview if request is succesful", async () => {
+    it("should dispatch preview if request is successful", async () => {
       await feed.getScreenshotPreview("custom", 1234);
 
       assert.calledOnce(feed.store.dispatch);

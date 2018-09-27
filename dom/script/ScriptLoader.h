@@ -538,7 +538,7 @@ private:
   void StartFetchingModuleDependencies(ModuleLoadRequest* aRequest);
 
   RefPtr<mozilla::GenericPromise>
-  StartFetchingModuleAndDependencies(ModuleLoadRequest* aParent, nsIURI* aURI);
+  StartFetchingModuleAndDependencies(ModuleLoadRequest* apparent, nsIURI* aURI);
 
   nsresult AssociateSourceElementsForModuleTree(JSContext* aCx,
                                                 ModuleLoadRequest* aRequest);

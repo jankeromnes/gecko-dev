@@ -27,8 +27,8 @@ FilePicker.prototype = {
   _addToRecentDocs: false,
   _title: "",
 
-  init: function(aParent, aTitle, aMode) {
-    this._domWin = aParent;
+  init: function(apparent, aTitle, aMode) {
+    this._domWin = apparent;
     this._mode = aMode;
     this._title = aTitle;
 

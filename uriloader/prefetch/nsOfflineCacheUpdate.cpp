@@ -1777,7 +1777,7 @@ nsOfflineCacheUpdate::ManifestCheckCompleted(nsresult aStatus,
 
         // In a rare case the manifest will not be modified on the next refetch
         // transfer all master document URIs to the new update to ensure that
-        // all documents refering it will be properly cached.
+        // all documents referring it will be properly cached.
         for (int32_t i = 0; i < mDocumentURIs.Count(); i++) {
             newUpdate->StickDocument(mDocumentURIs[i]);
         }

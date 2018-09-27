@@ -3607,7 +3607,7 @@ module.exports = function getEnumerableProperties(object) {
  */
 
 /*!
- * Module dependancies
+ * Module dependencies
  */
 
 var flag = require('./flag')
@@ -4402,7 +4402,7 @@ function objectToString(o) {
  */
 
 /*!
- * Module dependancies
+ * Module dependencies
  */
 
 var inspect = require('./inspect');
@@ -4617,7 +4617,7 @@ module.exports = function (ctx, name, getter) {
  */
 
 /*!
- * Module dependancies
+ * Module dependencies
  */
 
 var flag = require('./flag');

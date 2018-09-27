@@ -117,7 +117,7 @@ public:
      *  insufficient space to store all of the color-offset pairs, fColors
      *  and fColorOffsets will not be altered.  fColorOffsets specifies
      *  where on the range of 0 to 1 to transition to the given color.
-     *  The meaning of fPoint and fRadius is dependant on the type of gradient.
+     *  The meaning of fPoint and fRadius is dependent on the type of gradient.
      *
      *  None:
      *      info is ignored.

@@ -22,13 +22,13 @@ class SendGamepadUpdateRunnable final : public Runnable
   RefPtr<GamepadEventChannelParent> mParent;
   GamepadChangeEvent mEvent;
  public:
-   SendGamepadUpdateRunnable(GamepadEventChannelParent* aParent,
+   SendGamepadUpdateRunnable(GamepadEventChannelParent* apparent,
                              GamepadChangeEvent aEvent)
      : Runnable("dom::SendGamepadUpdateRunnable")
      , mEvent(aEvent)
    {
-     MOZ_ASSERT(aParent);
-     mParent = aParent;
+     MOZ_ASSERT(apparent);
+     mParent = apparent;
   }
   NS_IMETHOD Run() override
   {

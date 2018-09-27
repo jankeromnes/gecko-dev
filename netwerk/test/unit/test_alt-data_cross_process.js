@@ -1,11 +1,11 @@
 /**
- * Test for the "alternative data stream" stored withing a cache entry.
+ * Test for the "alternative data stream" stored within a cache entry.
  *
  * - we load a URL with preference for an alt data (check what we get is the raw data,
  *   since there was nothing previously cached)
  * - we store the alt data along the channel (to the cache entry)
  * - we flush the HTTP cache
- * - we reload the same URL using a new channel, again prefering the alt data be loaded
+ * - we reload the same URL using a new channel, again preferring the alt data be loaded
  * - this time the alt data must arive
  */
 

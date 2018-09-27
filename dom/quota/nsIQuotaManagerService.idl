@@ -108,7 +108,7 @@ interface nsIQuotaManagerService : nsISupports
    * Resets quota and storage management. This can be used to force
    * reinitialization of the temp storage, for example when the pref for
    * overriding the temp storage limit has changed.
-   * Be carefull, this invalidates all live storages!
+   * Be careful, this invalidates all live storages!
    *
    * If the dom.quotaManager.testing preference is not true the call will be
    * a no-op.

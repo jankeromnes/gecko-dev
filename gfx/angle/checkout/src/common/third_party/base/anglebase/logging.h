@@ -3,7 +3,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 //
-// logging.h: Compatiblity hacks for importing Chromium's base/numerics.
+// logging.h: Compatibility hacks for importing Chromium's base/numerics.
 
 #ifndef ANGLEBASE_LOGGING_H_
 #define ANGLEBASE_LOGGING_H_

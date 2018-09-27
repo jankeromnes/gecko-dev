@@ -340,7 +340,7 @@ union YYSTYPE
             TQualifierWrapperBase *qualifierWrapper;
             TTypeQualifierBuilder *typeQualifierBuilder;
         };
-    } interm;
+    } interim;
 
 
 };
@@ -2518,7 +2518,7 @@ yyreduce:
 
     {
         // The symbol table search was done in the lexical phase
-        (yyval.interm.intermTypedNode) = context->parseVariableIdentifier((yylsp[0]), ImmutableString((yyvsp[0].lex).string), (yyvsp[0].lex).symbol);
+        (yyval.interim.intermTypedNode) = context->parseVariableIdentifier((yylsp[0]), ImmutableString((yyvsp[0].lex).string), (yyvsp[0].lex).symbol);
     }
 
     break;
@@ -2526,7 +2526,7 @@ yyreduce:
   case 5:
 
     {
-        (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode);
+        (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode);
     }
 
     break;
@@ -2536,7 +2536,7 @@ yyreduce:
     {
         TConstantUnion *unionArray = new TConstantUnion[1];
         unionArray->setIConst((yyvsp[0].lex).i);
-        (yyval.interm.intermTypedNode) = context->addScalarLiteral(unionArray, (yylsp[0]));
+        (yyval.interim.intermTypedNode) = context->addScalarLiteral(unionArray, (yylsp[0]));
     }
 
     break;
@@ -2546,7 +2546,7 @@ yyreduce:
     {
         TConstantUnion *unionArray = new TConstantUnion[1];
         unionArray->setUConst((yyvsp[0].lex).u);
-        (yyval.interm.intermTypedNode) = context->addScalarLiteral(unionArray, (yylsp[0]));
+        (yyval.interim.intermTypedNode) = context->addScalarLiteral(unionArray, (yylsp[0]));
     }
 
     break;
@@ -2556,7 +2556,7 @@ yyreduce:
     {
         TConstantUnion *unionArray = new TConstantUnion[1];
         unionArray->setFConst((yyvsp[0].lex).f);
-        (yyval.interm.intermTypedNode) = context->addScalarLiteral(unionArray, (yylsp[0]));
+        (yyval.interim.intermTypedNode) = context->addScalarLiteral(unionArray, (yylsp[0]));
     }
 
     break;
@@ -2566,7 +2566,7 @@ yyreduce:
     {
         TConstantUnion *unionArray = new TConstantUnion[1];
         unionArray->setBConst((yyvsp[0].lex).b);
-        (yyval.interm.intermTypedNode) = context->addScalarLiteral(unionArray, (yylsp[0]));
+        (yyval.interim.intermTypedNode) = context->addScalarLiteral(unionArray, (yylsp[0]));
     }
 
     break;
@@ -2580,7 +2580,7 @@ yyreduce:
         }
         TConstantUnion *unionArray = new TConstantUnion[1];
         unionArray->setYuvCscStandardEXTConst(getYuvCscStandardEXT(ImmutableString((yyvsp[0].lex).string)));
-        (yyval.interm.intermTypedNode) = context->addScalarLiteral(unionArray, (yylsp[0]));
+        (yyval.interim.intermTypedNode) = context->addScalarLiteral(unionArray, (yylsp[0]));
     }
 
     break;
@@ -2588,7 +2588,7 @@ yyreduce:
   case 11:
 
     {
-        (yyval.interm.intermTypedNode) = (yyvsp[-1].interm.intermTypedNode);
+        (yyval.interim.intermTypedNode) = (yyvsp[-1].interim.intermTypedNode);
     }
 
     break;
@@ -2596,7 +2596,7 @@ yyreduce:
   case 12:
 
     {
-        (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode);
+        (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode);
     }
 
     break;
@@ -2604,7 +2604,7 @@ yyreduce:
   case 13:
 
     {
-        (yyval.interm.intermTypedNode) = context->addIndexExpression((yyvsp[-3].interm.intermTypedNode), (yylsp[-2]), (yyvsp[-1].interm.intermTypedNode));
+        (yyval.interim.intermTypedNode) = context->addIndexExpression((yyvsp[-3].interim.intermTypedNode), (yylsp[-2]), (yyvsp[-1].interim.intermTypedNode));
     }
 
     break;
@@ -2612,7 +2612,7 @@ yyreduce:
   case 14:
 
     {
-        (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode);
+        (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode);
     }
 
     break;
@@ -2620,7 +2620,7 @@ yyreduce:
   case 15:
 
     {
-        (yyval.interm.intermTypedNode) = context->addFieldSelectionExpression((yyvsp[-2].interm.intermTypedNode), (yylsp[-1]), ImmutableString((yyvsp[0].lex).string), (yylsp[0]));
+        (yyval.interim.intermTypedNode) = context->addFieldSelectionExpression((yyvsp[-2].interim.intermTypedNode), (yylsp[-1]), ImmutableString((yyvsp[0].lex).string), (yylsp[0]));
     }
 
     break;
@@ -2628,7 +2628,7 @@ yyreduce:
   case 16:
 
     {
-        (yyval.interm.intermTypedNode) = context->addUnaryMathLValue(EOpPostIncrement, (yyvsp[-1].interm.intermTypedNode), (yylsp[0]));
+        (yyval.interim.intermTypedNode) = context->addUnaryMathLValue(EOpPostIncrement, (yyvsp[-1].interim.intermTypedNode), (yylsp[0]));
     }
 
     break;
@@ -2636,7 +2636,7 @@ yyreduce:
   case 17:
 
     {
-        (yyval.interm.intermTypedNode) = context->addUnaryMathLValue(EOpPostDecrement, (yyvsp[-1].interm.intermTypedNode), (yylsp[0]));
+        (yyval.interim.intermTypedNode) = context->addUnaryMathLValue(EOpPostDecrement, (yyvsp[-1].interim.intermTypedNode), (yylsp[0]));
     }
 
     break;
@@ -2644,8 +2644,8 @@ yyreduce:
   case 18:
 
     {
-        context->checkIsScalarInteger((yyvsp[0].interm.intermTypedNode), "[]");
-        (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode);
+        context->checkIsScalarInteger((yyvsp[0].interim.intermTypedNode), "[]");
+        (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode);
     }
 
     break;
@@ -2653,7 +2653,7 @@ yyreduce:
   case 19:
 
     {
-        (yyval.interm.intermTypedNode) = context->addFunctionCallOrMethod((yyvsp[0].interm.functionLookup), (yylsp[0]));
+        (yyval.interim.intermTypedNode) = context->addFunctionCallOrMethod((yyvsp[0].interim.functionLookup), (yylsp[0]));
     }
 
     break;
@@ -2661,7 +2661,7 @@ yyreduce:
   case 20:
 
     {
-        (yyval.interm.functionLookup) = (yyvsp[0].interm.functionLookup);
+        (yyval.interim.functionLookup) = (yyvsp[0].interim.functionLookup);
     }
 
     break;
@@ -2670,8 +2670,8 @@ yyreduce:
 
     {
         ES3_OR_NEWER("", (yylsp[0]), "methods");
-        (yyval.interm.functionLookup) = (yyvsp[0].interm.functionLookup);
-        (yyval.interm.functionLookup)->setThisNode((yyvsp[-2].interm.intermTypedNode));
+        (yyval.interim.functionLookup) = (yyvsp[0].interim.functionLookup);
+        (yyval.interim.functionLookup)->setThisNode((yyvsp[-2].interim.intermTypedNode));
     }
 
     break;
@@ -2679,7 +2679,7 @@ yyreduce:
   case 22:
 
     {
-        (yyval.interm.functionLookup) = (yyvsp[-1].interm.functionLookup);
+        (yyval.interim.functionLookup) = (yyvsp[-1].interim.functionLookup);
     }
 
     break;
@@ -2687,7 +2687,7 @@ yyreduce:
   case 23:
 
     {
-        (yyval.interm.functionLookup) = (yyvsp[-1].interm.functionLookup);
+        (yyval.interim.functionLookup) = (yyvsp[-1].interim.functionLookup);
     }
 
     break;
@@ -2695,7 +2695,7 @@ yyreduce:
   case 24:
 
     {
-        (yyval.interm.functionLookup) = (yyvsp[-1].interm.functionLookup);
+        (yyval.interim.functionLookup) = (yyvsp[-1].interim.functionLookup);
     }
 
     break;
@@ -2703,7 +2703,7 @@ yyreduce:
   case 25:
 
     {
-        (yyval.interm.functionLookup) = (yyvsp[0].interm.functionLookup);
+        (yyval.interim.functionLookup) = (yyvsp[0].interim.functionLookup);
     }
 
     break;
@@ -2711,8 +2711,8 @@ yyreduce:
   case 26:
 
     {
-        (yyval.interm.functionLookup) = (yyvsp[-1].interm.functionLookup);
-        (yyval.interm.functionLookup)->addArgument((yyvsp[0].interm.intermTypedNode));
+        (yyval.interim.functionLookup) = (yyvsp[-1].interim.functionLookup);
+        (yyval.interim.functionLookup)->addArgument((yyvsp[0].interim.intermTypedNode));
     }
 
     break;
@@ -2720,8 +2720,8 @@ yyreduce:
   case 27:
 
     {
-        (yyval.interm.functionLookup) = (yyvsp[-2].interm.functionLookup);
-        (yyval.interm.functionLookup)->addArgument((yyvsp[0].interm.intermTypedNode));
+        (yyval.interim.functionLookup) = (yyvsp[-2].interim.functionLookup);
+        (yyval.interim.functionLookup)->addArgument((yyvsp[0].interim.intermTypedNode));
     }
 
     break;
@@ -2729,7 +2729,7 @@ yyreduce:
   case 28:
 
     {
-        (yyval.interm.functionLookup) = (yyvsp[-1].interm.functionLookup);
+        (yyval.interim.functionLookup) = (yyvsp[-1].interim.functionLookup);
     }
 
     break;
@@ -2737,7 +2737,7 @@ yyreduce:
   case 29:
 
     {
-        (yyval.interm.functionLookup) = context->addConstructorFunc((yyvsp[0].interm.type));
+        (yyval.interim.functionLookup) = context->addConstructorFunc((yyvsp[0].interim.type));
     }
 
     break;
@@ -2745,7 +2745,7 @@ yyreduce:
   case 30:
 
     {
-        (yyval.interm.functionLookup) = context->addNonConstructorFunc(ImmutableString((yyvsp[0].lex).string), (yyvsp[0].lex).symbol);
+        (yyval.interim.functionLookup) = context->addNonConstructorFunc(ImmutableString((yyvsp[0].lex).string), (yyvsp[0].lex).symbol);
     }
 
     break;
@@ -2753,7 +2753,7 @@ yyreduce:
   case 31:
 
     {
-        (yyval.interm.functionLookup) = context->addNonConstructorFunc(ImmutableString((yyvsp[0].lex).string), (yyvsp[0].lex).symbol);
+        (yyval.interim.functionLookup) = context->addNonConstructorFunc(ImmutableString((yyvsp[0].lex).string), (yyvsp[0].lex).symbol);
     }
 
     break;
@@ -2761,7 +2761,7 @@ yyreduce:
   case 32:
 
     {
-        (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode);
+        (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode);
     }
 
     break;
@@ -2769,7 +2769,7 @@ yyreduce:
   case 33:
 
     {
-        (yyval.interm.intermTypedNode) = context->addUnaryMathLValue(EOpPreIncrement, (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addUnaryMathLValue(EOpPreIncrement, (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -2777,7 +2777,7 @@ yyreduce:
   case 34:
 
     {
-        (yyval.interm.intermTypedNode) = context->addUnaryMathLValue(EOpPreDecrement, (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addUnaryMathLValue(EOpPreDecrement, (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -2785,26 +2785,26 @@ yyreduce:
   case 35:
 
     {
-        (yyval.interm.intermTypedNode) = context->addUnaryMath((yyvsp[-1].interm.op), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addUnaryMath((yyvsp[-1].interim.op), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 36:
 
-    { (yyval.interm.op) = EOpPositive; }
+    { (yyval.interim.op) = EOpPositive; }
 
     break;
 
   case 37:
 
-    { (yyval.interm.op) = EOpNegative; }
+    { (yyval.interim.op) = EOpNegative; }
 
     break;
 
   case 38:
 
-    { (yyval.interm.op) = EOpLogicalNot; }
+    { (yyval.interim.op) = EOpLogicalNot; }
 
     break;
 
@@ -2812,21 +2812,21 @@ yyreduce:
 
     {
         ES3_OR_NEWER("~", (yyloc), "bit-wise operator");
-        (yyval.interm.op) = EOpBitwiseNot;
+        (yyval.interim.op) = EOpBitwiseNot;
     }
 
     break;
 
   case 40:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
   case 41:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMath(EOpMul, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMath(EOpMul, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -2834,7 +2834,7 @@ yyreduce:
   case 42:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMath(EOpDiv, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMath(EOpDiv, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -2843,21 +2843,21 @@ yyreduce:
 
     {
         ES3_OR_NEWER("%", (yylsp[-1]), "integer modulus operator");
-        (yyval.interm.intermTypedNode) = context->addBinaryMath(EOpIMod, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMath(EOpIMod, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 44:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
   case 45:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMath(EOpAdd, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMath(EOpAdd, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -2865,14 +2865,14 @@ yyreduce:
   case 46:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMath(EOpSub, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMath(EOpSub, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 47:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
@@ -2880,7 +2880,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER("<<", (yylsp[-1]), "bit-wise operator");
-        (yyval.interm.intermTypedNode) = context->addBinaryMath(EOpBitShiftLeft, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMath(EOpBitShiftLeft, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -2889,21 +2889,21 @@ yyreduce:
 
     {
         ES3_OR_NEWER(">>", (yylsp[-1]), "bit-wise operator");
-        (yyval.interm.intermTypedNode) = context->addBinaryMath(EOpBitShiftRight, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMath(EOpBitShiftRight, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 50:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
   case 51:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMathBooleanResult(EOpLessThan, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMathBooleanResult(EOpLessThan, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -2911,7 +2911,7 @@ yyreduce:
   case 52:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMathBooleanResult(EOpGreaterThan, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMathBooleanResult(EOpGreaterThan, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -2919,7 +2919,7 @@ yyreduce:
   case 53:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMathBooleanResult(EOpLessThanEqual, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMathBooleanResult(EOpLessThanEqual, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -2927,21 +2927,21 @@ yyreduce:
   case 54:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMathBooleanResult(EOpGreaterThanEqual, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMathBooleanResult(EOpGreaterThanEqual, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 55:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
   case 56:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMathBooleanResult(EOpEqual, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMathBooleanResult(EOpEqual, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -2949,14 +2949,14 @@ yyreduce:
   case 57:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMathBooleanResult(EOpNotEqual, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMathBooleanResult(EOpNotEqual, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 58:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
@@ -2964,14 +2964,14 @@ yyreduce:
 
     {
         ES3_OR_NEWER("&", (yylsp[-1]), "bit-wise operator");
-        (yyval.interm.intermTypedNode) = context->addBinaryMath(EOpBitwiseAnd, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMath(EOpBitwiseAnd, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 60:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
@@ -2979,14 +2979,14 @@ yyreduce:
 
     {
         ES3_OR_NEWER("^", (yylsp[-1]), "bit-wise operator");
-        (yyval.interm.intermTypedNode) = context->addBinaryMath(EOpBitwiseXor, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMath(EOpBitwiseXor, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 62:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
@@ -2994,96 +2994,96 @@ yyreduce:
 
     {
         ES3_OR_NEWER("|", (yylsp[-1]), "bit-wise operator");
-        (yyval.interm.intermTypedNode) = context->addBinaryMath(EOpBitwiseOr, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMath(EOpBitwiseOr, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 64:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
   case 65:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMathBooleanResult(EOpLogicalAnd, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMathBooleanResult(EOpLogicalAnd, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 66:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
   case 67:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMathBooleanResult(EOpLogicalXor, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMathBooleanResult(EOpLogicalXor, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 68:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
   case 69:
 
     {
-        (yyval.interm.intermTypedNode) = context->addBinaryMathBooleanResult(EOpLogicalOr, (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addBinaryMathBooleanResult(EOpLogicalOr, (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 70:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
   case 71:
 
     {
-        (yyval.interm.intermTypedNode) = context->addTernarySelection((yyvsp[-4].interm.intermTypedNode), (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-3]));
+        (yyval.interim.intermTypedNode) = context->addTernarySelection((yyvsp[-4].interim.intermTypedNode), (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-3]));
     }
 
     break;
 
   case 72:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
   case 73:
 
     {
-        (yyval.interm.intermTypedNode) = context->addAssign((yyvsp[-1].interm.op), (yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addAssign((yyvsp[-1].interim.op), (yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
 
   case 74:
 
-    { (yyval.interm.op) = EOpAssign; }
+    { (yyval.interim.op) = EOpAssign; }
 
     break;
 
   case 75:
 
-    { (yyval.interm.op) = EOpMulAssign; }
+    { (yyval.interim.op) = EOpMulAssign; }
 
     break;
 
   case 76:
 
-    { (yyval.interm.op) = EOpDivAssign; }
+    { (yyval.interim.op) = EOpDivAssign; }
 
     break;
 
@@ -3091,20 +3091,20 @@ yyreduce:
 
     {
         ES3_OR_NEWER("%=", (yyloc), "integer modulus operator");
-        (yyval.interm.op) = EOpIModAssign;
+        (yyval.interim.op) = EOpIModAssign;
     }
 
     break;
 
   case 78:
 
-    { (yyval.interm.op) = EOpAddAssign; }
+    { (yyval.interim.op) = EOpAddAssign; }
 
     break;
 
   case 79:
 
-    { (yyval.interm.op) = EOpSubAssign; }
+    { (yyval.interim.op) = EOpSubAssign; }
 
     break;
 
@@ -3112,7 +3112,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER("<<=", (yyloc), "bit-wise operator");
-        (yyval.interm.op) = EOpBitShiftLeftAssign;
+        (yyval.interim.op) = EOpBitShiftLeftAssign;
     }
 
     break;
@@ -3121,7 +3121,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER(">>=", (yyloc), "bit-wise operator");
-        (yyval.interm.op) = EOpBitShiftRightAssign;
+        (yyval.interim.op) = EOpBitShiftRightAssign;
     }
 
     break;
@@ -3130,7 +3130,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER("&=", (yyloc), "bit-wise operator");
-        (yyval.interm.op) = EOpBitwiseAndAssign;
+        (yyval.interim.op) = EOpBitwiseAndAssign;
     }
 
     break;
@@ -3139,7 +3139,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER("^=", (yyloc), "bit-wise operator");
-        (yyval.interm.op) = EOpBitwiseXorAssign;
+        (yyval.interim.op) = EOpBitwiseXorAssign;
     }
 
     break;
@@ -3148,7 +3148,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER("|=", (yyloc), "bit-wise operator");
-        (yyval.interm.op) = EOpBitwiseOrAssign;
+        (yyval.interim.op) = EOpBitwiseOrAssign;
     }
 
     break;
@@ -3156,7 +3156,7 @@ yyreduce:
   case 85:
 
     {
-        (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode);
+        (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode);
     }
 
     break;
@@ -3164,7 +3164,7 @@ yyreduce:
   case 86:
 
     {
-        (yyval.interm.intermTypedNode) = context->addComma((yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.intermTypedNode), (yylsp[-1]));
+        (yyval.interim.intermTypedNode) = context->addComma((yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.intermTypedNode), (yylsp[-1]));
     }
 
     break;
@@ -3172,8 +3172,8 @@ yyreduce:
   case 87:
 
     {
-        context->checkIsConst((yyvsp[0].interm.intermTypedNode));
-        (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode);
+        context->checkIsConst((yyvsp[0].interim.intermTypedNode));
+        (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode);
     }
 
     break;
@@ -3190,7 +3190,7 @@ yyreduce:
   case 89:
 
     {
-        (yyval.interm.intermNode) = context->addFunctionPrototypeDeclaration(*((yyvsp[-1].interm).function), (yylsp[-1]));
+        (yyval.interim.intermNode) = context->addFunctionPrototypeDeclaration(*((yyvsp[-1].interim).function), (yylsp[-1]));
     }
 
     break;
@@ -3198,7 +3198,7 @@ yyreduce:
   case 90:
 
     {
-        (yyval.interm.intermNode) = (yyvsp[-1].interm).intermDeclaration;
+        (yyval.interim.intermNode) = (yyvsp[-1].interim).intermDeclaration;
     }
 
     break;
@@ -3206,8 +3206,8 @@ yyreduce:
   case 91:
 
     {
-        context->parseDefaultPrecisionQualifier((yyvsp[-2].interm.precision), (yyvsp[-1].interm.type), (yylsp[-3]));
-        (yyval.interm.intermNode) = nullptr;
+        context->parseDefaultPrecisionQualifier((yyvsp[-2].interim.precision), (yyvsp[-1].interim.type), (yylsp[-3]));
+        (yyval.interim.intermNode) = nullptr;
     }
 
     break;
@@ -3216,7 +3216,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER(ImmutableString((yyvsp[-3].lex).string), (yylsp[-4]), "interface blocks");
-        (yyval.interm.intermNode) = context->addInterfaceBlock(*(yyvsp[-4].interm.typeQualifierBuilder), (yylsp[-3]), ImmutableString((yyvsp[-3].lex).string), (yyvsp[-2].interm.fieldList), kEmptyImmutableString, (yyloc), NULL, (yyloc));
+        (yyval.interim.intermNode) = context->addInterfaceBlock(*(yyvsp[-4].interim.typeQualifierBuilder), (yylsp[-3]), ImmutableString((yyvsp[-3].lex).string), (yyvsp[-2].interim.fieldList), kEmptyImmutableString, (yyloc), NULL, (yyloc));
     }
 
     break;
@@ -3225,7 +3225,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER(ImmutableString((yyvsp[-4].lex).string), (yylsp[-5]), "interface blocks");
-        (yyval.interm.intermNode) = context->addInterfaceBlock(*(yyvsp[-5].interm.typeQualifierBuilder), (yylsp[-4]), ImmutableString((yyvsp[-4].lex).string), (yyvsp[-3].interm.fieldList), ImmutableString((yyvsp[-1].lex).string), (yylsp[-1]), NULL, (yyloc));
+        (yyval.interim.intermNode) = context->addInterfaceBlock(*(yyvsp[-5].interim.typeQualifierBuilder), (yylsp[-4]), ImmutableString((yyvsp[-4].lex).string), (yyvsp[-3].interim.fieldList), ImmutableString((yyvsp[-1].lex).string), (yylsp[-1]), NULL, (yyloc));
     }
 
     break;
@@ -3234,7 +3234,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER(ImmutableString((yyvsp[-7].lex).string), (yylsp[-8]), "interface blocks");
-        (yyval.interm.intermNode) = context->addInterfaceBlock(*(yyvsp[-8].interm.typeQualifierBuilder), (yylsp[-7]), ImmutableString((yyvsp[-7].lex).string), (yyvsp[-6].interm.fieldList), ImmutableString((yyvsp[-4].lex).string), (yylsp[-4]), (yyvsp[-2].interm.intermTypedNode), (yylsp[-3]));
+        (yyval.interim.intermNode) = context->addInterfaceBlock(*(yyvsp[-8].interim.typeQualifierBuilder), (yylsp[-7]), ImmutableString((yyvsp[-7].lex).string), (yyvsp[-6].interim.fieldList), ImmutableString((yyvsp[-4].lex).string), (yylsp[-4]), (yyvsp[-2].interim.intermTypedNode), (yylsp[-3]));
     }
 
     break;
@@ -3242,8 +3242,8 @@ yyreduce:
   case 95:
 
     {
-        context->parseGlobalLayoutQualifier(*(yyvsp[-1].interm.typeQualifierBuilder));
-        (yyval.interm.intermNode) = nullptr;
+        context->parseGlobalLayoutQualifier(*(yyvsp[-1].interim.typeQualifierBuilder));
+        (yyval.interim.intermNode) = nullptr;
     }
 
     break;
@@ -3251,7 +3251,7 @@ yyreduce:
   case 96:
 
     {
-        (yyval.interm.intermNode) = context->parseInvariantDeclaration(*(yyvsp[-2].interm.typeQualifierBuilder), (yylsp[-1]), ImmutableString((yyvsp[-1].lex).string), (yyvsp[-1].lex).symbol);
+        (yyval.interim.intermNode) = context->parseInvariantDeclaration(*(yyvsp[-2].interim.typeQualifierBuilder), (yylsp[-1]), ImmutableString((yyvsp[-1].lex).string), (yyvsp[-1].lex).symbol);
     }
 
     break;
@@ -3259,7 +3259,7 @@ yyreduce:
   case 97:
 
     {
-        (yyval.interm).function = context->parseFunctionDeclarator((yylsp[0]), (yyvsp[-1].interm.function));
+        (yyval.interim).function = context->parseFunctionDeclarator((yylsp[0]), (yyvsp[-1].interim.function));
         context->exitFunctionDeclaration();
     }
 
@@ -3268,7 +3268,7 @@ yyreduce:
   case 98:
 
     {
-        (yyval.interm.function) = (yyvsp[0].interm.function);
+        (yyval.interim.function) = (yyvsp[0].interim.function);
     }
 
     break;
@@ -3276,7 +3276,7 @@ yyreduce:
   case 99:
 
     {
-        (yyval.interm.function) = (yyvsp[0].interm.function);
+        (yyval.interim.function) = (yyvsp[0].interim.function);
     }
 
     break;
@@ -3285,10 +3285,10 @@ yyreduce:
 
     {
         // Add the parameter
-        (yyval.interm.function) = (yyvsp[-1].interm.function);
-        if ((yyvsp[0].interm.param).type->getBasicType() != EbtVoid)
+        (yyval.interim.function) = (yyvsp[-1].interim.function);
+        if ((yyvsp[0].interim.param).type->getBasicType() != EbtVoid)
         {
-            (yyvsp[-1].interm.function)->addParameter((yyvsp[0].interm.param).createVariable(&context->symbolTable));
+            (yyvsp[-1].interim.function)->addParameter((yyvsp[0].interim.param).createVariable(&context->symbolTable));
         }
     }
 
@@ -3297,17 +3297,17 @@ yyreduce:
   case 101:
 
     {
-        (yyval.interm.function) = (yyvsp[-2].interm.function);
+        (yyval.interim.function) = (yyvsp[-2].interim.function);
         // Only first parameter of one-parameter functions can be void
         // The check for named parameters not being void is done in parameter_declarator
-        if ((yyvsp[0].interm.param).type->getBasicType() == EbtVoid)
+        if ((yyvsp[0].interim.param).type->getBasicType() == EbtVoid)
         {
             // This parameter > first is void
             context->error((yylsp[-1]), "cannot be a parameter type except for '(void)'", "void");
         }
         else
         {
-            (yyvsp[-2].interm.function)->addParameter((yyvsp[0].interm.param).createVariable(&context->symbolTable));
+            (yyvsp[-2].interim.function)->addParameter((yyvsp[0].interim.param).createVariable(&context->symbolTable));
         }
     }
 
@@ -3316,7 +3316,7 @@ yyreduce:
   case 102:
 
     {
-        (yyval.interm.function) = context->parseFunctionHeader((yyvsp[-2].interm.type), ImmutableString((yyvsp[-1].lex).string), (yylsp[-1]));
+        (yyval.interim.function) = context->parseFunctionHeader((yyvsp[-2].interim.type), ImmutableString((yyvsp[-1].lex).string), (yylsp[-1]));
 
         context->symbolTable.push();
         context->enterFunctionDeclaration();
@@ -3327,7 +3327,7 @@ yyreduce:
   case 103:
 
     {
-        (yyval.interm.param) = context->parseParameterDeclarator((yyvsp[-1].interm.type), ImmutableString((yyvsp[0].lex).string), (yylsp[0]));
+        (yyval.interim.param) = context->parseParameterDeclarator((yyvsp[-1].interim.type), ImmutableString((yyvsp[0].lex).string), (yylsp[0]));
     }
 
     break;
@@ -3335,7 +3335,7 @@ yyreduce:
   case 104:
 
     {
-        (yyval.interm.param) = context->parseParameterArrayDeclarator(ImmutableString((yyvsp[-1].lex).string), (yylsp[-1]), *((yyvsp[0].interm.arraySizes)), (yylsp[0]), &(yyvsp[-2].interm.type));
+        (yyval.interim.param) = context->parseParameterArrayDeclarator(ImmutableString((yyvsp[-1].lex).string), (yylsp[-1]), *((yyvsp[0].interim.arraySizes)), (yylsp[0]), &(yyvsp[-2].interim.type));
     }
 
     break;
@@ -3343,8 +3343,8 @@ yyreduce:
   case 105:
 
     {
-        (yyval.interm.param) = (yyvsp[0].interm.param);
-        context->checkIsParameterQualifierValid((yylsp[0]), *(yyvsp[-1].interm.typeQualifierBuilder), (yyvsp[0].interm.param).type);
+        (yyval.interim.param) = (yyvsp[0].interim.param);
+        context->checkIsParameterQualifierValid((yylsp[0]), *(yyvsp[-1].interim.typeQualifierBuilder), (yyvsp[0].interim.param).type);
     }
 
     break;
@@ -3352,8 +3352,8 @@ yyreduce:
   case 106:
 
     {
-        (yyval.interm.param) = (yyvsp[0].interm.param);
-        (yyval.interm.param).type->setQualifier(EvqIn);
+        (yyval.interim.param) = (yyvsp[0].interim.param);
+        (yyval.interim.param).type->setQualifier(EvqIn);
     }
 
     break;
@@ -3361,8 +3361,8 @@ yyreduce:
   case 107:
 
     {
-        (yyval.interm.param) = (yyvsp[0].interm.param);
-        context->checkIsParameterQualifierValid((yylsp[0]), *(yyvsp[-1].interm.typeQualifierBuilder), (yyvsp[0].interm.param).type);
+        (yyval.interim.param) = (yyvsp[0].interim.param);
+        context->checkIsParameterQualifierValid((yylsp[0]), *(yyvsp[-1].interim.typeQualifierBuilder), (yyvsp[0].interim.param).type);
     }
 
     break;
@@ -3370,8 +3370,8 @@ yyreduce:
   case 108:
 
     {
-        (yyval.interm.param) = (yyvsp[0].interm.param);
-        (yyval.interm.param).type->setQualifier(EvqIn);
+        (yyval.interim.param) = (yyvsp[0].interim.param);
+        (yyval.interim.param).type->setQualifier(EvqIn);
     }
 
     break;
@@ -3379,8 +3379,8 @@ yyreduce:
   case 109:
 
     {
-        TParameter param = { 0, new TType((yyvsp[0].interm.type)) };
-        (yyval.interm.param) = param;
+        TParameter param = { 0, new TType((yyvsp[0].interim.type)) };
+        (yyval.interim.param) = param;
     }
 
     break;
@@ -3388,7 +3388,7 @@ yyreduce:
   case 110:
 
     {
-        (yyval.interm) = (yyvsp[0].interm);
+        (yyval.interim) = (yyvsp[0].interim);
     }
 
     break;
@@ -3396,8 +3396,8 @@ yyreduce:
   case 111:
 
     {
-        (yyval.interm) = (yyvsp[-2].interm);
-        context->parseDeclarator((yyval.interm).type, (yylsp[0]), ImmutableString((yyvsp[0].lex).string), (yyval.interm).intermDeclaration);
+        (yyval.interim) = (yyvsp[-2].interim);
+        context->parseDeclarator((yyval.interim).type, (yylsp[0]), ImmutableString((yyvsp[0].lex).string), (yyval.interim).intermDeclaration);
     }
 
     break;
@@ -3405,8 +3405,8 @@ yyreduce:
   case 112:
 
     {
-        (yyval.interm) = (yyvsp[-3].interm);
-        context->parseArrayDeclarator((yyval.interm).type, (yylsp[-1]), ImmutableString((yyvsp[-1].lex).string), (yylsp[0]), *((yyvsp[0].interm.arraySizes)), (yyval.interm).intermDeclaration);
+        (yyval.interim) = (yyvsp[-3].interim);
+        context->parseArrayDeclarator((yyval.interim).type, (yylsp[-1]), ImmutableString((yyvsp[-1].lex).string), (yylsp[0]), *((yyvsp[0].interim.arraySizes)), (yyval.interim).intermDeclaration);
     }
 
     break;
@@ -3415,8 +3415,8 @@ yyreduce:
 
     {
         ES3_OR_NEWER("=", (yylsp[-1]), "first-class arrays (array initializer)");
-        (yyval.interm) = (yyvsp[-5].interm);
-        context->parseArrayInitDeclarator((yyval.interm).type, (yylsp[-3]), ImmutableString((yyvsp[-3].lex).string), (yylsp[-2]), *((yyvsp[-2].interm.arraySizes)), (yylsp[-1]), (yyvsp[0].interm.intermTypedNode), (yyval.interm).intermDeclaration);
+        (yyval.interim) = (yyvsp[-5].interim);
+        context->parseArrayInitDeclarator((yyval.interim).type, (yylsp[-3]), ImmutableString((yyvsp[-3].lex).string), (yylsp[-2]), *((yyvsp[-2].interim.arraySizes)), (yylsp[-1]), (yyvsp[0].interim.intermTypedNode), (yyval.interim).intermDeclaration);
     }
 
     break;
@@ -3424,8 +3424,8 @@ yyreduce:
   case 114:
 
     {
-        (yyval.interm) = (yyvsp[-4].interm);
-        context->parseInitDeclarator((yyval.interm).type, (yylsp[-2]), ImmutableString((yyvsp[-2].lex).string), (yylsp[-1]), (yyvsp[0].interm.intermTypedNode), (yyval.interm).intermDeclaration);
+        (yyval.interim) = (yyvsp[-4].interim);
+        context->parseInitDeclarator((yyval.interim).type, (yylsp[-2]), ImmutableString((yyvsp[-2].lex).string), (yylsp[-1]), (yyvsp[0].interim.intermTypedNode), (yyval.interim).intermDeclaration);
     }
 
     break;
@@ -3433,8 +3433,8 @@ yyreduce:
   case 115:
 
     {
-        (yyval.interm).type = (yyvsp[0].interm.type);
-        (yyval.interm).intermDeclaration = context->parseSingleDeclaration((yyval.interm).type, (yylsp[0]), kEmptyImmutableString);
+        (yyval.interim).type = (yyvsp[0].interim.type);
+        (yyval.interim).intermDeclaration = context->parseSingleDeclaration((yyval.interim).type, (yylsp[0]), kEmptyImmutableString);
     }
 
     break;
@@ -3442,8 +3442,8 @@ yyreduce:
   case 116:
 
     {
-        (yyval.interm).type = (yyvsp[-1].interm.type);
-        (yyval.interm).intermDeclaration = context->parseSingleDeclaration((yyval.interm).type, (yylsp[0]), ImmutableString((yyvsp[0].lex).string));
+        (yyval.interim).type = (yyvsp[-1].interim.type);
+        (yyval.interim).intermDeclaration = context->parseSingleDeclaration((yyval.interim).type, (yylsp[0]), ImmutableString((yyvsp[0].lex).string));
     }
 
     break;
@@ -3451,8 +3451,8 @@ yyreduce:
   case 117:
 
     {
-        (yyval.interm).type = (yyvsp[-2].interm.type);
-        (yyval.interm).intermDeclaration = context->parseSingleArrayDeclaration((yyval.interm).type, (yylsp[-1]), ImmutableString((yyvsp[-1].lex).string), (yylsp[0]), *((yyvsp[0].interm.arraySizes)));
+        (yyval.interim).type = (yyvsp[-2].interim.type);
+        (yyval.interim).intermDeclaration = context->parseSingleArrayDeclaration((yyval.interim).type, (yylsp[-1]), ImmutableString((yyvsp[-1].lex).string), (yylsp[0]), *((yyvsp[0].interim.arraySizes)));
     }
 
     break;
@@ -3461,8 +3461,8 @@ yyreduce:
 
     {
         ES3_OR_NEWER("[]", (yylsp[-2]), "first-class arrays (array initializer)");
-        (yyval.interm).type = (yyvsp[-4].interm.type);
-        (yyval.interm).intermDeclaration = context->parseSingleArrayInitDeclaration((yyval.interm).type, (yylsp[-3]), ImmutableString((yyvsp[-3].lex).string), (yylsp[-2]), *((yyvsp[-2].interm.arraySizes)), (yylsp[-1]), (yyvsp[0].interm.intermTypedNode));
+        (yyval.interim).type = (yyvsp[-4].interim.type);
+        (yyval.interim).intermDeclaration = context->parseSingleArrayInitDeclaration((yyval.interim).type, (yylsp[-3]), ImmutableString((yyvsp[-3].lex).string), (yylsp[-2]), *((yyvsp[-2].interim.arraySizes)), (yylsp[-1]), (yyvsp[0].interim.intermTypedNode));
     }
 
     break;
@@ -3470,8 +3470,8 @@ yyreduce:
   case 119:
 
     {
-        (yyval.interm).type = (yyvsp[-3].interm.type);
-        (yyval.interm).intermDeclaration = context->parseSingleInitDeclaration((yyval.interm).type, (yylsp[-2]), ImmutableString((yyvsp[-2].lex).string), (yylsp[-1]), (yyvsp[0].interm.intermTypedNode));
+        (yyval.interim).type = (yyvsp[-3].interim.type);
+        (yyval.interim).intermDeclaration = context->parseSingleInitDeclaration((yyval.interim).type, (yylsp[-2]), ImmutableString((yyvsp[-2].lex).string), (yylsp[-1]), (yyvsp[0].interim.intermTypedNode));
     }
 
     break;
@@ -3479,8 +3479,8 @@ yyreduce:
   case 120:
 
     {
-        context->addFullySpecifiedType(&(yyvsp[0].interm.type));
-        (yyval.interm.type) = (yyvsp[0].interm.type);
+        context->addFullySpecifiedType(&(yyvsp[0].interim.type));
+        (yyval.interim.type) = (yyvsp[0].interim.type);
     }
 
     break;
@@ -3488,7 +3488,7 @@ yyreduce:
   case 121:
 
     {
-        (yyval.interm.type) = context->addFullySpecifiedType(*(yyvsp[-1].interm.typeQualifierBuilder), (yyvsp[0].interm.type));
+        (yyval.interim.type) = context->addFullySpecifiedType(*(yyvsp[-1].interim.typeQualifierBuilder), (yyvsp[0].interim.type));
     }
 
     break;
@@ -3496,7 +3496,7 @@ yyreduce:
   case 122:
 
     {
-        (yyval.interm.qualifier) = EvqSmooth;
+        (yyval.interim.qualifier) = EvqSmooth;
     }
 
     break;
@@ -3504,7 +3504,7 @@ yyreduce:
   case 123:
 
     {
-        (yyval.interm.qualifier) = EvqFlat;
+        (yyval.interim.qualifier) = EvqFlat;
     }
 
     break;
@@ -3512,8 +3512,8 @@ yyreduce:
   case 124:
 
     {
-        (yyval.interm.typeQualifierBuilder) = context->createTypeQualifierBuilder((yylsp[0]));
-        (yyval.interm.typeQualifierBuilder)->appendQualifier((yyvsp[0].interm.qualifierWrapper));
+        (yyval.interim.typeQualifierBuilder) = context->createTypeQualifierBuilder((yylsp[0]));
+        (yyval.interim.typeQualifierBuilder)->appendQualifier((yyvsp[0].interim.qualifierWrapper));
     }
 
     break;
@@ -3521,8 +3521,8 @@ yyreduce:
   case 125:
 
     {
-        (yyval.interm.typeQualifierBuilder) = (yyvsp[-1].interm.typeQualifierBuilder);
-        (yyval.interm.typeQualifierBuilder)->appendQualifier((yyvsp[0].interm.qualifierWrapper));
+        (yyval.interim.typeQualifierBuilder) = (yyvsp[-1].interim.typeQualifierBuilder);
+        (yyval.interim.typeQualifierBuilder)->appendQualifier((yyvsp[0].interim.qualifierWrapper));
     }
 
     break;
@@ -3538,8 +3538,8 @@ yyreduce:
   case 127:
 
     {
-        context->checkLocalVariableConstStorageQualifier(*(yyvsp[0].interm.qualifierWrapper));
-        (yyval.interm.qualifierWrapper) = (yyvsp[0].interm.qualifierWrapper);
+        context->checkLocalVariableConstStorageQualifier(*(yyvsp[0].interim.qualifierWrapper));
+        (yyval.interim.qualifierWrapper) = (yyvsp[0].interim.qualifierWrapper);
     }
 
     break;
@@ -3548,7 +3548,7 @@ yyreduce:
 
     {
         context->checkIsAtGlobalLevel((yylsp[0]), "layout");
-        (yyval.interm.qualifierWrapper) = new TLayoutQualifierWrapper((yyvsp[0].interm.layoutQualifier), (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TLayoutQualifierWrapper((yyvsp[0].interim.layoutQualifier), (yylsp[0]));
     }
 
     break;
@@ -3556,7 +3556,7 @@ yyreduce:
   case 129:
 
     {
-        (yyval.interm.qualifierWrapper) = new TPrecisionQualifierWrapper((yyvsp[0].interm.precision), (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TPrecisionQualifierWrapper((yyvsp[0].interim.precision), (yylsp[0]));
     }
 
     break;
@@ -3564,7 +3564,7 @@ yyreduce:
   case 130:
 
     {
-        (yyval.interm.qualifierWrapper) = new TInterpolationQualifierWrapper((yyvsp[0].interm.qualifier), (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TInterpolationQualifierWrapper((yyvsp[0].interim.qualifier), (yylsp[0]));
     }
 
     break;
@@ -3573,7 +3573,7 @@ yyreduce:
 
     {
         context->checkIsAtGlobalLevel((yylsp[0]), "invariant");
-        (yyval.interm.qualifierWrapper) = new TInvariantQualifierWrapper((yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TInvariantQualifierWrapper((yylsp[0]));
     }
 
     break;
@@ -3583,7 +3583,7 @@ yyreduce:
     {
         VERTEX_ONLY("attribute", (yylsp[0]));
         ES2_ONLY("attribute", (yylsp[0]));
-        (yyval.interm.qualifierWrapper) = context->parseGlobalStorageQualifier(EvqAttribute, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = context->parseGlobalStorageQualifier(EvqAttribute, (yylsp[0]));
     }
 
     break;
@@ -3592,7 +3592,7 @@ yyreduce:
 
     {
         ES2_ONLY("varying", (yylsp[0]));
-        (yyval.interm.qualifierWrapper) = context->parseVaryingQualifier((yylsp[0]));
+        (yyval.interim.qualifierWrapper) = context->parseVaryingQualifier((yylsp[0]));
     }
 
     break;
@@ -3600,7 +3600,7 @@ yyreduce:
   case 134:
 
     {
-        (yyval.interm.qualifierWrapper) = new TStorageQualifierWrapper(EvqConst, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TStorageQualifierWrapper(EvqConst, (yylsp[0]));
     }
 
     break;
@@ -3608,7 +3608,7 @@ yyreduce:
   case 135:
 
     {
-        (yyval.interm.qualifierWrapper) = context->parseInQualifier((yylsp[0]));
+        (yyval.interim.qualifierWrapper) = context->parseInQualifier((yylsp[0]));
     }
 
     break;
@@ -3616,7 +3616,7 @@ yyreduce:
   case 136:
 
     {
-        (yyval.interm.qualifierWrapper) = context->parseOutQualifier((yylsp[0]));
+        (yyval.interim.qualifierWrapper) = context->parseOutQualifier((yylsp[0]));
     }
 
     break;
@@ -3624,7 +3624,7 @@ yyreduce:
   case 137:
 
     {
-        (yyval.interm.qualifierWrapper) = context->parseInOutQualifier((yylsp[0]));
+        (yyval.interim.qualifierWrapper) = context->parseInOutQualifier((yylsp[0]));
     }
 
     break;
@@ -3633,7 +3633,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER("centroid", (yylsp[0]), "storage qualifier");
-        (yyval.interm.qualifierWrapper) = new TStorageQualifierWrapper(EvqCentroid, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TStorageQualifierWrapper(EvqCentroid, (yylsp[0]));
     }
 
     break;
@@ -3641,7 +3641,7 @@ yyreduce:
   case 139:
 
     {
-        (yyval.interm.qualifierWrapper) = context->parseGlobalStorageQualifier(EvqUniform, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = context->parseGlobalStorageQualifier(EvqUniform, (yylsp[0]));
     }
 
     break;
@@ -3650,7 +3650,7 @@ yyreduce:
 
     {
         ES3_1_ONLY("buffer", (yylsp[0]), "storage qualifier");
-        (yyval.interm.qualifierWrapper) = context->parseGlobalStorageQualifier(EvqBuffer, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = context->parseGlobalStorageQualifier(EvqBuffer, (yylsp[0]));
     }
 
     break;
@@ -3658,7 +3658,7 @@ yyreduce:
   case 141:
 
     {
-        (yyval.interm.qualifierWrapper) = new TMemoryQualifierWrapper(EvqReadOnly, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TMemoryQualifierWrapper(EvqReadOnly, (yylsp[0]));
     }
 
     break;
@@ -3666,7 +3666,7 @@ yyreduce:
   case 142:
 
     {
-        (yyval.interm.qualifierWrapper) = new TMemoryQualifierWrapper(EvqWriteOnly, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TMemoryQualifierWrapper(EvqWriteOnly, (yylsp[0]));
     }
 
     break;
@@ -3674,7 +3674,7 @@ yyreduce:
   case 143:
 
     {
-        (yyval.interm.qualifierWrapper) = new TMemoryQualifierWrapper(EvqCoherent, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TMemoryQualifierWrapper(EvqCoherent, (yylsp[0]));
     }
 
     break;
@@ -3682,7 +3682,7 @@ yyreduce:
   case 144:
 
     {
-        (yyval.interm.qualifierWrapper) = new TMemoryQualifierWrapper(EvqRestrict, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TMemoryQualifierWrapper(EvqRestrict, (yylsp[0]));
     }
 
     break;
@@ -3690,7 +3690,7 @@ yyreduce:
   case 145:
 
     {
-        (yyval.interm.qualifierWrapper) = new TMemoryQualifierWrapper(EvqVolatile, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = new TMemoryQualifierWrapper(EvqVolatile, (yylsp[0]));
     }
 
     break;
@@ -3699,7 +3699,7 @@ yyreduce:
 
     {
         COMPUTE_ONLY("shared", (yylsp[0]));
-        (yyval.interm.qualifierWrapper) = context->parseGlobalStorageQualifier(EvqShared, (yylsp[0]));
+        (yyval.interim.qualifierWrapper) = context->parseGlobalStorageQualifier(EvqShared, (yylsp[0]));
     }
 
     break;
@@ -3707,8 +3707,8 @@ yyreduce:
   case 147:
 
     {
-        (yyval.interm.type) = (yyvsp[0].interm.type);
-        (yyval.interm.type).precision = context->symbolTable.getDefaultPrecision((yyvsp[0].interm.type).getBasicType());
+        (yyval.interim.type) = (yyvsp[0].interim.type);
+        (yyval.interim.type).precision = context->symbolTable.getDefaultPrecision((yyvsp[0].interim.type).getBasicType());
     }
 
     break;
@@ -3716,7 +3716,7 @@ yyreduce:
   case 148:
 
     {
-        (yyval.interm.precision) = EbpHigh;
+        (yyval.interim.precision) = EbpHigh;
     }
 
     break;
@@ -3724,7 +3724,7 @@ yyreduce:
   case 149:
 
     {
-        (yyval.interm.precision) = EbpMedium;
+        (yyval.interim.precision) = EbpMedium;
     }
 
     break;
@@ -3732,7 +3732,7 @@ yyreduce:
   case 150:
 
     {
-        (yyval.interm.precision) = EbpLow;
+        (yyval.interim.precision) = EbpLow;
     }
 
     break;
@@ -3741,7 +3741,7 @@ yyreduce:
 
     {
         ES3_OR_NEWER_OR_MULTIVIEW("layout", (yylsp[-3]), "qualifier");
-        (yyval.interm.layoutQualifier) = (yyvsp[-1].interm.layoutQualifier);
+        (yyval.interim.layoutQualifier) = (yyvsp[-1].interim.layoutQualifier);
     }
 
     break;
@@ -3749,7 +3749,7 @@ yyreduce:
   case 152:
 
     {
-        (yyval.interm.layoutQualifier) = (yyvsp[0].interm.layoutQualifier);
+        (yyval.interim.layoutQualifier) = (yyvsp[0].interim.layoutQualifier);
     }
 
     break;
@@ -3757,7 +3757,7 @@ yyreduce:
   case 153:
 
     {
-        (yyval.interm.layoutQualifier) = context->joinLayoutQualifiers((yyvsp[-2].interm.layoutQualifier), (yyvsp[0].interm.layoutQualifier), (yylsp[0]));
+        (yyval.interim.layoutQualifier) = context->joinLayoutQualifiers((yyvsp[-2].interim.layoutQualifier), (yyvsp[0].interim.layoutQualifier), (yylsp[0]));
     }
 
     break;
@@ -3765,7 +3765,7 @@ yyreduce:
   case 154:
 
     {
-        (yyval.interm.layoutQualifier) = context->parseLayoutQualifier(ImmutableString((yyvsp[0].lex).string), (yylsp[0]));
+        (yyval.interim.layoutQualifier) = context->parseLayoutQualifier(ImmutableString((yyvsp[0].lex).string), (yylsp[0]));
     }
 
     break;
@@ -3773,7 +3773,7 @@ yyreduce:
   case 155:
 
     {
-        (yyval.interm.layoutQualifier) = context->parseLayoutQualifier(ImmutableString((yyvsp[-2].lex).string), (yylsp[-2]), (yyvsp[0].lex).i, (yylsp[0]));
+        (yyval.interim.layoutQualifier) = context->parseLayoutQualifier(ImmutableString((yyvsp[-2].lex).string), (yylsp[-2]), (yyvsp[0].lex).i, (yylsp[0]));
     }
 
     break;
@@ -3781,7 +3781,7 @@ yyreduce:
   case 156:
 
     {
-        (yyval.interm.layoutQualifier) = context->parseLayoutQualifier(ImmutableString((yyvsp[-2].lex).string), (yylsp[-2]), (yyvsp[0].lex).i, (yylsp[0]));
+        (yyval.interim.layoutQualifier) = context->parseLayoutQualifier(ImmutableString((yyvsp[-2].lex).string), (yylsp[-2]), (yyvsp[0].lex).i, (yylsp[0]));
     }
 
     break;
@@ -3789,7 +3789,7 @@ yyreduce:
   case 157:
 
     {
-        (yyval.interm.layoutQualifier) = context->parseLayoutQualifier(ImmutableString("shared"), (yylsp[0]));
+        (yyval.interim.layoutQualifier) = context->parseLayoutQualifier(ImmutableString("shared"), (yylsp[0]));
     }
 
     break;
@@ -3797,7 +3797,7 @@ yyreduce:
   case 158:
 
     {
-        (yyval.interm.type).initialize((yyvsp[0].interm.typeSpecifierNonArray), (context->symbolTable.atGlobalLevel() ? EvqGlobal : EvqTemporary));
+        (yyval.interim.type).initialize((yyvsp[0].interim.typeSpecifierNonArray), (context->symbolTable.atGlobalLevel() ? EvqGlobal : EvqTemporary));
     }
 
     break;
@@ -3805,8 +3805,8 @@ yyreduce:
   case 159:
 
     {
-        (yyval.interm.type).initialize((yyvsp[-1].interm.typeSpecifierNonArray), (context->symbolTable.atGlobalLevel() ? EvqGlobal : EvqTemporary));
-        (yyval.interm.type).setArraySizes((yyvsp[0].interm.arraySizes));
+        (yyval.interim.type).initialize((yyvsp[-1].interim.typeSpecifierNonArray), (context->symbolTable.atGlobalLevel() ? EvqGlobal : EvqTemporary));
+        (yyval.interim.type).setArraySizes((yyvsp[0].interim.arraySizes));
     }
 
     break;
@@ -3815,8 +3815,8 @@ yyreduce:
 
     {
         ES3_OR_NEWER("[]", (yylsp[-1]), "implicitly sized array");
-        (yyval.interm.arraySizes) = new TVector<unsigned int>();
-        (yyval.interm.arraySizes)->push_back(0u);
+        (yyval.interim.arraySizes) = new TVector<unsigned int>();
+        (yyval.interim.arraySizes)->push_back(0u);
     }
 
     break;
@@ -3824,11 +3824,11 @@ yyreduce:
   case 161:
 
     {
-        (yyval.interm.arraySizes) = new TVector<unsigned int>();
-        unsigned int size = context->checkIsValidArraySize((yylsp[-2]), (yyvsp[-1].interm.intermTypedNode));
+        (yyval.interim.arraySizes) = new TVector<unsigned int>();
+        unsigned int size = context->checkIsValidArraySize((yylsp[-2]), (yyvsp[-1].interim.intermTypedNode));
         // Make the type an array even if size check failed.
         // This ensures useless error messages regarding a variable's non-arrayness won't follow.
-        (yyval.interm.arraySizes)->push_back(size);
+        (yyval.interim.arraySizes)->push_back(size);
     }
 
     break;
@@ -3837,8 +3837,8 @@ yyreduce:
 
     {
         ES3_1_ONLY("[]", (yylsp[-1]), "arrays of arrays");
-        (yyval.interm.arraySizes) = (yyvsp[-2].interm.arraySizes);
-        (yyval.interm.arraySizes)->insert((yyval.interm.arraySizes)->begin(), 0u);
+        (yyval.interim.arraySizes) = (yyvsp[-2].interim.arraySizes);
+        (yyval.interim.arraySizes)->insert((yyval.interim.arraySizes)->begin(), 0u);
     }
 
     break;
@@ -3847,11 +3847,11 @@ yyreduce:
 
     {
         ES3_1_ONLY("[]", (yylsp[-2]), "arrays of arrays");
-        (yyval.interm.arraySizes) = (yyvsp[-3].interm.arraySizes);
-        unsigned int size = context->checkIsValidArraySize((yylsp[-2]), (yyvsp[-1].interm.intermTypedNode));
+        (yyval.interim.arraySizes) = (yyvsp[-3].interim.arraySizes);
+        unsigned int size = context->checkIsValidArraySize((yylsp[-2]), (yyvsp[-1].interim.intermTypedNode));
         // Make the type an array even if size check failed.
         // This ensures useless error messages regarding a variable's non-arrayness won't follow.
-        (yyval.interm.arraySizes)->insert((yyval.interm.arraySizes)->begin(), size);
+        (yyval.interim.arraySizes)->insert((yyval.interim.arraySizes)->begin(), size);
     }
 
     break;
@@ -3859,7 +3859,7 @@ yyreduce:
   case 164:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtVoid, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtVoid, (yylsp[0]));
     }
 
     break;
@@ -3867,7 +3867,7 @@ yyreduce:
   case 165:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
     }
 
     break;
@@ -3875,7 +3875,7 @@ yyreduce:
   case 166:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtInt, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtInt, (yylsp[0]));
     }
 
     break;
@@ -3883,7 +3883,7 @@ yyreduce:
   case 167:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUInt, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUInt, (yylsp[0]));
     }
 
     break;
@@ -3891,7 +3891,7 @@ yyreduce:
   case 168:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtBool, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtBool, (yylsp[0]));
     }
 
     break;
@@ -3899,8 +3899,8 @@ yyreduce:
   case 169:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(2);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(2);
     }
 
     break;
@@ -3908,8 +3908,8 @@ yyreduce:
   case 170:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(3);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(3);
     }
 
     break;
@@ -3917,8 +3917,8 @@ yyreduce:
   case 171:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(4);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(4);
     }
 
     break;
@@ -3926,8 +3926,8 @@ yyreduce:
   case 172:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtBool, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(2);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtBool, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(2);
     }
 
     break;
@@ -3935,8 +3935,8 @@ yyreduce:
   case 173:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtBool, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(3);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtBool, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(3);
     }
 
     break;
@@ -3944,8 +3944,8 @@ yyreduce:
   case 174:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtBool, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(4);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtBool, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(4);
     }
 
     break;
@@ -3953,8 +3953,8 @@ yyreduce:
   case 175:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtInt, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(2);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtInt, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(2);
     }
 
     break;
@@ -3962,8 +3962,8 @@ yyreduce:
   case 176:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtInt, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(3);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtInt, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(3);
     }
 
     break;
@@ -3971,8 +3971,8 @@ yyreduce:
   case 177:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtInt, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(4);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtInt, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(4);
     }
 
     break;
@@ -3980,8 +3980,8 @@ yyreduce:
   case 178:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUInt, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(2);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUInt, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(2);
     }
 
     break;
@@ -3989,8 +3989,8 @@ yyreduce:
   case 179:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUInt, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(3);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUInt, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(3);
     }
 
     break;
@@ -3998,8 +3998,8 @@ yyreduce:
   case 180:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUInt, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setAggregate(4);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUInt, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setAggregate(4);
     }
 
     break;
@@ -4007,8 +4007,8 @@ yyreduce:
   case 181:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setMatrix(2, 2);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setMatrix(2, 2);
     }
 
     break;
@@ -4016,8 +4016,8 @@ yyreduce:
   case 182:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setMatrix(3, 3);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setMatrix(3, 3);
     }
 
     break;
@@ -4025,8 +4025,8 @@ yyreduce:
   case 183:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setMatrix(4, 4);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setMatrix(4, 4);
     }
 
     break;
@@ -4034,8 +4034,8 @@ yyreduce:
   case 184:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setMatrix(2, 3);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setMatrix(2, 3);
     }
 
     break;
@@ -4043,8 +4043,8 @@ yyreduce:
   case 185:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setMatrix(3, 2);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setMatrix(3, 2);
     }
 
     break;
@@ -4052,8 +4052,8 @@ yyreduce:
   case 186:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setMatrix(2, 4);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setMatrix(2, 4);
     }
 
     break;
@@ -4061,8 +4061,8 @@ yyreduce:
   case 187:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setMatrix(4, 2);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setMatrix(4, 2);
     }
 
     break;
@@ -4070,8 +4070,8 @@ yyreduce:
   case 188:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setMatrix(3, 4);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setMatrix(3, 4);
     }
 
     break;
@@ -4079,8 +4079,8 @@ yyreduce:
   case 189:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
-        (yyval.interm.typeSpecifierNonArray).setMatrix(4, 3);
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtFloat, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).setMatrix(4, 3);
     }
 
     break;
@@ -4092,7 +4092,7 @@ yyreduce:
         {
             context->error((yylsp[0]), "unsupported type", "yuvCscStandardEXT");
         }
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtYuvCscStandardEXT, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtYuvCscStandardEXT, (yylsp[0]));
     }
 
     break;
@@ -4100,7 +4100,7 @@ yyreduce:
   case 191:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSampler2D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSampler2D, (yylsp[0]));
     }
 
     break;
@@ -4108,7 +4108,7 @@ yyreduce:
   case 192:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSampler3D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSampler3D, (yylsp[0]));
     }
 
     break;
@@ -4116,7 +4116,7 @@ yyreduce:
   case 193:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSamplerCube, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSamplerCube, (yylsp[0]));
     }
 
     break;
@@ -4124,7 +4124,7 @@ yyreduce:
   case 194:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSampler2DArray, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSampler2DArray, (yylsp[0]));
     }
 
     break;
@@ -4132,7 +4132,7 @@ yyreduce:
   case 195:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSampler2DMS, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSampler2DMS, (yylsp[0]));
     }
 
     break;
@@ -4140,7 +4140,7 @@ yyreduce:
   case 196:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSampler2DMSArray, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSampler2DMSArray, (yylsp[0]));
     }
 
     break;
@@ -4148,7 +4148,7 @@ yyreduce:
   case 197:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtISampler2D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtISampler2D, (yylsp[0]));
     }
 
     break;
@@ -4156,7 +4156,7 @@ yyreduce:
   case 198:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtISampler3D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtISampler3D, (yylsp[0]));
     }
 
     break;
@@ -4164,7 +4164,7 @@ yyreduce:
   case 199:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtISamplerCube, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtISamplerCube, (yylsp[0]));
     }
 
     break;
@@ -4172,7 +4172,7 @@ yyreduce:
   case 200:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtISampler2DArray, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtISampler2DArray, (yylsp[0]));
     }
 
     break;
@@ -4180,7 +4180,7 @@ yyreduce:
   case 201:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtISampler2DMS, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtISampler2DMS, (yylsp[0]));
     }
 
     break;
@@ -4188,7 +4188,7 @@ yyreduce:
   case 202:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtISampler2DMSArray, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtISampler2DMSArray, (yylsp[0]));
     }
 
     break;
@@ -4196,7 +4196,7 @@ yyreduce:
   case 203:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUSampler2D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUSampler2D, (yylsp[0]));
     }
 
     break;
@@ -4204,7 +4204,7 @@ yyreduce:
   case 204:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUSampler3D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUSampler3D, (yylsp[0]));
     }
 
     break;
@@ -4212,7 +4212,7 @@ yyreduce:
   case 205:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUSamplerCube, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUSamplerCube, (yylsp[0]));
     }
 
     break;
@@ -4220,7 +4220,7 @@ yyreduce:
   case 206:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUSampler2DArray, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUSampler2DArray, (yylsp[0]));
     }
 
     break;
@@ -4228,7 +4228,7 @@ yyreduce:
   case 207:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUSampler2DMS, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUSampler2DMS, (yylsp[0]));
     }
 
     break;
@@ -4236,7 +4236,7 @@ yyreduce:
   case 208:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUSampler2DMSArray, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUSampler2DMSArray, (yylsp[0]));
     }
 
     break;
@@ -4244,7 +4244,7 @@ yyreduce:
   case 209:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSampler2DShadow, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSampler2DShadow, (yylsp[0]));
     }
 
     break;
@@ -4252,7 +4252,7 @@ yyreduce:
   case 210:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSamplerCubeShadow, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSamplerCubeShadow, (yylsp[0]));
     }
 
     break;
@@ -4260,7 +4260,7 @@ yyreduce:
   case 211:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSampler2DArrayShadow, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSampler2DArrayShadow, (yylsp[0]));
     }
 
     break;
@@ -4275,7 +4275,7 @@ yyreduce:
         {
             context->error((yylsp[0]), "unsupported type", "samplerExternalOES");
         }
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSamplerExternalOES, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSamplerExternalOES, (yylsp[0]));
     }
 
     break;
@@ -4287,7 +4287,7 @@ yyreduce:
         {
             context->error((yylsp[0]), "unsupported type", "__samplerExternal2DY2YEXT");
         }
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSamplerExternal2DY2YEXT, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSamplerExternal2DY2YEXT, (yylsp[0]));
     }
 
     break;
@@ -4299,7 +4299,7 @@ yyreduce:
         {
             context->error((yylsp[0]), "unsupported type", "sampler2DRect");
         }
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtSampler2DRect, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtSampler2DRect, (yylsp[0]));
     }
 
     break;
@@ -4307,7 +4307,7 @@ yyreduce:
   case 215:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtImage2D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtImage2D, (yylsp[0]));
     }
 
     break;
@@ -4315,7 +4315,7 @@ yyreduce:
   case 216:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtIImage2D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtIImage2D, (yylsp[0]));
     }
 
     break;
@@ -4323,7 +4323,7 @@ yyreduce:
   case 217:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUImage2D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUImage2D, (yylsp[0]));
     }
 
     break;
@@ -4331,7 +4331,7 @@ yyreduce:
   case 218:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtImage3D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtImage3D, (yylsp[0]));
     }
 
     break;
@@ -4339,7 +4339,7 @@ yyreduce:
   case 219:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtIImage3D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtIImage3D, (yylsp[0]));
     }
 
     break;
@@ -4347,7 +4347,7 @@ yyreduce:
   case 220:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUImage3D, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUImage3D, (yylsp[0]));
     }
 
     break;
@@ -4355,7 +4355,7 @@ yyreduce:
   case 221:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtImage2DArray, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtImage2DArray, (yylsp[0]));
     }
 
     break;
@@ -4363,7 +4363,7 @@ yyreduce:
   case 222:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtIImage2DArray, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtIImage2DArray, (yylsp[0]));
     }
 
     break;
@@ -4371,7 +4371,7 @@ yyreduce:
   case 223:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUImage2DArray, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUImage2DArray, (yylsp[0]));
     }
 
     break;
@@ -4379,7 +4379,7 @@ yyreduce:
   case 224:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtImageCube, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtImageCube, (yylsp[0]));
     }
 
     break;
@@ -4387,7 +4387,7 @@ yyreduce:
   case 225:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtIImageCube, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtIImageCube, (yylsp[0]));
     }
 
     break;
@@ -4395,7 +4395,7 @@ yyreduce:
   case 226:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtUImageCube, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtUImageCube, (yylsp[0]));
     }
 
     break;
@@ -4403,7 +4403,7 @@ yyreduce:
   case 227:
 
     {
-        (yyval.interm.typeSpecifierNonArray).initialize(EbtAtomicCounter, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initialize(EbtAtomicCounter, (yylsp[0]));
     }
 
     break;
@@ -4411,7 +4411,7 @@ yyreduce:
   case 228:
 
     {
-        (yyval.interm.typeSpecifierNonArray) = (yyvsp[0].interm.typeSpecifierNonArray);
+        (yyval.interim.typeSpecifierNonArray) = (yyvsp[0].interim.typeSpecifierNonArray);
     }
 
     break;
@@ -4421,7 +4421,7 @@ yyreduce:
     {
         // This is for user defined type names. The lexical phase looked up the type.
         const TStructure *structure = static_cast<const TStructure*>((yyvsp[0].lex).symbol);
-        (yyval.interm.typeSpecifierNonArray).initializeStruct(structure, false, (yylsp[0]));
+        (yyval.interim.typeSpecifierNonArray).initializeStruct(structure, false, (yylsp[0]));
     }
 
     break;
@@ -4435,7 +4435,7 @@ yyreduce:
   case 231:
 
     {
-        (yyval.interm.typeSpecifierNonArray) = context->addStructure((yylsp[-5]), (yylsp[-4]), ImmutableString((yyvsp[-4].lex).string), (yyvsp[-1].interm.fieldList));
+        (yyval.interim.typeSpecifierNonArray) = context->addStructure((yylsp[-5]), (yylsp[-4]), ImmutableString((yyvsp[-4].lex).string), (yyvsp[-1].interim.fieldList));
     }
 
     break;
@@ -4449,7 +4449,7 @@ yyreduce:
   case 233:
 
     {
-        (yyval.interm.typeSpecifierNonArray) = context->addStructure((yylsp[-4]), (yyloc), kEmptyImmutableString, (yyvsp[-1].interm.fieldList));
+        (yyval.interim.typeSpecifierNonArray) = context->addStructure((yylsp[-4]), (yyloc), kEmptyImmutableString, (yyvsp[-1].interim.fieldList));
     }
 
     break;
@@ -4457,7 +4457,7 @@ yyreduce:
   case 234:
 
     {
-        (yyval.interm.fieldList) = context->addStructFieldList((yyvsp[0].interm.fieldList), (yylsp[0]));
+        (yyval.interim.fieldList) = context->addStructFieldList((yyvsp[0].interim.fieldList), (yylsp[0]));
     }
 
     break;
@@ -4465,7 +4465,7 @@ yyreduce:
   case 235:
 
     {
-        (yyval.interm.fieldList) = context->combineStructFieldLists((yyvsp[-1].interm.fieldList), (yyvsp[0].interm.fieldList), (yylsp[0]));
+        (yyval.interim.fieldList) = context->combineStructFieldLists((yyvsp[-1].interim.fieldList), (yyvsp[0].interim.fieldList), (yylsp[0]));
     }
 
     break;
@@ -4473,7 +4473,7 @@ yyreduce:
   case 236:
 
     {
-        (yyval.interm.fieldList) = context->addStructDeclaratorList((yyvsp[-2].interm.type), (yyvsp[-1].interm.declaratorList));
+        (yyval.interim.fieldList) = context->addStructDeclaratorList((yyvsp[-2].interim.type), (yyvsp[-1].interim.declaratorList));
     }
 
     break;
@@ -4482,7 +4482,7 @@ yyreduce:
 
     {
         // ES3 Only, but errors should be handled elsewhere
-        (yyval.interm.fieldList) = context->addStructDeclaratorListWithQualifiers(*(yyvsp[-3].interm.typeQualifierBuilder), &(yyvsp[-2].interm.type), (yyvsp[-1].interm.declaratorList));
+        (yyval.interim.fieldList) = context->addStructDeclaratorListWithQualifiers(*(yyvsp[-3].interim.typeQualifierBuilder), &(yyvsp[-2].interim.type), (yyvsp[-1].interim.declaratorList));
     }
 
     break;
@@ -4490,8 +4490,8 @@ yyreduce:
   case 238:
 
     {
-        (yyval.interm.declaratorList) = new TDeclaratorList();
-        (yyval.interm.declaratorList)->push_back((yyvsp[0].interm.declarator));
+        (yyval.interim.declaratorList) = new TDeclaratorList();
+        (yyval.interim.declaratorList)->push_back((yyvsp[0].interim.declarator));
     }
 
     break;
@@ -4499,7 +4499,7 @@ yyreduce:
   case 239:
 
     {
-        (yyval.interm.declaratorList)->push_back((yyvsp[0].interm.declarator));
+        (yyval.interim.declaratorList)->push_back((yyvsp[0].interim.declarator));
     }
 
     break;
@@ -4507,7 +4507,7 @@ yyreduce:
   case 240:
 
     {
-        (yyval.interm.declarator) = context->parseStructDeclarator(ImmutableString((yyvsp[0].lex).string), (yylsp[0]));
+        (yyval.interim.declarator) = context->parseStructDeclarator(ImmutableString((yyvsp[0].lex).string), (yylsp[0]));
     }
 
     break;
@@ -4515,82 +4515,82 @@ yyreduce:
   case 241:
 
     {
-        (yyval.interm.declarator) = context->parseStructArrayDeclarator(ImmutableString((yyvsp[-1].lex).string), (yylsp[-1]), (yyvsp[0].interm.arraySizes));
+        (yyval.interim.declarator) = context->parseStructArrayDeclarator(ImmutableString((yyvsp[-1].lex).string), (yylsp[-1]), (yyvsp[0].interim.arraySizes));
     }
 
     break;
 
   case 242:
 
-    { (yyval.interm.intermTypedNode) = (yyvsp[0].interm.intermTypedNode); }
+    { (yyval.interim.intermTypedNode) = (yyvsp[0].interim.intermTypedNode); }
 
     break;
 
   case 243:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode); }
 
     break;
 
   case 244:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermBlock); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermBlock); }
 
     break;
 
   case 245:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode); }
 
     break;
 
   case 246:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode); }
 
     break;
 
   case 247:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode); }
 
     break;
 
   case 248:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode); }
 
     break;
 
   case 249:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermSwitch); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermSwitch); }
 
     break;
 
   case 250:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermCase); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermCase); }
 
     break;
 
   case 251:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode); }
 
     break;
 
   case 252:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode); }
 
     break;
 
   case 253:
 
     {
-        (yyval.interm.intermBlock) = new TIntermBlock();
-        (yyval.interm.intermBlock)->setLine((yyloc));
+        (yyval.interim.intermBlock) = new TIntermBlock();
+        (yyval.interim.intermBlock)->setLine((yyloc));
     }
 
     break;
@@ -4610,21 +4610,21 @@ yyreduce:
   case 256:
 
     {
-        (yyvsp[-2].interm.intermBlock)->setLine((yyloc));
-        (yyval.interm.intermBlock) = (yyvsp[-2].interm.intermBlock);
+        (yyvsp[-2].interim.intermBlock)->setLine((yyloc));
+        (yyval.interim.intermBlock) = (yyvsp[-2].interim.intermBlock);
     }
 
     break;
 
   case 257:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermBlock); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermBlock); }
 
     break;
 
   case 258:
 
-    { (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode); }
+    { (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode); }
 
     break;
 
@@ -4636,7 +4636,7 @@ yyreduce:
 
   case 260:
 
-    { context->symbolTable.pop(); (yyval.interm.intermNode) = (yyvsp[0].interm.intermBlock); }
+    { context->symbolTable.pop(); (yyval.interim.intermNode) = (yyvsp[0].interim.intermBlock); }
 
     break;
 
@@ -4648,15 +4648,15 @@ yyreduce:
 
   case 262:
 
-    { context->symbolTable.pop(); (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode); }
+    { context->symbolTable.pop(); (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode); }
 
     break;
 
   case 263:
 
     {
-        (yyval.interm.intermBlock) = new TIntermBlock();
-        (yyval.interm.intermBlock)->setLine((yyloc));
+        (yyval.interim.intermBlock) = new TIntermBlock();
+        (yyval.interim.intermBlock)->setLine((yyloc));
     }
 
     break;
@@ -4664,8 +4664,8 @@ yyreduce:
   case 264:
 
     {
-        (yyvsp[-1].interm.intermBlock)->setLine((yyloc));
-        (yyval.interm.intermBlock) = (yyvsp[-1].interm.intermBlock);
+        (yyvsp[-1].interim.intermBlock)->setLine((yyloc));
+        (yyval.interim.intermBlock) = (yyvsp[-1].interim.intermBlock);
     }
 
     break;
@@ -4673,8 +4673,8 @@ yyreduce:
   case 265:
 
     {
-        (yyval.interm.intermBlock) = new TIntermBlock();
-        context->appendStatement((yyval.interm.intermBlock), (yyvsp[0].interm.intermNode));
+        (yyval.interim.intermBlock) = new TIntermBlock();
+        context->appendStatement((yyval.interim.intermBlock), (yyvsp[0].interim.intermNode));
     }
 
     break;
@@ -4682,28 +4682,28 @@ yyreduce:
   case 266:
 
     {
-        (yyval.interm.intermBlock) = (yyvsp[-1].interm.intermBlock);
-        context->appendStatement((yyval.interm.intermBlock), (yyvsp[0].interm.intermNode));
+        (yyval.interim.intermBlock) = (yyvsp[-1].interim.intermBlock);
+        context->appendStatement((yyval.interim.intermBlock), (yyvsp[0].interim.intermNode));
     }
 
     break;
 
   case 267:
 
-    { (yyval.interm.intermNode) = context->addEmptyStatement((yyloc)); }
+    { (yyval.interim.intermNode) = context->addEmptyStatement((yyloc)); }
 
     break;
 
   case 268:
 
-    { (yyval.interm.intermNode) = (yyvsp[-1].interm.intermTypedNode); }
+    { (yyval.interim.intermNode) = (yyvsp[-1].interim.intermTypedNode); }
 
     break;
 
   case 269:
 
     {
-        (yyval.interm.intermNode) = context->addIfElse((yyvsp[-2].interm.intermTypedNode), (yyvsp[0].interm.nodePair), (yylsp[-4]));
+        (yyval.interim.intermNode) = context->addIfElse((yyvsp[-2].interim.intermTypedNode), (yyvsp[0].interim.nodePair), (yylsp[-4]));
     }
 
     break;
@@ -4711,8 +4711,8 @@ yyreduce:
   case 270:
 
     {
-        (yyval.interm.nodePair).node1 = (yyvsp[-2].interm.intermNode);
-        (yyval.interm.nodePair).node2 = (yyvsp[0].interm.intermNode);
+        (yyval.interim.nodePair).node1 = (yyvsp[-2].interim.intermNode);
+        (yyval.interim.nodePair).node2 = (yyvsp[0].interim.intermNode);
     }
 
     break;
@@ -4720,8 +4720,8 @@ yyreduce:
   case 271:
 
     {
-        (yyval.interm.nodePair).node1 = (yyvsp[0].interm.intermNode);
-        (yyval.interm.nodePair).node2 = nullptr;
+        (yyval.interim.nodePair).node1 = (yyvsp[0].interim.intermNode);
+        (yyval.interim.nodePair).node2 = nullptr;
     }
 
     break;
@@ -4735,7 +4735,7 @@ yyreduce:
   case 273:
 
     {
-        (yyval.interm.intermSwitch) = context->addSwitch((yyvsp[-3].interm.intermTypedNode), (yyvsp[0].interm.intermBlock), (yylsp[-5]));
+        (yyval.interim.intermSwitch) = context->addSwitch((yyvsp[-3].interim.intermTypedNode), (yyvsp[0].interim.intermBlock), (yylsp[-5]));
         context->decrSwitchNestingLevel();
     }
 
@@ -4744,7 +4744,7 @@ yyreduce:
   case 274:
 
     {
-        (yyval.interm.intermCase) = context->addCase((yyvsp[-1].interm.intermTypedNode), (yylsp[-2]));
+        (yyval.interim.intermCase) = context->addCase((yyvsp[-1].interim.intermTypedNode), (yylsp[-2]));
     }
 
     break;
@@ -4752,7 +4752,7 @@ yyreduce:
   case 275:
 
     {
-        (yyval.interm.intermCase) = context->addDefault((yylsp[-1]));
+        (yyval.interim.intermCase) = context->addDefault((yylsp[-1]));
     }
 
     break;
@@ -4760,8 +4760,8 @@ yyreduce:
   case 276:
 
     {
-        (yyval.interm.intermNode) = (yyvsp[0].interm.intermTypedNode);
-        context->checkIsScalarBool((yyvsp[0].interm.intermTypedNode)->getLine(), (yyvsp[0].interm.intermTypedNode));
+        (yyval.interim.intermNode) = (yyvsp[0].interim.intermTypedNode);
+        context->checkIsScalarBool((yyvsp[0].interim.intermTypedNode)->getLine(), (yyvsp[0].interim.intermTypedNode));
     }
 
     break;
@@ -4769,7 +4769,7 @@ yyreduce:
   case 277:
 
     {
-        (yyval.interm.intermNode) = context->addConditionInitializer((yyvsp[-3].interm.type), ImmutableString((yyvsp[-2].lex).string), (yyvsp[0].interm.intermTypedNode), (yylsp[-2]));
+        (yyval.interim.intermNode) = context->addConditionInitializer((yyvsp[-3].interim.type), ImmutableString((yyvsp[-2].lex).string), (yyvsp[0].interim.intermTypedNode), (yylsp[-2]));
     }
 
     break;
@@ -4784,7 +4784,7 @@ yyreduce:
 
     {
         context->symbolTable.pop();
-        (yyval.interm.intermNode) = context->addLoop(ELoopWhile, 0, (yyvsp[-2].interm.intermNode), 0, (yyvsp[0].interm.intermNode), (yylsp[-5]));
+        (yyval.interim.intermNode) = context->addLoop(ELoopWhile, 0, (yyvsp[-2].interim.intermNode), 0, (yyvsp[0].interim.intermNode), (yylsp[-5]));
         context->decrLoopNestingLevel();
     }
 
@@ -4799,7 +4799,7 @@ yyreduce:
   case 281:
 
     {
-        (yyval.interm.intermNode) = context->addLoop(ELoopDoWhile, 0, (yyvsp[-2].interm.intermTypedNode), 0, (yyvsp[-5].interm.intermNode), (yylsp[-4]));
+        (yyval.interim.intermNode) = context->addLoop(ELoopDoWhile, 0, (yyvsp[-2].interim.intermTypedNode), 0, (yyvsp[-5].interim.intermNode), (yylsp[-4]));
         context->decrLoopNestingLevel();
     }
 
@@ -4815,7 +4815,7 @@ yyreduce:
 
     {
         context->symbolTable.pop();
-        (yyval.interm.intermNode) = context->addLoop(ELoopFor, (yyvsp[-3].interm.intermNode), (yyvsp[-2].interm.nodePair).node1, reinterpret_cast<TIntermTyped*>((yyvsp[-2].interm.nodePair).node2), (yyvsp[0].interm.intermNode), (yylsp[-6]));
+        (yyval.interim.intermNode) = context->addLoop(ELoopFor, (yyvsp[-3].interim.intermNode), (yyvsp[-2].interim.nodePair).node1, reinterpret_cast<TIntermTyped*>((yyvsp[-2].interim.nodePair).node2), (yyvsp[0].interim.intermNode), (yylsp[-6]));
         context->decrLoopNestingLevel();
     }
 
@@ -4824,7 +4824,7 @@ yyreduce:
   case 284:
 
     {
-        (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode);
+        (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode);
     }
 
     break;
@@ -4832,7 +4832,7 @@ yyreduce:
   case 285:
 
     {
-        (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode);
+        (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode);
     }
 
     break;
@@ -4840,7 +4840,7 @@ yyreduce:
   case 286:
 
     {
-        (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode);
+        (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode);
     }
 
     break;
@@ -4848,7 +4848,7 @@ yyreduce:
   case 287:
 
     {
-        (yyval.interm.intermNode) = nullptr;
+        (yyval.interim.intermNode) = nullptr;
     }
 
     break;
@@ -4856,8 +4856,8 @@ yyreduce:
   case 288:
 
     {
-        (yyval.interm.nodePair).node1 = (yyvsp[-1].interm.intermNode);
-        (yyval.interm.nodePair).node2 = 0;
+        (yyval.interim.nodePair).node1 = (yyvsp[-1].interim.intermNode);
+        (yyval.interim.nodePair).node2 = 0;
     }
 
     break;
@@ -4865,8 +4865,8 @@ yyreduce:
   case 289:
 
     {
-        (yyval.interm.nodePair).node1 = (yyvsp[-2].interm.intermNode);
-        (yyval.interm.nodePair).node2 = (yyvsp[0].interm.intermTypedNode);
+        (yyval.interim.nodePair).node1 = (yyvsp[-2].interim.intermNode);
+        (yyval.interim.nodePair).node2 = (yyvsp[0].interim.intermTypedNode);
     }
 
     break;
@@ -4874,7 +4874,7 @@ yyreduce:
   case 290:
 
     {
-        (yyval.interm.intermNode) = context->addBranch(EOpContinue, (yylsp[-1]));
+        (yyval.interim.intermNode) = context->addBranch(EOpContinue, (yylsp[-1]));
     }
 
     break;
@@ -4882,7 +4882,7 @@ yyreduce:
   case 291:
 
     {
-        (yyval.interm.intermNode) = context->addBranch(EOpBreak, (yylsp[-1]));
+        (yyval.interim.intermNode) = context->addBranch(EOpBreak, (yylsp[-1]));
     }
 
     break;
@@ -4890,7 +4890,7 @@ yyreduce:
   case 292:
 
     {
-        (yyval.interm.intermNode) = context->addBranch(EOpReturn, (yylsp[-1]));
+        (yyval.interim.intermNode) = context->addBranch(EOpReturn, (yylsp[-1]));
     }
 
     break;
@@ -4898,7 +4898,7 @@ yyreduce:
   case 293:
 
     {
-        (yyval.interm.intermNode) = context->addBranch(EOpReturn, (yyvsp[-1].interm.intermTypedNode), (yylsp[-2]));
+        (yyval.interim.intermNode) = context->addBranch(EOpReturn, (yyvsp[-1].interim.intermTypedNode), (yylsp[-2]));
     }
 
     break;
@@ -4906,7 +4906,7 @@ yyreduce:
   case 294:
 
     {
-        (yyval.interm.intermNode) = context->addBranch(EOpKill, (yylsp[-1]));
+        (yyval.interim.intermNode) = context->addBranch(EOpKill, (yylsp[-1]));
     }
 
     break;
@@ -4914,10 +4914,10 @@ yyreduce:
   case 295:
 
     {
-        (yyval.interm.intermBlock) = new TIntermBlock();
-        (yyval.interm.intermBlock)->setLine((yyloc));
-        (yyval.interm.intermBlock)->appendStatement((yyvsp[0].interm.intermNode));
-        context->setTreeRoot((yyval.interm.intermBlock));
+        (yyval.interim.intermBlock) = new TIntermBlock();
+        (yyval.interim.intermBlock)->setLine((yyloc));
+        (yyval.interim.intermBlock)->appendStatement((yyvsp[0].interim.intermNode));
+        context->setTreeRoot((yyval.interim.intermBlock));
     }
 
     break;
@@ -4925,7 +4925,7 @@ yyreduce:
   case 296:
 
     {
-        (yyval.interm.intermBlock)->appendStatement((yyvsp[0].interm.intermNode));
+        (yyval.interim.intermBlock)->appendStatement((yyvsp[0].interim.intermNode));
     }
 
     break;
@@ -4933,7 +4933,7 @@ yyreduce:
   case 297:
 
     {
-        (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode);
+        (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode);
     }
 
     break;
@@ -4941,7 +4941,7 @@ yyreduce:
   case 298:
 
     {
-        (yyval.interm.intermNode) = (yyvsp[0].interm.intermNode);
+        (yyval.interim.intermNode) = (yyvsp[0].interim.intermNode);
     }
 
     break;
@@ -4949,7 +4949,7 @@ yyreduce:
   case 299:
 
     {
-        context->parseFunctionDefinitionHeader((yylsp[0]), (yyvsp[0].interm).function, &((yyvsp[0].interm).intermFunctionPrototype));
+        context->parseFunctionDefinitionHeader((yylsp[0]), (yyvsp[0].interim).function, &((yyvsp[0].interim).intermFunctionPrototype));
     }
 
     break;
@@ -4957,7 +4957,7 @@ yyreduce:
   case 300:
 
     {
-        (yyval.interm.intermNode) = context->addFunctionDefinition((yyvsp[-2].interm).intermFunctionPrototype, (yyvsp[0].interm.intermBlock), (yylsp[-2]));
+        (yyval.interim.intermNode) = context->addFunctionDefinition((yyvsp[-2].interim).intermFunctionPrototype, (yyvsp[0].interim.intermBlock), (yylsp[-2]));
     }
 
     break;

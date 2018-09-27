@@ -12,7 +12,7 @@
 
         video.src = getVideoURI("/media/counting");
         video.oncanplaythrough = t.step_func(startTest);
-        video.onseeked = t.step_func_done(seeked);
+        video.onseeked = t.step_func_done(sought);
 
         function startTest() {
             // Set the mode of the text track to "showing".
@@ -21,7 +21,7 @@
             video.currentTime = 1.5;
         }
 
-        function seeked() {
+        function sought() {
             // Set the mode of the text track to "hidden", then to "showing" again.
             testTrack.track.mode = "hidden";
             testTrack.track.mode = "showing";

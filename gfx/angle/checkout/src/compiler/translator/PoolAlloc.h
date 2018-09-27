@@ -66,7 +66,7 @@ class TAllocation
 
     void checkAllocList() const;
 
-    // Return total size needed to accomodate user buffer of 'size',
+    // Return total size needed to accommodate user buffer of 'size',
     // plus our tracking data.
     inline static size_t allocationSize(size_t size)
     {
@@ -232,8 +232,8 @@ class TPoolAllocator
     std::vector<std::vector<void *>> mStack;
 #endif
 
-    TPoolAllocator &operator=(const TPoolAllocator &);  // dont allow assignment operator
-    TPoolAllocator(const TPoolAllocator &);             // dont allow default copy constructor
+    TPoolAllocator &operator=(const TPoolAllocator &);  // don't allow assignment operator
+    TPoolAllocator(const TPoolAllocator &);             // don't allow default copy constructor
     bool mLocked;
 };
 

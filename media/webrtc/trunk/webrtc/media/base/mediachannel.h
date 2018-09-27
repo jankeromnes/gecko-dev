@@ -1091,7 +1091,7 @@ enum DataMessageType {
 // DataMediaChannel::SignalDataReceived and in all of the signals that
 // signal fires, on up the chain.
 struct ReceiveDataParams {
-  // The in-packet stream indentifier.
+  // The in-packet stream identifier.
   // RTP data channels use SSRCs, SCTP data channels use SIDs.
   union {
     uint32_t ssrc;
@@ -1108,7 +1108,7 @@ struct ReceiveDataParams {
 };
 
 struct SendDataParams {
-  // The in-packet stream indentifier.
+  // The in-packet stream identifier.
   // RTP data channels use SSRCs, SCTP data channels use SIDs.
   union {
     uint32_t ssrc;

@@ -290,7 +290,7 @@ public:
 
   // We achieve measurable reduction in locking contention in parallel CSS
   // parsing by increasing the number of subtables up to 128. This has been
-  // measured to have neglible impact on the performance of initialization, GC,
+  // measured to have negligible impact on the performance of initialization, GC,
   // and shutdown.
   //
   // Another important consideration is memory, since we're adding fixed

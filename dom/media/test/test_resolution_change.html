@@ -25,7 +25,7 @@ function resize(e) {
 
 function ended(e)  {
   var v = e.target;
-  ok(v.seenResolutionChange, v.token + ": A resolution change should have ocurred by the end of playback");
+  ok(v.seenResolutionChange, v.token + ": A resolution change should have occurred by the end of playback");
   removeNodeAndSource(v);
   manager.finished(v.token);
 }

@@ -31,9 +31,9 @@ public:
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(DOMRectReadOnly)
 
-  explicit DOMRectReadOnly(nsISupports* aParent, double aX = 0, double aY = 0,
+  explicit DOMRectReadOnly(nsISupports* apparent, double aX = 0, double aY = 0,
                            double aWidth = 0, double aHeight = 0)
-    : mParent(aParent)
+    : mParent(apparent)
     , mX(aX)
     , mY(aY)
     , mWidth(aWidth)
@@ -99,9 +99,9 @@ protected:
 class DOMRect final : public DOMRectReadOnly
 {
 public:
-  explicit DOMRect(nsISupports* aParent, double aX = 0, double aY = 0,
+  explicit DOMRect(nsISupports* apparent, double aX = 0, double aY = 0,
                    double aWidth = 0, double aHeight = 0)
-    : DOMRectReadOnly(aParent, aX, aY, aWidth, aHeight)
+    : DOMRectReadOnly(apparent, aX, aY, aWidth, aHeight)
   {
   }
 
@@ -150,7 +150,7 @@ class DOMRectList final : public nsISupports,
   ~DOMRectList() {}
 
 public:
-  explicit DOMRectList(nsISupports *aParent) : mParent(aParent)
+  explicit DOMRectList(nsISupports *apparent) : mParent(apparent)
   {
   }
 

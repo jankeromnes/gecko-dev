@@ -22,7 +22,7 @@ public:
   NS_DECL_ABSTRACT_FRAME(nsSplittableFrame)
 
   void Init(nsIContent*       aContent,
-            nsContainerFrame* aParent,
+            nsContainerFrame* apparent,
             nsIFrame*         aPrevInFlow) override;
 
   nsSplittableType GetSplittableType() const override;

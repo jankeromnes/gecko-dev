@@ -401,7 +401,7 @@ typedef BaseTimeDuration<TimeDurationValueCalculator> TimeDuration;
  * This class is similar to C++11's time_point, however it is
  * explicitly nullable and provides an IsNull() method. time_point
  * is initialized to the clock's epoch and provides a
- * time_since_epoch() method that functions similiarly. i.e.
+ * time_since_epoch() method that functions similarly. i.e.
  * t.IsNull() is equivalent to t.time_since_epoch() == decltype(t)::duration::zero();
  *
  * Note that, since TimeStamp objects are small, prefer to pass them by value

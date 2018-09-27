@@ -214,10 +214,10 @@ BuildClonedMessageData(M* aManager, StructuredCloneData& aData,
 
 bool
 StructuredCloneData::BuildClonedMessageDataForParent(
-  nsIContentParent* aParent,
+  nsIContentParent* apparent,
   ClonedMessageData& aClonedData)
 {
-  return BuildClonedMessageData(aParent, *this, aClonedData);
+  return BuildClonedMessageData(apparent, *this, aClonedData);
 }
 
 bool
@@ -230,10 +230,10 @@ StructuredCloneData::BuildClonedMessageDataForChild(
 
 bool
 StructuredCloneData::BuildClonedMessageDataForBackgroundParent(
-  PBackgroundParent* aParent,
+  PBackgroundParent* apparent,
   ClonedMessageData& aClonedData)
 {
-  return BuildClonedMessageData(aParent, *this, aClonedData);
+  return BuildClonedMessageData(apparent, *this, aClonedData);
 }
 
 bool

@@ -35,7 +35,7 @@ struct MaiUtilListenerInfo
   gint key;
   guint signal_id;
   gulong hook_id;
-  // For window create/destory/minimize/maximize/restore/activate/deactivate
+  // For window create/destroy/minimize/maximize/restore/activate/deactivate
   // events, we'll chain gail_util's add/remove_global_event_listener.
   // So we store the listenerid returned by gail's add_global_event_listener
   // in this structure to call gail's remove_global_event_listener later.

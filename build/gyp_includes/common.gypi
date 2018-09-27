@@ -438,7 +438,7 @@
 
         # We always use skia text rendering in Aura on Windows, since GDI
         # doesn't agree with our BackingStore.
-        # TODO(beng): remove once skia text rendering is on by default.
+        # TODO(being): remove once skia text rendering is on by default.
         ['use_aura==1 and OS=="win"', {
           'enable_skia_text%': 1,
         }],
@@ -548,7 +548,7 @@
         }],
 
         ['chromeos==1', {
-          # When building for ChromeOS we dont want Chromium to use libjpeg_turbo.
+          # When building for ChromeOS we don't want Chromium to use libjpeg_turbo.
           'use_libjpeg_turbo%': 0,
         }],
 

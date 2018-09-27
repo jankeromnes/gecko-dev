@@ -705,7 +705,7 @@ public:
 
   const nsID& DefaultInterface() override { return NS_GET_IID(nsIFile); }
 
-  nsresult Init(nsIFile* aParent)
+  nsresult Init(nsIFile* apparent)
   {
     nsAutoString filepath;
     aParent->GetTarget(filepath);
@@ -725,7 +725,7 @@ public:
       return rv;
     }
 
-    mParent = aParent;
+    mParent = apparent;
     return NS_OK;
   }
 
@@ -2700,18 +2700,18 @@ nsLocalFile::GetDiskSpaceAvailable(int64_t* aDiskSpaceAvailable)
 }
 
 NS_IMETHODIMP
-nsLocalFile::GetParent(nsIFile** aParent)
+nsLocalFile::GetParent(nsIFile** apparent)
 {
   // Check we are correctly initialized.
   CHECK_mWorkingPath();
 
-  if (NS_WARN_IF(!aParent)) {
+  if (NS_WARN_IF(!apparent)) {
     return NS_ERROR_INVALID_ARG;
   }
 
   // A two-character path must be a drive such as C:, so it has no parent
   if (mWorkingPath.Length() == 2) {
-    *aParent = nullptr;
+    *apparent = nullptr;
     return NS_OK;
   }
 
@@ -2726,7 +2726,7 @@ nsLocalFile::GetParent(nsIFile** aParent)
 
   // A path of the form \\NAME is a top-level path and has no parent
   if (offset == 1 && mWorkingPath[0] == L'\\') {
-    *aParent = nullptr;
+    *apparent = nullptr;
     return NS_OK;
   }
 
@@ -2746,7 +2746,7 @@ nsLocalFile::GetParent(nsIFile** aParent)
     return rv;
   }
 
-  localFile.forget(aParent);
+  localFile.forget(apparent);
   return NS_OK;
 }
 

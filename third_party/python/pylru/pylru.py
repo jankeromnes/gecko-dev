@@ -133,7 +133,7 @@ class lrucache(object):
         # end of the list. Thus, in either case, by chooseing the node at the
         # tail of the list our conditions are satisfied.
 
-        # Since the list is circular, the tail node directly preceeds the
+        # Since the list is circular, the tail node directly precedes the
         # 'head' node.
         node = self.head.prev
 
@@ -153,7 +153,7 @@ class lrucache(object):
         self.table[key] = node
 
         # We need to move the node to the head of the list. The node is the
-        # tail node, so it directly preceeds the head node due to the list
+        # tail node, so it directly precedes the head node due to the list
         # being circular. Therefore, the ordering is already correct, we just
         # need to adjust the 'head' variable.
         self.head = node
@@ -173,7 +173,7 @@ class lrucache(object):
 
         # Because this node is now empty we want to reuse it before any
         # non-empty node. To do that we want to move it to the tail of the
-        # list. We move it so that it directly preceeds the 'head' node. This
+        # list. We move it so that it directly precedes the 'head' node. This
         # makes it the tail node. The 'head' is then adjusted. This
         # adjustment ensures correctness even for the case where the 'node'
         # is the 'head' node.

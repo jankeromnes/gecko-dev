@@ -52,7 +52,7 @@ version: 2.6.0
         
         propertyCache[property] = converted;
         return converted;
-        //return property.replace(/-([a-z])/gi, function(m0, m1) {return m1.toUpperCase()}) // cant use function as 2nd arg yet due to safari bug
+        //return property.replace(/-([a-z])/gi, function(m0, m1) {return m1.toUpperCase()}) // can't use function as 2nd arg yet due to safari bug
     };
     
     var getClassRegEx = function(className) {
@@ -115,7 +115,7 @@ version: 2.6.0
                         el.style.filter = 'alpha(opacity=' + val * 100 + ')';
                         
                         if (!el.currentStyle || !el.currentStyle.hasLayout) {
-                            el.style.zoom = 1; // when no layout or cant tell
+                            el.style.zoom = 1; // when no layout or can't tell
                         }
                     }
                     break;
@@ -1216,7 +1216,7 @@ YAHOO.util.Region.getRegion = function(el) {
  */
 YAHOO.util.Point = function(x, y) {
    if (YAHOO.lang.isArray(x)) { // accept input from Dom.getXY, Event.getXY, etc.
-      y = x[1]; // dont blow away x yet
+      y = x[1]; // don't blow away x yet
       x = x[0];
    }
    

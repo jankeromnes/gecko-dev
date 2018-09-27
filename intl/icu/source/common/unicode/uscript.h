@@ -70,7 +70,7 @@ typedef enum UScriptCode {
       /** @stable ICU 2.2 */
       USCRIPT_ARMENIAN     =  3,  /* Armn */
       /** @stable ICU 2.2 */
-      USCRIPT_BENGALI      =  4,  /* Beng */
+      USCRIPT_BENGALI      =  4,  /* Being */
       /** @stable ICU 2.2 */
       USCRIPT_BOPOMOFO     =  5,  /* Bopo */
       /** @stable ICU 2.2 */

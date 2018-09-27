@@ -146,10 +146,10 @@ public:
         MOZ_ASSERT(NS_IsMainThread());
     }
 
-    void Init(PluginModuleChromeParent* aParent)
+    void Init(PluginModuleChromeParent* apparent)
     {
-        MOZ_ASSERT(aParent);
-        mParent = aParent;
+        MOZ_ASSERT(apparent);
+        mParent = apparent;
     }
 
     void PostToMainThread()

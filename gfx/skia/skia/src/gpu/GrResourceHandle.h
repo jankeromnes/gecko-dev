@@ -29,7 +29,7 @@ private:
     int fValue;
 };
 
-// Creates a type "name", which is a specfic template instantiation of GrResourceHandle.
+// Creates a type "name", which is a specific template instantiation of GrResourceHandle.
 #define GR_DEFINE_RESOURCE_HANDLE_CLASS(name) \
     struct name##Kind {};  \
     using name = GrResourceHandle<name##Kind>;

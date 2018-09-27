@@ -48,7 +48,7 @@ class FontSize extends PureComponent {
         break;
     }
 
-    // Allow the upper bound to increase so it accomodates the out-of-bounds value.
+    // Allow the upper bound to increase so it accommodates the out-of-bounds value.
     max = Math.max(max, value);
     // Ensure we store the max value ever reached for this unit type. This will be the
     // max value of the input and slider. Without this memoization, the value and slider

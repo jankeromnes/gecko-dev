@@ -238,11 +238,11 @@ ContainsHoistedDeclaration(JSContext* cx, ParseNode* node, bool* result)
       case ParseNodeKind::For: {
         ForNode* forNode = &node->as<ForNode>();
         TernaryNode* loopHead = forNode->head();
-        MOZ_ASSERT(loopHead->isKind(ParseNodeKind::ForHead) ||
+        MOZ_ASSERT(loopHead->isKind(ParseNodeKind::forehead) ||
                    loopHead->isKind(ParseNodeKind::ForIn) ||
                    loopHead->isKind(ParseNodeKind::ForOf));
 
-        if (loopHead->isKind(ParseNodeKind::ForHead)) {
+        if (loopHead->isKind(ParseNodeKind::forehead)) {
             // for (init?; cond?; update?), with only init possibly containing
             // a hoisted declaration.  (Note: a lexical-declaration |init| is
             // (at present) hoisted in SpiderMonkey parlance -- but such
@@ -384,7 +384,7 @@ ContainsHoistedDeclaration(JSContext* cx, ParseNode* node, bool* result)
       case ParseNodeKind::Catch:
       case ParseNodeKind::ForIn:
       case ParseNodeKind::ForOf:
-      case ParseNodeKind::ForHead:
+      case ParseNodeKind::forehead:
       case ParseNodeKind::ClassMethod:
       case ParseNodeKind::ClassMethodList:
       case ParseNodeKind::ClassNames:
@@ -1534,7 +1534,7 @@ FoldForInOrOf(JSContext* cx, TernaryNode* node, PerHandlerParser<FullParseHandle
 static bool
 FoldForHead(JSContext* cx, TernaryNode* node, PerHandlerParser<FullParseHandler>& parser)
 {
-    MOZ_ASSERT(node->isKind(ParseNodeKind::ForHead));
+    MOZ_ASSERT(node->isKind(ParseNodeKind::forehead));
 
     ParseNode** init = node->unsafeKid1Reference();
     if (*init) {
@@ -1902,7 +1902,7 @@ Fold(JSContext* cx, ParseNode** pnp, PerHandlerParser<FullParseHandler>& parser)
       case ParseNodeKind::ForOf:
         return FoldForInOrOf(cx, &pn->as<TernaryNode>(), parser);
 
-      case ParseNodeKind::ForHead:
+      case ParseNodeKind::forehead:
         return FoldForHead(cx, &pn->as<TernaryNode>(), parser);
 
       case ParseNodeKind::Label:

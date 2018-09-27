@@ -19,7 +19,7 @@ function geoHandler(metadata, response)
   response.processAsync();
   response.setStatusLine("1.0", 200, "OK");
   response.setHeader("Cache-Control", "no-cache", false);
-  response.setHeader("Content-Type", "aplication/x-javascript", false);
+  response.setHeader("Content-Type", "application/x-javascript", false);
   do_timeout(5000, function() {
     response.write(position);
     response.finish();

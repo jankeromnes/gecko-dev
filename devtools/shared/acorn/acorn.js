@@ -74,7 +74,7 @@ pp.checkPropClash = function (prop, propHash) {
 // the AST node that the inner parser gave them in another node.
 
 // Parse a full expression. The optional arguments are used to
-// forbid the `in` operator (in for loops initalization expressions)
+// forbid the `in` operator (in for loops initialization expressions)
 // and provide reference for storing '=' operator inside shorthand
 // property assignment in contexts where both object expression
 // and object pattern might appear (so it's possible to raise

@@ -710,7 +710,7 @@ FC_GetSessionInfo(CK_SESSION_HANDLE hSession,
 
     rv = NSC_GetSessionInfo(hSession, pInfo);
     if (rv == CKR_OK) {
-        /* handle the case where the auxilary slot doesn't require login.
+        /* handle the case where the auxiliary slot doesn't require login.
          * piggy back on the main token's login state */
         if (isLoggedIn &&
             ((pInfo->state == CKS_RO_PUBLIC_SESSION) ||
@@ -929,7 +929,7 @@ CK_RV
 FC_FindObjectsInit(CK_SESSION_HANDLE hSession,
                    CK_ATTRIBUTE_PTR pTemplate, CK_ULONG usCount)
 {
-    /* let publically readable object be found */
+    /* let publicly readable object be found */
     unsigned int i;
     CK_RV rv;
     PRBool needLogin = PR_FALSE;
@@ -971,7 +971,7 @@ FC_FindObjects(CK_SESSION_HANDLE hSession,
 {
     CHECK_FORK();
 
-    /* let publically readable object be found */
+    /* let publicly readable object be found */
     SFTK_FIPSFATALCHECK();
     return NSC_FindObjects(hSession, phObject, usMaxObjectCount,
                            pusObjectCount);
@@ -1582,7 +1582,7 @@ FC_SetOperationState(CK_SESSION_HANDLE hSession,
 CK_RV
 FC_FindObjectsFinal(CK_SESSION_HANDLE hSession)
 {
-    /* let publically readable object be found */
+    /* let publicly readable object be found */
     SFTK_FIPSFATALCHECK();
     CHECK_FORK();
 

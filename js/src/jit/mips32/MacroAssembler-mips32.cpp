@@ -511,7 +511,7 @@ MacroAssemblerMIPS::ma_bal(Label* label, DelaySlotFill delaySlotFill)
     // Second word holds a pointer to the next branch in label's chain.
     uint32_t nextInChain = label->used() ? label->offset() : LabelBase::INVALID_OFFSET;
 
-    // Make the whole branch continous in the buffer.
+    // Make the whole branch continuous in the buffer.
     m_buffer.ensureSpace(4 * sizeof(uint32_t));
 
     spew("bal .Llabel %p\n", label);
@@ -583,7 +583,7 @@ MacroAssemblerMIPS::branchWithCode(InstImm code, Label* label, JumpKind jumpKind
     uint32_t nextInChain = label->used() ? label->offset() : LabelBase::INVALID_OFFSET;
 
     if (jumpKind == ShortJump) {
-        // Make the whole branch continous in the buffer.
+        // Make the whole branch continuous in the buffer.
         m_buffer.ensureSpace(2 * sizeof(uint32_t));
 
         // Indicate that this is short jump with offset 4.
@@ -601,7 +601,7 @@ MacroAssemblerMIPS::branchWithCode(InstImm code, Label* label, JumpKind jumpKind
 
     bool conditional = code.encode() != inst_beq.encode();
 
-    // Make the whole branch continous in the buffer.
+    // Make the whole branch continuous in the buffer.
     m_buffer.ensureSpace((conditional ? 5 : 4) * sizeof(uint32_t));
 
 #ifdef JS_JITSPEW

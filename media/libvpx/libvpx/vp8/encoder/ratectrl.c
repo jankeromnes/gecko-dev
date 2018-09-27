@@ -357,7 +357,7 @@ static void calc_iframe_target_size(VP8_COMP *cpi) {
 
   cpi->this_frame_target = (int)target;
 
-  /* TODO: if we separate rate targeting from Q targetting, move this.
+  /* TODO: if we separate rate targeting from Q targeting, move this.
    * Reset the active worst quality to the baseline value for key frames.
    */
   if (cpi->pass != 2) cpi->active_worst_quality = cpi->worst_quality;
@@ -383,7 +383,7 @@ static void calc_gf_params(VP8_COMP *cpi) {
       (cpi->oxcf.fixed_q < 0) ? cpi->last_q[INTER_FRAME] : cpi->oxcf.fixed_q;
   int Boost = 0;
 
-  int gf_frame_useage = 0; /* Golden frame useage since last GF */
+  int gf_frame_useage = 0; /* Golden frame usage since last GF */
   int tot_mbs = cpi->recent_ref_frame_usage[INTRA_FRAME] +
                 cpi->recent_ref_frame_usage[LAST_FRAME] +
                 cpi->recent_ref_frame_usage[GOLDEN_FRAME] +
@@ -462,7 +462,7 @@ static void calc_gf_params(VP8_COMP *cpi) {
       /* Adjust boost based upon ambient Q */
       Boost = GFQ_ADJUSTMENT;
 
-      /* Adjust based upon most recently measure intra useage */
+      /* Adjust based upon most recently measure intra usage */
       Boost = Boost *
               gf_intra_usage_adjustment[(cpi->this_frame_percent_intra < 15)
                                             ? cpi->this_frame_percent_intra
@@ -836,7 +836,7 @@ static void calc_pframe_target_size(VP8_COMP *cpi) {
 
   /* Test to see if we have to drop a frame
    * The auto-drop frame code is only used in buffered mode.
-   * In unbufferd mode (eg vide conferencing) the descision to
+   * In unbufferd mode (eg vide conferencing) the decision to
    * code or drop a frame is made outside the codec in response to real
    * world comms or buffer considerations.
    */
@@ -887,7 +887,7 @@ static void calc_pframe_target_size(VP8_COMP *cpi) {
       int Q = (cpi->oxcf.fixed_q < 0) ? cpi->last_q[INTER_FRAME]
                                       : cpi->oxcf.fixed_q;
 
-      int gf_frame_useage = 0; /* Golden frame useage since last GF */
+      int gf_frame_useage = 0; /* Golden frame usage since last GF */
       int tot_mbs = cpi->recent_ref_frame_usage[INTRA_FRAME] +
                     cpi->recent_ref_frame_usage[LAST_FRAME] +
                     cpi->recent_ref_frame_usage[GOLDEN_FRAME] +
@@ -906,14 +906,14 @@ static void calc_pframe_target_size(VP8_COMP *cpi) {
 
       /* Is a fixed manual GF frequency being used */
       if (cpi->auto_gold) {
-        /* For one pass throw a GF if recent frame intra useage is
-         * low or the GF useage is high
+        /* For one pass throw a GF if recent frame intra usage is
+         * low or the GF usage is high
          */
         if ((cpi->pass == 0) &&
             (cpi->this_frame_percent_intra < 15 || gf_frame_useage >= 5)) {
           cpi->common.refresh_golden_frame = 1;
 
-          /* Two pass GF descision */
+          /* Two pass GF decision */
         } else if (cpi->pass == 2) {
           cpi->common.refresh_golden_frame = 1;
         }
@@ -1242,7 +1242,7 @@ int vp8_regulate_q(VP8_COMP *cpi, int target_bits_per_frame) {
       /* Each incrment in the zbin is assumed to have a fixed effect
        * on bitrate. This is not of course true. The effect will be
        * highly clip dependent and may well have sudden steps. The
-       * idea here is to acheive higher effective quantizers than the
+       * idea here is to achieve higher effective quantizers than the
        * normal maximum by expanding the zero bin and hence
        * decreasing the number of low magnitude non zero coefficients.
        */

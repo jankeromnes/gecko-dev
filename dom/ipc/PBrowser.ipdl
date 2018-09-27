@@ -109,7 +109,7 @@ union OptionalShmem
   Shmem;
 };
 
-nested(upto inside_cpow) sync protocol PBrowser
+nested(up to inside_cpow) sync protocol PBrowser
 {
     manager PContent or PContentBridge;
 

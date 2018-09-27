@@ -62,7 +62,7 @@ Selector.prototype = {
     operators: {
         '=': function(attr, val) { return attr === val; }, // Equality
         '!=': function(attr, val) { return attr !== val; }, // Inequality
-        '~=': function(attr, val) { // Match one of space seperated words 
+        '~=': function(attr, val) { // Match one of space separated words 
             var s = ' ';
             return (s + attr + s).indexOf((s + val + s)) > -1;
         },

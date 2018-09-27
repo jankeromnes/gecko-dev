@@ -39,7 +39,7 @@
 // obviously have very different default settings. Consult the
 // documentation for your codec to see if it provides any default
 // configurations. All codecs provide a default configuration, number 0,
-// which is valid for material in the vacinity of QCIF/QVGA.
+// which is valid for material in the vicinity of QCIF/QVGA.
 //
 // Updating The Configuration
 // ---------------------------------

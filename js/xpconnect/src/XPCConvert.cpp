@@ -315,7 +315,7 @@ XPCConvert::NativeData2JS(MutableHandleValue d, const void* s,
             buffer[written] = 0;
 
             // JS_NewLatin1String takes ownership on success, i.e. a
-            // successful call will make it the responsiblity of the JS VM
+            // successful call will make it the responsibility of the JS VM
             // to free the buffer.
             // written can never exceed len, so the truncation is OK.
             JSString* str = JS_NewLatin1String(
@@ -359,7 +359,7 @@ XPCConvert::NativeData2JS(MutableHandleValue d, const void* s,
         buffer[written] = 0;
 
         // JS_NewUCStringDontDeflate takes ownership on success, i.e. a
-        // successful call will make it the responsiblity of the JS VM
+        // successful call will make it the responsibility of the JS VM
         // to free the buffer.
         JSString* str = JS_NewUCStringDontDeflate(cx, buffer, written);
         if (!str) {
@@ -1002,7 +1002,7 @@ XPCConvert::NativeInterface2JSObject(MutableHandleValue d,
     }
 
     // We used to have code here that unwrapped and simply exposed the
-    // underlying JSObject. That caused anomolies when JSComponents were
+    // underlying JSObject. That caused anomalies when JSComponents were
     // accessed from other JS code - they didn't act like other xpconnect
     // wrapped components. So, instead, we create "double wrapped" objects
     // (that means an XPCWrappedNative around an nsXPCWrappedJS). This isn't

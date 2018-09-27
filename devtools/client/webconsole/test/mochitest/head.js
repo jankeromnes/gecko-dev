@@ -609,7 +609,7 @@ async function closeConsole(tab = gBrowser.selectedTab) {
  * @param Object clickEventProps
  *        The custom properties which would be used to dispatch a click event
  * @returns Promise
- *          A Promise that is resolved when the link click simulation occured or
+ *          A Promise that is resolved when the link click simulation occurred or
  *          when the click is not dispatched.
  *          The promise resolves with an object that holds the following properties
  *          - link: url of the link or null(if event not fired)

@@ -25,7 +25,7 @@ class FontAxis extends PureComponent {
    * fine grained control based on range of values between min and max.
    *
    * @param  {Number} min
-   *         Minumum value for range.
+   *         Minimum value for range.
    * @param  {Number} max
    *         Maximum value for range.
    * @return {Number}

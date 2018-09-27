@@ -2513,12 +2513,12 @@ class StaticAnalysis(MachCommandBase):
                 print(output)
             return 0
         except CalledProcessError as e:
-            # Something wrong happend
-            print("clang-format: An error occured while running clang-format-diff.")
+            # Something wrong happened
+            print("clang-format: An error occurred while running clang-format-diff.")
             return e.returncode
 
     def _is_ignored_path(self, ignored_dir_re, f):
-        # Remove upto topsrcdir in pathname and match
+        # Remove up to topsrcdir in pathname and match
         if f.startswith(self.topsrcdir + '/'):
             match_f = f[len(self.topsrcdir + '/'):]
         else:
@@ -2584,8 +2584,8 @@ class StaticAnalysis(MachCommandBase):
             try:
                 check_output(args + l)
             except CalledProcessError as e:
-                # Something wrong happend
-                print("clang-format: An error occured while running clang-format.")
+                # Something wrong happened
+                print("clang-format: An error occurred while running clang-format.")
                 return e.returncode
 
         if show:
@@ -2599,7 +2599,7 @@ class StaticAnalysis(MachCommandBase):
                 output = check_output(diff_command)
                 print(output)
             except CalledProcessError as e:
-                # Something wrong happend
+                # Something wrong happened
                 print("clang-format: Unable to run the diff command.")
                 return e.returncode
         return 0

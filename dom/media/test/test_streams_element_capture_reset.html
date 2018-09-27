@@ -27,7 +27,7 @@ function dumpEvent(event) {
        " readyState=" + v.readyState);
 }
 
-var events = ["timeupdate", "seeking", "seeked", "ended", "playing", "pause"];
+var events = ["timeupdate", "seeking", "sought", "ended", "playing", "pause"];
 for (var i = 0; i < events.length; ++i) {
   v.addEventListener(events[i], dumpEvent);
 }
@@ -62,11 +62,11 @@ function startTest(test) {
     v.play();
   };
 
-  function seeked() {
+  function sought() {
     isGreaterThanOrEqualEps(v.currentTime, seekTime, "Finished seeking");
     isGreaterThanOrEqualEps(vout.currentTime, test.duration,
                 "checking vout.currentTime has not changed after seeking");
-    v.removeEventListener("seeked", seeked);
+    v.removeEventListener("sought", sought);
     function dontPlayAgain() {
       ok(false, "vout_untilended should not play again");
     }
@@ -93,7 +93,7 @@ function startTest(test) {
 
     v.pause();
     v.currentTime = seekTime;
-    v.addEventListener("seeked", seeked);
+    v.addEventListener("sought", sought);
   };
 
   v.addEventListener("ended", ended);

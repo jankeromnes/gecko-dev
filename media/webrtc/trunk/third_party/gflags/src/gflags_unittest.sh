@@ -211,8 +211,8 @@ Expect $LINENO 0 "gflags_unittest" "gflags_unittest.cc" \
   --tryfromenv=version
 Expect $LINENO 0 "PASS" "" --fromenv=help
 Expect $LINENO 0 "PASS" "" --tryfromenv=help
-Expect $LINENO 1 "helpfull not found in environment" "" --fromenv=helpfull
-Expect $LINENO 0 "PASS" "" --tryfromenv=helpfull
+Expect $LINENO 1 "helpful not found in environment" "" --fromenv=helpful
+Expect $LINENO 0 "PASS" "" --tryfromenv=helpful
 Expect $LINENO 0 "PASS" "" --tryfromenv=undefok --foo
 Expect $LINENO 1 "unknown command line flag" "" --tryfromenv=weirdo
 Expect $LINENO 0 "gflags_unittest" "gflags_unittest.cc" \

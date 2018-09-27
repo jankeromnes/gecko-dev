@@ -752,7 +752,7 @@ NS_IMPL_CYCLE_COLLECTING_RELEASE_WITH_LAST_RELEASE(XPCWrappedNative, Destroy())
  *    mJSObject we set it's parent to be mFlatJSObject. This way we know that
  *    when mFlatJSObject get's collected there are no outstanding reachable
  *    tearoff mJSObjects. Note that we must clear the private of any lingering
- *    mJSObjects at this point because we have no guarentee of the *order* of
+ *    mJSObjects at this point because we have no guarantee of the *order* of
  *    finalization within a given gc cycle.
  */
 

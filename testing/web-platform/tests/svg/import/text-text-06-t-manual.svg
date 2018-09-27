@@ -76,14 +76,14 @@
   <g id="test-body-content" font-family="SVGFreeSansASCII,sans-serif" font-size="18">
     <style type="text/css">
   @font-face {
-    font-family: embeded;
+    font-family: embedded;
     src: url(woffs/embeded-text-text-06.woff) format("woff");
     }
   </style>
     <g font-size="10">
       <defs>
-        <font id="embeded" horiz-adv-x="224">
-          <font-face font-family="embeded" units-per-em="1000" panose-1="0 0 0 0 0 0 0 0 0 0" ascent="917" descent="-250" alphabetic="0"/>
+        <font id="embedded" horiz-adv-x="224">
+          <font-face font-family="embedded" units-per-em="1000" panose-1="0 0 0 0 0 0 0 0 0 0" ascent="917" descent="-250" alphabetic="0"/>
           <missing-glyph horiz-adv-x="800" d="M50 0V800H750V0H50ZM700 50V750H100V50H700Z"/>
           <glyph unicode="1" glyph-name="gl_1" horiz-adv-x="1500" d="M 0 0 L 250 0 L 250 250 L 0 250 Z"/>
           <glyph unicode="2" glyph-name="gl_2" horiz-adv-x="1500" d="M 0 0 L 500 0 L 500 500 L 0 500 Z"/>
@@ -114,7 +114,7 @@
           <use xlink:href="#marker" x="70" fill="#8888ff"/>
           <use xlink:href="#marker" x="100" fill="#8888ff"/>
           <use xlink:href="#marker" x="130" fill="#8888ff"/>
-          <text x="10 180 40 70 100 130" y="0" font-family="embeded">fi1234</text>
+          <text x="10 180 40 70 100 130" y="0" font-family="embedded">fi1234</text>
         </g>
 
         <g transform="translate(100, 80)">
@@ -124,7 +124,7 @@
           <use xlink:href="#marker" x="30" y="10" fill="#8888ff"/>
           <use xlink:href="#marker" x="45" y="20" fill="#8888ff"/>
           <use xlink:href="#marker" x="60" y="30" fill="#8888ff"/>
-          <text y="-10 50 0 10 20 30" x="0" font-family="embeded">fi1234</text>
+          <text y="-10 50 0 10 20 30" x="0" font-family="embedded">fi1234</text>
         </g>
 
         <g transform="translate(100, 180)">
@@ -134,7 +134,7 @@
           <use xlink:href="#marker" x="70" y="10" fill="#8888ff"/>
           <use xlink:href="#marker" x="100" y="20" fill="#8888ff"/>
           <use xlink:href="#marker" x="130" y="30" fill="#8888ff"/>
-          <text x="10 180 40 70 100 130" y="-10 50 0 10 20 30" font-family="embeded">fi1234</text>
+          <text x="10 180 40 70 100 130" y="-10 50 0 10 20 30" font-family="embedded">fi1234</text>
         </g>
       </g>
     </g>

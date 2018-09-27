@@ -46,7 +46,7 @@ public:
    * Create an ordinary view
    * @param aBounds initial bounds for view
    *        XXX We should eliminate this parameter; you can set the bounds after CreateView
-   * @param aParent intended parent for view. this is not actually set in the
+   * @param apparent intended parent for view. this is not actually set in the
    *        nsView through this method. it is only used by the initialization
    *        code to walk up the view tree, if necessary, to find resources.
    *        XXX We should eliminate this parameter!
@@ -55,7 +55,7 @@ public:
    * @result The new view.  Never null.
    */
   nsView* CreateView(const nsRect& aBounds,
-                     nsView* aParent,
+                     nsView* apparent,
                      nsViewVisibility aVisibilityFlag = nsViewVisibility_kShow);
 
   /**
@@ -138,19 +138,19 @@ public:
    * overriden by z-order).
    * If it is false, the view is inserted before the sibling.
    * The view manager generates the appopriate dirty regions.
-   * @param aParent parent view
+   * @param apparent parent view
    * @param aChild child view
    * @param aSibling sibling view
    * @param aAfter after or before in the document order
    */
-  void InsertChild(nsView *aParent, nsView *aChild, nsView *aSibling,
+  void InsertChild(nsView *apparent, nsView *aChild, nsView *aSibling,
                    bool aAfter);
 
   /**
    * Remove a specific child view from its parent. This will NOT remove its placeholder
    * if there is one.
    * The view manager generates the appropriate dirty regions.
-   * @param aParent parent view
+   * @param apparent parent view
    * @param aChild child view
    */
   void RemoveChild(nsView *aChild);
@@ -338,7 +338,7 @@ private:
    */
   void CallWillPaintOnObservers();
   void ReparentChildWidgets(nsView* aView, nsIWidget *aNewWidget);
-  void ReparentWidgets(nsView* aView, nsView *aParent);
+  void ReparentWidgets(nsView* aView, nsView *apparent);
   void InvalidateWidgetArea(nsView *aWidgetView, const nsRegion &aDamagedRegion);
 
   void InvalidateViews(nsView *aView);

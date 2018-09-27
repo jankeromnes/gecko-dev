@@ -23,8 +23,8 @@ NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
 TestInterfaceSetlikeNode::TestInterfaceSetlikeNode(JSContext* aCx,
-                                                   nsPIDOMWindowInner* aParent)
-: mParent(aParent)
+                                                   nsPIDOMWindowInner* apparent)
+: mParent(apparent)
 {
 }
 

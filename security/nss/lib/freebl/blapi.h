@@ -386,9 +386,9 @@ extern PRBool KEA_Verify(SECItem *Y, SECItem *prime, SECItem *subPrime);
 /* Given gx == g^x, create a Schnorr zero-knowledge proof for the value x
  * using the specified hash algorithm and signer ID. The signature is
  * returned in the values gv and r. testRandom must be NULL for a PRNG
- * generated random committment to be used in the sigature. When testRandom
+ * generated random commitment to be used in the sigature. When testRandom
  * is non-NULL, that value must contain a value in the subgroup q; that
- * value will be used instead of a PRNG-generated committment in order to
+ * value will be used instead of a PRNG-generated commitment in order to
  * facilitate known-answer tests.
  *
  * If gxIn is non-NULL then it must contain a pre-computed value of g^x that

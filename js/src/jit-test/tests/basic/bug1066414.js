@@ -1,1 +1,1 @@
-for (var [...y] in Object) {} // dont assert
+for (var [...y] in Object) {} // don't assert

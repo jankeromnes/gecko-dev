@@ -100,7 +100,7 @@ public:
 private:
   static StaticRefPtr<CompositorManagerChild> sInstance;
 
-  CompositorManagerChild(CompositorManagerParent* aParent,
+  CompositorManagerChild(CompositorManagerParent* apparent,
                          uint64_t aProcessToken,
                          uint32_t aNamespace);
 

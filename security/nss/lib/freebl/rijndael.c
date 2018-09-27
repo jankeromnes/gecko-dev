@@ -854,7 +854,7 @@ aes_InitContext(AESContext *cx, const unsigned char *key, unsigned int keysize,
     Nk = keysize / 4;
     /* Obtain number of rounds from "table" */
     cx->Nr = RIJNDAEL_NUM_ROUNDS(Nk, cx->Nb);
-    /* copy in the iv, if neccessary */
+    /* copy in the iv, if necessary */
     if (mode == NSS_AES_CBC) {
         memcpy(cx->iv, iv, AES_BLOCK_SIZE);
 #ifdef USE_HW_AES
@@ -1069,7 +1069,7 @@ AES_Encrypt(AESContext *cx, unsigned char *output,
     *outputLen = inputLen;
 #if UINT_MAX > MP_32BIT_MAX
     /*
-     * we can guarentee that GSM won't overlfow if we limit the input to
+     * we can guarantee that GSM won't overlfow if we limit the input to
      * 2^36 bytes. For simplicity, we are limiting it to 2^32 for now.
      *
      * We do it here to cover both hardware and software GCM operations.

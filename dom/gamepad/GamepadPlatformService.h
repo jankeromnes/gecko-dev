@@ -69,10 +69,10 @@ class GamepadPlatformService final
   void ResetGamepadIndexes();
 
   //Add IPDL parent instance
-  void AddChannelParent(GamepadEventChannelParent* aParent);
+  void AddChannelParent(GamepadEventChannelParent* apparent);
 
   //Remove IPDL parent instance
-  void RemoveChannelParent(GamepadEventChannelParent* aParent);
+  void RemoveChannelParent(GamepadEventChannelParent* apparent);
 
   bool HasGamepadListeners();
 

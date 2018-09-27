@@ -228,7 +228,7 @@ GetDefaultOIDFormat(SECItem* oid, nsAString& outString, char separator)
       outString.Append(unknownText);
 
       if (++invalidCount > 3) {
-        // Allow only 3 occurences of Unknown in OID display string to
+        // Allow only 3 occurrences of Unknown in OID display string to
         // prevent bloat.
         break;
       }
@@ -1635,7 +1635,7 @@ ProcessSubjectPublicKeyInfo(CERTSubjectPublicKeyInfo* spki,
     // Algorithm unknown, display raw bytes
     // The subjectPublicKey field is encoded as a bit string.
     // ProcessRawBytes expects the length to be in bytes, so
-    // let's convert the lenght into a temporary SECItem.
+    // let's convert the length into a temporary SECItem.
     SECItem data;
     data.data = spki->subjectPublicKey.data;
     data.len = spki->subjectPublicKey.len / 8;

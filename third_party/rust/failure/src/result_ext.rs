@@ -48,12 +48,12 @@ pub trait ResultExt<T, E> {
     /// let x = (|| -> Result<(), failure::Error> {
     ///     Err(CustomError).compat()?
     /// })().with_context(|e| {
-    ///     format!("An error occured: {}", e)
+    ///     format!("An error occurred: {}", e)
     /// }).unwrap_err();
     ///
     /// let x = format!("{}", x);
     ///
-    /// assert_eq!(x, "An error occured: My custom error message");
+    /// assert_eq!(x, "An error occurred: My custom error message");
     /// # }
     ///
     /// # }
@@ -89,11 +89,11 @@ pub trait ResultExt<T, E> {
     ///  
     /// let x = (|| -> Result<(), failure::Error> {
     ///     Err(CustomError)?
-    /// })().context(format!("An error occured")).unwrap_err();
+    /// })().context(format!("An error occurred")).unwrap_err();
     ///
     /// let x = format!("{}", x);
     ///
-    /// assert_eq!(x, "An error occured");
+    /// assert_eq!(x, "An error occurred");
     /// # }
     ///
     /// # }
@@ -133,12 +133,12 @@ pub trait ResultExt<T, E> {
     /// let x = (|| -> Result<(), failure::Error> {
     ///     Err(CustomError)?
     /// })().with_context(|e| {
-    ///     format!("An error occured: {}", e)
+    ///     format!("An error occurred: {}", e)
     /// }).unwrap_err();
     ///
     /// let x = format!("{}", x);
     ///
-    /// assert_eq!(x, "An error occured: My custom error message");
+    /// assert_eq!(x, "An error occurred: My custom error message");
     /// # }
     ///
     /// # }

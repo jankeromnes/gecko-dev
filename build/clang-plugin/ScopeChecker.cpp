@@ -16,7 +16,7 @@ void ScopeChecker::registerMatchers(MatchFinder *AstMatcher) {
       callExpr(callee(functionDecl(heapAllocator()))).bind("node"), this);
 }
 
-// These enum variants determine whether an allocation has occured in the code.
+// These enum variants determine whether an allocation has occurred in the code.
 enum AllocationVariety {
   AV_None,
   AV_Global,

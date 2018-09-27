@@ -4227,7 +4227,7 @@ Preferences::SavePrefFileBlocking()
   }
 
   // If we weren't dirty to start, SavePrefFileInternal will early exit so
-  // there is no guarantee that we don't have oustanding async saves in the
+  // there is no guarantee that we don't have outstanding async saves in the
   // pipe. Since the contract of SavePrefFileOnMainThread is that the file on
   // disk matches the preferences, we have to make sure those requests are
   // completed.

@@ -12,7 +12,7 @@
 
 /*
 
-Test that unseekable media can't be seeked. We load a media that shouldn't
+Test that unseekable media can't be sought. We load a media that shouldn't
 be seekable, and play through once. While playing through we repeatedly try
 to seek and check that nothing happens when we do. We also verify that the
 seekable ranges are empty.
@@ -49,7 +49,7 @@ var onended = function(event) {
   // Remove the event listeners so that they can't run if there are any pending
   // events.
   v.removeEventListener("seeking", onseeking);
-  v.removeEventListener("seeked", onseeked);
+  v.removeEventListener("sought", onseeked);
   v.removeEventListener("timeupdate", ontimeupdate);
   v.removeEventListener("ended", onended);
 
@@ -58,7 +58,7 @@ var onended = function(event) {
     v.remove();
   }
 
-  // Verify that none of the seeks we did in timeupdate actually seeked.
+  // Verify that none of the seeks we did in timeupdate actually sought.
   ok(!v.actuallySeeked, "Should not be able to seek in unseekable media: " + v.name);
 
   manager.finished(v.token);
@@ -75,7 +75,7 @@ function startTest(test, token) {
   v.actuallySeeked = false;
   
   v.addEventListener("seeking", onseeking);
-  v.addEventListener("seeked", onseeked);
+  v.addEventListener("sought", onseeked);
   v.addEventListener("timeupdate", ontimeupdate);
   v.addEventListener("ended", onended);
 

@@ -76,8 +76,8 @@ class WebAuthnManager final : public WebAuthnManagerBase
 public:
   NS_DECL_ISUPPORTS
 
-  explicit WebAuthnManager(nsPIDOMWindowInner* aParent)
-    : WebAuthnManagerBase(aParent)
+  explicit WebAuthnManager(nsPIDOMWindowInner* apparent)
+    : WebAuthnManagerBase(apparent)
   { }
 
   already_AddRefed<Promise>

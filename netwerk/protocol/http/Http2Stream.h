@@ -238,7 +238,7 @@ protected:
   virtual void AdjustInitialWindow();
   MOZ_MUST_USE nsresult TransmitFrame(const char *, uint32_t *, bool forceCommitment);
 
-  // The underlying socket transport object is needed to propogate some events
+  // The underlying socket transport object is needed to propagate some events
   nsISocketTransport         *mSocketTransport;
 
 private:
@@ -338,7 +338,7 @@ private:
   //   ClientReceiveWindow
   uint64_t                     mLocalUnacked;
 
-  // True when sending is suspended becuase the server receive window is
+  // True when sending is suspended because the server receive window is
   //   <= 0
   bool                         mBlockedOnRwin;
 

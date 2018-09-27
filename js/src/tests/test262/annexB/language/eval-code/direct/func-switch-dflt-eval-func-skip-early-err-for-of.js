@@ -2,7 +2,7 @@
 // - src/annex-b-fns/eval-func-skip-early-err-for-of.case
 // - src/annex-b-fns/eval-func/direct-switch-dflt.template
 /*---
-description: Extension not observed when creation of variable binding would produce an early error (for-of statement) (Funtion declaration in the `default` clause of a `switch` statement in eval code in the global scope)
+description: Extension not observed when creation of variable binding would produce an early error (for-of statement) (Function declaration in the `default` clause of a `switch` statement in eval code in the global scope)
 esid: sec-web-compat-evaldeclarationinstantiation
 es6id: B.3.3.3
 flags: [generated, noStrict]

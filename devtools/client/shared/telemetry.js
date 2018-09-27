@@ -133,7 +133,7 @@ class Telemetry {
    *        Defaults to false.
    *
    * @returns {Boolean}
-   *          True if the timer was succesfully stopped and the data was added
+   *          True if the timer was successfully stopped and the data was added
    *          to the histogram, False otherwise.
    */
   finish(histogramId, obj, canceledOkay) {
@@ -166,7 +166,7 @@ class Telemetry {
    *        Defaults to false.
    *
    * @returns {Boolean}
-   *          True if the timer was succesfully stopped and the data was added
+   *          True if the timer was successfully stopped and the data was added
    *          to the histogram, False otherwise.
    */
   finishKeyed(histogramId, key, obj, canceledOkay) {

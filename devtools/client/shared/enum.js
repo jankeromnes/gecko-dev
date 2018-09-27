@@ -8,7 +8,7 @@ module.exports = {
 
   /**
    * Create a simple enum-like object with keys mirrored to values from an array.
-   * This makes comparison to a specfic value simpler without having to repeat and
+   * This makes comparison to a specific value simpler without having to repeat and
    * mis-type the value.
    */
   createEnum(array, target = {}) {

@@ -801,7 +801,7 @@ impl BoyerMooreSearch {
                         if window_end - window_end_snapshot >
                              16 * mem::size_of::<usize>() {
 
-                            // Returning a window_end >= backstop will immediatly
+                            // Returning a window_end >= backstop will immediately
                             // break us out of the inner loop in `find`.
                             if window_end >= backstop {
                                 return Some(window_end);

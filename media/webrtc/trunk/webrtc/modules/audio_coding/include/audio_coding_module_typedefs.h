@@ -25,7 +25,7 @@ namespace webrtc {
 // -VADLowBitrate            : more aggressive than "VADNormal" to save on
 //                             bit-rate.
 // -VADAggr                  : an aggressive mode.
-// -VADVeryAggr              : the most agressive mode.
+// -VADVeryAggr              : the most aggressive mode.
 //
 enum ACMVADMode {
   VADNormal = 0,

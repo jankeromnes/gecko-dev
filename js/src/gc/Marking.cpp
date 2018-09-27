@@ -494,7 +494,7 @@ js::TraceProcessGlobalRoot(JSTracer* trc, T* thing, const char* name)
     // them. Fortunately, atoms (permanent and non) cannot refer to other GC
     // things so they do not need to go through the mark stack and may simply
     // be marked directly.  Moreover, well-known symbols can refer only to
-    // permanent atoms, so likewise require no subsquent marking.
+    // permanent atoms, so likewise require no subsequent marking.
     CheckTracedThing(trc, *ConvertToBase(&thing));
     if (trc->isMarkingTracer()) {
         thing->asTenured().markIfUnmarked(gc::MarkColor::Black);
@@ -962,7 +962,7 @@ js::GCMarker::mark(T* thing)
 
 /*** Inline, Eager GC Marking *********************************************************************/
 
-// Each of the eager, inline marking paths is directly preceeded by the
+// Each of the eager, inline marking paths is directly preceded by the
 // out-of-line, generic tracing code for comparison. Both paths must end up
 // traversing equivalent subgraphs.
 

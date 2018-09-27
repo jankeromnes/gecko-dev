@@ -252,7 +252,7 @@ class TestLineRemapping(unittest.TestCase):
 
         self.assertEqual(len(records), 17)
 
-        # Lines/functions are only "moved" between records, not duplicated or omited.
+        # Lines/functions are only "moved" between records, not duplicated or omitted.
         self.assertEqual(original_line_count,
                          sum(r.line_count for r in records))
         self.assertEqual(original_covered_line_count,

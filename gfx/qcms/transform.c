@@ -1251,7 +1251,7 @@ qcms_transform* qcms_transform_create(
 			(in->A2B0 || out->B2A0 || in->mAB || out->mAB))
 		{
 		// Precache the transformation to a CLUT 33x33x33 in size.
-		// 33 is used by many profiles and works well in pratice. 
+		// 33 is used by many profiles and works well in practice. 
 		// This evenly divides 256 into blocks of 8x8x8.
 		// TODO For transforming small data sets of about 200x200 or less
 		// precaching should be avoided.

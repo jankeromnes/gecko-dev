@@ -24,7 +24,7 @@ function forceGC() {
 function doTest() {
   a.mozCaptureStreamUntilEnded();
 
-  a.addEventListener("seeked", function() {
+  a.addEventListener("sought", function() {
     a.play();
 
     a.addEventListener("play", function() {

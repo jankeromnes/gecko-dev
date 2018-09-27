@@ -61,9 +61,9 @@ public:
     constexpr int64_t timeNow = 100000;
     // Should be discarded as too old
     constexpr int64_t time0 = timeNow - (10 * 1000) - 1;
-    // Shold be commited
+    // Shold be committed
     constexpr int64_t time1 = timeNow - (10 * 1000);
-    // Should be commited because it is newer
+    // Should be committed because it is newer
     constexpr int64_t time2 = timeNow - (5 * 1000);
     // Should be discarded because it is older
     constexpr int64_t time3 = timeNow - (7 * 1000);

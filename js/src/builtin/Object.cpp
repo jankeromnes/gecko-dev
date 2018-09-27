@@ -2208,7 +2208,7 @@ CreateObjectPrototype(JSContext* cx, JSProtoKey key)
 
     /*
      * The default 'new' type of Object.prototype is required by type inference
-     * to have unknown properties, to simplify handling of e.g. heterogenous
+     * to have unknown properties, to simplify handling of e.g. heterogeneous
      * objects in JSON and script literals.
      */
     ObjectGroupRealm& realm = ObjectGroupRealm::getForNewObject(cx);

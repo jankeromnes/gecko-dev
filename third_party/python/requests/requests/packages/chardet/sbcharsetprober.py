@@ -102,7 +102,7 @@ class SingleByteCharSetProber(CharSetProber):
                 elif cf < NEGATIVE_SHORTCUT_THRESHOLD:
                     if constants._debug:
                         sys.stderr.write('%s confidence = %s, below negative'
-                                         'shortcut threshhold %s\n' %
+                                         'shortcut threshold %s\n' %
                                          (self._mModel['charsetName'], cf,
                                           NEGATIVE_SHORTCUT_THRESHOLD))
                     self._mState = constants.eNotMe

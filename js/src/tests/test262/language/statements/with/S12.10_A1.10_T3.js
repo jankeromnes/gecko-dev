@@ -7,7 +7,7 @@ info: |
     scope chain of the current execution context
 es5id: 12.10_A1.10_T3
 description: >
-    Using iteration statment withing "with" statement leading to
+    Using iteration statement within "with" statement leading to
     completion by exception  iteration statement inside with statement
     - exception completion
 flags: [noStrict]

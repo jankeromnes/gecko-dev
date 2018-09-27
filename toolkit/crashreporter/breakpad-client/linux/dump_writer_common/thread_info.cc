@@ -70,7 +70,7 @@ void ThreadInfo::FillCPUContext(RawContextCPU* out) const {
   out->dr1 = dregs[1];
   out->dr2 = dregs[2];
   out->dr3 = dregs[3];
-  // 4 and 5 deliberatly omitted because they aren't included in the minidump
+  // 4 and 5 deliberately omitted because they aren't included in the minidump
   // format.
   out->dr6 = dregs[6];
   out->dr7 = dregs[7];
@@ -144,7 +144,7 @@ void ThreadInfo::FillCPUContext(RawContextCPU* out) const {
   out->dr1 = dregs[1];
   out->dr2 = dregs[2];
   out->dr3 = dregs[3];
-  // 4 and 5 deliberatly omitted because they aren't included in the minidump
+  // 4 and 5 deliberately omitted because they aren't included in the minidump
   // format.
   out->dr6 = dregs[6];
   out->dr7 = dregs[7];

@@ -285,7 +285,7 @@ private:
   bool CodecConfigToWebRTCCodec(const AudioCodecConfig* codecInfo,
                                 webrtc::CodecInst& cinst);
 
-  //Generate block size in sample lenght for a given sampling frequency
+  //Generate block size in sample length for a given sampling frequency
   unsigned int GetNum10msSamplesForFrequency(int samplingFreqHz) const;
 
   // Function to copy a codec structure to Conduit's database

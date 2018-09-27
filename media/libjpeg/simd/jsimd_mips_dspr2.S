@@ -1412,7 +1412,7 @@ LEAF_MIPS_DSPR2(jsimd_h2v2_smooth_downsample_mips_dspr2)
     sb          v0, -1(t8)
     addiu       s4, s7, -2
     and         s4, s4, 3
-    addu        s5, s4, t8      //end adress
+    addu        s5, s4, t8      //end address
 4:
     lh          v0, 0(s2)
     lh          v1, 0(t9)
@@ -1451,7 +1451,7 @@ LEAF_MIPS_DSPR2(jsimd_h2v2_smooth_downsample_mips_dspr2)
     addiu       s1, s1, 2
     addiu       s5, s7, -2
     subu        s5, s5, s4
-    addu        s5, s5, t8      //end adress
+    addu        s5, s5, t8      //end address
 5:
     lh          v0, 0(s2)
     lh          v1, 0(t9)

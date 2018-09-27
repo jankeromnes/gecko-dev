@@ -86,7 +86,7 @@ def flush_input(fd, frags):
     while len(rv) == 4096:
         # If read() returns a full buffer, it may indicate there was 1 buffer
         # worth of data, or that there is more data to read.  Poll the socket
-        # before we read again to ensure that we will not block indefinitly.
+        # before we read again to ensure that we will not block indefinitely.
         readable, _, _ = select.select([fd], [], [], 0)
         if not readable:
             return

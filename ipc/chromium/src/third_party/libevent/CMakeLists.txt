@@ -769,7 +769,7 @@ source_group("Source Core"      FILES ${SRC_CORE})
 source_group("Source Extra"     FILES ${SRC_EXTRA})
 
 # Generate the configure headers.
-# (Place them in the build dir so we don't polute the source tree with generated files).
+# (Place them in the build dir so we don't pollute the source tree with generated files).
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/include)
 
 if (EVENT__BUILD_SHARED_LIBRARIES)
@@ -1246,7 +1246,7 @@ if (NOT EVENT__DISABLE_TESTS)
     #  If they are set in the shell the tests are running using simply "ctest" or "make test" will fail)
     if (WIN32)
         # Windows doesn't have "unset". But you can use "set VAR=" instead.
-        # We need to guard against the possibility taht EVENT_NOWIN32 is set, and all test failing
+        # We need to guard against the possibility that EVENT_NOWIN32 is set, and all test failing
         # since no event backend being available.
         file(TO_NATIVE_PATH ${CMAKE_CTEST_COMMAND} WINDOWS_CTEST_COMMAND)
 

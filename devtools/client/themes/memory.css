@@ -148,7 +148,7 @@ html, body, #app, #memory-tool {
    */
   display: flex;
   /**
-   * Flexing to fill out remaining vertical space. The preceeding sibling is
+   * Flexing to fill out remaining vertical space. The preceding sibling is
    * the toolbar. @see #memory-tool.
    */
   flex: 1;
@@ -281,7 +281,7 @@ html, body, #app, #memory-tool {
    */;
   display: flex;
   /**
-   * Flexing to fill out remaining horizontal space. The preceeding sibling
+   * Flexing to fill out remaining horizontal space. The preceding sibling
    * is the sidebar. @see #memory-tool-container.
    */
   flex: 1;

@@ -34,7 +34,7 @@ is(v.currentTime, SEEK_TIME, "currentTime is default playback start position");
 once(v, "seeking", function() {
   seekStarted = true;
 });
-once(v, "seeked", function() {
+once(v, "sought", function() {
   seekCompleted = true;
 });
 once(v, "loadedmetadata", function() {

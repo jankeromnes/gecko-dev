@@ -41,9 +41,9 @@ This carry also needs to record the number of bytes the carry holds. I use
 the low 2 bits as a count (0..3) and the carry bytes are shifted into the
 high byte in stream order.
 
-To handle endianess I simply use a macro that reads a uint32_t and define
+To handle endianness I simply use a macro that reads a uint32_t and define
 that macro to be a direct read on little endian machines, a read and swap
-on big endian machines, or a byte-by-byte read if the endianess is unknown.
+on big endian machines, or a byte-by-byte read if the endianness is unknown.
 
 -----------------------------------------------------------------------------*/
 
@@ -65,7 +65,7 @@ on big endian machines, or a byte-by-byte read if the endianess is unknown.
 #endif
 
 /*-----------------------------------------------------------------------------
- * Endianess, misalignment capabilities and util macros
+ * Endianness, misalignment capabilities and util macros
  *
  * The following 3 macros are defined in this section. The other macros defined
  * are only needed to help derive these 3.
@@ -99,7 +99,7 @@ on big endian machines, or a byte-by-byte read if the endianess is unknown.
   #endif
 #endif
 
-/* gcc (usually) defines xEL/EB macros for ARM and MIPS endianess */
+/* gcc (usually) defines xEL/EB macros for ARM and MIPS endianness */
 #if !defined(__BYTE_ORDER)
   #if defined(__ARMEL__) || defined(__MIPSEL__)
     #define __BYTE_ORDER __LITTLE_ENDIAN
@@ -123,7 +123,7 @@ on big endian machines, or a byte-by-byte read if the endianess is unknown.
     #define UNALIGNED_SAFE
   #endif
 #else
-  /* Unknown endianess so last resort is to read individual bytes */
+  /* Unknown endianness so last resort is to read individual bytes */
   #define READ_UINT32(ptr)   (ptr[0]|ptr[1]<<8|ptr[2]<<16|ptr[3]<<24)
 
   /* Since we're not doing word-reads we can skip the messing about with realignment */
@@ -285,7 +285,7 @@ uint32_t PMurHash32_Result(uint32_t h, uint32_t carry, uint32_t total_length)
 
 /*---------------------------------------------------------------------------*/
 
-/* Murmur3A compatable all-at-once */
+/* Murmur3A compatible all-at-once */
 uint32_t PMurHash32(uint32_t seed, const void *key, int len)
 {
   uint32_t h1=seed, carry=0;

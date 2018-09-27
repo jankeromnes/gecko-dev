@@ -1656,7 +1656,7 @@ public:
   /**
    * Only the implementation should use these methods.
    */
-  void SetParent(ContainerLayer* aParent) { mParent = aParent; }
+  void SetParent(ContainerLayer* apparent) { mParent = apparent; }
   void SetNextSibling(Layer* aSibling) { mNextSibling = aSibling; }
   void SetPrevSibling(Layer* aSibling) { mPrevSibling = aSibling; }
 
@@ -1677,7 +1677,7 @@ public:
    * Dump information about this layer and its child & sibling layers to
    * layerscope packet.
    */
-  void Dump(layerscope::LayersPacket* aPacket, const void* aParent);
+  void Dump(layerscope::LayersPacket* aPacket, const void* apparent);
 
   /**
    * Log information about this layer manager and its managed tree to
@@ -1699,7 +1699,7 @@ public:
 
   // Just like PrintInfo, but this function dump information into layerscope packet,
   // instead of a StringStream. It is also internally used to implement Dump();
-  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent);
+  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent);
 
   /**
    * Store display list log.
@@ -2056,7 +2056,7 @@ protected:
 
   virtual void PrintInfo(std::stringstream& aStream, const char* aPrefix) override;
 
-  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent) override;
+  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent) override;
 
   /**
    * ComputeEffectiveTransforms snaps the ideal transform to get mEffectiveTransform.
@@ -2311,7 +2311,7 @@ protected:
 
   virtual void PrintInfo(std::stringstream& aStream, const char* aPrefix) override;
 
-  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent) override;
+  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent) override;
 
   /**
    * True for if the container start a new 3D context extended by one
@@ -2395,7 +2395,7 @@ protected:
 
   virtual void PrintInfo(std::stringstream& aStream, const char* aPrefix) override;
 
-  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent) override;
+  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent) override;
 
   gfx::IntRect mBounds;
   gfx::Color mColor;
@@ -2484,7 +2484,7 @@ protected:
 
   virtual void PrintInfo(std::stringstream& aStream, const char* aPrefix) override;
 
-  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent) override;
+  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent) override;
 
   virtual CanvasRenderer* CreateCanvasRendererInternal() = 0;
 
@@ -2614,7 +2614,7 @@ protected:
 
   virtual void PrintInfo(std::stringstream& aStream, const char* aPrefix) override;
 
-  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent) override;
+  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent) override;
 
   // 0 is a special value that means "no ID".
   LayersId mId;

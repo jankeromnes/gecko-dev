@@ -58,7 +58,7 @@ mkdir_deps =$(foreach dir,$(getargv),$(call slash_strip,$(dir)/.mkdir.done))
 %/.mkdir.done: # mkdir -p -p => mkdir -p
 	$(subst $(space)-p,$(null),$(MKDIR)) -p '$(dir $@)'
 # Make the timestamp old enough for not being a problem with symbolic links
-# targets depending on it. Use Jan 3, 1980 to accomodate any timezone where
+# targets depending on it. Use Jan 3, 1980 to accommodate any timezone where
 # 198001010000 would translate to something older than FAT epoch.
 	@$(TOUCH) -t 198001030000 '$@'
 

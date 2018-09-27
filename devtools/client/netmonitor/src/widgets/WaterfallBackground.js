@@ -30,7 +30,7 @@ class WaterfallBackground {
    * Changes the element being used as the CSS background for a background
    * with a given background element ID.
    *
-   * The funtion wrap the Firefox only API. Waterfall Will not draw the
+   * The function wrap the Firefox only API. Waterfall Will not draw the
    * vertical line when running on non-firefox browser.
    * Could be fixed by Bug 1308695
    */

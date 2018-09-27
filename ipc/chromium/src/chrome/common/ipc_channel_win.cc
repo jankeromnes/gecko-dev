@@ -235,7 +235,7 @@ bool Channel::ChannelImpl::EnqueueHelloMessage() {
   // then don't give the game away by sending it in ours.
   int32_t secret = waiting_for_shared_secret_ ? 0 : shared_secret_;
 
-  // Also, don't send if the value is zero (for IPC backwards compatability).
+  // Also, don't send if the value is zero (for IPC backwards compatibility).
   if (!m->WriteInt(GetCurrentProcessId()) ||
       (secret && !m->WriteUInt32(secret)))
   {

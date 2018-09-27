@@ -14,7 +14,7 @@
 # options
 # -------
 #    -y answer all questions with y - use at your own risk...ignores warnings
-#    -s silent (only usefull with -y)
+#    -s silent (only useful with -y)
 #    -h, -? - you guessed right - displays this text
 #    -d debug
 #    -f <filename> - write the (error)output to filename

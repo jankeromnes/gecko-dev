@@ -4836,7 +4836,7 @@ bool ValidateRenderbufferStorageMultisampleANGLE(Context *context,
     // ANGLE_framebuffer_multisample states GL_OUT_OF_MEMORY is generated on a failure to create
     // the specified storage. This is different than ES 3.0 in which a sample number higher
     // than the maximum sample number supported by this format generates a GL_INVALID_VALUE.
-    // The TextureCaps::getMaxSamples method is only guarenteed to be valid when the context is ES3.
+    // The TextureCaps::getMaxSamples method is only guaranteed to be valid when the context is ES3.
     if (context->getClientMajorVersion() >= 3)
     {
         const TextureCaps &formatCaps = context->getTextureCaps().get(internalformat);

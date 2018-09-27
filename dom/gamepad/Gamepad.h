@@ -40,7 +40,7 @@ class Gamepad final : public nsISupports,
                       public nsWrapperCache
 {
 public:
-  Gamepad(nsISupports* aParent,
+  Gamepad(nsISupports* apparent,
           const nsAString& aID, uint32_t aIndex,
           uint32_t aHashKey,
           GamepadMappingType aMapping, GamepadHand aHand,
@@ -62,8 +62,8 @@ public:
   void SyncState(Gamepad* aOther);
 
   // Return a new Gamepad containing the same data as this object,
-  // parented to aParent.
-  already_AddRefed<Gamepad> Clone(nsISupports* aParent);
+  // parented to apparent.
+  already_AddRefed<Gamepad> Clone(nsISupports* apparent);
 
   nsISupports* GetParentObject() const
   {

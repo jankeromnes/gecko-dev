@@ -20,8 +20,8 @@ NS_WRAPPERCACHE_INTERFACE_MAP_ENTRY
 NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-MIDIOutputMap::MIDIOutputMap(nsPIDOMWindowInner* aParent) :
-  mParent(aParent)
+MIDIOutputMap::MIDIOutputMap(nsPIDOMWindowInner* apparent) :
+  mParent(apparent)
 {
 }
 

@@ -46,7 +46,7 @@
       assert_greater_than(cert.expires, Date.now(),
         'Expect generated certificate to expire reasonably long after current time');
     }),
-    'generateCertificate() with compulsary RSASSA-PKCS1-v1_5 parameters should succeed');
+    'generateCertificate() with compulsory RSASSA-PKCS1-v1_5 parameters should succeed');
 
   promise_test(t =>
     RTCPeerConnection.generateCertificate({
@@ -59,7 +59,7 @@
       assert_greater_than(cert.expires, Date.now(),
         'Expect generated certificate to expire reasonably long after current time');
     }),
-    'generateCertificate() with compulsary ECDSA parameters should succeed');
+    'generateCertificate() with compulsory ECDSA parameters should succeed');
 
   /*
    *  4.10. A user agent must reject a call to generateCertificate() with a

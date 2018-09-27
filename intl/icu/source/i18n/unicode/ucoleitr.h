@@ -23,7 +23,7 @@
 #if !UCONFIG_NO_COLLATION
 
 /**  
- * This indicates an error has occured during processing or if no more CEs is 
+ * This indicates an error has occurred during processing or if no more CEs is 
  * to be returned.
  * @stable ICU 2.0
  */
@@ -153,7 +153,7 @@ ucol_reset(UCollationElements *elems);
  * @param elems The UCollationElements containing the text.
  * @param status A pointer to a UErrorCode to receive any errors.
  * @return The next collation elements ordering, otherwise returns UCOL_NULLORDER 
- *         if an error has occured or if the end of string has been reached
+ *         if an error has occurred or if the end of string has been reached
  * @stable ICU 2.0
  */
 U_STABLE int32_t U_EXPORT2 
@@ -164,11 +164,11 @@ ucol_next(UCollationElements *elems, UErrorCode *status);
  * A single character may contain more than one collation element.
  * Note that internally a stack is used to store buffered collation elements. 
  * @param elems The UCollationElements containing the text.
- * @param status A pointer to a UErrorCode to receive any errors. Noteably 
+ * @param status A pointer to a UErrorCode to receive any errors. Notably 
  *               a U_BUFFER_OVERFLOW_ERROR is returned if the internal stack
  *               buffer has been exhausted.
  * @return The previous collation elements ordering, otherwise returns 
- *         UCOL_NULLORDER if an error has occured or if the start of string has 
+ *         UCOL_NULLORDER if an error has occurred or if the start of string has 
  *         been reached.
  * @stable ICU 2.0
  */

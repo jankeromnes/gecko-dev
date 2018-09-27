@@ -224,7 +224,7 @@ class Port : public PortInterface, public rtc::MessageHandler,
   // This signal sent when port fails to allocate candidates and this port
   // can't be used in establishing the connections. When port is in shared mode
   // and port fails to allocate one of the candidates, port shouldn't send
-  // this signal as other candidates might be usefull in establishing the
+  // this signal as other candidates might be useful in establishing the
   // connection.
   sigslot::signal1<Port*> SignalPortError;
 

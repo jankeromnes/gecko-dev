@@ -127,7 +127,7 @@ pub fn for_each_tile(
     // irregular size in the texture cache.
 
     // Because we can have very large virtual images we iterate over the visible portion of
-    // the image in layer space intead of iterating over device tiles.
+    // the image in layer space instead of iterating over device tiles.
 
     let visible_rect = match prim_rect.intersection(&visible_rect) {
        Some(rect) => rect,

@@ -77,10 +77,10 @@ public:
   nsIPrincipal* GetSelectedImageTriggeringPrincipal();
 
   // Runs image selection now if necessary. If an image has already
-  // been choosen, takes no action unless aReselect is true.
+  // been chosen, takes no action unless aReselect is true.
   //
   // aReselect - Always re-run selection, replacing the previously
-  //             choosen image.
+  //             chosen image.
   // return - true if the selected image result changed.
   bool SelectImage(bool aReselect = false);
 

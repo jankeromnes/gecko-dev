@@ -15,7 +15,7 @@ var EXPORTED_SYMBOLS = [
 
 let DNS_QUERY_RESPONSE_CODES = {
   QUERY           : 0,      // RFC 1035 - Query
-  RESPONSE        : 1       // RFC 1035 - Reponse
+  RESPONSE        : 1       // RFC 1035 - Response
 };
 
 let DNS_AUTHORITATIVE_ANSWER_CODES = {

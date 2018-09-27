@@ -18,8 +18,8 @@ CJBig2_Image* CJBig2_GRRDProc::decode(CJBig2_ArithDecoder* pArithDecoder,
     return new CJBig2_Image(GRW, GRH);
 
   if (!GRTEMPLATE) {
-    if ((GRAT[0] == -1) && (GRAT[1] == -1) && (GRAT[2] == -1) &&
-        (GRAT[3] == -1) && (GRREFERENCEDX == 0) &&
+    if ((GREAT[0] == -1) && (GREAT[1] == -1) && (GREAT[2] == -1) &&
+        (GREAT[3] == -1) && (GRREFERENCEDX == 0) &&
         (GRW == (uint32_t)GRREFERENCE->width())) {
       return decode_Template0_opt(pArithDecoder, grContext);
     }
@@ -63,12 +63,12 @@ CJBig2_Image* CJBig2_GRRDProc::decode_Template0_unopt(
         uint32_t CONTEXT = line5;
         CONTEXT |= line4 << 3;
         CONTEXT |= line3 << 6;
-        CONTEXT |= GRREFERENCE->getPixel(w - GRREFERENCEDX + GRAT[2],
-                                         h - GRREFERENCEDY + GRAT[3])
+        CONTEXT |= GRREFERENCE->getPixel(w - GRREFERENCEDX + GREAT[2],
+                                         h - GRREFERENCEDY + GREAT[3])
                    << 8;
         CONTEXT |= line2 << 9;
         CONTEXT |= line1 << 10;
-        CONTEXT |= GRREG->getPixel(w + GRAT[0], h + GRAT[1]) << 12;
+        CONTEXT |= GRREG->getPixel(w + GREAT[0], h + GREAT[1]) << 12;
         int bVal = pArithDecoder->DECODE(&grContext[CONTEXT]);
         GRREG->setPixel(w, h, bVal);
         line1 = ((line1 << 1) | GRREG->getPixel(w + 2, h - 1)) & 0x03;
@@ -118,12 +118,12 @@ CJBig2_Image* CJBig2_GRRDProc::decode_Template0_unopt(
           uint32_t CONTEXT = line5;
           CONTEXT |= line4 << 3;
           CONTEXT |= line3 << 6;
-          CONTEXT |= GRREFERENCE->getPixel(w - GRREFERENCEDX + GRAT[2],
-                                           h - GRREFERENCEDY + GRAT[3])
+          CONTEXT |= GRREFERENCE->getPixel(w - GRREFERENCEDX + GREAT[2],
+                                           h - GRREFERENCEDY + GREAT[3])
                      << 8;
           CONTEXT |= line2 << 9;
           CONTEXT |= line1 << 10;
-          CONTEXT |= GRREG->getPixel(w + GRAT[0], h + GRAT[1]) << 12;
+          CONTEXT |= GRREG->getPixel(w + GREAT[0], h + GREAT[1]) << 12;
           bVal = pArithDecoder->DECODE(&grContext[CONTEXT]);
         }
         GRREG->setPixel(w, h, bVal);

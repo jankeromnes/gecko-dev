@@ -114,7 +114,7 @@ PushNotifier::Dispatch(PushDispatcher& aDispatcher)
           continue;
         }
 
-        // Ensure that the content actor has the permissions avaliable for the
+        // Ensure that the content actor has the permissions available for the
         // principal the push is being sent for before sending the push message
         // down.
         Unused << contentActors[i]->

@@ -70,7 +70,7 @@ extern const char* my_strrchr(const char* haystack, char needle);
 // Read a hex value
 //   result: (output) the resulting value
 //   s: a string
-// Returns a pointer to the first invalid charactor.
+// Returns a pointer to the first invalid character.
 extern const char* my_read_hex_ptr(uintptr_t* result, const char* s);
 
 extern const char* my_read_decimal_ptr(uintptr_t* result, const char* s);

@@ -298,7 +298,7 @@ PollableEvent::Signal()
 bool
 PollableEvent::Clear()
 {
-  // necessary because of the "dont signal on socket thread" optimization
+  // necessary because of the "don't signal on socket thread" optimization
   MOZ_ASSERT(OnSocketThread(), "not on socket thread");
 
   SOCKET_LOG(("PollableEvent::Clear\n"));

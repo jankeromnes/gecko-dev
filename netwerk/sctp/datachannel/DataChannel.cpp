@@ -363,7 +363,7 @@ DataChannelConnection::Destroy()
 {
   // Though it's probably ok to do this and close the sockets;
   // if we really want it to do true clean shutdowns it can
-  // create a dependant Internal object that would remain around
+  // create a dependent Internal object that would remain around
   // until the network shut down the association or timed out.
   LOG(("Destroying DataChannelConnection %p", (void *) this));
   ASSERT_WEBRTC(NS_IsMainThread());

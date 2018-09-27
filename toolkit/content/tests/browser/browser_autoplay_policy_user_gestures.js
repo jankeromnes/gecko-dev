@@ -157,12 +157,12 @@ function callGUM(testParameters) {
     return content.navigator.mediaDevices.getUserMedia(testParameters.constraints);
   }
 
-  // Call gUM, without sucess: we've made it so that only fake requests
+  // Call gUM, without success: we've made it so that only fake requests
   // succeed without permission, and this is requesting non-fake-devices. Return
   // a resolved promise so that the test continues, but the getUserMedia Promise
   // will never be resolved.
   // We do this to check that it's not merely calling gUM that allows starting
-  // an AudioContext, it's having the Promise it return resolved successfuly,
+  // an AudioContext, it's having the Promise it return resolved successfully,
   // because of saved permissions for an origin or explicit user consent using
   // the prompt.
   content.navigator.mediaDevices.getUserMedia(testParameters.constraints);

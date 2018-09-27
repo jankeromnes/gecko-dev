@@ -908,10 +908,10 @@ HTMLTextAreaElement::IntrinsicState() const
 }
 
 nsresult
-HTMLTextAreaElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLTextAreaElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                                 nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLFormElementWithState::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLFormElementWithState::BindToTree(aDocument, apparent,
                                                               aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

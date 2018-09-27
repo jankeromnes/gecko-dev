@@ -684,7 +684,7 @@ ContentCacheInParent::HandleQueryContentEvent(WidgetQueryContentEvent& aEvent,
       if (aWidget->PluginHasFocus()) {
         MOZ_LOG(sContentCacheLog, LogLevel::Info,
           ("0x%p HandleQueryContentEvent(), "
-           "return emtpy selection becasue plugin has focus",
+           "return emtpy selection because plugin has focus",
            this));
         aEvent.mSucceeded = true;
         aEvent.mReply.mOffset = 0;

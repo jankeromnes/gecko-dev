@@ -163,10 +163,10 @@ ProxyAccessibleBase<Derived>::OuterDocOfRemoteBrowser() const
 
 template<class Derived>
 void
-ProxyAccessibleBase<Derived>::SetParent(Derived* aParent)
+ProxyAccessibleBase<Derived>::SetParent(Derived* apparent)
 {
   MOZ_ASSERT(IsDoc(), "we should only reparent documents");
-  if (!aParent) {
+  if (!apparent) {
     mParent = kNoParent;
   } else {
     MOZ_ASSERT(!aParent->IsDoc());

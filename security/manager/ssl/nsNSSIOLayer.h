@@ -214,7 +214,7 @@ private:
   mozilla::UniquePtr<char[]> mShortWriteBufferCheck;
 #endif
 
-  // mKEA* are used in false start and http/2 detetermination
+  // make* are used in false start and http/2 detetermination
   // Values are from nsISSLSocketControl
   int16_t mKEAUsed;
   uint32_t mKEAKeyBits;

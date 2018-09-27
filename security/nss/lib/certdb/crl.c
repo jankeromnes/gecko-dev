@@ -1337,7 +1337,7 @@ DPCache_RemoveCRL(CRLDPCache* cache, PRUint32 offset)
 
 /* check whether a CRL object stored in a PKCS#11 token still exists in
    that token . This has to be efficient (the entire CRL value cannot be
-   transferred accross the token boundaries), so this is accomplished by
+   transferred across the token boundaries), so this is accomplished by
    simply fetching the subject attribute and making sure it hasn't changed .
    Note that technically, the CRL object could have been replaced with a new
    PKCS#11 object of the same ID and subject (which actually happens in

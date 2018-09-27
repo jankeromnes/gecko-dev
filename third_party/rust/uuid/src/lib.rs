@@ -366,7 +366,7 @@ impl Uuid {
     /// however.  There is a slight possibility that two successive equal time values
     /// could be supplied and the sequence counter wraps back over to 0. 
     ///
-    /// If uniqueness and monotonicity is required, the user is responsibile for ensuring
+    /// If uniqueness and monotonicity is required, the user is responsible for ensuring
     /// that the time value always increases between calls. 
     /// (including between restarts of the process and device)
     ///
@@ -771,7 +771,7 @@ impl Uuid {
             if digit % 2 == 0 {
                 // First digit of the byte.
                 match chr {
-                    // Calulate upper half.
+                    // Calculate upper half.
                     b'0'...b'9' => acc = chr - b'0',
                     b'a'...b'f' => acc = chr - b'a' + 10,
                     b'A'...b'F' => acc = chr - b'A' + 10,

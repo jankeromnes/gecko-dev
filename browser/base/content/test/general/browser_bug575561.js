@@ -25,7 +25,7 @@ add_task(async function() {
   // Tests link to http://example.org/browser/browser/base/content/test/general/dummy_page.html
   await testLink(2, false, false);
 
-  // Pinned: Targetted link should open a new tab
+  // Pinned: Targeted link should open a new tab
   // Tests link to http://example.org/browser/browser/base/content/test/general/dummy_page.html with target="foo"
   await testLink(3, true, true);
 

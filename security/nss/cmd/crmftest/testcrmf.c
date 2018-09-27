@@ -54,7 +54,7 @@
 /* KNOWN BUGS:
 ** 1. generates BOTH signing and encryption cert requests, even for DSA keys.
 **
-** 2. Does not verify the siganture in the "Proof of Posession" in the
+** 2. Does not verify the siganture in the "Proof of Possession" in the
 **  decoded cert requests.  It only checks syntax of the POP.
 ** 3. CMMF "Stuff" should be broken up into separate steps, each of
 **  which may be optionally selected.

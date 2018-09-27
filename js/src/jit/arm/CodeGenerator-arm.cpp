@@ -1529,7 +1529,7 @@ CodeGenerator::visitTestDAndBranch(LTestDAndBranch* test)
 
     MBasicBlock* ifTrue = test->ifTrue();
     MBasicBlock* ifFalse = test->ifFalse();
-    // If the compare set the 0 bit, then the result is definately false.
+    // If the compare set the 0 bit, then the result is definitely false.
     jumpToBlock(ifFalse, Assembler::Zero);
     // It is also false if one of the operands is NAN, which is shown as
     // Overflow.
@@ -1546,7 +1546,7 @@ CodeGenerator::visitTestFAndBranch(LTestFAndBranch* test)
 
     MBasicBlock* ifTrue = test->ifTrue();
     MBasicBlock* ifFalse = test->ifFalse();
-    // If the compare set the 0 bit, then the result is definately false.
+    // If the compare set the 0 bit, then the result is definitely false.
     jumpToBlock(ifFalse, Assembler::Zero);
     // It is also false if one of the operands is NAN, which is shown as
     // Overflow.

@@ -78,9 +78,9 @@ public class DefaultConnectionReuseStrategy implements ConnectionReuseStrategy {
         // Check for a self-terminating entity. If the end of the entity will
         // be indicated by closing the connection, there is no keep-alive.
         final ProtocolVersion ver = response.getStatusLine().getProtocolVersion();
-        final Header teh = response.getFirstHeader(HTTP.TRANSFER_ENCODING);
-        if (teh != null) {
-            if (!HTTP.CHUNK_CODING.equalsIgnoreCase(teh.getValue())) {
+        final Header the = response.getFirstHeader(HTTP.TRANSFER_ENCODING);
+        if (the != null) {
+            if (!HTTP.CHUNK_CODING.equalsIgnoreCase(the.getValue())) {
                 return false;
             }
         } else {

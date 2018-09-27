@@ -17,7 +17,7 @@
 **   by most platforms. The NSPR Named Shared Memory API tries to
 **   provide a least common denominator interface so that it works
 **   across all supported platforms. To ensure that it works everywhere,
-**   some platform considerations must be accomodated and the protocol
+**   some platform considerations must be accommodated and the protocol
 **   for using NSPR Shared Memory API must be observed.
 **
 ** Protocol:
@@ -78,7 +78,7 @@
 **   shared memory resources. The default system limits on some
 **   platforms may be smaller than your requirements. These limits may
 **   be adjusted on some platforms either via boot-time options or by
-**   setting the size of the system paging space to accomodate more
+**   setting the size of the system paging space to accommodate more
 **   and/or larger shared memory segment(s).
 **
 ** Security:

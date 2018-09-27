@@ -20,7 +20,7 @@ def group_by(name):
 
 def loader(kind, path, config, params, loaded_tasks):
     """
-    Load tasks based on the jobs dependant kinds, designed for use as
+    Load tasks based on the jobs dependent kinds, designed for use as
     multiple-dependent needs.
 
     Required ``group-by-fn`` is used to define how we coalesce the

@@ -61,7 +61,7 @@ public:
     const void* get() const { return fPtr.get(); }
 
    /** Transfer ownership of the current ptr to the caller, setting the
-       internal reference to null. Note the caller is reponsible for calling
+       internal reference to null. Note the caller is responsible for calling
        sk_free on the returned address.
     */
     void* release() {

@@ -120,13 +120,13 @@ typedef struct htab { /* Memory resident data structure */
     int cbucket;           /* Current bucket */
     int cndx;              /* Index of next item on cpage */
     int dbmerrno;          /* Error Number -- for DBM
-                            * compatability */
+                            * compatibility */
     int new_file;          /* Indicates if fd is backing store
                             * or no */
     int save_file;         /* Indicates whether we need to flush
                             * file at
                             * exit */
-    uint32 *mapp[NCACHED]; /* Pointers to page maps */
+    uint32 *map[NCACHED]; /* Pointers to page maps */
     int nmaps;             /* Initial number of bitmaps */
     int nbufs;             /* Number of buffers left to
                             * allocate */

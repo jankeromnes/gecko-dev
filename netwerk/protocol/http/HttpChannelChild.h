@@ -398,7 +398,7 @@ private:
   // should be intercepted.
   uint8_t mSynthesizedResponse : 1;
 
-  // Set if a synthesized response should cause us to explictly allows intercepting
+  // Set if a synthesized response should cause us to explicitly allows intercepting
   // an expected forthcoming redirect.
   uint8_t mShouldInterceptSubsequentRedirect : 1;
   // Set if a redirection is being initiated to facilitate providing a synthesized

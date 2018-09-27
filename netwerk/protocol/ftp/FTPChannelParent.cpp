@@ -245,11 +245,11 @@ FTPChannelParent::RecvResume()
 class FTPDivertDataAvailableEvent : public MainThreadChannelEvent
 {
 public:
-  FTPDivertDataAvailableEvent(FTPChannelParent* aParent,
+  FTPDivertDataAvailableEvent(FTPChannelParent* apparent,
                               const nsCString& data,
                               const uint64_t& offset,
                               const uint32_t& count)
-  : mParent(aParent)
+  : mParent(apparent)
   , mData(data)
   , mOffset(offset)
   , mCount(count)
@@ -336,9 +336,9 @@ FTPChannelParent::DivertOnDataAvailable(const nsCString& data,
 class FTPDivertStopRequestEvent : public MainThreadChannelEvent
 {
 public:
-  FTPDivertStopRequestEvent(FTPChannelParent* aParent,
+  FTPDivertStopRequestEvent(FTPChannelParent* apparent,
                             const nsresult& statusCode)
-  : mParent(aParent)
+  : mParent(apparent)
   , mStatusCode(statusCode)
   {
   }
@@ -397,8 +397,8 @@ FTPChannelParent::DivertOnStopRequest(const nsresult& statusCode)
 class FTPDivertCompleteEvent : public MainThreadChannelEvent
 {
 public:
-  explicit FTPDivertCompleteEvent(FTPChannelParent* aParent)
-  : mParent(aParent)
+  explicit FTPDivertCompleteEvent(FTPChannelParent* apparent)
+  : mParent(apparent)
   {
   }
 

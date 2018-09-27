@@ -686,7 +686,7 @@ bool GetWinHttpProxySettings(const char* url, ProxyInfo* proxy) {
 // Uses the WinHTTP API to auto detect proxy for the given url. Firefox and IE
 // have slightly different option dialogs for proxy settings. In Firefox,
 // either a location of a proxy configuration file can be specified or auto
-// detection can be selected. In IE theese two options can be independently
+// detection can be selected. In IE these two options can be independently
 // selected. For the case where both options are selected (only IE) we try to
 // fetch the config file first, and if that fails we'll perform an auto
 // detection.

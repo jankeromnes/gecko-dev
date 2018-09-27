@@ -96,7 +96,7 @@ Tracker.prototype = {
     Observers.notify("weave:engine:score:updated", this.name);
   },
 
-  // Should be called by service everytime a sync has been done for an engine
+  // Should be called by service every time a sync has been done for an engine
   resetScore() {
     this._score = 0;
   },
@@ -753,7 +753,7 @@ function SyncEngine(name, service) {
   // on another device change, and we lose data from the user.
   //
   // Additionally, we use this as the set of items to upload for bookmark
-  // repair reponse, which has similar constraints.
+  // repair response, which has similar constraints.
   this._needWeakUpload = new Map();
 }
 

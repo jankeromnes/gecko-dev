@@ -842,7 +842,7 @@ static void setup_tx_block_mask(AV1_COMMON *const cm, int mi_row, int mi_col,
   if (plane == 0) {
     if (is_inter) {
       if (mbmi->skip) {
-        // TODO(chengchen): change av1_get_transform_size() to be consistant.
+        // TODO(chengchen): change av1_get_transform_size() to be consistent.
         // plane_tx_size = get_max_rect_tx_size(plane_bsize);
         plane_tx_size = mbmi->tx_size;
       } else {
@@ -1933,7 +1933,7 @@ typedef struct AV1_DEBLOCKING_PARAMETERS {
 } AV1_DEBLOCKING_PARAMETERS;
 
 // Return TX_SIZE from get_transform_size(), so it is plane and direction
-// awared
+// awarded
 static TX_SIZE set_lpf_parameters(
     AV1_DEBLOCKING_PARAMETERS *const params, const ptrdiff_t mode_step,
     const AV1_COMMON *const cm, const MACROBLOCKD *const xd,

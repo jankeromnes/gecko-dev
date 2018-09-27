@@ -357,8 +357,8 @@ protected:
 /**
  * This mechanism is designed to know if an extension is supported. In the long
  * term, we would like to only use the extension group queries XXX_* to have
- * full compatibility with context version and profiles (especialy the core that
- * officialy don't bring any extensions).
+ * full compatibility with context version and profiles (especially the core that
+ * officially don't bring any extensions).
  */
 public:
 

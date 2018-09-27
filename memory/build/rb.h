@@ -51,7 +51,7 @@
 //                              ^^^^^
 //                           or aKey
 //
-// Interpretation of comparision function return values:
+// Interpretation of comparison function return values:
 //
 //   Order::eLess: aNode <  aOther
 //   Order::eEqual: aNode == aOther

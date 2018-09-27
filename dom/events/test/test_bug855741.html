@@ -77,7 +77,7 @@ var blur_event = new FocusEvent("blur",
                                  relatedTarget: $("content")});
 blur_event.construct_test = true;
 
-// create cycle referece for leak test
+// create cycle reference for leak test
 $("content").foo_focus = focus_event;
 $("content").foo_blur = blur_event;
 

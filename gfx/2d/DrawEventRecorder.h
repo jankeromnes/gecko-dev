@@ -195,7 +195,7 @@ public:
   /* The index stream is of the form:
    * ItemIndex { size_t dataEnd; size_t extraDataEnd; }
    * It gets concatenated to the end of mOutputStream in Finish()
-   * The last size_t in the stream is offset of the begining of the
+   * The last size_t in the stream is offset of the beginning of the
    * index.
    */
   MemStream mIndex;

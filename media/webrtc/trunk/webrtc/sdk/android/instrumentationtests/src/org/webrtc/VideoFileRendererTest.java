@@ -40,7 +40,7 @@ public class VideoFileRendererTest {
         new VideoFileRenderer(videoOutPath, frameWidth, frameHeight, eglBase.getEglBaseContext());
 
     String[] frames = {
-        "THIS IS JUST SOME TEXT x", "THE SECOND FRAME qwerty.", "HERE IS THE THRID FRAME!"};
+        "THIS IS JUST SOME TEXT x", "THE SECOND FRAME qwerty.", "HERE IS THE THIRD FRAME!"};
 
     for (String frameStr : frames) {
       int[] planeSizes = {
@@ -74,7 +74,7 @@ public class VideoFileRendererTest {
           + "FRAME\n"
           + "THIS IS JUST SOME TEXT xFRAME\n"
           + "THE SECOND FRAME qwerty.FRAME\n"
-          + "HERE IS THE THRID FRAME!";
+          + "HERE IS THE THIRD FRAME!";
       assertEquals(expected, fileContent);
     } finally {
       writtenFile.close();

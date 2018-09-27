@@ -139,7 +139,7 @@ int PushResampler<T>::Resample(const T* src, size_t src_length, T* dst,
   }
 }
 
-// Explictly generate required instantiations.
+// Explicitly generate required instantiations.
 template class PushResampler<int16_t>;
 template class PushResampler<float>;
 

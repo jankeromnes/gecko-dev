@@ -13,7 +13,7 @@ var gTestLog = [];
  *    - .defaultEngine, triggering engine-default
  *    - .currentEngine, triggering engine-current (after bug 493051 - for now the search service sets this after engine-added)
  *   ...and then schedules a removal
- *  - engine-loaded (the search service's observer is garanteed to fire first, which is what causes engine-added to fire)
+ *  - engine-loaded (the search service's observer is guaranteed to fire first, which is what causes engine-added to fire)
  *  - engine-removed (due to the removal schedule above)
  */
 var expectedLog = [

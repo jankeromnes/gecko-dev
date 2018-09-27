@@ -16,7 +16,7 @@
     <d:testDescription xmlns="http://www.w3.org/1999/xhtml" href="http://www.w3.org/TR/SVG11/struct.html#Groups">
         <p>
           This test validates that properties are inherited (or not, depending on
-          their defintion), from a group to its children.
+          their definition), from a group to its children.
         </p>
     </d:testDescription>
     <d:operatorScript xmlns="http://www.w3.org/1999/xhtml">

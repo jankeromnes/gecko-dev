@@ -1070,7 +1070,7 @@ nsTypeAheadFind::Find(const nsAString& aSearchString, bool aLinksOnly,
 
   // --------- Initialize find if 1st char ----------
   if (bufferLength == 0) {
-    // If you can see the selection (not collapsed or thru caret browsing),
+    // If you can see the selection (not collapsed or through caret browsing),
     // or if already focused on a page element, start there.
     // Otherwise we're going to start at the first visible element
     bool isSelectionCollapsed = !selection || selection->IsCollapsed();

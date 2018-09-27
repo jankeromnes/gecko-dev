@@ -25,7 +25,7 @@ public:
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS_INHERITED(PublicKeyCredential,
                                                          Credential)
 
-  explicit PublicKeyCredential(nsPIDOMWindowInner* aParent);
+  explicit PublicKeyCredential(nsPIDOMWindowInner* apparent);
 
 protected:
   ~PublicKeyCredential() override;

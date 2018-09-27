@@ -480,7 +480,7 @@ typedef PRIntn PRBool;
 ** TYPES:       PRPackedBool
 ** DESCRIPTION:
 **  Use PRPackedBool within structs where bitfields are not desirable
-**      but minimum and consistant overhead matters.
+**      but minimum and consistent overhead matters.
 ************************************************************************/
 typedef PRUint8 PRPackedBool;
 

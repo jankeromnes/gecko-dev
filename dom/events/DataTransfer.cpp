@@ -122,9 +122,9 @@ ModeForEvent(EventMessage aEventMessage)
   }
 }
 
-DataTransfer::DataTransfer(nsISupports* aParent, EventMessage aEventMessage,
+DataTransfer::DataTransfer(nsISupports* apparent, EventMessage aEventMessage,
                            bool aIsExternal, int32_t aClipboardType)
-  : mParent(aParent)
+  : mParent(apparent)
   , mDropEffect(nsIDragService::DRAGDROP_ACTION_NONE)
   , mEffectAllowed(nsIDragService::DRAGDROP_ACTION_UNINITIALIZED)
   , mEventMessage(aEventMessage)
@@ -153,7 +153,7 @@ DataTransfer::DataTransfer(nsISupports* aParent, EventMessage aEventMessage,
   }
 }
 
-DataTransfer::DataTransfer(nsISupports* aParent,
+DataTransfer::DataTransfer(nsISupports* apparent,
                            EventMessage aEventMessage,
                            const uint32_t aEffectAllowed,
                            bool aCursorState,
@@ -165,7 +165,7 @@ DataTransfer::DataTransfer(nsISupports* aParent,
                            Element* aDragImage,
                            uint32_t aDragImageX,
                            uint32_t aDragImageY)
-  : mParent(aParent)
+  : mParent(apparent)
   , mDropEffect(nsIDragService::DRAGDROP_ACTION_NONE)
   , mEffectAllowed(aEffectAllowed)
   , mEventMessage(aEventMessage)
@@ -840,12 +840,12 @@ DataTransfer::AddElement(Element& aElement, ErrorResult& aRv)
 }
 
 nsresult
-DataTransfer::Clone(nsISupports* aParent, EventMessage aEventMessage,
+DataTransfer::Clone(nsISupports* apparent, EventMessage aEventMessage,
                     bool aUserCancelled, bool aIsCrossDomainSubFrameDrop,
                     DataTransfer** aNewDataTransfer)
 {
   RefPtr<DataTransfer> newDataTransfer =
-    new DataTransfer(aParent, aEventMessage, mEffectAllowed, mCursorState,
+    new DataTransfer(apparent, aEventMessage, mEffectAllowed, mCursorState,
                      mIsExternal, aUserCancelled, aIsCrossDomainSubFrameDrop,
                      mClipboardType, mItems, mDragImage, mDragImageX,
                      mDragImageY);

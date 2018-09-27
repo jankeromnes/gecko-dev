@@ -6,7 +6,7 @@
 // except according to those terms
 //! Common header file for all USB IOCTLs defined for
 //! the core stack. We define them in this single header file
-//! so that we can maintain backward compatibilty with older
+//! so that we can maintain backward compatibility with older
 //! versions of the stack.
 use shared::guiddef::GUID;
 use shared::minwindef::ULONG;

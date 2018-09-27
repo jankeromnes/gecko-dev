@@ -1269,7 +1269,7 @@ Ajax.InPlaceEditor.prototype = {
         new Ajax.Updater(
             {
                 success: this.element,
-                 // dont update on failure (this could be an option)
+                 // don't update on failure (this could be an option)
                 failure: null
             },
             this.url,

@@ -367,7 +367,7 @@ nsRFPService::RandomMidpoint(long long aClampedTimeUSec,
   nsCString hashResult = cache->Get(extraClampedTime, aContextMixin);
 
   if(hashResult.Length() != HASH_DIGEST_SIZE_BYTES) { // Cache Miss =(
-    // If someone has pased in the testing-only parameter, replace our seed with it
+    // If someone has passed in the testing-only parameter, replace our seed with it
     if (aSecretSeed != nullptr) {
       StaticMutexAutoLock lock(sLock);
       if (sSecretMidpointSeed) {
@@ -402,9 +402,9 @@ nsRFPService::RandomMidpoint(long long aClampedTimeUSec,
      *
      * With authentication off the table, the properties we would get by
      * using an HMAC here would be:
-     *  - Resistence to length extension
-     *  - Resistence to collision attacks on the underlying hash function
-     *  - Resistence to chosen prefix attacks
+     *  - Resistance to length extension
+     *  - Resistance to collision attacks on the underlying hash function
+     *  - Resistance to chosen prefix attacks
      *
      * There is no threat of length extension here. Nor is there any real
      * practical threat of collision: not only are we using a good hash
@@ -770,7 +770,7 @@ nsRFPService::Init()
   // Call Update here to cache the values of the prefs and set the timezone.
   UpdateRFPPref();
 
-  // Create the LRU Cache when we initialize, to avoid accidently trying to
+  // Create the LRU Cache when we initialize, to avoid accidentally trying to
   // create it (and call ClearOnShutdown) on a non-main-thread
   if(!sCache) {
     sCache = new LRUCache();

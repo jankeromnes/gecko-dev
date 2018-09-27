@@ -173,7 +173,7 @@ srtp_err_status_t srtp_crypto_kernel_load_debug_module(
  * key_len octets.  Return values are:
  *
  *    srtp_err_status_ok           no problems
- *    srtp_err_status_alloc_fail   an allocation failure occured
+ *    srtp_err_status_alloc_fail   an allocation failure occurred
  *    srtp_err_status_fail         couldn't find cipher with identifier 'id'
  */
 srtp_err_status_t srtp_crypto_kernel_alloc_cipher(srtp_cipher_type_id_t id,
@@ -189,7 +189,7 @@ srtp_err_status_t srtp_crypto_kernel_alloc_cipher(srtp_cipher_type_id_t id,
  * values are:
  *
  *    srtp_err_status_ok           no problems
- *    srtp_err_status_alloc_fail   an allocation failure occured
+ *    srtp_err_status_alloc_fail   an allocation failure occurred
  *    srtp_err_status_fail         couldn't find auth with identifier 'id'
  */
 srtp_err_status_t srtp_crypto_kernel_alloc_auth(srtp_auth_type_id_t id,

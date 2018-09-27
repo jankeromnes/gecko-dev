@@ -236,7 +236,7 @@ TEST(UrlClassifierCaching, InvalidateExpiredCacheEntryV4)
 }
 
 // This testcase check if an cache entry whose negative cache time is expired
-// and it doesn't have any postive cache entries in it, it should be removed
+// and it doesn't have any positive cache entries in it, it should be removed
 // from cache after calling |Has|.
 TEST(UrlClassifierCaching, NegativeCacheExpireV2)
 {

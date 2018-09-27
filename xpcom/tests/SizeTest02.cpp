@@ -39,7 +39,7 @@ Test02_Raw00( nsISupports* aDOMNode, nsString* aResult )
 		// m144, w66
 	{
 // -- the following code is assumed, but is commented out so we compare only
-//		 the relevent generated code
+//		 the relevant generated code
 
 //		if ( !aDOMNode )
 //			return NS_ERROR_NULL_POINTER;

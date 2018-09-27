@@ -3001,7 +3001,7 @@ NativeKey::GetFollowingCharMessage(MSG& aCharMsg)
           MOZ_LOG(sNativeKeyLogger, LogLevel::Warning,
             ("%p   NativeKey::GetFollowingCharMessage(), WARNING, received a "
              "char message during removing it from the queue, but it's "
-             "differnt from what trying to remove from the queue, "
+             "different from what trying to remove from the queue, "
              "aCharMsg=%s, nextKeyMsg=%s, kFoundCharMsg=%s",
              this, ToString(mReceivedMsg).get(), ToString(nextKeyMsg).get(),
              ToString(kFoundCharMsg).get()));
@@ -3062,7 +3062,7 @@ NativeKey::GetFollowingCharMessage(MSG& aCharMsg)
       if (!IsSamePhysicalKeyMessage(nextKeyMsgInAllWindows, kFoundCharMsg)) {
         MOZ_LOG(sNativeKeyLogger, LogLevel::Warning,
           ("%p   NativeKey::GetFollowingCharMessage(), WARNING, failed to "
-           "remove a char message and next key message becomes differnt key's "
+           "remove a char message and next key message becomes different key's "
            "char message, nextKeyMsgInAllWindows=%s, nextKeyMsg=%s, "
            "kFoundCharMsg=%s",
            this, ToString(nextKeyMsgInAllWindows).get(),
@@ -4763,7 +4763,7 @@ KeyboardLayout::ConvertNativeKeyCodeToDOMKeyCode(UINT aNativeKeyCode) const
     case VK_SLEEP:
     case VK_NUMLOCK:
     case VK_SCROLL: // SCROLL LOCK
-    case VK_ATTN: // Attension key of IBM midrange computers, e.g., AS/400
+    case VK_ATTN: // Attention key of IBM midrange computers, e.g., AS/400
     case VK_CRSEL: // Cursor Selection
     case VK_EXSEL: // Extend Selection
     case VK_EREOF: // Erase EOF key of IBM 3270 keyboard layout

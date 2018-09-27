@@ -55,7 +55,7 @@ public:
     ErrorResult& aRv);
   // End WebIDL Methods
 
-  explicit MediaCapabilities(nsIGlobalObject* aParent);
+  explicit MediaCapabilities(nsIGlobalObject* apparent);
 
   nsIGlobalObject* GetParentObject() const { return mParent; }
   JSObject* WrapObject(JSContext* aCx,

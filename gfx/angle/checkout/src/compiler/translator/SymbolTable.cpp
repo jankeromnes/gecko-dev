@@ -113,7 +113,7 @@ const TFunction *TSymbolTable::setFunctionParameterNamesFromDefinition(const TFu
     ASSERT(firstDeclaration);
     // Note: 'firstDeclaration' could be 'function' if this is the first time we've seen function as
     // it would have just been put in the symbol table. Otherwise, we're looking up an earlier
-    // occurance.
+    // occurrence.
     if (function != firstDeclaration)
     {
         // The previous declaration should have the same parameters as the function definition
@@ -295,7 +295,7 @@ TPrecision TSymbolTable::getDefaultPrecision(TBasicType type) const
 
     int level = static_cast<int>(mPrecisionStack.size()) - 1;
     ASSERT(level >= 0);  // Just to be safe. Should not happen.
-    // If we dont find anything we return this. Some types don't have predefined default precision.
+    // If we don't find anything we return this. Some types don't have predefined default precision.
     TPrecision prec = EbpUndefined;
     while (level >= 0)
     {

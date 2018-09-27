@@ -1089,7 +1089,7 @@ Column.prototype = {
   // items is a cell-id to cell-index map. It is basically a reverse map of the
   // this.cells object and is used to quickly reverse lookup a cell by its id
   // instead of looping through the cells array. This reverse map is not kept
-  // upto date in sync with the cells array as updating it is in itself a loop
+  // up to date in sync with the cells array as updating it is in itself a loop
   // through all the cells of the columns. Thus update it on demand when it goes
   // out of sync with this.cells.
   items: null,

@@ -4550,7 +4550,7 @@ EventStateManager::ResetPointerToWindowCenterWhilePointerLocked(
   if (aMouseEvent->mRefPoint != center && updateSynthCenteringPoint) {
     // Mouse move doesn't finish at the center of the window. Dispatch a
     // synthetic native mouse event to move the pointer back to the center
-    // of the window, to faciliate more movement. But first, record that
+    // of the window, to facilitate more movement. But first, record that
     // we've dispatched a synthetic mouse movement, so we can cancel it
     // in the other branch here.
     sSynthCenteringPoint = center;

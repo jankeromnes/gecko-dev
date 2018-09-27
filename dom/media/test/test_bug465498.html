@@ -35,7 +35,7 @@ function playbackEnded(e) {
 
 function seekEnded(e) {
   var v = e.target;
-  info(v._name + " seeked");
+  info(v._name + " sought");
   if (v._finished)
     return;
   ok(v.currentTime == 0, "Checking currentTime after seek: " +
@@ -70,7 +70,7 @@ function initTest(test, token) {
   v._finished = false;
   v.addEventListener("loadedmetadata", startTest);
   v.addEventListener("ended", playbackEnded);
-  v.addEventListener("seeked", seekEnded);
+  v.addEventListener("sought", seekEnded);
   v.addEventListener("seeking", seeking);
   document.body.appendChild(v);
 }

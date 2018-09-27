@@ -5,7 +5,7 @@
 
 //-----------------------------------------------------------------------------
 var BUGNUMBER = 301738;
-var summary = 'Date parse compatibilty with MSIE';
+var summary = 'Date parse compatibility with MSIE';
 var actual = '';
 var expect = '';
 

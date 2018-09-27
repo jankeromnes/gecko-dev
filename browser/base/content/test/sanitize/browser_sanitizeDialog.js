@@ -722,7 +722,7 @@ async function addDownloadWithMinutesAgo(aExpectedPathList, aMinutesAgo) {
 function promiseAddFormEntryWithMinutesAgo(aMinutesAgo) {
   let name = aMinutesAgo + "-minutes-ago";
 
-  // Artifically age the entry to the proper vintage.
+  // Artificially age the entry to the proper vintage.
   let timestamp = now_uSec - (aMinutesAgo * kUsecPerMin);
 
   return new Promise((resolve, reject) =>

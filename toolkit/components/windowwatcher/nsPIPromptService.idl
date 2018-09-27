@@ -26,6 +26,6 @@ interface nsPIPromptService : nsISupports
         eDelayButtonEnable=6, eSoundEventId=7};
 %}
 
-   void doDialog(in nsIDOMWindow aParent, in nsIDialogParamBlock aParamBlock, in string aChromeURL);
+   void doDialog(in nsIDOMWindow apparent, in nsIDialogParamBlock aParamBlock, in string aChromeURL);
 };
 

@@ -117,7 +117,7 @@ class DTDChecker(Checker):
             parser.parse(six.BytesIO(self.tmpl % (_entities.encode('utf-8'),
                          l10nValue.encode('utf-8'))))
             # also catch stray %
-            # if this fails, we need to substract the entity definition
+            # if this fails, we need to subtract the entity definition
             parser.setContentHandler(self.defaulthandler)
             parser.parse(
                 six.BytesIO(self.tmpl %
@@ -135,7 +135,7 @@ class DTDChecker(Checker):
             else:
                 col = e.getColumnNumber()
                 if lnr == 1:
-                    # first line starts with <elem>, substract
+                    # first line starts with <elem>, subtract
                     col -= len("<elem>")
                 elif lnr == 0:
                     col -= len("<!DOCTYPE elem [")  # first line is DOCTYPE

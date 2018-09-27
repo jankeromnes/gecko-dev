@@ -54,7 +54,7 @@ Changes between 1.2.1 and 1.3.0
     @py.test.mark.xfail(run=False) do not run the decorated test
     @py.test.mark.xfail(reason="...") prints the reason string in xfail summaries
 
-  specifiying ``--runxfail`` on command line ignores xfail markers to show
+  specifying ``--runxfail`` on command line ignores xfail markers to show
   you the underlying traceback.
 
 - expose (previously internal) commonly useful methods:
@@ -280,7 +280,7 @@ Changes between 1.1.0 and 1.0.2
 
 * add the ability to specify a path for py.lookup to search in
 
-* fix a funcarg cached_setup bug probably only occuring
+* fix a funcarg cached_setup bug probably only occurring
   in distributed testing and "module" scope with teardown.
 
 * many fixes and changes for making the code base python3 compatible,

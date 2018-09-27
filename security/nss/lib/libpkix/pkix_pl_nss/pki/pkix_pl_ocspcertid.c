@@ -217,7 +217,7 @@ cleanup:
  *  to prevent repetitive OCSP requests.
  *  After this function got called, it may no longer be safe to
  *  use the provided cid parameter, because ownership might have been
- *  transfered to the cache. This status will be recorded inside the
+ *  transferred to the cache. This status will be recorded inside the
  *  cid object.
  *
  * PARAMETERS

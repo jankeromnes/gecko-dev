@@ -91,7 +91,7 @@ bool VideoAdapter::KeepFrame(int64_t in_timestamp_ns) {
     const int64_t time_until_next_frame_ns =
         (*next_frame_timestamp_ns_ - in_timestamp_ns);
 
-    // Continue if timestamp is withing expected range.
+    // Continue if timestamp is within expected range.
     if (std::abs(time_until_next_frame_ns) < 2 * requested_format_->interval) {
       // Drop if a frame shouldn't be outputted yet.
       if (time_until_next_frame_ns > 0)

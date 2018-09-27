@@ -343,7 +343,7 @@ void
 IPCPrintDlg::CopyFrom(const LPPRINTDLGW& aDlg)
 {
   // DLP: Trouble -- my prior impl "worked" but didn't return anything
-  // AFAIR.  So... ???  But it printed a page!!!  How?!
+  // AFFAIR.  So... ???  But it printed a page!!!  How?!
   MOZ_ASSERT_UNREACHABLE("TODO: DLP:");
 }
 

@@ -1824,7 +1824,7 @@ ssl_GetSelfEncryptKeys(sslSocket *ss, PRUint8 *keyName,
 }
 
 /* If lockTime is zero, it implies that the lock is not held, and must be
- * aquired here.
+ * acquired here.
  */
 static SECStatus
 getSvrWrappingKey(unsigned int symWrapMechIndex,

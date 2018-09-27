@@ -49,7 +49,7 @@ class nsFilePicker :
 public:
   nsFilePicker();
 
-  NS_IMETHOD Init(mozIDOMWindowProxy *aParent, const nsAString& aTitle, int16_t aMode) override;
+  NS_IMETHOD Init(mozIDOMWindowProxy *apparent, const nsAString& aTitle, int16_t aMode) override;
 
   NS_DECL_ISUPPORTS
 
@@ -75,7 +75,7 @@ public:
 
 protected:
   /* method from nsBaseFilePicker */
-  virtual void InitNative(nsIWidget *aParent,
+  virtual void InitNative(nsIWidget *apparent,
                           const nsAString& aTitle) override;
   nsresult Show(int16_t *aReturnVal) override;
   nsresult ShowW(int16_t *aReturnVal);

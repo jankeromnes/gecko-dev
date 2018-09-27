@@ -210,7 +210,7 @@ const browsingContextTargetPrototype = {
    * Subclasses are expected to implement a getter for the docShell property.
    *
    * @param connection DebuggerServerConnection
-   *        The conection to the client.
+   *        The connection to the client.
    */
   initialize: function(connection) {
     Actor.prototype.initialize.call(this, connection);

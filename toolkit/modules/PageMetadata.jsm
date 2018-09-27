@@ -241,7 +241,7 @@ var PageMetadata = {
 
   /**
    * Find the first few images in a document, for use as preview images.
-   * Will return upto DISCOVER_IMAGES_MAX number of images.
+   * Will return up to DISCOVER_IMAGES_MAX number of images.
    *
    * @note This is not very clever. It does not (yet) check if any of the
    *       images may be appropriate as a preview image.

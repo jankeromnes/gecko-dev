@@ -133,7 +133,7 @@ typedef struct {
 
 typedef struct {
 
-  //for inital estimator
+  //for initial estimator
   int16_t   dec_buffer16[PITCH_CORR_LEN2+PITCH_CORR_STEP2+PITCH_MAX_LAG/2-PITCH_FRAME_LEN/2+2];
   int32_t   decimator_state32[2*ALLPASSSECTIONS+1];
   int16_t   inbuf[QLOOKAHEAD];
@@ -154,7 +154,7 @@ typedef struct {
   int32_t prevHP[PITCH_MAX_LAG + 10];                     // [FRAMESAMPLES/2]; save 90
 
 
-  int16_t decayCoeffPriodic; /* how much to supress a sample */
+  int16_t decayCoeffPriodic; /* how much to suppress a sample */
   int16_t decayCoeffNoise;
   int16_t used;       /* if PLC is used */
 

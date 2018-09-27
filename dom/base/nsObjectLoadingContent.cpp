@@ -599,10 +599,10 @@ nsObjectLoadingContent::SetupDocShell(nsIURI* aRecursionCheckURI)
 
 nsresult
 nsObjectLoadingContent::BindToTree(nsIDocument* aDocument,
-                                   nsIContent* aParent,
+                                   nsIContent* apparent,
                                    nsIContent* aBindingParent)
 {
-  nsImageLoadingContent::BindToTree(aDocument, aParent, aBindingParent);
+  nsImageLoadingContent::BindToTree(aDocument, apparent, aBindingParent);
 
   if (aDocument) {
     aDocument->AddPlugin(this);
@@ -621,7 +621,7 @@ nsObjectLoadingContent::UnbindFromTree(bool aDeep, bool aNullParent)
   nsIDocument* ownerDoc = thisElement->OwnerDoc();
   ownerDoc->RemovePlugin(this);
 
-  /// XXX(johns): Do we want to somehow propogate the reparenting behavior to
+  /// XXX(johns): Do we want to somehow propagate the reparenting behavior to
   ///             FakePlugin types as well?
   if (mType == eType_Plugin && (mInstanceOwner || mInstantiating)) {
     // we'll let the plugin continue to run at least until we get back to
@@ -1729,7 +1729,7 @@ nsObjectLoadingContent::UpdateObjectParameters()
     // In order of preference:
     //
     // 1) Perform typemustmatch check.
-    //    If check is sucessful use type without further checks.
+    //    If check is successful use type without further checks.
     //    If check is unsuccessful set stateInvalid to true
     // 2) Use our type hint if it matches a plugin
     // 3) If we have eAllowPluginSkipChannel, use the uri file extension if

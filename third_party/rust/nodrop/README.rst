@@ -11,7 +11,7 @@ Recent Changes (nodrop)
 
 - 0.1.11
 
-  - Remove erronous assertion in test (#77)
+  - Remove erroneous assertion in test (#77)
 
 - 0.1.10
 

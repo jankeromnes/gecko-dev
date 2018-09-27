@@ -206,7 +206,7 @@ See the commit [0c223f54](https://github.com/kbknapp/clap-rs/commit/0c223f54ed46
 
 #### Documentation
 
-*   adds addtional blurbs about using multiples with subcommands ([03455b77](https://github.com/kbknapp/clap-rs/commit/03455b7751a757e7b2f6ffaf2d16168539c99661))
+*   adds additional blurbs about using multiples with subcommands ([03455b77](https://github.com/kbknapp/clap-rs/commit/03455b7751a757e7b2f6ffaf2d16168539c99661))
 *   updates the docs to reflect changes to global args and that global args values can now be propagated back up the stack ([ead076f0](https://github.com/kbknapp/clap-rs/commit/ead076f03ada4c322bf3e34203925561ec496d87))
 *   add html_root_url attribute ([e67a061b](https://github.com/kbknapp/clap-rs/commit/e67a061bcf567c6518d6c2f58852e01f02764b22))
 *   sync README version numbers with crate version ([5536361b](https://github.com/kbknapp/clap-rs/commit/5536361bcda29887ed86bb68e43d0b603cbc423f))
@@ -364,7 +364,7 @@ Minimum version of Rust is now v1.13.0 (Stable)
 
 #### Bug Fixes
 
-* **PowerShell Completions:**  fixes a bug where powershells completions cant be used if no subcommands are defined ([a8bce558](https://github.com/kbknapp/clap-rs/commit/a8bce55837dc4e0fb187dc93180884a40ae09c6f), closes [#931](https://github.com/kbknapp/clap-rs/issues/931))
+* **PowerShell Completions:**  fixes a bug where powershells completions can't be used if no subcommands are defined ([a8bce558](https://github.com/kbknapp/clap-rs/commit/a8bce55837dc4e0fb187dc93180884a40ae09c6f), closes [#931](https://github.com/kbknapp/clap-rs/issues/931))
 
 #### Improvements
 
@@ -512,7 +512,7 @@ Minimum version of Rust is now v1.13.0 (Stable)
 *   now correctly shows subcommand as required in the usage string when AppSettings::SubcommandRequiredElseHelp is used ([8f0884c1](https://github.com/kbknapp/clap-rs/commit/8f0884c1764983a49b45de52a1eddf8d721564d8))
 *   fixes some memory leaks when an error is detected and clap exits ([8c2dd287](https://github.com/kbknapp/clap-rs/commit/8c2dd28718262ace4ae0db98563809548e02a86b))
 *   fixes a trait that's marked private accidentlly, but should be crate internal public ([1ae21108](https://github.com/kbknapp/clap-rs/commit/1ae21108015cea87e5360402e1747025116c7878))
-* **Completions:**   fixes a bug that tried to propogate global args multiple times when generating multiple completion scripts ([5e9b9cf4](https://github.com/kbknapp/clap-rs/commit/5e9b9cf4dd80fa66a624374fd04e6545635c1f94), closes [#846](https://github.com/kbknapp/clap-rs/issues/846))
+* **Completions:**   fixes a bug that tried to propagate global args multiple times when generating multiple completion scripts ([5e9b9cf4](https://github.com/kbknapp/clap-rs/commit/5e9b9cf4dd80fa66a624374fd04e6545635c1f94), closes [#846](https://github.com/kbknapp/clap-rs/issues/846))
 
 #### Features
 
@@ -535,7 +535,7 @@ Minimum version of Rust is now v1.13.0 (Stable)
 
 #### Bug Fixes
 
-* **Completions:**   fixes a bug that tried to propogate global args multiple times when generating multiple completion scripts ([5e9b9cf4](https://github.com/kbknapp/clap-rs/commit/5e9b9cf4dd80fa66a624374fd04e6545635c1f94), closes [#846](https://github.com/kbknapp/clap-rs/issues/846))
+* **Completions:**   fixes a bug that tried to propagate global args multiple times when generating multiple completion scripts ([5e9b9cf4](https://github.com/kbknapp/clap-rs/commit/5e9b9cf4dd80fa66a624374fd04e6545635c1f94), closes [#846](https://github.com/kbknapp/clap-rs/issues/846))
 
 #### Documentation
 
@@ -579,7 +579,7 @@ Minimum version of Rust is now v1.13.0 (Stable)
 
 *   allow final word to be wrapped in wrap_help ([564c5f0f](https://github.com/kbknapp/clap-rs/commit/564c5f0f1730f4a2c1cdd128664f1a981c31dcd4), closes [#828](https://github.com/kbknapp/clap-rs/issues/828))
 *   actually show character in debug output ([84d8c547](https://github.com/kbknapp/clap-rs/commit/84d8c5476de95b7f37d61888bc4f13688b712434))
-*   include final character in line lenght ([aff4ba18](https://github.com/kbknapp/clap-rs/commit/aff4ba18da8147e1259b04b0bfbc1fcb5c78a3c0))
+*   include final character in line length ([aff4ba18](https://github.com/kbknapp/clap-rs/commit/aff4ba18da8147e1259b04b0bfbc1fcb5c78a3c0))
 
 #### Improvements
 
@@ -741,7 +741,7 @@ Minimum version of Rust is now v1.13.0 (Stable)
 
 #### Improvements
 
-* **Error Output:**  conflicting errors are now symetrical, meaning more consistent and less confusing ([3d37001d](https://github.com/kbknapp/clap-rs/commit/3d37001d1dc647d73cc597ff172f1072d4beb80d), closes [#718](https://github.com/kbknapp/clap-rs/issues/718))
+* **Error Output:**  conflicting errors are now symmetrical, meaning more consistent and less confusing ([3d37001d](https://github.com/kbknapp/clap-rs/commit/3d37001d1dc647d73cc597ff172f1072d4beb80d), closes [#718](https://github.com/kbknapp/clap-rs/issues/718))
 
 #### Documentation
 
@@ -1447,7 +1447,7 @@ Minimum version of Rust is now v1.13.0 (Stable)
 
 #### Bug Fixes
 
-* **Multiple Values:**  fixes bug where number_of_values wasnt respected ([72c387da](https://github.com/kbknapp/clap-rs/commit/72c387da0bb8a6f526f863770f08bb8ca0d3de03))
+* **Multiple Values:**  fixes bug where number_of_values wasn't respected ([72c387da](https://github.com/kbknapp/clap-rs/commit/72c387da0bb8a6f526f863770f08bb8ca0d3de03))
 
 
 <a name="v2.0.4"></a>
@@ -2147,7 +2147,7 @@ Minimum version of Rust is now v1.13.0 (Stable)
 
 #### Bug Fixes
 
-* **Global Args**  global arguments propogate fully now ([1f377960](https://github.com/kbknapp/clap-rs/commit/1f377960a48c82f54ca5f39eb56bcb393140b046), closes [#137](https://github.com/kbknapp/clap-rs/issues/137))
+* **Global Args**  global arguments propagate fully now ([1f377960](https://github.com/kbknapp/clap-rs/commit/1f377960a48c82f54ca5f39eb56bcb393140b046), closes [#137](https://github.com/kbknapp/clap-rs/issues/137))
 
 
 
@@ -2157,7 +2157,7 @@ Minimum version of Rust is now v1.13.0 (Stable)
 
 #### Bug Fixes
 
-* **Global Args**  global arguments propogate fully now ([8f2c0160](https://github.com/kbknapp/clap-rs/commit/8f2c0160c8d844daef375a33dbaec7d89de00a00), closes [#137](https://github.com/kbknapp/clap-rs/issues/137))
+* **Global Args**  global arguments propagate fully now ([8f2c0160](https://github.com/kbknapp/clap-rs/commit/8f2c0160c8d844daef375a33dbaec7d89de00a00), closes [#137](https://github.com/kbknapp/clap-rs/issues/137))
 
 
 

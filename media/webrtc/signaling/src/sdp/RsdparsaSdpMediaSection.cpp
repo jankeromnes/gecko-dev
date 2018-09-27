@@ -218,7 +218,7 @@ RsdparsaSdpMediaSection::Serialize(std::ostream& os) const
   }
   os << CRLF;
 
-  // We dont do i=
+  // We don't do i=
 
   if (mConnection) {
     os << *mConnection;
@@ -231,7 +231,7 @@ RsdparsaSdpMediaSection::Serialize(std::ostream& os) const
     sdp_free_string(bwString);
   }
 
-  // We dont do k= because they're evil
+  // We don't do k= because they're evil
 
   os << *mAttributeList;
 }

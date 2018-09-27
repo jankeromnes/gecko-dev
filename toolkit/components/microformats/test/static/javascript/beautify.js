@@ -312,7 +312,7 @@ function js_beautify(js_source_text, indent_size, indent_character)
 
     function print_space()
     {
-        if (output && output.substr(output.length - 1) != ' ' && output.substr(output.length - 1) != '\n') { // prevent occassional duplicate space
+        if (output && output.substr(output.length - 1) != ' ' && output.substr(output.length - 1) != '\n') { // prevent occasional duplicate space
             output += ' ';
         }
     }

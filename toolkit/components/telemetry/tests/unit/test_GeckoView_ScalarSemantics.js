@@ -29,7 +29,7 @@ add_task(async function test_MultiprocessScalarSemantics() {
    * To mitigate races during deserialization of persisted data
    * scalar operations will be recorded and applied after the deserialization is finished.
    *
-   * This test ensures it works acording to the semantics and follows the documentation example:
+   * This test ensures it works according to the semantics and follows the documentation example:
    *
    *  * Scalar deserialization is started
    *  * “test” scalar is incremented by “10” by the application -> The operation [test, add, 10] is recorded into the list.

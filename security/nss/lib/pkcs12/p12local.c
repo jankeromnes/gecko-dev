@@ -754,7 +754,7 @@ search_again:
     return NULL;
 }
 
-/* seach the safe first then try the baggage bag
+/* search the safe first then try the baggage bag
  *  safe and bag contain certs and keys to search
  *  objType is the object type to look for
  *  bagType is the type of bag that was found by sec_pkcs12_find_object

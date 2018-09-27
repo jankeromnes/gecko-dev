@@ -92,7 +92,7 @@ interface nsISocketTransportService : nsISupports
      * NS_ERROR_SOCKET_ADDRESS_NOT_SUPPORTED.
      *
      * @param aName
-     *        The name of abstract socket adress of the Unix domain socket to
+     *        The name of abstract socket address of the Unix domain socket to
      *        which we should connect.
      */
     nsISocketTransport

@@ -1348,7 +1348,7 @@ PlacesSQLQueryBuilder::SelectAsURI()
         tagsSqlFragment + NS_LITERAL_CSTRING(", h.frecency, h.hidden, h.guid, "
         "null, null, null "
         "FROM moz_places h "
-        // WHERE 1 is a no-op since additonal conditions will start with AND.
+        // WHERE 1 is a no-op since additional conditions will start with AND.
         "WHERE 1 "
           "{QUERY_OPTIONS_VISITS} {QUERY_OPTIONS_PLACES} "
           "{ADDITIONAL_CONDITIONS} ");
@@ -1401,7 +1401,7 @@ PlacesSQLQueryBuilder::SelectAsVisit()
       "v.id, v.from_visit, v.visit_type "
     "FROM moz_places h "
     "JOIN moz_historyvisits v ON h.id = v.place_id "
-    // WHERE 1 is a no-op since additonal conditions will start with AND.
+    // WHERE 1 is a no-op since additional conditions will start with AND.
     "WHERE 1 "
       "{QUERY_OPTIONS_VISITS} {QUERY_OPTIONS_PLACES} "
       "{ADDITIONAL_CONDITIONS} ");

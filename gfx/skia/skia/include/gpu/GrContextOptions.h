@@ -159,7 +159,7 @@ struct GrContextOptions {
 
     /**
      * Disables correctness workarounds that are enabled for particular GPUs, OSes, or drivers.
-     * This does not affect code path choices that are made for perfomance reasons nor does it
+     * This does not affect code path choices that are made for performance reasons nor does it
      * override other GrContextOption settings.
      */
     bool fDisableDriverCorrectnessWorkarounds = false;

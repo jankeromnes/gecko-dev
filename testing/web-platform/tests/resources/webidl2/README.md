@@ -214,7 +214,7 @@ The fields are as follows:
 * `type`: Always "callback".
 * `name`: The name of the callback.
 * `idlType`: An [IDL Type](#idl-type) describing what the callback returns.
-* `arguments`: A list of [arguments](#arguments), as in function paramters.
+* `arguments`: A list of [arguments](#arguments), as in function parameters.
 * `extAttrs`: A list of [extended attributes](#extended-attributes).
 
 ### Dictionary

@@ -103,7 +103,7 @@ public:
         to peek(). Otherwise, there is no guarantee about ordering of elements in the queue. */
     T at(int i) const { return fArray[i]; }
 
-    /** Sorts the queue into priority order.  The queue is only guarenteed to remain in sorted order
+    /** Sorts the queue into priority order.  The queue is only guaranteed to remain in sorted order
      *  until any other operation, other than at(), is performed.
      */
     void sort() {

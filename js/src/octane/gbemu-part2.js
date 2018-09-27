@@ -4946,7 +4946,7 @@ GameBoyCore.prototype.initializeTiming = function () {
   this.CPUCyclesTotalCurrent = 0;
 }
 GameBoyCore.prototype.setupRAM = function () {
-  //Setup the auxilliary/switchable RAM:
+  //Setup the auxiliary/switchable RAM:
   if (this.cMBC2) {
     this.numRAMBanks = 1 / 16;
   }

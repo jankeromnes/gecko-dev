@@ -331,8 +331,8 @@ for step in steps:
 if args.step:
     steps = steps[steps.index(args.step):]
 
-if args.upto:
-    steps = steps[:steps.index(args.upto)+1]
+if args.up to:
+    steps = steps[:steps.index(args.up to)+1]
 
 for step in steps:
     run_job(step, data)

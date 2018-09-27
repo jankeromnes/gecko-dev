@@ -205,7 +205,7 @@ async function mapImportReferenceToDescriptor({
   //   ^^^^^^^^^^^^^^^   // mapping
   //          ^^^        // binding
   //
-  // Unfortunately, Webpack also has a tendancy to over-map past the call
+  // Unfortunately, Webpack also has a tendency to over-map past the call
   // expression to the start of the next line, at least when there isn't
   // anything else on that line that is mapped, e.g.
   //

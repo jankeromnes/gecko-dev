@@ -84,7 +84,7 @@ static const nsCString::size_type sMaxSpecLength = 128;
 namespace {
 
 /**
- * It is not recommended to read from Preference everytime a channel is
+ * It is not recommended to read from Preference every time a channel is
  * connected.
  * That is not fast and we should cache preference values and reuse them
  */

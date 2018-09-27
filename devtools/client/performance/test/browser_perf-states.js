@@ -3,7 +3,7 @@
 "use strict";
 
 /**
- * Tests that view states and lazy component intialization works.
+ * Tests that view states and lazy component initialization works.
  */
 
 const { SIMPLE_URL } = require("devtools/client/performance/test/helpers/urls");
@@ -20,7 +20,7 @@ add_task(async function() {
   const { PerformanceView, OverviewView, DetailsView } = panel.panelWin;
 
   is(PerformanceView.getState(), "empty",
-    "The intial state of the performance panel view is correct.");
+    "The initial state of the performance panel view is correct.");
 
   ok(!(OverviewView.graphs.get("timeline")),
     "The markers graph should not have been created yet.");

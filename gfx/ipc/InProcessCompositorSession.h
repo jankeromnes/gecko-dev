@@ -42,7 +42,7 @@ private:
   InProcessCompositorSession(widget::CompositorWidget* aWidget,
                              nsBaseWidget* baseWidget,
                              CompositorBridgeChild* aChild,
-                             CompositorBridgeParent* aParent);
+                             CompositorBridgeParent* apparent);
 
 private:
   nsBaseWidget* mWidget;

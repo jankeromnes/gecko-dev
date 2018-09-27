@@ -13,7 +13,7 @@
 class nsIJSArgArray;
 
 // A factory function for turning a JS::Value argv into an nsIArray
-// but also supports an effecient way of extracting the original argv.
+// but also supports an efficient way of extracting the original argv.
 // The resulting object will take a copy of the array, and ensure each
 // element is rooted.
 // Optionally, aArgv may be nullptr, in which case the array is allocated and

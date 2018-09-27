@@ -1003,7 +1003,7 @@ function run_beautifier_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         bt("var x = set\n\nfunction() {}", "var x = set\n\n    function() {}");
 
         bt('<!-- foo\nbar();\n-->');
-        bt('<!-- dont crash');
+        bt('<!-- don't crash');
         bt('for () /abc/.test()');
         bt('if (k) /aaa/m.test(v) && l();');
         bt('switch (true) {\n    case /swf/i.test(foo):\n        bar();\n}');

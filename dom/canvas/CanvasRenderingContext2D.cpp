@@ -1443,7 +1443,7 @@ CanvasRenderingContext2D::DemotableContexts()
   // This is a list of raw pointers to cycle-collected objects. We need to ensure
   // that we remove elements from it during UNLINK (which can happen considerably before
   // the actual destructor) since the object is logically destroyed at that point
-  // and will be in an inconsistant state.
+  // and will be in an inconsistent state.
   static std::vector<CanvasRenderingContext2D*> contexts;
   return contexts;
 }
@@ -6121,14 +6121,14 @@ NS_IMPL_CYCLE_COLLECTION_UNROOT_NATIVE(CanvasPath, Release)
 
 NS_IMPL_CYCLE_COLLECTION_WRAPPERCACHE(CanvasPath, mParent)
 
-CanvasPath::CanvasPath(nsISupports* aParent)
-  : mParent(aParent)
+CanvasPath::CanvasPath(nsISupports* apparent)
+  : mParent(apparent)
 {
   mPathBuilder = gfxPlatform::GetPlatform()->ScreenReferenceDrawTarget()->CreatePathBuilder();
 }
 
-CanvasPath::CanvasPath(nsISupports* aParent, already_AddRefed<PathBuilder> aPathBuilder)
-  : mParent(aParent), mPathBuilder(aPathBuilder)
+CanvasPath::CanvasPath(nsISupports* apparent, already_AddRefed<PathBuilder> aPathBuilder)
+  : mParent(apparent), mPathBuilder(aPathBuilder)
 {
   if (!mPathBuilder) {
     mPathBuilder = gfxPlatform::GetPlatform()->ScreenReferenceDrawTarget()->CreatePathBuilder();

@@ -248,7 +248,7 @@ TransportSecurityInfo::Write(nsIObjectOutputStream* aStream)
   return NS_OK;
 }
 
-// This is for backward compatability to be able to read nsISSLStatus
+// This is for backward compatibility to be able to read nsISSLStatus
 // serialized object.
 nsresult TransportSecurityInfo::ReadSSLStatus(nsIObjectInputStream* aStream)
 {

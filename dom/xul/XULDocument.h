@@ -334,7 +334,7 @@ protected:
      */
     nsresult
     CreateAndInsertPI(const nsXULPrototypePI* aProtoPI,
-                      nsINode* aParent, nsINode* aBeforeThis);
+                      nsINode* apparent, nsINode* aBeforeThis);
 
     /**
      * Inserts the passed <?xml-stylesheet ?> PI at the specified
@@ -347,7 +347,7 @@ protected:
      */
     nsresult
     InsertXMLStylesheetPI(const nsXULPrototypePI* aProtoPI,
-                          nsINode* aParent,
+                          nsINode* apparent,
                           nsINode* aBeforeThis,
                           nsIContent* aPINode);
 

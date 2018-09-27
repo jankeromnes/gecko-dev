@@ -141,7 +141,7 @@ public:
   static JSObject*
   ReadStructuredClone(JSContext* aCx,
                       JSStructuredCloneReader* aReader,
-                      nsIGlobalObject* aParent,
+                      nsIGlobalObject* apparent,
                       const nsTArray<RefPtr<gfx::DataSourceSurface>>& aClonedSurfaces,
                       uint32_t aIndex);
 

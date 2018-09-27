@@ -54,7 +54,7 @@ function checkInitialSource() {
     "The debugger should show the source mapped coffee source file.");
   is(gSources.selectedValue.indexOf(".js"), -1,
     "The debugger should not show the generated js source file.");
-  is(gEditor.getText().indexOf("isnt"), 218,
+  is(gEditor.getText().indexOf("isn't"), 218,
     "The debugger's editor should have the coffee source source displayed.");
   is(gEditor.getText().indexOf("function"), -1,
     "The debugger's editor should not have the JS source displayed.");

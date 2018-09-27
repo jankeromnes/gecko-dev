@@ -897,7 +897,7 @@ nsresult nsPluginHost::SetUpPluginInstance(const nsACString &aMimeType,
   // If we failed to load a plugin instance we'll try again after
   // reloading our plugin list. Only do that once per document to
   // avoid redundant high resource usage on pages with multiple
-  // unkown instance types. We'll do that by caching the document.
+  // unknown instance types. We'll do that by caching the document.
   nsCOMPtr<nsIDocument> document;
   aOwner->GetDocument(getter_AddRefs(document));
 

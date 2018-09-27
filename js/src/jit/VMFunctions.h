@@ -217,7 +217,7 @@ struct VMFunction
         // arguments passed by reference (0b1010 >> 1 == 0b0101).
         n = (n & 0x55555555) & ~(n >> 1);
 
-        // Add the number of double-word transfered by value. (expect a few
+        // Add the number of double-word transferred by value. (expect a few
         // loop iteration)
         while (n) {
             stackSlots++;
@@ -238,7 +238,7 @@ struct VMFunction
         // arguments passed by reference (0b1010 >> 1 == 0b0101).
         n = (n & 0x55555555) & (n >> 1);
 
-        // Add the number of double-word transfered by refference. (expect a
+        // Add the number of double-word transferred by reference. (expect a
         // few loop iterations)
         while (n) {
             count++;

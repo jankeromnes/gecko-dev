@@ -1867,7 +1867,7 @@ def VerifyNoGYPFileCircularDependencies(targets):
         continue
       dependency_node = dependency_nodes.get(dependency_build_file)
       if not dependency_node:
-        raise GypError("Dependancy '%s' not found" % dependency_build_file)
+        raise GypError("Dependency '%s' not found" % dependency_build_file)
       if dependency_node not in build_file_node.dependencies:
         build_file_node.dependencies.append(dependency_node)
         dependency_node.dependents.append(build_file_node)

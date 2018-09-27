@@ -88,7 +88,7 @@ void CommandLineParser::ProcessFlags() {
   std::vector<std::string>::iterator iter;
   for (iter = args_.begin(); iter != args_.end(); ++iter) {
     if (!IsFlagWellFormed(*iter)) {
-      // Ignore badly formated flags.
+      // Ignore badly formatted flags.
       continue;
     }
     std::string flag_name = GetCommandLineFlagName(*iter);

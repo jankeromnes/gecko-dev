@@ -821,7 +821,7 @@ void AllocateRequest::OnResponse(StunMessage* response) {
     entry_->OnConnect(addr, connection_);
   }
 
-  // We will do a keep-alive regardless of whether this request suceeds.
+  // We will do a keep-alive regardless of whether this request succeeds.
   // This should have almost no impact on network usage.
   entry_->ScheduleKeepAlive();
 }

@@ -21,7 +21,7 @@ FooComponent.prototype =
     var interfaces = [Ci.nsIClassInfo];
     aCount.value = interfaces.length;
 
-    // Guerilla test for line numbers hiding in this method
+    // Guerrilla test for line numbers hiding in this method
     var threw = true;
     try {
       thereIsNoSuchIdentifier;

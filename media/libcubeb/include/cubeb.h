@@ -293,14 +293,14 @@ typedef enum {
 } cubeb_device_fmt;
 
 #if defined(WORDS_BIGENDIAN) || defined(__BIG_ENDIAN__)
-/** 16-bit integers, native endianess, when on a Big Endian environment. */
+/** 16-bit integers, native endianness, when on a Big Endian environment. */
 #define CUBEB_DEVICE_FMT_S16NE     CUBEB_DEVICE_FMT_S16BE
-/** 32-bit floating points, native endianess, when on a Big Endian environment. */
+/** 32-bit floating points, native endianness, when on a Big Endian environment. */
 #define CUBEB_DEVICE_FMT_F32NE     CUBEB_DEVICE_FMT_F32BE
 #else
-/** 16-bit integers, native endianess, when on a Little Endian environment. */
+/** 16-bit integers, native endianness, when on a Little Endian environment. */
 #define CUBEB_DEVICE_FMT_S16NE     CUBEB_DEVICE_FMT_S16LE
-/** 32-bit floating points, native endianess, when on a Little Endian
+/** 32-bit floating points, native endianness, when on a Little Endian
  *  environment. */
 #define CUBEB_DEVICE_FMT_F32NE     CUBEB_DEVICE_FMT_F32LE
 #endif
@@ -347,7 +347,7 @@ typedef struct {
   uint32_t min_rate;          /**< Minimum sample rate supported. */
 
   uint32_t latency_lo;        /**< Lowest possible latency in frames. */
-  uint32_t latency_hi;        /**< Higest possible latency in frames. */
+  uint32_t latency_hi;        /**< Highest possible latency in frames. */
 } cubeb_device_info;
 
 /** Device collection.

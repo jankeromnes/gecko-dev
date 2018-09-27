@@ -326,7 +326,7 @@ function openModalWindow(domWin, uri, args) {
     // Password" dialog does this).  These prompts must be shown even if there
     // are *no* visible windows at all.
     // There's also a requirement for prompts to be blocked if a window is
-    // passed and that window is hidden (eg, auth prompts are supressed if the
+    // passed and that window is hidden (eg, auth prompts are suppressed if the
     // passed window is the hidden window).
     // See bug 875157 comment 30 for more...
     if (domWin) {

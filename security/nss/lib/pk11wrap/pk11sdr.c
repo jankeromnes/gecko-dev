@@ -379,7 +379,7 @@ PK11SDR_Decrypt(SECItem *data, SECItem *result, void *cx)
     }
 
     /*
-     * handle the case where your key indicies may have been broken
+     * handle the case where your key indices may have been broken
      */
     if (rv != SECSuccess) {
         PK11SymKey *keyList = PK11_ListFixedKeysInSlot(slot, NULL, cx);

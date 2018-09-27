@@ -88,7 +88,7 @@ static bool can_ignore_bilerp_constraint(const GrTextureProducer& producer,
 
 /**
  * Checks whether the paint, matrix, and constraint are compatible with using
- * GrRenderTargetContext::drawTextureAffine. It is more effecient than the GrTextureProducer
+ * GrRenderTargetContext::drawTextureAffine. It is more efficient than the GrTextureProducer
  * general case.
  */
 static bool can_use_draw_texture_affine(const SkPaint& paint, GrAA aa, const SkMatrix& ctm,

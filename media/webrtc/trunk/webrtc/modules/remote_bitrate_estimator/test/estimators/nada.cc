@@ -62,7 +62,7 @@ void NadaBweReceiver::ReceivePacket(int64_t arrival_time_ms,
   clock_.AdvanceTimeMilliseconds(arrival_time_ms - clock_.TimeInMilliseconds());
   recv_stats_->IncomingPacket(media_packet.header(),
                               media_packet.payload_size(), false);
-  // Refered as x_n.
+  // Referred as x_n.
   int64_t delay_ms = arrival_time_ms - media_packet.sender_timestamp_ms();
 
   // The min should be updated within the first 10 minutes.
@@ -70,7 +70,7 @@ void NadaBweReceiver::ReceivePacket(int64_t arrival_time_ms,
     baseline_delay_ms_ = std::min(baseline_delay_ms_, delay_ms);
   }
 
-  delay_signal_ms_ = delay_ms - baseline_delay_ms_;  // Refered as d_n.
+  delay_signal_ms_ = delay_ms - baseline_delay_ms_;  // Referred as d_n.
   const int kMedian = arraysize(last_delays_ms_);
   last_delays_ms_[(last_delays_index_++) % kMedian] = delay_signal_ms_;
   int size = std::min(last_delays_index_, kMedian);

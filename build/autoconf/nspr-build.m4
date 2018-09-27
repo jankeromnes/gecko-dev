@@ -24,7 +24,7 @@ MOZ_ARG_WITH_STRING(nspr-cflags,
                           script available.  This is the case when building
                           SpiderMonkey as part of the Mozilla tree: the
                           top-level configure script computes NSPR flags
-                          that accomodate the quirks of that environment.],
+                          that accommodate the quirks of that environment.],
     NSPR_CFLAGS=$withval)
 MOZ_ARG_WITH_STRING(nspr-libs,
 [  --with-nspr-libs=LIBS   Pass LIBS to LD when linking code that uses NSPR.

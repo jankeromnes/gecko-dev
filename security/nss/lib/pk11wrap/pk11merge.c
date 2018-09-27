@@ -1031,7 +1031,7 @@ pk11_mergeTrustEntry(CK_ATTRIBUTE *target, CK_ATTRIBUTE *source)
                                                                    : CKT_NSS_TRUST_UNKNOWN;
 
     /*
-     * Examine a single entry and deside if the source or target version
+     * Examine a single entry and decide if the source or target version
      * should win out. When all the entries have been checked, if there is
      * any case we need to update, we will write the whole source record
      * to the target database. That means for each individual record, if the

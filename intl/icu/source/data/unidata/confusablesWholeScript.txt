@@ -143,13 +143,13 @@
 
 0625          ; Arab; Latn; L #      (إ)  ARABIC LETTER ALEF WITH HAMZA BELOW
 0627          ; Arab; Latn; L #      (ا)  ARABIC LETTER ALEF
-0629          ; Arab; Latn; L #      (ة)  ARABIC LETTER TEH MARBUTA
+0629          ; Arab; Latn; L #      (ة)  ARABIC LETTER THE MARBUTA
 0647          ; Arab; Latn; L #      (ه)  ARABIC LETTER HEH
 0661          ; Arab; Latn; L #      (١)  ARABIC-INDIC DIGIT ONE
 0665          ; Arab; Latn; L #      (٥)  ARABIC-INDIC DIGIT FIVE
 06BE          ; Arab; Latn; L #      (ھ)  ARABIC LETTER HEH DOACHASHMEE
 06C1          ; Arab; Latn; L #      (ہ)  ARABIC LETTER HEH GOAL
-06C3          ; Arab; Latn; L #      (ۃ)  ARABIC LETTER TEH MARBUTA GOAL
+06C3          ; Arab; Latn; L #      (ۃ)  ARABIC LETTER THE MARBUTA GOAL
 06D5          ; Arab; Latn; L #      (ە)  ARABIC LETTER AE
 06F1          ; Arab; Latn; L #      (۱)  EXTENDED ARABIC-INDIC DIGIT ONE
 06F5          ; Arab; Latn; L #      (۵)  EXTENDED ARABIC-INDIC DIGIT FIVE
@@ -349,83 +349,83 @@
 
 # Bengali; Devanagari: [ঁ়]; [ँ़]
 
-0981          ; Beng; Deva; L #      (ঁ)  BENGALI SIGN CANDRABINDU
-09BC          ; Beng; Deva; L #      (়)  BENGALI SIGN NUKTA
+0981          ; Being; Deva; L #      (ঁ)  BENGALI SIGN CANDRABINDU
+09BC          ; Being; Deva; L #      (়)  BENGALI SIGN NUKTA
 
 # Total code points: 2
 
 # Bengali; Greek: [০]; [θ]
 
-09E6          ; Beng; Grek; L #      (০)  BENGALI DIGIT ZERO
+09E6          ; Being; Grek; L #      (০)  BENGALI DIGIT ZERO
 
 # Total code points: 1
 
 # Bengali; Gujarati: [ঁ়]; [ઁ઼]
 
-0981          ; Beng; Gujr; L #      (ঁ)  BENGALI SIGN CANDRABINDU
-09BC          ; Beng; Gujr; L #      (়)  BENGALI SIGN NUKTA
+0981          ; Being; Gujr; L #      (ঁ)  BENGALI SIGN CANDRABINDU
+09BC          ; Being; Gujr; L #      (়)  BENGALI SIGN NUKTA
 
 # Total code points: 2
 
 # Bengali; Gurmukhi: [ঃ়৪৭]; [ਃ਼੧੪]
 
-0983          ; Beng; Guru; L #      (ঃ)  BENGALI SIGN VISARGA
-09BC          ; Beng; Guru; L #      (়)  BENGALI SIGN NUKTA
-09EA          ; Beng; Guru; L #      (৪)  BENGALI DIGIT FOUR
-09ED          ; Beng; Guru; L #      (৭)  BENGALI DIGIT SEVEN
+0983          ; Being; Guru; L #      (ঃ)  BENGALI SIGN VISARGA
+09BC          ; Being; Guru; L #      (়)  BENGALI SIGN NUKTA
+09EA          ; Being; Guru; L #      (৪)  BENGALI DIGIT FOUR
+09ED          ; Being; Guru; L #      (৭)  BENGALI DIGIT SEVEN
 
 # Total code points: 4
 
 # Bengali; Han: [০]; [〇]
 
-09E6          ; Beng; Hani; L #      (০)  BENGALI DIGIT ZERO
+09E6          ; Being; Hani; L #      (০)  BENGALI DIGIT ZERO
 
 # Total code points: 1
 
 # Bengali; Hebrew: [়]; [ִ]
 
-09BC          ; Beng; Hebr; L #      (়)  BENGALI SIGN NUKTA
+09BC          ; Being; Hebr; L #      (়)  BENGALI SIGN NUKTA
 
 # Total code points: 1
 
 # Bengali; Kannada: [ঃ]; [ಃ]
 
-0983          ; Beng; Knda; L #      (ঃ)  BENGALI SIGN VISARGA
+0983          ; Being; Knda; L #      (ঃ)  BENGALI SIGN VISARGA
 
 # Total code points: 1
 
 # Bengali; Malayalam: [ঃ০]; [ഃഠ]
 
-0983          ; Beng; Mlym; L #      (ঃ)  BENGALI SIGN VISARGA
-09E6          ; Beng; Mlym; L #      (০)  BENGALI DIGIT ZERO
+0983          ; Being; Mlym; L #      (ঃ)  BENGALI SIGN VISARGA
+09E6          ; Being; Mlym; L #      (০)  BENGALI DIGIT ZERO
 
 # Total code points: 2
 
 # Bengali; Myanmar: [ঃ]; [း]
 
-0983          ; Beng; Mymr; L #      (ঃ)  BENGALI SIGN VISARGA
+0983          ; Being; Mymr; L #      (ঃ)  BENGALI SIGN VISARGA
 
 # Total code points: 1
 
 # Bengali; Oriya: [ঁ়০৪৭]; [ଁଃଠ଼୦୨]
 
-0981          ; Beng; Orya; L #      (ঁ)  BENGALI SIGN CANDRABINDU
-09BC          ; Beng; Orya; L #      (়)  BENGALI SIGN NUKTA
-09E6          ; Beng; Orya; L #      (০)  BENGALI DIGIT ZERO
-09EA          ; Beng; Orya; L #      (৪)  BENGALI DIGIT FOUR
-09ED          ; Beng; Orya; L #      (৭)  BENGALI DIGIT SEVEN
+0981          ; Being; Orya; L #      (ঁ)  BENGALI SIGN CANDRABINDU
+09BC          ; Being; Orya; L #      (়)  BENGALI SIGN NUKTA
+09E6          ; Being; Orya; L #      (০)  BENGALI DIGIT ZERO
+09EA          ; Being; Orya; L #      (৪)  BENGALI DIGIT FOUR
+09ED          ; Being; Orya; L #      (৭)  BENGALI DIGIT SEVEN
 
 # Total code points: 5
 
 # Bengali; Sinhala: [ঃ]; [ඃ]
 
-0983          ; Beng; Sinh; L #      (ঃ)  BENGALI SIGN VISARGA
+0983          ; Being; Sinh; L #      (ঃ)  BENGALI SIGN VISARGA
 
 # Total code points: 1
 
 # Bengali; Telugu: [ঃ]; [ః]
 
-0983          ; Beng; Telu; L #      (ঃ)  BENGALI SIGN VISARGA
+0983          ; Being; Telu; L #      (ঃ)  BENGALI SIGN VISARGA
 
 # Total code points: 1
 
@@ -612,8 +612,8 @@
 
 # Devanagari; Bengali: [ँ़]; [ঁ়]
 
-0901          ; Deva; Beng; L #      (ँ)  DEVANAGARI SIGN CANDRABINDU
-093C          ; Deva; Beng; L #      (़)  DEVANAGARI SIGN NUKTA
+0901          ; Deva; Being; L #      (ँ)  DEVANAGARI SIGN CANDRABINDU
+093C          ; Deva; Being; L #      (़)  DEVANAGARI SIGN NUKTA
 
 # Total code points: 2
 
@@ -851,7 +851,7 @@
 
 # Greek; Bengali: [θ]; [০]
 
-03B8          ; Grek; Beng; L #      (θ)  GREEK SMALL LETTER THETA
+03B8          ; Grek; Being; L #      (θ)  GREEK SMALL LETTER THETA
 
 # Total code points: 1
 
@@ -999,8 +999,8 @@
 
 # Gujarati; Bengali: [ઁ઼]; [ঁ়]
 
-0A81          ; Gujr; Beng; L #      (ઁ)  GUJARATI SIGN CANDRABINDU
-0ABC          ; Gujr; Beng; L #      (઼)  GUJARATI SIGN NUKTA
+0A81          ; Gujr; Being; L #      (ઁ)  GUJARATI SIGN CANDRABINDU
+0ABC          ; Gujr; Being; L #      (઼)  GUJARATI SIGN NUKTA
 
 # Total code points: 2
 
@@ -1126,10 +1126,10 @@
 
 # Gurmukhi; Bengali: [ਃ਼੧੪]; [ঃ়৪৭]
 
-0A03          ; Guru; Beng; L #      (ਃ)  GURMUKHI SIGN VISARGA
-0A3C          ; Guru; Beng; L #      (਼)  GURMUKHI SIGN NUKTA
-0A67          ; Guru; Beng; L #      (੧)  GURMUKHI DIGIT ONE
-0A6A          ; Guru; Beng; L #      (੪)  GURMUKHI DIGIT FOUR
+0A03          ; Guru; Being; L #      (ਃ)  GURMUKHI SIGN VISARGA
+0A3C          ; Guru; Being; L #      (਼)  GURMUKHI SIGN NUKTA
+0A67          ; Guru; Being; L #      (੧)  GURMUKHI DIGIT ONE
+0A6A          ; Guru; Being; L #      (੪)  GURMUKHI DIGIT FOUR
 
 # Total code points: 4
 
@@ -1247,7 +1247,7 @@
 
 # Han; Bengali: [〇]; [০]
 
-3007          ; Hani; Beng; L #      (〇)  IDEOGRAPHIC NUMBER ZERO
+3007          ; Hani; Being; L #      (〇)  IDEOGRAPHIC NUMBER ZERO
 
 # Total code points: 1
 
@@ -1287,7 +1287,7 @@
 
 # Hebrew; Bengali: [ִ]; [়]
 
-05B4          ; Hebr; Beng; L #      (ִ)  HEBREW POINT HIRIQ
+05B4          ; Hebr; Being; L #      (ִ)  HEBREW POINT HIRIQ
 
 # Total code points: 1
 
@@ -1417,7 +1417,7 @@
 
 # Kannada; Bengali: [ಃ]; [ঃ]
 
-0C83          ; Knda; Beng; L #      (ಃ)  KANNADA SIGN VISARGA
+0C83          ; Knda; Being; L #      (ಃ)  KANNADA SIGN VISARGA
 
 # Total code points: 1
 
@@ -1865,8 +1865,8 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Malayalam; Bengali: [ഃഠ]; [ঃ০]
 
-0D03          ; Mlym; Beng; L #      (ഃ)  MALAYALAM SIGN VISARGA
-0D20          ; Mlym; Beng; L #      (ഠ)  MALAYALAM LETTER TTHA
+0D03          ; Mlym; Being; L #      (ഃ)  MALAYALAM SIGN VISARGA
+0D20          ; Mlym; Being; L #      (ഠ)  MALAYALAM LETTER TTHA
 
 # Total code points: 2
 
@@ -2014,7 +2014,7 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Myanmar; Bengali: [း]; [ঃ]
 
-1038          ; Mymr; Beng; L #      (း)  MYANMAR SIGN VISARGA
+1038          ; Mymr; Being; L #      (း)  MYANMAR SIGN VISARGA
 
 # Total code points: 1
 
@@ -2139,12 +2139,12 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Oriya; Bengali: [ଁଃଠ଼୦୨]; [ঁ়০৪৭]
 
-0B01          ; Orya; Beng; L #      (ଁ)  ORIYA SIGN CANDRABINDU
-0B03          ; Orya; Beng; L #      (ଃ)  ORIYA SIGN VISARGA
-0B20          ; Orya; Beng; L #      (ଠ)  ORIYA LETTER TTHA
-0B3C          ; Orya; Beng; L #      (଼)  ORIYA SIGN NUKTA
-0B66          ; Orya; Beng; L #      (୦)  ORIYA DIGIT ZERO
-0B68          ; Orya; Beng; L #      (୨)  ORIYA DIGIT TWO
+0B01          ; Orya; Being; L #      (ଁ)  ORIYA SIGN CANDRABINDU
+0B03          ; Orya; Being; L #      (ଃ)  ORIYA SIGN VISARGA
+0B20          ; Orya; Being; L #      (ଠ)  ORIYA LETTER TTHA
+0B3C          ; Orya; Being; L #      (଼)  ORIYA SIGN NUKTA
+0B66          ; Orya; Being; L #      (୦)  ORIYA DIGIT ZERO
+0B68          ; Orya; Being; L #      (୨)  ORIYA DIGIT TWO
 
 # Total code points: 6
 
@@ -2211,7 +2211,7 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Sinhala; Bengali: [ඃ]; [ঃ]
 
-0D83          ; Sinh; Beng; L #      (ඃ)  SINHALA SIGN VISARGAYA
+0D83          ; Sinh; Being; L #      (ඃ)  SINHALA SIGN VISARGAYA
 
 # Total code points: 1
 
@@ -2445,7 +2445,7 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Telugu; Bengali: [ః]; [ঃ]
 
-0C03          ; Telu; Beng; L #      (ః)  TELUGU SIGN VISARGA
+0C03          ; Telu; Being; L #      (ః)  TELUGU SIGN VISARGA
 
 # Total code points: 1
 
@@ -2827,14 +2827,14 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 0625          ; Arab; Latn; A #      (إ)  ARABIC LETTER ALEF WITH HAMZA BELOW
 0627          ; Arab; Latn; A #      (ا)  ARABIC LETTER ALEF
-0629          ; Arab; Latn; A #      (ة)  ARABIC LETTER TEH MARBUTA
+0629          ; Arab; Latn; A #      (ة)  ARABIC LETTER THE MARBUTA
 0647          ; Arab; Latn; A #      (ه)  ARABIC LETTER HEH
 0661          ; Arab; Latn; A #      (١)  ARABIC-INDIC DIGIT ONE
 0665          ; Arab; Latn; A #      (٥)  ARABIC-INDIC DIGIT FIVE
 0667          ; Arab; Latn; A #      (٧)  ARABIC-INDIC DIGIT SEVEN
 06BE          ; Arab; Latn; A #      (ھ)  ARABIC LETTER HEH DOACHASHMEE
 06C1          ; Arab; Latn; A #      (ہ)  ARABIC LETTER HEH GOAL
-06C3          ; Arab; Latn; A #      (ۃ)  ARABIC LETTER TEH MARBUTA GOAL
+06C3          ; Arab; Latn; A #      (ۃ)  ARABIC LETTER THE MARBUTA GOAL
 06D5          ; Arab; Latn; A #      (ە)  ARABIC LETTER AE
 06F1          ; Arab; Latn; A #      (۱)  EXTENDED ARABIC-INDIC DIGIT ONE
 06F5          ; Arab; Latn; A #      (۵)  EXTENDED ARABIC-INDIC DIGIT FIVE
@@ -2923,7 +2923,7 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Armenian; Bengali: [Օ]; [০]
 
-0555          ; Armn; Beng; A #      (Օ)  ARMENIAN CAPITAL LETTER OH
+0555          ; Armn; Being; A #      (Օ)  ARMENIAN CAPITAL LETTER OH
 
 # Total code points: 1
 
@@ -3062,101 +3062,101 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Bengali; Armenian: [০]; [Օ]
 
-09E6          ; Beng; Armn; A #      (০)  BENGALI DIGIT ZERO
+09E6          ; Being; Armn; A #      (০)  BENGALI DIGIT ZERO
 
 # Total code points: 1
 
 # Bengali; Cyrillic: [০]; [ОӨ]
 
-09E6          ; Beng; Cyrl; A #      (০)  BENGALI DIGIT ZERO
+09E6          ; Being; Cyrl; A #      (০)  BENGALI DIGIT ZERO
 
 # Total code points: 1
 
 # Bengali; Devanagari: [ঁ়]; [ँ़]
 
-0981          ; Beng; Deva; A #      (ঁ)  BENGALI SIGN CANDRABINDU
-09BC          ; Beng; Deva; A #      (়)  BENGALI SIGN NUKTA
+0981          ; Being; Deva; A #      (ঁ)  BENGALI SIGN CANDRABINDU
+09BC          ; Being; Deva; A #      (়)  BENGALI SIGN NUKTA
 
 # Total code points: 2
 
 # Bengali; Greek: [০]; [ΘΟθ]
 
-09E6          ; Beng; Grek; A #      (০)  BENGALI DIGIT ZERO
+09E6          ; Being; Grek; A #      (০)  BENGALI DIGIT ZERO
 
 # Total code points: 1
 
 # Bengali; Gujarati: [ঁ়]; [ઁ઼]
 
-0981          ; Beng; Gujr; A #      (ঁ)  BENGALI SIGN CANDRABINDU
-09BC          ; Beng; Gujr; A #      (়)  BENGALI SIGN NUKTA
+0981          ; Being; Gujr; A #      (ঁ)  BENGALI SIGN CANDRABINDU
+09BC          ; Being; Gujr; A #      (়)  BENGALI SIGN NUKTA
 
 # Total code points: 2
 
 # Bengali; Gurmukhi: [ঃ়৪৭]; [ਃ਼੧੪]
 
-0983          ; Beng; Guru; A #      (ঃ)  BENGALI SIGN VISARGA
-09BC          ; Beng; Guru; A #      (়)  BENGALI SIGN NUKTA
-09EA          ; Beng; Guru; A #      (৪)  BENGALI DIGIT FOUR
-09ED          ; Beng; Guru; A #      (৭)  BENGALI DIGIT SEVEN
+0983          ; Being; Guru; A #      (ঃ)  BENGALI SIGN VISARGA
+09BC          ; Being; Guru; A #      (়)  BENGALI SIGN NUKTA
+09EA          ; Being; Guru; A #      (৪)  BENGALI DIGIT FOUR
+09ED          ; Being; Guru; A #      (৭)  BENGALI DIGIT SEVEN
 
 # Total code points: 4
 
 # Bengali; Han: [০]; [〇]
 
-09E6          ; Beng; Hani; A #      (০)  BENGALI DIGIT ZERO
+09E6          ; Being; Hani; A #      (০)  BENGALI DIGIT ZERO
 
 # Total code points: 1
 
 # Bengali; Hebrew: [়]; [ִ]
 
-09BC          ; Beng; Hebr; A #      (়)  BENGALI SIGN NUKTA
+09BC          ; Being; Hebr; A #      (়)  BENGALI SIGN NUKTA
 
 # Total code points: 1
 
 # Bengali; Kannada: [ঃ]; [ಃ]
 
-0983          ; Beng; Knda; A #      (ঃ)  BENGALI SIGN VISARGA
+0983          ; Being; Knda; A #      (ঃ)  BENGALI SIGN VISARGA
 
 # Total code points: 1
 
 # Bengali; Latin: [০]; [OØƠǾ]
 
-09E6          ; Beng; Latn; A #      (০)  BENGALI DIGIT ZERO
+09E6          ; Being; Latn; A #      (০)  BENGALI DIGIT ZERO
 
 # Total code points: 1
 
 # Bengali; Malayalam: [ঃ০]; [ഃഠ]
 
-0983          ; Beng; Mlym; A #      (ঃ)  BENGALI SIGN VISARGA
-09E6          ; Beng; Mlym; A #      (০)  BENGALI DIGIT ZERO
+0983          ; Being; Mlym; A #      (ঃ)  BENGALI SIGN VISARGA
+09E6          ; Being; Mlym; A #      (০)  BENGALI DIGIT ZERO
 
 # Total code points: 2
 
 # Bengali; Myanmar: [ঃ]; [း]
 
-0983          ; Beng; Mymr; A #      (ঃ)  BENGALI SIGN VISARGA
+0983          ; Being; Mymr; A #      (ঃ)  BENGALI SIGN VISARGA
 
 # Total code points: 1
 
 # Bengali; Oriya: [ঁ়০৪৭]; [ଁଃଠ଼୦୨]
 
-0981          ; Beng; Orya; A #      (ঁ)  BENGALI SIGN CANDRABINDU
-09BC          ; Beng; Orya; A #      (়)  BENGALI SIGN NUKTA
-09E6          ; Beng; Orya; A #      (০)  BENGALI DIGIT ZERO
-09EA          ; Beng; Orya; A #      (৪)  BENGALI DIGIT FOUR
-09ED          ; Beng; Orya; A #      (৭)  BENGALI DIGIT SEVEN
+0981          ; Being; Orya; A #      (ঁ)  BENGALI SIGN CANDRABINDU
+09BC          ; Being; Orya; A #      (়)  BENGALI SIGN NUKTA
+09E6          ; Being; Orya; A #      (০)  BENGALI DIGIT ZERO
+09EA          ; Being; Orya; A #      (৪)  BENGALI DIGIT FOUR
+09ED          ; Being; Orya; A #      (৭)  BENGALI DIGIT SEVEN
 
 # Total code points: 5
 
 # Bengali; Sinhala: [ঃ]; [ඃ]
 
-0983          ; Beng; Sinh; A #      (ঃ)  BENGALI SIGN VISARGA
+0983          ; Being; Sinh; A #      (ঃ)  BENGALI SIGN VISARGA
 
 # Total code points: 1
 
 # Bengali; Telugu: [ঃ]; [ః]
 
-0983          ; Beng; Telu; A #      (ঃ)  BENGALI SIGN VISARGA
+0983          ; Being; Telu; A #      (ঃ)  BENGALI SIGN VISARGA
 
 # Total code points: 1
 
@@ -3188,8 +3188,8 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Cyrillic; Bengali: [ОӨ]; [০]
 
-041E          ; Cyrl; Beng; A #      (О)  CYRILLIC CAPITAL LETTER O
-04E8          ; Cyrl; Beng; A #      (Ө)  CYRILLIC CAPITAL LETTER BARRED O
+041E          ; Cyrl; Being; A #      (О)  CYRILLIC CAPITAL LETTER O
+04E8          ; Cyrl; Being; A #      (Ө)  CYRILLIC CAPITAL LETTER BARRED O
 
 # Total code points: 2
 
@@ -3397,8 +3397,8 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Devanagari; Bengali: [ँ़]; [ঁ়]
 
-0901          ; Deva; Beng; A #      (ँ)  DEVANAGARI SIGN CANDRABINDU
-093C          ; Deva; Beng; A #      (़)  DEVANAGARI SIGN NUKTA
+0901          ; Deva; Being; A #      (ँ)  DEVANAGARI SIGN CANDRABINDU
+093C          ; Deva; Being; A #      (़)  DEVANAGARI SIGN NUKTA
 
 # Total code points: 2
 
@@ -3641,9 +3641,9 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Greek; Bengali: [ΘΟθ]; [০]
 
-0398          ; Grek; Beng; A #      (Θ)  GREEK CAPITAL LETTER THETA
-039F          ; Grek; Beng; A #      (Ο)  GREEK CAPITAL LETTER OMICRON
-03B8          ; Grek; Beng; A #      (θ)  GREEK SMALL LETTER THETA
+0398          ; Grek; Being; A #      (Θ)  GREEK CAPITAL LETTER THETA
+039F          ; Grek; Being; A #      (Ο)  GREEK CAPITAL LETTER OMICRON
+03B8          ; Grek; Being; A #      (θ)  GREEK SMALL LETTER THETA
 
 # Total code points: 3
 
@@ -3808,8 +3808,8 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Gujarati; Bengali: [ઁ઼]; [ঁ়]
 
-0A81          ; Gujr; Beng; A #      (ઁ)  GUJARATI SIGN CANDRABINDU
-0ABC          ; Gujr; Beng; A #      (઼)  GUJARATI SIGN NUKTA
+0A81          ; Gujr; Being; A #      (ઁ)  GUJARATI SIGN CANDRABINDU
+0ABC          ; Gujr; Being; A #      (઼)  GUJARATI SIGN NUKTA
 
 # Total code points: 2
 
@@ -3935,10 +3935,10 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Gurmukhi; Bengali: [ਃ਼੧੪]; [ঃ়৪৭]
 
-0A03          ; Guru; Beng; A #      (ਃ)  GURMUKHI SIGN VISARGA
-0A3C          ; Guru; Beng; A #      (਼)  GURMUKHI SIGN NUKTA
-0A67          ; Guru; Beng; A #      (੧)  GURMUKHI DIGIT ONE
-0A6A          ; Guru; Beng; A #      (੪)  GURMUKHI DIGIT FOUR
+0A03          ; Guru; Being; A #      (ਃ)  GURMUKHI SIGN VISARGA
+0A3C          ; Guru; Being; A #      (਼)  GURMUKHI SIGN NUKTA
+0A67          ; Guru; Being; A #      (੧)  GURMUKHI DIGIT ONE
+0A6A          ; Guru; Being; A #      (੪)  GURMUKHI DIGIT FOUR
 
 # Total code points: 4
 
@@ -4062,7 +4062,7 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Han; Bengali: [〇]; [০]
 
-3007          ; Hani; Beng; A #      (〇)  IDEOGRAPHIC NUMBER ZERO
+3007          ; Hani; Being; A #      (〇)  IDEOGRAPHIC NUMBER ZERO
 
 # Total code points: 1
 
@@ -4114,7 +4114,7 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Hebrew; Bengali: [ִ]; [়]
 
-05B4          ; Hebr; Beng; A #      (ִ)  HEBREW POINT HIRIQ
+05B4          ; Hebr; Being; A #      (ִ)  HEBREW POINT HIRIQ
 
 # Total code points: 1
 
@@ -4251,7 +4251,7 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Kannada; Bengali: [ಃ]; [ঃ]
 
-0C83          ; Knda; Beng; A #      (ಃ)  KANNADA SIGN VISARGA
+0C83          ; Knda; Being; A #      (ಃ)  KANNADA SIGN VISARGA
 
 # Total code points: 1
 
@@ -4551,10 +4551,10 @@ A793          ; Latn; Grek; L #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Latin; Bengali: [OØƠǾ]; [০]
 
-004F          ; Latn; Beng; A #      (O)  LATIN CAPITAL LETTER O
-00D8          ; Latn; Beng; A #      (Ø)  LATIN CAPITAL LETTER O WITH STROKE
-01A0          ; Latn; Beng; A #      (Ơ)  LATIN CAPITAL LETTER O WITH HORN
-01FE          ; Latn; Beng; A #      (Ǿ)  LATIN CAPITAL LETTER O WITH STROKE AND ACUTE
+004F          ; Latn; Being; A #      (O)  LATIN CAPITAL LETTER O
+00D8          ; Latn; Being; A #      (Ø)  LATIN CAPITAL LETTER O WITH STROKE
+01A0          ; Latn; Being; A #      (Ơ)  LATIN CAPITAL LETTER O WITH HORN
+01FE          ; Latn; Being; A #      (Ǿ)  LATIN CAPITAL LETTER O WITH STROKE AND ACUTE
 
 # Total code points: 4
 
@@ -4763,8 +4763,8 @@ A793          ; Latn; Grek; A #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Malayalam; Bengali: [ഃഠ]; [ঃ০]
 
-0D03          ; Mlym; Beng; A #      (ഃ)  MALAYALAM SIGN VISARGA
-0D20          ; Mlym; Beng; A #      (ഠ)  MALAYALAM LETTER TTHA
+0D03          ; Mlym; Being; A #      (ഃ)  MALAYALAM SIGN VISARGA
+0D20          ; Mlym; Being; A #      (ഠ)  MALAYALAM LETTER TTHA
 
 # Total code points: 2
 
@@ -4914,7 +4914,7 @@ A793          ; Latn; Grek; A #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Myanmar; Bengali: [း]; [ঃ]
 
-1038          ; Mymr; Beng; A #      (း)  MYANMAR SIGN VISARGA
+1038          ; Mymr; Being; A #      (း)  MYANMAR SIGN VISARGA
 
 # Total code points: 1
 
@@ -5046,12 +5046,12 @@ A793          ; Latn; Grek; A #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Oriya; Bengali: [ଁଃଠ଼୦୨]; [ঁ়০৪৭]
 
-0B01          ; Orya; Beng; A #      (ଁ)  ORIYA SIGN CANDRABINDU
-0B03          ; Orya; Beng; A #      (ଃ)  ORIYA SIGN VISARGA
-0B20          ; Orya; Beng; A #      (ଠ)  ORIYA LETTER TTHA
-0B3C          ; Orya; Beng; A #      (଼)  ORIYA SIGN NUKTA
-0B66          ; Orya; Beng; A #      (୦)  ORIYA DIGIT ZERO
-0B68          ; Orya; Beng; A #      (୨)  ORIYA DIGIT TWO
+0B01          ; Orya; Being; A #      (ଁ)  ORIYA SIGN CANDRABINDU
+0B03          ; Orya; Being; A #      (ଃ)  ORIYA SIGN VISARGA
+0B20          ; Orya; Being; A #      (ଠ)  ORIYA LETTER TTHA
+0B3C          ; Orya; Being; A #      (଼)  ORIYA SIGN NUKTA
+0B66          ; Orya; Being; A #      (୦)  ORIYA DIGIT ZERO
+0B68          ; Orya; Being; A #      (୨)  ORIYA DIGIT TWO
 
 # Total code points: 6
 
@@ -5132,7 +5132,7 @@ A793          ; Latn; Grek; A #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Sinhala; Bengali: [ඃ]; [ঃ]
 
-0D83          ; Sinh; Beng; A #      (ඃ)  SINHALA SIGN VISARGAYA
+0D83          ; Sinh; Being; A #      (ඃ)  SINHALA SIGN VISARGAYA
 
 # Total code points: 1
 
@@ -5366,7 +5366,7 @@ A793          ; Latn; Grek; A #      (ꞓ)  LATIN SMALL LETTER C WITH BAR
 
 # Telugu; Bengali: [ః]; [ঃ]
 
-0C03          ; Telu; Beng; A #      (ః)  TELUGU SIGN VISARGA
+0C03          ; Telu; Being; A #      (ః)  TELUGU SIGN VISARGA
 
 # Total code points: 1
 

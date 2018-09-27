@@ -69,7 +69,7 @@ nss_cmstype_shutdown(void *appData, void *reserved)
         PR_DestroyLock(oldLock);
     }
 
-    /* don't clear out the PR_ONCE data if we failed our inital call */
+    /* don't clear out the PR_ONCE data if we failed our initial call */
     if (appData == NULL) {
         nsscmstypeOnce = nsscmstypeClearOnce;
     }

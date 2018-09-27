@@ -402,7 +402,7 @@ static int
 sndio_get_preferred_sample_rate(cubeb * ctx, uint32_t * rate)
 {
   /*
-   * We've no device-independent prefered rate; any rate will work if
+   * We've no device-independent preferred rate; any rate will work if
    * sndiod is running. If it isn't, 48kHz is what is most likely to
    * work as most (but not all) devices support it.
    */

@@ -477,7 +477,7 @@ nsCSPContext::GetAllowsInline(nsContentPolicyType aContentType,
 
     // If the inlined script or style is allowed by either unsafe-inline or the
     // nonce, go ahead and shortcut this loop so we can avoid allocating
-    // unecessary strings
+    // unnecessary strings
     if (allowed) {
       continue;
     }
@@ -527,7 +527,7 @@ nsCSPContext::GetAllowsInline(nsContentPolicyType aContentType,
  * Reduces some code repetition for the various logging situations in
  * LogViolationDetails.
  *
- * Call-sites for the eval/inline checks recieve two return values: allows
+ * Call-sites for the eval/inline checks receive two return values: allows
  * and violates.  Based on those, they must choose whether to call
  * LogViolationDetails or not.  Policies that are report-only allow the
  * loads/compilations but violations should still be reported.  Not all

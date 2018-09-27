@@ -317,7 +317,7 @@ PROT_ListManager.prototype.stopUpdateCheckers = function() {
  */
 PROT_ListManager.prototype.maybeToggleUpdateChecking = function() {
   // We update tables if we have some tables that want updates.  If there
-  // are no tables that want to be updated - we dont need to check anything.
+  // are no tables that want to be updated - we don't need to check anything.
   if (this.requireTableUpdates()) {
     log("Starting managing lists");
 

@@ -36,16 +36,16 @@ OSFileSystem::Clone()
 }
 
 void
-OSFileSystem::Init(nsISupports* aParent)
+OSFileSystem::Init(nsISupports* apparent)
 {
   AssertIsOnOwningThread();
   MOZ_ASSERT(!mParent, "No duple Init() calls");
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
-  mParent = aParent;
+  mParent = apparent;
 
 #ifdef DEBUG
-  nsCOMPtr<nsIGlobalObject> obj = do_QueryInterface(aParent);
+  nsCOMPtr<nsIGlobalObject> obj = do_QueryInterface(apparent);
   MOZ_ASSERT(obj);
 #endif
 }

@@ -291,7 +291,7 @@ namespace Sfnt
         int8    ach_vend_id[4];
         uint16  fs_selection,
             fs_first_char_index,
-            fs_last_char_index, // Acording to Apple's spec this is where v0 should end
+            fs_last_char_index, // According to Apple's spec this is where v0 should end
             typo_ascender,
             typo_descender,
             type_linegap,

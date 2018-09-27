@@ -73,7 +73,7 @@ typedef int __BLAPI_DEPRECATED __attribute__((deprecated));
 /* XXX We shouldn't have to hard code this limit. For
  * now, this is the quickest way to support ECDSA signature
  * processing (ECDSA signature lengths depend on curve
- * size). This limit is sufficient for curves upto
+ * size). This limit is sufficient for curves up to
  * 576 bits.
  */
 #define MAX_ECKEY_LEN 72 /* Bytes */

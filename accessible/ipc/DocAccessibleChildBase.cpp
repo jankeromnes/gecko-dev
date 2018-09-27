@@ -81,7 +81,7 @@ DocAccessibleChildBase::SerializeTree(Accessible* aRoot,
 }
 
 void
-DocAccessibleChildBase::InsertIntoIpcTree(Accessible* aParent,
+DocAccessibleChildBase::InsertIntoIpcTree(Accessible* apparent,
                                           Accessible* aChild,
                                           uint32_t aIdxInParent)
 {

@@ -171,45 +171,45 @@ function registerMockPromptService()
         return new MockPrompt(aDOMWindow);
     },
 
-    alert: function(aParent, aDialogTitle, aText)
+    alert: function(apparent, aDialogTitle, aText)
     {
-      var prompt = new MockPrompt(aParent);
+      var prompt = new MockPrompt(apparent);
       return prompt.alert(aDialogTitle, aText);
     },
 
-    alertCheck: function(aParent, aDialogTitle, aText, aCheckMsg, aCheckState)
+    alertCheck: function(apparent, aDialogTitle, aText, aCheckMsg, aCheckState)
     {
-      var prompt = new MockPrompt(aParent);
+      var prompt = new MockPrompt(apparent);
       return prompt.alertCheck(aDialogTitle, aText, aCheckMsg, aCheckState);
     },
 
-    confirm: function(aParent, aDialogTitle, aText)
+    confirm: function(apparent, aDialogTitle, aText)
     {
-      var prompt = new MockPrompt(aParent);
+      var prompt = new MockPrompt(apparent);
       return prompt.confirm(aDialogTitle, aText);
     },
 
-    confirmCheck: function(aParent, aDialogTitle, aText, aCheckMsg,
+    confirmCheck: function(apparent, aDialogTitle, aText, aCheckMsg,
                            aCheckState)
     {
-      var prompt = new MockPrompt(aParent);
+      var prompt = new MockPrompt(apparent);
       return prompt.confirmCheck(aDialogTitle, aText, aCheckMsg, aCheckState);
     },
 
-    confirmEx: function(aParent, aDialogTitle, aText, aButtonFlags,
+    confirmEx: function(apparent, aDialogTitle, aText, aButtonFlags,
                         aButton0Title, aButton1Title, aButton2Title,
                         aCheckMsg, aCheckState)
     {
-      var prompt = new MockPrompt(aParent);
+      var prompt = new MockPrompt(apparent);
       return prompt.confirmEx(aDialogTitle, aText, aButtonFlags,
                         aButton0Title, aButton1Title, aButton2Title,
                         aCheckMsg, aCheckState);
     },
 
-    prompt: function(aParent, aDialogTitle, aText, aValue, aCheckMsg,
+    prompt: function(apparent, aDialogTitle, aText, aValue, aCheckMsg,
                      aCheckState)
     {
-      var prompt = new MockPrompt(aParent);
+      var prompt = new MockPrompt(apparent);
       return prompt.prompt(aDialogTitle, aText, aValue, aCheckMsg, aCheckState);
     },
 

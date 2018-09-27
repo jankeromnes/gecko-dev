@@ -36,7 +36,7 @@ def run_missing_tests(parameters, graph_config, input, task_group_id, task_id, t
     target_tasks = get_artifact(decision_task_id, "public/target-tasks.json")
 
     # The idea here is to schedule all tasks of the `test` kind that were
-    # targetted but did not appear in the final task-graph -- those were the
+    # targeted but did not appear in the final task-graph -- those were the
     # optimized tasks.
     to_run = []
     already_run = 0

@@ -35,7 +35,7 @@ namespace dom {
 class ExplicitChildIterator
 {
 public:
-  explicit ExplicitChildIterator(const nsIContent* aParent,
+  explicit ExplicitChildIterator(const nsIContent* apparent,
                                  bool aStartAtBeginning = true);
 
   ExplicitChildIterator(const ExplicitChildIterator& aOther)
@@ -103,7 +103,7 @@ protected:
 
   // The current child. When we encounter an insertion point,
   // mChild remains as the insertion point whose content we're iterating (and
-  // our state is controled by mDefaultChild or mIndexInInserted depending on
+  // our state is controlled by mDefaultChild or mIndexInInserted depending on
   // whether the insertion point expands to its default content or not).
   nsIContent* mChild;
 
@@ -131,10 +131,10 @@ protected:
 class FlattenedChildIterator : public ExplicitChildIterator
 {
 public:
-  explicit FlattenedChildIterator(const nsIContent* aParent,
+  explicit FlattenedChildIterator(const nsIContent* apparent,
                                   bool aStartAtBeginning = true)
-    : ExplicitChildIterator(aParent, aStartAtBeginning)
-    , mOriginalContent(aParent)
+    : ExplicitChildIterator(apparent, aStartAtBeginning)
+    , mOriginalContent(apparent)
   {
     Init(false);
   }
@@ -170,10 +170,10 @@ protected:
    * This constructor is a hack to help AllChildrenIterator which sometimes
    * doesn't want to consider XBL.
    */
-  FlattenedChildIterator(const nsIContent* aParent, uint32_t aFlags,
+  FlattenedChildIterator(const nsIContent* apparent, uint32_t aFlags,
                          bool aStartAtBeginning = true)
-    : ExplicitChildIterator(aParent, aStartAtBeginning)
-    , mOriginalContent(aParent)
+    : ExplicitChildIterator(apparent, aStartAtBeginning)
+    , mOriginalContent(apparent)
   {
     bool ignoreXBL = aFlags & nsIContent::eAllButXBL;
     Init(ignoreXBL);

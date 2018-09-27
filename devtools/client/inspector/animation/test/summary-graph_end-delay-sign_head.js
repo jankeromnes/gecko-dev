@@ -6,7 +6,7 @@
 /* import-globals-from head.js */
 
 // Test for following EndDelaySign component works.
-// * element existance
+// * element existence
 // * marginInlineStart position
 // * width
 // * additinal class
@@ -53,7 +53,7 @@ async function testSummaryGraphEndDelaySign() {
     const animationItemEl =
       findAnimationItemElementsByTargetSelector(panel, `.${ targetClass }`);
 
-    info(`Checking endDelay sign existance for ${ targetClass }`);
+    info(`Checking endDelay sign existence for ${ targetClass }`);
     const endDelaySignEl = animationItemEl.querySelector(".animation-end-delay-sign");
 
     if (expectedResult) {

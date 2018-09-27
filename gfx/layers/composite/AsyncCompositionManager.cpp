@@ -68,13 +68,13 @@ ContentMightReflowOnOrientationChange(const IntRect& rect)
   return rect.Width() != rect.Height();
 }
 
-AsyncCompositionManager::AsyncCompositionManager(CompositorBridgeParent* aParent,
+AsyncCompositionManager::AsyncCompositionManager(CompositorBridgeParent* apparent,
                                                  HostLayerManager* aManager)
   : mLayerManager(aManager)
   , mIsFirstPaint(true)
   , mLayersUpdated(false)
   , mReadyForCompose(true)
-  , mCompositorBridge(aParent)
+  , mCompositorBridge(apparent)
 {
   MOZ_ASSERT(mCompositorBridge);
 }
@@ -746,7 +746,7 @@ SampleAnimations(Layer* aLayer,
                   transformInDevice));
 #endif
                 // In the case of transform we have to set the unchanged
-                // transform value again becasue APZC might have modified the
+                // transform value again because APZC might have modified the
                 // previous shadow base transform value.
                 HostLayer* layerCompositor = layer->AsHostLayer();
                 layerCompositor->SetShadowBaseTransform(

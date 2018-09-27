@@ -57,7 +57,7 @@ protected:
   virtual void ActorDestroy(ActorDestroyReason why) override;
 
   bool SetupAppData(const IPC::SerializedLoadContext& loadContext,
-                    const PBrowserOrId &aParent);
+                    const PBrowserOrId &apparent);
 
   nsCOMPtr<nsIWyciwygChannel> mChannel;
   bool mIPCClosed;

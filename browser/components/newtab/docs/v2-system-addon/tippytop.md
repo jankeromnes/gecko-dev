@@ -5,7 +5,7 @@ TippyTop, a collection of icons from the Alexa top sites, provides high quality 
 TippyTop manifest is produced by [tippy-top-sites](https://github.com/mozilla/tippy-top-sites).
 
 ```sh
-# set up the enviroment, only needed for the first time
+# set up the environment, only needed for the first time
 $ pip install -r requirements.txt
 $ python make_manifest.py --count 2000 > icons.json  # Alexa top 2000 sites
 ```

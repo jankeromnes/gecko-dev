@@ -8,7 +8,7 @@
 // copies of the heap snapshot files by checking the local filesystem for a heap
 // snapshot file with the given snapshot id, we want to ensure that we are only
 // attempting to open heap snapshot files and not `~/.ssh/id_rsa`, for
-// example. Therefore, the RDP only talks about snapshot ids, or transfering the
+// example. Therefore, the RDP only talks about snapshot ids, or transferring the
 // bulk file data. A file path can be recovered from a snapshot id, which allows
 // one to check for the presence of the heap snapshot file on the local file
 // system, but we don't have to worry about opening arbitrary files.

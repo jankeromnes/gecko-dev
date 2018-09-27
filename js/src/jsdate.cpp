@@ -1693,7 +1693,7 @@ IsDate(HandleValue v)
 }
 
 /*
- * See ECMA 15.9.5.4 thru 15.9.5.23
+ * See ECMA 15.9.5.4 through 15.9.5.23
  */
 /* static */ MOZ_ALWAYS_INLINE bool
 DateObject::getTime_impl(JSContext* cx, const CallArgs& args)

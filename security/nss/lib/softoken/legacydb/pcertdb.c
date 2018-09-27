@@ -5183,7 +5183,7 @@ nsslowcert_UpdateSMimeProfile(NSSLOWCERTCertDBHandle *dbhandle,
     entry = nsslowcert_ReadDBSMimeEntry(dbhandle, emailAddr);
 
     if (entry) {
-        /* keep our old db entry consistant for old applications. */
+        /* keep our old db entry consistent for old applications. */
         if (!SECITEM_ItemsAreEqual(derSubject, &entry->subjectName)) {
             nsslowcert_UpdateSubjectEmailAddr(dbhandle, &entry->subjectName,
                                               emailAddr, nsslowcert_remove);

@@ -105,7 +105,7 @@ private:
 /*
  * Callback object TaskbarPreview hands to preview controllers when we
  * request async thumbnail or live preview images. Controllers invoke
- * this interface once they have aquired the requested image.
+ * this interface once they have acquired the requested image.
  */
 class TaskbarPreviewCallback : public nsITaskbarPreviewCallback
 {

@@ -48,7 +48,7 @@ interface mozITXTToHTMLConv : nsIStreamConverter {
   or "unknowledged" (DELETEME: is that a word?) to make.
   <p>
   <em>Note:</em> Don't use kGlyphSubstitution with this function. This option
-  generates tags, that are unuseable for UAs other than Mozilla. This would
+  generates tags, that are unusable for UAs other than Mozilla. This would
   be a data loss bug.
 
   @param text: HTML source to scan. May be a line, paragraph (recommended)

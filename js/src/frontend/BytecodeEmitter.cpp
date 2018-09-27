@@ -1489,7 +1489,7 @@ BytecodeEmitter::checkSideEffects(ParseNode* pn, bool* answer)
 
       case ParseNodeKind::ForIn:           // by ParseNodeKind::For
       case ParseNodeKind::ForOf:           // by ParseNodeKind::For
-      case ParseNodeKind::ForHead:         // by ParseNodeKind::For
+      case ParseNodeKind::forehead:         // by ParseNodeKind::For
       case ParseNodeKind::ClassMethod:     // by ParseNodeKind::Class
       case ParseNodeKind::ClassNames:      // by ParseNodeKind::Class
       case ParseNodeKind::ClassMethodList: // by ParseNodeKind::Class
@@ -5342,7 +5342,7 @@ BytecodeEmitter::emitSpread(bool allowSelfHosted)
 }
 
 bool
-BytecodeEmitter::emitInitializeForInOrOfTarget(TernaryNode* forHead)
+BytecodeEmitter::emitInitializeForInOrOfTarget(TernaryNode* forehead)
 {
     MOZ_ASSERT(forHead->isKind(ParseNodeKind::ForIn) ||
                forHead->isKind(ParseNodeKind::ForOf));
@@ -5558,7 +5558,7 @@ BytecodeEmitter::emitForIn(ForNode* forInLoop, const EmitterScope* headLexicalEm
 bool
 BytecodeEmitter::emitCStyleFor(ForNode* forNode, const EmitterScope* headLexicalEmitterScope)
 {
-    TernaryNode* forHead = forNode->head();
+    TernaryNode* forehead = forNode->head();
     ParseNode* forBody = forNode->body();
     ParseNode* init = forHead->kid1();
     ParseNode* cond = forHead->kid2();
@@ -5641,7 +5641,7 @@ BytecodeEmitter::emitCStyleFor(ForNode* forNode, const EmitterScope* headLexical
 bool
 BytecodeEmitter::emitFor(ForNode* forNode, const EmitterScope* headLexicalEmitterScope)
 {
-    if (forNode->head()->isKind(ParseNodeKind::ForHead)) {
+    if (forNode->head()->isKind(ParseNodeKind::forehead)) {
         return emitCStyleFor(forNode, headLexicalEmitterScope);
     }
 

@@ -20748,7 +20748,7 @@ var TypeScript;
                     if(bases[i] == this.checker.anyType) {
                         baseLinks[i].type = null;
                         var oldErrors = this.checker.errorReporter.getCapturedErrors();
-                        TypeScript.CompilerDiagnostics.assert(oldErrors.length == 0, "There shouldnt be any contextual errors when typechecking base type names");
+                        TypeScript.CompilerDiagnostics.assert(oldErrors.length == 0, "There shouldn't be any contextual errors when typechecking base type names");
                         this.checker.errorReporter.pushToErrorSink = true;
                         bases[i] = this.checker.resolveBaseTypeLink(baseLinks[i], type.containedScope);
                         this.checker.errorReporter.pushToErrorSink = false;

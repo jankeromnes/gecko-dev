@@ -244,9 +244,9 @@ protected:
   ~ChannelWrapper() = default;
 
 private:
-  ChannelWrapper(nsISupports* aParent, nsIChannel* aChannel)
+  ChannelWrapper(nsISupports* apparent, nsIChannel* aChannel)
     : ChannelHolder(aChannel)
-    , mParent(aParent)
+    , mParent(apparent)
   {}
 
   void ClearCachedAttributes();

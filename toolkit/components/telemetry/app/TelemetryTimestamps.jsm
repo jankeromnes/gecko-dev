@@ -9,7 +9,7 @@ var EXPORTED_SYMBOLS = ["TelemetryTimestamps"];
  * application-specific events.
  *
  * The TelemetryController component attaches the timestamps stored by this module to
- * the telemetry submission, substracting the process lifetime so that the times
+ * the telemetry submission, subtracting the process lifetime so that the times
  * are relative to process startup. The overall goal is to produce a basic
  * timeline of the startup process.
  */

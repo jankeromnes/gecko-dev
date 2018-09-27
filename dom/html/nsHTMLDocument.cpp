@@ -1460,7 +1460,7 @@ nsHTMLDocument::Open(JSContext* cx,
       return nullptr;
     }
 
-    // If the user has allowed mixed content on the rootDoc, then we should propogate it
+    // If the user has allowed mixed content on the rootDoc, then we should propagate it
     // down to the new document channel.
     bool rootHasSecureConnection = false;
     bool allowMixedContent = false;
@@ -2947,7 +2947,7 @@ nsHTMLDocument::ExecCommand(const nsAString& commandID,
     // For cut & copy commands, we need the behaviour from nsWindowRoot::GetControllers
     // which is to look at the focused element, and defer to a focused textbox's controller
     // The code past taken by other commands in ExecCommand always uses the window directly,
-    // rather than deferring to the textbox, which is desireable for most editor commands,
+    // rather than deferring to the textbox, which is desirable for most editor commands,
     // but not 'cut' and 'copy' (as those should allow copying out of embedded editors).
     // This behaviour is invoked if we call DoCommand directly on the docShell.
     nsCOMPtr<nsIDocShell> docShell(mDocumentContainer);

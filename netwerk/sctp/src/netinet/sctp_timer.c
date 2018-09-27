@@ -1578,7 +1578,7 @@ sctp_autoclose_timer(struct sctp_inpcb *inp,
 				 * done...
 				 */
 				if (SCTP_GET_STATE(asoc) != SCTP_STATE_SHUTDOWN_SENT) {
-					/* only send SHUTDOWN 1st time thru */
+					/* only send SHUTDOWN 1st time through */
 					struct sctp_nets *netp;
 
 					if ((SCTP_GET_STATE(asoc) == SCTP_STATE_OPEN) ||

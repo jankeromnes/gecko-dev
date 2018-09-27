@@ -1071,7 +1071,7 @@ var ViewMenu = {
   /**
    * Sorts the view by the specified column.
    * @param   aColumn
-   *          The colum that is the sort key. Can be null - the
+   *          The column that is the sort key. Can be null - the
    *          current sort column or the title column will be used.
    * @param   aDirection
    *          The direction to sort - "ascending" or "descending".

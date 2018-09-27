@@ -27,8 +27,8 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=1124898
       SimpleTest.executeSoon(tryWindow);
       return;
     }
-    is(w.eval('typeof getAttention'), 'undefined', 'getAttention doesnt exist on content-in-chrome window');
-    is(w.eval('typeof messageManager'), 'undefined', 'messageManager doesnt exist on content-in-chrome window');
+    is(w.eval('typeof getAttention'), 'undefined', 'getAttention doesn't exist on content-in-chrome window');
+    is(w.eval('typeof messageManager'), 'undefined', 'messageManager doesn't exist on content-in-chrome window');
     w.close();
     SimpleTest.finish();
   }

@@ -1591,7 +1591,7 @@ nsNativeThemeWin::DrawWidgetBackground(gfxContext* aContext,
       case StyleAppearance::MozWindowFrameRight:
       case StyleAppearance::MozWindowFrameBottom:
         // Nothing to draw, these areas are glass. Minimum dimensions
-        // should be set, so xul content should be layed out correctly.
+        // should be set, so xul content should be laid out correctly.
         return NS_OK;
       break;
       case StyleAppearance::MozWindowButtonClose:

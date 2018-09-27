@@ -67,7 +67,7 @@ runWithMSE(async (ms, el) => {
   el.play();
   el.currentTime = el.buffered.start(0);
   ms.endOfStream();
-  await Promise.all([once(el, "ended"), once(el, "seeked")]);
+  await Promise.all([once(el, "ended"), once(el, "sought")]);
   SimpleTest.finish();
 });
 

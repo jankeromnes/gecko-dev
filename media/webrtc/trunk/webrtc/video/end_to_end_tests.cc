@@ -1038,11 +1038,11 @@ void EndToEndTest::DecodesRetransmittedFrame(bool enable_rtx, bool enable_red) {
         if (std::find(rendered_timestamps_.begin(), rendered_timestamps_.end(),
                       retransmitted_timestamp_) != rendered_timestamps_.end()) {
           // Frame was rendered before last packet was scheduled for sending.
-          // This is extremly rare but possible scenario because prober able to
+          // This is extremely rare but possible scenario because prober able to
           // resend packet before it was send.
           // TODO(danilchap): Remove this corner case when prober would not be
           // able to sneak in between packet saved to history for resending and
-          // pacer notified about existance of that packet for sending.
+          // pacer notified about existence of that packet for sending.
           // See https://bugs.chromium.org/p/webrtc/issues/detail?id=5540 for
           // details.
           observation_complete_.Set();

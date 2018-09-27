@@ -731,7 +731,7 @@ add_task(async function test_somehidden() {
   await BrowserTestUtils.synthesizeMouseAtCenter("#one", { type: "mousedown" }, gBrowser.selectedBrowser);
   await popupShownPromise;
 
-  // The exact number is not needed; just ensure the height is larger than 4 items to accomodate any popup borders.
+  // The exact number is not needed; just ensure the height is larger than 4 items to accommodate any popup borders.
   ok(selectPopup.getBoundingClientRect().height >= selectPopup.lastElementChild.getBoundingClientRect().height * 4, "Height contains at least 4 items");
   ok(selectPopup.getBoundingClientRect().height < selectPopup.lastElementChild.getBoundingClientRect().height * 5, "Height doesn't contain 5 items");
 

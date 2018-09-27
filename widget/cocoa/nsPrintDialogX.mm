@@ -42,7 +42,7 @@ nsPrintDialogServiceX::Init()
 }
 
 NS_IMETHODIMP
-nsPrintDialogServiceX::Show(nsPIDOMWindowOuter *aParent, nsIPrintSettings *aSettings,
+nsPrintDialogServiceX::Show(nsPIDOMWindowOuter *apparent, nsIPrintSettings *aSettings,
                             nsIWebBrowserPrint *aWebBrowserPrint)
 {
   NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NSRESULT;
@@ -192,12 +192,12 @@ nsPrintDialogServiceX::Show(nsPIDOMWindowOuter *aParent, nsIPrintSettings *aSett
 }
 
 NS_IMETHODIMP
-nsPrintDialogServiceX::ShowPageSetup(nsPIDOMWindowOuter *aParent,
+nsPrintDialogServiceX::ShowPageSetup(nsPIDOMWindowOuter *apparent,
                                      nsIPrintSettings *aNSSettings)
 {
   NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NSRESULT;
 
-  MOZ_ASSERT(aParent, "aParent must not be null");
+  MOZ_ASSERT(apparent, "apparent must not be null");
   MOZ_ASSERT(aNSSettings, "aSettings must not be null");
   NS_ENSURE_TRUE(aNSSettings, NS_ERROR_FAILURE);
 

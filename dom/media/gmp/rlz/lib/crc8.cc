@@ -57,7 +57,7 @@ bool Crc8::Generate(const unsigned char *data, int length,
   if (!data)
     return false;
 
-  // The inital and final constants are as used in the ATM HEC.
+  // The initial and final constants are as used in the ATM HEC.
   static const unsigned char kInitial = 0x00;
   static const unsigned char kFinal = 0x55;
   unsigned char crc = kInitial;

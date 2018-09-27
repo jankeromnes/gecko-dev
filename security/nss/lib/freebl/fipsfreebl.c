@@ -1673,7 +1673,7 @@ bl_startup_tests(void)
 }
 
 /*
- * this is called from the freebl init entry points that controll access to
+ * this is called from the freebl init entry points that control access to
  * all other freebl functions. This prevents freebl from operating if our
  * power on selftest failed.
  */

@@ -1813,7 +1813,7 @@ TextInputHandler::HandleKeyDownEvent(NSEvent* aNativeEvent,
     //       For example, Japanese IME of Apple shows candidate window for
     //       typing window.  They, you can switch the sort order with Tab key.
     //       However, when you choose "Symbol" of the sort order, there may
-    //       be no candiate words.  In this case, IME handles the Tab key
+    //       be no candidate words.  In this case, IME handles the Tab key
     //       actually, but we cannot know it because composition string is
     //       not updated.  So, let's mark eKeyDown event as "processed by IME"
     //       when there is composition string.  This is same as Chrome.
@@ -3938,7 +3938,7 @@ IMEInputHandler::InsertTextAsCommittingComposition(
     if (!DispatchCompositionCommitEvent()) {
       MOZ_LOG(gLog, LogLevel::Info,
         ("%p IMEInputHandler::InsertTextAsCommittingComposition, "
-         "destroyed by commiting composition for setting replacement range",
+         "destroyed by committing composition for setting replacement range",
          this));
       return;
     }
@@ -4049,7 +4049,7 @@ IMEInputHandler::SetMarkedText(NSAttributedString* aAttrString,
     if (!DispatchCompositionCommitEvent()) {
       MOZ_LOG(gLog, LogLevel::Info,
         ("%p IMEInputHandler::SetMarkedText, "
-         "destroyed by commiting composition for setting replacement range",
+         "destroyed by committing composition for setting replacement range",
          this));
       return;
     }

@@ -4,7 +4,7 @@
 "use strict";
 
 // Test for following EffectTimingPath component works.
-// * element existance
+// * element existence
 // * path
 
 const TEST_DATA = [
@@ -38,7 +38,7 @@ add_task(async function() {
     const animationItemEl =
       findAnimationItemElementsByTargetSelector(panel, `.${ targetClass }`);
 
-    info(`Checking effect timing path existance for ${ targetClass }`);
+    info(`Checking effect timing path existence for ${ targetClass }`);
     const effectTimingPathEl =
       animationItemEl.querySelector(".animation-effect-timing-path");
 

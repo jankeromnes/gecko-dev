@@ -27,7 +27,7 @@ public:
   // Given a top-level window widget and a menu bar DOM node, sets up native
   // menus. Once created, native menus are controlled via the DOM, including
   // destruction.
-  NS_IMETHOD CreateNativeMenuBar(nsIWidget* aParent, mozilla::dom::Element* aMenuBarNode)=0;
+  NS_IMETHOD CreateNativeMenuBar(nsIWidget* apparent, mozilla::dom::Element* aMenuBarNode)=0;
 };
 
 NS_DEFINE_STATIC_IID_ACCESSOR(nsINativeMenuService, NS_INATIVEMENUSERVICE_IID)

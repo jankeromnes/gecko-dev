@@ -1138,7 +1138,7 @@ class MinidumpWriter {
           // Where <text> is some text like "ARMv7 Processor rev 2"
           // and <level> is a decimal corresponding to the ARM
           // architecture number. <endian> is either 'l' or 'b'
-          // and corresponds to the endianess, it is ignored here.
+          // and corresponds to the endianness, it is ignored here.
           while (value_len > 0 && my_isspace(value[value_len-1]))
             value_len--;
 

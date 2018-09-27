@@ -57,7 +57,7 @@ add_task(async function() {
     });
     // find again needs delay for crash test
     setTimeout(function() {
-      // ignore exception if occured
+      // ignore exception if occurred
       try {
         info("about to send find again command");
         gFindBar.onFindAgainCommand(false);

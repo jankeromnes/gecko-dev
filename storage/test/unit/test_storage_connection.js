@@ -228,7 +228,7 @@ add_task(async function test_close_does_not_spin_event_loop() {
 
 add_task(async function test_asyncClose_succeeds_with_finalized_async_statement() {
   // XXX this test isn't perfect since we can't totally control when events will
-  //     run.  If this paticular function fails randomly, it means we have a
+  //     run.  If this particular function fails randomly, it means we have a
   //     real bug.
 
   // We want to make sure we create a cached async statement to make sure that

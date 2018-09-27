@@ -181,7 +181,7 @@ Http2Stream::ReadSegments(nsAHttpSegmentReader *reader,
       mSession->TransactionHasDataToWrite(this);
 
     // mTxinlineFrameUsed represents any queued un-sent frame. It might
-    // be 0 if there is no such frame, which is not a gurantee that we
+    // be 0 if there is no such frame, which is not a guarantee that we
     // don't have more request body to send - just that any data that was
     // sent comprised a complete HTTP/2 frame. Likewise, a non 0 value is
     // a queued, but complete, http/2 frame length.

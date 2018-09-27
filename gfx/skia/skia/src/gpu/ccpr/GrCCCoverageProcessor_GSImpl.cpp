@@ -284,7 +284,7 @@ public:
         g->codeAppend ("}");
 
         // Emit the convex hull of 2 pixel-size boxes centered on the endpoints of the edge. Each
-        // invocation emits a different edge. Emit negative coverage that subtracts the appropiate
+        // invocation emits a different edge. Emit negative coverage that subtracts the appropriate
         // amount back out from the hull we drew above.
         g->codeAppend ("if (!aligned) {");
         g->codeAppendf(    "%s(outer_pts[0], outer_coverage[0]);", emitVertexFn);

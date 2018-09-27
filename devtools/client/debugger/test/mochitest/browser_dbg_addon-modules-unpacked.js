@@ -20,7 +20,7 @@ function test() {
        `Developer Tools - Test unpacked add-on with JS Modules - ${ADDON_URL}`,
        "Saw the right toolbox title.");
 
-    // Check the inital list of sources is correct
+    // Check the initial list of sources is correct
     let groups = yield addonDebugger.getSourceGroups();
     is(groups[0].name, "browser_dbg_addon5@tests.mozilla.org", "Add-on code should be the first group");
     is(groups[1].name, "chrome://global", "XUL code should be the second group");

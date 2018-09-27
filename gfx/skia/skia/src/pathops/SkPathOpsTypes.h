@@ -171,7 +171,7 @@ public:
         fPhase = phase;
     }
 
-    // called in very rare cases where angles are sorted incorrectly -- signfies op will fail
+    // called in very rare cases where angles are sorted incorrectly -- signifies op will fail
     void setWindingFailed() {
         fWindingFailed = true;
     }

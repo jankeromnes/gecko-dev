@@ -39,7 +39,7 @@
         ok(false, 'require-sri-for failed to block loading a Worker with no integrity metadata.');
       break;
       case 'good_worker_could_load':
-        ok(true, "Loaded a worker that has require-sri-for set (but its parent doesnt).")
+        ok(true, "Loaded a worker that has require-sri-for set (but its parent doesn't).")
         break;
       case 'bad_worker_could_load_via_importScripts':
         ok(false, 'require-sri-for failed to block loading importScript in a worker though we require SRI via CSP');

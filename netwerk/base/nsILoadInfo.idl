@@ -278,7 +278,7 @@ interface nsILoadInfo : nsISupports
    * is the principal of the document which provided the URL that the
    * <iframe> is navigating to. This could be the previous document inside
    * the <iframe> which set document.location. Or a document elsewhere in
-   * the frame tree which contained a <a target="..."> which targetted the
+   * the frame tree which contained a <a target="..."> which targeted the
    * <iframe>.
    *
    * If a stylesheet links to a sub-resource, like an @imported stylesheet,

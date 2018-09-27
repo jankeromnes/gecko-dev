@@ -32,7 +32,7 @@ add_task(async function test_save_sorted_engines() {
   search.moveEngine(engine1, 0);
   search.moveEngine(engine2, 1);
 
-  // Changes should be commited immediately
+  // Changes should be committed immediately
   await promiseAfterCache();
   info("Commit complete after moveEngine");
 

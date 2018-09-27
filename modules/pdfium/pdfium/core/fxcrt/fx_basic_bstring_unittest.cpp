@@ -735,8 +735,8 @@ TEST(fxcrt, ByteStringCNotNull) {
   EXPECT_EQ(alternate_string3, copied_alternate_string3);
   EXPECT_EQ(embedded_nul_string7, copied_embedded_nul_string7);
 
-  CFX_ByteStringC assigned_string3("intially something else");
-  CFX_ByteStringC assigned_alternate_string3("initally something else");
+  CFX_ByteStringC assigned_string3("initially something else");
+  CFX_ByteStringC assigned_alternate_string3("initially something else");
   CFX_ByteStringC assigned_ptr_string3("initially something else");
   CFX_ByteStringC assigned_embedded_nul_string7("initially something else");
 

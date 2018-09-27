@@ -216,7 +216,7 @@ p12u_ucs2_ascii_conversion_function(PRBool toUnicode,
         return PR_FALSE;
     }
     /* If converting Unicode to ASCII, swap bytes before conversion
-     * as neccessary.
+     * as necessary.
      */
     if (!toUnicode && swapBytes) {
         if (p12u_SwapUnicodeBytes(dup) != SECSuccess) {

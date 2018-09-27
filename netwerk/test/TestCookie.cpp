@@ -181,7 +181,7 @@ InitPrefs(nsIPrefBranch *aPrefBranch)
     aPrefBranch->SetIntPref(kCookiesPermissions, 0); // accept all
     aPrefBranch->SetBoolPref(kCookieLeaveSecurityAlone, true);
     // Set quotaPerHost to maxPerHost - 1, so there is only one cookie
-    // will be evicted everytime.
+    // will be evicted every time.
     aPrefBranch->SetIntPref(kPrefCookieQuotaPerHost, 49);
     // Set the base domain limit to 50 so we have a known value.
     aPrefBranch->SetIntPref(kCookiesMaxPerHost, 50);

@@ -190,7 +190,7 @@ int H264VideoToolboxDecoder::ResetDecompressionSession() {
     return WEBRTC_VIDEO_CODEC_OK;
   }
 
-  // Set keys for OpenGL and IOSurface compatibilty, which makes the encoder
+  // Set keys for OpenGL and IOSurface compatibility, which makes the encoder
   // create pixel buffers with GPU backed memory. The intent here is to pass
   // the pixel buffers directly so we avoid a texture upload later during
   // rendering. This currently is moot because we are converting back to an

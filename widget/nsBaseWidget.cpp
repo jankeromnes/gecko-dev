@@ -373,7 +373,7 @@ nsBaseWidget::~nsBaseWidget()
 // Basic create.
 //
 //-------------------------------------------------------------------------
-void nsBaseWidget::BaseCreate(nsIWidget* aParent,
+void nsBaseWidget::BaseCreate(nsIWidget* apparent,
                               nsWidgetInitData* aInitData)
 {
   static bool gDisableNativeThemeCached = false;
@@ -393,7 +393,7 @@ void nsBaseWidget::BaseCreate(nsIWidget* aParent,
     mHasRemoteContent = aInitData->mHasRemoteContent;
   }
 
-  if (aParent) {
+  if (apparent) {
     aParent->AddChild(this);
   }
 }
@@ -1737,7 +1737,7 @@ nsBaseWidget::ResolveIconName(const nsAString &aIconName,
   if (!dirSvc)
     return;
 
-  // first check auxilary chrome directories
+  // first check auxiliary chrome directories
 
   nsCOMPtr<nsISimpleEnumerator> dirs;
   dirSvc->Get(NS_APP_CHROME_DIR_LIST, NS_GET_IID(nsISimpleEnumerator),
@@ -2108,7 +2108,7 @@ nsIWidget::SynthesizeNativeTouchTap(LayoutDeviceIntPoint aPoint, bool aLongTap,
                                  aPoint, 0, 0, nullptr);
       return NS_ERROR_UNEXPECTED;
     }
-    // Windows requires recuring events, so we set this to a smaller window
+    // Windows requires recurring events, so we set this to a smaller window
     // than the pref value.
     int timeout = elapse;
     if (timeout > TOUCH_INJECT_PUMP_TIMER_MSEC) {

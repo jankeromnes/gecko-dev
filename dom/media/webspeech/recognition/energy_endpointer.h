@@ -48,7 +48,7 @@
 // important that the background noise level be estimated initially for
 // robustness in noisy conditions. The first frames are assumed to be background
 // noise and a fast update rate is used for the noise level. The duration for
-// fast update is controlled by the fast_update_dur_ paramter.
+// fast update is controlled by the fast_update_dur_ parameter.
 //
 // If used in noisy conditions, the endpointer should be started and run in the
 // EnvironmentEstimation mode, for at least 200ms, before switching to

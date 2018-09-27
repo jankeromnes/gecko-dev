@@ -511,7 +511,7 @@ class EventSequence(EventExpression):
     the EventSequence fires itself.
 
     One interesting point of note is what happens when one of the events passed
-    into the EventSequence is persistent. If a peristent event is supplied as
+    into the EventSequence is persistent. If a persistent event is supplied as
     the final entry in the sequence, and since the persistent event never
     retires itself, the sequence will keep firing every time the persistent
     event fires. This allows the user to provide an event sequence that is

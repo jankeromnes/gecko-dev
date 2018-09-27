@@ -29,7 +29,7 @@ extern void SECMOD_Init(void);
 SECStatus secmod_ModuleInit(SECMODModule *mod, SECMODModule **oldModule,
                             PRBool *alreadyLoaded);
 
-/* list managment */
+/* list management */
 extern SECStatus SECMOD_AddModuleToList(SECMODModule *newModule);
 extern SECStatus SECMOD_AddModuleToDBOnlyList(SECMODModule *newModule);
 extern SECStatus SECMOD_AddModuleToUnloadList(SECMODModule *newModule);

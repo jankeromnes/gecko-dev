@@ -4200,7 +4200,7 @@ void av1_read_film_grain_params(AV1_COMMON *cm,
   pars->scaling_shift = aom_rb_read_literal(rb, 2) + 8;  // 8 + value
 
   // AR coefficients
-  // Only sent if the corresponsing scaling function has
+  // Only sent if the corresponding scaling function has
   // more than 0 points
 
   pars->ar_coeff_lag = aom_rb_read_literal(rb, 2);

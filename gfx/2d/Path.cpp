@@ -477,7 +477,7 @@ FlattenBezier(const BezierControlPoints &aControlPoints,
 
   BezierControlPoints remainingCP = aControlPoints;
 
-  // For both inflection points, calulate the range where they can be linearly
+  // For both inflection points, calculate the range where they can be linearly
   // approximated if they are positioned within [0,1]
   if (count > 0 && t1 >= 0 && t1 < 1.0) {
     FindInflectionApproximationRange(aControlPoints, &t1min, &t1max, t1, aTolerance);

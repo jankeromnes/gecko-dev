@@ -725,7 +725,7 @@ cleanup:
  * DESCRIPTION:
  *
  * The function builds and validates a cert chain based on certificate
- * selection criterias from procParams. This function call PKIX_BuildChain
+ * selection criteria from procParams. This function call PKIX_BuildChain
  * to accomplish chain building. If PKIX_BuildChain returns with incomplete
  * IO, the function waits with PR_Poll until the blocking IO is finished and
  * return control back to PKIX_BuildChain.

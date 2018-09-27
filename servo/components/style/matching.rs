@@ -316,7 +316,7 @@ trait PrivateMatchMethods: TElement {
             // When display value is changed from none to other, we need to
             // traverse descendant elements in a subsequent normal
             // traversal (we can't traverse them in this animation-only restyle
-            // since we have no way to know whether the decendants
+            // since we have no way to know whether the descendants
             // need to be traversed at the beginning of the animation-only
             // restyle).
             let task = ::context::SequentialTask::process_post_animation(

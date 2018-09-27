@@ -108,7 +108,7 @@ async function addTestTab(url) {
   const store = win.view.store;
 
   const enableButton = doc.getElementById("accessibility-enable-button");
-  // If enable button is not found, asume the tool is already enabled.
+  // If enable button is not found, assume the tool is already enabled.
   if (enableButton) {
     EventUtils.sendMouseEvent({ type: "click" }, enableButton, win);
   }
@@ -248,7 +248,7 @@ async function toggleRow(doc, rowNumber) {
  *                                           the sidebar
  *                    }
  * @param  {Object} env  contains all relevant environment objects (same
- *                       structure as the return value of 'addTestTab' funciton)
+ *                       structure as the return value of 'addTestTab' function)
  */
 async function runA11yPanelTests(tests, env) {
   for (const { desc, action, expected } of tests) {

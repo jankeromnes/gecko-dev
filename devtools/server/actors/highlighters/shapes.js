@@ -1037,7 +1037,7 @@ class ShapesHighlighter extends AutoRefreshHighlighter {
   }
 
   /**
-   * Add new point to the polygon defintion and update element style.
+   * Add new point to the polygon definition and update element style.
    * TODO: Bug 1436054 - Do not default to percentage unit when inserting new point.
    * https://bugzilla.mozilla.org/show_bug.cgi?id=1436054
    *
@@ -1059,7 +1059,7 @@ class ShapesHighlighter extends AutoRefreshHighlighter {
   }
 
   /**
-   * Remove point from polygon defintion and update the element style.
+   * Remove point from polygon definition and update the element style.
    * @param {Number} point the index of the point to delete
    */
   _deletePolygonPoint(point) {

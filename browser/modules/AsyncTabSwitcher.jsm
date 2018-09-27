@@ -86,7 +86,7 @@ class AsyncTabSwitcher {
     // We show this tab in case the requestedTab hasn't loaded yet.
     this.lastVisibleTab = tabbrowser.selectedTab;
 
-    // Auxilliary state variables:
+    // Auxiliary state variables:
 
     this.visibleTab = tabbrowser.selectedTab; // Tab that's on screen.
     this.spinnerTab = null; // Tab showing a spinner.
@@ -555,7 +555,7 @@ class AsyncTabSwitcher {
 
   // This code runs after we've responded to an event or requested a new
   // tab. It's expected that we've already updated all the principal
-  // state variables. This function takes care of updating any auxilliary
+  // state variables. This function takes care of updating any auxiliary
   // state.
   postActions() {
     // Once we finish loading loadingTab, we null it out. So the state should

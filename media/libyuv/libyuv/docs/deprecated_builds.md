@@ -190,7 +190,7 @@ Running test with C code:
     ninja -C out/Release
     ninja -C out/Debug
 
-### Building Offical with GN
+### Building Official with GN
 
     gn gen out/Official "--args=is_debug=false is_official_build=true is_chrome_branded=true"
     ninja -C out/Official

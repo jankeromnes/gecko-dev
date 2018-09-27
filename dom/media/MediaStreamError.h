@@ -78,15 +78,15 @@ class MediaStreamError final : public nsISupports,
                                public nsWrapperCache
 {
 public:
-  MediaStreamError(nsPIDOMWindowInner* aParent,
+  MediaStreamError(nsPIDOMWindowInner* apparent,
                    Name aName,
                    const nsAString& aMessage = EmptyString(),
                    const nsAString& aConstraint =  EmptyString());
 
-  MediaStreamError(nsPIDOMWindowInner* aParent,
+  MediaStreamError(nsPIDOMWindowInner* apparent,
                    const BaseMediaMgrError& aOther)
   : BaseMediaMgrError(aOther.mName, aOther.mMessage, aOther.mConstraint)
-  , mParent(aParent) {}
+  , mParent(apparent) {}
 
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(MediaStreamError)

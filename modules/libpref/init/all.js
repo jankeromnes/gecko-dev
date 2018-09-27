@@ -288,7 +288,7 @@ pref("browser.display.document_color_use", 0);
 pref("browser.display.use_system_colors",   false);
 pref("browser.display.foreground_color",    "#000000");
 pref("browser.display.background_color",    "#FFFFFF");
-pref("browser.display.force_inline_alttext", false); // true = force ALT text for missing images to be layed out inline
+pref("browser.display.force_inline_alttext", false); // true = force ALT text for missing images to be laid out inline
 // 0 = no external leading,
 // 1 = use external leading only when font provides,
 // 2 = add extra leading both internal leading and external leading are zero
@@ -1539,7 +1539,7 @@ pref("security.fileuri.strict_origin_policy", true);
 pref("logging.config.clear_on_startup", true);
 
 // If there is ever a security firedrill that requires
-// us to block certian ports global, this is the pref
+// us to block certain ports global, this is the pref
 // to use.  Is is a comma delimited list of port numbers
 // for example:
 //   pref("network.security.ports.banned", "1,2,3,4,5");
@@ -1915,7 +1915,7 @@ pref("network.websocket.timeout.ping.response", 10);
 pref("network.websocket.extensions.permessage-deflate", true);
 
 // the maximum number of concurrent websocket sessions. By specification there
-// is never more than one handshake oustanding to an individual host at
+// is never more than one handshake outstanding to an individual host at
 // one time.
 pref("network.websocket.max-connections", 200);
 
@@ -2165,7 +2165,7 @@ pref("network.negotiate-auth.using-native-gsslib", true);
 
 #ifdef XP_WIN
 
-// Default to using the SSPI intead of GSSAPI on windows
+// Default to using the SSPI instead of GSSAPI on windows
 pref("network.auth.use-sspi", true);
 
 #endif
@@ -4905,7 +4905,7 @@ pref("layers.max-active", -1);
 // Compositor target frame rate. NOTE: If vsync is enabled the compositor
 // frame rate will still be capped.
 // -1 -> default (match layout.frame_rate or 60 FPS)
-// 0  -> full-tilt mode: Recomposite even if not transaction occured.
+// 0  -> full-tilt mode: Recomposite even if not transaction occurred.
 pref("layers.offmainthreadcomposition.frame-rate", -1);
 
 #if defined(XP_MACOSX) || defined (OS_OPENBSD)

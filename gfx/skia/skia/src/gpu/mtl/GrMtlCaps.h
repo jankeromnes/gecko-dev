@@ -39,7 +39,7 @@ public:
 
 #if 0
     /**
-     * Returns both a supported and most prefered stencil format to use in draws.
+     * Returns both a supported and most preferred stencil format to use in draws.
      */
     const StencilFormat& preferedStencilFormat() const {
         return fPreferedStencilFormat;

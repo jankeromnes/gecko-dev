@@ -65,7 +65,7 @@ TEST(TestBufferedInputStream, AsyncWait_sync) {
 
   ASSERT_EQ(NS_OK, bis->AsyncWait(cb, 0, 0, nullptr));
 
-  // Immediatelly called
+  // Immediately called
   ASSERT_TRUE(cb->Called());
 }
 
@@ -105,7 +105,7 @@ TEST(TestBufferedInputStream, AsyncWait_sync_closureOnly) {
 
   bis->CloseWithStatus(NS_ERROR_FAILURE);
 
-  // Immediatelly called
+  // Immediately called
   ASSERT_TRUE(cb->Called());
 }
 

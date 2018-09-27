@@ -168,7 +168,7 @@
         LDR     pTwiddle, [pFFTSpec, #ARMsFFTSpec_pTwiddle]
         LDR     pOut, [pFFTSpec, #ARMsFFTSpec_pBuf]
         
-        @//  N=1 Treat seperately  
+        @//  N=1 Treat separately  
         CMP     N,#1
         BGT     sizeGreaterThanOne
         VLD1    dX0[0],[pSrc]
@@ -260,7 +260,7 @@ specialScaleCase:                                           @//  scale = 0 or sc
         BGE      scaleEqualsOrder  
        
         @//check for even or odd order
-        @// NOTE: The following combination of BL's would work fine eventhough the first
+        @// NOTE: The following combination of BL's would work fine even though the first
         @// BL would corrupt the flags. This is because the end of the "grpZeroSetLoop" loop inside 
         @// armSP_FFTInv_CToC_SC32_Radix4_fs_OutOfPlace_unsafe sets the Z flag to EQ
         
@@ -285,7 +285,7 @@ lastStageUnscaledRadix4:
 
 scaleEqualsOrder:                
         @//check for even or odd order
-        @// NOTE: The following combination of BL's would work fine eventhough the first
+        @// NOTE: The following combination of BL's would work fine even though the first
         @// BL would corrupt the flags. This is because the end of the "grpZeroSetLoop" loop inside 
         @// armSP_FFTInv_CToC_SC32_Radix4_fs_OutOfPlace_unsafe sets the Z flag to EQ
                 

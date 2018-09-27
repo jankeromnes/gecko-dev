@@ -20,7 +20,7 @@
 *                             Removed subParseLong
 *                             Removed chk
 *   02/22/99    stephen     Removed character literals for EBCDIC safety
-*   10/14/99    aliu        Updated 2-digit year parsing so that only "00" thru
+*   10/14/99    aliu        Updated 2-digit year parsing so that only "00" through
 *                           "99" are recognized. {j28 4182066}
 *   11/15/99    weiv        Added support for week of year/day of week format
 ********************************************************************************
@@ -226,7 +226,7 @@ static const int32_t gFieldRangeBias[] = {
 };
 
 // When calendar uses hebr numbering (i.e. he@calendar=hebrew),
-// offset the years within the current millenium down to 1-999
+// offset the years within the current millennium down to 1-999
 static const int32_t HEBREW_CAL_CUR_MILLENIUM_START_YEAR = 5000;
 static const int32_t HEBREW_CAL_CUR_MILLENIUM_END_YEAR = 6000;
 
@@ -2104,7 +2104,7 @@ SimpleDateFormat::zeroPaddingNumber(
 //----------------------------------------------------------------------
 
 /**
- * Return true if the given format character, occuring count
+ * Return true if the given format character, occurring count
  * times, represents a numeric field.
  */
 UBool SimpleDateFormat::isNumeric(UChar formatChar, int32_t count) {
@@ -2359,7 +2359,7 @@ SimpleDateFormat::parse(const UnicodeString& text, Calendar& cal, ParsePosition&
             U_ASSERT(0 <= hourOfDay && hourOfDay <= 23);
 
 
-            // If hour-of-day is 0 or 13 thru 23 then input time in unambiguously in 24-hour format.
+            // If hour-of-day is 0 or 13 through 23 then input time in unambiguously in 24-hour format.
             if (hourOfDay == 0 || (13 <= hourOfDay && hourOfDay <= 23)) {
                 // Make hour-of-day take precedence over (hour + am/pm) by setting it again.
                 cal.set(UCAL_HOUR_OF_DAY, hourOfDay);

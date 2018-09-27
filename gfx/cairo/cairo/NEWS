@@ -3589,7 +3589,7 @@ General bug fixes
 	  (Richard Stellingwerff, Owen Taylor)
 
  * 4231
- * 4298 - Accomodate gentoo and Mandriva versions in X server vendor string check
+ * 4298 - Accommodate gentoo and Mandriva versions in X server vendor string check
 	  (Billy Biggs, Frederic Crozat, Owen Taylor)
 
 win32-specific fixes

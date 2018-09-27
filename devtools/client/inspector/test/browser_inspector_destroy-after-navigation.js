@@ -18,7 +18,7 @@ add_task(async function() {
     await toolbox.destroy();
     ok(true, "Toolbox destroyed");
   } catch (e) {
-    ok(false, "An exception occured while destroying toolbox");
+    ok(false, "An exception occurred while destroying toolbox");
     console.error(e);
   }
 });

@@ -422,7 +422,7 @@ public:
 
 
   /**
-   *  swaps occurence of 1 string for another
+   *  swaps occurrence of 1 string for another
    */
 
   void ReplaceChar(char_type aOldChar, char_type aNewChar);

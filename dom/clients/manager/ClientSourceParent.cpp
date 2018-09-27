@@ -152,7 +152,7 @@ ClientSourceParent::RecvInheritController(const ClientControlledArgs& aArgs)
   mController.emplace(aArgs.serviceWorker());
 
   // In parent-side intercept mode we must tell the parent-side SWM about
-  // this controller inheritence.  In legacy client-side mode this is done
+  // this controller inheritance.  In legacy client-side mode this is done
   // from the ClientSource instead.
   if (!ServiceWorkerParentInterceptEnabled()) {
     nsCOMPtr<nsIRunnable> r = NS_NewRunnableFunction(

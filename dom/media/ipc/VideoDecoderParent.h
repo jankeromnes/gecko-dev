@@ -26,7 +26,7 @@ public:
   // that reference us.
   NS_INLINE_DECL_THREADSAFE_REFCOUNTING(VideoDecoderParent)
 
-  VideoDecoderParent(VideoDecoderManagerParent* aParent,
+  VideoDecoderParent(VideoDecoderManagerParent* apparent,
                      const VideoInfo& aVideoInfo,
                      float aFramerate,
                      const layers::TextureFactoryIdentifier& aIdentifier,

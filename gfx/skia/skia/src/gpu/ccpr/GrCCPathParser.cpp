@@ -23,7 +23,7 @@ using QuadPointInstance = GrCCCoverageProcessor::QuadPointInstance;
 
 GrCCPathParser::GrCCPathParser(int maxTotalPaths, int maxPathPoints, int numSkPoints,
                                int numSkVerbs)
-        : fLocalDevPtsBuffer(maxPathPoints + 1)  // Overallocate by one point to accomodate for
+        : fLocalDevPtsBuffer(maxPathPoints + 1)  // Overallocate by one point to accommodate for
                                                  // overflow with Sk4f. (See parsePath.)
         , fGeometry(numSkPoints, numSkVerbs)
         , fPathsInfo(maxTotalPaths)

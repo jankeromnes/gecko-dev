@@ -61,7 +61,7 @@ CrossProcessCompositorBridgeParent::ActorDestroy(ActorDestroyReason aWhy)
 {
   mCanSend = false;
 
-  // We must keep this object alive untill the code handling message
+  // We must keep this object alive until the code handling message
   // reception is finished on this thread.
   MessageLoop::current()->PostTask(NewRunnableMethod(
     "layers::CrossProcessCompositorBridgeParent::DeferredDestroy",

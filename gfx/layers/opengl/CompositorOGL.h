@@ -75,7 +75,7 @@ public:
 };
 
 /**
- * Agressively reuses textures. One gl texture per texture unit in total.
+ * Aggressively reuses textures. One gl texture per texture unit in total.
  * So far this hasn't shown the best results on b2g.
  */
 class PerUnitTexturePoolOGL : public CompositorTexturePoolOGL
@@ -119,7 +119,7 @@ class CompositorOGL final : public Compositor
 
   std::map<ShaderConfigOGL, ShaderProgramOGL*> mPrograms;
 public:
-  explicit CompositorOGL(CompositorBridgeParent* aParent,
+  explicit CompositorOGL(CompositorBridgeParent* apparent,
                          widget::CompositorWidget* aWidget,
                          int aSurfaceWidth = -1, int aSurfaceHeight = -1,
                          bool aUseExternalSurfaceSize = false);

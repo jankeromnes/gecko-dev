@@ -68,7 +68,7 @@ function testWebM1(e) {
   function seekEnded() {
     ok(!completed, "should not be completed yet");
     ok(Math.abs(v.currentTime - halfBuffered) < 0.1,
-       "Video currentTime should be around " + halfBuffered + ": " + v.currentTime + " (seeked)");
+       "Video currentTime should be around " + halfBuffered + ": " + v.currentTime + " (sought)");
     endPassed = true;
     seekFlagEnd = v.seeking;
     v.play();
@@ -79,7 +79,7 @@ function testWebM1(e) {
 
     completed = true;
     ok(startPassed, "seeking event");
-    ok(endPassed, "seeked event");
+    ok(endPassed, "sought event");
     ok(seekFlagStart, "seeking flag on start should be true");
     ok(!seekFlagEnd, "seeking flag on end should be false");
     removeNodeAndSource(v);
@@ -88,7 +88,7 @@ function testWebM1(e) {
 
   once(v, "ended", playbackEnded);
   once(v, "seeking", seekStarted);
-  once(v, "seeked", seekEnded);
+  once(v, "sought", seekEnded);
 
   startTest();
 }

@@ -183,7 +183,7 @@ ffi_prep_cif_sysv_core (ffi_cif *cif)
 #if FFI_TYPE_LONGDOUBLE != FFI_TYPE_DOUBLE
 	case FFI_TYPE_LONGDOUBLE:
 	  fparg_count++;
-	  /* Fall thru */
+	  /* Fall through */
 #endif
 	case FFI_TYPE_DOUBLE:
 	  fparg_count++;

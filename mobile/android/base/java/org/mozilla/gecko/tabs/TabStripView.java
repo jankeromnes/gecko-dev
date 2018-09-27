@@ -224,15 +224,15 @@ public class TabStripView extends RecyclerView
 
         // Gradient argb color stops.
         final int transparent = 0x0;
-        final int inBetween = 0x11292C29;
+        final int between = 0x11292C29;
         final int darkest = 0xDD292C29;
         if (ViewUtil.isLayoutRtl(this)) {
             fadingEdgePaint.setShader(new LinearGradient(0, 0, fadingEdgeSize, 0,
-                    new int[] { darkest, inBetween, transparent },
+                    new int[] { darkest, between, transparent },
                     new float[] { 0, 0.6f, 1.0f }, Shader.TileMode.CLAMP));
         } else {
             fadingEdgePaint.setShader(new LinearGradient(w - fadingEdgeSize, 0, w, 0,
-                    new int[] { transparent, inBetween, darkest },
+                    new int[] { transparent, between, darkest },
                     new float[] { 0, 0.4f, 1.0f }, Shader.TileMode.CLAMP));
         }
     }

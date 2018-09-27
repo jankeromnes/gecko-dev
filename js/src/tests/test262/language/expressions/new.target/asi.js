@@ -13,7 +13,7 @@ var withSpaces = function() {
 };
 
 withSpaces();
-assert.sameValue(newTarget, undefined, 'tokens seperated by whitespace');
+assert.sameValue(newTarget, undefined, 'tokens separated by whitespace');
 
 new withSpaces();
 assert.sameValue(newTarget, withSpaces, 'tokens separateed by whitespace');
@@ -29,10 +29,10 @@ target;
 };
 
 withLineBreaks();
-assert.sameValue(newTarget, undefined, 'tokens seperated by line breaks');
+assert.sameValue(newTarget, undefined, 'tokens separated by line breaks');
 
 new withLineBreaks();
-assert.sameValue(newTarget, withLineBreaks, 'tokens seperated by line breaks');
+assert.sameValue(newTarget, withLineBreaks, 'tokens separated by line breaks');
 
 var withSLDC = function() {
   newTarget = new/* */./* */target;

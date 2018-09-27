@@ -250,7 +250,7 @@ NS_DEFINE_STATIC_IID_ACCESSOR(nsAHttpConnection, NS_AHTTPCONNECTION_IID)
             (fwdObject)->SetSecurityCallbacks(aCallbacks);  \
     }
 
-    // ThrottleResponse deliberately ommited since we want different implementation
+    // ThrottleResponse deliberately omitted since we want different implementation
     // for h1 and h2 connections.
 
 } // namespace net

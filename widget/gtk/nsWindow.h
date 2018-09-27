@@ -103,7 +103,7 @@ public:
 
     NS_INLINE_DECL_REFCOUNTING_INHERITED(nsWindow, nsBaseWidget)
 
-    void CommonCreate(nsIWidget *aParent, bool aListenForResizes);
+    void CommonCreate(nsIWidget *apparent, bool aListenForResizes);
 
     virtual nsresult DispatchEvent(mozilla::WidgetGUIEvent* aEvent,
                                    nsEventStatus& aStatus) override;
@@ -116,7 +116,7 @@ public:
 
     // nsIWidget
     using nsBaseWidget::Create; // for Create signature not overridden here
-    virtual MOZ_MUST_USE nsresult Create(nsIWidget* aParent,
+    virtual MOZ_MUST_USE nsresult Create(nsIWidget* apparent,
                                          nsNativeWidget aNativeParent,
                                          const LayoutDeviceIntRect& aRect,
                                          nsWidgetInitData* aInitData) override;

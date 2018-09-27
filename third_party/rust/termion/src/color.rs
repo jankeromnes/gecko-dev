@@ -178,7 +178,7 @@ impl<C: Color> fmt::Display for Bg<C> {
 pub trait DetectColors {
     /// How many ANSI colors are supported (from 8 to 256)?
     ///
-    /// Beware: the information given isn't authoritative, it's infered through escape codes or the
+    /// Beware: the information given isn't authoritative, it's inferred through escape codes or the
     /// value of `TERM`, more colors may be available.
     fn available_colors(&mut self) -> io::Result<u16>;
 }

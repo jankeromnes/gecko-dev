@@ -201,7 +201,7 @@ NSS_CMSDigestedData_Decode_AfterEnd(NSSCMSDigestedData *digd)
 {
     /* did we have digest calculation going on? */
     if (digd->cdigest.len != 0) {
-        /* XXX comparision btw digest & cdigest */
+        /* XXX comparison btw digest & cdigest */
         /* XXX set status */
         /* TODO!!!! */
     }

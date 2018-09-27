@@ -1468,7 +1468,7 @@ WebSocketChannel::IsPersistentFramePtr()
 // amount of data available for read
 //
 // Accumulated fragment size is passed in instead of using the member
-// variable beacuse when transitioning from the stack to the persistent
+// variable because when transitioning from the stack to the persistent
 // read buffer we want to explicitly include them in the buffer instead
 // of as already existing data.
 bool
@@ -1825,7 +1825,7 @@ WebSocketChannel::ProcessInput(uint8_t *buffer, uint32_t count)
         }
 
         if (frame) {
-          // We send the frame immediately becuase we want to have it dispatched
+          // We send the frame immediately because we want to have it dispatched
           // before the CallOnServerClose.
           mService->FrameReceived(mSerial, mInnerWindowID, frame.forget());
           frame = nullptr;
@@ -1966,7 +1966,7 @@ WebSocketChannel::ApplyMask(uint32_t mask, uint8_t *data, uint64_t len)
     return;
 
   // Optimally we want to apply the mask 32 bits at a time,
-  // but the buffer might not be alligned. So we first deal with
+  // but the buffer might not be aligned. So we first deal with
   // 0 to 3 bytes of preamble individually
 
   while (len && (reinterpret_cast<uintptr_t>(data) & 3)) {

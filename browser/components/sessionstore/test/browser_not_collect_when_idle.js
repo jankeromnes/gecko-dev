@@ -83,7 +83,7 @@ add_task(async function testIntervalChanges() {
 
   let p1 = promiseSaveState();
 
-  // Schedule a state write, which is expeced to be postponed after about
+  // Schedule a state write, which is expected to be postponed after about
   // `browser.sessionstore.interval.idle` ms, since the idle flag was just set.
   SessionSaver.runDelayed(0);
 

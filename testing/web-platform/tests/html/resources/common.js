@@ -106,7 +106,7 @@ function inContext(f) {
     };
 }
 
-// new context and iframe are created and url (if supplied) is asigned to
+// new context and iframe are created and url (if supplied) is assigned to
 // iframe.src
 // function f is bound to the iframe onload event or executed directly after
 // iframe creation

@@ -31,7 +31,7 @@ public:
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(SubtleCrypto)
 
 public:
-  explicit SubtleCrypto(nsIGlobalObject* aParent);
+  explicit SubtleCrypto(nsIGlobalObject* apparent);
 
   nsIGlobalObject* GetParentObject() const
   {

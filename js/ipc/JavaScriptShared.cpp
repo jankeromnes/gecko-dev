@@ -808,9 +808,9 @@ JavaScriptShared::Wrap(JSContext* cx, HandleObject aObj, InfallibleTArray<CpowEn
 }
 
 CPOWManager*
-mozilla::jsipc::CPOWManagerFor(PJavaScriptParent* aParent)
+mozilla::jsipc::CPOWManagerFor(PJavaScriptParent* apparent)
 {
-    return static_cast<JavaScriptParent*>(aParent);
+    return static_cast<JavaScriptParent*>(apparent);
 }
 
 CPOWManager*

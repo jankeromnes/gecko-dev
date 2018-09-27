@@ -2,7 +2,7 @@
 {
     var result = 0;
     // Regardless of order, the constructor is overridden by any CPN, because it's
-    // processed seperately.
+    // processed separately.
     class a { ["constructor"]() { result += 1; }; constructor() { result += 2; } }
     var aInst = new a();
     assertEq(result, 2);
@@ -41,7 +41,7 @@
 {
     var result = 0;
     // Regardless of order, the constructor is overridden by any CPN, because it's
-    // processed seperately.
+    // processed separately.
     let a = class { ["constructor"]() { result += 1; }; constructor() { result += 2; } };
     var aInst = new a();
     assertEq(result, 2);

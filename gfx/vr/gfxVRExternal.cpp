@@ -264,14 +264,14 @@ VRDisplayExternal::SubmitFrame(const layers::SurfaceDescriptor& aTexture,
   });
 
   if (mDisplayInfo.mDisplayState.mSuppressFrames || !mDisplayInfo.mDisplayState.mIsConnected) {
-    // External implementation wants to supress frames, service has shut down or hardware has been disconnected.
+    // External implementation wants to suppress frames, service has shut down or hardware has been disconnected.
     return false;
   }
 #else
   while (mDisplayInfo.mDisplayState.mLastSubmittedFrameId < aFrameId) {
     if (PullState()) {
       if (mDisplayInfo.mDisplayState.mSuppressFrames || !mDisplayInfo.mDisplayState.mIsConnected) {
-        // External implementation wants to supress frames, service has shut down or hardware has been disconnected.
+        // External implementation wants to suppress frames, service has shut down or hardware has been disconnected.
         return false;
       }
     }

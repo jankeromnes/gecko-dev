@@ -32,8 +32,8 @@ extern LogModule* GetGMPLog();
 
 namespace gmp {
 
-GMPContentParent::GMPContentParent(GMPParent* aParent)
-  : mParent(aParent)
+GMPContentParent::GMPContentParent(GMPParent* apparent)
+  : mParent(apparent)
   , mPluginId(0)
 {
   if (mParent) {

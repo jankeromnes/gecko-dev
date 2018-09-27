@@ -285,8 +285,8 @@ private:
   }
 
 public:
-  FormDataParser(const nsACString& aMimeType, const nsACString& aData, nsIGlobalObject* aParent)
-    : mMimeType(aMimeType), mData(aData), mState(START_PART), mParentObject(aParent)
+  FormDataParser(const nsACString& aMimeType, const nsACString& aData, nsIGlobalObject* apparent)
+    : mMimeType(aMimeType), mData(aData), mState(START_PART), mParentObject(apparent)
   {
   }
 
@@ -419,12 +419,12 @@ BodyUtil::ConsumeArrayBuffer(JSContext* aCx,
 
 // static
 already_AddRefed<Blob>
-BodyUtil::ConsumeBlob(nsISupports* aParent, const nsString& aMimeType,
+BodyUtil::ConsumeBlob(nsISupports* apparent, const nsString& aMimeType,
                        uint32_t aInputLength, uint8_t* aInput,
                        ErrorResult& aRv)
 {
   RefPtr<Blob> blob =
-    Blob::CreateMemoryBlob(aParent,
+    Blob::CreateMemoryBlob(apparent,
                            reinterpret_cast<void *>(aInput), aInputLength,
                            aMimeType);
 
@@ -437,7 +437,7 @@ BodyUtil::ConsumeBlob(nsISupports* aParent, const nsString& aMimeType,
 
 // static
 already_AddRefed<FormData>
-BodyUtil::ConsumeFormData(nsIGlobalObject* aParent, const nsCString& aMimeType,
+BodyUtil::ConsumeFormData(nsIGlobalObject* apparent, const nsCString& aMimeType,
                            const nsCString& aStr, ErrorResult& aRv)
 {
   NS_NAMED_LITERAL_CSTRING(formDataMimeType, "multipart/form-data");
@@ -451,7 +451,7 @@ BodyUtil::ConsumeFormData(nsIGlobalObject* aParent, const nsCString& aMimeType,
   }
 
   if (isValidFormDataMimeType) {
-    FormDataParser parser(aMimeType, aStr, aParent);
+    FormDataParser parser(aMimeType, aStr, apparent);
     if (!parser.Parse()) {
       aRv.ThrowTypeError<MSG_BAD_FORMDATA>();
       return nullptr;
@@ -470,7 +470,7 @@ BodyUtil::ConsumeFormData(nsIGlobalObject* aParent, const nsCString& aMimeType,
   }
 
   if (isValidUrlEncodedMimeType) {
-    RefPtr<FormData> fd = new FormData(aParent);
+    RefPtr<FormData> fd = new FormData(apparent);
     FillFormIterator iterator(fd);
     DebugOnly<bool> status = URLParams::Parse(aStr, iterator);
     MOZ_ASSERT(status);

@@ -1006,7 +1006,7 @@ Selection::AddItem(nsRange* aItem, int32_t* aOutIndex, bool aNoStartSelect)
         selectEventsEnabled && IsCollapsed() &&
         !IsBlockingSelectionChangeEvents()) {
       // First, we generate the ranges to add with a scratch range, which is a
-      // clone of the original range passed in. We do this seperately, because the
+      // clone of the original range passed in. We do this separately, because the
       // selectstart event could have caused the world to change, and required
       // ranges to be re-generated
       RefPtr<nsRange> scratchRange = aItem->CloneRange();
@@ -2809,7 +2809,7 @@ Selection::Extend(nsINode& aContainer, uint32_t aOffset, ErrorResult& aRv)
     if (aRv.Failed()) {
       return;
     }
-    if (focusNode != anchorNode || focusOffset != anchorOffset) {//if collapsed diff dont do anything
+    if (focusNode != anchorNode || focusOffset != anchorOffset) {//if collapsed diff don't do anything
       res = difRange->SetStart(focusNode, focusOffset);
       nsresult tmp = difRange->SetEnd(anchorNode, anchorOffset);
       if (NS_FAILED(tmp)) {
@@ -2871,7 +2871,7 @@ Selection::Extend(nsINode& aContainer, uint32_t aOffset, ErrorResult& aRv)
       return;
     }
     //deselect from a to 1
-    if (focusNode != anchorNode || focusOffset!= anchorOffset) {//if collapsed diff dont do anything
+    if (focusNode != anchorNode || focusOffset!= anchorOffset) {//if collapsed diff don't do anything
       res = difRange->SetStartAndEnd(anchorNode, anchorOffset,
                                      focusNode, focusOffset);
       nsresult tmp = SetAnchorFocusToRange(range);

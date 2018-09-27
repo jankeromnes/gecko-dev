@@ -48,7 +48,7 @@ const int32_t SCRIPT_PROPS[] = {
     0x0308 | RECOMMENDED,  // Zinh
     0x0628 | RECOMMENDED | RTL,  // Arab
     0x0531 | RECOMMENDED | CASED,  // Armn
-    0x0995 | RECOMMENDED,  // Beng
+    0x0995 | RECOMMENDED,  // Being
     0x3105 | RECOMMENDED | LB_LETTERS,  // Bopo
     0x13C4 | LIMITED_USE | CASED,  // Cher
     0x03E2 | EXCLUSION | CASED,  // Copt

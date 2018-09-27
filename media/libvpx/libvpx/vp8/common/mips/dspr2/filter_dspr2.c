@@ -2371,7 +2371,7 @@ void vp8_sixtap_predict4x4_dspr2(unsigned char *RESTRICT src_ptr,
   unsigned char FData[9 * 4]; /* Temp data bufffer used in filtering */
   unsigned int pos = 16;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
                        :
                        : [pos] "r"(pos));
@@ -2397,7 +2397,7 @@ void vp8_sixtap_predict8x8_dspr2(unsigned char *RESTRICT src_ptr,
 
   pos = 16;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1               \n\t"
                        :
                        : [pos] "r"(pos));
@@ -2573,7 +2573,7 @@ void vp8_sixtap_predict8x4_dspr2(unsigned char *RESTRICT src_ptr,
 
   pos = 16;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
                        :
                        : [pos] "r"(pos));
@@ -2704,7 +2704,7 @@ void vp8_sixtap_predict16x16_dspr2(unsigned char *RESTRICT src_ptr,
 
   pos = 16;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
                        :
                        : [pos] "r"(pos));

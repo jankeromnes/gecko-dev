@@ -2288,7 +2288,7 @@ MediaFormatReader::InternalSeek(TrackType aTrack,
       OwnerThread(),
       __func__,
       [self, aTrack](TimeUnit aTime) {
-        DDLOGEX(self.get(), DDLogCategory::Log, "seeked", DDNoValue{});
+        DDLOGEX(self.get(), DDLogCategory::Log, "sought", DDNoValue{});
         auto& decoder = self->GetDecoderData(aTrack);
         decoder.mSeekRequest.Complete();
         MOZ_ASSERT(
@@ -3008,14 +3008,14 @@ MediaFormatReader::OnSeekFailed(TrackType aTrack, const MediaResult& aError)
         aTrack == TrackType::kAudioTrack &&
         mFallbackSeekTime.isSome() &&
         mPendingSeekTime.ref() != mFallbackSeekTime.ref()) {
-      // We have failed to seek audio where video seeked to earlier.
+      // We have failed to seek audio where video sought to earlier.
       // Attempt to seek instead to the closest point that we know we have in
       // order to limit A/V sync discrepency.
 
       // Ensure we have the most up to date buffered ranges.
       UpdateReceivedNewData(TrackType::kAudioTrack);
       Maybe<TimeUnit> nextSeekTime;
-      // Find closest buffered time found after video seeked time.
+      // Find closest buffered time found after video sought time.
       for (const auto& timeRange : mAudio.mTimeRanges) {
         if (timeRange.mStart >= mPendingSeekTime.ref()) {
           nextSeekTime.emplace(timeRange.mStart);
@@ -3060,7 +3060,7 @@ void
 MediaFormatReader::OnVideoSeekCompleted(TimeUnit aTime)
 {
   MOZ_ASSERT(OnTaskQueue());
-  LOGV("Video seeked to %" PRId64, aTime.ToMicroseconds());
+  LOGV("Video sought to %" PRId64, aTime.ToMicroseconds());
   mVideo.mSeekRequest.Complete();
 
   mVideo.mFirstFrameTime = Some(aTime);
@@ -3072,7 +3072,7 @@ MediaFormatReader::OnVideoSeekCompleted(TimeUnit aTime)
     MOZ_ASSERT(mPendingSeekTime.isSome());
     if (mOriginalSeekTarget.IsFast()) {
       // We are performing a fast seek. We need to seek audio to where the
-      // video seeked to, to ensure proper A/V sync once playback resume.
+      // video sought to, to ensure proper A/V sync once playback resume.
       mPendingSeekTime = Some(aTime);
     }
     DoAudioSeek();
@@ -3144,7 +3144,7 @@ void
 MediaFormatReader::OnAudioSeekCompleted(TimeUnit aTime)
 {
   MOZ_ASSERT(OnTaskQueue());
-  LOGV("Audio seeked to %" PRId64, aTime.ToMicroseconds());
+  LOGV("Audio sought to %" PRId64, aTime.ToMicroseconds());
   mAudio.mSeekRequest.Complete();
   mAudio.mFirstFrameTime = Some(aTime);
   mPendingSeekTime.reset();

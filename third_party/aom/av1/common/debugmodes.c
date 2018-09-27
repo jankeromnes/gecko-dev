@@ -59,7 +59,7 @@ void av1_print_modes_and_motion_vectors(AV1_COMMON *cm, const char *file) {
   print_mi_data(cm, mvs, "Transform:", offsetof(MB_MODE_INFO, tx_size));
   print_mi_data(cm, mvs, "UV Modes:", offsetof(MB_MODE_INFO, uv_mode));
 
-  // output skip infomation.
+  // output skip information.
   log_frame_info(cm, "Skips:", mvs);
   for (mi_row = 0; mi_row < rows; mi_row++) {
     fprintf(mvs, "S ");

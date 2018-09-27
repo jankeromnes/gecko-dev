@@ -252,7 +252,7 @@ bool H264AnnexBBufferHasVideoFormatDescription(const uint8_t* annexb_buffer,
   RTC_DCHECK(annexb_buffer);
   RTC_DCHECK_GT(annexb_buffer_size, 4);
 
-  // The buffer we receive via RTP has 00 00 00 01 start code artifically
+  // The buffer we receive via RTP has 00 00 00 01 start code artificially
   // embedded by the RTP depacketizer. Extract NALU information.
   // TODO(tkchin): handle potential case where sps and pps are delivered
   // separately.

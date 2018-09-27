@@ -78,8 +78,8 @@ public:
   class iterator
   {
   public:
-    explicit iterator(CaptureCommandList& aParent)
-     : mParent(aParent),
+    explicit iterator(CaptureCommandList& apparent)
+     : mParent(apparent),
        mCurrent(nullptr),
        mEnd(nullptr)
     {

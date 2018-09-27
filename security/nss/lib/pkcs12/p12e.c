@@ -135,7 +135,7 @@ typedef struct sec_PKCS12EncoderContextStr {
     SEC_PKCS12ExportContext *p12exp;
 
     /* encoder information - this is set up based on whether
-     * password based or public key pased privacy is being used
+     * password based or public key passed privacy is being used
      */
     SEC_ASN1EncoderContext *outerA1ecx;
     union {
@@ -1553,7 +1553,7 @@ sec_pkcs12_encoder_start_context(SEC_PKCS12ExportContext *p12exp)
     } else {
         p12enc->aSafeCinfo = SEC_PKCS7CreateData();
 
-        /* init password pased integrity mode */
+        /* init password passed integrity mode */
         if (p12exp->integrityEnabled) {
             SECItem pwd = { siBuffer, NULL, 0 };
             PK11SymKey *symKey;

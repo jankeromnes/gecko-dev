@@ -118,8 +118,8 @@ static INLINE __m128i dc_sum_64(const uint8_t *ref) {
 
 static INLINE int divide_using_multiply_shift(int num, int shift1,
                                               int multiplier) {
-  const int interm = num >> shift1;
-  return interm * multiplier >> DC_SHIFT2;
+  const int interim = num >> shift1;
+  return interim * multiplier >> DC_SHIFT2;
 }
 
 // -----------------------------------------------------------------------------

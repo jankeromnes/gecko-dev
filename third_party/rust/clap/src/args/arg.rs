@@ -1281,7 +1281,7 @@ impl<'a, 'b> Arg<'a, 'b> {
     ///
     /// A safe thing to do if you'd like to support an option which supports multiple values, but
     /// also is "overridable" by itself, is to use `use_delimiter(false)` and *not* use
-    /// `multiple(true)` while telling users to seperate values with a comma (i.e. `val1,val2`)
+    /// `multiple(true)` while telling users to separate values with a comma (i.e. `val1,val2`)
     ///
     /// ```
     /// # use clap::{App, Arg};

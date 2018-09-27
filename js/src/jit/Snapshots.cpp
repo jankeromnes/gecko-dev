@@ -276,7 +276,7 @@ RValueAllocation::layoutFromMode(Mode mode)
 // indexable table of elements of X bytes, and thus we can safely divide any
 // offset within the buffer by X to obtain an index.
 //
-// By padding, we are loosing space within the allocation buffer, but we
+// By padding, we are losing space within the allocation buffer, but we
 // multiple by X the number of indexes that we can store on one byte in each
 // snapshots.
 //

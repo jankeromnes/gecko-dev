@@ -41,9 +41,9 @@ interface nsIWindowWatcher : nsISupports {
 
   /** Create a new window. It will automatically be added to our list
       (via addWindow()).
-      @param aParent parent window, if any. Null if no parent.  If it is
-             impossible to get to an nsIWebBrowserChrome from aParent, this
-             method will effectively act as if aParent were null.
+      @param apparent parent window, if any. Null if no parent.  If it is
+             impossible to get to an nsIWebBrowserChrome from apparent, this
+             method will effectively act as if apparent were null.
       @param aURL url to which to open the new window. Must already be
              escaped, if applicable. can be null.
       @param aName window name from JS window.open. can be null.  If a window
@@ -60,12 +60,12 @@ interface nsIWindowWatcher : nsISupports {
             determining the security context to use for the search for a given
             window named aName.
       @note This method should try to set the default charset for the new
-            window to the default charset of aParent.  This is not guaranteed,
+            window to the default charset of apparent.  This is not guaranteed,
             however.
       @note This method may dispatch a "toplevel-window-ready" notification
             via nsIObserverService if the window did not already exist.
   */
-  mozIDOMWindowProxy openWindow(in mozIDOMWindowProxy aParent, in string aUrl,
+  mozIDOMWindowProxy openWindow(in mozIDOMWindowProxy apparent, in string aUrl,
                                 in string aName, in string aFeatures,
                                 in nsISupports aArguments);
 
@@ -102,18 +102,18 @@ interface nsIWindowWatcher : nsISupports {
   nsISimpleEnumerator getWindowEnumerator();
 
   /** Return a newly created nsIPrompt implementation.
-      @param aParent the parent window used for posing alerts. can be null.
+      @param apparent the parent window used for posing alerts. can be null.
       @return a new nsIPrompt object
   */
 
-  nsIPrompt getNewPrompter(in mozIDOMWindowProxy aParent);
+  nsIPrompt getNewPrompter(in mozIDOMWindowProxy apparent);
 
   /** Return a newly created nsIAuthPrompt implementation.
-      @param aParent the parent window used for posing alerts. can be null.
+      @param apparent the parent window used for posing alerts. can be null.
       @return a new nsIAuthPrompt object
   */
 
-  nsIAuthPrompt getNewAuthPrompter(in mozIDOMWindowProxy aParent);
+  nsIAuthPrompt getNewAuthPrompter(in mozIDOMWindowProxy apparent);
 
   /** Set the window creator callback. It must be filled in by the app.
       openWindow will use it to create new windows.

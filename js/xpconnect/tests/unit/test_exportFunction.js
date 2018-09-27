@@ -11,7 +11,7 @@ function run_test() {
   subsb.ok = ok;
   subsb.equal = equal;
 
-  // Exporting should work if prinicipal of the source sandbox
+  // Exporting should work if principal of the source sandbox
   // subsumes the principal of the target sandbox.
   Cu.evalInSandbox("(" + function() {
     var wasCalled = false;

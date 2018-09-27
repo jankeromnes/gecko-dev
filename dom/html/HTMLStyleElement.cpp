@@ -99,10 +99,10 @@ HTMLStyleElement::ContentChanged(nsIContent* aContent)
 }
 
 nsresult
-HTMLStyleElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLStyleElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                              nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

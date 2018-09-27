@@ -183,5 +183,5 @@ function logEvents(el) {
   ["suspend", "play", "canplay", "canplaythrough", "loadstart", "loadedmetadata",
    "loadeddata", "playing", "ended", "error", "stalled", "emptied", "abort",
    "waiting", "pause", "durationchange", "seeking",
-   "seeked"].forEach(type => el.addEventListener(type, e => info(`got ${e.type} event`)));
+   "sought"].forEach(type => el.addEventListener(type, e => info(`got ${e.type} event`)));
 }

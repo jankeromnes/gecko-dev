@@ -20,7 +20,7 @@ VCS_REGEX = re.compile(
     r'(#(?P<fragment>\S+))?'
 )
 
-# This matches just about everyting
+# This matches just about everything
 LOCAL_REGEX = re.compile(
     r'^((?P<scheme>file)://)?'
     r'(?P<path>[^#]+)' +

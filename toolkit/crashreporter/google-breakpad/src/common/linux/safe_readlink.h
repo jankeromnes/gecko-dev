@@ -28,7 +28,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // safe_readlink.h: Define the google_breakpad::SafeReadLink function,
-// which wraps sys_readlink and gurantees the result is NULL-terminated.
+// which wraps sys_readlink and guarantees the result is NULL-terminated.
 
 #ifndef COMMON_LINUX_SAFE_READLINK_H_
 #define COMMON_LINUX_SAFE_READLINK_H_

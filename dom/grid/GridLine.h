@@ -21,7 +21,7 @@ class GridLine : public nsISupports
                , public nsWrapperCache
 {
 public:
-  explicit GridLine(GridLines* aParent);
+  explicit GridLine(GridLines* apparent);
 
 protected:
   virtual ~GridLine();

@@ -1034,7 +1034,7 @@ var PluginCrashReporter = {
    * @param keyVals
    *        An object whose key-value pairs will be merged
    *        with the ".extra" file submitted with the report.
-   *        The properties of htis object will override properties
+   *        The properties of this object will override properties
    *        of the same name in the .extra file.
    */
   submitCrashReport(runID, keyVals) {

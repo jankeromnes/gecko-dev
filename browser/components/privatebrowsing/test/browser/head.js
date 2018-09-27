@@ -21,8 +21,8 @@ function whenNewWindowLoaded(aOptions, aCallback) {
   return win;
 }
 
-function openWindow(aParent, aOptions) {
-  let win = aParent.OpenBrowserWindow(aOptions);
+function openWindow(apparent, aOptions) {
+  let win = apparent.OpenBrowserWindow(aOptions);
   return TestUtils.topicObserved("browser-delayed-startup-finished",
                                  subject => subject == win).then(() => win);
 }

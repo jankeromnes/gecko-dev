@@ -82,7 +82,7 @@ typedef struct {
 } size_params_type;
 
 typedef struct {
-  // Rate targetting variables
+  // Rate targeting variables
   int base_frame_target;  // A baseline frame target before adjustment
                           // for previous under or over shoot.
   int this_frame_target;  // Actual frame target after rc adjustment.

@@ -46,17 +46,17 @@ public:
 
   // This creates a Blob or a File based on the type of BlobImpl.
   static Blob*
-  Create(nsISupports* aParent, BlobImpl* aImpl);
+  Create(nsISupports* apparent, BlobImpl* aImpl);
 
   static already_AddRefed<Blob>
-  CreateStringBlob(nsISupports* aParent, const nsACString& aData,
+  CreateStringBlob(nsISupports* apparent, const nsACString& aData,
                    const nsAString& aContentType);
 
   // The returned Blob takes ownership of aMemoryBuffer. aMemoryBuffer will be
   // freed by free so it must be allocated by malloc or something
   // compatible with it.
   static already_AddRefed<Blob>
-  CreateMemoryBlob(nsISupports* aParent, void* aMemoryBuffer, uint64_t aLength,
+  CreateMemoryBlob(nsISupports* apparent, void* aMemoryBuffer, uint64_t aLength,
                    const nsAString& aContentType);
 
   BlobImpl* Impl() const
@@ -135,7 +135,7 @@ public:
 
 protected:
   // File constructor should never be used directly. Use Blob::Create instead.
-  Blob(nsISupports* aParent, BlobImpl* aImpl);
+  Blob(nsISupports* apparent, BlobImpl* aImpl);
   virtual ~Blob();
 
   virtual bool HasFileInterface() const { return false; }

@@ -80,7 +80,7 @@ class Result(object):
         self.output_bytes = output_bytes
         #: The exit code as integer.
         self.exit_code = exit_code
-        #: The exception that happend if one did.
+        #: The exception that happened if one did.
         self.exception = exception
         #: The traceback
         self.exc_info = exc_info

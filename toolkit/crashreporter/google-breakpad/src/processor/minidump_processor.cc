@@ -1103,7 +1103,7 @@ string MinidumpProcessor::GetCrashReason(Minidump *dump, uint64_t *address) {
           // an attempt to read data, 1 if it was an attempt to write data,
           // and 8 if this was a data execution violation.
           // exception_information[2] contains the underlying NTSTATUS code,
-          // which is the explanation for why this error occured.
+          // which is the explanation for why this error occurred.
           // This information is useful in addition to the code address, which
           // will be present in the crash thread's instruction field anyway.
           if (raw_exception->exception_record.number_parameters >= 1) {

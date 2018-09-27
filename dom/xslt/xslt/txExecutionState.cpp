@@ -133,7 +133,7 @@ txExecutionState::init(const txXPathNode& aNode,
 
     mRecycler = new txResultRecycler;
 
-    // The actual value here doesn't really matter since noone should use this
+    // The actual value here doesn't really matter since no one should use this
     // value. But lets put something errorlike in just in case
     mGlobalVarPlaceholderValue = new StringResult(NS_LITERAL_STRING("Error"), nullptr);
 

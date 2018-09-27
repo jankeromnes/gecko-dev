@@ -86,7 +86,7 @@ public:
     void opsCombined(const GrOp* consumer, const GrOp* consumed);
 
     // Because op combining is heavily dependent on sequence of draw calls, these calls will only
-    // produce valid information for the given draw sequence which preceeded them. Specifically, ops
+    // produce valid information for the given draw sequence which preceded them. Specifically, ops
     // of future draw calls may combine with previous ops and thus would invalidate the json. What
     // this means is that for some sequence of draw calls N, the below toJson calls will only
     // produce JSON which reflects N draw calls. This JSON may or may not be accurate for N + 1 or

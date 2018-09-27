@@ -165,7 +165,7 @@ public:
     ~SkDngMemoryAllocator() override {}
 
     dng_memory_block* Allocate(uint32 size) override {
-        // To avoid arbitary allocation requests which might lead to out-of-memory, limit the
+        // To avoid arbitrary allocation requests which might lead to out-of-memory, limit the
         // amount of memory that can be allocated at once. The memory limit is based on experiments
         // and supposed to be sufficient for all valid DNG images.
         if (size > 300 * 1024 * 1024) {  // 300 MB

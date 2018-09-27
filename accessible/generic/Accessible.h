@@ -407,7 +407,7 @@ public:
   virtual bool RemoveChild(Accessible* aChild);
 
   /**
-   * Reallocates the child withing its parent.
+   * Reallocates the child within its parent.
    */
   void MoveChild(uint32_t aNewIndex, Accessible* aChild);
 
@@ -1016,7 +1016,7 @@ protected:
   /**
    * Set accessible parent and index in parent.
    */
-  void BindToParent(Accessible* aParent, uint32_t aIndexInParent);
+  void BindToParent(Accessible* apparent, uint32_t aIndexInParent);
   void UnbindFromParent();
 
   /**

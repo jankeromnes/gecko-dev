@@ -260,7 +260,7 @@ class UdpTransport : public Transport {
 
     // Set the number of buffers that the socket implementation may use for
     // receiving packets to numberOfSocketBuffers. I.e. the number of packets
-    // that can be received in parallell.
+    // that can be received in parallel.
     // Note: this API only has effect on Windows.
     virtual int32_t StartReceiving(const uint32_t numberOfSocketBuffers) = 0;
 
@@ -321,7 +321,7 @@ class UdpTransport : public Transport {
     virtual int32_t SetSendPorts(const uint16_t rtpPort,
                                  const uint16_t rtcpPort = 0) = 0;
 
-    // Retreive the last registered error code.
+    // Retrieve the last registered error code.
     virtual ErrorCode LastError() const = 0;
 
     // Put the local IPv4 address in localIP.

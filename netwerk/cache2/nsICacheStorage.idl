@@ -45,7 +45,7 @@ interface nsICacheStorage : nsISupports
 
   /**
    * Perform the cache entry check (onCacheEntryCheck invocation) on any thread 
-   * for optimal perfomance optimization.  If this flag is not specified it is
+   * for optimal performance optimization.  If this flag is not specified it is
    * ensured that onCacheEntryCheck is called on the same thread as respective 
    * asyncOpen has been called.
    */
@@ -105,7 +105,7 @@ interface nsICacheStorage : nsISupports
                              in ACString aIdExtension);
 
   /**
-   * Synchronously check on existance of an entry.  In case of disk entries
+   * Synchronously check on existence of an entry.  In case of disk entries
    * this uses information from the cache index.  When the index data are not
    * up to date or index is still building, NS_ERROR_NOT_AVAILABLE is thrown.
    * The same error may throw any storage implementation that cannot determine
@@ -114,7 +114,7 @@ interface nsICacheStorage : nsISupports
   boolean exists(in nsIURI aURI, in ACString aIdExtension);
 
   /**
-   * Synchronously check on existance of alternative data and size of the
+   * Synchronously check on existence of alternative data and size of the
    * content. When the index data are not up to date or index is still building,
    * NS_ERROR_NOT_AVAILABLE is thrown. The same error may throw any storage
    * implementation that cannot determine entry state without blocking the caller.

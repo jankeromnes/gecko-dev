@@ -1306,7 +1306,7 @@ pub mod test_helpers {
     //! This module only exists to help with ensuring that the layout of the
     //! structs inside of rust and C++ are identical.
     //!
-    //! It is public to ensure that these testing functions are avaliable to
+    //! It is public to ensure that these testing functions are available to
     //! gtest code.
 
     use super::{nsACString, nsAString};

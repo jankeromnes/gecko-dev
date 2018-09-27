@@ -124,7 +124,7 @@ var fn = function (arg) {
     console.log("here");
 };
 fn("arg");
-// Un-decorated exported classes present a mapping challege because
+// Un-decorated exported classes present a mapping challenge because
 // the class name is mapped to an unhelpful export assignment.
 var ExportedOther = /** @class */ (function () {
     function ExportedOther() {

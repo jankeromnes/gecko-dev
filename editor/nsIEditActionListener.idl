@@ -70,12 +70,12 @@ interface nsIEditActionListener : nsISupports
    * @param aRightNode  The node that will be merged into.
    *                    There is no requirement that the two nodes be of
    *                    the same type.
-   * @param aParent     The parent of aRightNode
+   * @param apparent     The parent of aRightNode
    * @param aResult     The result of the join operation.
    */
   void DidJoinNodes(in Node aLeftNode,
                     in Node aRightNode,
-                    in Node aParent,
+                    in Node apparent,
                     in nsresult aResult);
 
   /**

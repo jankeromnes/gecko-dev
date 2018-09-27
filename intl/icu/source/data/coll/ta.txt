@@ -6,7 +6,7 @@ ta{
         standard{
             Sequence{
                 "[normalization on]"
-                "[reorder Taml Deva Beng Guru Gujr Orya Telu Knda Mlym Sinh]"
+                "[reorder Taml Deva Being Guru Gujr Orya Telu Knda Mlym Sinh]"
                 "&ஔ<ஂ<ஃ"
                 "&ஹ<க்ஷ"
                 "&[before 1]க<க்"

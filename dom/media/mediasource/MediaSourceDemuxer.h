@@ -97,7 +97,7 @@ class MediaSourceTrackDemuxer
   , public DecoderDoctorLifeLogger<MediaSourceTrackDemuxer>
 {
 public:
-  MediaSourceTrackDemuxer(MediaSourceDemuxer* aParent,
+  MediaSourceTrackDemuxer(MediaSourceDemuxer* apparent,
                           TrackInfo::TrackType aType,
                           TrackBuffersManager* aManager);
 

@@ -45,11 +45,11 @@ class ProcessHangMonitor final
   NS_DECL_NSIOBSERVER
 
   static PProcessHangMonitorParent* AddProcess(dom::ContentParent* aContentParent);
-  static void RemoveProcess(PProcessHangMonitorParent* aParent);
+  static void RemoveProcess(PProcessHangMonitorParent* apparent);
 
   static void ClearHang();
 
-  static void PaintWhileInterruptingJS(PProcessHangMonitorParent* aParent,
+  static void PaintWhileInterruptingJS(PProcessHangMonitorParent* apparent,
                                        dom::TabParent* aTab,
                                        bool aForceRepaint,
                                        const layers::LayersObserverEpoch& aEpoch);

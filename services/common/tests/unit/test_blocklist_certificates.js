@@ -111,7 +111,7 @@ add_task(async function test_something() {
 
   // Check that a sync completes even when there's bad data in the
   // collection. This will throw on fail, so just calling maybeSync is an
-  // acceptible test.
+  // acceptable test.
   Services.prefs.setCharPref("services.settings.server", dummyServerURL);
   await OneCRLBlocklistClient.maybeSync(5000, Date.now());
 });

@@ -17,8 +17,8 @@
 namespace mozilla {
 namespace dom {
 
-XPathResult::XPathResult(nsINode* aParent)
-    : mParent(aParent),
+XPathResult::XPathResult(nsINode* apparent)
+    : mParent(apparent),
       mDocument(nullptr),
       mCurrentPos(0),
       mResultType(ANY_TYPE),

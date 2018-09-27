@@ -14,7 +14,7 @@ def CompileXCAssets(
 
   Args:
     output: absolute path to the containing bundle
-    platform: the targetted platform
+    platform: the targeted platform
     product_type: the bundle type
     min_deployment_target: minimum deployment target
     inputs: list of absolute paths to .xcassets bundles

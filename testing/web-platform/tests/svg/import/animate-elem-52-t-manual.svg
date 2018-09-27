@@ -35,7 +35,7 @@
         Eventbase-element term is missing, the event-base element is defined to
         be the target element of the animation"
         The SMIL spec (3.1 subsection "The target element") says that the
-        animation target may be defined explicitly thru the targetElement IDREF
+        animation target may be defined explicitly through the targetElement IDREF
         or href URI.
         So in this test, the animation target is defined through
         xlink:href and the event base per definition is then also this

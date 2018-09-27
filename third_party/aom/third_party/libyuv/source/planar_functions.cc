@@ -2072,7 +2072,7 @@ static int ARGBSobelize(const uint8* src_argb, int src_stride_argb,
       SobelYRow(row_y0 - 1, row_y2 - 1, row_sobely, width);
       SobelRow(row_sobelx, row_sobely, dst_argb, width);
 
-      // Cycle thru circular queue of 3 row_y buffers.
+      // Cycle through circular queue of 3 row_y buffers.
       {
         uint8* row_yt = row_y0;
         row_y0 = row_y1;

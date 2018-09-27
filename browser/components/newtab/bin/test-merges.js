@@ -29,7 +29,7 @@ const TREEHERDER_PREFIX = "https://treeherder.mozilla.org/#/jobs?repo=pine&revis
 
 // Path to the working directory where the export/commit operations will be
 // done.  Highly advisted to be used only for this testing purpose so you don't
-// accidently clobber real work.
+// accidentally clobber real work.
 //
 // There will be two child directories:
 //

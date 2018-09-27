@@ -30,7 +30,7 @@ public:
   static const bool kNoEvents = true;
   static const bool kNoShutdown = true;
 
-  explicit TreeMutation(Accessible* aParent, bool aNoEvents = false);
+  explicit TreeMutation(Accessible* apparent, bool aNoEvents = false);
   ~TreeMutation();
 
   void AfterInsertion(Accessible* aChild);

@@ -191,7 +191,7 @@ ExceptionTableInfo::ExExtractResult ExceptionTableInfo::ExtabEntryExtract(
     GET_EXTAB_U32(data, extbl_data);
     if (!(data & ARM_EXIDX_COMPACT)) {
       // This denotes a "generic model" handler.  That will involve
-      // executing arbitary machine code, which is something we
+      // executing arbitrary machine code, which is something we
       // can't represent here; hence reject it.
       return ExCantRepresent;
     }

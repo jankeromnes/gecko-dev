@@ -454,7 +454,7 @@ nsNativeAppSupportUnix::Start(bool *aRetVal)
   NS_ASSERTION(gAppData, "gAppData must not be null.");
 
 // The dbus library is used by both nsWifiScannerDBus and BluetoothDBusService,
-// from diffrent threads. This could lead to race conditions if the dbus is not
+// from different threads. This could lead to race conditions if the dbus is not
 // initialized before making any other library calls.
 #ifdef MOZ_ENABLE_DBUS
   dbus_threads_init_default();

@@ -118,7 +118,7 @@ impl PulseContext {
                     u,
                 );
             } else {
-                // If info is None, then an error occured.
+                // If info is None, then an error occurred.
                 let ctx = unsafe { &mut *(u as *mut PulseContext) };
                 ctx.mainloop.signal();
             }

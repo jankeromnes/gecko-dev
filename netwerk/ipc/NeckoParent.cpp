@@ -205,7 +205,7 @@ NeckoParent::GetValidatedOriginAttributes(const SerializedLoadContext& aSerializ
   }
 
   // This may be a ServiceWorker: when a push notification is received, FF wakes
-  // up the corrisponding service worker so that it can manage the PushEvent. At
+  // up the corresponding service worker so that it can manage the PushEvent. At
   // that time we probably don't have any valid tabcontext, but still, we want
   // to support http channel requests coming from that ServiceWorker.
   if (aRequestingPrincipal) {
@@ -669,9 +669,9 @@ NeckoParent::RecvPDNSRequestConstructor(PDNSRequestParent* aActor,
 }
 
 bool
-NeckoParent::DeallocPDNSRequestParent(PDNSRequestParent* aParent)
+NeckoParent::DeallocPDNSRequestParent(PDNSRequestParent* apparent)
 {
-  DNSRequestParent *p = static_cast<DNSRequestParent*>(aParent);
+  DNSRequestParent *p = static_cast<DNSRequestParent*>(apparent);
   p->Release();
   return true;
 }
@@ -765,9 +765,9 @@ CallbackMap()
 
 NS_IMPL_ISUPPORTS(NeckoParent::NestedFrameAuthPrompt, nsIAuthPrompt2)
 
-NeckoParent::NestedFrameAuthPrompt::NestedFrameAuthPrompt(PNeckoParent* aParent,
+NeckoParent::NestedFrameAuthPrompt::NestedFrameAuthPrompt(PNeckoParent* apparent,
                                                           TabId aNestedFrameId)
-  : mNeckoParent(aParent)
+  : mNeckoParent(apparent)
   , mNestedFrameId(aNestedFrameId)
 {}
 

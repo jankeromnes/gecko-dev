@@ -32,7 +32,7 @@ protected:
   /**
    * When this method initializes the SVGLengthListAndInfo for its nsSMILValue
    * argument, it has to blindly set its mCanZeroPadList to true despite
-   * the fact that some attributes can't be zero-padded. (See the explaination
+   * the fact that some attributes can't be zero-padded. (See the explanation
    * that follows.) SVGAnimatedLengthList::SMILAnimatedLengthList's
    * GetBaseValue() and ValueFromString() methods then override this for the
    * nsSMILValue objects that they create to set this flag to the appropriate

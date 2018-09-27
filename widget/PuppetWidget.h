@@ -69,12 +69,12 @@ public:
   // PuppetWidget creation is infallible, hence InfallibleCreate(), which
   // Create() calls.
   using nsBaseWidget::Create; // for Create signature not overridden here
-  virtual nsresult Create(nsIWidget* aParent,
+  virtual nsresult Create(nsIWidget* apparent,
                           nsNativeWidget aNativeParent,
                           const LayoutDeviceIntRect& aRect,
                           nsWidgetInitData* aInitData = nullptr)
                           override;
-  void InfallibleCreate(nsIWidget* aParent,
+  void InfallibleCreate(nsIWidget* apparent,
                         nsNativeWidget aNativeParent,
                         const LayoutDeviceIntRect& aRect,
                         nsWidgetInitData* aInitData = nullptr);

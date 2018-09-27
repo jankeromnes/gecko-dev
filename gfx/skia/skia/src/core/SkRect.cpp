@@ -76,7 +76,7 @@ bool SkRect::setBoundsCheck(const SkPoint pts[], int count) {
         }
 
         /**
-         *  With some trickery, we may be able to use Min/Max to also propogate non-finites,
+         *  With some trickery, we may be able to use Min/Max to also propagate non-finites,
          *  in which case we could eliminate accum entirely, and just check min and max for
          *  "is_finite".
          */

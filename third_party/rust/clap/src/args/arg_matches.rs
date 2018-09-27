@@ -373,7 +373,7 @@ impl<'a> ArgMatches<'a> {
     /// index for `val` would be recorded. This is by design.
     ///
     /// Besides the flag/option descrepancy, the primary difference between an argv index and clap
-    /// index, is that clap continues counting once all arguments have properly seperated, whereas
+    /// index, is that clap continues counting once all arguments have properly separated, whereas
     /// an argv index does not.
     ///
     /// The examples should clear this up.
@@ -384,7 +384,7 @@ impl<'a> ArgMatches<'a> {
     /// # Examples
     ///
     /// The argv indices are listed in the comments below. See how they correspond to the clap
-    /// indices. Note that if it's not listed in a clap index, this is becuase it's not saved in
+    /// indices. Note that if it's not listed in a clap index, this is because it's not saved in
     /// in an `ArgMatches` struct for querying.
     ///
     /// ```rust

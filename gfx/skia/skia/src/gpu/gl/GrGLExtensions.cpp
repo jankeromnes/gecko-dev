@@ -128,7 +128,7 @@ bool GrGLExtensions::remove(const char ext[]) {
         return false;
     }
 
-    // This is not terribly effecient but we really only expect this function to be called at
+    // This is not terribly efficient but we really only expect this function to be called at
     // most a handful of times when our test programs start.
     fStrings->removeShuffle(idx);
     if (idx != fStrings->count()) {
@@ -141,7 +141,7 @@ bool GrGLExtensions::remove(const char ext[]) {
 void GrGLExtensions::add(const char ext[]) {
     int idx = find_string(*fStrings, ext);
     if (idx < 0) {
-        // This is not the most effecient approach since we end up looking at all of the
+        // This is not the most efficient approach since we end up looking at all of the
         // extensions after the add
         fStrings->emplace_back(ext);
         SkTLessFunctionToFunctorAdaptor<SkString, extension_compare> cmp;

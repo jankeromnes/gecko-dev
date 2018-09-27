@@ -150,7 +150,7 @@ PlaceholderTransaction::Merge(nsITransaction* aTransaction,
 //  RememberEndingSelection();
 //  efficiency hack: no need to remember selection here, as we haven't yet
 //  finished the initial batch and we know we will be told when the batch ends.
-//  we can remeber the selection then.
+//  we can remember the selection then.
   } else {
     // merge typing or IME or deletion transactions if the selection matches
     if ((mName.get() == nsGkAtoms::TypingTxnName ||

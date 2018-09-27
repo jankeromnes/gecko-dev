@@ -129,7 +129,7 @@ class Baton {
   CRITICAL_SECTION crit_sect_;
   ConditionVariableEventWin cond_var_;
   bool being_passed_;
-  // Statistics information: Number of successfull passes.
+  // Statistics information: Number of successful passes.
   int pass_count_;
 };
 

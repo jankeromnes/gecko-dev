@@ -4,7 +4,7 @@
 var PERMISSIONS_FILE_NAME = "permissions.sqlite";
 
 /*
- * Prevent the nsINavHistoryService from being avaliable for the migration
+ * Prevent the nsINavHistoryService from being available for the migration
  */
 
 var CONTRACT_ID = "@mozilla.org/browser/nav-history-service;1";

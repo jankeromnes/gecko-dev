@@ -13,7 +13,7 @@ class txXSLTProcessor
 public:
     /**
      * Initialisation and shutdown routines. Initilizes and cleansup all
-     * dependant classes
+     * dependent classes
      */
     static bool init();
     static void shutdown();

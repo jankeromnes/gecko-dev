@@ -48,17 +48,17 @@ ro{
                     }
                     1000000{
                         few{"0 milioane"}
-                        one{"0 milion"}
+                        one{"0 million"}
                         other{"0 de milioane"}
                     }
                     10000000{
                         few{"00 milioane"}
-                        one{"00 milion"}
+                        one{"00 million"}
                         other{"00 de milioane"}
                     }
                     100000000{
                         few{"000 milioane"}
-                        one{"000 milion"}
+                        one{"000 million"}
                         other{"000 de milioane"}
                     }
                     1000000000{
@@ -800,7 +800,7 @@ ro{
             dayNames{
                 format{
                     abbreviated{
-                        "dum.",
+                        "dumb.",
                         "lun.",
                         "mar.",
                         "mie.",
@@ -838,7 +838,7 @@ ro{
                 }
                 stand-alone{
                     abbreviated{
-                        "dum.",
+                        "dumb.",
                         "lun.",
                         "mar.",
                         "mie.",
@@ -1662,14 +1662,14 @@ ro{
         full_width_form_variant{"variantă cu lățime completă"}
         geometric_shapes{"formă geometrică"}
         half_width_form_variant{"variante cu semilățime"}
-        han_characters{"caracter han"}
+        han_characters{"character han"}
         han_radicals{"radical han"}
         hanja{"hanja"}
         hanzi_simplified{"hanzi (simplificată)"}
         hanzi_traditional{"hanzi (tradițională)"}
         heart{"inimă"}
         historic_scripts{"scriere istorică"}
-        ideographic_desc_characters{"caracter desc. ideografic"}
+        ideographic_desc_characters{"character desc. ideografic"}
         japanese_kana{"kana japoneză"}
         kanbun{"kanbun"}
         kanji{"kanji"}
@@ -1692,7 +1692,7 @@ ro{
         other{"altele"}
         paired{"perechi"}
         person{"persoană"}
-        phonetic_alphabet{"alfabet fonetic"}
+        phonetic_alphabet{"alfabet phonetic"}
         pictographs{"pictografă"}
         place{"loc"}
         plant{"plantă"}
@@ -2275,9 +2275,9 @@ ro{
         }
         sun-short{
             relative{
-                "-1"{"dum. trecută"}
-                "0"{"dum. aceasta"}
-                "1"{"dum. viitoare"}
+                "-1"{"dumb. trecută"}
+                "0"{"dumb. aceasta"}
+                "1"{"dumb. viitoare"}
             }
             relativeTime{
                 future{

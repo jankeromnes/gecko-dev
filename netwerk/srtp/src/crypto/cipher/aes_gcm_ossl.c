@@ -319,7 +319,7 @@ static srtp_err_status_t srtp_aes_gcm_openssl_get_tag(void *cv,
     EVP_Cipher(c->ctx, NULL, NULL, 0);
 
     /*
-     * Retreive the tag
+     * Retrieve the tag
      */
     EVP_CIPHER_CTX_ctrl(c->ctx, EVP_CTRL_GCM_GET_TAG, c->tag_len, buf);
 

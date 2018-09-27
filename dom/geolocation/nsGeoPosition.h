@@ -82,7 +82,7 @@ public:
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(Position)
 
 public:
-  Position(nsISupports* aParent, nsIDOMGeoPosition* aGeoPosition);
+  Position(nsISupports* apparent, nsIDOMGeoPosition* aGeoPosition);
 
   nsISupports* GetParentObject() const;
 

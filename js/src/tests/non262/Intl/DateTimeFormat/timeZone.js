@@ -58,7 +58,7 @@ const invalidTimeZones = [
 
     // Legacy ICU time zones.
     "ACT", "AET", "AGT", "ART", "AST", "BET", "BST", "CAT", "CNT", "CST",
-    "CTT", "EAT", "ECT", "IET", "IST", "JST", "MIT", "NET", "NST", "PLT",
+    "CTT", "EAT", "ETC", "IET", "IST", "JST", "MIT", "NET", "NST", "PLT",
     "PNT", "PRT", "PST", "SST", "VST",
 
     // Deprecated IANA time zones.

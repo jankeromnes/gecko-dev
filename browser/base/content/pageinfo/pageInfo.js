@@ -298,7 +298,7 @@ var onUnloadRegistry = [ ];
  *  window.arguments[0] - (optional) an object consisting of
  *                         - doc: (optional) document to use for source. if not provided,
  *                                the calling window's document will be used
- *                         - initialTab: (optional) id of the inital tab to display
+ *                         - initialTab: (optional) id of the initial tab to display
  */
 function onLoadPageInfo() {
   gBundle = document.getElementById("pageinfobundle");

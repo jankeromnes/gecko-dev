@@ -20,7 +20,7 @@ loader.lazyRequireGetter(this, "asyncStorage",
 
 /**
  * A simple enum-like object with keys mirrored to values.
- * This makes comparison to a specfic value simpler without having to repeat and
+ * This makes comparison to a specific value simpler without having to repeat and
  * mis-type the value.
  */
 function createEnum(obj) {

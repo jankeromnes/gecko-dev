@@ -9,12 +9,12 @@ function f2(a) {
 
 var restartCode = "counter = 0; " + f2.toSource();
 
-// We need to reevaluate this function everytime, otherwise it is flagged as
+// We need to reevaluate this function every time, otherwise it is flagged as
 // having an argument object and it would not be re-entered.
 
 // This test case is checking that f.arguments reflects the overflow or the
 // underflow of arguments after a bailout.  Due to the way bailouts are
-// recovered we need to check for the intial frame and for any other JS frame
+// recovered we need to check for the initial frame and for any other JS frame
 // below.
 //
 // To produce a JSFrame, we need to avoid the 'Hot' counters of f1 to be the

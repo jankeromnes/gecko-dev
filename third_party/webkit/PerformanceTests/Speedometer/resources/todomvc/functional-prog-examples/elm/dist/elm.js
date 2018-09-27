@@ -4568,7 +4568,7 @@ function saveSlot(a, b, index, slot)
     set2(a.lengths, b.lengths, index, l + length(slot));
 }
 
-// Creates a node or leaf with a given length at their arrays for perfomance.
+// Creates a node or leaf with a given length at their arrays for performance.
 // Is only used by shuffle.
 function createNode(h, length)
 {
@@ -8004,9 +8004,9 @@ function diffFacts(a, b, category)
 }
 
 
-function diffChildren(aParent, bParent, patches, rootIndex)
+function diffChildren(apparent, bParent, patches, rootIndex)
 {
-    var aChildren = aParent.children;
+    var aChildren = apparent.children;
     var bChildren = bParent.children;
 
     var aLen = aChildren.length;
@@ -8041,7 +8041,7 @@ function diffChildren(aParent, bParent, patches, rootIndex)
 ////////////  KEYED DIFF  ////////////
 
 
-function diffKeyedChildren(aParent, bParent, patches, rootIndex)
+function diffKeyedChildren(apparent, bParent, patches, rootIndex)
 {
     var localPatches = [];
 
@@ -8049,7 +8049,7 @@ function diffKeyedChildren(aParent, bParent, patches, rootIndex)
     var inserts = []; // Array { index : Int, entry : Entry }
     // type Entry = { tag : String, vnode : VNode, index : Int, data : _ }
 
-    var aChildren = aParent.children;
+    var aChildren = apparent.children;
     var bChildren = bParent.children;
     var aLen = aChildren.length;
     var bLen = bChildren.length;

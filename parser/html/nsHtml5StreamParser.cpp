@@ -619,7 +619,7 @@ nsHtml5StreamParser::FinalizeSniffing(
       rv = mChardet->Done();
       NS_ENSURE_SUCCESS(rv, rv);
     }
-    // fall thru; callback may have changed charset
+    // fall through; callback may have changed charset
   }
   if (mCharsetSource == kCharsetUninitialized) {
     // Hopefully this case is never needed, but dealing with it anyway

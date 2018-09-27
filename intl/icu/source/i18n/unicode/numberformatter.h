@@ -580,7 +580,7 @@ class U_I18N_API Precision : public UMemory {
                                                               int32_t maxSignificantDigits);
 
 #ifndef U_HIDE_DEPRECATED_API
-    // Compatiblity methods that will be removed in ICU 64.
+    // Compatibility methods that will be removed in ICU 64.
     // See http://bugs.icu-project.org/trac/ticket/13746
 
     /** @deprecated ICU 62 */

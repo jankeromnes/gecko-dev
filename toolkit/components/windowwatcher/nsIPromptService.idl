@@ -47,21 +47,21 @@ interface nsIPromptService : nsISupports
   /**
    * Puts up an alert dialog with an OK button.
    *
-   * @param aParent
+   * @param apparent
    *        The parent window or null.
    * @param aDialogTitle
    *        Text to appear in the title of the dialog.
    * @param aText
    *        Text to appear in the body of the dialog.
    */
-  void alert(in mozIDOMWindowProxy aParent,
+  void alert(in mozIDOMWindowProxy apparent,
              in wstring aDialogTitle,
              in wstring aText);
 
   /**
    * Puts up an alert dialog with an OK button and a labeled checkbox.
    *
-   * @param aParent
+   * @param apparent
    *        The parent window or null.
    * @param aDialogTitle
    *        Text to appear in the title of the dialog.
@@ -73,7 +73,7 @@ interface nsIPromptService : nsISupports
    *        Contains the initial checked state of the checkbox when this method
    *        is called and the final checked state after this method returns.
    */
-  void alertCheck(in mozIDOMWindowProxy aParent,
+  void alertCheck(in mozIDOMWindowProxy apparent,
                   in wstring aDialogTitle,
                   in wstring aText,
                   in wstring aCheckMsg,
@@ -82,7 +82,7 @@ interface nsIPromptService : nsISupports
   /**
    * Puts up a dialog with OK and Cancel buttons.
    *
-   * @param aParent
+   * @param apparent
    *        The parent window or null.
    * @param aDialogTitle
    *        Text to appear in the title of the dialog.
@@ -91,14 +91,14 @@ interface nsIPromptService : nsISupports
    *
    * @return true for OK, false for Cancel
    */
-  boolean confirm(in mozIDOMWindowProxy aParent,
+  boolean confirm(in mozIDOMWindowProxy apparent,
                   in wstring aDialogTitle,
                   in wstring aText);
 
   /**
    * Puts up a dialog with OK and Cancel buttons and a labeled checkbox.
    *
-   * @param aParent
+   * @param apparent
    *        The parent window or null.
    * @param aDialogTitle
    *        Text to appear in the title of the dialog.
@@ -112,7 +112,7 @@ interface nsIPromptService : nsISupports
    *
    * @return true for OK, false for Cancel
    */
-  boolean confirmCheck(in mozIDOMWindowProxy aParent,
+  boolean confirmCheck(in mozIDOMWindowProxy apparent,
                        in wstring aDialogTitle,
                        in wstring aText,
                        in wstring aCheckMsg,
@@ -177,7 +177,7 @@ interface nsIPromptService : nsISupports
   /**
    * Puts up a dialog with up to 3 buttons and an optional, labeled checkbox.
    *
-   * @param aParent
+   * @param apparent
    *        The parent window or null.
    * @param aDialogTitle
    *        Text to appear in the title of the dialog.
@@ -217,7 +217,7 @@ interface nsIPromptService : nsISupports
    *
    * where "AAA" and "BBB" correspond to one of the button titles.
    */
-  int32_t confirmEx(in mozIDOMWindowProxy aParent,
+  int32_t confirmEx(in mozIDOMWindowProxy apparent,
                     in wstring aDialogTitle,
                     in wstring aText,
                     in unsigned long aButtonFlags,
@@ -230,7 +230,7 @@ interface nsIPromptService : nsISupports
   /**
    * Puts up a dialog with an edit field and an optional, labeled checkbox.
    *
-   * @param aParent
+   * @param apparent
    *        The parent window or null.
    * @param aDialogTitle
    *        Text to appear in the title of the dialog.
@@ -249,7 +249,7 @@ interface nsIPromptService : nsISupports
    *
    * @return true for OK, false for Cancel.
    */
-  boolean prompt(in mozIDOMWindowProxy aParent,
+  boolean prompt(in mozIDOMWindowProxy apparent,
                  in wstring aDialogTitle,
                  in wstring aText,
                  inout wstring aValue,
@@ -260,7 +260,7 @@ interface nsIPromptService : nsISupports
    * Puts up a dialog with an edit field, a password field, and an optional,
    * labeled checkbox.
    *
-   * @param aParent
+   * @param apparent
    *        The parent window or null.
    * @param aDialogTitle
    *        Text to appear in the title of the dialog.
@@ -284,7 +284,7 @@ interface nsIPromptService : nsISupports
    *
    * @return true for OK, false for Cancel.
    */
-  boolean promptUsernameAndPassword(in mozIDOMWindowProxy aParent,
+  boolean promptUsernameAndPassword(in mozIDOMWindowProxy apparent,
                                     in wstring aDialogTitle,
                                     in wstring aText,
                                     inout wstring aUsername,
@@ -295,7 +295,7 @@ interface nsIPromptService : nsISupports
   /**
    * Puts up a dialog with a password field and an optional, labeled checkbox.
    *
-   * @param aParent
+   * @param apparent
    *        The parent window or null.
    * @param aDialogTitle
    *        Text to appear in the title of the dialog.
@@ -314,7 +314,7 @@ interface nsIPromptService : nsISupports
    *
    * @return true for OK, false for Cancel.
    */
-  boolean promptPassword(in mozIDOMWindowProxy aParent,
+  boolean promptPassword(in mozIDOMWindowProxy apparent,
                          in wstring aDialogTitle,
                          in wstring aText,
                          inout wstring aPassword,
@@ -325,7 +325,7 @@ interface nsIPromptService : nsISupports
    * Puts up a dialog box which has a list box of strings from which the user
    * may make a single selection.
    *
-   * @param aParent
+   * @param apparent
    *        The parent window or null.
    * @param aDialogTitle
    *        Text to appear in the title of the dialog.
@@ -341,7 +341,7 @@ interface nsIPromptService : nsISupports
    *
    * @return true for OK, false for Cancel.
    */
-  boolean select(in mozIDOMWindowProxy aParent,
+  boolean select(in mozIDOMWindowProxy apparent,
                  in wstring aDialogTitle,
                  in wstring aText,
                  in  uint32_t aCount,
@@ -356,14 +356,14 @@ interface nsIPromptService : nsISupports
   //
   // See nsIAuthPrompt2 for documentation on the semantics of the other
   // parameters.
-  boolean promptAuth(in mozIDOMWindowProxy aParent,
+  boolean promptAuth(in mozIDOMWindowProxy apparent,
                      in nsIChannel aChannel,
                      in uint32_t level,
                      in nsIAuthInformation authInfo,
                      in wstring checkboxLabel,
                      inout boolean checkValue);
 
-  nsICancelable asyncPromptAuth(in mozIDOMWindowProxy aParent,
+  nsICancelable asyncPromptAuth(in mozIDOMWindowProxy apparent,
                                 in nsIChannel aChannel,
                                 in nsIAuthPromptCallback aCallback,
                                 in nsISupports aContext,

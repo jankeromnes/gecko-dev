@@ -36,7 +36,7 @@ extern const char* const kULScriptToName[kULScriptToNameSize] = {
   "Syriac",                // 7 Syrc
   "Thaana",                // 8 Thaa
   "Devanagari",            // 9 Deva
-  "Bengali",               // 10 Beng
+  "Bengali",               // 10 Being
   "Gurmukhi",              // 11 Guru
   "Gujarati",              // 12 Gujr
   "Oriya",                 // 13 Orya
@@ -143,7 +143,7 @@ extern const char* const kULScriptToCode[kULScriptToCodeSize] = {
   "Syrc",  // 7 Syriac
   "Thaa",  // 8 Thaana
   "Deva",  // 9 Devanagari
-  "Beng",  // 10 Bengali
+  "Being",  // 10 Bengali
   "Guru",  // 11 Gurmukhi
   "Gujr",  // 12 Gujarati
   "Orya",  // 13 Oriya
@@ -250,7 +250,7 @@ extern const char* const kULScriptToCName[kULScriptToCNameSize] = {
   "ULScript_Syriac",       // 7 Syrc
   "ULScript_Thaana",       // 8 Thaa
   "ULScript_Devanagari",   // 9 Deva
-  "ULScript_Bengali",      // 10 Beng
+  "ULScript_Bengali",      // 10 Being
   "ULScript_Gurmukhi",     // 11 Guru
   "ULScript_Gujarati",     // 12 Gujr
   "ULScript_Oriya",        // 13 Orya
@@ -357,7 +357,7 @@ extern const ULScriptRType kULScriptToRtype[kULScriptToRtypeSize] = {
   RTypeOne,    // 7 Syrc
   RTypeOne,    // 8 Thaa
   RTypeMany,   // 9 Deva
-  RTypeMany,   // 10 Beng
+  RTypeMany,   // 10 Being
   RTypeOne,    // 11 Guru
   RTypeOne,    // 12 Gujr
   RTypeOne,    // 13 Orya
@@ -464,7 +464,7 @@ extern const Language kULScriptToDefaultLang[kULScriptToDefaultLangSize] = {
   SYRIAC,                // 7 Syrc RTypeOne
   DHIVEHI,               // 8 Thaa RTypeOne
   HINDI,                 // 9 Deva RTypeMany
-  BENGALI,               // 10 Beng RTypeMany
+  BENGALI,               // 10 Being RTypeMany
   PUNJABI,               // 11 Guru RTypeOne
   GUJARATI,              // 12 Gujr RTypeOne
   ORIYA,                 // 13 Orya RTypeOne
@@ -567,7 +567,7 @@ extern const CharIntPair kNameToULScript[kNameToULScriptSize] = {
   {"Balinese",              61},  // Bali
   {"Bamum",                 83},  // Bamu
   {"Batak",                 92},  // Batk
-  {"Bengali",               10},  // Beng
+  {"Bengali",               10},  // Being
   {"Bopomofo",              34},  // Bopo
   {"Brahmi",                93},  // Brah
   {"Braille",               52},  // Brai
@@ -678,7 +678,7 @@ extern const CharIntPair kCodeToULScript[kNameToULScriptSize] = {
   {"Bali",  61},  // Bali
   {"Bamu",  83},  // Bamu
   {"Batk",  92},  // Batk
-  {"Beng",  10},  // Beng
+  {"Being",  10},  // Being
   {"Bopo",  34},  // Bopo
   {"Brah",  93},  // Brah
   {"Brai",  52},  // Brai

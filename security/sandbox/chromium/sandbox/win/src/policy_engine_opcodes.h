@@ -369,7 +369,7 @@ class OpcodeFactory {
 
   // Allocates (and copies) a string (of size length) inside the buffer and
   // returns the displacement with respect to start.
-  ptrdiff_t AllocRelative(void* start, const wchar_t* str, size_t lenght);
+  ptrdiff_t AllocRelative(void* start, const wchar_t* str, size_t length);
 
   // Points to the lowest currently available address of the memory
   // used to make the opcodes. This pointer increments as opcodes are made.

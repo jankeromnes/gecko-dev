@@ -6609,7 +6609,7 @@ IonBuilder::jsop_newarray(JSObject* templateObject, uint32_t length)
         return Ok();
     }
 
-    MOZ_CRASH("newarray should have been emited");
+    MOZ_CRASH("newarray should have been emitted");
 }
 
 AbortReasonOr<Ok>
@@ -6733,7 +6733,7 @@ IonBuilder::jsop_newobject()
         return Ok();
     }
 
-    MOZ_CRASH("newobject should have been emited");
+    MOZ_CRASH("newobject should have been emitted");
 }
 
 AbortReasonOr<Ok>
@@ -8768,7 +8768,7 @@ IonBuilder::getElemTryCallSiteObject(bool* emitted, MDefinition* obj, MDefinitio
     }
 
     // Technically this code would work with any kind of frozen array,
-    // in pratice it is usually a CallSiteObject.
+    // in practice it is usually a CallSiteObject.
 
     ArrayObject* array = &cst->as<ArrayObject>();
     if (array->lengthIsWritable() || array->hasEmptyElements() || !array->denseElementsAreFrozen()) {

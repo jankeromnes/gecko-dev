@@ -136,7 +136,7 @@ namespace widget {
 
 #define BUFFER_BPP 4
 
-// TODO: How many rendering threads do we actualy handle?
+// TODO: How many rendering threads do we actually handle?
 static nsCOMArray<nsWaylandDisplay> gWaylandDisplays;
 static StaticMutex gWaylandDisplaysMutex;
 

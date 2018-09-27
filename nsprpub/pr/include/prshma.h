@@ -11,7 +11,7 @@
 ** shared memory, as in: the child process inherits the shared memory.
 ** Compare the file-mapped anonymous shared memory to to a named shared
 ** memory described in prshm.h. The intent is to provide a shared
-** memory that is accessable only by parent and child processes. ...
+** memory that is accessible only by parent and child processes. ...
 ** It's a security thing.
 ** 
 ** Depending on the underlying platform, the file-mapped shared memory
@@ -91,7 +91,7 @@
 ** lth. 2-Jul-1999.
 **
 ** Note: The second protocol was requested by NelsonB (7/1999); this is
-** to accomodate servers which already create their own child processes
+** to accommodate servers which already create their own child processes
 ** using platform native methods.
 ** 
 */

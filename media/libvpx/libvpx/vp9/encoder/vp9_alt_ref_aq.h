@@ -90,7 +90,7 @@ void vp9_alt_ref_aq_set_nsegments(struct ALT_REF_AQ *const self, int nsegments);
  *
  * Set up segmentation mode to LOOKAHEAD_AQ
  * (expected future frames prediction
- *  quality refering to the current frame).
+ *  quality referring to the current frame).
  *
  * \param    self    Instance of the class
  * \param    cpi     Encoder context

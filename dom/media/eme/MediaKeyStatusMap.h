@@ -34,7 +34,7 @@ public:
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(MediaKeyStatusMap)
 
 public:
-  explicit MediaKeyStatusMap(nsPIDOMWindowInner* aParent);
+  explicit MediaKeyStatusMap(nsPIDOMWindowInner* apparent);
 
 protected:
   ~MediaKeyStatusMap();

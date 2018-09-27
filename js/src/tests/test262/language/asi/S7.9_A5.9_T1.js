@@ -3,7 +3,7 @@
 
 /*---
 info: |
-    Additive/Substract Operator(A/SO) in combination with itself separated by LT or white spaces
+    Additive/Subtract Operator(A/SO) in combination with itself separated by LT or white spaces
     after automatic semicolon insertion gives valid result
 es5id: 7.9_A5.9_T1
 description: >

@@ -15,7 +15,7 @@
 
 namespace mozilla { namespace ct {
 
-// Retuns the list of unique CT log operator IDs appearing in the provided
+// Returns the list of unique CT log operator IDs appearing in the provided
 // list of verified SCTs.
 pkix::Result GetCTLogOperatorsFromVerifiedSCTList(const VerifiedSCTList& list,
                                                   CTLogOperatorList& operators);

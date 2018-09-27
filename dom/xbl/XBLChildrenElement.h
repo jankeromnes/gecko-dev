@@ -152,8 +152,8 @@ private:
 class nsAnonymousContentList final : public nsINodeList
 {
 public:
-  explicit nsAnonymousContentList(nsIContent* aParent)
-    : mParent(aParent)
+  explicit nsAnonymousContentList(nsIContent* apparent)
+    : mParent(apparent)
   {
   }
 

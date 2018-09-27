@@ -21,10 +21,10 @@ DESCRIPTION
     symkeyutil command can be used to manage these keys. 
 
     As with certutil, symkeyutil takes two types of arguments, commands and
-    options. Most commands fall into one of two catagories: commands which
+    options. Most commands fall into one of two categories: commands which
     create keys and commands which extract or destroy keys. 
 
-    Exceptions to these catagories are listed first:
+    Exceptions to these categories are listed first:
 
     -H    takes no additional options. It lists a more detailed help message.
     -L    takes the standard set of options. It lists all the keys in the 
@@ -119,7 +119,7 @@ OPTIONS
                      For the -K, -I, or -U options, key id is the key id for 
                      the new key.  If -i or -j is not specified, no key id 
                      is assumed.  Some tokens may generate their own unique 
-                     id for the key in this case (but it is not guarrenteed).
+                     id for the key in this case (but it is not guaranteed).
 
                      For the -D, -E, -W, or -M, the key id specifies the key to
                      operate on. In this case one andy only one of the -n, -i

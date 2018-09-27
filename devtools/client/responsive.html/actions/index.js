@@ -60,7 +60,7 @@ createEnum([
   // Remove a device.
   "REMOVE_DEVICE",
 
-  // Remove the viewport's device assocation.
+  // Remove the viewport's device association.
   "REMOVE_DEVICE_ASSOCIATION",
 
   // Resize the viewport.

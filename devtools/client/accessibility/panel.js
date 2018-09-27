@@ -111,7 +111,7 @@ AccessibilityPanel.prototype = {
 
   /**
    * Make sure the panel is refreshed when the page is reloaded. The panel is
-   * refreshed immediatelly if it's currently selected or lazily when the user
+   * refreshed immediately if it's currently selected or lazily when the user
    * actually selects it.
    */
   onTabNavigated() {

@@ -1036,7 +1036,7 @@ void GrGLCaps::initStencilSupport(const GrGLContextInfo& ctxInfo) {
             ctxInfo.hasExtension("GL_EXT_packed_depth_stencil") ||
             ctxInfo.hasExtension("GL_ARB_framebuffer_object");
 
-        // S1 thru S16 formats are in GL 3.0+, EXT_FBO, and ARB_FBO since we
+        // S1 through S16 formats are in GL 3.0+, EXT_FBO, and ARB_FBO since we
         // require FBO support we can expect these are legal formats and don't
         // check. These also all support the unsized GL_STENCIL_INDEX.
         fStencilFormats.push_back() = gS8;

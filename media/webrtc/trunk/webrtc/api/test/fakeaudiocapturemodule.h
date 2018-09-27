@@ -196,7 +196,7 @@ class FakeAudioCaptureModule
 
  protected:
   // The constructor is protected because the class needs to be created as a
-  // reference counted object (for memory managment reasons). It could be
+  // reference counted object (for memory management reasons). It could be
   // exposed in which case the burden of proper instantiation would be put on
   // the creator of a FakeAudioCaptureModule instance. To create an instance of
   // this class use the Create(..) API.

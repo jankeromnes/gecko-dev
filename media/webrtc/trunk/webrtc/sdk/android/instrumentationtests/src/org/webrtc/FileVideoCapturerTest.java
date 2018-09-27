@@ -88,7 +88,7 @@ public class FileVideoCapturerTest {
     fileVideoCapturer.startCapture(FRAME_WIDTH, FRAME_HEIGHT, 33);
 
     final String[] expectedFrames = {
-        "THIS IS JUST SOME TEXT x", "THE SECOND FRAME qwerty.", "HERE IS THE THRID FRAME!"};
+        "THIS IS JUST SOME TEXT x", "THE SECOND FRAME qwerty.", "HERE IS THE THIRD FRAME!"};
 
     final ArrayList<Frame> frameDatas;
     frameDatas = capturerObserver.getMinimumFramesBlocking(expectedFrames.length);

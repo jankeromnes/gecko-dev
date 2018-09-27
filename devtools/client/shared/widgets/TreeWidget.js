@@ -58,7 +58,7 @@ TreeWidget.prototype = {
    * Select any node in the tree.
    *
    * @param {array} ids
-   *        An array of ids leading upto the selected item
+   *        An array of ids leading up to the selected item
    */
   set selectedItem(ids) {
     if (this._selectedLabel) {
@@ -89,7 +89,7 @@ TreeWidget.prototype = {
    * Gets the selected item in the tree.
    *
    * @return {array}
-   *        An array of ids leading upto the selected item
+   *        An array of ids leading up to the selected item
    */
   get selectedItem() {
     return this._selectedItem;
@@ -99,7 +99,7 @@ TreeWidget.prototype = {
    * Returns if the passed array corresponds to the selected item in the tree.
    *
    * @return {array}
-   *        An array of ids leading upto the requested item
+   *        An array of ids leading up to the requested item
    */
   isSelected: function(item) {
     if (!this._selectedItem || this._selectedItem.length != item.length) {
@@ -149,7 +149,7 @@ TreeWidget.prototype = {
    * Select any node in the tree.
    *
    * @param {array} id
-   *        An array of ids leading upto the selected item
+   *        An array of ids leading up to the selected item
    */
   selectItem: function(id) {
     this.selectedItem = id;

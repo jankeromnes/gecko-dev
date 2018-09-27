@@ -482,7 +482,7 @@ ContentPrefService2.prototype = {
 
   // Deletes settings and groups that are no longer used.
   _settingsAndGroupsCleanupStmts() {
-    // The NOTNULL term in the subquery of the second statment is needed because of
+    // The NOTNULL term in the subquery of the second statement is needed because of
     // SQLite's weird IN behavior vis-a-vis NULLs.  See http://sqlite.org/lang_expr.html.
     return [
       this._stmt(`

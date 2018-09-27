@@ -2,7 +2,7 @@
 // - src/annex-b-fns/eval-func-block-scoping.case
 // - src/annex-b-fns/eval-func/direct-switch-dflt.template
 /*---
-description: A block-scoped binding is created (Funtion declaration in the `default` clause of a `switch` statement in eval code in the global scope)
+description: A block-scoped binding is created (Function declaration in the `default` clause of a `switch` statement in eval code in the global scope)
 esid: sec-web-compat-evaldeclarationinstantiation
 es6id: B.3.3.3
 flags: [generated, noStrict]

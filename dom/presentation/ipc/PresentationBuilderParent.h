@@ -22,7 +22,7 @@ public:
   NS_DECL_NSIPRESENTATIONSESSIONTRANSPORTBUILDER
   NS_DECL_NSIPRESENTATIONDATACHANNELSESSIONTRANSPORTBUILDER
 
-  explicit PresentationBuilderParent(PresentationParent* aParent);
+  explicit PresentationBuilderParent(PresentationParent* apparent);
 
   virtual mozilla::ipc::IPCResult RecvSendOffer(const nsString& aSDP) override;
 

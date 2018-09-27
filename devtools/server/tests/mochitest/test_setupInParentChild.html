@@ -65,7 +65,7 @@ function runTests() {
   };
   Services.ppmm.addMessageListener("test:setupChild", onChild);
 
-  // Wait also for a reponse from setupInParent called from setup-in-child.js
+  // Wait also for a response from setupInParent called from setup-in-child.js
   const onParent = (_, topic, args) => {
     Services.obs.removeObserver(onParent, "test:setupParent");
     args = JSON.parse(args);

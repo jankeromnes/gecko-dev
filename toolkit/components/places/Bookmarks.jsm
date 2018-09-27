@@ -585,7 +585,7 @@ var Bookmarks = Object.freeze({
         } catch (ex) {
           // This is not critical, regardless the bookmark has been created
           // and we should continue notifying the next ones.
-          Cu.reportError(`An error occured while handling special bookmark data: ${ex}`);
+          Cu.reportError(`An error occurred while handling special bookmark data: ${ex}`);
         }
 
         // Remove non-enumerable properties.

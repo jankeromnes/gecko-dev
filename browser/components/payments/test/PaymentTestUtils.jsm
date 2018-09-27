@@ -244,7 +244,7 @@ var PaymentTestUtils = {
     },
 
     /**
-     * Do the minimum possible to complete the payment succesfully.
+     * Do the minimum possible to complete the payment successfully.
      *
      * Don't await on this task since the cancel can close the dialog before
      * ContentTask can resolve the promise.

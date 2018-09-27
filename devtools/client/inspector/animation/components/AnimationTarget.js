@@ -64,7 +64,7 @@ class AnimationTarget extends Component {
       try {
         nodeFront = await getNodeFromActor(animation.actorID);
       } catch (e) {
-        // If an error occured while getting the nodeFront and if it can't be
+        // If an error occurred while getting the nodeFront and if it can't be
         // attributed to the panel having been destroyed in the meantime, this
         // error needs to be logged and render needs to stop.
         console.error(e);

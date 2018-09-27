@@ -93,11 +93,11 @@ MessagePortService::GetOrCreate()
 }
 
 bool
-MessagePortService::RequestEntangling(MessagePortParent* aParent,
+MessagePortService::RequestEntangling(MessagePortParent* apparent,
                                       const nsID& aDestinationUUID,
                                       const uint32_t& aSequenceID)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
   MessagePortServiceData* data;
 
   // If we don't have a MessagePortServiceData, we must create 2 of them for
@@ -137,7 +137,7 @@ MessagePortService::RequestEntangling(MessagePortParent* aParent,
     }
 
     // We activate this port, sending all the messages.
-    data->mParent = aParent;
+    data->mParent = apparent;
     data->mWaitingForNewParent = false;
 
     // We want to ensure we clear data->mMessages even if we early return, while
@@ -148,7 +148,7 @@ MessagePortService::RequestEntangling(MessagePortParent* aParent,
     FallibleTArray<RefPtr<SharedMessagePortMessage>>
       messages(std::move(data->mMessages));
     FallibleTArray<ClonedMessageData> array;
-    if (!SharedMessagePortMessage::FromSharedToMessagesParent(aParent,
+    if (!SharedMessagePortMessage::FromSharedToMessagesParent(apparent,
                                                               messages,
                                                               array)) {
       CloseAll(aParent->ID());
@@ -180,14 +180,14 @@ MessagePortService::RequestEntangling(MessagePortParent* aParent,
   }
 
   nextParent->mSequenceID = aSequenceID;
-  nextParent->mParent = aParent;
+  nextParent->mParent = apparent;
 
   return true;
 }
 
 bool
 MessagePortService::DisentanglePort(
-                  MessagePortParent* aParent,
+                  MessagePortParent* apparent,
                   FallibleTArray<RefPtr<SharedMessagePortMessage>>& aMessages)
 {
   MessagePortServiceData* data;
@@ -196,7 +196,7 @@ MessagePortService::DisentanglePort(
     return false;
   }
 
-  if (data->mParent != aParent) {
+  if (data->mParent != apparent) {
     MOZ_ASSERT(false, "DisentanglePort() should be called just from the correct parent.");
     return false;
   }
@@ -244,15 +244,15 @@ MessagePortService::DisentanglePort(
 }
 
 bool
-MessagePortService::ClosePort(MessagePortParent* aParent)
+MessagePortService::ClosePort(MessagePortParent* apparent)
 {
   MessagePortServiceData* data;
   if (!mPorts.Get(aParent->ID(), &data)) {
-    MOZ_ASSERT(false, "Unknown MessagePortParent should not happend.");
+    MOZ_ASSERT(false, "Unknown MessagePortParent should not happened.");
     return false;
   }
 
-  if (data->mParent != aParent) {
+  if (data->mParent != apparent) {
     MOZ_ASSERT(false, "ClosePort() should be called just from the correct parent.");
     return false;
   }
@@ -332,16 +332,16 @@ MessagePortService::MaybeShutdown()
 
 bool
 MessagePortService::PostMessages(
-                  MessagePortParent* aParent,
+                  MessagePortParent* apparent,
                   FallibleTArray<RefPtr<SharedMessagePortMessage>>& aMessages)
 {
   MessagePortServiceData* data;
   if (!mPorts.Get(aParent->ID(), &data)) {
-    MOZ_ASSERT(false, "Unknown MessagePortParent should not happend.");
+    MOZ_ASSERT(false, "Unknown MessagePortParent should not happened.");
     return false;
   }
 
-  if (data->mParent != aParent) {
+  if (data->mParent != apparent) {
     MOZ_ASSERT(false, "PostMessages() should be called just from the correct parent.");
     return false;
   }
@@ -373,7 +373,7 @@ MessagePortService::PostMessages(
 }
 
 void
-MessagePortService::ParentDestroy(MessagePortParent* aParent)
+MessagePortService::ParentDestroy(MessagePortParent* apparent)
 {
   // This port has already been destroyed.
   MessagePortServiceData* data;
@@ -381,10 +381,10 @@ MessagePortService::ParentDestroy(MessagePortParent* aParent)
     return;
   }
 
-  if (data->mParent != aParent) {
+  if (data->mParent != apparent) {
     // We don't want to send a message to this parent.
     for (uint32_t i = 0; i < data->mNextParents.Length(); ++i) {
-      if (aParent == data->mNextParents[i].mParent) {
+      if (apparent == data->mNextParents[i].mParent) {
        data->mNextParents.RemoveElementAt(i);
        break;
       }

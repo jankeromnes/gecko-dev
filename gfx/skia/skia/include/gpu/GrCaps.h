@@ -135,7 +135,7 @@ public:
 
     int maxRenderTargetSize() const { return fMaxRenderTargetSize; }
 
-    /** This is the largest render target size that can be used without incurring extra perfomance
+    /** This is the largest render target size that can be used without incurring extra performance
         cost. It is usually the max RT size, unless larger render targets are known to be slower. */
     int maxPreferredRenderTargetSize() const { return fMaxPreferredRenderTargetSize; }
 

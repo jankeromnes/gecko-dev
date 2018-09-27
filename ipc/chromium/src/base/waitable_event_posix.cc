@@ -176,7 +176,7 @@ bool WaitableEvent::TimedWait(const TimeDelta& max_time) {
       const bool return_value = sw.fired();
 
       // We can't acquire @lock_ before releasing @lock (because of locking
-      // order), however, inbetween the two a signal could be fired and @sw
+      // order), however, between the two a signal could be fired and @sw
       // would accept it, however we will still return false, so the signal
       // would be lost on an auto-reset WaitableEvent. Thus we call Disable
       // which makes sw::Fire return false.

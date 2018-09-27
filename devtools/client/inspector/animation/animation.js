@@ -581,7 +581,7 @@ class AnimationInspector {
   }
 
   /**
-   * Returns a simulatable efect timing animation for the keyframes progress bar.
+   * Returns a simulatable effect timing animation for the keyframes progress bar.
    * The returned animation is implementing Animation interface of Web Animation API.
    * https://drafts.csswg.org/web-animations/#the-animation-interface
    *

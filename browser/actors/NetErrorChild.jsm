@@ -116,7 +116,7 @@ class NetErrorChild extends ActorChild {
 
     if (input.data.certIsUntrusted) {
       switch (input.data.code) {
-        // We only want to measure MitM rates for now. Treat it as unkown issuer.
+        // We only want to measure MitM rates for now. Treat it as unknown issuer.
         case MOZILLA_PKIX_ERROR_MITM_DETECTED:
         case SEC_ERROR_UNKNOWN_ISSUER:
           let brandName = gBrandBundle.GetStringFromName("brandShortName");

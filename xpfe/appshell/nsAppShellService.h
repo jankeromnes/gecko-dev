@@ -36,7 +36,7 @@ protected:
   nsresult CreateHiddenWindowHelper(bool aIsPrivate);
   void EnsurePrivateHiddenWindow();
 
-  nsresult JustCreateTopWindow(nsIXULWindow *aParent,
+  nsresult JustCreateTopWindow(nsIXULWindow *apparent,
                                nsIURI *aUrl,
                                uint32_t aChromeMask,
                                int32_t aInitialWidth, int32_t aInitialHeight,
@@ -44,7 +44,7 @@ protected:
                                nsITabParent *aOpeningTab,
                                mozIDOMWindowProxy *aOpenerWindow,
                                nsWebShellWindow **aResult);
-  uint32_t CalculateWindowZLevel(nsIXULWindow *aParent, uint32_t aChromeMask);
+  uint32_t CalculateWindowZLevel(nsIXULWindow *apparent, uint32_t aChromeMask);
 
   RefPtr<nsWebShellWindow>  mHiddenWindow;
   RefPtr<nsWebShellWindow>  mHiddenPrivateWindow;

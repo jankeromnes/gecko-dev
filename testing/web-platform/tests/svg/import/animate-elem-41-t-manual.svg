@@ -47,7 +47,7 @@
         the animated element's shape must be the same as the left silouhette at the
         start of the animation and the same as the right silhouette at the end of
         the animation.</li>
-        <li>For the continous paint animations (fill, stroke and color),
+        <li>For the continuous paint animations (fill, stroke and color),
         three references shapes show the color that the animated element must be
         at the start, middle and end of the animation.</li>
         <li>For the stroke-width test, the two dark gray reference shapes show the

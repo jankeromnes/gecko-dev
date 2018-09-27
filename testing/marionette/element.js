@@ -448,7 +448,7 @@ element.findByLinkText = function(startNode, linkText) {
  * link text contains <var>linkText</var>.
  *
  * @param {Element} startNode
- *     Where in the DOM hierachy to begin searching.
+ *     Where in the DOM hierarchy to begin searching.
  * @param {string} linkText
  *     Link text to search for.
  *

@@ -299,22 +299,22 @@ var LoginRecipesContent = {
   },
 
   /**
-   * @param {HTMLElement} aParent the element to query for the selector from.
+   * @param {HTMLElement} apparent the element to query for the selector from.
    * @param {CSSSelector} aSelector the CSS selector to query for the login field.
    * @return {HTMLElement|null}
    */
-  queryLoginField(aParent, aSelector) {
+  queryLoginField(apparent, aSelector) {
     if (!aSelector) {
       return null;
     }
-    let field = aParent.ownerDocument.querySelector(aSelector);
+    let field = apparent.ownerDocument.querySelector(aSelector);
     if (!field) {
       log.debug("Login field selector wasn't matched:", aSelector);
       return null;
     }
     // ownerGlobal doesn't exist in content privileged windows.
     // eslint-disable-next-line mozilla/use-ownerGlobal
-    if (!(field instanceof aParent.ownerDocument.defaultView.HTMLInputElement)) {
+    if (!(field instanceof apparent.ownerDocument.defaultView.HTMLInputElement)) {
       log.warn("Login field isn't an <input> so ignoring it:", aSelector);
       return null;
     }

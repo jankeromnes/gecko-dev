@@ -74,7 +74,7 @@ private:
   // Wrapper class keeping a pointer to the DMD functions. It is statically
   // initialized because it needs to be set early enough.
   // Debug builds also check that it's never accessed before the static
-  // initialization actually occured, which could be the case if some other
+  // initialization actually occurred, which could be the case if some other
   // static initializer ended up calling into DMD.
   class Singleton
   {

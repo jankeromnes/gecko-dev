@@ -76,7 +76,7 @@ interface nsIParentalControlsService : nsISupports
 
   /**
    * @returns true if the current user account has parental controls
-   * logging enabled. If true, applications should log relevent events
+   * logging enabled. If true, applications should log relevant events
    * using 'log'.
    */ 
   readonly attribute boolean loggingEnabled;

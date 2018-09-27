@@ -4,7 +4,7 @@
  * http://creativecommons.org/publicdomain/zero/1.0/ */
 
 /**
- * Tests that the inspected indentifier is highlighted.
+ * Tests that the inspected identifier is highlighted.
  */
 
 const TAB_URL = EXAMPLE_URL + "doc_frame-parameters.html";

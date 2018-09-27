@@ -17,10 +17,10 @@ interface nsIEventTarget;
  * It provides methods to open blocking or non-blocking, buffered or unbuffered
  * streams to the resource.  The name "transport" is meant to connote the 
  * inherent data transfer implied by this interface (i.e., data is being
- * transfered in some fashion via the streams exposed by this interface).
+ * transferred in some fashion via the streams exposed by this interface).
  *
  * A transport can have an event sink associated with it.  The event sink 
- * receives transport-specific events as the transfer is occuring.  For a
+ * receives transport-specific events as the transfer is occurring.  For a
  * socket transport, these events can include status about the connection.
  * See nsISocketTransport for more info about socket transport specifics.
  */
@@ -52,7 +52,7 @@ interface nsITransport : nsISupports
      *
      * OPEN_UNBUFFERED
      *   If specified, the resulting stream may not support ReadSegments.
-     *   ReadSegments is only gauranteed to be implemented when this flag is
+     *   ReadSegments is only guaranteed to be implemented when this flag is
      *   NOT specified.
      *
      * @param aFlags

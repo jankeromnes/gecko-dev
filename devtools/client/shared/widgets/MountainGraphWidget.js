@@ -48,7 +48,7 @@ const GRAPH_REGION_STRIPES_COLOR = "rgba(237,38,85,0.2)";
  *     ...
  *     { delta: xm, values: [ym1, ym2, ... ymn] }
  *   ]
- * where the [ymn] values is assumed to aready be normalized from [0..1].
+ * where the [ymn] values is assumed to already be normalized from [0..1].
  *
  * @param Node parent
  *        The parent node holding the graph.

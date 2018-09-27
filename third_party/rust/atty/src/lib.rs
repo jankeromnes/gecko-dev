@@ -10,7 +10,7 @@
 //! ```
 //!
 //! ```
-//! if atty::isnt(atty::Stream::Stdout) {
+//! if atty::isn't(atty::Stream::Stdout) {
 //!   println!("i'm not a tty")
 //! }
 //! ```
@@ -81,7 +81,7 @@ pub fn is(stream: Stream) -> bool {
 }
 
 /// returns true if this is _not_ a tty
-pub fn isnt(stream: Stream) -> bool {
+pub fn isn't(stream: Stream) -> bool {
     !is(stream)
 }
 

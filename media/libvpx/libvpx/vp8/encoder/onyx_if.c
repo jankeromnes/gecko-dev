@@ -544,7 +544,7 @@ static void cyclic_background_refresh(VP8_COMP *cpi, int Q, int lf_adjustment) {
       /* If the MB is as a candidate for clean up then mark it for
        * possible boost/refresh (segment 1) The segment id may get
        * reset to 0 later if the MB gets coded anything other than
-       * last frame 0,0 as only (last frame 0,0) MBs are eligable for
+       * last frame 0,0 as only (last frame 0,0) MBs are eligible for
        * refresh : that is to say Mbs likely to be background blocks.
        */
       if (cpi->cyclic_refresh_map[i] == 0) {
@@ -2800,7 +2800,7 @@ static int decide_key_frame(VP8_COMP *cpi) {
   }
   /* in addition if the following are true and this is not a golden frame
    * then code a key frame Note that on golden frames there often seems
-   * to be a pop in intra useage anyway hence this restriction is
+   * to be a pop in intra usage anyway hence this restriction is
    * designed to prevent spurious key frames. The Intra pop needs to be
    * investigated.
    */
@@ -3687,7 +3687,7 @@ static void encode_frame_to_data_rate(VP8_COMP *cpi, size_t *size,
         Q = cpi->avg_frame_qindex;
       }
 
-      /* For constrained quality dont allow Q less than the cq level */
+      /* For constrained quality don't allow Q less than the cq level */
       if ((cpi->oxcf.end_usage == USAGE_CONSTRAINED_QUALITY) &&
           (Q < cpi->cq_target_quality)) {
         Q = cpi->cq_target_quality;
@@ -3714,7 +3714,7 @@ static void encode_frame_to_data_rate(VP8_COMP *cpi, size_t *size,
     } else {
       cpi->active_best_quality = inter_minq[Q];
 
-      /* For the constant/constrained quality mode we dont want
+      /* For the constant/constrained quality mode we don't want
        * q to fall below the cq level.
        */
       if ((cpi->oxcf.end_usage == USAGE_CONSTRAINED_QUALITY) &&
@@ -3735,7 +3735,7 @@ static void encode_frame_to_data_rate(VP8_COMP *cpi, size_t *size,
      * higher quality on the frames to prevent bits just going to waste.
      */
     if (cpi->oxcf.end_usage == USAGE_STREAM_FROM_SERVER) {
-      /* Note that the use of >= here elliminates the risk of a devide
+      /* Note that the use of >= here elliminates the risk of a divide
        * by 0 error in the else if clause
        */
       if (cpi->buffer_level >= cpi->oxcf.maximum_buffer_size) {
@@ -4370,7 +4370,7 @@ static void encode_frame_to_data_rate(VP8_COMP *cpi, size_t *size,
   vp8_cal_dissimilarity(cpi);
 #endif
 
-  /* Update the GF useage maps.
+  /* Update the GF usage maps.
    * This is done after completing the compression of a frame when all
    * modes etc. are finalized but before loop filter
    */
@@ -4773,7 +4773,7 @@ static void encode_frame_to_data_rate(VP8_COMP *cpi, size_t *size,
   cpi->mb.e_mbd.update_mb_segmentation_data = 0;
   cpi->mb.e_mbd.mode_ref_lf_delta_update = 0;
 
-  /* Dont increment frame counters if this was an altref buffer update
+  /* Don't increment frame counters if this was an altref buffer update
    * not a real frame
    */
   if (cm->show_frame) {

@@ -308,7 +308,7 @@ HTMLButtonElement::PostHandleEvent(EventChainPostVisitor& aVisitor)
     // Tell the form to flush a possible pending submission.
     // the reason is that the script returned false (the event was
     // not ignored) so if there is a stored submission, it needs to
-    // be submitted immediatelly.
+    // be submitted immediately.
     // Note, NS_IN_SUBMIT_CLICK is set only when we're in outer activate event.
     mForm->FlushPendingSubmission();
   } //if
@@ -317,11 +317,11 @@ HTMLButtonElement::PostHandleEvent(EventChainPostVisitor& aVisitor)
 }
 
 nsresult
-HTMLButtonElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLButtonElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent)
 {
   nsresult rv =
-    nsGenericHTMLFormElementWithState::BindToTree(aDocument, aParent, aBindingParent);
+    nsGenericHTMLFormElementWithState::BindToTree(aDocument, apparent, aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
   // Update our state; we may now be the default submit element

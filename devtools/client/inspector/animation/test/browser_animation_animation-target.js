@@ -4,7 +4,7 @@
 "use strict";
 
 // Test for following AnimationTarget component works.
-// * element existance
+// * element existence
 // * number of elements
 // * content of element
 // * title of inspect icon
@@ -19,7 +19,7 @@ add_task(async function() {
   await removeAnimatedElementsExcept([".animated", ".long"]);
   const { animationInspector, panel } = await openAnimationInspector();
 
-  info("Checking the animation target elements existance");
+  info("Checking the animation target elements existence");
   const animationItemEls = panel.querySelectorAll(".animation-list .animation-item");
   is(animationItemEls.length, animationInspector.state.animations.length,
      "Number of animation target element should be same to number of animations " +

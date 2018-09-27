@@ -63,7 +63,7 @@ ENCODING_RS_ENCODING const* encoding_for_label(uint8_t const* label, size_t labe
 /// to treat the labels that map to the replacement encoding as fatal
 /// errors, too.
 ///
-/// It is not OK to use this funciton when the action upon the method returning
+/// It is not OK to use this function when the action upon the method returning
 /// `NULL` is to use a fallback encoding (e.g. `WINDOWS_1252_ENCODING`). In
 /// such a case, the `encoding_for_label()` function should be used instead
 /// in order to avoid unsafe fallback for labels that `encoding_for_label()`

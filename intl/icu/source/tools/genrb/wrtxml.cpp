@@ -135,7 +135,7 @@ static char* getID(const char* id, const char* curKey, char* result) {
 
 /* ICU is not endian portable, because ICU data generated on big endian machines can be
  * ported to big endian machines but not to little endian machines and vice versa. The
- * conversion is not portable across platforms with different endianess.
+ * conversion is not portable across platforms with different endianness.
  */
 
 uint32_t computeCRC(const char *ptr, uint32_t len, uint32_t lastcrc){

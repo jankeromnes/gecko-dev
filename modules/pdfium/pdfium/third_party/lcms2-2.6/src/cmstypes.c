@@ -30,7 +30,7 @@
 // This file implements every single tag and tag type as described in the ICC spec. Some types
 // have been deprecated, like ncl and Data. There is no implementation for those types as there
 // are no profiles holding them. The programmer can also extend this list by defining his own types
-// by using the appropiate plug-in. There are three types of plug ins regarding that. First type
+// by using the appropriate plug-in. There are three types of plug ins regarding that. First type
 // allows to define new tags using any existing type. Next plug-in type allows to define new types
 // and the third one is very specific: allows to extend the number of elements in the multiprocessing
 // elements special type.
@@ -160,7 +160,7 @@ typedef cmsBool (* PositionTableEntryFn)(struct _cms_typehandler_struct* self,
                                              cmsUInt32Number n,
                                              cmsUInt32Number SizeOfTag);
 
-// Helper function to deal with position tables as decribed in ICC spec 4.3
+// Helper function to deal with position tables as described in ICC spec 4.3
 // A table of n elements is readed, where first comes n records containing offsets and sizes and
 // then a block containing the data itself. This allows to reuse same data in more than one entry
 static
@@ -1472,7 +1472,7 @@ void *Type_MLU_Read(struct _cms_typehandler_struct* self, cmsIOHANDLER* io, cmsU
             LargestPosition = EndOfThisString;
     }
 
-    // Now read the remaining of tag and fill all strings. Substract the directory
+    // Now read the remaining of tag and fill all strings. Subtract the directory
     SizeOfTag   = (LargestPosition * sizeof(wchar_t)) / sizeof(cmsUInt16Number);
     if (SizeOfTag == 0)
     {

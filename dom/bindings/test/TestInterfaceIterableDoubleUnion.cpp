@@ -22,8 +22,8 @@ NS_WRAPPERCACHE_INTERFACE_MAP_ENTRY
 NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-TestInterfaceIterableDoubleUnion::TestInterfaceIterableDoubleUnion(nsPIDOMWindowInner* aParent)
-  : mParent(aParent)
+TestInterfaceIterableDoubleUnion::TestInterfaceIterableDoubleUnion(nsPIDOMWindowInner* apparent)
+  : mParent(apparent)
 {
   OwningStringOrLong a;
   a.SetAsLong() = 1;

@@ -255,7 +255,7 @@ public:
     }
 
     // mStream->Close() will call JSStreamConsumer::OnInputStreamReady which may
-    // then destory itself, dropping the last reference to 'this'.
+    // then destroy itself, dropping the last reference to 'this'.
     RefPtr<WindowStreamOwner> keepAlive(this);
 
     mStream->Close();

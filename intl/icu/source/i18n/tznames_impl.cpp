@@ -772,7 +772,7 @@ struct ZNames::ZNamesLoader : public ResourceSink {
         clear();
         ures_getAllItemsWithFallback(zoneStrings, key, *this, localStatus);
 
-        // Ignore errors, but propogate possible warnings.
+        // Ignore errors, but propagate possible warnings.
         if (U_SUCCESS(localStatus)) {
             errorCode = localStatus;
         }

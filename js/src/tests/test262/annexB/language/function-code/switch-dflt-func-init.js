@@ -2,7 +2,7 @@
 // - src/annex-b-fns/func-init.case
 // - src/annex-b-fns/func/switch-dflt.template
 /*---
-description: Variable binding is initialized to `undefined` in outer scope (Funtion declaration in the `default` clause of a `switch` statement in function scope)
+description: Variable binding is initialized to `undefined` in outer scope (Function declaration in the `default` clause of a `switch` statement in function scope)
 esid: sec-web-compat-functiondeclarationinstantiation
 es6id: B.3.3.1
 flags: [generated, noStrict]

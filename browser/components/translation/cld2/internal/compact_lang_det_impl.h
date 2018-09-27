@@ -73,7 +73,7 @@ Short -- DEPRICATED, unused
 Hint -- EXPERIMENTAL flag for compact_lang_det_test.cc to indicate a language
           hint supplied in parameter plus_one.
 
-UseWords -- In additon to scoring quad/uni/nil-grams, score complete words
+UseWords -- In addition to scoring quad/uni/nil-grams, score complete words
 
 
 

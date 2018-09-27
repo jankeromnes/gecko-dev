@@ -199,8 +199,8 @@ public:
   bool mNeedsUpdate;
 };
 
-BasicCompositor::BasicCompositor(CompositorBridgeParent* aParent, widget::CompositorWidget* aWidget)
-  : Compositor(aWidget, aParent)
+BasicCompositor::BasicCompositor(CompositorBridgeParent* apparent, widget::CompositorWidget* aWidget)
+  : Compositor(aWidget, apparent)
   , mIsPendingEndRemoteDrawing(false)
 {
   MOZ_COUNT_CTOR(BasicCompositor);

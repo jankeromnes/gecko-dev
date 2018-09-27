@@ -305,7 +305,7 @@ int do_main(int argc, char* argv[]) {
           static_cast<size_t>(output_sample_rate / 100);
 
       if (!FLAGS_raw) {
-        // The WAV files need to be reset every time, because they cant change
+        // The WAV files need to be reset every time, because they can't change
         // their sample rate or number of channels.
         std::stringstream reverse_name;
         reverse_name << FLAGS_reverse_file << frame_count << ".wav";

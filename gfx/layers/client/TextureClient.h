@@ -425,7 +425,7 @@ public:
    * Returns a DrawTarget to draw into the TextureClient.
    * This function should never be called when not on the main thread!
    *
-   * This must never be called on a TextureClient that is not sucessfully locked.
+   * This must never be called on a TextureClient that is not successfully locked.
    * When called several times within one Lock/Unlock pair, this method should
    * return the same DrawTarget.
    * The DrawTarget is automatically flushed by the TextureClient when the latter
@@ -538,7 +538,7 @@ public:
   void SetAddedToCompositableClient();
 
   /**
-   * If this method retuns false, TextureClient is already added to CompositableClient,
+   * If this method returns false, TextureClient is already added to CompositableClient,
    * since its creation or recycling.
    */
   bool IsAddedToCompositableClient() const { return mAddedToCompositableClient; }

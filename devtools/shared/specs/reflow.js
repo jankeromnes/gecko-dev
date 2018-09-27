@@ -12,7 +12,7 @@ const reflowSpec = generateActorSpec({
   events: {
     /**
      * The reflows event is emitted when reflows have been detected. The event
-     * is sent with an array of reflows that occured. Each item has the
+     * is sent with an array of reflows that occurred. Each item has the
      * following properties:
      * - start {Number}
      * - end {Number}

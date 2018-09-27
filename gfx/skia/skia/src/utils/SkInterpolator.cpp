@@ -37,7 +37,7 @@ void SkInterpolatorBase::reset(int elemCount, int frameCount) {
     }
 }
 
-/*  Each value[] run is formated as:
+/*  Each value[] run is formatted as:
         <time (in msec)>
         <blend>
         <data[fElemCount]>

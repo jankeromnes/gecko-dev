@@ -22,7 +22,7 @@ class HandlerTextLeaf final : public IAccessible2
                               , public IServiceProvider
 {
 public:
-  explicit HandlerTextLeaf(IDispatch* aParent, long aIndexInParent,
+  explicit HandlerTextLeaf(IDispatch* apparent, long aIndexInParent,
                            HWND aHwnd, AccChildData& aData);
 
   DECL_IUNKNOWN

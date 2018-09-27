@@ -120,7 +120,7 @@ CodeMirror.defineMode("wasm", function() {
       }
       stream.eatWhile(isWordChar);
       word = stream.current();
-      // fall thru for "builtin" check
+      // fall through for "builtin" check
     }
     if (word in builtins) {
       return "builtin";

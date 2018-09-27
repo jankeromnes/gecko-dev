@@ -66,11 +66,11 @@ public:
 
     void ProcessCapturedFrame(unsigned char* pBuffer, int32_t length,
                               const VideoCaptureCapability& frameInfo);
-    //  explicit receiver lock aquisition and release
+    //  explicit receiver lock acquisition and release
     void LockReceive()  { m_crtRecv.Enter();}
     void UnlockReceive() {m_crtRecv.Leave();}
 
-    //  explicit filter lock aquisition and release
+    //  explicit filter lock acquisition and release
     void LockFilter() {m_crtFilter.Enter();}
     void UnlockFilter() { m_crtFilter.Leave(); }
     void SetFilterGraph(IGraphBuilder* graph); // Used if EVR

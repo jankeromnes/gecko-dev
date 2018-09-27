@@ -30,7 +30,7 @@ namespace {
 
 #else	// defined(_MSC_VER)
 
-// We can't do always_inline, becasue -Werror -Wattribute will trigger
+// We can't do always_inline, because -Werror -Wattribute will trigger
 // a "might not be able to inline" warning.
 //#define	FORCE_INLINE __attribute__((always_inline))
 #define	FORCE_INLINE inline

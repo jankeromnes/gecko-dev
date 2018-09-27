@@ -57,7 +57,7 @@ public:
 
   void
   ExecuteOp(nsIGlobalObject* aGlobal, Promise* aPromise,
-            nsISupports* aParent, const CacheOpArgs& aArgs);
+            nsISupports* apparent, const CacheOpArgs& aArgs);
 
   // Our parent Listener object has gone out of scope and is being destroyed.
   void StartDestroyFromListener();

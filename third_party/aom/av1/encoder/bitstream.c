@@ -2602,7 +2602,7 @@ static void write_film_grain_params(AV1_COMP *cpi,
   aom_wb_write_literal(wb, pars->scaling_shift - 8, 2);  // 8 + value
 
   // AR coefficients
-  // Only sent if the corresponsing scaling function has
+  // Only sent if the corresponding scaling function has
   // more than 0 points
 
   aom_wb_write_literal(wb, pars->ar_coeff_lag, 2);

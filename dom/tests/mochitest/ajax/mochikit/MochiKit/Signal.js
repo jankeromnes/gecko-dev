@@ -185,7 +185,7 @@ MochiKit.Base.update(MochiKit.Signal.Event.prototype, {
 
                 If you're looking for a special key, look for it in keydown or
                 keyup, but never keypress. If you're looking for a Unicode
-                chracter, look for it with keypress, but never keyup or
+                character, look for it with keypress, but never keyup or
                 keydown.
 
                 Notes:
@@ -591,7 +591,7 @@ MochiKit.Base.update(MochiKit.Signal, {
             } catch (err) {
                 /* probably hit a permission denied error; possibly one of
                  * firefox's screwy anonymous DIVs inside an input element.
-                 * Allow this event to propogate up.
+                 * Allow this event to propagate up.
                  */
                 return;
             }

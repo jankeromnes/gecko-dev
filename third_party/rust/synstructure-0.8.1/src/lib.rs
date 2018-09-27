@@ -301,7 +301,7 @@ pub struct BindingInfo<'a> {
 
     field: &'a Field,
 
-    // These are used to determine which type parameters are avaliable.
+    // These are used to determine which type parameters are available.
     generics: &'a Generics,
     seen_generics: Vec<bool>,
 }
@@ -1945,7 +1945,7 @@ impl<'a> Structure<'a> {
     /// You should generally avoid using absolute paths in your generated code,
     /// as they will resolve very differently when using the stable and nightly
     /// versions of `proc-macro2`. Instead, load the crates you need to use
-    /// explictly with `extern crate` and
+    /// explicitly with `extern crate` and
     ///
     /// # Trait Bounds
     ///

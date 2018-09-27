@@ -23,11 +23,11 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(CredentialsContainer)
 NS_INTERFACE_MAP_END
 
 already_AddRefed<Promise>
-CreateAndReject(nsPIDOMWindowInner* aParent, ErrorResult& aRv)
+CreateAndReject(nsPIDOMWindowInner* apparent, ErrorResult& aRv)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
-  nsCOMPtr<nsIGlobalObject> global = do_QueryInterface(aParent);
+  nsCOMPtr<nsIGlobalObject> global = do_QueryInterface(apparent);
   if (NS_WARN_IF(!global)) {
     aRv.Throw(NS_ERROR_FAILURE);
     return nullptr;
@@ -43,11 +43,11 @@ CreateAndReject(nsPIDOMWindowInner* aParent, ErrorResult& aRv)
 }
 
 static bool
-IsInActiveTab(nsPIDOMWindowInner* aParent)
+IsInActiveTab(nsPIDOMWindowInner* apparent)
 {
-  // Returns whether aParent is an inner window somewhere in the active tab.
+  // Returns whether apparent is an inner window somewhere in the active tab.
   // The active tab is the selected (i.e. visible) tab in the focused window.
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   nsCOMPtr<nsIDocument> doc(aParent->GetExtantDoc());
   if (NS_WARN_IF(!doc)) {
@@ -86,13 +86,13 @@ IsInActiveTab(nsPIDOMWindowInner* aParent)
 }
 
 static bool
-IsSameOriginWithAncestors(nsPIDOMWindowInner* aParent)
+IsSameOriginWithAncestors(nsPIDOMWindowInner* apparent)
 {
-  // This method returns true if aParent is either not in a frame / iframe, or
-  // is in a frame or iframe and all ancestors for aParent are the same origin.
+  // This method returns true if apparent is either not in a frame / iframe, or
+  // is in a frame or iframe and all ancestors for apparent are the same origin.
   // This is useful for Credential Management because we need to prohibit
   // iframes, but not break mochitests (which use iframes to embed the tests).
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   if (aParent->IsTopInnerWindow()) {
     // Not in a frame or iframe
@@ -122,10 +122,10 @@ IsSameOriginWithAncestors(nsPIDOMWindowInner* aParent)
   return true;
 }
 
-CredentialsContainer::CredentialsContainer(nsPIDOMWindowInner* aParent) :
-  mParent(aParent)
+CredentialsContainer::CredentialsContainer(nsPIDOMWindowInner* apparent) :
+  mParent(apparent)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 }
 
 CredentialsContainer::~CredentialsContainer()

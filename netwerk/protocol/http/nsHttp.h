@@ -165,7 +165,7 @@ namespace nsHttp
     void TrimHTTPWhitespace(const nsACString& aSource,
                                    nsACString& aDest);
 
-    // Returns true if the specified value is reasonable given the defintion
+    // Returns true if the specified value is reasonable given the definition
     // in RFC 2616 section 4.2.  Full strict validation is not performed
     // currently as it would require full parsing of the value.
     bool IsReasonableHeaderValue(const nsACString &s);

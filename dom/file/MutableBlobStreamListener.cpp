@@ -13,12 +13,12 @@ namespace mozilla {
 namespace dom {
 
 MutableBlobStreamListener::MutableBlobStreamListener(MutableBlobStorage::MutableBlobStorageType aStorageType,
-                                                     nsISupports* aParent,
+                                                     nsISupports* apparent,
                                                      const nsACString& aContentType,
                                                      MutableBlobStorageCallback* aCallback,
                                                      nsIEventTarget* aEventTarget)
   : mCallback(aCallback)
-  , mParent(aParent)
+  , mParent(apparent)
   , mStorageType(aStorageType)
   , mContentType(aContentType)
   , mEventTarget(aEventTarget)

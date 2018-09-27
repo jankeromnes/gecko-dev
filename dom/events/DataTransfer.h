@@ -71,7 +71,7 @@ protected:
   // this constructor is used only by the Clone method to copy the fields as
   // needed to a new data transfer.
   // NOTE: Do not call this method directly.
-  DataTransfer(nsISupports* aParent,
+  DataTransfer(nsISupports* apparent,
                EventMessage aEventMessage,
                const uint32_t aEffectAllowed,
                bool aCursorState,
@@ -98,7 +98,7 @@ public:
   // service directly. For clipboard operations, aClipboardType indicates
   // which clipboard to use, from nsIClipboard, or -1 for non-clipboard
   // operations, or if access to the system clipboard should not be allowed.
-  DataTransfer(nsISupports* aParent, EventMessage aEventMessage,
+  DataTransfer(nsISupports* apparent, EventMessage aEventMessage,
                bool aIsExternal, int32_t aClipboardType);
 
   virtual JSObject*
@@ -397,7 +397,7 @@ public:
   // DataTransfer objects for each event after `dragstart`. Event objects will
   // lazily clone the DataTransfer stored in the DragSession (which is a clone
   // of the DataTransfer used in the `dragstart` event) when requested.
-  nsresult Clone(nsISupports* aParent, EventMessage aEventMessage,
+  nsresult Clone(nsISupports* apparent, EventMessage aEventMessage,
                  bool aUserCancelled, bool aIsCrossDomainSubFrameDrop,
                  DataTransfer** aResult);
 

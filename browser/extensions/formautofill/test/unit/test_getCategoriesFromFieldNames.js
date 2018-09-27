@@ -64,11 +64,11 @@ add_task(async function test_getCategoriesFromFieldNames() {
       set: ["address", "name", "tel", "organization", "email"],
     },
     {
-      fieldNames: ["address-line2", "family-name", "", "name", "tel", "UNKOWN"],
+      fieldNames: ["address-line2", "family-name", "", "name", "tel", "UNKNOWN"],
       set: ["address", "name", "tel"],
     },
     {
-      fieldNames: ["tel", "family-name", "", "name", "tel", "UNKOWN"],
+      fieldNames: ["tel", "family-name", "", "name", "tel", "UNKNOWN"],
       set: ["tel", "name"],
     },
   ];

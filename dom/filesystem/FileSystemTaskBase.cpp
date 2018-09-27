@@ -207,17 +207,17 @@ FileSystemTaskChildBase::SetError(const nsresult& aErrorValue)
 FileSystemTaskParentBase::FileSystemTaskParentBase(
   FileSystemBase* aFileSystem,
   const FileSystemParams& aParam,
-  FileSystemRequestParent* aParent)
+  FileSystemRequestParent* apparent)
   : Runnable("dom::FileSystemTaskParentBase")
   , mErrorValue(NS_OK)
   , mFileSystem(aFileSystem)
-  , mRequestParent(aParent)
+  , mRequestParent(apparent)
   , mBackgroundEventTarget(GetCurrentThreadEventTarget())
 {
   MOZ_ASSERT(XRE_IsParentProcess(),
              "Only call from parent process!");
   MOZ_ASSERT(aFileSystem, "aFileSystem should not be null.");
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
   MOZ_ASSERT(mBackgroundEventTarget);
   AssertIsOnBackgroundThread();
 }

@@ -409,7 +409,7 @@ typedef struct SPEED_FEATURES {
   // calculation in the rd coefficient costing loop.
   int use_fast_coef_costing;
 
-  // This feature controls the tolerence vs target used in deciding whether to
+  // This feature controls the tolerance vs target used in deciding whether to
   // recode a frame. It has no meaning if recode is disabled.
   int recode_tolerance_low;
   int recode_tolerance_high;

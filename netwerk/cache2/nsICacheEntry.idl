@@ -186,7 +186,7 @@ interface nsICacheEntry : nsISupports
    * Called by consumer upon 304/206 response from the server.  This marks
    * the entry content as positively revalidated.
    * Consumer uses this method after the consumer has returned ENTRY_NEEDS_REVALIDATION
-   * result from onCacheEntryCheck and after successfull revalidation with the server.
+   * result from onCacheEntryCheck and after successful revalidation with the server.
    */
   void setValid();
 

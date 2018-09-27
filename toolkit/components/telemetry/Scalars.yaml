@@ -1772,7 +1772,7 @@ formautofill.addresses:
       - 990200
     description: >
       Count at submission time whether the submitted form was autofilled, but
-      the data in form is changed and can not be merged to orginal address profile.
+      the data in form is changed and can not be merged to orignal address profile.
     expires: never
     kind: uint
     notification_emails:

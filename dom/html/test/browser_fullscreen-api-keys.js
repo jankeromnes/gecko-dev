@@ -120,7 +120,7 @@ add_task(async function() {
   gMessageManager.loadFrameScript(
     "data:,(" + frameScript.toString() + ")();", false);
 
-  // Wait for the document being actived, so that
+  // Wait for the document being activated, so that
   // fullscreen request won't be denied.
   await promiseOneMessage("Test:Activated");
 

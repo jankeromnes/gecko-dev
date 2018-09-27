@@ -26,7 +26,7 @@ public:
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(MIDIOutputMap)
 
-  explicit MIDIOutputMap(nsPIDOMWindowInner* aParent);
+  explicit MIDIOutputMap(nsPIDOMWindowInner* apparent);
 
   nsPIDOMWindowInner*
   GetParentObject() const

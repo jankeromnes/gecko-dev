@@ -50,7 +50,7 @@ class Packet {
   std::vector<uint32_t> Csrcs() const;
 
   // TODO(danilchap): Remove this function when all code update to use RtpPacket
-  // directly. Function is there just for easier backward compatibilty.
+  // directly. Function is there just for easier backward compatibility.
   void GetHeader(RTPHeader* header) const;
 
   size_t headers_size() const;

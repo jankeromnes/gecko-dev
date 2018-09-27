@@ -16,7 +16,7 @@ namespace dom {
 class PerformanceMark final : public PerformanceEntry
 {
 public:
-  PerformanceMark(nsISupports* aParent,
+  PerformanceMark(nsISupports* apparent,
                   const nsAString& aName,
                   DOMHighResTimeStamp aStartTime);
 

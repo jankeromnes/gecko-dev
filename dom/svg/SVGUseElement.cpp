@@ -114,10 +114,10 @@ SVGUseElement::Clone(dom::NodeInfo* aNodeInfo, nsINode** aResult) const
 
 nsresult
 SVGUseElement::BindToTree(nsIDocument* aDocument,
-                          nsIContent* aParent,
+                          nsIContent* apparent,
                           nsIContent* aBindingParent)
 {
-  nsresult rv = SVGUseElementBase::BindToTree(aDocument, aParent, aBindingParent);
+  nsresult rv = SVGUseElementBase::BindToTree(aDocument, apparent, aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
   TriggerReclone();

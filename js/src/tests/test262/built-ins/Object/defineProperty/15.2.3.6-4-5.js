@@ -31,7 +31,7 @@ o["foo"] = 101;
 var d1 = Object.getOwnPropertyDescriptor(o, "foo");
 
 // now, redefine the property with the same descriptor
-// the property defintion should not get disturbed.
+// the property definition should not get disturbed.
 var desc = {
   value: 101,
   enumerable: true,

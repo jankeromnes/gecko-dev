@@ -876,7 +876,7 @@ DisplayListBuilder::PopStackingContext(bool aIsReferenceFrame)
 }
 
 wr::WrClipChainId
-DisplayListBuilder::DefineClipChain(const Maybe<wr::WrClipChainId>& aParent,
+DisplayListBuilder::DefineClipChain(const Maybe<wr::WrClipChainId>& apparent,
                                     const nsTArray<wr::WrClipId>& aClips)
 {
   nsTArray<size_t> clipIds;
@@ -884,11 +884,11 @@ DisplayListBuilder::DefineClipChain(const Maybe<wr::WrClipChainId>& aParent,
     clipIds.AppendElement(id.id);
   }
   uint64_t clipchainId = wr_dp_define_clipchain(mWrState,
-      aParent ? &(aParent->id) : nullptr,
+      apparent ? &(apparent->id) : nullptr,
       clipIds.Elements(), clipIds.Length());
   WRDL_LOG("DefineClipChain id=%" PRIu64 " p=%s clips=%zu\n", mWrState,
       clipchainId,
-      aParent ? Stringify(aParent->id).c_str() : "(nil)",
+      apparent ? Stringify(apparent->id).c_str() : "(nil)",
       clipIds.Length());
   return wr::WrClipChainId{ clipchainId };
 }

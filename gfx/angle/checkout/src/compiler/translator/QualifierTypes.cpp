@@ -702,7 +702,7 @@ unsigned int TLayoutQualifierWrapper::getRank() const
 
 unsigned int TStorageQualifierWrapper::getRank() const
 {
-    // Force the 'centroid' auxilary storage qualifier to be always first among all storage
+    // Force the 'centroid' auxiliary storage qualifier to be always first among all storage
     // qualifiers.
     if (mStorageQualifier == EvqCentroid)
     {

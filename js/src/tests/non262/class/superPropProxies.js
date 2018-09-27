@@ -21,7 +21,7 @@ class mid extends new Proxy(base, midStaticHandler) {
 class child extends mid {
     constructor() { super(); }
     static testStaticLookups() {
-        // This funtion is called more than once.
+        // This function is called more than once.
         this.called = false;
         super.prop;
         assertEq(this.called, true);

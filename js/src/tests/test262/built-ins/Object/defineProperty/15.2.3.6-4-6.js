@@ -36,7 +36,7 @@ Object.defineProperty(o, "foo", desc);
 var d1 = Object.getOwnPropertyDescriptor(o, "foo");
 
 // now, redefine the property with the same descriptor
-// the property defintion should not get disturbed.
+// the property definition should not get disturbed.
 Object.defineProperty(o, "foo", desc);
 
 var d2 = Object.getOwnPropertyDescriptor(o, "foo");

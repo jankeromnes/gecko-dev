@@ -452,7 +452,7 @@ public:
   Element* GetActiveEditingHost() const;
 
   /** Insert a string as quoted text
-    * (whose representation is dependant on the editor type),
+    * (whose representation is dependent on the editor type),
     * replacing the selected text (if any).
     *
     * @param aQuotedText    The actual text to be quoted
@@ -1412,7 +1412,7 @@ protected: // Shouldn't be used by friend classes
 
   /**
    * Use this to assure that selection is set after attribute nodes when
-   * trying to collapse selection at begining of a block node
+   * trying to collapse selection at beginning of a block node
    * e.g., when setting at beginning of a table cell
    * This will stop at a table, however, since we don't want to
    * "drill down" into nested tables.

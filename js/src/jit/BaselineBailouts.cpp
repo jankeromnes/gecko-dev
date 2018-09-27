@@ -971,7 +971,7 @@ InitFromBailout(JSContext* cx, size_t frameNo,
 
             if (IsSetPropPC(pc)) {
                 // We would love to just save all the arguments and leave them
-                // in the stub frame pushed below, but we will lose the inital
+                // in the stub frame pushed below, but we will lose the initial
                 // argument which the function was called with, which we must
                 // leave on the stack. It's pushed as the result of the SETPROP.
                 Value initialArg = savedCallerArgs[inlined_args - 1];

@@ -87,7 +87,7 @@ window['PR_SHOULD_USE_CONTINUATION'] = true;
       "object,out,override,orderby,params,partial,readonly,ref,sbyte,sealed," +
       "stackalloc,string,select,uint,ulong,unchecked,unsafe,ushort,var"];
   var COFFEE_KEYWORDS = "all,and,by,catch,class,else,extends,false,finally," +
-      "for,if,in,is,isnt,loop,new,no,not,null,of,off,on,or,return,super,then," +
+      "for,if,in,is,isn't,loop,new,no,not,null,of,off,on,or,return,super,then," +
       "true,try,unless,until,when,while,yes";
   var JSCRIPT_KEYWORDS = [COMMON_KEYWORDS,
       "debugger,eval,export,function,get,null,set,undefined,var,with," +
@@ -626,7 +626,7 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&
     * recognized.
     *
     * Shortcut is an optional string of characters, any of which, if the first
-    * character, gurantee that this pattern and only this pattern matches.
+    * character, guarantee that this pattern and only this pattern matches.
     *
     * @param {Array} shortcutStylePatterns patterns that always start with
     *   a known character.  Must have a shortcut string.

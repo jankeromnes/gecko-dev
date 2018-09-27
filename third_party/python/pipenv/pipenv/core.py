@@ -1053,7 +1053,7 @@ def do_lock(
         # Add index metadata to lockfile.
         if 'index' in dep:
             lockfile['develop'][dep['name']]['index'] = dep['index']
-        # Add PEP 508 specifier metadata to lockfile if dep isnt top level
+        # Add PEP 508 specifier metadata to lockfile if dep isn't top level
         # or top level dep doesn't itself have markers
         if 'markers' in dep:
             if dep['name'] in dev_packages and not any(key in dev_packages[dep['name']] for key in allowed_marker_keys):

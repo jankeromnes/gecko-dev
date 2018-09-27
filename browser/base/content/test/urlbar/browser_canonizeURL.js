@@ -55,7 +55,7 @@ add_task(async function checkPrefTurnsOffCanonize() {
   registerCleanupFunction(() => { Services.search.currentEngine = oldCurrentEngine; });
 
   let tabsToClose = [];
-  // Ensure we don't end up loading something in the current tab becuase it's empty:
+  // Ensure we don't end up loading something in the current tab because it's empty:
   if (isTabEmpty(gBrowser.selectedTab)) {
     tabsToClose.push(await BrowserTestUtils.openNewForegroundTab({gBrowser, opening: "about:mozilla"}));
   }

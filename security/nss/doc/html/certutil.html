@@ -158,7 +158,7 @@ Generating key.  This may take a few moments...
 	</p><p>
 		For example, this creates a self-signed certificate:
 	</p><pre class="programlisting">$ certutil -S -s "CN=Example CA" -n my-ca-cert -x -t "C,C,C" -1 -2 -5 -m 3650</pre><p>
-The interative prompts for key usage and whether any extensions are critical and responses have been ommitted for brevity.
+The interative prompts for key usage and whether any extensions are critical and responses have been omitted for brevity.
 	</p><p>
 		From there, new certificates can reference the self-signed certificate:
 	</p><pre class="programlisting">$ certutil -S -s "CN=My Server Cert" -n my-server-cert -c "my-ca-cert" -t ",," -1 -5 -6 -8 -m 730</pre><p><span class="command"><strong>Generating a Certificate from a Certificate Request</strong></span></p><p>

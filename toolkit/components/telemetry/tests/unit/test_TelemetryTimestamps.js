@@ -45,7 +45,7 @@ add_task(async function actualTest() {
   Assert.ok(TelemetryTimestamps.get().foo >= now); // foo has a reasonable value
 
   // Add timestamp with value
-  // Use a value far in the future since TelemetryController substracts the time of
+  // Use a value far in the future since TelemetryController subtracts the time of
   // process initialization.
   const YEAR_4000_IN_MS = 64060588800000;
   TelemetryTimestamps.add("bar", YEAR_4000_IN_MS);

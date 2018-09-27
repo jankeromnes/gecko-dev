@@ -47,7 +47,7 @@ typedef struct nssArenaMarkStr nssArenaMark;
  * ARENA_DESTRUCTOR_LIST
  *
  * Unfortunately, our pointer-tracker facility, used in debug
- * builds to agressively fight invalid pointers, requries that
+ * builds to aggressively fight invalid pointers, requries that
  * pointers be deregistered when objects are destroyed.  This
  * conflicts with the standard arena usage where "memory-only"
  * objects (that don't hold onto resources outside the arena)

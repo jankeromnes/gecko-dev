@@ -582,7 +582,7 @@ public:
   MOZ_INIT_OUTSIDE_CTOR
   LogicalSize      mContainingBlockSize;
 
-  // Cached pointers to the various style structs used during intialization
+  // Cached pointers to the various style structs used during initialization
   MOZ_INIT_OUTSIDE_CTOR
   const nsStyleDisplay*    mStyleDisplay;
   MOZ_INIT_OUTSIDE_CTOR

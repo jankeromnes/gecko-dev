@@ -220,7 +220,7 @@ private:
                            CacheEntryHandle** aResult);
 
   /**
-   * Check existance of an entry.  This may throw NS_ERROR_NOT_AVAILABLE
+   * Check existence of an entry.  This may throw NS_ERROR_NOT_AVAILABLE
    * when the information cannot be obtained synchronously w/o blocking.
    */
   nsresult CheckStorageEntry(CacheStorage const* aStorage,
@@ -265,7 +265,7 @@ private:
   /**
    * Tries to find an existing entry in the hashtables and synchronously call
    * OnCacheEntryInfo of the aVisitor callback when found.
-   * @retuns
+   * @returns
    *   true, when the entry has been found that also implies the callbacks has
    *        beem invoked
    *   false, when an entry has not been found

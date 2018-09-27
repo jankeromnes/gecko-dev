@@ -953,7 +953,7 @@ impl<'a> FontSettingTagIterState<'a> {
 ///
 ///   Two declarations of font-feature-settings[sic] can be animated between if
 ///   they are "like".  "Like" declarations are ones where the same set of
-///   properties appear (in any order).  Because succesive[sic] duplicate
+///   properties appear (in any order).  Because successive[sic] duplicate
 ///   properties are applied instead of prior duplicate properties, two
 ///   declarations can be "like" even if they have differing number of
 ///   properties. If two declarations are "like" then animation occurs pairwise

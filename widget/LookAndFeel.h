@@ -583,7 +583,7 @@ public:
    /**
    * This variant of GetColor() takes an extra Boolean parameter that allows
    * the caller to ask that hard-coded color values be substituted for
-   * native colors (used when it is desireable to hide system colors to
+   * native colors (used when it is desirable to hide system colors to
    * avoid system fingerprinting).
    */
   static nsresult GetColor(ColorID aID, bool aUseStandinsForNativeColors,

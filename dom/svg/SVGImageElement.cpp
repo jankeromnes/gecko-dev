@@ -216,14 +216,14 @@ SVGImageElement::MaybeLoadSVGImage()
 }
 
 nsresult
-SVGImageElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+SVGImageElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                             nsIContent* aBindingParent)
 {
-  nsresult rv = SVGImageElementBase::BindToTree(aDocument, aParent,
+  nsresult rv = SVGImageElementBase::BindToTree(aDocument, apparent,
                                                 aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
-  nsImageLoadingContent::BindToTree(aDocument, aParent, aBindingParent);
+  nsImageLoadingContent::BindToTree(aDocument, apparent, aBindingParent);
 
   if (mStringAttributes[HREF].IsExplicitlySet() ||
       mStringAttributes[XLINK_HREF].IsExplicitlySet()) {

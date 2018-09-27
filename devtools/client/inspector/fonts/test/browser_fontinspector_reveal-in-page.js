@@ -12,7 +12,7 @@ add_task(async function() {
   // Enable the feature, since it's off by default for now.
   await pushPref("devtools.inspector.fonthighlighter.enabled", true);
 
-  // Make sure the toolbox is tall enough to accomodate all fonts, otherwise mouseover
+  // Make sure the toolbox is tall enough to accommodate all fonts, otherwise mouseover
   // events simulation will fail.
   await pushPref("devtools.toolbox.footer.height", 500);
 

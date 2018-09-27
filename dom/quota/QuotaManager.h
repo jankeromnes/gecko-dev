@@ -246,7 +246,7 @@ public:
   // gets DirectoryLockFailed notification.
   // A lock is a reference counted object and at the time DirectoryLockAcquired
   // is called, quota manager holds just one strong reference to it which is
-  // then immediatelly cleared by quota manager. So it's up to client to add
+  // then immediately cleared by quota manager. So it's up to client to add
   // a new reference in order to keep the lock alive.
   // Unlocking is simply done by dropping all references to the lock object.
   // In other words, protection which the lock represents dies with the lock

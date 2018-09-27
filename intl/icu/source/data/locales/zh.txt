@@ -147,7 +147,7 @@ zh{
                 scientificFormat{"#E0"}
             }
         }
-        beng{
+        being{
             miscPatterns{
                 atLeast{"{0}+"}
                 range{"{0}-{1}"}

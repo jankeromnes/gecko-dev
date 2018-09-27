@@ -426,7 +426,7 @@ int nestegg_packet_discard_padding(nestegg_packet * packet,
     @retval  #NESTEGG_PACKET_HAS_SIGNAL_BYTE_UNENCRYPTED Encrypted bit not
              set, encryption information not read from packet.
     @retval  #NESTEGG_PACKET_HAS_SIGNAL_BYTE_ENCRYPTED Encrypted bit set,
-             encryption infomation read from packet.
+             encryption information read from packet.
     @retval  #NESTEGG_PACKET_HAS_SIGNAL_BYTE_PARTITIONED Partitioned bit set,
              encryption and parition information read from packet.
     @retval -1 Error.*/

@@ -94,7 +94,7 @@ var FormValidationHandler =
    *
    * @aWindow - the chrome window
    * @aPanelData - Object that contains popup information
-   *  aPanelData stucture detail:
+   *  aPanelData structure detail:
    *   contentRect - the bounding client rect of the target element. If
    *    content is remote, this is relative to the browser, otherwise its
    *    relative to the window.

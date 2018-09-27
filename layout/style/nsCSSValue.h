@@ -129,7 +129,7 @@ public:
   // Safe to call from any thread.
   bool DefinitelyEqualURIs(const URLValueData& aOther) const;
 
-  // Smae as DefinitelyEqualURIs but additionally compares the nsIPrincipal
+  // Same as DefinitelyEqualURIs but additionally compares the nsIPrincipal
   // pointers of the two URLValueData objects.
   bool DefinitelyEqualURIsAndPrincipal(const URLValueData& aOther) const;
 

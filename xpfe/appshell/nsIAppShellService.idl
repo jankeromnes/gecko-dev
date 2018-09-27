@@ -23,7 +23,7 @@ interface nsIAppShellService : nsISupports
 {
   /**
    * Create a window, which will be initially invisible.
-   * @param aParent the parent window.  Can be null.
+   * @param apparent the parent window.  Can be null.
    * @param aUrl the contents of the new window.
    * @param aChromeMask chrome flags affecting the kind of OS border
    *                    given to the window. see nsIBrowserWindow for
@@ -42,7 +42,7 @@ interface nsIAppShellService : nsISupports
    *                      Can be left null.
    */
   const long SIZE_TO_CONTENT = -1;
-  nsIXULWindow createTopLevelWindow(in nsIXULWindow aParent,
+  nsIXULWindow createTopLevelWindow(in nsIXULWindow apparent,
                                     in nsIURI aUrl, 
                                     in uint32_t aChromeMask,
                                     in long aInitialWidth,

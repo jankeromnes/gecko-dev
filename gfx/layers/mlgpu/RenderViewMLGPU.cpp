@@ -51,8 +51,8 @@ RenderViewMLGPU::RenderViewMLGPU(FrameBuilder* aBuilder,
 
 RenderViewMLGPU::RenderViewMLGPU(FrameBuilder* aBuilder,
                                  ContainerLayerMLGPU* aContainer,
-                                 RenderViewMLGPU* aParent)
- : RenderViewMLGPU(aBuilder, aParent)
+                                 RenderViewMLGPU* apparent)
+ : RenderViewMLGPU(aBuilder, apparent)
 {
   mContainer = aContainer;
   mTargetOffset = aContainer->GetTargetOffset();
@@ -67,10 +67,10 @@ RenderViewMLGPU::RenderViewMLGPU(FrameBuilder* aBuilder,
   mContainer->SetRenderView(this);
 }
 
-RenderViewMLGPU::RenderViewMLGPU(FrameBuilder* aBuilder, RenderViewMLGPU* aParent)
+RenderViewMLGPU::RenderViewMLGPU(FrameBuilder* aBuilder, RenderViewMLGPU* apparent)
  : mBuilder(aBuilder),
    mDevice(aBuilder->GetDevice()),
-   mParent(aParent),
+   mParent(apparent),
    mContainer(nullptr),
    mFinishedBuilding(false),
    mCurrentLayerBufferIndex(kInvalidResourceIndex),
@@ -80,7 +80,7 @@ RenderViewMLGPU::RenderViewMLGPU(FrameBuilder* aBuilder, RenderViewMLGPU* aParen
    mUseDepthBuffer(gfxPrefs::AdvancedLayersEnableDepthBuffer()),
    mDepthBufferNeedsClear(false)
 {
-  if (aParent) {
+  if (apparent) {
     aParent->AddChild(this);
   }
 }
@@ -107,9 +107,9 @@ RenderViewMLGPU::GetRenderTarget() const
 }
 
 void
-RenderViewMLGPU::AddChild(RenderViewMLGPU* aParent)
+RenderViewMLGPU::AddChild(RenderViewMLGPU* apparent)
 {
-  mChildren.push_back(aParent);
+  mChildren.push_back(apparent);
 }
 
 void
@@ -258,7 +258,7 @@ RenderViewMLGPU::UpdateVisibleRegion(ItemInfo& aItem)
 
   // Apply the new occluded area. We do another dance with the translation to
   // avoid copying the region. We do this after the SetRegionToRender call to
-  // accomodate the possiblity of a layer changing its visible region.
+  // accommodate the possibility of a layer changing its visible region.
   if (aItem.opaque) {
     mOccludedRegion.MoveBy(-translation);
     mOccludedRegion.OrWith(aItem.layer->GetRenderRegion());

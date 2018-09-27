@@ -207,7 +207,7 @@ add_task(async function test_success_unknown_completeStatus() {
 
     let {page} = el1.requestStore.getState();
 
-    // this status doesnt change page
+    // this status doesn't change page
     let payButton = document.getElementById("pay");
     is(payButton, document.querySelector(`#${page.id} button.primary`),
        `Primary button is the pay button in the ${completeStatus} state`);

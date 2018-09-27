@@ -5,7 +5,7 @@
 const TEST_PATH = getRootDirectory(gTestPath).replace("chrome://mochitests/content", "https://example.com") + "meta_tags.html";
 /**
  * This tests that with the page meta_tags.html, ContentMetaHandler.jsm parses
- * out the meta tags avilable and only stores the best one for description and
+ * out the meta tags available and only stores the best one for description and
  * one for preview image url. In the case of this test, the best defined meta
  * tags are "og:description" and "og:image:secure_url". The list of meta tags
  * and order of preference is found in ContentMetaHandler.jsm.

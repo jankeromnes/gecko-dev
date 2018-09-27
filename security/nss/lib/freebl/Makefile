@@ -85,7 +85,7 @@ endif
 # FREEBL_PRELINK_COMMAND
 #
 # This is an optional environment variable which can override the default
-# prelink command. It could be used on systems that did something similiar to 
+# prelink command. It could be used on systems that did something similar to 
 # prelink but used a different command and syntax. The only requirement is the 
 # program must take the library as the last argument, the program must output 
 # the original library to standard out, and the program does not need to take 

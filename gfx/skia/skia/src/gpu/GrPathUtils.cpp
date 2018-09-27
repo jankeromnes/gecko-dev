@@ -21,7 +21,7 @@ SkScalar GrPathUtils::scaleToleranceToSrc(SkScalar devTol,
     SkScalar stretch = viewM.getMaxScale();
 
     if (stretch < 0) {
-        // take worst case mapRadius amoung four corners.
+        // take worst case mapRadius among four corners.
         // (less than perfect)
         for (int i = 0; i < 4; ++i) {
             SkMatrix mat;

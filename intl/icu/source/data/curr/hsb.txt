@@ -800,7 +800,7 @@ hsb{
             two{"angolskej kwanzy (1977–1990)"}
         }
         AON{
-            few{"angolske nowe kwanzy (1990–2000)"}
+            few{"angolske now kwanzy (1990–2000)"}
             one{"angolska nowa kwanza (1990–2000)"}
             other{"angolskich nowych kwanzow (1990–2000)"}
             two{"angolskej nowej kwanzy (1990–2000)"}
@@ -956,7 +956,7 @@ hsb{
             two{"boliwiskej mvdolej"}
         }
         BRB{
-            few{"brazilske nowe cruzeiry (1967–1986)"}
+            few{"brazilske now cruzeiry (1967–1986)"}
             one{"brazilski nowy cruzeiro (1967–1986)"}
             other{"brazilskich nowych cruzeirow (1967–1986)"}
             two{"brazilskej nowej cruzeiraj (1967–1986)"}
@@ -980,7 +980,7 @@ hsb{
             two{"brazilskej realej"}
         }
         BRN{
-            few{"brazilske nowe cruzady"}
+            few{"brazilske now cruzady"}
             one{"brazilski nowy cruzado (1989–1990)"}
             other{"brazilskich nowych cruzadow"}
             two{"brazilskej nowej cruzadaj (1989–1990)"}
@@ -1256,7 +1256,7 @@ hsb{
             two{"indoneskej rupiji"}
         }
         ILS{
-            few{"israelske nowe šekele"}
+            few{"israelske now šekele"}
             one{"israelski nowy šekel"}
             other{"israelskich nowych šekelow"}
             two{"israelskej nowej šekelej"}
@@ -1754,7 +1754,7 @@ hsb{
             two{"trinidad-tobagoskej dolaraj"}
         }
         TWD{
-            few{"nowe taiwanske dolary"}
+            few{"now taiwanske dolary"}
             one{"nowy taiwanski dolar"}
             other{"nowych taiwanskich dolarow"}
             two{"nowej taiwanskej dolaraj"}

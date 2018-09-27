@@ -108,7 +108,7 @@ class TestMemoryUsage(AwsyTestCase):
         """Marionette test entry that returns an array of checkoint arrays.
 
         This will generate a set of checkpoints for each iteration requested.
-        Upon succesful completion the results will be stored in
+        Upon successful completion the results will be stored in
         |self.testvars["results"]| and accessible to the test runner via the
         |testvars| object it passed in.
         """

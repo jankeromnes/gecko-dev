@@ -200,7 +200,7 @@ int GainControlImpl::ProcessCaptureAudio(AudioBuffer* audio,
     uint8_t saturation_warning = 0;
 
     // The call to stream_has_echo() is ok from a deadlock perspective
-    // as the capture lock is allready held.
+    // as the capture lock is already held.
     int err = WebRtcAgc_Process(
         gain_controller->state(), audio->split_bands_const(capture_channel),
         audio->num_bands(), audio->num_frames_per_band(),

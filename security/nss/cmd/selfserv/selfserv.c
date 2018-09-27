@@ -1905,7 +1905,7 @@ server_main(
     }
 
     /* This uses the legacy certificate API.  See mySSLSNISocketConfig() for the
-     * new, prefered API. */
+     * new, preferred API. */
     for (i = 0; i < certNicknameIndex; i++) {
         if (cert[i] != NULL) {
             const SSLExtraServerCertData ocspData = {

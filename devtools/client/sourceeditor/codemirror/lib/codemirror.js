@@ -2043,16 +2043,16 @@ function insertLineContent(line, builder, styles) {
     }
     if (pos >= len) { break }
 
-    var upto = Math.min(len, nextChange)
+    var up to = Math.min(len, nextChange)
     while (true) {
       if (text) {
         var end = pos + text.length
         if (!collapsed) {
-          var tokenText = end > upto ? text.slice(0, upto - pos) : text
+          var tokenText = end > up to ? text.slice(0, up to - pos) : text
           builder.addToken(builder, tokenText, style ? style + spanStyle : spanStyle,
                            spanStartStyle, pos + tokenText.length == nextChange ? spanEndStyle : "", title, css)
         }
-        if (end >= upto) {text = text.slice(upto - pos); pos = upto; break}
+        if (end >= up to) {text = text.slice(up to - pos); pos = up to; break}
         pos = end
         spanStartStyle = ""
       }

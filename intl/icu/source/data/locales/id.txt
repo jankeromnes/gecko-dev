@@ -3123,24 +3123,24 @@ id{
             }
         }
         year-narrow{
-            dn{"thn."}
+            dn{"then."}
             relativeTime{
                 future{
-                    other{"dlm {0} thn"}
+                    other{"dlm {0} then"}
                 }
                 past{
-                    other{"{0} thn lalu"}
+                    other{"{0} then lalu"}
                 }
             }
         }
         year-short{
-            dn{"thn."}
+            dn{"then."}
             relativeTime{
                 future{
-                    other{"dlm {0} thn"}
+                    other{"dlm {0} then"}
                 }
                 past{
-                    other{"{0} thn lalu"}
+                    other{"{0} then lalu"}
                 }
             }
         }

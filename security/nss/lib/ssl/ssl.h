@@ -655,7 +655,7 @@ SSL_IMPORT SECStatus SSL_ForceHandshakeWithTimeout(PRFileDesc *fd,
 /*
 ** Query security status of socket. *on is set to one if security is
 ** enabled. *keySize will contain the stream key size used. *issuer will
-** contain the RFC1485 verison of the name of the issuer of the
+** contain the RFC1485 version of the name of the issuer of the
 ** certificate at the other end of the connection. For a client, this is
 ** the issuer of the server's certificate; for a server, this is the
 ** issuer of the client's certificate (if any). Subject is the subject of

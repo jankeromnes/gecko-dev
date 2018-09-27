@@ -88,11 +88,11 @@ struct NSSCKFWTokenStr {
      * The invariants the mutex protects are:
      *
      * 1) Each of the cached descriptions (versions, etc.) are in an
-     *    internally consistant state.
+     *    internally consistent state.
      *
-     * 2) The session counts and hashes are consistant.
+     * 2) The session counts and hashes are consistent.
      *
-     * 3) The object hashes are consistant.
+     * 3) The object hashes are consistent.
      *
      * Note that the calls accessing the cached descriptions will call
      * the NSSCKMDToken methods with the mutex locked.  Those methods

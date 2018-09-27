@@ -790,7 +790,7 @@ void HandleConnection(void* data)
               in_flags |= PR_POLL_WRITE;
               connect_accepted = true;
 
-              // Store response to the oposite buffer
+              // Store response to the opposite buffer
               if (response == 200)
               {
                   LOG_DEBUG((" accepted CONNECT request, connected to the server, sending OK to the client\n"));
@@ -906,7 +906,7 @@ void HandleConnection(void* data)
               if (!ssl_updated)
               {
                 LOG_DEBUG((" proxy response sent to the client"));
-                // Proxy response has just been writen, update to ssl
+                // Proxy response has just been written, update to ssl
                 ssl_updated = true;
                 if (ci->http_proxy_only)
                 {

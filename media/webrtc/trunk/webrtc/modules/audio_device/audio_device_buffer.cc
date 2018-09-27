@@ -26,7 +26,7 @@ namespace webrtc {
 
 static const char kTimerQueueName[] = "AudioDeviceBufferTimer";
 
-// Time between two sucessive calls to LogStats().
+// Time between two successive calls to LogStats().
 static const size_t kTimerIntervalInSeconds = 10;
 static const size_t kTimerIntervalInMilliseconds =
     kTimerIntervalInSeconds * rtc::kNumMillisecsPerSec;

@@ -103,7 +103,7 @@ const char* const legacyICUTimeZones[] = {
     "CTT",
     "Canada/East-Saskatchewan",
     "EAT",
-    "ECT",
+    "ETC",
     "IET",
     "IST",
     "JST",

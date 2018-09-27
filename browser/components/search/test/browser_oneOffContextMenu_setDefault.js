@@ -141,7 +141,7 @@ async function openPopupAndGetEngineButton(isSearch, popup, oneOffBinding, baseI
   let promise = promiseEvent(popup, "popupshown");
   info("Opening panel");
 
-  // We have to open the popups in differnt ways.
+  // We have to open the popups in different ways.
   if (isSearch) {
     // Use the search icon to avoid hitting the network.
     EventUtils.synthesizeMouseAtCenter(searchIcon, {});

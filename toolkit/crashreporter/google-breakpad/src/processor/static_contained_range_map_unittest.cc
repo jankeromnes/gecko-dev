@@ -158,7 +158,7 @@ class TestStaticCRMMap : public ::testing::Test {
  protected:
   void SetUp();
 
-  // A referrence map for testing StaticCRMMap.
+  // A reference map for testing StaticCRMMap.
   google_breakpad::ContainedRangeMap<unsigned int, int> crm_map_;
 
   // Static version of crm_map using serialized data of crm_map.
@@ -174,7 +174,7 @@ class TestStaticCRMMap : public ::testing::Test {
 void TestStaticCRMMap::SetUp() {
   // First, do the StoreRange tests.  This validates the containment
   // rules.
-  // We confirm the referrence map correctly stores data during setup.
+  // We confirm the reference map correctly stores data during setup.
   ASSERT_TRUE (crm_map_.StoreRange(10, 10,  1));
   ASSERT_FALSE(crm_map_.StoreRange(10, 10,  2));  // exactly equal to 1
   ASSERT_FALSE(crm_map_.StoreRange(11, 10,  3));  // begins inside 1 and extends up

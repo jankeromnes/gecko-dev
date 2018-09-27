@@ -1490,7 +1490,7 @@ void vp9_first_pass(VP9_COMP *cpi, const struct lookahead_entry *source) {
       first_pass_stat_calc(cpi, &fps, &(first_tile_col->fp_data));
     }
 
-    // Dont allow a value of 0 for duration.
+    // Don't allow a value of 0 for duration.
     // (Section duration is also defaulted to minimum of 1.0).
     fps.duration = VPXMAX(1.0, (double)(source->ts_end - source->ts_start));
 
@@ -1738,7 +1738,7 @@ void vp9_init_second_pass(VP9_COMP *cpi) {
     }
 
     // Second scan using clamps based on the previous cycle average.
-    // This may modify the total and average somewhat but we dont bother with
+    // This may modify the total and average somewhat but we don't bother with
     // further itterations.
     modified_score_total = 0.0;
     s = twopass->stats_in;
@@ -2177,7 +2177,7 @@ static double calculate_group_score(VP9_COMP *cpi, double av_score,
   double score_total = 0.0;
   int i = 0;
 
-  // We dont ever want to return a 0 score here.
+  // We don't ever want to return a 0 score here.
   if (frame_count == 0) return 1.0;
 
   while ((i < frame_count) && (s < twopass->stats_in_end)) {
@@ -2557,7 +2557,7 @@ static void define_gf_group(VP9_COMP *cpi, FIRSTPASS_STATS *this_frame) {
         (
             // Don't break out with a very short interval.
             (i >= active_min_gf_interval) &&
-            // If possible dont break very close to a kf
+            // If possible don't break very close to a kf
             ((rc->frames_to_key - i) >= rc->min_gf_interval) &&
             (!flash_detected) &&
             ((mv_ratio_accumulator > mv_ratio_accumulator_thresh) ||
@@ -3014,7 +3014,7 @@ static void find_next_key_frame(VP9_COMP *cpi, FIRSTPASS_STATS *this_frame) {
 
       // The second (lagging) ref error is not valid immediately after
       // a key frame because either the lag has not built up (in the case of
-      // the first key frame or it points to a refernce before the new key
+      // the first key frame or it points to a references before the new key
       // frame.
       if (i < 2) sr_accumulator = 0.0;
       frame_boost = calc_kf_frame_boost(cpi, &next_frame, &sr_accumulator, 0,
@@ -3147,7 +3147,7 @@ void vp9_rc_get_second_pass_params(VP9_COMP *cpi) {
 
   if (!twopass->stats_in) return;
 
-  // If this is an arf frame then we dont want to read the stats file or
+  // If this is an arf frame then we don't want to read the stats file or
   // advance the input pointer as we already have what we need.
   if (gf_group->update_type[gf_group->index] == ARF_UPDATE) {
     int target_rate;

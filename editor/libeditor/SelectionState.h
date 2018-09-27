@@ -117,7 +117,7 @@ public:
   nsresult SelAdjSplitNode(nsIContent& aRightNode, nsIContent* aNewLeftNode);
   nsresult SelAdjJoinNodes(nsINode& aLeftNode,
                            nsINode& aRightNode,
-                           nsINode& aParent,
+                           nsINode& apparent,
                            int32_t aOffset,
                            int32_t aOldLeftNodeLength);
   void SelAdjInsertText(dom::Text& aTextNode, int32_t aOffset,
@@ -131,7 +131,7 @@ public:
   nsresult DidReplaceContainer(dom::Element* aOriginalNode,
                                dom::Element* aNewNode);
   nsresult WillRemoveContainer();
-  nsresult DidRemoveContainer(nsINode* aNode, nsINode* aParent,
+  nsresult DidRemoveContainer(nsINode* aNode, nsINode* apparent,
                               int32_t aOffset, uint32_t aNodeOrigLen);
   nsresult WillInsertContainer();
   nsresult DidInsertContainer();
@@ -269,12 +269,12 @@ private:
 public:
   AutoRemoveContainerSelNotify(RangeUpdater& aRangeUpdater,
                                nsINode* aNode,
-                               nsINode* aParent,
+                               nsINode* apparent,
                                int32_t aOffset,
                                uint32_t aNodeOrigLen)
     : mRangeUpdater(aRangeUpdater)
     , mNode(aNode)
-    , mParent(aParent)
+    , mParent(apparent)
     , mOffset(aOffset)
     , mNodeOrigLen(aNodeOrigLen)
   {

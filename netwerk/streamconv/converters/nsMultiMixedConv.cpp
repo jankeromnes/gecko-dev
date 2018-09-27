@@ -943,8 +943,8 @@ nsMultiMixedConv::AccumulateData(Token const & aToken)
     if (!mRawData) {
         // This is the first read of raw data during this FeedInput loop
         // of the incremental tokenizer.  All 'raw' tokens are coming from
-        // the same linear buffer, hence begining of this loop raw data
-        // is begining of the first raw token.  Length of this loop raw
+        // the same linear buffer, hence beginning of this loop raw data
+        // is beginning of the first raw token.  Length of this loop raw
         // data is just sum of all 'raw' tokens we collect during this loop.
         //
         // It's ensured we flush (send to to the listener via OnDataAvailable)

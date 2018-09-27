@@ -54,10 +54,10 @@ pk11_MakeIDFromPublicKey(SECKEYPublicKey *pubKey)
  * import a public key into the desired slot
  *
  * This function takes a public key structure and creates a public key in a
- * given slot. If isToken is set, then a persistant public key is created.
+ * given slot. If isToken is set, then a persistent public key is created.
  *
  * Note: it is possible for this function to return a handle for a key which
- * is persistant, even if isToken is not set.
+ * is persistent, even if isToken is not set.
  */
 CK_OBJECT_HANDLE
 PK11_ImportPublicKey(PK11SlotInfo *slot, SECKEYPublicKey *pubKey,
@@ -463,7 +463,7 @@ pk11_get_Decoded_ECPoint(PLArenaPool *arena, const SECItem *ecParams,
         }
 
         /* if we know the key length, one of the above tests should have
-         * succeded. If it doesn't the module gave us bad data */
+         * succeeded. If it doesn't the module gave us bad data */
         if (keyLen) {
             return CKR_ATTRIBUTE_VALUE_INVALID;
         }

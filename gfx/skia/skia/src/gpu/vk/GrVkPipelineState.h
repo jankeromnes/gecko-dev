@@ -30,7 +30,7 @@ class GrVkSampler;
 class GrVkUniformBuffer;
 
 /**
- * This class holds onto a GrVkPipeline object that we use for draws. Besides storing the acutal
+ * This class holds onto a GrVkPipeline object that we use for draws. Besides storing the actual
  * GrVkPipeline object, this class is also responsible handling all uniforms, descriptors, samplers,
  * and other similar objects that are used along with the VkPipeline in the draw. This includes both
  * allocating and freeing these objects, as well as updating their values.

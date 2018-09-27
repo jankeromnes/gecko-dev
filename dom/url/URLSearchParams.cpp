@@ -343,10 +343,10 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(URLSearchParams)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-URLSearchParams::URLSearchParams(nsISupports* aParent,
+URLSearchParams::URLSearchParams(nsISupports* apparent,
                                  URLSearchParamsObserver* aObserver)
   : mParams(new URLParams())
-  , mParent(aParent)
+  , mParent(apparent)
   , mObserver(aObserver)
 {
 }

@@ -9,7 +9,7 @@ function hasPerm(aURI, aName) {
 
 add_task(async function() {
   // Make sure that we get a new process for the tab which we create. This is
-  // important, becuase we wanto to assert information about the initial state
+  // important, because we wanto to assert information about the initial state
   // of the local permissions cache.
   //
   // We use the same approach here as was used in the e10s-multi localStorage
@@ -37,7 +37,7 @@ add_task(async function() {
   addPerm("http://foo.bar.example.com", "perm2");
   addPerm("about:home", "perm3");
   addPerm("https://example.com", "perm4");
-  // NOTE: This permission is a preload permission, so it should be avaliable in the content process from startup.
+  // NOTE: This permission is a preload permission, so it should be available in the content process from startup.
   addPerm("https://somerandomwebsite.com", "document");
 
   await BrowserTestUtils.withNewTab({ gBrowser, url: "about:blank" }, async function(aBrowser) {
@@ -92,7 +92,7 @@ add_task(async function() {
     addPerm("https://someotherrandomwebsite.com", "document");
 
     await ContentTask.spawn(aBrowser, null, async function() {
-      // The new permissions should be avaliable, but only for
+      // The new permissions should be available, but only for
       // http://example.com, and about:home
       is(Services.perms.testPermission(Services.io.newURI("http://example.com"),
                                        "perm1"),
@@ -134,7 +134,7 @@ add_task(async function() {
       });
 
       // Now that the https subdomain has loaded, we want to make sure that the
-      // permissions are also avaliable for its parent domain, https://example.com!
+      // permissions are also available for its parent domain, https://example.com!
       is(Services.perms.testPermission(Services.io.newURI("http://example.com"),
                                        "perm1"),
          Services.perms.ALLOW_ACTION, "perm1-4");

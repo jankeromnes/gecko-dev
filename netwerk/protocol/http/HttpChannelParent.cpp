@@ -1082,11 +1082,11 @@ HttpChannelParent::RecvMarkOfflineCacheEntryAsForeign()
 class DivertDataAvailableEvent : public MainThreadChannelEvent
 {
 public:
-  DivertDataAvailableEvent(HttpChannelParent* aParent,
+  DivertDataAvailableEvent(HttpChannelParent* apparent,
                            const nsCString& data,
                            const uint64_t& offset,
                            const uint32_t& count)
-  : mParent(aParent)
+  : mParent(apparent)
   , mData(data)
   , mOffset(offset)
   , mCount(count)
@@ -1177,9 +1177,9 @@ HttpChannelParent::DivertOnDataAvailable(const nsCString& data,
 class DivertStopRequestEvent : public MainThreadChannelEvent
 {
 public:
-  DivertStopRequestEvent(HttpChannelParent* aParent,
+  DivertStopRequestEvent(HttpChannelParent* apparent,
                          const nsresult& statusCode)
-  : mParent(aParent)
+  : mParent(apparent)
   , mStatusCode(statusCode)
   {
   }
@@ -1239,8 +1239,8 @@ HttpChannelParent::DivertOnStopRequest(const nsresult& statusCode)
 class DivertCompleteEvent : public MainThreadChannelEvent
 {
 public:
-  explicit DivertCompleteEvent(HttpChannelParent* aParent)
-  : mParent(aParent)
+  explicit DivertCompleteEvent(HttpChannelParent* apparent)
+  : mParent(apparent)
   {
   }
 

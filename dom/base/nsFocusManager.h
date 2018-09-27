@@ -391,7 +391,7 @@ protected:
   void RaiseWindow(nsPIDOMWindowOuter* aWindow);
 
   /**
-   * Updates the caret positon and visibility to match the focus.
+   * Updates the caret position and visibility to match the focus.
    *
    * aMoveCaretToFocus should be true to move the caret to aContent.
    *
@@ -597,10 +597,10 @@ protected:
 
   /**
    * Return the next valid tabindex value after aCurrentTabIndex, if aForward
-   * is true, or the previous tabindex value if aForward is false. aParent is
-   * the node from which to start looking for tab indicies.
+   * is true, or the previous tabindex value if aForward is false. apparent is
+   * the node from which to start looking for tab indices.
    */
-  int32_t GetNextTabIndex(nsIContent* aParent,
+  int32_t GetNextTabIndex(nsIContent* apparent,
                           int32_t aCurrentTabIndex,
                           bool aForward);
 

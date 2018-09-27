@@ -116,7 +116,7 @@ struct SourceLineResolverBase::PublicSymbol {
   MemAddr address;
 
   // If the public symbol is used as a function entry point, parameter_size
-  // is set to the size of the parameters passed to the funciton on the
+  // is set to the size of the parameters passed to the function on the
   // stack, if known.
   int32_t parameter_size;
 

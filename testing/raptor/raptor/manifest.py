@@ -115,7 +115,7 @@ def get_raptor_test_list(args, oskey):
     A test ini (i.e. raptor-firefox-tp6.ini) will have one or more subtests inside,
     each with it's own name ([the-ini-file-test-section]).
 
-    We want the ability to eiter:
+    We want the ability to either:
         - run * all * of the subtests listed inside the test ini; - or -
         - just run a single one of those subtests that are inside the ini
 
@@ -124,7 +124,7 @@ def get_raptor_test_list(args, oskey):
     subtest with that name, then the test name provided might be the name of a
     test ini itself (i.e. raptor-firefox-tp6) that contains multiple subtests.
 
-    First look for a single matching subtest name in the list of all availble tests,
+    First look for a single matching subtest name in the list of all available tests,
     and if it's found we will just run that single subtest.
 
     Then look at the list of all available tests - each available test has a manifest

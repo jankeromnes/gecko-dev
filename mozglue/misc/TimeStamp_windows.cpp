@@ -72,7 +72,7 @@ static const DWORD kDefaultTimeIncrement = 156001;
  * This is needed to preserve maximum precision of the performance frequency
  * representation.  GetTickCount64 values in milliseconds are multiplied with
  * frequency per second.  Therefor we need to multiply QPC value by 1000 to
- * have the same units to allow simple arithmentic with both QPC and GTC.
+ * have the same units to allow simple arithmetic with both QPC and GTC.
  */
 
 #define ms2mt(x) ((x) * sFrequencyPerSec)

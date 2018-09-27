@@ -7134,7 +7134,7 @@ Debugger::replaceFrameGuts(JSContext* cx, AbstractFramePtr from, AbstractFramePt
         }
     }
 
-    // All frames successfuly replaced, cancel the rollback.
+    // All frames successfully replaced, cancel the rollback.
     removeToDebuggerFramesOnExit.release();
 
     return true;
@@ -8574,7 +8574,7 @@ DebuggerFrame::getImplementation(HandleDebuggerFrame frame)
 }
 
 /*
- * If succesful, transfers the ownership of the given `handler` to this
+ * If successful, transfers the ownership of the given `handler` to this
  * Debugger.Frame. Note that on failure, the ownership of `handler` is not
  * transferred, and the caller is responsible for cleaning it up.
  */

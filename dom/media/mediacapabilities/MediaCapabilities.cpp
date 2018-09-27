@@ -101,8 +101,8 @@ MediaDecodingConfigurationToStr(const MediaDecodingConfiguration& aConfig)
   return str;
 }
 
-MediaCapabilities::MediaCapabilities(nsIGlobalObject* aParent)
-  : mParent(aParent)
+MediaCapabilities::MediaCapabilities(nsIGlobalObject* apparent)
+  : mParent(apparent)
 {
 }
 

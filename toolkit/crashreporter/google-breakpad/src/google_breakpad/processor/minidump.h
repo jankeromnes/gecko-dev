@@ -483,7 +483,7 @@ class MinidumpModule : public MinidumpObject,
   vector<uint8_t>* cv_record_;
 
   // If cv_record_ is present, cv_record_signature_ contains a copy of the
-  // CodeView record's first four bytes, for ease of determinining the
+  // CodeView record's first four bytes, for ease of determining the
   // type of structure that cv_record_ contains.
   uint32_t cv_record_signature_;
 

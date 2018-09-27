@@ -55,7 +55,7 @@ struct DllInterceptionData;
 //   return rc;
 // }
 //
-// Any required syncronization must be performed outside this class. Also, it is
+// Any required synchronization must be performed outside this class. Also, it is
 // not possible to perform further interceptions after InitializeInterceptions
 // is called.
 //
@@ -159,7 +159,7 @@ class InterceptionManager {
     return ((value + alignment -1) / alignment) * alignment;
   }
 
-  // Sets up a given buffer with all the information that has to be transfered
+  // Sets up a given buffer with all the information that has to be transferred
   // to the child.
   // Returns true on success.
   //

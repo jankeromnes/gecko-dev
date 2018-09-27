@@ -4,7 +4,7 @@
 "use strict";
 
 /**
- * Tests if reponses from streaming content types (MPEG-DASH, HLS) are
+ * Tests if responses from streaming content types (MPEG-DASH, HLS) are
  * displayed as XML or plain text
  */
 

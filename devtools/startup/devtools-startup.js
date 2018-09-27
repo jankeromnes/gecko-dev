@@ -509,7 +509,7 @@ DevToolsStartup.prototype = {
 
   /**
    * Check if the user is a DevTools user by looking at our selfxss pref.
-   * This preference is incremented everytime the console is used (up to 5).
+   * This preference is incremented every time the console is used (up to 5).
    *
    * @return {Boolean} true if the user can be considered as a devtools user.
    */

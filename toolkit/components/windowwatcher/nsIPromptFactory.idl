@@ -14,9 +14,9 @@ interface nsIPromptFactory : nsISupports
 {
   /**
    * Returns an object implementing the specified interface that creates
-   * prompts parented to aParent.
+   * prompts parented to apparent.
    */
-  void getPrompt(in mozIDOMWindowProxy aParent, in nsIIDRef iid,
+  void getPrompt(in mozIDOMWindowProxy apparent, in nsIIDRef iid,
                  [iid_is(iid),retval] out nsQIResult result);
 };
 

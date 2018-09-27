@@ -9,7 +9,7 @@ import traceback
 
 class MarionetteException(Exception):
 
-    """Raised when a generic non-recoverable exception has occured."""
+    """Raised when a generic non-recoverable exception has occurred."""
 
     status = "webdriver error"
 

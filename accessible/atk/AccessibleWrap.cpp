@@ -1615,11 +1615,11 @@ MaiAtkObject::FireTextChangeEvent(const nsString& aStr, int32_t aStart,
 }
 
 void
-a11y::ProxyShowHideEvent(ProxyAccessible* aTarget, ProxyAccessible* aParent,
+a11y::ProxyShowHideEvent(ProxyAccessible* aTarget, ProxyAccessible* apparent,
                          bool aInsert, bool aFromUser)
 {
   MaiAtkObject* obj = MAI_ATK_OBJECT(GetWrapperFor(aTarget));
-  obj->FireAtkShowHideEvent(GetWrapperFor(aParent), aInsert, aFromUser);
+  obj->FireAtkShowHideEvent(GetWrapperFor(apparent), aInsert, aFromUser);
 }
 
 #define ADD_EVENT "children_changed::add"
@@ -1631,12 +1631,12 @@ static const char *kMutationStrings[2][2] = {
 };
 
 void
-MaiAtkObject::FireAtkShowHideEvent(AtkObject* aParent, bool aIsAdded,
+MaiAtkObject::FireAtkShowHideEvent(AtkObject* apparent, bool aIsAdded,
                                    bool aFromUser)
 {
     int32_t indexInParent = getIndexInParentCB(&this->parent);
     const char *signal_name = kMutationStrings[aFromUser][aIsAdded];
-    g_signal_emit_by_name(aParent, signal_name, indexInParent, this, nullptr);
+    g_signal_emit_by_name(apparent, signal_name, indexInParent, this, nullptr);
 }
 
 void

@@ -13,7 +13,7 @@ const mid  = new Cu.Sandbox(midP);
 const high = new Cu.Sandbox(highP);
 
 function run_test() {
-  // Test that the priveleged view of a SavedFrame from a subsumed compartment
+  // Test that the privileged view of a SavedFrame from a subsumed compartment
   // is the same view that the subsumed compartment gets. Create the following
   // chain of function calls (with some intermediate system-principaled frames
   // due to implementation):

@@ -378,7 +378,7 @@ def exportTest262(args):
             relPath = os.path.relpath(dirPath, src)
             fullRelPath = os.path.join(basename, relPath)
 
-            # Make new test subdirectory to seperate from includes
+            # Make new test subdirectory to separate from includes
             currentOutDir = os.path.join(outDir, "tests", fullRelPath)
 
             # This also creates the own outDir folder

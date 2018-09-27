@@ -20,7 +20,7 @@
 *                       Changed implementation of toUnicode
 *                       function
 *   08/21/2000  Ram     Added support for ISO-2022-KR
-*   08/29/2000  Ram     Seperated implementation of EBCDIC to
+*   08/29/2000  Ram     Separated implementation of EBCDIC to
 *                       ucnvebdc.c
 *   09/20/2000  Ram     Added support for ISO-2022-CN
 *                       Added implementations for getNextUChar()
@@ -2147,7 +2147,7 @@ escape:
                     changeState_2022(args->converter,&(mySource),
                         mySourceLimit, ISO_2022_JP,err);
 
-                    /* If in ISO-2022-JP only and we successully completed an escape sequence, but previous segment was empty, create an error */
+                    /* If in ISO-2022-JP only and we successfully completed an escape sequence, but previous segment was empty, create an error */
                     if(myData->version==0 && myData->key==0 && U_SUCCESS(*err) && myData->isEmptySegment) {
                         *err = U_ILLEGAL_ESCAPE_SEQUENCE;
                         args->converter->toUCallbackReason = UCNV_IRREGULAR;
@@ -2324,7 +2324,7 @@ endloop:
 /***************************************************************
 *   Rules for ISO-2022-KR encoding
 *   i) The KSC5601 designator sequence should appear only once in a file,
-*      at the begining of a line before any KSC5601 characters. This usually
+*      at the beginning of a line before any KSC5601 characters. This usually
 *      means that it appears by itself on the first line of the file
 *  ii) There are only 2 shifting sequences SO to shift into double byte mode
 *      and SI to shift into single byte mode
@@ -2849,21 +2849,21 @@ getTrailByte:
 *       SS2 is a Chinese character as defined in CNS
 *       11643-plane-2, until another SS2designation
 *       appears
-*       (Meaning <ESC>N must preceed every 2 byte
+*       (Meaning <ESC>N must precede every 2 byte
 *        sequence.)
 *
 *      ESC $ + I       Indicates the immediate two bytes following SS3
 *       is a Chinese character as defined in CNS
 *       11643-plane-3, until another SS3designation
 *       appears
-*       (Meaning <ESC>O must preceed every 2 byte
+*       (Meaning <ESC>O must precede every 2 byte
 *        sequence.)
 *
 *      ESC $ + J       Indicates the immediate two bytes following SS3
 *       is a Chinese character as defined in CNS
 *       11643-plane-4, until another SS3designation
 *       appears
-*       (In English: <ESC>O must preceed every 2 byte
+*       (In English: <ESC>O must precede every 2 byte
 *        sequence.)
 *
 *      ESC $ + K       Indicates the immediate two bytes following SS3

@@ -878,7 +878,7 @@ _LMBCSFromUnicode(UConverterFromUnicodeArgs*     args,
          A) The optimization group
          B) The locale group
          C) The last group that succeeded with this string.
-         D) every other group that's relevent (single or double)
+         D) every other group that's relevant (single or double)
          E) If its single-byte ambiguous, try the exceptions group
 
       4. And as a grand fallback: Unicode

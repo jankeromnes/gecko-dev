@@ -61,7 +61,7 @@ final class MarkableInputStream extends InputStream {
 
   /**
    * Makes sure that the underlying stream can backtrack the full range from
-   * {@code reset} thru {@code limit}. Since we can't call {@code mark()}
+   * {@code reset} through {@code limit}. Since we can't call {@code mark()}
    * without also adjusting the reset-to-position on the underlying stream this
    * method resets first and then marks the union of the two byte ranges. On
    * buffered streams this additional cursor motion shouldn't result in any

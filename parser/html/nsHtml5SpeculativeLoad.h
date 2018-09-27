@@ -253,7 +253,7 @@ private:
   eHtml5SpeculativeLoad mOpCode;
 
   /**
-   * Whether the refering element has async and/or defer attributes.
+   * Whether the referring element has async and/or defer attributes.
    */
   bool mIsAsync;
   bool mIsDefer;

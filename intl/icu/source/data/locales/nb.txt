@@ -95,7 +95,7 @@ nb{
                 superscriptingExponent{"×"}
             }
         }
-        beng{
+        being{
             miscPatterns{
                 atLeast{"⩾{0}"}
                 range{"{0}–{1}"}

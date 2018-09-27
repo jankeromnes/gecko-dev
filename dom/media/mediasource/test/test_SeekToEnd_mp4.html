@@ -41,8 +41,8 @@ runWithMSE(async (ms, el) => {
      "seeking time is in buffered range");
   ok(el.currentTime > audiosb.buffered.end(0),
      "seeking point is not buffered in audio track");
-  await once(el, "seeked");
-  ok(true, "we have successfully seeked");
+  await once(el, "sought");
+  ok(true, "we have successfully sought");
   // Now ensure that we can play to the end, even though we are missing data in one track.
   el.play();
   await once(el, "ended");

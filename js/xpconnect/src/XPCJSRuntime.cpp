@@ -972,7 +972,7 @@ XPCJSRuntime::FinalizeCallback(JSFreeOp* fop,
             XPCWrappedNativeScope::SweepAllWrappedNativeTearOffs();
 
             // Now we need to kill the 'Dying' XPCWrappedNativeProtos.
-            // We transfered these native objects to this table when their
+            // We transferred these native objects to this table when their
             // JSObject's were finalized. We did not destroy them immediately
             // at that point because the ordering of JS finalization is not
             // deterministic and we did not yet know if any wrappers that

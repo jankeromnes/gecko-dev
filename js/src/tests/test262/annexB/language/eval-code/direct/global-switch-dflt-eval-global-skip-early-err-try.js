@@ -2,7 +2,7 @@
 // - src/annex-b-fns/eval-global-skip-early-err-try.case
 // - src/annex-b-fns/eval-global/direct-switch-dflt.template
 /*---
-description: Extension is not observed when creation of variable binding would produce an early error (try statement) (Funtion declaration in the `default` clause of a `switch` statement in eval code in the global scope)
+description: Extension is not observed when creation of variable binding would produce an early error (try statement) (Function declaration in the `default` clause of a `switch` statement in eval code in the global scope)
 esid: sec-web-compat-evaldeclarationinstantiation
 es6id: B.3.3.3
 flags: [generated, noStrict]

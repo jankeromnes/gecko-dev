@@ -143,7 +143,7 @@ class MockMinidumpMemoryRegion : public MinidumpMemoryRegion {
   MockMemoryRegion region_;
 };
 
-// A test miscelaneous info stream, just returns values from the
+// A test miscellaneous info stream, just returns values from the
 // MDRawMiscInfo fed to it.
 class TestMinidumpMiscInfo : public MinidumpMiscInfo {
  public:

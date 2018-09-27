@@ -294,7 +294,7 @@ nsShmImage::CreateDrawTarget(const mozilla::LayoutDeviceIntRegion& aRegion)
 
   // Due to bug 1205045, we must avoid making GTK calls off the main thread to query window size.
   // Instead we just track the largest offset within the image we are drawing to and grow the image
-  // to accomodate it. Since usually the entire window is invalidated on the first paint to it,
+  // to accommodate it. Since usually the entire window is invalidated on the first paint to it,
   // this should grow the image to the necessary size quickly without many intermediate reallocations.
   IntRect bounds = aRegion.GetBounds().ToUnknownRect();
   IntSize size(bounds.XMost(), bounds.YMost());

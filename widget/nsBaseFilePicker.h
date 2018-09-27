@@ -24,7 +24,7 @@ public:
   nsBaseFilePicker(); 
   virtual ~nsBaseFilePicker();
 
-  NS_IMETHOD Init(mozIDOMWindowProxy* aParent,
+  NS_IMETHOD Init(mozIDOMWindowProxy* apparent,
                   const nsAString& aTitle,
                   int16_t aMode) override;
 
@@ -48,7 +48,7 @@ public:
 
 protected:
 
-  virtual void InitNative(nsIWidget *aParent, const nsAString& aTitle) = 0;
+  virtual void InitNative(nsIWidget *apparent, const nsAString& aTitle) = 0;
   virtual nsresult Show(int16_t *_retval) = 0;
 
   bool mAddToRecentDocs;

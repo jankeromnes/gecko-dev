@@ -83,7 +83,7 @@ TEST(RangeMap, TestShinkDown_SameRange) {
 }
 
 // If a range is completely contained by another range, then the larger range
-// should be shrinked down.
+// should be shrunk down.
 TEST(RangeMap, TestShinkDown_CompletelyContained) {
   TestMap range_map;
   range_map.SetEnableShrinkDown(true);

@@ -636,7 +636,7 @@ public:
      * @param text the text to be transliterated
      * @param index the position indices
      * @param incremental if TRUE, then assume more characters may be inserted
-     * at index.limit, and postpone processing to accomodate future incoming
+     * at index.limit, and postpone processing to accommodate future incoming
      * characters
      * @stable ICU 2.4
      */
@@ -666,7 +666,7 @@ private:
      * @param text the text to be transliterated
      * @param index the position indices
      * @param incremental if TRUE, then assume more characters may be inserted
-     * at index.limit, and postpone processing to accomodate future incoming
+     * at index.limit, and postpone processing to accommodate future incoming
      * characters
      * @param rollback if TRUE and if incremental is TRUE, then perform special
      * incremental processing, as described above, and undo partial
@@ -816,7 +816,7 @@ public:
      *
      * @param ID a valid ID, as enumerated by <code>getAvailableIDs()</code>
      * @param dir        either FORWARD or REVERSE.
-     * @param parseError Struct to recieve information on position
+     * @param parseError Struct to receive information on position
      *                   of error if an error is encountered
      * @param status     Output param to filled in with a success or an error.
      * @return A <code>Transliterator</code> object with the given ID
@@ -854,7 +854,7 @@ public:
      * @param ID            the id for the transliterator.
      * @param rules         rules, separated by ';'
      * @param dir           either FORWARD or REVERSE.
-     * @param parseError    Struct to recieve information on position
+     * @param parseError    Struct to receive information on position
      *                      of error if an error is encountered
      * @param status        Output param set to success/failure code.
      * @stable ICU 2.0
@@ -1133,7 +1133,7 @@ public:
      * Return a registered source specifier.
      * @param index which specifier to return, from 0 to n-1, where
      * n = countAvailableSources()
-     * @param result fill-in paramter to receive the source specifier.
+     * @param result fill-in parameter to receive the source specifier.
      * If index is out of range, result will be empty.
      * @return reference to result
      * @stable ICU 2.0
@@ -1156,7 +1156,7 @@ public:
      * @param index which specifier to return, from 0 to n-1, where
      * n = countAvailableTargets(source)
      * @param source the source specifier
-     * @param result fill-in paramter to receive the target specifier.
+     * @param result fill-in parameter to receive the target specifier.
      * If source is invalid or if index is out of range, result will
      * be empty.
      * @return reference to result
@@ -1183,7 +1183,7 @@ public:
      * n = countAvailableVariants(source, target)
      * @param source the source specifier
      * @param target the target specifier
-     * @param result fill-in paramter to receive the variant
+     * @param result fill-in parameter to receive the variant
      * specifier.  If source is invalid or if target is invalid or if
      * index is out of range, result will be empty.
      * @return reference to result

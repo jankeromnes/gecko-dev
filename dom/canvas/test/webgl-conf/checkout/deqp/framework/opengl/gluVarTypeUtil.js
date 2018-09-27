@@ -35,7 +35,7 @@ goog.scope(function() {
     gluVarTypeUtil.array_op_equivalent = function(arr1, arr2) {
         if (arr1.length != arr2.length) return false;
         for (var i = 0; i < arr1.length; ++i) {
-            if (arr1[i].isnt(arr2[1])) return false;
+            if (arr1[i].isn't(arr2[1])) return false;
         }
         return true;
     };
@@ -139,7 +139,7 @@ goog.scope(function() {
     gluVarTypeUtil.VarTypeComponent.prototype.is = function(other) {
         return this.type == other.type && this.index == other.index;
     };
-    gluVarTypeUtil.VarTypeComponent.prototype.isnt = function(other) {
+    gluVarTypeUtil.VarTypeComponent.prototype.isn't = function(other) {
         return this.type != other.type || this.index != other.index;
     };
 
@@ -253,10 +253,10 @@ goog.scope(function() {
             this.m_type.is(other.m_type)
         );
     };
-    gluVarTypeUtil.SubTypeAccess.prototype.isnt = function(other) {
+    gluVarTypeUtil.SubTypeAccess.prototype.isn't = function(other) {
         return (
             !gluVarTypeUtil.array_op_equivalent(this.m_path, other.m_path) ||
-            this.m_type.isnt(other.m_type)
+            this.m_type.isn't(other.m_type)
         );
     };
 
@@ -377,7 +377,7 @@ goog.scope(function() {
         return (this.m_type == null);
     };
     /** next
-     * equivelant to operator++(), doesnt return.
+     * equivalent to operator++(), doesn't return.
      */
     gluVarTypeUtil.SubTypeIterator.prototype.next = function() {
         if (this.m_path.length > 0) {

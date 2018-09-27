@@ -114,7 +114,7 @@ public:
 
     /**
      *  These functions get/set the memory usage limit for the resource cache, used for temporary
-     *  bitmaps and other resources. Entries are purged from the cache when the memory useage
+     *  bitmaps and other resources. Entries are purged from the cache when the memory usage
      *  exceeds this limit.
      */
     static size_t GetResourceCacheTotalByteLimit();

@@ -61,7 +61,7 @@ add_task(async function test_escape() {
 
   info("Match 'dont' at the beginning or after /");
   await check_autocomplete({
-    search: "dont",
+    search: "don't",
     matches: [ { uri: uri2, title: "title1" },
                { uri: uri4, title: "dontmatchme3" },
                { uri: uri6, title: "title1", tags: [ "dontmatchme3" ], style: [ "bookmark-tag" ] } ],

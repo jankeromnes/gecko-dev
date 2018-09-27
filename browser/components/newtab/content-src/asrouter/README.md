@@ -40,7 +40,7 @@ Name | Used for | Type | Example value
 * Navigate to `about:newtab?endpoint=<URL>`
   * Example `https://gist.githubusercontent.com/piatra/70234f08696c0a0509d7ba5568cd830f/raw/68370f34abc134142c64b6f0a9b9258a06de7aa3/messages.json`
   * URL should be from an endpoint that was just whitelisted
-  * The snippet preview should imediately load
+  * The snippet preview should immediately load
   * The endpoint must be HTTPS, the host must be whitelisted
   * Errors are surfaced in the `Console` tab of the `Browser Toolbox`
 

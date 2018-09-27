@@ -726,7 +726,7 @@ private:
     // or rate optimization related to the active/background tab is hit.
     // We carry this value through each http channel's onstoprequest notification
     // to the parent process.  On the content process then we just update this
-    // value from ipc onstoprequest arguments.  This is a sufficent way of passing
+    // value from ipc onstoprequest arguments.  This is a sufficient way of passing
     // it down to the content process, since the value will be used only after
     // onstoprequest notification coming from an http channel.
     Mutex mLastActiveTabLoadOptimizationLock;

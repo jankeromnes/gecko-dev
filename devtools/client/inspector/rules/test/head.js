@@ -65,7 +65,7 @@ function getStyle(testActor, selector, propName) {
 }
 
 /**
- * When a tooltip is closed, this ends up "commiting" the value changed within
+ * When a tooltip is closed, this ends up "committing" the value changed within
  * the tooltip (e.g. the color in case of a colorpicker) which, in turn, ends up
  * setting the value of the corresponding css property in the rule-view.
  * Use this function to close the tooltip and make sure the test waits for the
@@ -255,7 +255,7 @@ var openCubicBezierAndChangeCoords = async function(view, ruleIndex,
  * @param {String} commitValueWith
  *        Which key should be used to commit the new value. VK_RETURN is used by
  *        default, but tests might want to use another key to test cancelling
- *        for exemple.
+ *        for example.
  * @param {Boolean} blurNewProperty
  *        After the new value has been added, a new property would have been
  *        focused. This parameter is true by default, and that causes the new

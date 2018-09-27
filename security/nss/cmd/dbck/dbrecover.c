@@ -50,7 +50,7 @@ IsEmailCert(CERTCertificate *cert)
         but doesn't appear to. */
     /*  Check the key usage extension.  */
     if (cert->keyUsagePresent) {
-        /*  Must at least be able to sign or encrypt (not neccesarily
+        /*  Must at least be able to sign or encrypt (not necessarily
          *  both if it is one of a dual cert).
          */
         if (!((cert->rawKeyUsage & KU_DIGITAL_SIGNATURE) ||

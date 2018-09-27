@@ -119,9 +119,9 @@ public:
   {
     return mChromeMessageManager;
   }
-  void SetChromeMessageManager(nsFrameMessageManager* aParent)
+  void SetChromeMessageManager(nsFrameMessageManager* apparent)
   {
-    mChromeMessageManager = aParent;
+    mChromeMessageManager = apparent;
   }
 
   already_AddRefed<nsFrameLoader> GetFrameLoader();

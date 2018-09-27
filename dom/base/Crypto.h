@@ -25,7 +25,7 @@ protected:
   virtual ~Crypto();
 
 public:
-  explicit Crypto(nsIGlobalObject* aParent);
+  explicit Crypto(nsIGlobalObject* apparent);
 
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(Crypto)

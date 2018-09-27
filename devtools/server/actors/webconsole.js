@@ -1042,7 +1042,7 @@ WebConsoleActor.prototype =
             // debugger is allowed to access it, regardless of whether the
             // debuggee is allowed to access it or not.
             //
-            // To accomodate these tests, if calling the "toString" property
+            // To accommodate these tests, if calling the "toString" property
             // from the debuggee compartment fails, we rewrap the error object
             // in the debugger's compartment, and then call the "toString"
             // property from there.

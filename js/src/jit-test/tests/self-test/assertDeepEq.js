@@ -108,5 +108,5 @@ assertDeepEq([y], [y]);
 var g1 = newGlobal(), g2 = newGlobal();
 assertDeepEq(g1, g2);
 assertDeepEq(g1, g2, {strictEquivalence: true});
-Object.preventExtensions(g2.Math.abs);  // make some miniscule change
+Object.preventExtensions(g2.Math.abs);  // make some minuscule change
 assertNotDeepEq(g1, g2);

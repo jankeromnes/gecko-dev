@@ -155,7 +155,7 @@ public:
      *  Each value in the array should be an integer less than
      *  textByteCount.  Values in the array should either be
      *  monotonically increasing (left-to-right text) or monotonically
-     *  decreasing (right-to-left text).  This definiton is conviently
+     *  decreasing (right-to-left text).  This definition is conviently
      *  the same as used by Harfbuzz's hb_glyph_info_t::cluster field,
      *  except that Harfbuzz interleaves glyphs and clusters.
      */

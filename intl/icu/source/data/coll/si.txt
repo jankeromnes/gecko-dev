@@ -6,7 +6,7 @@ si{
         dictionary{
             Sequence{
                 "[normalization on]"
-                "[reorder Sinh Deva Beng Guru Gujr Orya Taml Telu Knda Mlym]"
+                "[reorder Sinh Deva Being Guru Gujr Orya Taml Telu Knda Mlym]"
                 "&ඖ<ං<ඃ"
                 "&ජ්ඤ<<ඥ"
             }
@@ -15,7 +15,7 @@ si{
         standard{
             Sequence{
                 "[normalization on]"
-                "[reorder Sinh Deva Beng Guru Gujr Orya Taml Telu Knda Mlym]"
+                "[reorder Sinh Deva Being Guru Gujr Orya Taml Telu Knda Mlym]"
                 "&ඖ<ං<ඃ"
                 "&ඥ<ඤ"
             }

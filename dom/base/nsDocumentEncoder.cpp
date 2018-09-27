@@ -1145,7 +1145,7 @@ protected:
                                 int32_t* ioEndOffset);
   nsresult GetPromotedPoint(Endpoint aWhere, nsINode* aNode, int32_t aOffset,
                             nsCOMPtr<nsINode>* outNode, int32_t* outOffset, nsINode* aCommon);
-  nsCOMPtr<nsINode> GetChildAt(nsINode *aParent, int32_t aOffset);
+  nsCOMPtr<nsINode> GetChildAt(nsINode *apparent, int32_t aOffset);
   bool IsMozBR(Element* aNode);
   nsresult GetNodeLocation(nsINode *inChild, nsCOMPtr<nsINode> *outParent, int32_t *outOffset);
   bool IsRoot(nsINode* aNode);
@@ -1309,7 +1309,7 @@ nsHTMLCopyEncoder::SetSelection(Selection* aSelection)
   //NS_ENSURE_SUCCESS(rv, rv);
   mSelection = new Selection();
 
-  // loop thru the ranges in the selection
+  // loop through the ranges in the selection
   for (uint32_t rangeIdx = 0; rangeIdx < rangeCount; ++rangeIdx) {
     range = aSelection->GetRangeAt(rangeIdx);
     NS_ENSURE_TRUE(range, NS_ERROR_FAILURE);
@@ -1709,14 +1709,14 @@ nsHTMLCopyEncoder::GetPromotedPoint(Endpoint aWhere, nsINode* aNode,
 }
 
 nsCOMPtr<nsINode>
-nsHTMLCopyEncoder::GetChildAt(nsINode *aParent, int32_t aOffset)
+nsHTMLCopyEncoder::GetChildAt(nsINode *apparent, int32_t aOffset)
 {
   nsCOMPtr<nsINode> resultNode;
 
-  if (!aParent)
+  if (!apparent)
     return resultNode;
 
-  nsCOMPtr<nsIContent> content = do_QueryInterface(aParent);
+  nsCOMPtr<nsIContent> content = do_QueryInterface(apparent);
   MOZ_ASSERT(content, "null content in nsHTMLCopyEncoder::GetChildAt");
 
   resultNode = content->GetChildAt_Deprecated(aOffset);

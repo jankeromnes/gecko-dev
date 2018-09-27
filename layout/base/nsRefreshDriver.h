@@ -366,7 +366,7 @@ public:
    * determine how much jank has taken place between two instants in
    * time.
    *
-   * Return `false` if `aJank` needs to be grown to accomodate the
+   * Return `false` if `aJank` needs to be grown to accommodate the
    * data but we didn't have enough memory.
    */
   static bool GetJankLevels(mozilla::Vector<uint64_t>& aJank);

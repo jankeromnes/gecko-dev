@@ -61,7 +61,7 @@ pub enum UnsignedIntegerType {
     UnsignedShort,
 }
 
-// Publically available AST structures
+// Publicly available AST structures
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct Argument {

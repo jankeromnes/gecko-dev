@@ -2171,7 +2171,7 @@ MacroAssembler::branchToComputedAddress(const BaseIndex& addr)
 
     ma_ldr(DTRAddr(base, DtrRegImmShift(addr.index, LSL, scale)), pc);
     // When loading from pc, the pc is shifted to the next instruction, we
-    // add one extra instruction to accomodate for this shifted offset.
+    // add one extra instruction to accommodate for this shifted offset.
     breakpoint();
 }
 

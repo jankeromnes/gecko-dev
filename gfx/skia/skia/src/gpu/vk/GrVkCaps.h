@@ -94,7 +94,7 @@ public:
     }
 
     // Returns true if while adding commands to command buffers, we must make a new command buffer
-    // everytime we want to bind a new VkPipeline. This is true for both primary and secondary
+    // every time we want to bind a new VkPipeline. This is true for both primary and secondary
     // command buffers. This is to work around a driver bug specifically on AMD.
     bool newCBOnPipelineChange() const {
         return fNewCBOnPipelineChange;
@@ -108,7 +108,7 @@ public:
     }
 
     /**
-     * Returns both a supported and most prefered stencil format to use in draws.
+     * Returns both a supported and most preferred stencil format to use in draws.
      */
     const StencilFormat& preferedStencilFormat() const {
         return fPreferedStencilFormat;

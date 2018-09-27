@@ -174,7 +174,7 @@ function finish()
 
 async function onload()
 {
-  // Before actually running tests, we disable auto-dir scrolling, becasue the
+  // Before actually running tests, we disable auto-dir scrolling, because the
   // tests in this file are meant to test scrolling transactions, not meant to
   // test default actions for wheel events, so we simply disabled auto-dir
   // scrolling, which are well tested in

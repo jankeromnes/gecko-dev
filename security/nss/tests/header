@@ -21,7 +21,7 @@
 # options
 # -------
 #   -y answer all questions with y - use at your own risk... ignores warnings 
-#   -s silent (only usefull with -y)
+#   -s silent (only useful with -y)
 #   -h, -? - you guessed right - displays this text
 #   -d debug
 #   -f <filename> - write the (error)output to filename
@@ -86,7 +86,7 @@ if [ -z "$O_OPTIONS" ] # header is global, some including scripts may not
 then                # permit options, they don't need to bother
     O_OPTIONS=OFF
 fi
-O_SILENT=OFF        # turned on by -s silent (only usefull with -y)
+O_SILENT=OFF        # turned on by -s silent (only useful with -y)
 if  [ -z "$O_DEBUG" ] ; then
     O_DEBUG=OFF     # turned on by -d - calls to Debug produce output when ON
 fi
@@ -112,8 +112,8 @@ fi
 TMPFILES=""
 
 WAIT_FOR=600  # if waiting for an event sleep n seconds before rechecking 
-              # recomended value 10 minutes 600
-WAIT_TIMES=30 # recheck n times before giving up - recomended 30 - total of 5h
+              # recommended value 10 minutes 600
+WAIT_TIMES=30 # recheck n times before giving up - recommended 30 - total of 5h
 
 if [ -z "$QAYEAR" ]   # may I introduce - the y2k+1 bug? QA for last year 
 then                  # might not work
@@ -371,7 +371,7 @@ copy_to_local()
     unset USE_64;export USE_64;
 #FIXME only tested on 64 bit Solaris and only got 32 bit builds
     while [ $NO_DIRS -lt 4 ] ; do
-                                                  # first time thru: Debug 32 bit NT
+                                                  # first time through: Debug 32 bit NT
         set_objdir
         Debug "Copying ${OBJDIR}..."
         if [ ! -d ${LOCAL_MOZROOT}/dist/${OBJDIR} ] ; then
@@ -962,9 +962,9 @@ win_set_d1()
     do
         if [ "$O_CRONFILE" = "ON" ] 
         then
-            Exit "cant write in $NSS_VER_DIR" 
+            Exit "can't write in $NSS_VER_DIR" 
         fi
-        Warning "cant write in $NSS_VER_DIR" 
+        Warning "can't write in $NSS_VER_DIR" 
         Echo "input start directory (u:/nss, d:/src/nss, f:/shared/nss) "
         read D
         if [ -n "$D" ]
@@ -1244,7 +1244,7 @@ kill_by_name()
 }
 
 ############################### early_exit ###################################
-# global shell function , attempts a little more usefull user notification
+# global shell function , attempts a little more useful user notification
 # of a complete failure
 ########################################################################
 
@@ -1360,9 +1360,9 @@ trap "rm -f ${TMPFILES} 2>/dev/null; Exit 'killed... cleaning up...'" 2 3 15
 # for it to be created.
 # uses the variables WAIT_FOR and WAIT_TIMES
 # WAIT_FOR: if waiting for an event sleep n seconds before rechecking 
-#     recomended value 10 minutes 600
+#     recommended value 10 minutes 600
 # WAIT_TIMES: recheck n times before giving up to prevent endless loop
-#     recomended 30 - total of 5h
+#     recommended 30 - total of 5h
 ########################################################################
 
 Wait()
@@ -1563,7 +1563,7 @@ opt_usage()
     line
     Echo
     Echo "    -y answer all questions with y - use at your own risk..."
-    Echo "    -s silent (only usefull with -y)"
+    Echo "    -s silent (only useful with -y)"
     Echo "    -h, -? - you guessed right - displays this text"
     Echo "    -d debug"
     Echo "    -f <filename> - write the (error)output to filename"

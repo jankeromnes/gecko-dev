@@ -16,7 +16,7 @@ namespace webrtc {
 
 SmoothingFilterImpl::SmoothingFilterImpl(int init_time_ms, const Clock* clock)
     : init_time_ms_(init_time_ms),
-      // Duing the initalization time, we use an increasing alpha. Specifically,
+      // Duing the initialization time, we use an increasing alpha. Specifically,
       //   alpha(n) = exp(-powf(init_factor_, n)),
       // where |init_factor_| is chosen such that
       //   alpha(init_time_ms_) = exp(-1.0f / init_time_ms_),

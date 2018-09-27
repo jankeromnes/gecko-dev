@@ -45,7 +45,7 @@ public:
     // called by the connection when it takes ownership of the transaction.
     virtual void SetConnection(nsAHttpConnection *) = 0;
 
-    // called by the connection after a successfull activation of this transaction
+    // called by the connection after a successful activation of this transaction
     // in other words, tells the transaction it transitioned to the "active" state.
     virtual void OnActivated() {}
 

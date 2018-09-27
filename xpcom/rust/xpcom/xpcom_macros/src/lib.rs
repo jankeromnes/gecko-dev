@@ -458,7 +458,7 @@ fn gen_casts(
         (quote!{}, quote!{})
     };
 
-    // Add the if statment to QueryInterface for the base class.
+    // Add the if statement to QueryInterface for the base class.
     let base_name = Ident::from(iface.name);
 
     let qi = quote! {

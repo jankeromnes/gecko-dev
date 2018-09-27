@@ -69,7 +69,7 @@ function testWebM2(e) {
 
     completed = true;
     ok(startPassed, "send seeking event");
-    ok(endPassed, "send seeked event");
+    ok(endPassed, "send sought event");
     ok(v.ended, "Checking playback has ended");
     ok(Math.abs(v.currentTime - v.duration) <= 0.1, "Checking currentTime at end: " + v.currentTime);
     removeNodeAndSource(v);
@@ -78,7 +78,7 @@ function testWebM2(e) {
 
   v.addEventListener("ended", playbackEnded);
   v.addEventListener("seeking", seekStarted);
-  v.addEventListener("seeked", seekEnded);
+  v.addEventListener("sought", seekEnded);
 
   startTest();
 }

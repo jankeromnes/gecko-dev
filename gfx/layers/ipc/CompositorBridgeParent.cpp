@@ -706,7 +706,7 @@ CompositorBridgeParent::ActorDestroy(ActorDestroyReason why)
   // There are chances that the ref count reaches zero on the main thread shortly
   // after this function returns while some ipdl code still needs to run on
   // this thread.
-  // We must keep the compositor parent alive untill the code handling message
+  // We must keep the compositor parent alive until the code handling message
   // reception is finished on this thread.
   mSelfRef = this;
   MessageLoop::current()->PostTask(

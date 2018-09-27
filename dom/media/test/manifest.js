@@ -713,7 +713,7 @@ var gChainingTests = [
   { name:"variable-samplerate.ogg", type:"audio/ogg", links: 1 },
   // Opus decoding in Firefox outputs 48 kHz PCM despite having a different
   // original sample rate, so we can safely play Opus chained media that have
-  // different samplerate accross links.
+  // different samplerate across links.
   { name:"variable-samplerate.opus", type:"audio/ogg; codec=opus", links: 2 },
   // A chained video file. We don't support those, so only one link should be
   // reported.

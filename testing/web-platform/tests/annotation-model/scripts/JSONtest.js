@@ -27,7 +27,7 @@ function JSONtest(params) {
   this.Base = null;         // URI "base" for the test suite being run
   this.TestDir = null;      // URI "base" for the test case being run
   this.Params = null;       // paramaters passed in
-  this.Promise = null;             // master Promise that resolves when intialization is complete
+  this.Promise = null;             // master Promise that resolves when initialization is complete
   this.Properties = null;   // testharness_properties from the opening window
   this.SkipFailures = [];   // list of assertionType values that should be skipped if their test would fail
   this.Test = null;         // test being run

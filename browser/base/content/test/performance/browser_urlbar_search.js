@@ -70,7 +70,7 @@ EXPECTED_REFLOWS_FIRST_OPEN.push(
   }
 );
 
-/* These reflows happen everytime the awesomebar panel opens. */
+/* These reflows happen every time the awesomebar panel opens. */
 const EXPECTED_REFLOWS_SECOND_OPEN = [
   {
     stack: [

@@ -9,7 +9,7 @@ import copy
 
 def loader(kind, path, config, params, loaded_tasks):
     """
-    Load tasks based on the jobs dependant kinds.
+    Load tasks based on the jobs dependent kinds.
 
     The `only-for-build-platforms` kind configuration, if specified, will limit
     the build platforms for which a job will be created. Alternatively there is

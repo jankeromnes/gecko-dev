@@ -243,7 +243,7 @@
 	file: "sunspider-regexp-dna.html",
 	name: "DNA Sequence Counting",
 	origin: ["SunSpider", "http://www2.webkit.org/perf/sunspider-0.9/sunspider.html"],
-	desc: "Counts occurences in a DNA sequence.",
+	desc: "Counts occurrences in a DNA sequence.",
 	category: "SunSpider JavaScript Tests",
 	tags: ["string","regexp"]
 },

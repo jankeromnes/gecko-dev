@@ -38,9 +38,9 @@ ToPossiblyUnconstrainedPixels(nscoord aSize)
   return nsPresContext::AppUnitsToDoubleCSSPixels(aSize);
 }
 
-FlexItem::FlexItem(FlexLine* aParent,
+FlexItem::FlexItem(FlexLine* apparent,
                    const ComputedFlexItemInfo* aItem)
-  : mParent(aParent)
+  : mParent(apparent)
 {
   MOZ_ASSERT(aItem,
     "Should never be instantiated with a null ComputedFlexLineInfo.");

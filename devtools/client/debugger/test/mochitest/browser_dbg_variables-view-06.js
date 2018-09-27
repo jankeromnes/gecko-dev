@@ -4,7 +4,7 @@
  * http://creativecommons.org/publicdomain/zero/1.0/ */
 
 /**
- * Test that Promises get their internal state added as psuedo properties.
+ * Test that Promises get their internal state added as pseudo properties.
  */
 
 const TAB_URL = EXAMPLE_URL + "doc_promise.html";

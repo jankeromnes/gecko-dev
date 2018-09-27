@@ -1076,10 +1076,10 @@ bool WebMDemuxer::GetOffsetForTime(uint64_t aTime, int64_t* aOffset)
 
 
 //WebMTrackDemuxer
-WebMTrackDemuxer::WebMTrackDemuxer(WebMDemuxer* aParent,
+WebMTrackDemuxer::WebMTrackDemuxer(WebMDemuxer* apparent,
                                    TrackInfo::TrackType aType,
                                    uint32_t aTrackNumber)
-  : mParent(aParent)
+  : mParent(apparent)
   , mType(aType)
   , mNeedKeyframe(true)
 {
@@ -1102,7 +1102,7 @@ RefPtr<WebMTrackDemuxer::SeekPromise>
 WebMTrackDemuxer::Seek(const TimeUnit& aTime)
 {
   // Seeks to aTime. Upon success, SeekPromise will be resolved with the
-  // actual time seeked to. Typically the random access point time
+  // actual time sought to. Typically the random access point time
 
   auto seekTime = aTime;
   bool keyframe = false;
@@ -1121,7 +1121,7 @@ WebMTrackDemuxer::Seek(const TimeUnit& aTime)
       return SeekPromise::CreateAndReject(rv, __func__);
     }
 
-    // Check what time we actually seeked to.
+    // Check what time we actually sought to.
     if (mSamples.GetSize() == 0) {
       // We can't determine if the seek succeeded at this stage, so break the
       // loop.

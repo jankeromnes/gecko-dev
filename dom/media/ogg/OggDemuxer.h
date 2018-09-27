@@ -339,7 +339,7 @@ class OggTrackDemuxer
   , public DecoderDoctorLifeLogger<OggTrackDemuxer>
 {
 public:
-  OggTrackDemuxer(OggDemuxer* aParent,
+  OggTrackDemuxer(OggDemuxer* apparent,
                   TrackInfo::TrackType aType,
                   uint32_t aTrackNumber);
 

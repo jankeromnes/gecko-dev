@@ -370,7 +370,7 @@ umsg_format(    const UMessageFormat *fmt,
     va_list    ap;
     int32_t actLen;  
     //argument checking defered to last method call umsg_vformat which
-    //saves time when arguments are valid and we dont care when arguments are not
+    //saves time when arguments are valid and we don't care when arguments are not
     //since we return an error anyway
 
     
@@ -493,7 +493,7 @@ umsg_parse( const UMessageFormat *fmt,
 {
     va_list    ap;
     //argument checking defered to last method call umsg_vparse which
-    //saves time when arguments are valid and we dont care when arguments are not
+    //saves time when arguments are valid and we don't care when arguments are not
     //since we return an error anyway
 
     // start vararg processing

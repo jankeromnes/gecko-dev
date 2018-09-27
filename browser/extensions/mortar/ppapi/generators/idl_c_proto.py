@@ -71,7 +71,7 @@ class CGen(object):
   #
   # TypeMap modifies how an object is stored or passed, for example pointers
   # are passed as 'const' if they are 'in' parameters, and structures are
-  # preceeded by the keyword 'struct' as well as using a pointer.
+  # preceded by the keyword 'struct' as well as using a pointer.
   #
   TypeMap = {
     'Array': {
@@ -291,7 +291,7 @@ class CGen(object):
       rel = typeref.first_release[release]
       name = 'struct %s%s' % (prefix, self.GetStructName(typeref, rel, True))
 
-    # For structures, preceed with 'struct' or 'union' as appropriate
+    # For structures, precede with 'struct' or 'union' as appropriate
     elif typeref.IsA('Struct'):
       if typeref.GetProperty('union'):
         name = 'union %s%s' % (prefix, typeref.GetName())

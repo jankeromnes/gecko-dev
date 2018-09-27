@@ -111,14 +111,14 @@ TEST(RegistryPolicyTest, TestKeyAnyAccess) {
         L"Reg_OpenKey open write HKEY_LOCAL_MACHINE software\\microsoft"));
   }
 
-  // Tests subdirectory access on keys where we don't have subdirectory acess.
+  // Tests subdirectory access on keys where we don't have subdirectory access.
   EXPECT_EQ(SBOX_TEST_DENIED, runner.RunTest(L"Reg_OpenKey create read "
       L"HKEY_LOCAL_MACHINE software\\microsoft\\Windows"));
 
   EXPECT_EQ(SBOX_TEST_DENIED, runner.RunTest(L"Reg_OpenKey open read "
       L"HKEY_LOCAL_MACHINE software\\microsoft\\windows"));
 
-  // Tests to see if we can create keys where we dont have subdirectory access.
+  // Tests to see if we can create keys where we don't have subdirectory access.
   // This is denied.
   EXPECT_EQ(SBOX_TEST_DENIED, runner.RunTest(L"Reg_OpenKey create write "
       L"HKEY_LOCAL_MACHINE software\\Microsoft\\google_unit_tests"));
@@ -164,7 +164,7 @@ TEST(RegistryPolicyTest, TestKeyReadOnlyAccess) {
                              TargetPolicy::REG_ALLOW_READONLY,
                              L"HKEY_LOCAL_MACHINE\\Software\\Policies\\*"));
 
-  // Tests subdirectory acess on keys where we have subdirectory acess.
+  // Tests subdirectory access on keys where we have subdirectory access.
   EXPECT_EQ(SBOX_TEST_SUCCEEDED, runner.RunTest(L"Reg_OpenKey create read "
       L"HKEY_LOCAL_MACHINE software\\Policies\\microsoft"));
 
@@ -271,7 +271,7 @@ TEST(RegistryPolicyTest, TestKeyReadOnlyHKCU) {
   EXPECT_EQ(SBOX_TEST_SUCCEEDED, runner.RunTest(
       L"Reg_OpenKey open read HKEY_CURRENT_USER software"));
 
-  // Tests write access where we only have read-only acess.
+  // Tests write access where we only have read-only access.
   EXPECT_EQ(SBOX_TEST_DENIED, runner.RunTest(
       L"Reg_OpenKey create write HKEY_CURRENT_USER software"));
 

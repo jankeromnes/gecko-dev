@@ -15,7 +15,7 @@ namespace mozilla {
 namespace dom {
 
 
-// A CSSFontFaceRuleDecl is always embeded in a CSSFontFaceRule.
+// A CSSFontFaceRuleDecl is always embedded in a CSSFontFaceRule.
 class CSSFontFaceRule;
 class CSSFontFaceRuleDecl final : public nsICSSDeclaration
 {

@@ -243,7 +243,7 @@ DataTransferItem::GetType(nsAString& aType)
 
   // If we do have a File, then we need to look at our File object to discover
   // what its mime type is. We can use the System Principal here, as this
-  // information should be avaliable even if the data is currently inaccessible
+  // information should be available even if the data is currently inaccessible
   // (for example during a dragover).
   //
   // XXX: This seems inefficient, as it seems like we should be able to get this

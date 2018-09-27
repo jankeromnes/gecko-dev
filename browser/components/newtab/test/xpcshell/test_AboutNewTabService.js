@@ -194,7 +194,7 @@ add_task(function test_locale() {
 });
 
 /**
- * Tests reponse to updates to prefs
+ * Tests response to updates to prefs
  */
 add_task(async function test_updates() {
    // Simulates a "cold-boot" situation, with some pref already set before testing a series

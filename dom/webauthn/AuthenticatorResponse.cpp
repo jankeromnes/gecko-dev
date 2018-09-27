@@ -34,8 +34,8 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(AuthenticatorResponse)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-AuthenticatorResponse::AuthenticatorResponse(nsPIDOMWindowInner* aParent)
-  : mParent(aParent)
+AuthenticatorResponse::AuthenticatorResponse(nsPIDOMWindowInner* apparent)
+  : mParent(apparent)
   , mClientDataJSONCachedObj(nullptr)
 {
   mozilla::HoldJSObjects(this);

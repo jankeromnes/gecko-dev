@@ -5215,16 +5215,16 @@ static bool
 CheckFor(FunctionValidator& f, ParseNode* forStmt, const LabelVector* labels = nullptr)
 {
     MOZ_ASSERT(forStmt->isKind(ParseNodeKind::For));
-    ParseNode* forHead = BinaryLeft(forStmt);
+    ParseNode* forehead = BinaryLeft(forStmt);
     ParseNode* body = BinaryRight(forStmt);
 
-    if (!forHead->isKind(ParseNodeKind::ForHead)) {
-        return f.fail(forHead, "unsupported for-loop statement");
+    if (!forHead->isKind(ParseNodeKind::forehead)) {
+        return f.fail(forehead, "unsupported for-loop statement");
     }
 
-    ParseNode* maybeInit = TernaryKid1(forHead);
-    ParseNode* maybeCond = TernaryKid2(forHead);
-    ParseNode* maybeInc = TernaryKid3(forHead);
+    ParseNode* maybeInit = TernaryKid1(forehead);
+    ParseNode* maybeCond = TernaryKid2(forehead);
+    ParseNode* maybeInc = TernaryKid3(forehead);
 
     // A for-loop `for (#init; #cond; #inc) #body` is equivalent to:
     // (block                                               // depth X

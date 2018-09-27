@@ -51,7 +51,7 @@ public:
   virtual bool HasScriptContent() override;
 
   // nsIContent specializations:
-  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent) override;
   virtual nsresult AfterSetAttr(int32_t aNamespaceID, nsAtom* aName,
                                 const nsAttrValue* aValue,

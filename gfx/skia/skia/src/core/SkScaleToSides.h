@@ -44,7 +44,7 @@ public:
             // than limit, but only by one ULP.
             float newMaxRadius = (float)(limit - newMinRadius);
 
-            // The total sum of newMinRadius and newMaxRadius can be upto 1.5 ULPs off. If the
+            // The total sum of newMinRadius and newMaxRadius can be up to 1.5 ULPs off. If the
             // sum is greater than the limit then newMaxRadius may have to be reduced twice.
             // Note: nextafterf is a c99 call and should be std::nextafter, but this is not
             // implemented in the GCC ARM compiler.

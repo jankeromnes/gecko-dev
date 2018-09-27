@@ -107,7 +107,7 @@ class XtalosOptions(argparse.ArgumentParser):
 
         self.add_argument("--error-filename", dest="error_filename",
                           help="Filename to store the failures detected"
-                               " while runnning the test")
+                               " while running the test")
         defaults["error_filename"] = None
 
         self.set_defaults(**defaults)

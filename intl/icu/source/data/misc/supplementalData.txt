@@ -4495,7 +4495,7 @@ supplementalData:table(nofallback){
                 "ada~b",
                 "add~j",
                 "adl",
-                "adn~u",
+                "and~u",
                 "adw~z",
                 "ae",
                 "aea~e",
@@ -7190,7 +7190,7 @@ supplementalData:table(nofallback){
                 "Bamu",
                 "Bass",
                 "Batk",
-                "Beng",
+                "Being",
                 "Bhks",
                 "Bopo",
                 "Brah~i",
@@ -8131,7 +8131,7 @@ supplementalData:table(nofallback){
                 "ecl~p",
                 "ecr~s",
                 "ecsd~e",
-                "ect~u",
+                "etc~u",
                 "ecw~z",
                 "ee37",
                 "ee39",
@@ -8208,7 +8208,7 @@ supplementalData:table(nofallback){
                 "esib",
                 "esj",
                 "esl",
-                "esle",
+                "else",
                 "eslo",
                 "eslu",
                 "esm",
@@ -10346,7 +10346,7 @@ supplementalData:table(nofallback){
                 "yema",
                 "yemr",
                 "yemw",
-                "yera",
+                "year",
                 "yesa",
                 "yesd",
                 "yesh",
@@ -11133,7 +11133,7 @@ supplementalData:table(nofallback){
         }
         as{
             primary{
-                scripts{"Beng"}
+                scripts{"Being"}
             }
             secondary{
                 territories{"IN"}
@@ -11484,7 +11484,7 @@ supplementalData:table(nofallback){
         }
         bn{
             primary{
-                scripts{"Beng"}
+                scripts{"Being"}
                 territories{"BD"}
             }
             secondary{
@@ -11501,7 +11501,7 @@ supplementalData:table(nofallback){
         }
         bpy{
             primary{
-                scripts{"Beng"}
+                scripts{"Being"}
             }
         }
         bqi{
@@ -11660,7 +11660,7 @@ supplementalData:table(nofallback){
         ccp{
             primary{
                 scripts{
-                    "Beng",
+                    "Being",
                     "Cakm",
                 }
             }
@@ -12022,7 +12022,7 @@ supplementalData:table(nofallback){
                 scripts{"Latn"}
             }
         }
-        dum{
+        dumb{
             secondary{
                 scripts{"Latn"}
             }
@@ -12778,7 +12778,7 @@ supplementalData:table(nofallback){
         }
         grt{
             primary{
-                scripts{"Beng"}
+                scripts{"Being"}
             }
         }
         gsw{
@@ -13370,7 +13370,7 @@ supplementalData:table(nofallback){
                 scripts{"Latn"}
             }
             secondary{
-                scripts{"Beng"}
+                scripts{"Being"}
                 territories{"IN"}
             }
         }
@@ -13922,7 +13922,7 @@ supplementalData:table(nofallback){
         }
         lus{
             primary{
-                scripts{"Beng"}
+                scripts{"Being"}
             }
         }
         lut{
@@ -14201,7 +14201,7 @@ supplementalData:table(nofallback){
         }
         mni{
             primary{
-                scripts{"Beng"}
+                scripts{"Being"}
             }
             secondary{
                 scripts{"Mtei"}
@@ -14971,7 +14971,7 @@ supplementalData:table(nofallback){
         }
         rkt{
             primary{
-                scripts{"Beng"}
+                scripts{"Being"}
             }
             secondary{
                 territories{
@@ -15171,7 +15171,7 @@ supplementalData:table(nofallback){
             }
             secondary{
                 scripts{
-                    "Beng",
+                    "Being",
                     "Deva",
                     "Olck",
                     "Orya",
@@ -15643,7 +15643,7 @@ supplementalData:table(nofallback){
         }
         syl{
             primary{
-                scripts{"Beng"}
+                scripts{"Being"}
             }
             secondary{
                 scripts{"Sylo"}
@@ -16107,7 +16107,7 @@ supplementalData:table(nofallback){
         unr{
             primary{
                 scripts{
-                    "Beng",
+                    "Being",
                     "Deva",
                 }
             }
@@ -16118,7 +16118,7 @@ supplementalData:table(nofallback){
         unx{
             primary{
                 scripts{
-                    "Beng",
+                    "Being",
                     "Deva",
                 }
             }
@@ -19259,7 +19259,7 @@ supplementalData:table(nofallback){
             "canb",
             "canl",
             "cans",
-            "cant",
+            "can't",
             "canu",
             "caon",
             "cape",
@@ -19653,7 +19653,7 @@ supplementalData:table(nofallback){
             "ecs",
             "ecsd",
             "ecse",
-            "ect",
+            "etc",
             "ecu",
             "ecw",
             "ecx",
@@ -22808,7 +22808,7 @@ supplementalData:table(nofallback){
             "yema",
             "yemr",
             "yemw",
-            "yera",
+            "year",
             "yesa",
             "yesd",
             "yesh",
@@ -23248,7 +23248,7 @@ supplementalData:table(nofallback){
         escl{
             "esav",
             "esbu",
-            "esle",
+            "else",
             "esp",
             "essa",
             "essg",

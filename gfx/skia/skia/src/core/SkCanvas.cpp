@@ -1415,7 +1415,7 @@ void SkCanvas::onClipRect(const SkRect& rect, SkClipOp op, ClipEdgeStyle edgeSty
 void SkCanvas::androidFramework_setDeviceClipRestriction(const SkIRect& rect) {
     fClipRestrictionRect = rect;
     if (fClipRestrictionRect.isEmpty()) {
-        // we notify the device, but we *dont* resolve deferred saves (since we're just
+        // we notify the device, but we *don't* resolve deferred saves (since we're just
         // removing the restriction if the rect is empty. how I hate this api.
         FOR_EACH_TOP_DEVICE(device->androidFramework_setDeviceClipRestriction(&fClipRestrictionRect));
     } else {

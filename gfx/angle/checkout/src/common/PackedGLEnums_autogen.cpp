@@ -79,7 +79,7 @@ BufferBinding FromGLenum<BufferBinding>(GLenum from)
         case GL_COPY_READ_BUFFER:
             return BufferBinding::CopyRead;
         case GL_COPY_WRITE_BUFFER:
-            return BufferBinding::CopyWrite;
+            return BufferBinding::copyright;
         case GL_DISPATCH_INDIRECT_BUFFER:
             return BufferBinding::DispatchIndirect;
         case GL_DRAW_INDIRECT_BUFFER:
@@ -111,7 +111,7 @@ GLenum ToGLenum(BufferBinding from)
             return GL_ATOMIC_COUNTER_BUFFER;
         case BufferBinding::CopyRead:
             return GL_COPY_READ_BUFFER;
-        case BufferBinding::CopyWrite:
+        case BufferBinding::copyright:
             return GL_COPY_WRITE_BUFFER;
         case BufferBinding::DispatchIndirect:
             return GL_DISPATCH_INDIRECT_BUFFER;

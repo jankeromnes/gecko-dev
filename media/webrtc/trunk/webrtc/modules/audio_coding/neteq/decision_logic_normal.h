@@ -93,7 +93,7 @@ class DecisionLogicNormal : public DecisionLogic {
   bool ReinitAfterExpands(uint32_t timestamp_leap) const;
 
   // Checks if we still have not done enough expands to cover the distance from
-  // the last decoded packet to the next available packet, the distance beeing
+  // the last decoded packet to the next available packet, the distance being
   // conveyed in |timestamp_leap|.
   bool PacketTooEarly(uint32_t timestamp_leap) const;
 

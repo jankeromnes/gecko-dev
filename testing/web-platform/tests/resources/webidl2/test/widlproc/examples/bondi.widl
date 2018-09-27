@@ -71,7 +71,7 @@ module bondi {
 	 */
     [Callback=FunctionOnly, NoInterfaceObject] interface RequestFeatureSuccessCallback {
        /**
-	    * \brief Method invoked upon a succesful requestFeature invocation
+	    * \brief Method invoked upon a successful requestFeature invocation
 	    *
 	    * \param ob Object implementing the JavaScript API associated with the requested Feature.
 	    */

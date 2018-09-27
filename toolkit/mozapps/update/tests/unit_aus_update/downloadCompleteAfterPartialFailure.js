@@ -3,9 +3,9 @@
  */
 
 const WindowWatcher = {
-  getNewPrompter: function WW_getNewPrompter(aParent) {
-    Assert.ok(!aParent,
-              "the aParent parameter should not be defined");
+  getNewPrompter: function WW_getNewPrompter(apparent) {
+    Assert.ok(!apparent,
+              "the apparent parameter should not be defined");
     return {
       alert: function WW_GNP_alert(aTitle, aText) {
         let title = getString("updaterIOErrorTitle");

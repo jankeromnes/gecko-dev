@@ -212,7 +212,7 @@ impl DeviceInfoRef {
         self.get_ref().latency_lo
     }
 
-    /// Higest possible latency in frames.
+    /// Highest possible latency in frames.
     pub fn latency_hi(&self) -> u32 {
         self.get_ref().latency_hi
     }

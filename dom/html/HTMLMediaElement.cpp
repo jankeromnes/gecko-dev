@@ -1340,7 +1340,7 @@ public:
     NS_ASSERTION(aChannel == mChannel, "Channels should match!");
     mChannel = aNewChannel;
 
-    // Handle forwarding of Range header so that the intial detection
+    // Handle forwarding of Range header so that the initial detection
     // of seeking support (via result code 206) works across redirects.
     nsCOMPtr<nsIHttpChannel> http = do_QueryInterface(aChannel);
     NS_ENSURE_STATE(http);
@@ -4539,11 +4539,11 @@ HTMLMediaElement::AfterMaybeChangeAttr(int32_t aNamespaceID,
 
 nsresult
 HTMLMediaElement::BindToTree(nsIDocument* aDocument,
-                             nsIContent* aParent,
+                             nsIContent* apparent,
                              nsIContent* aBindingParent)
 {
   nsresult rv = nsGenericHTMLElement::BindToTree(
-    aDocument, aParent, aBindingParent);
+    aDocument, apparent, aBindingParent);
 
   if (nsContentUtils::IsUAWidgetEnabled() && IsInComposedDoc()) {
     // Construct Shadow Root so web content can be hidden in the DOM.
@@ -5761,7 +5761,7 @@ HTMLMediaElement::SeekCompleted()
     mTextTrackManager->DidSeek();
   }
   FireTimeUpdate(false);
-  DispatchAsyncEvent(NS_LITERAL_STRING("seeked"));
+  DispatchAsyncEvent(NS_LITERAL_STRING("sought"));
   // We changed whether we're seeking so we need to AddRemoveSelfReference
   AddRemoveSelfReference();
   if (mCurrentPlayRangeStart == -1.0) {

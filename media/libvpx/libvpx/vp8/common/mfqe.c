@@ -11,7 +11,7 @@
 /* MFQE: Multiframe Quality Enhancement
  * In rate limited situations keyframes may cause significant visual artifacts
  * commonly referred to as "popping." This file implements a postproccesing
- * algorithm which blends data from the preceeding frame when there is no
+ * algorithm which blends data from the preceding frame when there is no
  * motion and the q from the previous frame is lower which indicates that it is
  * higher quality.
  */

@@ -18,8 +18,8 @@ class TestCImplementedInterface : public TestJSImplInterface
 public:
   TestCImplementedInterface(JS::Handle<JSObject*> aJSImpl,
                             JS::Handle<JSObject*> aJSImplGlobal,
-                            nsIGlobalObject* aParent)
-    : TestJSImplInterface(aJSImpl, aJSImplGlobal, aParent)
+                            nsIGlobalObject* apparent)
+    : TestJSImplInterface(aJSImpl, aJSImplGlobal, apparent)
   {}
 };
 
@@ -27,7 +27,7 @@ class TestCImplementedInterface2 : public nsISupports,
                                    public nsWrapperCache
 {
 public:
-  explicit TestCImplementedInterface2(nsIGlobalObject* aParent)
+  explicit TestCImplementedInterface2(nsIGlobalObject* apparent)
   {}
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(TestCImplementedInterface2)

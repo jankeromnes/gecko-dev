@@ -112,7 +112,7 @@ class ProxyObject : public ShapedObject
 
     static bool isValidProxyClass(const Class* clasp) {
         // Since we can take classes from the outside, make sure that they
-        // are "sane". They have to quack enough like proxies for us to belive
+        // are "sane". They have to quack enough like proxies for us to believe
         // they should be treated as such.
 
         // Proxy classes are not allowed to have call or construct hooks directly. Their

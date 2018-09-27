@@ -10,9 +10,9 @@ pub enum Error {
     Utf8Error(str::Utf8Error),
     /// The output of `rustc -vV` was not in the expected format.
     UnexpectedVersionFormat,
-    /// An error ocurred in parsing a `VersionReq`.
+    /// An error occurred in parsing a `VersionReq`.
     ReqParseError(semver::ReqParseError),
-    /// An error ocurred in parsing the semver.
+    /// An error occurred in parsing the semver.
     SemVerError(semver::SemVerError),
     /// The pre-release tag is unknown.
     UnknownPreReleaseTag(Identifier),

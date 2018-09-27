@@ -1501,7 +1501,7 @@ function moveToPrevLineEnd(aID, aCaretOffset) {
 }
 
 /**
- * Move the caret to begining of the line.
+ * Move the caret to beginning of the line.
  */
 function moveToLineStart(aID, aCaretOffset) {
   if (MAC) {
@@ -1518,7 +1518,7 @@ function moveToLineStart(aID, aCaretOffset) {
 }
 
 /**
- * Move the caret to begining of the text.
+ * Move the caret to beginning of the text.
  */
 function moveToTextStart(aID) {
   if (MAC) {
@@ -1643,7 +1643,7 @@ function invokerChecker(aEventType, aTargetOrFunc, aTargetFuncArg, aIsAsync) {
 }
 
 /**
- * event checker that forces preceeding async events to happen before this
+ * event checker that forces preceding async events to happen before this
  * checker.
  */
 function orderChecker() {

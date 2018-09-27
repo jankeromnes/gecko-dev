@@ -44,7 +44,7 @@
 //
 // Notes:
 //   - NOT every feature is a candidate to be controlled by this mechanism as
-//     it may require negotation between involved parties (e.g. SDP).
+//     it may require negotiation between involved parties (e.g. SDP).
 //
 // TODO(andresp): since chrome --force-fieldtrials does not marks the trial
 //     as active it does not gets propaged to renderer process. For now one

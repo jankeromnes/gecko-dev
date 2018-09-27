@@ -301,9 +301,9 @@ bool app::platform(CJS_Runtime* pRuntime,
   CPDFSDK_FormFillEnvironment* pFormFillEnv = pRuntime->GetFormFillEnv();
   if (!pFormFillEnv)
     return false;
-  CFX_WideString platfrom = pFormFillEnv->GetPlatform();
-  if (!platfrom.IsEmpty()) {
-    vp << platfrom;
+  CFX_WideString platform = pFormFillEnv->GetPlatform();
+  if (!platform.IsEmpty()) {
+    vp << platform;
     return true;
   }
 #endif

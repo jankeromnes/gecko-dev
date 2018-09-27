@@ -4385,7 +4385,7 @@ function(in_window)
         }
         // #endregion 
 
-        // #region Get neccessary values from internal fields for current certificate 
+        // #region Get necessary values from internal fields for current certificate 
         var publicKeyInfo_schema = this.subjectPublicKeyInfo.toSchema();
         var publicKeyInfo_buffer = publicKeyInfo_schema.toBER(false);
         var publicKeyInfo_view = new Uint8Array(publicKeyInfo_buffer);
@@ -6834,7 +6834,7 @@ function(in_window)
                     /// <summary>Compare two directoryName values</summary>
                     /// <param name="name" type="in_window.org.pkijs.simpl.RDN">directoryName from name</param>
                     /// <param name="constraint" type="in_window.org.pkijs.simpl.RDN">Constraint for directoryName from name</param>
-                    /// <param name="any" type="Boolean">Boolean flag - should be comparision interrupted after first match or we need to match all "constraints" parts</param>
+                    /// <param name="any" type="Boolean">Boolean flag - should be comparison interrupted after first match or we need to match all "constraints" parts</param>
                     /// <returns type="Boolean">Boolean result - valid or invalid the "name" against the "constraint"</returns>
 
                     // #region Initial check 
@@ -6955,7 +6955,7 @@ function(in_window)
                     {
                         policy_result.result = false;
                         policy_result.result_code = 21;
-                        policy_result.result_message = "No neccessary name form found";
+                        policy_result.result_message = "No necessary name form found";
 
                         return new Promise(function(resolve, reject)
                         {

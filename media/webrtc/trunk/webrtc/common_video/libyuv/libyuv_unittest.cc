@@ -125,7 +125,7 @@ TEST_F(TestLibYuv, ConvertTest) {
   }
   psnr = I420PSNR(*orig_frame_->video_frame_buffer(), *res_i420_buffer);
 
-  // Optimization Speed- quality trade-off => 45 dB only (platform dependant).
+  // Optimization Speed- quality trade-off => 45 dB only (platform dependent).
   EXPECT_GT(ceil(psnr), 44);
   j++;
 

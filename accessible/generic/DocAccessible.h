@@ -308,17 +308,17 @@ public:
   /**
    * Returns aria-owns seized child at the given index.
    */
-  Accessible* ARIAOwnedAt(Accessible* aParent, uint32_t aIndex) const
+  Accessible* ARIAOwnedAt(Accessible* apparent, uint32_t aIndex) const
   {
-    nsTArray<RefPtr<Accessible> >* children = mARIAOwnsHash.Get(aParent);
+    nsTArray<RefPtr<Accessible> >* children = mARIAOwnsHash.Get(apparent);
     if (children) {
       return children->SafeElementAt(aIndex);
     }
     return nullptr;
   }
-  uint32_t ARIAOwnedCount(Accessible* aParent) const
+  uint32_t ARIAOwnedCount(Accessible* apparent) const
   {
-    nsTArray<RefPtr<Accessible> >* children = mARIAOwnsHash.Get(aParent);
+    nsTArray<RefPtr<Accessible> >* children = mARIAOwnsHash.Get(apparent);
     return children ? children->Length() : 0;
   }
 

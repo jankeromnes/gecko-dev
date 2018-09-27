@@ -277,7 +277,7 @@ class FileCopier(FileRegistry):
         registered are removed and empty directories are deleted. In
         addition, all directory symlinks in the destination directory
         are deleted: this is a conservative approach to ensure that we
-        never accidently write files into a directory that is not the
+        never accidentally write files into a directory that is not the
         destination directory. In the worst case, we might have a
         directory symlink in the object directory to the source
         directory.

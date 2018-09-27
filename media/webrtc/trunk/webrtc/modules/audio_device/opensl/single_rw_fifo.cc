@@ -108,7 +108,7 @@ int8_t* SingleRwFifo::Pop() {
   int8_t* ret_val = NULL;
   if (size() <= 0) {
     // Size can be queried outside of the Pop function. The caller is assumed
-    // to ensure that Pop will be successfull before calling it.
+    // to ensure that Pop will be successful before calling it.
     assert(false);
     return ret_val;
   }

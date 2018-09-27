@@ -606,10 +606,10 @@ static const ElementInfo kElements[eHTMLTag_userdefined] = {
 };
 
 bool
-HTMLEditUtils::CanContain(int32_t aParent, int32_t aChild)
+HTMLEditUtils::CanContain(int32_t apparent, int32_t aChild)
 {
-  NS_ASSERTION(aParent > eHTMLTag_unknown && aParent <= eHTMLTag_userdefined,
-               "aParent out of range!");
+  NS_ASSERTION(apparent > eHTMLTag_unknown && apparent <= eHTMLTag_userdefined,
+               "apparent out of range!");
   NS_ASSERTION(aChild > eHTMLTag_unknown && aChild <= eHTMLTag_userdefined,
                "aChild out of range!");
 
@@ -626,7 +626,7 @@ HTMLEditUtils::CanContain(int32_t aParent, int32_t aChild)
 #endif
 
   // Special-case button.
-  if (aParent == eHTMLTag_button) {
+  if (apparent == eHTMLTag_button) {
     static const nsHTMLTag kButtonExcludeKids[] = {
       eHTMLTag_a,
       eHTMLTag_fieldset,
@@ -650,13 +650,13 @@ HTMLEditUtils::CanContain(int32_t aParent, int32_t aChild)
     return false;
   }
 
-  // Bug #67007, dont strip userdefined tags.
+  // Bug #67007, don't strip userdefined tags.
   if (aChild == eHTMLTag_userdefined) {
     return true;
   }
 
-  const ElementInfo& parent = kElements[aParent - 1];
-  if (aParent == aChild) {
+  const ElementInfo& parent = kElements[apparent - 1];
+  if (apparent == aChild) {
     return parent.mCanContainSelf;
   }
 

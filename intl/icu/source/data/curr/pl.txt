@@ -168,7 +168,7 @@ pl{
         }
         BRN{
             "BRN",
-            "nowe cruzado brazylijskie",
+            "now cruzado brazylijskie",
         }
         BRR{
             "BRR",
@@ -1223,7 +1223,7 @@ pl{
             other{"kwanza angolańska (1977–1990)"}
         }
         AON{
-            few{"nowe kwanzy angolańskie (1990–2000)"}
+            few{"now kwanzy angolańskie (1990–2000)"}
             many{"nowych kwanz angolańskich (1990–2000)"}
             one{"nowa kwanza angolańska (1990–2000)"}
             other{"nowa kwanza angolańska (1990–2000)"}
@@ -1631,7 +1631,7 @@ pl{
             other{"rupii indonezyjskiej"}
         }
         ILS{
-            few{"nowe szekle izraelskie"}
+            few{"now szekle izraelskie"}
             many{"nowych szekli izraelskich"}
             one{"nowy szekel izraelski"}
             other{"nowego szekla izraelskiego"}
@@ -2183,7 +2183,7 @@ pl{
             other{"dolara Trynidadu i Tobago"}
         }
         TWD{
-            few{"nowe dolary tajwańskie"}
+            few{"now dolary tajwańskie"}
             many{"nowych dolarów tajwańskich"}
             one{"nowy dolar tajwański"}
             other{"nowego dolara tajwańskiego"}

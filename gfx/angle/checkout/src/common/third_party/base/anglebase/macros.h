@@ -3,7 +3,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 //
-// macros.h: Compatiblity hacks for importing Chromium's MRUCache.
+// macros.h: Compatibility hacks for importing Chromium's MRUCache.
 
 #ifndef ANGLEBASE_MACROS_H_
 #define ANGLEBASE_MACROS_H_

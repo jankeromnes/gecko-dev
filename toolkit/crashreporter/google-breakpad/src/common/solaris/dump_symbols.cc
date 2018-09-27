@@ -78,7 +78,7 @@ struct SymbolEntry {
   GElf_Word size;
 };
 
-// Infomation of a line.
+// Information of a line.
 struct LineInfo {
   // Offset from start of the function.
   // Load from stab symbol.
@@ -152,7 +152,7 @@ const char *kSymtabName = ".symtab";
 // Strtab section name.
 const char *kStrtabName = ".strtab";
 
-// Default buffer lenght for demangle.
+// Default buffer length for demangle.
 const int demangleLen = 20000;
 
 // Offset to the string table.

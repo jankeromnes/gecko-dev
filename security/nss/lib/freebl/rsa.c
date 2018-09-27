@@ -77,7 +77,7 @@ typedef struct RSABlindingParamsStr RSABlindingParams;
 */
 struct RSABlindingParamsListStr {
     PZLock *lock;    /* Lock for the list   */
-    PRCondVar *cVar; /* Condidtion Variable */
+    PRCondVar *cVar; /* Condition Variable */
     int waitCount;   /* Number of threads waiting on cVar */
     PRCList head;    /* Pointer to the list */
 };

@@ -1155,7 +1155,7 @@ function selectMenuItem(dbg, index) {
 }
 
 /**
- * Toggles the debugger call stack accordian.
+ * Toggles the debugger call stack accordion.
  *
  * @memberof mochitest/actions
  * @param {Object} dbg

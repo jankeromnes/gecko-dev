@@ -54,10 +54,10 @@ NS_INTERFACE_MAP_END
 static nsCString
 ToCString(const MediaKeySystemConfiguration& aConfig);
 
-MediaKeySystemAccess::MediaKeySystemAccess(nsPIDOMWindowInner* aParent,
+MediaKeySystemAccess::MediaKeySystemAccess(nsPIDOMWindowInner* apparent,
                                            const nsAString& aKeySystem,
                                            const MediaKeySystemConfiguration& aConfig)
-  : mParent(aParent)
+  : mParent(apparent)
   , mKeySystem(aKeySystem)
   , mConfig(aConfig)
 {

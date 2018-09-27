@@ -209,7 +209,7 @@ var gatt_errors_tests = [{
 }, {
   testName: 'GATT Error: Not Paired.',
   uuid: errorUUID(0xA7),
-  // TODO(ortuno): Change to InsufficientAuthenticationError or similiar
+  // TODO(ortuno): Change to InsufficientAuthenticationError or similar
   // once https://github.com/WebBluetoothCG/web-bluetooth/issues/137 is
   // resolved.
   error: new DOMException(

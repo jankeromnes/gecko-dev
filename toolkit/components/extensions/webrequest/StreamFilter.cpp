@@ -33,14 +33,14 @@ namespace extensions {
  * Initialization
  *****************************************************************************/
 
-StreamFilter::StreamFilter(nsIGlobalObject* aParent,
+StreamFilter::StreamFilter(nsIGlobalObject* apparent,
                            uint64_t aRequestId,
                            const nsAString& aAddonId)
-  : mParent(aParent)
+  : mParent(apparent)
   , mChannelId(aRequestId)
   , mAddonId(NS_Atomize(aAddonId))
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   Connect();
 };

@@ -17,7 +17,7 @@ use writer::config::EmitterConfig;
 /// An error which may be returned by `XmlWriter` when writing XML events.
 #[derive(Debug)]
 pub enum EmitterError {
-    /// An I/O error occured in the underlying `Write` instance.
+    /// An I/O error occurred in the underlying `Write` instance.
     Io(io::Error),
 
     /// Document declaration has already been written to the output stream.

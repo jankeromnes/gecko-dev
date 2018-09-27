@@ -100,7 +100,7 @@ public:
 
     bool IsConnected()
     {
-        // This funtion can be called in both main thread and compositor thread.
+        // This function can be called in both main thread and compositor thread.
         MutexAutoLock lock(mHandlerMutex);
         return (mHandlers.Length() != 0) ? true : false;
     }
@@ -1486,7 +1486,7 @@ LayerScopeWebSocketManager::SocketHandler::ApplyMask(uint32_t aMask,
     }
 
     // Optimally we want to apply the mask 32 bits at a time,
-    // but the buffer might not be alligned. So we first deal with
+    // but the buffer might not be aligned. So we first deal with
     // 0 to 3 bytes of preamble individually
     while (aLen && (reinterpret_cast<uintptr_t>(aData) & 3)) {
         *aData ^= aMask >> 24;

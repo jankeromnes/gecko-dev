@@ -307,7 +307,7 @@ void DeallocateTextureClientSyncProxy(TextureDeallocParams params,
 
 /// The logic for synchronizing a TextureClient's deallocation goes here.
 ///
-/// This funciton takes care of dispatching work to the right thread using
+/// This function takes care of dispatching work to the right thread using
 /// a synchronous proxy if needed, and handles client/host deallocation.
 void
 DeallocateTextureClient(TextureDeallocParams params)

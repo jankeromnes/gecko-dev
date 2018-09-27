@@ -257,10 +257,10 @@ HLSDemuxer::~HLSDemuxer()
   mInitPromise.RejectIfExists(NS_ERROR_DOM_MEDIA_CANCELED, __func__);
 }
 
-HLSTrackDemuxer::HLSTrackDemuxer(HLSDemuxer* aParent,
+HLSTrackDemuxer::HLSTrackDemuxer(HLSDemuxer* apparent,
                                  TrackInfo::TrackType aType,
                                  UniquePtr<TrackInfo> aTrackInfo)
-  : mParent(aParent)
+  : mParent(apparent)
   , mType(aType)
   , mMutex("HLSTrackDemuxer")
   , mTrackInfo(std::move(aTrackInfo))

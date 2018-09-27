@@ -159,12 +159,12 @@ SVGAnimationElement::GetSimpleDuration(ErrorResult& rv)
 
 nsresult
 SVGAnimationElement::BindToTree(nsIDocument* aDocument,
-                                nsIContent* aParent,
+                                nsIContent* apparent,
                                 nsIContent* aBindingParent)
 {
   MOZ_ASSERT(!mHrefTarget.get(),
              "Shouldn't have href-target yet (or it should've been cleared)");
-  nsresult rv = SVGAnimationElementBase::BindToTree(aDocument, aParent,
+  nsresult rv = SVGAnimationElementBase::BindToTree(aDocument, apparent,
                                                     aBindingParent);
   NS_ENSURE_SUCCESS(rv,rv);
 

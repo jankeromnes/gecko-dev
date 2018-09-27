@@ -570,7 +570,7 @@ var CloudStorageInternal = {
    */
   _checkIfAssetExists(path) {
     return OS.File.exists(path).catch(err => {
-      Cu.reportError(`Couldn't check existance of ${path}`, err);
+      Cu.reportError(`Couldn't check existence of ${path}`, err);
       return false;
     });
   },

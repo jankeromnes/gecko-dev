@@ -236,7 +236,7 @@ var pktApi = (function() {
     *                        A function to be called if the request succeeds.
     *      - {function(Error errorThrown,  XMLHttpRequest xhr) | undefined} error:
     *                       A function to be called if the request fails.
-    * @return {Boolean} Returns Boolean whether the api call started sucessfully
+    * @return {Boolean} Returns Boolean whether the api call started successfully
     *
     */
     function apiRequest(options) {
@@ -318,7 +318,7 @@ var pktApi = (function() {
      * @param {string} url     URL of the link
      * @param {Object | undefined} options Can provide a string-based title, a
      *                                     `success` callback and an `error` callback.
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function addLink(url, options) {
 
@@ -375,7 +375,7 @@ var pktApi = (function() {
      * Get a preview for saved URL
      * @param {string} url     URL of the link
      * @param {Object | undefined} options Can provide a `success` callback and an `error` callback.
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function getArticleInfo(url, options) {
         return apiRequest({
@@ -396,7 +396,7 @@ var pktApi = (function() {
     /**
      * Request a email for mobile apps
      * @param {Object | undefined} options Can provide a `success` callback and an `error` callback.
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function getMobileDownload(options) {
         return apiRequest({
@@ -419,7 +419,7 @@ var pktApi = (function() {
      * @param  {Object | undefined} options Can provide an actionInfo object with
      *                                      further data to send to the API. Can
      *                                      have success and error callbacks
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function deleteItem(itemId, options) {
         var action = {
@@ -435,7 +435,7 @@ var pktApi = (function() {
      * @param  {Object | undefined} options Can provide an actionInfo object with
      *                                      further data to send to the API. Can
      *                                      have success and error callbacks
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function archiveItem(itemId, options) {
         var action = {
@@ -453,7 +453,7 @@ var pktApi = (function() {
      *                                       with further data to send to the
      *                                       API. Can have success and error
      *                                       callbacks
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function sendAction(action, options) {
         // Options can have an 'actionInfo' object. This actionInfo object gets
@@ -469,7 +469,7 @@ var pktApi = (function() {
      * removing of items via the API
      * @param  {Array} actions Array of action objects
      * @param  {Object | undefined} options Can have success and error callbacks
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function sendActions(actions, options) {
         return apiRequest({
@@ -495,7 +495,7 @@ var pktApi = (function() {
      * @param {Object | undefined} options Can provide an actionInfo object with
      *                                     further data to send to the API. Can
      *                                     have success and error callbacks
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function addTagsToItem(itemId, tags, options) {
         return addTags({item_id: itemId}, tags, options);
@@ -509,7 +509,7 @@ var pktApi = (function() {
      * @param {Object} options Can provide an actionInfo object with further
      *                         data to send to the API. Can have success and error
      *                         callbacks
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function addTagsToURL(url, tags, options) {
         return addTags({url}, tags, options);
@@ -523,7 +523,7 @@ var pktApi = (function() {
      * @param {Object | undefined} options Can provide an actionInfo object with
      *                                     further data to send to the API. Can
      *                                     have success and error callbacks
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function addTags(actionPart, tags, options) {
         // Tags add action
@@ -623,7 +623,7 @@ var pktApi = (function() {
      * @param  {Object | undefined} options Can provide an actionInfo object
      *                                      with further data to send to the API.
      *                                      Can have success and error callbacks
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function getSuggestedTagsForItem(itemId, options) {
         return getSuggestedTags({item_id: itemId}, options);
@@ -635,7 +635,7 @@ var pktApi = (function() {
      * @param {Object} options Can provide an actionInfo object with further
      *                         data to send to the API. Can have success and error
      *                         callbacks
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function getSuggestedTagsForURL(url, options) {
         return getSuggestedTags({url}, options);
@@ -643,7 +643,7 @@ var pktApi = (function() {
 
     /**
      * Helper function to get suggested tags
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function getSuggestedTags(data, options) {
 
@@ -662,7 +662,7 @@ var pktApi = (function() {
 
     /**
      * Helper function to get a user's pocket stories
-     * @return {Boolean} Returns Boolean whether the api call started sucessfully
+     * @return {Boolean} Returns Boolean whether the api call started successfully
      */
     function retrieve(data = {}, options = {}) {
         const requestData = Object.assign({}, data, {access_token: getAccessToken()});

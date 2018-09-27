@@ -844,7 +844,7 @@ var gCrashManager;
  * from the crash manager for performance reasons: since all crash metadata
  * needs to be loaded into memory for access, we wish to easily dispose of all
  * associated memory when this data is no longer needed. Having an isolated
- * object whose references can easily be lost faciliates that simple disposal.
+ * object whose references can easily be lost facilitates that simple disposal.
  *
  * When metadata is updated, the caller must explicitly persist the changes
  * to disk. This prevents excessive I/O during updates.

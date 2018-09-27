@@ -4,7 +4,7 @@
 "use strict";
 
 // Test for following NegativeDelayPath component works.
-// * element existance
+// * element existence
 // * path
 
 const TEST_DATA = [

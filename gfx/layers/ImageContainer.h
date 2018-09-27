@@ -692,7 +692,7 @@ private:
   RefPtr<BufferRecycleBin> mRecycleBin;
 
   // This member points to an ImageClient if this ImageContainer was
-  // sucessfully created with ENABLE_ASYNC, or points to null otherwise.
+  // successfully created with ENABLE_ASYNC, or points to null otherwise.
   // 'unsuccessful' in this case only means that the ImageClient could not
   // be created, most likely because off-main-thread compositing is not enabled.
   // In this case the ImageContainer is perfectly usable, but it will forward

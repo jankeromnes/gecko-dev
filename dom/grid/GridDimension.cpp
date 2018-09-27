@@ -23,12 +23,12 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(GridDimension)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-GridDimension::GridDimension(Grid* aParent)
-  : mParent(aParent)
+GridDimension::GridDimension(Grid* apparent)
+  : mParent(apparent)
   , mLines(new GridLines(this))
   , mTracks(new GridTracks(this))
 {
-  MOZ_ASSERT(aParent, "Should never be instantiated with a null Grid");
+  MOZ_ASSERT(apparent, "Should never be instantiated with a null Grid");
 }
 
 GridDimension::~GridDimension()

@@ -88,7 +88,7 @@ protected:
      *
      * @param dstInfo         Contains output information.  Height specifies
      *                        the total number of rows that will be decoded.
-     * @param options         Additonal options to pass to the decoder.
+     * @param options         Additional options to pass to the decoder.
      */
     virtual SkCodec::Result onPrepareToDecode(const SkImageInfo& dstInfo,
             const SkCodec::Options& options) = 0;

@@ -71,7 +71,7 @@ add_task(async function() {
   docChildren = await a11yDoc.children();
   is(docChildren.length, 4, "Root doc should have correct number of children");
 
-  // Ensure destory event is emitted by walker when cached accessible's raw
+  // Ensure destroy event is emitted by walker when cached accessible's raw
   // accessible gets destroyed.
   await emitA11yEvent(a11yWalker, "accessible-destroy",
     destroyedFront => checkA11yFront(destroyedFront, { }, accessibleFront),

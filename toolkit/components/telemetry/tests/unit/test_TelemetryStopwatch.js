@@ -42,7 +42,7 @@ function run_test() {
   Assert.ok(!TelemetryStopwatch.start("mark1"));
   Assert.ok(!TelemetryStopwatch.start("mark1", refObj));
 
-  // Can't stop a timer that was accidentaly started twice
+  // Can't stop a timer that was accidentally started twice
   Assert.ok(!TelemetryStopwatch.finish("mark1"));
   Assert.ok(!TelemetryStopwatch.finish("mark1", refObj));
 

@@ -1034,7 +1034,7 @@ nsHttpTransaction::Close(nsresult reason)
     }
 
     if (mActivityDistributor) {
-        // report the reponse is complete if not already reported
+        // report the response is complete if not already reported
         if (!mResponseIsComplete) {
             nsresult rv = mActivityDistributor->ObserveActivity(
                 mChannel,
@@ -1585,7 +1585,7 @@ nsHttpTransaction::HandleContentStart()
     if (mResponseHead) {
         if (mEarlyDataDisposition == EARLY_ACCEPTED) {
             if (mResponseHead->Status() == 425) {
-                // We will report this state when the final responce arrives.
+                // We will report this state when the final response arrives.
                 mEarlyDataDisposition = EARLY_425;
             } else {
                 Unused << mResponseHead->SetHeader(nsHttp::X_Firefox_Early_Data, NS_LITERAL_CSTRING("accepted"));

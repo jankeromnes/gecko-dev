@@ -98,7 +98,7 @@ namespace SevenZip
 		/// </summary>
 		BlockSize,
 		/// <summary>
-		/// Specifies number of postion state bits for LZMA (0 <= x <= 4).
+		/// Specifies number of position state bits for LZMA (0 <= x <= 4).
 		/// </summary>
 		PosStateBits,
 		/// <summary>

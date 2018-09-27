@@ -178,8 +178,8 @@ public:
 
   struct NestEggContext
   {
-    NestEggContext(WebMDemuxer* aParent, MediaResource* aResource)
-      : mParent(aParent)
+    NestEggContext(WebMDemuxer* apparent, MediaResource* aResource)
+      : mParent(apparent)
       , mResource(aResource)
       , mContext(nullptr)
     {
@@ -300,7 +300,7 @@ class WebMTrackDemuxer
   , public DecoderDoctorLifeLogger<WebMTrackDemuxer>
 {
 public:
-  WebMTrackDemuxer(WebMDemuxer* aParent,
+  WebMTrackDemuxer(WebMDemuxer* apparent,
                   TrackInfo::TrackType aType,
                   uint32_t aTrackNumber);
 

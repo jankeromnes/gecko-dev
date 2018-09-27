@@ -165,7 +165,7 @@ class MarionetteTestResult(StructuredTestResult, TestResultCollection):
         super(MarionetteTestResult, self).addSuccess(test)
 
     def addExpectedFailure(self, test, err):
-        """Called when an expected failure/error occured."""
+        """Called when an expected failure/error occurred."""
         self.add_test_result(test, output=self._exc_info_to_string(err, test),
                              result_actual='KNOWN-FAIL')
         super(MarionetteTestResult, self).addExpectedFailure(test, err)
@@ -948,7 +948,7 @@ class BaseMarionetteTestRunner(object):
             self.logger.info('failed: {}'.format(self.failed))
         else:
             self.logger.info(
-                'failed: {0} (unexpected sucesses: {1})'.format(self.failed,
+                'failed: {0} (unexpected successes: {1})'.format(self.failed,
                                                                 self.unexpected_successes))
         if self.skipped == 0:
             self.logger.info('todo: {}'.format(self.todo))

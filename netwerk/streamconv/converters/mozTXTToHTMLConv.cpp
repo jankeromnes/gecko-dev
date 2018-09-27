@@ -825,7 +825,7 @@ mozTXTToHTMLConv::GlyphHit(const char16_t * aInString, int32_t aInLength, bool c
 
           SmilyHit(aInString, aInLength, bArg,
                    ":-[",
-                   "moz-smiley-s6", // embarassed
+                   "moz-smiley-s6", // embarrassed
                    outputHTML, glyphTextLen) ||
 
           SmilyHit(aInString, aInLength, bArg,

@@ -176,7 +176,7 @@ add_task(async function() {
   addons.children[0].click();
   panel = await popupPromise;
 
-  // Again we should be at the extentions list in about:addons
+  // Again we should be at the extensions list in about:addons
   is(gBrowser.currentURI.spec, "about:addons", "Foreground tab is at about:addons");
 
   win = gBrowser.selectedBrowser.contentWindow;

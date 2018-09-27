@@ -724,7 +724,7 @@
 **Bug fixes**
 
 - 632_: [Linux] better error message if cannot parse process UNIX connections.
-- 634_: [Linux] Proces.cmdline() does not include empty string arguments.
+- 634_: [Linux] Process.cmdline() does not include empty string arguments.
 - 635_: [UNIX] crash on module import if 'enum' package is installed on python
   < 3.4.
 
@@ -1220,7 +1220,7 @@ DeprecationWarning.
   the ppid to 1 in case of a zombie process.
 - 323_: [OSX] disk_io_counters()'s read_time and write_time parameters were
   reporting microseconds not milliseconds.  (patch by Gregory Szorc)
-- 331_: Process cmdline is no longer cached after first acces as it may change.
+- 331_: Process cmdline is no longer cached after first access as it may change.
 - 333_: [OSX] Leak of Mach ports on OS X (patch by rsesek@google.com)
 - 337_: [Linux] process methods not working because of a poor /proc
   implementation will raise NotImplementedError rather than RuntimeError
@@ -1591,7 +1591,7 @@ DeprecationWarning.
 - 113_: exception messages now include process name and pid.
 - 114_: process username Windows implementation has been rewritten in pure
   C and no longer uses WMI resulting in a big speedup. Also, pywin32 is no
-  longer required as a third-party dependancy. (patch by wj32)
+  longer required as a third-party dependency. (patch by wj32)
 - 117_: added support for Windows 2000.
 - 123_: psutil.cpu_percent() and psutil.Process.cpu_percent() accept a
   new 'interval' parameter.

@@ -1750,7 +1750,7 @@ MediaManager::SelectSettings(
 }
 
 /**
- * Runs on a seperate thread and is responsible for enumerating devices.
+ * Runs on a separate thread and is responsible for enumerating devices.
  * Depending on whether a picture or stream was asked for, either
  * ProcessGetUserMedia is called, and the results are sent back to the DOM.
  *

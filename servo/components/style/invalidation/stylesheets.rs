@@ -176,7 +176,7 @@ impl StylesheetInvalidationSet {
     /// Clears the invalidation set, invalidating elements as needed if
     /// `document_element` is provided.
     ///
-    /// Returns true if any invalidations ocurred.
+    /// Returns true if any invalidations occurred.
     pub fn flush<E>(&mut self, document_element: Option<E>, snapshots: Option<&SnapshotMap>) -> bool
     where
         E: TElement,

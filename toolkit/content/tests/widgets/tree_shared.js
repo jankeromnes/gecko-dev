@@ -1017,7 +1017,7 @@ function testtag_tree_TreeView_rows_sort(tree, testid, rowInfo) {
 
 // checks if the current and selected rows are correct
 // current is the index of the current row
-// selected is an array of the indicies of the selected rows
+// selected is an array of the indices of the selected rows
 // viewidx is the row that should be visible at the top of the tree
 function testtag_tree_TreeSelection_State(tree, testid, current, selected, viewidx) {
   var selection = tree.view.selection;

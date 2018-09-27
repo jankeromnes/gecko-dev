@@ -1856,7 +1856,7 @@ imgLoader::ValidateRequestWithNewChannel(imgRequest* request,
                                          int32_t aCORSMode,
                                          bool* aNewChannelCreated)
 {
-  // now we need to insert a new channel request object inbetween the real
+  // now we need to insert a new channel request object between the real
   // request and the proxy that basically delays loading the image until it
   // gets a 304 or figures out that this needs to be a new request
 
@@ -2778,7 +2778,7 @@ imgLoader::LoadImageWithChannel(nsIChannel* channel,
 
     // No principal specified here, because we're not passed one.
     // In LoadImageWithChannel, the redirects that may have been
-    // assoicated with this load would have gone through necko.
+    // associated with this load would have gone through necko.
     // We only have the final URI in ImageLib and hence don't know
     // if the request went through insecure redirects.  But if it did,
     // the necko cache should have handled that (since all necko cache hits

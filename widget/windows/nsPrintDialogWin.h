@@ -24,14 +24,14 @@ public:
   NS_DECL_ISUPPORTS
 
   NS_IMETHOD Init() override;
-  NS_IMETHOD Show(nsPIDOMWindowOuter* aParent,
+  NS_IMETHOD Show(nsPIDOMWindowOuter* apparent,
                   nsIPrintSettings* aSettings,
                   nsIWebBrowserPrint* aWebBrowserPrint) override;
-  NS_IMETHOD ShowPageSetup(nsPIDOMWindowOuter* aParent,
+  NS_IMETHOD ShowPageSetup(nsPIDOMWindowOuter* apparent,
                            nsIPrintSettings* aSettings) override;
 
 private:
-  nsresult DoDialog(mozIDOMWindowProxy* aParent,
+  nsresult DoDialog(mozIDOMWindowProxy* apparent,
                     nsIDialogParamBlock* aParamBlock,
                     nsIPrintSettings* aPS,
                     const char* aChromeURL);

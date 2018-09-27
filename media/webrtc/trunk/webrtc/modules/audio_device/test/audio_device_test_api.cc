@@ -877,7 +877,7 @@ TEST_F(AudioDeviceAPITest, SpeakerVolumeIsAvailable) {
   EXPECT_EQ(0, audio_device_->SpeakerVolumeIsAvailable(&available));
   EXPECT_FALSE(audio_device_->SpeakerIsInitialized());
 
-  // check all availiable devices
+  // check all available devices
   int16_t no_devices = audio_device_->PlayoutDevices();
   for (int i = 0; i < no_devices; i++) {
     EXPECT_EQ(0, audio_device_->SetPlayoutDevice(i));
@@ -1021,7 +1021,7 @@ TEST_F(AudioDeviceAPITest, MicrophoneVolumeIsAvailable) {
   EXPECT_EQ(0, audio_device_->MicrophoneVolumeIsAvailable(&available));
   EXPECT_FALSE(audio_device_->MicrophoneIsInitialized());
 
-  // check all availiable devices
+  // check all available devices
   int16_t no_devices = audio_device_->RecordingDevices();
   for (int i = 0; i < no_devices; i++) {
     EXPECT_EQ(0, audio_device_->SetRecordingDevice(i));
@@ -1154,7 +1154,7 @@ TEST_F(AudioDeviceAPITest, SpeakerMuteIsAvailable) {
   EXPECT_EQ(0, audio_device_->SpeakerMuteIsAvailable(&available));
   EXPECT_FALSE(audio_device_->SpeakerIsInitialized());
 
-  // check all availiable devices
+  // check all available devices
   int16_t no_devices = audio_device_->PlayoutDevices();
   for (int i = 0; i < no_devices; i++) {
     EXPECT_EQ(0, audio_device_->SetPlayoutDevice(i));
@@ -1180,7 +1180,7 @@ TEST_F(AudioDeviceAPITest, MicrophoneMuteIsAvailable) {
   EXPECT_EQ(0, audio_device_->MicrophoneMuteIsAvailable(&available));
   EXPECT_FALSE(audio_device_->MicrophoneIsInitialized());
 
-  // check all availiable devices
+  // check all available devices
   int16_t no_devices = audio_device_->RecordingDevices();
   for (int i = 0; i < no_devices; i++) {
     EXPECT_EQ(0, audio_device_->SetRecordingDevice(i));
@@ -1206,7 +1206,7 @@ TEST_F(AudioDeviceAPITest, MicrophoneBoostIsAvailable) {
   EXPECT_EQ(0, audio_device_->MicrophoneBoostIsAvailable(&available));
   EXPECT_FALSE(audio_device_->MicrophoneIsInitialized());
 
-  // check all availiable devices
+  // check all available devices
   int16_t no_devices = audio_device_->RecordingDevices();
   for (int i = 0; i < no_devices; i++) {
     EXPECT_EQ(0, audio_device_->SetRecordingDevice(i));

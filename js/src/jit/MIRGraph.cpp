@@ -1533,7 +1533,7 @@ MBasicBlock::inheritPhisFromBackedge(TempAllocator& alloc, MBasicBlock* backedge
         MDefinition* loopDef = entryResumePoint()->getOperand(slot);
         if (loopDef->block() != this) {
             // If we are finishing a pending loop header, then we need to ensure
-            // that all operands are phis. This is usualy the case, except for
+            // that all operands are phis. This is usually the case, except for
             // object/arrays build with generators, in which case we share the
             // same allocations across all blocks.
             MOZ_ASSERT(loopDef->block()->id() < id());

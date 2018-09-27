@@ -24,7 +24,7 @@ class PrecompiledScript : public nsISupports
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SKIPPABLE_SCRIPT_HOLDER_CLASS(PrecompiledScript)
 
-  explicit PrecompiledScript(nsISupports* aParent, JS::Handle<JSScript*> aScript, JS::ReadOnlyCompileOptions& aOptions);
+  explicit PrecompiledScript(nsISupports* apparent, JS::Handle<JSScript*> aScript, JS::ReadOnlyCompileOptions& aOptions);
 
   void ExecuteInGlobal(JSContext* aCx, JS::HandleObject aGlobal,
                        JS::MutableHandleValue aRval,

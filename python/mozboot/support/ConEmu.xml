@@ -756,7 +756,7 @@
 			</key>
 			<key name="Tasks" modified="2016-08-05 15:29:11" build="160724">
 				<value name="Count" type="long" data="14"/>
-                                <!-- MOZ: This task launches Mozilla's MSYS2 development enviornment -->
+                                <!-- MOZ: This task launches Mozilla's MSYS2 development environment -->
 				<key name="Task1" modified="2016-08-05 15:29:11" build="160724">
 					<value name="Name" type="string" data="{Bash::mozdev}"/>
 					<value name="Flags" type="dword" data="00000005"/>

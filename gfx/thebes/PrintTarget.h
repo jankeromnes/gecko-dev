@@ -91,7 +91,7 @@ public:
    * If aRecorder is passed a recording DrawTarget will be created instead of
    * the type of DrawTarget that would normally be returned for a particular
    * subclass of this class.  This argument is only intended to be used in
-   * the e10s content process if printing output can't otherwise be transfered
+   * the e10s content process if printing output can't otherwise be transferred
    * over to the parent process using the normal DrawTarget type.
    *
    * NOTE: this should only be called between BeginPage()/EndPage() calls, and

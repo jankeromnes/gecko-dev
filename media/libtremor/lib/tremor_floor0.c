@@ -218,7 +218,7 @@ void vorbis_lsp_to_curve(ogg_int32_t *curve,int *map,int n,int ln,
     /* pi,qi normalized collectively, both tracked using qexp */
 
     if(m&1){
-      /* odd order filter; slightly assymetric */
+      /* odd order filter; slightly asymmetric */
       /* the last coefficient */
       qi=(qi>>shift)*labs(ilsp[j-1]-wi);
       pi=(pi>>shift)<<14;

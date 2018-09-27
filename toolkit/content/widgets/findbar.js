@@ -863,7 +863,7 @@ class MozFindbar extends XULElement {
 
     // Only search on input if we don't have a last-failed string,
     // or if the current search string doesn't start with it.
-    // In entire-word mode we always attemp a find; since sequential matching
+    // In entire-word mode we always attempt a find; since sequential matching
     // is not guaranteed, the first character typed may not be a word (no
     // match), but the with the second character it may well be a word,
     // thus a match.
@@ -1002,7 +1002,7 @@ class MozFindbar extends XULElement {
 
       // (e10s) since we focus lets also select it, otherwise that would
       // only happen in this.onCurrentSelection and, because it is async,
-      // there's a chance keypresses could come inbetween, leading to
+      // there's a chance keypresses could come between, leading to
       // jumbled up queries.
       this._findField.select();
 

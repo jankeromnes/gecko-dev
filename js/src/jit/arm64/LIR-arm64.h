@@ -111,7 +111,7 @@ class LDivI : public LBinaryMath<1>
 // It is implemented as a proper C function so it trashes r0, r1, r2 and r3.
 // The call also trashes lr, and has the ability to trash ip. The function also
 // takes two arguments (dividend in r0, divisor in r1). The LInstruction gets
-// encoded such that the divisor and dividend are passed in their apropriate
+// encoded such that the divisor and dividend are passed in their appropriate
 // registers and end their life at the start of the instruction by the use of
 // useFixedAtStart.  The result is returned in r0 and the other three registers
 // that can be trashed are marked as temps.  For the time being, the link

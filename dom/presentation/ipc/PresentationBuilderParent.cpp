@@ -20,10 +20,10 @@ public:
   NS_DECL_ISUPPORTS
   NS_DECL_NSIPRESENTATIONSESSIONTRANSPORT
 
-  PresentationSessionTransportIPC(PresentationParent* aParent,
+  PresentationSessionTransportIPC(PresentationParent* apparent,
                                   const nsAString& aSessionId,
                                   uint8_t aRole)
-    : mParent(aParent)
+    : mParent(apparent)
     , mSessionId(aSessionId)
     , mRole(aRole)
   {
@@ -107,8 +107,8 @@ NS_IMPL_ISUPPORTS(PresentationBuilderParent,
                   nsIPresentationSessionTransportBuilder,
                   nsIPresentationDataChannelSessionTransportBuilder)
 
-PresentationBuilderParent::PresentationBuilderParent(PresentationParent* aParent)
-  : mParent(aParent)
+PresentationBuilderParent::PresentationBuilderParent(PresentationParent* apparent)
+  : mParent(apparent)
 {
 }
 

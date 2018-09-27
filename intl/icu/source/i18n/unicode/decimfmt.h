@@ -283,7 +283,7 @@ template class U_I18N_API    EnumSet<UNumberFormatAttribute,
  *     <td>Pad escape, precedes pad character
  * </table>
  *
- * <p>A DecimalFormat pattern contains a postive and negative
+ * <p>A DecimalFormat pattern contains a positive and negative
  * subpattern, for example, "#,##0.00;(#,##0.00)".  Each subpattern has a
  * prefix, a numeric part, and a suffix.  If there is no explicit negative
  * subpattern, the negative subpattern is the localized minus sign prefixed to the
@@ -583,9 +583,9 @@ template class U_I18N_API    EnumSet<UNumberFormatAttribute,
  * count of <code>getMaximumSignificantDigits() - 1</code>. For example, the
  * pattern <code>"@@###E0"</code> is equivalent to <code>"0.0###E0"</code>.
  *
- * <li>If signficant digits are in use, then the integer and fraction
+ * <li>If significant digits are in use, then the integer and fraction
  * digit counts, as set via the API, are ignored.  If significant
- * digits are not in use, then the signficant digit counts, as set via
+ * digits are not in use, then the significant digit counts, as set via
  * the API, are ignored.
  *
  * </ul>
@@ -639,7 +639,7 @@ template class U_I18N_API    EnumSet<UNumberFormatAttribute,
  * increment in the pattern itself.  "#,#50" specifies a rounding increment of
  * 50.  "#,##0.05" specifies a rounding increment of 0.05.
  *
- * <p>In the absense of an explicit rounding increment numbers are
+ * <p>In the absence of an explicit rounding increment numbers are
  * rounded to their formatted width.
  *
  * <ul>
@@ -844,7 +844,7 @@ class U_I18N_API DecimalFormat : public NumberFormat {
      * @param pattern           a non-localized pattern string
      * @param symbolsToAdopt    the set of symbols to be used.  The caller should not
      *                          delete this object after making this call.
-     * @param parseError        Output param to receive errors occured during parsing
+     * @param parseError        Output param to receive errors occurred during parsing
      * @param status            Output param set to success/failure code. If the
      *                          pattern is invalid this will be set to a failure code.
      * @stable ICU 2.0
@@ -1120,7 +1120,7 @@ class U_I18N_API DecimalFormat : public NumberFormat {
      * does string comparisons to try to find an optimal match.
      * If no object can be parsed, index is unchanged, and NULL is
      * returned.  The result is returned as the most parsimonious
-     * type of Formattable that will accomodate all of the
+     * type of Formattable that will accommodate all of the
      * necessary precision.  For example, if the result is exactly 12,
      * it will be returned as a long.  However, if it is 1.5, it will
      * be returned as a double.
@@ -1826,7 +1826,7 @@ class U_I18N_API DecimalFormat : public NumberFormat {
      * these are presumed to be set in the positive pattern.
      *
      * @param pattern    The pattern to be applied.
-     * @param parseError Struct to recieve information on position
+     * @param parseError Struct to receive information on position
      *                   of error if an error is encountered
      * @param status     Output param set to success/failure code on
      *                   exit. If the pattern is invalid, this will be
@@ -1868,7 +1868,7 @@ class U_I18N_API DecimalFormat : public NumberFormat {
      * these are presumed to be set in the positive pattern.
      *
      * @param pattern   The localized pattern to be applied.
-     * @param parseError Struct to recieve information on position
+     * @param parseError Struct to receive information on position
      *                   of error if an error is encountered
      * @param status    Output param set to success/failure code on
      *                  exit. If the pattern is invalid, this will be

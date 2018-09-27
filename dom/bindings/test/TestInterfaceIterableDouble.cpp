@@ -22,8 +22,8 @@ NS_WRAPPERCACHE_INTERFACE_MAP_ENTRY
 NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-TestInterfaceIterableDouble::TestInterfaceIterableDouble(nsPIDOMWindowInner* aParent)
-  : mParent(aParent)
+TestInterfaceIterableDouble::TestInterfaceIterableDouble(nsPIDOMWindowInner* apparent)
+  : mParent(apparent)
 {
   mValues.AppendElement(std::pair<nsString, nsString>(NS_LITERAL_STRING("a"),
                                                       NS_LITERAL_STRING("b")));

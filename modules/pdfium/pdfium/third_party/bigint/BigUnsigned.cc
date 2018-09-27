@@ -240,7 +240,7 @@ void BigUnsigned::subtract(const BigUnsigned &a, const BigUnsigned &b) {
 /*
  * About the multiplication and division algorithms:
  *
- * I searched unsucessfully for fast C++ built-in operations like the `b_0'
+ * I searched unsuccessfully for fast C++ built-in operations like the `b_0'
  * and `c_0' Knuth describes in Section 4.3.1 of ``The Art of Computer
  * Programming'' (replace `place' by `Blk'):
  *

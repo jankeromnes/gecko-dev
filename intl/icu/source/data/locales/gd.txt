@@ -65,7 +65,7 @@ gd{
                 superscriptingExponent{"×"}
             }
         }
-        beng{
+        being{
             symbols{
                 decimal{"."}
                 exponential{"E"}

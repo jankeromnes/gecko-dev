@@ -130,7 +130,7 @@ extern "C" {
  *
  *  A srtp_cipher_type_id_t is an integer that represents a particular
  *  cipher type, e.g. the Advanced Encryption Standard (AES).  A
- *  SRTP_NULL_CIPHER is avaliable; this cipher leaves the data unchanged,
+ *  SRTP_NULL_CIPHER is available; this cipher leaves the data unchanged,
  *  and can be selected to indicate that no encryption is to take
  *  place.
  *
@@ -145,7 +145,7 @@ typedef uint32_t srtp_cipher_type_id_t;
  *
  *  An srtp_auth_type_id_t is an integer that represents a particular
  *  authentication function type, e.g. HMAC-SHA1.  A SRTP_NULL_AUTH is
- *  avaliable; this authentication function performs no computation,
+ *  available; this authentication function performs no computation,
  *  and can be selected to indicate that no authentication is to take
  *  place.
  *
@@ -581,7 +581,7 @@ srtp_err_status_t srtp_unprotect_mki(srtp_t ctx,
  * have its `next' field set to NULL.
  *
  * @return
- *    - srtp_err_status_ok           if creation succeded.
+ *    - srtp_err_status_ok           if creation succeeded.
  *    - srtp_err_status_alloc_fail   if allocation failed.
  *    - srtp_err_status_init_fail    if initialization failed.
  */
@@ -597,7 +597,7 @@ srtp_err_status_t srtp_create(srtp_t *session, const srtp_policy_t *policy);
  * stream.
  *
  * @return values:
- *    - srtp_err_status_ok           if stream creation succeded.
+ *    - srtp_err_status_ok           if stream creation succeeded.
  *    - srtp_err_status_alloc_fail   if stream allocation failed
  *    - srtp_err_status_init_fail    if stream initialization failed.
  */
@@ -620,7 +620,7 @@ srtp_err_status_t srtp_add_stream(srtp_t session, const srtp_policy_t *policy);
  *          session.
  *
  * @return
- *    - srtp_err_status_ok     if the stream deallocation succeded.
+ *    - srtp_err_status_ok     if the stream deallocation succeeded.
  *    - [other]           otherwise.
  *
  */
@@ -644,7 +644,7 @@ srtp_err_status_t srtp_remove_stream(srtp_t session, unsigned int ssrc);
  * have its `next' field set to NULL.
  *
  * @return
- *    - srtp_err_status_ok           if stream creation succeded.
+ *    - srtp_err_status_ok           if stream creation succeeded.
  *    - srtp_err_status_alloc_fail   if stream allocation failed
  *    - srtp_err_status_init_fail    if stream initialization failed.
  *    - [other]                 otherwise.
@@ -667,7 +667,7 @@ srtp_err_status_t srtp_update(srtp_t session, const srtp_policy_t *policy);
  * for the session.
  *
  * @return
- *    - srtp_err_status_ok           if stream creation succeded.
+ *    - srtp_err_status_ok           if stream creation succeeded.
  *    - srtp_err_status_alloc_fail   if stream allocation failed
  *    - srtp_err_status_init_fail    if stream initialization failed.
  *    - [other]                      otherwise.
@@ -1160,7 +1160,7 @@ void srtp_crypto_policy_set_aes_gcm_256_16_auth(srtp_crypto_policy_t *p);
  *
  * @return
  *    - srtp_err_status_ok             if there no problems.
- *    - srtp_err_status_dealloc_fail   a memory deallocation failure occured.
+ *    - srtp_err_status_dealloc_fail   a memory deallocation failure occurred.
  */
 srtp_err_status_t srtp_dealloc(srtp_t s);
 
@@ -1560,7 +1560,7 @@ void *srtp_get_user_data(srtp_t ctx);
  * latter case, all of the streams in the session will expire.
  */
 typedef enum {
-    event_ssrc_collision,    /**< An SSRC collision occured.            */
+    event_ssrc_collision,    /**< An SSRC collision occurred.            */
     event_key_soft_limit,    /**< An SRTP stream reached the soft key   */
                              /**< usage limit and will expire soon.     */
     event_key_hard_limit,    /**< An SRTP stream reached the hard       */
@@ -1577,9 +1577,9 @@ typedef enum {
  * handler function.
  */
 typedef struct srtp_event_data_t {
-    srtp_t session;     /**< The session in which the event happend.        */
+    srtp_t session;     /**< The session in which the event happened.        */
     uint32_t ssrc;      /**< The ssrc in host order of the stream in which  */
-                        /**< the event happend                              */
+                        /**< the event happened                              */
     srtp_event_t event; /**< An enum indicating the type of event.          */
 } srtp_event_data_t;
 

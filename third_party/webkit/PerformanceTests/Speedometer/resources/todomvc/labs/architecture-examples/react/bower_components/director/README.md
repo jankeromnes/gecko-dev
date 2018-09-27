@@ -329,7 +329,7 @@ In large web appliations, both [Client-side](#client-side) and [Server-side](#ht
 
     this.get(function (id) {
       //
-      // Retreive the user with the specified `id`.
+      // Retrieve the user with the specified `id`.
       //
     });
 

@@ -218,7 +218,7 @@ static constexpr FloatRegister d14 = {FloatRegisters::d14, VFPRegister::Double};
 static constexpr FloatRegister d15 = {FloatRegisters::d15, VFPRegister::Double};
 
 
-// For maximal awesomeness, 8 should be sufficent. ldrd/strd (dual-register
+// For maximal awesomeness, 8 should be sufficient. ldrd/strd (dual-register
 // load/store) operate in a single cycle when the address they are dealing with
 // is 8 byte aligned. Also, the ARM abi wants the stack to be 8 byte aligned at
 // function boundaries. I'm trying to make sure this is always true.

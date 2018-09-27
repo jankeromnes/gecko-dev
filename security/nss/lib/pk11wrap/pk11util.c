@@ -800,7 +800,7 @@ SECMOD_InternaltoPubCipherFlags(unsigned long internalFlags)
     return internalFlags;
 }
 
-/* Funtion reports true if module of modType is installed/configured */
+/* Function reports true if module of modType is installed/configured */
 PRBool
 SECMOD_IsModulePresent(unsigned long int pubCipherEnableFlags)
 {
@@ -971,7 +971,7 @@ SECMOD_CanDeleteInternalModule(void)
  * check to see if the module has added new slots. PKCS 11 v2.20 allows for
  * modules to add new slots, but never remove them. Slots cannot be added
  * between a call to C_GetSlotLlist(Flag, NULL, &count) and the subsequent
- * C_GetSlotList(flag, &data, &count) so that the array doesn't accidently
+ * C_GetSlotList(flag, &data, &count) so that the array doesn't accidentally
  * grow on the caller. It is permissible for the slots to increase between
  * successive calls with NULL to get the size.
  */
@@ -1057,7 +1057,7 @@ SECMOD_UpdateSlotList(SECMODModule *mod)
 
     /* until this point we're still using the old slot list. Now we update
      * module slot list. We update the slots (array) first then the count,
-     * since we've already guarrenteed that count has increased (just in case
+     * since we've already guaranteed that count has increased (just in case
      * someone is looking at the slots field of  module without holding the
      * moduleLock */
     SECMOD_GetWriteLock(moduleLock);

@@ -465,7 +465,7 @@ ClientSource::Control(const ClientControlledArgs& aArgs)
   // it should be fine to accept these control messages.
   //
   // Its also fine to default to allowing ClientSource attached to a docshell
-  // to be controlled.  These clients represent inital about:blank windows
+  // to be controlled.  These clients represent initial about:blank windows
   // that do not have an inner window created yet.  We explicitly allow initial
   // about:blank.
   bool controlAllowed = true;

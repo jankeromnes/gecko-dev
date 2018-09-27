@@ -451,7 +451,7 @@ public:
   mozilla::ipc::IPCResult RecvRemotePluginsReady() override;
 
   /**
-   * Used by the profiler to denote when a vsync occured
+   * Used by the profiler to denote when a vsync occurred
    */
   static void PostInsertVsyncProfilerMarker(mozilla::TimeStamp aVsyncTimestamp);
 

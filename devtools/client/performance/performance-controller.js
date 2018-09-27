@@ -181,7 +181,7 @@ var PerformanceController = {
   /**
    * Enables front event listeners.
    *
-   * The rationale behind this is given by the async intialization of all the
+   * The rationale behind this is given by the async initialization of all the
    * frontend components. Even though the panel is considered "open" only after
    * both the controller and the view are created, and even though their
    * initialization is sequential (controller, then view), the controller might

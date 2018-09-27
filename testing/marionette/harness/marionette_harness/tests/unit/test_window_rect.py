@@ -165,7 +165,7 @@ class TestWindowRect(MarionetteTestCase):
         #
         # Because we have to cater to an unknown set of environments,
         # the following assertions are the most common denominator that
-        # make this test pass, irregardless of system characteristics.
+        # make this test pass, regardless of system characteristics.
 
         os = self.marionette.session_capabilities["platformName"]
 

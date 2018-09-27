@@ -75,7 +75,7 @@ function run_test() {
   // hierarchy. We leave that to mochitests.
 
   // Test isThirdPartyChannel. As above, we can't test the bits that require
-  // a load context or window heirarchy. Because of bug 1259873, we assume
+  // a load context or window hierarchy. Because of bug 1259873, we assume
   // that these are not third-party.
   do_check_throws(function() { util.isThirdPartyChannel(null); },
     NS_ERROR_INVALID_ARG);

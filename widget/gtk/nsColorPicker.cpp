@@ -58,11 +58,11 @@ GtkColorSelection* nsColorPicker::WidgetGetColorSelection(GtkWidget* widget)
 }
 #endif
 
-NS_IMETHODIMP nsColorPicker::Init(mozIDOMWindowProxy *aParent,
+NS_IMETHODIMP nsColorPicker::Init(mozIDOMWindowProxy *apparent,
                                   const nsAString& title,
                                   const nsAString& initialColor)
 {
-  auto* parent = nsPIDOMWindowOuter::From(aParent);
+  auto* parent = nsPIDOMWindowOuter::From(apparent);
   mParentWidget = mozilla::widget::WidgetUtils::DOMWindowToWidget(parent);
   mTitle = title;
   mInitialColor = initialColor;

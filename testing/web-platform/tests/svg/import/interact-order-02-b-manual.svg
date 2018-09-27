@@ -31,7 +31,7 @@
       <p>
         Clicking on the first circle should change the circle from black to red.  Clicking
         on the second circle should take you to another SVG file titled "Hyperlink target for
-        interact-order-02.svg.  Cliking on the circle in this SVG file should return you to the orginal
+        interact-order-02.svg.  Cliking on the circle in this SVG file should return you to the orignal
         two circles.
       </p>
     </d:passCriteria>

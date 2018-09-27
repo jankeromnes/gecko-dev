@@ -61,7 +61,7 @@ protected:
 /**
  * An abstract interface for classes that can allocate PTexture objects
  * across IPDL. Currently a sub-class of LayersIPCChannel for simplicity
- * since all our implementations use both, but could be independant if needed.
+ * since all our implementations use both, but could be independent if needed.
  */
 class TextureForwarder : public LayersIPCChannel {
 public:

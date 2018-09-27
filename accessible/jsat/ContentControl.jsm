@@ -98,7 +98,7 @@ this.ContentControl.prototype = {
     let position = vc.position;
 
     if (aMessage.json.origin != "child" && this.sendToChild(vc, aMessage)) {
-      // Forwarded succesfully to child cursor.
+      // Forwarded successfully to child cursor.
       return;
     }
 
@@ -121,7 +121,7 @@ this.ContentControl.prototype = {
     let vc = this.vc;
 
     if (origin != "child" && this.sendToChild(vc, aMessage)) {
-      // Forwarded succesfully to child cursor.
+      // Forwarded successfully to child cursor.
       return;
     }
 

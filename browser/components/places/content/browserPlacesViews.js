@@ -1882,7 +1882,7 @@ PlacesToolbar.prototype = {
     if (parent.localName == "toolbarbutton") {
       this._openedMenuButton = null;
       // Clear the dragover attribute if present, if we are dragging into a
-      // folder in the hierachy of current opened popup we don't clear
+      // folder in the hierarchy of current opened popup we don't clear
       // this attribute on clearOverFolder.  See Notify for closeTimer.
       if (parent.hasAttribute("dragover"))
         parent.removeAttribute("dragover");

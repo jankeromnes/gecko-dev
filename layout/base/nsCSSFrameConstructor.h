@@ -118,7 +118,7 @@ private:
   bool MaybeConstructLazily(Operation aOperation, nsIContent* aChild);
 
 #ifdef DEBUG
-  void CheckBitsForLazyFrameConstruction(nsIContent* aParent);
+  void CheckBitsForLazyFrameConstruction(nsIContent* apparent);
 #else
   void CheckBitsForLazyFrameConstruction(nsIContent*) {}
 #endif
@@ -1521,7 +1521,7 @@ private:
                                nsFrameItems& aFrameItems);
   static bool AtLineBoundary(FCItemIterator& aIter);
 
-  nsresult GetAnonymousContent(nsIContent* aParent,
+  nsresult GetAnonymousContent(nsIContent* apparent,
                                nsIFrame* aParentFrame,
                                nsTArray<nsIAnonymousContentCreator::ContentInfo>& aAnonContent);
 

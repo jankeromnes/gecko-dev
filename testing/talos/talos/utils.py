@@ -65,7 +65,7 @@ def interpolate(template, **kwargs):
 
 
 def findall(string, token):
-    """find all occurences in a string"""
+    """find all occurrences in a string"""
     return [m.start() for m in re.finditer(re.escape(token), string)]
 
 

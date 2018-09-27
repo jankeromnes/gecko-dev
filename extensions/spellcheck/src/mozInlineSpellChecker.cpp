@@ -442,7 +442,7 @@ mozInlineSpellStatus::GetDocument() const
 // mozInlineSpellStatus::PositionToCollapsedRange
 //
 //    Converts a given DOM position to a collapsed range covering that
-//    position. We use ranges to store DOM positions becuase they stay
+//    position. We use ranges to store DOM positions because they stay
 //    updated as the DOM is changed.
 
 already_AddRefed<nsRange>

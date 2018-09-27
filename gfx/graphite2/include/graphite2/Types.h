@@ -57,7 +57,7 @@ enum gr_encform {
     #undef _gr2_export_flag
     #undef _gr2_import_flag
     #undef _gr2_static_flag
-  #else  // How MSVC sepcifies function level attributes adn deprecation
+  #else  // How MSVC sepcifies function level attributes and deprecation
     #define _gr2_and
     #define _gr2_tag_fn(a)       __declspec(a)
     #define _gr2_deprecated_flag deprecated

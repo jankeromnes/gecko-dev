@@ -128,10 +128,10 @@ CJBig2_Image* CJBig2_TRDProc::decode_Huffman(CJBig2_BitStream* pStream,
         pGRRD->GRREFERENCEDX = (RDWI >> 2) + RDXI;
         pGRRD->GRREFERENCEDY = (RDHI >> 2) + RDYI;
         pGRRD->TPGRON = 0;
-        pGRRD->GRAT[0] = SBRAT[0];
-        pGRRD->GRAT[1] = SBRAT[1];
-        pGRRD->GRAT[2] = SBRAT[2];
-        pGRRD->GRAT[3] = SBRAT[3];
+        pGRRD->GREAT[0] = SBRAT[0];
+        pGRRD->GREAT[1] = SBRAT[1];
+        pGRRD->GREAT[2] = SBRAT[2];
+        pGRRD->GREAT[3] = SBRAT[3];
 
         {
           std::unique_ptr<CJBig2_ArithDecoder> pArithDecoder(
@@ -343,10 +343,10 @@ CJBig2_Image* CJBig2_TRDProc::decode_Arith(CJBig2_ArithDecoder* pArithDecoder,
         pGRRD->GRREFERENCEDX = (RDWI >> 1) + RDXI;
         pGRRD->GRREFERENCEDY = (RDHI >> 1) + RDYI;
         pGRRD->TPGRON = 0;
-        pGRRD->GRAT[0] = SBRAT[0];
-        pGRRD->GRAT[1] = SBRAT[1];
-        pGRRD->GRAT[2] = SBRAT[2];
-        pGRRD->GRAT[3] = SBRAT[3];
+        pGRRD->GREAT[0] = SBRAT[0];
+        pGRRD->GREAT[1] = SBRAT[1];
+        pGRRD->GREAT[2] = SBRAT[2];
+        pGRRD->GREAT[3] = SBRAT[3];
         IBI.reset(pGRRD->decode(pArithDecoder, grContext));
         pIBI = IBI.get();
       }

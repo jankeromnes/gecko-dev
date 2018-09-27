@@ -26,7 +26,7 @@ public:
   NS_DECL_NSIREQUESTOBSERVER
 
   MutableBlobStreamListener(MutableBlobStorage::MutableBlobStorageType aType,
-                            nsISupports* aParent,
+                            nsISupports* apparent,
                             const nsACString& aContentType,
                             MutableBlobStorageCallback* aCallback,
                             nsIEventTarget* aEventTarget = nullptr);

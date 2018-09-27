@@ -167,12 +167,12 @@ WyciwygChannelParent::RecvAppData(const IPC::SerializedLoadContext& loadContext,
 
 bool
 WyciwygChannelParent::SetupAppData(const IPC::SerializedLoadContext& loadContext,
-                                   const PBrowserOrId &aParent)
+                                   const PBrowserOrId &apparent)
 {
   if (!mChannel)
     return true;
 
-  const char* error = NeckoParent::CreateChannelLoadContext(aParent,
+  const char* error = NeckoParent::CreateChannelLoadContext(apparent,
                                                             Manager()->Manager(),
                                                             loadContext,
                                                             nullptr,
@@ -197,7 +197,7 @@ mozilla::ipc::IPCResult
 WyciwygChannelParent::RecvAsyncOpen(const URIParams& aOriginal,
                                     const uint32_t& aLoadFlags,
                                     const IPC::SerializedLoadContext& loadContext,
-                                    const PBrowserOrId &aParent)
+                                    const PBrowserOrId &apparent)
 {
   nsCOMPtr<nsIURI> original = DeserializeURI(aOriginal);
   if (!original)
@@ -226,7 +226,7 @@ WyciwygChannelParent::RecvAsyncOpen(const URIParams& aOriginal,
     return IPC_OK();
   }
 
-  if (!mReceivedAppData && !SetupAppData(loadContext, aParent)) {
+  if (!mReceivedAppData && !SetupAppData(loadContext, apparent)) {
     return IPC_FAIL_NO_REASON(this);
   }
 

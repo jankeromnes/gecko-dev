@@ -18,7 +18,7 @@
     "message": "Salva"
   },
   "saveScreenshotVisibleArea": {
-    "message": "Salva l’area visibile"
+    "message": "Salva l’area visible"
   },
   "saveScreenshotFullPage": {
     "message": "Salva l’intera schermata"
@@ -30,7 +30,7 @@
     "message": "Scarica"
   },
   "downloadOnlyNotice": {
-    "message": "Al momento è attiva la modalità “Solo download”."
+    "message": "Al memento è attiva la modalità “Solo download”."
   },
   "downloadOnlyDetails": {
     "message": "Firefox Screenshots entra automaticamente in modalità “Solo download” nelle seguenti situazioni:"
@@ -87,25 +87,25 @@
     "message": "Fuori servizio"
   },
   "requestErrorDetails": {
-    "message": "Siamo spiacenti, non è stato possibile salvare l’immagine. Riprova più tardi."
+    "message": "Siamo spiacenti, non è stato possible salvare l’immagine. Riprova più tardi."
   },
   "connectionErrorTitle": {
-    "message": "Non è possibile accedere agli screenshot salvati."
+    "message": "Non è possible accedere agli screenshot salvati."
   },
   "connectionErrorDetails": {
-    "message": "Verifica che la connessione a Internet stia funzionando correttamente. Se è possibile accedere ad altri siti, potrebbe trattarsi di un problema temporaneo con il servizio Firefox Screenshots."
+    "message": "Verifica che la connessione a Internet stia funzionando correttamente. Se è possible accedere ad altri siti, potrebbe trattarsi di un problema temporaneo con il servizio Firefox Screenshots."
   },
   "loginErrorDetails": {
-    "message": "Non è stato possibile salvare l’immagine in quanto si è verificato un problema con il servizio Firefox Screenshots. Riprova più tardi."
+    "message": "Non è stato possible salvare l’immagine in quanto si è verificato un problema con il servizio Firefox Screenshots. Riprova più tardi."
   },
   "unshootablePageErrorTitle": {
-    "message": "Non è possibile salvare uno screenshot di questa pagina."
+    "message": "Non è possible salvare uno screenshot di questa pagina."
   },
   "unshootablePageErrorDetails": {
-    "message": "Non è possibile salvare uno screenshot in quanto non si tratta di una normale pagina web."
+    "message": "Non è possible salvare uno screenshot in quanto non si tratta di una normale pagina web."
   },
   "selfScreenshotErrorTitle": {
-    "message": "Non è possibile salvare uno screenshot di una pagina di Firefox Screenshots"
+    "message": "Non è possible salvare uno screenshot di una pagina di Firefox Screenshots"
   },
   "emptySelectionErrorTitle": {
     "message": "L’area selezionata è troppo piccola"

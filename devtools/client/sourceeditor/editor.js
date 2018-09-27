@@ -368,7 +368,7 @@ Editor.prototype = {
     cm.getScrollerElement().addEventListener("wheel", ev => {
       // By handling the wheel events ourselves, we force the platform to
       // scroll synchronously, like it did before APZ. However, we lose smooth
-      // scrolling for users with mouse wheels. This seems acceptible vs.
+      // scrolling for users with mouse wheels. This seems acceptable vs.
       // doing nothing and letting the gutter slide around.
       ev.preventDefault();
 
@@ -1175,7 +1175,7 @@ Editor.prototype = {
 
   /**
    * Intercept CodeMirror's findNext and findPrev key shortcut to allow
-   * immediately search for next occurance after typing a word to search.
+   * immediately search for next occurrence after typing a word to search.
    */
   findNextOrPrev: function(node, isFindPrev) {
     const cm = editors.get(this);
@@ -1185,7 +1185,7 @@ Editor.prototype = {
       return;
     }
     const query = node.value;
-    // cm.state.search allows to automatically start searching for the next occurance
+    // cm.state.search allows to automatically start searching for the next occurrence
     // it's the precise reason why we reimplement these key shortcuts
     if (!cm.state.search || cm.state.search.query !== query) {
       cm.state.search = {

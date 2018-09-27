@@ -2004,7 +2004,7 @@ int main(int argc, const char **argv_) {
 
     /* If input file does not specify bit-depth but input-bit-depth parameter
      * exists, assume that to be the input bit-depth. However, if the
-     * input-bit-depth paramter does not exist, assume the input bit-depth
+     * input-bit-depth parameter does not exist, assume the input bit-depth
      * to be the same as the codec bit-depth.
      */
     if (!input.bit_depth) {

@@ -1970,7 +1970,7 @@ static int mdb_page_flush(MDB_txn *txn, int keep);
  * If the txn never references them again, they can be left alone.
  * If the txn only reads them, they can be used without any fuss.
  * If the txn writes them again, they can be dirtied immediately without
- * going thru all of the work of #mdb_page_touch(). Such references are
+ * going through all of the work of #mdb_page_touch(). Such references are
  * handled by #mdb_page_unspill().
  *
  * Also note, we never spill DB root pages, nor pages of active cursors,
@@ -7089,7 +7089,7 @@ mdb_cursor_del(MDB_cursor *mc, unsigned int flags)
 			} else {
 				mc->mc_xcursor->mx_cursor.mc_flags &= ~C_INITIALIZED;
 			}
-			/* otherwise fall thru and delete the sub-DB */
+			/* otherwise fall through and delete the sub-DB */
 		}
 
 		if (leaf->mn_flags & F_SUBDATA) {

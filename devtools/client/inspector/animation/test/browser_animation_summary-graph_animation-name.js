@@ -4,7 +4,7 @@
 "use strict";
 
 // Test for following AnimationName component works.
-// * element existance
+// * element existence
 // * name text
 
 const TEST_DATA = [
@@ -38,7 +38,7 @@ add_task(async function() {
     const animationItemEl =
       findAnimationItemElementsByTargetSelector(panel, `.${ targetClass }`);
 
-    info(`Checking animation name element existance for ${ targetClass }`);
+    info(`Checking animation name element existence for ${ targetClass }`);
     const animationNameEl = animationItemEl.querySelector(".animation-name");
 
     if (expectedLabel) {

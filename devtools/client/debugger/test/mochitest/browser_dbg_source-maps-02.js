@@ -51,7 +51,7 @@ function testToggleGeneratedSource() {
     isnot(gSources.selectedItem.attachment.source.url.indexOf(".js"), -1,
       "The debugger should show the generated js source file.");
 
-    is(gEditor.getText().indexOf("isnt"), -1,
+    is(gEditor.getText().indexOf("isn't"), -1,
       "The debugger's editor should not have the coffee source source displayed.");
     is(gEditor.getText().indexOf("function"), 36,
       "The debugger's editor should have the JS source displayed.");
@@ -104,7 +104,7 @@ function testToggleOnPause() {
     is(gSources.selectedItem.attachment.source.url.indexOf(".js"), -1,
       "The debugger should not show the generated js source file.");
 
-    is(gEditor.getText().indexOf("isnt"), 218,
+    is(gEditor.getText().indexOf("isn't"), 218,
       "The debugger's editor should have the coffee source source displayed.");
     is(gEditor.getText().indexOf("function"), -1,
       "The debugger's editor should not have the JS source displayed.");

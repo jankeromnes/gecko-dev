@@ -54,7 +54,7 @@ interface nsIClipboard : nsISupports
 
    /**
     * This provides a way to give correct UI feedback about, for instance, a paste 
-    * should be allowed. It does _NOT_ actually retreive the data and should be a very
+    * should be allowed. It does _NOT_ actually retrieve the data and should be a very
     * inexpensive call. All it does is check if there is data on the clipboard matching
     * any of the flavors in the given list.
     *

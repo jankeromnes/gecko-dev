@@ -222,7 +222,7 @@ struct CheckedMulOp<T,
   }
 };
 
-// Avoid poluting the namespace once we're done with the macro.
+// Avoid polluting the namespace once we're done with the macro.
 #undef USE_OVERFLOW_BUILTINS
 
 // Division just requires a check for a zero denominator or an invalid negation
@@ -470,7 +470,7 @@ BASE_FLOAT_ARITHMETIC_OPS(Div, /)
 // Wrap the unary operations to allow SFINAE when instantiating integrals versus
 // floating points. These don't perform any overflow checking. Rather, they
 // exhibit well-defined overflow semantics and rely on the caller to detect
-// if an overflow occured.
+// if an overflow occurred.
 
 template <typename T,
           typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>

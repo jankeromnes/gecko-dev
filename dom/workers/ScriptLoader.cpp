@@ -1437,7 +1437,7 @@ private:
       }
     }
 
-    // This is the last index, we can unused things before the exection of the
+    // This is the last index, we can unused things before the execution of the
     // script and the stopping of the sync loop.
     if (lastIndex == mLoadInfos.Length() - 1) {
       mCacheCreator = nullptr;
@@ -2296,14 +2296,14 @@ ChannelFromScriptURLMainThread(nsIPrincipal* aPrincipal,
 
 nsresult
 ChannelFromScriptURLWorkerThread(JSContext* aCx,
-                                 WorkerPrivate* aParent,
+                                 WorkerPrivate* apparent,
                                  const nsAString& aScriptURL,
                                  WorkerLoadInfo& aLoadInfo)
 {
   aParent->AssertIsOnWorkerThread();
 
   RefPtr<ChannelGetterRunnable> getter =
-    new ChannelGetterRunnable(aParent, aScriptURL, aLoadInfo);
+    new ChannelGetterRunnable(apparent, aScriptURL, aLoadInfo);
 
   ErrorResult rv;
   getter->Dispatch(Canceling, rv);

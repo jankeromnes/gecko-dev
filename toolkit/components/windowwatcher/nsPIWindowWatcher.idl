@@ -46,9 +46,9 @@ interface nsPIWindowWatcher : nsISupports
   /** Like the public interface's open(), but can handle openDialog-style
       arguments and calls which shouldn't result in us navigating the window.
 
-      @param aParent parent window, if any. Null if no parent.  If it is
-             impossible to get to an nsIWebBrowserChrome from aParent, this
-             method will effectively act as if aParent were null.
+      @param apparent parent window, if any. Null if no parent.  If it is
+             impossible to get to an nsIWebBrowserChrome from apparent, this
+             method will effectively act as if apparent were null.
       @param aURL url to which to open the new window. Must already be
              escaped, if applicable. can be null.
       @param aName window name from JS window.open. can be null.  If a window
@@ -80,9 +80,9 @@ interface nsPIWindowWatcher : nsISupports
       @note This method should try to set the default charset for the new
             window to the default charset of the document in the calling window
             (which is determined based on the JS stack and the value of
-            aParent).  This is not guaranteed, however.
+            apparent).  This is not guaranteed, however.
   */
-  mozIDOMWindowProxy openWindow2(in mozIDOMWindowProxy aParent, in string aUrl,
+  mozIDOMWindowProxy openWindow2(in mozIDOMWindowProxy apparent, in string aUrl,
                                  in string aName, in string aFeatures,
                                  in boolean aCalledFromScript,
                                  in boolean aDialog,

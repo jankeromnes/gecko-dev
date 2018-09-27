@@ -918,7 +918,7 @@ protected:
      * RestoreCommittedComposition() restores the committed string as
      * composing string.  If InsertTextAtSelection() or something is called
      * before a call of OnStartComposition() or previous composition is
-     * committed and new composition is restarted to clean up the commited
+     * committed and new composition is restarted to clean up the committed
      * string, there is a pending compositionend.  In this case, we need to
      * cancel the pending compositionend and continue the composition.
      *

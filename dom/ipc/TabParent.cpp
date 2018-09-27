@@ -878,7 +878,7 @@ TabParent::Deactivate()
 }
 
   a11y::PDocAccessibleParent*
-TabParent::AllocPDocAccessibleParent(PDocAccessibleParent* aParent,
+TabParent::AllocPDocAccessibleParent(PDocAccessibleParent* apparent,
                                      const uint64_t&, const uint32_t&,
                                      const IAccessibleHolder&)
 {
@@ -890,10 +890,10 @@ TabParent::AllocPDocAccessibleParent(PDocAccessibleParent* aParent,
 }
 
 bool
-TabParent::DeallocPDocAccessibleParent(PDocAccessibleParent* aParent)
+TabParent::DeallocPDocAccessibleParent(PDocAccessibleParent* apparent)
 {
 #ifdef ACCESSIBILITY
-  delete static_cast<a11y::DocAccessibleParent*>(aParent);
+  delete static_cast<a11y::DocAccessibleParent*>(apparent);
 #endif
   return true;
 }

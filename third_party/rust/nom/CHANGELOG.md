@@ -518,7 +518,7 @@ Considering the number of changes since the last release, this version can conta
 ## 0.3.11 - 2015-08-04
 
 ### Thanks
-- @bluss for remarking that the crate included random junk lying non commited in my local repository
+- @bluss for remarking that the crate included random junk lying non committed in my local repository
 
 ### Fixed
 - cleanup of my local repository will ship less files in the crates, resulting in a smaller download
@@ -581,7 +581,7 @@ Considering the number of changes since the last release, this version can conta
 ### Added
 - documentation for a few functions
 - the consumer trait now requires the `failed(&self, error_code)` method in case of parsing error
-- `named!` now handles thge alternative `named!(pub fun_name<OutputType>, ...)`
+- `named!` now handles the alternative `named!(pub fun_name<OutputType>, ...)`
 
 ### Fixed
 - `filter!` now returns the whole input if the filter function never returned false

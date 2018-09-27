@@ -85,14 +85,14 @@ HTMLEmbedElement::AsyncEventRunning(AsyncEventDispatcher* aEvent)
 
 nsresult
 HTMLEmbedElement::BindToTree(nsIDocument *aDocument,
-                             nsIContent *aParent,
+                             nsIContent *apparent,
                              nsIContent *aBindingParent)
 {
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
-  rv = nsObjectLoadingContent::BindToTree(aDocument, aParent,
+  rv = nsObjectLoadingContent::BindToTree(aDocument, apparent,
                                           aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

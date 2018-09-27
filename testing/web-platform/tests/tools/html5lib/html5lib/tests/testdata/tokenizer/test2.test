@@ -124,7 +124,7 @@
 "input":"<?namespace>",
 "output":["ParseError", ["Comment", "?namespace"]]},
 
-{"description":"A bogus comment stops at >, even if preceeded by two dashes",
+{"description":"A bogus comment stops at >, even if preceded by two dashes",
 "input":"<?foo-->",
 "output":["ParseError", ["Comment", "?foo--"]]},
 

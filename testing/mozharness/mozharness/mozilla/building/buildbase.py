@@ -888,7 +888,7 @@ or run without that action (ie: --no-{action})"
         1) must be a platform that can run against pgo
         2) either:
             a) must be a nightly build
-            b) must be on a branch that runs pgo if it can everytime
+            b) must be on a branch that runs pgo if it can every time
         """
         c = self.config
         if self.stage_platform in c['pgo_platforms']:
@@ -1119,7 +1119,7 @@ or run without that action (ie: --no-{action})"
         self._generate_build_stats()
 
     def static_analysis_autotest(self):
-        """Run mach static-analysis autotest, in order to make sure we dont regress"""
+        """Run mach static-analysis autotest, in order to make sure we don't regress"""
         self.preflight_build()
         self._run_mach_command_in_build_env(['static-analysis', 'autotest', '--intree-tool'])
 

@@ -1441,7 +1441,7 @@ TEST(VP8VideoTrackEncoder, EncodeComplete)
 
   // Pull Encoded Data back from encoder. Since we have sent
   // EOS to encoder, encoder.GetEncodedTrack should return
-  // NS_OK immidiately.
+  // NS_OK immediately.
   EncodedFrameContainer container;
   EXPECT_TRUE(NS_SUCCEEDED(encoder.GetEncodedTrack(container)));
 

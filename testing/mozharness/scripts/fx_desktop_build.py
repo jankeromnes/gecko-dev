@@ -183,7 +183,7 @@ class FxDesktopBuild(BuildScript, TryToolsMixin, object):
             # This contains all the source code/objdir to compile.  However,
             # there is already a build dir in mozharness for every mh run. The
             # 'build' that factory refers to I named: 'src' so
-            # there is a seperation in mh.  for example, rather than having
+            # there is a separation in mh.  for example, rather than having
             # '{mozharness_repo}/build/build/', I have '{
             # mozharness_repo}/build/src/'
             'abs_src_dir': os.path.join(abs_dirs['abs_work_dir'],

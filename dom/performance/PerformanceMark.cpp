@@ -10,10 +10,10 @@
 
 using namespace mozilla::dom;
 
-PerformanceMark::PerformanceMark(nsISupports* aParent,
+PerformanceMark::PerformanceMark(nsISupports* apparent,
                                  const nsAString& aName,
                                  DOMHighResTimeStamp aStartTime)
-  : PerformanceEntry(aParent, aName, NS_LITERAL_STRING("mark"))
+  : PerformanceEntry(apparent, aName, NS_LITERAL_STRING("mark"))
   , mStartTime(aStartTime)
 {
 }

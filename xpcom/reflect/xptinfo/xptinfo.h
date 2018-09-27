@@ -109,7 +109,7 @@ struct nsXPTInterfaceInfo
   nsresult GetName(char** aName) const;
   nsresult IsScriptable(bool* aRes) const;
   nsresult IsBuiltinClass(bool* aRes) const;
-  nsresult GetParent(const nsXPTInterfaceInfo** aParent) const;
+  nsresult GetParent(const nsXPTInterfaceInfo** apparent) const;
   nsresult GetMethodCount(uint16_t* aMethodCount) const;
   nsresult GetConstantCount(uint16_t* aConstantCount) const;
   nsresult GetMethodInfo(uint16_t aIndex, const nsXPTMethodInfo** aInfo) const;

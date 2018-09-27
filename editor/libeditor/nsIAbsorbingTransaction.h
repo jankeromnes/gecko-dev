@@ -29,7 +29,7 @@ class SelectionState;
 
 /**
  * A transaction interface mixin - for transactions that can support.
- * the placeholder absorbtion idiom.
+ * the placeholder absorption idiom.
  */
 class nsIAbsorbingTransaction  : public nsISupports{
 public:

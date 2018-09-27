@@ -38,7 +38,7 @@ var cnNUMBER = 123;
 
 
 /***********************************************************/
-/****  THESE ARE LEGITMATE CALLS AND SHOULD ALL SUCCEED  ***/
+/****  THESE ARE LEGITIMATE CALLS AND SHOULD ALL SUCCEED  ***/
 /***********************************************************/
 status = inSection(1);
 actual = cnFAIL_1; // initialize to failure

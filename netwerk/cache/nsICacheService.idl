@@ -24,7 +24,7 @@ interface nsIEventTarget;
 interface nsICacheService : nsISupports
 {
     /**
-     * @throws NS_ERROR_NOT_IMPLEMENTED when the cache v2 is prefered to use.
+     * @throws NS_ERROR_NOT_IMPLEMENTED when the cache v2 is preferred to use.
      *
      * Create a cache session
      *
@@ -50,14 +50,14 @@ interface nsICacheService : nsISupports
                                   in boolean                streamBased);
 
     /**
-     * @throws NS_ERROR_NOT_IMPLEMENTED when the cache v2 is prefered to use.
+     * @throws NS_ERROR_NOT_IMPLEMENTED when the cache v2 is preferred to use.
      *
      * Visit entries stored in the cache.  Used to implement about:cache.
      */
     void visitEntries(in nsICacheVisitor visitor);
 
     /**
-     * @throws NS_ERROR_NOT_IMPLEMENTED when the cache v2 is prefered to use.
+     * @throws NS_ERROR_NOT_IMPLEMENTED when the cache v2 is preferred to use.
      *
      * Evicts all entries in all devices implied by the storage policy.
      *

@@ -50,7 +50,7 @@ class Indexer:
        The toc data file should be list of tab-separated records, one
        per line, of each spec section's uri, number/letter, and title.
        `splitChapter` selects a single page index if False, chapter 
-       indicies if True.
+       indices if True.
        `extraData` can be a dictionary whose data gets passed to the templates.
        `overviewCopyExts` lists file extensions that should be found
        and copied from the template path into the main build directory.

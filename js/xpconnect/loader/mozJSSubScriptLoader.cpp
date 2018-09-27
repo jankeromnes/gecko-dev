@@ -212,7 +212,7 @@ EvalScript(JSContext* cx,
         if (!loadScope) {
             // A null loadScope means we are cross-compartment. In this case, we
             // should check the target isn't in the JSM loader shared-global or
-            // we will contaiminate all JSMs in the compartment.
+            // we will contaminate all JSMs in the compartment.
             //
             // NOTE: If loadScope is already a shared-global JSM, we can't
             // determine which JSM the target belongs to and have to assume it

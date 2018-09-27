@@ -40,7 +40,7 @@
 
       for (let idx = 0; idx < globalIds.length; idx++) {
         ok(isAccessible(globalIds[idx]),
-           "Must be accessible becuase of aria-" + globalIds[idx] +
+           "Must be accessible because of aria-" + globalIds[idx] +
            " presence");
       }
 
@@ -52,7 +52,7 @@
 
       for (let idx = 0; idx < globalIds.length; idx++) {
         ok(isAccessible("td_" + globalIds[idx]),
-           "Inherited presentation role must be ignored becuase of " +
+           "Inherited presentation role must be ignored because of " +
            "aria-" + globalIds[idx] + " presence");
       }
 

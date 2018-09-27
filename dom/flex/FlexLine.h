@@ -23,7 +23,7 @@ class FlexLine : public nsISupports
                , public nsWrapperCache
 {
 public:
-  explicit FlexLine(Flex* aParent,
+  explicit FlexLine(Flex* apparent,
                     const ComputedFlexLineInfo* aLine);
 
 protected:

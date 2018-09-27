@@ -123,7 +123,7 @@ public:
    * aNodes
    */
   static void FireNodeInserted(nsIDocument* aDoc,
-                               nsINode* aParent,
+                               nsINode* apparent,
                                nsTArray<nsCOMPtr<nsIContent> >& aNodes);
 
   NS_DECL_CYCLE_COLLECTION_SKIPPABLE_SCRIPT_HOLDER_CLASS_INHERITED(FragmentOrElement,

@@ -12,7 +12,7 @@ import traceback
 try:
     from unittest import TextTestResult
 except ImportError:
-    # bug 971243 - python 2.6 compatibilty
+    # bug 971243 - python 2.6 compatibility
     from unittest import _TextTestResult as TextTestResult
 
 """Adapter used to output structuredlog messages from unittest

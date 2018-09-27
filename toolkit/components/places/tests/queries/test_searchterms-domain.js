@@ -77,7 +77,7 @@ add_task(async function test_searchterms_domain() {
     info("result: " + root.getChild(i).uri + " Title: " + root.getChild(i).title);
   }
 
-  // Check our inital result set
+  // Check our initial result set
   compareArrayToResult(testData, root);
 
   // If that passes, check liveupdate

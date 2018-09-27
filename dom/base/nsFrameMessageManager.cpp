@@ -176,11 +176,11 @@ MessageManagerCallback::DoGetRemoteType(nsAString& aRemoteType,
 }
 
 bool
-MessageManagerCallback::BuildClonedMessageDataForParent(nsIContentParent* aParent,
+MessageManagerCallback::BuildClonedMessageDataForParent(nsIContentParent* apparent,
                                                         StructuredCloneData& aData,
                                                         ClonedMessageData& aClonedData)
 {
-  return aData.BuildClonedMessageDataForParent(aParent, aClonedData);
+  return aData.BuildClonedMessageDataForParent(apparent, aClonedData);
 }
 
 bool

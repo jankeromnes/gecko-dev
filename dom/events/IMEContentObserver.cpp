@@ -1246,17 +1246,17 @@ IMEContentObserver::ClearAddedNodesDuringDocumentChange()
 }
 
 bool
-IMEContentObserver::IsNextNodeOfLastAddedNode(nsINode* aParent,
+IMEContentObserver::IsNextNodeOfLastAddedNode(nsINode* apparent,
                                               nsIContent* aChild) const
 {
-  MOZ_ASSERT(aParent);
-  MOZ_ASSERT(aChild && aChild->GetParentNode() == aParent);
+  MOZ_ASSERT(apparent);
+  MOZ_ASSERT(aChild && aChild->GetParentNode() == apparent);
   MOZ_ASSERT(mRootContent);
   MOZ_ASSERT(HasAddedNodesDuringDocumentChange());
 
   // If the parent node isn't changed, we can check that mLastAddedContent has
   // aChild as its next sibling.
-  if (aParent == mLastAddedContainer) {
+  if (apparent == mLastAddedContainer) {
     if (NS_WARN_IF(mLastAddedContent->GetNextSibling() != aChild)) {
       return false;
     }
@@ -1269,7 +1269,7 @@ IMEContentObserver::IsNextNodeOfLastAddedNode(nsINode* aParent,
     return false;
   }
 
-  // If the node is aParent is a descendant of mLastAddedContainer,
+  // If the node is apparent is a descendant of mLastAddedContainer,
   // aChild should be the first child in the new container.
   if (mLastAddedContainer == aParent->GetParent()) {
     if (NS_WARN_IF(aChild->GetPreviousSibling())) {

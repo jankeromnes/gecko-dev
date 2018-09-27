@@ -161,7 +161,7 @@ common_gyp_vars() {
 
 ################################################################################
 # Initializes environment variables for NDK/SDK build. Only Android NDK Revision
-# 7 on Linux or Mac is offically supported. To run this script, the system
+# 7 on Linux or Mac is officially supported. To run this script, the system
 # environment ANDROID_NDK_ROOT must be set to Android NDK's root path.  The
 # ANDROID_SDK_ROOT only needs to be set to override the default SDK which is in
 # the tree under $ROOT/src/third_party/android_tools/sdk.

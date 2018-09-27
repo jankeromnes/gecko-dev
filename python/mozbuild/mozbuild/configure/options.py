@@ -399,7 +399,7 @@ class CommandLineHelper(object):
     For instance, an Option('--foo', env='FOO') can be passed as --foo on the
     command line, or as FOO=1 in the environment *or* on the command line.
 
-    If multiple variants are given, command line is prefered over the
+    If multiple variants are given, command line is preferred over the
     environment, and if different values are given on the command line, the
     last one wins. (This mimicks the behavior of autoconf, avoiding to break
     existing mozconfigs using valid options in weird ways)

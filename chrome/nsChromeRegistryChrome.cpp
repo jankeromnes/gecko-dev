@@ -331,7 +331,7 @@ SerializeURI(nsIURI* aURI,
 
 void
 nsChromeRegistryChrome::SendRegisteredChrome(
-    mozilla::dom::PContentParent* aParent)
+    mozilla::dom::PContentParent* apparent)
 {
   InfallibleTArray<ChromePackage> packages;
   InfallibleTArray<SubstitutionMapping> resources;
@@ -347,7 +347,7 @@ nsChromeRegistryChrome::SendRegisteredChrome(
   // If we were passed a parent then a new child process has been created and
   // has requested all of the chrome so send it the resources too. Otherwise
   // resource mappings are sent by the resource protocol handler dynamically.
-  if (aParent) {
+  if (apparent) {
     nsCOMPtr<nsIIOService> io (do_GetIOService());
     NS_ENSURE_TRUE_VOID(io);
 
@@ -374,7 +374,7 @@ nsChromeRegistryChrome::SendRegisteredChrome(
   nsAutoCString appLocale;
   LocaleService::GetInstance()->GetAppLocaleAsLangTag(appLocale);
 
-  if (aParent) {
+  if (apparent) {
     bool success = aParent->SendRegisterChrome(packages, resources, overrides,
                                                appLocale, false);
     NS_ENSURE_TRUE_VOID(success);

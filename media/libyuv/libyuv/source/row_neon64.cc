@@ -2356,7 +2356,7 @@ void ARGBSepiaRow_NEON(uint8_t* dst_argb, int width) {
         "v21", "v22", "v24", "v25", "v26", "v28", "v29", "v30");
 }
 
-// Tranform 8 ARGB pixels (32 bytes) with color matrix.
+// Transform 8 ARGB pixels (32 bytes) with color matrix.
 // TODO(fbarchard): Was same as Sepia except matrix is provided.  This function
 // needs to saturate.  Consider doing a non-saturating version.
 void ARGBColorMatrixRow_NEON(const uint8_t* src_argb,

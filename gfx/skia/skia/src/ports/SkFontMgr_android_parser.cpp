@@ -55,7 +55,7 @@ struct FamilyData;
 
 struct TagHandler {
     /** Called at the start tag.
-     *  Called immediately after the parent tag retuns this handler from a call to 'tag'.
+     *  Called immediately after the parent tag returns this handler from a call to 'tag'.
      *  Allows setting up for handling the tag content and processing attributes.
      *  If nullptr, will not be called.
      */

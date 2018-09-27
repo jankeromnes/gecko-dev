@@ -244,7 +244,7 @@ class FecPacketMaskMetricsTest : public ::testing::Test {
     return num_recovered_packets;
   }
 
-  // Compute the probability of occurence of the loss state/configuration,
+  // Compute the probability of occurrence of the loss state/configuration,
   // given by |state|, for all the loss models considered in this test.
   void ComputeProbabilityWeight(double* prob_weight,
                                 uint8_t* state,
@@ -383,7 +383,7 @@ class FecPacketMaskMetricsTest : public ::testing::Test {
 
   // Compute the metrics for an FEC code, given by the code type |code_type|
   // (XOR-random/ bursty or RS), and by the code index |code_index|
-  // (which containes the code size parameters/protection length).
+  // (which contains the code size parameters/protection length).
   void ComputeMetricsForCode(CodeType code_type,
                              int code_index) {
     std::unique_ptr<double[]> prob_weight(new double[kNumLossModels]);

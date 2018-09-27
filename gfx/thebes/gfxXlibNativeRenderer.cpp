@@ -46,7 +46,7 @@ using namespace mozilla::gfx;
       because that would mean that drawing intended to be very transparent
       messes with other content.
 
-      The strategy is prefered over simple for non-opaque drawing and opaque
+      The strategy is preferred over simple for non-opaque drawing and opaque
       targets on the same screen as compositing without alpha is a simpler
       operation.
 

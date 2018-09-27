@@ -66,7 +66,7 @@ class WPDTree {
   WPDNode* NodeAt(int level, int index);
 
   // Updates all the nodes of the tree with the new data. |data_length| must be
-  // teh same that was used for the creation of the tree.
+  // the same that was used for the creation of the tree.
   // Returns 0 if correct, and -1 otherwise.
   int Update(const float* data, size_t data_length);
 

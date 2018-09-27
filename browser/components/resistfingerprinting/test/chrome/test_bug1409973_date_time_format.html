@@ -46,7 +46,7 @@
       ["javascript.use_us_english_locale", true],
     ],
   }, function() {
-    // Now confirm that calling toLocaleString with no arguements gives us UTC
+    // Now confirm that calling toLocaleString with no arguments gives us UTC
     SimpleTest.is(date.toLocaleString(undefined, {timeZoneName: "long"}), referenceLocaleString, "Date.toLocaleString");
     // And that a no-options Intl.DateTimeFormat formatter looks correct too
     let options = new Intl.DateTimeFormat(undefined, {

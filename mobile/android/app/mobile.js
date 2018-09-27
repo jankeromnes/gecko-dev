@@ -220,7 +220,7 @@ pref("extensions.getAddons.langpacks.url", "https://services.addons.mozilla.org/
 
 /* preference for the locale picker */
 pref("extensions.getLocales.get.url", "");
-pref("extensions.compatability.locales.buildid", "0");
+pref("extensions.compatibility.locales.buildid", "0");
 
 /* Don't let XPIProvider install distribution add-ons; we do our own thing on mobile. */
 pref("extensions.installDistroAddons", false);

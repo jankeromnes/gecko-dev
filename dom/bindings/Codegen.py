@@ -1212,7 +1212,7 @@ class CGHeaders(CGWrapper):
         # Now for non-callback descriptors make sure we include any
         # headers needed by Func declarations and other things like that.
         for desc in descriptors:
-            # If this is an iterator interface generated for a seperate
+            # If this is an iterator interface generated for a separate
             # iterable interface, skip generating type includes, as we have
             # what we need in IterableIterator.h
             if desc.interface.isExternal() or desc.interface.isIteratorInterface():
@@ -2173,7 +2173,7 @@ class PropertyDefiner:
         specType = "const " + specType
         arrays = fill(
             """
-            // We deliberately use brace-elision to make Visual Studio produce better initalization code.
+            // We deliberately use brace-elision to make Visual Studio produce better initialization code.
             #if defined(__clang__)
             #pragma clang diagnostic push
             #pragma clang diagnostic ignored "-Wmissing-braces"
@@ -2656,7 +2656,7 @@ class AttrDefiner(PropertyDefiner):
 
 class ConstDefiner(PropertyDefiner):
     """
-    A class for definining constants on the interface object
+    A class for defining constants on the interface object
     """
     def __init__(self, descriptor, name):
         PropertyDefiner.__init__(self, descriptor, name)
@@ -8248,7 +8248,7 @@ class CGMethodCall(CGThing):
 
             # First check for undefined and optional distinguishing arguments
             # and output a special branch for that case.  Note that we don't
-            # use distinguishingArgument here because we actualy want to
+            # use distinguishingArgument here because we actually want to
             # exclude variadic arguments.  Also note that we skip this check if
             # we plan to output a isNullOrUndefined() special case for this
             # argument anyway, since that will subsume our isUndefined() check.
@@ -15307,23 +15307,23 @@ class CGJSImplClass(CGBindingImplClass):
         baseConstructors = [
             ("mImpl(new %s(nullptr, aJSImplObject, aJSImplGlobal, /* aIncumbentGlobal = */ nullptr))" %
              jsImplName(descriptor.name)),
-            "mParent(aParent)"]
+            "mParent(apparent)"]
         parentInterface = descriptor.interface.parent
         while parentInterface:
             if parentInterface.isJSImplemented():
                 baseConstructors.insert(
-                    0, "%s(aJSImplObject, aJSImplGlobal, aParent)" % parentClass)
+                    0, "%s(aJSImplObject, aJSImplGlobal, apparent)" % parentClass)
                 break
             parentInterface = parentInterface.parent
         if not parentInterface and descriptor.interface.parent:
             # We only have C++ ancestors, so only pass along the window
             baseConstructors.insert(0,
-                                    "%s(aParent)" % parentClass)
+                                    "%s(apparent)" % parentClass)
 
         constructor = ClassConstructor(
             [Argument("JS::Handle<JSObject*>", "aJSImplObject"),
              Argument("JS::Handle<JSObject*>", "aJSImplGlobal"),
-             Argument("nsIGlobalObject*", "aParent")],
+             Argument("nsIGlobalObject*", "apparent")],
             visibility="public",
             baseConstructors=baseConstructors)
 
@@ -16487,7 +16487,7 @@ class CGMaplikeOrSetlikeMethodGenerator(CGThing):
     def appendKeyArgConversion(self):
         """
         Generates the key argument for methods. Helper functions will use
-        an AutoValueVector, while interface methods have seperate JS::Values.
+        an AutoValueVector, while interface methods have separate JS::Values.
         """
         if self.helperImpl:
             return ([], ["argv[0]"], [])
@@ -16497,7 +16497,7 @@ class CGMaplikeOrSetlikeMethodGenerator(CGThing):
         """
         Generates arguments for methods that require a key and value. Helper
         functions will use an AutoValueVector, while interface methods have
-        seperate JS::Values.
+        separate JS::Values.
         """
         r = self.appendKeyArgConversion()
         if self.helperImpl:

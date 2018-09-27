@@ -6485,7 +6485,7 @@ Ember.setupForTesting = testing.setupForTesting;
   		    assertLi,
   		    assertList;
 
-  		// Update remaing tests to aborted
+  		// Update remaining tests to aborted
   		if (abortButton && abortButton.disabled) {
   			html = "Tests aborted after " + details.runtime + " milliseconds.";
 
@@ -10211,7 +10211,7 @@ define('ember-qunit/adapter', ['exports', 'qunit', '@ember/test-helpers/has-embe
       message = error;
       source = 'unknown source';
     } else {
-      message = 'unhandledRejection occured, but it had no message';
+      message = 'unhandledRejection occurred, but it had no message';
       source = 'unknown source';
     }
 

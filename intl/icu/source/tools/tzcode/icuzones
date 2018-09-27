@@ -52,7 +52,7 @@ Link America/St_Johns CNT
 Link America/Chicago CST
 Link Asia/Shanghai CTT
 Link Africa/Addis_Ababa EAT
-Link Europe/Paris ECT
+Link Europe/Paris ETC
 #Link Europe/Istanbul EET # EET is a standard UNIX zone
 ####Link EST America/New_York EST # Defined as -05:00
 ####Link Pacific/Honolulu HST # Defined as -10:00

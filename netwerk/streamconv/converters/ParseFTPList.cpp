@@ -969,7 +969,7 @@ int ParseFTPList(const char *line, struct list_state *state,
        * "----------   1 owner    group         1803128 Jul 10 10:18 ls-lR.Z"
        * "d---------   1 owner    group               0 May  9 19:45 Softlib"
        * Also WFTPD for MSDOS:
-       * "-rwxrwxrwx   1 noone    nogroup      322 Aug 19  1996 message.ftp"
+       * "-rwxrwxrwx   1 no one    nogroup      322 Aug 19  1996 message.ftp"
        * Hellsoft for NetWare:
        * "d[RWCEMFA] supervisor            512       Jan 16 18:53    login"
        * "-[RWCEMFA] rhesus             214059       Oct 20 15:27    cx.exe"

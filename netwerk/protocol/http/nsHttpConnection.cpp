@@ -711,7 +711,7 @@ nsHttpConnection::Activate(nsAHttpTransaction *trans, uint32_t caps, int32_t pri
     NS_ENSURE_ARG_POINTER(trans);
     NS_ENSURE_TRUE(!mTransaction, NS_ERROR_IN_PROGRESS);
 
-    // If TCP fast Open has been used and conection was idle for some time
+    // If TCP fast Open has been used and connection was idle for some time
     // we will be cautious and watch out for bug 1395494.
     if (mNPNComplete && (mFastOpenStatus == TFO_DATA_SENT) &&
         gHttpHandler->CheckIfConnectionIsStalledOnlyIfIdleForThisAmountOfSeconds() &&
@@ -852,7 +852,7 @@ nsHttpConnection::SetupNPNList(nsISSLSocketControl *ssl, uint32_t caps)
     if (npnToken.IsEmpty()) {
         // The first protocol is used as the fallback if none of the
         // protocols supported overlap with the server's list.
-        // When using ALPN the advertised preferences are protocolArray indicies
+        // When using ALPN the advertised preferences are protocolArray indices
         // {1, .., N, 0} in decreasing order.
         // For NPN, In the case of overlap, matching priority is driven by
         // the order of the server's advertisement - with index 0 used when
@@ -2575,7 +2575,7 @@ nsHttpConnection::SetFastOpenStatus(uint8_t tfoStatus) {
                 (mFastOpenStatus <= TFO_FAILED_BACKUP_CONNECTION_TFO_DATA_COOKIE_NOT_ACCEPTED)) {
                 mFastOpenStatus = TFO_FAILED_BACKUP_CONNECTION_NO_TFO_FAILED_TOO;
             } else {
-                // We add +7 to tranform TFO_FAILED_CONNECTION_REFUSED into
+                // We add +7 to transform TFO_FAILED_CONNECTION_REFUSED into
                 // TFO_FAILED_CONNECTION_REFUSED_NO_TFO_FAILED_TOO, etc.
                 // If the list in TCPFastOpenLayer.h changes please addapt +7.
                 mFastOpenStatus = tfoStatus + 7;

@@ -59,7 +59,7 @@ var tcuImageCompare = framework.common.tcuImageCompare;
      * @constructor
      * @struct
      */
-    es3fPixelBufferObjectTest.TestSpec = function() { // This is originaly a struct
+    es3fPixelBufferObjectTest.TestSpec = function() { // This is originally a struct
         this.name = '';
         this.description = '';
         this.useColorClear = false;

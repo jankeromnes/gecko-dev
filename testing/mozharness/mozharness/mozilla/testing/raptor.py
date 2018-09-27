@@ -262,7 +262,7 @@ class Raptor(TestingMixin, MercurialScript, CodeCoverageMixin, AndroidMixin):
         else:  # running on google chrome
             if not self.run_local:
                 # when running locally we already set the chrome binary above in init; here
-                # in production we aready installed chrome, so set the binary path to our install
+                # in production we already installed chrome, so set the binary path to our install
                 kw_options['binary'] = self.chrome_path
 
         # options overwritten from **kw

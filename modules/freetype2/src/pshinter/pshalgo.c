@@ -803,7 +803,7 @@
 
             /* We choose between B) and C) above based on the amount
              * of fractional stem width; for small amounts, choose
-             * C) always, for large amounts, B) always, and inbetween,
+             * C) always, for large amounts, B) always, and between,
              * pick whichever one involves less stem movement.
              */
             if ( frac_len < 32 )

@@ -21,7 +21,7 @@ public:
   NS_INLINE_DECL_CYCLE_COLLECTING_NATIVE_REFCOUNTING(AudioParamMap)
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_NATIVE_CLASS(AudioParamMap)
 
-  explicit AudioParamMap(nsPIDOMWindowInner* aParent);
+  explicit AudioParamMap(nsPIDOMWindowInner* apparent);
 
   nsPIDOMWindowInner* GetParentObject() const { return mParent; }
 

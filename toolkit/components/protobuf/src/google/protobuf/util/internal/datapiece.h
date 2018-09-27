@@ -55,7 +55,7 @@ namespace converter {
 //
 // For string, a StringPiece is stored. For Cord, a pointer to Cord is stored.
 // Just like StringPiece, the DataPiece class does not own the storage for
-// the actual string or Cord, so it is the user's responsiblity to guarantee
+// the actual string or Cord, so it is the user's responsibility to guarantee
 // that the underlying storage is still valid when the DataPiece is accessed.
 class LIBPROTOBUF_EXPORT DataPiece {
  public:

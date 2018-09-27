@@ -2746,7 +2746,7 @@ jsvalToInteger(JSContext* cx, HandleValue val, IntegerType* result)
   JS_STATIC_ASSERT(numeric_limits<IntegerType>::is_exact);
 
   if (val.isInt32()) {
-    // Make sure the integer fits in the alotted precision, and has the right
+    // Make sure the integer fits in the allotted precision, and has the right
     // sign.
     int32_t i = val.toInt32();
     return ConvertExact(i, result);
@@ -2976,7 +2976,7 @@ jsvalToBigInteger(JSContext* cx,
   JS_STATIC_ASSERT(numeric_limits<IntegerType>::is_exact);
 
   if (val.isInt32()) {
-    // Make sure the integer fits in the alotted precision, and has the right
+    // Make sure the integer fits in the allotted precision, and has the right
     // sign.
     int32_t i = val.toInt32();
     return ConvertExact(i, result);
@@ -3049,7 +3049,7 @@ jsidToBigInteger(JSContext* cx,
   JS_STATIC_ASSERT(numeric_limits<IntegerType>::is_exact);
 
   if (JSID_IS_INT(val)) {
-    // Make sure the integer fits in the alotted precision, and has the right
+    // Make sure the integer fits in the allotted precision, and has the right
     // sign.
     int32_t i = JSID_TO_INT(val);
     return ConvertExact(i, result);
@@ -3158,7 +3158,7 @@ jsvalToPtrExplicit(JSContext* cx, HandleValue val, uintptr_t* result)
       int64_t i = Int64Base::GetInt(obj);
       intptr_t p = intptr_t(i);
 
-      // Make sure the integer fits in the alotted precision.
+      // Make sure the integer fits in the allotted precision.
       if (int64_t(p) != i) {
         return false;
       }
@@ -3169,7 +3169,7 @@ jsvalToPtrExplicit(JSContext* cx, HandleValue val, uintptr_t* result)
     if (UInt64::IsUInt64(obj)) {
       uint64_t i = Int64Base::GetInt(obj);
 
-      // Make sure the integer fits in the alotted precision.
+      // Make sure the integer fits in the allotted precision.
       *result = uintptr_t(i);
       return uint64_t(*result) == i;
     }

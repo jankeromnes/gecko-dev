@@ -497,7 +497,7 @@ net_ExtractURLScheme(const nsACString &inURI,
     inURI.BeginReading(start);
     inURI.EndReading(end);
 
-    // Strip C0 and space from begining
+    // Strip C0 and space from beginning
     while (start != end) {
         if ((uint8_t) *start > 0x20) {
             break;
@@ -553,7 +553,7 @@ net_IsAbsoluteURL(const nsACString& uri)
     uri.BeginReading(start);
     uri.EndReading(end);
 
-    // Strip C0 and space from begining
+    // Strip C0 and space from beginning
     while (start != end) {
         if ((uint8_t) *start > 0x20) {
             break;

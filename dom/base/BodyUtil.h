@@ -37,7 +37,7 @@ public:
    * |aInput|, which must be allocated by |malloc|.
    */
   static already_AddRefed<Blob>
-  ConsumeBlob(nsISupports* aParent, const nsString& aMimeType,
+  ConsumeBlob(nsISupports* apparent, const nsString& aMimeType,
               uint32_t aInputLength, uint8_t* aInput, ErrorResult& aRv);
 
   /**
@@ -45,7 +45,7 @@ public:
    * and sets |aRv| to MSG_BAD_FORMDATA if |aStr| contains invalid data.
    */
   static already_AddRefed<FormData>
-  ConsumeFormData(nsIGlobalObject* aParent, const nsCString& aMimeType,
+  ConsumeFormData(nsIGlobalObject* apparent, const nsCString& aMimeType,
                   const nsCString& aStr, ErrorResult& aRv);
 
   /**

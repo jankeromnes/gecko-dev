@@ -49,7 +49,7 @@ namespace {
  * adding precalculated values.
  * For a linear example we have the function f(t) = m*t+b, then the value of that function at t+h
  * would be f(t+h) = m*(t+h)+b. If we want to know the uniform step that we must add to the first
- * evaluation f(t) then we need to substract f(t+h) - f(t) = m*t + m*h + b - m*t + b = mh. After
+ * evaluation f(t) then we need to subtract f(t+h) - f(t) = m*t + m*h + b - m*t + b = mh. After
  * obtaining this value (mh) we could just add this constant step to our first sampled point
  * to compute the next one.
  *
@@ -337,7 +337,7 @@ sk_sp<SkVertices> SkPatchUtils::MakeVertices(const SkPoint cubics[12], const SkC
 
     /*
      *  1. Should we offer this as a runtime choice, as we do in gradients?
-     *  2. Since drawing the vertices wants premul, shoudl we extend SkVertices to store
+     *  2. Since drawing the vertices wants premul, should we extend SkVertices to store
      *     premul colors (as floats, w/ a colorspace)?
      */
     bool doPremul = true;

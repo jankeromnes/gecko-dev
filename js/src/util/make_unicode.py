@@ -333,7 +333,7 @@ def process_unicode_data(unicode_data, derived_core_properties):
 
         flags = 0
 
-        # we combine whitespace and lineterminators because in pratice we don't need them separated
+        # we combine whitespace and lineterminators because in practice we don't need them separated
         if category == 'Zs' or code in whitespace or code in line_terminator:
             flags |= FLAG_SPACE
             test_space_table.append(code)

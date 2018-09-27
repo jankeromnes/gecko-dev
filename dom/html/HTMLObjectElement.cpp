@@ -229,14 +229,14 @@ HTMLObjectElement::PostHandleEvent(EventChainPostVisitor& aVisitor)
 
 nsresult
 HTMLObjectElement::BindToTree(nsIDocument *aDocument,
-                              nsIContent *aParent,
+                              nsIContent *apparent,
                               nsIContent *aBindingParent)
 {
-  nsresult rv = nsGenericHTMLFormElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLFormElement::BindToTree(aDocument, apparent,
                                                      aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
-  rv = nsObjectLoadingContent::BindToTree(aDocument, aParent,
+  rv = nsObjectLoadingContent::BindToTree(aDocument, apparent,
                                           aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

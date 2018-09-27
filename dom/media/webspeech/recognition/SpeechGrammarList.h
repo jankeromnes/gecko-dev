@@ -28,7 +28,7 @@ class SpeechGrammarList final : public nsISupports,
                                 public nsWrapperCache
 {
 public:
-  explicit SpeechGrammarList(nsISupports* aParent);
+  explicit SpeechGrammarList(nsISupports* apparent);
 
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(SpeechGrammarList)

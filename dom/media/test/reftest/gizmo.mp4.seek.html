@@ -13,9 +13,9 @@ function doTest() {
 
   video.currentTime = 1.801;
 
-  video.addEventListener("seeked", function() {
+  video.addEventListener("sought", function() {
     // Since the our media pipeline send the frame to imageBridge, then fire
-    // seeked event, the target frame may not be shown on the screen.
+    // sought event, the target frame may not be shown on the screen.
     // So using canvas to access the target frame in the imageContainer in
     // videoElement.
     var canvas = document.getElementById("canvas");

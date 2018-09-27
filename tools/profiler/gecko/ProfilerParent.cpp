@@ -20,8 +20,8 @@ using namespace ipc;
 
 class ProfilerParentTracker final {
 public:
-  static void StartTracking(ProfilerParent* aParent);
-  static void StopTracking(ProfilerParent* aParent);
+  static void StartTracking(ProfilerParent* apparent);
+  static void StopTracking(ProfilerParent* apparent);
 
   template<typename FuncType>
   static void Enumerate(FuncType aIterFunc);
@@ -47,10 +47,10 @@ ProfilerParentTracker::StartTracking(ProfilerParent* aProfilerParent)
 }
 
 /* static */ void
-ProfilerParentTracker::StopTracking(ProfilerParent* aParent)
+ProfilerParentTracker::StopTracking(ProfilerParent* apparent)
 {
   if (sInstance) {
-    sInstance->mProfilerParents.RemoveElement(aParent);
+    sInstance->mProfilerParents.RemoveElement(apparent);
   }
 }
 

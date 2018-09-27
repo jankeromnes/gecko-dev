@@ -2689,7 +2689,7 @@ Trace::PerformDeferredActions(LifoAlloc* alloc,
                     }
                     // SET_REGISTER is currently only used for newly introduced loop
                     // counters. They can have a significant previous value if they
-                    // occour in a loop. TODO(lrn): Propagate this information, so
+                    // occur in a loop. TODO(lrn): Propagate this information, so
                     // we can set undo_action to IGNORE if we know there is no value to
                     // restore.
                     undo_action = DEFER_RESTORE;

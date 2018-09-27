@@ -180,7 +180,7 @@ bool FindMatchingCrypto(const CryptoParamsVec& cryptos,
   return false;
 }
 
-// For audio, HMAC 32 is prefered over HMAC 80 because of the low overhead.
+// For audio, HMAC 32 is preferred over HMAC 80 because of the low overhead.
 void GetSupportedAudioCryptoSuites(const rtc::CryptoOptions& crypto_options,
     std::vector<int>* crypto_suites) {
 #ifdef HAVE_SRTP

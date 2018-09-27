@@ -389,7 +389,7 @@ static const char kEventTypeNames[][40] = {
   "show",                                    // EVENT_SHOW
   "hide",                                    // EVENT_HIDE
   "reorder",                                 // EVENT_REORDER
-  "active decendent change",                 // EVENT_ACTIVE_DECENDENT_CHANGED
+  "active descendant change",                 // EVENT_ACTIVE_DECENDENT_CHANGED
   "focus",                                   // EVENT_FOCUS
   "state change",                            // EVENT_STATE_CHANGE
   "location change",                         // EVENT_LOCATION_CHANGE

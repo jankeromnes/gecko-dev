@@ -630,7 +630,7 @@ sdb_openDBLocal(SDBPrivate *sdb_p, sqlite3 **sqlDB, const char **table)
     return CKR_OK;
 }
 
-/* closing the local database currenly means unlocking the monitor */
+/* closing the local database currently means unlocking the monitor */
 static CK_RV
 sdb_closeDBLocal(SDBPrivate *sdb_p, sqlite3 *sqlDB)
 {
@@ -1975,7 +1975,7 @@ sdb_init(char *dbname, char *table, sdbDataType type, int *inUpdate,
         PRUint32 tempOps = 0;
         /*
          *  Use PR_Access to determine how expensive it
-         * is to check for the existance of a local file compared to the same
+         * is to check for the existence of a local file compared to the same
          * check in the temp directory. If the temp directory is faster, cache
          * the database there. */
         tempDir = sdb_getTempDir(sqlDB);

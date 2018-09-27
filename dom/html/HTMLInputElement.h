@@ -195,7 +195,7 @@ public:
   void CancelRangeThumbDrag(bool aIsForUserEvent = true);
   void SetValueOfRangeForUserEvent(Decimal aValue);
 
-  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent) override;
   virtual void UnbindFromTree(bool aDeep = true,
                               bool aNullParent = true) override;
@@ -982,7 +982,7 @@ protected:
    * This helper method convert a sub-string that contains only digits to a
    * number (unsigned int given that it can't contain a minus sign).
    * This method will return whether the sub-string is correctly formatted
-   * (ie. contains only digit) and it can be successfuly parsed to generate a
+   * (ie. contains only digit) and it can be successfully parsed to generate a
    * number).
    * If the method returns true, |aResult| will contained the parsed number.
    *

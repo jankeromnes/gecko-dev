@@ -1219,7 +1219,7 @@ static nr_stun_attr_info attrs[] = {
    NR_ADD_STUN_ATTRIBUTE(NR_STUN_ATTR_BANDWIDTH, "BANDWIDTH", nr_stun_attr_codec_UINT4, 0)
 #endif /* USE_TURN */
 
-   /* for backwards compatibilty */
+   /* for backwards compatibility */
    NR_ADD_STUN_ATTRIBUTE(NR_STUN_ATTR_OLD_XOR_MAPPED_ADDRESS, "Old XOR-MAPPED-ADDRESS", nr_stun_attr_codec_old_xor_mapped_address, 0)
 #ifdef USE_RFC_3489_BACKWARDS_COMPATIBLE
    NR_ADD_STUN_ATTRIBUTE_IGNORE(NR_STUN_ATTR_OLD_RESPONSE_ADDRESS, "RESPONSE-ADDRESS")

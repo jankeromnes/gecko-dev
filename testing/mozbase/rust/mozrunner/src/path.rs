@@ -10,7 +10,7 @@ fn is_executable(path: &PathBuf) -> bool {
 
     // Permissions are a set of four 4-bit bitflags, represented by a single octal
     // digit.  The lowest bit of each of the last three values represents the
-    // executable permission for all, group and user, repsectively.  We assume the
+    // executable permission for all, group and user, respectively.  We assume the
     // file is executable if any of these are set.
     match fs::metadata(path).ok() {
         Some(meta) => meta.permissions().mode() & 0o111 != 0,

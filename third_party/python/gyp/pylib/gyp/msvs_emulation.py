@@ -1097,7 +1097,7 @@ def CalculateCommonVariables(default_variables, params):
   # To determine processor word size on Windows, in addition to checking
   # PROCESSOR_ARCHITECTURE (which reflects the word size of the current
   # process), it is also necessary to check PROCESSOR_ARCHITEW6432 (which
-  # contains the actual word size of the system when running thru WOW64).
+  # contains the actual word size of the system when running through WOW64).
   if ('64' in os.environ.get('PROCESSOR_ARCHITECTURE', '') or
       '64' in os.environ.get('PROCESSOR_ARCHITEW6432', '')):
     default_variables['MSVS_OS_BITS'] = 64

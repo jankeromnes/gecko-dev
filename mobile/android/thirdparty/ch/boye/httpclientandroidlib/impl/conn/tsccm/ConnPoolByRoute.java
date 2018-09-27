@@ -791,10 +791,10 @@ public class ConnPoolByRoute extends AbstractConnPool {
             }
 
             // wake up all waiting threads
-            final Iterator<WaitingThread> iwth = waitingThreads.iterator();
-            while (iwth.hasNext()) {
-                final WaitingThread waiter = iwth.next();
-                iwth.remove();
+            final Iterator<WaitingThread> with = waitingThreads.iterator();
+            while (with.hasNext()) {
+                final WaitingThread waiter = with.next();
+                with.remove();
                 waiter.wakeup();
             }
 

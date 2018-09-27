@@ -597,7 +597,7 @@ public:
   // is called to start the list over.
   void ClearSdpParseErrorMessages();
 
-  // Called to retreive the list of parsing errors.
+  // Called to retrieve the list of parsing errors.
   const std::vector<std::string> &GetSdpParseErrors();
 
   // Sets the RTC Signaling State

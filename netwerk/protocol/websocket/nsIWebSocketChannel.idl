@@ -20,7 +20,7 @@ webidl Node;
 /**
  * Low-level websocket API: handles network protocol.  
  *
- * This is primarly intended for use by the higher-level nsIWebSocket.idl.
+ * This is primarily intended for use by the higher-level nsIWebSocket.idl.
  * We are also making it scriptable for now, but this may change once we have
  * WebSockets for Workers.
  */

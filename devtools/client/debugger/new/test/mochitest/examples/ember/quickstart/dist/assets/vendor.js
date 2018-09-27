@@ -17023,7 +17023,7 @@ enifed('@glimmer/runtime', ['exports', '@glimmer/util', '@glimmer/reference', '@
 
     // Patch:    Adjacent text node merging fix
     // Browsers: IE, Edge, Firefox w/o inspector open
-    // Reason:   These browsers will merge adjacent text nodes. For exmaple given
+    // Reason:   These browsers will merge adjacent text nodes. For example given
     //           <div>Hello</div> with div.insertAdjacentHTML(' world') browsers
     //           with proper behavior will populate div.childNodes with two items.
     //           These browsers will populate it with one merged node instead.
@@ -17179,7 +17179,7 @@ enifed('@glimmer/runtime', ['exports', '@glimmer/util', '@glimmer/reference', '@
             this.document = document;
             this.setupUselessElement();
         }
-        // split into seperate method so that NodeDOMTreeConstruction
+        // split into separate method so that NodeDOMTreeConstruction
         // can override it.
 
 
@@ -21777,10 +21777,10 @@ enifed("dag-map", ["exports"], function (exports) {
                 }
             }
         };
-        Vertices.prototype.pushIncoming = function (incomming) {
+        Vertices.prototype.pushIncoming = function (incoming) {
             var stack = this.stack;
-            for (var i = incomming.length - 1; i >= 0; i--) {
-                var index = incomming[i];
+            for (var i = incoming.length - 1; i >= 0; i--) {
+                var index = incoming[i];
                 if (!this[index].flag) {
                     stack.push(index);
                 }
@@ -27150,7 +27150,7 @@ enifed('ember-glimmer/components/link-to', ['exports', 'ember-debug', 'ember-met
             get: function (_key) {
                 // always returns false for `get` because (due to the `set` just below)
                 // the cached return value from the set will prevent this getter from _ever_
-                // being called after a set has occured
+                // being called after a set has occurred
                 return false;
             },
             set: function (_key, value) {
@@ -35144,7 +35144,7 @@ enifed('ember-metal', ['exports', 'ember-environment', 'ember-utils', 'ember-deb
   var DESCRIPTOR = '__DESCRIPTOR__';
 
   /**
-    Returns the CP descriptor assocaited with `obj` and `keyName`, if any.
+    Returns the CP descriptor associated with `obj` and `keyName`, if any.
   
     @method descriptorFor
     @param {Object} obj the object to check
@@ -45085,7 +45085,7 @@ enifed('ember-runtime/computed/reduce_computed_macros', ['exports', 'ember-debug
     The callback method you provide should have the following signature.
     `item` is the current item in the iteration.
     `index` is the integer index of the current item in the iteration.
-    `array` is the dependant array itself.
+    `array` is the dependent array itself.
   
     ```javascript
     function(item, index, array);
@@ -57990,7 +57990,7 @@ enifed("handlebars", ["exports"], function (exports) {
       return;
     }
 
-    // We omit the last node if it's whitespace only and not preceeded by a non-content node.
+    // We omit the last node if it's whitespace only and not preceded by a non-content node.
     var original = current.value;
     current.value = current.value.replace(multiple ? /\s+$/ : /[ \t]+$/, '');
     current.leftStripped = current.value !== original;
@@ -58482,7 +58482,7 @@ enifed("route-recognizer", ["exports"], function (exports) {
     };
     var EmptyObject = Object.freeze({});
     var EmptyArray = Object.freeze([]);
-    // The `names` will be populated with the paramter name for each dynamic/star
+    // The `names` will be populated with the parameter name for each dynamic/star
     // segment. `shouldDecodes` will be populated with a boolean for each dyanamic/star
     // segment, indicating whether it should be decoded during recognition.
     function parse(segments, route, types) {
@@ -62346,10 +62346,10 @@ enifed('rsvp', ['exports', 'ember-babel', 'node-module'], function (exports, _em
     its last argument. The callback expects an error to be passed as its first
     argument (if an error occurred, otherwise null), and the value from the
     operation as its second argument ('function(err, value){ }').
-    @param {Boolean|Array} [options] An optional paramter that if set
+    @param {Boolean|Array} [options] An optional parameter that if set
     to `true` causes the promise to fulfill with the callback's success arguments
     as an array. This is useful if the node function has multiple success
-    paramters. If you set this paramter to an array with names, the promise will
+    parameters. If you set this parameter to an array with names, the promise will
     fulfill with a hash with these names as keys and the success parameters as
     values.
     @return {Function} a function that wraps `nodeFunc` to return an
@@ -68260,7 +68260,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
   didUpdate: null,
 
   /**
-    Fired when a new record is commited to the server.
+    Fired when a new record is committed to the server.
      @event didCreate
   */
   didCreate: null,
@@ -79214,7 +79214,7 @@ function hasMany(type, options) {
 
 /**
 
-  WARNING: This interface is likely to change in order to accomodate https://github.com/emberjs/rfcs/pull/4
+  WARNING: This interface is likely to change in order to accommodate https://github.com/emberjs/rfcs/pull/4
 
   ## Using BuildURLMixin
 
@@ -85667,7 +85667,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
       (or a file called app/models/blog/post.js in ember-cli), Ember Data will throw an error
       because it cannot find the "blog/post" model.
        Since we want to remove this namespace, we can define a serializer for the application that will
-      remove "blog/" from the payload key whenver it's encountered by Ember Data:
+      remove "blog/" from the payload key whenever it's encountered by Ember Data:
        ```app/serializers/application.js
       import DS from 'ember-data';
        export default DS.RESTSerializer.extend({

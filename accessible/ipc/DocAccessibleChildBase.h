@@ -48,7 +48,7 @@ public:
   /**
    * Serializes a shown tree and sends it to the chrome process.
    */
-  void InsertIntoIpcTree(Accessible* aParent,
+  void InsertIntoIpcTree(Accessible* apparent,
                          Accessible* aChild, uint32_t aIdxInParent);
   void ShowEvent(AccShowEvent* aShowEvent);
 

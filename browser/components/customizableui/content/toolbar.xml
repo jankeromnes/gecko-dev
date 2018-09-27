@@ -164,7 +164,7 @@
   <!-- The toolbar-menubar-autohide and toolbar-drag bindings are almost
        verbatim copies of their toolkit counterparts - they just inherit from
        the customizableui's toolbar binding instead of toolkit's. We're currently
-       OK with the maintainance burden of having two copies of a binding, since
+       OK with the maintenance burden of having two copies of a binding, since
        the long term goal is to move the customization framework into toolkit. -->
 
   <binding id="toolbar-menubar-autohide"

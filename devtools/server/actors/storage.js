@@ -106,7 +106,7 @@ var StorageActors = {};
  * actors.
  *
  * This default object is missing a couple of required methods that should be
- * implemented seperately for each actor. They are namely:
+ * implemented separately for each actor. They are namely:
  *   - observe : Method which gets triggered on the notificaiton of the watched
  *               topic.
  *   - getNamesForHost : Given a host, get list of all known store names.
@@ -2814,7 +2814,7 @@ const StorageActor = protocol.ActorClassWithSpec(specs.storageSpec, {
     }
     if (action == "added") {
       // If the same store name was previously deleted or changed, but now is
-      // added somehow, dont send the deleted or changed update.
+      // added somehow, don't send the deleted or changed update.
       this.removeNamesFromUpdateList("deleted", storeType, data);
       this.removeNamesFromUpdateList("changed", storeType, data);
     } else if (action == "changed" && this.boundUpdate.added &&

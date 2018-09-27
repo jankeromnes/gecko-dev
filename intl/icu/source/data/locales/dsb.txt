@@ -50,7 +50,7 @@ dsb{
                     }
                     1000000{
                         few{"0 miliony"}
-                        one{"0 milion"}
+                        one{"0 million"}
                         other{"0 milionow"}
                         two{"0 miliona"}
                     }

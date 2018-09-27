@@ -60,7 +60,7 @@ function dumpNthFrame(n) {
     }
   }
   video.addEventListener("loadeddata", checkNthFrame);
-  video.addEventListener("seeked", checkNthFrame);
+  video.addEventListener("sought", checkNthFrame);
 }
 
 function dumpLastFrame() {

@@ -123,7 +123,7 @@ HeadlessWidget::Destroy()
 }
 
 nsresult
-HeadlessWidget::Create(nsIWidget* aParent,
+HeadlessWidget::Create(nsIWidget* apparent,
                        nsNativeWidget aNativeParent,
                        const LayoutDeviceIntRect& aRect,
                        nsWidgetInitData* aInitData)
@@ -135,7 +135,7 @@ HeadlessWidget::Create(nsIWidget* aParent,
   mBounds = aRect;
   mRestoreBounds = aRect;
 
-  if (aParent) {
+  if (apparent) {
     mTopLevel = aParent->GetTopLevelWidget();
   } else {
     mTopLevel = this;

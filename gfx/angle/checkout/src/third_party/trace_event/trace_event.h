@@ -136,7 +136,7 @@
 // again under lock.
 //
 // Without the use of these static category pointers and enabled flags all
-// trace points would carry a significant performance cost of aquiring a lock
+// trace points would carry a significant performance cost of acquiring a lock
 // and resolving the category.
 
 #ifndef COMMON_TRACE_EVENT_H_

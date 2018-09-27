@@ -45,7 +45,7 @@ class MP4TrackDemuxer
   , public DecoderDoctorLifeLogger<MP4TrackDemuxer>
 {
 public:
-  MP4TrackDemuxer(MP4Demuxer* aParent,
+  MP4TrackDemuxer(MP4Demuxer* apparent,
                   UniquePtr<TrackInfo>&& aInfo,
                   const IndiceWrapper& aIndices);
 
@@ -364,10 +364,10 @@ MP4Demuxer::GetCrypto()
   return crypto;
 }
 
-MP4TrackDemuxer::MP4TrackDemuxer(MP4Demuxer* aParent,
+MP4TrackDemuxer::MP4TrackDemuxer(MP4Demuxer* apparent,
                                  UniquePtr<TrackInfo>&& aInfo,
                                  const IndiceWrapper& aIndices)
-  : mParent(aParent)
+  : mParent(apparent)
   , mStream(new ResourceStream(mParent->mResource))
   , mInfo(std::move(aInfo))
   , mIndex(new Index(aIndices,
@@ -431,7 +431,7 @@ MP4TrackDemuxer::Seek(const media::TimeUnit& aTime)
 
   mIterator->Seek(seekTime.ToMicroseconds());
 
-  // Check what time we actually seeked to.
+  // Check what time we actually sought to.
   do {
     RefPtr<MediaRawData> sample = GetNextSample();
     if (!sample) {

@@ -20,7 +20,7 @@ class GridLines : public nsISupports
                 , public nsWrapperCache
 {
 public:
-  explicit GridLines(GridDimension* aParent);
+  explicit GridLines(GridDimension* apparent);
 
 protected:
   virtual ~GridLines();

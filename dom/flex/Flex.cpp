@@ -21,9 +21,9 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(Flex)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-Flex::Flex(Element* aParent,
+Flex::Flex(Element* apparent,
            nsFlexContainerFrame* aFrame)
-  : mParent(aParent)
+  : mParent(apparent)
 {
   MOZ_ASSERT(aFrame,
     "Should never be instantiated with a null nsFlexContainerFrame");

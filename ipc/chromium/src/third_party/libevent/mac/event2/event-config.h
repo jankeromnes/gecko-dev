@@ -518,7 +518,7 @@
 /* Define to 1 if you need to in order for `stat' and other things to work. */
 /* #undef EVENT___POSIX_SOURCE */
 
-/* Define to appropriate substitue if compiler doesnt have __func__ */
+/* Define to appropriate substitue if compiler doesn't have __func__ */
 /* #undef EVENT____func__ */
 
 /* Define to empty if `const' does not conform to ANSI C. */
@@ -536,7 +536,7 @@
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 /* #undef EVENT__size_t */
 
-/* Define to unsigned int if you dont have it */
+/* Define to unsigned int if you don't have it */
 /* #undef EVENT__socklen_t */
 
 /* Define to `int' if <sys/types.h> does not define. */

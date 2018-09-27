@@ -1294,7 +1294,7 @@ private:
                            int32_t maxDigits) const;
 
     /**
-     * Return true if the given format character, occuring count
+     * Return true if the given format character, occurring count
      * times, represents a numeric field.
      */
     static UBool isNumeric(char16_t formatChar, int32_t count);

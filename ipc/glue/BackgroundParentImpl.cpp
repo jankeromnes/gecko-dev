@@ -641,11 +641,11 @@ struct MOZ_STACK_CLASS NullifyContentParentRAII
 class CheckPrincipalRunnable final : public Runnable
 {
 public:
-  CheckPrincipalRunnable(already_AddRefed<ContentParent> aParent,
+  CheckPrincipalRunnable(already_AddRefed<ContentParent> apparent,
                          const PrincipalInfo& aPrincipalInfo,
                          const nsCString& aOrigin)
     : Runnable("ipc::CheckPrincipalRunnable")
-    , mContentParent(aParent)
+    , mContentParent(apparent)
     , mPrincipalInfo(aPrincipalInfo)
     , mOrigin(aOrigin)
   {
@@ -1012,7 +1012,7 @@ BackgroundParentImpl::RecvPHttpBackgroundChannelConstructor(
   AssertIsInMainProcess();
   AssertIsOnBackgroundThread();
 
-  net::HttpBackgroundChannelParent* aParent =
+  net::HttpBackgroundChannelParent* apparent =
     static_cast<net::HttpBackgroundChannelParent*>(aActor);
 
   if (NS_WARN_IF(NS_FAILED(aParent->Init(aChannelId)))) {

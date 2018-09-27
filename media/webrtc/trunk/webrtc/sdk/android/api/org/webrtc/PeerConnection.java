@@ -265,7 +265,7 @@ public class PeerConnection {
     return nativeGetStats(observer, (track == null) ? 0 : track.nativeTrack);
   }
 
-  // Starts recording an RTC event log. Ownership of the file is transfered to
+  // Starts recording an RTC event log. Ownership of the file is transferred to
   // the native code. If an RTC event log is already being recorded, it will be
   // stopped and a new one will start using the provided file. Logging will
   // continue until the stopRtcEventLog function is called. The max_size_bytes

@@ -677,7 +677,7 @@ public class SearchEngineManager implements SharedPreferences.OnSharedPreference
      *
      * This method closes the stream after it is done reading it.
      *
-     * @param identifier Seach engine identifier. This only exists for search engines that
+     * @param identifier Search engine identifier. This only exists for search engines that
      *                   ship with the default set of engines in the locale.
      * @param in InputStream for search plugin XML file.
      * @return SearchEngine instance.

@@ -69,10 +69,10 @@ AssembleClientData(const nsAString& aOrigin,
 }
 
 nsresult
-GetOrigin(nsPIDOMWindowInner* aParent,
+GetOrigin(nsPIDOMWindowInner* apparent,
           /*out*/ nsAString& aOrigin, /*out*/ nsACString& aHost)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
   nsCOMPtr<nsIDocument> doc = aParent->GetDoc();
   MOZ_ASSERT(doc);
 
@@ -103,11 +103,11 @@ GetOrigin(nsPIDOMWindowInner* aParent,
 }
 
 nsresult
-RelaxSameOrigin(nsPIDOMWindowInner* aParent,
+RelaxSameOrigin(nsPIDOMWindowInner* apparent,
                 const nsAString& aInputRpId,
                 /* out */ nsACString& aRelaxedRpId)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
   nsCOMPtr<nsIDocument> doc = aParent->GetDoc();
   MOZ_ASSERT(doc);
 
@@ -372,7 +372,7 @@ WebAuthnManager::MakeCredential(const PublicKeyCredentialCreationOptions& aOptio
     selection.mUserVerification == UserVerificationRequirement::Required;
 
   // Does the RP desire direct attestation? Indirect attestation is not
-  // implemented, and thus is equivilent to None.
+  // implemented, and thus is equivalent to None.
   bool requestDirectAttestation =
     attestation == AttestationConveyancePreference::Direct;
 

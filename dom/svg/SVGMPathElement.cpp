@@ -81,12 +81,12 @@ SVGMPathElement::Href()
 
 nsresult
 SVGMPathElement::BindToTree(nsIDocument* aDocument,
-                            nsIContent* aParent,
+                            nsIContent* apparent,
                             nsIContent* aBindingParent)
 {
   MOZ_ASSERT(!mPathTracker.get(),
              "Shouldn't have href-target yet (or it should've been cleared)");
-  nsresult rv = SVGMPathElementBase::BindToTree(aDocument, aParent,
+  nsresult rv = SVGMPathElementBase::BindToTree(aDocument, apparent,
                                                 aBindingParent);
   NS_ENSURE_SUCCESS(rv,rv);
 
@@ -96,7 +96,7 @@ SVGMPathElement::BindToTree(nsIDocument* aDocument,
         ? mAttrs.GetAttr(nsGkAtoms::href, kNameSpaceID_None)
         : mAttrs.GetAttr(nsGkAtoms::href, kNameSpaceID_XLink);
     if (hrefAttrValue) {
-      UpdateHrefTarget(aParent, hrefAttrValue->GetStringValue());
+      UpdateHrefTarget(apparent, hrefAttrValue->GetStringValue());
     }
   }
 
@@ -222,7 +222,7 @@ SVGMPathElement::GetReferencedPath()
 // Protected helper methods
 
 void
-SVGMPathElement::UpdateHrefTarget(nsIContent* aParent,
+SVGMPathElement::UpdateHrefTarget(nsIContent* apparent,
                                   const nsAString& aHrefStr)
 {
   nsCOMPtr<nsIURI> targetURI;
@@ -235,12 +235,12 @@ SVGMPathElement::UpdateHrefTarget(nsIContent* aParent,
     mPathTracker.get()->RemoveMutationObserver(this);
   }
 
-  if (aParent) {
-    // Pass in |aParent| instead of |this| -- first argument is only used
+  if (apparent) {
+    // Pass in |apparent| instead of |this| -- first argument is only used
     // for a call to GetComposedDoc(), and |this| might not have a current
     // document yet (if our caller is BindToTree).
     // Bug 1415044 to investigate which referrer we should use
-    mPathTracker.Reset(aParent, targetURI,
+    mPathTracker.Reset(apparent, targetURI,
                        OwnerDoc()->GetDocumentURI(),
                        OwnerDoc()->GetReferrerPolicy());
   } else {
@@ -254,7 +254,7 @@ SVGMPathElement::UpdateHrefTarget(nsIContent* aParent,
     mPathTracker.get()->AddMutationObserver(this);
   }
 
-  NotifyParentOfMpathChange(aParent);
+  NotifyParentOfMpathChange(apparent);
 }
 
 void
@@ -272,12 +272,12 @@ SVGMPathElement::UnlinkHrefTarget(bool aNotifyParent)
 }
 
 void
-SVGMPathElement::NotifyParentOfMpathChange(nsIContent* aParent)
+SVGMPathElement::NotifyParentOfMpathChange(nsIContent* apparent)
 {
-  if (aParent && aParent->IsSVGElement(nsGkAtoms::animateMotion)) {
+  if (apparent && apparent->IsSVGElement(nsGkAtoms::animateMotion)) {
 
     SVGAnimateMotionElement* animateMotionParent =
-      static_cast<SVGAnimateMotionElement*>(aParent);
+      static_cast<SVGAnimateMotionElement*>(apparent);
 
     animateMotionParent->MpathChanged();
     AnimationNeedsResample();

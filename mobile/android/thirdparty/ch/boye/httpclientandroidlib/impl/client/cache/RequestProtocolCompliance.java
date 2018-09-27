@@ -275,7 +275,7 @@ class RequestProtocolCompliance {
 
     /**
      * Extract error information about the {@link HttpRequest} telling the 'caller'
-     * that a problem occured.
+     * that a problem occurred.
      *
      * @param errorCheck What type of error should I get
      * @return The {@link HttpResponse} that is the error generated

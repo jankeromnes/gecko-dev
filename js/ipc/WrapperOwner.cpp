@@ -30,7 +30,7 @@ struct AuxCPOWData
     bool isConstructor;
     bool isDOMObject;
 
-    // The object tag is just some auxilliary information that clients can use
+    // The object tag is just some auxiliary information that clients can use
     // however they see fit.
     nsCString objectTag;
 

@@ -56,7 +56,7 @@ public:
   virtual void Flush() = 0;
 
   // Maximum number of blocks expected in this block cache. (But allow overflow
-  // to accomodate incoming traffic before MediaCache can handle it.)
+  // to accommodate incoming traffic before MediaCache can handle it.)
   virtual int32_t GetMaxBlocks() const = 0;
 
   // Can be called on any thread. This defers to a non-main thread.

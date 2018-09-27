@@ -450,7 +450,7 @@ public:
     MOZ_ASSERT(mTempFile);
   }
 
-  // The attach method is seperate from the constructor as we may be addref-ing
+  // The attach method is separate from the constructor as we may be addref-ing
   // ourself, and we want to be sure someone has a strong reference to us.
   void Attach()
   {

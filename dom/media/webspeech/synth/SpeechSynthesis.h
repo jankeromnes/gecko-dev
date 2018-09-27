@@ -30,7 +30,7 @@ class SpeechSynthesis final : public DOMEventTargetHelper
                             , public nsSupportsWeakReference
 {
 public:
-  explicit SpeechSynthesis(nsPIDOMWindowInner* aParent);
+  explicit SpeechSynthesis(nsPIDOMWindowInner* apparent);
 
   NS_DECL_ISUPPORTS_INHERITED
   NS_DECL_CYCLE_COLLECTION_CLASS_INHERITED(SpeechSynthesis, DOMEventTargetHelper)

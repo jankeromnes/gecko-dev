@@ -168,7 +168,7 @@ class Browser(object):
         return False
 
     def log_crash(self, process, test):
-        """Return a list of dictionaries containing information about crashes that happend
+        """Return a list of dictionaries containing information about crashes that happened
         in the browser, or an empty list if no crashes occurred"""
         self.logger.crash(process, test)
 

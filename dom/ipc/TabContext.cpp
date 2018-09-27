@@ -89,7 +89,7 @@ TabContext::UpdateTabContextAfterSwap(const TabContext& aContext)
   // This is only used after already initialized.
   MOZ_ASSERT(mInitialized);
 
-  // The only permissable changes are to `mIsMozBrowserElement` and
+  // The only permissible changes are to `mIsMozBrowserElement` and
   // mChromeOuterWindowID.  All other fields must match for the change
   // to be accepted.
   if (aContext.mOriginAttributes != mOriginAttributes) {

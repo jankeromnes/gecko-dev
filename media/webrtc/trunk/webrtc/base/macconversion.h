@@ -28,7 +28,7 @@ bool p_convertHostCFStringRefToCPPString(const CFStringRef cfstr,
 // Convert the CFNumber to an integer, putting the integer in the location
 // given, and returhing true, if the conversion succeeds.
 // If given a NULL or a non-CFNumber, returns false.
-// This is pretty aggresive about trying to convert to int.
+// This is pretty aggressive about trying to convert to int.
 bool p_convertCFNumberToInt(CFNumberRef cfn, int* i);
 
 // given a CFNumberRef, determine if it represents a true value.

@@ -104,7 +104,7 @@ private:
 class nsBaseFilePickerEnumerator : public nsSimpleEnumerator
 {
 public:
-  nsBaseFilePickerEnumerator(nsPIDOMWindowOuter* aParent,
+  nsBaseFilePickerEnumerator(nsPIDOMWindowOuter* apparent,
                              nsISimpleEnumerator* iterator,
                              int16_t aMode)
     : mIterator(iterator)
@@ -160,14 +160,14 @@ nsBaseFilePicker::~nsBaseFilePicker()
 
 }
 
-NS_IMETHODIMP nsBaseFilePicker::Init(mozIDOMWindowProxy* aParent,
+NS_IMETHODIMP nsBaseFilePicker::Init(mozIDOMWindowProxy* apparent,
                                      const nsAString& aTitle,
                                      int16_t aMode)
 {
-  MOZ_ASSERT(aParent, "Null parent passed to filepicker, no file "
+  MOZ_ASSERT(apparent, "Null parent passed to filepicker, no file "
                   "picker for you!");
 
-  mParent = nsPIDOMWindowOuter::From(aParent);
+  mParent = nsPIDOMWindowOuter::From(apparent);
 
   nsCOMPtr<nsIWidget> widget = WidgetUtils::DOMWindowToWidget(mParent->GetOuterWindow());
   NS_ENSURE_TRUE(widget, NS_ERROR_FAILURE);

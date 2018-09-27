@@ -66,7 +66,7 @@ partial interface DataTransfer {
    *  auto - use default system behavior.
    *  default - set the cursor to an arrow during the drag operation.
    *
-   * Values other than 'default' are indentical to setting mozCursor to
+   * Values other than 'default' are identical to setting mozCursor to
    * 'auto'.
    */
   [UseCounter]

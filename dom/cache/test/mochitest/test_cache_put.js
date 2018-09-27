@@ -15,7 +15,7 @@ Promise.all([fetch(url),
   return Promise.all([fetchResponse.text(),
                       response.text()]);
 }).then(function(results) {
-  // suppress large assert spam unless it's relevent
+  // suppress large assert spam unless it's relevant
   if (results[0] !== results[1]) {
     is(results[0], results[1], 'stored response body should match original');
   }

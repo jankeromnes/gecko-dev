@@ -132,7 +132,7 @@ def decode_integer(data, prefix_bits):
 def _dict_to_iterable(header_dict):
     """
     This converts a dictionary to an iterable of two-tuples. This is a
-    HPACK-specific function becuase it pulls "special-headers" out first and
+    HPACK-specific function because it pulls "special-headers" out first and
     then emits them.
     """
     assert isinstance(header_dict, dict)

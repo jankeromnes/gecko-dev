@@ -616,7 +616,7 @@ function getFailingHttpServer(serverPort, serverIdentities) {
 // serverPort is the port of the http OCSP responder
 // identity is the http hostname that will answer the OCSP requests
 // nssDBLocation is the location of the NSS database from where the OCSP
-//   responses will be generated (assumes appropiate keys are present)
+//   responses will be generated (assumes appropriate keys are present)
 // expectedCertNames is an array of nicks of the certs to be responsed
 // expectedBasePaths is an optional array that is used to indicate
 //   what is the expected base path of the OCSP request.
@@ -865,7 +865,7 @@ function loadPKCS11TestModule(expectModuleUnloadToFail) {
       pkcs11ModuleDB.deleteModule("PKCS11 Test Module");
     } catch (e) {
       Assert.ok(expectModuleUnloadToFail,
-                `Module unload should suceed only when expected: ${e}`);
+                `Module unload should succeed only when expected: ${e}`);
     }
   });
   pkcs11ModuleDB.addModule("PKCS11 Test Module", libraryFile.path, 0, 0);

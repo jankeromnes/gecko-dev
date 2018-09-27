@@ -18,7 +18,7 @@ external events) to arrange for that somehow; typically by
 using nsITimer or the SocketTansportService.
 
 This sort of push model is a much better fit for the demands
-of WebRTC, expecially because ICE contexts span multiple
+of WebRTC, especially because ICE contexts span multiple
 network transports.
 
 

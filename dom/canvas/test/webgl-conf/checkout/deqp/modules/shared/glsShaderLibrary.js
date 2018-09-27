@@ -956,7 +956,7 @@ var gluShaderUtil = framework.opengl.gluShaderUtil;
                         advanceToken();
                     }
 
-                    // TODO: need to fix these constants, we dont have glu
+                    // TODO: need to fix these constants, we don't have glu
                     if (versionNum === 100 && postfix === 'es') version = '100';
                     else if (versionNum === 300 && postfix === 'es') version = '300 es';
                     else if (versionNum === 310 && postfix === 'es') version = '310 es';

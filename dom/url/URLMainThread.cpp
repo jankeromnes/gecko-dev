@@ -30,7 +30,7 @@ URLMainThread::Constructor(const GlobalObject& aGlobal, const nsAString& aURL,
 }
 
 /* static */ already_AddRefed<URLMainThread>
-URLMainThread::Constructor(nsISupports* aParent, const nsAString& aURL,
+URLMainThread::Constructor(nsISupports* apparent, const nsAString& aURL,
                            const nsAString& aBase, ErrorResult& aRv)
 {
   MOZ_ASSERT(NS_IsMainThread());
@@ -43,11 +43,11 @@ URLMainThread::Constructor(nsISupports* aParent, const nsAString& aURL,
     return nullptr;
   }
 
-  return Constructor(aParent, aURL, baseUri, aRv);
+  return Constructor(apparent, aURL, baseUri, aRv);
 }
 
 /* static */ already_AddRefed<URLMainThread>
-URLMainThread::Constructor(nsISupports* aParent, const nsAString& aURL,
+URLMainThread::Constructor(nsISupports* apparent, const nsAString& aURL,
                            nsIURI* aBase, ErrorResult& aRv)
 {
   MOZ_ASSERT(NS_IsMainThread());
@@ -62,7 +62,7 @@ URLMainThread::Constructor(nsISupports* aParent, const nsAString& aURL,
     return nullptr;
   }
 
-  RefPtr<URLMainThread> url = new URLMainThread(aParent);
+  RefPtr<URLMainThread> url = new URLMainThread(apparent);
   url->SetURI(uri.forget());
   return url.forget();
 }
@@ -142,8 +142,8 @@ URLMainThread::RevokeObjectURL(const GlobalObject& aGlobal,
   }
 }
 
-URLMainThread::URLMainThread(nsISupports* aParent)
-  : URL(aParent)
+URLMainThread::URLMainThread(nsISupports* apparent)
+  : URL(apparent)
 {
   MOZ_ASSERT(NS_IsMainThread());
 }

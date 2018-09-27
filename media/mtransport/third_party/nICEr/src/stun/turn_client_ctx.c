@@ -487,7 +487,7 @@ int nr_turn_client_deallocate(nr_turn_client_ctx *ctx)
     ABORT(r);
 
   // We are only sending a single request here because we are in the process of
-  // shutting everything down. Theoretically we should probably start a seperate
+  // shutting everything down. Theoretically we should probably start a separate
   // STUN transaction which outlives the TURN context.
   if ((r=nr_turn_client_send_stun_request(ctx, aloc, 0)))
     ABORT(r);
@@ -582,7 +582,7 @@ static void nr_turn_client_allocate_cb(NR_SOCKET s, int how, void *arg)
     ABORT(r);
 
   r_log(NR_LOG_TURN, LOG_INFO,
-        "TURN(%s): Succesfully allocated addr %s lifetime=%u",
+        "TURN(%s): Successfully allocated addr %s lifetime=%u",
         ctx->tctx->label,
         ctx->tctx->relay_addr.as_string,
         ctx->stun->results.allocate_response.lifetime_secs);

@@ -1309,7 +1309,7 @@ entities = {
     "amp;": "&",
     "and;": "\u2227",
     "andand;": "\u2a55",
-    "andd;": "\u2a5c",
+    "and;": "\u2a5c",
     "andslope;": "\u2a58",
     "andv;": "\u2a5a",
     "ang;": "\u2220",

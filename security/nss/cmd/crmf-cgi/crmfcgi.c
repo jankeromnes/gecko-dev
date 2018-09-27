@@ -612,7 +612,7 @@ verifySignature(CGIVarTable *varTable, CRMFCertReqMsg *currReq,
         rv = ERROR_VERIFYING_SIGNATURE_POP;
         goto loser;
     }
-/* Fall thru in successfull case. */
+/* Fall through in successful case. */
 loser:
     if (pubKey != NULL) {
         SECKEY_DestroyPublicKey(pubKey);

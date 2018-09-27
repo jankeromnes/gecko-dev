@@ -82,7 +82,7 @@ impl Deref for Foo {
     fn deref(&self) -> &Self::Target { &"Hello" }
 }
 ```
-Foo can safely implement StableDeref. It doesn't own the data being derefed, but the data is gaurenteed to live long enough, due to it being 'static.
+Foo can safely implement StableDeref. It doesn't own the data being derefed, but the data is guaranteed to live long enough, due to it being 'static.
 
 ```
 # use std::ops::Deref;

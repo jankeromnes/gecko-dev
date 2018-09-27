@@ -4211,27 +4211,27 @@ const BrowserSearch = {
 
 XPCOMUtils.defineConstant(this, "BrowserSearch", BrowserSearch);
 
-function FillHistoryMenu(aParent) {
+function FillHistoryMenu(apparent) {
   // Lazily add the hover listeners on first showing and never remove them
-  if (!aParent.hasStatusListener) {
+  if (!apparent.hasStatusListener) {
     // Show history item's uri in the status bar when hovering, and clear on exit
-    aParent.addEventListener("DOMMenuItemActive", function(aEvent) {
+    apparent.addEventListener("DOMMenuItemActive", function(aEvent) {
       // Only the current page should have the checked attribute, so skip it
       if (!aEvent.target.hasAttribute("checked"))
         XULBrowserWindow.setOverLink(aEvent.target.getAttribute("uri"));
     });
-    aParent.addEventListener("DOMMenuItemInactive", function() {
+    apparent.addEventListener("DOMMenuItemInactive", function() {
       XULBrowserWindow.setOverLink("");
     });
 
-    aParent.hasStatusListener = true;
+    apparent.hasStatusListener = true;
   }
 
   // Remove old entries if any
-  let children = aParent.children;
+  let children = apparent.children;
   for (var i = children.length - 1; i >= 0; --i) {
     if (children[i].hasAttribute("index"))
-      aParent.removeChild(children[i]);
+      apparent.removeChild(children[i]);
   }
 
   const MAX_HISTORY_MENU_ITEMS = 15;
@@ -4246,15 +4246,15 @@ function FillHistoryMenu(aParent) {
     if (!initial) {
       if (count <= 1) {
         // if there is only one entry now, close the popup.
-        aParent.hidePopup();
+        apparent.hidePopup();
         return;
-      } else if (aParent.id != "backForwardMenu" && !aParent.parentNode.open) {
+      } else if (apparent.id != "backForwardMenu" && !apparent.parentNode.open) {
         // if the popup wasn't open before, but now needs to be, reopen the menu.
         // It should trigger FillHistoryMenu again. This might happen with the
         // delay from click-and-hold menus but skip this for the context menu
         // (backForwardMenu) rather than figuring out how the menu should be
         // positioned and opened as it is an extreme edgecase.
-        aParent.parentNode.open = true;
+        apparent.parentNode.open = true;
         return;
       }
     }
@@ -4303,7 +4303,7 @@ function FillHistoryMenu(aParent) {
       }
 
       if (!item.parentNode) {
-        aParent.appendChild(item);
+        apparent.appendChild(item);
       }
 
       existingIndex++;
@@ -4312,7 +4312,7 @@ function FillHistoryMenu(aParent) {
     if (!initial) {
       let existingLength = children.length;
       while (existingIndex < existingLength) {
-        aParent.removeChild(aParent.lastElementChild);
+        apparent.removeChild(apparent.lastElementChild);
         existingIndex++;
       }
     }
@@ -5291,7 +5291,7 @@ var CombinedStopReload = {
     // the reload button exceeds 150ms, then we will show the animation.
     // If we don't know when we switched to stop (switchToStop is called
     // after init but before switchToReload), then we will prevent the
-    // animation from occuring.
+    // animation from occurring.
     return this.timeWhenSwitchedToStop &&
            window.performance.now() - this.timeWhenSwitchedToStop > 150;
   },
@@ -8063,7 +8063,7 @@ var ToolbarIconColor = {
         this._toolbarLuminanceCache.clear();
         break;
       case "toolbarvisibilitychange":
-        // toolbar changes dont require reset of the cached color values
+        // toolbar changes don't require reset of the cached color values
         break;
       case "tabsintitlebar":
         this._windowState.tabsintitlebar = reasonValue;

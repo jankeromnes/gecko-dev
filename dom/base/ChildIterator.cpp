@@ -17,9 +17,9 @@
 namespace mozilla {
 namespace dom {
 
-ExplicitChildIterator::ExplicitChildIterator(const nsIContent* aParent,
+ExplicitChildIterator::ExplicitChildIterator(const nsIContent* apparent,
                                              bool aStartAtBeginning)
-  : mParent(aParent),
+  : mParent(apparent),
     mChild(nullptr),
     mDefaultChild(nullptr),
     mIsFirst(aStartAtBeginning),

@@ -91,7 +91,7 @@ function installAddonEngine(name = "engine-addon") {
     QueryInterface: ChromeUtils.generateQI([Ci.nsIDirectoryServiceProvider,
                                             Ci.nsIDirectoryServiceProvider2]),
 
-    getFile(prop, persistant) {
+    getFile(prop, persistent) {
       throw Cr.NS_ERROR_FAILURE;
     },
 

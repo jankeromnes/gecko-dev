@@ -46,7 +46,7 @@ HANDLE GetMarkerFile(const wchar_t *extension) {
       NULL, OPEN_ALWAYS, FILE_FLAG_DELETE_ON_CLOSE, NULL);
 }
 
-// Returns type infomation for an NT object. This routine is expected to be
+// Returns type information for an NT object. This routine is expected to be
 // called for invalid handles so it catches STATUS_INVALID_HANDLE exceptions
 // that can be generated when handle tracing is enabled.
 NTSTATUS QueryObjectTypeInformation(HANDLE handle, void* buffer, ULONG* size) {

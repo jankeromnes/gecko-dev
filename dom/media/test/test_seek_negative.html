@@ -47,7 +47,7 @@ function startTest(test, token) {
     v._seekStarted = true;
     ok(v.currentTime >= 0, "currentTime should be positive");
   });
-  once(v, "seeked", function() {
+  once(v, "sought", function() {
     v._seekCompleted = true;
     ok(v.currentTime >= 0, "currentTime should be positive");
   });

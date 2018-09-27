@@ -433,7 +433,7 @@ impl JitterRng {
     /// Basic quality tests on the timer, by measuring CPU timing jitter a few
     /// hundred times.
     ///
-    /// If succesful, this will return the estimated number of rounds necessary
+    /// If successful, this will return the estimated number of rounds necessary
     /// to collect 64 bits of entropy. Otherwise a `TimerError` with the cause
     /// of the failure will be returned.
     pub fn test_timer(&mut self) -> Result<u32, TimerError> {
@@ -539,7 +539,7 @@ impl JitterRng {
         // available bits of entropy per round here for two reasons:
         // 1. Simple estimates of the available bits (like Shannon entropy) are
         //    too optimistic.
-        // 2)  Unless we want to waste a lot of time during intialization, there
+        // 2)  Unless we want to waste a lot of time during initialization, there
         //     only a small number of samples are available.
         //
         // Therefore we use a very simple and conservative estimate:

@@ -605,7 +605,7 @@ const NodeActor = protocol.ActorClassWithSpec(nodeSpec, {
    *
    * Accepts a maxDim request parameter to resize images that are larger. This
    * is important as the resizing occurs server-side so that image-data being
-   * transfered in the longstring back to the client will be that much smaller
+   * transferred in the longstring back to the client will be that much smaller
    */
   getImageData: function(maxDim) {
     return InspectorActorUtils.imageToImageData(this.rawNode, maxDim).then(imageData => {

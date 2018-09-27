@@ -122,7 +122,7 @@ ShowCustomDialog(GtkComboBox *changed_box, gpointer user_data)
 
 class nsPrintDialogWidgetGTK {
   public:
-    nsPrintDialogWidgetGTK(nsPIDOMWindowOuter *aParent,
+    nsPrintDialogWidgetGTK(nsPIDOMWindowOuter *apparent,
                            nsIPrintSettings *aPrintSettings);
     ~nsPrintDialogWidgetGTK() { gtk_widget_destroy(dialog); }
     NS_ConvertUTF16toUTF8 GetUTF8FromBundle(const char* aKey);
@@ -159,10 +159,10 @@ class nsPrintDialogWidgetGTK {
     void ExportHeaderFooter(nsIPrintSettings *aNS);
 };
 
-nsPrintDialogWidgetGTK::nsPrintDialogWidgetGTK(nsPIDOMWindowOuter *aParent,
+nsPrintDialogWidgetGTK::nsPrintDialogWidgetGTK(nsPIDOMWindowOuter *apparent,
                                                nsIPrintSettings *aSettings)
 {
-  nsCOMPtr<nsIWidget> widget = WidgetUtils::DOMWindowToWidget(aParent);
+  nsCOMPtr<nsIWidget> widget = WidgetUtils::DOMWindowToWidget(apparent);
   NS_ASSERTION(widget, "Need a widget for dialog to be modal.");
   GtkWindow* gtkParent = get_gtk_window_for_nsiwidget(widget);
   NS_ASSERTION(gtkParent, "Need a GTK window for dialog to be modal.");
@@ -670,7 +670,7 @@ nsFlatpakPrintPortal::nsFlatpakPrintPortal(nsPrintSettingsGTK* aPrintSettings):
 /**
  * Creates GDBusProxy, query for window handle and create a new GMainLoop.
  *
- * The GMainLoop is to be run from GetResult() and be quitted during
+ * The GMainLoop is to be run from GetResult() and be quit during
  * FinishPrintDialog.
  *
  * @param aWindow toplevel application window which is used as parent of print
@@ -900,7 +900,7 @@ nsFlatpakPrintPortal::FinishPrintDialog(GVariant* parameters)
  */
 GtkPrintOperationResult
 nsFlatpakPrintPortal::GetResult() {
-  // If the mLoop has not been initialized we haven't go thru PreparePrint method
+  // If the mLoop has not been initialized we haven't go through PreparePrint method
   if (!NS_IsMainThread() || !mLoop) {
     return GTK_PRINT_OPERATION_RESULT_ERROR;
   }
@@ -991,11 +991,11 @@ nsFlatpakPrintPortal::~nsFlatpakPrintPortal() {
 }
 
 NS_IMETHODIMP
-nsPrintDialogServiceGTK::Show(nsPIDOMWindowOuter *aParent,
+nsPrintDialogServiceGTK::Show(nsPIDOMWindowOuter *apparent,
                               nsIPrintSettings *aSettings,
                               nsIWebBrowserPrint *aWebBrowserPrint)
 {
-  MOZ_ASSERT(aParent, "aParent must not be null");
+  MOZ_ASSERT(apparent, "apparent must not be null");
   MOZ_ASSERT(aSettings, "aSettings must not be null");
 
   // Check for the flatpak portal first
@@ -1004,7 +1004,7 @@ nsPrintDialogServiceGTK::Show(nsPIDOMWindowOuter *aParent,
   bool shouldUsePortal;
   giovfs->ShouldUseFlatpakPortal(&shouldUsePortal);
   if (shouldUsePortal && gtk_check_version(3, 22, 0) == nullptr) {
-    nsCOMPtr<nsIWidget> widget = WidgetUtils::DOMWindowToWidget(aParent);
+    nsCOMPtr<nsIWidget> widget = WidgetUtils::DOMWindowToWidget(apparent);
     NS_ASSERTION(widget, "Need a widget for dialog to be modal.");
     GtkWindow* gtkParent = get_gtk_window_for_nsiwidget(widget);
     NS_ASSERTION(gtkParent, "Need a GTK window for dialog to be modal.");
@@ -1043,7 +1043,7 @@ nsPrintDialogServiceGTK::Show(nsPIDOMWindowOuter *aParent,
     return rv;
   }
 
-  nsPrintDialogWidgetGTK printDialog(aParent, aSettings);
+  nsPrintDialogWidgetGTK printDialog(apparent, aSettings);
   nsresult rv = printDialog.ImportSettings(aSettings);
 
   NS_ENSURE_SUCCESS(rv, rv);
@@ -1072,14 +1072,14 @@ nsPrintDialogServiceGTK::Show(nsPIDOMWindowOuter *aParent,
 }
 
 NS_IMETHODIMP
-nsPrintDialogServiceGTK::ShowPageSetup(nsPIDOMWindowOuter *aParent,
+nsPrintDialogServiceGTK::ShowPageSetup(nsPIDOMWindowOuter *apparent,
                                        nsIPrintSettings *aNSSettings)
 {
-  MOZ_ASSERT(aParent, "aParent must not be null");
+  MOZ_ASSERT(apparent, "apparent must not be null");
   MOZ_ASSERT(aNSSettings, "aSettings must not be null");
   NS_ENSURE_TRUE(aNSSettings, NS_ERROR_FAILURE);
 
-  nsCOMPtr<nsIWidget> widget = WidgetUtils::DOMWindowToWidget(aParent);
+  nsCOMPtr<nsIWidget> widget = WidgetUtils::DOMWindowToWidget(apparent);
   NS_ASSERTION(widget, "Need a widget for dialog to be modal.");
   GtkWindow* gtkParent = get_gtk_window_for_nsiwidget(widget);
   NS_ASSERTION(gtkParent, "Need a GTK window for dialog to be modal.");

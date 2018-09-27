@@ -272,7 +272,7 @@ class FFSetup(object):
                         LOG.critical("Unable to make gcda archive folder %s" % gcda_archive_top)
                 for _gcda in _gcda_files_found:
                     # want to copy the existing directory strucutre but put it under archive-dir
-                    # need to remove preceeding '/' from _gcda file name so can join the path
+                    # need to remove preceding '/' from _gcda file name so can join the path
                     gcda_archive_file = os.path.join(gcov_prefix,
                                                      gcda_archive_folder_name,
                                                      self.test_config['name'],

@@ -46,17 +46,17 @@ bs{
                     }
                     1000000{
                         few{"0 miliona"}
-                        one{"0 milion"}
+                        one{"0 million"}
                         other{"0 miliona"}
                     }
                     10000000{
                         few{"00 miliona"}
-                        one{"00 milion"}
+                        one{"00 million"}
                         other{"00 miliona"}
                     }
                     100000000{
                         few{"000 miliona"}
-                        one{"000 milion"}
+                        one{"000 million"}
                         other{"000 miliona"}
                     }
                     1000000000{

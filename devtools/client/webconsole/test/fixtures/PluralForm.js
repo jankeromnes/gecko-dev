@@ -5,10 +5,10 @@
 
 module.exports = {
   PluralForm: {
-    get: function(occurence, str) {
+    get: function(occurrence, str) {
       if (str.includes(";")) {
         const [singular, plural] = str.split(";");
-        return occurence > 1 ? plural : singular;
+        return occurrence > 1 ? plural : singular;
       }
 
       return str;

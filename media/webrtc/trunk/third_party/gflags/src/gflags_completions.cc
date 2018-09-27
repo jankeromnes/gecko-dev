@@ -39,10 +39,10 @@
 //     2a) If there are no matching flags, do nothing.
 //     2b) If all matching flags share a common prefix longer than the
 //         completion word, output just that matching prefix
-//  3) Categorize those flags to produce a rough ordering of relevence.
+//  3) Categorize those flags to produce a rough ordering of relevance.
 //  4) Potentially trim the set of flags returned to a smaller number
 //     that bash is happier with
-//  5) Output the matching flags in groups ordered by relevence.
+//  5) Output the matching flags in groups ordered by relevance.
 //     5a) Force bash to place most-relevent groups at the top of the list
 //     5b) Trim most flag's descriptions to fit on a single terminal line
 
@@ -184,7 +184,7 @@ struct CompletionOptions {
 
 // Notable flags are flags that are special or preferred for some
 // reason.  For example, flags that are defined in the binary's module
-// are expected to be much more relevent than flags defined in some
+// are expected to be much more relevant than flags defined in some
 // other random location.  These sets are specified roughly in precedence
 // order.  Once a flag is placed in one of these 'higher' sets, it won't
 // be placed in any of the 'lower' sets.
@@ -408,7 +408,7 @@ static bool DoesSingleFlagMatch(
 // 3) Categorize matches (and helper method)
 
 // Given a set of matching flags, categorize them by
-// likely relevence to this specific binary
+// likely relevance to this specific binary
 static void CategorizeAllMatchingFlags(
     const set<const CommandLineFlagInfo *> &all_matches,
     const string &search_token,

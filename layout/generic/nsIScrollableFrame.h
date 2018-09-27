@@ -216,7 +216,7 @@ public:
    * @param aRange If non-null, specifies area which contains aScrollPosition
    * and can be used for choosing a performance-optimized scroll position.
    * Any point within this area can be chosen.
-   * The choosen point will be as close as possible to aScrollPosition.
+   * The chosen point will be as close as possible to aScrollPosition.
    */
   virtual void ScrollTo(nsPoint aScrollPosition, ScrollMode aMode,
                         const nsRect* aRange = nullptr,

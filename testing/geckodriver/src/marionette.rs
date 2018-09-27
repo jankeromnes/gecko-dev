@@ -280,7 +280,7 @@ impl WebDriverHandler<GeckoExtensionRoute> for MarionetteHandler {
                 Err(_) => {
                     return Err(WebDriverError::new(
                         ErrorStatus::UnknownError,
-                        "Failed to aquire Marionette connection",
+                        "Failed to acquire Marionette connection",
                     ))
                 }
             }
@@ -309,7 +309,7 @@ impl WebDriverHandler<GeckoExtensionRoute> for MarionetteHandler {
             }
             Err(_) => Err(WebDriverError::new(
                 ErrorStatus::UnknownError,
-                "Failed to aquire Marionette connection",
+                "Failed to acquire Marionette connection",
             )),
         }
     }

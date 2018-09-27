@@ -118,7 +118,7 @@ asm(// We need to be able to tell the kernel exactly where we made a
     "9:.size SyscallAsm, 9b-SyscallAsm\n"
 #elif defined(__arm__)
     // Throughout this file, we use the same mode (ARM vs. thumb)
-    // that the C++ compiler uses. This means, when transfering control
+    // that the C++ compiler uses. This means, when transferring control
     // from C++ to assembly code, we do not need to switch modes (e.g.
     // by using the "bx" instruction). It also means that our assembly
     // code should not be invoked directly from code that lives in

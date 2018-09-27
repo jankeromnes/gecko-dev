@@ -3,7 +3,7 @@
 // - src/class-fields/string-literal-names.case
 // - src/class-fields/productions/cls-decl-regular-definitions.template
 /*---
-description: String literal names (regular fields defintion)
+description: String literal names (regular fields definition)
 esid: prod-FieldDefinition
 features: [class, class-fields-public]
 flags: [generated]

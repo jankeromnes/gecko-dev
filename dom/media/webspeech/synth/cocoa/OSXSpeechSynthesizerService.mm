@@ -419,7 +419,7 @@ OSXSpeechSynthesizerService::Speak(const nsAString& aText,
   nsTArray<size_t> offsets;
   offsets.SetCapacity(aText.Length());
 
-  // This loop looks for occurances of "[[" or "]]", escapes them, and
+  // This loop looks for occurrences of "[[" or "]]", escapes them, and
   // populates the offsets array to supply a map to the original offsets.
   for (size_t i = 0; i < aText.Length(); i++) {
     if (aText.Length() > i + 1 &&

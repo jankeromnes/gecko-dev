@@ -1528,7 +1528,7 @@ static void srtp_calc_aead_iv(srtp_session_keys_t *session_keys,
     debug_print(mod_srtp, "RTP SALT = %s\n", v128_hex_string(&salt));
 
     /*
-     * Finally, apply tyhe SALT to the input
+     * Finally, apply they SALT to the input
      */
     v128_xor(iv, &in, &salt);
 }
@@ -3435,7 +3435,7 @@ void srtp_crypto_policy_set_aes_gcm_256_16_auth(srtp_crypto_policy_t *p)
  *
  * Input:  *session_keys - pointer to SRTP stream context session keys,
  *                        used to retrieve the SALT
- *         *iv           - Pointer to recieve the calculated IV
+ *         *iv           - Pointer to receive the calculated IV
  *         seq_num       - The SEQ value to use for the IV calculation.
  *         *hdr          - The RTP header, used to get the SSRC value
  *
@@ -3529,7 +3529,7 @@ static srtp_err_status_t srtp_protect_rtcp_aead(
     } else {
         enc_start = NULL;
         enc_octet_len = 0;
-        /* 0 is network-order independant */
+        /* 0 is network-order independent */
         trailer = 0x00000000; /* set encrypt bit */
     }
 
@@ -3968,7 +3968,7 @@ srtp_err_status_t srtp_protect_rtcp_mki(srtp_t ctx,
     } else {
         enc_start = NULL;
         enc_octet_len = 0;
-        /* 0 is network-order independant */
+        /* 0 is network-order independent */
         trailer = 0x00000000; /* set encrypt bit */
     }
 

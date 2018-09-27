@@ -1319,7 +1319,7 @@ nsINode::Unlink(nsINode* tmp)
 }
 
 static void
-AdoptNodeIntoOwnerDoc(nsINode *aParent, nsINode *aNode, ErrorResult& aError)
+AdoptNodeIntoOwnerDoc(nsINode *apparent, nsINode *aNode, ErrorResult& aError)
 {
   NS_ASSERTION(!aNode->GetParentNode(),
                "Should have removed from parent already");
@@ -1340,7 +1340,7 @@ AdoptNodeIntoOwnerDoc(nsINode *aParent, nsINode *aNode, ErrorResult& aError)
 }
 
 static void
-CheckForOutdatedParent(nsINode* aParent, nsINode* aNode, ErrorResult& aError)
+CheckForOutdatedParent(nsINode* apparent, nsINode* aNode, ErrorResult& aError)
 {
   if (JSObject* existingObjUnrooted = aNode->GetWrapper()) {
     JS::Rooted<JSObject*> existingObj(RootingCx(), existingObjUnrooted);
@@ -1512,22 +1512,22 @@ struct IndexCacheSlot
 static IndexCacheSlot sIndexCache[CACHE_NUM_SLOTS];
 
 static inline void
-AddChildAndIndexToCache(const nsINode* aParent, const nsINode* aChild,
+AddChildAndIndexToCache(const nsINode* apparent, const nsINode* aChild,
                         int32_t aChildIndex)
 {
-  uint32_t index = CACHE_GET_INDEX(aParent);
-  sIndexCache[index].mParent = aParent;
+  uint32_t index = CACHE_GET_INDEX(apparent);
+  sIndexCache[index].mParent = apparent;
   sIndexCache[index].mChild = aChild;
   sIndexCache[index].mChildIndex = aChildIndex;
 }
 
 static inline void
-GetChildAndIndexFromCache(const nsINode* aParent,
+GetChildAndIndexFromCache(const nsINode* apparent,
                           const nsINode** aChild,
                           int32_t* aChildIndex)
 {
-  uint32_t index = CACHE_GET_INDEX(aParent);
-  if (sIndexCache[index].mParent == aParent) {
+  uint32_t index = CACHE_GET_INDEX(apparent);
+  if (sIndexCache[index].mParent == apparent) {
     *aChild = sIndexCache[index].mChild;
     *aChildIndex = sIndexCache[index].mChildIndex;
   } else {
@@ -1537,10 +1537,10 @@ GetChildAndIndexFromCache(const nsINode* aParent,
 }
 
 static inline void
-RemoveFromCache(const nsINode* aParent)
+RemoveFromCache(const nsINode* apparent)
 {
-  uint32_t index = CACHE_GET_INDEX(aParent);
-  if (sIndexCache[index].mParent == aParent) {
+  uint32_t index = CACHE_GET_INDEX(apparent);
+  if (sIndexCache[index].mParent == apparent) {
     sIndexCache[index] = { nullptr, nullptr, -1 };
   }
 }
@@ -2048,12 +2048,12 @@ nsINode::RemoveChildNode(nsIContent* aKid, bool aNotify)
 // inserting it's the content before which we're inserting.  In the
 // latter case it may be null.
 static
-bool IsAllowedAsChild(nsIContent* aNewChild, nsINode* aParent,
+bool IsAllowedAsChild(nsIContent* aNewChild, nsINode* apparent,
                       bool aIsReplace, nsINode* aRefChild)
 {
   MOZ_ASSERT(aNewChild, "Must have new child");
   MOZ_ASSERT_IF(aIsReplace, aRefChild);
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
   MOZ_ASSERT(aParent->IsDocument() ||
              aParent->IsDocumentFragment() ||
              aParent->IsElement(),
@@ -2061,17 +2061,17 @@ bool IsAllowedAsChild(nsIContent* aNewChild, nsINode* aParent,
              "can't be parents!");
 
   // A common case is that aNewChild has no kids, in which case
-  // aParent can't be a descendant of aNewChild unless they're
-  // actually equal to each other.  Fast-path that case, since aParent
+  // apparent can't be a descendant of aNewChild unless they're
+  // actually equal to each other.  Fast-path that case, since apparent
   // could be pretty deep in the DOM tree.
-  if (aNewChild == aParent ||
+  if (aNewChild == apparent ||
       ((aNewChild->GetFirstChild() ||
         // HTML template elements and ShadowRoot hosts need
         // to be checked to ensure that they are not inserted into
         // the hosted content.
         aNewChild->NodeInfo()->NameAtom() == nsGkAtoms::_template ||
         aNewChild->GetShadowRoot()) &&
-       nsContentUtils::ContentIsHostIncludingDescendantOf(aParent,
+       nsContentUtils::ContentIsHostIncludingDescendantOf(apparent,
                                                           aNewChild))) {
     return false;
   }
@@ -2184,7 +2184,7 @@ bool IsAllowedAsChild(nsIContent* aNewChild, nsINode* aParent,
         }
         // If we can put this content at the the right place, we might be ok;
         // if not, we bail out.
-        if (!IsAllowedAsChild(child, aParent, aIsReplace, aRefChild)) {
+        if (!IsAllowedAsChild(child, apparent, aIsReplace, aRefChild)) {
           return false;
         }
       }

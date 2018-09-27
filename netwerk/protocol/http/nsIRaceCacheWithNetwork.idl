@@ -45,7 +45,7 @@ interface nsIRaceCacheWithNetwork : nsISupports
   void test_delayCacheEntryOpeningBy(in long timeout);
 
   /**
-   * Immediatelly triggers AsyncOpenURI if the timer hasn't fired.
+   * Immediately triggers AsyncOpenURI if the timer hasn't fired.
    * Can only be called on the main thread.
    * This is only called in tests to reliably trigger the opening of the cache
    * entry.

@@ -759,7 +759,7 @@ void vpx_convolve2_avg_horiz_dspr2(const uint8_t *src, ptrdiff_t src_stride,
 
   assert(x_step_q4 == 16);
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
                        :
                        : [pos] "r"(pos));

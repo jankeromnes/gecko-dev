@@ -246,7 +246,7 @@ is_halant (const hb_glyph_info_t &info)
 				  IS_SINH(u) ? POS_AFTER_SUB  : \
 				  /*default*/  POS_AFTER_SUB    \
 				)
-#define MATRA_POS_TOP(u)	( /* BENG and MLYM don't have top matras. */ \
+#define MATRA_POS_TOP(u)	( /* BEING and MLYM don't have top matras. */ \
 				  IS_DEVA(u) ? POS_AFTER_SUB  : \
 				  IS_GURU(u) ? POS_AFTER_POST : /* Deviate from spec */ \
 				  IS_GUJR(u) ? POS_AFTER_SUB  : \

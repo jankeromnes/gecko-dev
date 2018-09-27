@@ -378,7 +378,7 @@ add_task(async function test_bug671378_scenario() {
   // Set nextSync != 0
   // syncInterval still hasn't been set by call to updateClientMode.
   // Explicitly trying to invoke scheduleNextSync during a sync
-  // (to immitate a score update that isn't big enough to trigger a sync).
+  // (to imitate a score update that isn't big enough to trigger a sync).
   Svc.Obs.add("weave:service:sync:start", function onSyncStart() {
     // Wait for other sync:start observers to be called so that
     // nextSync is set to 0.

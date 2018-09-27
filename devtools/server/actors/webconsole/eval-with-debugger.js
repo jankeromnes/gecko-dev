@@ -220,7 +220,7 @@ function getEvalInput(string) {
   if (trimmedString === "help" || trimmedString === "?") {
     return "help()";
   }
-  // we support Unix like syntax for commands if it is preceeded by `:`
+  // we support Unix like syntax for commands if it is preceded by `:`
   if (isCommand(string)) {
     try {
       return formatCommand(string);

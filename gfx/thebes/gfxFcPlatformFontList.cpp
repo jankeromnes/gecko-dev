@@ -846,7 +846,7 @@ gfxFontconfigFontEntry::CreateScaledFont(FcPattern* aRenderPattern,
 }
 
 #ifdef MOZ_WIDGET_GTK
-// defintion included below
+// definition included below
 static void ApplyGdkScreenFontOptions(FcPattern *aPattern);
 #endif
 
@@ -1963,9 +1963,9 @@ gfxFcPlatformFontList::FindAndAddFamilies(const nsACString& aFamily,
     // Example:
     //
     //   serif ==> DejaVu Serif, ...
-    //   Helvetica, serif ==> Helvetica, TeX Gyre Heros, Nimbus Sans L, DejaVu Serif
+    //   Helvetica, serif ==> Helvetica, TeX Gyre Heroes, Nimbus Sans L, DejaVu Serif
     //
-    // In this case fontconfig is including Tex Gyre Heros and
+    // In this case fontconfig is including Tex Gyre Heroes and
     // Nimbus Sans L as alternatives for Helvetica.
 
     // Because the FcConfigSubstitute call is quite expensive, we cache the

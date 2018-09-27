@@ -192,7 +192,7 @@ class StreamHixie75(StreamBase):
 
         Raises:
             ConnectionTerminatedException: when closing handshake was
-                not successfull.
+                not successful.
         """
 
         if self._request.server_terminated:

@@ -21,7 +21,7 @@ class nsColorPicker final : public nsIColorPicker
 public:
   NS_DECL_ISUPPORTS
 
-  NS_IMETHOD Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
+  NS_IMETHOD Init(mozIDOMWindowProxy* apparent, const nsAString& aTitle,
                   const nsAString& aInitialColor) override;
   NS_IMETHOD Open(nsIColorPickerShownCallback* aCallback) override;
 

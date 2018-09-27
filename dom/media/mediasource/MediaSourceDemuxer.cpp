@@ -309,10 +309,10 @@ MediaSourceDemuxer::GetMozDebugReaderData(nsACString& aString)
   aString += result;
 }
 
-MediaSourceTrackDemuxer::MediaSourceTrackDemuxer(MediaSourceDemuxer* aParent,
+MediaSourceTrackDemuxer::MediaSourceTrackDemuxer(MediaSourceDemuxer* apparent,
                                                  TrackInfo::TrackType aType,
                                                  TrackBuffersManager* aManager)
-  : mParent(aParent)
+  : mParent(apparent)
   , mType(aType)
   , mMonitor("MediaSourceTrackDemuxer")
   , mManager(aManager)

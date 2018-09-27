@@ -26,7 +26,7 @@ void WebRtcIlbcfix_Lsf2Poly(
     int16_t *lsf    /* (i) line spectral frequencies in Q13 */
                             ) {
   int32_t f[2][6]; /* f[0][] and f[1][] corresponds to
-                            F1(z) and F2(z) respectivly */
+                            F1(z) and F2(z) respectively */
   int32_t *f1ptr, *f2ptr;
   int16_t *a1ptr, *a2ptr;
   int32_t tmpW32;

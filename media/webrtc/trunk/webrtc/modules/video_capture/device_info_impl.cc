@@ -193,7 +193,7 @@ int32_t DeviceInfoImpl::GetBestMatchedCapability(
                              diffFrameRate >= currentbestDiffFrameRate)) // Current frame rate is lower than requested. This is better.
                         )
                         {
-                            if ((currentbestDiffFrameRate == diffFrameRate) // Same frame rate as previous  or frame rate allready good enough
+                            if ((currentbestDiffFrameRate == diffFrameRate) // Same frame rate as previous  or frame rate already good enough
                                 || (currentbestDiffFrameRate >= 0))
                             {
                                 if (bestRawType != requested.rawType

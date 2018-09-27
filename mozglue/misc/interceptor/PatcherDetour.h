@@ -154,7 +154,7 @@ public:
     if (aNumHooks == 0) {
       // Win32 allocates VM addresses at a 64KiB granularity, so by default we
       // might as well utilize that entire 64KiB reservation instead of
-      // artifically constraining ourselves to the page size.
+      // artificially constraining ourselves to the page size.
       aNumHooks = this->mVMPolicy.GetAllocGranularity() / kHookSize;
     }
 

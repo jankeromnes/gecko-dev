@@ -401,7 +401,7 @@ class PerMessageDeflateExtensionProcessor(ExtensionProcessorInterface):
             server_max_window_bits, server_no_context_takeover)
 
         # Note that we prepare for incoming messages compressed with window
-        # bits upto 15 regardless of the client_max_window_bits value to be
+        # bits up to 15 regardless of the client_max_window_bits value to be
         # sent to the client.
         self._rfc1979_inflater = util._RFC1979Inflater()
 

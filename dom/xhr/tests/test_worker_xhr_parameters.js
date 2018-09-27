@@ -41,7 +41,7 @@ function testParameters(havePrivileges) {
     }
     ok(!!xhr, "passed " + JSON.stringify(value));
 
-    // If the page doesnt have privileges to create a system or anon XHR,
+    // If the page doesn't have privileges to create a system or anon XHR,
     // these flags will always be false no matter what is passed.
     var expectedAnon = false;
     var expectedSystem = false;

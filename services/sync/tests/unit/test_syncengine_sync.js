@@ -1431,7 +1431,7 @@ add_task(async function test_syncFinish_deleteLotsInBatches() {
 
     // Declare what we want to have deleted: all records no. 100 and
     // up and all records that are less than 200 mins old (which are
-    // records 0 thru 90).
+    // records 0 through 90).
     engine._delete = {ids: [],
                       newer: now / 1000 - 60 * 200.5};
     for (i = 100; i < 234; i++) {
@@ -1441,7 +1441,7 @@ add_task(async function test_syncFinish_deleteLotsInBatches() {
     await engine._syncFinish();
 
     // Ensure that the appropriate server data has been wiped while
-    // preserving records 90 thru 200.
+    // preserving records 90 through 200.
     for (i = 0; i < 234; i++) {
       let id = "record-no-" + i;
       if (i <= 90 || i >= 100) {

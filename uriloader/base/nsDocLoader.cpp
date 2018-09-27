@@ -122,9 +122,9 @@ nsDocLoader::nsDocLoader()
 }
 
 nsresult
-nsDocLoader::SetDocLoaderParent(nsDocLoader *aParent)
+nsDocLoader::SetDocLoaderParent(nsDocLoader *apparent)
 {
-  mParent = aParent;
+  mParent = apparent;
   return NS_OK;
 }
 
@@ -458,7 +458,7 @@ nsDocLoader::OnStartRequest(nsIRequest *request, nsISupports *aCtxt)
                "mDocumentRequest MUST be set for the duration of a page load!");
 
   // This is the only way to catch document request start event after a redirect
-  // has occured without changing inherited Firefox behaviour significantly.
+  // has occurred without changing inherited Firefox behaviour significantly.
   // Problem description:
   // The combination of |STATE_START + STATE_IS_DOCUMENT| is only sent for
   // initial request (see |doStartDocumentLoad| call above).

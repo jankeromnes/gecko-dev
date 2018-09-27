@@ -78,7 +78,7 @@ function handleStream(evt, filename) {
         // test doesn't so much want to saturate the stream as to make sure the
         // data is at least flowing a little bit.  (Also, the author had some
         // concern about slowing down the test by overwhelming the event loop
-        // and concern that we might not have sufficent back-pressure plumbed
+        // and concern that we might not have sufficient back-pressure plumbed
         // through and an infinite pipe might make bad things happen.)
         intervalId = setInterval(tick, TICK_INTERVAL);
         tick();

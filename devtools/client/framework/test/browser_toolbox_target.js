@@ -5,7 +5,7 @@
 
 // Test about:devtools-toolbox?target which allows opening a toolbox in an
 // iframe while defining which document to debug by setting a `target`
-// attribute refering to the document to debug.
+// attribute referring to the document to debug.
 
 add_task(async function() {
   // iframe loads the document to debug

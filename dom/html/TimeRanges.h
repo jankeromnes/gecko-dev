@@ -32,9 +32,9 @@ public:
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(TimeRanges)
 
   TimeRanges();
-  explicit TimeRanges(nsISupports* aParent);
+  explicit TimeRanges(nsISupports* apparent);
   explicit TimeRanges(const media::TimeIntervals& aTimeIntervals);
-  TimeRanges(nsISupports* aParent, const media::TimeIntervals& aTimeIntervals);
+  TimeRanges(nsISupports* apparent, const media::TimeIntervals& aTimeIntervals);
 
   media::TimeIntervals ToTimeIntervals() const;
 

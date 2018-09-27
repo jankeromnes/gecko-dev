@@ -232,7 +232,7 @@ private:
   // 2. If true, interim results SHOULD be returned
   // 3. If false, interim results MUST NOT be returned
   //
-  // Pocketsphinx does not return interm results; so, defaulting
+  // Pocketsphinx does not return interim results; so, defaulting
   // mInterimResults to false, then ignoring its subsequent value
   // is a conforming implementation.
   bool mInterimResults;

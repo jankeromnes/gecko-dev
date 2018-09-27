@@ -995,7 +995,7 @@ class XcodeSettings(object):
 
   def _GetStripPostbuilds(self, configname, output_binary, quiet):
     """Returns a list of shell commands that contain the shell commands
-    neccessary to strip this target's binary. These should be run as postbuilds
+    necessary to strip this target's binary. These should be run as postbuilds
     before the actual postbuilds run."""
     self.configname = configname
 
@@ -1030,7 +1030,7 @@ class XcodeSettings(object):
 
   def _GetDebugInfoPostbuilds(self, configname, output, output_binary, quiet):
     """Returns a list of shell commands that contain the shell commands
-    neccessary to massage this target's debug information. These should be run
+    necessary to massage this target's debug information. These should be run
     as postbuilds before the actual postbuilds run."""
     self.configname = configname
 
@@ -1502,7 +1502,7 @@ def GetMacBundleResources(product_dir, xcode_settings, resources):
     output = dest
 
     # The make generator doesn't support it, so forbid it everywhere
-    # to keep the generators more interchangable.
+    # to keep the generators more interchangeable.
     assert ' ' not in res, (
       "Spaces in resource filenames not supported (%s)"  % res)
 
@@ -1551,7 +1551,7 @@ def GetMacInfoPlist(product_dir, xcode_settings, gyp_path_to_build_path):
     return None, None, [], {}
 
   # The make generator doesn't support it, so forbid it everywhere
-  # to keep the generators more interchangable.
+  # to keep the generators more interchangeable.
   assert ' ' not in info_plist, (
     "Spaces in Info.plist filenames not supported (%s)"  % info_plist)
 

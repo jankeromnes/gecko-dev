@@ -5,7 +5,7 @@
 /**
  * Firefox Accounts OAuth Grant Client allows clients to obtain
  * an OAuth token from a BrowserID assertion. Only certain client
- * IDs support this privilage.
+ * IDs support this privilege.
  */
 
 var EXPORTED_SYMBOLS = ["FxAccountsOAuthGrantClient", "FxAccountsOAuthGrantClientError"];

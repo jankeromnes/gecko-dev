@@ -4,7 +4,7 @@
 /*
  *  The following code handles the storage of PKCS 11 modules used by the
  * NSS. This file is written to abstract away how the modules are
- * stored so we can deside that later.
+ * stored so we can decide that later.
  */
 #include "pkcs11i.h"
 #include "sdb.h"

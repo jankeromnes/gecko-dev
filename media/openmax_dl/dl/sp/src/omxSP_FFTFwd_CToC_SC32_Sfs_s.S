@@ -206,7 +206,7 @@ specialScaleCase:	                                    @//  scale = 0 or scale = 
         BGE      scaleEqualsOrder  
        
         @//check for even or odd order
-        @// NOTE: The following combination of BL's would work fine eventhough the first
+        @// NOTE: The following combination of BL's would work fine even though the first
         @// BL would corrupt the flags. This is because the end of the "grpZeroSetLoop" loop inside 
         @// armSP_FFTFwd_CToC_SC32_Radix4_fs_OutOfPlace_unsafe sets the Z flag to EQ
         
@@ -231,7 +231,7 @@ lastStageUnscaledRadix4:
 
 scaleEqualsOrder:	         
         @//check for even or odd order
-        @// NOTE: The following combination of BL's would work fine eventhough the first
+        @// NOTE: The following combination of BL's would work fine even though the first
         @// BL would corrupt the flags. This is because the end of the "grpZeroSetLoop" loop inside 
         @// armSP_FFTFwd_CToC_SC32_Radix4_fs_OutOfPlace_unsafe sets the Z flag to EQ
                 

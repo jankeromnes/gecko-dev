@@ -1644,7 +1644,7 @@ gfxPlatform::HasEnoughTotalSystemMemoryForSkiaGL()
 already_AddRefed<DrawTarget>
 gfxPlatform::CreateDrawTargetForBackend(BackendType aBackend, const IntSize& aSize, SurfaceFormat aFormat)
 {
-  // There is a bunch of knowledge in the gfxPlatform heirarchy about how to
+  // There is a bunch of knowledge in the gfxPlatform hierarchy about how to
   // create the best offscreen surface for the current system and situation. We
   // can easily take advantage of this for the Cairo backend, so that's what we
   // do.

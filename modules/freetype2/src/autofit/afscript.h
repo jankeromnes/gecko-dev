@@ -61,7 +61,7 @@
           "\xEA\x9B\x81 \xEA\x9B\xAF" ) /* ꛁ ꛯ */
 
   /* there are no simple forms for letters; we thus use two digit shapes */
-  SCRIPT( beng, BENG,
+  SCRIPT( being, BEING,
           "Bengali",
           HB_SCRIPT_BENGALI,
           HINTING_TOP_TO_BOTTOM,

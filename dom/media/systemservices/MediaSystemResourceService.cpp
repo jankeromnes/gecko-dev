@@ -60,13 +60,13 @@ MediaSystemResourceService::Destroy()
 }
 
 void
-MediaSystemResourceService::Acquire(media::MediaSystemResourceManagerParent* aParent,
+MediaSystemResourceService::Acquire(media::MediaSystemResourceManagerParent* apparent,
                                     uint32_t aId,
                                     MediaSystemResourceType aResourceType,
                                     bool aWillWait)
 {
   MOZ_ASSERT(CompositorThreadHolder::IsInCompositorThread());
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   if (mDestroyed) {
     return;
@@ -86,7 +86,7 @@ MediaSystemResourceService::Acquire(media::MediaSystemResourceManagerParent* aPa
   if (resource->mAcquiredRequests.size() < resource->mResourceCount) {
     // Resource is available
     resource->mAcquiredRequests.push_back(
-      MediaSystemResourceRequest(aParent, aId));
+      MediaSystemResourceRequest(apparent, aId));
     // Send success response
     mozilla::Unused << aParent->SendResponse(aId, true /* success */);
     return;
@@ -98,16 +98,16 @@ MediaSystemResourceService::Acquire(media::MediaSystemResourceManagerParent* aPa
   }
   // Wait until acquire.
   resource->mWaitingRequests.push_back(
-    MediaSystemResourceRequest(aParent, aId));
+    MediaSystemResourceRequest(apparent, aId));
 }
 
 void
-MediaSystemResourceService::ReleaseResource(media::MediaSystemResourceManagerParent* aParent,
+MediaSystemResourceService::ReleaseResource(media::MediaSystemResourceManagerParent* apparent,
                                             uint32_t aId,
                                             MediaSystemResourceType aResourceType)
 {
   MOZ_ASSERT(CompositorThreadHolder::IsInCompositorThread());
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   if (mDestroyed) {
     return;
@@ -120,14 +120,14 @@ MediaSystemResourceService::ReleaseResource(media::MediaSystemResourceManagerPar
     // Resource does not exit
     return;
   }
-  RemoveRequest(aParent, aId, aResourceType);
+  RemoveRequest(apparent, aId, aResourceType);
   UpdateRequests(aResourceType);
 }
 
 void
-MediaSystemResourceService::ReleaseResource(media::MediaSystemResourceManagerParent* aParent)
+MediaSystemResourceService::ReleaseResource(media::MediaSystemResourceManagerParent* apparent)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   if (mDestroyed) {
     return;
@@ -135,17 +135,17 @@ MediaSystemResourceService::ReleaseResource(media::MediaSystemResourceManagerPar
 
   for (auto iter = mResources.Iter(); !iter.Done(); iter.Next()) {
     const uint32_t& key = iter.Key();
-    RemoveRequests(aParent, static_cast<MediaSystemResourceType>(key));
+    RemoveRequests(apparent, static_cast<MediaSystemResourceType>(key));
     UpdateRequests(static_cast<MediaSystemResourceType>(key));
   }
 }
 
 void
-MediaSystemResourceService::RemoveRequest(media::MediaSystemResourceManagerParent* aParent,
+MediaSystemResourceService::RemoveRequest(media::MediaSystemResourceManagerParent* apparent,
                                           uint32_t aId,
                                           MediaSystemResourceType aResourceType)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   MediaSystemResource* resource = mResources.Get(static_cast<uint32_t>(aResourceType));
   if (!resource) {
@@ -156,7 +156,7 @@ MediaSystemResourceService::RemoveRequest(media::MediaSystemResourceManagerParen
   std::deque<MediaSystemResourceRequest>& acquiredRequests =
     resource->mAcquiredRequests;
   for (it = acquiredRequests.begin(); it != acquiredRequests.end(); it++) {
-    if (((*it).mParent == aParent) && ((*it).mId == aId)) {
+    if (((*it).mParent == apparent) && ((*it).mId == aId)) {
       acquiredRequests.erase(it);
       return;
     }
@@ -165,7 +165,7 @@ MediaSystemResourceService::RemoveRequest(media::MediaSystemResourceManagerParen
   std::deque<MediaSystemResourceRequest>& waitingRequests =
     resource->mWaitingRequests;
   for (it = waitingRequests.begin(); it != waitingRequests.end(); it++) {
-    if (((*it).mParent == aParent) && ((*it).mId == aId)) {
+    if (((*it).mParent == apparent) && ((*it).mId == aId)) {
       waitingRequests.erase(it);
       return;
     }
@@ -173,10 +173,10 @@ MediaSystemResourceService::RemoveRequest(media::MediaSystemResourceManagerParen
 }
 
 void
-MediaSystemResourceService::RemoveRequests(media::MediaSystemResourceManagerParent* aParent,
+MediaSystemResourceService::RemoveRequests(media::MediaSystemResourceManagerParent* apparent,
                                            MediaSystemResourceType aResourceType)
 {
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   MediaSystemResource* resource = mResources.Get(static_cast<uint32_t>(aResourceType));
 
@@ -190,7 +190,7 @@ MediaSystemResourceService::RemoveRequests(media::MediaSystemResourceManagerPare
   std::deque<MediaSystemResourceRequest>& acquiredRequests =
     resource->mAcquiredRequests;
   for (it = acquiredRequests.begin(); it != acquiredRequests.end();) {
-    if ((*it).mParent == aParent) {
+    if ((*it).mParent == apparent) {
       it = acquiredRequests.erase(it);
     } else {
       it++;
@@ -200,7 +200,7 @@ MediaSystemResourceService::RemoveRequests(media::MediaSystemResourceManagerPare
   std::deque<MediaSystemResourceRequest>& waitingRequests =
     resource->mWaitingRequests;
   for (it = waitingRequests.begin(); it != waitingRequests.end();) {
-    if ((*it).mParent == aParent) {
+    if ((*it).mParent == apparent) {
       it = waitingRequests.erase(it);
     } else {
       it++;

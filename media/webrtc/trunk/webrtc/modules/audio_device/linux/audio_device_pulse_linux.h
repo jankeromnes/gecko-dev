@@ -61,7 +61,7 @@ const uint32_t WEBRTC_PA_PLAYBACK_LATENCY_MINIMUM_MSECS = 20;
 const uint32_t WEBRTC_PA_PLAYBACK_LATENCY_INCREMENT_MSECS = 20;
 
 // We also need to configure a suitable request size. Too small and we'd burn
-// CPU from the overhead of transfering small amounts of data at once. Too large
+// CPU from the overhead of transferring small amounts of data at once. Too large
 // and the amount of data remaining in the buffer right before refilling it
 // would be a buffer underflow risk. We set it to half of the buffer size.
 const uint32_t WEBRTC_PA_PLAYBACK_REQUEST_FACTOR = 2;
@@ -69,7 +69,7 @@ const uint32_t WEBRTC_PA_PLAYBACK_REQUEST_FACTOR = 2;
 // Capture.
 
 // For capture, low latency is not a buffer overflow risk, but it makes us burn
-// CPU from the overhead of transfering small amounts of data at once, so we set
+// CPU from the overhead of transferring small amounts of data at once, so we set
 // a recommended value that we use for the kLowLatency constant (but if the user
 // explicitly requests something lower then we will honour it).
 // 1ms takes about 6-7% CPU. 5ms takes about 5%. 10ms takes about 4.x%.

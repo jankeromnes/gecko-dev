@@ -3197,7 +3197,7 @@ SearchService.prototype = {
     for (let engine of cache.engines) {
       let name = engine._name;
       if (name in this._engines) {
-        LOG("_loadEnginesMetadataFromCache, transfering metadata for " + name);
+        LOG("_loadEnginesMetadataFromCache, transferring metadata for " + name);
         this._engines[name]._metaData = engine._metaData || {};
       }
     }

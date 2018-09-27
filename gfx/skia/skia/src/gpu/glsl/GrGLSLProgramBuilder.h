@@ -117,7 +117,7 @@ protected:
 
 private:
     // reset is called by program creator between each processor's emit code.  It increments the
-    // stage offset for variable name mangling, and also ensures verfication variables in the
+    // stage offset for variable name mangling, and also ensures verification variables in the
     // fragment shader are cleared.
     void reset() {
         this->addStage();

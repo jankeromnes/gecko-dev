@@ -388,7 +388,7 @@ static void NoiseEstimationC(NoiseSuppressionFixedC* inst,
     for (i = 0; i < inst->magnLen; i++) {
       // compute delta
       if (inst->noiseEstDensity[offset + i] > 512) {
-        // Get the value for delta by shifting intead of dividing.
+        // Get the value for delta by shifting instead of dividing.
         int factor = WebRtcSpl_NormW16(inst->noiseEstDensity[offset + i]);
         delta = (int16_t)(FACTOR_Q16 >> (14 - factor));
       } else {

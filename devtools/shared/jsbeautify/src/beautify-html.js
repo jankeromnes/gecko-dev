@@ -789,7 +789,7 @@
 
                         var indentation = multi_parser.get_full_indent(script_indent_level);
                         if (_beautifier) {
-                            // call the Beautifier if avaliable
+                            // call the Beautifier if available
                             text = _beautifier(text.replace(/^\s*/, indentation), options);
                         } else {
                             // simply indent the string otherwise

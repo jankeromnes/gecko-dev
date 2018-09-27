@@ -259,7 +259,7 @@ void ScoreOneChunk(const char* text, ULScript ulscript,
 
 
 // Score chunks of text described by hitbuffer, allowing each to be in a
-// different language, and optionally adjusting the boundaries inbetween.
+// different language, and optionally adjusting the boundaries between.
 // Set last_cspan to the last chunkspan used
 void ScoreAllHits(const char* text,  ULScript ulscript,
                   bool more_to_come, bool score_cjk,

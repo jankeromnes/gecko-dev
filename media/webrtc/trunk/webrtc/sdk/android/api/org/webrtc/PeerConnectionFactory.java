@@ -145,7 +145,7 @@ public class PeerConnectionFactory {
     return new AudioTrack(nativeCreateAudioTrack(nativeFactory, id, source.nativeSource));
   }
 
-  // Starts recording an AEC dump. Ownership of the file is transfered to the
+  // Starts recording an AEC dump. Ownership of the file is transferred to the
   // native code. If an AEC dump is already in progress, it will be stopped and
   // a new one will start using the provided file.
   public boolean startAecDump(int file_descriptor, int filesize_limit_bytes) {

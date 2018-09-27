@@ -84,7 +84,7 @@ add_task(async function MixedTest3B() {
   await assertMixedContentBlockingState(gTestBrowser, {activeLoaded: true, activeBlocked: false, passiveLoaded: true});
 });
 
-// Location change - User override on one page doesn't propogate to another page after location change.
+// Location change - User override on one page doesn't propagate to another page after location change.
 add_task(async function MixedTest4() {
   var url = HTTPS_TEST_ROOT_2 + "file_bug822367_4.html";
   BrowserTestUtils.loadURI(gTestBrowser, url);

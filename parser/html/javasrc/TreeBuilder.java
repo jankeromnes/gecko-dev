@@ -1738,7 +1738,7 @@ public abstract class TreeBuilder<T> implements TokenHandler,
                                         pop();
                                     }
                                     continue starttagloop;
-                                } // else fall thru
+                                } // else fall through
                             }
                             // CPPONLY: MOZ_FALLTHROUGH;
                         default:

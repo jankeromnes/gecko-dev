@@ -56,7 +56,7 @@ features: [BigInt, TypedArray]
 testWithBigIntTypedArrayConstructors(function(TA) {
 
   assert.throws(SyntaxError, function() {
-    new TA(["definately not a number"]);
+    new TA(["definitely not a number"]);
   }, "StringToBigInt(prim) == NaN");
 
 });

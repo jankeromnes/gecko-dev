@@ -24,8 +24,8 @@ using namespace mozilla::a11y;
 
 EventTree* const TreeMutation::kNoEventTree = reinterpret_cast<EventTree*>(-1);
 
-TreeMutation::TreeMutation(Accessible* aParent, bool aNoEvents) :
-  mParent(aParent), mStartIdx(UINT32_MAX),
+TreeMutation::TreeMutation(Accessible* apparent, bool aNoEvents) :
+  mParent(apparent), mStartIdx(UINT32_MAX),
   mStateFlagsCopy(mParent->mStateFlags),
   mQueueEvents(!aNoEvents)
 {

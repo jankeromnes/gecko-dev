@@ -26,7 +26,7 @@ struct VideoCaptureCapability
 
 
 // IPC analog for webrtc::VideoFrame
-// the described buffer is transported seperately in a Shmem
+// the described buffer is transported separately in a Shmem
 // See VideoFrameUtils.h
 struct VideoFrameProperties
 {

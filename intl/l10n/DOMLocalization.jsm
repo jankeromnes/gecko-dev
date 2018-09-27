@@ -681,7 +681,7 @@ class DOMLocalization extends Localization {
   translateFragment(frag) {
     if (frag.localize) {
       // This is a temporary fast-path offered by Gecko to workaround performance
-      // issues coming from Fluent and XBL+Stylo performing unnecesary
+      // issues coming from Fluent and XBL+Stylo performing unnecessary
       // operations during startup.
       // For details see bug 1441037, bug 1442262, and bug 1363862.
 

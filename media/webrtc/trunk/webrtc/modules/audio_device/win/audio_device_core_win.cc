@@ -3530,7 +3530,7 @@ DWORD AudioDeviceWindowsCore::DoRenderThread()
 
             // Derive the amount of available space in the output buffer
             uint32_t framesAvailable = bufferLength - padding;
-            // WEBRTC_TRACE(kTraceStream, kTraceAudioDevice, _id, "#avaliable audio frames = %u", framesAvailable);
+            // WEBRTC_TRACE(kTraceStream, kTraceAudioDevice, _id, "#available audio frames = %u", framesAvailable);
 
             // Do we have 10 ms available in the render buffer?
             if (framesAvailable < _playBlockSize)

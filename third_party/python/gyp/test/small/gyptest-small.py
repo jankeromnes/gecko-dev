@@ -19,7 +19,7 @@ import TestGyp
 test = TestGyp.TestGyp()
 
 # Add pylib to the import path (so tests can import their dependencies).
-# This is consistant with the path.append done in the top file "gyp".
+# This is consistent with the path.append done in the top file "gyp".
 sys.path.insert(0, os.path.join(test._cwd, 'pylib'))
 
 # Add new test suites here.

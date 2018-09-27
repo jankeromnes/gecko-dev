@@ -248,7 +248,7 @@ impl FromStr for OwnedName {
 
     /// Parses the given string slice into a qualified name.
     ///
-    /// This function, when finishes sucessfully, always return a qualified
+    /// This function, when finishes successfully, always return a qualified
     /// name without a namespace (`name.namespace == None`). It should be filled later
     /// using proper `NamespaceStack`.
     ///

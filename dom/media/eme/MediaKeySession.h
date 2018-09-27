@@ -53,7 +53,7 @@ public:
                                            DOMEventTargetHelper)
 public:
   MediaKeySession(JSContext* aCx,
-                  nsPIDOMWindowInner* aParent,
+                  nsPIDOMWindowInner* apparent,
                   MediaKeys* aKeys,
                   const nsAString& aKeySystem,
                   MediaKeySessionType aSessionType,

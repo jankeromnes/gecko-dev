@@ -16,7 +16,7 @@ namespace dom {
 class PerformanceMeasure final : public PerformanceEntry
 {
 public:
-  PerformanceMeasure(nsISupports* aParent,
+  PerformanceMeasure(nsISupports* apparent,
                      const nsAString& aName,
                      DOMHighResTimeStamp aStartTime,
                      DOMHighResTimeStamp aEndTime);

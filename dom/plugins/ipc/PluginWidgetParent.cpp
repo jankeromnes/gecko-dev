@@ -60,13 +60,13 @@ PluginWidgetParent::GetTabParent()
 }
 
 void
-PluginWidgetParent::SetParent(nsIWidget* aParent)
+PluginWidgetParent::SetParent(nsIWidget* apparent)
 {
   // This will trigger sync send messages to the plugin process window
   // procedure and a cascade of events to that window related to focus
   // and activation.
-  if (mWidget && aParent) {
-    mWidget->SetParent(aParent);
+  if (mWidget && apparent) {
+    mWidget->SetParent(apparent);
   }
 }
 

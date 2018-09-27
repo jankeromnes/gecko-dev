@@ -32,7 +32,7 @@ runWithMSE(async (ms, v) => {
   sb.appendBuffer(new Uint8Array(arrayBuffer, 25819));
   await once(sb, "updateend");
   ms.endOfStream();
-  await once(v, "seeked");
+  await once(v, "sought");
   SimpleTest.finish();
 });
 

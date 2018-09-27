@@ -32,7 +32,7 @@ using namespace mozilla::layers;
  * - deserializes the data into a texture host
  * - reads the surface from the texture host.
  *
- * The surface in the end should be equal to the inital one.
+ * The surface in the end should be equal to the initial one.
  * This test is run for different combinations of texture types and
  * image formats.
  */

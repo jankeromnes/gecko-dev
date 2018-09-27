@@ -376,7 +376,7 @@ static void getDefaultTZName(const UnicodeString &tzid, UBool isDST, UnicodeStri
  * dow      day of week in BYDAY, or 0 when not found
  * wim      day of week ordinal number in BYDAY, or 0 when not found
  * dom      an array of day of month
- * domCount number of availble days in dom (domCount is specifying the size of dom on input)
+ * domCount number of available days in dom (domCount is specifying the size of dom on input)
  * until    time defined by UNTIL attribute or MIN_MILLIS if not available
  */
 static void parseRRULE(const UnicodeString& rrule, int32_t& month, int32_t& dow, int32_t& wim,
@@ -663,7 +663,7 @@ static TimeZoneRule* createRuleByRRULE(const UnicodeString& zonename, int rawOff
                     goto unsupportedRRule;
                 }
             }
-            // If ealier month, go through days to find the earliest day
+            // If earlier month, go through days to find the earliest day
             if (tmp_month == earliestMonth) {
                 for (j = 0; j < tmp_daysCount; j++) {
                     tmp_days[j] = tmp_days[j] > 0 ? tmp_days[j] : MONTHLENGTH[tmp_month] + tmp_days[j] + 1;
@@ -875,7 +875,7 @@ static DateTimeRule* toWallTimeRule(const DateTimeRule* rule, int32_t rawOffset,
 }
 
 /*
- * Minumum implementations of stream writer/reader, writing/reading
+ * Minimum implementations of stream writer/reader, writing/reading
  * UnicodeString.  For now, we do not want to introduce the dependency
  * on the ICU I/O stream in this module.  But we want to keep the code
  * equivalent to the ICU4J implementation, which utilizes java.io.Writer/
@@ -1553,7 +1553,7 @@ VTimeZone::parse(UErrorCode& status) {
                     if (startAvail && actualStart < firstStart) {
                         // save from offset information for the earliest rule
                         firstStart = actualStart;
-                        // If this is STD, assume the time before this transtion
+                        // If this is STD, assume the time before this transition
                         // is DST when the difference is 1 hour.  This might not be
                         // accurate, but VTIMEZONE data does not have such info.
                         if (dstSavings > 0) {
@@ -2589,7 +2589,7 @@ VTimeZone::endZoneProps(VTZWriter& writer, UBool isDst, UErrorCode& status) cons
 }
 
 /*
- * Write the beggining part of RRULE line
+ * Write the beginning part of RRULE line
  */
 void
 VTimeZone::beginRRULE(VTZWriter& writer, int32_t month, UErrorCode& status) const {

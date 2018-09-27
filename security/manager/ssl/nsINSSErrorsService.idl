@@ -45,7 +45,7 @@ interface nsINSSErrorsService : nsISupports
 
     /**
      *  The following values define the range of NSPR error codes used by NSS.
-     *  NSS remains the authorative source for these numbers, as a result,
+     *  NSS remains the authoritative source for these numbers, as a result,
      *  the values might change in the future.
      *  The security module will perform a runtime check and assertion
      *  to ensure the values are in synch with NSS.

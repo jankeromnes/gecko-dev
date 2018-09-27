@@ -8,7 +8,7 @@ Add a void cast to silence clang Wcomma build warning, in sandbox's snapshot of 
 
 The build warning is for "possible misuse of comma operator".
 
-The comma operator is a bit of a footgun becasue its first operand's result
+The comma operator is a bit of a footgun because its first operand's result
 just gets dropped on the floor (in this case, the result of the DCHECK
 expression).  It appears that Chromium's use of the comma operator here is
 intentional, though -- so we might as well accept clang's suggestion and "cast

@@ -37,7 +37,7 @@ namespace cricket {
 // only way to have a TransportController with fake TransportChannels.
 //
 // TODO(deadbeef): Change this once the Transport/TransportChannel class
-// heirarchy is cleaned up, and we can pass a "TransportChannelFactory" or
+// hierarchy is cleaned up, and we can pass a "TransportChannelFactory" or
 // something similar into TransportController.
 typedef FakeTransportController TransportControllerForTest;
 

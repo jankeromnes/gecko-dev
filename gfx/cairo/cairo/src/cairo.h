@@ -478,9 +478,9 @@ cairo_pop_group_to_source (cairo_t *cr);
  * the source color.
  * @CAIRO_OPERATOR_COLOR_BURN: darkens the destination color to reflect
  * the source color.
- * @CAIRO_OPERATOR_HARD_LIGHT: Multiplies or screens, dependant on source
+ * @CAIRO_OPERATOR_HARD_LIGHT: Multiplies or screens, dependent on source
  * color.
- * @CAIRO_OPERATOR_SOFT_LIGHT: Darkens or lightens, dependant on source
+ * @CAIRO_OPERATOR_SOFT_LIGHT: Darkens or lightens, dependent on source
  * color.
  * @CAIRO_OPERATOR_DIFFERENCE: Takes the difference of the source and
  * destination color.
@@ -2278,7 +2278,7 @@ cairo_surface_get_subpixel_antialiasing (cairo_surface_t *surface);
  * @CAIRO_FORMAT_A1: each pixel is a 1-bit quantity holding
  *   an alpha value. Pixels are packed together into 32-bit
  *   quantities. The ordering of the bits matches the
- *   endianess of the platform. On a big-endian machine, the
+ *   endianness of the platform. On a big-endian machine, the
  *   first pixel is in the uppermost bit, on a little-endian
  *   machine the first pixel is in the least-significant bit.
  * @CAIRO_FORMAT_RGB16_565: each pixel is a 16-bit quantity

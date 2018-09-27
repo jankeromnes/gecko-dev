@@ -18,7 +18,7 @@ public:
   explicit OSFileSystem(const nsAString& aRootDir);
 
   void
-  Init(nsISupports* aParent);
+  Init(nsISupports* apparent);
 
   // Overrides FileSystemBase
 

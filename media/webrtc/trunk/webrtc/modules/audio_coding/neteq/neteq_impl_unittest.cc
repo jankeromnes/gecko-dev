@@ -1254,7 +1254,7 @@ TEST_F(NetEqImplTest, DecodingErrorDuringInternalCng) {
 }
 
 // Tests that the return value from last_output_sample_rate_hz() is equal to the
-// configured inital sample rate.
+// configured initial sample rate.
 TEST_F(NetEqImplTest, InitialLastOutputSampleRate) {
   UseNoMocks();
   config_.sample_rate_hz = 48000;

@@ -160,7 +160,7 @@ size_t SkVertices::approximateSize() const {
 #define kHeaderSize         (3 * sizeof(uint32_t))
 
 sk_sp<SkData> SkVertices::encode() const {
-    // packed has room for addtional flags in the future (e.g. versioning)
+    // packed has room for additional flags in the future (e.g. versioning)
     uint32_t packed = static_cast<uint32_t>(fMode);
     SkASSERT((packed & ~kMode_Mask) == 0);  // our mode fits in the mask bits
     if (this->hasTexCoords()) {
@@ -224,7 +224,7 @@ sk_sp<SkVertices> SkVertices::Decode(const void* data, size_t length) {
     reader.read(builder.colors(), sizes.fCSize);
     reader.read(builder.indices(), sizes.fISize);
     if (indexCount > 0) {
-        // validate that the indicies are in range
+        // validate that the indices are in range
         SkASSERT(indexCount == builder.indexCount());
         const uint16_t* indices = builder.indices();
         for (int i = 0; i < indexCount; ++i) {

@@ -175,7 +175,7 @@ protected:
 
   virtual void PrintInfo(std::stringstream& aStream, const char* aPrefix) override;
 
-  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* aParent) override;
+  virtual void DumpPacket(layerscope::LayersPacket* aPacket, const void* apparent) override;
 
   uint64_t mSequenceCounter;
   nsAutoPtr<ReadbackSink> mSink;

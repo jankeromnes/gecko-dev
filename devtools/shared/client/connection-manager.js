@@ -324,7 +324,7 @@ Connection.prototype = {
       }
       // In some cases, especially on Mac, the openOutputStream call in
       // DebuggerClient.socketConnect may throw NS_ERROR_NOT_INITIALIZED.
-      // It occurs when we connect agressively to the simulator,
+      // It occurs when we connect aggressively to the simulator,
       // and keep trying to open a socket to the server being started in
       // the simulator.
       this._onDisconnected();

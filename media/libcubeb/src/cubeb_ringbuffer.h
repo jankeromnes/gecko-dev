@@ -297,7 +297,7 @@ private:
   available_write_internal(int read_index,
                            int write_index) const
   {
-    /* We substract one element here to always keep at least one sample
+    /* We subtract one element here to always keep at least one sample
      * free in the buffer, to distinguish between full and empty array. */
     int rv = read_index - write_index - 1;
     if (write_index >= read_index) {

@@ -539,7 +539,7 @@ HTMLComboboxAccessible::SelectedOption() const
 ////////////////////////////////////////////////////////////////////////////////
 
 HTMLComboboxListAccessible::
-  HTMLComboboxListAccessible(Accessible* aParent, nsIContent* aContent,
+  HTMLComboboxListAccessible(Accessible* apparent, nsIContent* aContent,
                              DocAccessible* aDoc) :
   HTMLSelectListAccessible(aContent, aDoc)
 {

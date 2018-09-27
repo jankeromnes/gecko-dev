@@ -114,7 +114,7 @@ function cross_origin_url(base_url, feature_name) {
 // 1. Feature usage succeeds by default in the top level frame.
 // 2. Feature usage succeeds by default in a same-origin iframe.
 // 3. Feature usage fails by default in a cross-origin iframe.
-// 4. Feature usage suceeds when an allow attribute is specified on a
+// 4. Feature usage succeeds when an allow attribute is specified on a
 //    cross-origin iframe.
 //
 // The same page which called this function will be loaded in the iframe in

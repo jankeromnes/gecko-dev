@@ -138,7 +138,7 @@ public:
   // attributes.
   virtual bool GetIsOpaque() = 0;
 
-  // Invalidate this context and release any held resources, in preperation
+  // Invalidate this context and release any held resources, in preparation
   // for possibly reinitializing with SetDimensions/InitializeWithSurface.
   NS_IMETHOD Reset() = 0;
 

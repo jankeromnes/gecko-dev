@@ -319,7 +319,7 @@ nr_stun_receive_request_or_indication_short_term_auth(nr_stun_message *msg,
     switch (msg->header.magic_cookie) {
     default:
         /* in RFC 3489 there is no magic cookie, it's part of the transaction ID */
-        /* drop thru */
+        /* drop through */
     case NR_STUN_MAGIC_COOKIE:
         if (!nr_stun_message_has_attribute(msg, NR_STUN_ATTR_MESSAGE_INTEGRITY, &attr)) {
             nr_stun_form_error_response(msg, res, 400, "Missing MESSAGE-INTEGRITY");
@@ -365,7 +365,7 @@ nr_stun_receive_response_short_term_auth(nr_stun_message *res)
     switch (res->header.magic_cookie) {
     default:
         /* in RFC 3489 there is no magic cookie, it's part of the transaction ID */
-        /* drop thru */
+        /* drop through */
     case NR_STUN_MAGIC_COOKIE:
         if (!nr_stun_message_has_attribute(res, NR_STUN_ATTR_MESSAGE_INTEGRITY, &attr)) {
             r_log(NR_LOG_STUN, LOG_WARNING, "Missing MESSAGE-INTEGRITY");
@@ -454,7 +454,7 @@ nr_stun_receive_request_long_term_auth(nr_stun_message *req, nr_stun_server_ctx 
     switch (req->header.magic_cookie) {
     default:
         /* in RFC 3489 there is no magic cookie, it's part of the transaction ID */
-        /* drop thru */
+        /* drop through */
     case NR_STUN_MAGIC_COOKIE:
         if (!nr_stun_message_has_attribute(req, NR_STUN_ATTR_USERNAME, 0)) {
             nr_stun_form_error_response(req, res, 400, "Missing USERNAME");
@@ -524,7 +524,7 @@ nr_stun_receive_response_long_term_auth(nr_stun_message *res, nr_stun_client_ctx
     switch (res->header.magic_cookie) {
     default:
         /* in RFC 3489 there is no magic cookie, it's part of the transaction ID */
-        /* drop thru */
+        /* drop through */
     case NR_STUN_MAGIC_COOKIE:
         if (nr_stun_message_has_attribute(res, NR_STUN_ATTR_REALM, &attr)) {
             RFREE(ctx->realm);

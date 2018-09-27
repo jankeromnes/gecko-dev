@@ -676,15 +676,15 @@ EnsureUTF16ValiditySpan(mozilla::Span<char16_t> aString)
 inline void
 EnsureUTF16Validity(nsAString& aString)
 {
-  uint32_t upTo = UTF16ValidUpTo(aString);
+  uint32_t up to = UTF16ValidUpTo(aString);
   uint32_t len = aString.Length();
-  if (upTo == len) {
+  if (up to == len) {
     return;
   }
   char16_t* ptr = aString.BeginWriting();
   auto span = mozilla::MakeSpan(ptr, len);
-  span[upTo] = 0xFFFD;
-  EnsureUTF16ValiditySpan(span.From(upTo + 1));
+  span[up to] = 0xFFFD;
+  EnsureUTF16ValiditySpan(span.From(up to + 1));
 }
 
 bool ParseString(const nsACString& aAstring, char aDelimiter,

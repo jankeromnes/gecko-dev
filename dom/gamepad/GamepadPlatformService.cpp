@@ -189,17 +189,17 @@ GamepadPlatformService::ResetGamepadIndexes()
 }
 
 void
-GamepadPlatformService::AddChannelParent(GamepadEventChannelParent* aParent)
+GamepadPlatformService::AddChannelParent(GamepadEventChannelParent* apparent)
 {
   // mChannelParents can only be modified once GamepadEventChannelParent
   // is created or removed in Background thread
   AssertIsOnBackgroundThread();
-  MOZ_ASSERT(aParent);
-  MOZ_ASSERT(!mChannelParents.Contains(aParent));
+  MOZ_ASSERT(apparent);
+  MOZ_ASSERT(!mChannelParents.Contains(apparent));
 
   // We use mutex here to prevent race condition with monitor thread
   MutexAutoLock autoLock(mMutex);
-  mChannelParents.AppendElement(aParent);
+  mChannelParents.AppendElement(apparent);
   FlushPendingEvents();
 }
 
@@ -224,17 +224,17 @@ GamepadPlatformService::FlushPendingEvents()
 }
 
 void
-GamepadPlatformService::RemoveChannelParent(GamepadEventChannelParent* aParent)
+GamepadPlatformService::RemoveChannelParent(GamepadEventChannelParent* apparent)
 {
   // mChannelParents can only be modified once GamepadEventChannelParent
   // is created or removed in Background thread
   AssertIsOnBackgroundThread();
-  MOZ_ASSERT(aParent);
-  MOZ_ASSERT(mChannelParents.Contains(aParent));
+  MOZ_ASSERT(apparent);
+  MOZ_ASSERT(mChannelParents.Contains(apparent));
 
   // We use mutex here to prevent race condition with monitor thread
   MutexAutoLock autoLock(mMutex);
-  mChannelParents.RemoveElement(aParent);
+  mChannelParents.RemoveElement(apparent);
 }
 
 bool

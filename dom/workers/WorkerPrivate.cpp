@@ -2592,7 +2592,7 @@ WorkerPrivate::PrincipalIsValid() const
 }
 #endif
 
-WorkerPrivate::WorkerPrivate(WorkerPrivate* aParent,
+WorkerPrivate::WorkerPrivate(WorkerPrivate* apparent,
                              const nsAString& aScriptURL,
                              bool aIsChromeWorker, WorkerType aWorkerType,
                              const nsAString& aWorkerName,
@@ -2600,7 +2600,7 @@ WorkerPrivate::WorkerPrivate(WorkerPrivate* aParent,
                              WorkerLoadInfo& aLoadInfo)
   : mMutex("WorkerPrivate Mutex")
   , mCondVar(mMutex, "WorkerPrivate CondVar")
-  , mParent(aParent)
+  , mParent(apparent)
   , mScriptURL(aScriptURL)
   , mWorkerName(aWorkerName)
   , mWorkerType(aWorkerType)
@@ -2644,7 +2644,7 @@ WorkerPrivate::WorkerPrivate(WorkerPrivate* aParent,
   MOZ_ASSERT_IF(!IsDedicatedWorker(), NS_IsMainThread());
   mLoadInfo.StealFrom(aLoadInfo);
 
-  if (aParent) {
+  if (apparent) {
     aParent->AssertIsOnWorkerThread();
 
     // Note that this copies our parent's secure context state into mJSSettings.
@@ -2715,7 +2715,7 @@ WorkerPrivate::WorkerPrivate(WorkerPrivate* aParent,
   // and main thread target for now.  This is mainly due to the restriction
   // that ThrottledEventQueue can only be created on the main thread at the
   // moment.
-  if (aParent) {
+  if (apparent) {
     mMainThreadThrottledEventQueue = aParent->mMainThreadThrottledEventQueue;
     mMainThreadEventTarget = aParent->mMainThreadEventTarget;
     return;
@@ -2860,7 +2860,7 @@ WorkerPrivate::Constructor(JSContext* aCx,
 // static
 nsresult
 WorkerPrivate::GetLoadInfo(JSContext* aCx, nsPIDOMWindowInner* aWindow,
-                           WorkerPrivate* aParent, const nsAString& aScriptURL,
+                           WorkerPrivate* apparent, const nsAString& aScriptURL,
                            bool aIsChromeWorker,
                            LoadGroupBehavior aLoadGroupBehavior,
                            WorkerType aWorkerType,
@@ -2878,7 +2878,7 @@ WorkerPrivate::GetLoadInfo(JSContext* aCx, nsPIDOMWindowInner* aWindow,
   WorkerLoadInfo loadInfo;
   nsresult rv;
 
-  if (aParent) {
+  if (apparent) {
     aParent->AssertIsOnWorkerThread();
 
     // If the parent is going away give up now.
@@ -2894,10 +2894,10 @@ WorkerPrivate::GetLoadInfo(JSContext* aCx, nsPIDOMWindowInner* aWindow,
 
     // Passing a pointer to our stack loadInfo is safe here because this
     // method uses a sync runnable to get the channel from the main thread.
-    rv = ChannelFromScriptURLWorkerThread(aCx, aParent, aScriptURL,
+    rv = ChannelFromScriptURLWorkerThread(aCx, apparent, aScriptURL,
                                           loadInfo);
     if (NS_FAILED(rv)) {
-      MOZ_ALWAYS_TRUE(loadInfo.ProxyReleaseMainThreadObjects(aParent));
+      MOZ_ALWAYS_TRUE(loadInfo.ProxyReleaseMainThreadObjects(apparent));
       return rv;
     }
 
@@ -2909,7 +2909,7 @@ WorkerPrivate::GetLoadInfo(JSContext* aCx, nsPIDOMWindowInner* aWindow,
     }
 
     if (parentStatus > Running) {
-      MOZ_ALWAYS_TRUE(loadInfo.ProxyReleaseMainThreadObjects(aParent));
+      MOZ_ALWAYS_TRUE(loadInfo.ProxyReleaseMainThreadObjects(apparent));
       return NS_ERROR_FAILURE;
     }
 

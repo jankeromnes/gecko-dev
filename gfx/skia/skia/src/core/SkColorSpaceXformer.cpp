@@ -47,7 +47,7 @@ std::unique_ptr<SkColorSpaceXformer> SkColorSpaceXformer::Make(sk_sp<SkColorSpac
 //    to not defeat their own/internal caching), but also for avoiding unnecessary cloning
 //    (e.g. duplicated SkImages allocated for the example in #1 above).
 //
-// The caching scope is naturaly bound by the lifetime of the SkColorSpaceXformer object, but
+// The caching scope is naturally bound by the lifetime of the SkColorSpaceXformer object, but
 // clients may choose to not discard xformers immediately - in which case, caching indefinitely
 // is problematic.  The solution is to limit the cache scope to the top level apply() call
 // (i.e. we only keep cached objects alive while transforming).

@@ -356,7 +356,7 @@ CERT_DestroyOCSPResponse(CERTOCSPResponse *response);
  *     Pointer in which to store the OCSP request created for the given
  *     list of certificates.  It is only filled in if the entire operation
  *     is successful and the pointer is not null -- and in that case the
- *     caller is then reponsible for destroying it.
+ *     caller is then responsible for destroying it.
  * RETURN:
  *   Returns a pointer to the SECItem holding the response.
  *   On error, returns null with error set describing the reason:

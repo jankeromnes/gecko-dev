@@ -25,7 +25,7 @@ add_task(async function() {
     browser.test.assertRejects(
       browser.tabs.sendMessage(tab.id, "void"),
       /Could not establish connection. Receiving end does not exist/,
-      "No recievers in a tab pending restore."
+      "No receivers in a tab pending restore."
     );
     browser.test.notifyPass("lazy");
   }

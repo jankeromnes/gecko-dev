@@ -66,9 +66,9 @@ AddWorkerHolderToStreamChild(const CacheRequest& aRequest,
 
 CacheOpChild::CacheOpChild(CacheWorkerHolder* aWorkerHolder,
                            nsIGlobalObject* aGlobal,
-                           nsISupports* aParent, Promise* aPromise)
+                           nsISupports* apparent, Promise* aPromise)
   : mGlobal(aGlobal)
-  , mParent(aParent)
+  , mParent(apparent)
   , mPromise(aPromise)
 {
   MOZ_DIAGNOSTIC_ASSERT(mGlobal);

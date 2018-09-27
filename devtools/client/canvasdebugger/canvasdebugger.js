@@ -42,7 +42,7 @@ const EVENTS = {
   SNAPSHOTS_LIST_CLEARED: "CanvasDebugger:SnapshotsListCleared",
 
   // When an animation frame snapshot starts/finishes being recorded, and
-  // whether it was completed succesfully or cancelled.
+  // whether it was completed successfully or cancelled.
   SNAPSHOT_RECORDING_STARTED: "CanvasDebugger:SnapshotRecordingStarted",
   SNAPSHOT_RECORDING_FINISHED: "CanvasDebugger:SnapshotRecordingFinished",
   SNAPSHOT_RECORDING_COMPLETED: "CanvasDebugger:SnapshotRecordingCompleted",

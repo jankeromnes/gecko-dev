@@ -250,7 +250,7 @@ var BookmarkPropertiesPanel = {
     let acceptButton = document.documentElement.getButton("accept");
     acceptButton.disabled = true;
 
-    // Allow initialization to complete in a truely async manner so that we're
+    // Allow initialization to complete in a truly async manner so that we're
     // not blocking the main thread.
     this._initDialog().catch(ex => {
       Cu.reportError(`Failed to initialize dialog: ${ex}`);
@@ -259,7 +259,7 @@ var BookmarkPropertiesPanel = {
 
   /**
    * Initializes the dialog, gathering the required bookmark data. This function
-   * will enable the accept button (if appropraite) when it is complete.
+   * will enable the accept button (if appropriate) when it is complete.
    */
   async _initDialog() {
     let acceptButton = document.documentElement.getButton("accept");

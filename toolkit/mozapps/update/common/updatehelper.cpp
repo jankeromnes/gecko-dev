@@ -489,7 +489,7 @@ WaitForServiceStop(LPCWSTR serviceName, DWORD maxWaitSeconds)
  * Determines if there is at least one process running for the specified
  * application. A match will be found across any session for any user.
  *
- * @param process The process to check for existance
+ * @param process The process to check for existence
  * @return ERROR_NOT_FOUND if the process was not found
  *         ERROR_SUCCESS if the process was found and there were no errors
  *         Other Win32 system error code for other errors
@@ -522,7 +522,7 @@ IsProcessRunning(LPCWSTR filename)
 }
 
 /**
- * Waits for the specified applicaiton to exit.
+ * Waits for the specified application to exit.
  *
  * @param filename   The application to wait for.
  * @param maxSeconds The maximum amount of seconds to wait for all

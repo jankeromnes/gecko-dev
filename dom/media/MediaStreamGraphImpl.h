@@ -96,7 +96,7 @@ public:
  * be able to friend it.
  *
  * There can be multiple MediaStreamGraph per process: one per document.
- * Additionaly, each OfflineAudioContext object creates its own MediaStreamGraph
+ * Additionally, each OfflineAudioContext object creates its own MediaStreamGraph
  * object too.
  */
 class MediaStreamGraphImpl : public MediaStreamGraph,
@@ -518,7 +518,7 @@ public:
   }
 
   /**
-   * Signal to the graph that the thread has paused indefinitly,
+   * Signal to the graph that the thread has paused indefinitely,
    * or resumed.
    */
   void PausedIndefinitly();

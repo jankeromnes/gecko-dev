@@ -308,7 +308,7 @@ template<size_t N> struct VariantIndex { static constexpr size_t index = N; };
 /**
  * # mozilla::Variant
  *
- * A variant / tagged union / heterogenous disjoint union / sum-type template
+ * A variant / tagged union / heterogeneous disjoint union / sum-type template
  * class. Similar in concept to (but not derived from) `boost::variant`.
  *
  * Sometimes, you may wish to use a C union with non-POD types. However, this is
@@ -386,7 +386,7 @@ template<size_t N> struct VariantIndex { static constexpr size_t index = N; };
  *    };
  *    // Now instantiante with the result being an int too:
  *    ResultOrError<int> myResult(123); // Fail!
- *    // In Variant<int, int>, which 'int' are we refering to, from inside
+ *    // In Variant<int, int>, which 'int' are we referring to, from inside
  *    // ResultOrError functions?
  *
  *    // Good!

@@ -30,7 +30,7 @@ public:
     return mParent;
   }
 
-  explicit MIDIInputMap(nsPIDOMWindowInner* aParent);
+  explicit MIDIInputMap(nsPIDOMWindowInner* apparent);
   JSObject* WrapObject(JSContext* aCx, JS::Handle<JSObject*> aGivenProto) override;
 private:
   ~MIDIInputMap() = default;

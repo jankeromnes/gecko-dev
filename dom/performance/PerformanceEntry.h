@@ -25,7 +25,7 @@ protected:
   virtual ~PerformanceEntry();
 
 public:
-  PerformanceEntry(nsISupports* aParent,
+  PerformanceEntry(nsISupports* apparent,
                    const nsAString& aName,
                    const nsAString& aEntryType);
 

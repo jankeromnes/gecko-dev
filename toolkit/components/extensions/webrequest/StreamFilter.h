@@ -39,7 +39,7 @@ class StreamFilter : public DOMEventTargetHelper
          uint64_t aRequestId,
          const nsAString& aAddonId);
 
-  explicit StreamFilter(nsIGlobalObject* aParent,
+  explicit StreamFilter(nsIGlobalObject* apparent,
                         uint64_t aRequestId,
                         const nsAString& aAddonId);
 

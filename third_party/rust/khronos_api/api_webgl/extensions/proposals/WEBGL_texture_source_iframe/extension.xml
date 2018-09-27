@@ -61,7 +61,7 @@ interface WEBGL_texture_source_iframe {
       </p>
       <p>Note this function returns a promise asynchronously because wiring an iframe rendering results
       to a WebGL texture could take multiple frames. The iframe could be invisible, therefore not part of
-      the rendering pipeline and needs to be inserted into it. The iframe could also be in a seperate
+      the rendering pipeline and needs to be inserted into it. The iframe could also be in a separate
       process from the one where WebGL is in, although this is likely not the case right now because we
       currently limit iframe to be same origin only.</p>
     </function>

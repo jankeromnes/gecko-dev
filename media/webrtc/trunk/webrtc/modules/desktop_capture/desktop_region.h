@@ -29,7 +29,7 @@ class DesktopRegion {
   // The following private types need to be declared first because they are used
   // in the public Iterator.
 
-  // RowSpan represents a horizontal span withing a single row.
+  // RowSpan represents a horizontal span within a single row.
   struct RowSpan {
     RowSpan(int32_t left, int32_t right);
 

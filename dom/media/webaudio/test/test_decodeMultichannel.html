@@ -42,7 +42,7 @@ addLoadEvent(function() {
   xhr.onload = function() {
     var context = new AudioContext();
     context.decodeAudioData(xhr.response, function(b) {
-      ok(true, "Decoding of a wave file with four channels succeded.");
+      ok(true, "Decoding of a wave file with four channels succeeded.");
       is(b.numberOfChannels, 4, "The AudioBuffer should have 4 channels.");
       decodeUsingAudioElement();
     }, function() {

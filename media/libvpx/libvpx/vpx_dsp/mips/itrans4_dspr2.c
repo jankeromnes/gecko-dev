@@ -222,7 +222,7 @@ void vpx_idct4x4_16_add_dspr2(const int16_t *input, uint8_t *dest, int stride) {
   int16_t *outptr = out;
   uint32_t pos = 45;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
                        :
                        : [pos] "r"(pos));
@@ -242,7 +242,7 @@ void vpx_idct4x4_1_add_dspr2(const int16_t *input, uint8_t *dest, int stride) {
   uint32_t pos = 45;
   int16_t input_dc = input[0];
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
 
                        :

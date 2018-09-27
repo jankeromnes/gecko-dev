@@ -617,7 +617,7 @@ InplaceEditor.prototype = {
    * dimensions (distance, angle, duration).
    *
    * @param {String} beforeValue
-   *        The string preceeding the number value in the current property
+   *        The string preceding the number value in the current property
    *        value.
    * @param {String} afterValue
    *        The string following the number value in the current property value.
@@ -661,7 +661,7 @@ InplaceEditor.prototype = {
     let start = 0;
     let m;
 
-    // retreive values from left to right until we find the one at our offset
+    // retrieve values from left to right until we find the one at our offset
     while ((m = reSplitCSS.exec(value)) &&
           (m.index + m[0].length < offset)) {
       value = value.substr(m.index + m[0].length);
@@ -1201,7 +1201,7 @@ InplaceEditor.prototype = {
       event.stopPropagation();
     } else if (isKeyIn(key, "SPACE")) {
       // No need for leading spaces here.  This is particularly
-      // noticable when adding a property: it's very natural to type
+      // noticeable when adding a property: it's very natural to type
       // <name>: (which advances to the next property) then spacebar.
       prevent = !input.value;
     }
@@ -1362,7 +1362,7 @@ InplaceEditor.prototype = {
           input.selectionStart < input.value.length) {
         const nextChar = input.value.slice(input.selectionStart)[0];
         // Check if the next character is a valid word character, no suggestion should be
-        // provided when preceeding a word.
+        // provided when preceding a word.
         if (/[\w-]/.test(nextChar)) {
           // This emit is mainly to make the test flow simpler.
           this.emit("after-suggest", "nothing to autocomplete");

@@ -966,7 +966,7 @@ SameGroup(JSObject* first, JSObject* second)
 // [[1,2],[3,4],[5.5,6.5]], try to ensure that each element of the array has
 // the same group. This is mainly important when the elements might have
 // different native vs. unboxed layouts, or different unboxed layouts, and
-// accessing the heterogenous layouts from JIT code will be much slower than
+// accessing the heterogeneous layouts from JIT code will be much slower than
 // if they were homogenous.
 //
 // To do this, with each new array element we compare it with one of the

@@ -143,7 +143,7 @@ public:
 
   // nsSVGElement overrides
 
-  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent) override;
   virtual void UnbindFromTree(bool aDeep, bool aNullParent) override;
   virtual nsSVGAnimatedTransformList*
@@ -192,7 +192,7 @@ private:
    * basically a simplified version of GetOwnerSVGElement that uses the parent
    * parameters passed in instead.
    */
-  bool WillBeOutermostSVG(nsIContent* aParent,
+  bool WillBeOutermostSVG(nsIContent* apparent,
                           nsIContent* aBindingParent) const;
 
   // invalidate viewbox -> viewport xform & inform frames

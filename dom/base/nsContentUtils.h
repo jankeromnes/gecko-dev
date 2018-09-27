@@ -1333,9 +1333,9 @@ public:
    * If you depend on that you need to hold references yourself.
    *
    * @param aChild    The node to fire DOMNodeRemoved at.
-   * @param aParent   The parent of aChild.
+   * @param apparent   The parent of aChild.
    */
-  static void MaybeFireNodeRemoved(nsINode* aChild, nsINode* aParent);
+  static void MaybeFireNodeRemoved(nsINode* aChild, nsINode* apparent);
 
   /**
    * This method creates and dispatches a trusted event.
@@ -1887,7 +1887,7 @@ public:
   static void HidePopupsInDocument(nsIDocument* aDocument);
 
   /**
-   * Retrieve the current drag session, or null if no drag is currently occuring
+   * Retrieve the current drag session, or null if no drag is currently occurring
    */
   static already_AddRefed<nsIDragSession> GetDragSession();
 
@@ -2257,7 +2257,7 @@ public:
    * layer manager. In addition to the normal layer manager lookup this will
    * specifically request a persistent layer manager. This means that the layer
    * manager is expected to remain the layer manager for the document in the
-   * forseeable future. This function should be used carefully as it may change
+   * foreseeable future. This function should be used carefully as it may change
    * the document's layer manager.
    *
    * @param aDoc the document for which to return a layer manager.
@@ -2806,13 +2806,13 @@ public:
                                               nsTArray<mozilla::dom::IPCDataTransfer>& aIPC,
                                               bool aInSyncMessage,
                                               mozilla::dom::nsIContentChild* aChild,
-                                              mozilla::dom::nsIContentParent* aParent);
+                                              mozilla::dom::nsIContentParent* apparent);
 
   static void TransferableToIPCTransferable(nsITransferable* aTransferable,
                                             mozilla::dom::IPCDataTransfer* aIPCDataTransfer,
                                             bool aInSyncMessage,
                                             mozilla::dom::nsIContentChild* aChild,
-                                            mozilla::dom::nsIContentParent* aParent);
+                                            mozilla::dom::nsIContentParent* apparent);
 
   /*
    * Get the pixel data from the given source surface and return it as a buffer.
@@ -2962,7 +2962,7 @@ public:
    */
   static StorageAccess StorageAllowedForNewWindow(nsIPrincipal* aPrincipal,
                                                   nsIURI* aURI,
-                                                  nsPIDOMWindowInner* aParent);
+                                                  nsPIDOMWindowInner* apparent);
 
   /*
    * Checks if storage should be allowed for the given channel.  The check will

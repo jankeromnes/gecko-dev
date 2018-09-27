@@ -63,7 +63,7 @@
 // we'll include the default flag value and as much of the flag's
 // description as can fit on a single terminal line width, as specified
 // by the flag --tab_completion_columns).  Furthermore, we'll try to
-// make bash order the output such that the most useful or relevent
+// make bash order the output such that the most useful or relevant
 // flags are the most likely to be shown at the top.
 //
 // ** Additional features:

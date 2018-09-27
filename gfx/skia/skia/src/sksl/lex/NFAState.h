@@ -143,7 +143,7 @@ struct NFAState {
 
     std::vector<int> fData;
 
-    // states we transition to upon a succesful match from this state
+    // states we transition to upon a successful match from this state
     std::vector<int> fNext;
 };
 

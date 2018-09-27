@@ -341,13 +341,13 @@ public:
   }
 
   template<typename P, typename C>
-  static void LinkParentAndChild(const P* aParent,
+  static void LinkParentAndChild(const P* apparent,
                                  const char* aLinkName,
                                  const C* aChild)
   {
     if (aChild) {
       Log(DDLoggedTypeTraits<P>::Name(),
-          aParent,
+          apparent,
           DDLogCategory::_Link,
           aLinkName,
           DDLogValue{ DDLogObject{ DDLoggedTypeTraits<C>::Name(), aChild } });
@@ -370,14 +370,14 @@ public:
   }
 
   template<typename P>
-  static void LinkParentAndChild(const P* aParent,
+  static void LinkParentAndChild(const P* apparent,
                                  const char* aLinkName,
                                  const char* aChildTypeName,
                                  const void* aChildPointer)
   {
     if (aChildPointer) {
       Log(DDLoggedTypeTraits<P>::Name(),
-          aParent,
+          apparent,
           DDLogCategory::_Link,
           aLinkName,
           DDLogValue{ DDLogObject{ aChildTypeName, aChildPointer } });
@@ -399,11 +399,11 @@ public:
   }
 
   template<typename P, typename C>
-  static void UnlinkParentAndChild(const P* aParent, const C* aChild)
+  static void UnlinkParentAndChild(const P* apparent, const C* aChild)
   {
     if (aChild) {
       Log(DDLoggedTypeTraits<P>::Name(),
-          aParent,
+          apparent,
           DDLogCategory::_Unlink,
           "",
           DDLogValue{ DDLogObject{ DDLoggedTypeTraits<C>::Name(), aChild } });

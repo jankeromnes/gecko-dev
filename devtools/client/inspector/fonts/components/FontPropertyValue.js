@@ -320,7 +320,7 @@ class FontPropertyValue extends PureComponent {
 
   /**
    * Toggle the "interactive" state which causes render() to use `value` fom internal
-   * state instead of from props to prevent jittering during continous dragging of the
+   * state instead of from props to prevent jittering during continuous dragging of the
    * range input thumb or incrementing from the number input.
    *
    * @param {Boolean} isInteractive

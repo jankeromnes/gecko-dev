@@ -128,7 +128,7 @@ const uint32_t kDeleteTimeoutMs = 1000;
 // Anything larger is compressed and stored outside the database.
 const int32_t kDefaultDataThresholdBytes = 1024 * 1024; // 1MB
 
-// The maximal size of a serialized object to be transfered through IPC.
+// The maximal size of a serialized object to be transferred through IPC.
 const int32_t kDefaultMaxSerializedMsgSize = IPC::Channel::kMaximumMessageSize;
 
 #define IDB_PREF_BRANCH_ROOT "dom.indexedDB."

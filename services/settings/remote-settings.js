@@ -400,7 +400,7 @@ class RemoteSettingsClient {
         syncResult = await collection.sync({ remote: gServerURL, strategy });
         const { ok } = syncResult;
         if (!ok) {
-          // Some synchronization conflicts occured.
+          // Some synchronization conflicts occurred.
           reportStatus = UptakeTelemetry.STATUS.CONFLICT_ERROR;
           throw new Error("Sync failed");
         }

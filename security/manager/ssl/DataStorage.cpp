@@ -872,7 +872,7 @@ DataStorage::Put(const nsCString& aKey, const nsCString& aValue,
 
   nsString filename(mFilename);
   RunOnAllContentParents(
-  [aKey, aValue, aType, filename] (dom::ContentParent* aParent) {
+  [aKey, aValue, aType, filename] (dom::ContentParent* apparent) {
     DataStorageItem item;
     item.key() = aKey;
     item.value() = aValue;
@@ -913,7 +913,7 @@ DataStorage::Remove(const nsCString& aKey, DataStorageType aType)
 
   nsString filename(mFilename);
   RunOnAllContentParents(
-  [filename, aKey, aType] (dom::ContentParent* aParent) {
+  [filename, aKey, aType] (dom::ContentParent* apparent) {
     Unused << aParent->SendDataStorageRemove(filename, aKey, aType);
   });
 }
@@ -1040,7 +1040,7 @@ DataStorage::Clear()
   }
 
   nsString filename(mFilename);
-  RunOnAllContentParents([filename] (dom::ContentParent* aParent) {
+  RunOnAllContentParents([filename] (dom::ContentParent* apparent) {
     Unused << aParent->SendDataStorageClear(filename);
   });
 

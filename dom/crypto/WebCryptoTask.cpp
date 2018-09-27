@@ -969,15 +969,15 @@ public:
            CryptoKey& aKey,
            const CryptoOperationData& aSignature,
            const CryptoOperationData& aData,
-           bool aSign)
+           bool assign)
     : mMechanism(aKey.Algorithm().Mechanism())
     , mSymKey(aKey.GetSymKey())
-    , mSign(aSign)
+    , mSign(assign)
   {
     CHECK_KEY_ALGORITHM(aKey.Algorithm(), WEBCRYPTO_ALG_HMAC);
 
     ATTEMPT_BUFFER_INIT(mData, aData);
-    if (!aSign) {
+    if (!assign) {
       ATTEMPT_BUFFER_INIT(mSignature, aSignature);
     }
 
@@ -1081,19 +1081,19 @@ public:
                            CryptoKey& aKey,
                            const CryptoOperationData& aSignature,
                            const CryptoOperationData& aData,
-                           bool aSign)
+                           bool assign)
     : mOidTag(SEC_OID_UNKNOWN)
     , mHashMechanism(UNKNOWN_CK_MECHANISM)
     , mMgfMechanism(UNKNOWN_CK_MECHANISM)
     , mPrivKey(aKey.GetPrivateKey())
     , mPubKey(aKey.GetPublicKey())
     , mSaltLength(0)
-    , mSign(aSign)
+    , mSign(assign)
     , mVerified(false)
     , mAlgorithm(Algorithm::UNKNOWN)
   {
     ATTEMPT_BUFFER_INIT(mData, aData);
-    if (!aSign) {
+    if (!assign) {
       ATTEMPT_BUFFER_INIT(mSignature, aSignature);
     }
 
@@ -3244,15 +3244,15 @@ WebCryptoTask::CreateSignVerifyTask(JSContext* aCx,
                                     CryptoKey& aKey,
                                     const CryptoOperationData& aSignature,
                                     const CryptoOperationData& aData,
-                                    bool aSign)
+                                    bool assign)
 {
-  TelemetryMethod method = (aSign)? TM_SIGN : TM_VERIFY;
+  TelemetryMethod method = (assign)? TM_SIGN : TM_VERIFY;
   Telemetry::Accumulate(Telemetry::WEBCRYPTO_METHOD, method);
   Telemetry::Accumulate(Telemetry::WEBCRYPTO_EXTRACTABLE_SIG, aKey.Extractable());
 
   // Ensure key is usable for this operation
-  if ((aSign  && !aKey.HasUsage(CryptoKey::SIGN)) ||
-      (!aSign && !aKey.HasUsage(CryptoKey::VERIFY))) {
+  if ((assign  && !aKey.HasUsage(CryptoKey::SIGN)) ||
+      (!assign && !aKey.HasUsage(CryptoKey::VERIFY))) {
     return new FailureTask(NS_ERROR_DOM_INVALID_ACCESS_ERR);
   }
 
@@ -3263,12 +3263,12 @@ WebCryptoTask::CreateSignVerifyTask(JSContext* aCx,
   }
 
   if (algName.EqualsLiteral(WEBCRYPTO_ALG_HMAC)) {
-    return new HmacTask(aCx, aAlgorithm, aKey, aSignature, aData, aSign);
+    return new HmacTask(aCx, aAlgorithm, aKey, aSignature, aData, assign);
   } else if (algName.EqualsLiteral(WEBCRYPTO_ALG_RSASSA_PKCS1) ||
              algName.EqualsLiteral(WEBCRYPTO_ALG_RSA_PSS) ||
              algName.EqualsLiteral(WEBCRYPTO_ALG_ECDSA)) {
     return new AsymmetricSignVerifyTask(aCx, aAlgorithm, aKey, aSignature,
-                                        aData, aSign);
+                                        aData, assign);
   }
 
   return new FailureTask(NS_ERROR_DOM_NOT_SUPPORTED_ERR);

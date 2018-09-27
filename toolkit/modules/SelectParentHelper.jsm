@@ -31,7 +31,7 @@ var SelectParentHelper = {
    * `populate` takes the `menulist` element and a list of `items` and generates
    * a popup list of options.
    *
-   * If `customStylingEnabled` is set to `true`, the function will alse
+   * If `customStylingEnabled` is set to `true`, the function will else
    * style the select and its popup trying to prevent the text
    * and background to end up in the same color.
    *

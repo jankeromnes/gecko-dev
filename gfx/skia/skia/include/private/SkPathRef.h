@@ -29,7 +29,7 @@ class SkWBuffer;
  * constructor a pointer to a sk_sp<SkPathRef>, which may be updated to point to a new SkPathRef
  * after the editor's constructor returns.
  *
- * The points and verbs are stored in a single allocation. The points are at the begining of the
+ * The points and verbs are stored in a single allocation. The points are at the beginning of the
  * allocation while the verbs are stored at end of the allocation, in reverse order. Thus the points
  * and verbs both grow into the middle of the allocation until the meet. To access verb i in the
  * verb array use ref.verbs()[~i] (because verbs() returns a pointer just beyond the first
@@ -172,7 +172,7 @@ public:
      *                  if the height and width are the same.
      * @param isCCW     is the oval CCW (or CW if false).
      * @param start     indicates where the contour starts on the oval (see
-     *                  SkPath::addOval for intepretation of the index).
+     *                  SkPath::addOval for interpretation of the index).
      *
      * @return true if this path is an oval.
      *              Tracking whether a path is an oval is considered an
@@ -525,7 +525,7 @@ private:
 
     mutable SkRect   fBounds;
 
-    SkPoint*            fPoints; // points to begining of the allocation
+    SkPoint*            fPoints; // points to beginning of the allocation
     uint8_t*            fVerbs; // points just past the end of the allocation (verbs grow backwards)
     int                 fVerbCnt;
     int                 fPointCnt;

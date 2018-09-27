@@ -116,7 +116,7 @@ void av_bprint_init(AVBPrint *buf, unsigned size_init, unsigned size_max);
 void av_bprint_init_for_buffer(AVBPrint *buf, char *buffer, unsigned size);
 
 /**
- * Append a formated string to a print buffer.
+ * Append a formatted string to a print buffer.
  */
 void av_bprintf(AVBPrint *buf, const char *fmt, ...) av_printf_format(2, 3);
 

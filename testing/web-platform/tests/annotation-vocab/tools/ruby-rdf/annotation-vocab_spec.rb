@@ -76,7 +76,7 @@ describe "Web Annotation Vocab" do
       it format do
         fg = RDF::Graph.load(vocab, format: format, headers: {"Accept" => content_type})
 
-        # XXX Normalize whitespace in literals to ease comparision
+        # XXX Normalize whitespace in literals to ease comparison
         fg.each_object {|o| o.squish! if o.literal?}
         expect(fg).to be_equivalent_graph(vocab_graph)
       end

@@ -162,7 +162,7 @@ private:
 
 /** Handles one way of a (possibly) duplex resampler, working on interleaved
  * audio buffers of type T. This class is designed so that the number of frames
- * coming out of the resampler can be precisely controled. It manages its own
+ * coming out of the resampler can be precisely controlled. It manages its own
  * input buffer, and can use the caller's output buffer, or allocate its own. */
 template<typename T>
 class cubeb_resampler_speex_one_way : public processor {
@@ -428,7 +428,7 @@ public:
    * @parameter frames_needed the number of frames the user needs to write into
    * the buffer.
    * @returns a pointer to a location in the input buffer where #frames_needed
-   * can be writen. */
+   * can be written. */
   T * input_buffer(uint32_t frames_needed)
   {
     leftover_samples = delay_input_buffer.length();

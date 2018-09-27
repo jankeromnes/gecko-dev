@@ -560,7 +560,7 @@ ImageBridgeChild::Bind(Endpoint<PImageBridgeChild>&& aEndpoint)
 }
 
 void
-ImageBridgeChild::BindSameProcess(RefPtr<ImageBridgeParent> aParent)
+ImageBridgeChild::BindSameProcess(RefPtr<ImageBridgeParent> apparent)
 {
   MessageLoop *parentMsgLoop = aParent->GetMessageLoop();
   ipc::MessageChannel *parentChannel = aParent->GetIPCChannel();

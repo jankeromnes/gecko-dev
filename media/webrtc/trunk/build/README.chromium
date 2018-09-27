@@ -12,4 +12,4 @@ List of property sheets to be included by projects:
     Run to enable automatic copy of DLL when they are as an input file in a vcproj project.
 
   release.vsprops
-    Enables release settings. Must be included directly in Release configuration. Includes internal\essential.vsprops. Also includes "internal\release_impl$(CHROME_BUILD_TYPE).vsprops". So the behavior is dependant on the CHROME_BUILD_TYPE environment variable.
+    Enables release settings. Must be included directly in Release configuration. Includes internal\essential.vsprops. Also includes "internal\release_impl$(CHROME_BUILD_TYPE).vsprops". So the behavior is dependent on the CHROME_BUILD_TYPE environment variable.

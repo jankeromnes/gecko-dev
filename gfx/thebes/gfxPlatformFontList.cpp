@@ -416,7 +416,7 @@ gfxPlatformFontList::SearchFamiliesForFaceName(const nsACString& aFaceName)
     char16_t firstChar = 0;
     gfxFontEntry *lookup = nullptr;
 
-    // iterate over familes starting with the same letter
+    // iterate over families starting with the same letter
     firstChar = ToLowerCase(aFaceName.CharAt(0));
 
     for (auto iter = mFontFamilies.Iter(); !iter.Done(); iter.Next()) {

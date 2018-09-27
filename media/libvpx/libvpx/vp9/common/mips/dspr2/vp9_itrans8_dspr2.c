@@ -28,7 +28,7 @@ void vp9_iht8x8_64_add_dspr2(const int16_t *input, uint8_t *dest, int stride,
   int16_t temp_in[8 * 8], temp_out[8];
   uint32_t pos = 45;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp    %[pos],    1    \n\t" : : [pos] "r"(pos));
 
   switch (tx_type) {

@@ -58,7 +58,7 @@ window.gActivityStreamStrings = {
   "settings_pane_snippets_header": "Kuski",
   "edit_topsites_button_text": "Wobźěłaś",
   "edit_topsites_edit_button": "Toś to sedło wobźěłaś",
-  "topsites_form_add_header": "Nowe nejcesćej woglědane sedło",
+  "topsites_form_add_header": "Now nejcesćej woglědane sedło",
   "topsites_form_edit_header": "Nejcesćej woglědane sedło wobźěłaś",
   "topsites_form_title_label": "Titel",
   "topsites_form_title_placeholder": "Titel zapódaś",

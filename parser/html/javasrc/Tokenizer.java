@@ -3744,7 +3744,7 @@ public class Tokenizer implements Locator {
                                 returnState = state;
                                 state = transition(state, Tokenizer.RAWTEXT_RCDATA_LESS_THAN_SIGN, reconsume, pos);
                                 break rawtextloop;
-                            // FALL THRU continue stateloop;
+                            // FALL THROUGH continue stateloop;
                             case '\u0000':
                                 emitReplacementCharacter(buf, pos);
                                 continue;
@@ -3780,7 +3780,7 @@ public class Tokenizer implements Locator {
                                 clearStrBufBeforeUse();
                                 state = transition(state, Tokenizer.NON_DATA_END_TAG_NAME, reconsume, pos);
                                 break rawtextrcdatalessthansignloop;
-                            // FALL THRU continue stateloop;
+                            // FALL THROUGH continue stateloop;
                             default:
                                 /*
                                  * Otherwise, emit a U+003C LESS-THAN SIGN
@@ -4014,7 +4014,7 @@ public class Tokenizer implements Locator {
                                 flushChars(buf, pos);
                                 returnState = state;
                                 state = transition(state, Tokenizer.SCRIPT_DATA_LESS_THAN_SIGN, reconsume, pos);
-                                break scriptdataloop; // FALL THRU continue
+                                break scriptdataloop; // FALL THROUGH continue
                             // stateloop;
                             case '\u0000':
                                 emitReplacementCharacter(buf, pos);
@@ -4056,7 +4056,7 @@ public class Tokenizer implements Locator {
                                 tokenHandler.characters(Tokenizer.LT_GT, 0, 1);
                                 cstart = pos;
                                 state = transition(state, Tokenizer.SCRIPT_DATA_ESCAPE_START, reconsume, pos);
-                                break scriptdatalessthansignloop; // FALL THRU
+                                break scriptdatalessthansignloop; // FALL THROUGH
                             // continue
                             // stateloop;
                             default:
@@ -4093,7 +4093,7 @@ public class Tokenizer implements Locator {
                                  * script data escape start dash state.
                                  */
                                 state = transition(state, Tokenizer.SCRIPT_DATA_ESCAPE_START_DASH, reconsume, pos);
-                                break scriptdataescapestartloop; // FALL THRU
+                                break scriptdataescapestartloop; // FALL THROUGH
                             // continue
                             // stateloop;
                             default:
@@ -4214,7 +4214,7 @@ public class Tokenizer implements Locator {
                                  * script data escaped dash state.
                                  */
                                 state = transition(state, Tokenizer.SCRIPT_DATA_ESCAPED_DASH, reconsume, pos);
-                                break scriptdataescapedloop; // FALL THRU
+                                break scriptdataescapedloop; // FALL THROUGH
                             // continue
                             // stateloop;
                             case '<':
@@ -4428,7 +4428,7 @@ public class Tokenizer implements Locator {
                                  * script data double escaped dash state.
                                  */
                                 state = transition(state, Tokenizer.SCRIPT_DATA_DOUBLE_ESCAPED_DASH, reconsume, pos);
-                                break scriptdatadoubleescapedloop; // FALL THRU
+                                break scriptdatadoubleescapedloop; // FALL THROUGH
                             // continue
                             // stateloop;
                             case '<':

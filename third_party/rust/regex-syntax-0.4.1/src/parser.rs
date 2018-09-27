@@ -380,7 +380,7 @@ impl Parser {
         }
     }
 
-    // Parses a counted repeition operator, e.g., `a{2,4}?z`.
+    // Parses a counted repetition operator, e.g., `a{2,4}?z`.
     //
     // Start: `{`
     // End:   `z`

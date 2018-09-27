@@ -1058,7 +1058,7 @@ interface nsIDOMWindowUtils : nsISupports {
    * metrics of the text.
    *
    * @param aOffset   The caret offset.  0 is the left side of the first
-   *                  caracter in LTR text.
+   *                  character in LTR text.
    * @param aLength   Not used.
    * @param aX        Not used.
    * @param aY        Not used.
@@ -1201,7 +1201,7 @@ interface nsIDOMWindowUtils : nsISupports {
    *
    * @param aX, aY The selection point in client coordinates.
    * @param aSelectType The selection behavior requested.
-   * @return True if a selection occured, false otherwise.
+   * @return True if a selection occurred, false otherwise.
    * @throw NS_ERROR_DOM_SECURITY_ERR, NS_ERROR_UNEXPECTED for utils
    * issues, and NS_ERROR_INVALID_ARG for coordinates that are outside
    * this window.
@@ -1810,7 +1810,7 @@ interface nsIDOMWindowUtils : nsISupports {
    * Returns a JSObject which contains a list of frame uniformities
    * when the pref gfx.vsync.collect-scroll-data is enabled.
    * Every result contains a layer address and a frame uniformity for that layer.
-   * A negative frame uniformity value indicates an invalid frame uniformity and an error has occured.
+   * A negative frame uniformity value indicates an invalid frame uniformity and an error has occurred.
    */
   [implicit_jscontext] jsval getFrameUniformityTestData();
 

@@ -45,7 +45,7 @@ ClockTime()
   //
   // At the time of writing mach_absolute_time returns the number of nanoseconds
   // since boot. This won't overflow 64bits for 500+ years so we aren't going
-  // to worry about that possiblity
+  // to worry about that possibility
   return mach_absolute_time();
 }
 

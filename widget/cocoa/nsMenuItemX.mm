@@ -57,13 +57,13 @@ nsMenuItemX::~nsMenuItemX()
   NS_OBJC_END_TRY_ABORT_BLOCK;
 }
 
-nsresult nsMenuItemX::Create(nsMenuX* aParent, const nsString& aLabel, EMenuItemType aItemType,
+nsresult nsMenuItemX::Create(nsMenuX* apparent, const nsString& aLabel, EMenuItemType aItemType,
                              nsMenuGroupOwnerX* aMenuGroupOwner, nsIContent* aNode)
 {
   NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NSRESULT;
 
   mType = aItemType;
-  mMenuParent = aParent;
+  mMenuParent = apparent;
   mContent = aNode;
 
   mMenuGroupOwner = aMenuGroupOwner;

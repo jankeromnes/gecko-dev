@@ -127,7 +127,7 @@ ContentAreaDropListener.prototype =
     uriString = uriString.replace(/^\s*|\s*$/g, '');
 
     // Apply URI fixup so that this validation prevents bad URIs even if the
-    // similar fixup is applied later, especialy fixing typos up will convert
+    // similar fixup is applied later, especially fixing typos up will convert
     // non-URI to URI.
     let fixupFlags = Ci.nsIURIFixup.FIXUP_FLAG_FIX_SCHEME_TYPOS |
         Ci.nsIURIFixup.FIXUP_FLAG_ALLOW_KEYWORD_LOOKUP;

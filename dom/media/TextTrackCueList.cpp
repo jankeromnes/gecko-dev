@@ -32,7 +32,7 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(TextTrackCueList)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-TextTrackCueList::TextTrackCueList(nsISupports* aParent) : mParent(aParent)
+TextTrackCueList::TextTrackCueList(nsISupports* apparent) : mParent(apparent)
 {
 }
 

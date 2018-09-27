@@ -103,7 +103,7 @@ public:
 
   // nsIWidget interface
   using nsWindowBase::Create; // for Create signature not overridden here
-  virtual MOZ_MUST_USE nsresult Create(nsIWidget* aParent,
+  virtual MOZ_MUST_USE nsresult Create(nsIWidget* apparent,
                                        nsNativeWidget aNativeParent,
                                        const LayoutDeviceIntRect& aRect,
                                        nsWidgetInitData* aInitData = nullptr)

@@ -155,7 +155,7 @@ GetFilesTaskChild::HandlerCallback()
 /* static */ already_AddRefed<GetFilesTaskParent>
 GetFilesTaskParent::Create(FileSystemBase* aFileSystem,
                            const FileSystemGetFilesParams& aParam,
-                           FileSystemRequestParent* aParent,
+                           FileSystemRequestParent* apparent,
                            ErrorResult& aRv)
 {
   MOZ_ASSERT(XRE_IsParentProcess(), "Only call from parent process!");
@@ -163,7 +163,7 @@ GetFilesTaskParent::Create(FileSystemBase* aFileSystem,
   MOZ_ASSERT(aFileSystem);
 
   RefPtr<GetFilesTaskParent> task =
-    new GetFilesTaskParent(aFileSystem, aParam, aParent);
+    new GetFilesTaskParent(aFileSystem, aParam, apparent);
 
   aRv = NS_NewLocalFile(aParam.realPath(), true,
                         getter_AddRefs(task->mTargetPath));
@@ -176,8 +176,8 @@ GetFilesTaskParent::Create(FileSystemBase* aFileSystem,
 
 GetFilesTaskParent::GetFilesTaskParent(FileSystemBase* aFileSystem,
                                        const FileSystemGetFilesParams& aParam,
-                                       FileSystemRequestParent* aParent)
-  : FileSystemTaskParentBase(aFileSystem, aParam, aParent)
+                                       FileSystemRequestParent* apparent)
+  : FileSystemTaskParentBase(aFileSystem, aParam, apparent)
   , GetFilesHelperBase(aParam.recursiveFlag())
   , mDirectoryDOMPath(aParam.domPath())
 {

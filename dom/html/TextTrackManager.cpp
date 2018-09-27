@@ -351,7 +351,7 @@ TextTrackManager::AddListeners()
   if (mMediaElement) {
     mMediaElement->AddEventListener(NS_LITERAL_STRING("resizevideocontrols"),
                                     this, false, false);
-    mMediaElement->AddEventListener(NS_LITERAL_STRING("seeked"),
+    mMediaElement->AddEventListener(NS_LITERAL_STRING("sought"),
                                     this, false, false);
     mMediaElement->AddEventListener(NS_LITERAL_STRING("controlbarchange"),
                                     this, false, true);
@@ -469,7 +469,7 @@ TextTrackManager::HandleEvent(Event* aEvent)
   nsAutoString type;
   aEvent->GetType(type);
   if (type.EqualsLiteral("resizevideocontrols") ||
-      type.EqualsLiteral("seeked")) {
+      type.EqualsLiteral("sought")) {
     for (uint32_t i = 0; i< mTextTracks->Length(); i++) {
       ((*mTextTracks)[i])->SetCuesDirty();
     }

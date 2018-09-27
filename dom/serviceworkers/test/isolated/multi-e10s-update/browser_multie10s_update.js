@@ -111,7 +111,7 @@ add_task(async function test_update() {
   if (status == 0) {
     ok(false, "both succeeded. This is wrong.");
   } else if (status == 1) {
-    ok(true, "one succeded, one failed. This is good.");
+    ok(true, "one succeeded, one failed. This is good.");
   } else {
     ok(false, "both failed. This is definitely wrong.");
   }

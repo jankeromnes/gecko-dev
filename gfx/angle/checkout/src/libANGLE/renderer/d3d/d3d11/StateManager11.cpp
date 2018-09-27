@@ -2768,7 +2768,7 @@ angle::Result StateManager11::applyVertexBuffers(const gl::Context *context,
             const TranslatedAttribute &attrib = *mCurrentAttributes[attribIndex];
             Buffer11 *bufferStorage = attrib.storage ? GetAs<Buffer11>(attrib.storage) : nullptr;
 
-            // If indexed pointsprite emulation is active, then we need to take a less efficent code
+            // If indexed pointsprite emulation is active, then we need to take a less efficient code
             // path. Emulated indexed pointsprite rendering requires that the vertex buffers match
             // exactly to the indices passed by the caller.  This could expand or shrink the vertex
             // buffer depending on the number of points indicated by the index list or how many

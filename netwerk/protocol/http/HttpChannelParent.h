@@ -310,7 +310,7 @@ private:
 
   // OnStatus is always called before OnProgress.
   // Set true in OnStatus if next OnProgress can be ignored
-  // since the information can be recontructed from ODA.
+  // since the information can be reconstructed from ODA.
   uint8_t mIgnoreProgress              : 1;
 
   uint8_t mSentRedirect1BeginFailed    : 1;

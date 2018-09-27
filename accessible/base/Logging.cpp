@@ -659,11 +659,11 @@ logging::TreeInfo(const char* aMsg, uint32_t aExtraFlags,
 
 
 void
-logging::TreeInfo(const char* aMsg, uint32_t aExtraFlags, Accessible* aParent)
+logging::TreeInfo(const char* aMsg, uint32_t aExtraFlags, Accessible* apparent)
 {
   if (IsEnabledAll(logging::eTree | aExtraFlags)) {
     MsgBegin("TREE", "%s; doc: %p", aMsg, aParent->Document());
-    AccessibleInfo("container", aParent);
+    AccessibleInfo("container", apparent);
     for (uint32_t idx = 0; idx < aParent->ChildCount(); idx++) {
       AccessibleInfo("child", aParent->GetChildAt(idx));
     }

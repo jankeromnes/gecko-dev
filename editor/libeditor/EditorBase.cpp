@@ -3239,11 +3239,11 @@ EditorBase::DoSplitNode(const EditorDOMPoint& aStartOfRightNode,
 nsresult
 EditorBase::DoJoinNodes(nsINode* aNodeToKeep,
                         nsINode* aNodeToJoin,
-                        nsINode* aParent)
+                        nsINode* apparent)
 {
   MOZ_ASSERT(aNodeToKeep);
   MOZ_ASSERT(aNodeToJoin);
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   uint32_t firstNodeLength = aNodeToJoin->Length();
 
@@ -3397,10 +3397,10 @@ EditorBase::DoJoinNodes(nsINode* aNodeToKeep,
 // static
 int32_t
 EditorBase::GetChildOffset(nsINode* aChild,
-                           nsINode* aParent)
+                           nsINode* apparent)
 {
   MOZ_ASSERT(aChild);
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 
   // nsINode::ComputeIndexOf() is expensive.  So, if we can return index
   // without calling it, we should do that.
@@ -3718,25 +3718,25 @@ EditorBase::IsBlockNode(nsINode* aNode)
 }
 
 bool
-EditorBase::CanContain(nsINode& aParent,
+EditorBase::CanContain(nsINode& apparent,
                        nsIContent& aChild) const
 {
-  switch (aParent.NodeType()) {
+  switch (apparent.NodeType()) {
     case nsINode::ELEMENT_NODE:
     case nsINode::DOCUMENT_FRAGMENT_NODE:
-      return TagCanContain(*aParent.NodeInfo()->NameAtom(), aChild);
+      return TagCanContain(*apparent.NodeInfo()->NameAtom(), aChild);
   }
   return false;
 }
 
 bool
-EditorBase::CanContainTag(nsINode& aParent,
+EditorBase::CanContainTag(nsINode& apparent,
                           nsAtom& aChildTag) const
 {
-  switch (aParent.NodeType()) {
+  switch (apparent.NodeType()) {
     case nsINode::ELEMENT_NODE:
     case nsINode::DOCUMENT_FRAGMENT_NODE:
-      return TagCanContainTag(*aParent.NodeInfo()->NameAtom(), aChildTag);
+      return TagCanContainTag(*apparent.NodeInfo()->NameAtom(), aChildTag);
   }
   return false;
 }
@@ -4024,7 +4024,7 @@ EditorBase::SplitNodeDeepWithTransaction(
   while (true) {
     // Need to insert rules code call here to do things like not split a list
     // if you are after the last <li> or before the first, etc.  For now we
-    // just have some smarts about unneccessarily splitting text nodes, which
+    // just have some smarts about unnecessarily splitting text nodes, which
     // should be universal enough to put straight in this EditorBase routine.
     if (NS_WARN_IF(!atStartOfRightNode.GetContainerAsContent())) {
       return SplitNodeResult(NS_ERROR_FAILURE);

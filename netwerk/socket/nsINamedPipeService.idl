@@ -19,7 +19,7 @@ interface nsINamedPipeDataObserver : nsISupports
      * onDataAvailable
      *
      * @param aBytesTransferred
-     *        Transfered bytes during last transmission.
+     *        Transferred bytes during last transmission.
      * @param aOverlapped
      *        Corresponding overlapped structure used by the async I/O
      */

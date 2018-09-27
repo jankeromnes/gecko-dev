@@ -13037,7 +13037,7 @@ enifed("dom-helper", ["exports", "htmlbars-runtime/morph", "morph-attr", "dom-he
   // `childNodes.length`, bringing us back around to having to support a
   // full-fidelity `childNodes` array!
   //
-  // Worst of all, Kris Selden investigated how browsers are actualy implemented
+  // Worst of all, Kris Selden investigated how browsers are actually implemented
   // and discovered that they're all linked lists under the hood anyway. Accessing
   // `childNodes` requires them to allocate a new live collection backed by that
   // linked list, which is itself a rather expensive operation. Our assumed
@@ -13446,7 +13446,7 @@ enifed('dom-helper/build-html-dom', ['exports'], function (exports) {
     return testEl.firstChild.innerHTML === '';
   })(doc);
 
-  // IE 8 (and likely earlier) likes to move whitespace preceeding
+  // IE 8 (and likely earlier) likes to move whitespace preceding
   // a script tag to appear after it. This means that we can
   // accidentally remove whitespace when updating a morph.
   var movesWhitespace = doc && (function (document) {
@@ -15106,7 +15106,7 @@ enifed('ember-application/system/application', ['exports', 'ember-metal', 'ember
       Boot a new instance of `Ember.ApplicationInstance` for the current
       application and navigate it to the given `url`. Returns a `Promise` that
       resolves with the instance when the initial routing and rendering is
-      complete, or rejects with any error that occured during the boot process.
+      complete, or rejects with any error that occurred during the boot process.
        When `autoboot` is disabled, calling `visit` would first cause the
       application to boot, which runs the application initializers.
        This method also takes a hash of boot-time configuration options for
@@ -15124,7 +15124,7 @@ enifed('ember-application/system/application', ['exports', 'ember-metal', 'ember
       combinations of them are valid; certain incompatible combinations might
       result in unexpected behavior.
        For example, booting the instance in the full browser environment
-      while specifying a foriegn `document` object (e.g. `{ isBrowser: true,
+      while specifying a foreign `document` object (e.g. `{ isBrowser: true,
       document: iframe.contentDocument }`) does not work correctly today,
       largely due to Ember's jQuery dependency.
        Currently, there are three officially supported scenarios/configurations.
@@ -15201,13 +15201,13 @@ enifed('ember-application/system/application', ['exports', 'ember-metal', 'ember
        #### Server-Side Resource Discovery
        This setup allows you to run the routing layer of your Ember app in a server
       environment using Node.js and completely disable rendering. This allows you
-      to simulate and discover the resources (i.e. AJAX requests) needed to fufill
+      to simulate and discover the resources (i.e. AJAX requests) needed to fulfill
       a given request and eagerly "push" these resources to the client.
        ```app/initializers/network-service.js
       import BrowserNetworkService from 'app/services/network/browser';
       import NodeNetworkService from 'app/services/network/node';
        // Inject a (hypothetical) service for abstracting all AJAX calls and use
-      // the appropiate implementaion on the client/server. This also allows the
+      // the appropriate implementaion on the client/server. This also allows the
       // server to log all the AJAX calls made during a particular request and use
       // that for resource-discovery purpose.
        export function initialize(application) {
@@ -20076,7 +20076,7 @@ enifed('ember-htmlbars/keywords/get', ['exports', 'ember-metal/debug', 'ember-me
     Dynamically look up a property on an object. The second argument to `{{get}}`
     should have a string value, although it can be bound.
   
-    For example, these two usages are equivilent:
+    For example, these two usages are equivalent:
   
     ```handlebars
     {{person.height}}
@@ -20193,7 +20193,7 @@ enifed('ember-htmlbars/keywords/input', ['exports', 'ember-metal/debug', 'ember-
     {{input value=searchWord}}
     ```
   
-    In this example, the inital value in the `<input />` will be set to the value of `searchWord`.
+    In this example, the initial value in the `<input />` will be set to the value of `searchWord`.
     If the user changes the text, the value of `searchWord` will also be updated.
   
     ### Actions
@@ -23050,7 +23050,7 @@ enifed('ember-htmlbars/utils/subscribe', ['exports', 'ember-metal/streams/utils'
       // dirty, we want to invoke the willRenderElement and
       // didRenderElement lifecycle hooks. From the perspective of the
       // programming model, whenever anything in the DOM changes, a
-      // "re-render" has occured.
+      // "re-render" has occurred.
       if (component && component._renderNode) {
         component._renderNode.isDirty = true;
       }
@@ -24527,7 +24527,7 @@ enifed('ember-metal/computed', ['exports', 'ember-metal/debug', 'ember-metal/pro
       this._getter = config;
     } else {
       _emberMetalDebug.assert('Ember.computed expects a function or an object as last argument.', typeof config === 'object' && !Array.isArray(config));
-      _emberMetalDebug.assert('Config object pased to a Ember.computed can only contain `get` or `set` keys.', (function () {
+      _emberMetalDebug.assert('Config object passed to a Ember.computed can only contain `get` or `set` keys.', (function () {
         var keys = Object.keys(config);
         for (var i = 0; i < keys.length; i++) {
           if (keys[i] !== 'get' && keys[i] !== 'set') {
@@ -33436,7 +33436,7 @@ enifed('ember-routing-htmlbars/keywords/action', ['exports', 'htmlbars-runtime/h
     Two options can be passed to the `action` helper when it is used in this way.
   
     * `target=someProperty` will look to `someProperty` instead of the current
-      context for the `actions` hash. This can be useful when targetting a
+      context for the `actions` hash. This can be useful when targeting a
       service for actions.
     * `value="target.value"` will read the path `target.value` off the first
       argument to the action when it is called and rewrite the first argument
@@ -38805,7 +38805,7 @@ enifed('ember-routing/system/router', ['exports', 'ember-metal/logger', 'ember-m
     },
 
     /*
-      Resets all pending query paramter changes.
+      Resets all pending query parameter changes.
       Called after transitioning to a new route
       based on query parameter changes.
     */
@@ -40012,7 +40012,7 @@ enifed('ember-routing/utils', ['exports', 'ember-metal/assign', 'ember-metal/pro
   }
 
   function _calculateCacheValuePrefix(prefix, part) {
-    // calculates the dot seperated sections from prefix that are also
+    // calculates the dot separated sections from prefix that are also
     // at the start of part - which gives us the route name
 
     // given : prefix = site.article.comments, part = site.article.id
@@ -40536,7 +40536,7 @@ enifed('ember-runtime/computed/reduce_computed_macros', ['exports', 'ember-metal
     The callback method you provide should have the following signature.
     `item` is the current item in the iteration.
     `index` is the integer index of the current item in the iteration.
-    `array` is the dependant array itself.
+    `array` is the dependent array itself.
   
     ```javascript
     function(item, index, array);
@@ -51170,7 +51170,7 @@ enifed('ember-views/components/component', ['exports', 'ember-metal/debug', 'emb
        ```hbs
       {{my-component "John" 38}}
       ```
-       The parameters can be refered to just like named parameters:
+       The parameters can be referred to just like named parameters:
        ```hbs
       Name: {{attrs.name}}, Age: {{attrs.age}}.
       ```
@@ -51186,7 +51186,7 @@ enifed('ember-views/components/component', ['exports', 'ember-metal/debug', 'emb
        ```hbs
       {{my-component "John" "Michael" "Scott"}}
       ```
-       The parameters can then be refered to by enumerating over the list:
+       The parameters can then be referred to by enumerating over the list:
        ```hbs
       {{#each attrs.names as |name|}}{{name}}{{/each}}
       ```
@@ -55775,7 +55775,7 @@ enifed("htmlbars-runtime/hooks", ["exports", "htmlbars-runtime/render", "morph-r
     // that it advances past as candidates for deletion. Assuming those morphs
     // are not yielded in later, they will be removed in the prune step during
     // cleanup.
-    // Note that this helper function assumes that the morph being seeked to is
+    // Note that this helper function assumes that the morph being sought to is
     // guaranteed to exist in the previous MorphList; if this is called and the
     // morph does not exist, it will result in an infinite loop
     function advanceToKey(key) {
@@ -57973,7 +57973,7 @@ enifed("morph-attr", ["exports", "morph-attr/sanitize-attribute-value", "dom-hel
       var attrName = this.attrName;
 
       if (attrName === 'value' && element.tagName === 'INPUT' && element.value === value) {
-        // Do nothing. Attempts to avoid accidently changing the input cursor location.
+        // Do nothing. Attempts to avoid accidentally changing the input cursor location.
         // See https://github.com/tildeio/htmlbars/pull/447 for more details.
       } else {
           // do not render if initial value is undefined or null
@@ -62993,10 +62993,10 @@ enifed('rsvp/node', ['exports', 'rsvp/promise', 'rsvp/-internal', 'rsvp/utils'],
     its last argument. The callback expects an error to be passed as its first
     argument (if an error occurred, otherwise null), and the value from the
     operation as its second argument ('function(err, value){ }').
-    @param {Boolean|Array} [options] An optional paramter that if set
+    @param {Boolean|Array} [options] An optional parameter that if set
     to `true` causes the promise to fulfill with the callback's success arguments
     as an array. This is useful if the node function has multiple success
-    paramters. If you set this paramter to an array with names, the promise will
+    parameters. If you set this parameter to an array with names, the promise will
     fulfill with a hash with these names as keys and the success parameters as
     values.
     @return {Function} a function that wraps `nodeFunc` to return an

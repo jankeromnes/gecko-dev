@@ -86,7 +86,7 @@ enum FloatLexState {
     /// float literal. The exponent base is assumed to not have occurred yet.
     AfterDecimalPoint,
 
-    /// At this state, it is assumed that the exponent base and at least one digit has occured in
+    /// At this state, it is assumed that the exponent base and at least one digit has occurred in
     /// the float literal. A decimal point may or may not have already preceded.
     AfterExponentBase,
 

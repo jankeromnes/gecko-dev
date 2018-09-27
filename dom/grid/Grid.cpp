@@ -22,9 +22,9 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(Grid)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-Grid::Grid(nsISupports* aParent,
+Grid::Grid(nsISupports* apparent,
            nsGridContainerFrame* aFrame)
-  : mParent(do_QueryInterface(aParent))
+  : mParent(do_QueryInterface(apparent))
   , mRows(new GridDimension(this))
   , mCols(new GridDimension(this))
 {

@@ -36,7 +36,7 @@ public:
                      const bool& isForPrinting) override;
     virtual mozilla::ipc::IPCResult
     RecvShowPrintDialog(PPrintSettingsDialogParent* aDialog,
-                        PBrowserParent* aParent,
+                        PBrowserParent* apparent,
                         const PrintData& aData) override;
 
     virtual mozilla::ipc::IPCResult

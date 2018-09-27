@@ -48,11 +48,11 @@ public:
     return nullptr;
   }
 
-  virtual nsresult        Create(nsIWidget* aParent,
+  virtual nsresult        Create(nsIWidget* apparent,
                                  nsNativeWidget aNativeParent,
                                  const LayoutDeviceIntRect& aRect,
                                  nsWidgetInitData* aInitData = nullptr) override { return NS_OK; }
-  virtual nsresult        Create(nsIWidget* aParent,
+  virtual nsresult        Create(nsIWidget* apparent,
                                  nsNativeWidget aNativeParent,
                                  const DesktopIntRect& aRect,
                                  nsWidgetInitData* aInitData = nullptr) override { return NS_OK; }

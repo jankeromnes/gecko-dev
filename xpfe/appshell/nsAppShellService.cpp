@@ -182,7 +182,7 @@ nsAppShellService::DestroyHiddenWindow()
  * Create a new top level window and display the given URL within it...
  */
 NS_IMETHODIMP
-nsAppShellService::CreateTopLevelWindow(nsIXULWindow *aParent,
+nsAppShellService::CreateTopLevelWindow(nsIXULWindow *apparent,
                                         nsIURI *aUrl,
                                         uint32_t aChromeMask,
                                         int32_t aInitialWidth,
@@ -197,7 +197,7 @@ nsAppShellService::CreateTopLevelWindow(nsIXULWindow *aParent,
   StartupTimeline::RecordOnce(StartupTimeline::CREATE_TOP_LEVEL_WINDOW);
 
   RefPtr<nsWebShellWindow> newWindow;
-  rv = JustCreateTopWindow(aParent, aUrl,
+  rv = JustCreateTopWindow(apparent, aUrl,
                            aChromeMask, aInitialWidth, aInitialHeight,
                            false, aOpeningTab, aOpenerWindow,
                            getter_AddRefs(newWindow));
@@ -208,7 +208,7 @@ nsAppShellService::CreateTopLevelWindow(nsIXULWindow *aParent,
     RegisterTopLevelWindow(*aResult);
     nsCOMPtr<nsIXULWindow> parent;
     if (aChromeMask & nsIWebBrowserChrome::CHROME_DEPENDENT)
-      parent = aParent;
+      parent = apparent;
     (*aResult)->SetZLevel(CalculateWindowZLevel(parent, aChromeMask));
   }
 
@@ -571,7 +571,7 @@ nsAppShellService::CreateWindowlessBrowser(bool aIsChrome, nsIWindowlessBrowser 
 }
 
 uint32_t
-nsAppShellService::CalculateWindowZLevel(nsIXULWindow *aParent,
+nsAppShellService::CalculateWindowZLevel(nsIXULWindow *apparent,
                                          uint32_t      aChromeMask)
 {
   uint32_t zLevel;
@@ -591,7 +591,7 @@ nsAppShellService::CalculateWindowZLevel(nsIXULWindow *aParent,
   */
   uint32_t modalDepMask = nsIWebBrowserChrome::CHROME_MODAL |
                           nsIWebBrowserChrome::CHROME_DEPENDENT;
-  if (aParent && (aChromeMask & modalDepMask)) {
+  if (apparent && (aChromeMask & modalDepMask)) {
     aParent->GetZLevel(&zLevel);
   }
 #else
@@ -599,7 +599,7 @@ nsAppShellService::CalculateWindowZLevel(nsIXULWindow *aParent,
       but pre-Mac OS X, right?) know how to stack dependent windows. On these
       platforms, give the dependent window the same level as its parent,
       so we won't try to override the normal platform behaviour. */
-  if ((aChromeMask & nsIWebBrowserChrome::CHROME_DEPENDENT) && aParent)
+  if ((aChromeMask & nsIWebBrowserChrome::CHROME_DEPENDENT) && apparent)
     aParent->GetZLevel(&zLevel);
 #endif
 
@@ -647,7 +647,7 @@ CheckForFullscreenWindow()
  * Just do the window-making part of CreateTopLevelWindow
  */
 nsresult
-nsAppShellService::JustCreateTopWindow(nsIXULWindow *aParent,
+nsAppShellService::JustCreateTopWindow(nsIXULWindow *apparent,
                                        nsIURI *aUrl,
                                        uint32_t aChromeMask,
                                        int32_t aInitialWidth,
@@ -662,7 +662,7 @@ nsAppShellService::JustCreateTopWindow(nsIXULWindow *aParent,
 
   nsCOMPtr<nsIXULWindow> parent;
   if (aChromeMask & nsIWebBrowserChrome::CHROME_DEPENDENT)
-    parent = aParent;
+    parent = apparent;
 
   RefPtr<nsWebShellWindow> window = new nsWebShellWindow(aChromeMask);
 
@@ -751,7 +751,7 @@ nsAppShellService::JustCreateTopWindow(nsIXULWindow *aParent,
 
   widgetInitData.mRTL = LocaleService::GetInstance()->IsAppLocaleRTL();
 
-  nsresult rv = window->Initialize(parent, center ? aParent : nullptr,
+  nsresult rv = window->Initialize(parent, center ? apparent : nullptr,
                                    aUrl, aInitialWidth, aInitialHeight,
                                    aIsHiddenWindow, aOpeningTab,
                                    aOpenerWindow, widgetInitData);
@@ -771,7 +771,7 @@ nsAppShellService::JustCreateTopWindow(nsIXULWindow *aParent,
     isUsingRemoteTabs = true;
   }
 
-  nsCOMPtr<mozIDOMWindowProxy> domWin = do_GetInterface(aParent);
+  nsCOMPtr<mozIDOMWindowProxy> domWin = do_GetInterface(apparent);
   nsCOMPtr<nsIWebNavigation> webNav = do_GetInterface(domWin);
   nsCOMPtr<nsILoadContext> parentContext = do_QueryInterface(webNav);
 

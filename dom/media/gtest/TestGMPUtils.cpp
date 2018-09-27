@@ -39,9 +39,9 @@ TEST(GeckoMediaPlugins, TestSplitAt) {
   }
 
   {
-    const char* input = "a simple, comma, seperated, list";
+    const char* input = "a simple, comma, separated, list";
     const char* delims = ",";
-    const char* tokens[] = { "a simple", " comma", " seperated", " list" };
+    const char* tokens[] = { "a simple", " comma", " separated", " list" };
     TestSplitAt(input, delims, MOZ_ARRAY_LENGTH(tokens), tokens);
   }
 

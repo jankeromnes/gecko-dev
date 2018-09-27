@@ -329,7 +329,7 @@ public interface ExoPlayer {
    * the type of source passed to {@link #prepare(MediaSource)}. For live streams it will typically
    * be the live edge of the window. For other streams it will typically be the start of the window.
    *
-   * @param windowIndex The index of the window whose associated default position should be seeked
+   * @param windowIndex The index of the window whose associated default position should be sought
    *     to.
    */
   void seekToDefaultPosition(int windowIndex);

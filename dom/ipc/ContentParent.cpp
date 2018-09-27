@@ -461,8 +461,8 @@ namespace {
 class ScriptableCPInfo final : public nsIContentProcessInfo
 {
 public:
-  explicit ScriptableCPInfo(ContentParent* aParent)
-    : mContentParent(aParent)
+  explicit ScriptableCPInfo(ContentParent* apparent)
+    : mContentParent(apparent)
   {
     MOZ_ASSERT(mContentParent);
   }
@@ -1389,7 +1389,7 @@ ContentParent::Init()
   Unused << SendInitProfiler(ProfilerParent::CreateForProcess(OtherPid()));
 #endif
 
-  // Ensure that the default set of permissions are avaliable in the content
+  // Ensure that the default set of permissions are available in the content
   // process before we try to load any URIs in it.
   EnsurePermissionsByKey(EmptyCString());
 
@@ -4079,9 +4079,9 @@ ContentParent::RecvSetGeolocationHigherAccuracy(const bool& aEnable)
 }
 
 NS_IMETHODIMP
-ContentParent::HandleEvent(nsIDOMGeoPosition* postion)
+ContentParent::HandleEvent(nsIDOMGeoPosition* position)
 {
-  Unused << SendGeolocationUpdate(postion);
+  Unused << SendGeolocationUpdate(position);
   return NS_OK;
 }
 
@@ -4744,7 +4744,7 @@ ContentParent::RecvSetOfflinePermission(const Principal& aPrincipal)
 }
 
 void
-ContentParent::MaybeInvokeDragSession(TabParent* aParent)
+ContentParent::MaybeInvokeDragSession(TabParent* apparent)
 {
   // dnd uses IPCBlob to transfer data to the content process and the IPC
   // message is sent as normal priority. When sending input events with input
@@ -4770,10 +4770,10 @@ ContentParent::MaybeInvokeDragSession(TabParent* aParent)
         session->SetDataTransfer(transfer);
       }
       // Note, even though this fills the DataTransfer object with
-      // external data, the data is usually transfered over IPC lazily when
+      // external data, the data is usually transferred over IPC lazily when
       // needed.
       transfer->FillAllExternalData();
-      nsCOMPtr<nsILoadContext> lc = aParent ?
+      nsCOMPtr<nsILoadContext> lc = apparent ?
                                      aParent->GetLoadContext() : nullptr;
       nsCOMPtr<nsIArray> transferables =
         transfer->GetTransferables(lc);
@@ -5930,7 +5930,7 @@ ContentParent::RecvBHRThreadHang(const HangDetails& aDetails)
 {
   nsCOMPtr<nsIObserverService> obs = mozilla::services::GetObserverService();
   if (obs) {
-    // Copy the HangDetails recieved over the network into a nsIHangDetails, and
+    // Copy the HangDetails received over the network into a nsIHangDetails, and
     // then fire our own observer notification.
     // XXX: We should be able to avoid this potentially expensive copy here by
     // moving our deserialized argument.
@@ -5971,7 +5971,7 @@ ContentParent::RecvAttachBrowsingContext(
   if (aParentId && !parent) {
     // Unless 'aParentId' is 0 (which it is when the child is a root
     // BrowsingContext) there should always be a corresponding
-    // 'parent'. The only reason for there not beeing one is if the
+    // 'parent'. The only reason for there not being one is if the
     // parent has already been detached, in which case the
     // BrowsingContext that tries to attach itself to the context with
     // 'aParentId' is surely doomed and we can safely do nothing.
@@ -6051,7 +6051,7 @@ ContentParent::RecvDetachBrowsingContext(const BrowsingContextId& aContextId,
   if (!context->IsOwnedByProcess(ChildID())) {
     // Where trying to detach a child BrowsingContext in another child
     // process. This is illegal since the owner of the BrowsingContext
-    // is the proccess with the in-process docshell, which is tracked
+    // is the process with the in-process docshell, which is tracked
     // by OwnerProcessId.
 
     // TODO(farre): To crash or not to crash. Same reasoning as in

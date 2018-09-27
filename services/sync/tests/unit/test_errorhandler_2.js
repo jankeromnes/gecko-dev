@@ -55,7 +55,7 @@ async function clean() {
   Status.resetSync();
   Status.resetBackoff();
   removeLogFiles();
-  // Move log levels back to trace (startOver will have reversed this), sicne
+  // Move log levels back to trace (startOver will have reversed this), since
   syncTestLogging();
 }
 

@@ -340,7 +340,7 @@ var classifierTester = {
                                             flashSetting);
     if (expectedPluginListed != null) {
       is(pluginInfo.listed, expectedPluginListed,
-         "Plugin's existance in navigator.plugins should match expected");
+         "Plugin's existence in navigator.plugins should match expected");
     }
   },
 };

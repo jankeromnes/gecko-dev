@@ -107,7 +107,7 @@ function hash(s) {
 
 ///////// Mocks of relevant browser functionality. (c) by Google. ////////
 
-// Every acces to window will be redirected to PdfJS_window.
+// Every access to window will be redirected to PdfJS_window.
 var PdfJS_window = Object.create(this);
 
 function PdfJS_windowInstall(name, x) {
@@ -343,7 +343,7 @@ PdfJS_windowInstall("Canvas", function() {
   }
   this.width = 100;
   this.height = 100;
-  this.style = { visibility: "visibile" };
+  this.style = { visibility: "visible" };
 });
 
 PdfJS_windowInstall("document", {
@@ -1267,7 +1267,7 @@ var Promise = PDFJS.Promise = (function PromiseClosure() {
    * Builds a promise that is resolved when all the passed in promises are
    * resolved.
    * @param {Promise[]} promises Array of promises to wait for.
-   * @return {Promise} New dependant promise.
+   * @return {Promise} New dependent promise.
    */
   Promise.all = function Promise_all(promises) {
     var deferred = new Promise();
@@ -1964,7 +1964,7 @@ var WorkerTransport = (function WorkerTransportClosure() {
             this.objs.resolve(id, font);
             break;
           default:
-            error('Got unkown object type ' + type);
+            error('Got unknown object type ' + type);
         }
       }, this);
 
@@ -4402,7 +4402,7 @@ var PDFFunction = (function PDFFunctionClosure() {
 
         // clip to domain
         var v = clip(args[0], domain[0], domain[1]);
-        // calulate which bound the value is in
+        // calculate which bound the value is in
         for (var i = 0, ii = bounds.length; i < ii; ++i) {
           if (v < bounds[i])
             break;
@@ -13349,7 +13349,7 @@ var PartialEvaluator = (function PartialEvaluatorClosure() {
 
         var imageMask = dict.get('ImageMask', 'IM') || false;
         if (imageMask) {
-          // This depends on a tmpCanvas beeing filled with the
+          // This depends on a tmpCanvas being filled with the
           // current fillStyle, such that processing the pixel
           // data can't be done here. Instead of creating a
           // complete PDFImage, only read the information needed
@@ -18437,7 +18437,7 @@ var CFFCompiler = (function CFFCompilerClosure() {
       var globalSubrIndex = this.compileIndex(cff.globalSubrIndex);
       output.add(globalSubrIndex);
 
-      // Now start on the other entries that have no specfic order.
+      // Now start on the other entries that have no specific order.
       if (cff.encoding && cff.topDict.hasName('Encoding')) {
         if (cff.encoding.predefined) {
           topDictTracker.setEntryLocation('Encoding', [cff.encoding.format],
@@ -26600,7 +26600,7 @@ var Lexer = (function LexerClosure() {
         } else if (ch == '-') {
           // ignore minus signs in the middle of numbers to match
           // Adobe's behavior
-          warn('Badly formated number');
+          warn('Badly formatted number');
         } else if (ch >= '0' && ch <= '9') {
           str += ch;
         } else if (ch == 'e' || ch == 'E') {
@@ -31604,7 +31604,7 @@ var JpxImage = (function JpxImageClosure() {
         var height = subband.tby1 - subband.tby0;
         var gainLog2 = SubbandsGainLog2[subband.type];
 
-        // calulate quantization coefficient (Section E.1.1.1)
+        // calculate quantization coefficient (Section E.1.1.1)
         var delta = Math.pow(2, (precision + gainLog2) - epsilon) *
           (1 + mu / 2048);
         var mb = (guardBits + epsilon - 1);

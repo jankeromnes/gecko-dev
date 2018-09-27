@@ -6,7 +6,7 @@ pa{
         standard{
             Sequence{
                 "[normalization on]"
-                "[reorder Guru Deva Beng Gujr Orya Taml Telu Knda Mlym Sinh Arab]"
+                "[reorder Guru Deva Being Gujr Orya Taml Telu Knda Mlym Sinh Arab]"
                 "&ੱ<<ੰ<<ਂ<<ਁ<<਼"
                 "&ੜ<੍"
             }

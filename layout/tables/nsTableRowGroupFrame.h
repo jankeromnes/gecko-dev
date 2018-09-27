@@ -51,10 +51,10 @@ public:
 
   // nsIFrame overrides
   virtual void Init(nsIContent*       aContent,
-                    nsContainerFrame* aParent,
+                    nsContainerFrame* apparent,
                     nsIFrame*         aPrevInFlow) override
   {
-    nsContainerFrame::Init(aContent, aParent, aPrevInFlow);
+    nsContainerFrame::Init(aContent, apparent, aPrevInFlow);
     if (!aPrevInFlow) {
       mWritingMode = GetTableFrame()->GetWritingMode();
     }
@@ -192,9 +192,9 @@ public:
 
   // The table row is the equivalent to a line in block layout.
   // The nsILineIterator assumes that a line resides in a block, this role is
-  // fullfilled by the row group. Rows in table are counted relative to the
+  // fulfilled by the row group. Rows in table are counted relative to the
   // table. The row index of row corresponds to the cellmap coordinates. The
-  // line index with respect to a row group can be computed by substracting the
+  // line index with respect to a row group can be computed by subtracting the
   // row index of the first row in the row group.
 
   /** Get the number of rows in a row group

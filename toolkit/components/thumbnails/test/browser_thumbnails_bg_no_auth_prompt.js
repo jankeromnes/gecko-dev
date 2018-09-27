@@ -5,7 +5,7 @@
 // relies on the fact that if the dialog was displayed the test will hang
 // and timeout.  IOW - the tests would pass if the dialogs appear and are
 // manually closed by the user - so don't do that :)  (obviously there is
-// noone available to do that when run via tbpl etc, so this should be safe,
+// no one available to do that when run via tbpl etc, so this should be safe,
 // and it's tricky to use the window-watcher to check a window *does not*
 // appear - how long should the watcher be active before assuming it's not
 // going to appear?)

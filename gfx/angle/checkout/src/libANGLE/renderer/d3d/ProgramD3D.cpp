@@ -2338,7 +2338,7 @@ void ProgramD3D::setUniformMatrixfvInternal(GLint location,
     unsigned int arrayElementOffset             = uniformLocation.arrayIndex;
     unsigned int elementCount                   = targetUniform->getArraySizeProduct();
 
-    // Internally store matrices as transposed versions to accomodate HLSL matrix indexing
+    // Internally store matrices as transposed versions to accommodate HLSL matrix indexing
     transpose = !transpose;
 
     for (gl::ShaderType shaderType : gl::AllShaderTypes())

@@ -2212,7 +2212,7 @@ sctp_add_addresses_to_i_ia(struct sctp_inpcb *inp, struct sctp_tcb *stcb,
 				continue;
 			}
 			if (laddr->ifa->localifa_flags & SCTP_BEING_DELETED)
-				/* Address being deleted by the system, dont
+				/* Address being deleted by the system, don't
 				 * list.
 				 */
 				continue;

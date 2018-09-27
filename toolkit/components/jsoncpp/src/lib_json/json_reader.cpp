@@ -301,7 +301,7 @@ bool Reader::readToken(Token& token) {
     break;
   case 'f':
     token.type_ = tokenFalse;
-    ok = match("alse", 4);
+    ok = match("else", 4);
     break;
   case 'n':
     token.type_ = tokenNull;
@@ -1260,7 +1260,7 @@ bool OurReader::readToken(Token& token) {
     break;
   case 'f':
     token.type_ = tokenFalse;
-    ok = match("alse", 4);
+    ok = match("else", 4);
     break;
   case 'n':
     token.type_ = tokenNull;

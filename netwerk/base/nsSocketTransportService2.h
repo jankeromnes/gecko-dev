@@ -183,7 +183,7 @@ private:
         bool IsTimedOut(PRIntervalTime now) const;
         // Engages the timeout by marking the epoch we start polling this socket.
         // If epoch is already marked this does nothing, hence, this method can be
-        // called everytime we put this socket to poll() list with in-flags set.
+        // called every time we put this socket to poll() list with in-flags set.
         void EnsureTimeout(PRIntervalTime now);
         // Called after an event on a socket has been signalled to turn of the
         // timeout calculation.
@@ -219,7 +219,7 @@ private:
     bool GrowIdleList();
     void   InitMaxCount();
 
-    // Total bytes number transfered through all the sockets except active ones
+    // Total bytes number transferred through all the sockets except active ones
     uint64_t mSentBytesCount;
     uint64_t mReceivedBytesCount;
     //-------------------------------------------------------------------------

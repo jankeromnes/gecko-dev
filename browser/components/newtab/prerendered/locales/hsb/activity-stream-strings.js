@@ -58,7 +58,7 @@ window.gActivityStreamStrings = {
   "settings_pane_snippets_header": "Šlipki",
   "edit_topsites_button_text": "Wobdźěłać",
   "edit_topsites_edit_button": "Tute sydło wobdźěłać",
-  "topsites_form_add_header": "Nowe najhusćišo wopytane sydło",
+  "topsites_form_add_header": "Now najhusćišo wopytane sydło",
   "topsites_form_edit_header": "Najhusćišo wopytane sydło wobdźěłać",
   "topsites_form_title_label": "Titul",
   "topsites_form_title_placeholder": "Titul zapodać",

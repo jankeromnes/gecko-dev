@@ -469,7 +469,7 @@ add_task(async function test_validate() {
 
   Assert.equal(creditCards[2]["cc-number"].length, 16);
 
-  // dont enforce validity on the card network when storing a record,
+  // don't enforce validity on the card network when storing a record,
   // to avoid data loss when syncing records between different clients with different rules
   Assert.equal(creditCards[3]["cc-type"], "asiv");
 });

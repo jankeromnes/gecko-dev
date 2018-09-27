@@ -60,7 +60,7 @@ class CrossProcessCpowHolder : public CpowHolder
 };
 
 CPOWManager*
-CPOWManagerFor(PJavaScriptParent* aParent);
+CPOWManagerFor(PJavaScriptParent* apparent);
 
 CPOWManager*
 CPOWManagerFor(PJavaScriptChild* aChild);

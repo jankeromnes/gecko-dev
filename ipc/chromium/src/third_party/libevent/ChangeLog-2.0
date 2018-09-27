@@ -1211,7 +1211,7 @@ Changes in 2.0.1-alpha (17 Apr 2009):
  o Remove the never-exported, never-used evhttp_hostportfile function.
  o Support input/output filters for bufferevents; somewhat similar to libio's model.  This will allow us to implement SSL, compression, etc, transparently to users of bufferevents such as the http layer.
  o allow connections to be removed from an rpc pool
- o add new evtimer_assign, signal_assign, evtimer_new, and signal_new functions to manipulate timer and signal events, analagous to the now-recommended event_assign and event_new
+ o add new evtimer_assign, signal_assign, evtimer_new, and signal_new functions to manipulate timer and signal events, analogous to the now-recommended event_assign and event_new
  o switch internal uses of event_set over to use event_assign.
  o introduce evbuffer_contiguous_space() api that tells a user how much data is available in the first buffer chain
  o introduce evbuffer_reserve_space() and evbuffer_commit_space() to make processing in filters more efficient.
@@ -1263,7 +1263,7 @@ Changes in 2.0.1-alpha (17 Apr 2009):
  o Set the 0x20 bit on outgoing alphabetic characters in DNS requests randomly, and insist on a match in replies.  This helps resist DNS poisoning attacks.
  o Make the http connection close detection work properly with bufferevents and fix a potential memory leak associated with it.
  o Restructure the event backends so that they do not need to keep track of events themselves, as a side effect multiple events can use the same fd or signal.
- o Add generic implementations for parsing and emiting IPv6 addresses on platforms that do not have inet_ntop and/or inet_pton.
+ o Add generic implementations for parsing and emitting IPv6 addresses on platforms that do not have inet_ntop and/or inet_pton.
  o Allow DNS servers that have IPv6 addresses.
  o Add an evbuffer_write_atmost() function to write a limited number of bytes to an fd.
  o Refactor internal notify-main-thread logic to prefer eventfd to pipe, then pipe to socketpair, and only use socketpairs as a last resort.

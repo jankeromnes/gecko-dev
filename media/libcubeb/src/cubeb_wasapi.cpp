@@ -928,7 +928,7 @@ wasapi_stream_render_loop(LPVOID stream)
           hr = E_FAIL;
           continue;
         }
-        LOG("Stream setup successfuly.");
+        LOG("Stream setup successfully.");
       }
       XASSERT(stm->output_client || stm->input_client);
       if (stm->output_client) {

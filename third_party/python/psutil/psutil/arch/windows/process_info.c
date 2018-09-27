@@ -360,7 +360,7 @@ psutil_assert_pid_not_exists(DWORD pid, char *err) {
 
 
 /*
-/* Check for PID existance by using OpenProcess() + GetExitCodeProcess.
+/* Check for PID existence by using OpenProcess() + GetExitCodeProcess.
 /* Returns:
  * 1: pid exists
  * 0: it doesn't

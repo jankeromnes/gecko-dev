@@ -16,9 +16,9 @@ NS_IMPL_CYCLE_COLLECTION_WRAPPERCACHE(PlacesWeakCallbackWrapper, mParent, mCallb
 NS_IMPL_CYCLE_COLLECTION_ROOT_NATIVE(PlacesWeakCallbackWrapper, AddRef)
 NS_IMPL_CYCLE_COLLECTION_UNROOT_NATIVE(PlacesWeakCallbackWrapper, Release)
 
-PlacesWeakCallbackWrapper::PlacesWeakCallbackWrapper(nsISupports* aParent,
+PlacesWeakCallbackWrapper::PlacesWeakCallbackWrapper(nsISupports* apparent,
                                                      PlacesEventCallback& aCallback)
-  : mParent(do_GetWeakReference(aParent))
+  : mParent(do_GetWeakReference(apparent))
   , mCallback(&aCallback)
 {
 }

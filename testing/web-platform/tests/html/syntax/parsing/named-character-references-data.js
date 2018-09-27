@@ -659,7 +659,7 @@ window.data = {
   '&amp;': { 'codepoints': [0x00026], 'characters': '\x26' },
   '&and;': { 'codepoints': [0x02227], 'characters': '\u2227' },
   '&andand;': { 'codepoints': [0x02A55], 'characters': '\u2A55' },
-  '&andd;': { 'codepoints': [0x02A5C], 'characters': '\u2A5C' },
+  '&and;': { 'codepoints': [0x02A5C], 'characters': '\u2A5C' },
   '&andslope;': { 'codepoints': [0x02A58], 'characters': '\u2A58' },
   '&andv;': { 'codepoints': [0x02A5A], 'characters': '\u2A5A' },
   '&ang;': { 'codepoints': [0x02220], 'characters': '\u2220' },

@@ -1951,7 +1951,7 @@ def CalculateVariables(default_variables, params):
   # To determine processor word size on Windows, in addition to checking
   # PROCESSOR_ARCHITECTURE (which reflects the word size of the current
   # process), it is also necessary to check PROCESSOR_ARCITEW6432 (which
-  # contains the actual word size of the system when running thru WOW64).
+  # contains the actual word size of the system when running through WOW64).
   if (os.environ.get('PROCESSOR_ARCHITECTURE', '').find('64') >= 0 or
       os.environ.get('PROCESSOR_ARCHITEW6432', '').find('64') >= 0):
     default_variables['MSVS_OS_BITS'] = 64
@@ -3099,7 +3099,7 @@ def _FinalizeMSBuildSettings(spec, configuration):
   _ToolAppend(msbuild_settings, 'ResourceCompile',
               'AdditionalIncludeDirectories', resource_include_dirs)
   # Add in libraries, note that even for empty libraries, we want this
-  # set, to prevent inheriting default libraries from the enviroment.
+  # set, to prevent inheriting default libraries from the environment.
   _ToolSetOrAppend(msbuild_settings, 'Link', 'AdditionalDependencies',
                   libraries)
   _ToolAppend(msbuild_settings, 'Link', 'AdditionalLibraryDirectories',

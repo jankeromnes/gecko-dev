@@ -36,7 +36,7 @@ enum MemoryPressureState
    * In case of conflict with an new memory pressue, the new memory pressure
    * takes precedence over an ongoing memory pressure.  The reason being
    * that if no events are processed between 2 notifications (new followed
-   * by ongoing, or ongoing followed by a new) we want to be as aggresive as
+   * by ongoing, or ongoing followed by a new) we want to be as aggressive as
    * possible on the clean-up of the memory.  After all, we are trying to
    * keep Gecko alive as long as possible.
    */

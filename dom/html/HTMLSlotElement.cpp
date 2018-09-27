@@ -48,12 +48,12 @@ NS_IMPL_ELEMENT_CLONE(HTMLSlotElement)
 
 nsresult
 HTMLSlotElement::BindToTree(nsIDocument* aDocument,
-                            nsIContent* aParent,
+                            nsIContent* apparent,
                             nsIContent* aBindingParent)
 {
   RefPtr<ShadowRoot> oldContainingShadow = GetContainingShadow();
 
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

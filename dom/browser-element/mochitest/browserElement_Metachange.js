@@ -56,7 +56,7 @@ function runTest() {
       is(e.detail.name, 'application-name');
       is(e.detail.content, 'foobar');
 
-      // We should recieve metachange events when the user creates new metas
+      // We should receive metachange events when the user creates new metas
       SpecialPowers.getBrowserFrameMessageManager(iframe1)
                    .loadFrameScript("data:,content.document.title='New title';",
                                     /* allowDelayedLoad = */ false);
@@ -169,7 +169,7 @@ function runTest() {
 
 
   iframe1.src = createHtml(createMeta('application-name', 'foobar'));
-  // We should not recieve meta change events for either of the below iframes
+  // We should not receive meta change events for either of the below iframes
   iframe2.src = createHtml(createMeta('application-name', 'foobar'));
   iframe3.src = createHtml(createMeta('application-name', 'foobar'));
 

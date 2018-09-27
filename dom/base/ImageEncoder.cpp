@@ -25,7 +25,7 @@ namespace mozilla {
 namespace dom {
 
 // This class should be placed inside GetBRGADataSourceSurfaceSync(). However,
-// due to B2G ICS uses old complier (C++98/03) which forbids local class as
+// due to B2G ICS uses old compiler (C++98/03) which forbids local class as
 // template parameter, we need to move this class outside.
 class SurfaceHelper : public Runnable {
 public:

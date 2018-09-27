@@ -3,7 +3,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 //
-// sys_byteorder.h: Compatiblity hacks for importing Chromium's base/SHA1.
+// sys_byteorder.h: Compatibility hacks for importing Chromium's base/SHA1.
 
 #ifndef ANGLEBASE_SYS_BYTEORDER_H_
 #define ANGLEBASE_SYS_BYTEORDER_H_

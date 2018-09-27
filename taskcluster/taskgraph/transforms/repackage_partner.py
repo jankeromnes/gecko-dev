@@ -42,7 +42,7 @@ taskref_or_string = Any(
     {Required('task-reference'): basestring})
 
 packaging_description_schema = Schema({
-    # the dependant task (object) for this  job, used to inform repackaging.
+    # the dependent task (object) for this  job, used to inform repackaging.
     Required('dependent-task'): object,
 
     # depname is used in taskref's to identify the taskID of the signed things

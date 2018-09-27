@@ -919,7 +919,7 @@ impl Item {
     /// Returns whether the item is a constified module enum
     fn is_constified_enum_module(&self, ctx: &BindgenContext) -> bool {
         // Do not jump through aliases, except for aliases that point to a type
-        // with the same name, since we dont generate coe for them.
+        // with the same name, since we don't generate coe for them.
         let item = self.id.into_resolver().through_type_refs().resolve(ctx);
         let type_ = match *item.kind() {
             ItemKind::Type(ref type_) => type_,

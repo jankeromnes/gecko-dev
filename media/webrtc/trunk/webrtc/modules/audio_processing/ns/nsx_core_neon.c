@@ -219,7 +219,7 @@ void WebRtcNsx_NoiseEstimationNeon(NoiseSuppressionFixedC* inst,
       int j;
       for (j = 0; j < 8; j++) {
         if (inst->noiseEstDensity[offset + i + j] > 512) {
-          // Get values for deltaBuff by shifting intead of dividing.
+          // Get values for deltaBuff by shifting instead of dividing.
           int factor = WebRtcSpl_NormW16(inst->noiseEstDensity[offset + i + j]);
           deltaBuff[j] = (int16_t)(FACTOR_Q16 >> (14 - factor));
         }
@@ -288,7 +288,7 @@ void WebRtcNsx_NoiseEstimationNeon(NoiseSuppressionFixedC* inst,
     // Last iteration over magnitude spectrum:
     // compute delta
     if (inst->noiseEstDensity[offset + i] > 512) {
-      // Get values for deltaBuff by shifting intead of dividing.
+      // Get values for deltaBuff by shifting instead of dividing.
       int factor = WebRtcSpl_NormW16(inst->noiseEstDensity[offset + i]);
       delta = (int16_t)(FACTOR_Q16 >> (14 - factor));
     } else {
@@ -441,7 +441,7 @@ void WebRtcNsx_PrepareSpectrumNeon(NoiseSuppressionFixedC* inst,
   freq_buf[inst->anaLen + 1] = -inst->imag[inst->anaLen2];
 }
 
-// For the noise supress process, synthesis, read out fully processed segment,
+// For the noise suppress process, synthesis, read out fully processed segment,
 // and update synthesis buffer.
 void WebRtcNsx_SynthesisUpdateNeon(NoiseSuppressionFixedC* inst,
                                    int16_t* out_frame,

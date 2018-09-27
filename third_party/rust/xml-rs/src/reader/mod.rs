@@ -37,7 +37,7 @@ impl<R: Read> EventReader<R> {
         EventReader::new_with_config(source, ParserConfig::new())
     }
 
-    /// Creates a new reader with the provded configuration, consuming the given stream.
+    /// Creates a new reader with the provided configuration, consuming the given stream.
     #[inline]
     pub fn new_with_config(source: R, config: ParserConfig) -> EventReader<R> {
         EventReader { source: source, parser: PullParser::new(config) }

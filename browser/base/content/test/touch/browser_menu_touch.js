@@ -6,7 +6,7 @@
  * when opened through a touch event. */
 
 async function openAndCheckMenu(menu, target) {
-  is(menu.state, "closed", `Menu panel (${menu.id}) is initally closed.`);
+  is(menu.state, "closed", `Menu panel (${menu.id}) is initially closed.`);
 
   let popupshown = BrowserTestUtils.waitForEvent(menu, "popupshown");
   EventUtils.synthesizeNativeTapAtCenter(target);

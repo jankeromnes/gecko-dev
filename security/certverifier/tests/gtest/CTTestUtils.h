@@ -88,7 +88,7 @@ void GetSampleSTHTreeHeadDecodedSignature(DigitallySigned& signature);
 // Certificate with embedded SCT in an X509v3 extension.
 Buffer GetDEREncodedTestEmbeddedCert();
 
-// For the above certificate, the corresponsing TBSCertificate without
+// For the above certificate, the corresponding TBSCertificate without
 // the embedded SCT extension.
 Buffer GetDEREncodedTestTbsCert();
 

@@ -2,7 +2,7 @@
 // - src/annex-b-fns/global-skip-early-err-for.case
 // - src/annex-b-fns/global/switch-dflt.template
 /*---
-description: Extension not observed when creation of variable binding would produce an early error (for statement) (Funtion declaration in the `default` clause of a `switch` statement in the global scope)
+description: Extension not observed when creation of variable binding would produce an early error (for statement) (Function declaration in the `default` clause of a `switch` statement in the global scope)
 esid: sec-web-compat-globaldeclarationinstantiation
 es6id: B.3.3.2
 flags: [generated, noStrict]

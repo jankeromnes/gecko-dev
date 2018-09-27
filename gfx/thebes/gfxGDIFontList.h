@@ -88,7 +88,7 @@ private:
  * do special things:  Really old fonts bitmap and vector fonts (device
  * and raster), Type 1 fonts, and TrueType/OpenType fonts.
  * 
- * This list is sorted in order from least prefered to most prefered.
+ * This list is sorted in order from least preferred to most preferred.
  * We prefer Type1 fonts over OpenType fonts to avoid falling back to
  * things like Arial (opentype) when you ask for Helvetica (type1)
  **/

@@ -39,7 +39,7 @@ loader.lazyRequireGetter(this, "EventEmitter", "devtools/shared/event-emitter");
  * ThreadActors manage a JSInspector object and manage execution/inspection
  * of debuggees.
  *
- * @param aParent object
+ * @param apparent object
  *        This |ThreadActor|'s parent actor. It must implement the following
  *        properties:
  *          - url: The URL string of the debuggee.
@@ -219,7 +219,7 @@ const ThreadActor = ActorClassWithSpec(threadSpec, {
    * Clean up listeners, debuggees and clear actor pools associated with
    * the lifetime of this actor. This does not destroy the thread actor,
    * it resets it. This is used in methods `onReleaseMany` `onDetatch` and
-   * `exit`. The actor is truely destroyed in the `exit method`.
+   * `exit`. The actor is truly destroyed in the `exit method`.
    */
   destroy: function() {
     dumpn("in ThreadActor.prototype.destroy");
@@ -592,7 +592,7 @@ const ThreadActor = ActorClassWithSpec(threadSpec, {
     }
 
     // Cases when we have executed enough within a frame to consider a "step"
-    // to have occured:
+    // to have occurred:
     //
     // 1. We change URLs (can happen without changing frames thanks to
     //    source mapping).

@@ -108,7 +108,7 @@ protected:
 
   void TestFlingAcceleration() {
     // Jack up the fling acceleration multiplier so we can easily determine
-    // whether acceleration occured.
+    // whether acceleration occurred.
     const float kAcceleration = 100.0f;
     SCOPED_GFX_PREF(APZFlingAccelBaseMultiplier, float, kAcceleration);
     SCOPED_GFX_PREF(APZFlingAccelMinVelocity, float, 0.0);

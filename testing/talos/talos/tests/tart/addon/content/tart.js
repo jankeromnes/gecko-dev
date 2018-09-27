@@ -12,7 +12,7 @@
 // V - make sure of window size (use pinned tart tab - enough even in scale 2 with australis)
 // V - Make sure test-cases work on australis (min tab width for 8th tab)
 // V - pref - disable paint starvation: docshell.event_starvation_delay_hint=1 -> will be set by talos or by the user
-// V - For manual test: display: relevent prefs instructions (rate, starve hint), instructions for many-tabs
+// V - For manual test: display: relevant prefs instructions (rate, starve hint), instructions for many-tabs
 // V - allow API-less intervals recording (using rAF, since the API is b0rked with OMTC)
 //     (but using rAF appears to record spurious very short intervals which I think are not really frames)
 // V - Optimize cases (minimize test count without hurting cover):

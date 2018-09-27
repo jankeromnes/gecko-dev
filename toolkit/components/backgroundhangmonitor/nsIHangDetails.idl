@@ -64,7 +64,7 @@ interface nsIHangDetails : nsISupports
   [implicit_jscontext] readonly attribute jsval modules;
 
   /**
-   * The hang annotations which were captured when the hang occured. This
+   * The hang annotations which were captured when the hang occurred. This
    * attribute is a JS object of key-value pairs.
    */
   [implicit_jscontext] readonly attribute jsval annotations;

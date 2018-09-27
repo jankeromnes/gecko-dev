@@ -479,7 +479,7 @@ LayerTransactionParent::RecvUpdate(const TransactionInfo& aInfo)
   bool drawFps = gfxPrefs::LayersDrawFPS();
   if (drawFps) {
     uint32_t visualWarningTrigger = gfxPrefs::LayerTransactionWarning();
-    // The default theshold is 200ms to trigger, hit red when it take 4 times longer
+    // The default threshold is 200ms to trigger, hit red when it take 4 times longer
     TimeDuration latency = TimeStamp::Now() - aInfo.transactionStart();
     if (latency > TimeDuration::FromMilliseconds(visualWarningTrigger)) {
       float severity = (latency - TimeDuration::FromMilliseconds(visualWarningTrigger)).ToMilliseconds() /

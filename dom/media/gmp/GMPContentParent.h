@@ -24,7 +24,7 @@ class GMPContentParent final : public PGMPContentParent,
 public:
   NS_INLINE_DECL_THREADSAFE_REFCOUNTING(GMPContentParent)
 
-  explicit GMPContentParent(GMPParent* aParent = nullptr);
+  explicit GMPContentParent(GMPParent* apparent = nullptr);
 
   nsresult GetGMPVideoDecoder(GMPVideoDecoderParent** aGMPVD,
                               uint32_t aDecryptorId);
@@ -62,8 +62,8 @@ public:
   public:
     NS_INLINE_DECL_THREADSAFE_REFCOUNTING(CloseBlocker)
 
-    explicit CloseBlocker(GMPContentParent* aParent)
-      : mParent(aParent)
+    explicit CloseBlocker(GMPContentParent* apparent)
+      : mParent(apparent)
     {
       mParent->AddCloseBlocker();
     }

@@ -541,7 +541,7 @@ loser:
 
     if (A) {
         /* if i != c, then we didn't complete the loop above and must of failed
-         * somwhere along the way */
+         * somewhere along the way */
         if (i != c) {
             SECITEM_ZfreeItem(A, PR_TRUE);
             A = NULL;

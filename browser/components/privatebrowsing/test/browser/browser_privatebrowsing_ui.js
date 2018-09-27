@@ -53,7 +53,7 @@ function test() {
     whenNewWindowLoaded(aOptions, function(aWin) {
       windowsToClose.push(aWin);
       // execute should only be called when need, like when you are opening
-      // web pages on the test. If calling executeSoon() is not necesary, then
+      // web pages on the test. If calling executeSoon() is not necessary, then
       // call whenNewWindowLoaded() instead of testOnWindow() on your test.
       executeSoon(() => aCallback(aWin));
     });

@@ -182,11 +182,11 @@ U2FTokenManager::AbortTransaction(const uint64_t& aTransactionId,
 }
 
 void
-U2FTokenManager::MaybeClearTransaction(PWebAuthnTransactionParent* aParent)
+U2FTokenManager::MaybeClearTransaction(PWebAuthnTransactionParent* apparent)
 {
   // Only clear if we've been requested to do so by our current transaction
   // parent.
-  if (mTransactionParent == aParent) {
+  if (mTransactionParent == apparent) {
     ClearTransaction();
   }
 }
@@ -458,10 +458,10 @@ U2FTokenManager::MaybeAbortSign(const uint64_t& aTransactionId,
 }
 
 void
-U2FTokenManager::Cancel(PWebAuthnTransactionParent* aParent,
+U2FTokenManager::Cancel(PWebAuthnTransactionParent* apparent,
                         const uint64_t& aTransactionId)
 {
-  if (mTransactionParent != aParent || mLastTransactionId != aTransactionId) {
+  if (mTransactionParent != apparent || mLastTransactionId != aTransactionId) {
     return;
   }
 

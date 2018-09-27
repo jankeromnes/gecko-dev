@@ -129,9 +129,9 @@ struct MaiAtkObject
 
   /**
    * Notify ATK of a shown or hidden subtree rooted at aObject whose parent is
-   * aParent
+   * apparent
    */
-  void FireAtkShowHideEvent(AtkObject* aParent, bool aIsAdded, bool aFromUser);
+  void FireAtkShowHideEvent(AtkObject* apparent, bool aIsAdded, bool aFromUser);
 
 private:
   /*

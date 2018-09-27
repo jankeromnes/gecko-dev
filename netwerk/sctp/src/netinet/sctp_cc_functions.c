@@ -169,7 +169,7 @@ sctp_cwnd_update_after_fr(struct sctp_tcb *stcb,
 						uint32_t srtt;
 
 						srtt = net->lastsa;
-						/* lastsa>>3;  we don't need to devide ...*/
+						/* lastsa>>3;  we don't need to divide ...*/
 						if (srtt == 0) {
 							srtt = 1;
 						}
@@ -786,7 +786,7 @@ sctp_cwnd_update_after_sack_common(struct sctp_tcb *stcb,
 		TAILQ_FOREACH(net, &stcb->asoc.nets, sctp_next) {
 			t_ssthresh += net->ssthresh;
 			t_cwnd += net->cwnd;
-			/* lastsa>>3;  we don't need to devide ...*/
+			/* lastsa>>3;  we don't need to divide ...*/
 			srtt = net->lastsa;
 			if (srtt > 0) {
 				uint64_t tmp;

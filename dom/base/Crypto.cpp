@@ -29,8 +29,8 @@ NS_IMPL_CYCLE_COLLECTING_RELEASE(Crypto)
 
 NS_IMPL_CYCLE_COLLECTION_WRAPPERCACHE(Crypto, mParent, mSubtle)
 
-Crypto::Crypto(nsIGlobalObject* aParent)
-  : mParent(aParent)
+Crypto::Crypto(nsIGlobalObject* apparent)
+  : mParent(apparent)
 {
 }
 

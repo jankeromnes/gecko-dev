@@ -702,7 +702,7 @@ TEST(IntervalSet, StaticAssert)
   static_assert(mozilla::IsSame<nsTArray_CopyChooser<media::TimeIntervals>::Type, nsTArray_CopyWithConstructors<media::TimeIntervals>>::value, "Must use copy constructor");
 }
 
-TEST(IntervalSet, Substraction)
+TEST(IntervalSet, Subtraction)
 {
   IntIntervals i0;
   i0 += IntInterval(5, 10);

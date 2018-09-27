@@ -935,7 +935,7 @@ class ContextMenuChild extends ActorChild {
   _setContextForNodesWithChildren(editFlags) {
     const context = this.context;
 
-    // Second, bubble out, looking for items of interest that can have childen.
+    // Second, bubble out, looking for items of interest that can have children.
     // Always pick the innermost link, background image, etc.
     let elem = context.target;
 

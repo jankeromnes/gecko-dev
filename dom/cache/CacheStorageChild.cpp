@@ -51,11 +51,11 @@ CacheStorageChild::ClearListener()
 
 void
 CacheStorageChild::ExecuteOp(nsIGlobalObject* aGlobal, Promise* aPromise,
-                             nsISupports* aParent, const CacheOpArgs& aArgs)
+                             nsISupports* apparent, const CacheOpArgs& aArgs)
 {
   mNumChildActors += 1;
   Unused << SendPCacheOpConstructor(
-    new CacheOpChild(GetWorkerHolder(), aGlobal, aParent, aPromise), aArgs);
+    new CacheOpChild(GetWorkerHolder(), aGlobal, apparent, aPromise), aArgs);
 }
 
 void

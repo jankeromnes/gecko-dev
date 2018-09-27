@@ -60,7 +60,7 @@ private:
   // flag.
   bool mInheritsSecurityContext;
 
-  // Whether the nsIURI's protocol handler has teh URI_SYNC_LOAD_IS_OK flag.
+  // Whether the nsIURI's protocol handler has the URI_SYNC_LOAD_IS_OK flag.
   bool mSyncLoadIsOK;
 };
 

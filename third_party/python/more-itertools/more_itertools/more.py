@@ -1788,7 +1788,7 @@ def difference(iterable, func=sub):
 class SequenceView(Sequence):
     """Return a read-only view of the sequence object *target*.
 
-    :class:`SequenceView` objects are analagous to Python's built-in
+    :class:`SequenceView` objects are analogous to Python's built-in
     "dictionary view" types. They provide a dynamic view of a sequence's items,
     meaning that when the sequence updates, so does the view.
 

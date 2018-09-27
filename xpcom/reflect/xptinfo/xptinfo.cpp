@@ -89,9 +89,9 @@ nsXPTInterfaceInfo::IsBuiltinClass(bool* aRes) const
 }
 
 nsresult
-nsXPTInterfaceInfo::GetParent(const nsXPTInterfaceInfo** aParent) const
+nsXPTInterfaceInfo::GetParent(const nsXPTInterfaceInfo** apparent) const
 {
-  *aParent = GetParent();
+  *apparent = GetParent();
   return NS_OK;
 }
 

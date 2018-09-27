@@ -3940,7 +3940,7 @@ var SessionStoreInternal = {
       // TAB_LAZY_STATES holds data for lazy-browser tabs to proxy for
       // data unobtainable from the unbound browser.  This only applies to lazy
       // browsers and will be removed once the browser is inserted in the document.
-      // This must preceed `updateTabLabelAndIcon` call for required data to be present.
+      // This must precede `updateTabLabelAndIcon` call for required data to be present.
       let url = "about:blank";
       let title = "";
 
@@ -4970,7 +4970,7 @@ var SessionStoreInternal = {
   /**
    * Send the "SessionStore:restoreHistory" message to content, triggering a
    * content restore. This method is intended to be used internally by
-   * SessionStore, as it also ensures that permissions are avaliable in the
+   * SessionStore, as it also ensures that permissions are available in the
    * content process before triggering the history restore in the content
    * process.
    *

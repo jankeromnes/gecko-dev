@@ -106,7 +106,7 @@ public:
 
     // Write one audio frame, i.e. the bufferLength first bytes of audioBuffer,
     // to file. The audio frame size is determined by the codecInst.pacsize
-    // parameter of the last sucessfull StartRecordingAudioFile(..) call.
+    // parameter of the last successful StartRecordingAudioFile(..) call.
     // Note: bufferLength must be exactly one frame.
     virtual int32_t IncomingAudioData(
         const int8_t* audioBuffer,

@@ -64,7 +64,7 @@ add_task(async function test_cfg_enabled() {
       // We timed out, or otherwise didn't crash properly
       Assert.ok(false, "This test should cause a crash when CFG is enabled. We didn't " +
         "observe a crash. This specific assertion should be redundant to a false assertion " +
-        "immediately prior to it. If it occurs alone, then something strange has occured " +
+        "immediately prior to it. If it occurs alone, then something strange has occurred " +
         "and CFG status and this test should be investigated.");
     } else {
       // We crashed properly, clean up...

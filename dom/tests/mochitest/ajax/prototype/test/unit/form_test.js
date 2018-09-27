@@ -339,7 +339,7 @@ new Test.Unit.Runner({
   },
   
   testSetValue: function(){
-    // unkown element
+    // unknown element
     this.assertEqual(null, Form.Element.setValue('someBorkedId', 'blah')); // Unknown
     
     // test button element

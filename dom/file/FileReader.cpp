@@ -666,7 +666,7 @@ FileReader::OnInputStreamReady(nsIAsyncInputStream* aStream)
   }
 
   // We use this class to decrease the busy counter at the end of this method.
-  // In theory we can do it immediatelly but, for debugging reasons, we want to
+  // In theory we can do it immediately but, for debugging reasons, we want to
   // be 100% sure we have a workerRef when OnLoadEnd() is called.
   FileReaderDecreaseBusyCounter RAII(this);
 

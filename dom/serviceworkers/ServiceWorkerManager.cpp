@@ -2125,7 +2125,7 @@ ServiceWorkerManager::DispatchFetchEvent(nsIInterceptedChannel* aChannel,
 
     // Also override the initial about:blank controller since the real
     // network load may be intercepted by a different service worker.  If
-    // the intial about:blank has a controller here its simply been
+    // the initial about:blank has a controller here its simply been
     // inherited from its parent.
     if (clientInfo.isNothing()) {
       clientInfo = loadInfo->GetInitialClientInfo();

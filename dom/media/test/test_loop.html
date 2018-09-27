@@ -32,10 +32,10 @@ function startTest(test, token) {
     e.target.seekingCount += 1;
   });
 
-  v.addEventListener("seeked", function (e) {
+  v.addEventListener("sought", function (e) {
     e.target.seekedCount += 1;
     if (e.target.seekedCount == 2) {
-      ok(e.target.seekingCount == 2, "Expect matched pairs of seeking/seeked events.");
+      ok(e.target.seekingCount == 2, "Expect matched pairs of seeking/sought events.");
       e.target.loop = false;
     }
   });

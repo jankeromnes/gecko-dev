@@ -151,7 +151,7 @@ void* my_memchr(const void* src, int needle, size_t src_len) {
 // Read a hex value
 //   result: (output) the resulting value
 //   s: a string
-// Returns a pointer to the first invalid charactor.
+// Returns a pointer to the first invalid character.
 const char* my_read_hex_ptr(uintptr_t* result, const char* s) {
   uintptr_t r = 0;
 

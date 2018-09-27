@@ -31,7 +31,7 @@ function test_lazy_api() {
     constructor: "LazyActor",
     type: { global: true, target: true }
   });
-  // The actor is immediatly registered, but not loaded
+  // The actor is immediately registered, but not loaded
   Assert.ok(DebuggerServer.targetScopedActorFactories.hasOwnProperty("lazyActor"));
   Assert.ok(DebuggerServer.globalActorFactories.hasOwnProperty("lazyActor"));
   Assert.ok(!isActorLoaded);

@@ -12,7 +12,7 @@ author: Roozbeh Pournader
 var numberingSystems = {
     arab: 0x0660,
     arabext: 0x06F0,
-    beng: 0x09E6,
+    being: 0x09E6,
     deva: 0x0966,
     fullwide: 0xFF10,
     gujr: 0x0AE6,

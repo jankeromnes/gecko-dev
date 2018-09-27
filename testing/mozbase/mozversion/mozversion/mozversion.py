@@ -112,7 +112,7 @@ def get_version(binary=None):
     Returns the application version information as a dict. You can specify
     a path to the binary of the application or an Android APK file (to get
     version information for Firefox for Android). If this is omitted then the
-    current directory is checked for the existance of an application.ini
+    current directory is checked for the existence of an application.ini
     file.
 
     :param binary: Path to the binary for the application or Android APK file

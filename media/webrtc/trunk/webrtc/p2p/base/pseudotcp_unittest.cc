@@ -439,7 +439,7 @@ class PseudoTcpTestPingPong : public PseudoTcpTestBase {
 // contracts and enlarges correctly.
 class PseudoTcpTestReceiveWindow : public PseudoTcpTestBase {
  public:
-  // Not all the data are transfered, |size| just need to be big enough
+  // Not all the data are transferred, |size| just need to be big enough
   // to fill up the receiver window twice.
   void TestTransfer(int size) {
     // Create some dummy data to send.

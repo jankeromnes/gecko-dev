@@ -153,7 +153,7 @@ nsMenuX::~nsMenuX()
   NS_OBJC_END_TRY_ABORT_BLOCK;
 }
 
-nsresult nsMenuX::Create(nsMenuObjectX* aParent, nsMenuGroupOwnerX* aMenuGroupOwner, nsIContent* aContent)
+nsresult nsMenuX::Create(nsMenuObjectX* apparent, nsMenuGroupOwnerX* aMenuGroupOwner, nsIContent* aContent)
 {
   NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NSRESULT;
 
@@ -168,7 +168,7 @@ nsresult nsMenuX::Create(nsMenuObjectX* aParent, nsMenuGroupOwnerX* aMenuGroupOw
   NS_ASSERTION(mMenuGroupOwner, "No menu owner given, must have one");
   mMenuGroupOwner->RegisterForContentChanges(mContent, this);
 
-  mParent = aParent;
+  mParent = apparent;
   // our parent could be either a menu bar (if we're toplevel) or a menu (if we're a submenu)
 
 #ifdef DEBUG

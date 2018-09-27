@@ -491,7 +491,7 @@ sslMutex_Lock(sslMutex *pMutex)
         PORT_SetError(PR_INVALID_ARGUMENT_ERROR);
         return SECFailure; /* what else ? */
     }
-    /* acquire the mutex to be the only owner accross all other processes */
+    /* acquire the mutex to be the only owner across all other processes */
     event = WaitForSingleObject(hMutex, INFINITE);
     switch (event) {
         case WAIT_OBJECT_0:

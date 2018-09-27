@@ -206,7 +206,7 @@ class PageInfoChild extends ActorChild {
   }
 
   /**
-   * Set up a JSON element object with all the instanceOf and other infomation that
+   * Set up a JSON element object with all the instanceOf and other information that
    * makePreview in pageInfo.js uses to figure out how to display the preview.
    */
 

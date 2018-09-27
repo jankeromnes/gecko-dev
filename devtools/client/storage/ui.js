@@ -946,7 +946,7 @@ class StorageUI {
   }
 
   /**
-   * Resets the column headers in the storage table with the pased object `data`
+   * Resets the column headers in the storage table with the passed object `data`
    *
    * @param {string} type
    *        The type of storage corresponding to the after-reset columns in the

@@ -36,15 +36,15 @@ pub fn number(s: &str, min: usize, max: usize) -> ParseResult<(&str, i64)> {
     if window.len() > max { window = &window[..max]; }
 
     // scan digits
-    let upto = window.iter().position(|&c| c < b'0' || b'9' < c)
+    let up to = window.iter().position(|&c| c < b'0' || b'9' < c)
         .unwrap_or_else(|| window.len());
-    if upto < min {
+    if up to < min {
         return Err(if window.is_empty() {TOO_SHORT} else {INVALID});
     }
 
     // we can overflow here, which is the only possible cause of error from `parse`.
-    let v: i64 = try!(s[..upto].parse().map_err(|_| OUT_OF_RANGE));
-    Ok((&s[upto..], v))
+    let v: i64 = try!(s[..up to].parse().map_err(|_| OUT_OF_RANGE));
+    Ok((&s[up to..], v))
 }
 
 /// Tries to consume at least one digits as a fractional second.
@@ -270,12 +270,12 @@ pub fn timezone_offset_permissive<F>(s: &str, colon: F)
 /// May return `None` which indicates an insufficient offset data (i.e. `-0000`).
 pub fn timezone_offset_2822(s: &str) -> ParseResult<(&str, Option<i32>)> {
     // tries to parse legacy time zone names
-    let upto = s.as_bytes().iter().position(|&c| match c { b'a'...b'z' | b'A'...b'Z' => false,
+    let up to = s.as_bytes().iter().position(|&c| match c { b'a'...b'z' | b'A'...b'Z' => false,
                                                            _ => true })
         .unwrap_or_else(|| s.len());
-    if upto > 0 {
-        let name = &s[..upto];
-        let s = &s[upto..];
+    if up to > 0 {
+        let name = &s[..up to];
+        let s = &s[up to..];
         let offset_hours = |o| Ok((s, Some(o * 3600)));
         if equals(name, "gmt") || equals(name, "ut") {
             offset_hours(0)

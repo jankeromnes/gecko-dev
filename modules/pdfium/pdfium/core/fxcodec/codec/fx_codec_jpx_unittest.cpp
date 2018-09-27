@@ -387,7 +387,7 @@ TEST(fxcodec, DecodeDataSkip) {
     EXPECT_EQ(4u, opj_skip_from_memory(4, &dd));
     EXPECT_EQ(kSkipError, opj_skip_from_memory(-2, &dd));
 
-    // Next read succeeds as if nothing has happenned.
+    // Next read succeeds as if nothing has happened.
     EXPECT_EQ(1u, opj_read_from_memory(buffer, 1, &dd));
     EXPECT_EQ(0x84, buffer[0]);
     EXPECT_EQ(0xbd, buffer[1]);
@@ -396,7 +396,7 @@ TEST(fxcodec, DecodeDataSkip) {
     memset(buffer, 0xbd, sizeof(buffer));
     EXPECT_EQ(kSkipError, opj_skip_from_memory(-4, &dd));
 
-    // Next read succeeds as if nothing has happenned.
+    // Next read succeeds as if nothing has happened.
     EXPECT_EQ(1u, opj_read_from_memory(buffer, 1, &dd));
     EXPECT_EQ(0x85, buffer[0]);
     EXPECT_EQ(0xbd, buffer[1]);
@@ -418,7 +418,7 @@ TEST(fxcodec, DecodeDataSkip) {
   {
     DecodeData dd(stream_data, sizeof(stream_data));
 
-    // Negative skip after EOS isn't alowed, still EOS.
+    // Negative skip after EOS isn't allowed, still EOS.
     memset(buffer, 0xbd, sizeof(buffer));
     EXPECT_EQ(8u, opj_skip_from_memory(8, &dd));
     EXPECT_EQ(kSkipError, opj_skip_from_memory(-4, &dd));

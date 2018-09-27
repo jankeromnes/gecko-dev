@@ -84,7 +84,7 @@ add_task(async function() {
     manager.addGlobal("resolve", resolve);
     manager.evalInSandbox(`
       (async function() {
-        // The uncloned return value should be privileged and inaccesible.
+        // The uncloned return value should be privileged and inaccessible.
         const uncloned = await driver.uncloned();
         ok(!("value" in uncloned), "The sandbox could not use an uncloned return value");
 

@@ -365,7 +365,7 @@ TEST_F(FakeNetworkPipeTest, DisallowReorderingThenAllowReordering) {
   pipe->Process();
 
   // Confirm that all packets have been delivered
-  // and that reordering has occured.
+  // and that reordering has occurred.
   EXPECT_EQ(kNumPackets, receiver->delivered_sequence_numbers_.size());
   bool reordering_has_occured = false;
   last_seq_num = -1;

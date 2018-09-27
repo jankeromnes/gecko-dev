@@ -25,7 +25,7 @@ SK_API void sk_canvas_save(sk_canvas_t*);
     This behaves the same as sk_canvas_save(), but in addition it
     allocates an offscreen surface. All drawing calls are directed
     there, and only when the balancing call to sk_canvas_restore() is
-    made is that offscreen transfered to the canvas (or the previous
+    made is that offscreen transferred to the canvas (or the previous
     layer).
 
     @param sk_rect_t* (may be null) This rect, if non-null, is used as

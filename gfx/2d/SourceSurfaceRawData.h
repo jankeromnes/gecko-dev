@@ -51,7 +51,7 @@ public:
 
   virtual void GuaranteePersistance() override;
 
-  // Althought Map (and Moz2D in general) isn't normally threadsafe,
+  // Although Map (and Moz2D in general) isn't normally threadsafe,
   // we want to allow it for SourceSurfaceRawData since it should
   // always be fine (for reading at least).
   //

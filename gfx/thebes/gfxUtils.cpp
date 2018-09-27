@@ -663,7 +663,7 @@ gfxUtils::ClipToRegion(DrawTarget* aTarget, const nsIntRegion& aRegion)
 /*static*/ float
 gfxUtils::ClampToScaleFactor(float aVal, bool aRoundDown)
 {
-  // Arbitary scale factor limitation. We can increase this
+  // Arbitrary scale factor limitation. We can increase this
   // for better scaling performance at the cost of worse
   // quality.
   static const float kScaleResolution = 2;

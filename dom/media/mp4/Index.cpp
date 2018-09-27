@@ -22,7 +22,7 @@ class MOZ_STACK_CLASS RangeFinder
 {
 public:
   // Given that we're processing this in order we don't use a binary search
-  // to find the apropriate time range. Instead we search linearly from the
+  // to find the appropriate time range. Instead we search linearly from the
   // last used point.
   explicit RangeFinder(const MediaByteRangeSet& ranges)
     : mRanges(ranges), mIndex(0)

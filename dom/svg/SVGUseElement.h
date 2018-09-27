@@ -47,7 +47,7 @@ public:
   NS_IMPL_FROMNODE_WITH_TAG(SVGUseElement, kNameSpaceID_SVG, use)
 
   nsresult BindToTree(nsIDocument* aDocument,
-                      nsIContent* aParent,
+                      nsIContent* apparent,
                       nsIContent* aBindingParent) override;
   void UnbindFromTree(bool aDeep = true,
                       bool aNullParent = true) override;

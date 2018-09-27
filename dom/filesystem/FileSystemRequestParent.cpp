@@ -78,12 +78,12 @@ namespace {
 class CheckPermissionRunnable final : public Runnable
 {
 public:
-  CheckPermissionRunnable(already_AddRefed<ContentParent> aParent,
+  CheckPermissionRunnable(already_AddRefed<ContentParent> apparent,
                           FileSystemRequestParent* aActor,
                           FileSystemTaskParentBase* aTask,
                           const nsAString& aPath)
     : Runnable("dom::CheckPermissionRunnable")
-    , mContentParent(aParent)
+    , mContentParent(apparent)
     , mActor(aActor)
     , mTask(aTask)
     , mPath(aPath)

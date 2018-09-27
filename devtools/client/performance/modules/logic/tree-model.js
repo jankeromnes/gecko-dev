@@ -360,7 +360,7 @@ ThreadNode.prototype = {
    * Mimicks the interface of FrameNode, and a ThreadNode can never have
    * optimization data (at the moment, anyway), so provide a function
    * to return null so we don't need to check if a frame node is a thread
-   * or not everytime we fetch optimization data.
+   * or not every time we fetch optimization data.
    *
    * @return {null}
    */
@@ -531,7 +531,7 @@ FrameNode.prototype = {
 
   /**
    * Returns the underlying JITOptimizations model representing
-   * the optimization attempts occuring in this frame.
+   * the optimization attempts occurring in this frame.
    *
    * @return {JITOptimizations|null}
    */

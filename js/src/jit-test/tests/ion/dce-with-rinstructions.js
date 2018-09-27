@@ -459,7 +459,7 @@ function rinline_arguments_length_1(i) {
     var x = ret_argumentsLength.apply(this, arguments);
     if (uceFault_inline_arguments_length_1(i) || uceFault_inline_arguments_length_1(i))
         assertEq(x, 1);
-    // We cannot garantee that the function would be inlined
+    // We cannot guarantee that the function would be inlined
     // assertRecoveredOnBailout(x, true);
     return i;
 }
@@ -469,7 +469,7 @@ function rinline_arguments_length_3(i) {
     var x = ret_argumentsLength.apply(this, arguments);
     if (uceFault_inline_arguments_length_3(i) || uceFault_inline_arguments_length_3(i))
         assertEq(x, 3);
-    // We cannot garantee that the function would be inlined
+    // We cannot guarantee that the function would be inlined
     // assertRecoveredOnBailout(x, true);
     return i;
 }

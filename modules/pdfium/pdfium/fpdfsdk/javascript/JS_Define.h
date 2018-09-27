@@ -142,7 +142,7 @@ void JSMethod(const char* method_name_string,
         #method_name, #class_name, info);                                  \
   }
 
-// All JS classes have a name, an object defintion ID, and the ability to
+// All JS classes have a name, an object definition ID, and the ability to
 // register themselves with FXJS_V8. We never make a BASE class on its own
 // because it can't really do anything.
 #define DECLARE_JS_CLASS_BASE_PART() \

@@ -155,7 +155,7 @@
      * range-testing. \
      */ \
     /* \
-     * Binary operators tokens, Or thru Pow. These must be in the same \
+     * Binary operators tokens, Or through Pow. These must be in the same \
      * order as F(OR) and friends in FOR_EACH_PARSE_NODE_KIND in ParseNode.h. \
      */ \
     macro(Pipeline,     "'|>'") \

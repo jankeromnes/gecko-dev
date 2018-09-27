@@ -1,7 +1,7 @@
  // 1.percent-encoded IDN that contains blacklisted character should be converted
  //   to punycode, not UTF-8 string
  // 2.only hostname-valid percent encoded ASCII characters should be decoded
- // 3.IDN convertion must not bypassed by %00
+ // 3.IDN conversion must not bypassed by %00
 let reference = [
    ["www.example.com%e2%88%95www.mozill%d0%b0.com%e2%81%84www.mozilla.org",
     "www.example.xn--comwww-re3c.xn--mozill-8nf.xn--comwww-rq0c.mozilla.org"],

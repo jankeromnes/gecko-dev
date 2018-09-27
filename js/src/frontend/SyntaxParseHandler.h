@@ -423,7 +423,7 @@ FOR_EACH_PARSENODE_SUBCLASS(DECLARE_AS)
     void setFunctionBox(CodeNodeType funNode, FunctionBox* funbox) {}
     void addFunctionFormalParameter(CodeNodeType funNode, Node argpn) {}
 
-    ForNodeType newForStatement(uint32_t begin, TernaryNodeType forHead, Node body, unsigned iflags) {
+    ForNodeType newForStatement(uint32_t begin, TernaryNodeType forehead, Node body, unsigned iflags) {
         return NodeGeneric;
     }
 

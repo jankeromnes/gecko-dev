@@ -143,7 +143,7 @@ _cairo_uint64_divrem (cairo_uint64_t num, cairo_uint64_t den)
 #endif
 
 /*
- * 64-bit comparisions derived from lt or eq
+ * 64-bit comparisons derived from lt or eq
  */
 #define			_cairo_uint64_le(a,b)	    (!_cairo_uint64_gt(a,b))
 #define			_cairo_uint64_ne(a,b)	    (!_cairo_uint64_eq(a,b))

@@ -2,7 +2,7 @@
 // - src/annex-b-fns/global-block-scoping.case
 // - src/annex-b-fns/global/switch-dflt.template
 /*---
-description: A block-scoped binding is created (Funtion declaration in the `default` clause of a `switch` statement in the global scope)
+description: A block-scoped binding is created (Function declaration in the `default` clause of a `switch` statement in the global scope)
 esid: sec-web-compat-globaldeclarationinstantiation
 es6id: B.3.3.2
 flags: [generated, noStrict]

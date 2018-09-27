@@ -32,7 +32,7 @@
  * - frecency: (number)
  *     The frecency of the page, if any.
  *     See https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Frecency_algorithm
- *     Note that this property may not be used to change the actualy frecency
+ *     Note that this property may not be used to change the actually frecency
  *     score of a page, only to retrieve it. In other words, any `frecency` field
  *     passed as argument to a function of this API will be ignored.
  *  - visits: (Array<VisitInfo>)

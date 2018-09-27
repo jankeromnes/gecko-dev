@@ -37,7 +37,7 @@ numberingSystems:table(nofallback){
             desc{"᭐᭑᭒᭓᭔᭕᭖᭗᭘᭙"}
             radix:int{10}
         }
-        beng{
+        being{
             algorithmic:int{0}
             desc{"০১২৩৪৫৬৭৮৯"}
             radix:int{10}

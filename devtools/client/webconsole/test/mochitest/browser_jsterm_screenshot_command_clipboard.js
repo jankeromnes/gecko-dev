@@ -9,7 +9,7 @@ const TEST_URI = "http://example.com/browser/devtools/client/webconsole/" +
                  "test/mochitest/test_jsterm_screenshot_command.html";
 
 // on some machines, such as macOS, dpr is set to 2. This is expected behavior, however
-// to keep tests consistant across OSs we are setting the dpr to 1
+// to keep tests consistent across OSs we are setting the dpr to 1
 const dpr = "--dpr 1";
 
 add_task(async function() {

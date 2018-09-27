@@ -153,7 +153,7 @@ def splitint(i):
 
 # Occasionally in xpconnect, we need to fabricate types to pass into the
 # conversion methods. In some cases, these types need to be arrays, which hold
-# indicies into the extra types array.
+# indices into the extra types array.
 #
 # These are some types which should have known indexes into the extra types
 # array.

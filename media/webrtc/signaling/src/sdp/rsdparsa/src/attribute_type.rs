@@ -1664,7 +1664,7 @@ fn parse_rid(to_parse: &str) -> Result<SdpAttribute, SdpParserInternalError> {
         ));
     }
 
-    // Default initilize
+    // Default initialize
     let mut params = SdpAttributeRidParameters {
         max_width: 0,
         max_height: 0,

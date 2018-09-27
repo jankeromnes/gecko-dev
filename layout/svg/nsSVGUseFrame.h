@@ -28,7 +28,7 @@ public:
 
   // nsIFrame interface:
   void Init(nsIContent* aContent,
-            nsContainerFrame* aParent,
+            nsContainerFrame* apparent,
             nsIFrame* aPrevInFlow) override;
 
   nsresult AttributeChanged(int32_t aNameSpaceID,

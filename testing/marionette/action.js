@@ -864,7 +864,7 @@ action.PointerParameters = class {
    *     Object that represents pointer parameters.
    *
    * @return {action.PointerParameters}
-   *     Validated pointer paramters.
+   *     Validated pointer parameters.
    */
   static fromJSON(parametersData) {
     if (typeof parametersData == "undefined") {

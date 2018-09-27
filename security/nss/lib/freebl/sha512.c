@@ -402,7 +402,7 @@ SHA256_Update(SHA256Context *ctx, const unsigned char *input,
     if ((ctx->sizeLo += inputLen) < inputLen)
         ctx->sizeHi++;
 
-    /* if data already in buffer, attemp to fill rest of buffer */
+    /* if data already in buffer, attempt to fill rest of buffer */
     if (inBuf) {
         unsigned int todo = SHA256_BLOCK_LENGTH - inBuf;
         if (inputLen < todo)
@@ -1195,7 +1195,7 @@ SHA512_Update(SHA512Context *ctx, const unsigned char *input,
         ctx->sizeLo.hi++;
 #endif
 
-    /* if data already in buffer, attemp to fill rest of buffer */
+    /* if data already in buffer, attempt to fill rest of buffer */
     if (inBuf) {
         unsigned int todo = SHA512_BLOCK_LENGTH - inBuf;
         if (inputLen < todo)
@@ -1346,7 +1346,7 @@ SHA512_Clone(SHA512Context *dest, SHA512Context *src)
 /* ======================================================================= */
 /* SHA384 uses a SHA512Context as the real context.
 ** The only differences between SHA384 an SHA512 are:
-** a) the intialization values for the context, and
+** a) the initialization values for the context, and
 ** b) the number of bytes of data produced as output.
 */
 

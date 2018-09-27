@@ -125,7 +125,7 @@ class VideoMediaChannelTest : public testing::Test,
   // Setup an additional stream just to send video. Defer add recv stream.
   // This is required if you want to test unsignalled recv of video rtp packets.
   void SetUpSecondStreamWithNoRecv() {
-    // SetUp() already added kSsrc make sure duplicate SSRCs cant be added.
+    // SetUp() already added kSsrc make sure duplicate SSRCs can't be added.
     EXPECT_TRUE(channel_->AddRecvStream(
         cricket::StreamParams::CreateLegacy(kSsrc)));
     EXPECT_TRUE(channel_->SetSink(kSsrc, &renderer_));
@@ -133,7 +133,7 @@ class VideoMediaChannelTest : public testing::Test,
         cricket::StreamParams::CreateLegacy(kSsrc)));
     EXPECT_TRUE(channel_->AddSendStream(
         cricket::StreamParams::CreateLegacy(kSsrc + 2)));
-    // We dont add recv for the second stream.
+    // We don't add recv for the second stream.
 
     // Setup the receive and renderer for second stream after send.
     video_capturer_2_.reset(CreateFakeVideoCapturer());

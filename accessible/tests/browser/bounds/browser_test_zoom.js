@@ -36,7 +36,7 @@ async function runTests(browser, accDoc) {
   let imgmap = findAccessibleChildByID(accDoc, "imgmap");
   if (!imgmap.childCount) {
     // An image map may not be available even after the doc and image load
-    // is complete. We don't recieve any DOM events for this change either,
+    // is complete. We don't receive any DOM events for this change either,
     // so we need to wait for a REORDER.
     await waitForEvent(EVENT_REORDER, "imgmap");
   }

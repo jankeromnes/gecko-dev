@@ -223,7 +223,7 @@ struct SamplerBinding
     bool unreferenced;
 };
 
-// A varying with tranform feedback enabled. If it's an array, either the whole array or one of its
+// A varying with transform feedback enabled. If it's an array, either the whole array or one of its
 // elements specified by 'arrayIndex' can set to be enabled.
 struct TransformFeedbackVarying : public sh::Varying
 {

@@ -37,7 +37,7 @@ public:
                      EventChainPostVisitor& aVisitor) override;
 
   virtual nsresult BindToTree(nsIDocument* aDocument,
-                              nsIContent* aParent,
+                              nsIContent* apparent,
                               nsIContent* aBindingParent) override;
 
   virtual bool ParseAttribute(int32_t aNamespaceID,

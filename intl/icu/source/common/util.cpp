@@ -251,7 +251,7 @@ int32_t ICU_Utility::parsePattern(const UnicodeString& pat,
                 if (++ipat == pat.length()) {
                     return index; // success; c unparsed
                 }
-                // fall thru; process c again with next cpat
+                // fall through; process c again with next cpat
             }
         }
 
@@ -262,7 +262,7 @@ int32_t ICU_Utility::parsePattern(const UnicodeString& pat,
             if (ipat == pat.length()) {
                 return index; // success; c parsed
             }
-            // fall thru; get next cpat
+            // fall through; get next cpat
         }
 
         // match failure of literal

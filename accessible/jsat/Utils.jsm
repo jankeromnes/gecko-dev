@@ -427,7 +427,7 @@ var Logger = { // jshint ignore:line
   },
 
   logException: function logException(
-    aException, aErrorMessage = "An exception has occured") {
+    aException, aErrorMessage = "An exception has occurred") {
     try {
       let stackMessage = "";
       if (aException.stack) {
@@ -648,7 +648,7 @@ PivotContext.prototype = {
   /*
    * This is a list of the accessible's ancestry up to the common ancestor
    * of the accessible and the old accessible. It is useful for giving the
-   * user context as to where they are in the heirarchy.
+   * user context as to where they are in the hierarchy.
    */
   get newAncestry() {
     if (!this._newAncestry) {

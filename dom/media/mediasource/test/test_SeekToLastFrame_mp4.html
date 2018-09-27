@@ -21,7 +21,7 @@ runWithMSE(async (ms, el) => {
   el.play();
   // let seek to the last audio frame.
   el.currentTime = 1.532517;
-  await once(el, "seeked");
+  await once(el, "sought");
   ok(true, "seek completed");
   ms.endOfStream();
   await once(el, "ended");

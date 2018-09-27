@@ -73,7 +73,7 @@ PluginModuleChild* gChromeInstance = nullptr;
 } // namespace
 
 #ifdef XP_WIN
-// Used with fix for flash fullscreen window loosing focus.
+// Used with fix for flash fullscreen window losing focus.
 static bool gDelayFlashFocusReplyUntilEval = false;
 #endif
 
@@ -2089,7 +2089,7 @@ PluginModuleChild::CallWindowProcHook(int nCode, WPARAM wParam, LPARAM lParam)
         (InSendMessageEx(nullptr)&(ISMEX_REPLIED|ISMEX_SEND)) == ISMEX_SEND) {
         CWPSTRUCT* pCwp = reinterpret_cast<CWPSTRUCT*>(lParam);
         if (pCwp->message == WM_KILLFOCUS) {
-            // Fix for flash fullscreen window loosing focus. On single
+            // Fix for flash fullscreen window losing focus. On single
             // core systems, sync killfocus events need to be handled
             // after the flash fullscreen window procedure processes this
             // message, otherwise fullscreen focus will not work correctly.

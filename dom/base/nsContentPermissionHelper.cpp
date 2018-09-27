@@ -437,9 +437,9 @@ nsContentPermissionUtils::GetContentPermissionRequestParentById(const TabId& aTa
 
 /* static */ void
 nsContentPermissionUtils::NotifyRemoveContentPermissionRequestParent(
-  PContentPermissionRequestParent* aParent)
+  PContentPermissionRequestParent* apparent)
 {
-  auto it = ContentPermissionRequestParentMap().find(aParent);
+  auto it = ContentPermissionRequestParentMap().find(apparent);
   MOZ_ASSERT(it != ContentPermissionRequestParentMap().end());
 
   ContentPermissionRequestParentMap().erase(it);

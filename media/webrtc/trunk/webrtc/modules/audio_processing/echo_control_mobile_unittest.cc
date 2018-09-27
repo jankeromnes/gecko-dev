@@ -19,7 +19,7 @@
 namespace webrtc {
 namespace {
 
-// TODO(peah): Increase the number of frames to proces when the issue of
+// TODO(peah): Increase the number of frames to process when the issue of
 // non repeatable test results have been found.
 const int kNumFramesToProcess = 200;
 
@@ -109,8 +109,8 @@ void RunBitexactnessTest(int sample_rate_hz,
 
   // Compare the output with the reference. Only the first values of the output
   // from last frame processed are compared in order not having to specify all
-  // preceeding frames as testvectors. As the algorithm being tested has a
-  // memory, testing only the last frame implicitly also tests the preceeding
+  // preceding frames as testvectors. As the algorithm being tested has a
+  // memory, testing only the last frame implicitly also tests the preceding
   // frames.
   const float kElementErrorBound = 1.0f / 32768.0f;
   EXPECT_TRUE(test::VerifyDeinterleavedArray(

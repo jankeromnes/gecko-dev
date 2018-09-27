@@ -396,7 +396,7 @@
 //!
 //! ### Testing Code
 //!
-//! To test with all features both enabled and disabled, you can run theese commands:
+//! To test with all features both enabled and disabled, you can run these commands:
 //!
 //! ```text
 //! $ cargo test --no-default-features
@@ -487,7 +487,7 @@
 //! version of Rust is considered a minor breaking change, meaning *at a minimum* the minor version
 //! of `clap` will be bumped.
 //!
-//! In order to keep from being suprised of breaking changes, it is **highly** recommended to use
+//! In order to keep from being surprised of breaking changes, it is **highly** recommended to use
 //! the `~major.minor.patch` style in your `Cargo.toml`:
 //!
 //! ```toml

@@ -183,7 +183,7 @@ impl AttrValue {
     }
 
     pub fn from_atomic_tokens(atoms: Vec<Atom>) -> AttrValue {
-        // TODO(ajeffrey): effecient conversion of Vec<Atom> to String
+        // TODO(ajeffrey): efficient conversion of Vec<Atom> to String
         let tokens = String::from(str_join(&atoms, "\x20"));
         AttrValue::TokenList(tokens, atoms)
     }
@@ -569,7 +569,7 @@ pub fn parse_length(mut value: &str) -> LengthOrPercentageOrAuto {
     // Steps 8 to 13
     // We trim the string length to the minimum of:
     // 1. the end of the string
-    // 2. the first occurence of a '%' (U+0025 PERCENT SIGN)
+    // 2. the first occurrence of a '%' (U+0025 PERCENT SIGN)
     // 3. the second occurrence of a '.' (U+002E FULL STOP)
     // 4. the occurrence of a character that is neither a digit nor '%' nor '.'
     // Note: Step 10 is directly subsumed by FromStr::from_str

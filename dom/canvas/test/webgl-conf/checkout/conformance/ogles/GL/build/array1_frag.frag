@@ -28,5 +28,5 @@ precision mediump float;
 #endif
 void main()
 {
-    int array[2][2];  // two dimentional arrays are not allowed
+    int array[2][2];  // two dimensional arrays are not allowed
 }

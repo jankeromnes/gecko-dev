@@ -455,7 +455,7 @@ psutil_proc_cpu_times(PyObject *self, PyObject *args) {
 
     /*
      * User and kernel times are represented as a FILETIME structure
-     * wich contains a 64-bit value representing the number of
+     * which contains a 64-bit value representing the number of
      * 100-nanosecond intervals since January 1, 1601 (UTC):
      * http://msdn.microsoft.com/en-us/library/ms724284(VS.85).aspx
      * To convert it into a float representing the seconds that the
@@ -1219,7 +1219,7 @@ psutil_proc_threads(PyObject *self, PyObject *args) {
 
             /*
              * User and kernel times are represented as a FILETIME structure
-             * wich contains a 64-bit value representing the number of
+             * which contains a 64-bit value representing the number of
              * 100-nanosecond intervals since January 1, 1601 (UTC):
              * http://msdn.microsoft.com/en-us/library/ms724284(VS.85).aspx
              * To convert it into a float representing the seconds that the

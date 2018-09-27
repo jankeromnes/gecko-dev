@@ -16,7 +16,7 @@ function g() {
 // Wait until IonMonkey compilation finished.
 while(!(res = g()));
 
-// Check that we entered Ion succesfully.
+// Check that we entered Ion successfully.
 if (res !== true)
     crash("Cannot enter IonMonkey");
 

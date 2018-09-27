@@ -140,7 +140,7 @@ private:
     /**
      * Saves "offline-manifest-hash" meta data from the old offline cache
      * token to mOldManifestHashValue member to be compared on
-     * successfull load.
+     * successful load.
      */
     nsresult GetOldManifestContentHash(nsIRequest *aRequest);
     /**

@@ -494,7 +494,7 @@ struct MessageWindow {
         return NS_OK;
     }
 
-    // Destory:  Get rid of window and reset mHandle.
+    // Destroy:  Get rid of window and reset mHandle.
     NS_IMETHOD Destroy() {
         nsresult retval = NS_OK;
 

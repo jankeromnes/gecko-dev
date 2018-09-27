@@ -239,7 +239,7 @@ HTMLFormElement::Submit(ErrorResult& aRv)
     // aha, we have a pending submission that was not flushed
     // (this happens when form.submit() is called twice)
     // we have to delete it and build a new one since values
-    // might have changed inbetween (we emulate IE here, that's all)
+    // might have changed between (we emulate IE here, that's all)
     mPendingSubmission = nullptr;
   }
 
@@ -277,10 +277,10 @@ HTMLFormElement::ParseAttribute(int32_t aNamespaceID,
 }
 
 nsresult
-HTMLFormElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLFormElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                             nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
@@ -508,7 +508,7 @@ HTMLFormElement::PostHandleEvent(EventChainPostVisitor& aVisitor)
         // tell the form to flush a possible pending submission.
         // the reason is that the script returned false (the event was
         // not ignored) so if there is a stored submission, it needs to
-        // be submitted immediatelly.
+        // be submitted immediately.
         FlushPendingSubmission();
       }
     }

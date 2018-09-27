@@ -47,7 +47,7 @@ void WebRtcIlbcfix_CbUpdateBestIndex(
     shNew=WEBRTC_SPL_MIN(31,(*shTotMax)-CritNewSh);
   }
 
-  /* Compare the two criterias. If the new one is better,
+  /* Compare the two criteria. If the new one is better,
      calculate the gain and store this index as the new best one
   */
 

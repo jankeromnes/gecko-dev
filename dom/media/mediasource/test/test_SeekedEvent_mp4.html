@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>MSE: Check that seeked event is fired prior loadeddata</title>
+  <title>MSE: Check that sought event is fired prior loadeddata</title>
   <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
   <script type="text/javascript" src="mediasource.js"></script>
   <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
@@ -14,7 +14,7 @@ SimpleTest.waitForExplicitFinish();
 
 runWithMSE(async (ms, el) => {
   el.controls = true;
-  const events = ["seeked", "loadeddata", "playing"];
+  const events = ["sought", "loadeddata", "playing"];
   let eventCount = 0;
   events.forEach(type => el.addEventListener(type,
       () => is(events[eventCount++], type, "events must come in order")));
@@ -36,7 +36,7 @@ runWithMSE(async (ms, el) => {
   // TODO: readyState should be at least HAVE_CURRENTDATA, see bug 1367993.
   ok(el.readyState >= el.HAVE_METADATA, "readyState is HAVE_METADATA");
   el.currentTime = 2;
-  await Promise.all([once(el, "seeked"), once(el, "playing")]);
+  await Promise.all([once(el, "sought"), once(el, "playing")]);
   ok(true, "completed seek");
   is(eventCount, events.length, "Received expected number of events");
   SimpleTest.finish();

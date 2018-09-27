@@ -67,7 +67,7 @@ interface nsIWebProgressListener : nsISupports
    * State Type Flags
    *
    * These flags further describe the entity for which the state transition is
-   * occuring.  These flags are NOT mutually exclusive (i.e., an onStateChange
+   * occurring.  These flags are NOT mutually exclusive (i.e., an onStateChange
    * event may indicate some combination of these flags).
    *
    * STATE_IS_REQUEST
@@ -124,7 +124,7 @@ interface nsIWebProgressListener : nsISupports
    *   to partition the work that occurs when a document request completes.
    *
    * STATE_IS_REDIRECTED_DOCUMENT
-   *  Same as STATE_IS_DOCUMENT, but sent only after a redirect has occured.
+   *  Same as STATE_IS_DOCUMENT, but sent only after a redirect has occurred.
    *  Introduced in order not to confuse existing code with extra state change
    *  events. See |nsDocLoader::OnStartRequest| for more info.
    */
@@ -137,7 +137,7 @@ interface nsIWebProgressListener : nsISupports
   /**
    * State Modifier Flags
    *
-   * These flags further describe the transition which is occuring.  These
+   * These flags further describe the transition which is occurring.  These
    * flags are NOT mutually exclusive (i.e., an onStateChange event may
    * indicate some combination of these flags).
    *

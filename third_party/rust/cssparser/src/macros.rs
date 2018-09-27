@@ -124,7 +124,7 @@ macro_rules! cssparser_internal__to_lowercase {
 
 /// Implementation detail of match_ignore_ascii_case! and ascii_case_insensitive_phf_map! macros.
 ///
-/// **This function is not part of the public API. It can change or be removed between any verisons.**
+/// **This function is not part of the public API. It can change or be removed between any versions.**
 ///
 /// If `input` is larger than buffer, return `None`.
 /// Otherwise, return `input` ASCII-lowercased, using `buffer` as temporary space if necessary.

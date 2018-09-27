@@ -364,7 +364,7 @@ protected:
                                   bool aUnsafe);
 
   void Bind(Endpoint<PImageBridgeChild>&& aEndpoint);
-  void BindSameProcess(RefPtr<ImageBridgeParent> aParent);
+  void BindSameProcess(RefPtr<ImageBridgeParent> apparent);
 
   void SendImageBridgeThreadId();
 

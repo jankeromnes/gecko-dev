@@ -154,7 +154,7 @@ std::unique_ptr<GrFragmentProcessor> TwoPointConicalEffect::TestCreate(
                     kTestNativelyFocalBit   = (1 << 2),
                     kTestFocalOnCircleBit   = (1 << 3),
                     kTestSwappedBit         = (1 << 4);
-                    // We won't treat isWellDefined and isRadiusIncreasing specially beacuse they
+                    // We won't treat isWellDefined and isRadiusIncreasing specially because they
                     // should have high probability to be turned on and off as we're getting random
                     // radii and centers.
 

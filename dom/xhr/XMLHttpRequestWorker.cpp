@@ -1143,7 +1143,7 @@ EventRunnable::PreDispatch(WorkerPrivate* /* unused */)
         JS::Rooted<JSObject*> obj(cx, response.isObject() ?
                                   &response.toObject() : nullptr);
         if (obj && JS_IsArrayBufferObject(obj)) {
-          // Use cached response if the arraybuffer has been transfered.
+          // Use cached response if the arraybuffer has been transferred.
           if (mProxy->mArrayBufferResponseWasTransferred) {
             MOZ_ASSERT(JS_IsDetachedArrayBufferObject(obj));
             mUseCachedArrayBufferResponse = true;

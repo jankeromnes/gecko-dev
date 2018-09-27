@@ -162,7 +162,7 @@ public:
 
   // nsIFrame
   void Init(nsIContent*       aContent,
-            nsContainerFrame* aParent,
+            nsContainerFrame* apparent,
             nsIFrame*         aPrevInFlow) override;
   void DestroyFrom(nsIFrame* aDestructRoot, PostDestroyData& aPostDestroyData) override;
   ComputedStyle* GetAdditionalComputedStyle(int32_t aIndex) const override;

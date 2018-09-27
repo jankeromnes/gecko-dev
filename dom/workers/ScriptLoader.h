@@ -46,7 +46,7 @@ ChannelFromScriptURLMainThread(nsIPrincipal* aPrincipal,
 
 nsresult
 ChannelFromScriptURLWorkerThread(JSContext* aCx,
-                                 WorkerPrivate* aParent,
+                                 WorkerPrivate* apparent,
                                  const nsAString& aScriptURL,
                                  WorkerLoadInfo& aLoadInfo);
 

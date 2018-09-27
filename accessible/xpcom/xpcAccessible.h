@@ -25,7 +25,7 @@ class xpcAccessible : public nsIAccessible
 {
 public:
   // nsIAccessible
-  NS_IMETHOD GetParent(nsIAccessible** aParent) final;
+  NS_IMETHOD GetParent(nsIAccessible** apparent) final;
   NS_IMETHOD GetNextSibling(nsIAccessible** aNextSibling) final;
   NS_IMETHOD GetPreviousSibling(nsIAccessible** aPreviousSibling)
     final;

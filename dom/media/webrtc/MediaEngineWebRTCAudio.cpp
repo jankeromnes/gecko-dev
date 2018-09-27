@@ -684,7 +684,7 @@ MediaEngineWebRTCMicrophoneSource::Deallocate(const RefPtr<const AllocationHandl
   }
 
   if (mAllocations.IsEmpty()) {
-    // If empty, no callbacks to deliver data should be occuring
+    // If empty, no callbacks to deliver data should be occurring
     MOZ_ASSERT(mState != kReleased, "Source not allocated");
     MOZ_ASSERT(mState != kStarted, "Source not stopped");
 
@@ -914,7 +914,7 @@ MediaEngineWebRTCMicrophoneSource::Pull(const RefPtr<const AllocationHandle>& aH
       if (!PassThrough(aStream->GraphImpl()) && mPacketizerInput) {
         // Processing is active and is processed in chunks of 10ms through the
         // input packetizer. We allow for 10ms of silence on the track to
-        // accomodate the buffering worst-case.
+        // accommodate the buffering worst-case.
         delta += mPacketizerInput->PacketSize();
       }
     }

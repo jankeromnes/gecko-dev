@@ -36,7 +36,7 @@
  *	The memory map can be used as a read-only or read-write map. It is
  *	read-only by default as this provides total immunity to corruption.
  *	Using read-write mode offers much higher write performance, but adds
- *	the possibility for stray application writes thru pointers to silently
+ *	the possibility for stray application writes through pointers to silently
  *	corrupt the database. Of course if your application code is known to
  *	be bug-free (...) then this is not an issue.
  *

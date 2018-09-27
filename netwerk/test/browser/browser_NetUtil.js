@@ -27,7 +27,7 @@ var tests = [
 ];
 
 function test_asyncFetchBadCert() {
-  // Try a load from an untrusted cert, with errors supressed
+  // Try a load from an untrusted cert, with errors suppressed
   NetUtil.asyncFetch({
     uri: "https://untrusted.example.com",
     loadUsingSystemPrincipal: true

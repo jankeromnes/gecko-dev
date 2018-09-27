@@ -54,7 +54,7 @@ function isExactDomainMatch(part, debuggeeHost) {
  * Performs a binary search to insert a node into contents. Returns positive
  * number, index of the found child, or negative number, which can be used
  * to calculate a position where a new node can be inserted (`-index - 1`).
- * The matcher is a function that returns result of comparision of a node with
+ * The matcher is a function that returns result of comparison of a node with
  * lookup value.
  */
 function findNodeInContents(tree, matcher) {

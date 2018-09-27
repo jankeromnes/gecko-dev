@@ -10,7 +10,7 @@ RefCountedMap RefCountedClasses;
 void RefCountedInsideLambdaChecker::registerMatchers(MatchFinder *AstMatcher) {
   // We want to reject any code which captures a pointer to an object of a
   // refcounted type, and then lets that value escape. As a primitive analysis,
-  // we reject any occurances of the lambda as a template parameter to a class
+  // we reject any occurrences of the lambda as a template parameter to a class
   // (which could allow it to escape), as well as any presence of such a lambda
   // in a return value (either from lambdas, or in c++14, auto functions).
   //

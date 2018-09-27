@@ -1222,7 +1222,7 @@ nsExpatDriver::IsContainer(int32_t aTag) const
 }
 
 NS_IMETHODIMP_(bool)
-nsExpatDriver::CanContain(int32_t aParent,int32_t aChild) const
+nsExpatDriver::CanContain(int32_t apparent,int32_t aChild) const
 {
   return true;
 }

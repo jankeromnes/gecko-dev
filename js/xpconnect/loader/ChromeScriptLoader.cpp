@@ -297,14 +297,14 @@ ChromeUtils::CompileScript(GlobalObject& aGlobal,
     return promise.forget();
 }
 
-PrecompiledScript::PrecompiledScript(nsISupports* aParent, Handle<JSScript*> aScript,
+PrecompiledScript::PrecompiledScript(nsISupports* apparent, Handle<JSScript*> aScript,
                                      JS::ReadOnlyCompileOptions& aOptions)
-    : mParent(aParent)
+    : mParent(apparent)
     , mScript(aScript)
     , mURL(aOptions.filename())
     , mHasReturnValue(!aOptions.noScriptRval)
 {
-    MOZ_ASSERT(aParent);
+    MOZ_ASSERT(apparent);
     MOZ_ASSERT(aScript);
 
     mozilla::HoldJSObjects(this);

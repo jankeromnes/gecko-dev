@@ -2543,7 +2543,7 @@ bool OutputHLSL::handleExcessiveLoop(TInfoSinkBase &out, TIntermLoop *node)
     int limit            = 0;
     int increment        = 0;
 
-    // Parse index name and intial value
+    // Parse index name and initial value
     if (node->getInit())
     {
         TIntermDeclaration *init = node->getInit()->getAsDeclarationNode();

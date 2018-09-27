@@ -24,9 +24,9 @@ struct DOMPointInit;
 class DOMPointReadOnly : public nsWrapperCache
 {
 public:
-  DOMPointReadOnly(nsISupports* aParent, double aX, double aY,
+  DOMPointReadOnly(nsISupports* apparent, double aX, double aY,
                    double aZ, double aW)
-    : mParent(aParent)
+    : mParent(apparent)
     , mX(aX)
     , mY(aY)
     , mZ(aZ)
@@ -61,9 +61,9 @@ protected:
 class DOMPoint final : public DOMPointReadOnly
 {
 public:
-  explicit DOMPoint(nsISupports* aParent, double aX = 0.0, double aY = 0.0,
+  explicit DOMPoint(nsISupports* apparent, double aX = 0.0, double aY = 0.0,
                     double aZ = 0.0, double aW = 1.0)
-    : DOMPointReadOnly(aParent, aX, aY, aZ, aW)
+    : DOMPointReadOnly(apparent, aX, aY, aZ, aW)
   {}
 
   static already_AddRefed<DOMPoint>

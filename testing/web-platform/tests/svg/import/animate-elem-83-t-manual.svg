@@ -43,7 +43,7 @@
       <p>
         The third test validates a simple values-animation on a path's d attribute
         made of M, C and Z commands where the values attribute is specified and
-        specifies three seperate values.
+        specifies three separate values.
         The attribute is compatible with the path element's d attribute.
       </p>
       <p>
@@ -72,7 +72,7 @@
     </d:operatorScript>
     <d:passCriteria xmlns="http://www.w3.org/1999/xhtml">
       <p>The test consists of six sub-tests.  In each sub-test, the light gray filled
-      path must continously morph its shape, starting one second after the document
+      path must continuously morph its shape, starting one second after the document
       load and continuing for three seconds.  In all sub-tests except for #3, there are
       two orange reference shape outlines between which the gray path must morph.
       In sub-test #3, there are three reference shapes.  The test passes if each of the

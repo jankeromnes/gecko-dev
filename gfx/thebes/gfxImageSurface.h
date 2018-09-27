@@ -54,7 +54,7 @@ public:
      * Construct an image surface, with a specified stride and allowing the
      * allocation of more memory than required for the storage of the surface
      * itself.  When aStride and aMinimalAllocation are <=0, this constructor
-     * is the equivalent of the preceeding one.
+     * is the equivalent of the preceding one.
      *
      * @param format Format of the data
      * @param aSize The size of the buffer
@@ -114,7 +114,7 @@ public:
 
     /**
      * Fast copy from a source surface; returns TRUE if successful, FALSE otherwise
-     * Assumes that the format of this surface is compatable with aSurface
+     * Assumes that the format of this surface is compatible with aSurface
      */
     bool CopyFrom (mozilla::gfx::SourceSurface *aSurface);
 
@@ -177,7 +177,7 @@ protected:
 class gfxSubimageSurface : public gfxImageSurface {
 protected:
     friend class gfxImageSurface;
-    gfxSubimageSurface(gfxImageSurface* aParent,
+    gfxSubimageSurface(gfxImageSurface* apparent,
                        unsigned char* aData,
                        const mozilla::gfx::IntSize& aSize,
                        gfxImageFormat aFormat);

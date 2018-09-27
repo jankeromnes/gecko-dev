@@ -61,7 +61,7 @@ add_task(async function test_error_attributes() {
 
   try {
     await OS.File.open(fpath, {truncate: true}, {});
-    Assert.ok(false, "Opening path suceeded (it should fail) " + fpath);
+    Assert.ok(false, "Opening path succeeded (it should fail) " + fpath);
   } catch (err) {
     Assert.ok(err instanceof OS.File.Error);
     Assert.ok(err.becauseNoSuchFile);

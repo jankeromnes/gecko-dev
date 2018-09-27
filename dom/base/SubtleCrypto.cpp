@@ -23,8 +23,8 @@ NS_INTERFACE_MAP_END
 
 
 
-SubtleCrypto::SubtleCrypto(nsIGlobalObject* aParent)
-  : mParent(aParent)
+SubtleCrypto::SubtleCrypto(nsIGlobalObject* apparent)
+  : mParent(apparent)
 {
 }
 

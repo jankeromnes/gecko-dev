@@ -24,7 +24,7 @@ static constexpr float kMinLevel = 1.995262314968883e-13f;
 
 // Calculates the normalized RMS value from a mean square value. The input
 // should be the sum of squared samples divided by the number of samples. The
-// value will be normalized to full range before computing the RMS, wich is
+// value will be normalized to full range before computing the RMS, which is
 // returned as a negated dBfs. That is, 0 is full amplitude while 127 is very
 // faint.
 int ComputeRms(float mean_square) {

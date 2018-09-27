@@ -1,7 +1,7 @@
 // This tests that attempting to perform ModuleDeclarationInstantation a second
 // time after a failure re-throws the same error.
 //
-// The first attempt fails becuase module 'a' is not available. The second
+// The first attempt fails because module 'a' is not available. The second
 // attempt fails because of the previous failure.
 //
 // This test exercises the path where the previously instantiated module is

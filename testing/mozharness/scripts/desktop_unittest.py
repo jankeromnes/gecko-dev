@@ -469,7 +469,7 @@ class DesktopUnittest(TestingMixin, MercurialScript, MozbaseMixin,
                 suites = dict((key, all_suites.get(key)) for key in
                               specified_suites if key in all_suites.keys())
         else:
-            if c.get('run_all_suites'):  # needed if you dont specify any suites
+            if c.get('run_all_suites'):  # needed if you don't specify any suites
                 suites = all_suites
             else:
                 suites = self.query_per_test_category_suites(category, all_suites)

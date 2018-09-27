@@ -218,7 +218,7 @@ add_UITour_task(async function test_show_appMenu_and_highligh_buttonOnPageAction
   gContentAPI.showHighlight("pageAction-sendToDevice");
   await pageActionPanelShownPromise;
   await highlightVisiblePromise;
-  is(appMenu.state, "open", "Shouldn't close the app menu because it is opened explictly by api user.");
+  is(appMenu.state, "open", "Shouldn't close the app menu because it is opened explicitly by api user.");
   is(pageActionPanel.state, "open", "Should open the page action panel to highlight the sendToDevice button");
   is(getShowHighlightTargetName(), "pageAction-sendToDevice", "Should highlight the sendToDevice button on the page action panel");
 
@@ -262,7 +262,7 @@ add_UITour_task(async function test_show_pageActionPanel_and_showInfo_buttonOnAp
   await appMenuShownPromise;
   await tooltipVisiblePromise;
   is(appMenu.state, "open", "Should open the app menu to show info on the privateWindow button");
-  is(pageActionPanel.state, "open", "Shouldn't close the page action panel because it is opened explictly by api user.");
+  is(pageActionPanel.state, "open", "Shouldn't close the page action panel because it is opened explicitly by api user.");
   is(getShowInfoTargetName(), "privateWindow", "Should show info tooltip on the privateWindow button on the app menu");
 
   // Test hiding the page action panel wouldn't affect the info tooltip on the app menu

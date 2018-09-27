@@ -125,7 +125,7 @@ public:
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(URLSearchParams)
 
-  explicit URLSearchParams(nsISupports* aParent,
+  explicit URLSearchParams(nsISupports* apparent,
                            URLSearchParamsObserver* aObserver=nullptr);
 
   // WebIDL methods

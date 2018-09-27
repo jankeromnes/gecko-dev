@@ -15,7 +15,7 @@ SimpleTest.waitForExplicitFinish();
 SimpleTest.requestLongerTimeout(3);
 
 /* Description of the test:
- * We load a page inlcuding a worker, a shared worker as well as a
+ * We load a page including a worker, a shared worker as well as a
  * service worker with a CSP of:
  *   >> worker-src https://example.com; child-src 'none'; script-src 'nonce-foo'
  * and make sure that worker-src governs these three kinds of workers correctly.

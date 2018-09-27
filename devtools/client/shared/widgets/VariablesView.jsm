@@ -1410,8 +1410,8 @@ Scope.prototype = {
    * @return boolean
    *         True if the specified item is a direct child, false otherwise.
    */
-  isChildOf: function(aParent) {
-    return this.ownerView == aParent;
+  isChildOf: function(apparent) {
+    return this.ownerView == apparent;
   },
 
   /**
@@ -1423,14 +1423,14 @@ Scope.prototype = {
    * @return boolean
    *         True if the specified item is a descendant, false otherwise.
    */
-  isDescendantOf: function(aParent) {
-    if (this.isChildOf(aParent)) {
+  isDescendantOf: function(apparent) {
+    if (this.isChildOf(apparent)) {
       return true;
     }
 
     // Recurse to parent if it is a Scope, Variable, or Property.
     if (this.ownerView instanceof Scope) {
-      return this.ownerView.isDescendantOf(aParent);
+      return this.ownerView.isDescendantOf(apparent);
     }
 
     return false;
@@ -1511,7 +1511,7 @@ Scope.prototype = {
     }
     this.expanded ^= 1;
 
-    // Make sure the scope and its contents are visibile.
+    // Make sure the scope and its contents are visible.
     for (const [, variable] of this._store) {
       variable.header = true;
       variable._matched = true;
@@ -1668,7 +1668,7 @@ Scope.prototype = {
    * @return boolean
    */
   get focusable() {
-    // Check if this target node is actually visibile.
+    // Check if this target node is actually visible.
     if (!this._nameString ||
         !this._isContentVisible ||
         !this._isHeaderVisible ||

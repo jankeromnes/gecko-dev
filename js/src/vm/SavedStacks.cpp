@@ -1419,7 +1419,7 @@ SavedStacks::insertFrames(JSContext* cx, MutableHandleSavedFrame frame,
     // stack all the way to the end, this remains null.
     RootedSavedFrame parent(cx, nullptr);
 
-    // Choose the right frame iteration strategy to accomodate both
+    // Choose the right frame iteration strategy to accommodate both
     // evalInFramePrev links and the LiveSavedFrameCache. For background, see
     // the LiveSavedFrameCache comments in Stack.h.
     //

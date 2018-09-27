@@ -155,7 +155,7 @@ const loadListener = {
       let documentURI = content.document.documentURI;
       logger.debug(truncate`Check readyState ${readyState} for ${documentURI}`);
       // If the page load has already finished, don't setup listeners and
-      // timers but return immediatelly.
+      // timers but return immediately.
       if (this.handleReadyState(readyState, documentURI)) {
         return;
       }

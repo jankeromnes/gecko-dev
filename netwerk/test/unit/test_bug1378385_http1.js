@@ -139,7 +139,7 @@ function setup_http_server()
   server.registerPathHandler('/', function(metadata, response)
   {
     var id = metadata.getHeader("X-ID");
-    log("Server recived the response id=" + id);
+    log("Server received the response id=" + id);
 
     response.processAsync();
     response.setHeader("X-ID", id);

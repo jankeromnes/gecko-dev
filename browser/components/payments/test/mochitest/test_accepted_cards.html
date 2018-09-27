@@ -44,7 +44,7 @@ add_task(async function test_reConnected() {
   let removed = container.removeChild(acceptedElem);
   container.appendChild(removed);
   let newItemsCount = acceptedElem.querySelectorAll(".accepted-cards-item").length;
-  is(itemsCount, newItemsCount, "Number of items doesnt changed when re-connected");
+  is(itemsCount, newItemsCount, "Number of items doesn't changed when re-connected");
 });
 
 add_task(async function test_someAccepted() {

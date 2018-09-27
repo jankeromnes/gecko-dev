@@ -32,7 +32,7 @@ function tokenAtTextPosition(cm, {
     type: token.type
   };
 } // The strategy of querying codeMirror tokens was borrowed
-// from Chrome's inital implementation in JavaScriptSourceFrame.js#L414
+// from Chrome's initial implementation in JavaScriptSourceFrame.js#L414
 
 
 function getExpressionFromCoords(cm, coord) {

@@ -77,7 +77,7 @@ public:
 
   /**
    * retrieve the value for a key.
-   * @param aKey the key to retreive
+   * @param aKey the key to retrieve
    * @param aData data associated with this key will be placed at this
    *   pointer.  If you only need to check if the key exists, aData
    *   may be null.

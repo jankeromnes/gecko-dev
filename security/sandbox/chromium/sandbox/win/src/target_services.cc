@@ -39,7 +39,7 @@ bool FlushRegKey(HKEY root) {
 
 // This function forces advapi32.dll to release some internally cached handles
 // that were made during calls to RegOpenkey and RegOpenKeyEx if it is called
-// with a more restrictive token. Returns true if the flushing is succesful
+// with a more restrictive token. Returns true if the flushing is successful
 // although this behavior is undocumented and there is no guarantee that in
 // fact this will happen in future versions of windows.
 bool FlushCachedRegHandles() {

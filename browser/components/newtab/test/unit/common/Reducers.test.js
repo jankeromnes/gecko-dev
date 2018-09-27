@@ -248,7 +248,7 @@ describe("Reducers", () => {
       const nextState = Dialog(INITIAL_STATE.Dialog, action);
       assert.isFalse(nextState.visible);
     });
-    it("should return inital state on DELETE_HISTORY_URL", () => {
+    it("should return initial state on DELETE_HISTORY_URL", () => {
       const action = {type: at.DELETE_HISTORY_URL};
       const nextState = Dialog(INITIAL_STATE.Dialog, action);
 

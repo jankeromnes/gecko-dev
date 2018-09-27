@@ -493,7 +493,7 @@ nsHttpAuthNode::SetAuthEntry(const char *path,
         if (!entry)
             return NS_ERROR_OUT_OF_MEMORY;
 
-        // We want the latest identity be at the begining of the list so that
+        // We want the latest identity be at the beginning of the list so that
         // the newest working credentials are sent first on new requests.
         // Changing a realm is sometimes used to "timeout" authrozization.
         mList.InsertElementAt(0, entry);

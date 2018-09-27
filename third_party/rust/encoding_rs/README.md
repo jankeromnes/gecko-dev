@@ -427,7 +427,7 @@ used in Firefox.
 ### 0.3
 
 * Change the references to the instances of `Encoding` from `const` to `static`
-  to make the referents unique across crates that use the refernces.
+  to make the referents unique across crates that use the references.
 * Introduce non-reference-typed `FOO_INIT` instances of `Encoding` to allow
   foreign crates to initialize `static` arrays with references to `Encoding`
   instances even under Rust's constraints that prohibit the initialization of

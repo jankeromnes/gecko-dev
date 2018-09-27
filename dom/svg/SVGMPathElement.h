@@ -43,7 +43,7 @@ public:
 
   // nsIContent interface
   virtual nsresult Clone(dom::NodeInfo*, nsINode** aResult) const override;
-  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent) override;
   virtual void UnbindFromTree(bool aDeep, bool aNullParent) override;
 
@@ -104,9 +104,9 @@ protected:
 
   virtual StringAttributesInfo GetStringInfo() override;
 
-  void UpdateHrefTarget(nsIContent* aParent, const nsAString& aHrefStr);
+  void UpdateHrefTarget(nsIContent* apparent, const nsAString& aHrefStr);
   void UnlinkHrefTarget(bool aNotifyParent);
-  void NotifyParentOfMpathChange(nsIContent* aParent);
+  void NotifyParentOfMpathChange(nsIContent* apparent);
 
   enum { HREF, XLINK_HREF };
   nsSVGString        mStringAttributes[2];

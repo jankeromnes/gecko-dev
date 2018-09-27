@@ -31,7 +31,7 @@ been as carefully checked for errors as the normal dictionaries and
 thus may contain misspelled or invalid words; and (2) contain
 uncommon, yet valid, words that might cause problems as they are
 likely to be misspellings of more common words (for example, "ort" and
-"calender").
+"calendar").
 
 To get an idea of the difference in size, here are 25 random words
 only found in the large dictionary for American English:

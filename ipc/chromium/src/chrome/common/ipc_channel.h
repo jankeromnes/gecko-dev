@@ -52,7 +52,7 @@ class Channel {
     // message of this size or bigger results in a channel error.
     kMaximumMessageSize = 256 * 1024 * 1024,
 
-    // Ammount of data to read at once from the pipe.
+    // Amount of data to read at once from the pipe.
     kReadBufferSize = 4 * 1024,
 
     // Maximum size of a message that we allow to be copied (rather than moved).

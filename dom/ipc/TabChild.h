@@ -580,7 +580,7 @@ public:
   bool DeallocPPluginWidgetChild(PPluginWidgetChild* aActor) override;
 
 #ifdef XP_WIN
-  nsresult CreatePluginWidget(nsIWidget* aParent, nsIWidget** aOut);
+  nsresult CreatePluginWidget(nsIWidget* apparent, nsIWidget** aOut);
 #endif
 
   virtual PPaymentRequestChild*

@@ -28,7 +28,7 @@ async function initTest(test, token) {
   info(`${v._name}: seeking to the end of the media.`);
   v.currentTime = 3.0 * v.duration;
   // Wait for 'seeked' and 'ended' to be fired.
-  await Promise.all([once(v, "seeked"), once(v, "ended")]);
+  await Promise.all([once(v, "sought"), once(v, "ended")]);
   // Check currentTime is near the end of the media.
   ok(Math.abs(v.duration - v.currentTime) < 0.1,
      "Should be at end of media for " + v._name + " t=" + v.currentTime + " d=" + v.duration);

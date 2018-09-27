@@ -23,7 +23,7 @@ public:
   NS_INLINE_DECL_CYCLE_COLLECTING_NATIVE_REFCOUNTING(PlacesWeakCallbackWrapper)
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_NATIVE_CLASS(PlacesWeakCallbackWrapper)
 
-  explicit PlacesWeakCallbackWrapper(nsISupports* aParent,
+  explicit PlacesWeakCallbackWrapper(nsISupports* apparent,
                                      PlacesEventCallback& aCallback);
 
   static already_AddRefed<PlacesWeakCallbackWrapper>

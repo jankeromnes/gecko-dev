@@ -255,7 +255,7 @@ protected:
   virtual ~MatchPattern() = default;
 
 private:
-  explicit MatchPattern(nsISupports* aParent) : mParent(aParent) {}
+  explicit MatchPattern(nsISupports* apparent) : mParent(apparent) {}
 
   void Init(JSContext* aCx, const nsAString& aPattern, bool aIgnorePath,
             bool aRestrictSchemes, ErrorResult& aRv);
@@ -344,8 +344,8 @@ protected:
   virtual ~MatchPatternSet() = default;
 
 private:
-  explicit MatchPatternSet(nsISupports* aParent, ArrayType&& aPatterns)
-    : mParent(aParent)
+  explicit MatchPatternSet(nsISupports* apparent, ArrayType&& aPatterns)
+    : mParent(apparent)
     , mPatterns(std::forward<ArrayType>(aPatterns))
   {}
 

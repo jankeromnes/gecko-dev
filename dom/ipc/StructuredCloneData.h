@@ -201,11 +201,11 @@ public:
   // by a previous call to Write() into ClonedMessageData IPC representation.
   // (Blobs are represented in IPC by IPCBlob actors, so we need the parent to
   // be able to create them.)
-  bool BuildClonedMessageDataForParent(nsIContentParent* aParent,
+  bool BuildClonedMessageDataForParent(nsIContentParent* apparent,
                                        ClonedMessageData& aClonedData);
   bool BuildClonedMessageDataForChild(nsIContentChild* aChild,
                                       ClonedMessageData& aClonedData);
-  bool BuildClonedMessageDataForBackgroundParent(mozilla::ipc::PBackgroundParent* aParent,
+  bool BuildClonedMessageDataForBackgroundParent(mozilla::ipc::PBackgroundParent* apparent,
                                                  ClonedMessageData& aClonedData);
   bool BuildClonedMessageDataForBackgroundChild(mozilla::ipc::PBackgroundChild* aChild,
                                                 ClonedMessageData& aClonedData);

@@ -19,9 +19,9 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(SpeechSynthesisVoice)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-SpeechSynthesisVoice::SpeechSynthesisVoice(nsISupports* aParent,
+SpeechSynthesisVoice::SpeechSynthesisVoice(nsISupports* apparent,
                                            const nsAString& aUri)
-  : mParent(aParent)
+  : mParent(apparent)
   , mUri(aUri)
 {
 }

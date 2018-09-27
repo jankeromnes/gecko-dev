@@ -544,7 +544,7 @@
 
 2.3. Microoptimizations
 
-  Internal event list maintainance no longer use the antipattern where
+  Internal event list maintenance no longer use the antipattern where
   we have one function with multiple totally independent behaviors
   depending on an argument:
       #define OP1 1
@@ -590,7 +590,7 @@
 
 3.1. Linux-specific improvements
 
-  The logic for deciding which arguements to use with epoll_ctl() is now
+  The logic for deciding which arguments to use with epoll_ctl() is now
   a table-driven lookup, rather than the previous pile of cascading
   branches.  This should minimize epoll_ctl() calls and make the epoll
   code run a little faster on change-heavy loads.

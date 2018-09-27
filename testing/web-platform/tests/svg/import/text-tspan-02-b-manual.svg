@@ -18,14 +18,14 @@
       <ul>
         <li>
           Tests the case where more characters than rotate values are
-          supplied. In this case the last rotate value should propogate to
+          supplied. In this case the last rotate value should propagate to
           subsequent characters in the element and child tspan elements that
           do not contain a rotate value.
         </li>
         <li>
           Tests the case where more values than characters are supplied. In
           this case each character should be rotated by the designated value
-          remaining unused values propogate to any child tspan elements that
+          remaining unused values propagate to any child tspan elements that
           do not contain a rotate value.
         </li>
         <li>

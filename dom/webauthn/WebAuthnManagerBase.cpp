@@ -16,11 +16,11 @@ namespace dom {
 NS_NAMED_LITERAL_STRING(kDeactivateEvent, "deactivate");
 NS_NAMED_LITERAL_STRING(kVisibilityChange, "visibilitychange");
 
-WebAuthnManagerBase::WebAuthnManagerBase(nsPIDOMWindowInner* aParent)
-  : mParent(aParent)
+WebAuthnManagerBase::WebAuthnManagerBase(nsPIDOMWindowInner* apparent)
+  : mParent(apparent)
 {
   MOZ_ASSERT(NS_IsMainThread());
-  MOZ_ASSERT(aParent);
+  MOZ_ASSERT(apparent);
 }
 
 WebAuthnManagerBase::~WebAuthnManagerBase()

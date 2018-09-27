@@ -335,7 +335,7 @@ pkix_pl_Pk11CertStore_ImportCrl(
                               plContext),
             PKIX_LISTGETITEMFAILED);
 
-        /* Delete crl from the list to keep controll of the
+        /* Delete crl from the list to keep control of the
          * last reference. crl need to be destroyed right after
          * it released the ownership of the crl der. */
         PKIX_CHECK(

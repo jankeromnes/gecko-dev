@@ -335,7 +335,7 @@ ArchiveReader::ExtractItemToStream(const MarItem *item, FILE *fp)
     }
 
     // The return value of xz_dec_run is not XZ_OK and if it isn't XZ_STREAM_END
-    // an error has occured.
+    // an error has occurred.
     if (xz_rv != XZ_STREAM_END) {
       ret = UNEXPECTED_XZ_ERROR;
       break;

@@ -144,7 +144,7 @@ class TestFrameBuffer2 : public ::testing::Test {
       max_wait_time_ = max_wait_time;
       trigger_extract_event_.Set();
       crit_.Leave();
-      // Make sure |crit_| is aquired by |extract_thread_| before returning.
+      // Make sure |crit_| is acquired by |extract_thread_| before returning.
       crit_acquired_event_.Wait(rtc::Event::kForever);
     }
   }

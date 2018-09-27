@@ -25,7 +25,7 @@ public:
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(AuthenticatorResponse)
 
-  explicit AuthenticatorResponse(nsPIDOMWindowInner* aParent);
+  explicit AuthenticatorResponse(nsPIDOMWindowInner* apparent);
 
 protected:
   virtual ~AuthenticatorResponse();

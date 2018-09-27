@@ -747,7 +747,7 @@ typedef uint64_t GrFence;
  * Used to include or exclude specific GPU path renderers for testing purposes.
  */
 enum class GpuPathRenderers {
-    kNone              = 0, // Always use sofware masks and/or GrDefaultPathRenderer.
+    kNone              = 0, // Always use software masks and/or GrDefaultPathRenderer.
     kDashLine          = 1 << 0,
     kStencilAndCover   = 1 << 1,
     kMSAA              = 1 << 2,

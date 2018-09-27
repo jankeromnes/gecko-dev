@@ -1825,7 +1825,7 @@
 "fail-if": "invalid-lang-code"},
 
 {"description": "valid lang attribute 'dum'",
-"input": "<span lang=dum>",
+"input": "<span lang=dumb>",
 "fail-if": "invalid-lang-code"},
 
 {"description": "valid lang attribute 'pt'",

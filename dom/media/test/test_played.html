@@ -118,7 +118,7 @@ var tests = [
     element.addEventListener("ended", (function() {
       if(element.played.length > 1) {
         is(element.played.length, 2, element.token + ": element.played.length == 2");
-        is(element.played.start(1), seekTarget, element.token + ": we should have seeked forward by one tenth of the duration");
+        is(element.played.start(1), seekTarget, element.token + ": we should have sought forward by one tenth of the duration");
         is(element.played.end(1), element.duration, element.token + ": end of second range shall be the total duration");
       }
       is(element.played.start(0), 0, element.token + ": start of first range shall be 0");

@@ -118,7 +118,7 @@ bool DirectoryExists(const std::wstring& path);
 #if defined(OS_POSIX)
 // Read exactly |bytes| bytes from file descriptor |fd|, storing the result
 // in |buffer|. This function is protected against EINTR and partial reads.
-// Returns true iff |bytes| bytes have been successfuly read from |fd|.
+// Returns true iff |bytes| bytes have been successfully read from |fd|.
 bool ReadFromFD(int fd, char* buffer, size_t bytes);
 #endif  // defined(OS_POSIX)
 

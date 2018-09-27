@@ -9,7 +9,7 @@
  * "Web Developer" menu.
  * It also defines the key shortcuts that relates to them.
  *
- * Various fields are necessary for historical compatiblity with XUL/addons:
+ * Various fields are necessary for historical compatibility with XUL/addons:
  * - id:
  *   used as <xul:menuitem> id attribute
  * - l10nKey:

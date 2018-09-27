@@ -377,7 +377,7 @@ function getNumberingSystems(locale) {
     var defaultNumberingSystem = intl_numberingSystem(locale);
     return [
         defaultNumberingSystem,
-        "arab", "arabext", "bali", "beng", "deva",
+        "arab", "arabext", "bali", "being", "deva",
         "fullwide", "gujr", "guru", "hanidec", "khmr",
         "knda", "laoo", "latn", "limb", "mlym",
         "mong", "mymr", "orya", "tamldec", "telu",

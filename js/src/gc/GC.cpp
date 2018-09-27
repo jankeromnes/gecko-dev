@@ -8522,7 +8522,7 @@ js::NewRealm(JSContext* cx, JSPrincipals* principals, const JS::RealmOptions& op
     if (zoneHolder) {
         rt->gc.zones().infallibleAppend(zoneHolder.release());
 
-        // Lazily set the runtime's sytem zone.
+        // Lazily set the runtime's system zone.
         if (compSpec == JS::CompartmentSpecifier::NewCompartmentInSystemZone) {
             MOZ_RELEASE_ASSERT(!rt->gc.systemZone);
             rt->gc.systemZone = zone;

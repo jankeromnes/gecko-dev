@@ -163,7 +163,7 @@ promise_test(async t => {
   div.style.animation = 'anim1 100s, notyet 100s';
   let animations = div.getAnimations();
   assert_equals(animations.length, 1,
-    'getAnimations initally only returns Animations for CSS Animations whose'
+    'getAnimations initially only returns Animations for CSS Animations whose'
     + ' animation-name is found');
 
   await animations[0].ready;

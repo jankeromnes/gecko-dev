@@ -38,7 +38,7 @@ typedef enum {
   ULScript_Syriac              = 7,  // Syrc
   ULScript_Thaana              = 8,  // Thaa
   ULScript_Devanagari          = 9,  // Deva
-  ULScript_Bengali             = 10,  // Beng
+  ULScript_Bengali             = 10,  // Being
   ULScript_Gurmukhi            = 11,  // Guru
   ULScript_Gujarati            = 12,  // Gujr
   ULScript_Oriya               = 13,  // Orya

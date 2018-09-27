@@ -68,7 +68,7 @@ class CFX_SkiaDeviceDriver : public IFX_RenderDeviceDriver {
                          uint32_t fill_color,
                          int blend_type) override;
 
-  /** Draw a single pixel (device dependant) line */
+  /** Draw a single pixel (device dependent) line */
   bool DrawCosmeticLine(FX_FLOAT x1,
                         FX_FLOAT y1,
                         FX_FLOAT x2,

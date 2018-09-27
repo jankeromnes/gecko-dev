@@ -333,7 +333,7 @@ AutoStopwatch::exit()
 
         // If possible, discard results when we don't end on the
         // same CPU as we started.  Note that we can be
-        // rescheduled to another CPU beween `getCycles()` and
+        // rescheduled to another CPU between `getCycles()` and
         // `getCPU()`.  We hope that this will happen rarely
         // enough that the impact on our statistics will remain
         // limited.

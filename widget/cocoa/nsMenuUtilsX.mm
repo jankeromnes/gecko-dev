@@ -178,13 +178,13 @@ bool nsMenuUtilsX::NodeIsHiddenOrCollapsed(nsIContent* inContent)
 
 // Determines how many items are visible among the siblings in a menu that are
 // before the given child. This will not count the application menu.
-int nsMenuUtilsX::CalculateNativeInsertionPoint(nsMenuObjectX* aParent,
+int nsMenuUtilsX::CalculateNativeInsertionPoint(nsMenuObjectX* apparent,
                                                 nsMenuObjectX* aChild)
 {
   int insertionPoint = 0;
   nsMenuObjectTypeX parentType = aParent->MenuObjectType();
   if (parentType == eMenuBarObjectType) {
-    nsMenuBarX* menubarParent = static_cast<nsMenuBarX*>(aParent);
+    nsMenuBarX* menubarParent = static_cast<nsMenuBarX*>(apparent);
     uint32_t numMenus = menubarParent->GetMenuCount();
     for (uint32_t i = 0; i < numMenus; i++) {
       nsMenuX* currMenu = menubarParent->GetMenuAt(i);
@@ -198,9 +198,9 @@ int nsMenuUtilsX::CalculateNativeInsertionPoint(nsMenuObjectX* aParent,
            parentType == eStandaloneNativeMenuObjectType) {
     nsMenuX* menuParent;
     if (parentType == eSubmenuObjectType)
-      menuParent = static_cast<nsMenuX*>(aParent);
+      menuParent = static_cast<nsMenuX*>(apparent);
     else
-      menuParent = static_cast<nsStandaloneNativeMenu*>(aParent)->GetMenuXObject();
+      menuParent = static_cast<nsStandaloneNativeMenu*>(apparent)->GetMenuXObject();
 
     uint32_t numItems = menuParent->GetItemCount();
     for (uint32_t i = 0; i < numItems; i++) {

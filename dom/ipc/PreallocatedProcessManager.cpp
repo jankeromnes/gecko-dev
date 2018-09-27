@@ -39,10 +39,10 @@ public:
   NS_DECL_NSIOBSERVER
 
   // See comments on PreallocatedProcessManager for these methods.
-  void AddBlocker(ContentParent* aParent);
-  void RemoveBlocker(ContentParent* aParent);
+  void AddBlocker(ContentParent* apparent);
+  void RemoveBlocker(ContentParent* apparent);
   already_AddRefed<ContentParent> Take();
-  bool Provide(ContentParent* aParent);
+  bool Provide(ContentParent* apparent);
 
 private:
   static mozilla::StaticRefPtr<PreallocatedProcessManagerImpl> sSingleton;
@@ -177,16 +177,16 @@ PreallocatedProcessManagerImpl::Take()
 }
 
 bool
-PreallocatedProcessManagerImpl::Provide(ContentParent* aParent)
+PreallocatedProcessManagerImpl::Provide(ContentParent* apparent)
 {
   if (mEnabled && !mShutdown && !mPreallocatedProcess) {
-    mPreallocatedProcess = aParent;
+    mPreallocatedProcess = apparent;
   }
 
   // We might get a call from both NotifyTabDestroying and NotifyTabDestroyed with the same
   // ContentParent. Returning true here for both calls is important to avoid the cached process
   // to be destroyed.
-  return aParent == mPreallocatedProcess;
+  return apparent == mPreallocatedProcess;
 }
 
 void
@@ -201,7 +201,7 @@ PreallocatedProcessManagerImpl::Enable()
 }
 
 void
-PreallocatedProcessManagerImpl::AddBlocker(ContentParent* aParent)
+PreallocatedProcessManagerImpl::AddBlocker(ContentParent* apparent)
 {
   uint64_t childID = aParent->ChildID();
   MOZ_ASSERT(!mBlockers.Contains(childID));
@@ -209,7 +209,7 @@ PreallocatedProcessManagerImpl::AddBlocker(ContentParent* aParent)
 }
 
 void
-PreallocatedProcessManagerImpl::RemoveBlocker(ContentParent* aParent)
+PreallocatedProcessManagerImpl::RemoveBlocker(ContentParent* apparent)
 {
   uint64_t childID = aParent->ChildID();
   MOZ_ASSERT(mBlockers.Contains(childID));
@@ -314,15 +314,15 @@ inline PreallocatedProcessManagerImpl* GetPPMImpl()
 }
 
 /* static */ void
-PreallocatedProcessManager::AddBlocker(ContentParent* aParent)
+PreallocatedProcessManager::AddBlocker(ContentParent* apparent)
 {
-  GetPPMImpl()->AddBlocker(aParent);
+  GetPPMImpl()->AddBlocker(apparent);
 }
 
 /* static */ void
-PreallocatedProcessManager::RemoveBlocker(ContentParent* aParent)
+PreallocatedProcessManager::RemoveBlocker(ContentParent* apparent)
 {
-  GetPPMImpl()->RemoveBlocker(aParent);
+  GetPPMImpl()->RemoveBlocker(apparent);
 }
 
 /* static */ already_AddRefed<ContentParent>
@@ -332,9 +332,9 @@ PreallocatedProcessManager::Take()
 }
 
 /* static */ bool
-PreallocatedProcessManager::Provide(ContentParent* aParent)
+PreallocatedProcessManager::Provide(ContentParent* apparent)
 {
-  return GetPPMImpl()->Provide(aParent);
+  return GetPPMImpl()->Provide(apparent);
 }
 
 } // namespace mozilla

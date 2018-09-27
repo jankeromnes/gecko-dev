@@ -130,7 +130,7 @@ class PageAction extends EventEmitter {
    * Retreives a property of the page action for the specified tab.
    *
    * @param {Object} tab The tab to retrieve the property from. If null, the default value is returned.
-   * @param {string} prop The property to retreive - currently only "popup" is supported.
+   * @param {string} prop The property to retrieve - currently only "popup" is supported.
    * @returns {string} the value stored for the specified property. If the value for the tab is undefined, then the
    *    default value is returned.
    */

@@ -217,10 +217,10 @@ CJBig2_SymbolDict* CJBig2_SDDProc::decode_Arith(
           pGRRD->GRREFERENCEDX = RDXI;
           pGRRD->GRREFERENCEDY = RDYI;
           pGRRD->TPGRON = 0;
-          pGRRD->GRAT[0] = SDRAT[0];
-          pGRRD->GRAT[1] = SDRAT[1];
-          pGRRD->GRAT[2] = SDRAT[2];
-          pGRRD->GRAT[3] = SDRAT[3];
+          pGRRD->GREAT[0] = SDRAT[0];
+          pGRRD->GREAT[1] = SDRAT[1];
+          pGRRD->GREAT[2] = SDRAT[2];
+          pGRRD->GREAT[3] = SDRAT[3];
           BS = pGRRD->decode(pArithDecoder, grContext->data());
           if (!BS) {
             FX_Free(SBSYMS);
@@ -499,10 +499,10 @@ CJBig2_SymbolDict* CJBig2_SDDProc::decode_Huffman(
           pGRRD->GRREFERENCEDX = RDXI;
           pGRRD->GRREFERENCEDY = RDYI;
           pGRRD->TPGRON = 0;
-          pGRRD->GRAT[0] = SDRAT[0];
-          pGRRD->GRAT[1] = SDRAT[1];
-          pGRRD->GRAT[2] = SDRAT[2];
-          pGRRD->GRAT[3] = SDRAT[3];
+          pGRRD->GREAT[0] = SDRAT[0];
+          pGRRD->GREAT[1] = SDRAT[1];
+          pGRRD->GREAT[2] = SDRAT[2];
+          pGRRD->GREAT[3] = SDRAT[3];
           std::unique_ptr<CJBig2_ArithDecoder> pArithDecoder(
               new CJBig2_ArithDecoder(pStream));
           BS = pGRRD->decode(pArithDecoder.get(), grContext->data());

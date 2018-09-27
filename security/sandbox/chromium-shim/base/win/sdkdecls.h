@@ -10,7 +10,7 @@
 #include <windows.h>
 
 // This file contains definitions required for things dynamically loaded
-// while building or targetting lower platform versions or lower SDKs.
+// while building or targeting lower platform versions or lower SDKs.
 
 #if (_WIN32_WINNT < 0x0600)
 typedef struct _STARTUPINFOEXA {

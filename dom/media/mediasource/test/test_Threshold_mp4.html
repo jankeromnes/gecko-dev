@@ -42,7 +42,7 @@ runWithMSE(async (ms, el) => {
   is(el.buffered.length, 2, "buffered range has right length");
   // Now we test that seeking will succeed despite the gap.
   el.currentTime = el.buffered.end(0) + (threshold / 2);
-  await once(el, "seeked");
+  await once(el, "sought");
   // Now we test that we don't pass the gap.
   // Clean up our sourcebuffer by removing all data.
   videosb.timestampOffset = 0;

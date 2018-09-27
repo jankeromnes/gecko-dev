@@ -399,7 +399,7 @@ VRService::PushState(const mozilla::gfx::VRSystemState& aState)
   if (!mAPIShmem) {
     return;
   }
-  // Copying the VR service state to the shmem is atomic, infallable,
+  // Copying the VR service state to the shmem is atomic, infallible,
   // and non-blocking on x86/x64 architectures.  Arm requires a mutex
   // that is locked for the duration of the memcpy to and from shmem on
   // both sides.

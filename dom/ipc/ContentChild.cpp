@@ -765,7 +765,7 @@ ContentChild::SetProcessName(const nsAString& aName)
 }
 
 NS_IMETHODIMP
-ContentChild::ProvideWindow(mozIDOMWindowProxy* aParent,
+ContentChild::ProvideWindow(mozIDOMWindowProxy* apparent,
                             uint32_t aChromeFlags,
                             bool aCalledFromJS,
                             bool aPositionSpecified,
@@ -778,14 +778,14 @@ ContentChild::ProvideWindow(mozIDOMWindowProxy* aParent,
                             bool* aWindowIsNew,
                             mozIDOMWindowProxy** aReturn)
 {
-  return ProvideWindowCommon(nullptr, aParent, false, aChromeFlags,
+  return ProvideWindowCommon(nullptr, apparent, false, aChromeFlags,
                              aCalledFromJS, aPositionSpecified,
                              aSizeSpecified, aURI, aName, aFeatures,
                              aForceNoOpener, aLoadInfo, aWindowIsNew, aReturn);
 }
 
 static nsresult
-GetCreateWindowParams(mozIDOMWindowProxy* aParent,
+GetCreateWindowParams(mozIDOMWindowProxy* apparent,
                       nsDocShellLoadInfo* aLoadInfo,
                       nsACString& aBaseURIString, float* aFullZoom,
                       uint32_t* aReferrerPolicy,
@@ -796,7 +796,7 @@ GetCreateWindowParams(mozIDOMWindowProxy* aParent,
     NS_ERROR("aTriggeringPrincipal is null");
     return NS_ERROR_FAILURE;
   }
-  auto* opener = nsPIDOMWindowOuter::From(aParent);
+  auto* opener = nsPIDOMWindowOuter::From(apparent);
   if (!opener) {
     nsCOMPtr<nsIPrincipal> nullPrincipal =
       NullPrincipal::CreateWithoutOriginAttributes();
@@ -839,7 +839,7 @@ GetCreateWindowParams(mozIDOMWindowProxy* aParent,
 
 nsresult
 ContentChild::ProvideWindowCommon(TabChild* aTabOpener,
-                                  mozIDOMWindowProxy* aParent,
+                                  mozIDOMWindowProxy* apparent,
                                   bool aIframeMoz,
                                   uint32_t aChromeFlags,
                                   bool aCalledFromJS,
@@ -862,8 +862,8 @@ ContentChild::ProvideWindowCommon(TabChild* aTabOpener,
 
   nsresult rv;
 
-  MOZ_ASSERT(!aParent || aTabOpener,
-             "If aParent is non-null, we should have an aTabOpener");
+  MOZ_ASSERT(!apparent || aTabOpener,
+             "If apparent is non-null, we should have an aTabOpener");
 
   // Cache the boolean preference for allowing noopener windows to open in a
   // separate process.
@@ -896,7 +896,7 @@ ContentChild::ProvideWindowCommon(TabChild* aTabOpener,
     float fullZoom;
     nsCOMPtr<nsIPrincipal> triggeringPrincipal;
     uint32_t referrerPolicy = mozilla::net::RP_Unset;
-    rv = GetCreateWindowParams(aParent, aLoadInfo, baseURIString, &fullZoom,
+    rv = GetCreateWindowParams(apparent, aLoadInfo, baseURIString, &fullZoom,
                                &referrerPolicy,
                                getter_AddRefs(triggeringPrincipal));
     if (NS_WARN_IF(NS_FAILED(rv))) {
@@ -975,9 +975,9 @@ ContentChild::ProvideWindowCommon(TabChild* aTabOpener,
   PRenderFrameChild* renderFrame = newChild->SendPRenderFrameConstructor();
 
   nsCOMPtr<nsPIDOMWindowInner> parentTopInnerWindow;
-  if (aParent) {
+  if (apparent) {
     nsCOMPtr<nsPIDOMWindowOuter> parentTopWindow =
-      nsPIDOMWindowOuter::From(aParent)->GetTop();
+      nsPIDOMWindowOuter::From(apparent)->GetTop();
     if (parentTopWindow) {
       parentTopInnerWindow = parentTopWindow->GetCurrentInnerWindow();
     }
@@ -1030,7 +1030,7 @@ ContentChild::ProvideWindowCommon(TabChild* aTabOpener,
     }
 
     ShowInfo showInfo(EmptyString(), false, false, true, false, 0, 0, 0);
-    auto* opener = nsPIDOMWindowOuter::From(aParent);
+    auto* opener = nsPIDOMWindowOuter::From(apparent);
     nsIDocShell* openerShell;
     if (opener && (openerShell = opener->GetDocShell())) {
       nsCOMPtr<nsILoadContext> context = do_QueryInterface(openerShell);
@@ -1049,9 +1049,9 @@ ContentChild::ProvideWindowCommon(TabChild* aTabOpener,
     // they can poke at the document and cause the nsDocument to be created before
     // the openerwindow
     nsCOMPtr<mozIDOMWindowProxy> windowProxy = do_GetInterface(newChild->WebNavigation());
-    if (!aForceNoOpener && windowProxy && aParent) {
+    if (!aForceNoOpener && windowProxy && apparent) {
       nsPIDOMWindowOuter* outer = nsPIDOMWindowOuter::From(windowProxy);
-      nsPIDOMWindowOuter* parent = nsPIDOMWindowOuter::From(aParent);
+      nsPIDOMWindowOuter* parent = nsPIDOMWindowOuter::From(apparent);
       outer->SetOpenerWindow(parent, *aWindowIsNew);
     }
 
@@ -1110,7 +1110,7 @@ ContentChild::ProvideWindowCommon(TabChild* aTabOpener,
     float fullZoom;
     nsCOMPtr<nsIPrincipal> triggeringPrincipal;
     uint32_t referrerPolicy = mozilla::net::RP_Unset;
-    rv = GetCreateWindowParams(aParent, aLoadInfo, baseURIString, &fullZoom,
+    rv = GetCreateWindowParams(apparent, aLoadInfo, baseURIString, &fullZoom,
                                &referrerPolicy,
                                getter_AddRefs(triggeringPrincipal));
     if (NS_WARN_IF(NS_FAILED(rv))) {
@@ -1646,7 +1646,7 @@ StartMacOSContentSandbox()
   // because it's not running a native event loop. See bug 1384336.
   CGSShutdownServerConnections();
 
-  // Actual security benefits are only acheived when we additionally deny
+  // Actual security benefits are only achieved when we additionally deny
   // future connections, however this currently breaks WebGL so it's not done
   // by default.
   if (Preferences::GetBool(
@@ -1785,7 +1785,7 @@ ContentChild::RecvSetProcessSandbox(const MaybeFileDesc& aBroker)
   sandboxEnabled = StartMacOSContentSandbox();
 #elif defined(__OpenBSD__)
   sandboxEnabled = StartOpenBSDSandbox(GeckoProcessType_Content);
-  /* dont overwrite an existing session dbus address, but ensure it is set */
+  /* don't overwrite an existing session dbus address, but ensure it is set */
   if (!PR_GetEnv("DBUS_SESSION_BUS_ADDRESS")) {
       static LazyLogModule sPledgeLog("SandboxPledge");
       MOZ_LOG(sPledgeLog, LogLevel::Debug, ("no session dbus found, faking one\n"));

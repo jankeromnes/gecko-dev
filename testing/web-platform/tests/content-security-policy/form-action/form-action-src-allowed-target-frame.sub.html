@@ -7,7 +7,7 @@
   <script src="/resources/testharnessreport.js"></script>
   <script>
     function OnDocumentLoaded() {
-      let test = async_test("form submission targetting a frame allowed");
+      let test = async_test("form submission targeting a frame allowed");
       window.addEventListener("message", function(event) {
         if (event.data == "DocumentNotBlocked") {
           test.done();

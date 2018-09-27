@@ -13,7 +13,7 @@ namespace mozilla { namespace net {
 
 // This is an abstract class that can be pointed to by either
 // nsCOMPtr or nsRefPtr. nsHttpConnectionMgr uses it for generic
-// objects that need to be reference counted - similiar to nsISupports
+// objects that need to be reference counted - similar to nsISupports
 // but it may or may not be xpcom.
 
 class ARefBase

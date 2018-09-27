@@ -181,7 +181,7 @@ partial interface HTMLMediaElement {
  * video data or is not seekable, the operation is ignored without filing the
  * "seeking" event.
  *
- * Once the SeekToNextFrame() is done, a "seeked" event should always be filed
+ * Once the SeekToNextFrame() is done, a "sought" event should always be filed
  * and a "ended" event might also be filed depends on where the media element's
  * position before seeking was. There are two cases:
  * Assume the media source has n+1 video frames where n is a non-negative
@@ -192,10 +192,10 @@ partial interface HTMLMediaElement {
  *     frame's beginning time, where x belongs to [1, n], then the
  *     SeekToNextFrame() operation seeks the media to the x-th frame, sets the
  *     media's currentTime to the x-th frame's beginning time and dispatches a
- *     "seeked" event.
+ *     "sought" event.
  * (2) Otherwise, if the currentTime is larger or equal to the n-th frame's
  *     beginning time, then the SeekToNextFrame() operation sets the media's
- *     currentTime to the duration of the media source and dispatches a "seeked"
+ *     currentTime to the duration of the media source and dispatches a "sought"
  *     event and an "ended" event.
  */
 partial interface HTMLMediaElement {

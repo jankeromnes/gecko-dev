@@ -147,7 +147,7 @@ sftk_MapDecryptError(int error)
 
 /*
  * return CKR_SIGNATURE_INVALID instead of CKR_DEVICE_ERROR by default for
- * backward compatibilty.
+ * backward compatibility.
  */
 static CK_RV
 sftk_MapVerifyError(int error)
@@ -888,7 +888,7 @@ sftk_CryptInit(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism,
             break;
         case CKM_RC2_CBC_PAD:
             context->doPad = PR_TRUE;
-        /* fall thru */
+        /* fall through */
         case CKM_RC2_ECB:
         case CKM_RC2_CBC:
             context->blockSize = 8;
@@ -918,7 +918,7 @@ sftk_CryptInit(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism,
 #if NSS_SOFTOKEN_DOES_RC5
         case CKM_RC5_CBC_PAD:
             context->doPad = PR_TRUE;
-        /* fall thru */
+        /* fall through */
         case CKM_RC5_ECB:
         case CKM_RC5_CBC:
             if (key_type != CKK_RC5) {
@@ -969,7 +969,7 @@ sftk_CryptInit(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism,
             break;
         case CKM_CDMF_CBC_PAD:
             context->doPad = PR_TRUE;
-        /* fall thru */
+        /* fall through */
         case CKM_CDMF_ECB:
         case CKM_CDMF_CBC:
             if (key_type != CKK_CDMF) {
@@ -987,7 +987,7 @@ sftk_CryptInit(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism,
             goto finish_des;
         case CKM_DES_CBC_PAD:
             context->doPad = PR_TRUE;
-        /* fall thru */
+        /* fall through */
         case CKM_DES_CBC:
             if (key_type != CKK_DES) {
                 crv = CKR_KEY_TYPE_INCONSISTENT;
@@ -1004,7 +1004,7 @@ sftk_CryptInit(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism,
             goto finish_des;
         case CKM_DES3_CBC_PAD:
             context->doPad = PR_TRUE;
-        /* fall thru */
+        /* fall through */
         case CKM_DES3_CBC:
             if ((key_type != CKK_DES2) && (key_type != CKK_DES3)) {
                 crv = CKR_KEY_TYPE_INCONSISTENT;
@@ -1047,14 +1047,14 @@ sftk_CryptInit(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism,
             break;
         case CKM_SEED_CBC_PAD:
             context->doPad = PR_TRUE;
-        /* fall thru */
+        /* fall through */
         case CKM_SEED_CBC:
             if (!pMechanism->pParameter ||
                 pMechanism->ulParameterLen != 16) {
                 crv = CKR_MECHANISM_PARAM_INVALID;
                 break;
             }
-        /* fall thru */
+        /* fall through */
         case CKM_SEED_ECB:
             context->blockSize = 16;
             if (key_type != CKK_SEED) {
@@ -1082,14 +1082,14 @@ sftk_CryptInit(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism,
 
         case CKM_CAMELLIA_CBC_PAD:
             context->doPad = PR_TRUE;
-        /* fall thru */
+        /* fall through */
         case CKM_CAMELLIA_CBC:
             if (!pMechanism->pParameter ||
                 pMechanism->ulParameterLen != 16) {
                 crv = CKR_MECHANISM_PARAM_INVALID;
                 break;
             }
-        /* fall thru */
+        /* fall through */
         case CKM_CAMELLIA_ECB:
             context->blockSize = 16;
             if (key_type != CKK_CAMELLIA) {
@@ -1120,7 +1120,7 @@ sftk_CryptInit(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism,
 
         case CKM_AES_CBC_PAD:
             context->doPad = PR_TRUE;
-        /* fall thru */
+        /* fall through */
         case CKM_AES_ECB:
         case CKM_AES_CBC:
             context->blockSize = 16;
@@ -1182,7 +1182,7 @@ sftk_CryptInit(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism,
 
         case CKM_NSS_AES_KEY_WRAP_PAD:
             context->doPad = PR_TRUE;
-        /* fall thru */
+        /* fall through */
         case CKM_NSS_AES_KEY_WRAP:
             context->multi = PR_FALSE;
             context->blockSize = 8;
@@ -1884,7 +1884,7 @@ sftk_HMACCmp(CK_ULONG *copyLen, unsigned char *sig, unsigned int sigLen,
 }
 
 /*
- * common HMAC initalization routine
+ * common HMAC initialization routine
  */
 static CK_RV
 sftk_doHMACInit(SFTKSessionContext *context, HASH_HashType hash,
@@ -2000,7 +2000,7 @@ sftk_SSLMACVerify(SFTKSSLMACInfo *info, unsigned char *sig, unsigned int sigLen,
 }
 
 /*
- * common HMAC initalization routine
+ * common HMAC initialization routine
  */
 static CK_RV
 sftk_doSSLMACInit(SFTKSessionContext *context, SECOidTag oid,

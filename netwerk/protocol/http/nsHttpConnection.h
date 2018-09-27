@@ -352,7 +352,7 @@ private:
     bool                            mInSpdyTunnel;
     bool                            mForcePlainText;
 
-    // A snapshot of current number of transfered bytes
+    // A snapshot of current number of transferred bytes
     int64_t                         mTrafficCount;
     bool                            mTrafficStamp; // true then the above is set
 
@@ -391,7 +391,7 @@ private:
 
     bool                            mResponseTimeoutEnabled;
 
-    // Flag to indicate connection is in inital keepalive period (fast detect).
+    // Flag to indicate connection is in initial keepalive period (fast detect).
     uint32_t                        mTCPKeepaliveConfig;
     nsCOMPtr<nsITimer>              mTCPKeepaliveTransitionTimer;
 

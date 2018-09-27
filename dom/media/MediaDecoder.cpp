@@ -372,7 +372,7 @@ MediaDecoder::OnPlaybackEvent(MediaPlaybackEvent&& aEvent)
       break;
     case MediaPlaybackEvent::Loop:
       GetOwner()->DispatchAsyncEvent(NS_LITERAL_STRING("seeking"));
-      GetOwner()->DispatchAsyncEvent(NS_LITERAL_STRING("seeked"));
+      GetOwner()->DispatchAsyncEvent(NS_LITERAL_STRING("sought"));
       break;
     case MediaPlaybackEvent::Invalidate:
       Invalidate();

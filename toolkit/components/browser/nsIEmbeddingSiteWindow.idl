@@ -79,7 +79,7 @@ interface nsIEmbeddingSiteWindow : nsISupports
      * Sets the dimensions for the window; the position & size. The
      * flags to indicate what the caller wants to set and whether the size
      * refers to the inner or outer area. The inner area refers to just
-     * the embedded area, wheras the outer area can also include any 
+     * the embedded area, whereas the outer area can also include any 
      * surrounding chrome, window frame, title bar, and so on.
      *
      * @param flags  Combination of position, inner and outer size flags.

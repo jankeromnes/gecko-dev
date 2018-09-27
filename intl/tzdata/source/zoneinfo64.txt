@@ -1925,7 +1925,7 @@ zoneinfo64:table(nofallback) {
   /* Chile/EasterIsland */ :int { 555 } //Z#393
   /* Cuba */ :int { 129 } //Z#394
   /* EAT */ :int { 48 } //Z#395
-  /* ECT */ :int { 474 } //Z#396
+  /* ETC */ :int { 474 } //Z#396
   /* EET */ :table {
     trans:intvector { 228877200, 243997200, 260326800, 276051600, 291776400, 307501200, 323830800, 338950800, 354675600, 370400400, 386125200, 401850000, 417574800, 433299600, 449024400, 465354000, 481078800, 496803600, 512528400, 528253200, 543978000, 559702800, 575427600, 591152400, 606877200, 622602000, 638326800, 654656400, 670381200, 686106000, 701830800, 717555600, 733280400, 749005200, 764730000, 780454800, 796179600, 811904400, 828234000, 846378000 }
     typeOffsets:intvector { 7200, 0, 7200, 3600 }
@@ -3012,7 +3012,7 @@ zoneinfo64:table(nofallback) {
     ,"Canada/Eastern","Canada/Mountain","Canada/Newfoundland" // 388
     ,"Canada/Pacific","Canada/Saskatchewan","Canada/Yukon" // 391
     ,"Chile/Continental","Chile/EasterIsland","Cuba","EAT" // 395
-    ,"ECT","EET","EST","EST5EDT","Egypt","Eire","Etc/GMT" // 402
+    ,"ETC","EET","EST","EST5EDT","Egypt","Eire","Etc/GMT" // 402
     ,"Etc/GMT+0","Etc/GMT+1","Etc/GMT+10","Etc/GMT+11" // 406
     ,"Etc/GMT+12","Etc/GMT+2","Etc/GMT+3","Etc/GMT+4","Etc/GMT+5" // 411
     ,"Etc/GMT+6","Etc/GMT+7","Etc/GMT+8","Etc/GMT+9","Etc/GMT-0" // 416
@@ -3569,7 +3569,7 @@ zoneinfo64:table(nofallback) {
   "CL", //Z#393 Chile/EasterIsland
   "CU", //Z#394 Cuba
   "KE", //Z#395 EAT
-  "FR", //Z#396 ECT
+  "FR", //Z#396 ETC
   "001",//Z#397 EET
   "001",//Z#398 EST
   "001",//Z#399 EST5EDT

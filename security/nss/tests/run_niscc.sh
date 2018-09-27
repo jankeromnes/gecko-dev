@@ -51,7 +51,7 @@ All options (and possibly more) can be also set through environment variables.
 Commandline options have higher priority than environment variables.
 For more information please refer to the source code of this script.
 
-For a successfull run the script NEEDS the core file pattern to be 'core.*',
+For a successful run the script NEEDS the core file pattern to be 'core.*',
 e.g. 'core.%t'. You can check the current pattern in
 '/proc/sys/kernel/core_pattern'. Otherwise the test will be unable to detect
 any failures and will pass every time.

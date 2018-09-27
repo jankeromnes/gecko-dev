@@ -74,11 +74,11 @@
 
         test(function() {
             assert_throws(new TypeError(), function() { new DOMQuad(1, 2, 3, 4); });
-        },'test Constructor with invaild integer args');
+        },'test Constructor with invalid integer args');
 
         test(function() {
             assert_throws(new TypeError(), function() { new DOMQuad("1", "2", "3", "4"); });
-        },'test Constructor with invaild string args');
+        },'test Constructor with invalid string args');
 
         test(function() {
             assert_throws(new TypeError(), function() { new DOMQuad({}, {}, {}, NaN); });

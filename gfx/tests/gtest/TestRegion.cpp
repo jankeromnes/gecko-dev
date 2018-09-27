@@ -1236,13 +1236,13 @@ TEST(Gfx, RegionVisitEdges) {
     TestVisit(r);
   }
 
-  { // two rects side by side - 1 pixel inbetween
+  { // two rects side by side - 1 pixel between
     nsRegion r(nsRect(20, 20, 100, 100));
     r.Or(r, nsRect(121, 20, 100, 100));
     TestVisit(r);
   }
 
-  { // two rects side by side - 2 pixels inbetween
+  { // two rects side by side - 2 pixels between
     nsRegion r(nsRect(20, 20, 100, 100));
     r.Or(r, nsRect(122, 20, 100, 100));
     TestVisit(r);

@@ -51,7 +51,7 @@ class XPathResult final : public nsIXPathResult,
     ~XPathResult();
 
 public:
-    explicit XPathResult(nsINode* aParent);
+    explicit XPathResult(nsINode* apparent);
     XPathResult(const XPathResult &aResult);
 
     enum {

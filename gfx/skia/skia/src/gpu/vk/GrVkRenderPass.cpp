@@ -58,7 +58,7 @@ void GrVkRenderPass::init(const GrVkGpu* gpu,
     attachments.reset(numAttachments);
     memset(attachments.begin(), 0, numAttachments * sizeof(VkAttachmentDescription));
 
-    // Refs to attachments on the render pass (as described by teh VkAttachmentDescription above),
+    // Refs to attachments on the render pass (as described by the VkAttachmentDescription above),
     // that are used by the subpass.
     VkAttachmentReference colorRef;
     VkAttachmentReference stencilRef;

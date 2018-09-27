@@ -12,7 +12,7 @@
 //
 // In principle, the standard instance of the worker loader should provide the
 // same built-in modules as its devtools counterpart, so that both loaders are
-// interchangable on the main thread, making them easier to test.
+// interchangeable on the main thread, making them easier to test.
 //
 // On the worker thread, some of these modules, in particular those that rely on
 // the use of Components, and for which the worker debugger doesn't provide an

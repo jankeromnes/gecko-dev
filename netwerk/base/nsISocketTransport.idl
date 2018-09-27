@@ -296,7 +296,7 @@ interface nsISocketTransport : nsITransport
     readonly attribute nsresult firstRetryError;
 
     /**
-     * If true, this socket transport has found out the prefered family
+     * If true, this socket transport has found out the preferred family
      * according it's connection flags could not be used to establish
      * connections any more.  Hence, the preference should be reset.
      */

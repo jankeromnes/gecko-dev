@@ -627,7 +627,7 @@ ShadowLayerForwarder::EndTransaction(const nsIntRegion& aRegionToClear,
 
   AUTO_PROFILER_LABEL("ShadowLayerForwarder::EndTransaction", GRAPHICS);
 
-  RenderTraceScope rendertrace("Foward Transaction", "000091");
+  RenderTraceScope rendertrace("Forward Transaction", "000091");
   MOZ_ASSERT(!mTxn->Finished(), "forgot BeginTransaction?");
 
   DiagnosticTypes diagnostics = gfxPlatform::GetPlatform()->GetLayerDiagnosticTypes();
@@ -676,7 +676,7 @@ ShadowLayerForwarder::EndTransaction(const nsIntRegion& aRegionToClear,
   // before we add paint ops.  This allows layers to record the
   // attribute changes before new pixels arrive, which can be useful
   // for setting up back/front buffers.
-  RenderTraceScope rendertrace2("Foward Transaction", "000092");
+  RenderTraceScope rendertrace2("Forward Transaction", "000092");
   for (ShadowableLayerSet::Iterator it(&mTxn->mMutants);
        !it.Done(); it.Next()) {
     ShadowableLayer* shadow = it.Get()->GetKey();

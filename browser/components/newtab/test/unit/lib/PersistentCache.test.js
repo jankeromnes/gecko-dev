@@ -32,13 +32,13 @@ describe("PersistentCache", () => {
       await cache.get("foo");
       assert.calledOnce(fakeOS.File.read);
     });
-    it("doesnt try to read the file if it doesn't exist", async () => {
+    it("doesn't try to read the file if it doesn't exist", async () => {
       fakeOS.File.read = sinon.spy();
       fakeOS.File.exists = async () => false;
       await cache.get("foo");
       assert.notCalled(fakeOS.File.read);
     });
-    it("doesnt try to read the file if it was already loaded", async () => {
+    it("doesn't try to read the file if it was already loaded", async () => {
       fakeOS.File.read = sinon.spy();
       await cache._load();
       fakeOS.File.read.reset();
@@ -65,7 +65,7 @@ describe("PersistentCache", () => {
       await cache.set("foo", {x: 42});
       assert.calledOnce(fakeOS.File.read);
     });
-    it("doesnt try to read the file if it was already loaded", async () => {
+    it("doesn't try to read the file if it was already loaded", async () => {
       fakeOS.File.read = sinon.spy();
       cache = new PersistentCache(filename, true);
       await cache._load();

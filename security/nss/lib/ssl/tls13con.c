@@ -4933,7 +4933,7 @@ tls13_ProtectRecord(sslSocket *ss,
  *
  * If SECFailure is returned, we:
  * 1. Set |*alert| to the alert to be sent.
- * 2. Call PORT_SetError() witn an appropriate code.
+ * 2. Call PORT_SetError() with an appropriate code.
  */
 SECStatus
 tls13_UnprotectRecord(sslSocket *ss,

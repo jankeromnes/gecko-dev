@@ -343,7 +343,7 @@ impl CalcNode {
     /// Puts this `<length>` or `<percentage>` into `ret`, or error.
     ///
     /// `factor` is the sign or multiplicative factor to account for the sign
-    /// (this allows adding and substracting into the return value).
+    /// (this allows adding and subtracting into the return value).
     fn add_length_or_percentage_to(
         &self,
         ret: &mut CalcLengthOrPercentage,

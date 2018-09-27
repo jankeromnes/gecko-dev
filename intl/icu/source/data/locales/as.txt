@@ -18,7 +18,7 @@ as{
     ExemplarCharactersNumbers{"[\\- , . % ‰ + 0০ 1১ 2২ 3৩ 4৪ 5৫ 6৬ 7৭ 8৮ 9৯]"}
     MoreInformation{"?"}
     NumberElements{
-        beng{
+        being{
             patterns{
                 currencyFormat{"¤ #,##,##0.00"}
                 decimalFormat{"#,##,##0.###"}
@@ -38,7 +38,7 @@ as{
                 superscriptingExponent{"×"}
             }
         }
-        default{"beng"}
+        default{"being"}
         latn{
             miscPatterns{
                 atLeast{"⩾{0}"}
@@ -228,7 +228,7 @@ as{
             }
         }
         minimumGroupingDigits{"1"}
-        native{"beng"}
+        native{"being"}
     }
     Version{"2.1.41.97"}
     calendar{

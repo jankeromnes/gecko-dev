@@ -41,7 +41,7 @@ private:
 };
 
 /**
- * This class is analagous to MutexAutoUnlock for Mutex; it is an RAII class
+ * This class is analogous to MutexAutoUnlock for Mutex; it is an RAII class
  * that is to be instantiated within a NeuteredWindowRegion, thus temporarily
  * disabling neutering for the remainder of its enclosing block.
  * @see NeuteredWindowRegion

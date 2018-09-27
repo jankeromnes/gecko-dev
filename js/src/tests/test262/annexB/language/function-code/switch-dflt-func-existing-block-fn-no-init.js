@@ -2,7 +2,7 @@
 // - src/annex-b-fns/func-existing-block-fn-no-init.case
 // - src/annex-b-fns/func/switch-dflt.template
 /*---
-description: Does not re-initialize binding created by similar forms (Funtion declaration in the `default` clause of a `switch` statement in function scope)
+description: Does not re-initialize binding created by similar forms (Function declaration in the `default` clause of a `switch` statement in function scope)
 esid: sec-web-compat-functiondeclarationinstantiation
 es6id: B.3.3.1
 flags: [generated, noStrict]

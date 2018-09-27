@@ -159,7 +159,7 @@ import java.util.IdentityHashMap;
       for (MediaPeriod enabledPeriod : enabledPeriods) {
         if (enabledPeriod != periods[0]
             && enabledPeriod.seekToUs(positionUs) != positionUs) {
-          throw new IllegalStateException("Children seeked to different positions");
+          throw new IllegalStateException("Children sought to different positions");
         }
       }
     }
@@ -184,7 +184,7 @@ import java.util.IdentityHashMap;
     // Additional periods must seek to the same position.
     for (int i = 1; i < enabledPeriods.length; i++) {
       if (enabledPeriods[i].seekToUs(positionUs) != positionUs) {
-        throw new IllegalStateException("Children seeked to different positions");
+        throw new IllegalStateException("Children sought to different positions");
       }
     }
     return positionUs;

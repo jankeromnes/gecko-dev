@@ -633,7 +633,7 @@ EnvironmentAddonBuilder.prototype = {
    *
    * @returns Promise<Object> This returns a Promise resolved with a status object with the following members:
    *   changed - Whether the environment changed.
-   *   oldEnvironment - Only set if a change occured, contains the environment data before the change.
+   *   oldEnvironment - Only set if a change occurred, contains the environment data before the change.
    */
   async _updateAddons(atStartup) {
     this._environment._log.trace("_updateAddons");
@@ -939,7 +939,7 @@ EnvironmentCache.prototype = {
   },
 
   /**
-   * Wait for the current enviroment to be fully initialized.
+   * Wait for the current environment to be fully initialized.
    * @returns Promise<object>
    */
   onInitialized() {
@@ -1204,7 +1204,7 @@ EnvironmentCache.prototype = {
       case SESSIONSTORE_WINDOWS_RESTORED_TOPIC:
         this._sessionWasRestored = true;
         // Make sure to initialize the search service once we've done restoring
-        // the windows, so that we don't risk loosing search data.
+        // the windows, so that we don't risk losing search data.
         Services.search.init();
         // The default browser check could take some time, so just call it after
         // the session was restored.

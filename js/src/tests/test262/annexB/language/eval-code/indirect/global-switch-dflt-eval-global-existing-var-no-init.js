@@ -2,7 +2,7 @@
 // - src/annex-b-fns/eval-global-existing-var-no-init.case
 // - src/annex-b-fns/eval-global/indirect-switch-dflt.template
 /*---
-description: Existing variable binding is not modified (Funtion declaration in the `default` clause of a `switch` statement in eval code in the global scope)
+description: Existing variable binding is not modified (Function declaration in the `default` clause of a `switch` statement in eval code in the global scope)
 esid: sec-web-compat-evaldeclarationinstantiation
 es6id: B.3.3.3
 flags: [generated, noStrict]

@@ -83,7 +83,7 @@ private:
   nsresult  WriteFrameTimeStamps();
 
   /***
-   * mFrameTimestamps is a psuedo circular buffer
+   * mFrameTimestamps is a pseudo circular buffer
    * Since we have a constant write time and don't
    * read at an offset except our latest write
    * we don't need an explicit read pointer.

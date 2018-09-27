@@ -1269,7 +1269,7 @@ TelemetryEvent::SetEventRecordingEnabled(const nsACString& category, bool enable
 
   if (!gCategoryNames.Contains(category)) {
     LogToBrowserConsole(nsIScriptError::warningFlag,
-                        NS_LITERAL_STRING("Unkown category for SetEventRecordingEnabled."));
+                        NS_LITERAL_STRING("Unknown category for SetEventRecordingEnabled."));
     return;
   }
 

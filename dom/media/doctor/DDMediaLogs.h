@@ -172,11 +172,11 @@ private:
     const DDMessageIndex mLinkingIndex;
     Maybe<DDMessageIndex> mUnlinkingIndex;
 
-    DDObjectLink(DDLogObject aParent,
+    DDObjectLink(DDLogObject apparent,
                  DDLogObject aChild,
                  const char* aLinkName,
                  DDMessageIndex aLinkingIndex)
-      : mParent(aParent)
+      : mParent(apparent)
       , mChild(aChild)
       , mLinkName(aLinkName)
       , mLinkingIndex(aLinkingIndex)

@@ -72,7 +72,7 @@ static bool CheckMessageContent(nsIUDPMessage *aMessage, uint32_t aExpectedConte
 }
 
 /*
- * UDPClientListener: listens for incomming UDP packets
+ * UDPClientListener: listens for incoming UDP packets
  */
 class UDPClientListener : public nsIUDPSocketListener
 {
@@ -134,7 +134,7 @@ UDPClientListener::OnStopListening(nsIUDPSocket*, nsresult)
 }
 
 /*
- * UDPServerListener: listens for incomming UDP packets
+ * UDPServerListener: listens for incoming UDP packets
  */
 class UDPServerListener : public nsIUDPSocketListener
 {

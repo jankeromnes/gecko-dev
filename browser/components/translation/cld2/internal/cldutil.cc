@@ -537,7 +537,7 @@ void GetOctaHits(const char* text,
 // Reliability calculations, for single language and between languages        //
 //----------------------------------------------------------------------------//
 
-// Return reliablity of result 0..100 for top two scores
+// Return reliability of result 0..100 for top two scores
 // delta==0 is 0% reliable, delta==fully_reliable_thresh is 100% reliable
 // (on a scale where +1 is a factor of  2 ** 1.6 = 3.02)
 // Threshold is uni/quadgram increment count, bounded above and below.
@@ -569,7 +569,7 @@ int ReliabilityDelta(int value1, int value2, int gramcount) {
                      (100 * delta) / fully_reliable_thresh);
 }
 
-// Return reliablity of result 0..100 for top score vs. expected mainsteam score
+// Return reliability of result 0..100 for top score vs. expected mainsteam score
 // Values are score per 1024 bytes of input
 // ratio = max(top/mainstream, mainstream/top)
 // ratio > 4.0 is 0% reliable, <= 2.0 is 100% reliable

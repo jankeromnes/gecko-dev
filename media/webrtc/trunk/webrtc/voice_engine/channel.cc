@@ -3335,7 +3335,7 @@ int32_t Channel::MixOrReplaceAudioWithFile(int mixingFrequency) {
     if (!input_file_player_) {
       WEBRTC_TRACE(kTraceWarning, kTraceVoice, VoEId(_instanceId, _channelId),
                    "Channel::MixOrReplaceAudioWithFile() fileplayer"
-                   " doesnt exist");
+                   " doesn't exist");
       return -1;
     }
 

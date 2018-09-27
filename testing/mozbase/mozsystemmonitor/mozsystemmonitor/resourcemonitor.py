@@ -363,7 +363,7 @@ class SystemResourceMonitor(object):
     # Methods to record events alongside the monitored data.
 
     def record_event(self, name):
-        """Record an event as occuring now.
+        """Record an event as occurring now.
 
         Events are actions that occur at a specific point in time. If you are
         looking for an action that has a duration, see the phase API below.

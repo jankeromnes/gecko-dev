@@ -104,7 +104,7 @@ To get the tests running, you need to set up the test domains in your
 [`hosts` file](http://en.wikipedia.org/wiki/Hosts_%28file%29%23Location_in_the_file_system).
 
 The necessary content can be generated with `./wpt make-hosts-file`; on
-Windows, you will need to preceed the prior command with `python` or
+Windows, you will need to precede the prior command with `python` or
 the path to the Python binary (`python wpt make-hosts-file`).
 
 For example, on most UNIX-like systems, you can setup the hosts file with:

@@ -911,7 +911,7 @@ __ibitmap(HTAB *hashp, int pnum, int nbits, int ndx)
     ip[clearints - 1] = ALL_SET << (nbits & BYTE_MASK);
     SETBIT(ip, 0);
     hashp->BITMAPS[ndx] = (uint16)pnum;
-    hashp->mapp[ndx] = ip;
+    hashp->map[ndx] = ip;
     return (0);
 }
 
@@ -949,7 +949,7 @@ overflow_page(HTAB *hashp)
     /* Look through all the free maps to find the first free block */
     first_page = hashp->LAST_FREED >> (hashp->BSHIFT + BYTE_SHIFT);
     for (i = first_page; i <= (unsigned)free_page; i++) {
-        if (!(freep = (uint32 *)hashp->mapp[i]) &&
+        if (!(freep = (uint32 *)hashp->map[i]) &&
             !(freep = fetch_bitmap(hashp, i)))
             return (0);
         if (i == (unsigned)free_page)
@@ -1106,7 +1106,7 @@ __free_ovflpage(HTAB *hashp, BUFHEAD *obufp)
     free_page = (bit_address >> (hashp->BSHIFT + BYTE_SHIFT));
     free_bit = bit_address & ((hashp->BSIZE << BYTE_SHIFT) - 1);
 
-    if (!(freep = hashp->mapp[free_page]))
+    if (!(freep = hashp->map[free_page]))
         freep = fetch_bitmap(hashp, free_page);
 
 #ifdef DEBUG
@@ -1234,15 +1234,15 @@ fetch_bitmap(HTAB *hashp, uint32 ndx)
 {
     if (ndx >= (unsigned)hashp->nmaps)
         return (NULL);
-    if ((hashp->mapp[ndx] = (uint32 *)malloc((size_t)hashp->BSIZE)) == NULL)
+    if ((hashp->map[ndx] = (uint32 *)malloc((size_t)hashp->BSIZE)) == NULL)
         return (NULL);
     if (__get_page(hashp,
-                   (char *)hashp->mapp[ndx], hashp->BITMAPS[ndx], 0, 1, 1)) {
-        free(hashp->mapp[ndx]);
-        hashp->mapp[ndx] = NULL; /* NEW: 9-11-95 */
+                   (char *)hashp->map[ndx], hashp->BITMAPS[ndx], 0, 1, 1)) {
+        free(hashp->map[ndx]);
+        hashp->map[ndx] = NULL; /* NEW: 9-11-95 */
         return (NULL);
     }
-    return (hashp->mapp[ndx]);
+    return (hashp->map[ndx]);
 }
 
 #ifdef DEBUG4

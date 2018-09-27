@@ -821,7 +821,7 @@ struct MOZ_STACK_CLASS BytecodeEmitter
     MOZ_MUST_USE bool emitForIn(ForNode* forNode, const EmitterScope* headLexicalEmitterScope);
     MOZ_MUST_USE bool emitForOf(ForNode* forNode, const EmitterScope* headLexicalEmitterScope);
 
-    MOZ_MUST_USE bool emitInitializeForInOrOfTarget(TernaryNode* forHead);
+    MOZ_MUST_USE bool emitInitializeForInOrOfTarget(TernaryNode* forehead);
 
     MOZ_MUST_USE bool emitBreak(PropertyName* label);
     MOZ_MUST_USE bool emitContinue(PropertyName* label);

@@ -1,6 +1,6 @@
 # flake8: noqa: F821
 test.compile("source.cpp")
-test.run_analysis_script('gcTypes', upto='gcFunctions')
+test.run_analysis_script('gcTypes', up to='gcFunctions')
 
 # The suppressions file uses only mangled names since it's for internal use,
 # though I may change that soon given (1) the unfortunate non-uniqueness of

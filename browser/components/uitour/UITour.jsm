@@ -67,7 +67,7 @@ var UITour = {
   url: null,
   /* Map from browser chrome windows to a Set of <browser>s in which a tour is open (both visible and hidden) */
   tourBrowsersByWindow: new WeakMap(),
-  // Menus opened by api users explictly through `Mozilla.UITour.showMenu` call
+  // Menus opened by api users explicitly through `Mozilla.UITour.showMenu` call
   noautohideMenus: new Set(),
   availableTargetsCache: new WeakMap(),
   clearAvailableTargetsCache() {
@@ -925,8 +925,8 @@ var UITour = {
         this.showMenu(aWindow, aMenuName, resolve);
       });
     } else if (!this.noautohideMenus.has(aMenuName)) {
-      // If the menu was opened explictly by api user through `Mozilla.UITour.showMenu`,
-      // it should be closed explictly by api user through `Mozilla.UITour.hideMenu`.
+      // If the menu was opened explicitly by api user through `Mozilla.UITour.showMenu`,
+      // it should be closed explicitly by api user through `Mozilla.UITour.hideMenu`.
       // So we shouldn't get to here to close it for the highlight/info annotation.
       log.debug("_setMenuStateForAnnotation: Closing the menu");
       promise = new Promise(resolve => {

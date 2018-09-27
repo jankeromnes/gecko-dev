@@ -2,7 +2,7 @@
 namespace mozilla {
 namespace _ipdltest {
 
-// This is supposed to be analagous to PPaintingBridge.
+// This is supposed to be analogous to PPaintingBridge.
 sync protocol PTestPaintThread
 {
 parent:

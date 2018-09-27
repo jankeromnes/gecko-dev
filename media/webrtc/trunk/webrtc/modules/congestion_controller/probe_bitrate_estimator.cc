@@ -16,7 +16,7 @@
 #include "webrtc/base/logging.h"
 
 namespace {
-// The minumum number of probes we need for a valid cluster.
+// The minimum number of probes we need for a valid cluster.
 constexpr int kMinNumProbesValidCluster = 4;
 
 // The maximum (receive rate)/(send rate) ratio for a valid estimate.

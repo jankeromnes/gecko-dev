@@ -6054,7 +6054,7 @@ exports["default"] = /*istanbul ignore end*/function (start, minLine, maxLine) {
       return iterator();
     }
 
-    // We tried to fit hunk before text beginning and beyond text lenght, then
+    // We tried to fit hunk before text beginning and beyond text length, then
     // hunk can't fit on the text. Return undefined
   };
 };
@@ -7448,7 +7448,7 @@ function defaultClearTimeout () {
 } ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
+        //normal environments in sane situations
         return setTimeout(fun, 0);
     }
     // if setTimeout wasn't available but was latter defined
@@ -7473,7 +7473,7 @@ function runTimeout(fun) {
 }
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
+        //normal environments in sane situations
         return clearTimeout(marker);
     }
     // if clearTimeout wasn't available but was latter defined
@@ -7761,7 +7761,7 @@ process.umask = function() { return 0; };
         // contain already visited objects
         var objects1 = [],
             objects2 = [],
-        // contain pathes (position in the object structure)
+        // contain paths (position in the object structure)
         // of the already visited objects
         // indexes same as in objects arrays
             paths1 = [],
@@ -7884,7 +7884,7 @@ process.umask = function() { return 0; };
                 index1 = isObject1 ? getIndex(objects1, value1) : -1;
                 index2 = isObject2 ? getIndex(objects2, value2) : -1;
 
-                // determine the new pathes of the objects
+                // determine the new paths of the objects
                 // - for non cyclic objects the current path will be extended
                 //   by current property name
                 // - for cyclic objects the stored path is taken
@@ -7900,7 +7900,7 @@ process.umask = function() { return 0; };
                     return true;
                 }
 
-                // remember the current objects and their pathes
+                // remember the current objects and their paths
                 if (index1 === -1 && isObject1) {
                     objects1.push(value1);
                     paths1.push(newPath1);

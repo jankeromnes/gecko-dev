@@ -876,7 +876,7 @@ cert_smime_client()
 ## Eve@bogus.com and the cert for Eve-ec@bogus.com end up 
 ## listing eve@bogus.net in the Certificate Subject Alt Name extension. 
 ## This can cause a problem later when cmsutil attempts to create
-## enveloped data and accidently picks up the ECC cert (NSS currently
+## enveloped data and accidentally picks up the ECC cert (NSS currently
 ## does not support ECC for enveloped data creation). This script
 ## avoids the problem by ensuring that these conflicting certs are
 ## never added to the same cert database (see comment marked XXXX).

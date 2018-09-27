@@ -23,9 +23,9 @@ class ProxyAccessible : public ProxyAccessibleBase<ProxyAccessible>
 {
 public:
 
-  ProxyAccessible(uint64_t aID, ProxyAccessible* aParent,
+  ProxyAccessible(uint64_t aID, ProxyAccessible* apparent,
                   DocAccessibleParent* aDoc, role aRole, uint32_t aInterfaces)
-    : ProxyAccessibleBase(aID, aParent, aDoc, aRole, aInterfaces)
+    : ProxyAccessibleBase(aID, apparent, aDoc, aRole, aInterfaces)
 
   {
     MOZ_COUNT_CTOR(ProxyAccessible);

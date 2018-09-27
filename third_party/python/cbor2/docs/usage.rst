@@ -77,4 +77,4 @@ Tag Semantics                                Python type(s)
 37  Binary UUID                              uuid.UUID
 === ======================================== ====================================================
 
-Arbitary tags can be represented with the :class:`~cbor2.types.CBORTag` class.
+Arbitrary tags can be represented with the :class:`~cbor2.types.CBORTag` class.

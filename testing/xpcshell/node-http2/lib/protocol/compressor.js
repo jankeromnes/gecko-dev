@@ -72,7 +72,7 @@ function size(entry) {
 // The `add(index, entry)` can be used to [manage the header table][tablemgmt]:
 // [tablemgmt]: https://tools.ietf.org/html/rfc7541#section-4
 //
-// * it pushes the new `entry` at the beggining of the table
+// * it pushes the new `entry` at the beginning of the table
 // * before doing such a modification, it has to be ensured that the header table size will stay
 //   lower than or equal to the header table size limit. To achieve this, entries are evicted from
 //   the end of the header table until the size of the header table is less than or equal to

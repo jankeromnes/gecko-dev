@@ -451,7 +451,7 @@ var AboutReaderListener = {
         }
 
         // If we are restoring multiple reader mode tabs during session restore, duplicate "DOMContentLoaded"
-        // events may be fired for the visible tab. The inital "DOMContentLoaded" may be received before the
+        // events may be fired for the visible tab. The initial "DOMContentLoaded" may be received before the
         // document body is available, so we avoid instantiating an AboutReader object, expecting that a
         // valid message will follow. See bug 925983.
         if (content.document.body) {

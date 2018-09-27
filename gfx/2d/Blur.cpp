@@ -30,7 +30,7 @@ namespace gfx {
  * It takes care of transposing the data on input or output depending
  * on whether we intend a horizontal or vertical blur, and whether we're
  * reading from the initial source or writing to the final destination.
- * It allows starting or ending anywhere within the row to accomodate
+ * It allows starting or ending anywhere within the row to accommodate
  * a skip rect.
  */
 template<bool aTransposeInput, bool aTransposeOutput>

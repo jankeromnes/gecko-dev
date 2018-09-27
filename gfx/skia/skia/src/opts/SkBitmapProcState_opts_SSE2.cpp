@@ -300,10 +300,10 @@ void ClampX_ClampY_filter_scale_SSE2(const SkBitmapProcState& s, uint32_t xy[],
             fx += dx;
         }
     } else {
-        // SSE2 only support 16bit interger max & min, so only process the case
-        // maxX less than the max 16bit interger. Actually maxX is the bitmap's
+        // SSE2 only support 16bit integer max & min, so only process the case
+        // maxX less than the max 16bit integer. Actually maxX is the bitmap's
         // height, there should be rare bitmap whose height will be greater
-        // than max 16bit interger in the real world.
+        // than max 16bit integer in the real world.
         if ((count >= 4) && (maxX <= 0xFFFF)) {
             while (((size_t)xy & 0x0F) != 0) {
                 *xy++ = ClampX_ClampY_pack_filter(fx, maxX, one);
@@ -425,10 +425,10 @@ void ClampX_ClampY_nofilter_scale_SSE2(const SkBitmapProcState& s,
             fx += dx;
         }
     } else {
-        // SSE2 only support 16bit interger max & min, so only process the case
-        // maxX less than the max 16bit interger. Actually maxX is the bitmap's
+        // SSE2 only support 16bit integer max & min, so only process the case
+        // maxX less than the max 16bit integer. Actually maxX is the bitmap's
         // height, there should be rare bitmap whose height will be greater
-        // than max 16bit interger in the real world.
+        // than max 16bit integer in the real world.
         if ((count >= 8) && (maxX <= 0xFFFF)) {
             while (((size_t)xy & 0x0F) != 0) {
                 *xy++ = pack_two_shorts(SkClampMax((fx + dx) >> 16, maxX),

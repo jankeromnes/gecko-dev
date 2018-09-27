@@ -497,7 +497,7 @@ bool TransportLayerDtls::Setup() {
     return false;
   }
 
-  Unused << pr_fd.release(); // ownership transfered to ssl_fd;
+  Unused << pr_fd.release(); // ownership transferred to ssl_fd;
 
   if (role_ == CLIENT) {
     MOZ_MTLOG(ML_INFO, "Setting up DTLS as client");

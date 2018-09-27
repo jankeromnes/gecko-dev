@@ -83,7 +83,7 @@ ContentVerifier::FinishSignature()
 
   // Verify the content:
   // If this fails, we return an invalid signature error to load a fallback page.
-  // If everthing is good, we return a new stream to the next listener and kick
+  // If everything is good, we return a new stream to the next listener and kick
   // that one off.
   bool verified = false;
   nsresult rv = NS_OK;

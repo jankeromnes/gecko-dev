@@ -139,9 +139,9 @@ FileDescriptorFile::Contains(nsIFile* aOther, bool* aRetVal)
 }
 
 NS_IMETHODIMP
-FileDescriptorFile::GetParent(nsIFile** aParent)
+FileDescriptorFile::GetParent(nsIFile** apparent)
 {
-  return mFile->GetParent(aParent);
+  return mFile->GetParent(apparent);
 }
 
 NS_IMETHODIMP

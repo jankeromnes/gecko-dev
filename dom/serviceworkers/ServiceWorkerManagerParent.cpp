@@ -120,11 +120,11 @@ private:
 class CheckPrincipalWithCallbackRunnable final : public Runnable
 {
 public:
-  CheckPrincipalWithCallbackRunnable(already_AddRefed<ContentParent> aParent,
+  CheckPrincipalWithCallbackRunnable(already_AddRefed<ContentParent> apparent,
                                      const PrincipalInfo& aPrincipalInfo,
                                      Runnable* aCallback)
     : Runnable("dom::CheckPrincipalWithCallbackRunnable")
-    , mContentParent(aParent)
+    , mContentParent(apparent)
     , mPrincipalInfo(aPrincipalInfo)
     , mCallback(aCallback)
     , mBackgroundEventTarget(GetCurrentThreadEventTarget())

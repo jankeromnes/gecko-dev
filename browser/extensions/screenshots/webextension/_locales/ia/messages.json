@@ -18,7 +18,7 @@
     "message": "Salvar"
   },
   "saveScreenshotVisibleArea": {
-    "message": "Salvar le area visibile"
+    "message": "Salvar le area visible"
   },
   "saveScreenshotFullPage": {
     "message": "Salvar le pagina"
@@ -141,7 +141,7 @@
     "message": "Captura fenestras o paginas integre"
   },
   "tourBodyFullPage": {
-    "message": "Elige le buttones in alto a dextra pro capturar le area visibile in le fenestra o pro capturar un pagina integre."
+    "message": "Elige le buttones in alto a dextra pro capturar le area visible in le fenestra o pro capturar un pagina integre."
   },
   "tourHeaderDownloadUpload": {
     "message": "Como tu lo agrada"

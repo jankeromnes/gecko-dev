@@ -233,7 +233,7 @@ public:
     void UpdateActiveTransaction(nsHttpTransaction* aTrans);
 
     // called by nsHttpTransaction::WriteSegments.  decides whether the transaction
-    // should limit reading its reponse data.  There are various conditions this
+    // should limit reading its response data.  There are various conditions this
     // methods evaluates.  If called by an active-tab non-throttled transaction,
     // the throttling window time will be prolonged.
     bool ShouldThrottle(nsHttpTransaction* aTrans);

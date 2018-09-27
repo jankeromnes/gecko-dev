@@ -29,7 +29,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=1022913
 
     var onSecondSeekComplete = function(event) {
       var v = event.target;
-      v.removeEventListener("seeked", onSecondSeekComplete);
+      v.removeEventListener("sought", onSecondSeekComplete);
       ok(v.currentTime >= v.firstSeekTarget, v.name + " seek never go backwards. time=" + v.currentTime + " firstSeekTarget=" + v.firstSeekTarget + " secondSeekTarget=" + v.secondSeekTarget);
       manager.finished(v.token);
       removeNodeAndSource(v);
@@ -37,11 +37,11 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=1022913
 
     var onFirstSeekComplete = function(event) {
       var v = event.target;
-      v.removeEventListener("seeked", onFirstSeekComplete);
+      v.removeEventListener("sought", onFirstSeekComplete);
       // Seek to 75% of the way between the start and the first keyframe
       // using fastSeek. We then test that the currentTime doesn't drop back
       // to the previous keyframe, currentTime should go forwards.
-      v.addEventListener("seeked", onSecondSeekComplete);
+      v.addEventListener("sought", onSecondSeekComplete);
       v.secondSeekTarget = v.keyframes[1] * 0.75;
       v.fastSeek(v.secondSeekTarget);
     }
@@ -50,7 +50,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=1022913
       // Seek to the mid-point between the start and the first keyframe.
       var v = event.target;
       v.removeEventListener("loadedmetadata", onLoadedMetadata);
-      v.addEventListener("seeked", onFirstSeekComplete);
+      v.addEventListener("sought", onFirstSeekComplete);
       v.firstSeekTarget = v.keyframes[1] * 0.5;
       v.currentTime = v.firstSeekTarget;
     }

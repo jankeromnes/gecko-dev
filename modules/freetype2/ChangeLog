@@ -1125,7 +1125,7 @@
 	bisecting them still horizontally if that was not enough.  This is
 	guaranteed to fail when a single scanline cannot fit into the
 	rendering memory pool.  Now we bisect the bands vertically so that
-	the smallest unit is a column of the band height, which is guranteed
+	the smallest unit is a column of the band height, which is guaranteed
 	to fit into memory.
 
 	* src/smooth/ftgrays.c (gray_convert_glyph): Implement it.

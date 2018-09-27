@@ -127,7 +127,7 @@ pub enum Error {
     /// Contains the command and the cause.
     Command { command: String, cause: io::Error },
 
-    /// `pkg-config` did not exit sucessfully.
+    /// `pkg-config` did not exit successfully.
     ///
     /// Contains the command and output.
     Failure { command: String, output: Output },
@@ -147,7 +147,7 @@ impl error::Error for Error {
             }
             Error::MSVC => "pkg-config is incompatible with the MSVC ABI build.",
             Error::Command { .. } => "failed to run pkg-config",
-            Error::Failure { .. } => "pkg-config did not exit sucessfully",
+            Error::Failure { .. } => "pkg-config did not exit successfully",
             Error::__Nonexhaustive => panic!(),
         }
     }

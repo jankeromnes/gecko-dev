@@ -59,7 +59,7 @@ const EMIT_MEDIA_RULES_THROTTLING = 500;
  * Emits events:
  *   'property-change': A property on the underlying stylesheet has changed
  *   'source-editor-load': The source editor for this editor has been loaded
- *   'error': An error has occured
+ *   'error': An error has occurred
  *
  * @param {StyleSheet|OriginalSource}  styleSheet
  *        Stylesheet or original source to show
@@ -569,7 +569,7 @@ StyleSheetEditor.prototype = {
 
   /**
    * Handle mousemove events, calling _highlightSelectorAt after a delay only
-   * and reseting the delay everytime.
+   * and reseting the delay every time.
    */
   _onMouseMove: function(e) {
     this.highlighter.hide();

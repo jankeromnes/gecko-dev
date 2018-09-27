@@ -92,7 +92,7 @@ where
 {
     // The service handling the connection
     server: S,
-    // The transport responsible for sending/receving messages over the wire
+    // The transport responsible for sending/receiving messages over the wire
     transport: S::Transport,
     // FIFO of "in flight" responses to requests.
     in_flight: VecDeque<InFlight<S::Future>>,

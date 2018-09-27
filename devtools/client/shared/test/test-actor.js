@@ -425,7 +425,7 @@ var TestActor = exports.TestActor = protocol.ActorClassWithSpec(testSpec, {
    * Wait for a specific event on a node matching the provided selector.
    * @param {String} eventName The name of the event to listen to
    * @param {String} selector Optional:  css selector of the node which should
-   *        trigger the event. If ommitted, target will be the content window
+   *        trigger the event. If omitted, target will be the content window
    */
   waitForEventOnNode: function(eventName, selector) {
     return new Promise(resolve => {
@@ -953,7 +953,7 @@ var TestActorFront = exports.TestActorFront = protocol.FrontClassWithSpec(testSp
     const right = left + width;
     const bottom = top + height;
 
-    // Converts points dictionnary into an array
+    // Converts points dictionary into an array
     const list = [];
     for (let i = 1; i <= 4; i++) {
       const p = points["p" + i];

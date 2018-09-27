@@ -21,10 +21,10 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(PerformanceEntry)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-PerformanceEntry::PerformanceEntry(nsISupports* aParent,
+PerformanceEntry::PerformanceEntry(nsISupports* apparent,
                                    const nsAString& aName,
                                    const nsAString& aEntryType)
-: mParent(aParent),
+: mParent(apparent),
   mName(aName),
   mEntryType(aEntryType)
 {

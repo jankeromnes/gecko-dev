@@ -845,7 +845,7 @@ impl<K, V, S> IndexMap<K, V, S>
     ///
     /// Like `Vec::swap_remove`, the pair is removed by swapping it with the
     /// last element of the map and popping it off. **This perturbs
-    /// the postion of what used to be the last element!**
+    /// the position of what used to be the last element!**
     ///
     /// Return `None` if `key` is not in map.
     ///
@@ -861,7 +861,7 @@ impl<K, V, S> IndexMap<K, V, S>
     ///
     /// Like `Vec::swap_remove`, the pair is removed by swapping it with the
     /// last element of the map and popping it off. **This perturbs
-    /// the postion of what used to be the last element!**
+    /// the position of what used to be the last element!**
     ///
     /// Return `None` if `key` is not in map.
     pub fn swap_remove_full<Q: ?Sized>(&mut self, key: &Q) -> Option<(usize, K, V)>

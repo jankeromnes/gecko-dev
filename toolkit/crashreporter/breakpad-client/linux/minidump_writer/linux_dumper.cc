@@ -258,7 +258,7 @@ void CrOSPostProcessMappings(wasteful_vector<MappingInfo*>& mappings) {
   // The entry point is in the first mapping. We want to find the location
   // of the entry point after merging segment. To do this, we want to find
   // the mapping that covers the first mapping from the original mapping list.
-  // If the mapping is not in the beginning, we move it to the begining via
+  // If the mapping is not in the beginning, we move it to the beginning via
   // a right rotate by using reverse iterators.
   for (l = 0; l < mappings.size(); l++) {
     if (mappings[l]->start_addr <= first_start_addr

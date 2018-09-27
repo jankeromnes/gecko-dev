@@ -23,7 +23,7 @@ void TInfoSinkBase::prefix(Severity severity)
             sink.append("ERROR: ");
             break;
         default:
-            sink.append("UNKOWN ERROR: ");
+            sink.append("UNKNOWN ERROR: ");
             break;
     }
 }

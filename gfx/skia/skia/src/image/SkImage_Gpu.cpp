@@ -137,7 +137,7 @@ static void apply_premul(const SkImageInfo& info, void* pixels, size_t rowBytes)
             return; // nothing to do
     }
 
-    // SkColor is not necesarily RGBA or BGRA, but it is one of them on little-endian,
+    // SkColor is not necessarily RGBA or BGRA, but it is one of them on little-endian,
     // and in either case, the alpha-byte is always in the same place, so we can safely call
     // SkPreMultiplyColor()
     //

@@ -12,7 +12,7 @@
         "type": "object",
         "optional": true,
         "allowedContexts": ["content", "devtools"],
-        "description": "Set for the lifetime of a callback if an ansychronous extension api has resulted in an error. If no error has occured lastError will be <var>undefined</var>.",
+        "description": "Set for the lifetime of a callback if an ansychronous extension api has resulted in an error. If no error has occurred lastError will be <var>undefined</var>.",
         "properties": {
           "message": { "type": "string", "description": "Description of the error that has taken place." }
         },

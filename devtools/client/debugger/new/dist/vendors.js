@@ -1071,7 +1071,7 @@ function defaultClearTimeout () {
 } ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
+        //normal environments in sane situations
         return setTimeout(fun, 0);
     }
     // if setTimeout wasn't available but was latter defined
@@ -1096,7 +1096,7 @@ function runTimeout(fun) {
 }
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
+        //normal environments in sane situations
         return clearTimeout(marker);
     }
     // if clearTimeout wasn't available but was latter defined
@@ -2347,7 +2347,7 @@ const ElectronKeysMapping = {
 };
 
 /**
- * Helper to listen for keyboard events decribed in .properties file.
+ * Helper to listen for keyboard events described in .properties file.
  *
  * let shortcuts = new KeyShortcuts({
  *   window
@@ -7418,7 +7418,7 @@ class Telemetry {
    *        Defaults to false.
    *
    * @returns {Boolean}
-   *          True if the timer was succesfully stopped and the data was added
+   *          True if the timer was successfully stopped and the data was added
    *          to the histogram, False otherwise.
    */
   finish(histogramId, obj, canceledOkay) {
@@ -7443,7 +7443,7 @@ class Telemetry {
    *        Defaults to false.
    *
    * @returns {Boolean}
-   *          True if the timer was succesfully stopped and the data was added
+   *          True if the timer was successfully stopped and the data was added
    *          to the histogram, False otherwise.
    */
   finishKeyed(histogramId, key, obj, cancelledOkay) {

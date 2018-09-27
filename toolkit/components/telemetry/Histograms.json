@@ -4722,7 +4722,7 @@
     "keyed": true,
     "n_values": 30,
     "bug_numbers": [1332780],
-    "description": "Network error from SafeBrowsing database updates. (0=sucess, 1=unknown error, 2=already connected, 3=not connected, 4=connection refused,5=net timeout, 6=offline, 7=port access not allowed, 8=net reset, 9=net interrupt, 10=proxy connection refused,11=partial transfer,12=inadequate security,13=unknown host,14=dns lookup queue full,15=unknown proxy host"
+    "description": "Network error from SafeBrowsing database updates. (0=success, 1=unknown error, 2=already connected, 3=not connected, 4=connection refused,5=net timeout, 6=offline, 7=port access not allowed, 8=net reset, 9=net interrupt, 10=proxy connection refused,11=partial transfer,12=inadequate security,13=unknown host,14=dns lookup queue full,15=unknown proxy host"
   },
   "URLCLASSIFIER_UPDATE_REMOTE_STATUS2": {
     "record_in_processes": ["main", "content"],
@@ -4842,7 +4842,7 @@
     "kind": "enumerated",
     "n_values": 30,
     "bug_numbers": [1351147],
-    "description": "Whether or not an error was encountered while sending a Safe Browsing ThreatHit report. (0=sucess, 1=unknown error, 2=already connected, 3=not connected, 4=connection refused,5=net timeout, 6=offline, 7=port access not allowed, 8=net reset, 9=net interrupt, 10=proxy connection refused, 11=partial transfer, 12=inadequate security, 13=unknown host, 14=dns lookup queue full, 15=unknown proxy host)"
+    "description": "Whether or not an error was encountered while sending a Safe Browsing ThreatHit report. (0=success, 1=unknown error, 2=already connected, 3=not connected, 4=connection refused,5=net timeout, 6=offline, 7=port access not allowed, 8=net reset, 9=net interrupt, 10=proxy connection refused, 11=partial transfer, 12=inadequate security, 13=unknown host, 14=dns lookup queue full, 15=unknown proxy host)"
   },
   "URLCLASSIFIER_THREATHIT_REMOTE_STATUS": {
     "record_in_processes": ["main", "content"],
@@ -12184,14 +12184,14 @@
     "record_in_processes": ["main", "content"],
     "expires_in_version": "default",
     "kind": "count",
-    "description": "A number of sucessfully translated pages"
+    "description": "A number of successfully translated pages"
   },
   "TRANSLATED_PAGES_BY_LANGUAGE": {
     "record_in_processes": ["main", "content"],
     "expires_in_version": "default",
     "kind": "count",
     "keyed": true,
-    "description": "A number of sucessfully translated pages by language"
+    "description": "A number of successfully translated pages by language"
   },
   "TRANSLATED_CHARACTERS": {
     "record_in_processes": ["main", "content"],
@@ -12199,7 +12199,7 @@
     "kind": "exponential",
     "high": 10240,
     "n_buckets": 50,
-    "description": "A number of sucessfully translated characters"
+    "description": "A number of successfully translated characters"
   },
   "DENIED_TRANSLATION_OFFERS": {
     "record_in_processes": ["main", "content"],

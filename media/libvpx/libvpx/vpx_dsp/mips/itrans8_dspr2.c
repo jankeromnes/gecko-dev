@@ -456,7 +456,7 @@ void vpx_idct8x8_64_add_dspr2(const int16_t *input, uint8_t *dest, int stride) {
   int16_t *outptr = out;
   uint32_t pos = 45;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp    %[pos],    1    \n\t" : : [pos] "r"(pos));
 
   // First transform rows
@@ -471,7 +471,7 @@ void vpx_idct8x8_12_add_dspr2(const int16_t *input, uint8_t *dest, int stride) {
   int16_t *outptr = out;
   uint32_t pos = 45;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp    %[pos],    1    \n\t" : : [pos] "r"(pos));
 
   // First transform rows
@@ -511,7 +511,7 @@ void vpx_idct8x8_1_add_dspr2(const int16_t *input, uint8_t *dest, int stride) {
   int32_t a1, absa1;
   int32_t t1, t2, vector_a1, vector_1, vector_2;
 
-  /* bit positon for extract from acc */
+  /* bit position for extract from acc */
   __asm__ __volatile__("wrdsp      %[pos],     1           \n\t"
 
                        :

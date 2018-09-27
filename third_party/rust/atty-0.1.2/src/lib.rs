@@ -10,7 +10,7 @@
 //! ```
 //!
 //! ```
-//! if atty::isnt() {
+//! if atty::isn't() {
 //!   println!("i'm not a tty")
 //! }
 //! ```
@@ -47,7 +47,7 @@ pub fn is() -> bool {
 }
 
 /// returns true if this is _not_ a tty
-pub fn isnt() -> bool {
+pub fn isn't() -> bool {
     !is()
 }
 

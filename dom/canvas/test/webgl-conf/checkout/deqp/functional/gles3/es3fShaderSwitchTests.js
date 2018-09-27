@@ -463,7 +463,7 @@ goog.scope(function() {
             '}\n');
 
         // Negative cases.
-        // This is being tested somwhere else: data/gles3/shaders/switch.html
+        // This is being tested somewhere else: data/gles3/shaders/switch.html
     };
 
     /**

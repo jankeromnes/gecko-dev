@@ -168,9 +168,9 @@ ContentBridgeParent::AllocPBrowserParent(const TabId& aTabId,
 }
 
 bool
-ContentBridgeParent::DeallocPBrowserParent(PBrowserParent* aParent)
+ContentBridgeParent::DeallocPBrowserParent(PBrowserParent* apparent)
 {
-  return nsIContentParent::DeallocPBrowserParent(aParent);
+  return nsIContentParent::DeallocPBrowserParent(apparent);
 }
 
 mozilla::ipc::IPCResult

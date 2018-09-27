@@ -93,7 +93,7 @@ function GameBoyCanvas() {
   }
   this.width = 160;
   this.height = 144;
-  this.style = { visibility: "visibile" };
+  this.style = { visibility: "visible" };
 }
 
 function cout(message, colorIndex) {

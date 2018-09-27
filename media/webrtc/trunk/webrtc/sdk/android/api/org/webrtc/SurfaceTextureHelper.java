@@ -98,7 +98,7 @@ public class SurfaceTextureHelper {
       pendingListener = null;
       // May have a pending frame from the previous capture session - drop it.
       if (hasPendingTexture) {
-        // Calling updateTexImage() is neccessary in order to receive new frames.
+        // Calling updateTexImage() is necessary in order to receive new frames.
         updateTexImage();
         hasPendingTexture = false;
       }

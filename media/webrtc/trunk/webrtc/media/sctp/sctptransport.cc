@@ -282,7 +282,7 @@ class SctpTransport::UsrSctpWrapper {
   }
 
   // This is the callback usrsctp uses when there's data to send on the network
-  // that has been wrapped appropriatly for the SCTP protocol.
+  // that has been wrapped appropriately for the SCTP protocol.
   static int OnSctpOutboundPacket(void* addr,
                                   void* data,
                                   size_t length,

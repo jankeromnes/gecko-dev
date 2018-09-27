@@ -53,10 +53,10 @@ NS_IMPL_ISUPPORTS_INHERITED(HTMLScriptElement, nsGenericHTMLElement,
                             nsIMutationObserver)
 
 nsresult
-HTMLScriptElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLScriptElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
@@ -164,7 +164,7 @@ HTMLScriptElement::SetText(const nsAString& aValue, ErrorResult& aRv)
 }
 
 // variation of this code in nsSVGScriptElement - check if changes
-// need to be transfered when modifying
+// need to be transferred when modifying
 
 bool
 HTMLScriptElement::GetScriptType(nsAString& aType)
@@ -211,7 +211,7 @@ HTMLScriptElement::FreezeExecutionAttrs(nsIDocument* aOwnerDoc)
               !type.IsEmpty() && type.LowerCaseEqualsASCII("module");
 
   // variation of this code in nsSVGScriptElement - check if changes
-  // need to be transfered when modifying.  Note that we don't use GetSrc here
+  // need to be transferred when modifying.  Note that we don't use GetSrc here
   // because it will return the base URL when the attr value is "".
   nsAutoString src;
   if (GetAttr(kNameSpaceID_None, nsGkAtoms::src, src)) {

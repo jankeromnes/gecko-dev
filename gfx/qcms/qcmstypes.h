@@ -18,7 +18,7 @@
 #endif
 
 #if !defined(IS_LITTLE_ENDIAN) && !defined(IS_BIG_ENDIAN)
-#error Unknown endianess
+#error Unknown endianness
 #endif
 
 #if defined (_SVR4) || defined (SVR4) || defined (__OpenBSD__) || defined (_sgi) || defined (__sun) || defined (sun) || defined (__digital__)

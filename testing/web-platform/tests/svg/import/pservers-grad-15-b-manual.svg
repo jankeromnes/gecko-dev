@@ -28,7 +28,7 @@
     <d:passCriteria xmlns="http://www.w3.org/1999/xhtml">
       <p>
         The top rectangle must be blue at the lefthand side and fuchsia at the right
-        hand side, fading smoothly accross. The lower rectangle must be fuchsia at
+        hand side, fading smoothly across. The lower rectangle must be fuchsia at
         the edges with a black centre to the radial gradient at the centre of the
         rectangle, and the gradient occupying the whole rectangle.
       </p>

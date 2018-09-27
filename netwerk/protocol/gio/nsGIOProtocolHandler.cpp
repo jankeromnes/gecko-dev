@@ -307,7 +307,7 @@ nsGIOInputStream::DoOpenDirectory()
 /**
  * Create file stream and set mime type for channel
  * @param info file info used to determine mime type
- * @return NS_OK when file stream created successfuly, error code otherwise
+ * @return NS_OK when file stream created successfully, error code otherwise
  */
 nsresult
 nsGIOInputStream::DoOpenFile(GFileInfo *info)

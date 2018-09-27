@@ -307,7 +307,7 @@ public:
     if (mChunks[0].IsNull()) {
       StreamTime extraToKeep = aNewEnd - mChunks[0].GetDuration();
       if (extraToKeep < 0) {
-        // reduce the size of the Null, get rid of everthing else
+        // reduce the size of the Null, get rid of everything else
         mChunks[0].SetNull(aNewEnd);
         extraToKeep = 0;
       }

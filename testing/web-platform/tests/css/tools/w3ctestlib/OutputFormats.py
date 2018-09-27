@@ -30,7 +30,7 @@ class BasicFormat:
      format-specific location transformations."""
   formatDirName = None
   indexExt      = '.htm'
-  convert       = True   # XXX hack to supress format conversion in support dirs, need to clean up output code to make this cleaner
+  convert       = True   # XXX hack to suppress format conversion in support dirs, need to clean up output code to make this cleaner
 
   def __init__(self, destroot, sourceTree, extMap=None, outputDirName=None):
     """Creates format root of the output tree. `destroot` is the root path

@@ -145,7 +145,7 @@ class HTTP20Connection(object):
         # - _recv_cb
         # respectively.
         #
-        # I.e, send/recieve on the connection and its streams are serialized
+        # I.e, send/receive on the connection and its streams are serialized
         # separately across the threads accessing the connection.  This is a
         # simple way of providing thread-safety.
         #
@@ -550,7 +550,7 @@ class HTTP20Connection(object):
         # Concurrency:
         #
         # Hold _write_lock: synchronize access to the connection's HPACK
-        # encoder and decoder and the subsquent write to the connection
+        # encoder and decoder and the subsequent write to the connection
         with self._write_lock:
             stream.send_headers(headers_only)
 
@@ -702,7 +702,7 @@ class HTTP20Connection(object):
                 # exception.
                 self.close()
 
-                # If an error occured, try to read the error description from
+                # If an error occurred, try to read the error description from
                 # code registry otherwise use the frame's additional data.
                 if event.error_code != 0:
                     try:

@@ -79,10 +79,10 @@ HTMLMetaElement::AfterSetAttr(int32_t aNameSpaceID, nsAtom* aName,
 }
 
 nsresult
-HTMLMetaElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLMetaElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                             nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
   if (aDocument &&

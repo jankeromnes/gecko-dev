@@ -324,7 +324,7 @@ const FramebufferAttachment *FramebufferState::getAttachment(const Context *cont
         return getColorAttachment(attachment - GL_COLOR_ATTACHMENT0);
     }
 
-    // WebGL1 allows a developer to query for attachment parameters even when "inconsistant" (i.e.
+    // WebGL1 allows a developer to query for attachment parameters even when "inconsistent" (i.e.
     // multiple conflicting attachment points) and requires us to return the framebuffer attachment
     // associated with WebGL.
     switch (attachment)

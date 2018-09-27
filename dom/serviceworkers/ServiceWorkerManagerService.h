@@ -34,8 +34,8 @@ public:
   static already_AddRefed<ServiceWorkerManagerService> Get();
   static already_AddRefed<ServiceWorkerManagerService> GetOrCreate();
 
-  void RegisterActor(ServiceWorkerManagerParent* aParent);
-  void UnregisterActor(ServiceWorkerManagerParent* aParent);
+  void RegisterActor(ServiceWorkerManagerParent* apparent);
+  void UnregisterActor(ServiceWorkerManagerParent* apparent);
 
   void PropagateRegistration(uint64_t aParentID,
                              ServiceWorkerRegistrationData& aData);

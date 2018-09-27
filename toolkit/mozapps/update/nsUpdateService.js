@@ -1627,7 +1627,7 @@ UpdateService.prototype = {
       LOG("UpdateService:_postUpdateProcessing - unable to apply " +
           "updates... returning early");
       // If the update is present in the update directly somehow,
-      // it would prevent us from notifying the user of futher updates.
+      // it would prevent us from notifying the user of further updates.
       cleanupActiveUpdate();
       return;
     }
@@ -4032,7 +4032,7 @@ UpdatePrompt.prototype = {
               // If the update window is already open skip showing the UI
               if (!this.updatePrompt._getUpdateWindow())
                 this.updatePrompt._showUI(parent, uri, features, name, page, update);
-              // fall thru
+              // fall through
             case "quit-application":
               idleService.removeIdleObserver(this, IDLE_TIME);
               Services.obs.removeObserver(this, "quit-application");

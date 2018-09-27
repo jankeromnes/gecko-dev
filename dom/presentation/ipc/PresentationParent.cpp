@@ -30,8 +30,8 @@ public:
   NS_DECL_ISUPPORTS
   NS_DECL_NSIPRESENTATIONTRANSPORTBUILDERCONSTRUCTOR
 
-  explicit PresentationTransportBuilderConstructorIPC(PresentationParent* aParent)
-    : mParent(aParent)
+  explicit PresentationTransportBuilderConstructorIPC(PresentationParent* apparent)
+    : mParent(apparent)
   {
   }
 

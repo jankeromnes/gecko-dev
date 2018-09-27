@@ -85,7 +85,7 @@ add_task(async function() {
     "Autocomplete Popup hidden after keyboard Enter key");
 
   // Space separated tokens
-  // The last token where autocomplete is availabe shall generate the popup
+  // The last token where autocomplete is available shall generate the popup
   EventUtils.sendString(" p");
   testAutocompleteContents(["protocol:"], document);
 

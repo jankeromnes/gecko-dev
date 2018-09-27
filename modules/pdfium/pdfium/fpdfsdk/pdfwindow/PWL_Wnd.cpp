@@ -308,7 +308,7 @@ void CPWL_Wnd::GetAppearanceStream(CFX_ByteTextBuf& sAppStream) {
   }
 }
 
-// if don't set,Get default apperance stream
+// if don't set,Get default appearance stream
 void CPWL_Wnd::GetThisAppearanceStream(CFX_ByteTextBuf& sAppStream) {
   CFX_FloatRect rectWnd = GetWindowRect();
   if (!rectWnd.IsEmpty()) {

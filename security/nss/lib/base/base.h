@@ -466,7 +466,7 @@ NSS_EXTERN_DATA PLHashAllocOps nssArenaHashAllocOps;
  * nss_SetError
  *
  * This routine places a new error code on the top of the calling
- * thread's error stack.  Calling this routine wiht an error code
+ * thread's error stack.  Calling this routine with an error code
  * of zero will clear the error stack.
  */
 
@@ -560,7 +560,7 @@ NSS_EXTERN NSSUTF8 *nssUTF8_Duplicate(const NSSUTF8 *s, NSSArena *arenaOpt);
  * Returns true if the two Printable strings pointed to by the
  * two specified NSSUTF8 pointers match when compared with the
  * rules for Printable String (leading and trailing spaces are
- * disregarded, extents of whitespace match irregardless of length,
+ * disregarded, extents of whitespace match regardless of length,
  * and case is not significant), then PR_TRUE will be returned.
  * Otherwise, PR_FALSE will be returned.  Upon failure, PR_FALSE
  * will be returned.  If the optional statusOpt argument is not

@@ -532,7 +532,7 @@ extern "C" {
   /******************************************************************************
    * WebRtcIsac_GetNewBitStream(...)
    *
-   * This function returns encoded data, with the recieved bwe-index in the
+   * This function returns encoded data, with the received bwe-index in the
    * stream. If the rate is set to a value less than bottleneck of codec
    * the new bistream will be re-encoded with the given target rate.
    * It should always return a complete packet, i.e. only called once
@@ -634,8 +634,8 @@ extern "C" {
   /*******************************************************************************
    * WebRtcIsac_GetNewFrameLen(...)
    *
-   * returns the frame lenght (in samples) of the next packet. In the case of channel-adaptive
-   * mode, iSAC decides on its frame lenght based on the estimated bottleneck
+   * returns the frame length (in samples) of the next packet. In the case of channel-adaptive
+   * mode, iSAC decides on its frame length based on the estimated bottleneck
    * this allows a user to prepare for the next packet (at the encoder)
    *
    * The primary usage is in CE to make the iSAC works in channel-adaptive mode
@@ -643,7 +643,7 @@ extern "C" {
    * Input:
    *        - ISAC_main_inst     : iSAC struct
    *
-   * Return Value                : frame lenght in samples
+   * Return Value                : frame length in samples
    *
    */
 

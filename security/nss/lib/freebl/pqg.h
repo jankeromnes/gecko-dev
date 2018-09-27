@@ -19,7 +19,7 @@ unsigned int PQG_GetLength(const SECItem *obj);
  * returns SECFaillure and sets SEC_ERROR_INVALID_ARGS if it doesn't.
  * See blapi.h for legal DSA PQG sizes. */
 SECStatus PQG_Check(const PQGParams *params);
-/* Return the prefered hash algorithm for the given PQGParameters. */
+/* Return the preferred hash algorithm for the given PQGParameters. */
 HASH_HashType PQG_GetHashType(const PQGParams *params);
 
 #endif /* _PQG_H_ */

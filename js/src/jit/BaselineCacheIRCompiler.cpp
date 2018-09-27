@@ -166,7 +166,7 @@ JitCode*
 BaselineCacheIRCompiler::compile()
 {
 #ifndef JS_USE_LINK_REGISTER
-    // The first value contains the return addres,
+    // The first value contains the return address,
     // which we pull into ICTailCallReg for tail calls.
     masm.adjustFrame(sizeof(intptr_t));
 #endif

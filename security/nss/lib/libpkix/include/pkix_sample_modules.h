@@ -353,7 +353,7 @@ PKIX_PL_NssContext_SetTimeout(PKIX_UInt32 timeout, PKIX_PL_NssContext *nssContex
  * FUNCTION: PKIX_PL_NssContext_SetMaxResponseLen
  * DESCRIPTION:
  *
- * Sets maximum responce length allowed during network IO operations.
+ * Sets maximum response length allowed during network IO operations.
  *
  * PARAMETERS:
  *  "nssContext"

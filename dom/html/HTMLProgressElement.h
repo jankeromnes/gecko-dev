@@ -51,7 +51,7 @@ protected:
 protected:
   /**
    * Returns whethem the progress element is in the indeterminate state.
-   * A progress element is in the indeterminate state if its value is ommited
+   * A progress element is in the indeterminate state if its value is omitted
    * or is not a floating point number..
    *
    * @return whether the progress element is in the indeterminate state.

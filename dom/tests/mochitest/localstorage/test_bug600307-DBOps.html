@@ -42,14 +42,14 @@ function startTest()
   // Basic test 1 (set a key, check presence after reload):
   localStorage.setItem("item", "value");
   localStorageFlushAndReload(function() {
-  is(localStorage.getItem("item"), "value", "Basic persistance works");
+  is(localStorage.getItem("item"), "value", "Basic persistence works");
   is(localStorage.length, 1, "1 item in localStorage");
 
   // Basic test 2 (set a key twice, check presence of the last value):
   localStorage.setItem("item", "value2");
   localStorage.setItem("item", "value3");
   localStorageFlushAndReload(function() {
-  is(localStorage.getItem("item"), "value3", "Basic persistance 2 works");
+  is(localStorage.getItem("item"), "value3", "Basic persistence 2 works");
 
   // Basic test 3 (remove a key, check it has been deleted):
   localStorage.removeItem("item");

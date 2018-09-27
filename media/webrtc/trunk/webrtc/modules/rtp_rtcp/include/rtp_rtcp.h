@@ -115,7 +115,7 @@ class RtpRtcp : public Module {
   // **************************************************************************
 
   // TODO(nisse): Deprecated. Kept temporarily, as an alias for the
-  // new function which has slighly different semantics. Delete as
+  // new function which has slightly different semantics. Delete as
   // soon as known applications are updated.
   virtual int32_t SetMaxTransferUnit(uint16_t size) {
     SetMaxRtpPacketSize(size);

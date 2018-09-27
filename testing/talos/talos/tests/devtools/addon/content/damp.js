@@ -345,7 +345,7 @@ Damp.prototype = {
 
     dump(message + "\n");
 
-    // Stop further test execution and immediatly close DAMP
+    // Stop further test execution and immediately close DAMP
     this._tests = [];
     this._results = null;
     this._doneInternal();

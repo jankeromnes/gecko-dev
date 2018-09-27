@@ -2,7 +2,7 @@
 // - src/annex-b-fns/func-skip-early-err-try.case
 // - src/annex-b-fns/func/switch-dflt.template
 /*---
-description: Extension is observed when creation of variable binding would not produce an early error (try statement) (Funtion declaration in the `default` clause of a `switch` statement in function scope)
+description: Extension is observed when creation of variable binding would not produce an early error (try statement) (Function declaration in the `default` clause of a `switch` statement in function scope)
 esid: sec-web-compat-functiondeclarationinstantiation
 es6id: B.3.3.1
 flags: [generated, noStrict]

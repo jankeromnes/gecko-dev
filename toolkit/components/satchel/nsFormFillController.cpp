@@ -93,7 +93,7 @@ NS_IMPL_CYCLE_COLLECTING_RELEASE(nsFormFillController)
 nsFormFillController::nsFormFillController() :
   mFocusedInput(nullptr),
   mListNode(nullptr),
-  // The amount of time a context menu event supresses showing a
+  // The amount of time a context menu event suppresses showing a
   // popup from a focus event in ms. This matches the threshold in
   // toolkit/components/passwordmgr/LoginManagerContent.jsm.
   mFocusAfterRightClickThreshold(400),

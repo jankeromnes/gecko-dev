@@ -55,7 +55,7 @@ var Modules = (function (modules) {
                     this._baseNode.href = baseUrl;
                     this._linkNode.href = url;
 
-                    // dont use getAttribute as it returns orginal value not resolved
+                    // don't use getAttribute as it returns orignal value not resolved
                     return this._linkNode.href;
 				}
 			}else{

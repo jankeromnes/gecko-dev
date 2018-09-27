@@ -979,7 +979,7 @@ TEST_F(AudioDeviceTest, RunPlayoutAndRecordingInFullDuplex) {
   StopPlayout();
   StopRecording();
 
-  // These thresholds are set rather high to accomodate differences in hardware
+  // These thresholds are set rather high to accommodate differences in hardware
   // in several devices, so this test can be used in swarming.
   // See http://bugs.webrtc.org/6464
   EXPECT_LE(fifo_audio_stream->average_size(), 60u);

@@ -67,7 +67,7 @@ public:
   static already_AddRefed<GetDirectoryListingTaskParent>
   Create(FileSystemBase* aFileSystem,
          const FileSystemGetDirectoryListingParams& aParam,
-         FileSystemRequestParent* aParent,
+         FileSystemRequestParent* apparent,
          ErrorResult& aRv);
 
   nsresult
@@ -76,7 +76,7 @@ public:
 private:
   GetDirectoryListingTaskParent(FileSystemBase* aFileSystem,
                                 const FileSystemGetDirectoryListingParams& aParam,
-                                FileSystemRequestParent* aParent);
+                                FileSystemRequestParent* apparent);
 
   virtual FileSystemResponseValue
   GetSuccessRequestResult(ErrorResult& aRv) const override;

@@ -20,7 +20,7 @@ const testcases = [
     { locale: "x-only-u-kf", start: -1, end: 0 },
 
     // Unicode extension sequence starts with key subtag.
-    // - no suceeding key or type subtags.
+    // - no succeeding key or type subtags.
     { locale: "en-u-ab", start: 2, end: 7 },
     { locale: "en-u-ab-x-y", start: 2, end: 7 },
     { locale: "en-u-ab-x-yz", start: 2, end: 7 },
@@ -37,7 +37,7 @@ const testcases = [
     { locale: "en-u-ab-cdef-x-y-u-kn", start: 2, end: 12 },
 
     // Unicode extension sequence starts with attribute subtag.
-    // - no suceeding attribute or key subtags.
+    // - no succeeding attribute or key subtags.
     { locale: "en-u-abc", start: 2, end: 8 },
     { locale: "en-u-abc-x-y", start: 2, end: 8 },
     { locale: "en-u-abc-x-yz", start: 2, end: 8 },

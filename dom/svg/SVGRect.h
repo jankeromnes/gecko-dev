@@ -20,7 +20,7 @@ namespace dom {
 class SVGRect final : public SVGIRect
 {
 public:
-  explicit SVGRect(nsIContent* aParent, float x=0.0f, float y=0.0f, float w=0.0f,
+  explicit SVGRect(nsIContent* apparent, float x=0.0f, float y=0.0f, float w=0.0f,
                    float h=0.0f);
 
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
@@ -83,10 +83,10 @@ protected:
 } // namespace mozilla
 
 already_AddRefed<mozilla::dom::SVGRect>
-NS_NewSVGRect(nsIContent* aParent, float x=0.0f, float y=0.0f,
+NS_NewSVGRect(nsIContent* apparent, float x=0.0f, float y=0.0f,
               float width=0.0f, float height=0.0f);
 
 already_AddRefed<mozilla::dom::SVGRect>
-NS_NewSVGRect(nsIContent* aParent, const mozilla::gfx::Rect& rect);
+NS_NewSVGRect(nsIContent* apparent, const mozilla::gfx::Rect& rect);
 
 #endif //mozilla_dom_SVGRect_h

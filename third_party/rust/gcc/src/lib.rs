@@ -117,12 +117,12 @@ enum ErrorKind {
     ToolNotFound,
 }
 
-/// Represents an internal error that occurred, with an explaination.
+/// Represents an internal error that occurred, with an explanation.
 #[derive(Clone, Debug)]
 pub struct Error {
     /// Describes the kind of error that occurred.
     kind: ErrorKind,
-    /// More explaination of error that occurred.
+    /// More explanation of error that occurred.
     message: String,
 }
 
@@ -538,7 +538,7 @@ impl Build {
     /// This option sets the `-stdlib` flag, which is only supported by some
     /// compilers (clang, icc) but not by others (gcc). The library will not
     /// detect which compiler is used, as such it is the responsibility of the
-    /// caller to ensure that this option is only used in conjuction with a
+    /// caller to ensure that this option is only used in conjunction with a
     /// compiler which supports the `-stdlib` flag.
     ///
     /// A value of `None` indicates that no specific C++ standard library should

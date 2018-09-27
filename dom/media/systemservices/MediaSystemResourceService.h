@@ -31,16 +31,16 @@ public:
   static void Init();
   static void Shutdown();
 
-  void Acquire(media::MediaSystemResourceManagerParent* aParent,
+  void Acquire(media::MediaSystemResourceManagerParent* apparent,
                uint32_t aId,
                MediaSystemResourceType aResourceType,
                bool aWillWait);
 
-  void ReleaseResource(media::MediaSystemResourceManagerParent* aParent,
+  void ReleaseResource(media::MediaSystemResourceManagerParent* apparent,
                        uint32_t aId,
                        MediaSystemResourceType aResourceType);
 
-  void ReleaseResource(media::MediaSystemResourceManagerParent* aParent);
+  void ReleaseResource(media::MediaSystemResourceManagerParent* apparent);
 
 private:
   MediaSystemResourceService();
@@ -49,8 +49,8 @@ private:
   struct MediaSystemResourceRequest {
     MediaSystemResourceRequest()
       : mParent(nullptr), mId(-1) {}
-    MediaSystemResourceRequest(media::MediaSystemResourceManagerParent* aParent, uint32_t aId)
-      : mParent(aParent), mId(aId) {}
+    MediaSystemResourceRequest(media::MediaSystemResourceManagerParent* apparent, uint32_t aId)
+      : mParent(apparent), mId(aId) {}
     media::MediaSystemResourceManagerParent* mParent;
     uint32_t mId;
   };
@@ -68,11 +68,11 @@ private:
 
   void Destroy();
 
-  void RemoveRequest(media::MediaSystemResourceManagerParent* aParent,
+  void RemoveRequest(media::MediaSystemResourceManagerParent* apparent,
                      uint32_t aId,
                      MediaSystemResourceType aResourceType);
 
-  void RemoveRequests(media::MediaSystemResourceManagerParent* aParent,
+  void RemoveRequests(media::MediaSystemResourceManagerParent* apparent,
                       MediaSystemResourceType aResourceType);
 
   void UpdateRequests(MediaSystemResourceType aResourceType);

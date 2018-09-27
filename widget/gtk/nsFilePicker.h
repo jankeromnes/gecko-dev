@@ -39,7 +39,7 @@ public:
   NS_IMETHOD GetFiles(nsISimpleEnumerator **aFiles) override;
 
   // nsBaseFilePicker
-  virtual void InitNative(nsIWidget *aParent,
+  virtual void InitNative(nsIWidget *apparent,
                           const nsAString& aTitle) override;
 
   static void Shutdown();

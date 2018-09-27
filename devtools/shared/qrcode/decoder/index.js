@@ -349,13 +349,13 @@ function Detector(image) {
     let state = 0;
     for (let x = fromX, y = fromY; x != toX; x += xstep) {
       let realX = steep ? y : x;
-      let realY = steep ? x : y;
+      let really = steep ? x : y;
       if (state == 1) {
-        if (this.image[realX + realY * imgWidth]) {
+        if (this.image[realX + really * imgWidth]) {
           state++;
         }
       } else {
-        if (!this.image[realX + realY * imgWidth]) {
+        if (!this.image[realX + really * imgWidth]) {
           state++;
         }
       }

@@ -386,8 +386,8 @@ int SkOpAngle::convexHullOverlaps(const SkOpAngle* rh) {
         return 1;
     }
     // if the outside sweeps are greater than 180 degress:
-        // first assume the inital tangents are the ordering
-        // if the midpoint direction matches the inital order, that is enough
+        // first assume the initial tangents are the ordering
+        // if the midpoint direction matches the initial order, that is enough
     SkDVector m0 = this->segment()->dPtAtT(this->midT()) - this->fPart.fCurve[0];
     SkDVector m1 = rh->segment()->dPtAtT(rh->midT()) - rh->fPart.fCurve[0];
     double m0xm1 = m0.crossCheck(m1);

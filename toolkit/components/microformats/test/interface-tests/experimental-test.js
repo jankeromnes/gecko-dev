@@ -7,7 +7,7 @@ assert = chai.assert;
 
 describe('experimental', function() {
 
-   it('h-geo - geo data writen as lat;lon', function(){
+   it('h-geo - geo data written as lat;lon', function(){
 
         var expected = {
 				'items': [{

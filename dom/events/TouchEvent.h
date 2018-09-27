@@ -26,14 +26,14 @@ public:
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(TouchList)
 
-  explicit TouchList(nsISupports* aParent)
-    : mParent(aParent)
+  explicit TouchList(nsISupports* apparent)
+    : mParent(apparent)
   {
     nsJSContext::LikelyShortLivingObjectCreated();
   }
-  TouchList(nsISupports* aParent,
+  TouchList(nsISupports* apparent,
             const WidgetTouchEvent::TouchArray& aTouches)
-    : mParent(aParent)
+    : mParent(apparent)
     , mPoints(aTouches)
   {
     nsJSContext::LikelyShortLivingObjectCreated();

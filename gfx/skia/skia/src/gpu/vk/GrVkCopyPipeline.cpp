@@ -84,7 +84,7 @@ GrVkCopyPipeline* GrVkCopyPipeline::Create(GrVkGpu* gpu,
         VK_FALSE,                                                    // depthBoundsTestEnable
         VK_FALSE,                                                    // stencilTestEnable
         dummyStencilState,                                           // front
-        dummyStencilState,                                           // bakc
+        dummyStencilState,                                           // back
         0.0f,                                                        // minDepthBounds
         1.0f                                                         // maxDepthBounds
     };

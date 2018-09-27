@@ -45,7 +45,7 @@ public:
 
   EventStates IntrinsicState() const override;
 
-  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                                nsIContent* aBindingParent) override;
 
   // This function is called when a callback function from nsIMutationObserver

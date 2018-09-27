@@ -736,7 +736,7 @@ bool MessageDifferencer::CompareWithFieldsInternal(
       continue;
     }
 
-    // By this point, field1 and field2 are guarenteed to point to the same
+    // By this point, field1 and field2 are guaranteed to point to the same
     // field, so we can now compare the values.
     if (IsIgnored(message1, message2, field1, *parent_fields)) {
       // Ignore this field. Report and move on.
@@ -786,7 +786,7 @@ bool MessageDifferencer::CompareWithFieldsInternal(
         parent_fields->pop_back();
       }
     }
-    // Increment the field indicies.
+    // Increment the field indices.
     ++field_index1;
     ++field_index2;
   }
@@ -1372,7 +1372,7 @@ int MaximumMatcher::FindMaximumMatch(bool early_return) {
     }
   }
   // Backfill match_list1_ as we only filled match_list2_ when finding
-  // argumenting pathes.
+  // argumenting paths.
   for (int i = 0; i < count2_; ++i) {
     if ((*match_list2_)[i] != -1) {
       (*match_list1_)[(*match_list2_)[i]] = i;

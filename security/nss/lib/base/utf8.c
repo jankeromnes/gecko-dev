@@ -72,7 +72,7 @@ nssUTF8_CaseIgnoreMatch(const NSSUTF8 *a, const NSSUTF8 *b, PRStatus *statusOpt)
  * Returns true if the two Printable strings pointed to by the
  * two specified NSSUTF8 pointers match when compared with the
  * rules for Printable String (leading and trailing spaces are
- * disregarded, extents of whitespace match irregardless of length,
+ * disregarded, extents of whitespace match regardless of length,
  * and case is not significant), then PR_TRUE will be returned.
  * Otherwise, PR_FALSE will be returned.  Upon failure, PR_FALSE
  * will be returned.  If the optional statusOpt argument is not

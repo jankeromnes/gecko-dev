@@ -170,10 +170,10 @@ typedef integer_t	cpu_threadtype_t;
  *
  * The subtype definitions here are unusual for historical reasons.
  * NeXT used to consider 68030 code as generic 68000 code.  For
- * backwards compatability:
+ * backwards compatibility:
  * 
  *	CPU_SUBTYPE_MC68030 symbol has been preserved for source code
- *	compatability.
+ *	compatibility.
  *
  *	CPU_SUBTYPE_MC680x0_ALL has been defined to be the same
  *	subtype as CPU_SUBTYPE_MC68030 for binary comatability.

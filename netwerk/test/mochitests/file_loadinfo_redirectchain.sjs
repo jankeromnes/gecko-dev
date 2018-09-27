@@ -1,6 +1,6 @@
 /*
  * Redirect handler specifically for the needs of:
- * Bug 1194052 - Append Principal to RedirectChain within LoadInfo before the channel is succesfully openend
+ * Bug 1194052 - Append Principal to RedirectChain within LoadInfo before the channel is successfully openend
  */
 
 function createIframeContent(aQuery) {

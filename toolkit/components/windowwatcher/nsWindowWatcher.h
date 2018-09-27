@@ -48,7 +48,7 @@ public:
   NS_DECL_NSPIWINDOWWATCHER
   NS_DECL_NSIPROMPTFACTORY
 
-  static int32_t GetWindowOpenLocation(nsPIDOMWindowOuter* aParent,
+  static int32_t GetWindowOpenLocation(nsPIDOMWindowOuter* apparent,
                                        uint32_t aChromeFlags,
                                        bool aCalledFromJS,
                                        bool aPositionSpecified,
@@ -78,7 +78,7 @@ protected:
 
   // Just like OpenWindowJS, but knows whether it got called via OpenWindowJS
   // (which means called from script) or called via OpenWindow.
-  nsresult OpenWindowInternal(mozIDOMWindowProxy* aParent,
+  nsresult OpenWindowInternal(mozIDOMWindowProxy* apparent,
                               const char* aUrl,
                               const char* aName,
                               const char* aFeatures,
@@ -92,12 +92,12 @@ protected:
                               mozIDOMWindowProxy** aResult);
 
   static nsresult URIfromURL(const char* aURL,
-                             mozIDOMWindowProxy* aParent,
+                             mozIDOMWindowProxy* apparent,
                              nsIURI** aURI);
 
   static uint32_t CalculateChromeFlagsForChild(const nsACString& aFeaturesStr);
 
-  static uint32_t CalculateChromeFlagsForParent(mozIDOMWindowProxy* aParent,
+  static uint32_t CalculateChromeFlagsForParent(mozIDOMWindowProxy* apparent,
                                                 const nsACString& aFeaturesStr,
                                                 bool aDialog,
                                                 bool aChromeURL,
@@ -109,12 +109,12 @@ protected:
   /* Compute the right SizeSpec based on aFeatures */
   static void CalcSizeSpec(const nsACString& aFeatures, SizeSpec& aResult);
   static nsresult ReadyOpenedDocShellItem(nsIDocShellTreeItem* aOpenedItem,
-                                          nsPIDOMWindowOuter* aParent,
+                                          nsPIDOMWindowOuter* apparent,
                                           bool aWindowIsNew,
                                           bool aForceNoOpener,
                                           mozIDOMWindowProxy** aOpenedWindow);
   static void SizeOpenedWindow(nsIDocShellTreeOwner* aTreeOwner,
-                               mozIDOMWindowProxy* aParent,
+                               mozIDOMWindowProxy* apparent,
                                bool aIsCallerChrome,
                                const SizeSpec& aSizeSpec,
                                const mozilla::Maybe<float>& aOpenerFullZoom =

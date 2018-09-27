@@ -1184,7 +1184,7 @@ FxAccountsInternal.prototype = {
         certificate: accountData.cert.rawCert,
       };
     }
-    // We are definately going to generate a new cert, either because it has
+    // We are definitely going to generate a new cert, either because it has
     // already expired, or the keyPair has - and a new keyPair means we must
     // generate a new cert.
 

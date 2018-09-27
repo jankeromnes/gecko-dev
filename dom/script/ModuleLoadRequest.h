@@ -51,7 +51,7 @@ public:
 
   // Create a module load request for an imported module.
   ModuleLoadRequest(nsIURI* aURI,
-                    ModuleLoadRequest* aParent);
+                    ModuleLoadRequest* apparent);
 
   bool IsTopLevel() const override
   {

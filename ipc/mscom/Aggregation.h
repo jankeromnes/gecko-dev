@@ -18,7 +18,7 @@ namespace mscom {
 /**
  * This is used for stabilizing a COM object's reference count during
  * construction when that object aggregates other objects. Since the aggregated
- * object(s) may AddRef() or Release(), we need to artifically boost the
+ * object(s) may AddRef() or Release(), we need to artificially boost the
  * refcount to prevent premature destruction. Note that we increment/decrement
  * instead of AddRef()/Release() in this class because we want to adjust the
  * refcount without causing any other side effects (like object destruction).

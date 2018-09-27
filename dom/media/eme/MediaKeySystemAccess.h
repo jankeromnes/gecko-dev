@@ -32,7 +32,7 @@ public:
   NS_DECL_CYCLE_COLLECTION_SCRIPT_HOLDER_CLASS(MediaKeySystemAccess)
 
 public:
-  explicit MediaKeySystemAccess(nsPIDOMWindowInner* aParent,
+  explicit MediaKeySystemAccess(nsPIDOMWindowInner* apparent,
                                 const nsAString& aKeySystem,
                                 const MediaKeySystemConfiguration& aConfig);
 

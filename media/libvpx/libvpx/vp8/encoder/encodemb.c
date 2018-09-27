@@ -494,7 +494,7 @@ void vp8_encode_inter16x16(MACROBLOCK *x) {
   if (x->optimize) optimize_mb(x);
 }
 
-/* this funciton is used by first pass only */
+/* this function is used by first pass only */
 void vp8_encode_inter16x16y(MACROBLOCK *x) {
   BLOCK *b = &x->block[0];
 

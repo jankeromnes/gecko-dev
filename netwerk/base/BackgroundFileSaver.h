@@ -128,7 +128,7 @@ private:
   bool mWorkerThreadAttentionRequested;
 
   /**
-   * True if the operation should finish as soon as possibile.
+   * True if the operation should finish as soon as possible.
    */
   bool mFinishRequested;
 

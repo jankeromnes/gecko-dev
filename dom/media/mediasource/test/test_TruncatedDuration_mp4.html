@@ -14,7 +14,7 @@
 // of the video.
 // We then shorten the video to 1/3rd of its original size.
 // We ensure that the buffered range immediately reflect the truncation
-// and that we've seeked to the new end of the media as per W3C spec and
+// and that we've sought to the new end of the media as per W3C spec and
 // video.currentTime got updated.
 
 SimpleTest.waitForExplicitFinish();
@@ -35,7 +35,7 @@ runWithMSE(async (ms, v) => {
   v.currentTime = v.duration / 2;
   is(v.currentTime, v.duration / 2, "current time was updated");
   ok(v.seeking, "seeking is true");
-  await once(v, "seeked");
+  await once(v, "sought");
   const duration = round(v.duration / 3);
   is(sb.updating, false, "sourcebuffer isn't updating");
   sb.remove(duration, Infinity);

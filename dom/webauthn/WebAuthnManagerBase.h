@@ -26,7 +26,7 @@ class WebAuthnManagerBase : public nsIDOMEventListener
 public:
   NS_DECL_NSIDOMEVENTLISTENER
 
-  explicit WebAuthnManagerBase(nsPIDOMWindowInner* aParent);
+  explicit WebAuthnManagerBase(nsPIDOMWindowInner* apparent);
 
   virtual void
   FinishMakeCredential(const uint64_t& aTransactionId,

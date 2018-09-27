@@ -201,7 +201,7 @@ class MessageQueue {
   void set_socketserver(SocketServer* ss);
 
   // Note: The behavior of MessageQueue has changed.  When a MQ is stopped,
-  // futher Posts and Sends will fail.  However, any pending Sends and *ready*
+  // further Posts and Sends will fail.  However, any pending Sends and *ready*
   // Posts (as opposed to unexpired delayed Posts) will be delivered before
   // Get (or Peek) returns false.  By guaranteeing delivery of those messages,
   // we eliminate the race condition when an MessageHandler and MessageQueue

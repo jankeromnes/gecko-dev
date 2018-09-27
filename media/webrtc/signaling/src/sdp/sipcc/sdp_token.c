@@ -820,7 +820,7 @@ sdp_result_e sdp_parse_bandwidth (sdp_t *sdp_p, uint16_t level, const char *ptr)
 /*
  * sdp_build_bandwidth
  *
- * Builds *all* the bandwith lines for the specified level.
+ * Builds *all* the bandwidth lines for the specified level.
  */
 sdp_result_e sdp_build_bandwidth (sdp_t *sdp_p, uint16_t level, flex_string *fs)
 {

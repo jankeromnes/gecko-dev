@@ -65,7 +65,7 @@ public:
 
   /**
    * Obtains and transfers ownership of the array of parameters that are bound
-   * to this statment.  This can be null.
+   * to this statement.  This can be null.
    */
   inline already_AddRefed<BindingParamsArray> bindingParamsArray()
   {

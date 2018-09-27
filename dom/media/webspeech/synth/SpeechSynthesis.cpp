@@ -56,8 +56,8 @@ NS_INTERFACE_MAP_END_INHERITING(DOMEventTargetHelper)
 NS_IMPL_ADDREF_INHERITED(SpeechSynthesis, DOMEventTargetHelper)
 NS_IMPL_RELEASE_INHERITED(SpeechSynthesis, DOMEventTargetHelper)
 
-SpeechSynthesis::SpeechSynthesis(nsPIDOMWindowInner* aParent)
-  : DOMEventTargetHelper(aParent)
+SpeechSynthesis::SpeechSynthesis(nsPIDOMWindowInner* apparent)
+  : DOMEventTargetHelper(apparent)
   , mHoldQueue(false)
   , mInnerID(aParent->WindowID())
 {

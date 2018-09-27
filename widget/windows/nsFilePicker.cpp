@@ -194,13 +194,13 @@ nsFilePicker::~nsFilePicker()
 
 NS_IMPL_ISUPPORTS(nsFilePicker, nsIFilePicker)
 
-NS_IMETHODIMP nsFilePicker::Init(mozIDOMWindowProxy *aParent, const nsAString& aTitle, int16_t aMode)
+NS_IMETHODIMP nsFilePicker::Init(mozIDOMWindowProxy *apparent, const nsAString& aTitle, int16_t aMode)
 {
-  nsCOMPtr<nsPIDOMWindowOuter> window = do_QueryInterface(aParent);
+  nsCOMPtr<nsPIDOMWindowOuter> window = do_QueryInterface(apparent);
   nsIDocShell* docShell = window ? window->GetDocShell() : nullptr;  
   mLoadContext = do_QueryInterface(docShell);
   
-  return nsBaseFilePicker::Init(aParent, aTitle, aMode);
+  return nsBaseFilePicker::Init(apparent, aTitle, aMode);
 }
 
 STDMETHODIMP nsFilePicker::QueryInterface(REFIID refiid, void** ppvResult)
@@ -597,7 +597,7 @@ nsFilePicker::ShowW(int16_t *aReturnVal)
 
   *aReturnVal = returnCancel;
 
-  AutoSuppressEvents supress(mParentWidget);
+  AutoSuppressEvents suppress(mParentWidget);
 
   nsAutoString initialDir;
   if (mDisplayDirectory)
@@ -766,10 +766,10 @@ nsFilePicker::SetFilterIndex(int32_t aFilterIndex)
 }
 
 void
-nsFilePicker::InitNative(nsIWidget *aParent,
+nsFilePicker::InitNative(nsIWidget *apparent,
                          const nsAString& aTitle)
 {
-  mParentWidget = aParent;
+  mParentWidget = apparent;
   mTitle.Assign(aTitle);
 }
 

@@ -24,7 +24,7 @@
     t.add_cleanup(() => pc2.close());
     const srdPromise = pc2.setRemoteDescription(offer);
     pc2.addTrack(videoTrack, stream);
-    // The deadlock encountered in https://crbug.com/736725 occured here.
+    // The deadlock encountered in https://crbug.com/736725 occurred here.
     await srdPromise;
     await pc2.createAnswer();
   }, 'RTCPeerConnection addTrack does not deadlock.');

@@ -33,7 +33,7 @@
           0622:   آ  ARABIC LETTER ALEF WITH MADDA ABOVE
           0644:   ل  ARABIC LETTER LAM
           0627:   ا  ARABIC LETTER ALEF
-          062A:   ت  ARABIC LETTER TEH
+          062A:   ت  ARABIC LETTER THE
         </p>
         <p>
           The second subtest has the word for 'three', ثلاثة
@@ -41,7 +41,7 @@
           0644:   ل  ARABIC LETTER LAM
           0627:   ا  ARABIC LETTER ALEF
           062B:   ث  ARABIC LETTER THEH
-          0629:   ة  ARABIC LETTER TEH MARBUTA
+          0629:   ة  ARABIC LETTER THE MARBUTA
         </p>
     </d:testDescription>
     <d:operatorScript xmlns="http://www.w3.org/1999/xhtml">
@@ -53,7 +53,7 @@
       <p>
         The test is passed if the blue glyphs آ and ث touch the first vertical
         line. The second vertical line falls in middle of the brown glyphs
-        inbetween آلا and ت and inbetween ثلا and ثة. The black glyphs ت and ة
+        between آلا and ت and between ثلا and ثة. The black glyphs ت and ة
         touch the last vertical line.
       </p>
     </d:passCriteria>

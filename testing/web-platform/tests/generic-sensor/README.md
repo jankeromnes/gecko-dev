@@ -4,7 +4,7 @@ sensor backends. The `GenericSensorTest` interface is defined as:
 
 ```
   class GenericSensorTest {
-    async initialize();  // Sets up the testing enviroment.
+    async initialize();  // Sets up the testing environment.
     async reset(); // Frees the resources.
   };
 ```

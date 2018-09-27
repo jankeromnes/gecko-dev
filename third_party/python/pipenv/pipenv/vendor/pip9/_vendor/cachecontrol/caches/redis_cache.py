@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 def total_seconds(td):
-    """Python 2.6 compatability"""
+    """Python 2.6 compatibility"""
     if hasattr(td, 'total_seconds'):
         return td.total_seconds()
 

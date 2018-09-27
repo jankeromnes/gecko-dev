@@ -13,7 +13,7 @@
 
 // Flags are defined and declared using DEFINE_xxx and DECLARE_xxx macros,
 // where xxx is the flag type. Flags are referred to via FLAG_yyy,
-// where yyy is the flag name. For intialization and iteration of flags,
+// where yyy is the flag name. For initialization and iteration of flags,
 // see the FlagList class. For full programmatic access to any
 // flag, see the Flag class.
 //

@@ -6,7 +6,7 @@ or{
         standard{
             Sequence{
                 "[normalization on]"
-                "[reorder Orya Deva Beng Guru Gujr Taml Telu Knda Mlym Sinh]"
+                "[reorder Orya Deva Being Guru Gujr Taml Telu Knda Mlym Sinh]"
                 "&ଔ<ଁ<ଂ<ଃ"
                 "&ହ<କ୍ଷ"
                 "&ଯ<<ୟ"

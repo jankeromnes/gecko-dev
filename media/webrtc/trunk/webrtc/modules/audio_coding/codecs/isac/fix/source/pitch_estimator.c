@@ -409,7 +409,7 @@ void WebRtcIsacfix_PitchAnalysis(const int16_t *inn,               /* PITCH_FRAM
   int16_t inbufQ0[PITCH_FRAME_LEN + QLOOKAHEAD];
   int16_t k;
 
-  /* inital pitch estimate */
+  /* initial pitch estimate */
   WebRtcIsacfix_InitialPitch(inn, State,  PitchLags_Q7);
 
 

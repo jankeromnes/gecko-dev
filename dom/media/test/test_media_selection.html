@@ -122,7 +122,7 @@ for (var i = 0; i < gSmallTests.length; ++i) {
                 maketest(add_source, src, otherType, check),
                 maketest(add_source, 'unknown.raw', type, null),
 
-                // should not start loading, type excludes it from media candiate list
+                // should not start loading, type excludes it from media candidate list
                 maketest(add_source, src, 'bogus/type', null),
 
                 // element doesn't notice source children attached later, needs bug 462455 fixed

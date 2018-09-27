@@ -70,7 +70,7 @@ protected:
 
 #ifdef MOZ_ENABLE_SKIA_PDF
 
-  // This variable is independant of nsIPrintSettings::kOutputFormatPDF.
+  // This variable is independent of nsIPrintSettings::kOutputFormatPDF.
   // It controls both whether normal printing is done via PDF using Skia and
   // whether print-to-PDF uses Skia.
   bool mPrintViaSkPDF;

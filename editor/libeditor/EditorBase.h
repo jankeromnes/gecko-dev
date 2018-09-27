@@ -1196,18 +1196,18 @@ protected: // May be called by friends.
   /**
    * DoJoinNodes() merges contents in aNodeToJoin to aNodeToKeep and remove
    * aNodeToJoin from the DOM tree.  aNodeToJoin and aNodeToKeep must have
-   * same parent, aParent.  Additionally, if one of aNodeToJoin or aNodeToKeep
+   * same parent, apparent.  Additionally, if one of aNodeToJoin or aNodeToKeep
    * is a text node, the other must be a text node.
    *
    * @param aNodeToKeep   The node that will remain after the join.
    * @param aNodeToJoin   The node that will be joined with aNodeToKeep.
    *                      There is no requirement that the two nodes be of the
    *                      same type.
-   * @param aParent       The parent of aNodeToKeep
+   * @param apparent       The parent of aNodeToKeep
    */
   nsresult DoJoinNodes(nsINode* aNodeToKeep,
                        nsINode* aNodeToJoin,
-                       nsINode* aParent);
+                       nsINode* apparent);
 
   /**
    * SplitNodeDeepWithTransaction() splits aMostAncestorToSplit deeply.
@@ -1413,10 +1413,10 @@ protected: // May be called by friends.
                                bool bNoBlockCrossing = false);
 
   /**
-   * Returns true if aParent can contain a child of type aTag.
+   * Returns true if apparent can contain a child of type aTag.
    */
-  bool CanContain(nsINode& aParent, nsIContent& aChild) const;
-  bool CanContainTag(nsINode& aParent, nsAtom& aTag) const;
+  bool CanContain(nsINode& apparent, nsIContent& aChild) const;
+  bool CanContainTag(nsINode& apparent, nsAtom& aTag) const;
   bool TagCanContain(nsAtom& aParentTag, nsIContent& aChild) const;
   virtual bool TagCanContainTag(nsAtom& aParentTag, nsAtom& aChildTag) const;
 
@@ -1851,14 +1851,14 @@ protected: // Shouldn't be used by friend classes
                                                 nsIContent& aAncestorLimit);
 
   /**
-   * Return the offset of aChild in aParent.  Asserts fatally if parent or
+   * Return the offset of aChild in apparent.  Asserts fatally if parent or
    * child is null, or parent is not child's parent.
-   * FYI: aChild must not be being removed from aParent.  In such case, these
+   * FYI: aChild must not be being removed from apparent.  In such case, these
    *      methods may return wrong index if aChild doesn't have previous
    *      sibling or next sibling.
    */
   static int32_t GetChildOffset(nsINode* aChild,
-                                nsINode* aParent);
+                                nsINode* apparent);
 
   /**
    * Creates a range with just the supplied node and appends that to the

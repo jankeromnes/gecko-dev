@@ -118,10 +118,10 @@ HTMLOutputElement::IntrinsicState() const
 }
 
 nsresult
-HTMLOutputElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLOutputElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLFormElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLFormElement::BindToTree(aDocument, apparent,
                                                      aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 

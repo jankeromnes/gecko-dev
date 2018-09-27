@@ -3473,7 +3473,7 @@ sctp_asconf_send_nat_state_update(struct sctp_tcb *stcb,
 				continue;
 			}
 			if (laddr->ifa->localifa_flags & SCTP_BEING_DELETED)
-				/* Address being deleted by the system, dont
+				/* Address being deleted by the system, don't
 				 * list.
 				 */
 				continue;

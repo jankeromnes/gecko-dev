@@ -91,7 +91,7 @@ public:
   GetContentPermissionRequestParentById(const TabId& aTabId);
 
   static void
-  NotifyRemoveContentPermissionRequestParent(PContentPermissionRequestParent* aParent);
+  NotifyRemoveContentPermissionRequestParent(PContentPermissionRequestParent* apparent);
 
   static nsTArray<PContentPermissionRequestChild*>
   GetContentPermissionRequestChildById(const TabId& aTabId);
@@ -140,8 +140,8 @@ private:
     NS_DECL_ISUPPORTS
     NS_DECL_NSICONTENTPERMISSIONREQUESTER
 
-    explicit nsContentPermissionRequesterProxy(ContentPermissionRequestParent* aParent)
-      : mParent(aParent)
+    explicit nsContentPermissionRequesterProxy(ContentPermissionRequestParent* apparent)
+      : mParent(apparent)
       , mWaitGettingResult(false) {}
 
     void NotifyVisibilityResult(const bool& aIsVisible);

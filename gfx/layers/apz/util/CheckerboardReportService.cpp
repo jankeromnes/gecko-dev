@@ -172,8 +172,8 @@ CheckerboardReportService::Constructor(const dom::GlobalObject& aGlobal, ErrorRe
   return ces.forget();
 }
 
-CheckerboardReportService::CheckerboardReportService(nsISupports* aParent)
-  : mParent(aParent)
+CheckerboardReportService::CheckerboardReportService(nsISupports* apparent)
+  : mParent(apparent)
 {
 }
 

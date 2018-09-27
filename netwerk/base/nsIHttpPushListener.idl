@@ -27,7 +27,7 @@ interface nsIHttpPushListener : nsISupports
    * The new channel can be canceled after the AsyncOpen if it is not wanted.
    *
    * @param associatedChannel
-   *        the monitor channel that was recieved on
+   *        the monitor channel that was received on
    * @param pushChannel
    *        a channel to the resource which is being pushed
    */

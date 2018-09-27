@@ -273,7 +273,7 @@ private:
         return mLastSendError;
     }
 
-    // Currently only for debugging purposes, doesn't aquire mMonitor.
+    // Currently only for debugging purposes, doesn't acquire mMonitor.
     ChannelState GetChannelState__TotallyRacy() const {
         return mChannelState;
     }

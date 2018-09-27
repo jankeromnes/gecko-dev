@@ -47,7 +47,7 @@ ig{
                 timeSeparator{":"}
             }
         }
-        beng{
+        being{
             symbols{
                 timeSeparator{":"}
             }

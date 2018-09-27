@@ -31,10 +31,10 @@ using namespace mozilla::gfx;
 namespace mozilla {
 namespace dom {
 
-VRFieldOfView::VRFieldOfView(nsISupports* aParent,
+VRFieldOfView::VRFieldOfView(nsISupports* apparent,
                              double aUpDegrees, double aRightDegrees,
                              double aDownDegrees, double aLeftDegrees)
-  : mParent(aParent)
+  : mParent(apparent)
   , mUpDegrees(aUpDegrees)
   , mRightDegrees(aRightDegrees)
   , mDownDegrees(aDownDegrees)
@@ -42,8 +42,8 @@ VRFieldOfView::VRFieldOfView(nsISupports* aParent,
 {
 }
 
-VRFieldOfView::VRFieldOfView(nsISupports* aParent, const gfx::VRFieldOfView& aSrc)
-  : mParent(aParent)
+VRFieldOfView::VRFieldOfView(nsISupports* apparent, const gfx::VRFieldOfView& aSrc)
+  : mParent(apparent)
   , mUpDegrees(aSrc.upDegrees)
   , mRightDegrees(aSrc.rightDegrees)
   , mDownDegrees(aSrc.downDegrees)
@@ -147,15 +147,15 @@ NS_IMPL_CYCLE_COLLECTION_TRACE_END
 NS_IMPL_CYCLE_COLLECTION_ROOT_NATIVE(VREyeParameters, AddRef)
 NS_IMPL_CYCLE_COLLECTION_UNROOT_NATIVE(VREyeParameters, Release)
 
-VREyeParameters::VREyeParameters(nsISupports* aParent,
+VREyeParameters::VREyeParameters(nsISupports* apparent,
                                  const gfx::Point3D& aEyeTranslation,
                                  const gfx::VRFieldOfView& aFOV,
                                  const gfx::IntSize& aRenderSize)
-  : mParent(aParent)
+  : mParent(apparent)
   , mEyeTranslation(aEyeTranslation)
   , mRenderSize(aRenderSize)
 {
-  mFOV = new VRFieldOfView(aParent, aFOV);
+  mFOV = new VRFieldOfView(apparent, aFOV);
   mozilla::HoldJSObjects(this);
 }
 
@@ -190,10 +190,10 @@ VREyeParameters::WrapObject(JSContext* aCx, JS::Handle<JSObject*> aGivenProto)
   return VREyeParameters_Binding::Wrap(aCx, this, aGivenProto);
 }
 
-VRStageParameters::VRStageParameters(nsISupports* aParent,
+VRStageParameters::VRStageParameters(nsISupports* apparent,
                                      const gfx::Matrix4x4& aSittingToStandingTransform,
                                      const gfx::Size& aSize)
-  : mParent(aParent)
+  : mParent(apparent)
   , mSittingToStandingTransform(aSittingToStandingTransform)
   , mSittingToStandingTransformArray(nullptr)
   , mSize(aSize)
@@ -259,15 +259,15 @@ VRDisplayCapabilities::WrapObject(JSContext* aCx, JS::Handle<JSObject*> aGivenPr
   return VRDisplayCapabilities_Binding::Wrap(aCx, this, aGivenProto);
 }
 
-VRPose::VRPose(nsISupports* aParent, const gfx::VRHMDSensorState& aState)
-  : Pose(aParent)
+VRPose::VRPose(nsISupports* apparent, const gfx::VRHMDSensorState& aState)
+  : Pose(apparent)
   , mVRState(aState)
 {
   mozilla::HoldJSObjects(this);
 }
 
-VRPose::VRPose(nsISupports* aParent)
-  : Pose(aParent)
+VRPose::VRPose(nsISupports* apparent)
+  : Pose(apparent)
 {
   mVRState.inputFrameID = 0;
   mVRState.timestamp = 0.0;
@@ -797,15 +797,15 @@ NS_IMPL_CYCLE_COLLECTION_TRACE_END
 NS_IMPL_CYCLE_COLLECTION_ROOT_NATIVE(VRFrameData, AddRef)
 NS_IMPL_CYCLE_COLLECTION_UNROOT_NATIVE(VRFrameData, Release)
 
-VRFrameData::VRFrameData(nsISupports* aParent)
-  : mParent(aParent)
+VRFrameData::VRFrameData(nsISupports* apparent)
+  : mParent(apparent)
   , mLeftProjectionMatrix(nullptr)
   , mLeftViewMatrix(nullptr)
   , mRightProjectionMatrix(nullptr)
   , mRightViewMatrix(nullptr)
 {
   mozilla::HoldJSObjects(this);
-  mPose = new VRPose(aParent);
+  mPose = new VRPose(apparent);
 }
 
 VRFrameData::~VRFrameData()
@@ -968,8 +968,8 @@ NS_IMPL_CYCLE_COLLECTION_WRAPPERCACHE(VRSubmitFrameResult, mParent)
 NS_IMPL_CYCLE_COLLECTION_ROOT_NATIVE(VRSubmitFrameResult, AddRef)
 NS_IMPL_CYCLE_COLLECTION_UNROOT_NATIVE(VRSubmitFrameResult, Release)
 
-VRSubmitFrameResult::VRSubmitFrameResult(nsISupports* aParent)
-  : mParent(aParent)
+VRSubmitFrameResult::VRSubmitFrameResult(nsISupports* apparent)
+  : mParent(apparent)
   , mFrameNum(0)
 {
   mozilla::HoldJSObjects(this);

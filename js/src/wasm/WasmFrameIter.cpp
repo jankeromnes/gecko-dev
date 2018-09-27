@@ -1038,7 +1038,7 @@ js::wasm::StartUnwinding(const RegisterState& registers, UnwindState* unwindStat
             (void)PoppedTLSReg;
             // The fixedFP field of the Frame has been loaded into fp.
             // The ra and TLS might also be loaded, but the Frame structure is
-            // still on stack, so we can acess the ra form there.
+            // still on stack, so we can access the ra form there.
             AssertCallerFP(fpWasTagged, fp, sp);
             fixedPC = reinterpret_cast<Frame*>(sp)->returnAddress;
             fixedFP = fp;

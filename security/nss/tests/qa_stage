@@ -74,7 +74,7 @@ qa_stage_init()
         Echo "Staging area daily QA (DQA): $DQA_STAGE does not exist, exit"
         exit 1
     fi
-    cd $STAGE_1 || (Echo "Cant cd to $STAGE_1 , exit"; exit)
+    cd $STAGE_1 || (Echo "Can't cd to $STAGE_1 , exit"; exit)
     rm all.tar* 2>/dev/null
     TBX_STAGE=$STAGE_1/tinderbox
     DQA_STAGE=$STAGE_1/daily_qa/${DAYBUILD}
@@ -266,7 +266,7 @@ if [ "$DO_CLEAN" = "ON" ] ; then
         Echo "Staging area daily QA (DQA): $DQA_STAGE does not exist, exit"
         exit 1
     fi
-    cd $STAGE_1 || (Echo "Cant cd to $STAGE_1 , exit"; exit)
+    cd $STAGE_1 || (Echo "Can't cd to $STAGE_1 , exit"; exit)
     if [ -n "$TBX_STAGE" -a -d "$TBX_STAGE" ] ; then
         rm -rf $TBX_STAGE/*
     else
@@ -286,7 +286,7 @@ if [ ! -d  $STAGE_1 ] ; then
     Echo "Staging area daily QA (DQA): $DQA_STAGE does not exist, exit"
     exit 1
 fi
-cd $STAGE_1 || (Echo "Cant cd to $STAGE_1 , exit"; exit)
+cd $STAGE_1 || (Echo "Can't cd to $STAGE_1 , exit"; exit)
 Echo "tar..."
 if [ "$O_SILENT" = "ON" ] ; then
     TARPARAM=cf

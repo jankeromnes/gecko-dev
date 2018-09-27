@@ -243,7 +243,7 @@ private:
     ProxyAccessible* mProxy;
   };
 
-  uint32_t AddSubtree(ProxyAccessible* aParent,
+  uint32_t AddSubtree(ProxyAccessible* apparent,
                       const nsTArray<AccessibleData>& aNewTree, uint32_t aIdx,
                       uint32_t aIdxInParent);
   MOZ_MUST_USE bool CheckDocTree() const;

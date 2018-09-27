@@ -87,7 +87,7 @@ JitRuntime::generateEnterJIT(JSContext* cx, MacroAssembler& masm)
         masm.bind(&noNewTarget);
     }
 
-    // eax <- 8*numValues, eax is now the offset betwen argv and the last value.
+    // eax <- 8*numValues, eax is now the offset between argv and the last value.
     masm.shll(Imm32(3), eax);
 
     // Guarantee stack alignment of Jit frames.
@@ -859,7 +859,7 @@ JitRuntime::generateDebugTrapHandler(JSContext* cx)
 {
     StackMacroAssembler masm;
 #ifndef JS_USE_LINK_REGISTER
-    // The first value contains the return addres,
+    // The first value contains the return address,
     // which we pull into ICTailCallReg for tail calls.
     masm.setFramePushed(sizeof(intptr_t));
 #endif

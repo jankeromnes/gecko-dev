@@ -173,7 +173,7 @@ def TestFile(name, stringlist, force, update):
       return 1
   else:
     if wrote:
-      ErrOut.Log('Should not have writen output %s.' % filename)
+      ErrOut.Log('Should not have written output %s.' % filename)
       return 1
     if cur_time != old_time:
       ErrOut.Log('Should not have modified timestamp for %s.' % filename)

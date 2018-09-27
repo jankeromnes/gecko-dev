@@ -136,7 +136,7 @@ public:
 
   static nsresult
   GetLoadInfo(JSContext* aCx, nsPIDOMWindowInner* aWindow,
-              WorkerPrivate* aParent,
+              WorkerPrivate* apparent,
               const nsAString& aScriptURL, bool aIsChromeWorker,
               LoadGroupBehavior aLoadGroupBehavior, WorkerType aWorkerType,
               WorkerLoadInfo* aLoadInfo);
@@ -1201,7 +1201,7 @@ public:
   StartCancelingTimer();
 
 private:
-  WorkerPrivate(WorkerPrivate* aParent,
+  WorkerPrivate(WorkerPrivate* apparent,
                 const nsAString& aScriptURL, bool aIsChromeWorker,
                 WorkerType aWorkerType, const nsAString& aWorkerName,
                 const nsACString& aServiceWorkerScope,

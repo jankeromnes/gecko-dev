@@ -180,7 +180,7 @@ function module(moduleName) {
 }
 
 /**
- * Specify the number of expected assertions to gurantee that failed test (no assertions are run at all) don't slip through.
+ * Specify the number of expected assertions to guarantee that failed test (no assertions are run at all) don't slip through.
  */
 function expect(asserts) {
 	_config.expected = asserts;
@@ -300,7 +300,7 @@ function url(value) {
  * Checks that the first two arguments are equal, with an optional message.
  * Prints out both expected and actual values on failure.
  *
- * Prefered to ok( expected == actual, message )
+ * Preferred to ok( expected == actual, message )
  *
  * @example equals( "Expected 2 characters.", v.formatMessage("Expected {0} characters.", 2) );
  *

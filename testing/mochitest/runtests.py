@@ -2001,7 +2001,7 @@ toolbar#nav-bar {
             debuggerInfo,
             dump_screen=False):
         """
-        Kill the process, preferrably in a way that gets us a stack trace.
+        Kill the process, preferably in a way that gets us a stack trace.
         Also attempts to obtain a screenshot before killing the process
         if specified.
         """

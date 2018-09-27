@@ -566,7 +566,7 @@ void bufferevent_unlock(struct bufferevent *bufev);
 /**
  * Public interface to manually increase the reference count of a bufferevent
  * this is useful in situations where a user may reference the bufferevent
- * somewhere eles (unknown to libevent)
+ * somewhere else (unknown to libevent)
  *
  * @param bufev the bufferevent to increase the refcount on
  *
@@ -799,7 +799,7 @@ void ev_token_bucket_cfg_free(struct ev_token_bucket_cfg *cfg);
    They are: socket-based bufferevents (normal and IOCP-based), and SSL-based
    bufferevents.
 
-   Return 0 on sucess, -1 on failure.
+   Return 0 on success, -1 on failure.
  */
 EVENT2_EXPORT_SYMBOL
 int bufferevent_set_rate_limit(struct bufferevent *bev,

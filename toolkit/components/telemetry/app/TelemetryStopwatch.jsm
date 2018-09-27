@@ -211,7 +211,7 @@ var TelemetryStopwatch = {
    *                                  is finished after being cancelled. Defaults
    *                                  to false.
    *
-   * @returns {Boolean} True if the timer was succesfully stopped and the data
+   * @returns {Boolean} True if the timer was successfully stopped and the data
    *                    was added to the histogram, False otherwise.
    */
   finish(aHistogram, aObj, aCanceledOkay) {
@@ -321,7 +321,7 @@ var TelemetryStopwatch = {
    *                                  is finished after being cancelled. Defaults
    *                                  to false.
    *
-   * @returns {Boolean} True if the timer was succesfully stopped and the data
+   * @returns {Boolean} True if the timer was successfully stopped and the data
    *                   was added to the histogram, False otherwise.
    */
   finishKeyed(aHistogram, aKey, aObj, aCanceledOkay) {

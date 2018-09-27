@@ -33,7 +33,7 @@ def is_executable_file(path):
 
     if (sys.platform.startswith('sunos')
             and os.getuid() == 0):
-        # When root on Solaris, os.X_OK is True for *all* files, irregardless
+        # When root on Solaris, os.X_OK is True for *all* files, regardless
         # of their executability -- instead, any permission bit of any user,
         # group, or other is fine enough.
         #

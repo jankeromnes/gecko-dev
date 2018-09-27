@@ -260,7 +260,7 @@ class DuplicateError(ConfigObjError):
 
 class ConfigspecError(ConfigObjError):
     """
-    An error occured whilst parsing a configspec.
+    An error occurred whilst parsing a configspec.
     """
 
 
@@ -863,7 +863,7 @@ class Section(dict):
         unless ``raise_errors=False``, in which case set the return value to
         ``False``.
         
-        Any unrecognised keyword arguments you pass to walk, will be pased on
+        Any unrecognised keyword arguments you pass to walk, will be passed on
         to the function you pass in.
         
         Note: if ``call_on_sections`` is ``True`` then - on encountering a
@@ -1722,7 +1722,7 @@ class ConfigObj(Section):
         Handle an error according to the error settings.
         
         Either raise the error or store it.
-        The error will have occured at ``cur_index``
+        The error will have occurred at ``cur_index``
         """
         line = infile[cur_index]
         cur_index += 1

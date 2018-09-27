@@ -42,7 +42,7 @@ LazyLogModule gMediaCacheLog("MediaCache");
 #define LOGE(...) NS_DebugBreak(NS_DEBUG_WARNING, nsPrintfCString(__VA_ARGS__).get(), nullptr, __FILE__, __LINE__)
 
 // For HTTP seeking, if number of bytes needing to be
-// seeked forward is less than this value then a read is
+// sought forward is less than this value then a read is
 // done rather than a byte range request.
 //
 // If we assume a 100Mbit connection, and assume reissuing an HTTP seek causes
@@ -1918,7 +1918,7 @@ MediaCache::NoteSeek(AutoLock& aLock,
                      int64_t aOldOffset)
 {
   if (aOldOffset < aStream->mStreamOffset) {
-    // We seeked forward. Convert blocks from readahead to played.
+    // We sought forward. Convert blocks from readahead to played.
     // Any readahead block that intersects the seeked-over range must
     // be converted.
     int32_t blockIndex = OffsetToBlockIndex(aOldOffset);
@@ -1947,7 +1947,7 @@ MediaCache::NoteSeek(AutoLock& aLock,
       ++blockIndex;
     }
   } else {
-    // We seeked backward. Convert from played to readahead.
+    // We sought backward. Convert from played to readahead.
     // Any played block that is entirely after the start of the seeked-over
     // range must be converted.
     int32_t blockIndex =
@@ -1973,7 +1973,7 @@ MediaCache::NoteSeek(AutoLock& aLock,
           // Adding this as the first block is sure to be OK since
           // this must currently be the earliest readahead block
           // (that's why we're proceeding backwards from the end of
-          // the seeked range to the start)
+          // the sought range to the start)
           aStream->mReadaheadBlocks.AddFirstBlock(cacheBlockIndex);
           Verify(aLock);
         }

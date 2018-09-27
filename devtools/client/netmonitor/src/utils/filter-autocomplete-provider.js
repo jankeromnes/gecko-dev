@@ -81,7 +81,7 @@ function getAutocompleteValuesForFlag(flag, request) {
  */
 function getLastTokenFlagValues(lastToken, requests) {
   // The last token must be a string like "method:GET" or "method:", Any token
-  // without a ":" cant be used to parse out flag values
+  // without a ":" can't be used to parse out flag values
   if (!lastToken.includes(":")) {
     return [];
   }

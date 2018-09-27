@@ -28,15 +28,15 @@ nsFilePickerProxy::~nsFilePickerProxy()
 }
 
 NS_IMETHODIMP
-nsFilePickerProxy::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
+nsFilePickerProxy::Init(mozIDOMWindowProxy* apparent, const nsAString& aTitle,
                         int16_t aMode)
 {
-  TabChild* tabChild = TabChild::GetFrom(aParent);
+  TabChild* tabChild = TabChild::GetFrom(apparent);
   if (!tabChild) {
     return NS_ERROR_FAILURE;
   }
 
-  mParent = nsPIDOMWindowOuter::From(aParent);
+  mParent = nsPIDOMWindowOuter::From(apparent);
 
   mMode = aMode;
 
@@ -48,7 +48,7 @@ nsFilePickerProxy::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
 }
 
 void
-nsFilePickerProxy::InitNative(nsIWidget* aParent, const nsAString& aTitle)
+nsFilePickerProxy::InitNative(nsIWidget* apparent, const nsAString& aTitle)
 {
 }
 

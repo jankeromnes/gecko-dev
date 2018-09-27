@@ -8,7 +8,7 @@ function monitorGlobalValues(wast, lib, expected) {
     function setupFrame(frame) {
         var globals = {};
         framesGlobals.push(globals);
-        // Environment with globals follow function scope enviroment
+        // Environment with globals follow function scope environment
         var globalEnv = frame.environment.parent;
         globalEnv.names().forEach(n => {
             globals[n] = [globalEnv.getVariable(n)];

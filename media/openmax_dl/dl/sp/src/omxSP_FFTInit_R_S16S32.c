@@ -116,7 +116,7 @@ OMXResult omxSP_FFTInit_R_S16S32(
      * Filling Twiddle factors : exp^(-j*2*PI*k/ (N/2) ) ; k=0,1,2,...,3/4(N/2)
      * N/2 point complex FFT is used to compute N point real FFT
      * The original twiddle table "armSP_FFT_S32TwiddleTable" is of size (MaxSize/8 + 1)
-     * Rest of the values i.e., upto MaxSize are calculated using the symmetries of sin and cos
+     * Rest of the values i.e., up to MaxSize are calculated using the symmetries of sin and cos
      * The max size of the twiddle table needed is 3/4(N/2) for a radix-4 stage
      *
      * W = (-2 * PI) / N 

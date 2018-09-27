@@ -375,7 +375,7 @@ TEST(CodePointToUtf8Test, CanEncode8To11Bits) {
 
   // 101 0111 0110 => 110-10101 10-110110
   // Some compilers (e.g., GCC on MinGW) cannot handle non-ASCII codepoints
-  // in wide strings and wide chars. In order to accomodate them, we have to
+  // in wide strings and wide chars. In order to accommodate them, we have to
   // introduce such character constants as integers.
   EXPECT_STREQ("\xD5\xB6",
                CodePointToUtf8(static_cast<wchar_t>(0x576), buffer));
@@ -1985,7 +1985,7 @@ TEST(Int32FromEnvOrDieDeathTest, AbortsOnFailure) {
 }
 
 // Tests that Int32FromEnvOrDie() aborts with an error message
-// if the variable cannot be represnted by an Int32.
+// if the variable cannot be represented by an Int32.
 TEST(Int32FromEnvOrDieDeathTest, AbortsOnInt32Overflow) {
   SetEnv(GTEST_FLAG_PREFIX_UPPER_ "VAR", "1234567891234567891234");
   EXPECT_DEATH_IF_SUPPORTED(
@@ -3591,7 +3591,7 @@ TEST(AssertionTest, AssertFalseWithAssertionResult) {
 }
 
 #ifdef __BORLANDC__
-// Restores warnings after previous "#pragma option push" supressed them
+// Restores warnings after previous "#pragma option push" suppressed them
 # pragma option pop
 #endif
 
@@ -3621,7 +3621,7 @@ TEST(AssertionTest, ASSERT_EQ) {
 TEST(AssertionTest, ASSERT_EQ_NULL) {
   // A success.
   const char* p = NULL;
-  // Some older GCC versions may issue a spurious waring in this or the next
+  // Some older GCC versions may issue a spurious warning in this or the next
   // assertion statement. This warning should not be suppressed with
   // static_cast since the test verifies the ability to use bare NULL as the
   // expected parameter to the macro.
@@ -4208,7 +4208,7 @@ TEST(ExpectTest, ExpectFalseWithAssertionResult) {
 }
 
 #ifdef __BORLANDC__
-// Restores warnings after previous "#pragma option push" supressed them
+// Restores warnings after previous "#pragma option push" suppressed them
 # pragma option pop
 #endif
 
@@ -6286,7 +6286,7 @@ TEST(StreamingAssertionsTest, Truth2) {
 }
 
 #ifdef __BORLANDC__
-// Restores warnings after previous "#pragma option push" supressed them
+// Restores warnings after previous "#pragma option push" suppressed them
 # pragma option pop
 #endif
 

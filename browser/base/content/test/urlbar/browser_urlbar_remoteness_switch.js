@@ -3,7 +3,7 @@
 /**
  * Verify that when loading and going back/forward through history between URLs
  * loaded in the content process, and URLs loaded in the parent process, we
- * don't set the URL for the tab to about:blank inbetween the loads.
+ * don't set the URL for the tab to about:blank between the loads.
  */
 add_task(async function() {
   let url = "http://www.example.com/foo.html";

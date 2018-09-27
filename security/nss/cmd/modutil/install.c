@@ -657,7 +657,7 @@ DoInstall(JAR *jar, const char *installDir, const char *tempDir,
             /*executables.Append(dest);*/
         }
 
-        /* Make sure the directory we are targetting exists */
+        /* Make sure the directory we are targeting exists */
         if (make_dirs(dest, file->permissions)) {
             ret = PK11_INSTALL_CREATE_DIR;
             goto loser;

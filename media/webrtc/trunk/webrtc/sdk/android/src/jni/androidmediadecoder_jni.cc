@@ -490,7 +490,7 @@ int32_t MediaCodecVideoDecoder::ProcessHWErrorOnCodecThread() {
     ret_val = InitDecodeOnCodecThread();
     ALOGE << "Reset H.264 codec done. Status: " << ret_val;
     if (ret_val == WEBRTC_VIDEO_CODEC_OK) {
-      // H.264 codec was succesfully reset - return regular error code.
+      // H.264 codec was successfully reset - return regular error code.
       return WEBRTC_VIDEO_CODEC_ERROR;
     } else {
       // Fail to restart H.264 codec - return error code which should stop the

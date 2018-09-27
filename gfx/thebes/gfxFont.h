@@ -1766,7 +1766,7 @@ public:
 
     /**
      * Draw the emphasis marks for the given text run. Its prerequisite
-     * and output are similiar to the method Draw().
+     * and output are similar to the method Draw().
      * @param aPt the baseline origin of the emphasis marks.
      * @param aParams some drawing parameters, see EmphasisMarkDrawParams.
      */

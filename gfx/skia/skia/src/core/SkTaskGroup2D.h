@@ -19,7 +19,7 @@ public:
     // Return false iff the column needs initialization and such initialization is not finished yet.
     virtual bool work2D(int row, int column, int thread) = 0;
 
-    // Return false if no initialization is done for this colum (e.g., it's already initialized; or
+    // Return false if no initialization is done for this column (e.g., it's already initialized; or
     // maybe some other thread is initializing the column).
     virtual bool initColumn(int column, int thread) = 0;
 

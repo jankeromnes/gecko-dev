@@ -42,14 +42,14 @@ class HeapSnapshot final : public nsISupports
   friend struct DeserializedStackFrame;
   friend class JS::ubi::Concrete<JS::ubi::DeserializedNode>;
 
-  explicit HeapSnapshot(JSContext* cx, nsISupports* aParent)
+  explicit HeapSnapshot(JSContext* cx, nsISupports* apparent)
     : timestamp(Nothing())
     , rootId(0)
     , nodes(cx)
     , frames(cx)
-    , mParent(aParent)
+    , mParent(apparent)
   {
-    MOZ_ASSERT(aParent);
+    MOZ_ASSERT(apparent);
   };
 
   // Initialize this HeapSnapshot from the given buffer that contains a

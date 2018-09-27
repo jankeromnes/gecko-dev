@@ -16,7 +16,7 @@ def parameterized(func_suffix, *args, **kwargs):
     r"""Decorator which generates methods given a base method and some data.
 
     **func_suffix** is used as a suffix for the new created method and must be
-    unique given a base method. if **func_suffix** countains characters that
+    unique given a base method. if **func_suffix** contains characters that
     are not allowed in normal python function name, these characters will be
     replaced with "_".
 

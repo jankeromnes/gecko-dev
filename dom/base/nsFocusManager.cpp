@@ -1179,7 +1179,7 @@ nsFocusManager::EnsureCurrentWidgetFocused()
 }
 
 bool
-ActivateOrDeactivateChild(TabParent* aParent, void* aArg)
+ActivateOrDeactivateChild(TabParent* apparent, void* aArg)
 {
   bool active = static_cast<bool>(aArg);
   Unused << aParent->SendParentActivated(active);
@@ -3973,12 +3973,12 @@ nsFocusManager::GetNextTabbableMapArea(bool aForward,
 }
 
 int32_t
-nsFocusManager::GetNextTabIndex(nsIContent* aParent,
+nsFocusManager::GetNextTabIndex(nsIContent* apparent,
                                 int32_t aCurrentTabIndex,
                                 bool aForward)
 {
   int32_t tabIndex, childTabIndex;
-  FlattenedChildIterator iter(aParent);
+  FlattenedChildIterator iter(apparent);
 
   if (aForward) {
     tabIndex = 0;
@@ -3987,7 +3987,7 @@ nsFocusManager::GetNextTabIndex(nsIContent* aParent,
          child = iter.GetNextChild()) {
       // Skip child's descendants if child is a shadow host or slot, as they are
       // in the focus navigation scope owned by child's shadow root
-      if (!(nsDocument::IsShadowDOMEnabled(aParent) && IsHostOrSlot(child))) {
+      if (!(nsDocument::IsShadowDOMEnabled(apparent) && IsHostOrSlot(child))) {
         childTabIndex = GetNextTabIndex(child, aCurrentTabIndex, aForward);
         if (childTabIndex > aCurrentTabIndex && childTabIndex != tabIndex) {
           tabIndex = (tabIndex == 0 || childTabIndex < tabIndex) ? childTabIndex : tabIndex;
@@ -4012,7 +4012,7 @@ nsFocusManager::GetNextTabIndex(nsIContent* aParent,
          child = iter.GetNextChild()) {
       // Skip child's descendants if child is a shadow host or slot, as they are
       // in the focus navigation scope owned by child's shadow root
-      if (!(nsDocument::IsShadowDOMEnabled(aParent) && IsHostOrSlot(child))) {
+      if (!(nsDocument::IsShadowDOMEnabled(apparent) && IsHostOrSlot(child))) {
         childTabIndex = GetNextTabIndex(child, aCurrentTabIndex, aForward);
         if ((aCurrentTabIndex == 0 && childTabIndex > tabIndex) ||
             (childTabIndex < aCurrentTabIndex && childTabIndex > tabIndex)) {

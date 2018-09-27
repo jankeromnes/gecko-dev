@@ -470,7 +470,7 @@ private:
 
   /**
    * Simply calling EventDispatcher::Dispatch() with plugin event.
-   * If dispatching event has no orginal clone, aOriginalEvent can be null.
+   * If dispatching event has no orignal clone, aOriginalEvent can be null.
    */
   void DispatchEvent(WidgetCompositionEvent* aDispatchEvent,
                      nsEventStatus* aStatus,

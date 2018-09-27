@@ -239,7 +239,7 @@ fn test_cose_sign_verify_two_signatures_tampered_signature() {
 }
 
 fn main() {
-    // Basic NSS exmaple usage.
+    // Basic NSS example usage.
     test_nss::test_nss_sign_verify();
     test_nss::test_nss_sign_verify_different_payload();
     test_nss::test_nss_sign_verify_wrong_cert();

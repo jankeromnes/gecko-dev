@@ -62,11 +62,11 @@ interface nsIBaseWindow : nsISupports
 		in nsIWidget parentWidget,	in long x, in long y, in long cx, in long cy);
 
 	/*
-	Tells the window that intialization and setup is complete.  When this is
+	Tells the window that initialization and setup is complete.  When this is
 	called the window can actually create itself based on the setup
 	information handed to it.
 
-	@return	NS_OK - Creation was successfull.
+	@return	NS_OK - Creation was successful.
 				NS_ERROR_UNEXPECTED - This call was unexpected at this time.
 					Perhaps create() had already been called or not all
 					required initialization had been done.
@@ -76,7 +76,7 @@ interface nsIBaseWindow : nsISupports
 	/*
 	Tell the window that it should destroy itself.  This call should not be
 	necessary as it will happen implictly when final release occurs on the
-	object.  If for some reaons you want the window destroyed prior to release
+	object.  If for some reasons you want the window destroyed prior to release
 	due to cycle or ordering issues, then this call provides that ability.
 
 	@return	NS_OK - Everything destroyed properly.

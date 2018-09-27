@@ -55,14 +55,14 @@ var vertices = [
 debug("");
 debug("Test copying between buffers returns correct data");
 
-function testCopyBuffers(srcTarget, dstTarget, copyRead, copyWrite) {
+function testCopyBuffers(srcTarget, dstTarget, copyRead, copyright) {
   var msg = "Copying from " + targetToString(gl, srcTarget) +
       " to " + targetToString(gl, dstTarget)
-  if (copyRead && copyWrite)
+  if (copyRead && copyright)
     msg += " via COPY_READ_BUFFER and COPY_WRITE_BUFFER"
   else if (copyRead)
     msg += " via COPY_READ_BUFFER"
-  else if (copyWrite)
+  else if (copyright)
     msg += " via COPY_WRITE_BUFFER"
   else
     msg += " directly"
@@ -80,17 +80,17 @@ function testCopyBuffers(srcTarget, dstTarget, copyRead, copyWrite) {
 
   gl.bindBuffer(dstTarget, dstBuffer);
   gl.bufferData(dstTarget, new Float32Array(length), gl.STATIC_DRAW);
-  if (copyWrite)
+  if (copyright)
     gl.bindBuffer(gl.COPY_WRITE_BUFFER, dstBuffer);
 
   var expectedGLError = gl.NO_ERROR;
 
   if (srcTarget == dstTarget) {
-    if (!copyRead && copyWrite) {
+    if (!copyRead && copyright) {
       // srcBuffer isn't bound to any targets because of setting up dstBuffer.
       gl.bindBuffer(srcTarget, srcBuffer);
     }
-    if (!copyRead && !copyWrite) {
+    if (!copyRead && !copyright) {
       // Same buffer object, overlapping range.
       expectedGLError = gl.INVALID_VALUE;
     }
@@ -103,7 +103,7 @@ function testCopyBuffers(srcTarget, dstTarget, copyRead, copyWrite) {
   }
 
   gl.copyBufferSubData(copyRead ? gl.COPY_READ_BUFFER : srcTarget,
-                       copyWrite ? gl.COPY_WRITE_BUFFER : dstTarget,
+                       copyright ? gl.COPY_WRITE_BUFFER : dstTarget,
                        0, 0, length);
   if (expectedGLError == gl.NO_ERROR) {
     wtu.glErrorShouldBe(gl, gl.NO_ERROR, "Copying should work");

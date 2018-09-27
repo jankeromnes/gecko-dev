@@ -91,12 +91,12 @@ SpecialPowers.pushPrefEnv({
 }, async function() {
 
   // This test is mainly to verify we only generate different padding size for
-  // the opaque response which is comming from netwrok.
+  // the opaque response which is coming from netwrok.
   // Besides, this test utilizes verifyUsage() to ensure Cache Acions does
-  // update thier usage/padding size to the QM, does record padding size to
+  // update their usage/padding size to the QM, does record padding size to
   // the directory padding file and does do above two things synchronously.
   // So that, opaque response's size is bigger than the normal response's size
-  // and we always have the same usage bewteen from in-memory and from
+  // and we always have the same usage between from in-memory and from
   // the file-system.
   // Note: For the cloned and cached opaque response, the padding size shouldn't
   // be changed. Thus, it makes the attacker harder to get the padding size.

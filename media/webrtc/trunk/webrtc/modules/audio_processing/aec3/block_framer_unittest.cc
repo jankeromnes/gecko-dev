@@ -231,7 +231,7 @@ TEST(BlockFramer, WrongNumberOfPreceedingApiCallsForInsertBlock) {
     for (size_t num_calls = 0; num_calls < 4; ++num_calls) {
       std::ostringstream ss;
       ss << "Sample rate: " << rate;
-      ss << ", Num preceeding InsertBlockAndExtractSubFrame calls: "
+      ss << ", Num preceding InsertBlockAndExtractSubFrame calls: "
          << num_calls;
 
       SCOPED_TRACE(ss.str());

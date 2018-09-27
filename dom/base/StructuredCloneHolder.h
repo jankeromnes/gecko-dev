@@ -65,7 +65,7 @@ public:
   // point we cannot use the overridden methods.
   void Clear();
 
-  // If these 3 methods are not implement, transfering objects will not be
+  // If these 3 methods are not implement, transferring objects will not be
   // allowed. Otherwise only arrayBuffers will be transferred.
 
   virtual bool
@@ -190,7 +190,7 @@ public:
              JS::CloneDataPolicy cloneDataPolicy,
              ErrorResult &aRv);
 
-  void Read(nsISupports* aParent,
+  void Read(nsISupports* apparent,
             JSContext* aCx,
             JS::MutableHandle<JS::Value> aValue,
             ErrorResult &aRv);
@@ -311,13 +311,13 @@ protected:
   // If you receive a buffer from IPC, you can use this method to retrieve a
   // JS::Value. It can happen that you want to pre-populate the array of Blobs
   // and/or the PortIdentifiers.
-  void ReadFromBuffer(nsISupports* aParent,
+  void ReadFromBuffer(nsISupports* apparent,
                       JSContext* aCx,
                       JSStructuredCloneData& aBuffer,
                       JS::MutableHandle<JS::Value> aValue,
                       ErrorResult &aRv);
 
-  void ReadFromBuffer(nsISupports* aParent,
+  void ReadFromBuffer(nsISupports* apparent,
                       JSContext* aCx,
                       JSStructuredCloneData& aBuffer,
                       uint32_t aAlgorithmVersion,

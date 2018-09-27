@@ -56,7 +56,7 @@ public:
    * image load.
    * @param aHadInsecureImageRedirect
    *        boolean flag indicating that an insecure redirect through http
-   *        occured when this image was initially loaded and cached.
+   *        occurred when this image was initially loaded and cached.
    * Remaining parameters are from nsIContentPolicy::ShouldLoad().
    */
   static nsresult ShouldLoad(bool aHadInsecureImageRedirect,

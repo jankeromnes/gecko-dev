@@ -3284,7 +3284,7 @@ CacheIndex::ChangeState(EState aNewState)
     ReportHashStats();
   }
 
-  // Try to evict entries over limit everytime we're leaving state READING,
+  // Try to evict entries over limit every time we're leaving state READING,
   // BUILDING or UPDATING, but not during shutdown or when removing all
   // entries.
   if (!mShuttingDown && !mRemovingAll && aNewState != SHUTDOWN &&

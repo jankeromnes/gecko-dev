@@ -927,7 +927,7 @@ PK11_MoveSymKey(PK11SlotInfo *slot, CK_ATTRIBUTE_TYPE operation,
  * keyType must be -1 for most algorithms. Some PBE algorthims cannot
  *  determine the correct key type from the mechanism or the parameters,
  *  so key type must be specified. Other PKCS #11 mechanisms may do so in
- *  the future. Currently there is no need to export this publically.
+ *  the future. Currently there is no need to export this publicly.
  *  Keep it private until there is a need in case we need to expand the
  *  keygen parameters again...
  *

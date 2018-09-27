@@ -66,7 +66,7 @@ srtp_err_status_t cipher_driver_self_test(srtp_cipher_type_t *ct);
 
 /*
  * cipher_driver_test_buffering(ct) tests the cipher's output
- * buffering for correctness by checking the consistency of succesive
+ * buffering for correctness by checking the consistency of successive
  * calls
  */
 
@@ -348,7 +348,7 @@ srtp_err_status_t cipher_driver_self_test(srtp_cipher_type_t *ct)
 
 /*
  * cipher_driver_test_buffering(ct) tests the cipher's output
- * buffering for correctness by checking the consistency of succesive
+ * buffering for correctness by checking the consistency of successive
  * calls
  */
 

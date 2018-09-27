@@ -111,7 +111,7 @@ public:
     MOZ_ASSERT(res.mShmem.IsWritable(), "Shmem in Pool is not writable?");
 
     // Prepare buffer, increase size if needed (we never shrink as we don't
-    // maintain seperate sized pools and we don't want to keep reallocating)
+    // maintain separate sized pools and we don't want to keep reallocating)
     if (res.mShmem.Size<char>() < aSize) {
       LOG(("Size change/increase in Shmem Pool"));
       aInstance->DeallocShmem(res.mShmem);

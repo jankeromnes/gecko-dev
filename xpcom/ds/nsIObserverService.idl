@@ -44,7 +44,7 @@ interface nsIObserverService : nsISupports
      * Unregisters a given listener from notifications regarding the specified
      * topic.
      *
-     * @param anObserver : The interface pointer which will stop recieving
+     * @param anObserver : The interface pointer which will stop receiving
      *                     notifications.
      * @param aTopic     : The notification topic or subject.
      */

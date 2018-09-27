@@ -184,7 +184,7 @@ GetDirectoryListingTaskChild::HandlerCallback()
 /* static */ already_AddRefed<GetDirectoryListingTaskParent>
 GetDirectoryListingTaskParent::Create(FileSystemBase* aFileSystem,
                                       const FileSystemGetDirectoryListingParams& aParam,
-                                      FileSystemRequestParent* aParent,
+                                      FileSystemRequestParent* apparent,
                                       ErrorResult& aRv)
 {
   MOZ_ASSERT(XRE_IsParentProcess(), "Only call from parent process!");
@@ -192,7 +192,7 @@ GetDirectoryListingTaskParent::Create(FileSystemBase* aFileSystem,
   MOZ_ASSERT(aFileSystem);
 
   RefPtr<GetDirectoryListingTaskParent> task =
-    new GetDirectoryListingTaskParent(aFileSystem, aParam, aParent);
+    new GetDirectoryListingTaskParent(aFileSystem, aParam, apparent);
 
   aRv = NS_NewLocalFile(aParam.realPath(), true,
                         getter_AddRefs(task->mTargetPath));
@@ -205,8 +205,8 @@ GetDirectoryListingTaskParent::Create(FileSystemBase* aFileSystem,
 
 GetDirectoryListingTaskParent::GetDirectoryListingTaskParent(FileSystemBase* aFileSystem,
                                                              const FileSystemGetDirectoryListingParams& aParam,
-                                                             FileSystemRequestParent* aParent)
-  : FileSystemTaskParentBase(aFileSystem, aParam, aParent)
+                                                             FileSystemRequestParent* apparent)
+  : FileSystemTaskParentBase(aFileSystem, aParam, apparent)
   , mDOMPath(aParam.domPath())
   , mFilters(aParam.filters())
 {

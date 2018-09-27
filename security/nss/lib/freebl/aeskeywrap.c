@@ -117,7 +117,7 @@ AESKeyWrap_DestroyContext(AESKeyWrapContext *cx, PRBool freeit)
 ** simpler than trying to convert the data to little-endian and back.
 */
 
-/* A and T point to two 64-bit values stored most signficant byte first
+/* A and T point to two 64-bit values stored most significant byte first
 ** (big endian).  This function increments the 64-bit value T, and then
 ** XORs it with A, changing A.
 */
@@ -143,7 +143,7 @@ increment_and_xor(unsigned char *A, unsigned char *T)
     A[7] ^= T[7];
 }
 
-/* A and T point to two 64-bit values stored most signficant byte first
+/* A and T point to two 64-bit values stored most significant byte first
 ** (big endian).  This function XORs T with A, giving a new A, then
 ** decrements the 64-bit value T.
 */

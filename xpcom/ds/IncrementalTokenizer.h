@@ -113,7 +113,7 @@ private:
   // Numerical index pointing at the current cursor position.  We don't keep direct
   // reference to the string buffer since the buffer gets often reallocated.
   nsCString::index_type mInputCursor;
-  // Refernce to the consumer function.
+  // References to the consumer function.
   Consumer mConsumer;
 };
 

@@ -65,23 +65,23 @@ ServiceWorkerManagerService::GetOrCreate()
 }
 
 void
-ServiceWorkerManagerService::RegisterActor(ServiceWorkerManagerParent* aParent)
+ServiceWorkerManagerService::RegisterActor(ServiceWorkerManagerParent* apparent)
 {
   AssertIsOnBackgroundThread();
-  MOZ_ASSERT(aParent);
-  MOZ_ASSERT(!mAgents.Contains(aParent));
+  MOZ_ASSERT(apparent);
+  MOZ_ASSERT(!mAgents.Contains(apparent));
 
-  mAgents.PutEntry(aParent);
+  mAgents.PutEntry(apparent);
 }
 
 void
-ServiceWorkerManagerService::UnregisterActor(ServiceWorkerManagerParent* aParent)
+ServiceWorkerManagerService::UnregisterActor(ServiceWorkerManagerParent* apparent)
 {
   AssertIsOnBackgroundThread();
-  MOZ_ASSERT(aParent);
-  MOZ_ASSERT(mAgents.Contains(aParent));
+  MOZ_ASSERT(apparent);
+  MOZ_ASSERT(mAgents.Contains(apparent));
 
-  mAgents.RemoveEntry(aParent);
+  mAgents.RemoveEntry(apparent);
 }
 
 void

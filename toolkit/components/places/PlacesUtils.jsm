@@ -2693,7 +2693,7 @@ var GuidHelper = {
        * This observers serves two purposes:
        * (1) Invalidate cached id<->GUID paris on when items are removed.
        * (2) Cache GUIDs given us free of charge by onItemAdded/onItemRemoved.
-      *      So, for exmaple, when the NewBookmark needs the new GUID, we already
+      *      So, for example, when the NewBookmark needs the new GUID, we already
       *      have it cached.
       */
       this.observer = {

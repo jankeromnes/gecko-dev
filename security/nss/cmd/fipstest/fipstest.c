@@ -5505,7 +5505,7 @@ dsa_pqggen_test(char *reqfn)
         /* [A.xxxxx ] */
         if (buf[0] == '[' && buf[1] == 'A') {
             if (strncmp(&buf[1], "A.1.1.2", 7) == 0) {
-                fprintf(stderr, "NSS does Generate Probablistic Primes\n");
+                fprintf(stderr, "NSS does Generate Probabilistic Primes\n");
                 exit(1);
             } else if (strncmp(&buf[1], "A.2.1", 5) == 0) {
                 type = A_1_2_1;
@@ -5795,7 +5795,7 @@ dsa_siggen_test(char *reqfn)
             }
             len = len / 2;
 
-            /* output the orginal Msg, and generated Y, R, and S */
+            /* output the orignal Msg, and generated Y, R, and S */
             fputs(buf, dsaresp);
             to_hex_str(buf, dsakey->publicValue.data,
                        dsakey->publicValue.len);

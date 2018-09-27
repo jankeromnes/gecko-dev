@@ -327,7 +327,7 @@ BarGraphWidget.prototype = extend(AbstractCanvasGraph.prototype, {
   _blocksBoundingRects: null,
 
   /**
-   * Calculates the height of the tallest bar that would eventially be rendered
+   * Calculates the height of the tallest bar that would eventually be rendered
    * in this graph.
    *
    * Bars that are too close too each other in the graph will be combined.

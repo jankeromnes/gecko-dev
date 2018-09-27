@@ -1172,7 +1172,7 @@ int32_t CJBig2_Context::parseGenericRefinementRegion(CJBig2_Segment* pSegment) {
   pGRRD->TPGRON = (cFlags >> 1) & 0x01;
   if (!pGRRD->GRTEMPLATE) {
     for (int32_t i = 0; i < 4; ++i) {
-      if (m_pStream->read1Byte((uint8_t*)&pGRRD->GRAT[i]) != 0)
+      if (m_pStream->read1Byte((uint8_t*)&pGRRD->GREAT[i]) != 0)
         return JBIG2_ERROR_TOO_SHORT;
     }
   }

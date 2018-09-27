@@ -42,7 +42,7 @@ public:
             const WebAuthnGetAssertionInfo& aTransactionInfo);
   void Cancel(PWebAuthnTransactionParent* aTransactionParent,
               const uint64_t& aTransactionId);
-  void MaybeClearTransaction(PWebAuthnTransactionParent* aParent);
+  void MaybeClearTransaction(PWebAuthnTransactionParent* apparent);
   static void Initialize();
 private:
   U2FTokenManager();

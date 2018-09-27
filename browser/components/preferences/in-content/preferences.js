@@ -333,7 +333,7 @@ function internalPrefCategoryNameToFriendlyName(aName) {
 // Put up a confirm dialog with "ok to restart", "revert without restarting"
 // and "restart later" buttons and returns the index of the button chosen.
 // We can choose not to display the "restart later", or "revert" buttons,
-// altough the later still lets us revert by using the escape key.
+// although the later still lets us revert by using the escape key.
 //
 // The constants are useful to interpret the return value of the function.
 const CONFIRM_RESTART_PROMPT_RESTART_NOW = 0;

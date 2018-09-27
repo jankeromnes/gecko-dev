@@ -2427,7 +2427,7 @@ XrayWrapper<Base, Traits>::getPropertyKeys(JSContext* cx, HandleObject wrapper, 
 
 /*
  * The Permissive / Security variants should be used depending on whether the
- * compartment of the wrapper is guranteed to subsume the compartment of the
+ * compartment of the wrapper is guaranteed to subsume the compartment of the
  * wrapped object (i.e. - whether it is safe from a security perspective to
  * unwrap the wrapper).
  */

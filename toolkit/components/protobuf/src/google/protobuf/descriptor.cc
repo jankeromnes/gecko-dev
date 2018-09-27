@@ -6857,7 +6857,7 @@ void FileDescriptor::DependenciesOnceInit(const FileDescriptor* to_init) {
 
 const FileDescriptor* FileDescriptor::dependency(int index) const {
   if (dependencies_once_) {
-    // Do once init for all indicies, as it's unlikely only a single index would
+    // Do once init for all indices, as it's unlikely only a single index would
     // be called, and saves on GoogleOnceDynamic allocations.
     dependencies_once_->Init(&FileDescriptor::DependenciesOnceInit, this);
   }

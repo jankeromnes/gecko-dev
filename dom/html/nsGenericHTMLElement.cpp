@@ -416,10 +416,10 @@ nsGenericHTMLElement::EditableInclusiveDescendantCount()
 }
 
 nsresult
-nsGenericHTMLElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+nsGenericHTMLElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                                  nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLElementBase::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElementBase::BindToTree(aDocument, apparent,
                                                      aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
@@ -1747,10 +1747,10 @@ nsGenericHTMLFormElement::GetDesiredIMEState()
 
 nsresult
 nsGenericHTMLFormElement::BindToTree(nsIDocument* aDocument,
-                                     nsIContent* aParent,
+                                     nsIContent* apparent,
                                      nsIContent* aBindingParent)
 {
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                  aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
 
@@ -1770,7 +1770,7 @@ nsGenericHTMLFormElement::BindToTree(nsIDocument* aDocument,
   // We should not call UpdateFormOwner if none of these conditions are
   // fulfilled.
   if (HasAttr(kNameSpaceID_None, nsGkAtoms::form) ? IsInComposedDoc()
-                                                  : !!aParent) {
+                                                  : !!apparent) {
     UpdateFormOwner(true, nullptr);
   }
 

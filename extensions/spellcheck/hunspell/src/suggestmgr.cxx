@@ -409,7 +409,7 @@ int SuggestMgr::replchars(std::vector<std::string>& wlst,
   const std::vector<replentry>& reptable = pAMgr->get_reptable();
   for (size_t i = 0; i < reptable.size(); ++i) {
     const char* r = word;
-    // search every occurence of the pattern in the word
+    // search every occurrence of the pattern in the word
     while ((r = strstr(r, reptable[i].pattern.c_str())) != NULL) {
       int type = (r == word) ? 1 : 0;
       if (r - word + reptable[i].pattern.size() == strlen(word))
@@ -825,7 +825,7 @@ int SuggestMgr::swapchar(std::vector<std::string>& wlst,
   }
 
   // try double swaps for short words
-  // ahev -> have, owudl -> would
+  // have -> have, would -> would
   if (candidate.size() == 4 || candidate.size() == 5) {
     candidate[0] = word[1];
     candidate[1] = word[0];
@@ -863,7 +863,7 @@ int SuggestMgr::swapchar_utf(std::vector<std::string>& wlst,
   }
 
   // try double swaps for short words
-  // ahev -> have, owudl -> would, suodn -> sound
+  // have -> have, would -> would, suodn -> sound
   if (candidate_utf.size() == 4 || candidate_utf.size() == 5) {
     candidate_utf[0] = word[1];
     candidate_utf[1] = word[0];
@@ -1105,7 +1105,7 @@ void SuggestMgr::ngsuggest(std::vector<std::string>& wlst,
         sc = ngram(3, word, f, NGRAM_LONGER_WORSE) + leftcommon;
       }
 
-      // check special pronounciation
+      // check special pronunciation
       f.clear();
       if ((hp->var & H_OPT_PHON) &&
           copy_field(f, HENTRY_DATA(hp), MORPH_PHON)) {
@@ -1177,7 +1177,7 @@ void SuggestMgr::ngsuggest(std::vector<std::string>& wlst,
   }
 
   // find minimum threshold for a passable suggestion
-  // mangle original word three differnt ways
+  // mangle original word three different ways
   // and score them to generate a minimum acceptable score
   std::vector<w_char> w_mw;
   int thresh = 0;

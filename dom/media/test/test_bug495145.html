@@ -60,7 +60,7 @@ function seeked2(e) {
   v._finished = true;
   v.removeEventListener("loadedmetadata", start);
   v.removeEventListener("ended", ended2);
-  v.removeEventListener("seeked", seeked2);
+  v.removeEventListener("sought", seeked2);
   removeNodeAndSource(v);
   manager.finished(v.token);
 }
@@ -77,7 +77,7 @@ function createVideo(test, x, token) {
   v.addEventListener("loadedmetadata", start);
   v.addEventListener("ended", x == 1 ? ended1 : ended2);
   if (x == 2)
-    v.addEventListener("seeked", seeked2);
+    v.addEventListener("sought", seeked2);
   document.body.appendChild(v);
 }
 

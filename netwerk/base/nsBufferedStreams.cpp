@@ -206,7 +206,7 @@ nsBufferedStream::Seek(int32_t whence, int64_t offset)
     if (offsetInBuffer <= mFillPoint) {
         // It's safe to just set mCursor to offsetInBuffer.  In particular, we
         // want to avoid calling Fill() here since we already have the data that
-        // was seeked to and calling Fill() might auto-close our underlying
+        // was sought to and calling Fill() might auto-close our underlying
         // stream in some cases.
         mCursor = offsetInBuffer;
         return NS_OK;
@@ -747,7 +747,7 @@ nsBufferedInputStream::GetCloneable(bool* aCloneable)
   *aCloneable = false;
 
   // If we don't have the buffer, the inputStream has been already closed.
-  // If mBufferStartOffset is not 0, the stream has been seeked or read.
+  // If mBufferStartOffset is not 0, the stream has been sought or read.
   // In both case the cloning is not supported.
   if (!mBuffer || mBufferStartOffset) {
     return NS_OK;

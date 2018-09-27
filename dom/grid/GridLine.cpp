@@ -20,15 +20,15 @@ NS_INTERFACE_MAP_BEGIN_CYCLE_COLLECTION(GridLine)
   NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-GridLine::GridLine(GridLines *aParent)
-  : mParent(aParent)
+GridLine::GridLine(GridLines *apparent)
+  : mParent(apparent)
   , mStart(0.0)
   , mBreadth(0.0)
   , mType(GridDeclaration::Implicit)
   , mNumber(0)
   , mNegativeNumber(0)
 {
-  MOZ_ASSERT(aParent, "Should never be instantiated with a null GridLines");
+  MOZ_ASSERT(apparent, "Should never be instantiated with a null GridLines");
 }
 
 GridLine::~GridLine()

@@ -15,7 +15,7 @@ namespace _ipdltest {
 class TestPaintThreadChild;
 class TestPaintThreadParent;
 
-// Analagous to LayerTransactionParent.
+// Analogous to LayerTransactionParent.
 class TestOffMainThreadPaintingParent final : public PTestLayoutThreadParent
 {
 public:
@@ -43,7 +43,7 @@ private:
   uint32_t mSyncMessages;
 };
 
-// Analagous to LayerTransactionChild.
+// Analogous to LayerTransactionChild.
 class TestOffMainThreadPaintingChild final : public PTestLayoutThreadChild
 {
 public:

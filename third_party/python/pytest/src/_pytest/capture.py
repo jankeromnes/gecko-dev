@@ -494,7 +494,7 @@ class FDCaptureBinary(object):
 
     def done(self):
         """ stop capturing, restore streams, return original capture file,
-        seeked to position zero. """
+        sought to position zero. """
         targetfd_save = self.__dict__.pop("targetfd_save")
         os.dup2(targetfd_save, self.targetfd)
         os.close(targetfd_save)

@@ -37,13 +37,13 @@
     video.addEventListener("play", done, { once: true });
     synthesizeMouseAtCenter(playButton, {});
   }, done => {
-    video.addEventListener("seeked", done, { once: true });
+    video.addEventListener("sought", done, { once: true });
     synthesizeMouseAtCenter(scrubber, {});
   }, done => {
     let counter = 0;
     let keys = ["KEY_ArrowDown", "KEY_ArrowDown", "KEY_ArrowUp", "KEY_ArrowDown", "KEY_ArrowUp", "KEY_ArrowUp"];
 
-    video.addEventListener("seeked", () => ok(false, "should not trigger seeked event"));
+    video.addEventListener("sought", () => ok(false, "should not trigger sought event"));
     video.addEventListener("volumechange", () => {
       if (++counter === keys.length) {
         ok(true, "change volume by up/down arrow key without trigger 'seeked' event");

@@ -45,7 +45,7 @@ ModuleLoadRequest::ModuleLoadRequest(nsIURI* aURI,
 }
 
 ModuleLoadRequest::ModuleLoadRequest(nsIURI* aURI,
-                                     ModuleLoadRequest* aParent)
+                                     ModuleLoadRequest* apparent)
   : ScriptLoadRequest(ScriptKind::eModule,
                       aURI,
                       aParent->mFetchOptions,

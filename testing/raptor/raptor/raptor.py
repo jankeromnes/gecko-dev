@@ -326,7 +326,7 @@ def main(args=sys.argv[1:]):
         os.sys.exit(1)
 
     # if we have results but one test page timed out (i.e. one tp6 test page didn't load
-    # but others did) we still dumped PERFHERDER_DATA for the successfull pages but we
+    # but others did) we still dumped PERFHERDER_DATA for the successful pages but we
     # want the overall test job to marked as a failure
     pages_that_timed_out = raptor.get_page_timeout_list()
     if len(pages_that_timed_out) > 0:

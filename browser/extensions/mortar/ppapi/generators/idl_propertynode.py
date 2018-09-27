@@ -33,7 +33,7 @@ class IDLPropertyNode(object):
     prop = self.property_map.get(name, None)
     if prop is not None:
       return prop
-    # If not, seach parents in order
+    # If not, search parents in order
     for parent in self.parents:
       prop = parent.GetProperty(name)
       if prop is not None:

@@ -1133,7 +1133,7 @@ SetupCGGlyphs(CGContextRef aCGContext,
 // next to each other.
 
 // The context returned from this method will have the origin
-// in the top left and will have applied all the neccessary clips
+// in the top left and will have applied all the necessary clips
 // and transforms to the CGContext. See the comment above
 // SetupCGContext.
 CGContextRef

@@ -1149,7 +1149,7 @@ NSSSymmetricKey_UnwrapPrivateKey(
     NSSItem *wrappedKey,
     NSSUTF8 *labelOpt,
     NSSItem *keyIDOpt,
-    PRBool persistant,
+    PRBool persistent,
     PRBool sensitive,
     NSSToken *destinationOpt,
     NSSCallback *uhh);
@@ -1735,7 +1735,7 @@ NSSTrustDomain_FindUserCertificatesForEmailSigning(
 /*
  * NSSTrustDomain_GenerateKeyPair
  *
- * Creates persistant objects.  If you want session objects, use
+ * Creates persistent objects.  If you want session objects, use
  * NSSCryptoContext_GenerateKeyPair.  The destination token is where
  * the keys are stored.  If that token can do the required math, then
  * that's where the keys are generated too.  Otherwise, the keys are
@@ -2241,7 +2241,7 @@ NSSCryptoContext_FindUserCertificatesForEmailSigning(
 /*
  * NSSCryptoContext_GenerateKeyPair
  *
- * Creates session objects.  If you want persistant objects, use
+ * Creates session objects.  If you want persistent objects, use
  * NSSTrustDomain_GenerateKeyPair.  The destination token is where
  * the keys are stored.  If that token can do the required math, then
  * that's where the keys are generated too.  Otherwise, the keys are

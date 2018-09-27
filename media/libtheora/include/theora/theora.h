@@ -201,7 +201,7 @@ typedef enum {
  * 
  * See <a href="http://svn.xiph.org/trunk/theora/examples/encoder_example.c">
  * examples/encoder_example.c</a> for usage examples of the
- * other paramters and good default settings for the encoder parameters.
+ * other parameters and good default settings for the encoder parameters.
  */
 typedef struct {
   ogg_uint32_t  width;		/**< encoded frame width  */
@@ -260,7 +260,7 @@ typedef struct{
  * the 'comment' header packet.
  *
  * Meta data is stored as a series of (tag, value) pairs, in
- * length-encoded string vectors. The first occurence of the 
+ * length-encoded string vectors. The first occurrence of the 
  * '=' character delimits the tag and value. A particular tag
  * may occur more than once. The character set encoding for
  * the strings is always UTF-8, but the tag names are limited
@@ -330,7 +330,7 @@ typedef struct theora_comment{
  * Call this after a seek, to update the internal granulepos
  * in the decoder, to insure that subsequent frames are marked
  * properly. If you track timestamps yourself and do not use
- * the granule postion returned by the decoder, then you do
+ * the granule position returned by the decoder, then you do
  * not need to use this control.
  */
 #define TH_DECCTL_SET_GRANPOS (5)

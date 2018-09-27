@@ -634,7 +634,7 @@ void RelayServerConnection::SendStun(const StunMessage& msg) {
 void RelayServerConnection::SendStunError(
       const StunMessage& request, int error_code, const char* error_desc) {
   // An error does not indicate use.  If no legitimate use off the binding
-  // occurs, we want it to be cleaned up even if errors are still occuring.
+  // occurs, we want it to be cleaned up even if errors are still occurring.
 
   cricket::SendStunError(
       request, socket_, addr_pair_.source(), error_code, error_desc,

@@ -39,7 +39,7 @@ public:
   virtual CORSMode GetCORSMode() const override;
 
   // nsIContent
-  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+  virtual nsresult BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                               nsIContent* aBindingParent) override;
   virtual bool ParseAttribute(int32_t aNamespaceID,
                               nsAtom* aAttribute,

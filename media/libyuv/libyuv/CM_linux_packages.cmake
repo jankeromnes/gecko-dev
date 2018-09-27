@@ -35,7 +35,7 @@ ELSE ()
 	SET ( YUV_COMPILE_FOR_ARM7 TRUE )
 ENDIF ()
 
-# setup the sytem name, such as "x86-32", "amd-64", and "arm-32
+# setup the system name, such as "x86-32", "amd-64", and "arm-32
 IF ( ${YUV_CROSS_COMPILE_FOR_ARM7} OR ${YUV_COMPILE_FOR_ARM7} )
 	SET ( YUV_SYSTEM_NAME "armhf-${YUV_BIT_SIZE}" )
 ELSE ()

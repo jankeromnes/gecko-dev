@@ -371,20 +371,20 @@ nsDiskCacheBlockFile::Write(int32_t offset, const void *buf, int32_t amount)
        20mb is a magic threshold because OSX stops autodefragging files bigger than that.
        Beyond 20mb grow in 4mb chunks.
      */
-    const int32_t upTo = offset + amount;
+    const int32_t up to = offset + amount;
     // Use a conservative definition of 20MB
     const int32_t minPreallocate = 4*1024*1024;
     const int32_t maxPreallocate = 20*1000*1000;
-    if (mFileSize < upTo) {
+    if (mFileSize < up to) {
         // maximal file size
         const int32_t maxFileSize = mBitMapWords * 4 * (mBlockSize * 8 + 1);
-        if (upTo > maxPreallocate) {
+        if (up to > maxPreallocate) {
             // grow the file as a multiple of minPreallocate
-            mFileSize = ((upTo + minPreallocate - 1) / minPreallocate) * minPreallocate;
+            mFileSize = ((up to + minPreallocate - 1) / minPreallocate) * minPreallocate;
         } else {
             // Grow quickly between 1MB to 20MB
             if (mFileSize)
-                while(mFileSize < upTo)
+                while(mFileSize < up to)
                     mFileSize *= 2;
             mFileSize = clamped(mFileSize, minPreallocate, maxPreallocate);
         }

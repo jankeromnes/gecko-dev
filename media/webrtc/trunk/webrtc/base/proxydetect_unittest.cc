@@ -98,7 +98,7 @@ TEST_F(ProxyDetectTest, DISABLED_TestFirefoxProxySocks) {
 }
 
 // Verified that SSL proxy is detected if configured. SSL proxy is an
-// extention of a HTTP proxy to support secure connections.
+// extension of a HTTP proxy to support secure connections.
 TEST_F(ProxyDetectTest, DISABLED_TestFirefoxProxySsl) {
   ProxyInfo proxy_info;
   SocketAddress proxy_address("proxy.ssl.com", 7777);

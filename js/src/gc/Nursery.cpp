@@ -648,7 +648,7 @@ js::Nursery::renderProfileJSON(JSONPrinter& json) const
     }
 
     // These counters only contain consistent data if the profiler is enabled,
-    // and then there's no guarentee.
+    // and then there's no guarantee.
     if (runtime()->geckoProfiler().enabled()) {
         json.property("cells_allocated_nursery",
             runtime()->gc.stats().allocsSinceMinorGCNursery());

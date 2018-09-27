@@ -20,8 +20,8 @@ NS_WRAPPERCACHE_INTERFACE_MAP_ENTRY
 NS_INTERFACE_MAP_ENTRY(nsISupports)
 NS_INTERFACE_MAP_END
 
-MIDIInputMap::MIDIInputMap(nsPIDOMWindowInner* aParent) :
-  mParent(aParent)
+MIDIInputMap::MIDIInputMap(nsPIDOMWindowInner* apparent) :
+  mParent(apparent)
 {
 }
 

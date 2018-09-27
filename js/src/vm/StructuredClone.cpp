@@ -631,7 +631,7 @@ ReportDataCloneError(JSContext* cx,
         break;
 
       default:
-        MOZ_CRASH("Unkown errorId");
+        MOZ_CRASH("Unknown errorId");
         break;
     }
 }

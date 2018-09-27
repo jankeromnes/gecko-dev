@@ -53,7 +53,7 @@ AudioSink::AudioSink(AbstractThread* aThread,
   if (resampling) {
     mOutputRate = 48000;
   } else if (mInfo.mRate == 44100 || mInfo.mRate == 48000) {
-    // The original rate is of good quality and we want to minimize unecessary
+    // The original rate is of good quality and we want to minimize unnecessary
     // resampling. The common scenario being that the sampling rate is one or
     // the other, this allows to minimize audio quality regression and hoping
     // content provider want change from those rates mid-stream.

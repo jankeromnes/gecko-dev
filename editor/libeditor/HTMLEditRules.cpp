@@ -1399,7 +1399,7 @@ HTMLEditRules::WillInsertText(EditSubAction aEditSubAction,
   }
   MOZ_ASSERT(pointToInsert.IsSetAndValid());
 
-  // dont put text in places that can't have it
+  // don't put text in places that can't have it
   if (!EditorBase::IsTextNode(pointToInsert.GetContainer()) &&
       !HTMLEditorRef().CanContainTag(*pointToInsert.GetContainer(),
                                      *nsGkAtoms::textTagName)) {
@@ -3110,7 +3110,7 @@ HTMLEditRules::WillDeleteSelection(nsIEditor::EDirection aAction,
         }
 
         // Check endpoints for possible text deletion.  We can assume that if
-        // text node is found, we can delete to end or to begining as
+        // text node is found, we can delete to end or to beginning as
         // appropriate, since the case where both sel endpoints in same text
         // node was already handled (we wouldn't be here)
         if (startNode->GetAsText() &&
@@ -3692,7 +3692,7 @@ HTMLEditRules::MoveBlock(Element& aLeftBlock,
   MOZ_ASSERT(IsEditorDataAvailable());
 
   nsTArray<OwningNonNull<nsINode>> arrayOfNodes;
-  // GetNodesFromPoint is the workhorse that figures out what we wnat to move.
+  // GetNodesFromPoint is the workhorse that figures out what we want to move.
   nsresult rv = GetNodesFromPoint(EditorDOMPoint(&aRightBlock, aRightOffset),
                                   EditSubAction::eCreateOrChangeList,
                                   arrayOfNodes, TouchContent::yes);
@@ -4891,7 +4891,7 @@ HTMLEditRules::IndentAroundSelectionWithCSS()
         continue;
       }
 
-      // Check for whether we should join a list that preceeds curNode.
+      // Check for whether we should join a list that precedes curNode.
       // We do this if the previous element is a list, and the list is of
       // the same type (li/ol) as curNode was a part of.
       sibling = HTMLEditorRef().GetPriorHTMLSibling(curNode);
@@ -5170,7 +5170,7 @@ HTMLEditRules::IndentAroundSelectionWithHTML()
         continue;
       }
 
-      // Check for whether we should join a list that preceeds curNode.
+      // Check for whether we should join a list that precedes curNode.
       // We do this if the previous element is a list, and the list is of
       // the same type (li/ol) as curNode was a part of.
       sibling = HTMLEditorRef().GetPriorHTMLSibling(curNode);
@@ -6970,7 +6970,7 @@ HTMLEditRules::NormalizeSelection()
     }
   }
 
-  // There is a demented possiblity we have to check for.  We might have a very
+  // There is a demented possibility we have to check for.  We might have a very
   // strange selection that is not collapsed and yet does not contain any
   // editable content, and satisfies some of the above conditions that cause
   // tweaking.  In this case we don't want to tweak the selection into a block

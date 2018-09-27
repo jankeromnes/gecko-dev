@@ -293,7 +293,7 @@ public:
     /// Is there support for GL_KHR_debug?
     bool debugSupport() const { return fDebugSupport; }
 
-    /// Is there support for ES2 compatability?
+    /// Is there support for ES2 compatibility?
     bool ES2CompatibilitySupport() const { return fES2CompatibilitySupport; }
 
     /// Is there support for glDraw*Instanced?

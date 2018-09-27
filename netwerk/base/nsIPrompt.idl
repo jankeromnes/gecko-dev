@@ -4,7 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /**
- * This is the prompt interface which can be used without knowlege of a
+ * This is the prompt interface which can be used without knowledge of a
  * parent window. The parentage is hidden by the GetInterface though
  * which it is gotten. This interface is identical to nsIPromptService
  * but without the parent nsIDOMWindow parameter. See nsIPromptService

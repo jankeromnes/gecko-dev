@@ -2987,7 +2987,7 @@ mojo.config = {
     });
 
     this.setInterfaceIdNamespaceBit_ = setInterfaceIdNamespaceBit;
-    // |cachedMessageData| caches infomation about a message, so it can be
+    // |cachedMessageData| caches information about a message, so it can be
     // processed later if a client is not yet attached to the target endpoint.
     this.cachedMessageData = null;
     this.controlMessageHandler_ = new internal.PipeControlMessageHandler(this);

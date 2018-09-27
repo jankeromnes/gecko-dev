@@ -716,7 +716,7 @@ ScriptLoader::StartFetchingModuleDependencies(ModuleLoadRequest* aRequest)
   }
 
   // Wait for all imports to become ready.
-  RefPtr<GenericPromise::AllPromiseType> allReady =
+  RefPtr<GenericPromise::AllPromiseType> already =
     GenericPromise::All(GetMainThreadSerialEventTarget(), importsReady);
   allReady->Then(GetMainThreadSerialEventTarget(), __func__, aRequest,
                  &ModuleLoadRequest::DependenciesLoaded,
@@ -724,12 +724,12 @@ ScriptLoader::StartFetchingModuleDependencies(ModuleLoadRequest* aRequest)
 }
 
 RefPtr<GenericPromise>
-ScriptLoader::StartFetchingModuleAndDependencies(ModuleLoadRequest* aParent,
+ScriptLoader::StartFetchingModuleAndDependencies(ModuleLoadRequest* apparent,
                                                  nsIURI* aURI)
 {
   MOZ_ASSERT(aURI);
 
-  RefPtr<ModuleLoadRequest> childRequest = new ModuleLoadRequest(aURI, aParent);
+  RefPtr<ModuleLoadRequest> childRequest = new ModuleLoadRequest(aURI, apparent);
 
   aParent->mImports.AppendElement(childRequest);
 
@@ -740,7 +740,7 @@ ScriptLoader::StartFetchingModuleAndDependencies(ModuleLoadRequest* aParent,
     nsAutoCString url2;
     aURI->GetAsciiSpec(url2);
 
-    LOG(("ScriptLoadRequest (%p): Start fetching dependency %p", aParent, childRequest.get()));
+    LOG(("ScriptLoadRequest (%p): Start fetching dependency %p", apparent, childRequest.get()));
     LOG(("StartFetchingModuleAndDependencies \"%s\" -> \"%s\"", url1.get(), url2.get()));
   }
 
@@ -749,7 +749,7 @@ ScriptLoader::StartFetchingModuleAndDependencies(ModuleLoadRequest* aParent,
   nsresult rv = StartLoad(childRequest);
   if (NS_FAILED(rv)) {
     MOZ_ASSERT(!childRequest->mModuleScript);
-    LOG(("ScriptLoadRequest (%p):   rejecting %p", aParent, &childRequest->mReady));
+    LOG(("ScriptLoadRequest (%p):   rejecting %p", apparent, &childRequest->mReady));
     childRequest->mReady.Reject(rv, __func__);
     return ready;
   }
@@ -1169,7 +1169,7 @@ ScriptLoader::StartLoad(ScriptLoadRequest* aRequest)
 
   nsCOMPtr<nsIHttpChannel> httpChannel(do_QueryInterface(channel));
   if (httpChannel) {
-    // HTTP content negotation has little value in this context.
+    // HTTP content negotiation has little value in this context.
     nsAutoCString acceptTypes("*/*");
     if (BinASTEncodingEnabled() && aRequest->ShouldAcceptBinASTEncoding()) {
       acceptTypes = APPLICATION_JAVASCRIPT_BINAST ", */*";
@@ -2496,7 +2496,7 @@ ScriptLoader::MaybeTriggerBytecodeEncoding()
   }
 
   // Wait until all scripts are loaded before saving the bytecode, such that
-  // we capture most of the intialization of the page.
+  // we capture most of the initialization of the page.
   if (HasPendingRequests()) {
     LOG(("ScriptLoader (%p): Wait for other pending request to finish.", this));
     return;

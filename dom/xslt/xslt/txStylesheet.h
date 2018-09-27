@@ -75,7 +75,7 @@ public:
     };
 
     /**
-     * Contain information that is import precedence dependant.
+     * Contain information that is import precedence dependent.
      */
     class ImportFrame {
     public:

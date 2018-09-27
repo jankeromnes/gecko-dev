@@ -796,7 +796,7 @@ LockedUpdateDirectoryPaddingFile(nsIFile* aBaseDir,
     }
 
     if (shouldRevise) {
-      // If somehow runing into this condition, the tracking padding size is
+      // If somehow running into this condition, the tracking padding size is
       // incorrect.
       // Delete padding file to indicate the padding size is incorrect for
       // avoiding error happening in the following lines.

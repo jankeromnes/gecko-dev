@@ -69,7 +69,7 @@ add_task(async function run_test() {
     Assert.equal(record.value["services.sync.prefs.sync.testing.int"], null);
     Assert.equal(record.value["services.sync.prefs.sync.testing.string"], null);
     Assert.equal(record.value["services.sync.prefs.sync.testing.bool"], null);
-    Assert.equal(record.value["services.sync.prefs.sync.testing.dont.change"], null);
+    Assert.equal(record.value["services.sync.prefs.sync.testing.don't.change"], null);
     Assert.equal(record.value["services.sync.prefs.sync.testing.synced.url"], null);
     // but this one is a user_pref so *will* be synced.
     Assert.equal(record.value["services.sync.prefs.sync.testing.turned.off"], false);
@@ -99,7 +99,7 @@ add_task(async function run_test() {
     Assert.equal(prefs.get("testing.string"), "im in ur prefs");
     Assert.equal(prefs.get("testing.bool"), false);
     Assert.equal(prefs.get("testing.deleteme"), undefined);
-    Assert.equal(prefs.get("testing.dont.change"), "Please don't change me.");
+    Assert.equal(prefs.get("testing.don't.change"), "Please don't change me.");
     Assert.equal(prefs.get("testing.somepref"), "im a new pref from other device");
     Assert.equal(prefs.get("testing.synced.url"), "https://www.example.com");
     Assert.equal(prefs.get("testing.unsynced.url"), "https://www.example.com/2");

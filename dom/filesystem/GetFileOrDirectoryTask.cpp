@@ -160,7 +160,7 @@ GetFileOrDirectoryTaskChild::HandlerCallback()
 /* static */ already_AddRefed<GetFileOrDirectoryTaskParent>
 GetFileOrDirectoryTaskParent::Create(FileSystemBase* aFileSystem,
                                      const FileSystemGetFileOrDirectoryParams& aParam,
-                                     FileSystemRequestParent* aParent,
+                                     FileSystemRequestParent* apparent,
                                      ErrorResult& aRv)
 {
   MOZ_ASSERT(XRE_IsParentProcess(), "Only call from parent process!");
@@ -168,7 +168,7 @@ GetFileOrDirectoryTaskParent::Create(FileSystemBase* aFileSystem,
   MOZ_ASSERT(aFileSystem);
 
   RefPtr<GetFileOrDirectoryTaskParent> task =
-    new GetFileOrDirectoryTaskParent(aFileSystem, aParam, aParent);
+    new GetFileOrDirectoryTaskParent(aFileSystem, aParam, apparent);
 
   aRv = NS_NewLocalFile(aParam.realPath(), true,
                         getter_AddRefs(task->mTargetPath));
@@ -181,8 +181,8 @@ GetFileOrDirectoryTaskParent::Create(FileSystemBase* aFileSystem,
 
 GetFileOrDirectoryTaskParent::GetFileOrDirectoryTaskParent(FileSystemBase* aFileSystem,
                                                            const FileSystemGetFileOrDirectoryParams& aParam,
-                                                           FileSystemRequestParent* aParent)
-  : FileSystemTaskParentBase(aFileSystem, aParam, aParent)
+                                                           FileSystemRequestParent* apparent)
+  : FileSystemTaskParentBase(aFileSystem, aParam, apparent)
   , mIsDirectory(false)
 {
   MOZ_ASSERT(XRE_IsParentProcess(), "Only call from parent process!");

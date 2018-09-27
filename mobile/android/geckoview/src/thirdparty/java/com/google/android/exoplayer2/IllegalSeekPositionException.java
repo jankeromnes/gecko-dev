@@ -26,7 +26,7 @@ public final class IllegalSeekPositionException extends IllegalStateException {
    */
   public final Timeline timeline;
   /**
-   * The index of the window being seeked to.
+   * The index of the window being sought to.
    */
   public final int windowIndex;
   /**
@@ -36,7 +36,7 @@ public final class IllegalSeekPositionException extends IllegalStateException {
 
   /**
    * @param timeline The {@link Timeline} in which the seek was attempted.
-   * @param windowIndex The index of the window being seeked to.
+   * @param windowIndex The index of the window being sought to.
    * @param positionMs The seek position in the specified window.
    */
   public IllegalSeekPositionException(Timeline timeline, int windowIndex, long positionMs) {

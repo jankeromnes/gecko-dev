@@ -512,7 +512,7 @@ int32_t AudioDeviceLinuxALSA::MicrophoneBoostIsAvailable(bool& available)
     bool isAvailable(false);
     bool wasInitialized = _mixerManager.MicrophoneIsInitialized();
 
-    // Enumerate all avaliable microphone and make an attempt to open up the
+    // Enumerate all available microphone and make an attempt to open up the
     // input mixer corresponding to the currently selected input device.
     //
     if (!wasInitialized && InitMicrophone() == -1)
@@ -831,7 +831,7 @@ int32_t AudioDeviceLinuxALSA::SetPlayoutDevice(uint16_t index)
 
     uint32_t nDevices = GetDevicesInfo(0, true);
     WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
-                 "  number of availiable audio output devices is %u", nDevices);
+                 "  number of available audio output devices is %u", nDevices);
 
     if (index > (nDevices-1))
     {
@@ -917,7 +917,7 @@ int32_t AudioDeviceLinuxALSA::SetRecordingDevice(uint16_t index)
 
     uint32_t nDevices = GetDevicesInfo(0, false);
     WEBRTC_TRACE(kTraceInfo, kTraceAudioDevice, _id,
-                 "  number of availiable audio input devices is %u", nDevices);
+                 "  number of available audio input devices is %u", nDevices);
 
     if (index > (nDevices-1))
     {
@@ -2020,7 +2020,7 @@ bool AudioDeviceLinuxALSA::PlayThreadProcess()
         //maximum tixe in milliseconds to wait, a negative value means infinity
         err = LATE(snd_pcm_wait)(_handlePlayout, 2);
         if (err == 0)
-        { //timeout occured
+        { //timeout occurred
             WEBRTC_TRACE(kTraceStream, kTraceAudioDevice, _id,
                          "playout snd_pcm_wait timeout");
         }
@@ -2097,7 +2097,7 @@ bool AudioDeviceLinuxALSA::RecThreadProcess()
         //maximum time in milliseconds to wait, a negative value means infinity
         err = LATE(snd_pcm_wait)(_handleRecord,
             ALSA_CAPTURE_WAIT_TIMEOUT);
-        if (err == 0) //timeout occured
+        if (err == 0) //timeout occurred
             WEBRTC_TRACE(kTraceStream, kTraceAudioDevice, _id,
                          "capture snd_pcm_wait timeout");
 

@@ -384,7 +384,7 @@ function(in_window)
     local.base_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         return {
             block_name: local.base_block.prototype.block_name.call(this),
@@ -502,7 +502,7 @@ function(in_window)
     local.hex_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.base_block.prototype.toJSON.call(this);
 
@@ -809,7 +809,7 @@ function(in_window)
     local.identification_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.hex_block.prototype.toJSON.call(this);
 
@@ -940,7 +940,7 @@ function(in_window)
         this.length = util_frombase(length_buffer_view, 8);
 
         if(this.long_form_used && (this.length <= 127))
-            this.warnings.push("Unneccesary usage of long length form");
+            this.warnings.push("Unnecessary usage of long length form");
 
         this.block_length = count + 1;
         // #endregion 
@@ -1018,7 +1018,7 @@ function(in_window)
     local.length_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.base_block.prototype.toJSON.call(this);
 
@@ -1055,7 +1055,7 @@ function(in_window)
     local.value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.base_block.prototype.toJSON.call(this);
 
@@ -1176,7 +1176,7 @@ function(in_window)
     in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.base_block.prototype.toJSON.call(this);
 
@@ -1287,7 +1287,7 @@ function(in_window)
     local.ASN1_PRIMITIVE_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.value_block.prototype.toJSON.call(this);
 
@@ -1323,7 +1323,7 @@ function(in_window)
     in_window.org.pkijs.asn1.ASN1_PRIMITIVE.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -1467,7 +1467,7 @@ function(in_window)
     local.ASN1_CONSTRUCTED_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.value_block.prototype.toJSON.call(this);
 
@@ -1534,7 +1534,7 @@ function(in_window)
     in_window.org.pkijs.asn1.ASN1_CONSTRUCTED.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -1589,7 +1589,7 @@ function(in_window)
     local.EOC_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.value_block.prototype.toJSON.call(this);
 
@@ -1623,7 +1623,7 @@ function(in_window)
     in_window.org.pkijs.asn1.EOC.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -1734,7 +1734,7 @@ function(in_window)
     local.BOOLEAN_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.value_block.prototype.toJSON.call(this);
 
@@ -1771,7 +1771,7 @@ function(in_window)
     in_window.org.pkijs.asn1.BOOLEAN.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -1807,7 +1807,7 @@ function(in_window)
     in_window.org.pkijs.asn1.SEQUENCE.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_CONSTRUCTED.prototype.toJSON.call(this);
 
@@ -1839,7 +1839,7 @@ function(in_window)
     in_window.org.pkijs.asn1.SET.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_CONSTRUCTED.prototype.toJSON.call(this);
 
@@ -1918,7 +1918,7 @@ function(in_window)
     in_window.org.pkijs.asn1.NULL.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -2059,7 +2059,7 @@ function(in_window)
     local.OCTETSTRING_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.ASN1_CONSTRUCTED_value_block.prototype.toJSON.call(this);
 
@@ -2121,7 +2121,7 @@ function(in_window)
     in_window.org.pkijs.asn1.OCTETSTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -2328,7 +2328,7 @@ function(in_window)
     local.BITSTRING_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.ASN1_CONSTRUCTED_value_block.prototype.toJSON.call(this);
 
@@ -2385,7 +2385,7 @@ function(in_window)
     in_window.org.pkijs.asn1.BITSTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -2498,7 +2498,7 @@ function(in_window)
     local.INTEGER_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.value_block.prototype.toJSON.call(this);
 
@@ -2564,7 +2564,7 @@ function(in_window)
     in_window.org.pkijs.asn1.INTEGER.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -2600,7 +2600,7 @@ function(in_window)
     in_window.org.pkijs.asn1.ENUMERATED.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.INTEGER.prototype.toJSON.call(this);
 
@@ -2796,7 +2796,7 @@ function(in_window)
     local.SID_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.hex_block.prototype.toJSON.call(this);
 
@@ -2994,7 +2994,7 @@ function(in_window)
     local.OID_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.value_block.prototype.toJSON.call(this);
 
@@ -3032,7 +3032,7 @@ function(in_window)
     in_window.org.pkijs.asn1.OID.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -3068,7 +3068,7 @@ function(in_window)
     local.UTF8STRING_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.hex_block.prototype.toJSON.call(this);
 
@@ -3171,7 +3171,7 @@ function(in_window)
     in_window.org.pkijs.asn1.UTF8STRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -3203,7 +3203,7 @@ function(in_window)
     local.BMPSTRING_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.hex_block.prototype.toJSON.call(this);
 
@@ -3319,7 +3319,7 @@ function(in_window)
     in_window.org.pkijs.asn1.BMPSTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -3351,7 +3351,7 @@ function(in_window)
     local.UNIVERSALSTRING_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.hex_block.prototype.toJSON.call(this);
 
@@ -3467,7 +3467,7 @@ function(in_window)
     in_window.org.pkijs.asn1.UNIVERSALSTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -3500,7 +3500,7 @@ function(in_window)
     local.SIMPLESTRING_value_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.hex_block.prototype.toJSON.call(this);
 
@@ -3590,7 +3590,7 @@ function(in_window)
     local.SIMPLESTRING_block.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.ASN1_block.prototype.toJSON.call(this);
 
@@ -3622,7 +3622,7 @@ function(in_window)
     in_window.org.pkijs.asn1.NUMERICSTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.SIMPLESTRING_block.prototype.toJSON.call(this);
 
@@ -3654,7 +3654,7 @@ function(in_window)
     in_window.org.pkijs.asn1.PRINTABLESTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.SIMPLESTRING_block.prototype.toJSON.call(this);
 
@@ -3686,7 +3686,7 @@ function(in_window)
     in_window.org.pkijs.asn1.TELETEXSTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.SIMPLESTRING_block.prototype.toJSON.call(this);
 
@@ -3718,7 +3718,7 @@ function(in_window)
     in_window.org.pkijs.asn1.VIDEOTEXSTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.SIMPLESTRING_block.prototype.toJSON.call(this);
 
@@ -3750,7 +3750,7 @@ function(in_window)
     in_window.org.pkijs.asn1.IA5STRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.SIMPLESTRING_block.prototype.toJSON.call(this);
 
@@ -3782,7 +3782,7 @@ function(in_window)
     in_window.org.pkijs.asn1.GRAPHICSTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.SIMPLESTRING_block.prototype.toJSON.call(this);
 
@@ -3814,7 +3814,7 @@ function(in_window)
     in_window.org.pkijs.asn1.VISIBLESTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.SIMPLESTRING_block.prototype.toJSON.call(this);
 
@@ -3846,7 +3846,7 @@ function(in_window)
     in_window.org.pkijs.asn1.GENERALSTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.SIMPLESTRING_block.prototype.toJSON.call(this);
 
@@ -3878,7 +3878,7 @@ function(in_window)
     in_window.org.pkijs.asn1.CHARACTERSTRING.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = local.SIMPLESTRING_block.prototype.toJSON.call(this);
 
@@ -4008,7 +4008,7 @@ function(in_window)
         var parser_array = parser.exec(input_string);
         if(parser_array === null)
         {
-            this.error = "Wrong input string for convertion";
+            this.error = "Wrong input string for conversion";
             return;
         }
         // #endregion 
@@ -4055,7 +4055,7 @@ function(in_window)
     in_window.org.pkijs.asn1.UTCTIME.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.VISIBLESTRING.prototype.toJSON.call(this);
 
@@ -4211,7 +4211,7 @@ function(in_window)
             var number = new Number(input_string[input_string.length - 1]);
 
             if(isNaN(number.valueOf()))
-                throw new Error("Wrong input string for convertion");
+                throw new Error("Wrong input string for conversion");
 
             timeString = input_string;
         }
@@ -4221,10 +4221,10 @@ function(in_window)
         if(isUTC)
         {
             if(timeString.indexOf("+") != (-1))
-                throw new Error("Wrong input string for convertion");
+                throw new Error("Wrong input string for conversion");
 
             if(timeString.indexOf("-") != (-1))
-                throw new Error("Wrong input string for convertion");
+                throw new Error("Wrong input string for conversion");
         }
         // #endregion 
         // #region Get "UTC time difference" in case of local time
@@ -4246,12 +4246,12 @@ function(in_window)
                 timeString = timeString.substr(0, differencePosition);
 
                 if((differenceString.length != 2) && (differenceString.length != 4))
-                    throw new Error("Wrong input string for convertion");
+                    throw new Error("Wrong input string for conversion");
 
                 var number = new Number(differenceString.substr(0, 2));
 
                 if(isNaN(number.valueOf()))
-                    throw new Error("Wrong input string for convertion");
+                    throw new Error("Wrong input string for conversion");
 
                 hourDifference = multiplier * number;
 
@@ -4260,7 +4260,7 @@ function(in_window)
                     number = new Number(differenceString.substr(2, 2));
 
                     if(isNaN(number.valueOf()))
-                        throw new Error("Wrong input string for convertion");
+                        throw new Error("Wrong input string for conversion");
 
                     minuteDifference = multiplier * number;
                 }
@@ -4280,7 +4280,7 @@ function(in_window)
             var fractionPartCheck = new Number("0" + timeString.substr(fractionPointPosition));
 
             if(isNaN(fractionPartCheck.valueOf()))
-                throw new Error("Wrong input string for convertion");
+                throw new Error("Wrong input string for conversion");
 
             fractionPart = fractionPartCheck.valueOf();
 
@@ -4296,7 +4296,7 @@ function(in_window)
             case (dateTimeString.length == 8): // "YYYYMMDD"
                 parser = /(\d{4})(\d{2})(\d{2})/ig;
                 if(fractionPointPosition !== (-1))
-                    throw new Error("Wrong input string for convertion"); // Here we should not have a "fraction point"
+                    throw new Error("Wrong input string for conversion"); // Here we should not have a "fraction point"
                 break;
             case (dateTimeString.length == 10): // "YYYYMMDDHH"
                 parser = /(\d{4})(\d{2})(\d{2})(\d{2})/ig;
@@ -4335,14 +4335,14 @@ function(in_window)
                 }
                 break;
             default:
-                throw new Error("Wrong input string for convertion");
+                throw new Error("Wrong input string for conversion");
         }
         // #endregion 
 
         // #region Put parsed values at right places 
         var parser_array = parser.exec(dateTimeString);
         if(parser_array == null)
-            throw new Error("Wrong input string for convertion");
+            throw new Error("Wrong input string for conversion");
 
         for(var j = 1; j < parser_array.length; j++)
         {
@@ -4367,7 +4367,7 @@ function(in_window)
                     this.second = parseInt(parser_array[j], 10);
                     break;
                 default:
-                    throw new Error("Wrong input string for convertion");
+                    throw new Error("Wrong input string for conversion");
             }
         }
         // #endregion 
@@ -4420,7 +4420,7 @@ function(in_window)
     in_window.org.pkijs.asn1.GENERALIZEDTIME.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.VISIBLESTRING.prototype.toJSON.call(this);
 
@@ -4459,7 +4459,7 @@ function(in_window)
     in_window.org.pkijs.asn1.DATE.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.UTF8STRING.prototype.toJSON.call(this);
 
@@ -4491,7 +4491,7 @@ function(in_window)
     in_window.org.pkijs.asn1.TIMEOFDAY.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.UTF8STRING.prototype.toJSON.call(this);
 
@@ -4523,7 +4523,7 @@ function(in_window)
     in_window.org.pkijs.asn1.DATETIME.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.UTF8STRING.prototype.toJSON.call(this);
 
@@ -4555,7 +4555,7 @@ function(in_window)
     in_window.org.pkijs.asn1.DURATION.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.UTF8STRING.prototype.toJSON.call(this);
 
@@ -4587,7 +4587,7 @@ function(in_window)
     in_window.org.pkijs.asn1.TIME.prototype.toJSON =
     function()
     {
-        /// <summary>Convertion for the block to JSON object</summary>
+        /// <summary>Conversion for the block to JSON object</summary>
 
         var _object = in_window.org.pkijs.asn1.UTF8STRING.prototype.toJSON.call(this);
 
@@ -5080,7 +5080,7 @@ function(in_window)
 
         // #region Comparing id_block properties in ASN.1 data and ASN.1 schema 
         // #region Encode and decode ASN.1 schema id_block 
-        /// <remarks>This encoding/decoding is neccessary because could be an errors in schema definition</remarks>
+        /// <remarks>This encoding/decoding is necessary because could be an errors in schema definition</remarks>
         if(('fromBER' in input_asn1_schema.id_block) === false)
             return {
                 verified: false,

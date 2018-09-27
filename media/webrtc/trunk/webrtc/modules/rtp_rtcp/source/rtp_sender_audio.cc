@@ -60,7 +60,7 @@ int32_t RTPSenderAudio::RegisterAudioPayload(
   } else if (RtpUtility::StringCompare(payloadName, "telephone-event", 15)) {
     rtc::CritScope cs(&send_audio_critsect_);
     // Don't add it to the list
-    // we dont want to allow send with a DTMF payloadtype
+    // we don't want to allow send with a DTMF payloadtype
     dtmf_payload_type_ = payload_type;
     dtmf_payload_freq_ = frequency;
     return 0;

@@ -2,7 +2,7 @@
 // - src/annex-b-fns/func-skip-param.case
 // - src/annex-b-fns/func/switch-dflt.template
 /*---
-description: Extension not observed when there is a formal parameter with the same name (Funtion declaration in the `default` clause of a `switch` statement in function scope)
+description: Extension not observed when there is a formal parameter with the same name (Function declaration in the `default` clause of a `switch` statement in function scope)
 esid: sec-web-compat-functiondeclarationinstantiation
 es6id: B.3.3.1
 flags: [generated, noStrict]

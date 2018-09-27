@@ -18,7 +18,7 @@
     try {
       p.crashInNestedLoop();
       // The plugin didn't crash when expected.  This happens sometimes.  Give
-      // it longer to crash.  If it crashes (but not at the apropriate time),
+      // it longer to crash.  If it crashes (but not at the appropriate time),
       // soft fail with a todo; if it doesn't crash then something went wrong,
       // so fail.
       SimpleTest.requestFlakyTimeout("sometimes the plugin takes a little longer to crash");

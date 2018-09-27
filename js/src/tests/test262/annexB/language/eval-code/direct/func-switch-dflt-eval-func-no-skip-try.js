@@ -2,7 +2,7 @@
 // - src/annex-b-fns/eval-func-no-skip-try.case
 // - src/annex-b-fns/eval-func/direct-switch-dflt.template
 /*---
-description: Extension is observed when creation of variable binding would not produce an early error (try statement) (Funtion declaration in the `default` clause of a `switch` statement in eval code in the global scope)
+description: Extension is observed when creation of variable binding would not produce an early error (try statement) (Function declaration in the `default` clause of a `switch` statement in eval code in the global scope)
 esid: sec-web-compat-evaldeclarationinstantiation
 es6id: B.3.3.3
 flags: [generated, noStrict]

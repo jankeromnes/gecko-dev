@@ -26,14 +26,14 @@ TimeRanges::TimeRanges()
 {
 }
 
-TimeRanges::TimeRanges(nsISupports* aParent)
-  : mParent(aParent)
+TimeRanges::TimeRanges(nsISupports* apparent)
+  : mParent(apparent)
 {
 }
 
-TimeRanges::TimeRanges(nsISupports* aParent,
+TimeRanges::TimeRanges(nsISupports* apparent,
                        const media::TimeIntervals& aTimeIntervals)
-  : TimeRanges(aParent)
+  : TimeRanges(apparent)
 {
   if (aTimeIntervals.IsInvalid()) {
     return;

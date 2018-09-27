@@ -43,7 +43,7 @@ public:
 
   nsNativeMenuServiceX() {}
 
-  NS_IMETHOD CreateNativeMenuBar(nsIWidget* aParent,
+  NS_IMETHOD CreateNativeMenuBar(nsIWidget* apparent,
                                  mozilla::dom::Element* aMenuBarNode) override;
 
 protected:
@@ -114,8 +114,8 @@ public:
   nsMenuObjectTypeX MenuObjectType() override {return eMenuBarObjectType;}
 
   // nsMenuBarX
-  nsresult          Create(nsIWidget* aParent, mozilla::dom::Element* aElement);
-  void              SetParent(nsIWidget* aParent);
+  nsresult          Create(nsIWidget* apparent, mozilla::dom::Element* aElement);
+  void              SetParent(nsIWidget* apparent);
   uint32_t          GetMenuCount();
   bool              MenuContainsAppMenu();
   nsMenuX*          GetMenuAt(uint32_t aIndex);

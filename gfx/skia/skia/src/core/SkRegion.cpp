@@ -1165,7 +1165,7 @@ static bool validate_run(const int32_t* runs,
         return false;
     }
     const int32_t* const end = runs + runCount;
-    SkIRect bounds = {0, 0, 0 ,0};  // calulated bounds
+    SkIRect bounds = {0, 0, 0 ,0};  // calculated bounds
     SkIRect rect = {0, 0, 0, 0};    // current rect
     rect.fTop = *runs++;
     if (rect.fTop == SkRegion::kRunTypeSentinel) {

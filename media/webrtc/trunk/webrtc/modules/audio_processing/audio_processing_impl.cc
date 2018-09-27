@@ -1051,7 +1051,7 @@ int AudioProcessingImpl::ProcessStream(AudioFrame* frame) {
   ProcessingConfig processing_config;
   bool reinitialization_required = false;
   {
-    // Aquire lock for the access of api_format.
+    // Acquire lock for the access of api_format.
     // The lock is released immediately due to the conditional
     // reinitialization.
     rtc::CritScope cs_capture(&crit_capture_);
@@ -1753,7 +1753,7 @@ void AudioProcessingImpl::MaybeUpdateHistograms() {
   static const int kMinDiffDelayMs = 60;
 
   if (echo_cancellation()->is_enabled()) {
-    // Activate delay_jumps_ counters if we know echo_cancellation is runnning.
+    // Activate delay_jumps_ counters if we know echo_cancellation is running.
     // If a stream has echo we know that the echo_cancellation is in process.
     if (capture_.stream_delay_jumps == -1 &&
         echo_cancellation()->stream_has_echo()) {

@@ -133,7 +133,7 @@ async function testPolygonAddPoint(config) {
   newPointY = Number((newPointY * 100 / height).toFixed(precision));
   const definition = await getComputedPropertyValue(selector, property, inspector);
   ok(definition.includes(`${newPointX}% ${newPointY}%`),
-     "Point successfuly added");
+     "Point successfully added");
 
   await teardown({selector, property, ...config});
 }

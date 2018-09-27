@@ -20,7 +20,7 @@
 namespace cricket {
 
 // Describes a session content. Individual content types inherit from
-// this class.  Analagous to a <jingle><content><description> or
+// this class.  Analogous to a <jingle><content><description> or
 // <session><description>.
 class ContentDescription {
  public:
@@ -28,7 +28,7 @@ class ContentDescription {
   virtual ContentDescription* Copy() const = 0;
 };
 
-// Analagous to a <jingle><content> or <session><description>.
+// Analogous to a <jingle><content> or <session><description>.
 // name = name of <content name="...">
 // type = xmlns of <content>
 struct ContentInfo {

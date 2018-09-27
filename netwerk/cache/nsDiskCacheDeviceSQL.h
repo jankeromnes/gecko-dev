@@ -239,7 +239,7 @@ private:
   nsresult GetUsage(const nsACString &clientID,
                     uint32_t *usage);
 
-  nsresult RunSimpleQuery(mozIStorageStatement *statment,
+  nsresult RunSimpleQuery(mozIStorageStatement *statement,
                           uint32_t resultIndex,
                           uint32_t * count,
                           char *** values);

@@ -258,7 +258,7 @@ class TreeMetadataEmitter(LoggingMixin):
                     for q in recurse_refs(o):
                         yield q
 
-        # Check that all static libraries refering shared libraries in
+        # Check that all static libraries referring shared libraries in
         # USE_LIBS are linked into a shared library or program.
         for lib in self._static_linking_shared:
             if all(isinstance(o, StaticLibrary) for o in recurse_refs(lib)):

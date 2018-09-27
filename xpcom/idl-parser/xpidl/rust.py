@@ -337,7 +337,7 @@ pub struct %(name)sVTable {%(base)s%(entries)s}
 # NOTE: This template is not generated for nsISupports, as it has no base interfaces.
 deref_tmpl = """\
 // Every interface struct type implements `Deref` to its base interface. This
-// causes methods on the base interfaces to be directly avaliable on the
+// causes methods on the base interfaces to be directly available on the
 // object. For example, you can call `.AddRef` or `.QueryInterface` directly
 // on any interface which inherits from `nsISupports`.
 impl ::std::ops::Deref for %(name)s {

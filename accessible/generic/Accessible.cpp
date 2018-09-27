@@ -1325,7 +1325,7 @@ Accessible::ApplyARIAState(uint64_t* aState) const
   }
 
   if (*aState & states::FOCUSABLE) {
-    // Propogate aria-disabled from ancestors down to any focusable descendant.
+    // Propagate aria-disabled from ancestors down to any focusable descendant.
     const Accessible* ancestor = this;
     while ((ancestor = ancestor->Parent()) && !ancestor->IsDoc()) {
       dom::Element* el = ancestor->Elm();
@@ -2113,21 +2113,21 @@ Accessible::NativeDescription(nsString& aDescription)
 
 // Accessible protected
 void
-Accessible::BindToParent(Accessible* aParent, uint32_t aIndexInParent)
+Accessible::BindToParent(Accessible* apparent, uint32_t aIndexInParent)
 {
-  MOZ_ASSERT(aParent, "This method isn't used to set null parent");
+  MOZ_ASSERT(apparent, "This method isn't used to set null parent");
   MOZ_ASSERT(!mParent, "The child was expected to be moved");
 
 #ifdef A11Y_LOG
   if (mParent) {
     logging::TreeInfo("BindToParent: stealing accessible", 0,
                       "old parent", mParent,
-                      "new parent", aParent,
+                      "new parent", apparent,
                       "child", this, nullptr);
   }
 #endif
 
-  mParent = aParent;
+  mParent = apparent;
   mIndexInParent = aIndexInParent;
 
   // Note: this is currently only used for richlistitems and their children.

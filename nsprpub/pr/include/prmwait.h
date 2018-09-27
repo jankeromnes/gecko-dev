@@ -83,7 +83,7 @@ typedef struct PRMemoryDescriptor
 /*
 ** STRUCTURE:   PRMWaitClientData
 ** DESCRIPTION:
-**      An opague stucture for which a client MAY give provide a concrete
+**      An opague structure for which a client MAY give provide a concrete
 **      definition and associate with a receive descriptor. The NSPR runtime
 **      does not manage this field. It is completely up to the client.
 */

@@ -206,7 +206,7 @@ BCP47FromLanguageID[] = {
     /** A mapping from Windows LCID to BCP 47 codes.
      *  This list is the sorted, curated output of tools/win_lcid.cpp.
      *  Note that these are sorted by value for quick binary lookup, and not logically by lsb.
-     *  The 'bare' language ids (e.g. 0x0001 for Arabic) are ommitted
+     *  The 'bare' language ids (e.g. 0x0001 for Arabic) are omitted
      *  as they do not appear as valid language ids in the OpenType specification.
      */
     { 0x0401, "ar-SA" }, //Arabic

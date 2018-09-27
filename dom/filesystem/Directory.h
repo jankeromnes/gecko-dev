@@ -35,7 +35,7 @@ public:
               ErrorResult& aRv);
 
   static already_AddRefed<Directory>
-  Create(nsISupports* aParent, nsIFile* aDirectory,
+  Create(nsISupports* apparent, nsIFile* aDirectory,
          FileSystemBase* aFileSystem = 0);
 
   // ========= Begin WebIDL bindings. ===========
@@ -100,7 +100,7 @@ public:
   }
 
 private:
-  Directory(nsISupports* aParent,
+  Directory(nsISupports* apparent,
             nsIFile* aFile,
             FileSystemBase* aFileSystem = nullptr);
   ~Directory();

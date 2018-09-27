@@ -141,7 +141,7 @@ public:
    */
 
   NS_IMETHOD
-  InheritAutomaticData(nsIFrame* aParent) = 0;
+  InheritAutomaticData(nsIFrame* apparent) = 0;
 
   NS_IMETHOD
   TransmitAutomaticData() = 0;

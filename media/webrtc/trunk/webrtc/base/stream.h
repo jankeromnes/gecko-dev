@@ -90,7 +90,7 @@ class StreamInterface : public MessageHandler {
   virtual void Close() = 0;
 
   // Streams may signal one or more StreamEvents to indicate state changes.
-  // The first argument identifies the stream on which the state change occured.
+  // The first argument identifies the stream on which the state change occurred.
   // The second argument is a bit-wise combination of StreamEvents.
   // If SE_CLOSE is signalled, then the third argument is the associated error
   // code.  Otherwise, the value is undefined.
@@ -188,7 +188,7 @@ class StreamInterface : public MessageHandler {
   virtual bool Flush();
 
   // Communicates the amount of data which will be written to the stream.  The
-  // stream may choose to preallocate memory to accomodate this data.  The
+  // stream may choose to preallocate memory to accommodate this data.  The
   // stream may return false to indicate that there is not enough room (ie,
   // Write will return SR_EOS/SR_ERROR at some point).  Note that calling this
   // function should not affect the existing state of data in the stream.
@@ -401,7 +401,7 @@ class FileStream : public StreamInterface {
   bool Flush() override;
 
 #if defined(WEBRTC_POSIX) && !defined(__native_client__)
-  // Tries to aquire an exclusive lock on the file.
+  // Tries to acquire an exclusive lock on the file.
   // Use OpenShare(...) on win32 to get similar functionality.
   bool TryLock();
   bool Unlock();
@@ -462,7 +462,7 @@ class MemoryStreamBase : public StreamInterface {
   RTC_DISALLOW_COPY_AND_ASSIGN(MemoryStreamBase);
 };
 
-// MemoryStream dynamically resizes to accomodate written data.
+// MemoryStream dynamically resizes to accommodate written data.
 
 class MemoryStream : public MemoryStreamBase {
  public:

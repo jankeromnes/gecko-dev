@@ -654,7 +654,7 @@ where
         Self::parse_separated_with(input, T::parse)
     }
 
-    /// Parse **one or more** syntax tree nodes with punctuation in bewteen and
+    /// Parse **one or more** syntax tree nodes with punctuation in between and
     /// **no trailing** punctuation.
     /// allowing trailing punctuation.
     pub fn parse_separated_nonempty(input: Cursor) -> PResult<Self> {

@@ -252,7 +252,7 @@ const PasswordsCleaner = {
         // XXXehsan: is there a better way to do this rather than this
         // hacky comparison?
         if (!ex.message.includes("User canceled Master Password entry")) {
-          throw new Error("Exception occured in clearing passwords :" + ex);
+          throw new Error("Exception occurred in clearing passwords :" + ex);
         }
       }
 

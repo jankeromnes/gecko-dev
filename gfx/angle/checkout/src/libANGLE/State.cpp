@@ -2425,7 +2425,7 @@ Error State::getIntegerv(const Context *context, GLenum pname, GLint *params)
             *params = mBoundBuffers[BufferBinding::CopyRead].id();
             break;
         case GL_COPY_WRITE_BUFFER_BINDING:
-            *params = mBoundBuffers[BufferBinding::CopyWrite].id();
+            *params = mBoundBuffers[BufferBinding::copyright].id();
             break;
         case GL_PIXEL_PACK_BUFFER_BINDING:
             *params = mBoundBuffers[BufferBinding::PixelPack].id();
@@ -2736,7 +2736,7 @@ Error State::syncProgramTextures(const Context *context)
             mActiveTexturesCache[textureUnitIndex] = nullptr;
         }
 
-        // Bind the texture unconditionally, to recieve completeness change notifications.
+        // Bind the texture unconditionally, to receive completeness change notifications.
         mCompleteTextureBindings[textureUnitIndex].bind(texture->getSubject());
         newActiveTextures.set(textureUnitIndex);
 

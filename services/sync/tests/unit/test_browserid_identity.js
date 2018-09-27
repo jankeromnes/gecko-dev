@@ -207,7 +207,7 @@ add_task(async function test_resourceAuthenticatorSkew() {
 add_task(async function test_RESTResourceAuthenticatorSkew() {
   _("BrowserIDManager REST Resource Authenticator compensates for clock skew in Hawk header.");
 
-  // Clock is skewed 12 hours into the future from our arbitary date
+  // Clock is skewed 12 hours into the future from our arbitrary date
   let now = new Date("Fri Apr 09 2004 00:00:00 GMT-0700").valueOf() + 12 * HOUR_MS;
   let browseridManager = new BrowserIDManager();
   let hawkClient = new HawkClient("https://example.net/v1", "/foo");

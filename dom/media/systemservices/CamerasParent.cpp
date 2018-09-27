@@ -93,7 +93,7 @@ Monitor* CamerasParent::sThreadMonitor = nullptr;
 StaticMutex CamerasParent::sMutex;
 
 // 3 threads are involved in this code:
-// - the main thread for some setups, and occassionally for video capture setup
+// - the main thread for some setups, and occasionally for video capture setup
 //   calls that don't work correctly elsewhere.
 // - the IPC thread on which PBackground is running and which receives and
 //   sends messages
@@ -123,13 +123,13 @@ void InputObserver::OnDeviceChange() {
 
 class DeliverFrameRunnable : public mozilla::Runnable {
 public:
-  DeliverFrameRunnable(CamerasParent* aParent,
+  DeliverFrameRunnable(CamerasParent* apparent,
                        CaptureEngine aEngine,
                        uint32_t aStreamId,
                        const webrtc::VideoFrame& aFrame,
                        const VideoFrameProperties& aProperties)
     : Runnable("camera::DeliverFrameRunnable")
-    , mParent(aParent)
+    , mParent(apparent)
     , mCapEngine(aEngine)
     , mStreamId(aStreamId)
     , mProperties(aProperties)
@@ -146,13 +146,13 @@ public:
                                            aProperties.bufferSize(), aFrame);
   }
 
-  DeliverFrameRunnable(CamerasParent* aParent,
+  DeliverFrameRunnable(CamerasParent* apparent,
                        CaptureEngine aEngine,
                        uint32_t aStreamId,
                        ShmemBuffer aBuffer,
                        VideoFrameProperties& aProperties)
     : Runnable("camera::DeliverFrameRunnable")
-    , mParent(aParent)
+    , mParent(apparent)
     , mCapEngine(aEngine)
     , mStreamId(aStreamId)
     , mBuffer(std::move(aBuffer))

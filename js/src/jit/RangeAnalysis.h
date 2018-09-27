@@ -228,7 +228,7 @@ class Range : public TempObject {
 
         // Forbid the max_exponent_ field from implying better bounds for
         // lower_/upper_ fields. We have to add 1 to the max_exponent_ when
-        // canHaveFractionalPart_ is true in order to accomodate
+        // canHaveFractionalPart_ is true in order to accommodate
         // fractional offsets. For example, 2147483647.9 is greater than
         // INT32_MAX, so a range containing that value will have
         // hasInt32UpperBound_ set to false, however that value also has

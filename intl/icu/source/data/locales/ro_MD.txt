@@ -7,7 +7,7 @@ ro_MD{
             dayNames{
                 format{
                     abbreviated{
-                        "Dum",
+                        "Dumb",
                         "Lun",
                         "Mar",
                         "Mie",
@@ -36,7 +36,7 @@ ro_MD{
                 }
                 stand-alone{
                     abbreviated{
-                        "Dum",
+                        "Dumb",
                         "Lun",
                         "Mar",
                         "Mie",

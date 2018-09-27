@@ -11,7 +11,7 @@ createEnum([
   // Update the custom font variation instance with the current axes values.
   "UPDATE_CUSTOM_INSTANCE",
 
-  // Reset font editor to intial state.
+  // Reset font editor to initial state.
   "RESET_EDITOR",
 
   // Apply the variation settings of a font instance.

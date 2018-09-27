@@ -44,14 +44,14 @@ Windows-1252
 #data
 <!DOCTYPE HTML>
 <meta http-equiv="Content-Type" content="text/html; charset=iso8859-2">
-<!-- XXX this is a tough one, not sure how to do this one, unless we explictly do content= processing -->
+<!-- XXX this is a tough one, not sure how to do this one, unless we explicitly do content= processing -->
 #encoding
 iso8859-2
 
 #data
 <!DOCTYPE HTML>
 <meta content="text/html; charset=iso8859-2" http-equiv="Content-Type">
-<!-- XXX this is a tough one, not sure how to do this one, unless we explictly do content= processing -->
+<!-- XXX this is a tough one, not sure how to do this one, unless we explicitly do content= processing -->
 #encoding
 iso8859-2
 

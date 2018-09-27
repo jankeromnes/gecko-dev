@@ -143,7 +143,7 @@ public:
    * Returns true if the given URI matches the URI of our PAC file or the
    * URI it has been redirected to. In the case of a chain of redirections
    * only the current one being followed and the original are considered
-   * becuase this information is used, respectively, to determine if we
+   * because this information is used, respectively, to determine if we
    * should bypass the proxy (to fetch the pac file) or if the pac
    * configuration has changed (and we should reload the pac file)
    */

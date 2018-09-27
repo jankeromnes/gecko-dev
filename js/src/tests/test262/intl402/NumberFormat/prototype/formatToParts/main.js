@@ -2,7 +2,7 @@
 // This code is governed by the license found in the LICENSE file.
 
 /*---
-description: Tests for existance and behavior of Intl.NumberFormat.prototype.formatToParts
+description: Tests for existence and behavior of Intl.NumberFormat.prototype.formatToParts
 ---*/
 
 function reduce(parts) {

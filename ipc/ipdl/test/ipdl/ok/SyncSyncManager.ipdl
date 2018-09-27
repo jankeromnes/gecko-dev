@@ -4,7 +4,7 @@ include protocol SyncSyncManagee;
  * in the Rust IPDL parser that was treating "sync" like "async" in the
  * nested case.
  */
-nested(upto not) sync protocol SyncSyncManager {
+nested(up to not) sync protocol SyncSyncManager {
     manages SyncSyncManagee;
 parent:
     async SyncSyncManagee();

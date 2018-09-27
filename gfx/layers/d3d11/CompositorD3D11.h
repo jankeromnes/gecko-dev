@@ -28,7 +28,7 @@ class DiagnosticsD3D11;
 class CompositorD3D11 : public Compositor
 {
 public:
-  CompositorD3D11(CompositorBridgeParent* aParent, widget::CompositorWidget* aWidget);
+  CompositorD3D11(CompositorBridgeParent* apparent, widget::CompositorWidget* aWidget);
   ~CompositorD3D11();
 
   virtual CompositorD3D11* AsCompositorD3D11() override { return this; }

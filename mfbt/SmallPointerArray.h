@@ -19,7 +19,7 @@
 namespace mozilla {
 
 // Array class for situations where a small number of NON-NULL elements (<= 2)
-// is expected, a large number of elements must be accomodated if necessary,
+// is expected, a large number of elements must be accommodated if necessary,
 // and the size of the class must be minimal. Typical vector implementations
 // will fulfill the first two requirements by simply adding inline storage
 // alongside the rest of their member variables. While this strategy works,

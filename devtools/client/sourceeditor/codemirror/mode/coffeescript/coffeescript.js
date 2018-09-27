@@ -28,7 +28,7 @@ CodeMirror.defineMode("coffeescript", function(conf, parserConf) {
   var atProp = /^@[_A-Za-z$][_A-Za-z$0-9]*/;
 
   var wordOperators = wordRegexp(["and", "or", "not",
-                                  "is", "isnt", "in",
+                                  "is", "isn't", "in",
                                   "instanceof", "typeof"]);
   var indentKeywords = ["for", "while", "loop", "if", "unless", "else",
                         "switch", "try", "catch", "finally", "class"];

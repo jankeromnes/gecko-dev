@@ -29,7 +29,7 @@
 # include $(CLEAR_VARS)
 # include jni/libvpx/build/make/Android.mk
 #
-# By default libvpx will detect at runtime the existance of NEON extension.
+# By default libvpx will detect at runtime the existence of NEON extension.
 # For this we import the 'cpufeatures' module from the NDK sources.
 # libvpx can also be configured without this runtime detection method.
 # Configuring with --disable-runtime-cpu-detect will assume presence of NEON.

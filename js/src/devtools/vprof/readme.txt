@@ -70,8 +70,8 @@ Here are a few examples of using the value-profiling utility:
     value profile e and call myProbe (void* vprofID) at the profiling point.
     inside the probe, the client has the predefined variables:
     _VAL, _COUNT, _SUM, _MIN, _MAX, and the general purpose registers
-    _IVAR1, ..., IVAR4      general integer registrs
-    _I64VAR1, ..., I64VAR4  general integer64 registrs
+    _IVAR1, ..., IVAR4      general integer registers
+    _I64VAR1, ..., I64VAR4  general integer64 registers
     _DVAR1, ..., _DVAR4     general double registers
     _GENPTR a generic pointer that can be used by the client
     the number of registers can be changed in vprof.h
@@ -90,8 +90,8 @@ _vprof (v, myProbe);
    value profile v and call myProbe (void* vprofID) at the profiling point
    inside the probe, the client has the predefined variables:
    _VAL, _COUNT, _SUM, _MIN, _MAX, and the general purpose registers
-   _IVAR1, ..., IVAR4   general integer registrs
-   _I64VAR1, ..., I64VAR4 general integer64 registrs
+   _IVAR1, ..., IVAR4   general integer registers
+   _I64VAR1, ..., I64VAR4 general integer64 registers
    _DVAR1, ..., _DVAR4  general double registers
   the number of registers can be changed in vprof.h
   _GENPTR a generic pointer that can be used for almost anything

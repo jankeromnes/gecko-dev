@@ -102,7 +102,7 @@ this.VideoControlsImplPageWidget = class {
       videoEvents: ["play", "pause", "ended", "volumechange", "loadeddata",
                     "loadstart", "timeupdate", "progress",
                     "playing", "waiting", "canplay", "canplaythrough",
-                    "seeking", "seeked", "emptied", "loadedmetadata",
+                    "seeking", "sought", "emptied", "loadedmetadata",
                     "error", "suspend", "stalled",
                     "mozvideoonlyseekbegin", "mozvideoonlyseekcompleted"],
 
@@ -555,7 +555,7 @@ this.VideoControlsImplPageWidget = class {
             this.statusIcon.setAttribute("type", "throbber");
             this.setupStatusFader();
             break;
-          case "seeked":
+          case "sought":
           case "playing":
           case "canplay":
           case "canplaythrough":

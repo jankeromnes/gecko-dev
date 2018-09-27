@@ -335,7 +335,7 @@ typedef struct VP8_COMP {
 
   CODING_CONTEXT coding_context;
 
-  /* Rate targetting variables */
+  /* Rate targeting variables */
   int64_t last_prediction_error;
   int64_t last_intra_error;
 
@@ -354,7 +354,7 @@ typedef struct VP8_COMP {
   /* GF interval chosen when we coded the last GF */
   int current_gf_interval;
 
-  /* Total bits overspent becasue of GF boost (cumulative) */
+  /* Total bits overspent because of GF boost (cumulative) */
   int gf_overspend_bits;
 
   /* Used in the few frames following a GF to recover the extra bits

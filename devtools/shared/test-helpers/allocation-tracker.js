@@ -6,7 +6,7 @@
  * This file helps tracking Javascript object allocations.
  * It is only included in local builds as a debugging helper.
  *
- * It is typicaly used when running DevTools tests (either mochitests or DAMP).
+ * It is typically used when running DevTools tests (either mochitests or DAMP).
  * To use it, you need to set the following environment variable:
  *   DEBUG_DEVTOOLS_ALLOCATIONS="normal"
  *     This will only print the number of JS objects created during your test.

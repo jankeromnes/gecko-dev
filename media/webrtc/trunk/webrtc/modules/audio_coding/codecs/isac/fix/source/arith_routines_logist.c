@@ -276,7 +276,7 @@ int WebRtcIsacfix_DecLogisticMulti2(int16_t *dataQ7,
     inSqrt = envQ8[envCount];
     i = 10;
 
-    /* For safty reasons */
+    /* For safety reasons */
     if (inSqrt < 0)
       inSqrt=-inSqrt;
 

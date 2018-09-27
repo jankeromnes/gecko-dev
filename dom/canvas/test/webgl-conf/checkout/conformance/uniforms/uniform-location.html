@@ -98,8 +98,8 @@ wtu.shouldGenerateGLError(contextA, contextA.NO_ERROR, "contextA.uniform1f(locat
 shouldBe("contextA.getUniform(programS, locationSx)", "3");
 shouldBe("contextA.getUniform(programS, locationArray0)", "123");
 
-// getUniformLocation should return a different object everytime, should not cache and return the same object
-debug("Testing that getUniformLocation returns a different object everytime");
+// getUniformLocation should return a different object every time, should not cache and return the same object
+debug("Testing that getUniformLocation returns a different object every time");
 locationSx  = contextA.getUniformLocation(programS, "u_struct.x");
 locationSx2 = contextA.getUniformLocation(programS, "u_struct.x");
 shouldBeFalse("locationSx === locationSx2");

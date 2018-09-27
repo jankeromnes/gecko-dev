@@ -113,7 +113,7 @@ add_task(async function shareURLAddressBar() {
     // We should see 1 receiver and one extra node for the "More..." button
     Assert.equal(panel.children.length, 2, "Has correct share receivers");
 
-    // Remove the Share URL button from the Address bar so we dont interfere
+    // Remove the Share URL button from the Address bar so we don't interfere
     // with future tests
     contextMenuPromise = promisePanelShown("pageActionContextMenu");
     EventUtils.synthesizeMouseAtCenter(shareButton, {

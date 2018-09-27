@@ -478,7 +478,7 @@ public:
     }
 
     /*
-     * Sets the name of the node to match. Only availible for pi nodes
+     * Sets the name of the node to match. Only available for pi nodes
      */
     void setNodeName(const nsAString& aName)
     {

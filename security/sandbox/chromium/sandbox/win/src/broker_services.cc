@@ -356,7 +356,7 @@ ResultCode BrokerServicesBase::SpawnTarget(const wchar_t* exe_path,
   // We don't want any child processes causing the IDC_APPSTARTING cursor.
   startup_info.startup_info()->dwFlags |= STARTF_FORCEOFFFEEDBACK;
 
-  // The liftime of |mitigations|, |inherit_handle_list| and
+  // The lifetime of |mitigations|, |inherit_handle_list| and
   // |child_process_creation| have to be at least as long as
   // |startup_info| because |UpdateProcThreadAttribute| requires that
   // its |lpValue| parameter persist until |DeleteProcThreadAttributeList| is

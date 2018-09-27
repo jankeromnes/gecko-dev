@@ -2,7 +2,7 @@
 // - src/annex-b-fns/global-existing-fn-no-init.case
 // - src/annex-b-fns/global/switch-dflt.template
 /*---
-description: Existing variable binding is not modified (Funtion declaration in the `default` clause of a `switch` statement in the global scope)
+description: Existing variable binding is not modified (Function declaration in the `default` clause of a `switch` statement in the global scope)
 esid: sec-web-compat-globaldeclarationinstantiation
 es6id: B.3.3.2
 flags: [generated, noStrict]

@@ -68,7 +68,7 @@ class DxgiAdapterDuplicator {
   DesktopRect ScreenRect(int id) const;
 
   // Returns the count of screens owned by this DxgiAdapterDuplicator. These
-  // screens can be retrieved by an interger in the range of
+  // screens can be retrieved by an integer in the range of
   // [0, screen_count()).
   int screen_count() const { return static_cast<int>(duplicators_.size()); }
 

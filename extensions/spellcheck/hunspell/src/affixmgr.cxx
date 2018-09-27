@@ -520,7 +520,7 @@ int AffixMgr::parse_file(const char* affpath, const char* key) {
     }
 
     /* parse in the ignored characters (for example, Arabic optional diacretics
-     * charachters */
+     * characters */
     if (line.compare(0, 6, "IGNORE", 6) == 0) {
       if (!parse_array(line, ignorechars, ignorechars_utf16,
                        utf8, afflst->getlinenum())) {
@@ -1284,7 +1284,7 @@ int AffixMgr::cpdrep_check(const char* word, int wl) {
   for (size_t i = 0; i < reptable.size(); ++i) {
     const char* r = word;
     const size_t lenp = reptable[i].pattern.size();
-    // search every occurence of the pattern in the word
+    // search every occurrence of the pattern in the word
     while ((r = strstr(r, reptable[i].pattern.c_str())) != NULL) {
       std::string candidate(word);
       size_t type = r == word && langnum != LANG_hu ? 1 : 0;

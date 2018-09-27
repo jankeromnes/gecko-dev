@@ -90,7 +90,7 @@ MediaEngineWebRTC::EnumerateVideoDevices(uint64_t aWindowId,
    * We still enumerate every time, in case a new device was plugged in since
    * the last call. TODO: Verify that WebRTC actually does deal with hotplugging
    * new devices (with or without new engine creation) and accordingly adjust.
-   * Enumeration is not neccessary if GIPS reports the same set of devices
+   * Enumeration is not necessary if GIPS reports the same set of devices
    * for a given instance of the engine. Likewise, if a device was plugged out,
    * mVideoSources must be updated.
    */

@@ -68,7 +68,7 @@ class LIBPROTOBUF_EXPORT AnyMetadata {
   bool UnpackTo(Message* message) const;
 
   // Checks whether the type specified in the type URL matches the given type.
-  // A type is consdiered matching if its full name matches the full name after
+  // A type is considered matching if its full name matches the full name after
   // the last "/" in the type URL.
   template<typename T>
   bool Is() const {

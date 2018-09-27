@@ -11,7 +11,7 @@ const WORKER_URL =
 
 add_task(async function() {
   try {
-    new DevToolsWorker("resource://i/dont/exist.js");
+    new DevToolsWorker("resource://i/don't/exist.js");
     ok(false, "Creating a DevToolsWorker with an invalid URL throws");
   } catch (e) {
     ok(true, "Creating a DevToolsWorker with an invalid URL throws");

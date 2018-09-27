@@ -63,7 +63,7 @@ VRLayerChild::SubmitFrame(const VRDisplayInfo& aDisplayInfo)
   }
 
   // Keep the SharedSurfaceTextureClient alive long enough for
-  // 1 extra frame, accomodating overlapped asynchronous rendering.
+  // 1 extra frame, accommodating overlapped asynchronous rendering.
   mLastFrameTexture = mThisFrameTexture;
 
 #if defined(MOZ_WIDGET_ANDROID)

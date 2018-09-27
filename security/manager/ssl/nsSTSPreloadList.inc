@@ -7192,7 +7192,7 @@ cannarobotics.com, 1
 cannoli.london, 1
 cannyfoxx.me, 1
 canoonic.se, 1
-cant.at, 1
+can't.at, 1
 cantatio.ch, 1
 canterberry.cc, 1
 canterbury.ws, 1
@@ -11664,8 +11664,8 @@ donotcall.gov, 1
 donotlink.it, 1
 donovand.info, 1
 donpomodoro.com.co, 1
-dont.re, 1
-dont.watch, 1
+don't.re, 1
+don't.watch, 1
 dontbubble.me, 1
 dontcageus.org, 1
 donthedragonwilson.com, 1
@@ -19811,7 +19811,7 @@ ingber.com, 1
 inge-r.nl, 1
 ingeeibach.de, 1
 ingenium.si, 1
-ingenius.ws, 1
+ingenious.ws, 1
 ingerhy.com, 1
 ingi.ga, 1
 ingjobs.ch, 1
@@ -43598,7 +43598,7 @@ whosyourdaddy.ml, 1
 whoturgled.com, 1
 whqtravel.org, 0
 whs-music.org, 1
-whta.se, 1
+what.se, 1
 whub.io, 1
 why-brexit.uk, 1
 whychoosebob.net.au, 1

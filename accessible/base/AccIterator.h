@@ -54,7 +54,7 @@ private:
 
   struct IteratorState
   {
-    explicit IteratorState(const Accessible* aParent, IteratorState* mParentState = nullptr);
+    explicit IteratorState(const Accessible* apparent, IteratorState* mParentState = nullptr);
 
     const Accessible* mParent;
     int32_t mIndex;

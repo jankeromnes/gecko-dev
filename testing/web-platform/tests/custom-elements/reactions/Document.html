@@ -133,7 +133,7 @@ test_with_window(function (contentWindow, contentDocument) {
     // document.open()'s spec doesn't match most browsers; see https://github.com/whatwg/html/issues/1698.
     // However, as explained in https://github.com/whatwg/html/issues/1698#issuecomment-298748641
     // the custom element registry will be replaced after document.open() call,
-    // So call customElements.define() after that in order to register defintion
+    // So call customElements.define() after that in order to register definition
     // to correct custom elements registry.
     const element = define_custom_element_in_window(contentWindow, 'custom-element', []);
     contentWindow.document.write('<custom-element></custom-element>');
@@ -154,7 +154,7 @@ test_with_window(function (contentWindow) {
     // document.open()'s spec doesn't match most browsers; see https://github.com/whatwg/html/issues/1698.
     // However, as explained in https://github.com/whatwg/html/issues/1698#issuecomment-298748641
     // the custom element registry will be replaced after document.open() call,
-    // So call customElements.define() after that in order to register defintion
+    // So call customElements.define() after that in order to register definition
     // to correct custom elements registry.
     const element = define_custom_element_in_window(contentWindow, 'custom-element', []);
     contentWindow.document.writeln('<custom-element></custom-element>');

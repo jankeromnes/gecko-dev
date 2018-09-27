@@ -533,7 +533,7 @@ async function setupFormHistory() {
         value: "1y",
       }]);
 
-  // Artifically age the entries to the proper vintage.
+  // Artificially age the entries to the proper vintage.
   let timestamp = now_uSec - 10 * kUsecPerMin;
   let results = await searchEntries(["guid"], { fieldname: "10minutes" });
   await update({ op: "update", firstUsed: timestamp, guid: results[0].guid });

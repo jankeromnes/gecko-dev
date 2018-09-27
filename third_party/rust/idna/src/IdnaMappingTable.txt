@@ -786,8 +786,8 @@
 050B          ; valid                                  # 3.2  CYRILLIC SMALL LETTER KOMI NJE
 050C          ; mapped                 ; 050D          # 3.2  CYRILLIC CAPITAL LETTER KOMI SJE
 050D          ; valid                                  # 3.2  CYRILLIC SMALL LETTER KOMI SJE
-050E          ; mapped                 ; 050F          # 3.2  CYRILLIC CAPITAL LETTER KOMI TJE
-050F          ; valid                                  # 3.2  CYRILLIC SMALL LETTER KOMI TJE
+050E          ; mapped                 ; 050F          # 3.2  CYRILLIC CAPITAL LETTER KOMI THE
+050F          ; valid                                  # 3.2  CYRILLIC SMALL LETTER KOMI THE
 0510          ; mapped                 ; 0511          # 5.0  CYRILLIC CAPITAL LETTER REVERSED ZE
 0511          ; valid                                  # 5.0  CYRILLIC SMALL LETTER REVERSED ZE
 0512          ; mapped                 ; 0513          # 5.0  CYRILLIC CAPITAL LETTER EL WITH HOOK
@@ -4040,7 +4040,7 @@ A76D          ; valid                                  # 5.1  LATIN SMALL LETTER
 A76E          ; mapped                 ; A76F          # 5.1  LATIN CAPITAL LETTER CON
 A76F          ; valid                                  # 5.1  LATIN SMALL LETTER CON
 A770          ; mapped                 ; A76F          # 5.1  MODIFIER LETTER US
-A771..A778    ; valid                                  # 5.1  LATIN SMALL LETTER DUM..LATIN SMALL LETTER UM
+A771..A778    ; valid                                  # 5.1  LATIN SMALL LETTER DUMB..LATIN SMALL LETTER UM
 A779          ; mapped                 ; A77A          # 5.1  LATIN CAPITAL LETTER INSULAR D
 A77A          ; valid                                  # 5.1  LATIN SMALL LETTER INSULAR D
 A77B          ; mapped                 ; A77C          # 5.1  LATIN CAPITAL LETTER INSULAR F
@@ -4867,12 +4867,12 @@ FC07          ; mapped                 ; 0628 062E     # 1.1  ARABIC LIGATURE BE
 FC08          ; mapped                 ; 0628 0645     # 1.1  ARABIC LIGATURE BEH WITH MEEM ISOLATED FORM
 FC09          ; mapped                 ; 0628 0649     # 1.1  ARABIC LIGATURE BEH WITH ALEF MAKSURA ISOLATED FORM
 FC0A          ; mapped                 ; 0628 064A     # 1.1  ARABIC LIGATURE BEH WITH YEH ISOLATED FORM
-FC0B          ; mapped                 ; 062A 062C     # 1.1  ARABIC LIGATURE TEH WITH JEEM ISOLATED FORM
-FC0C          ; mapped                 ; 062A 062D     # 1.1  ARABIC LIGATURE TEH WITH HAH ISOLATED FORM
-FC0D          ; mapped                 ; 062A 062E     # 1.1  ARABIC LIGATURE TEH WITH KHAH ISOLATED FORM
-FC0E          ; mapped                 ; 062A 0645     # 1.1  ARABIC LIGATURE TEH WITH MEEM ISOLATED FORM
-FC0F          ; mapped                 ; 062A 0649     # 1.1  ARABIC LIGATURE TEH WITH ALEF MAKSURA ISOLATED FORM
-FC10          ; mapped                 ; 062A 064A     # 1.1  ARABIC LIGATURE TEH WITH YEH ISOLATED FORM
+FC0B          ; mapped                 ; 062A 062C     # 1.1  ARABIC LIGATURE THE WITH JEEM ISOLATED FORM
+FC0C          ; mapped                 ; 062A 062D     # 1.1  ARABIC LIGATURE THE WITH HAH ISOLATED FORM
+FC0D          ; mapped                 ; 062A 062E     # 1.1  ARABIC LIGATURE THE WITH KHAH ISOLATED FORM
+FC0E          ; mapped                 ; 062A 0645     # 1.1  ARABIC LIGATURE THE WITH MEEM ISOLATED FORM
+FC0F          ; mapped                 ; 062A 0649     # 1.1  ARABIC LIGATURE THE WITH ALEF MAKSURA ISOLATED FORM
+FC10          ; mapped                 ; 062A 064A     # 1.1  ARABIC LIGATURE THE WITH YEH ISOLATED FORM
 FC11          ; mapped                 ; 062B 062C     # 1.1  ARABIC LIGATURE THEH WITH JEEM ISOLATED FORM
 FC12          ; mapped                 ; 062B 0645     # 1.1  ARABIC LIGATURE THEH WITH MEEM ISOLATED FORM
 FC13          ; mapped                 ; 062B 0649     # 1.1  ARABIC LIGATURE THEH WITH ALEF MAKSURA ISOLATED FORM
@@ -4968,12 +4968,12 @@ FC6C          ; mapped                 ; 0628 0645     # 1.1  ARABIC LIGATURE BE
 FC6D          ; mapped                 ; 0628 0646     # 1.1  ARABIC LIGATURE BEH WITH NOON FINAL FORM
 FC6E          ; mapped                 ; 0628 0649     # 1.1  ARABIC LIGATURE BEH WITH ALEF MAKSURA FINAL FORM
 FC6F          ; mapped                 ; 0628 064A     # 1.1  ARABIC LIGATURE BEH WITH YEH FINAL FORM
-FC70          ; mapped                 ; 062A 0631     # 1.1  ARABIC LIGATURE TEH WITH REH FINAL FORM
-FC71          ; mapped                 ; 062A 0632     # 1.1  ARABIC LIGATURE TEH WITH ZAIN FINAL FORM
-FC72          ; mapped                 ; 062A 0645     # 1.1  ARABIC LIGATURE TEH WITH MEEM FINAL FORM
-FC73          ; mapped                 ; 062A 0646     # 1.1  ARABIC LIGATURE TEH WITH NOON FINAL FORM
-FC74          ; mapped                 ; 062A 0649     # 1.1  ARABIC LIGATURE TEH WITH ALEF MAKSURA FINAL FORM
-FC75          ; mapped                 ; 062A 064A     # 1.1  ARABIC LIGATURE TEH WITH YEH FINAL FORM
+FC70          ; mapped                 ; 062A 0631     # 1.1  ARABIC LIGATURE THE WITH REH FINAL FORM
+FC71          ; mapped                 ; 062A 0632     # 1.1  ARABIC LIGATURE THE WITH ZAIN FINAL FORM
+FC72          ; mapped                 ; 062A 0645     # 1.1  ARABIC LIGATURE THE WITH MEEM FINAL FORM
+FC73          ; mapped                 ; 062A 0646     # 1.1  ARABIC LIGATURE THE WITH NOON FINAL FORM
+FC74          ; mapped                 ; 062A 0649     # 1.1  ARABIC LIGATURE THE WITH ALEF MAKSURA FINAL FORM
+FC75          ; mapped                 ; 062A 064A     # 1.1  ARABIC LIGATURE THE WITH YEH FINAL FORM
 FC76          ; mapped                 ; 062B 0631     # 1.1  ARABIC LIGATURE THEH WITH REH FINAL FORM
 FC77          ; mapped                 ; 062B 0632     # 1.1  ARABIC LIGATURE THEH WITH ZAIN FINAL FORM
 FC78          ; mapped                 ; 062B 0645     # 1.1  ARABIC LIGATURE THEH WITH MEEM FINAL FORM
@@ -5017,11 +5017,11 @@ FC9D          ; mapped                 ; 0628 062D     # 1.1  ARABIC LIGATURE BE
 FC9E          ; mapped                 ; 0628 062E     # 1.1  ARABIC LIGATURE BEH WITH KHAH INITIAL FORM
 FC9F          ; mapped                 ; 0628 0645     # 1.1  ARABIC LIGATURE BEH WITH MEEM INITIAL FORM
 FCA0          ; mapped                 ; 0628 0647     # 1.1  ARABIC LIGATURE BEH WITH HEH INITIAL FORM
-FCA1          ; mapped                 ; 062A 062C     # 1.1  ARABIC LIGATURE TEH WITH JEEM INITIAL FORM
-FCA2          ; mapped                 ; 062A 062D     # 1.1  ARABIC LIGATURE TEH WITH HAH INITIAL FORM
-FCA3          ; mapped                 ; 062A 062E     # 1.1  ARABIC LIGATURE TEH WITH KHAH INITIAL FORM
-FCA4          ; mapped                 ; 062A 0645     # 1.1  ARABIC LIGATURE TEH WITH MEEM INITIAL FORM
-FCA5          ; mapped                 ; 062A 0647     # 1.1  ARABIC LIGATURE TEH WITH HEH INITIAL FORM
+FCA1          ; mapped                 ; 062A 062C     # 1.1  ARABIC LIGATURE THE WITH JEEM INITIAL FORM
+FCA2          ; mapped                 ; 062A 062D     # 1.1  ARABIC LIGATURE THE WITH HAH INITIAL FORM
+FCA3          ; mapped                 ; 062A 062E     # 1.1  ARABIC LIGATURE THE WITH KHAH INITIAL FORM
+FCA4          ; mapped                 ; 062A 0645     # 1.1  ARABIC LIGATURE THE WITH MEEM INITIAL FORM
+FCA5          ; mapped                 ; 062A 0647     # 1.1  ARABIC LIGATURE THE WITH HEH INITIAL FORM
 FCA6          ; mapped                 ; 062B 0645     # 1.1  ARABIC LIGATURE THEH WITH MEEM INITIAL FORM
 FCA7          ; mapped                 ; 062C 062D     # 1.1  ARABIC LIGATURE JEEM WITH HAH INITIAL FORM
 FCA8          ; mapped                 ; 062C 0645     # 1.1  ARABIC LIGATURE JEEM WITH MEEM INITIAL FORM
@@ -5083,8 +5083,8 @@ FCDF          ; mapped                 ; 0626 0645     # 1.1  ARABIC LIGATURE YE
 FCE0          ; mapped                 ; 0626 0647     # 1.1  ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH HEH MEDIAL FORM
 FCE1          ; mapped                 ; 0628 0645     # 1.1  ARABIC LIGATURE BEH WITH MEEM MEDIAL FORM
 FCE2          ; mapped                 ; 0628 0647     # 1.1  ARABIC LIGATURE BEH WITH HEH MEDIAL FORM
-FCE3          ; mapped                 ; 062A 0645     # 1.1  ARABIC LIGATURE TEH WITH MEEM MEDIAL FORM
-FCE4          ; mapped                 ; 062A 0647     # 1.1  ARABIC LIGATURE TEH WITH HEH MEDIAL FORM
+FCE3          ; mapped                 ; 062A 0645     # 1.1  ARABIC LIGATURE THE WITH MEEM MEDIAL FORM
+FCE4          ; mapped                 ; 062A 0647     # 1.1  ARABIC LIGATURE THE WITH HEH MEDIAL FORM
 FCE5          ; mapped                 ; 062B 0645     # 1.1  ARABIC LIGATURE THEH WITH MEEM MEDIAL FORM
 FCE6          ; mapped                 ; 062B 0647     # 1.1  ARABIC LIGATURE THEH WITH HEH MEDIAL FORM
 FCE7          ; mapped                 ; 0633 0645     # 1.1  ARABIC LIGATURE SEEN WITH MEEM MEDIAL FORM
@@ -5175,13 +5175,13 @@ FD3B          ; mapped                 ; 0638 0645     # 1.1  ARABIC LIGATURE ZA
 FD3C..FD3D    ; mapped                 ; 0627 064B     # 1.1  ARABIC LIGATURE ALEF WITH FATHATAN FINAL FORM..ARABIC LIGATURE ALEF WITH FATHATAN ISOLATED FORM
 FD3E..FD3F    ; valid                  ;      ; NV8    # 1.1  ORNATE LEFT PARENTHESIS..ORNATE RIGHT PARENTHESIS
 FD40..FD4F    ; disallowed                             # NA   <reserved-FD40>..<reserved-FD4F>
-FD50          ; mapped                 ; 062A 062C 0645 #1.1  ARABIC LIGATURE TEH WITH JEEM WITH MEEM INITIAL FORM
-FD51..FD52    ; mapped                 ; 062A 062D 062C #1.1  ARABIC LIGATURE TEH WITH HAH WITH JEEM FINAL FORM..ARABIC LIGATURE TEH WITH HAH WITH JEEM INITIAL FORM
-FD53          ; mapped                 ; 062A 062D 0645 #1.1  ARABIC LIGATURE TEH WITH HAH WITH MEEM INITIAL FORM
-FD54          ; mapped                 ; 062A 062E 0645 #1.1  ARABIC LIGATURE TEH WITH KHAH WITH MEEM INITIAL FORM
-FD55          ; mapped                 ; 062A 0645 062C #1.1  ARABIC LIGATURE TEH WITH MEEM WITH JEEM INITIAL FORM
-FD56          ; mapped                 ; 062A 0645 062D #1.1  ARABIC LIGATURE TEH WITH MEEM WITH HAH INITIAL FORM
-FD57          ; mapped                 ; 062A 0645 062E #1.1  ARABIC LIGATURE TEH WITH MEEM WITH KHAH INITIAL FORM
+FD50          ; mapped                 ; 062A 062C 0645 #1.1  ARABIC LIGATURE THE WITH JEEM WITH MEEM INITIAL FORM
+FD51..FD52    ; mapped                 ; 062A 062D 062C #1.1  ARABIC LIGATURE THE WITH HAH WITH JEEM FINAL FORM..ARABIC LIGATURE THE WITH HAH WITH JEEM INITIAL FORM
+FD53          ; mapped                 ; 062A 062D 0645 #1.1  ARABIC LIGATURE THE WITH HAH WITH MEEM INITIAL FORM
+FD54          ; mapped                 ; 062A 062E 0645 #1.1  ARABIC LIGATURE THE WITH KHAH WITH MEEM INITIAL FORM
+FD55          ; mapped                 ; 062A 0645 062C #1.1  ARABIC LIGATURE THE WITH MEEM WITH JEEM INITIAL FORM
+FD56          ; mapped                 ; 062A 0645 062D #1.1  ARABIC LIGATURE THE WITH MEEM WITH HAH INITIAL FORM
+FD57          ; mapped                 ; 062A 0645 062E #1.1  ARABIC LIGATURE THE WITH MEEM WITH KHAH INITIAL FORM
 FD58..FD59    ; mapped                 ; 062C 0645 062D #1.1  ARABIC LIGATURE JEEM WITH MEEM WITH HAH FINAL FORM..ARABIC LIGATURE JEEM WITH MEEM WITH HAH INITIAL FORM
 FD5A          ; mapped                 ; 062D 0645 064A #1.1  ARABIC LIGATURE HAH WITH MEEM WITH YEH FINAL FORM
 FD5B          ; mapped                 ; 062D 0645 0649 #1.1  ARABIC LIGATURE HAH WITH MEEM WITH ALEF MAKSURA FINAL FORM
@@ -5236,12 +5236,12 @@ FD9A          ; mapped                 ; 0646 0645 064A #1.1  ARABIC LIGATURE NO
 FD9B          ; mapped                 ; 0646 0645 0649 #1.1  ARABIC LIGATURE NOON WITH MEEM WITH ALEF MAKSURA FINAL FORM
 FD9C..FD9D    ; mapped                 ; 064A 0645 0645 #1.1  ARABIC LIGATURE YEH WITH MEEM WITH MEEM FINAL FORM..ARABIC LIGATURE YEH WITH MEEM WITH MEEM INITIAL FORM
 FD9E          ; mapped                 ; 0628 062E 064A #1.1  ARABIC LIGATURE BEH WITH KHAH WITH YEH FINAL FORM
-FD9F          ; mapped                 ; 062A 062C 064A #1.1  ARABIC LIGATURE TEH WITH JEEM WITH YEH FINAL FORM
-FDA0          ; mapped                 ; 062A 062C 0649 #1.1  ARABIC LIGATURE TEH WITH JEEM WITH ALEF MAKSURA FINAL FORM
-FDA1          ; mapped                 ; 062A 062E 064A #1.1  ARABIC LIGATURE TEH WITH KHAH WITH YEH FINAL FORM
-FDA2          ; mapped                 ; 062A 062E 0649 #1.1  ARABIC LIGATURE TEH WITH KHAH WITH ALEF MAKSURA FINAL FORM
-FDA3          ; mapped                 ; 062A 0645 064A #1.1  ARABIC LIGATURE TEH WITH MEEM WITH YEH FINAL FORM
-FDA4          ; mapped                 ; 062A 0645 0649 #1.1  ARABIC LIGATURE TEH WITH MEEM WITH ALEF MAKSURA FINAL FORM
+FD9F          ; mapped                 ; 062A 062C 064A #1.1  ARABIC LIGATURE THE WITH JEEM WITH YEH FINAL FORM
+FDA0          ; mapped                 ; 062A 062C 0649 #1.1  ARABIC LIGATURE THE WITH JEEM WITH ALEF MAKSURA FINAL FORM
+FDA1          ; mapped                 ; 062A 062E 064A #1.1  ARABIC LIGATURE THE WITH KHAH WITH YEH FINAL FORM
+FDA2          ; mapped                 ; 062A 062E 0649 #1.1  ARABIC LIGATURE THE WITH KHAH WITH ALEF MAKSURA FINAL FORM
+FDA3          ; mapped                 ; 062A 0645 064A #1.1  ARABIC LIGATURE THE WITH MEEM WITH YEH FINAL FORM
+FDA4          ; mapped                 ; 062A 0645 0649 #1.1  ARABIC LIGATURE THE WITH MEEM WITH ALEF MAKSURA FINAL FORM
 FDA5          ; mapped                 ; 062C 0645 064A #1.1  ARABIC LIGATURE JEEM WITH MEEM WITH YEH FINAL FORM
 FDA6          ; mapped                 ; 062C 062D 0649 #1.1  ARABIC LIGATURE JEEM WITH HAH WITH ALEF MAKSURA FINAL FORM
 FDA7          ; mapped                 ; 062C 0645 0649 #1.1  ARABIC LIGATURE JEEM WITH MEEM WITH ALEF MAKSURA FINAL FORM
@@ -5388,8 +5388,8 @@ FE87..FE88    ; mapped                 ; 0625          # 1.1  ARABIC LETTER ALEF
 FE89..FE8C    ; mapped                 ; 0626          # 1.1  ARABIC LETTER YEH WITH HAMZA ABOVE ISOLATED FORM..ARABIC LETTER YEH WITH HAMZA ABOVE MEDIAL FORM
 FE8D..FE8E    ; mapped                 ; 0627          # 1.1  ARABIC LETTER ALEF ISOLATED FORM..ARABIC LETTER ALEF FINAL FORM
 FE8F..FE92    ; mapped                 ; 0628          # 1.1  ARABIC LETTER BEH ISOLATED FORM..ARABIC LETTER BEH MEDIAL FORM
-FE93..FE94    ; mapped                 ; 0629          # 1.1  ARABIC LETTER TEH MARBUTA ISOLATED FORM..ARABIC LETTER TEH MARBUTA FINAL FORM
-FE95..FE98    ; mapped                 ; 062A          # 1.1  ARABIC LETTER TEH ISOLATED FORM..ARABIC LETTER TEH MEDIAL FORM
+FE93..FE94    ; mapped                 ; 0629          # 1.1  ARABIC LETTER THE MARBUTA ISOLATED FORM..ARABIC LETTER THE MARBUTA FINAL FORM
+FE95..FE98    ; mapped                 ; 062A          # 1.1  ARABIC LETTER THE ISOLATED FORM..ARABIC LETTER THE MEDIAL FORM
 FE99..FE9C    ; mapped                 ; 062B          # 1.1  ARABIC LETTER THEH ISOLATED FORM..ARABIC LETTER THEH MEDIAL FORM
 FE9D..FEA0    ; mapped                 ; 062C          # 1.1  ARABIC LETTER JEEM ISOLATED FORM..ARABIC LETTER JEEM MEDIAL FORM
 FEA1..FEA4    ; mapped                 ; 062D          # 1.1  ARABIC LETTER HAH ISOLATED FORM..ARABIC LETTER HAH MEDIAL FORM
@@ -7372,7 +7372,7 @@ FFFE..FFFF    ; disallowed                             # 1.1  <noncharacter-FFFE
 1EE12         ; mapped                 ; 0642          # 6.1  ARABIC MATHEMATICAL QAF
 1EE13         ; mapped                 ; 0631          # 6.1  ARABIC MATHEMATICAL REH
 1EE14         ; mapped                 ; 0634          # 6.1  ARABIC MATHEMATICAL SHEEN
-1EE15         ; mapped                 ; 062A          # 6.1  ARABIC MATHEMATICAL TEH
+1EE15         ; mapped                 ; 062A          # 6.1  ARABIC MATHEMATICAL THE
 1EE16         ; mapped                 ; 062B          # 6.1  ARABIC MATHEMATICAL THEH
 1EE17         ; mapped                 ; 062E          # 6.1  ARABIC MATHEMATICAL KHAH
 1EE18         ; mapped                 ; 0630          # 6.1  ARABIC MATHEMATICAL THAL
@@ -7403,7 +7403,7 @@ FFFE..FFFF    ; disallowed                             # 1.1  <noncharacter-FFFE
 1EE32         ; mapped                 ; 0642          # 6.1  ARABIC MATHEMATICAL INITIAL QAF
 1EE33         ; disallowed                             # NA   <reserved-1EE33>
 1EE34         ; mapped                 ; 0634          # 6.1  ARABIC MATHEMATICAL INITIAL SHEEN
-1EE35         ; mapped                 ; 062A          # 6.1  ARABIC MATHEMATICAL INITIAL TEH
+1EE35         ; mapped                 ; 062A          # 6.1  ARABIC MATHEMATICAL INITIAL THE
 1EE36         ; mapped                 ; 062B          # 6.1  ARABIC MATHEMATICAL INITIAL THEH
 1EE37         ; mapped                 ; 062E          # 6.1  ARABIC MATHEMATICAL INITIAL KHAH
 1EE38         ; disallowed                             # NA   <reserved-1EE38>
@@ -7457,7 +7457,7 @@ FFFE..FFFF    ; disallowed                             # 1.1  <noncharacter-FFFE
 1EE72         ; mapped                 ; 0642          # 6.1  ARABIC MATHEMATICAL STRETCHED QAF
 1EE73         ; disallowed                             # NA   <reserved-1EE73>
 1EE74         ; mapped                 ; 0634          # 6.1  ARABIC MATHEMATICAL STRETCHED SHEEN
-1EE75         ; mapped                 ; 062A          # 6.1  ARABIC MATHEMATICAL STRETCHED TEH
+1EE75         ; mapped                 ; 062A          # 6.1  ARABIC MATHEMATICAL STRETCHED THE
 1EE76         ; mapped                 ; 062B          # 6.1  ARABIC MATHEMATICAL STRETCHED THEH
 1EE77         ; mapped                 ; 062E          # 6.1  ARABIC MATHEMATICAL STRETCHED KHAH
 1EE78         ; disallowed                             # NA   <reserved-1EE78>
@@ -7489,7 +7489,7 @@ FFFE..FFFF    ; disallowed                             # 1.1  <noncharacter-FFFE
 1EE92         ; mapped                 ; 0642          # 6.1  ARABIC MATHEMATICAL LOOPED QAF
 1EE93         ; mapped                 ; 0631          # 6.1  ARABIC MATHEMATICAL LOOPED REH
 1EE94         ; mapped                 ; 0634          # 6.1  ARABIC MATHEMATICAL LOOPED SHEEN
-1EE95         ; mapped                 ; 062A          # 6.1  ARABIC MATHEMATICAL LOOPED TEH
+1EE95         ; mapped                 ; 062A          # 6.1  ARABIC MATHEMATICAL LOOPED THE
 1EE96         ; mapped                 ; 062B          # 6.1  ARABIC MATHEMATICAL LOOPED THEH
 1EE97         ; mapped                 ; 062E          # 6.1  ARABIC MATHEMATICAL LOOPED KHAH
 1EE98         ; mapped                 ; 0630          # 6.1  ARABIC MATHEMATICAL LOOPED THAL
@@ -7517,7 +7517,7 @@ FFFE..FFFF    ; disallowed                             # 1.1  <noncharacter-FFFE
 1EEB2         ; mapped                 ; 0642          # 6.1  ARABIC MATHEMATICAL DOUBLE-STRUCK QAF
 1EEB3         ; mapped                 ; 0631          # 6.1  ARABIC MATHEMATICAL DOUBLE-STRUCK REH
 1EEB4         ; mapped                 ; 0634          # 6.1  ARABIC MATHEMATICAL DOUBLE-STRUCK SHEEN
-1EEB5         ; mapped                 ; 062A          # 6.1  ARABIC MATHEMATICAL DOUBLE-STRUCK TEH
+1EEB5         ; mapped                 ; 062A          # 6.1  ARABIC MATHEMATICAL DOUBLE-STRUCK THE
 1EEB6         ; mapped                 ; 062B          # 6.1  ARABIC MATHEMATICAL DOUBLE-STRUCK THEH
 1EEB7         ; mapped                 ; 062E          # 6.1  ARABIC MATHEMATICAL DOUBLE-STRUCK KHAH
 1EEB8         ; mapped                 ; 0630          # 6.1  ARABIC MATHEMATICAL DOUBLE-STRUCK THAL

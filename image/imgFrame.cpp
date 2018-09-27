@@ -146,7 +146,7 @@ ClearSurface(DataSourceSurface* aSurface, const IntSize& aSize, SurfaceFormat aF
     // Skia doesn't support RGBX surfaces, so ensure the alpha value is set
     // to opaque white. While it would be nice to only do this for Skia,
     // imgFrame can run off main thread and past shutdown where
-    // we might not have gfxPlatform, so just memset everytime instead.
+    // we might not have gfxPlatform, so just memset every time instead.
     memset(data, 0xFF, stride * aSize.height);
   } else if (aSurface->OnHeap()) {
     // We only need to memset it if the buffer was allocated on the heap.

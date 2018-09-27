@@ -70,7 +70,7 @@ var PermissionsUtils = {
    *                     The value is expected to be a comma separated list of
    *                     host named. eg:
    *                     * something.example.com
-   *                     * foo.exmaple.com,bar.example.com
+   *                     * foo.example.com,bar.example.com
    *
    * @param aPermission Permission name to be passsed to the Permissions
    *                    Manager.

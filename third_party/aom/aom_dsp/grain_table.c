@@ -240,7 +240,7 @@ int aom_film_grain_table_lookup(aom_film_grain_table_t *t, int64_t time_stamp,
         entry->end_time = time_stamp;
         if (t->tail == entry) t->tail = new_entry;
       }
-      // If segments aren't aligned, delete from the beggining of subsequent
+      // If segments aren't aligned, delete from the beginning of subsequent
       // segments
       if (end_time > entry_end_time) {
         aom_film_grain_table_lookup(t, entry->end_time, end_time, 1, 0);

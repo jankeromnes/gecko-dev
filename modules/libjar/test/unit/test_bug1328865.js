@@ -6,7 +6,7 @@
 
 ChromeUtils.import("resource://gre/modules/NetUtil.jsm");
 
-// Check that reading non existant inner jars results in the right error
+// Check that reading non existent inner jars results in the right error
 
 add_task(async function() {
   var file = do_get_file("data/test_bug597702.zip");

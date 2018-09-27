@@ -19,7 +19,7 @@ class GridArea : public nsISupports
                , public nsWrapperCache
 {
 public:
-  explicit GridArea(Grid *aParent,
+  explicit GridArea(Grid *apparent,
                     const nsString& aName,
                     GridDeclaration aType,
                     uint32_t aRowStart,

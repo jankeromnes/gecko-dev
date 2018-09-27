@@ -512,7 +512,7 @@ typedef struct vpx_codec_enc_cfg {
    * be subtracted from the target bitrate in order to compensate
    * for prior overshoot.
    * VP9: Expressed as a percentage of the target bitrate, a threshold
-   * undershoot level (current rate vs target) beyond which more agressive
+   * undershoot level (current rate vs target) beyond which more aggressive
    * corrective measures are taken.
    *   *
    * Valid values in the range VP8:0-1000 VP9: 0-100.
@@ -527,7 +527,7 @@ typedef struct vpx_codec_enc_cfg {
    * be added to the target bitrate in order to compensate for
    * prior undershoot.
    * VP9: Expressed as a percentage of the target bitrate, a threshold
-   * overshoot level (current rate vs target) beyond which more agressive
+   * overshoot level (current rate vs target) beyond which more aggressive
    * corrective measures are taken.
    *
    * Valid values in the range VP8:0-1000 VP9: 0-100.

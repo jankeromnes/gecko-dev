@@ -448,7 +448,7 @@ def chopstring(message, key, n, funcref):
     """Chops the 'message' into integers that fit into n,
     leaving room for a safebit to be added to ensure that all
     messages fold during exponentiation.  The MSB of the number n
-    is not independant modulo n (setting it could cause overflow), so
+    is not independent modulo n (setting it could cause overflow), so
     use the next lower bit for the safebit.  Therefore reserve 2-bits
     in the number n for non-data bits.  Calls specified encryption
     function for each chop.

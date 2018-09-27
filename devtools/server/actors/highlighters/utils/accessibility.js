@@ -13,7 +13,7 @@ const MAX_STRING_LENGTH = 50;
 
 /**
  * The AccessibleInfobar is a class responsible for creating the markup for the
- * accessible highlighter. It is also reponsible for updating content within the
+ * accessible highlighter. It is also responsible for updating content within the
  * infobar such as role and name values.
  */
 class Infobar {

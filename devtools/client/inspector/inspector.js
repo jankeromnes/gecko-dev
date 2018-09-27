@@ -176,7 +176,7 @@ Inspector.prototype = {
     await this._getPageStyle();
 
     // This may throw if the document is still loading and we are
-    // refering to a dead about:blank document
+    // referring to a dead about:blank document
     const defaultSelection = await this._getDefaultNodeForSelection()
       .catch(this._handleRejectionIfNotDestroyed);
 

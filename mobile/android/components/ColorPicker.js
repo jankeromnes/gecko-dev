@@ -23,8 +23,8 @@ ColorPicker.prototype = {
     return this._strings;
   },
 
-  init: function(aParent, aTitle, aInitial) {
-    this._domWin = aParent;
+  init: function(apparent, aTitle, aInitial) {
+    this._domWin = apparent;
     this._initial = aInitial;
     this._title = aTitle;
   },

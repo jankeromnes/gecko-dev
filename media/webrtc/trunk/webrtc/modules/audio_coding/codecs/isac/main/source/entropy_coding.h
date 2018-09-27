@@ -29,7 +29,7 @@
  * WebRtcIsac_Time2Spec().
  *
  * Input:
- *  - streamdata            : pointer to a stucture containg the encoded
+ *  - streamdata            : pointer to a structure containg the encoded
  *                            data and theparameters needed for entropy
  *                            coding.
  *  - AvgPitchGain_Q12      : average pitch-gain of the frame. This is only
@@ -43,7 +43,7 @@
  *   - *fi                  : pointer to a buffer where the imaginary part
  *                            of DFT coefficients are written to.
  *
- * Return value             : < 0 if an error occures
+ * Return value             : < 0 if an error occurs
  *                              0 if succeeded.
  */
 int WebRtcIsac_DecodeSpec(Bitstr* streamdata, int16_t AvgPitchGain_Q12,
@@ -65,11 +65,11 @@ int WebRtcIsac_DecodeSpec(Bitstr* streamdata, int16_t AvgPitchGain_Q12,
  *  - band                  : specifies which band's DFT should be decoded.
  *
  * Output:
- *  - streamdata            : pointer to a stucture containg the encoded
+ *  - streamdata            : pointer to a structure containg the encoded
  *                            data and theparameters needed for entropy
  *                            coding.
  *
- * Return value             : < 0 if an error occures
+ * Return value             : < 0 if an error occurs
  *                              0 if succeeded.
  */
 int WebRtcIsac_EncodeSpec(const int16_t* fr, const int16_t* fi,
@@ -141,7 +141,7 @@ int16_t WebRtcIsac_EncodeLpcUB(double* lpcCoeff, Bitstr* streamdata,
  *                            0-16 kHz mode.
  *
  * Input/output:
- *  - streamdata            : pointer to a stucture containg the encoded
+ *  - streamdata            : pointer to a structure containg the encoded
  *                            data and theparameters needed for entropy
  *                            coding.
  *
@@ -212,7 +212,7 @@ void WebRtcIsac_TranscodeLPCCoef(double* LPCCoef_lo, double* LPCCoef_hi,
  *  - lpGains               : a buffer which contains 'SUBFRAME' number of
  *                            LP gains to be encoded. The input values are
  *                            overwritten by the quantized values.
- *  - streamdata            : pointer to a stucture containg the encoded
+ *  - streamdata            : pointer to a structure containg the encoded
  *                            data and theparameters needed for entropy
  *                            coding.
  *
@@ -232,7 +232,7 @@ void WebRtcIsac_EncodeLpcGainUb(double* lpGains, Bitstr* streamdata,
  *  - lpGains               : a buffer which contains 'SUBFRAME' number of
  *                            LP gains to be encoded.
  * Input/outputs:
- *  - streamdata            : pointer to a stucture containg the encoded
+ *  - streamdata            : pointer to a structure containg the encoded
  *                            data and theparameters needed for entropy
  *                            coding.
  *
@@ -245,7 +245,7 @@ void WebRtcIsac_StoreLpcGainUb(double* lpGains, Bitstr* streamdata);
  * Decode the LPC gain of sub-frames.
  *
  * Input/output:
- *  - streamdata            : pointer to a stucture containg the encoded
+ *  - streamdata            : pointer to a structure containg the encoded
  *                            data and theparameters needed for entropy
  *                            coding.
  *
@@ -267,7 +267,7 @@ int16_t WebRtcIsac_DecodeLpcGainUb(double* lpGains, Bitstr* streamdata);
  *                            0-12 kHz or 0-16 kHz mode.
  *
  * Input/output:
- *  - streamdata            : pointer to a stucture containg the encoded
+ *  - streamdata            : pointer to a structure containg the encoded
  *                            data and theparameters needed for entropy
  *                            coding.
  *
@@ -284,7 +284,7 @@ int16_t WebRtcIsac_EncodeBandwidth(enum ISACBandwidth bandwidth,
  * or 0-16 kHz.
  *
  * Input/output:
- *  - streamdata            : pointer to a stucture containg the encoded
+ *  - streamdata            : pointer to a structure containg the encoded
  *                            data and theparameters needed for entropy
  *                            coding.
  *
@@ -304,7 +304,7 @@ int16_t WebRtcIsac_DecodeBandwidth(Bitstr* streamData,
  * Decode the jitter information.
  *
  * Input/output:
- *  - streamdata            : pointer to a stucture containg the encoded
+ *  - streamdata            : pointer to a structure containg the encoded
  *                            data and theparameters needed for entropy
  *                            coding.
  *
@@ -325,7 +325,7 @@ int16_t WebRtcIsac_EncodeJitterInfo(int32_t jitterIndex,
  * Decode the jitter information.
  *
  * Input/output:
- *  - streamdata            : pointer to a stucture containg the encoded
+ *  - streamdata            : pointer to a structure containg the encoded
  *                            data and theparameters needed for entropy
  *                            coding.
  *

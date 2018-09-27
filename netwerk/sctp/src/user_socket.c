@@ -247,7 +247,7 @@ sofree(struct socket *so)
 
 	ACCEPT_LOCK_ASSERT();
 	SOCK_LOCK_ASSERT(so);
-	/* SS_NOFDREF unset in accept call.  this condition seems irrelevent
+	/* SS_NOFDREF unset in accept call.  this condition seems irrelevant
 	 *  for __Userspace__...
 	 */
 	if (so->so_count != 0 ||

@@ -1478,7 +1478,7 @@ main(int argc, char **argv)
             encryptOptions.input = &input;
             encryptOptions.outfile = outFile;
             /* decode an enveloped-data message to get the bulkkey (create
-             * a new one if neccessary)
+             * a new one if necessary)
              */
             if (!encryptOptions.envFile) {
                 encryptOptions.envFile = PR_Open(envFileName,

@@ -84,7 +84,7 @@ ssl_init()
 
   fileout=0 #FIXME, looks like all.sh tried to turn this on but actually didn't
   #fileout=1
-  #verbose="-v" #FIXME - see where this is usefull
+  #verbose="-v" #FIXME - see where this is useful
 
   USER_NICKNAME=TestUser
   NORM_EXT=""
@@ -532,7 +532,7 @@ ssl_stapling()
   # 3: have fresh and valid revocation data, status revoked
 
   # selfserv modes
-  # good, revoked, unkown: Include locally signed response. Requires: -A
+  # good, revoked, unknown: Include locally signed response. Requires: -A
   # failure: Include OCSP failure status, such as "try later" (unsigned)
   # badsig: use a good status but with an invalid signature
   # corrupted: stapled cert status is an invalid block of data

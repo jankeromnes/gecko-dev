@@ -1402,15 +1402,15 @@ struct MOZ_NEEDS_MEMMOVABLE_MEMBERS nsStylePosition
 
   /**
    * Return the used value for 'align-self' given our parent ComputedStyle
-   * aParent (or null for the root).
+   * apparent (or null for the root).
    */
-  uint8_t UsedAlignSelf(mozilla::ComputedStyle* aParent) const;
+  uint8_t UsedAlignSelf(mozilla::ComputedStyle* apparent) const;
 
   /**
    * Return the used value for 'justify-self' given our parent ComputedStyle
-   * aParent (or null for the root).
+   * apparent (or null for the root).
    */
-  uint8_t UsedJustifySelf(mozilla::ComputedStyle* aParent) const;
+  uint8_t UsedJustifySelf(mozilla::ComputedStyle* apparent) const;
 
   mozilla::Position mObjectPosition;
   nsStyleSides  mOffset;                // coord, percent, calc, auto

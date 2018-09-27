@@ -1045,13 +1045,13 @@ var Histogram = {
   /**
    * Renders a single Telemetry histogram
    *
-   * @param aParent Parent element
+   * @param apparent Parent element
    * @param aName Histogram name
    * @param aHgram Histogram information
    * @param aOptions Object with render options
    *                 * exponential: bars follow logarithmic scale
    */
-  render: function Histogram_render(aParent, aName, aHgram, aOptions) {
+  render: function Histogram_render(apparent, aName, aHgram, aOptions) {
     let options = aOptions || {};
     let hgram = this.processHistogram(aHgram, aName);
 
@@ -1090,7 +1090,7 @@ var Histogram = {
     });
     outerDiv.appendChild(copyButton);
 
-    aParent.appendChild(outerDiv);
+    apparent.appendChild(outerDiv);
     return outerDiv;
   },
 

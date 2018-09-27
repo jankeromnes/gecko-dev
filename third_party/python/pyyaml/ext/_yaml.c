@@ -1030,7 +1030,7 @@ static char __pyx_k_StreamStartEvent[] = "StreamStartEvent";
 static char __pyx_k_StreamStartToken[] = "StreamStartToken";
 static char __pyx_k_descend_resolver[] = "descend_resolver";
 static char __pyx_k_no_emitter_error[] = "no emitter error";
-static char __pyx_k_second_occurence[] = "second occurence";
+static char __pyx_k_second_occurence[] = "second occurrence";
 static char __pyx_k_MappingStartEvent[] = "MappingStartEvent";
 static char __pyx_k_DocumentStartEvent[] = "DocumentStartEvent";
 static char __pyx_k_DocumentStartToken[] = "DocumentStartToken";
@@ -1059,7 +1059,7 @@ static char __pyx_k_serializer_is_already_opened[] = "serializer is already open
 static char __pyx_k_root_src_pyyaml_ext__yaml_pyx[] = "/root/src/pyyaml/ext/_yaml.pyx";
 static char __pyx_k_a_string_or_stream_input_is_requ[] = "a string or stream input is required";
 static char __pyx_k_expected_a_single_document_in_th[] = "expected a single document in the stream";
-static char __pyx_k_found_duplicate_anchor_first_occ[] = "found duplicate anchor; first occurence";
+static char __pyx_k_found_duplicate_anchor_first_occ[] = "found duplicate anchor; first occurrence";
 static PyObject *__pyx_n_s_AliasEvent;
 static PyObject *__pyx_n_s_AliasToken;
 static PyObject *__pyx_n_s_AnchorToken;
@@ -9094,8 +9094,8 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
  *                         self.parsed_event.start_mark.column,
  *                         None, None)
  *                 if PY_MAJOR_VERSION < 3:             # <<<<<<<<<<<<<<
- *                     raise ComposerError("found duplicate anchor; first occurence",
- *                             self.anchors[anchor].start_mark, "second occurence", mark)
+ *                     raise ComposerError("found duplicate anchor; first occurrence",
+ *                             self.anchors[anchor].start_mark, "second occurrence", mark)
  */
       __pyx_t_4 = ((PY_MAJOR_VERSION < 3) != 0);
       if (__pyx_t_4) {
@@ -9103,8 +9103,8 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
         /* "_yaml.pyx":765
  *                         None, None)
  *                 if PY_MAJOR_VERSION < 3:
- *                     raise ComposerError("found duplicate anchor; first occurence",             # <<<<<<<<<<<<<<
- *                             self.anchors[anchor].start_mark, "second occurence", mark)
+ *                     raise ComposerError("found duplicate anchor; first occurrence",             # <<<<<<<<<<<<<<
+ *                             self.anchors[anchor].start_mark, "second occurrence", mark)
  *                 else:
  */
         __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ComposerError); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -9112,10 +9112,10 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
 
         /* "_yaml.pyx":766
  *                 if PY_MAJOR_VERSION < 3:
- *                     raise ComposerError("found duplicate anchor; first occurence",
- *                             self.anchors[anchor].start_mark, "second occurence", mark)             # <<<<<<<<<<<<<<
+ *                     raise ComposerError("found duplicate anchor; first occurrence",
+ *                             self.anchors[anchor].start_mark, "second occurrence", mark)             # <<<<<<<<<<<<<<
  *                 else:
- *                     raise ComposerError(u"found duplicate anchor; first occurence",
+ *                     raise ComposerError(u"found duplicate anchor; first occurrence",
  */
         __pyx_t_3 = PyObject_GetItem(__pyx_v_self->anchors, __pyx_v_anchor); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 766; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_3);
@@ -9126,8 +9126,8 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
         /* "_yaml.pyx":765
  *                         None, None)
  *                 if PY_MAJOR_VERSION < 3:
- *                     raise ComposerError("found duplicate anchor; first occurence",             # <<<<<<<<<<<<<<
- *                             self.anchors[anchor].start_mark, "second occurence", mark)
+ *                     raise ComposerError("found duplicate anchor; first occurrence",             # <<<<<<<<<<<<<<
+ *                             self.anchors[anchor].start_mark, "second occurrence", mark)
  *                 else:
  */
         __pyx_t_3 = PyTuple_New(4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -9155,10 +9155,10 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
       /*else*/ {
 
         /* "_yaml.pyx":768
- *                             self.anchors[anchor].start_mark, "second occurence", mark)
+ *                             self.anchors[anchor].start_mark, "second occurrence", mark)
  *                 else:
- *                     raise ComposerError(u"found duplicate anchor; first occurence",             # <<<<<<<<<<<<<<
- *                             self.anchors[anchor].start_mark, u"second occurence", mark)
+ *                     raise ComposerError(u"found duplicate anchor; first occurrence",             # <<<<<<<<<<<<<<
+ *                             self.anchors[anchor].start_mark, u"second occurrence", mark)
  *         self.descend_resolver(parent, index)
  */
         __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_ComposerError); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -9166,8 +9166,8 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
 
         /* "_yaml.pyx":769
  *                 else:
- *                     raise ComposerError(u"found duplicate anchor; first occurence",
- *                             self.anchors[anchor].start_mark, u"second occurence", mark)             # <<<<<<<<<<<<<<
+ *                     raise ComposerError(u"found duplicate anchor; first occurrence",
+ *                             self.anchors[anchor].start_mark, u"second occurrence", mark)             # <<<<<<<<<<<<<<
  *         self.descend_resolver(parent, index)
  *         if self.parsed_event.type == YAML_SCALAR_EVENT:
  */
@@ -9178,10 +9178,10 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
         /* "_yaml.pyx":768
- *                             self.anchors[anchor].start_mark, "second occurence", mark)
+ *                             self.anchors[anchor].start_mark, "second occurrence", mark)
  *                 else:
- *                     raise ComposerError(u"found duplicate anchor; first occurence",             # <<<<<<<<<<<<<<
- *                             self.anchors[anchor].start_mark, u"second occurence", mark)
+ *                     raise ComposerError(u"found duplicate anchor; first occurrence",             # <<<<<<<<<<<<<<
+ *                             self.anchors[anchor].start_mark, u"second occurrence", mark)
  *         self.descend_resolver(parent, index)
  */
         __pyx_t_3 = PyTuple_New(4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -9212,8 +9212,8 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
   __pyx_L7:;
 
   /* "_yaml.pyx":770
- *                     raise ComposerError(u"found duplicate anchor; first occurence",
- *                             self.anchors[anchor].start_mark, u"second occurence", mark)
+ *                     raise ComposerError(u"found duplicate anchor; first occurrence",
+ *                             self.anchors[anchor].start_mark, u"second occurrence", mark)
  *         self.descend_resolver(parent, index)             # <<<<<<<<<<<<<<
  *         if self.parsed_event.type == YAML_SCALAR_EVENT:
  *             node = self._compose_scalar_node(anchor)
@@ -9244,7 +9244,7 @@ static PyObject *__pyx_f_5_yaml_7CParser__compose_node(struct __pyx_obj_5_yaml_C
   switch (__pyx_v_self->parsed_event.type) {
 
     /* "_yaml.pyx":771
- *                             self.anchors[anchor].start_mark, u"second occurence", mark)
+ *                             self.anchors[anchor].start_mark, u"second occurrence", mark)
  *         self.descend_resolver(parent, index)
  *         if self.parsed_event.type == YAML_SCALAR_EVENT:             # <<<<<<<<<<<<<<
  *             node = self._compose_scalar_node(anchor)

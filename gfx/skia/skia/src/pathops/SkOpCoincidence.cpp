@@ -644,7 +644,7 @@ bool SkOpCoincidence::addIfMissing(const SkOpPtT* over1s, const SkOpPtT* over2s,
 }
 
 /* Please keep this in sync with debugAddOrOverlap() */
-// If this is called by addEndMovedSpans(), a returned false propogates out to an abort.
+// If this is called by addEndMovedSpans(), a returned false propagates out to an abort.
 // If this is called by AddIfMissing(), a returned false indicates there was nothing to add
 bool SkOpCoincidence::addOrOverlap(SkOpSegment* coinSeg, SkOpSegment* oppSeg,
         double coinTs, double coinTe, double oppTs, double oppTe, bool* added) {

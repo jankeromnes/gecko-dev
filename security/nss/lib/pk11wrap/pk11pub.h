@@ -111,7 +111,7 @@ PRBool PK11_UserEnableSlot(PK11SlotInfo *slot);
  * pollInterval is a suggested pulling interval value. '0' means use the
  *  default. Future implementations that don't poll may ignore this value.
  * series is the current series for the last slot. This should be the series
- *  value for the slot the last time you read persistant information from the
+ *  value for the slot the last time you read persistent information from the
  *  slot. For instance, if you publish a cert from the slot, you should obtain
  *  the slot series at that time. Then PK11_WaitForTokenEvent can detect a
  *  a change in the slot between the time you publish and the time
@@ -287,10 +287,10 @@ CK_MECHANISM_TYPE PK11_GetMechanism(PK11SymKey *symKey);
  * import a public key into the desired slot
  *
  * This function takes a public key structure and creates a public key in a
- * given slot. If isToken is set, then a persistant public key is created.
+ * given slot. If isToken is set, then a persistent public key is created.
  *
  * Note: it is possible for this function to return a handle for a key which
- * is persistant, even if isToken is not set.
+ * is persistent, even if isToken is not set.
  */
 CK_OBJECT_HANDLE PK11_ImportPublicKey(PK11SlotInfo *slot,
                                       SECKEYPublicKey *pubKey, PRBool isToken);

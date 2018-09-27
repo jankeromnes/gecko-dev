@@ -736,7 +736,7 @@ protected:
   /**
    * SendLineScrollEvent() dispatches a DOMMouseScroll event for the
    * WidgetWheelEvent.  This method shouldn't be called for non-trusted
-   * wheel event because it's not necessary for compatiblity.
+   * wheel event because it's not necessary for compatibility.
    *
    * @param aTargetFrame        The event target of wheel event.
    * @param aEvent              The original Wheel event.
@@ -755,7 +755,7 @@ protected:
   /**
    * SendPixelScrollEvent() dispatches a MozMousePixelScroll event for the
    * WidgetWheelEvent.  This method shouldn't be called for non-trusted
-   * wheel event because it's not necessary for compatiblity.
+   * wheel event because it's not necessary for compatibility.
    *
    * @param aTargetFrame        The event target of wheel event.
    * @param aEvent              The original Wheel event.

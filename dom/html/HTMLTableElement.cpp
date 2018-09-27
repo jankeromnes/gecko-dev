@@ -29,7 +29,7 @@ class TableRowsCollection final : public nsIHTMLCollection
                                 , public nsWrapperCache
 {
 public:
-  explicit TableRowsCollection(HTMLTableElement* aParent);
+  explicit TableRowsCollection(HTMLTableElement* apparent);
 
   NS_DECL_CYCLE_COLLECTING_ISUPPORTS
 
@@ -127,8 +127,8 @@ protected:
 };
 
 
-TableRowsCollection::TableRowsCollection(HTMLTableElement *aParent)
-  : mParent(aParent)
+TableRowsCollection::TableRowsCollection(HTMLTableElement *apparent)
+  : mParent(apparent)
   , mBodyStart(0)
   , mFootStart(0)
   , mInitialized(false)
@@ -1114,11 +1114,11 @@ HTMLTableElement::ReleaseInheritedAttributes()
 }
 
 nsresult
-HTMLTableElement::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
+HTMLTableElement::BindToTree(nsIDocument* aDocument, nsIContent* apparent,
                              nsIContent* aBindingParent)
 {
   ReleaseInheritedAttributes();
-  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, aParent,
+  nsresult rv = nsGenericHTMLElement::BindToTree(aDocument, apparent,
                                                 aBindingParent);
   NS_ENSURE_SUCCESS(rv, rv);
   BuildInheritedAttributes();

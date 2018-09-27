@@ -122,7 +122,7 @@ protected:
                                  nsIContent** aResult, bool* aAppendContent,
                                  mozilla::dom::FromParser aFromParser);
 
-  // aParent is allowed to be null here if this is the root content
+  // apparent is allowed to be null here if this is the root content
   // being closed
   virtual nsresult CloseElement(nsIContent* aContent);
 

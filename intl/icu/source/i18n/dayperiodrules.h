@@ -74,7 +74,7 @@ private:
     int32_t getStartHourForDayPeriod(DayPeriod dayPeriod, UErrorCode &errorCode) const;
 
     // Returns the hour that ends dayPeriod, i.e. that starts the next period.
-    // E.g. if fDayPeriodForHour[13] thru [16] are AFTERNOON1, then this function returns 17 if
+    // E.g. if fDayPeriodForHour[13] through [16] are AFTERNOON1, then this function returns 17 if
     // queried with AFTERNOON1.
     // Returns 0 for MIDNIGHT and 12 for NOON.
     int32_t getEndHourForDayPeriod(DayPeriod dayPeriod, UErrorCode &errorCode) const;

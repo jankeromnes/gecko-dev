@@ -1897,7 +1897,7 @@ UpgradeSchemaFrom7To8(mozIStorageConnection* aConnection)
       "key_path TEXT NOT NULL, "
       "unique_index INTEGER NOT NULL, "
       "multientry INTEGER NOT NULL, "
-      "object_store_autoincrement INTERGER NOT NULL, "
+      "object_store_autoincrement INTEGER NOT NULL, "
       "PRIMARY KEY (id), "
       "UNIQUE (object_store_id, name), "
       "FOREIGN KEY (object_store_id) REFERENCES object_store(id) ON DELETE "

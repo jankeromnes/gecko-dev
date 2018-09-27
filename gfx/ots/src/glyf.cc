@@ -245,7 +245,7 @@ bool OpenTypeGLYF::Parse(const uint8_t *data, size_t length) {
     // The LOCA parser checks that these values are monotonic
     const unsigned gly_length = offsets[i + 1] - offsets[i];
     if (!gly_length) {
-      // this glyph has no outline (e.g. the space charactor)
+      // this glyph has no outline (e.g. the space character)
       resulting_offsets[i] = current_offset;
       continue;
     }

@@ -365,12 +365,12 @@ gfxImageSurface::GetSubimage(const gfxRect& aRect)
     return image.forget();
 }
 
-gfxSubimageSurface::gfxSubimageSurface(gfxImageSurface* aParent,
+gfxSubimageSurface::gfxSubimageSurface(gfxImageSurface* apparent,
                                        unsigned char* aData,
                                        const IntSize& aSize,
                                        gfxImageFormat aFormat)
   : gfxImageSurface(aData, aSize, aParent->Stride(), aFormat)
-  , mParent(aParent)
+  , mParent(apparent)
 {
 }
 

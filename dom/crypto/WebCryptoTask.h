@@ -75,7 +75,7 @@ protected:
                           CryptoKey& aKey,
                           const CryptoOperationData& aSignature,
                           const CryptoOperationData& aData,
-                          bool aSign);
+                          bool assign);
 
 public:
   static WebCryptoTask* CreateEncryptTask(JSContext* aCx,

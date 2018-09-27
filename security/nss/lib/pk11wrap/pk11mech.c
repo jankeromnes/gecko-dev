@@ -101,7 +101,7 @@ PK11_GetBestWrapMechanism(PK11SlotInfo *slot)
 /*
  * NOTE: This is not thread safe. Called at init time, and when loading
  * a new Entry. It is reasonably safe as long as it is not re-entered
- * (readers will always see a consistant table)
+ * (readers will always see a consistent table)
  *
  * This routine is called to add entries to the mechanism table, once there,
  * they can not be removed.
@@ -1120,7 +1120,7 @@ static const SEC_ASN1Template sec_rc2ecb_parameter_template[] = {
     { 0 }
 };
 
-/* S/MIME picked id values to represent differnt keysizes */
+/* S/MIME picked id values to represent different keysizes */
 /* I do have a formula, but it ain't pretty, and it only works because you
  * can always match three points to a parabola:) */
 static unsigned char

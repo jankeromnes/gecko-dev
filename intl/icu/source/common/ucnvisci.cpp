@@ -1164,15 +1164,15 @@ static const uint16_t lookupTable[][2]={
  *  Post context
  *  i)  ATR : Attribute code is used to declare the font and script switching.
  *      Currently we only switch scripts and font codes consumed without generating an error
- *  ii) EXT : Extention code is used to declare switching to Sanskrit and for obscure,
+ *  ii) EXT : Extension code is used to declare switching to Sanskrit and for obscure,
  *      obsolete characters
  *  Pre context
- *  i)  Halant: if preceeded by a halant then it is a explicit halant
+ *  i)  Halant: if preceded by a halant then it is a explicit halant
  *  ii) Nukta :
- *       a) if preceeded by a halant then it is a soft halant
- *       b) if preceeded by specific consonants and the ligatures have pre-composed
+ *       a) if preceded by a halant then it is a soft halant
+ *       b) if preceded by specific consonants and the ligatures have pre-composed
  *          characters in Unicode then convert to pre-composed characters
- *  iii) Danda: If Danda is preceeded by a Danda then convert to Double Danda
+ *  iii) Danda: If Danda is preceded by a Danda then convert to Double Danda
  *
  */
 

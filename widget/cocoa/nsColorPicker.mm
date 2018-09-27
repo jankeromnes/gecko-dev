@@ -100,7 +100,7 @@ nsColorPicker::~nsColorPicker()
 }
 
 NS_IMETHODIMP
-nsColorPicker::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
+nsColorPicker::Init(mozIDOMWindowProxy* apparent, const nsAString& aTitle,
                     const nsAString& aInitialColor)
 {
   MOZ_ASSERT(NS_IsMainThread(),

@@ -535,7 +535,7 @@ impl HttpTryFrom<HeaderName> for HeaderValue {
 
     #[inline]
     fn try_from(name: HeaderName) -> Result<Self, Self::Error> {
-        // Infallable as header names have the same validations
+        // Infallible as header names have the same validations
         Ok(name.into())
     }
 }

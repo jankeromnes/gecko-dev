@@ -31,8 +31,8 @@ runWithMSE(async (ms, v) => {
     is(v.currentTime, target, "Video currentTime at target");
   });
 
-  await once(v, "seeked");
-  ok(wasSeeking, "Received expected seeking and seeked events");
+  await once(v, "sought");
+  ok(wasSeeking, "Received expected seeking and sought events");
   is(v.currentTime, target, "Video currentTime at target");
   SimpleTest.finish();
 });

@@ -103,7 +103,7 @@ DocAccessibleParent::RecvShowEvent(const ShowEventData& aData,
 }
 
 uint32_t
-DocAccessibleParent::AddSubtree(ProxyAccessible* aParent,
+DocAccessibleParent::AddSubtree(ProxyAccessible* apparent,
                                 const nsTArray<a11y::AccessibleData>& aNewTree,
                                 uint32_t aIdx, uint32_t aIdxInParent)
 {
@@ -120,7 +120,7 @@ DocAccessibleParent::AddSubtree(ProxyAccessible* aParent,
   }
 
   ProxyAccessible* newProxy = new ProxyAccessible(
-    newChild.ID(), aParent, this, newChild.Role(), newChild.Interfaces());
+    newChild.ID(), apparent, this, newChild.Role(), newChild.Interfaces());
 
   aParent->AddChildAt(aIdxInParent, newProxy);
   mAccessibles.PutEntry(newChild.ID())->mProxy = newProxy;

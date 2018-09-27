@@ -724,7 +724,7 @@ protected:
 
   /**
    * Returns true if we know for sure that the pattern for a given style is opaque.
-   * Usefull to know if we can discard the content below in certain situations.
+   * Useful to know if we can discard the content below in certain situations.
    */
   bool PatternIsOpaque(Style aStyle) const;
 
@@ -751,7 +751,7 @@ protected:
 
   nsString& GetFont()
   {
-    /* will initilize the value if not set, else does nothing */
+    /* will initialize the value if not set, else does nothing */
     GetCurrentFontStyle();
 
     return CurrentState().font;

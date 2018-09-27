@@ -116,7 +116,7 @@ crlgen_PlaceAnEntry(CRLGENGeneratorData *crlGenData,
     return newData;
 }
 
-/* Use this structure to keep pointer when commiting entries extensions */
+/* Use this structure to keep pointer when committing entries extensions */
 struct commitData {
     int pos;
     CERTCrlEntry **entries;
@@ -1170,7 +1170,7 @@ crlgen_setNextDataFn_field(CRLGENGeneratorData *crlGenData, void *str,
         case CRLGEN_UPDATE_CONTEXT:
             if (dtype != CRLGEN_TYPE_ZDATE) {
                 crlgen_PrintError(crlGenData->parsedLineNum,
-                                  "bad formated date. Should be "
+                                  "bad formatted date. Should be "
                                   "YYYYMMDDHHMMSSZ.\n");
                 return SECFailure;
             }

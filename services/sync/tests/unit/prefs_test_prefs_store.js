@@ -7,7 +7,7 @@
 pref("services.sync.prefs.sync.testing.int", true);
 pref("services.sync.prefs.sync.testing.string", true);
 pref("services.sync.prefs.sync.testing.bool", true);
-pref("services.sync.prefs.sync.testing.dont.change", true);
+pref("services.sync.prefs.sync.testing.don't.change", true);
 // this one is a user pref, so it *will* sync.
 user_pref("services.sync.prefs.sync.testing.turned.off", false);
 pref("services.sync.prefs.sync.testing.nonexistent", true);
@@ -22,7 +22,7 @@ user_pref("services.sync.prefs.sync.testing.unsynced.url", true);
 user_pref("testing.int", 123);
 user_pref("testing.string", "ohai");
 user_pref("testing.bool", true);
-user_pref("testing.dont.change", "Please don't change me.");
+user_pref("testing.don't.change", "Please don't change me.");
 user_pref("testing.turned.off", "I won't get synced.");
 user_pref("testing.not.turned.on", "I won't get synced either!");
 // Some url we don't want to sync

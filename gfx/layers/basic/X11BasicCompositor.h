@@ -47,8 +47,8 @@ private:
 class X11BasicCompositor : public BasicCompositor
 {
 public:
-  explicit X11BasicCompositor(CompositorBridgeParent* aParent, widget::CompositorWidget* aWidget)
-    : BasicCompositor(aParent, aWidget)
+  explicit X11BasicCompositor(CompositorBridgeParent* apparent, widget::CompositorWidget* aWidget)
+    : BasicCompositor(apparent, aWidget)
   {}
 
   virtual already_AddRefed<DataTextureSource>

@@ -22,7 +22,7 @@ class Flex : public nsISupports
            , public nsWrapperCache
 {
 public:
-  explicit Flex(Element* aParent, nsFlexContainerFrame* aFrame);
+  explicit Flex(Element* apparent, nsFlexContainerFrame* aFrame);
 
 protected:
   virtual ~Flex() = default;

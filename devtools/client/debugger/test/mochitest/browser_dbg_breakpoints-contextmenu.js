@@ -158,7 +158,7 @@ function test() {
       ok(selectedBreakpoint.actor,
          "There should be a breakpoint actor.");
       ok(!selectedBreakpoint.disabled,
-         "The targetted breakpoint should not have been disabled (" + index + ").");
+         "The targeted breakpoint should not have been disabled (" + index + ").");
 
       for (let bp of queries.getBreakpoints(getState())) {
         if (bp !== selectedBreakpoint) {

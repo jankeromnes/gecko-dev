@@ -39,7 +39,7 @@ function test() {
           "The debugger should show the source mapped coffee source file.");
     is(Sources.selectedValue.indexOf(".js"), -1,
        "The debugger should not show the generated js source file.");
-    is(editor.getText().indexOf("isnt"), 211,
+    is(editor.getText().indexOf("isn't"), 211,
        "The debugger's editor should have the coffee source source displayed.");
     is(editor.getText().indexOf("function"), -1,
        "The debugger's editor should not have the JS source displayed.");

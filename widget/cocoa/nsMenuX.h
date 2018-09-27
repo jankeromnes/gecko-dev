@@ -52,7 +52,7 @@ public:
   void              IconUpdated() override { mParent->IconUpdated(); }
 
   // nsMenuX
-  nsresult       Create(nsMenuObjectX* aParent, nsMenuGroupOwnerX* aMenuGroupOwner, nsIContent* aNode);
+  nsresult       Create(nsMenuObjectX* apparent, nsMenuGroupOwnerX* aMenuGroupOwner, nsIContent* aNode);
   uint32_t       GetItemCount();
   nsMenuObjectX* GetItemAt(uint32_t aPos);
   nsresult       GetVisibleItemCount(uint32_t &aCount);

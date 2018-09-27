@@ -51,7 +51,7 @@ pub type DiGraphMap<N, E> = GraphMap<N, E, Directed>;
 ///
 /// It uses an combined adjacency list and sparse adjacency matrix
 /// representation, using **O(|V| + |E|)** space, and allows testing for edge
-/// existance in constant time.
+/// existence in constant time.
 ///
 /// `GraphMap` is parameterized over:
 ///
@@ -384,8 +384,8 @@ impl<N, E, Ty> GraphMap<N, E, Ty>
     /// Return an iterator over all edges of the graph with their weight in arbitrary order.
     ///
     /// Iterator element type is `(N, N, &E)`
-    pub fn all_edges(&self) -> AllEdges<N, E, Ty> {
-        AllEdges {
+    pub fn all_edges(&self) -> alleges<N, E, Ty> {
+        alleges {
             inner: self.edges.iter(),
             ty: self.ty,
         }
@@ -589,18 +589,18 @@ impl<'a, N: 'a, E: 'a, Ty> IntoEdgeReferences for &'a GraphMap<N, E, Ty>
           Ty: EdgeType,
 {
     type EdgeRef = (N, N, &'a E);
-    type EdgeReferences = AllEdges<'a, N, E, Ty>;
+    type EdgeReferences = alleges<'a, N, E, Ty>;
     fn edge_references(self) -> Self::EdgeReferences {
         self.all_edges()
     }
 }
 
-pub struct AllEdges<'a, N, E: 'a, Ty> where N: 'a + NodeTrait {
+pub struct alleges<'a, N, E: 'a, Ty> where N: 'a + NodeTrait {
     inner: OrderMapIter<'a, (N, N), E>,
     ty: PhantomData<Ty>,
 }
 
-impl<'a, N, E, Ty> Iterator for AllEdges<'a, N, E, Ty>
+impl<'a, N, E, Ty> Iterator for alleges<'a, N, E, Ty>
     where N: 'a + NodeTrait, E: 'a,
           Ty: EdgeType,
 {
@@ -630,7 +630,7 @@ impl<'a, N, E, Ty> Iterator for AllEdges<'a, N, E, Ty>
     }
 }
 
-impl<'a, N, E, Ty> DoubleEndedIterator for AllEdges<'a, N, E, Ty>
+impl<'a, N, E, Ty> DoubleEndedIterator for alleges<'a, N, E, Ty>
     where N: 'a + NodeTrait, E: 'a,
           Ty: EdgeType,
 {

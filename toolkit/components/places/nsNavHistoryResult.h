@@ -229,8 +229,8 @@ NS_DEFINE_STATIC_IID_ACCESSOR(nsNavHistoryResult, NS_NAVHISTORYRESULT_IID)
   NS_IMPLEMENT_SIMPLE_RESULTNODE \
   NS_IMETHOD GetIcon(nsACString& aIcon) override \
     { return nsNavHistoryResultNode::GetIcon(aIcon); } \
-  NS_IMETHOD GetParent(nsINavHistoryContainerResultNode** aParent) override \
-    { return nsNavHistoryResultNode::GetParent(aParent); } \
+  NS_IMETHOD GetParent(nsINavHistoryContainerResultNode** apparent) override \
+    { return nsNavHistoryResultNode::GetParent(apparent); } \
   NS_IMETHOD GetParentResult(nsINavHistoryResult** aResult) override \
     { return nsNavHistoryResultNode::GetParentResult(aResult); } \
   NS_IMETHOD GetTags(nsAString& aTags) override \
@@ -259,7 +259,7 @@ public:
 
   NS_IMPLEMENT_SIMPLE_RESULTNODE
   NS_IMETHOD GetIcon(nsACString& aIcon) override;
-  NS_IMETHOD GetParent(nsINavHistoryContainerResultNode** aParent) override;
+  NS_IMETHOD GetParent(nsINavHistoryContainerResultNode** apparent) override;
   NS_IMETHOD GetParentResult(nsINavHistoryResult** aResult) override;
   NS_IMETHOD GetType(uint32_t* type) override
     { *type = nsNavHistoryResultNode::RESULT_TYPE_URI; return NS_OK; }

@@ -924,7 +924,7 @@ intl_FormatToPartsDateTime(JSContext* cx, UDateFormat* df, ClippedTime x,
         size_t beginIndex(beginIndexInt);
         size_t endIndex(endIndexInt);
 
-        // Technically this isn't guaranteed.  But it appears true in pratice,
+        // Technically this isn't guaranteed.  But it appears true in practice,
         // and http://bugs.icu-project.org/trac/ticket/12024 is expected to
         // correct the documentation lapse.
         MOZ_ASSERT(lastEndIndex <= beginIndex,

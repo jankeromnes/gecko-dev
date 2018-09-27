@@ -415,7 +415,7 @@ gfxFT2FontBase::InitMetrics()
         mMetrics.zeroOrAveCharWidth = 0.0;
     }
 
-    // Prefering a measured x over sxHeight because sxHeight doesn't consider
+    // Preferring a measured x over sxHeight because sxHeight doesn't consider
     // hinting, but maybe the x extents are not quite right in some fancy
     // script fonts.  CSS 2.1 suggests possibly using the height of an "o",
     // which would have a more consistent glyph across fonts.

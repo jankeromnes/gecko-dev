@@ -23,7 +23,7 @@ use tokio_io::{AsyncRead, AsyncWrite};
 pub trait Connect: Send + Sync {
     /// The connected IO Stream.
     type Transport: AsyncRead + AsyncWrite + Send + 'static;
-    /// An error occured when trying to connect.
+    /// An error occurred when trying to connect.
     type Error: Into<Box<StdError + Send + Sync>>;
     /// A Future that will resolve to the connected Transport.
     type Future: Future<Item=(Self::Transport, Connected), Error=Self::Error> + Send;
@@ -995,7 +995,7 @@ mod http {
             ];
 
             // Scenarios for IPv6 -> IPv4 fallback require that host can access IPv6 network.
-            // Otherwise, connection to "slow" IPv6 address will error-out immediatelly.
+            // Otherwise, connection to "slow" IPv6 address will error-out immediately.
             let ipv6_accessible = measure_connect(slow_ipv6_addr()).0;
 
             for &(hosts, family, timeout, needs_ipv6_access) in scenarios {

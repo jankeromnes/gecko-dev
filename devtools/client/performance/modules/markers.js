@@ -26,7 +26,7 @@ const { Formatters } = require("devtools/client/performance/modules/marker-forma
  *           would render something like `Cause: ${marker.causeName}` in the UI.
  * - colorName: The label of the DevTools color used for this marker. If
  *              adding a new color, be sure to check that there's an entry
- *              for `.marker-color-graphs-{COLORNAME}` for the equivilent
+ *              for `.marker-color-graphs-{COLORNAME}` for the equivalent
  *              entry in "./devtools/client/themes/performance.css"
  *              https://developer.mozilla.org/en-US/docs/Tools/DevToolsColors
  * - collapsible: Whether or not this marker can contain other markers it

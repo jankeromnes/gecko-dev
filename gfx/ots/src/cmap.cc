@@ -220,7 +220,7 @@ bool OpenTypeCMAP::ParseFormat4(int platform, int encoding,
     for (unsigned cp = ranges[i].start_range; cp <= ranges[i].end_range; ++cp) {
       const uint16_t code_point = static_cast<uint16_t>(cp);
       if (ranges[i].id_range_offset == 0) {
-        // this is explictly allowed to overflow in the spec
+        // this is explicitly allowed to overflow in the spec
         const uint16_t glyph = code_point + ranges[i].id_delta;
         if (glyph >= num_glyphs) {
           return Error("Range glyph reference too high (%d > %d)", glyph, num_glyphs - 1);
